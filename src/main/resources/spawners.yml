@@ -1,0 +1,9624 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#                 Spawner List                   #
+# ---------------------------------------------- #
+
+SpawnerNumber: 1202
+Spawners:
+  s1:
+    x: 267.0
+    y: 76.0
+    z: -721.0
+    world: begining
+    mob: tuto1
+    amount: 1
+    maxamount: 1
+  s2:
+    x: 271.0
+    y: 76.0
+    z: -714.0
+    world: begining
+    mob: tuto1
+    amount: 1
+    maxamount: 1
+  s3:
+    x: 265.0
+    y: 76.0
+    z: -711.0
+    world: begining
+    mob: tuto1
+    amount: 1
+    maxamount: 1
+  s4:
+    x: 271.0
+    y: 76.0
+    z: -706.0
+    world: begining
+    mob: tuto1
+    amount: 1
+    maxamount: 1
+  s5:
+    x: 265.0
+    y: 76.0
+    z: -702.0
+    world: begining
+    mob: tuto1
+    amount: 1
+    maxamount: 1
+  s6:
+    x: 266.0
+    y: 76.0
+    z: -603.0
+    world: begining
+    mob: tuto2
+    amount: 1
+    maxamount: 1
+  s7:
+    x: 267.0
+    y: 79.0
+    z: -594.0
+    world: begining
+    mob: tuto2
+    amount: 1
+    maxamount: 1
+  s8:
+    x: 270.0
+    y: 83.0
+    z: -587.0
+    world: begining
+    mob: tuto2
+    amount: 1
+    maxamount: 1
+  s9:
+    x: 268.0
+    y: 103.0
+    z: -384.0
+    world: begining
+    mob: tutob
+    amount: 1
+    maxamount: 1
+  s10:
+    x: -3199.0
+    y: 67.0
+    z: 4896.0
+    world: world
+    mob: beginner1
+    amount: 1
+    maxamount: 1
+  s11:
+    x: -3217.0
+    y: 67.0
+    z: 4899.0
+    world: world
+    mob: beginner1
+    amount: 1
+    maxamount: 1
+  s12:
+    x: -3225.0
+    y: 67.0
+    z: 4896.0
+    world: world
+    mob: beginner1
+    amount: 1
+    maxamount: 1
+  s13:
+    x: -3234.0
+    y: 66.0
+    z: 4900.0
+    world: world
+    mob: beginner1
+    amount: 1
+    maxamount: 1
+  s14:
+    x: -3245.0
+    y: 64.0
+    z: 4895.0
+    world: world
+    mob: beginner1
+    amount: 1
+    maxamount: 1
+  s15:
+    x: -3260.0
+    y: 64.0
+    z: 4899.0
+    world: world
+    mob: beginner1
+    amount: 1
+    maxamount: 1
+  s16:
+    x: -3272.0
+    y: 64.0
+    z: 4888.0
+    world: world
+    mob: beginner3
+    amount: 1
+    maxamount: 1
+  s17:
+    x: -3274.0
+    y: 66.0
+    z: 4872.0
+    world: world
+    mob: beginner3
+    amount: 1
+    maxamount: 1
+  s18:
+    x: -3281.0
+    y: 65.0
+    z: 4859.0
+    world: world
+    mob: beginner3
+    amount: 1
+    maxamount: 1
+  s19:
+    x: -3273.0
+    y: 64.0
+    z: 4850.0
+    world: world
+    mob: beginner3
+    amount: 1
+    maxamount: 1
+  s20:
+    x: -3274.0
+    y: 65.0
+    z: 4831.0
+    world: world
+    mob: beginner3
+    amount: 1
+    maxamount: 1
+  s21:
+    x: -3253.0
+    y: 65.0
+    z: 4801.0
+    world: world
+    mob: beginner3
+    amount: 1
+    maxamount: 1
+  s22:
+    x: -3275.0
+    y: 65.0
+    z: 4861.0
+    world: world
+    mob: beginner1
+    amount: 1
+    maxamount: 1
+  s23:
+    x: -3275.0
+    y: 64.0
+    z: 4843.0
+    world: world
+    mob: beginner1
+    amount: 1
+    maxamount: 1
+  s24:
+    x: -3266.0
+    y: 66.0
+    z: 4812.0
+    world: world
+    mob: beginner1
+    amount: 1
+    maxamount: 1
+  s25:
+    x: -3265.0
+    y: 64.0
+    z: 4781.0
+    world: world
+    mob: beginner4
+    amount: 1
+    maxamount: 1
+  s26:
+    x: -3248.0
+    y: 65.0
+    z: 4779.0
+    world: world
+    mob: beginner4
+    amount: 1
+    maxamount: 1
+  s27:
+    x: -3235.0
+    y: 65.0
+    z: 4754.0
+    world: world
+    mob: beginner4
+    amount: 1
+    maxamount: 1
+  s28:
+    x: -3239.0
+    y: 65.0
+    z: 4705.0
+    world: world
+    mob: beginner4
+    amount: 1
+    maxamount: 1
+  s29:
+    x: -3257.0
+    y: 66.0
+    z: 4716.0
+    world: world
+    mob: beginner4
+    amount: 1
+    maxamount: 1
+  s30:
+    x: -3264.0
+    y: 67.0
+    z: 4742.0
+    world: world
+    mob: beginner4
+    amount: 1
+    maxamount: 1
+  s31:
+    x: -3249.0
+    y: 65.0
+    z: 4687.0
+    world: world
+    mob: beginner2
+    amount: 1
+    maxamount: 1
+  s32:
+    x: -3239.0
+    y: 65.0
+    z: 4663.0
+    world: world
+    mob: beginner2
+    amount: 1
+    maxamount: 1
+  s33:
+    x: -3241.0
+    y: 64.0
+    z: 4646.0
+    world: world
+    mob: beginner2
+    amount: 1
+    maxamount: 1
+  s34:
+    x: -3225.0
+    y: 69.0
+    z: 4615.0
+    world: world
+    mob: beginner2
+    amount: 1
+    maxamount: 1
+  s35:
+    x: -3203.0
+    y: 66.0
+    z: 4588.0
+    world: world
+    mob: beginner5
+    amount: 1
+    maxamount: 2
+  s36:
+    x: -3222.0
+    y: 65.0
+    z: 4575.0
+    world: world
+    mob: beginner5
+    amount: 1
+    maxamount: 2
+  s37:
+    x: -3170.0
+    y: 64.0
+    z: 4541.0
+    world: world
+    mob: beginner5
+    amount: 1
+    maxamount: 1
+  s38:
+    x: -3230.0
+    y: 64.0
+    z: 4549.0
+    world: world
+    mob: beginner5
+    amount: 1
+    maxamount: 1
+  s39:
+    x: -3158.0
+    y: 62.0
+    z: 4508.0
+    world: world
+    mob: beginner6
+    amount: 1
+    maxamount: 1
+  s40:
+    x: -3134.0
+    y: 63.0
+    z: 4438.0
+    world: world
+    mob: beginner6
+    amount: 1
+    maxamount: 1
+  s41:
+    x: -3226.0
+    y: 64.0
+    z: 4508.0
+    world: world
+    mob: beginner6
+    amount: 1
+    maxamount: 1
+  s42:
+    x: -3231.0
+    y: 64.0
+    z: 4520.0
+    world: world
+    mob: beginner5
+    amount: 1
+    maxamount: 2
+  s43:
+    x: -3149.0
+    y: 62.0
+    z: 4487.0
+    world: world
+    mob: beginner5
+    amount: 1
+    maxamount: 2
+  s44:
+    x: -3179.0
+    y: 63.0
+    z: 4458.0
+    world: world
+    mob: beginner5
+    amount: 1
+    maxamount: 2
+  s45:
+    x: -2905.0
+    y: 66.0
+    z: 4407.0
+    world: world
+    mob: zombie1
+    amount: 1
+    maxamount: 2
+  s46:
+    x: -2888.0
+    y: 66.0
+    z: 4384.0
+    world: world
+    mob: zombie2
+    amount: 1
+    maxamount: 2
+  s47:
+    x: -2875.0
+    y: 66.0
+    z: 4434.0
+    world: world
+    mob: zombie1
+    amount: 1
+    maxamount: 2
+  s48:
+    x: -2841.0
+    y: 68.0
+    z: 4416.0
+    world: world
+    mob: zombie2
+    amount: 1
+    maxamount: 2
+  s49:
+    x: -2826.0
+    y: 67.0
+    z: 4376.0
+    world: world
+    mob: zombie1
+    amount: 1
+    maxamount: 2
+  s50:
+    x: -2798.0
+    y: 66.0
+    z: 4432.0
+    world: world
+    mob: zombie2
+    amount: 1
+    maxamount: 2
+  s51:
+    x: -2772.0
+    y: 67.0
+    z: 4384.0
+    world: world
+    mob: zombie1
+    amount: 1
+    maxamount: 2
+  s52:
+    x: -2728.0
+    y: 67.0
+    z: 4393.0
+    world: world
+    mob: zombie2
+    amount: 1
+    maxamount: 2
+  s53:
+    x: -2682.0
+    y: 66.0
+    z: 4379.0
+    world: world
+    mob: zombie1
+    amount: 1
+    maxamount: 2
+  s54:
+    x: -2646.0
+    y: 67.0
+    z: 4419.0
+    world: world
+    mob: zombie2
+    amount: 1
+    maxamount: 2
+  s55:
+    x: -2600.0
+    y: 66.0
+    z: 4435.0
+    world: world
+    mob: zombie1
+    amount: 1
+    maxamount: 2
+  s56:
+    x: -2564.0
+    y: 66.0
+    z: 4465.0
+    world: world
+    mob: zombie2
+    amount: 1
+    maxamount: 2
+  s57:
+    x: -2888.0
+    y: 67.0
+    z: 4407.0
+    world: world
+    mob: zombie4
+    amount: 1
+    maxamount: 1
+  s58:
+    x: -2843.0
+    y: 69.0
+    z: 4424.0
+    world: world
+    mob: zombie4
+    amount: 1
+    maxamount: 1
+  s59:
+    x: -2758.0
+    y: 68.0
+    z: 4372.0
+    world: world
+    mob: zombie4
+    amount: 1
+    maxamount: 1
+  s60:
+    x: -2687.0
+    y: 67.0
+    z: 4395.0
+    world: world
+    mob: zombie4
+    amount: 1
+    maxamount: 1
+  s61:
+    x: -2631.0
+    y: 67.0
+    z: 4422.0
+    world: world
+    mob: zombie4
+    amount: 1
+    maxamount: 1
+  s62:
+    x: -2573.0
+    y: 66.0
+    z: 4450.0
+    world: world
+    mob: zombie4
+    amount: 1
+    maxamount: 1
+  s63:
+    x: -2863.0
+    y: 67.0
+    z: 4419.0
+    world: world
+    mob: zombie3
+    amount: 1
+    maxamount: 1
+  s64:
+    x: -2841.0
+    y: 68.0
+    z: 4387.0
+    world: world
+    mob: zombie3
+    amount: 1
+    maxamount: 1
+  s65:
+    x: -2799.0
+    y: 67.0
+    z: 4399.0
+    world: world
+    mob: zombie3
+    amount: 1
+    maxamount: 1
+  s66:
+    x: -2755.0
+    y: 67.0
+    z: 4407.0
+    world: world
+    mob: zombie3
+    amount: 1
+    maxamount: 1
+  s67:
+    x: -2748.0
+    y: 67.0
+    z: 4360.0
+    world: world
+    mob: zombie3
+    amount: 1
+    maxamount: 1
+  s68:
+    x: -2705.0
+    y: 67.0
+    z: 4354.0
+    world: world
+    mob: zombie3
+    amount: 1
+    maxamount: 1
+  s69:
+    x: -2699.0
+    y: 70.0
+    z: 4408.0
+    world: world
+    mob: zombie3
+    amount: 1
+    maxamount: 1
+  s70:
+    x: -2650.0
+    y: 66.0
+    z: 4389.0
+    world: world
+    mob: zombie3
+    amount: 1
+    maxamount: 1
+  s71:
+    x: -2605.0
+    y: 66.0
+    z: 4417.0
+    world: world
+    mob: zombie3
+    amount: 1
+    maxamount: 1
+  s72:
+    x: -3055.0
+    y: 73.0
+    z: 4865.0
+    world: world
+    mob: villager1
+    amount: 1
+    maxamount: 1
+  s73:
+    x: -3021.0
+    y: 71.0
+    z: 4885.0
+    world: world
+    mob: villager1
+    amount: 1
+    maxamount: 1
+  s74:
+    x: -3030.0
+    y: 74.0
+    z: 4850.0
+    world: world
+    mob: villager1
+    amount: 1
+    maxamount: 1
+  s75:
+    x: -2994.0
+    y: 72.0
+    z: 4870.0
+    world: world
+    mob: villager1
+    amount: 1
+    maxamount: 1
+  s76:
+    x: -2989.0
+    y: 73.0
+    z: 4851.0
+    world: world
+    mob: villager1
+    amount: 1
+    maxamount: 1
+  s77:
+    x: -2998.0
+    y: 73.0
+    z: 4833.0
+    world: world
+    mob: villager1
+    amount: 1
+    maxamount: 1
+  s78:
+    x: -2958.0
+    y: 73.0
+    z: 4824.0
+    world: world
+    mob: villager1
+    amount: 1
+    maxamount: 1
+  s79:
+    x: -2927.0
+    y: 72.0
+    z: 4820.0
+    world: world
+    mob: villager1
+    amount: 1
+    maxamount: 1
+  s80:
+    x: -2611.0
+    y: 66.0
+    z: 4762.0
+    world: world
+    mob: villager15
+    amount: 1
+    maxamount: 1
+  s81:
+    x: -2602.0
+    y: 66.0
+    z: 4797.0
+    world: world
+    mob: villager15
+    amount: 1
+    maxamount: 1
+  s82:
+    x: -2569.0
+    y: 66.0
+    z: 4786.0
+    world: world
+    mob: villager15
+    amount: 1
+    maxamount: 1
+  s83:
+    x: -2558.0
+    y: 66.0
+    z: 4791.0
+    world: world
+    mob: villager15
+    amount: 1
+    maxamount: 1
+  s84:
+    x: -2065.0
+    y: 66.0
+    z: 4271.0
+    world: world
+    mob: sailor
+    amount: 1
+    maxamount: 1
+  s85:
+    x: -2073.0
+    y: 66.0
+    z: 4266.0
+    world: world
+    mob: sailor
+    amount: 1
+    maxamount: 1
+  s86:
+    x: -2077.0
+    y: 66.0
+    z: 4270.0
+    world: world
+    mob: sailor
+    amount: 1
+    maxamount: 1
+  s87:
+    x: -2038.0
+    y: 66.0
+    z: 4221.0
+    world: world
+    mob: villager2
+    amount: 1
+    maxamount: 1
+  s88:
+    x: -2005.0
+    y: 64.0
+    z: 4198.0
+    world: world
+    mob: villager2
+    amount: 1
+    maxamount: 1
+  s89:
+    x: -2048.0
+    y: 65.0
+    z: 4186.0
+    world: world
+    mob: villager2
+    amount: 1
+    maxamount: 1
+  s90:
+    x: -2060.0
+    y: 66.0
+    z: 4160.0
+    world: world
+    mob: villager2
+    amount: 1
+    maxamount: 1
+  s91:
+    x: -2071.0
+    y: 67.0
+    z: 4181.0
+    world: world
+    mob: villager2
+    amount: 1
+    maxamount: 1
+  s92:
+    x: -2093.0
+    y: 66.0
+    z: 4197.0
+    world: world
+    mob: villager2
+    amount: 1
+    maxamount: 1
+  s93:
+    x: -2107.0
+    y: 66.0
+    z: 4145.0
+    world: world
+    mob: villager2
+    amount: 1
+    maxamount: 1
+  s94:
+    x: -2058.0
+    y: 64.0
+    z: 4072.0
+    world: world
+    mob: villager2
+    amount: 1
+    maxamount: 1
+  s95:
+    x: -2050.0
+    y: 64.0
+    z: 4042.0
+    world: world
+    mob: villager2
+    amount: 1
+    maxamount: 1
+  s96:
+    x: -2058.0
+    y: 64.0
+    z: 4019.0
+    world: world
+    mob: villager2
+    amount: 1
+    maxamount: 1
+  s97:
+    x: -2079.0
+    y: 63.0
+    z: 4003.0
+    world: world
+    mob: villager2
+    amount: 1
+    maxamount: 1
+  s98:
+    x: -2087.0
+    y: 62.0
+    z: 3950.0
+    world: world
+    mob: sailor
+    amount: 1
+    maxamount: 1
+  s99:
+    x: -2101.0
+    y: 62.0
+    z: 3940.0
+    world: world
+    mob: sailor
+    amount: 1
+    maxamount: 1
+  s100:
+    x: -2064.0
+    y: 62.0
+    z: 3955.0
+    world: world
+    mob: sailor
+    amount: 1
+    maxamount: 1
+  s101:
+    x: -2177.0
+    y: 65.0
+    z: 4232.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s102:
+    x: -2158.0
+    y: 64.0
+    z: 4252.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s103:
+    x: -2225.0
+    y: 70.0
+    z: 4184.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s104:
+    x: -2199.0
+    y: 70.0
+    z: 4139.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s105:
+    x: -2239.0
+    y: 70.0
+    z: 4127.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s106:
+    x: -2238.0
+    y: 66.0
+    z: 4098.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s107:
+    x: -2162.0
+    y: 65.0
+    z: 4049.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s108:
+    x: -2457.0
+    y: 61.0
+    z: 2522.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s109:
+    x: -2440.0
+    y: 62.0
+    z: 2571.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s110:
+    x: -2460.0
+    y: 62.0
+    z: 2641.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s111:
+    x: -2482.0
+    y: 62.0
+    z: 2690.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s112:
+    x: -2382.0
+    y: 62.0
+    z: 2859.0
+    world: world
+    mob: villager3
+    amount: 1
+    maxamount: 1
+  s113:
+    x: -2421.0
+    y: 62.0
+    z: 2844.0
+    world: world
+    mob: villager3
+    amount: 1
+    maxamount: 1
+  s114:
+    x: -2440.0
+    y: 62.0
+    z: 2814.0
+    world: world
+    mob: villager3
+    amount: 1
+    maxamount: 1
+  s115:
+    x: -2352.0
+    y: 67.0
+    z: 2579.0
+    world: world
+    mob: villager3
+    amount: 1
+    maxamount: 1
+  s116:
+    x: -2402.0
+    y: 67.0
+    z: 2655.0
+    world: world
+    mob: villager3
+    amount: 1
+    maxamount: 1
+  s117:
+    x: -2404.0
+    y: 67.0
+    z: 2685.0
+    world: world
+    mob: villager3
+    amount: 1
+    maxamount: 1
+  s118:
+    x: -2401.0
+    y: 67.0
+    z: 2714.0
+    world: world
+    mob: villager3
+    amount: 1
+    maxamount: 1
+  s119:
+    x: -2400.0
+    y: 67.0
+    z: 2743.0
+    world: world
+    mob: villager3
+    amount: 1
+    maxamount: 1
+  s120:
+    x: -4822.0
+    y: 106.0
+    z: 2190.0
+    world: world
+    mob: villager4
+    amount: 1
+    maxamount: 1
+  s121:
+    x: -4793.0
+    y: 106.0
+    z: 2178.0
+    world: world
+    mob: villager4
+    amount: 1
+    maxamount: 1
+  s122:
+    x: -4828.0
+    y: 106.0
+    z: 2172.0
+    world: world
+    mob: villager4
+    amount: 1
+    maxamount: 1
+  s123:
+    x: -4892.0
+    y: 118.0
+    z: 2070.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s124:
+    x: -4698.0
+    y: 107.0
+    z: 2278.0
+    world: world
+    mob: villager4
+    amount: 1
+    maxamount: 1
+  s125:
+    x: -4813.0
+    y: 103.0
+    z: 2355.0
+    world: world
+    mob: villager4
+    amount: 1
+    maxamount: 1
+  s126:
+    x: -4969.0
+    y: 103.0
+    z: 2167.0
+    world: world
+    mob: sailor
+    amount: 1
+    maxamount: 1
+  s127:
+    x: -4969.0
+    y: 101.0
+    z: 2142.0
+    world: world
+    mob: sailor
+    amount: 1
+    maxamount: 1
+  s128:
+    x: -4899.0
+    y: 116.0
+    z: 2092.0
+    world: world
+    mob: farmer
+    amount: 1
+    maxamount: 1
+  s129:
+    x: -2483.0
+    y: 61.0
+    z: 4880.0
+    world: world
+    mob: forest2
+    amount: 1
+    maxamount: 2
+  s130:
+    x: -2421.0
+    y: 61.0
+    z: 4833.0
+    world: world
+    mob: forest2
+    amount: 1
+    maxamount: 2
+  s131:
+    x: -2385.0
+    y: 61.0
+    z: 4912.0
+    world: world
+    mob: forest2
+    amount: 1
+    maxamount: 2
+  s132:
+    x: -2242.0
+    y: 61.0
+    z: 4771.0
+    world: world
+    mob: forest2
+    amount: 1
+    maxamount: 2
+  s133:
+    x: -2226.0
+    y: 61.0
+    z: 4887.0
+    world: world
+    mob: forest2
+    amount: 1
+    maxamount: 2
+  s134:
+    x: -2147.0
+    y: 61.0
+    z: 4854.0
+    world: world
+    mob: forest2
+    amount: 1
+    maxamount: 2
+  s135:
+    x: -2462.0
+    y: 63.0
+    z: 4880.0
+    world: world
+    mob: forest1
+    amount: 1
+    maxamount: 1
+  s136:
+    x: -2414.0
+    y: 65.0
+    z: 4902.0
+    world: world
+    mob: forest1
+    amount: 1
+    maxamount: 1
+  s137:
+    x: -2359.0
+    y: 64.0
+    z: 4863.0
+    world: world
+    mob: forest1
+    amount: 1
+    maxamount: 1
+  s138:
+    x: -2375.0
+    y: 63.0
+    z: 4907.0
+    world: world
+    mob: forest1
+    amount: 1
+    maxamount: 1
+  s139:
+    x: -2340.0
+    y: 63.0
+    z: 4946.0
+    world: world
+    mob: forest1
+    amount: 1
+    maxamount: 1
+  s140:
+    x: -2448.0
+    y: 65.0
+    z: 4845.0
+    world: world
+    mob: forest1
+    amount: 1
+    maxamount: 1
+  s141:
+    x: -2395.0
+    y: 67.0
+    z: 4843.0
+    world: world
+    mob: forest1
+    amount: 1
+    maxamount: 1
+  s142:
+    x: -2413.0
+    y: 67.0
+    z: 4798.0
+    world: world
+    mob: forest1
+    amount: 1
+    maxamount: 1
+  s143:
+    x: -2333.0
+    y: 64.0
+    z: 4773.0
+    world: world
+    mob: forest5
+    amount: 1
+    maxamount: 1
+  s144:
+    x: -2300.0
+    y: 61.0
+    z: 4812.0
+    world: world
+    mob: forest4
+    amount: 1
+    maxamount: 1
+  s145:
+    x: -2253.0
+    y: 64.0
+    z: 4777.0
+    world: world
+    mob: forest4
+    amount: 1
+    maxamount: 1
+  s146:
+    x: -2296.0
+    y: 61.0
+    z: 4979.0
+    world: world
+    mob: forest5
+    amount: 1
+    maxamount: 1
+  s147:
+    x: -2235.0
+    y: 61.0
+    z: 4962.0
+    world: world
+    mob: forest4
+    amount: 1
+    maxamount: 1
+  s148:
+    x: -2173.0
+    y: 64.0
+    z: 4904.0
+    world: world
+    mob: forest1
+    amount: 1
+    maxamount: 1
+  s149:
+    x: -2193.0
+    y: 61.0
+    z: 4827.0
+    world: world
+    mob: forest5
+    amount: 1
+    maxamount: 1
+  s150:
+    x: -2282.0
+    y: 61.0
+    z: 4908.0
+    world: world
+    mob: forest4
+    amount: 1
+    maxamount: 1
+  s151:
+    x: -2396.0
+    y: 61.0
+    z: 4857.0
+    world: world
+    mob: forest3
+    amount: 1
+    maxamount: 1
+  s152:
+    x: -2445.0
+    y: 61.0
+    z: 4856.0
+    world: world
+    mob: forest3
+    amount: 1
+    maxamount: 1
+  s153:
+    x: -2437.0
+    y: 61.0
+    z: 4901.0
+    world: world
+    mob: forest3
+    amount: 1
+    maxamount: 1
+  s154:
+    x: -2349.0
+    y: 61.0
+    z: 4924.0
+    world: world
+    mob: forest3
+    amount: 1
+    maxamount: 1
+  s155:
+    x: -2318.0
+    y: 61.0
+    z: 4968.0
+    world: world
+    mob: forest2
+    amount: 1
+    maxamount: 1
+  s156:
+    x: -2255.0
+    y: 61.0
+    z: 4982.0
+    world: world
+    mob: forest3
+    amount: 1
+    maxamount: 1
+  s157:
+    x: -2250.0
+    y: 61.0
+    z: 4934.0
+    world: world
+    mob: forest3
+    amount: 1
+    maxamount: 1
+  s158:
+    x: -2258.0
+    y: 61.0
+    z: 4853.0
+    world: world
+    mob: forest3
+    amount: 1
+    maxamount: 1
+  s159:
+    x: -2392.0
+    y: 61.0
+    z: 4791.0
+    world: world
+    mob: forest3
+    amount: 1
+    maxamount: 1
+  s160:
+    x: -2300.0
+    y: 61.0
+    z: 4746.0
+    world: world
+    mob: forest3
+    amount: 1
+    maxamount: 1
+  s161:
+    x: -2286.0
+    y: 64.0
+    z: 4741.0
+    world: world
+    mob: forest1
+    amount: 1
+    maxamount: 1
+  s162:
+    x: -2312.0
+    y: 61.0
+    z: 4812.0
+    world: world
+    mob: forest2
+    amount: 1
+    maxamount: 1
+  s163:
+    x: -2196.0
+    y: 61.0
+    z: 4734.0
+    world: world
+    mob: forest3
+    amount: 1
+    maxamount: 1
+  s164:
+    x: -2156.0
+    y: 61.0
+    z: 4752.0
+    world: world
+    mob: forest5
+    amount: 1
+    maxamount: 1
+  s165:
+    x: -2125.0
+    y: 61.0
+    z: 4811.0
+    world: world
+    mob: forest3
+    amount: 1
+    maxamount: 1
+  s166:
+    x: -2355.0
+    y: 61.0
+    z: 4874.0
+    world: world
+    mob: forest2
+    amount: 1
+    maxamount: 1
+  s167:
+    x: -2221.0
+    y: 64.0
+    z: 4898.0
+    world: world
+    mob: forest4
+    amount: 1
+    maxamount: 1
+  s168:
+    x: -1987.0
+    y: 71.0
+    z: 4690.0
+    world: world
+    mob: sugar1
+    amount: 1
+    maxamount: 1
+  s169:
+    x: -1961.0
+    y: 69.0
+    z: 4671.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s170:
+    x: -1933.0
+    y: 70.0
+    z: 4674.0
+    world: world
+    mob: sugar4
+    amount: 1
+    maxamount: 1
+  s171:
+    x: -1974.0
+    y: 69.0
+    z: 4649.0
+    world: world
+    mob: sugar3
+    amount: 1
+    maxamount: 1
+  s172:
+    x: -1942.0
+    y: 69.0
+    z: 4639.0
+    world: world
+    mob: sugar1
+    amount: 1
+    maxamount: 1
+  s173:
+    x: -1969.0
+    y: 66.0
+    z: 4606.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s174:
+    x: -1948.0
+    y: 66.0
+    z: 4576.0
+    world: world
+    mob: sugar4
+    amount: 1
+    maxamount: 1
+  s175:
+    x: -1973.0
+    y: 64.0
+    z: 4545.0
+    world: world
+    mob: sugar3
+    amount: 1
+    maxamount: 1
+  s176:
+    x: -2014.0
+    y: 64.0
+    z: 4551.0
+    world: world
+    mob: sugar4
+    amount: 1
+    maxamount: 1
+  s177:
+    x: -1979.0
+    y: 64.0
+    z: 4504.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s178:
+    x: -2005.0
+    y: 65.0
+    z: 4492.0
+    world: world
+    mob: sugar1
+    amount: 1
+    maxamount: 1
+  s179:
+    x: -1973.0
+    y: 62.0
+    z: 4445.0
+    world: world
+    mob: sugar3
+    amount: 1
+    maxamount: 1
+  s180:
+    x: -1942.0
+    y: 63.0
+    z: 4503.0
+    world: world
+    mob: sugar3
+    amount: 1
+    maxamount: 1
+  s181:
+    x: -1907.0
+    y: 62.0
+    z: 4506.0
+    world: world
+    mob: sugar4
+    amount: 1
+    maxamount: 1
+  s182:
+    x: -1888.0
+    y: 66.0
+    z: 4522.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s183:
+    x: -1865.0
+    y: 67.0
+    z: 4517.0
+    world: world
+    mob: sugar1
+    amount: 1
+    maxamount: 1
+  s184:
+    x: -1840.0
+    y: 70.0
+    z: 4551.0
+    world: world
+    mob: sugar4
+    amount: 1
+    maxamount: 1
+  s185:
+    x: -1826.0
+    y: 75.0
+    z: 4570.0
+    world: world
+    mob: sugar1
+    amount: 1
+    maxamount: 1
+  s186:
+    x: -1774.0
+    y: 88.0
+    z: 4527.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s187:
+    x: -1767.0
+    y: 89.0
+    z: 4595.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s188:
+    x: -1796.0
+    y: 89.0
+    z: 4631.0
+    world: world
+    mob: sugar4
+    amount: 1
+    maxamount: 1
+  s189:
+    x: -1841.0
+    y: 90.0
+    z: 4679.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s190:
+    x: -1899.0
+    y: 73.0
+    z: 4719.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s191:
+    x: -1930.0
+    y: 72.0
+    z: 4710.0
+    world: world
+    mob: sugar3
+    amount: 1
+    maxamount: 1
+  s192:
+    x: -1847.0
+    y: 91.0
+    z: 4655.0
+    world: world
+    mob: sugar1
+    amount: 1
+    maxamount: 1
+  s193:
+    x: -1798.0
+    y: 89.0
+    z: 4604.0
+    world: world
+    mob: sugar3
+    amount: 1
+    maxamount: 1
+  s194:
+    x: -1770.0
+    y: 89.0
+    z: 4619.0
+    world: world
+    mob: sugar1
+    amount: 1
+    maxamount: 1
+  s195:
+    x: -1757.0
+    y: 87.0
+    z: 4561.0
+    world: world
+    mob: sugar4
+    amount: 1
+    maxamount: 1
+  s196:
+    x: -1866.0
+    y: 67.0
+    z: 4518.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s197:
+    x: -1945.0
+    y: 66.0
+    z: 4600.0
+    world: world
+    mob: sugar3
+    amount: 1
+    maxamount: 1
+  s198:
+    x: -1951.0
+    y: 64.0
+    z: 4550.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s199:
+    x: -1956.0
+    y: 61.0
+    z: 4477.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s200:
+    x: -1890.0
+    y: 66.0
+    z: 4529.0
+    world: world
+    mob: sugar3
+    amount: 1
+    maxamount: 1
+  s201:
+    x: -1864.0
+    y: 67.0
+    z: 4542.0
+    world: world
+    mob: sugar3
+    amount: 1
+    maxamount: 1
+  s202:
+    x: -1765.0
+    y: 88.0
+    z: 4528.0
+    world: world
+    mob: sugar3
+    amount: 1
+    maxamount: 1
+  s203:
+    x: -1870.0
+    y: 73.0
+    z: 4731.0
+    world: world
+    mob: sugar1
+    amount: 1
+    maxamount: 1
+  s204:
+    x: -1844.0
+    y: 73.0
+    z: 4743.0
+    world: world
+    mob: sugar2
+    amount: 1
+    maxamount: 1
+  s205:
+    x: -2088.0
+    y: 67.0
+    z: 3771.0
+    world: world
+    mob: pirate1
+    amount: 1
+    maxamount: 1
+  s206:
+    x: -2088.0
+    y: 66.0
+    z: 3746.0
+    world: world
+    mob: pirate2
+    amount: 1
+    maxamount: 2
+  s207:
+    x: -2230.0
+    y: 62.0
+    z: 3767.0
+    world: world
+    mob: pirate2
+    amount: 1
+    maxamount: 2
+  s208:
+    x: -2219.0
+    y: 69.0
+    z: 3767.0
+    world: world
+    mob: pirate1
+    amount: 1
+    maxamount: 2
+  s209:
+    x: -2216.0
+    y: 63.0
+    z: 3727.0
+    world: world
+    mob: pirate2
+    amount: 1
+    maxamount: 2
+  s210:
+    x: -1948.0
+    y: 66.0
+    z: 3795.0
+    world: world
+    mob: pirate2
+    amount: 1
+    maxamount: 1
+  s211:
+    x: -1932.0
+    y: 66.0
+    z: 3777.0
+    world: world
+    mob: pirate2
+    amount: 1
+    maxamount: 1
+  s212:
+    x: -1968.0
+    y: 61.0
+    z: 3789.0
+    world: world
+    mob: pirate1
+    amount: 1
+    maxamount: 1
+  s213:
+    x: -2032.0
+    y: 61.0
+    z: 3636.0
+    world: world
+    mob: pirate3
+    amount: 1
+    maxamount: 1
+  s214:
+    x: -2068.0
+    y: 70.0
+    z: 3642.0
+    world: world
+    mob: pirate4
+    amount: 1
+    maxamount: 1
+  s215:
+    x: -2058.0
+    y: 68.0
+    z: 3619.0
+    world: world
+    mob: pirate4
+    amount: 1
+    maxamount: 1
+  s216:
+    x: -2187.0
+    y: 69.0
+    z: 3576.0
+    world: world
+    mob: pirate3
+    amount: 1
+    maxamount: 1
+  s217:
+    x: -2184.0
+    y: 69.0
+    z: 3553.0
+    world: world
+    mob: pirate4
+    amount: 1
+    maxamount: 2
+  s218:
+    x: -2185.0
+    y: 72.0
+    z: 3538.0
+    world: world
+    mob: pirate3
+    amount: 1
+    maxamount: 1
+  s219:
+    x: -1995.0
+    y: 77.0
+    z: 3868.0
+    world: world
+    mob: pirate1
+    amount: 1
+    maxamount: 1
+  s220:
+    x: -2130.0
+    y: 67.0
+    z: 3305.0
+    world: world
+    mob: frost1
+    amount: 1
+    maxamount: 1
+  s221:
+    x: -2198.0
+    y: 67.0
+    z: 3322.0
+    world: world
+    mob: frost1
+    amount: 1
+    maxamount: 1
+  s222:
+    x: -2180.0
+    y: 68.0
+    z: 3286.0
+    world: world
+    mob: frost1
+    amount: 1
+    maxamount: 1
+  s223:
+    x: -2238.0
+    y: 65.0
+    z: 3239.0
+    world: world
+    mob: frost1
+    amount: 1
+    maxamount: 1
+  s224:
+    x: -2121.0
+    y: 40.0
+    z: 3145.0
+    world: world
+    mob: frost3
+    amount: 2
+    maxamount: 4
+  s225:
+    x: -2098.0
+    y: 24.0
+    z: 3133.0
+    world: world
+    mob: frost3
+    amount: 2
+    maxamount: 4
+  s226:
+    x: -2106.0
+    y: 24.0
+    z: 3150.0
+    world: world
+    mob: frost3
+    amount: 1
+    maxamount: 2
+  s227:
+    x: -2095.0
+    y: 13.0
+    z: 3139.0
+    world: world
+    mob: frost3
+    amount: 2
+    maxamount: 4
+  s228:
+    x: -2061.0
+    y: 4.0
+    z: 3140.0
+    world: world
+    mob: frost3
+    amount: 2
+    maxamount: 4
+  s229:
+    x: -2284.0
+    y: 81.0
+    z: 3314.0
+    world: world
+    mob: frost4
+    amount: 1
+    maxamount: 1
+  s230:
+    x: -2354.0
+    y: 79.0
+    z: 3181.0
+    world: world
+    mob: frost4
+    amount: 1
+    maxamount: 1
+  s231:
+    x: -2372.0
+    y: 65.0
+    z: 3249.0
+    world: world
+    mob: frost4
+    amount: 1
+    maxamount: 1
+  s232:
+    x: -2575.0
+    y: 94.0
+    z: 3522.0
+    world: world
+    mob: frost2
+    amount: 1
+    maxamount: 1
+  s233:
+    x: -2595.0
+    y: 88.0
+    z: 3560.0
+    world: world
+    mob: frost2
+    amount: 1
+    maxamount: 1
+  s234:
+    x: -2621.0
+    y: 78.0
+    z: 3522.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s235:
+    x: -2559.0
+    y: 80.0
+    z: 3507.0
+    world: world
+    mob: frost5
+    amount: 1
+    maxamount: 1
+  s236:
+    x: -2601.0
+    y: 87.0
+    z: 3511.0
+    world: world
+    mob: frost2
+    amount: 1
+    maxamount: 1
+  s237:
+    x: -2600.0
+    y: 65.0
+    z: 3469.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s238:
+    x: -2579.0
+    y: 79.0
+    z: 3546.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s239:
+    x: -2634.0
+    y: 82.0
+    z: 3549.0
+    world: world
+    mob: frost5
+    amount: 1
+    maxamount: 1
+  s240:
+    x: -2663.0
+    y: 67.0
+    z: 3442.0
+    world: world
+    mob: frost5
+    amount: 1
+    maxamount: 1
+  s241:
+    x: -2593.0
+    y: 91.0
+    z: 3534.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s242:
+    x: -2607.0
+    y: 76.0
+    z: 3568.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s243:
+    x: -2496.0
+    y: 74.0
+    z: 3359.0
+    world: world
+    mob: frost4
+    amount: 1
+    maxamount: 1
+  s244:
+    x: -2582.0
+    y: 79.0
+    z: 3355.0
+    world: world
+    mob: frost4
+    amount: 1
+    maxamount: 1
+  s245:
+    x: -2498.0
+    y: 81.0
+    z: 3088.0
+    world: world
+    mob: frost1
+    amount: 1
+    maxamount: 1
+  s246:
+    x: -2497.0
+    y: 65.0
+    z: 3139.0
+    world: world
+    mob: frost1
+    amount: 1
+    maxamount: 1
+  s247:
+    x: -2456.0
+    y: 72.0
+    z: 3122.0
+    world: world
+    mob: frost1
+    amount: 1
+    maxamount: 1
+  s248:
+    x: -2348.0
+    y: 74.0
+    z: 3437.0
+    world: world
+    mob: frost4
+    amount: 1
+    maxamount: 1
+  s249:
+    x: -2381.0
+    y: 65.0
+    z: 3543.0
+    world: world
+    mob: frost2
+    amount: 1
+    maxamount: 1
+  s250:
+    x: -2292.0
+    y: 66.0
+    z: 3429.0
+    world: world
+    mob: frost2
+    amount: 1
+    maxamount: 1
+  s251:
+    x: -2237.0
+    y: 76.0
+    z: 3337.0
+    world: world
+    mob: frost2
+    amount: 1
+    maxamount: 1
+  s252:
+    x: -2316.0
+    y: 73.0
+    z: 3214.0
+    world: world
+    mob: frost2
+    amount: 1
+    maxamount: 1
+  s253:
+    x: -2346.0
+    y: 73.0
+    z: 3132.0
+    world: world
+    mob: frost2
+    amount: 1
+    maxamount: 1
+  s254:
+    x: -2527.0
+    y: 70.0
+    z: 3410.0
+    world: world
+    mob: frost2
+    amount: 1
+    maxamount: 1
+  s255:
+    x: -2514.0
+    y: 76.0
+    z: 3631.0
+    world: world
+    mob: frost2
+    amount: 1
+    maxamount: 1
+  s256:
+    x: -2516.0
+    y: 65.0
+    z: 3477.0
+    world: world
+    mob: frost2
+    amount: 1
+    maxamount: 1
+  s257:
+    x: -2405.0
+    y: 68.0
+    z: 3485.0
+    world: world
+    mob: frost5
+    amount: 1
+    maxamount: 1
+  s258:
+    x: -2334.0
+    y: 69.0
+    z: 3356.0
+    world: world
+    mob: frost5
+    amount: 1
+    maxamount: 1
+  s259:
+    x: -2379.0
+    y: 77.0
+    z: 3189.0
+    world: world
+    mob: frost5
+    amount: 1
+    maxamount: 1
+  s260:
+    x: -2279.0
+    y: 72.0
+    z: 3261.0
+    world: world
+    mob: frost5
+    amount: 1
+    maxamount: 1
+  s261:
+    x: -2488.0
+    y: 70.0
+    z: 3307.0
+    world: world
+    mob: frost5
+    amount: 1
+    maxamount: 1
+  s262:
+    x: -2542.0
+    y: 72.0
+    z: 3608.0
+    world: world
+    mob: frost5
+    amount: 1
+    maxamount: 1
+  s263:
+    x: -2370.0
+    y: 69.0
+    z: 3484.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s264:
+    x: -2312.0
+    y: 78.0
+    z: 3394.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s265:
+    x: -2258.0
+    y: 66.0
+    z: 3389.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s266:
+    x: -2306.0
+    y: 67.0
+    z: 3167.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s267:
+    x: -2321.0
+    y: 72.0
+    z: 3303.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s268:
+    x: -2348.0
+    y: 77.0
+    z: 3206.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s269:
+    x: -2254.0
+    y: 79.0
+    z: 3295.0
+    world: world
+    mob: frost6
+    amount: 1
+    maxamount: 2
+  s270:
+    x: -2491.0
+    y: 65.0
+    z: 3254.0
+    world: world
+    mob: frost1
+    amount: 1
+    maxamount: 1
+  s271:
+    x: -2512.0
+    y: 64.0
+    z: 3267.0
+    world: world
+    mob: frost1
+    amount: 1
+    maxamount: 1
+  s272:
+    x: -2496.0
+    y: 63.0
+    z: 3183.0
+    world: world
+    mob: frost1
+    amount: 1
+    maxamount: 1
+  s273:
+    x: -2460.0
+    y: 67.0
+    z: 3158.0
+    world: world
+    mob: frost1
+    amount: 1
+    maxamount: 1
+  s274:
+    x: -2667.0
+    y: 115.0
+    z: 1785.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s275:
+    x: -2666.0
+    y: 120.0
+    z: 1756.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s276:
+    x: -2635.0
+    y: 124.0
+    z: 1750.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s277:
+    x: -2646.0
+    y: 105.0
+    z: 1864.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s278:
+    x: -2662.0
+    y: 107.0
+    z: 1822.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s279:
+    x: -2566.0
+    y: 115.0
+    z: 1834.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s280:
+    x: -2566.0
+    y: 115.0
+    z: 1855.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s281:
+    x: -2566.0
+    y: 109.0
+    z: 1878.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s282:
+    x: -2536.0
+    y: 113.0
+    z: 1912.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s283:
+    x: -2570.0
+    y: 107.0
+    z: 1912.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s284:
+    x: -2561.0
+    y: 106.0
+    z: 1943.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s285:
+    x: -2550.0
+    y: 110.0
+    z: 1893.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s286:
+    x: -2535.0
+    y: 119.0
+    z: 1830.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s287:
+    x: -2524.0
+    y: 130.0
+    z: 1789.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s288:
+    x: -2485.0
+    y: 132.0
+    z: 1814.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s289:
+    x: -2464.0
+    y: 132.0
+    z: 1846.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s290:
+    x: -2478.0
+    y: 130.0
+    z: 1865.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s291:
+    x: -2465.0
+    y: 130.0
+    z: 1889.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s292:
+    x: -2442.0
+    y: 133.0
+    z: 1899.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s293:
+    x: -2476.0
+    y: 126.0
+    z: 1921.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s294:
+    x: -2469.0
+    y: 124.0
+    z: 1950.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s295:
+    x: -2480.0
+    y: 118.0
+    z: 1984.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s296:
+    x: -2488.0
+    y: 114.0
+    z: 2016.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s297:
+    x: -2503.0
+    y: 109.0
+    z: 2049.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s298:
+    x: -2443.0
+    y: 106.0
+    z: 2062.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s299:
+    x: -2402.0
+    y: 108.0
+    z: 2052.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s300:
+    x: -2385.0
+    y: 106.0
+    z: 2085.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s301:
+    x: -2371.0
+    y: 100.0
+    z: 2121.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s302:
+    x: -2413.0
+    y: 104.0
+    z: 2083.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s303:
+    x: -2369.0
+    y: 113.0
+    z: 2058.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s304:
+    x: -2344.0
+    y: 106.0
+    z: 2096.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s305:
+    x: -2342.0
+    y: 110.0
+    z: 2071.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s306:
+    x: -2330.0
+    y: 113.0
+    z: 2060.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s307:
+    x: -2315.0
+    y: 117.0
+    z: 2045.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s308:
+    x: -2311.0
+    y: 119.0
+    z: 2028.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s309:
+    x: -2300.0
+    y: 124.0
+    z: 2007.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s310:
+    x: -2394.0
+    y: 120.0
+    z: 1984.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s311:
+    x: -2376.0
+    y: 116.0
+    z: 2010.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s312:
+    x: -2363.0
+    y: 120.0
+    z: 1993.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s313:
+    x: -2366.0
+    y: 126.0
+    z: 1960.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s314:
+    x: -2336.0
+    y: 125.0
+    z: 2000.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s315:
+    x: -2350.0
+    y: 119.0
+    z: 2028.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s316:
+    x: -2403.0
+    y: 119.0
+    z: 2003.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s317:
+    x: -2486.0
+    y: 114.0
+    z: 2017.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s318:
+    x: -2475.0
+    y: 117.0
+    z: 2001.0
+    world: world
+    mob: desert2
+    amount: 1
+    maxamount: 1
+  s319:
+    x: -2469.0
+    y: 125.0
+    z: 1927.0
+    world: world
+    mob: desert5
+    amount: 1
+    maxamount: 1
+  s320:
+    x: -2555.0
+    y: 112.0
+    z: 1868.0
+    world: world
+    mob: desert6
+    amount: 1
+    maxamount: 1
+  s321:
+    x: -2587.0
+    y: 94.0
+    z: 2047.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s322:
+    x: -2540.0
+    y: 91.0
+    z: 2121.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s323:
+    x: -2722.0
+    y: 113.0
+    z: 1778.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s324:
+    x: -2692.0
+    y: 127.0
+    z: 1724.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s325:
+    x: -2597.0
+    y: 125.0
+    z: 1773.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s326:
+    x: -2411.0
+    y: 92.0
+    z: 2167.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s327:
+    x: -2458.0
+    y: 88.0
+    z: 2179.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s328:
+    x: -2580.0
+    y: 88.0
+    z: 2094.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s329:
+    x: -2357.0
+    y: 131.0
+    z: 1927.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s330:
+    x: -2388.0
+    y: 134.0
+    z: 1921.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s331:
+    x: -2256.0
+    y: 130.0
+    z: 1995.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s332:
+    x: -2458.0
+    y: 133.0
+    z: 1799.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s333:
+    x: -2419.0
+    y: 143.0
+    z: 1751.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s334:
+    x: -2394.0
+    y: 145.0
+    z: 1732.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s335:
+    x: -2363.0
+    y: 143.0
+    z: 1865.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s336:
+    x: -2332.0
+    y: 143.0
+    z: 1875.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s337:
+    x: -2344.0
+    y: 143.0
+    z: 1845.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s338:
+    x: -2314.0
+    y: 145.0
+    z: 1832.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s339:
+    x: -2333.0
+    y: 143.0
+    z: 1824.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s340:
+    x: -2372.0
+    y: 146.0
+    z: 1810.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s341:
+    x: -2339.0
+    y: 138.0
+    z: 1786.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s342:
+    x: -2315.0
+    y: 143.0
+    z: 1765.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s343:
+    x: -2371.0
+    y: 143.0
+    z: 1730.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s344:
+    x: -2370.0
+    y: 143.0
+    z: 1677.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s345:
+    x: -2355.0
+    y: 138.0
+    z: 1703.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s346:
+    x: -2335.0
+    y: 138.0
+    z: 1776.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s347:
+    x: -2296.0
+    y: 143.0
+    z: 1750.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s348:
+    x: -2241.0
+    y: 138.0
+    z: 1953.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s349:
+    x: -2209.0
+    y: 143.0
+    z: 1922.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s350:
+    x: -2205.0
+    y: 143.0
+    z: 1867.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s351:
+    x: -2218.0
+    y: 143.0
+    z: 1839.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s352:
+    x: -2189.0
+    y: 143.0
+    z: 1812.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s353:
+    x: -2214.0
+    y: 138.0
+    z: 1790.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s354:
+    x: -2175.0
+    y: 143.0
+    z: 1777.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s355:
+    x: -2204.0
+    y: 138.0
+    z: 1779.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s356:
+    x: -2188.0
+    y: 138.0
+    z: 1752.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s357:
+    x: -2157.0
+    y: 143.0
+    z: 1723.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s358:
+    x: -2205.0
+    y: 139.0
+    z: 1732.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s359:
+    x: -2163.0
+    y: 143.0
+    z: 1766.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s360:
+    x: -2199.0
+    y: 143.0
+    z: 1705.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s361:
+    x: -2224.0
+    y: 143.0
+    z: 1681.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s362:
+    x: -2201.0
+    y: 139.0
+    z: 1664.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s363:
+    x: -2187.0
+    y: 139.0
+    z: 1633.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s364:
+    x: -2161.0
+    y: 139.0
+    z: 1624.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s365:
+    x: -2148.0
+    y: 139.0
+    z: 1677.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s366:
+    x: -2175.0
+    y: 142.0
+    z: 1714.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s367:
+    x: -2168.0
+    y: 143.0
+    z: 1598.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s368:
+    x: -2214.0
+    y: 143.0
+    z: 1598.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s369:
+    x: -2236.0
+    y: 143.0
+    z: 1635.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s370:
+    x: -2257.0
+    y: 143.0
+    z: 1632.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s371:
+    x: -2258.0
+    y: 143.0
+    z: 1592.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s372:
+    x: -2289.0
+    y: 143.0
+    z: 1628.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s373:
+    x: -2308.0
+    y: 138.0
+    z: 1587.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s374:
+    x: -2352.0
+    y: 140.0
+    z: 1569.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s375:
+    x: -2347.0
+    y: 145.0
+    z: 1628.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s376:
+    x: -2282.0
+    y: 145.0
+    z: 1670.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s377:
+    x: -2338.0
+    y: 144.0
+    z: 1675.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s378:
+    x: -2292.0
+    y: 143.0
+    z: 1701.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s379:
+    x: -2266.0
+    y: 143.0
+    z: 1753.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s380:
+    x: -2244.0
+    y: 143.0
+    z: 1732.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s381:
+    x: -2404.0
+    y: 143.0
+    z: 1637.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s382:
+    x: -2473.0
+    y: 140.0
+    z: 1759.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s383:
+    x: -2406.0
+    y: 144.0
+    z: 1848.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s384:
+    x: -2427.0
+    y: 141.0
+    z: 1814.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s385:
+    x: -2461.0
+    y: 132.0
+    z: 1805.0
+    world: world
+    mob: desert1
+    amount: 2
+    maxamount: 2
+  s386:
+    x: -2534.0
+    y: 138.0
+    z: 1620.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s387:
+    x: -2511.0
+    y: 143.0
+    z: 1642.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s388:
+    x: -2490.0
+    y: 143.0
+    z: 1610.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s389:
+    x: -2461.0
+    y: 143.0
+    z: 1578.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s390:
+    x: -2450.0
+    y: 139.0
+    z: 1619.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s391:
+    x: -2422.0
+    y: 138.0
+    z: 1603.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s392:
+    x: -2429.0
+    y: 138.0
+    z: 1575.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s393:
+    x: -2400.0
+    y: 139.0
+    z: 1580.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s394:
+    x: -2391.0
+    y: 143.0
+    z: 1602.0
+    world: world
+    mob: desert4
+    amount: 1
+    maxamount: 1
+  s395:
+    x: -2372.0
+    y: 143.0
+    z: 1599.0
+    world: world
+    mob: desert3
+    amount: 1
+    maxamount: 1
+  s396:
+    x: -2888.0
+    y: 65.0
+    z: 2485.0
+    world: world
+    mob: swamp1
+    amount: 1
+    maxamount: 1
+  s397:
+    x: -2955.0
+    y: 67.0
+    z: 2843.0
+    world: world
+    mob: swamp1
+    amount: 1
+    maxamount: 1
+  s398:
+    x: -2946.0
+    y: 66.0
+    z: 2205.0
+    world: world
+    mob: swamp1
+    amount: 1
+    maxamount: 1
+  s399:
+    x: -3164.0
+    y: 65.0
+    z: 1684.0
+    world: world
+    mob: swamp1
+    amount: 1
+    maxamount: 1
+  s400:
+    x: -3280.0
+    y: 63.0
+    z: 2265.0
+    world: world
+    mob: swamp1
+    amount: 1
+    maxamount: 1
+  s401:
+    x: -3164.0
+    y: 65.0
+    z: 2169.0
+    world: world
+    mob: swamp1
+    amount: 1
+    maxamount: 1
+  s402:
+    x: -3154.0
+    y: 65.0
+    z: 2412.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s403:
+    x: -3119.0
+    y: 65.0
+    z: 2374.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s404:
+    x: -3085.0
+    y: 65.0
+    z: 2388.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s405:
+    x: -3089.0
+    y: 65.0
+    z: 2433.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s406:
+    x: -3120.0
+    y: 65.0
+    z: 2429.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s407:
+    x: -3104.0
+    y: 65.0
+    z: 2403.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s408:
+    x: -2893.0
+    y: 68.0
+    z: 2968.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s409:
+    x: -2904.0
+    y: 67.0
+    z: 2919.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s410:
+    x: -2971.0
+    y: 68.0
+    z: 2887.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s411:
+    x: -2994.0
+    y: 68.0
+    z: 2821.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s412:
+    x: -3060.0
+    y: 66.0
+    z: 2791.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s413:
+    x: -3065.0
+    y: 66.0
+    z: 2760.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s414:
+    x: -3011.0
+    y: 66.0
+    z: 2797.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s415:
+    x: -2956.0
+    y: 67.0
+    z: 2704.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s416:
+    x: -2947.0
+    y: 66.0
+    z: 2593.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s417:
+    x: -2923.0
+    y: 65.0
+    z: 2494.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s418:
+    x: -2846.0
+    y: 66.0
+    z: 2443.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s419:
+    x: -2962.0
+    y: 65.0
+    z: 2438.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s420:
+    x: -3015.0
+    y: 69.0
+    z: 2403.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s421:
+    x: -2965.0
+    y: 66.0
+    z: 2255.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s422:
+    x: -3074.0
+    y: 65.0
+    z: 2241.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s423:
+    x: -3132.0
+    y: 66.0
+    z: 2170.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s424:
+    x: -3297.0
+    y: 65.0
+    z: 2184.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s425:
+    x: -3201.0
+    y: 68.0
+    z: 2319.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s426:
+    x: -3075.0
+    y: 66.0
+    z: 2177.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s427:
+    x: -3196.0
+    y: 67.0
+    z: 2427.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s428:
+    x: -3114.0
+    y: 69.0
+    z: 2486.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s429:
+    x: -3000.0
+    y: 65.0
+    z: 2496.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s430:
+    x: -3057.0
+    y: 66.0
+    z: 2577.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s431:
+    x: -3189.0
+    y: 66.0
+    z: 2626.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s432:
+    x: -3023.0
+    y: 67.0
+    z: 2900.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s433:
+    x: -2942.0
+    y: 79.0
+    z: 3071.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s434:
+    x: -2864.0
+    y: 75.0
+    z: 3108.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s435:
+    x: -2967.0
+    y: 68.0
+    z: 3006.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s436:
+    x: -2873.0
+    y: 66.0
+    z: 2992.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s437:
+    x: -2870.0
+    y: 68.0
+    z: 3038.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s438:
+    x: -2919.0
+    y: 67.0
+    z: 2988.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s439:
+    x: -2894.0
+    y: 67.0
+    z: 3022.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s440:
+    x: -2917.0
+    y: 70.0
+    z: 3036.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s441:
+    x: -2943.0
+    y: 67.0
+    z: 2999.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s442:
+    x: -2930.0
+    y: 66.0
+    z: 2948.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s443:
+    x: -2878.0
+    y: 70.0
+    z: 2911.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s444:
+    x: -2889.0
+    y: 66.0
+    z: 2883.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s445:
+    x: -2916.0
+    y: 65.0
+    z: 2893.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s446:
+    x: -2945.0
+    y: 67.0
+    z: 2973.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s447:
+    x: -2966.0
+    y: 67.0
+    z: 2954.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s448:
+    x: -2959.0
+    y: 67.0
+    z: 2912.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s449:
+    x: -2989.0
+    y: 67.0
+    z: 2910.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s450:
+    x: -2989.0
+    y: 69.0
+    z: 2942.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s451:
+    x: -3012.0
+    y: 67.0
+    z: 2924.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s452:
+    x: -3040.0
+    y: 69.0
+    z: 2942.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s453:
+    x: -3053.0
+    y: 71.0
+    z: 2995.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s454:
+    x: -3089.0
+    y: 68.0
+    z: 2977.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s455:
+    x: -3068.0
+    y: 68.0
+    z: 2936.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s456:
+    x: -3104.0
+    y: 68.0
+    z: 2917.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s457:
+    x: -3131.0
+    y: 67.0
+    z: 2929.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s458:
+    x: -3135.0
+    y: 67.0
+    z: 2890.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s459:
+    x: -3166.0
+    y: 66.0
+    z: 2892.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s460:
+    x: -3159.0
+    y: 67.0
+    z: 2855.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s461:
+    x: -3199.0
+    y: 66.0
+    z: 2849.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s462:
+    x: -3203.0
+    y: 67.0
+    z: 2791.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s463:
+    x: -3157.0
+    y: 66.0
+    z: 2785.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s464:
+    x: -3141.0
+    y: 66.0
+    z: 2834.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s465:
+    x: -3103.0
+    y: 66.0
+    z: 2841.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s466:
+    x: -3098.0
+    y: 67.0
+    z: 2887.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s467:
+    x: -3053.0
+    y: 67.0
+    z: 2886.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s468:
+    x: -3039.0
+    y: 67.0
+    z: 2855.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s469:
+    x: -3070.0
+    y: 65.0
+    z: 2834.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s470:
+    x: -3098.0
+    y: 66.0
+    z: 2798.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s471:
+    x: -3117.0
+    y: 65.0
+    z: 2769.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s472:
+    x: -3192.0
+    y: 66.0
+    z: 2769.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s473:
+    x: -3224.0
+    y: 67.0
+    z: 2832.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s474:
+    x: -3236.0
+    y: 66.0
+    z: 2800.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s475:
+    x: -3218.0
+    y: 66.0
+    z: 2770.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s476:
+    x: -3242.0
+    y: 66.0
+    z: 2746.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s477:
+    x: -3250.0
+    y: 66.0
+    z: 2721.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s478:
+    x: -3235.0
+    y: 66.0
+    z: 2694.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s479:
+    x: -3180.0
+    y: 66.0
+    z: 2746.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s480:
+    x: -3174.0
+    y: 66.0
+    z: 2712.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s481:
+    x: -3184.0
+    y: 66.0
+    z: 2675.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s482:
+    x: -3232.0
+    y: 66.0
+    z: 2646.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s483:
+    x: -3203.0
+    y: 66.0
+    z: 2627.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s484:
+    x: -3206.0
+    y: 66.0
+    z: 2603.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s485:
+    x: -3228.0
+    y: 66.0
+    z: 2597.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s486:
+    x: -3187.0
+    y: 67.0
+    z: 2584.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s487:
+    x: -3203.0
+    y: 65.0
+    z: 2567.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s488:
+    x: -3159.0
+    y: 65.0
+    z: 2582.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s489:
+    x: -3124.0
+    y: 65.0
+    z: 2581.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s490:
+    x: -3145.0
+    y: 68.0
+    z: 2542.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s491:
+    x: -3107.0
+    y: 68.0
+    z: 2558.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s492:
+    x: -3086.0
+    y: 65.0
+    z: 2579.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s493:
+    x: -3050.0
+    y: 67.0
+    z: 2543.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s494:
+    x: -3017.0
+    y: 67.0
+    z: 2541.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s495:
+    x: -2990.0
+    y: 68.0
+    z: 2510.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s496:
+    x: -2973.0
+    y: 66.0
+    z: 2543.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s497:
+    x: -2945.0
+    y: 65.0
+    z: 2564.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s498:
+    x: -2978.0
+    y: 66.0
+    z: 2623.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s499:
+    x: -2971.0
+    y: 66.0
+    z: 2657.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s500:
+    x: -3033.0
+    y: 65.0
+    z: 2614.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s501:
+    x: -3014.0
+    y: 66.0
+    z: 2651.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s502:
+    x: -2981.0
+    y: 66.0
+    z: 2689.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s503:
+    x: -3016.0
+    y: 68.0
+    z: 2725.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s504:
+    x: -3003.0
+    y: 67.0
+    z: 2740.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s505:
+    x: -2970.0
+    y: 66.0
+    z: 2717.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s506:
+    x: -2946.0
+    y: 67.0
+    z: 2713.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s507:
+    x: -2935.0
+    y: 67.0
+    z: 2684.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s508:
+    x: -2943.0
+    y: 66.0
+    z: 2658.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s509:
+    x: -2958.0
+    y: 66.0
+    z: 2640.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s510:
+    x: -2947.0
+    y: 66.0
+    z: 2616.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s511:
+    x: -2924.0
+    y: 66.0
+    z: 2625.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s512:
+    x: -2911.0
+    y: 65.0
+    z: 2663.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s513:
+    x: -2885.0
+    y: 64.0
+    z: 2704.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s514:
+    x: -2914.0
+    y: 67.0
+    z: 2741.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s515:
+    x: -2928.0
+    y: 70.0
+    z: 2771.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s516:
+    x: -2912.0
+    y: 70.0
+    z: 2792.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s517:
+    x: -2876.0
+    y: 66.0
+    z: 2785.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s518:
+    x: -2874.0
+    y: 65.0
+    z: 2828.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s519:
+    x: -2908.0
+    y: 66.0
+    z: 2838.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s520:
+    x: -2939.0
+    y: 67.0
+    z: 2859.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s521:
+    x: -2978.0
+    y: 68.0
+    z: 2887.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s522:
+    x: -2958.0
+    y: 67.0
+    z: 2910.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s523:
+    x: -3014.0
+    y: 71.0
+    z: 2857.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s524:
+    x: -3039.0
+    y: 65.0
+    z: 2818.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s525:
+    x: -3026.0
+    y: 66.0
+    z: 2764.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s526:
+    x: -3087.0
+    y: 65.0
+    z: 2771.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s527:
+    x: -2888.0
+    y: 66.0
+    z: 2611.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s528:
+    x: -2889.0
+    y: 66.0
+    z: 2568.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s529:
+    x: -2856.0
+    y: 66.0
+    z: 2499.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s530:
+    x: -2873.0
+    y: 67.0
+    z: 2543.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s531:
+    x: -2913.0
+    y: 68.0
+    z: 2538.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s532:
+    x: -2953.0
+    y: 65.0
+    z: 2519.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s533:
+    x: -2956.0
+    y: 69.0
+    z: 2472.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s534:
+    x: -2941.0
+    y: 65.0
+    z: 2456.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s535:
+    x: -2924.0
+    y: 70.0
+    z: 2418.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s536:
+    x: -2867.0
+    y: 65.0
+    z: 2444.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s537:
+    x: -2871.0
+    y: 65.0
+    z: 2393.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s538:
+    x: -2925.0
+    y: 66.0
+    z: 2394.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s539:
+    x: -2908.0
+    y: 70.0
+    z: 2360.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s540:
+    x: -2870.0
+    y: 65.0
+    z: 2345.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s541:
+    x: -2891.0
+    y: 65.0
+    z: 2305.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s542:
+    x: -2923.0
+    y: 66.0
+    z: 2273.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s543:
+    x: -2957.0
+    y: 65.0
+    z: 2301.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s544:
+    x: -2946.0
+    y: 67.0
+    z: 2343.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s545:
+    x: -2898.0
+    y: 65.0
+    z: 2288.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s546:
+    x: -2931.0
+    y: 65.0
+    z: 2313.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s547:
+    x: -2944.0
+    y: 67.0
+    z: 2242.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s548:
+    x: -3015.0
+    y: 65.0
+    z: 2267.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s549:
+    x: -3019.0
+    y: 65.0
+    z: 2249.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s550:
+    x: -3049.0
+    y: 65.0
+    z: 2256.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s551:
+    x: -3044.0
+    y: 65.0
+    z: 2225.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s552:
+    x: -3002.0
+    y: 65.0
+    z: 2202.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s553:
+    x: -2993.0
+    y: 66.0
+    z: 2233.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s554:
+    x: -3004.0
+    y: 65.0
+    z: 2173.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s555:
+    x: -3039.0
+    y: 65.0
+    z: 2180.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s556:
+    x: -3041.0
+    y: 65.0
+    z: 2152.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s557:
+    x: -3053.0
+    y: 65.0
+    z: 2224.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s558:
+    x: -3087.0
+    y: 65.0
+    z: 2206.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s559:
+    x: -3101.0
+    y: 66.0
+    z: 2184.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s560:
+    x: -3129.0
+    y: 66.0
+    z: 2190.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s561:
+    x: -3150.0
+    y: 65.0
+    z: 2149.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s562:
+    x: -3182.0
+    y: 65.0
+    z: 2130.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s563:
+    x: -3137.0
+    y: 65.0
+    z: 2096.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s564:
+    x: -3200.0
+    y: 65.0
+    z: 2081.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s565:
+    x: -3212.0
+    y: 67.0
+    z: 2150.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s566:
+    x: -3179.0
+    y: 65.0
+    z: 2201.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s567:
+    x: -3201.0
+    y: 65.0
+    z: 2210.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s568:
+    x: -3207.0
+    y: 65.0
+    z: 2253.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s569:
+    x: -3169.0
+    y: 65.0
+    z: 2296.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s570:
+    x: -3210.0
+    y: 65.0
+    z: 2295.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s571:
+    x: -3242.0
+    y: 67.0
+    z: 2244.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s572:
+    x: -3241.0
+    y: 71.0
+    z: 2222.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s573:
+    x: -3259.0
+    y: 63.0
+    z: 2188.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s574:
+    x: -3231.0
+    y: 64.0
+    z: 2183.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s575:
+    x: -3217.0
+    y: 66.0
+    z: 2171.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s576:
+    x: -3253.0
+    y: 64.0
+    z: 2144.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s577:
+    x: -3297.0
+    y: 63.0
+    z: 2145.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s578:
+    x: -3289.0
+    y: 64.0
+    z: 2094.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s579:
+    x: -3208.0
+    y: 65.0
+    z: 2103.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s580:
+    x: -3243.0
+    y: 65.0
+    z: 2117.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s581:
+    x: -3238.0
+    y: 65.0
+    z: 2084.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s582:
+    x: -3296.0
+    y: 64.0
+    z: 2110.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s583:
+    x: -3335.0
+    y: 63.0
+    z: 2091.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s584:
+    x: -3337.0
+    y: 64.0
+    z: 2041.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s585:
+    x: -3364.0
+    y: 63.0
+    z: 2029.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s586:
+    x: -3350.0
+    y: 64.0
+    z: 2000.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s587:
+    x: -3372.0
+    y: 63.0
+    z: 1985.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s588:
+    x: -3348.0
+    y: 65.0
+    z: 1958.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s589:
+    x: -3358.0
+    y: 65.0
+    z: 1932.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s590:
+    x: -3312.0
+    y: 65.0
+    z: 1936.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s591:
+    x: -3303.0
+    y: 65.0
+    z: 1905.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s592:
+    x: -3322.0
+    y: 65.0
+    z: 1875.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s593:
+    x: -3278.0
+    y: 65.0
+    z: 1861.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s594:
+    x: -3244.0
+    y: 65.0
+    z: 1835.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s595:
+    x: -3257.0
+    y: 66.0
+    z: 1884.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s596:
+    x: -3281.0
+    y: 65.0
+    z: 1907.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s597:
+    x: -3274.0
+    y: 66.0
+    z: 1934.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s598:
+    x: -3258.0
+    y: 64.0
+    z: 1920.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s599:
+    x: -3241.0
+    y: 66.0
+    z: 1948.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s600:
+    x: -3236.0
+    y: 68.0
+    z: 1975.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s601:
+    x: -3220.0
+    y: 65.0
+    z: 1989.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s602:
+    x: -3237.0
+    y: 65.0
+    z: 2021.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s603:
+    x: -3194.0
+    y: 65.0
+    z: 2026.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s604:
+    x: -3194.0
+    y: 65.0
+    z: 2060.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s605:
+    x: -3169.0
+    y: 66.0
+    z: 2092.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s606:
+    x: -3104.0
+    y: 65.0
+    z: 2118.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s607:
+    x: -3065.0
+    y: 65.0
+    z: 2137.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s608:
+    x: -3072.0
+    y: 65.0
+    z: 2159.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s609:
+    x: -3132.0
+    y: 64.0
+    z: 2129.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s610:
+    x: -3161.0
+    y: 65.0
+    z: 2121.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s611:
+    x: -3266.0
+    y: 65.0
+    z: 2070.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s612:
+    x: -3224.0
+    y: 65.0
+    z: 2016.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s613:
+    x: -3342.0
+    y: 65.0
+    z: 1914.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s614:
+    x: -3305.0
+    y: 65.0
+    z: 1916.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s615:
+    x: -3279.0
+    y: 65.0
+    z: 1891.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s616:
+    x: -3364.0
+    y: 65.0
+    z: 1897.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s617:
+    x: -3346.0
+    y: 65.0
+    z: 1871.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s618:
+    x: -3351.0
+    y: 65.0
+    z: 1840.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s619:
+    x: -3312.0
+    y: 65.0
+    z: 1849.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s620:
+    x: -3001.0
+    y: 70.0
+    z: 2340.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s621:
+    x: -3255.0
+    y: 65.0
+    z: 1810.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s622:
+    x: -3321.0
+    y: 66.0
+    z: 1805.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s623:
+    x: -3335.0
+    y: 65.0
+    z: 1764.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s624:
+    x: -3256.0
+    y: 66.0
+    z: 1754.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s625:
+    x: -3285.0
+    y: 65.0
+    z: 1825.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s626:
+    x: -3250.0
+    y: 66.0
+    z: 1778.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s627:
+    x: -3206.0
+    y: 65.0
+    z: 1807.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s628:
+    x: -3209.0
+    y: 65.0
+    z: 1763.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s629:
+    x: -3237.0
+    y: 66.0
+    z: 1732.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s630:
+    x: -3319.0
+    y: 66.0
+    z: 1721.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s631:
+    x: -3254.0
+    y: 67.0
+    z: 1713.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s632:
+    x: -3233.0
+    y: 65.0
+    z: 1670.0
+    world: world
+    mob: swamp3
+    amount: 1
+    maxamount: 2
+  s633:
+    x: -3224.0
+    y: 65.0
+    z: 1726.0
+    world: world
+    mob: swamp5
+    amount: 1
+    maxamount: 2
+  s634:
+    x: -3170.0
+    y: 65.0
+    z: 1711.0
+    world: world
+    mob: swamp2
+    amount: 1
+    maxamount: 2
+  s635:
+    x: -3233.0
+    y: 65.0
+    z: 1810.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s636:
+    x: -3226.0
+    y: 66.0
+    z: 1878.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s637:
+    x: -3283.0
+    y: 63.0
+    z: 2213.0
+    world: world
+    mob: swamp1
+    amount: 1
+    maxamount: 1
+  s638:
+    x: -3309.0
+    y: 65.0
+    z: 2238.0
+    world: world
+    mob: swamp4
+    amount: 1
+    maxamount: 1
+  s639:
+    x: -3217.0
+    y: 67.0
+    z: 2817.0
+    world: world
+    mob: swamp1
+    amount: 1
+    maxamount: 1
+  s640:
+    x: -3197.0
+    y: 68.0
+    z: 2521.0
+    world: world
+    mob: swamp1
+    amount: 1
+    maxamount: 1
+  s641:
+    x: -3314.0
+    y: 65.0
+    z: 2244.0
+    world: world
+    mob: swamp7
+    amount: 1
+    maxamount: 2
+  s642:
+    x: -3314.0
+    y: 65.0
+    z: 2230.0
+    world: world
+    mob: swamp6
+    amount: 1
+    maxamount: 2
+  s643:
+    x: -3375.0
+    y: 69.0
+    z: 2254.0
+    world: world
+    mob: lava3
+    amount: 1
+    maxamount: 2
+  s644:
+    x: -3370.0
+    y: 69.0
+    z: 2226.0
+    world: world
+    mob: lava3
+    amount: 1
+    maxamount: 2
+  s645:
+    x: -3395.0
+    y: 69.0
+    z: 2238.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s646:
+    x: -3492.0
+    y: 63.0
+    z: 2234.0
+    world: world
+    mob: lava9
+    amount: 1
+    maxamount: 2
+  s647:
+    x: -3519.0
+    y: 62.0
+    z: 2220.0
+    world: world
+    mob: lava9
+    amount: 1
+    maxamount: 2
+  s648:
+    x: -3548.0
+    y: 62.0
+    z: 2250.0
+    world: world
+    mob: lava9
+    amount: 1
+    maxamount: 2
+  s649:
+    x: -3545.0
+    y: 62.0
+    z: 2203.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s650:
+    x: -3576.0
+    y: 63.0
+    z: 2274.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s651:
+    x: -3569.0
+    y: 63.0
+    z: 2303.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s652:
+    x: -3576.0
+    y: 63.0
+    z: 2195.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s653:
+    x: -3558.0
+    y: 62.0
+    z: 2170.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s654:
+    x: -3524.0
+    y: 62.0
+    z: 2167.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s655:
+    x: -3624.0
+    y: 65.0
+    z: 2205.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 1
+  s656:
+    x: -3635.0
+    y: 65.0
+    z: 2185.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 1
+  s657:
+    x: -3657.0
+    y: 65.0
+    z: 2180.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 1
+  s658:
+    x: -3664.0
+    y: 65.0
+    z: 2158.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 1
+  s659:
+    x: -3638.0
+    y: 65.0
+    z: 2240.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s660:
+    x: -3656.0
+    y: 65.0
+    z: 2245.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 2
+  s661:
+    x: -3670.0
+    y: 65.0
+    z: 2249.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 2
+  s662:
+    x: -3747.0
+    y: 64.0
+    z: 2202.0
+    world: world
+    mob: lava6
+    amount: 1
+    maxamount: 1
+  s663:
+    x: -3714.0
+    y: 64.0
+    z: 2191.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s664:
+    x: -3733.0
+    y: 69.0
+    z: 2200.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s665:
+    x: -3720.0
+    y: 64.0
+    z: 2201.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s666:
+    x: -4090.0
+    y: 64.0
+    z: 2152.0
+    world: world
+    mob: lava6
+    amount: 1
+    maxamount: 1
+  s667:
+    x: -4071.0
+    y: 65.0
+    z: 2155.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s668:
+    x: -4070.0
+    y: 64.0
+    z: 2118.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s669:
+    x: -4057.0
+    y: 64.0
+    z: 2128.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s670:
+    x: -3854.0
+    y: 69.0
+    z: 2276.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s671:
+    x: -3772.0
+    y: 63.0
+    z: 2298.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s672:
+    x: -3812.0
+    y: 63.0
+    z: 2280.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s673:
+    x: -3848.0
+    y: 63.0
+    z: 2290.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s674:
+    x: -3849.0
+    y: 64.0
+    z: 2262.0
+    world: world
+    mob: lava6
+    amount: 1
+    maxamount: 1
+  s675:
+    x: -3837.0
+    y: 64.0
+    z: 2261.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s676:
+    x: -3848.0
+    y: 63.0
+    z: 2323.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s677:
+    x: -3869.0
+    y: 63.0
+    z: 2314.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s678:
+    x: -3866.0
+    y: 63.0
+    z: 2330.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s679:
+    x: -3747.0
+    y: 64.0
+    z: 2235.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 2
+  s680:
+    x: -3794.0
+    y: 63.0
+    z: 2313.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 2
+  s681:
+    x: -3895.0
+    y: 63.0
+    z: 2329.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 2
+  s682:
+    x: -3881.0
+    y: 64.0
+    z: 2282.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 2
+  s683:
+    x: -3910.0
+    y: 64.0
+    z: 2263.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s684:
+    x: -3893.0
+    y: 64.0
+    z: 2264.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s685:
+    x: -3957.0
+    y: 64.0
+    z: 2381.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s686:
+    x: -3978.0
+    y: 65.0
+    z: 2376.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s687:
+    x: -4006.0
+    y: 64.0
+    z: 2380.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s688:
+    x: -3986.0
+    y: 69.0
+    z: 2428.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s689:
+    x: -4011.0
+    y: 69.0
+    z: 2426.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s690:
+    x: -4040.0
+    y: 64.0
+    z: 2385.0
+    world: world
+    mob: lava6
+    amount: 1
+    maxamount: 1
+  s691:
+    x: -3988.0
+    y: 64.0
+    z: 2407.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s692:
+    x: -4024.0
+    y: 64.0
+    z: 2356.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s693:
+    x: -4010.0
+    y: 65.0
+    z: 2462.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s694:
+    x: -4023.0
+    y: 65.0
+    z: 2479.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s695:
+    x: -4032.0
+    y: 65.0
+    z: 2454.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 1
+  s696:
+    x: -4047.0
+    y: 66.0
+    z: 2498.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s697:
+    x: -4016.0
+    y: 64.0
+    z: 2509.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s698:
+    x: -4053.0
+    y: 66.0
+    z: 2526.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s699:
+    x: -3826.0
+    y: 63.0
+    z: 2355.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s700:
+    x: -3791.0
+    y: 63.0
+    z: 2364.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s701:
+    x: -3704.0
+    y: 65.0
+    z: 2067.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s702:
+    x: -3703.0
+    y: 66.0
+    z: 2019.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s703:
+    x: -3694.0
+    y: 64.0
+    z: 1965.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s704:
+    x: -3744.0
+    y: 68.0
+    z: 1922.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s705:
+    x: -3758.0
+    y: 67.0
+    z: 2001.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s706:
+    x: -3773.0
+    y: 66.0
+    z: 2046.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s707:
+    x: -3820.0
+    y: 61.0
+    z: 2069.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s708:
+    x: -3867.0
+    y: 62.0
+    z: 2069.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s709:
+    x: -3913.0
+    y: 62.0
+    z: 2083.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s710:
+    x: -3958.0
+    y: 62.0
+    z: 2100.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s711:
+    x: -3909.0
+    y: 62.0
+    z: 2363.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s712:
+    x: -3925.0
+    y: 62.0
+    z: 2395.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s713:
+    x: -3761.0
+    y: 62.0
+    z: 2304.0
+    world: world
+    mob: lava5
+    amount: 1
+    maxamount: 1
+  s714:
+    x: -4041.0
+    y: 80.0
+    z: 2328.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s715:
+    x: -4042.0
+    y: 80.0
+    z: 2307.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 1
+  s716:
+    x: -3743.0
+    y: 63.0
+    z: 2132.0
+    world: world
+    mob: lava9
+    amount: 1
+    maxamount: 2
+  s717:
+    x: -3735.0
+    y: 56.0
+    z: 2002.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s718:
+    x: -3717.0
+    y: 58.0
+    z: 1945.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s719:
+    x: -3730.0
+    y: 56.0
+    z: 2043.0
+    world: world
+    mob: lava9
+    amount: 1
+    maxamount: 2
+  s720:
+    x: -3851.0
+    y: 63.0
+    z: 2081.0
+    world: world
+    mob: lava9
+    amount: 1
+    maxamount: 2
+  s721:
+    x: -3925.0
+    y: 63.0
+    z: 2098.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s722:
+    x: -3975.0
+    y: 63.0
+    z: 2114.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s723:
+    x: -3959.0
+    y: 65.0
+    z: 2325.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s724:
+    x: -4000.0
+    y: 65.0
+    z: 2317.0
+    world: world
+    mob: lava9
+    amount: 1
+    maxamount: 2
+  s725:
+    x: -4029.0
+    y: 64.0
+    z: 2267.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s726:
+    x: -3976.0
+    y: 65.0
+    z: 2230.0
+    world: world
+    mob: lava9
+    amount: 1
+    maxamount: 2
+  s727:
+    x: -4004.0
+    y: 65.0
+    z: 2195.0
+    world: world
+    mob: lava2
+    amount: 1
+    maxamount: 2
+  s728:
+    x: -3796.0
+    y: 64.0
+    z: 2161.0
+    world: world
+    mob: lava6
+    amount: 1
+    maxamount: 1
+  s729:
+    x: -3790.0
+    y: 64.0
+    z: 2169.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s730:
+    x: -3785.0
+    y: 64.0
+    z: 2155.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s731:
+    x: -3821.0
+    y: 65.0
+    z: 2141.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s732:
+    x: -3851.0
+    y: 65.0
+    z: 2166.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 2
+  s733:
+    x: -3874.0
+    y: 66.0
+    z: 2141.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s734:
+    x: -3871.0
+    y: 65.0
+    z: 2170.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s735:
+    x: -3722.0
+    y: 63.0
+    z: 2105.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s736:
+    x: -3748.0
+    y: 63.0
+    z: 2082.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s737:
+    x: -3736.0
+    y: 63.0
+    z: 2096.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s738:
+    x: -3926.0
+    y: 65.0
+    z: 2146.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 2
+  s739:
+    x: -3953.0
+    y: 63.0
+    z: 2137.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s740:
+    x: -3992.0
+    y: 63.0
+    z: 2124.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s741:
+    x: -3985.0
+    y: 63.0
+    z: 2140.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s742:
+    x: -3969.0
+    y: 65.0
+    z: 2275.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s743:
+    x: -3978.0
+    y: 65.0
+    z: 2249.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s744:
+    x: -3993.0
+    y: 65.0
+    z: 2297.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s745:
+    x: -4007.0
+    y: 65.0
+    z: 2232.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 2
+  s746:
+    x: -4014.0
+    y: 65.0
+    z: 2250.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s747:
+    x: -4017.0
+    y: 64.0
+    z: 2301.0
+    world: world
+    mob: lava1
+    amount: 1
+    maxamount: 2
+  s748:
+    x: -4004.0
+    y: 74.0
+    z: 2331.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s749:
+    x: -3949.0
+    y: 64.0
+    z: 2354.0
+    world: world
+    mob: lava7
+    amount: 1
+    maxamount: 1
+  s750:
+    x: -3924.0
+    y: 63.0
+    z: 2378.0
+    world: world
+    mob: lava9
+    amount: 1
+    maxamount: 2
+  s751:
+    x: -3931.0
+    y: 72.0
+    z: 2337.0
+    world: world
+    mob: lava8
+    amount: 1
+    maxamount: 1
+  s752:
+    x: -3938.0
+    y: 65.0
+    z: 2287.0
+    world: world
+    mob: lava4
+    amount: 1
+    maxamount: 2
+  s753:
+    x: -3772.0
+    y: 61.0
+    z: 1695.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s754:
+    x: -3859.0
+    y: 60.0
+    z: 1742.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s755:
+    x: -4010.0
+    y: 53.0
+    z: 1681.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s756:
+    x: -4027.0
+    y: 59.0
+    z: 1792.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s757:
+    x: -4110.0
+    y: 59.0
+    z: 1793.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s758:
+    x: -4088.0
+    y: 60.0
+    z: 1683.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s759:
+    x: -4060.0
+    y: 62.0
+    z: 1597.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s760:
+    x: -4125.0
+    y: 62.0
+    z: 1451.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s761:
+    x: -4011.0
+    y: 68.0
+    z: 1347.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s762:
+    x: -3959.0
+    y: 58.0
+    z: 1224.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s763:
+    x: -3840.0
+    y: 63.0
+    z: 1325.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s764:
+    x: -3742.0
+    y: 63.0
+    z: 1273.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s765:
+    x: -3635.0
+    y: 63.0
+    z: 1408.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s766:
+    x: -3640.0
+    y: 65.0
+    z: 1538.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s767:
+    x: -3544.0
+    y: 63.0
+    z: 1520.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s768:
+    x: -3634.0
+    y: 66.0
+    z: 1655.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s769:
+    x: -3711.0
+    y: 67.0
+    z: 1646.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s770:
+    x: -3728.0
+    y: 62.0
+    z: 1699.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s771:
+    x: -3806.0
+    y: 63.0
+    z: 1739.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s772:
+    x: -3628.0
+    y: 63.0
+    z: 1586.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s773:
+    x: -3581.0
+    y: 63.0
+    z: 1481.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s774:
+    x: -3580.0
+    y: 63.0
+    z: 1359.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s775:
+    x: -3631.0
+    y: 66.0
+    z: 1366.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s776:
+    x: -3730.0
+    y: 69.0
+    z: 1320.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s777:
+    x: -3823.0
+    y: 63.0
+    z: 1260.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s778:
+    x: -3902.0
+    y: 63.0
+    z: 1295.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s779:
+    x: -3926.0
+    y: 50.0
+    z: 1219.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s780:
+    x: -4013.0
+    y: 63.0
+    z: 1255.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s781:
+    x: -4086.0
+    y: 62.0
+    z: 1381.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s782:
+    x: -4100.0
+    y: 63.0
+    z: 1492.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s783:
+    x: -4043.0
+    y: 59.0
+    z: 1551.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s784:
+    x: -4068.0
+    y: 59.0
+    z: 1644.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s785:
+    x: -4040.0
+    y: 58.0
+    z: 1728.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s786:
+    x: -4043.0
+    y: 59.0
+    z: 1826.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s787:
+    x: -3973.0
+    y: 71.0
+    z: 1827.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s788:
+    x: -3942.0
+    y: 63.0
+    z: 1720.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s789:
+    x: -3892.0
+    y: 63.0
+    z: 1829.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s790:
+    x: -3881.0
+    y: 63.0
+    z: 1755.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s791:
+    x: -3824.0
+    y: 59.0
+    z: 1658.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s792:
+    x: -3783.0
+    y: 55.0
+    z: 1729.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s793:
+    x: -3851.0
+    y: 63.0
+    z: 1688.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s794:
+    x: -3901.0
+    y: 63.0
+    z: 1693.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s795:
+    x: -3983.0
+    y: 60.0
+    z: 1799.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s796:
+    x: -4080.0
+    y: 59.0
+    z: 1860.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s797:
+    x: -4149.0
+    y: 64.0
+    z: 1773.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s798:
+    x: -4077.0
+    y: 63.0
+    z: 1736.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s799:
+    x: -4046.0
+    y: 58.0
+    z: 1684.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s800:
+    x: -4096.0
+    y: 65.0
+    z: 1615.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s801:
+    x: -4068.0
+    y: 59.0
+    z: 1558.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s802:
+    x: -4066.0
+    y: 59.0
+    z: 1511.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s803:
+    x: -4037.0
+    y: 55.0
+    z: 1482.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s804:
+    x: -4058.0
+    y: 62.0
+    z: 1442.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s805:
+    x: -4062.0
+    y: 62.0
+    z: 1409.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s806:
+    x: -4051.0
+    y: 55.0
+    z: 1344.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s807:
+    x: -4037.0
+    y: 59.0
+    z: 1281.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s808:
+    x: -3967.0
+    y: 58.0
+    z: 1247.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s809:
+    x: -3921.0
+    y: 45.0
+    z: 1245.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s810:
+    x: -3898.0
+    y: 61.0
+    z: 1266.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s811:
+    x: -3873.0
+    y: 60.0
+    z: 1299.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s812:
+    x: -3845.0
+    y: 58.0
+    z: 1273.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s813:
+    x: -3824.0
+    y: 49.0
+    z: 1298.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s814:
+    x: -3775.0
+    y: 63.0
+    z: 1326.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s815:
+    x: -3747.0
+    y: 59.0
+    z: 1317.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s816:
+    x: -3757.0
+    y: 61.0
+    z: 1203.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s817:
+    x: -3778.0
+    y: 58.0
+    z: 1225.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s818:
+    x: -3689.0
+    y: 59.0
+    z: 1186.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s819:
+    x: -3701.0
+    y: 59.0
+    z: 1284.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s820:
+    x: -3698.0
+    y: 60.0
+    z: 1339.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s821:
+    x: -3677.0
+    y: 54.0
+    z: 1384.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s822:
+    x: -3615.0
+    y: 63.0
+    z: 1385.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s823:
+    x: -3554.0
+    y: 45.0
+    z: 1418.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s824:
+    x: -3543.0
+    y: 57.0
+    z: 1391.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s825:
+    x: -3550.0
+    y: 63.0
+    z: 1474.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s826:
+    x: -3612.0
+    y: 59.0
+    z: 1527.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s827:
+    x: -3666.0
+    y: 63.0
+    z: 1459.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s828:
+    x: -3649.0
+    y: 63.0
+    z: 1505.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s829:
+    x: -3712.0
+    y: 63.0
+    z: 1574.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s830:
+    x: -3820.0
+    y: 64.0
+    z: 1543.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s831:
+    x: -3923.0
+    y: 65.0
+    z: 1529.0
+    world: world
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s832:
+    x: -3776.0
+    y: 64.0
+    z: 1546.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s833:
+    x: -3808.0
+    y: 64.0
+    z: 1569.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s834:
+    x: -3802.0
+    y: 63.0
+    z: 1467.0
+    world: world
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s835:
+    x: -3785.0
+    y: 64.0
+    z: 1493.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s836:
+    x: -3776.0
+    y: 63.0
+    z: 1451.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s837:
+    x: -3833.0
+    y: 64.0
+    z: 1434.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s838:
+    x: -3863.0
+    y: 64.0
+    z: 1434.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s839:
+    x: -3899.0
+    y: 63.0
+    z: 1463.0
+    world: world
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s840:
+    x: -3891.0
+    y: 62.0
+    z: 1395.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s841:
+    x: -3914.0
+    y: 64.0
+    z: 1437.0
+    world: world
+    mob: void1
+    amount: 1
+    maxamount: 2
+  s842:
+    x: -3930.0
+    y: 63.0
+    z: 1492.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s843:
+    x: -3863.0
+    y: 64.0
+    z: 1563.0
+    world: world
+    mob: void4
+    amount: 1
+    maxamount: 1
+  s844:
+    x: -3946.0
+    y: 63.0
+    z: 1517.0
+    world: world
+    mob: void2
+    amount: 1
+    maxamount: 1
+  s845:
+    x: -4099.0
+    y: 61.0
+    z: 1891.0
+    world: world
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s846:
+    x: -4167.0
+    y: 64.0
+    z: 1814.0
+    world: world
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s847:
+    x: -3964.0
+    y: 67.0
+    z: 1642.0
+    world: world
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s848:
+    x: -3651.0
+    y: 75.0
+    z: 1680.0
+    world: world
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s849:
+    x: -3579.0
+    y: 67.0
+    z: 1455.0
+    world: world
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s850:
+    x: -3742.0
+    y: 76.0
+    z: 1360.0
+    world: world
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s851:
+    x: -3966.0
+    y: 77.0
+    z: 1295.0
+    world: world
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s852:
+    x: -4116.0
+    y: 68.0
+    z: 1657.0
+    world: world
+    mob: void7
+    amount: 1
+    maxamount: 1
+  s853:
+    x: -4145.0
+    y: 70.0
+    z: 1585.0
+    world: world
+    mob: void7
+    amount: 1
+    maxamount: 1
+  s854:
+    x: -4175.0
+    y: 68.0
+    z: 1631.0
+    world: world
+    mob: void5
+    amount: 1
+    maxamount: 1
+  s855:
+    x: -4126.0
+    y: 71.0
+    z: 1596.0
+    world: world
+    mob: void5
+    amount: 1
+    maxamount: 1
+  s856:
+    x: -4202.0
+    y: 70.0
+    z: 1634.0
+    world: world
+    mob: void7
+    amount: 1
+    maxamount: 1
+  s857:
+    x: -4106.0
+    y: 67.0
+    z: 1549.0
+    world: world
+    mob: void5
+    amount: 1
+    maxamount: 1
+  s858:
+    x: -4181.0
+    y: 69.0
+    z: 1666.0
+    world: world
+    mob: void7
+    amount: 1
+    maxamount: 1
+  s859:
+    x: -4132.0
+    y: 67.0
+    z: 1674.0
+    world: world
+    mob: void5
+    amount: 1
+    maxamount: 1
+  s860:
+    x: -4092.0
+    y: 69.0
+    z: 1543.0
+    world: world
+    mob: void7
+    amount: 1
+    maxamount: 1
+  s861:
+    x: -4159.0
+    y: 64.0
+    z: 1627.0
+    world: world
+    mob: void8
+    amount: 1
+    maxamount: 1
+  s862:
+    x: -4173.0
+    y: 64.0
+    z: 1585.0
+    world: world
+    mob: void6
+    amount: 1
+    maxamount: 1
+  s863:
+    x: -4208.0
+    y: 63.0
+    z: 1605.0
+    world: world
+    mob: void8
+    amount: 1
+    maxamount: 1
+  s864:
+    x: -4199.0
+    y: 64.0
+    z: 1583.0
+    world: world
+    mob: void6
+    amount: 1
+    maxamount: 1
+  s865:
+    x: -4225.0
+    y: 63.0
+    z: 1643.0
+    world: world
+    mob: void8
+    amount: 1
+    maxamount: 1
+  s866:
+    x: -4245.0
+    y: 63.0
+    z: 1632.0
+    world: world
+    mob: void6
+    amount: 1
+    maxamount: 1
+  s867:
+    x: -4259.0
+    y: 63.0
+    z: 1650.0
+    world: world
+    mob: void8
+    amount: 1
+    maxamount: 1
+  s868:
+    x: -4223.0
+    y: 64.0
+    z: 1554.0
+    world: world
+    mob: void6
+    amount: 1
+    maxamount: 1
+  s869:
+    x: -4193.0
+    y: 63.0
+    z: 1527.0
+    world: world
+    mob: void8
+    amount: 1
+    maxamount: 1
+  s870:
+    x: -4151.0
+    y: 63.0
+    z: 1512.0
+    world: world
+    mob: void6
+    amount: 1
+    maxamount: 1
+  s871:
+    x: -4122.0
+    y: 64.0
+    z: 1550.0
+    world: world
+    mob: void8
+    amount: 1
+    maxamount: 1
+  s872:
+    x: -4152.0
+    y: 64.0
+    z: 1566.0
+    world: world
+    mob: void6
+    amount: 1
+    maxamount: 1
+  s873:
+    x: -4247.0
+    y: 63.0
+    z: 1587.0
+    world: world
+    mob: void5
+    amount: 1
+    maxamount: 1
+  s874:
+    x: -4240.0
+    y: 63.0
+    z: 1570.0
+    world: world
+    mob: void7
+    amount: 1
+    maxamount: 1
+  s875:
+    x: -4257.0
+    y: 63.0
+    z: 1576.0
+    world: world
+    mob: void6
+    amount: 1
+    maxamount: 1
+  s876:
+    x: -4222.0
+    y: 63.0
+    z: 1587.0
+    world: world
+    mob: void8
+    amount: 1
+    maxamount: 1
+  s877:
+    x: -4136.0
+    y: 63.0
+    z: 1527.0
+    world: world
+    mob: void7
+    amount: 1
+    maxamount: 1
+  s878:
+    x: -4155.0
+    y: 62.0
+    z: 1478.0
+    world: world
+    mob: void5
+    amount: 1
+    maxamount: 1
+  s879:
+    x: -3612.0
+    y: 63.0
+    z: 1894.0
+    world: world
+    mob: lava3
+    amount: 1
+    maxamount: 2
+  s880:
+    x: -3585.0
+    y: 63.0
+    z: 1941.0
+    world: world
+    mob: lava3
+    amount: 1
+    maxamount: 2
+  s881:
+    x: -3543.0
+    y: 63.0
+    z: 1909.0
+    world: world
+    mob: lava3
+    amount: 1
+    maxamount: 2
+  s882:
+    x: -2495.0
+    y: 61.0
+    z: 2855.0
+    world: world
+    mob: cow
+    amount: 1
+    maxamount: 2
+  s883:
+    x: -2464.0
+    y: 62.0
+    z: 2838.0
+    world: world
+    mob: sheep
+    amount: 1
+    maxamount: 2
+  s884:
+    x: -2441.0
+    y: 61.0
+    z: 2881.0
+    world: world
+    mob: cow
+    amount: 1
+    maxamount: 2
+  s885:
+    x: -2456.0
+    y: 63.0
+    z: 2779.0
+    world: world
+    mob: sheep
+    amount: 1
+    maxamount: 2
+  s886:
+    x: -2531.0
+    y: 62.0
+    z: 2767.0
+    world: world
+    mob: cow
+    amount: 1
+    maxamount: 2
+  s887:
+    x: -2508.0
+    y: 63.0
+    z: 2705.0
+    world: world
+    mob: sheep
+    amount: 1
+    maxamount: 2
+  s888:
+    x: -2538.0
+    y: 61.0
+    z: 2691.0
+    world: world
+    mob: cow
+    amount: 1
+    maxamount: 2
+  s889:
+    x: -2491.0
+    y: 62.0
+    z: 2648.0
+    world: world
+    mob: sheep
+    amount: 1
+    maxamount: 2
+  s890:
+    x: -2509.0
+    y: 61.0
+    z: 2612.0
+    world: world
+    mob: cow
+    amount: 1
+    maxamount: 2
+  s891:
+    x: -2487.0
+    y: 62.0
+    z: 2583.0
+    world: world
+    mob: sheep
+    amount: 1
+    maxamount: 2
+  s892:
+    x: -2462.0
+    y: 62.0
+    z: 2612.0
+    world: world
+    mob: cow
+    amount: 1
+    maxamount: 2
+  s893:
+    x: -2493.0
+    y: 63.0
+    z: 2755.0
+    world: world
+    mob: cow
+    amount: 1
+    maxamount: 2
+  s894:
+    x: -2455.0
+    y: 63.0
+    z: 2709.0
+    world: world
+    mob: sheep
+    amount: 1
+    maxamount: 2
+  s895:
+    x: -2427.0
+    y: 64.0
+    z: 2633.0
+    world: world
+    mob: cow
+    amount: 1
+    maxamount: 2
+  s896:
+    x: -2721.0
+    y: 65.0
+    z: 4837.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s897:
+    x: -2695.0
+    y: 66.0
+    z: 4819.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s898:
+    x: -2692.0
+    y: 65.0
+    z: 4792.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s899:
+    x: -2761.0
+    y: 65.0
+    z: 4795.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s900:
+    x: -2786.0
+    y: 66.0
+    z: 4841.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s901:
+    x: -2756.0
+    y: 66.0
+    z: 4847.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s902:
+    x: -2775.0
+    y: 65.0
+    z: 4898.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s903:
+    x: -2739.0
+    y: 69.0
+    z: 4911.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s904:
+    x: -2728.0
+    y: 65.0
+    z: 4963.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s905:
+    x: -2721.0
+    y: 65.0
+    z: 4894.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s906:
+    x: -2706.0
+    y: 65.0
+    z: 4947.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s907:
+    x: -2691.0
+    y: 65.0
+    z: 4926.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s908:
+    x: -2652.0
+    y: 64.0
+    z: 4928.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s909:
+    x: -2643.0
+    y: 64.0
+    z: 4953.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s910:
+    x: -2602.0
+    y: 64.0
+    z: 4931.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s911:
+    x: -2568.0
+    y: 64.0
+    z: 4895.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s912:
+    x: -2683.0
+    y: 75.0
+    z: 4867.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s913:
+    x: -2734.0
+    y: 73.0
+    z: 4857.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s914:
+    x: -2695.0
+    y: 70.0
+    z: 4844.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s915:
+    x: -2641.0
+    y: 68.0
+    z: 4802.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s916:
+    x: -2619.0
+    y: 66.0
+    z: 4755.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s917:
+    x: -2605.0
+    y: 67.0
+    z: 4798.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s918:
+    x: -2539.0
+    y: 66.0
+    z: 4788.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s919:
+    x: -2525.0
+    y: 66.0
+    z: 4819.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s920:
+    x: -2500.0
+    y: 66.0
+    z: 4796.0
+    world: world
+    mob: sheepb
+    amount: 1
+    maxamount: 2
+  s921:
+    x: -2667.0
+    y: 65.0
+    z: 4959.0
+    world: world
+    mob: cowb
+    amount: 1
+    maxamount: 2
+  s922:
+    x: -2975.0
+    y: 62.0
+    z: 5069.0
+    world: world
+    mob: hobbit
+    amount: 1
+    maxamount: 2
+  s923:
+    x: -2934.0
+    y: 63.0
+    z: 5065.0
+    world: world
+    mob: hobbit
+    amount: 1
+    maxamount: 2
+  s924:
+    x: -2867.0
+    y: 62.0
+    z: 5084.0
+    world: world
+    mob: hobbit
+    amount: 1
+    maxamount: 2
+  s925:
+    x: -2817.0
+    y: 63.0
+    z: 5108.0
+    world: world
+    mob: hobbit
+    amount: 1
+    maxamount: 2
+  s926:
+    x: -2847.0
+    y: 66.0
+    z: 5130.0
+    world: world
+    mob: hobbit
+    amount: 1
+    maxamount: 2
+  s927:
+    x: -2789.0
+    y: 63.0
+    z: 5135.0
+    world: world
+    mob: hobbit
+    amount: 1
+    maxamount: 2
+  s928:
+    x: -2878.0
+    y: 77.0
+    z: 5149.0
+    world: world
+    mob: hobbit
+    amount: 1
+    maxamount: 2
+  s929:
+    x: 1018.0
+    y: 21.0
+    z: 547.0
+    world: dungeons
+    mob: beginner1
+    amount: 2
+    maxamount: 2
+  s930:
+    x: 1021.0
+    y: 21.0
+    z: 76.0
+    world: dungeons
+    mob: beginner1
+    amount: 2
+    maxamount: 2
+  s931:
+    x: 1030.0
+    y: 21.0
+    z: -391.0
+    world: dungeons
+    mob: beginner1
+    amount: 2
+    maxamount: 2
+  s932:
+    x: 1036.0
+    y: 21.0
+    z: -856.0
+    world: dungeons
+    mob: beginner1
+    amount: 2
+    maxamount: 2
+  s933:
+    x: 1027.0
+    y: 21.0
+    z: -860.0
+    world: dungeons
+    mob: beginner4
+    amount: 2
+    maxamount: 2
+  s934:
+    x: 1021.0
+    y: 21.0
+    z: -395.0
+    world: dungeons
+    mob: beginner4
+    amount: 2
+    maxamount: 2
+  s935:
+    x: 1012.0
+    y: 21.0
+    z: 72.0
+    world: dungeons
+    mob: beginner4
+    amount: 2
+    maxamount: 2
+  s936:
+    x: 1009.0
+    y: 21.0
+    z: 543.0
+    world: dungeons
+    mob: beginner4
+    amount: 2
+    maxamount: 2
+  s937:
+    x: 987.0
+    y: 32.0
+    z: 543.0
+    world: dungeons
+    mob: beginner2
+    amount: 2
+    maxamount: 2
+  s938:
+    x: 990.0
+    y: 32.0
+    z: 72.0
+    world: dungeons
+    mob: beginner2
+    amount: 2
+    maxamount: 2
+  s939:
+    x: 999.0
+    y: 32.0
+    z: -395.0
+    world: dungeons
+    mob: beginner2
+    amount: 2
+    maxamount: 2
+  s940:
+    x: 1005.0
+    y: 32.0
+    z: -860.0
+    world: dungeons
+    mob: beginner2
+    amount: 2
+    maxamount: 2
+  s941:
+    x: 1017.0
+    y: 46.0
+    z: -869.0
+    world: dungeons
+    mob: beginner3
+    amount: 2
+    maxamount: 2
+  s942:
+    x: 1011.0
+    y: 46.0
+    z: -404.0
+    world: dungeons
+    mob: beginner3
+    amount: 2
+    maxamount: 2
+  s943:
+    x: 1002.0
+    y: 46.0
+    z: 63.0
+    world: dungeons
+    mob: beginner3
+    amount: 2
+    maxamount: 2
+  s944:
+    x: 999.0
+    y: 46.0
+    z: 534.0
+    world: dungeons
+    mob: beginner3
+    amount: 2
+    maxamount: 2
+  s945:
+    x: 1022.0
+    y: 73.0
+    z: 532.0
+    world: dungeons
+    mob: beginner5
+    amount: 2
+    maxamount: 2
+  s946:
+    x: 1025.0
+    y: 73.0
+    z: 61.0
+    world: dungeons
+    mob: beginner5
+    amount: 2
+    maxamount: 2
+  s947:
+    x: 1034.0
+    y: 73.0
+    z: -406.0
+    world: dungeons
+    mob: beginner5
+    amount: 2
+    maxamount: 2
+  s948:
+    x: 1040.0
+    y: 73.0
+    z: -871.0
+    world: dungeons
+    mob: beginner5
+    amount: 2
+    maxamount: 2
+  s949:
+    x: 1006.0
+    y: 79.0
+    z: -871.0
+    world: dungeons
+    mob: beginner6
+    amount: 2
+    maxamount: 2
+  s950:
+    x: 1000.0
+    y: 79.0
+    z: -406.0
+    world: dungeons
+    mob: beginner6
+    amount: 2
+    maxamount: 2
+  s951:
+    x: 991.0
+    y: 79.0
+    z: 61.0
+    world: dungeons
+    mob: beginner6
+    amount: 2
+    maxamount: 2
+  s952:
+    x: 988.0
+    y: 79.0
+    z: 532.0
+    world: dungeons
+    mob: beginner6
+    amount: 2
+    maxamount: 2
+  s953:
+    x: 980.0
+    y: 115.0
+    z: 537.0
+    world: dungeons
+    mob: slimeboss
+    amount: 1
+    maxamount: 1
+  s954:
+    x: 983.0
+    y: 115.0
+    z: 66.0
+    world: dungeons
+    mob: slimeboss
+    amount: 1
+    maxamount: 1
+  s955:
+    x: 992.0
+    y: 115.0
+    z: -401.0
+    world: dungeons
+    mob: slimeboss
+    amount: 1
+    maxamount: 1
+  s956:
+    x: 998.0
+    y: 115.0
+    z: -866.0
+    world: dungeons
+    mob: slimeboss
+    amount: 1
+    maxamount: 1
+  s957:
+    x: -97.0
+    y: 109.0
+    z: 568.0
+    world: dungeons
+    mob: zombie1
+    amount: 2
+    maxamount: 2
+  s958:
+    x: -88.0
+    y: 108.0
+    z: 113.0
+    world: dungeons
+    mob: zombie1
+    amount: 2
+    maxamount: 2
+  s959:
+    x: -105.0
+    y: 108.0
+    z: -402.0
+    world: dungeons
+    mob: zombie1
+    amount: 2
+    maxamount: 2
+  s960:
+    x: -107.0
+    y: 108.0
+    z: -882.0
+    world: dungeons
+    mob: zombie1
+    amount: 2
+    maxamount: 2
+  s961:
+    x: -83.0
+    y: 107.0
+    z: -985.0
+    world: dungeons
+    mob: zombie1
+    amount: 2
+    maxamount: 2
+  s962:
+    x: -81.0
+    y: 107.0
+    z: -505.0
+    world: dungeons
+    mob: zombie1
+    amount: 2
+    maxamount: 2
+  s963:
+    x: -64.0
+    y: 107.0
+    z: 10.0
+    world: dungeons
+    mob: zombie1
+    amount: 2
+    maxamount: 2
+  s964:
+    x: -73.0
+    y: 108.0
+    z: 465.0
+    world: dungeons
+    mob: zombie1
+    amount: 2
+    maxamount: 2
+  s965:
+    x: -100.0
+    y: 107.0
+    z: 499.0
+    world: dungeons
+    mob: zombie2
+    amount: 2
+    maxamount: 2
+  s966:
+    x: -91.0
+    y: 106.0
+    z: 44.0
+    world: dungeons
+    mob: zombie2
+    amount: 2
+    maxamount: 2
+  s967:
+    x: -108.0
+    y: 106.0
+    z: -471.0
+    world: dungeons
+    mob: zombie2
+    amount: 2
+    maxamount: 2
+  s968:
+    x: -110.0
+    y: 106.0
+    z: -951.0
+    world: dungeons
+    mob: zombie2
+    amount: 2
+    maxamount: 2
+  s969:
+    x: -167.0
+    y: 110.0
+    z: -940.0
+    world: dungeons
+    mob: zombie2
+    amount: 2
+    maxamount: 2
+  s970:
+    x: -165.0
+    y: 110.0
+    z: -460.0
+    world: dungeons
+    mob: zombie2
+    amount: 2
+    maxamount: 2
+  s971:
+    x: -148.0
+    y: 110.0
+    z: 55.0
+    world: dungeons
+    mob: zombie2
+    amount: 2
+    maxamount: 2
+  s972:
+    x: -157.0
+    y: 111.0
+    z: 510.0
+    world: dungeons
+    mob: zombie2
+    amount: 2
+    maxamount: 2
+  s973:
+    x: -124.0
+    y: 108.0
+    z: 518.0
+    world: dungeons
+    mob: zombieboss
+    amount: 1
+    maxamount: 1
+  s974:
+    x: -115.0
+    y: 107.0
+    z: 63.0
+    world: dungeons
+    mob: zombieboss
+    amount: 1
+    maxamount: 1
+  s975:
+    x: -132.0
+    y: 107.0
+    z: -452.0
+    world: dungeons
+    mob: zombieboss
+    amount: 1
+    maxamount: 1
+  s976:
+    x: -134.0
+    y: 107.0
+    z: -932.0
+    world: dungeons
+    mob: zombieboss
+    amount: 1
+    maxamount: 1
+  s977:
+    x: -120.0
+    y: 109.0
+    z: -916.0
+    world: dungeons
+    mob: zombie3
+    amount: 2
+    maxamount: 2
+  s978:
+    x: -118.0
+    y: 109.0
+    z: -436.0
+    world: dungeons
+    mob: zombie3
+    amount: 2
+    maxamount: 2
+  s979:
+    x: -101.0
+    y: 109.0
+    z: 79.0
+    world: dungeons
+    mob: zombie3
+    amount: 2
+    maxamount: 2
+  s980:
+    x: -110.0
+    y: 110.0
+    z: 534.0
+    world: dungeons
+    mob: zombie3
+    amount: 2
+    maxamount: 2
+  s981:
+    x: 351.0
+    y: 110.0
+    z: 483.0
+    world: dungeons
+    mob: forest2
+    amount: 2
+    maxamount: 2
+  s982:
+    x: 352.0
+    y: 110.0
+    z: -389.0
+    world: dungeons
+    mob: forest2
+    amount: 2
+    maxamount: 2
+  s983:
+    x: 337.0
+    y: 110.0
+    z: -1237.0
+    world: dungeons
+    mob: forest2
+    amount: 2
+    maxamount: 2
+  s984:
+    x: 325.0
+    y: 110.0
+    z: -2143.0
+    world: dungeons
+    mob: forest2
+    amount: 2
+    maxamount: 2
+  s985:
+    x: 328.0
+    y: 109.0
+    z: -2170.0
+    world: dungeons
+    mob: forest1
+    amount: 2
+    maxamount: 2
+  s986:
+    x: 339.0
+    y: 109.0
+    z: -1264.0
+    world: dungeons
+    mob: forest1
+    amount: 2
+    maxamount: 2
+  s987:
+    x: 354.0
+    y: 109.0
+    z: -416.0
+    world: dungeons
+    mob: forest1
+    amount: 2
+    maxamount: 2
+  s988:
+    x: 354.0
+    y: 109.0
+    z: 456.0
+    world: dungeons
+    mob: forest1
+    amount: 2
+    maxamount: 2
+  s989:
+    x: 352.0
+    y: 111.0
+    z: 434.0
+    world: dungeons
+    mob: forest3
+    amount: 2
+    maxamount: 2
+  s990:
+    x: 352.0
+    y: 111.0
+    z: -438.0
+    world: dungeons
+    mob: forest3
+    amount: 2
+    maxamount: 2
+  s991:
+    x: 337.0
+    y: 111.0
+    z: -1286.0
+    world: dungeons
+    mob: forest3
+    amount: 2
+    maxamount: 2
+  s992:
+    x: 326.0
+    y: 111.0
+    z: -2192.0
+    world: dungeons
+    mob: forest3
+    amount: 2
+    maxamount: 2
+  s993:
+    x: 333.0
+    y: 114.0
+    z: -2216.0
+    world: dungeons
+    mob: forest5
+    amount: 2
+    maxamount: 2
+  s994:
+    x: 344.0
+    y: 114.0
+    z: -1310.0
+    world: dungeons
+    mob: forest5
+    amount: 2
+    maxamount: 2
+  s995:
+    x: 359.0
+    y: 114.0
+    z: -462.0
+    world: dungeons
+    mob: forest5
+    amount: 2
+    maxamount: 2
+  s996:
+    x: 359.0
+    y: 114.0
+    z: 410.0
+    world: dungeons
+    mob: forest5
+    amount: 2
+    maxamount: 2
+  s997:
+    x: 363.0
+    y: 113.0
+    z: 372.0
+    world: dungeons
+    mob: forest2
+    amount: 2
+    maxamount: 2
+  s998:
+    x: 363.0
+    y: 113.0
+    z: -500.0
+    world: dungeons
+    mob: forest2
+    amount: 2
+    maxamount: 2
+  s999:
+    x: 348.0
+    y: 113.0
+    z: -1348.0
+    world: dungeons
+    mob: forest2
+    amount: 2
+    maxamount: 2
+  s1000:
+    x: 337.0
+    y: 113.0
+    z: -2254.0
+    world: dungeons
+    mob: forest2
+    amount: 2
+    maxamount: 2
+  s1001:
+    x: 336.0
+    y: 112.0
+    z: -2296.0
+    world: dungeons
+    mob: forest3
+    amount: 2
+    maxamount: 2
+  s1002:
+    x: 340.0
+    y: 116.0
+    z: -2315.0
+    world: dungeons
+    mob: forest5
+    amount: 2
+    maxamount: 2
+  s1003:
+    x: 348.0
+    y: 113.0
+    z: -1388.0
+    world: dungeons
+    mob: forest3
+    amount: 2
+    maxamount: 2
+  s1004:
+    x: 351.0
+    y: 116.0
+    z: -1409.0
+    world: dungeons
+    mob: forest5
+    amount: 2
+    maxamount: 2
+  s1005:
+    x: 362.0
+    y: 112.0
+    z: -542.0
+    world: dungeons
+    mob: forest3
+    amount: 2
+    maxamount: 2
+  s1006:
+    x: 366.0
+    y: 116.0
+    z: -561.0
+    world: dungeons
+    mob: forest5
+    amount: 2
+    maxamount: 2
+  s1007:
+    x: 362.0
+    y: 112.0
+    z: 330.0
+    world: dungeons
+    mob: forest3
+    amount: 2
+    maxamount: 2
+  s1008:
+    x: 366.0
+    y: 116.0
+    z: 311.0
+    world: dungeons
+    mob: forest5
+    amount: 2
+    maxamount: 2
+  s1009:
+    x: 361.0
+    y: 113.0
+    z: 286.0
+    world: dungeons
+    mob: forest4
+    amount: 2
+    maxamount: 2
+  s1010:
+    x: 361.0
+    y: 113.0
+    z: -586.0
+    world: dungeons
+    mob: forest4
+    amount: 2
+    maxamount: 2
+  s1011:
+    x: 346.0
+    y: 113.0
+    z: -1434.0
+    world: dungeons
+    mob: forest4
+    amount: 2
+    maxamount: 2
+  s1012:
+    x: 335.0
+    y: 113.0
+    z: -2340.0
+    world: dungeons
+    mob: forest4
+    amount: 2
+    maxamount: 2
+  s1013:
+    x: 351.0
+    y: 109.0
+    z: -2416.0
+    world: dungeons
+    mob: magicboss
+    amount: 1
+    maxamount: 1
+  s1014:
+    x: 362.0
+    y: 109.0
+    z: -1510.0
+    world: dungeons
+    mob: magicboss
+    amount: 1
+    maxamount: 1
+  s1015:
+    x: 377.0
+    y: 109.0
+    z: -662.0
+    world: dungeons
+    mob: magicboss
+    amount: 1
+    maxamount: 1
+  s1016:
+    x: 377.0
+    y: 109.0
+    z: 210.0
+    world: dungeons
+    mob: magicboss
+    amount: 1
+    maxamount: 1
+  s1017:
+    x: 2934.0
+    y: 23.0
+    z: 653.0
+    world: dungeons
+    mob: sugar1
+    amount: 2
+    maxamount: 2
+  s1018:
+    x: 2926.0
+    y: 23.0
+    z: 41.0
+    world: dungeons
+    mob: sugar1
+    amount: 2
+    maxamount: 2
+  s1019:
+    x: 2923.0
+    y: 23.0
+    z: -583.0
+    world: dungeons
+    mob: sugar1
+    amount: 2
+    maxamount: 2
+  s1020:
+    x: 2920.0
+    y: 23.0
+    z: -1224.0
+    world: dungeons
+    mob: sugar1
+    amount: 2
+    maxamount: 2
+  s1021:
+    x: 2930.0
+    y: 23.0
+    z: -1244.0
+    world: dungeons
+    mob: sugar2
+    amount: 2
+    maxamount: 2
+  s1022:
+    x: 2933.0
+    y: 23.0
+    z: -603.0
+    world: dungeons
+    mob: sugar2
+    amount: 2
+    maxamount: 2
+  s1023:
+    x: 2936.0
+    y: 23.0
+    z: 21.0
+    world: dungeons
+    mob: sugar2
+    amount: 2
+    maxamount: 2
+  s1024:
+    x: 2944.0
+    y: 23.0
+    z: 633.0
+    world: dungeons
+    mob: sugar2
+    amount: 2
+    maxamount: 2
+  s1025:
+    x: 2935.0
+    y: 23.0
+    z: 612.0
+    world: dungeons
+    mob: sugar3
+    amount: 2
+    maxamount: 2
+  s1026:
+    x: 2927.0
+    y: 23.0
+    z: 0.0
+    world: dungeons
+    mob: sugar3
+    amount: 2
+    maxamount: 2
+  s1027:
+    x: 2924.0
+    y: 23.0
+    z: -624.0
+    world: dungeons
+    mob: sugar3
+    amount: 2
+    maxamount: 2
+  s1028:
+    x: 2921.0
+    y: 23.0
+    z: -1265.0
+    world: dungeons
+    mob: sugar3
+    amount: 2
+    maxamount: 2
+  s1029:
+    x: 2910.0
+    y: 23.0
+    z: -1287.0
+    world: dungeons
+    mob: sugar4
+    amount: 2
+    maxamount: 2
+  s1030:
+    x: 2913.0
+    y: 23.0
+    z: -646.0
+    world: dungeons
+    mob: sugar4
+    amount: 2
+    maxamount: 2
+  s1031:
+    x: 2916.0
+    y: 23.0
+    z: -22.0
+    world: dungeons
+    mob: sugar4
+    amount: 2
+    maxamount: 2
+  s1032:
+    x: 2924.0
+    y: 23.0
+    z: 590.0
+    world: dungeons
+    mob: sugar4
+    amount: 2
+    maxamount: 2
+  s1033:
+    x: 2930.0
+    y: 23.0
+    z: 567.0
+    world: dungeons
+    mob: sugar2
+    amount: 2
+    maxamount: 2
+  s1034:
+    x: 2922.0
+    y: 23.0
+    z: -45.0
+    world: dungeons
+    mob: sugar2
+    amount: 2
+    maxamount: 2
+  s1035:
+    x: 2919.0
+    y: 23.0
+    z: -669.0
+    world: dungeons
+    mob: sugar2
+    amount: 2
+    maxamount: 2
+  s1036:
+    x: 2916.0
+    y: 23.0
+    z: -1310.0
+    world: dungeons
+    mob: sugar2
+    amount: 2
+    maxamount: 2
+  s1037:
+    x: 2927.0
+    y: 23.0
+    z: -1331.0
+    world: dungeons
+    mob: sugar3
+    amount: 2
+    maxamount: 2
+  s1038:
+    x: 2930.0
+    y: 23.0
+    z: -690.0
+    world: dungeons
+    mob: sugar3
+    amount: 2
+    maxamount: 2
+  s1039:
+    x: 2933.0
+    y: 23.0
+    z: -66.0
+    world: dungeons
+    mob: sugar3
+    amount: 2
+    maxamount: 2
+  s1040:
+    x: 2941.0
+    y: 23.0
+    z: 546.0
+    world: dungeons
+    mob: sugar3
+    amount: 2
+    maxamount: 2
+  s1041:
+    x: 2965.0
+    y: 23.0
+    z: 535.0
+    world: dungeons
+    mob: sugar1
+    amount: 2
+    maxamount: 2
+  s1042:
+    x: 2957.0
+    y: 23.0
+    z: -77.0
+    world: dungeons
+    mob: sugar1
+    amount: 2
+    maxamount: 2
+  s1043:
+    x: 2954.0
+    y: 23.0
+    z: -701.0
+    world: dungeons
+    mob: sugar1
+    amount: 2
+    maxamount: 2
+  s1044:
+    x: 2951.0
+    y: 23.0
+    z: -1342.0
+    world: dungeons
+    mob: sugar1
+    amount: 2
+    maxamount: 2
+  s1045:
+    x: 2978.0
+    y: 23.0
+    z: -1361.0
+    world: dungeons
+    mob: sugar4
+    amount: 2
+    maxamount: 2
+  s1046:
+    x: 2981.0
+    y: 23.0
+    z: -719.0
+    world: dungeons
+    mob: sugar4
+    amount: 2
+    maxamount: 2
+  s1047:
+    x: 2984.0
+    y: 23.0
+    z: -95.0
+    world: dungeons
+    mob: sugar4
+    amount: 2
+    maxamount: 2
+  s1048:
+    x: 2992.0
+    y: 23.0
+    z: 517.0
+    world: dungeons
+    mob: sugar4
+    amount: 2
+    maxamount: 2
+  s1049:
+    x: 2933.0
+    y: 43.0
+    z: 450.0
+    world: dungeons
+    mob: sugarboss
+    amount: 1
+    maxamount: 1
+  s1050:
+    x: 2925.0
+    y: 43.0
+    z: -162.0
+    world: dungeons
+    mob: sugarboss
+    amount: 1
+    maxamount: 1
+  s1051:
+    x: 2922.0
+    y: 43.0
+    z: -786.0
+    world: dungeons
+    mob: sugarboss
+    amount: 1
+    maxamount: 1
+  s1052:
+    x: 2919.0
+    y: 43.0
+    z: -1427.0
+    world: dungeons
+    mob: sugarboss
+    amount: 1
+    maxamount: 1
+  s1053:
+    x: 4496.0
+    y: 64.0
+    z: 659.0
+    world: dungeons
+    mob: pirate1
+    amount: 2
+    maxamount: 2
+  s1054:
+    x: 4494.0
+    y: 64.0
+    z: 9.0
+    world: dungeons
+    mob: pirate1
+    amount: 2
+    maxamount: 2
+  s1055:
+    x: 4504.0
+    y: 64.0
+    z: -589.0
+    world: dungeons
+    mob: pirate1
+    amount: 2
+    maxamount: 2
+  s1056:
+    x: 4506.0
+    y: 64.0
+    z: -1205.0
+    world: dungeons
+    mob: pirate1
+    amount: 2
+    maxamount: 2
+  s1057:
+    x: 4513.0
+    y: 66.0
+    z: -1249.0
+    world: dungeons
+    mob: pirate3
+    amount: 2
+    maxamount: 2
+  s1058:
+    x: 4511.0
+    y: 66.0
+    z: -633.0
+    world: dungeons
+    mob: pirate3
+    amount: 2
+    maxamount: 2
+  s1059:
+    x: 4501.0
+    y: 66.0
+    z: -35.0
+    world: dungeons
+    mob: pirate3
+    amount: 2
+    maxamount: 2
+  s1060:
+    x: 4503.0
+    y: 66.0
+    z: 615.0
+    world: dungeons
+    mob: pirate3
+    amount: 2
+    maxamount: 2
+  s1061:
+    x: 4525.0
+    y: 67.0
+    z: 532.0
+    world: dungeons
+    mob: pirate3
+    amount: 2
+    maxamount: 2
+  s1062:
+    x: 4523.0
+    y: 67.0
+    z: -117.0
+    world: dungeons
+    mob: pirate3
+    amount: 2
+    maxamount: 2
+  s1063:
+    x: 4533.0
+    y: 66.0
+    z: -717.0
+    world: dungeons
+    mob: pirate3
+    amount: 2
+    maxamount: 2
+  s1064:
+    x: 4535.0
+    y: 67.0
+    z: -1332.0
+    world: dungeons
+    mob: pirate3
+    amount: 2
+    maxamount: 2
+  s1065:
+    x: 4618.0
+    y: 68.0
+    z: -1446.0
+    world: dungeons
+    mob: pirateboss
+    amount: 1
+    maxamount: 1
+  s1066:
+    x: 4616.0
+    y: 68.0
+    z: -830.0
+    world: dungeons
+    mob: pirateboss
+    amount: 1
+    maxamount: 1
+  s1067:
+    x: 4606.0
+    y: 68.0
+    z: -232.0
+    world: dungeons
+    mob: pirateboss
+    amount: 1
+    maxamount: 1
+  s1068:
+    x: 4608.0
+    y: 68.0
+    z: 418.0
+    world: dungeons
+    mob: pirateboss
+    amount: 1
+    maxamount: 1
+  s1069:
+    x: 4097.0
+    y: 56.0
+    z: 643.0
+    world: dungeons
+    mob: frost3
+    amount: 2
+    maxamount: 2
+  s1070:
+    x: 4087.0
+    y: 56.0
+    z: 19.0
+    world: dungeons
+    mob: frost3
+    amount: 2
+    maxamount: 2
+  s1071:
+    x: 4095.0
+    y: 56.0
+    z: -562.0
+    world: dungeons
+    mob: frost3
+    amount: 2
+    maxamount: 2
+  s1072:
+    x: 4111.0
+    y: 56.0
+    z: -1169.0
+    world: dungeons
+    mob: frost3
+    amount: 2
+    maxamount: 2
+  s1073:
+    x: 4092.0
+    y: 56.0
+    z: -1188.0
+    world: dungeons
+    mob: frost2
+    amount: 2
+    maxamount: 2
+  s1074:
+    x: 4076.0
+    y: 56.0
+    z: -581.0
+    world: dungeons
+    mob: frost2
+    amount: 2
+    maxamount: 2
+  s1075:
+    x: 4068.0
+    y: 56.0
+    z: 0.0
+    world: dungeons
+    mob: frost2
+    amount: 2
+    maxamount: 2
+  s1076:
+    x: 4078.0
+    y: 56.0
+    z: 624.0
+    world: dungeons
+    mob: frost2
+    amount: 2
+    maxamount: 2
+  s1077:
+    x: 4063.0
+    y: 56.0
+    z: 606.0
+    world: dungeons
+    mob: frost5
+    amount: 2
+    maxamount: 2
+  s1078:
+    x: 4053.0
+    y: 56.0
+    z: -18.0
+    world: dungeons
+    mob: frost5
+    amount: 2
+    maxamount: 2
+  s1079:
+    x: 4061.0
+    y: 56.0
+    z: -599.0
+    world: dungeons
+    mob: frost5
+    amount: 2
+    maxamount: 2
+  s1080:
+    x: 4077.0
+    y: 56.0
+    z: -1206.0
+    world: dungeons
+    mob: frost5
+    amount: 2
+    maxamount: 2
+  s1081:
+    x: 4047.0
+    y: 56.0
+    z: 587.0
+    world: dungeons
+    mob: frost6
+    amount: 2
+    maxamount: 2
+  s1082:
+    x: 4037.0
+    y: 56.0
+    z: -37.0
+    world: dungeons
+    mob: frost6
+    amount: 2
+    maxamount: 2
+  s1083:
+    x: 4045.0
+    y: 56.0
+    z: -618.0
+    world: dungeons
+    mob: frost6
+    amount: 2
+    maxamount: 2
+  s1084:
+    x: 4061.0
+    y: 56.0
+    z: -1225.0
+    world: dungeons
+    mob: frost6
+    amount: 2
+    maxamount: 2
+  s1085:
+    x: 4047.0
+    y: 56.0
+    z: -1245.0
+    world: dungeons
+    mob: frost5
+    amount: 2
+    maxamount: 2
+  s1086:
+    x: 4032.0
+    y: 56.0
+    z: -638.0
+    world: dungeons
+    mob: frost5
+    amount: 2
+    maxamount: 2
+  s1087:
+    x: 4024.0
+    y: 56.0
+    z: -57.0
+    world: dungeons
+    mob: frost5
+    amount: 2
+    maxamount: 2
+  s1088:
+    x: 4034.0
+    y: 56.0
+    z: 567.0
+    world: dungeons
+    mob: frost5
+    amount: 2
+    maxamount: 2
+  s1089:
+    x: 4018.0
+    y: 56.0
+    z: 540.0
+    world: dungeons
+    mob: frost6
+    amount: 2
+    maxamount: 2
+  s1090:
+    x: 4007.0
+    y: 56.0
+    z: -84.0
+    world: dungeons
+    mob: frost6
+    amount: 2
+    maxamount: 2
+  s1091:
+    x: 4017.0
+    y: 56.0
+    z: -664.0
+    world: dungeons
+    mob: frost6
+    amount: 2
+    maxamount: 2
+  s1092:
+    x: 4033.0
+    y: 56.0
+    z: -1272.0
+    world: dungeons
+    mob: frost6
+    amount: 2
+    maxamount: 2
+  s1093:
+    x: 4039.0
+    y: 9.0
+    z: 438.0
+    world: dungeons
+    mob: iceboss
+    amount: 1
+    maxamount: 1
+  s1094:
+    x: 4029.0
+    y: 9.0
+    z: -186.0
+    world: dungeons
+    mob: iceboss
+    amount: 1
+    maxamount: 1
+  s1095:
+    x: 4037.0
+    y: 9.0
+    z: -767.0
+    world: dungeons
+    mob: iceboss
+    amount: 1
+    maxamount: 1
+  s1096:
+    x: 4053.0
+    y: 9.0
+    z: -1374.0
+    world: dungeons
+    mob: iceboss
+    amount: 1
+    maxamount: 1
+  s1097:
+    x: 2002.0
+    y: 54.0
+    z: 411.0
+    world: dungeons
+    mob: desert2
+    amount: 2
+    maxamount: 2
+  s1098:
+    x: 1974.0
+    y: 54.0
+    z: -207.0
+    world: dungeons
+    mob: desert2
+    amount: 2
+    maxamount: 2
+  s1099:
+    x: 1954.0
+    y: 54.0
+    z: -807.0
+    world: dungeons
+    mob: desert2
+    amount: 2
+    maxamount: 2
+  s1100:
+    x: 1918.0
+    y: 54.0
+    z: -1394.0
+    world: dungeons
+    mob: desert2
+    amount: 2
+    maxamount: 2
+  s1101:
+    x: 1929.0
+    y: 54.0
+    z: -1373.0
+    world: dungeons
+    mob: desert4
+    amount: 2
+    maxamount: 2
+  s1102:
+    x: 1965.0
+    y: 54.0
+    z: -786.0
+    world: dungeons
+    mob: desert4
+    amount: 2
+    maxamount: 2
+  s1103:
+    x: 1985.0
+    y: 54.0
+    z: -186.0
+    world: dungeons
+    mob: desert4
+    amount: 2
+    maxamount: 2
+  s1104:
+    x: 2013.0
+    y: 54.0
+    z: 432.0
+    world: dungeons
+    mob: desert4
+    amount: 2
+    maxamount: 2
+  s1105:
+    x: 2036.0
+    y: 54.0
+    z: 455.0
+    world: dungeons
+    mob: desert6
+    amount: 2
+    maxamount: 2
+  s1106:
+    x: 2008.0
+    y: 54.0
+    z: -163.0
+    world: dungeons
+    mob: desert6
+    amount: 2
+    maxamount: 2
+  s1107:
+    x: 1988.0
+    y: 54.0
+    z: -763.0
+    world: dungeons
+    mob: desert6
+    amount: 2
+    maxamount: 2
+  s1108:
+    x: 1952.0
+    y: 54.0
+    z: -1350.0
+    world: dungeons
+    mob: desert6
+    amount: 2
+    maxamount: 2
+  s1109:
+    x: 1991.0
+    y: 54.0
+    z: -1318.0
+    world: dungeons
+    mob: desert3
+    amount: 2
+    maxamount: 2
+  s1110:
+    x: 2027.0
+    y: 54.0
+    z: -731.0
+    world: dungeons
+    mob: desert3
+    amount: 2
+    maxamount: 2
+  s1111:
+    x: 2047.0
+    y: 54.0
+    z: -131.0
+    world: dungeons
+    mob: desert3
+    amount: 2
+    maxamount: 2
+  s1112:
+    x: 2075.0
+    y: 54.0
+    z: 487.0
+    world: dungeons
+    mob: desert3
+    amount: 2
+    maxamount: 2
+  s1113:
+    x: 2112.0
+    y: 15.0
+    z: 631.0
+    world: dungeons
+    mob: desertboss
+    amount: 1
+    maxamount: 1
+  s1114:
+    x: 2084.0
+    y: 15.0
+    z: 13.0
+    world: dungeons
+    mob: desertboss
+    amount: 1
+    maxamount: 1
+  s1115:
+    x: 2064.0
+    y: 15.0
+    z: -587.0
+    world: dungeons
+    mob: desertboss
+    amount: 1
+    maxamount: 1
+  s1116:
+    x: 2028.0
+    y: 15.0
+    z: -1174.0
+    world: dungeons
+    mob: desertboss
+    amount: 1
+    maxamount: 1
+  s1117:
+    x: 1518.0
+    y: 55.0
+    z: 664.0
+    world: dungeons
+    mob: swamp2
+    amount: 2
+    maxamount: 2
+  s1118:
+    x: 1488.0
+    y: 55.0
+    z: -30.0
+    world: dungeons
+    mob: swamp2
+    amount: 2
+    maxamount: 2
+  s1119:
+    x: 1495.0
+    y: 55.0
+    z: -600.0
+    world: dungeons
+    mob: swamp2
+    amount: 2
+    maxamount: 2
+  s1120:
+    x: 1479.0
+    y: 55.0
+    z: -1187.0
+    world: dungeons
+    mob: swamp2
+    amount: 2
+    maxamount: 2
+  s1121:
+    x: 1534.0
+    y: 55.0
+    z: 668.0
+    world: dungeons
+    mob: swamp3
+    amount: 2
+    maxamount: 2
+  s1122:
+    x: 1504.0
+    y: 55.0
+    z: -26.0
+    world: dungeons
+    mob: swamp3
+    amount: 2
+    maxamount: 2
+  s1123:
+    x: 1511.0
+    y: 55.0
+    z: -596.0
+    world: dungeons
+    mob: swamp3
+    amount: 2
+    maxamount: 2
+  s1124:
+    x: 1495.0
+    y: 55.0
+    z: -1183.0
+    world: dungeons
+    mob: swamp3
+    amount: 2
+    maxamount: 2
+  s1125:
+    x: 1558.0
+    y: 51.0
+    z: 656.0
+    world: dungeons
+    mob: swamp5
+    amount: 2
+    maxamount: 2
+  s1126:
+    x: 1528.0
+    y: 51.0
+    z: -38.0
+    world: dungeons
+    mob: swamp5
+    amount: 2
+    maxamount: 2
+  s1127:
+    x: 1535.0
+    y: 51.0
+    z: -608.0
+    world: dungeons
+    mob: swamp5
+    amount: 2
+    maxamount: 2
+  s1128:
+    x: 1519.0
+    y: 51.0
+    z: -1195.0
+    world: dungeons
+    mob: swamp5
+    amount: 2
+    maxamount: 2
+  s1129:
+    x: 1551.0
+    y: 51.0
+    z: 618.0
+    world: dungeons
+    mob: swamp6
+    amount: 2
+    maxamount: 2
+  s1130:
+    x: 1521.0
+    y: 51.0
+    z: -76.0
+    world: dungeons
+    mob: swamp6
+    amount: 2
+    maxamount: 2
+  s1131:
+    x: 1528.0
+    y: 51.0
+    z: -646.0
+    world: dungeons
+    mob: swamp6
+    amount: 2
+    maxamount: 2
+  s1132:
+    x: 1512.0
+    y: 51.0
+    z: -1233.0
+    world: dungeons
+    mob: swamp6
+    amount: 2
+    maxamount: 2
+  s1133:
+    x: 1540.0
+    y: 58.0
+    z: 585.0
+    world: dungeons
+    mob: swamp1
+    amount: 2
+    maxamount: 2
+  s1134:
+    x: 1510.0
+    y: 58.0
+    z: -109.0
+    world: dungeons
+    mob: swamp1
+    amount: 2
+    maxamount: 2
+  s1135:
+    x: 1517.0
+    y: 58.0
+    z: -679.0
+    world: dungeons
+    mob: swamp1
+    amount: 2
+    maxamount: 2
+  s1136:
+    x: 1501.0
+    y: 58.0
+    z: -1266.0
+    world: dungeons
+    mob: swamp1
+    amount: 2
+    maxamount: 2
+  s1137:
+    x: 1553.0
+    y: 57.0
+    z: 450.0
+    world: dungeons
+    mob: swampboss
+    amount: 1
+    maxamount: 1
+  s1138:
+    x: 1524.0
+    y: 57.0
+    z: -244.0
+    world: dungeons
+    mob: swampboss
+    amount: 1
+    maxamount: 1
+  s1139:
+    x: 1532.0
+    y: 57.0
+    z: -814.0
+    world: dungeons
+    mob: swampboss
+    amount: 1
+    maxamount: 1
+  s1140:
+    x: 1515.0
+    y: 57.0
+    z: -1402.0
+    world: dungeons
+    mob: swampboss
+    amount: 1
+    maxamount: 1
+  s1141:
+    x: 2513.0
+    y: 74.0
+    z: 607.0
+    world: dungeons
+    mob: lava1
+    amount: 2
+    maxamount: 2
+  s1142:
+    x: 2506.0
+    y: 74.0
+    z: -164.0
+    world: dungeons
+    mob: lava1
+    amount: 2
+    maxamount: 2
+  s1143:
+    x: 2499.0
+    y: 74.0
+    z: -921.0
+    world: dungeons
+    mob: lava1
+    amount: 2
+    maxamount: 2
+  s1144:
+    x: 2494.0
+    y: 74.0
+    z: -1696.0
+    world: dungeons
+    mob: lava1
+    amount: 2
+    maxamount: 2
+  s1145:
+    x: 2511.0
+    y: 81.0
+    z: -1700.0
+    world: dungeons
+    mob: lava8
+    amount: 2
+    maxamount: 2
+  s1146:
+    x: 2516.0
+    y: 81.0
+    z: -925.0
+    world: dungeons
+    mob: lava8
+    amount: 2
+    maxamount: 2
+  s1147:
+    x: 2523.0
+    y: 81.0
+    z: -168.0
+    world: dungeons
+    mob: lava8
+    amount: 2
+    maxamount: 2
+  s1148:
+    x: 2530.0
+    y: 81.0
+    z: 603.0
+    world: dungeons
+    mob: lava8
+    amount: 2
+    maxamount: 2
+  s1149:
+    x: 2534.0
+    y: 88.0
+    z: 584.0
+    world: dungeons
+    mob: lava6
+    amount: 2
+    maxamount: 2
+  s1150:
+    x: 2527.0
+    y: 87.0
+    z: -188.0
+    world: dungeons
+    mob: lava6
+    amount: 2
+    maxamount: 2
+  s1151:
+    x: 2521.0
+    y: 88.0
+    z: -943.0
+    world: dungeons
+    mob: lava6
+    amount: 2
+    maxamount: 2
+  s1152:
+    x: 2515.0
+    y: 88.0
+    z: -1719.0
+    world: dungeons
+    mob: lava6
+    amount: 2
+    maxamount: 2
+  s1153:
+    x: 2515.0
+    y: 97.0
+    z: -1747.0
+    world: dungeons
+    mob: lava4
+    amount: 2
+    maxamount: 2
+  s1154:
+    x: 2520.0
+    y: 97.0
+    z: -972.0
+    world: dungeons
+    mob: lava4
+    amount: 2
+    maxamount: 2
+  s1155:
+    x: 2527.0
+    y: 97.0
+    z: -215.0
+    world: dungeons
+    mob: lava4
+    amount: 2
+    maxamount: 2
+  s1156:
+    x: 2534.0
+    y: 97.0
+    z: 556.0
+    world: dungeons
+    mob: lava4
+    amount: 2
+    maxamount: 2
+  s1157:
+    x: 2534.0
+    y: 97.0
+    z: 527.0
+    world: dungeons
+    mob: lava7
+    amount: 2
+    maxamount: 2
+  s1158:
+    x: 2527.0
+    y: 97.0
+    z: -244.0
+    world: dungeons
+    mob: lava7
+    amount: 2
+    maxamount: 2
+  s1159:
+    x: 2520.0
+    y: 97.0
+    z: -1001.0
+    world: dungeons
+    mob: lava7
+    amount: 2
+    maxamount: 2
+  s1160:
+    x: 2515.0
+    y: 96.0
+    z: -1777.0
+    world: dungeons
+    mob: lava7
+    amount: 2
+    maxamount: 2
+  s1161:
+    x: 2515.0
+    y: 96.0
+    z: -1817.0
+    world: dungeons
+    mob: lava6
+    amount: 2
+    maxamount: 2
+  s1162:
+    x: 2520.0
+    y: 96.0
+    z: -1042.0
+    world: dungeons
+    mob: lava6
+    amount: 2
+    maxamount: 2
+  s1163:
+    x: 2527.0
+    y: 96.0
+    z: -285.0
+    world: dungeons
+    mob: lava6
+    amount: 2
+    maxamount: 2
+  s1164:
+    x: 2534.0
+    y: 96.0
+    z: 486.0
+    world: dungeons
+    mob: lava6
+    amount: 2
+    maxamount: 2
+  s1165:
+    x: 2534.0
+    y: 96.0
+    z: 388.0
+    world: dungeons
+    mob: lava5
+    amount: 2
+    maxamount: 2
+  s1166:
+    x: 2527.0
+    y: 96.0
+    z: -383.0
+    world: dungeons
+    mob: lava5
+    amount: 2
+    maxamount: 2
+  s1167:
+    x: 2520.0
+    y: 96.0
+    z: -1140.0
+    world: dungeons
+    mob: lava5
+    amount: 2
+    maxamount: 2
+  s1168:
+    x: 2515.0
+    y: 96.0
+    z: -1915.0
+    world: dungeons
+    mob: lava5
+    amount: 2
+    maxamount: 2
+  s1169:
+    x: 2515.0
+    y: 96.0
+    z: -2081.0
+    world: dungeons
+    mob: lavaboss
+    amount: 1
+    maxamount: 1
+  s1170:
+    x: 2520.0
+    y: 96.0
+    z: -1306.0
+    world: dungeons
+    mob: lavaboss
+    amount: 1
+    maxamount: 1
+  s1171:
+    x: 2527.0
+    y: 96.0
+    z: -549.0
+    world: dungeons
+    mob: lavaboss
+    amount: 1
+    maxamount: 1
+  s1172:
+    x: 2534.0
+    y: 96.0
+    z: 222.0
+    world: dungeons
+    mob: lavaboss
+    amount: 1
+    maxamount: 1
+  s1173:
+    x: 3503.0
+    y: 75.0
+    z: 596.0
+    world: dungeons
+    mob: void1
+    amount: 2
+    maxamount: 2
+  s1174:
+    x: 3510.0
+    y: 75.0
+    z: -304.0
+    world: dungeons
+    mob: void1
+    amount: 2
+    maxamount: 2
+  s1175:
+    x: 3518.0
+    y: 75.0
+    z: -1163.0
+    world: dungeons
+    mob: void1
+    amount: 2
+    maxamount: 2
+  s1176:
+    x: 3541.0
+    y: 75.0
+    z: -2055.0
+    world: dungeons
+    mob: void1
+    amount: 2
+    maxamount: 2
+  s1177:
+    x: 3541.0
+    y: 75.0
+    z: -2081.0
+    world: dungeons
+    mob: void2
+    amount: 2
+    maxamount: 2
+  s1178:
+    x: 3518.0
+    y: 75.0
+    z: -1189.0
+    world: dungeons
+    mob: void2
+    amount: 2
+    maxamount: 2
+  s1179:
+    x: 3510.0
+    y: 75.0
+    z: -330.0
+    world: dungeons
+    mob: void2
+    amount: 2
+    maxamount: 2
+  s1180:
+    x: 3503.0
+    y: 75.0
+    z: 570.0
+    world: dungeons
+    mob: void2
+    amount: 2
+    maxamount: 2
+  s1181:
+    x: 3503.0
+    y: 75.0
+    z: 488.0
+    world: dungeons
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s1182:
+    x: 3510.0
+    y: 75.0
+    z: -412.0
+    world: dungeons
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s1183:
+    x: 3518.0
+    y: 75.0
+    z: -1271.0
+    world: dungeons
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s1184:
+    x: 3541.0
+    y: 75.0
+    z: -2163.0
+    world: dungeons
+    mob: void3
+    amount: 1
+    maxamount: 1
+  s1185:
+    x: 3541.0
+    y: 91.0
+    z: -2219.0
+    world: dungeons
+    mob: void6
+    amount: 1
+    maxamount: 1
+  s1186:
+    x: 3518.0
+    y: 91.0
+    z: -1327.0
+    world: dungeons
+    mob: void6
+    amount: 1
+    maxamount: 1
+  s1187:
+    x: 3510.0
+    y: 91.0
+    z: -468.0
+    world: dungeons
+    mob: void6
+    amount: 1
+    maxamount: 1
+  s1188:
+    x: 3503.0
+    y: 91.0
+    z: 432.0
+    world: dungeons
+    mob: void6
+    amount: 1
+    maxamount: 1
+  s1189:
+    x: 3505.0
+    y: 91.0
+    z: 419.0
+    world: dungeons
+    mob: void5
+    amount: 1
+    maxamount: 1
+  s1190:
+    x: 3512.0
+    y: 91.0
+    z: -481.0
+    world: dungeons
+    mob: void5
+    amount: 1
+    maxamount: 1
+  s1191:
+    x: 3520.0
+    y: 91.0
+    z: -1340.0
+    world: dungeons
+    mob: void5
+    amount: 1
+    maxamount: 1
+  s1192:
+    x: 3543.0
+    y: 91.0
+    z: -2232.0
+    world: dungeons
+    mob: void5
+    amount: 1
+    maxamount: 1
+  s1193:
+    x: 3540.0
+    y: 94.0
+    z: -2255.0
+    world: dungeons
+    mob: void8
+    amount: 1
+    maxamount: 1
+  s1194:
+    x: 3542.0
+    y: 94.0
+    z: -2269.0
+    world: dungeons
+    mob: void7
+    amount: 1
+    maxamount: 1
+  s1195:
+    x: 3517.0
+    y: 94.0
+    z: -1363.0
+    world: dungeons
+    mob: void8
+    amount: 1
+    maxamount: 1
+  s1196:
+    x: 3519.0
+    y: 94.0
+    z: -1377.0
+    world: dungeons
+    mob: void7
+    amount: 1
+    maxamount: 1
+  s1197:
+    x: 3509.0
+    y: 94.0
+    z: -504.0
+    world: dungeons
+    mob: void8
+    amount: 1
+    maxamount: 1
+  s1198:
+    x: 3511.0
+    y: 94.0
+    z: -518.0
+    world: dungeons
+    mob: void7
+    amount: 1
+    maxamount: 1
+  s1199:
+    x: 3502.0
+    y: 94.0
+    z: 396.0
+    world: dungeons
+    mob: void8
+    amount: 1
+    maxamount: 1
+  s1200:
+    x: 3504.0
+    y: 94.0
+    z: 382.0
+    world: dungeons
+    mob: void7
+    amount: 1
+    maxamount: 1
+  s1201:
+    x: -3153.0
+    y: 71.0
+    z: 4554.0
+    world: world
+    mob: beginner6
+    amount: 1
+    maxamount: 2
+  s1202:
+    x: -3210.0
+    y: 63.0
+    z: 4490.0
+    world: world
+    mob: beginner6
+    amount: 1
+    maxamount: 2

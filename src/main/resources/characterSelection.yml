@@ -1,0 +1,48 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#           Character Selection Locations        #
+# ---------------------------------------------- #
+
+characterSelectionCenter:
+  world: world
+  x: -2760.5
+  y: 45.5
+  z: 6119.5
+  yaw: -135
+  pitch: 2
+characterSelectionHologram1:
+  world: world
+  x: -2753.5
+  y: 45.5
+  z: 6112.5
+  yaw: -316.5
+  pitch: 90.0
+characterSelectionHologram2:
+  world: world
+  x: -2753.5
+  y: 45.5
+  z: 6126.5
+  yaw: -226.5
+  pitch: -2
+characterSelectionHologram3:
+  world: world
+  x: -2767.5
+  y: 45.5
+  z: 6126.5
+  yaw: -135
+  pitch: -0.5
+characterSelectionHologram4:
+  world: world
+  x: -2767.5
+  y: 45.5
+  z: 6112.5
+  yaw: -45.5
+  pitch: -1
+tutorialStart:
+  world: begining
+  x: 268
+  y: 151.0
+  z: -830.5
+  yaw: -4.5
+  pitch: -9

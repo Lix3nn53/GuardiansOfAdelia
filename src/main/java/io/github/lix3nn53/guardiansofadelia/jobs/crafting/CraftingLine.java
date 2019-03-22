@@ -1,0 +1,54 @@
+package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiLine;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CraftingLine implements GuiLine {
+
+    private final List<ItemStack> ingredients = new ArrayList<>();
+    private final ItemStack itemToCreate;
+
+    public CraftingLine(ItemStack itemToCreate) {
+        this.itemToCreate = itemToCreate;
+    }
+
+    public void addWord(ItemStack itemStack) {
+        if (isEmpty()) {
+            ingredients.add(itemStack);
+        }
+    }
+
+    public List<ItemStack> getLine() {
+        List<ItemStack> line = new ArrayList<>(ingredients);
+        while (line.size() < 7) {
+            ingredients.add(new ItemStack(Material.AIR));
+        }
+        ItemStack infoGlass = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
+        ItemMeta itemMeta = infoGlass.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.GOLD + "Crafting Guide");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.YELLOW + "You need ingredients on left side of");
+            add(ChatColor.YELLOW + "this line to create the item on right side of this line.");
+            add("");
+            add(ChatColor.GREEN + "If you have enough ingredients, click on the item you want to create.");
+            add(ChatColor.GREEN + "Required ingredients will be removed from your inventory and you");
+            add(ChatColor.GREEN + "will get the crafted item.");
+        }});
+        infoGlass.setItemMeta(itemMeta);
+        line.add(infoGlass);
+        line.add(itemToCreate);
+        return line;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return ingredients.size() < 7;
+    }
+}

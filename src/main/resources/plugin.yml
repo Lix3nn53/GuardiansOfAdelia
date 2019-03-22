@@ -1,0 +1,37 @@
+main: io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia
+name: GuardiansOfAdelia
+version: '0.1'
+api-version: 1.13
+description: GuardiansOfAdelia MMORPG project
+load: POSTWORLD
+author: Lix3nn
+website: guardiansofadelia.com
+prefix: GoA
+depend:
+  - SkillAPI
+  - ProtocolLib
+  - Citizens
+  - LibsDisguises
+  - LuckPerms
+  - WorldEdit
+  - WorldGuard
+commands:
+  guild:
+    description: Foo command
+    aliases:
+      - g
+    permission: guardian.player
+    permission-message: You do not have permission!
+    usage: /<command> [test|stop]
+permissions:
+  guardian.player:
+    description: GuardiansOfAdelia permission for player commands
+    default: true
+  guardian.admin:
+    description: GuardiansOfAdelia permission for admin commands
+    default: false
+  guardian.*:
+    description: Wildcard permission
+    default: false
+    children:
+      guardian.admin: true
