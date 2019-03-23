@@ -28,6 +28,6 @@ Please note that these features are for my personal server. It probably will not
   * Actions: 
     Perform specific actions when player accepts, completes and turns in a quest.
   * Tasks: 
-    Add specific tasks for your players to complete.
+    Add specific tasks for your players to complete. You perform actions on task complete too.
   * Rewards: 
     Give experience, money and/or items to your players when they turn in a quest.
