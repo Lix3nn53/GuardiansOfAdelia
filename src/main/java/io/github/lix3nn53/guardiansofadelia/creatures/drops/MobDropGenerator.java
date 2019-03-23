@@ -14,7 +14,7 @@ class MobDropGenerator {
     public static List<ItemStack> getDrops(Entity entity) {
         List<ItemStack> drops = new ArrayList<ItemStack>();
 
-        drops.add(Weapons.getWeapon(RPGClass.KNIGHT, 5, ItemTier.COMMON, "Tag", 1, 1, 1, 1));
+        drops.add(Weapons.getWeapon(RPGClass.KNIGHT, 5, ItemTier.COMMON, "Tag", 1, 1, 1));
         return drops;
     }
 

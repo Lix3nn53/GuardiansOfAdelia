@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 class Staffs {
 
     public static ItemStack get(int placementNumber, ItemTier tier, String itemTag, double bonusPercent, int minStatValue,
-                                int maxStatValue, double chanceToGetEachStat, int minNumberofStats) {
+                                int maxStatValue, int minNumberofStats) {
         String name = "Short Staff";
         Material material = Material.DIAMOND_SHOVEL;
         int durability = 4;
@@ -79,7 +79,7 @@ class Staffs {
         int damage = magicDamage / 4;
 
         final WeaponMagical weapon = new WeaponMagical(name, tier, itemTag, material, durability, level, rpgClass, damage, magicDamage, bonusPercent,
-                attackSpeed, minStatValue, maxStatValue, chanceToGetEachStat, minNumberofStats, itemID);
+                attackSpeed, minStatValue, maxStatValue, minNumberofStats, itemID);
         return weapon.getItemStack();
     }
 }

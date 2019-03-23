@@ -12,10 +12,14 @@ import java.util.ArrayList;
 
 public class RPGSlotRing extends RPGSlotPassive implements RPGSlot {
 
-    private final String requiredNbtTag = "ring";
+    private final int passiveTypeNum = 1;
 
     public boolean doesFit(ItemStack itemStack) {
-        return NBTTagUtils.hasTag(itemStack, requiredNbtTag);
+        if (NBTTagUtils.hasTag(itemStack, "passive")) {
+            Integer typeNum = NBTTagUtils.getInteger(itemStack, "passive");
+            return typeNum == this.passiveTypeNum;
+        }
+        return false;
     }
 
     public ItemStack getFillItem() {

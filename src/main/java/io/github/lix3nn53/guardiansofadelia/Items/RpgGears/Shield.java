@@ -23,12 +23,12 @@ public class Shield implements RPGGear {
     private ItemStack itemStack;
 
     public Shield(String name, ItemTier tier, String itemTag, Material material, int durability, int level, RPGClass rpgClass, int health,
-                  int defense, int magicDefense, int minStatValue, int maxStatValue, double chanceToGetEachStat, int minNumberOfStats, int itemID) {
+                  int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats, int itemID) {
         name = tier.getTierColor() + itemTag + " " + name;
 
         List<String> lore = new ArrayList<>();
 
-        StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats);
+        StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
         lore.add("");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);

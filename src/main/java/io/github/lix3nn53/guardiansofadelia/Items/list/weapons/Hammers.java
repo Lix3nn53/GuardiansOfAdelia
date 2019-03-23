@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 class Hammers {
 
     public static ItemStack get(int placementNumber, ItemTier tier, String itemTag, double bonusPercent, int minStatValue,
-                                int maxStatValue, double chanceToGetEachStat, int minNumberofStats) {
+                                int maxStatValue, int minNumberofStats) {
         String name = "Short Hammer";
         Material material = Material.DIAMOND_PICKAXE;
         int durability = 8;
@@ -77,7 +77,7 @@ class Hammers {
         }
 
         final WeaponMelee weapon = new WeaponMelee(name, tier, itemTag, material, durability, level, rpgClass, damage, bonusPercent,
-                attackSpeed, minStatValue, maxStatValue, chanceToGetEachStat, minNumberofStats, itemID);
+                attackSpeed, minStatValue, maxStatValue, minNumberofStats, itemID);
         return weapon.getItemStack();
     }
 }

@@ -9,7 +9,6 @@ import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
-import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.*;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
@@ -220,7 +219,7 @@ public class MyInventoryClickEvent implements Listener {
                             int whoCanCompleteThisQuest = questNpcManager.getWhoCanCompleteThisQuest(questNo);
                             if (whoCanCompleteThisQuest == resourceNPC) {
                                 //complete quest
-                                boolean didComplete = rpgCharacter.completeQuest(questNo);
+                                boolean didComplete = rpgCharacter.completeQuest(questNo, player);
                                 if (didComplete) {
                                     GuiGeneric questGui = questNpcManager.getQuestGui(player, resourceNPC);
                                     questGui.openInventory(player);
@@ -241,7 +240,7 @@ public class MyInventoryClickEvent implements Listener {
                                 //give quest
                                 Quest questCopyById = questNpcManager.getQuestCopyById(questNo);
 
-                                boolean questListIsNotFull = rpgCharacter.addQuest(questCopyById);
+                                boolean questListIsNotFull = rpgCharacter.addQuest(questCopyById, player);
                                 if (questListIsNotFull) {
                                     GuiGeneric questGui = questNpcManager.getQuestGui(player, resourceNPC);
                                     questGui.openInventory(player);
@@ -274,27 +273,17 @@ public class MyInventoryClickEvent implements Listener {
         } else if (title.equals(ChatColor.YELLOW.toString() + ChatColor.BOLD + "RPG Inventory")) {
             RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                event.setCancelled(true);
                 if (cursor.getType().equals(Material.AIR)) {
-                    boolean change = rpgInventory.onCursorClickWithAir(player, slot);
-                    if (change) {
-                        GuiGeneric guiGeneric = rpgInventory.formRPGInventory(player);
-                        guiGeneric.openInventory(player);
-                    }
-                }else {
-                    boolean change = rpgInventory.onCursorClickWithItem(player, slot, cursor);
-                    if (change) {
-                        GuiGeneric guiGeneric = rpgInventory.formRPGInventory(player);
-                        guiGeneric.openInventory(player);
-                    }
+                    boolean change = rpgInventory.onCursorClickWithAir(player, slot, topInventory, event.isShiftClick());
+                } else {
+                    boolean change = rpgInventory.onCursorClickWithItem(player, slot, cursor, topInventory);
                 }
-            }else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+            } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
                 if (cursor.getType().equals(Material.AIR)) {
                     if (event.isShiftClick()) {
-                        boolean change = rpgInventory.onShiftClick(current, player, slot);
-                        if (change) {
-                            GuiGeneric guiGeneric = rpgInventory.formRPGInventory(player);
-                            guiGeneric.openInventory(player);
-                        }
+                        event.setCancelled(true);
+                        boolean change = rpgInventory.onShiftClick(current, player, slot, topInventory);
                     }
                 }
             }

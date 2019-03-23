@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 public class Boots {
 
     public static ItemStack get(RPGClass rpgClass, int placementNumber, ItemTier tier, String itemTag, double healthBonus, int minStatValue,
-                                int maxStatValue, double chanceToGetEachStat, int minNumberOfStats) {
+                                int maxStatValue, int minNumberOfStats) {
         String name = "Leather Boots";
         Material material = Material.LEATHER_BOOTS;
         int level = 2;
@@ -442,7 +442,7 @@ public class Boots {
 
         final GearArmor boots = new GearArmor(name, tier, itemTag, material, level,
                 rpgClass, health,
-                defense, magicDefense, minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats, itemID);
+                defense, magicDefense, minStatValue, maxStatValue, minNumberOfStats, itemID);
         if (isColorful) {
             LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) boots.getItemStack().getItemMeta();
             if (rpgClass.equals(RPGClass.ARCHER)) {

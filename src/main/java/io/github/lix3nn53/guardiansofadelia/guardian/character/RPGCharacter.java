@@ -12,21 +12,14 @@ import java.util.Optional;
 
 public final class RPGCharacter {
 
-    private final Player player;
-    private final RPGInventory rpgInventory;
+    private final RPGInventory rpgInventory = new RPGInventory();
     private List<Quest> questList = new ArrayList<>();
     private List<Integer> turnedInQuests = new ArrayList<Integer>();
     private Job job;
 
     private ChatTag chatTag = ChatTag.NEWBIE;
 
-    public RPGCharacter(Player player) {
-        this.player = player;
-        rpgInventory = new RPGInventory(player);
-    }
-
-
-    public boolean addQuest(Quest quest) {
+    public boolean addQuest(Quest quest, Player player) {
         if (!hasQuest(quest.getQuestID())) {
             if (this.questList.size() < 5) {
                 this.questList.add(quest);
@@ -37,7 +30,7 @@ public final class RPGCharacter {
         return false;
     }
 
-    public boolean completeQuest(int questID) {
+    public boolean completeQuest(int questID, Player player) {
         Optional<Quest> questOptional = this.questList.stream()
                 .filter(characterQuest -> characterQuest.getQuestID() == questID)
                 .findAny();

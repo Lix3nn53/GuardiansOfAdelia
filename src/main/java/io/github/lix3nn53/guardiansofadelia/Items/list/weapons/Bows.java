@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 class Bows {
 
     public static ItemStack get(int placementNumber, ItemTier tier, String itemTag, double bonusPercent, int minStatValue,
-                                int maxStatValue, double chanceToGetEachStat, int minNumberofStats) {
+                                int maxStatValue, int minNumberofStats) {
         String name = "Short Bow";
         Material material = Material.BOW;
         int durability = 2;
@@ -79,7 +79,7 @@ class Bows {
         int damage = rangedDamage / 4;
 
         final WeaponRanged weapon = new WeaponRanged(name, tier, itemTag, material, durability, level, rpgClass, damage, rangedDamage, bonusPercent,
-                attackSpeed, minStatValue, maxStatValue, chanceToGetEachStat, minNumberofStats, itemID);
+                attackSpeed, minStatValue, maxStatValue, minNumberofStats, itemID);
         return weapon.getItemStack();
     }
 }

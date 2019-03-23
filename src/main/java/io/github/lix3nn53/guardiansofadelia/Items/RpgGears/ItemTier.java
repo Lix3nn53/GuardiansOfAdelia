@@ -48,18 +48,6 @@ public enum ItemTier {
         return percent;
     }
 
-    public double getChanceToGetEachStat() {
-        double percent = 0.25;
-        if (this == ItemTier.RARE) {
-            percent = 0.3;
-        } else if (this == ItemTier.MYSTIC) {
-            percent = 0.5;
-        } else if (this == ItemTier.LEGENDARY) {
-            percent = 0.7;
-        }
-        return percent;
-    }
-
     public int getMinNumberOfStats() {
         int number = 0;
         if (this == ItemTier.RARE) {

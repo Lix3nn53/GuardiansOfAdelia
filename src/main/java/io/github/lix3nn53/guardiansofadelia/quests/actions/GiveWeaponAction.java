@@ -20,16 +20,14 @@ public class GiveWeaponAction implements Action {
     private final String itemTag;
     private final int minStatValue;
     private final int maxStatValue;
-    private final double chaceToGetEachStat;
     private final int minNumberOfStats;
 
-    public GiveWeaponAction(int placementNumber, ItemTier tier, String itemTag, int minStatValue, int maxStatValue, double chaceToGetEachStat, int minNumberOfStats) {
+    public GiveWeaponAction(int placementNumber, ItemTier tier, String itemTag, int minStatValue, int maxStatValue, int minNumberOfStats) {
         this.placementNumber = placementNumber;
         this.tier = tier;
         this.itemTag = itemTag;
         this.minStatValue = minStatValue;
         this.maxStatValue = maxStatValue;
-        this.chaceToGetEachStat = chaceToGetEachStat;
         this.minNumberOfStats = minNumberOfStats;
     }
 
@@ -42,7 +40,7 @@ public class GiveWeaponAction implements Action {
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 RPGClass rpgClass = activeCharacter.getRPGClass();
-                ItemStack weapon = Weapons.getWeapon(rpgClass, placementNumber, tier, itemTag, minStatValue, maxStatValue, chaceToGetEachStat, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, placementNumber, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
                 InventoryUtils.giveItemToPlayer(player, weapon);
             }
         }

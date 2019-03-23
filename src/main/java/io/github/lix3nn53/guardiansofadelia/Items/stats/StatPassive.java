@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items.stats;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class StatPassive implements Stat {
@@ -18,7 +20,7 @@ public class StatPassive implements Stat {
         this.air = air;
     }
 
-    public StatPassive(int minStatValue, int maxStatValue, double chanceToGetEachStat, int minNumberOfStats) {
+    public StatPassive(int minStatValue, int maxStatValue, int minNumberOfStats) {
         if (maxStatValue <= 0) {
             return;
         }
@@ -29,10 +31,18 @@ public class StatPassive implements Stat {
             maxStatValue = minStatValue;
         }
 
-        this.roll(minStatValue, maxStatValue, chanceToGetEachStat);
+        int amountOfStats = new Random().nextInt(5);
 
-        if (!isSatisfied(minNumberOfStats)) {
-            satisfy(minStatValue, maxStatValue, minNumberOfStats);
+        if (minNumberOfStats <= 5) {
+            if (amountOfStats < minNumberOfStats) {
+                amountOfStats = minNumberOfStats;
+            }
+        } else {
+            amountOfStats = 5;
+        }
+
+        for (int i = 0; i < amountOfStats; i++) {
+            satisfyOneRandomly(minStatValue, maxStatValue);
         }
     }
 
@@ -56,149 +66,44 @@ public class StatPassive implements Stat {
         return air;
     }
 
-    private int getNumberOfStats() {
-        int numberOfStats = 0;
-        if (this.fire != 0) {
-            numberOfStats++;
-        }
-        if (this.water != 0) {
-            numberOfStats++;
-        }
-        if (this.earth != 0) {
-            numberOfStats++;
-        }
-        if (this.lightning != 0) {
-            numberOfStats++;
-        }
-        if (this.air != 0) {
-            numberOfStats++;
-        }
-        return numberOfStats;
-    }
-
-    private boolean isSatisfied(int minNumberOfStats) {
-        if (minNumberOfStats > 5) {
-            minNumberOfStats = 5;
-        }
-        int numberOfStats = getNumberOfStats();
-        return numberOfStats >= minNumberOfStats;
-    }
-
-    private void roll(int minStatValue, int maxStatValue, double chanceToGetEachStat) {
+    private void satisfyOneRandomly(int minStatValue, int maxStatValue) {
+        List<String> unUsedElements = new ArrayList<>();
         if (this.fire == 0) {
-            double chance = Math.random();
-            if (chance <= chanceToGetEachStat) {
-                if (minStatValue >= maxStatValue) {
-                    this.fire = maxStatValue;
-                } else {
-                    int value = new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
-                    this.fire = value;
-                }
-            }
+            unUsedElements.add("fire");
         }
         if (this.water == 0) {
-            double chance = Math.random();
-            if (chance <= chanceToGetEachStat) {
-                if (minStatValue >= maxStatValue) {
-                    this.fire = maxStatValue;
-                } else {
-                    int value = new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
-                    this.fire = value;
-                }
-            }
+            unUsedElements.add("water");
         }
         if (this.earth == 0) {
-            double chance = Math.random();
-            if (chance <= chanceToGetEachStat) {
-                if (minStatValue >= maxStatValue) {
-                    this.fire = maxStatValue;
-                } else {
-                    int value = new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
-                    this.fire = value;
-                }
-            }
+            unUsedElements.add("earth");
         }
         if (this.lightning == 0) {
-            double chance = Math.random();
-            if (chance <= chanceToGetEachStat) {
-                if (minStatValue >= maxStatValue) {
-                    this.fire = maxStatValue;
-                } else {
-                    int value = new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
-                    this.fire = value;
-                }
-            }
+            unUsedElements.add("lightning");
         }
         if (this.air == 0) {
-            double chance = Math.random();
-            if (chance <= chanceToGetEachStat) {
-                if (minStatValue >= maxStatValue) {
-                    this.fire = maxStatValue;
-                } else {
-                    int value = new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
-                    this.fire = value;
-                }
-            }
+            unUsedElements.add("air");
+        }
+        int random = new Random().nextInt(unUsedElements.size());
+        String elementString = unUsedElements.get(random);
+
+        if (elementString.equals("fire")) {
+            this.fire = getRandomValue(minStatValue, maxStatValue);
+        } else if (elementString.equals("water")) {
+            this.water = getRandomValue(minStatValue, maxStatValue);
+        } else if (elementString.equals("earth")) {
+            this.earth = getRandomValue(minStatValue, maxStatValue);
+        } else if (elementString.equals("lightning")) {
+            this.lightning = getRandomValue(minStatValue, maxStatValue);
+        } else if (elementString.equals("air")) {
+            this.air = getRandomValue(minStatValue, maxStatValue);
         }
     }
 
-    private void satisfy(int minStatValue, int maxStatValue, int minNumberOfStats) {
-        int numberOfStats = getNumberOfStats();
-        if (this.fire == 0) {
-            if (minStatValue >= maxStatValue) {
-                this.fire = maxStatValue;
-            } else {
-                int value = new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
-                this.fire = value;
-            }
-            numberOfStats++;
-        }
-        if (numberOfStats >= minNumberOfStats) {
-            return;
-        }
-        if (this.water == 0) {
-            if (minStatValue >= maxStatValue) {
-                this.fire = maxStatValue;
-            } else {
-                int value = new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
-                this.fire = value;
-            }
-            numberOfStats++;
-        }
-        if (numberOfStats >= minNumberOfStats) {
-            return;
-        }
-        if (this.earth == 0) {
-            if (minStatValue >= maxStatValue) {
-                this.fire = maxStatValue;
-            } else {
-                int value = new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
-                this.fire = value;
-            }
-            numberOfStats++;
-        }
-        if (numberOfStats >= minNumberOfStats) {
-            return;
-        }
-        if (this.lightning == 0) {
-            if (minStatValue >= maxStatValue) {
-                this.fire = maxStatValue;
-            } else {
-                int value = new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
-                this.fire = value;
-            }
-            numberOfStats++;
-        }
-        if (numberOfStats >= minNumberOfStats) {
-            return;
-        }
-        if (this.air == 0) {
-            if (minStatValue >= maxStatValue) {
-                this.fire = maxStatValue;
-            } else {
-                int value = new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
-                this.fire = value;
-            }
+    private int getRandomValue(int minStatValue, int maxStatValue) {
+        if (minStatValue >= maxStatValue) {
+            return maxStatValue;
+        } else {
+            return new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
         }
     }
 }

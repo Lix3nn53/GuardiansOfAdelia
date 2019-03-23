@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 public class Chestplates {
 
     public static ItemStack get(RPGClass rpgClass, int placementNumber, ItemTier tier, String itemTag, double healthBonus, int minStatValue,
-                                int maxStatValue, double chanceToGetEachStat, int minNumberOfStats) {
+                                int maxStatValue, int minNumberOfStats) {
         String name = "Leather Chestplate";
         Material material = Material.LEATHER_CHESTPLATE;
         int level = 8;
@@ -442,7 +442,7 @@ public class Chestplates {
 
         final GearArmor chestplate = new GearArmor(name, tier, itemTag, material, level,
                 rpgClass, health,
-                defense, magicDefense, minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats, itemID);
+                defense, magicDefense, minStatValue, maxStatValue, minNumberOfStats, itemID);
         if (isColorful) {
             LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) chestplate.getItemStack().getItemMeta();
             if (rpgClass.equals(RPGClass.ARCHER)) {

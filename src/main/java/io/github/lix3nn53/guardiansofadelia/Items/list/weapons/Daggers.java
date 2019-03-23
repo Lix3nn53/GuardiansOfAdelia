@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 class Daggers {
 
     public static ItemStack get(int placementNumber, ItemTier tier, String itemTag, double bonusPercent, int minStatValue,
-                                int maxStatValue, double chanceToGetEachStat, int minNumberofStats) {
+                                int maxStatValue, int minNumberofStats) {
         String name = "Short Dagger";
         Material material = Material.DIAMOND_HOE;
         int durability = 9;
@@ -77,7 +77,7 @@ class Daggers {
         }
 
         final WeaponOffhand weapon = new WeaponOffhand(name, tier, itemTag, material, durability, level, rpgClass, damage, bonusPercent,
-                attackSpeed, minStatValue, maxStatValue, chanceToGetEachStat, minNumberofStats, itemID);
+                attackSpeed, minStatValue, maxStatValue, minNumberofStats, itemID);
         return weapon.getItemStack();
     }
 }

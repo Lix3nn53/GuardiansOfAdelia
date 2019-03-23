@@ -30,7 +30,7 @@ public class TutorialManager {
         GuardianDataManager guardianDataManager = GuardiansOfAdelia.getGuardianDataManager();
         if (guardianDataManager.hasGuardianData(player.getUniqueId())) {
             GuardianData guardianData = guardianDataManager.getGuardianData(player.getUniqueId());
-            RPGCharacter rpgCharacter = new RPGCharacter(player);
+            RPGCharacter rpgCharacter = new RPGCharacter();
             guardianData.setActiveCharacter(rpgCharacter, charNo);
 
             SkillAPIUtils.createTurorialCharacter(player, charNo, rpgClass);
@@ -49,7 +49,7 @@ public class TutorialManager {
 
             QuestNPCManager questNpcManager = GuardiansOfAdelia.getQuestNpcManager();
             Quest tutorialStartQuest = questNpcManager.getQuestCopyById(1);
-            rpgCharacter.addQuest(tutorialStartQuest);
+            rpgCharacter.addQuest(tutorialStartQuest, player);
         }
     }
 
@@ -58,13 +58,12 @@ public class TutorialManager {
         ItemTier tier = ItemTier.COMMON;
         int minStatValue = 10;
         int maxStatValue = 50;
-        double chanceToGetEachStat = 0.4;
         int minNumberOfStats = 2;
         String itemTag = "Tutorial";
-        ItemStack helmet = Helmets.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats);
-        ItemStack chest = Chestplates.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats);
-        ItemStack leggings = Leggings.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats);
-        ItemStack boots = Boots.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats);
+        ItemStack helmet = Helmets.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack chest = Chestplates.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack leggings = Leggings.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack boots = Boots.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
 
         changeClassOfItemToTutorialClass(helmet, rpgClass);
         changeClassOfItemToTutorialClass(chest, rpgClass);
@@ -76,16 +75,16 @@ public class TutorialManager {
         player.getInventory().setLeggings(leggings);
         player.getInventory().setBoots(boots);
 
-        ItemStack mainHand = Weapons.getWeapon(rpgClass, 10, tier, itemTag, minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats);
+        ItemStack mainHand = Weapons.getWeapon(rpgClass, 10, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
         changeClassOfItemToTutorialClass(mainHand, rpgClass);
         player.getInventory().setItem(5, mainHand);
 
         if (rpgClass.equals(RPGClass.KNIGHT)) {
-            ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats);
+            ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
             changeClassOfItemToTutorialClass(shield, rpgClass);
             player.getInventory().setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
-            ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats);
+            ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
             changeClassOfItemToTutorialClass(shield, rpgClass);
             player.getInventory().setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.NINJA)) {

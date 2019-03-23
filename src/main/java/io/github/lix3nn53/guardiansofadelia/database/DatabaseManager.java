@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.database;
 
-import com.sucy.skill.api.player.PlayerData;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -99,8 +98,8 @@ public class DatabaseManager {
         for (int charNo = 1; charNo <= 4; charNo++) {
             boolean characterExists = databaseQueries.characterExists(player.getUniqueId(), charNo);
             if (characterExists) {
-                PlayerData characterData = SkillAPIUtils.getCharacterData(player, charNo);
-                if (characterData != null) {
+                boolean hasValidData = SkillAPIUtils.hasValidData(player, charNo);
+                if (hasValidData) {
 
                     //load last location of character
                     UUID uuid = player.getUniqueId();
@@ -127,18 +126,26 @@ public class DatabaseManager {
                     livingWatcher.setNoGravity(true);
                     livingWatcher.setCustomNameVisible(true);
 
+                    String className = SkillAPIUtils.getClassName(player, charNo);
+                    int level = SkillAPIUtils.getLevel(player, charNo);
+                    int health = SkillAPIUtils.getHealth(player, charNo);
+                    int mana = SkillAPIUtils.getMana(player, charNo);
+                    int exp = SkillAPIUtils.getExp(player, charNo);
+                    int expReq = SkillAPIUtils.getRequiredExp(player, charNo);
+                    int totalExp = SkillAPIUtils.getTotalExp(player, charNo);
+
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                        livingWatcher.setCustomName("Class: " + characterData.getMainClass().getData().getName());
+                        livingWatcher.setCustomName("Class: " + className);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(5), mobDisguise, player);
-                        livingWatcher.setCustomName("Level: " + characterData.getMainClass().getLevel());
+                        livingWatcher.setCustomName("Level: " + level);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(4), mobDisguise, player);
-                        livingWatcher.setCustomName("Health: " + characterData.getMainClass().getHealth());
+                        livingWatcher.setCustomName("Health: " + health);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(3), mobDisguise, player);
-                        livingWatcher.setCustomName("Mana: " + characterData.getMainClass().getMana());
+                        livingWatcher.setCustomName("Mana: " + mana);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(2), mobDisguise, player);
-                        livingWatcher.setCustomName("Experience: " + characterData.getMainClass().getExp() + "/" + characterData.getMainClass().getRequiredExp());
+                        livingWatcher.setCustomName("Experience: " + exp + "/" + expReq);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(1), mobDisguise, player);
-                        livingWatcher.setCustomName("Total Experience: " + characterData.getMainClass().getTotalExp());
+                        livingWatcher.setCustomName("Total Experience: " + totalExp);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(0), mobDisguise, player);
                     });
                 }

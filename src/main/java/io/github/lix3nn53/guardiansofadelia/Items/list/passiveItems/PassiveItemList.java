@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class PassiveItemList {
 
     public static ItemStack get(int placementNumber, RPGSlotType rpgSlotType, ItemTier tier, String itemTag, int minStatValue,
-                                int maxStatValue, double chanceToGetEachStat, int minNumberofStats, double bonusPercent) {
+                                int maxStatValue, int minNumberofStats, double bonusPercent) {
         String name = "Stone Ring";
         Material material = Material.SHEARS;
         int durability = 1;
@@ -253,7 +253,7 @@ public class PassiveItemList {
         }
 
         final GearPassive passive = new GearPassive(name, tier, itemTag, material, durability, passiveTypeNum, level, rpgClass, minStatValue,
-                maxStatValue, chanceToGetEachStat, minNumberofStats, bonusPercent, itemID);
+                maxStatValue, minNumberofStats, bonusPercent, itemID);
 
         return passive.getItemStack();
     }

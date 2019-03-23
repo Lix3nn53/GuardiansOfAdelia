@@ -7,21 +7,21 @@ import org.bukkit.inventory.ItemStack;
 public class Weapons {
 
     public static ItemStack getWeapon(RPGClass rpgClass, int placementNumber, ItemTier tier, String itemTag, int minStatValue,
-                                      int maxStatValue, double chaceToGetEachStat, int minNumberOfStats) {
+                                      int maxStatValue, int minNumberOfStats) {
         if (rpgClass.equals(RPGClass.WARRIOR)) {
-            return Axes.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chaceToGetEachStat, minNumberOfStats);
+            return Axes.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.ARCHER)) {
-            return Bows.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chaceToGetEachStat, minNumberOfStats);
+            return Bows.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.NINJA)) {
-            return Daggers.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chaceToGetEachStat, minNumberOfStats);
+            return Daggers.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
-            return Hammers.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chaceToGetEachStat, minNumberOfStats);
+            return Hammers.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.MAGE)) {
-            return Staffs.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chaceToGetEachStat, minNumberOfStats);
+            return Staffs.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.KNIGHT)) {
-            return Swords.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chaceToGetEachStat, minNumberOfStats);
+            return Swords.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.MONK)) {
-            return Tridents.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, chaceToGetEachStat, minNumberOfStats);
+            return Tridents.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         }
         return null;
     }

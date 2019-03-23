@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 public class Shields {
 
     public static ItemStack get(RPGClass rpgClass, int placementNumber, ItemTier tier, String itemTag, double healthBonus, int minStatValue,
-                                int maxStatValue, double chanceToGetEachStat, int minNumberOfStats) {
+                                int maxStatValue, int minNumberOfStats) {
         String name = "Wooden Shield";
         Material material = Material.IRON_SWORD;
         int durability = 5;
@@ -181,7 +181,7 @@ public class Shields {
 
         final Shield shield = new Shield(name, tier, itemTag, material, durability, level,
                 rpgClass, health,
-                defense, magicDefense, minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats, itemID);
+                defense, magicDefense, minStatValue, maxStatValue, minNumberOfStats, itemID);
         return shield.getItemStack();
     }
 }

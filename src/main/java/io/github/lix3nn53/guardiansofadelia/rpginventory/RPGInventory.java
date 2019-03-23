@@ -1,18 +1,21 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory;
 
-import io.github.lix3nn53.guardiansofadelia.Items.stats.Stat;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatType;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.*;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class RPGInventory {
 
-    private final GuiGeneric rpgInventory = new GuiGeneric(54, ChatColor.YELLOW.toString() + ChatColor.BOLD + "RPG Inventory", 0);
+    private final GuiGeneric rpgGui = new GuiGeneric(54, ChatColor.YELLOW.toString() + ChatColor.BOLD + "RPG Inventory", 0);
 
     private RPGSlotParrot parrotSlot = new RPGSlotParrot();
     private RPGSlotEarring earringSlot = new RPGSlotEarring();
@@ -29,80 +32,82 @@ public class RPGInventory {
 
     public GuiGeneric formRPGInventory(Player player) {
         if (parrotSlot.isEmpty()) {
-            rpgInventory.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getItemOnSlot());
+            rpgGui.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getItemOnSlot());
         }
 
         if (earringSlot.isEmpty()) {
-            rpgInventory.setItem(RPGSlotType.EARRING.getSlotNo(), earringSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.EARRING.getSlotNo(), earringSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.EARRING.getSlotNo(), earringSlot.getItemOnSlot());
+            rpgGui.setItem(RPGSlotType.EARRING.getSlotNo(), earringSlot.getItemOnSlot());
         }
 
         if (necklaceSlot.isEmpty()) {
-            rpgInventory.setItem(RPGSlotType.NECKLACE.getSlotNo(), necklaceSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.NECKLACE.getSlotNo(), necklaceSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.NECKLACE.getSlotNo(), necklaceSlot.getItemOnSlot());
+            rpgGui.setItem(RPGSlotType.NECKLACE.getSlotNo(), necklaceSlot.getItemOnSlot());
         }
 
         if (gloveSlot.isEmpty()) {
-            rpgInventory.setItem(RPGSlotType.GLOVE.getSlotNo(), gloveSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.GLOVE.getSlotNo(), gloveSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.GLOVE.getSlotNo(), gloveSlot.getItemOnSlot());
+            rpgGui.setItem(RPGSlotType.GLOVE.getSlotNo(), gloveSlot.getItemOnSlot());
         }
 
         if (ringSlot.isEmpty()) {
-            rpgInventory.setItem(RPGSlotType.RING.getSlotNo(), ringSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.RING.getSlotNo(), ringSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.RING.getSlotNo(), ringSlot.getItemOnSlot());
+            rpgGui.setItem(RPGSlotType.RING.getSlotNo(), ringSlot.getItemOnSlot());
         }
 
         if (petSlot.isEmpty()) {
-            rpgInventory.setItem(RPGSlotType.PET.getSlotNo(), petSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.PET.getSlotNo(), petSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.PET.getSlotNo(), petSlot.getItemOnSlot());
+            rpgGui.setItem(RPGSlotType.PET.getSlotNo(), petSlot.getItemOnSlot());
         }
 
         if (helmetSlot.isEmpty(player)) {
-            rpgInventory.setItem(RPGSlotType.HELMET.getSlotNo(), helmetSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.HELMET.getSlotNo(), helmetSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.HELMET.getSlotNo(), helmetSlot.getItemOnSlot(player));
+            rpgGui.setItem(RPGSlotType.HELMET.getSlotNo(), helmetSlot.getItemOnSlot(player));
         }
 
         if (chestplateSlot.isEmpty(player)) {
-            rpgInventory.setItem(RPGSlotType.CHESTPLATE.getSlotNo(), chestplateSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.CHESTPLATE.getSlotNo(), chestplateSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.CHESTPLATE.getSlotNo(), chestplateSlot.getItemOnSlot(player));
+            rpgGui.setItem(RPGSlotType.CHESTPLATE.getSlotNo(), chestplateSlot.getItemOnSlot(player));
         }
 
         if (leggingsSlot.isEmpty(player)) {
-            rpgInventory.setItem(RPGSlotType.LEGGINGS.getSlotNo(), leggingsSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.LEGGINGS.getSlotNo(), leggingsSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.LEGGINGS.getSlotNo(), leggingsSlot.getItemOnSlot(player));
+            rpgGui.setItem(RPGSlotType.LEGGINGS.getSlotNo(), leggingsSlot.getItemOnSlot(player));
         }
 
         if (bootsSlot.isEmpty(player)) {
-            rpgInventory.setItem(RPGSlotType.BOOTS.getSlotNo(), bootsSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.BOOTS.getSlotNo(), bootsSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.BOOTS.getSlotNo(), bootsSlot.getItemOnSlot(player));
+            rpgGui.setItem(RPGSlotType.BOOTS.getSlotNo(), bootsSlot.getItemOnSlot(player));
         }
 
         if (offhandSlot.isEmpty(player)) {
-            rpgInventory.setItem(RPGSlotType.OFFHAND.getSlotNo(), offhandSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.OFFHAND.getSlotNo(), offhandSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.OFFHAND.getSlotNo(), offhandSlot.getItemOnSlot(player));
+            rpgGui.setItem(RPGSlotType.OFFHAND.getSlotNo(), offhandSlot.getItemOnSlot(player));
         }
 
         if (mainhandSlot.isEmpty(player)) {
-            rpgInventory.setItem(RPGSlotType.MAINHAND.getSlotNo(), mainhandSlot.getFillItem());
+            rpgGui.setItem(RPGSlotType.MAINHAND.getSlotNo(), mainhandSlot.getFillItem());
         } else {
-            rpgInventory.setItem(RPGSlotType.MAINHAND.getSlotNo(), mainhandSlot.getItemOnSlot(player));
+            rpgGui.setItem(RPGSlotType.MAINHAND.getSlotNo(), mainhandSlot.getItemOnSlot(player));
         }
 
-        rpgInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+        rpgGui.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
 
-        return rpgInventory;
+        rpgGui.setLocked(false);
+
+        return rpgGui;
     }
 
     public StatPassive getTotalPassiveStat() {
@@ -127,7 +132,7 @@ public class RPGInventory {
     public boolean setParrot(ItemStack itemStack, Player player) {
         if (this.parrotSlot.doesFit(itemStack)) {
             this.parrotSlot.setItemOnSlot(itemStack);
-            updateBonusStats(player);
+            addBonusStats(player, itemStack);
             return true;
         }
         return false;
@@ -140,7 +145,7 @@ public class RPGInventory {
     public boolean setEarring(ItemStack itemStack, Player player) {
         if (this.earringSlot.doesFit(itemStack)) {
             this.earringSlot.setItemOnSlot(itemStack);
-            updateBonusStats(player);
+            addBonusStats(player, itemStack);
             return true;
         }
         return false;
@@ -153,7 +158,7 @@ public class RPGInventory {
     public boolean setNecklace(ItemStack itemStack, Player player) {
         if (this.necklaceSlot.doesFit(itemStack)) {
             this.necklaceSlot.setItemOnSlot(itemStack);
-            updateBonusStats(player);
+            addBonusStats(player, itemStack);
             return true;
         }
         return false;
@@ -166,7 +171,7 @@ public class RPGInventory {
     public boolean setGlove(ItemStack itemStack, Player player) {
         if (this.gloveSlot.doesFit(itemStack)) {
             this.gloveSlot.setItemOnSlot(itemStack);
-            updateBonusStats(player);
+            addBonusStats(player, itemStack);
             return true;
         }
         return false;
@@ -179,7 +184,7 @@ public class RPGInventory {
     public boolean setRing(ItemStack itemStack, Player player) {
         if (this.ringSlot.doesFit(itemStack)) {
             this.ringSlot.setItemOnSlot(itemStack);
-            updateBonusStats(player);
+            addBonusStats(player, itemStack);
             return true;
         }
         return false;
@@ -289,161 +294,206 @@ public class RPGInventory {
         return mainhandSlot;
     }
 
-    public boolean onShiftClick(ItemStack itemStack, Player player, int slot) {
+    public boolean onShiftClick(ItemStack itemStack, Player player, int slot, Inventory topInventory) {
         ItemStack oldItemOnSlot = null;
         boolean change = false;
+        int topSlot = 0;
         if (parrotSlot.doesFit(itemStack)) {
             if (!parrotSlot.isEmpty()) {
                 oldItemOnSlot = parrotSlot.getItemOnSlot();
             }
             change = setParrot(itemStack, player);
+            topSlot = RPGSlotType.PARROT.getSlotNo();
         } else if (earringSlot.doesFit(itemStack)) {
             if (!earringSlot.isEmpty()) {
                 oldItemOnSlot = earringSlot.getItemOnSlot();
             }
             change = setEarring(itemStack, player);
+            topSlot = RPGSlotType.EARRING.getSlotNo();
         } else if (necklaceSlot.doesFit(itemStack)) {
             if (!necklaceSlot.isEmpty()) {
                 oldItemOnSlot = necklaceSlot.getItemOnSlot();
             }
             change = setNecklace(itemStack, player);
+            topSlot = RPGSlotType.NECKLACE.getSlotNo();
         } else if (gloveSlot.doesFit(itemStack)) {
             if (!gloveSlot.isEmpty()) {
                 oldItemOnSlot = gloveSlot.getItemOnSlot();
             }
             change = setGlove(itemStack, player);
+            topSlot = RPGSlotType.GLOVE.getSlotNo();
         } else if (ringSlot.doesFit(itemStack)) {
             if (!ringSlot.isEmpty()) {
                 oldItemOnSlot = ringSlot.getItemOnSlot();
             }
             change = setRing(itemStack, player);
+            topSlot = RPGSlotType.RING.getSlotNo();
         } else if (petSlot.doesFit(itemStack)) {
             if (!petSlot.isEmpty()) {
                 oldItemOnSlot = petSlot.getItemOnSlot();
             }
             change = setPet(itemStack, player);
+            topSlot = RPGSlotType.PET.getSlotNo();
         }
-        if (oldItemOnSlot != null && change) {
-            player.getInventory().setItem(slot, oldItemOnSlot);
+        if (change) {
+            if (oldItemOnSlot != null) {
+                player.getInventory().setItem(slot, oldItemOnSlot);
+            } else {
+                player.getInventory().setItem(slot, new ItemStack(Material.AIR));
+            }
+            topInventory.setItem(topSlot, itemStack);
+            topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
         }
         return change;
     }
 
-    public void updateBonusStats(Player player) {
-        StatPassive totalPassiveStat = getTotalPassiveStat();
-        int fireB = SkillAPIUtils.getBonusAttribute(player, "fire");
-        int earthB = SkillAPIUtils.getBonusAttribute(player, "earth");
-        int waterB = SkillAPIUtils.getBonusAttribute(player, "water");
-        int lightningB = SkillAPIUtils.getBonusAttribute(player, "lightning");
-        int airB = SkillAPIUtils.getBonusAttribute(player, "air");
+    public void removeBonusStats(Player player, ItemStack itemStack) {
+        StatType statType = StatUtils.getStatType(itemStack.getType());
+        if (statType.equals(StatType.PASSIVE)) {
+            StatPassive statPassive = (StatPassive) StatUtils.getStat(itemStack);
 
-        SkillAPIUtils.removeBonusAttribute(player, "fire", fireB);
-        SkillAPIUtils.removeBonusAttribute(player, "earth", earthB);
-        SkillAPIUtils.removeBonusAttribute(player, "water", waterB);
-        SkillAPIUtils.removeBonusAttribute(player, "lightning", lightningB);
-        SkillAPIUtils.removeBonusAttribute(player, "air", airB);
-
-        SkillAPIUtils.addBonusAttribute(player, "fire", totalPassiveStat.getFire());
-        SkillAPIUtils.addBonusAttribute(player, "earth", totalPassiveStat.getEarth());
-        SkillAPIUtils.addBonusAttribute(player, "water", totalPassiveStat.getWater());
-        SkillAPIUtils.addBonusAttribute(player, "lightning", totalPassiveStat.getLightning());
-        SkillAPIUtils.addBonusAttribute(player, "air", totalPassiveStat.getAir());
+            SkillAPIUtils.removeBonusAttribute(player, "fire", statPassive.getFire());
+            SkillAPIUtils.removeBonusAttribute(player, "earth", statPassive.getEarth());
+            SkillAPIUtils.removeBonusAttribute(player, "water", statPassive.getWater());
+            SkillAPIUtils.removeBonusAttribute(player, "lightning", statPassive.getLightning());
+            SkillAPIUtils.removeBonusAttribute(player, "air", statPassive.getAir());
+        }
     }
 
-    public boolean onCursorClickWithItem(Player player, int slot, ItemStack cursor) {
+    public void addBonusStats(Player player, ItemStack itemStack) {
+        StatType statType = StatUtils.getStatType(itemStack.getType());
+        if (statType.equals(StatType.PASSIVE)) {
+            StatPassive statPassive = (StatPassive) StatUtils.getStat(itemStack);
+
+            SkillAPIUtils.addBonusAttribute(player, "fire", statPassive.getFire());
+            SkillAPIUtils.addBonusAttribute(player, "earth", statPassive.getEarth());
+            SkillAPIUtils.addBonusAttribute(player, "water", statPassive.getWater());
+            SkillAPIUtils.addBonusAttribute(player, "lightning", statPassive.getLightning());
+            SkillAPIUtils.addBonusAttribute(player, "air", statPassive.getAir());
+        }
+    }
+
+    public boolean onCursorClickWithItem(Player player, int slot, ItemStack cursor, Inventory topInventory) {
         if (slot == RPGSlotType.PARROT.getSlotNo()) {
             RPGSlotParrot rpgSlot = getParrotSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
                 boolean didEquip = setParrot(cursor, player);
                 if (didEquip) {
+                    removeBonusStats(player, itemOnSlot);
                     player.setItemOnCursor(itemOnSlot);
+                    topInventory.setItem(slot, cursor);
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                     return true;
                 }
-            }else {
+            } else {
                 boolean didEquip = setParrot(cursor, player);
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
+                    topInventory.setItem(slot, cursor);
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                     return true;
                 }
             }
-        }else if (slot == RPGSlotType.EARRING.getSlotNo()) {
+        } else if (slot == RPGSlotType.EARRING.getSlotNo()) {
             RPGSlotEarring rpgSlot = getEarringSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
                 boolean didEquip = setEarring(cursor, player);
                 if (didEquip) {
+                    removeBonusStats(player, itemOnSlot);
                     player.setItemOnCursor(itemOnSlot);
+                    topInventory.setItem(slot, cursor);
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                     return true;
                 }
-            }else {
+            } else {
                 boolean didEquip = setEarring(cursor, player);
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
+                    topInventory.setItem(slot, cursor);
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                     return true;
                 }
             }
-        }else if (slot == RPGSlotType.NECKLACE.getSlotNo()) {
+        } else if (slot == RPGSlotType.NECKLACE.getSlotNo()) {
             RPGSlotNecklace rpgSlot = getNecklaceSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
                 boolean didEquip = setNecklace(cursor, player);
                 if (didEquip) {
+                    removeBonusStats(player, itemOnSlot);
                     player.setItemOnCursor(itemOnSlot);
+                    topInventory.setItem(slot, cursor);
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                     return true;
                 }
-            }else {
+            } else {
                 boolean didEquip = setNecklace(cursor, player);
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
+                    topInventory.setItem(slot, cursor);
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                     return true;
                 }
             }
-        }else if (slot == RPGSlotType.RING.getSlotNo()) {
+        } else if (slot == RPGSlotType.RING.getSlotNo()) {
             RPGSlotRing rpgSlot = getRingSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
                 boolean didEquip = setRing(cursor, player);
                 if (didEquip) {
+                    removeBonusStats(player, itemOnSlot);
                     player.setItemOnCursor(itemOnSlot);
+                    topInventory.setItem(slot, cursor);
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                     return true;
                 }
-            }else {
+            } else {
                 boolean didEquip = setRing(cursor, player);
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
+                    topInventory.setItem(slot, cursor);
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                     return true;
                 }
             }
-        }else if (slot == RPGSlotType.GLOVE.getSlotNo()) {
+        } else if (slot == RPGSlotType.GLOVE.getSlotNo()) {
             RPGSlotGlove rpgSlot = getGloveSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
                 boolean didEquip = setGlove(cursor, player);
                 if (didEquip) {
+                    removeBonusStats(player, itemOnSlot);
                     player.setItemOnCursor(itemOnSlot);
+                    topInventory.setItem(slot, cursor);
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                     return true;
                 }
-            }else {
+            } else {
                 boolean didEquip = setGlove(cursor, player);
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
+                    topInventory.setItem(slot, cursor);
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                     return true;
                 }
             }
-        }else if (slot == RPGSlotType.PET.getSlotNo()) {
+        } else if (slot == RPGSlotType.PET.getSlotNo()) {
             PetSlot rpgSlot = getPetSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
                 boolean didEquip = setPet(cursor, player);
                 if (didEquip) {
                     player.setItemOnCursor(itemOnSlot);
+                    topInventory.setItem(slot, cursor);
                     return true;
                 }
-            }else {
+            } else {
                 boolean didEquip = setPet(cursor, player);
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
+                    topInventory.setItem(slot, cursor);
                     return true;
                 }
             }
@@ -451,53 +501,93 @@ public class RPGInventory {
         return false;
     }
 
-    public boolean onCursorClickWithAir(Player player, int slot) {
+    public boolean onCursorClickWithAir(Player player, int slot, Inventory topInventory, boolean isShiftClick) {
         if (slot == RPGSlotType.PARROT.getSlotNo()) {
             RPGSlotParrot rpgSlot = getParrotSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                if (isShiftClick) {
+                    InventoryUtils.giveItemToPlayer(player, itemOnSlot);
+                } else {
+                    player.setItemOnCursor(itemOnSlot);
+                }
                 rpgSlot.clearItemOnSlot();
-                player.setItemOnCursor(itemOnSlot);
+                topInventory.setItem(slot, parrotSlot.getFillItem());
+                removeBonusStats(player, itemOnSlot);
+                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                 return true;
             }
-        }else if (slot == RPGSlotType.EARRING.getSlotNo()) {
+        } else if (slot == RPGSlotType.EARRING.getSlotNo()) {
             RPGSlotEarring rpgSlot = getEarringSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                if (isShiftClick) {
+                    InventoryUtils.giveItemToPlayer(player, itemOnSlot);
+                } else {
+                    player.setItemOnCursor(itemOnSlot);
+                }
                 rpgSlot.clearItemOnSlot();
-                player.setItemOnCursor(itemOnSlot);
+                topInventory.setItem(slot, earringSlot.getFillItem());
+                removeBonusStats(player, itemOnSlot);
+                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                 return true;
             }
-        }else if (slot == RPGSlotType.NECKLACE.getSlotNo()) {
+        } else if (slot == RPGSlotType.NECKLACE.getSlotNo()) {
             RPGSlotNecklace rpgSlot = getNecklaceSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                if (isShiftClick) {
+                    InventoryUtils.giveItemToPlayer(player, itemOnSlot);
+                } else {
+                    player.setItemOnCursor(itemOnSlot);
+                }
                 rpgSlot.clearItemOnSlot();
-                player.setItemOnCursor(itemOnSlot);
+                topInventory.setItem(slot, necklaceSlot.getFillItem());
+                removeBonusStats(player, itemOnSlot);
+                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                 return true;
             }
-        }else if (slot == RPGSlotType.RING.getSlotNo()) {
+        } else if (slot == RPGSlotType.RING.getSlotNo()) {
             RPGSlotRing rpgSlot = getRingSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                if (isShiftClick) {
+                    InventoryUtils.giveItemToPlayer(player, itemOnSlot);
+                } else {
+                    player.setItemOnCursor(itemOnSlot);
+                }
                 rpgSlot.clearItemOnSlot();
-                player.setItemOnCursor(itemOnSlot);
+                topInventory.setItem(slot, ringSlot.getFillItem());
+                removeBonusStats(player, itemOnSlot);
+                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                 return true;
             }
-        }else if (slot == RPGSlotType.GLOVE.getSlotNo()) {
+        } else if (slot == RPGSlotType.GLOVE.getSlotNo()) {
             RPGSlotGlove rpgSlot = getGloveSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                if (isShiftClick) {
+                    InventoryUtils.giveItemToPlayer(player, itemOnSlot);
+                } else {
+                    player.setItemOnCursor(itemOnSlot);
+                }
                 rpgSlot.clearItemOnSlot();
-                player.setItemOnCursor(itemOnSlot);
+                topInventory.setItem(slot, gloveSlot.getFillItem());
+                removeBonusStats(player, itemOnSlot);
+                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
                 return true;
             }
-        }else if (slot == RPGSlotType.PET.getSlotNo()) {
+        } else if (slot == RPGSlotType.PET.getSlotNo()) {
             PetSlot rpgSlot = getPetSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                if (isShiftClick) {
+                    InventoryUtils.giveItemToPlayer(player, itemOnSlot);
+                } else {
+                    player.setItemOnCursor(itemOnSlot);
+                }
                 rpgSlot.clearItemOnSlot();
-                player.setItemOnCursor(itemOnSlot);
+                topInventory.setItem(slot, petSlot.getFillItem());
                 return true;
             }
         }

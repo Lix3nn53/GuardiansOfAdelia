@@ -266,7 +266,7 @@ public class PetList {
             case "guard1": {
                 PlayerDisguise disguise = new PlayerDisguise(petName);
                 PlayerWatcher pWatcher = disguise.getWatcher();
-                ItemStack weapon = Weapons.getWeapon(RPGClass.NINJA, 8, ItemTier.COMMON, "", 0, 0, 0, 0);
+                ItemStack weapon = Weapons.getWeapon(RPGClass.NINJA, 8, ItemTier.COMMON, "", 0, 0, 0);
                 pWatcher.setItemInMainHand(weapon);
                 pWatcher.setItemInOffHand(weapon);
                 pWatcher.setSkin("JJesi");
@@ -277,7 +277,7 @@ public class PetList {
             case "guard2": {
                 PlayerDisguise disguise = new PlayerDisguise(petName);
                 PlayerWatcher pWatcher = disguise.getWatcher();
-                ItemStack weapon = Weapons.getWeapon(RPGClass.NINJA, 4, ItemTier.COMMON, "", 0, 0, 0, 0);
+                ItemStack weapon = Weapons.getWeapon(RPGClass.NINJA, 4, ItemTier.COMMON, "", 0, 0, 0);
                 pWatcher.setItemInMainHand(weapon);
                 pWatcher.setSkin("Stegoleopluradon");
                 disguise = disguise.setReplaceSounds(true);

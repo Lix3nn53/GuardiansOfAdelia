@@ -41,7 +41,7 @@ public class MainStoryQuests {
         tasks.add(task);
 
         Task task1 = new TaskInteract(14);
-        GiveWeaponAction giveWeaponAction = new GiveWeaponAction(1, ItemTier.RARE, "Newbie", 1, 5, 0.5, 2);
+        GiveWeaponAction giveWeaponAction = new GiveWeaponAction(1, ItemTier.RARE, "Newbie", 1, 5, 2);
         SendTitleAction sendTitleAction1 = new SendTitleAction("+ + +", ChatColor.GREEN + "Obtained Weapon");
         task1.addOnCompleteAction(giveWeaponAction);
         task1.addOnCompleteAction(sendTitleAction1);

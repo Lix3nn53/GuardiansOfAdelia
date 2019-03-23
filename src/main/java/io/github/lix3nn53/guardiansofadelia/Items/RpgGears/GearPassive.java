@@ -22,12 +22,12 @@ public class GearPassive implements RPGGear {
     private ItemStack itemStack;
 
     public GearPassive(String name, ItemTier tier, String itemTag, Material material, int durability, int passiveType, int level, RPGClass rpgClass,
-                       int minStatValue, int maxStatValue, double chanceToGetEachStat, int minNumberOfStats, double bonusPercent, int itemID) {
+                       int minStatValue, int maxStatValue, int minNumberOfStats, double bonusPercent, int itemID) {
         name = tier.getTierColor() + itemTag + " " + name;
 
         List<String> lore = new ArrayList<>();
 
-        StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats);
+        StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
         lore.add("");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);

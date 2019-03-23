@@ -237,7 +237,7 @@ public class DatabaseQueries {
             ResultSet resultSet = pst.executeQuery();
 
             if (resultSet.next()) {
-                rpgCharacter = new RPGCharacter(player);
+                rpgCharacter = new RPGCharacter();
                 RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
 
                 String itemString = resultSet.getString("off_hand");
@@ -249,37 +249,37 @@ public class DatabaseQueries {
                 itemString = resultSet.getString("slot_parrot");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setParrot(ItemSerializer.restoreModdedItem(itemString));
+                    rpgInventory.setParrot(ItemSerializer.restoreModdedItem(itemString), player);
                 }
 
                 itemString = resultSet.getString("slot_necklace");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setNecklace(ItemSerializer.restoreModdedItem(itemString));
+                    rpgInventory.setNecklace(ItemSerializer.restoreModdedItem(itemString), player);
                 }
 
                 itemString = resultSet.getString("slot_ring");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setRing(ItemSerializer.restoreModdedItem(itemString));
+                    rpgInventory.setRing(ItemSerializer.restoreModdedItem(itemString), player);
                 }
 
                 itemString = resultSet.getString("slot_earring");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setEarring(ItemSerializer.restoreModdedItem(itemString));
+                    rpgInventory.setEarring(ItemSerializer.restoreModdedItem(itemString), player);
                 }
 
                 itemString = resultSet.getString("slot_glove");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setGlove(ItemSerializer.restoreModdedItem(itemString));
+                    rpgInventory.setGlove(ItemSerializer.restoreModdedItem(itemString), player);
                 }
 
                 itemString = resultSet.getString("slot_pet");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setPet(ItemSerializer.restoreModdedItem(itemString));
+                    rpgInventory.setPet(ItemSerializer.restoreModdedItem(itemString), player);
                 }
 
                 String jobString = resultSet.getString("job_type");

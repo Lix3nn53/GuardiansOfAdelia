@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 class Tridents {
 
     public static ItemStack get(int placementNumber, ItemTier tier, String itemTag, double bonusPercent, int minStatValue,
-                                int maxStatValue, double chanceToGetEachStat, int minNumberofStats) {
+                                int maxStatValue, int minNumberofStats) {
         String name = "Wooden Spear";
         Material material = Material.TRIDENT;
         int durability = 7;
@@ -88,7 +88,7 @@ class Tridents {
         }
 
         final WeaponRanged weapon = new WeaponRanged(name, tier, itemTag, material, durability, level, rpgClass, meleeDamage, rangedDamage, bonusPercent,
-                attackSpeed, minStatValue, maxStatValue, chanceToGetEachStat, minNumberofStats, itemID);
+                attackSpeed, minStatValue, maxStatValue, minNumberofStats, itemID);
         return weapon.getItemStack();
     }
 }

@@ -25,14 +25,14 @@ public class WeaponOffhand implements RPGGear {
 
     public WeaponOffhand(String name, ItemTier tier, String itemTag, Material material, int durability, int level, RPGClass rpgClass,
                          int damage, double bonusPercent, AttackSpeed attackSpeed, int minStatValue, int maxStatValue,
-                         double chanceToGetEachStat, int minNumberOfStats, int itemID) {
+                         int minNumberOfStats, int itemID) {
         name = tier.getTierColor() + itemTag + " " + name;
         damage = (int) ((damage * bonusPercent) + 0.5);
         int offhandDamage = (int) ((damage * 0.6) + 0.5);
 
         List<String> lore = new ArrayList<>();
 
-        StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats);
+        StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
         lore.add("");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);

@@ -25,13 +25,13 @@ public class WeaponRanged implements RPGGear {
 
     public WeaponRanged(String name, ItemTier tier, String itemTag, Material material, int durability, int level, RPGClass rpgClass,
                         int damage, int rangedDamage, double bonusPercent, AttackSpeed attackSpeed, int minStatValue,
-                        int maxStatValue, double chanceToGetEachStat, int minNumberOfStats, int itemID) {
+                        int maxStatValue, int minNumberOfStats, int itemID) {
         name = tier.getTierColor() + itemTag + " " + name;
         rangedDamage = (int) ((rangedDamage * bonusPercent) + 0.5);
 
         List<String> lore = new ArrayList<>();
 
-        StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, chanceToGetEachStat, minNumberOfStats);
+        StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
         lore.add("");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
