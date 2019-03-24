@@ -44,13 +44,18 @@ public class InventoryUtils {
         }
     }
 
-    public static void fillWithGlass(GuiGeneric inventory) {
+    public static void fillEmptySlotsWithGlass(GuiGeneric inventory) {
         ItemStack fillItem = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta statusItemMeta = fillItem.getItemMeta();
         statusItemMeta.setDisplayName(org.bukkit.ChatColor.DARK_GRAY + "-");
         fillItem.setItemMeta(statusItemMeta);
         for (int i = 0; i < inventory.getSize(); i++) {
-            inventory.setItem(i, fillItem);
+            ItemStack item = inventory.getItem(i);
+            if (item == null) {
+                inventory.setItem(i, fillItem);
+            } else if (item.getType().equals(Material.AIR)) {
+                inventory.setItem(i, fillItem);
+            }
         }
     }
 

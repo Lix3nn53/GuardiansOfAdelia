@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -33,10 +32,9 @@ public class GiveWeaponAction implements Action {
 
     @Override
     public void perform(Player player) {
-        GuardianDataManager guardianDataManager = GuardiansOfAdelia.getGuardianDataManager();
         UUID uuid = player.getUniqueId();
-        if (guardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = guardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 RPGClass rpgClass = activeCharacter.getRPGClass();

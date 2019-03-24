@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.party;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -45,7 +45,7 @@ public final class Party implements Group {
     @Override
     public void removeMember(Player player) {
         members.remove(player);
-        GuardianData guardianData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
         guardianData.clearParty();
         player.sendMessage(ChatColor.RED + "You left the party");
         for (Player member : members) {
@@ -53,7 +53,7 @@ public final class Party implements Group {
         }
         if (members.size() < 2) {
             for (Player member : members) {
-                GuardianData memberguardianData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(member.getUniqueId());
+                GuardianData memberguardianData = GuardianDataManager.getGuardianData(member.getUniqueId());
                 memberguardianData.clearParty();
                 board.hide(member);
             }

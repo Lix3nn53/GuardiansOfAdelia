@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.consumables.PotionType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
@@ -22,7 +21,6 @@ import java.util.List;
 public class MainStoryQuests {
 
     public static void createQuests() {
-        QuestNPCManager questNpcManager = GuardiansOfAdelia.getQuestNpcManager();
 
         //king of roumen first quest
         List<String> story = new ArrayList<>();
@@ -68,7 +66,7 @@ public class MainStoryQuests {
                 "Time to meet villagers!", obj,
                 "", tasks, itemPrizes, 10, 10, 0, 4,
                 Material.GRASS_BLOCK);
-        questNpcManager.addQuest(quest1, 19, 19);
+        QuestNPCManager.addQuest(quest1, 19, 19);
 
         //king of roumen 2nd quest
     }

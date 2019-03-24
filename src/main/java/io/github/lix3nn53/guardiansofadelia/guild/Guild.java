@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.guild;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.entity.Player;
@@ -25,7 +24,7 @@ public class Guild {
     public Guild(String name, String tag) {
         this.tag = tag;
         this.name = name;
-        GuardiansOfAdelia.getGuildManager().addGuildToMemory(this);
+        GuildManager.addGuildToMemory(this);
     }
 
     public Set<UUID> getMembers() {
@@ -154,10 +153,9 @@ public class Guild {
     }
 
     public void destroy() {
-        GuardiansOfAdelia.getGuildManager().removeGuildFromMemory(this);
+        GuildManager.removeGuildFromMemory(this);
         //remove from sql database
-        DatabaseManager databaseManager = GuardiansOfAdelia.getDatabaseManager();
-        databaseManager.clearGuild(this.name);
+        DatabaseManager.clearGuild(this.name);
     }
 
     public ItemStack[] getGuildStorage() {

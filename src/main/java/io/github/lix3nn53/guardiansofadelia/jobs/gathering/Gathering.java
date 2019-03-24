@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.Ingredients;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
@@ -14,8 +15,8 @@ import java.util.Random;
 public class Gathering {
 
     public void gatheringAnim(final Player player, final GatheringType type, final int gatherLevel) {
-        if (GuardiansOfAdelia.getGuardianDataManager().hasGuardianData(player.getUniqueId())) {
-            final GuardianData guardianData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+        if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
+            final GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
             if (guardianData.isFreeToAct()) {
                 guardianData.setGathering(true);
 

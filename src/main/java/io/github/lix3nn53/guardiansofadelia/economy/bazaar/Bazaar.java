@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.economy.bazaar;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
@@ -41,13 +41,13 @@ public class Bazaar {
     }
 
     public boolean buyItem(Player buyer, ItemStack itemToBuy) {
-        if (GuardiansOfAdelia.getGuardianDataManager().hasGuardianData(owner.getUniqueId())) {
+        if (GuardianDataManager.hasGuardianData(owner.getUniqueId())) {
             if (itemsToSell.contains(itemToBuy) && !buyer.equals(owner)) {
                 int price = EconomyUtils.getItemPrice(itemToBuy);
                 boolean isBought = EconomyUtils.buyItem(buyer, itemToBuy);
                 if (isBought) {
                     List<Coin> coins = EconomyUtils.priceToCoins(price);
-                    GuardianData guardianData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(owner.getUniqueId());
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(owner.getUniqueId());
                     for (Coin coin : coins) {
                         if (coin.getAmount() > 0) {
                             boolean addedToBazaarStorage = guardianData.addToBazaarStorage(coin.getCoin());

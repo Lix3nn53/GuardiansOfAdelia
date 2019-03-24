@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.consumables;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import net.md_5.bungee.api.ChatColor;
@@ -22,8 +23,8 @@ public class BuffScroll extends Consumable {
 
     @Override
     public void startConsuming(Player player) {
-        if (GuardiansOfAdelia.getGuardianDataManager().hasGuardianData(player.getUniqueId())) {
-            GuardianData guardianData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+        if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
             if (guardianData.isFreeToAct()) {
                 guardianData.setConsuming(true);
 

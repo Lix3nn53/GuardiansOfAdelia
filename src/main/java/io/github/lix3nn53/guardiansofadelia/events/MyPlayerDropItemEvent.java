@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
@@ -16,8 +15,7 @@ public class MyPlayerDropItemEvent implements Listener {
     public void onEvent(PlayerDropItemEvent event) {
         Item itemDrop = event.getItemDrop();
         ItemStack itemStack = itemDrop.getItemStack();
-        DropManager dropManager = GuardiansOfAdelia.getDropManager();
-        dropManager.setItem(itemStack, event.getPlayer());
+        DropManager.setItem(itemStack, event.getPlayer());
 
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasDisplayName()) {

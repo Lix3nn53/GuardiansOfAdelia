@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.drops;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -19,8 +19,8 @@ final class DropDamage {
     }
 
     public void addDamage(Player p, int damage) {
-        if (GuardiansOfAdelia.getGuardianDataManager().hasGuardianData(p.getUniqueId())) {
-            GuardianData guardianData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(p.getUniqueId());
+        if (GuardianDataManager.hasGuardianData(p.getUniqueId())) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(p.getUniqueId());
             if (guardianData.isInParty()) {
                 Party party = guardianData.getParty();
                 if (partyDamages.containsKey(party)) {

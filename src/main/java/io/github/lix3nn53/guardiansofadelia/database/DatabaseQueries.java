@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.database;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -315,11 +314,10 @@ public class DatabaseQueries {
                     List<Quest> questList = new ArrayList<>();
 
                     String[] allQuestsWithTheirTasks = activeQuestsString.split(";");
-                    QuestNPCManager questNpcManager = GuardiansOfAdelia.getQuestNpcManager();
                     for (String aQuestAndItsTasksString : allQuestsWithTheirTasks) {
                         if (!aQuestAndItsTasksString.equals("")) {
                             String[] aQuestAndItsTasksArray = aQuestAndItsTasksString.split("-");
-                            Quest quest = questNpcManager.getQuestCopyById(Integer.parseInt(aQuestAndItsTasksArray[0]));
+                            Quest quest = QuestNPCManager.getQuestCopyById(Integer.parseInt(aQuestAndItsTasksArray[0]));
                             List<Task> tasks = quest.getTasks();
                             for (int i = 1; i < aQuestAndItsTasksArray.length; i++) {
                                 if (i < tasks.size()) {

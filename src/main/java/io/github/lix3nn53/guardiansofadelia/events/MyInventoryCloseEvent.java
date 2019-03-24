@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import org.bukkit.entity.Player;
@@ -18,10 +17,8 @@ public class MyInventoryCloseEvent implements Listener {
         Player player = (Player) event.getPlayer();
         UUID uuid = player.getUniqueId();
 
-        GuardianDataManager guardianDataManager = GuardiansOfAdelia.getGuardianDataManager();
-
-        if (guardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = guardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             guardianData.clearActiveGui();
         }
     }

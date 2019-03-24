@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
@@ -161,8 +162,8 @@ public class Dungeon implements Minigame {
     public void forceTeamParties() {
         if (playersInQueue.size() > 1) {
             for (Player player : playersInQueue) {
-                if (GuardiansOfAdelia.getGuardianDataManager().hasGuardianData(player.getUniqueId())) {
-                    GuardianData guardianData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+                if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
                     if (guardianData.isInParty()) {
                         guardianData.getParty().removeMember(player);
                     }

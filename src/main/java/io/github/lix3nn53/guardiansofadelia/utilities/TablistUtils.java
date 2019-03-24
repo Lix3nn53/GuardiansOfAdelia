@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.utilities;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -21,12 +20,11 @@ public class TablistUtils {
 
     public static void updateTablist(Player player) {
         UUID uuid = player.getUniqueId();
-        GuardianDataManager guardianDataManager = GuardiansOfAdelia.getGuardianDataManager();
         StringBuilder header = new StringBuilder(player.getDisplayName());
         header.append("\n");
         StringBuilder footer = new StringBuilder();
-        if (guardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = guardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
 
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();

@@ -22,17 +22,17 @@ import java.util.*;
 
 public class QuestNPCManager {
 
-    private HashMap<Integer, List<Quest>> npcNoToCanGiveQuests = new HashMap<>();
-    private HashMap<Integer, List<Quest>> npcNoToCanCompleteQuests = new HashMap<>();
-    private HashMap<Integer, QuestHologram> npcNoToHologram = new HashMap<>();
+    private static HashMap<Integer, List<Quest>> npcNoToCanGiveQuests = new HashMap<>();
+    private static HashMap<Integer, List<Quest>> npcNoToCanCompleteQuests = new HashMap<>();
+    private static HashMap<Integer, QuestHologram> npcNoToHologram = new HashMap<>();
 
-    public GuiGeneric getQuestGui(Player player, int npcId) {
+    public static GuiGeneric getQuestGui(Player player, int npcId) {
         NPC npc = CitizensAPI.getNPCRegistry().getById(npcId);
 
         if (npc != null) {
             GuiGeneric questMenu = new GuiGeneric(27, ChatColor.YELLOW + "Quest List of " + npc.getName(), npcId);
 
-            if (GuardiansOfAdelia.getGuardianDataManager().hasGuardianData(player.getUniqueId())) {
+            if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
                 List<Quest> npcQuestList = new ArrayList<>();
 
                 if (npcNoToCanGiveQuests.containsKey(npcId)) {
@@ -62,7 +62,7 @@ public class QuestNPCManager {
         return null;
     }
 
-    public void addQuest(Quest quest, int npcToTakeFrom, int npcToComplete) {
+    public static void addQuest(Quest quest, int npcToTakeFrom, int npcToComplete) {
         if (npcNoToCanGiveQuests.containsKey(npcToTakeFrom)) {
             npcNoToCanGiveQuests.get(npcToTakeFrom).add(quest);
         } else {
@@ -91,14 +91,13 @@ public class QuestNPCManager {
         }
     }
 
-    public void setNpcHologramForPlayer(Player player, int npcId) {
+    public static void setNpcHologramForPlayer(Player player, int npcId) {
         Bukkit.getScheduler().runTaskAsynchronously(GuardiansOfAdelia.getInstance(), () -> {
             if (npcNoToHologram.containsKey(npcId)) {
                 QuestHologram questHologram = npcNoToHologram.get(npcId);
-                GuardianDataManager guardianDataManager = GuardiansOfAdelia.getGuardianDataManager();
                 UUID uuid = player.getUniqueId();
-                if (guardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = guardianDataManager.getGuardianData(uuid);
+                if (GuardianDataManager.hasGuardianData(uuid)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
 
                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                     List<Quest> playerQuestList = activeCharacter.getQuestList();
@@ -198,7 +197,7 @@ public class QuestNPCManager {
         });
     }
 
-    public Quest getQuestCopyById(int questId) {
+    public static Quest getQuestCopyById(int questId) {
         for (Integer npcId : npcNoToCanGiveQuests.keySet()) {
             List<Quest> questList = npcNoToCanGiveQuests.get(npcId);
             Optional<Quest> questOptional = questList.stream()
@@ -212,17 +211,17 @@ public class QuestNPCManager {
         return null;
     }
 
-    public HashMap<Integer, QuestHologram> getNpcNoToHologram() {
+    public static HashMap<Integer, QuestHologram> getNpcNoToHologram() {
         return npcNoToHologram;
     }
 
-    public void setAllNpcHologramForPlayer(Player player) {
+    public static void setAllNpcHologramForPlayer(Player player) {
         for (int i : npcNoToHologram.keySet()) {
             setNpcHologramForPlayer(player, i);
         }
     }
 
-    public void onChunkLoad(Entity entity) {
+    public static void onChunkLoad(Entity entity) {
         NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
         NPC npc = npcRegistry.getNPC(entity);
         int npcId = npc.getId();
@@ -237,13 +236,13 @@ public class QuestNPCManager {
         }
     }
 
-    public void setNpcHologramForAllPlayers(int npcId) {
+    public static void setNpcHologramForAllPlayers(int npcId) {
         for (Player player : Bukkit.getOnlinePlayers()) {
             setNpcHologramForPlayer(player, npcId);
         }
     }
 
-    private void createHologramBase(NPC npc, int npcId) {
+    private static void createHologramBase(NPC npc, int npcId) {
         if (!npcNoToHologram.containsKey(npcId)) {
             Location holoLocation = npc.getStoredLocation().clone();
             QuestHologram questHologram = new QuestHologram(holoLocation);
@@ -266,7 +265,7 @@ public class QuestNPCManager {
         }
     }
 
-    public int getWhoCanCompleteThisQuest(int questNo) {
+    public static int getWhoCanCompleteThisQuest(int questNo) {
         for (int npcNo : npcNoToCanCompleteQuests.keySet()) {
             List<Quest> canCompleteQuestList = npcNoToCanCompleteQuests.get(npcNo);
             boolean canComplete = canCompleteQuestList.stream()
@@ -278,7 +277,7 @@ public class QuestNPCManager {
         return 0;
     }
 
-    public int getWhoCanGiveThisQuest(int questNo) {
+    public static int getWhoCanGiveThisQuest(int questNo) {
         for (int npcNo : npcNoToCanGiveQuests.keySet()) {
             List<Quest> canCompleteQuestList = npcNoToCanGiveQuests.get(npcNo);
             boolean canGive = canCompleteQuestList.stream()

@@ -2,8 +2,11 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
+import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
+import io.github.lix3nn53.guardiansofadelia.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.quests.QuestHologram;
+import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Chunk;
@@ -26,45 +29,42 @@ public class MyChunkEvents implements Listener {
     public void onChunkLoadEvent(ChunkLoadEvent event) {
         Chunk chunk = event.getChunk();
         Entity[] chunkEntities = chunk.getEntities();
-        SpawnerManager spawnerManager = GuardiansOfAdelia.getSpawnerManager();
         for (int i = 0; i < chunkEntities.length; i++) {
             Entity chunkEntity = chunkEntities[i];
             if (!isBoundEntity(chunkEntity, true)) {
-                spawnerManager.onMobDeath(chunkEntity);
+                SpawnerManager.onMobDeath(chunkEntity);
                 chunkEntity.remove();
             }
         }
-        spawnerManager.activateSpawnersOnChunk(chunk);
+        SpawnerManager.activateSpawnersOnChunk(chunk);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onChunkUnloadEvent(ChunkUnloadEvent event) {
         Chunk chunk = event.getChunk();
         Entity[] chunkEntities = chunk.getEntities();
-        SpawnerManager spawnerManager = GuardiansOfAdelia.getSpawnerManager();
         for (int i = 0; i < chunkEntities.length; i++) {
             Entity chunkEntity = chunkEntities[i];
             if (!isBoundEntity(chunkEntity, false)) {
-                spawnerManager.onMobDeath(chunkEntity);
+                SpawnerManager.onMobDeath(chunkEntity);
                 chunkEntity.remove();
             }
         }
-        spawnerManager.deactivateSpawnersOnChunk(chunk);
+        SpawnerManager.deactivateSpawnersOnChunk(chunk);
     }
 
     private boolean isBoundEntity(Entity chunkEntity, boolean isChunkLoad) {
-        QuestNPCManager questNpcManager = GuardiansOfAdelia.getQuestNpcManager();
         NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
         if (npcRegistry.isNPC(chunkEntity)) {
             if (isChunkLoad) {
-                questNpcManager.onChunkLoad(chunkEntity);
+                QuestNPCManager.onChunkLoad(chunkEntity);
             }
             return true;
         } else if (chunkEntity.getType().equals(EntityType.ARMOR_STAND)) {
             if (chunkEntity.isCustomNameVisible()) {
-                if (GuardiansOfAdelia.getTombManager().getTombToPlayer().containsKey(chunkEntity)) {
+                if (TombManager.isTomb(chunkEntity)) {
                     return true;
-                } else if (GuardiansOfAdelia.getBazaarManager().getBazaarToPlayer().containsKey(chunkEntity)) {
+                } else if (BazaarManager.isBazaar(chunkEntity)) {
                     return true;
                 } else {
                     //character selection holograms
@@ -78,13 +78,11 @@ public class MyChunkEvents implements Listener {
                         }
                     }
                     //quest icon holograms
-                    if (questNpcManager != null) {
-                        Collection<QuestHologram> npcNoToHologram = questNpcManager.getNpcNoToHologram().values();
-                        for (QuestHologram questHologram : npcNoToHologram) {
-                            ArmorStand armorStand = questHologram.getHolo().getArmorStand();
-                            if (armorStand.equals(chunkEntity)) {
-                                return true;
-                            }
+                    Collection<QuestHologram> npcNoToHologram = QuestNPCManager.getNpcNoToHologram().values();
+                    for (QuestHologram questHologram : npcNoToHologram) {
+                        ArmorStand armorStand = questHologram.getHolo().getArmorStand();
+                        if (armorStand.equals(chunkEntity)) {
+                            return true;
                         }
                     }
                 }
@@ -94,7 +92,7 @@ public class MyChunkEvents implements Listener {
             return true;
         } else if (chunkEntity.getType().equals(EntityType.WOLF) || chunkEntity.getType().equals(EntityType.HORSE)
                 || chunkEntity.getType().equals(EntityType.DONKEY) || chunkEntity.getType().equals(EntityType.MULE)) {
-            return GuardiansOfAdelia.getPetManager().isPet(chunkEntity);
+            return PetManager.isPet(chunkEntity);
         } else return chunkEntity.getType().equals(EntityType.DROPPED_ITEM);
         return false;
     }

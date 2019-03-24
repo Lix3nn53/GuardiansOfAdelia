@@ -52,6 +52,19 @@ public final class TaskDealDamage implements Task {
         return false;
     }
 
+    public boolean progress(Player player, int damageDeal) {
+        if (progress < damageNeeded) {
+            progress += damageDeal;
+            if (isCompleted()) {
+                for (Action action : onCompleteActions) {
+                    action.perform(player);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public int getProgress() {
         return this.progress;
@@ -66,7 +79,7 @@ public final class TaskDealDamage implements Task {
         if (livingEntity.isCustomNameVisible()) {
             String customName = livingEntity.getCustomName();
             if (customName.equals(this.mobName)) {
-                return progress(player);
+                return progress(player, damageDeal);
             }
         }
         return false;

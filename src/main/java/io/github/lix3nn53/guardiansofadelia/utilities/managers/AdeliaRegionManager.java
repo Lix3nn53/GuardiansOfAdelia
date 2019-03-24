@@ -9,15 +9,11 @@ import org.bukkit.Location;
 
 public class AdeliaRegionManager {
 
-    private final RegionManager regionManagerWorld = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(Bukkit.getWorld("world")));
-    private final RegionManager regionManagerDungeons = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(Bukkit.getWorld("dungeons")));
-    private final RegionManager regionManagerArena = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(Bukkit.getWorld("arena")));
+    private static final RegionManager regionManagerWorld = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(Bukkit.getWorld("world")));
+    private static final RegionManager regionManagerDungeons = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(Bukkit.getWorld("dungeons")));
+    private static final RegionManager regionManagerArena = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(Bukkit.getWorld("arena")));
 
-    public AdeliaRegionManager() {
-
-    }
-
-    public boolean isBuffRegion(Location location) {
+    public static boolean isBuffRegion(Location location) {
         if (location.getWorld().getName().equals("world")) {
             if (regionManagerWorld != null) {
                 for (ProtectedRegion region : regionManagerWorld.getApplicableRegions(BukkitAdapter.asBlockVector(location))) {
@@ -30,7 +26,7 @@ public class AdeliaRegionManager {
         return false;
     }
 
-    public boolean isCharacterSelectionRegion(Location location) {
+    public static boolean isCharacterSelectionRegion(Location location) {
         if (location.getWorld().getName().equals("world")) {
             if (regionManagerWorld != null) {
                 for (ProtectedRegion region : regionManagerWorld.getApplicableRegions(BukkitAdapter.asBlockVector(location))) {

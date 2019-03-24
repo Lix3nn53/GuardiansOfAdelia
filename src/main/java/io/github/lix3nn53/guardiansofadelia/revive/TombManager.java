@@ -1,19 +1,21 @@
 package io.github.lix3nn53.guardiansofadelia.revive;
 
+import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
 public class TombManager {
 
-    private HashMap<ArmorStand, Player> tombToPlayer = new HashMap<ArmorStand, Player>();
+    private static HashMap<ArmorStand, Player> tombToPlayer = new HashMap<ArmorStand, Player>();
 
-    public HashMap<ArmorStand, Player> getTombToPlayer() {
-        return tombToPlayer;
+    public static boolean isTomb(Entity entity) {
+        return tombToPlayer.containsKey(entity);
     }
 
-    public void setTombToPlayer(HashMap<ArmorStand, Player> tombToPlayer) {
-        this.tombToPlayer = tombToPlayer;
+    public static void addTomb(Player player, Location location) {
+
     }
 }

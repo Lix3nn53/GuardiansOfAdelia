@@ -1,6 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -12,9 +15,9 @@ public class MyPlayerQuitEvent implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onEvent(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        GuardiansOfAdelia.packetLimitterOnQuit(player);
-        GuardiansOfAdelia.getGuildManager().onPlayerQuit(player);
-        GuardiansOfAdelia.getGuardianDataManager().onPlayerQuit(player);
+        PacketLimitter.onQuit(player);
+        GuildManager.onPlayerQuit(player);
+        GuardianDataManager.onPlayerQuit(player);
         GuardiansOfAdelia.getCharacterSelectionScreenManager().clear(player);
     }
 

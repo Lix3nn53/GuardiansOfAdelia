@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
@@ -42,10 +41,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5));
                 HealthBarManager.showToPlayerFor10Seconds(player, healthBar);
 
-                GuardianDataManager guardianDataManager = GuardiansOfAdelia.getGuardianDataManager();
                 UUID uniqueId = player.getUniqueId();
-                if (guardianDataManager.hasGuardianData(uniqueId)) {
-                    GuardianData guardianData = guardianDataManager.getGuardianData(uniqueId);
+                if (GuardianDataManager.hasGuardianData(uniqueId)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
@@ -70,18 +68,16 @@ public class MyEntityDamageByEntityEvent implements Listener {
             String text = ChatColor.RED.toString() + (int) (finalDamage + 0.5) + " ➹";
             FakeIndicator.showPlayer(player, text, target.getLocation());
 
-            DropManager dropManager = GuardiansOfAdelia.getDropManager();
-            dropManager.dealDamage(target, player, (int) (finalDamage + 0.5));
+            DropManager.dealDamage(target, player, (int) (finalDamage + 0.5));
         }
 
         //player is target
         if (target.getType().equals(EntityType.PLAYER)) {
             Player player = (Player) target;
 
-            GuardianDataManager guardianDataManager = GuardiansOfAdelia.getGuardianDataManager();
             UUID uniqueId = player.getUniqueId();
-            if (guardianDataManager.hasGuardianData(uniqueId)) {
-                GuardianData guardianData = guardianDataManager.getGuardianData(uniqueId);
+            if (GuardianDataManager.hasGuardianData(uniqueId)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
                 if (guardianData.isInParty()) {
                     Party party = guardianData.getParty();
                     party.getBoard().updateHP(player.getName(), (int) (player.getHealth() - finalDamage + 0.5));

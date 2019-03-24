@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.consumables.PotionType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.*;
@@ -26,10 +25,9 @@ import java.util.List;
 
 public class TutorialManager {
 
-    public void startTutorial(Player player, RPGClass rpgClass, int charNo, Location startLocation) {
-        GuardianDataManager guardianDataManager = GuardiansOfAdelia.getGuardianDataManager();
-        if (guardianDataManager.hasGuardianData(player.getUniqueId())) {
-            GuardianData guardianData = guardianDataManager.getGuardianData(player.getUniqueId());
+    public static void startTutorial(Player player, RPGClass rpgClass, int charNo, Location startLocation) {
+        if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
             RPGCharacter rpgCharacter = new RPGCharacter();
             guardianData.setActiveCharacter(rpgCharacter, charNo);
 
@@ -47,13 +45,12 @@ public class TutorialManager {
             SkillAPIUtils.recoverMana(player);
             player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 1D);
 
-            QuestNPCManager questNpcManager = GuardiansOfAdelia.getQuestNpcManager();
-            Quest tutorialStartQuest = questNpcManager.getQuestCopyById(1);
+            Quest tutorialStartQuest = QuestNPCManager.getQuestCopyById(1);
             rpgCharacter.addQuest(tutorialStartQuest, player);
         }
     }
 
-    private void giveTutorialItems(Player player, RPGClass rpgClass) {
+    private static void giveTutorialItems(Player player, RPGClass rpgClass) {
         InventoryUtils.setMenuItemPlayer(player);
         ItemTier tier = ItemTier.COMMON;
         int minStatValue = 10;
@@ -99,7 +96,7 @@ public class TutorialManager {
         InventoryUtils.giveItemToPlayer(player, manaPotion);
     }
 
-    private void changeClassOfItemToTutorialClass(ItemStack itemStack, RPGClass rpgClass) {
+    private static void changeClassOfItemToTutorialClass(ItemStack itemStack, RPGClass rpgClass) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> lore = itemMeta.getLore();
         for (int i = 0; i < lore.size(); i++) {

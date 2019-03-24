@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.QuestHologram;
 import org.bukkit.Material;
@@ -23,14 +22,11 @@ public class MyItemDespawnEvent implements Listener {
         Material type = itemStack.getType();
         if (type.equals(Material.STONE_PICKAXE)) {
             //quest icon holograms
-            QuestNPCManager questNpcManager = GuardiansOfAdelia.getQuestNpcManager();
-            if (questNpcManager != null) {
-                Collection<QuestHologram> npcNoToHologram = questNpcManager.getNpcNoToHologram().values();
-                for (QuestHologram questHologram : npcNoToHologram) {
-                    ArmorStand armorStand = questHologram.getHolo().getArmorStand();
-                    if (armorStand.getPassengers().get(0).equals(entity)) {
-                        event.setCancelled(true);
-                    }
+            Collection<QuestHologram> npcNoToHologram = QuestNPCManager.getNpcNoToHologram().values();
+            for (QuestHologram questHologram : npcNoToHologram) {
+                ArmorStand armorStand = questHologram.getHolo().getArmorStand();
+                if (armorStand.getPassengers().get(0).equals(entity)) {
+                    event.setCancelled(true);
                 }
             }
         }

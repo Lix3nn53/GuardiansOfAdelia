@@ -1,10 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
+import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
 
 import java.util.Optional;
@@ -60,7 +60,7 @@ public enum DungeonTheme {
 
     public Town getDefaultTown() {
         final int townNo = getTownNo();
-        Optional<Town> townOptional = GuardiansOfAdelia.getAdeliaTownManager().getTowns().stream()
+        Optional<Town> townOptional = TownManager.getTowns().stream()
                 .filter(item -> item.getNo() == townNo)
                 .findAny();
         if (townOptional.isPresent()) {

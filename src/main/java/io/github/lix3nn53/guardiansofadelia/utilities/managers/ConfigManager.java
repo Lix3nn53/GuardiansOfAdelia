@@ -2,7 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
+import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
+import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -19,35 +21,35 @@ import java.util.List;
 
 public class ConfigManager {
 
-    private File configFile;
-    private FileConfiguration spawnersConfig;
-    private FileConfiguration characterSelectionConfig;
-    private FileConfiguration townsConfig;
+    private static File configFile;
+    private static FileConfiguration spawnersConfig;
+    private static FileConfiguration characterSelectionConfig;
+    private static FileConfiguration townsConfig;
 
-    public ConfigManager() {
+    public static void init() {
         if (!GuardiansOfAdelia.getInstance().getDataFolder().exists()) {
             GuardiansOfAdelia.getInstance().getDataFolder().mkdirs();
         }
-        this.configFile = GuardiansOfAdelia.getInstance().getDataFolder();
+        configFile = GuardiansOfAdelia.getInstance().getDataFolder();
     }
 
-    public void createConfigALL() {
+    public static void createConfigALL() {
         createSpawners();
         createCharacterSelectionConfig();
         createTowns();
     }
 
-    public void loadConfigALL() {
+    public static void loadConfigALL() {
         loadSpawners();
         loadCharacterSelectionConfig();
         loadTowns();
     }
 
-    public void writeConfigALL() {
+    public static void writeConfigALL() {
         writeSpawners();
     }
 
-    private void createSpawners() {
+    private static void createSpawners() {
         File customConfigFile = new File(configFile, "spawners.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
@@ -62,7 +64,7 @@ public class ConfigManager {
         }
     }
 
-    private void loadSpawners() {
+    private static void loadSpawners() {
         int spawnerNumber = spawnersConfig.getInt("SpawnerNumber");
         for (int i = 1; i <= spawnerNumber; i++) {
             String worldString = spawnersConfig.getString("Spawners.s" + i + ".world");
@@ -75,13 +77,13 @@ public class ConfigManager {
             int amount = spawnersConfig.getInt("Spawners.s" + i + ".amount");
             int maxamount = spawnersConfig.getInt("Spawners.s" + i + ".maxamount");
             Spawner spawner = new Spawner(location, mobCode, amount, maxamount);
-            GuardiansOfAdelia.getSpawnerManager().addSpawner(spawner);
+            SpawnerManager.addSpawner(spawner);
         }
     }
 
-    private void writeSpawners() {
+    private static void writeSpawners() {
         int i = 1;
-        List<Spawner> spawnerList = GuardiansOfAdelia.getSpawnerManager().getSpawners();
+        List<Spawner> spawnerList = SpawnerManager.getSpawners();
         for (Spawner spawner : spawnerList) {
             spawnersConfig.set("Spawners.s" + i + ".x", spawner.getLocation().getX());
             spawnersConfig.set("Spawners.s" + i + ".y", spawner.getLocation().getY());
@@ -99,7 +101,7 @@ public class ConfigManager {
         }
     }
 
-    private void createCharacterSelectionConfig() {
+    private static void createCharacterSelectionConfig() {
         File customConfigFile = new File(configFile, "characterSelection.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
@@ -114,7 +116,7 @@ public class ConfigManager {
         }
     }
 
-    private void loadCharacterSelectionConfig() {
+    private static void loadCharacterSelectionConfig() {
         List<Location> locationList = new ArrayList<>();
         for (int i = 1; i < 5; i++) {
             String worldName = characterSelectionConfig.getString("characterSelectionHologram" + i + ".world");
@@ -147,7 +149,7 @@ public class ConfigManager {
         GuardiansOfAdelia.getCharacterSelectionScreenManager().setTutorialStart(locationTuto);
     }
 
-    private void writeCharacterSelectionConfig() {
+    private static void writeCharacterSelectionConfig() {
         CharacterSelectionScreenManager characterSelectionScreenManager = GuardiansOfAdelia.getCharacterSelectionScreenManager();
         Location characterSelectionCenter = characterSelectionScreenManager.getCharacterSelectionCenter();
         characterSelectionConfig.set("characterSelection" + "Center" + ".world", characterSelectionCenter.getWorld().getName());
@@ -182,7 +184,7 @@ public class ConfigManager {
         }
     }
 
-    private void createTowns() {
+    private static void createTowns() {
         File customConfigFile = new File(configFile, "towns.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
@@ -197,7 +199,7 @@ public class ConfigManager {
         }
     }
 
-    private void loadTowns() {
+    private static void loadTowns() {
         for (int i = 1; i < 6; i++) {
             String townName = townsConfig.getString("town" + i + ".name");
             String worldName = townsConfig.getString("town" + i + ".world");
@@ -208,12 +210,12 @@ public class ConfigManager {
             float pitch = (float) townsConfig.getDouble("town" + i + ".pitch");
             Location location = new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
             Town town = new Town(townName, i, location);
-            GuardiansOfAdelia.getAdeliaTownManager().addTown(town);
+            TownManager.addTown(town);
         }
     }
 
-    private void writeTowns() {
-        List<Town> towns = GuardiansOfAdelia.getAdeliaTownManager().getTowns();
+    private static void writeTowns() {
+        List<Town> towns = TownManager.getTowns();
         for (Town town : towns) {
             Location location = town.getLocation();
             characterSelectionConfig.set("town" + town.getNo() + ".name", town.getName());

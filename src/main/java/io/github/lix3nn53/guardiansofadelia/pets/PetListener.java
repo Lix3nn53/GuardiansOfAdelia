@@ -18,9 +18,8 @@ public class PetListener {
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) event.getEntity();
-            PetManager petManager = GuardiansOfAdelia.getPetManager();
-            if (petManager.isPet(livingEntity)) {
-                Player owner = petManager.getOwner(livingEntity);
+            if (PetManager.isPet(livingEntity)) {
+                Player owner = PetManager.getOwner(livingEntity);
 
                 // Check if the entity has been killed by another entity
                 if (event instanceof EntityDamageByEntityEvent) {
@@ -59,9 +58,9 @@ public class PetListener {
                     new BukkitRunnable() {
                         @Override
                         public void run() {
-                            GuardiansOfAdelia.getPetManager().spawnPet(owner);
+                            PetManager.spawnPet(owner);
                         }
-                    }.runTaskLater(GuardiansOfAdelia.getInstance(), petManager.getRespawnDelay());
+                    }.runTaskLater(GuardiansOfAdelia.getInstance(), PetManager.getRespawnDelay());
                 } else {
                     //update health on custom name
                     int oldHealth = (int) (livingEntity.getHealth() + 0.5);
@@ -76,7 +75,7 @@ public class PetListener {
                 }
             } else if (livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
-                if (petManager.isPetOwner(player)) {
+                if (PetManager.isPetOwner(player)) {
                     //set pet target
 
                 }

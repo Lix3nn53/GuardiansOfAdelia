@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.revive;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
+import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -24,7 +25,7 @@ public class PlayerGhost {
                 cancel();
                 tomb.remove();
                 if (tomb.getOwner().getGameMode().equals(GameMode.SPECTATOR)) {
-                    Town nearestTown = GuardiansOfAdelia.getAdeliaTownManager().getNearestTown(tomb.getOwner().getLocation());
+                    Town nearestTown = TownManager.getNearestTown(tomb.getOwner().getLocation());
                 }
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 90L);

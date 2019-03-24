@@ -31,7 +31,8 @@ public class StatPassive implements Stat {
             maxStatValue = minStatValue;
         }
 
-        int amountOfStats = new Random().nextInt(5);
+        int amountOfStats = new Random().nextInt(50);
+        amountOfStats = (int) (amountOfStats / 10 + 0.5);
 
         if (minNumberOfStats <= 5) {
             if (amountOfStats < minNumberOfStats) {

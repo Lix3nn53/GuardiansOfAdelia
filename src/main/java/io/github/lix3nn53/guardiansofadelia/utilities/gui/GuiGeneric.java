@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.gui;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import org.bukkit.Bukkit;
@@ -72,9 +71,8 @@ public class GuiGeneric implements Gui {
     @Override
     public void openInventory(Player player) {
         UUID uuid = player.getUniqueId();
-        GuardianDataManager guardianDataManager = GuardiansOfAdelia.getGuardianDataManager();
-        if (guardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             player.openInventory(inventory);
             guardianData.setActiveGui(this);
         }

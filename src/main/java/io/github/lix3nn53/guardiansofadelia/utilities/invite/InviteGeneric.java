@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.invite;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -38,7 +39,7 @@ public final class InviteGeneric implements Invite {
 
     @Override
     public void send() {
-        GuardianData receiverData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(receiver.getUniqueId());
+        GuardianData receiverData = GuardianDataManager.getGuardianData(receiver.getUniqueId());
         if (!receiverData.hasPendingInvite()) {
             sender.sendTitle("", senderTitle, 20, 40, 20);
             receiver.sendMessage(receiverMessage);
@@ -75,13 +76,13 @@ public final class InviteGeneric implements Invite {
 
     @Override
     public void accept() {
-        GuardianData receiverData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(receiver.getUniqueId());
+        GuardianData receiverData = GuardianDataManager.getGuardianData(receiver.getUniqueId());
         receiverData.getActiveCharacter();
     }
 
     @Override
     public void reject() {
-        GuardianData receiverData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(receiver.getUniqueId());
+        GuardianData receiverData = GuardianDataManager.getGuardianData(receiver.getUniqueId());
         receiverData.getActiveCharacter();
     }
 }

@@ -12,15 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SpawnerManager {
-    private HashMap<Entity, Spawner> mobToSpawner = new HashMap<>();
-    private HashMap<String, List<Spawner>> chunkKeyToSpawners = new HashMap<>();
-    private List<Spawner> activeSpawners = new ArrayList<>();
+    private static HashMap<Entity, Spawner> mobToSpawner = new HashMap<>();
+    private static HashMap<String, List<Spawner>> chunkKeyToSpawners = new HashMap<>();
+    private static List<Spawner> activeSpawners = new ArrayList<>();
 
-    void onSpawnerMobSpawn(Entity entity, Spawner spawner) {
+    static void onSpawnerMobSpawn(Entity entity, Spawner spawner) {
         mobToSpawner.put(entity, spawner);
     }
 
-    public void onMobDeath(Entity entity) {
+    public static void onMobDeath(Entity entity) {
         if (mobToSpawner.containsKey(entity)) {
             Spawner spawner = mobToSpawner.get(entity);
             mobToSpawner.remove(entity);
@@ -28,7 +28,7 @@ public class SpawnerManager {
         }
     }
 
-    public void addSpawner(Spawner spawner) {
+    public static void addSpawner(Spawner spawner) {
         Location location = spawner.getLocation();
         String chunkKey = getChunkKey(location);
         if (chunkKeyToSpawners.containsKey(chunkKey)) {
@@ -40,14 +40,14 @@ public class SpawnerManager {
         }
     }
 
-    public void activateSpawnersOnChunk(Chunk chunk) {
+    public static void activateSpawnersOnChunk(Chunk chunk) {
         String chunkKey = getChunkKey(chunk.getBlock(0, 0, 0).getLocation());
         if (chunkKeyToSpawners.containsKey(chunkKey)) {
             activeSpawners.addAll(chunkKeyToSpawners.get(chunkKey));
         }
     }
 
-    public void deactivateSpawnersOnChunk(Chunk chunk) {
+    public static void deactivateSpawnersOnChunk(Chunk chunk) {
         String chunkKey = getChunkKey(chunk.getBlock(0, 0, 0).getLocation());
         if (chunkKeyToSpawners.containsKey(chunkKey)) {
             List<Spawner> spawners = chunkKeyToSpawners.get(chunkKey);
@@ -58,7 +58,7 @@ public class SpawnerManager {
         }
     }
 
-    public void startSpawners() {
+    public static void startSpawners() {
         new BukkitRunnable() {
 
             @Override
@@ -86,7 +86,7 @@ public class SpawnerManager {
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20 * 60L, 20 * 20L);
     }
 
-    public List<Spawner> getSpawners() {
+    public static List<Spawner> getSpawners() {
         List<Spawner> spawners = new ArrayList<>();
         for (List<Spawner> s : chunkKeyToSpawners.values()) {
             spawners.addAll(s);
@@ -94,7 +94,7 @@ public class SpawnerManager {
         return spawners;
     }
 
-    private String getChunkKey(Location location) {
+    private static String getChunkKey(Location location) {
         World world = location.getWorld();
         if (world == null) return null;
         return world.getName() + "|" + (location.getBlockX() >> 4) + "," + (location.getBlockZ() >> 4);

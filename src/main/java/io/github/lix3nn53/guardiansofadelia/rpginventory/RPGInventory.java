@@ -105,6 +105,7 @@ public class RPGInventory {
 
         rpgGui.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
 
+        InventoryUtils.fillEmptySlotsWithGlass(rpgGui);
         rpgGui.setLocked(false);
 
         return rpgGui;

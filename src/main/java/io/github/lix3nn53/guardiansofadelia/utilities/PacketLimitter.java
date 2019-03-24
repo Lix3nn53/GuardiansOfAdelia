@@ -22,9 +22,9 @@ public class PacketLimitter {
 
     public static HashMap<UUID, Integer> kick = new HashMap<UUID, Integer>();
 
-    private ProtocolManager protocolManager;
+    private static ProtocolManager protocolManager;
 
-    public void register() {
+    public static void register() {
         protocolManager = ProtocolLibrary.getProtocolManager();
 
         new BukkitRunnable() {
@@ -435,14 +435,14 @@ public class PacketLimitter {
         });
     }
 
-    public void onQuit(Player p) {
+    public static void onQuit(Player p) {
         UUID uuid = p.getUniqueId();
         PacketsSent.remove(uuid);
         warnings.remove(uuid);
         kick.remove(uuid);
     }
 
-    private boolean packetLimit(Player p) {
+    private static boolean packetLimit(Player p) {
         UUID uuid = p.getUniqueId();
 
         if (PacketsSent.containsKey(uuid)) {

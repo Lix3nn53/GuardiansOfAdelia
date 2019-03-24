@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.economy.trading;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.InviteGeneric;
 import org.bukkit.ChatColor;
@@ -38,12 +38,12 @@ public class TradeInvite implements Invite {
     @Override
     public void accept() {
         this.inviteBase.getSender().sendMessage(ChatColor.AQUA + this.inviteBase.getReceiver().getName() + " accepted your trade invite");
-        GuardianData receiverData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(inviteBase.getReceiver().getUniqueId());
+        GuardianData receiverData = GuardianDataManager.getGuardianData(inviteBase.getReceiver().getUniqueId());
         if (receiverData.isTrading()) {
             inviteBase.getSender().sendMessage(ChatColor.RED + "This player is already trading.");
             return;
         }
-        GuardianData senderData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(inviteBase.getSender().getUniqueId());
+        GuardianData senderData = GuardianDataManager.getGuardianData(inviteBase.getSender().getUniqueId());
         if (senderData.isTrading()) {
             inviteBase.getReceiver().sendMessage(ChatColor.RED + "This player is already trading.");
             return;

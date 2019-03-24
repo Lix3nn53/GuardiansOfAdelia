@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.quests;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -132,15 +131,14 @@ public final class Quest {
     }
 
     public ItemStack getGuiItem(Player player) {
-        GuardianDataManager guardianDataManager = GuardiansOfAdelia.getGuardianDataManager();
         UUID uuid = player.getUniqueId();
         ItemStack questItem = new ItemStack(Material.GRAY_WOOL, 1);
         ArrayList<String> lore = new ArrayList<String>();
         lore.add(ChatColor.RED + "You can't accept this quest");
         ItemMeta itemMeta = questItem.getItemMeta();
         itemMeta.setDisplayName(ChatColor.DARK_PURPLE + getName() + ChatColor.GRAY + " Q#" + getQuestID());
-        if (guardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = guardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
             List<Quest> playerQuests = rpgCharacter.getQuestList();
@@ -232,13 +230,12 @@ public final class Quest {
         }
 
         if (!this.turnInMsg.equals("")) {
-            player.sendMessage(ChatColor.LIGHT_PURPLE + this.turnInMsg);
+            player.sendMessage(ChatColor.YELLOW + this.turnInMsg);
         }
 
         TablistUtils.updateTablist(player);
 
-        QuestNPCManager questNpcManager = GuardiansOfAdelia.getQuestNpcManager();
-        questNpcManager.setAllNpcHologramForPlayer(player);
+        QuestNPCManager.setAllNpcHologramForPlayer(player);
 
         for (Action action : onTurnInActions) {
             action.perform(player);
@@ -250,9 +247,8 @@ public final class Quest {
         Advancement onCompleteAdvancement = QuestAdvancements.getOnCompleteAdvancement(this.questID, this.getName(), this.advancementMaterial);
         onCompleteAdvancement.displayToast(player);
 
-        QuestNPCManager questNpcManager = GuardiansOfAdelia.getQuestNpcManager();
-        int whoCanCompleteThisQuest = questNpcManager.getWhoCanCompleteThisQuest(this.questID);
-        questNpcManager.setNpcHologramForPlayer(player, whoCanCompleteThisQuest);
+        int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(this.questID);
+        QuestNPCManager.setNpcHologramForPlayer(player, whoCanCompleteThisQuest);
 
         for (Action action : onCompleteActions) {
             action.perform(player);
@@ -264,15 +260,14 @@ public final class Quest {
         Advancement onAcceptAdvancement = QuestAdvancements.getOnAcceptAdvancement(this.questID, this.getName(), this.advancementMaterial);
         onAcceptAdvancement.displayToast(player);
         if (!this.startMsg.equals("")) {
-            player.sendMessage(ChatColor.LIGHT_PURPLE + this.startMsg);
+            player.sendMessage(ChatColor.YELLOW + this.startMsg);
         }
         TablistUtils.updateTablist(player);
 
-        QuestNPCManager questNpcManager = GuardiansOfAdelia.getQuestNpcManager();
-        int whoCanGiveThisQuest = questNpcManager.getWhoCanGiveThisQuest(this.questID);
-        questNpcManager.setNpcHologramForPlayer(player, whoCanGiveThisQuest);
-        int whoCanCompleteThisQuest = questNpcManager.getWhoCanCompleteThisQuest(this.questID);
-        questNpcManager.setNpcHologramForPlayer(player, whoCanCompleteThisQuest);
+        int whoCanGiveThisQuest = QuestNPCManager.getWhoCanGiveThisQuest(this.questID);
+        QuestNPCManager.setNpcHologramForPlayer(player, whoCanGiveThisQuest);
+        int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(this.questID);
+        QuestNPCManager.setNpcHologramForPlayer(player, whoCanCompleteThisQuest);
 
         for (Action action : onAcceptActions) {
             action.perform(player);

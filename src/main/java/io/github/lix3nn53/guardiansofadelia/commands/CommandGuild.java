@@ -3,8 +3,10 @@ package io.github.lix3nn53.guardiansofadelia.commands;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildInvite;
+import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -55,12 +57,12 @@ public class CommandGuild implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("top")) {
-                List<Guild> top10 = GuardiansOfAdelia.getGuildManager().getTop10();
+                List<Guild> top10 = GuildManager.getTop10();
                 for (Guild guild : top10) {
                     player.sendMessage(ChatColor.DARK_PURPLE + guild.getName() + " - " + guild.getWarPoints());
                 }
             } else if (args[0].equals("leave")) {
-                GuardianData playerData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+                GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
                 if (playerData.isInGuild()) {
                     Guild guild = playerData.getGuild();
                     PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
@@ -72,7 +74,7 @@ public class CommandGuild implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("member")) {
-                GuardianData playerData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+                GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
                 if (playerData.isInGuild()) {
                     Guild guild = playerData.getGuild();
                     Set<UUID> members = guild.getMembers();
@@ -85,7 +87,7 @@ public class CommandGuild implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("ann")) {
-                GuardianData playerData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+                GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
                 if (playerData.isInGuild()) {
                     Guild guild = playerData.getGuild();
                     String announcement = guild.getAnnouncement();
@@ -96,7 +98,7 @@ public class CommandGuild implements CommandExecutor {
                     Player player2 = Bukkit.getPlayer(args[1]);
                     if (player2 != null) {
                         if (player2.isOnline()) {
-                            GuardianData playerData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+                            GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
                             if (playerData.isInGuild()) {
                                 Guild guild = playerData.getGuild();
                                 PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
@@ -115,7 +117,7 @@ public class CommandGuild implements CommandExecutor {
                     Player player2 = Bukkit.getPlayer(args[1]);
                     if (player2 != null) {
                         if (!player.getUniqueId().equals(player2.getUniqueId())) {
-                            GuardianData playerData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+                            GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
                             if (playerData.isInGuild()) {
                                 Guild guild = playerData.getGuild();
                                 if (guild.isMember(player2.getUniqueId())) {
@@ -163,7 +165,7 @@ public class CommandGuild implements CommandExecutor {
                     }
                     Player player2 = Bukkit.getPlayer(args[1]);
                     if (player2 != null) {
-                        GuardianData playerData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+                        GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
                         if (playerData.isInGuild()) {
                             Guild guild = playerData.getGuild();
                             if (guild.isMember(player2.getUniqueId())) {
@@ -195,7 +197,7 @@ public class CommandGuild implements CommandExecutor {
                 }
             } else if (args[0].equals("setann")) {
                 if (args.length >= 2) {
-                    GuardianData playerData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+                    GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
                     if (playerData.isInGuild()) {
                         Guild guild = playerData.getGuild();
                         PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
@@ -216,7 +218,7 @@ public class CommandGuild implements CommandExecutor {
                 if (args.length >= 2) {
                     Player player2 = Bukkit.getPlayer(args[1]);
                     if (player2 != null) {
-                        GuardianData playerData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+                        GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
                         if (playerData.isInGuild()) {
                             Guild guild = playerData.getGuild();
                             if (guild.isMember(player2.getUniqueId())) {
@@ -231,7 +233,7 @@ public class CommandGuild implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("destroy")) {
-                GuardianData playerData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+                GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
                 if (playerData.isInGuild()) {
                     Guild guild = playerData.getGuild();
                     PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
@@ -255,7 +257,7 @@ public class CommandGuild implements CommandExecutor {
                 }
             } else if (args[0].equals("confirmdestroy")) {
                 if (guildDestroyWaitingForConfirm.contains(player)) {
-                    GuardianData playerData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+                    GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
                     if (playerData.isInGuild()) {
                         Guild guild = playerData.getGuild();
                         guild.destroy();

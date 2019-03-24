@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
+import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -47,10 +48,9 @@ public class MyInventoryClickEvent implements Listener {
         Gui activeGui = null;
         GuardianData guardianData = null;
         RPGCharacter rpgCharacter = null;
-        GuardianDataManager guardianDataManager = GuardiansOfAdelia.getGuardianDataManager();
 
-        if (guardianDataManager.hasGuardianData(uuid)) {
-            guardianData = guardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
                 rpgCharacter = guardianData.getActiveCharacter();
             }
@@ -167,19 +167,19 @@ public class MyInventoryClickEvent implements Listener {
 
                 CharacterSelectionScreenManager characterSelectionScreenManager = GuardiansOfAdelia.getCharacterSelectionScreenManager();
                 if (currentName.contains("Roumen")) {
-                    Location location = GuardiansOfAdelia.getAdeliaTownManager().getTown(1).getLocation();
+                    Location location = TownManager.getTown(1).getLocation();
                     characterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Port Veloa")) {
-                    Location location = GuardiansOfAdelia.getAdeliaTownManager().getTown(2).getLocation();
+                    Location location = TownManager.getTown(2).getLocation();
                     characterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Elderine")) {
-                    Location location = GuardiansOfAdelia.getAdeliaTownManager().getTown(3).getLocation();
+                    Location location = TownManager.getTown(3).getLocation();
                     characterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Uruga")) {
-                    Location location = GuardiansOfAdelia.getAdeliaTownManager().getTown(4).getLocation();
+                    Location location = TownManager.getTown(4).getLocation();
                     characterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Arberstol Ruins")) {
-                    Location location = GuardiansOfAdelia.getAdeliaTownManager().getTown(5).getLocation();
+                    Location location = TownManager.getTown(5).getLocation();
                     characterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("last location")) {
                     HashMap<UUID, HashMap<Integer, Location>> charLocationsForSelection = GuardiansOfAdelia.getCharLocationsForSelection();
@@ -215,13 +215,12 @@ public class MyInventoryClickEvent implements Listener {
                         if (type.equals(Material.MAGENTA_WOOL)) {
                             String[] split = currentName.split("#");
                             int questNo = Integer.parseInt(split[1]);
-                            QuestNPCManager questNpcManager = GuardiansOfAdelia.getQuestNpcManager();
-                            int whoCanCompleteThisQuest = questNpcManager.getWhoCanCompleteThisQuest(questNo);
+                            int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(questNo);
                             if (whoCanCompleteThisQuest == resourceNPC) {
                                 //complete quest
                                 boolean didComplete = rpgCharacter.completeQuest(questNo, player);
                                 if (didComplete) {
-                                    GuiGeneric questGui = questNpcManager.getQuestGui(player, resourceNPC);
+                                    GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
                                     questGui.openInventory(player);
                                 } else {
                                     player.sendMessage(ChatColor.RED + "Couldn't complete the quest ERROR report pls");
@@ -234,15 +233,14 @@ public class MyInventoryClickEvent implements Listener {
                         } else if (type.equals(Material.LIME_WOOL)) {
                             String[] split = currentName.split("#");
                             int questNo = Integer.parseInt(split[1]);
-                            QuestNPCManager questNpcManager = GuardiansOfAdelia.getQuestNpcManager();
-                            int whoCanGiveThisQuest = questNpcManager.getWhoCanGiveThisQuest(questNo);
+                            int whoCanGiveThisQuest = QuestNPCManager.getWhoCanGiveThisQuest(questNo);
                             if (whoCanGiveThisQuest == resourceNPC) {
                                 //give quest
-                                Quest questCopyById = questNpcManager.getQuestCopyById(questNo);
+                                Quest questCopyById = QuestNPCManager.getQuestCopyById(questNo);
 
                                 boolean questListIsNotFull = rpgCharacter.addQuest(questCopyById, player);
                                 if (questListIsNotFull) {
-                                    GuiGeneric questGui = questNpcManager.getQuestGui(player, resourceNPC);
+                                    GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
                                     questGui.openInventory(player);
                                 } else {
                                     player.sendMessage(ChatColor.RED + "Your quest list is full");
@@ -262,7 +260,7 @@ public class MyInventoryClickEvent implements Listener {
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
 
-                Town town = GuardiansOfAdelia.getAdeliaTownManager().getTown(i);
+                Town town = TownManager.getTown(i);
                 CompassManager.setCompassItemLocation(player, town.getName(), town.getLocation());
             } else if (current.getType().equals(Material.LIME_WOOL)) {
                 String displayName = current.getItemMeta().getDisplayName();

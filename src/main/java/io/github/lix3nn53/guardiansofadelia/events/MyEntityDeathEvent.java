@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -14,11 +14,10 @@ public class MyEntityDeathEvent implements Listener {
     public void onEvent(EntityDeathEvent event) {
         LivingEntity entity = event.getEntity();
 
-        SpawnerManager spawnerManager = GuardiansOfAdelia.getSpawnerManager();
-        spawnerManager.onMobDeath(entity);
+        SpawnerManager.onMobDeath(entity);
 
         //drops
-        GuardiansOfAdelia.getDropManager().onDeathDropItems(entity);
+        DropManager.onDeathDropItems(entity);
     }
 
 }

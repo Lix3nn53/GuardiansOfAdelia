@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guild;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.InviteGeneric;
 import org.bukkit.ChatColor;
@@ -15,7 +15,7 @@ public class GuildInvite implements Invite {
     private final String receiverTitle = ChatColor.DARK_PURPLE + "Received guild invitation";
 
     public GuildInvite(Player sender, Player receiver) {
-        GuardianData senderData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(sender.getUniqueId());
+        GuardianData senderData = GuardianDataManager.getGuardianData(sender.getUniqueId());
         this.receiverMessage = ChatColor.DARK_PURPLE + sender.getName() + " invites you to " + senderData.getGuild().getName() + " guild";
         this.inviteBase = new InviteGeneric(sender, receiver, senderTitle, receiverMessage, receiverTitle);
     }
@@ -33,7 +33,7 @@ public class GuildInvite implements Invite {
 
     @Override
     public void send() {
-        GuardianData receiverData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(inviteBase.getReceiver().getUniqueId());
+        GuardianData receiverData = GuardianDataManager.getGuardianData(inviteBase.getReceiver().getUniqueId());
         if (receiverData.isInGuild()) {
             inviteBase.getSender().sendMessage(ChatColor.RED + "This player is already in a guild.");
             return;
@@ -44,7 +44,7 @@ public class GuildInvite implements Invite {
     @Override
     public void accept() {
         this.inviteBase.getSender().sendMessage(ChatColor.DARK_PURPLE + this.inviteBase.getReceiver().getName() + " accepted your party invite");
-        GuardianData senderData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(inviteBase.getSender().getUniqueId());
+        GuardianData senderData = GuardianDataManager.getGuardianData(inviteBase.getSender().getUniqueId());
         if (senderData.isInGuild()) {
             Guild guild = senderData.getGuild();
             boolean isReceiverJoined = guild.addMember(inviteBase.getReceiver().getUniqueId());

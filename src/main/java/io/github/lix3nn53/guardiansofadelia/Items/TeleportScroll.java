@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.Items;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
@@ -50,8 +51,8 @@ public class TeleportScroll {
     }
 
     public void teleport(Player player) {
-        if (GuardiansOfAdelia.getGuardianDataManager().hasGuardianData(player.getUniqueId())) {
-            GuardianData guardianData = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId());
+        if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
             if (!guardianData.isFreeToAct()) {
                 guardianData.setTeleporting(true);
                 final double startPosX = player.getLocation().getX();

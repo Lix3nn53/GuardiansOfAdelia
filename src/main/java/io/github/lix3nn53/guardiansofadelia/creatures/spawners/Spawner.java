@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.spawners;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.EntityList;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -25,7 +24,7 @@ public class Spawner {
             if (spawnedEntityAmount < maxAmount) {
                 Entity entity = EntityList.getMob(location, mobCode);
                 spawnedEntityAmount++;
-                GuardiansOfAdelia.getSpawnerManager().onSpawnerMobSpawn(entity, this);
+                SpawnerManager.onSpawnerMobSpawn(entity, this);
             }
         }
     }

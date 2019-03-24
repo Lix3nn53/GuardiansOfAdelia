@@ -51,8 +51,7 @@ public class CharacterSelectionScreenManager {
             createHolograms();
         }
         players.add(player);
-        DatabaseManager databaseManager = GuardiansOfAdelia.getDatabaseManager();
-        databaseManager.loadPlayerDataAndCharacterSelection(player);
+        DatabaseManager.loadPlayerDataAndCharacterSelection(player);
         player.teleport(this.characterSelectionCenter);
     }
 
@@ -76,7 +75,7 @@ public class CharacterSelectionScreenManager {
 
     public void selectCharacter(Player player, int charNo, Location location) {
         player.sendMessage("Loading character-" + charNo);
-        GuardiansOfAdelia.getDatabaseManager().loadCharacter(player, charNo, location);
+        DatabaseManager.loadCharacter(player, charNo, location);
         clear(player);
     }
 
@@ -107,7 +106,6 @@ public class CharacterSelectionScreenManager {
         player.sendMessage("Creating character-" + charNo);
         clear(player);
         //start tutorial
-        TutorialManager tutorialManager = GuardiansOfAdelia.getTutorialManager();
-        tutorialManager.startTutorial(player, rpgClass, charNo, this.tutorialStart);
+        TutorialManager.startTutorial(player, rpgClass, charNo, this.tutorialStart);
     }
 }

@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.pets;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.PetList;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -13,27 +13,27 @@ import java.util.HashMap;
 
 public class PetManager {
 
-    private HashMap<Entity, Player> petToPlayer = new HashMap<Entity, Player>();
-    private long respawnDelay = 20 * 60L;
+    private static HashMap<Entity, Player> petToPlayer = new HashMap<Entity, Player>();
+    private static long respawnDelay = 20 * 60L;
 
-    public void addPet(Player owner, Entity pet) {
+    public static void addPet(Player owner, Entity pet) {
         petToPlayer.put(pet, owner);
     }
 
-    public Player getOwner(Entity entity) {
+    public static Player getOwner(Entity entity) {
         return petToPlayer.get(entity);
     }
 
-    public boolean isPet(Entity entity) {
+    public static boolean isPet(Entity entity) {
         return petToPlayer.containsKey(entity);
     }
 
-    public long getRespawnDelay() {
+    public static long getRespawnDelay() {
         return respawnDelay;
     }
 
-    public void spawnPet(Player player) {
-        ItemStack egg = GuardiansOfAdelia.getGuardianDataManager().getGuardianData(player.getUniqueId()).getActiveCharacter().getRpgInventory().getPetSlot().getItemOnSlot();
+    public static void spawnPet(Player player) {
+        ItemStack egg = GuardianDataManager.getGuardianData(player.getUniqueId()).getActiveCharacter().getRpgInventory().getPetSlot().getItemOnSlot();
         if (NBTTagUtils.hasTag(egg, "petCode")) {
             if (NBTTagUtils.hasTag(egg, "petLevel")) {
                 //companion
@@ -50,7 +50,7 @@ public class PetManager {
         }
     }
 
-    public boolean isPetOwner(Player player) {
+    public static boolean isPetOwner(Player player) {
         for (Entity pet : petToPlayer.keySet()) {
             Player owner = petToPlayer.get(pet);
             if (owner == player) {

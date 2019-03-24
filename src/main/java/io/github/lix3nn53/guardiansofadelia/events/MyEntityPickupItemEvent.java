@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -21,8 +20,7 @@ public class MyEntityPickupItemEvent implements Listener {
             event.setCancelled(true);
         } else if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player player = (Player) event.getEntity();
-            DropManager dropManager = GuardiansOfAdelia.getDropManager();
-            if (!dropManager.canPickUp(itemStack, player)) {
+            if (!DropManager.canPickUp(itemStack, player)) {
                 event.setCancelled(true);
             }
         } else {
