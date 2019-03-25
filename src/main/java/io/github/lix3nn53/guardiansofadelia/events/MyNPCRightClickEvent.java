@@ -58,8 +58,7 @@ public class MyNPCRightClickEvent implements Listener {
 
             if (MerchantManager.isMerchant(id)) {
                 MerchantMenu merchantMenu = MerchantManager.getMerchantMenu(id);
-                GuiGeneric merchantMenuGui = merchantMenu.getMerchantMenuGui();
-                merchantMenuGui.openInventory(player);
+                merchantMenu.openInventory(player);
             } else {
                 GuiGeneric questGui = QuestNPCManager.getQuestGui(player, id);
                 questGui.openInventory(player);

@@ -1,11 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
-import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
-import org.bukkit.Material;
+import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,20 +25,34 @@ public class MerchantManager {
     }
 
     public static void init() {
-        MerchantMenu blacksmith = new MerchantMenu("Blacksmith", true, true, true, 14);
+        setMerchant(14, new MerchantMenu(MerchantType.BLACKSMITH, 1, 14));
+        setMerchant(24, new MerchantMenu(MerchantType.BLACKSMITH, 3, 24));
+        setMerchant(29, new MerchantMenu(MerchantType.BLACKSMITH, 4, 29));
+        setMerchant(36, new MerchantMenu(MerchantType.BLACKSMITH, 5, 36));
+    }
 
-        ItemStack enchant = new ItemStack(Material.DIAMOND);
-        ItemMeta itemMeta = enchant.getItemMeta();
-        itemMeta.setDisplayName("Enchant Items");
-        List<String> lore = new ArrayList<>();
-        lore.add("Strengthen your items with magical stones!");
+    public static ItemStack setShopPrice(ItemStack itemStack, int price) {
+        int copper;
+        int silver = 0;
+        int gold = 0;
+        if (price > 63) {
+            copper = price % 64;
+            silver = price / 64;
+            if (silver > 63) {
+                silver = price % 64;
+                gold = price / 64;
+            }
+        } else {
+            copper = price;
+        }
+        List<String> lore = itemStack.getItemMeta().getLore();
+        String priceString = ChatColor.GREEN + Integer.toString(copper) + " " + ChatColor.WHITE + silver + " " +
+                ChatColor.YELLOW + gold;
+        lore.add(ChatColor.GOLD + "Price: " + priceString);
+        ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setLore(lore);
-        enchant.setItemMeta(itemMeta);
-
-        EnchantGui enchantGui = new EnchantGui();
-
-        blacksmith.addGuiPage(enchant, enchantGui);
-
-
+        itemStack.setItemMeta(itemMeta);
+        itemStack = NBTTagUtils.putInteger("shopPrice", price, itemStack);
+        return itemStack;
     }
 }

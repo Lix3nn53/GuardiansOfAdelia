@@ -27,7 +27,7 @@ public class CommandGuild implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!command.equals("guild")) {
+        if (!command.getName().equals("guild")) {
             return false;
         }
         if (sender instanceof Player) {

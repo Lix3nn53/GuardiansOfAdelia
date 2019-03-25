@@ -14,7 +14,7 @@ public class GuiBookGeneric implements GuiBook {
     private final String name;
     private final int resourceNpcNo;
     private List<GuiPage> pageList = new ArrayList<GuiPage>();
-    private boolean isLocked;
+    private boolean isLocked = true;
 
     public GuiBookGeneric(String name, int resourceNpcNo) {
         this.name = name;

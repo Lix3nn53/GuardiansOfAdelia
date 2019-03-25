@@ -9,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
+import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.quests.list.MainStoryQuests;
 import io.github.lix3nn53.guardiansofadelia.quests.list.TutorialQuests;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
@@ -121,6 +122,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         PacketLimitter.register();
         ConfigManager.createConfigALL();
         ConfigManager.loadConfigALL();
+        MerchantManager.init();
 
         //DELAYED TASKS
         new BukkitRunnable() {

@@ -7,6 +7,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
+import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
+import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantShop;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
@@ -48,17 +50,33 @@ public class MyInventoryClickEvent implements Listener {
         GuardianData guardianData = null;
         RPGCharacter rpgCharacter = null;
 
+        ItemStack current = event.getCurrentItem();
+        String title = event.getView().getTitle();
+
         if (GuardianDataManager.hasGuardianData(uuid)) {
             guardianData = GuardianDataManager.getGuardianData(uuid);
-            if (guardianData.hasActiveCharacter()) {
-                rpgCharacter = guardianData.getActiveCharacter();
-            }
 
             if (guardianData.hasActiveGui()) {
                 activeGui = guardianData.getActiveGui();
                 if (activeGui.isLocked()) {
                     event.setCancelled(true);
                 }
+
+                if (activeGui instanceof MerchantMenu) {
+                    MerchantMenu merchantMenu = (MerchantMenu) activeGui;
+                    if (merchantMenu.isButton(current)) {
+                        MerchantShop buttonShop = merchantMenu.getButtonShop(current);
+                        String[] split = title.split("#");
+                        int shopLevel = Integer.parseInt(split[1]);
+                        Gui gui = buttonShop.getGui(merchantMenu.getResourceNPC(), player, shopLevel);
+                        gui.openInventory(player);
+                        return;
+                    }
+                }
+            }
+
+            if (guardianData.hasActiveCharacter()) {
+                rpgCharacter = guardianData.getActiveCharacter();
             }
         }
 
@@ -83,9 +101,7 @@ public class MyInventoryClickEvent implements Listener {
         if (!(event.getCurrentItem().hasItemMeta())) return;
         if (!(event.getCurrentItem().getItemMeta().hasDisplayName())) return;
 
-        ItemStack current = event.getCurrentItem();
         String currentName = current.getItemMeta().getDisplayName();
-        String title = event.getView().getTitle();
         Inventory topInventory = event.getView().getTopInventory();
         int slot = event.getSlot();
 
