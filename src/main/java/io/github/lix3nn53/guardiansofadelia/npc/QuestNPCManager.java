@@ -99,34 +99,24 @@ public class QuestNPCManager {
                 if (GuardianDataManager.hasGuardianData(uuid)) {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
 
-                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                    List<Quest> playerQuestList = activeCharacter.getQuestList();
-                    boolean playerHasQuestToCompleteFromThisNPC = false;
+                    if (guardianData.hasActiveCharacter()) {
+                        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                        List<Quest> playerQuestList = activeCharacter.getQuestList();
 
-                    boolean npcHasQuest1 = false;
-                    boolean npcHasQuest2 = false;
+                        boolean npcHasQuest1 = false;
+                        boolean npcHasQuest2 = false;
 
-                    //check for canComplete quest since Q > ALL
-                    if (npcNoToCanCompleteQuests.containsKey(npcId)) {
-                        npcHasQuest1 = true;
                         List<Quest> npcCanCompleteQuestList = npcNoToCanCompleteQuests.get(npcId);
 
-                        for (Quest playerQuest : playerQuestList) {
-                            playerHasQuestToCompleteFromThisNPC = npcCanCompleteQuestList.stream()
-                                    .anyMatch(npcQuest -> npcQuest.getQuestID() == playerQuest.getQuestID());
-                            if (playerHasQuestToCompleteFromThisNPC) {
-                                break;
-                            }
-                        }
+                        //check for canComplete quest since Q > ALL
+                        if (npcNoToCanCompleteQuests.containsKey(npcId)) {
+                            npcHasQuest1 = true;
 
-                        if (playerHasQuestToCompleteFromThisNPC) {
                             for (Quest playerQuest : playerQuestList) {
-                                Optional<Quest> questGenericOptional = npcCanCompleteQuestList.stream()
-                                        .filter(npcQuest -> npcQuest.getQuestID() == playerQuest.getQuestID())
-                                        .findAny();
-                                if (questGenericOptional.isPresent()) {
-                                    Quest quest = questGenericOptional.get();
-                                    if (quest.isCompleted()) {
+                                if (playerQuest.isCompleted()) {
+                                    boolean thisCompletedQuestIsFromThisNpc = npcCanCompleteQuestList.stream()
+                                            .anyMatch(npcQuest -> npcQuest.getQuestID() == playerQuest.getQuestID());
+                                    if (thisCompletedQuestIsFromThisNpc) {
                                         //has at least one completed quest from this npc
                                         Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
                                             questHologram.disguiseToPlayer(QuestIconType.COMPLETED, player);
@@ -135,61 +125,63 @@ public class QuestNPCManager {
                                     }
                                 }
                             }
-                            //we don't put current icon here cuz ! is only for where you take the quest. This is where you complete the quest
-
                         }
-                    }
-                    //if code reaches here there is no completed quest
-                    //check for ? then !
-                    if (npcNoToCanGiveQuests.containsKey(npcId)) {
-                        npcHasQuest2 = true;
+                        //if code reaches here there is no completed quest
+                        //check for ? then !
                         List<Quest> npcCanTakeQuestList = npcNoToCanGiveQuests.get(npcId);
+                        if (npcNoToCanGiveQuests.containsKey(npcId)) {
+                            npcHasQuest2 = true;
 
-                        //check if player can take at least one quest
-                        for (Quest npcQuest : npcCanTakeQuestList) {
-                            List<Integer> turnedInQuests = activeCharacter.getTurnedInQuests();
-                            if (turnedInQuests.contains(npcQuest.getQuestID())) {
-                                continue;
+                            //check if player can take at least one quest
+                            for (Quest npcQuest : npcCanTakeQuestList) {
+                                List<Integer> turnedInQuests = activeCharacter.getTurnedInQuests();
+                                if (turnedInQuests.contains(npcQuest.getQuestID())) {
+                                    continue;
+                                }
+                                boolean playerAlreadyAcceptedThisAvaiableQuest = activeCharacter.hasQuest(npcQuest.getQuestID());
+                                if (playerAlreadyAcceptedThisAvaiableQuest) {
+                                    continue;
+                                }
+                                if (npcQuest.isAvailable(activeCharacter, player.getLevel())) {
+                                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                                        questHologram.disguiseToPlayer(QuestIconType.NEW, player);
+                                    });
+                                    return;
+                                }
                             }
-                            boolean playerAlreadyAcceptedThisAvaiableQuest = activeCharacter.hasQuest(npcQuest.getQuestID());
-                            if (playerAlreadyAcceptedThisAvaiableQuest) {
-                                continue;
+
+                            //on upper check, if player has quest to complete but not completed set !
+                            for (Quest playerQuest : playerQuestList) {
+                                boolean playerHasQuestTakenFromThisNPC = npcCanCompleteQuestList.stream()
+                                        .anyMatch(npcQuest -> npcQuest.getQuestID() == playerQuest.getQuestID());
+                                if (playerHasQuestTakenFromThisNPC) {
+                                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                                        questHologram.disguiseToPlayer(QuestIconType.CURRENT, player);
+                                    });
+                                    return;
+                                }
                             }
-                            if (npcQuest.isAvailable(activeCharacter, player.getLevel())) {
+
+                            //check if player has at least one quest taken from this npc
+                            for (Quest playerQuest : playerQuestList) {
+                                boolean playerHasQuestTakenFromThisNPC = npcCanTakeQuestList.stream()
+                                        .anyMatch(npcQuest -> npcQuest.getQuestID() == playerQuest.getQuestID());
+                                if (playerHasQuestTakenFromThisNPC) {
+                                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                                        questHologram.disguiseToPlayer(QuestIconType.CURRENT, player);
+                                    });
+                                    return;
+                                }
+                            }
+                        }
+                        //check if npc is quest npc
+                        if (npcHasQuest1 || npcHasQuest2) {
+                            if (questHologram.isDisguisedToPlayer(player)) {
+                                //if code reaches here player doesn't have any quest from this npc and can't take any quest from this npc
                                 Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                                    questHologram.disguiseToPlayer(QuestIconType.NEW, player);
+                                    questHologram.disguiseToPlayer(QuestIconType.EMPTY, player);
                                 });
-                                return;
                             }
-                        }
-
-                        //on upper check, if player has quest to complete but not completed set !
-                        if (playerHasQuestToCompleteFromThisNPC) {
-                            Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                                questHologram.disguiseToPlayer(QuestIconType.CURRENT, player);
-                            });
-                            return;
-                        }
-
-                        //check if player has at least one quest taken from this npc
-                        for (Quest playerQuest : playerQuestList) {
-                            boolean playerHasQuestTakenFromThisNPC = npcCanTakeQuestList.stream()
-                                    .anyMatch(npcQuest -> npcQuest.getQuestID() == playerQuest.getQuestID());
-                            if (playerHasQuestTakenFromThisNPC) {
-                                Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                                    questHologram.disguiseToPlayer(QuestIconType.CURRENT, player);
-                                });
-                                return;
-                            }
-                        }
-                    }
-                    //check if npc is quest npc
-                    if (npcHasQuest1 || npcHasQuest2) {
-                        if (questHologram.isDisguisedToPlayer(player)) {
-                            //if code reaches here player doesn't have any quest from this npc and can't take any quest from this npc
-                            Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                                questHologram.disguiseToPlayer(QuestIconType.EMPTY, player);
-                            });
                         }
                     }
                 }

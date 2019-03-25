@@ -19,7 +19,7 @@ public final class RPGCharacter {
 
     private ChatTag chatTag = ChatTag.NEWBIE;
 
-    public boolean addQuest(Quest quest, Player player) {
+    public boolean acceptQuest(Quest quest, Player player) {
         if (!hasQuest(quest.getQuestID())) {
             if (this.questList.size() < 5) {
                 this.questList.add(quest);
@@ -30,16 +30,16 @@ public final class RPGCharacter {
         return false;
     }
 
-    public boolean completeQuest(int questID, Player player) {
+    public boolean turnInQuest(int questID, Player player) {
         Optional<Quest> questOptional = this.questList.stream()
                 .filter(characterQuest -> characterQuest.getQuestID() == questID)
                 .findAny();
         if (questOptional.isPresent()) {
             Quest quest = questOptional.get();
             if (quest.isCompleted()) {
-                quest.onTurnIn(player);
                 this.questList.remove(quest);
                 this.turnedInQuests.add(questID);
+                quest.onTurnIn(player);
                 return true;
             }
         }

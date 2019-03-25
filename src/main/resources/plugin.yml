@@ -17,19 +17,17 @@ depend:
   - WorldGuard
 commands:
   guild:
-    description: Foo command
+    description: Guild command
     aliases:
       - g
     permission: guardian.player
     permission-message: You do not have permission!
-    usage: /<command> [test|stop]
   lix:
-    description: Foo command
+    description: Admin command
     aliases:
-      - g
+      - l
     permission: guardian.admin
     permission-message: You do not have permission!
-    usage: /<command> [test|stop]
 permissions:
   guardian.player:
     description: GuardiansOfAdelia permission for player commands

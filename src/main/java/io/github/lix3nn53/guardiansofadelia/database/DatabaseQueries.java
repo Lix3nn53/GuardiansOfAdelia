@@ -302,7 +302,7 @@ public class DatabaseQueries {
                     rpgCharacter.setJob(job);
                 }
 
-                String chatTagString = resultSet.getString("chat_tag_no");
+                String chatTagString = resultSet.getString("chat_tag");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
                     rpgCharacter.setChatTag(ChatTag.valueOf(chatTagString));
@@ -320,10 +320,12 @@ public class DatabaseQueries {
                             Quest quest = QuestNPCManager.getQuestCopyById(Integer.parseInt(aQuestAndItsTasksArray[0]));
                             List<Task> tasks = quest.getTasks();
                             for (int i = 1; i < aQuestAndItsTasksArray.length; i++) {
-                                if (i < tasks.size()) {
-                                    tasks.get(i).setProgress(Integer.parseInt(aQuestAndItsTasksArray[i]));
+                                int taskIndex = i - 1;
+                                if (taskIndex < tasks.size()) {
+                                    tasks.get(taskIndex).setProgress(Integer.parseInt(aQuestAndItsTasksArray[i]));
                                 }
                             }
+                            questList.add(quest);
                         }
                     }
                     rpgCharacter.setQuestList(questList);

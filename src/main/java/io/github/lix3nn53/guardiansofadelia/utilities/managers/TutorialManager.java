@@ -46,7 +46,7 @@ public class TutorialManager {
             player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 1D);
 
             Quest tutorialStartQuest = QuestNPCManager.getQuestCopyById(1);
-            rpgCharacter.addQuest(tutorialStartQuest, player);
+            rpgCharacter.acceptQuest(tutorialStartQuest, player);
         }
     }
 

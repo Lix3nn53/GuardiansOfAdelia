@@ -60,7 +60,11 @@ public final class TaskInteract implements Task {
 
     public boolean progress(int npcId, Player player) {
         if (npcId == this.npcId) {
-            return progress(player);
+            if (progress(player)) {
+                NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
+                player.sendMessage(ChatColor.YELLOW + "Quest interact with " + npcRegistry.getById(npcId).getName() + "");
+                return true;
+            }
         }
         return false;
     }

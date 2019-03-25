@@ -83,7 +83,7 @@ public class SpawnerManager {
                     }
                 }
             }
-        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20 * 60L, 20 * 20L);
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20 * 40L, 20 * 15L);
     }
 
     public static List<Spawner> getSpawners() {

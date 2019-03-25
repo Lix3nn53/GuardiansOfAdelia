@@ -139,7 +139,7 @@ public final class Quest {
             boolean questActive = playerQuests.stream().anyMatch(item -> item.getQuestID() == this.questID);
             if (questActive) {
                 questItem = new ItemStack(Material.PINK_WOOL, 1);
-                lore.set(0, ChatColor.LIGHT_PURPLE + "You accepted this quest");
+                lore.set(0, ChatColor.YELLOW + "You accepted this quest");
                 Optional<Quest> playerQuestOptional = playerQuests.stream()
                         .filter(item -> item.getQuestID() == this.questID)
                         .findAny();
@@ -147,7 +147,7 @@ public final class Quest {
                     Quest playerQuest = playerQuestOptional.get();
                     if (playerQuest.isCompleted()) {
                         questItem = new ItemStack(Material.MAGENTA_WOOL, 1);
-                        lore.set(0, ChatColor.DARK_PURPLE + "Click to complete this quest");
+                        lore.set(0, ChatColor.LIGHT_PURPLE + "Click to complete this quest");
                     }
                 }
             } else if (turnedInQuests.contains(this.questID)) {
@@ -357,11 +357,12 @@ public final class Quest {
         for (Task task : this.getTasks()) {
             int progress = task.getProgress();
             replaceTaskValues = replaceTaskValues.replace("TASK_PROGRESS_" + i, progress + "");
+            i++;
         }
         return replaceTaskValues;
     }
 
-    public void progressKillTasks(Player questOwner, LivingEntity livingTarget) {
+    public boolean progressKillTasks(Player questOwner, LivingEntity livingTarget) {
         for (Task task : this.tasks) {
             if (task instanceof TaskKill) {
                 TaskKill taskKill = (TaskKill) task;
@@ -371,12 +372,14 @@ public final class Quest {
                     if (this.isCompleted()) {
                         this.onComplete(questOwner);
                     }
+                    return true;
                 }
             }
         }
+        return false;
     }
 
-    public void progressDealDamageTasks(Player questOwner, LivingEntity livingTarget, int damage) {
+    public boolean progressDealDamageTasks(Player questOwner, LivingEntity livingTarget, int damage) {
         for (Task task : this.tasks) {
             if (task instanceof TaskDealDamage) {
                 TaskDealDamage taskDealDamage = (TaskDealDamage) task;
@@ -386,12 +389,14 @@ public final class Quest {
                     if (this.isCompleted()) {
                         this.onComplete(questOwner);
                     }
+                    return true;
                 }
             }
         }
+        return false;
     }
 
-    public void progressInterractTasks(Player questOwner, int npcId) {
+    public boolean progressInteractTasks(Player questOwner, int npcId) {
         for (Task task : this.tasks) {
             if (task instanceof TaskInteract) {
                 TaskInteract taskInteract = (TaskInteract) task;
@@ -401,8 +406,10 @@ public final class Quest {
                     if (this.isCompleted()) {
                         this.onComplete(questOwner);
                     }
+                    return true;
                 }
             }
         }
+        return false;
     }
 }

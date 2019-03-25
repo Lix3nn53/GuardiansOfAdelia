@@ -24,6 +24,7 @@ public class CharacterInfoSlot {
         skullMeta.setDisplayName(ChatColor.YELLOW + "Character Info");
 
         int charNo = SkillAPIUtils.getActiveCharacterNo(player);
+        String className = SkillAPIUtils.getClassName(player, charNo);
         int mana = SkillAPIUtils.getMana(player, charNo);
         int maxMana = SkillAPIUtils.getMaxMana(player, charNo);
         int exp = SkillAPIUtils.getExp(player, charNo);
@@ -33,6 +34,7 @@ public class CharacterInfoSlot {
 
         skullMeta.setLore(new ArrayList() {{
             add("");
+            add(ChatColor.LIGHT_PURPLE + "Class: " + ChatColor.GRAY + "" + className);
             add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + "" + player.getLevel());
             add(ChatColor.YELLOW + "Experience: " + ChatColor.GRAY + exp + "/" + expReq);
             add(ChatColor.GREEN + "❤ Health: " + ChatColor.GRAY + "" + health + "/" + maxHealth);

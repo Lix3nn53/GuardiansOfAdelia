@@ -33,14 +33,14 @@ public class MainStoryQuests {
         Task task = new TaskInteract(17);
         ItemStack boat = OtherItems.getBoat();
         GiveItemAction giveItemAction = new GiveItemAction(boat);
-        SendTitleAction sendTitleAction = new SendTitleAction("+ + +", ChatColor.GREEN + "Obtained Boat");
+        SendTitleAction sendTitleAction = new SendTitleAction("", ChatColor.GREEN + "Obtained Boat");
         task.addOnCompleteAction(giveItemAction);
         task.addOnCompleteAction(sendTitleAction);
         tasks.add(task);
 
         Task task1 = new TaskInteract(14);
         GiveWeaponAction giveWeaponAction = new GiveWeaponAction(1, ItemTier.RARE, "Newbie", 1, 5, 2);
-        SendTitleAction sendTitleAction1 = new SendTitleAction("+ + +", ChatColor.GREEN + "Obtained Weapon");
+        SendTitleAction sendTitleAction1 = new SendTitleAction("", ChatColor.GREEN + "Obtained Weapon");
         task1.addOnCompleteAction(giveWeaponAction);
         task1.addOnCompleteAction(sendTitleAction1);
         tasks.add(task1);
@@ -54,7 +54,7 @@ public class MainStoryQuests {
         GiveItemAction giveItemAction2 = new GiveItemAction(manaPotion);
         task2.addOnCompleteAction(giveItemAction1);
         task2.addOnCompleteAction(giveItemAction2);
-        SendTitleAction sendTitleAction2 = new SendTitleAction("+ + +", ChatColor.GREEN + "Obtained Potions");
+        SendTitleAction sendTitleAction2 = new SendTitleAction("", ChatColor.GREEN + "Obtained Potions");
         task2.addOnCompleteAction(sendTitleAction2);
         tasks.add(task2);
 
@@ -62,9 +62,9 @@ public class MainStoryQuests {
         String obj = "Talk to Item Merchant TASK_PROGRESS_1/1\n" + "Talk to Blacksmith TASK_PROGRESS_2/1\n" +
                 "Talk to Magical Item Merchant TASK_PROGRESS_3/1\n"
                 + "Then go back to King of Roumen\n";
-        Quest quest1 = new Quest(5, "Another newbie?", story,
+        Quest quest1 = new Quest(6, "Another newbie?", story,
                 "Time to meet villagers!", obj,
-                "", tasks, itemPrizes, 10, 10, 0, 4,
+                "", tasks, itemPrizes, 10, 10, 0, 5,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest1, 19, 19);
 

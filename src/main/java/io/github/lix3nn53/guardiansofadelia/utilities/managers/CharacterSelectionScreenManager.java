@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
@@ -18,6 +17,7 @@ import java.util.UUID;
 
 public class CharacterSelectionScreenManager {
 
+    private static final HashMap<UUID, HashMap<Integer, Location>> charLocationsForSelection = new HashMap<>();
     private final List<Location> armorStandLocationBases;
     private final List<Player> players = new ArrayList<>();
     private Location tutorialStart;
@@ -82,7 +82,6 @@ public class CharacterSelectionScreenManager {
     public void clear(Player player) {
         removeDisguisesFromPlayer(player);
         players.remove(player);
-        HashMap<UUID, HashMap<Integer, Location>> charLocationsForSelection = GuardiansOfAdelia.getCharLocationsForSelection();
         charLocationsForSelection.remove(player.getUniqueId());
     }
 
@@ -107,5 +106,31 @@ public class CharacterSelectionScreenManager {
         clear(player);
         //start tutorial
         TutorialManager.startTutorial(player, rpgClass, charNo, this.tutorialStart);
+    }
+
+    public void setCharLocation(UUID uuid, int charNo, Location location) {
+        HashMap<Integer, Location> integerLocationHashMap = new HashMap<>();
+        if (charLocationsForSelection.containsKey(uuid)) {
+            integerLocationHashMap = charLocationsForSelection.get(uuid);
+        }
+        integerLocationHashMap.put(charNo, location);
+        charLocationsForSelection.put(uuid, integerLocationHashMap);
+    }
+
+    /**
+     * @return last leave location if valid else null
+     */
+    public Location getCharLocation(Player player, int charNo) {
+        UUID uuid = player.getUniqueId();
+        if (charLocationsForSelection.containsKey(uuid)) {
+            HashMap<Integer, Location> integerLocationHashMap = charLocationsForSelection.get(uuid);
+            if (integerLocationHashMap.containsKey(charNo)) {
+                Location location = integerLocationHashMap.get(charNo);
+                if (location.getWorld().getName().equals("world")) {
+                    return location;
+                }
+            }
+        }
+        return null;
     }
 }

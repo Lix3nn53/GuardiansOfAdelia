@@ -29,7 +29,6 @@ public class GuardianDataManager {
         UUID uuid = player.getUniqueId();
         if (hasGuardianData(uuid)) {
             GuardianData guardianData = getGuardianData(uuid);
-
             DatabaseManager.writeGuardianDataWithCurrentCharacter(player, guardianData);
         }
         onlineGuardians.remove(uuid);

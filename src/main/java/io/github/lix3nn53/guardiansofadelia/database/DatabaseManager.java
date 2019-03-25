@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.database;
 
+import com.sucy.skill.api.player.PlayerAccounts;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -47,12 +48,12 @@ public class DatabaseManager {
                 if (rpgCharacter != null) {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                     guardianData.setActiveCharacter(rpgCharacter, charNo);
+                    player.teleport(location);
+                    TablistUtils.updateTablist(player);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            player.teleport(location);
-            TablistUtils.updateTablist(player);
         });
     }
 
@@ -95,24 +96,19 @@ public class DatabaseManager {
     //Not async, must run async
     private static void loadCharacterSelectionAndFormHolograms(Player player) {
         player.sendMessage("Preparing character selection..");
+        PlayerAccounts playerAccounts = SkillAPIUtils.getPlayerAccountData(player);
         for (int charNo = 1; charNo <= 4; charNo++) {
             boolean characterExists = databaseQueries.characterExists(player.getUniqueId(), charNo);
             if (characterExists) {
-                boolean hasValidData = SkillAPIUtils.hasValidData(player, charNo);
+                boolean hasValidData = SkillAPIUtils.hasValidData(playerAccounts, charNo);
                 if (hasValidData) {
+                    UUID uuid = player.getUniqueId();
 
                     //load last location of character
-                    UUID uuid = player.getUniqueId();
-                    HashMap<UUID, HashMap<Integer, Location>> charLocationsForSelection = GuardiansOfAdelia.getCharLocationsForSelection();
-
-                    HashMap<Integer, Location> integerLocationHashMap = new HashMap<>();
-                    if (charLocationsForSelection.containsKey(uuid)) {
-                        integerLocationHashMap = charLocationsForSelection.get(uuid);
-                    }
                     try {
                         Location lastLocationOfCharacter = databaseQueries.getLastLocationOfCharacter(uuid, charNo);
                         if (lastLocationOfCharacter != null) {
-                            integerLocationHashMap.put(charNo, lastLocationOfCharacter);
+                            GuardiansOfAdelia.getCharacterSelectionScreenManager().setCharLocation(uuid, charNo, lastLocationOfCharacter);
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -135,7 +131,6 @@ public class DatabaseManager {
                     int totalExp = SkillAPIUtils.getTotalExp(player, charNo);
 
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                        livingWatcher.setCustomName("Class: " + className);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(5), mobDisguise, player);
                         livingWatcher.setCustomName("Level: " + level);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(4), mobDisguise, player);
@@ -147,6 +142,7 @@ public class DatabaseManager {
                         DisguiseAPI.disguiseToPlayers(armorStands.get(1), mobDisguise, player);
                         livingWatcher.setCustomName("Total Experience: " + totalExp);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(0), mobDisguise, player);
+                        livingWatcher.setCustomName("Class: " + className);
                     });
                 }
             }
@@ -181,17 +177,19 @@ public class DatabaseManager {
         databaseQueries.setFriendsOfPlayer(uuid, friends);
 
         //character
-        int activeCharacterNo = guardianData.getActiveCharacterNo();
-        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-        ItemStack offHand = null;
-        if (!activeCharacter.getRpgInventory().getOffhandSlot().isEmpty(player)) {
-            offHand = activeCharacter.getRpgInventory().getOffhandSlot().getItemOnSlot(player);
-        }
-        try {
-            databaseQueries.setCharacter(player.getUniqueId(), activeCharacterNo, activeCharacter, player.getInventory().getContents(),
-                    player.getLocation(), player.getInventory().getArmorContents(), offHand);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (guardianData.hasActiveCharacter()) {
+            int activeCharacterNo = guardianData.getActiveCharacterNo();
+            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+            ItemStack offHand = null;
+            if (!activeCharacter.getRpgInventory().getOffhandSlot().isEmpty(player)) {
+                offHand = activeCharacter.getRpgInventory().getOffhandSlot().getItemOnSlot(player);
+            }
+            try {
+                databaseQueries.setCharacter(player.getUniqueId(), activeCharacterNo, activeCharacter, player.getInventory().getContents(),
+                        player.getLocation(), player.getInventory().getArmorContents(), offHand);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

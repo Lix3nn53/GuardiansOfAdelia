@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class MyPlayerJoinEvent implements Listener {
 
@@ -15,6 +16,14 @@ public class MyPlayerJoinEvent implements Listener {
 
         player.getInventory().clear();
         //character selection handles loading data too
-        GuardiansOfAdelia.getCharacterSelectionScreenManager().startCharacterSelection(player);
+
+
+        // TODO remove delay, this delay is currently here because it works Faster than SkillAPI's data loading.
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                GuardiansOfAdelia.getCharacterSelectionScreenManager().startCharacterSelection(player);
+            }
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 40L);
     }
 }

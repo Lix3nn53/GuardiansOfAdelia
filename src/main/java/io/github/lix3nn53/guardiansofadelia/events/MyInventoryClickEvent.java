@@ -35,7 +35,6 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 public class MyInventoryClickEvent implements Listener {
@@ -182,15 +181,11 @@ public class MyInventoryClickEvent implements Listener {
                     Location location = TownManager.getTown(5).getLocation();
                     characterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("last location")) {
-                    HashMap<UUID, HashMap<Integer, Location>> charLocationsForSelection = GuardiansOfAdelia.getCharLocationsForSelection();
-                    if (charLocationsForSelection.containsKey(uuid)) {
-                        HashMap<Integer, Location> integerLocationHashMap = charLocationsForSelection.get(uuid);
-                        if (integerLocationHashMap.containsKey(charNo)) {
-                            Location location = integerLocationHashMap.get(charNo);
-                            if (location.getWorld().getName().equals("world")) {
-                                characterSelectionScreenManager.selectCharacter(player, charNo, location);
-                            }
-                        }
+                    Location charLocation = characterSelectionScreenManager.getCharLocation(player, charNo);
+                    if (charLocation != null) {
+                        characterSelectionScreenManager.selectCharacter(player, charNo, charLocation);
+                    } else {
+                        player.sendMessage(ChatColor.RED + "Your saved quit-location is not valid");
                     }
                 }
             } else {
@@ -218,7 +213,7 @@ public class MyInventoryClickEvent implements Listener {
                             int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(questNo);
                             if (whoCanCompleteThisQuest == resourceNPC) {
                                 //complete quest
-                                boolean didComplete = rpgCharacter.completeQuest(questNo, player);
+                                boolean didComplete = rpgCharacter.turnInQuest(questNo, player);
                                 if (didComplete) {
                                     GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
                                     questGui.openInventory(player);
@@ -238,7 +233,7 @@ public class MyInventoryClickEvent implements Listener {
                                 //give quest
                                 Quest questCopyById = QuestNPCManager.getQuestCopyById(questNo);
 
-                                boolean questListIsNotFull = rpgCharacter.addQuest(questCopyById, player);
+                                boolean questListIsNotFull = rpgCharacter.acceptQuest(questCopyById, player);
                                 if (questListIsNotFull) {
                                     GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
                                     questGui.openInventory(player);

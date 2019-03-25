@@ -26,6 +26,20 @@ public class SkillAPIUtils {
         return false;
     }
 
+    public static boolean hasValidData(PlayerAccounts playerAccountData, int charNo) {
+        if (playerAccountData.hasData(charNo)) {
+            PlayerData playerData = playerAccountData.getData(charNo);
+            if (playerData.hasClass()) {
+                return !playerData.getMainClass().getData().getName().contains("Tutorial");
+            }
+        }
+        return false;
+    }
+
+    public static PlayerAccounts getPlayerAccountData(Player player) {
+        return SkillAPI.getPlayerAccountData(player);
+    }
+
     public static int getActiveCharacterNo(Player player) {
         PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
         return playerAccountData.getActiveId();
@@ -117,7 +131,7 @@ public class SkillAPIUtils {
         PlayerData activeData = playerAccountData.getActiveData();
         if (activeData.hasClass()) {
             String className = activeData.getMainClass().getData().getName();
-            return !className.contains("tutorial");
+            return !className.contains("Tutorial");
         }
         return false;
     }

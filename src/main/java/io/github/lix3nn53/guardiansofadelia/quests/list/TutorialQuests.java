@@ -70,7 +70,7 @@ public class TutorialQuests {
                 tasks3, itemPrizes1, 0, 0, 90, 2, Material.RED_NETHER_BRICKS);
         QuestNPCManager.addQuest(quest3, 6, 7);
 
-        //syvia to malephar then to king of roumen
+        //syvia to malephar
         List<String> story4 = new ArrayList<>();
         story4.add("We need to stop this before it harms Adelia!");
         List<Task> tasks4 = new ArrayList<>();
@@ -89,7 +89,20 @@ public class TutorialQuests {
         quest4.addOnCompleteAction(clearPotionEffectAction);
         quest4.addOnCompleteAction(new SendTitleAction(ChatColor.YELLOW + "What **** happened?", ""));
         quest4.addOnCompleteAction(new TutorialEndAction());
-        QuestNPCManager.addQuest(quest4, 7, 19);
+        quest4.addOnCompleteAction(new FinishQuestAction(4));
+        quest4.addOnCompleteAction(new StartQuestAction(5));
+        QuestNPCManager.addQuest(quest4, 7, 0);
+
+        //malephar to king of roumen
+        List<String> story5 = new ArrayList<>();
+        story.add("TODO story of dream");
+        List<Task> tasks5 = new ArrayList<>();
+        List<ItemStack> itemPrizes5 = new ArrayList<>();
+        Quest quest5 = new Quest(5, "A fresh start", story5,
+                "Get out of the ship and follow the path to King of Roumen", "Talk to King of Roumen to learn what happened",
+                "",
+                tasks5, itemPrizes5, 0, 0, 1, 4, Material.GRASS_BLOCK);
+        QuestNPCManager.addQuest(quest5, 0, 19);
     }
 
 }

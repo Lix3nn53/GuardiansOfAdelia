@@ -9,24 +9,25 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
+import io.github.lix3nn53.guardiansofadelia.quests.list.MainStoryQuests;
 import io.github.lix3nn53.guardiansofadelia.quests.list.TutorialQuests;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.ConfigManager;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Difficulty;
+import org.bukkit.GameRule;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 public class GuardiansOfAdelia extends JavaPlugin {
-
-    private static final HashMap<UUID, HashMap<Integer, Location>> charLocationsForSelection = new HashMap<>();
 
     private static CharacterSelectionScreenManager CHARACTER_SELECTION_SCREEN_MANAGER;
 
@@ -42,10 +43,6 @@ public class GuardiansOfAdelia extends JavaPlugin {
 
     public static void setCharacterSelectionScreenManager(CharacterSelectionScreenManager characterSelectionScreenManager) {
         CHARACTER_SELECTION_SCREEN_MANAGER = characterSelectionScreenManager;
-    }
-
-    public static HashMap<UUID, HashMap<Integer, Location>> getCharLocationsForSelection() {
-        return charLocationsForSelection;
     }
 
     @Override
@@ -135,6 +132,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
 
         //REGISTER QUESTS FROM LISTS
         TutorialQuests.createQuests();
+        MainStoryQuests.createQuests();
     }
 
     @Override
