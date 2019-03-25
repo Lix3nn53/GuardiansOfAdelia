@@ -4,10 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import io.github.lix3nn53.guardiansofadelia.quests.actions.ClearPotionEffectAction;
-import io.github.lix3nn53.guardiansofadelia.quests.actions.PotionEffectAction;
-import io.github.lix3nn53.guardiansofadelia.quests.actions.SendTitleAction;
-import io.github.lix3nn53.guardiansofadelia.quests.actions.TeleportAction;
+import io.github.lix3nn53.guardiansofadelia.quests.actions.*;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskDealDamage;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskKill;
@@ -78,7 +75,6 @@ public class TutorialQuests {
         story4.add("We need to stop this before it harms Adelia!");
         List<Task> tasks4 = new ArrayList<>();
         TaskDealDamage taskDealDamage = new TaskDealDamage(ChatColor.RED + "Malephar", 200);
-        taskDealDamage.addOnCompleteAction(new SendTitleAction(ChatColor.YELLOW + "What **** happened?", ""));
         tasks4.add(taskDealDamage);
         Quest quest4 = new Quest(4, "Hall of Darkness", story4, "Now you seem ready to face Malephar.. or are you?", "Time to face Malephar?!",
                 "", tasks4, itemPrizes, 0, 0, 90, 3, Material.RED_NETHER_BRICKS);
@@ -91,6 +87,8 @@ public class TutorialQuests {
         quest4.addOnCompleteAction(potionEffectAction);
         quest4.addOnCompleteAction(teleportAction);
         quest4.addOnCompleteAction(clearPotionEffectAction);
+        quest4.addOnCompleteAction(new SendTitleAction(ChatColor.YELLOW + "What **** happened?", ""));
+        quest4.addOnCompleteAction(new TutorialEndAction());
         QuestNPCManager.addQuest(quest4, 7, 19);
     }
 

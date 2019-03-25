@@ -594,4 +594,35 @@ public class RPGInventory {
         }
         return false;
     }
+
+    public void clearInventory(Player player) {
+        if (!parrotSlot.isEmpty()) {
+            ItemStack itemOnSlot = parrotSlot.getItemOnSlot();
+            removeBonusStats(player, itemOnSlot);
+            parrotSlot.clearItemOnSlot();
+        }
+        if (!earringSlot.isEmpty()) {
+            ItemStack itemOnSlot = earringSlot.getItemOnSlot();
+            removeBonusStats(player, itemOnSlot);
+            earringSlot.clearItemOnSlot();
+        }
+        if (!necklaceSlot.isEmpty()) {
+            ItemStack itemOnSlot = necklaceSlot.getItemOnSlot();
+            removeBonusStats(player, itemOnSlot);
+            necklaceSlot.clearItemOnSlot();
+        }
+        if (!gloveSlot.isEmpty()) {
+            ItemStack itemOnSlot = gloveSlot.getItemOnSlot();
+            removeBonusStats(player, itemOnSlot);
+            gloveSlot.clearItemOnSlot();
+        }
+        if (!ringSlot.isEmpty()) {
+            ItemStack itemOnSlot = ringSlot.getItemOnSlot();
+            removeBonusStats(player, itemOnSlot);
+            ringSlot.clearItemOnSlot();
+        }
+        if (!petSlot.isEmpty()) {
+            petSlot.clearItemOnSlot();
+        }
+    }
 }

@@ -13,14 +13,19 @@ public final class TaskGift implements Task {
     private final int amountNeeded;
     private final ItemStack item;
     private final String entityName;
-    private final List<Action> onCompleteActions = new ArrayList<>();
-    private int progress;
+    private List<Action> onCompleteActions = new ArrayList<>();
+    private int progress = 0;
 
     public TaskGift(final int amountNeeded, final ItemStack item, final String entityName) {
         this.amountNeeded = amountNeeded;
         this.item = item;
         this.entityName = entityName;
-        progress = 0;
+    }
+
+    public TaskGift freshCopy() {
+        TaskGift taskCopy = new TaskGift(this.amountNeeded, this.item, this.entityName);
+        taskCopy.setOnCompleteActions(this.onCompleteActions);
+        return taskCopy;
     }
 
     public String getObjectiveString() {
@@ -66,5 +71,9 @@ public final class TaskGift implements Task {
     @Override
     public void addOnCompleteAction(Action action) {
         onCompleteActions.add(action);
+    }
+
+    public void setOnCompleteActions(List<Action> onCompleteActions) {
+        this.onCompleteActions = onCompleteActions;
     }
 }

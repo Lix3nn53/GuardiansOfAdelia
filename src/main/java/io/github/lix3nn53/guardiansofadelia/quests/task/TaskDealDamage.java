@@ -12,14 +12,19 @@ public final class TaskDealDamage implements Task {
 
     private final int damageNeeded;
     private final String mobName;
-    private final List<Action> onCompleteActions = new ArrayList<>();
-    private int progress;
+    private List<Action> onCompleteActions = new ArrayList<>();
+    private int progress = 0;
 
 
     public TaskDealDamage(final String mobName, final int damageNeeded) {
         this.mobName = mobName;
         this.damageNeeded = damageNeeded;
-        progress = 0;
+    }
+
+    public TaskDealDamage freshCopy() {
+        TaskDealDamage taskCopy = new TaskDealDamage(this.mobName, this.damageNeeded);
+        taskCopy.setOnCompleteActions(this.onCompleteActions);
+        return taskCopy;
     }
 
     public String getObjectiveString() {
@@ -88,5 +93,9 @@ public final class TaskDealDamage implements Task {
     @Override
     public void addOnCompleteAction(Action action) {
         onCompleteActions.add(action);
+    }
+
+    public void setOnCompleteActions(List<Action> onCompleteActions) {
+        this.onCompleteActions = onCompleteActions;
     }
 }

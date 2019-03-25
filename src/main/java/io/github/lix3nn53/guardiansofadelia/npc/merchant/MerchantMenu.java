@@ -13,10 +13,10 @@ import java.util.HashMap;
 public class MerchantMenu {
 
     private final HashMap<ItemStack, Gui> itemToGui = new HashMap<ItemStack, Gui>();
-    private final GuiGeneric actionSelectionGui;
+    private final GuiGeneric merchantMenuGui;
 
     public MerchantMenu(String shopName, boolean canSell, boolean hasQuest, boolean canCoinConver, int resourceNpcNo) {
-        this.actionSelectionGui = new GuiGeneric(27, shopName, resourceNpcNo);
+        this.merchantMenuGui = new GuiGeneric(27, shopName, resourceNpcNo);
         if (canSell) {
             int sellSlotNo = 0;
             ItemStack sellItem = new ItemStack(Material.ORANGE_WOOL);
@@ -27,7 +27,7 @@ public class MerchantMenu {
                 add(ChatColor.YELLOW + "Sell your item for coins");
             }});
             sellItem.setItemMeta(statusItemMeta);
-            actionSelectionGui.setItem(sellSlotNo, sellItem);
+            merchantMenuGui.setItem(sellSlotNo, sellItem);
         }
         if (canCoinConver) {
             int coinConverterSlotNo = 2;
@@ -40,7 +40,7 @@ public class MerchantMenu {
                 add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
             }});
             coinConvertItem.setItemMeta(statusItemMeta);
-            actionSelectionGui.setItem(coinConverterSlotNo, coinConvertItem);
+            merchantMenuGui.setItem(coinConverterSlotNo, coinConvertItem);
         }
         if (hasQuest) {
             int questSlotNo = 4;
@@ -52,17 +52,21 @@ public class MerchantMenu {
                 add(ChatColor.DARK_PURPLE + "Quest list of this NPC");
             }});
             questItem.setItemMeta(statusItemMeta);
-            actionSelectionGui.setItem(questSlotNo, questItem);
+            merchantMenuGui.setItem(questSlotNo, questItem);
         }
     }
 
     public boolean addGuiPage(ItemStack selection, Gui gui) {
         if (itemToGui.size() < 5) {
             int slotNo = (itemToGui.size() * 2) + 18;
-            actionSelectionGui.setItem(slotNo, selection);
+            merchantMenuGui.setItem(slotNo, selection);
             itemToGui.put(selection, gui);
             return true;
         }
         return false;
+    }
+
+    public GuiGeneric getMerchantMenuGui() {
+        return this.merchantMenuGui;
     }
 }

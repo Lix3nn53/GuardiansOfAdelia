@@ -17,14 +17,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 
-public class EnchantGui {
+public class EnchantGui extends GuiGeneric {
 
-    GuiGeneric gui;
-    Player owner;
-
-    public EnchantGui(Player owner) {
-        this.owner = owner;
-        gui = new GuiGeneric(27, ChatColor.AQUA + "Item Enchanting", 0);
+    public EnchantGui() {
+        super(27, ChatColor.AQUA + "Item Enchanting", 0);
 
         ItemStack itemGlass = new ItemStack(Material.RED_STAINED_GLASS_PANE, 1);
         ItemStack finalGlass = new ItemStack(Material.PURPLE_STAINED_GLASS_PANE, 1);
@@ -82,36 +78,36 @@ public class EnchantGui {
         }});
         wool.setItemMeta(im4);
 
-        gui.setItem(0, itemGlass);
-        gui.setItem(1, itemGlass);
-        gui.setItem(2, itemGlass);
-        gui.setItem(3, stoneGlass);
-        gui.setItem(4, stoneGlass);
-        gui.setItem(5, stoneGlass);
-        gui.setItem(6, finalGlass);
-        gui.setItem(7, finalGlass);
-        gui.setItem(8, finalGlass);
-        gui.setItem(9, itemGlass);
-        gui.setItem(11, itemGlass);
-        gui.setItem(12, stoneGlass);
-        gui.setItem(14, stoneGlass);
-        gui.setItem(15, finalGlass);
-        gui.setItem(17, finalGlass);
-        gui.setItem(16, wool);
-        gui.setItem(18, itemGlass);
-        gui.setItem(19, itemGlass);
-        gui.setItem(20, itemGlass);
-        gui.setItem(21, stoneGlass);
-        gui.setItem(22, stoneGlass);
-        gui.setItem(23, stoneGlass);
-        gui.setItem(24, finalGlass);
-        gui.setItem(25, finalGlass);
-        gui.setItem(26, finalGlass);
+        setItem(0, itemGlass);
+        setItem(1, itemGlass);
+        setItem(2, itemGlass);
+        setItem(3, stoneGlass);
+        setItem(4, stoneGlass);
+        setItem(5, stoneGlass);
+        setItem(6, finalGlass);
+        setItem(7, finalGlass);
+        setItem(8, finalGlass);
+        setItem(9, itemGlass);
+        setItem(11, itemGlass);
+        setItem(12, stoneGlass);
+        setItem(14, stoneGlass);
+        setItem(15, finalGlass);
+        setItem(17, finalGlass);
+        setItem(16, wool);
+        setItem(18, itemGlass);
+        setItem(19, itemGlass);
+        setItem(20, itemGlass);
+        setItem(21, stoneGlass);
+        setItem(22, stoneGlass);
+        setItem(23, stoneGlass);
+        setItem(24, finalGlass);
+        setItem(25, finalGlass);
+        setItem(26, finalGlass);
     }
 
     public boolean setItemToEnchant(ItemStack itemStack) {
         if (StatUtils.hasStatType(itemStack.getType())) {
-            gui.setItem(10, itemStack);
+            setItem(10, itemStack);
             return true;
         }
         return false;
@@ -132,7 +128,7 @@ public class EnchantGui {
             }
             boolean b = stoneLevel == EnchantManager.getRequiredEnchantStoneLevel(EnchantManager.getEnchantLevel(itemStack));
             if (b) {
-                gui.setItem(13, enchantStone);
+                setItem(13, enchantStone);
             }
             return b;
         }
@@ -140,18 +136,20 @@ public class EnchantGui {
     }
 
     public ItemStack getItemToEnchant() {
-        return gui.getItem(10);
+        return getItem(10);
     }
 
     public ItemStack getEnchantStone() {
-        return gui.getItem(13);
+        return getItem(13);
     }
 
-    public void startEnchanting() {
+    public void startEnchanting(Player owner) {
         Location loc = owner.getLocation();
         World w = loc.getWorld();
 
         w.playSound(loc, "randoming", 0.5F, 0.9F);
+
+        GuiGeneric gui = this;
 
         new BukkitRunnable() {
 
@@ -203,8 +201,8 @@ public class EnchantGui {
         damageable.setDamage(5);
         success.setItemMeta(itemMeta);
 
-        InventoryUtils.fillWithItem(gui, success);
-        gui.setItem(13, itemStack);
+        InventoryUtils.fillWithItem(this, success);
+        setItem(13, itemStack);
     }
 
     private void setFailGui(ItemStack itemStack) {
@@ -215,11 +213,7 @@ public class EnchantGui {
         damageable.setDamage(4);
         fail.setItemMeta(itemMeta);
 
-        InventoryUtils.fillWithItem(gui, fail);
-        gui.setItem(13, itemStack);
-    }
-
-    public GuiGeneric getGui() {
-        return gui;
+        InventoryUtils.fillWithItem(this, fail);
+        setItem(13, itemStack);
     }
 }

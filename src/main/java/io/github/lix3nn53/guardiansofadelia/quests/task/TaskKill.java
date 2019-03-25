@@ -13,14 +13,19 @@ public final class TaskKill implements Task {
     private final int amountNeeded;
 
     private final String mobName;
-    private final List<Action> onCompleteActions = new ArrayList<>();
+    private List<Action> onCompleteActions = new ArrayList<>();
     private int progress;
-
 
     public TaskKill(final String mobName, final int amountNeeded) {
         this.mobName = mobName;
         this.amountNeeded = amountNeeded;
         progress = 0;
+    }
+
+    public TaskKill freshCopy() {
+        TaskKill taskCopy = new TaskKill(this.mobName, this.amountNeeded);
+        taskCopy.setOnCompleteActions(this.onCompleteActions);
+        return taskCopy;
     }
 
     public String getObjectiveString() {
@@ -76,5 +81,9 @@ public final class TaskKill implements Task {
     @Override
     public void addOnCompleteAction(Action action) {
         onCompleteActions.add(action);
+    }
+
+    public void setOnCompleteActions(List<Action> onCompleteActions) {
+        this.onCompleteActions = onCompleteActions;
     }
 }

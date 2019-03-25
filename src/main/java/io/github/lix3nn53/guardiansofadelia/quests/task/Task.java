@@ -16,4 +16,6 @@ public interface Task {
     void setProgress(int progress);
 
     void addOnCompleteAction(Action action);
+
+    Task freshCopy();
 }

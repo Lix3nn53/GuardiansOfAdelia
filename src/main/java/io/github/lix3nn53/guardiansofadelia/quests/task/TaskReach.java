@@ -13,12 +13,18 @@ public final class TaskReach implements Task {
 
     private final Location blockLoc;
     private final Material blockMat;
-    private final List<Action> onCompleteActions = new ArrayList<>();
+    private List<Action> onCompleteActions = new ArrayList<>();
     private int completed = 0;
 
     public TaskReach(final Location blockLoc, final Material blockMat) {
         this.blockLoc = blockLoc;
         this.blockMat = blockMat;
+    }
+
+    public TaskReach freshCopy() {
+        TaskReach taskCopy = new TaskReach(this.blockLoc, this.blockMat);
+        taskCopy.setOnCompleteActions(this.onCompleteActions);
+        return taskCopy;
     }
 
     public String getObjectiveString() {
@@ -64,5 +70,9 @@ public final class TaskReach implements Task {
     @Override
     public void addOnCompleteAction(Action action) {
         onCompleteActions.add(action);
+    }
+
+    public void setOnCompleteActions(List<Action> onCompleteActions) {
+        this.onCompleteActions = onCompleteActions;
     }
 }

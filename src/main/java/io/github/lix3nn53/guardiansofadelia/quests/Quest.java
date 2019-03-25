@@ -75,13 +75,18 @@ public final class Quest {
                 questToCopy.getTasks(), questToCopy.getItemPrizes(), questToCopy.getMoneyPrize(), questToCopy.getExpPrize(),
                 questToCopy.getMinLevel(), questToCopy.getQuestReq(), questToCopy.getAdvancementMaterial());
         List<Action> copyOnAcceptActions = questToCopy.getOnAcceptActions();
+
         this.onAcceptActions.addAll(copyOnAcceptActions);
         List<Action> copyCompleteActions = questToCopy.getOnCompleteActions();
         this.onCompleteActions.addAll(copyCompleteActions);
         List<Action> copyOnTurnInActions = questToCopy.getOnTurnInActions();
         this.onTurnInActions.addAll(copyOnTurnInActions);
-        //no defensive copies are created here, since
-        //there are no mutable object fields (String is immutable)
+
+        List<Task> copyTasks = new ArrayList<>();
+        for (Task task : questToCopy.getTasks()) {
+            copyTasks.add(task.freshCopy());
+        }
+        this.setTasks(copyTasks);
     }
 
     public void addTask(Task task) {
@@ -100,19 +105,6 @@ public final class Quest {
         } else {
             itemPrizes.add(item);
         }
-    }
-
-    public boolean isCompleted() {
-        for (Task t : this.tasks) {
-            if (!t.isCompleted()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public boolean isAvailable(RPGCharacter rpgCharacter, int playerLevel) {
@@ -136,7 +128,7 @@ public final class Quest {
         ArrayList<String> lore = new ArrayList<String>();
         lore.add(ChatColor.RED + "You can't accept this quest");
         ItemMeta itemMeta = questItem.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.DARK_PURPLE + getName() + ChatColor.GRAY + " Q#" + getQuestID());
+        itemMeta.setDisplayName(ChatColor.DARK_PURPLE + this.name + ChatColor.GRAY + " Q#" + this.questID);
         if (GuardianDataManager.hasGuardianData(uuid)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
@@ -144,12 +136,12 @@ public final class Quest {
             List<Quest> playerQuests = rpgCharacter.getQuestList();
             List<Integer> turnedInQuests = rpgCharacter.getTurnedInQuests();
 
-            boolean questActive = playerQuests.stream().anyMatch(item -> item.getQuestID() == this.getQuestID());
+            boolean questActive = playerQuests.stream().anyMatch(item -> item.getQuestID() == this.questID);
             if (questActive) {
                 questItem = new ItemStack(Material.PINK_WOOL, 1);
                 lore.set(0, ChatColor.LIGHT_PURPLE + "You accepted this quest");
                 Optional<Quest> playerQuestOptional = playerQuests.stream()
-                        .filter(item -> item.getQuestID() == this.getQuestID())
+                        .filter(item -> item.getQuestID() == this.questID)
                         .findAny();
                 if (playerQuestOptional.isPresent()) {
                     Quest playerQuest = playerQuestOptional.get();
@@ -158,7 +150,7 @@ public final class Quest {
                         lore.set(0, ChatColor.DARK_PURPLE + "Click to complete this quest");
                     }
                 }
-            } else if (turnedInQuests.contains(this.getQuestID())) {
+            } else if (turnedInQuests.contains(this.questID)) {
                 questItem = new ItemStack(Material.WHITE_WOOL, 1);
                 lore.set(0, ChatColor.WHITE + "You completed this quest");
             } else if (isAvailable(rpgCharacter, player.getLevel())) {
@@ -206,86 +198,40 @@ public final class Quest {
         return questItem;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public List<Task> getTasks() {
         return tasks;
     }
 
-    public void onTurnIn(Player player) {
-        player.sendMessage(ChatColor.DARK_PURPLE + "You have turned in " + ChatColor.LIGHT_PURPLE + this.name);
-        Advancement onTurnInAdvancement = QuestAdvancements.getOnTurnInAdvancement(this.questID, this.getName(), this.advancementMaterial);
-        onTurnInAdvancement.displayToast(player);
-        if (!itemPrizes.isEmpty()) {
-            for (ItemStack itemStack : this.itemPrizes) {
-                InventoryUtils.giveItemToPlayer(player, itemStack);
-            }
-        }
-        if (expPrize != 0) {
-            SkillAPIUtils.giveQuestExp(player, this.expPrize);
-        }
-        if (moneyPrize != 0) {
-            List<Coin> coins = EconomyUtils.priceToCoins(this.moneyPrize);
-            for (Coin coin : coins) {
-                InventoryUtils.giveItemToPlayer(player, coin.getCoin());
-            }
-        }
-
-        if (!this.turnInMsg.equals("")) {
-            player.sendMessage(ChatColor.YELLOW + this.turnInMsg);
-        }
-
-        TablistUtils.updateTablist(player);
-
-        QuestNPCManager.setAllNpcHologramForPlayer(player);
-
-        for (Action action : onTurnInActions) {
-            action.perform(player);
-        }
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    public void onComplete(Player player) {
-        player.sendMessage(ChatColor.DARK_PURPLE + "You have completed " + ChatColor.LIGHT_PURPLE + this.name);
-        Advancement onCompleteAdvancement = QuestAdvancements.getOnCompleteAdvancement(this.questID, this.getName(), this.advancementMaterial);
-        onCompleteAdvancement.displayToast(player);
-
-        int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(this.questID);
-        QuestNPCManager.setNpcHologramForPlayer(player, whoCanCompleteThisQuest);
-
-        for (Action action : onCompleteActions) {
-            action.perform(player);
-        }
+    public void addOnAcceptAction(Action action) {
+        this.onAcceptActions.add(action);
     }
 
-    public void onAccept(Player player) {
-        player.sendMessage(ChatColor.DARK_PURPLE + "You have accepted " + ChatColor.LIGHT_PURPLE + this.name);
-        Advancement onAcceptAdvancement = QuestAdvancements.getOnAcceptAdvancement(this.questID, this.getName(), this.advancementMaterial);
-        onAcceptAdvancement.displayToast(player);
-        if (!this.startMsg.equals("")) {
-            player.sendMessage(ChatColor.YELLOW + this.startMsg);
-        }
-        TablistUtils.updateTablist(player);
-
-        int whoCanGiveThisQuest = QuestNPCManager.getWhoCanGiveThisQuest(this.questID);
-        QuestNPCManager.setNpcHologramForPlayer(player, whoCanGiveThisQuest);
-        int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(this.questID);
-        QuestNPCManager.setNpcHologramForPlayer(player, whoCanCompleteThisQuest);
-
-        for (Action action : onAcceptActions) {
-            action.perform(player);
-        }
+    public void addOnCompleteAction(Action action) {
+        this.onCompleteActions.add(action);
     }
 
-    public String getObjectiveTextForTablist() {
-        String replaceTaskValues = objectiveText;
-        int i = 1;
-        for (Task task : this.getTasks()) {
-            int progress = task.getProgress();
-            replaceTaskValues = replaceTaskValues.replace("TASK_PROGRESS_" + i, progress + "");
-        }
-        return replaceTaskValues;
+    public void addOnTurnInAction(Action action) {
+        this.onTurnInActions.add(action);
     }
 
-    public String getObjectiveText() {
-        return objectiveText;
+    public List<Action> getOnAcceptActions() {
+        return onAcceptActions;
+    }
+
+    public List<Action> getOnCompleteActions() {
+        return onCompleteActions;
+    }
+
+    public List<Action> getOnTurnInActions() {
+        return onTurnInActions;
     }
 
     public int getQuestID() {
@@ -298,6 +244,10 @@ public final class Quest {
 
     public String getStartMsg() {
         return startMsg;
+    }
+
+    public String getObjectiveText() {
+        return objectiveText;
     }
 
     public String getTurnInMsg() {
@@ -320,12 +270,95 @@ public final class Quest {
         return questReq;
     }
 
+    public Material getAdvancementMaterial() {
+        return advancementMaterial;
+    }
+
     public List<ItemStack> getItemPrizes() {
         return itemPrizes;
     }
 
-    public Material getAdvancementMaterial() {
-        return advancementMaterial;
+    public boolean isCompleted() {
+        for (Task t : this.tasks) {
+            if (!t.isCompleted()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void onTurnIn(Player player) {
+        player.sendMessage(ChatColor.DARK_PURPLE + "You have turned in " + ChatColor.LIGHT_PURPLE + getName());
+        Advancement onTurnInAdvancement = QuestAdvancements.getOnTurnInAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
+        onTurnInAdvancement.displayToast(player);
+        if (!getItemPrizes().isEmpty()) {
+            for (ItemStack itemStack : getItemPrizes()) {
+                InventoryUtils.giveItemToPlayer(player, itemStack);
+            }
+        }
+        if (getExpPrize() != 0) {
+            SkillAPIUtils.giveQuestExp(player, getExpPrize());
+        }
+        if (getMoneyPrize() != 0) {
+            List<Coin> coins = EconomyUtils.priceToCoins(getMoneyPrize());
+            for (Coin coin : coins) {
+                InventoryUtils.giveItemToPlayer(player, coin.getCoin());
+            }
+        }
+
+        if (!getTurnInMsg().equals("")) {
+            player.sendMessage(ChatColor.YELLOW + getTurnInMsg());
+        }
+
+        TablistUtils.updateTablist(player);
+
+        QuestNPCManager.setAllNpcHologramForPlayer(player);
+
+        for (Action action : getOnTurnInActions()) {
+            action.perform(player);
+        }
+    }
+
+    public void onComplete(Player player) {
+        player.sendMessage(ChatColor.DARK_PURPLE + "You have completed " + ChatColor.LIGHT_PURPLE + getName());
+        Advancement onCompleteAdvancement = QuestAdvancements.getOnCompleteAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
+        onCompleteAdvancement.displayToast(player);
+
+        int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(getQuestID());
+        QuestNPCManager.setNpcHologramForPlayer(player, whoCanCompleteThisQuest);
+
+        for (Action action : getOnCompleteActions()) {
+            action.perform(player);
+        }
+    }
+
+    public void onAccept(Player player) {
+        player.sendMessage(ChatColor.DARK_PURPLE + "You have accepted " + ChatColor.LIGHT_PURPLE + getName());
+        Advancement onAcceptAdvancement = QuestAdvancements.getOnAcceptAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
+        onAcceptAdvancement.displayToast(player);
+        if (!getStartMsg().equals("")) {
+            player.sendMessage(ChatColor.YELLOW + getStartMsg());
+        }
+        TablistUtils.updateTablist(player);
+
+        int whoCanGiveThisQuest = QuestNPCManager.getWhoCanGiveThisQuest(getQuestID());
+        QuestNPCManager.setNpcHologramForPlayer(player, whoCanGiveThisQuest);
+        int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(getQuestID());
+        QuestNPCManager.setNpcHologramForPlayer(player, whoCanCompleteThisQuest);
+
+        for (Action action : getOnAcceptActions()) {
+            action.perform(player);
+        }
+    }
+
+    public String getObjectiveTextForTablist() {
+        String replaceTaskValues = getObjectiveText();
+        int i = 1;
+        for (Task task : this.getTasks()) {
+            int progress = task.getProgress();
+            replaceTaskValues = replaceTaskValues.replace("TASK_PROGRESS_" + i, progress + "");
+        }
+        return replaceTaskValues;
     }
 
     public void progressKillTasks(Player questOwner, LivingEntity livingTarget) {
@@ -371,29 +404,5 @@ public final class Quest {
                 }
             }
         }
-    }
-
-    public void addOnAcceptAction(Action action) {
-        this.onAcceptActions.add(action);
-    }
-
-    public void addOnCompleteAction(Action action) {
-        this.onCompleteActions.add(action);
-    }
-
-    public void addOnTurnInAction(Action action) {
-        this.onTurnInActions.add(action);
-    }
-
-    public List<Action> getOnAcceptActions() {
-        return onAcceptActions;
-    }
-
-    public List<Action> getOnCompleteActions() {
-        return onCompleteActions;
-    }
-
-    public List<Action> getOnTurnInActions() {
-        return onTurnInActions;
     }
 }

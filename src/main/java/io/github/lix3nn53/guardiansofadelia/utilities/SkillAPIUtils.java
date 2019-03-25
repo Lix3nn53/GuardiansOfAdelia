@@ -32,75 +32,51 @@ public class SkillAPIUtils {
     }
 
     public static String getClassName(Player player, int charNo) {
-        if (hasValidData(player, charNo)) {
-            PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
-            PlayerData playerData = playerAccountData.getData(charNo);
-            return playerData.getMainClass().getData().getName();
-        }
-        return "";
+        PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
+        PlayerData playerData = playerAccountData.getData(charNo);
+        return playerData.getMainClass().getData().getName();
     }
 
     public static int getHealth(Player player, int charNo) {
-        if (hasValidData(player, charNo)) {
-            PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
-            PlayerData playerData = playerAccountData.getData(charNo);
-            return (int) (playerData.getMainClass().getHealth() + 0.5);
-        }
-        return 0;
+        PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
+        PlayerData playerData = playerAccountData.getData(charNo);
+        return (int) (playerData.getMainClass().getHealth() + 0.5);
     }
 
     public static int getMana(Player player, int charNo) {
-        if (hasValidData(player, charNo)) {
-            PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
-            PlayerData playerData = playerAccountData.getData(charNo);
-            return (int) (playerData.getMainClass().getMana() + 0.5);
-        }
-        return 0;
+        PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
+        PlayerData playerData = playerAccountData.getData(charNo);
+        return (int) (playerData.getMainClass().getMana() + 0.5);
     }
 
     public static int getMaxMana(Player player, int charNo) {
-        if (hasValidData(player, charNo)) {
-            PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
-            PlayerData playerData = playerAccountData.getData(charNo);
-            return (int) (playerData.getMaxMana() + 0.5);
-        }
-        return 0;
+        PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
+        PlayerData playerData = playerAccountData.getData(charNo);
+        return (int) (playerData.getMaxMana() + 0.5);
     }
 
     public static int getLevel(Player player, int charNo) {
-        if (hasValidData(player, charNo)) {
-            PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
-            PlayerData playerData = playerAccountData.getData(charNo);
-            return playerData.getMainClass().getLevel();
-        }
-        return 0;
+        PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
+        PlayerData playerData = playerAccountData.getData(charNo);
+        return playerData.getMainClass().getLevel();
     }
 
     public static int getExp(Player player, int charNo) {
-        if (hasValidData(player, charNo)) {
-            PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
-            PlayerData playerData = playerAccountData.getData(charNo);
-            return (int) (playerData.getMainClass().getExp() + 0.5);
-        }
-        return 0;
+        PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
+        PlayerData playerData = playerAccountData.getData(charNo);
+        return (int) (playerData.getMainClass().getExp() + 0.5);
     }
 
     public static int getTotalExp(Player player, int charNo) {
-        if (hasValidData(player, charNo)) {
-            PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
-            PlayerData playerData = playerAccountData.getData(charNo);
-            return (int) (playerData.getMainClass().getTotalExp() + 0.5);
-        }
-        return 0;
+        PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
+        PlayerData playerData = playerAccountData.getData(charNo);
+        return (int) (playerData.getMainClass().getTotalExp() + 0.5);
     }
 
     public static int getRequiredExp(Player player, int charNo) {
-        if (hasValidData(player, charNo)) {
-            PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
-            PlayerData playerData = playerAccountData.getData(charNo);
-            return (int) (playerData.getMainClass().getRequiredExp() + 0.5);
-        }
-        return 0;
+        PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
+        PlayerData playerData = playerAccountData.getData(charNo);
+        return (int) (playerData.getMainClass().getRequiredExp() + 0.5);
     }
 
     public static void giveQuestExp(Player player, double exp) {
@@ -176,5 +152,25 @@ public class SkillAPIUtils {
     public static int getInvestedAttribute(Player player, String attr) {
         PlayerData sdata = SkillAPI.getPlayerData(player);
         return sdata.getInvestedAttribute(attr);
+    }
+
+    public static void resetClass(Player player) {
+        PlayerData playerData = SkillAPI.getPlayerData(player);
+        playerData.resetAll();
+    }
+
+    public static void setClass(Player player, String className) {
+        PlayerData playerData = SkillAPI.getPlayerData(player);
+        playerData.setClass(SkillAPI.getClass(className));
+    }
+
+    public static void refunAttributes(Player player) {
+        PlayerData playerData = SkillAPI.getPlayerData(player);
+        playerData.refundAttributes();
+    }
+
+    public static void clearBonuses(Player player) {
+        PlayerData playerData = SkillAPI.getPlayerData(player);
+        playerData.clearBonuses();
     }
 }

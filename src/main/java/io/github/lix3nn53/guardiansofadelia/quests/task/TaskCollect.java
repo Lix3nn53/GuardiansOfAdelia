@@ -11,13 +11,19 @@ public final class TaskCollect implements Task {
 
     private final int amountNeeded;
     private final String itemName;
-    private final List<Action> onCompleteActions = new ArrayList<>();
+    private List<Action> onCompleteActions = new ArrayList<>();
     private int progress;
 
     public TaskCollect(final String itemName, final int amountNeeded) {
         this.itemName = itemName;
         this.amountNeeded = amountNeeded;
         progress = 0;
+    }
+
+    public TaskCollect freshCopy() {
+        TaskCollect taskCopy = new TaskCollect(this.itemName, this.amountNeeded);
+        taskCopy.setOnCompleteActions(this.onCompleteActions);
+        return taskCopy;
     }
 
     public String getObjectiveString() {
@@ -63,5 +69,9 @@ public final class TaskCollect implements Task {
     @Override
     public void addOnCompleteAction(Action action) {
         onCompleteActions.add(action);
+    }
+
+    public void setOnCompleteActions(List<Action> onCompleteActions) {
+        this.onCompleteActions = onCompleteActions;
     }
 }

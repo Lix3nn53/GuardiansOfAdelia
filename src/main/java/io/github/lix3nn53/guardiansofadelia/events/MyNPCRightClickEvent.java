@@ -3,8 +3,8 @@ package io.github.lix3nn53.guardiansofadelia.events;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.menu.CharacterSelectionMenuList;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
-import io.github.lix3nn53.guardiansofadelia.towns.Town;
-import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
+import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
@@ -43,16 +43,10 @@ public class MyNPCRightClickEvent implements Listener {
                 characterCreationMenu.openInventory(player);
             }
         } else {
-            String name = npc.getName();
-            if (name.contains("Blacksmith")) {
-                Town nearestTown = TownManager.getNearestTown(npc.getStoredLocation());
-
-                int no = nearestTown.getNo();
-
-                if (no == 1) {
-
-                }
-
+            if (MerchantManager.isMerchant(id)) {
+                MerchantMenu merchantMenu = MerchantManager.getMerchantMenu(id);
+                GuiGeneric merchantMenuGui = merchantMenu.getMerchantMenuGui();
+                merchantMenuGui.openInventory(player);
             } else {
                 GuiGeneric questGui = QuestNPCManager.getQuestGui(player, id);
                 questGui.openInventory(player);

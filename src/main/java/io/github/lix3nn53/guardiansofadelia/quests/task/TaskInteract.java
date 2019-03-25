@@ -13,11 +13,17 @@ import java.util.List;
 public final class TaskInteract implements Task {
 
     private final int npcId;
-    private final List<Action> onCompleteActions = new ArrayList<>();
+    private List<Action> onCompleteActions = new ArrayList<>();
     private int completed = 0;
 
     public TaskInteract(final int npcId) {
         this.npcId = npcId;
+    }
+
+    public TaskInteract freshCopy() {
+        TaskInteract taskCopy = new TaskInteract(this.npcId);
+        taskCopy.setOnCompleteActions(this.onCompleteActions);
+        return taskCopy;
     }
 
     public String getObjectiveString() {
@@ -72,5 +78,9 @@ public final class TaskInteract implements Task {
     @Override
     public void addOnCompleteAction(Action action) {
         onCompleteActions.add(action);
+    }
+
+    public void setOnCompleteActions(List<Action> onCompleteActions) {
+        this.onCompleteActions = onCompleteActions;
     }
 }
