@@ -4,7 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.consumables.BuffType;
 import io.github.lix3nn53.guardiansofadelia.Items.consumables.PotionType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.*;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.Items.list.consumables.BuffScrolls;
 import io.github.lix3nn53.guardiansofadelia.Items.list.consumables.Potions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
@@ -55,7 +56,6 @@ public class ItemPoolGenerator {
     }
 
     public static List<ItemStack> generateArmors(ItemTier tier, String itemTag, GearLevel gearLevel) {
-        double bonusPercent = tier.getBonusPercent();
         int minNumberofStats = tier.getMinNumberOfStats();
         int minStatValue = gearLevel.getMinStatValue();
         int maxStatValue = gearLevel.getMaxStatValue();
@@ -63,47 +63,17 @@ public class ItemPoolGenerator {
         List<ItemStack> temp = new ArrayList<>();
 
         if (gearLevel.equals(GearLevel.ZERO) || gearLevel.equals(GearLevel.ONE)) {
-            temp.add(Boots.get(RPGClass.NO_CLASS, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Chestplates.get(RPGClass.NO_CLASS, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Helmets.get(RPGClass.NO_CLASS, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Leggings.get(RPGClass.NO_CLASS, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
+            temp.add(Armors.getArmor(ArmorType.HELMET, RPGClass.NO_CLASS, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+            temp.add(Armors.getArmor(ArmorType.CHESTPLATE, RPGClass.NO_CLASS, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+            temp.add(Armors.getArmor(ArmorType.LEGGINGS, RPGClass.NO_CLASS, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+            temp.add(Armors.getArmor(ArmorType.BOOTS, RPGClass.NO_CLASS, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         } else {
-            temp.add(Boots.get(RPGClass.MONK, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Chestplates.get(RPGClass.MONK, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Helmets.get(RPGClass.MONK, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Leggings.get(RPGClass.MONK, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-
-            temp.add(Boots.get(RPGClass.KNIGHT, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Chestplates.get(RPGClass.KNIGHT, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Helmets.get(RPGClass.KNIGHT, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Leggings.get(RPGClass.KNIGHT, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Shields.get(RPGClass.KNIGHT, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-
-            temp.add(Boots.get(RPGClass.MAGE, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Chestplates.get(RPGClass.MAGE, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Helmets.get(RPGClass.MAGE, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Leggings.get(RPGClass.MAGE, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-
-            temp.add(Boots.get(RPGClass.PALADIN, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Chestplates.get(RPGClass.PALADIN, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Helmets.get(RPGClass.PALADIN, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Leggings.get(RPGClass.PALADIN, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Shields.get(RPGClass.PALADIN, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-
-            temp.add(Boots.get(RPGClass.NINJA, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Chestplates.get(RPGClass.NINJA, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Helmets.get(RPGClass.NINJA, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Leggings.get(RPGClass.NINJA, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-
-            temp.add(Boots.get(RPGClass.ARCHER, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Chestplates.get(RPGClass.ARCHER, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Helmets.get(RPGClass.ARCHER, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Leggings.get(RPGClass.ARCHER, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-
-            temp.add(Boots.get(RPGClass.WARRIOR, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Chestplates.get(RPGClass.WARRIOR, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Helmets.get(RPGClass.WARRIOR, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Leggings.get(RPGClass.WARRIOR, gearLevel.getArmorNo(), tier, itemTag, bonusPercent, minStatValue, maxStatValue, minNumberofStats));
+            for (RPGClass rpgClass : RPGClass.values()) {
+                temp.add(Armors.getArmor(ArmorType.HELMET, rpgClass, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+                temp.add(Armors.getArmor(ArmorType.CHESTPLATE, rpgClass, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+                temp.add(Armors.getArmor(ArmorType.LEGGINGS, rpgClass, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+                temp.add(Armors.getArmor(ArmorType.BOOTS, rpgClass, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+            }
         }
 
         return temp;

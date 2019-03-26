@@ -2,7 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.consumables.PotionType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.*;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Shields;
 import io.github.lix3nn53.guardiansofadelia.Items.list.consumables.Potions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -57,10 +59,11 @@ public class TutorialManager {
         int maxStatValue = 50;
         int minNumberOfStats = 2;
         String itemTag = "Tutorial";
-        ItemStack helmet = Helmets.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack chest = Chestplates.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack leggings = Leggings.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack boots = Boots.get(rpgClass, 7, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+
+        ItemStack helmet = Armors.getArmor(ArmorType.HELMET, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack chest = Armors.getArmor(ArmorType.CHESTPLATE, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack leggings = Armors.getArmor(ArmorType.LEGGINGS, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack boots = Armors.getArmor(ArmorType.BOOTS, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
 
         changeClassOfItemToTutorialClass(helmet, rpgClass);
         changeClassOfItemToTutorialClass(chest, rpgClass);

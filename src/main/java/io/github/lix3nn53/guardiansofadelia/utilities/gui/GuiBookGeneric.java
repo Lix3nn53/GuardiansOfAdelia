@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.gui;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -8,12 +10,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class GuiBookGeneric implements GuiBook {
 
     private final String name;
     private final int resourceNpcNo;
-    private List<GuiPage> pageList = new ArrayList<GuiPage>();
+    private List<GuiPage> pageList = new ArrayList<>();
     private boolean isLocked = true;
 
     public GuiBookGeneric(String name, int resourceNpcNo) {
@@ -21,18 +24,17 @@ public class GuiBookGeneric implements GuiBook {
         this.resourceNpcNo = resourceNpcNo;
     }
 
-    public GuiGeneric getPageInventory(int pageNo) {
-        pageNo = pageNo - 1;
-        GuiGeneric pageGui = new GuiGeneric(54, name + " Crafting Page-" + pageNo, resourceNpcNo);
-        if (pageNo < pageList.size()) {
-            if (pageNo > 0) {
+    public GuiGeneric getPageInventory(int pageIndex) {
+        GuiGeneric pageGui = new GuiGeneric(54, name + " Crafting Page-" + (pageIndex + 1), resourceNpcNo);
+        if (pageIndex < pageList.size()) {
+            if (pageIndex > 0) {
                 ItemStack previousPage = new ItemStack(Material.YELLOW_WOOL);
                 ItemMeta statusItemMeta = previousPage.getItemMeta();
                 statusItemMeta.setDisplayName(ChatColor.YELLOW + "Previous Page");
                 previousPage.setItemMeta(statusItemMeta);
                 pageGui.setItem(45, previousPage);
             }
-            if (pageNo < pageList.size() - 1) {
+            if (pageIndex < pageList.size() - 1) {
                 ItemStack nextPage = new ItemStack(Material.YELLOW_WOOL);
                 ItemMeta statusItemMeta = nextPage.getItemMeta();
                 statusItemMeta.setDisplayName(ChatColor.YELLOW + "Next Page");
@@ -40,7 +42,7 @@ public class GuiBookGeneric implements GuiBook {
                 pageGui.setItem(53, nextPage);
             }
             int i = 0;
-            for (GuiLine line : pageList.get(pageNo).guiLines) {
+            for (GuiLine line : pageList.get(pageIndex).guiLines) {
                 int y = 0;
                 for (ItemStack itemStack : line.getLine()) {
                     pageGui.setItem(i + y, itemStack);
@@ -63,22 +65,36 @@ public class GuiBookGeneric implements GuiBook {
 
     @Override
     public List<Integer> getFillableSlots() {
-        return getPageInventory(1).getFillableSlots();
+        return getPageInventory(0).getFillableSlots();
     }
 
     @Override
     public List<Integer> getItemSlots() {
-        return getPageInventory(1).getItemSlots();
+        return getPageInventory(0).getItemSlots();
     }
 
     @Override
     public List<Integer> getEmptySlots() {
-        return getPageInventory(1).getEmptySlots();
+        return getPageInventory(0).getEmptySlots();
     }
 
     @Override
     public void openInventory(Player player) {
-        getPageInventory(1).openInventory(player);
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            getPageInventory(0).openInventory(player);
+            guardianData.setActiveGui(this);
+        }
+    }
+
+    public void openInventoryPage(Player player, int pageIndex) {
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            getPageInventory(pageIndex).openInventory(player);
+            guardianData.setActiveGui(this);
+        }
     }
 
     @Override
@@ -93,9 +109,5 @@ public class GuiBookGeneric implements GuiBook {
     @Override
     public int getResourceNPC() {
         return resourceNpcNo;
-    }
-
-    public void openInventoryPage(Player player, int pageNo) {
-        getPageInventory(pageNo).openInventory(player);
     }
 }

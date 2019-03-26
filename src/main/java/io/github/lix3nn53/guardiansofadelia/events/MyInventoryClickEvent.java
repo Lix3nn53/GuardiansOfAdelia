@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
@@ -52,6 +53,7 @@ public class MyInventoryClickEvent implements Listener {
 
         ItemStack current = event.getCurrentItem();
         String title = event.getView().getTitle();
+        int slot = event.getSlot();
 
         if (GuardianDataManager.hasGuardianData(uuid)) {
             guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -62,6 +64,22 @@ public class MyInventoryClickEvent implements Listener {
                     event.setCancelled(true);
                 }
 
+                if (activeGui instanceof GuiBookGeneric) {
+                    GuiBookGeneric guiBookGeneric = (GuiBookGeneric) activeGui;
+                    if (slot == 53) {
+                        //next page
+                        String[] split = title.split("Page-");
+                        int pageIndex = Integer.parseInt(split[1]) - 1;
+                        pageIndex++;
+                        guiBookGeneric.openInventoryPage(player, pageIndex);
+                    } else if (slot == 45) {
+                        //previous page
+                        String[] split = title.split("Page-");
+                        int pageIndex = Integer.parseInt(split[1]) - 1;
+                        pageIndex--;
+                        guiBookGeneric.openInventoryPage(player, pageIndex);
+                    }
+                }
                 if (activeGui instanceof MerchantMenu) {
                     MerchantMenu merchantMenu = (MerchantMenu) activeGui;
                     if (merchantMenu.isButton(current)) {
@@ -103,7 +121,6 @@ public class MyInventoryClickEvent implements Listener {
 
         String currentName = current.getItemMeta().getDisplayName();
         Inventory topInventory = event.getView().getTopInventory();
-        int slot = event.getSlot();
 
         if (currentName.equals(ChatColor.GREEN + "Menu")) {
             event.setCancelled(true);

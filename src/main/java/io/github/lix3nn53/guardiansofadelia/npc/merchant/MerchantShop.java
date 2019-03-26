@@ -5,6 +5,8 @@ import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.consumables.PotionType;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.Items.list.consumables.Potions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
@@ -118,7 +120,7 @@ public enum MerchantShop {
 
         List<GuiPage> guiPages = new ArrayList<>();
         guiPages.add(new GuiPage());
-        int guiPageIndex = 1;
+        int guiPageIndex = 0;
 
         for (MerchantGuiLine line : lines) {
             if (guiPages.get(guiPageIndex).isEmpty()) {
@@ -152,7 +154,7 @@ public enum MerchantShop {
 
         List<GuiPage> guiPages = new ArrayList<>();
         guiPages.add(new GuiPage());
-        int guiPageIndex = 1;
+        int guiPageIndex = 0;
 
         for (MerchantGuiLine line : lines) {
             if (guiPages.get(guiPageIndex).isEmpty()) {
@@ -278,7 +280,7 @@ public enum MerchantShop {
 
         List<GuiPage> guiPages = new ArrayList<>();
         guiPages.add(new GuiPage());
-        int guiPageIndex = 1;
+        int guiPageIndex = 0;
 
         for (MerchantGuiLine line : lines) {
             if (guiPages.get(guiPageIndex).isEmpty()) {
@@ -307,8 +309,8 @@ public enum MerchantShop {
         int lineIndex = 0;
 
         if (shopLevel == 1) {
-            for (RPGClass rpgClass : RPGClass.values()) {
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 1, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+            for (ArmorType armorType : ArmorType.values()) {
+                ItemStack weapon = Armors.getArmor(armorType, RPGClass.NO_CLASS, 1, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 1);
                 } else {
@@ -316,23 +318,34 @@ public enum MerchantShop {
                     lineIndex++;
                 }
             }
-            for (RPGClass rpgClass : RPGClass.values()) {
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 2, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+            lines.add(new MerchantGuiLine());
+            lineIndex++;
+            for (ArmorType armorType : ArmorType.values()) {
+                ItemStack weapon = Armors.getArmor(armorType, RPGClass.NO_CLASS, 2, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 2);
+                    lines.get(lineIndex).addWord(weapon, 1);
                 } else {
                     lines.add(new MerchantGuiLine());
                     lineIndex++;
                 }
             }
+            lines.add(new MerchantGuiLine());
+            lineIndex++;
             for (RPGClass rpgClass : RPGClass.values()) {
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 3, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 3);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
                 }
+                for (ArmorType armorType : ArmorType.values()) {
+                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 1, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    if (lines.get(lineIndex).isEmpty()) {
+                        lines.get(lineIndex).addWord(weapon, 1);
+                    } else {
+                        lines.add(new MerchantGuiLine());
+                        lineIndex++;
+                    }
+                }
+                lines.add(new MerchantGuiLine());
+                lineIndex++;
             }
         } else if (shopLevel == 3) {
             for (RPGClass rpgClass : RPGClass.values()) {
@@ -404,7 +417,7 @@ public enum MerchantShop {
 
         List<GuiPage> guiPages = new ArrayList<>();
         guiPages.add(new GuiPage());
-        int guiPageIndex = 1;
+        int guiPageIndex = 0;
 
         for (MerchantGuiLine line : lines) {
             if (guiPages.get(guiPageIndex).isEmpty()) {
@@ -530,7 +543,7 @@ public enum MerchantShop {
 
         List<GuiPage> guiPages = new ArrayList<>();
         guiPages.add(new GuiPage());
-        int guiPageIndex = 1;
+        int guiPageIndex = 0;
 
         for (MerchantGuiLine line : lines) {
             if (guiPages.get(guiPageIndex).isEmpty()) {
