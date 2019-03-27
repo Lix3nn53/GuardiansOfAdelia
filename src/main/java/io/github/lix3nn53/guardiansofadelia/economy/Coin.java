@@ -63,20 +63,21 @@ public class Coin {
 
     public ItemStack getCoin() {
         ItemStack money = new ItemStack(Material.IRON_INGOT, amount);
-        ItemMeta im = money.getItemMeta();
-        im.setDisplayName(ChatColor.GREEN + "Bronze Coin");
+        ItemMeta itemMeta = money.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.GREEN + "Bronze Coin");
         if (type.equals(CoinType.SILVER)) {
             money = new ItemStack(Material.GOLD_INGOT, amount);
-            im.setDisplayName(ChatColor.WHITE + "Silver Coin");
+            itemMeta.setDisplayName(ChatColor.WHITE + "Silver Coin");
         } else if (type.equals(CoinType.GOLD)) {
             money = new ItemStack(Material.DIAMOND, amount);
-            im.setDisplayName(ChatColor.YELLOW + "Gold Coin");
+            itemMeta.setDisplayName(ChatColor.YELLOW + "Gold Coin");
         }
-        im.setLore(new ArrayList() {{
+        itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
             add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
         }});
+        money.setItemMeta(itemMeta);
 
         return money;
     }

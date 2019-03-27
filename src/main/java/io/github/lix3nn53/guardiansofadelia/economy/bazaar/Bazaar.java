@@ -22,32 +22,75 @@ import java.util.List;
 public class Bazaar {
 
     private final Player owner;
-    private final List<ItemStack> itemsToSell = new ArrayList<>();
+    private final BazaarCustomerGui customerGui;
     private final List<Player> customers = new ArrayList<>();
     private ArmorStand bazaarModel;
-    private boolean open;
+    private boolean open = false;
+    private int moneyEarned = 0;
 
     public Bazaar(Player owner) {
         this.owner = owner;
+        this.customerGui = new BazaarCustomerGui(owner);
     }
 
     public boolean addItem(ItemStack itemStack, int price) {
-        if (itemsToSell.size() < 18) {
-            itemStack = EconomyUtils.setItemPrice(itemStack, price);
-            itemsToSell.add(itemStack);
-            return true;
+        if (GuardianDataManager.hasGuardianData(owner.getUniqueId())) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(owner.getUniqueId());
+            if (guardianData.bazaarStorageIsEmpty()) {
+                if (customerGui.anyEmpty()) {
+                    itemStack = EconomyUtils.setShopPrice(itemStack, price);
+                    guardianData.addToBazaarStorage(itemStack);
+                    customerGui.addItem(itemStack);
+                    return true;
+                }
+            }
         }
         return false;
     }
 
+    public boolean removeItem(ItemStack itemStack) {
+        if (GuardianDataManager.hasGuardianData(owner.getUniqueId())) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(owner.getUniqueId());
+            if (getItemsOnSale().contains(itemStack)) {
+                guardianData.removeFromBazaarStorage(itemStack);
+                customerGui.removeItem(itemStack, 1);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<ItemStack> getItemsOnSale() {
+        List<ItemStack> itemsOnSale = new ArrayList<>();
+        for (int i = 0; i < 18; i++) {
+            if (customerGui.getItem(i) != null) {
+                ItemStack item = customerGui.getItem(i);
+                if (!item.getType().equals(Material.AIR)) {
+                    itemsOnSale.add(item);
+                }
+            }
+        }
+        return itemsOnSale;
+    }
+
     public boolean buyItem(Player buyer, ItemStack itemToBuy) {
         if (GuardianDataManager.hasGuardianData(owner.getUniqueId())) {
-            if (itemsToSell.contains(itemToBuy) && !buyer.equals(owner)) {
-                int price = EconomyUtils.getItemPrice(itemToBuy);
-                boolean isBought = EconomyUtils.buyItem(buyer, itemToBuy);
-                if (isBought) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(owner.getUniqueId());
+
+            if (getItemsOnSale().contains(itemToBuy) && !buyer.equals(owner)) {
+
+                boolean pay = EconomyUtils.pay(buyer, itemToBuy);
+                if (pay) {
+                    guardianData.removeFromBazaarStorage(itemToBuy);
+                    removeItem(itemToBuy);
+
+                    ItemStack clone = EconomyUtils.removeShopPrice(itemToBuy);
+                    InventoryUtils.giveItemToPlayer(buyer, clone);
+
+                    int price = EconomyUtils.getItemPrice(itemToBuy);
+                    moneyEarned += price;
+
                     List<Coin> coins = EconomyUtils.priceToCoins(price);
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(owner.getUniqueId());
                     for (Coin coin : coins) {
                         if (coin.getAmount() > 0) {
                             boolean addedToBazaarStorage = guardianData.addToBazaarStorage(coin.getCoin());
@@ -56,6 +99,7 @@ public class Bazaar {
                             }
                         }
                     }
+
                     owner.sendMessage(ChatColor.WHITE + buyer.getName() + ChatColor.GOLD + " purchased this item " + itemToBuy.getItemMeta().getDisplayName() +
                             ChatColor.GOLD + " from your bazaar. " +
                             ChatColor.GREEN + coins.get(0).getAmount() + " " + ChatColor.WHITE + coins.get(1).getAmount() + " " + ChatColor.YELLOW + coins.get(2).getAmount()
@@ -88,14 +132,16 @@ public class Bazaar {
         this.bazaarModel.setInvulnerable(true);
         this.bazaarModel.setGravity(false);
         this.bazaarModel.setRemoveWhenFarAway(false);
+
+        BazaarManager.putBazaarToPlayer(owner, bazaarModel);
     }
 
     public boolean isOpen() {
         return open;
     }
 
-    public void open() {
-        this.open = true;
+    public void setOpen(boolean isOpen) {
+        this.open = isOpen;
     }
 
     public void edit() {
@@ -104,7 +150,7 @@ public class Bazaar {
         }
         customers.clear();
 
-        GuiGeneric customerGui = new GuiGeneric(27, "Edit your bazaar", 0);
+        GuiGeneric customerGui = new GuiGeneric(27, ChatColor.GOLD + "Edit your bazaar", 0);
 
         ItemStack glassInfo = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
         ItemMeta itemMeta = glassInfo.getItemMeta();
@@ -126,42 +172,58 @@ public class Bazaar {
         ItemMeta redMeta = redWool.getItemMeta();
         redMeta.setDisplayName(ChatColor.RED + "Click to destroy your bazaar");
         redWool.setItemMeta(redMeta);
-        customerGui.setItem(25, glassInfo);
+        customerGui.setItem(18, redWool);
 
         ItemStack greenWool = new ItemStack(Material.LIME_WOOL);
         ItemMeta greenMeta = greenWool.getItemMeta();
         greenMeta.setDisplayName(ChatColor.GREEN + "Click to set up your bazaar");
         greenWool.setItemMeta(greenMeta);
-        customerGui.setItem(26, glassInfo);
+        customerGui.setItem(26, greenWool);
 
         int i = 0;
-        for (ItemStack itemStack : itemsToSell) {
+        for (ItemStack itemStack : getItemsOnSale()) {
             customerGui.setItem(i, itemStack);
             i++;
         }
+
+        setOpen(false);
+        customerGui.openInventory(owner);
     }
 
     public void showToCustomer(Player customer) {
         if (open) {
-            GuiGeneric customerGui = new GuiGeneric(27, owner.getName() + "'s bazaar", 0);
-
-            ItemStack glassInfo = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE, 1);
-            ItemMeta itemMeta = glassInfo.getItemMeta();
-
-            itemMeta.setDisplayName(ChatColor.GOLD + "Double click to buy an item");
-            glassInfo.setItemMeta(itemMeta);
-
-            for (int i = 18; i <= 26; i++) {
-                customerGui.setItem(i, glassInfo);
-            }
-
-            int i = 0;
-            for (ItemStack itemStack : itemsToSell) {
-                customerGui.setItem(i, itemStack);
-                i++;
-            }
             customerGui.openInventory(customer);
             customers.add(customer);
         }
+    }
+
+    public void remove() {
+        for (Player customer : customers) {
+            customer.closeInventory();
+        }
+        customers.clear();
+
+        BazaarManager.clearBazaarToPlayer(bazaarModel);
+        this.bazaarModel.remove();
+
+        this.open = false;
+    }
+
+    public void setUp() {
+        if (!getItemsOnSale().isEmpty()) {
+            if (this.bazaarModel == null) {
+                createModel();
+            }
+            setOpen(true);
+            owner.closeInventory();
+        }
+    }
+
+    public List<Player> getCustomers() {
+        return customers;
+    }
+
+    public int getMoneyEarned() {
+        return moneyEarned;
     }
 }

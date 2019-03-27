@@ -52,6 +52,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         getLogger().info("Starting GuardiansOfAdelia..");
 
         //register events
+        Bukkit.getPluginManager().registerEvents(new MyAsyncPlayerChatEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyChunkEvents(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityDamageByEntityEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityDamageEvent(), this);
@@ -64,6 +65,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MyItemDespawnEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyItemMergeEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyNPCRightClickEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyPlayerAnimationEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerDeathEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerDropItemEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerEggThrowEvent(), this);
@@ -115,6 +117,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
                 for (Guild guild : activeGuilds) {
                     DatabaseManager.writeGuildData(guild);
                 }
+                getLogger().info("Write current data to database");
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 60 * 5L, 20 * 60 * 5L);
 

@@ -88,9 +88,9 @@ public class TutorialQuests {
         quest4.addOnCompleteAction(teleportAction);
         quest4.addOnCompleteAction(clearPotionEffectAction);
         quest4.addOnCompleteAction(new SendTitleAction(ChatColor.YELLOW + "What **** happened?", ""));
-        quest4.addOnCompleteAction(new TutorialEndAction());
         quest4.addOnCompleteAction(new FinishQuestAction(4));
         quest4.addOnCompleteAction(new StartQuestAction(5));
+        quest4.addOnCompleteAction(new TutorialEndAction());
         QuestNPCManager.addQuest(quest4, 7, 0);
 
         //malephar to king of roumen

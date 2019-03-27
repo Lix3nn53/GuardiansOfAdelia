@@ -19,7 +19,7 @@ public class ShopLine implements GuiLine {
 
     public void addWord(ItemStack itemStack, int price) {
         if (itemList.size() < 9) {
-            itemStack = EconomyUtils.setItemPrice(itemStack, price);
+            itemStack = EconomyUtils.setShopPrice(itemStack, price);
             itemList.add(itemStack);
         }
     }

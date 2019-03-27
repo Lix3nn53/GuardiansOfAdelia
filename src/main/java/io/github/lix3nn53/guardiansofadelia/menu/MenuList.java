@@ -1,8 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.menu;
 
+import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
+import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -10,6 +15,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class MenuList {
 
@@ -287,9 +294,54 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric bazaar() {
+    public static GuiGeneric bazaar(Player player) {
         GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.GOLD + "Bazaar", 0);
 
+        ItemStack info = new ItemStack(Material.YELLOW_WOOL);
+        ItemMeta itemMeta = info.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.GOLD + "Your Bazaar");
+
+        boolean hasBazaar = false;
+        UUID uniqueId = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uniqueId)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+            if (guardianData.hasBazaar()) {
+                Bazaar bazaar = guardianData.getBazaar();
+                if (bazaar.isOpen()) {
+                    hasBazaar = true;
+                    List<String> lore = new ArrayList<>();
+                    lore.add("");
+                    lore.add(ChatColor.GREEN + "OPEN");
+                    lore.add("");
+                    lore.add(ChatColor.GOLD + "Money earned: " + EconomyUtils.priceToString(bazaar.getMoneyEarned()));
+                    lore.add("");
+                    lore.add(ChatColor.YELLOW + "Current Customers");
+                    for (Player customer : bazaar.getCustomers()) {
+                        lore.add(customer.getDisplayName());
+                    }
+                    itemMeta.setLore(lore);
+                }
+            }
+        }
+        if (!hasBazaar) {
+            itemMeta.setLore(new ArrayList() {{
+                add("");
+                add(ChatColor.GRAY + "CLOSED");
+            }});
+        }
+        info.setItemMeta(itemMeta);
+        guiGeneric.setItem(12, info);
+
+        ItemStack open = new ItemStack(Material.LIME_WOOL);
+        itemMeta.setDisplayName(ChatColor.GREEN + "Open/Edit your bazaar");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Set up a bazaar in your current location");
+            add("");
+            add(ChatColor.GRAY + "Edit your bazaar if you already have one");
+        }});
+        open.setItemMeta(itemMeta);
+        guiGeneric.setItem(14, open);
 
         return guiGeneric;
     }

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.gui;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -84,6 +85,10 @@ public class GuiGeneric implements Gui {
 
     public void setContents(ItemStack[] itemStacks) {
         this.inventory.setContents(itemStacks);
+    }
+
+    public void removeItem(ItemStack itemStack, int amount) {
+        InventoryUtils.removeItemFromInventory(this.inventory, itemStack, amount);
     }
 
     public void addItem(ItemStack itemStack) {

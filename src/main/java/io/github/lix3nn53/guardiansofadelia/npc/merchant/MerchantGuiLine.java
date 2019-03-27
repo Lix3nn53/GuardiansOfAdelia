@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
+import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiLine;
 import org.bukkit.inventory.ItemStack;
 
@@ -12,7 +13,7 @@ public class MerchantGuiLine implements GuiLine {
 
     public void addWord(ItemStack itemStack, int price) {
         if (isEmpty()) {
-            itemStack = MerchantManager.setShopPrice(itemStack, price);
+            itemStack = EconomyUtils.setShopPrice(itemStack, price);
             words.add(itemStack);
         }
     }

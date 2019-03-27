@@ -1,15 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 public class MerchantManager {
@@ -58,98 +51,6 @@ public class MerchantManager {
         setMerchant(28, new MerchantMenu(MerchantType.MAGIC_SHOP, 3, 28));
         setMerchant(37, new MerchantMenu(MerchantType.MAGIC_SHOP, 4, 37));
         setMerchant(44, new MerchantMenu(MerchantType.MAGIC_SHOP, 5, 44));
-    }
-
-    public static ItemStack setShopPrice(ItemStack itemStack, int price) {
-        int copper;
-        int silver = 0;
-        int gold = 0;
-        if (price > 63) {
-            copper = price % 64;
-            silver = price / 64;
-            if (silver > 63) {
-                silver = price % 64;
-                gold = price / 64;
-            }
-        } else {
-            copper = price;
-        }
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        List<String> lore = itemMeta.getLore();
-        String priceString = ChatColor.GREEN + Integer.toString(copper) + " " + ChatColor.WHITE + silver + " " +
-                ChatColor.YELLOW + gold;
-        lore.add(ChatColor.GOLD + "Price: " + priceString);
-        itemMeta.setLore(lore);
-        itemStack.setItemMeta(itemMeta);
-        itemStack = NBTTagUtils.putInteger("shopPrice", price, itemStack);
-        return itemStack;
-    }
-
-    public static ItemStack removeShopPrice(ItemStack itemStack) {
-        ItemStack clone = itemStack.clone();
-        ItemMeta itemMeta = clone.getItemMeta();
-        List<String> lore = itemMeta.getLore();
-        int size = lore.size();
-        lore.remove(size - 1);
-        itemMeta.setLore(lore);
-        clone.setItemMeta(itemMeta);
-        clone = NBTTagUtils.removeTag("shopPrice", clone);
-        return clone;
-    }
-
-    public static int getItemPrice(ItemStack itemStack) {
-        if (NBTTagUtils.hasTag(itemStack, "shopPrice")) {
-            return NBTTagUtils.getInteger(itemStack, "shopPrice");
-        }
-        return 0;
-    }
-
-    public static boolean pay(Player player, ItemStack itemStack) {
-        int copper;
-        int silver = 0;
-        int gold = 0;
-        int price = getItemPrice(itemStack);
-        if (price > 63) {
-            copper = price % 64;
-            silver = price / 64;
-            if (silver > 63) {
-                silver = price % 64;
-                gold = price / 64;
-            }
-        } else {
-            copper = price;
-        }
-        boolean payed = false;
-        boolean payed1 = false;
-        boolean payed2 = false;
-        if (copper > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.IRON_INGOT, copper)) {
-                payed = true;
-            }
-        } else {
-            payed = true;
-        }
-        if (silver > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.GOLD_INGOT, silver)) {
-                payed1 = true;
-            }
-        } else {
-            payed1 = true;
-        }
-        if (gold > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.DIAMOND, gold)) {
-                payed2 = true;
-            }
-        } else {
-            payed2 = true;
-        }
-        if (payed && payed1 && payed2) {
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.IRON_INGOT, copper);
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.GOLD_INGOT, silver);
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.DIAMOND, gold);
-            return true;
-        }
-        return false;
     }
 
     public static boolean onSellItemClick(Player player, int slot) {

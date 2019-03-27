@@ -1,6 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
+import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
+import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarCustomerGui;
+import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -41,12 +45,18 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
 import java.util.UUID;
 
 public class MyInventoryClickEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(InventoryClickEvent event) {
+        if (event.getCurrentItem() == null) return;
+        if (event.getCurrentItem().getType().equals(Material.AIR)) return;
+        if (!(event.getCurrentItem().hasItemMeta())) return;
+        if (!(event.getCurrentItem().getItemMeta().hasDisplayName())) return;
+
         Player player = (Player) event.getWhoClicked();
         UUID uuid = player.getUniqueId();
 
@@ -96,6 +106,27 @@ public class MyInventoryClickEvent implements Listener {
                         return;
                     }
                 }
+                if (!title.equals("Bazaar Storage")) {
+                    if (NBTTagUtils.hasTag(current, "shopPrice")) {
+                        boolean didClickBefore = MerchantManager.onSellItemClick(player, slot);
+                        if (didClickBefore) {
+                            if (activeGui instanceof BazaarCustomerGui) {
+                                BazaarCustomerGui bazaarCustomerGui = (BazaarCustomerGui) activeGui;
+                                Bazaar bazaar = bazaarCustomerGui.getBazaar();
+                                if (bazaar != null) {
+                                    bazaar.buyItem(player, current);
+                                }
+                            } else {
+                                boolean pay = EconomyUtils.pay(player, current);
+                                if (pay) {
+                                    ItemStack itemStack = EconomyUtils.removeShopPrice(current);
+                                    InventoryUtils.giveItemToPlayer(player, itemStack);
+                                }
+                            }
+                        }
+                        return;
+                    }
+                }
             }
 
             if (guardianData.hasActiveCharacter()) {
@@ -112,23 +143,6 @@ public class MyInventoryClickEvent implements Listener {
                 if (rpgCharacter != null) {
                     GuiGeneric guiGeneric = rpgCharacter.getRpgInventory().formRPGInventory(player);
                     guiGeneric.openInventory(player);
-                }
-            }
-            return;
-        }
-
-        if (event.getCurrentItem() == null) return;
-        if (event.getCurrentItem().getType().equals(Material.AIR)) return;
-        if (!(event.getCurrentItem().hasItemMeta())) return;
-        if (!(event.getCurrentItem().getItemMeta().hasDisplayName())) return;
-
-        if (NBTTagUtils.hasTag(current, "shopPrice")) {
-            boolean didClickBefore = MerchantManager.onSellItemClick(player, slot);
-            if (didClickBefore) {
-                boolean pay = MerchantManager.pay(player, current);
-                if (pay) {
-                    ItemStack itemStack = MerchantManager.removeShopPrice(current);
-                    InventoryUtils.giveItemToPlayer(player, itemStack);
                 }
             }
             return;
@@ -174,7 +188,7 @@ public class MyInventoryClickEvent implements Listener {
                 GuiGeneric minigames = MenuList.minigames();
                 minigames.openInventory(player);
             } else if (currentName.equals(ChatColor.YELLOW + "Bazaar")) {
-                GuiGeneric bazaar = MenuList.bazaar();
+                GuiGeneric bazaar = MenuList.bazaar(player);
                 bazaar.openInventory(player);
             } else if (currentName.equals(ChatColor.LIGHT_PURPLE + "Donation ♥")) {
                 player.closeInventory();
@@ -327,6 +341,75 @@ public class MyInventoryClickEvent implements Listener {
                         boolean change = rpgInventory.onShiftClick(current, player, slot, topInventory);
                     }
                 }
+            }
+        } else if (title.equals(ChatColor.GOLD + "Bazaar")) {
+            if (current.getType().equals(Material.LIME_WOOL)) {
+                if (guardianData != null) {
+                    if (guardianData.hasBazaar()) {
+                        Bazaar bazaar = guardianData.getBazaar();
+                        bazaar.edit();
+                    } else {
+                        Bazaar bazaar = new Bazaar(player);
+                        guardianData.setBazaar(bazaar);
+                        bazaar.edit();
+                    }
+                }
+            }
+        } else if (title.equals(ChatColor.GOLD + "Edit your bazaar")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                if (current.getType().equals(Material.LIME_WOOL)) {
+                    if (guardianData != null) {
+                        if (guardianData.hasBazaar()) {
+                            Bazaar bazaar = guardianData.getBazaar();
+                            bazaar.setUp();
+                        }
+                    }
+                } else if (current.getType().equals(Material.RED_WOOL)) {
+                    if (guardianData != null) {
+                        if (guardianData.hasBazaar()) {
+                            Bazaar bazaar = guardianData.getBazaar();
+                            bazaar.remove();
+                            guardianData.setBazaar(null);
+                            player.closeInventory();
+                            player.sendMessage(ChatColor.RED + "Removed your bazaar");
+                        }
+                    }
+                } else {
+                    if (guardianData != null) {
+                        if (guardianData.hasBazaar()) {
+                            Bazaar bazaar = guardianData.getBazaar();
+                            boolean isRemoved = bazaar.removeItem(current);
+                            if (isRemoved) {
+                                ItemStack itemStack = EconomyUtils.removeShopPrice(current);
+                                InventoryUtils.giveItemToPlayer(player, itemStack);
+                                bazaar.edit();
+                            }
+                        }
+                    }
+                }
+            } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+                BazaarManager.setPlayerSettingMoneyOfItem(player, current);
+                player.closeInventory();
+                player.sendMessage(ChatColor.GOLD + "Enter a price for item: " + currentName);
+                player.sendMessage(ChatColor.YELLOW + "(Enter a number to chat without '/' or anything)");
+            }
+        } else if (title.equals("Bazaar Storage")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                if (guardianData != null) {
+                    if (guardianData.hasBazaar()) {
+                        Bazaar bazaar = guardianData.getBazaar();
+                        List<ItemStack> itemsOnSale = bazaar.getItemsOnSale();
+                        if (itemsOnSale.contains(current)) {
+                            player.closeInventory();
+                            player.sendMessage(ChatColor.RED + "You can't get an item from bazaar storage which is on sale");
+                            return;
+                        }
+                    }
+                }
+                ItemStack removedShopPrice = EconomyUtils.removeShopPrice(current);
+                InventoryUtils.giveItemToPlayer(player, removedShopPrice);
+                clickedInventory.setItem(slot, new ItemStack(Material.AIR));
+
             }
         }
     }

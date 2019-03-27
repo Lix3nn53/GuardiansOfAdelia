@@ -65,6 +65,7 @@ public class MyChunkEvents implements Listener {
                     return true;
                 }*/
                 if (BazaarManager.isBazaar(chunkEntity)) {
+                    GuardiansOfAdelia.getInstance().getLogger().info("chunk entity is Bazaar");
                     return true;
                 } else {
                     //character selection holograms

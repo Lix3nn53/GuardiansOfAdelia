@@ -45,7 +45,6 @@ public class GuardianData {
 
     public GuardianData() {
         personalStorage.setLocked(false);
-        bazaarStorage.setLocked(false);
     }
 
     public RPGCharacter getActiveCharacter() {
@@ -163,6 +162,14 @@ public class GuardianData {
         return false;
     }
 
+    public boolean bazaarStorageIsEmpty() {
+        return this.bazaarStorage.anyEmpty();
+    }
+
+    public void removeFromBazaarStorage(ItemStack itemStack) {
+        this.bazaarStorage.removeItem(itemStack, 1);
+    }
+
     public void setTeleporting(boolean teleporting) {
         this.isTeleporting = teleporting;
     }
@@ -224,6 +231,10 @@ public class GuardianData {
 
     public void setBazaar(Bazaar bazaar) {
         this.bazaar = bazaar;
+    }
+
+    public boolean hasBazaar() {
+        return this.bazaar != null;
     }
 
     public List<Player> getFriends() {

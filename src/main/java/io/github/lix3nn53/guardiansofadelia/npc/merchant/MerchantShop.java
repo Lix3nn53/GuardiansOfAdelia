@@ -106,6 +106,11 @@ public enum MerchantShop {
 
     private GuiGeneric getBazaarStorageGui(Player player, int shopNpc) {
         GuiGeneric guiGeneric = new GuiGeneric(54, "Bazaar Storage", shopNpc);
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            return guardianData.getBazaarStorageGui();
+        }
         return guiGeneric;
     }
 

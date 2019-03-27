@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
@@ -50,6 +51,7 @@ public class DatabaseManager {
                     guardianData.setActiveCharacter(rpgCharacter, charNo);
                     player.teleport(location);
                     TablistUtils.updateTablist(player);
+                    InventoryUtils.setMenuItemPlayer(player);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

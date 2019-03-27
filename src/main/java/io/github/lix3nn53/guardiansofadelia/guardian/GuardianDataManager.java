@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian;
 
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
+import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -30,6 +31,10 @@ public class GuardianDataManager {
         if (hasGuardianData(uuid)) {
             GuardianData guardianData = getGuardianData(uuid);
             DatabaseManager.writeGuardianDataWithCurrentCharacter(player, guardianData);
+            if (guardianData.hasBazaar()) {
+                Bazaar bazaar = guardianData.getBazaar();
+                bazaar.remove();
+            }
         }
         onlineGuardians.remove(uuid);
     }

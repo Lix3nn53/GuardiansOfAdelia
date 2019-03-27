@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -57,7 +58,17 @@ public class TutorialEndAction implements Action {
                         player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 200, 4));
                         QuestNPCManager.setAllNpcHologramForPlayer(player);
                     }
-                }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 5L);
+                }.runTaskLater(GuardiansOfAdelia.getInstance(), 5L);
+
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        UUID uuid = player.getUniqueId();
+                        if (GuardianDataManager.hasGuardianData(uuid)) {
+                            DatabaseManager.writeGuardianDataWithCurrentCharacter(player, guardianData);
+                        }
+                    }
+                }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
             }
         }
     }
