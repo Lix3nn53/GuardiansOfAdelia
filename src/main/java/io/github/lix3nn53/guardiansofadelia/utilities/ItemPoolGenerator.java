@@ -69,6 +69,9 @@ public class ItemPoolGenerator {
             temp.add(Armors.getArmor(ArmorType.BOOTS, RPGClass.NO_CLASS, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         } else {
             for (RPGClass rpgClass : RPGClass.values()) {
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
+                }
                 temp.add(Armors.getArmor(ArmorType.HELMET, rpgClass, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
                 temp.add(Armors.getArmor(ArmorType.CHESTPLATE, rpgClass, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
                 temp.add(Armors.getArmor(ArmorType.LEGGINGS, rpgClass, gearLevel.getArmorNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));

@@ -134,4 +134,18 @@ public class InventoryUtils {
         menu.setItemMeta(im);
         player.getInventory().setItem(17, menu);
     }
+
+    public static boolean inventoryContains(Inventory inventory, Material mat, int amount) {
+        int count = 0;
+        ItemStack[] items = inventory.getContents();
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null && items[i].getType().equals(mat)) {
+                count += items[i].getAmount();
+            }
+            if (count >= amount) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

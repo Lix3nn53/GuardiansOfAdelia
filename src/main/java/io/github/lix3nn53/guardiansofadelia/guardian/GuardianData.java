@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.economy.trading.Trade;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
-import io.github.lix3nn53.guardiansofadelia.revive.PlayerGhost;
 import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -20,14 +19,11 @@ import java.util.Optional;
 
 public class GuardianData {
 
+    private final GuiGeneric personalStorage = new GuiGeneric(54, "Personal Storage", 0);
+    private final GuiGeneric bazaarStorage = new GuiGeneric(54, "Bazaar Storage", 0);
     private RPGCharacter activeCharacter;
     private int activeCharacterNo = 0;
-
     private Invite pendingInvite;
-
-    private GuiGeneric personalStorage = new GuiGeneric(54, "Personal Storage", 0);
-    private GuiGeneric bazaarStorageGui = new GuiGeneric(54, "Bazaar Storage", 0);
-
     private StaffRank staffRank = StaffRank.NONE;
     private List<Player> friends = new ArrayList<>();
 
@@ -45,9 +41,12 @@ public class GuardianData {
 
     private List<String> activeBuffCodes = new ArrayList<>();
 
-    private PlayerGhost playerGhost;
-
     private Bazaar bazaar;
+
+    public GuardianData() {
+        personalStorage.setLocked(false);
+        bazaarStorage.setLocked(false);
+    }
 
     public RPGCharacter getActiveCharacter() {
         return activeCharacter;
@@ -140,17 +139,25 @@ public class GuardianData {
     }
 
     public ItemStack[] getBazaarStorage() {
-        return bazaarStorageGui.getContents();
+        return bazaarStorage.getContents();
     }
 
     public void setBazaarStorage(ItemStack[] bazaarStorage) {
-        this.bazaarStorageGui.setContents(bazaarStorage);
+        this.bazaarStorage.setContents(bazaarStorage);
+    }
+
+    public GuiGeneric getPersonalStorageGui() {
+        return this.personalStorage;
+    }
+
+    public GuiGeneric getBazaarStorageGui() {
+        return this.bazaarStorage;
     }
 
     public boolean addToBazaarStorage(ItemStack itemStack) {
-        if (this.bazaarStorageGui.anyEmpty()) {
+        if (this.bazaarStorage.anyEmpty()) {
             //inventory has empty slot
-            this.bazaarStorageGui.addItem(itemStack);
+            this.bazaarStorage.addItem(itemStack);
             return true;
         }
         return false;
@@ -209,14 +216,6 @@ public class GuardianData {
 
     public void setPet(LivingEntity pet) {
         this.pet = pet;
-    }
-
-    public PlayerGhost getPlayerGhost() {
-        return playerGhost;
-    }
-
-    public void setPlayerGhost(PlayerGhost playerGhost) {
-        this.playerGhost = playerGhost;
     }
 
     public Bazaar getBazaar() {

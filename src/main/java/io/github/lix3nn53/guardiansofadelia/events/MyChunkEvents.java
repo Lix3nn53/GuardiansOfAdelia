@@ -6,7 +6,6 @@ import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.quests.QuestHologram;
-import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Chunk;
@@ -62,9 +61,10 @@ public class MyChunkEvents implements Listener {
             return true;
         } else if (chunkEntity.getType().equals(EntityType.ARMOR_STAND)) {
             if (chunkEntity.isCustomNameVisible()) {
-                if (TombManager.isTomb(chunkEntity)) {
+                /*if (TombManager.isTomb(chunkEntity)) {
                     return true;
-                } else if (BazaarManager.isBazaar(chunkEntity)) {
+                }*/
+                if (BazaarManager.isBazaar(chunkEntity)) {
                     return true;
                 } else {
                     //character selection holograms

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -21,5 +22,6 @@ public class MyInventoryCloseEvent implements Listener {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             guardianData.clearActiveGui();
         }
+        MerchantManager.clearSellItemClick(player);
     }
 }

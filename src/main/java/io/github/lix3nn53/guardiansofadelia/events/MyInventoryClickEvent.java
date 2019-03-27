@@ -7,12 +7,15 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
+import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantShop;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
@@ -72,12 +75,14 @@ public class MyInventoryClickEvent implements Listener {
                         int pageIndex = Integer.parseInt(split[1]) - 1;
                         pageIndex++;
                         guiBookGeneric.openInventoryPage(player, pageIndex);
+                        return;
                     } else if (slot == 45) {
                         //previous page
                         String[] split = title.split("Page-");
                         int pageIndex = Integer.parseInt(split[1]) - 1;
                         pageIndex--;
                         guiBookGeneric.openInventoryPage(player, pageIndex);
+                        return;
                     }
                 }
                 if (activeGui instanceof MerchantMenu) {
@@ -113,11 +118,21 @@ public class MyInventoryClickEvent implements Listener {
         }
 
         if (event.getCurrentItem() == null) return;
-        if (event.getCurrentItem().getType().equals(Material.AIR)
-                || event.getCurrentItem().getType().equals(Material.FEATHER)
-                || event.getCurrentItem().getType().equals(Material.IRON_HOE)) return;
+        if (event.getCurrentItem().getType().equals(Material.AIR)) return;
         if (!(event.getCurrentItem().hasItemMeta())) return;
         if (!(event.getCurrentItem().getItemMeta().hasDisplayName())) return;
+
+        if (NBTTagUtils.hasTag(current, "shopPrice")) {
+            boolean didClickBefore = MerchantManager.onSellItemClick(player, slot);
+            if (didClickBefore) {
+                boolean pay = MerchantManager.pay(player, current);
+                if (pay) {
+                    ItemStack itemStack = MerchantManager.removeShopPrice(current);
+                    InventoryUtils.giveItemToPlayer(player, itemStack);
+                }
+            }
+            return;
+        }
 
         String currentName = current.getItemMeta().getDisplayName();
         Inventory topInventory = event.getView().getTopInventory();

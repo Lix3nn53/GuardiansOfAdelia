@@ -37,6 +37,7 @@ public class OtherItems {
             add(ChatColor.GRAY + "Material collection tool");
         }});
         itemMeta.addEnchant(Enchantment.LURE, 3, false);
+        itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
         itemStack = NBTTagUtils.putInteger("durability", durability, itemStack);
         return itemStack;

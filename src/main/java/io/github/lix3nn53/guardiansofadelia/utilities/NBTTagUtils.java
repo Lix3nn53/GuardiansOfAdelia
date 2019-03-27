@@ -5,6 +5,8 @@ import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.utility.MinecraftReflection;
 import com.comphenix.protocol.wrappers.nbt.NbtCompound;
 import com.comphenix.protocol.wrappers.nbt.NbtFactory;
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class NBTTagUtils {
@@ -12,6 +14,12 @@ public class NBTTagUtils {
     public ProtocolManager pm = ProtocolLibrary.getProtocolManager();
 
     public static ItemStack putString(String key, String value, ItemStack item) {
+        if (item.getType().equals(Material.AIR)) {
+            GuardiansOfAdelia.getInstance().getLogger().info("AIR INTEGER");
+        }
+        if (item.getType().equals(Material.TRIDENT)) {
+            GuardiansOfAdelia.getInstance().getLogger().info("TRIDENT INTEGER");
+        }
         ItemStack ret = item.clone();
         ret = MinecraftReflection.getBukkitItemStack(ret);
         NbtCompound tag = (NbtCompound) NbtFactory.fromItemTag(MinecraftReflection.getBukkitItemStack(item));
@@ -59,7 +67,8 @@ public class NBTTagUtils {
     public static ItemStack putInteger(String key, int i, ItemStack item) {
         ItemStack ret = item.clone();
         ret = MinecraftReflection.getBukkitItemStack(ret);
-        NbtCompound tag = (NbtCompound) NbtFactory.fromItemTag(MinecraftReflection.getBukkitItemStack(item));
+        ItemStack bukkitItemStack = MinecraftReflection.getBukkitItemStack(item);
+        NbtCompound tag = (NbtCompound) NbtFactory.fromItemTag(bukkitItemStack);
         tag.put(key, i);
         NbtFactory.setItemTag(ret, tag);
         return ret;

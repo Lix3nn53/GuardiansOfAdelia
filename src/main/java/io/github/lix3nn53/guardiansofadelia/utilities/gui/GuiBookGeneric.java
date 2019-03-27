@@ -25,7 +25,7 @@ public class GuiBookGeneric implements GuiBook {
     }
 
     public GuiGeneric getPageInventory(int pageIndex) {
-        GuiGeneric pageGui = new GuiGeneric(54, name + " Crafting Page-" + (pageIndex + 1), resourceNpcNo);
+        GuiGeneric pageGui = new GuiGeneric(54, name + " Page-" + (pageIndex + 1), resourceNpcNo);
         if (pageIndex < pageList.size()) {
             if (pageIndex > 0) {
                 ItemStack previousPage = new ItemStack(Material.YELLOW_WOOL);

@@ -272,7 +272,6 @@ public class EntityList {
         } else if (mobcode.equals("forest3")) {
             Rabbit entity = (Rabbit) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Cursed Rabbit", 200D, EntityType.RABBIT);
             entity.setRabbitType(Rabbit.Type.THE_KILLER_BUNNY);
-            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(30D);
             entity.getEquipment().clear();
             return entity;
         } else if (mobcode.equals("forest4")) {

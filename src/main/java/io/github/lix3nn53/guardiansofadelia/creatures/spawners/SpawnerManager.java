@@ -94,7 +94,7 @@ public class SpawnerManager {
         return spawners;
     }
 
-    private static String getChunkKey(Location location) {
+    public static String getChunkKey(Location location) {
         World world = location.getWorld();
         if (world == null) return null;
         return world.getName() + "|" + (location.getBlockX() >> 4) + "," + (location.getBlockZ() >> 4);

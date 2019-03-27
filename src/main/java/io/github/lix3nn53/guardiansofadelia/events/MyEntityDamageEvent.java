@@ -13,7 +13,9 @@ public class MyEntityDamageEvent implements Listener {
     public void onEvent(EntityDamageEvent event) {
         if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player player = (Player) event.getEntity();
-
+            if (event.getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
+                player.setHealth(0);
+            }
         }
     }
 

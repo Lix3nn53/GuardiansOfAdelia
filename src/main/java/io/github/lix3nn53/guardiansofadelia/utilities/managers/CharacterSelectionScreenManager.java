@@ -133,4 +133,8 @@ public class CharacterSelectionScreenManager {
         }
         return null;
     }
+
+    public boolean isPlayerInCharSelection(Player player) {
+        return players.contains(player);
+    }
 }

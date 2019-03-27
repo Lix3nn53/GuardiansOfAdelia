@@ -190,7 +190,7 @@ public final class Quest {
 
             lore.add("");
             for (String st : story) {
-                lore.add(ChatColor.ITALIC.toString() + ChatColor.GRAY + st);
+                lore.add(ChatColor.ITALIC.toString() + ChatColor.YELLOW + st);
             }
             itemMeta.setLore(lore);
         }
