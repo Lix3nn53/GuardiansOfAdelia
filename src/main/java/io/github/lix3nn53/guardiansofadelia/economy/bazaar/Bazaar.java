@@ -27,10 +27,15 @@ public class Bazaar {
     private ArmorStand bazaarModel;
     private boolean open = false;
     private int moneyEarned = 0;
+    private Location baseLocation;
 
     public Bazaar(Player owner) {
         this.owner = owner;
         this.customerGui = new BazaarCustomerGui(owner);
+        this.baseLocation = owner.getLocation().clone();
+        this.baseLocation.setYaw(0f);
+        this.baseLocation.setPitch(0f);
+        BazaarManager.onBazaarCreate(this.baseLocation, this);
     }
 
     public boolean addItem(ItemStack itemStack, int price) {
@@ -114,9 +119,8 @@ public class Bazaar {
         return false;
     }
 
-    private void createModel() {
-        Location location = owner.getLocation();
-        this.bazaarModel = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
+    public void createModel() {
+        this.bazaarModel = (ArmorStand) baseLocation.getWorld().spawnEntity(baseLocation, EntityType.ARMOR_STAND);
         ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta instanceof Damageable) {
@@ -207,6 +211,8 @@ public class Bazaar {
         this.bazaarModel.remove();
 
         this.open = false;
+
+        BazaarManager.onBazaarRemove(this.baseLocation);
     }
 
     public void setUp() {

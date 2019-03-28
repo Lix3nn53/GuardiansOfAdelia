@@ -36,6 +36,7 @@ public class MyChunkEvents implements Listener {
             }
         }
         SpawnerManager.activateSpawnersOnChunk(chunk);
+        createCustomEntitiesOnChunkLoad(chunk);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -56,38 +57,10 @@ public class MyChunkEvents implements Listener {
         NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
         if (npcRegistry.isNPC(chunkEntity)) {
             if (isChunkLoad) {
+                //create quest icons
                 QuestNPCManager.onChunkLoad(chunkEntity);
             }
             return true;
-        } else if (chunkEntity.getType().equals(EntityType.ARMOR_STAND)) {
-            if (chunkEntity.isCustomNameVisible()) {
-                /*if (TombManager.isTomb(chunkEntity)) {
-                    return true;
-                }*/
-                if (BazaarManager.isBazaar(chunkEntity)) {
-                    GuardiansOfAdelia.getInstance().getLogger().info("chunk entity is Bazaar");
-                    return true;
-                } else {
-                    //character selection holograms
-                    if (GuardiansOfAdelia.getCharacterSelectionScreenManager() != null) {
-                        HashMap<Integer, List<ArmorStand>> characterNoToArmorStands = GuardiansOfAdelia.getCharacterSelectionScreenManager().getCharacterNoToArmorStands();
-                        for (int i : characterNoToArmorStands.keySet()) {
-                            List<ArmorStand> armorStands = characterNoToArmorStands.get(i);
-                            if (armorStands.contains(chunkEntity)) {
-                                return true;
-                            }
-                        }
-                    }
-                    //quest icon holograms
-                    Collection<QuestHologram> npcNoToHologram = QuestNPCManager.getNpcNoToHologram().values();
-                    for (QuestHologram questHologram : npcNoToHologram) {
-                        ArmorStand armorStand = questHologram.getHolo().getArmorStand();
-                        if (armorStand.equals(chunkEntity)) {
-                            return true;
-                        }
-                    }
-                }
-            }
         } else if (chunkEntity.getType().equals(EntityType.PLAYER) || chunkEntity.getType().equals(EntityType.ITEM_FRAME)
                 || chunkEntity.getType().equals(EntityType.PAINTING)) {
             return true;
@@ -95,6 +68,11 @@ public class MyChunkEvents implements Listener {
                 || chunkEntity.getType().equals(EntityType.DONKEY) || chunkEntity.getType().equals(EntityType.MULE)) {
             return PetManager.isPet(chunkEntity);
         } else return chunkEntity.getType().equals(EntityType.DROPPED_ITEM);
-        return false;
+    }
+
+    private void createCustomEntitiesOnChunkLoad(Chunk chunk) {
+        String chunkKey = SpawnerManager.getChunkKey(chunk.getBlock(0, 0, 0).getLocation());
+        //create bazaar models
+        BazaarManager.onChunkLoad(chunkKey);
     }
 }
