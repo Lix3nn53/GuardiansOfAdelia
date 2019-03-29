@@ -52,25 +52,46 @@ public class MyInventoryClickEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(InventoryClickEvent event) {
+        Inventory clickedInventory = event.getClickedInventory();
+        ItemStack cursor = event.getCursor();
+
+        Player player = (Player) event.getWhoClicked();
+        UUID uuid = player.getUniqueId();
+
+        GuardianData guardianData = null;
+        RPGCharacter rpgCharacter = null;
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            guardianData = GuardianDataManager.getGuardianData(uuid);
+
+            if (guardianData.hasActiveCharacter()) {
+                rpgCharacter = guardianData.getActiveCharacter();
+            }
+        }
+
+        //Open RPG-Inventory
+        if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.CRAFTING)) {
+            event.setCancelled(true);
+            if (cursor.getType().equals(Material.AIR)) {
+                if (rpgCharacter != null) {
+                    GuiGeneric guiGeneric = rpgCharacter.getRpgInventory().formRPGInventory(player);
+                    guiGeneric.openInventory(player);
+                }
+            }
+            return;
+        }
+
         if (event.getCurrentItem() == null) return;
         if (event.getCurrentItem().getType().equals(Material.AIR)) return;
         if (!(event.getCurrentItem().hasItemMeta())) return;
         if (!(event.getCurrentItem().getItemMeta().hasDisplayName())) return;
 
-        Player player = (Player) event.getWhoClicked();
-        UUID uuid = player.getUniqueId();
-
         Gui activeGui = null;
-        GuardianData guardianData = null;
-        RPGCharacter rpgCharacter = null;
 
         ItemStack current = event.getCurrentItem();
         String title = event.getView().getTitle();
         int slot = event.getSlot();
 
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            guardianData = GuardianDataManager.getGuardianData(uuid);
-
+        if (guardianData != null) {
             if (guardianData.hasActiveGui()) {
                 activeGui = guardianData.getActiveGui();
                 if (activeGui.isLocked()) {
@@ -128,24 +149,6 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-
-            if (guardianData.hasActiveCharacter()) {
-                rpgCharacter = guardianData.getActiveCharacter();
-            }
-        }
-
-        //Open RPG-Inventory
-        Inventory clickedInventory = event.getClickedInventory();
-        ItemStack cursor = event.getCursor();
-        if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.CRAFTING)) {
-            event.setCancelled(true);
-            if (cursor.getType().equals(Material.AIR)) {
-                if (rpgCharacter != null) {
-                    GuiGeneric guiGeneric = rpgCharacter.getRpgInventory().formRPGInventory(player);
-                    guiGeneric.openInventory(player);
-                }
-            }
-            return;
         }
 
         String currentName = current.getItemMeta().getDisplayName();

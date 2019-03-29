@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.database;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -239,46 +240,46 @@ public class DatabaseQueries {
                 rpgCharacter = new RPGCharacter();
                 RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
 
-                String itemString = resultSet.getString("off_hand");
+                String offHand = resultSet.getString("off_hand");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    player.getInventory().setItemInOffHand(ItemSerializer.restoreModdedItem(itemString));
+                    player.getInventory().setItemInOffHand(ItemSerializer.restoreModdedItem(offHand));
                 }
 
-                itemString = resultSet.getString("slot_parrot");
+                String parrot = resultSet.getString("slot_parrot");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setParrot(ItemSerializer.restoreModdedItem(itemString), player);
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setParrot(ItemSerializer.restoreModdedItem(parrot), player));
                 }
 
-                itemString = resultSet.getString("slot_necklace");
+                String necklace = resultSet.getString("slot_necklace");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setNecklace(ItemSerializer.restoreModdedItem(itemString), player);
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setNecklace(ItemSerializer.restoreModdedItem(necklace), player));
                 }
 
-                itemString = resultSet.getString("slot_ring");
+                String ring = resultSet.getString("slot_ring");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setRing(ItemSerializer.restoreModdedItem(itemString), player);
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setRing(ItemSerializer.restoreModdedItem(ring), player));
                 }
 
-                itemString = resultSet.getString("slot_earring");
+                String earring = resultSet.getString("slot_earring");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setEarring(ItemSerializer.restoreModdedItem(itemString), player);
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setEarring(ItemSerializer.restoreModdedItem(earring), player));
                 }
 
-                itemString = resultSet.getString("slot_glove");
+                String glove = resultSet.getString("slot_glove");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setGlove(ItemSerializer.restoreModdedItem(itemString), player);
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setGlove(ItemSerializer.restoreModdedItem(glove), player));
                 }
 
-                itemString = resultSet.getString("slot_pet");
+                String pet = resultSet.getString("slot_pet");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgInventory.setPet(ItemSerializer.restoreModdedItem(itemString), player);
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setPet(ItemSerializer.restoreModdedItem(pet), player));
                 }
 
                 String jobString = resultSet.getString("job_type");

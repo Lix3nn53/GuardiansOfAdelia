@@ -198,6 +198,9 @@ public enum MerchantShop {
 
         if (shopLevel == 1) {
             for (RPGClass rpgClass : RPGClass.values()) {
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
+                }
                 ItemStack weapon = Weapons.getWeapon(rpgClass, 1, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 1);
@@ -206,7 +209,12 @@ public enum MerchantShop {
                     lineIndex++;
                 }
             }
+            lines.add(new MerchantGuiLine());
+            lineIndex++;
             for (RPGClass rpgClass : RPGClass.values()) {
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
+                }
                 ItemStack weapon = Weapons.getWeapon(rpgClass, 2, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 2);
@@ -215,7 +223,12 @@ public enum MerchantShop {
                     lineIndex++;
                 }
             }
+            lines.add(new MerchantGuiLine());
+            lineIndex++;
             for (RPGClass rpgClass : RPGClass.values()) {
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
+                }
                 ItemStack weapon = Weapons.getWeapon(rpgClass, 3, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 3);
@@ -226,6 +239,9 @@ public enum MerchantShop {
             }
         } else if (shopLevel == 3) {
             for (RPGClass rpgClass : RPGClass.values()) {
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
+                }
                 ItemStack weapon = Weapons.getWeapon(rpgClass, 4, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 4);
@@ -234,7 +250,12 @@ public enum MerchantShop {
                     lineIndex++;
                 }
             }
+            lines.add(new MerchantGuiLine());
+            lineIndex++;
             for (RPGClass rpgClass : RPGClass.values()) {
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
+                }
                 ItemStack weapon = Weapons.getWeapon(rpgClass, 5, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 5);
@@ -243,7 +264,12 @@ public enum MerchantShop {
                     lineIndex++;
                 }
             }
+            lines.add(new MerchantGuiLine());
+            lineIndex++;
             for (RPGClass rpgClass : RPGClass.values()) {
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
+                }
                 ItemStack weapon = Weapons.getWeapon(rpgClass, 6, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 6);
@@ -254,6 +280,9 @@ public enum MerchantShop {
             }
         } else if (shopLevel == 4) {
             for (RPGClass rpgClass : RPGClass.values()) {
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
+                }
                 ItemStack weapon = Weapons.getWeapon(rpgClass, 7, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 7);
@@ -262,7 +291,12 @@ public enum MerchantShop {
                     lineIndex++;
                 }
             }
+            lines.add(new MerchantGuiLine());
+            lineIndex++;
             for (RPGClass rpgClass : RPGClass.values()) {
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
+                }
                 ItemStack weapon = Weapons.getWeapon(rpgClass, 8, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 8);
@@ -273,6 +307,9 @@ public enum MerchantShop {
             }
         } else if (shopLevel == 5) {
             for (RPGClass rpgClass : RPGClass.values()) {
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
+                }
                 ItemStack weapon = Weapons.getWeapon(rpgClass, 9, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 9);
@@ -281,7 +318,12 @@ public enum MerchantShop {
                     lineIndex++;
                 }
             }
+            lines.add(new MerchantGuiLine());
+            lineIndex++;
             for (RPGClass rpgClass : RPGClass.values()) {
+                if (rpgClass.equals(RPGClass.NO_CLASS)) {
+                    continue;
+                }
                 ItemStack weapon = Weapons.getWeapon(rpgClass, 10, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 10);

@@ -45,15 +45,17 @@ Please note that these features are for my personal server. It probably will not
   * Set up a bazaar to sell your items to other players.
   * Each bazaar has a model, players can left click this model to buy items from it.
   * Item on sale and money earned will be delivered to seller's bazaar-storage.
-* Guild
-  * TODO
-* Jobs
-  * TODO
-* Minigames
+* Trade
   * TODO
 * Party
   * TODO
-* Pets
+* Guild
   * TODO
 * Dungeons
+  * TODO
+* Minigames
+  * TODO
+* Jobs
+  * TODO
+* Pets
   * TODO

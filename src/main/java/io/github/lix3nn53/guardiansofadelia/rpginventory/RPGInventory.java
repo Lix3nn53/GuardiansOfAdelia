@@ -9,9 +9,12 @@ import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class RPGInventory {
 
@@ -134,6 +137,7 @@ public class RPGInventory {
         if (this.parrotSlot.doesFit(itemStack)) {
             this.parrotSlot.setItemOnSlot(itemStack);
             addBonusStats(player, itemStack);
+            manageShoulderEntity(player);
             return true;
         }
         return false;
@@ -305,6 +309,7 @@ public class RPGInventory {
             }
             change = setParrot(itemStack, player);
             topSlot = RPGSlotType.PARROT.getSlotNo();
+            manageShoulderEntity(player);
         } else if (earringSlot.doesFit(itemStack)) {
             if (!earringSlot.isEmpty()) {
                 oldItemOnSlot = earringSlot.getItemOnSlot();
@@ -385,6 +390,7 @@ public class RPGInventory {
                     player.setItemOnCursor(itemOnSlot);
                     topInventory.setItem(slot, cursor);
                     topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    manageShoulderEntity(player);
                     return true;
                 }
             } else {
@@ -393,6 +399,7 @@ public class RPGInventory {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
                     topInventory.setItem(slot, cursor);
                     topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    manageShoulderEntity(player);
                     return true;
                 }
             }
@@ -516,6 +523,7 @@ public class RPGInventory {
                 topInventory.setItem(slot, parrotSlot.getFillItem());
                 removeBonusStats(player, itemOnSlot);
                 topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                manageShoulderEntity(player);
                 return true;
             }
         } else if (slot == RPGSlotType.EARRING.getSlotNo()) {
@@ -600,6 +608,7 @@ public class RPGInventory {
             ItemStack itemOnSlot = parrotSlot.getItemOnSlot();
             removeBonusStats(player, itemOnSlot);
             parrotSlot.clearItemOnSlot();
+            manageShoulderEntity(player);
         }
         if (!earringSlot.isEmpty()) {
             ItemStack itemOnSlot = earringSlot.getItemOnSlot();
@@ -623,6 +632,28 @@ public class RPGInventory {
         }
         if (!petSlot.isEmpty()) {
             petSlot.clearItemOnSlot();
+        }
+    }
+
+    private void manageShoulderEntity(Player player) {
+        player.setShoulderEntityLeft(null);
+        if (!this.parrotSlot.isEmpty()) {
+            ItemStack itemOnSlot = this.parrotSlot.getItemOnSlot();
+            Parrot parrot = (Parrot) player.getWorld().spawnEntity(player.getLocation(), EntityType.PARROT);
+            ItemMeta itemMeta = itemOnSlot.getItemMeta();
+            String displayName = itemMeta.getDisplayName();
+
+            parrot.setVariant(Parrot.Variant.GRAY);
+            if (displayName.contains("Green")) {
+                parrot.setVariant(Parrot.Variant.GREEN);
+            } else if (displayName.contains("Blue")) {
+                parrot.setVariant(Parrot.Variant.BLUE);
+            } else if (displayName.contains("Red")) {
+                parrot.setVariant(Parrot.Variant.RED);
+            } else if (displayName.contains("LightBlue")) {
+                parrot.setVariant(Parrot.Variant.CYAN);
+            }
+            player.setShoulderEntityLeft(parrot);
         }
     }
 }

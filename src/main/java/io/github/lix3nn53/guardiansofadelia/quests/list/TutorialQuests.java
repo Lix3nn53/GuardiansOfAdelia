@@ -54,11 +54,11 @@ public class TutorialQuests {
 
         //elysea to syvia
         List<ItemStack> itemPrizes1 = new ArrayList<>();
-        itemPrizes1.add(PassiveItemList.get(5, RPGSlotType.PARROT, ItemTier.COMMON, "Tutorial", 10, 20, 2, ItemTier.COMMON.getBonusPercent()));
-        itemPrizes1.add(PassiveItemList.get(10, RPGSlotType.EARRING, ItemTier.COMMON, "Tutorial", 10, 20, 2, ItemTier.COMMON.getBonusPercent()));
-        itemPrizes1.add(PassiveItemList.get(10, RPGSlotType.GLOVE, ItemTier.COMMON, "Tutorial", 10, 20, 2, ItemTier.COMMON.getBonusPercent()));
-        itemPrizes1.add(PassiveItemList.get(10, RPGSlotType.RING, ItemTier.COMMON, "Tutorial", 10, 20, 2, ItemTier.COMMON.getBonusPercent()));
-        itemPrizes1.add(PassiveItemList.get(10, RPGSlotType.NECKLACE, ItemTier.COMMON, "Tutorial", 10, 20, 2, ItemTier.COMMON.getBonusPercent()));
+        itemPrizes1.add(PassiveItemList.get(5, RPGSlotType.PARROT, ItemTier.COMMON, "Tutorial", 10, 20, 2));
+        itemPrizes1.add(PassiveItemList.get(10, RPGSlotType.EARRING, ItemTier.COMMON, "Tutorial", 10, 20, 2));
+        itemPrizes1.add(PassiveItemList.get(10, RPGSlotType.GLOVE, ItemTier.COMMON, "Tutorial", 10, 20, 2));
+        itemPrizes1.add(PassiveItemList.get(10, RPGSlotType.RING, ItemTier.COMMON, "Tutorial", 10, 20, 2));
+        itemPrizes1.add(PassiveItemList.get(10, RPGSlotType.NECKLACE, ItemTier.COMMON, "Tutorial", 10, 20, 2));
         List<String> story3 = new ArrayList<>();
         story3.add("Syvia found Malephar, the darkness returns?");
         List<Task> tasks3 = new ArrayList<>();

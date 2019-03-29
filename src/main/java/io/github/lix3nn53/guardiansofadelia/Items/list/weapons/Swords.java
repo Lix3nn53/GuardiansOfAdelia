@@ -34,13 +34,13 @@ class Swords {
             itemID = 503;
         } else if (placementNumber == 4) {
             name = "Broad Sword";
-            durability = 7;
+            durability = 2;
             level = 30;
             damage = 168;
             itemID = 504;
         } else if (placementNumber == 5) {
             name = "Heroic Sword";
-            durability = 2;
+            durability = 7;
             level = 40;
             damage = 228;
             itemID = 505;
