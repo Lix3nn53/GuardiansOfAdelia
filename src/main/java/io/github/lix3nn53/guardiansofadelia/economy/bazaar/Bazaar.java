@@ -149,10 +149,11 @@ public class Bazaar {
     }
 
     public void edit() {
-        for (Player customer : customers) {
+        List<Player> copy = new ArrayList<>();
+        copy.addAll(customers);
+        for (Player customer : copy) {
             customer.closeInventory();
         }
-        customers.clear();
 
         GuiGeneric customerGui = new GuiGeneric(27, ChatColor.GOLD + "Edit your bazaar", 0);
 
@@ -202,10 +203,11 @@ public class Bazaar {
     }
 
     public void remove() {
-        for (Player customer : customers) {
+        List<Player> copy = new ArrayList<>();
+        copy.addAll(customers);
+        for (Player customer : copy) {
             customer.closeInventory();
         }
-        customers.clear();
 
         BazaarManager.clearBazaarToPlayer(bazaarModel);
         this.bazaarModel.remove();
@@ -231,5 +233,9 @@ public class Bazaar {
 
     public int getMoneyEarned() {
         return moneyEarned;
+    }
+
+    public void removeCustomer(Player player) {
+        customers.remove(player);
     }
 }

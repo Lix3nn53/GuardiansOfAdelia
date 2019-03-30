@@ -222,7 +222,7 @@ public class TradeGui extends GuiGeneric {
         setItem(4, status);
         setItem(13, status);
         setItem(22, status);
-        
+
         //right side first part (guide for owner)
         ItemStack middle = new ItemStack(Material.RED_STAINED_GLASS_PANE);
         ItemMeta middleItemMeta = middle.getItemMeta();

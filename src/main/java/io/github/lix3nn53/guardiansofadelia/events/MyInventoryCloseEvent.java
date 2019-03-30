@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
+import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarCustomerGui;
 import io.github.lix3nn53.guardiansofadelia.economy.trading.Trade;
 import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeGui;
 import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeManager;
@@ -35,6 +36,12 @@ public class MyInventoryCloseEvent implements Listener {
                         Player otherPlayer = trade.getOtherPlayer(player);
                         TradeManager.removeTrade(player, otherPlayer);
                         otherPlayer.closeInventory();
+                    }
+                } else if (activeGui instanceof BazaarCustomerGui) {
+                    BazaarCustomerGui bazaarCustomerGui = (BazaarCustomerGui) activeGui;
+                    Bazaar bazaar = bazaarCustomerGui.getBazaar();
+                    if (bazaar != null) {
+                        bazaar.removeCustomer(player);
                     }
                 } else if (guardianData.hasBazaar()) {
                     String title = event.getView().getTitle();

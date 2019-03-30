@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
@@ -8,9 +9,12 @@ import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +24,15 @@ public class GuardianData {
 
     private final GuiGeneric personalStorage = new GuiGeneric(54, "Personal Storage", 0);
     private final GuiGeneric bazaarStorage = new GuiGeneric(54, "Bazaar Storage", 0);
+
     private RPGCharacter activeCharacter;
     private int activeCharacterNo = 0;
+
     private Invite pendingInvite;
+    private BukkitTask inviteTimeoutTask;
+
     private StaffRank staffRank = StaffRank.NONE;
+
     private List<Player> friends = new ArrayList<>();
 
     private Guild guild;
@@ -105,14 +114,31 @@ public class GuardianData {
 
     public void clearPendingInvite() {
         this.pendingInvite = null;
+        if (this.inviteTimeoutTask != null) {
+            this.inviteTimeoutTask.cancel();
+        }
     }
 
     public Invite getPendingInvite() {
         return pendingInvite;
     }
 
-    public void setPendingInvite(Invite pendingInvite) {
+    public void setPendingInvite(Invite pendingInvite, Player receiver) {
         this.pendingInvite = pendingInvite;
+
+        if (this.inviteTimeoutTask != null) {
+            this.inviteTimeoutTask.cancel();
+        }
+        this.inviteTimeoutTask = new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                if (hasPendingInvite()) {
+                    clearPendingInvite();
+                    receiver.sendMessage(ChatColor.RED + "Invite timeout");
+                }
+            }
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20L * 30);
     }
 
     public ItemStack[] getPersonalStorage() {

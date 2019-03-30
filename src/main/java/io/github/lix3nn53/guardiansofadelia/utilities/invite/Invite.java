@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.invite;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import net.md_5.bungee.api.ChatColor;
@@ -9,7 +8,6 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class Invite {
 
@@ -58,15 +56,7 @@ public class Invite {
             messageMain.addExtra(messageReject);
             receiver.spigot().sendMessage(messageMain);
 
-            receiverData.setPendingInvite(this);
-            new BukkitRunnable() {
-
-                @Override
-                public void run() {
-                    receiverData.clearPendingInvite();
-                    receiver.sendMessage("Invite timeout");
-                }
-            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 30);
+            receiverData.setPendingInvite(this, receiver);
         } else {
             sender.sendMessage(ChatColor.RED + receiver.getName() + " is answering another invite");
         }
