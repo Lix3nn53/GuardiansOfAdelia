@@ -24,6 +24,7 @@ public class MyChunkEvents implements Listener {
             if (shouldChunkEventRemove(chunkEntity)) {
                 SpawnerManager.onMobDeath(chunkEntity);
                 chunkEntity.remove();
+            } else {
                 createQuestIconBase(chunkEntity);
             }
         }
@@ -45,12 +46,13 @@ public class MyChunkEvents implements Listener {
     }
 
     private boolean shouldChunkEventRemove(Entity chunkEntity) {
-        EntityType type = chunkEntity.getType();
-        if (type.equals(EntityType.PLAYER) || type.equals(EntityType.ITEM_FRAME)
-                || type.equals(EntityType.PAINTING) || type.equals(EntityType.DROPPED_ITEM)) {
+        NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
+        if (npcRegistry.isNPC(chunkEntity)) {
             return false;
         }
-        return true;
+        EntityType type = chunkEntity.getType();
+        return !type.equals(EntityType.PLAYER) && !type.equals(EntityType.ITEM_FRAME)
+                && !type.equals(EntityType.PAINTING) && !type.equals(EntityType.DROPPED_ITEM);
     }
 
     private void createCustomEntitiesOnChunkLoad(Chunk chunk) {

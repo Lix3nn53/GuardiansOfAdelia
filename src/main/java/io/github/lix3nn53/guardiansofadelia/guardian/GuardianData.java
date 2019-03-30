@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian;
 
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
-import io.github.lix3nn53.guardiansofadelia.economy.trading.Trade;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
@@ -30,7 +29,6 @@ public class GuardianData {
     private Guild guild;
     private Party party;
 
-    private Trade trade;
     private Gui activeGui;
 
     private LivingEntity pet;
@@ -85,22 +83,6 @@ public class GuardianData {
         this.party = party;
     }
 
-    public boolean isTrading() {
-        return this.trade != null;
-    }
-
-    public void removeTrade() {
-        this.trade = null;
-    }
-
-    public Trade getTrade() {
-        return this.trade;
-    }
-
-    public void setTrade(Trade trade) {
-        this.trade = trade;
-    }
-
     public boolean isInGuild() {
         return this.guild != null;
     }
@@ -121,12 +103,16 @@ public class GuardianData {
         return this.pendingInvite != null;
     }
 
-    public void setPendingInvite(Invite pendingInvite) {
-        this.pendingInvite = pendingInvite;
-    }
-
     public void clearPendingInvite() {
         this.pendingInvite = null;
+    }
+
+    public Invite getPendingInvite() {
+        return pendingInvite;
+    }
+
+    public void setPendingInvite(Invite pendingInvite) {
+        this.pendingInvite = pendingInvite;
     }
 
     public ItemStack[] getPersonalStorage() {

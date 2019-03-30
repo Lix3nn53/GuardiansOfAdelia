@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.economy.bazaar;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;

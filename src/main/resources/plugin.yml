@@ -22,6 +22,18 @@ commands:
       - g
     permission: guardian.player
     permission-message: You do not have permission!
+  invite:
+    description: Invite command
+    aliases:
+      - i
+    permission: guardian.player
+    permission-message: You do not have permission!
+  trade:
+    description: Trade command
+    aliases:
+      - t
+    permission: guardian.player
+    permission-message: You do not have permission!
   lix:
     description: Admin command
     aliases:

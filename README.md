@@ -46,7 +46,10 @@ Please note that these features are for my personal server. It probably will not
   * Each bazaar has a model, players can left click this model to buy items from it.
   * Item on sale and money earned will be delivered to seller's bazaar-storage.
 * Trade
-  * TODO
+  * Invite a player to trade. If he/she accepts a Trade-Gui will open for both players.
+  * Add/remove items you will give to other player. Also you can see which items you will receive from other player.
+  * Lock the trade. Once locked players can't add/remove items.
+  * Accept the trade. When both players accept the trade finishes and items on Trade-Gui gets traded.
 * Party
   * TODO
 * Guild

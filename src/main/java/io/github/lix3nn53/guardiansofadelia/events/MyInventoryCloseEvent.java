@@ -1,9 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
+import io.github.lix3nn53.guardiansofadelia.economy.trading.Trade;
+import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeGui;
+import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,16 +26,26 @@ public class MyInventoryCloseEvent implements Listener {
 
         if (GuardianDataManager.hasGuardianData(uuid)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-            if (guardianData.hasBazaar()) {
-                if (guardianData.hasActiveGui()) {
+            if (guardianData.hasActiveGui()) {
+                Gui activeGui = guardianData.getActiveGui();
+
+                if (activeGui instanceof TradeGui) {
+                    if (TradeManager.hasTrade(player)) {
+                        Trade trade = TradeManager.getTrade(player);
+                        Player otherPlayer = trade.getOtherPlayer(player);
+                        TradeManager.removeTrade(player, otherPlayer);
+                        otherPlayer.closeInventory();
+                    }
+                } else if (guardianData.hasBazaar()) {
                     String title = event.getView().getTitle();
                     if (title.equals(ChatColor.GOLD + "Edit your bazaar")) {
                         Bazaar bazaar = guardianData.getBazaar();
                         bazaar.setOpen(true);
                     }
                 }
+
+                guardianData.clearActiveGui();
             }
-            guardianData.clearActiveGui();
         }
         MerchantManager.clearSellItemClick(player);
     }

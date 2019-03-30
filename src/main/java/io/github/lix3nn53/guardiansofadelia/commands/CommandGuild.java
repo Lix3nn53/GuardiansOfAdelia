@@ -106,7 +106,10 @@ public class CommandGuild implements CommandExecutor {
                                 Guild guild = playerData.getGuild();
                                 PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
                                 if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
-                                    GuildInvite invite = new GuildInvite(player, player2);
+                                    String receiverMessage = ChatColor.DARK_PURPLE + sender.getName() + " invites you to " + playerData.getGuild().getName() + " guild";
+                                    String receiverTitle = ChatColor.DARK_PURPLE + "Received guild invitation";
+                                    String senderTitle = ChatColor.DARK_PURPLE + "Sent guild invitation";
+                                    GuildInvite invite = new GuildInvite(player, player2, senderTitle, receiverMessage, receiverTitle);
                                     invite.send();
                                 } else {
                                     player.sendMessage(ChatColor.RED + "You must be guild leader or commander to invite players to guild");

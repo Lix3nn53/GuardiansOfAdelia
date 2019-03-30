@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.Items.list.weapons;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class Weapons {

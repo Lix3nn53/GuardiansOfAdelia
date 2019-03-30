@@ -5,6 +5,9 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarCustomerGui;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
+import io.github.lix3nn53.guardiansofadelia.economy.trading.Trade;
+import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeGui;
+import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -115,8 +118,7 @@ public class MyInventoryClickEvent implements Listener {
                         guiBookGeneric.openInventoryPage(player, pageIndex);
                         return;
                     }
-                }
-                if (activeGui instanceof MerchantMenu) {
+                } else if (activeGui instanceof MerchantMenu) {
                     MerchantMenu merchantMenu = (MerchantMenu) activeGui;
                     if (merchantMenu.isButton(current)) {
                         MerchantShop buttonShop = merchantMenu.getButtonShop(current);
@@ -125,6 +127,21 @@ public class MyInventoryClickEvent implements Listener {
                         Gui gui = buttonShop.getGui(merchantMenu.getResourceNPC(), player, shopLevel);
                         gui.openInventory(player);
                         return;
+                    }
+                } else if (activeGui instanceof TradeGui) {
+                    if (TradeManager.hasTrade(player)) {
+                        Trade trade = TradeManager.getTrade(player);
+                        if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                            if (current.getType().equals(Material.LIME_WOOL)) {
+                                trade.accept(player);
+                            } else if (current.getType().equals(Material.YELLOW_WOOL)) {
+                                trade.lock();
+                            } else if ((slot > 4 && slot < 9) || (slot > 13 && slot < 18)) {
+                                trade.removeItemFromTrade(player, slot);
+                            }
+                        } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+                            trade.addItem(player, slot);
+                        }
                     }
                 }
                 if (!title.equals("Bazaar Storage")) {

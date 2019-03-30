@@ -1,7 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia;
 
 import io.github.lix3nn53.guardiansofadelia.commands.CommandGuild;
+import io.github.lix3nn53.guardiansofadelia.commands.CommandInvite;
 import io.github.lix3nn53.guardiansofadelia.commands.CommandLix;
+import io.github.lix3nn53.guardiansofadelia.commands.CommandTrade;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.events.*;
@@ -79,6 +81,8 @@ public class GuardiansOfAdelia extends JavaPlugin {
         //set command executors
         this.getCommand("guild").setExecutor(new CommandGuild());
         this.getCommand("lix").setExecutor(new CommandLix());
+        this.getCommand("invite").setExecutor(new CommandInvite());
+        this.getCommand("trade").setExecutor(new CommandTrade());
 
         for (World w : Bukkit.getServer().getWorlds()) {
             w.setDifficulty(Difficulty.HARD);
