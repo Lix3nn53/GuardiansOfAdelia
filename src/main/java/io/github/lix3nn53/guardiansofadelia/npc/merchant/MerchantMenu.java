@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MerchantMenu extends GuiGeneric {
 
-    private final HashMap<ItemStack, MerchantShop> itemToButton = new HashMap<>();
+    private final HashMap<ItemStack, MerchantPageType> itemToButton = new HashMap<>();
 
     public MerchantMenu(MerchantType merchantType, int merchantLevel, int npcNo) {
         super(27, merchantType.getName() + " #" + merchantLevel, npcNo);
@@ -27,7 +27,7 @@ public class MerchantMenu extends GuiGeneric {
                 add(ChatColor.YELLOW + "Sell your item for coins");
             }});
             sellItem.setItemMeta(statusItemMeta);
-            setItem(nextSlotNo, sellItem, MerchantShop.SELL);
+            setItem(nextSlotNo, sellItem, MerchantPageType.SELL);
             nextSlotNo += 2;
         }
         if (merchantType.canCoinConvert()) {
@@ -40,7 +40,7 @@ public class MerchantMenu extends GuiGeneric {
                 add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
             }});
             coinConvertItem.setItemMeta(statusItemMeta);
-            setItem(nextSlotNo, coinConvertItem, MerchantShop.CONVERT);
+            setItem(nextSlotNo, coinConvertItem, MerchantPageType.CONVERT);
         }
 
         if (merchantType.equals(MerchantType.BLACKSMITH)) {
@@ -51,7 +51,7 @@ public class MerchantMenu extends GuiGeneric {
             lore.add("");
             itemMeta.setLore(lore);
             weapons.setItemMeta(itemMeta);
-            setItem(18, weapons, MerchantShop.WEAPON);
+            setItem(18, weapons, MerchantPageType.WEAPON);
 
             ItemStack armors = new ItemStack(Material.LIGHT_BLUE_WOOL);
             itemMeta.setDisplayName("Armors");
@@ -59,7 +59,7 @@ public class MerchantMenu extends GuiGeneric {
             lore2.add("");
             itemMeta.setLore(lore2);
             armors.setItemMeta(itemMeta);
-            setItem(20, armors, MerchantShop.ARMOR);
+            setItem(20, armors, MerchantPageType.ARMOR);
 
             ItemStack shields = new ItemStack(Material.CYAN_WOOL);
             itemMeta.setDisplayName("Shields");
@@ -67,7 +67,7 @@ public class MerchantMenu extends GuiGeneric {
             lore3.add("");
             itemMeta.setLore(lore3);
             shields.setItemMeta(itemMeta);
-            setItem(22, shields, MerchantShop.SHIELD);
+            setItem(22, shields, MerchantPageType.SHIELD);
 
             ItemStack enchant = new ItemStack(Material.DIAMOND_BLOCK);
             itemMeta = enchant.getItemMeta();
@@ -76,7 +76,7 @@ public class MerchantMenu extends GuiGeneric {
             lore1.add("Strengthen your items with magical stones!");
             itemMeta.setLore(lore1);
             enchant.setItemMeta(itemMeta);
-            setItem(24, enchant, MerchantShop.ENCHANT);
+            setItem(24, enchant, MerchantPageType.ENCHANT);
         } else if (merchantType.equals(MerchantType.STORAGE_KEEPER)) {
             ItemStack personal = new ItemStack(Material.YELLOW_WOOL);
             ItemMeta itemMeta = personal.getItemMeta();
@@ -85,7 +85,7 @@ public class MerchantMenu extends GuiGeneric {
             lore.add("");
             itemMeta.setLore(lore);
             personal.setItemMeta(itemMeta);
-            setItem(18, personal, MerchantShop.PERSONAL_STORAGE);
+            setItem(18, personal, MerchantPageType.PERSONAL_STORAGE);
 
             ItemStack guild = new ItemStack(Material.PURPLE_WOOL);
             itemMeta.setDisplayName("Guild Storage");
@@ -93,7 +93,7 @@ public class MerchantMenu extends GuiGeneric {
             lore2.add("");
             itemMeta.setLore(lore2);
             guild.setItemMeta(itemMeta);
-            setItem(20, guild, MerchantShop.GUILD_STORAGE);
+            setItem(20, guild, MerchantPageType.GUILD_STORAGE);
 
             ItemStack bazaar = new ItemStack(Material.LIGHT_BLUE_WOOL);
             itemMeta.setDisplayName("Bazaar Storage");
@@ -101,7 +101,7 @@ public class MerchantMenu extends GuiGeneric {
             lore3.add("");
             itemMeta.setLore(lore3);
             bazaar.setItemMeta(itemMeta);
-            setItem(22, bazaar, MerchantShop.BAZAAR_STORAGE);
+            setItem(22, bazaar, MerchantPageType.BAZAAR_STORAGE);
         } else if (merchantType.equals(MerchantType.MAGIC_SHOP)) {
             ItemStack weapons = new ItemStack(Material.MAGENTA_WOOL);
             ItemMeta itemMeta = weapons.getItemMeta();
@@ -110,7 +110,7 @@ public class MerchantMenu extends GuiGeneric {
             lore.add("");
             itemMeta.setLore(lore);
             weapons.setItemMeta(itemMeta);
-            setItem(18, weapons, MerchantShop.POTIONS);
+            setItem(18, weapons, MerchantPageType.POTIONS);
 
             ItemStack armors = new ItemStack(Material.LIGHT_BLUE_WOOL);
             itemMeta.setDisplayName("Teleport Scrolls");
@@ -118,7 +118,7 @@ public class MerchantMenu extends GuiGeneric {
             lore2.add("");
             itemMeta.setLore(lore2);
             armors.setItemMeta(itemMeta);
-            setItem(20, armors, MerchantShop.TP_SCROLL);
+            setItem(20, armors, MerchantPageType.TP_SCROLL);
         } else if (merchantType.equals(MerchantType.TOOL_SHOP)) {
             ItemStack weapons = new ItemStack(Material.YELLOW_WOOL);
             ItemMeta itemMeta = weapons.getItemMeta();
@@ -127,7 +127,7 @@ public class MerchantMenu extends GuiGeneric {
             lore.add("");
             itemMeta.setLore(lore);
             weapons.setItemMeta(itemMeta);
-            setItem(18, weapons, MerchantShop.TOOL);
+            setItem(18, weapons, MerchantPageType.TOOL);
 
             ItemStack armors = new ItemStack(Material.MAGENTA_WOOL);
             itemMeta.setDisplayName("Utility");
@@ -135,7 +135,7 @@ public class MerchantMenu extends GuiGeneric {
             lore2.add("");
             itemMeta.setLore(lore2);
             armors.setItemMeta(itemMeta);
-            setItem(20, armors, MerchantShop.UTILITY);
+            setItem(20, armors, MerchantPageType.UTILITY);
         } else if (merchantType.equals(MerchantType.PET_SHOP)) {
             ItemStack weapons = new ItemStack(Material.YELLOW_WOOL);
             ItemMeta itemMeta = weapons.getItemMeta();
@@ -144,7 +144,7 @@ public class MerchantMenu extends GuiGeneric {
             lore.add("");
             itemMeta.setLore(lore);
             weapons.setItemMeta(itemMeta);
-            setItem(18, weapons, MerchantShop.COMPANION);
+            setItem(18, weapons, MerchantPageType.COMPANION);
 
             ItemStack armors = new ItemStack(Material.PURPLE_WOOL);
             itemMeta.setDisplayName("Mounts");
@@ -152,11 +152,11 @@ public class MerchantMenu extends GuiGeneric {
             lore2.add("");
             itemMeta.setLore(lore2);
             armors.setItemMeta(itemMeta);
-            setItem(20, armors, MerchantShop.MOUNT);
+            setItem(20, armors, MerchantPageType.MOUNT);
         }
     }
 
-    public void setItem(int index, ItemStack item, MerchantShop button) {
+    public void setItem(int index, ItemStack item, MerchantPageType button) {
         super.setItem(index, item);
         this.itemToButton.put(item, button);
     }
@@ -165,7 +165,7 @@ public class MerchantMenu extends GuiGeneric {
         return this.itemToButton.containsKey(itemStack);
     }
 
-    public MerchantShop getButtonShop(ItemStack itemStack) {
+    public MerchantPageType getButtonShop(ItemStack itemStack) {
         return this.itemToButton.get(itemStack);
     }
 }

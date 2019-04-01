@@ -16,7 +16,8 @@ import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
-import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantShop;
+import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantPageType;
+import io.github.lix3nn53.guardiansofadelia.npc.merchant.SellGui;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
@@ -121,7 +122,7 @@ public class MyInventoryClickEvent implements Listener {
                 } else if (activeGui instanceof MerchantMenu) {
                     MerchantMenu merchantMenu = (MerchantMenu) activeGui;
                     if (merchantMenu.isButton(current)) {
-                        MerchantShop buttonShop = merchantMenu.getButtonShop(current);
+                        MerchantPageType buttonShop = merchantMenu.getButtonShop(current);
                         String[] split = title.split("#");
                         int shopLevel = Integer.parseInt(split[1]);
                         Gui gui = buttonShop.getGui(merchantMenu.getResourceNPC(), player, shopLevel);
@@ -142,6 +143,17 @@ public class MyInventoryClickEvent implements Listener {
                         } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
                             trade.addItem(player, slot);
                         }
+                    }
+                } else if (activeGui instanceof SellGui) {
+                    SellGui sellGui = (SellGui) activeGui;
+                    if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                        if (current.getType().equals(Material.LIME_WOOL)) {
+                            sellGui.confirm();
+                        } else if (current.getType().equals(Material.YELLOW_WOOL)) {
+                            sellGui.finish(player);
+                        }
+                    } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+                        sellGui.addItemToSell(current, slot);
                     }
                 }
                 if (!title.equals("Bazaar Storage")) {

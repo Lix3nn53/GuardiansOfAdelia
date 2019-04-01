@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
 import org.bukkit.ChatColor;
 
-enum MerchantType {
+public enum MerchantType {
     BLACKSMITH,
     STORAGE_KEEPER,
     MAGIC_SHOP,

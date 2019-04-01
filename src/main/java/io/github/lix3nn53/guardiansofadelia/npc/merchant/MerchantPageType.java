@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public enum MerchantShop {
+public enum MerchantPageType {
     SELL,
     CONVERT,
     PERSONAL_STORAGE,
@@ -79,9 +79,8 @@ public enum MerchantShop {
         return new GuiGeneric(9, "ERROR", resourceNpc);
     }
 
-    private GuiGeneric getSellGui(int shopNpc) {
-        GuiGeneric guiGeneric = new GuiGeneric(54, "Sell Items", shopNpc);
-        return guiGeneric;
+    private SellGui getSellGui(int shopNpc) {
+        return new SellGui(shopNpc);
     }
 
     private GuiGeneric getConverGui(int shopNpc) {

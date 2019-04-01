@@ -296,10 +296,10 @@ public final class Quest {
                 InventoryUtils.giveItemToPlayer(player, itemStack);
             }
         }
-        if (getExpPrize() != 0) {
+        if (getExpPrize() > 0) {
             SkillAPIUtils.giveQuestExp(player, getExpPrize());
         }
-        if (getMoneyPrize() != 0) {
+        if (getMoneyPrize() > 0) {
             List<Coin> coins = EconomyUtils.priceToCoins(getMoneyPrize());
             for (Coin coin : coins) {
                 InventoryUtils.giveItemToPlayer(player, coin.getCoin());
