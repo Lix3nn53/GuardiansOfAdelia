@@ -19,12 +19,6 @@ public class CommandTrade implements CommandExecutor {
             Player player = (Player) sender;
             if (args.length < 1) {
                 player.sendMessage(ChatColor.YELLOW + "/trade <player>");
-                player.sendMessage(ChatColor.YELLOW + "/trade accept");
-                player.sendMessage(ChatColor.YELLOW + "/trade reject");
-            } else if (args[0].equals("accept")) {
-
-            } else if (args[0].equals("reject")) {
-
             } else if (args.length == 1) {
                 if (!args[0].equalsIgnoreCase(player.getName())) {
                     Player receiver = Bukkit.getPlayer(args[0]);

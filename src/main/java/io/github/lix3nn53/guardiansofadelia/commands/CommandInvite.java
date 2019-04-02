@@ -22,8 +22,8 @@ public class CommandInvite implements CommandExecutor {
             Player player = (Player) sender;
             UUID uuid = player.getUniqueId();
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/trade accept");
-                player.sendMessage(ChatColor.YELLOW + "/trade reject");
+                player.sendMessage(ChatColor.YELLOW + "/invite accept");
+                player.sendMessage(ChatColor.YELLOW + "/invite reject");
             } else if (args[0].equals("accept")) {
                 if (GuardianDataManager.hasGuardianData(uuid)) {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);

@@ -1,27 +1,24 @@
 package io.github.lix3nn53.guardiansofadelia.party;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public final class Party implements Group {
+public final class Party {
 
     private final int size;
     private List<Player> members;
     private Player leader;
     private PartyBoard board;
 
-    public Party(List<Player> members, Player leader, int size) {
+    public Party(List<Player> members, int size) {
         this.members = members;
-        this.leader = leader;
+        this.leader = members.get(0);
         this.board = new PartyBoard(this);
         this.size = size;
     }
 
-    @Override
     public List<Player> getMembers() {
         return members;
     }
@@ -30,50 +27,83 @@ public final class Party implements Group {
         return leader;
     }
 
-    @Override
     public boolean addMember(Player player) {
         if (members.size() < size) {
             if (!members.contains(player)) {
                 members.add(player);
-                board.remake();
+                board.remake(this);
+                PartyManager.addMember(player, this);
                 return true;
             }
         }
         return false;
     }
 
-    @Override
-    public void removeMember(Player player) {
-        members.remove(player);
-        GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
-        guardianData.clearParty();
-        player.sendMessage(ChatColor.RED + "You left the party");
-        for (Player member : members) {
-            member.sendMessage(player.getName() + ChatColor.RED + " left your party");
+    public void leave(Player playerLeft) {
+        if (members.contains(playerLeft)) {
+            members.remove(playerLeft);
+            PartyManager.removeMember(playerLeft);
+
+            playerLeft.sendMessage(ChatColor.RED + "You left the party");
+
+            for (Player member : members) {
+                member.sendMessage(playerLeft.getName() + ChatColor.RED + " left your party");
+            }
+
+
+            onMemberRemove(playerLeft);
         }
+    }
+
+    public void kickMember(Player kicker, Player playerToKick) {
+        if (getLeader().getUniqueId().equals(kicker.getUniqueId())) {
+            if (members.contains(playerToKick)) {
+                members.remove(playerToKick);
+                PartyManager.removeMember(playerToKick);
+
+                playerToKick.sendMessage(kicker.getName() + ChatColor.RED + " kicked you from the party");
+
+                for (Player member : members) {
+                    member.sendMessage(kicker.getName() + ChatColor.RED + " kicked " + playerToKick.getName() + " from the party");
+                }
+
+                onMemberRemove(playerToKick);
+            }
+        }
+    }
+
+    private void onMemberRemove(Player player) {
         if (members.size() < 2) {
             for (Player member : members) {
-                GuardianData memberguardianData = GuardianDataManager.getGuardianData(member.getUniqueId());
-                memberguardianData.clearParty();
+                PartyManager.removeMember(member);
                 board.hide(member);
+                PartyManager.removeMember(member);
             }
             members.clear();
         } else {
             if (player.getUniqueId().equals(leader.getUniqueId())) {
                 leader = members.get(0);
             }
-            board.remake();
+            board.remake(this);
         }
     }
 
-    public void setNewLeader(Player player) {
-        if (members.contains(player)) {
-            leader = player;
-            board.remake();
+    public void setNewLeader(Player setter, Player player) {
+        if (setter.getUniqueId().equals(leader.getUniqueId())) {
+            if (members.contains(player)) {
+                if (!player.getUniqueId().equals(leader.getUniqueId())) {
+                    leader = player;
+                    board.remake(this);
+                }
+            }
         }
     }
 
     public PartyBoard getBoard() {
         return board;
+    }
+
+    public boolean isEmpty() {
+        return members.size() < size;
     }
 }

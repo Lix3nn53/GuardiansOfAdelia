@@ -34,6 +34,12 @@ commands:
       - t
     permission: guardian.player
     permission-message: You do not have permission!
+  party:
+    description: Party command
+    aliases:
+      - pt
+    permission: guardian.player
+    permission-message: You do not have permission!
   lix:
     description: Admin command
     aliases:

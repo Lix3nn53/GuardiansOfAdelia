@@ -5,11 +5,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class PartyBoard extends ScoreboardGeneral {
-    private final Party party;
 
     public PartyBoard(Party party) {
         super(ChatColor.AQUA + "Party");
-        this.party = party;
         this.setLine("", 1);
         this.setLine(ChatColor.YELLOW + "» Leader", 2);
         this.setLine(party.getLeader().getName() + ChatColor.RED + " ❤", 3);
@@ -39,7 +37,7 @@ public class PartyBoard extends ScoreboardGeneral {
         }
     }
 
-    public void remake() {
+    public void remake(Party party) {
         this.setLine("", 1);
         this.setLine(ChatColor.YELLOW + "» Leader", 2);
         this.setLine(party.getLeader().getName() + ChatColor.RED + " ❤", 3);

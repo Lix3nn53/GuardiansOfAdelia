@@ -1,8 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
+import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,9 +15,8 @@ public class MyEntityRegainHealthEvent implements Listener {
     public void onEvent(EntityRegainHealthEvent event) {
         if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player player = (Player) event.getEntity();
-            GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
-            if (guardianData.isInParty()) {
-                Party party = guardianData.getParty();
+            if (PartyManager.inParty(player)) {
+                Party party = PartyManager.getParty(player);
                 party.getBoard().updateHP(player.getName(), (int) (player.getHealth() + event.getAmount()));
             }
 

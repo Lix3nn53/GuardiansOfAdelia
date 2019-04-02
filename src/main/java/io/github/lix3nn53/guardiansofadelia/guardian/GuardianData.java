@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
-import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -36,7 +35,6 @@ public class GuardianData {
     private List<Player> friends = new ArrayList<>();
 
     private Guild guild;
-    private Party party;
 
     private Gui activeGui;
 
@@ -74,22 +72,6 @@ public class GuardianData {
     public boolean isFreeToAct() {
         boolean isFree = isGathering && isTeleporting && isConsuming;
         return isFree;
-    }
-
-    public boolean isInParty() {
-        return this.party != null;
-    }
-
-    public void clearParty() {
-        this.party = null;
-    }
-
-    public Party getParty() {
-        return this.party;
-    }
-
-    public void setParty(Party party) {
-        this.party = party;
     }
 
     public boolean isInGuild() {

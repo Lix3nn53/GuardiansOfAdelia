@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
+import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.FakeIndicator;
 import org.bukkit.ChatColor;
@@ -75,13 +76,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
         if (target.getType().equals(EntityType.PLAYER)) {
             Player player = (Player) target;
 
-            UUID uniqueId = player.getUniqueId();
-            if (GuardianDataManager.hasGuardianData(uniqueId)) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
-                if (guardianData.isInParty()) {
-                    Party party = guardianData.getParty();
-                    party.getBoard().updateHP(player.getName(), (int) (player.getHealth() - finalDamage + 0.5));
-                }
+            if (PartyManager.inParty(player)) {
+                Party party = PartyManager.getParty(player);
+                party.getBoard().updateHP(player.getName(), (int) (player.getHealth() - finalDamage + 0.5));
             }
         }
     }

@@ -2,10 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
+import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import net.md_5.bungee.api.ChatColor;
@@ -163,13 +163,13 @@ public class Dungeon implements Minigame {
         if (playersInQueue.size() > 1) {
             for (Player player : playersInQueue) {
                 if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
-                    if (guardianData.isInParty()) {
-                        guardianData.getParty().removeMember(player);
+                    if (PartyManager.inParty(player)) {
+                        Party party = PartyManager.getParty(player);
+                        party.leave(player);
                     }
                 }
             }
-            Party party = new Party(playersInQueue, playersInQueue.get(0), playersInQueue.size());
+            Party party = new Party(playersInQueue, playersInQueue.size());
             teams.set(0, party);
         }
     }

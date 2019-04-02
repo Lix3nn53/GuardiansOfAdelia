@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.drops;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
+import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -18,11 +18,10 @@ final class DropDamage {
         this.entity = entity;
     }
 
-    public void addDamage(Player p, int damage) {
-        if (GuardianDataManager.hasGuardianData(p.getUniqueId())) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(p.getUniqueId());
-            if (guardianData.isInParty()) {
-                Party party = guardianData.getParty();
+    public void addDamage(Player player, int damage) {
+        if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
+            if (PartyManager.inParty(player)) {
+                Party party = PartyManager.getParty(player);
                 if (partyDamages.containsKey(party)) {
                     int current = partyDamages.get(party);
                     partyDamages.put(party, current + damage);
@@ -30,11 +29,11 @@ final class DropDamage {
                     partyDamages.put(party, damage);
                 }
             } else {
-                if (playerDamages.containsKey(p)) {
-                    int current = playerDamages.get(p);
-                    playerDamages.put(p, current + damage);
+                if (playerDamages.containsKey(player)) {
+                    int current = playerDamages.get(player);
+                    playerDamages.put(player, current + damage);
                 } else {
-                    playerDamages.put(p, damage);
+                    playerDamages.put(player, damage);
                 }
             }
         }
