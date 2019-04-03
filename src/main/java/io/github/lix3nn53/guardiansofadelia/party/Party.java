@@ -86,6 +86,7 @@ public final class Party {
             }
             board.remake(this);
         }
+        board.hide(player);
     }
 
     public void setNewLeader(Player setter, Player player) {

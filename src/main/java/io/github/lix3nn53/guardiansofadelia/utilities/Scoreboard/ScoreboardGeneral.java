@@ -19,13 +19,14 @@ public class ScoreboardGeneral implements MyScoreboard {
 
     public ScoreboardGeneral(String displayName) {
         board = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective obj = board.registerNewObjective("GuardiansOfAdelia", "dummy", displayName);
+        Objective obj = board.registerNewObjective("GoA", "dummy", displayName);
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
     }
 
     public void setLine(String text, int row) {
         if (row <= 15 && row > 0) {
-            Objective obj = board.getObjective("GuardiansOfAdelia");
+            removeLine(row);
+            Objective obj = board.getObjective("GoA");
             Score score = obj.getScore(text);
             score.setScore(15 - row);
             rowLines.put(row, text);

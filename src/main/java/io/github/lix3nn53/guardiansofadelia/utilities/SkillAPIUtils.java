@@ -101,6 +101,22 @@ public class SkillAPIUtils {
         }
     }
 
+    public static void givePartyExp(Player player, double exp) {
+        PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
+        PlayerData activeData = playerAccountData.getActiveData();
+        if (activeData.hasClass()) {
+            activeData.giveExp(exp, ExpSource.COMMAND);
+        }
+    }
+
+    public static void giveMobExp(Player player, double exp) {
+        PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
+        PlayerData activeData = playerAccountData.getActiveData();
+        if (activeData.hasClass()) {
+            activeData.giveExp(exp, ExpSource.MOB);
+        }
+    }
+
     public static void giveLevels(Player player, int level) {
         PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
         PlayerData activeData = playerAccountData.getActiveData();

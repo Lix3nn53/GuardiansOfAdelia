@@ -10,12 +10,12 @@ public class PartyBoard extends ScoreboardGeneral {
         super(ChatColor.AQUA + "Party");
         this.setLine("", 1);
         this.setLine(ChatColor.YELLOW + "» Leader", 2);
-        this.setLine(party.getLeader().getName() + ChatColor.RED + " ❤", 3);
+        this.setLine(party.getLeader().getName() + ChatColor.RED + " ❤" + (int) (party.getLeader().getHealth() + 0.5), 3);
         this.setLine(ChatColor.GREEN + "» Members", 4);
         int lineCounter = 5;
-        for (Player p : party.getMembers()) {
-            if (!p.getUniqueId().equals(party.getLeader().getUniqueId())) {
-                this.setLine(p.getName() + ChatColor.RED + " ❤", lineCounter);
+        for (Player member : party.getMembers()) {
+            if (!member.getUniqueId().equals(party.getLeader().getUniqueId())) {
+                this.setLine(member.getName() + ChatColor.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
                 lineCounter++;
             }
         }
@@ -40,12 +40,12 @@ public class PartyBoard extends ScoreboardGeneral {
     public void remake(Party party) {
         this.setLine("", 1);
         this.setLine(ChatColor.YELLOW + "» Leader", 2);
-        this.setLine(party.getLeader().getName() + ChatColor.RED + " ❤", 3);
+        this.setLine(party.getLeader().getName() + ChatColor.RED + " ❤" + (int) (party.getLeader().getHealth() + 0.5), 3);
         this.setLine(ChatColor.GREEN + "» Members", 4);
         int lineCounter = 5;
-        for (Player p : party.getMembers()) {
-            if (!p.getUniqueId().equals(party.getLeader().getUniqueId())) {
-                this.setLine(p.getName() + ChatColor.RED + " ❤", lineCounter);
+        for (Player member : party.getMembers()) {
+            if (!member.getUniqueId().equals(party.getLeader().getUniqueId())) {
+                this.setLine(member.getName() + ChatColor.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
                 lineCounter++;
             }
         }

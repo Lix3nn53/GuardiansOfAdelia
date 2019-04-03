@@ -15,11 +15,11 @@ public class MyEntityRegainHealthEvent implements Listener {
     public void onEvent(EntityRegainHealthEvent event) {
         if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player player = (Player) event.getEntity();
+
             if (PartyManager.inParty(player)) {
                 Party party = PartyManager.getParty(player);
-                party.getBoard().updateHP(player.getName(), (int) (player.getHealth() + event.getAmount()));
+                party.getBoard().updateHP(player.getName(), (int) (player.getHealth() + event.getAmount() + 0.5));
             }
-
         }
     }
 }

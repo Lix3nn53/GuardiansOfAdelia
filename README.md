@@ -51,7 +51,9 @@ Please note that these features are for my personal server. It probably will not
   * Lock the trade. Once locked players can't add/remove items.
   * Accept the trade. When both players accept the trade finishes and items on Trade-Gui gets traded.
 * Party
-  * TODO
+  * Fight together with your friends
+  * Share experience gained from monsters with party members
+  * Progress at your quests' together
 * Guild
   * TODO
 * Dungeons

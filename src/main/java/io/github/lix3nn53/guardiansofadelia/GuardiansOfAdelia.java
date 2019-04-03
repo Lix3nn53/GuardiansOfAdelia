@@ -1,12 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia;
 
-import io.github.lix3nn53.guardiansofadelia.commands.CommandGuild;
-import io.github.lix3nn53.guardiansofadelia.commands.CommandInvite;
-import io.github.lix3nn53.guardiansofadelia.commands.CommandLix;
-import io.github.lix3nn53.guardiansofadelia.commands.CommandTrade;
+import io.github.lix3nn53.guardiansofadelia.commands.*;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.events.*;
+import io.github.lix3nn53.guardiansofadelia.events.myskillapievents.MyPlayerExperienceGainEvent;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
@@ -74,6 +72,9 @@ public class GuardiansOfAdelia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MyPlayerJoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerQuitEvent(), this);
 
+        //SkillAPI events
+        Bukkit.getPluginManager().registerEvents(new MyPlayerExperienceGainEvent(), this);
+
         //init managers
         ConfigManager.init();
         //CHARACTER_SELECTION_SCREEN_MANAGER is initialized at config loading
@@ -83,6 +84,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         this.getCommand("lix").setExecutor(new CommandLix());
         this.getCommand("invite").setExecutor(new CommandInvite());
         this.getCommand("trade").setExecutor(new CommandTrade());
+        this.getCommand("party").setExecutor(new CommandParty());
 
         for (World w : Bukkit.getServer().getWorlds()) {
             w.setDifficulty(Difficulty.HARD);

@@ -2,13 +2,14 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.MobExperienceList;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.FakeIndicator;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
@@ -53,13 +54,20 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         for (Quest quest : questList) {
                             quest.progressDealDamageTasks(player, livingTarget, (int) (finalDamage + 0.5));
                         }
+                        PartyManager.progressDealDamageTasksOfOtherMembers(player, livingTarget, finalDamage);
 
                         //on Kill
                         if (finalDamage >= livingTarget.getHealth()) {
+
+                            if (livingTarget.isCustomNameVisible()) {
+                                SkillAPIUtils.giveMobExp(player, MobExperienceList.getExperience(livingTarget.getCustomName()));
+                            }
+
                             //progress kill tasks
                             for (Quest quest : questList) {
                                 quest.progressKillTasks(player, livingTarget);
                             }
+                            PartyManager.progressMobKillTasksOfOtherMembers(player, livingTarget);
                         }
                     }
                 }
@@ -74,12 +82,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
         //player is target
         if (target.getType().equals(EntityType.PLAYER)) {
-            Player player = (Player) target;
 
-            if (PartyManager.inParty(player)) {
-                Party party = PartyManager.getParty(player);
-                party.getBoard().updateHP(player.getName(), (int) (player.getHealth() - finalDamage + 0.5));
-            }
         }
     }
 
