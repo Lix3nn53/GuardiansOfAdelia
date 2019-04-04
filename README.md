@@ -55,7 +55,10 @@ Please note that these features are for my personal server. It probably will not
   * Share experience gained from monsters with party members
   * Progress at your quests' together
 * Guild
-  * TODO
+  * Create or a guild to gather a strong army and fight for power
+  * Manage your guild with commands such as guild members' ranks
+  * TODO Guild wars
+  * TODO 
 * Dungeons
   * TODO
 * Minigames

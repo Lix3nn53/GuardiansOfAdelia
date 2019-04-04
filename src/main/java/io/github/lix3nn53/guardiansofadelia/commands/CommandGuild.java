@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildInvite;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
+import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -49,50 +50,53 @@ public class CommandGuild implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_PURPLE + "/guild newleader <player> - set new guild leader");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/guild destroy - destroy the guild");
             } else if (args[0].equals("create")) {
-                if (args.length == 2) {
+                if (args.length == 3) {
                     int price = 64 * 2;
                     if (EconomyUtils.pay(player, price)) {
-                        Guild guild = new Guild(args[0], args[1]);
+                        Guild guild = new Guild(args[1], args[2]);
+                        guild.addMember(player.getUniqueId());
                         guild.setLeader(player.getUniqueId());
-
+                        GuildManager.addPlayerGuild(player, guild);
+                        player.sendMessage(ChatColor.DARK_PURPLE + "Successfully created a new guild called " + guild.getName());
+                        TablistUtils.updateTablist(player);
                     } else {
-                        player.sendMessage(ChatColor.RED + "Cost to create a new guild is 2 silver");
+                        player.sendMessage(ChatColor.RED + "Creating a new guild costs 2 silver");
                     }
                 }
             } else if (args[0].equals("top")) {
-                List<Guild> top10 = GuildManager.getTop10();
-                for (Guild guild : top10) {
+                List<Guild> sortedGuilds = GuildManager.getGuildsSortedByWarPoints();
+                int bound = Math.min(10, sortedGuilds.size());
+                for (int i = 0; i < bound; i++) {
+                    Guild guild = sortedGuilds.get(i);
                     player.sendMessage(ChatColor.DARK_PURPLE + guild.getName() + " - " + guild.getWarPoints());
                 }
             } else if (args[0].equals("leave")) {
-                GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
-                if (playerData.isInGuild()) {
-                    Guild guild = playerData.getGuild();
+                if (GuildManager.inGuild(player)) {
+                    Guild guild = GuildManager.getGuild(player);
                     PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
                     if (!rank.equals(PlayerRankInGuild.LEADER)) {
                         guild.removeMember(player.getUniqueId());
-                        playerData.clearGuild();
+                        GuildManager.removePlayer(player);
                     } else {
                         player.sendMessage(ChatColor.RED + "Guild leader can't leave his/her guild. Choose a new leader first.");
                     }
                 }
             } else if (args[0].equals("member")) {
-                GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
-                if (playerData.isInGuild()) {
-                    Guild guild = playerData.getGuild();
+                if (GuildManager.inGuild(player)) {
+                    Guild guild = GuildManager.getGuild(player);
                     Set<UUID> members = guild.getMembers();
-                    String membersString = "Guild members: ";
+                    StringBuilder membersString = new StringBuilder("Guild members: ");
                     for (UUID member : members) {
                         Player memberPlayer = Bukkit.getPlayer(member);
                         if (memberPlayer != null) {
-                            membersString += memberPlayer.getName() + " ";
+                            membersString.append(memberPlayer.getName() + " ");
                         }
                     }
+                    player.sendMessage(membersString.toString());
                 }
             } else if (args[0].equals("ann")) {
-                GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
-                if (playerData.isInGuild()) {
-                    Guild guild = playerData.getGuild();
+                if (GuildManager.inGuild(player)) {
+                    Guild guild = GuildManager.getGuild(player);
                     String announcement = guild.getAnnouncement();
                     player.sendMessage(ChatColor.RED + "Guild announcement: " + announcement);
                 }
@@ -101,12 +105,11 @@ public class CommandGuild implements CommandExecutor {
                     Player player2 = Bukkit.getPlayer(args[1]);
                     if (player2 != null) {
                         if (player2.isOnline()) {
-                            GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
-                            if (playerData.isInGuild()) {
-                                Guild guild = playerData.getGuild();
+                            if (GuildManager.inGuild(player)) {
+                                Guild guild = GuildManager.getGuild(player);
                                 PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
                                 if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
-                                    String receiverMessage = ChatColor.DARK_PURPLE + sender.getName() + " invites you to " + playerData.getGuild().getName() + " guild";
+                                    String receiverMessage = ChatColor.DARK_PURPLE + sender.getName() + " invites you to " + guild.getName() + " guild";
                                     String receiverTitle = ChatColor.DARK_PURPLE + "Received guild invitation";
                                     String senderTitle = ChatColor.DARK_PURPLE + "Sent guild invitation";
                                     GuildInvite invite = new GuildInvite(player, player2, senderTitle, receiverMessage, receiverTitle);
@@ -123,9 +126,8 @@ public class CommandGuild implements CommandExecutor {
                     Player player2 = Bukkit.getPlayer(args[1]);
                     if (player2 != null) {
                         if (!player.getUniqueId().equals(player2.getUniqueId())) {
-                            GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
-                            if (playerData.isInGuild()) {
-                                Guild guild = playerData.getGuild();
+                            if (GuildManager.inGuild(player)) {
+                                Guild guild = GuildManager.getGuild(player);
                                 if (guild.isMember(player2.getUniqueId())) {
                                     PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
                                     if (rank.equals(PlayerRankInGuild.LEADER)) {
@@ -171,9 +173,8 @@ public class CommandGuild implements CommandExecutor {
                     }
                     Player player2 = Bukkit.getPlayer(args[1]);
                     if (player2 != null) {
-                        GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
-                        if (playerData.isInGuild()) {
-                            Guild guild = playerData.getGuild();
+                        if (GuildManager.inGuild(player)) {
+                            Guild guild = GuildManager.getGuild(player);
                             if (guild.isMember(player2.getUniqueId())) {
                                 PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
                                 if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
@@ -203,16 +204,15 @@ public class CommandGuild implements CommandExecutor {
                 }
             } else if (args[0].equals("setann")) {
                 if (args.length >= 2) {
-                    GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
-                    if (playerData.isInGuild()) {
-                        Guild guild = playerData.getGuild();
+                    if (GuildManager.inGuild(player)) {
+                        Guild guild = GuildManager.getGuild(player);
                         PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
                         if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
                             String announcement = "";
                             for (int i = 1; i < args.length; i++) {
                                 announcement += args[i];
                             }
-                            if (announcement.length() < 300) {
+                            if (announcement.length() < 1000) {
                                 guild.setAnnouncement(announcement);
                             }
                         } else {
@@ -224,9 +224,8 @@ public class CommandGuild implements CommandExecutor {
                 if (args.length >= 2) {
                     Player player2 = Bukkit.getPlayer(args[1]);
                     if (player2 != null) {
-                        GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
-                        if (playerData.isInGuild()) {
-                            Guild guild = playerData.getGuild();
+                        if (GuildManager.inGuild(player)) {
+                            Guild guild = GuildManager.getGuild(player);
                             if (guild.isMember(player2.getUniqueId())) {
                                 PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
                                 if (rank.equals(PlayerRankInGuild.LEADER)) {
@@ -239,9 +238,8 @@ public class CommandGuild implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("destroy")) {
-                GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
-                if (playerData.isInGuild()) {
-                    Guild guild = playerData.getGuild();
+                if (GuildManager.inGuild(player)) {
+                    Guild guild = GuildManager.getGuild(player);
                     PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
                     if (rank.equals(PlayerRankInGuild.LEADER)) {
                         player.sendMessage(ChatColor.RED + "Are you sure? Do you want to destroy this guild permanently?");
@@ -264,8 +262,8 @@ public class CommandGuild implements CommandExecutor {
             } else if (args[0].equals("confirmdestroy")) {
                 if (guildDestroyWaitingForConfirm.contains(player)) {
                     GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
-                    if (playerData.isInGuild()) {
-                        Guild guild = playerData.getGuild();
+                    if (GuildManager.inGuild(player)) {
+                        Guild guild = GuildManager.getGuild(player);
                         guild.destroy();
                     }
                 }

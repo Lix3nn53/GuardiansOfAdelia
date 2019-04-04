@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
+import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
@@ -367,7 +368,7 @@ public class DatabaseQueries {
         return rpgCharacter;
     }
 
-    public Guild getGuild(String name) throws SQLException {
+    public Guild getGuild(Player player, String name) throws SQLException {
         String SQL_QUERY = "SELECT * FROM goa_guild WHERE name = ?";
         Guild guild = null;
         try (Connection con = pool.getConnection()) {
@@ -418,6 +419,8 @@ public class DatabaseQueries {
                         ItemStack[] itemStacks = ItemSerializer.restoreModdedStacks(storageString);
                         guild.setGuildStorage(itemStacks);
                     }
+
+                    GuildManager.addPlayerGuild(player, guild);
                 }
             }
             resultSet.close();
@@ -532,7 +535,7 @@ public class DatabaseQueries {
             statement.addBatch("DELETE FROM goa_player_guild WHERE name = '" + guild + "'");
 
             for (UUID player : playerPlayerRankInGuildHashMap.keySet()) {
-                statement.addBatch("INSERT INTO goa_guild_storage \n" +
+                statement.addBatch("INSERT INTO goa_player_guild \n" +
                         "\t(uuid, name, rank) \n" +
                         "VALUES \n" +
                         "\t('" + player.toString() + "', '" + guild + "', '" + playerPlayerRankInGuildHashMap.get(player).name() + "')");
@@ -547,7 +550,7 @@ public class DatabaseQueries {
     }
 
     public int setGuild(Guild guild) throws SQLException {
-        String SQL_QUERY = "INSERT INTO goa_player_guild \n" +
+        String SQL_QUERY = "INSERT INTO goa_guild \n" +
                 "\t(name, tag, war_point, announcement, hall_level, bank_level, lab_level, storage) \n" +
                 "VALUES \n" +
                 "\t(?, ?, ?, ?, ?, ?, ?, ?)\n" +

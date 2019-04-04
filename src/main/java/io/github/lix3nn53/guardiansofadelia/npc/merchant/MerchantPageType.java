@@ -13,14 +13,19 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guild.Guild;
+import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiPage;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,11 +53,15 @@ public enum MerchantPageType {
             case SELL:
                 return getSellGui(resourceNpc);
             case CONVERT:
-                return getConverGui(resourceNpc);
+                return getConvertGui(resourceNpc);
             case PERSONAL_STORAGE:
                 return getPersonalStorageGui(player, resourceNpc);
             case GUILD_STORAGE:
-                return getGuildStorageGui(player, resourceNpc);
+                if (GuildManager.inGuild(player)) {
+                    Guild guild = GuildManager.getGuild(player);
+                    return getGuildStorageGui(guild);
+                }
+                return null;
             case BAZAAR_STORAGE:
                 return getBazaarStorageGui(player, resourceNpc);
             case WEAPON:
@@ -83,8 +92,35 @@ public enum MerchantPageType {
         return new SellGui(shopNpc);
     }
 
-    private GuiGeneric getConverGui(int shopNpc) {
-        GuiGeneric guiGeneric = new GuiGeneric(54, "Coin Convert", shopNpc);
+    private GuiGeneric getConvertGui(int shopNpc) {
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.GOLD + "Coin Converter", shopNpc);
+
+        ItemStack silverToBronze = new ItemStack(Material.IRON_INGOT, 64);
+        ItemMeta itemMeta = silverToBronze.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.GREEN + "Bronze Coin");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
+            add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
+        }});
+        silverToBronze.setItemMeta(itemMeta);
+        guiGeneric.setItem(0, silverToBronze);
+
+        ItemStack bronzeToSilver = new ItemStack(Material.GOLD_INGOT, 1);
+        itemMeta.setDisplayName(ChatColor.WHITE + "Silver Coin");
+        bronzeToSilver.setItemMeta(itemMeta);
+        guiGeneric.setItem(9, bronzeToSilver);
+
+        ItemStack goldToSilver = new ItemStack(Material.GOLD_INGOT, 64);
+        itemMeta.setDisplayName(ChatColor.WHITE + "Silver Coin");
+        goldToSilver.setItemMeta(itemMeta);
+        guiGeneric.setItem(10, goldToSilver);
+
+        ItemStack silverToGold = new ItemStack(Material.DIAMOND, 1);
+        itemMeta.setDisplayName(ChatColor.GOLD + "Gold Coin");
+        silverToGold.setItemMeta(itemMeta);
+        guiGeneric.setItem(18, silverToGold);
+
         return guiGeneric;
     }
 
@@ -98,9 +134,8 @@ public enum MerchantPageType {
         return guiGeneric;
     }
 
-    private GuiGeneric getGuildStorageGui(Player player, int shopNpc) {
-        GuiGeneric guiGeneric = new GuiGeneric(54, "Guild Storage", shopNpc);
-        return guiGeneric;
+    private GuiGeneric getGuildStorageGui(Guild guild) {
+        return guild.getGuildStorageGui();
     }
 
     private GuiGeneric getBazaarStorageGui(Player player, int shopNpc) {

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guild;
 
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
 public class Guild {
 
     private HashMap<UUID, PlayerRankInGuild> members = new HashMap<UUID, PlayerRankInGuild>();
-    private ItemStack[] guildStorage;
+    private final GuiGeneric guildStorage = new GuiGeneric(54, "Guild Storage", 0);
     private String name;
     private String tag;
     private int warPoints = 0;
@@ -24,7 +25,7 @@ public class Guild {
     public Guild(String name, String tag) {
         this.tag = tag;
         this.name = name;
-        GuildManager.addGuildToMemory(this);
+        guildStorage.setLocked(false);
     }
 
     public Set<UUID> getMembers() {
@@ -66,18 +67,26 @@ public class Guild {
         }
     }
 
-    public boolean addMember(UUID player) {
+    public boolean addMember(UUID uuid) {
         if (members.size() < 20) {
-            members.put(player, PlayerRankInGuild.SOLDIER);
+            members.put(uuid, PlayerRankInGuild.SOLDIER);
+            Player player = Bukkit.getPlayer(uuid);
+            if (player != null) {
+                GuildManager.addPlayerGuild(player, this);
+            }
             return true;
         }
         return false;
     }
 
-    public void removeMember(UUID player) {
-        if (members.containsKey(player)) {
-            if (!members.get(player).equals(PlayerRankInGuild.LEADER)) {
-                members.remove(player);
+    public void removeMember(UUID uuid) {
+        if (members.containsKey(uuid)) {
+            if (!members.get(uuid).equals(PlayerRankInGuild.LEADER)) {
+                members.remove(uuid);
+                Player player = Bukkit.getPlayer(uuid);
+                if (player != null) {
+                    GuildManager.removePlayer(player);
+                }
             }
         }
     }
@@ -153,23 +162,25 @@ public class Guild {
     }
 
     public void destroy() {
-        GuildManager.removeGuildFromMemory(this);
+        GuildManager.removeGuild(this);
         //remove from sql database
         DatabaseManager.clearGuild(this.name);
     }
 
     public ItemStack[] getGuildStorage() {
-        return guildStorage;
+        return guildStorage.getContents();
     }
 
     public void setGuildStorage(ItemStack[] guildStorage) {
-        this.guildStorage = guildStorage;
+        this.guildStorage.setContents(guildStorage);
     }
 
 
-    public void openGuildStorage(Player player) {
-        GuiGeneric storageGui = new GuiGeneric(getBankLevel() * 9, "Guild " + getName() + "'s storage", 0);
-        storageGui.setContents(this.guildStorage);
-        storageGui.openInventory(player);
+    public GuiGeneric getGuildStorageGui() {
+        return this.guildStorage;
+    }
+
+    public boolean isEmpty() {
+        return members.size() < 20;
     }
 }

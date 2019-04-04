@@ -1,76 +1,75 @@
 package io.github.lix3nn53.guardiansofadelia.guild;
 
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class GuildManager {
 
-    private static List<Guild> guildList = new ArrayList<>();
+    private static HashMap<Player, Guild> playerToGuild = new HashMap<>();
 
-    public static List<Guild> getTop10() {
-        guildList.sort(Comparator.comparingInt(Guild::getWarPoints));
-        int size = guildList.size();
+    public static void addPlayerGuild(Player player, Guild guild) {
+        playerToGuild.put(player, guild);
+    }
 
-        List<Guild> top10Guild = new ArrayList<>();
-        for (int i = size - 10; i < size; i++) {
-            top10Guild.add(guildList.get(i));
+    public static Guild getGuild(Player player) {
+        return playerToGuild.get(player);
+    }
+
+    public static boolean inGuild(Player player) {
+        return playerToGuild.containsKey(player);
+    }
+
+    public static void removePlayer(Player player) {
+        playerToGuild.remove(player);
+    }
+
+    public static void removeGuild(Guild guild) {
+        playerToGuild.values().removeAll(Collections.singleton(guild));
+    }
+
+    public static List<Guild> getGuildsSortedByWarPoints() {
+        Collection<Guild> guilds = playerToGuild.values();
+
+        List<Guild> guildList = new ArrayList<>(guilds);
+
+        List<Guild> guildListNoDuplicate = guildList.stream().distinct().collect(Collectors.toList());
+
+        guildListNoDuplicate.sort(Comparator.comparingInt(Guild::getWarPoints));
+
+        return guildListNoDuplicate;
+    }
+
+    public static void onPlayerQuit(Player player) {
+        if (inGuild(player)) {
+            Guild guild = getGuild(player);
+            playerToGuild.remove(player);
+
+            if (!getActiveGuilds().contains(guild)) {
+                DatabaseManager.writeGuildData(guild);
+            }
         }
-        Collections.reverse(top10Guild);
-        return top10Guild;
-    }
-
-    public static void addGuildToMemory(Guild guild) {
-        guildList.add(guild);
-    }
-
-    public static void removeGuildFromMemory(Guild guild) {
-        guildList.remove(guild);
-    }
-
-    public static boolean isGuildLoaded(String name) {
-        Optional<Guild> guildOptional = guildList.stream()
-                .filter(item -> item.getName().equals(name))
-                .findAny();
-        return guildOptional.isPresent();
-    }
-
-    public static Guild getGuild(String name) {
-        Optional<Guild> guildOptional = guildList.stream()
-                .filter(item -> item.getName().equals(name))
-                .findAny();
-        return guildOptional.orElse(null);
     }
 
     public static List<Guild> getActiveGuilds() {
-        return guildList;
+        Collection<Guild> guilds = playerToGuild.values();
+
+        List<Guild> guildList = new ArrayList<>(guilds);
+
+        return guildList.stream().distinct().collect(Collectors.toList());
     }
 
-    //call before removing player guardianData
-    public static void onPlayerQuit(Player player) {
-        UUID uuid = player.getUniqueId();
-        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-        if (guardianData.isInGuild()) {
-            Guild guild = guardianData.getGuild();
-            Set<UUID> members = guild.getMembers();
-            boolean anyOnlineMemberLeft = false;
-            for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                if (onlinePlayer.getUniqueId() != uuid) {
-                    if (members.contains(onlinePlayer.getUniqueId())) {
-                        anyOnlineMemberLeft = true;
-                        break;
-                    }
-                }
-            }
-            if (!anyOnlineMemberLeft) {
-                DatabaseManager.writeGuildData(guild);
-                guildList.remove(guild);
-            }
-        }
+    public static Optional<Guild> getGuild(String name) {
+        Collection<Guild> guilds = playerToGuild.values();
 
+        List<Guild> guildList = new ArrayList<>(guilds);
+
+        return guildList.stream()
+                .filter(item -> item.getName().equals(name))
+                .findAny();
     }
+
+
 }

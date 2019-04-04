@@ -17,8 +17,8 @@ public class MyPlayerQuitEvent implements Listener {
     public void onEvent(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         PacketLimitter.onQuit(player);
-        GuildManager.onPlayerQuit(player);
         GuardianDataManager.onPlayerQuit(player);
+        GuildManager.onPlayerQuit(player);
         GuardiansOfAdelia.getCharacterSelectionScreenManager().clear(player);
         PartyManager.onPlayerQuit(player);
     }

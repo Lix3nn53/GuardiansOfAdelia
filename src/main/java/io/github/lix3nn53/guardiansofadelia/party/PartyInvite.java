@@ -28,11 +28,7 @@ public class PartyInvite extends Invite {
             }
         }
         if (PartyManager.inParty(getReceiver())) {
-            getSender().sendMessage(getReceiver().getName() + ChatColor.RED + " is in another party");
-            return;
-        }
-        if (PartyManager.inParty(getReceiver())) {
-            getSender().sendMessage(ChatColor.RED + "This player is already in a party.");
+            getSender().sendMessage(getReceiver().getName() + ChatColor.RED + " is already in a party");
             return;
         }
         super.send();

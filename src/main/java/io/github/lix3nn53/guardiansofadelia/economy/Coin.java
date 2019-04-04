@@ -49,12 +49,12 @@ public class Coin {
                 itemMeta.setDisplayName(ChatColor.WHITE + "Silver Coin");
             } else if (type.equals(CoinType.GOLD)) {
                 money = new ItemStack(Material.DIAMOND, amount);
-                itemMeta.setDisplayName(ChatColor.YELLOW + "Gold Coin");
+                itemMeta.setDisplayName(ChatColor.GOLD + "Gold Coin");
             }
             itemMeta.setLore(new ArrayList() {{
                 add("");
                 add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
-                add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
+                add(ChatColor.WHITE + "64 Silver = " + ChatColor.GOLD + "1 Gold");
             }});
             money.setItemMeta(itemMeta);
 

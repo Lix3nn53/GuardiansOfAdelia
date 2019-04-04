@@ -26,6 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class DatabaseManager {
@@ -74,13 +75,17 @@ public class DatabaseManager {
 
                 String guildNameOfPlayer = databaseQueries.getGuildNameOfPlayer(uuid);
                 if (guildNameOfPlayer != null) {
-                    if (!GuildManager.isGuildLoaded(guildNameOfPlayer)) {
-                        Guild guild = databaseQueries.getGuild(guildNameOfPlayer);
+                    Optional<Guild> guildOptional = GuildManager.getGuild(guildNameOfPlayer);
+                    if (guildOptional.isPresent()) {
+                        Guild guild = guildOptional.get();
+                        GuildManager.addPlayerGuild(player, guild);
+                    } else {
+                        Guild guild = databaseQueries.getGuild(player, guildNameOfPlayer);
                         if (guild != null) {
                             HashMap<UUID, PlayerRankInGuild> guildMembers = databaseQueries.getGuildMembers(guildNameOfPlayer);
                             guild.setMembers(guildMembers);
 
-                            GuildManager.addGuildToMemory(guild);
+                            GuildManager.addPlayerGuild(player, guild);
                         }
                     }
                 }

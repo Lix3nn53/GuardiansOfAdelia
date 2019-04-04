@@ -34,8 +34,6 @@ public class GuardianData {
 
     private List<Player> friends = new ArrayList<>();
 
-    private Guild guild;
-
     private Gui activeGui;
 
     private LivingEntity pet;
@@ -72,22 +70,6 @@ public class GuardianData {
     public boolean isFreeToAct() {
         boolean isFree = isGathering && isTeleporting && isConsuming;
         return isFree;
-    }
-
-    public boolean isInGuild() {
-        return this.guild != null;
-    }
-
-    public void clearGuild() {
-        this.guild = null;
-    }
-
-    public Guild getGuild() {
-        return this.guild;
-    }
-
-    public void setGuild(Guild guild) {
-        this.guild = guild;
     }
 
     public boolean hasPendingInvite() {

@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
+import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -65,12 +66,12 @@ public class TablistUtils {
                 footer = new StringBuilder(footer.substring(0, footer.length() - 1));
             }
 
-            if (guardianData.isInGuild()) {
+            if (GuildManager.inGuild(player)) {
                 footer.append("\n");
                 footer.append("\n" + ChatColor.DARK_PURPLE + "GUILD");
                 footer.append("\n");
 
-                Guild guild = guardianData.getGuild();
+                Guild guild = GuildManager.getGuild(player);
 
                 footer.append(guild.getName());
                 footer.append("\n");
@@ -97,7 +98,7 @@ public class TablistUtils {
         setPlayerlistHeaderFooter(player, header.toString(), footer.toString());
     }
 
-    public static void setPlayerlistHeaderFooter(Player player, String header, String footer) {
+    private static void setPlayerlistHeaderFooter(Player player, String header, String footer) {
 
         try {
             Object tabHeader = getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + header + "\"}");

@@ -1,10 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.guild;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class GuildInvite extends Invite {
 
@@ -14,29 +15,43 @@ public class GuildInvite extends Invite {
 
     @Override
     public void send() {
-        GuardianData receiverData = GuardianDataManager.getGuardianData(getReceiver().getUniqueId());
-        if (receiverData.isInGuild()) {
-            getSender().sendMessage(ChatColor.RED + "This player is already in a guild.");
-            return;
+        if (GuildManager.inGuild(getSender())) {
+            Guild guild = GuildManager.getGuild(getSender());
+            if (!guild.isEmpty()) {
+                getSender().sendMessage(ChatColor.RED + "Your guild is full");
+                return;
+            } else {
+                if (guild.getMembers().contains(getReceiver().getUniqueId())) {
+                    getSender().sendMessage(getReceiver().getName() + ChatColor.RED + " is already in your guild");
+                    return;
+                }
+            }
+            if (GuildManager.inGuild(getReceiver())) {
+                getSender().sendMessage(getReceiver().getName() + ChatColor.RED + " is already in a guild");
+                return;
+            }
+            super.send();
         }
-        super.send();
     }
 
     @Override
     public void accept() {
-        getSender().sendMessage(ChatColor.DARK_PURPLE + getReceiver().getName() + " accepted your party invite");
-        GuardianData senderData = GuardianDataManager.getGuardianData(getSender().getUniqueId());
-        if (senderData.isInGuild()) {
-            Guild guild = senderData.getGuild();
-            boolean isReceiverJoined = guild.addMember(getReceiver().getUniqueId());
-            if (isReceiverJoined) {
-                getReceiver().sendMessage(ChatColor.DARK_PURPLE + "You joined guild " + senderData.getGuild().getName());
+        getSender().sendMessage(ChatColor.DARK_PURPLE + getReceiver().getName() + " accepted your guild invite");
+        if (GuildManager.inGuild(getSender())) {
+            Guild guild = GuildManager.getGuild(getSender());
+            if (guild.isEmpty()) {
+                boolean isReceiverJoined = guild.addMember(getReceiver().getUniqueId());
+                if (isReceiverJoined) {
+                    for (UUID uuid : guild.getMembers()) {
+                        Player member = Bukkit.getPlayer(uuid);
+                        if (member != null) {
+                            member.sendMessage(getReceiver().getName() + ChatColor.DARK_PURPLE + " joined guild (invited by" + getSender().getName() + ")");
+                        }
+                    }
+                }
             } else {
                 getReceiver().sendMessage(ChatColor.RED + getSender().getName() + "'s guild is full");
-                getSender().sendMessage(ChatColor.RED + "Your guild is full");
             }
-        } else {
-            getSender().sendMessage(ChatColor.RED + "You don't have a guild");
         }
         super.accept();
     }

@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.economy.Coin;
+import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarCustomerGui;
@@ -48,6 +50,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.util.List;
 import java.util.UUID;
@@ -126,7 +129,9 @@ public class MyInventoryClickEvent implements Listener {
                         String[] split = title.split("#");
                         int shopLevel = Integer.parseInt(split[1]);
                         Gui gui = buttonShop.getGui(merchantMenu.getResourceNPC(), player, shopLevel);
-                        gui.openInventory(player);
+                        if (gui != null) {
+                            gui.openInventory(player);
+                        }
                         return;
                     }
                 } else if (activeGui instanceof TradeGui) {
@@ -340,6 +345,33 @@ public class MyInventoryClickEvent implements Listener {
                                 player.sendMessage(ChatColor.RED + "You can't take this quest from this NPC. You need to talk with " + ChatColor.WHITE + byId.getName());
                             }
                         }
+                    }
+                }
+            }
+        }  else if (title.equals(ChatColor.GOLD + "Coin Converter")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                PlayerInventory playerInventory = player.getInventory();
+                if (current.getType().equals(Material.IRON_INGOT)) {
+                    if (InventoryUtils.inventoryContains(playerInventory, Material.GOLD_INGOT, 1)) {
+                        InventoryUtils.removeMaterialFromInventory(playerInventory, Material.GOLD_INGOT, 1);
+                        InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.COPPER, 64).getCoin());
+                    }
+                } else if (current.getType().equals(Material.GOLD_INGOT)) {
+                    if (current.getAmount() == 1) {
+                        if (InventoryUtils.inventoryContains(playerInventory, Material.IRON_INGOT, 64)) {
+                            InventoryUtils.removeMaterialFromInventory(playerInventory, Material.IRON_INGOT, 64);
+                            InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.SILVER, 1).getCoin());
+                        }
+                    } else if (current.getAmount() == 64) {
+                        if (InventoryUtils.inventoryContains(playerInventory, Material.DIAMOND, 1)) {
+                            InventoryUtils.removeMaterialFromInventory(playerInventory, Material.DIAMOND, 1);
+                            InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.SILVER, 64).getCoin());
+                        }
+                    }
+                } else if (current.getType().equals(Material.DIAMOND)) {
+                    if (InventoryUtils.inventoryContains(playerInventory, Material.GOLD_INGOT, 64)) {
+                        InventoryUtils.removeMaterialFromInventory(playerInventory, Material.GOLD_INGOT, 64);
+                        InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.GOLD, 1).getCoin());
                     }
                 }
             }
