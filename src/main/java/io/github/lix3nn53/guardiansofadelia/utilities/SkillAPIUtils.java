@@ -45,6 +45,11 @@ public class SkillAPIUtils {
         return playerAccountData.getActiveId();
     }
 
+    public static void setActiveCharacter(Player player, int charNo) {
+        PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
+        playerAccountData.setAccount(charNo);
+    }
+
     public static String getClassName(Player player, int charNo) {
         PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
         PlayerData playerData = playerAccountData.getData(charNo);

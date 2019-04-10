@@ -33,7 +33,7 @@ public class MyAsyncPlayerChatEvent implements Listener {
                         int price = Integer.parseInt(message);
                         ItemStack itemToSetMoney = BazaarManager.getItemToSetMoney(player);
                         bazaar.addItem(itemToSetMoney, price);
-                        InventoryUtils.removeItemFromInventory(player.getInventory(), itemToSetMoney, 1);
+                        InventoryUtils.removeItemFromInventory(player.getInventory(), itemToSetMoney, itemToSetMoney.getAmount());
                         bazaar.edit();
                         BazaarManager.clearPlayerSettingMoneyOfItem(player);
                     } catch (NumberFormatException e) {

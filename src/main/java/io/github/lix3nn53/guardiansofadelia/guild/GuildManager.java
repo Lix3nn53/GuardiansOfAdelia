@@ -1,7 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.guild;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,6 +17,33 @@ public class GuildManager {
 
     public static void addPlayerGuild(Player player, Guild guild) {
         playerToGuild.put(player, guild);
+        GuildManager.updateTablistOfMembers(player);
+    }
+
+    public static void updateTablistOfMembers(Player player) {
+        if (playerToGuild.containsKey(player)) {
+            Guild guild = playerToGuild.get(player);
+            for (UUID uuid : guild.getMembers()) {
+                Player member = Bukkit.getPlayer(uuid);
+                if (member != null) {
+                    TablistUtils.updateTablist(member);
+                }
+            }
+        }
+    }
+
+    public static void sendJoinMessageToMembers(Player player) {
+        if (playerToGuild.containsKey(player)) {
+            Guild guild = playerToGuild.get(player);
+            for (UUID uuid : guild.getMembers()) {
+                if (!uuid.equals(player.getUniqueId())) {
+                    Player member = Bukkit.getPlayer(uuid);
+                    if (member != null) {
+                        member.sendMessage(ChatColor.DARK_PURPLE + "Guild member " + ChatColor.WHITE + player.getName() + ChatColor.DARK_PURPLE + " joined the server.");
+                    }
+                }
+            }
+        }
     }
 
     public static Guild getGuild(Player player) {
@@ -46,6 +78,19 @@ public class GuildManager {
         if (inGuild(player)) {
             Guild guild = getGuild(player);
             playerToGuild.remove(player);
+
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    for (UUID uuid : guild.getMembers()) {
+                        Player member = Bukkit.getPlayer(uuid);
+                        if (member != null) {
+                            TablistUtils.updateTablist(member);
+                        }
+                    }
+                }
+            }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L);
 
             if (!getActiveGuilds().contains(guild)) {
                 DatabaseManager.writeGuildData(guild);

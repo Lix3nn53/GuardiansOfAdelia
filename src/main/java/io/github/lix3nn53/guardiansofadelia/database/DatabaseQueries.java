@@ -419,8 +419,6 @@ public class DatabaseQueries {
                         ItemStack[] itemStacks = ItemSerializer.restoreModdedStacks(storageString);
                         guild.setGuildStorage(itemStacks);
                     }
-
-                    GuildManager.addPlayerGuild(player, guild);
                 }
             }
             resultSet.close();

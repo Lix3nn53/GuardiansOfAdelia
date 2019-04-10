@@ -87,6 +87,7 @@ public class Guild {
                 if (player != null) {
                     GuildManager.removePlayer(player);
                 }
+                DatabaseManager.removeGuildOfPlayer(player.getUniqueId());
             }
         }
     }

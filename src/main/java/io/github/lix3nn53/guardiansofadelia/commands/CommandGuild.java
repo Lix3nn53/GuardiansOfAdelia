@@ -11,16 +11,14 @@ import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class CommandGuild implements CommandExecutor {
 
@@ -56,8 +54,7 @@ public class CommandGuild implements CommandExecutor {
                         Guild guild = new Guild(args[1], args[2]);
                         guild.addMember(player.getUniqueId());
                         guild.setLeader(player.getUniqueId());
-                        GuildManager.addPlayerGuild(player, guild);
-                        player.sendMessage(ChatColor.DARK_PURPLE + "Successfully created a new guild called " + guild.getName());
+                        player.sendMessage(ChatColor.DARK_PURPLE + "Successfully created a new guild called " + ChatColor.WHITE + guild.getName());
                         TablistUtils.updateTablist(player);
                     } else {
                         player.sendMessage(ChatColor.RED + "Creating a new guild costs 2 silver");
@@ -84,38 +81,38 @@ public class CommandGuild implements CommandExecutor {
             } else if (args[0].equals("member")) {
                 if (GuildManager.inGuild(player)) {
                     Guild guild = GuildManager.getGuild(player);
-                    Set<UUID> members = guild.getMembers();
-                    StringBuilder membersString = new StringBuilder("Guild members: ");
-                    for (UUID member : members) {
-                        Player memberPlayer = Bukkit.getPlayer(member);
-                        if (memberPlayer != null) {
-                            membersString.append(memberPlayer.getName() + " ");
-                        }
+                    HashMap<UUID, PlayerRankInGuild> members = guild.getMembersWithRanks();
+                    player.sendMessage("GuildMember  -  Rank");
+                    for (UUID member : members.keySet()) {
+                        OfflinePlayer memberPlayer = Bukkit.getOfflinePlayer(member);
+                        PlayerRankInGuild playerRankInGuild = members.get(member);
+                        player.sendMessage(memberPlayer.getName() + "  -  " + playerRankInGuild.toString());
                     }
-                    player.sendMessage(membersString.toString());
                 }
             } else if (args[0].equals("ann")) {
                 if (GuildManager.inGuild(player)) {
                     Guild guild = GuildManager.getGuild(player);
                     String announcement = guild.getAnnouncement();
-                    player.sendMessage(ChatColor.RED + "Guild announcement: " + announcement);
+                    player.sendMessage(ChatColor.DARK_PURPLE + "Guild announcement: " + ChatColor.WHITE + announcement);
                 }
             } else if (args[0].equals("invite")) {
                 if (args.length == 2) {
-                    Player player2 = Bukkit.getPlayer(args[1]);
-                    if (player2 != null) {
-                        if (player2.isOnline()) {
-                            if (GuildManager.inGuild(player)) {
-                                Guild guild = GuildManager.getGuild(player);
-                                PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
-                                if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
-                                    String receiverMessage = ChatColor.DARK_PURPLE + sender.getName() + " invites you to " + guild.getName() + " guild";
-                                    String receiverTitle = ChatColor.DARK_PURPLE + "Received guild invitation";
-                                    String senderTitle = ChatColor.DARK_PURPLE + "Sent guild invitation";
-                                    GuildInvite invite = new GuildInvite(player, player2, senderTitle, receiverMessage, receiverTitle);
-                                    invite.send();
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "You must be guild leader or commander to invite players to guild");
+                    if (!args[1].equalsIgnoreCase(player.getName())) {
+                        Player player2 = Bukkit.getPlayer(args[1]);
+                        if (player2 != null) {
+                            if (player2.isOnline()) {
+                                if (GuildManager.inGuild(player)) {
+                                    Guild guild = GuildManager.getGuild(player);
+                                    PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
+                                    if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
+                                        String receiverMessage = ChatColor.DARK_PURPLE + sender.getName() + " invites you to " + guild.getName() + " guild";
+                                        String receiverTitle = ChatColor.DARK_PURPLE + "Received guild invitation";
+                                        String senderTitle = ChatColor.DARK_PURPLE + "Sent guild invitation";
+                                        GuildInvite invite = new GuildInvite(player, player2, senderTitle, receiverMessage, receiverTitle);
+                                        invite.send();
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "You must be guild leader or commander to invite players to guild");
+                                    }
                                 }
                             }
                         }
@@ -123,9 +120,9 @@ public class CommandGuild implements CommandExecutor {
                 }
             } else if (args[0].equals("kick")) {
                 if (args.length == 2) {
-                    Player player2 = Bukkit.getPlayer(args[1]);
-                    if (player2 != null) {
-                        if (!player.getUniqueId().equals(player2.getUniqueId())) {
+                    if (!args[1].equalsIgnoreCase(player.getName())) {
+                        Player player2 = Bukkit.getPlayer(args[1]);
+                        if (player2 != null) {
                             if (GuildManager.inGuild(player)) {
                                 Guild guild = GuildManager.getGuild(player);
                                 if (guild.isMember(player2.getUniqueId())) {
@@ -134,7 +131,14 @@ public class CommandGuild implements CommandExecutor {
                                         guild.removeMember(player2.getUniqueId());
                                         player.sendMessage("You kicked " + player2.getName() + " from guild " + guild.getName());
                                         if (player2.isOnline()) {
-                                            player.sendMessage(player.getName() + " kicked your from guild " + guild.getName());
+                                            player2.sendMessage(player.getName() + " kicked you from guild " + guild.getName());
+                                            TablistUtils.updateTablist(player2);
+                                        }
+                                        for (UUID uuid : guild.getMembers()) {
+                                            Player member = Bukkit.getPlayer(uuid);
+                                            if (member != null) {
+                                                TablistUtils.updateTablist(member);
+                                            }
                                         }
                                     } else if (rank.equals(PlayerRankInGuild.COMMANDER)) {
                                         PlayerRankInGuild rank2 = guild.getRankInGuild(player.getUniqueId());
@@ -142,7 +146,14 @@ public class CommandGuild implements CommandExecutor {
                                             guild.removeMember(player2.getUniqueId());
                                             player.sendMessage("You kicked " + player2.getName() + " from guild " + guild.getName());
                                             if (player2.isOnline()) {
-                                                player.sendMessage(player.getName() + " kicked your from guild " + guild.getName());
+                                                player2.sendMessage(player.getName() + " kicked you from guild " + guild.getName());
+                                                TablistUtils.updateTablist(player2);
+                                            }
+                                            for (UUID uuid : guild.getMembers()) {
+                                                Player member = Bukkit.getPlayer(uuid);
+                                                if (member != null) {
+                                                    TablistUtils.updateTablist(member);
+                                                }
                                             }
                                         } else {
                                             player.sendMessage(ChatColor.RED + "You can't kick the guild leader or another commander");
@@ -157,46 +168,48 @@ public class CommandGuild implements CommandExecutor {
                                 player.sendMessage(ChatColor.RED + "You are not in a guild");
                             }
                         } else {
-                            player.sendMessage(ChatColor.RED + "You can't kick yourself");
+                            player.sendMessage(ChatColor.RED + "Player not found");
                         }
                     } else {
-                        player.sendMessage(ChatColor.RED + "Player not found");
+                        player.sendMessage(ChatColor.RED + "You can't kick yourself");
                     }
                 }
             } else if (args[0].equals("ranklist")) {
                 player.sendMessage(ChatColor.DARK_PURPLE + "Ranks in guild: 1-Leader, 2-Commander, 3-Sergeant, 4-Corporal, 5-Soldier");
             } else if (args[0].equals("rank")) {
                 if (args.length == 3) {
-                    if (args[2].equals("1")) {
-                        player.sendMessage(ChatColor.RED + "You can't give guild leader rank to a player. Use /guild newleader instead");
-                        return true;
-                    }
-                    Player player2 = Bukkit.getPlayer(args[1]);
-                    if (player2 != null) {
-                        if (GuildManager.inGuild(player)) {
-                            Guild guild = GuildManager.getGuild(player);
-                            if (guild.isMember(player2.getUniqueId())) {
-                                PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
-                                if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
-                                    if (args[2].equals("2")) {
-                                        guild.setRankInGuild(player2.getUniqueId(), PlayerRankInGuild.COMMANDER);
-                                        player.sendMessage(ChatColor.DARK_PURPLE + player2.getName() + "'s new guild rank is Commander");
-                                        player2.sendMessage(ChatColor.DARK_PURPLE + player.getName() + " changed your guild rank to Commander");
-                                    } else if (args[2].equals("3")) {
-                                        guild.setRankInGuild(player2.getUniqueId(), PlayerRankInGuild.SERGEANT);
-                                        player.sendMessage(ChatColor.DARK_PURPLE + player2.getName() + "'s new guild rank is Sergeant");
-                                        player2.sendMessage(ChatColor.DARK_PURPLE + player.getName() + " changed your guild rank to Sergeant");
-                                    } else if (args[2].equals("4")) {
-                                        guild.setRankInGuild(player2.getUniqueId(), PlayerRankInGuild.CORPORAL);
-                                        player.sendMessage(ChatColor.DARK_PURPLE + player2.getName() + "'s new guild rank is Corporal");
-                                        player2.sendMessage(ChatColor.DARK_PURPLE + player.getName() + " changed your guild rank to Corporal");
-                                    } else if (args[2].equals("5")) {
-                                        guild.setRankInGuild(player2.getUniqueId(), PlayerRankInGuild.SOLDIER);
-                                        player.sendMessage(ChatColor.DARK_PURPLE + player2.getName() + "'s new guild rank is Soldier");
-                                        player2.sendMessage(ChatColor.DARK_PURPLE + player.getName() + " changed your guild rank to Soldier");
+                    if (!args[1].equalsIgnoreCase(player.getName())) {
+                        if (args[2].equals("1")) {
+                            player.sendMessage(ChatColor.RED + "You can't give guild leader rank to a player. Use /guild newleader instead");
+                            return true;
+                        }
+                        Player player2 = Bukkit.getPlayer(args[1]);
+                        if (player2 != null) {
+                            if (GuildManager.inGuild(player)) {
+                                Guild guild = GuildManager.getGuild(player);
+                                if (guild.isMember(player2.getUniqueId())) {
+                                    PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
+                                    if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
+                                        if (args[2].equals("2")) {
+                                            guild.setRankInGuild(player2.getUniqueId(), PlayerRankInGuild.COMMANDER);
+                                            player.sendMessage(ChatColor.DARK_PURPLE + player2.getName() + "'s new guild rank is Commander");
+                                            player2.sendMessage(ChatColor.DARK_PURPLE + player.getName() + " changed your guild rank to Commander");
+                                        } else if (args[2].equals("3")) {
+                                            guild.setRankInGuild(player2.getUniqueId(), PlayerRankInGuild.SERGEANT);
+                                            player.sendMessage(ChatColor.DARK_PURPLE + player2.getName() + "'s new guild rank is Sergeant");
+                                            player2.sendMessage(ChatColor.DARK_PURPLE + player.getName() + " changed your guild rank to Sergeant");
+                                        } else if (args[2].equals("4")) {
+                                            guild.setRankInGuild(player2.getUniqueId(), PlayerRankInGuild.CORPORAL);
+                                            player.sendMessage(ChatColor.DARK_PURPLE + player2.getName() + "'s new guild rank is Corporal");
+                                            player2.sendMessage(ChatColor.DARK_PURPLE + player.getName() + " changed your guild rank to Corporal");
+                                        } else if (args[2].equals("5")) {
+                                            guild.setRankInGuild(player2.getUniqueId(), PlayerRankInGuild.SOLDIER);
+                                            player.sendMessage(ChatColor.DARK_PURPLE + player2.getName() + "'s new guild rank is Soldier");
+                                            player2.sendMessage(ChatColor.DARK_PURPLE + player.getName() + " changed your guild rank to Soldier");
+                                        }
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "You must be guild leader or commander to change guild ranks");
                                     }
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "You must be guild leader or commander to change guild ranks");
                                 }
                             }
                         }
@@ -212,8 +225,9 @@ public class CommandGuild implements CommandExecutor {
                             for (int i = 1; i < args.length; i++) {
                                 announcement += args[i];
                             }
-                            if (announcement.length() < 1000) {
+                            if (announcement.length() < 420) {
                                 guild.setAnnouncement(announcement);
+                                player.sendMessage(ChatColor.DARK_PURPLE + "Set guild announcement to: " + ChatColor.WHITE + announcement);
                             }
                         } else {
                             player.sendMessage(ChatColor.RED + "You must be guild leader or commander to set announcement");
@@ -222,16 +236,18 @@ public class CommandGuild implements CommandExecutor {
                 }
             } else if (args[0].equals("newleader")) {
                 if (args.length >= 2) {
-                    Player player2 = Bukkit.getPlayer(args[1]);
-                    if (player2 != null) {
-                        if (GuildManager.inGuild(player)) {
-                            Guild guild = GuildManager.getGuild(player);
-                            if (guild.isMember(player2.getUniqueId())) {
-                                PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
-                                if (rank.equals(PlayerRankInGuild.LEADER)) {
-                                    guild.setLeader(player2.getUniqueId());
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "You must be guild leader to choose a new guild leader");
+                    if (!args[1].equalsIgnoreCase(player.getName())) {
+                        Player player2 = Bukkit.getPlayer(args[1]);
+                        if (player2 != null) {
+                            if (GuildManager.inGuild(player)) {
+                                Guild guild = GuildManager.getGuild(player);
+                                if (guild.isMember(player2.getUniqueId())) {
+                                    PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
+                                    if (rank.equals(PlayerRankInGuild.LEADER)) {
+                                        guild.setLeader(player2.getUniqueId());
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "You must be guild leader to choose a new guild leader");
+                                    }
                                 }
                             }
                         }
@@ -254,18 +270,26 @@ public class CommandGuild implements CommandExecutor {
                                 guildDestroyWaitingForConfirm.remove(player);
                                 cancel();
                             }
-                        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20L * 30L, 1L);
+                        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * 30L);
                     } else {
                         player.sendMessage(ChatColor.RED + "You must be guild leader to destroy the guild");
                     }
                 }
             } else if (args[0].equals("confirmdestroy")) {
                 if (guildDestroyWaitingForConfirm.contains(player)) {
-                    GuardianData playerData = GuardianDataManager.getGuardianData(player.getUniqueId());
                     if (GuildManager.inGuild(player)) {
                         Guild guild = GuildManager.getGuild(player);
                         guild.destroy();
+                        for (UUID uuid : guild.getMembers()) {
+                            Player member = Bukkit.getPlayer(uuid);
+                            if (member != null) {
+                                TablistUtils.updateTablist(member);
+                                member.sendMessage(ChatColor.RED + "Guild leader (" + player.getName() +") destroyed the guild: " + guild.getName());
+                            }
+                        }
+                        player.sendMessage(ChatColor.RED + "Destroyed the guild: " + ChatColor.WHITE + guild.getName());
                     }
+                    guildDestroyWaitingForConfirm.remove(player);
                 }
             }
         }

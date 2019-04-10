@@ -24,16 +24,27 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class DatabaseManager {
 
     private static final DatabaseQueries databaseQueries = new DatabaseQueries();
 
     public static void onDisable() {
+        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+        for (Player player : onlinePlayers) {
+            UUID uuid = player.getUniqueId();
+            if (GuardianDataManager.hasGuardianData(uuid)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                writeGuardianDataWithCurrentCharacter(player, guardianData);
+                GuardiansOfAdelia.getInstance().getLogger().info("Player save on disable: " + player.getName());
+            }
+        }
+        List<Guild> activeGuilds = GuildManager.getActiveGuilds();
+        for (Guild guild : activeGuilds) {
+            writeGuildData(guild);
+            GuardiansOfAdelia.getInstance().getLogger().info("Guild save on disable: " + guild.getName());
+        }
         databaseQueries.onDisable();
     }
 
@@ -53,6 +64,7 @@ public class DatabaseManager {
                     player.teleport(location);
                     TablistUtils.updateTablist(player);
                     InventoryUtils.setMenuItemPlayer(player);
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> SkillAPIUtils.setActiveCharacter(player, charNo));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -79,6 +91,7 @@ public class DatabaseManager {
                     if (guildOptional.isPresent()) {
                         Guild guild = guildOptional.get();
                         GuildManager.addPlayerGuild(player, guild);
+                        GuildManager.sendJoinMessageToMembers(player);
                     } else {
                         Guild guild = databaseQueries.getGuild(player, guildNameOfPlayer);
                         if (guild != null) {
@@ -91,7 +104,6 @@ public class DatabaseManager {
                 }
 
                 player.sendMessage("Loaded player data");
-                TablistUtils.updateTablist(player);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -211,8 +223,8 @@ public class DatabaseManager {
 
     public static void clearGuild(String guildName) {
         try {
-            databaseQueries.clearGuild(guildName);
             databaseQueries.clearMembersOfGuild(guildName);
+            databaseQueries.clearGuild(guildName);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -234,5 +246,15 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void removeGuildOfPlayer(UUID uuid) {
+        Bukkit.getScheduler().runTaskAsynchronously(GuardiansOfAdelia.getInstance(), () -> {
+            try {
+                databaseQueries.clearGuildOfPlayer(uuid);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

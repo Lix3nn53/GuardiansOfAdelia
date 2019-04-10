@@ -58,7 +58,7 @@ public class Bazaar {
             GuardianData guardianData = GuardianDataManager.getGuardianData(owner.getUniqueId());
             if (getItemsOnSale().contains(itemStack)) {
                 guardianData.removeFromBazaarStorage(itemStack);
-                customerGui.removeItem(itemStack, 1);
+                customerGui.removeItem(itemStack, itemStack.getAmount());
                 return true;
             }
         }

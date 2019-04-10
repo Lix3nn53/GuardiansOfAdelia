@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Set;
 import java.util.UUID;
 
 public class GuardianDataManager {
@@ -37,5 +38,9 @@ public class GuardianDataManager {
             }
         }
         onlineGuardians.remove(uuid);
+    }
+
+    public static Set<UUID> getOnlineUUIDs() {
+        return onlineGuardians.keySet();
     }
 }

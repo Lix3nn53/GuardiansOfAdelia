@@ -25,7 +25,7 @@ public class MyPlayerAnimationEvent implements Listener {
         }
         Player player = event.getPlayer();
 
-        List<Entity> nearbyEntities = player.getNearbyEntities(2, 2, 2);
+        List<Entity> nearbyEntities = player.getNearbyEntities(1, 1, 1);
         for (Entity entity : nearbyEntities) {
             if (entity.getType().equals(EntityType.ARMOR_STAND)) {
                 if (BazaarManager.isBazaar(entity)) {

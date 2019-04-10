@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guild;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -45,7 +46,8 @@ public class GuildInvite extends Invite {
                     for (UUID uuid : guild.getMembers()) {
                         Player member = Bukkit.getPlayer(uuid);
                         if (member != null) {
-                            member.sendMessage(getReceiver().getName() + ChatColor.DARK_PURPLE + " joined guild (invited by" + getSender().getName() + ")");
+                            member.sendMessage(getReceiver().getName() + ChatColor.DARK_PURPLE + " joined guild " + guild.getName() + " (invited by" + getSender().getName() + ")");
+                            TablistUtils.updateTablist(member);
                         }
                     }
                 }

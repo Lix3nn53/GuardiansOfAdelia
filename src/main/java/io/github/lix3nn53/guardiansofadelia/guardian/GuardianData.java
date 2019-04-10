@@ -143,7 +143,7 @@ public class GuardianData {
     }
 
     public void removeFromBazaarStorage(ItemStack itemStack) {
-        this.bazaarStorage.removeItem(itemStack, 1);
+        this.bazaarStorage.removeItem(itemStack, itemStack.getAmount());
     }
 
     public void setTeleporting(boolean teleporting) {

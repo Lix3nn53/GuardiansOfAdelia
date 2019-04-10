@@ -10,7 +10,7 @@ public class Spawner {
     private final String mobCode;
     private final int amountPerSpawn;
     private final int maxAmount;
-    private int spawnedEntityAmount;
+    private int spawnedEntityAmount = 0;
 
     public Spawner(Location location, String mobCode, int amountPerSpawn, int maxAmount) {
         this.location = location;
@@ -31,6 +31,10 @@ public class Spawner {
 
     public void onSpawnedEntityDeath() {
         spawnedEntityAmount--;
+    }
+
+    public void resetEntityCount() {
+        spawnedEntityAmount = 0;
     }
 
     public String getMobCode() {

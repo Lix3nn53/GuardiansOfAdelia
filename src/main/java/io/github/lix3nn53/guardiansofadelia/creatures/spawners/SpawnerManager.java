@@ -53,7 +53,7 @@ public class SpawnerManager {
             List<Spawner> spawners = chunkKeyToSpawners.get(chunkKey);
             activeSpawners.removeAll(spawners);
             for (Spawner spawner : spawners) {
-                spawner.onSpawnedEntityDeath();
+                spawner.resetEntityCount();
             }
         }
     }
@@ -83,7 +83,7 @@ public class SpawnerManager {
                     }
                 }
             }
-        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20 * 40L, 20 * 15L);
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20 * 40L, 20 * 20L);
     }
 
     public static List<Spawner> getSpawners() {
