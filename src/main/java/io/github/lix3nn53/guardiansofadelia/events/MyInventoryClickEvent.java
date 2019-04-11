@@ -15,6 +15,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
@@ -51,6 +53,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 import java.util.UUID;
@@ -185,7 +188,8 @@ public class MyInventoryClickEvent implements Listener {
             }
         }
 
-        String currentName = current.getItemMeta().getDisplayName();
+        ItemMeta itemMeta = current.getItemMeta();
+        String currentName = itemMeta.getDisplayName();
         Inventory topInventory = event.getView().getTopInventory();
 
         if (currentName.equals(ChatColor.GREEN + "Menu")) {
@@ -348,7 +352,7 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        }  else if (title.equals(ChatColor.GOLD + "Coin Converter")) {
+        } else if (title.equals(ChatColor.GOLD + "Coin Converter")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 PlayerInventory playerInventory = player.getInventory();
                 if (current.getType().equals(Material.IRON_INGOT)) {
@@ -377,14 +381,14 @@ public class MyInventoryClickEvent implements Listener {
             }
         } else if (title.equals(ChatColor.AQUA + "Compass")) {
             if (current.getType().equals(Material.LIGHT_BLUE_WOOL)) {
-                String displayName = current.getItemMeta().getDisplayName();
+                String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
 
                 Town town = TownManager.getTown(i);
                 CompassManager.setCompassItemLocation(player, town.getName(), town.getLocation());
             } else if (current.getType().equals(Material.LIME_WOOL)) {
-                String displayName = current.getItemMeta().getDisplayName();
+                String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
                 CompassManager.setCompassItemNPC(player, i);
@@ -474,6 +478,21 @@ public class MyInventoryClickEvent implements Listener {
                 InventoryUtils.giveItemToPlayer(player, removedShopPrice);
                 clickedInventory.setItem(slot, new ItemStack(Material.AIR));
 
+            }
+        } else if (title.contains("Join dungeon: ")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                if (current.getType().equals(Material.LIME_WOOL)) {
+                    String s = title.replace("Join dungeon: ", "");
+                    DungeonTheme dungeonTheme = DungeonTheme.valueOf(s);
+                    String displayName = itemMeta.getDisplayName();
+                    int i = displayName.indexOf("#");
+                    String c = String.valueOf(displayName.charAt(i + 1));
+                    int roomNo = Integer.parseInt(c);
+                    boolean joined = MiniGameManager.getDungeon(dungeonTheme, roomNo).joinQueue(player);
+                    if (joined) {
+                        player.closeInventory();
+                    }
+                }
             }
         }
     }

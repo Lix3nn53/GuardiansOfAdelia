@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
@@ -68,6 +69,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 quest.progressKillTasks(player, livingTarget);
                             }
                             PartyManager.progressMobKillTasksOfOtherMembers(player, livingTarget);
+
+                            if (MiniGameManager.isInMinigame(player)) {
+                                MiniGameManager.onMobKillDungeon(player, livingTarget);
+                            }
                         }
                     }
                 }

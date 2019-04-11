@@ -3,37 +3,22 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
 
 public enum DungeonTheme {
     SLIME, ZOMBIE, MAGIC_FOREST, ICE_CREAM, PIRATE, ICE, DESERT, SWAMP, LAVA, DARKNESS;
-
-    public String getCode() {
-        if (this.equals(DungeonTheme.DARKNESS)) {
-            return "dark";
-        } else if (this.equals(DungeonTheme.DESERT)) {
-            return "desert";
-        } else if (this.equals(DungeonTheme.SWAMP)) {
-            return "swamp";
-        } else if (this.equals(DungeonTheme.ICE_CREAM)) {
-            return "sugar";
-        } else if (this.equals(DungeonTheme.ICE)) {
-            return "ice";
-        } else if (this.equals(DungeonTheme.MAGIC_FOREST)) {
-            return "magic";
-        } else if (this.equals(DungeonTheme.PIRATE)) {
-            return "pirate";
-        } else if (this.equals(DungeonTheme.LAVA)) {
-            return "lava";
-        } else if (this.equals(DungeonTheme.ZOMBIE)) {
-            return "zombie";
-        }
-        return "slime";
-    }
 
     public String getName() {
         if (this.equals(DungeonTheme.DARKNESS)) {
@@ -63,10 +48,7 @@ public enum DungeonTheme {
         Optional<Town> townOptional = TownManager.getTowns().stream()
                 .filter(item -> item.getNo() == townNo)
                 .findAny();
-        if (townOptional.isPresent()) {
-            return townOptional.get();
-        }
-        return null;
+        return townOptional.orElse(null);
     }
 
     private int getTownNo() {
@@ -132,12 +114,12 @@ public enum DungeonTheme {
     }
 
     private void generateChestItems(PrizeChest prizeChest, String itemTag, GearLevel gearLevel) {
-        double random = Math.random();
-        if (random < 0.3) {
+        int random = new Random().nextInt(3);
+        if (random == 0) {
             prizeChest.setName(prizeChest.getName() + " (Weapon)");
             prizeChest.addItemList(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, itemTag, gearLevel));
             prizeChest.addItemList(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, itemTag, gearLevel));
-        } else if (random < 0.6) {
+        } else if (random == 1) {
             prizeChest.setName(prizeChest.getName() + " (Jewelry)");
             prizeChest.addItemList(ItemPoolGenerator.generatePassives(ItemTier.MYSTIC, itemTag, gearLevel));
             prizeChest.addItemList(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, itemTag, gearLevel));
@@ -146,5 +128,60 @@ public enum DungeonTheme {
             prizeChest.addItemList(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, itemTag, gearLevel));
             prizeChest.addItemList(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, itemTag, gearLevel));
         }
+    }
+
+    public GuiGeneric getJoinQueueGui() {
+        GuiGeneric guiGeneric = new GuiGeneric(27, "Join dungeon: " + toString(), 0);
+
+        Dungeon dungeon = MiniGameManager.getDungeon(this, 1);
+        ItemStack room = new ItemStack(Material.LIME_WOOL);
+        ItemMeta itemMeta = room.getItemMeta();
+        itemMeta.setDisplayName(getName() + " #1 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Click to join this dungeon room!");
+        }});
+        room.setItemMeta(itemMeta);
+
+        if (dungeon.isInGame()) {
+            room.setType(Material.RED_WOOL);
+        }
+        room.setItemMeta(itemMeta);
+        guiGeneric.setItem(9, room);
+
+        dungeon = MiniGameManager.getDungeon(this, 2);
+        itemMeta.setDisplayName(getName() + " #2 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
+        room.setItemMeta(itemMeta);
+
+        room.setType(Material.LIME_WOOL);
+        if (dungeon.isInGame()) {
+            room.setType(Material.RED_WOOL);
+        }
+        room.setItemMeta(itemMeta);
+        guiGeneric.setItem(11, room);
+
+        dungeon = MiniGameManager.getDungeon(this, 3);
+        itemMeta.setDisplayName(getName() + " #3 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
+        room.setItemMeta(itemMeta);
+
+        room.setType(Material.LIME_WOOL);
+        if (dungeon.isInGame()) {
+            room.setType(Material.RED_WOOL);
+        }
+        room.setItemMeta(itemMeta);
+        guiGeneric.setItem(13, room);
+
+        dungeon = MiniGameManager.getDungeon(this, 4);
+        itemMeta.setDisplayName(getName() + " #4 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
+        room.setItemMeta(itemMeta);
+
+        room.setType(Material.LIME_WOOL);
+        if (dungeon.isInGame()) {
+            room.setType(Material.RED_WOOL);
+        }
+        room.setItemMeta(itemMeta);
+        guiGeneric.setItem(15, room);
+
+        return guiGeneric;
     }
 }

@@ -2,8 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.commands;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildInvite;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
@@ -18,7 +16,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class CommandGuild implements CommandExecutor {
 
@@ -284,7 +285,7 @@ public class CommandGuild implements CommandExecutor {
                             Player member = Bukkit.getPlayer(uuid);
                             if (member != null) {
                                 TablistUtils.updateTablist(member);
-                                member.sendMessage(ChatColor.RED + "Guild leader (" + player.getName() +") destroyed the guild: " + guild.getName());
+                                member.sendMessage(ChatColor.RED + "Guild leader (" + player.getName() + ") destroyed the guild: " + guild.getName());
                             }
                         }
                         player.sendMessage(ChatColor.RED + "Destroyed the guild: " + ChatColor.WHITE + guild.getName());

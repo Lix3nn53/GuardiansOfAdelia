@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ScoreboardGeneral implements MyScoreboard {
+public abstract class ScoreboardGeneral implements MyScoreboard {
 
     Scoreboard board;
     List<Player> registeredPlayers = new ArrayList<>();
@@ -33,7 +34,6 @@ public class ScoreboardGeneral implements MyScoreboard {
         }
     }
 
-    @Override
     public void removeLine(int row) {
         if (row <= 15 && row > 0) {
             if (rowLines.containsKey(row)) {

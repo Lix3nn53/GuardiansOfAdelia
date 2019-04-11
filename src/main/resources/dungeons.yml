@@ -1,0 +1,406 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#                 Town Information               #
+# ---------------------------------------------- #
+
+SLIME1:
+  x: 1029
+  y: 21.5
+  z: 528
+  world: dungeons
+  yaw: 20
+  pitch: -0.3
+  levelReq: 5
+  timeLimitInMinutes: 10
+  bossMobName: §6King Slime
+SLIME2:
+  x: 1032
+  y: 21.5
+  z: 57
+  world: dungeons
+  yaw: -341
+  pitch: 2
+  levelReq: 5
+  timeLimitInMinutes: 10
+  bossMobName: §6King Slime
+SLIME3:
+  x: 1040
+  y: 21.5
+  z: -411
+  world: dungeons
+  yaw: -341
+  pitch: 0.45
+  levelReq: 5
+  timeLimitInMinutes: 10
+  bossMobName: §6King Slime
+SLIME4:
+  x: 1046.5
+  y: 21.5
+  z: -875.5
+  world: dungeons
+  yaw: -338.5
+  pitch: -1.35
+  levelReq: 5
+  timeLimitInMinutes: 10
+  bossMobName: §6King Slime
+ZOMBIE1:
+  x: -66.5
+  y: 112.5
+  z: 579.5
+  world: dungeons
+  yaw: -286.5
+  pitch: 5.7
+  levelReq: 10
+  timeLimitInMinutes: 10
+  bossMobName: §2Zombie Leader
+ZOMBIE2:
+  x: -57.5
+  y: 112.5
+  z: 124.5
+  world: dungeons
+  yaw: -287
+  pitch: 6
+  levelReq: 10
+  timeLimitInMinutes: 10
+  bossMobName: §2Zombie Leader
+ZOMBIE3:
+  x: -75.5
+  y: 112.5
+  z: -390.5
+  world: dungeons
+  yaw: -285.8
+  pitch: 3.75
+  levelReq: 10
+  timeLimitInMinutes: 10
+  bossMobName: §2Zombie Leader
+ZOMBIE4:
+  x: -77.53
+  y: 112.5
+  z: -870.4
+  world: dungeons
+  yaw: -288.5
+  pitch: 5.5
+  levelReq: 10
+  timeLimitInMinutes: 10
+  bossMobName: §2Zombie Leader
+MAGIC_FOREST1:
+  x: 350.53
+  y: 111.5
+  z: 533.5
+  world: dungeons
+  yaw: -183
+  pitch: -0.9
+  levelReq: 15
+  timeLimitInMinutes: 10
+  bossMobName: §5Dark Magic Master
+MAGIC_FOREST2:
+  x: 351.5
+  y: 111.5
+  z: -340
+  world: dungeons
+  yaw: -192.5
+  pitch: -0.9
+  levelReq: 15
+  timeLimitInMinutes: 10
+  bossMobName: §5Dark Magic Master
+MAGIC_FOREST3:
+  x: 336.5
+  y: 111.5
+  z: -1187.5
+  world: dungeons
+  yaw: -193.5
+  pitch: -0.5
+  levelReq: 15
+  timeLimitInMinutes: 10
+  bossMobName: §5Dark Magic Master
+MAGIC_FOREST4:
+  x: 325.5
+  y: 111.5
+  z: -2093.5
+  world: dungeons
+  yaw: -192.5
+  pitch: -1.5
+  levelReq: 15
+  timeLimitInMinutes: 10
+  bossMobName: §5Dark Magic Master
+ICE_CREAM1:
+  x: 2925.5
+  y: 23.5
+  z: 691.5
+  world: dungeons
+  yaw: -168.5
+  pitch: -5.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §eMad Cook
+ICE_CREAM2:
+  x: 2917.5
+  y: 23.5
+  z: 80
+  world: dungeons
+  yaw: -166.5
+  pitch: -7
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §eMad Cook
+ICE_CREAM3:
+  x: 2914.5
+  y: 23.5
+  z: -545.5
+  world: dungeons
+  yaw: -166.5
+  pitch: -7.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §eMad Cook
+ICE_CREAM4:
+  x: 2911.5
+  y: 23.5
+  z: -1186.5
+  world: dungeons
+  yaw: -165.5
+  pitch: -7
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §eMad Cook
+PIRATE1:
+  x: 4452.5
+  y: 66.5
+  z: 710.5
+  world: dungeons
+  yaw: -138
+  pitch: 13.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §3Captain Barbaros
+PIRATE2:
+  x: 4451.5
+  y: 66.5
+  z: 59.5
+  world: dungeons
+  yaw: -137.5
+  pitch: 22.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §3Captain Barbaros
+PIRATE3:
+  x: 4461.53
+  y: 66.0
+  z: -538.5
+  world: dungeons
+  yaw: -138.5
+  pitch: 3.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §3Captain Barbaros
+PIRATE4:
+  x: 4464
+  y: 66.5
+  z: -1154.5
+  world: dungeons
+  yaw: -150.5
+  pitch: 9
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §3Captain Barbaros
+ICE1:
+  x: 4140.5
+  y: 61.5
+  z: 679.5
+  world: dungeons
+  yaw: -227.5
+  pitch: 1.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §bMakvurn
+ICE2:
+  x: 4130.5
+  y: 61.5
+  z: 55.5
+  world: dungeons
+  yaw: 134.5
+  pitch: 1.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §bMakvurn
+ICE3:
+  x: 4138.5
+  y: 61.5
+  z: -525.5
+  world: dungeons
+  yaw: -226.5
+  pitch: 0.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §bMakvurn
+ICE4:
+  x: 4154.5
+  y: 61.5
+  z: -1132.5
+  world: dungeons
+  yaw: -225.5
+  pitch: 1.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §bMakvurn
+DESERT1:
+  x: 1984
+  y: 54.5
+  z: 358.5
+  world: dungeons
+  yaw: -18.5
+  pitch: 0.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §eSelket
+DESERT2:
+  x: 1956.5
+  y: 54.5
+  z: -255.5
+  world: dungeons
+  yaw: -20.5
+  pitch: -1.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §eSelket
+DESERT3:
+  x: 1939.5
+  y: 54.5
+  z: -851.5
+  world: dungeons
+  yaw: -14.5
+  pitch: -0.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §eSelket
+DESERT4:
+  x: 1900.5
+  y: 54.5
+  z: -1443.5
+  world: dungeons
+  yaw: -16.5
+  pitch: -0.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §eSelket
+SWAMP1:
+  x: 1478.5
+  y: 77.5
+  z: 659.5
+  world: dungeons
+  yaw: -92.5
+  pitch: 5.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §9Mage Woz
+SWAMP2:
+  x: 1446.5
+  y: 77.5
+  z: -34.5
+  world: dungeons
+  yaw: -95.5
+  pitch: 2.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §9Mage Woz
+SWAMP3:
+  x: 1455
+  y: 77.5
+  z: -604.5
+  world: dungeons
+  yaw: -98.5
+  pitch: 5.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §9Mage Woz
+SWAMP4:
+  x: 1437.5
+  y: 77.5
+  z: -1191
+  world: dungeons
+  yaw: -97.5
+  pitch: 2.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §9Mage Woz
+LAVA1:
+  x: 2503.5
+  y: 64.5
+  z: 705.5
+  world: dungeons
+  yaw: -190.5
+  pitch: 5.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §cWar Chief Drogoth
+LAVA2:
+  x: 2494.5
+  y: 64.5
+  z: -68.53
+  world: dungeons
+  yaw: -194
+  pitch: -1.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §cWar Chief Drogoth
+LAVA3:
+  x: 2483.5
+  y: 64.5
+  z: -826.5
+  world: dungeons
+  yaw: -189.5
+  pitch: -4.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §cWar Chief Drogoth
+LAVA4:
+  x: 2479.5
+  y: 64.5
+  z: -1600.5
+  world: dungeons
+  yaw: 170.5
+  pitch: -2.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §cWar Chief Drogoth
+DARKNESS1:
+  x: 3515.5
+  y: 151.5
+  z: 688.5
+  world: dungeons
+  yaw: -179.5
+  pitch: 0.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §4Malephar
+DARKNESS2:
+  x: 3522.5
+  y: 151.5
+  z: -210.5
+  world: dungeons
+  yaw: -180.5
+  pitch: 2.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §4Malephar
+DARKNESS3:
+  x: 3530.5
+  y: 151.5
+  z: -1069.5
+  world: dungeons
+  yaw: -180.5
+  pitch: -0.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §4Malephar
+DARKNESS4:
+  x: 3553.5
+  y: 151.5
+  z: -1957.5
+  world: dungeons
+  yaw: -180.5
+  pitch: 0.5
+  levelReq: 20
+  timeLimitInMinutes: 10
+  bossMobName: §4Malephar

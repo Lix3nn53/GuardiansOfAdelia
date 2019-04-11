@@ -208,12 +208,10 @@ public class EntityList {
         } else if (mobcode.equals("beginner5")) {
             Slime entity = (Slime) EntityUtils.create(loc, ChatColor.GREEN + "Baby Slime", 100D, EntityType.SLIME);
             entity.setSize(2);
-            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(2D);
             return entity;
         } else if (mobcode.equals("beginner6")) {
             Slime entity = (Slime) EntityUtils.create(loc, ChatColor.GREEN + "Sticky Slime", 120D, EntityType.SLIME);
             entity.setSize(3);
-            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(2D);
             return entity;
         } else if (mobcode.equals("zombie1")) {
             Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Zombie", 180D, EntityType.ZOMBIE);
@@ -660,7 +658,6 @@ public class EntityList {
             return entity;
         } else if (mobcode.equals("slimeboss")) {
             Slime entity = (Slime) EntityUtils.create(loc, ChatColor.GOLD + "King Slime", 840D, EntityType.SLIME);
-            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(10D);
             entity.setSize(6);
             return entity;
         } else if (mobcode.equals("zombieboss")) {

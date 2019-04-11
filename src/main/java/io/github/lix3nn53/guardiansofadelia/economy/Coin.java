@@ -60,6 +60,6 @@ public class Coin {
 
             return money;
         }
-        return null;
+        return new ItemStack(Material.AIR);
     }
 }

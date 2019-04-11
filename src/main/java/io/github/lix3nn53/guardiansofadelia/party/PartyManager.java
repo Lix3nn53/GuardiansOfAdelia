@@ -36,6 +36,12 @@ public class PartyManager {
         playerToParty.put(player, party);
     }
 
+    public static void addMembers(List<Player> players, Party party) {
+        for (Player player : players) {
+            playerToParty.put(player, party);
+        }
+    }
+
     //QUEST PROGRESSES
 
 
@@ -57,12 +63,10 @@ public class PartyManager {
                             for (Quest quest : questList) {
                                 quest.progressDealDamageTasks(member, livingTarget, (int) (finalDamage + 0.5));
                             }
-                            member.sendMessage("Party quest deal damage share");
                         }
                     }
                 }
             }
-            player.sendMessage("Party quest deal damage share");
         }
     }
 
@@ -84,12 +88,10 @@ public class PartyManager {
                             for (Quest quest : questList) {
                                 quest.progressKillTasks(member, livingTarget);
                             }
-                            member.sendMessage("Party quest kill mob share");
                         }
                     }
                 }
             }
-            player.sendMessage("Party quest kill mob share");
         }
     }
 

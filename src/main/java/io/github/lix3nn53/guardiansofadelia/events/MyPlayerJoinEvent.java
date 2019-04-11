@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,6 +15,7 @@ public class MyPlayerJoinEvent implements Listener {
     public void onEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
+        player.setGameMode(GameMode.ADVENTURE);
         player.getInventory().clear();
         //character selection handles loading data too
 

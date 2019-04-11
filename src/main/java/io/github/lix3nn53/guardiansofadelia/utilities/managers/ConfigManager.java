@@ -3,6 +3,9 @@ package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import org.bukkit.Bukkit;
@@ -25,6 +28,8 @@ public class ConfigManager {
     private static FileConfiguration spawnersConfig;
     private static FileConfiguration characterSelectionConfig;
     private static FileConfiguration townsConfig;
+    private static FileConfiguration dungeonsConfig;
+    private static FileConfiguration dungeonGatesConfig;
 
     public static void init() {
         if (!GuardiansOfAdelia.getInstance().getDataFolder().exists()) {
@@ -37,16 +42,20 @@ public class ConfigManager {
         createSpawners();
         createCharacterSelectionConfig();
         createTowns();
+        createDungeons();
+        createDungeonGates();
     }
 
     public static void loadConfigALL() {
         loadSpawners();
         loadCharacterSelectionConfig();
         loadTowns();
+        loadDungeons();
+        loadDungeonGates();
     }
 
     public static void writeConfigALL() {
-        writeSpawners();
+
     }
 
     private static void createSpawners() {
@@ -228,6 +237,109 @@ public class ConfigManager {
         }
         try {
             characterSelectionConfig.save(configFile + "/characterSelection.yml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void createDungeons() {
+        File customConfigFile = new File(configFile, "dungeons.yml");
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+            GuardiansOfAdelia.getInstance().saveResource("dungeons.yml", false);
+        }
+
+        dungeonsConfig = new YamlConfiguration();
+        try {
+            dungeonsConfig.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadDungeons() {
+        for (DungeonTheme dungeonTheme : DungeonTheme.values()) {
+            for (int i = 1; i <= 4; i++) {
+                String code = dungeonTheme.toString() + i;
+                String worldString = dungeonsConfig.getString(code + ".world");
+                World world = Bukkit.getWorld(worldString);
+                double x = dungeonsConfig.getDouble(code + ".x");
+                double y = dungeonsConfig.getDouble(code + ".y");
+                double z = dungeonsConfig.getDouble(code + ".z");
+                float yaw = (float) dungeonsConfig.getDouble(code + ".yaw");
+                float pitch = (float) dungeonsConfig.getDouble(code + ".pitch");
+                Location location = new Location(world, x, y, z, yaw, pitch);
+
+                int levelReq = dungeonsConfig.getInt(code + ".levelReq");
+                int timeLimitInMinutes = dungeonsConfig.getInt(code + ".timeLimitInMinutes");
+                String bossMobName = dungeonsConfig.getString(code + ".bossMobName");
+                List<Location> locations = new ArrayList<>();
+                locations.add(location);
+                Dungeon dungeon = new Dungeon(levelReq, timeLimitInMinutes, dungeonTheme, i, locations, bossMobName);
+                MiniGameManager.addDungeon(dungeonTheme, i, dungeon);
+            }
+        }
+    }
+
+    private static void writeDungeons() {
+        for (String code : MiniGameManager.getDungeons()) {
+            Dungeon dungeon = MiniGameManager.getDungeon(code);
+            Location startLocation = dungeon.getStartLocation(0);
+            dungeonsConfig.set(code + ".world", startLocation.getWorld().getName());
+            dungeonsConfig.set(code + ".x", startLocation.getX());
+            dungeonsConfig.set(code + ".y", startLocation.getY());
+            dungeonsConfig.set(code + ".z", startLocation.getZ());
+            dungeonsConfig.set(code + ".yaw", startLocation.getYaw());
+            dungeonsConfig.set(code + ".pitch", startLocation.getPitch());
+
+            dungeonsConfig.set(code + ".levelReq", dungeon.getLevelReq());
+            dungeonsConfig.set(code + ".timeLimitInMinutes", dungeon.getTimeLimitInMinutes());
+            dungeonsConfig.set(code + ".bossMobName", dungeon.getBossMobName());
+        }
+        try {
+            dungeonsConfig.save(configFile + "/dungeons.yml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void createDungeonGates() {
+        File customConfigFile = new File(configFile, "dungeonGates.yml");
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+            GuardiansOfAdelia.getInstance().saveResource("dungeonGates.yml", false);
+        }
+
+        dungeonGatesConfig = new YamlConfiguration();
+        try {
+            dungeonGatesConfig.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadDungeonGates() {
+        for (DungeonTheme dungeonTheme : DungeonTheme.values()) {
+            String worldString = dungeonGatesConfig.getString(dungeonTheme.toString() + ".world");
+            World world = Bukkit.getWorld(worldString);
+            double x = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".x");
+            double y = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".y");
+            double z = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".z");
+            Location location = new Location(world, x, y, z);
+            MiniGameManager.addGate(location, dungeonTheme);
+        }
+    }
+
+    private static void writeDungeonGates() {
+        for (Location location : MiniGameManager.getDungeonGates()) {
+            DungeonTheme theme = MiniGameManager.getDungeonFromGate(location);
+            dungeonGatesConfig.set(theme.toString() + ".world", location.getWorld().getName());
+            dungeonGatesConfig.set(theme.toString() + ".x", location.getX());
+            dungeonGatesConfig.set(theme.toString() + ".y", location.getY());
+            dungeonGatesConfig.set(theme.toString() + ".z", location.getZ());
+        }
+        try {
+            dungeonsConfig.save(configFile + "/dungeonGates.yml");
         } catch (IOException e) {
             e.printStackTrace();
         }

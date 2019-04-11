@@ -12,8 +12,8 @@ import java.util.UUID;
 
 public class Guild {
 
-    private HashMap<UUID, PlayerRankInGuild> members = new HashMap<UUID, PlayerRankInGuild>();
     private final GuiGeneric guildStorage = new GuiGeneric(54, "Guild Storage", 0);
+    private HashMap<UUID, PlayerRankInGuild> members = new HashMap<UUID, PlayerRankInGuild>();
     private String name;
     private String tag;
     private int warPoints = 0;

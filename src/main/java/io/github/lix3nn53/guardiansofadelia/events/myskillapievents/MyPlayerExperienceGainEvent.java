@@ -30,12 +30,10 @@ public class MyPlayerExperienceGainEvent implements Listener {
                 for (Player member : members) {
                     if (!member.getUniqueId().equals(player.getUniqueId())) {
                         SkillAPIUtils.givePartyExp(member, exp);
-                        member.sendMessage("Party exp share");
                     }
                 }
 
                 event.setExp(exp);
-                player.sendMessage("Party exp share");
             }
         }
     }
