@@ -46,7 +46,7 @@ public class PartyManager {
 
 
     public static void progressDealDamageTasksOfOtherMembers(Player player, LivingEntity livingTarget, double finalDamage) {
-        if (PartyManager.inParty(player)) {
+        if (inParty(player)) {
             Party party = PartyManager.getParty(player);
             List<Player> members = party.getMembers();
 
@@ -71,7 +71,7 @@ public class PartyManager {
     }
 
     public static void progressMobKillTasksOfOtherMembers(Player player, LivingEntity livingTarget) {
-        if (PartyManager.inParty(player)) {
+        if (inParty(player)) {
             Party party = PartyManager.getParty(player);
             List<Player> members = party.getMembers();
 

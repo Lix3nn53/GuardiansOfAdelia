@@ -10,9 +10,9 @@ import java.util.List;
 public final class Party {
 
     private final int size;
-    private List<Player> members;
+    private final List<Player> members;
+    private final BoardWithPlayers board;
     private Player leader;
-    private BoardWithPlayers board;
 
     public Party(List<Player> members, int size) {
         this.members = members;
@@ -62,6 +62,7 @@ public final class Party {
 
             onMemberRemove(playerLeft);
         }
+
     }
 
     public void kickMember(Player kicker, Player playerToKick) {

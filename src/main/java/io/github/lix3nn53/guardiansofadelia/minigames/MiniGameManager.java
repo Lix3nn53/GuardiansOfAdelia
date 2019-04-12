@@ -32,14 +32,14 @@ public class MiniGameManager {
         startLocations.add(new Location(Bukkit.getWorld("arena"), -71.5, 145.5, -305.5, -135, -2));
         startLocations.add(new Location(Bukkit.getWorld("arena"), 56.5, 145.5, -305.5, 135, -2));
         startLocations.add(new Location(Bukkit.getWorld("arena"), 56.5, 145.5, -433.5, 45, -2));
-        LastOneStanding room = new LastOneStanding(1, 5, 1, startLocations, 1, 2, 2, 2);
+        LastOneStanding room = new LastOneStanding(1, 5, 1, startLocations, 1, 3, 2, 3);
         lastOneStandingList.add(room);
 
         List<Location> startLocations2 = new ArrayList<>();
         startLocations2.add(new Location(Bukkit.getWorld("arena"), -60.5, 141.5, 22.5, -135, -2));
         startLocations2.add(new Location(Bukkit.getWorld("arena"), 67.5, 141.5, 22.5, 135, -2));
         startLocations2.add(new Location(Bukkit.getWorld("arena"), 67.5, 141.5, -105.5, 48, -2));
-        LastOneStanding room2 = new LastOneStanding(1, 5, 2, startLocations2, 1, 2, 2, 2);
+        LastOneStanding room2 = new LastOneStanding(1, 5, 2, startLocations2, 1, 3, 2, 3);
         lastOneStandingList.add(room2);
 
         List<Location> startLocations3 = new ArrayList<>();
@@ -119,7 +119,6 @@ public class MiniGameManager {
         if (playerToMinigame.containsKey(player)) {
             Minigame minigame = playerToMinigame.get(player);
             minigame.leave(player);
-            playerToMinigame.remove(player);
         }
     }
 

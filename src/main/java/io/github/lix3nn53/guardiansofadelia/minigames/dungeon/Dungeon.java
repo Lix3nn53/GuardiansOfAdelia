@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
-import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
@@ -32,8 +31,8 @@ public class Dungeon extends Minigame {
             PrizeChest prizeChest = theme.getPrizeChest();
             ItemStack prizeItem = prizeChest.getChest();
 
-            Party party = getTeams().get(winnerTeam);
-            for (Player member : party.getMembers()) {
+            List<Player> party = getTeams().get(winnerTeam);
+            for (Player member : party) {
                 member.sendMessage(ChatColor.GOLD + "Dungeon prize: " + prizeItem.getItemMeta().getDisplayName());
                 InventoryUtils.giveItemToPlayer(member, prizeItem);
             }

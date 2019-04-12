@@ -284,7 +284,7 @@ public class ConfigManager {
     private static void writeDungeons() {
         for (String code : MiniGameManager.getDungeons()) {
             Dungeon dungeon = MiniGameManager.getDungeon(code);
-            Location startLocation = dungeon.getStartLocation(0);
+            Location startLocation = dungeon.getStartLocation(1);
             dungeonsConfig.set(code + ".world", startLocation.getWorld().getName());
             dungeonsConfig.set(code + ".x", startLocation.getX());
             dungeonsConfig.set(code + ".y", startLocation.getY());
