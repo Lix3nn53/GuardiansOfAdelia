@@ -393,6 +393,22 @@ public class MyInventoryClickEvent implements Listener {
                 int i = Integer.parseInt(split[1]);
                 CompassManager.setCompassItemNPC(player, i);
             }
+        } else if (title.equals(ChatColor.GOLD + "MiniGames")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                if (currentName.equals(ChatColor.RED + "Last One Standing")) {
+                    MiniGameManager.getLastOneStandingJoinGui().openInventory(player);
+                }
+            }
+        } else if (title.equals(ChatColor.GOLD + "Join Last One Standing")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                int i = currentName.indexOf("#");
+                String c = String.valueOf(currentName.charAt(i + 1));
+                int roomNo = Integer.parseInt(c);
+                boolean joined = MiniGameManager.getLastOneStanding(roomNo).joinQueue(player);
+                if (joined) {
+                    player.closeInventory();
+                }
+            }
         } else if (title.equals(ChatColor.YELLOW.toString() + ChatColor.BOLD + "RPG Inventory")) {
             RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {

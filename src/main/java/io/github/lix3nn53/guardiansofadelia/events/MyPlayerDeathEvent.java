@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
-import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import org.bukkit.Location;
@@ -18,18 +17,18 @@ public class MyPlayerDeathEvent implements Listener {
     public void onEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
 
-        Location location = player.getLocation();
+        Location deathLocation = player.getLocation();
         player.spigot().respawn();
 
-        if (location.getWorld().getName().equals("world")) {
+        if (deathLocation.getWorld().getName().equals("world")) {
             if (GuardiansOfAdelia.getCharacterSelectionScreenManager().isPlayerInCharSelection(player)) {
                 player.teleport(GuardiansOfAdelia.getCharacterSelectionScreenManager().getCharacterSelectionCenter());
             } else {
-                Town town = TownManager.getNearestTown(location);
+                Town town = TownManager.getNearestTown(deathLocation);
                 player.teleport(town.getLocation());
             }
         } else if (MiniGameManager.isInMinigame(player)) {
-            MiniGameManager.onPlayerDeath(player);
+            MiniGameManager.onPlayerDeath(player, deathLocation);
         } else {
             Town town = TownManager.getTown(1);
             player.teleport(town.getLocation());

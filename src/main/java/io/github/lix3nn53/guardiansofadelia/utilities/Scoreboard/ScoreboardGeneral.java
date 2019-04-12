@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;

@@ -117,10 +117,9 @@ public final class Party {
     }
 
     public void destroy() {
-        for (Player member : members) {
-            board.hide(member);
+        for (Player member : getMembers()) {
+            getBoard().hide(member);
             PartyManager.removeMember(member);
         }
-        members.clear();
     }
 }

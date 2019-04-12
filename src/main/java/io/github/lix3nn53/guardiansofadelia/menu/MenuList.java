@@ -347,8 +347,21 @@ public class MenuList {
     }
 
     public static GuiGeneric minigames() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.RED + "MiniGames", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.GOLD + "MiniGames", 0);
 
+        ItemStack pvp = new ItemStack(Material.RED_WOOL);
+        ItemMeta itemMeta = pvp.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.RED + "Last One Standing");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Click to join this minigame");
+        }});
+        pvp.setItemMeta(itemMeta);
+        guiGeneric.setItem(0, pvp);
+
+        itemMeta.setDisplayName(ChatColor.RED + "Most kills");
+        pvp.setItemMeta(itemMeta);
+        guiGeneric.setItem(2, pvp);
 
         return guiGeneric;
     }

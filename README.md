@@ -59,10 +59,13 @@ Please note that these features are for my personal server. It probably will not
   * Manage your guild with commands such as guild members' ranks
   * TODO Guild wars
   * TODO 
-* Dungeons
-  * TODO
 * Minigames
-  * TODO
+  * This is abstract class to create minigames
+  * Current minigames created from this abstract class: Dungeons, LastManStanding(pvp)
+* Dungeons
+  * Subclass of minigames
+  * Join dungeons with up to 4 players
+  * Kill dungeon boss before timeout to gain a prize chest
 * Jobs
   * TODO
 * Pets
