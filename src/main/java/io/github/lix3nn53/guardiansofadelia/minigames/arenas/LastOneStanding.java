@@ -20,10 +20,10 @@ public class LastOneStanding extends Minigame {
     @Override
     public void endGame() {
         super.endGame();
-        int winnerTeam = getWinnerTeam();
-        if (winnerTeam >= 0) {
+        List<Integer> winnerTeam = getWinnerTeams();
+        if (!winnerTeam.isEmpty()) {
             StringBuilder msg = new StringBuilder(ChatColor.GOLD + "Winner team: #" + winnerTeam + " ( ");
-            Party winnerParty = getTeams().get(winnerTeam);
+            Party winnerParty = getTeams().get(winnerTeam.get(0));
             for (Player player : winnerParty.getMembers()) {
                 msg.append(player.getName());
                 msg.append(" ");
@@ -53,15 +53,17 @@ public class LastOneStanding extends Minigame {
     }
 
     @Override
-    public int getWinnerTeam() {
-        int bestTeamIndex = -1;
+    public List<Integer> getWinnerTeams() {
         for (int teamNo : getTeams().keySet()) {
             int livesOfTeam = getLivesOfTeam(teamNo);
             if (livesOfTeam > 0) {
-                bestTeamIndex = teamNo;
-                break;
+                //return last alive team
+                List<Integer> winner = new ArrayList<>();
+                winner.add(teamNo);
+                return winner;
             }
         }
-        return bestTeamIndex;
+        //return empty
+        return new ArrayList<>();
     }
 }

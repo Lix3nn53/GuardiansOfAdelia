@@ -359,7 +359,7 @@ public class MenuList {
         pvp.setItemMeta(itemMeta);
         guiGeneric.setItem(0, pvp);
 
-        itemMeta.setDisplayName(ChatColor.RED + "Most kills");
+        itemMeta.setDisplayName(ChatColor.RED + "Win By Most Kills");
         pvp.setItemMeta(itemMeta);
         guiGeneric.setItem(2, pvp);
 

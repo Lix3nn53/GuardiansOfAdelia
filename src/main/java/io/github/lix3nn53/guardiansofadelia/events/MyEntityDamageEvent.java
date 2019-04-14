@@ -17,7 +17,7 @@ public class MyEntityDamageEvent implements Listener {
             Player player = (Player) event.getEntity();
 
             if (event.getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
-                player.setHealth(0);
+                event.setDamage(10000D);
             }
 
             double finalDamage = event.getFinalDamage();

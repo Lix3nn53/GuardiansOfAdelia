@@ -71,7 +71,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             PartyManager.progressMobKillTasksOfOtherMembers(player, livingTarget);
 
                             if (MiniGameManager.isInMinigame(player)) {
-                                MiniGameManager.onMobKillDungeon(player, livingTarget);
+                                if (livingTarget.getType().equals(EntityType.PLAYER)) {
+                                    MiniGameManager.onPlayerKill(player);
+                                } else {
+                                    MiniGameManager.onMobKillDungeon(player, livingTarget);
+                                }
                             }
                         }
                     }

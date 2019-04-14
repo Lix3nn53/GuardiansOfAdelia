@@ -113,14 +113,19 @@ public abstract class Minigame {
     public void endGame() {
         if (!gameCountDown.isCancelled()) {
             gameCountDown.cancel();
-            int winnerTeam = getWinnerTeam();
+            List<Integer> winnerTeams = getWinnerTeams();
             for (Integer teamNo : teams.keySet()) {
                 Party party = teams.get(teamNo);
                 for (Player member : party.getMembers()) {
                     if (member.isOnline()) {
-                        if (winnerTeam == teamNo) {
-                            member.sendTitle(ChatColor.GREEN + "Congratulations!", ChatColor.YELLOW + "", 30, 80, 30);
-                            member.sendMessage("You have have won the " + ChatColor.GREEN + getMinigameName() + " !");
+                        if (winnerTeams.contains(teamNo)) {
+                            if (winnerTeams.size() == 1) {
+                                member.sendTitle(ChatColor.GREEN + "Congratulations!", ChatColor.YELLOW + "", 30, 80, 30);
+                                member.sendMessage("You have have won the " + ChatColor.GREEN + getMinigameName() + " !");
+                            } else {
+                                member.sendTitle(ChatColor.GREEN + "Tie!", ChatColor.YELLOW + "", 30, 80, 30);
+                                member.sendMessage("You are sharing first place with another team in " + ChatColor.GREEN + getMinigameName());
+                            }
                         } else {
                             member.sendTitle(ChatColor.RED + "Failed..", ChatColor.YELLOW + "", 30, 80, 30);
                             member.sendMessage("You lose the " + ChatColor.GREEN + getMinigameName());
@@ -326,20 +331,26 @@ public abstract class Minigame {
         onPlayerLeaveQueueCountdownCheck();
     }
 
-    public int getWinnerTeam() {
-        int bestTeamIndex = -1;
+    public List<Integer> getWinnerTeams() {
+        List<Integer> teamsAtBestScore = new ArrayList<>();
         int bestScore = 0;
-        for (Integer team : teams.keySet()) {
-            Integer integer = teamToScore.get(team);
-            if (integer > bestScore) {
-                bestScore = integer;
-                bestTeamIndex = team;
+        for (int team : getTeams().keySet()) {
+            int teamScore = getScoreOfTeam(team);
+            if (teamScore > bestScore) {
+                bestScore = teamScore;
             }
         }
-        if (bestScore == 0) {
-            return -1;
+        for (int team : getTeams().keySet()) {
+            int teamScore = getScoreOfTeam(team);
+            if (teamScore == bestScore) {
+                teamsAtBestScore.add(team);
+            }
         }
-        return bestTeamIndex;
+        return teamsAtBestScore;
+    }
+
+    public int getScoreOfTeam(int teamNo) {
+        return teamToScore.get(teamNo);
     }
 
     public List<Location> getStartLocations() {
@@ -364,11 +375,12 @@ public abstract class Minigame {
     }
 
     public void addScore(Player player, int scoreToAdd) {
-        int teamOfPlayer = getTeamOfPlayer(player);
-        if (teamToScore.containsKey(teamOfPlayer)) {
-            Integer integer = teamToScore.get(teamOfPlayer);
-            integer += scoreToAdd;
-            teamToScore.put(teamOfPlayer, integer);
+        int teamNo = getTeamOfPlayer(player);
+        if (teamToScore.containsKey(teamNo)) {
+            Integer score = teamToScore.get(teamNo);
+            score += scoreToAdd;
+            teamToScore.put(teamNo, score);
+            updateTeamScoresOnScoreBoard(teamNo, score);
         }
     }
 
@@ -442,8 +454,23 @@ public abstract class Minigame {
         }
     }
 
-    public void onPlayerDeath(Player player, Location deathLocation) {
+    private Location getStartWatchLocation(Player player, int teamOfPlayer) {
+        Location startWatchLocation = getStartLocation(teamOfPlayer);
+        if (this.teamSize > 1) {
+            Party party = teams.get(teamOfPlayer);
+            for (Player member : party.getMembers()) {
+                if (!member.getUniqueId().equals(player.getUniqueId())) {
+                    startWatchLocation = member.getLocation();
+                    break;
+                }
+            }
+        }
+        return startWatchLocation;
+    }
+
+    public void onPlayerDeath(Player player) {
         int teamOfPlayer = getTeamOfPlayer(player);
+        Location startWatchLocation = getStartWatchLocation(player, teamOfPlayer);
         if (maxLives > 1) {
             int deathCount = 0;
             if (teamDeathCount.containsKey(teamOfPlayer)) {
@@ -453,7 +480,7 @@ public abstract class Minigame {
             teamDeathCount.put(teamOfPlayer, deathCount);
             updateTeamLivesOnScoreBoard(teamOfPlayer, getLivesOfTeam(teamOfPlayer));
             if (deathCount >= this.maxLives) {
-                fail(teamOfPlayer, deathLocation);
+                fail(teamOfPlayer, startWatchLocation);
             } else {
                 player.setGameMode(GameMode.SPECTATOR);
                 //respawn countdown
@@ -476,7 +503,7 @@ public abstract class Minigame {
                             cancel();
                         } else {
                             if (count == 0) {
-                                player.teleport(deathLocation);
+                                player.teleport(startWatchLocation);
                             }
                             player.sendTitle(ChatColor.DARK_PURPLE + "Respawn in", ChatColor.LIGHT_PURPLE.toString() + (respawnDelayInSeconds - count) + " seconds", 0, 20, 0);
                             count++;
@@ -485,17 +512,17 @@ public abstract class Minigame {
                 }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20L);
             }
         } else {
-            fail(teamOfPlayer, deathLocation);
+            fail(teamOfPlayer, startWatchLocation);
         }
     }
 
-    public void fail(int teamNo, Location deathLocation) {
+    public void fail(int teamNo, Location startWatchLocation) {
         for (Player player : teams.get(teamNo).getMembers()) {
             player.setGameMode(GameMode.SPECTATOR);
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    player.teleport(deathLocation);
+                    player.teleport(startWatchLocation);
                 }
             }.runTaskLater(GuardiansOfAdelia.getInstance(), 5L);
         }

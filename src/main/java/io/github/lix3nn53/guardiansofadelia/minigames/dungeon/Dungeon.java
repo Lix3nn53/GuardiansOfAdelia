@@ -27,12 +27,12 @@ public class Dungeon extends Minigame {
     @Override
     public void endGame() {
         super.endGame();
-        int winnerTeam = getWinnerTeam();
-        if (winnerTeam >= 0) {
+        List<Integer> winnerTeam = getWinnerTeams();
+        if (!winnerTeam.isEmpty()) {
             PrizeChest prizeChest = theme.getPrizeChest();
             ItemStack prizeItem = prizeChest.getChest();
 
-            Party party = getTeams().get(winnerTeam);
+            Party party = getTeams().get(winnerTeam.get(0));
             for (Player member : party.getMembers()) {
                 member.sendMessage(ChatColor.GOLD + "Dungeon prize: " + prizeItem.getItemMeta().getDisplayName());
                 InventoryUtils.giveItemToPlayer(member, prizeItem);
@@ -63,5 +63,19 @@ public class Dungeon extends Minigame {
 
     public String getBossMobName() {
         return bossMobName;
+    }
+
+    @Override
+    public List<Integer> getWinnerTeams() {
+        List<Integer> teamsAtBestScore = new ArrayList<>();
+        for (int team : getTeams().keySet()) {
+            int teamScore = getScoreOfTeam(team);
+            if (teamScore > 0) {
+                List<Integer> winner = new ArrayList<>();
+                winner.add(team);
+                return winner;
+            }
+        }
+        return teamsAtBestScore;
     }
 }

@@ -20,6 +20,10 @@ public class MyPlayerDeathEvent implements Listener {
 
         final Location deathLocation = player.getLocation();
 
+        if (deathLocation.getY() < 1) {
+            deathLocation.setY(1);
+        }
+
         new BukkitRunnable() {
 
             @Override
@@ -34,7 +38,7 @@ public class MyPlayerDeathEvent implements Listener {
                         player.teleport(town.getLocation());
                     }
                 } else if (MiniGameManager.isInMinigame(player)) {
-                    MiniGameManager.onPlayerDeath(player, deathLocation);
+                    MiniGameManager.onPlayerDeath(player);
                 } else {
                     Town town = TownManager.getTown(1);
                     player.teleport(town.getLocation());

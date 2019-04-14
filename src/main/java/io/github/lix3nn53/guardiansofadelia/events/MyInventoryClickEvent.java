@@ -397,6 +397,8 @@ public class MyInventoryClickEvent implements Listener {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 if (currentName.equals(ChatColor.RED + "Last One Standing")) {
                     MiniGameManager.getLastOneStandingJoinGui().openInventory(player);
+                } else if (currentName.equals(ChatColor.RED + "Win By Most Kills")) {
+                    MiniGameManager.getWinByMostKillsJoinGui().openInventory(player);
                 }
             }
         } else if (title.equals(ChatColor.GOLD + "Join Last One Standing")) {
@@ -405,6 +407,16 @@ public class MyInventoryClickEvent implements Listener {
                 String c = String.valueOf(currentName.charAt(i + 1));
                 int roomNo = Integer.parseInt(c);
                 boolean joined = MiniGameManager.getLastOneStanding(roomNo).joinQueue(player);
+                if (joined) {
+                    player.closeInventory();
+                }
+            }
+        } else if (title.equals(ChatColor.GOLD + "Join Win By Most Kills")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                int i = currentName.indexOf("#");
+                String c = String.valueOf(currentName.charAt(i + 1));
+                int roomNo = Integer.parseInt(c);
+                boolean joined = MiniGameManager.getWinByMostKills(roomNo).joinQueue(player);
                 if (joined) {
                     player.closeInventory();
                 }
