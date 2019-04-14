@@ -10,23 +10,38 @@ import java.util.List;
 public final class Party {
 
     private final int size;
+    private final int minSize;
     private final List<Player> members;
     private final BoardWithPlayers board;
     private Player leader;
 
-    public Party(List<Player> members, int size) {
+    public Party(List<Player> members, int size, int minSize) {
         this.members = members;
-        this.leader = members.get(0);
+        if (!members.isEmpty()) {
+            this.leader = members.get(0);
+        }
         this.board = new BoardWithPlayers(members, ChatColor.AQUA + "Party", new ArrayList<>());
         this.size = size;
+        if (minSize < 1) {
+            this.minSize = 1;
+        } else {
+            this.minSize = minSize;
+        }
         PartyManager.addMembers(members, this);
     }
 
-    public Party(List<Player> members, int size, BoardWithPlayers boardWithPlayers) {
+    public Party(List<Player> members, int size, int minSize, BoardWithPlayers boardWithPlayers) {
         this.members = members;
-        this.leader = members.get(0);
+        if (!members.isEmpty()) {
+            this.leader = members.get(0);
+        }
         this.board = boardWithPlayers;
         this.size = size;
+        if (minSize < 1) {
+            this.minSize = 1;
+        } else {
+            this.minSize = minSize;
+        }
         PartyManager.addMembers(members, this);
     }
 
@@ -44,6 +59,9 @@ public final class Party {
                 members.add(player);
                 board.remake(this.members);
                 PartyManager.addMember(player, this);
+                if (members.size() == 1) {
+                    this.leader = player;
+                }
                 return true;
             }
         }
@@ -51,18 +69,15 @@ public final class Party {
     }
 
     public void leave(Player playerLeft) {
-        if (members.contains(playerLeft)) {
-            members.remove(playerLeft);
+        members.remove(playerLeft);
 
-            playerLeft.sendMessage(ChatColor.RED + "You left the party");
+        playerLeft.sendMessage(ChatColor.RED + "You left the party");
 
-            for (Player member : members) {
-                member.sendMessage(playerLeft.getName() + ChatColor.RED + " left your party");
-            }
-
-            onMemberRemove(playerLeft);
+        for (Player member : members) {
+            member.sendMessage(playerLeft.getName() + ChatColor.RED + " left your party");
         }
 
+        onMemberRemove(playerLeft);
     }
 
     public void kickMember(Player kicker, Player playerToKick) {
@@ -82,12 +97,11 @@ public final class Party {
     }
 
     private void onMemberRemove(Player player) {
-        if (members.size() < 2) {
+        if (members.size() < minSize) {
             for (Player member : members) {
                 board.hide(member);
                 PartyManager.removeMember(member);
             }
-            members.clear();
         } else {
             if (player.getUniqueId().equals(leader.getUniqueId())) {
                 leader = members.get(0);
@@ -113,7 +127,7 @@ public final class Party {
         return board;
     }
 
-    public boolean isEmpty() {
+    public boolean anyFreeSpace() {
         return members.size() < size;
     }
 

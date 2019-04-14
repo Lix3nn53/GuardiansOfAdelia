@@ -17,7 +17,7 @@ public class PartyInvite extends Invite {
     public void send() {
         if (PartyManager.inParty(getSender())) {
             Party party = PartyManager.getParty(getSender());
-            if (!party.isEmpty()) {
+            if (!party.anyFreeSpace()) {
                 getSender().sendMessage(ChatColor.RED + "Your party is full");
                 return;
             } else {
@@ -39,7 +39,7 @@ public class PartyInvite extends Invite {
         getSender().sendMessage(ChatColor.AQUA + getReceiver().getName() + " accepted your party invite");
         if (PartyManager.inParty(getSender())) {
             Party party = PartyManager.getParty(getSender());
-            if (party.isEmpty()) {
+            if (party.anyFreeSpace()) {
                 boolean isReceiverJoined = party.addMember(getReceiver());
                 if (isReceiverJoined) {
                     for (Player member : party.getMembers()) {
@@ -54,7 +54,7 @@ public class PartyInvite extends Invite {
             members.add(getSender());
             members.add(getReceiver());
 
-            Party party = new Party(members, 4);
+            Party party = new Party(members, 4, 2);
 
             PartyManager.addParty(getSender(), getReceiver(), party);
 

@@ -17,7 +17,8 @@ import java.util.List;
 
 public abstract class Minigame {
 
-    private final String name;
+    private final String gameName;
+    private final String mapName;
     private final HashMap<Integer, Integer> teamToScore = new HashMap<>();
     private final List<Location> startLocations;
     private final Town backTown;
@@ -25,21 +26,23 @@ public abstract class Minigame {
     private final int roomNo;
     private final int queueTimeLimitInMinutes;
     private final int timeLimitInMinutes;
-    private final HashMap<Integer, List<Player>> teams = new HashMap<>();
+    private final HashMap<Integer, Party> teams = new HashMap<>();
     private final int teamSize;
 
     private final int teamAmount;
     private final int maxLives;
-    private final HashMap<Player, Integer> playerDeathCount = new HashMap<>();
+    private final int minTeamsAlive;
+    private final HashMap<Integer, Integer> teamDeathCount = new HashMap<>();
     private final int respawnDelayInSeconds;
     private final int requiredPlayerAmountToStart;
     private BukkitRunnable gameCountDown;
     private BukkitRunnable queueCountDown;
     private boolean isInGame = false;
 
-    public Minigame(String name, int roomNo, int levelReq, int teamSize, int teamAmount, List<Location> startLocations, int timeLimitInMinutes,
-                    int queueTimeLimitInMinutes, Town backTown, int maxLives, int respawnDelayInSeconds, int requiredPlayerAmountToStart) {
-        this.name = name;
+    public Minigame(String gameName, String mapName, int roomNo, int levelReq, int teamSize, int teamAmount, List<Location> startLocations, int timeLimitInMinutes,
+                    int queueTimeLimitInMinutes, Town backTown, int maxLives, int minTeamsAlive, int respawnDelayInSeconds, int requiredPlayerAmountToStart) {
+        this.gameName = gameName;
+        this.mapName = mapName;
         this.backTown = backTown;
         this.levelReq = levelReq;
         this.timeLimitInMinutes = timeLimitInMinutes;
@@ -49,10 +52,13 @@ public abstract class Minigame {
         this.teamSize = teamSize;
         this.teamAmount = teamAmount;
         this.maxLives = maxLives;
+        this.minTeamsAlive = minTeamsAlive;
         this.respawnDelayInSeconds = respawnDelayInSeconds;
         this.requiredPlayerAmountToStart = requiredPlayerAmountToStart;
         for (int i = 1; i <= teamAmount; i++) {
-            teams.put(i, new ArrayList<>());
+            BoardWithPlayers boardWithPlayers = new BoardWithPlayers(new ArrayList<>(), gameName, getScoreboardTopLines());
+            teams.put(i, new Party(new ArrayList<>(), teamSize, 1, boardWithPlayers));
+            teamToScore.put(i, 0);
         }
     }
 
@@ -60,7 +66,7 @@ public abstract class Minigame {
         return levelReq;
     }
 
-    public HashMap<Integer, List<Player>> getTeams() {
+    public HashMap<Integer, Party> getTeams() {
         return teams;
     }
 
@@ -75,11 +81,10 @@ public abstract class Minigame {
     public void startGame() {
         if (!getPlayersInGame().isEmpty()) {
             isInGame = true;
-            forceTeamParties();
 
             for (int teamNo : teams.keySet()) {
-                List<Player> party = teams.get(teamNo);
-                for (Player member : party) {
+                Party party = teams.get(teamNo);
+                for (Player member : party.getMembers()) {
                     if (member.isOnline()) {
                         member.teleport(startLocations.get(teamNo - 1));
                     }
@@ -94,7 +99,6 @@ public abstract class Minigame {
                 public void run() {
                     if (secondsPass == timeLimitInMinutes * 60) {
                         //end minigame
-                        cancel();
                         endGame();
                     } else {
                         updateTimeOnScoreBoards(timeLimitInMinutes * 60 - secondsPass);
@@ -107,76 +111,66 @@ public abstract class Minigame {
     }
 
     public void endGame() {
-        gameCountDown.cancel();
-        int winnerTeam = getWinnerTeam();
-        for (Integer teamNo : teams.keySet()) {
-            List<Player> party = teams.get(teamNo);
-            for (Player member : party) {
-                if (member.isOnline()) {
-                    if (winnerTeam == teamNo) {
-                        member.sendTitle(ChatColor.GREEN + "Congratulations!", ChatColor.YELLOW + "", 30, 80, 30);
-                        member.sendMessage("You have have won the " + ChatColor.GREEN + getMinigameName() + " !");
+        if (!gameCountDown.isCancelled()) {
+            gameCountDown.cancel();
+            int winnerTeam = getWinnerTeam();
+            for (Integer teamNo : teams.keySet()) {
+                Party party = teams.get(teamNo);
+                for (Player member : party.getMembers()) {
+                    if (member.isOnline()) {
+                        if (winnerTeam == teamNo) {
+                            member.sendTitle(ChatColor.GREEN + "Congratulations!", ChatColor.YELLOW + "", 30, 80, 30);
+                            member.sendMessage("You have have won the " + ChatColor.GREEN + getMinigameName() + " !");
+                        } else {
+                            member.sendTitle(ChatColor.RED + "Failed..", ChatColor.YELLOW + "", 30, 80, 30);
+                            member.sendMessage("You lose the " + ChatColor.GREEN + getMinigameName());
+                        }
+                        member.setGameMode(GameMode.SPECTATOR);
+                    }
+                }
+            }
+
+            new BukkitRunnable() {
+
+                int count = 0;
+
+                @Override
+                public void run() {
+                    if (count == 3) {
+                        cancel();
+
+                        if (isInGame) {
+                            for (Player member : getPlayersInGame()) {
+                                MiniGameManager.removePlayer(member);
+                                member.teleport(backTown.getLocation());
+                                member.setGameMode(GameMode.ADVENTURE);
+                                if (PartyManager.inParty(member)) {
+                                    Party party = PartyManager.getParty(member);
+                                    party.leave(member);
+                                }
+                            }
+
+                            isInGame = false;
+                            teams.clear();
+                            teamToScore.clear();
+                            for (int i = 1; i <= teamAmount; i++) {
+                                BoardWithPlayers boardWithPlayers = new BoardWithPlayers(new ArrayList<>(), gameName, getScoreboardTopLines());
+                                teams.put(i, new Party(new ArrayList<>(), teamSize, 1, boardWithPlayers));
+                                teamToScore.put(i, 0);
+                            }
+                            teamDeathCount.clear();
+                            gameCountDown.cancel();
+                        }
                     } else {
-                        member.sendTitle(ChatColor.RED + "Failed..", ChatColor.YELLOW + "", 30, 80, 30);
-                        member.sendMessage("You lose the " + ChatColor.GREEN + getMinigameName());
-                    }
-                    member.setGameMode(GameMode.SPECTATOR);
-                }
-            }
-        }
-
-        new BukkitRunnable() {
-
-            int count = 0;
-
-            @Override
-            public void run() {
-                if (count == 3) {
-                    cancel();
-
-                    for (Player member : getPlayersInGame()) {
-                        MiniGameManager.removePlayer(member);
-                        member.teleport(backTown.getLocation());
-                        member.setGameMode(GameMode.ADVENTURE);
-                        if (PartyManager.inParty(member)) {
-                            Party party = PartyManager.getParty(member);
-                            party.leave(member);
+                        for (Player member : getPlayersInGame()) {
+                            if (member.isOnline()) {
+                                member.sendMessage(ChatColor.AQUA.toString() + "You will be teleported in " + (15 - (count * 5)) + " seconds.");
+                            }
                         }
+                        count++;
                     }
-
-                    isInGame = false;
-                    teams.clear();
-                    for (int i = 1; i <= teamAmount; i++) {
-                        teams.put(i, new ArrayList<>());
-                    }
-                    playerDeathCount.clear();
-                    teamToScore.clear();
-                    gameCountDown.cancel();
-                } else {
-                    for (Player member : getPlayersInGame()) {
-                        if (member.isOnline()) {
-                            member.sendMessage(ChatColor.AQUA.toString() + "You will be teleported in " + (15 - (count * 5)) + " seconds.");
-                        }
-                    }
-                    count++;
                 }
-            }
-        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 5L, 20 * 5L);
-    }
-
-    public void forceTeamParties() {
-        for (Player player : getPlayersInGame()) {
-            if (PartyManager.inParty(player)) {
-                Party party = PartyManager.getParty(player);
-                party.leave(player);
-            }
-        }
-
-        for (Integer team : teams.keySet()) {
-            List<Player> players = teams.get(team);
-            BoardWithPlayers boardWithPlayers = new BoardWithPlayers(players, this.name, getScoreboardTopLines());
-            new Party(players, players.size(), boardWithPlayers);
-            teamToScore.put(team, 0);
+            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 5L, 20 * 5L);
         }
     }
 
@@ -189,11 +183,15 @@ public abstract class Minigame {
     }
 
     private void addPlayer(Player player) {
+        if (PartyManager.inParty(player)) {
+            Party party = PartyManager.getParty(player);
+            party.leave(player);
+        }
         for (Integer team : teams.keySet()) {
-            List<Player> players = teams.get(team);
-            if (players.size() < this.teamSize) {
-                players.add(player);
-                teams.put(team, players);
+            Party party = teams.get(team);
+            if (party.getMembers().size() < this.teamSize) {
+                party.addMember(player);
+                teams.put(team, party);
                 break;
             }
         }
@@ -201,10 +199,10 @@ public abstract class Minigame {
 
     private void removePlayer(Player player) {
         for (Integer team : teams.keySet()) {
-            List<Player> players = teams.get(team);
-            if (players.contains(player)) {
-                players.remove(player);
-                teams.put(team, players);
+            Party party = teams.get(team);
+            if (party.getMembers().contains(player)) {
+                party.leave(player);
+                teams.put(team, party);
                 break;
             }
         }
@@ -255,7 +253,7 @@ public abstract class Minigame {
                     }
                 }
             };
-            this.queueCountDown.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 10L);
+            this.queueCountDown.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 1L);
         }
     }
 
@@ -310,17 +308,19 @@ public abstract class Minigame {
                 player.teleport(this.backTown.getLocation());
             }
         }
+
+        int teamOfPlayer = getTeamOfPlayer(player);
+
         removePlayer(player);
-        if (getPlayersInGameSize() <= 0) {
-            isInGame = false;
-            teams.clear();
-            for (int i = 1; i <= teamAmount; i++) {
-                teams.put(i, new ArrayList<>());
-            }
-            playerDeathCount.clear();
-            teamToScore.clear();
-            gameCountDown.cancel();
+
+        if (getTeams().get(teamOfPlayer).getMembers().isEmpty()) {
+            setLivesOfTeam(teamOfPlayer, 0);
         }
+
+        if (getAliveTeams().size() == minTeamsAlive) {
+            endGame();
+        }
+
         MiniGameManager.removePlayer(player);
         player.setGameMode(GameMode.ADVENTURE);
         onPlayerLeaveQueueCountdownCheck();
@@ -357,8 +357,8 @@ public abstract class Minigame {
     public List<Player> getPlayersInGame() {
         List<Player> playersInGame = new ArrayList<>();
         for (Integer teamNo : teams.keySet()) {
-            List<Player> party = teams.get(teamNo);
-            playersInGame.addAll(party);
+            Party party = teams.get(teamNo);
+            playersInGame.addAll(party.getMembers());
         }
         return playersInGame;
     }
@@ -372,32 +372,33 @@ public abstract class Minigame {
         }
     }
 
-    public void addScore(int teamIndex, int scoreToAdd) {
-        if (teamToScore.containsKey(teamIndex)) {
-            Integer score = teamToScore.get(teamIndex);
+    public void addScore(int teamNo, int scoreToAdd) {
+        if (teamToScore.containsKey(teamNo)) {
+            Integer score = teamToScore.get(teamNo);
             score += scoreToAdd;
-            teamToScore.put(teamIndex, score);
-            updateScoreboardScore(teamIndex, score);
+            teamToScore.put(teamNo, score);
+            updateTeamScoresOnScoreBoard(teamNo, score);
         }
     }
 
     public List<String> getScoreboardTopLines() {
         List<String> topLines = new ArrayList<>();
         topLines.add("Time remaining: " + this.timeLimitInMinutes * 60);
-        topLines.add("Score: " + 0);
+        for (int i = 0; i < teamAmount; i++) {
+            topLines.add("Team" + (i + 1) + " score: " + getMaxLives());
+        }
         return topLines;
     }
 
-    public void updateScoreboardScore(int teamIndex, int newScore) {
-        List<Player> players = teams.get(teamIndex);
-        if (!players.isEmpty()) {
-            if (PartyManager.inParty(players.get(0))) {
-                Party party = PartyManager.getParty(players.get(0));
+    public void updateTeamScoresOnScoreBoard(int teamNoToChange, int newScore) {
+        for (Integer teamNo : teams.keySet()) {
+            Party party = teams.get(teamNo);
+            if (!party.getMembers().isEmpty()) {
                 BoardWithPlayers board = party.getBoard();
                 for (int k : board.getRowLines().keySet()) {
                     String s = board.getRowLines().get(k);
-                    if (s.contains("Score: ")) {
-                        board.setLine("Score: " + newScore, k);
+                    if (s.contains("Team" + teamNoToChange + " score: ")) {
+                        board.setLine("Team" + teamNoToChange + " score: " + newScore, k);
                         break;
                     }
                 }
@@ -407,38 +408,52 @@ public abstract class Minigame {
 
     public void updateTimeOnScoreBoards(int seconds) {
         for (Integer teamNo : teams.keySet()) {
-            List<Player> players = teams.get(teamNo);
-            if (!players.isEmpty()) {
-                if (PartyManager.inParty(players.get(0))) {
-                    Party party = PartyManager.getParty(players.get(0));
-                    BoardWithPlayers board = party.getBoard();
-                    for (int k : board.getRowLines().keySet()) {
-                        String s = board.getRowLines().get(k);
-                        if (s.contains("Time remaining: ")) {
-                            board.setLine("Time remaining: " + seconds, k);
-                            break;
-                        }
+            Party party = teams.get(teamNo);
+            if (!party.getMembers().isEmpty()) {
+                BoardWithPlayers board = party.getBoard();
+                for (int k : board.getRowLines().keySet()) {
+                    String s = board.getRowLines().get(k);
+                    if (s.contains("Time remaining: ")) {
+                        board.setLine("Time remaining: " + seconds, k);
+                        break;
                     }
                 }
             }
         }
     }
 
-    public String getName() {
-        return name;
+    public String getGameName() {
+        return gameName;
+    }
+
+    private void updateTeamLivesOnScoreBoard(int teamNoToChange, int teamLives) {
+        for (Integer teamNo : getTeams().keySet()) {
+            Party party = getTeams().get(teamNo);
+            if (!party.getMembers().isEmpty()) {
+                BoardWithPlayers board = party.getBoard();
+                for (int k : board.getRowLines().keySet()) {
+                    String s = board.getRowLines().get(k);
+                    if (s.contains("Team" + teamNoToChange + " lives: ")) {
+                        board.setLine("Team" + teamNoToChange + " lives: " + teamLives, k);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public void onPlayerDeath(Player player, Location deathLocation) {
+        int teamOfPlayer = getTeamOfPlayer(player);
         if (maxLives > 1) {
             int deathCount = 0;
-            if (playerDeathCount.containsKey(player)) {
-                deathCount = playerDeathCount.get(player);
+            if (teamDeathCount.containsKey(teamOfPlayer)) {
+                deathCount = teamDeathCount.get(teamOfPlayer);
             }
             deathCount++;
-            playerDeathCount.put(player, deathCount);
-
+            teamDeathCount.put(teamOfPlayer, deathCount);
+            updateTeamLivesOnScoreBoard(teamOfPlayer, getLivesOfTeam(teamOfPlayer));
             if (deathCount >= this.maxLives) {
-                fail(player, deathLocation);
+                fail(teamOfPlayer, deathLocation);
             } else {
                 player.setGameMode(GameMode.SPECTATOR);
                 //respawn countdown
@@ -451,8 +466,8 @@ public abstract class Minigame {
                         if (count == respawnDelayInSeconds) {
                             //respawn
                             for (Integer teamNo : teams.keySet()) {
-                                List<Player> players = teams.get(teamNo);
-                                if (players.contains(player)) {
+                                Party party = teams.get(teamNo);
+                                if (party.getMembers().contains(player)) {
                                     player.teleport(startLocations.get(teamNo - 1));
                                     player.setGameMode(GameMode.ADVENTURE);
                                     break;
@@ -470,43 +485,38 @@ public abstract class Minigame {
                 }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20L);
             }
         } else {
-            fail(player, deathLocation);
+            fail(teamOfPlayer, deathLocation);
         }
     }
 
-    public void fail(Player player, Location deathLocation) {
-        player.setGameMode(GameMode.SPECTATOR);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                player.teleport(deathLocation);
-            }
-        }.runTaskLater(GuardiansOfAdelia.getInstance(), 5L);
+    public void fail(int teamNo, Location deathLocation) {
+        for (Player player : teams.get(teamNo).getMembers()) {
+            player.setGameMode(GameMode.SPECTATOR);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.teleport(deathLocation);
+                }
+            }.runTaskLater(GuardiansOfAdelia.getInstance(), 5L);
+        }
+        //check game end
+        if (getAliveTeams().size() == minTeamsAlive) {
+            endGame();
+        }
     }
 
-    public int getLivesOfPlayer(Player player) {
+    public int getLivesOfTeam(int teamNo) {
         int deathCount = 0;
-        if (playerDeathCount.containsKey(player)) {
-            deathCount = playerDeathCount.get(player);
+        if (teamDeathCount.containsKey(teamNo)) {
+            deathCount = teamDeathCount.get(teamNo);
         }
         return maxLives - deathCount;
     }
 
-    public int getLivesOfTeam(int index) {
-        List<Player> party = teams.get(index);
-        int lives = 0;
-
-        for (Player player : party) {
-            lives += getLivesOfPlayer(player);
-        }
-
-        return lives;
-    }
-
     public int getTeamOfPlayer(Player player) {
         for (Integer teamNo : teams.keySet()) {
-            List<Player> party = teams.get(teamNo);
-            if (party.contains(player)) {
+            Party party = teams.get(teamNo);
+            if (party.getMembers().contains(player)) {
                 return teamNo;
             }
         }
@@ -515,10 +525,6 @@ public abstract class Minigame {
 
     public int getMaxLives() {
         return maxLives;
-    }
-
-    public int getMaxLivesOfTeam() {
-        return maxLives * this.teamSize;
     }
 
     public List<Integer> getAliveTeams() {
@@ -532,11 +538,26 @@ public abstract class Minigame {
         return aliveTeams;
     }
 
-    public void setLivesOfPlayer(Player player, int lives) {
-        int deathCount = this.maxLives - (this.maxLives - lives);
+    public void setLivesOfTeam(int teamNo, int lives) {
+        int deathCount = this.maxLives - lives;
         if (deathCount < 0) {
             deathCount = 0;
         }
-        playerDeathCount.put(player, deathCount);
+        teamDeathCount.put(teamNo, deathCount);
+        updateTeamLivesOnScoreBoard(teamNo, lives);
+    }
+
+    public String getMapName() {
+        return mapName;
+    }
+
+    public int getNonEmptyTeamAmount() {
+        int i = 0;
+        for (int teamNo : teams.keySet()) {
+            if (!teams.get(teamNo).getMembers().isEmpty()) {
+                i++;
+            }
+        }
+        return i;
     }
 }

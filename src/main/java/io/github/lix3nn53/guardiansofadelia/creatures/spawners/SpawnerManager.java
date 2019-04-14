@@ -21,10 +21,9 @@ public class SpawnerManager {
     }
 
     public static void onMobDeath(Entity entity) {
-        if (mobToSpawner.containsKey(entity)) {
-            Spawner spawner = mobToSpawner.get(entity);
-            mobToSpawner.remove(entity);
-            spawner.onSpawnedEntityDeath();
+        Spawner remove = mobToSpawner.remove(entity);
+        if (remove != null) {
+            remove.onSpawnedEntityDeath();
         }
     }
 
@@ -52,9 +51,6 @@ public class SpawnerManager {
         if (chunkKeyToSpawners.containsKey(chunkKey)) {
             List<Spawner> spawners = chunkKeyToSpawners.get(chunkKey);
             activeSpawners.removeAll(spawners);
-            for (Spawner spawner : spawners) {
-                spawner.resetEntityCount();
-            }
         }
     }
 

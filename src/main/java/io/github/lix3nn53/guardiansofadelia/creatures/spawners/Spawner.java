@@ -33,10 +33,6 @@ public class Spawner {
         spawnedEntityAmount--;
     }
 
-    public void resetEntityCount() {
-        spawnedEntityAmount = 0;
-    }
-
     public String getMobCode() {
         return mobCode;
     }

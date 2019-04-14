@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyInvite;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
@@ -19,6 +20,10 @@ public class CommandParty implements CommandExecutor {
         }
         if (sender instanceof Player) {
             Player player = (Player) sender;
+            if (MiniGameManager.isInMinigame(player)) {
+                player.sendMessage(ChatColor.RED + "You can't use party commands in minigames");
+                return false;
+            }
             if (args.length < 1) {
                 player.sendMessage(ChatColor.YELLOW + "/party invite <player>");
                 player.sendMessage(ChatColor.YELLOW + "/party leave");

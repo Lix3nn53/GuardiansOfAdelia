@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
+import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
@@ -17,8 +18,8 @@ public class Dungeon extends Minigame {
     private final String bossMobName;
 
     public Dungeon(int levelReq, int timeLimitInMinutes, DungeonTheme theme, int roomNo, List<Location> startLocation, String bossMobName) {
-        super(ChatColor.AQUA + "Dungeon", roomNo, levelReq, 4, 1, startLocation, timeLimitInMinutes,
-                1, theme.getDefaultTown(), 2, 24, 1);
+        super(ChatColor.AQUA + "Dungeon", theme.getName(), roomNo, levelReq, 4, 1, startLocation, timeLimitInMinutes,
+                1, theme.getDefaultTown(), 4, 0, 24, 1);
         this.theme = theme;
         this.bossMobName = bossMobName;
     }
@@ -31,8 +32,8 @@ public class Dungeon extends Minigame {
             PrizeChest prizeChest = theme.getPrizeChest();
             ItemStack prizeItem = prizeChest.getChest();
 
-            List<Player> party = getTeams().get(winnerTeam);
-            for (Player member : party) {
+            Party party = getTeams().get(winnerTeam);
+            for (Player member : party.getMembers()) {
                 member.sendMessage(ChatColor.GOLD + "Dungeon prize: " + prizeItem.getItemMeta().getDisplayName());
                 InventoryUtils.giveItemToPlayer(member, prizeItem);
             }
@@ -46,7 +47,7 @@ public class Dungeon extends Minigame {
 
     public void onBossKill(String mobName) {
         if (isInGame() && this.bossMobName.equals(mobName)) {
-            addScore(0, 1);
+            addScore(1, 1);
             endGame();
         }
     }
@@ -55,6 +56,7 @@ public class Dungeon extends Minigame {
     public List<String> getScoreboardTopLines() {
         List<String> topLines = new ArrayList<>();
         topLines.add("Time remaining: " + getTimeLimitInMinutes() * 60);
+        topLines.add("Team" + 1 + " lives: " + getMaxLives());
         topLines.add("Boss: " + getBossMobName());
         return topLines;
     }

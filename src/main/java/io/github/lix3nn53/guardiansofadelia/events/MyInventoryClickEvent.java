@@ -500,9 +500,8 @@ public class MyInventoryClickEvent implements Listener {
                 if (current.getType().equals(Material.LIME_WOOL)) {
                     String s = title.replace("Join dungeon: ", "");
                     DungeonTheme dungeonTheme = DungeonTheme.valueOf(s);
-                    String displayName = itemMeta.getDisplayName();
-                    int i = displayName.indexOf("#");
-                    String c = String.valueOf(displayName.charAt(i + 1));
+                    int i = currentName.indexOf("#");
+                    String c = String.valueOf(currentName.charAt(i + 1));
                     int roomNo = Integer.parseInt(c);
                     boolean joined = MiniGameManager.getDungeon(dungeonTheme, roomNo).joinQueue(player);
                     if (joined) {

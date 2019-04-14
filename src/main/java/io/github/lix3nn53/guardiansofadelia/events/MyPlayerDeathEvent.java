@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class MyPlayerDeathEvent implements Listener {
 
@@ -17,23 +18,29 @@ public class MyPlayerDeathEvent implements Listener {
     public void onEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
 
-        Location deathLocation = player.getLocation();
-        player.spigot().respawn();
+        final Location deathLocation = player.getLocation();
 
-        if (deathLocation.getWorld().getName().equals("world")) {
-            if (GuardiansOfAdelia.getCharacterSelectionScreenManager().isPlayerInCharSelection(player)) {
-                player.teleport(GuardiansOfAdelia.getCharacterSelectionScreenManager().getCharacterSelectionCenter());
-            } else {
-                Town town = TownManager.getNearestTown(deathLocation);
-                player.teleport(town.getLocation());
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                player.spigot().respawn();
+
+                if (deathLocation.getWorld().getName().equals("world")) {
+                    if (GuardiansOfAdelia.getCharacterSelectionScreenManager().isPlayerInCharSelection(player)) {
+                        player.teleport(GuardiansOfAdelia.getCharacterSelectionScreenManager().getCharacterSelectionCenter());
+                    } else {
+                        Town town = TownManager.getNearestTown(deathLocation);
+                        player.teleport(town.getLocation());
+                    }
+                } else if (MiniGameManager.isInMinigame(player)) {
+                    MiniGameManager.onPlayerDeath(player, deathLocation);
+                } else {
+                    Town town = TownManager.getTown(1);
+                    player.teleport(town.getLocation());
+                }
             }
-        } else if (MiniGameManager.isInMinigame(player)) {
-            MiniGameManager.onPlayerDeath(player, deathLocation);
-        } else {
-            Town town = TownManager.getTown(1);
-            player.teleport(town.getLocation());
-        }
-
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 5L);
     }
 
 }

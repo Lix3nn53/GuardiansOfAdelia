@@ -23,8 +23,8 @@ public class MyPlayerQuitEvent implements Listener {
 
         GuildManager.onPlayerQuit(player);
         GuardiansOfAdelia.getCharacterSelectionScreenManager().clear(player);
-        PartyManager.onPlayerQuit(player);
         MiniGameManager.onQuit(player);
+        PartyManager.onPlayerQuit(player);
     }
 
 }

@@ -23,16 +23,22 @@ public class BoardWithPlayers extends ScoreboardGeneral {
 
         this.setLine(ChatColor.GREEN + "» Leader", lineCounter);
         lineCounter++;
-        this.setLine(players.get(0).getName() + ChatColor.RED + " ❤" + (int) (players.get(0).getHealth() + 0.5), lineCounter);
-        lineCounter++;
-        this.setLine(ChatColor.GREEN + "» Members", lineCounter);
-        lineCounter++;
-
-        for (int i = 1; i < players.size(); i++) {
-            Player member = players.get(i);
-            this.setLine(member.getName() + ChatColor.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
+        if (!players.isEmpty()) {
+            this.setLine(players.get(0).getName() + ChatColor.RED + " ❤" + (int) (players.get(0).getHealth() + 0.5), lineCounter);
             lineCounter++;
         }
+
+        if (players.size() > 1) {
+            this.setLine(ChatColor.GREEN + "» Members", lineCounter);
+            lineCounter++;
+
+            for (int i = 1; i < players.size(); i++) {
+                Player member = players.get(i);
+                this.setLine(member.getName() + ChatColor.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
+                lineCounter++;
+            }
+        }
+
         for (Player p : players) {
             this.show(p);
         }
@@ -61,13 +67,28 @@ public class BoardWithPlayers extends ScoreboardGeneral {
 
         }
 
-        this.setLine(ChatColor.GREEN + "» Members", lineCounter);
+        this.setLine(ChatColor.GREEN + "» Leader", lineCounter);
         lineCounter++;
-
-        for (Player member : players) {
-            this.setLine(member.getName() + ChatColor.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
+        if (!players.isEmpty()) {
+            this.setLine(players.get(0).getName() + ChatColor.RED + " ❤" + (int) (players.get(0).getHealth() + 0.5), lineCounter);
             lineCounter++;
         }
+
+        if (players.size() > 1) {
+            this.setLine(ChatColor.GREEN + "» Members", lineCounter);
+            lineCounter++;
+
+            for (int i = 1; i < players.size(); i++) {
+                Player member = players.get(i);
+                this.setLine(member.getName() + ChatColor.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
+                lineCounter++;
+            }
+        }
+
+        for (int i = lineCounter; i < 15; i++) {
+            this.removeLine(i);
+        }
+
         for (Player p : players) {
             this.show(p);
         }

@@ -10,10 +10,12 @@ import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -136,11 +138,20 @@ public enum DungeonTheme {
         Dungeon dungeon = MiniGameManager.getDungeon(this, 1);
         ItemStack room = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = room.getItemMeta();
-        itemMeta.setDisplayName(getName() + " #1 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Click to join this dungeon room!");
-        }});
+        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #1 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
+        List<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + dungeon.getLevelReq());
+        lore.add(ChatColor.RED + "Boss: " + ChatColor.WHITE + dungeon.getBossMobName());
+        lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + dungeon.getTimeLimitInMinutes() + " minute(s)");
+        lore.add("");
+        lore.add(ChatColor.GOLD + "Players in dungeon");
+        for (Player player : dungeon.getPlayersInGame()) {
+            lore.add(player.getDisplayName());
+        }
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Click to join this dungeon room!");
+        itemMeta.setLore(lore);
         room.setItemMeta(itemMeta);
 
         if (dungeon.isInGame()) {
@@ -150,7 +161,7 @@ public enum DungeonTheme {
         guiGeneric.setItem(9, room);
 
         dungeon = MiniGameManager.getDungeon(this, 2);
-        itemMeta.setDisplayName(getName() + " #2 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
+        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #2 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
         room.setItemMeta(itemMeta);
 
         room.setType(Material.LIME_WOOL);
@@ -161,7 +172,7 @@ public enum DungeonTheme {
         guiGeneric.setItem(11, room);
 
         dungeon = MiniGameManager.getDungeon(this, 3);
-        itemMeta.setDisplayName(getName() + " #3 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
+        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #3 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
         room.setItemMeta(itemMeta);
 
         room.setType(Material.LIME_WOOL);
@@ -172,7 +183,7 @@ public enum DungeonTheme {
         guiGeneric.setItem(13, room);
 
         dungeon = MiniGameManager.getDungeon(this, 4);
-        itemMeta.setDisplayName(getName() + " #4 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
+        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #4 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
         room.setItemMeta(itemMeta);
 
         room.setType(Material.LIME_WOOL);
