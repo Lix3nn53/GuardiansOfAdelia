@@ -62,6 +62,21 @@ public abstract class Minigame {
         }
     }
 
+    public void reformParties() {
+        for (int teamNo : teams.keySet()) {
+            Party party = teams.get(teamNo);
+            for (Player member : party.getMembers()) {
+                PartyManager.removeMember(member);
+            }
+        }
+        teams.clear();
+        for (int i = 1; i <= teamAmount; i++) {
+            BoardWithPlayers boardWithPlayers = new BoardWithPlayers(new ArrayList<>(), gameName, getScoreboardTopLines());
+            teams.put(i, new Party(new ArrayList<>(), teamSize, 1, boardWithPlayers));
+            teamToScore.put(i, 0);
+        }
+    }
+
     public int getLevelReq() {
         return levelReq;
     }
@@ -102,12 +117,17 @@ public abstract class Minigame {
                         endGame();
                     } else {
                         updateTimeOnScoreBoards(timeLimitInMinutes * 60 - secondsPass);
+                        onGameTick();
                         secondsPass++;
                     }
                 }
             };
             gameCountDown.runTaskTimer(GuardiansOfAdelia.getInstance(), 5L, 20L);
         }
+    }
+
+    public void onGameTick() {
+
     }
 
     public void endGame() {
@@ -187,7 +207,7 @@ public abstract class Minigame {
         return queueCountDown;
     }
 
-    private void addPlayer(Player player) {
+    public boolean addPlayer(Player player) {
         if (PartyManager.inParty(player)) {
             Party party = PartyManager.getParty(player);
             party.leave(player);
@@ -197,9 +217,10 @@ public abstract class Minigame {
             if (party.getMembers().size() < this.teamSize) {
                 party.addMember(player);
                 teams.put(team, party);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     private void removePlayer(Player player) {
@@ -232,7 +253,7 @@ public abstract class Minigame {
         return false;
     }
 
-    private void onPlayerJoinQueueCountdownCheck() {
+    public void onPlayerJoinQueueCountdownCheck() {
         if (this.requiredPlayerAmountToStart == getPlayersInGame().size()) {
             for (Player member : getPlayersInGame()) {
                 member.sendMessage(ChatColor.AQUA + "Begin start countdown for " + getMinigameName());
@@ -260,6 +281,10 @@ public abstract class Minigame {
             };
             this.queueCountDown.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 1L);
         }
+    }
+
+    public void setQueueCountDown(BukkitRunnable queueCountDown) {
+        this.queueCountDown = queueCountDown;
     }
 
     private void onPlayerLeaveQueueCountdownCheck() {
@@ -393,6 +418,10 @@ public abstract class Minigame {
         }
     }
 
+    public HashMap<Integer, Integer> getTeamToScore() {
+        return teamToScore;
+    }
+
     public List<String> getScoreboardTopLines() {
         List<String> topLines = new ArrayList<>();
         topLines.add("Time remaining: " + this.timeLimitInMinutes * 60);
@@ -466,6 +495,10 @@ public abstract class Minigame {
             }
         }
         return startWatchLocation;
+    }
+
+    public void onPlayerKill(Player killer) {
+        addScore(killer, 1);
     }
 
     public void onPlayerDeath(Player player) {

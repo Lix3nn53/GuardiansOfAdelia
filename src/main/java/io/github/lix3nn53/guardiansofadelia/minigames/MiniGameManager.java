@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.arenas.LastOneStanding;
 import io.github.lix3nn53.guardiansofadelia.minigames.arenas.WinByMostKills;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.minigames.guildwar.GuildWar;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -23,6 +24,7 @@ public class MiniGameManager {
 
     private static final List<LastOneStanding> lastOneStandingList = new ArrayList<>();
     private static final List<WinByMostKills> winByMostKillsList = new ArrayList<>();
+    private static final List<GuildWar> guildWarList = new ArrayList<>();
 
     private static final HashMap<String, Dungeon> codeToDungeon = new HashMap<>();
     private static final HashMap<Location, DungeonTheme> gateLocations = new HashMap<>();
@@ -69,10 +71,25 @@ public class MiniGameManager {
         winByMostKillsStartLocations2.add(new Location(Bukkit.getWorld("arena"), 67.5, 141.5, -105.5, 48, -2));
         WinByMostKills winByMostKillsRoom2 = new WinByMostKills("Space Jump", 1, 1, 2, winByMostKillsStartLocations2, 1, 3,3);
         winByMostKillsList.add(winByMostKillsRoom2);
+
+        //Guild War
+        List<Location> guildWarLocations1 = new ArrayList<>();
+        guildWarLocations1.add(new Location(Bukkit.getWorld("arena"), 362.5, 40.5, -363.5, -1, -3));
+        guildWarLocations1.add(new Location(Bukkit.getWorld("arena"), 480.5, 48.5, -33.5, 179.5f, -2));
+        List<Location> guildWarFlagGrounds1 = new ArrayList<>();
+        guildWarFlagGrounds1.add(new Location(Bukkit.getWorld("arena"), 280, 44, -134));
+        guildWarFlagGrounds1.add(new Location(Bukkit.getWorld("arena"), 407, 31, -187));
+        guildWarFlagGrounds1.add(new Location(Bukkit.getWorld("arena"), 529, 46, -271));
+        GuildWar GuildWarRoom1 = new GuildWar(100,"Space Jump", 1, guildWarLocations1, guildWarFlagGrounds1);
+        guildWarList.add(GuildWarRoom1);
     }
 
     public static LastOneStanding getLastOneStanding(int roomNo) {
         return lastOneStandingList.get(roomNo - 1);
+    }
+
+    public static GuildWar getGuildWar(int roomNo) {
+        return guildWarList.get(roomNo - 1);
     }
 
     public static WinByMostKills getWinByMostKills(int roomNo) {
@@ -137,8 +154,7 @@ public class MiniGameManager {
 
     public static void onPlayerKill(Player killer) {
         if (playerToMinigame.containsKey(killer)) {
-            Minigame minigame = playerToMinigame.get(killer);
-            minigame.addScore(killer, 1);
+            playerToMinigame.get(killer).onPlayerKill(killer);
         }
     }
 
@@ -208,6 +224,34 @@ public class MiniGameManager {
             }});
             room.setItemMeta(itemMeta);
             if (winByMostKills.isInGame()) {
+                room.setType(Material.RED_WOOL);
+            }
+            room.setItemMeta(itemMeta);
+            guiGeneric.setItem(i, room);
+            i += 2;
+        }
+        return guiGeneric;
+    }
+
+    public static GuiGeneric getGuildWarJoinGui() {
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_PURPLE + "Join Guild War", 0);
+
+        int i = 9;
+        for (GuildWar guildWar : guildWarList) {
+            ItemStack room = new ItemStack(Material.LIME_WOOL);
+            ItemMeta itemMeta = room.getItemMeta();
+            itemMeta.setDisplayName(ChatColor.GREEN + guildWar.getMinigameName() + " (" + guildWar.getPlayersInGameSize() + "/" + guildWar.getMaxPlayerSize() + ")");
+            itemMeta.setLore(new ArrayList() {{
+                add("");
+                add(ChatColor.GREEN + "Map: " + ChatColor.WHITE + guildWar.getMapName());
+                add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + guildWar.getLevelReq());
+                add(ChatColor.GOLD + "Team size: " + ChatColor.WHITE + guildWar.getTeamSize());
+                add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + guildWar.getTimeLimitInMinutes() + " minute(s)");
+                add("");
+                add(ChatColor.GRAY + "Click to join this room!");
+            }});
+            room.setItemMeta(itemMeta);
+            if (guildWar.isInGame()) {
                 room.setType(Material.RED_WOOL);
             }
             room.setItemMeta(itemMeta);

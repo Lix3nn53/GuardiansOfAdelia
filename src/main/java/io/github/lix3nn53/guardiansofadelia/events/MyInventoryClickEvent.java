@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
@@ -223,8 +224,9 @@ public class MyInventoryClickEvent implements Listener {
                 GuiGeneric character = MenuList.character();
                 character.openInventory(player);
             } else if (currentName.equals(ChatColor.DARK_PURPLE + "Guild")) {
-                GuiGeneric guild = MenuList.guild();
-                guild.openInventory(player);
+                if (GuildManager.inGuild(player)) {
+                    MenuList.guild().openInventory(player);
+                }
             } else if (currentName.equals(ChatColor.DARK_PURPLE + "Minigames")) {
                 GuiGeneric minigames = MenuList.minigames();
                 minigames.openInventory(player);
@@ -392,6 +394,22 @@ public class MyInventoryClickEvent implements Listener {
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
                 CompassManager.setCompassItemNPC(player, i);
+            }
+        } else if (title.equals(ChatColor.DARK_PURPLE + "Guild")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                if (currentName.equals(ChatColor.RED + "Join Guild War")) {
+                    MiniGameManager.getGuildWarJoinGui().openInventory(player);
+                }
+            }
+        } else if (title.equals(ChatColor.DARK_PURPLE + "Join Guild War")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                int i = currentName.indexOf("#");
+                String c = String.valueOf(currentName.charAt(i + 1));
+                int roomNo = Integer.parseInt(c);
+                boolean joined = MiniGameManager.getGuildWar(roomNo).joinQueue(player);
+                if (joined) {
+                    player.closeInventory();
+                }
             }
         } else if (title.equals(ChatColor.GOLD + "MiniGames")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {

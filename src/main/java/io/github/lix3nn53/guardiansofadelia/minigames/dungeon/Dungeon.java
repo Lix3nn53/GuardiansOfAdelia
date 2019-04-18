@@ -22,6 +22,7 @@ public class Dungeon extends Minigame {
                 1, theme.getDefaultTown(), 4, 0, 24, 1);
         this.theme = theme;
         this.bossMobName = bossMobName;
+        reformParties();
     }
 
     @Override

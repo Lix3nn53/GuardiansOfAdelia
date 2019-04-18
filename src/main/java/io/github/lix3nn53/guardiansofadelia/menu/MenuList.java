@@ -240,7 +240,6 @@ public class MenuList {
     public static GuiGeneric guide() {
         GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.GREEN + "Guides", 0);
 
-
         return guiGeneric;
     }
 
@@ -290,6 +289,15 @@ public class MenuList {
     public static GuiGeneric guild() {
         GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_PURPLE + "Guild", 0);
 
+        ItemStack guildWar = new ItemStack(Material.RED_WOOL);
+        ItemMeta itemMeta = guildWar.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.RED + "Join Guild War");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Click to join a guild war");
+        }});
+        guildWar.setItemMeta(itemMeta);
+        guiGeneric.setItem(17, guildWar);
 
         return guiGeneric;
     }
