@@ -46,15 +46,15 @@ public class MiniGameManager {
         lastOneStandingList.add(lastOneStandingRoom2);
 
         List<Location> lastOneStandingStartLocations3 = new ArrayList<>();
-        lastOneStandingStartLocations3.add(new Location(Bukkit.getWorld("arena"), 80.5, 90.5, 577.5, -164, -4));
-        lastOneStandingStartLocations3.add(new Location(Bukkit.getWorld("arena"), -15.5, 87.5, 445.5, -33, -4));
-        LastOneStanding lastOneStandingRoom3 = new LastOneStanding("Conquer the village", 1, 3, 3, lastOneStandingStartLocations3, 2, 2, 2, 4);
+        lastOneStandingStartLocations3.add(new Location(Bukkit.getWorld("arena"), 133.5, 73.5, 528.5, 95, -4));
+        lastOneStandingStartLocations3.add(new Location(Bukkit.getWorld("arena"), -41.5, 73.5, 509.5, -84, -1));
+        LastOneStanding lastOneStandingRoom3 = new LastOneStanding("Battle of Biomes", 1, 3, 3, lastOneStandingStartLocations3, 2, 2, 2, 4);
         lastOneStandingList.add(lastOneStandingRoom3);
 
         List<Location> lastOneStandingStartLocations4 = new ArrayList<>();
-        lastOneStandingStartLocations4.add(new Location(Bukkit.getWorld("arena"), 91.5, 90.5, 808.5, -164, -4));
-        lastOneStandingStartLocations4.add(new Location(Bukkit.getWorld("arena"), -5.5, 87.5, 676.5, -33, -4));
-        LastOneStanding lastOneStandingRoom4 = new LastOneStanding("Conquer the village", 1, 3, 4, lastOneStandingStartLocations4, 2, 2, 2, 4);
+        lastOneStandingStartLocations3.add(new Location(Bukkit.getWorld("arena"), 140.5, 72.5, 759.5, 95, -4));
+        lastOneStandingStartLocations3.add(new Location(Bukkit.getWorld("arena"), -33.5, 72.5, 741.5, -84, -1));
+        LastOneStanding lastOneStandingRoom4 = new LastOneStanding("Battle of Biomes", 1, 3, 4, lastOneStandingStartLocations4, 2, 2, 2, 4);
         lastOneStandingList.add(lastOneStandingRoom4);
 
         //Win By Most Kills
@@ -80,8 +80,16 @@ public class MiniGameManager {
         guildWarFlagGrounds1.add(new Location(Bukkit.getWorld("arena"), 280, 44, -134));
         guildWarFlagGrounds1.add(new Location(Bukkit.getWorld("arena"), 407, 31, -187));
         guildWarFlagGrounds1.add(new Location(Bukkit.getWorld("arena"), 529, 46, -271));
-        GuildWar GuildWarRoom1 = new GuildWar(100,"Space Jump", 1, guildWarLocations1, guildWarFlagGrounds1);
+        GuildWar GuildWarRoom1 = new GuildWar(500,"Royal Clash", 1, guildWarLocations1, guildWarFlagGrounds1);
         guildWarList.add(GuildWarRoom1);
+
+        List<Location> guildWarLocations2 = new ArrayList<>();
+        guildWarLocations2.add(new Location(Bukkit.getWorld("arena"), 434.5, 88.5, 495.5, -108, -3));
+        guildWarLocations2.add(new Location(Bukkit.getWorld("arena"), 433.5, 88.5, 278.5, 106.5f, -5));
+        List<Location> guildWarFlagGrounds2 = new ArrayList<>();
+        guildWarFlagGrounds2.add(new Location(Bukkit.getWorld("arena"), 464, 49, 389));
+        GuildWar GuildWarRoom2 = new GuildWar(200,"The Deep Valley", 1, guildWarLocations2, guildWarFlagGrounds2);
+        guildWarList.add(GuildWarRoom2);
     }
 
     public static LastOneStanding getLastOneStanding(int roomNo) {

@@ -1,7 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.revive;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
+import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
@@ -27,51 +29,87 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class TombManager {
 
-    private static HashMap<Player, ArmorStand> playerToTomb = new HashMap<>();
-    private static HashMap<Player, Location> playerToTombLocation = new HashMap<>();
+    private static HashMap<Player, Tomb> playerToTomb = new HashMap<>();
+    private static HashMap<String, List<Tomb>> chunkKeyToTomb = new HashMap<>();
 
-    public static boolean isTomb(Entity entity) {
-        return playerToTomb.values().contains(entity);
+    public static boolean hasTomb(Player player) {
+        return playerToTomb.containsKey(player);
     }
 
-    public static void onDeath(Player player, Location location) {
-        playerToTombLocation.put(player, location);
-
-        Town town = TownManager.getNearestTown(location);
-
-        createModel(player, location);
-
+    public static void onDeath(Player player, Location deathLocation) {
+        Town town = TownManager.getNearestTown(deathLocation);
         player.teleport(town.getLocation());
+
+        Tomb tomb = new Tomb(player, deathLocation);
+        String chunkKey = SpawnerManager.getChunkKey(deathLocation);
+        if (chunkKeyToTomb.containsKey(chunkKey)) {
+            List<Tomb> tombs = chunkKeyToTomb.get(chunkKey);
+            tombs.add(tomb);
+            chunkKeyToTomb.put(chunkKey, tombs);
+        } else {
+            List<Tomb> tombs = new ArrayList<>();
+            tombs.add(tomb);
+            chunkKeyToTomb.put(chunkKey, tombs);
+        }
+        playerToTomb.put(player, tomb);
+
         openDeathGui(player);
 
         new BukkitRunnable() {
+
+            int count = 0;
+            int timeLimitIn10Seconds = 12;
+
             @Override
             public void run() {
-                if (player.getGameMode().equals(GameMode.SPECTATOR)) {
-                    removeTomb(player);
-                    player.teleport(town.getLocation());
-                    player.setGameMode(GameMode.ADVENTURE);
+                if (playerToTomb.containsKey(player)) {
+                    if (count == timeLimitIn10Seconds) {
+                        tomb.remove();
+                        player.teleport(town.getLocation());
+                        player.setGameMode(GameMode.ADVENTURE);
+                        player.sendMessage(ChatColor.RED + "Tomb search timeout");
+                        cancel();
+                    } else {
+                        player.sendMessage(ChatColor.AQUA.toString() + ((timeLimitIn10Seconds * 10) - (10 * count)) + " seconds left for your soul to give up");
+                        count++;
+                    }
+                } else {
+                    cancel();
                 }
             }
-        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 120L);
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L,20 * 10L);
     }
 
-    private static void removeTomb(Player player) {
-        if (playerToTomb.containsKey(player)) {
-            ArmorStand tomb = playerToTomb.get(player);
-            tomb.remove();
-            playerToTomb.remove(player);
-            playerToTombLocation.remove(player);
+    public static void onChunkLoad(String chunkKey) {
+        if (chunkKeyToTomb.containsKey(chunkKey)) {
+            List<Tomb> tombs = chunkKeyToTomb.get(chunkKey);
+            for (Tomb tomb : tombs) {
+                tomb.createModel();
+            }
         }
     }
 
+    public static void onTombRemove(Tomb tomb) {
+        String chunkKey = SpawnerManager.getChunkKey(tomb.getBaseLocation());
+        if (chunkKeyToTomb.containsKey(chunkKey)) {
+            List<Tomb> tombs = chunkKeyToTomb.get(chunkKey);
+            tombs.remove(tomb);
+            if (tombs.isEmpty()) {
+                chunkKeyToTomb.remove(chunkKey);
+            } else {
+                chunkKeyToTomb.put(chunkKey, tombs);
+            }
+        }
+        playerToTomb.remove(tomb.getOwner());
+    }
+
     private static void openDeathGui(Player player) {
-        String titleBase = ChatColor.AQUA + "Revive Gui";
-        GuiGeneric reviveGui = new GuiGeneric(9, titleBase, 0);
+        GuiGeneric reviveGui = new GuiGeneric(9, ChatColor.AQUA + "Revive Gui", 0);
 
         ItemStack respawn = new ItemStack(Material.IRON_HOE);
         ItemMeta itemMeta = respawn.getItemMeta();
@@ -93,119 +131,48 @@ public class TombManager {
 
         reviveGui.setItem(3, respawn);
 
-        ItemStack ghost = new ItemStack(Material.IRON_HOE);
+        ItemStack soul = new ItemStack(Material.IRON_HOE);
         if (itemMeta instanceof Damageable) {
             Damageable damageable = (Damageable) itemMeta;
             damageable.setDamage(73);
         }
-        itemMeta.setDisplayName("§bSearch your tomb in soul mode");
+        itemMeta.setDisplayName(ChatColor.AQUA + "Search your tomb in soul mode");
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GRAY + "Find your tomb and left");
-            add(ChatColor.GRAY + "click near it to respawn.");
-            add(ChatColor.RED + "Time limit is 2 minutes after your death.");
+            add(ChatColor.GRAY + "click near it to respawn");
+            add(ChatColor.RED + "Time limit is 2 minutes after your death");
             add(ChatColor.GRAY + "You will respawn here if you cant");
-            add(ChatColor.GRAY + "find your tomb in time.");
+            add(ChatColor.GRAY + "find your tomb in time");
         }});
-        ghost.setItemMeta(itemMeta);
+        soul.setItemMeta(itemMeta);
 
-        reviveGui.setItem(5, ghost);
+        reviveGui.setItem(5, soul);
 
         reviveGui.openInventory(player);
-
-        UUID uniqueId = player.getUniqueId();
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (GuardianDataManager.hasGuardianData(uniqueId)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
-                    if (guardianData.hasActiveGui()) {
-                        Gui activeGui = guardianData.getActiveGui();
-                        if (activeGui instanceof GuiGeneric) {
-                            String title = player.getOpenInventory().getTitle();
-                            if (title.equals(titleBase)) {
-                                removeTomb(player);
-                                player.sendMessage(ChatColor.RED + "ReviveGui timeout");
-                            }
-                        }
-                    }
-                }
-            }
-        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 30L);
-    }
-
-    public static boolean playerHasTomb(Player player) {
-        return playerToTombLocation.containsKey(player);
-    }
-
-    public static Location getTombLocation(Player player) {
-        return playerToTombLocation.get(player);
-    }
-
-    public static ArmorStand getTomb(Player player) {
-        return playerToTomb.get(player);
     }
 
     public static void onReachToTomb(Player player) {
         if (playerToTomb.containsKey(player)) {
-            removeTomb(player);
-            player.setFlying(false);
-            player.setAllowFlight(false);
-            player.setGameMode(GameMode.ADVENTURE);
-            player.sendMessage(ChatColor.GREEN + "You have reached your tomb in time!");
-            player.removePotionEffect(PotionEffectType.INVISIBILITY);
-            player.removePotionEffect(PotionEffectType.GLOWING);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 120, 10));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 60, 1));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 60, 1));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 60, 1));
-        }
-    }
-
-    public static void startSearch(Player player) {
-        player.closeInventory();
-        player.setAllowFlight(true);
-        player.setFlying(true);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 1));
-    }
-
-    public static void onChunkLoad(Chunk chunk) {
-        for (Player player : playerToTombLocation.keySet()) {
-            Location location = playerToTombLocation.get(player);
-            String chunkKey = SpawnerManager.getChunkKey(chunk.getBlock(0, 0, 0).getLocation());
-            String chunkKey2 = SpawnerManager.getChunkKey(location.getChunk().getBlock(0, 0, 0).getLocation());
-            if (chunkKey.equals(chunkKey2)) {
-                createModel(player, location);
+            Tomb tomb = playerToTomb.get(player);
+            if (tomb.isNear()) {
+                tomb.remove();
+                player.setGameMode(GameMode.ADVENTURE);
+                player.sendMessage(ChatColor.GREEN + "You have reached your tomb in time!");
+                player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 240, 20));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 40, 1));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 60, 1));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 60, 1));
             }
         }
     }
 
-    private static void createModel(Player player, Location location) {
+    public static void startSearch(Player player) {
         if (playerToTomb.containsKey(player)) {
-            ArmorStand armorStand = playerToTomb.get(player);
-            armorStand.remove();
+            player.closeInventory();
+            player.setGameMode(GameMode.SPECTATOR);
+        } else {
+            player.sendMessage(ChatColor.RED + "You don't have a tomb");
         }
-        ArmorStand tompModel = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
-
-        ItemStack helm = new ItemStack(Material.IRON_PICKAXE);
-        ItemMeta itemMeta = helm.getItemMeta();
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(1);
-        }
-        itemMeta.setUnbreakable(true);
-        helm.setItemMeta(itemMeta);
-
-        tompModel.setHelmet(helm);
-        tompModel.setVisible(false);
-        tompModel.setCustomName(org.bukkit.ChatColor.DARK_PURPLE + "< Tomb " + org.bukkit.ChatColor.LIGHT_PURPLE + player.getName() + org.bukkit.ChatColor.DARK_PURPLE + " >");
-        tompModel.setCustomNameVisible(true);
-        tompModel.setInvulnerable(true);
-        tompModel.setGravity(false);
-        tompModel.setGlowing(true);
-        tompModel.setRemoveWhenFarAway(false);
-
-        playerToTomb.put(player, tompModel);
     }
 }

@@ -214,7 +214,7 @@ public class Bazaar {
 
         this.open = false;
 
-        BazaarManager.onBazaarRemove(this.baseLocation);
+        BazaarManager.onBazaarRemove(this);
     }
 
     public void setUp() {
@@ -237,5 +237,9 @@ public class Bazaar {
 
     public void removeCustomer(Player player) {
         customers.remove(player);
+    }
+
+    public Location getBaseLocation() {
+        return baseLocation;
     }
 }

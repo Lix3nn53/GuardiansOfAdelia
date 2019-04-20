@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
+import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import org.bukkit.Location;
@@ -34,8 +35,7 @@ public class MyPlayerDeathEvent implements Listener {
                     if (GuardiansOfAdelia.getCharacterSelectionScreenManager().isPlayerInCharSelection(player)) {
                         player.teleport(GuardiansOfAdelia.getCharacterSelectionScreenManager().getCharacterSelectionCenter());
                     } else {
-                        Town town = TownManager.getNearestTown(deathLocation);
-                        player.teleport(town.getLocation());
+                        TombManager.onDeath(player, deathLocation);
                     }
                 } else if (MiniGameManager.isInMinigame(player)) {
                     MiniGameManager.onPlayerDeath(player);

@@ -57,7 +57,7 @@ public class Dungeon extends Minigame {
     public List<String> getScoreboardTopLines() {
         List<String> topLines = new ArrayList<>();
         topLines.add("Time remaining: " + getTimeLimitInMinutes() * 60);
-        topLines.add("Team" + 1 + " lives: " + getMaxLives());
+        topLines.add(getTeamTextColor(1) + "Team" + 1 + " lives: " + getMaxLives());
         topLines.add("Boss: " + getBossMobName());
         return topLines;
     }

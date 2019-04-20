@@ -24,6 +24,7 @@ import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantPageType;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.SellGui;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
@@ -455,6 +456,10 @@ public class MyInventoryClickEvent implements Listener {
                         boolean change = rpgInventory.onShiftClick(current, player, slot, topInventory);
                     }
                 }
+            }
+        } else if (title.equals(ChatColor.AQUA + "Revive Gui")) {
+            if (slot == 5) {
+                TombManager.startSearch(player);
             }
         } else if (title.equals(ChatColor.GOLD + "Bazaar")) {
             if (current.getType().equals(Material.LIME_WOOL)) {

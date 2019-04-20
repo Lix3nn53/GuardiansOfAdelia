@@ -32,7 +32,7 @@ public class GuildWar extends Minigame {
 
     public GuildWar(int maxPoint, String mapName, int roomNo, List<Location> startLocations, List<Location> flagGroundLocations) {
         super(ChatColor.DARK_PURPLE + "GuildWar", mapName, roomNo, 1, 10, 2, startLocations,
-                15, 1, TownManager.getTown(1), 999, 0, 20, 0);
+                15, 2, TownManager.getTown(1), 999, 0, 20, 0);
         this.maxPoint = maxPoint;
         for (Location flagGround : flagGroundLocations) {
             castles.add(new Castle(flagGround.getBlock()));
@@ -54,7 +54,7 @@ public class GuildWar extends Minigame {
 
     @Override
     public void onPlayerKill(Player killer) {
-        addScore(killer, 5);
+        //Override so it doesn't give any score
     }
 
     @Override
@@ -140,24 +140,6 @@ public class GuildWar extends Minigame {
         }
     }
 
-    private Material getTeamWool(int teamNo) {
-        if (teamNo == 1) {
-            return Material.LIGHT_BLUE_WOOL;
-        } else if (teamNo == 2) {
-            return Material.RED_WOOL;
-        }
-        return null;
-    }
-
-    private ChatColor getTeamTextColor(int teamNo) {
-        if (teamNo == 1) {
-            return ChatColor.AQUA;
-        } else if (teamNo == 2) {
-            return ChatColor.RED;
-        }
-        return null;
-    }
-
     @Override
     public void onPlayerDeath(Player player) {
         super.onPlayerDeath(player);
@@ -193,7 +175,7 @@ public class GuildWar extends Minigame {
                                     return true;
                                 }
                             } else {
-                                player.sendMessage("You must be guild Leader or Commander to join a guild war");
+                                player.sendMessage("You must be Leader or Commander to join your guild to a GuildWar");
                             }
                         }
                     }
@@ -267,7 +249,7 @@ public class GuildWar extends Minigame {
                     }
                 }
             };
-            queueCountDown.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 1L);
+            queueCountDown.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 10L);
             setQueueCountDown(queueCountDown);
         }
     }
@@ -287,7 +269,9 @@ public class GuildWar extends Minigame {
         if (!winnerTeams.isEmpty()) {
             StringBuilder msg = new StringBuilder();
             if (winnerTeams.size() == 1) {
-                msg.append(ChatColor.GOLD + "Winner guild: ").append(this.guilds.get(winnerTeams.get(0) - 1).getName()).append(" ( ");
+                Guild winnerGuild = this.guilds.get(winnerTeams.get(0) - 1);
+                winnerGuild.addWarPoints(1);
+                msg.append(ChatColor.GOLD + "Winner guild: ").append(winnerGuild.getName()).append(" ( ");
                 Party winnerParty = getTeams().get(winnerTeams.get(0));
                 for (Player player : winnerParty.getMembers()) {
                     msg.append(player.getName());

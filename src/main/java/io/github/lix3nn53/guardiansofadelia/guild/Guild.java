@@ -128,6 +128,10 @@ public class Guild {
         this.warPoints = warPoints;
     }
 
+    public void addWarPoints(int toAdd) {
+        this.warPoints += toAdd;
+    }
+
     public int getHallLevel() {
         return hallLevel;
     }

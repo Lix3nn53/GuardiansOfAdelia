@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayer
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -279,7 +280,7 @@ public abstract class Minigame {
                     }
                 }
             };
-            this.queueCountDown.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 1L);
+            this.queueCountDown.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 10L);
         }
     }
 
@@ -426,7 +427,7 @@ public abstract class Minigame {
         List<String> topLines = new ArrayList<>();
         topLines.add("Time remaining: " + this.timeLimitInMinutes * 60);
         for (int i = 0; i < teamAmount; i++) {
-            topLines.add("Team" + (i + 1) + " score: " + getMaxLives());
+            topLines.add(getTeamTextColor(i + 1) + "Team" + (i + 1) + " score: " + getMaxLives());
         }
         return topLines;
     }
@@ -439,7 +440,7 @@ public abstract class Minigame {
                 for (int k : board.getRowLines().keySet()) {
                     String s = board.getRowLines().get(k);
                     if (s.contains("Team" + teamNoToChange + " score: ")) {
-                        board.setLine("Team" + teamNoToChange + " score: " + newScore, k);
+                        board.setLine(getTeamTextColor(teamNoToChange) + "Team" + teamNoToChange + " score: " + newScore, k);
                         break;
                     }
                 }
@@ -475,7 +476,7 @@ public abstract class Minigame {
                 for (int k : board.getRowLines().keySet()) {
                     String s = board.getRowLines().get(k);
                     if (s.contains("Team" + teamNoToChange + " lives: ")) {
-                        board.setLine("Team" + teamNoToChange + " lives: " + teamLives, k);
+                        board.setLine(getTeamTextColor(teamNoToChange) + "Team" + teamNoToChange + " lives: " + teamLives, k);
                         break;
                     }
                 }
@@ -499,6 +500,32 @@ public abstract class Minigame {
 
     public void onPlayerKill(Player killer) {
         addScore(killer, 1);
+    }
+
+    public Material getTeamWool(int teamNo) {
+        if (teamNo == 1) {
+            return Material.LIGHT_BLUE_WOOL;
+        } else if (teamNo == 2) {
+            return Material.RED_WOOL;
+        } else if (teamNo == 3) {
+            return Material.YELLOW_WOOL;
+        } else if (teamNo == 4) {
+            return Material.LIME_WOOL;
+        }
+        return Material.WHITE_WOOL;
+    }
+
+    public ChatColor getTeamTextColor(int teamNo) {
+        if (teamNo == 1) {
+            return ChatColor.AQUA;
+        } else if (teamNo == 2) {
+            return ChatColor.RED;
+        } else if (teamNo == 3) {
+            return ChatColor.YELLOW;
+        } else if (teamNo == 4) {
+            return ChatColor.GREEN;
+        }
+        return ChatColor.WHITE;
     }
 
     public void onPlayerDeath(Player player) {

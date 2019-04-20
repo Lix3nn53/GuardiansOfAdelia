@@ -60,7 +60,7 @@ public class WinByMostKills extends Minigame {
         topLines.add("Time remaining: " + getTimeLimitInMinutes() * 60);
         int teamAmount = getTeamAmount();
         for (int i = 0; i < teamAmount; i++) {
-            topLines.add("Team" + (i + 1) + " score: " + 0);
+            topLines.add(getTeamTextColor(i + 1) + "Team" + (i + 1) + " score: " + 0);
         }
         return topLines;
     }

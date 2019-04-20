@@ -6,8 +6,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -42,8 +44,9 @@ public class MyPlayerAnimationEvent implements Listener {
                 List<Entity> nearbyEntities = player.getNearbyEntities(1, 1, 1);
                 for (Entity entity : nearbyEntities) {
                     if (entity.getType().equals(EntityType.ARMOR_STAND)) {
-                        if (BazaarManager.isBazaar(entity)) {
-                            Player owner = BazaarManager.getOwner(entity);
+                        ArmorStand armorStand = (ArmorStand) entity;
+                        if (BazaarManager.isBazaar(armorStand)) {
+                            Player owner = BazaarManager.getOwner(armorStand);
                             UUID uuid = owner.getUniqueId();
                             if (GuardianDataManager.hasGuardianData(uuid)) {
                                 GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -53,6 +56,8 @@ public class MyPlayerAnimationEvent implements Listener {
                                     break;
                                 }
                             }
+                        } else if (TombManager.hasTomb(player)) {
+                            TombManager.onReachToTomb(player);
                         }
                     }
                 }

@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.events;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
+import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Chunk;
@@ -59,6 +60,7 @@ public class MyChunkEvents implements Listener {
         String chunkKey = SpawnerManager.getChunkKey(chunk.getBlock(0, 0, 0).getLocation());
         //create bazaar models
         BazaarManager.onChunkLoad(chunkKey);
+        TombManager.onChunkLoad(chunkKey);
     }
 
     private void createQuestIconBase(Entity chunkEntity) {

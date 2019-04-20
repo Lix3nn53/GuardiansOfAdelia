@@ -70,3 +70,6 @@ Please note that these features are for my personal server. It probably will not
   * TODO
 * Pets
   * TODO
+* Revive
+  * Revive at closest town.
+  * Then you can choose to revive here or become a soul and search for your tomb. If you can find your tomb in 2 minutes, left click to revive there.
