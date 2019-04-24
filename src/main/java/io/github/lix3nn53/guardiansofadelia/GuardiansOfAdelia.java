@@ -72,8 +72,10 @@ public class GuardiansOfAdelia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MyPlayerDeathEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerDropItemEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerEggThrowEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyPlayerItemHeldEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerJoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerQuitEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyProjectileLaunchEvent(), this);
 
         //SkillAPI events
         Bukkit.getPluginManager().registerEvents(new MyPlayerExperienceGainEvent(), this);
@@ -88,6 +90,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         this.getCommand("invite").setExecutor(new CommandInvite());
         this.getCommand("trade").setExecutor(new CommandTrade());
         this.getCommand("party").setExecutor(new CommandParty());
+        this.getCommand("minigame").setExecutor(new CommandMinigame());
 
         for (World w : Bukkit.getServer().getWorlds()) {
             w.setDifficulty(Difficulty.HARD);

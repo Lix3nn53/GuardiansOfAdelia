@@ -15,7 +15,7 @@ My personal spigot(https://www.spigotmc.org/) plugin project to create a MMORPG 
 
 ## Features
 
-Please note that these features are for my personal server. It probably will not work in any other setup.
+Please note that these features are for my personal server. It probably will not work in any other setup. 
 * Quests
   * Icons: 
     Quest icons appear on NPCs and disguises themselfs to each player differently. 
@@ -57,8 +57,11 @@ Please note that these features are for my personal server. It probably will not
 * Guild
   * Create guild to gather a strong army and fight for power
   * Manage your guild with commands such as guild members' ranks
-  * TODO Guild wars
-  * TODO 
+* GuildWars
+  * Guild leader or commanders can join your guild to a GuildWar
+  * The goal is conquering the castles on map
+  * Each castle will give your team +1 point per second
+  * First team that reaches the goal point wins the GuildWar
 * Minigames
   * This is abstract class to create minigames
   * Current minigames created from this abstract class: Dungeons, LastManStanding(pvp)
@@ -71,5 +74,5 @@ Please note that these features are for my personal server. It probably will not
 * Pets
   * TODO
 * Revive
-  * Revive at closest town.
-  * Then you can choose to revive here or become a soul and search for your tomb. If you can find your tomb in 2 minutes, left click to revive there.
+  * Revive at closest town
+  * Then you can choose to revive here or become a soul and search for your tomb. If you can find your tomb in 2 minutes, left click to revive there

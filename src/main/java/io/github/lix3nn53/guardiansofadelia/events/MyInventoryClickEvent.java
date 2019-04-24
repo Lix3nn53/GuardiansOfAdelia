@@ -1,6 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
+import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatType;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
@@ -57,6 +61,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -164,6 +169,35 @@ public class MyInventoryClickEvent implements Listener {
                         }
                     } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
                         sellGui.addItemToSell(current, slot);
+                    }
+                } else if (activeGui instanceof EnchantGui) {
+                    EnchantGui enchantGui = (EnchantGui) activeGui;
+                    if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                        if (current.getType().equals(Material.EMERALD_BLOCK)) {
+                            enchantGui.startEnchanting(player);
+                        }
+                    } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+                        List<Material> enchantStoneMaterials = new ArrayList<>();
+                        for (EnchantStone enchantStone : EnchantStone.values()) {
+                            enchantStoneMaterials.add(enchantStone.getType());
+                        }
+                        if (enchantStoneMaterials.contains(current.getType())) {
+                            ItemStack oldEnchantStone = enchantGui.getEnchantStone();
+                            if (oldEnchantStone != null) {
+                                if (!oldEnchantStone.getType().equals(Material.AIR)) {
+                                    InventoryUtils.giveItemToPlayer(player, oldEnchantStone);
+                                }
+                            }
+                            enchantGui.setEnchantStone(current);
+                        } else if (StatUtils.hasStatType(current.getType())) {
+                            ItemStack oldItemToEnchant = enchantGui.getItemToEnchant();
+                            if (oldItemToEnchant != null) {
+                                if (!oldItemToEnchant.getType().equals(Material.AIR)) {
+                                    InventoryUtils.giveItemToPlayer(player, oldItemToEnchant);
+                                }
+                            }
+                            enchantGui.setItemToEnchant(current);
+                        }
                     }
                 }
                 if (!title.equals("Bazaar Storage")) {

@@ -54,7 +54,7 @@ public class PartyInvite extends Invite {
             members.add(getSender());
             members.add(getReceiver());
 
-            Party party = new Party(members, 4, 2);
+            Party party = new Party(members, 4, 2, ChatColor.AQUA);
 
             PartyManager.addParty(getSender(), getReceiver(), party);
 

@@ -8,9 +8,12 @@ import java.util.List;
 public class BoardWithPlayers extends ScoreboardGeneral {
 
     private final List<String> topLines;
+    private final ChatColor teamColor;
 
-    public BoardWithPlayers(List<Player> players, String name, List<String> topLines) {
+    public BoardWithPlayers(List<Player> players, String name, List<String> topLines, ChatColor teamColor) {
         super(name);
+        this.teamColor = teamColor;
+
         this.topLines = topLines;
         this.setLine("", 1);
 
@@ -39,8 +42,12 @@ public class BoardWithPlayers extends ScoreboardGeneral {
             }
         }
 
+        this.registerNewTeam("friendlyTeam");
+        this.setTeamColor("friendlyTeam", teamColor);
+
         for (Player p : players) {
             this.show(p);
+            this.joinTeam("friendlyTeam", p);
         }
     }
 
@@ -89,8 +96,13 @@ public class BoardWithPlayers extends ScoreboardGeneral {
             this.removeLine(i);
         }
 
+        this.unregisterTeam("friendlyTeam");
+        this.registerNewTeam("friendlyTeam");
+        this.setTeamColor("friendlyTeam", this.teamColor);
+
         for (Player p : players) {
             this.show(p);
+            this.joinTeam("friendlyTeam", p);
         }
     }
 }

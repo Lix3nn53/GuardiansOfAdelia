@@ -21,8 +21,7 @@ public class Weapons {
         } else if (rpgClass.equals(RPGClass.KNIGHT)) {
             return Swords.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.MONK)) {
-            //TODO return Tridents.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
-            return Swords.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+            return Tridents.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         }
         return null;
     }

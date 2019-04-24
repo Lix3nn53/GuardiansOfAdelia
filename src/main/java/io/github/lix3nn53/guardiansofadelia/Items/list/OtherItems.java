@@ -42,4 +42,16 @@ public class OtherItems {
         itemStack = NBTTagUtils.putInteger("durability", durability, itemStack);
         return itemStack;
     }
+
+    public static ItemStack getArrow(int amount) {
+        ItemStack itemStack = new ItemStack(Material.ARROW, amount);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Arrow");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Ammunition for bows & crossbows");
+        }});
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
 }

@@ -5,7 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,7 +18,8 @@ import java.util.List;
 
 public abstract class Minigame {
 
-    private final String gameName;
+    private final String gameTypeName;
+    private final ChatColor gameColor;
     private final String mapName;
     private final HashMap<Integer, Integer> teamToScore = new HashMap<>();
     private final List<Location> startLocations;
@@ -40,9 +41,10 @@ public abstract class Minigame {
     private BukkitRunnable queueCountDown;
     private boolean isInGame = false;
 
-    public Minigame(String gameName, String mapName, int roomNo, int levelReq, int teamSize, int teamAmount, List<Location> startLocations, int timeLimitInMinutes,
+    public Minigame(String gameTypeName, ChatColor gameColor, String mapName, int roomNo, int levelReq, int teamSize, int teamAmount, List<Location> startLocations, int timeLimitInMinutes,
                     int queueTimeLimitInMinutes, Town backTown, int maxLives, int minTeamsAlive, int respawnDelayInSeconds, int requiredPlayerAmountToStart) {
-        this.gameName = gameName;
+        this.gameTypeName = gameTypeName;
+        this.gameColor = gameColor;
         this.mapName = mapName;
         this.backTown = backTown;
         this.levelReq = levelReq;
@@ -56,8 +58,17 @@ public abstract class Minigame {
         this.minTeamsAlive = minTeamsAlive;
         this.respawnDelayInSeconds = respawnDelayInSeconds;
         this.requiredPlayerAmountToStart = requiredPlayerAmountToStart;
+
+        this.gameCountDown = new BukkitRunnable() {
+            @Override
+            public void run() {
+                cancel();
+            }
+        };
+        gameCountDown.runTaskTimer(GuardiansOfAdelia.getInstance(), 5L, 20L);
+
         for (int i = 1; i <= teamAmount; i++) {
-            BoardWithPlayers boardWithPlayers = new BoardWithPlayers(new ArrayList<>(), gameName, getScoreboardTopLines());
+            BoardWithPlayers boardWithPlayers = new BoardWithPlayers(new ArrayList<>(), gameTypeName, getScoreboardTopLines(), getTeamTextColor(i));
             teams.put(i, new Party(new ArrayList<>(), teamSize, 1, boardWithPlayers));
             teamToScore.put(i, 0);
         }
@@ -72,8 +83,9 @@ public abstract class Minigame {
         }
         teams.clear();
         for (int i = 1; i <= teamAmount; i++) {
-            BoardWithPlayers boardWithPlayers = new BoardWithPlayers(new ArrayList<>(), gameName, getScoreboardTopLines());
-            teams.put(i, new Party(new ArrayList<>(), teamSize, 1, boardWithPlayers));
+            BoardWithPlayers boardWithPlayers = new BoardWithPlayers(new ArrayList<>(), gameTypeName, getScoreboardTopLines(), getTeamTextColor(i));
+            Party party = new Party(new ArrayList<>(), teamSize, 1, boardWithPlayers);
+            teams.put(i, party);
             teamToScore.put(i, 0);
         }
     }
@@ -180,7 +192,7 @@ public abstract class Minigame {
                             teams.clear();
                             teamToScore.clear();
                             for (int i = 1; i <= teamAmount; i++) {
-                                BoardWithPlayers boardWithPlayers = new BoardWithPlayers(new ArrayList<>(), gameName, getScoreboardTopLines());
+                                BoardWithPlayers boardWithPlayers = new BoardWithPlayers(new ArrayList<>(), gameTypeName, getScoreboardTopLines(), getTeamTextColor(i));
                                 teams.put(i, new Party(new ArrayList<>(), teamSize, 1, boardWithPlayers));
                                 teamToScore.put(i, 0);
                             }
@@ -190,7 +202,7 @@ public abstract class Minigame {
                     } else {
                         for (Player member : getPlayersInGame()) {
                             if (member.isOnline()) {
-                                member.sendMessage(ChatColor.AQUA.toString() + "You will be teleported in " + (15 - (count * 5)) + " seconds.");
+                                member.sendMessage(getGameColor() + "You will be teleported in " + (15 - (count * 5)) + " seconds.");
                             }
                         }
                         count++;
@@ -198,6 +210,10 @@ public abstract class Minigame {
                 }
             }.runTaskTimer(GuardiansOfAdelia.getInstance(), 5L, 20 * 5L);
         }
+    }
+
+    public ChatColor getGameColor() {
+        return gameColor;
     }
 
     public int getQueueTimeLimitInMinutes() {
@@ -241,7 +257,7 @@ public abstract class Minigame {
                 if (!getPlayersInGame().contains(player) && getPlayersInGame().size() < this.teamAmount * this.teamSize) {
                     addPlayer(player);
                     for (Player member : getPlayersInGame()) {
-                        member.sendMessage(ChatColor.AQUA + player.getName() + " joined queue for " + getMinigameName());
+                        member.sendMessage(player.getName() + getGameColor() + " joined queue for " + getMinigameName());
                     }
                     MiniGameManager.addPlayer(player, this);
                     onPlayerJoinQueueCountdownCheck();
@@ -257,7 +273,7 @@ public abstract class Minigame {
     public void onPlayerJoinQueueCountdownCheck() {
         if (this.requiredPlayerAmountToStart == getPlayersInGame().size()) {
             for (Player member : getPlayersInGame()) {
-                member.sendMessage(ChatColor.AQUA + "Begin start countdown for " + getMinigameName());
+                member.sendMessage(getGameColor() + "Begin start countdown for " + getMinigameName());
             }
             //start countdown
             this.queueCountDown = new BukkitRunnable() {
@@ -273,7 +289,7 @@ public abstract class Minigame {
                     } else {
                         for (Player member : getPlayersInGame()) {
                             if (member.isOnline()) {
-                                member.sendMessage(ChatColor.AQUA.toString() + (queueTimeLimitInMinutes * 60 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
+                                member.sendMessage(getGameColor().toString() + (queueTimeLimitInMinutes * 60 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
                             }
                         }
                         count++;
@@ -310,7 +326,7 @@ public abstract class Minigame {
     }
 
     public String getMinigameName() {
-        return "minigame default";
+        return this.gameColor + this.gameTypeName + " #" + getRoomNo();
     }
 
     public Location getStartLocation(int teamNo) {
@@ -338,6 +354,7 @@ public abstract class Minigame {
             if (!player.getLocation().getWorld().getName().equals("world")) {
                 player.teleport(this.backTown.getLocation());
             }
+            player.sendMessage(ChatColor.RED + "You have left " + getMinigameName());
         }
 
         int teamOfPlayer = getTeamOfPlayer(player);
@@ -355,6 +372,9 @@ public abstract class Minigame {
         MiniGameManager.removePlayer(player);
         player.setGameMode(GameMode.ADVENTURE);
         onPlayerLeaveQueueCountdownCheck();
+        if (getPlayersInGame().isEmpty()) {
+            endGame();
+        }
     }
 
     public List<Integer> getWinnerTeams() {
@@ -427,7 +447,7 @@ public abstract class Minigame {
         List<String> topLines = new ArrayList<>();
         topLines.add("Time remaining: " + this.timeLimitInMinutes * 60);
         for (int i = 0; i < teamAmount; i++) {
-            topLines.add(getTeamTextColor(i + 1) + "Team" + (i + 1) + " score: " + getMaxLives());
+            topLines.add(getTeamTextColor(i + 1) + "Team" + (i + 1) + " score: " + getScoreOfTeam(i + 1));
         }
         return topLines;
     }
@@ -464,8 +484,8 @@ public abstract class Minigame {
         }
     }
 
-    public String getGameName() {
-        return gameName;
+    public String getGameTypeName() {
+        return gameTypeName;
     }
 
     private void updateTeamLivesOnScoreBoard(int teamNoToChange, int teamLives) {

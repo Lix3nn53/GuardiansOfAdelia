@@ -87,8 +87,8 @@ public class MiniGameManager {
         guildWarLocations2.add(new Location(Bukkit.getWorld("arena"), 434.5, 88.5, 495.5, -108, -3));
         guildWarLocations2.add(new Location(Bukkit.getWorld("arena"), 433.5, 88.5, 278.5, 106.5f, -5));
         List<Location> guildWarFlagGrounds2 = new ArrayList<>();
-        guildWarFlagGrounds2.add(new Location(Bukkit.getWorld("arena"), 464, 49, 389));
-        GuildWar GuildWarRoom2 = new GuildWar(200,"The Deep Valley", 1, guildWarLocations2, guildWarFlagGrounds2);
+        guildWarFlagGrounds2.add(new Location(Bukkit.getWorld("arena"), 464, 55, 389));
+        GuildWar GuildWarRoom2 = new GuildWar(200,"The Deep Valley", 2, guildWarLocations2, guildWarFlagGrounds2);
         guildWarList.add(GuildWarRoom2);
     }
 
@@ -170,6 +170,10 @@ public class MiniGameManager {
         if (playerToMinigame.containsKey(player)) {
             Minigame minigame = playerToMinigame.get(player);
             minigame.leave(player);
+        } else {
+            if (player.isOnline()) {
+                player.sendMessage(ChatColor.RED + "You are not in a minigame");
+            }
         }
     }
 

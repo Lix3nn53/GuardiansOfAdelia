@@ -13,14 +13,12 @@ import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.FakeIndicator;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,63 +34,73 @@ public class MyEntityDamageByEntityEvent implements Listener {
         //player is attacker
         if (damager.getType().equals(EntityType.PLAYER)) {
             Player player = (Player) damager;
-
-            //if living entity
-            if (event.getEntity() instanceof LivingEntity) {
-                LivingEntity livingTarget = (LivingEntity) target;
-                //show bossbar
-                HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5));
-                HealthBarManager.showToPlayerFor10Seconds(player, healthBar);
-
-                UUID uniqueId = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uniqueId)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
-                    if (guardianData.hasActiveCharacter()) {
-                        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-
-                        //progress deal damage tasks
-                        List<Quest> questList = activeCharacter.getQuestList();
-                        for (Quest quest : questList) {
-                            quest.progressDealDamageTasks(player, livingTarget, (int) (finalDamage + 0.5));
-                        }
-                        PartyManager.progressDealDamageTasksOfOtherMembers(player, livingTarget, finalDamage);
-
-                        //on Kill
-                        if (finalDamage >= livingTarget.getHealth()) {
-
-                            if (livingTarget.isCustomNameVisible()) {
-                                SkillAPIUtils.giveMobExp(player, MobExperienceList.getExperience(livingTarget.getCustomName()));
-                            }
-
-                            //progress kill tasks
-                            for (Quest quest : questList) {
-                                quest.progressKillTasks(player, livingTarget);
-                            }
-                            PartyManager.progressMobKillTasksOfOtherMembers(player, livingTarget);
-
-                            if (MiniGameManager.isInMinigame(player)) {
-                                if (livingTarget.getType().equals(EntityType.PLAYER)) {
-                                    MiniGameManager.onPlayerKill(player);
-                                } else {
-                                    MiniGameManager.onMobKillDungeon(player, livingTarget);
-                                }
-                            }
-                        }
-                    }
-                }
+            onPlayerAttackEntity(event, player, target, finalDamage);
+        }else if (damager instanceof Projectile) {
+            Projectile projectile = (Projectile) damager;
+            ProjectileSource shooter = projectile.getShooter();
+            if (shooter instanceof Player) {
+                Player player = (Player) shooter;
+                onPlayerAttackEntity(event, player, target, finalDamage);
             }
-
-            //indicator
-            String text = ChatColor.RED.toString() + (int) (finalDamage + 0.5) + " ➹";
-            FakeIndicator.showPlayer(player, text, target.getLocation());
-
-            DropManager.dealDamage(target, player, (int) (finalDamage + 0.5));
         }
 
         //player is target
         if (target.getType().equals(EntityType.PLAYER)) {
 
         }
+    }
+
+    private void onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, Entity target, double finalDamage) {
+        //if living entity
+        if (event.getEntity() instanceof LivingEntity) {
+            LivingEntity livingTarget = (LivingEntity) target;
+            //show bossbar
+            HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5));
+            HealthBarManager.showToPlayerFor10Seconds(player, healthBar);
+
+            UUID uniqueId = player.getUniqueId();
+            if (GuardianDataManager.hasGuardianData(uniqueId)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                    //progress deal damage tasks
+                    List<Quest> questList = activeCharacter.getQuestList();
+                    for (Quest quest : questList) {
+                        quest.progressDealDamageTasks(player, livingTarget, (int) (finalDamage + 0.5));
+                    }
+                    PartyManager.progressDealDamageTasksOfOtherMembers(player, livingTarget, finalDamage);
+
+                    //on Kill
+                    if (finalDamage >= livingTarget.getHealth()) {
+
+                        if (livingTarget.isCustomNameVisible()) {
+                            SkillAPIUtils.giveMobExp(player, MobExperienceList.getExperience(livingTarget.getCustomName()));
+                        }
+
+                        //progress kill tasks
+                        for (Quest quest : questList) {
+                            quest.progressKillTasks(player, livingTarget);
+                        }
+                        PartyManager.progressMobKillTasksOfOtherMembers(player, livingTarget);
+
+                        if (MiniGameManager.isInMinigame(player)) {
+                            if (livingTarget.getType().equals(EntityType.PLAYER)) {
+                                MiniGameManager.onPlayerKill(player);
+                            } else {
+                                MiniGameManager.onMobKillDungeon(player, livingTarget);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //indicator
+        String text = ChatColor.RED.toString() + (int) (finalDamage + 0.5) + " ➹";
+        FakeIndicator.showPlayer(player, text, target.getLocation());
+
+        DropManager.dealDamage(target, player, (int) (finalDamage + 0.5));
     }
 
 }

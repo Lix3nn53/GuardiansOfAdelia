@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
+import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public final class RPGCharacter {
     private List<Integer> turnedInQuests = new ArrayList<Integer>();
     private Job job;
 
-    private ChatTag chatTag = ChatTag.NEWBIE;
+    private ChatTag chatTag = ChatTag.NOVICE;
 
     public boolean acceptQuest(Quest quest, Player player) {
         if (!hasQuest(quest.getQuestID())) {
@@ -60,10 +61,6 @@ public final class RPGCharacter {
 
     public void setTurnedInQuests(List<Integer> turnedInQuests) {
         this.turnedInQuests = turnedInQuests;
-    }
-
-    public RPGClass getRPGClass() {
-        return RPGClass.ARCHER;
     }
 
     public RPGInventory getRpgInventory() {

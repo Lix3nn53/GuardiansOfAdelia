@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -56,5 +57,26 @@ public abstract class ScoreboardGeneral implements MyScoreboard {
 
     public HashMap<Integer, String> getRowLines() {
         return rowLines;
+    }
+
+    public void setTeamColor(String teamName, ChatColor color) {
+        this.board.getTeam(teamName).setColor(color);
+    }
+
+    public void registerNewTeam(String teamName) {
+        this.board.registerNewTeam(teamName);
+        this.board.getTeam(teamName).setAllowFriendlyFire(false);
+    }
+
+    public void joinTeam(String teamName, Player player) {
+        this.board.getTeam(teamName).addEntry(player.getName());
+    }
+
+    public void leaveTeam(String teamName, Player player) {
+        this.board.getTeam(teamName).removeEntry(player.getName());
+    }
+
+    public void unregisterTeam(String teamName) {
+        this.board.getTeam(teamName).unregister();
     }
 }

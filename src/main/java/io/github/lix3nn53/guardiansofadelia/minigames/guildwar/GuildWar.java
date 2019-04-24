@@ -10,8 +10,8 @@ import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -31,7 +31,7 @@ public class GuildWar extends Minigame {
     private final int maxPoint;
 
     public GuildWar(int maxPoint, String mapName, int roomNo, List<Location> startLocations, List<Location> flagGroundLocations) {
-        super(ChatColor.DARK_PURPLE + "GuildWar", mapName, roomNo, 1, 10, 2, startLocations,
+        super("GuildWar", ChatColor.DARK_PURPLE, mapName, roomNo, 1, 10, 2, startLocations,
                 15, 2, TownManager.getTown(1), 999, 0, 20, 0);
         this.maxPoint = maxPoint;
         for (Location flagGround : flagGroundLocations) {
@@ -82,14 +82,9 @@ public class GuildWar extends Minigame {
             }
         }
         for (int i = 0; i < getTeamAmount(); i++) {
-            topLines.add("Team" + (i + 1) + " score: " + 0);
+            topLines.add(getTeamTextColor(i + 1) + "Team" + (i + 1) + " score: " + 0);
         }
         return topLines;
-    }
-
-    @Override
-    public String getMinigameName() {
-        return "Guild War #" + getRoomNo();
     }
 
     private void performCastleConquer(Castle castle, int castleNo) {
@@ -132,7 +127,7 @@ public class GuildWar extends Minigame {
                 for (int k : board.getRowLines().keySet()) {
                     String s = board.getRowLines().get(k);
                     if (s.contains("Castle-" + castleNo + ": ")) {
-                        board.setLine(getTeamTextColor(teamNo) + "Castle-" + castleNo + ": " + ownerTeam, k);
+                        board.setLine(getTeamTextColor(ownerTeam) + "Castle-" + castleNo + ": " + ownerTeam, k);
                         break;
                     }
                 }
@@ -166,7 +161,7 @@ public class GuildWar extends Minigame {
                                                 Player member = Bukkit.getPlayer(uuid);
                                                 if (member != null) {
                                                     if (member.isOnline()) {
-                                                        member.sendMessage("Guild '" + guild.getName() + "' joined GuildWar #" + getRoomNo());
+                                                        member.sendMessage(getGameColor() + "Guild '" + guild.getName() + "' joined GuildWar #" + getRoomNo());
                                                     }
                                                 }
                                             }
@@ -175,7 +170,7 @@ public class GuildWar extends Minigame {
                                     return true;
                                 }
                             } else {
-                                player.sendMessage("You must be Leader or Commander to join your guild to a GuildWar");
+                                player.sendMessage(ChatColor.RED + "You must be Leader or Commander to join your guild to a GuildWar");
                             }
                         }
                     }
@@ -191,7 +186,7 @@ public class GuildWar extends Minigame {
         if (!getPlayersInGame().contains(player) && getPlayersInGame().size() < getTeamAmount() * getTeamSize()) {
             if (addPlayer(player)) {
                 for (Player member : getPlayersInGame()) {
-                    member.sendMessage(ChatColor.AQUA + player.getName() + " joined queue for " + getMinigameName());
+                    member.sendMessage(getGameColor() + player.getName() + " joined queue for " + getMinigameName());
                 }
                 MiniGameManager.addPlayer(player, this);
                 onPlayerJoinQueueCountdownCheck();
@@ -226,7 +221,7 @@ public class GuildWar extends Minigame {
     public void onPlayerJoinQueueCountdownCheck() {
         if (this.guilds.size() == getTeamAmount()) {
             for (Player member : getPlayersInGame()) {
-                member.sendMessage(ChatColor.AQUA + "Begin start countdown for " + getMinigameName());
+                member.sendMessage(getGameColor() + "Begin start countdown for " + getMinigameName());
             }
             //start countdown
             BukkitRunnable queueCountDown = new BukkitRunnable() {
@@ -242,7 +237,7 @@ public class GuildWar extends Minigame {
                     } else {
                         for (Player member : getPlayersInGame()) {
                             if (member.isOnline()) {
-                                member.sendMessage(ChatColor.AQUA.toString() + (getQueueTimeLimitInMinutes() * 60 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
+                                member.sendMessage(getGameColor().toString() + (getQueueTimeLimitInMinutes() * 60 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
                             }
                         }
                         count++;
@@ -271,7 +266,7 @@ public class GuildWar extends Minigame {
             if (winnerTeams.size() == 1) {
                 Guild winnerGuild = this.guilds.get(winnerTeams.get(0) - 1);
                 winnerGuild.addWarPoints(1);
-                msg.append(ChatColor.GOLD + "Winner guild: ").append(winnerGuild.getName()).append(" ( ");
+                msg.append(getGameColor() + "Winner guild: ").append(winnerGuild.getName()).append(" ( ");
                 Party winnerParty = getTeams().get(winnerTeams.get(0));
                 for (Player player : winnerParty.getMembers()) {
                     msg.append(player.getName());

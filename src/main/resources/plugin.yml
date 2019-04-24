@@ -16,6 +16,12 @@ depend:
   - WorldEdit
   - WorldGuard
 commands:
+  lix:
+    description: Admin command
+    aliases:
+      - l
+    permission: guardian.admin
+    permission-message: You do not have permission!
   guild:
     description: Guild command
     aliases:
@@ -40,11 +46,11 @@ commands:
       - pt
     permission: guardian.player
     permission-message: You do not have permission!
-  lix:
-    description: Admin command
+  minigame:
+    description: Minigame command
     aliases:
-      - l
-    permission: guardian.admin
+      - mg
+    permission: guardian.player
     permission-message: You do not have permission!
 permissions:
   guardian.player:

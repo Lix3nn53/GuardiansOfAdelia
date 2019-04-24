@@ -53,7 +53,12 @@ public class SkillAPIUtils {
     public static String getClassName(Player player, int charNo) {
         PlayerAccounts playerAccountData = SkillAPI.getPlayerAccountData(player);
         PlayerData playerData = playerAccountData.getData(charNo);
-        return playerData.getMainClass().getData().getName();
+        if (playerData != null) {
+            if (playerData.getMainClass() != null) {
+                return playerData.getMainClass().getData().getName();
+            }
+        }
+        return "";
     }
 
     public static int getHealth(Player player, int charNo) {
@@ -207,5 +212,27 @@ public class SkillAPIUtils {
     public static void clearBonuses(Player player) {
         PlayerData playerData = SkillAPI.getPlayerData(player);
         playerData.clearBonuses();
+    }
+
+    public static RPGClass getRPGClass(Player player) {
+        int charNo = getActiveCharacterNo(player);
+        String className = SkillAPIUtils.getClassName(player, charNo);
+        className = className.toLowerCase();
+        if (className.contains("archer")) {
+            return RPGClass.ARCHER;
+        } else if (className.contains("knight")) {
+            return RPGClass.KNIGHT;
+        } else if (className.contains("mage")) {
+            return RPGClass.MAGE;
+        } else if (className.contains("monk")) {
+            return RPGClass.MONK;
+        } else if (className.contains("ninja")) {
+            return RPGClass.NINJA;
+        } else if (className.contains("paladin")) {
+            return RPGClass.PALADIN;
+        } else if (className.contains("warrior")) {
+            return RPGClass.WARRIOR;
+        }
+        return RPGClass.NO_CLASS;
     }
 }

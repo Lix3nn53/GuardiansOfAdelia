@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,7 +18,7 @@ public class Dungeon extends Minigame {
     private final String bossMobName;
 
     public Dungeon(int levelReq, int timeLimitInMinutes, DungeonTheme theme, int roomNo, List<Location> startLocation, String bossMobName) {
-        super(ChatColor.AQUA + "Dungeon", theme.getName(), roomNo, levelReq, 4, 1, startLocation, timeLimitInMinutes,
+        super("Dungeon " + theme.getName(), ChatColor.AQUA, theme.getName(), roomNo, levelReq, 4, 1, startLocation, timeLimitInMinutes,
                 1, theme.getDefaultTown(), 4, 0, 24, 1);
         this.theme = theme;
         this.bossMobName = bossMobName;
@@ -35,15 +35,10 @@ public class Dungeon extends Minigame {
 
             Party party = getTeams().get(winnerTeam.get(0));
             for (Player member : party.getMembers()) {
-                member.sendMessage(ChatColor.GOLD + "Dungeon prize: " + prizeItem.getItemMeta().getDisplayName());
+                member.sendMessage(getGameColor() + "Dungeon prize: " + prizeItem.getItemMeta().getDisplayName());
                 InventoryUtils.giveItemToPlayer(member, prizeItem);
             }
         }
-    }
-
-    @Override
-    public String getMinigameName() {
-        return this.theme.getName() + " #" + getRoomNo();
     }
 
     public void onBossKill(String mobName) {

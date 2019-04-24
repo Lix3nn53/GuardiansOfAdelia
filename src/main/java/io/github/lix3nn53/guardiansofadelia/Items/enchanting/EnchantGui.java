@@ -72,9 +72,9 @@ public class EnchantGui extends GuiGeneric {
             add(ChatColor.GREEN + "and the enchant stone");
             add(ChatColor.GREEN + "click emerald block to enchant!");
             add("");
-            add(ChatColor.RED + "NOTE:");
-            add(ChatColor.GRAY + "If it fails the level of");
-            add(ChatColor.GRAY + "enchant falls back.");
+            add(ChatColor.RED + "Warning:");
+            add(ChatColor.GRAY + "If it fails the enchant level");
+            add(ChatColor.GRAY + "of item decreases");
         }});
         wool.setItemMeta(im4);
 
@@ -113,26 +113,8 @@ public class EnchantGui extends GuiGeneric {
         return false;
     }
 
-    public boolean setEnchantStone(ItemStack itemStack, ItemStack enchantStone) {
-        String name = enchantStone.getItemMeta().getDisplayName();
-        if (name.contains("Enchant Stone")) {
-            int stoneLevel = 0;
-            if (name.contains("1")) {
-                stoneLevel = 1;
-            } else if (name.contains("2")) {
-                stoneLevel = 3;
-            } else if (name.contains("3")) {
-                stoneLevel = 3;
-            } else if (name.contains("4")) {
-                stoneLevel = 4;
-            }
-            boolean b = stoneLevel == EnchantManager.getRequiredEnchantStoneLevel(EnchantManager.getEnchantLevel(itemStack));
-            if (b) {
-                setItem(13, enchantStone);
-            }
-            return b;
-        }
-        return false;
+    public void setEnchantStone(ItemStack enchantStone) {
+        setItem(13, enchantStone);
     }
 
     public ItemStack getItemToEnchant() {
@@ -144,56 +126,91 @@ public class EnchantGui extends GuiGeneric {
     }
 
     public void startEnchanting(Player owner) {
-        Location loc = owner.getLocation();
-        World w = loc.getWorld();
+        ItemStack enchantStone = getEnchantStone();
+        final ItemStack itemToEnchant = getItemToEnchant();
+        if (enchantStone != null && itemToEnchant != null) {
+            if (!enchantStone.getType().equals(Material.AIR) && !itemToEnchant.getType().equals(Material.AIR)) {
+                String name = enchantStone.getItemMeta().getDisplayName();
+                if (name.contains("Enchant Stone")) {
+                    int stoneLevel = 0;
+                    if (name.contains("1")) {
+                        stoneLevel = 1;
+                    } else if (name.contains("2")) {
+                        stoneLevel = 3;
+                    } else if (name.contains("3")) {
+                        stoneLevel = 3;
+                    } else if (name.contains("4")) {
+                        stoneLevel = 4;
+                    }
+                    int enchantLevel = EnchantManager.getEnchantLevel(itemToEnchant);
+                    if (enchantLevel < 12) {
+                        int requiredEnchantStoneLevel = EnchantManager.getRequiredEnchantStoneLevel(enchantLevel);
+                        boolean stoneFits = stoneLevel == requiredEnchantStoneLevel;
+                        if (stoneFits) {
+                            Location loc = owner.getLocation();
+                            World w = loc.getWorld();
 
-        w.playSound(loc, "randoming", 0.5F, 0.9F);
+                            w.playSound(loc, "randoming", 0.5F, 0.9F);
 
-        GuiGeneric gui = this;
+                            GuiGeneric gui = this;
 
-        new BukkitRunnable() {
+                            new BukkitRunnable() {
 
-            // We don't want the task to run indefinitely
-            int ticksRun;
+                                // We don't want the task to run indefinitely
+                                int ticksRun;
 
-            @Override
-            public void run() {
-                ticksRun++;
-                if (ticksRun == 1) { // 20 ticks = 1 seconds
-                    InventoryUtils.fillWithRandomGlasses(gui);
-                } else if (ticksRun == 2) {
-                    InventoryUtils.fillWithRandomGlasses(gui);
-                } else if (ticksRun == 4) {
-                    InventoryUtils.fillWithRandomGlasses(gui);
-                } else if (ticksRun == 6) {
-                    InventoryUtils.fillWithRandomGlasses(gui);
-                } else if (ticksRun == 9) {
-                    InventoryUtils.fillWithRandomGlasses(gui);
-                } else if (ticksRun == 12) {
-                    InventoryUtils.fillWithRandomGlasses(gui);
-                } else if (ticksRun == 16) {
-                    InventoryUtils.fillWithRandomGlasses(gui);
-                } else if (ticksRun == 20) {
-                    InventoryUtils.fillWithRandomGlasses(gui);
-                } else if (ticksRun == 25) {
-                    InventoryUtils.fillWithRandomGlasses(gui);
-                } else if (ticksRun == 30) {
-                    InventoryUtils.fillWithRandomGlasses(gui);
-                } else if (ticksRun == 40) {
-                    cancel();
-                    Enchant enchant = new Enchant(owner, getItemToEnchant());
-                    boolean success = enchant.enchantItem();
-                    if (success) {
-                        setSuccessGui(enchant.getItemStack());
+                                @Override
+                                public void run() {
+                                    ticksRun++;
+                                    if (ticksRun == 1) { // 20 ticks = 1 seconds
+                                        InventoryUtils.fillWithRandomGlasses(gui);
+                                    } else if (ticksRun == 2) {
+                                        InventoryUtils.fillWithRandomGlasses(gui);
+                                    } else if (ticksRun == 4) {
+                                        InventoryUtils.fillWithRandomGlasses(gui);
+                                    } else if (ticksRun == 6) {
+                                        InventoryUtils.fillWithRandomGlasses(gui);
+                                    } else if (ticksRun == 9) {
+                                        InventoryUtils.fillWithRandomGlasses(gui);
+                                    } else if (ticksRun == 12) {
+                                        InventoryUtils.fillWithRandomGlasses(gui);
+                                    } else if (ticksRun == 16) {
+                                        InventoryUtils.fillWithRandomGlasses(gui);
+                                    } else if (ticksRun == 20) {
+                                        InventoryUtils.fillWithRandomGlasses(gui);
+                                    } else if (ticksRun == 25) {
+                                        InventoryUtils.fillWithRandomGlasses(gui);
+                                    } else if (ticksRun == 30) {
+                                        InventoryUtils.fillWithRandomGlasses(gui);
+                                    } else if (ticksRun == 40) {
+                                        cancel();
+                                        Enchant enchant = new Enchant(owner, itemToEnchant);
+                                        boolean success = enchant.enchantItem();
+                                        if (success) {
+                                            setSuccessGui();
+                                        } else {
+                                            setFailGui();
+                                        }
+                                        InventoryUtils.removeMaterialFromInventory(owner.getInventory(), enchantStone.getType(), 1);
+                                        InventoryUtils.removeItemFromInventory(owner.getInventory(), itemToEnchant, 1);
+                                        InventoryUtils.giveItemToPlayer(owner, enchant.getItemStack());
+                                        openInventory(owner);
+                                    }
+                                }
+                            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 5L);
+
+                        } else {
+                            owner.sendMessage(ChatColor.RED + "You must place Enchant Stone Tier " + requiredEnchantStoneLevel + " to enchant this item");
+                        }
                     } else {
-                        setFailGui(enchant.getItemStack());
+                        owner.sendMessage(ChatColor.RED + "Your item is at max enchant level");
                     }
                 }
             }
-        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 5L);
+        }
     }
 
-    private void setSuccessGui(ItemStack itemStack) {
+    private void setSuccessGui() {
         ItemStack success = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = success.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GREEN + "Success");
@@ -202,10 +219,9 @@ public class EnchantGui extends GuiGeneric {
         success.setItemMeta(itemMeta);
 
         InventoryUtils.fillWithItem(this, success);
-        setItem(13, itemStack);
     }
 
-    private void setFailGui(ItemStack itemStack) {
+    private void setFailGui() {
         ItemStack fail = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = fail.getItemMeta();
         itemMeta.setDisplayName(ChatColor.RED + "Fail");
@@ -214,6 +230,5 @@ public class EnchantGui extends GuiGeneric {
         fail.setItemMeta(itemMeta);
 
         InventoryUtils.fillWithItem(this, fail);
-        setItem(13, itemStack);
     }
 }

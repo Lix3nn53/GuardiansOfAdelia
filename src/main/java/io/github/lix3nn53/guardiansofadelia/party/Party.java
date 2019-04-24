@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.party;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -15,12 +15,13 @@ public final class Party {
     private final BoardWithPlayers board;
     private Player leader;
 
-    public Party(List<Player> members, int size, int minSize) {
+    public Party(List<Player> members, int size, int minSize, ChatColor teamColor) {
         this.members = members;
         if (!members.isEmpty()) {
             this.leader = members.get(0);
         }
-        this.board = new BoardWithPlayers(members, ChatColor.AQUA + "Party", new ArrayList<>());
+        List<String> topLines = new ArrayList<>();
+        this.board = new BoardWithPlayers(members, ChatColor.AQUA + "Party", topLines, teamColor);
         this.size = size;
         if (minSize < 1) {
             this.minSize = 1;

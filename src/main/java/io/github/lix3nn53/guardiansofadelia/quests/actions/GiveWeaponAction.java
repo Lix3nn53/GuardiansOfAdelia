@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -32,15 +33,8 @@ public class GiveWeaponAction implements Action {
 
     @Override
     public void perform(Player player) {
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-            if (guardianData.hasActiveCharacter()) {
-                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                RPGClass rpgClass = activeCharacter.getRPGClass();
-                ItemStack weapon = Weapons.getWeapon(rpgClass, placementNumber, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-                InventoryUtils.giveItemToPlayer(player, weapon);
-            }
-        }
+        RPGClass rpgClass = SkillAPIUtils.getRPGClass(player);
+        ItemStack weapon = Weapons.getWeapon(rpgClass, placementNumber, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        InventoryUtils.giveItemToPlayer(player, weapon);
     }
 }

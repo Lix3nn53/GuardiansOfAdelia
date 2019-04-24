@@ -186,6 +186,6 @@ public class StatUtils {
                 mat.equals(Material.IRON_CHESTPLATE) ||
                 mat.equals(Material.CHAINMAIL_CHESTPLATE) ||
                 mat.equals(Material.LEATHER_CHESTPLATE) ||
-                mat.equals(Material.IRON_SWORD) || mat.equals(Material.DIAMOND_HOE) || mat.equals(Material.SHEARS);
+                mat.equals(Material.IRON_SWORD) || mat.equals(Material.SHEARS);
     }
 }

@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.minigames.arenas;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class WinByMostKills extends Minigame {
 
     public WinByMostKills(String mapName, int levelReq, int timeLimitInMinutes, int roomNo, List<Location> startLocations, int teamSize, int teamAmount, int requiredPlayerAmountToStart) {
-        super(ChatColor.RED + "WinByMostKills", mapName, roomNo, levelReq, teamSize, teamAmount, startLocations,
+        super("WinByMostKills", ChatColor.GOLD, mapName, roomNo, levelReq, teamSize, teamAmount, startLocations,
                 timeLimitInMinutes, 1, TownManager.getTown(1), 999, 0, 20, requiredPlayerAmountToStart);
     }
 
@@ -24,7 +24,7 @@ public class WinByMostKills extends Minigame {
         if (!winnerTeams.isEmpty()) {
             StringBuilder msg = new StringBuilder();
             if (winnerTeams.size() == 1) {
-                msg.append(ChatColor.GOLD + "Winner team: #").append(winnerTeams).append(" ( ");
+                msg.append(getGameColor() + "Winner team: #").append(winnerTeams).append(" ( ");
                 Party winnerParty = getTeams().get(winnerTeams.get(0));
                 for (Player player : winnerParty.getMembers()) {
                     msg.append(player.getName());
@@ -32,7 +32,7 @@ public class WinByMostKills extends Minigame {
                 }
                 msg.append(")");
             } else {
-                msg.append(ChatColor.GOLD + "Tie! Teams sharing the first place:");
+                msg.append(getGameColor() + "Tie! Teams sharing the first place:");
                 for (int team : winnerTeams) {
                     msg.append(" #").append(team).append(" ( ");
                     Party winnerParty = getTeams().get(team);
@@ -47,11 +47,6 @@ public class WinByMostKills extends Minigame {
                 player.sendMessage(msg.toString());
             }
         }
-    }
-
-    @Override
-    public String getMinigameName() {
-        return "Win By Most Kills #" + getRoomNo();
     }
 
     @Override
