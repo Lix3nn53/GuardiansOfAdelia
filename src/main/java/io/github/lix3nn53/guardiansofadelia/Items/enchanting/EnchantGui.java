@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -197,7 +198,7 @@ public class EnchantGui extends GuiGeneric {
                                         openInventory(owner);
                                     }
                                 }
-                            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 5L);
+                            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 1L);
 
                         } else {
                             owner.sendMessage(ChatColor.RED + "You must place Enchant Stone Tier " + requiredEnchantStoneLevel + " to enchant this item");
@@ -216,6 +217,8 @@ public class EnchantGui extends GuiGeneric {
         itemMeta.setDisplayName(ChatColor.GREEN + "Success");
         Damageable damageable = (Damageable) itemMeta;
         damageable.setDamage(5);
+        itemMeta.setUnbreakable(true);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         success.setItemMeta(itemMeta);
 
         InventoryUtils.fillWithItem(this, success);
@@ -227,6 +230,8 @@ public class EnchantGui extends GuiGeneric {
         itemMeta.setDisplayName(ChatColor.RED + "Fail");
         Damageable damageable = (Damageable) itemMeta;
         damageable.setDamage(4);
+        itemMeta.setUnbreakable(true);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         fail.setItemMeta(itemMeta);
 
         InventoryUtils.fillWithItem(this, fail);

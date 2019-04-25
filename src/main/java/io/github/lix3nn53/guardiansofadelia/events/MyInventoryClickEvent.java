@@ -182,20 +182,8 @@ public class MyInventoryClickEvent implements Listener {
                             enchantStoneMaterials.add(enchantStone.getType());
                         }
                         if (enchantStoneMaterials.contains(current.getType())) {
-                            ItemStack oldEnchantStone = enchantGui.getEnchantStone();
-                            if (oldEnchantStone != null) {
-                                if (!oldEnchantStone.getType().equals(Material.AIR)) {
-                                    InventoryUtils.giveItemToPlayer(player, oldEnchantStone);
-                                }
-                            }
                             enchantGui.setEnchantStone(current);
                         } else if (StatUtils.hasStatType(current.getType())) {
-                            ItemStack oldItemToEnchant = enchantGui.getItemToEnchant();
-                            if (oldItemToEnchant != null) {
-                                if (!oldItemToEnchant.getType().equals(Material.AIR)) {
-                                    InventoryUtils.giveItemToPlayer(player, oldItemToEnchant);
-                                }
-                            }
                             enchantGui.setItemToEnchant(current);
                         }
                     }

@@ -8,8 +8,6 @@ import java.util.HashMap;
 
 public class EnchantManager {
 
-    private static HashMap<Player, Enchant> activeEnchants = new HashMap<Player, Enchant>();
-
     public static int getEnchantLevel(ItemStack itemStack) {
         ItemMeta im = itemStack.getItemMeta();
         if (im.getDisplayName().contains("+1")) {

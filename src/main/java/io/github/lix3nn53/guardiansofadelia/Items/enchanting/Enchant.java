@@ -22,7 +22,7 @@ public class Enchant {
 
     public Enchant(Player player, ItemStack itemStack) {
         this.player = player;
-        this.itemStack = itemStack;
+        this.itemStack = itemStack.clone();
 
         this.currentEnchantLevel = EnchantManager.getEnchantLevel(itemStack);
     }
@@ -96,10 +96,10 @@ public class Enchant {
         if (currentEnchantLevel == 12) {
             return;
         }
-        ItemMeta im = itemStack.getItemMeta();
-        List<String> lore = im.getLore();
+        ItemMeta itemMeta = this.itemStack.getItemMeta();
+        List<String> lore = itemMeta.getLore();
 
-        String name = im.getDisplayName();
+        String name = itemMeta.getDisplayName();
         if (this.currentEnchantLevel == 0) {
             name = name + ChatColor.AQUA + " [ +1 ]";
         } else if (this.currentEnchantLevel == 1) {
@@ -126,7 +126,7 @@ public class Enchant {
         } else if (this.currentEnchantLevel == 11) {
             name = name.replace("\\+11", "\\+12");
         }
-        im.setDisplayName(name);
+        itemMeta.setDisplayName(name);
 
         StatType type = StatUtils.getStatType(itemStack.getType());
 
@@ -155,7 +155,7 @@ public class Enchant {
                 String line = lore.get(lineToChange);
                 String newLine = line.replace(stat.getValue() + "", nextValue + "");
                 lore.set(lineToChange, newLine);
-                im.setLore(lore);
+                itemMeta.setLore(lore);
             }
 
             if (type.equals(StatType.MELEE)) {
@@ -191,7 +191,7 @@ public class Enchant {
                 String lineRanged = lore.get(lineToChangeRanged);
                 String newLineRanged = lineRanged.replace(stat.getRangedDamage() + "", nextRangedDamageValue + "");
                 lore.set(lineToChangeRanged, newLineRanged);
-                im.setLore(lore);
+                itemMeta.setLore(lore);
             }
             itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);
         } else if (type.equals(StatType.OFFHAND)) {
@@ -223,7 +223,7 @@ public class Enchant {
                 String lineRanged = lore.get(lineToChangeOffhand);
                 String newLineRanged = lineRanged.replace(stat.getOffHandDamage() + "", nextOffhandDamageValue + "");
                 lore.set(lineToChangeOffhand, newLineRanged);
-                im.setLore(lore);
+                itemMeta.setLore(lore);
             }
             itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);
         } else if (type.equals(StatType.PASSIVE)) {
@@ -283,9 +283,10 @@ public class Enchant {
                 String newLine = line.replace(stat.getAir() + "", nextAirValue + "");
                 lore.set(lineToChangeAir, newLine);
             }
-            im.setLore(lore);
+            itemMeta.setLore(lore);
         }
 
+        this.itemStack.setItemMeta(itemMeta);
         currentEnchantLevel++;
     }
 
@@ -293,10 +294,10 @@ public class Enchant {
         if (currentEnchantLevel == 0) {
             return;
         }
-        ItemMeta im = itemStack.getItemMeta();
-        List<String> lore = im.getLore();
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        List<String> lore = itemMeta.getLore();
 
-        String name = im.getDisplayName();
+        String name = itemMeta.getDisplayName();
         if (this.currentEnchantLevel == 1) {
             name = name.replace(ChatColor.AQUA + " \\[ ", "");
             name = name.replace("]", "");
@@ -325,7 +326,7 @@ public class Enchant {
         } else if (this.currentEnchantLevel == 12) {
             name = name.replace("\\+12", "\\+11");
         }
-        im.setDisplayName(name);
+        itemMeta.setDisplayName(name);
 
         StatType type = StatUtils.getStatType(itemStack.getType());
 
@@ -354,7 +355,7 @@ public class Enchant {
                 String line = lore.get(lineToChange);
                 String newLine = line.replace(stat.getValue() + "", nextValue + "");
                 lore.set(lineToChange, newLine);
-                im.setLore(lore);
+                itemMeta.setLore(lore);
             }
 
             if (type.equals(StatType.MELEE)) {
@@ -390,7 +391,7 @@ public class Enchant {
                 String lineRanged = lore.get(lineToChangeRanged);
                 String newLineRanged = lineRanged.replace(stat.getRangedDamage() + "", nextRangedDamageValue + "");
                 lore.set(lineToChangeRanged, newLineRanged);
-                im.setLore(lore);
+                itemMeta.setLore(lore);
             }
             itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);
         } else if (type.equals(StatType.OFFHAND)) {
@@ -422,7 +423,7 @@ public class Enchant {
                 String lineRanged = lore.get(lineToChangeOffhand);
                 String newLineRanged = lineRanged.replace(stat.getOffHandDamage() + "", nextOffhandDamageValue + "");
                 lore.set(lineToChangeOffhand, newLineRanged);
-                im.setLore(lore);
+                itemMeta.setLore(lore);
             }
             itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);
         } else if (type.equals(StatType.PASSIVE)) {
@@ -482,9 +483,10 @@ public class Enchant {
                 String newLine = line.replace(stat.getAir() + "", nextAirValue + "");
                 lore.set(lineToChangeAir, newLine);
             }
-            im.setLore(lore);
+            itemMeta.setLore(lore);
         }
 
+        this.itemStack.setItemMeta(itemMeta);
         currentEnchantLevel--;
     }
 

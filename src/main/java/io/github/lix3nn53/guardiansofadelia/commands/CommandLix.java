@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -36,6 +37,7 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_PURPLE + "/lix setstaff <player> [NONE|OWNER|ADMIN|DEVELOPER|BUILDER|SUPPORT|YOUTUBER|TRAINEE]");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/lix tp [town|?] <num>");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/lix weapon [class] <num>");
+                player.sendMessage(ChatColor.DARK_PURPLE + "/lix stone <grade> <amount>");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/lix passive [parrot|earring|necklace|glove|ring] <num>");
             } else if (args[0].equals("setstaff")) {
                 if (args.length == 3) {
@@ -73,6 +75,20 @@ public class CommandLix implements CommandExecutor {
                     int no = Integer.parseInt(args[2]);
                     ItemStack weapon = Weapons.getWeapon(rpgClass, no, ItemTier.LEGENDARY, "Command", 0, 0, 0);
                     InventoryUtils.giveItemToPlayer(player, weapon);
+                }
+            } else if (args[0].equals("stone")) {
+                if (args.length == 3) {
+                    int grade = Integer.parseInt(args[1]);
+                    int amount = Integer.parseInt(args[2]);
+                    EnchantStone enchantStone = EnchantStone.TIER_ONE;
+                    if (grade == 2) {
+                        enchantStone = EnchantStone.TIER_TWO;
+                    } else if (grade == 3) {
+                        enchantStone = EnchantStone.TIER_THREE;
+                    } else if (grade == 4) {
+                        enchantStone = EnchantStone.TIER_FOUR;
+                    }
+                    InventoryUtils.giveItemToPlayer(player, enchantStone.getItemSTack(amount));
                 }
             } else if (args[0].equals("passive")) {
                 if (args.length == 3) {
