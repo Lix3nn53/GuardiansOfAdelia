@@ -11,7 +11,7 @@ class Crossbows {
 
     public static ItemStack get(int placementNumber, ItemTier tier, String itemTag, double bonusPercent, int minStatValue,
                                 int maxStatValue, int minNumberofStats) {
-        String name = "Short Bow";
+        String name = "Short Crossbow";
         Material material = Material.CROSSBOW;
         int durability = 2;
         int level = 1;
@@ -21,7 +21,7 @@ class Crossbows {
         int itemID = 701;
 
         if (placementNumber == 2) {
-            name = "Light Bow";
+            name = "Light Crossbow";
             durability = 13;
             level = 10;
             rangedDamage = 86;
@@ -33,19 +33,19 @@ class Crossbows {
             rangedDamage = 124;
             itemID = 703;
         } else if (placementNumber == 4) {
-            name = "Battle Bow";
+            name = "Battle Crossbow";
             durability = 12;
             level = 30;
             rangedDamage = 201;
             itemID = 704;
         } else if (placementNumber == 5) {
-            name = "Satet Bow";
+            name = "Satet Crossbow";
             durability = 3;
             level = 40;
             rangedDamage = 271;
             itemID = 705;
         } else if (placementNumber == 6) {
-            name = "Leaf Fairy Bow";
+            name = "Leaf Fairy Crossbow";
             durability = 6;
             level = 50;
             rangedDamage = 324;
@@ -57,19 +57,19 @@ class Crossbows {
             rangedDamage = 402;
             itemID = 707;
         } else if (placementNumber == 8) {
-            name = "Unicorn Bow";
+            name = "Unicorn Crossbow";
             durability = 7;
             level = 70;
             rangedDamage = 498;
             itemID = 708;
         } else if (placementNumber == 9) {
-            name = "Zephyr Bow";
+            name = "Zephyr Crossbow";
             durability = 8;
             level = 80;
             rangedDamage = 624;
             itemID = 709;
         } else if (placementNumber == 10) {
-            name = "Arcade Bow";
+            name = "Arcade Crossbow";
             durability = 14;
             level = 90;
             rangedDamage = 1072;

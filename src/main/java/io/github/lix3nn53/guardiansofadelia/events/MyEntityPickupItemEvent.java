@@ -20,7 +20,7 @@ public class MyEntityPickupItemEvent implements Listener {
             event.setCancelled(true);
         } else if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player player = (Player) event.getEntity();
-            if (!DropManager.canPickUp(itemStack, player)) {
+            if (!DropManager.canPickUp(player, itemStack)) {
                 event.setCancelled(true);
             }
         } else {

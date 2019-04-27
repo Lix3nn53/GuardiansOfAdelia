@@ -1,8 +1,5 @@
+
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
-import io.github.lix3nn53.guardiansofadelia.party.Party;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +9,14 @@ public class Test {
 
     public static void main(String[] args) {
 
+        int x = 4;
+        int y = 4;
+        int z = 2;
+
+        for (int lvl = 1; lvl <=90; lvl++) {
+            double exp = x * lvl * lvl + y * lvl + z;
+            System.out.println("Level " + lvl + " exp req: " + exp);
+        }
 
     }
 
@@ -48,6 +53,16 @@ public class Test {
             int result = (int) (pow + 0.5);
             System.out.println(count + ": " + result);
             count++;
+        }
+
+        //exp formula
+        int x = 4;
+        int y = 4;
+        int z = 2;
+
+        for (int lvl = 1; lvl <=90; lvl++) {
+            double exp = x * lvl * lvl + y * lvl + z;
+            System.out.println("Level " + lvl + " exp req: " + exp);
         }
     }
 

@@ -14,12 +14,13 @@ public class MyEntityDeathEvent implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onEvent(EntityDeathEvent event) {
         LivingEntity entity = event.getEntity();
+        event.getDrops().clear();
 
         if (!entity.getType().equals(EntityType.PLAYER)) {
             SpawnerManager.onMobDeath(entity);
 
             //drops
-            DropManager.onDeathDropItems(entity);
+            DropManager.onMobDeath(entity, event);
         }
     }
 

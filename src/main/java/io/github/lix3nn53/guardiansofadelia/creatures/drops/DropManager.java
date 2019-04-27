@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.drops;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.party.Party;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -13,65 +13,59 @@ import java.util.List;
 
 public class DropManager {
 
-    private static HashMap<Entity, DropDamage> dropDamages = new HashMap<Entity, DropDamage>();
-    private static HashMap<ItemStack, List<Player>> droppedItemOwners = new HashMap<ItemStack, List<Player>>();
+    private static HashMap<LivingEntity, DropDamage> dropDamages = new HashMap<>();
+    private static HashMap<ItemStack, List<Player>> droppedItemOwners = new HashMap<>();
 
-    public static void dealDamage(Entity entity, Player p, int damage) {
-        if (dropDamages.containsKey(entity)) {
-            DropDamage dm = dropDamages.get(entity);
-            dm.addDamage(p, damage);
+    public static void onPlayerDealDamageToMob(Player attacker, LivingEntity damaged, double damage) {
+        if (dropDamages.containsKey(damaged)) {
+            DropDamage dropDamage = dropDamages.get(damaged);
+            dropDamage.dealDamage(attacker, damage);
         } else {
-            DropDamage dm = new DropDamage(entity);
-            dm.addDamage(p, damage);
-            dropDamages.put(entity, dm);
+            DropDamage dropDamage = new DropDamage();
+            dropDamage.dealDamage(attacker, damage);
+            dropDamages.put(damaged, dropDamage);
         }
     }
 
-    public static void onDeathDropItems(Entity entity) {
-        if (dropDamages.containsKey(entity)) {
-            List<ItemStack> drops = MobDropGenerator.getDrops(entity);
-            DropDamage dropDamage = dropDamages.get(entity);
-            dropDamages.remove(entity);
-            if (dropDamage.isMostDamageDealerParty()) {
-                Party party = dropDamage.getBestParty();
-                for (ItemStack drop : drops) {
-                    droppedItemOwners.put(drop, party.getMembers());
-                }
-                startTimer(drops);
-            } else {
-                Player player = dropDamage.getBestPlayer();
-                List<Player> onelist = new ArrayList<Player>();
-                onelist.add(player);
-                for (ItemStack drop : drops) {
-                    droppedItemOwners.put(drop, onelist);
-                }
-                startTimer(drops);
-            }
-        }
-    }
-
-    public static boolean canPickUp(ItemStack item, Player player) {
-        if (droppedItemOwners.containsKey(item)) {
-            List<Player> plist = droppedItemOwners.get(item);
-            return plist.contains(player);
+    public static boolean canPickUp(Player player, ItemStack itemStack) {
+        if (droppedItemOwners.containsKey(itemStack)) {
+            List<Player> players = droppedItemOwners.get(itemStack);
+            return players.contains(player);
         }
         return true;
     }
 
-    private static void startTimer(List<ItemStack> drops) {
+    public static void setItem(ItemStack itemStack, List<Player> players) {
+        droppedItemOwners.put(itemStack, players);
+        startItemTimer(itemStack);
+    }
+
+    public static void setItem(ItemStack itemStack, Player player) {
+        List<Player> players = new ArrayList<>();
+        players.add(player);
+        droppedItemOwners.put(itemStack, players);
+        startItemTimer(itemStack);
+    }
+
+    public static void onMobDeath(LivingEntity entity, EntityDeathEvent event) {
+        if (dropDamages.containsKey(entity)) {
+            DropDamage dropDamage = dropDamages.get(entity);
+            List<Player> bestPlayers = dropDamage.getBestPlayers();
+            List<ItemStack> drops = MobDropGenerator.getDrops(entity);
+            for (ItemStack itemStack : drops) {
+                droppedItemOwners.put(itemStack, bestPlayers);
+                startItemTimer(itemStack);
+            }
+            event.getDrops().addAll(drops);
+        }
+    }
+
+    private static void startItemTimer(ItemStack itemStack) {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (ItemStack drop : drops) {
-                    droppedItemOwners.remove(drop);
-                }
+                droppedItemOwners.remove(itemStack);
             }
-        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 30);
-    }
-
-    public static void setItem(ItemStack drop, Player player) {
-        List<Player> onelist = new ArrayList<Player>();
-        onelist.add(player);
-        droppedItemOwners.put(drop, onelist);
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 30L);
     }
 }

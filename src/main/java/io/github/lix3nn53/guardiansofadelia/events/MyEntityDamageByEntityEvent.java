@@ -31,22 +31,20 @@ public class MyEntityDamageByEntityEvent implements Listener {
         Entity target = event.getEntity();
         double finalDamage = event.getFinalDamage();
 
-        //player is attacker
-        if (damager.getType().equals(EntityType.PLAYER)) {
-            Player player = (Player) damager;
-            onPlayerAttackEntity(event, player, target, finalDamage);
-        }else if (damager instanceof Projectile) {
-            Projectile projectile = (Projectile) damager;
-            ProjectileSource shooter = projectile.getShooter();
-            if (shooter instanceof Player) {
-                Player player = (Player) shooter;
+        if (target.getType().equals(EntityType.PLAYER)) { //player is target
+
+        } else {
+            if (damager.getType().equals(EntityType.PLAYER)) { //player is attacker
+                Player player = (Player) damager;
                 onPlayerAttackEntity(event, player, target, finalDamage);
+            } else if (damager instanceof Projectile) { //projectile is attacker
+                Projectile projectile = (Projectile) damager;
+                ProjectileSource shooter = projectile.getShooter();
+                if (shooter instanceof Player) {
+                    Player player = (Player) shooter;
+                    onPlayerAttackEntity(event, player, target, finalDamage);
+                }
             }
-        }
-
-        //player is target
-        if (target.getType().equals(EntityType.PLAYER)) {
-
         }
     }
 
@@ -94,13 +92,12 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     }
                 }
             }
+            DropManager.onPlayerDealDamageToMob(player, livingTarget, (int) (finalDamage + 0.5));
         }
 
         //indicator
         String text = ChatColor.RED.toString() + (int) (finalDamage + 0.5) + " ➹";
         FakeIndicator.showPlayer(player, text, target.getLocation());
-
-        DropManager.dealDamage(target, player, (int) (finalDamage + 0.5));
     }
 
 }
