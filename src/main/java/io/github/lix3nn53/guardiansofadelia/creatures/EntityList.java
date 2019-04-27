@@ -14,6 +14,8 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Random;
+
 public class EntityList {
 
     public static Entity getMob(Location loc, String mobcode) {
@@ -21,130 +23,68 @@ public class EntityList {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Hobbit", 20000D, EntityType.VILLAGER);
             entity.setBaby();
             entity.setAgeLock(true);
-            double d = Math.random();
-            if (d < 0.2) {
-                entity.setProfession(Villager.Profession.BLACKSMITH);
-            } else if (d < 0.4) {
-                entity.setProfession(Villager.Profession.BUTCHER);
-            } else if (d < 0.6) {
-                entity.setProfession(Villager.Profession.FARMER);
-            } else if (d < 0.8) {
-                entity.setProfession(Villager.Profession.LIBRARIAN);
-            } else if (d < 1) {
-                entity.setProfession(Villager.Profession.PRIEST);
-            }
+
+            Villager.Profession[] values = Villager.Profession.values();
+            int i = new Random().nextInt(values.length);
+            Villager.Profession value = values[i];
+            entity.setProfession(value);
             return entity;
         } else if (mobcode.equals("villager1")) {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.GREEN + "Roumen Villager", 40000D, EntityType.VILLAGER);
             entity.setAdult();
-            double d = Math.random();
-            if (d < 0.2) {
-                entity.setProfession(Villager.Profession.BLACKSMITH);
-            } else if (d < 0.4) {
-                entity.setProfession(Villager.Profession.BUTCHER);
-            } else if (d < 0.6) {
-                entity.setProfession(Villager.Profession.FARMER);
-            } else if (d < 0.8) {
-                entity.setProfession(Villager.Profession.LIBRARIAN);
-            } else if (d < 1) {
-                entity.setProfession(Villager.Profession.PRIEST);
-            }
+            Villager.Profession[] values = Villager.Profession.values();
+            int i = new Random().nextInt(values.length);
+            Villager.Profession value = values[i];
+            entity.setProfession(value);
             return entity;
         } else if (mobcode.equals("villager15")) {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.GREEN + "Veloa Villager", 60000D, EntityType.VILLAGER);
             entity.setAdult();
             double d = Math.random();
-            if (d < 0.2) {
-                entity.setProfession(Villager.Profession.BLACKSMITH);
-            } else if (d < 0.4) {
-                entity.setProfession(Villager.Profession.BUTCHER);
-            } else if (d < 0.6) {
-                entity.setProfession(Villager.Profession.FARMER);
-            } else if (d < 0.8) {
-                entity.setProfession(Villager.Profession.LIBRARIAN);
-            } else if (d < 1) {
-                entity.setProfession(Villager.Profession.PRIEST);
-            }
+            Villager.Profession[] values = Villager.Profession.values();
+            int i = new Random().nextInt(values.length);
+            Villager.Profession value = values[i];
+            entity.setProfession(value);
             return entity;
         } else if (mobcode.equals("villager2")) {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.GREEN + "Elderine Villager", 80000D, EntityType.VILLAGER);
             entity.setAdult();
-            double d = Math.random();
-            if (d < 0.2) {
-                entity.setProfession(Villager.Profession.BLACKSMITH);
-            } else if (d < 0.4) {
-                entity.setProfession(Villager.Profession.BUTCHER);
-            } else if (d < 0.6) {
-                entity.setProfession(Villager.Profession.FARMER);
-            } else if (d < 0.8) {
-                entity.setProfession(Villager.Profession.LIBRARIAN);
-            } else if (d < 1) {
-                entity.setProfession(Villager.Profession.PRIEST);
-            }
+            Villager.Profession[] values = Villager.Profession.values();
+            int i = new Random().nextInt(values.length);
+            Villager.Profession value = values[i];
+            entity.setProfession(value);
             return entity;
         } else if (mobcode.equals("villager3")) {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.GREEN + "Uruga Villager", 120000D, EntityType.VILLAGER);
             entity.setAdult();
-            double d = Math.random();
-            if (d < 0.2) {
-                entity.setProfession(Villager.Profession.BLACKSMITH);
-            } else if (d < 0.4) {
-                entity.setProfession(Villager.Profession.BUTCHER);
-            } else if (d < 0.6) {
-                entity.setProfession(Villager.Profession.FARMER);
-            } else if (d < 0.8) {
-                entity.setProfession(Villager.Profession.LIBRARIAN);
-            } else if (d < 1) {
-                entity.setProfession(Villager.Profession.PRIEST);
-            }
+            Villager.Profession[] values = Villager.Profession.values();
+            int i = new Random().nextInt(values.length);
+            Villager.Profession value = values[i];
+            entity.setProfession(value);
             return entity;
         } else if (mobcode.equals("villager4")) {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.GREEN + "Aberstol Villager", 200000D, EntityType.VILLAGER);
             entity.setAdult();
-            double d = Math.random();
-            if (d < 0.2) {
-                entity.setProfession(Villager.Profession.BLACKSMITH);
-            } else if (d < 0.4) {
-                entity.setProfession(Villager.Profession.BUTCHER);
-            } else if (d < 0.6) {
-                entity.setProfession(Villager.Profession.FARMER);
-            } else if (d < 0.8) {
-                entity.setProfession(Villager.Profession.LIBRARIAN);
-            } else if (d < 1) {
-                entity.setProfession(Villager.Profession.PRIEST);
-            }
+            Villager.Profession[] values = Villager.Profession.values();
+            int i = new Random().nextInt(values.length);
+            Villager.Profession value = values[i];
+            entity.setProfession(value);
             return entity;
         } else if (mobcode.equals("sailor")) {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.AQUA + "Sailor", 100000D, EntityType.VILLAGER);
             entity.setAdult();
-            double d = Math.random();
-            if (d < 0.2) {
-                entity.setProfession(Villager.Profession.BLACKSMITH);
-            } else if (d < 0.4) {
-                entity.setProfession(Villager.Profession.BUTCHER);
-            } else if (d < 0.6) {
-                entity.setProfession(Villager.Profession.FARMER);
-            } else if (d < 0.8) {
-                entity.setProfession(Villager.Profession.LIBRARIAN);
-            } else if (d < 1) {
-                entity.setProfession(Villager.Profession.PRIEST);
-            }
+            Villager.Profession[] values = Villager.Profession.values();
+            int i = new Random().nextInt(values.length);
+            Villager.Profession value = values[i];
+            entity.setProfession(value);
             return entity;
         } else if (mobcode.equals("farmer")) {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.YELLOW + "Farmer", 80000D, EntityType.VILLAGER);
             entity.setAdult();
-            double d = Math.random();
-            if (d < 0.2) {
-                entity.setProfession(Villager.Profession.BLACKSMITH);
-            } else if (d < 0.4) {
-                entity.setProfession(Villager.Profession.BUTCHER);
-            } else if (d < 0.6) {
-                entity.setProfession(Villager.Profession.FARMER);
-            } else if (d < 0.8) {
-                entity.setProfession(Villager.Profession.LIBRARIAN);
-            } else if (d < 1) {
-                entity.setProfession(Villager.Profession.PRIEST);
-            }
+            Villager.Profession[] values = Villager.Profession.values();
+            int i = new Random().nextInt(values.length);
+            Villager.Profession value = values[i];
+            entity.setProfession(value);
             return entity;
         } else if (mobcode.equals("tuto1")) {
             WitherSkeleton entity = (WitherSkeleton) EntityUtils.create(loc, ChatColor.RED + "Malephar's Cavalry", 1800D, EntityType.WITHER_SKELETON);

@@ -232,6 +232,8 @@ public class SkillAPIUtils {
             return RPGClass.PALADIN;
         } else if (className.contains("warrior")) {
             return RPGClass.WARRIOR;
+        } else if (className.contains("hunter")) {
+            return RPGClass.HUNTER;
         }
         return RPGClass.NO_CLASS;
     }

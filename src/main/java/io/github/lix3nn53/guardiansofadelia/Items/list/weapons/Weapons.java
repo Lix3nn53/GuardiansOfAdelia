@@ -22,6 +22,8 @@ public class Weapons {
             return Swords.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.MONK)) {
             return Tridents.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+        } else if (rpgClass.equals(RPGClass.HUNTER)) {
+            return Crossbows.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         }
         return null;
     }

@@ -28,10 +28,10 @@ public class CharacterSelectionMenuList {
             add("");
             add(ChatColor.GREEN + "❤ Health: ▋▋▋▋▋");
             add(ChatColor.AQUA + "✧ Mana: ▋▋");
-            add(ChatColor.RED + "➹ Damage: ▋▋");
+            add(ChatColor.RED + "➹ Damage: ▋▋▋");
             add(ChatColor.DARK_AQUA + "✦ Magic Damage: ▋");
             add(ChatColor.AQUA + "■ Defense: ▋▋▋▋▋");
-            add(ChatColor.BLUE + "✦ Magic Defense: ▋");
+            add(ChatColor.BLUE + "✦ Magic Defense: ▋▋");
             add("");
             add(ChatColor.YELLOW + "The powerhouse and mainstay of any party.");
             add(ChatColor.YELLOW + "Knights battle foes at close range while");
@@ -51,9 +51,9 @@ public class CharacterSelectionMenuList {
             add(ChatColor.GREEN + "❤ Health: ▋▋▋▋");
             add(ChatColor.AQUA + "✧ Mana: ▋▋▋▋");
             add(ChatColor.RED + "➹ Damage: ▋▋");
-            add(ChatColor.DARK_AQUA + "✦ Magic Damage: ▋▋");
+            add(ChatColor.DARK_AQUA + "✦ Magic Damage: ▋");
             add(ChatColor.AQUA + "■ Defense: ▋▋▋");
-            add(ChatColor.BLUE + "✦ Magic Defense: ▋▋▋");
+            add(ChatColor.BLUE + "✦ Magic Defense: ▋▋▋▋");
             add("");
             add(ChatColor.YELLOW + "Paladins aids fellow adventurers with");
             add(ChatColor.YELLOW + "the holy power of light and beats foes");
@@ -71,11 +71,11 @@ public class CharacterSelectionMenuList {
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GREEN + "❤ Health: ▋▋▋▋");
-            add(ChatColor.AQUA + "✧ Mana: ▋");
-            add(ChatColor.RED + "➹ Damage: ▋▋▋▋▋");
-            add(ChatColor.DARK_AQUA + "✦ Magic Damage: ▋▋");
+            add(ChatColor.AQUA + "✧ Mana: ▋▋");
+            add(ChatColor.RED + "➹ Damage: ▋▋▋▋▋▋");
+            add(ChatColor.DARK_AQUA + "✦ Magic Damage: ▋");
             add(ChatColor.AQUA + "■ Defense: ▋▋▋");
-            add(ChatColor.BLUE + "✦ Magic Defense: ▋");
+            add(ChatColor.BLUE + "✦ Magic Defense: ▋▋");
             add("");
             add(ChatColor.YELLOW + "Thanks to their strength, fearlessness and");
             add(ChatColor.YELLOW + "superior combat skills, warriors are");
@@ -94,9 +94,9 @@ public class CharacterSelectionMenuList {
             add("");
             add(ChatColor.GREEN + "❤ Health: ▋▋▋");
             add(ChatColor.AQUA + "✧ Mana: ▋▋▋");
-            add(ChatColor.RED + "➹ Damage: ▋▋▋▋");
+            add(ChatColor.RED + "➹ Damage: ▋▋▋▋▋");
             add(ChatColor.DARK_AQUA + "✦ Magic Damage: ▋▋");
-            add(ChatColor.AQUA + "■ Defense: ▋▋");
+            add(ChatColor.AQUA + "■ Defense: ▋▋▋");
             add(ChatColor.BLUE + "✦ Magic Defense: ▋▋");
             add("");
             add(ChatColor.YELLOW + "Due to their incredible speed and agility,");
@@ -114,11 +114,11 @@ public class CharacterSelectionMenuList {
         itemMeta.setDisplayName(ChatColor.GREEN + "Archer");
         itemMeta.setLore(new ArrayList() {{
             add("");
-            add(ChatColor.GREEN + "❤ Health: ▋▋▋");
-            add(ChatColor.AQUA + "✧ Mana: ▋▋▋");
+            add(ChatColor.GREEN + "❤ Health: ▋▋");
+            add(ChatColor.AQUA + "✧ Mana: ▋▋▋▋");
             add(ChatColor.RED + "➹ Damage: ▋▋▋▋");
-            add(ChatColor.DARK_AQUA + "✦ Magic Damage: ▋▋");
-            add(ChatColor.AQUA + "■ Defense: ▋▋");
+            add(ChatColor.DARK_AQUA + "✦ Magic Damage: ▋▋▋");
+            add(ChatColor.AQUA + "■ Defense: ▋▋▋");
             add(ChatColor.BLUE + "✦ Magic Defense: ▋▋");
             add("");
             add(ChatColor.YELLOW + "The Archer has lots of movement and");
@@ -137,11 +137,11 @@ public class CharacterSelectionMenuList {
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GREEN + "❤ Health: ▋▋");
-            add(ChatColor.AQUA + "✧ Mana: ▋▋▋▋");
+            add(ChatColor.AQUA + "✧ Mana: ▋▋▋▋▋");
             add(ChatColor.RED + "➹ Damage: ▋");
             add(ChatColor.DARK_AQUA + "✦ Magic Damage: ▋▋▋▋▋");
-            add(ChatColor.AQUA + "■ Defense: ▋");
-            add(ChatColor.BLUE + "✦ Magic Defense: ▋▋▋");
+            add(ChatColor.AQUA + "■ Defense: ▋▋");
+            add(ChatColor.BLUE + "✦ Magic Defense: ▋▋");
             add("");
             add(ChatColor.YELLOW + "The Mage may be frail and weak in body,");
             add(ChatColor.YELLOW + "but that is a worthy sacrifice for");
@@ -158,9 +158,9 @@ public class CharacterSelectionMenuList {
         itemMeta.setDisplayName(ChatColor.GOLD + "Monk");
         itemMeta.setLore(new ArrayList() {{
             add("");
-            add(ChatColor.GREEN + "❤ Health: ▋▋▋");
-            add(ChatColor.AQUA + "✧ Mana: ▋▋");
-            add(ChatColor.RED + "➹ Damage: ▋▋▋");
+            add(ChatColor.GREEN + "❤ Health: ▋▋▋▋");
+            add(ChatColor.AQUA + "✧ Mana: ▋▋▋");
+            add(ChatColor.RED + "➹ Damage: ▋▋▋▋");
             add(ChatColor.DARK_AQUA + "✦ Magic Damage: ▋▋");
             add(ChatColor.AQUA + "■ Defense: ▋▋▋");
             add(ChatColor.BLUE + "✦ Magic Defense: ▋▋");
@@ -171,7 +171,29 @@ public class CharacterSelectionMenuList {
             add(ChatColor.YELLOW + "feared opponents at any distance");
         }});
         s7.setItemMeta(itemMeta);
-        guiGeneric.setItem(49, s7);
+        guiGeneric.setItem(47, s7);
+
+        ItemStack s8 = new ItemStack(Material.STONE_PICKAXE);
+        if (itemMeta instanceof Damageable) {
+            Damageable damageable = (Damageable) itemMeta;
+            damageable.setDamage(48);
+        }
+        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Hunter");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GREEN + "❤ Health: ▋▋▋");
+            add(ChatColor.AQUA + "✧ Mana: ▋▋▋▋");
+            add(ChatColor.RED + "➹ Damage: ▋▋▋▋");
+            add(ChatColor.DARK_AQUA + "✦ Magic Damage: ▋▋");
+            add(ChatColor.AQUA + "■ Defense: ▋▋▋");
+            add(ChatColor.BLUE + "✦ Magic Defense: ▋▋");
+            add("");
+            add(ChatColor.YELLOW + "The Hunter uses a slow but strong ranged");
+            add(ChatColor.YELLOW + "weapon, crossbows. Their hunting techniques");
+            add(ChatColor.YELLOW + "makes anyone a prey for the hunter arrows.");
+        }});
+        s8.setItemMeta(itemMeta);
+        guiGeneric.setItem(51, s8);
 
         return guiGeneric;
     }

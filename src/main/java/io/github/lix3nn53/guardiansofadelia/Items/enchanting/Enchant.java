@@ -194,38 +194,6 @@ public class Enchant {
                 itemMeta.setLore(lore);
             }
             itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);
-        } else if (type.equals(StatType.OFFHAND)) {
-            StatOffhand stat = (StatOffhand) StatUtils.getStat(itemStack);
-            int nextDamageValue = stat.getDamage() + getBonusValue(stat.getDamage());
-            stat.setDamage(nextDamageValue);
-            int nextOffhandDamageValue = stat.getOffHandDamage();
-            int lineToChange = -1;
-            int lineToChangeOffhand = -1;
-            int changeCounter = 0;
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+")) {
-                    lineToChange = i;
-                    changeCounter++;
-                } else if (line.contains(ChatColor.GRAY + "%60 when in offhand (")) {
-                    lineToChangeOffhand = i;
-                    changeCounter++;
-                }
-                if (changeCounter == 2) {
-                    break;
-                }
-            }
-            if (lineToChange != -1 && lineToChangeOffhand != -1) {
-                String line = lore.get(lineToChange);
-                String newLine = line.replace(stat.getDamage() + "", nextDamageValue + "");
-                lore.set(lineToChange, newLine);
-
-                String lineRanged = lore.get(lineToChangeOffhand);
-                String newLineRanged = lineRanged.replace(stat.getOffHandDamage() + "", nextOffhandDamageValue + "");
-                lore.set(lineToChangeOffhand, newLineRanged);
-                itemMeta.setLore(lore);
-            }
-            itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);
         } else if (type.equals(StatType.PASSIVE)) {
             StatPassive stat = (StatPassive) StatUtils.getStat(itemStack);
 
@@ -391,38 +359,6 @@ public class Enchant {
                 String lineRanged = lore.get(lineToChangeRanged);
                 String newLineRanged = lineRanged.replace(stat.getRangedDamage() + "", nextRangedDamageValue + "");
                 lore.set(lineToChangeRanged, newLineRanged);
-                itemMeta.setLore(lore);
-            }
-            itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);
-        } else if (type.equals(StatType.OFFHAND)) {
-            StatOffhand stat = (StatOffhand) StatUtils.getStat(itemStack);
-            int nextDamageValue = stat.getDamage() - getDecreaseValue(stat.getDamage());
-            stat.setDamage(nextDamageValue);
-            int nextOffhandDamageValue = stat.getOffHandDamage();
-            int lineToChange = -1;
-            int lineToChangeOffhand = -1;
-            int changeCounter = 0;
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+")) {
-                    lineToChange = i;
-                    changeCounter++;
-                } else if (line.contains(ChatColor.GRAY + "%60 when in offhand (")) {
-                    lineToChangeOffhand = i;
-                    changeCounter++;
-                }
-                if (changeCounter == 2) {
-                    break;
-                }
-            }
-            if (lineToChange != -1 && lineToChangeOffhand != -1) {
-                String line = lore.get(lineToChange);
-                String newLine = line.replace(stat.getDamage() + "", nextDamageValue + "");
-                lore.set(lineToChange, newLine);
-
-                String lineRanged = lore.get(lineToChangeOffhand);
-                String newLineRanged = lineRanged.replace(stat.getOffHandDamage() + "", nextOffhandDamageValue + "");
-                lore.set(lineToChangeOffhand, newLineRanged);
                 itemMeta.setLore(lore);
             }
             itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);

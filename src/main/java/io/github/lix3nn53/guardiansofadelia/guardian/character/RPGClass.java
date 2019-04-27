@@ -10,6 +10,7 @@ public enum RPGClass {
     NINJA,
     PALADIN,
     WARRIOR,
+    HUNTER,
     NO_CLASS;
 
     public String getClassString() {
@@ -33,6 +34,9 @@ public enum RPGClass {
         } else if (this == RPGClass.WARRIOR) {
             color = ChatColor.RED;
             name = "Warrior";
+        } else if (this == RPGClass.HUNTER) {
+            color = ChatColor.DARK_GREEN;
+            name = "Hunter";
         }
         return color + name;
     }
@@ -51,6 +55,8 @@ public enum RPGClass {
             code = "paladin";
         } else if (this == RPGClass.WARRIOR) {
             code = "warrior";
+        } else if (this == RPGClass.HUNTER) {
+            code = "hunter";
         }
         return code;
     }
@@ -69,6 +75,8 @@ public enum RPGClass {
             color = ChatColor.YELLOW;
         } else if (this == RPGClass.WARRIOR) {
             color = ChatColor.RED;
+        } else if (this == RPGClass.HUNTER) {
+            color = ChatColor.DARK_GREEN;
         }
         return color;
     }
@@ -87,6 +95,8 @@ public enum RPGClass {
             name = "Paladin";
         } else if (this == RPGClass.WARRIOR) {
             name = "Warrior";
+        } else if (this == RPGClass.HUNTER) {
+            name = "Hunter";
         }
         return name;
     }

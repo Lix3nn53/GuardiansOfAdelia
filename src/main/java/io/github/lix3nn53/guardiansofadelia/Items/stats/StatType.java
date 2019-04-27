@@ -4,7 +4,6 @@ public enum StatType {
     MELEE,
     RANGED,
     HYBRID,
-    OFFHAND,
     MAGICAL,
     HEALTH,
     PASSIVE

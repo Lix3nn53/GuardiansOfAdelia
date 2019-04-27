@@ -31,9 +31,9 @@ public enum BuffType {
             case PHYSICAL_DAMAGE:
                 return Material.INK_SAC;
             case PHYSICAL_DEFENSE:
-                return Material.CACTUS_GREEN;
+                return Material.GREEN_DYE;
             case MAGICAL_DAMAGE:
-                return Material.ROSE_RED;
+                return Material.RED_DYE;
             case MAGICAL_DEFENSE:
                 return Material.COCOA_BEANS;
         }

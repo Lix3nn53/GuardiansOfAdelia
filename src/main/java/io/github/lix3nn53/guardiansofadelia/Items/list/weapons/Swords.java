@@ -16,7 +16,7 @@ class Swords {
         int durability = 1;
         int level = 1;
         RPGClass rpgClass = RPGClass.KNIGHT;
-        int damage = 53;
+        int damage = 6;
         AttackSpeed attackSpeed = AttackSpeed.NORMAL;
         int itemID = 501;
 
@@ -24,55 +24,55 @@ class Swords {
             name = "Steel Sword";
             durability = 4;
             level = 10;
-            damage = 74;
+            damage = 24;
             itemID = 502;
         } else if (placementNumber == 3) {
             name = "Spear";
             durability = 6;
             level = 20;
-            damage = 102;
+            damage = 60;
             itemID = 503;
         } else if (placementNumber == 4) {
             name = "Broad Sword";
             durability = 2;
             level = 30;
-            damage = 168;
+            damage = 150;
             itemID = 504;
         } else if (placementNumber == 5) {
             name = "Heroic Sword";
             durability = 7;
             level = 40;
-            damage = 228;
+            damage = 240;
             itemID = 505;
         } else if (placementNumber == 6) {
             name = "Sword of Doom2RENAME";
             durability = 3;
             level = 50;
-            damage = 274;
+            damage = 390;
             itemID = 506;
         } else if (placementNumber == 7) {
             name = "Fire Spirit Sword";
             durability = 10;
             level = 60;
-            damage = 342;
+            damage = 540;
             itemID = 507;
         } else if (placementNumber == 8) {
             name = "Leaf Fairy Sword";
             durability = 5;
             level = 70;
-            damage = 426;
+            damage = 720;
             itemID = 508;
         } else if (placementNumber == 9) {
             name = "Water Fairy Sword";
             durability = 8;
             level = 80;
-            damage = 533;
+            damage = 900;
             itemID = 509;
         } else if (placementNumber == 10) {
             name = "Hellas Sword";
             durability = 9;
             level = 90;
-            damage = 918;
+            damage = 1200;
             itemID = 510;
         }
 

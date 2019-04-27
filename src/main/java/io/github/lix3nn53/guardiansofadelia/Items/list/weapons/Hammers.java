@@ -16,7 +16,7 @@ class Hammers {
         int durability = 8;
         int level = 1;
         RPGClass rpgClass = RPGClass.PALADIN;
-        int damage = 62;
+        int damage = 4;
         AttackSpeed attackSpeed = AttackSpeed.SLOW;
         int itemID = 301;
 
@@ -24,55 +24,55 @@ class Hammers {
             name = "Stout Mace";
             durability = 1;
             level = 10;
-            damage = 102;
+            damage = 16;
             itemID = 302;
         } else if (placementNumber == 3) {
             name = "Steel Hammer";
             durability = 6;
             level = 20;
-            damage = 153;
+            damage = 40;
             itemID = 303;
         } else if (placementNumber == 4) {
             name = "War Hammer";
             durability = 7;
             level = 30;
-            damage = 242;
+            damage = 100;
             itemID = 304;
         } else if (placementNumber == 5) {
             name = "Wind Hammer";
             durability = 11;
             level = 40;
-            damage = 324;
+            damage = 160;
             itemID = 305;
         } else if (placementNumber == 6) {
             name = "Mace of Doom";
             durability = 5;
             level = 50;
-            damage = 386;
+            damage = 260;
             itemID = 306;
         } else if (placementNumber == 7) {
             name = "Volcano Hammer";
             durability = 2;
             level = 60;
-            damage = 476;
+            damage = 360;
             itemID = 307;
         } else if (placementNumber == 8) {
             name = "Emerald Hammer";
             durability = 3;
             level = 70;
-            damage = 591;
+            damage = 480;
             itemID = 308;
         } else if (placementNumber == 9) {
             name = "Lightbringer Hammer";
             durability = 12;
             level = 80;
-            damage = 732;
+            damage = 600;
             itemID = 309;
         } else if (placementNumber == 10) {
             name = "Guardian Angel Hammer";
             durability = 4;
             level = 90;
-            damage = 1248;
+            damage = 800;
             itemID = 310;
         }
 

@@ -1,13 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.utilities;
 
-import net.minecraft.server.v1_13_R2.*;
-import org.bukkit.craftbukkit.v1_13_R2.inventory.CraftItemStack;
+import net.minecraft.server.v1_14_R1.*;
+import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
 public class RPGItemUtils {
 
     public static ItemStack setDamageWhenInMainHand(ItemStack item, int attack) {
-        net.minecraft.server.v1_13_R2.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_14_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         NBTTagCompound compound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
         NBTTagList modifiers = compound.hasKey("AttributeModifiers")
                 ? compound.getList("AttributeModifiers", 10)
@@ -28,7 +28,7 @@ public class RPGItemUtils {
     }
 
     public static ItemStack resetArmor(ItemStack item) {
-        net.minecraft.server.v1_13_R2.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_14_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         NBTTagCompound compound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
         NBTTagList modifiers = new NBTTagList();
         NBTTagCompound toughness = new NBTTagCompound();
@@ -54,7 +54,7 @@ public class RPGItemUtils {
     }
 
     public static ItemStack setAttackSpeed(ItemStack item, double attackSpeed) {
-        net.minecraft.server.v1_13_R2.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_14_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         NBTTagCompound compound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
         NBTTagList modifiers = compound.hasKey("AttributeModifiers")
                 ? compound.getList("AttributeModifiers", 10)

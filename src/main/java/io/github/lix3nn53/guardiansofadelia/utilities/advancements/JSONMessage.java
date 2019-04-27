@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.advancements;
 
-import net.minecraft.server.v1_13_R2.IChatBaseComponent;
-import net.minecraft.server.v1_13_R2.IChatBaseComponent.ChatSerializer;
+import net.minecraft.server.v1_14_R1.IChatBaseComponent;
+import net.minecraft.server.v1_14_R1.IChatBaseComponent.ChatSerializer;
 
 public class JSONMessage {
 

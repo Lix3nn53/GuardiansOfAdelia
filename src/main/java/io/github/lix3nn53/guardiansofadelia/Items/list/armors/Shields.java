@@ -14,9 +14,9 @@ public class Shields {
         Material material = Material.IRON_SWORD;
         int durability = 5;
         int level = 1;
-        int health = 15;
-        int defense = 15;
-        int magicDefense = 5;
+        int health = 85;
+        int defense = 8;
+        int magicDefense = 3;
         int itemID = 5000;
 
         if (rpgClass.equals(RPGClass.KNIGHT)) {
@@ -24,73 +24,73 @@ public class Shields {
                 name = "Steel Shield";
                 level = 10;
                 durability = 8;
-                health = 30;
-                defense = 30;
-                magicDefense = 10;
+                health = 214;
+                defense = 21;
+                magicDefense = 8;
                 itemID = 5001;
             } else if (placementNumber == 3) {
                 name = "Bulwark";
                 level = 20;
                 durability = 4;
-                health = 65;
-                defense = 45;
-                magicDefense = 15;
+                health = 535;
+                defense = 53;
+                magicDefense = 21;
                 itemID = 5002;
             } else if (placementNumber == 4) {
                 name = "Battle Shield";
                 level = 30;
                 durability = 1;
-                health = 100;
-                defense = 70;
-                magicDefense = 20;
+                health = 850;
+                defense = 85;
+                magicDefense = 34;
                 itemID = 5003;
             } else if (placementNumber == 5) {
                 name = "Heroic Shield";
                 level = 40;
                 durability = 9;
-                health = 150;
-                defense = 100;
-                magicDefense = 30;
+                health = 1400;
+                defense = 140;
+                magicDefense = 55;
                 itemID = 5004;
             } else if (placementNumber == 6) {
                 name = "Shield of Doom";
                 level = 50;
                 durability = 2;
-                health = 210;
-                defense = 130;
-                magicDefense = 40;
+                health = 1920;
+                defense = 192;
+                magicDefense = 77;
                 itemID = 5005;
             } else if (placementNumber == 7) {
                 name = "Fire Spirit Shield";
                 level = 60;
                 durability = 3;
-                health = 270;
-                defense = 160;
-                magicDefense = 50;
+                health = 2600;
+                defense = 250;
+                magicDefense = 102;
                 itemID = 5006;
             } else if (placementNumber == 8) {
                 name = "Titanic Nature Shield";
                 level = 70;
                 durability = 7;
-                health = 320;
-                defense = 200;
-                magicDefense = 70;
+                health = 3200;
+                defense = 320;
+                magicDefense = 128;
                 itemID = 5007;
             } else if (placementNumber == 9) {
                 name = "Water Fairy Shield";
                 level = 80;
                 durability = 6;
-                health = 420;
-                defense = 260;
-                magicDefense = 90;
+                health = 4200;
+                defense = 426;
+                magicDefense = 171;
                 itemID = 5008;
             } else if (placementNumber == 10) {
                 name = "Hellas Shield";
                 level = 90;
                 durability = 10;
-                health = 600;
-                defense = 450;
-                magicDefense = 150;
+                health = 5550;
+                defense = 562;
+                magicDefense = 225;
                 itemID = 5009;
             }
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
@@ -98,81 +98,81 @@ public class Shields {
                 name = "Wooden Shield";
                 level = 1;
                 durability = 5;
-                health = 15;
-                defense = 12;
-                magicDefense = 12;
+                health = 70;
+                defense = 5;
+                magicDefense = 6;
                 itemID = 5101;
             } else if (placementNumber == 2) {
                 name = "Steel Shield";
                 level = 10;
                 durability = 8;
-                health = 25;
-                defense = 22;
-                magicDefense = 22;
+                health = 170;
+                defense = 12;
+                magicDefense = 17;
                 itemID = 5102;
             } else if (placementNumber == 3) {
                 name = "Bulwark";
                 level = 20;
                 durability = 11;
-                health = 45;
-                defense = 34;
-                magicDefense = 34;
+                health = 420;
+                defense = 32;
+                magicDefense = 42;
                 itemID = 5103;
             } else if (placementNumber == 4) {
                 name = "Battle Shield";
                 level = 30;
                 durability = 1;
-                health = 74;
-                defense = 54;
-                magicDefense = 54;
+                health = 680;
+                defense = 50;
+                magicDefense = 70;
                 itemID = 5104;
             } else if (placementNumber == 5) {
                 name = "Wind Shield";
                 level = 40;
                 durability = 15;
-                health = 100;
-                defense = 81;
-                magicDefense = 81;
+                health = 1100;
+                defense = 84;
+                magicDefense = 112;
                 itemID = 5105;
             } else if (placementNumber == 6) {
                 name = "Shield of Doom";
                 level = 50;
                 durability = 12;
-                health = 150;
-                defense = 100;
-                magicDefense = 100;
+                health = 1550;
+                defense = 115;
+                magicDefense = 153;
                 itemID = 5106;
             } else if (placementNumber == 7) {
                 name = "Volcano Shield";
                 level = 60;
                 durability = 3;
-                health = 200;
-                defense = 120;
-                magicDefense = 120;
+                health = 2050;
+                defense = 153;
+                magicDefense = 204;
                 itemID = 5107;
             } else if (placementNumber == 8) {
                 name = "Titanic Emerald Shield";
                 level = 70;
                 durability = 13;
-                health = 240;
-                defense = 150;
-                magicDefense = 150;
+                health = 2570;
+                defense = 192;
+                magicDefense = 258;
                 itemID = 5108;
             } else if (placementNumber == 9) {
                 name = "Lightbringer Shield";
                 level = 80;
                 durability = 6;
-                health = 300;
-                defense = 190;
-                magicDefense = 190;
+                health = 3400;
+                defense = 255;
+                magicDefense = 342;
                 itemID = 5109;
             } else if (placementNumber == 10) {
                 name = "Guardian Angel Shield";
                 level = 90;
                 durability = 14;
-                health = 420;
-                defense = 330;
-                magicDefense = 330;
+                health = 4500;
+                defense = 336;
+                magicDefense = 450;
                 itemID = 5110;
             }
         }

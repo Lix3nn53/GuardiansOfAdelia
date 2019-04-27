@@ -61,15 +61,6 @@ public class StatUtils {
                     return new StatOneType(currentValue);
                 }
             }
-        } else if (type.equals(StatType.OFFHAND)) {
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    return new StatOffhand(currentValue);
-                }
-            }
         } else if (type.equals(StatType.PASSIVE)) {
             int changeCounter = 0;
             int fire = 0;
@@ -125,7 +116,7 @@ public class StatUtils {
 
     public static StatType getStatType(Material mat) {
         StatType type = null;
-        if (mat.equals(Material.DIAMOND_AXE) || mat.equals(Material.DIAMOND_PICKAXE) || mat.equals(Material.DIAMOND_SWORD)) {
+        if (mat.equals(Material.DIAMOND_AXE) || mat.equals(Material.DIAMOND_PICKAXE) || mat.equals(Material.DIAMOND_SWORD) || mat.equals(Material.DIAMOND_HOE)) {
             type = StatType.MELEE;
         } else if (mat.equals(Material.BOW)) {
             type = StatType.RANGED;
@@ -133,8 +124,6 @@ public class StatUtils {
             type = StatType.HYBRID;
         } else if (mat.equals(Material.DIAMOND_SHOVEL)) {
             type = StatType.MAGICAL;
-        } else if (mat.equals(Material.DIAMOND_HOE)) {
-            type = StatType.OFFHAND;
         } else if (mat.equals(Material.DIAMOND_LEGGINGS) ||
                 mat.equals(Material.GOLDEN_LEGGINGS) ||
                 mat.equals(Material.IRON_LEGGINGS) ||

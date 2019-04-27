@@ -16,7 +16,7 @@ class Staffs {
         int durability = 4;
         int level = 1;
         RPGClass rpgClass = RPGClass.MAGE;
-        int magicDamage = 46;
+        int magicDamage = 10;
         AttackSpeed attackSpeed = AttackSpeed.SLOW;
         int itemID = 401;
 
@@ -24,55 +24,55 @@ class Staffs {
             name = "Leaf Fairy Staff";
             durability = 3;
             level = 10;
-            magicDamage = 78;
+            magicDamage = 40;
             itemID = 402;
         } else if (placementNumber == 3) {
             name = "Zest Staff";
             durability = 7;
             level = 20;
-            magicDamage = 116;
+            magicDamage = 100;
             itemID = 403;
         } else if (placementNumber == 4) {
             name = "Dinah Wand";
             durability = 1;
             level = 30;
-            magicDamage = 184;
+            magicDamage = 250;
             itemID = 404;
         } else if (placementNumber == 5) {
             name = "Nether Fire Staff";
             durability = 5;
             level = 40;
-            magicDamage = 247;
+            magicDamage = 400;
             itemID = 405;
         } else if (placementNumber == 6) {
             name = "Water Fairy Staff";
             durability = 2;
             level = 50;
-            magicDamage = 296;
+            magicDamage = 650;
             itemID = 406;
         } else if (placementNumber == 7) {
             name = "Fairy Staff";
             durability = 10;
             level = 60;
-            magicDamage = 364;
+            magicDamage = 900;
             itemID = 407;
         } else if (placementNumber == 8) {
             name = "Ocean Staff";
             durability = 16;
             level = 70;
-            magicDamage = 447;
+            magicDamage = 1200;
             itemID = 408;
         } else if (placementNumber == 9) {
             name = "Crystal of Swamp";
             durability = 6;
             level = 80;
-            magicDamage = 553;
+            magicDamage = 1500;
             itemID = 409;
         } else if (placementNumber == 10) {
             name = "Neferti Staff";
             durability = 11;
             level = 90;
-            magicDamage = 942;
+            magicDamage = 2000;
             itemID = 410;
         }
 
