@@ -9,15 +9,10 @@ public class Test {
 
     public static void main(String[] args) {
 
-        int x = 4;
-        int y = 4;
-        int z = 2;
+    }
 
-        for (int lvl = 1; lvl <=90; lvl++) {
-            double exp = x * lvl * lvl + y * lvl + z;
-            System.out.println("Level " + lvl + " exp req: " + exp);
-        }
-
+    private static double expFormula(int level) {
+        return 10 + Math.round(5 * Math.pow(level, 3) / 4);
     }
 
     private void asd() {
@@ -56,13 +51,45 @@ public class Test {
         }
 
         //exp formula
-        int x = 4;
-        int y = 4;
-        int z = 2;
+        List<Integer> monstersToKill = new ArrayList<>();
+        monstersToKill.add(10);
+        monstersToKill.add(70);
+        monstersToKill.add(120);
+        monstersToKill.add(180);
+        monstersToKill.add(220);
+        monstersToKill.add(280);
+        monstersToKill.add(360);
+        monstersToKill.add(450);
+        monstersToKill.add(580);
+        monstersToKill.add(700);
 
-        for (int lvl = 1; lvl <=90; lvl++) {
-            double exp = x * lvl * lvl + y * lvl + z;
-            System.out.println("Level " + lvl + " exp req: " + exp);
+        int registration = 1;
+
+        for (int lvl = 0; lvl <=90; lvl++) {
+            //double exp = x * lvl * lvl + y * lvl + z;
+            double exp = expFormula(lvl);
+            System.out.println("Level " + lvl + " TotalExp: " + exp);
+        }
+
+        for (int lvl = 0; lvl <=90; lvl++) {
+            //double exp = x * lvl * lvl + y * lvl + z;
+            double exp = expFormula(lvl);
+            int i = (int) (lvl / 10 + 0.5);
+            System.out.println("Level " + lvl + " MobKill: " + monstersToKill.get(i));
+        }
+
+        for (int lvl = 0; lvl <=90; lvl++) {
+            //double exp = x * lvl * lvl + y * lvl + z;
+            double exp = expFormula(lvl);
+            int i = (int) (lvl / 10 + 0.5);
+            System.out.println("Level " + lvl + " ExpPerMob: " + exp / monstersToKill.get(i));
+        }
+
+        for (int lvl = 0; lvl <=90; lvl+=10) {
+            //double exp = x * lvl * lvl + y * lvl + z;
+            double exp = expFormula(lvl);
+            int i = (int) (lvl / 10 + 0.5);
+            System.out.println("Level " + lvl + " ExpPerMob: " + exp / monstersToKill.get(i));
         }
     }
 

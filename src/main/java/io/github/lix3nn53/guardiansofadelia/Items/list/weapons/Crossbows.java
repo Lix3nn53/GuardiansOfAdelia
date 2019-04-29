@@ -13,7 +13,7 @@ class Crossbows {
                                 int maxStatValue, int minNumberofStats) {
         String name = "Short Crossbow";
         Material material = Material.CROSSBOW;
-        int durability = 2;
+        int customModelDataId = 10000001;
         int level = 1;
         RPGClass rpgClass = RPGClass.HUNTER;
         int rangedDamage = 62;
@@ -22,55 +22,55 @@ class Crossbows {
 
         if (placementNumber == 2) {
             name = "Light Crossbow";
-            durability = 13;
+            customModelDataId = 10000002;
             level = 10;
             rangedDamage = 86;
             itemID = 702;
         } else if (placementNumber == 3) {
             name = "Crossbow";
-            durability = 5;
+            customModelDataId = 10000003;
             level = 20;
             rangedDamage = 124;
             itemID = 703;
         } else if (placementNumber == 4) {
             name = "Battle Crossbow";
-            durability = 12;
+            customModelDataId = 10000004;
             level = 30;
             rangedDamage = 201;
             itemID = 704;
         } else if (placementNumber == 5) {
             name = "Satet Crossbow";
-            durability = 3;
+            customModelDataId = 10000005;
             level = 40;
             rangedDamage = 271;
             itemID = 705;
         } else if (placementNumber == 6) {
             name = "Leaf Fairy Crossbow";
-            durability = 6;
+            customModelDataId = 10000006;
             level = 50;
             rangedDamage = 324;
             itemID = 706;
         } else if (placementNumber == 7) {
             name = "Crossbow of Doom";
-            durability = 4;
+            customModelDataId = 10000008;
             level = 60;
             rangedDamage = 402;
             itemID = 707;
         } else if (placementNumber == 8) {
             name = "Unicorn Crossbow";
-            durability = 7;
+            customModelDataId = 10000010;
             level = 70;
             rangedDamage = 498;
             itemID = 708;
         } else if (placementNumber == 9) {
             name = "Zephyr Crossbow";
-            durability = 8;
+            customModelDataId = 10000012;
             level = 80;
             rangedDamage = 624;
             itemID = 709;
         } else if (placementNumber == 10) {
             name = "Arcade Crossbow";
-            durability = 14;
+            customModelDataId = 10000014;
             level = 90;
             rangedDamage = 1072;
             itemID = 710;
@@ -78,7 +78,7 @@ class Crossbows {
 
         int damage = rangedDamage / 4;
 
-        final WeaponRanged weapon = new WeaponRanged(name, tier, itemTag, material, durability, level, rpgClass, damage, rangedDamage, bonusPercent,
+        final WeaponRanged weapon = new WeaponRanged(name, tier, itemTag, material, customModelDataId, level, rpgClass, damage, rangedDamage, bonusPercent,
                 attackSpeed, minStatValue, maxStatValue, minNumberofStats, itemID);
         return weapon.getItemStack();
     }

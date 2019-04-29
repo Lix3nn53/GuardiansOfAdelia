@@ -23,7 +23,7 @@ public class WeaponMelee implements RPGGear {
     private final RPGClass rpgClass;
     private ItemStack itemStack;
 
-    public WeaponMelee(String name, ItemTier tier, String itemTag, Material material, int durability, int level, RPGClass rpgClass, int damage,
+    public WeaponMelee(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, RPGClass rpgClass, int damage,
                        double bonusPercent, AttackSpeed attackSpeed, int minStatValue, int maxStatValue, int minNumberOfStats
             , int itemID) {
         name = tier.getTierColor() + itemTag + " " + name;
@@ -70,10 +70,7 @@ public class WeaponMelee implements RPGGear {
         itemMeta.setDisplayName(name);
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(durability);
-        }
+        itemMeta.setCustomModelData(customModelDataId);
         this.itemStack.setItemMeta(itemMeta);
 
         this.itemID = itemID;

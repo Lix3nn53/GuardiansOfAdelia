@@ -428,195 +428,21 @@ public class Enchant {
 
     private void startGlowing() {
         ItemMeta itemMeta = itemStack.getItemMeta();
-        Damageable damageable = (Damageable) itemMeta;
-        if (itemStack.getType().equals(Material.DIAMOND_AXE)) {
-            if (damageable.getDamage() == 4) {
-                damageable.setDamage(14);
-            } else if (damageable.getDamage() == 6) {
-                damageable.setDamage(15);
-            } else if (damageable.getDamage() == 5) {
-                damageable.setDamage(17);
-            } else if (damageable.getDamage() == 3) {
-                damageable.setDamage(13);
-            } else if (damageable.getDamage() == 8) {
-                damageable.setDamage(16);
-            }
-        } else if (itemStack.getType().equals(Material.BOW)) {
-            if (damageable.getDamage() == 6) {
-                damageable.setDamage(19);
-            } else if (damageable.getDamage() == 4) {
-                damageable.setDamage(17);
-            } else if (damageable.getDamage() == 7) {
-                damageable.setDamage(18);
-            } else if (damageable.getDamage() == 14) {
-                damageable.setDamage(16);
-            } else if (damageable.getDamage() == 8) {
-                damageable.setDamage(15);
-            }
-        } else if (itemStack.getType().equals(Material.DIAMOND_HOE)) {
-            if (damageable.getDamage() == 10) {
-                damageable.setDamage(17);
-            } else if (damageable.getDamage() == 3) {
-                damageable.setDamage(16);
-            } else if (damageable.getDamage() == 8) {
-                damageable.setDamage(15);
-            } else if (damageable.getDamage() == 1) {
-                damageable.setDamage(18);
-            } else if (damageable.getDamage() == 2) {
-                damageable.setDamage(19);
-            }
-        } else if (itemStack.getType().equals(Material.DIAMOND_PICKAXE)) {
-            if (damageable.getDamage() == 5) {
-                damageable.setDamage(18);
-            } else if (damageable.getDamage() == 2) {
-                damageable.setDamage(17);
-            } else if (damageable.getDamage() == 3) {
-                damageable.setDamage(15);
-            } else if (damageable.getDamage() == 12) {
-                damageable.setDamage(16);
-            } else if (damageable.getDamage() == 4) {
-                damageable.setDamage(14);
-            }
-        } else if (itemStack.getType().equals(Material.DIAMOND_SWORD)) {
-            if (damageable.getDamage() == 3) {
-                damageable.setDamage(15);
-            } else if (damageable.getDamage() == 10) {
-                damageable.setDamage(12);
-            } else if (damageable.getDamage() == 5) {
-                damageable.setDamage(13);
-            } else if (damageable.getDamage() == 8) {
-                damageable.setDamage(11);
-            } else if (damageable.getDamage() == 9) {
-                damageable.setDamage(14);
-            }
-        } else if (itemStack.getType().equals(Material.DIAMOND_SHOVEL)) {
-            if (damageable.getDamage() == 10) {
-                damageable.setDamage(21);
-            } else if (damageable.getDamage() == 2) {
-                damageable.setDamage(17);
-            } else if (damageable.getDamage() == 16) {
-                damageable.setDamage(20);
-            } else if (damageable.getDamage() == 6) {
-                damageable.setDamage(19);
-            } else if (damageable.getDamage() == 11) {
-                damageable.setDamage(18);
-            }
-        } else if (itemStack.getType().equals(Material.IRON_SWORD)) {
-            if (damageable.getDamage() == 2) {
-                damageable.setDamage(18);
-            } else if (damageable.getDamage() == 3) {
-                damageable.setDamage(17);
-            } else if (damageable.getDamage() == 7) {
-                damageable.setDamage(20);
-            } else if (damageable.getDamage() == 6) {
-                damageable.setDamage(16);
-            } else if (damageable.getDamage() == 10) {
-                damageable.setDamage(22);
-            } else if (damageable.getDamage() == 12) {
-                damageable.setDamage(19);
-            } else if (damageable.getDamage() == 13) {
-                damageable.setDamage(21);
-            } else if (damageable.getDamage() == 14) {
-                damageable.setDamage(23);
-            }
+        if (itemMeta.hasCustomModelData()) {
+            int customModelData = itemMeta.getCustomModelData();
+            customModelData++;
+            itemMeta.setCustomModelData(customModelData);
+            itemStack.setItemMeta(itemMeta);
         }
-        itemStack.setItemMeta(itemMeta);
     }
 
     private void extinguish() {
         ItemMeta itemMeta = itemStack.getItemMeta();
-        Damageable damageable = (Damageable) itemMeta;
-        if (itemStack.getType().equals(Material.DIAMOND_AXE)) {
-            if (damageable.getDamage() == 14) {
-                damageable.setDamage(4);
-            } else if (damageable.getDamage() == 15) {
-                damageable.setDamage(6);
-            } else if (damageable.getDamage() == 17) {
-                damageable.setDamage(5);
-            } else if (damageable.getDamage() == 13) {
-                damageable.setDamage(3);
-            } else if (damageable.getDamage() == 16) {
-                damageable.setDamage(8);
-            }
-        } else if (itemStack.getType().equals(Material.BOW)) {
-            if (damageable.getDamage() == 19) {
-                damageable.setDamage(6);
-            } else if (damageable.getDamage() == 17) {
-                damageable.setDamage(4);
-            } else if (damageable.getDamage() == 18) {
-                damageable.setDamage(7);
-            } else if (damageable.getDamage() == 16) {
-                damageable.setDamage(14);
-            } else if (damageable.getDamage() == 15) {
-                damageable.setDamage(8);
-            }
-        } else if (itemStack.getType().equals(Material.DIAMOND_HOE)) {
-            if (damageable.getDamage() == 17) {
-                damageable.setDamage(10);
-            } else if (damageable.getDamage() == 16) {
-                damageable.setDamage(3);
-            } else if (damageable.getDamage() == 15) {
-                damageable.setDamage(8);
-            } else if (damageable.getDamage() == 18) {
-                damageable.setDamage(1);
-            } else if (damageable.getDamage() == 19) {
-                damageable.setDamage(2);
-            }
-        } else if (itemStack.getType().equals(Material.DIAMOND_PICKAXE)) {
-            if (damageable.getDamage() == 18) {
-                damageable.setDamage(5);
-            } else if (damageable.getDamage() == 17) {
-                damageable.setDamage(2);
-            } else if (damageable.getDamage() == 15) {
-                damageable.setDamage(3);
-            } else if (damageable.getDamage() == 16) {
-                damageable.setDamage(12);
-            } else if (damageable.getDamage() == 14) {
-                damageable.setDamage(4);
-            }
-        } else if (itemStack.getType().equals(Material.DIAMOND_SWORD)) {
-            if (damageable.getDamage() == 15) {
-                damageable.setDamage(3);
-            } else if (damageable.getDamage() == 12) {
-                damageable.setDamage(10);
-            } else if (damageable.getDamage() == 13) {
-                damageable.setDamage(5);
-            } else if (damageable.getDamage() == 11) {
-                damageable.setDamage(8);
-            } else if (damageable.getDamage() == 14) {
-                damageable.setDamage(9);
-            }
-        } else if (itemStack.getType().equals(Material.DIAMOND_SHOVEL)) {
-            if (damageable.getDamage() == 21) {
-                damageable.setDamage(10);
-            } else if (damageable.getDamage() == 17) {
-                damageable.setDamage(2);
-            } else if (damageable.getDamage() == 20) {
-                damageable.setDamage(16);
-            } else if (damageable.getDamage() == 19) {
-                damageable.setDamage(6);
-            } else if (damageable.getDamage() == 18) {
-                damageable.setDamage(11);
-            }
-        } else if (itemStack.getType().equals(Material.IRON_SWORD)) {
-            if (damageable.getDamage() == 18) {
-                damageable.setDamage(2);
-            } else if (damageable.getDamage() == 17) {
-                damageable.setDamage(3);
-            } else if (damageable.getDamage() == 20) {
-                damageable.setDamage(7);
-            } else if (damageable.getDamage() == 16) {
-                damageable.setDamage(6);
-            } else if (damageable.getDamage() == 22) {
-                damageable.setDamage(10);
-            } else if (damageable.getDamage() == 19) {
-                damageable.setDamage(12);
-            } else if (damageable.getDamage() == 21) {
-                damageable.setDamage(13);
-            } else if (damageable.getDamage() == 23) {
-                damageable.setDamage(14);
-            }
+        if (itemMeta.hasCustomModelData()) {
+            int customModelData = itemMeta.getCustomModelData();
+            customModelData--;
+            itemMeta.setCustomModelData(customModelData);
+            itemStack.setItemMeta(itemMeta);
         }
-        itemStack.setItemMeta(itemMeta);
     }
 }

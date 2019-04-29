@@ -13,7 +13,7 @@ public class PassiveItemList {
                                 int maxStatValue, int minNumberofStats) {
         String name = "Stone Ring";
         Material material = Material.SHEARS;
-        int durability = 1;
+        int customModelDataId = 10000001;
         int level = 2;
         RPGClass rpgClass = RPGClass.NO_CLASS;
         int itemID = 6001;
@@ -22,47 +22,47 @@ public class PassiveItemList {
         if (rpgSlotType.equals(RPGSlotType.RING)) {
             if (placementNumber == 2) {
                 name = "Leaf Ring";
-                durability = 2;
+                customModelDataId = 10000002;
                 level = 12;
                 itemID = 6002;
             } else if (placementNumber == 3) {
                 name = "Gold Ring";
-                durability = 3;
+                customModelDataId = 10000003;
                 level = 22;
                 itemID = 6003;
             } else if (placementNumber == 4) {
                 name = "Fire Ring";
-                durability = 4;
+                customModelDataId = 10000004;
                 level = 32;
                 itemID = 6004;
             } else if (placementNumber == 5) {
                 name = "Ocean Ring";
-                durability = 5;
+                customModelDataId = 10000005;
                 level = 42;
                 itemID = 6005;
             } else if (placementNumber == 6) {
                 name = "Lapis Ring";
-                durability = 6;
+                customModelDataId = 10000006;
                 level = 52;
                 itemID = 6006;
             } else if (placementNumber == 7) {
                 name = "Lightning Ring";
-                durability = 7;
+                customModelDataId = 10000007;
                 level = 62;
                 itemID = 6007;
             } else if (placementNumber == 8) {
                 name = "Amethyst Ring";
-                durability = 8;
+                customModelDataId = 10000008;
                 level = 72;
                 itemID = 6008;
             } else if (placementNumber == 9) {
                 name = "Ruby Ring";
-                durability = 9;
+                customModelDataId = 10000009;
                 level = 82;
                 itemID = 6009;
             } else if (placementNumber == 10) {
                 name = "Moon Stone Ring";
-                durability = 10;
+                customModelDataId = 10000010;
                 level = 90;
                 itemID = 6010;
             }
@@ -70,52 +70,52 @@ public class PassiveItemList {
             passiveTypeNum = 2;
             if (placementNumber == 1) {
                 name = "Short Gloves";
-                durability = 11;
+                customModelDataId = 10000011;
                 level = 4;
                 itemID = 6101;
             } else if (placementNumber == 2) {
                 name = "Cloth Gloves";
-                durability = 12;
+                customModelDataId = 10000012;
                 level = 14;
                 itemID = 6102;
             } else if (placementNumber == 3) {
                 name = "Leather Gloves";
-                durability = 13;
+                customModelDataId = 10000013;
                 level = 24;
                 itemID = 6103;
             } else if (placementNumber == 4) {
                 name = "Chainmail Gloves";
-                durability = 14;
+                customModelDataId = 10000014;
                 level = 34;
                 itemID = 6104;
             } else if (placementNumber == 5) {
                 name = "Iron Gloves";
-                durability = 15;
+                customModelDataId = 10000015;
                 level = 44;
                 itemID = 6105;
             } else if (placementNumber == 6) {
                 name = "Amethyst Gloves";
-                durability = 16;
+                customModelDataId = 10000016;
                 level = 54;
                 itemID = 6106;
             } else if (placementNumber == 7) {
                 name = "Gold Gloves";
-                durability = 17;
+                customModelDataId = 10000017;
                 level = 64;
                 itemID = 6107;
             } else if (placementNumber == 8) {
                 name = "Quartz Gloves";
-                durability = 18;
+                customModelDataId = 10000018;
                 level = 74;
                 itemID = 6108;
             } else if (placementNumber == 9) {
                 name = "Titanium Gloves";
-                durability = 19;
+                customModelDataId = 10000019;
                 level = 84;
                 itemID = 6109;
             } else if (placementNumber == 10) {
                 name = "Moon Stone Gloves";
-                durability = 20;
+                customModelDataId = 10000020;
                 level = 90;
                 itemID = 6110;
             }
@@ -123,52 +123,52 @@ public class PassiveItemList {
             passiveTypeNum = 3;
             if (placementNumber == 1) {
                 name = "Stone Necklace";
-                durability = 21;
+                customModelDataId = 10000021;
                 level = 6;
                 itemID = 6201;
             } else if (placementNumber == 2) {
                 name = "Leaf Necklace";
-                durability = 22;
+                customModelDataId = 10000022;
                 level = 16;
                 itemID = 6202;
             } else if (placementNumber == 3) {
                 name = "Gold Necklace";
-                durability = 23;
+                customModelDataId = 10000023;
                 level = 26;
                 itemID = 6203;
             } else if (placementNumber == 4) {
                 name = "Fire Necklace";
-                durability = 24;
+                customModelDataId = 10000024;
                 level = 36;
                 itemID = 6204;
             } else if (placementNumber == 5) {
                 name = "Ocean Necklace";
-                durability = 25;
+                customModelDataId = 10000025;
                 level = 46;
                 itemID = 6205;
             } else if (placementNumber == 6) {
                 name = "Lapis Necklace";
-                durability = 26;
+                customModelDataId = 10000026;
                 level = 56;
                 itemID = 6206;
             } else if (placementNumber == 7) {
                 name = "Lightning Necklace";
-                durability = 27;
+                customModelDataId = 10000027;
                 level = 66;
                 itemID = 6207;
             } else if (placementNumber == 8) {
                 name = "Amethyst Necklace";
-                durability = 28;
+                customModelDataId = 10000028;
                 level = 76;
                 itemID = 6208;
             } else if (placementNumber == 9) {
                 name = "Ruby Necklace";
-                durability = 29;
+                customModelDataId = 10000029;
                 level = 86;
                 itemID = 6209;
             } else if (placementNumber == 10) {
                 name = "Moon Stone Necklace";
-                durability = 30;
+                customModelDataId = 10000030;
                 level = 90;
                 itemID = 6210;
             }
@@ -176,59 +176,58 @@ public class PassiveItemList {
             passiveTypeNum = 4;
             if (placementNumber == 1) {
                 name = "Stone Earrings";
-                durability = 31;
+                customModelDataId = 10000031;
                 level = 8;
                 itemID = 6301;
             } else if (placementNumber == 2) {
                 name = "Leaf Earrings";
-                durability = 32;
+                customModelDataId = 10000032;
                 level = 18;
                 itemID = 6302;
             } else if (placementNumber == 3) {
                 name = "Gold Earrings";
-                durability = 33;
+                customModelDataId = 10000033;
                 level = 28;
                 itemID = 6303;
             } else if (placementNumber == 4) {
                 name = "Fire Earrings";
-                durability = 34;
+                customModelDataId = 10000034;
                 level = 38;
                 itemID = 6304;
             } else if (placementNumber == 5) {
                 name = "Ocean Earrings";
-                durability = 35;
+                customModelDataId = 10000035;
                 level = 48;
                 itemID = 6305;
             } else if (placementNumber == 6) {
                 name = "Lapis Earrings";
-                durability = 36;
+                customModelDataId = 10000036;
                 level = 58;
                 itemID = 6306;
             } else if (placementNumber == 7) {
                 name = "Lightning Earrings";
-                durability = 37;
+                customModelDataId = 10000037;
                 level = 68;
                 itemID = 6307;
             } else if (placementNumber == 8) {
                 name = "Amethyst Earrings";
-                durability = 38;
+                customModelDataId = 10000038;
                 level = 78;
                 itemID = 6308;
             } else if (placementNumber == 9) {
                 name = "Ruby Earrings";
-                durability = 39;
+                customModelDataId = 10000039;
                 level = 88;
                 itemID = 6309;
             } else if (placementNumber == 10) {
                 name = "Moon Stone Earrings";
-                durability = 40;
+                customModelDataId = 10000040;
                 level = 90;
                 itemID = 6310;
             }
         } else if (rpgSlotType.equals(RPGSlotType.PARROT)) {
             passiveTypeNum = 5;
-            material = Material.STONE_HOE;
-            durability = 7;
+            customModelDataId = 10000041;
             if (placementNumber == 1) {
                 name = "Gray Parrot";
                 level = 20;
@@ -252,7 +251,7 @@ public class PassiveItemList {
             }
         }
 
-        final GearPassive passive = new GearPassive(name, tier, itemTag, material, durability, passiveTypeNum, level, rpgClass, minStatValue,
+        final GearPassive passive = new GearPassive(name, tier, itemTag, material, customModelDataId, passiveTypeNum, level, rpgClass, minStatValue,
                 maxStatValue, minNumberofStats, tier.getBonusPercent(), itemID);
 
         return passive.getItemStack();

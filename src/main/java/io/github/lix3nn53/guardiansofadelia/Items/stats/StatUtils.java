@@ -146,7 +146,7 @@ public class StatUtils {
                 mat.equals(Material.LEATHER_CHESTPLATE) ||
                 mat.equals(Material.IRON_SWORD)) {
             type = StatType.HEALTH;
-        } else if (mat.equals(Material.SHEARS) || mat.equals(Material.STONE_HOE)) {
+        } else if (mat.equals(Material.SHEARS)) {
             type = StatType.PASSIVE;
         }
         return type;
