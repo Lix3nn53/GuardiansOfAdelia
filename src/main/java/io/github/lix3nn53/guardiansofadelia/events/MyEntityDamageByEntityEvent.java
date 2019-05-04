@@ -25,7 +25,7 @@ import java.util.UUID;
 
 public class MyEntityDamageByEntityEvent implements Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEvent(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
         Entity target = event.getEntity();

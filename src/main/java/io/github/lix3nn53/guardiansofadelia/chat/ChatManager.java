@@ -80,7 +80,7 @@ public class ChatManager {
     private static String getChatPrefix(Player player) {
         String prefix = "";
         UUID uuid = player.getUniqueId();
-        if(GuardianDataManager.hasGuardianData(uuid)) {
+        if (GuardianDataManager.hasGuardianData(uuid)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             StaffRank staffRank = guardianData.getStaffRank();
             if (!staffRank.equals(StaffRank.NONE)) {

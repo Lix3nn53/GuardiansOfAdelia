@@ -12,7 +12,6 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -24,15 +23,12 @@ public class CraftingGuiManager {
         GuiGeneric guiGeneric = new GuiGeneric(27, jobType.getName() + " Level Selection", 0);
         ItemStack itemStack = new ItemStack(Material.STONE_PICKAXE, 10);
         ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setCustomModelData(10000036);
         itemMeta.setDisplayName(ChatColor.GOLD + "Level 10~19");
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GRAY + "Click to craft items of this level.");
         }});
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(45);
-        }
 
         itemStack.setItemMeta(itemMeta);
         guiGeneric.setItem(9, itemStack);

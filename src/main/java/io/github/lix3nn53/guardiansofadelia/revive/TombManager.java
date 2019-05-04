@@ -1,23 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.revive;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
-import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Chunk;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -30,7 +21,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class TombManager {
 
@@ -82,7 +72,7 @@ public class TombManager {
                     cancel();
                 }
             }
-        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L,20 * 10L);
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 10L);
     }
 
     public static void onChunkLoad(String chunkKey) {

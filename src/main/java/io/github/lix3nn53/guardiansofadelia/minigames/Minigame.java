@@ -224,6 +224,10 @@ public abstract class Minigame {
         return queueCountDown;
     }
 
+    public void setQueueCountDown(BukkitRunnable queueCountDown) {
+        this.queueCountDown = queueCountDown;
+    }
+
     public boolean addPlayer(Player player) {
         if (PartyManager.inParty(player)) {
             Party party = PartyManager.getParty(player);
@@ -298,10 +302,6 @@ public abstract class Minigame {
             };
             this.queueCountDown.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 10L);
         }
-    }
-
-    public void setQueueCountDown(BukkitRunnable queueCountDown) {
-        this.queueCountDown = queueCountDown;
     }
 
     private void onPlayerLeaveQueueCountdownCheck() {

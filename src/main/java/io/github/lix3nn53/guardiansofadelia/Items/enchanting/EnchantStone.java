@@ -14,18 +14,18 @@ public enum EnchantStone {
     TIER_FOUR;
 
     public Material getType() {
-        if(this.equals(EnchantStone.TIER_TWO)){
+        if (this.equals(EnchantStone.TIER_TWO)) {
             return Material.BRICK;
-        } else if(this.equals(EnchantStone.TIER_THREE)){
+        } else if (this.equals(EnchantStone.TIER_THREE)) {
             return Material.CLAY_BALL;
-        } else if(this.equals(EnchantStone.TIER_FOUR)){
+        } else if (this.equals(EnchantStone.TIER_FOUR)) {
             return Material.GOLD_NUGGET;
         }
         return Material.FLINT;
     }
 
     public ItemStack getItemSTack(int amount) {
-        if(this.equals(EnchantStone.TIER_TWO)){
+        if (this.equals(EnchantStone.TIER_TWO)) {
             ItemStack item = new ItemStack(Material.BRICK, amount);
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(ChatColor.BLUE + "Enchant Stone Tier 2");
@@ -37,7 +37,7 @@ public enum EnchantStone {
             }});
             item.setItemMeta(itemMeta);
             return item;
-        } else if(this.equals(EnchantStone.TIER_THREE)){
+        } else if (this.equals(EnchantStone.TIER_THREE)) {
             ItemStack item = new ItemStack(Material.CLAY_BALL, amount);
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Enchant Stone Tier 3");
@@ -49,7 +49,7 @@ public enum EnchantStone {
             }});
             item.setItemMeta(itemMeta);
             return item;
-        } else if(this.equals(EnchantStone.TIER_FOUR)){
+        } else if (this.equals(EnchantStone.TIER_FOUR)) {
             ItemStack item = new ItemStack(Material.GOLD_NUGGET, amount);
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(ChatColor.RED + "Enchant Stone Tier 4");

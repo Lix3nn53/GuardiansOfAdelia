@@ -15,7 +15,6 @@ public class EntityUtils {
         entity.setHealth(hp);
         entity.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0.7D);
         entity.setCanPickupItems(false);
-        entity.setRemoveWhenFarAway(false);
 
         return entity;
     }

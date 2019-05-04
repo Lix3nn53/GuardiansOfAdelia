@@ -19,7 +19,6 @@ public class Hologram {
         as.setInvulnerable(true);
         as.setCustomNameVisible(true);
         as.setCustomName(title);
-        as.setRemoveWhenFarAway(false);
         type = HologramType.TEXT;
     }
 
@@ -31,7 +30,6 @@ public class Hologram {
         as.setInvulnerable(true);
         Item item = loc.getWorld().dropItem(loc, itemStack);
         as.addPassenger(item);
-        as.setRemoveWhenFarAway(false);
         type = HologramType.ITEM;
     }
 
@@ -43,7 +41,6 @@ public class Hologram {
         as.setInvulnerable(true);
         as.setCustomNameVisible(false);
         as.setCustomName("");
-        as.setRemoveWhenFarAway(false);
         type = HologramType.INVISIBLE;
     }
 

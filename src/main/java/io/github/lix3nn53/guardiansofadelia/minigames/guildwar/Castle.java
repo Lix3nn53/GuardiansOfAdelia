@@ -5,9 +5,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
 public class Castle {
+    private final Block flagGround;
     private int conqueror = 0;
     private int flagHeight = 10;
-    private final Block flagGround;
 
     public Castle(Block flagGround) {
         this.flagGround = flagGround;
@@ -22,7 +22,7 @@ public class Castle {
     }
 
     public Block getFlag() {
-        return flagGround.getRelative(0,flagHeight,0);
+        return flagGround.getRelative(0, flagHeight, 0);
     }
 
     public void reset() {

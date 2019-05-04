@@ -2,16 +2,11 @@ package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.UUID;
 
 public class GiveWeaponAction implements Action {
 

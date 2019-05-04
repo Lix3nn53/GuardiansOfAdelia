@@ -9,7 +9,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -102,12 +101,9 @@ public class PrizeChest {
     }
 
     public ItemStack getChest() {
-        ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
+        ItemStack itemStack = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(6);
-        }
+        itemMeta.setCustomModelData(10000035);
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.GOLD + "Number of items: " + ChatColor.GRAY + prizePool.size());

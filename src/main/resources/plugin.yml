@@ -22,6 +22,10 @@ commands:
       - l
     permission: guardian.admin
     permission-message: You do not have permission!
+  lixskill:
+    description: Admin command utility for skills
+    permission: guardian.admin
+    permission-message: You do not have permission!
   guild:
     description: Guild command
     aliases:

@@ -12,7 +12,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -114,16 +113,16 @@ public class EnchantGui extends GuiGeneric {
         return false;
     }
 
-    public void setEnchantStone(ItemStack enchantStone) {
-        setItem(13, enchantStone);
-    }
-
     public ItemStack getItemToEnchant() {
         return getItem(10);
     }
 
     public ItemStack getEnchantStone() {
         return getItem(13);
+    }
+
+    public void setEnchantStone(ItemStack enchantStone) {
+        setItem(13, enchantStone);
     }
 
     public void startEnchanting(Player owner) {
@@ -215,8 +214,7 @@ public class EnchantGui extends GuiGeneric {
         ItemStack success = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = success.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GREEN + "Success");
-        Damageable damageable = (Damageable) itemMeta;
-        damageable.setDamage(5);
+        itemMeta.setCustomModelData(10000005);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         success.setItemMeta(itemMeta);
@@ -228,8 +226,7 @@ public class EnchantGui extends GuiGeneric {
         ItemStack fail = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = fail.getItemMeta();
         itemMeta.setDisplayName(ChatColor.RED + "Fail");
-        Damageable damageable = (Damageable) itemMeta;
-        damageable.setDamage(4);
+        itemMeta.setCustomModelData(10000006);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         fail.setItemMeta(itemMeta);

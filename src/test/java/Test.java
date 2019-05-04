@@ -1,5 +1,6 @@
 
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ public class Test {
 
     public static void main(String[] args) {
 
+        System.out.println(Material.values().toString());
     }
 
     private static double expFormula(int level) {

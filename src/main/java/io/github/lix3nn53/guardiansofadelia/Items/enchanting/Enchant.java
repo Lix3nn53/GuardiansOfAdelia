@@ -5,10 +5,8 @@ import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;

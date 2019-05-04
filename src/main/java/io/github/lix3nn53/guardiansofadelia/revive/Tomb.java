@@ -7,14 +7,13 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class Tomb {
 
     private final Player owner;
-    private ArmorStand tombModel;
     private final Location baseLocation;
+    private ArmorStand tombModel;
 
     public Tomb(Player owner, Location deathLocation) {
         this.owner = owner;
@@ -28,10 +27,7 @@ public class Tomb {
         this.tombModel = (ArmorStand) baseLocation.getWorld().spawnEntity(baseLocation, EntityType.ARMOR_STAND);
         ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(1);
-        }
+        itemMeta.setCustomModelData(10000001);
         itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
         this.tombModel.setHelmet(itemStack);
@@ -40,7 +36,6 @@ public class Tomb {
         this.tombModel.setCustomNameVisible(true);
         this.tombModel.setInvulnerable(true);
         this.tombModel.setGravity(false);
-        this.tombModel.setRemoveWhenFarAway(false);
     }
 
     public void remove() {

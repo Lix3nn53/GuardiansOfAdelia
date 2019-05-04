@@ -13,7 +13,6 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -123,10 +122,7 @@ public class Bazaar {
         this.bazaarModel = (ArmorStand) baseLocation.getWorld().spawnEntity(baseLocation, EntityType.ARMOR_STAND);
         ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(3);
-        }
+        itemMeta.setCustomModelData(10000003);
         itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
         this.bazaarModel.setHelmet(itemStack);
@@ -135,7 +131,6 @@ public class Bazaar {
         this.bazaarModel.setCustomNameVisible(true);
         this.bazaarModel.setInvulnerable(true);
         this.bazaarModel.setGravity(false);
-        this.bazaarModel.setRemoveWhenFarAway(false);
 
         BazaarManager.putBazaarToPlayer(owner, bazaarModel);
     }

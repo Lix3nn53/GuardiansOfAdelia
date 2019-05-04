@@ -48,7 +48,7 @@ public class GuildWar extends Minigame {
             if (conqueror > 0) {
                 addScore(conqueror, 1);
             }
-            performCastleConquer(castle, i+1);
+            performCastleConquer(castle, i + 1);
         }
     }
 

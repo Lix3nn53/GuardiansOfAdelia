@@ -5,7 +5,6 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -19,10 +18,7 @@ public class CharacterSelectionMenuList {
         ItemMeta itemMeta = s1.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(17);
-        }
+        itemMeta.setCustomModelData(10000009);
         itemMeta.setDisplayName(ChatColor.AQUA + "Knight");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -41,10 +37,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(29, s1);
 
         ItemStack s2 = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(16);
-        }
+        itemMeta.setCustomModelData(10000008);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Paladin");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -63,10 +56,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(15, s2);
 
         ItemStack s3 = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(20);
-        }
+        itemMeta.setCustomModelData(10000012);
         itemMeta.setDisplayName(ChatColor.RED + "Warrior");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -85,10 +75,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(11, s3);
 
         ItemStack s4 = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(19);
-        }
+        itemMeta.setCustomModelData(10000011);
         itemMeta.setDisplayName(ChatColor.BLUE + "Ninja");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -107,10 +94,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(31, s4);
 
         ItemStack s5 = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(15);
-        }
+        itemMeta.setCustomModelData(10000007);
         itemMeta.setDisplayName(ChatColor.GREEN + "Archer");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -129,10 +113,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(33, s5);
 
         ItemStack s6 = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(18);
-        }
+        itemMeta.setCustomModelData(10000010);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Mage");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -151,10 +132,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(13, s6);
 
         ItemStack s7 = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(47);
-        }
+        itemMeta.setCustomModelData(10000015);
         itemMeta.setDisplayName(ChatColor.GOLD + "Monk");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -174,10 +152,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(47, s7);
 
         ItemStack s8 = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(48);
-        }
+        itemMeta.setCustomModelData(10000016);
         itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Hunter");
         itemMeta.setLore(new ArrayList() {{
             add("");

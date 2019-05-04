@@ -62,14 +62,14 @@ public class MiniGameManager {
         winByMostKillsStartLocations1.add(new Location(Bukkit.getWorld("arena"), -71.5, 145.5, -305.5, -135, -2));
         winByMostKillsStartLocations1.add(new Location(Bukkit.getWorld("arena"), 56.5, 145.5, -305.5, 135, -2));
         winByMostKillsStartLocations1.add(new Location(Bukkit.getWorld("arena"), 56.5, 145.5, -433.5, 45, -2));
-        WinByMostKills winByMostKillsRoom1 = new WinByMostKills("Space Jump", 1, 1, 1, winByMostKillsStartLocations1, 1, 3,3);
+        WinByMostKills winByMostKillsRoom1 = new WinByMostKills("Space Jump", 1, 1, 1, winByMostKillsStartLocations1, 1, 3, 3);
         winByMostKillsList.add(winByMostKillsRoom1);
 
         List<Location> winByMostKillsStartLocations2 = new ArrayList<>();
         winByMostKillsStartLocations2.add(new Location(Bukkit.getWorld("arena"), -60.5, 141.5, 22.5, -135, -2));
         winByMostKillsStartLocations2.add(new Location(Bukkit.getWorld("arena"), 67.5, 141.5, 22.5, 135, -2));
         winByMostKillsStartLocations2.add(new Location(Bukkit.getWorld("arena"), 67.5, 141.5, -105.5, 48, -2));
-        WinByMostKills winByMostKillsRoom2 = new WinByMostKills("Space Jump", 1, 1, 2, winByMostKillsStartLocations2, 1, 3,3);
+        WinByMostKills winByMostKillsRoom2 = new WinByMostKills("Space Jump", 1, 1, 2, winByMostKillsStartLocations2, 1, 3, 3);
         winByMostKillsList.add(winByMostKillsRoom2);
 
         //Guild War
@@ -80,7 +80,7 @@ public class MiniGameManager {
         guildWarFlagGrounds1.add(new Location(Bukkit.getWorld("arena"), 280, 44, -134));
         guildWarFlagGrounds1.add(new Location(Bukkit.getWorld("arena"), 407, 31, -187));
         guildWarFlagGrounds1.add(new Location(Bukkit.getWorld("arena"), 529, 46, -271));
-        GuildWar GuildWarRoom1 = new GuildWar(500,"Royal Clash", 1, guildWarLocations1, guildWarFlagGrounds1);
+        GuildWar GuildWarRoom1 = new GuildWar(500, "Royal Clash", 1, guildWarLocations1, guildWarFlagGrounds1);
         guildWarList.add(GuildWarRoom1);
 
         List<Location> guildWarLocations2 = new ArrayList<>();
@@ -88,7 +88,7 @@ public class MiniGameManager {
         guildWarLocations2.add(new Location(Bukkit.getWorld("arena"), 433.5, 88.5, 278.5, 106.5f, -5));
         List<Location> guildWarFlagGrounds2 = new ArrayList<>();
         guildWarFlagGrounds2.add(new Location(Bukkit.getWorld("arena"), 464, 55, 389));
-        GuildWar GuildWarRoom2 = new GuildWar(200,"The Deep Valley", 2, guildWarLocations2, guildWarFlagGrounds2);
+        GuildWar GuildWarRoom2 = new GuildWar(200, "The Deep Valley", 2, guildWarLocations2, guildWarFlagGrounds2);
         guildWarList.add(GuildWarRoom2);
     }
 

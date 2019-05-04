@@ -10,7 +10,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
@@ -25,10 +24,7 @@ public class MenuList {
 
         ItemStack guide = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = guide.getItemMeta();
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(13);
-        }
+        itemMeta.setCustomModelData(10000024);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setDisplayName(ChatColor.GREEN + "Guides");
@@ -41,10 +37,7 @@ public class MenuList {
         guiGeneric.setItem(10, guide);
 
         ItemStack compass = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(12);
-        }
+        itemMeta.setCustomModelData(10000023);
         itemMeta.setDisplayName(ChatColor.AQUA + "Compass");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -55,10 +48,7 @@ public class MenuList {
         guiGeneric.setItem(12, compass);
 
         ItemStack map = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(22);
-        }
+        itemMeta.setCustomModelData(10000026);
         itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Maps");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -68,10 +58,7 @@ public class MenuList {
         guiGeneric.setItem(14, map);
 
         ItemStack news = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(8);
-        }
+        itemMeta.setCustomModelData(10000022);
         itemMeta.setDisplayName(ChatColor.AQUA + "Announcements and News");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -91,10 +78,7 @@ public class MenuList {
         guiGeneric.setItem(28, character);
 
         ItemStack guild = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(14);
-        }
+        itemMeta.setCustomModelData(10000025);
         itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Guild");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -104,10 +88,7 @@ public class MenuList {
         guiGeneric.setItem(30, guild);
 
         ItemStack minigames = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(25);
-        }
+        itemMeta.setCustomModelData(10000029);
         itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Minigames");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -117,10 +98,7 @@ public class MenuList {
         guiGeneric.setItem(32, minigames);
 
         ItemStack bazaar = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(23);
-        }
+        itemMeta.setCustomModelData(10000027);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Bazaar");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -130,10 +108,7 @@ public class MenuList {
         guiGeneric.setItem(34, bazaar);
 
         ItemStack donation = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(24);
-        }
+        itemMeta.setCustomModelData(10000028);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Donation ♥");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -151,10 +126,7 @@ public class MenuList {
 
         ItemStack skills = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = skills.getItemMeta();
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(27);
-        }
+        itemMeta.setCustomModelData(10000031);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Skills");
@@ -167,10 +139,7 @@ public class MenuList {
         guiGeneric.setItem(9, skills);
 
         ItemStack elements = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(10);
-        }
+        itemMeta.setCustomModelData(10000037);
         itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Elements");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -181,10 +150,7 @@ public class MenuList {
         guiGeneric.setItem(11, elements);
 
         ItemStack job = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(26);
-        }
+        itemMeta.setCustomModelData(10000030);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Job");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -194,10 +160,7 @@ public class MenuList {
         guiGeneric.setItem(13, job);
 
         ItemStack chat = new ItemStack(Material.STONE_PICKAXE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(31);
-        }
+        itemMeta.setCustomModelData(10000033);
         itemMeta.setDisplayName(ChatColor.AQUA + "Chat Tag");
         itemMeta.setLore(new ArrayList() {{
             add("");

@@ -17,6 +17,8 @@ import static com.comphenix.protocol.wrappers.nbt.NbtFactory.fromBase;
 
 public class NBTTagUtils {
 
+    // Item stack trickery
+    private static StructureModifier<Object> itemStackModifier;
     public ProtocolManager pm = ProtocolLibrary.getProtocolManager();
 
     public static ItemStack putString(String key, String value, ItemStack item) {
@@ -106,6 +108,7 @@ public class NBTTagUtils {
      * <p>
      * The item stack must be a wrapper for a CraftItemStack. Use
      * {@link MinecraftReflection#getBukkitItemStack(Object)} if not.
+     *
      * @param stack - the item stack.
      * @return A wrapper for its NBT tag.
      */
@@ -125,6 +128,7 @@ public class NBTTagUtils {
 
     /**
      * Ensure that the given stack can store arbitrary NBT information.
+     *
      * @param stack - the stack to check.
      */
     private static void checkItemStack(ItemStack stack) {
@@ -138,6 +142,7 @@ public class NBTTagUtils {
 
     /**
      * Retrieve a structure modifier that automatically marshalls between NBT wrappers and their NMS counterpart.
+     *
      * @param stack - the stack that will store the NBT compound.
      * @return The structure modifier.
      */
@@ -155,15 +160,13 @@ public class NBTTagUtils {
                         BukkitConverters.getNbtConverter());
     }
 
-    // Item stack trickery
-    private static StructureModifier<Object> itemStackModifier;
-
     /**
      * Set the NBT compound tag of a given item stack.
      * <p>
      * The item stack must be a wrapper for a CraftItemStack. Use
      * {@link MinecraftReflection#getBukkitItemStack(Object)} if not.
-     * @param stack - the item stack, cannot be air.
+     *
+     * @param stack    - the item stack, cannot be air.
      * @param compound - the new NBT compound, or NULL to remove it.
      * @throws IllegalArgumentException If the stack is not a CraftItemStack, or it represents air.
      */
