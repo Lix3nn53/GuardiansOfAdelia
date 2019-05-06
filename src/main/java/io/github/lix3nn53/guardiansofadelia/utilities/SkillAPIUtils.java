@@ -226,8 +226,8 @@ public class SkillAPIUtils {
             return RPGClass.MAGE;
         } else if (className.contains("monk")) {
             return RPGClass.MONK;
-        } else if (className.contains("ninja")) {
-            return RPGClass.NINJA;
+        } else if (className.contains("rogue")) {
+            return RPGClass.ROGUE;
         } else if (className.contains("paladin")) {
             return RPGClass.PALADIN;
         } else if (className.contains("warrior")) {

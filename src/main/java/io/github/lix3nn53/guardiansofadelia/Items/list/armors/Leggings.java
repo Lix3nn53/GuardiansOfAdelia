@@ -204,7 +204,7 @@ class Leggings {
                 itemID = 4208;
                 material = Material.GOLDEN_LEGGINGS;
             }
-        } else if (rpgClass.equals(RPGClass.NINJA)) {
+        } else if (rpgClass.equals(RPGClass.ROGUE)) {
             if (placementNumber == 1) {
                 name = "Sunset Leggings";
                 level = 26;
@@ -509,7 +509,7 @@ class Leggings {
                 leatherArmorMeta.setColor(Color.fromRGB(0, 184, 230));
             } else if (rpgClass.equals(RPGClass.MAGE)) {
                 leatherArmorMeta.setColor(Color.fromRGB(153, 0, 115));
-            } else if (rpgClass.equals(RPGClass.NINJA)) {
+            } else if (rpgClass.equals(RPGClass.ROGUE)) {
                 leatherArmorMeta.setColor(Color.fromRGB(0, 0, 26));
             } else if (rpgClass.equals(RPGClass.PALADIN)) {
                 leatherArmorMeta.setColor(Color.fromRGB(230, 230, 0));

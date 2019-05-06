@@ -7,7 +7,7 @@ public enum RPGClass {
     KNIGHT,
     MAGE,
     MONK,
-    NINJA,
+    ROGUE,
     PALADIN,
     WARRIOR,
     HUNTER,
@@ -25,9 +25,9 @@ public enum RPGClass {
         } else if (this == RPGClass.MONK) {
             color = ChatColor.GOLD;
             name = "Monk";
-        } else if (this == RPGClass.NINJA) {
+        } else if (this == RPGClass.ROGUE) {
             color = ChatColor.BLUE;
-            name = "Ninja";
+            name = "Rogue";
         } else if (this == RPGClass.PALADIN) {
             color = ChatColor.YELLOW;
             name = "Paladin";
@@ -49,8 +49,8 @@ public enum RPGClass {
             code = "mage";
         } else if (this == RPGClass.MONK) {
             code = "monk";
-        } else if (this == RPGClass.NINJA) {
-            code = "ninja";
+        } else if (this == RPGClass.ROGUE) {
+            code = "rogue";
         } else if (this == RPGClass.PALADIN) {
             code = "paladin";
         } else if (this == RPGClass.WARRIOR) {
@@ -69,7 +69,7 @@ public enum RPGClass {
             color = ChatColor.LIGHT_PURPLE;
         } else if (this == RPGClass.MONK) {
             color = ChatColor.GOLD;
-        } else if (this == RPGClass.NINJA) {
+        } else if (this == RPGClass.ROGUE) {
             color = ChatColor.BLUE;
         } else if (this == RPGClass.PALADIN) {
             color = ChatColor.YELLOW;
@@ -89,8 +89,8 @@ public enum RPGClass {
             name = "Mage";
         } else if (this == RPGClass.MONK) {
             name = "Monk";
-        } else if (this == RPGClass.NINJA) {
-            name = "Ninja";
+        } else if (this == RPGClass.ROGUE) {
+            name = "Rogue";
         } else if (this == RPGClass.PALADIN) {
             name = "Paladin";
         } else if (this == RPGClass.WARRIOR) {

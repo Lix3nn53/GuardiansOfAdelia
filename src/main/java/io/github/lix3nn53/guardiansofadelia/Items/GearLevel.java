@@ -170,17 +170,17 @@ public enum GearLevel {
             case TWO:
                 return 2;
             case THREE:
-                return 2;
+                return 1;
             case FOUR:
-                return 3;
+                return 2;
             case FIVE:
-                return 4;
+                return 3;
             case SIX:
-                return 5;
+                return 4;
             case SEVEN:
-                return 6;
+                return 5;
             case EIGHT:
-                return 7;
+                return 6;
             case NINE:
                 return 7;
         }

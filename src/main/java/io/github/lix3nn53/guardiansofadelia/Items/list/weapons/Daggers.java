@@ -15,7 +15,7 @@ class Daggers {
         Material material = Material.DIAMOND_HOE;
         int customModelDataId = 10000001;
         int level = 1;
-        RPGClass rpgClass = RPGClass.NINJA;
+        RPGClass rpgClass = RPGClass.ROGUE;
         int damage = 5;
         AttackSpeed attackSpeed = AttackSpeed.FAST;
         int itemID = 201;

@@ -671,7 +671,7 @@ public class Ingredients {
                     reqIngredients.add(Ingredients.getIngredient(GatheringType.MINING_ORE, 4, 64));
                     reqIngredients.add(Ingredients.getIngredient(GatheringType.MINING_ORE, 5, 32));
             }
-        } else if (material.equals(Material.BOW)) {
+        } else if (material.equals(Material.BOW) || material.equals(Material.CROSSBOW)) {
             switch (gearLevel) {
                 case ONE:
                     reqIngredients.add(Ingredients.getIngredient(GatheringType.WOODCUTTING, 1, 4));

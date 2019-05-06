@@ -29,7 +29,7 @@ public class ItemPoolGenerator {
 
         temp.add(Weapons.getWeapon(RPGClass.WARRIOR, gearLevel.getWeaponAndPassiveNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.ARCHER, gearLevel.getWeaponAndPassiveNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(Weapons.getWeapon(RPGClass.NINJA, gearLevel.getWeaponAndPassiveNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(Weapons.getWeapon(RPGClass.ROGUE, gearLevel.getWeaponAndPassiveNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.PALADIN, gearLevel.getWeaponAndPassiveNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.MAGE, gearLevel.getWeaponAndPassiveNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.KNIGHT, gearLevel.getWeaponAndPassiveNo(), tier, itemTag, minStatValue, maxStatValue, minNumberofStats));

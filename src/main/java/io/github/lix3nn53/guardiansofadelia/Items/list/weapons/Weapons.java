@@ -12,7 +12,7 @@ public class Weapons {
             return Axes.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.ARCHER)) {
             return Bows.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
-        } else if (rpgClass.equals(RPGClass.NINJA)) {
+        } else if (rpgClass.equals(RPGClass.ROGUE)) {
             return Daggers.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
             return Hammers.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);

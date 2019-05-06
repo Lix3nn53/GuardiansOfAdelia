@@ -87,7 +87,7 @@ public class TutorialManager {
             ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
             changeClassOfItemToTutorialClass(shield, rpgClass);
             player.getInventory().setItemInOffHand(shield);
-        } else if (rpgClass.equals(RPGClass.NINJA)) {
+        } else if (rpgClass.equals(RPGClass.ROGUE)) {
             player.getInventory().setItemInOffHand(mainHand);
         }
 

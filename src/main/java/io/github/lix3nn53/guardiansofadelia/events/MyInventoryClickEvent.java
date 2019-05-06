@@ -18,6 +18,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
+import io.github.lix3nn53.guardiansofadelia.jobs.Job;
+import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
@@ -275,8 +277,8 @@ public class MyInventoryClickEvent implements Listener {
                     characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.KNIGHT);
                 } else if (currentName.contains("Paladin")) {
                     characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.PALADIN);
-                } else if (currentName.contains("Ninja")) {
-                    characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.NINJA);
+                } else if (currentName.contains("Rogue")) {
+                    characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.ROGUE);
                 } else if (currentName.contains("Archer")) {
                     characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.ARCHER);
                 } else if (currentName.contains("Mage")) {
@@ -321,7 +323,7 @@ public class MyInventoryClickEvent implements Listener {
                 } else if (currentName.equals(ChatColor.DARK_GREEN + "Elements")) {
                     SkillAPIUtils.openAttributeMenu(player);
                 } else if (currentName.equals(ChatColor.YELLOW + "Job")) {
-                    GuiGeneric job = MenuList.job();
+                    GuiGeneric job = MenuList.job(player);
                     job.openInventory(player);
                 } else if (currentName.equals(ChatColor.AQUA + "Chat Tag")) {
                     GuiGeneric chatTag = MenuList.chatTag();
@@ -416,6 +418,22 @@ public class MyInventoryClickEvent implements Listener {
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
                 CompassManager.setCompassItemNPC(player, i);
+            }
+        } else if (title.equals(ChatColor.YELLOW + "Job")) {
+            if (rpgCharacter != null) {
+                if (!rpgCharacter.hasJob()) {
+                    if (current.getType().equals(Material.RED_WOOL)) {
+                        rpgCharacter.setJob(new Job(JobType.WEAPONSMITH));
+                    } else if (current.getType().equals(Material.LIGHT_BLUE_WOOL)) {
+                        rpgCharacter.setJob(new Job(JobType.ARMORSMITH));
+                    } else if (current.getType().equals(Material.MAGENTA_WOOL)) {
+                        rpgCharacter.setJob(new Job(JobType.ALCHEMIST));
+                    } else if (current.getType().equals(Material.YELLOW_WOOL)) {
+                        rpgCharacter.setJob(new Job(JobType.JEWELLER));
+                    }
+                    GuiGeneric job = MenuList.job(player);
+                    job.openInventory(player);
+                }
             }
         } else if (title.equals(ChatColor.DARK_PURPLE + "Guild")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {

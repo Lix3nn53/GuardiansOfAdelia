@@ -76,7 +76,7 @@ public class CharacterSelectionMenuList {
 
         ItemStack s4 = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(10000011);
-        itemMeta.setDisplayName(ChatColor.BLUE + "Ninja");
+        itemMeta.setDisplayName(ChatColor.BLUE + "Rogue");
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GREEN + "❤ Health: ▋▋▋");
@@ -87,7 +87,7 @@ public class CharacterSelectionMenuList {
             add(ChatColor.BLUE + "✦ Magic Defense: ▋▋");
             add("");
             add(ChatColor.YELLOW + "Due to their incredible speed and agility,");
-            add(ChatColor.YELLOW + "Ninjas are an expert at dealing");
+            add(ChatColor.YELLOW + "Rogues are an expert at dealing");
             add(ChatColor.YELLOW + "damage in a short amount of time!");
         }});
         s4.setItemMeta(itemMeta);

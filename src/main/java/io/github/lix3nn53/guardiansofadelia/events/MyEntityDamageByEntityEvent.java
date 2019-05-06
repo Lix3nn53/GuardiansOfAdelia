@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
-import io.github.lix3nn53.guardiansofadelia.creatures.MobExperienceList;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -18,6 +17,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.List;
@@ -32,7 +32,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
         double finalDamage = event.getFinalDamage();
 
         if (target.getType().equals(EntityType.PLAYER)) { //player is target
-
+            int customDamage = getCustomDamage(damager);
+            if (customDamage > 0) {
+                event.setDamage(customDamage);
+            }
         } else {
             if (damager.getType().equals(EntityType.PLAYER)) { //player is attacker
                 Player player = (Player) damager;
@@ -72,8 +75,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     //on Kill
                     if (finalDamage >= livingTarget.getHealth()) {
 
-                        if (livingTarget.isCustomNameVisible()) {
-                            SkillAPIUtils.giveMobExp(player, MobExperienceList.getExperience(livingTarget.getCustomName()));
+                        int experience = getExperience(livingTarget);
+                        if (experience > 0) {
+                            SkillAPIUtils.giveMobExp(player, experience);
                         }
 
                         //progress kill tasks
@@ -100,4 +104,19 @@ public class MyEntityDamageByEntityEvent implements Listener {
         FakeIndicator.showPlayer(player, text, target.getLocation());
     }
 
+    private static int getExperience(Entity entity) {
+        if (entity.hasMetadata("experience")) {
+            List<MetadataValue> metadataValues = entity.getMetadata("experience");
+            return metadataValues.get(0).asInt();
+        }
+        return 0;
+    }
+
+    private static int getCustomDamage(Entity entity) {
+        if (entity.hasMetadata("customDamage")) {
+            List<MetadataValue> metadataValues = entity.getMetadata("customDamage");
+            return metadataValues.get(0).asInt();
+        }
+        return 0;
+    }
 }

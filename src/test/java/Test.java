@@ -1,6 +1,5 @@
 
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,14 +9,14 @@ public class Test {
 
     public static void main(String[] args) {
 
-        System.out.println(Material.values().toString());
+        printClassStats();
     }
 
     private static double expFormula(int level) {
         return 10 + Math.round(5 * Math.pow(level, 3) / 4);
     }
 
-    private void asd() {
+    private static void asd() {
         final DatabaseQueries databaseQueries = new DatabaseQueries();
 
         databaseQueries.createTables();
@@ -54,18 +53,25 @@ public class Test {
 
         //exp formula
         List<Integer> monstersToKill = new ArrayList<>();
-        monstersToKill.add(10);
-        monstersToKill.add(70);
-        monstersToKill.add(120);
+        monstersToKill.add(30);
+        monstersToKill.add(80);
+        monstersToKill.add(110);
+        monstersToKill.add(150);
         monstersToKill.add(180);
-        monstersToKill.add(220);
-        monstersToKill.add(280);
+        monstersToKill.add(230);
+        monstersToKill.add(260);
+        monstersToKill.add(290);
+        monstersToKill.add(320);
         monstersToKill.add(360);
+        monstersToKill.add(400);
         monstersToKill.add(450);
-        monstersToKill.add(580);
-        monstersToKill.add(700);
-
-        int registration = 1;
+        monstersToKill.add(500);
+        monstersToKill.add(550);
+        monstersToKill.add(600);
+        monstersToKill.add(680);
+        monstersToKill.add(750);
+        monstersToKill.add(820);
+        monstersToKill.add(900);
 
         for (int lvl = 0; lvl <=90; lvl++) {
             //double exp = x * lvl * lvl + y * lvl + z;
@@ -73,29 +79,29 @@ public class Test {
             System.out.println("Level " + lvl + " TotalExp: " + exp);
         }
 
-        for (int lvl = 0; lvl <=90; lvl++) {
+        for (int lvl = 0; lvl <=90; lvl+=5) {
             //double exp = x * lvl * lvl + y * lvl + z;
             double exp = expFormula(lvl);
-            int i = (int) (lvl / 10 + 0.5);
+            int i = (int) (lvl / 5 + 0.5);
             System.out.println("Level " + lvl + " MobKill: " + monstersToKill.get(i));
         }
 
         for (int lvl = 0; lvl <=90; lvl++) {
             //double exp = x * lvl * lvl + y * lvl + z;
             double exp = expFormula(lvl);
-            int i = (int) (lvl / 10 + 0.5);
+            int i = (int) (lvl / 5 + 0.5);
             System.out.println("Level " + lvl + " ExpPerMob: " + exp / monstersToKill.get(i));
         }
 
-        for (int lvl = 0; lvl <=90; lvl+=10) {
+        for (int lvl = 0; lvl <=90; lvl+=5) {
             //double exp = x * lvl * lvl + y * lvl + z;
             double exp = expFormula(lvl);
-            int i = (int) (lvl / 10 + 0.5);
+            int i = (int) (lvl / 5 + 0.5);
             System.out.println("Level " + lvl + " ExpPerMob: " + exp / monstersToKill.get(i));
         }
     }
 
-    private void printClassStats() {
+    private static void printClassStats() {
         HashMap<String, Integer> classToMaxHP = new HashMap<>();
         HashMap<String, Integer> classToMaxMP = new HashMap<>();
         HashMap<String, Integer> classToMaxDMG = new HashMap<>();
@@ -107,7 +113,7 @@ public class Test {
         classes.add("knight");
         classes.add("paladin");
         classes.add("warrior");
-        classes.add("ninja");
+        classes.add("rogue");
         classes.add("archer");
         classes.add("mage");
         classes.add("monk");
@@ -148,7 +154,7 @@ public class Test {
                 mdmg = 1;
                 def = 3;
                 mdef = 2;
-            } else if (clas.equals("ninja")) {
+            } else if (clas.equals("rogue")) {
                 hp = 3;
                 mp = 3;
                 dmg = 5;
@@ -242,7 +248,7 @@ public class Test {
         classes.add("knight");
         classes.add("paladin");
         classes.add("warrior");
-        classes.add("ninja");
+        classes.add("rogue");
         classes.add("archer");
         classes.add("mage");
         classes.add("monk");
@@ -283,7 +289,7 @@ public class Test {
                 mdmg = 1;
                 def = 3;
                 mdef = 2;
-            } else if (clas.equals("ninja")) {
+            } else if (clas.equals("rogue")) {
                 hp = 3;
                 mp = 4;
                 dmg = 5;

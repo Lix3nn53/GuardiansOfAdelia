@@ -4,6 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -186,9 +188,87 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric job() {
+    public static GuiGeneric job(Player player) {
         GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.YELLOW + "Job", 0);
 
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                if (activeCharacter.hasJob()) {
+                    Job job = activeCharacter.getJob();
+
+                    ItemStack character = new ItemStack(Material.PLAYER_HEAD);
+                    SkullMeta skullMeta = (SkullMeta) character.getItemMeta();
+                    skullMeta.setDisplayName(ChatColor.YELLOW + "Character Job");
+                    skullMeta.setLore(new ArrayList() {{
+                        add("");
+                        add(ChatColor.WHITE + "Job: " + job.getJobType().getName());
+                        add(ChatColor.WHITE + "Job level: " + job.getLevel());
+                        add(ChatColor.WHITE + "Job experience: " + job.getExperience());
+                    }});
+                    character.setItemMeta(skullMeta);
+                    guiGeneric.setItem(28, character);
+
+                    ItemStack jobGuide = new ItemStack(Material.PLAYER_HEAD);
+                    ItemMeta itemMeta = jobGuide.getItemMeta();
+                    itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Crafting Guide");
+                    itemMeta.setLore(new ArrayList() {{
+                        add("");
+                        add(ChatColor.RED + "Weaponsmith");
+                        add("Left click any a/b/c block to start crafting");
+                        add(ChatColor.AQUA + "Armorsmith");
+                        add("Left click any a/b/c block to start crafting");
+                        add(ChatColor.LIGHT_PURPLE + "Alchemist");
+                        add("Left click any a/b/c block to start crafting");
+                        add(ChatColor.GOLD + "Jeweller");
+                        add("Left click any a/b/c block to start crafting");
+                    }});
+                    jobGuide.setItemMeta(itemMeta);
+                    guiGeneric.setItem(28, jobGuide);
+
+                } else {
+                    ItemStack weapon = new ItemStack(Material.RED_WOOL);
+                    ItemMeta itemMeta = weapon.getItemMeta();
+                    itemMeta.setDisplayName(ChatColor.RED + "Select Weaponsmith");
+                    itemMeta.setLore(new ArrayList() {{
+                        add("");
+                        add(ChatColor.GRAY + "Create weapons!");
+
+                    }});
+                    weapon.setItemMeta(itemMeta);
+                    guiGeneric.setItem(9, weapon);
+
+                    ItemStack armor = new ItemStack(Material.LIGHT_BLUE_WOOL);
+                    itemMeta.setDisplayName(ChatColor.AQUA + "Select Armorsmith");
+                    itemMeta.setLore(new ArrayList() {{
+                        add("");
+                        add(ChatColor.GRAY + "Create armors!");
+                    }});
+                    armor.setItemMeta(itemMeta);
+                    guiGeneric.setItem(11, armor);
+
+                    ItemStack alchemist = new ItemStack(Material.MAGENTA_WOOL);
+                    itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Select Alchemist");
+                    itemMeta.setLore(new ArrayList() {{
+                        add("");
+                        add(ChatColor.GRAY + "Create magical items!");
+                    }});
+                    alchemist.setItemMeta(itemMeta);
+                    guiGeneric.setItem(13, alchemist);
+
+                    ItemStack jeweller = new ItemStack(Material.YELLOW_WOOL);
+                    itemMeta.setDisplayName(ChatColor.GOLD + "Select Jeweller");
+                    itemMeta.setLore(new ArrayList() {{
+                        add("");
+                        add(ChatColor.GRAY + "Create jewelries!");
+                    }});
+                    jeweller.setItemMeta(itemMeta);
+                    guiGeneric.setItem(15, jeweller);
+                }
+            }
+        }
 
         return guiGeneric;
     }

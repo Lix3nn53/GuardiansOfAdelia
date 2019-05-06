@@ -24,54 +24,49 @@ public class CraftingGuiManager {
         ItemStack itemStack = new ItemStack(Material.STONE_PICKAXE, 10);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setCustomModelData(10000036);
-        itemMeta.setDisplayName(ChatColor.GOLD + "Level 10~19");
+        itemMeta.setDisplayName(ChatColor.GOLD + "Level 20~29");
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GRAY + "Click to craft items of this level.");
         }});
-
-        itemStack.setItemMeta(itemMeta);
-        guiGeneric.setItem(9, itemStack);
-
-        itemMeta.setDisplayName(ChatColor.GOLD + "Level 20~29");
         itemStack.setItemMeta(itemMeta);
         itemStack.setAmount(20);
-        guiGeneric.setItem(10, itemStack);
+        guiGeneric.setItem(9, itemStack);
 
         itemMeta.setDisplayName(ChatColor.GOLD + "Level 30~39");
         itemStack.setItemMeta(itemMeta);
         itemStack.setAmount(30);
-        guiGeneric.setItem(11, itemStack);
+        guiGeneric.setItem(10, itemStack);
 
         itemMeta.setDisplayName(ChatColor.GOLD + "Level 40~49");
         itemStack.setItemMeta(itemMeta);
         itemStack.setAmount(40);
-        guiGeneric.setItem(12, itemStack);
+        guiGeneric.setItem(11, itemStack);
 
         itemMeta.setDisplayName(ChatColor.GOLD + "Level 50~59");
         itemStack.setItemMeta(itemMeta);
         itemStack.setAmount(50);
-        guiGeneric.setItem(13, itemStack);
+        guiGeneric.setItem(12, itemStack);
 
         itemMeta.setDisplayName(ChatColor.GOLD + "Level 60~69");
         itemStack.setItemMeta(itemMeta);
         itemStack.setAmount(60);
-        guiGeneric.setItem(14, itemStack);
+        guiGeneric.setItem(13, itemStack);
 
         itemMeta.setDisplayName(ChatColor.GOLD + "Level 70~79");
         itemStack.setItemMeta(itemMeta);
         itemStack.setAmount(70);
-        guiGeneric.setItem(15, itemStack);
+        guiGeneric.setItem(14, itemStack);
 
         itemMeta.setDisplayName(ChatColor.GOLD + "Level 80~89");
         itemStack.setItemMeta(itemMeta);
         itemStack.setAmount(80);
-        guiGeneric.setItem(16, itemStack);
+        guiGeneric.setItem(15, itemStack);
 
         itemMeta.setDisplayName(ChatColor.GOLD + "Level 90~99");
         itemStack.setItemMeta(itemMeta);
         itemStack.setAmount(90);
-        guiGeneric.setItem(17, itemStack);
+        guiGeneric.setItem(16, itemStack);
 
         return guiGeneric;
     }
@@ -90,7 +85,7 @@ public class CraftingGuiManager {
             itemStackList = ItemPoolGenerator.generatePotions(tier, itemTag, gearLevel);
             itemStackList.addAll(ItemPoolGenerator.generateBuffScrolls(tier, itemTag, gearLevel));
         } else if (this.equals(JobType.ARMORSMITH)) {
-            itemTag = "Armorsmith's ";
+            itemTag = "Armorsmith's";
             itemStackList = ItemPoolGenerator.generateArmors(tier, itemTag, gearLevel);
         } else if (this.equals(JobType.JEWELLER)) {
             itemTag = "Jeweller's";
