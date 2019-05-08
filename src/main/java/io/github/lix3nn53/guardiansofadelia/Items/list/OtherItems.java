@@ -54,4 +54,16 @@ public class OtherItems {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
+
+    public static ItemStack getSaddle() {
+        ItemStack itemStack = new ItemStack(Material.SADDLE);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Saddle");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Required to control mounts.");
+        }});
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
 }

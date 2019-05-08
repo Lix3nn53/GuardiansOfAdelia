@@ -428,9 +428,11 @@ public class Enchant {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasCustomModelData()) {
             int customModelData = itemMeta.getCustomModelData();
-            customModelData++;
-            itemMeta.setCustomModelData(customModelData);
-            itemStack.setItemMeta(itemMeta);
+            if (customModelData >= 6) {
+                customModelData++;
+                itemMeta.setCustomModelData(customModelData);
+                itemStack.setItemMeta(itemMeta);
+            }
         }
     }
 
@@ -438,9 +440,11 @@ public class Enchant {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasCustomModelData()) {
             int customModelData = itemMeta.getCustomModelData();
-            customModelData--;
-            itemMeta.setCustomModelData(customModelData);
-            itemStack.setItemMeta(itemMeta);
+            if (customModelData >= 7) {
+                customModelData--;
+                itemMeta.setCustomModelData(customModelData);
+                itemStack.setItemMeta(itemMeta);
+            }
         }
     }
 }

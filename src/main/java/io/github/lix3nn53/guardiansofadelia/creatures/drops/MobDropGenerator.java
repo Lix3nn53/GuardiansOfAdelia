@@ -2,10 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.creatures.drops;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
-import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
@@ -13,11 +10,10 @@ import org.bukkit.metadata.MetadataValue;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 class MobDropGenerator {
 
-    public static ItemStack getDrop(Entity entity) {
+    public static List<ItemStack> getDrops(Entity entity) {
         int dropTableNumber = getDropTableNumber(entity);
         List<ItemStack> dropTable = new ArrayList<ItemStack>();
 
@@ -63,13 +59,15 @@ class MobDropGenerator {
             dropTable.addAll(ItemPoolGenerator.generatePassives(ItemTier.RARE, "", GearLevel.NINE));
         }
 
+        List<ItemStack> drops = new ArrayList<>();
+
         Collections.shuffle(dropTable);
         double random = Math.random();
         if (random < 0.1D) {
-            return dropTable.get(0);
+            drops.add(dropTable.get(0));
         }
 
-        return new ItemStack(Material.AIR);
+        return drops;
     }
 
     private static int getDropTableNumber(Entity entity) {

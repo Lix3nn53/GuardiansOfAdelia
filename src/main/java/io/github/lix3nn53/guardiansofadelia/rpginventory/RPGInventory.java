@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.rpginventory;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.*;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
@@ -143,10 +144,6 @@ public class RPGInventory {
         return false;
     }
 
-    public void clearParrot() {
-        this.parrotSlot.clearItemOnSlot();
-    }
-
     public boolean setEarring(ItemStack itemStack, Player player) {
         if (this.earringSlot.doesFit(itemStack)) {
             this.earringSlot.setItemOnSlot(itemStack);
@@ -154,10 +151,6 @@ public class RPGInventory {
             return true;
         }
         return false;
-    }
-
-    public void clearEarring() {
-        this.earringSlot.clearItemOnSlot();
     }
 
     public boolean setNecklace(ItemStack itemStack, Player player) {
@@ -169,10 +162,6 @@ public class RPGInventory {
         return false;
     }
 
-    public void clearNecklace() {
-        this.necklaceSlot.clearItemOnSlot();
-    }
-
     public boolean setGlove(ItemStack itemStack, Player player) {
         if (this.gloveSlot.doesFit(itemStack)) {
             this.gloveSlot.setItemOnSlot(itemStack);
@@ -180,10 +169,6 @@ public class RPGInventory {
             return true;
         }
         return false;
-    }
-
-    public void clearGlove() {
-        this.gloveSlot.clearItemOnSlot();
     }
 
     public boolean setRing(ItemStack itemStack, Player player) {
@@ -195,20 +180,13 @@ public class RPGInventory {
         return false;
     }
 
-    public void clearRing() {
-        this.ringSlot.clearItemOnSlot();
-    }
-
     public boolean setPet(ItemStack itemStack, Player player) {
         if (this.petSlot.doesFit(itemStack)) {
             this.petSlot.setItemOnSlot(itemStack);
+            PetManager.onEggEquipEvent(player);
             return true;
         }
         return false;
-    }
-
-    public void clearPet() {
-        this.petSlot.clearItemOnSlot();
     }
 
     public boolean setHelmet(ItemStack itemStack, Player player) {
@@ -302,44 +280,43 @@ public class RPGInventory {
     public boolean onShiftClick(ItemStack itemStack, Player player, int slot, Inventory topInventory) {
         ItemStack oldItemOnSlot = null;
         boolean change = false;
-        int topSlot = 0;
+        RPGSlotType rpgSlotType = null;
         if (parrotSlot.doesFit(itemStack)) {
             if (!parrotSlot.isEmpty()) {
                 oldItemOnSlot = parrotSlot.getItemOnSlot();
             }
             change = setParrot(itemStack, player);
-            topSlot = RPGSlotType.PARROT.getSlotNo();
-            manageShoulderEntity(player);
+            rpgSlotType = RPGSlotType.PARROT;
         } else if (earringSlot.doesFit(itemStack)) {
             if (!earringSlot.isEmpty()) {
                 oldItemOnSlot = earringSlot.getItemOnSlot();
             }
             change = setEarring(itemStack, player);
-            topSlot = RPGSlotType.EARRING.getSlotNo();
+            rpgSlotType = RPGSlotType.EARRING;
         } else if (necklaceSlot.doesFit(itemStack)) {
             if (!necklaceSlot.isEmpty()) {
                 oldItemOnSlot = necklaceSlot.getItemOnSlot();
             }
             change = setNecklace(itemStack, player);
-            topSlot = RPGSlotType.NECKLACE.getSlotNo();
+            rpgSlotType = RPGSlotType.NECKLACE;
         } else if (gloveSlot.doesFit(itemStack)) {
             if (!gloveSlot.isEmpty()) {
                 oldItemOnSlot = gloveSlot.getItemOnSlot();
             }
             change = setGlove(itemStack, player);
-            topSlot = RPGSlotType.GLOVE.getSlotNo();
+            rpgSlotType = RPGSlotType.GLOVE;
         } else if (ringSlot.doesFit(itemStack)) {
             if (!ringSlot.isEmpty()) {
                 oldItemOnSlot = ringSlot.getItemOnSlot();
             }
             change = setRing(itemStack, player);
-            topSlot = RPGSlotType.RING.getSlotNo();
+            rpgSlotType = RPGSlotType.RING;
         } else if (petSlot.doesFit(itemStack)) {
             if (!petSlot.isEmpty()) {
                 oldItemOnSlot = petSlot.getItemOnSlot();
             }
             change = setPet(itemStack, player);
-            topSlot = RPGSlotType.PET.getSlotNo();
+            rpgSlotType = RPGSlotType.PET;
         }
         if (change) {
             if (oldItemOnSlot != null) {
@@ -347,8 +324,14 @@ public class RPGInventory {
             } else {
                 player.getInventory().setItem(slot, new ItemStack(Material.AIR));
             }
-            topInventory.setItem(topSlot, itemStack);
+            topInventory.setItem(rpgSlotType.getSlotNo(), itemStack);
             topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+            if (rpgSlotType.equals(RPGSlotType.PARROT)) {
+                manageShoulderEntity(player);
+            }
+            if (rpgSlotType.equals(RPGSlotType.PET)) {
+                PetManager.onEggEquipEvent(player);
+            }
         }
         return change;
     }
@@ -495,6 +478,7 @@ public class RPGInventory {
                 if (didEquip) {
                     player.setItemOnCursor(itemOnSlot);
                     topInventory.setItem(slot, cursor);
+                    PetManager.onEggEquipEvent(player);
                     return true;
                 }
             } else {
@@ -502,6 +486,7 @@ public class RPGInventory {
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
                     topInventory.setItem(slot, cursor);
+                    PetManager.onEggEquipEvent(player);
                     return true;
                 }
             }
@@ -597,6 +582,7 @@ public class RPGInventory {
                 }
                 rpgSlot.clearItemOnSlot();
                 topInventory.setItem(slot, petSlot.getFillItem());
+                PetManager.onEggEquipEvent(player);
                 return true;
             }
         }
@@ -632,11 +618,11 @@ public class RPGInventory {
         }
         if (!petSlot.isEmpty()) {
             petSlot.clearItemOnSlot();
+            PetManager.onEggEquipEvent(player);
         }
     }
 
     private void manageShoulderEntity(Player player) {
-        player.setShoulderEntityLeft(null);
         if (!this.parrotSlot.isEmpty()) {
             ItemStack itemOnSlot = this.parrotSlot.getItemOnSlot();
             Parrot parrot = (Parrot) player.getWorld().spawnEntity(player.getLocation(), EntityType.PARROT);
@@ -654,6 +640,8 @@ public class RPGInventory {
                 parrot.setVariant(Parrot.Variant.CYAN);
             }
             player.setShoulderEntityLeft(parrot);
+        } else {
+            player.setShoulderEntityLeft(null);
         }
     }
 }

@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
 import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -19,9 +20,9 @@ public class PetMount implements RPGGear {
     private final int level;
     private ItemStack itemStack;
 
-    public PetMount(String name, String petCode, ItemTier tier, String itemTag, Material material, int durability, int level,
+    public PetMount(Mount mount, ItemTier tier, String itemTag, Material material, int durability, int level,
                     int health, double speed, double jump, int itemID) {
-        name = tier.getTierColor() + itemTag + " " + name;
+        String name = tier.getTierColor() + itemTag + " " + mount.getName();
 
         List<String> lore = new ArrayList<>();
 
@@ -29,18 +30,21 @@ public class PetMount implements RPGGear {
         lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Mount");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         lore.add(ChatColor.YELLOW + "----------------");
-        lore.add(tier.getTierString());
+        lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + "1");
+        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / 20");
         lore.add(ChatColor.YELLOW + "----------------");
-        lore.add(ChatColor.DARK_GREEN + "❤ Companion Health: " + ChatColor.GRAY + health);
-        lore.add(ChatColor.AQUA + "⇨ Companion Speed: " + ChatColor.GRAY + speed);
-        lore.add(ChatColor.YELLOW + "⇪ Companion Jump: " + ChatColor.GRAY + jump);
+        lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + health);
+        lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + speed);
+        lore.add(ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + jump);
         lore.add("");
         lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 
         this.itemStack = new ItemStack(material);
         this.itemStack = NBTTagUtils.putInteger("reqLevel", level, this.itemStack);
-        this.itemStack = NBTTagUtils.putString("petCode", petCode, this.itemStack);
-        this.itemStack = NBTTagUtils.putInteger("petCurrentHealth", level, this.itemStack);
+        this.itemStack = NBTTagUtils.putString("petCode", mount.toString(), this.itemStack);
+        this.itemStack = NBTTagUtils.putInteger("petLevel", 1, this.itemStack);
+        this.itemStack = NBTTagUtils.putInteger("petExp", 1, this.itemStack);
+        this.itemStack = NBTTagUtils.putInteger("petCurrentHealth", health, this.itemStack);
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);

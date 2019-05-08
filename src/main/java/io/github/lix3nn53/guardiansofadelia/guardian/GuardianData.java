@@ -35,8 +35,6 @@ public class GuardianData {
 
     private Gui activeGui;
 
-    private LivingEntity pet;
-
     private boolean isTeleporting;
     private boolean isGathering;
     private boolean isConsuming;
@@ -190,14 +188,6 @@ public class GuardianData {
                 .filter(item -> item.equals(buff))
                 .findAny();
         return buffOptional.isPresent();
-    }
-
-    public LivingEntity getPet() {
-        return pet;
-    }
-
-    public void setPet(LivingEntity pet) {
-        this.pet = pet;
     }
 
     public Bazaar getBazaar() {

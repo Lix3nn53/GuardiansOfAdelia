@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.database;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
@@ -280,6 +281,7 @@ public class DatabaseQueries {
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setPet(ItemSerializer.restoreModdedItem(pet), player));
+                    Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> PetManager.onEggEquipEvent(player), 80L);
                 }
 
                 String jobString = resultSet.getString("job_type");

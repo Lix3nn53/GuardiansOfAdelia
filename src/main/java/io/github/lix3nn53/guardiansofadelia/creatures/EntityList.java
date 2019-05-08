@@ -852,6 +852,7 @@ public class EntityList {
     /**
      * Use this is entity doesn't have the GENERIC_ATTACK_DAMAGE attribute but can attack
      * For example slimes and killer rabbits
+     *
      * @param entity
      * @param customDamage
      */

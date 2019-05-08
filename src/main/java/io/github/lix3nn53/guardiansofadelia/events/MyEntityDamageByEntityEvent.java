@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.events;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -24,6 +25,22 @@ import java.util.List;
 import java.util.UUID;
 
 public class MyEntityDamageByEntityEvent implements Listener {
+
+    private static int getExperience(Entity entity) {
+        if (entity.hasMetadata("experience")) {
+            List<MetadataValue> metadataValues = entity.getMetadata("experience");
+            return metadataValues.get(0).asInt();
+        }
+        return 0;
+    }
+
+    private static int getCustomDamage(Entity entity) {
+        if (entity.hasMetadata("customDamage")) {
+            List<MetadataValue> metadataValues = entity.getMetadata("customDamage");
+            return metadataValues.get(0).asInt();
+        }
+        return 0;
+    }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEvent(EntityDamageByEntityEvent event) {
@@ -55,6 +72,33 @@ public class MyEntityDamageByEntityEvent implements Listener {
         //if living entity
         if (event.getEntity() instanceof LivingEntity) {
             LivingEntity livingTarget = (LivingEntity) target;
+
+            //on player attack to pet
+            if (target.getType().equals(EntityType.WOLF) || target.getType().equals(EntityType.HORSE)) {
+                boolean pvp = livingTarget.getWorld().getPVP();
+                if (pvp) {
+                    if (PetManager.isPet(livingTarget)) {
+                        Player owner = PetManager.getOwner(livingTarget);
+                        //attack own pet
+                        if (owner.equals(player)) {
+                            event.setCancelled(true);
+                            return;
+                        } else {
+                            //attack pet of party member
+                            if (PartyManager.inParty(player)) {
+                                if (PartyManager.getParty(player).getMembers().contains(owner)) {
+                                    event.setCancelled(true);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    event.setCancelled(true);
+                    return;
+                }
+            }
+
             //show bossbar
             HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5));
             HealthBarManager.showToPlayerFor10Seconds(player, healthBar);
@@ -102,21 +146,5 @@ public class MyEntityDamageByEntityEvent implements Listener {
         //indicator
         String text = ChatColor.RED.toString() + (int) (finalDamage + 0.5) + " ➹";
         FakeIndicator.showPlayer(player, text, target.getLocation());
-    }
-
-    private static int getExperience(Entity entity) {
-        if (entity.hasMetadata("experience")) {
-            List<MetadataValue> metadataValues = entity.getMetadata("experience");
-            return metadataValues.get(0).asInt();
-        }
-        return 0;
-    }
-
-    private static int getCustomDamage(Entity entity) {
-        if (entity.hasMetadata("customDamage")) {
-            List<MetadataValue> metadataValues = entity.getMetadata("customDamage");
-            return metadataValues.get(0).asInt();
-        }
-        return 0;
     }
 }

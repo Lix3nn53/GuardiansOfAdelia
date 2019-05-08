@@ -1,6 +1,8 @@
-package io.github.lix3nn53.guardiansofadelia.pets;
+package io.github.lix3nn53.guardiansofadelia.creatures.pets;
 
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Horse;
+import org.bukkit.entity.Wolf;
 
 public enum PetType {
     COMPANION,
@@ -11,6 +13,6 @@ public enum PetType {
     }
 
     public static boolean isMount(Entity entity) {
-        return entity instanceof Horse || entity instanceof Donkey || entity instanceof Mule;
+        return entity instanceof Horse;
     }
 }
