@@ -5,6 +5,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Monster;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -60,6 +61,19 @@ public class SpawnerManager {
             @Override
             public void run() {
                 int howManyEachTime = 50;
+                for (Entity entity : mobToSpawner.keySet()) {
+                    if (!entity.isDead()) {
+                        Spawner spawner = mobToSpawner.get(entity);
+                        Location location = spawner.getLocation();
+                        double v = location.distanceSquared(entity.getLocation());
+                        if (v >= 1453) {
+                            entity.teleport(location);
+                            if (entity instanceof Monster) {
+                                ((Monster) entity).setTarget(null);
+                            }
+                        }
+                    }
+                }
                 for (int i = 0; i < activeSpawners.size(); i += howManyEachTime) {
                     List<Spawner> sub = activeSpawners.subList(i, Math.min(activeSpawners.size(), i + howManyEachTime));
 

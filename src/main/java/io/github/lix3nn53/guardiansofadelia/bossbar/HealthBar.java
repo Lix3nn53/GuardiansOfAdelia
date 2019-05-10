@@ -28,7 +28,7 @@ public class HealthBar {
         setVisible();
     }
 
-    public HealthBar(LivingEntity livingTarget, int damage) {
+    public HealthBar(LivingEntity livingTarget, int damage, boolean isPet) {
         double maxHealth = livingTarget.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         double currentHealth = livingTarget.getHealth() - damage;
         double progress = 0;
@@ -43,7 +43,12 @@ public class HealthBar {
             name = livingTarget.getCustomName();
         }
 
-        String title = (ChatColor.RED.toString() + damage + ChatColor.RED + "➹ " + name + " " + ChatColor.GREEN + (int) (currentHealth + 0.5) +
+        String damageIcon = "➹ ";
+        if (isPet) {
+            damageIcon = ">.< ";
+        }
+
+        String title = (ChatColor.RED.toString() + damage + ChatColor.RED + damageIcon + name + " " + ChatColor.GREEN + (int) (currentHealth + 0.5) +
                 ChatColor.GRAY + "/" + ChatColor.GREEN + (int) (maxHealth + 0.5) + ChatColor.RED + "❤");
 
         BarColor color = BarColor.GREEN;

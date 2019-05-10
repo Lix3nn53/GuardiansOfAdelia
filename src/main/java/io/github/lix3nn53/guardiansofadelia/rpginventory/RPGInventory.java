@@ -312,6 +312,9 @@ public class RPGInventory {
             change = setRing(itemStack, player);
             rpgSlotType = RPGSlotType.RING;
         } else if (petSlot.doesFit(itemStack)) {
+            if (PetManager.isPetDead(player)) {
+                return false;
+            }
             if (!petSlot.isEmpty()) {
                 oldItemOnSlot = petSlot.getItemOnSlot();
             }
@@ -471,6 +474,9 @@ public class RPGInventory {
                 }
             }
         } else if (slot == RPGSlotType.PET.getSlotNo()) {
+            if (PetManager.isPetDead(player)) {
+                return false;
+            }
             PetSlot rpgSlot = getPetSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
@@ -572,6 +578,9 @@ public class RPGInventory {
                 return true;
             }
         } else if (slot == RPGSlotType.PET.getSlotNo()) {
+            if (PetManager.isPetDead(player)) {
+                return false;
+            }
             PetSlot rpgSlot = getPetSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();

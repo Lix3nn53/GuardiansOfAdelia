@@ -9,7 +9,11 @@ public class Test {
 
     public static void main(String[] args) {
 
-        printClassStats();
+        for (int lvl = 0; lvl <=90; lvl++) {
+            //double exp = x * lvl * lvl + y * lvl + z;
+            double exp = expFormula(lvl);
+            System.out.println("Level " + lvl + " TotalExp: " + exp);
+        }
     }
 
     private static double expFormula(int level) {

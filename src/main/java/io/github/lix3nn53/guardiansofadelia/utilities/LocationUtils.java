@@ -10,29 +10,36 @@ import java.util.Random;
 
 public class LocationUtils {
 
-    public static Location getRandomSafeLocationNearPoint(Location paramLocation, int range) {
-        Block block = paramLocation.getBlock();
-        List<Location> localArrayList = new ArrayList<>();
+    private static final Random RANDOM = new Random();
 
-        World world = paramLocation.getWorld();
-        for (int i = block.getX() - range; i < block.getX() + range; i++) {
-            for (int j = block.getY() - range; j < block.getY() + range; j++) {
-                for (int k = block.getZ() - range; k < block.getZ() + range; k++) {
-                    Location newLocation = new Location(world, i, j, k).getBlock().getLocation();
-                    if (newLocation.getBlock().isPassable()) {
-                        Block newLocationDownBlock = newLocation.clone().subtract(0.0D, 1.0D, 0.0D).getBlock();
-                        if (!newLocationDownBlock.isEmpty() && !newLocationDownBlock.isLiquid()) {
-                            newLocation.setYaw(-180.0F + new Random().nextFloat() * 360.0F);
-                            localArrayList.add(newLocation);
+    public static Location getRandomSafeLocationNearPoint(Location location, int radius) {
+        Block playerBlock = location.getBlock();
+        List<Location> availableLocations = new ArrayList<>();
+
+        World world = location.getWorld();
+        for (int x = playerBlock.getX() - radius; x < playerBlock.getX() + radius; x++) {
+            for (int y = playerBlock.getY() - radius; y < playerBlock.getY() + radius; y++) {
+                for (int z = playerBlock.getZ() - radius; z < playerBlock.getZ() + radius; z++) {
+                    Location loc = getBlockCenter(new Location(world, x, y, z));
+                    if (loc.getBlock().isEmpty()) {
+                        Block underBlock = loc.clone().subtract(0, 1, 0).getBlock();
+                        if (!underBlock.isEmpty() && !underBlock.isLiquid()) {
+                            availableLocations.add(loc);
                         }
                     }
                 }
             }
         }
-        if (localArrayList.size() == 0) {
-            return block.getLocation().clone();
+
+        if (availableLocations.size() == 0) {
+            return getBlockCenter(playerBlock.getLocation().clone());
         }
-        return localArrayList.get(new Random().nextInt(localArrayList.size()));
+
+        return availableLocations.get(LocationUtils.RANDOM.nextInt(availableLocations.size()));
+    }
+
+    public static Location getBlockCenter(Location loc) {
+        return loc.add(0.5, 0, 0.5);
     }
 
     /*

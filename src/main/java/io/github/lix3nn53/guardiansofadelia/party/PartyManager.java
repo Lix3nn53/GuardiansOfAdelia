@@ -1,9 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.party;
 
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -42,8 +44,24 @@ public class PartyManager {
         }
     }
 
-    //QUEST PROGRESSES
+    public static void shareExpOnMobKill(Player player, int experience) {
+        if (inParty(player)) {
+            Party party = PartyManager.getParty(player);
+            List<Player> members = party.getMembers();
 
+            double expMultiplier = 1 - (0.1 * members.size());
+            if (expMultiplier < 0.5D) {
+                expMultiplier = 0.5D;
+            }
+            int expToGiveEachPlayer = (int) (experience * expMultiplier);
+            for (Player member : members) {
+                SkillAPIUtils.giveMobExp(member, expToGiveEachPlayer);
+                PetExperienceManager.giveExperienceToActivePet(member, expToGiveEachPlayer);
+            }
+        }
+    }
+
+    //QUEST PROGRESSES
 
     public static void progressDealDamageTasksOfOtherMembers(Player player, LivingEntity livingTarget, double finalDamage) {
         if (inParty(player)) {

@@ -8,7 +8,6 @@ import io.github.lix3nn53.guardiansofadelia.commands.*;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.events.*;
-import io.github.lix3nn53.guardiansofadelia.events.myskillapievents.MyPlayerExperienceGainEvent;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
@@ -83,9 +82,6 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
         Bukkit.getPluginManager().registerEvents(new MyPlayerJoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerQuitEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyProjectileLaunchEvent(), this);
-
-        //SkillAPI events
-        Bukkit.getPluginManager().registerEvents(new MyPlayerExperienceGainEvent(), this);
 
         //init managers
         ConfigManager.init();

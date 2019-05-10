@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.pets;
 
+import com.comphenix.protocol.utility.MinecraftReflection;
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -14,15 +16,23 @@ import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class PetManager {
 
     private static HashMap<LivingEntity, Player> petToPlayer = new HashMap<>();
     private static HashMap<Player, LivingEntity> playerToPet = new HashMap<>();
-    private static long respawnDelay = 20 * 60L;
+    private static double PET_MOVEMENT_SPEED = 0.75D;
+
+    private final static List<Player> deathPetPlayerList = new ArrayList<>();
+    private static long respawnDelay = 20 * 300L;
 
     public static void setPet(Player owner, LivingEntity pet) {
         petToPlayer.put(pet, owner);
@@ -52,61 +62,15 @@ public class PetManager {
         if (isCompanionCode(petCode)) {
             Companion companion = Companion.valueOf(petCode);
             String petName = companion.getName();
-            int damage = 1;
-            int maxHP = 100;
-            switch (petLevel) {
-                case 2:
-                    damage = 3;
-                    maxHP = 201;
-                    break;
-                case 3:
-                    damage = 2;
-                    maxHP = 200;
-                    break;
-                case 4:
-                    damage = 2;
-                    maxHP = 200;
-                    break;
-                case 5:
-                    damage = 2;
-                    maxHP = 200;
-                    break;
-                case 6:
-                    damage = 2;
-                    maxHP = 200;
-                    break;
-                case 7:
-                    damage = 2;
-                    maxHP = 200;
-                    break;
-                case 8:
-                    damage = 2;
-                    maxHP = 200;
-                    break;
-                case 9:
-                    damage = 2;
-                    maxHP = 200;
-                    break;
-                case 10:
-                    damage = 2;
-                    maxHP = 200;
-                    break;
-                case 11:
-                    damage = 2;
-                    maxHP = 200;
-                    break;
-                case 12:
-                    damage = 2;
-                    maxHP = 200;
-                    break;
-            }
+            int damage = getCompanionDamage(petLevel);
+            int maxHP = getCompanionHealth(petLevel);
 
             if (currentHP <= 0) {
                 currentHP = (int) ((maxHP * 0.4) + 0.5);
             }
 
             Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
-            petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
+            petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "LvL-" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
             Wolf wolf = (Wolf) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.WOLF);
             wolf.setAdult();
             wolf.setTamed(true);
@@ -122,73 +86,16 @@ public class PetManager {
             Horse.Color color = mount.getColor();
             ItemStack armor = new ItemStack(Material.AIR);
 
-            double movementSpeed = 1;
-            double jumpStrength = 1;
-            int maxHP = 100;
-            switch (petLevel) {
-                case 2:
-                    movementSpeed = 3;
-                    jumpStrength = 3;
-                    maxHP = 201;
-                    break;
-                case 3:
-                    movementSpeed = 3;
-                    jumpStrength = 3;
-                    maxHP = 200;
-                    break;
-                case 4:
-                    movementSpeed = 3;
-                    jumpStrength = 3;
-                    maxHP = 200;
-                    break;
-                case 5:
-                    movementSpeed = 3;
-                    jumpStrength = 3;
-                    maxHP = 200;
-                    break;
-                case 6:
-                    movementSpeed = 3;
-                    jumpStrength = 3;
-                    maxHP = 200;
-                    break;
-                case 7:
-                    movementSpeed = 3;
-                    jumpStrength = 3;
-                    maxHP = 200;
-                    break;
-                case 8:
-                    movementSpeed = 3;
-                    jumpStrength = 3;
-                    maxHP = 200;
-                    break;
-                case 9:
-                    movementSpeed = 3;
-                    jumpStrength = 3;
-                    maxHP = 200;
-                    break;
-                case 10:
-                    movementSpeed = 3;
-                    jumpStrength = 3;
-                    maxHP = 200;
-                    break;
-                case 11:
-                    movementSpeed = 3;
-                    jumpStrength = 3;
-                    maxHP = 200;
-                    break;
-                case 12:
-                    movementSpeed = 3;
-                    jumpStrength = 3;
-                    maxHP = 200;
-                    break;
-            }
+            double movementSpeed = getMountSpeed(petLevel);
+            double jumpStrength = getMountJump(petLevel);
+            int maxHP = getMountHealth(petLevel);
 
             if (currentHP <= 0) {
                 currentHP = (int) ((maxHP * 0.4) + 0.5);
             }
 
             Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
-            petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
+            petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "LvL-" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
             Horse horse = (Horse) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.HORSE);
             horse.setTamed(true);
             horse.setAdult();
@@ -206,7 +113,6 @@ public class PetManager {
         }
         return null;
     }
-
 
     private static boolean isCompanionCode(String id) {
         try {
@@ -226,6 +132,27 @@ public class PetManager {
 
         }
         return false;
+    }
+
+    public static void onPetDeath(LivingEntity livingEntity) {
+        if (isPet(livingEntity)) {
+            Player owner = getOwner(livingEntity);
+            deathPetPlayerList.add(owner);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    deathPetPlayerList.remove(owner);
+                    if (owner.isOnline()) {
+                        updateCurrentHealthSavedInEgg(livingEntity, (int) (livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2));
+                        repsawnPet(owner);
+                    }
+                }
+            }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 60 * 5L);
+        }
+    }
+
+    public static boolean isPetDead(Player player) {
+        return deathPetPlayerList.contains(player);
     }
 
     public static void onPetTakeDamage(LivingEntity livingEntity, double currentHealth, double finalDamage) {
@@ -302,5 +229,229 @@ public class PetManager {
                 }
             }
         }
+    }
+
+    public static void repsawnPet(Player player) {
+        if (hasActivePet(player)) {
+            removePet(player);
+            onEggEquipEvent(player);
+        }
+    }
+
+    private static Method craftEntity_getHandle, navigationAbstract_a, entityInsentient_getNavigation;
+    private static Class<?> entityInsentientClass = MinecraftReflection.getMinecraftClass("EntityInsentient");
+
+    static {
+        try {
+            craftEntity_getHandle = MinecraftReflection.getCraftEntityClass().getDeclaredMethod("getHandle");
+            entityInsentient_getNavigation = entityInsentientClass.getDeclaredMethod("getNavigation");
+            navigationAbstract_a = MinecraftReflection.getMinecraftClass("NavigationAbstract")
+                    .getDeclaredMethod("a", double.class, double.class, double.class, double.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void onPlayerMove(Player player) {
+        if (hasActivePet(player)) {
+            LivingEntity activePet = getActivePet(player);
+            if (!player.isOnline() || activePet.isDead()) {
+                return;
+            }
+
+            Location target = player.getLocation();
+
+            if (!target.getWorld().getName().equals(activePet.getLocation().getWorld().getName())) {
+                PetManager.teleportPet(player, activePet, null);
+                if (activePet.getType().equals(EntityType.WOLF)){ //clear wolf target
+                    Wolf wolf = (Wolf) activePet;
+                    wolf.setTarget(null);
+                }
+                return;
+            }
+
+            final double distance = target.distance(activePet.getLocation());
+            if (distance > 20D) {
+                PetManager.teleportPet(player, activePet, null);
+                if (activePet.getType().equals(EntityType.WOLF)){ //clear wolf target
+                    Wolf wolf = (Wolf) activePet;
+                    wolf.setTarget(null);
+                }
+            } else if (distance < 6D) {
+                return;
+            } else if (activePet.getType().equals(EntityType.WOLF)){ //if distance is between and pet is wolf which has a target, return
+                Wolf wolf = (Wolf) activePet;
+                LivingEntity wolfTarget = wolf.getTarget();
+                if (wolfTarget != null) {
+                    return;
+                }
+            }
+
+            double speedModifier = PET_MOVEMENT_SPEED;
+
+            try {
+                Object insentient = entityInsentientClass.cast(craftEntity_getHandle.invoke(activePet));
+                Object navigation = entityInsentient_getNavigation.invoke(insentient);
+                navigationAbstract_a.invoke(navigation, target.getX(), target.getY(), target.getZ(), speedModifier);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void teleportPet(final Player player, final LivingEntity pet, final Location to) {
+        Location baseLocation = to != null ? to : player.getLocation();
+        Location newPetLoc = LocationUtils.getRandomSafeLocationNearPoint(baseLocation, 4);
+        pet.teleport(newPetLoc);
+    }
+
+    public static int getCompanionHealth(int petLevel) {
+        switch (petLevel) {
+            case 1:
+                return 201;
+            case 2:
+                return 201;
+            case 3:
+                return 200;
+            case 4:
+                return 200;
+            case 5:
+                return 200;
+            case 6:
+                return 200;
+            case 7:
+                return 200;
+            case 8:
+                return 200;
+            case 9:
+                return 200;
+            case 10:
+                return 200;
+            case 11:
+                return 200;
+            case 12:
+                return 200;
+        }
+        return 200;
+    }
+
+    public static int getCompanionDamage(int petLevel) {
+        switch (petLevel) {
+            case 1:
+                return 201;
+            case 2:
+                return 201;
+            case 3:
+                return 200;
+            case 4:
+                return 200;
+            case 5:
+                return 200;
+            case 6:
+                return 200;
+            case 7:
+                return 200;
+            case 8:
+                return 200;
+            case 9:
+                return 200;
+            case 10:
+                return 200;
+            case 11:
+                return 200;
+            case 12:
+                return 200;
+        }
+        return 200;
+    }
+
+    public static int getMountHealth(int petLevel) {
+        switch (petLevel) {
+            case 1:
+                return 201;
+            case 2:
+                return 201;
+            case 3:
+                return 200;
+            case 4:
+                return 200;
+            case 5:
+                return 200;
+            case 6:
+                return 200;
+            case 7:
+                return 200;
+            case 8:
+                return 200;
+            case 9:
+                return 200;
+            case 10:
+                return 200;
+            case 11:
+                return 200;
+            case 12:
+                return 200;
+        }
+        return 200;
+    }
+
+    public static double getMountSpeed(int petLevel) {
+        switch (petLevel) {
+            case 1:
+                return 201;
+            case 2:
+                return 201;
+            case 3:
+                return 200;
+            case 4:
+                return 200;
+            case 5:
+                return 200;
+            case 6:
+                return 200;
+            case 7:
+                return 200;
+            case 8:
+                return 200;
+            case 9:
+                return 200;
+            case 10:
+                return 200;
+            case 11:
+                return 200;
+            case 12:
+                return 200;
+        }
+        return 200;
+    }
+
+    public static double getMountJump(int petLevel) {
+        switch (petLevel) {
+            case 1:
+                return 201;
+            case 2:
+                return 201;
+            case 3:
+                return 200;
+            case 4:
+                return 200;
+            case 5:
+                return 200;
+            case 6:
+                return 200;
+            case 7:
+                return 200;
+            case 8:
+                return 200;
+            case 9:
+                return 200;
+            case 10:
+                return 200;
+            case 11:
+                return 200;
+            case 12:
+                return 200;
+        }
+        return 200;
     }
 }

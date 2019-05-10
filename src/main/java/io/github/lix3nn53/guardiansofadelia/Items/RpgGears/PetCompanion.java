@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -20,30 +22,29 @@ public class PetCompanion implements RPGGear {
     private final int level;
     private ItemStack itemStack;
 
-    public PetCompanion(Companion companion, ItemTier tier, String itemTag, Material material, int durability, int level,
-                        int damage, int health, int itemID) {
-        String name = tier.getTierColor() + itemTag + " " + companion.getName() + ChatColor.GOLD + " LvL 1";
+    public PetCompanion(Companion companion, ItemTier tier, String itemTag, Material material, int durability, int reqLevel, int petLevel, int itemID) {
+        String name = tier.getTierColor() + itemTag + " " + companion.getName();
+        int companionHealth = PetManager.getCompanionHealth(petLevel);
 
         List<String> lore = new ArrayList<>();
-
         lore.add("");
         lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Companion");
-        lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
+        lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
         lore.add(ChatColor.YELLOW + "----------------");
-        lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + "1");
-        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / 20");
+        lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + petLevel);
+        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getExpReq(petLevel));
         lore.add(ChatColor.YELLOW + "----------------");
-        lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + health);
-        lore.add(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + damage);
+        lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + companionHealth);
+        lore.add(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + PetManager.getCompanionDamage(petLevel));
         lore.add("");
         lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 
         this.itemStack = new ItemStack(material);
-        this.itemStack = NBTTagUtils.putInteger("reqLevel", level, this.itemStack);
+        this.itemStack = NBTTagUtils.putInteger("reqLevel", reqLevel, this.itemStack);
         this.itemStack = NBTTagUtils.putString("petCode", companion.toString(), this.itemStack);
-        this.itemStack = NBTTagUtils.putInteger("petLevel", 1, this.itemStack);
-        this.itemStack = NBTTagUtils.putInteger("petExp", 1, this.itemStack);
-        this.itemStack = NBTTagUtils.putInteger("petCurrentHealth", health, this.itemStack);
+        this.itemStack = NBTTagUtils.putInteger("petLevel", petLevel, this.itemStack);
+        this.itemStack = NBTTagUtils.putInteger("petExp", 0, this.itemStack);
+        this.itemStack = NBTTagUtils.putInteger("petCurrentHealth", companionHealth - 1, this.itemStack);
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
@@ -59,7 +60,7 @@ public class PetCompanion implements RPGGear {
         this.itemID = itemID;
         this.tier = tier;
         this.itemTag = itemTag;
-        this.level = level;
+        this.level = reqLevel;
     }
 
     @Override
