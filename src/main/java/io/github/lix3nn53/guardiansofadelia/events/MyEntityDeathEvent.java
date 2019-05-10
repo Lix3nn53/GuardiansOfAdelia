@@ -16,6 +16,7 @@ public class MyEntityDeathEvent implements Listener {
     public void onEvent(EntityDeathEvent event) {
         LivingEntity entity = event.getEntity();
         event.getDrops().clear();
+        event.setDroppedExp(0);
 
         if (entity.getType().equals(EntityType.WOLF) || entity.getType().equals(EntityType.HORSE)) {
             PetManager.onPetDeath(entity);

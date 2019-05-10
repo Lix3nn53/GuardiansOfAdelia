@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -39,7 +39,7 @@ public class OtherItems {
         itemMeta.addEnchant(Enchantment.LURE, 3, false);
         itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
-        itemStack = NBTTagUtils.putInteger("durability", durability, itemStack);
+        itemStack = persistentDataContainerUtil.putInteger("durability", durability, itemStack);
         return itemStack;
     }
 
@@ -62,6 +62,28 @@ public class OtherItems {
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GRAY + "Required to control mounts.");
+        }});
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    public static ItemStack getPetFood(int tier) {
+        ItemStack itemStack = new ItemStack(Material.LAPIS_LAZULI);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Pet Food Tier " + tier);
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Right click on your pet while holding");
+            add(ChatColor.GRAY + "this item to feed and heal");
+            if (tier == 1) {
+                add(ChatColor.GRAY + "Restores 100 health");
+            } else if (tier == 2) {
+                add(ChatColor.GRAY + "Restores 500 health");
+            } else if (tier == 3) {
+                add(ChatColor.GRAY + "Restores 1000 health");
+            } else if (tier == 4) {
+                add(ChatColor.GRAY + "Restores 2000 health");
+            }
         }});
         itemStack.setItemMeta(itemMeta);
         return itemStack;

@@ -9,7 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.PetSlot;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,12 +27,24 @@ import java.util.UUID;
 
 public class PetManager {
 
+    private final static List<Player> deathPetPlayerList = new ArrayList<>();
     private static HashMap<LivingEntity, Player> petToPlayer = new HashMap<>();
     private static HashMap<Player, LivingEntity> playerToPet = new HashMap<>();
     private static double PET_MOVEMENT_SPEED = 0.75D;
-
-    private final static List<Player> deathPetPlayerList = new ArrayList<>();
     private static long respawnDelay = 20 * 300L;
+    private static Method craftEntity_getHandle, navigationAbstract_a, entityInsentient_getNavigation;
+    private static Class<?> entityInsentientClass = MinecraftReflection.getMinecraftClass("EntityInsentient");
+
+    static {
+        try {
+            craftEntity_getHandle = MinecraftReflection.getCraftEntityClass().getDeclaredMethod("getHandle");
+            entityInsentient_getNavigation = entityInsentientClass.getDeclaredMethod("getNavigation");
+            navigationAbstract_a = MinecraftReflection.getMinecraftClass("NavigationAbstract")
+                    .getDeclaredMethod("a", double.class, double.class, double.class, double.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void setPet(Player owner, LivingEntity pet) {
         petToPlayer.put(pet, owner);
@@ -169,6 +181,20 @@ public class PetManager {
         }
     }
 
+    public static void onPetHeal(LivingEntity livingEntity, double currentHealth, double healAmount) {
+        if (!livingEntity.isDead()) {
+            if (PetManager.isPet(livingEntity)) {
+                int currentHealthInteger = (int) (currentHealth + 0.5);
+                int nextHealth = (int) ((currentHealth + healAmount) + 0.5);
+                String customName = livingEntity.getCustomName();
+                String replace = customName.replace(currentHealthInteger + "/", nextHealth + "/");
+                livingEntity.setCustomName(replace);
+
+                updateCurrentHealthSavedInEgg(livingEntity, nextHealth);
+            }
+        }
+    }
+
     private static void updateCurrentHealthSavedInEgg(LivingEntity livingEntity, int nextHealth) {
         UUID uuid = PetManager.getOwner(livingEntity).getUniqueId();
         if (GuardianDataManager.hasGuardianData(uuid)) {
@@ -178,8 +204,8 @@ public class PetManager {
                 PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
                 if (!petSlot.isEmpty()) {
                     ItemStack itemOnSlot = petSlot.getItemOnSlot();
-                    if (NBTTagUtils.hasTag(itemOnSlot, "petCurrentHealth")) {
-                        itemOnSlot = NBTTagUtils.putInteger("petCurrentHealth", nextHealth, itemOnSlot);
+                    if (persistentDataContainerUtil.hasInteger(itemOnSlot, "petCurrentHealth")) {
+                        itemOnSlot = persistentDataContainerUtil.putInteger("petCurrentHealth", nextHealth, itemOnSlot);
                         petSlot.setItemOnSlot(itemOnSlot);
                     }
                 }
@@ -214,11 +240,11 @@ public class PetManager {
                 if (!petSlot.isEmpty()) {
                     ItemStack egg = petSlot.getItemOnSlot();
                     if (!egg.getType().equals(Material.AIR)) {
-                        if (NBTTagUtils.hasTag(egg, "petCode")) {
-                            if (NBTTagUtils.hasTag(egg, "petLevel")) {
-                                String petCode = NBTTagUtils.getString(egg, "petCode");
-                                int petLevel = NBTTagUtils.getInteger(egg, "petLevel");
-                                int petCurrentHealth = NBTTagUtils.getInteger(egg, "petCurrentHealth");
+                        if (persistentDataContainerUtil.hasString(egg, "petCode")) {
+                            if (persistentDataContainerUtil.hasInteger(egg, "petLevel")) {
+                                String petCode = persistentDataContainerUtil.getString(egg, "petCode");
+                                int petLevel = persistentDataContainerUtil.getInteger(egg, "petLevel");
+                                int petCurrentHealth = persistentDataContainerUtil.getInteger(egg, "petCurrentHealth");
 
                                 spawnPet(player, petCode, petCurrentHealth, petLevel);
                             }
@@ -238,20 +264,6 @@ public class PetManager {
         }
     }
 
-    private static Method craftEntity_getHandle, navigationAbstract_a, entityInsentient_getNavigation;
-    private static Class<?> entityInsentientClass = MinecraftReflection.getMinecraftClass("EntityInsentient");
-
-    static {
-        try {
-            craftEntity_getHandle = MinecraftReflection.getCraftEntityClass().getDeclaredMethod("getHandle");
-            entityInsentient_getNavigation = entityInsentientClass.getDeclaredMethod("getNavigation");
-            navigationAbstract_a = MinecraftReflection.getMinecraftClass("NavigationAbstract")
-                    .getDeclaredMethod("a", double.class, double.class, double.class, double.class);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void onPlayerMove(Player player) {
         if (hasActivePet(player)) {
             LivingEntity activePet = getActivePet(player);
@@ -263,7 +275,7 @@ public class PetManager {
 
             if (!target.getWorld().getName().equals(activePet.getLocation().getWorld().getName())) {
                 PetManager.teleportPet(player, activePet, null);
-                if (activePet.getType().equals(EntityType.WOLF)){ //clear wolf target
+                if (activePet.getType().equals(EntityType.WOLF)) { //clear wolf target
                     Wolf wolf = (Wolf) activePet;
                     wolf.setTarget(null);
                 }
@@ -273,13 +285,13 @@ public class PetManager {
             final double distance = target.distance(activePet.getLocation());
             if (distance > 20D) {
                 PetManager.teleportPet(player, activePet, null);
-                if (activePet.getType().equals(EntityType.WOLF)){ //clear wolf target
+                if (activePet.getType().equals(EntityType.WOLF)) { //clear wolf target
                     Wolf wolf = (Wolf) activePet;
                     wolf.setTarget(null);
                 }
             } else if (distance < 6D) {
                 return;
-            } else if (activePet.getType().equals(EntityType.WOLF)){ //if distance is between and pet is wolf which has a target, return
+            } else if (activePet.getType().equals(EntityType.WOLF)) { //if distance is between and pet is wolf which has a target, return
                 Wolf wolf = (Wolf) activePet;
                 LivingEntity wolfTarget = wolf.getTarget();
                 if (wolfTarget != null) {
@@ -307,151 +319,141 @@ public class PetManager {
 
     public static int getCompanionHealth(int petLevel) {
         switch (petLevel) {
-            case 1:
-                return 201;
             case 2:
-                return 201;
+                return 250;
             case 3:
-                return 200;
+                return 600;
             case 4:
-                return 200;
+                return 1000;
             case 5:
-                return 200;
+                return 1600;
             case 6:
-                return 200;
+                return 2400;
             case 7:
-                return 200;
+                return 3200;
             case 8:
-                return 200;
+                return 4000;
             case 9:
-                return 200;
+                return 5000;
             case 10:
-                return 200;
+                return 6000;
             case 11:
-                return 200;
+                return 7500;
             case 12:
-                return 200;
+                return 9000;
         }
-        return 200;
+        return 120;
     }
 
     public static int getCompanionDamage(int petLevel) {
         switch (petLevel) {
-            case 1:
-                return 201;
             case 2:
-                return 201;
+                return 24;
             case 3:
-                return 200;
+                return 60;
             case 4:
-                return 200;
+                return 120;
             case 5:
                 return 200;
             case 6:
-                return 200;
+                return 300;
             case 7:
-                return 200;
+                return 400;
             case 8:
-                return 200;
+                return 500;
             case 9:
-                return 200;
+                return 700;
             case 10:
-                return 200;
+                return 900;
             case 11:
-                return 200;
+                return 1200;
             case 12:
-                return 200;
+                return 1500;
         }
-        return 200;
+        return 12;
     }
 
     public static int getMountHealth(int petLevel) {
         switch (petLevel) {
-            case 1:
-                return 201;
             case 2:
-                return 201;
+                return 400;
             case 3:
-                return 200;
+                return 900;
             case 4:
-                return 200;
+                return 1500;
             case 5:
-                return 200;
+                return 2400;
             case 6:
-                return 200;
+                return 3600;
             case 7:
-                return 200;
+                return 4800;
             case 8:
-                return 200;
+                return 6000;
             case 9:
-                return 200;
+                return 7400;
             case 10:
-                return 200;
+                return 9000;
             case 11:
-                return 200;
+                return 12000;
             case 12:
-                return 200;
+                return 15000;
         }
         return 200;
     }
 
     public static double getMountSpeed(int petLevel) {
         switch (petLevel) {
-            case 1:
-                return 201;
             case 2:
-                return 201;
+                return 0.4;
             case 3:
-                return 200;
+                return 0.45;
             case 4:
-                return 200;
+                return 0.5;
             case 5:
-                return 200;
+                return 0.55;
             case 6:
-                return 200;
+                return 0.6;
             case 7:
-                return 200;
+                return 0.65;
             case 8:
-                return 200;
+                return 0.7;
             case 9:
-                return 200;
+                return 0.75;
             case 10:
-                return 200;
+                return 0.8;
             case 11:
-                return 200;
+                return 0.85;
             case 12:
-                return 200;
+                return 0.9;
         }
-        return 200;
+        return 0.35;
     }
 
     public static double getMountJump(int petLevel) {
         switch (petLevel) {
-            case 1:
-                return 201;
             case 2:
-                return 201;
+                return 0.75;
             case 3:
-                return 200;
+                return 0.8;
             case 4:
-                return 200;
+                return 0.85;
             case 5:
-                return 200;
+                return 0.9;
             case 6:
-                return 200;
+                return 0.95;
             case 7:
-                return 200;
+                return 1;
             case 8:
-                return 200;
+                return 1.05;
             case 9:
-                return 200;
+                return 1.1;
             case 10:
-                return 200;
+                return 1.15;
             case 11:
-                return 200;
+                return 1.2;
             case 12:
-                return 200;
+                return 1.25;
         }
-        return 200;
+        return 0.7;
     }
 }

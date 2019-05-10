@@ -8,7 +8,6 @@ import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;

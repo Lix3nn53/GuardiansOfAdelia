@@ -34,7 +34,7 @@ import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
@@ -190,7 +190,7 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
                 if (!title.equals("Bazaar Storage")) {
-                    if (NBTTagUtils.hasTag(current, "shopPrice")) {
+                    if (persistentDataContainerUtil.hasInteger(current, "shopPrice")) {
                         boolean didClickBefore = MerchantManager.onSellItemClick(player, slot);
                         if (didClickBefore) {
                             if (activeGui instanceof BazaarCustomerGui) {

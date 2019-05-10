@@ -70,9 +70,20 @@ Please note that these features are for my personal server. It probably will not
   * Join dungeons with up to 4 players
   * Kill dungeon boss before timeout to gain a prize chest
 * Jobs
-  * TODO
+  * You can profess a job and create items
+  * There are 4 type of jobs. Weaponsmith, armorsmith, alchemist, jeweller
+  * There are 7 types of material gathering. Woodcutting, harvesting_grass, harvesting_flower, fishing, mining_ore, mining_jewelry, hunting
+  * You can open crafting gui by right clicking certain blocks
+  * You can create items from crafting gui by using materials
+  * You can gain job experience by crafting and unlock higher tier crafts
 * Pets
-  * TODO
+  * Buy eggs from pet-merchants and equip to spawn your pet. When spawned your pet will follow you
+  * There are 2 types of pets. Companions and mounts
+  * Companions have health and damage attributes. They attack your enemies to protect you
+  * Mounts have health, speed and jump attributes. You can mount and ride them to travel faster
+  * Your active pet gains experience when you kill monsters. Their attributes increases on level up
+  * If your pet dies, you can't spawn another pet for 5 minutes. Your pet repsawns with half hp after 5 minutes
+  * You can feed pets to restore their healths
 * Revive
   * Revive at closest town
   * Then you can choose to revive here or become a soul and search for your tomb. If you can find your tomb in 2 minutes, left click to revive there

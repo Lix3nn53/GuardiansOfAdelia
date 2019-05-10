@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.creatures;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.MonsterItems;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -12,7 +12,6 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -841,11 +840,11 @@ public class EntityList {
     }
 
     private static void setEntityExperience(Entity entity, int experience) {
-        entity.setMetadata("experience", new FixedMetadataValue(GuardiansOfAdelia.getInstance(), experience));
+        persistentDataContainerUtil.putInteger("experience", experience, entity);
     }
 
     private static void setEntityDropTableNo(Entity entity, int dropTableNumber) {
-        entity.setMetadata("dropTableNumber", new FixedMetadataValue(GuardiansOfAdelia.getInstance(), dropTableNumber));
+        persistentDataContainerUtil.putInteger("dropTableNumber", dropTableNumber, entity);
     }
 
 
@@ -857,6 +856,6 @@ public class EntityList {
      * @param customDamage
      */
     private static void setDamage(Entity entity, int customDamage) {
-        entity.setMetadata("customDamage", new FixedMetadataValue(GuardiansOfAdelia.getInstance(), customDamage));
+        persistentDataContainerUtil.putInteger("customDamage", customDamage, entity);
     }
 }

@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
@@ -46,7 +46,7 @@ public class TeleportScroll {
             add(ChatColor.RED + "If you move, the teleportation will be canceled!");
         }});
         scroll.setItemMeta(itemMeta);
-        scroll = NBTTagUtils.putInteger("reqLevel", level, scroll);
+        scroll = persistentDataContainerUtil.putInteger("reqLevel", level, scroll);
         return scroll;
     }
 

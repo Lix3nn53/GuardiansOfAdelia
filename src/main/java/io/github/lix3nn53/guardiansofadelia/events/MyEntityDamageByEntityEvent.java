@@ -13,13 +13,13 @@ import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.FakeIndicator;
+import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.List;
@@ -28,17 +28,15 @@ import java.util.UUID;
 public class MyEntityDamageByEntityEvent implements Listener {
 
     private static int getExperience(Entity entity) {
-        if (entity.hasMetadata("experience")) {
-            List<MetadataValue> metadataValues = entity.getMetadata("experience");
-            return metadataValues.get(0).asInt();
+        if (persistentDataContainerUtil.hasInteger(entity, "experience")) {
+            return persistentDataContainerUtil.getInteger(entity, "experience");
         }
         return 0;
     }
 
     private static int getCustomDamage(Entity entity) {
-        if (entity.hasMetadata("customDamage")) {
-            List<MetadataValue> metadataValues = entity.getMetadata("customDamage");
-            return metadataValues.get(0).asInt();
+        if (persistentDataContainerUtil.hasInteger(entity, "customDamage")) {
+            return persistentDataContainerUtil.getInteger(entity, "customDamage");
         }
         return 0;
     }
@@ -56,22 +54,20 @@ public class MyEntityDamageByEntityEvent implements Listener {
             //DAMAGER
             if (damager.getType().equals(EntityType.PLAYER)) { //player is attacker
                 Player player = (Player) damager;
-                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, finalDamage);
+                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, finalDamage, false);
             } else if (damager instanceof Projectile) { //projectile is attacker
                 Projectile projectile = (Projectile) damager;
                 ProjectileSource shooter = projectile.getShooter();
                 if (shooter instanceof Player) {
                     Player player = (Player) shooter;
-                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, finalDamage);
+                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, finalDamage, false);
                 }
             } else if (damager instanceof LivingEntity) {
                 if (damager instanceof Wolf) {
                     Wolf wolf = (Wolf) damager;
-                    if (PetManager.isPet(wolf)) {
-                        //show bossbar to owner when his/her pet attacks
-                        HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5), true);
+                    if (PetManager.isPet(wolf)) { //pet is attacker
                         Player owner = PetManager.getOwner(wolf);
-                        HealthBarManager.showToPlayerFor10Seconds(owner, healthBar);
+                        isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, finalDamage, true);
                     }
                 }
             }
@@ -107,9 +103,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
      * @param player
      * @param livingTarget
      * @param finalDamage
+     * @param isPet        isAttackerPet else attacker is Player
      * @return isEventCanceled
      */
-    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, double finalDamage) {
+    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, double finalDamage, boolean isPet) {
         //on player attack to pet
         if (livingTarget.getType().equals(EntityType.WOLF) || livingTarget.getType().equals(EntityType.HORSE)) {
             boolean pvp = livingTarget.getWorld().getPVP();
@@ -136,19 +133,21 @@ public class MyEntityDamageByEntityEvent implements Listener {
             }
         }
 
-        //if player has active pet
-        if (PetManager.hasActivePet(player)) {
-            LivingEntity activePet = PetManager.getActivePet(player);
-            if (activePet instanceof Wolf) {
-                Wolf wolf = (Wolf) activePet;
-                if (wolf.getTarget() == null) {
-                    wolf.setTarget(livingTarget);
+        if (!isPet) { //attacker is Pet so don't edit pet's target
+            //if player has active pet
+            if (PetManager.hasActivePet(player)) {
+                LivingEntity activePet = PetManager.getActivePet(player);
+                if (activePet instanceof Wolf) {
+                    Wolf wolf = (Wolf) activePet;
+                    if (wolf.getTarget() == null) {
+                        wolf.setTarget(livingTarget);
+                    }
                 }
             }
         }
 
         //show bossbar
-        HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5), false);
+        HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5), isPet);
         HealthBarManager.showToPlayerFor10Seconds(player, healthBar);
 
         UUID uniqueId = player.getUniqueId();

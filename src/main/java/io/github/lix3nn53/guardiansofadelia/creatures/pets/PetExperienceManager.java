@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.PetSlot;
-import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class PetExperienceManager {
 
-    public static void giveExperienceToActivePet(Player owner, int expToGive){
+    public static void giveExperienceToActivePet(Player owner, int expToGive) {
         if (PetManager.hasActivePet(owner)) {
             int eggExperience = getEggExperience(owner);
             if (eggExperience > -1) {
@@ -38,25 +38,25 @@ public class PetExperienceManager {
     }
 
     public static int getExpReq(int eggLevel) {
-        if(eggLevel == 2){
+        if (eggLevel == 2) {
             return 2000;
-        }else if(eggLevel == 3){
+        } else if (eggLevel == 3) {
             return 5000;
-        }else if(eggLevel == 4){
+        } else if (eggLevel == 4) {
             return 20000;
-        }else if(eggLevel == 5){
+        } else if (eggLevel == 5) {
             return 50000;
-        }else if(eggLevel == 6){
+        } else if (eggLevel == 6) {
             return 120000;
-        }else if(eggLevel == 7){
+        } else if (eggLevel == 7) {
             return 200000;
-        }else if(eggLevel == 8){
+        } else if (eggLevel == 8) {
             return 350000;
-        }else if(eggLevel == 9){
+        } else if (eggLevel == 9) {
             return 550000;
-        }else if(eggLevel == 10){
+        } else if (eggLevel == 10) {
             return 800000;
-        }else if(eggLevel == 11){
+        } else if (eggLevel == 11) {
             return 1000000;
         }
         return 500; //level 1
@@ -70,7 +70,7 @@ public class PetExperienceManager {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
                 if (!petSlot.isEmpty()) {
-                    ItemStack egg = NBTTagUtils.putInteger("petExp", nextExperience, petSlot.getItemOnSlot());
+                    ItemStack egg = persistentDataContainerUtil.putInteger("petExp", nextExperience, petSlot.getItemOnSlot());
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
@@ -92,8 +92,8 @@ public class PetExperienceManager {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
                 if (!petSlot.isEmpty()) {
-                    ItemStack egg = NBTTagUtils.putInteger("petLevel", nextLevel, petSlot.getItemOnSlot());
-                    egg = NBTTagUtils.putInteger("petExp", 1, egg);
+                    ItemStack egg = persistentDataContainerUtil.putInteger("petLevel", nextLevel, petSlot.getItemOnSlot());
+                    egg = persistentDataContainerUtil.putInteger("petExp", 1, egg);
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
@@ -137,8 +137,8 @@ public class PetExperienceManager {
                 PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
                 if (!petSlot.isEmpty()) {
                     ItemStack itemOnSlot = petSlot.getItemOnSlot();
-                    if (NBTTagUtils.hasTag(itemOnSlot, "petLevel")) {
-                        return NBTTagUtils.getInteger(itemOnSlot, "petLevel");
+                    if (persistentDataContainerUtil.hasInteger(itemOnSlot, "petLevel")) {
+                        return persistentDataContainerUtil.getInteger(itemOnSlot, "petLevel");
                     }
                 }
             }
@@ -155,8 +155,8 @@ public class PetExperienceManager {
                 PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
                 if (!petSlot.isEmpty()) {
                     ItemStack itemOnSlot = petSlot.getItemOnSlot();
-                    if (NBTTagUtils.hasTag(itemOnSlot, "petExp")) {
-                        return NBTTagUtils.getInteger(itemOnSlot, "petExp");
+                    if (persistentDataContainerUtil.hasInteger(itemOnSlot, "petExp")) {
+                        return persistentDataContainerUtil.getInteger(itemOnSlot, "petExp");
                     }
                 }
             }

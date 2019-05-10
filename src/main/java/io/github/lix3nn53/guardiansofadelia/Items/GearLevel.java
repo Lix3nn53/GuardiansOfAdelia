@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
 import org.bukkit.inventory.ItemStack;
 
 public enum GearLevel {
@@ -16,8 +16,8 @@ public enum GearLevel {
     NINE;
 
     public static GearLevel getGearLevelOfItem(ItemStack itemStack) {
-        if (NBTTagUtils.hasTag(itemStack, "reqLevel")) {
-            int reqLevel = NBTTagUtils.getInteger(itemStack, "reqLevel");
+        if (persistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
+            int reqLevel = persistentDataContainerUtil.getInteger(itemStack, "reqLevel");
             if (reqLevel < 10) {
                 return ZERO;
             } else if (reqLevel < 20) {

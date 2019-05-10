@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory.slots;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
@@ -15,8 +15,8 @@ public class RPGSlotParrot extends RPGSlotPassive implements RPGSlot {
     private final int passiveTypeNum = 5;
 
     public boolean doesFit(ItemStack itemStack) {
-        if (NBTTagUtils.hasTag(itemStack, "passive")) {
-            Integer typeNum = NBTTagUtils.getInteger(itemStack, "passive");
+        if (persistentDataContainerUtil.hasInteger(itemStack, "passive")) {
+            int typeNum = persistentDataContainerUtil.getInteger(itemStack, "passive");
             return typeNum == this.passiveTypeNum;
         }
         return false;

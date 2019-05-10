@@ -3,9 +3,9 @@ package io.github.lix3nn53.guardiansofadelia.creatures.drops;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
+import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.MetadataValue;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -71,9 +71,8 @@ class MobDropGenerator {
     }
 
     private static int getDropTableNumber(Entity entity) {
-        if (entity.hasMetadata("dropTableNumber")) {
-            List<MetadataValue> metadataValues = entity.getMetadata("dropTableNumber");
-            return metadataValues.get(0).asInt();
+        if (persistentDataContainerUtil.hasInteger(entity, "dropTableNumber")) {
+            return persistentDataContainerUtil.getInteger(entity, "dropTableNumber");
         }
         return -1;
     }

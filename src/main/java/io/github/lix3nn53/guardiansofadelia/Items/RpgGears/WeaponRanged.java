@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.utilities.NBTTagUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -60,11 +60,11 @@ public class WeaponRanged implements RPGGear {
         lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 
         this.itemStack = new ItemStack(material);
-        this.itemStack = NBTTagUtils.putInteger("reqLevel", level, this.itemStack);
-        this.itemStack = NBTTagUtils.putString("reqClass", rpgClass.getClassCode(), this.itemStack);
+        this.itemStack = persistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
+        this.itemStack = persistentDataContainerUtil.putString("reqClass", rpgClass.getClassCode(), this.itemStack);
         this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSppedValue());
         this.itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, damage);
-        this.itemStack = NBTTagUtils.putInteger("rangedDamage", rangedDamage, this.itemStack);
+        this.itemStack = persistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, this.itemStack);
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
