@@ -4,12 +4,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ItemMergeEvent;
+import org.bukkit.event.player.PlayerTakeLecternBookEvent;
 
-public class MyItemMergeEvent implements Listener {
+public class MyPlayerTakeLecternBookEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-    public void onEvent(ItemMergeEvent event) {
+    public void onEvent(PlayerTakeLecternBookEvent event) {
         event.setCancelled(true);
     }
-
 }

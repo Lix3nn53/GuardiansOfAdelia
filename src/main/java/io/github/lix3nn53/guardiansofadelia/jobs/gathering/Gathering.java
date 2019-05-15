@@ -5,7 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.Ingredients;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class Gathering {
 
-    public void gatheringAnim(final Player player, final GatheringType type, final int gatherLevel) {
+    public void startGathering(final Player player, final GatheringType type, final int gatherLevel) {
         if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
             final GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
             if (guardianData.isFreeToAct()) {
@@ -41,7 +41,7 @@ public class Gathering {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
-                                player.sendMessage("§cGathering has been canceled because you moved.");
+                                player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
                             } else {
                                 player.sendTitle(ChatColor.YELLOW + "Gathering...", ChatColor.YELLOW + "||||||||||||||||", 0, 50, 0);
                             }
@@ -49,7 +49,7 @@ public class Gathering {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
-                                player.sendMessage("§cGathering has been canceled because you moved.");
+                                player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
                             } else {
                                 player.sendTitle(ChatColor.YELLOW + "Gathering...", ChatColor.GREEN + "||||" + ChatColor.YELLOW + "||||||||||||", 0, 50, 0);
                             }
@@ -57,7 +57,7 @@ public class Gathering {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
-                                player.sendMessage("§cGathering has been canceled because you moved.");
+                                player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
                             } else {
                                 player.sendTitle(ChatColor.YELLOW + "Gathering...", ChatColor.GREEN + "||||||||" + ChatColor.YELLOW + "||||||||", 0, 50, 0);
                             }
@@ -65,7 +65,7 @@ public class Gathering {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
-                                player.sendMessage("§cGathering has been canceled because you moved.");
+                                player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
                             } else {
                                 player.sendTitle(ChatColor.YELLOW + "Gathering...", ChatColor.GREEN + "||||||||||||" + ChatColor.YELLOW + "||||", 0, 50, 0);
                             }
@@ -73,7 +73,7 @@ public class Gathering {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
-                                player.sendMessage("§cGathering has been canceled because you moved.");
+                                player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
                             } else {
                                 player.sendTitle(ChatColor.YELLOW + "Gathering...", ChatColor.GREEN + "||||||||||||||||", 0, 50, 0);
                             }

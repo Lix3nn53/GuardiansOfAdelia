@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -29,11 +30,7 @@ import java.util.UUID;
 
 public class DatabaseQueries {
 
-    private final ConnectionPoolManager pool;
-
-    public DatabaseQueries() {
-        pool = new ConnectionPoolManager();
-    }
+    private final ConnectionPoolManager pool = ConfigManager.loadDatabaseConfig();
 
     public void onDisable() {
         pool.closePool();

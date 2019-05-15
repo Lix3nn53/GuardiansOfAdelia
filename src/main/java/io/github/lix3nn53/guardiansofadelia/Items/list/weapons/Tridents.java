@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponRanged;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 class Tridents {
@@ -89,6 +90,8 @@ class Tridents {
 
         final WeaponRanged weapon = new WeaponRanged(name, tier, itemTag, material, customModelDataId, level, rpgClass, meleeDamage, rangedDamage, bonusPercent,
                 attackSpeed, minStatValue, maxStatValue, minNumberofStats, itemID);
-        return weapon.getItemStack();
+        ItemStack itemStack = weapon.getItemStack();
+        itemStack.addEnchantment(Enchantment.LOYALTY, 3);
+        return itemStack;
     }
 }

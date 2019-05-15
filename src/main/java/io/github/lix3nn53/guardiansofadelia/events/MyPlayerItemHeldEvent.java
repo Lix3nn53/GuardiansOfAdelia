@@ -19,13 +19,13 @@ public class MyPlayerItemHeldEvent implements Listener {
         Player player = event.getPlayer();
         RPGClass rpgClass = SkillAPIUtils.getRPGClass(player);
 
-        if (rpgClass.equals(RPGClass.ARCHER)) {
+        if (rpgClass.equals(RPGClass.ARCHER) || rpgClass.equals(RPGClass.HUNTER)) {
             PlayerInventory inventory = player.getInventory();
             int newSlot = event.getNewSlot();
             ItemStack item = inventory.getItem(newSlot);
 
             if (item != null) {
-                if (item.getType().equals(Material.BOW)) {
+                if (item.getType().equals(Material.BOW) || item.getType().equals(Material.CROSSBOW)) {
                     ItemStack arrow = OtherItems.getArrow(2);
                     inventory.setItemInOffHand(arrow);
                 } else {

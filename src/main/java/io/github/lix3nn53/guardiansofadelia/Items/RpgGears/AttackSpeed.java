@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
-import net.md_5.bungee.api.ChatColor;
+
+import org.bukkit.ChatColor;
 
 public enum AttackSpeed {
     SLOW,

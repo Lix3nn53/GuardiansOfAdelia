@@ -81,12 +81,23 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
         Bukkit.getPluginManager().registerEvents(new MyPlayerInteractEntityEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerItemHeldEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerJoinEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyPlayerMoveEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyPlayerPickupArrowEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerQuitEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyPlayerTakeLecternBookEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyProjectileLaunchEvent(), this);
 
         //init managers
         ConfigManager.init();
+        ConfigManager.createConfigALL();
+        ConfigManager.loadConfigALL();
         //CHARACTER_SELECTION_SCREEN_MANAGER is initialized at config loading
+        //DATABASE SETUP is initialized at config loading
+
+        MyPacketListeners.addPacketListeners();
+        PacketLimitter.register();
+        MerchantManager.init();
+        MiniGameManager.initMinigames();
 
         //set command executors
         this.getCommand("guild").setExecutor(new CommandGuild());
@@ -141,14 +152,6 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
                 getLogger().info("Write current data to database");
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 60 * 5L, 20 * 60 * 5L);
-
-        //SETUPS
-        MyPacketListeners.addPacketListeners();
-        PacketLimitter.register();
-        ConfigManager.createConfigALL();
-        ConfigManager.loadConfigALL();
-        MerchantManager.init();
-        MiniGameManager.initMinigames();
 
         //DELAYED TASKS
         new BukkitRunnable() {

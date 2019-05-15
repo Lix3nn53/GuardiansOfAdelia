@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
+import io.github.lix3nn53.guardiansofadelia.database.ConnectionPoolManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ConfigManager {
 
@@ -30,6 +32,7 @@ public class ConfigManager {
     private static FileConfiguration townsConfig;
     private static FileConfiguration dungeonsConfig;
     private static FileConfiguration dungeonGatesConfig;
+    private static FileConfiguration databaseConfig;
 
     public static void init() {
         if (!GuardiansOfAdelia.getInstance().getDataFolder().exists()) {
@@ -39,6 +42,7 @@ public class ConfigManager {
     }
 
     public static void createConfigALL() {
+        createDatabaseConfig();
         createSpawners();
         createCharacterSelectionConfig();
         createTowns();
@@ -56,6 +60,35 @@ public class ConfigManager {
 
     public static void writeConfigALL() {
 
+    }
+
+    private static void createDatabaseConfig() {
+        File customConfigFile = new File(configFile, "database.yml");
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+            GuardiansOfAdelia.getInstance().saveResource("database.yml", false);
+        }
+
+        databaseConfig = new YamlConfiguration();
+        try {
+            databaseConfig.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ConnectionPoolManager loadDatabaseConfig() {
+        String hostname = databaseConfig.getString("hostname");
+        String port = databaseConfig.getString("port");
+        String database = databaseConfig.getString("database");
+        String username = databaseConfig.getString("username");
+        String password = databaseConfig.getString("password");
+        int minimumConnections = databaseConfig.getInt("minimumConnections");
+        int maximumConnections = databaseConfig.getInt("maximumConnections");
+        int connectionTimeout = databaseConfig.getInt("connectionTimeout");
+        String testQuery = databaseConfig.getString("testQuery");
+
+        return new ConnectionPoolManager(hostname, port, database, username, password, minimumConnections, maximumConnections, connectionTimeout, testQuery);
     }
 
     private static void createSpawners() {

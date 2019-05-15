@@ -23,21 +23,17 @@ public class ConnectionPoolManager {
     private long connectionTimeout;
     private String testQuery;
 
-    public ConnectionPoolManager() {
-        init();
+    public ConnectionPoolManager(String hostname, String port, String database, String username, String password, int minimumConnections, int maximumConnections, long connectionTimeout, String testQuery) {
+        this.hostname = hostname;
+        this.port = port;
+        this.database = database;
+        this.username = username;
+        this.password = password;
+        this.minimumConnections = minimumConnections;
+        this.maximumConnections = maximumConnections;
+        this.connectionTimeout = connectionTimeout;
+        this.testQuery = testQuery;
         setupPool();
-    }
-
-    private void init() {
-        hostname = "localhost";
-        port = "3306";
-        database = "goa";
-        username = "lixtrinn";
-        password = "asdsadfsafsabJK19034783ayu3wl12mgkj647nsdm9sf9dsfj9dsf82h32f8h2hf82f8hfhf2k2";
-        minimumConnections = 5;
-        maximumConnections = 20;
-        connectionTimeout = 30000;
-        testQuery = "SELECT 1";
     }
 
     private void setupPool() {
