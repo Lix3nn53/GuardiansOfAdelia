@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class CharacterSelectionMenuList {
 
     public static GuiGeneric getCharacterCreationMenu(int charNo) {
-        GuiGeneric guiGeneric = new GuiGeneric(63, ChatColor.YELLOW + "Character " + charNo + " Creation", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.YELLOW + "Character " + charNo + " Creation", 0);
 
         ItemStack s1 = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = s1.getItemMeta();
@@ -34,7 +34,7 @@ public class CharacterSelectionMenuList {
             add(ChatColor.YELLOW + "allies support them from all sides.");
         }});
         s1.setItemMeta(itemMeta);
-        guiGeneric.setItem(29, s1);
+        guiGeneric.setItem(20, s1);
 
         ItemStack s2 = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(10000008);
@@ -53,7 +53,7 @@ public class CharacterSelectionMenuList {
             add(ChatColor.YELLOW + "by channeling holy wrath.");
         }});
         s2.setItemMeta(itemMeta);
-        guiGeneric.setItem(15, s2);
+        guiGeneric.setItem(6, s2);
 
         ItemStack s3 = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(10000012);
@@ -72,7 +72,7 @@ public class CharacterSelectionMenuList {
             add(ChatColor.YELLOW + "always ready to take on any enemy.");
         }});
         s3.setItemMeta(itemMeta);
-        guiGeneric.setItem(11, s3);
+        guiGeneric.setItem(2, s3);
 
         ItemStack s4 = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(10000011);
@@ -91,7 +91,7 @@ public class CharacterSelectionMenuList {
             add(ChatColor.YELLOW + "damage in a short amount of time!");
         }});
         s4.setItemMeta(itemMeta);
-        guiGeneric.setItem(31, s4);
+        guiGeneric.setItem(22, s4);
 
         ItemStack s5 = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(10000007);
@@ -110,7 +110,7 @@ public class CharacterSelectionMenuList {
             add(ChatColor.YELLOW + "and deal damage from long distances.");
         }});
         s5.setItemMeta(itemMeta);
-        guiGeneric.setItem(33, s5);
+        guiGeneric.setItem(24, s5);
 
         ItemStack s6 = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(10000010);
@@ -129,7 +129,7 @@ public class CharacterSelectionMenuList {
             add(ChatColor.YELLOW + "the strength of the mind.");
         }});
         s6.setItemMeta(itemMeta);
-        guiGeneric.setItem(13, s6);
+        guiGeneric.setItem(4, s6);
 
         ItemStack s7 = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(10000015);
@@ -149,7 +149,7 @@ public class CharacterSelectionMenuList {
             add(ChatColor.YELLOW + "feared opponents at any distance");
         }});
         s7.setItemMeta(itemMeta);
-        guiGeneric.setItem(47, s7);
+        guiGeneric.setItem(38, s7);
 
         ItemStack s8 = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(10000016);
@@ -165,10 +165,10 @@ public class CharacterSelectionMenuList {
             add("");
             add(ChatColor.YELLOW + "The Hunter uses a slow but strong ranged");
             add(ChatColor.YELLOW + "weapon, crossbows. Their hunting techniques");
-            add(ChatColor.YELLOW + "makes anyone a prey for the hunter arrows.");
+            add(ChatColor.YELLOW + "makes anyone a prey for the deadly arrows.");
         }});
         s8.setItemMeta(itemMeta);
-        guiGeneric.setItem(51, s8);
+        guiGeneric.setItem(42, s8);
 
         return guiGeneric;
     }

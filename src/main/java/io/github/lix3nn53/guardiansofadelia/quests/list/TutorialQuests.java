@@ -102,7 +102,7 @@ public class TutorialQuests {
                 "Get out of the ship and follow the path to King of Roumen", "Talk to King of Roumen to learn what happened",
                 "",
                 tasks5, itemPrizes5, 0, 0, 1, 4, Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest5, 0, 19);
+        QuestNPCManager.addQuest(quest5, 0, 31);
     }
 
 }

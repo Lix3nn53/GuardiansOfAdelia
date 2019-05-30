@@ -7,50 +7,70 @@
 SLIME:
   x: -3219.5
   y: 71.5
-  z: 4456.5
+  z: 4452.5
   world: world
+  yaw: 0
+  pitch: 0
 ZOMBIE:
   x: -2756.5
-  y: 92.5
-  z: 4285.5
+  y: 91.5
+  z: 4282.5
   world: world
+  yaw: 0
+  pitch: 0
 MAGIC_FOREST:
   x: -2053.5
-  y: 62.5
+  y: 61.5
   z: 4884.5
   world: world
+  yaw: 0
+  pitch: 0
 ICE_CREAM:
-  x: -1756.5
-  y: 93.5
-  z: 4789.5
+  x: -1753.5
+  y: 95.5
+  z: 4792.5
   world: world
+  yaw: 90
+  pitch: 0
 PIRATE:
   x: -1894.5
-  y: 66.5
-  z: 3633.5
+  y: 65.5
+  z: 3634.5
   world: world
+  yaw: 90
+  pitch: 0
 ICE:
   x: -2411.5
-  y: 66.5
+  y: 65.5
   z: 3040.5
   world: world
+  yaw: 0
+  pitch: 0
 DESERT:
   x: -2523.5
-  y: 139.5
-  z: 1530.5
+  y: 138.5
+  z: 1532.5
   world: world
+  yaw: 0
+  pitch: 0
 SWAMP:
   x: -3089.5
-  y: 66.5
+  y: 65.5
   z: 2411.5
   world: world
+  yaw: 0
+  pitch: 0
 LAVA:
   x: -3768.5
-  y: 65.5
+  y: 64.5
   z: 2433.5
   world: world
+  yaw: 0
+  pitch: 0
 DARKNESS:
   x: -3872.5
-  y: 105.5
+  y: 104.5
   z: 1497.5
   world: world
+  yaw: 90
+  pitch: 0

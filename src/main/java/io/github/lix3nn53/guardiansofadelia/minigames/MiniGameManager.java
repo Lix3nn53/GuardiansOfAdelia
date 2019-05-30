@@ -5,6 +5,8 @@ import io.github.lix3nn53.guardiansofadelia.minigames.arenas.WinByMostKills;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.guildwar.GuildWar;
+import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
+import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -27,7 +29,7 @@ public class MiniGameManager {
     private static final List<GuildWar> guildWarList = new ArrayList<>();
 
     private static final HashMap<String, Dungeon> codeToDungeon = new HashMap<>();
-    private static final HashMap<Location, DungeonTheme> gateLocations = new HashMap<>();
+    private static final HashMap<Portal, DungeonTheme> portalToDungeonTheme = new HashMap<>();
 
     private static final HashMap<Player, Minigame> playerToMinigame = new HashMap<>();
 
@@ -124,21 +126,21 @@ public class MiniGameManager {
         return codeToDungeon.keySet();
     }
 
-    public static DungeonTheme getDungeonFromGate(Location location) {
-        for (Location gateLocation : gateLocations.keySet()) {
-            if (gateLocation.distanceSquared(location) < 16D) {
-                return gateLocations.get(gateLocation);
-            }
+    public static DungeonTheme getDungeonFromPortal(Portal portal) {
+        if (portalToDungeonTheme.containsKey(portal)) {
+            return portalToDungeonTheme.get(portal);
         }
         return null;
     }
 
-    public static void addGate(Location location, DungeonTheme dungeonTheme) {
-        gateLocations.put(location, dungeonTheme);
+    public static void addMinigamePortal(Location location, DungeonTheme dungeonTheme) {
+        Portal portal = new Portal(location, dungeonTheme.getPortalColor());
+        portalToDungeonTheme.put(portal, dungeonTheme);
+        PortalManager.addPortal(portal);
     }
 
-    public static Set<Location> getDungeonGates() {
-        return gateLocations.keySet();
+    public static Set<Portal> getDungeonPortals() {
+        return portalToDungeonTheme.keySet();
     }
 
     public static boolean isInMinigame(Player player) {

@@ -537,7 +537,7 @@ public class EntityList {
             return entity;
         } else if (mobcode.equals("lava2")) {
             MagmaCube entity = (MagmaCube) EntityUtils.create(loc, ChatColor.RED + "Magma Cube", 3500D, EntityType.MAGMA_CUBE);
-            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(860D);
+            setDamage(entity, 860);
             entity.setSize(3);
             setEntityExperience(entity, 880);
             setEntityDropTableNo(entity, 8);
@@ -618,7 +618,7 @@ public class EntityList {
             return entity;
         } else if (mobcode.equals("lava9")) {
             MagmaCube entity = (MagmaCube) EntityUtils.create(loc, ChatColor.RED + "Baby Magma", 2600D, EntityType.MAGMA_CUBE);
-            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(820D);
+            setDamage(entity, 820);
             entity.setSize(2);
             setEntityExperience(entity, 820);
             setEntityDropTableNo(entity, 8);
@@ -631,7 +631,7 @@ public class EntityList {
             return entity;
         } else if (mobcode.equals("void2")) {
             IronGolem entity = (IronGolem) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Void Golem", 9000D, EntityType.IRON_GOLEM);
-            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
+            setDamage(entity, 1200);
             setEntityExperience(entity, 1000);
             setEntityDropTableNo(entity, 9);
             return entity;
@@ -643,7 +643,7 @@ public class EntityList {
             return entity;
         } else if (mobcode.equals("void4")) {
             Shulker entity = (Shulker) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Void Shulker", 5000D, EntityType.SHULKER);
-            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
+            setDamage(entity, 1200);
             setEntityExperience(entity, 1000);
             setEntityDropTableNo(entity, 9);
             return entity;

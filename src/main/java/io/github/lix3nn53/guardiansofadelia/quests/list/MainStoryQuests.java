@@ -66,7 +66,7 @@ public class MainStoryQuests {
                 "Time to meet villagers!", obj,
                 "", tasks, itemPrizes, 10, 10, 0, 5,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest1, 19, 19);
+        QuestNPCManager.addQuest(quest1, 31, 31);
 
         //king of roumen 2nd quest
     }

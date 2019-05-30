@@ -52,4 +52,24 @@ public enum Mount {
         }
         return Horse.Color.BLACK;
     }
+
+    public int getEggCustomModelData() {
+        switch (this) {
+            case BLACK:
+                return 10000007;
+            case BROWN:
+                return 10000007;
+            case CHESTNUT:
+                return 10000007;
+            case CREAMY:
+                return 10000007;
+            case DARK_BROWN:
+                return 10000007;
+            case GRAY:
+                return 10000007;
+            case WHITE:
+                return 10000007;
+        }
+        return 10000007;
+    }
 }

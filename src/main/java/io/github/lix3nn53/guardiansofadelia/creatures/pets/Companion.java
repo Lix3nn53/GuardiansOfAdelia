@@ -177,4 +177,72 @@ public enum Companion {
                 break;
         }
     }
+
+    public int getEggCustomModelData() {
+        switch (this) {
+            case CHICKEN:
+                return 10000009;
+            case SHEEP:
+                return 10000017;
+            case COW:
+                return 10000001;
+            case PIG:
+                return 10000001;
+            case CAT_ALL_BLACK:
+                return 10000006;
+            case CAT_BLACK:
+                return 10000006;
+            case CAT_BRITISH_SHORTHAIR:
+                return 10000006;
+            case CAT_CALICO:
+                return 10000006;
+            case CAT_JELLIE:
+                return 10000006;
+            case CAT_PERSIAN:
+                return 10000006;
+            case CAT_RAGDOLL:
+                return 10000006;
+            case CAT_RED:
+                return 10000006;
+            case CAT_SIAMESE:
+                return 10000006;
+            case CAT_TABBY:
+                return 10000006;
+            case CAT_WHITE:
+                return 10000006;
+            case RABBIT_BLACK:
+                return 10000015;
+            case RABBIT_BLACK_AND_WHITE:
+                return 10000015;
+            case RABBIT_BROWN:
+                return 10000015;
+            case RABBIT_GOLD:
+                return 10000015;
+            case RABBIT_SALT_AND_PEPPER:
+                return 10000015;
+            case RABBIT_WHITE:
+                return 10000015;
+            case CHOCOLATE:
+                return 10000015;
+            case WOLF:
+                return 10000015;
+            case TURTLE:
+                return 10000015;
+            case POLAR_BEAR:
+                return 10000015;
+            case PANDA:
+                return 10000015;
+            case ICE_CREAM:
+                return 10000015;
+            case FOX_RED:
+                return 10000015;
+            case FOX_SNOW:
+                return 10000015;
+            case VEX:
+                return 10000015;
+            case MINI_DRAGON:
+                return 10000015;
+        }
+        return 10000001;
+    }
 }

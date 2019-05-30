@@ -13,7 +13,7 @@ public class MyPlayerPickupArrowEvent implements Listener {
     public void onEvent(PlayerPickupArrowEvent event) {
         AbstractArrow arrow = event.getArrow();
 
-        if (arrow.getType().equals(EntityType.TRIDENT)) {
+        if (arrow instanceof Trident) {
             arrow.remove();
             event.setCancelled(true);
             Player player = event.getPlayer();

@@ -6,6 +6,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
+import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -34,31 +36,30 @@ public class MyPlayerAnimationEvent implements Listener {
 
         if (player.getLocation().getWorld().getName().equals("world")) {
             Block targetBlock = player.getTargetBlock(null, 5);
-
-            if (targetBlock.getType().equals(Material.EMERALD_BLOCK) || targetBlock.getType().equals(Material.DIAMOND_BLOCK) || targetBlock.getType().equals(Material.GOLD_BLOCK)) {
-                DungeonTheme theme = MiniGameManager.getDungeonFromGate(targetBlock.getLocation());
-                if (theme != null) {
-                    theme.getJoinQueueGui().openInventory(player);
-                }
-            } else {
-                List<Entity> nearbyEntities = player.getNearbyEntities(1, 1, 1);
-                for (Entity entity : nearbyEntities) {
-                    if (entity.getType().equals(EntityType.ARMOR_STAND)) {
-                        ArmorStand armorStand = (ArmorStand) entity;
-                        if (BazaarManager.isBazaar(armorStand)) {
-                            Player owner = BazaarManager.getOwner(armorStand);
-                            UUID uuid = owner.getUniqueId();
-                            if (GuardianDataManager.hasGuardianData(uuid)) {
-                                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-                                if (guardianData.hasBazaar()) {
-                                    Bazaar bazaar = guardianData.getBazaar();
-                                    bazaar.showToCustomer(player);
-                                    break;
-                                }
-                            }
-                        } else if (TombManager.hasTomb(player)) {
-                            TombManager.onReachToTomb(player);
+            
+            List<Entity> nearbyEntities = player.getNearbyEntities(1, 1, 1);
+            for (Entity entity : nearbyEntities) {
+                if (entity.getType().equals(EntityType.ARMOR_STAND)) {
+                    ArmorStand armorStand = (ArmorStand) entity;
+                    Portal portal = PortalManager.getPortalFromArmorStand(armorStand);
+                    if (portal != null) { //portal model
+                        DungeonTheme theme = MiniGameManager.getDungeonFromPortal(portal);
+                        if (theme != null) {
+                            theme.getJoinQueueGui().openInventory(player);
                         }
+                    }else if (BazaarManager.isBazaar(armorStand)) {
+                        Player owner = BazaarManager.getOwner(armorStand);
+                        UUID uuid = owner.getUniqueId();
+                        if (GuardianDataManager.hasGuardianData(uuid)) {
+                            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                            if (guardianData.hasBazaar()) {
+                                Bazaar bazaar = guardianData.getBazaar();
+                                bazaar.showToCustomer(player);
+                                break;
+                            }
+                        }
+                    } else if (TombManager.hasTomb(player)) {
+                        TombManager.onReachToTomb(player);
                     }
                 }
             }

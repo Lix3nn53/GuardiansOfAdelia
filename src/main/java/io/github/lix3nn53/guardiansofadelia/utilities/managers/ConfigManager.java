@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class ConfigManager {
 
@@ -358,23 +357,10 @@ public class ConfigManager {
             double x = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".x");
             double y = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".y");
             double z = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".z");
-            Location location = new Location(world, x, y, z);
-            MiniGameManager.addGate(location, dungeonTheme);
-        }
-    }
-
-    private static void writeDungeonGates() {
-        for (Location location : MiniGameManager.getDungeonGates()) {
-            DungeonTheme theme = MiniGameManager.getDungeonFromGate(location);
-            dungeonGatesConfig.set(theme.toString() + ".world", location.getWorld().getName());
-            dungeonGatesConfig.set(theme.toString() + ".x", location.getX());
-            dungeonGatesConfig.set(theme.toString() + ".y", location.getY());
-            dungeonGatesConfig.set(theme.toString() + ".z", location.getZ());
-        }
-        try {
-            dungeonsConfig.save(configFile + "/dungeonGates.yml");
-        } catch (IOException e) {
-            e.printStackTrace();
+            float yaw = (float) dungeonsConfig.getDouble(dungeonTheme.toString() + ".yaw");
+            float pitch = (float) dungeonsConfig.getDouble(dungeonTheme.toString() + ".pitch");
+            Location location = new Location(world, x, y, z, yaw, pitch);
+            MiniGameManager.addMinigamePortal(location, dungeonTheme);
         }
     }
 }

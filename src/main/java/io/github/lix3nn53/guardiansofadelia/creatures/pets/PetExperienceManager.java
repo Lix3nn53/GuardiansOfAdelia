@@ -19,50 +19,74 @@ public class PetExperienceManager {
         if (PetManager.hasActivePet(owner)) {
             int eggExperience = getEggExperience(owner);
             if (eggExperience > -1) {
-                int eggLevel = getEggLevel(owner);
-                if (eggLevel > 0) {
-                    if (eggLevel < 12) {
-                        int nextExperience = eggExperience + expToGive;
-                        int expReq = getExpReq(eggLevel);
+                int currentLevel = getLevelFromExp(eggExperience);
+                int nextExperience = eggExperience + expToGive;
+                int nextLevel = getLevelFromExp(nextExperience);
 
-                        if (nextExperience > expReq) {
-                            int nextLevel = eggLevel + 1;
-                            levelUp(owner, nextLevel, getExpReq(nextLevel));
-                        } else {
-                            updateEggExp(owner, nextExperience, expReq);
-                        }
-                    }
+                updateEggExp(owner, nextExperience, nextLevel);
+
+                if (currentLevel < nextLevel) {
+                    levelUp(owner, nextLevel);
                 }
             }
         }
     }
 
-    public static int getExpReq(int eggLevel) {
-        if (eggLevel == 2) {
-            return 2000;
-        } else if (eggLevel == 3) {
-            return 5000;
-        } else if (eggLevel == 4) {
-            return 20000;
-        } else if (eggLevel == 5) {
-            return 50000;
-        } else if (eggLevel == 6) {
-            return 120000;
-        } else if (eggLevel == 7) {
-            return 200000;
-        } else if (eggLevel == 8) {
-            return 350000;
-        } else if (eggLevel == 9) {
-            return 550000;
-        } else if (eggLevel == 10) {
-            return 800000;
-        } else if (eggLevel == 11) {
-            return 1000000;
+    public static int getLevelFromExp(int eggExp) {
+        if (eggExp >= 1400000) {
+            return 12;
+        } else if (eggExp >= 1000000) {
+            return 11;
+        } else if (eggExp >= 800000) {
+            return 10;
+        } else if (eggExp >= 550000) {
+            return 9;
+        } else if (eggExp >= 350000) {
+            return 8;
+        } else if (eggExp >= 200000) {
+            return 7;
+        } else if (eggExp >= 120000) {
+            return 6;
+        } else if (eggExp >= 50000) {
+            return 5;
+        } else if (eggExp >= 20000) {
+            return 4;
+        } else if (eggExp >= 5000) {
+            return 3;
+        } else if (eggExp >= 2000) {
+            return 2;
         }
-        return 500; //level 1
+        return 1;
     }
 
-    private static void updateEggExp(Player player, int nextExperience, int expReq) {
+    public static String getNextExperienceTarget(int eggLevel) {
+        if (eggLevel == 2) {
+            return "2000";
+        } else if (eggLevel == 3) {
+            return "5000";
+        } else if (eggLevel == 4) {
+            return "20000";
+        } else if (eggLevel == 5) {
+            return "50000";
+        } else if (eggLevel == 6) {
+            return "120000";
+        } else if (eggLevel == 7) {
+            return "200000";
+        } else if (eggLevel == 8) {
+            return "350000";
+        } else if (eggLevel == 9) {
+            return "550000";
+        } else if (eggLevel == 10) {
+            return "800000";
+        } else if (eggLevel == 11) {
+            return "1000000";
+        } else if (eggLevel == 12) {
+            return "∞";
+        }
+        return "500";
+    }
+
+    private static void updateEggExp(Player player, int nextExperience, int currentLevel) {
         UUID uuid = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uuid)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -74,7 +98,7 @@ public class PetExperienceManager {
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
-                    lore.set(6, ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + nextExperience + " / " + expReq);
+                    lore.set(6, ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + nextExperience + " / " + getNextExperienceTarget(currentLevel));
                     itemMeta.setLore(lore);
                     egg.setItemMeta(itemMeta);
 
@@ -84,7 +108,7 @@ public class PetExperienceManager {
         }
     }
 
-    private static void levelUp(Player player, int nextLevel, int nextExpReq) {
+    private static void levelUp(Player player, int nextLevel) {
         UUID uuid = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uuid)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -92,20 +116,18 @@ public class PetExperienceManager {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
                 if (!petSlot.isEmpty()) {
-                    ItemStack egg = persistentDataContainerUtil.putInteger("petLevel", nextLevel, petSlot.getItemOnSlot());
-                    egg = persistentDataContainerUtil.putInteger("petExp", 1, egg);
+                    ItemStack egg = petSlot.getItemOnSlot();
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
                     lore.set(5, ChatColor.GOLD + "Level: " + ChatColor.GRAY + nextLevel);
-                    lore.set(6, ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "1 / " + nextExpReq);
 
                     if (lore.get(1).contains("Companion")) {
                         int damage = PetManager.getCompanionDamage(nextLevel);
                         int maxHP = PetManager.getCompanionHealth(nextLevel);
                         lore.set(7, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
                         lore.set(8, ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + damage);
-                        player.sendMessage(ChatColor.GOLD + "DEBUG pet companion");
+                        player.sendMessage(ChatColor.GOLD + "DEBUG pet companion level up");
                     } else {
                         double movementSpeed = PetManager.getMountSpeed(nextLevel);
                         double jumpStrength = PetManager.getMountJump(nextLevel);
@@ -113,7 +135,7 @@ public class PetExperienceManager {
                         lore.set(7, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
                         lore.set(8, ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + movementSpeed);
                         lore.set(9, ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + jumpStrength);
-                        player.sendMessage(ChatColor.GOLD + "DEBUG pet mount");
+                        player.sendMessage(ChatColor.GOLD + "DEBUG pet mount level up");
                     }
 
                     itemMeta.setLore(lore);
@@ -126,24 +148,6 @@ public class PetExperienceManager {
                 }
             }
         }
-    }
-
-    private static int getEggLevel(Player player) {
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-            if (guardianData.hasActiveCharacter()) {
-                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
-                if (!petSlot.isEmpty()) {
-                    ItemStack itemOnSlot = petSlot.getItemOnSlot();
-                    if (persistentDataContainerUtil.hasInteger(itemOnSlot, "petLevel")) {
-                        return persistentDataContainerUtil.getInteger(itemOnSlot, "petLevel");
-                    }
-                }
-            }
-        }
-        return -1;
     }
 
     private static int getEggExperience(Player player) {

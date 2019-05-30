@@ -241,12 +241,13 @@ public class PetManager {
                     ItemStack egg = petSlot.getItemOnSlot();
                     if (!egg.getType().equals(Material.AIR)) {
                         if (persistentDataContainerUtil.hasString(egg, "petCode")) {
-                            if (persistentDataContainerUtil.hasInteger(egg, "petLevel")) {
+                            if (persistentDataContainerUtil.hasInteger(egg, "petExp")) {
                                 String petCode = persistentDataContainerUtil.getString(egg, "petCode");
-                                int petLevel = persistentDataContainerUtil.getInteger(egg, "petLevel");
                                 int petCurrentHealth = persistentDataContainerUtil.getInteger(egg, "petCurrentHealth");
+                                int petExp = persistentDataContainerUtil.getInteger(egg, "petExp");
+                                int levelFromExp = PetExperienceManager.getLevelFromExp(petExp);
 
-                                spawnPet(player, petCode, petCurrentHealth, petLevel);
+                                spawnPet(player, petCode, petCurrentHealth, levelFromExp);
                             }
                         }
                     }

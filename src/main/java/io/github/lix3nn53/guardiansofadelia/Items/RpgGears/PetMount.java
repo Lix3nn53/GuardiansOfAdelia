@@ -22,7 +22,7 @@ public class PetMount implements RPGGear {
     private final int level;
     private ItemStack itemStack;
 
-    public PetMount(Mount mount, ItemTier tier, String itemTag, Material material, int durability, int reqLevel, int petLevel, int itemID) {
+    public PetMount(Mount mount, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int petLevel, int itemID) {
         String name = tier.getTierColor() + itemTag + " " + mount.getName();
         int mountHealth = PetManager.getMountHealth(petLevel);
 
@@ -32,7 +32,7 @@ public class PetMount implements RPGGear {
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
         lore.add(ChatColor.YELLOW + "----------------");
         lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + petLevel);
-        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getExpReq(petLevel));
+        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(petLevel));
         lore.add(ChatColor.YELLOW + "----------------");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + mountHealth);
         lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + PetManager.getMountSpeed(petLevel));
@@ -43,7 +43,6 @@ public class PetMount implements RPGGear {
         this.itemStack = new ItemStack(material);
         this.itemStack = persistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);
         this.itemStack = persistentDataContainerUtil.putString("petCode", mount.toString(), this.itemStack);
-        this.itemStack = persistentDataContainerUtil.putInteger("petLevel", 1, this.itemStack);
         this.itemStack = persistentDataContainerUtil.putInteger("petExp", 0, this.itemStack);
         this.itemStack = persistentDataContainerUtil.putInteger("petCurrentHealth", mountHealth - 1, this.itemStack);
 
@@ -52,10 +51,7 @@ public class PetMount implements RPGGear {
         itemMeta.setDisplayName(name);
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(durability);
-        }
+        itemMeta.setCustomModelData(customModelData);
         this.itemStack.setItemMeta(itemMeta);
 
         this.itemID = itemID;

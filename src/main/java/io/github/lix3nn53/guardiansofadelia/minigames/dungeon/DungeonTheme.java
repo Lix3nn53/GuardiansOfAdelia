@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
@@ -194,5 +195,28 @@ public enum DungeonTheme {
         guiGeneric.setItem(15, room);
 
         return guiGeneric;
+    }
+
+    public PortalColor getPortalColor() {
+        if (this.equals(DungeonTheme.DARKNESS)) {
+            return PortalColor.PURPLE;
+        } else if (this.equals(DungeonTheme.DESERT)) {
+            return PortalColor.ORANGE;
+        } else if (this.equals(DungeonTheme.SWAMP)) {
+            return PortalColor.ORANGE;
+        } else if (this.equals(DungeonTheme.ICE_CREAM)) {
+            return PortalColor.PURPLE;
+        } else if (this.equals(DungeonTheme.ICE)) {
+            return PortalColor.BLUE;
+        } else if (this.equals(DungeonTheme.MAGIC_FOREST)) {
+            return PortalColor.GREEN;
+        } else if (this.equals(DungeonTheme.PIRATE)) {
+            return PortalColor.BLUE;
+        } else if (this.equals(DungeonTheme.LAVA)) {
+            return PortalColor.RED;
+        } else if (this.equals(DungeonTheme.ZOMBIE)) {
+            return PortalColor.GREEN;
+        }
+        return PortalColor.GREEN;
     }
 }
