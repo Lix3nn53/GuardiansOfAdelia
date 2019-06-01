@@ -10,7 +10,6 @@ import me.libraryaddict.disguise.disguisetypes.watchers.RabbitWatcher;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.Fox;
-import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.Wolf;
 
 

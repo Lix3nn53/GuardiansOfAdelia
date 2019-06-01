@@ -277,8 +277,8 @@ public class DatabaseQueries {
                 String pet = resultSet.getString("slot_pet");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setPet(ItemSerializer.restoreModdedItem(pet), player));
-                    Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> PetManager.onEggEquipEvent(player), 80L);
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setEgg(ItemSerializer.restoreModdedItem(pet), player));
+                    Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> PetManager.onEggEquip(player), 40L);
                 }
 
                 String jobString = resultSet.getString("job_type");
@@ -646,8 +646,8 @@ public class DatabaseQueries {
             } else {
                 pst.setNull(8, Types.BLOB);
             }
-            if (!rpgCharacter.getRpgInventory().getPetSlot().isEmpty()) {
-                String itemString = ItemSerializer.saveModdedItemData(rpgCharacter.getRpgInventory().getPetSlot().getItemOnSlot());
+            if (!rpgCharacter.getRpgInventory().getEggSlot().isEmpty()) {
+                String itemString = ItemSerializer.saveModdedItemData(rpgCharacter.getRpgInventory().getEggSlot().getItemOnSlot());
                 pst.setString(9, itemString);
             } else {
                 pst.setNull(9, Types.BLOB);

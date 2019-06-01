@@ -21,7 +21,7 @@ public class Portal {
     public void createModel() {
         double x = Math.toRadians(baseLocation.getPitch());
         double y = Math.toRadians(baseLocation.getYaw());
-        EulerAngle eulerAngle = new EulerAngle(x, y,0);
+        EulerAngle eulerAngle = new EulerAngle(x, y, 0);
 
         Location clone = baseLocation.clone();
         clone.setPitch(0);

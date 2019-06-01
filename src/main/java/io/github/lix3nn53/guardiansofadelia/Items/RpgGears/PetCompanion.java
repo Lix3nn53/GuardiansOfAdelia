@@ -21,20 +21,20 @@ public class PetCompanion implements RPGGear {
     private final int level;
     private ItemStack itemStack;
 
-    public PetCompanion(Companion companion, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int petLevel, int itemID) {
+    public PetCompanion(Companion companion, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int itemID) {
         String name = tier.getTierColor() + itemTag + " " + companion.getName();
-        int companionHealth = PetManager.getCompanionHealth(petLevel);
+        int companionHealth = PetManager.getCompanionHealth(1);
 
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Companion");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
         lore.add(ChatColor.YELLOW + "----------------");
-        lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + petLevel);
-        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(petLevel));
+        lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + 1);
+        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(1));
         lore.add(ChatColor.YELLOW + "----------------");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + companionHealth);
-        lore.add(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + PetManager.getCompanionDamage(petLevel));
+        lore.add(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + PetManager.getCompanionDamage(1));
         lore.add("");
         lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 

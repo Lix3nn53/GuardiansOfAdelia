@@ -16,8 +16,7 @@ class MobDropGenerator {
 
     private static HashMap<Integer, List<ItemStack>> dropTables = new HashMap<>();
 
-    static
-    {
+    static {
         List<ItemStack> dropTable0 = new ArrayList<ItemStack>();
         dropTable0.addAll(ItemPoolGenerator.generateWeapons(ItemTier.RARE, "", GearLevel.ZERO));
         dropTable0.addAll(ItemPoolGenerator.generateArmors(ItemTier.RARE, "", GearLevel.ZERO));

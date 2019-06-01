@@ -9,7 +9,6 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -36,7 +35,7 @@ public class MyPlayerAnimationEvent implements Listener {
 
         if (player.getLocation().getWorld().getName().equals("world")) {
             Block targetBlock = player.getTargetBlock(null, 5);
-            
+
             List<Entity> nearbyEntities = player.getNearbyEntities(1, 1, 1);
             for (Entity entity : nearbyEntities) {
                 if (entity.getType().equals(EntityType.ARMOR_STAND)) {
@@ -47,7 +46,7 @@ public class MyPlayerAnimationEvent implements Listener {
                         if (theme != null) {
                             theme.getJoinQueueGui().openInventory(player);
                         }
-                    }else if (BazaarManager.isBazaar(armorStand)) {
+                    } else if (BazaarManager.isBazaar(armorStand)) {
                         Player owner = BazaarManager.getOwner(armorStand);
                         UUID uuid = owner.getUniqueId();
                         if (GuardianDataManager.hasGuardianData(uuid)) {

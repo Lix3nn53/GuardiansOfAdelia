@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.creatures.pets;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.PetSlot;
+import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
@@ -33,27 +33,27 @@ public class PetExperienceManager {
     }
 
     public static int getLevelFromExp(int eggExp) {
-        if (eggExp >= 1400000) {
+        if (eggExp >= 1000000) {
             return 12;
-        } else if (eggExp >= 1000000) {
-            return 11;
         } else if (eggExp >= 800000) {
-            return 10;
+            return 11;
         } else if (eggExp >= 550000) {
-            return 9;
+            return 10;
         } else if (eggExp >= 350000) {
-            return 8;
+            return 9;
         } else if (eggExp >= 200000) {
-            return 7;
+            return 8;
         } else if (eggExp >= 120000) {
-            return 6;
+            return 7;
         } else if (eggExp >= 50000) {
-            return 5;
+            return 6;
         } else if (eggExp >= 20000) {
-            return 4;
+            return 5;
         } else if (eggExp >= 5000) {
-            return 3;
+            return 4;
         } else if (eggExp >= 2000) {
+            return 3;
+        } else if (eggExp >= 500) {
             return 2;
         }
         return 1;
@@ -92,18 +92,18 @@ public class PetExperienceManager {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
-                if (!petSlot.isEmpty()) {
-                    ItemStack egg = petSlot.getItemOnSlot();
-                    PersistentDataContainerUtil.putInteger("petExp", nextExperience, petSlot.getItemOnSlot());
+                EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
+                if (!eggSlot.isEmpty()) {
+                    ItemStack egg = eggSlot.getItemOnSlot();
+                    PersistentDataContainerUtil.putInteger("petExp", nextExperience, eggSlot.getItemOnSlot());
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
-                    lore.set(6, ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + nextExperience + " / " + getNextExperienceTarget(currentLevel));
+                    lore.set(5, ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + nextExperience + " / " + getNextExperienceTarget(currentLevel));
                     itemMeta.setLore(lore);
                     egg.setItemMeta(itemMeta);
 
-                    petSlot.setItemOnSlot(egg);
+                    eggSlot.setItemOnSlot(egg);
                 }
             }
         }
@@ -115,20 +115,20 @@ public class PetExperienceManager {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
-                if (!petSlot.isEmpty()) {
-                    ItemStack egg = petSlot.getItemOnSlot();
+                EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
+                if (!eggSlot.isEmpty()) {
+                    ItemStack egg = eggSlot.getItemOnSlot();
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
-                    lore.set(5, ChatColor.GOLD + "Level: " + ChatColor.GRAY + nextLevel);
+                    lore.set(4, ChatColor.GOLD + "Level: " + ChatColor.GRAY + nextLevel);
 
                     if (lore.get(1).contains("Companion")) {
                         int damage = PetManager.getCompanionDamage(nextLevel);
                         int maxHP = PetManager.getCompanionHealth(nextLevel);
                         lore.set(7, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
                         lore.set(8, ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + damage);
-                        player.sendMessage(ChatColor.GOLD + "DEBUG pet companion level up");
+                        player.sendMessage(ChatColor.GOLD + "DEBUG pet COMPANION level up");
                     } else {
                         double movementSpeed = PetManager.getMountSpeed(nextLevel);
                         double jumpStrength = PetManager.getMountJump(nextLevel);
@@ -136,15 +136,15 @@ public class PetExperienceManager {
                         lore.set(7, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
                         lore.set(8, ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + movementSpeed);
                         lore.set(9, ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + jumpStrength);
-                        player.sendMessage(ChatColor.GOLD + "DEBUG pet mount level up");
+                        player.sendMessage(ChatColor.GOLD + "DEBUG pet MOUNT level up");
                     }
 
                     itemMeta.setLore(lore);
 
                     egg.setItemMeta(itemMeta);
-                    petSlot.setItemOnSlot(egg);
+                    eggSlot.setItemOnSlot(egg);
 
-                    PetManager.repsawnPet(player);
+                    PetManager.respawnPet(player);
                     player.sendMessage(ChatColor.GOLD + "Your pet has leveled up!");
                 }
             }
@@ -157,9 +157,9 @@ public class PetExperienceManager {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
-                if (!petSlot.isEmpty()) {
-                    ItemStack itemOnSlot = petSlot.getItemOnSlot();
+                EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
+                if (!eggSlot.isEmpty()) {
+                    ItemStack itemOnSlot = eggSlot.getItemOnSlot();
                     if (PersistentDataContainerUtil.hasInteger(itemOnSlot, "petExp")) {
                         return PersistentDataContainerUtil.getInteger(itemOnSlot, "petExp");
                     }

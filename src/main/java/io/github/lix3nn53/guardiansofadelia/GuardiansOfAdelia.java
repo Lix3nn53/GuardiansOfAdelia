@@ -65,7 +65,6 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
         Bukkit.getPluginManager().registerEvents(new MyEntityDamageByEntityEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityDamageEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityDeathEvent(), this);
-        Bukkit.getPluginManager().registerEvents(new MyEntityDismountEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityMountEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityPickupItemEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityRegainHealthEvent(), this);

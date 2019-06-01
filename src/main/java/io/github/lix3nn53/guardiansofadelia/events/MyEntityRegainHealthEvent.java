@@ -24,7 +24,7 @@ public class MyEntityRegainHealthEvent implements Listener {
                 Party party = PartyManager.getParty(player);
                 party.getBoard().updateHP(player.getName(), (int) (player.getHealth() + event.getAmount() + 0.5));
             }
-        } else if (entityType.equals(EntityType.WOLF) ||entityType.equals(EntityType.HORSE)) {
+        } else if (entityType.equals(EntityType.WOLF) || entityType.equals(EntityType.HORSE)) {
             Entity entity = event.getEntity();
             if (entity instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) entity;

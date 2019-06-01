@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
@@ -9,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Parrot;
@@ -17,16 +19,21 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RPGInventory {
 
     private final GuiGeneric rpgGui = new GuiGeneric(54, ChatColor.YELLOW.toString() + ChatColor.BOLD + "RPG Inventory", 0);
+
+    private final List<Player> petSpawnCooldownList = new ArrayList<>();
 
     private RPGSlotParrot parrotSlot = new RPGSlotParrot();
     private RPGSlotEarring earringSlot = new RPGSlotEarring();
     private RPGSlotNecklace necklaceSlot = new RPGSlotNecklace();
     private RPGSlotGlove gloveSlot = new RPGSlotGlove();
     private RPGSlotRing ringSlot = new RPGSlotRing();
-    private PetSlot petSlot = new PetSlot();
+    private EggSlot eggSlot = new EggSlot();
     private VanillaSlotHelmet helmetSlot = new VanillaSlotHelmet();
     private VanillaSlotChestplate chestplateSlot = new VanillaSlotChestplate();
     private VanillaSlotLeggings leggingsSlot = new VanillaSlotLeggings();
@@ -65,10 +72,10 @@ public class RPGInventory {
             rpgGui.setItem(RPGSlotType.RING.getSlotNo(), ringSlot.getItemOnSlot());
         }
 
-        if (petSlot.isEmpty()) {
-            rpgGui.setItem(RPGSlotType.PET.getSlotNo(), petSlot.getFillItem());
+        if (eggSlot.isEmpty()) {
+            rpgGui.setItem(RPGSlotType.PET.getSlotNo(), eggSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.PET.getSlotNo(), petSlot.getItemOnSlot());
+            rpgGui.setItem(RPGSlotType.PET.getSlotNo(), eggSlot.getItemOnSlot());
         }
 
         if (helmetSlot.isEmpty(player)) {
@@ -180,10 +187,9 @@ public class RPGInventory {
         return false;
     }
 
-    public boolean setPet(ItemStack itemStack, Player player) {
-        if (this.petSlot.doesFit(itemStack)) {
-            this.petSlot.setItemOnSlot(itemStack);
-            PetManager.onEggEquipEvent(player);
+    public boolean setEgg(ItemStack itemStack, Player player) {
+        if (this.eggSlot.doesFit(itemStack)) {
+            this.eggSlot.setItemOnSlot(itemStack);
             return true;
         }
         return false;
@@ -249,8 +255,8 @@ public class RPGInventory {
         return ringSlot;
     }
 
-    public PetSlot getPetSlot() {
-        return petSlot;
+    public EggSlot getEggSlot() {
+        return eggSlot;
     }
 
     public VanillaSlotHelmet getHelmetSlot() {
@@ -311,19 +317,22 @@ public class RPGInventory {
             }
             change = setRing(itemStack, player);
             rpgSlotType = RPGSlotType.RING;
-        } else if (petSlot.doesFit(itemStack)) {
-            if (PetManager.isPetDead(player)) {
+        } else if (eggSlot.doesFit(itemStack)) {
+            if (PetManager.isPetDead(player) || petSpawnCooldownList.contains(player)) {
                 return false;
             }
-            if (!petSlot.isEmpty()) {
-                oldItemOnSlot = petSlot.getItemOnSlot();
+            if (!eggSlot.isEmpty()) {
+                oldItemOnSlot = eggSlot.getItemOnSlot();
             }
-            change = setPet(itemStack, player);
+            change = setEgg(itemStack, player);
             rpgSlotType = RPGSlotType.PET;
         }
         if (change) {
             if (oldItemOnSlot != null) {
                 player.getInventory().setItem(slot, oldItemOnSlot);
+                if (rpgSlotType.equals(RPGSlotType.PET)) {
+                    PetManager.onEggUnequip(player);
+                }
             } else {
                 player.getInventory().setItem(slot, new ItemStack(Material.AIR));
             }
@@ -333,7 +342,8 @@ public class RPGInventory {
                 manageShoulderEntity(player);
             }
             if (rpgSlotType.equals(RPGSlotType.PET)) {
-                PetManager.onEggEquipEvent(player);
+                PetManager.onEggEquip(player);
+                startPetSpawnCooldown(player);
             }
         }
         return change;
@@ -474,25 +484,28 @@ public class RPGInventory {
                 }
             }
         } else if (slot == RPGSlotType.PET.getSlotNo()) {
-            if (PetManager.isPetDead(player)) {
+            if (PetManager.isPetDead(player)  || petSpawnCooldownList.contains(player)) {
                 return false;
             }
-            PetSlot rpgSlot = getPetSlot();
+            EggSlot rpgSlot = getEggSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
-                boolean didEquip = setPet(cursor, player);
+                boolean didEquip = setEgg(cursor, player);
                 if (didEquip) {
+                    PetManager.onEggUnequip(player);
                     player.setItemOnCursor(itemOnSlot);
                     topInventory.setItem(slot, cursor);
-                    PetManager.onEggEquipEvent(player);
+                    PetManager.onEggEquip(player);
+                    startPetSpawnCooldown(player);
                     return true;
                 }
             } else {
-                boolean didEquip = setPet(cursor, player);
+                boolean didEquip = setEgg(cursor, player);
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
                     topInventory.setItem(slot, cursor);
-                    PetManager.onEggEquipEvent(player);
+                    PetManager.onEggEquip(player);
+                    startPetSpawnCooldown(player);
                     return true;
                 }
             }
@@ -581,7 +594,7 @@ public class RPGInventory {
             if (PetManager.isPetDead(player)) {
                 return false;
             }
-            PetSlot rpgSlot = getPetSlot();
+            EggSlot rpgSlot = getEggSlot();
             if (!rpgSlot.isEmpty()) {
                 ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
                 if (isShiftClick) {
@@ -590,8 +603,8 @@ public class RPGInventory {
                     player.setItemOnCursor(itemOnSlot);
                 }
                 rpgSlot.clearItemOnSlot();
-                topInventory.setItem(slot, petSlot.getFillItem());
-                PetManager.onEggEquipEvent(player);
+                topInventory.setItem(slot, eggSlot.getFillItem());
+                PetManager.onEggUnequip(player);
                 return true;
             }
         }
@@ -625,9 +638,9 @@ public class RPGInventory {
             removeBonusStats(player, itemOnSlot);
             ringSlot.clearItemOnSlot();
         }
-        if (!petSlot.isEmpty()) {
-            petSlot.clearItemOnSlot();
-            PetManager.onEggEquipEvent(player);
+        if (!eggSlot.isEmpty()) {
+            eggSlot.clearItemOnSlot();
+            PetManager.onEggUnequip(player);
         }
     }
 
@@ -652,5 +665,11 @@ public class RPGInventory {
         } else {
             player.setShoulderEntityLeft(null);
         }
+    }
+
+    private void startPetSpawnCooldown(Player player) {
+        player.sendMessage("pet spawn cooldown start");
+        petSpawnCooldownList.add(player);
+        Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> petSpawnCooldownList.remove(player), 20 * 8L);
     }
 }

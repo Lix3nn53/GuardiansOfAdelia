@@ -10,13 +10,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class PetSlot {
+public class EggSlot {
 
     private final String requiredNbtTag = "petCode";
     private ItemStack itemOnSlot;
 
     public boolean doesFit(ItemStack itemStack) {
-        return PersistentDataContainerUtil.hasInteger(itemStack, requiredNbtTag);
+        return PersistentDataContainerUtil.hasString(itemStack, requiredNbtTag);
     }
 
     public boolean isEmpty() {
@@ -39,7 +39,7 @@ public class PetSlot {
         ItemStack itemStack = new ItemStack(Material.IRON_AXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Companion Slot");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Egg Slot");
         itemMeta.setLore(new ArrayList() {{
             add("");
         }});

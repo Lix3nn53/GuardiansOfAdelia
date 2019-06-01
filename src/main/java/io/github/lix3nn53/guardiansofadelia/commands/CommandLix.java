@@ -50,8 +50,8 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix tp [town|?] <num>");
                 player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
                 player.sendMessage(ChatColor.BLUE + "/lix weapon [class] <num>");
-                player.sendMessage(ChatColor.BLUE + "/lix companion [type] <level>");
-                player.sendMessage(ChatColor.BLUE + "/lix mount [type] <level>");
+                player.sendMessage(ChatColor.BLUE + "/lix companion [type]");
+                player.sendMessage(ChatColor.BLUE + "/lix mount [type]");
                 player.sendMessage(ChatColor.BLUE + "/lix stone <grade> <amount>");
                 player.sendMessage(ChatColor.BLUE + "/lix passive [parrot|earring|necklace|glove|ring] <num>");
                 player.sendMessage(ChatColor.BLUE + "/lix model portal<1-5>");
@@ -93,15 +93,14 @@ public class CommandLix implements CommandExecutor {
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("companion")) {
-                if (args.length == 3) {
+                if (args.length == 2) {
                     Companion mount = Companion.valueOf(args[1]);
 
-                    int level = Integer.parseInt(args[2]);
-                    ItemStack egg = Companions.get(mount, ItemTier.COMMON, level, 20, 800000);
+                    ItemStack egg = Companions.get(mount, ItemTier.COMMON, 20, 800000);
                     InventoryUtils.giveItemToPlayer(player, egg);
                 }
             } else if (args[0].equals("mount")) {
-                if (args.length == 3) {
+                if (args.length == 2) {
                     Mount mount = Mount.valueOf(args[1]);
 
                     int level = Integer.parseInt(args[2]);

@@ -6,10 +6,11 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.PetSlot;
+import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -79,6 +80,8 @@ public class PetManager {
 
             if (currentHP <= 0) {
                 currentHP = (int) ((maxHP * 0.4) + 0.5);
+            } else if (currentHP > maxHP) {
+                currentHP = maxHP;
             }
 
             Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
@@ -87,6 +90,7 @@ public class PetManager {
             wolf.setAdult();
             wolf.setTamed(true);
             wolf.setOwner(owner);
+            wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
             wolf.setHealth(currentHP);
             wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.75D);
             wolf.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage);
@@ -104,6 +108,8 @@ public class PetManager {
 
             if (currentHP <= 0) {
                 currentHP = (int) ((maxHP * 0.4) + 0.5);
+            } else if (currentHP > maxHP) {
+                currentHP = maxHP;
             }
 
             Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
@@ -156,7 +162,7 @@ public class PetManager {
                     deathPetPlayerList.remove(owner);
                     if (owner.isOnline()) {
                         updateCurrentHealthSavedInEgg(livingEntity, (int) (livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2));
-                        repsawnPet(owner);
+                        respawnPet(owner);
                     }
                 }
             }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 60 * 5L);
@@ -201,12 +207,12 @@ public class PetManager {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
-                if (!petSlot.isEmpty()) {
-                    ItemStack itemOnSlot = petSlot.getItemOnSlot();
+                EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
+                if (!eggSlot.isEmpty()) {
+                    ItemStack itemOnSlot = eggSlot.getItemOnSlot();
                     if (PersistentDataContainerUtil.hasInteger(itemOnSlot, "petCurrentHealth")) {
                         PersistentDataContainerUtil.putInteger("petCurrentHealth", nextHealth, itemOnSlot);
-                        petSlot.setItemOnSlot(itemOnSlot);
+                        eggSlot.setItemOnSlot(itemOnSlot);
                     }
                 }
             }
@@ -214,6 +220,7 @@ public class PetManager {
     }
 
     private static void removePet(Player player) {
+        player.sendMessage("remove pet");
         if (hasActivePet(player)) {
             LivingEntity activePet = getActivePet(player);
             petToPlayer.remove(activePet);
@@ -223,6 +230,7 @@ public class PetManager {
     }
 
     private static void spawnPet(Player player, String petCode, int petCurrentHealth, int petLevel) {
+        player.sendMessage("spawn pet");
         LivingEntity pet = getPet(player, petCode, petCurrentHealth, petLevel);
         if (pet != null) {
             petToPlayer.put(pet, player);
@@ -230,15 +238,15 @@ public class PetManager {
         }
     }
 
-    public static void onEggEquipEvent(Player player) {
+    public static void onEggEquip(Player player) {
         UUID uuid = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uuid)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
-                if (!petSlot.isEmpty()) {
-                    ItemStack egg = petSlot.getItemOnSlot();
+                EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
+                if (!eggSlot.isEmpty()) {
+                    ItemStack egg = eggSlot.getItemOnSlot();
                     if (!egg.getType().equals(Material.AIR)) {
                         if (PersistentDataContainerUtil.hasString(egg, "petCode")) {
                             if (PersistentDataContainerUtil.hasInteger(egg, "petExp")) {
@@ -258,10 +266,18 @@ public class PetManager {
         }
     }
 
-    public static void repsawnPet(Player player) {
+    public static void onEggUnequip(Player player) {
+        removePet(player);
+    }
+
+    public static void onPlayerQuit(Player player) {
+        removePet(player);
+    }
+
+    public static void respawnPet(Player player) {
         if (hasActivePet(player)) {
             removePet(player);
-            onEggEquipEvent(player);
+            Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> onEggEquip(player), 20L);
         }
     }
 
