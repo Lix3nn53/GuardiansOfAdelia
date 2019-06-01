@@ -21,21 +21,24 @@ public class PetMount implements RPGGear {
     private final int level;
     private ItemStack itemStack;
 
-    public PetMount(Mount mount, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int petLevel, int itemID) {
-        String name = tier.getTierColor() + itemTag + " " + mount.getName();
-        int mountHealth = PetManager.getMountHealth(petLevel);
+    public PetMount(Mount mount, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int itemID) {
+        String name = tier.getTierColor() + mount.getName();
+        if (itemTag != null && !itemTag.equals("")) {
+            name = tier.getTierColor() + itemTag + " " + mount.getName();
+        }
+        int mountHealth = PetManager.getMountHealth(1);
 
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Mount");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
         lore.add(ChatColor.YELLOW + "----------------");
-        lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + petLevel);
-        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(petLevel));
+        lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + 1);
+        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(1));
         lore.add(ChatColor.YELLOW + "----------------");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + mountHealth);
-        lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + PetManager.getMountSpeed(petLevel));
-        lore.add(ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + PetManager.getMountJump(petLevel));
+        lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + PetManager.getMountSpeed(1));
+        lore.add(ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + PetManager.getMountJump(1));
         lore.add("");
         lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 

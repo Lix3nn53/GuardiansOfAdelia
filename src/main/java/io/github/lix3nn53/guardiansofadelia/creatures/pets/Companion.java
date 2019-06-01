@@ -7,6 +7,7 @@ import me.libraryaddict.disguise.disguisetypes.RabbitType;
 import me.libraryaddict.disguise.disguisetypes.watchers.CatWatcher;
 import me.libraryaddict.disguise.disguisetypes.watchers.FoxWatcher;
 import me.libraryaddict.disguise.disguisetypes.watchers.RabbitWatcher;
+import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.Fox;
@@ -93,7 +94,7 @@ public enum Companion {
             case CHOCOLATE:
                 return ChatColor.YELLOW + "Baby Chocolate";
             case WOLF:
-                return ChatColor.WHITE + "Baby Wolf";
+                return ChatColor.WHITE + "Wolf";
             case TURTLE:
                 return ChatColor.GREEN + "Baby Turtle";
             case POLAR_BEAR:
@@ -214,42 +215,42 @@ public enum Companion {
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
             case RABBIT_BLACK:
-                disguise = new MobDisguise(DisguiseType.CAT, false);
+                disguise = new MobDisguise(DisguiseType.RABBIT, false);
                 RabbitWatcher rabbitWatcher = (RabbitWatcher) disguise.getWatcher();
                 rabbitWatcher.setType(RabbitType.BLACK);
                 disguise = disguise.setReplaceSounds(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
             case RABBIT_BLACK_AND_WHITE:
-                disguise = new MobDisguise(DisguiseType.CAT, false);
+                disguise = new MobDisguise(DisguiseType.RABBIT, false);
                 rabbitWatcher = (RabbitWatcher) disguise.getWatcher();
                 rabbitWatcher.setType(RabbitType.PATCHES);
                 disguise = disguise.setReplaceSounds(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
             case RABBIT_BROWN:
-                disguise = new MobDisguise(DisguiseType.CAT, false);
+                disguise = new MobDisguise(DisguiseType.RABBIT, false);
                 rabbitWatcher = (RabbitWatcher) disguise.getWatcher();
                 rabbitWatcher.setType(RabbitType.BROWN);
                 disguise = disguise.setReplaceSounds(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
             case RABBIT_GOLD:
-                disguise = new MobDisguise(DisguiseType.CAT, false);
+                disguise = new MobDisguise(DisguiseType.RABBIT, false);
                 rabbitWatcher = (RabbitWatcher) disguise.getWatcher();
                 rabbitWatcher.setType(RabbitType.GOLD);
                 disguise = disguise.setReplaceSounds(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
             case RABBIT_SALT_AND_PEPPER:
-                disguise = new MobDisguise(DisguiseType.CAT, false);
+                disguise = new MobDisguise(DisguiseType.RABBIT, false);
                 rabbitWatcher = (RabbitWatcher) disguise.getWatcher();
                 rabbitWatcher.setType(RabbitType.PEPPER);
                 disguise = disguise.setReplaceSounds(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
             case RABBIT_WHITE:
-                disguise = new MobDisguise(DisguiseType.CAT, false);
+                disguise = new MobDisguise(DisguiseType.RABBIT, false);
                 rabbitWatcher = (RabbitWatcher) disguise.getWatcher();
                 rabbitWatcher.setType(RabbitType.WHITE);
                 disguise = disguise.setReplaceSounds(true);
@@ -263,7 +264,7 @@ public enum Companion {
             case WOLF:
                 break;
             case TURTLE:
-                disguise = new MobDisguise(DisguiseType.TURTLE, false);
+                disguise = new MobDisguise(DisguiseType.TURTLE, true);
                 disguise = disguise.setReplaceSounds(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
@@ -278,31 +279,33 @@ public enum Companion {
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
             case ICE_CREAM:
-                disguise = new MobDisguise(DisguiseType.SNOWMAN, false);
+                disguise = new MobDisguise(DisguiseType.SNOWMAN, true);
                 disguise = disguise.setReplaceSounds(true);
+                SnowmanWatcher snowmanWatcher = (SnowmanWatcher) disguise.getWatcher();
+                snowmanWatcher.setDerp(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
             case FOX_RED:
-                disguise = new MobDisguise(DisguiseType.FOX, false);
+                disguise = new MobDisguise(DisguiseType.FOX, true);
                 FoxWatcher foxWatcher = (FoxWatcher) disguise.getWatcher();
                 foxWatcher.setType(Fox.Type.RED);
                 disguise = disguise.setReplaceSounds(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
             case FOX_SNOW:
-                disguise = new MobDisguise(DisguiseType.FOX, false);
+                disguise = new MobDisguise(DisguiseType.FOX, true);
                 foxWatcher = (FoxWatcher) disguise.getWatcher();
                 foxWatcher.setType(Fox.Type.SNOW);
                 disguise = disguise.setReplaceSounds(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
             case VEX:
-                disguise = new MobDisguise(DisguiseType.VEX, false);
+                disguise = new MobDisguise(DisguiseType.VEX, true);
                 disguise = disguise.setReplaceSounds(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
             case MINI_DRAGON:
-                disguise = new MobDisguise(DisguiseType.BAT, false);
+                disguise = new MobDisguise(DisguiseType.BAT, true);
                 disguise = disguise.setReplaceSounds(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;

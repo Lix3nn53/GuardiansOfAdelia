@@ -8,9 +8,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class Mounts {
 
-    public static ItemStack get(Mount mount, ItemTier tier, int petLevel, int reqLevel, int itemID) {
+    public static ItemStack get(Mount mount, ItemTier tier, int reqLevel, int itemID) {
 
-        PetMount petCompanion = new PetMount(mount, tier, "", Material.STONE_HOE, mount.getEggCustomModelData(), reqLevel, petLevel, itemID);
+        PetMount petCompanion = new PetMount(mount, tier, "", Material.STONE_HOE, mount.getEggCustomModelData(), reqLevel, itemID);
 
         return petCompanion.getItemStack();
     }

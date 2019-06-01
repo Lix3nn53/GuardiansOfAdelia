@@ -22,7 +22,10 @@ public class GearPassive implements RPGGear {
 
     public GearPassive(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int passiveType, int level, RPGClass rpgClass,
                        int minStatValue, int maxStatValue, int minNumberOfStats, double bonusPercent, int itemID) {
-        name = tier.getTierColor() + itemTag + " " + name;
+        name = tier.getTierColor() + name;
+        if (itemTag != null && !itemTag.equals("")) {
+            name = tier.getTierColor() + itemTag + " " + name;
+        }
 
         List<String> lore = new ArrayList<>();
 

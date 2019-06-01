@@ -23,7 +23,10 @@ public class GearArmor implements RPGGear {
 
     public GearArmor(String name, ItemTier tier, String itemTag, Material material, int level, RPGClass rpgClass, int health,
                      int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats, int itemID) {
-        name = tier.getTierColor() + itemTag + " " + name;
+        name = tier.getTierColor() + name;
+        if (itemTag != null && !itemTag.equals("")) {
+            name = tier.getTierColor() + itemTag + " " + name;
+        }
 
         List<String> lore = new ArrayList<>();
 

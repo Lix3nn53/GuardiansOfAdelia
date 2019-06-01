@@ -25,7 +25,10 @@ public class WeaponMelee implements RPGGear {
     public WeaponMelee(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, RPGClass rpgClass, int damage,
                        double bonusPercent, AttackSpeed attackSpeed, int minStatValue, int maxStatValue, int minNumberOfStats
             , int itemID) {
-        name = tier.getTierColor() + itemTag + " " + name;
+        name = tier.getTierColor() + name;
+        if (itemTag != null && !itemTag.equals("")) {
+            name = tier.getTierColor() + itemTag + " " + name;
+        }
         damage = (int) ((damage * bonusPercent) + 0.5);
 
         List<String> lore = new ArrayList<>();

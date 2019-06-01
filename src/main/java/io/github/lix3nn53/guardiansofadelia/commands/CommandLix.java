@@ -103,8 +103,7 @@ public class CommandLix implements CommandExecutor {
                 if (args.length == 2) {
                     Mount mount = Mount.valueOf(args[1]);
 
-                    int level = Integer.parseInt(args[2]);
-                    ItemStack egg = Mounts.get(mount, ItemTier.COMMON, level, 20, 800000);
+                    ItemStack egg = Mounts.get(mount, ItemTier.COMMON, 20, 800000);
                     InventoryUtils.giveItemToPlayer(player, egg);
                 }
             } else if (args[0].equals("stone")) {

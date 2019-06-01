@@ -668,7 +668,6 @@ public class RPGInventory {
     }
 
     private void startPetSpawnCooldown(Player player) {
-        player.sendMessage("pet spawn cooldown start");
         petSpawnCooldownList.add(player);
         Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> petSpawnCooldownList.remove(player), 20 * 8L);
     }

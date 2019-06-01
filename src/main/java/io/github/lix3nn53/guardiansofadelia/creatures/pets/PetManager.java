@@ -47,10 +47,6 @@ public class PetManager {
         }
     }
 
-    public static void setPet(Player owner, LivingEntity pet) {
-        petToPlayer.put(pet, owner);
-    }
-
     public static Player getOwner(LivingEntity entity) {
         return petToPlayer.get(entity);
     }
@@ -85,14 +81,14 @@ public class PetManager {
             }
 
             Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
-            petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "LvL-" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
+            petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "lvl" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
             Wolf wolf = (Wolf) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.WOLF);
             wolf.setAdult();
             wolf.setTamed(true);
             wolf.setOwner(owner);
             wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
             wolf.setHealth(currentHP);
-            wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.75D);
+            wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_MOVEMENT_SPEED);
             wolf.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage);
             companion.disguise(wolf);
             return wolf;
@@ -102,7 +98,7 @@ public class PetManager {
             Horse.Color color = mount.getColor();
             ItemStack armor = new ItemStack(Material.AIR);
 
-            double movementSpeed = getMountSpeed(petLevel);
+            double mountSpeed = getMountSpeed(petLevel);
             double jumpStrength = getMountJump(petLevel);
             int maxHP = getMountHealth(petLevel);
 
@@ -113,7 +109,7 @@ public class PetManager {
             }
 
             Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
-            petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "LvL-" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
+            petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "lvl" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
             Horse horse = (Horse) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.HORSE);
             horse.setTamed(true);
             horse.setAdult();
@@ -122,11 +118,12 @@ public class PetManager {
             horse.setColor(color);
             horse.setOwner(owner);
             horse.setHealth(currentHP);
-            horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(movementSpeed);
+            horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_MOVEMENT_SPEED);
             horse.getAttribute(Attribute.HORSE_JUMP_STRENGTH).setBaseValue(jumpStrength);
             if (!armor.getType().equals(Material.AIR)) {
                 horse.getInventory().setArmor(armor);
             }
+            PersistentDataContainerUtil.putDouble("mountSpeed", mountSpeed, horse);
             return horse;
         }
         return null;
@@ -152,9 +149,21 @@ public class PetManager {
         return false;
     }
 
+    public static void onMount(LivingEntity mount) {
+        if (PersistentDataContainerUtil.hasDouble(mount, "mountSpeed")) {
+            double mountSpeed = PersistentDataContainerUtil.getDouble(mount, "mountSpeed");
+            mount.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(mountSpeed);
+        }
+    }
+
+    public static void onDismount(LivingEntity mount) {
+        mount.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_MOVEMENT_SPEED);
+    }
+
     public static void onPetDeath(LivingEntity livingEntity) {
         if (isPet(livingEntity)) {
             Player owner = getOwner(livingEntity);
+            owner.sendMessage(ChatColor.RED + "Your pet is dead. Respawning in 2 minutes");
             deathPetPlayerList.add(owner);
             new BukkitRunnable() {
                 @Override
@@ -163,9 +172,10 @@ public class PetManager {
                     if (owner.isOnline()) {
                         updateCurrentHealthSavedInEgg(livingEntity, (int) (livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2));
                         respawnPet(owner);
+                        owner.sendMessage(ChatColor.GREEN + "Your pet is respawned");
                     }
                 }
-            }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 60 * 5L);
+            }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 60 * 2L);
         }
     }
 
@@ -202,17 +212,19 @@ public class PetManager {
     }
 
     private static void updateCurrentHealthSavedInEgg(LivingEntity livingEntity, int nextHealth) {
-        UUID uuid = PetManager.getOwner(livingEntity).getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-            if (guardianData.hasActiveCharacter()) {
-                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
-                if (!eggSlot.isEmpty()) {
-                    ItemStack itemOnSlot = eggSlot.getItemOnSlot();
-                    if (PersistentDataContainerUtil.hasInteger(itemOnSlot, "petCurrentHealth")) {
-                        PersistentDataContainerUtil.putInteger("petCurrentHealth", nextHealth, itemOnSlot);
-                        eggSlot.setItemOnSlot(itemOnSlot);
+        if (isPet(livingEntity)) {
+            UUID uuid = PetManager.getOwner(livingEntity).getUniqueId();
+            if (GuardianDataManager.hasGuardianData(uuid)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                    EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
+                    if (!eggSlot.isEmpty()) {
+                        ItemStack itemOnSlot = eggSlot.getItemOnSlot();
+                        if (PersistentDataContainerUtil.hasInteger(itemOnSlot, "petCurrentHealth")) {
+                            PersistentDataContainerUtil.putInteger("petCurrentHealth", nextHealth, itemOnSlot);
+                            eggSlot.setItemOnSlot(itemOnSlot);
+                        }
                     }
                 }
             }
@@ -220,7 +232,6 @@ public class PetManager {
     }
 
     private static void removePet(Player player) {
-        player.sendMessage("remove pet");
         if (hasActivePet(player)) {
             LivingEntity activePet = getActivePet(player);
             petToPlayer.remove(activePet);
@@ -230,7 +241,6 @@ public class PetManager {
     }
 
     private static void spawnPet(Player player, String petCode, int petCurrentHealth, int petLevel) {
-        player.sendMessage("spawn pet");
         LivingEntity pet = getPet(player, petCode, petCurrentHealth, petLevel);
         if (pet != null) {
             petToPlayer.put(pet, player);
@@ -249,14 +259,12 @@ public class PetManager {
                     ItemStack egg = eggSlot.getItemOnSlot();
                     if (!egg.getType().equals(Material.AIR)) {
                         if (PersistentDataContainerUtil.hasString(egg, "petCode")) {
-                            if (PersistentDataContainerUtil.hasInteger(egg, "petExp")) {
-                                String petCode = PersistentDataContainerUtil.getString(egg, "petCode");
-                                int petCurrentHealth = PersistentDataContainerUtil.getInteger(egg, "petCurrentHealth");
-                                int petExp = PersistentDataContainerUtil.getInteger(egg, "petExp");
-                                int levelFromExp = PetExperienceManager.getLevelFromExp(petExp);
+                            String petCode = PersistentDataContainerUtil.getString(egg, "petCode");
+                            int petCurrentHealth = PersistentDataContainerUtil.getInteger(egg, "petCurrentHealth");
+                            int petExp = PersistentDataContainerUtil.getInteger(egg, "petExp");
+                            int levelFromExp = PetExperienceManager.getLevelFromExp(petExp);
 
-                                spawnPet(player, petCode, petCurrentHealth, levelFromExp);
-                            }
+                            spawnPet(player, petCode, petCurrentHealth, levelFromExp);
                         }
                     }
                 } else {

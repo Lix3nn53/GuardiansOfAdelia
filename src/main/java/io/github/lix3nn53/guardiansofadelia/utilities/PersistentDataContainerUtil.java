@@ -122,4 +122,22 @@ public class PersistentDataContainerUtil {
         PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
         return persistentDataContainer.get(namespacedKey, PersistentDataType.INTEGER);
     }
+
+    public static boolean hasDouble(Entity entity, String key) {
+        NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
+        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+        return persistentDataContainer.has(namespacedKey, PersistentDataType.DOUBLE);
+    }
+
+    public static void putDouble(String key, double value, Entity entity) {
+        NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
+        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+        persistentDataContainer.set(namespacedKey, PersistentDataType.DOUBLE, value);
+    }
+
+    public static double getDouble(Entity entity, String key) {
+        NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
+        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+        return persistentDataContainer.get(namespacedKey, PersistentDataType.DOUBLE);
+    }
 }
