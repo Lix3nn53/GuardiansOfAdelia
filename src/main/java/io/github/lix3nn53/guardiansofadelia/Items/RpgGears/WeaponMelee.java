@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -59,8 +59,8 @@ public class WeaponMelee implements RPGGear {
         lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 
         this.itemStack = new ItemStack(material);
-        this.itemStack = persistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
-        this.itemStack = persistentDataContainerUtil.putString("reqClass", rpgClass.getClassCode(), this.itemStack);
+        PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
+        PersistentDataContainerUtil.putString("reqClass", rpgClass.getClassCode(), this.itemStack);
         this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSppedValue());
         this.itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, damage);
 

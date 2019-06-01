@@ -9,7 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.PetSlot;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -204,8 +204,8 @@ public class PetManager {
                 PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
                 if (!petSlot.isEmpty()) {
                     ItemStack itemOnSlot = petSlot.getItemOnSlot();
-                    if (persistentDataContainerUtil.hasInteger(itemOnSlot, "petCurrentHealth")) {
-                        itemOnSlot = persistentDataContainerUtil.putInteger("petCurrentHealth", nextHealth, itemOnSlot);
+                    if (PersistentDataContainerUtil.hasInteger(itemOnSlot, "petCurrentHealth")) {
+                        PersistentDataContainerUtil.putInteger("petCurrentHealth", nextHealth, itemOnSlot);
                         petSlot.setItemOnSlot(itemOnSlot);
                     }
                 }
@@ -240,11 +240,11 @@ public class PetManager {
                 if (!petSlot.isEmpty()) {
                     ItemStack egg = petSlot.getItemOnSlot();
                     if (!egg.getType().equals(Material.AIR)) {
-                        if (persistentDataContainerUtil.hasString(egg, "petCode")) {
-                            if (persistentDataContainerUtil.hasInteger(egg, "petExp")) {
-                                String petCode = persistentDataContainerUtil.getString(egg, "petCode");
-                                int petCurrentHealth = persistentDataContainerUtil.getInteger(egg, "petCurrentHealth");
-                                int petExp = persistentDataContainerUtil.getInteger(egg, "petExp");
+                        if (PersistentDataContainerUtil.hasString(egg, "petCode")) {
+                            if (PersistentDataContainerUtil.hasInteger(egg, "petExp")) {
+                                String petCode = PersistentDataContainerUtil.getString(egg, "petCode");
+                                int petCurrentHealth = PersistentDataContainerUtil.getInteger(egg, "petCurrentHealth");
+                                int petExp = PersistentDataContainerUtil.getInteger(egg, "petExp");
                                 int levelFromExp = PetExperienceManager.getLevelFromExp(petExp);
 
                                 spawnPet(player, petCode, petCurrentHealth, levelFromExp);

@@ -53,8 +53,8 @@ public class MyChunkEvents implements Listener {
             return false;
         }
         EntityType type = chunkEntity.getType();
-        return !type.equals(EntityType.PLAYER) && !type.equals(EntityType.ITEM_FRAME)
-                && !type.equals(EntityType.PAINTING) && !type.equals(EntityType.DROPPED_ITEM);
+        return !(type.equals(EntityType.PLAYER) || type.equals(EntityType.ITEM_FRAME)
+                || type.equals(EntityType.PAINTING) || type.equals(EntityType.DROPPED_ITEM));
     }
 
     private void createCustomEntitiesOnChunkLoad(Chunk chunk) {

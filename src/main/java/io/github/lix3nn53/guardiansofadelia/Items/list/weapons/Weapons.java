@@ -9,21 +9,21 @@ public class Weapons {
     public static ItemStack getWeapon(RPGClass rpgClass, int placementNumber, ItemTier tier, String itemTag, int minStatValue,
                                       int maxStatValue, int minNumberOfStats) {
         if (rpgClass.equals(RPGClass.WARRIOR)) {
-            return Axes.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+            return Axes.get(placementNumber, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.ARCHER)) {
-            return Bows.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+            return Bows.get(placementNumber, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.ROGUE)) {
-            return Daggers.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+            return Daggers.get(placementNumber, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
-            return Hammers.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+            return Hammers.get(placementNumber, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.MAGE)) {
-            return Staffs.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+            return Staffs.get(placementNumber, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.KNIGHT)) {
-            return Swords.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+            return Swords.get(placementNumber, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.MONK)) {
-            return Tridents.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+            return Tridents.get(placementNumber, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
         } else if (rpgClass.equals(RPGClass.HUNTER)) {
-            return Crossbows.get(placementNumber, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+            return Crossbows.get(placementNumber, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
         }
         return null;
     }

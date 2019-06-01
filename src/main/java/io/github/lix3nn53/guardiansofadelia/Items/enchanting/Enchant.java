@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items.enchanting;
 
 import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
-import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
@@ -159,7 +159,7 @@ public class Enchant {
             if (type.equals(StatType.MELEE)) {
                 itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextValue);
             } else if (type.equals(StatType.RANGED)) {
-                itemStack = persistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
+                PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             }
         } else if (type.equals(StatType.HYBRID)) {
             StatHybrid stat = (StatHybrid) StatUtils.getStat(itemStack);
@@ -327,7 +327,7 @@ public class Enchant {
             if (type.equals(StatType.MELEE)) {
                 itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextValue);
             } else if (type.equals(StatType.RANGED)) {
-                itemStack = persistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
+                PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             }
         } else if (type.equals(StatType.HYBRID)) {
             StatHybrid stat = (StatHybrid) StatUtils.getStat(itemStack);

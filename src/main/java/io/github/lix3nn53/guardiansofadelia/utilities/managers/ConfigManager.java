@@ -357,8 +357,8 @@ public class ConfigManager {
             double x = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".x");
             double y = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".y");
             double z = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".z");
-            float yaw = (float) dungeonsConfig.getDouble(dungeonTheme.toString() + ".yaw");
-            float pitch = (float) dungeonsConfig.getDouble(dungeonTheme.toString() + ".pitch");
+            float yaw = (float) dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".yaw");
+            float pitch = (float) dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".pitch");
             Location location = new Location(world, x, y, z, yaw, pitch);
             MiniGameManager.addMinigamePortal(location, dungeonTheme);
         }

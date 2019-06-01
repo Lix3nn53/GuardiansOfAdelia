@@ -63,12 +63,9 @@ public class TutorialEndAction implements Action {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        UUID uuid = player.getUniqueId();
-                        if (GuardianDataManager.hasGuardianData(uuid)) {
-                            DatabaseManager.writeGuardianDataWithCurrentCharacter(player, guardianData);
-                        }
+                        DatabaseManager.writeGuardianDataWithCurrentCharacter(player, guardianData);
                     }
-                }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
+                }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20L);
             }
         }
     }

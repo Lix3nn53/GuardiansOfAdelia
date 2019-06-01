@@ -3,12 +3,11 @@ package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
-import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -40,10 +39,10 @@ public class PetCompanion implements RPGGear {
         lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 
         this.itemStack = new ItemStack(material);
-        this.itemStack = persistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);
-        this.itemStack = persistentDataContainerUtil.putString("petCode", companion.toString(), this.itemStack);
-        this.itemStack = persistentDataContainerUtil.putInteger("petExp", 0, this.itemStack);
-        this.itemStack = persistentDataContainerUtil.putInteger("petCurrentHealth", companionHealth - 1, this.itemStack);
+        PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);
+        PersistentDataContainerUtil.putString("petCode", companion.toString(), this.itemStack);
+        PersistentDataContainerUtil.putInteger("petExp", 0, this.itemStack);
+        PersistentDataContainerUtil.putInteger("petCurrentHealth", companionHealth - 1, this.itemStack);
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);

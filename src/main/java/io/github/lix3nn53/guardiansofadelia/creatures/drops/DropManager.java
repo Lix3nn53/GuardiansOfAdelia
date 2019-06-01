@@ -50,13 +50,16 @@ public class DropManager {
     public static void onMobDeath(LivingEntity entity, EntityDeathEvent event) {
         if (dropDamages.containsKey(entity)) {
             DropDamage dropDamage = dropDamages.get(entity);
+            dropDamages.remove(entity);
             List<Player> bestPlayers = dropDamage.getBestPlayers();
             List<ItemStack> drops = MobDropGenerator.getDrops(entity);
-            for (ItemStack itemStack : drops) {
-                droppedItemOwners.put(itemStack, bestPlayers);
-                startItemTimer(itemStack);
+            if (!drops.isEmpty()) {
+                for (ItemStack itemStack : drops) {
+                    droppedItemOwners.put(itemStack, bestPlayers);
+                    startItemTimer(itemStack);
+                }
+                event.getDrops().addAll(drops);
             }
-            event.getDrops().addAll(drops);
         }
     }
 

@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.economy;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -74,12 +74,12 @@ public class EconomyUtils {
         lore.add(ChatColor.GOLD + "Price: " + priceString);
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
-        itemStack = persistentDataContainerUtil.putInteger("shopPrice", price, itemStack);
+        PersistentDataContainerUtil.putInteger("shopPrice", price, itemStack);
         return itemStack;
     }
 
     public static ItemStack removeShopPrice(ItemStack itemStack) {
-        if (persistentDataContainerUtil.hasInteger(itemStack, "shopPrice")) {
+        if (PersistentDataContainerUtil.hasInteger(itemStack, "shopPrice")) {
             ItemStack clone = itemStack.clone();
             ItemMeta itemMeta = clone.getItemMeta();
             List<String> lore = itemMeta.getLore();
@@ -87,15 +87,15 @@ public class EconomyUtils {
             lore.remove(size - 1);
             itemMeta.setLore(lore);
             clone.setItemMeta(itemMeta);
-            clone = persistentDataContainerUtil.removeTag(clone, "shopPrice");
+            clone = PersistentDataContainerUtil.removeTag(clone, "shopPrice");
             return clone;
         }
         return itemStack;
     }
 
     public static int getItemPrice(ItemStack itemStack) {
-        if (persistentDataContainerUtil.hasInteger(itemStack, "shopPrice")) {
-            return persistentDataContainerUtil.getInteger(itemStack, "shopPrice");
+        if (PersistentDataContainerUtil.hasInteger(itemStack, "shopPrice")) {
+            return PersistentDataContainerUtil.getInteger(itemStack, "shopPrice");
         }
         return 0;
     }

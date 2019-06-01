@@ -63,7 +63,7 @@ public class LocationUtils {
         double x1 = (Math.random() * (radius * 2)) - radius;
         double z1 = (Math.random() * (radius * 2)) - radius;
 
-        return baseLocation.clone().add(x1, Math.random() + 0.8, z1);
+        return baseLocation.clone().add(x1, Math.random() + 0.8 - 4, z1);
     }
 
 }

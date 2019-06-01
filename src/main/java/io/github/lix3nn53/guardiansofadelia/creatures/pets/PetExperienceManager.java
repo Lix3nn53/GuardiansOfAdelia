@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.PetSlot;
-import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -94,7 +94,8 @@ public class PetExperienceManager {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
                 if (!petSlot.isEmpty()) {
-                    ItemStack egg = persistentDataContainerUtil.putInteger("petExp", nextExperience, petSlot.getItemOnSlot());
+                    ItemStack egg = petSlot.getItemOnSlot();
+                    PersistentDataContainerUtil.putInteger("petExp", nextExperience, petSlot.getItemOnSlot());
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
@@ -159,8 +160,8 @@ public class PetExperienceManager {
                 PetSlot petSlot = activeCharacter.getRpgInventory().getPetSlot();
                 if (!petSlot.isEmpty()) {
                     ItemStack itemOnSlot = petSlot.getItemOnSlot();
-                    if (persistentDataContainerUtil.hasInteger(itemOnSlot, "petExp")) {
-                        return persistentDataContainerUtil.getInteger(itemOnSlot, "petExp");
+                    if (PersistentDataContainerUtil.hasInteger(itemOnSlot, "petExp")) {
+                        return PersistentDataContainerUtil.getInteger(itemOnSlot, "petExp");
                     }
                 }
             }

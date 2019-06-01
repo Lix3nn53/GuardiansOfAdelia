@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
@@ -15,12 +16,10 @@ import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,6 +28,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.UUID;
 
@@ -151,6 +152,19 @@ public class CommandLix implements CommandExecutor {
                     armorStand.setVisible(false);
                     armorStand.setInvulnerable(true);
                     armorStand.setGravity(false);
+                }
+            } else if (args[0].equals("test")) {
+                ItemStack itemStack = new ItemStack(Material.SHEARS);
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), "passive");
+                PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
+                persistentDataContainer.set(namespacedKey, PersistentDataType.INTEGER, 5);
+                itemStack.setItemMeta(itemMeta);
+                if (persistentDataContainer.has(namespacedKey, PersistentDataType.INTEGER)) {
+                    int typeNum = PersistentDataContainerUtil.getInteger(itemStack, "passive");
+                    player.sendMessage("passive = " + typeNum);
+                } else {
+                    player.sendMessage("no key");
                 }
             }
 

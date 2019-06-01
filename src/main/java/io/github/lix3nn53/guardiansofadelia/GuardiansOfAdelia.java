@@ -65,6 +65,7 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
         Bukkit.getPluginManager().registerEvents(new MyEntityDamageByEntityEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityDamageEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityDeathEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyEntityDismountEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityMountEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityPickupItemEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityRegainHealthEvent(), this);
@@ -73,6 +74,7 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
         Bukkit.getPluginManager().registerEvents(new MyInventoryCloseEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyItemDespawnEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyItemMergeEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyItemSpawnEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyNPCRightClickEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerAnimationEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerDeathEvent(), this);

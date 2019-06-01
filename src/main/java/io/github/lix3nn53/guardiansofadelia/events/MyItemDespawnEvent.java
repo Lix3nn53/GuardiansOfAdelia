@@ -25,8 +25,10 @@ public class MyItemDespawnEvent implements Listener {
             Collection<QuestHologram> npcNoToHologram = QuestNPCManager.getNpcNoToHologram().values();
             for (QuestHologram questHologram : npcNoToHologram) {
                 ArmorStand armorStand = questHologram.getHolo().getArmorStand();
-                if (armorStand.getPassengers().get(0).equals(entity)) {
-                    event.setCancelled(true);
+                if (!armorStand.getPassengers().isEmpty()) {
+                    if (armorStand.getPassengers().get(0).equals(entity)) {
+                        event.setCancelled(true);
+                    }
                 }
             }
         }

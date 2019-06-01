@@ -252,7 +252,7 @@ public class PassiveItemList {
         }
 
         final GearPassive passive = new GearPassive(name, tier, itemTag, material, customModelDataId, passiveTypeNum, level, rpgClass, minStatValue,
-                maxStatValue, minNumberofStats, tier.getBonusPercent(), itemID);
+                maxStatValue, minNumberofStats, tier.getBonusMultiplier(), itemID);
 
         return passive.getItemStack();
     }

@@ -61,7 +61,9 @@ public class DatabaseManager {
                 if (rpgCharacter != null) {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                     guardianData.setActiveCharacter(rpgCharacter, charNo);
-                    player.teleport(location);
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                        player.teleport(location);
+                    });
                     TablistUtils.updateTablist(player);
                     InventoryUtils.setMenuItemPlayer(player);
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> SkillAPIUtils.setActiveCharacter(player, charNo));

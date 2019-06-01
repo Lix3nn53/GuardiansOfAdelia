@@ -1,13 +1,33 @@
 
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Test {
 
+    private static final HashMap<Character, Double> playerDamages = new HashMap<>();
+
     public static void main(String[] args) {
+
+        playerDamages.put('A', 1D);
+        playerDamages.put('S', 1D);
+        playerDamages.put('D', 1D);
+        playerDamages.put('F', 1D);
+        playerDamages.put('g', 1D);
+        playerDamages.put('h', 1D);
+        playerDamages.put('j', 1D);
+        playerDamages.put('k', 2D);
+
+        double max = Collections.max(playerDamages.values());
+        List<Character> collect = playerDamages.entrySet().stream()
+                .filter(entry -> entry.getValue() == max)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
+        for (char ch : collect) {
+            System.out.println(ch);
+        }
 
         for (int lvl = 0; lvl <=90; lvl++) {
             //double exp = x * lvl * lvl + y * lvl + z;

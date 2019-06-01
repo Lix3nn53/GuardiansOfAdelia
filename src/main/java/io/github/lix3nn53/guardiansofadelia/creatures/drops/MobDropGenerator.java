@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.creatures.drops;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
-import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
@@ -80,26 +80,27 @@ class MobDropGenerator {
     }
 
     public static List<ItemStack> getDrops(Entity entity) {
-        int dropTableNumber = getDropTableNumber(entity);
-
-        List<ItemStack> dropTable = dropTables.get(dropTableNumber);
-
         List<ItemStack> drops = new ArrayList<>();
 
-        if (!dropTable.isEmpty()) {
-            Collections.shuffle(dropTable);
-            double random = Math.random();
-            if (random < 0.1D) {
-                drops.add(dropTable.get(0));
+        double random = Math.random();
+        if (random < 0.9D) {
+            int dropTableNumber = getDropTableNumber(entity);
+
+            if (dropTables.containsKey(dropTableNumber)) {
+                List<ItemStack> dropTable = dropTables.get(dropTableNumber);
+
+                if (!dropTable.isEmpty()) {
+                    Collections.shuffle(dropTable);
+                    drops.add(dropTable.get(0));
+                }
             }
         }
-
         return drops;
     }
 
     private static int getDropTableNumber(Entity entity) {
-        if (persistentDataContainerUtil.hasInteger(entity, "dropTableNumber")) {
-            return persistentDataContainerUtil.getInteger(entity, "dropTableNumber");
+        if (PersistentDataContainerUtil.hasInteger(entity, "dropTableNumber")) {
+            return PersistentDataContainerUtil.getInteger(entity, "dropTableNumber");
         }
         return -1;
     }

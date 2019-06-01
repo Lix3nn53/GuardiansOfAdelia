@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory.slots;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
@@ -16,7 +16,7 @@ public class PetSlot {
     private ItemStack itemOnSlot;
 
     public boolean doesFit(ItemStack itemStack) {
-        return persistentDataContainerUtil.hasInteger(itemStack, requiredNbtTag);
+        return PersistentDataContainerUtil.hasInteger(itemStack, requiredNbtTag);
     }
 
     public boolean isEmpty() {

@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.creatures;
 
 import io.github.lix3nn53.guardiansofadelia.Items.list.MonsterItems;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -840,11 +840,11 @@ public class EntityList {
     }
 
     private static void setEntityExperience(Entity entity, int experience) {
-        persistentDataContainerUtil.putInteger("experience", experience, entity);
+        PersistentDataContainerUtil.putInteger("experience", experience, entity);
     }
 
     private static void setEntityDropTableNo(Entity entity, int dropTableNumber) {
-        persistentDataContainerUtil.putInteger("dropTableNumber", dropTableNumber, entity);
+        PersistentDataContainerUtil.putInteger("dropTableNumber", dropTableNumber, entity);
     }
 
 
@@ -856,6 +856,6 @@ public class EntityList {
      * @param customDamage
      */
     private static void setDamage(Entity entity, int customDamage) {
-        persistentDataContainerUtil.putInteger("customDamage", customDamage, entity);
+        PersistentDataContainerUtil.putInteger("customDamage", customDamage, entity);
     }
 }

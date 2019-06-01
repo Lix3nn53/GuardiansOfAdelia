@@ -13,7 +13,7 @@ public class QuestHologram {
 
     //Hologram to disguise, one per quest NPC
 
-    Hologram holo;
+    private final Hologram holo;
 
     public QuestHologram(Location loc) {
         QuestIconType questIconType = QuestIconType.EMPTY;
@@ -23,13 +23,17 @@ public class QuestHologram {
     }
 
     public void disguiseToPlayer(QuestIconType type, Player p) {
-        ItemStack holoItem = type.getHoloItem();
+        if (!holo.getArmorStand().isDead()) {
+            if (!holo.getArmorStand().getPassengers().isEmpty()) {
+                ItemStack holoItem = type.getHoloItem();
 
-        MiscDisguise disguise = new MiscDisguise(DisguiseType.DROPPED_ITEM);
-        DroppedItemWatcher watcher = (DroppedItemWatcher) disguise.getWatcher();
-        watcher.setItemStack(holoItem);
+                MiscDisguise disguise = new MiscDisguise(DisguiseType.DROPPED_ITEM);
+                DroppedItemWatcher watcher = (DroppedItemWatcher) disguise.getWatcher();
+                watcher.setItemStack(holoItem);
 
-        DisguiseAPI.disguiseToPlayers(holo.getArmorStand().getPassengers().get(0), disguise, p);
+                DisguiseAPI.disguiseToPlayers(holo.getArmorStand().getPassengers().get(0), disguise, p);
+            }
+        }
     }
 
     public Hologram getHolo() {
@@ -37,6 +41,11 @@ public class QuestHologram {
     }
 
     public boolean isDisguisedToPlayer(Player player) {
-        return DisguiseAPI.isDisguised(player, holo.getArmorStand().getPassengers().get(0));
+        if (!holo.getArmorStand().isDead()) {
+            if (!holo.getArmorStand().getPassengers().isEmpty()) {
+                return DisguiseAPI.isDisguised(player, holo.getArmorStand().getPassengers().get(0));
+            }
+        }
+        return false;
     }
 }

@@ -80,11 +80,11 @@ public class TutorialManager {
         player.getInventory().setItem(5, mainHand);
 
         if (rpgClass.equals(RPGClass.KNIGHT)) {
-            ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+            ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
             changeClassOfItemToTutorialClass(shield, rpgClass);
             player.getInventory().setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
-            ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusPercent(), minStatValue, maxStatValue, minNumberOfStats);
+            ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
             changeClassOfItemToTutorialClass(shield, rpgClass);
             player.getInventory().setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.ROGUE)) {

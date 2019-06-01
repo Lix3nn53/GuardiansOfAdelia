@@ -6,6 +6,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.EulerAngle;
 
 public class Portal {
     private final Location baseLocation;
@@ -18,7 +19,16 @@ public class Portal {
     }
 
     public void createModel() {
-        this.armorStand = (ArmorStand) baseLocation.getWorld().spawnEntity(baseLocation, EntityType.ARMOR_STAND);
+        double x = Math.toRadians(baseLocation.getPitch());
+        double y = Math.toRadians(baseLocation.getYaw());
+        EulerAngle eulerAngle = new EulerAngle(x, y,0);
+
+        Location clone = baseLocation.clone();
+        clone.setPitch(0);
+        clone.setYaw(0);
+
+        this.armorStand = (ArmorStand) clone.getWorld().spawnEntity(clone, EntityType.ARMOR_STAND);
+        armorStand.setHeadPose(eulerAngle);
         ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setCustomModelData(this.portalColor.getCustomModelData());

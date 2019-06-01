@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -39,7 +39,7 @@ public class OtherItems {
         itemMeta.addEnchant(Enchantment.LURE, 3, false);
         itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
-        itemStack = persistentDataContainerUtil.putInteger("durability", durability, itemStack);
+        PersistentDataContainerUtil.putInteger("durability", durability, itemStack);
         return itemStack;
     }
 

@@ -13,7 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.FakeIndicator;
-import io.github.lix3nn53.guardiansofadelia.utilities.persistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -28,15 +28,15 @@ import java.util.UUID;
 public class MyEntityDamageByEntityEvent implements Listener {
 
     private static int getExperience(Entity entity) {
-        if (persistentDataContainerUtil.hasInteger(entity, "experience")) {
-            return persistentDataContainerUtil.getInteger(entity, "experience");
+        if (PersistentDataContainerUtil.hasInteger(entity, "experience")) {
+            return PersistentDataContainerUtil.getInteger(entity, "experience");
         }
         return 0;
     }
 
     private static int getCustomDamage(Entity entity) {
-        if (persistentDataContainerUtil.hasInteger(entity, "customDamage")) {
-            return persistentDataContainerUtil.getInteger(entity, "customDamage");
+        if (PersistentDataContainerUtil.hasInteger(entity, "customDamage")) {
+            return PersistentDataContainerUtil.getInteger(entity, "customDamage");
         }
         return 0;
     }

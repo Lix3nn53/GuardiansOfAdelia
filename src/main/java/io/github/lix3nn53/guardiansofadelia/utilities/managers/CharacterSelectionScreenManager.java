@@ -6,14 +6,16 @@ import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.util.BoundingBox;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.function.Predicate;
 
 public class CharacterSelectionScreenManager {
 
@@ -29,6 +31,15 @@ public class CharacterSelectionScreenManager {
     }
 
     private void createHolograms() {
+        //remove old armorStands since chunk events doesn't work for them. Because spawn chunks are always loaded.
+        BoundingBox boundingBox = new BoundingBox(-2750, 41, 6108, -2772, 53, 6130);
+        Predicate<Entity> predicate = entity -> entity.getType().equals(EntityType.ARMOR_STAND);
+        Collection<Entity> oldArmorStands = Bukkit.getWorld("world").getNearbyEntities(boundingBox, predicate);
+        for (Entity entity : oldArmorStands) {
+            entity.remove();
+        }
+
+        //create new armorStands
         int i = 1;
         for (Location location : armorStandLocationBases) {
             List<ArmorStand> holoList = new ArrayList<>();

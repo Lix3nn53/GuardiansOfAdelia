@@ -8,7 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-public class persistentDataContainerUtil {
+public class PersistentDataContainerUtil {
 
     public static boolean hasString(ItemStack itemStack, String key) {
         if (itemStack.hasItemMeta()) {
@@ -40,15 +40,12 @@ public class persistentDataContainerUtil {
         return false;
     }
 
-    public static ItemStack putString(String key, String value, ItemStack itemStack) {
-        if (itemStack.hasItemMeta()) {
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
-            PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
-            persistentDataContainer.set(namespacedKey, PersistentDataType.STRING, value);
-            itemStack.setItemMeta(itemMeta);
-        }
-        return itemStack;
+    public static void putString(String key, String value, ItemStack itemStack) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
+        PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
+        persistentDataContainer.set(namespacedKey, PersistentDataType.STRING, value);
+        itemStack.setItemMeta(itemMeta);
     }
 
     public static String getString(ItemStack itemStack, String key) {
@@ -61,15 +58,12 @@ public class persistentDataContainerUtil {
         return null;
     }
 
-    public static ItemStack putDouble(String key, double value, ItemStack itemStack) {
-        if (itemStack.hasItemMeta()) {
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
-            PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
-            persistentDataContainer.set(namespacedKey, PersistentDataType.DOUBLE, value);
-            itemStack.setItemMeta(itemMeta);
-        }
-        return itemStack;
+    public static void putDouble(String key, double value, ItemStack itemStack) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
+        PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
+        persistentDataContainer.set(namespacedKey, PersistentDataType.DOUBLE, value);
+        itemStack.setItemMeta(itemMeta);
     }
 
     public static double getDouble(ItemStack itemStack, String key) {
@@ -82,15 +76,12 @@ public class persistentDataContainerUtil {
         return 0;
     }
 
-    public static ItemStack putInteger(String key, int value, ItemStack itemStack) {
-        if (itemStack.hasItemMeta()) {
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
-            PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
-            persistentDataContainer.set(namespacedKey, PersistentDataType.INTEGER, value);
-            itemStack.setItemMeta(itemMeta);
-        }
-        return itemStack;
+    public static void putInteger(String key, int value, ItemStack itemStack) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
+        PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
+        persistentDataContainer.set(namespacedKey, PersistentDataType.INTEGER, value);
+        itemStack.setItemMeta(itemMeta);
     }
 
     public static int getInteger(ItemStack itemStack, String key) {
