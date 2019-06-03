@@ -1,11 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.consumables.PotionType;
+import io.github.lix3nn53.guardiansofadelia.Items.consumables.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Shields;
-import io.github.lix3nn53.guardiansofadelia.Items.list.consumables.Potions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -91,10 +90,10 @@ public class TutorialManager {
             player.getInventory().setItemInOffHand(mainHand);
         }
 
-        ItemStack hpPotion = Potions.getItemStack(PotionType.HEALTH, 5);
+        ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(10);
         hpPotion.setAmount(20);
         InventoryUtils.giveItemToPlayer(player, hpPotion);
-        ItemStack manaPotion = Potions.getItemStack(PotionType.MANA, 5);
+        ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(10);
         manaPotion.setAmount(20);
         InventoryUtils.giveItemToPlayer(player, manaPotion);
     }

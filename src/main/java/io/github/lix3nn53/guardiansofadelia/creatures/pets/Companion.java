@@ -96,7 +96,7 @@ public enum Companion {
             case WOLF:
                 return ChatColor.WHITE + "Wolf";
             case TURTLE:
-                return ChatColor.GREEN + "Baby Turtle";
+                return ChatColor.GREEN + "Turtle";
             case POLAR_BEAR:
                 return ChatColor.AQUA + "Baby PolarBear";
             case PANDA:
@@ -319,9 +319,9 @@ public enum Companion {
             case SHEEP:
                 return 10000017;
             case COW:
-                return 10000001;
+                return 10000013;
             case PIG:
-                return 10000001;
+                return 10000005;
             case CAT_ALL_BLACK:
                 return 10000006;
             case CAT_BLACK:
@@ -345,37 +345,37 @@ public enum Companion {
             case CAT_WHITE:
                 return 10000006;
             case RABBIT_BLACK:
-                return 10000015;
+                return 10000018;
             case RABBIT_BLACK_AND_WHITE:
-                return 10000015;
+                return 10000018;
             case RABBIT_BROWN:
-                return 10000015;
+                return 10000018;
             case RABBIT_GOLD:
-                return 10000015;
+                return 10000018;
             case RABBIT_SALT_AND_PEPPER:
-                return 10000015;
+                return 10000018;
             case RABBIT_WHITE:
-                return 10000015;
+                return 10000018;
             case CHOCOLATE:
-                return 10000015;
+                return 10000013;
             case WOLF:
-                return 10000015;
+                return 10000016;
             case TURTLE:
-                return 10000015;
+                return 10000001;
             case POLAR_BEAR:
-                return 10000015;
+                return 10000004;
             case PANDA:
-                return 10000015;
+                return 10000014;
             case ICE_CREAM:
                 return 10000015;
             case FOX_RED:
-                return 10000015;
+                return 10000011;
             case FOX_SNOW:
-                return 10000015;
+                return 10000004;
             case VEX:
-                return 10000015;
+                return 10000010;
             case MINI_DRAGON:
-                return 10000015;
+                return 10000003;
         }
         return 10000001;
     }

@@ -82,8 +82,7 @@ public class CraftingGuiManager {
 
         if (this.equals(JobType.ALCHEMIST)) {
             itemTag = "Alchemist's";
-            itemStackList = ItemPoolGenerator.generatePotions(tier, itemTag, gearLevel);
-            itemStackList.addAll(ItemPoolGenerator.generateBuffScrolls(tier, itemTag, gearLevel));
+            itemStackList = ItemPoolGenerator.generateConsumables(itemTag, gearLevel.getConsumableNo());
         } else if (this.equals(JobType.ARMORSMITH)) {
             itemTag = "Armorsmith's";
             itemStackList = ItemPoolGenerator.generateArmors(tier, itemTag, gearLevel);

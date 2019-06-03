@@ -1,22 +1,20 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
-import io.github.lix3nn53.guardiansofadelia.Items.consumables.PotionType;
+import io.github.lix3nn53.guardiansofadelia.Items.consumables.Consumable;
+import io.github.lix3nn53.guardiansofadelia.Items.scrolls.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Shields;
-import io.github.lix3nn53.guardiansofadelia.Items.list.consumables.Potions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
+import io.github.lix3nn53.guardiansofadelia.Items.scrolls.TeleportScrollLocation;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
-import io.github.lix3nn53.guardiansofadelia.towns.Town;
-import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -390,7 +388,6 @@ public enum MerchantPageType {
 
     private GuiBookGeneric getArmorShop(int shopLevel, int shopNpc) {
         List<MerchantGuiLine> lines = new ArrayList<>();
-        lines.add(new MerchantGuiLine());
 
         ItemTier tier = ItemTier.COMMON;
         int minStatValue = 0;
@@ -399,6 +396,7 @@ public enum MerchantPageType {
         int lineIndex = 0;
 
         if (shopLevel == 1) {
+            lines.add(new MerchantGuiLine());
             for (ArmorType armorType : ArmorType.values()) {
                 ItemStack weapon = Armors.getArmor(armorType, RPGClass.NO_CLASS, 1, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
@@ -406,6 +404,7 @@ public enum MerchantPageType {
                 } else {
                     lines.add(new MerchantGuiLine());
                     lineIndex++;
+                    lines.get(lineIndex).addWord(weapon, 1);
                 }
             }
             lines.add(new MerchantGuiLine());
@@ -417,14 +416,15 @@ public enum MerchantPageType {
                 } else {
                     lines.add(new MerchantGuiLine());
                     lineIndex++;
+                    lines.get(lineIndex).addWord(weapon, 1);
                 }
             }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
             for (RPGClass rpgClass : RPGClass.values()) {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
+                lines.add(new MerchantGuiLine());
+                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 1, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -432,16 +432,17 @@ public enum MerchantPageType {
                     } else {
                         lines.add(new MerchantGuiLine());
                         lineIndex++;
+                        lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
-                lines.add(new MerchantGuiLine());
-                lineIndex++;
             }
         } else if (shopLevel == 3) {
             for (RPGClass rpgClass : RPGClass.values()) {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
+                lines.add(new MerchantGuiLine());
+                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 2, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -449,17 +450,16 @@ public enum MerchantPageType {
                     } else {
                         lines.add(new MerchantGuiLine());
                         lineIndex++;
+                        lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
-                lines.add(new MerchantGuiLine());
-                lineIndex++;
             }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
             for (RPGClass rpgClass : RPGClass.values()) {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
+                lines.add(new MerchantGuiLine());
+                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 3, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -467,16 +467,17 @@ public enum MerchantPageType {
                     } else {
                         lines.add(new MerchantGuiLine());
                         lineIndex++;
+                        lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
-                lines.add(new MerchantGuiLine());
-                lineIndex++;
             }
         } else if (shopLevel == 4) {
             for (RPGClass rpgClass : RPGClass.values()) {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
+                lines.add(new MerchantGuiLine());
+                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 4, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -484,17 +485,16 @@ public enum MerchantPageType {
                     } else {
                         lines.add(new MerchantGuiLine());
                         lineIndex++;
+                        lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
-                lines.add(new MerchantGuiLine());
-                lineIndex++;
             }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
             for (RPGClass rpgClass : RPGClass.values()) {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
+                lines.add(new MerchantGuiLine());
+                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 5, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -502,16 +502,17 @@ public enum MerchantPageType {
                     } else {
                         lines.add(new MerchantGuiLine());
                         lineIndex++;
+                        lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
-                lines.add(new MerchantGuiLine());
-                lineIndex++;
             }
         } else if (shopLevel == 5) {
             for (RPGClass rpgClass : RPGClass.values()) {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
+                lines.add(new MerchantGuiLine());
+                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 6, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -519,17 +520,16 @@ public enum MerchantPageType {
                     } else {
                         lines.add(new MerchantGuiLine());
                         lineIndex++;
+                        lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
-                lines.add(new MerchantGuiLine());
-                lineIndex++;
             }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
             for (RPGClass rpgClass : RPGClass.values()) {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
+                lines.add(new MerchantGuiLine());
+                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 7, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -537,10 +537,9 @@ public enum MerchantPageType {
                     } else {
                         lines.add(new MerchantGuiLine());
                         lineIndex++;
+                        lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
-                lines.add(new MerchantGuiLine());
-                lineIndex++;
             }
         }
 
@@ -554,6 +553,7 @@ public enum MerchantPageType {
             } else {
                 guiPages.add(new GuiPage());
                 guiPageIndex++;
+                guiPages.get(guiPageIndex).addLine(line);
             }
         }
 
@@ -691,9 +691,9 @@ public enum MerchantPageType {
     private GuiBookGeneric getPotionShop(int shopLevel, int shopNpc) {
         MerchantGuiLine line1 = new MerchantGuiLine();
 
-        ItemStack hpPotion = Potions.getItemStack(PotionType.HEALTH, shopLevel);
+        ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(shopLevel * 2);
         line1.addWord(hpPotion, 1);
-        ItemStack manaPotion = Potions.getItemStack(PotionType.MANA, shopLevel);
+        ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(shopLevel * 2);
         line1.addWord(manaPotion, 1);
 
         GuiPage guiPage = new GuiPage();
@@ -707,27 +707,22 @@ public enum MerchantPageType {
     private GuiBookGeneric getTeleportScrollShop(int shopLevel, int shopNpc) {
         MerchantGuiLine line1 = new MerchantGuiLine();
 
-        Town town1 = TownManager.getTown(1);
-        TeleportScroll roumen = new TeleportScroll(town1.getLocation(), 1, town1.getName());
+        TeleportScroll roumen = new TeleportScroll(TeleportScrollLocation.ROUMEN, 1);
         line1.addWord(roumen.getScroll(1), 1);
 
-        Town town2 = TownManager.getTown(2);
-        TeleportScroll port = new TeleportScroll(town2.getLocation(), 5, town2.getName());
+        TeleportScroll port = new TeleportScroll(TeleportScrollLocation.PORT_VELOA, 5);
         line1.addWord(port.getScroll(1), 1);
 
         if (shopLevel >= 2) {
-            Town town3 = TownManager.getTown(3);
-            TeleportScroll elderine = new TeleportScroll(town3.getLocation(), 20, town3.getName());
+            TeleportScroll elderine = new TeleportScroll(TeleportScrollLocation.ELDERINE, 20);
             line1.addWord(elderine.getScroll(1), 1);
         }
         if (shopLevel >= 3) {
-            Town town4 = TownManager.getTown(4);
-            TeleportScroll uruga = new TeleportScroll(town4.getLocation(), 40, town4.getName());
+            TeleportScroll uruga = new TeleportScroll(TeleportScrollLocation.URUGA, 40);
             line1.addWord(uruga.getScroll(1), 1);
         }
         if (shopLevel >= 4) {
-            Town town5 = TownManager.getTown(5);
-            TeleportScroll ruins = new TeleportScroll(town5.getLocation(), 60, town5.getName());
+            TeleportScroll ruins = new TeleportScroll(TeleportScrollLocation.ALBERSTOL_RUINS, 60);
             line1.addWord(ruins.getScroll(1), 1);
         }
 

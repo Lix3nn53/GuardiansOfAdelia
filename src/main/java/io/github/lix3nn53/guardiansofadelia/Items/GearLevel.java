@@ -186,4 +186,28 @@ public enum GearLevel {
         }
         return 1;
     }
+
+    public int getConsumableNo() {
+        switch (this) {
+            case ONE:
+                return 1;
+            case TWO:
+                return 2;
+            case THREE:
+                return 4;
+            case FOUR:
+                return 6;
+            case FIVE:
+                return 8;
+            case SIX:
+                return 10;
+            case SEVEN:
+                return 12;
+            case EIGHT:
+                return 14;
+            case NINE:
+                return 16;
+        }
+        return 1;
+    }
 }

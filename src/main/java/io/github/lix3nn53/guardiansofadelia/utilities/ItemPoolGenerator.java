@@ -2,12 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.utilities;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.consumables.BuffType;
-import io.github.lix3nn53.guardiansofadelia.Items.consumables.PotionType;
+import io.github.lix3nn53.guardiansofadelia.Items.consumables.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
-import io.github.lix3nn53.guardiansofadelia.Items.list.consumables.BuffScrolls;
-import io.github.lix3nn53.guardiansofadelia.Items.list.consumables.Potions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
@@ -82,28 +79,22 @@ public class ItemPoolGenerator {
         return temp;
     }
 
-    public static List<ItemStack> generatePotions(ItemTier tier, String itemTag, GearLevel gearLevel) {
-        int itemTier = gearLevel.getMinLevel();
-
+    public static List<ItemStack> generateConsumables(int potionLevel) {
         List<ItemStack> temp = new ArrayList<>();
 
-        temp.add(Potions.getItemStack(PotionType.HEALTH, itemTier));
-        temp.add(Potions.getItemStack(PotionType.MANA, itemTier));
-        temp.add(Potions.getItemStack(PotionType.HYBRID, itemTier));
-        temp.add(Potions.getItemStack(PotionType.REGENERATION, itemTier));
+        for (Consumable consumable : Consumable.values()) {
+            temp.add(consumable.getItemStack(potionLevel));
+        }
 
         return temp;
     }
 
-    public static List<ItemStack> generateBuffScrolls(ItemTier tier, String itemTag, GearLevel gearLevel) {
-        int itemTier = gearLevel.getMinLevel();
-
+    public static List<ItemStack> generateConsumables(String tag, int potionLevel) {
         List<ItemStack> temp = new ArrayList<>();
 
-        temp.add(BuffScrolls.getItemStack(BuffType.PHYSICAL_DAMAGE, itemTier));
-        temp.add(BuffScrolls.getItemStack(BuffType.PHYSICAL_DEFENSE, itemTier));
-        temp.add(BuffScrolls.getItemStack(BuffType.MAGICAL_DAMAGE, itemTier));
-        temp.add(BuffScrolls.getItemStack(BuffType.MAGICAL_DEFENSE, itemTier));
+        for (Consumable consumable : Consumable.values()) {
+            temp.add(consumable.getItemStack(tag, potionLevel));
+        }
 
         return temp;
     }

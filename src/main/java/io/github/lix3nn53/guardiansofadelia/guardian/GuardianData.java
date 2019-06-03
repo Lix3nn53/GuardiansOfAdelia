@@ -15,7 +15,6 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class GuardianData {
 
@@ -37,8 +36,6 @@ public class GuardianData {
     private boolean isTeleporting;
     private boolean isGathering;
     private boolean isConsuming;
-
-    private List<String> activeBuffCodes = new ArrayList<>();
 
     private Bazaar bazaar;
 
@@ -64,8 +61,7 @@ public class GuardianData {
     }
 
     public boolean isFreeToAct() {
-        boolean isFree = isGathering && isTeleporting && isConsuming;
-        return isFree;
+        return isGathering && isTeleporting && isConsuming;
     }
 
     public boolean hasPendingInvite() {
@@ -168,25 +164,6 @@ public class GuardianData {
 
     public void setActiveGui(Gui gui) {
         this.activeGui = gui;
-    }
-
-    public void addBuff(String buff) {
-        this.activeBuffCodes.add(buff);
-    }
-
-    public void removeBuff(String buff) {
-        this.activeBuffCodes.remove(buff);
-    }
-
-    public void clearBuffs() {
-        this.activeBuffCodes.clear();
-    }
-
-    public boolean hasBuff(String buff) {
-        Optional<String> buffOptional = this.activeBuffCodes.stream()
-                .filter(item -> item.equals(buff))
-                .findAny();
-        return buffOptional.isPresent();
     }
 
     public Bazaar getBazaar() {

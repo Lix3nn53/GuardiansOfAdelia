@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GuiPage {
 
-    List<GuiLine> guiLines = new ArrayList<>();
+    private final List<GuiLine> guiLines = new ArrayList<>();
 
     public List<GuiLine> getGuiLines() {
         return guiLines;

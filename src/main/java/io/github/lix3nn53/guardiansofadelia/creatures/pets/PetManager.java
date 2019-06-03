@@ -86,10 +86,11 @@ public class PetManager {
             wolf.setAdult();
             wolf.setTamed(true);
             wolf.setOwner(owner);
-            wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
-            wolf.setHealth(currentHP);
+            wolf.setSilent(true);
             wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_MOVEMENT_SPEED);
             wolf.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage);
+            wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
+            wolf.setHealth(currentHP);
             companion.disguise(wolf);
             return wolf;
         } else if (isMountCode(petCode)) {

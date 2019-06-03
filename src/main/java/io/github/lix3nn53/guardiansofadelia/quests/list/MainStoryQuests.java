@@ -1,9 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.consumables.PotionType;
+import io.github.lix3nn53.guardiansofadelia.Items.consumables.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
-import io.github.lix3nn53.guardiansofadelia.Items.list.consumables.Potions;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.GiveItemAction;
@@ -46,9 +45,9 @@ public class MainStoryQuests {
         tasks.add(task1);
 
         Task task2 = new TaskInteract(16);
-        ItemStack hpPotion = Potions.getItemStack(PotionType.HEALTH, 1);
+        ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(1);
         hpPotion.setAmount(10);
-        ItemStack manaPotion = Potions.getItemStack(PotionType.MANA, 1);
+        ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(1);
         manaPotion.setAmount(10);
         GiveItemAction giveItemAction1 = new GiveItemAction(hpPotion);
         GiveItemAction giveItemAction2 = new GiveItemAction(manaPotion);

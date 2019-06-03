@@ -42,7 +42,7 @@ public class GuiBookGeneric implements GuiBook {
                 pageGui.setItem(53, nextPage);
             }
             int i = 0;
-            for (GuiLine line : pageList.get(pageIndex).guiLines) {
+            for (GuiLine line : pageList.get(pageIndex).getGuiLines()) {
                 int y = 0;
                 for (ItemStack itemStack : line.getLine()) {
                     pageGui.setItem(i + y, itemStack);
