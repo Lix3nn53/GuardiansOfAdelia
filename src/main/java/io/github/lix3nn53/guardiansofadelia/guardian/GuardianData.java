@@ -35,7 +35,6 @@ public class GuardianData {
 
     private boolean isTeleporting;
     private boolean isGathering;
-    private boolean isConsuming;
 
     private Bazaar bazaar;
 
@@ -61,7 +60,7 @@ public class GuardianData {
     }
 
     public boolean isFreeToAct() {
-        return isGathering && isTeleporting && isConsuming;
+        return !(isGathering || isTeleporting);
     }
 
     public boolean hasPendingInvite() {
@@ -144,10 +143,6 @@ public class GuardianData {
 
     public void setGathering(boolean gathering) {
         this.isGathering = gathering;
-    }
-
-    public void setConsuming(boolean consuming) {
-        this.isConsuming = consuming;
     }
 
     public boolean hasActiveGui() {

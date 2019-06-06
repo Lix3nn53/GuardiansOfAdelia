@@ -77,6 +77,7 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
         Bukkit.getPluginManager().registerEvents(new MyItemSpawnEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyNPCRightClickEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerAnimationEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyPlayerBedEnterEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerDeathEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerDropItemEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerEggThrowEvent(), this);
@@ -115,7 +116,6 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
             w.setDifficulty(Difficulty.HARD);
             w.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
             w.setGameRule(GameRule.DISABLE_ELYTRA_MOVEMENT_CHECK, true);
-            w.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
             w.setGameRule(GameRule.DO_ENTITY_DROPS, false);
             w.setGameRule(GameRule.DO_FIRE_TICK, false);
             w.setGameRule(GameRule.DO_MOB_LOOT, false);
@@ -130,8 +130,13 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
             w.setTime(3000);
             if (w.getName().equals("arena")) {
                 w.setPVP(true);
+                w.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+            } else if (w.getName().equals("world")) {
+                w.setPVP(false);
+                w.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
             } else {
                 w.setPVP(false);
+                w.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
             }
             getLogger().info(w.getName() + " options set");
         }

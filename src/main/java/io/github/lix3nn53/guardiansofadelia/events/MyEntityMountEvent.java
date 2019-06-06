@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;

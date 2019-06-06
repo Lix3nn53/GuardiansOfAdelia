@@ -484,7 +484,7 @@ public class RPGInventory {
                 }
             }
         } else if (slot == RPGSlotType.PET.getSlotNo()) {
-            if (PetManager.isPetDead(player)  || petSpawnCooldownList.contains(player)) {
+            if (PetManager.isPetDead(player) || petSpawnCooldownList.contains(player)) {
                 return false;
             }
             EggSlot rpgSlot = getEggSlot();

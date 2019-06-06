@@ -1,19 +1,24 @@
-package io.github.lix3nn53.guardiansofadelia.Items.scrolls;
+package io.github.lix3nn53.guardiansofadelia.Items;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public enum TeleportScrollLocation {
+import java.util.ArrayList;
+
+public enum TeleportScroll {
     ROUMEN,
     PORT_VELOA,
     ELDERINE,
@@ -51,7 +56,7 @@ public enum TeleportScrollLocation {
     public void teleport(Player player, ItemStack scroll) {
         if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
-            if (!guardianData.isFreeToAct()) {
+            if (guardianData.isFreeToAct()) {
                 guardianData.setTeleporting(true);
                 final double startPosX = player.getLocation().getX();
                 final double startPosY = player.getLocation().getY();
@@ -154,5 +159,27 @@ public enum TeleportScrollLocation {
                 }.runTaskTimer(GuardiansOfAdelia.getInstance(), 5L, 5L);
             }
         }
+    }
+
+    public ItemStack getScroll(int amount, int level) {
+        ItemStack scroll = new ItemStack(Material.PAPER, amount);
+        ItemMeta itemMeta = scroll.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Teleport Scroll " + ChatColor.DARK_PURPLE +
+                "(" + ChatColor.AQUA + getName() + ChatColor.DARK_PURPLE + ")");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.YELLOW + "Required Level: " + level);
+            add("");
+            add(ChatColor.BLUE + "Right click while holding this");
+            add(ChatColor.BLUE + "to start teleporting.");
+            add(ChatColor.BLUE + "You will be teleported to");
+            add(ChatColor.AQUA + getName() + ChatColor.BLUE + " in 5 seconds.");
+            add("");
+            add(ChatColor.RED + "If you move, the teleportation will be canceled!");
+        }});
+        scroll.setItemMeta(itemMeta);
+        PersistentDataContainerUtil.putInteger("reqLevel", level, scroll);
+        PersistentDataContainerUtil.putString("teleportScroll", toString(), scroll);
+        return scroll;
     }
 }

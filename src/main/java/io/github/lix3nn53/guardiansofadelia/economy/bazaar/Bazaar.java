@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.economy.bazaar;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -14,6 +15,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -187,7 +189,12 @@ public class Bazaar {
         }
 
         setOpen(false);
-        customerGui.openInventory(owner);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                customerGui.openInventory(owner);
+            }
+        }.runTask(GuardiansOfAdelia.getInstance());
     }
 
     public void showToCustomer(Player customer) {

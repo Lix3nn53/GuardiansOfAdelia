@@ -209,7 +209,7 @@ public class MenuList {
                         add(ChatColor.WHITE + "Job experience: " + job.getExperience());
                     }});
                     character.setItemMeta(skullMeta);
-                    guiGeneric.setItem(28, character);
+                    guiGeneric.setItem(9, character);
 
                     ItemStack jobGuide = new ItemStack(Material.PLAYER_HEAD);
                     ItemMeta itemMeta = jobGuide.getItemMeta();
@@ -217,16 +217,20 @@ public class MenuList {
                     itemMeta.setLore(new ArrayList() {{
                         add("");
                         add(ChatColor.RED + "Weaponsmith");
-                        add("Left click any a/b/c block to start crafting");
+                        add(ChatColor.GRAY + "Left click grindstone to craft melee weapons");
+                        add(ChatColor.GRAY + "Left click fletching table to craft ranged weapons");
                         add(ChatColor.AQUA + "Armorsmith");
-                        add("Left click any a/b/c block to start crafting");
+                        add(ChatColor.GRAY + "Left click anvil to craft heavy armors");
+                        add(ChatColor.GRAY + "Left click loom to craft light armors");
                         add(ChatColor.LIGHT_PURPLE + "Alchemist");
-                        add("Left click any a/b/c block to start crafting");
+                        add(ChatColor.GRAY + "Left click brewing stand to craft potions");
+                        add(ChatColor.GRAY + "Left click campfire to craft foods");
                         add(ChatColor.GOLD + "Jeweller");
-                        add("Left click any a/b/c block to start crafting");
+                        add(ChatColor.GRAY + "Left click smithing table to craft jewels");
+                        add(ChatColor.GRAY + "Left click enchanting table to craft enchant stones");
                     }});
                     jobGuide.setItemMeta(itemMeta);
-                    guiGeneric.setItem(28, jobGuide);
+                    guiGeneric.setItem(11, jobGuide);
 
                 } else {
                     ItemStack weapon = new ItemStack(Material.RED_WOOL);

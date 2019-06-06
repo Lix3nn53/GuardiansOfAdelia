@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.utilities;
 
+import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.consumables.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
@@ -83,7 +83,7 @@ public class ItemPoolGenerator {
         List<ItemStack> temp = new ArrayList<>();
 
         for (Consumable consumable : Consumable.values()) {
-            temp.add(consumable.getItemStack(potionLevel));
+            temp.add(consumable.getItemStack(potionLevel, 3));
         }
 
         return temp;
@@ -93,7 +93,7 @@ public class ItemPoolGenerator {
         List<ItemStack> temp = new ArrayList<>();
 
         for (Consumable consumable : Consumable.values()) {
-            temp.add(consumable.getItemStack(tag, potionLevel));
+            temp.add(consumable.getItemStack(tag, potionLevel, 3));
         }
 
         return temp;

@@ -1,15 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
+import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.consumables.Consumable;
-import io.github.lix3nn53.guardiansofadelia.Items.scrolls.TeleportScroll;
+import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Shields;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
-import io.github.lix3nn53.guardiansofadelia.Items.scrolls.TeleportScrollLocation;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
@@ -691,9 +690,9 @@ public enum MerchantPageType {
     private GuiBookGeneric getPotionShop(int shopLevel, int shopNpc) {
         MerchantGuiLine line1 = new MerchantGuiLine();
 
-        ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(shopLevel * 2);
+        ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(shopLevel * 2, 3);
         line1.addWord(hpPotion, 1);
-        ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(shopLevel * 2);
+        ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(shopLevel * 2, 3);
         line1.addWord(manaPotion, 1);
 
         GuiPage guiPage = new GuiPage();
@@ -707,23 +706,18 @@ public enum MerchantPageType {
     private GuiBookGeneric getTeleportScrollShop(int shopLevel, int shopNpc) {
         MerchantGuiLine line1 = new MerchantGuiLine();
 
-        TeleportScroll roumen = new TeleportScroll(TeleportScrollLocation.ROUMEN, 1);
-        line1.addWord(roumen.getScroll(1), 1);
+        line1.addWord(TeleportScroll.ROUMEN.getScroll(1, 1), 1);
 
-        TeleportScroll port = new TeleportScroll(TeleportScrollLocation.PORT_VELOA, 5);
-        line1.addWord(port.getScroll(1), 1);
+        line1.addWord(TeleportScroll.PORT_VELOA.getScroll(1, 5), 1);
 
         if (shopLevel >= 2) {
-            TeleportScroll elderine = new TeleportScroll(TeleportScrollLocation.ELDERINE, 20);
-            line1.addWord(elderine.getScroll(1), 1);
+            line1.addWord(TeleportScroll.ELDERINE.getScroll(1, 20), 1);
         }
         if (shopLevel >= 3) {
-            TeleportScroll uruga = new TeleportScroll(TeleportScrollLocation.URUGA, 40);
-            line1.addWord(uruga.getScroll(1), 1);
+            line1.addWord(TeleportScroll.URUGA.getScroll(1, 40), 1);
         }
         if (shopLevel >= 4) {
-            TeleportScroll ruins = new TeleportScroll(TeleportScrollLocation.ALBERSTOL_RUINS, 60);
-            line1.addWord(ruins.getScroll(1), 1);
+            line1.addWord(TeleportScroll.ALBERSTOL_RUINS.getScroll(1, 60), 1);
         }
 
         GuiPage guiPage = new GuiPage();
