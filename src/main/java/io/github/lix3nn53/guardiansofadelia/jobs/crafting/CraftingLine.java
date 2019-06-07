@@ -34,12 +34,10 @@ public class CraftingLine implements GuiLine {
         itemMeta.setDisplayName(ChatColor.GOLD + "Crafting Guide");
         itemMeta.setLore(new ArrayList() {{
             add("");
-            add(ChatColor.YELLOW + "You need ingredients on left side of");
-            add(ChatColor.YELLOW + "this line to create the item on right side of this line.");
+            add(ChatColor.YELLOW + "You need ingredients on left side of this line");
+            add(ChatColor.YELLOW + "to create the item on right side of this line.");
             add("");
-            add(ChatColor.GREEN + "If you have enough ingredients, click on the item you want to create.");
-            add(ChatColor.GREEN + "Required ingredients will be removed from your inventory and you");
-            add(ChatColor.GREEN + "will get the crafted item.");
+            add(ChatColor.GREEN + "If you have enough ingredients, click on the item you want to craft.");
         }});
         infoGlass.setItemMeta(itemMeta);
         line.add(infoGlass);

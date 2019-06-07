@@ -111,6 +111,7 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
         this.getCommand("trade").setExecutor(new CommandTrade());
         this.getCommand("party").setExecutor(new CommandParty());
         this.getCommand("minigame").setExecutor(new CommandMinigame());
+        this.getCommand("job").setExecutor(new CommandJob());
 
         for (World w : Bukkit.getServer().getWorlds()) {
             w.setDifficulty(Difficulty.HARD);

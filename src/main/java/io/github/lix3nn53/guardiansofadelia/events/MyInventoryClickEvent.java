@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
@@ -20,6 +21,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
+import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
+import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
@@ -580,6 +583,38 @@ public class MyInventoryClickEvent implements Listener {
                     boolean joined = MiniGameManager.getDungeon(dungeonTheme, roomNo).joinQueue(player);
                     if (joined) {
                         player.closeInventory();
+                    }
+                }
+            }
+        } else if (title.contains(" Crafting Level Selection")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                if (current.getType().equals(Material.STONE_PICKAXE)) {
+                    String replace = title.replace(" Crafting Level Selection", "");
+                    CraftingType craftingType = CraftingType.valueOf(replace);
+                    if (currentName.equals(ChatColor.GOLD + "Level 20~29")) {
+                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.TWO);
+                        craftingBook.openInventory(player);
+                    } else if (currentName.equals(ChatColor.GOLD + "Level 30~39")) {
+                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.THREE);
+                        craftingBook.openInventory(player);
+                    } else if (currentName.equals(ChatColor.GOLD + "Level 40~49")) {
+                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.FOUR);
+                        craftingBook.openInventory(player);
+                    } else if (currentName.equals(ChatColor.GOLD + "Level 50~59")) {
+                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.FIVE);
+                        craftingBook.openInventory(player);
+                    } else if (currentName.equals(ChatColor.GOLD + "Level 60~69")) {
+                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.SIX);
+                        craftingBook.openInventory(player);
+                    } else if (currentName.equals(ChatColor.GOLD + "Level 70~79")) {
+                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.SEVEN);
+                        craftingBook.openInventory(player);
+                    } else if (currentName.equals(ChatColor.GOLD + "Level 80~89")) {
+                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.EIGHT);
+                        craftingBook.openInventory(player);
+                    } else if (currentName.equals(ChatColor.GOLD + "Level 90~99")) {
+                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.NINE);
+                        craftingBook.openInventory(player);
                     }
                 }
             }

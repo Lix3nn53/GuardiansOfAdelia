@@ -1,9 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -76,6 +73,20 @@ public enum Consumable {
         return "";
     }
 
+    public Material getMaterial() {
+        switch (this) {
+            case BUFF_PHYSICAL_DAMAGE:
+                return Material.COOKED_BEEF;
+            case BUFF_PHYSICAL_DEFENSE:
+                return Material.RABBIT_STEW;
+            case BUFF_MAGICAL_DAMAGE:
+                return Material.COOKED_SALMON;
+            case BUFF_MAGICAL_DEFENSE:
+                return Material.SUSPICIOUS_STEW;
+        }
+        return Material.POTION;
+    }
+
     private int getReqLevel(int skillLevel) {
         if (skillLevel == 1) {
             return 1;
@@ -84,10 +95,13 @@ public enum Consumable {
     }
 
     public ItemStack getItemStack(int skillLevel, int uses) {
-        ItemStack itemStack = new ItemStack(Material.POTION);
-        PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
-        potionMeta.setColor(getPotionColor());
-        potionMeta.setDisplayName(getName() + " Tier-" + skillLevel + " (" + uses + " Uses left)");
+        ItemStack itemStack = new ItemStack(getMaterial());
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemStack.getType().equals(Material.POTION)) {
+            PotionMeta potionMeta = (PotionMeta) itemMeta;
+            potionMeta.setColor(getPotionColor());
+        }
+        itemMeta.setDisplayName(getName() + " Tier-" + skillLevel + " (" + uses + " Uses left)");
         int reqLevel = getReqLevel(skillLevel);
 
         List<String> lore = new ArrayList<>();
@@ -98,34 +112,9 @@ public enum Consumable {
         lore.add(ChatColor.GRAY + "is in your hand to use");
         lore.add("");
         lore.addAll(getDescription());
-        potionMeta.setLore(lore);
+        itemMeta.setLore(lore);
 
-        itemStack.setItemMeta(potionMeta);
-        PersistentDataContainerUtil.putString("customConsumable", toString(), itemStack);
-        PersistentDataContainerUtil.putInteger("consumableLevel", skillLevel, itemStack);
-        PersistentDataContainerUtil.putInteger("consumableUsesLeft", uses, itemStack);
-        PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, itemStack);
-        return itemStack;
-    }
-
-    public ItemStack getItemStack(String tag, int skillLevel, int uses) {
-        ItemStack itemStack = new ItemStack(Material.POTION);
-        PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
-        potionMeta.setColor(getPotionColor());
-        potionMeta.setDisplayName(getName() + " Tier-" + skillLevel + " (" + uses + " Uses left)");
-        int reqLevel = getReqLevel(skillLevel);
-
-        List<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatColor.YELLOW + "Required Level: " + reqLevel);
-        lore.add("");
-        lore.add(ChatColor.GRAY + "Hold right click while this item");
-        lore.add(ChatColor.GRAY + "is in your hand to use");
-        lore.add("");
-        lore.addAll(getDescription());
-        potionMeta.setLore(lore);
-
-        itemStack.setItemMeta(potionMeta);
+        itemStack.setItemMeta(itemMeta);
         PersistentDataContainerUtil.putString("customConsumable", toString(), itemStack);
         PersistentDataContainerUtil.putInteger("consumableLevel", skillLevel, itemStack);
         PersistentDataContainerUtil.putInteger("consumableUsesLeft", uses, itemStack);
@@ -135,14 +124,6 @@ public enum Consumable {
 
     private Color getPotionColor() {
         switch (this) {
-            case BUFF_PHYSICAL_DAMAGE:
-                return Color.ORANGE;
-            case BUFF_PHYSICAL_DEFENSE:
-                return Color.TEAL;
-            case BUFF_MAGICAL_DAMAGE:
-                return Color.PURPLE;
-            case BUFF_MAGICAL_DEFENSE:
-                return Color.LIME;
             case POTION_INSTANT_HEALTH:
                 return Color.RED;
             case POTION_INSTANT_MANA:
@@ -158,13 +139,13 @@ public enum Consumable {
     public String getName() {
         switch (this) {
             case BUFF_PHYSICAL_DAMAGE:
-                return ChatColor.RED + "Physical-Damage Buff Scroll";
+                return ChatColor.RED + "Steak (Physical-Damage Buff)";
             case BUFF_PHYSICAL_DEFENSE:
-                return ChatColor.AQUA + "Physical-Defense Buff Scroll";
+                return ChatColor.AQUA + "Beef Stew (Physical-Defense Buff)";
             case BUFF_MAGICAL_DAMAGE:
-                return ChatColor.LIGHT_PURPLE + "Magical-Damage Buff Scroll";
+                return ChatColor.LIGHT_PURPLE + "Cooked Fish (Magical-Damage Buff)";
             case BUFF_MAGICAL_DEFENSE:
-                return ChatColor.GREEN + "Magical-Defense Buff Scroll";
+                return ChatColor.GREEN + "Highland Soup (Magical-Defense Buff)";
             case POTION_INSTANT_HEALTH:
                 return ChatColor.RED + "Health Potion";
             case POTION_INSTANT_MANA:
@@ -181,16 +162,16 @@ public enum Consumable {
         List<String> lore = new ArrayList<>();
         switch (this) {
             case BUFF_PHYSICAL_DAMAGE:
-                lore.add(ChatColor.GRAY + "Increases physical damage for 1 hour");
+                lore.add(ChatColor.GRAY + "Increases physical damage for 20 minutes");
                 break;
             case BUFF_PHYSICAL_DEFENSE:
-                lore.add(ChatColor.GRAY + "Increases physical defense for 1 hour");
+                lore.add(ChatColor.GRAY + "Increases physical defense for 20 minutes");
                 break;
             case BUFF_MAGICAL_DAMAGE:
-                lore.add(ChatColor.GRAY + "Increases magical damage for 1 hour");
+                lore.add(ChatColor.GRAY + "Increases magical damage for 20 minutes");
                 break;
             case BUFF_MAGICAL_DEFENSE:
-                lore.add(ChatColor.GRAY + "Increases magical defense for 1 hour");
+                lore.add(ChatColor.GRAY + "Increases magical defense for 20 minutes");
                 break;
             case POTION_INSTANT_HEALTH:
                 lore.add(ChatColor.GRAY + "Restores health");

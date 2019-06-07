@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.list.Ingredients;
+import io.github.lix3nn53.guardiansofadelia.Items.list.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class Gathering {
 
-    public void startGathering(final Player player, final GatheringType type, final int gatherLevel) {
+    public void startGathering(final Player player, final GatheringType type) {
         if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
             final GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
             if (guardianData.isFreeToAct()) {
@@ -79,7 +79,7 @@ public class Gathering {
                             }
                         } else if (secsRun == 5) {
                             cancel();
-                            directGather(player, type, gatherLevel);
+                            directGather(player, type);
                             guardianData.setGathering(false);
                         }
                     }
@@ -88,13 +88,13 @@ public class Gathering {
         }
     }
 
-    public void directGather(Player player, GatheringType type, int gatherLevel) {
+    public void directGather(Player player, GatheringType type) {
         // Obtain a number between [0 - 4].
         Random rand = new Random();
-        int n = rand.nextInt(5);
+        int amount = rand.nextInt(5);
 
-        if (n > 0) {
-            ItemStack ingredient = Ingredients.getIngredient(type, gatherLevel, n);
+        if (amount > 0) {
+            ItemStack ingredient = type.getGatheredIngredient(amount);
             player.sendTitle(ChatColor.GREEN + "Gathering Success", ChatColor.YELLOW + "" + ingredient.getAmount() + "x " + ingredient.getItemMeta().getDisplayName(), 30, 80, 30);
             InventoryUtils.giveItemToPlayer(player, ingredient);
         } else {
