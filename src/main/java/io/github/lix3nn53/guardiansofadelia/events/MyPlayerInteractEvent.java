@@ -9,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -191,8 +192,8 @@ public class MyPlayerInteractEvent implements Listener {
                             if (activeCharacter.hasJob()) {
                                 Job job = activeCharacter.getJob();
                                 if (job.getJobType().equals(JobType.JEWELLER)) {
-                                    GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.ENCHANT_STONE);
-                                    levelSelection.openInventory(player);
+                                    GuiBookGeneric enchantStoneCraftingBook = CraftingGuiManager.getEnchantStoneCraftingBook();
+                                    enchantStoneCraftingBook.openInventory(player);
                                 } else {
                                     player.sendMessage(ChatColor.RED + "Only jewellers can craft enchant stones");
                                 }

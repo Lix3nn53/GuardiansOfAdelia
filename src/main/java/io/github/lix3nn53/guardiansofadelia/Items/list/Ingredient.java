@@ -44,7 +44,6 @@ public enum Ingredient {
                     add("");
                     add(ChatColor.GRAY + "Material Level: 2");
                     add("");
-                    add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
 
                 }});
@@ -58,7 +57,6 @@ public enum Ingredient {
                     add("");
                     add(ChatColor.GRAY + "Material Level: 4");
                     add("");
-                    add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
 
                 }});
@@ -70,7 +68,7 @@ public enum Ingredient {
                 im.setDisplayName(ChatColor.YELLOW + "Raw Beef");
                 im.setLore(new ArrayList() {{
                     add("");
-                    add(ChatColor.GRAY + "Material Level: 2");
+                    add(ChatColor.GRAY + "Material Level: 3");
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.ALCHEMIST.getName());
 
@@ -83,7 +81,7 @@ public enum Ingredient {
                 im.setDisplayName(ChatColor.YELLOW + "Raw Cod");
                 im.setLore(new ArrayList() {{
                     add("");
-                    add(ChatColor.GRAY + "Material Level: 2");
+                    add(ChatColor.GRAY + "Material Level: 1");
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.ALCHEMIST.getName());
 
@@ -96,7 +94,7 @@ public enum Ingredient {
                 im.setDisplayName(ChatColor.YELLOW + "Raw Salmon");
                 im.setLore(new ArrayList() {{
                     add("");
-                    add(ChatColor.GRAY + "Material Level: 4");
+                    add(ChatColor.GRAY + "Material Level: 5");
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.ALCHEMIST.getName());
 
@@ -194,7 +192,6 @@ public enum Ingredient {
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
 
                 }});
                 itemStack.setItemMeta(im);
@@ -209,7 +206,6 @@ public enum Ingredient {
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
 
                 }});
                 itemStack.setItemMeta(im);
@@ -224,7 +220,6 @@ public enum Ingredient {
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
 
                 }});
                 itemStack.setItemMeta(im);
@@ -239,7 +234,6 @@ public enum Ingredient {
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
 
                 }});
                 itemStack.setItemMeta(im);
@@ -254,7 +248,6 @@ public enum Ingredient {
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
 
                 }});
                 itemStack.setItemMeta(im);
@@ -268,7 +261,6 @@ public enum Ingredient {
                     add(ChatColor.GRAY + "Material Level: 1");
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ALCHEMIST.getName());
 
@@ -284,7 +276,6 @@ public enum Ingredient {
                     add(ChatColor.GRAY + "Material Level: 2");
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ALCHEMIST.getName());
 
@@ -300,7 +291,6 @@ public enum Ingredient {
                     add(ChatColor.GRAY + "Material Level: 3");
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ALCHEMIST.getName());
 
@@ -316,7 +306,6 @@ public enum Ingredient {
                     add(ChatColor.GRAY + "Material Level: 4");
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ALCHEMIST.getName());
 
@@ -332,7 +321,6 @@ public enum Ingredient {
                     add(ChatColor.GRAY + "Material Level: 5");
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.ALCHEMIST.getName());
 
@@ -348,7 +336,6 @@ public enum Ingredient {
                     add(ChatColor.GRAY + "Material Level: 1");
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
 
                 }});
@@ -363,7 +350,6 @@ public enum Ingredient {
                     add(ChatColor.GRAY + "Material Level: 3");
                     add("");
                     add(ChatColor.GREEN + "✔ " + JobType.WEAPONSMITH.getName());
-                    add(ChatColor.GREEN + "✔ " + JobType.ARMORSMITH.getName());
                     add(ChatColor.GREEN + "✔ " + JobType.JEWELLER.getName());
 
                 }});

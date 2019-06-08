@@ -64,6 +64,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -587,6 +588,12 @@ public class MyInventoryClickEvent implements Listener {
                 }
             }
         } else if (title.contains(" Crafting Level Selection")) {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+
+                }
+            }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 if (current.getType().equals(Material.STONE_PICKAXE)) {
                     String replace = title.replace(" Crafting Level Selection", "");

@@ -27,7 +27,7 @@ public class CraftingLine implements GuiLine {
     public List<ItemStack> getLine() {
         List<ItemStack> line = new ArrayList<>(ingredients);
         while (line.size() < 7) {
-            ingredients.add(new ItemStack(Material.AIR));
+            line.add(new ItemStack(Material.AIR));
         }
         ItemStack infoGlass = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
         ItemMeta itemMeta = infoGlass.getItemMeta();
