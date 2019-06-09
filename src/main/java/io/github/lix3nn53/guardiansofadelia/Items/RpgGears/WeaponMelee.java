@@ -15,7 +15,6 @@ import java.util.List;
 
 public class WeaponMelee implements RPGGear {
 
-    private final int itemID;
     private final ItemTier tier;
     private final String itemTag;
     private final int level;
@@ -23,8 +22,7 @@ public class WeaponMelee implements RPGGear {
     private ItemStack itemStack;
 
     public WeaponMelee(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, RPGClass rpgClass, int damage,
-                       double bonusPercent, AttackSpeed attackSpeed, int minStatValue, int maxStatValue, int minNumberOfStats
-            , int itemID) {
+                       double bonusPercent, AttackSpeed attackSpeed, int minStatValue, int maxStatValue, int minNumberOfStats) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + name;
@@ -58,8 +56,6 @@ public class WeaponMelee implements RPGGear {
         if (statPassive.getAir() != 0) {
             lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Air: " + ChatColor.GRAY + "+" + statPassive.getAir());
         }
-        lore.add("");
-        lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
@@ -75,16 +71,10 @@ public class WeaponMelee implements RPGGear {
         itemMeta.setCustomModelData(customModelDataId);
         this.itemStack.setItemMeta(itemMeta);
 
-        this.itemID = itemID;
         this.tier = tier;
         this.itemTag = itemTag;
         this.level = level;
         this.rpgClass = rpgClass;
-    }
-
-    @Override
-    public int getItemID() {
-        return itemID;
     }
 
     @Override

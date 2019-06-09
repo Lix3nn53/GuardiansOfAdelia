@@ -4,8 +4,6 @@ import org.bukkit.inventory.ItemStack;
 
 public interface RPGGear {
 
-    int getItemID();
-
     ItemStack getItemStack();
 
     ItemTier getTier();

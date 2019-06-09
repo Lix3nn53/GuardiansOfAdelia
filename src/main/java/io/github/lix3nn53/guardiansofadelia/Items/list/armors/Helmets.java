@@ -18,7 +18,6 @@ class Helmets {
         int health = 18;
         int defense = 10;
         int magicDefense = 7;
-        int itemID = 3200;
         boolean isColorful = false;
 
         if (rpgClass.equals(RPGClass.NO_CLASS)) {
@@ -28,7 +27,6 @@ class Helmets {
                 health = 36;
                 defense = 14;
                 magicDefense = 10;
-                itemID = 3201;
             }
         } else if (rpgClass.equals(RPGClass.ARCHER)) {
             if (placementNumber == 1) {
@@ -37,7 +35,6 @@ class Helmets {
                 health = 180;
                 defense = 27;
                 magicDefense = 18;
-                itemID = 3002;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Forest Fairy Helmet";
@@ -45,7 +42,6 @@ class Helmets {
                 health = 300;
                 defense = 42;
                 magicDefense = 30;
-                itemID = 3003;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Hunter Helmet";
@@ -53,7 +49,6 @@ class Helmets {
                 health = 470;
                 defense = 70;
                 magicDefense = 50;
-                itemID = 3004;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 4) {
                 name = "Speedy Helmet";
@@ -61,7 +56,6 @@ class Helmets {
                 health = 650;
                 defense = 100;
                 magicDefense = 65;
-                itemID = 3005;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 5) {
                 name = "White Wolf Helmet";
@@ -69,7 +63,6 @@ class Helmets {
                 health = 870;
                 defense = 130;
                 magicDefense = 87;
-                itemID = 3006;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 6) {
                 name = "Moottalis Helmet";
@@ -77,7 +70,6 @@ class Helmets {
                 health = 1100;
                 defense = 165;
                 magicDefense = 110;
-                itemID = 3007;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Helmet";
@@ -85,7 +77,6 @@ class Helmets {
                 health = 1450;
                 defense = 218;
                 magicDefense = 144;
-                itemID = 3008;
                 material = Material.CHAINMAIL_HELMET;
             }
         } else if (rpgClass.equals(RPGClass.KNIGHT)) {
@@ -95,7 +86,6 @@ class Helmets {
                 health = 357;
                 defense = 35;
                 magicDefense = 14;
-                itemID = 3102;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Sky Fairy Helmet";
@@ -103,7 +93,6 @@ class Helmets {
                 health = 570;
                 defense = 58;
                 magicDefense = 22;
-                itemID = 3103;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Half Plate Helmet";
@@ -111,7 +100,6 @@ class Helmets {
                 health = 940;
                 defense = 92;
                 magicDefense = 37;
-                itemID = 3104;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 4) {
                 name = "Mighty Plate Helmet";
@@ -119,7 +107,6 @@ class Helmets {
                 health = 1280;
                 defense = 128;
                 magicDefense = 51;
-                itemID = 3105;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 5) {
                 name = "Elisa Helmet";
@@ -127,7 +114,6 @@ class Helmets {
                 health = 1720;
                 defense = 172;
                 magicDefense = 68;
-                itemID = 3106;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 6) {
                 name = "Gloria Helmet";
@@ -135,7 +121,6 @@ class Helmets {
                 health = 2140;
                 defense = 214;
                 magicDefense = 85;
-                itemID = 3107;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Helmet";
@@ -143,7 +128,6 @@ class Helmets {
                 health = 2800;
                 defense = 280;
                 magicDefense = 114;
-                itemID = 3108;
                 material = Material.DIAMOND_HELMET;
             }
         } else if (rpgClass.equals(RPGClass.MAGE)) {
@@ -153,7 +137,6 @@ class Helmets {
                 health = 180;
                 defense = 18;
                 magicDefense = 18;
-                itemID = 3202;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Eli Helmet";
@@ -161,7 +144,6 @@ class Helmets {
                 health = 300;
                 defense = 28;
                 magicDefense = 28;
-                itemID = 3203;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Wisdom Circlet";
@@ -169,7 +151,6 @@ class Helmets {
                 health = 470;
                 defense = 48;
                 magicDefense = 48;
-                itemID = 3204;
                 material = Material.GOLDEN_HELMET;
             } else if (placementNumber == 4) {
                 name = "Wizardy Circlet";
@@ -177,7 +158,6 @@ class Helmets {
                 health = 680;
                 defense = 64;
                 magicDefense = 64;
-                itemID = 3205;
                 material = Material.GOLDEN_HELMET;
             } else if (placementNumber == 5) {
                 name = "Xhar Circlet";
@@ -185,7 +165,6 @@ class Helmets {
                 health = 870;
                 defense = 90;
                 magicDefense = 90;
-                itemID = 3206;
                 material = Material.GOLDEN_HELMET;
             } else if (placementNumber == 6) {
                 name = "Chamor Circlet";
@@ -193,7 +172,6 @@ class Helmets {
                 health = 1090;
                 defense = 105;
                 magicDefense = 105;
-                itemID = 3207;
                 material = Material.GOLDEN_HELMET;
             } else if (placementNumber == 7) {
                 name = "Neferti Circlet";
@@ -201,7 +179,6 @@ class Helmets {
                 health = 1450;
                 defense = 150;
                 magicDefense = 150;
-                itemID = 3208;
                 material = Material.GOLDEN_HELMET;
             }
         } else if (rpgClass.equals(RPGClass.ROGUE)) {
@@ -211,7 +188,6 @@ class Helmets {
                 health = 272;
                 defense = 27;
                 magicDefense = 18;
-                itemID = 3302;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Dark Wind Helmet";
@@ -219,7 +195,6 @@ class Helmets {
                 health = 440;
                 defense = 42;
                 magicDefense = 30;
-                itemID = 3303;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Terra Helmet";
@@ -227,7 +202,6 @@ class Helmets {
                 health = 710;
                 defense = 70;
                 magicDefense = 48;
-                itemID = 3304;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 4) {
                 name = "Lupy Helmet";
@@ -235,7 +209,6 @@ class Helmets {
                 health = 980;
                 defense = 100;
                 magicDefense = 65;
-                itemID = 3305;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 5) {
                 name = "White Fox Helmet";
@@ -243,7 +216,6 @@ class Helmets {
                 health = 1320;
                 defense = 130;
                 magicDefense = 88;
-                itemID = 3306;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 6) {
                 name = "Luna Helmet";
@@ -251,7 +223,6 @@ class Helmets {
                 health = 1600;
                 defense = 165;
                 magicDefense = 110;
-                itemID = 3307;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 7) {
                 name = "Shadow Helmet";
@@ -259,7 +230,6 @@ class Helmets {
                 health = 2180;
                 defense = 218;
                 magicDefense = 144;
-                itemID = 3308;
                 material = Material.CHAINMAIL_HELMET;
             }
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
@@ -269,7 +239,6 @@ class Helmets {
                 health = 280;
                 defense = 21;
                 magicDefense = 28;
-                itemID = 3402;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "August Helmet";
@@ -277,7 +246,6 @@ class Helmets {
                 health = 450;
                 defense = 34;
                 magicDefense = 45;
-                itemID = 3403;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Rhythm Helmet";
@@ -285,7 +253,6 @@ class Helmets {
                 health = 740;
                 defense = 55;
                 magicDefense = 74;
-                itemID = 3404;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 4) {
                 name = "Eleaza Helmet";
@@ -293,7 +260,6 @@ class Helmets {
                 health = 1020;
                 defense = 78;
                 magicDefense = 102;
-                itemID = 3405;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 5) {
                 name = "Gaia Helmet";
@@ -301,7 +267,6 @@ class Helmets {
                 health = 1350;
                 defense = 102;
                 magicDefense = 138;
-                itemID = 3406;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 6) {
                 name = "Holyshion Helmet";
@@ -309,7 +274,6 @@ class Helmets {
                 health = 1720;
                 defense = 128;
                 magicDefense = 172;
-                itemID = 3407;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 7) {
                 name = "Khraje Helmet";
@@ -317,7 +281,6 @@ class Helmets {
                 health = 2300;
                 defense = 170;
                 magicDefense = 228;
-                itemID = 3408;
                 material = Material.DIAMOND_HELMET;
             }
         } else if (rpgClass.equals(RPGClass.WARRIOR)) {
@@ -327,7 +290,6 @@ class Helmets {
                 health = 360;
                 defense = 27;
                 magicDefense = 18;
-                itemID = 3502;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Fire Spirit Helmet";
@@ -335,7 +297,6 @@ class Helmets {
                 health = 580;
                 defense = 44;
                 magicDefense = 28;
-                itemID = 3503;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Light Plate Helmet";
@@ -343,7 +304,6 @@ class Helmets {
                 health = 940;
                 defense = 70;
                 magicDefense = 48;
-                itemID = 3504;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 4) {
                 name = "Fury Plate Helmet";
@@ -351,7 +311,6 @@ class Helmets {
                 health = 1300;
                 defense = 98;
                 magicDefense = 64;
-                itemID = 3505;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 5) {
                 name = "Ceres Helmet";
@@ -359,7 +318,6 @@ class Helmets {
                 health = 1740;
                 defense = 130;
                 magicDefense = 88;
-                itemID = 3506;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 6) {
                 name = "Zakar Helmet";
@@ -367,7 +325,6 @@ class Helmets {
                 health = 2180;
                 defense = 164;
                 magicDefense = 108;
-                itemID = 3507;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 7) {
                 name = "Raxes Helmet";
@@ -375,7 +332,6 @@ class Helmets {
                 health = 2900;
                 defense = 218;
                 magicDefense = 144;
-                itemID = 3508;
                 material = Material.IRON_HELMET;
             }
         } else if (rpgClass.equals(RPGClass.MONK)) {
@@ -385,7 +341,6 @@ class Helmets {
                 health = 360;
                 defense = 27;
                 magicDefense = 18;
-                itemID = 3602;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Kelp Helmet";
@@ -393,7 +348,6 @@ class Helmets {
                 health = 580;
                 defense = 44;
                 magicDefense = 28;
-                itemID = 3603;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Coral Helmet";
@@ -401,7 +355,6 @@ class Helmets {
                 health = 940;
                 defense = 70;
                 magicDefense = 48;
-                itemID = 3604;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 4) {
                 name = "Aqua Helmet";
@@ -409,7 +362,6 @@ class Helmets {
                 health = 1300;
                 defense = 98;
                 magicDefense = 64;
-                itemID = 3605;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 5) {
                 name = "Water Spirit Helmet";
@@ -417,7 +369,6 @@ class Helmets {
                 health = 1740;
                 defense = 130;
                 magicDefense = 88;
-                itemID = 3606;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 6) {
                 name = "Mera Helmet";
@@ -425,7 +376,6 @@ class Helmets {
                 health = 2180;
                 defense = 164;
                 magicDefense = 108;
-                itemID = 3607;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 7) {
                 name = "Atlantean Helmet";
@@ -433,7 +383,6 @@ class Helmets {
                 health = 2900;
                 defense = 218;
                 magicDefense = 144;
-                itemID = 3608;
                 material = Material.IRON_HELMET;
             }
         } else if (rpgClass.equals(RPGClass.HUNTER)) {
@@ -443,7 +392,6 @@ class Helmets {
                 health = 272;
                 defense = 27;
                 magicDefense = 18;
-                itemID = 3702;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Forest Fairy Helmet";
@@ -451,7 +399,6 @@ class Helmets {
                 health = 440;
                 defense = 42;
                 magicDefense = 30;
-                itemID = 3703;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Hunter Helmet";
@@ -459,7 +406,6 @@ class Helmets {
                 health = 710;
                 defense = 70;
                 magicDefense = 50;
-                itemID = 3704;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 4) {
                 name = "Speedy Helmet";
@@ -467,7 +413,6 @@ class Helmets {
                 health = 980;
                 defense = 100;
                 magicDefense = 65;
-                itemID = 3705;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 5) {
                 name = "White Wolf Helmet";
@@ -475,7 +420,6 @@ class Helmets {
                 health = 1320;
                 defense = 130;
                 magicDefense = 87;
-                itemID = 3706;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 6) {
                 name = "Moottalis Helmet";
@@ -483,7 +427,6 @@ class Helmets {
                 health = 1600;
                 defense = 165;
                 magicDefense = 110;
-                itemID = 3707;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Helmet";
@@ -491,7 +434,6 @@ class Helmets {
                 health = 2180;
                 defense = 218;
                 magicDefense = 144;
-                itemID = 3708;
                 material = Material.CHAINMAIL_HELMET;
             }
         }
@@ -500,7 +442,7 @@ class Helmets {
 
         final GearArmor helmet = new GearArmor(name, tier, itemTag, material, level,
                 rpgClass, health,
-                defense, magicDefense, minStatValue, maxStatValue, minNumberOfStats, itemID);
+                defense, magicDefense, minStatValue, maxStatValue, minNumberOfStats);
         if (isColorful) {
             LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) helmet.getItemStack().getItemMeta();
             if (rpgClass.equals(RPGClass.ARCHER)) {

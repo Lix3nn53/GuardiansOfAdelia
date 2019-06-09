@@ -160,64 +160,64 @@ public enum MerchantPageType {
         int lineIndex = 0;
 
         if (shopLevel == 1) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.WOLF, ItemTier.COMMON, 20, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.WOLF, ItemTier.COMMON, 20), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.PIG, ItemTier.COMMON, 20, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.PIG, ItemTier.COMMON, 20), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.SHEEP, ItemTier.COMMON, 20, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.SHEEP, ItemTier.COMMON, 20), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.COW, ItemTier.COMMON, 20, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.COW, ItemTier.COMMON, 20), 1);
         } else if (shopLevel == 3) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_ALL_BLACK, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_BLACK, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_BRITISH_SHORTHAIR, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_CALICO, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_JELLIE, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_PERSIAN, ItemTier.COMMON, 30, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_ALL_BLACK, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_BLACK, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_BRITISH_SHORTHAIR, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_CALICO, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_JELLIE, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_PERSIAN, ItemTier.COMMON, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_RAGDOLL, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_RED, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_SIAMESE, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_TABBY, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_WHITE, ItemTier.COMMON, 30, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_RAGDOLL, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_RED, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_SIAMESE, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_TABBY, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_WHITE, ItemTier.COMMON, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BLACK, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BLACK_AND_WHITE, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BROWN, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_GOLD, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_SALT_AND_PEPPER, ItemTier.COMMON, 30, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_WHITE, ItemTier.COMMON, 30, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BLACK, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BLACK_AND_WHITE, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BROWN, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_GOLD, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_SALT_AND_PEPPER, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_WHITE, ItemTier.COMMON, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.CHICKEN, ItemTier.COMMON, 30, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CHICKEN, ItemTier.COMMON, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.CHOCOLATE, ItemTier.COMMON, 30, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CHOCOLATE, ItemTier.COMMON, 30), 1);
         } else if (shopLevel == 4) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.POLAR_BEAR, ItemTier.COMMON, 50, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.POLAR_BEAR, ItemTier.COMMON, 50), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.PANDA, ItemTier.COMMON, 50, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.PANDA, ItemTier.COMMON, 50), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.TURTLE, ItemTier.COMMON, 50, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.TURTLE, ItemTier.COMMON, 50), 1);
         } else if (shopLevel == 5) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.FOX_RED, ItemTier.COMMON, 70, 800000), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.FOX_SNOW, ItemTier.COMMON, 70, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.FOX_RED, ItemTier.COMMON, 70), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.FOX_SNOW, ItemTier.COMMON, 70), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.ICE_CREAM, ItemTier.COMMON, 70, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.ICE_CREAM, ItemTier.COMMON, 70), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.MINI_DRAGON, ItemTier.COMMON, 70, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.MINI_DRAGON, ItemTier.COMMON, 70), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.VEX, ItemTier.COMMON, 70, 800000), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.VEX, ItemTier.COMMON, 70), 1);
         }
 
         List<GuiPage> guiPages = new ArrayList<>();
@@ -245,13 +245,13 @@ public enum MerchantPageType {
         lines.add(new MerchantGuiLine());
         int lineIndex = 0;
 
-        lines.get(lineIndex).addWord(Mounts.get(Mount.BLACK, ItemTier.COMMON, 40, 800000), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.BROWN, ItemTier.COMMON, 40, 800000), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.CHESTNUT, ItemTier.COMMON, 40, 800000), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.CREAMY, ItemTier.COMMON, 40, 800000), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.DARK_BROWN, ItemTier.COMMON, 40, 800000), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.GRAY, ItemTier.COMMON, 40, 800000), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.WHITE, ItemTier.COMMON, 40, 800000), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.BLACK, ItemTier.COMMON, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.BROWN, ItemTier.COMMON, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.CHESTNUT, ItemTier.COMMON, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.CREAMY, ItemTier.COMMON, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.DARK_BROWN, ItemTier.COMMON, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.GRAY, ItemTier.COMMON, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.WHITE, ItemTier.COMMON, 40), 1);
 
         List<GuiPage> guiPages = new ArrayList<>();
         guiPages.add(new GuiPage());

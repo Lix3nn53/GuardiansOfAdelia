@@ -1,8 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.Items.stats;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
@@ -176,5 +179,33 @@ public class StatUtils {
                 mat.equals(Material.CHAINMAIL_CHESTPLATE) ||
                 mat.equals(Material.LEATHER_CHESTPLATE) ||
                 mat.equals(Material.IRON_SWORD) || mat.equals(Material.SHEARS);
+    }
+
+    public static void addRandomStats(ItemStack itemStack, GearLevel gearLevel, ItemTier itemTier) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta.hasLore()) {
+            if (hasStatType(itemStack.getType())) {
+                StatPassive statPassive = new StatPassive(gearLevel.getMinStatValue(), gearLevel.getMaxStatValue(), itemTier.getMinNumberOfStats());
+
+                List<String> lore = itemMeta.getLore();
+                if (statPassive.getFire() != 0) {
+                    lore.add(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
+                }
+                if (statPassive.getWater() != 0) {
+                    lore.add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
+                }
+                if (statPassive.getEarth() != 0) {
+                    lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
+                }
+                if (statPassive.getLightning() != 0) {
+                    lore.add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
+                }
+                if (statPassive.getAir() != 0) {
+                    lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Air: " + ChatColor.GRAY + "+" + statPassive.getAir());
+                }
+                itemMeta.setLore(lore);
+                itemStack.setItemMeta(itemMeta);
+            }
+        }
     }
 }

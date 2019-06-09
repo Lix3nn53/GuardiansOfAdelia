@@ -14,14 +14,13 @@ import java.util.List;
 
 public class GearPassive implements RPGGear {
 
-    private final int itemID;
     private final ItemTier tier;
     private final String itemTag;
     private final int level;
     private ItemStack itemStack;
 
     public GearPassive(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int passiveType, int level, RPGClass rpgClass,
-                       int minStatValue, int maxStatValue, int minNumberOfStats, double bonusPercent, int itemID) {
+                       int minStatValue, int maxStatValue, int minNumberOfStats, double bonusPercent) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + name;
@@ -54,8 +53,6 @@ public class GearPassive implements RPGGear {
         if (statPassive.getAir() != 0) {
             lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Air: " + ChatColor.GRAY + "+" + (int) (statPassive.getAir() * bonusPercent));
         }
-        lore.add("");
-        lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
@@ -69,15 +66,9 @@ public class GearPassive implements RPGGear {
         itemMeta.setCustomModelData(customModelDataId);
         this.itemStack.setItemMeta(itemMeta);
 
-        this.itemID = itemID;
         this.tier = tier;
         this.itemTag = itemTag;
         this.level = level;
-    }
-
-    @Override
-    public int getItemID() {
-        return itemID;
     }
 
     @Override

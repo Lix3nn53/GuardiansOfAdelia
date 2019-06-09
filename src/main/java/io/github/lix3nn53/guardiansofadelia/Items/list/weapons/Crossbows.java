@@ -18,68 +18,58 @@ class Crossbows {
         RPGClass rpgClass = RPGClass.HUNTER;
         int rangedDamage = 12;
         AttackSpeed attackSpeed = AttackSpeed.SLOW;
-        int itemID = 701;
 
         if (placementNumber == 2) {
             name = "Light Crossbow";
             customModelDataId = 10000002;
             level = 10;
             rangedDamage = 48;
-            itemID = 702;
         } else if (placementNumber == 3) {
             name = "Crossbow";
             customModelDataId = 10000003;
             level = 20;
             rangedDamage = 120;
-            itemID = 703;
         } else if (placementNumber == 4) {
             name = "Battle Crossbow";
             customModelDataId = 10000004;
             level = 30;
             rangedDamage = 300;
-            itemID = 704;
         } else if (placementNumber == 5) {
             name = "Satet Crossbow";
             customModelDataId = 10000005;
             level = 40;
             rangedDamage = 480;
-            itemID = 705;
         } else if (placementNumber == 6) {
             name = "Leaf Fairy Crossbow";
             customModelDataId = 10000006;
             level = 50;
             rangedDamage = 780;
-            itemID = 706;
         } else if (placementNumber == 7) {
             name = "Crossbow of Doom";
             customModelDataId = 10000008;
             level = 60;
             rangedDamage = 1080;
-            itemID = 707;
         } else if (placementNumber == 8) {
             name = "Unicorn Crossbow";
             customModelDataId = 10000010;
             level = 70;
             rangedDamage = 1440;
-            itemID = 708;
         } else if (placementNumber == 9) {
             name = "Zephyr Crossbow";
             customModelDataId = 10000012;
             level = 80;
             rangedDamage = 1800;
-            itemID = 709;
         } else if (placementNumber == 10) {
             name = "Arcade Crossbow";
             customModelDataId = 10000014;
             level = 90;
             rangedDamage = 2400;
-            itemID = 710;
         }
 
         int damage = rangedDamage / 4;
 
         final WeaponRanged weapon = new WeaponRanged(name, tier, itemTag, material, customModelDataId, level, rpgClass, damage, rangedDamage, bonusPercent,
-                attackSpeed, minStatValue, maxStatValue, minNumberofStats, itemID);
+                attackSpeed, minStatValue, maxStatValue, minNumberofStats);
         return weapon.getItemStack();
     }
 }

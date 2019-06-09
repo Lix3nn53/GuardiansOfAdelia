@@ -44,19 +44,19 @@ public enum CraftingType {
     public List<ItemStack> getItemsToCraft(GearLevel gearLevel) {
         ItemTier tier = ItemTier.MYSTIC;
         String itemTag = "Weaponsmith's";
-        List<ItemStack> itemStackList = ItemPoolGenerator.generateRangedWeapons(tier, itemTag, gearLevel);
+        List<ItemStack> itemStackList = ItemPoolGenerator.generateRangedWeaponsNoStats(tier, itemTag, gearLevel);
 
         switch (this) {
             case WEAPON_RANGED:
-                itemStackList = ItemPoolGenerator.generateMeleeWeapons(tier, itemTag, gearLevel);
+                itemStackList = ItemPoolGenerator.generateMeleeWeaponsNoStats(tier, itemTag, gearLevel);
                 break;
             case ARMOR_HEAVY:
                 itemTag = "Armorsmith's";
-                itemStackList = ItemPoolGenerator.generateHeavyArmors(tier, itemTag, gearLevel);
+                itemStackList = ItemPoolGenerator.generateHeavyArmorsNoStats(tier, itemTag, gearLevel);
                 break;
             case ARMOR_LIGHT:
                 itemTag = "Armorsmith's";
-                itemStackList = ItemPoolGenerator.generateLightArmors(tier, itemTag, gearLevel);
+                itemStackList = ItemPoolGenerator.generateLightArmorsNoStats(tier, itemTag, gearLevel);
                 break;
             case POTION:
                 itemStackList = ItemPoolGenerator.generatePotions(gearLevel.getConsumableNo());
@@ -66,7 +66,7 @@ public enum CraftingType {
                 break;
             case JEWEL:
                 itemTag = "Jeweller's";
-                itemStackList = ItemPoolGenerator.generatePassives(tier, itemTag, gearLevel);
+                itemStackList = ItemPoolGenerator.generatePassivesNoStats(tier, itemTag, gearLevel);
                 break;
             case ENCHANT_STONE:
                 itemStackList = new ArrayList<>();
@@ -208,127 +208,252 @@ public enum CraftingType {
                 }
                 break;
             case ARMOR_HEAVY:
-                if (gearLevel.equals(GearLevel.TWO)) {
-                    itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(4));
-                    itemStackList.add(Ingredient.MINING_ORE_COPPER.getItemStack(8));
-                } else if (gearLevel.equals(GearLevel.THREE)) {
-                    itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(8));
-                    itemStackList.add(Ingredient.MINING_ORE_COPPER.getItemStack(8));
-                } else if (gearLevel.equals(GearLevel.FOUR)) {
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(12));
-                    itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(12));
-                } else if (gearLevel.equals(GearLevel.FIVE)) {
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(16));
-                    itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(12));
-                } else if (gearLevel.equals(GearLevel.SIX)) {
-                    itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(20));
-                    itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(16));
-                    itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(4));
-                } else if (gearLevel.equals(GearLevel.SEVEN)) {
-                    itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(24));
-                    itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(16));
-                    itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(6));
-                } else if (gearLevel.equals(GearLevel.EIGHT)) {
-                    itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(28));
-                    itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(20));
-                    itemStackList.add(Ingredient.MINING_ORE_TITANIUM.getItemStack(10));
-                } else if (gearLevel.equals(GearLevel.NINE)) {
-                    itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(40));
-                    itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(24));
-                    itemStackList.add(Ingredient.MINING_ORE_TITANIUM.getItemStack(12));
+                if (material.equals(Material.DIAMOND_CHESTPLATE) || material.equals(Material.IRON_CHESTPLATE)
+                        || material.equals(Material.LEATHER_CHESTPLATE) || material.equals(Material.SHIELD)) {
+                    if (gearLevel.equals(GearLevel.TWO)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(4));
+                        itemStackList.add(Ingredient.MINING_ORE_COPPER.getItemStack(8));
+                    } else if (gearLevel.equals(GearLevel.THREE)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(8));
+                        itemStackList.add(Ingredient.MINING_ORE_COPPER.getItemStack(8));
+                    } else if (gearLevel.equals(GearLevel.FOUR)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(12));
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(12));
+                    } else if (gearLevel.equals(GearLevel.FIVE)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(16));
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(12));
+                    } else if (gearLevel.equals(GearLevel.SIX)) {
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(20));
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(16));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(4));
+                    } else if (gearLevel.equals(GearLevel.SEVEN)) {
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(24));
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(16));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(6));
+                    } else if (gearLevel.equals(GearLevel.EIGHT)) {
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(28));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(20));
+                        itemStackList.add(Ingredient.MINING_ORE_TITANIUM.getItemStack(10));
+                    } else if (gearLevel.equals(GearLevel.NINE)) {
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(40));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(24));
+                        itemStackList.add(Ingredient.MINING_ORE_TITANIUM.getItemStack(12));
+                    }
+                } else if (material.equals(Material.DIAMOND_LEGGINGS) || material.equals(Material.IRON_LEGGINGS) || material.equals(Material.LEATHER_LEGGINGS)) {
+                    if (gearLevel.equals(GearLevel.TWO)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(3));
+                        itemStackList.add(Ingredient.MINING_ORE_COPPER.getItemStack(6));
+                    } else if (gearLevel.equals(GearLevel.THREE)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(6));
+                        itemStackList.add(Ingredient.MINING_ORE_COPPER.getItemStack(6));
+                    } else if (gearLevel.equals(GearLevel.FOUR)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(9));
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(9));
+                    } else if (gearLevel.equals(GearLevel.FIVE)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(12));
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(9));
+                    } else if (gearLevel.equals(GearLevel.SIX)) {
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(15));
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(12));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(3));
+                    } else if (gearLevel.equals(GearLevel.SEVEN)) {
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(18));
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(12));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(4));
+                    } else if (gearLevel.equals(GearLevel.EIGHT)) {
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(21));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(15));
+                        itemStackList.add(Ingredient.MINING_ORE_TITANIUM.getItemStack(7));
+                    } else if (gearLevel.equals(GearLevel.NINE)) {
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(30));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(18));
+                        itemStackList.add(Ingredient.MINING_ORE_TITANIUM.getItemStack(9));
+                    }
+                } else { //boots and helmet
+                    if (gearLevel.equals(GearLevel.TWO)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(2));
+                        itemStackList.add(Ingredient.MINING_ORE_COPPER.getItemStack(4));
+                    } else if (gearLevel.equals(GearLevel.THREE)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(4));
+                        itemStackList.add(Ingredient.MINING_ORE_COPPER.getItemStack(4));
+                    } else if (gearLevel.equals(GearLevel.FOUR)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(6));
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(6));
+                    } else if (gearLevel.equals(GearLevel.FIVE)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(8));
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(6));
+                    } else if (gearLevel.equals(GearLevel.SIX)) {
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(10));
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(8));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(2));
+                    } else if (gearLevel.equals(GearLevel.SEVEN)) {
+                        itemStackList.add(Ingredient.MINING_ORE_IRON.getItemStack(12));
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(8));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(3));
+                    } else if (gearLevel.equals(GearLevel.EIGHT)) {
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(14));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(10));
+                        itemStackList.add(Ingredient.MINING_ORE_TITANIUM.getItemStack(5));
+                    } else if (gearLevel.equals(GearLevel.NINE)) {
+                        itemStackList.add(Ingredient.MINING_ORE_STEEL.getItemStack(20));
+                        itemStackList.add(Ingredient.MINING_ORE_DIAMOND.getItemStack(12));
+                        itemStackList.add(Ingredient.MINING_ORE_TITANIUM.getItemStack(6));
+                    }
                 }
                 break;
             case ARMOR_LIGHT:
-                if (gearLevel.equals(GearLevel.TWO)) {
-                    itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(4));
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(8));
-                } else if (gearLevel.equals(GearLevel.THREE)) {
-                    itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(8));
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(8));
-                } else if (gearLevel.equals(GearLevel.FOUR)) {
-                    itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(12));
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(12));
-                } else if (gearLevel.equals(GearLevel.FIVE)) {
-                    itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(16));
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(12));
-                } else if (gearLevel.equals(GearLevel.SIX)) {
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(20));
-                    itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(16));
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(4));
-                } else if (gearLevel.equals(GearLevel.SEVEN)) {
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(24));
-                    itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(16));
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(6));
-                } else if (gearLevel.equals(GearLevel.EIGHT)) {
-                    itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(28));
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(20));
-                    itemStackList.add(Ingredient.HARVESTING_SOFT_SILK.getItemStack(10));
-                } else if (gearLevel.equals(GearLevel.NINE)) {
-                    itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(40));
-                    itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(24));
-                    itemStackList.add(Ingredient.HARVESTING_SOFT_SILK.getItemStack(12));
+                if (material.equals(Material.CHAINMAIL_CHESTPLATE) || material.equals(Material.GOLDEN_CHESTPLATE) || material.equals(Material.LEATHER_CHESTPLATE)) {
+                    if (gearLevel.equals(GearLevel.TWO)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(4));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(8));
+                    } else if (gearLevel.equals(GearLevel.THREE)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(8));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(8));
+                    } else if (gearLevel.equals(GearLevel.FOUR)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(12));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(12));
+                    } else if (gearLevel.equals(GearLevel.FIVE)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(16));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(12));
+                    } else if (gearLevel.equals(GearLevel.SIX)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(20));
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(16));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(4));
+                    } else if (gearLevel.equals(GearLevel.SEVEN)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(24));
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(16));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(6));
+                    } else if (gearLevel.equals(GearLevel.EIGHT)) {
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(28));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(20));
+                        itemStackList.add(Ingredient.HARVESTING_SOFT_SILK.getItemStack(10));
+                    } else if (gearLevel.equals(GearLevel.NINE)) {
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(40));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(24));
+                        itemStackList.add(Ingredient.HARVESTING_SOFT_SILK.getItemStack(12));
+                    }
+                } else if (material.equals(Material.CHAINMAIL_LEGGINGS) || material.equals(Material.GOLDEN_LEGGINGS) || material.equals(Material.LEATHER_LEGGINGS)) {
+                    if (gearLevel.equals(GearLevel.TWO)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(3));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(6));
+                    } else if (gearLevel.equals(GearLevel.THREE)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(6));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(6));
+                    } else if (gearLevel.equals(GearLevel.FOUR)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(9));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(9));
+                    } else if (gearLevel.equals(GearLevel.FIVE)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(12));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(9));
+                    } else if (gearLevel.equals(GearLevel.SIX)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(15));
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(12));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(3));
+                    } else if (gearLevel.equals(GearLevel.SEVEN)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(18));
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(12));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(4));
+                    } else if (gearLevel.equals(GearLevel.EIGHT)) {
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(21));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(15));
+                        itemStackList.add(Ingredient.HARVESTING_SOFT_SILK.getItemStack(7));
+                    } else if (gearLevel.equals(GearLevel.NINE)) {
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(30));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(18));
+                        itemStackList.add(Ingredient.HARVESTING_SOFT_SILK.getItemStack(9));
+                    }
+                } else { //boots and helmet
+                    if (gearLevel.equals(GearLevel.TWO)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(2));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(4));
+                    } else if (gearLevel.equals(GearLevel.THREE)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(4));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(4));
+                    } else if (gearLevel.equals(GearLevel.FOUR)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(6));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(6));
+                    } else if (gearLevel.equals(GearLevel.FIVE)) {
+                        itemStackList.add(Ingredient.HARVESTING_STRING.getItemStack(8));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(6));
+                    } else if (gearLevel.equals(GearLevel.SIX)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(10));
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(8));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(2));
+                    } else if (gearLevel.equals(GearLevel.SEVEN)) {
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_WORN.getItemStack(12));
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(8));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(3));
+                    } else if (gearLevel.equals(GearLevel.EIGHT)) {
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(14));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(10));
+                        itemStackList.add(Ingredient.HARVESTING_SOFT_SILK.getItemStack(5));
+                    } else if (gearLevel.equals(GearLevel.NINE)) {
+                        itemStackList.add(Ingredient.HARVESTING_SILK.getItemStack(20));
+                        itemStackList.add(Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(12));
+                        itemStackList.add(Ingredient.HARVESTING_SOFT_SILK.getItemStack(6));
+                    }
                 }
                 break;
             case POTION:
                 if (gearLevel.equals(GearLevel.TWO)) {
-                    itemStackList.add(Ingredient.MINING_JEWEL_GOLD_DUST.getItemStack(4));
-                    itemStackList.add(Ingredient.HARVESTING_ROSE.getItemStack(8));
+                    itemStackList.add(Ingredient.MINING_JEWEL_GOLD_DUST.getItemStack(2));
+                    itemStackList.add(Ingredient.HARVESTING_ROSE.getItemStack(4));
                 } else if (gearLevel.equals(GearLevel.THREE)) {
-                    itemStackList.add(Ingredient.MINING_JEWEL_GOLD_DUST.getItemStack(8));
-                    itemStackList.add(Ingredient.HARVESTING_ROSE.getItemStack(8));
+                    itemStackList.add(Ingredient.MINING_JEWEL_GOLD_DUST.getItemStack(4));
+                    itemStackList.add(Ingredient.HARVESTING_ROSE.getItemStack(4));
                 } else if (gearLevel.equals(GearLevel.FOUR)) {
-                    itemStackList.add(Ingredient.HARVESTING_ROSE.getItemStack(12));
-                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(12));
+                    itemStackList.add(Ingredient.HARVESTING_ROSE.getItemStack(6));
+                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(6));
                 } else if (gearLevel.equals(GearLevel.FIVE)) {
-                    itemStackList.add(Ingredient.HARVESTING_ROSE.getItemStack(16));
-                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(12));
+                    itemStackList.add(Ingredient.HARVESTING_ROSE.getItemStack(8));
+                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(6));
                 } else if (gearLevel.equals(GearLevel.SIX)) {
-                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(20));
-                    itemStackList.add(Ingredient.HARVESTING_CHERRY.getItemStack(16));
-                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(4));
+                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(10));
+                    itemStackList.add(Ingredient.HARVESTING_CHERRY.getItemStack(8));
+                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(2));
                 } else if (gearLevel.equals(GearLevel.SEVEN)) {
-                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(24));
-                    itemStackList.add(Ingredient.HARVESTING_CHERRY.getItemStack(16));
-                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(6));
+                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(12));
+                    itemStackList.add(Ingredient.HARVESTING_CHERRY.getItemStack(8));
+                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(3));
                 } else if (gearLevel.equals(GearLevel.EIGHT)) {
-                    itemStackList.add(Ingredient.HARVESTING_CHERRY.getItemStack(28));
-                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(20));
-                    itemStackList.add(Ingredient.HARVESTING_PLUM_FLOWER.getItemStack(10));
+                    itemStackList.add(Ingredient.HARVESTING_CHERRY.getItemStack(14));
+                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(10));
+                    itemStackList.add(Ingredient.HARVESTING_PLUM_FLOWER.getItemStack(5));
                 } else if (gearLevel.equals(GearLevel.NINE)) {
-                    itemStackList.add(Ingredient.HARVESTING_CHERRY.getItemStack(40));
-                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(24));
-                    itemStackList.add(Ingredient.HARVESTING_PLUM_FLOWER.getItemStack(12));
+                    itemStackList.add(Ingredient.HARVESTING_CHERRY.getItemStack(20));
+                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(12));
+                    itemStackList.add(Ingredient.HARVESTING_PLUM_FLOWER.getItemStack(6));
                 }
                 break;
             case FOOD:
                 if (gearLevel.equals(GearLevel.TWO)) {
-                    itemStackList.add(Ingredient.MINING_JEWEL_GOLD_DUST.getItemStack(4));
-                    itemStackList.add(Ingredient.HUNTING_BEEF.getItemStack(8));
+                    itemStackList.add(Ingredient.MINING_JEWEL_GOLD_DUST.getItemStack(3));
+                    itemStackList.add(Ingredient.HUNTING_BEEF.getItemStack(6));
                 } else if (gearLevel.equals(GearLevel.THREE)) {
-                    itemStackList.add(Ingredient.MINING_JEWEL_GOLD_DUST.getItemStack(8));
-                    itemStackList.add(Ingredient.HUNTING_BEEF.getItemStack(8));
+                    itemStackList.add(Ingredient.MINING_JEWEL_GOLD_DUST.getItemStack(6));
+                    itemStackList.add(Ingredient.HUNTING_BEEF.getItemStack(6));
                 } else if (gearLevel.equals(GearLevel.FOUR)) {
-                    itemStackList.add(Ingredient.HUNTING_BEEF.getItemStack(12));
-                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(12));
+                    itemStackList.add(Ingredient.HUNTING_BEEF.getItemStack(9));
+                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(9));
                 } else if (gearLevel.equals(GearLevel.FIVE)) {
-                    itemStackList.add(Ingredient.HUNTING_BEEF.getItemStack(16));
-                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(12));
+                    itemStackList.add(Ingredient.HUNTING_BEEF.getItemStack(12));
+                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(9));
                 } else if (gearLevel.equals(GearLevel.SIX)) {
-                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(20));
-                    itemStackList.add(Ingredient.FISHING_COD.getItemStack(16));
-                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(4));
+                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(15));
+                    itemStackList.add(Ingredient.FISHING_COD.getItemStack(12));
+                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(3));
                 } else if (gearLevel.equals(GearLevel.SEVEN)) {
-                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(24));
-                    itemStackList.add(Ingredient.FISHING_COD.getItemStack(16));
-                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(6));
+                    itemStackList.add(Ingredient.MINING_JEWEL_JADE.getItemStack(18));
+                    itemStackList.add(Ingredient.FISHING_COD.getItemStack(12));
+                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(4));
                 } else if (gearLevel.equals(GearLevel.EIGHT)) {
-                    itemStackList.add(Ingredient.FISHING_COD.getItemStack(28));
-                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(20));
-                    itemStackList.add(Ingredient.FISHING_SALMON.getItemStack(10));
+                    itemStackList.add(Ingredient.FISHING_COD.getItemStack(21));
+                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(15));
+                    itemStackList.add(Ingredient.FISHING_SALMON.getItemStack(6));
                 } else if (gearLevel.equals(GearLevel.NINE)) {
-                    itemStackList.add(Ingredient.FISHING_COD.getItemStack(40));
-                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(24));
-                    itemStackList.add(Ingredient.FISHING_SALMON.getItemStack(12));
+                    itemStackList.add(Ingredient.FISHING_COD.getItemStack(30));
+                    itemStackList.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(18));
+                    itemStackList.add(Ingredient.FISHING_SALMON.getItemStack(8));
                 }
                 break;
             case JEWEL:

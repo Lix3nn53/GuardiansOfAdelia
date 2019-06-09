@@ -8,9 +8,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class Companions {
 
-    public static ItemStack get(Companion companion, ItemTier tier, int reqLevel, int itemID) {
+    public static ItemStack get(Companion companion, ItemTier tier, int reqLevel) {
 
-        PetCompanion petCompanion = new PetCompanion(companion, tier, "", Material.STONE_HOE, companion.getEggCustomModelData(), reqLevel, itemID);
+        PetCompanion petCompanion = new PetCompanion(companion, tier, "", Material.STONE_HOE, companion.getEggCustomModelData(), reqLevel);
 
         return petCompanion.getItemStack();
     }

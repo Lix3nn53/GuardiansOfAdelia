@@ -96,14 +96,14 @@ public class CommandLix implements CommandExecutor {
                 if (args.length == 2) {
                     Companion mount = Companion.valueOf(args[1]);
 
-                    ItemStack egg = Companions.get(mount, ItemTier.COMMON, 20, 800000);
+                    ItemStack egg = Companions.get(mount, ItemTier.COMMON, 20);
                     InventoryUtils.giveItemToPlayer(player, egg);
                 }
             } else if (args[0].equals("mount")) {
                 if (args.length == 2) {
                     Mount mount = Mount.valueOf(args[1]);
 
-                    ItemStack egg = Mounts.get(mount, ItemTier.COMMON, 20, 800000);
+                    ItemStack egg = Mounts.get(mount, ItemTier.COMMON, 20);
                     InventoryUtils.giveItemToPlayer(player, egg);
                 }
             } else if (args[0].equals("stone")) {

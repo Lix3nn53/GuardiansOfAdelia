@@ -15,13 +15,12 @@ import java.util.List;
 
 public class PetCompanion implements RPGGear {
 
-    private final int itemID;
     private final ItemTier tier;
     private final String itemTag;
     private final int level;
     private ItemStack itemStack;
 
-    public PetCompanion(Companion companion, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int itemID) {
+    public PetCompanion(Companion companion, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel) {
         String name = tier.getTierColor() + companion.getName();
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + companion.getName();
@@ -38,8 +37,6 @@ public class PetCompanion implements RPGGear {
         lore.add(ChatColor.YELLOW + "----------------");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + companionHealth);
         lore.add(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + PetManager.getCompanionDamage(1));
-        lore.add("");
-        lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);
@@ -55,15 +52,9 @@ public class PetCompanion implements RPGGear {
         itemMeta.setCustomModelData(customModelData);
         this.itemStack.setItemMeta(itemMeta);
 
-        this.itemID = itemID;
         this.tier = tier;
         this.itemTag = itemTag;
         this.level = reqLevel;
-    }
-
-    @Override
-    public int getItemID() {
-        return itemID;
     }
 
     @Override

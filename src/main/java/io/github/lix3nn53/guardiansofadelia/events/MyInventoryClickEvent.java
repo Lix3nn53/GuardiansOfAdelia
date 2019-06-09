@@ -2,8 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
@@ -587,41 +589,113 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        } else if (title.contains(" Crafting Level Selection")) {
-            new BukkitRunnable() {
-                @Override
-                public void run() {
+        } else if (title.contains(" Crafting")) {
+            if (title.contains(" Level Selection")) {
+                if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                    if (current.getType().equals(Material.STONE_PICKAXE)) {
+                        if (rpgCharacter != null) {
+                            Job job = rpgCharacter.getJob();
+                            int jobLevel = job.getLevel();
 
+                            String replace = title.replace(" Crafting Level Selection", "");
+                            CraftingType craftingType = CraftingType.valueOf(replace);
+
+                            GearLevel gearLevel = GearLevel.TWO;
+                            int reqJobLevel = 1;
+                            if (currentName.equals(ChatColor.GOLD + "Level 30~39")) {
+                                gearLevel = GearLevel.THREE;
+                                reqJobLevel = 2;
+                            } else if (currentName.equals(ChatColor.GOLD + "Level 40~49")) {
+                                gearLevel = GearLevel.FOUR;
+                                reqJobLevel = 3;
+                            } else if (currentName.equals(ChatColor.GOLD + "Level 50~59")) {
+                                gearLevel = GearLevel.FIVE;
+                                reqJobLevel = 4;
+                            } else if (currentName.equals(ChatColor.GOLD + "Level 60~69")) {
+                                gearLevel = GearLevel.SIX;
+                                reqJobLevel = 5;
+                            } else if (currentName.equals(ChatColor.GOLD + "Level 70~79")) {
+                                gearLevel = GearLevel.SEVEN;
+                                reqJobLevel = 6;
+                            } else if (currentName.equals(ChatColor.GOLD + "Level 80~89")) {
+                                gearLevel = GearLevel.EIGHT;
+                                reqJobLevel = 7;
+                            } else if (currentName.equals(ChatColor.GOLD + "Level 90~99")) {
+                                gearLevel = GearLevel.NINE;
+                                reqJobLevel = 8;
+                            }
+
+                            if (jobLevel >= reqJobLevel) {
+                                GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, gearLevel);
+                                craftingBook.openInventory(player);
+                            } else {
+                                player.sendMessage(ChatColor.RED + "Required job-level to craft " + currentName + ChatColor.RED + " items is " + reqJobLevel);
+                            }
+                        }
+                    }
                 }
-            }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
-            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                if (current.getType().equals(Material.STONE_PICKAXE)) {
-                    String replace = title.replace(" Crafting Level Selection", "");
-                    CraftingType craftingType = CraftingType.valueOf(replace);
-                    if (currentName.equals(ChatColor.GOLD + "Level 20~29")) {
-                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.TWO);
-                        craftingBook.openInventory(player);
-                    } else if (currentName.equals(ChatColor.GOLD + "Level 30~39")) {
-                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.THREE);
-                        craftingBook.openInventory(player);
-                    } else if (currentName.equals(ChatColor.GOLD + "Level 40~49")) {
-                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.FOUR);
-                        craftingBook.openInventory(player);
-                    } else if (currentName.equals(ChatColor.GOLD + "Level 50~59")) {
-                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.FIVE);
-                        craftingBook.openInventory(player);
-                    } else if (currentName.equals(ChatColor.GOLD + "Level 60~69")) {
-                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.SIX);
-                        craftingBook.openInventory(player);
-                    } else if (currentName.equals(ChatColor.GOLD + "Level 70~79")) {
-                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.SEVEN);
-                        craftingBook.openInventory(player);
-                    } else if (currentName.equals(ChatColor.GOLD + "Level 80~89")) {
-                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.EIGHT);
-                        craftingBook.openInventory(player);
-                    } else if (currentName.equals(ChatColor.GOLD + "Level 90~99")) {
-                        GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, GearLevel.NINE);
-                        craftingBook.openInventory(player);
+            } else {
+                if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                    if (rpgCharacter != null) {
+                        ItemStack item = clickedInventory.getItem(7);
+                        ItemMeta craftingGuideGlass = item.getItemMeta();
+                        if (craftingGuideGlass.hasDisplayName()) {
+                            String displayName = craftingGuideGlass.getDisplayName();
+                            if (displayName.equals(ChatColor.GOLD + "Crafting Guide")) {
+                                if (slot == 8 || slot == 17 || slot == 26 || slot == 35 || slot == 44) {
+                                    List<ItemStack> ingredients = new ArrayList<>();
+
+                                    for (int i = slot - 8; i < slot - 1; i++) {
+                                        ItemStack ingredient = clickedInventory.getItem(i);
+                                        if (ingredient != null) {
+                                            if (!ingredient.getType().equals(Material.AIR)) {
+                                                ingredients.add(ingredient);
+                                            }
+                                        }
+                                    }
+
+                                    boolean hasIngredients = true;
+                                    int jobExpToGive = 0;
+                                    for (ItemStack ingredient : ingredients) {
+                                        jobExpToGive += ingredient.getAmount();
+                                        boolean inventoryContains = InventoryUtils.inventoryContains(player.getInventory(), ingredient.getType(), ingredient.getAmount());
+                                        if (!inventoryContains) {
+                                            hasIngredients = false;
+                                            break;
+                                        }
+                                    }
+
+                                    if (hasIngredients) {
+                                        ItemStack clone = current.clone();
+
+                                        GearLevel gearLevel = GearLevel.TWO;
+                                        if (title.contains("30~39")) {
+                                            gearLevel = GearLevel.THREE;
+                                        } else if (title.contains("40~49")) {
+                                            gearLevel = GearLevel.FOUR;
+                                        } else if (title.contains("50~59")) {
+                                            gearLevel = GearLevel.FIVE;
+                                        } else if (title.contains("60~69")) {
+                                            gearLevel = GearLevel.SIX;
+                                        } else if (title.contains("70~79")) {
+                                            gearLevel = GearLevel.SEVEN;
+                                        } else if (title.contains("80~89")) {
+                                            gearLevel = GearLevel.EIGHT;
+                                        } else if (title.contains("90~99")) {
+                                            gearLevel = GearLevel.NINE;
+                                        }
+
+                                        StatUtils.addRandomStats(clone, gearLevel, ItemTier.MYSTIC);
+
+                                        for (ItemStack ingredient : ingredients) {
+                                            InventoryUtils.removeMaterialFromInventory(player.getInventory(), ingredient.getType(), ingredient.getAmount());
+                                        }
+                                        InventoryUtils.giveItemToPlayer(player, clone);
+                                        rpgCharacter.getJob().addExperience(player, jobExpToGive);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

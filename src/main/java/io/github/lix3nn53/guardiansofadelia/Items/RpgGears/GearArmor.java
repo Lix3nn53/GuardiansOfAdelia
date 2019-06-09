@@ -15,14 +15,13 @@ import java.util.List;
 
 public class GearArmor implements RPGGear {
 
-    private final int itemID;
     private final ItemTier tier;
     private final String itemTag;
     private final int level;
     private ItemStack itemStack;
 
     public GearArmor(String name, ItemTier tier, String itemTag, Material material, int level, RPGClass rpgClass, int health,
-                     int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats, int itemID) {
+                     int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + name;
@@ -58,8 +57,6 @@ public class GearArmor implements RPGGear {
         if (statPassive.getAir() != 0) {
             lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Air: " + ChatColor.GRAY + "+" + statPassive.getAir());
         }
-        lore.add("");
-        lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 
         this.itemStack = new ItemStack(material);
         this.itemStack = RPGItemUtils.resetArmor(this.itemStack);
@@ -73,15 +70,9 @@ public class GearArmor implements RPGGear {
         itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES);
         this.itemStack.setItemMeta(itemMeta);
 
-        this.itemID = itemID;
         this.tier = tier;
         this.itemTag = itemTag;
         this.level = level;
-    }
-
-    @Override
-    public int getItemID() {
-        return itemID;
     }
 
     @Override

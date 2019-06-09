@@ -15,13 +15,12 @@ import java.util.List;
 
 public class PetMount implements RPGGear {
 
-    private final int itemID;
     private final ItemTier tier;
     private final String itemTag;
     private final int level;
     private ItemStack itemStack;
 
-    public PetMount(Mount mount, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int itemID) {
+    public PetMount(Mount mount, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel) {
         String name = tier.getTierColor() + mount.getName();
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + mount.getName();
@@ -39,8 +38,6 @@ public class PetMount implements RPGGear {
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + mountHealth);
         lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + PetManager.getMountSpeed(1));
         lore.add(ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + PetManager.getMountJump(1));
-        lore.add("");
-        lore.add(ChatColor.DARK_GRAY + "#" + itemID);
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);
@@ -56,15 +53,9 @@ public class PetMount implements RPGGear {
         itemMeta.setCustomModelData(customModelData);
         this.itemStack.setItemMeta(itemMeta);
 
-        this.itemID = itemID;
         this.tier = tier;
         this.itemTag = itemTag;
         this.level = reqLevel;
-    }
-
-    @Override
-    public int getItemID() {
-        return itemID;
     }
 
     @Override

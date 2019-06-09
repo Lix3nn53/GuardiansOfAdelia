@@ -18,68 +18,58 @@ class Staffs {
         RPGClass rpgClass = RPGClass.MAGE;
         int magicDamage = 10;
         AttackSpeed attackSpeed = AttackSpeed.SLOW;
-        int itemID = 401;
 
         if (placementNumber == 2) {
             name = "Leaf Fairy Staff";
             customModelDataId = 10000002;
             level = 10;
             magicDamage = 40;
-            itemID = 402;
         } else if (placementNumber == 3) {
             name = "Zest Staff";
             customModelDataId = 10000003;
             level = 20;
             magicDamage = 100;
-            itemID = 403;
         } else if (placementNumber == 4) {
             name = "Dinah Wand";
             customModelDataId = 10000004;
             level = 30;
             magicDamage = 250;
-            itemID = 404;
         } else if (placementNumber == 5) {
             name = "Nether Fire Staff";
             customModelDataId = 10000005;
             level = 40;
             magicDamage = 400;
-            itemID = 405;
         } else if (placementNumber == 6) {
             name = "Water Fairy Staff";
             customModelDataId = 10000006;
             level = 50;
             magicDamage = 650;
-            itemID = 406;
         } else if (placementNumber == 7) {
             name = "Fairy Staff";
             customModelDataId = 10000008;
             level = 60;
             magicDamage = 900;
-            itemID = 407;
         } else if (placementNumber == 8) {
             name = "Ocean Staff";
             customModelDataId = 10000010;
             level = 70;
             magicDamage = 1200;
-            itemID = 408;
         } else if (placementNumber == 9) {
             name = "Crystal of Swamp";
             customModelDataId = 10000012;
             level = 80;
             magicDamage = 1500;
-            itemID = 409;
         } else if (placementNumber == 10) {
             name = "Neferti Staff";
             customModelDataId = 10000014;
             level = 90;
             magicDamage = 2000;
-            itemID = 410;
         }
 
         int damage = magicDamage / 4;
 
         final WeaponMagical weapon = new WeaponMagical(name, tier, itemTag, material, customModelDataId, level, rpgClass, damage, magicDamage, bonusPercent,
-                attackSpeed, minStatValue, maxStatValue, minNumberofStats, itemID);
+                attackSpeed, minStatValue, maxStatValue, minNumberofStats);
         return weapon.getItemStack();
     }
 }
