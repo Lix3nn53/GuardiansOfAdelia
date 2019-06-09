@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
+import io.github.lix3nn53.guardiansofadelia.Items.GatheringTool;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
@@ -743,15 +744,47 @@ public enum MerchantPageType {
     }
 
     private GuiBookGeneric getPotionShop(int shopLevel, int shopNpc) {
-        MerchantGuiLine line1 = new MerchantGuiLine();
-
-        ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(shopLevel * 2, 3);
-        line1.addWord(hpPotion, 1);
-        ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(shopLevel * 2, 3);
-        line1.addWord(manaPotion, 1);
-
         GuiPage guiPage = new GuiPage();
+
+        MerchantGuiLine line1 = new MerchantGuiLine();
+        ItemStack hpPotion1 = Consumable.POTION_INSTANT_HEALTH.getItemStack(1, 3);
+        line1.addWord(hpPotion1, 1);
+        ItemStack manaPotion1 = Consumable.POTION_INSTANT_MANA.getItemStack(1, 3);
+        line1.addWord(manaPotion1, 1);
         guiPage.addLine(line1);
+
+        if (shopLevel >= 2) {
+            MerchantGuiLine line = new MerchantGuiLine();
+            ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(2, 3);
+            line.addWord(hpPotion, 1);
+            ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(2, 3);
+            line.addWord(manaPotion, 1);
+            guiPage.addLine(line);
+            if (shopLevel >= 3) {
+                line = new MerchantGuiLine();
+                hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(3, 3);
+                line.addWord(hpPotion, 1);
+                manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(3, 3);
+                line.addWord(manaPotion, 1);
+                guiPage.addLine(line);
+                if (shopLevel >= 4) {
+                    line = new MerchantGuiLine();
+                    hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(4, 3);
+                    line.addWord(hpPotion, 1);
+                    manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(4, 3);
+                    line.addWord(manaPotion, 1);
+                    guiPage.addLine(line);
+                    if (shopLevel >= 5) {
+                        line = new MerchantGuiLine();
+                        hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(5, 3);
+                        line.addWord(hpPotion, 1);
+                        manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(5, 3);
+                        line.addWord(manaPotion, 1);
+                        guiPage.addLine(line);
+                    }
+                }
+            }
+        }
 
         GuiBookGeneric potion_shop = new GuiBookGeneric("Potion Shop", shopNpc);
         potion_shop.addPage(guiPage);
@@ -767,12 +800,12 @@ public enum MerchantPageType {
 
         if (shopLevel >= 2) {
             line1.addWord(TeleportScroll.ELDERINE.getScroll(1, 20), 1);
-        }
-        if (shopLevel >= 3) {
-            line1.addWord(TeleportScroll.URUGA.getScroll(1, 40), 1);
-        }
-        if (shopLevel >= 4) {
-            line1.addWord(TeleportScroll.ALBERSTOL_RUINS.getScroll(1, 60), 1);
+            if (shopLevel >= 3) {
+                line1.addWord(TeleportScroll.URUGA.getScroll(1, 40), 1);
+                if (shopLevel >= 4) {
+                    line1.addWord(TeleportScroll.ALBERSTOL_RUINS.getScroll(1, 60), 1);
+                }
+            }
         }
 
         GuiPage guiPage = new GuiPage();
@@ -792,7 +825,7 @@ public enum MerchantPageType {
         GuiPage guiPage = new GuiPage();
         guiPage.addLine(line1);
 
-        GuiBookGeneric potion_shop = new GuiBookGeneric("Potion Shop", shopNpc);
+        GuiBookGeneric potion_shop = new GuiBookGeneric("Utility Shop", shopNpc);
         potion_shop.addPage(guiPage);
         return potion_shop;
     }
@@ -800,13 +833,47 @@ public enum MerchantPageType {
     private GuiBookGeneric getToolShop(int shopLevel, int shopNpc) {
         MerchantGuiLine line1 = new MerchantGuiLine();
 
-        ItemStack fishingRod = OtherItems.getFishingRod(30);
-        line1.addWord(fishingRod, 1);
+        ItemStack axe = GatheringTool.WOODEN_AXE.getItemStack();
+        ItemStack hoe = GatheringTool.WOODEN_HOE.getItemStack();
+        ItemStack pickaxe = GatheringTool.WOODEN_PICKAXE.getItemStack();
+        ItemStack fishingRod = GatheringTool.WOODEN_FISHING_ROD.getItemStack();
+        int price = 1;
+
+        if (shopLevel == 2) {
+            axe = GatheringTool.STONE_AXE.getItemStack();
+            hoe = GatheringTool.STONE_HOE.getItemStack();
+            pickaxe = GatheringTool.STONE_PICKAXE.getItemStack();
+            fishingRod = GatheringTool.STONE_FISHING_ROD.getItemStack();
+            price = 2;
+        } else if (shopLevel == 3) {
+            axe = GatheringTool.IRON_AXE.getItemStack();
+            hoe = GatheringTool.IRON_HOE.getItemStack();
+            pickaxe = GatheringTool.IRON_PICKAXE.getItemStack();
+            fishingRod = GatheringTool.IRON_FISHING_ROD.getItemStack();
+            price = 3;
+        } else if (shopLevel == 4) {
+            axe = GatheringTool.GOLDEN_AXE.getItemStack();
+            hoe = GatheringTool.GOLDEN_HOE.getItemStack();
+            pickaxe = GatheringTool.GOLDEN_PICKAXE.getItemStack();
+            fishingRod = GatheringTool.GOLDEN_FISHING_ROD.getItemStack();
+            price = 4;
+        } else if (shopLevel == 5) {
+            axe = GatheringTool.DIAMOND_AXE.getItemStack();
+            hoe = GatheringTool.DIAMOND_HOE.getItemStack();
+            pickaxe = GatheringTool.DIAMOND_PICKAXE.getItemStack();
+            fishingRod = GatheringTool.DIAMOND_FISHING_ROD.getItemStack();
+            price = 5;
+        }
+
+        line1.addWord(axe, price);
+        line1.addWord(hoe, price);
+        line1.addWord(pickaxe, price);
+        line1.addWord(fishingRod, price);
 
         GuiPage guiPage = new GuiPage();
         guiPage.addLine(line1);
 
-        GuiBookGeneric potion_shop = new GuiBookGeneric("Potion Shop", shopNpc);
+        GuiBookGeneric potion_shop = new GuiBookGeneric("Tool Shop", shopNpc);
         potion_shop.addPage(guiPage);
         return potion_shop;
     }

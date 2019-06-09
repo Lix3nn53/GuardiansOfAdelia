@@ -18,9 +18,10 @@ public class MyEntityDeathEvent implements Listener {
         event.getDrops().clear();
         event.setDroppedExp(0);
 
-        if (entity.getType().equals(EntityType.WOLF) || entity.getType().equals(EntityType.HORSE)) {
+        EntityType entityType = entity.getType();
+        if (entityType.equals(EntityType.WOLF) || entityType.equals(EntityType.HORSE)) {
             PetManager.onPetDeath(entity);
-        } else if (!entity.getType().equals(EntityType.PLAYER)) {
+        } else if (!entityType.equals(EntityType.PLAYER)) {
             SpawnerManager.onMobDeath(entity);
 
             DropManager.onMobDeath(entity, event);

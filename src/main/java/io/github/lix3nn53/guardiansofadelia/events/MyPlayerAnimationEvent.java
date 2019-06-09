@@ -4,11 +4,13 @@ import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -19,6 +21,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerAnimationType;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,6 +38,47 @@ public class MyPlayerAnimationEvent implements Listener {
 
         if (player.getLocation().getWorld().getName().equals("world")) {
             Block targetBlock = player.getTargetBlock(null, 5);
+
+            Material type = targetBlock.getType();
+
+            if (type.equals(Material.EMERALD_ORE) || type.equals(Material.GOLD_ORE) || type.equals(Material.REDSTONE_ORE) || type.equals(Material.LAPIS_ORE)) {
+                ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+                Material handType = itemInMainHand.getType();
+                if (handType.equals(Material.WOODEN_PICKAXE) || handType.equals(Material.STONE_PICKAXE) || handType.equals(Material.IRON_PICKAXE)
+                        || handType.equals(Material.GOLDEN_PICKAXE) || handType.equals(Material.DIAMOND_PICKAXE)) {
+                    GatheringType.MINING_JEWELRY.startGatheringAnimation(player, itemInMainHand);
+                    return;
+                }
+            } else if (type.equals(Material.COAL_ORE) || type.equals(Material.IRON_ORE) || type.equals(Material.DIAMOND_ORE)) {
+                ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+                Material handType = itemInMainHand.getType();
+                if (handType.equals(Material.WOODEN_PICKAXE) || handType.equals(Material.STONE_PICKAXE) || handType.equals(Material.IRON_PICKAXE)
+                        || handType.equals(Material.GOLDEN_PICKAXE) || handType.equals(Material.DIAMOND_PICKAXE)) {
+                    GatheringType.MINING_ORE.startGatheringAnimation(player, itemInMainHand);
+                    return;
+                }
+            } else if (type.equals(Material.DANDELION) || type.equals(Material.POPPY)
+                    || type.equals(Material.BLUE_ORCHID) || type.equals(Material.ALLIUM) || type.equals(Material.AZURE_BLUET) || type.equals(Material.RED_TULIP)
+                    || type.equals(Material.ORANGE_TULIP) || type.equals(Material.WHITE_TULIP) || type.equals(Material.PINK_TULIP) || type.equals(Material.OXEYE_DAISY)
+                    || type.equals(Material.CORNFLOWER) || type.equals(Material.LILY_OF_THE_VALLEY) || type.equals(Material.WITHER_ROSE) || type.equals(Material.SUNFLOWER)
+                    || type.equals(Material.LILAC) || type.equals(Material.ROSE_BUSH) || type.equals(Material.PEONY)) {
+                ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+                Material handType = itemInMainHand.getType();
+                if (handType.equals(Material.WOODEN_HOE) || handType.equals(Material.STONE_HOE) || handType.equals(Material.IRON_HOE)
+                        || handType.equals(Material.GOLDEN_HOE) || handType.equals(Material.DIAMOND_HOE)) {
+                    GatheringType.HARVESTING_FLOWER.startGatheringAnimation(player, itemInMainHand);
+                    return;
+                }
+            } else if (type.equals(Material.ACACIA_WOOD) || type.equals(Material.BIRCH_WOOD)
+                    || type.equals(Material.DARK_OAK_WOOD) || type.equals(Material.JUNGLE_WOOD) || type.equals(Material.OAK_WOOD) || type.equals(Material.SPRUCE_WOOD)) {
+                ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+                Material handType = itemInMainHand.getType();
+                if (handType.equals(Material.WOODEN_AXE) || handType.equals(Material.STONE_AXE) || handType.equals(Material.IRON_AXE)
+                        || handType.equals(Material.GOLDEN_AXE) || handType.equals(Material.DIAMOND_AXE)) {
+                    GatheringType.WOODCUTTING.startGatheringAnimation(player, itemInMainHand);
+                    return;
+                }
+            }
 
             List<Entity> nearbyEntities = player.getNearbyEntities(1, 1, 1);
             for (Entity entity : nearbyEntities) {

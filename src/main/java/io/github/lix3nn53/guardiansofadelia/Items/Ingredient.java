@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.Items.list;
+package io.github.lix3nn53.guardiansofadelia.Items;
 
 import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
 import net.md_5.bungee.api.ChatColor;
@@ -89,7 +89,7 @@ public enum Ingredient {
                 itemStack.setItemMeta(im);
                 break;
             case FISHING_SALMON:
-                itemStack = new ItemStack(Material.NETHER_BRICKS, amount);
+                itemStack = new ItemStack(Material.NETHER_BRICK, amount);
                 im = itemStack.getItemMeta();
                 im.setDisplayName(ChatColor.YELLOW + "Raw Salmon");
                 im.setLore(new ArrayList() {{
@@ -370,7 +370,7 @@ public enum Ingredient {
             case FISHING_COD:
                 return Material.SUGAR;
             case FISHING_SALMON:
-                return Material.NETHER_BRICKS;
+                return Material.NETHER_BRICK;
             case HARVESTING_STRING:
                 return Material.STRING;
             case HARVESTING_SILK:

@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
@@ -20,6 +21,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.List;
@@ -187,6 +189,14 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             MiniGameManager.onPlayerKill(player);
                         } else {
                             MiniGameManager.onMobKillDungeon(player, livingTarget);
+                        }
+                    }
+
+                    if (livingTarget.getType().equals(EntityType.COW) ||livingTarget.getType().equals(EntityType.SHEEP)) {
+                        ItemStack itemStack = GatheringType.HUNTING.onHunt(player);
+                        if (itemStack != null) {
+                            Item item = livingTarget.getWorld().dropItemNaturally(livingTarget.getLocation().add(0, 0.5, 0), itemStack);
+                            DropManager.setItem(item.getItemStack(), player);
                         }
                     }
                 }

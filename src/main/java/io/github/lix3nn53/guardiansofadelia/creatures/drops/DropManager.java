@@ -35,6 +35,11 @@ public class DropManager {
         return true;
     }
 
+    public static boolean onItemDespawn(ItemStack itemStack) {
+        droppedItemOwners.remove(itemStack);
+        return true;
+    }
+
     public static void setItem(ItemStack itemStack, List<Player> players) {
         droppedItemOwners.put(itemStack, players);
         startItemTimer(itemStack);

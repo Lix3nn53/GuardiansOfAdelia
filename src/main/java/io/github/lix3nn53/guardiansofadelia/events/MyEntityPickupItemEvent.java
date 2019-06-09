@@ -26,6 +26,11 @@ public class MyEntityPickupItemEvent implements Listener {
         } else {
             event.setCancelled(true);
         }
+
+
+        if (!event.isCancelled()) {
+            DropManager.onItemDespawn(itemStack);
+        }
     }
 
 }

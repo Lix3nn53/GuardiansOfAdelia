@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
-import io.github.lix3nn53.guardiansofadelia.Items.list.Ingredient;
+import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

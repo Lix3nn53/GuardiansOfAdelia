@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.QuestHologram;
 import org.bukkit.Material;
@@ -31,6 +32,10 @@ public class MyItemDespawnEvent implements Listener {
                     }
                 }
             }
+        }
+
+        if (!event.isCancelled()) {
+            DropManager.onItemDespawn(itemStack);
         }
     }
 }

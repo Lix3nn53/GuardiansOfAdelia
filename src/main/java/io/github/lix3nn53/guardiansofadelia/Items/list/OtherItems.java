@@ -1,9 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -25,22 +23,6 @@ public class OtherItems {
         }});
         item.setItemMeta(im);
         return item;
-    }
-
-    public static ItemStack getFishingRod(int durability) {
-        ItemStack itemStack = new ItemStack(Material.FISHING_ROD);
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Fishing Rod");
-        itemMeta.setLore(new ArrayList() {{
-            add(ChatColor.YELLOW + "Durability: " + durability);
-            add("");
-            add(ChatColor.GRAY + "Material collection tool");
-        }});
-        itemMeta.addEnchant(Enchantment.LURE, 3, false);
-        itemMeta.setUnbreakable(true);
-        itemStack.setItemMeta(itemMeta);
-        PersistentDataContainerUtil.putInteger("durability", durability, itemStack);
-        return itemStack;
     }
 
     public static ItemStack getArrow(int amount) {
