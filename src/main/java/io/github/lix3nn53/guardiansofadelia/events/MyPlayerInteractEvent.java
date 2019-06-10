@@ -27,7 +27,7 @@ import java.util.UUID;
 
 public class MyPlayerInteractEvent implements Listener {
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onEvent(PlayerInteractEvent event) {
         EquipmentSlot hand = event.getHand();
         if (!hand.equals(EquipmentSlot.HAND)) {

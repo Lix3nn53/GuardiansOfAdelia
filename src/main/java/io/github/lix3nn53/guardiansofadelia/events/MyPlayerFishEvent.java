@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringType;
+import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

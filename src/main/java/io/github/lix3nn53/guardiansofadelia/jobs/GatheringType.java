@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
+package io.github.lix3nn53.guardiansofadelia.jobs;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
@@ -39,8 +39,6 @@ public enum GatheringType {
 
                     @Override
                     public void run() {
-                        secsRun++;
-
                         double differenceX = Math.abs(startPosX - player.getLocation().getX());
                         double differenceY = Math.abs(startPosY - player.getLocation().getY());
                         double differenceZ = Math.abs(startPosZ - player.getLocation().getZ());
@@ -93,8 +91,9 @@ public enum GatheringType {
                             }
                             guardianData.setGathering(false);
                         }
+                        secsRun++;
                     }
-                }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20L);
+                }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 28L);
             }
         }
     }

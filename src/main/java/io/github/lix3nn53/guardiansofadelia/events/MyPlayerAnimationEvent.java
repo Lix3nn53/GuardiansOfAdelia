@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringType;
+import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
@@ -70,7 +70,9 @@ public class MyPlayerAnimationEvent implements Listener {
                     return;
                 }
             } else if (type.equals(Material.ACACIA_WOOD) || type.equals(Material.BIRCH_WOOD)
-                    || type.equals(Material.DARK_OAK_WOOD) || type.equals(Material.JUNGLE_WOOD) || type.equals(Material.OAK_WOOD) || type.equals(Material.SPRUCE_WOOD)) {
+                    || type.equals(Material.DARK_OAK_WOOD) || type.equals(Material.JUNGLE_WOOD) || type.equals(Material.OAK_WOOD) || type.equals(Material.SPRUCE_WOOD)
+            || type.equals(Material.ACACIA_LOG) || type.equals(Material.BIRCH_LOG)
+                    || type.equals(Material.DARK_OAK_LOG) || type.equals(Material.JUNGLE_LOG) || type.equals(Material.OAK_LOG) || type.equals(Material.SPRUCE_LOG)) {
                 ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                 Material handType = itemInMainHand.getType();
                 if (handType.equals(Material.WOODEN_AXE) || handType.equals(Material.STONE_AXE) || handType.equals(Material.IRON_AXE)

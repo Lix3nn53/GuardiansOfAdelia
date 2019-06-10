@@ -70,12 +70,13 @@ Please note that these features are for my personal server. It probably will not
   * Join dungeons with up to 4 players
   * Kill dungeon boss before timeout to gain a prize chest
 * Jobs
-  * You can profess a job and create items
   * There are 4 type of jobs. Weaponsmith, armorsmith, alchemist, jeweller
-  * There are 7 types of material gathering. Woodcutting, harvesting_grass, harvesting_flower, fishing, mining_ore, mining_jewelry, hunting
-  * You can open crafting gui by right clicking certain blocks
-  * You can create items from crafting gui by using materials
-  * You can gain job experience by crafting and unlock higher tier crafts
+  * Weaponsmith crafts ranged & melee weapons. Armorsmith crafts heavy & light armor. Alchemist crafts potions & foods(buff). Jeweller crafts jewels & enchanting stones.
+  * There are 4 type of gathering tools. Axe, hoe, pickaxe, fishing rod. Tools lose durability when you gather ingredients with them.
+  * There are 6 types of gathering. Woodcutting, harvesting_flower, fishing, mining_ore, mining_jewelry, hunting
+  * You can open crafting gui by right clicking certain blocks like anvil, grindstone etc
+  * On crafting gui, select the level of items you want to create, then craft by clicking on items at cost of ingredients
+  * You can gain job experience by crafting and unlock higher level crafts
 * Pets
   * Buy eggs from pet-merchants and equip to spawn your pet. When spawned your pet will follow you
   * There are 2 types of pets. Companions and mounts
