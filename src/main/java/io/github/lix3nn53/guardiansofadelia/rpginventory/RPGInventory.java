@@ -5,9 +5,12 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.*;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -21,6 +24,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class RPGInventory {
 
@@ -131,10 +135,10 @@ public class RPGInventory {
                 + gloveSlot.getBonusStats().getEarth() + ringSlot.getBonusStats().getEarth();
         int lightning = parrotSlot.getBonusStats().getLightning() + earringSlot.getBonusStats().getLightning() + necklaceSlot.getBonusStats().getLightning()
                 + gloveSlot.getBonusStats().getLightning() + ringSlot.getBonusStats().getLightning();
-        int air = parrotSlot.getBonusStats().getAir() + earringSlot.getBonusStats().getAir() + necklaceSlot.getBonusStats().getAir()
-                + gloveSlot.getBonusStats().getAir() + ringSlot.getBonusStats().getAir();
+        int wind = parrotSlot.getBonusStats().getWind() + earringSlot.getBonusStats().getWind() + necklaceSlot.getBonusStats().getWind()
+                + gloveSlot.getBonusStats().getWind() + ringSlot.getBonusStats().getWind();
 
-        return new StatPassive(fire, water, earth, lightning, air);
+        return new StatPassive(fire, water, earth, lightning, wind);
     }
 
     private int getSlotNo(RPGSlotType slotType) {
@@ -354,11 +358,21 @@ public class RPGInventory {
         if (statType.equals(StatType.PASSIVE)) {
             StatPassive statPassive = (StatPassive) StatUtils.getStat(itemStack);
 
-            SkillAPIUtils.removeBonusAttribute(player, "fire", statPassive.getFire());
-            SkillAPIUtils.removeBonusAttribute(player, "earth", statPassive.getEarth());
-            SkillAPIUtils.removeBonusAttribute(player, "water", statPassive.getWater());
-            SkillAPIUtils.removeBonusAttribute(player, "lightning", statPassive.getLightning());
-            SkillAPIUtils.removeBonusAttribute(player, "air", statPassive.getAir());
+            UUID uuid = player.getUniqueId();
+            if (GuardianDataManager.hasGuardianData(uuid)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                    RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+
+                    rpgCharacterStats.getFire().removeBonus(statPassive.getFire());
+                    rpgCharacterStats.getEarth().removeBonus(statPassive.getEarth());
+                    rpgCharacterStats.getWater().removeBonus(statPassive.getWater());
+                    rpgCharacterStats.getLightning().removeBonus(statPassive.getLightning());
+                    rpgCharacterStats.getWind().removeBonus(statPassive.getWind());
+                }
+            }
         }
     }
 
@@ -367,11 +381,21 @@ public class RPGInventory {
         if (statType.equals(StatType.PASSIVE)) {
             StatPassive statPassive = (StatPassive) StatUtils.getStat(itemStack);
 
-            SkillAPIUtils.addBonusAttribute(player, "fire", statPassive.getFire());
-            SkillAPIUtils.addBonusAttribute(player, "earth", statPassive.getEarth());
-            SkillAPIUtils.addBonusAttribute(player, "water", statPassive.getWater());
-            SkillAPIUtils.addBonusAttribute(player, "lightning", statPassive.getLightning());
-            SkillAPIUtils.addBonusAttribute(player, "air", statPassive.getAir());
+            UUID uuid = player.getUniqueId();
+            if (GuardianDataManager.hasGuardianData(uuid)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                    RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+
+                    rpgCharacterStats.getFire().addBonus(statPassive.getFire());
+                    rpgCharacterStats.getEarth().addBonus(statPassive.getEarth());
+                    rpgCharacterStats.getWater().addBonus(statPassive.getWater());
+                    rpgCharacterStats.getLightning().addBonus(statPassive.getLightning());
+                    rpgCharacterStats.getWind().addBonus(statPassive.getWind());
+                }
+            }
         }
     }
 

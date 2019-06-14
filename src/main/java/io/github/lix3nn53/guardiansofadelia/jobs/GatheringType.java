@@ -207,7 +207,8 @@ public enum GatheringType {
             case HUNTING:
                 if (random < 0.4) {
                     return Ingredient.HUNTING_LEATHER_WORN.getItemStack(amount);
-                } if (random < 0.7) {
+                }
+                if (random < 0.7) {
                     return Ingredient.HUNTING_BEEF.getItemStack(amount);
                 } else {
                     return Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(amount);

@@ -10,14 +10,14 @@ public class StatPassive implements Stat {
     private int water = 0;
     private int earth = 0;
     private int lightning = 0;
-    private int air = 0;
+    private int wind = 0;
 
-    public StatPassive(int fire, int water, int earth, int lightning, int air) {
+    public StatPassive(int fire, int water, int earth, int lightning, int wind) {
         this.fire = fire;
         this.water = water;
         this.earth = earth;
         this.lightning = lightning;
-        this.air = air;
+        this.wind = wind;
     }
 
     public StatPassive(int minStatValue, int maxStatValue, int minNumberOfStats) {
@@ -63,8 +63,8 @@ public class StatPassive implements Stat {
         return lightning;
     }
 
-    public int getAir() {
-        return air;
+    public int getWind() {
+        return wind;
     }
 
     private void satisfyOneRandomly(int minStatValue, int maxStatValue) {
@@ -81,8 +81,8 @@ public class StatPassive implements Stat {
         if (this.lightning == 0) {
             unUsedElements.add("lightning");
         }
-        if (this.air == 0) {
-            unUsedElements.add("air");
+        if (this.wind == 0) {
+            unUsedElements.add("wind");
         }
         int random = new Random().nextInt(unUsedElements.size());
         String elementString = unUsedElements.get(random);
@@ -95,8 +95,8 @@ public class StatPassive implements Stat {
             this.earth = getRandomValue(minStatValue, maxStatValue);
         } else if (elementString.equals("lightning")) {
             this.lightning = getRandomValue(minStatValue, maxStatValue);
-        } else if (elementString.equals("air")) {
-            this.air = getRandomValue(minStatValue, maxStatValue);
+        } else if (elementString.equals("wind")) {
+            this.wind = getRandomValue(minStatValue, maxStatValue);
         }
     }
 

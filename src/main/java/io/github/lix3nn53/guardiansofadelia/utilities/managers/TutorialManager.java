@@ -9,14 +9,14 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterExperienceManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -29,11 +29,13 @@ public class TutorialManager {
     public static void startTutorial(Player player, RPGClass rpgClass, int charNo, Location startLocation) {
         if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
-            RPGCharacter rpgCharacter = new RPGCharacter();
+            RPGCharacter rpgCharacter = new RPGCharacter(rpgClass);
             guardianData.setActiveCharacter(rpgCharacter, charNo);
 
-            SkillAPIUtils.createTurorialCharacter(player, charNo, rpgClass);
-            SkillAPIUtils.giveLevels(player, 89);
+            int totalExpForLevel = RPGCharacterExperienceManager.getTotalExpForLevel(90);
+            RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
+            rpgCharacterStats.setTotalExp(totalExpForLevel);
+
             giveTutorialItems(player, rpgClass);
             player.teleport(startLocation);
 
@@ -43,8 +45,8 @@ public class TutorialManager {
             player.sendMessage(ChatColor.DARK_PURPLE + "---------- " + ChatColor.GRAY + "Fall of the Adelia" + ChatColor.DARK_PURPLE + " ----------");
             player.sendMessage("");
 
-            SkillAPIUtils.recoverMana(player);
-            player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 1D);
+            rpgCharacterStats.setCurrentHealth(rpgCharacterStats.getTotalMaxHealth());
+            rpgCharacterStats.setCurrentMana(rpgCharacterStats.getTotalMaxMana());
 
             Quest tutorialStartQuest = QuestNPCManager.getQuestCopyById(1);
             rpgCharacter.acceptQuest(tutorialStartQuest, player);

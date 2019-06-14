@@ -9,7 +9,9 @@ public class Job {
     private int level = 1;
     private int experience;
 
-    public Job(JobType jobType) { this.jobType = jobType; }
+    public Job(JobType jobType) {
+        this.jobType = jobType;
+    }
 
     public JobType getJobType() {
         return jobType;

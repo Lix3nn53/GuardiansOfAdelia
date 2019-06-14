@@ -34,6 +34,11 @@ public class Test {
             double exp = expFormula(lvl);
             System.out.println("Level " + lvl + " TotalExp: " + exp);
         }
+
+        int experience = 0;
+        for (int level = 1; level <= 0; level++) {
+            System.out.println("Level 1123213123123123123123");
+        }
     }
 
     private static double expFormula(int level) {

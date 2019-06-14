@@ -13,7 +13,6 @@ import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.FakeIndicator;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
@@ -59,6 +58,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, finalDamage, false);
             } else if (damager instanceof Projectile) { //projectile is attacker
                 Projectile projectile = (Projectile) damager;
+                if (PersistentDataContainerUtil.hasInteger(projectile, "rangedDamage")) {
+                    int rangedDamage = PersistentDataContainerUtil.getInteger(projectile, "rangedDamage");
+                    event.setDamage(rangedDamage);
+                }
                 ProjectileSource shooter = projectile.getShooter();
                 if (shooter instanceof Player) {
                     Player player = (Player) shooter;
@@ -173,7 +176,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         if (PartyManager.inParty(player)) {
                             PartyManager.shareExpOnMobKill(player, experience);
                         } else {
-                            SkillAPIUtils.giveMobExp(player, experience);
+                            activeCharacter.getRpgCharacterStats().giveExp(experience);
                             PetExperienceManager.giveExperienceToActivePet(player, experience);
                         }
                     }
@@ -192,7 +195,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         }
                     }
 
-                    if (livingTarget.getType().equals(EntityType.COW) ||livingTarget.getType().equals(EntityType.SHEEP)) {
+                    if (livingTarget.getType().equals(EntityType.COW) || livingTarget.getType().equals(EntityType.SHEEP)) {
                         ItemStack itemStack = GatheringType.HUNTING.onHunt(player);
                         if (itemStack != null) {
                             Item item = livingTarget.getWorld().dropItemNaturally(livingTarget.getLocation().add(0, 0.5, 0), itemStack);

@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
@@ -40,7 +39,6 @@ import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -66,7 +64,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -325,9 +322,9 @@ public class MyInventoryClickEvent implements Listener {
                 }
             } else {
                 if (currentName.equals(ChatColor.LIGHT_PURPLE + "Skills")) {
-                    SkillAPIUtils.openSkillMenu(player);
+                    //TODO skill gui
                 } else if (currentName.equals(ChatColor.DARK_GREEN + "Elements")) {
-                    SkillAPIUtils.openAttributeMenu(player);
+                    //TODO attribute gui
                 } else if (currentName.equals(ChatColor.YELLOW + "Job")) {
                     GuiGeneric job = MenuList.job(player);
                     job.openInventory(player);

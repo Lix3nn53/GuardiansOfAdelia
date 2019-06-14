@@ -88,7 +88,7 @@ public class MyPlayerInteractEvent implements Listener {
                             }
                         }
                     }
-                }  else if (clickedBlockType.equals(Material.GRINDSTONE)) {
+                } else if (clickedBlockType.equals(Material.GRINDSTONE)) {
                     event.setCancelled(true);
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -107,7 +107,7 @@ public class MyPlayerInteractEvent implements Listener {
                             }
                         }
                     }
-                }  else if (clickedBlockType.equals(Material.FLETCHING_TABLE)) {
+                } else if (clickedBlockType.equals(Material.FLETCHING_TABLE)) {
                     event.setCancelled(true);
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -126,7 +126,7 @@ public class MyPlayerInteractEvent implements Listener {
                             }
                         }
                     }
-                }  else if (clickedBlockType.equals(Material.ANVIL)) {
+                } else if (clickedBlockType.equals(Material.ANVIL)) {
                     event.setCancelled(true);
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -145,7 +145,7 @@ public class MyPlayerInteractEvent implements Listener {
                             }
                         }
                     }
-                }  else if (clickedBlockType.equals(Material.LOOM)) {
+                } else if (clickedBlockType.equals(Material.LOOM)) {
                     event.setCancelled(true);
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -164,7 +164,7 @@ public class MyPlayerInteractEvent implements Listener {
                             }
                         }
                     }
-                }  else if (clickedBlockType.equals(Material.SMITHING_TABLE)) {
+                } else if (clickedBlockType.equals(Material.SMITHING_TABLE)) {
                     event.setCancelled(true);
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -183,7 +183,7 @@ public class MyPlayerInteractEvent implements Listener {
                             }
                         }
                     }
-                }  else if (clickedBlockType.equals(Material.ENCHANTING_TABLE)) {
+                } else if (clickedBlockType.equals(Material.ENCHANTING_TABLE)) {
                     event.setCancelled(true);
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);

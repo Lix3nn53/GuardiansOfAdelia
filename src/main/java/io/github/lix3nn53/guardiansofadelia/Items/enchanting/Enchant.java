@@ -199,7 +199,7 @@ public class Enchant {
             int lineToChangeWater = -1;
             int lineToChangeEarth = -1;
             int lineToChangeLightning = -1;
-            int lineToChangeAir = -1;
+            int lineToChangeWind = -1;
             int changeCounter = 0;
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
@@ -215,8 +215,8 @@ public class Enchant {
                 } else if (stat.getLightning() != 0 && line.contains(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+")) {
                     lineToChangeLightning = i;
                     changeCounter++;
-                } else if (stat.getAir() != 0 && line.contains(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Air: " + ChatColor.GRAY + "+")) {
-                    lineToChangeAir = i;
+                } else if (stat.getWind() != 0 && line.contains(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+")) {
+                    lineToChangeWind = i;
                     changeCounter++;
                 }
                 if (changeCounter == 5) {
@@ -243,11 +243,11 @@ public class Enchant {
                 String line = lore.get(lineToChangeLightning);
                 String newLine = line.replace(stat.getLightning() + "", nextLightningValue + "");
                 lore.set(lineToChangeLightning, newLine);
-            } else if (lineToChangeAir != -1) {
-                int nextAirValue = stat.getAir() + getBonusValue(stat.getAir());
-                String line = lore.get(lineToChangeAir);
-                String newLine = line.replace(stat.getAir() + "", nextAirValue + "");
-                lore.set(lineToChangeAir, newLine);
+            } else if (lineToChangeWind != -1) {
+                int nextWindValue = stat.getWind() + getBonusValue(stat.getWind());
+                String line = lore.get(lineToChangeWind);
+                String newLine = line.replace(stat.getWind() + "", nextWindValue + "");
+                lore.set(lineToChangeWind, newLine);
             }
             itemMeta.setLore(lore);
         }
@@ -367,7 +367,7 @@ public class Enchant {
             int lineToChangeWater = -1;
             int lineToChangeEarth = -1;
             int lineToChangeLightning = -1;
-            int lineToChangeAir = -1;
+            int lineToChangeWind = -1;
             int changeCounter = 0;
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
@@ -383,8 +383,8 @@ public class Enchant {
                 } else if (stat.getLightning() != 0 && line.contains(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+")) {
                     lineToChangeLightning = i;
                     changeCounter++;
-                } else if (stat.getAir() != 0 && line.contains(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Air: " + ChatColor.GRAY + "+")) {
-                    lineToChangeAir = i;
+                } else if (stat.getWind() != 0 && line.contains(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+")) {
+                    lineToChangeWind = i;
                     changeCounter++;
                 }
                 if (changeCounter == 5) {
@@ -411,11 +411,11 @@ public class Enchant {
                 String line = lore.get(lineToChangeLightning);
                 String newLine = line.replace(stat.getLightning() + "", nextLightningValue + "");
                 lore.set(lineToChangeLightning, newLine);
-            } else if (lineToChangeAir != -1) {
-                int nextAirValue = stat.getAir() - getDecreaseValue(stat.getAir());
-                String line = lore.get(lineToChangeAir);
-                String newLine = line.replace(stat.getAir() + "", nextAirValue + "");
-                lore.set(lineToChangeAir, newLine);
+            } else if (lineToChangeWind != -1) {
+                int nextWindValue = stat.getWind() - getDecreaseValue(stat.getWind());
+                String line = lore.get(lineToChangeWind);
+                String newLine = line.replace(stat.getWind() + "", nextWindValue + "");
+                lore.set(lineToChangeWind, newLine);
             }
             itemMeta.setLore(lore);
         }

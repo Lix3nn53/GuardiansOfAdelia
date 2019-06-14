@@ -5,6 +5,8 @@ import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
@@ -63,22 +65,35 @@ public class DatabaseQueries {
                     "(\n" +
                     " `character_no`   smallint NOT NULL ,\n" +
                     " `uuid`           varchar(40) NOT NULL ,\n" +
-                    " `off_hand`       text ,\n" +
-                    " `slot_parrot`    text ,\n" +
-                    " `slot_necklace`  text ,\n" +
-                    " `slot_ring`      text ,\n" +
-                    " `slot_earring`   text ,\n" +
-                    " `slot_glove`     text ,\n" +
-                    " `slot_pet`       text ,\n" +
-                    " `chat_tag`       varchar(45) ,\n" +
-                    " `job_type`       varchar(45) ,\n" +
-                    " `job_level`      smallint ,\n" +
-                    " `job_experience` mediumint ,\n" +
+                    " `off_hand`       text NULL ,\n" +
+                    " `slot_parrot`    text NULL ,\n" +
+                    " `slot_necklace`  text NULL ,\n" +
+                    " `slot_ring`      text NULL ,\n" +
+                    " `slot_earring`   text NULL ,\n" +
+                    " `slot_glove`     text NULL ,\n" +
+                    " `slot_pet`       text NULL ,\n" +
+                    " `chat_tag`       varchar(45) NULL ,\n" +
+                    " `job_type`       varchar(45) NULL ,\n" +
+                    " `job_level`      smallint NULL ,\n" +
+                    " `job_experience` mediumint NULL ,\n" +
                     " `inventory`      text NOT NULL ,\n" +
-                    " `turnedinquests` text ,\n" +
-                    " `activequests`   text ,\n" +
+                    " `turnedinquests` text NULL ,\n" +
+                    " `activequests`   text NULL ,\n" +
                     " `location`       text NOT NULL ,\n" +
                     " `armor_content`  text NOT NULL ,\n" +
+                    " `rpg_class`      varchar(45) NOT NULL ,\n" +
+                    " `totalexp`       int NOT NULL ,\n" +
+                    " `attr_fire`      smallint NOT NULL ,\n" +
+                    " `attr_water`     smallint NOT NULL ,\n" +
+                    " `attr_earth`     smallint NOT NULL ,\n" +
+                    " `attr_lightning` smallint NOT NULL ,\n" +
+                    " `attr_wind`      smallint NOT NULL ,\n" +
+                    " `skill_one`      smallint NOT NULL ,\n" +
+                    " `skill_two`      smallint NOT NULL ,\n" +
+                    " `skill_three`    smallint NOT NULL ,\n" +
+                    " `skill_passive`  smallint NOT NULL ,\n" +
+                    " `skill_ultimate` smallint NOT NULL ,\n" +
+                    "\n" +
                     "UNIQUE KEY `Ind_88` (`uuid`, `character_no`),\n" +
                     "KEY `fkIdx_55` (`uuid`),\n" +
                     "CONSTRAINT `FK_55` FOREIGN KEY `fkIdx_55` (`uuid`) REFERENCES `goa_player` (`uuid`)\n" +
@@ -235,8 +250,36 @@ public class DatabaseQueries {
             ResultSet resultSet = pst.executeQuery();
 
             if (resultSet.next()) {
-                rpgCharacter = new RPGCharacter();
+                String rpgClassString = resultSet.getString("rpg_class");
+                rpgCharacter = new RPGCharacter(RPGClass.valueOf(rpgClassString));
                 RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
+
+                RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
+
+                int totalexp = resultSet.getInt("totalexp");
+                rpgCharacterStats.setTotalExp(totalexp);
+
+                int attr_fire = resultSet.getInt("attr_fire");
+                rpgCharacterStats.getFire().setInvested(attr_fire);
+                int attr_water = resultSet.getInt("attr_water");
+                rpgCharacterStats.getWater().setInvested(attr_water);
+                int attr_earth = resultSet.getInt("attr_earth");
+                rpgCharacterStats.getEarth().setInvested(attr_earth);
+                int attr_lightning = resultSet.getInt("attr_lightning");
+                rpgCharacterStats.getLightning().setInvested(attr_lightning);
+                int attr_wind = resultSet.getInt("attr_wind");
+                rpgCharacterStats.getWind().setInvested(attr_wind);
+
+                int skill_one = resultSet.getInt("skill_one");
+                rpgCharacterStats.investSkillPoints(1, skill_one);
+                int skill_two = resultSet.getInt("skill_two");
+                rpgCharacterStats.investSkillPoints(2, skill_two);
+                int skill_three = resultSet.getInt("skill_three");
+                rpgCharacterStats.investSkillPoints(3, skill_three);
+                int skill_passive = resultSet.getInt("skill_passive");
+                rpgCharacterStats.investSkillPoints(4, skill_passive);
+                int skill_ultimate = resultSet.getInt("skill_ultimate");
+                rpgCharacterStats.investSkillPoints(5, skill_ultimate);
 
                 String offHand = resultSet.getString("off_hand");
                 if (!resultSet.wasNull()) {
@@ -451,6 +494,47 @@ public class DatabaseQueries {
         return location;
     }
 
+    public RPGClass getRPGClassCharacter(UUID uuid, int charNo) throws SQLException {
+        String SQL_QUERY = "SELECT rpg_class FROM goa_player_character WHERE uuid = ? AND character_no = ?";
+        RPGClass rpgClass = null;
+        try (Connection con = pool.getConnection()) {
+            PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+
+            pst.setString(1, uuid.toString());
+            pst.setInt(2, charNo);
+
+            ResultSet resultSet = pst.executeQuery();
+
+            if (resultSet.next()) {
+                String rpgClassString = resultSet.getString("rpgClass");
+                rpgClass = RPGClass.valueOf(rpgClassString);
+            }
+            resultSet.close();
+            pst.close();
+        }
+        return rpgClass;
+    }
+
+    public int getTotalExp(UUID uuid, int charNo) throws SQLException {
+        String SQL_QUERY = "SELECT totalexp FROM goa_player_character WHERE uuid = ? AND character_no = ?";
+        int totalexp = -1;
+        try (Connection con = pool.getConnection()) {
+            PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+
+            pst.setString(1, uuid.toString());
+            pst.setInt(2, charNo);
+
+            ResultSet resultSet = pst.executeQuery();
+
+            if (resultSet.next()) {
+                totalexp = resultSet.getInt("totalexp");
+            }
+            resultSet.close();
+            pst.close();
+        }
+        return totalexp;
+    }
+
     //SETTERS
 
     public int setGuildOfPlayer(UUID uuid, String guild, PlayerRankInGuild rank) throws SQLException {
@@ -583,7 +667,8 @@ public class DatabaseQueries {
     public int setCharacter(UUID uuid, int charNo, RPGCharacter rpgCharacter, ItemStack[] inventory, Location location, ItemStack[] armorContent, ItemStack offHand) throws SQLException {
         String SQL_QUERY = "INSERT INTO goa_player_character \n" +
                 "\t(uuid, character_no, off_hand, slot_parrot, slot_necklace, slot_ring, slot_earring, slot_glove, " +
-                "slot_pet, chat_tag, job_type, job_level, job_experience, inventory, activequests, turnedinquests, location, armor_content) \n" +
+                "slot_pet, chat_tag, job_type, job_level, job_experience, inventory, activequests, turnedinquests, location, armor_content, " +
+                "rpg_class, totalexp, attr_fire, attr_water, attr_earth, attr_lightning, attr_wind, skill_one, skill_two, skill_three, skill_passive, skill_ultimate) \n" +
                 "VALUES \n" +
                 "\t(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
@@ -604,7 +689,19 @@ public class DatabaseQueries {
                 "\tactivequests = VALUES(activequests),\n" +
                 "\tturnedinquests = VALUES(turnedinquests),\n" +
                 "\tlocation = VALUES(location),\n" +
-                "\tarmor_content = VALUES(armor_content);";
+                "\tarmor_content = VALUES(armor_content),\n" +
+                "\trpg_class = VALUES(rpg_class),\n" +
+                "\ttotalexp = VALUES(totalexp),\n" +
+                "\tattr_fire = VALUES(attr_fire),\n" +
+                "\tattr_water = VALUES(attr_water),\n" +
+                "\tattr_earth = VALUES(attr_earth),\n" +
+                "\tattr_lightning = VALUES(attr_lightning),\n" +
+                "\tattr_wind = VALUES(attr_wind),\n" +
+                "\tskill_one = VALUES(skill_one),\n" +
+                "\tskill_two = VALUES(skill_two),\n" +
+                "\tskill_three = VALUES(skill_three),\n" +
+                "\tskill_passive = VALUES(skill_passive),\n" +
+                "\tskill_ultimate = VALUES(skill_ultimate);";
         try (Connection con = pool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
@@ -725,6 +822,36 @@ public class DatabaseQueries {
             } else {
                 pst.setNull(18, Types.BLOB);
             }
+
+            RPGClass rpgClass = rpgCharacter.getRpgClass();
+            pst.setString(19, rpgClass.toString());
+
+            RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
+
+            int totalExp = rpgCharacterStats.getTotalExp();
+            pst.setInt(20, totalExp);
+
+            int fire = rpgCharacterStats.getFire().getInvested();
+            pst.setInt(21, fire);
+            int water = rpgCharacterStats.getWater().getInvested();
+            pst.setInt(22, water);
+            int earth = rpgCharacterStats.getEarth().getInvested();
+            pst.setInt(23, earth);
+            int lightning = rpgCharacterStats.getLightning().getInvested();
+            pst.setInt(24, lightning);
+            int wind = rpgCharacterStats.getWind().getInvested();
+            pst.setInt(25, wind);
+
+            int skill_one = rpgCharacterStats.getInvestedSkillPoints(1);
+            pst.setInt(26, skill_one);
+            int skill_two = rpgCharacterStats.getInvestedSkillPoints(2);
+            pst.setInt(27, skill_two);
+            int skill_three = rpgCharacterStats.getInvestedSkillPoints(3);
+            pst.setInt(28, skill_three);
+            int skill_passive = rpgCharacterStats.getInvestedSkillPoints(4);
+            pst.setInt(29, skill_passive);
+            int skill_ultimate = rpgCharacterStats.getInvestedSkillPoints(5);
+            pst.setInt(30, skill_ultimate);
 
             //2 = replaced, 1 = new row added
             int returnValue = pst.executeUpdate();

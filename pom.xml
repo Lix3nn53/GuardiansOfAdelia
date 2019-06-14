@@ -72,8 +72,8 @@
 
     <repositories>
         <repository>
-            <id>papermc</id>
-            <url>https://papermc.io/repo/repository/maven-public/</url>
+            <id>spigotmc-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
             <id>everything</id>
@@ -95,8 +95,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.destroystokyo.paper</groupId>
-            <artifactId>paper-api</artifactId>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
             <version>1.14.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
@@ -138,8 +138,7 @@
             <artifactId>worldedit-bukkit</artifactId>
             <version>7.0.0-SNAPSHOT</version>
             <type>jar</type>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/worldedit-bukkit-7.0.0-SNAPSHOT-dist.jar</systemPath>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
@@ -147,14 +146,6 @@
             <version>7.0.0-SNAPSHOT</version>
             <type>jar</type>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sucy.skill</groupId>
-            <artifactId>SkillAPI</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/SkillAPI.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

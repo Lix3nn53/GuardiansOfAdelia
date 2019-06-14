@@ -12,7 +12,6 @@ import io.github.lix3nn53.guardiansofadelia.quests.task.TaskDealDamage;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskInteract;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskKill;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.advancements.Advancement;
 import org.bukkit.ChatColor;
@@ -39,8 +38,8 @@ public final class Quest {
     private final String turnInMsg;
     private final int moneyPrize;
     private final int expPrize;
-    private final int minLevel;
-    private final int questReq;
+    private final int requiredLevel;
+    private final int requiredQuest;
     private final Material advancementMaterial;
     private final List<Action> onAcceptActions = new ArrayList<>();
     private final List<Action> onCompleteActions = new ArrayList<>();
@@ -51,7 +50,7 @@ public final class Quest {
     public Quest(
             final int questID, final String name, final List<String> story, final String startMsg, final String objectiveText, final String turnInMsg,
             final List<Task> tasks, final List<ItemStack> itemPrizes, final int moneyPrize, final int expPrize,
-            final int minLevel, final int questReq, Material advancementMaterial) {
+            final int requiredLevel, final int requiredQuest, Material advancementMaterial) {
         this.questID = questID;
         this.name = name;
         this.story = story;
@@ -62,8 +61,8 @@ public final class Quest {
         this.itemPrizes = itemPrizes;
         this.moneyPrize = moneyPrize;
         this.expPrize = expPrize;
-        this.minLevel = minLevel;
-        this.questReq = questReq;
+        this.requiredLevel = requiredLevel;
+        this.requiredQuest = requiredQuest;
         this.advancementMaterial = advancementMaterial;
     }
 
@@ -73,7 +72,7 @@ public final class Quest {
     public Quest(Quest questToCopy) {
         this(questToCopy.getQuestID(), questToCopy.getName(), questToCopy.getStory(), questToCopy.getStartMsg(), questToCopy.getObjectiveText(), questToCopy.getTurnInMsg(),
                 questToCopy.getTasks(), questToCopy.getItemPrizes(), questToCopy.getMoneyPrize(), questToCopy.getExpPrize(),
-                questToCopy.getMinLevel(), questToCopy.getQuestReq(), questToCopy.getAdvancementMaterial());
+                questToCopy.getRequiredLevel(), questToCopy.getRequiredQuest(), questToCopy.getAdvancementMaterial());
         List<Action> copyOnAcceptActions = questToCopy.getOnAcceptActions();
 
         this.onAcceptActions.addAll(copyOnAcceptActions);
@@ -110,16 +109,16 @@ public final class Quest {
     public boolean isAvailable(RPGCharacter rpgCharacter, int playerLevel) {
         List<Integer> turnedInQuests = rpgCharacter.getTurnedInQuests();
 
-        if (questReq != 0 && minLevel != 0) {
-            if (playerLevel >= minLevel) {
-                return turnedInQuests.contains(questReq);
+        if (requiredLevel != 0) {
+            if (playerLevel < requiredLevel) {
+                return false;
             }
-        } else if (minLevel != 0) {
-            return playerLevel >= minLevel;
-        } else if (questReq != 0) {
-            return turnedInQuests.contains(questReq);
         }
-        return false;
+        if (requiredQuest != 0) {
+            return turnedInQuests.contains(requiredQuest);
+        }
+
+        return true;
     }
 
     public ItemStack getGuiItem(Player player) {
@@ -172,19 +171,18 @@ public final class Quest {
             }
             lore.add("");
 
-            if (minLevel != 0) {
-                if (player.getLevel() >= minLevel) {
-                    lore.add(ChatColor.GREEN + "Required Level: " + minLevel);
+            if (requiredLevel != 0) {
+                if (player.getLevel() >= requiredLevel) {
+                    lore.add(ChatColor.GREEN + "Required Level: " + requiredLevel);
                 } else {
-                    lore.add(ChatColor.RED + "Required Level: " + minLevel);
+                    lore.add(ChatColor.RED + "Required Level: " + requiredLevel);
                 }
             }
-
-            if (questReq != 0) {
-                if (turnedInQuests.contains(questReq)) {
-                    lore.add(ChatColor.GREEN + "Required Quest: " + questReq);
+            if (requiredQuest != 0) {
+                if (turnedInQuests.contains(requiredQuest)) {
+                    lore.add(ChatColor.GREEN + "Required Quest: " + requiredQuest);
                 } else {
-                    lore.add(ChatColor.RED + "Required Quest: " + questReq);
+                    lore.add(ChatColor.RED + "Required Quest: " + requiredQuest);
                 }
             }
 
@@ -262,12 +260,12 @@ public final class Quest {
         return expPrize;
     }
 
-    public int getMinLevel() {
-        return minLevel;
+    public int getRequiredLevel() {
+        return requiredLevel;
     }
 
-    public int getQuestReq() {
-        return questReq;
+    public int getRequiredQuest() {
+        return requiredQuest;
     }
 
     public Material getAdvancementMaterial() {
@@ -297,7 +295,15 @@ public final class Quest {
             }
         }
         if (getExpPrize() > 0) {
-            SkillAPIUtils.giveQuestExp(player, getExpPrize());
+            UUID uuid = player.getUniqueId();
+            if (GuardianDataManager.hasGuardianData(uuid)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                    activeCharacter.getRpgCharacterStats().giveExp(getExpPrize());
+                }
+            }
         }
         if (getMoneyPrize() > 0) {
             List<Coin> coins = EconomyUtils.priceToCoins(getMoneyPrize());

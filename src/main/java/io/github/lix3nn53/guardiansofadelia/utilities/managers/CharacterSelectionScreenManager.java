@@ -46,10 +46,7 @@ public class CharacterSelectionScreenManager {
             Location clone = location.clone();
 
             holoList.add(new Hologram(clone.add(0.0, 0.4, 0.0), " ").getArmorStand());
-            holoList.add(new Hologram(clone.add(0.0, 0.3, 0.0), " ").getArmorStand());
             holoList.add(new Hologram(clone.add(0.0, 0.3, 0.0), ChatColor.GREEN + "Create New Character").getArmorStand());
-            holoList.add(new Hologram(clone.add(0.0, 0.3, 0.0), " ").getArmorStand());
-            holoList.add(new Hologram(clone.add(0.0, 0.3, 0.0), " ").getArmorStand());
             holoList.add(new Hologram(clone.add(0.0, 0.3, 0.0), " ").getArmorStand());
 
             characterNoToArmorStands.put(i, holoList);

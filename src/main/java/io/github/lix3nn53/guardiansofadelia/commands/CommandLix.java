@@ -17,7 +17,6 @@ import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import org.bukkit.*;
 import org.bukkit.command.Command;
@@ -82,9 +81,7 @@ public class CommandLix implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("debug")) {
-                for (int i = 1; i < 5; i++) {
-                    SkillAPIUtils.hasValidData(player, i);
-                }
+
             } else if (args[0].equals("weapon")) {
                 if (args.length == 3) {
                     RPGClass rpgClass = RPGClass.valueOf(args[1]);

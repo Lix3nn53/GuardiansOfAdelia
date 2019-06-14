@@ -1,15 +1,15 @@
 package io.github.lix3nn53.guardiansofadelia.database;
 
-import com.sucy.skill.api.player.PlayerAccounts;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterExperienceManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.AdeliaRegionManager;
@@ -66,7 +66,6 @@ public class DatabaseManager {
                     });
                     TablistUtils.updateTablist(player);
                     InventoryUtils.setMenuItemPlayer(player);
-                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> SkillAPIUtils.setActiveCharacter(player, charNo));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -117,54 +116,44 @@ public class DatabaseManager {
     //Not async, must run async
     private static void loadCharacterSelectionAndFormHolograms(Player player) {
         player.sendMessage("Preparing character selection..");
-        PlayerAccounts playerAccounts = SkillAPIUtils.getPlayerAccountData(player);
         for (int charNo = 1; charNo <= 4; charNo++) {
             boolean characterExists = databaseQueries.characterExists(player.getUniqueId(), charNo);
             if (characterExists) {
-                boolean hasValidData = SkillAPIUtils.hasValidData(playerAccounts, charNo);
-                if (hasValidData) {
-                    UUID uuid = player.getUniqueId();
+                UUID uuid = player.getUniqueId();
 
-                    //load last location of character
-                    try {
-                        Location lastLocationOfCharacter = databaseQueries.getLastLocationOfCharacter(uuid, charNo);
-                        if (lastLocationOfCharacter != null) {
-                            GuardiansOfAdelia.getCharacterSelectionScreenManager().setCharLocation(uuid, charNo, lastLocationOfCharacter);
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
+                //load last location of character
+                try {
+                    Location lastLocationOfCharacter = databaseQueries.getLastLocationOfCharacter(uuid, charNo);
+                    if (lastLocationOfCharacter != null) {
+                        GuardiansOfAdelia.getCharacterSelectionScreenManager().setCharLocation(uuid, charNo, lastLocationOfCharacter);
                     }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
-                    List<ArmorStand> armorStands = GuardiansOfAdelia.getCharacterSelectionScreenManager().getCharacterNoToArmorStands().get(charNo);
+                List<ArmorStand> armorStands = GuardiansOfAdelia.getCharacterSelectionScreenManager().getCharacterNoToArmorStands().get(charNo);
 
-                    MobDisguise mobDisguise = new MobDisguise(DisguiseType.ARMOR_STAND, false);
-                    LivingWatcher livingWatcher = mobDisguise.getWatcher();
-                    livingWatcher.setInvisible(true);
-                    livingWatcher.setNoGravity(true);
-                    livingWatcher.setCustomNameVisible(true);
+                MobDisguise mobDisguise = new MobDisguise(DisguiseType.ARMOR_STAND, false);
+                LivingWatcher livingWatcher = mobDisguise.getWatcher();
+                livingWatcher.setInvisible(true);
+                livingWatcher.setNoGravity(true);
+                livingWatcher.setCustomNameVisible(true);
 
-                    String className = SkillAPIUtils.getClassName(player, charNo);
-                    int level = SkillAPIUtils.getLevel(player, charNo);
-                    int health = SkillAPIUtils.getHealth(player, charNo);
-                    int mana = SkillAPIUtils.getMana(player, charNo);
-                    int exp = SkillAPIUtils.getExp(player, charNo);
-                    int expReq = SkillAPIUtils.getRequiredExp(player, charNo);
-                    int totalExp = SkillAPIUtils.getTotalExp(player, charNo);
+                try {
+                    RPGClass rpgClassCharacter = databaseQueries.getRPGClassCharacter(uuid, charNo);
+                    int totalExp = databaseQueries.getTotalExp(uuid, charNo);
+                    int level = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
 
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                        DisguiseAPI.disguiseToPlayers(armorStands.get(5), mobDisguise, player);
-                        livingWatcher.setCustomName("Level: " + level);
-                        DisguiseAPI.disguiseToPlayers(armorStands.get(4), mobDisguise, player);
-                        livingWatcher.setCustomName("Health: " + health);
-                        DisguiseAPI.disguiseToPlayers(armorStands.get(3), mobDisguise, player);
-                        livingWatcher.setCustomName("Mana: " + mana);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(2), mobDisguise, player);
-                        livingWatcher.setCustomName("Experience: " + exp + "/" + expReq);
+                        livingWatcher.setCustomName("Level: " + level);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(1), mobDisguise, player);
                         livingWatcher.setCustomName("Total Experience: " + totalExp);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(0), mobDisguise, player);
-                        livingWatcher.setCustomName("Class: " + className);
+                        livingWatcher.setCustomName("Class: " + rpgClassCharacter.getClassString());
                     });
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
             player.sendMessage("Loaded character-" + charNo);
@@ -178,7 +167,7 @@ public class DatabaseManager {
             //if player is in character selection it is not safe to save
             return;
         }
-        if (!SkillAPIUtils.isSafeToSave(player)) {
+        if (player.getLocation().getWorld().getName().equals("begining")) { //tutorial
             return;
         }
 

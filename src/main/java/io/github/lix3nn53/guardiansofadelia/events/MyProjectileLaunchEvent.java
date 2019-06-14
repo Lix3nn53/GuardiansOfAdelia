@@ -1,8 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.PlayerTridentThrowManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,6 +17,8 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.projectiles.ProjectileSource;
+
+import java.util.UUID;
 
 public class MyProjectileLaunchEvent implements Listener {
 
@@ -29,23 +33,37 @@ public class MyProjectileLaunchEvent implements Listener {
             ItemStack item = inventory.getItemInMainHand();
 
             if (item.getType().equals(Material.TRIDENT)) {
-                RPGClass rpgClass = SkillAPIUtils.getRPGClass(player);
-                if (rpgClass.equals(RPGClass.MONK)) {
-                    if (PlayerTridentThrowManager.canThrow(player)) {
-                        PlayerTridentThrowManager.onPlayerTridentThrow(player);
-                        inventory.setItemInMainHand(item);
-                    } else {
-                        event.setCancelled(true);
-                        player.sendMessage(ChatColor.RED + "You can't throw your spear again before it returns back");
+                UUID uuid = player.getUniqueId();
+                if (GuardianDataManager.hasGuardianData(uuid)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (guardianData.hasActiveCharacter()) {
+                        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                        RPGClass rpgClass = activeCharacter.getRpgClass();
+                        if (rpgClass.equals(RPGClass.MONK)) {
+                            if (PlayerTridentThrowManager.canThrow(player)) {
+                                PlayerTridentThrowManager.onPlayerTridentThrow(player);
+                                inventory.setItemInMainHand(item);
+                            } else {
+                                event.setCancelled(true);
+                                player.sendMessage(ChatColor.RED + "You can't throw your spear again before it returns back");
+                            }
+                        } else {
+                            event.setCancelled(true);
+                        }
                     }
-                } else {
-                    event.setCancelled(true);
                 }
             } else if (item.getType().equals(Material.BOW) || item.getType().equals(Material.CROSSBOW)) {
-                RPGClass rpgClass = SkillAPIUtils.getRPGClass(player);
-                if (rpgClass.equals(RPGClass.ARCHER) || rpgClass.equals(RPGClass.HUNTER)) {
-                    ItemStack arrow = OtherItems.getArrow(2);
-                    inventory.setItemInOffHand(arrow);
+                UUID uuid = player.getUniqueId();
+                if (GuardianDataManager.hasGuardianData(uuid)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (guardianData.hasActiveCharacter()) {
+                        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                        RPGClass rpgClass = activeCharacter.getRpgClass();
+                        if (rpgClass.equals(RPGClass.ARCHER) || rpgClass.equals(RPGClass.HUNTER)) {
+                            ItemStack arrow = OtherItems.getArrow(2);
+                            inventory.setItemInOffHand(arrow);
+                        }
+                    }
                 }
             }
         }

@@ -2,11 +2,15 @@ package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.UUID;
 
 public class GiveWeaponAction implements Action {
 
@@ -28,8 +32,15 @@ public class GiveWeaponAction implements Action {
 
     @Override
     public void perform(Player player) {
-        RPGClass rpgClass = SkillAPIUtils.getRPGClass(player);
-        ItemStack weapon = Weapons.getWeapon(rpgClass, placementNumber, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        InventoryUtils.giveItemToPlayer(player, weapon);
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                RPGClass rpgClass = activeCharacter.getRpgClass();
+                ItemStack weapon = Weapons.getWeapon(rpgClass, placementNumber, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+                InventoryUtils.giveItemToPlayer(player, weapon);
+            }
+        }
     }
 }

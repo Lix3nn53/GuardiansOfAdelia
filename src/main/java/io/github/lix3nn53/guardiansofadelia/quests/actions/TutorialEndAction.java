@@ -5,11 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -39,17 +38,14 @@ public class TutorialEndAction implements Action {
 
                 InventoryUtils.setMenuItemPlayer(player);
 
-                String className = SkillAPIUtils.getClassName(player, SkillAPIUtils.getActiveCharacterNo(player));
-                String newClass = className.replace("Tutorial", "");
+                RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                SkillAPIUtils.refunAttributes(player);
-                SkillAPIUtils.clearBonuses(player);
-                SkillAPIUtils.resetClass(player);
+                rpgCharacterStats.setTotalExp(0);
+                rpgCharacterStats.resetAttributes();
+                rpgCharacterStats.clearBonuses();
 
-                SkillAPIUtils.setClass(player, newClass);
-
-                player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 1D);
-                SkillAPIUtils.recoverMana(player);
+                rpgCharacterStats.setCurrentHealth(rpgCharacterStats.getTotalMaxHealth());
+                rpgCharacterStats.setCurrentMana(rpgCharacterStats.getTotalMaxMana());
 
                 new BukkitRunnable() {
                     @Override

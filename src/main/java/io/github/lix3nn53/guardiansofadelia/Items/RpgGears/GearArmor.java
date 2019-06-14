@@ -54,14 +54,33 @@ public class GearArmor implements RPGGear {
         if (statPassive.getLightning() != 0) {
             lore.add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
         }
-        if (statPassive.getAir() != 0) {
-            lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Air: " + ChatColor.GRAY + "+" + statPassive.getAir());
+        if (statPassive.getWind() != 0) {
+            lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
         }
 
         this.itemStack = new ItemStack(material);
         this.itemStack = RPGItemUtils.resetArmor(this.itemStack);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
         PersistentDataContainerUtil.putString("reqClass", rpgClass.getClassCode(), this.itemStack);
+        PersistentDataContainerUtil.putInteger("health", health, this.itemStack);
+        PersistentDataContainerUtil.putInteger("defense", defense, this.itemStack);
+        PersistentDataContainerUtil.putInteger("magicDefense", magicDefense, this.itemStack);
+
+        if (statPassive.getFire() != 0) {
+            PersistentDataContainerUtil.putInteger("fire", statPassive.getFire(), this.itemStack);
+        }
+        if (statPassive.getWater() != 0) {
+            PersistentDataContainerUtil.putInteger("water", statPassive.getWater(), this.itemStack);
+        }
+        if (statPassive.getEarth() != 0) {
+            PersistentDataContainerUtil.putInteger("earth", statPassive.getEarth(), this.itemStack);
+        }
+        if (statPassive.getLightning() != 0) {
+            PersistentDataContainerUtil.putInteger("lightning", statPassive.getLightning(), this.itemStack);
+        }
+        if (statPassive.getWind() != 0) {
+            PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), this.itemStack);
+        }
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);

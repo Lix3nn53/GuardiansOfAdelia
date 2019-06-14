@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -8,7 +9,6 @@ import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
@@ -32,7 +32,9 @@ public class MyNPCRightClickEvent implements Listener {
 
         if (id > 0 && id < 5) {
             //1-2-3-4 character selection npc
-            if (SkillAPIUtils.hasValidData(player, id)) {
+            DatabaseQueries databaseQueries = new DatabaseQueries();
+
+            if (databaseQueries.characterExists(uuid, id)) {
                 GuiGeneric characterTeleportationMenu = CharacterSelectionMenuList.characterSelectionMenu(id);
                 characterTeleportationMenu.openInventory(player);
             } else {

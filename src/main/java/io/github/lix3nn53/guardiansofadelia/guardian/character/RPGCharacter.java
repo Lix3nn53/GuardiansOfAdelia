@@ -13,11 +13,20 @@ import java.util.Optional;
 public final class RPGCharacter {
 
     private final RPGInventory rpgInventory = new RPGInventory();
+    private final RPGClass rpgClass;
+    RPGCharacterStats rpgCharacterStats = new RPGCharacterStats();
     private List<Quest> questList = new ArrayList<>();
     private List<Integer> turnedInQuests = new ArrayList<Integer>();
     private Job job;
-
     private ChatTag chatTag = ChatTag.NOVICE;
+
+    public RPGCharacter(RPGClass rpgClass) {
+        this.rpgClass = rpgClass;
+    }
+
+    public RPGClass getRpgClass() {
+        return rpgClass;
+    }
 
     public boolean acceptQuest(Quest quest, Player player) {
         if (!hasQuest(quest.getQuestID())) {
@@ -89,5 +98,9 @@ public final class RPGCharacter {
     public boolean hasQuest(int questId) {
         return this.questList.stream()
                 .anyMatch(playerQuest -> playerQuest.getQuestID() == questId);
+    }
+
+    public RPGCharacterStats getRpgCharacterStats() {
+        return rpgCharacterStats;
     }
 }

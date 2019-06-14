@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -55,7 +54,15 @@ public class PartyManager {
             }
             int expToGiveEachPlayer = (int) (experience * expMultiplier);
             for (Player member : members) {
-                SkillAPIUtils.giveMobExp(member, expToGiveEachPlayer);
+                UUID uuid = player.getUniqueId();
+                if (GuardianDataManager.hasGuardianData(uuid)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (guardianData.hasActiveCharacter()) {
+                        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                        activeCharacter.getRpgCharacterStats().giveExp(expToGiveEachPlayer);
+                    }
+                }
                 PetExperienceManager.giveExperienceToActivePet(member, expToGiveEachPlayer);
             }
         }

@@ -53,8 +53,8 @@ public class WeaponMelee implements RPGGear {
         if (statPassive.getLightning() != 0) {
             lore.add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
         }
-        if (statPassive.getAir() != 0) {
-            lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Air: " + ChatColor.GRAY + "+" + statPassive.getAir());
+        if (statPassive.getWind() != 0) {
+            lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
         }
 
         this.itemStack = new ItemStack(material);
@@ -62,6 +62,22 @@ public class WeaponMelee implements RPGGear {
         PersistentDataContainerUtil.putString("reqClass", rpgClass.getClassCode(), this.itemStack);
         this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSppedValue());
         this.itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, damage);
+
+        if (statPassive.getFire() != 0) {
+            PersistentDataContainerUtil.putInteger("fire", statPassive.getFire(), this.itemStack);
+        }
+        if (statPassive.getWater() != 0) {
+            PersistentDataContainerUtil.putInteger("water", statPassive.getWater(), this.itemStack);
+        }
+        if (statPassive.getEarth() != 0) {
+            PersistentDataContainerUtil.putInteger("earth", statPassive.getEarth(), this.itemStack);
+        }
+        if (statPassive.getLightning() != 0) {
+            PersistentDataContainerUtil.putInteger("lightning", statPassive.getLightning(), this.itemStack);
+        }
+        if (statPassive.getWind() != 0) {
+            PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), this.itemStack);
+        }
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);

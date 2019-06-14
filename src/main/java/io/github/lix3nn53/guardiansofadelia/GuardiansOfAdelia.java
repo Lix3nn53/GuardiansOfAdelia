@@ -1,9 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia;
 
-import com.google.common.collect.ImmutableList;
-import com.sucy.skill.SkillAPI;
-import com.sucy.skill.api.SkillPlugin;
-import com.sucy.skill.dynamic.custom.CustomEffectComponent;
 import io.github.lix3nn53.guardiansofadelia.commands.*;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
@@ -18,8 +14,6 @@ import io.github.lix3nn53.guardiansofadelia.quests.list.MainStoryQuests;
 import io.github.lix3nn53.guardiansofadelia.quests.list.TutorialQuests;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIHologramDestroyMechanic;
-import io.github.lix3nn53.guardiansofadelia.utilities.SkillAPIHologramMechanic;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.ConfigManager;
 import org.bukkit.Bukkit;
@@ -34,7 +28,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
+public class GuardiansOfAdelia extends JavaPlugin {
 
     private static CharacterSelectionScreenManager CHARACTER_SELECTION_SCREEN_MANAGER;
 
@@ -69,6 +63,7 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
         Bukkit.getPluginManager().registerEvents(new MyEntityMountEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityPickupItemEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityRegainHealthEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyEntityShootBowEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityTargetLivingEntityEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyInventoryClickEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyInventoryCloseEvent(), this);
@@ -181,23 +176,5 @@ public class GuardiansOfAdelia extends JavaPlugin implements SkillPlugin {
     public void onDisable() {
         DatabaseManager.onDisable();
         ConfigManager.writeConfigALL();
-    }
-
-    @Override
-    public void registerSkills(SkillAPI skillAPI) {
-
-    }
-
-    @Override
-    public void registerClasses(SkillAPI skillAPI) {
-
-    }
-
-    @Override
-    public List<CustomEffectComponent> getComponents() {
-        return ImmutableList.of(
-                new SkillAPIHologramMechanic(),
-                new SkillAPIHologramDestroyMechanic()
-        );
     }
 }

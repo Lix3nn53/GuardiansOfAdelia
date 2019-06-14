@@ -71,7 +71,7 @@ public class MyPlayerAnimationEvent implements Listener {
                 }
             } else if (type.equals(Material.ACACIA_WOOD) || type.equals(Material.BIRCH_WOOD)
                     || type.equals(Material.DARK_OAK_WOOD) || type.equals(Material.JUNGLE_WOOD) || type.equals(Material.OAK_WOOD) || type.equals(Material.SPRUCE_WOOD)
-            || type.equals(Material.ACACIA_LOG) || type.equals(Material.BIRCH_LOG)
+                    || type.equals(Material.ACACIA_LOG) || type.equals(Material.BIRCH_LOG)
                     || type.equals(Material.DARK_OAK_LOG) || type.equals(Material.JUNGLE_LOG) || type.equals(Material.OAK_LOG) || type.equals(Material.SPRUCE_LOG)) {
                 ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                 Material handType = itemInMainHand.getType();

@@ -70,7 +70,7 @@ public class StatUtils {
             int water = 0;
             int earth = 0;
             int lightning = 0;
-            int air = 0;
+            int wind = 0;
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
                 if (line.contains(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+")) {
@@ -93,17 +93,17 @@ public class StatUtils {
                     int currentValue = Integer.parseInt(currentValueString);
                     lightning = currentValue;
                     changeCounter++;
-                } else if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Air: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Air: " + ChatColor.GRAY + "+", "");
+                } else if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+")) {
+                    String currentValueString = line.replace(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+", "");
                     int currentValue = Integer.parseInt(currentValueString);
-                    air = currentValue;
+                    wind = currentValue;
                     changeCounter++;
                 }
                 if (changeCounter == 5) {
                     break;
                 }
             }
-            return new StatPassive(fire, water, earth, lightning, air);
+            return new StatPassive(fire, water, earth, lightning, wind);
         } else if (type.equals(StatType.RANGED)) {
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
@@ -200,8 +200,8 @@ public class StatUtils {
                 if (statPassive.getLightning() != 0) {
                     lore.add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
                 }
-                if (statPassive.getAir() != 0) {
-                    lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Air: " + ChatColor.GRAY + "+" + statPassive.getAir());
+                if (statPassive.getWind() != 0) {
+                    lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
                 }
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);

@@ -5,13 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afe9802a-f9a8-4925-a9e7-8b6ffb1aa80a" name="Default Changelist" comment="SIL">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityShootBowEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/attribute/Attribute.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/attribute/AttributeType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacterExperienceManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacterStats.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/skill/BuffType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/skill/HologramMechanic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/skill/StatusEffectType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/GuardiansOfAdelia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/GuardiansOfAdelia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearArmor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearPassive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearPassive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/Shield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/Shield.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMagical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMagical.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMelee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMelee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponRanged.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponRanged.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/enchanting/Enchant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/enchanting/Enchant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/stats/StatPassive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/stats/StatPassive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/stats/StatUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/stats/StatUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/commands/CommandLix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/commands/CommandLix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/database/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/database/DatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/database/DatabaseQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/database/DatabaseQueries.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityDamageByEntityEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityDamageByEntityEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerAnimationEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerAnimationEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerFishEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerFishEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerInteractEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerInteractEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/gathering/GatheringType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/GatheringType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyInventoryClickEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyInventoryClickEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyNPCRightClickEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyNPCRightClickEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerItemHeldEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerItemHeldEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyProjectileLaunchEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyProjectileLaunchEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/party/PartyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/party/PartyManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/Quest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/Quest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/actions/GiveWeaponAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/actions/GiveWeaponAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/actions/TutorialEndAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/actions/TutorialEndAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/rpginventory/RPGInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/rpginventory/RPGInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/rpginventory/slots/CharacterInfoSlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/rpginventory/slots/CharacterInfoSlot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/SkillAPIHologramDestroyMechanic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/SkillAPIHologramMechanic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/SkillAPIUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/managers/CharacterSelectionScreenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/managers/CharacterSelectionScreenManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/managers/TutorialManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/managers/TutorialManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/SkillAPI.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/worldedit-bukkit-7.0.0-SNAPSHOT-dist.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Test.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -24,94 +61,76 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/crafting/CraftingGuiManager.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/database/DatabaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="986">
-              <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/Job.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+            <state relative-caret-position="459">
+              <caret line="140" selection-start-line="140" selection-end-line="140" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#619#620#0" expanded="true" />
-                <element signature="e#663#664#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerAnimationEvent.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="621">
-              <caret line="76" column="61" lean-forward="true" selection-start-line="76" selection-start-column="61" selection-end-line="76" selection-end-column="61" />
+            <state relative-caret-position="170">
+              <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/GatheringType.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/characterSelection.yml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/managers/CharacterSelectionScreenManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="80" column="41" lean-forward="true" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
+            <state relative-caret-position="291">
+              <caret line="79" column="59" selection-start-line="79" selection-start-column="59" selection-end-line="79" selection-end-column="59" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#3664#3665#0" expanded="true" />
+                <element signature="e#3711#3712#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerInteractEvent.java">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="29" column="49" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
+            <state relative-caret-position="-1207">
+              <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/JobType.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/database/DatabaseQueries.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+            <state relative-caret-position="247">
+              <caret line="470" column="42" selection-start-line="470" selection-start-column="42" selection-end-line="470" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/stats/StatUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="207" column="13" selection-start-line="207" selection-start-column="13" selection-end-line="207" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/crafting/CraftingLine.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacterExperienceManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
-              <caret line="33" column="65" lean-forward="true" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="65" />
-              <folding>
-                <element signature="e#535#536#0" expanded="true" />
-                <element signature="e#583#584#0" expanded="true" />
-              </folding>
+              <caret line="26" column="38" lean-forward="true" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/crafting/CraftingType.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/rpginventory/slots/CharacterInfoSlot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="73" column="73" lean-forward="true" selection-start-line="73" selection-start-column="73" selection-end-line="73" selection-end-column="73" />
+            <state relative-caret-position="229">
+              <caret line="44" column="59" selection-start-line="44" selection-start-column="59" selection-end-line="44" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -120,10 +139,30 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyInventoryClickEvent.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="693" column="67" selection-start-line="693" selection-start-column="67" selection-end-line="693" selection-end-column="67" />
+            <state relative-caret-position="255">
+              <caret line="23" column="23" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="23" />
+              <folding>
+                <element signature="e#861#862#0" expanded="true" />
+                <element signature="e#901#902#0" expanded="true" />
+                <element signature="e#938#939#0" expanded="true" />
+                <element signature="e#969#970#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacterStats.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="807">
+              <caret line="165" column="46" selection-start-line="165" selection-start-column="46" selection-end-line="165" selection-end-column="46" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#951#952#0" expanded="true" />
+                <element signature="e#991#992#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -141,21 +180,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>isConsuming</find>
-      <find>Tools</find>
-      <find>anch</find>
-      <find>itemStackList</find>
-      <find>while</find>
-      <find>MINING_ORE_COPPER</find>
-      <find>MINING_ORE_IRON</find>
-      <find>MINING_ORE_TITANIUM</find>
-      <find>WOODCUTTING_PLANK</find>
-      <find>LEATHER</find>
-      <find>HUNTING_LEATHER</find>
-      <find>STRING</find>
-      <find>SILK</find>
-      <find>ROSE</find>
-      <find>MINING_JEWEL</find>
       <find>HUNTING_BEEF</find>
       <find>GOLDEN</find>
       <find>&quot;durability&quot;</find>
@@ -168,17 +192,26 @@
       <find>&quot;Gathering Fail&quot;</find>
       <find>, 800000</find>
       <find>Crafting</find>
-      <find>Crafting</find>
-      <find>getGuardianData</find>
       <find>WOOD</find>
+      <find>getGuardianData</find>
+      <find>requiredCompletedQuest</find>
+      <find>static {</find>
+      <find>&quot;Air:</find>
+      <find>Air</find>
+      <find>&quot;air&quot;</find>
+      <find>air</find>
+      <find>eggExp</find>
+      <find>hash</find>
+      <find>Base</find>
+      <find>EntityShootBowEvent</find>
+      <find>RPGClass</find>
+      <find>RPGCharacter</find>
+      <find>goa_player_character</find>
+      <find>SkillAPIUtils</find>
+      <find>Skill</find>
+      <find>paper</find>
     </findStrings>
     <replaceStrings>
-      <replace>Tier</replace>
-      <replace>fromItemTag</replace>
-      <replace>setItemTag</replace>
-      <replace>v1_14_R1</replace>
-      <replace>Crossbow</replace>
-      <replace>customModelDataId = 8;</replace>
       <replace>customModelDataId = 10000001;</replace>
       <replace>customModelDataId = 10000016;</replace>
       <replace>ROGUE</replace>
@@ -203,6 +236,12 @@
       <replace>toolDurability</replace>
       <replace>&quot;Gathering Failed&quot;</replace>
       <replace>LOG</replace>
+      <replace>&quot;Wind:</replace>
+      <replace>&quot;wind&quot;</replace>
+      <replace>wind</replace>
+      <replace>totalExp</replace>
+      <replace>Total</replace>
+      <replace>rpgCharacterStats</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\Lix3nn97\IdeaProjects\GuardiansOfAdelia\src\main\java\io\github\lix3nn53\guardiansofadelia\Items</dir>
@@ -215,57 +254,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/crafting/CraftingLine.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/Ingredient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/OtherItems.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/GatheringTool.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/gathering/Gathering.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/GuardiansOfAdelia.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerFishEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/Ingredient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityPickupItemEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyItemDespawnEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/creatures/drops/DropManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityDeathEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/creatures/drops/MobDropGenerator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityDamageByEntityEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/gathering/GatheringType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMagical.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/RPGGear.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMelee.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponRanged.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/Shield.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/PetMount.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/PetCompanion.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearPassive.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearArmor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/armors/Boots.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/armors/Chestplates.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/armors/Helmets.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/armors/Leggings.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/armors/Shields.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/eggs/Companions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/eggs/Mounts.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/passiveItems/PassiveItemList.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Axes.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Bows.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Crossbows.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Daggers.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Hammers.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Staffs.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Swords.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Tridents.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/commands/CommandLix.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/npc/merchant/MerchantPageType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/ItemPoolGenerator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/GearLevel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/stats/StatUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyInventoryClickEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/Job.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/crafting/CraftingType.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerAnimationEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/GatheringType.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerInteractEvent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/list/MainStoryQuests.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/list/TutorialQuests.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/Attribute.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/stats/StatPassive.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/enchanting/Enchant.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/stats/StatUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/attribute/Attribute.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/skill/StatusEffect.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/skill/StatusEffectType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/skill/BuffType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacterExperience.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/attribute/AttributeType.java" />
+        <option value="$PROJECT_DIR$/src/test/java/Test.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/attribute/AttributeType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearArmor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearPassive.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/Shield.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMagical.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMelee.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponRanged.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityShootBowEvent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/GuardiansOfAdelia.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/SkillAPIHologramMechanic.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/HologramMechanic.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/skill/HologramMechanic.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/commands/CommandLix.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyNPCRightClickEvent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/actions/TutorialEndAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/rpginventory/slots/CharacterInfoSlot.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerItemHeldEvent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyProjectileLaunchEvent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/actions/GiveWeaponAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/attribute/Attribute.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/rpginventory/RPGInventory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyInventoryClickEvent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacterExperienceManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/managers/TutorialManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityDamageByEntityEvent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/party/PartyManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/Quest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/SkillAPIUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacterStats.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/database/DatabaseQueries.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/managers/CharacterSelectionScreenManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/database/DatabaseManager.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -365,34 +404,6 @@
               <item name="GuardiansOfAdelia" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="guardiansofadelia" type="462c0819:PsiDirectoryNode" />
-              <item name="events" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GuardiansOfAdelia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GuardiansOfAdelia" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="guardiansofadelia" type="462c0819:PsiDirectoryNode" />
-              <item name="jobs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GuardiansOfAdelia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GuardiansOfAdelia" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="guardiansofadelia" type="462c0819:PsiDirectoryNode" />
-              <item name="jobs" type="462c0819:PsiDirectoryNode" />
-              <item name="crafting" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GuardiansOfAdelia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GuardiansOfAdelia" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -421,7 +432,7 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560151031888" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560553779572" />
     <property name="last.edited.regexp" value="Sample Text" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -496,9 +507,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.19989339" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.20415778" />
       <window_info id="Structure" order="1" sideWeight="0.50080776" side_tool="true" weight="0.26066098" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -574,398 +584,419 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/Ingredient.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/stats/StatPassive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="91" column="51" selection-start-line="91" selection-start-column="51" selection-end-line="91" selection-end-column="51" />
+        <state relative-caret-position="399">
+          <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1575#1576#0" expanded="true" />
+            <element signature="e#1601#1602#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityDeathEvent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/enchanting/Enchant.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+        <state relative-caret-position="495">
+          <caret line="414" column="28" selection-start-line="414" selection-start-column="28" selection-end-line="414" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/creatures/drops/MobDropGenerator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/stats/StatUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="80" column="59" lean-forward="true" selection-start-line="80" selection-start-column="59" selection-end-line="80" selection-end-column="59" />
+        <state relative-caret-position="-364">
+          <caret line="72" column="20" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/skill/StatusEffectType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/skill/BuffType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacterExperience.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+          <folding>
+            <element signature="e#163#164#0" expanded="true" />
+            <element signature="e#199#200#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/creatures/pets/PetExperienceManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="34" column="4" lean-forward="true" selection-start-line="34" selection-start-column="4" selection-end-line="59" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/attribute/AttributeType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="30" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearArmor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="63" column="99" lean-forward="true" selection-start-line="63" selection-start-column="99" selection-end-line="82" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearPassive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="58" column="87" selection-start-line="58" selection-start-column="87" selection-end-line="58" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/Shield.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="82" column="9" selection-start-line="82" selection-start-column="9" selection-end-line="82" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMagical.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="65" column="86" lean-forward="true" selection-start-line="65" selection-start-column="86" selection-end-line="83" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityRegainHealthEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="17" column="56" lean-forward="true" selection-start-line="14" selection-start-column="39" selection-end-line="17" selection-end-column="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/creatures/drops/DropManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="51" column="14" selection-start-line="51" selection-start-column="14" selection-end-line="51" selection-end-column="14" />
+        <state relative-caret-position="102">
+          <caret line="15" column="55" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/creatures/drops/DropDamage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMelee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="63" column="51" selection-start-line="63" selection-start-column="51" selection-end-line="63" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityShootBowEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="72" lean-forward="true" selection-start-line="22" selection-start-column="72" selection-end-line="22" selection-end-column="72" />
           <folding>
-            <element signature="e#2633#2786#0" expanded="true" />
-            <element signature="e#2785#2786#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerFishEvent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponRanged.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="29" selection-end-column="13" />
+        <state relative-caret-position="204">
+          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/RPGItemUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="47" column="51" lean-forward="true" selection-start-line="47" selection-start-column="51" selection-end-line="47" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/GuardiansOfAdelia.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="69" selection-start-line="15" selection-start-column="69" selection-end-line="15" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/SkillAPIHologramDestroyMechanic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/skill/HologramMechanic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2166#2359#0" expanded="true" />
+            <element signature="e#2358#2359#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/commands/CommandLix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/GuardianData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="48" column="22" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="48" column="14" selection-start-line="48" selection-start-column="14" selection-end-line="48" selection-end-column="14" />
+          <folding>
+            <element signature="e#1360#1361#0" expanded="true" />
+            <element signature="e#1426#1427#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyNPCRightClickEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="37" column="60" lean-forward="true" selection-start-line="37" selection-start-column="60" selection-end-line="37" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/actions/TutorialEndAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="60" column="16" lean-forward="true" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
+          <folding>
+            <element signature="e#2189#2576#0" expanded="true" />
+            <element signature="e#2575#2576#0" expanded="true" />
+            <element signature="e#2645#2878#0" expanded="true" />
+            <element signature="e#2877#2878#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="71" column="33" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyProjectileLaunchEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-380">
+          <caret line="6" column="72" selection-start-line="6" selection-start-column="72" selection-end-line="6" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/actions/GiveWeaponAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="69" selection-start-line="8" selection-start-column="69" selection-end-line="8" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/attribute/Attribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="36" column="26" lean-forward="true" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+          <folding>
+            <element signature="e#238#239#0" expanded="true" />
+            <element signature="e#288#289#0" expanded="true" />
+            <element signature="e#615#616#0" expanded="true" />
+            <element signature="e#649#650#0" expanded="true" />
+            <element signature="e#692#693#0" expanded="true" />
+            <element signature="e#726#727#0" expanded="true" />
+            <element signature="e#775#776#0" expanded="true" />
+            <element signature="e#811#812#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyEntityDamageByEntityEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="195" column="72" selection-start-line="195" selection-start-column="72" selection-end-line="195" selection-end-column="72" />
+        <state relative-caret-position="2618">
+          <caret line="178" column="87" selection-start-line="178" selection-start-column="87" selection-end-line="178" selection-end-column="87" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/GuardiansOfAdelia.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/managers/TutorialManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="83" column="70" selection-start-line="83" selection-start-column="70" selection-end-line="83" selection-end-column="70" />
-          <folding>
-            <element signature="e#8836#8984#0" expanded="true" />
-            <element signature="e#8983#8984#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/GatheringTool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3537">
-          <caret line="27" column="11" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+        <state relative-caret-position="306">
+          <caret line="30" column="98" lean-forward="true" selection-start-line="29" selection-start-column="8" selection-end-line="30" selection-end-column="98" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/RPGGear.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/Shield.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMagical.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponMelee.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/PetMount.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="39" column="94" selection-start-line="39" selection-start-column="94" selection-end-line="39" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/PetCompanion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearPassive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/armors/Boots.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="444" column="83" selection-start-line="444" selection-start-column="83" selection-end-line="444" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/armors/Chestplates.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
-          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/armors/Helmets.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerItemHeldEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/eggs/Companions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="80" selection-start-line="10" selection-start-column="80" selection-end-line="10" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/eggs/Mounts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="72" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/passiveItems/PassiveItemList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Axes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="19" column="51" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/OtherItems.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/MonsterItems.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Tridents.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="22" column="53" lean-forward="true" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Swords.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Staffs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="19" column="51" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Hammers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="19" column="51" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Daggers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="19" column="51" lean-forward="true" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Bows.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="688">
-          <caret line="70" column="46" selection-start-line="70" selection-start-column="46" selection-end-line="70" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/armors/Shields.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-604">
-          <caret line="10" column="121" selection-start-line="10" selection-start-column="110" selection-end-line="10" selection-end-column="121" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/WeaponRanged.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="30" column="58" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Crossbows.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="70" column="154" selection-start-line="70" selection-start-column="142" selection-end-line="70" selection-end-column="154" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/weapons/Weapons.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="25" column="88" selection-start-line="25" selection-start-column="70" selection-end-line="25" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/npc/merchant/MerchantPageType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="255" column="16" selection-start-line="255" selection-start-column="16" selection-end-line="255" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/commands/CommandLix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="98" column="46" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/ItemPoolGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="189" column="117" selection-start-line="189" selection-start-column="117" selection-end-line="189" selection-end-column="117" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/armors/Armors.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/GearLevel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="141" column="15" selection-start-line="141" selection-start-column="15" selection-end-line="141" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/RpgGears/GearArmor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="43" column="56" lean-forward="true" selection-start-line="43" selection-start-column="56" selection-end-line="43" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/list/armors/Leggings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="442" column="42" selection-start-line="442" selection-start-column="42" selection-end-line="442" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/crafting/CraftingLine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="33" column="65" lean-forward="true" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="65" />
-          <folding>
-            <element signature="e#535#536#0" expanded="true" />
-            <element signature="e#583#584#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/JobType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/Items/stats/StatUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="207" column="13" selection-start-line="207" selection-start-column="13" selection-end-line="207" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/crafting/CraftingGuiManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="986">
-          <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
+          <caret line="28" column="66" lean-forward="true" selection-start-line="23" selection-start-column="8" selection-end-line="28" selection-end-column="66" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyInventoryClickEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="693" column="67" selection-start-line="693" selection-start-column="67" selection-end-line="693" selection-end-column="67" />
+        <state relative-caret-position="164">
+          <caret line="324" column="32" selection-start-line="324" selection-start-column="32" selection-end-line="324" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/crafting/CraftingType.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/rpginventory/RPGInventory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="73" column="73" lean-forward="true" selection-start-line="73" selection-start-column="73" selection-end-line="73" selection-end-column="73" />
+        <state relative-caret-position="170">
+          <caret line="10" column="81" selection-start-line="10" selection-start-column="81" selection-end-line="10" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/party/PartyManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="64" column="17" selection-start-line="56" selection-start-column="16" selection-end-line="64" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/Job.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/quests/Quest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+        <state relative-caret-position="221">
+          <caret line="13" column="69" selection-start-line="13" selection-start-column="69" selection-end-line="13" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/SkillAPIUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacterStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="807">
+          <caret line="165" column="46" selection-start-line="165" selection-start-column="46" selection-end-line="165" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#619#620#0" expanded="true" />
-            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#951#952#0" expanded="true" />
+            <element signature="e#991#992#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerAnimationEvent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="76" column="61" lean-forward="true" selection-start-line="76" selection-start-column="61" selection-end-line="76" selection-end-column="61" />
+        <state relative-caret-position="255">
+          <caret line="23" column="23" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="23" />
+          <folding>
+            <element signature="e#861#862#0" expanded="true" />
+            <element signature="e#901#902#0" expanded="true" />
+            <element signature="e#938#939#0" expanded="true" />
+            <element signature="e#969#970#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/jobs/GatheringType.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/database/DatabaseQueries.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="80" column="41" lean-forward="true" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
+        <state relative-caret-position="247">
+          <caret line="470" column="42" selection-start-line="470" selection-start-column="42" selection-end-line="470" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/managers/ConfigManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="210" column="48" lean-forward="true" selection-start-line="210" selection-start-column="48" selection-end-line="210" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/utilities/managers/CharacterSelectionScreenManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="79" column="59" selection-start-line="79" selection-start-column="59" selection-end-line="79" selection-end-column="59" />
+          <folding>
+            <element signature="e#3664#3665#0" expanded="true" />
+            <element signature="e#3711#3712#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/database/DatabaseManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="140" selection-start-line="140" selection-end-line="140" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/events/MyPlayerInteractEvent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="29" column="49" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
+        <state relative-caret-position="170">
+          <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/characterSelection.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/guardian/character/RPGCharacterExperienceManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="38" lean-forward="true" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/lix3nn53/guardiansofadelia/rpginventory/slots/CharacterInfoSlot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="44" column="59" selection-start-line="44" selection-start-column="59" selection-end-line="44" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1207">
+          <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
         </state>
       </provider>
     </entry>
