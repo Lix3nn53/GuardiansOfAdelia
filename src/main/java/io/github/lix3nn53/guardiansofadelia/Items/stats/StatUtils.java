@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.stats;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -17,16 +18,11 @@ public class StatUtils {
 
         List<String> lore = item.getItemMeta().getLore();
         if (type.equals(StatType.HEALTH)) {
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    return new StatOneType(currentValue);
-                }
+            if (PersistentDataContainerUtil.hasInteger(item, "health")) {
+                int health = PersistentDataContainerUtil.getInteger(item, "health");
+                return new StatOneType(health);
             }
         } else if (type.equals(StatType.HYBRID)) {
-            int changeCounter = 0;
             int melee = 0;
             int ranged = 0;
             for (int i = 0; i < lore.size(); i++) {
@@ -35,25 +31,17 @@ public class StatUtils {
                     String currentValueString = line.replace(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+", "");
                     int currentValue = Integer.parseInt(currentValueString);
                     melee = currentValue;
-                    changeCounter++;
-                } else if (line.contains(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    ranged = currentValue;
-                    changeCounter++;
-                }
-                if (changeCounter == 2) {
-                    return new StatHybrid(melee, ranged);
+                    break;
                 }
             }
+            if (PersistentDataContainerUtil.hasInteger(item, "rangedDamage")) {
+                ranged = PersistentDataContainerUtil.getInteger(item, "rangedDamage");
+            }
+            return new StatHybrid(melee, ranged);
         } else if (type.equals(StatType.MAGICAL)) {
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(ChatColor.DARK_AQUA + "✦ Magic Damage: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.DARK_AQUA + "✦ Magic Damage: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    return new StatOneType(currentValue);
-                }
+            if (PersistentDataContainerUtil.hasInteger(item, "magicDamage")) {
+                int magicDamage = PersistentDataContainerUtil.getInteger(item, "magicDamage");
+                return new StatOneType(magicDamage);
             }
         } else if (type.equals(StatType.MELEE)) {
             for (int i = 0; i < lore.size(); i++) {
@@ -65,53 +53,33 @@ public class StatUtils {
                 }
             }
         } else if (type.equals(StatType.PASSIVE)) {
-            int changeCounter = 0;
             int fire = 0;
             int water = 0;
             int earth = 0;
             int lightning = 0;
             int wind = 0;
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    fire = currentValue;
-                    changeCounter++;
-                } else if (line.contains(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    water = currentValue;
-                    changeCounter++;
-                } else if (line.contains(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    earth = currentValue;
-                    changeCounter++;
-                } else if (line.contains(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    lightning = currentValue;
-                    changeCounter++;
-                } else if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    wind = currentValue;
-                    changeCounter++;
-                }
-                if (changeCounter == 5) {
-                    break;
-                }
+
+            if (PersistentDataContainerUtil.hasInteger(item, "fire")) {
+                fire = PersistentDataContainerUtil.getInteger(item, "fire");
             }
+            if (PersistentDataContainerUtil.hasInteger(item, "water")) {
+                water = PersistentDataContainerUtil.getInteger(item, "water");
+            }
+            if (PersistentDataContainerUtil.hasInteger(item, "earth")) {
+                earth = PersistentDataContainerUtil.getInteger(item, "earth");
+            }
+            if (PersistentDataContainerUtil.hasInteger(item, "lightning")) {
+                lightning = PersistentDataContainerUtil.getInteger(item, "lightning");
+            }
+            if (PersistentDataContainerUtil.hasInteger(item, "wind")) {
+                wind = PersistentDataContainerUtil.getInteger(item, "wind");
+            }
+
             return new StatPassive(fire, water, earth, lightning, wind);
         } else if (type.equals(StatType.RANGED)) {
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    return new StatOneType(currentValue);
-                }
+            if (PersistentDataContainerUtil.hasInteger(item, "rangedDamage")) {
+                int rangedDamage = PersistentDataContainerUtil.getInteger(item, "rangedDamage");
+                return new StatOneType(rangedDamage);
             }
         }
         return null;
@@ -190,18 +158,23 @@ public class StatUtils {
                 List<String> lore = itemMeta.getLore();
                 if (statPassive.getFire() != 0) {
                     lore.add(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
+                    PersistentDataContainerUtil.putInteger("fire", statPassive.getFire(), itemStack);
                 }
                 if (statPassive.getWater() != 0) {
                     lore.add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
+                    PersistentDataContainerUtil.putInteger("water", statPassive.getWater(), itemStack);
                 }
                 if (statPassive.getEarth() != 0) {
                     lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
+                    PersistentDataContainerUtil.putInteger("earth", statPassive.getEarth(), itemStack);
                 }
                 if (statPassive.getLightning() != 0) {
                     lore.add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
+                    PersistentDataContainerUtil.putInteger("lightning", statPassive.getLightning(), itemStack);
                 }
                 if (statPassive.getWind() != 0) {
                     lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
+                    PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), itemStack);
                 }
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);

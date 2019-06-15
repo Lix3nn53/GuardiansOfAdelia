@@ -17,10 +17,8 @@ public class MyPlayerJoinEvent implements Listener {
 
         player.setGameMode(GameMode.ADVENTURE);
         player.getInventory().clear();
+
         //character selection handles loading data too
-
-
-        // TODO remove delay, this delay is currently here because it works Faster than SkillAPI's data loading.
         new BukkitRunnable() {
             @Override
             public void run() {

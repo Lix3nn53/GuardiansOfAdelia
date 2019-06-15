@@ -30,8 +30,9 @@ public enum Consumable {
                 return;
             }
         }
-        /*TODO Cast skillapi skill when item consumed
-        SkillAPIUtils.forceUseSkill(player, getSkillCode(), skillLevel);*/
+
+        //TODO Cast skill when item consumed
+
         if (PersistentDataContainerUtil.hasInteger(itemStack, "consumableUsesLeft")) {
             int usesLeft = PersistentDataContainerUtil.getInteger(itemStack, "consumableUsesLeft");
             if (usesLeft > 1) {
@@ -188,79 +189,4 @@ public enum Consumable {
         }
         return lore;
     }
-
-    /*public void startConsuming(Player player) {
-        if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
-            if (guardianData.isFreeToAct()) {
-                guardianData.setConsuming(true);
-
-                final double startPosX = player.getLocation().getX();
-                final double startPosY = player.getLocation().getY();
-                final double startPosZ = player.getLocation().getZ();
-
-                new BukkitRunnable() {
-
-                    // We don't want the task to run indefinitely
-                    int secsRun;
-
-                    @Override
-                    public void run() {
-                        secsRun++;
-
-                        double differenceX = Math.abs(startPosX - player.getLocation().getX());
-                        double differenceY = Math.abs(startPosY - player.getLocation().getY());
-                        double differenceZ = Math.abs(startPosZ - player.getLocation().getZ());
-
-                        if (secsRun == 0) {
-                            if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
-                                guardianData.setConsuming(false);
-                                cancel();
-                                player.sendMessage("§cConsuming has been canceled because you moved.");
-                            } else {
-                                player.sendTitle(ChatColor.YELLOW + "Consuming...", ChatColor.YELLOW + "||||||||||||||||", 0, 50, 0);
-                            }
-                        } else if (secsRun == 1) {
-                            if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
-                                guardianData.setConsuming(false);
-                                cancel();
-                                player.sendMessage("§cConsuming has been canceled because you moved.");
-                            } else {
-                                player.sendTitle(ChatColor.YELLOW + "Consuming...", ChatColor.GREEN + "||||" + ChatColor.YELLOW + "||||||||||||", 0, 50, 0);
-                            }
-                        } else if (secsRun == 2) {
-                            if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
-                                guardianData.setConsuming(false);
-                                cancel();
-                                player.sendMessage("§cConsuming has been canceled because you moved.");
-                            } else {
-                                player.sendTitle(ChatColor.YELLOW + "Consuming...", ChatColor.GREEN + "||||||||" + ChatColor.YELLOW + "||||||||", 0, 50, 0);
-                            }
-                        } else if (secsRun == 3) {
-                            if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
-                                guardianData.setConsuming(false);
-                                cancel();
-                                player.sendMessage("§cConsuming has been canceled because you moved.");
-                            } else {
-                                player.sendTitle(ChatColor.YELLOW + "Consuming...", ChatColor.GREEN + "||||||||||||" + ChatColor.YELLOW + "||||", 0, 50, 0);
-                            }
-                        } else if (secsRun == 4) {
-                            if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
-                                guardianData.setConsuming(false);
-                                cancel();
-                                player.sendMessage("§cConsuming has been canceled because you moved.");
-                            } else {
-                                player.sendTitle(ChatColor.YELLOW + "Consuming...", ChatColor.GREEN + "||||||||||||||||", 0, 50, 0);
-                            }
-                        } else if (secsRun == 5) {
-                            cancel();
-                            InventoryUtils.removeMaterialFromInventory(player.getInventory(), consumableType.getMaterial(), 1);
-                            SkillAPIUtils.forceUseSkill(player, consumableType.getSkillCode(), skillLevel);
-                            guardianData.setConsuming(false);
-                        }
-                    }
-                }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20L);
-            }
-        }
-    }*/
 }

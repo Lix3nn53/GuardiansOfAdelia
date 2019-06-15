@@ -5,7 +5,6 @@ My personal spigot(https://www.spigotmc.org/) plugin project to create a MMORPG 
 ## Dependencies
 * HikariCP (https://github.com/brettwooldridge/HikariCP)
 * Spigot (https://github.com/SpigotMC)
-* SkillAPI (https://github.com/Eniripsa96/SkillAPI)
 * ProtocolLib (https://github.com/dmulloy2/ProtocolLib)
 * Citizens (https://github.com/CitizensDev/Citizens2)
 * LibsDisguises (https://github.com/libraryaddict/LibsDisguises)

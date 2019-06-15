@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
@@ -58,6 +59,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -73,10 +76,20 @@ public class MyInventoryClickEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(InventoryClickEvent event) {
-        Inventory clickedInventory = event.getClickedInventory();
-        ItemStack cursor = event.getCursor();
+        if (event.getAction() == InventoryAction.NOTHING) return; //Why does this get called if nothing happens?
 
         Player player = (Player) event.getWhoClicked();
+        Inventory clickedInventory = event.getClickedInventory();
+
+        ItemStack current = event.getCurrentItem();
+        Material currentType = current.getType();
+
+        ItemStack cursor = event.getCursor();
+        Material cursorType = cursor.getType();
+
+        //manage armor and offhand attributes for player character
+        armorAndOffhandListener(player, event.getSlotType(), clickedInventory, event, current, currentType, cursor, cursorType);
+
         UUID uuid = player.getUniqueId();
 
         GuardianData guardianData = null;
@@ -92,7 +105,7 @@ public class MyInventoryClickEvent implements Listener {
         //Open RPG-Inventory
         if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.CRAFTING)) {
             event.setCancelled(true);
-            if (cursor.getType().equals(Material.AIR)) {
+            if (cursorType.equals(Material.AIR)) {
                 if (rpgCharacter != null) {
                     GuiGeneric guiGeneric = rpgCharacter.getRpgInventory().formRPGInventory(player);
                     guiGeneric.openInventory(player);
@@ -108,7 +121,6 @@ public class MyInventoryClickEvent implements Listener {
 
         Gui activeGui = null;
 
-        ItemStack current = event.getCurrentItem();
         String title = event.getView().getTitle();
         int slot = event.getSlot();
 
@@ -152,9 +164,9 @@ public class MyInventoryClickEvent implements Listener {
                     if (TradeManager.hasTrade(player)) {
                         Trade trade = TradeManager.getTrade(player);
                         if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                            if (current.getType().equals(Material.LIME_WOOL)) {
+                            if (currentType.equals(Material.LIME_WOOL)) {
                                 trade.accept(player);
-                            } else if (current.getType().equals(Material.YELLOW_WOOL)) {
+                            } else if (currentType.equals(Material.YELLOW_WOOL)) {
                                 trade.lock();
                             } else if ((slot > 4 && slot < 9) || (slot > 13 && slot < 18)) {
                                 trade.removeItemFromTrade(player, slot);
@@ -166,9 +178,9 @@ public class MyInventoryClickEvent implements Listener {
                 } else if (activeGui instanceof SellGui) {
                     SellGui sellGui = (SellGui) activeGui;
                     if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                        if (current.getType().equals(Material.LIME_WOOL)) {
+                        if (currentType.equals(Material.LIME_WOOL)) {
                             sellGui.confirm();
-                        } else if (current.getType().equals(Material.YELLOW_WOOL)) {
+                        } else if (currentType.equals(Material.YELLOW_WOOL)) {
                             sellGui.finish(player);
                         }
                     } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
@@ -177,7 +189,7 @@ public class MyInventoryClickEvent implements Listener {
                 } else if (activeGui instanceof EnchantGui) {
                     EnchantGui enchantGui = (EnchantGui) activeGui;
                     if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                        if (current.getType().equals(Material.EMERALD_BLOCK)) {
+                        if (currentType.equals(Material.EMERALD_BLOCK)) {
                             enchantGui.startEnchanting(player);
                         }
                     } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
@@ -185,9 +197,9 @@ public class MyInventoryClickEvent implements Listener {
                         for (EnchantStone enchantStone : EnchantStone.values()) {
                             enchantStoneMaterials.add(enchantStone.getType());
                         }
-                        if (enchantStoneMaterials.contains(current.getType())) {
+                        if (enchantStoneMaterials.contains(currentType)) {
                             enchantGui.setEnchantStone(current);
-                        } else if (StatUtils.hasStatType(current.getType())) {
+                        } else if (StatUtils.hasStatType(currentType)) {
                             enchantGui.setItemToEnchant(current);
                         }
                     }
@@ -338,7 +350,7 @@ public class MyInventoryClickEvent implements Listener {
                 if (activeGui != null) {
                     int resourceNPC = activeGui.getResourceNPC();
                     if (resourceNPC != 0) {
-                        Material type = current.getType();
+                        Material type = currentType;
                         if (type.equals(Material.MAGENTA_WOOL)) {
                             String[] split = currentName.split("#");
                             int questNo = Integer.parseInt(split[1]);
@@ -384,12 +396,12 @@ public class MyInventoryClickEvent implements Listener {
         } else if (title.equals(ChatColor.GOLD + "Coin Converter")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 PlayerInventory playerInventory = player.getInventory();
-                if (current.getType().equals(Material.IRON_INGOT)) {
+                if (currentType.equals(Material.IRON_INGOT)) {
                     if (InventoryUtils.inventoryContains(playerInventory, Material.GOLD_INGOT, 1)) {
                         InventoryUtils.removeMaterialFromInventory(playerInventory, Material.GOLD_INGOT, 1);
                         InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.COPPER, 64).getCoin());
                     }
-                } else if (current.getType().equals(Material.GOLD_INGOT)) {
+                } else if (currentType.equals(Material.GOLD_INGOT)) {
                     if (current.getAmount() == 1) {
                         if (InventoryUtils.inventoryContains(playerInventory, Material.IRON_INGOT, 64)) {
                             InventoryUtils.removeMaterialFromInventory(playerInventory, Material.IRON_INGOT, 64);
@@ -401,7 +413,7 @@ public class MyInventoryClickEvent implements Listener {
                             InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.SILVER, 64).getCoin());
                         }
                     }
-                } else if (current.getType().equals(Material.DIAMOND)) {
+                } else if (currentType.equals(Material.DIAMOND)) {
                     if (InventoryUtils.inventoryContains(playerInventory, Material.GOLD_INGOT, 64)) {
                         InventoryUtils.removeMaterialFromInventory(playerInventory, Material.GOLD_INGOT, 64);
                         InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.GOLD, 1).getCoin());
@@ -409,14 +421,14 @@ public class MyInventoryClickEvent implements Listener {
                 }
             }
         } else if (title.equals(ChatColor.AQUA + "Compass")) {
-            if (current.getType().equals(Material.LIGHT_BLUE_WOOL)) {
+            if (currentType.equals(Material.LIGHT_BLUE_WOOL)) {
                 String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
 
                 Town town = TownManager.getTown(i);
                 CompassManager.setCompassItemLocation(player, town.getName(), town.getLocation());
-            } else if (current.getType().equals(Material.LIME_WOOL)) {
+            } else if (currentType.equals(Material.LIME_WOOL)) {
                 String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
@@ -425,13 +437,13 @@ public class MyInventoryClickEvent implements Listener {
         } else if (title.equals(ChatColor.YELLOW + "Job")) {
             if (rpgCharacter != null) {
                 if (!rpgCharacter.hasJob()) {
-                    if (current.getType().equals(Material.RED_WOOL)) {
+                    if (currentType.equals(Material.RED_WOOL)) {
                         rpgCharacter.setJob(new Job(JobType.WEAPONSMITH));
-                    } else if (current.getType().equals(Material.LIGHT_BLUE_WOOL)) {
+                    } else if (currentType.equals(Material.LIGHT_BLUE_WOOL)) {
                         rpgCharacter.setJob(new Job(JobType.ARMORSMITH));
-                    } else if (current.getType().equals(Material.MAGENTA_WOOL)) {
+                    } else if (currentType.equals(Material.MAGENTA_WOOL)) {
                         rpgCharacter.setJob(new Job(JobType.ALCHEMIST));
-                    } else if (current.getType().equals(Material.YELLOW_WOOL)) {
+                    } else if (currentType.equals(Material.YELLOW_WOOL)) {
                         rpgCharacter.setJob(new Job(JobType.JEWELLER));
                     }
                     GuiGeneric job = MenuList.job(player);
@@ -486,13 +498,13 @@ public class MyInventoryClickEvent implements Listener {
             RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 event.setCancelled(true);
-                if (cursor.getType().equals(Material.AIR)) {
+                if (cursorType.equals(Material.AIR)) {
                     boolean change = rpgInventory.onCursorClickWithAir(player, slot, topInventory, event.isShiftClick());
                 } else {
                     boolean change = rpgInventory.onCursorClickWithItem(player, slot, cursor, topInventory);
                 }
             } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
-                if (cursor.getType().equals(Material.AIR)) {
+                if (cursorType.equals(Material.AIR)) {
                     if (event.isShiftClick()) {
                         event.setCancelled(true);
                         boolean change = rpgInventory.onShiftClick(current, player, slot, topInventory);
@@ -504,7 +516,7 @@ public class MyInventoryClickEvent implements Listener {
                 TombManager.startSearch(player);
             }
         } else if (title.equals(ChatColor.GOLD + "Bazaar")) {
-            if (current.getType().equals(Material.LIME_WOOL)) {
+            if (currentType.equals(Material.LIME_WOOL)) {
                 if (guardianData != null) {
                     if (guardianData.hasBazaar()) {
                         Bazaar bazaar = guardianData.getBazaar();
@@ -518,14 +530,14 @@ public class MyInventoryClickEvent implements Listener {
             }
         } else if (title.equals(ChatColor.GOLD + "Edit your bazaar")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                if (current.getType().equals(Material.LIME_WOOL)) {
+                if (currentType.equals(Material.LIME_WOOL)) {
                     if (guardianData != null) {
                         if (guardianData.hasBazaar()) {
                             Bazaar bazaar = guardianData.getBazaar();
                             bazaar.setUp();
                         }
                     }
-                } else if (current.getType().equals(Material.RED_WOOL)) {
+                } else if (currentType.equals(Material.RED_WOOL)) {
                     if (guardianData != null) {
                         if (guardianData.hasBazaar()) {
                             Bazaar bazaar = guardianData.getBazaar();
@@ -574,7 +586,7 @@ public class MyInventoryClickEvent implements Listener {
             }
         } else if (title.contains("Join dungeon: ")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                if (current.getType().equals(Material.LIME_WOOL)) {
+                if (currentType.equals(Material.LIME_WOOL)) {
                     String s = title.replace("Join dungeon: ", "");
                     DungeonTheme dungeonTheme = DungeonTheme.valueOf(s);
                     int i = currentName.indexOf("#");
@@ -589,7 +601,7 @@ public class MyInventoryClickEvent implements Listener {
         } else if (title.contains(" Crafting")) {
             if (title.contains(" Level Selection")) {
                 if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                    if (current.getType().equals(Material.STONE_PICKAXE)) {
+                    if (currentType.equals(Material.STONE_PICKAXE)) {
                         if (rpgCharacter != null) {
                             Job job = rpgCharacter.getJob();
                             int jobLevel = job.getLevel();
@@ -699,4 +711,120 @@ public class MyInventoryClickEvent implements Listener {
         }
     }
 
+    /**
+     * A utility method to support versions that use null or air ItemStacks.
+     */
+    private boolean isAirOrNull(ItemStack item) {
+        return item == null || item.getType().equals(Material.AIR);
+    }
+
+    private boolean isArmorEquippedOnRelatedSlot(ArmorType armorTypeOfCurrentItem, Player player) {
+        if (armorTypeOfCurrentItem.equals(ArmorType.HELMET)) {
+            return !isAirOrNull(player.getInventory().getHelmet());
+        } else if (armorTypeOfCurrentItem.equals(ArmorType.CHESTPLATE)) {
+            return !isAirOrNull(player.getInventory().getChestplate());
+        } else if (armorTypeOfCurrentItem.equals(ArmorType.LEGGINGS)) {
+            return !isAirOrNull(player.getInventory().getLeggings());
+        } else if (armorTypeOfCurrentItem.equals(ArmorType.BOOTS)) {
+            return !isAirOrNull(player.getInventory().getBoots());
+        }
+
+        return false;
+    }
+
+    private void armorShiftClickListener(Material currentType, InventoryClickEvent event, Player player) {
+        ArmorType armorTypeOfCurrentItem = ArmorType.getArmorType(currentType);
+        if (armorTypeOfCurrentItem == null) return;
+
+        boolean equipping = true; //removing otherwise
+        if (event.getRawSlot() == armorTypeOfCurrentItem.getSlot()) equipping = false;
+
+        if (isArmorEquippedOnRelatedSlot(armorTypeOfCurrentItem, player)) {
+            //player is already equipping an item on slot we are managing
+            if (!equipping) { //removing armor with shift click
+
+            } //there is no else because you can't equip another armor with shift click if you are already equipping one
+        } else if (equipping) { //armor slot is empty & equipping item with shift click
+
+
+        }
+    }
+
+    private void armorNumPressListener(Inventory clickedInventory, InventoryClickEvent event, Player player) {
+        ItemStack hotbarItem = clickedInventory.getItem(event.getHotbarButton()); //item in hotbar slot of pressed num key
+        ArmorType armorTypeOfHotBarItem = ArmorType.getArmorType(hotbarItem.getType());
+
+        if (armorTypeOfHotBarItem != null) {
+            if (isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) {
+                //player is already equipping an item on slot we are managing
+                //player replaces current armor with item on hotbar
+
+
+            } else {
+                //armor slot is empty
+                //player equips item on hotbar
+
+            }
+        } else if (isAirOrNull(hotbarItem)) { //hot bar item is not an armor & removing currently equipped item from armor slot
+
+        } else if (isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) { //player is already equipping an item on slot we are managing
+
+        }
+    }
+
+    private void armorNormalClickListener(ItemStack cursor, Material cursorType, Material currentType, InventoryClickEvent event, Player player) {
+        ArmorType armorTypeOfCursor = ArmorType.getArmorType(cursorType);
+        if (armorTypeOfCursor != null) {
+            if (event.getRawSlot() != armorTypeOfCursor.getSlot())
+                return; //Used for drag and drop checking to make sure you aren't trying to place a helmet in the boots slot
+
+            if (isArmorEquippedOnRelatedSlot(armorTypeOfCursor, player)) {
+                //player is already equipping an item on slot we are managing
+                //player replaces current armor with item on cursor
+
+            } else {
+                //armor slot is empty
+                //player equips item on cursor
+
+            }
+        } else if (isAirOrNull(cursor)) { //cursor is an non-armor item
+            ArmorType armorTypeOfCurrentItem = ArmorType.getArmorType(currentType);
+            if (armorTypeOfCurrentItem == null) return; //clicked item is not armor
+
+            if (event.getRawSlot() == armorTypeOfCurrentItem.getSlot()) { //replace clicked armor with cursor
+
+            } //else clicked item is armor which is not equipped
+        }//no else since nothing happens with cursor with nonArmor item
+    }
+
+    private void offhandNormalClickListener(ItemStack cursor, Material cursorType, ItemStack current, Material currentType, InventoryClickEvent event, Player player) {
+        if (!isAirOrNull(cursor)) { //with item on cursor
+            if (cursorType.equals(Material.SHIELD) || currentType.equals(Material.DIAMOND_HOE)) {
+
+            } else {
+                event.setCancelled(true);
+            }
+        } else { //without item on cursor
+
+        }
+    }
+
+    private void armorAndOffhandListener(Player player, InventoryType.SlotType slotType, Inventory clickedInventory, InventoryClickEvent event, ItemStack current, Material currentType, ItemStack cursor, Material cursorType) {
+        if (slotType != InventoryType.SlotType.ARMOR && slotType != InventoryType.SlotType.QUICKBAR && slotType != InventoryType.SlotType.CONTAINER)
+            return;
+        if (!clickedInventory.getType().equals(InventoryType.PLAYER)) return; //Prevents shit in the 2by2 crafting
+
+        if (event.getRawSlot() == 45) { //clicked on off hand slot
+            offhandNormalClickListener(cursor, cursorType, current, currentType, event, player);
+            return;
+        }
+
+        if (event.isShiftClick()) {
+            armorShiftClickListener(currentType, event, player);
+        } else if (event.getClick().equals(ClickType.NUMBER_KEY)) {
+            armorNumPressListener(clickedInventory, event, player);
+        } else { //drag and drop
+            armorNormalClickListener(cursor, cursorType, currentType, event, player);
+        }
+    }
 }
