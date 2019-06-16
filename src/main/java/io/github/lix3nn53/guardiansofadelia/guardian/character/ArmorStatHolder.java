@@ -6,11 +6,10 @@ public class ArmorStatHolder {
     private final int defense;
     private final int magicDefense;
 
-    public ArmorStatHolder(int maxHealth, int defense, int magicDefense, RPGCharacterStats rpgCharacterStats) {
+    public ArmorStatHolder(int maxHealth, int defense, int magicDefense) {
         this.maxHealth = maxHealth;
         this.defense = defense;
         this.magicDefense = magicDefense;
-        rpgCharacterStats.onHealthChange();
     }
 
     public int getMaxHealth() {

@@ -31,7 +31,6 @@ public class RPGCharacterStats {
     private final Attribute wind = new Attribute(AttributeType.WIND);
     private final List<Integer> investedSkillPoints = new ArrayList<>();
     private int maxHealth = 20;
-    private int currentHealth = 20;
     private int maxMana = 20;
     private int currentMana = 20;
     private int defense = 1;
@@ -50,14 +49,15 @@ public class RPGCharacterStats {
         this.player = player;
 
         player.setLevel(1);
+        player.setHealthScale(20);
 
-        helmet = new ArmorStatHolder(0, 0, 0, this);
-        chestplate = new ArmorStatHolder(0, 0, 0, this);
-        leggings = new ArmorStatHolder(0, 0, 0, this);
-        boots = new ArmorStatHolder(0, 0, 0, this);
+        helmet = new ArmorStatHolder(0, 0, 0);
+        chestplate = new ArmorStatHolder(0, 0, 0);
+        leggings = new ArmorStatHolder(0, 0, 0);
+        boots = new ArmorStatHolder(0, 0, 0);
 
         //offhand slot
-        shield = new ArmorStatHolder(0, 0, 0, this);
+        shield = new ArmorStatHolder(0, 0, 0);
 
         investedSkillPoints.add(0);
         investedSkillPoints.add(0);
@@ -69,7 +69,7 @@ public class RPGCharacterStats {
         new BukkitRunnable() {
             @Override
             public void run() {
-                String message = ChatColor.RED + "❤" + currentHealth + "/" + getTotalMaxHealth() + "                    " + ChatColor.AQUA + "✧" + currentMana + "/" + getTotalMaxMana();
+                String message = ChatColor.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + "                    " + ChatColor.AQUA + "✧" + currentMana + "/" + getTotalMaxMana();
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 10L);
@@ -99,8 +99,7 @@ public class RPGCharacterStats {
     }
 
     public void setCurrentHealth(int currentHealth) {
-        this.currentHealth = currentHealth;
-        onHealthChange();
+        player.setHealth(currentHealth);
     }
 
     public int getCurrentMana() {
@@ -109,7 +108,7 @@ public class RPGCharacterStats {
 
     public void setCurrentMana(int currentMana) {
         this.currentMana = currentMana;
-        onManaChange();
+        onCurrentManaChange();
     }
 
     public void setDefense(int defense) {
@@ -311,36 +310,24 @@ public class RPGCharacterStats {
         return investedSkillPoints.get(index);
     }
 
-    public void onHealthChange() {
+    public void onMaxHealthChange() {
         int totalMaxHealth = getTotalMaxHealth();
-        if (currentHealth > totalMaxHealth) {
-            currentHealth = totalMaxHealth;
+        player.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).setBaseValue(totalMaxHealth);
+        if (player.getHealth() > totalMaxHealth) {
+            player.setHealth(totalMaxHealth);
         }
-
-        double ratio = (double) currentHealth / totalMaxHealth;
-        int healthLevel = (int) (20 * ratio + 0.5);
-
-        if (currentHealth > 0) {
-            if (healthLevel <= 0) {
-                healthLevel = 1;
-            }
-        } else {
-            healthLevel = 0;
-        }
-
-        player.setHealth(healthLevel);
     }
 
-    public void onManaChange() {
+    public void onCurrentManaChange() {
         int totalMaxMana = getTotalMaxMana();
-        if (currentHealth > totalMaxMana) {
-            currentHealth = totalMaxMana;
+        if (currentMana > totalMaxMana) {
+            currentMana = totalMaxMana;
         }
 
         double ratio = (double) currentMana / totalMaxMana;
         int foodLevel = (int) (20 * ratio + 0.5);
 
-        if (currentHealth > 0) {
+        if (currentMana > 0) {
             if (foodLevel <= 0) {
                 foodLevel = 1;
             }
@@ -372,19 +359,19 @@ public class RPGCharacterStats {
 
             switch (armorType) {
                 case HELMET:
-                    helmet = new ArmorStatHolder(health, defense, magicDefense, this);
+                    helmet = new ArmorStatHolder(health, defense, magicDefense);
                     addPassiveStatBonuses(armor);
                     break;
                 case CHESTPLATE:
-                    chestplate = new ArmorStatHolder(health, defense, magicDefense, this);
+                    chestplate = new ArmorStatHolder(health, defense, magicDefense);
                     addPassiveStatBonuses(armor);
                     break;
                 case LEGGINGS:
-                    leggings = new ArmorStatHolder(health, defense, magicDefense, this);
+                    leggings = new ArmorStatHolder(health, defense, magicDefense);
                     addPassiveStatBonuses(armor);
                     break;
                 case BOOTS:
-                    boots = new ArmorStatHolder(health, defense, magicDefense, this);
+                    boots = new ArmorStatHolder(health, defense, magicDefense);
                     addPassiveStatBonuses(armor);
                     break;
             }
@@ -397,19 +384,19 @@ public class RPGCharacterStats {
         if (armorType != null) {
             switch (armorType) {
                 case HELMET:
-                    helmet = new ArmorStatHolder(0, 0, 0, this);
+                    helmet = new ArmorStatHolder(0, 0, 0);
                     removePassiveStatBonuses(armor);
                     break;
                 case CHESTPLATE:
-                    chestplate = new ArmorStatHolder(0, 0, 0, this);
+                    chestplate = new ArmorStatHolder(0, 0, 0);
                     removePassiveStatBonuses(armor);
                     break;
                 case LEGGINGS:
-                    leggings = new ArmorStatHolder(0, 0, 0, this);
+                    leggings = new ArmorStatHolder(0, 0, 0);
                     removePassiveStatBonuses(armor);
                     break;
                 case BOOTS:
-                    boots = new ArmorStatHolder(0, 0, 0, this);
+                    boots = new ArmorStatHolder(0, 0, 0);
                     removePassiveStatBonuses(armor);
                     break;
             }
@@ -434,7 +421,7 @@ public class RPGCharacterStats {
                 magicDefense = PersistentDataContainerUtil.getInteger(offhand, "magicDefense");
             }
 
-            shield = new ArmorStatHolder(health, defense, magicDefense, this);
+            shield = new ArmorStatHolder(health, defense, magicDefense);
             addPassiveStatBonuses(offhand);
         } else if (material.equals(Material.DIAMOND_HOE)) {
             StatOneType stat = (StatOneType) StatUtils.getStat(offhand);
@@ -447,11 +434,12 @@ public class RPGCharacterStats {
     public void onOffhandUnequip(ItemStack offhand) {
         Material material = offhand.getType();
         if (material.equals(Material.SHIELD)) {
-            shield = new ArmorStatHolder(0, 0, 0, this);
+            shield = new ArmorStatHolder(0, 0, 0);
             removePassiveStatBonuses(offhand);
         } else if (material.equals(Material.DIAMOND_HOE)) {
             damageBonusFromOffhand = 0;
             removePassiveStatBonuses(offhand);
+            onMaxHealthChange();
         }
     }
 
@@ -476,6 +464,7 @@ public class RPGCharacterStats {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
             this.getWind().addBonus(bonus, this);
         }
+        onMaxHealthChange();
     }
 
     private void removePassiveStatBonuses(ItemStack itemStack) {
@@ -499,18 +488,19 @@ public class RPGCharacterStats {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
             this.getWind().removeBonus(bonus, this);
         }
+        onMaxHealthChange();
     }
 
     public void recalculateEquipmentBonuses(RPGInventory rpgInventory, RPGClass rpgClass) {
         clearBonuses();
 
-        helmet = new ArmorStatHolder(0, 0, 0, this);
-        chestplate = new ArmorStatHolder(0, 0, 0, this);
-        leggings = new ArmorStatHolder(0, 0, 0, this);
-        boots = new ArmorStatHolder(0, 0, 0, this);
+        helmet = new ArmorStatHolder(0, 0, 0);
+        chestplate = new ArmorStatHolder(0, 0, 0);
+        leggings = new ArmorStatHolder(0, 0, 0);
+        boots = new ArmorStatHolder(0, 0, 0);
 
         //offhand slot
-        shield = new ArmorStatHolder(0, 0, 0, this);
+        shield = new ArmorStatHolder(0, 0, 0);
         damageBonusFromOffhand = 0;
 
         PlayerInventory inventory = player.getInventory();
@@ -564,6 +554,8 @@ public class RPGCharacterStats {
         getEarth().addBonus(totalPassiveStat.getEarth(), this);
         getLightning().addBonus(totalPassiveStat.getLightning(), this);
         getWind().addBonus(totalPassiveStat.getWind(), this);
+
+        onMaxHealthChange();
     }
 
     /**

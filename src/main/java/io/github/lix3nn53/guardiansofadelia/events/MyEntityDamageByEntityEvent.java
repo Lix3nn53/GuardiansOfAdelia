@@ -52,12 +52,14 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
         if (target instanceof LivingEntity) {
             boolean isEventCanceled = false;
+            boolean isAttackerPlayer = false;
             LivingEntity livingTarget = (LivingEntity) target;
 
             //DAMAGER
             if (damager.getType().equals(EntityType.PLAYER)) { //player is attacker
                 Player player = (Player) damager;
                 isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, false, false);
+                isAttackerPlayer = true;
             } else if (damager instanceof Projectile) { //projectile is attacker
                 boolean isMagic = false;
                 Projectile projectile = (Projectile) damager;
@@ -73,6 +75,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 if (shooter instanceof Player) {
                     Player player = (Player) shooter;
                     isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, true, isMagic);
+                    isAttackerPlayer = true;
                 }
             } else if (damager instanceof LivingEntity) {
                 if (damager instanceof Wolf) {
@@ -80,6 +83,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     if (PetManager.isPet(wolf)) { //pet is attacker
                         Player owner = PetManager.getOwner(wolf);
                         isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, true, false, false);
+                        isAttackerPlayer = true;
                     }
                 }
             }
@@ -92,8 +96,30 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         event.setDamage(customDamage);
                     }
 
-                    //manage target player's pet's target
                     Player playerTarget = (Player) target;
+
+                    if (!isAttackerPlayer) { //we are managing this on onPlayerAttackEntity method if attacker is player
+                        //custom defense formula if target is another player
+                        UUID uniqueId = playerTarget.getUniqueId();
+                        if (GuardianDataManager.hasGuardianData(uniqueId)) {
+                            GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+                            if (guardianData.hasActiveCharacter()) {
+                                double damage = event.getDamage();
+
+                                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                                RPGCharacterStats targetRpgCharacterStats = activeCharacter.getRpgCharacterStats();
+                                int totalDefense = targetRpgCharacterStats.getTotalDefense();
+                                double reduction = (1 - (totalDefense / (totalDefense + 3000.0))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
+
+                                damage = damage * reduction;
+
+                                event.setDamage(damage);
+                            }
+                        }
+                    }
+
+                    //manage target player's pet's target
                     if (damager instanceof LivingEntity) {
                         LivingEntity livingDamager = (LivingEntity) damager;
                         if (PetManager.hasActivePet(playerTarget)) {
@@ -203,22 +229,26 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 //custom defense formula if target is another player
                 if (livingTarget.getType().equals(EntityType.PLAYER)) {
-                    Player targetPlayer = (Player) livingTarget;
-                    UUID targetUniqueId = targetPlayer.getUniqueId();
+                    Player playerTarget = (Player) livingTarget;
+                    UUID targetUniqueId = playerTarget.getUniqueId();
                     if (GuardianDataManager.hasGuardianData(targetUniqueId)) {
                         GuardianData targetGuardianData = GuardianDataManager.getGuardianData(targetUniqueId);
                         if (targetGuardianData.hasActiveCharacter()) {
+
                             RPGCharacter targetActiveCharacter = targetGuardianData.getActiveCharacter();
+
                             RPGCharacterStats targetRpgCharacterStats = targetActiveCharacter.getRpgCharacterStats();
                             int totalDefense = targetRpgCharacterStats.getTotalDefense();
                             double reduction = (1 - (totalDefense / (totalDefense + 3000.0))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
 
                             damage = damage * reduction;
+
+                            event.setDamage(damage);
                         }
                     }
                 }
-                event.setDamage(damage);
 
+                event.setDamage(damage);
 
                 double finalDamage = event.getFinalDamage();
 

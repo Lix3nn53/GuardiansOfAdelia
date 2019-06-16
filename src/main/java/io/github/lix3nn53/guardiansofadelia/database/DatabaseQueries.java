@@ -673,7 +673,7 @@ public class DatabaseQueries {
                 "slot_pet, chat_tag, job_type, job_level, job_experience, inventory, activequests, turnedinquests, location, armor_content, " +
                 "rpg_class, totalexp, attr_fire, attr_water, attr_earth, attr_lightning, attr_wind, skill_one, skill_two, skill_three, skill_passive, skill_ultimate) \n" +
                 "VALUES \n" +
-                "\t(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n" +
+                "\t(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
                 "\tuuid = VALUES(uuid),\n" +
                 "\tcharacter_no = VALUES(character_no),\n" +

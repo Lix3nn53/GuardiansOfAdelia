@@ -46,6 +46,8 @@ public class MyPlayerInteractEvent implements Listener {
                 }
             } else {
                 Block clickedBlock = event.getClickedBlock();
+                if (clickedBlock == null) return;
+
                 Material clickedBlockType = clickedBlock.getType();
 
                 UUID uuid = player.getUniqueId();

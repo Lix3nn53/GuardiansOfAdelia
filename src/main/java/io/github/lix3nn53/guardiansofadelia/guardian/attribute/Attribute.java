@@ -55,10 +55,10 @@ public class Attribute {
             case LIGHTNING:
                 break;
             case EARTH:
-                rpgCharacterStats.onHealthChange();
+                rpgCharacterStats.onMaxHealthChange();
                 break;
             case WATER:
-                rpgCharacterStats.onManaChange();
+                rpgCharacterStats.onCurrentManaChange();
                 break;
             case WIND:
                 break;
