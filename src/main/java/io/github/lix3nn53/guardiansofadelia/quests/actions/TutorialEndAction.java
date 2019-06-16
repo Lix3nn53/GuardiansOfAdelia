@@ -53,6 +53,7 @@ public class TutorialEndAction implements Action {
                         player.removePotionEffect(PotionEffectType.WITHER);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 200, 4));
                         QuestNPCManager.setAllNpcHologramForPlayer(player);
+                        activeCharacter.getRpgCharacterStats().recalculateEquipmentBonuses(rpgInventory, activeCharacter.getRpgClass());
                     }
                 }.runTaskLater(GuardiansOfAdelia.getInstance(), 5L);
 

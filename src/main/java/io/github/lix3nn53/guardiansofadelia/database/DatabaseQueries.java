@@ -251,7 +251,8 @@ public class DatabaseQueries {
 
             if (resultSet.next()) {
                 String rpgClassString = resultSet.getString("rpg_class");
-                rpgCharacter = new RPGCharacter(RPGClass.valueOf(rpgClassString));
+                RPGClass rpgClass = RPGClass.valueOf(rpgClassString);
+                rpgCharacter = new RPGCharacter(rpgClass, player);
                 RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
 
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
@@ -260,15 +261,15 @@ public class DatabaseQueries {
                 rpgCharacterStats.setTotalExp(totalexp);
 
                 int attr_fire = resultSet.getInt("attr_fire");
-                rpgCharacterStats.getFire().setInvested(attr_fire);
+                rpgCharacterStats.getFire().setInvested(attr_fire, rpgCharacterStats);
                 int attr_water = resultSet.getInt("attr_water");
-                rpgCharacterStats.getWater().setInvested(attr_water);
+                rpgCharacterStats.getWater().setInvested(attr_water, rpgCharacterStats);
                 int attr_earth = resultSet.getInt("attr_earth");
-                rpgCharacterStats.getEarth().setInvested(attr_earth);
+                rpgCharacterStats.getEarth().setInvested(attr_earth, rpgCharacterStats);
                 int attr_lightning = resultSet.getInt("attr_lightning");
-                rpgCharacterStats.getLightning().setInvested(attr_lightning);
+                rpgCharacterStats.getLightning().setInvested(attr_lightning, rpgCharacterStats);
                 int attr_wind = resultSet.getInt("attr_wind");
-                rpgCharacterStats.getWind().setInvested(attr_wind);
+                rpgCharacterStats.getWind().setInvested(attr_wind, rpgCharacterStats);
 
                 int skill_one = resultSet.getInt("skill_one");
                 rpgCharacterStats.investSkillPoints(1, skill_one);
@@ -402,6 +403,8 @@ public class DatabaseQueries {
                     ItemStack[] itemStacks = ItemSerializer.restoreModdedStacks(armorContentString);
                     player.getInventory().setArmorContents(itemStacks);
                 }
+
+                rpgCharacter.getRpgCharacterStats().recalculateEquipmentBonuses(rpgInventory, rpgClass);
             }
             resultSet.close();
             pst.close();

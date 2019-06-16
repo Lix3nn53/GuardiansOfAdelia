@@ -7,9 +7,9 @@ import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
@@ -17,6 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.FakeIndicator;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -56,24 +57,29 @@ public class MyEntityDamageByEntityEvent implements Listener {
             //DAMAGER
             if (damager.getType().equals(EntityType.PLAYER)) { //player is attacker
                 Player player = (Player) damager;
-                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false);
+                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, false, false);
             } else if (damager instanceof Projectile) { //projectile is attacker
+                boolean isMagic = false;
                 Projectile projectile = (Projectile) damager;
                 if (PersistentDataContainerUtil.hasInteger(projectile, "rangedDamage")) {
                     int rangedDamage = PersistentDataContainerUtil.getInteger(projectile, "rangedDamage");
                     event.setDamage(rangedDamage);
+                } else if (PersistentDataContainerUtil.hasInteger(projectile, "magicDamage")) {
+                    int magicDamage = PersistentDataContainerUtil.getInteger(projectile, "magicDamage");
+                    event.setDamage(magicDamage);
+                    isMagic = true;
                 }
                 ProjectileSource shooter = projectile.getShooter();
                 if (shooter instanceof Player) {
                     Player player = (Player) shooter;
-                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false);
+                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, true, isMagic);
                 }
             } else if (damager instanceof LivingEntity) {
                 if (damager instanceof Wolf) {
                     Wolf wolf = (Wolf) damager;
                     if (PetManager.isPet(wolf)) { //pet is attacker
                         Player owner = PetManager.getOwner(wolf);
-                        isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, true);
+                        isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, true, false, false);
                     }
                 }
             }
@@ -112,7 +118,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
      * @param isPet        isAttackerPet else attacker is Player
      * @return isEventCanceled
      */
-    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, boolean isPet) {
+    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, boolean isPet, boolean isRangedAttack, boolean isMagicAttack) {
         UUID uniqueId = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uniqueId)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
@@ -158,10 +164,43 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 }
 
                 //custom damage modifiers
-                RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-                Attribute fire = rpgCharacterStats.getFire();
                 double damage = event.getDamage();
-                damage += fire.getIncrement();
+
+                RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+                RPGClass rpgClass = activeCharacter.getRpgClass();
+                if (isMagicAttack) { //ranged overrides magic so check magic first
+                    damage += rpgCharacterStats.getTotalMagicDamage(player, rpgClass); //add to spell damage
+                } else if (isRangedAttack) {
+                    damage += rpgCharacterStats.getFire().getIncrement(); //add to projectile damage
+                } else { //melee
+                    ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+                    Material type = itemInMainHand.getType();
+
+                    if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
+                            || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
+                        if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "reqLevel")) {
+                            int reqLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "reqLevel");
+                            if (player.getLevel() < reqLevel) {
+                                event.setCancelled(true);
+                                player.sendMessage("Required level for this weapon is " + reqLevel);
+                                return false;
+                            }
+                        }
+
+                        if (PersistentDataContainerUtil.hasString(itemInMainHand, "reqClass")) {
+                            String reqClassString = PersistentDataContainerUtil.getString(itemInMainHand, "reqClass");
+                            RPGClass reqClass = RPGClass.valueOf(reqClassString);
+                            if (!rpgClass.equals(reqClass)) {
+                                event.setCancelled(true);
+                                player.sendMessage("Required class for this weapon is " + reqClass.getClassString());
+                                return false;
+                            }
+                        }
+
+                        damage += rpgCharacterStats.getFire().getIncrement(); //add to weapon damage
+                    }
+                }
+
                 //custom defense formula if target is another player
                 if (livingTarget.getType().equals(EntityType.PLAYER)) {
                     Player targetPlayer = (Player) livingTarget;

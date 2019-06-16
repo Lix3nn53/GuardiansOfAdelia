@@ -41,26 +41,6 @@ public enum RPGClass {
         return color + name;
     }
 
-    public String getClassCode() {
-        String code = "archer";
-        if (this == RPGClass.KNIGHT) {
-            code = "knight";
-        } else if (this == RPGClass.MAGE) {
-            code = "mage";
-        } else if (this == RPGClass.MONK) {
-            code = "monk";
-        } else if (this == RPGClass.ROGUE) {
-            code = "rogue";
-        } else if (this == RPGClass.PALADIN) {
-            code = "paladin";
-        } else if (this == RPGClass.WARRIOR) {
-            code = "warrior";
-        } else if (this == RPGClass.HUNTER) {
-            code = "hunter";
-        }
-        return code;
-    }
-
     public ChatColor getClassColor() {
         ChatColor color = ChatColor.GREEN;
         if (this == RPGClass.KNIGHT) {

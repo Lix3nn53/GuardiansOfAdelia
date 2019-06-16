@@ -49,7 +49,6 @@ public class FakeHologram {
             manager.sendServerPacket(p, armorStand.getHandle());
             return true;
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return false;
@@ -62,7 +61,6 @@ public class FakeHologram {
             manager.sendServerPacket(p, destroy.getHandle());
             return true;
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return false;

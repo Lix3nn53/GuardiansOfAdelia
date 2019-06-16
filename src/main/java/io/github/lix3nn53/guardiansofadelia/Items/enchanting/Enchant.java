@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUti
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -129,69 +130,71 @@ public class Enchant {
         StatType type = StatUtils.getStatType(itemStack.getType());
 
         if (type.equals(StatType.HEALTH) || type.equals(StatType.MAGICAL) ||
-                type.equals(StatType.MELEE) || type.equals(StatType.RANGED)) {
-            StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
-            int nextValue = stat.getValue() + getBonusValue(stat.getValue());
+                type.equals(StatType.MELEE) || type.equals(StatType.HYBRID)) {
+            if (itemStack.getType().equals(Material.TRIDENT)) {
+                StatHybrid stat = (StatHybrid) StatUtils.getStat(itemStack);
+                int nextDamageValue = stat.getMeleeDamage() + getBonusValue(stat.getMeleeDamage());
+                int nextRangedDamageValue = stat.getRangedDamage() + getBonusValue(stat.getRangedDamage());
+                int lineToChange = -1;
+                int lineToChangeRanged = -1;
+                int changeCounter = 0;
+                for (int i = 0; i < lore.size(); i++) {
+                    String line = lore.get(i);
+                    if (line.contains(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+")) {
+                        lineToChange = i;
+                        changeCounter++;
+                    } else if (line.contains(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+")) {
+                        lineToChangeRanged = i;
+                        changeCounter++;
+                    }
+                    if (changeCounter == 2) {
+                        break;
+                    }
+                }
+                if (lineToChange != -1 && lineToChangeRanged != -1) {
+                    String line = lore.get(lineToChange);
+                    String newLine = line.replace(stat.getMeleeDamage() + "", nextDamageValue + "");
+                    lore.set(lineToChange, newLine);
 
-            String statString = ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+";
-            if (type.equals(StatType.MAGICAL)) {
-                statString = ChatColor.DARK_AQUA + "✦ Magic Damage: " + ChatColor.GRAY + "+";
-            } else if (type.equals(StatType.MELEE)) {
-                statString = ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+";
-            } else if (type.equals(StatType.RANGED)) {
-                statString = ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+";
-            }
-            int lineToChange = -1;
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(statString)) {
-                    lineToChange = i;
-                    break;
+                    String lineRanged = lore.get(lineToChangeRanged);
+                    String newLineRanged = lineRanged.replace(stat.getRangedDamage() + "", nextRangedDamageValue + "");
+                    lore.set(lineToChangeRanged, newLineRanged);
+                    itemMeta.setLore(lore);
+                }
+                itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);
+            } else {
+                StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
+                int nextValue = stat.getValue() + getBonusValue(stat.getValue());
+
+                String statString = ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+";
+                if (type.equals(StatType.MAGICAL)) {
+                    statString = ChatColor.DARK_AQUA + "✦ Magic Damage: " + ChatColor.GRAY + "+";
+                } else if (type.equals(StatType.MELEE)) {
+                    statString = ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+";
+                } else if (type.equals(StatType.HYBRID)) {
+                    statString = ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+";
+                }
+                int lineToChange = -1;
+                for (int i = 0; i < lore.size(); i++) {
+                    String line = lore.get(i);
+                    if (line.contains(statString)) {
+                        lineToChange = i;
+                        break;
+                    }
+                }
+                if (lineToChange != -1) {
+                    String line = lore.get(lineToChange);
+                    String newLine = line.replace(stat.getValue() + "", nextValue + "");
+                    lore.set(lineToChange, newLine);
+                    itemMeta.setLore(lore);
+                }
+
+                if (type.equals(StatType.MELEE)) {
+                    itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextValue);
+                } else if (type.equals(StatType.HYBRID)) {
+                    PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
                 }
             }
-            if (lineToChange != -1) {
-                String line = lore.get(lineToChange);
-                String newLine = line.replace(stat.getValue() + "", nextValue + "");
-                lore.set(lineToChange, newLine);
-                itemMeta.setLore(lore);
-            }
-
-            if (type.equals(StatType.MELEE)) {
-                itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextValue);
-            } else if (type.equals(StatType.RANGED)) {
-                PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
-            }
-        } else if (type.equals(StatType.HYBRID)) {
-            StatHybrid stat = (StatHybrid) StatUtils.getStat(itemStack);
-            int nextDamageValue = stat.getDamage() + getBonusValue(stat.getDamage());
-            int nextRangedDamageValue = stat.getRangedDamage() + getBonusValue(stat.getRangedDamage());
-            int lineToChange = -1;
-            int lineToChangeRanged = -1;
-            int changeCounter = 0;
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+")) {
-                    lineToChange = i;
-                    changeCounter++;
-                } else if (line.contains(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+")) {
-                    lineToChangeRanged = i;
-                    changeCounter++;
-                }
-                if (changeCounter == 2) {
-                    break;
-                }
-            }
-            if (lineToChange != -1 && lineToChangeRanged != -1) {
-                String line = lore.get(lineToChange);
-                String newLine = line.replace(stat.getDamage() + "", nextDamageValue + "");
-                lore.set(lineToChange, newLine);
-
-                String lineRanged = lore.get(lineToChangeRanged);
-                String newLineRanged = lineRanged.replace(stat.getRangedDamage() + "", nextRangedDamageValue + "");
-                lore.set(lineToChangeRanged, newLineRanged);
-                itemMeta.setLore(lore);
-            }
-            itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);
         } else if (type.equals(StatType.PASSIVE)) {
             StatPassive stat = (StatPassive) StatUtils.getStat(itemStack);
 
@@ -297,69 +300,71 @@ public class Enchant {
         StatType type = StatUtils.getStatType(itemStack.getType());
 
         if (type.equals(StatType.HEALTH) || type.equals(StatType.MAGICAL) ||
-                type.equals(StatType.MELEE) || type.equals(StatType.RANGED)) {
-            StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
-            int nextValue = stat.getValue() - getDecreaseValue(stat.getValue());
+                type.equals(StatType.MELEE) || type.equals(StatType.HYBRID)) {
+            if (itemStack.getType().equals(Material.TRIDENT)) {
+                StatHybrid stat = (StatHybrid) StatUtils.getStat(itemStack);
+                int nextDamageValue = stat.getMeleeDamage() - getDecreaseValue(stat.getMeleeDamage());
+                int nextRangedDamageValue = stat.getRangedDamage() - getDecreaseValue(stat.getRangedDamage());
+                int lineToChange = -1;
+                int lineToChangeRanged = -1;
+                int changeCounter = 0;
+                for (int i = 0; i < lore.size(); i++) {
+                    String line = lore.get(i);
+                    if (line.contains(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+")) {
+                        lineToChange = i;
+                        changeCounter++;
+                    } else if (line.contains(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+")) {
+                        lineToChangeRanged = i;
+                        changeCounter++;
+                    }
+                    if (changeCounter == 2) {
+                        break;
+                    }
+                }
+                if (lineToChange != -1 && lineToChangeRanged != -1) {
+                    String line = lore.get(lineToChange);
+                    String newLine = line.replace(stat.getMeleeDamage() + "", nextDamageValue + "");
+                    lore.set(lineToChange, newLine);
 
-            String statString = ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+";
-            if (type.equals(StatType.MAGICAL)) {
-                statString = ChatColor.DARK_AQUA + "✦ Magic Damage: " + ChatColor.GRAY + "+";
-            } else if (type.equals(StatType.MELEE)) {
-                statString = ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+";
-            } else if (type.equals(StatType.RANGED)) {
-                statString = ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+";
-            }
-            int lineToChange = -1;
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(statString)) {
-                    lineToChange = i;
-                    break;
+                    String lineRanged = lore.get(lineToChangeRanged);
+                    String newLineRanged = lineRanged.replace(stat.getRangedDamage() + "", nextRangedDamageValue + "");
+                    lore.set(lineToChangeRanged, newLineRanged);
+                    itemMeta.setLore(lore);
+                }
+                itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);
+            } else {
+                StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
+                int nextValue = stat.getValue() - getDecreaseValue(stat.getValue());
+
+                String statString = ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+";
+                if (type.equals(StatType.MAGICAL)) {
+                    statString = ChatColor.DARK_AQUA + "✦ Magic Damage: " + ChatColor.GRAY + "+";
+                } else if (type.equals(StatType.MELEE)) {
+                    statString = ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+";
+                } else if (type.equals(StatType.HYBRID)) {
+                    statString = ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+";
+                }
+                int lineToChange = -1;
+                for (int i = 0; i < lore.size(); i++) {
+                    String line = lore.get(i);
+                    if (line.contains(statString)) {
+                        lineToChange = i;
+                        break;
+                    }
+                }
+                if (lineToChange != -1) {
+                    String line = lore.get(lineToChange);
+                    String newLine = line.replace(stat.getValue() + "", nextValue + "");
+                    lore.set(lineToChange, newLine);
+                    itemMeta.setLore(lore);
+                }
+
+                if (type.equals(StatType.MELEE)) {
+                    itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextValue);
+                } else if (type.equals(StatType.HYBRID)) {
+                    PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
                 }
             }
-            if (lineToChange != -1) {
-                String line = lore.get(lineToChange);
-                String newLine = line.replace(stat.getValue() + "", nextValue + "");
-                lore.set(lineToChange, newLine);
-                itemMeta.setLore(lore);
-            }
-
-            if (type.equals(StatType.MELEE)) {
-                itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextValue);
-            } else if (type.equals(StatType.RANGED)) {
-                PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
-            }
-        } else if (type.equals(StatType.HYBRID)) {
-            StatHybrid stat = (StatHybrid) StatUtils.getStat(itemStack);
-            int nextDamageValue = stat.getDamage() - getDecreaseValue(stat.getDamage());
-            int nextRangedDamageValue = stat.getRangedDamage() - getDecreaseValue(stat.getRangedDamage());
-            int lineToChange = -1;
-            int lineToChangeRanged = -1;
-            int changeCounter = 0;
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+")) {
-                    lineToChange = i;
-                    changeCounter++;
-                } else if (line.contains(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+")) {
-                    lineToChangeRanged = i;
-                    changeCounter++;
-                }
-                if (changeCounter == 2) {
-                    break;
-                }
-            }
-            if (lineToChange != -1 && lineToChangeRanged != -1) {
-                String line = lore.get(lineToChange);
-                String newLine = line.replace(stat.getDamage() + "", nextDamageValue + "");
-                lore.set(lineToChange, newLine);
-
-                String lineRanged = lore.get(lineToChangeRanged);
-                String newLineRanged = lineRanged.replace(stat.getRangedDamage() + "", nextRangedDamageValue + "");
-                lore.set(lineToChangeRanged, newLineRanged);
-                itemMeta.setLore(lore);
-            }
-            itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, nextDamageValue);
         } else if (type.equals(StatType.PASSIVE)) {
             StatPassive stat = (StatPassive) StatUtils.getStat(itemStack);
 

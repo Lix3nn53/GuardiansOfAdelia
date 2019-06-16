@@ -76,19 +76,21 @@ public class MyInventoryClickEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(InventoryClickEvent event) {
-        if (event.getAction() == InventoryAction.NOTHING) return; //Why does this get called if nothing happens?
-
         Player player = (Player) event.getWhoClicked();
         Inventory clickedInventory = event.getClickedInventory();
 
         ItemStack current = event.getCurrentItem();
-        Material currentType = current.getType();
+        Material currentType = Material.AIR;
+        if (current != null) {
+            currentType = current.getType();
+        }
+
 
         ItemStack cursor = event.getCursor();
-        Material cursorType = cursor.getType();
-
-        //manage armor and offhand attributes for player character
-        armorAndOffhandListener(player, event.getSlotType(), clickedInventory, event, current, currentType, cursor, cursorType);
+        Material cursorType = Material.AIR;
+        if (cursor != null) {
+            cursorType = cursor.getType();
+        }
 
         UUID uuid = player.getUniqueId();
 
@@ -99,6 +101,11 @@ public class MyInventoryClickEvent implements Listener {
 
             if (guardianData.hasActiveCharacter()) {
                 rpgCharacter = guardianData.getActiveCharacter();
+
+                //manage armor and offhand attributes for player character
+                if (event.getAction() != InventoryAction.NOTHING) {
+                    armorAndOffhandListener(player, event.getSlotType(), clickedInventory, event, current, currentType, cursor, cursorType, guardianData, rpgCharacter);
+                }
             }
         }
 
@@ -694,7 +701,7 @@ public class MyInventoryClickEvent implements Listener {
                                             gearLevel = GearLevel.NINE;
                                         }
 
-                                        StatUtils.addRandomStats(clone, gearLevel, ItemTier.MYSTIC);
+                                        StatUtils.addRandomPassiveStats(clone, gearLevel, ItemTier.MYSTIC);
 
                                         for (ItemStack ingredient : ingredients) {
                                             InventoryUtils.removeMaterialFromInventory(player.getInventory(), ingredient.getType(), ingredient.getAmount());
@@ -732,7 +739,7 @@ public class MyInventoryClickEvent implements Listener {
         return false;
     }
 
-    private void armorShiftClickListener(Material currentType, InventoryClickEvent event, Player player) {
+    private void armorShiftClickListener(ItemStack current, Material currentType, InventoryClickEvent event, Player player, GuardianData guardianData, RPGCharacter rpgCharacter) {
         ArmorType armorTypeOfCurrentItem = ArmorType.getArmorType(currentType);
         if (armorTypeOfCurrentItem == null) return;
 
@@ -742,15 +749,18 @@ public class MyInventoryClickEvent implements Listener {
         if (isArmorEquippedOnRelatedSlot(armorTypeOfCurrentItem, player)) {
             //player is already equipping an item on slot we are managing
             if (!equipping) { //removing armor with shift click
-
+                rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
             } //there is no else because you can't equip another armor with shift click if you are already equipping one
         } else if (equipping) { //armor slot is empty & equipping item with shift click
-
-
+            if (StatUtils.doesCharacterMeetRequirements(current, player, rpgCharacter.getRpgClass())) {
+                rpgCharacter.getRpgCharacterStats().onArmorEquip(current);
+            } else {
+                event.setCancelled(true);
+            }
         }
     }
 
-    private void armorNumPressListener(Inventory clickedInventory, InventoryClickEvent event, Player player) {
+    private void armorNumPressListener(ItemStack current, Inventory clickedInventory, InventoryClickEvent event, Player player, GuardianData guardianData, RPGCharacter rpgCharacter) {
         ItemStack hotbarItem = clickedInventory.getItem(event.getHotbarButton()); //item in hotbar slot of pressed num key
         ArmorType armorTypeOfHotBarItem = ArmorType.getArmorType(hotbarItem.getType());
 
@@ -758,21 +768,28 @@ public class MyInventoryClickEvent implements Listener {
             if (isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) {
                 //player is already equipping an item on slot we are managing
                 //player replaces current armor with item on hotbar
-
-
+                if (StatUtils.doesCharacterMeetRequirements(hotbarItem, player, rpgCharacter.getRpgClass())) {
+                    rpgCharacter.getRpgCharacterStats().onArmorEquip(hotbarItem);
+                } else {
+                    event.setCancelled(true);
+                }
             } else {
                 //armor slot is empty
                 //player equips item on hotbar
-
+                if (StatUtils.doesCharacterMeetRequirements(hotbarItem, player, rpgCharacter.getRpgClass())) {
+                    rpgCharacter.getRpgCharacterStats().onArmorEquip(hotbarItem);
+                } else {
+                    event.setCancelled(true);
+                }
             }
         } else if (isAirOrNull(hotbarItem)) { //hot bar item is not an armor & removing currently equipped item from armor slot
-
-        } else if (isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) { //player is already equipping an item on slot we are managing
-
+            if (isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) { //player is already equipping an item on slot we are managing
+                rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
+            }
         }
     }
 
-    private void armorNormalClickListener(ItemStack cursor, Material cursorType, Material currentType, InventoryClickEvent event, Player player) {
+    private void armorNormalClickListener(ItemStack cursor, Material cursorType, ItemStack current, Material currentType, InventoryClickEvent event, Player player, GuardianData guardianData, RPGCharacter rpgCharacter) {
         ArmorType armorTypeOfCursor = ArmorType.getArmorType(cursorType);
         if (armorTypeOfCursor != null) {
             if (event.getRawSlot() != armorTypeOfCursor.getSlot())
@@ -781,50 +798,59 @@ public class MyInventoryClickEvent implements Listener {
             if (isArmorEquippedOnRelatedSlot(armorTypeOfCursor, player)) {
                 //player is already equipping an item on slot we are managing
                 //player replaces current armor with item on cursor
-
+                if (StatUtils.doesCharacterMeetRequirements(cursor, player, rpgCharacter.getRpgClass())) {
+                    rpgCharacter.getRpgCharacterStats().onArmorEquip(cursor);
+                } else {
+                    event.setCancelled(true);
+                }
             } else {
                 //armor slot is empty
                 //player equips item on cursor
-
+                if (StatUtils.doesCharacterMeetRequirements(cursor, player, rpgCharacter.getRpgClass())) {
+                    rpgCharacter.getRpgCharacterStats().onArmorEquip(cursor);
+                } else {
+                    event.setCancelled(true);
+                }
             }
         } else if (isAirOrNull(cursor)) { //cursor is an non-armor item
             ArmorType armorTypeOfCurrentItem = ArmorType.getArmorType(currentType);
             if (armorTypeOfCurrentItem == null) return; //clicked item is not armor
 
             if (event.getRawSlot() == armorTypeOfCurrentItem.getSlot()) { //replace clicked armor with cursor
-
+                rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
             } //else clicked item is armor which is not equipped
         }//no else since nothing happens with cursor with nonArmor item
     }
 
-    private void offhandNormalClickListener(ItemStack cursor, Material cursorType, ItemStack current, Material currentType, InventoryClickEvent event, Player player) {
+    private void offhandNormalClickListener(ItemStack cursor, Material cursorType, ItemStack current, Material currentType, InventoryClickEvent event, Player player, GuardianData guardianData, RPGCharacter rpgCharacter) {
         if (!isAirOrNull(cursor)) { //with item on cursor
             if (cursorType.equals(Material.SHIELD) || currentType.equals(Material.DIAMOND_HOE)) {
-
+                rpgCharacter.getRpgCharacterStats().onOffhandEquip(cursor);
             } else {
                 event.setCancelled(true);
             }
         } else { //without item on cursor
-
+            rpgCharacter.getRpgCharacterStats().onOffhandUnequip(current);
         }
     }
 
-    private void armorAndOffhandListener(Player player, InventoryType.SlotType slotType, Inventory clickedInventory, InventoryClickEvent event, ItemStack current, Material currentType, ItemStack cursor, Material cursorType) {
+    private void armorAndOffhandListener(Player player, InventoryType.SlotType slotType, Inventory clickedInventory, InventoryClickEvent event, ItemStack current,
+                                         Material currentType, ItemStack cursor, Material cursorType, GuardianData guardianData, RPGCharacter rpgCharacter) {
         if (slotType != InventoryType.SlotType.ARMOR && slotType != InventoryType.SlotType.QUICKBAR && slotType != InventoryType.SlotType.CONTAINER)
             return;
         if (!clickedInventory.getType().equals(InventoryType.PLAYER)) return; //Prevents shit in the 2by2 crafting
 
         if (event.getRawSlot() == 45) { //clicked on off hand slot
-            offhandNormalClickListener(cursor, cursorType, current, currentType, event, player);
+            offhandNormalClickListener(cursor, cursorType, current, currentType, event, player, guardianData, rpgCharacter);
             return;
         }
 
         if (event.isShiftClick()) {
-            armorShiftClickListener(currentType, event, player);
+            armorShiftClickListener(current, currentType, event, player, guardianData, rpgCharacter);
         } else if (event.getClick().equals(ClickType.NUMBER_KEY)) {
-            armorNumPressListener(clickedInventory, event, player);
+            armorNumPressListener(current, clickedInventory, event, player, guardianData, rpgCharacter);
         } else { //drag and drop
-            armorNormalClickListener(cursor, cursorType, currentType, event, player);
+            armorNormalClickListener(cursor, cursorType, current, currentType, event, player, guardianData, rpgCharacter);
         }
     }
 }

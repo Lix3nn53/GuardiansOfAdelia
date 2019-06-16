@@ -2,11 +2,11 @@ package io.github.lix3nn53.guardiansofadelia.Items.stats;
 
 public class StatHybrid implements Stat {
 
-    int damage;
-    int rangedDamage;
+    private int meleeDamage;
+    private int rangedDamage;
 
-    public StatHybrid(int damage, int rangedDamage) {
-        this.damage = damage;
+    public StatHybrid(final int meleeDamage, final int rangedDamage) {
+        this.meleeDamage = meleeDamage;
         this.rangedDamage = rangedDamage;
     }
 
@@ -14,7 +14,7 @@ public class StatHybrid implements Stat {
         return rangedDamage;
     }
 
-    public int getDamage() {
-        return damage;
+    public int getMeleeDamage() {
+        return meleeDamage;
     }
 }

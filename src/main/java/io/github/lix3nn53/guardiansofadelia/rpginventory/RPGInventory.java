@@ -366,11 +366,11 @@ public class RPGInventory {
 
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                    rpgCharacterStats.getFire().removeBonus(statPassive.getFire());
-                    rpgCharacterStats.getEarth().removeBonus(statPassive.getEarth());
-                    rpgCharacterStats.getWater().removeBonus(statPassive.getWater());
-                    rpgCharacterStats.getLightning().removeBonus(statPassive.getLightning());
-                    rpgCharacterStats.getWind().removeBonus(statPassive.getWind());
+                    rpgCharacterStats.getFire().removeBonus(statPassive.getFire(), rpgCharacterStats);
+                    rpgCharacterStats.getEarth().removeBonus(statPassive.getEarth(), rpgCharacterStats);
+                    rpgCharacterStats.getWater().removeBonus(statPassive.getWater(), rpgCharacterStats);
+                    rpgCharacterStats.getLightning().removeBonus(statPassive.getLightning(), rpgCharacterStats);
+                    rpgCharacterStats.getWind().removeBonus(statPassive.getWind(), rpgCharacterStats);
                 }
             }
         }
@@ -389,11 +389,11 @@ public class RPGInventory {
 
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                    rpgCharacterStats.getFire().addBonus(statPassive.getFire());
-                    rpgCharacterStats.getEarth().addBonus(statPassive.getEarth());
-                    rpgCharacterStats.getWater().addBonus(statPassive.getWater());
-                    rpgCharacterStats.getLightning().addBonus(statPassive.getLightning());
-                    rpgCharacterStats.getWind().addBonus(statPassive.getWind());
+                    rpgCharacterStats.getFire().addBonus(statPassive.getFire(), rpgCharacterStats);
+                    rpgCharacterStats.getEarth().addBonus(statPassive.getEarth(), rpgCharacterStats);
+                    rpgCharacterStats.getWater().addBonus(statPassive.getWater(), rpgCharacterStats);
+                    rpgCharacterStats.getLightning().addBonus(statPassive.getLightning(), rpgCharacterStats);
+                    rpgCharacterStats.getWind().addBonus(statPassive.getWind(), rpgCharacterStats);
                 }
             }
         }

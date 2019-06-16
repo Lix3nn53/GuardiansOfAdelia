@@ -61,10 +61,12 @@ public class WeaponMagical implements RPGGear {
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
-        PersistentDataContainerUtil.putString("reqClass", rpgClass.getClassCode(), this.itemStack);
+        PersistentDataContainerUtil.putString("reqClass", rpgClass.toString(), this.itemStack);
+
         this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSppedValue());
         this.itemStack = RPGItemUtils.setDamageWhenInMainHand(this.itemStack, damage);
 
+        PersistentDataContainerUtil.putInteger("meleeDamage", damage, this.itemStack);
         PersistentDataContainerUtil.putInteger("magicDamage", magicDamage, this.itemStack);
 
         if (statPassive.getFire() != 0) {

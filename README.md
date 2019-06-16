@@ -14,7 +14,16 @@ My personal spigot(https://www.spigotmc.org/) plugin project to create a MMORPG 
 
 ## Features
 
-Please note that these features are for my personal server. It probably will not work in any other setup. 
+Please note that these features are for my personal server. It probably will not work in any other setup.
+* Characters
+  * You can create up to 4 different characters with 1 minecraft account.
+  * Create new character or select an existing one to play when you join server.
+* Classes
+  * TODO
+* Attributes
+  * TODO
+* Skills
+  * TODO
 * Quests
   * Icons: 
     Quest icons appear on NPCs and disguises themselfs to each player differently. 
@@ -79,7 +88,7 @@ Please note that these features are for my personal server. It probably will not
 * Pets
   * Buy eggs from pet-merchants and equip to spawn your pet. When spawned your pet will follow you
   * There are 2 types of pets. Companions and mounts
-  * Companions have health and damage attributes. They attack your enemies to protect you
+  * Companions have health and meleeDamage attributes. They attack your enemies to protect you
   * Mounts have health, speed and jump attributes. You can mount and ride them to travel faster
   * Your active pet gains experience when you kill monsters. Their attributes increases on level up
   * If your pet dies, you can't spawn another pet for 5 minutes. Your pet repsawns with half hp after 5 minutes

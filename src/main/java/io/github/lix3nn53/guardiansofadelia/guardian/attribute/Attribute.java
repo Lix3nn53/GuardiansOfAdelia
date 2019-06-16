@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.attribute;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+
 public class Attribute {
     private final AttributeType attributeType;
     private int invested;
@@ -9,39 +11,57 @@ public class Attribute {
         this.attributeType = attributeType;
     }
 
-    public AttributeType getAttributeType() {
-        return attributeType;
-    }
-
     public int getInvested() {
         return invested;
     }
 
-    public void setInvested(int invested) {
+    public void setInvested(int invested, RPGCharacterStats rpgCharacterStats) {
         this.invested = invested;
+        onValueChange(rpgCharacterStats);
     }
 
     public int getBonus() {
         return bonus;
     }
 
-    public void setBonus(int bonus) {
-        this.bonus = bonus;
+    public void clearBonus(RPGCharacterStats rpgCharacterStats) {
+        this.bonus = 0;
+        onValueChange(rpgCharacterStats);
     }
 
-    public void removeBonus(int remove) {
+    public void removeBonus(int remove, RPGCharacterStats rpgCharacterStats) {
         this.bonus -= remove;
+        onValueChange(rpgCharacterStats);
     }
 
-    public void addBonus(int add) {
+    public void addBonus(int add, RPGCharacterStats rpgCharacterStats) {
         this.bonus += add;
+        onValueChange(rpgCharacterStats);
     }
 
-    public int getTotal() {
-        return invested + bonus;
+    public void setBonus(int set, RPGCharacterStats rpgCharacterStats) {
+        this.bonus = set;
+        onValueChange(rpgCharacterStats);
     }
 
     public double getIncrement() {
         return (invested + bonus) * attributeType.getIncrement();
+    }
+
+    private void onValueChange(RPGCharacterStats rpgCharacterStats) {
+        switch (attributeType) {
+            case FIRE:
+                break;
+            case LIGHTNING:
+                break;
+            case EARTH:
+                rpgCharacterStats.onHealthChange();
+                break;
+            case WATER:
+                rpgCharacterStats.onManaChange();
+                break;
+            case WIND:
+                break;
+        }
     }
 }

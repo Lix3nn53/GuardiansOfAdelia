@@ -60,23 +60,23 @@ public class MyPlayerItemHeldEvent implements Listener {
                             RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                             if (PersistentDataContainerUtil.hasInteger(oldItem, "fire")) {
                                 int bonus = PersistentDataContainerUtil.getInteger(oldItem, "fire");
-                                rpgCharacterStats.getFire().removeBonus(bonus);
+                                rpgCharacterStats.getFire().removeBonus(bonus, rpgCharacterStats);
                             }
                             if (PersistentDataContainerUtil.hasInteger(oldItem, "water")) {
                                 int bonus = PersistentDataContainerUtil.getInteger(oldItem, "water");
-                                rpgCharacterStats.getWater().removeBonus(bonus);
+                                rpgCharacterStats.getWater().removeBonus(bonus, rpgCharacterStats);
                             }
                             if (PersistentDataContainerUtil.hasInteger(oldItem, "earth")) {
                                 int bonus = PersistentDataContainerUtil.getInteger(oldItem, "earth");
-                                rpgCharacterStats.getEarth().removeBonus(bonus);
+                                rpgCharacterStats.getEarth().removeBonus(bonus, rpgCharacterStats);
                             }
                             if (PersistentDataContainerUtil.hasInteger(oldItem, "lightning")) {
                                 int bonus = PersistentDataContainerUtil.getInteger(oldItem, "lightning");
-                                rpgCharacterStats.getLightning().removeBonus(bonus);
+                                rpgCharacterStats.getLightning().removeBonus(bonus, rpgCharacterStats);
                             }
                             if (PersistentDataContainerUtil.hasInteger(oldItem, "wind")) {
                                 int bonus = PersistentDataContainerUtil.getInteger(oldItem, "wind");
-                                rpgCharacterStats.getWind().removeBonus(bonus);
+                                rpgCharacterStats.getWind().removeBonus(bonus, rpgCharacterStats);
                             }
                         }
                     }
@@ -123,23 +123,23 @@ public class MyPlayerItemHeldEvent implements Listener {
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                         if (PersistentDataContainerUtil.hasInteger(item, "fire")) {
                             int bonus = PersistentDataContainerUtil.getInteger(item, "fire");
-                            rpgCharacterStats.getFire().addBonus(bonus);
+                            rpgCharacterStats.getFire().addBonus(bonus, rpgCharacterStats);
                         }
                         if (PersistentDataContainerUtil.hasInteger(item, "water")) {
                             int bonus = PersistentDataContainerUtil.getInteger(item, "water");
-                            rpgCharacterStats.getWater().addBonus(bonus);
+                            rpgCharacterStats.getWater().addBonus(bonus, rpgCharacterStats);
                         }
                         if (PersistentDataContainerUtil.hasInteger(item, "earth")) {
                             int bonus = PersistentDataContainerUtil.getInteger(item, "earth");
-                            rpgCharacterStats.getEarth().addBonus(bonus);
+                            rpgCharacterStats.getEarth().addBonus(bonus, rpgCharacterStats);
                         }
                         if (PersistentDataContainerUtil.hasInteger(item, "lightning")) {
                             int bonus = PersistentDataContainerUtil.getInteger(item, "lightning");
-                            rpgCharacterStats.getLightning().addBonus(bonus);
+                            rpgCharacterStats.getLightning().addBonus(bonus, rpgCharacterStats);
                         }
                         if (PersistentDataContainerUtil.hasInteger(item, "wind")) {
                             int bonus = PersistentDataContainerUtil.getInteger(item, "wind");
-                            rpgCharacterStats.getWind().addBonus(bonus);
+                            rpgCharacterStats.getWind().addBonus(bonus, rpgCharacterStats);
                         }
                     }
                 } else {

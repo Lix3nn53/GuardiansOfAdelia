@@ -2,9 +2,11 @@ package io.github.lix3nn53.guardiansofadelia.Items.stats;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -16,7 +18,6 @@ public class StatUtils {
         Material mat = item.getType();
         StatType type = getStatType(mat);
 
-        List<String> lore = item.getItemMeta().getLore();
         if (type.equals(StatType.HEALTH)) {
             if (PersistentDataContainerUtil.hasInteger(item, "health")) {
                 int health = PersistentDataContainerUtil.getInteger(item, "health");
@@ -25,32 +26,27 @@ public class StatUtils {
         } else if (type.equals(StatType.HYBRID)) {
             int melee = 0;
             int ranged = 0;
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    melee = currentValue;
-                    break;
-                }
+            if (PersistentDataContainerUtil.hasInteger(item, "meleeDamage")) {
+                melee = PersistentDataContainerUtil.getInteger(item, "meleeDamage");
             }
             if (PersistentDataContainerUtil.hasInteger(item, "rangedDamage")) {
                 ranged = PersistentDataContainerUtil.getInteger(item, "rangedDamage");
             }
             return new StatHybrid(melee, ranged);
         } else if (type.equals(StatType.MAGICAL)) {
-            if (PersistentDataContainerUtil.hasInteger(item, "magicDamage")) {
-                int magicDamage = PersistentDataContainerUtil.getInteger(item, "magicDamage");
-                return new StatOneType(magicDamage);
+            int melee = 0;
+            int magical = 0;
+            if (PersistentDataContainerUtil.hasInteger(item, "meleeDamage")) {
+                melee = PersistentDataContainerUtil.getInteger(item, "meleeDamage");
             }
+            if (PersistentDataContainerUtil.hasInteger(item, "magicDamage")) {
+                magical = PersistentDataContainerUtil.getInteger(item, "magicDamage");
+            }
+            return new StatMagical(melee, magical);
         } else if (type.equals(StatType.MELEE)) {
-            for (int i = 0; i < lore.size(); i++) {
-                String line = lore.get(i);
-                if (line.contains(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+")) {
-                    String currentValueString = line.replace(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+", "");
-                    int currentValue = Integer.parseInt(currentValueString);
-                    return new StatOneType(currentValue);
-                }
+            if (PersistentDataContainerUtil.hasInteger(item, "meleeDamage")) {
+                int damage = PersistentDataContainerUtil.getInteger(item, "meleeDamage");
+                return new StatOneType(damage);
             }
         } else if (type.equals(StatType.PASSIVE)) {
             int fire = 0;
@@ -76,11 +72,6 @@ public class StatUtils {
             }
 
             return new StatPassive(fire, water, earth, lightning, wind);
-        } else if (type.equals(StatType.RANGED)) {
-            if (PersistentDataContainerUtil.hasInteger(item, "rangedDamage")) {
-                int rangedDamage = PersistentDataContainerUtil.getInteger(item, "rangedDamage");
-                return new StatOneType(rangedDamage);
-            }
         }
         return null;
     }
@@ -89,9 +80,7 @@ public class StatUtils {
         StatType type = null;
         if (mat.equals(Material.DIAMOND_AXE) || mat.equals(Material.DIAMOND_PICKAXE) || mat.equals(Material.DIAMOND_SWORD) || mat.equals(Material.DIAMOND_HOE)) {
             type = StatType.MELEE;
-        } else if (mat.equals(Material.BOW)) {
-            type = StatType.RANGED;
-        } else if (mat.equals(Material.TRIDENT)) {
+        } else if (mat.equals(Material.TRIDENT) || mat.equals(Material.BOW) || mat.equals(Material.CROSSBOW)) {
             type = StatType.HYBRID;
         } else if (mat.equals(Material.DIAMOND_SHOVEL)) {
             type = StatType.MAGICAL;
@@ -149,7 +138,7 @@ public class StatUtils {
                 mat.equals(Material.IRON_SWORD) || mat.equals(Material.SHEARS);
     }
 
-    public static void addRandomStats(ItemStack itemStack, GearLevel gearLevel, ItemTier itemTier) {
+    public static void addRandomPassiveStats(ItemStack itemStack, GearLevel gearLevel, ItemTier itemTier) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasLore()) {
             if (hasStatType(itemStack.getType())) {
@@ -180,5 +169,25 @@ public class StatUtils {
                 itemStack.setItemMeta(itemMeta);
             }
         }
+    }
+
+    public static boolean doesCharacterMeetRequirements(ItemStack itemStack, Player player, RPGClass rpgClass) {
+        if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
+            int reqLevel = PersistentDataContainerUtil.getInteger(itemStack, "reqLevel");
+            if (player.getLevel() < reqLevel) {
+                player.sendMessage("Required level for this weapon is " + reqLevel);
+                return false;
+            }
+        }
+
+        if (PersistentDataContainerUtil.hasString(itemStack, "reqClass")) {
+            String reqClassString = PersistentDataContainerUtil.getString(itemStack, "reqClass");
+            RPGClass reqClass = RPGClass.valueOf(reqClassString);
+            if (!rpgClass.equals(reqClass)) {
+                player.sendMessage("Required class for this weapon is " + reqClass.getClassString());
+                return false;
+            }
+        }
+        return true;
     }
 }

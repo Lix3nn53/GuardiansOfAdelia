@@ -14,13 +14,14 @@ public final class RPGCharacter {
 
     private final RPGInventory rpgInventory = new RPGInventory();
     private final RPGClass rpgClass;
-    RPGCharacterStats rpgCharacterStats = new RPGCharacterStats();
+    private final RPGCharacterStats rpgCharacterStats;
     private List<Quest> questList = new ArrayList<>();
     private List<Integer> turnedInQuests = new ArrayList<Integer>();
     private Job job;
     private ChatTag chatTag = ChatTag.NOVICE;
 
-    public RPGCharacter(RPGClass rpgClass) {
+    public RPGCharacter(RPGClass rpgClass, Player player) {
+        rpgCharacterStats = new RPGCharacterStats(player);
         this.rpgClass = rpgClass;
     }
 

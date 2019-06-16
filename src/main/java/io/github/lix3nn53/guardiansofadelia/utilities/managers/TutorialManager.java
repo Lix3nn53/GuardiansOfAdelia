@@ -29,7 +29,7 @@ public class TutorialManager {
     public static void startTutorial(Player player, RPGClass rpgClass, int charNo, Location startLocation) {
         if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
-            RPGCharacter rpgCharacter = new RPGCharacter(rpgClass);
+            RPGCharacter rpgCharacter = new RPGCharacter(rpgClass, player);
             guardianData.setActiveCharacter(rpgCharacter, charNo);
 
             int totalExpForLevel = RPGCharacterExperienceManager.getTotalExpForLevel(90);
@@ -45,11 +45,13 @@ public class TutorialManager {
             player.sendMessage(ChatColor.DARK_PURPLE + "---------- " + ChatColor.GRAY + "Fall of the Adelia" + ChatColor.DARK_PURPLE + " ----------");
             player.sendMessage("");
 
-            rpgCharacterStats.setCurrentHealth(rpgCharacterStats.getTotalMaxHealth());
-            rpgCharacterStats.setCurrentMana(rpgCharacterStats.getTotalMaxMana());
-
             Quest tutorialStartQuest = QuestNPCManager.getQuestCopyById(1);
             rpgCharacter.acceptQuest(tutorialStartQuest, player);
+
+            rpgCharacter.getRpgCharacterStats().recalculateEquipmentBonuses(rpgCharacter.getRpgInventory(), rpgCharacter.getRpgClass());
+
+            rpgCharacterStats.setCurrentHealth(rpgCharacterStats.getTotalMaxHealth());
+            rpgCharacterStats.setCurrentMana(rpgCharacterStats.getTotalMaxMana());
         }
     }
 
