@@ -53,6 +53,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
         if (target instanceof LivingEntity) {
             boolean isEventCanceled = false;
             boolean isAttackerPlayer = false;
+            boolean isMagicAttack = false;
             LivingEntity livingTarget = (LivingEntity) target;
 
             //DAMAGER
@@ -61,7 +62,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, false, false);
                 isAttackerPlayer = true;
             } else if (damager instanceof Projectile) { //projectile is attacker
-                boolean isMagic = false;
                 Projectile projectile = (Projectile) damager;
                 if (PersistentDataContainerUtil.hasInteger(projectile, "rangedDamage")) {
                     int rangedDamage = PersistentDataContainerUtil.getInteger(projectile, "rangedDamage");
@@ -69,12 +69,12 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 } else if (PersistentDataContainerUtil.hasInteger(projectile, "magicDamage")) {
                     int magicDamage = PersistentDataContainerUtil.getInteger(projectile, "magicDamage");
                     event.setDamage(magicDamage);
-                    isMagic = true;
+                    isMagicAttack = true;
                 }
                 ProjectileSource shooter = projectile.getShooter();
                 if (shooter instanceof Player) {
                     Player player = (Player) shooter;
-                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, true, isMagic);
+                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, true, isMagicAttack);
                     isAttackerPlayer = true;
                 }
             } else if (damager instanceof LivingEntity) {
@@ -110,6 +110,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                                 RPGCharacterStats targetRpgCharacterStats = activeCharacter.getRpgCharacterStats();
                                 int totalDefense = targetRpgCharacterStats.getTotalDefense();
+
+                                if (isMagicAttack) {
+                                    totalDefense = targetRpgCharacterStats.getTotalMagicDefense();
+                                }
+
                                 double reduction = (1 - (totalDefense / (totalDefense + 3000.0))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
 
                                 damage = damage * reduction;
@@ -239,6 +244,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                             RPGCharacterStats targetRpgCharacterStats = targetActiveCharacter.getRpgCharacterStats();
                             int totalDefense = targetRpgCharacterStats.getTotalDefense();
+
+                            if (isMagicAttack) {
+                                totalDefense = targetRpgCharacterStats.getTotalMagicDefense();
+                            }
+
                             double reduction = (1 - (totalDefense / (totalDefense + 3000.0))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
 
                             damage = damage * reduction;

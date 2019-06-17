@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -18,7 +19,7 @@ import java.util.UUID;
 
 public class MyEntityShootBowEvent implements Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(EntityShootBowEvent event) {
         ItemStack itemInMainHand = event.getBow();
         if (itemInMainHand != null) {
@@ -61,6 +62,12 @@ public class MyEntityShootBowEvent implements Listener {
                                 float force = event.getForce();
                                 rangedDamage = (int) ((rangedDamage * force) + 0.5);
                                 PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, projectile);
+                            }
+
+                            //add arrow
+                            if (type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
+                                ItemStack arrow = OtherItems.getArrow(2);
+                                player.getInventory().setItemInOffHand(arrow);
                             }
                         }
                     }

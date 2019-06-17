@@ -1,13 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.PlayerTridentThrowManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -15,7 +16,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.UUID;
@@ -26,44 +26,68 @@ public class MyProjectileLaunchEvent implements Listener {
     public void onEvent(ProjectileLaunchEvent event) {
         Projectile projectile = event.getEntity();
         ProjectileSource shooter = projectile.getShooter();
+
         if (shooter instanceof Player) {
             Player player = (Player) shooter;
 
-            PlayerInventory inventory = player.getInventory();
-            ItemStack item = inventory.getItemInMainHand();
+            ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+            Material type = itemInMainHand.getType();
 
-            if (item.getType().equals(Material.TRIDENT)) {
-                UUID uuid = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (type.equals(Material.TRIDENT)) {
+                //trident return cooldown
+                if (PlayerTridentThrowManager.canThrow(player)) {
+                    PlayerTridentThrowManager.onPlayerTridentThrow(player);
+                    player.getInventory().setItemInMainHand(itemInMainHand);
+                } else {
+                    event.setCancelled(true);
+                    player.sendMessage(ChatColor.RED + "You can't throw your spear again before it returns back");
+                    return;
+                }
+
+                UUID uniqueId = player.getUniqueId();
+                if (GuardianDataManager.hasGuardianData(uniqueId)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                        RPGClass rpgClass = activeCharacter.getRpgClass();
-                        if (rpgClass.equals(RPGClass.MONK)) {
-                            if (PlayerTridentThrowManager.canThrow(player)) {
-                                PlayerTridentThrowManager.onPlayerTridentThrow(player);
-                                inventory.setItemInMainHand(item);
-                            } else {
+
+                        if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "reqLevel")) {
+                            int reqLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "reqLevel");
+                            if (player.getLevel() < reqLevel) {
                                 event.setCancelled(true);
-                                player.sendMessage(ChatColor.RED + "You can't throw your spear again before it returns back");
+                                player.sendMessage("Required level for this weapon is " + reqLevel);
+                                return;
                             }
-                        } else {
-                            event.setCancelled(true);
+                        }
+
+                        RPGClass rpgClass = activeCharacter.getRpgClass();
+
+                        if (PersistentDataContainerUtil.hasString(itemInMainHand, "reqClass")) {
+                            String reqClassString = PersistentDataContainerUtil.getString(itemInMainHand, "reqClass");
+                            RPGClass reqClass = RPGClass.valueOf(reqClassString);
+                            if (!rpgClass.equals(reqClass)) {
+                                event.setCancelled(true);
+                                player.sendMessage("Required class for this weapon is " + reqClass.getClassString());
+                                return;
+                            }
+                        }
+
+                        if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "rangedDamage")) {
+                            int rangedDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "rangedDamage");
+                            PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, projectile);
                         }
                     }
                 }
-            } else if (item.getType().equals(Material.BOW) || item.getType().equals(Material.CROSSBOW)) {
-                UUID uuid = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-                    if (guardianData.hasActiveCharacter()) {
-                        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                        RPGClass rpgClass = activeCharacter.getRpgClass();
-                        if (rpgClass.equals(RPGClass.ARCHER) || rpgClass.equals(RPGClass.HUNTER)) {
-                            ItemStack arrow = OtherItems.getArrow(2);
-                            inventory.setItemInOffHand(arrow);
-                        }
-                    }
+            }
+        } else if (shooter instanceof LivingEntity) {
+            LivingEntity livingEntity = (LivingEntity) shooter;
+
+            ItemStack itemInMainHand = livingEntity.getEquipment().getItemInMainHand();
+            Material type = itemInMainHand.getType();
+
+            if (type.equals(Material.TRIDENT)) {
+                if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "rangedDamage")) {
+                    int rangedDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "rangedDamage");
+                    PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, projectile);
                 }
             }
         }

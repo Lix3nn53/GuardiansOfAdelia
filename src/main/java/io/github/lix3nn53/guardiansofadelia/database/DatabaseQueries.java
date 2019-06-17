@@ -509,7 +509,7 @@ public class DatabaseQueries {
             ResultSet resultSet = pst.executeQuery();
 
             if (resultSet.next()) {
-                String rpgClassString = resultSet.getString("rpgClass");
+                String rpgClassString = resultSet.getString("rpg_class");
                 rpgClass = RPGClass.valueOf(rpgClassString);
             }
             resultSet.close();

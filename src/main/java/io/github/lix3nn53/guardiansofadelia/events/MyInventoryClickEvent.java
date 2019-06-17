@@ -309,6 +309,8 @@ public class MyInventoryClickEvent implements Listener {
                     characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.WARRIOR);
                 } else if (currentName.contains("Monk")) {
                     characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.MONK);
+                } else if (currentName.contains("Hunter")) {
+                    characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.HUNTER);
                 }
             } else if (title.contains("Selection")) {
                 String charNoString = title.replace(ChatColor.YELLOW + "Character ", "");
