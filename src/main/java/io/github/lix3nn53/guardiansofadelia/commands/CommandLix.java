@@ -83,8 +83,11 @@ public class CommandLix implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("debug")) {
-                String message = ChatColor.GREEN + "Just a simple test message!";
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
+                ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+                if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "meleeDamage")) {
+                    int meleeDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "meleeDamage");
+                    player.sendMessage("melee damage: " + meleeDamage);
+                }
             } else if (args[0].equals("weapon")) {
                 if (args.length == 3) {
                     RPGClass rpgClass = RPGClass.valueOf(args[1]);

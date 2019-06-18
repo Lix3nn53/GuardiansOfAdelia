@@ -17,7 +17,7 @@ class Tridents {
         int customModelDataId = 10000001;
         int level = 1;
         RPGClass rpgClass = RPGClass.MONK;
-        int meleeDamage = (int) ((8 * bonusPercent) + 0.5);
+        int meleeDamage = 8;
         int rangedDamage = 6; //do not add bonusPercent to rangedDamage because WeaponRanged constructor already does that
 
         AttackSpeed attackSpeed = AttackSpeed.NORMAL;
@@ -77,6 +77,8 @@ class Tridents {
             meleeDamage = 1600;
             rangedDamage = 1280;
         }
+
+        meleeDamage = (int) ((meleeDamage * bonusPercent) + 0.5); //add bonusPercent to meleeDamage because WeaponRanged constructor adds only to rangedDamage
 
         final WeaponRanged weapon = new WeaponRanged(name, tier, itemTag, material, customModelDataId, level, rpgClass, meleeDamage, rangedDamage, bonusPercent,
                 attackSpeed, minStatValue, maxStatValue, minNumberofStats);

@@ -19,9 +19,6 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.List;
 
 
 public class TutorialManager {
@@ -68,52 +65,29 @@ public class TutorialManager {
         ItemStack leggings = Armors.getArmor(ArmorType.LEGGINGS, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
         ItemStack boots = Armors.getArmor(ArmorType.BOOTS, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
 
-        changeClassOfItemToTutorialClass(helmet, rpgClass);
-        changeClassOfItemToTutorialClass(chest, rpgClass);
-        changeClassOfItemToTutorialClass(leggings, rpgClass);
-        changeClassOfItemToTutorialClass(boots, rpgClass);
-
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(leggings);
         player.getInventory().setBoots(boots);
 
         ItemStack mainHand = Weapons.getWeapon(rpgClass, 10, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        changeClassOfItemToTutorialClass(mainHand, rpgClass);
         player.getInventory().setItem(5, mainHand);
 
         if (rpgClass.equals(RPGClass.KNIGHT)) {
             ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
-            changeClassOfItemToTutorialClass(shield, rpgClass);
             player.getInventory().setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
             ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
-            changeClassOfItemToTutorialClass(shield, rpgClass);
             player.getInventory().setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.ROGUE)) {
             player.getInventory().setItemInOffHand(mainHand);
         }
 
         ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(10, 3);
-        hpPotion.setAmount(20);
+        InventoryUtils.giveItemToPlayer(player, hpPotion);
         InventoryUtils.giveItemToPlayer(player, hpPotion);
         ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(10, 3);
-        manaPotion.setAmount(20);
         InventoryUtils.giveItemToPlayer(player, manaPotion);
-    }
-
-    private static void changeClassOfItemToTutorialClass(ItemStack itemStack, RPGClass rpgClass) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        List<String> lore = itemMeta.getLore();
-        for (int i = 0; i < lore.size(); i++) {
-            String classLore = lore.get(i);
-            if (classLore.contains("Required Class")) {
-                classLore = ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassColor() + "Tutorial" + rpgClass.getClassStringNoColor();
-                lore.set(i, classLore);
-                break;
-            }
-        }
-        itemMeta.setLore(lore);
-        itemStack.setItemMeta(itemMeta);
+        InventoryUtils.giveItemToPlayer(player, manaPotion);
     }
 }

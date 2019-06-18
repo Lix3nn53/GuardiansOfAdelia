@@ -17,7 +17,9 @@ import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.FakeIndicator;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -99,7 +101,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     Player playerTarget = (Player) target;
 
                     if (!isAttackerPlayer) { //we are managing this on onPlayerAttackEntity method if attacker is player
-                        //custom defense formula if target is another player
+                        //custom defense formula if target is another player attacked by mob
                         UUID uniqueId = playerTarget.getUniqueId();
                         if (GuardianDataManager.hasGuardianData(uniqueId)) {
                             GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
@@ -115,7 +117,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                     totalDefense = targetRpgCharacterStats.getTotalMagicDefense();
                                 }
 
-                                double reduction = (1 - (totalDefense / (totalDefense + 3000.0))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
+                                double reduction = getDefenseReduction(totalDefense);
 
                                 damage = damage * reduction;
 
@@ -240,11 +242,17 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     }
                 }
 
+                Location targetLocation = livingTarget.getLocation();
+
                 //add critical damage right before defense
                 double totalCriticalChance = rpgCharacterStats.getTotalCriticalChance();
                 double random = Math.random();
+                boolean isCritical = false;
                 if (random <= totalCriticalChance) {
-                    damage = damage * 1.6;
+                    damage = damage * 1.6D;
+                    isCritical = true;
+                    Particle particle = Particle.CRIT;
+                    targetLocation.getWorld().spawnParticle(particle, targetLocation.clone().add(0,0.25,0), 6);
                 }
 
                 //custom defense formula if target is another player
@@ -264,7 +272,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 totalDefense = targetRpgCharacterStats.getTotalMagicDefense();
                             }
 
-                            double reduction = (1 - (totalDefense / (totalDefense + 3000.0))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
+                            double reduction = getDefenseReduction(totalDefense);
 
                             damage = damage * reduction;
 
@@ -278,7 +286,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 double finalDamage = event.getFinalDamage();
 
                 //show bossbar
-                HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5), isPet);
+                HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5), isPet, isCritical);
                 HealthBarManager.showToPlayerFor10Seconds(player, healthBar);
 
                 //progress deal damage tasks
@@ -318,7 +326,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     if (livingTarget.getType().equals(EntityType.COW) || livingTarget.getType().equals(EntityType.SHEEP)) {
                         ItemStack itemStack = GatheringType.HUNTING.onHunt(player);
                         if (itemStack != null) {
-                            Item item = livingTarget.getWorld().dropItemNaturally(livingTarget.getLocation().add(0, 0.5, 0), itemStack);
+                            Item item = livingTarget.getWorld().dropItemNaturally(targetLocation.add(0, 0.5, 0), itemStack);
                             DropManager.setItem(item.getItemStack(), player);
                         }
                     }
@@ -326,8 +334,14 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 DropManager.onPlayerDealDamageToMob(player, livingTarget, (int) (finalDamage + 0.5));
 
                 //indicator
-                String text = ChatColor.RED.toString() + (int) (finalDamage + 0.5) + " ➹";
-                FakeIndicator.showPlayer(player, text, livingTarget.getLocation());
+                ChatColor indicatorColor = ChatColor.RED;
+                String indicatorIcon = "➹";
+                if (isCritical) {
+                    indicatorColor = ChatColor.GOLD;
+                    indicatorIcon = "⚝";
+                }
+                String text = indicatorColor.toString() + (int) (finalDamage + 0.5) + " " + indicatorIcon;
+                FakeIndicator.showPlayer(player, text, targetLocation);
             }
         }
         return false;
@@ -338,5 +352,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
      */
     private boolean isAirOrNull(ItemStack item) {
         return item == null || item.getType().equals(Material.AIR);
+    }
+
+    private double getDefenseReduction(int totalDefense) {
+        return  (1 - (totalDefense / (totalDefense + 3000.0))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
     }
 }

@@ -10,7 +10,13 @@ public class Test {
 
     public static void main(String[] args) {
 
-        playerDamages.put('A', 1D);
+        double damage = 2000;
+
+        damage = damage * 1.6;
+
+        System.out.println("damage: " + damage);
+
+       /* playerDamages.put('A', 1D);
         playerDamages.put('S', 1D);
         playerDamages.put('D', 1D);
         playerDamages.put('F', 1D);
@@ -38,7 +44,7 @@ public class Test {
         int experience = 0;
         for (int level = 1; level <= 0; level++) {
             System.out.println("Level 1123213123123123123123");
-        }
+        }*/
     }
 
     private static double expFormula(int level) {
