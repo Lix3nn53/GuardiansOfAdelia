@@ -564,4 +564,8 @@ public class RPGCharacterStats {
     private boolean isAirOrNull(ItemStack item) {
         return item == null || item.getType().equals(Material.AIR);
     }
+
+    public int getDamageBonusFromOffhand() {
+        return damageBonusFromOffhand;
+    }
 }

@@ -229,7 +229,22 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         }
 
                         damage += rpgCharacterStats.getFire().getIncrement(); //add to weapon damage
+
+                        //add damage bonus from offhand
+                        ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
+                        if (!isAirOrNull(itemInMainHand)) {
+                            if (itemInOffHand.getType().equals(Material.DIAMOND_HOE)) {
+                                damage += rpgCharacterStats.getDamageBonusFromOffhand();
+                            }
+                        }
                     }
+                }
+
+                //add critical damage right before defense
+                double totalCriticalChance = rpgCharacterStats.getTotalCriticalChance();
+                double random = Math.random();
+                if (random <= totalCriticalChance) {
+                    damage = damage * 1.6;
                 }
 
                 //custom defense formula if target is another player
@@ -316,5 +331,12 @@ public class MyEntityDamageByEntityEvent implements Listener {
             }
         }
         return false;
+    }
+
+    /**
+     * A utility method to support versions that use null or air ItemStacks.
+     */
+    private boolean isAirOrNull(ItemStack item) {
+        return item == null || item.getType().equals(Material.AIR);
     }
 }

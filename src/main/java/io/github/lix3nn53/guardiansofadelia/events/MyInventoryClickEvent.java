@@ -826,8 +826,12 @@ public class MyInventoryClickEvent implements Listener {
 
     private void offhandNormalClickListener(ItemStack cursor, Material cursorType, ItemStack current, Material currentType, InventoryClickEvent event, Player player, GuardianData guardianData, RPGCharacter rpgCharacter) {
         if (!isAirOrNull(cursor)) { //with item on cursor
-            if (cursorType.equals(Material.SHIELD) || currentType.equals(Material.DIAMOND_HOE)) {
-                rpgCharacter.getRpgCharacterStats().onOffhandEquip(cursor);
+            if (cursorType.equals(Material.SHIELD) || cursorType.equals(Material.DIAMOND_HOE)) {
+                if (StatUtils.doesCharacterMeetRequirements(cursor, player, rpgCharacter.getRpgClass())) {
+                    rpgCharacter.getRpgCharacterStats().onOffhandEquip(cursor);
+                } else {
+                    event.setCancelled(true);
+                }
             } else {
                 event.setCancelled(true);
             }

@@ -47,6 +47,7 @@ public class CharacterInfoSlot {
                 int expReq = RPGCharacterExperienceManager.getRequiredExperience(level);
                 int maxHealth = (int) (player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + 0.5);
                 int health = (int) (player.getHealth() + 0.5);
+                double criticalChance = rpgCharacterStats.getTotalCriticalChance() * 100;
 
                 skullMeta.setLore(new ArrayList() {{
                     add("");
@@ -61,7 +62,7 @@ public class CharacterInfoSlot {
                     add(ChatColor.DARK_AQUA + "✦ Magic Damage: " + ChatColor.GRAY + rpgCharacterStats.getTotalMagicDamage(player, rpgClass));
                     add(ChatColor.AQUA + "■ Defense: " + ChatColor.GRAY + rpgCharacterStats.getTotalDefense());
                     add(ChatColor.BLUE + "✦ Magic Defense: " + ChatColor.GRAY + rpgCharacterStats.getTotalMagicDefense());
-                    add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + rpgCharacterStats.getTotalCriticalChance() + "%");
+                    add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + criticalChance + "%");
                     add(ChatColor.YELLOW + "----------------");
                     add(ChatColor.RED + "☄" + ChatColor.GRAY + " Fire: " + rpgCharacterStats.getFire().getBonus() + " (+" + rpgCharacterStats.getFire().getInvested() + ")");
                     add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + rpgCharacterStats.getWater().getBonus() + " (+" + rpgCharacterStats.getWater().getInvested() + ")");
