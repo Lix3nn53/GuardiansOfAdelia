@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities;
 
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -147,5 +148,26 @@ public class InventoryUtils {
             }
         }
         return false;
+    }
+
+    public static boolean isArmorEquippedOnRelatedSlot(ArmorType armorTypeOfCurrentItem, Player player) {
+        if (armorTypeOfCurrentItem.equals(ArmorType.HELMET)) {
+            return !isAirOrNull(player.getInventory().getHelmet());
+        } else if (armorTypeOfCurrentItem.equals(ArmorType.CHESTPLATE)) {
+            return !isAirOrNull(player.getInventory().getChestplate());
+        } else if (armorTypeOfCurrentItem.equals(ArmorType.LEGGINGS)) {
+            return !isAirOrNull(player.getInventory().getLeggings());
+        } else if (armorTypeOfCurrentItem.equals(ArmorType.BOOTS)) {
+            return !isAirOrNull(player.getInventory().getBoots());
+        }
+
+        return false;
+    }
+
+    /**
+     * A utility method to support versions that use null or air ItemStacks.
+     */
+    public static boolean isAirOrNull(ItemStack item) {
+        return item == null || item.getType().equals(Material.AIR);
     }
 }

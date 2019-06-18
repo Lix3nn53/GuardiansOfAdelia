@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,7 +24,7 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
         ItemStack mainHandItem = event.getMainHandItem();
         ItemStack offHandItem = event.getOffHandItem();
 
-        if (!isAirOrNull(mainHandItem)) {
+        if (!InventoryUtils.isAirOrNull(mainHandItem)) {
             Material mainHandItemType = mainHandItem.getType();
 
             if (mainHandItemType.equals(Material.SHIELD) || mainHandItemType.equals(Material.DIAMOND_HOE)) {
@@ -36,7 +37,7 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
-                        if (!isAirOrNull(offHandItem)) {
+                        if (!InventoryUtils.isAirOrNull(offHandItem)) {
                             rpgCharacter.getRpgCharacterStats().onOffhandUnequip(offHandItem);
                         }
 
@@ -51,7 +52,7 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
                 event.setCancelled(true);
             }
         } else {
-            if (!isAirOrNull(offHandItem)) {
+            if (!InventoryUtils.isAirOrNull(offHandItem)) {
                 Material offHandItemType = offHandItem.getType();
 
                 if (offHandItemType.equals(Material.SHIELD) || offHandItemType.equals(Material.DIAMOND_HOE)) {
@@ -72,12 +73,5 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
                 }
             }
         }
-    }
-
-    /**
-     * A utility method to support versions that use null or air ItemStacks.
-     */
-    private boolean isAirOrNull(ItemStack item) {
-        return item == null || item.getType().equals(Material.AIR);
     }
 }

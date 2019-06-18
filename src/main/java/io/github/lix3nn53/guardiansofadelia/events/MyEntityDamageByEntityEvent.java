@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.FakeIndicator;
 import org.bukkit.ChatColor;
@@ -234,7 +235,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                         //add damage bonus from offhand
                         ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
-                        if (!isAirOrNull(itemInMainHand)) {
+                        if (!InventoryUtils.isAirOrNull(itemInMainHand)) {
                             if (itemInOffHand.getType().equals(Material.DIAMOND_HOE)) {
                                 damage += rpgCharacterStats.getDamageBonusFromOffhand();
                             }
@@ -345,13 +346,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
             }
         }
         return false;
-    }
-
-    /**
-     * A utility method to support versions that use null or air ItemStacks.
-     */
-    private boolean isAirOrNull(ItemStack item) {
-        return item == null || item.getType().equals(Material.AIR);
     }
 
     private double getDefenseReduction(int totalDefense) {

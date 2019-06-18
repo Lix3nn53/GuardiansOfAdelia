@@ -720,27 +720,6 @@ public class MyInventoryClickEvent implements Listener {
         }
     }
 
-    /**
-     * A utility method to support versions that use null or air ItemStacks.
-     */
-    private boolean isAirOrNull(ItemStack item) {
-        return item == null || item.getType().equals(Material.AIR);
-    }
-
-    private boolean isArmorEquippedOnRelatedSlot(ArmorType armorTypeOfCurrentItem, Player player) {
-        if (armorTypeOfCurrentItem.equals(ArmorType.HELMET)) {
-            return !isAirOrNull(player.getInventory().getHelmet());
-        } else if (armorTypeOfCurrentItem.equals(ArmorType.CHESTPLATE)) {
-            return !isAirOrNull(player.getInventory().getChestplate());
-        } else if (armorTypeOfCurrentItem.equals(ArmorType.LEGGINGS)) {
-            return !isAirOrNull(player.getInventory().getLeggings());
-        } else if (armorTypeOfCurrentItem.equals(ArmorType.BOOTS)) {
-            return !isAirOrNull(player.getInventory().getBoots());
-        }
-
-        return false;
-    }
-
     private void armorShiftClickListener(ItemStack current, Material currentType, InventoryClickEvent event, Player player, GuardianData guardianData, RPGCharacter rpgCharacter) {
         ArmorType armorTypeOfCurrentItem = ArmorType.getArmorType(currentType);
         if (armorTypeOfCurrentItem == null) return;
@@ -748,7 +727,7 @@ public class MyInventoryClickEvent implements Listener {
         boolean equipping = true; //removing otherwise
         if (event.getRawSlot() == armorTypeOfCurrentItem.getSlot()) equipping = false;
 
-        if (isArmorEquippedOnRelatedSlot(armorTypeOfCurrentItem, player)) {
+        if (InventoryUtils.isArmorEquippedOnRelatedSlot(armorTypeOfCurrentItem, player)) {
             //player is already equipping an item on slot we are managing
             if (!equipping) { //removing armor with shift click
                 rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
@@ -767,10 +746,11 @@ public class MyInventoryClickEvent implements Listener {
         ArmorType armorTypeOfHotBarItem = ArmorType.getArmorType(hotbarItem.getType());
 
         if (armorTypeOfHotBarItem != null) {
-            if (isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) {
+            if (InventoryUtils.isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) {
                 //player is already equipping an item on slot we are managing
                 //player replaces current armor with item on hotbar
                 if (StatUtils.doesCharacterMeetRequirements(hotbarItem, player, rpgCharacter.getRpgClass())) {
+                    rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
                     rpgCharacter.getRpgCharacterStats().onArmorEquip(hotbarItem);
                 } else {
                     event.setCancelled(true);
@@ -784,8 +764,8 @@ public class MyInventoryClickEvent implements Listener {
                     event.setCancelled(true);
                 }
             }
-        } else if (isAirOrNull(hotbarItem)) { //hot bar item is not an armor & removing currently equipped item from armor slot
-            if (isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) { //player is already equipping an item on slot we are managing
+        } else if (InventoryUtils.isAirOrNull(hotbarItem)) { //hot bar item is not an armor & removing currently equipped item from armor slot
+            if (InventoryUtils.isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) { //player is already equipping an item on slot we are managing
                 rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
             }
         }
@@ -797,10 +777,11 @@ public class MyInventoryClickEvent implements Listener {
             if (event.getRawSlot() != armorTypeOfCursor.getSlot())
                 return; //Used for drag and drop checking to make sure you aren't trying to place a helmet in the boots slot
 
-            if (isArmorEquippedOnRelatedSlot(armorTypeOfCursor, player)) {
+            if (InventoryUtils.isArmorEquippedOnRelatedSlot(armorTypeOfCursor, player)) {
                 //player is already equipping an item on slot we are managing
                 //player replaces current armor with item on cursor
                 if (StatUtils.doesCharacterMeetRequirements(cursor, player, rpgCharacter.getRpgClass())) {
+                    rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
                     rpgCharacter.getRpgCharacterStats().onArmorEquip(cursor);
                 } else {
                     event.setCancelled(true);
@@ -814,7 +795,7 @@ public class MyInventoryClickEvent implements Listener {
                     event.setCancelled(true);
                 }
             }
-        } else if (isAirOrNull(cursor)) { //cursor is an non-armor item
+        } else if (InventoryUtils.isAirOrNull(cursor)) { //cursor is an non-armor item
             ArmorType armorTypeOfCurrentItem = ArmorType.getArmorType(currentType);
             if (armorTypeOfCurrentItem == null) return; //clicked item is not armor
 
@@ -825,9 +806,14 @@ public class MyInventoryClickEvent implements Listener {
     }
 
     private void offhandNormalClickListener(ItemStack cursor, Material cursorType, ItemStack current, Material currentType, InventoryClickEvent event, Player player, GuardianData guardianData, RPGCharacter rpgCharacter) {
-        if (!isAirOrNull(cursor)) { //with item on cursor
+        if (!InventoryUtils.isAirOrNull(cursor)) { //with item on cursor
             if (cursorType.equals(Material.SHIELD) || cursorType.equals(Material.DIAMOND_HOE)) {
                 if (StatUtils.doesCharacterMeetRequirements(cursor, player, rpgCharacter.getRpgClass())) {
+                    if (current != null) {
+                        if (!current.getType().equals(Material.AIR)) {
+                            rpgCharacter.getRpgCharacterStats().onOffhandUnequip(current);
+                        }
+                    }
                     rpgCharacter.getRpgCharacterStats().onOffhandEquip(cursor);
                 } else {
                     event.setCancelled(true);

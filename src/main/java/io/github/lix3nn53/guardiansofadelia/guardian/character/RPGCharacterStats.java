@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -506,42 +507,42 @@ public class RPGCharacterStats {
         PlayerInventory inventory = player.getInventory();
 
         ItemStack itemInMainHand = inventory.getItemInMainHand();
-        if (!isAirOrNull(itemInMainHand)) {
+        if (!InventoryUtils.isAirOrNull(itemInMainHand)) {
             if (StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) {
                 addPassiveStatBonuses(itemInMainHand);
             }
         }
 
         ItemStack itemInOffHand = inventory.getItemInOffHand();
-        if (!isAirOrNull(itemInOffHand)) {
+        if (!InventoryUtils.isAirOrNull(itemInOffHand)) {
             if (StatUtils.doesCharacterMeetRequirements(itemInOffHand, player, rpgClass)) {
                 onOffhandEquip(itemInOffHand);
             }
         }
 
         ItemStack inventoryHelmet = inventory.getHelmet();
-        if (!isAirOrNull(inventoryHelmet)) {
+        if (!InventoryUtils.isAirOrNull(inventoryHelmet)) {
             if (StatUtils.doesCharacterMeetRequirements(inventoryHelmet, player, rpgClass)) {
                 onArmorEquip(inventoryHelmet);
             }
         }
 
         ItemStack inventoryChestplate = inventory.getChestplate();
-        if (!isAirOrNull(inventoryChestplate)) {
+        if (!InventoryUtils.isAirOrNull(inventoryChestplate)) {
             if (StatUtils.doesCharacterMeetRequirements(inventoryChestplate, player, rpgClass)) {
                 onArmorEquip(inventoryChestplate);
             }
         }
 
         ItemStack inventoryLeggings = inventory.getLeggings();
-        if (!isAirOrNull(inventoryLeggings)) {
+        if (!InventoryUtils.isAirOrNull(inventoryLeggings)) {
             if (StatUtils.doesCharacterMeetRequirements(inventoryLeggings, player, rpgClass)) {
                 onArmorEquip(inventoryLeggings);
             }
         }
 
         ItemStack inventoryBoots = inventory.getBoots();
-        if (!isAirOrNull(inventoryBoots)) {
+        if (!InventoryUtils.isAirOrNull(inventoryBoots)) {
             if (StatUtils.doesCharacterMeetRequirements(inventoryBoots, player, rpgClass)) {
                 onArmorEquip(inventoryBoots);
             }
@@ -556,13 +557,6 @@ public class RPGCharacterStats {
         getWind().addBonus(totalPassiveStat.getWind(), this);
 
         onMaxHealthChange();
-    }
-
-    /**
-     * A utility method to support versions that use null or air ItemStacks.
-     */
-    private boolean isAirOrNull(ItemStack item) {
-        return item == null || item.getType().equals(Material.AIR);
     }
 
     public int getDamageBonusFromOffhand() {

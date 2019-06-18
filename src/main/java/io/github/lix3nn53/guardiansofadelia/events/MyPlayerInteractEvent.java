@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -8,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -19,6 +22,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -36,9 +40,42 @@ public class MyPlayerInteractEvent implements Listener {
         Action action = event.getAction();
         if (action.equals(Action.RIGHT_CLICK_AIR) || action.equals(Action.RIGHT_CLICK_BLOCK)) {
             Player player = event.getPlayer();
+
             ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
             Material itemInMainHandType = itemInMainHand.getType();
-            if (itemInMainHandType.equals(Material.PAPER)) {
+
+            ArmorType armorType = ArmorType.getArmorType(itemInMainHandType);
+
+            if (armorType != null) {
+                UUID uuid = player.getUniqueId();
+                if (GuardianDataManager.hasGuardianData(uuid)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+                    if (guardianData.hasActiveCharacter()) {
+                        RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+
+                        if (InventoryUtils.isArmorEquippedOnRelatedSlot(armorType, player)) {
+                            //player is already equipping an item on slot we are managing
+                            //player replaces current armor with item on hand
+                            if (StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgCharacter.getRpgClass())) {
+                                ItemStack armorTypeItemStack = armorType.getItemStack(player);
+                                rpgCharacter.getRpgCharacterStats().onArmorUnequip(armorTypeItemStack);
+                                rpgCharacter.getRpgCharacterStats().onArmorEquip(itemInMainHand);
+                            } else {
+                                event.setCancelled(true);
+                            }
+                        } else {
+                            //armor slot is empty
+                            //player equips item on hand
+                            if (StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgCharacter.getRpgClass())) {
+                                rpgCharacter.getRpgCharacterStats().onArmorEquip(itemInMainHand);
+                            } else {
+                                event.setCancelled(true);
+                            }
+                        }
+                    }
+                }
+            } else if (itemInMainHandType.equals(Material.PAPER)) {
                 if (PersistentDataContainerUtil.hasString(itemInMainHand, "teleportScroll")) {
                     String teleportScroll = PersistentDataContainerUtil.getString(itemInMainHand, "teleportScroll");
                     TeleportScroll teleportScrollLocation = TeleportScroll.valueOf(teleportScroll);

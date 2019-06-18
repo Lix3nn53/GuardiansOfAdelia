@@ -1,6 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.armors;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 public enum ArmorType {
     HELMET,
@@ -28,5 +31,18 @@ public enum ArmorType {
                 return 8;
         }
         return 5;
+    }
+
+    public ItemStack getItemStack(Player player) {
+        PlayerInventory inventory = player.getInventory();
+        switch (this) {
+            case CHESTPLATE:
+                return inventory.getChestplate();
+            case LEGGINGS:
+                return inventory.getLeggings();
+            case BOOTS:
+                return inventory.getBoots();
+        }
+        return inventory.getHelmet();
     }
 }
