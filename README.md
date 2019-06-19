@@ -19,9 +19,26 @@ Please note that these features are for my personal server. It probably will not
   * You can create up to 4 different characters with 1 minecraft account.
   * Create new character or select an existing one to play when you join server.
 * Classes
-  * TODO
+  * You have to select a class for your character when you are creating one.
+  * There are 8 different classes you can select;
+  * Warrior: Deals heavy damage with their two handed weapons but slow on feet
+  * Rogue: Good at dealing high damage to a single target, also dual wielding daggers looks cool
+  * Knight: Filling up tank role with thier heavy armor and shield
+  * Paladin: Supports their allies with buffs and heals
+  * Archer: Deals damage from long ranged and has the ability kit to keep that range
+  * Hunter: Deals high damage from long range with their crossbows. Uses traps to hunt their targets
+  * Mage: Deals area damage and controls targets with elemental abilities
+  * Monk: While they are feared opponents in close range their weapons, spear, can be thrown to fight at long range
 * Attributes
-  * TODO
+  * A character has 7 attributes: Max health and mana, physical damage and defense, magical damage and defense and critical chance.
+  * Your base attributes increases as you level up. Equipments adds their attributes to your character when you equip them.
+  * There are elements which increases your attributes as you gain more point in them;
+  * Fire: increases physical damage
+  * Water: increases max mana
+  * Earth: increases max health
+  * Lightning: increases magical damage
+  * Wind: increases critical chance
+  * You can gain more points on elements by investing element points you gain by leveling up or equiping items which has element bonuses on them.
 * Skills
   * TODO
 * Quests
