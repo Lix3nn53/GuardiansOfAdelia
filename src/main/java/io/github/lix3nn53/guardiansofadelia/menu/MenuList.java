@@ -196,18 +196,58 @@ public class MenuList {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
 
                 int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
-                guiGeneric = new GuiGeneric(27, ChatColor.AQUA + "Elements " + pointsLeft, 0);
+                guiGeneric = new GuiGeneric(27, ChatColor.AQUA + "Elements (Points: " + pointsLeft + ")", 0);
 
                 Attribute fireStat = rpgCharacterStats.getFire();
                 ItemStack fire = new ItemStack(Material.PAPER);
                 ItemMeta ıtemMeta = fire.getItemMeta();
-                ıtemMeta.setDisplayName(ChatColor.RED + "Fire " + fireStat.getInvested());
+                ıtemMeta.setDisplayName(ChatColor.RED + "Fire (Invested: " + fireStat.getInvested() + ")");
                 ıtemMeta.setLore(new ArrayList() {{
                     add("");
-                    add(AttributeType.FIRE.getDescription());
+                    add(fireStat.getAttributeType().getDescription());
                 }});
                 fire.setItemMeta(ıtemMeta);
-                guiGeneric.setItem(9, fire);
+                guiGeneric.setItem(1, fire);
+
+                Attribute waterStat = rpgCharacterStats.getWater();
+                ItemStack water = new ItemStack(Material.PAPER);
+                ıtemMeta.setDisplayName(ChatColor.BLUE + "Water (Invested: " + waterStat.getInvested() + ")");
+                ıtemMeta.setLore(new ArrayList() {{
+                    add("");
+                    add(waterStat.getAttributeType().getDescription());
+                }});
+                water.setItemMeta(ıtemMeta);
+                guiGeneric.setItem(4, water);
+
+                Attribute earthStat = rpgCharacterStats.getWater();
+                ItemStack earth = new ItemStack(Material.PAPER);
+                ıtemMeta.setDisplayName(ChatColor.DARK_GREEN + "Earth (Invested: " + earthStat.getInvested() + ")");
+                ıtemMeta.setLore(new ArrayList() {{
+                    add("");
+                    add(earthStat.getAttributeType().getDescription());
+                }});
+                water.setItemMeta(ıtemMeta);
+                guiGeneric.setItem(7, earth);
+
+                Attribute lightningStat = rpgCharacterStats.getWater();
+                ItemStack lightning = new ItemStack(Material.PAPER);
+                ıtemMeta.setDisplayName(ChatColor.AQUA + "Lightning (Invested: " + lightningStat.getInvested() + ")");
+                ıtemMeta.setLore(new ArrayList() {{
+                    add("");
+                    add(lightningStat.getAttributeType().getDescription());
+                }});
+                water.setItemMeta(ıtemMeta);
+                guiGeneric.setItem(3, lightning);
+
+                Attribute windStat = rpgCharacterStats.getWater();
+                ItemStack wind = new ItemStack(Material.PAPER);
+                ıtemMeta.setDisplayName(ChatColor.WHITE + "Wind (Invested: " + windStat.getInvested() + ")");
+                ıtemMeta.setLore(new ArrayList() {{
+                    add("");
+                    add(windStat.getAttributeType().getDescription());
+                }});
+                water.setItemMeta(ıtemMeta);
+                guiGeneric.setItem(5, wind);
             }
         }
 

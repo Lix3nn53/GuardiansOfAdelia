@@ -59,6 +59,10 @@ commands:
     description: Job command
     permission: guardian.player
     permission-message: You do not have permission!
+  character:
+    description: Character command
+    permission: guardian.player
+    permission-message: You do not have permission!
 permissions:
   guardian.player:
     description: GuardiansOfAdelia permission for player commands

@@ -103,6 +103,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         MiniGameManager.initMinigames();
 
         //set command executors
+        this.getCommand("character").setExecutor(new CommandCharacter());
         this.getCommand("guild").setExecutor(new CommandGuild());
         this.getCommand("lix").setExecutor(new CommandLix());
         this.getCommand("invite").setExecutor(new CommandInvite());

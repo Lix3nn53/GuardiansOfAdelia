@@ -345,7 +345,8 @@ public class MyInventoryClickEvent implements Listener {
                 if (currentName.equals(ChatColor.LIGHT_PURPLE + "Skills")) {
                     //TODO skill gui
                 } else if (currentName.equals(ChatColor.DARK_GREEN + "Elements")) {
-                    //TODO attribute gui
+                    GuiGeneric element = MenuList.element(player);
+                    element.openInventory(player);
                 } else if (currentName.equals(ChatColor.YELLOW + "Job")) {
                     GuiGeneric job = MenuList.job(player);
                     job.openInventory(player);
@@ -741,32 +742,40 @@ public class MyInventoryClickEvent implements Listener {
         }
     }
 
-    private void armorNumPressListener(ItemStack current, Inventory clickedInventory, InventoryClickEvent event, Player player, GuardianData guardianData, RPGCharacter rpgCharacter) {
+    private void armorNumPressListener(int rawSlot, ItemStack current, Inventory clickedInventory, InventoryClickEvent event, Player player, GuardianData guardianData, RPGCharacter rpgCharacter) {
         ItemStack hotbarItem = clickedInventory.getItem(event.getHotbarButton()); //item in hotbar slot of pressed num key
-        ArmorType armorTypeOfHotBarItem = ArmorType.getArmorType(hotbarItem.getType());
 
-        if (armorTypeOfHotBarItem != null) {
-            if (InventoryUtils.isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) {
-                //player is already equipping an item on slot we are managing
-                //player replaces current armor with item on hotbar
-                if (StatUtils.doesCharacterMeetRequirements(hotbarItem, player, rpgCharacter.getRpgClass())) {
+        if (rawSlot >= 5 && rawSlot <= 8) {
+            if (InventoryUtils.isAirOrNull(hotbarItem)) { //hot bar item is not an armor & removing currently equipped item from armor slot
+                if (!InventoryUtils.isAirOrNull(current)) {
                     rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
-                    rpgCharacter.getRpgCharacterStats().onArmorEquip(hotbarItem);
-                } else {
-                    event.setCancelled(true);
                 }
             } else {
-                //armor slot is empty
-                //player equips item on hotbar
-                if (StatUtils.doesCharacterMeetRequirements(hotbarItem, player, rpgCharacter.getRpgClass())) {
-                    rpgCharacter.getRpgCharacterStats().onArmorEquip(hotbarItem);
-                } else {
-                    event.setCancelled(true);
+                ArmorType armorTypeOfHotBarItem = ArmorType.getArmorType(hotbarItem.getType());
+
+                if (armorTypeOfHotBarItem != null) { //hotbar item is armor
+                    if (event.getRawSlot() != armorTypeOfHotBarItem.getSlot())
+                        return; //Used for drag and drop checking to make sure you aren't trying to place a helmet in the boots slot
+
+                    if (InventoryUtils.isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) {
+                        //player is already equipping an item on slot we are managing
+                        //player replaces current armor with item on hotbar
+                        if (StatUtils.doesCharacterMeetRequirements(hotbarItem, player, rpgCharacter.getRpgClass())) {
+                            rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
+                            rpgCharacter.getRpgCharacterStats().onArmorEquip(hotbarItem);
+                        } else {
+                            event.setCancelled(true);
+                        }
+                    } else {
+                        //armor slot is empty
+                        //player equips item on hotbar
+                        if (StatUtils.doesCharacterMeetRequirements(hotbarItem, player, rpgCharacter.getRpgClass())) {
+                            rpgCharacter.getRpgCharacterStats().onArmorEquip(hotbarItem);
+                        } else {
+                            event.setCancelled(true);
+                        }
+                    }
                 }
-            }
-        } else if (InventoryUtils.isAirOrNull(hotbarItem)) { //hot bar item is not an armor & removing currently equipped item from armor slot
-            if (InventoryUtils.isArmorEquippedOnRelatedSlot(armorTypeOfHotBarItem, player)) { //player is already equipping an item on slot we are managing
-                rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
             }
         }
     }
@@ -795,7 +804,7 @@ public class MyInventoryClickEvent implements Listener {
                     event.setCancelled(true);
                 }
             }
-        } else if (InventoryUtils.isAirOrNull(cursor)) { //cursor is an non-armor item
+        } else if (InventoryUtils.isAirOrNull(cursor)) { //cursor is empty
             ArmorType armorTypeOfCurrentItem = ArmorType.getArmorType(currentType);
             if (armorTypeOfCurrentItem == null) return; //clicked item is not armor
 
@@ -826,6 +835,30 @@ public class MyInventoryClickEvent implements Listener {
         }
     }
 
+    private void offhandNumPressListener(int rawSlot, ItemStack current, Inventory clickedInventory, InventoryClickEvent event, Player player, GuardianData guardianData, RPGCharacter rpgCharacter) {
+        ItemStack hotbarItem = clickedInventory.getItem(event.getHotbarButton()); //item in hotbar slot of pressed num key
+
+        if (!InventoryUtils.isAirOrNull(hotbarItem)) { //with item on hotbar
+            Material hotbarItemType = hotbarItem.getType();
+            if (hotbarItemType.equals(Material.SHIELD) || hotbarItemType.equals(Material.DIAMOND_HOE)) {
+                if (StatUtils.doesCharacterMeetRequirements(hotbarItem, player, rpgCharacter.getRpgClass())) {
+                    if (current != null) {
+                        if (!current.getType().equals(Material.AIR)) {
+                            rpgCharacter.getRpgCharacterStats().onOffhandUnequip(current);
+                        }
+                    }
+                    rpgCharacter.getRpgCharacterStats().onOffhandEquip(hotbarItem);
+                } else {
+                    event.setCancelled(true);
+                }
+            } else {
+                event.setCancelled(true);
+            }
+        } else { //without item on cursor
+            rpgCharacter.getRpgCharacterStats().onOffhandUnequip(current);
+        }
+    }
+
     private void armorAndOffhandListener(Player player, InventoryType.SlotType slotType, Inventory clickedInventory, InventoryClickEvent event, ItemStack current,
                                          Material currentType, ItemStack cursor, Material cursorType, GuardianData guardianData, RPGCharacter rpgCharacter) {
         if (slotType != InventoryType.SlotType.ARMOR && slotType != InventoryType.SlotType.QUICKBAR && slotType != InventoryType.SlotType.CONTAINER)
@@ -833,14 +866,18 @@ public class MyInventoryClickEvent implements Listener {
         if (!clickedInventory.getType().equals(InventoryType.PLAYER)) return; //Prevents shit in the 2by2 crafting
 
         if (event.getRawSlot() == 45) { //clicked on off hand slot
-            offhandNormalClickListener(cursor, cursorType, current, currentType, event, player, guardianData, rpgCharacter);
+            if (event.getClick().equals(ClickType.NUMBER_KEY)) {
+                offhandNumPressListener(event.getRawSlot(), current, clickedInventory, event, player, guardianData, rpgCharacter);
+            } else {
+                offhandNormalClickListener(cursor, cursorType, current, currentType, event, player, guardianData, rpgCharacter);
+            }
             return;
         }
 
         if (event.isShiftClick()) {
             armorShiftClickListener(current, currentType, event, player, guardianData, rpgCharacter);
         } else if (event.getClick().equals(ClickType.NUMBER_KEY)) {
-            armorNumPressListener(current, clickedInventory, event, player, guardianData, rpgCharacter);
+            armorNumPressListener(event.getRawSlot(), current, clickedInventory, event, player, guardianData, rpgCharacter);
         } else { //drag and drop
             armorNormalClickListener(cursor, cursorType, current, currentType, event, player, guardianData, rpgCharacter);
         }

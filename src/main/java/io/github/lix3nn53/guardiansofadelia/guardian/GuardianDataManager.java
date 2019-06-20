@@ -43,4 +43,15 @@ public class GuardianDataManager {
     public static Set<UUID> getOnlineUUIDs() {
         return onlineGuardians.keySet();
     }
+
+    public static void clearCurrentCharacterDataWithoutSaving(UUID uuid) {
+        if (hasGuardianData(uuid)) {
+            GuardianData guardianData = getGuardianData(uuid);
+            if (guardianData.hasBazaar()) {
+                Bazaar bazaar = guardianData.getBazaar();
+                bazaar.remove();
+            }
+        }
+        onlineGuardians.remove(uuid);
+    }
 }

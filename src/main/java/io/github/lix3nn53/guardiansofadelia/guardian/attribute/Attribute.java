@@ -64,4 +64,8 @@ public class Attribute {
                 break;
         }
     }
+
+    public AttributeType getAttributeType() {
+        return attributeType;
+    }
 }
