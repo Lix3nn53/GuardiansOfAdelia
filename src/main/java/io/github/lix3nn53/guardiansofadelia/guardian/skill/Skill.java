@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,7 +21,7 @@ public class Skill {
     int manaCost;
     int cooldown;
 
-    private final List<SkillComponent> triggers = new ArrayList<>();
+    private final List<TriggerComponent> triggers = new ArrayList<>();
 
     public Skill(String name, Material material, List<String> description, int maxSkillLevel, int reqPlayerLevel) {;
         this.name = name;

@@ -4,7 +4,10 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
@@ -181,8 +184,32 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric element() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.AQUA + "Elements", 0);
+    public static GuiGeneric element(Player player) {
+        GuiGeneric guiGeneric = null;
+
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+                RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
+
+                int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
+                guiGeneric = new GuiGeneric(27, ChatColor.AQUA + "Elements " + pointsLeft, 0);
+
+                Attribute fireStat = rpgCharacterStats.getFire();
+                ItemStack fire = new ItemStack(Material.PAPER);
+                ItemMeta ıtemMeta = fire.getItemMeta();
+                ıtemMeta.setDisplayName(ChatColor.RED + "Fire " + fireStat.getInvested());
+                ıtemMeta.setLore(new ArrayList() {{
+                    add("");
+                    add(AttributeType.FIRE.getDescription());
+                }});
+                fire.setItemMeta(ıtemMeta);
+                guiGeneric.setItem(9, fire);
+            }
+        }
 
 
         return guiGeneric;
