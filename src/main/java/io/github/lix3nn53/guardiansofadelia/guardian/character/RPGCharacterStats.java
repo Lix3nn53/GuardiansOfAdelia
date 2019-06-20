@@ -311,6 +311,31 @@ public class RPGCharacterStats {
         return investedSkillPoints.get(index);
     }
 
+    public int getSkillPointsLeftToSpend() {
+        int result = 0;
+
+        for (int invested : investedSkillPoints) {
+            result += invested;
+        }
+
+        return result;
+    }
+
+    public int getInvestedAttributePoints() {
+        return this.fire.getInvested() + water.getInvested() + earth.getInvested() + lightning.getInvested() + wind.getInvested();
+    }
+
+    public int getAttributePointsLeftToSpend() {
+        int totalExp = getTotalExp();
+        int level = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
+
+        int inventedPointsOnAttributes = getInvestedAttributePoints();
+
+        int pointsPerLevel = 1;
+
+        return (level * pointsPerLevel) - inventedPointsOnAttributes;
+    }
+
     public void onMaxHealthChange() {
         int totalMaxHealth = getTotalMaxHealth();
         player.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).setBaseValue(totalMaxHealth);

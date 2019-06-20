@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.guardian.skill;
+package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import org.bukkit.Location;
