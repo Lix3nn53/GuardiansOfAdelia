@@ -4,5 +4,5 @@ public enum SpreadType {
     CONE,
     HORIZONTAL_CONE,
     RAIN
-    
+
 }
