@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,9 +21,9 @@ public class Skill {
     int manaCost;
     int cooldown;
 
-    private final List<TriggerComponent> triggers = new ArrayList<>();
+    private final List<SkillComponent> triggers = new ArrayList<>();
 
-    public Skill(String name, Material material, List<String> description, int maxSkillLevel, int reqPlayerLevel) {;
+    public Skill(String name, Material material, List<String> description, int maxSkillLevel, int reqPlayerLevel) {
         this.name = name;
         this.material = material;
         this.maxSkillLevel = maxSkillLevel;
@@ -75,5 +75,13 @@ public class Skill {
     public boolean canPlayersCast() {
         //TODO
         return true;
+    }
+
+    public boolean cast(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+        boolean didCast = false;
+        for (SkillComponent trigger : triggers) {
+            didCast = trigger.execute(caster, skillLevel, targets) || didCast;
+        }
+        return didCast;
     }
 }
