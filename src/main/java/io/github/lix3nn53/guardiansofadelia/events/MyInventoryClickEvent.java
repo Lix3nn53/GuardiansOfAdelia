@@ -18,7 +18,9 @@ import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeGui;
 import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
@@ -444,6 +446,31 @@ public class MyInventoryClickEvent implements Listener {
                 int i = Integer.parseInt(split[1]);
                 CompassManager.setCompassItemNPC(player, i);
             }
+        } else if (title.equals(ChatColor.AQUA + "Elements (Points:")) {
+            if (rpgCharacter != null) {
+                RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
+
+                int pointsLeftToSpend = rpgCharacterStats.getAttributePointsLeftToSpend();
+                if (pointsLeftToSpend > 0) {
+                    Attribute attr = null;
+                    if (slot == 1) {
+                        attr = rpgCharacterStats.getFire();
+                    } else if (slot == 4) {
+                        attr = rpgCharacterStats.getWater();
+                    } else if (slot == 7) {
+                        attr = rpgCharacterStats.getEarth();
+                    } else if (slot == 19) {
+                        attr = rpgCharacterStats.getLightning();
+                    } else if (slot == 21) {
+                        attr = rpgCharacterStats.getWater();
+                    }
+                    if (attr != null) {
+                        attr.investOnePoint(rpgCharacterStats);
+                        GuiGeneric element = MenuList.element(player);
+                        element.openInventory(player);
+                    }
+                }
+            }
         } else if (title.equals(ChatColor.YELLOW + "Job")) {
             if (rpgCharacter != null) {
                 if (!rpgCharacter.hasJob()) {
@@ -746,7 +773,7 @@ public class MyInventoryClickEvent implements Listener {
         ItemStack hotbarItem = clickedInventory.getItem(event.getHotbarButton()); //item in hotbar slot of pressed num key
 
         if (rawSlot >= 5 && rawSlot <= 8) {
-            if (InventoryUtils.isAirOrNull(hotbarItem)) { //hot bar item is not an armor & removing currently equipped item from armor slot
+            if (InventoryUtils.isAirOrNull(hotbarItem)) { //removing currently equipped item from armor slot
                 if (!InventoryUtils.isAirOrNull(current)) {
                     rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
                 }
@@ -768,7 +795,6 @@ public class MyInventoryClickEvent implements Listener {
                         }
                     } else {
                         //armor slot is empty
-                        //player equips item on hotbar
                         if (StatUtils.doesCharacterMeetRequirements(hotbarItem, player, rpgCharacter.getRpgClass())) {
                             rpgCharacter.getRpgCharacterStats().onArmorEquip(hotbarItem);
                         } else {
@@ -808,7 +834,7 @@ public class MyInventoryClickEvent implements Listener {
             ArmorType armorTypeOfCurrentItem = ArmorType.getArmorType(currentType);
             if (armorTypeOfCurrentItem == null) return; //clicked item is not armor
 
-            if (event.getRawSlot() == armorTypeOfCurrentItem.getSlot()) { //replace clicked armor with cursor
+            if (event.getRawSlot() == armorTypeOfCurrentItem.getSlot()) { //unequip current
                 rpgCharacter.getRpgCharacterStats().onArmorUnequip(current);
             } //else clicked item is armor which is not equipped
         }//no else since nothing happens with cursor with nonArmor item

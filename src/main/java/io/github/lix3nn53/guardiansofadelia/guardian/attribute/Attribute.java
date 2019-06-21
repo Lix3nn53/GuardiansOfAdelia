@@ -20,6 +20,11 @@ public class Attribute {
         onValueChange(rpgCharacterStats);
     }
 
+    public void investOnePoint(RPGCharacterStats rpgCharacterStats) {
+        this.invested++;
+        onValueChange(rpgCharacterStats);
+    }
+
     public int getBonus() {
         return bonus;
     }

@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
-import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
@@ -237,7 +236,7 @@ public class MenuList {
                     add(lightningStat.getAttributeType().getDescription());
                 }});
                 water.setItemMeta(ıtemMeta);
-                guiGeneric.setItem(3, lightning);
+                guiGeneric.setItem(19, lightning);
 
                 Attribute windStat = rpgCharacterStats.getWater();
                 ItemStack wind = new ItemStack(Material.PAPER);
@@ -247,7 +246,7 @@ public class MenuList {
                     add(windStat.getAttributeType().getDescription());
                 }});
                 water.setItemMeta(ıtemMeta);
-                guiGeneric.setItem(5, wind);
+                guiGeneric.setItem(21, wind);
             }
         }
 

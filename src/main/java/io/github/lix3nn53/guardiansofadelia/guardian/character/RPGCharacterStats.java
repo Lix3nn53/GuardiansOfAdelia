@@ -70,7 +70,7 @@ public class RPGCharacterStats {
         new BukkitRunnable() {
             @Override
             public void run() {
-                String message = ChatColor.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + "                    " + ChatColor.AQUA + "✧" + currentMana + "/" + getTotalMaxMana();
+                String message = ChatColor.RED + "❤" + player.getHealth() + 0.5 + "/" + getTotalMaxHealth() + "                    " + ChatColor.AQUA + "✧" + currentMana + "/" + getTotalMaxMana();
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 10L);
@@ -465,7 +465,6 @@ public class RPGCharacterStats {
         } else if (material.equals(Material.DIAMOND_HOE)) {
             damageBonusFromOffhand = 0;
             removePassiveStatBonuses(offhand);
-            onMaxHealthChange();
         }
     }
 
@@ -481,6 +480,7 @@ public class RPGCharacterStats {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
             this.getEarth().addBonus(bonus, this);
+            onMaxHealthChange();
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
@@ -490,7 +490,6 @@ public class RPGCharacterStats {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
             this.getWind().addBonus(bonus, this);
         }
-        onMaxHealthChange();
     }
 
     private void removePassiveStatBonuses(ItemStack itemStack) {
@@ -505,6 +504,7 @@ public class RPGCharacterStats {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
             this.getEarth().removeBonus(bonus, this);
+            onMaxHealthChange();
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
@@ -514,7 +514,6 @@ public class RPGCharacterStats {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
             this.getWind().removeBonus(bonus, this);
         }
-        onMaxHealthChange();
     }
 
     public void recalculateEquipmentBonuses(RPGInventory rpgInventory, RPGClass rpgClass) {
@@ -580,8 +579,6 @@ public class RPGCharacterStats {
         getEarth().addBonus(totalPassiveStat.getEarth(), this);
         getLightning().addBonus(totalPassiveStat.getLightning(), this);
         getWind().addBonus(totalPassiveStat.getWind(), this);
-
-        onMaxHealthChange();
     }
 
     public int getDamageBonusFromOffhand() {
