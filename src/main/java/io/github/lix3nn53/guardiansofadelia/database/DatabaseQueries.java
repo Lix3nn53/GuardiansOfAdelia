@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
@@ -271,16 +272,17 @@ public class DatabaseQueries {
                 int attr_wind = resultSet.getInt("attr_wind");
                 rpgCharacterStats.getWind().setInvested(attr_wind, rpgCharacterStats);
 
+                SkillBar skillBar = rpgCharacter.getSkillBar();
                 int skill_one = resultSet.getInt("skill_one");
-                rpgCharacterStats.investSkillPoints(1, skill_one);
+                skillBar.investSkillPoints(1, skill_one);
                 int skill_two = resultSet.getInt("skill_two");
-                rpgCharacterStats.investSkillPoints(2, skill_two);
+                skillBar.investSkillPoints(2, skill_two);
                 int skill_three = resultSet.getInt("skill_three");
-                rpgCharacterStats.investSkillPoints(3, skill_three);
+                skillBar.investSkillPoints(3, skill_three);
                 int skill_passive = resultSet.getInt("skill_passive");
-                rpgCharacterStats.investSkillPoints(4, skill_passive);
+                skillBar.investSkillPoints(4, skill_passive);
                 int skill_ultimate = resultSet.getInt("skill_ultimate");
-                rpgCharacterStats.investSkillPoints(5, skill_ultimate);
+                skillBar.investSkillPoints(5, skill_ultimate);
 
                 String offHand = resultSet.getString("off_hand");
                 if (!resultSet.wasNull()) {
@@ -845,15 +847,16 @@ public class DatabaseQueries {
             int wind = rpgCharacterStats.getWind().getInvested();
             pst.setInt(25, wind);
 
-            int skill_one = rpgCharacterStats.getInvestedSkillPoints(1);
+            SkillBar skillBar = rpgCharacter.getSkillBar();
+            int skill_one = skillBar.getInvestedSkillPoints(1);
             pst.setInt(26, skill_one);
-            int skill_two = rpgCharacterStats.getInvestedSkillPoints(2);
+            int skill_two = skillBar.getInvestedSkillPoints(2);
             pst.setInt(27, skill_two);
-            int skill_three = rpgCharacterStats.getInvestedSkillPoints(3);
+            int skill_three = skillBar.getInvestedSkillPoints(3);
             pst.setInt(28, skill_three);
-            int skill_passive = rpgCharacterStats.getInvestedSkillPoints(4);
+            int skill_passive = skillBar.getInvestedSkillPoints(4);
             pst.setInt(29, skill_passive);
-            int skill_ultimate = rpgCharacterStats.getInvestedSkillPoints(5);
+            int skill_ultimate = skillBar.getInvestedSkillPoints(5);
             pst.setInt(30, skill_ultimate);
 
             //2 = replaced, 1 = new row added

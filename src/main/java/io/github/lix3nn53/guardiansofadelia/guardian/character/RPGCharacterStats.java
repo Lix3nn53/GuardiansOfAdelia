@@ -17,9 +17,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RPGCharacterStats {
 
     private final Player player;
@@ -30,7 +27,7 @@ public class RPGCharacterStats {
     private final Attribute earth = new Attribute(AttributeType.EARTH);
     private final Attribute water = new Attribute(AttributeType.WATER);
     private final Attribute wind = new Attribute(AttributeType.WIND);
-    private final List<Integer> investedSkillPoints = new ArrayList<>();
+
     private int maxHealth = 20;
     private int maxMana = 20;
     private int currentMana = 20;
@@ -60,17 +57,11 @@ public class RPGCharacterStats {
         //offhand slot
         shield = new ArmorStatHolder(0, 0, 0);
 
-        investedSkillPoints.add(0);
-        investedSkillPoints.add(0);
-        investedSkillPoints.add(0);
-        investedSkillPoints.add(0);
-        investedSkillPoints.add(0);
-
         //start action bar scheduler
         new BukkitRunnable() {
             @Override
             public void run() {
-                String message = ChatColor.RED + "❤" + player.getHealth() + 0.5 + "/" + getTotalMaxHealth() + "                    " + ChatColor.AQUA + "✧" + currentMana + "/" + getTotalMaxMana();
+                String message = ChatColor.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + "                    " + ChatColor.AQUA + "✧" + currentMana + "/" + getTotalMaxMana();
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 10L);
@@ -293,32 +284,6 @@ public class RPGCharacterStats {
         earth.clearBonus(this);
         water.clearBonus(this);
         wind.clearBonus(this);
-    }
-
-    /**
-     * @param skillNo 1,2,3 normal skills, 4 passive, 5 ultimate
-     * @param points  to invest in skill
-     */
-    public void investSkillPoints(int skillNo, int points) {
-        int index = skillNo - 1;
-        int invested = investedSkillPoints.get(index);
-        invested += points;
-        investedSkillPoints.set(index, invested);
-    }
-
-    public int getInvestedSkillPoints(int skillNo) {
-        int index = skillNo - 1;
-        return investedSkillPoints.get(index);
-    }
-
-    public int getSkillPointsLeftToSpend() {
-        int result = 0;
-
-        for (int invested : investedSkillPoints) {
-            result += invested;
-        }
-
-        return result;
     }
 
     public int getInvestedAttributePoints() {

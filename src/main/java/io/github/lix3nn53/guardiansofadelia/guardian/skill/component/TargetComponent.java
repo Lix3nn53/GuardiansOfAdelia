@@ -2,12 +2,15 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component;
 
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Tameable;
 
 import java.util.List;
 
 public abstract class TargetComponent extends SkillComponent {
 
-    private final boolean throughWall = false;
+    //TODO private final boolean throughWall = false; isObstructed(from.getEyeLocation(), target.getEyeLocation())
     private final boolean allies = false;
     private final boolean enemy = false;
 
@@ -16,7 +19,7 @@ public abstract class TargetComponent extends SkillComponent {
      * Executes the component
      *
      * @param caster  caster of the skill
-     * @param level   level of the skill
+     * @param skillLevel   level of the skill
      * @param targets targets to apply to
      * @return true if applied to something, false otherwise
      */
@@ -24,15 +27,15 @@ public abstract class TargetComponent extends SkillComponent {
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
 
-        return (list.size() > 0 && executeChildren(caster, skillLevel, targets));
+        return (targets.size() > 0 && executeChildren(caster, skillLevel, targets));
 
     }
 
     boolean isValidTarget(final LivingEntity caster, final LivingEntity from, final LivingEntity target) {
 
-        return target != caster
+        boolean everyone = allies && enemy;
 
-                && (throughWall || !TargetHelper.isObstructed(from.getEyeLocation(), target.getEyeLocation()))
+        return target != caster
 
                 && (everyone || allies == isAlly(caster, target));
 
@@ -70,8 +73,9 @@ public abstract class TargetComponent extends SkillComponent {
                     if (PartyManager.inParty(attackerPlayer)) {
                         Party party = PartyManager.getParty(attackerPlayer);
                         List<Player> members = party.getMembers();
-                        return !members.contains((Player) target);
+                        return !members.contains(target);
                     }
+
                     return true;
                 }
             } else if (target instanceof Tameable) {
@@ -83,11 +87,13 @@ public abstract class TargetComponent extends SkillComponent {
                 }
             }
         } else if (attacker instanceof Tameable) {
-            Tameable tameable = (Tameable) attacker;
-            if (tameable.isTamed() && (tameable.getOwner() instanceof LivingEntity)) {
-                if (tameable.getOwner().equals(target)) return false;
+            if (target instanceof Player) {
+                Tameable tameable = (Tameable) attacker;
+                if (tameable.isTamed() && (tameable.getOwner() instanceof LivingEntity)) {
+                    if (tameable.getOwner().equals(target)) return false;
 
-                return canAttack((LivingEntity) tameable.getOwner(), target);
+                    return canAttack((LivingEntity) tameable.getOwner(), target);
+                }
             }
         }
         return true;

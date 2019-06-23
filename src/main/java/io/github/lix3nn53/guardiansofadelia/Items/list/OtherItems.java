@@ -70,4 +70,16 @@ public class OtherItems {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
+
+    public static ItemStack getUnassignedSkill() {
+        ItemStack itemStack = new ItemStack(Material.PAPER);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Unassigned Skill");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "You haven't unlocked a skill for this slot yer");
+        }});
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
 }

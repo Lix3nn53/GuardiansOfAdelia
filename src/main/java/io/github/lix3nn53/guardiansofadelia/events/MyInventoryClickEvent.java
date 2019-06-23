@@ -446,7 +446,7 @@ public class MyInventoryClickEvent implements Listener {
                 int i = Integer.parseInt(split[1]);
                 CompassManager.setCompassItemNPC(player, i);
             }
-        } else if (title.equals(ChatColor.AQUA + "Elements (Points:")) {
+        } else if (title.contains(ChatColor.AQUA + "Elements (Points:")) {
             if (rpgCharacter != null) {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
 

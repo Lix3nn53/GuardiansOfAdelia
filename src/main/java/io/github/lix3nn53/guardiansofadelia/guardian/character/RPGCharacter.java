@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
+import io.github.lix3nn53.guardiansofadelia.guardian.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
@@ -14,6 +15,7 @@ public final class RPGCharacter {
 
     private final RPGInventory rpgInventory = new RPGInventory();
     private final RPGClass rpgClass;
+    private final SkillBar skillBar;
     private final RPGCharacterStats rpgCharacterStats;
     private List<Quest> questList = new ArrayList<>();
     private List<Integer> turnedInQuests = new ArrayList<Integer>();
@@ -23,6 +25,7 @@ public final class RPGCharacter {
     public RPGCharacter(RPGClass rpgClass, Player player) {
         rpgCharacterStats = new RPGCharacterStats(player);
         this.rpgClass = rpgClass;
+        this.skillBar = new SkillBar(player);
     }
 
     public RPGClass getRpgClass() {
@@ -103,5 +106,9 @@ public final class RPGCharacter {
 
     public RPGCharacterStats getRpgCharacterStats() {
         return rpgCharacterStats;
+    }
+
+    public SkillBar getSkillBar() {
+        return skillBar;
     }
 }

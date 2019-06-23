@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component;
 
+import org.bukkit.entity.LivingEntity;
+
 import java.util.List;
 
 public abstract class TriggerComponent extends SkillComponent {

@@ -218,35 +218,35 @@ public class MenuList {
                 water.setItemMeta(ıtemMeta);
                 guiGeneric.setItem(4, water);
 
-                Attribute earthStat = rpgCharacterStats.getWater();
+                Attribute earthStat = rpgCharacterStats.getEarth();
                 ItemStack earth = new ItemStack(Material.PAPER);
                 ıtemMeta.setDisplayName(ChatColor.DARK_GREEN + "Earth (Invested: " + earthStat.getInvested() + ")");
                 ıtemMeta.setLore(new ArrayList() {{
                     add("");
                     add(earthStat.getAttributeType().getDescription());
                 }});
-                water.setItemMeta(ıtemMeta);
+                earth.setItemMeta(ıtemMeta);
                 guiGeneric.setItem(7, earth);
 
-                Attribute lightningStat = rpgCharacterStats.getWater();
+                Attribute lightningStat = rpgCharacterStats.getLightning();
                 ItemStack lightning = new ItemStack(Material.PAPER);
                 ıtemMeta.setDisplayName(ChatColor.AQUA + "Lightning (Invested: " + lightningStat.getInvested() + ")");
                 ıtemMeta.setLore(new ArrayList() {{
                     add("");
                     add(lightningStat.getAttributeType().getDescription());
                 }});
-                water.setItemMeta(ıtemMeta);
-                guiGeneric.setItem(19, lightning);
+                lightning.setItemMeta(ıtemMeta);
+                guiGeneric.setItem(20, lightning);
 
-                Attribute windStat = rpgCharacterStats.getWater();
+                Attribute windStat = rpgCharacterStats.getWind();
                 ItemStack wind = new ItemStack(Material.PAPER);
                 ıtemMeta.setDisplayName(ChatColor.WHITE + "Wind (Invested: " + windStat.getInvested() + ")");
                 ıtemMeta.setLore(new ArrayList() {{
                     add("");
                     add(windStat.getAttributeType().getDescription());
                 }});
-                water.setItemMeta(ıtemMeta);
-                guiGeneric.setItem(21, wind);
+                wind.setItemMeta(ıtemMeta);
+                guiGeneric.setItem(24, wind);
             }
         }
 

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -34,6 +35,9 @@ public class Skill {
     }
 
     //TODO copy constructor
+    public Skill(Skill skillToCopy) {
+
+    }
 
     public String getName() {
         return name;
@@ -55,7 +59,7 @@ public class Skill {
         return description;
     }
 
-    public ItemStack getIcon() {
+    public ItemStack getIcon(int skillLevel) {
 
         ItemStack icon = new ItemStack(getMaterial());
 
