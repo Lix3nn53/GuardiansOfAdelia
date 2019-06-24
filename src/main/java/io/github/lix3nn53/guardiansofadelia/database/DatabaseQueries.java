@@ -4,10 +4,10 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
@@ -253,7 +253,14 @@ public class DatabaseQueries {
             if (resultSet.next()) {
                 String rpgClassString = resultSet.getString("rpg_class");
                 RPGClass rpgClass = RPGClass.valueOf(rpgClassString);
-                rpgCharacter = new RPGCharacter(rpgClass, player);
+
+                int skill_one = resultSet.getInt("skill_one");
+                int skill_two = resultSet.getInt("skill_two");
+                int skill_three = resultSet.getInt("skill_three");
+                int skill_passive = resultSet.getInt("skill_passive");
+                int skill_ultimate = resultSet.getInt("skill_ultimate");
+
+                rpgCharacter = new RPGCharacter(rpgClass, player, skill_one, skill_two, skill_three, skill_passive, skill_ultimate);
                 RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
 
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
@@ -271,18 +278,6 @@ public class DatabaseQueries {
                 rpgCharacterStats.getLightning().setInvested(attr_lightning, rpgCharacterStats);
                 int attr_wind = resultSet.getInt("attr_wind");
                 rpgCharacterStats.getWind().setInvested(attr_wind, rpgCharacterStats);
-
-                SkillBar skillBar = rpgCharacter.getSkillBar();
-                int skill_one = resultSet.getInt("skill_one");
-                skillBar.investSkillPoints(1, skill_one);
-                int skill_two = resultSet.getInt("skill_two");
-                skillBar.investSkillPoints(2, skill_two);
-                int skill_three = resultSet.getInt("skill_three");
-                skillBar.investSkillPoints(3, skill_three);
-                int skill_passive = resultSet.getInt("skill_passive");
-                skillBar.investSkillPoints(4, skill_passive);
-                int skill_ultimate = resultSet.getInt("skill_ultimate");
-                skillBar.investSkillPoints(5, skill_ultimate);
 
                 String offHand = resultSet.getString("off_hand");
                 if (!resultSet.wasNull()) {

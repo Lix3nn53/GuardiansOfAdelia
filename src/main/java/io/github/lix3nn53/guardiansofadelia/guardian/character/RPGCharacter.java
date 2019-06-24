@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
-import io.github.lix3nn53.guardiansofadelia.guardian.SkillBar;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
@@ -22,10 +22,16 @@ public final class RPGCharacter {
     private Job job;
     private ChatTag chatTag = ChatTag.NOVICE;
 
+    public RPGCharacter(RPGClass rpgClass, Player player, int one, int two, int three, int passive, int ultimate) {
+        rpgCharacterStats = new RPGCharacterStats(player);
+        this.rpgClass = rpgClass;
+        this.skillBar = new SkillBar(player, rpgClass, one, two, three, passive, ultimate);
+    }
+
     public RPGCharacter(RPGClass rpgClass, Player player) {
         rpgCharacterStats = new RPGCharacterStats(player);
         this.rpgClass = rpgClass;
-        this.skillBar = new SkillBar(player);
+        this.skillBar = new SkillBar(player, rpgClass, 0, 0, 0, 0, 0);
     }
 
     public RPGClass getRpgClass() {

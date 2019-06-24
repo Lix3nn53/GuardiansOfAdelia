@@ -88,4 +88,12 @@ public class Skill {
         }
         return didCast;
     }
+
+    public int getCooldown() {
+        return cooldown;
+    }
+
+    public void addTrigger(SkillComponent skillComponent) {
+        triggers.add(skillComponent);
+    }
 }

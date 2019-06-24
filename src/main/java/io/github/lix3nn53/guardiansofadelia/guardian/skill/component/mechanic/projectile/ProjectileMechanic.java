@@ -29,15 +29,36 @@ public class ProjectileMechanic extends MechanicComponent {
 
     private final Class<? extends Projectile> projectileType;
 
-    public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
+    public ProjectileMechanic(SpreadType spreadType, double speed,
                               int amount, double angle, double right, double upward, double forward,
                               double range, Class<? extends Projectile> projectileType) {
         this.spreadType = spreadType;
-        this.radius = radius;
-        this.height = height;
         this.speed = speed;
         this.amount = amount;
         this.angle = angle;
+        this.right = right;
+        this.upward = upward;
+        this.forward = forward;
+        this.range = range;
+        this.projectileType = projectileType;
+
+        this.radius = 0;
+        this.height = 0;
+    }
+
+    public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
+                              int amount, double right, double upward, double forward,
+                              double range, Class<? extends Projectile> projectileType) {
+        this.spreadType = spreadType;
+
+        this.radius = radius;
+        this.height = height;
+
+        this.speed = speed;
+        this.amount = amount;
+
+        this.angle = 0;
+
         this.right = right;
         this.upward = upward;
         this.forward = forward;

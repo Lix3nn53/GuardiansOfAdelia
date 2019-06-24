@@ -2,7 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import org.bukkit.Material;
+import org.bukkit.entity.Fireball;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +104,8 @@ public class SkillList {
         description.clear();
         description.add("asd");
         skillOne = new Skill("Fireball", Material.AIR, description, 10, 1);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.4, 1, 30,
+                0, 0, 0, 10, Fireball.class);
         mage.add(skillOne);
 
         description.clear();
@@ -234,24 +239,33 @@ public class SkillList {
      * @param rpgClass
      */
     public static List<Skill> getSkillSet(RPGClass rpgClass) {
+        List<Skill> skills = new ArrayList<>();
         switch (rpgClass) {
             case ARCHER:
-                return archer;
+                skills.addAll(archer);
+                break;
             case KNIGHT:
-                return knight;
+                skills.addAll(knight);
+                break;
             case MAGE:
-                return mage;
+                skills.addAll(mage);
+                break;
             case MONK:
-                return monk;
+                skills.addAll(monk);
+                break;
             case ROGUE:
-                return rogue;
+                skills.addAll(rogue);
+                break;
             case PALADIN:
-                return paladin;
+                skills.addAll(paladin);
+                break;
             case WARRIOR:
-                return warrior;
+                skills.addAll(warrior);
+                break;
             case HUNTER:
-                return hunter;
+                skills.addAll(hunter);
+                break;
         }
-        return null;
+        return skills;
     }
 }
