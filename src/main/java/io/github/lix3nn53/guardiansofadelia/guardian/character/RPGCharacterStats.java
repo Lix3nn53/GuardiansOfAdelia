@@ -549,4 +549,62 @@ public class RPGCharacterStats {
     public int getDamageBonusFromOffhand() {
         return damageBonusFromOffhand;
     }
+
+    public boolean addItemBonuses(ItemStack itemStack, RPGClass rpgClass) {
+        if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
+
+            //manage stats on item drop
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "fire");
+                getFire().addBonus(bonus, this);
+            }
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "water");
+                getWater().addBonus(bonus, this);
+            }
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
+                getEarth().addBonus(bonus, this);
+            }
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
+                getLightning().addBonus(bonus, this);
+            }
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
+                getWind().addBonus(bonus, this);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeItemBonuses(ItemStack itemStack, RPGClass rpgClass) {
+        if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
+
+            //manage stats on item drop
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "fire");
+                getFire().removeBonus(bonus, this);
+            }
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "water");
+                getWater().removeBonus(bonus, this);
+            }
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
+                getEarth().removeBonus(bonus, this);
+            }
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
+                getLightning().removeBonus(bonus, this);
+            }
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
+                getWind().removeBonus(bonus, this);
+            }
+            return true;
+        }
+        return false;
+    }
 }

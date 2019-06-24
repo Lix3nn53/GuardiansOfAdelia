@@ -36,6 +36,8 @@ public class DropManager {
     }
 
     public static boolean onItemDespawn(ItemStack itemStack) {
+        //TODO debug message
+        GuardiansOfAdelia.getInstance().getLogger().info("onItemDespawn test called twice: " + itemStack.getType().toString());
         droppedItemOwners.remove(itemStack);
         return true;
     }

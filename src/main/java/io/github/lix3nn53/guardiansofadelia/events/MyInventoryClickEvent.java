@@ -80,6 +80,21 @@ public class MyInventoryClickEvent implements Listener {
     public void onEvent(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         Inventory clickedInventory = event.getClickedInventory();
+        int slot = event.getSlot();
+
+        if (event.getAction() != InventoryAction.NOTHING) {
+            if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+                if (slot >= 0 && slot <= 3) { //skill bar
+                    event.setCancelled(true);
+                    player.sendMessage("Cancel event: hot bar skill item click");
+                    return;
+                } else if (slot == player.getInventory().getHeldItemSlot()) { //clicked on item in main hand
+
+
+                    return;
+                }
+            }
+        }
 
         ItemStack current = event.getCurrentItem();
         Material currentType = Material.AIR;
@@ -131,7 +146,6 @@ public class MyInventoryClickEvent implements Listener {
         Gui activeGui = null;
 
         String title = event.getView().getTitle();
-        int slot = event.getSlot();
 
         if (guardianData != null) {
             if (guardianData.hasActiveGui()) {
