@@ -13,6 +13,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -271,19 +272,14 @@ public class RPGCharacterStats {
     }
 
     public void resetAttributes() {
-        fire.setInvested(0, this);
-        lightning.setInvested(0, this);
-        earth.setInvested(0, this);
-        water.setInvested(0, this);
-        wind.setInvested(0, this);
-    }
+        fire.setInvested(0, this, false);
+        lightning.setInvested(0, this, false);
+        earth.setInvested(0, this, false);
+        water.setInvested(0, this, false);
+        wind.setInvested(0, this, false);
 
-    public void clearBonuses() {
-        fire.clearBonus(this);
-        lightning.clearBonus(this);
-        earth.clearBonus(this);
-        water.clearBonus(this);
-        wind.clearBonus(this);
+        onMaxHealthChange();
+        onCurrentManaChange();
     }
 
     public int getInvestedAttributePoints() {
@@ -329,96 +325,75 @@ public class RPGCharacterStats {
         player.setFoodLevel(foodLevel);
     }
 
-    public void onArmorEquip(ItemStack armor) {
-        Material material = armor.getType();
+    public void onArmorEquip(ItemStack itemStack, boolean fixDisplay) {
+        Material material = itemStack.getType();
         ArmorType armorType = ArmorType.getArmorType(material);
         if (armorType != null) {
             int health = 0;
-            if (PersistentDataContainerUtil.hasInteger(armor, "health")) {
-                health = PersistentDataContainerUtil.getInteger(armor, "health");
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "health")) {
+                health = PersistentDataContainerUtil.getInteger(itemStack, "health");
             }
 
             int defense = 0;
-            if (PersistentDataContainerUtil.hasInteger(armor, "defense")) {
-                defense = PersistentDataContainerUtil.getInteger(armor, "defense");
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "defense")) {
+                defense = PersistentDataContainerUtil.getInteger(itemStack, "defense");
             }
 
             int magicDefense = 0;
-            if (PersistentDataContainerUtil.hasInteger(armor, "magicDefense")) {
-                magicDefense = PersistentDataContainerUtil.getInteger(armor, "magicDefense");
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "magicDefense")) {
+                magicDefense = PersistentDataContainerUtil.getInteger(itemStack, "magicDefense");
             }
 
             switch (armorType) {
                 case HELMET:
                     helmet = new ArmorStatHolder(health, defense, magicDefense);
-                    addPassiveStatBonuses(armor);
+                    setPassiveStatBonuses(EquipmentSlot.HEAD, itemStack, fixDisplay);
                     break;
                 case CHESTPLATE:
                     chestplate = new ArmorStatHolder(health, defense, magicDefense);
-                    addPassiveStatBonuses(armor);
+                    setPassiveStatBonuses(EquipmentSlot.CHEST, itemStack, fixDisplay);
                     break;
                 case LEGGINGS:
                     leggings = new ArmorStatHolder(health, defense, magicDefense);
-                    addPassiveStatBonuses(armor);
+                    setPassiveStatBonuses(EquipmentSlot.LEGS, itemStack, fixDisplay);
                     break;
                 case BOOTS:
                     boots = new ArmorStatHolder(health, defense, magicDefense);
-                    addPassiveStatBonuses(armor);
+                    setPassiveStatBonuses(EquipmentSlot.FEET, itemStack, fixDisplay);
                     break;
+            }
+
+            if (fixDisplay) {
+                onMaxHealthChange();
             }
         }
     }
 
-    public void onArmorUnequip(ItemStack armor) {
-        Material material = armor.getType();
-        ArmorType armorType = ArmorType.getArmorType(material);
-        if (armorType != null) {
-            switch (armorType) {
-                case HELMET:
-                    helmet = new ArmorStatHolder(0, 0, 0);
-                    removePassiveStatBonuses(armor);
-                    break;
-                case CHESTPLATE:
-                    chestplate = new ArmorStatHolder(0, 0, 0);
-                    removePassiveStatBonuses(armor);
-                    break;
-                case LEGGINGS:
-                    leggings = new ArmorStatHolder(0, 0, 0);
-                    removePassiveStatBonuses(armor);
-                    break;
-                case BOOTS:
-                    boots = new ArmorStatHolder(0, 0, 0);
-                    removePassiveStatBonuses(armor);
-                    break;
-            }
-        }
-    }
-
-    public void onOffhandEquip(ItemStack offhand) {
-        Material material = offhand.getType();
+    public void onOffhandEquip(ItemStack itemStack, boolean fixDisplay) {
+        Material material = itemStack.getType();
         if (material.equals(Material.SHIELD)) {
             int health = 0;
-            if (PersistentDataContainerUtil.hasInteger(offhand, "health")) {
-                health = PersistentDataContainerUtil.getInteger(offhand, "health");
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "health")) {
+                health = PersistentDataContainerUtil.getInteger(itemStack, "health");
             }
 
             int defense = 0;
-            if (PersistentDataContainerUtil.hasInteger(offhand, "defense")) {
-                defense = PersistentDataContainerUtil.getInteger(offhand, "defense");
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "defense")) {
+                defense = PersistentDataContainerUtil.getInteger(itemStack, "defense");
             }
 
             int magicDefense = 0;
-            if (PersistentDataContainerUtil.hasInteger(offhand, "magicDefense")) {
-                magicDefense = PersistentDataContainerUtil.getInteger(offhand, "magicDefense");
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "magicDefense")) {
+                magicDefense = PersistentDataContainerUtil.getInteger(itemStack, "magicDefense");
             }
 
             shield = new ArmorStatHolder(health, defense, magicDefense);
-            addPassiveStatBonuses(offhand);
+            setPassiveStatBonuses(EquipmentSlot.OFF_HAND, itemStack, fixDisplay);
         } else if (material.equals(Material.DIAMOND_HOE)) {
-            StatOneType stat = (StatOneType) StatUtils.getStat(offhand);
+            StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
             int damage = stat.getValue();
             damageBonusFromOffhand = (int) ((damage * 0.6) + 0.5);
-            addPassiveStatBonuses(offhand);
+            setPassiveStatBonuses(EquipmentSlot.OFF_HAND, itemStack, fixDisplay);
         }
     }
 
@@ -426,63 +401,71 @@ public class RPGCharacterStats {
         Material material = offhand.getType();
         if (material.equals(Material.SHIELD)) {
             shield = new ArmorStatHolder(0, 0, 0);
-            removePassiveStatBonuses(offhand);
+            removePassiveStatBonuses(EquipmentSlot.OFF_HAND);
         } else if (material.equals(Material.DIAMOND_HOE)) {
             damageBonusFromOffhand = 0;
-            removePassiveStatBonuses(offhand);
+            removePassiveStatBonuses(EquipmentSlot.OFF_HAND);
         }
     }
 
-    private void addPassiveStatBonuses(ItemStack itemStack) {
+    private void setPassiveStatBonuses(EquipmentSlot equipmentSlot, ItemStack itemStack, boolean fixDisplay) {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "fire");
-            getFire().addBonus(bonus, this);
+            getFire().setBonus(equipmentSlot, this, bonus, false);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "water");
-            this.getWater().addBonus(bonus, this);
+            getWater().setBonus(equipmentSlot, this, bonus, fixDisplay);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
-            this.getEarth().addBonus(bonus, this);
-            onMaxHealthChange();
+            getEarth().setBonus(equipmentSlot, this, bonus, fixDisplay);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
-            this.getLightning().addBonus(bonus, this);
+            getLightning().setBonus(equipmentSlot, this, bonus, false);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
-            this.getWind().addBonus(bonus, this);
+            getWind().setBonus(equipmentSlot, this, bonus, false);
         }
     }
 
-    private void removePassiveStatBonuses(ItemStack itemStack) {
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "fire");
-            getFire().removeBonus(bonus, this);
-        }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "water");
-            this.getWater().removeBonus(bonus, this);
-        }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
-            this.getEarth().removeBonus(bonus, this);
-            onMaxHealthChange();
-        }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
-            this.getLightning().removeBonus(bonus, this);
-        }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
-            this.getWind().removeBonus(bonus, this);
-        }
+    private void removePassiveStatBonuses(EquipmentSlot equipmentSlot) {
+        getFire().removeBonus(equipmentSlot, this, false);
+        getWater().removeBonus(equipmentSlot, this, false);
+        getEarth().removeBonus(equipmentSlot, this, false);
+        getLightning().removeBonus(equipmentSlot, this, false);
+        getWind().removeBonus(equipmentSlot, this, false);
+
+        onMaxHealthChange();
+        onCurrentManaChange();
     }
 
-    public void recalculateEquipmentBonuses(RPGInventory rpgInventory, RPGClass rpgClass) {
-        clearBonuses();
+    public void recalculateRPGInventory(RPGInventory rpgInventory) {
+        getFire().clearPassive(this, false);
+        getWater().clearPassive(this, false);
+        getEarth().clearPassive(this, false);
+        getLightning().clearPassive(this, false);
+        getWind().clearPassive(this, false);
+
+        StatPassive totalPassiveStat = rpgInventory.getTotalPassiveStat();
+        getFire().addBonusToPassive(totalPassiveStat.getFire(), this, false);
+        getWater().addBonusToPassive(totalPassiveStat.getWater(), this, false);
+        getEarth().addBonusToPassive(totalPassiveStat.getEarth(), this, false);
+        getLightning().addBonusToPassive(totalPassiveStat.getLightning(), this, false);
+        getWind().addBonusToPassive(totalPassiveStat.getWind(), this, false);
+
+        onMaxHealthChange();
+        onCurrentManaChange();
+    }
+
+    public void recalculateEquipment(RPGClass rpgClass) {
+        getFire().clearEquipment(this, false);
+        getWater().clearEquipment(this, false);
+        getEarth().clearEquipment(this, false);
+        getLightning().clearEquipment(this, false);
+        getWind().clearEquipment(this, false);
 
         helmet = new ArmorStatHolder(0, 0, 0);
         chestplate = new ArmorStatHolder(0, 0, 0);
@@ -498,113 +481,130 @@ public class RPGCharacterStats {
         ItemStack itemInMainHand = inventory.getItemInMainHand();
         if (!InventoryUtils.isAirOrNull(itemInMainHand)) {
             if (StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) {
-                addPassiveStatBonuses(itemInMainHand);
+                setPassiveStatBonuses(EquipmentSlot.HAND, itemInMainHand, false);
             }
         }
 
         ItemStack itemInOffHand = inventory.getItemInOffHand();
         if (!InventoryUtils.isAirOrNull(itemInOffHand)) {
             if (StatUtils.doesCharacterMeetRequirements(itemInOffHand, player, rpgClass)) {
-                onOffhandEquip(itemInOffHand);
+                onOffhandEquip(itemInOffHand, false);
+            } else {
+                InventoryUtils.giveItemToPlayer(player, itemInOffHand);
+                itemInOffHand.setAmount(0);
             }
         }
 
         ItemStack inventoryHelmet = inventory.getHelmet();
         if (!InventoryUtils.isAirOrNull(inventoryHelmet)) {
             if (StatUtils.doesCharacterMeetRequirements(inventoryHelmet, player, rpgClass)) {
-                onArmorEquip(inventoryHelmet);
+                onArmorEquip(inventoryHelmet, false);
+            } else {
+                InventoryUtils.giveItemToPlayer(player, inventoryHelmet);
+                inventoryHelmet.setAmount(0);
             }
         }
 
         ItemStack inventoryChestplate = inventory.getChestplate();
         if (!InventoryUtils.isAirOrNull(inventoryChestplate)) {
             if (StatUtils.doesCharacterMeetRequirements(inventoryChestplate, player, rpgClass)) {
-                onArmorEquip(inventoryChestplate);
+                onArmorEquip(inventoryChestplate, false);
+            } else {
+                InventoryUtils.giveItemToPlayer(player, inventoryChestplate);
+                inventoryChestplate.setAmount(0);
             }
         }
 
         ItemStack inventoryLeggings = inventory.getLeggings();
         if (!InventoryUtils.isAirOrNull(inventoryLeggings)) {
             if (StatUtils.doesCharacterMeetRequirements(inventoryLeggings, player, rpgClass)) {
-                onArmorEquip(inventoryLeggings);
+                onArmorEquip(inventoryLeggings, false);
+            } else {
+                InventoryUtils.giveItemToPlayer(player, inventoryLeggings);
+                inventoryLeggings.setAmount(0);
             }
         }
 
         ItemStack inventoryBoots = inventory.getBoots();
         if (!InventoryUtils.isAirOrNull(inventoryBoots)) {
             if (StatUtils.doesCharacterMeetRequirements(inventoryBoots, player, rpgClass)) {
-                onArmorEquip(inventoryBoots);
+                onArmorEquip(inventoryBoots, false);
+            } else {
+                InventoryUtils.giveItemToPlayer(player, inventoryBoots);
+                inventoryBoots.setAmount(0);
             }
         }
 
-        //rpg inventory bonuses
-        StatPassive totalPassiveStat = rpgInventory.getTotalPassiveStat();
-        getFire().addBonus(totalPassiveStat.getFire(), this);
-        getWater().addBonus(totalPassiveStat.getWater(), this);
-        getEarth().addBonus(totalPassiveStat.getEarth(), this);
-        getLightning().addBonus(totalPassiveStat.getLightning(), this);
-        getWind().addBonus(totalPassiveStat.getWind(), this);
+        onMaxHealthChange();
+        onCurrentManaChange();
     }
+
 
     public int getDamageBonusFromOffhand() {
         return damageBonusFromOffhand;
     }
 
-    public boolean addItemBonuses(ItemStack itemStack, RPGClass rpgClass) {
+    public boolean setMainHandBonuses(ItemStack itemStack, RPGClass rpgClass, boolean fixDisplay) {
         if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
 
             //manage stats on item drop
             if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, "fire");
-                getFire().addBonus(bonus, this);
+                getFire().setBonus(EquipmentSlot.HAND, this, bonus, false);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, "water");
-                getWater().addBonus(bonus, this);
+                getWater().setBonus(EquipmentSlot.HAND, this, bonus, fixDisplay);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
-                getEarth().addBonus(bonus, this);
+                getEarth().setBonus(EquipmentSlot.HAND, this, bonus, fixDisplay);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
-                getLightning().addBonus(bonus, this);
+                getLightning().setBonus(EquipmentSlot.HAND, this, bonus, false);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
-                getWind().addBonus(bonus, this);
+                getWind().setBonus(EquipmentSlot.HAND, this, bonus, false);
             }
             return true;
         }
         return false;
     }
 
-    public boolean removeItemBonuses(ItemStack itemStack, RPGClass rpgClass) {
+    public boolean removeMainHandBonuses(ItemStack itemStack, RPGClass rpgClass, boolean fixDisplay) {
         if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
 
             //manage stats on item drop
             if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "fire");
-                getFire().removeBonus(bonus, this);
+                getFire().removeBonus(EquipmentSlot.HAND, this, false);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "water");
-                getWater().removeBonus(bonus, this);
+                getWater().removeBonus(EquipmentSlot.HAND, this, fixDisplay);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
-                getEarth().removeBonus(bonus, this);
+                getEarth().removeBonus(EquipmentSlot.HAND, this, fixDisplay);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
-                getLightning().removeBonus(bonus, this);
+                getLightning().removeBonus(EquipmentSlot.HAND, this, false);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
-                getWind().removeBonus(bonus, this);
+                getWind().removeBonus(EquipmentSlot.HAND, this, false);
             }
             return true;
         }
         return false;
+    }
+
+    public void clearMainHandBonuses(RPGClass rpgClass, boolean fixDisplay) {
+        getFire().removeBonus(EquipmentSlot.HAND, this, false);
+        getWater().removeBonus(EquipmentSlot.HAND, this, false);
+        getEarth().removeBonus(EquipmentSlot.HAND, this, false);
+        getLightning().removeBonus(EquipmentSlot.HAND, this, false);
+        getWind().removeBonus(EquipmentSlot.HAND, this, false);
+
+        onMaxHealthChange();
+        onCurrentManaChange();
     }
 }

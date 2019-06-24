@@ -64,11 +64,11 @@ public class CharacterInfoSlot {
                     add(ChatColor.BLUE + "✦ Magic Defense: " + ChatColor.GRAY + rpgCharacterStats.getTotalMagicDefense());
                     add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + criticalChance + "%");
                     add(ChatColor.YELLOW + "----------------");
-                    add(ChatColor.RED + "☄" + ChatColor.GRAY + " Fire: " + rpgCharacterStats.getFire().getBonus() + " (+" + rpgCharacterStats.getFire().getInvested() + ")");
-                    add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + rpgCharacterStats.getWater().getBonus() + " (+" + rpgCharacterStats.getWater().getInvested() + ")");
-                    add(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + rpgCharacterStats.getEarth().getBonus() + " (+" + rpgCharacterStats.getEarth().getInvested() + ")");
-                    add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + rpgCharacterStats.getLightning().getBonus() + " (+" + rpgCharacterStats.getLightning().getInvested() + ")");
-                    add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + rpgCharacterStats.getWind().getBonus() + " (+" + rpgCharacterStats.getWind().getInvested() + ")");
+                    add(ChatColor.RED + "☄" + ChatColor.GRAY + " Fire: " + rpgCharacterStats.getFire().getTotalBonus() + " (+" + rpgCharacterStats.getFire().getInvested() + ")");
+                    add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + rpgCharacterStats.getWater().getTotalBonus() + " (+" + rpgCharacterStats.getWater().getInvested() + ")");
+                    add(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + rpgCharacterStats.getEarth().getTotalBonus() + " (+" + rpgCharacterStats.getEarth().getInvested() + ")");
+                    add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + rpgCharacterStats.getLightning().getTotalBonus() + " (+" + rpgCharacterStats.getLightning().getInvested() + ")");
+                    add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + rpgCharacterStats.getWind().getTotalBonus() + " (+" + rpgCharacterStats.getWind().getInvested() + ")");
                 }});
                 itemStack.setItemMeta(skullMeta);
                 return itemStack;

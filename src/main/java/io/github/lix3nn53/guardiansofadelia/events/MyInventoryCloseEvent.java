@@ -7,6 +7,8 @@ import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeGui;
 import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import net.md_5.bungee.api.ChatColor;
@@ -52,6 +54,13 @@ public class MyInventoryCloseEvent implements Listener {
                 }
 
                 guardianData.clearActiveGui();
+            }
+
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+
+                rpgCharacterStats.recalculateEquipment(activeCharacter.getRpgClass());
             }
         }
         MerchantManager.clearSellItemClick(player);

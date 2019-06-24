@@ -49,9 +49,7 @@ public class MyEntityPickupItemEvent implements Listener {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                             RPGClass rpgClass = activeCharacter.getRpgClass();
 
-                            activeCharacter.getRpgCharacterStats().addItemBonuses(itemStack, rpgClass);
-                            player.sendMessage("Add item bonuses on pickup");
-                            //TODO remove item pickup stat debug
+                            activeCharacter.getRpgCharacterStats().setMainHandBonuses(itemStack, rpgClass, true);
                         }
                     }
                 }

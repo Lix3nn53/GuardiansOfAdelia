@@ -269,15 +269,15 @@ public class DatabaseQueries {
                 rpgCharacterStats.setTotalExp(totalexp);
 
                 int attr_fire = resultSet.getInt("attr_fire");
-                rpgCharacterStats.getFire().setInvested(attr_fire, rpgCharacterStats);
+                rpgCharacterStats.getFire().setInvested(attr_fire, rpgCharacterStats, false);
                 int attr_water = resultSet.getInt("attr_water");
-                rpgCharacterStats.getWater().setInvested(attr_water, rpgCharacterStats);
+                rpgCharacterStats.getWater().setInvested(attr_water, rpgCharacterStats, true);
                 int attr_earth = resultSet.getInt("attr_earth");
-                rpgCharacterStats.getEarth().setInvested(attr_earth, rpgCharacterStats);
+                rpgCharacterStats.getEarth().setInvested(attr_earth, rpgCharacterStats, true);
                 int attr_lightning = resultSet.getInt("attr_lightning");
-                rpgCharacterStats.getLightning().setInvested(attr_lightning, rpgCharacterStats);
+                rpgCharacterStats.getLightning().setInvested(attr_lightning, rpgCharacterStats, false);
                 int attr_wind = resultSet.getInt("attr_wind");
-                rpgCharacterStats.getWind().setInvested(attr_wind, rpgCharacterStats);
+                rpgCharacterStats.getWind().setInvested(attr_wind, rpgCharacterStats, false);
 
                 String offHand = resultSet.getString("off_hand");
                 if (!resultSet.wasNull()) {
@@ -401,7 +401,8 @@ public class DatabaseQueries {
                     player.getInventory().setArmorContents(itemStacks);
                 }
 
-                rpgCharacter.getRpgCharacterStats().recalculateEquipmentBonuses(rpgInventory, rpgClass);
+                rpgCharacter.getRpgCharacterStats().recalculateEquipment(rpgCharacter.getRpgClass());
+                rpgCharacter.getRpgCharacterStats().recalculateRPGInventory(rpgCharacter.getRpgInventory());
             }
             resultSet.close();
             pst.close();
@@ -843,15 +844,15 @@ public class DatabaseQueries {
             pst.setInt(25, wind);
 
             SkillBar skillBar = rpgCharacter.getSkillBar();
-            int skill_one = skillBar.getInvestedSkillPoints(1);
+            int skill_one = skillBar.getInvestedSkillPoints(0);
             pst.setInt(26, skill_one);
-            int skill_two = skillBar.getInvestedSkillPoints(2);
+            int skill_two = skillBar.getInvestedSkillPoints(1);
             pst.setInt(27, skill_two);
-            int skill_three = skillBar.getInvestedSkillPoints(3);
+            int skill_three = skillBar.getInvestedSkillPoints(2);
             pst.setInt(28, skill_three);
-            int skill_passive = skillBar.getInvestedSkillPoints(4);
+            int skill_passive = skillBar.getInvestedSkillPoints(3);
             pst.setInt(29, skill_passive);
-            int skill_ultimate = skillBar.getInvestedSkillPoints(5);
+            int skill_ultimate = skillBar.getInvestedSkillPoints(4);
             pst.setInt(30, skill_ultimate);
 
             //2 = replaced, 1 = new row added

@@ -56,7 +56,7 @@ public class MyPlayerItemHeldEvent implements Listener {
                             || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
 
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-                        rpgCharacterStats.removeItemBonuses(oldItem, rpgClass);
+                        rpgCharacterStats.removeMainHandBonuses(oldItem, rpgClass, true);
                     }
                 }
 
@@ -73,7 +73,7 @@ public class MyPlayerItemHeldEvent implements Listener {
 
 
                             RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-                            boolean meetRequirements = rpgCharacterStats.addItemBonuses(item, rpgClass);
+                            boolean meetRequirements = rpgCharacterStats.setMainHandBonuses(item, rpgClass, true);
 
                             //manage arrow in offhand
                             if (type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {

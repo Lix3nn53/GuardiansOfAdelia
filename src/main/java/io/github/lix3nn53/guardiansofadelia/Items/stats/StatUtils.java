@@ -175,7 +175,7 @@ public class StatUtils {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
             int reqLevel = PersistentDataContainerUtil.getInteger(itemStack, "reqLevel");
             if (player.getLevel() < reqLevel) {
-                player.sendMessage("Required level for this weapon is " + reqLevel);
+                player.sendMessage("Required level for this item is " + reqLevel);
                 return false;
             }
         }
@@ -184,7 +184,7 @@ public class StatUtils {
             String reqClassString = PersistentDataContainerUtil.getString(itemStack, "reqClass");
             RPGClass reqClass = RPGClass.valueOf(reqClassString);
             if (!rpgClass.equals(reqClass)) {
-                player.sendMessage("Required class for this weapon is " + reqClass.getClassString());
+                player.sendMessage("Required class for this item is " + reqClass.getClassString());
                 return false;
             }
         }

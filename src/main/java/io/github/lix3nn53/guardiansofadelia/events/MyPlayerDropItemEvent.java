@@ -37,25 +37,17 @@ public class MyPlayerDropItemEvent implements Listener {
 
         ItemStack itemInMainHand = playerInventory.getItemInMainHand();
 
-        //TODO test listening Q key press
-        if (itemStack.getAmount() == 1) {
-            if (itemInMainHand.equals(itemStack)) {
-                Material type = itemInMainHand.getType();
-                if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
-                        || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
+        if (itemInMainHand.getType().equals(Material.AIR)) {
+            UUID uuid = player.getUniqueId();
+            if (GuardianDataManager.hasGuardianData(uuid)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                    RPGClass rpgClass = activeCharacter.getRpgClass();
 
-                    UUID uuid = player.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-                        if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            RPGClass rpgClass = activeCharacter.getRpgClass();
+                    RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                            RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-
-                            rpgCharacterStats.removeItemBonuses(itemInMainHand, rpgClass);
-                        }
-                    }
+                    rpgCharacterStats.clearMainHandBonuses(rpgClass, true);
                 }
             }
         }

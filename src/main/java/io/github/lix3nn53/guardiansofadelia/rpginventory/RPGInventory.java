@@ -366,11 +366,11 @@ public class RPGInventory {
 
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                    rpgCharacterStats.getFire().removeBonus(statPassive.getFire(), rpgCharacterStats);
-                    rpgCharacterStats.getEarth().removeBonus(statPassive.getEarth(), rpgCharacterStats);
-                    rpgCharacterStats.getWater().removeBonus(statPassive.getWater(), rpgCharacterStats);
-                    rpgCharacterStats.getLightning().removeBonus(statPassive.getLightning(), rpgCharacterStats);
-                    rpgCharacterStats.getWind().removeBonus(statPassive.getWind(), rpgCharacterStats);
+                    rpgCharacterStats.getFire().removeBonusFromPassive(statPassive.getFire(), rpgCharacterStats, false);
+                    rpgCharacterStats.getEarth().removeBonusFromPassive(statPassive.getEarth(), rpgCharacterStats, true);
+                    rpgCharacterStats.getWater().removeBonusFromPassive(statPassive.getWater(), rpgCharacterStats, true);
+                    rpgCharacterStats.getLightning().removeBonusFromPassive(statPassive.getLightning(), rpgCharacterStats, false);
+                    rpgCharacterStats.getWind().removeBonusFromPassive(statPassive.getWind(), rpgCharacterStats, false);
                 }
             }
         }
@@ -389,11 +389,11 @@ public class RPGInventory {
 
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                    rpgCharacterStats.getFire().addBonus(statPassive.getFire(), rpgCharacterStats);
-                    rpgCharacterStats.getEarth().addBonus(statPassive.getEarth(), rpgCharacterStats);
-                    rpgCharacterStats.getWater().addBonus(statPassive.getWater(), rpgCharacterStats);
-                    rpgCharacterStats.getLightning().addBonus(statPassive.getLightning(), rpgCharacterStats);
-                    rpgCharacterStats.getWind().addBonus(statPassive.getWind(), rpgCharacterStats);
+                    rpgCharacterStats.getFire().addBonusToPassive(statPassive.getFire(), rpgCharacterStats, false);
+                    rpgCharacterStats.getEarth().addBonusToPassive(statPassive.getEarth(), rpgCharacterStats, true);
+                    rpgCharacterStats.getWater().addBonusToPassive(statPassive.getWater(), rpgCharacterStats, true);
+                    rpgCharacterStats.getLightning().addBonusToPassive(statPassive.getLightning(), rpgCharacterStats, false);
+                    rpgCharacterStats.getWind().addBonusToPassive(statPassive.getWind(), rpgCharacterStats, false);
                 }
             }
         }

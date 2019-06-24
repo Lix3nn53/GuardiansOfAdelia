@@ -10,8 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryAction;
-import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -37,12 +35,8 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
-                        if (!InventoryUtils.isAirOrNull(offHandItem)) {
-                            rpgCharacter.getRpgCharacterStats().onOffhandUnequip(offHandItem);
-                        }
-
                         if (StatUtils.doesCharacterMeetRequirements(mainHandItem, player, rpgCharacter.getRpgClass())) {
-                            rpgCharacter.getRpgCharacterStats().onOffhandEquip(mainHandItem);
+                            rpgCharacter.getRpgCharacterStats().onOffhandEquip(mainHandItem, true);
                         } else {
                             event.setCancelled(true);
                         }
@@ -51,26 +45,24 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
             } else {
                 event.setCancelled(true);
             }
-        } else {
-            if (!InventoryUtils.isAirOrNull(offHandItem)) {
-                Material offHandItemType = offHandItem.getType();
+        } else if (!InventoryUtils.isAirOrNull(offHandItem)) {
+            Material offHandItemType = offHandItem.getType();
 
-                if (offHandItemType.equals(Material.SHIELD) || offHandItemType.equals(Material.DIAMOND_HOE)) {
-                    Player player = event.getPlayer();
+            if (offHandItemType.equals(Material.SHIELD) || offHandItemType.equals(Material.DIAMOND_HOE)) {
+                Player player = event.getPlayer();
 
-                    UUID uuid = player.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                UUID uuid = player.getUniqueId();
+                if (GuardianDataManager.hasGuardianData(uuid)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
 
-                        if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+                    if (guardianData.hasActiveCharacter()) {
+                        RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
-                            rpgCharacter.getRpgCharacterStats().onOffhandUnequip(offHandItem);
-                        }
+                        rpgCharacter.getRpgCharacterStats().onOffhandUnequip(offHandItem);
                     }
-                } else {
-                    event.setCancelled(true);
                 }
+            } else {
+                event.setCancelled(true);
             }
         }
     }

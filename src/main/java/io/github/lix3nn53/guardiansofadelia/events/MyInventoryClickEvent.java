@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
@@ -61,7 +60,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -87,10 +85,6 @@ public class MyInventoryClickEvent implements Listener {
                 if (slot >= 0 && slot <= 3) { //skill bar
                     event.setCancelled(true);
                     player.sendMessage("Cancel event: hot bar skill item click");
-                    return;
-                } else if (slot == player.getInventory().getHeldItemSlot()) { //clicked on item in main hand
-
-
                     return;
                 }
             }
@@ -119,10 +113,11 @@ public class MyInventoryClickEvent implements Listener {
             if (guardianData.hasActiveCharacter()) {
                 rpgCharacter = guardianData.getActiveCharacter();
 
+                /*
                 //manage armor and offhand attributes for player character
                 if (event.getAction() != InventoryAction.NOTHING) {
                     armorAndOffhandListener(player, event.getSlotType(), clickedInventory, event, current, currentType, cursor, cursorType, guardianData, rpgCharacter);
-                }
+                }*/
             }
         }
 
@@ -479,7 +474,7 @@ public class MyInventoryClickEvent implements Listener {
                         attr = rpgCharacterStats.getWater();
                     }
                     if (attr != null) {
-                        attr.investOnePoint(rpgCharacterStats);
+                        attr.investOnePoint(rpgCharacterStats, true);
                         GuiGeneric element = MenuList.element(player);
                         element.openInventory(player);
                     }
@@ -762,6 +757,10 @@ public class MyInventoryClickEvent implements Listener {
         }
     }
 
+    /*
+
+    //ARMOR EQUIP LISTENER
+
     private void armorShiftClickListener(ItemStack current, Material currentType, InventoryClickEvent event, Player player, GuardianData guardianData, RPGCharacter rpgCharacter) {
         ArmorType armorTypeOfCurrentItem = ArmorType.getArmorType(currentType);
         if (armorTypeOfCurrentItem == null) return;
@@ -921,5 +920,5 @@ public class MyInventoryClickEvent implements Listener {
         } else { //drag and drop
             armorNormalClickListener(cursor, cursorType, current, currentType, event, player, guardianData, rpgCharacter);
         }
-    }
+    }*/
 }

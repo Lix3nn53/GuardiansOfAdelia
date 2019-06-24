@@ -10,6 +10,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SkillBar {
@@ -19,7 +20,7 @@ public class SkillBar {
 
     private final List<Integer> investedSkillPoints = new ArrayList<>();
 
-    private final List<Integer> skillsOnCooldown = new ArrayList<>();
+    private static HashMap<Integer, Boolean> skillsOnCooldown = new HashMap<>();
 
     public SkillBar(Player player, RPGClass rpgClass, int one, int two, int three, int passive, int ultimate) {
         this.player = player;
@@ -63,19 +64,27 @@ public class SkillBar {
     public void updateSkillBar() {
         List<Skill> skillSet = SkillList.getSkillSet(rpgClass);
         for (int i = 0; i < investedSkillPoints.size(); i++) {
+            int slot = i;
+
+            if (i == 3) { //don't place passive skill on hot-bar
+                continue;
+            } else if (i > 3) {
+                slot--;
+            }
+
             Integer invested = investedSkillPoints.get(i);
             if (invested > 0) {
                 Skill skill = skillSet.get(i);
                 ItemStack icon = skill.getIcon(invested);
-                player.getInventory().setItem(i, icon);
+                player.getInventory().setItem(slot, icon);
             } else {
-                player.getInventory().setItem(i, OtherItems.getUnassignedSkill());
+                player.getInventory().setItem(slot, OtherItems.getUnassignedSkill());
             }
         }
     }
 
     public boolean castSkill(int skillIndex) {
-        if (skillsOnCooldown.contains(skillIndex)) {
+        if (skillsOnCooldown.containsKey(skillIndex)) {
             //TODO play sound to player on cast fail
             return false;
         }
@@ -89,7 +98,7 @@ public class SkillBar {
         int cooldown = skill.getCooldown();
         PlayerInventory inventory = player.getInventory();
 
-        skillsOnCooldown.add(skillIndex);
+        skillsOnCooldown.put(skillIndex, true);
 
         new BukkitRunnable() {
 

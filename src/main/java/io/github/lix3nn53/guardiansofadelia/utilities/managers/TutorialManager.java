@@ -45,7 +45,8 @@ public class TutorialManager {
             Quest tutorialStartQuest = QuestNPCManager.getQuestCopyById(1);
             rpgCharacter.acceptQuest(tutorialStartQuest, player);
 
-            rpgCharacter.getRpgCharacterStats().recalculateEquipmentBonuses(rpgCharacter.getRpgInventory(), rpgCharacter.getRpgClass());
+            rpgCharacter.getRpgCharacterStats().recalculateEquipment(rpgCharacter.getRpgClass());
+            rpgCharacter.getRpgCharacterStats().recalculateRPGInventory(rpgCharacter.getRpgInventory());
 
             rpgCharacterStats.setCurrentHealth(rpgCharacterStats.getTotalMaxHealth());
             rpgCharacterStats.setCurrentMana(rpgCharacterStats.getTotalMaxMana());

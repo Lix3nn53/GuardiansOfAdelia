@@ -42,7 +42,6 @@ public class TutorialEndAction implements Action {
 
                 rpgCharacterStats.setTotalExp(0);
                 rpgCharacterStats.resetAttributes();
-                rpgCharacterStats.clearBonuses();
 
                 rpgCharacterStats.setCurrentHealth(rpgCharacterStats.getTotalMaxHealth());
                 rpgCharacterStats.setCurrentMana(rpgCharacterStats.getTotalMaxMana());
@@ -53,7 +52,8 @@ public class TutorialEndAction implements Action {
                         player.removePotionEffect(PotionEffectType.WITHER);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 200, 4));
                         QuestNPCManager.setAllNpcHologramForPlayer(player);
-                        activeCharacter.getRpgCharacterStats().recalculateEquipmentBonuses(rpgInventory, activeCharacter.getRpgClass());
+                        activeCharacter.getRpgCharacterStats().recalculateEquipment(activeCharacter.getRpgClass());
+                        activeCharacter.getRpgCharacterStats().recalculateRPGInventory(rpgInventory);
                     }
                 }.runTaskLater(GuardiansOfAdelia.getInstance(), 5L);
 
