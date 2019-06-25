@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
@@ -118,7 +119,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                     totalDefense = targetRpgCharacterStats.getTotalMagicDefense();
                                 }
 
-                                double reduction = getDefenseReduction(totalDefense);
+                                double reduction = StatUtils.getDefenseReduction(totalDefense);
 
                                 damage = damage * reduction;
 
@@ -273,7 +274,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 totalDefense = targetRpgCharacterStats.getTotalMagicDefense();
                             }
 
-                            double reduction = getDefenseReduction(totalDefense);
+                            double reduction = StatUtils.getDefenseReduction(totalDefense);
 
                             damage = damage * reduction;
 
@@ -346,9 +347,5 @@ public class MyEntityDamageByEntityEvent implements Listener {
             }
         }
         return false;
-    }
-
-    private double getDefenseReduction(int totalDefense) {
-        return  (1 - (totalDefense / (totalDefense + 3000.0))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
     }
 }
