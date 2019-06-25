@@ -27,6 +27,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -57,13 +58,13 @@ public class MyEntityDamageByEntityEvent implements Listener {
         if (target instanceof LivingEntity) {
             boolean isEventCanceled = false;
             boolean isAttackerPlayer = false;
-            boolean isMagicAttack = false;
+            boolean isMagicAttack = event.getCause().equals(EntityDamageEvent.DamageCause.CUSTOM);
             LivingEntity livingTarget = (LivingEntity) target;
 
             //DAMAGER
             if (damager.getType().equals(EntityType.PLAYER)) { //player is attacker
                 Player player = (Player) damager;
-                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, false, false);
+                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, false, isMagicAttack);
                 isAttackerPlayer = true;
             } else if (damager instanceof Projectile) { //projectile is attacker
                 Projectile projectile = (Projectile) damager;

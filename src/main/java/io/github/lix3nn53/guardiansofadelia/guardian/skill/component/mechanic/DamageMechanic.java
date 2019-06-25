@@ -1,18 +1,16 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class DamageMechanic extends MechanicComponent {
 
@@ -29,6 +27,7 @@ public class DamageMechanic extends MechanicComponent {
 	@Override
 	public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
 		double calcDamage = baseDamage + (levelMultiplier * skillLevel);
+
 		if(caster instanceof Player) {
 			UUID uniqueId = caster.getUniqueId();
 			if (GuardianDataManager.hasGuardianData(uniqueId)) {
@@ -47,38 +46,8 @@ public class DamageMechanic extends MechanicComponent {
 				}
 			}
 		}
-		for (LivingEntity ent : targets) {
-			if (ent instanceof Player) {
-				if (type == SkillDamageType.MAGIC) {
-					UUID uniqueId = ent.getUniqueId();
-					if (GuardianDataManager.hasGuardianData(uniqueId)) {
-						GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
-						if (guardianData.hasActiveCharacter()) {
 
-							RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-
-							RPGCharacterStats targetRpgCharacterStats = activeCharacter.getRpgCharacterStats();
-							int totalDefense = targetRpgCharacterStats.getTotalMagicDefense();
-							double reduction = StatUtils.getDefenseReduction(totalDefense);
-							calcDamage *= reduction;
-						}
-					}
-				} else {
-					UUID uniqueId = ent.getUniqueId();
-					if (GuardianDataManager.hasGuardianData(uniqueId)) {
-						GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
-						if (guardianData.hasActiveCharacter()) {
-
-							RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-
-							RPGCharacterStats targetRpgCharacterStats = activeCharacter.getRpgCharacterStats();
-							int totalDefense = targetRpgCharacterStats.getTotalDefense();
-							double reduction = StatUtils.getDefenseReduction(totalDefense);
-							calcDamage *= reduction;
-						}
-					}
-				}
-			}
+        for (LivingEntity ent : targets) {
 			ent.damage(calcDamage, caster);
 		}
 		return targets.size() > 0;
@@ -95,6 +64,6 @@ public class DamageMechanic extends MechanicComponent {
 	
 	
 	public enum SkillDamageType {
-		MAGIC, MELEE, RANGED;
-	}
+        MAGIC, MELEE, RANGED
+    }
 }
