@@ -1,10 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DamageMechanic extends MechanicComponent {
@@ -13,5 +11,11 @@ public class DamageMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         //TODO
         return targets.size() > 0;
+    }
+
+    @Override
+    public List<String> getSkillLoreAdditions(int skillLevel) {
+        //TODO
+        return null;
     }
 }

@@ -115,4 +115,10 @@ public class ProjectileMechanic extends MechanicComponent {
 
         return targets.size() > 0;
     }
+
+    @Override
+    public List<String> getSkillLoreAdditions(int skillLevel) {
+        //TODO
+        return null;
+    }
 }

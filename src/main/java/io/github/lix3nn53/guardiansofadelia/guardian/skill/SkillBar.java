@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Each player character has unique skill-bar
+ */
 public class SkillBar {
 
     private final Player player;
@@ -32,7 +35,7 @@ public class SkillBar {
         investedSkillPoints.add(passive);
         investedSkillPoints.add(ultimate);
 
-        updateSkillBar();
+        remakeSkillBar();
     }
 
     /**
@@ -44,7 +47,7 @@ public class SkillBar {
         invested += points;
         investedSkillPoints.set(skillIndex, invested);
 
-        updateSkillBar();
+        remakeSkillBarIcon(skillIndex);
     }
 
     public int getInvestedSkillPoints(int skillIndex) {
@@ -61,7 +64,7 @@ public class SkillBar {
         return result;
     }
 
-    public void updateSkillBar() {
+    public void remakeSkillBar() {
         List<Skill> skillSet = SkillList.getSkillSet(rpgClass);
         for (int i = 0; i < investedSkillPoints.size(); i++) {
             int slot = i;
@@ -75,11 +78,31 @@ public class SkillBar {
             Integer invested = investedSkillPoints.get(i);
             if (invested > 0) {
                 Skill skill = skillSet.get(i);
-                ItemStack icon = skill.getIcon(invested);
+                ItemStack icon = skill.getIcon(invested, player.getLevel(), getSkillPointsLeftToSpend());
                 player.getInventory().setItem(slot, icon);
             } else {
                 player.getInventory().setItem(slot, OtherItems.getUnassignedSkill());
             }
+        }
+    }
+
+    public void remakeSkillBarIcon(int skillIndex) {
+        List<Skill> skillSet = SkillList.getSkillSet(rpgClass);
+        int slot = skillIndex;
+
+        if (skillIndex == 3) { //don't place passive skill on hot-bar
+            return;
+        } else if (skillIndex > 3) {
+            slot--;
+        }
+
+        Integer invested = investedSkillPoints.get(skillIndex);
+        if (invested > 0) {
+            Skill skill = skillSet.get(skillIndex);
+            ItemStack icon = skill.getIcon(invested, player.getLevel(), getSkillPointsLeftToSpend());
+            player.getInventory().setItem(slot, icon);
+        } else {
+            player.getInventory().setItem(slot, OtherItems.getUnassignedSkill());
         }
     }
 
@@ -93,9 +116,10 @@ public class SkillBar {
 
         Skill skill = skillSet.get(skillIndex);
 
-        skill.cast(player, investedSkillPoints.get(skillIndex), null);
+        Integer skillLevel = investedSkillPoints.get(skillIndex);
+        skill.cast(player, skillLevel, null);
 
-        int cooldown = skill.getCooldown();
+        int cooldown = skill.getCooldown(skillLevel);
         PlayerInventory inventory = player.getInventory();
 
         skillsOnCooldown.put(skillIndex, true);

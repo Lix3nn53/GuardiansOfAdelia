@@ -10,6 +10,11 @@ import org.bukkit.entity.Fireball;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Common list of skills for skill-bars etc
+ * <p>
+ * Not unique for players
+ */
 public class SkillList {
 
     private static final List<Skill> archer = new ArrayList<>();
@@ -234,7 +239,7 @@ public class SkillList {
     }
 
     /**
-     * First 3 skills are normal actives, 4th skill is passive and 5th skill is ultimate
+     * Elements in returned list: 0,1,2 normal skills, 3 passive, 4 ultimate
      *
      * @param rpgClass
      */
@@ -267,5 +272,32 @@ public class SkillList {
                 break;
         }
         return skills;
+    }
+
+    /**
+     * @param rpgClass
+     * @param skillIndex 0,1,2 normal skills, 3 passive, 4 ultimate
+     * @return
+     */
+    public static Skill getSkill(RPGClass rpgClass, int skillIndex) {
+        switch (rpgClass) {
+            case ARCHER:
+                return archer.get(skillIndex);
+            case KNIGHT:
+                return knight.get(skillIndex);
+            case MAGE:
+                return mage.get(skillIndex);
+            case MONK:
+                return monk.get(skillIndex);
+            case ROGUE:
+                return rogue.get(skillIndex);
+            case PALADIN:
+                return paladin.get(skillIndex);
+            case WARRIOR:
+                return warrior.get(skillIndex);
+            case HUNTER:
+                return hunter.get(skillIndex);
+        }
+        return null;
     }
 }
