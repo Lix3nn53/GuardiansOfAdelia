@@ -19,7 +19,7 @@ public abstract class SkillComponent {
      * @param targets
      * @return
      */
-    boolean executeChildren(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    protected boolean executeChildren(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
         boolean worked = false;
@@ -42,7 +42,7 @@ public abstract class SkillComponent {
      * @param skillLevel
      * @return
      */
-    List<String> getSkillLoreAdditionsOfChildren(int skillLevel) {
+    protected List<String> getSkillLoreAdditionsOfChildren(int skillLevel) {
         List<String> additions = new ArrayList<>();
         for (SkillComponent child : children) {
             additions.addAll(child.getSkillLoreAdditions(skillLevel));
