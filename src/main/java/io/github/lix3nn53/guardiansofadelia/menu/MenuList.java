@@ -7,6 +7,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.list.SkillList;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
@@ -176,9 +179,69 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric skill() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.LIGHT_PURPLE + "Skills", 0);
+    public static GuiGeneric skill(Player player) {
+        GuiGeneric guiGeneric = null;
 
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+
+                SkillBar skillBar = rpgCharacter.getSkillBar();
+
+                int pointsLeft = skillBar.getSkillPointsLeftToSpend();
+                guiGeneric = new GuiGeneric(27, ChatColor.LIGHT_PURPLE + "Skills (Points: " + pointsLeft + ")", 0);
+
+                List<Skill> skillSet = SkillList.getSkillSet(rpgCharacter.getRpgClass());
+
+                Skill skillOne = skillSet.get(0);
+                int investedSkillPoints = skillBar.getInvestedSkillPoints(0);
+                ItemStack icon = skillOne.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+                ItemMeta itemMeta = icon.getItemMeta();
+                String displayName = itemMeta.getDisplayName();
+                itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+                icon.setItemMeta(itemMeta);
+                guiGeneric.setItem(1, icon);
+
+                Skill skillTwo = skillSet.get(1);
+                investedSkillPoints = skillBar.getInvestedSkillPoints(1);
+                icon = skillTwo.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+                itemMeta = icon.getItemMeta();
+                displayName = itemMeta.getDisplayName();
+                itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+                icon.setItemMeta(itemMeta);
+                guiGeneric.setItem(4, icon);
+
+                Skill skillThree = skillSet.get(2);
+                investedSkillPoints = skillBar.getInvestedSkillPoints(2);
+                icon = skillThree.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+                itemMeta = icon.getItemMeta();
+                displayName = itemMeta.getDisplayName();
+                itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+                icon.setItemMeta(itemMeta);
+                guiGeneric.setItem(7, icon);
+
+                Skill skillFour = skillSet.get(3);
+                investedSkillPoints = skillBar.getInvestedSkillPoints(3);
+                icon = skillFour.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+                itemMeta = icon.getItemMeta();
+                displayName = itemMeta.getDisplayName();
+                itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+                icon.setItemMeta(itemMeta);
+                guiGeneric.setItem(20, icon);
+
+                Skill skillFive = skillSet.get(4);
+                investedSkillPoints = skillBar.getInvestedSkillPoints(4);
+                icon = skillFive.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+                itemMeta = icon.getItemMeta();
+                displayName = itemMeta.getDisplayName();
+                itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+                icon.setItemMeta(itemMeta);
+                guiGeneric.setItem(24, icon);
+            }
+        }
 
         return guiGeneric;
     }

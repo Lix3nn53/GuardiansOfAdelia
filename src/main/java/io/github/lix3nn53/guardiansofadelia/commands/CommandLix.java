@@ -11,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
@@ -18,8 +19,6 @@ import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -47,6 +46,7 @@ public class CommandLix implements CommandExecutor {
             if (args.length < 1) {
                 player.sendMessage(ChatColor.DARK_PURPLE + "---- ADMIN ----");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/lix setstaff <player> [NONE|OWNER|ADMIN|DEVELOPER|BUILDER|SUPPORT|YOUTUBER|TRAINEE]");
+                player.sendMessage(ChatColor.DARK_PURPLE + "/lix exp <player> <amount>");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "---- UTILS ----");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix tp [town|?] <num>");
                 player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
@@ -56,6 +56,21 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.BLUE + "/lix stone <grade> <amount>");
                 player.sendMessage(ChatColor.BLUE + "/lix passive [parrot|earring|necklace|glove|ring] <num>");
                 player.sendMessage(ChatColor.BLUE + "/lix model portal<1-5>");
+            } else if (args[0].equals("exp")) {
+                if (args.length == 3) {
+                    int expToGive = Integer.parseInt(args[2]);
+                    Player player2 = Bukkit.getPlayer(args[1]);
+                    if (player2 != null) {
+                        UUID uuid = player2.getUniqueId();
+                        if (GuardianDataManager.hasGuardianData(uuid)) {
+                            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                            if (guardianData.hasActiveCharacter()) {
+                                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                                activeCharacter.getRpgCharacterStats().giveExp(expToGive);
+                            }
+                        }
+                    }
+                }
             } else if (args[0].equals("setstaff")) {
                 if (args.length == 3) {
                     try {

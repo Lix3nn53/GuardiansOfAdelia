@@ -12,34 +12,27 @@ import java.util.List;
 
 public class Skill {
 
-    String name;
-    Material material;
-    List<String> description;
-    int maxSkillLevel;
+    private final String name;
+    private final Material material;
+    private final List<String> description;
 
-    int reqPlayerLevel;
-    double reqPlayerLevelIncreamentPerLevel;
-    int reqPoints;
-    double reqPointsIncreamentPerLevel;
-
-    private int investedPoints;
+    private final List<Integer> reqPlayerLevels;
+    private final List<Integer> reqSkillPoints;
 
     //skill attributes
-    int manaCost;
-    double manaCostIncreamentPerLevel;
-    int cooldown;
-    double cooldownIncreamentPerLevel;
+    private final List<Integer> manaCosts;
+    private final List<Integer> cooldowns;
 
     private final List<SkillComponent> triggers = new ArrayList<>();
 
-    public Skill(String name, Material material, List<String> description, int maxSkillLevel, int reqPlayerLevel) {
+    public Skill(String name, Material material, List<String> description, List<Integer> reqPlayerLevels, List<Integer> reqSkillPoints, List<Integer> manaCosts, List<Integer> cooldowns) {
         this.name = name;
         this.material = material;
-        this.maxSkillLevel = maxSkillLevel;
-        this.reqPlayerLevel = reqPlayerLevel;
         this.description = description;
-
-
+        this.reqPlayerLevels = reqPlayerLevels;
+        this.reqSkillPoints = reqSkillPoints;
+        this.manaCosts = manaCosts;
+        this.cooldowns = cooldowns;
     }
 
     public String getName() {
@@ -51,28 +44,53 @@ public class Skill {
     }
 
     public int getMaxSkillLevel() {
-        return maxSkillLevel;
+        return reqPlayerLevels.size() - 1;
     }
 
     public int getReqPlayerLevel(int skillLevel) {
-        return (int) (reqPlayerLevel + (skillLevel * reqPlayerLevelIncreamentPerLevel) + 0.5);
+        return reqPlayerLevels.get(skillLevel);
     }
 
     public int getReqSkillPoints(int skillLevel) {
-        return (int) (reqPoints + (skillLevel * reqPointsIncreamentPerLevel) + 0.5);
+        return reqSkillPoints.get(skillLevel);
+    }
+
+    public int getManaCost(int skillLevel) {
+        return manaCosts.get(skillLevel);
+    }
+
+    public int getCooldown(int skillLevel) {
+        return cooldowns.get(skillLevel);
+    }
+
+    public int getCurrentSkillLevel(int pointsInvested) {
+        int skillLevel = 0;
+
+        int totalReqPoint = 0;
+        for (int reqPoint : reqSkillPoints) {
+            totalReqPoint += reqPoint;
+            if (pointsInvested >= totalReqPoint) {
+                skillLevel++;
+            } else {
+                break;
+            }
+        }
+
+        return skillLevel;
     }
 
     public List<String> getDescription() {
         return description;
     }
 
-    public ItemStack getIcon(int skillLevel, int playerLevel, int playerPoints) {
+    public ItemStack getIcon(int playerLevel, int playerPoints, int investedPoints) {
+        int skillLevel = getCurrentSkillLevel(investedPoints);
 
         ItemStack icon = new ItemStack(getMaterial());
 
         ItemMeta itemMeta = icon.getItemMeta();
 
-        itemMeta.setDisplayName(getName() + " (" + investedPoints + "/" + getMaxSkillLevel() + ")");
+        itemMeta.setDisplayName(getName() + " (" + skillLevel + "/" + getMaxSkillLevel() + ")");
         List<String> lore = new ArrayList<>();
 
         int reqPlayerLevel = getReqPlayerLevel(skillLevel);
@@ -91,8 +109,8 @@ public class Skill {
         lore.add(reqSkillPointsColor + "Required Skill Points: " + reqSkillPoints);
 
         lore.add(ChatColor.YELLOW + "------------------------------");
-        lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(playerLevel));
-        lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(playerLevel));
+        lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel));
+        lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel));
 
         lore.add(ChatColor.YELLOW + "------------------------------");
         //skill attributes
@@ -107,14 +125,6 @@ public class Skill {
 
         icon.setItemMeta(itemMeta);
         return icon;
-    }
-
-    public int getManaCost(int skillLevel) {
-        return (int) (manaCost + (skillLevel * manaCostIncreamentPerLevel) + 0.5);
-    }
-
-    public int getCooldown(int skillLevel) {
-        return (int) (cooldown + (skillLevel * cooldownIncreamentPerLevel) + 0.5);
     }
 
     public boolean canPlayersCast() {

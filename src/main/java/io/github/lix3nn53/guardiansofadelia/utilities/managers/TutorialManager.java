@@ -72,7 +72,7 @@ public class TutorialManager {
         player.getInventory().setBoots(boots);
 
         ItemStack mainHand = Weapons.getWeapon(rpgClass, 10, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        player.getInventory().setItem(5, mainHand);
+        player.getInventory().setItem(4, mainHand);
 
         if (rpgClass.equals(RPGClass.KNIGHT)) {
             ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);

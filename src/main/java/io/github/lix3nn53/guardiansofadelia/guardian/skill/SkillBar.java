@@ -29,6 +29,8 @@ public class SkillBar {
         this.player = player;
         this.rpgClass = rpgClass;
 
+        player.getInventory().setHeldItemSlot(4);
+
         investedSkillPoints.add(one);
         investedSkillPoints.add(two);
         investedSkillPoints.add(three);
@@ -40,14 +42,46 @@ public class SkillBar {
 
     /**
      * @param skillIndex 0,1,2 normal skills, 3 passive, 4 ultimate
-     * @param points  to invest in skill
      */
-    public void investSkillPoints(int skillIndex, int points) {
-        int invested = investedSkillPoints.get(skillIndex);
-        invested += points;
-        investedSkillPoints.set(skillIndex, invested);
+    public boolean upgradeSkill(int skillIndex) {
+        Skill skill = SkillList.getSkill(rpgClass, skillIndex);
 
+        Integer invested = investedSkillPoints.get(skillIndex);
+        int currentSkillLevel = skill.getCurrentSkillLevel(invested);
+
+        if (currentSkillLevel >= skill.getMaxSkillLevel()) {
+            return false;
+        }
+
+        int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel);
+
+        if (getSkillPointsLeftToSpend() >= reqSkillPoints) {
+            investedSkillPoints.set(skillIndex, invested + reqSkillPoints);
+            remakeSkillBarIcon(skillIndex);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param skillIndex 0,1,2 normal skills, 3 passive, 4 ultimate
+     */
+    public boolean downgradeSkill(int skillIndex) {
+        Skill skill = SkillList.getSkill(rpgClass, skillIndex);
+
+        Integer invested = investedSkillPoints.get(skillIndex);
+        int currentSkillLevel = skill.getCurrentSkillLevel(invested);
+
+        if (currentSkillLevel <= 0) {
+            return false;
+        }
+
+        int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel - 1);
+
+        investedSkillPoints.set(skillIndex, invested - reqSkillPoints);
         remakeSkillBarIcon(skillIndex);
+        return true;
     }
 
     public int getInvestedSkillPoints(int skillIndex) {
@@ -55,10 +89,10 @@ public class SkillBar {
     }
 
     public int getSkillPointsLeftToSpend() {
-        int result = 0;
+        int result = player.getLevel();
 
         for (int invested : investedSkillPoints) {
-            result += invested;
+            result -= invested;
         }
 
         return result;
@@ -78,7 +112,7 @@ public class SkillBar {
             Integer invested = investedSkillPoints.get(i);
             if (invested > 0) {
                 Skill skill = skillSet.get(i);
-                ItemStack icon = skill.getIcon(invested, player.getLevel(), getSkillPointsLeftToSpend());
+                ItemStack icon = skill.getIcon(player.getLevel(), getSkillPointsLeftToSpend(), invested);
                 player.getInventory().setItem(slot, icon);
             } else {
                 player.getInventory().setItem(slot, OtherItems.getUnassignedSkill());
@@ -99,7 +133,7 @@ public class SkillBar {
         Integer invested = investedSkillPoints.get(skillIndex);
         if (invested > 0) {
             Skill skill = skillSet.get(skillIndex);
-            ItemStack icon = skill.getIcon(invested, player.getLevel(), getSkillPointsLeftToSpend());
+            ItemStack icon = skill.getIcon(player.getLevel(), getSkillPointsLeftToSpend(), invested);
             player.getInventory().setItem(slot, icon);
         } else {
             player.getInventory().setItem(slot, OtherItems.getUnassignedSkill());
@@ -116,7 +150,13 @@ public class SkillBar {
 
         Skill skill = skillSet.get(skillIndex);
 
-        Integer skillLevel = investedSkillPoints.get(skillIndex);
+        Integer invested = investedSkillPoints.get(skillIndex);
+        int skillLevel = skill.getCurrentSkillLevel(invested);
+
+        if (skillLevel <= 0) {
+            return false;
+        }
+
         skill.cast(player, skillLevel, null);
 
         int cooldown = skill.getCooldown(skillLevel);
@@ -143,7 +183,7 @@ public class SkillBar {
                 }
                 seconds++;
             }
-        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 20L * cooldown);
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 20L);
 
         return true;
     }

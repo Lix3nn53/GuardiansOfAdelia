@@ -29,212 +29,249 @@ public class SkillList {
     static {
         //ARCHER
         List<String> description = new ArrayList<>();
+
+        List<Integer> reqLevels = new ArrayList<>();
+        reqLevels.add(1);
+        reqLevels.add(5);
+        reqLevels.add(10);
+        reqLevels.add(15);
+        reqLevels.add(20);
+        reqLevels.add(25);
+        reqLevels.add(30);
+
+        List<Integer> reqPoints = new ArrayList<>();
+        reqPoints.add(1);
+        reqPoints.add(2);
+        reqPoints.add(3);
+        reqPoints.add(4);
+        reqPoints.add(5);
+        reqPoints.add(6);
+        reqPoints.add(7);
+
+        List<Integer> manaCosts = new ArrayList<>();
+        manaCosts.add(5);
+        manaCosts.add(5);
+        manaCosts.add(5);
+        manaCosts.add(5);
+        manaCosts.add(5);
+        manaCosts.add(5);
+        manaCosts.add(5);
+
+        List<Integer> cooldowns = new ArrayList<>();
+        cooldowns.add(5);
+        cooldowns.add(5);
+        cooldowns.add(5);
+        cooldowns.add(5);
+        cooldowns.add(5);
+        cooldowns.add(5);
+        cooldowns.add(5);
+
         description.add("asd");
-        Skill skillOne = new Skill("Blind Shot", Material.AIR, description, 10, 1);
+        Skill skillOne = new Skill("Blind Shot", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         archer.add(skillOne);
 
         description.clear();
         description.add("asd");
-        Skill skillTwo = new Skill("Zephyr", Material.AIR, description, 10, 1);
+        Skill skillTwo = new Skill("Zephyr", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         archer.add(skillTwo);
 
         description.clear();
         description.add("asd");
-        Skill skillThree = new Skill("Purple Wings", Material.AIR, description, 10, 1);
+        Skill skillThree = new Skill("Purple Wings", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         archer.add(skillThree);
 
         description.clear();
         description.add("asd");
-        Skill passive = new Skill("Hop Hop", Material.AIR, description, 10, 1);
+        Skill passive = new Skill("Hop Hop", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         archer.add(passive);
 
         description.clear();
         description.add("asd");
-        Skill ultimate = new Skill("Make It Rain", Material.AIR, description, 10, 1);
+        Skill ultimate = new Skill("Make It Rain", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         archer.add(ultimate);
 
         //HUNTER
         description.clear();
         description.add("asd");
-        skillOne = new Skill("SkillName", Material.AIR, description, 10, 1);
+        skillOne = new Skill("SkillName", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         hunter.add(skillOne);
 
         description.clear();
         description.add("asd");
-        skillTwo = new Skill("SkillName", Material.AIR, description, 10, 1);
+        skillTwo = new Skill("SkillName", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         hunter.add(skillTwo);
 
         description.clear();
         description.add("asd");
-        skillThree = new Skill("SkillName", Material.AIR, description, 10, 1);
+        skillThree = new Skill("SkillName", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         hunter.add(skillThree);
 
         description.clear();
         description.add("asd");
-        passive = new Skill("SkillName", Material.AIR, description, 10, 1);
+        passive = new Skill("SkillName", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         hunter.add(passive);
 
         description.clear();
         description.add("asd");
-        ultimate = new Skill("SkillName", Material.AIR, description, 10, 1);
+        ultimate = new Skill("SkillName", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         hunter.add(ultimate);
 
         //KNIGHT
         description.clear();
         description.add("asd");
-        skillOne = new Skill("Slice and Dice", Material.AIR, description, 10, 1);
+        skillOne = new Skill("Slice and Dice", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         knight.add(skillOne);
 
         description.clear();
         description.add("asd");
-        skillTwo = new Skill("Devastate", Material.AIR, description, 10, 1);
+        skillTwo = new Skill("Devastate", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         knight.add(skillTwo);
 
         description.clear();
         description.add("asd");
-        skillThree = new Skill("Battle Cry", Material.AIR, description, 10, 1);
+        skillThree = new Skill("Battle Cry", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         knight.add(skillThree);
 
         description.clear();
         description.add("asd");
-        passive = new Skill("Block", Material.AIR, description, 10, 1);
+        passive = new Skill("Block", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         knight.add(passive);
 
         description.clear();
         description.add("asd");
-        ultimate = new Skill("Wrath of Justice", Material.AIR, description, 10, 1);
+        ultimate = new Skill("Wrath of Justice", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         knight.add(ultimate);
 
         //MAGE
         description.clear();
         description.add("asd");
-        skillOne = new Skill("Fireball", Material.AIR, description, 10, 1);
+        skillOne = new Skill("Fireball", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.4, 1, 30,
                 0, 0, 0, 10, Fireball.class);
         mage.add(skillOne);
 
         description.clear();
         description.add("asd");
-        skillTwo = new Skill("Electric Shock", Material.AIR, description, 10, 1);
+        skillTwo = new Skill("Electric Shock", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         mage.add(skillTwo);
 
         description.clear();
         description.add("asd");
-        skillThree = new Skill("Shockwave", Material.AIR, description, 10, 1);
+        skillThree = new Skill("Shockwave", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         mage.add(skillThree);
 
         description.clear();
         description.add("asd");
-        passive = new Skill("Mental Fortitude", Material.AIR, description, 10, 1);
+        passive = new Skill("Mental Fortitude", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         mage.add(passive);
 
         description.clear();
         description.add("asd");
-        ultimate = new Skill("Inferno", Material.AIR, description, 10, 1);
+        ultimate = new Skill("Inferno", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         mage.add(ultimate);
 
         //MONK
         description.clear();
         description.add("asd");
-        skillOne = new Skill("Iron Fist", Material.AIR, description, 10, 1);
+        skillOne = new Skill("Iron Fist", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         monk.add(skillOne);
 
         description.clear();
         description.add("asd");
-        skillTwo = new Skill("Tumble", Material.AIR, description, 10, 1);
+        skillTwo = new Skill("Tumble", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         monk.add(skillTwo);
 
         description.clear();
         description.add("asd");
-        skillThree = new Skill("Serenity", Material.AIR, description, 10, 1);
+        skillThree = new Skill("Serenity", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         monk.add(skillThree);
 
         description.clear();
         description.add("asd");
-        passive = new Skill("Mark of Ocean", Material.AIR, description, 10, 1);
+        passive = new Skill("Mark of Ocean", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         monk.add(passive);
 
         description.clear();
         description.add("asd");
-        ultimate = new Skill("Aqua Prison", Material.AIR, description, 10, 1);
+        ultimate = new Skill("Aqua Prison", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         monk.add(ultimate);
 
         //PALADIN
         description.clear();
         description.add("asd");
-        skillOne = new Skill("Hammerblow", Material.AIR, description, 10, 1);
+        skillOne = new Skill("Hammerblow", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         paladin.add(skillOne);
 
         description.clear();
         description.add("asd");
-        skillTwo = new Skill("Heal", Material.AIR, description, 10, 1);
+        skillTwo = new Skill("Heal", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         paladin.add(skillTwo);
 
         description.clear();
         description.add("asd");
-        skillThree = new Skill("Polymorph", Material.AIR, description, 10, 1);
+        skillThree = new Skill("Polymorph", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         paladin.add(skillThree);
 
         description.clear();
         description.add("asd");
-        passive = new Skill("Resurrection", Material.AIR, description, 10, 1);
+        passive = new Skill("Resurrection", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         paladin.add(passive);
 
         description.clear();
         description.add("asd");
-        ultimate = new Skill("Cosmic Radiance", Material.AIR, description, 10, 1);
+        ultimate = new Skill("Cosmic Radiance", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         paladin.add(ultimate);
 
         //ROGUE
         description.clear();
         description.add("asd");
-        skillOne = new Skill("Smoke", Material.AIR, description, 10, 1);
+        skillOne = new Skill("Smoke", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         rogue.add(skillOne);
 
         description.clear();
         description.add("asd");
-        skillTwo = new Skill("Void Dash", Material.AIR, description, 10, 1);
+        skillTwo = new Skill("Void Dash", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         rogue.add(skillTwo);
 
         description.clear();
         description.add("asd");
-        skillThree = new Skill("Shurikens", Material.AIR, description, 10, 1);
+        skillThree = new Skill("Shurikens", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         rogue.add(skillThree);
 
         description.clear();
         description.add("asd");
-        passive = new Skill("Backstab", Material.AIR, description, 10, 1);
+        passive = new Skill("Backstab", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         rogue.add(passive);
 
         description.clear();
         description.add("asd");
-        ultimate = new Skill("Phantom Strike", Material.AIR, description, 10, 1);
+        ultimate = new Skill("Phantom Strike", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         rogue.add(ultimate);
 
         //WARRIOR
         description.clear();
         description.add("asd");
-        skillOne = new Skill("Power Slash", Material.AIR, description, 10, 1);
+        skillOne = new Skill("Power Slash", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         warrior.add(skillOne);
 
         description.clear();
         description.add("asd");
-        skillTwo = new Skill("Flame Slash", Material.AIR, description, 10, 1);
+        skillTwo = new Skill("Flame Slash", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         warrior.add(skillTwo);
 
         description.clear();
         description.add("asd");
-        skillThree = new Skill("Victory Flag", Material.AIR, description, 10, 1);
+        skillThree = new Skill("Victory Flag", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         warrior.add(skillThree);
 
         description.clear();
         description.add("asd");
-        passive = new Skill("Death Rattle", Material.AIR, description, 10, 1);
+        passive = new Skill("Death Rattle", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         warrior.add(passive);
 
         description.clear();
         description.add("asd");
-        ultimate = new Skill("Grand Skyfall", Material.AIR, description, 10, 1);
+        ultimate = new Skill("Grand Skyfall", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         warrior.add(ultimate);
     }
 

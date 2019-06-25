@@ -21,6 +21,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
@@ -354,7 +355,8 @@ public class MyInventoryClickEvent implements Listener {
                 }
             } else {
                 if (currentName.equals(ChatColor.LIGHT_PURPLE + "Skills")) {
-                    //TODO skill gui
+                    GuiGeneric skill = MenuList.skill(player);
+                    skill.openInventory(player);
                 } else if (currentName.equals(ChatColor.DARK_GREEN + "Elements")) {
                     GuiGeneric element = MenuList.element(player);
                     element.openInventory(player);
@@ -468,15 +470,47 @@ public class MyInventoryClickEvent implements Listener {
                         attr = rpgCharacterStats.getWater();
                     } else if (slot == 7) {
                         attr = rpgCharacterStats.getEarth();
-                    } else if (slot == 19) {
+                    } else if (slot == 20) {
                         attr = rpgCharacterStats.getLightning();
-                    } else if (slot == 21) {
+                    } else if (slot == 24) {
                         attr = rpgCharacterStats.getWater();
                     }
                     if (attr != null) {
                         attr.investOnePoint(rpgCharacterStats, true);
                         GuiGeneric element = MenuList.element(player);
                         element.openInventory(player);
+                    }
+                }
+            }
+        } else if (title.contains(ChatColor.LIGHT_PURPLE + "Skills (Points: ")) {
+            if (rpgCharacter != null) {
+                SkillBar skillBar = rpgCharacter.getSkillBar();
+
+                int skillIndex = -1;
+                if (slot == 1) {
+                    skillIndex = 0;
+                } else if (slot == 4) {
+                    skillIndex = 1;
+                } else if (slot == 7) {
+                    skillIndex = 2;
+                } else if (slot == 20) {
+                    skillIndex = 3;
+                } else if (slot == 24) {
+                    skillIndex = 4;
+                }
+                if (skillIndex != -1) {
+                    if (event.isLeftClick()) {
+                        boolean upgradeSkill = skillBar.upgradeSkill(skillIndex);
+                        if (upgradeSkill) {
+                            GuiGeneric skill = MenuList.skill(player);
+                            skill.openInventory(player);
+                        }
+                    } else if (event.isRightClick()) {
+                        boolean downgradeSkill = skillBar.downgradeSkill(skillIndex);
+                        if (downgradeSkill) {
+                            GuiGeneric skill = MenuList.skill(player);
+                            skill.openInventory(player);
+                        }
                     }
                 }
             }

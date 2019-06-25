@@ -77,7 +77,7 @@ public class OtherItems {
         itemMeta.setDisplayName(ChatColor.YELLOW + "Unassigned Skill");
         itemMeta.setLore(new ArrayList() {{
             add("");
-            add(ChatColor.GRAY + "You haven't unlocked a skill for this slot yer");
+            add(ChatColor.GRAY + "You haven't unlocked a skill for this slot yet");
         }});
         itemStack.setItemMeta(itemMeta);
         return itemStack;

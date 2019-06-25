@@ -48,6 +48,7 @@ public class DamageMechanic extends MechanicComponent {
 		}
 
         for (LivingEntity ent : targets) {
+			//TODO SKILL DAMAGE DETECT
 			ent.damage(calcDamage, caster);
 		}
 		return targets.size() > 0;
