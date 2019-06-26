@@ -11,6 +11,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
 import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
@@ -27,7 +29,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -55,31 +56,36 @@ public class MyEntityDamageByEntityEvent implements Listener {
         Entity damager = event.getDamager();
         Entity target = event.getEntity();
 
+        DamageMechanic.DamageType damageType = DamageMechanic.DamageType.MELEE;
+        if (SkillUtils.isSkillDamage()) {
+            damageType = SkillUtils.getDamageType();
+        }
+
         if (target instanceof LivingEntity) {
             boolean isEventCanceled = false;
             boolean isAttackerPlayer = false;
-            boolean isMagicAttack = event.getCause().equals(EntityDamageEvent.DamageCause.CUSTOM);
             LivingEntity livingTarget = (LivingEntity) target;
 
             //DAMAGER
             if (damager.getType().equals(EntityType.PLAYER)) { //player is attacker
                 Player player = (Player) damager;
-                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, false, isMagicAttack);
+                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, damageType);
                 isAttackerPlayer = true;
             } else if (damager instanceof Projectile) { //projectile is attacker
                 Projectile projectile = (Projectile) damager;
                 if (PersistentDataContainerUtil.hasInteger(projectile, "rangedDamage")) {
                     int rangedDamage = PersistentDataContainerUtil.getInteger(projectile, "rangedDamage");
                     event.setDamage(rangedDamage);
+                    damageType = DamageMechanic.DamageType.RANGED;
                 } else if (PersistentDataContainerUtil.hasInteger(projectile, "magicDamage")) {
                     int magicDamage = PersistentDataContainerUtil.getInteger(projectile, "magicDamage");
                     event.setDamage(magicDamage);
-                    isMagicAttack = true;
+                    damageType = DamageMechanic.DamageType.MAGIC;
                 }
                 ProjectileSource shooter = projectile.getShooter();
                 if (shooter instanceof Player) {
                     Player player = (Player) shooter;
-                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, true, isMagicAttack);
+                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, damageType);
                     isAttackerPlayer = true;
                 }
             } else if (damager instanceof LivingEntity) {
@@ -87,7 +93,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     Wolf wolf = (Wolf) damager;
                     if (PetManager.isPet(wolf)) { //pet is attacker
                         Player owner = PetManager.getOwner(wolf);
-                        isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, true, false, false);
+                        isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, true, damageType);
                         isAttackerPlayer = true;
                     }
                 }
@@ -116,7 +122,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 RPGCharacterStats targetRpgCharacterStats = activeCharacter.getRpgCharacterStats();
                                 int totalDefense = targetRpgCharacterStats.getTotalDefense();
 
-                                if (isMagicAttack) {
+                                if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
                                     totalDefense = targetRpgCharacterStats.getTotalMagicDefense();
                                 }
 
@@ -154,7 +160,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
      * @param isPet        isAttackerPet else attacker is Player
      * @return isEventCanceled
      */
-    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, boolean isPet, boolean isRangedAttack, boolean isMagicAttack) {
+    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, boolean isPet, DamageMechanic.DamageType damageType) {
         UUID uniqueId = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uniqueId)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
@@ -204,9 +210,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                 RPGClass rpgClass = activeCharacter.getRpgClass();
-                if (isMagicAttack) { //ranged overrides magic so check magic first
+                if (damageType.equals(DamageMechanic.DamageType.MAGIC)) { //ranged overrides magic so check magic first
                     damage += rpgCharacterStats.getTotalMagicDamage(player, rpgClass); //add to spell damage
-                } else if (isRangedAttack) {
+                } else if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
                     damage += rpgCharacterStats.getFire().getIncrement(); //add to projectile damage
                 } else { //melee
                     ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
@@ -271,7 +277,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             RPGCharacterStats targetRpgCharacterStats = targetActiveCharacter.getRpgCharacterStats();
                             int totalDefense = targetRpgCharacterStats.getTotalDefense();
 
-                            if (isMagicAttack) {
+                            if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
                                 totalDefense = targetRpgCharacterStats.getTotalMagicDefense();
                             }
 

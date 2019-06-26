@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -16,12 +17,12 @@ public class DamageMechanic extends MechanicComponent {
 
 	private double baseDamage;
 	private double levelMultiplier;
-	private SkillDamageType type;
+    private DamageType damageType;
 
-	public DamageMechanic(double baseDamage, double levelMultiplier, SkillDamageType type) {
+    public DamageMechanic(double baseDamage, double levelMultiplier, DamageType damageType) {
 		this.baseDamage = baseDamage;
 		this.levelMultiplier = levelMultiplier;
-		this.type = type;
+        this.damageType = damageType;
 	}
 
 	@Override
@@ -37,34 +38,36 @@ public class DamageMechanic extends MechanicComponent {
 					RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
 					RPGCharacterStats targetRpgCharacterStats = activeCharacter.getRpgCharacterStats();
-					if(type == SkillDamageType.MAGIC)
+                    if (damageType == DamageType.MAGIC)
 						calcDamage += targetRpgCharacterStats.getTotalMagicDamage((Player) caster, activeCharacter.getRpgClass());
-					else if(type == SkillDamageType.MELEE)
+                    else if (damageType == DamageType.MELEE)
 						calcDamage += targetRpgCharacterStats.getTotalMeleeDamage((Player) caster, activeCharacter.getRpgClass());
-					else if(type == SkillDamageType.RANGED)
+                    else if (damageType == DamageType.RANGED)
 						calcDamage += targetRpgCharacterStats.getTotalRangedDamage((Player) caster, activeCharacter.getRpgClass());
 				}
 			}
 		}
 
         for (LivingEntity ent : targets) {
-			//TODO SKILL DAMAGE DETECT
+            SkillUtils.setDamageType(damageType);
+            ent.setNoDamageTicks(0);
 			ent.damage(calcDamage, caster);
+            SkillUtils.clearSkillDamage();
 		}
 		return targets.size() > 0;
 	}
 
 	@Override
 	public List<String> getSkillLoreAdditions(int skillLevel) {
-		List<String> lore = new ArrayList<String>();
-		lore.add((type == SkillDamageType.MAGIC ? "Magic Damage: " : 
-			(type == SkillDamageType.MELEE ? "Melee damage: " : "Ranged damage:")) 
+        List<String> lore = new ArrayList<>();
+        lore.add((damageType == DamageType.MAGIC ? "Magic Damage: " :
+                (damageType == DamageType.MELEE ? "Melee damage: " : "Ranged damage:"))
 				+ (baseDamage + (levelMultiplier * skillLevel)));
 		return null;
 	}
-	
-	
-	public enum SkillDamageType {
+
+
+    public enum DamageType {
         MAGIC, MELEE, RANGED
     }
 }
