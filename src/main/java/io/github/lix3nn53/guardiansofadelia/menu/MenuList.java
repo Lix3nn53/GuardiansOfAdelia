@@ -9,7 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.list.SkillList;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillList;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;

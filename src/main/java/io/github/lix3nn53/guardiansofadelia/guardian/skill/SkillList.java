@@ -1,7 +1,6 @@
-package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
+package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import org.bukkit.Material;
@@ -27,7 +26,6 @@ public class SkillList {
     private static final List<Skill> warrior = new ArrayList<>();
 
     static {
-        //ARCHER
         List<String> description = new ArrayList<>();
 
         List<Integer> reqLevels = new ArrayList<>();
@@ -66,6 +64,7 @@ public class SkillList {
         cooldowns.add(5);
         cooldowns.add(5);
 
+        //ARCHER
         description.add("asd");
         Skill skillOne = new Skill("Blind Shot", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         archer.add(skillOne);
@@ -91,6 +90,7 @@ public class SkillList {
         archer.add(ultimate);
 
         //HUNTER
+        //TODO hunter skill names
         description.clear();
         description.add("asd");
         skillOne = new Skill("SkillName", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
@@ -103,7 +103,7 @@ public class SkillList {
 
         description.clear();
         description.add("asd");
-        skillThree = new Skill("SkillName", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        skillThree = new Skill("Bear Trap", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         hunter.add(skillThree);
 
         description.clear();
@@ -143,11 +143,13 @@ public class SkillList {
         knight.add(ultimate);
 
         //MAGE
+        //TODO fireball implement & test
         description.clear();
         description.add("asd");
         skillOne = new Skill("Fireball", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.4, 1, 30,
                 0, 0, 0, 10, Fireball.class);
+        skillOne.addTrigger(projectileMechanic);
         mage.add(skillOne);
 
         description.clear();

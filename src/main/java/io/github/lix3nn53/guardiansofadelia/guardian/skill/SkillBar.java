@@ -3,7 +3,6 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.list.SkillList;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
