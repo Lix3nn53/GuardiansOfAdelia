@@ -1,8 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
 import org.bukkit.Material;
 import org.bukkit.entity.Fireball;
 
@@ -147,9 +150,20 @@ public class SkillList {
         description.clear();
         description.add("asd");
         skillOne = new Skill("Fireball", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.4, 1, 30,
-                0, 0, 0, 10, Fireball.class);
-        skillOne.addTrigger(projectileMechanic);
+        CastTrigger castTrigger = new CastTrigger();
+
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
+                0, 1, 0, 200, true, Fireball.class);
+
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
+
+        areaTarget.addChildren(new DamageMechanic(10, 10, DamageMechanic.DamageType.MAGIC));
+
+        projectileMechanic.addChildren(areaTarget);
+
+        castTrigger.addChildren(projectileMechanic);
+
+        skillOne.addTrigger(castTrigger);
         mage.add(skillOne);
 
         description.clear();

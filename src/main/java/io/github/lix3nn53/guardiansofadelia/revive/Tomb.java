@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.revive;
 
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;

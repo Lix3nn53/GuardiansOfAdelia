@@ -116,6 +116,7 @@ public class Skill {
         //skill attributes
         for (SkillComponent trigger : triggers) {
             lore.addAll(trigger.getSkillLoreAdditions(skillLevel));
+            lore.addAll(trigger.getSkillLoreAdditionsOfChildren(skillLevel));
         }
 
         lore.add(ChatColor.YELLOW + "------------------------------");

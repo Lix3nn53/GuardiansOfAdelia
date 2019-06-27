@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;

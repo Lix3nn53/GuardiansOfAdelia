@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory.slots;
 
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;

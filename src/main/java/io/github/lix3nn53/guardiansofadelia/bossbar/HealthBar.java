@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.bossbar;
 
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -28,7 +28,7 @@ public class HealthBar {
         setVisible();
     }
 
-    public HealthBar(LivingEntity livingTarget, int damage, boolean isPet, boolean isCritical) {
+    public HealthBar(LivingEntity livingTarget, int damage, ChatColor damageColor, String damageIcon) {
         double maxHealth = livingTarget.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         double currentHealth = livingTarget.getHealth() - damage;
         double progress = 0;
@@ -43,18 +43,7 @@ public class HealthBar {
             targetName = livingTarget.getCustomName();
         }
 
-        ChatColor damageColor = ChatColor.RED;
-        String damageIcon = "➹ ";
-        if (isPet) {
-            damageColor = ChatColor.LIGHT_PURPLE;
-            damageIcon = ">.< ";
-        }
-        if (isCritical) {
-            damageColor = ChatColor.GOLD;
-            damageIcon = "⚝ ";
-        }
-
-        String title = (damageColor.toString() + damage + damageColor + damageIcon + targetName + " " + ChatColor.GREEN + (int) (currentHealth + 0.5) +
+        String title = (damageColor.toString() + damage + damageColor + damageIcon + " " + targetName + " " + ChatColor.GREEN + (int) (currentHealth + 0.5) +
                 ChatColor.GRAY + "/" + ChatColor.GREEN + (int) (maxHealth + 0.5) + ChatColor.RED + "❤");
 
         BarColor color = BarColor.GREEN;

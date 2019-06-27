@@ -42,7 +42,7 @@ public abstract class SkillComponent {
      * @param skillLevel
      * @return
      */
-    protected List<String> getSkillLoreAdditionsOfChildren(int skillLevel) {
+    public List<String> getSkillLoreAdditionsOfChildren(int skillLevel) {
         List<String> additions = new ArrayList<>();
         for (SkillComponent child : children) {
             additions.addAll(child.getSkillLoreAdditions(skillLevel));

@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.enchanting;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

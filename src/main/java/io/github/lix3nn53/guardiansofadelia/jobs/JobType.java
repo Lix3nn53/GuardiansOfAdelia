@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.jobs;
 
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 
 public enum JobType {
     WEAPONSMITH,

@@ -6,39 +6,67 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class TargetComponent extends SkillComponent {
 
+    final int max;
+    final boolean self;
     //TODO private final boolean throughWall = false; isObstructed(from.getEyeLocation(), target.getEyeLocation())
-    private final boolean allies = false;
-    private final boolean enemy = false;
+    private final boolean allies;
+    private final boolean enemy;
 
-
-    /**
-     * Executes the component
-     *
-     * @param caster  caster of the skill
-     * @param skillLevel   level of the skill
-     * @param targets targets to apply to
-     * @return true if applied to something, false otherwise
-     */
-
-    @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
-
-        return (targets.size() > 0 && executeChildren(caster, skillLevel, targets));
-
+    protected TargetComponent(boolean allies, boolean enemy, boolean self, int max) {
+        this.allies = allies;
+        this.enemy = enemy;
+        this.max = max;
+        this.self = self;
     }
 
-    boolean isValidTarget(final LivingEntity caster, final LivingEntity from, final LivingEntity target) {
+    /**
+     * Method to use on current targets to eliminate not wanted targets.
+     * For example we want to eliminate allies on offensive skills. (allies = false)
+     *
+     * @param caster
+     * @param targets
+     * @return
+     */
+    protected List<LivingEntity> determineTargets(final LivingEntity caster, final List<LivingEntity> targets) {
+        final List<LivingEntity> list = new ArrayList<>();
+
+        for (LivingEntity target : targets) {
+            if (isValidTarget(caster, target)) {
+                list.add(target);
+                if (list.size() >= max) {
+                    break;
+                }
+            }
+        }
+
+        if (self) {
+            list.add(caster);
+        }
+
+        return list;
+    }
+
+    /**
+     * Target filter.
+     *
+     * @param caster
+     * @param target
+     * @return
+     */
+    private boolean isValidTarget(final LivingEntity caster, final LivingEntity target) {
 
         boolean everyone = allies && enemy;
 
-        return target != caster
+        if (everyone) return target != caster;
 
-                && (everyone || allies == isAlly(caster, target));
+        if (allies) return isAlly(caster, target);
 
+        return true;
     }
 
     /**
@@ -49,7 +77,7 @@ public abstract class TargetComponent extends SkillComponent {
      * @return true if an ally, false otherwise
      */
 
-    public boolean isAlly(LivingEntity attacker, LivingEntity target) {
+    private boolean isAlly(LivingEntity attacker, LivingEntity target) {
 
         return !canAttack(attacker, target);
 
@@ -63,7 +91,7 @@ public abstract class TargetComponent extends SkillComponent {
      * @return true if can be attacked, false otherwise
      */
 
-    public boolean canAttack(LivingEntity attacker, LivingEntity target) {
+    private boolean canAttack(LivingEntity attacker, LivingEntity target) {
         if (attacker instanceof Player) {
             if (target instanceof Player) {
                 if (attacker.getWorld().getName().equals("arena")) {

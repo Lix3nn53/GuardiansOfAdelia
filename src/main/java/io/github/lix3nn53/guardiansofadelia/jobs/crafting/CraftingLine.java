@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiLine;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;

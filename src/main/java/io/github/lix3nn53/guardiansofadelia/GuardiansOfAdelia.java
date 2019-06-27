@@ -88,6 +88,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MyPlayerQuitEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerSwapHandItemsEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerTakeLecternBookEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyProjectileHitEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyProjectileLaunchEvent(), this);
 
         //init managers

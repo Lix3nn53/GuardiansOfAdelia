@@ -51,7 +51,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
         return 0;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
         Entity target = event.getEntity();
@@ -59,6 +59,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
         DamageMechanic.DamageType damageType = DamageMechanic.DamageType.MELEE;
         if (SkillUtils.isSkillDamage()) {
             damageType = SkillUtils.getDamageType();
+            SkillUtils.clearSkillDamage();
         }
 
         if (target instanceof LivingEntity) {
@@ -77,10 +78,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     int rangedDamage = PersistentDataContainerUtil.getInteger(projectile, "rangedDamage");
                     event.setDamage(rangedDamage);
                     damageType = DamageMechanic.DamageType.RANGED;
-                } else if (PersistentDataContainerUtil.hasInteger(projectile, "magicDamage")) {
-                    int magicDamage = PersistentDataContainerUtil.getInteger(projectile, "magicDamage");
-                    event.setDamage(magicDamage);
-                    damageType = DamageMechanic.DamageType.MAGIC;
+                } else if (PersistentDataContainerUtil.hasInteger(projectile, "skillLevel")) {
+                    //projectile is a skill so cancel event and let children mechanics of this projectile do their things
+                    event.setCancelled(true);
+                    return;
                 }
                 ProjectileSource shooter = projectile.getShooter();
                 if (shooter instanceof Player) {
@@ -294,10 +295,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 double finalDamage = event.getFinalDamage();
 
-                //show bossbar
-                HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5), isPet, isCritical);
-                HealthBarManager.showToPlayerFor10Seconds(player, healthBar);
-
                 //progress deal damage tasks
                 List<Quest> questList = activeCharacter.getQuestList();
                 for (Quest quest : questList) {
@@ -344,13 +341,23 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 //indicator
                 ChatColor indicatorColor = ChatColor.RED;
-                String indicatorIcon = "➹";
+                String indicatorIcon = "⸸";
+                if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
+                    indicatorIcon = "➹";
+                } else if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
+                    indicatorColor = ChatColor.AQUA;
+                    indicatorIcon = "✧";
+                }
+
                 if (isCritical) {
                     indicatorColor = ChatColor.GOLD;
-                    indicatorIcon = "⚝";
                 }
                 String text = indicatorColor.toString() + (int) (finalDamage + 0.5) + " " + indicatorIcon;
                 FakeIndicator.showPlayer(player, text, targetLocation);
+
+                //show bossbar
+                HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5), indicatorColor, indicatorIcon);
+                HealthBarManager.showToPlayerFor10Seconds(player, healthBar);
             }
         }
         return false;

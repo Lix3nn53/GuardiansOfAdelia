@@ -1,7 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.TempEntity;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -26,12 +27,13 @@ public class ProjectileMechanic extends MechanicComponent {
     private final double upward;
     private final double forward;
     private final double range;
+    private final boolean mustHitToWork;
 
     private final Class<? extends Projectile> projectileType;
 
     public ProjectileMechanic(SpreadType spreadType, double speed,
                               int amount, double angle, double right, double upward, double forward,
-                              double range, Class<? extends Projectile> projectileType) {
+                              double range, boolean mustHitToWork, Class<? extends Projectile> projectileType) {
         this.spreadType = spreadType;
         this.speed = speed;
         this.amount = amount;
@@ -40,15 +42,31 @@ public class ProjectileMechanic extends MechanicComponent {
         this.upward = upward;
         this.forward = forward;
         this.range = range;
+        this.mustHitToWork = mustHitToWork;
         this.projectileType = projectileType;
 
         this.radius = 0;
         this.height = 0;
     }
 
+    /**
+     * For rain type projectile mechanics
+     *
+     * @param spreadType
+     * @param radius
+     * @param height
+     * @param speed
+     * @param amount
+     * @param right
+     * @param upward
+     * @param forward
+     * @param range
+     * @param mustHitToWork
+     * @param projectileType
+     */
     public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
                               int amount, double right, double upward, double forward,
-                              double range, Class<? extends Projectile> projectileType) {
+                              double range, boolean mustHitToWork, Class<? extends Projectile> projectileType) {
         this.spreadType = spreadType;
 
         this.radius = radius;
@@ -56,6 +74,7 @@ public class ProjectileMechanic extends MechanicComponent {
 
         this.speed = speed;
         this.amount = amount;
+        this.mustHitToWork = mustHitToWork;
 
         this.angle = 0;
 
@@ -71,25 +90,20 @@ public class ProjectileMechanic extends MechanicComponent {
 
         // Fire from each target
         ArrayList<Entity> projectiles = new ArrayList<Entity>();
-        for (LivingEntity target : targets)
-        {
+        for (LivingEntity target : targets) {
             // Apply the spread type
             if (spreadType.equals(SpreadType.RAIN)) {
                 ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amount);
 
-                for (Location loc : locs)
-                {
+                for (Location loc : locs) {
                     Projectile p = caster.launchProjectile(projectileType);
                     p.setVelocity(new Vector(0, speed, 0));
                     p.teleport(loc);
                     projectiles.add(p);
                 }
-            }
-            else
-            {
+            } else {
                 Vector dir = target.getLocation().getDirection();
-                if (spreadType.equals(SpreadType.HORIZONTAL_CONE))
-                {
+                if (spreadType.equals(SpreadType.HORIZONTAL_CONE)) {
                     dir.setY(0);
                     dir.normalize();
                 }
@@ -99,11 +113,9 @@ public class ProjectileMechanic extends MechanicComponent {
                 looking.multiply(forward).add(normal.multiply(right));
 
                 ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount);
-                for (Vector d : dirs)
-                {
+                for (Vector d : dirs) {
                     Projectile p = caster.launchProjectile(projectileType);
-                    if (projectileType != Arrow.class)
-                    {
+                    if (projectileType != Arrow.class) {
                         p.teleport(target.getLocation().add(looking).add(0, upward + 0.5, 0).add(p.getVelocity()).setDirection(d));
                     }
                     p.setVelocity(d.multiply(speed));
@@ -111,14 +123,46 @@ public class ProjectileMechanic extends MechanicComponent {
                 }
             }
         }
-        EntityUtils.delayedRemove(projectiles, (int) Math.ceil(range / Math.abs(speed)));
+        ProjectileManager.onSkillProjectileShoot(projectiles, this, skillLevel, (int) Math.ceil(range / Math.abs(speed)));
 
         return targets.size() > 0;
     }
 
+    /**
+     * The callback for the projectiles that applies child components
+     *
+     * @param projectile projectile calling back for
+     * @param hit        the entity hit by the projectile, if any
+     */
+    public void callback(Projectile projectile, Entity hit) {
+        if (hit == null) {
+            if (mustHitToWork) return;
+
+            hit = new TempEntity(projectile.getLocation());
+        }
+
+
+        ArrayList<LivingEntity> targets = new ArrayList<>();
+        if (hit instanceof LivingEntity) {
+            targets.add((LivingEntity) hit);
+        }
+
+        int skillLevel = 1;
+        if (PersistentDataContainerUtil.hasInteger(projectile, "skillLevel")) {
+            skillLevel = PersistentDataContainerUtil.getInteger(projectile, "skillLevel");
+        }
+
+        executeChildren((LivingEntity) projectile.getShooter(), skillLevel, targets);
+        projectile.remove();
+    }
+
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add("Projectile amount: " + amount);
+
         //TODO
-        return null;
+        return new ArrayList<>();
     }
 }

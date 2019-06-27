@@ -46,6 +46,8 @@ public class TutorialEndAction implements Action {
                 rpgCharacterStats.setCurrentHealth(rpgCharacterStats.getTotalMaxHealth());
                 rpgCharacterStats.setCurrentMana(rpgCharacterStats.getTotalMaxMana());
 
+                activeCharacter.getSkillBar().remakeSkillBar();
+
                 new BukkitRunnable() {
                     @Override
                     public void run() {
