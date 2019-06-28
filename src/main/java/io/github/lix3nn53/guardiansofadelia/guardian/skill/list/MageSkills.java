@@ -15,23 +15,21 @@ import java.util.List;
 public class MageSkills {
 
     public static List<Skill> getSet() {
-        List<Skill> mage = new ArrayList<>();
+        List<Skill> skills = new ArrayList<>();
 
-        mage.add(getOne());
-        mage.add(getTwo());
-        mage.add(getThree());
-        mage.add(getPassive());
-        mage.add(getUltimate());
+        skills.add(getOne());
+        skills.add(getTwo());
+        skills.add(getThree());
+        skills.add(getPassive());
+        skills.add(getUltimate());
 
-        return mage;
+        return skills;
     }
 
     private static Skill getOne() {
         List<String> description = new ArrayList<>();
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
+        description.add("Deals area damage if");
+        description.add("fireball hits a target.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -90,10 +88,8 @@ public class MageSkills {
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
+        description.add("Shoot a lightning bolt that deals damage and");
+        description.add("silences targets in area if it hits a target.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -131,17 +127,14 @@ public class MageSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Electric Shock", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Lightning Bolt", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         return skill;
     }
 
     private static Skill getThree() {
         List<String> description = new ArrayList<>();
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
+        description.add("Push nearby enemies and cleanse yourself.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -186,10 +179,9 @@ public class MageSkills {
 
     private static Skill getPassive() {
         List<String> description = new ArrayList<>();
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
+        description.add("When you took physical damage while");
+        description.add("this skill is active, block it and");
+        description.add("gain shields.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -234,10 +226,8 @@ public class MageSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
+        description.add("Summon meteors");
+        description.add("todo");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);

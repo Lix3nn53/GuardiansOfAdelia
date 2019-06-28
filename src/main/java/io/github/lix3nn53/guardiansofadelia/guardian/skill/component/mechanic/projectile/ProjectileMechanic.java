@@ -1,17 +1,28 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.TempEntity;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
+import org.bukkit.metadata.LazyMetadataValue;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 public class ProjectileMechanic extends MechanicComponent {
 
@@ -28,8 +39,14 @@ public class ProjectileMechanic extends MechanicComponent {
     private final double forward;
     private final double range;
     private final boolean mustHitToWork;
+    //Particle projectile
+    Particle particle;
 
     private final Class<? extends Projectile> projectileType;
+    ArrangementParticle arrangement;
+    double radiusParticle;
+    int amountParticle;
+    private int piercing = 0;
 
     public ProjectileMechanic(SpreadType spreadType, double speed,
                               int amount, double angle, double right, double upward, double forward,
@@ -114,16 +131,30 @@ public class ProjectileMechanic extends MechanicComponent {
 
                 ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount);
                 for (Vector d : dirs) {
-                    Projectile p = caster.launchProjectile(projectileType);
+                    Projectile p;
+
+                    if (particle != null) {
+                        p = caster.launchProjectile(Arrow.class);
+                        //TODO test disguise
+                        MiscDisguise miscDisguise = new MiscDisguise(DisguiseType.AREA_EFFECT_CLOUD);
+                        DisguiseAPI.disguiseToAll(p, miscDisguise);
+                        startParticleAnimation(p);
+                    } else {
+                        p = caster.launchProjectile(projectileType);
+                    }
+
                     if (projectileType != Arrow.class) {
                         p.teleport(target.getLocation().add(looking).add(0, upward + 0.5, 0).add(p.getVelocity()).setDirection(d));
+                    } else if (piercing > 0) {
+                        Callable integerCallable = () -> piercing;
+                        p.setMetadata("PierceLevel", new LazyMetadataValue(GuardiansOfAdelia.getInstance(), LazyMetadataValue.CacheStrategy.CACHE_AFTER_FIRST_EVAL, integerCallable));
                     }
                     p.setVelocity(d.multiply(speed));
                     projectiles.add(p);
                 }
             }
         }
-        ProjectileManager.onSkillProjectileShoot(projectiles, this, skillLevel, (int) Math.ceil(range / Math.abs(speed)));
+        ProjectileListener.onSkillProjectileShoot(projectiles, this, skillLevel, (int) Math.ceil(range / Math.abs(speed)));
 
         return targets.size() > 0;
     }
@@ -164,5 +195,31 @@ public class ProjectileMechanic extends MechanicComponent {
 
         //TODO
         return new ArrayList<>();
+    }
+
+    public void setPiercing(int piercing) {
+        this.piercing = piercing;
+    }
+
+    public void setParticle(Particle particle, ArrangementParticle arrangement, double radiusParticle, int amountParticle) {
+        this.particle = particle;
+        this.arrangement = arrangement;
+        this.radiusParticle = radiusParticle;
+        this.amountParticle = amountParticle;
+    }
+
+    private void startParticleAnimation(Projectile projectile) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (projectile.isValid()) {
+                    Location location = projectile.getLocation();
+
+                    ParticleUtil.play(location, particle, arrangement, radiusParticle, amountParticle, Direction.XZ);
+                } else {
+                    cancel();
+                }
+            }
+        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 1L, 5L);
     }
 }

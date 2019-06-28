@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileListener;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -15,6 +15,6 @@ public class MyProjectileHitEvent implements Listener {
         Projectile entity = event.getEntity();
         Entity hitEntity = event.getHitEntity();
 
-        ProjectileManager.onSkillProjectileLand(entity, hitEntity);
+        ProjectileListener.onSkillProjectileLand(entity, hitEntity);
     }
 }

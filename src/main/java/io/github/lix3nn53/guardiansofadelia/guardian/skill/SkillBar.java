@@ -142,7 +142,7 @@ public class SkillBar {
 
     public boolean castSkill(int skillIndex) {
         if (skillsOnCooldown.containsKey(skillIndex)) {
-            //TODO play sound to player on cast fail
+            //TODO playSingleParticle sound to player on cast fail
             return false;
         }
 

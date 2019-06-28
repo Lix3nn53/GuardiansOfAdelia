@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ProjectileManager {
+public class ProjectileListener {
 
     private static HashMap<Entity, ProjectileMechanic> projectileToCallback = new HashMap<>();
 

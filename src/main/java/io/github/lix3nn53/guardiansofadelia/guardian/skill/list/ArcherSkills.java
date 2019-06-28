@@ -1,13 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
 import org.bukkit.Material;
-import org.bukkit.entity.Fireball;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,23 +9,20 @@ import java.util.List;
 public class ArcherSkills {
 
     public static List<Skill> getSet() {
-        List<Skill> mage = new ArrayList<>();
+        List<Skill> skills = new ArrayList<>();
 
-        mage.add(getOne());
-        mage.add(getTwo());
-        mage.add(getThree());
-        mage.add(getPassive());
-        mage.add(getUltimate());
+        skills.add(getOne());
+        skills.add(getTwo());
+        skills.add(getThree());
+        skills.add(getPassive());
+        skills.add(getUltimate());
 
-        return mage;
+        return skills;
     }
 
     private static Skill getOne() {
         List<String> description = new ArrayList<>();
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
+        description.add("Shoot an arrow that blinds target");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -69,31 +60,15 @@ public class ArcherSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Fireball", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
-        CastTrigger castTrigger = new CastTrigger();
-
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
-                0, 1, 0, 200, true, Fireball.class);
-
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
-
-        areaTarget.addChildren(new DamageMechanic(10, 10, DamageMechanic.DamageType.MAGIC));
-
-        projectileMechanic.addChildren(areaTarget);
-
-        castTrigger.addChildren(projectileMechanic);
-
-        skill.addTrigger(castTrigger);
+        Skill skill = new Skill("Blind Shot", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         return skill;
     }
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
+        description.add("Root nearby targets and gain");
+        description.add("movement speed.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -131,17 +106,15 @@ public class ArcherSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Electric Shock", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Zephyr", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         return skill;
     }
 
     private static Skill getThree() {
         List<String> description = new ArrayList<>();
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
+        description.add("Jump backwards into the air and");
+        description.add("gain resistance to fall damage.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -179,17 +152,14 @@ public class ArcherSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Shockwave", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Purple Wings", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         return skill;
     }
 
     private static Skill getPassive() {
         List<String> description = new ArrayList<>();
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
+        description.add("Jump boost");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -227,17 +197,15 @@ public class ArcherSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Mental Fortitude", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Hop Hop", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         return skill;
     }
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
-        description.add("asd");
+        description.add("Reveal an area with a flurry of arrows,");
+        description.add("dealing waves of damage to opponents.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -275,7 +243,7 @@ public class ArcherSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Inferno", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Make It Rain", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         return skill;
     }
