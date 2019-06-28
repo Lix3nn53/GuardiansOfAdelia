@@ -55,9 +55,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
     public void onEvent(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
         Entity target = event.getEntity();
+        boolean isSkill = false;
 
         DamageMechanic.DamageType damageType = DamageMechanic.DamageType.MELEE;
         if (SkillUtils.isSkillDamage()) {
+            isSkill = true;
             damageType = SkillUtils.getDamageType();
             SkillUtils.clearSkillDamage();
         }
@@ -70,11 +72,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
             //DAMAGER
             if (damager.getType().equals(EntityType.PLAYER)) { //player is attacker
                 Player player = (Player) damager;
-                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, damageType);
+                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, damageType, isSkill);
                 isAttackerPlayer = true;
             } else if (damager instanceof Projectile) { //projectile is attacker
                 Projectile projectile = (Projectile) damager;
-                if (PersistentDataContainerUtil.hasInteger(projectile, "rangedDamage")) {
+                if (PersistentDataContainerUtil.hasInteger(projectile, "rangedDamage")) { //projectile is fired by player without skills involved
                     int rangedDamage = PersistentDataContainerUtil.getInteger(projectile, "rangedDamage");
                     event.setDamage(rangedDamage);
                     damageType = DamageMechanic.DamageType.RANGED;
@@ -86,7 +88,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 ProjectileSource shooter = projectile.getShooter();
                 if (shooter instanceof Player) {
                     Player player = (Player) shooter;
-                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, damageType);
+                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, damageType, isSkill);
                     isAttackerPlayer = true;
                 }
             } else if (damager instanceof LivingEntity) {
@@ -94,7 +96,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     Wolf wolf = (Wolf) damager;
                     if (PetManager.isPet(wolf)) { //pet is attacker
                         Player owner = PetManager.getOwner(wolf);
-                        isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, true, damageType);
+                        isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, true, damageType, isSkill);
                         isAttackerPlayer = true;
                     }
                 }
@@ -110,7 +112,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                     Player playerTarget = (Player) target;
 
-                    if (!isAttackerPlayer) { //we are managing this on onPlayerAttackEntity method if attacker is player
+                    if (!isAttackerPlayer) { //we are managing this on onPlayerAttackEntity() method if attacker is player
                         //custom defense formula if target is another player attacked by mob
                         UUID uniqueId = playerTarget.getUniqueId();
                         if (GuardianDataManager.hasGuardianData(uniqueId)) {
@@ -161,7 +163,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
      * @param isPet        isAttackerPet else attacker is Player
      * @return isEventCanceled
      */
-    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, boolean isPet, DamageMechanic.DamageType damageType) {
+    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, boolean isPet, DamageMechanic.DamageType damageType, boolean isSkill) {
         UUID uniqueId = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uniqueId)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
@@ -211,16 +213,24 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                 RPGClass rpgClass = activeCharacter.getRpgClass();
-                if (damageType.equals(DamageMechanic.DamageType.MAGIC)) { //ranged overrides magic so check magic first
+                if (damageType.equals(DamageMechanic.DamageType.MAGIC)) { //Ranged overrides Magic so check magic first. You can not deal Magic damage without skills.
                     damage += rpgCharacterStats.getTotalMagicDamage(player, rpgClass); //add to spell damage
                 } else if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
-                    damage += rpgCharacterStats.getFire().getIncrement(); //add to projectile damage
+                    if (isSkill) { //add full ranged damage to skills
+                        damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClass);
+                    } else { //add only fire element to projectiles fired without skills involved
+                        damage += rpgCharacterStats.getFire().getIncrement();
+                    }
                 } else { //melee
                     ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                     Material type = itemInMainHand.getType();
 
-                    if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
+                    if (isSkill) { //Add full melee damage to skills
+                        damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClass);
+                    } else if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
                             || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
+                        //Normal melee attack. Check for requirements then add fire and offhand bonus
+
                         if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "reqLevel")) {
                             int reqLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "reqLevel");
                             if (player.getLevel() < reqLevel) {
