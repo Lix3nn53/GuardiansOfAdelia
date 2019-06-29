@@ -1,7 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
 import org.bukkit.Material;
+import org.bukkit.entity.Arrow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +66,18 @@ public class HunterSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Piercing Arrow", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        CastTrigger castTrigger = new CastTrigger();
 
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
+                0, 1, 0, 200, true, Arrow.class);
+
+        projectileMechanic.setPiercing(5);
+
+        projectileMechanic.addChildren(new DamageMechanic(10, 10, DamageMechanic.DamageType.MAGIC));
+
+        castTrigger.addChildren(projectileMechanic);
+
+        skill.addTrigger(castTrigger);
         return skill;
     }
 

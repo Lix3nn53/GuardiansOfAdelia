@@ -6,8 +6,11 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.pr
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Fireball;
+import org.bukkit.entity.SmallFireball;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,6 +131,20 @@ public class MageSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Lightning Bolt", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        CastTrigger castTrigger = new CastTrigger();
+
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
+                0, 1, 0, 200, true, SmallFireball.class, Particle.VILLAGER_HAPPY, ArrangementParticle.SPHERE, 0.5, 4);
+
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
+
+        areaTarget.addChildren(new DamageMechanic(10, 10, DamageMechanic.DamageType.MAGIC));
+
+        projectileMechanic.addChildren(areaTarget);
+
+        castTrigger.addChildren(projectileMechanic);
+
+        skill.addTrigger(castTrigger);
 
         return skill;
     }

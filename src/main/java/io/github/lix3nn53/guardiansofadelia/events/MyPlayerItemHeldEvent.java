@@ -42,11 +42,15 @@ public class MyPlayerItemHeldEvent implements Listener {
                     return;
                 }
 
+                int previousSlot = event.getPreviousSlot();
+                if (previousSlot >= 0 && previousSlot <= 3) { //previous slot is skill bar
+                    return;
+                }
+
                 RPGClass rpgClass = activeCharacter.getRpgClass();
 
                 //remove old item stats
                 PlayerInventory inventory = player.getInventory();
-                int previousSlot = event.getPreviousSlot();
                 ItemStack oldItem = inventory.getItem(previousSlot);
                 if (oldItem != null) {
                     Material type = oldItem.getType();

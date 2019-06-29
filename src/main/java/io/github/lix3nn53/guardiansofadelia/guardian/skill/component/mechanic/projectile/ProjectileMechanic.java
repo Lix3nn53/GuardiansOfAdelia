@@ -66,20 +66,56 @@ public class ProjectileMechanic extends MechanicComponent {
         this.height = 0;
     }
 
+    public ProjectileMechanic(SpreadType spreadType, double speed,
+                              int amount, double angle, double right, double upward, double forward,
+                              double range, boolean mustHitToWork, Class<? extends Projectile> projectileType,
+                              Particle particle, ArrangementParticle arrangement, double radiusParticle, int amountParticle) {
+        this.spreadType = spreadType;
+        this.speed = speed;
+        this.amount = amount;
+        this.angle = angle;
+        this.right = right;
+        this.upward = upward;
+        this.forward = forward;
+        this.range = range;
+        this.mustHitToWork = mustHitToWork;
+        this.projectileType = projectileType;
+
+        this.radius = 0;
+        this.height = 0;
+
+        setParticle(particle, arrangement, radiusParticle, amountParticle);
+    }
+
     /**
      * For rain type projectile mechanics
      *
-     * @param spreadType
-     * @param radius
-     * @param height
-     * @param speed
-     * @param amount
-     * @param right
-     * @param upward
-     * @param forward
-     * @param range
-     * @param mustHitToWork
-     * @param projectileType
+     */
+    public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
+                              int amount, double right, double upward, double forward,
+                              double range, boolean mustHitToWork, Class<? extends Projectile> projectileType,
+                              Particle particle, ArrangementParticle arrangement, double radiusParticle, int amountParticle) {
+        this.spreadType = spreadType;
+
+        this.radius = radius;
+        this.height = height;
+
+        this.speed = speed;
+        this.amount = amount;
+        this.mustHitToWork = mustHitToWork;
+
+        this.angle = 0;
+
+        this.right = right;
+        this.upward = upward;
+        this.forward = forward;
+        this.range = range;
+        this.projectileType = projectileType;
+
+    }
+
+    /**
+     * For rain type projectile mechanics
      */
     public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
                               int amount, double right, double upward, double forward,
@@ -100,6 +136,12 @@ public class ProjectileMechanic extends MechanicComponent {
         this.forward = forward;
         this.range = range;
         this.projectileType = projectileType;
+
+        setParticle(particle, arrangement, radiusParticle, amountParticle);
+    }
+
+    public void onPierce() {
+        this.piercing--;
     }
 
     @Override
@@ -131,21 +173,19 @@ public class ProjectileMechanic extends MechanicComponent {
 
                 ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount);
                 for (Vector d : dirs) {
-                    Projectile p;
+                    Projectile p = caster.launchProjectile(projectileType);
 
                     if (particle != null) {
-                        p = caster.launchProjectile(Arrow.class);
-                        //TODO test disguise
-                        MiscDisguise miscDisguise = new MiscDisguise(DisguiseType.AREA_EFFECT_CLOUD);
-                        DisguiseAPI.disguiseToAll(p, miscDisguise);
+                        //TODO disguise console warn spam
+                        MiscDisguise disguise = new MiscDisguise(DisguiseType.UNKNOWN);
+                        DisguiseAPI.disguiseToAll(p, disguise);
                         startParticleAnimation(p);
-                    } else {
-                        p = caster.launchProjectile(projectileType);
                     }
 
                     if (projectileType != Arrow.class) {
                         p.teleport(target.getLocation().add(looking).add(0, upward + 0.5, 0).add(p.getVelocity()).setDirection(d));
                     } else if (piercing > 0) {
+                        //TODO arrow does not pierce
                         Callable integerCallable = () -> piercing;
                         p.setMetadata("PierceLevel", new LazyMetadataValue(GuardiansOfAdelia.getInstance(), LazyMetadataValue.CacheStrategy.CACHE_AFTER_FIRST_EVAL, integerCallable));
                     }
@@ -167,6 +207,7 @@ public class ProjectileMechanic extends MechanicComponent {
      */
     public void callback(Projectile projectile, Entity hit) {
         if (hit == null) {
+            if (projectile.isValid()) projectile.remove();
             if (mustHitToWork) return;
 
             hit = new TempEntity(projectile.getLocation());
@@ -184,7 +225,10 @@ public class ProjectileMechanic extends MechanicComponent {
         }
 
         executeChildren((LivingEntity) projectile.getShooter(), skillLevel, targets);
-        projectile.remove();
+
+        if (getPiercing() <= 0) {
+            projectile.remove();
+        }
     }
 
     @Override
@@ -199,6 +243,10 @@ public class ProjectileMechanic extends MechanicComponent {
 
     public void setPiercing(int piercing) {
         this.piercing = piercing;
+    }
+
+    public int getPiercing() {
+        return piercing;
     }
 
     public void setParticle(Particle particle, ArrangementParticle arrangement, double radiusParticle, int amountParticle) {
@@ -220,6 +268,6 @@ public class ProjectileMechanic extends MechanicComponent {
                     cancel();
                 }
             }
-        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 1L, 5L);
+        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 1L, 3L);
     }
 }

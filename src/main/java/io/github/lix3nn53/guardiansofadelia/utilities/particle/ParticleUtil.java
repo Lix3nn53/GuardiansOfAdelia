@@ -31,14 +31,7 @@ public class ParticleUtil {
      * @param particle particle to playSingleParticle
      */
     public static void playSingleParticle(Location loc, Particle particle) {
-        final int rad = 1;
-        final float dx = 1;
-        final float dy = 1;
-        final float dz = 1;
-        final int amount = 1;
-        final float speed = 1;
-
-        loc.getWorld().spawnParticle(particle, loc, rad, dx, dy, dz, speed, amount);
+        loc.getWorld().spawnParticle(particle, loc, 1);
     }
 
     /**
@@ -119,22 +112,15 @@ public class ParticleUtil {
      */
     public static void fillHemisphere(Location loc, Particle particle, double radius, int amount) {
         Location temp = loc.clone();
-        double rSquared = radius * radius;
         double twoRadius = radius * 2;
-        int index = 0;
 
         // Play the particles
-        while (index < amount) {
+        for (int i = 0; i < amount; i++) {
             temp.setX(loc.getX() + random.nextDouble() * twoRadius - radius);
             temp.setY(loc.getY() + random.nextDouble() * radius);
             temp.setZ(loc.getZ() + random.nextDouble() * twoRadius - radius);
 
-            if (temp.distanceSquared(loc) > rSquared) {
-                continue;
-            }
-
             playSingleParticle(temp, particle);
-            index++;
         }
     }
 }
