@@ -37,15 +37,17 @@ public class MyPlayerItemHeldEvent implements Listener {
                         return;
                     }
 
-                    activeCharacter.getSkillBar().castSkill(newSlot);
+                    int skillIndex = newSlot;
+                    if (newSlot == 3) {
+                        skillIndex++; //ultimate index is one off
+                    }
+
+                    activeCharacter.getSkillBar().castSkill(skillIndex);
                     event.setCancelled(true);
                     return;
                 }
 
                 int previousSlot = event.getPreviousSlot();
-                if (previousSlot >= 0 && previousSlot <= 3) { //previous slot is skill bar
-                    return;
-                }
 
                 RPGClass rpgClass = activeCharacter.getRpgClass();
 

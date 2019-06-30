@@ -1,8 +1,9 @@
-
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 public class Test {
 
@@ -10,11 +11,35 @@ public class Test {
 
     public static void main(String[] args) {
 
-        double damage = 2000;
+        HashMap<String, HashSet<String>> castKeyToSkillFlags = new HashMap<>();
 
-        damage = damage * 1.6;
+        String castKey = "key";
 
-        System.out.println("damage: " + damage);
+        String flag = "flag";
+
+
+        if (castKeyToSkillFlags.containsKey(castKey)) {
+            HashSet<String> flags = castKeyToSkillFlags.get(castKey);
+            flags.add(flag);
+            castKeyToSkillFlags.put(castKey, flags);
+        } else {
+            HashSet<String> flags = new HashSet<>();
+            flags.add(flag);
+            castKeyToSkillFlags.put(castKey, flags);
+        }
+
+
+        flag = "flag2";
+
+        if (castKeyToSkillFlags.containsKey(castKey)) {
+            castKeyToSkillFlags.get(castKey).add(flag);
+        } else {
+            HashSet<String> flags = new HashSet<>();
+            flags.add(flag);
+            castKeyToSkillFlags.put(castKey, flags);
+        }
+
+        System.out.println(castKeyToSkillFlags.toString());
 
        /* playerDamages.put('A', 1D);
         playerDamages.put('S', 1D);

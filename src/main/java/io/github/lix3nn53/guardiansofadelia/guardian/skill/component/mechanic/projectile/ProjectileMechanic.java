@@ -16,18 +16,17 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
-import org.bukkit.metadata.LazyMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 public class ProjectileMechanic extends MechanicComponent {
 
     private final Vector UP = new Vector(0, 1, 0);
 
+    private final Class<? extends Projectile> projectileType;
     private final SpreadType spreadType;
     private final double radius;
     private final double height;
@@ -39,15 +38,18 @@ public class ProjectileMechanic extends MechanicComponent {
     private final double forward;
     private final double range;
     private final boolean mustHitToWork;
-    //Particle projectile
-    Particle particle;
 
-    private final Class<? extends Projectile> projectileType;
-    ArrangementParticle arrangement;
-    double radiusParticle;
-    int amountParticle;
+    //Particle projectile
+    private Particle particle;
+    private ArrangementParticle arrangement;
+    private double radiusParticle;
+    private int amountParticle;
+
+    //Piercing
     private int piercing = 0;
 
+    private String castKey;
+
     public ProjectileMechanic(SpreadType spreadType, double speed,
                               int amount, double angle, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType) {
@@ -89,7 +91,6 @@ public class ProjectileMechanic extends MechanicComponent {
 
     /**
      * For rain type projectile mechanics
-     *
      */
     public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
                               int amount, double right, double upward, double forward,
@@ -138,14 +139,11 @@ public class ProjectileMechanic extends MechanicComponent {
         this.projectileType = projectileType;
 
         setParticle(particle, arrangement, radiusParticle, amountParticle);
-    }
-
-    public void onPierce() {
-        this.piercing--;
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+        this.castKey = castKey;
 
         // Fire from each target
         ArrayList<Entity> projectiles = new ArrayList<Entity>();
@@ -186,9 +184,10 @@ public class ProjectileMechanic extends MechanicComponent {
                         p.teleport(target.getLocation().add(looking).add(0, upward + 0.5, 0).add(p.getVelocity()).setDirection(d));
                     } else if (piercing > 0) {
                         //TODO arrow does not pierce
-                        Callable integerCallable = () -> piercing;
-                        p.setMetadata("PierceLevel", new LazyMetadataValue(GuardiansOfAdelia.getInstance(), LazyMetadataValue.CacheStrategy.CACHE_AFTER_FIRST_EVAL, integerCallable));
+                        GuardiansOfAdelia.getInstance().getLogger().info("piercing");
+                        ((Arrow) p).setPierceLevel(piercing);
                     }
+
                     p.setVelocity(d.multiply(speed));
                     projectiles.add(p);
                 }
@@ -224,11 +223,14 @@ public class ProjectileMechanic extends MechanicComponent {
             skillLevel = PersistentDataContainerUtil.getInteger(projectile, "skillLevel");
         }
 
-        executeChildren((LivingEntity) projectile.getShooter(), skillLevel, targets);
+        executeChildren((LivingEntity) projectile.getShooter(), skillLevel, targets, castKey);
 
-        if (getPiercing() <= 0) {
-            projectile.remove();
+        if (projectile instanceof Arrow) {
+            GuardiansOfAdelia.getInstance().getLogger().info("pierce level: " + ((Arrow) projectile).getPierceLevel());
+            if (((Arrow) projectile).getPierceLevel() > 0) return;
         }
+
+        projectile.remove();
     }
 
     @Override
@@ -243,10 +245,6 @@ public class ProjectileMechanic extends MechanicComponent {
 
     public void setPiercing(int piercing) {
         this.piercing = piercing;
-    }
-
-    public int getPiercing() {
-        return piercing;
     }
 
     public void setParticle(Particle particle, ArrangementParticle arrangement, double radiusParticle, int amountParticle) {

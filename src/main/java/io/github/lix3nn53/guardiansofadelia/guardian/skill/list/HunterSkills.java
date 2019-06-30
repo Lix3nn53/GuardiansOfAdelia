@@ -1,12 +1,18 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.FlagCondition;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram.HologramMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -263,6 +269,44 @@ public class HunterSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Bear Trap", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+
+        CastTrigger castTrigger = new CastTrigger();
+
+        //Add HologramMechanic to CastTrigger's children
+        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000005, 30, ChatColor.DARK_GRAY + "< Trap %caster% >");
+
+        //Add repeatMechanic to hologramMechanic's children
+        RepeatMechanic repeatMechanic = new RepeatMechanic(3, 10L, 60);
+
+        //Add areaTarget to repeatMechanic's children
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
+
+        //Add effects and setRemoveFlag to areaTarget's children
+        PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, 60, 999);
+        PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, 60, 999);
+        SilenceMechanic silenceMechanic = new SilenceMechanic(3);
+        FlagSetMechanic setRemoveFlag = new FlagSetMechanic("shouldStopSkill");
+
+        //Add FlagCondition to repeatMechanic's children
+        //Add RemoveMechanic and RepeatCancelMechanic to FlagCondition's children
+        FlagCondition removeCondition = new FlagCondition("shouldStopSkill", true);
+
+        skill.addTrigger(castTrigger);
+        castTrigger.addChildren(hologramMechanic);
+        hologramMechanic.addChildren(repeatMechanic);
+
+        //repeat part 1, area and effects
+        repeatMechanic.addChildren(areaTarget);
+        areaTarget.addChildren(stopJumping);
+        areaTarget.addChildren(stopWalking);
+        areaTarget.addChildren(silenceMechanic);
+        areaTarget.addChildren(setRemoveFlag);
+
+        //repeat part 2, stop and remove
+        repeatMechanic.addChildren(removeCondition);
+        removeCondition.addChildren(new RemoveMechanic());
+        removeCondition.addChildren(new RepeatCancelMechanic());
+        removeCondition.addChildren(new FlagRemoveMechanic("shouldStopSkill"));
 
         return skill;
     }

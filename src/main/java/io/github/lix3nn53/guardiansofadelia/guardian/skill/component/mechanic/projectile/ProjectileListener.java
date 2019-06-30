@@ -39,11 +39,7 @@ public class ProjectileListener {
                 ProjectileMechanic projectileMechanic = projectileToCallback.get(projectile);
                 projectileMechanic.callback((Projectile) projectile, hit);
 
-                if (hit != null && projectileMechanic.getPiercing() > 0) {
-                    projectileMechanic.onPierce();
-                } else {
-                    projectileToCallback.remove(projectile);
-                }
+                projectileToCallback.remove(projectile);
             }
         }
     }

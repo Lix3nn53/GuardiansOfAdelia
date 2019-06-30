@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component;
 
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
@@ -13,7 +14,6 @@ public abstract class TargetComponent extends SkillComponent {
 
     final int max;
     final boolean self;
-    //TODO private final boolean throughWall = false; isObstructed(from.getEyeLocation(), target.getEyeLocation())
     private final boolean allies;
     private final boolean enemy;
 
@@ -44,10 +44,6 @@ public abstract class TargetComponent extends SkillComponent {
             }
         }
 
-        if (self) {
-            list.add(caster);
-        }
-
         return list;
     }
 
@@ -60,9 +56,14 @@ public abstract class TargetComponent extends SkillComponent {
      */
     private boolean isValidTarget(final LivingEntity caster, final LivingEntity target) {
 
+        if (!self && caster.equals(target)) return false;
+
         boolean everyone = allies && enemy;
 
         if (everyone) return target != caster;
+
+        EntityType type = target.getType();
+        if (type.equals(EntityType.ARMOR_STAND)) return false;
 
         if (allies) return isAlly(caster, target);
 

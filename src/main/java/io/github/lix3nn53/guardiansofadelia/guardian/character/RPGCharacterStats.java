@@ -21,14 +21,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class RPGCharacterStats {
 
     private final Player player;
-
-    private int totalExp;
     private final Attribute fire = new Attribute(AttributeType.FIRE);
     private final Attribute lightning = new Attribute(AttributeType.LIGHTNING);
     private final Attribute earth = new Attribute(AttributeType.EARTH);
     private final Attribute water = new Attribute(AttributeType.WATER);
     private final Attribute wind = new Attribute(AttributeType.WIND);
-
+    private int totalExp;
     private int maxHealth = 20;
     private int maxMana = 20;
     private int currentMana = 20;

@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,12 +19,10 @@ import java.util.List;
  */
 public class SkillBar {
 
+    private static HashMap<Integer, Boolean> skillsOnCooldown = new HashMap<>();
     private final Player player;
     private final RPGClass rpgClass;
-
     private final List<Integer> investedSkillPoints = new ArrayList<>();
-
-    private static HashMap<Integer, Boolean> skillsOnCooldown = new HashMap<>();
 
     public SkillBar(Player player, RPGClass rpgClass, int one, int two, int three, int passive, int ultimate) {
         this.player = player;
@@ -141,6 +140,11 @@ public class SkillBar {
     }
 
     public boolean castSkill(int skillIndex) {
+        if (StatusEffectManager.isSilenced(player)) {
+            //TODO silence info
+            return false;
+        }
+
         if (skillsOnCooldown.containsKey(skillIndex)) {
             //TODO playSingleParticle sound to player on cast fail
             return false;
@@ -157,7 +161,9 @@ public class SkillBar {
             return false;
         }
 
-        skill.cast(player, skillLevel, null);
+        int nextCastNumber = SkillDataManager.getNextCastNumber(player);
+        String castKey = SkillDataManager.getCastKey(player, nextCastNumber);
+        skill.cast(player, skillLevel, null, castKey); //cast ends when this returns
 
         int cooldown = skill.getCooldown(skillLevel);
         PlayerInventory inventory = player.getInventory();

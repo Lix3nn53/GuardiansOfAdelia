@@ -8,19 +8,19 @@ public abstract class TriggerComponent extends SkillComponent {
 
     private boolean isRunning = false;
 
-    public boolean trigger(final LivingEntity caster, final int skillLevel, final List<LivingEntity> targets) {
+    public boolean trigger(final LivingEntity caster, final int skillLevel, final List<LivingEntity> targets, String castKey) {
 
-        return execute(caster, skillLevel, targets);
+        return execute(caster, skillLevel, targets, castKey);
     }
 
     @Override
-    public boolean execute(final LivingEntity caster, final int skillLevel, final List<LivingEntity> targets) {
+    public boolean execute(final LivingEntity caster, final int skillLevel, final List<LivingEntity> targets, String castKey) {
 
         try {
 
             isRunning = true;
 
-            return executeChildren(caster, skillLevel, targets);
+            return executeChildren(caster, skillLevel, targets, castKey);
 
         } finally {
 

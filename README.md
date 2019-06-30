@@ -40,7 +40,9 @@ Please note that these features are for my personal server. It probably will not
   * Wind: increases critical chance
   * You can gain more points on elements by investing element points you gain by leveling up or equiping items which has element bonuses on them.
 * Skills
-  * TODO
+  * Invest skill points to learn or upgrade your skills
+  * Use 1-2-3-4 hot bar keys to cast skills via SkillBar
+  * Combine SkillComponents to create skill mechanics. Component types are trigger, target, mechanic, condition.
 * Quests
   * Icons: 
     Quest icons appear on NPCs and disguises themselfs to each player differently. 

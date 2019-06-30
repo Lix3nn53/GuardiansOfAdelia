@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileListener;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -16,5 +18,12 @@ public class MyProjectileHitEvent implements Listener {
         Entity hitEntity = event.getHitEntity();
 
         ProjectileListener.onSkillProjectileLand(entity, hitEntity);
+
+        if (entity instanceof Arrow) {
+            Arrow arrow = (Arrow) entity;
+            if (arrow.getPierceLevel() > 0) {
+                GuardiansOfAdelia.getInstance().getLogger().info("pierce Level on hit event: " + arrow.getPierceLevel());
+            }
+        }
     }
 }

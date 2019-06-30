@@ -20,28 +20,23 @@ public class ProjectileUtil {
      * @param dir    center direction of the spread
      * @param angle  angle which to spread at
      * @param amount amount of directions to calculate
-     *
      * @return the list of calculated directions
      */
-    public static ArrayList<Vector> calcSpread(Vector dir, double angle, int amount)
-    {
+    public static ArrayList<Vector> calcSpread(Vector dir, double angle, int amount) {
         // Special cases
-        if (amount <= 0)
-        {
+        if (amount <= 0) {
             return new ArrayList<>();
         }
 
         ArrayList<Vector> list = new ArrayList<>();
 
         // One goes straight if odd amount
-        if (amount % 2 == 1)
-        {
+        if (amount % 2 == 1) {
             list.add(dir);
             amount--;
         }
 
-        if (amount <= 0)
-        {
+        if (amount <= 0) {
             return list;
         }
 
@@ -56,22 +51,18 @@ public class ProjectileUtil {
 
         // Get the vertical angle
         double vBaseAngle = Math.acos(Math.max(-1, Math.min(base.dot(dir), 1)));
-        if (dir.getY() < 0)
-        {
+        if (dir.getY() < 0) {
             vBaseAngle = -vBaseAngle;
         }
         double hAngle = Math.acos(Math.max(-1, Math.min(1, base.dot(X_VEC)))) / DEGREE_TO_RAD;
-        if (dir.getZ() < 0)
-        {
+        if (dir.getZ() < 0) {
             hAngle = -hAngle;
         }
 
         // Calculate directions
         double angleIncrement = angle / (amount - 1);
-        for (int i = 0; i < amount / 2; i++)
-        {
-            for (int direction = -1; direction <= 1; direction += 2)
-            {
+        for (int i = 0; i < amount / 2; i++) {
+            for (int direction = -1; direction <= 1; direction += 2) {
                 // Initial calculations
                 double bonusAngle = angle / 2 * direction - angleIncrement * i * direction;
                 double totalAngle = hAngle + bonusAngle;
@@ -99,14 +90,11 @@ public class ProjectileUtil {
      * @param radius radius of the circle
      * @param height height above the target to use
      * @param amount amount of locations to calculate
-     *
      * @return list of locations to spawn projectiles
      */
-    public static ArrayList<Location> calcRain(Location loc, double radius, double height, int amount)
-    {
+    public static ArrayList<Location> calcRain(Location loc, double radius, double height, int amount) {
         ArrayList<Location> list = new ArrayList<>();
-        if (amount <= 0)
-        {
+        if (amount <= 0) {
             return list;
         }
         loc.add(0, height, 0);
@@ -117,14 +105,12 @@ public class ProjectileUtil {
 
         // Calculate locations
         int tiers = (amount + 7) / 8;
-        for (int i = 0; i < tiers; i++)
-        {
+        for (int i = 0; i < tiers; i++) {
             double rad = radius * (tiers - i) / tiers;
             int tierNum = Math.min(amount, 8);
             double increment = 360 / tierNum;
             double angle = (i % 2) * 22.5;
-            for (int j = 0; j < tierNum; j++)
-            {
+            for (int j = 0; j < tierNum; j++) {
                 double dx = Math.cos(angle) * rad;
                 double dz = Math.sin(angle) * rad;
                 Location l = loc.clone();

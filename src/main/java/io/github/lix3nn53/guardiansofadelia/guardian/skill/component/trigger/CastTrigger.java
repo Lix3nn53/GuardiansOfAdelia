@@ -9,11 +9,11 @@ import java.util.List;
 public class CastTrigger extends TriggerComponent {
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
         List<LivingEntity> targetCaster = new ArrayList<>();
         targetCaster.add(caster);
 
-        return executeChildren(caster, skillLevel, targetCaster);
+        return executeChildren(caster, skillLevel, targetCaster, castKey);
     }
 
     @Override

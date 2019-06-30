@@ -272,7 +272,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     damage = damage * 1.6D;
                     isCritical = true;
                     Particle particle = Particle.CRIT;
-                    targetLocation.getWorld().spawnParticle(particle, targetLocation.clone().add(0,0.25,0), 6);
+                    targetLocation.getWorld().spawnParticle(particle, targetLocation.clone().add(0, 0.25, 0), 6);
                 }
 
                 //custom defense formula if target is another player
