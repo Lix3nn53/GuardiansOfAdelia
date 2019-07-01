@@ -1,7 +1,17 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.LaunchMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.ParticleMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.entity.SmallFireball;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +72,20 @@ public class WarriorSkills {
 
         Skill skill = new Skill("Power Slash", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+        CastTrigger castTrigger = new CastTrigger();
+
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 4);
+        DamageMechanic damageMechanic = new DamageMechanic(10, 10, DamageMechanic.DamageType.MELEE);
+
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20);
+
+        skill.addTrigger(castTrigger);
+
+        castTrigger.addChildren(areaTarget);
+        castTrigger.addChildren(particleMechanic);
+
+        areaTarget.addChildren(damageMechanic);
+
         return skill;
     }
 
@@ -107,6 +131,20 @@ public class WarriorSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Flame Burst", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+
+        CastTrigger castTrigger = new CastTrigger();
+
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
+                0, 1, 0, 200, true, SmallFireball.class, Particle.FLAME, ArrangementParticle.SPHERE, 0.5, 4);
+
+        DamageMechanic damageMechanic = new DamageMechanic(10, 10, DamageMechanic.DamageType.MELEE);
+
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, 0, 0.75, 0, 0.1);
+
+        castTrigger.addChildren(projectileMechanic);
+
+        projectileMechanic.addChildren(damageMechanic);
+        projectileMechanic.addChildren(launchMechanic);
 
         return skill;
     }

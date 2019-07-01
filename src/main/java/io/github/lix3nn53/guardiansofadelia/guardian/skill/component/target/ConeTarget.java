@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
-import io.github.lix3nn53.guardiansofadelia.utilities.Nearby;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -11,35 +10,37 @@ import java.util.List;
  * Applies child components to the closest all nearby entities around
  * each of the current targets.
  */
-public class AreaTarget extends TargetComponent {
+public class ConeTarget extends TargetComponent {
 
-    private final double radius;
+    private final double angle;
+    private final double range;
 
-    public AreaTarget(boolean allies, boolean enemy, boolean self, int max, double radius) {
+    public ConeTarget(boolean allies, boolean enemy, boolean self, int max, double angle, double range) {
         super(allies, enemy, self, max);
-        this.radius = radius;
+        this.angle = angle;
+        this.range = range;
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
 
-        List<LivingEntity> nearby = new ArrayList<>();
+        List<LivingEntity> cone = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            List<LivingEntity> nearbyTarget = Nearby.getLivingNearby(target, radius);
-            nearbyTarget = determineTargets(caster, nearbyTarget);
-            nearby.addAll(nearbyTarget);
+            List<LivingEntity> coneTargets = TargetHelper.getConeTargets(target, angle, range);
+            coneTargets = determineTargets(caster, coneTargets);
+            cone.addAll(coneTargets);
         }
 
-        if (nearby.isEmpty()) return false;
+        if (cone.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, nearby, castKey);
+        return executeChildren(caster, skillLevel, cone, castKey);
     }
 
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("Radius: " + radius);
+        lore.add("Cone range: " + range);
         return lore;
     }
 }

@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
-import io.github.lix3nn53.guardiansofadelia.utilities.Nearby;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -11,35 +10,37 @@ import java.util.List;
  * Applies child components to the closest all nearby entities around
  * each of the current targets.
  */
-public class AreaTarget extends TargetComponent {
+public class SingleTarget extends TargetComponent {
 
-    private final double radius;
+    private final double range;
+    private final double tolerance;
 
-    public AreaTarget(boolean allies, boolean enemy, boolean self, int max, double radius) {
+    public SingleTarget(boolean allies, boolean enemy, boolean self, int max, double range, double tolerance) {
         super(allies, enemy, self, max);
-        this.radius = radius;
+        this.range = range;
+        this.tolerance = tolerance;
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
 
-        List<LivingEntity> nearby = new ArrayList<>();
+        List<LivingEntity> single = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            List<LivingEntity> nearbyTarget = Nearby.getLivingNearby(target, radius);
-            nearbyTarget = determineTargets(caster, nearbyTarget);
-            nearby.addAll(nearbyTarget);
+            List<LivingEntity> singleTargets = TargetHelper.getLivingTargets(target, range, tolerance);
+            singleTargets = determineTargets(caster, singleTargets);
+            single.addAll(singleTargets);
         }
 
-        if (nearby.isEmpty()) return false;
+        if (single.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, nearby, castKey);
+        return executeChildren(caster, skillLevel, single, castKey);
     }
 
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("Radius: " + radius);
+        lore.add("Cone range: " + range);
         return lore;
     }
 }
