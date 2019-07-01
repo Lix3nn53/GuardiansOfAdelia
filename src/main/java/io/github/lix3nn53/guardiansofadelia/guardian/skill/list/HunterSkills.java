@@ -276,7 +276,7 @@ public class HunterSkills {
         HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000005, 30, ChatColor.DARK_GRAY + "< Trap %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
-        RepeatMechanic repeatMechanic = new RepeatMechanic(3, 10L, 60);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(10L, 60);
 
         //Add areaTarget to repeatMechanic's children
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);

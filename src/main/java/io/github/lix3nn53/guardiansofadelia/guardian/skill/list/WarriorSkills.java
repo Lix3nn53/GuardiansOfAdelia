@@ -1,17 +1,20 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.LaunchMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.ParticleMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram.HologramMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.SmallFireball;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,6 +144,8 @@ public class WarriorSkills {
 
         LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, 0, 0.75, 0, 0.1);
 
+        skill.addTrigger(castTrigger);
+
         castTrigger.addChildren(projectileMechanic);
 
         projectileMechanic.addChildren(damageMechanic);
@@ -190,7 +195,36 @@ public class WarriorSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
+        //TODO debug buff ally and self
         Skill skill = new Skill("Victory Flag", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+
+        CastTrigger castTrigger = new CastTrigger();
+
+        //Add HologramMechanic to CastTrigger's children
+        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000004, 30, ChatColor.AQUA + "< Victory-Flag %caster% >");
+
+        //Add repeatMechanic to hologramMechanic's children
+        RepeatMechanic repeatMechanic = new RepeatMechanic(40L, 15);
+
+        //Add areaTarget to repeatMechanic's children
+        AreaTarget areaTarget = new AreaTarget(true, false, true, 999, 9);
+        BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DAMAGE, 0.1, 40L, 0.03);
+        BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, 0.1, 40L, 0.03);
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, 2, 1);
+
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6);
+
+        skill.addTrigger(castTrigger);
+        castTrigger.addChildren(hologramMechanic);
+        hologramMechanic.addChildren(repeatMechanic);
+
+        //repeat part 1, area and effects
+        repeatMechanic.addChildren(areaTarget);
+        areaTarget.addChildren(physicalDamageBuff);
+        areaTarget.addChildren(magicalDamageBuff);
+        areaTarget.addChildren(potionEffectMechanic);
+
+        repeatMechanic.addChildren(particleMechanic);
 
         return skill;
     }

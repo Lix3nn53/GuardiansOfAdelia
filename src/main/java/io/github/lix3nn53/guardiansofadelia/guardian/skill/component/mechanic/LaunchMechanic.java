@@ -28,7 +28,7 @@ public class LaunchMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
         if (targets.isEmpty()) return false;
 
-        double upwardSpeedToUse = upwardSpeed + (upwardPerLevel * skillLevel) - upwardPerLevel;
+        double upwardSpeedToUse = upwardSpeed + (upwardPerLevel * (skillLevel - 1));
 
         for (LivingEntity ent : targets) {
             final Vector dir;

@@ -12,14 +12,12 @@ import java.util.List;
 
 public class RepeatMechanic extends MechanicComponent {
 
-    private final double amount;
     private final long period;
-    private final int repetations;
+    private final int repetitions;
 
-    public RepeatMechanic(double amount, long period, int repetations) {
-        this.amount = amount;
+    public RepeatMechanic(long period, int repetitions) {
         this.period = period;
-        this.repetations = repetations;
+        this.repetitions = repetitions;
     }
 
     @Override
@@ -35,7 +33,7 @@ public class RepeatMechanic extends MechanicComponent {
                 executeChildren(caster, skillLevel, targets, castKey);
 
                 counter++;
-                if (counter >= repetations) {
+                if (counter >= repetitions) {
                     cancel();
                 }
             }
@@ -49,7 +47,7 @@ public class RepeatMechanic extends MechanicComponent {
             public void run() {
                 SkillDataManager.removeRepeatTask(castKey, bukkitTask);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), period * repetations);
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), period * repetitions);
 
         return true;
     }
@@ -57,7 +55,7 @@ public class RepeatMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add("Repeat: " + amount);
+        lore.add("Repeat every " + (int) (period / 20 + 0.5) + " seconds, " + repetitions + " times");
         return lore;
     }
 }

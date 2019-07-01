@@ -13,6 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
@@ -218,8 +219,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 } else if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
                     if (isSkill) { //add full ranged damage to skills
                         damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClass);
-                    } else { //add only fire element to projectiles fired without skills involved
+                    } else { //add fire element and physical damage buff to projectiles fired without skills involved
                         damage += rpgCharacterStats.getFire().getIncrement();
+                        damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
                     }
                 } else { //melee
                     ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
@@ -256,9 +258,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
                         if (!InventoryUtils.isAirOrNull(itemInMainHand)) {
                             if (itemInOffHand.getType().equals(Material.DIAMOND_HOE)) {
-                                damage += rpgCharacterStats.getDamageBonusFromOffhand();
+                                damage += rpgCharacterStats.getTotalDamageBonusFromOffhand();
                             }
                         }
+
+                        damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
                     }
                 }
 

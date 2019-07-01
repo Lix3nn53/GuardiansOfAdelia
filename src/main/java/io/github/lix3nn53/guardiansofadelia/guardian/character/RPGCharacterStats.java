@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
@@ -41,6 +42,12 @@ public class RPGCharacterStats {
     //offhand slot
     private ArmorStatHolder shield;
     private int damageBonusFromOffhand = 0;
+
+    //buff multipliers from skills
+    private double physicalDamageBuff = 1;
+    private double magicalDamageBuff = 1;
+    private double physicalDefenseBuff = 1;
+    private double magicalDefenseBuff = 1;
 
     public RPGCharacterStats(Player player) {
         this.player = player;
@@ -153,11 +160,11 @@ public class RPGCharacterStats {
     }
 
     public int getTotalDefense() {
-        return defense + helmet.getDefense() + chestplate.getDefense() + leggings.getDefense() + boots.getDefense() + shield.getDefense();
+        return (int) ((defense + helmet.getDefense() + chestplate.getDefense() + leggings.getDefense() + boots.getDefense() + shield.getDefense()) * physicalDefenseBuff + 0.5);
     }
 
     public int getTotalMagicDefense() {
-        return magicDefense + helmet.getMagicDefense() + chestplate.getMagicDefense() + leggings.getMagicDefense() + boots.getMagicDefense() + shield.getMagicDefense();
+        return (int) ((magicDefense + helmet.getMagicDefense() + chestplate.getMagicDefense() + leggings.getMagicDefense() + boots.getMagicDefense() + shield.getMagicDefense()) * magicalDefenseBuff + 0.5);
     }
 
     public double getTotalCriticalChance() {
@@ -191,7 +198,7 @@ public class RPGCharacterStats {
                 return lightningBonus + PersistentDataContainerUtil.getInteger(itemInMainHand, "magicDamage");
             }
         }
-        return lightningBonus;
+        return (int) (lightningBonus * magicalDamageBuff + 0.5);
     }
 
     public int getTotalMeleeDamage(Player player, RPGClass rpgClass) {
@@ -232,7 +239,7 @@ public class RPGCharacterStats {
                     return statMagical.getMeleeDamage() + bonus;
             }
         }
-        return bonus;
+        return (int) (bonus * physicalDamageBuff + 0.5);
     }
 
     public int getTotalRangedDamage(Player player, RPGClass rpgClass) {
@@ -266,7 +273,7 @@ public class RPGCharacterStats {
                     return statHybrid.getRangedDamage() + fireBonus;
             }
         }
-        return fireBonus;
+        return (int) (fireBonus * physicalDamageBuff + 0.5);
     }
 
     public void resetAttributes() {
@@ -538,8 +545,8 @@ public class RPGCharacterStats {
     }
 
 
-    public int getDamageBonusFromOffhand() {
-        return damageBonusFromOffhand;
+    public int getTotalDamageBonusFromOffhand() {
+        return (int) (damageBonusFromOffhand * physicalDamageBuff + 0.5);
     }
 
     public boolean setMainHandBonuses(ItemStack itemStack, RPGClass rpgClass, boolean fixDisplay) {
@@ -604,5 +611,30 @@ public class RPGCharacterStats {
 
         onMaxHealthChange();
         onCurrentManaChange();
+    }
+
+    public void addToBuffMultiplier(BuffType buffType, double addToMultiplier) {
+        if (buffType.equals(BuffType.PHYSICAL_DAMAGE)) {
+            this.physicalDamageBuff += addToMultiplier;
+        } else if (buffType.equals(BuffType.MAGIC_DAMAGE)) {
+            this.magicalDamageBuff += addToMultiplier;
+        } else if (buffType.equals(BuffType.PHYSICAL_DEFENSE)) {
+            this.physicalDefenseBuff += addToMultiplier;
+        } else if (buffType.equals(BuffType.MAGIC_DEFENSE)) {
+            this.magicalDefenseBuff += addToMultiplier;
+        }
+    }
+
+    public double getBuffMultiplier(BuffType buffType) {
+        if (buffType.equals(BuffType.PHYSICAL_DAMAGE)) {
+            return this.physicalDamageBuff;
+        } else if (buffType.equals(BuffType.MAGIC_DAMAGE)) {
+            return this.magicalDamageBuff;
+        } else if (buffType.equals(BuffType.PHYSICAL_DEFENSE)) {
+            return this.physicalDefenseBuff;
+        } else if (buffType.equals(BuffType.MAGIC_DEFENSE)) {
+            return this.magicalDefenseBuff;
+        }
+        return 1;
     }
 }

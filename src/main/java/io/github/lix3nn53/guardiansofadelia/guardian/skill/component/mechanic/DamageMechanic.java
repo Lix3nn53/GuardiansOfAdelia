@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -38,9 +37,7 @@ public class DamageMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add((damageType == DamageType.MAGIC ? ChatColor.AQUA + "Magic Damage: " :
-                (damageType == DamageType.MELEE ? ChatColor.RED + "Melee damage: " : ChatColor.RED + "Ranged damage: "))
-                + (baseDamage + (levelMultiplier * skillLevel)));
+        lore.add(damageType.name() + ": " + (int) (baseDamage + (levelMultiplier * skillLevel) + 0.5));
         return lore;
     }
 
