@@ -55,15 +55,12 @@ public abstract class TargetComponent extends SkillComponent {
      * @return
      */
     private boolean isValidTarget(final LivingEntity caster, final LivingEntity target) {
-
-        if (!self && caster.equals(target)) return false;
-
-        boolean everyone = allies && enemy;
-
-        if (everyone) return target != caster;
-
         EntityType type = target.getType();
-        if (type.equals(EntityType.ARMOR_STAND)) return false;
+        if (type.equals(EntityType.ARMOR_STAND)) return false; //ignore list of target mechanics
+
+        if (caster == target) return self;
+
+        if (allies && enemy) return true;
 
         if (allies) return isAlly(caster, target);
 

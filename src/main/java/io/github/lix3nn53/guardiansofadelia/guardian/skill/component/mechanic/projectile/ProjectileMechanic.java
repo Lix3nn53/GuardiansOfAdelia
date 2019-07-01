@@ -145,6 +145,8 @@ public class ProjectileMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
         this.castKey = castKey;
 
+        GuardiansOfAdelia.getInstance().getLogger().info("1");
+
         // Fire from each target
         ArrayList<Entity> projectiles = new ArrayList<Entity>();
         for (LivingEntity target : targets) {
@@ -160,6 +162,7 @@ public class ProjectileMechanic extends MechanicComponent {
                 }
             } else {
                 Vector dir = target.getLocation().getDirection();
+                GuardiansOfAdelia.getInstance().getLogger().info("2");
                 if (spreadType.equals(SpreadType.HORIZONTAL_CONE)) {
                     dir.setY(0);
                     dir.normalize();
@@ -171,6 +174,7 @@ public class ProjectileMechanic extends MechanicComponent {
 
                 ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount);
                 for (Vector d : dirs) {
+                    GuardiansOfAdelia.getInstance().getLogger().info("3");
                     Projectile p = caster.launchProjectile(projectileType);
 
                     if (particle != null) {
@@ -261,7 +265,7 @@ public class ProjectileMechanic extends MechanicComponent {
                 if (projectile.isValid()) {
                     Location location = projectile.getLocation();
 
-                    ParticleUtil.play(location, particle, arrangement, radiusParticle, amountParticle, Direction.XZ);
+                    ParticleUtil.play(location, particle, arrangement, radiusParticle, amountParticle, Direction.XZ, 0, 0, 0, 0);
                 } else {
                     cancel();
                 }

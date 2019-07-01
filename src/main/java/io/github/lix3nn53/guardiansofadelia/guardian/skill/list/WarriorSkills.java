@@ -80,7 +80,7 @@ public class WarriorSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 4);
         DamageMechanic damageMechanic = new DamageMechanic(10, 10, DamageMechanic.DamageType.MELEE);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0);
 
         skill.addTrigger(castTrigger);
 
@@ -210,9 +210,9 @@ public class WarriorSkills {
         AreaTarget areaTarget = new AreaTarget(true, false, true, 999, 9);
         BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DAMAGE, 0.1, 40L, 0.03);
         BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, 0.1, 40L, 0.03);
-        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, 2, 1);
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, 41, 0);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6, 0, 0, 0, 0, 2, 0, 0);
 
         skill.addTrigger(castTrigger);
         castTrigger.addChildren(hologramMechanic);

@@ -13,7 +13,7 @@ public class PotionEffectMechanic extends MechanicComponent {
     private final PotionEffect potionEffect;
 
     public PotionEffectMechanic(PotionEffectType type, int duration, int amplifier) {
-        potionEffect = new PotionEffect(type, duration, amplifier, false);
+        potionEffect = new PotionEffect(type, duration, amplifier, false, false, true);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class PotionEffectMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
-            target.addPotionEffect(potionEffect);
+            target.addPotionEffect(potionEffect, true);
         }
 
         return true;

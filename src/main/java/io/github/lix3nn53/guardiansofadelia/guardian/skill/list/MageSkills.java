@@ -2,8 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.ParticleMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
@@ -139,6 +141,8 @@ public class MageSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
 
         areaTarget.addChildren(new DamageMechanic(10, 10, DamageMechanic.DamageType.MAGIC));
+        areaTarget.addChildren(new ParticleMechanic(Particle.VILLAGER_HAPPY, ArrangementParticle.CIRCLE, 2, 4, 0, 0, 0, 0, 0.5, 0, 0));
+        areaTarget.addChildren(new SilenceMechanic(3));
 
         projectileMechanic.addChildren(areaTarget);
 
