@@ -14,13 +14,13 @@ public class ParticleUtil {
      *
      * @param loc location to center the effect around
      */
-    public static void play(Location loc, Particle particle, ArrangementParticle arrangement, double radius, int amount, Direction dir, double dx, double dy, double dz, double speed) {
+    public static void play(Location loc, Particle particle, ArrangementParticle arrangement, double radius, int amount, Direction dir, double dx, double dy, double dz, double speed, Particle.DustOptions dustOptions) {
         if (arrangement.equals(ArrangementParticle.CIRCLE)) {
-            fillCircle(loc, particle, radius, amount, dir, dx, dy, dz, speed);
+            fillCircle(loc, particle, radius, amount, dir, dx, dy, dz, speed, dustOptions);
         } else if (arrangement.equals(ArrangementParticle.SPHERE)) {
-            fillSphere(loc, particle, radius, amount, dx, dy, dz, speed);
+            fillSphere(loc, particle, radius, amount, dx, dy, dz, speed, dustOptions);
         } else if (arrangement.equals(ArrangementParticle.HEMISPHERE)) {
-            fillHemisphere(loc, particle, radius, amount, dx, dy, dz, speed);
+            fillHemisphere(loc, particle, radius, amount, dx, dy, dz, speed, dustOptions);
         }
     }
 
@@ -30,8 +30,8 @@ public class ParticleUtil {
      * @param loc      location to playSingleParticle the effect
      * @param particle particle to playSingleParticle
      */
-    public static void playSingleParticle(Location loc, Particle particle, double dx, double dy, double dz, double speed) {
-        loc.getWorld().spawnParticle(particle, loc, 1, dx, dy, dz, speed);
+    public static void playSingleParticle(Location loc, Particle particle, double dx, double dy, double dz, double speed, Particle.DustOptions dustOptions) {
+        loc.getWorld().spawnParticle(particle, loc, 1, dx, dy, dz, speed, dustOptions);
     }
 
     /**
@@ -47,7 +47,7 @@ public class ParticleUtil {
             double radius,
             int amount,
             Direction direction,
-            double dx, double dy, double dz, double speed) {
+            double dx, double dy, double dz, double speed, Particle.DustOptions dustOptions) {
         Location temp = loc.clone();
         double rSquared = radius * radius;
         double twoRadius = radius * 2;
@@ -69,7 +69,7 @@ public class ParticleUtil {
                 continue;
             }
 
-            playSingleParticle(temp, particle, dx, dy, dz, speed);
+            playSingleParticle(temp, particle, dx, dy, dz, speed, dustOptions);
             index++;
         }
     }
@@ -83,7 +83,7 @@ public class ParticleUtil {
      * @param amount   amount of particles to use
      */
     public static void fillSphere(Location loc, Particle particle, double radius, int amount,
-                                  double dx, double dy, double dz, double speed) {
+                                  double dx, double dy, double dz, double speed, Particle.DustOptions dustOptions) {
         Location temp = loc.clone();
         double rSquared = radius * radius;
         double twoRadius = radius * 2;
@@ -99,7 +99,7 @@ public class ParticleUtil {
                 continue;
             }
 
-            playSingleParticle(temp, particle, dx, dy, dz, speed);
+            playSingleParticle(temp, particle, dx, dy, dz, speed, dustOptions);
             index++;
         }
     }
@@ -113,7 +113,7 @@ public class ParticleUtil {
      * @param amount   amount of particles to use
      */
     public static void fillHemisphere(Location loc, Particle particle, double radius, int amount,
-                                      double dx, double dy, double dz, double speed) {
+                                      double dx, double dy, double dz, double speed, Particle.DustOptions dustOptions) {
         Location temp = loc.clone();
         double twoRadius = radius * 2;
 
@@ -123,7 +123,7 @@ public class ParticleUtil {
             temp.setY(loc.getY() + random.nextDouble() * radius);
             temp.setZ(loc.getZ() + random.nextDouble() * twoRadius - radius);
 
-            playSingleParticle(temp, particle, dx, dy, dz, speed);
+            playSingleParticle(temp, particle, dx, dy, dz, speed, dustOptions);
         }
     }
 }

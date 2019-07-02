@@ -136,12 +136,12 @@ public class MageSkills {
         CastTrigger castTrigger = new CastTrigger();
 
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
-                0, 1, 0, 200, true, SmallFireball.class, Particle.VILLAGER_HAPPY, ArrangementParticle.SPHERE, 0.5, 4);
+                0, 1, 0, 200, true, SmallFireball.class, Particle.VILLAGER_HAPPY, ArrangementParticle.SPHERE, 0.5, 4, null);
 
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
 
         areaTarget.addChildren(new DamageMechanic(10, 10, DamageMechanic.DamageType.MAGIC));
-        areaTarget.addChildren(new ParticleMechanic(Particle.VILLAGER_HAPPY, ArrangementParticle.CIRCLE, 2, 4, 0, 0, 0, 0, 0.5, 0, 0));
+        areaTarget.addChildren(new ParticleMechanic(Particle.VILLAGER_HAPPY, ArrangementParticle.CIRCLE, 2, 4, 0, 0, 0, 0, 0.5, 0, 0, null));
         areaTarget.addChildren(new SilenceMechanic(3));
 
         projectileMechanic.addChildren(areaTarget);

@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
@@ -29,6 +30,7 @@ public class MyPlayerQuitEvent implements Listener {
         PartyManager.onPlayerQuit(player);
         PetManager.onPlayerQuit(player);
         SkillDataManager.onPlayerQuit(player);
+        TriggerListener.onPlayerQuit(player);
     }
 
 }

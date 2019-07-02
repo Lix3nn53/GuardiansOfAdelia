@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityListener;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import org.bukkit.entity.Entity;
@@ -14,15 +15,23 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class MyEntityDamageEvent implements Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(EntityDamageEvent event) {
+        if (!(event.getEntity() instanceof LivingEntity)) return;
+
+        if (event.getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
+            event.setDamage(10000D);
+        }
+
+        if (ImmunityListener.isImmune((LivingEntity) event.getEntity(), event.getCause())) {
+            event.setCancelled(true);
+            return;
+        }
+
         EntityType entityType = event.getEntityType();
+
         if (entityType.equals(EntityType.PLAYER)) {
             Player player = (Player) event.getEntity();
-
-            if (event.getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
-                event.setDamage(10000D);
-            }
 
             double finalDamage = event.getFinalDamage();
             if (PartyManager.inParty(player)) {

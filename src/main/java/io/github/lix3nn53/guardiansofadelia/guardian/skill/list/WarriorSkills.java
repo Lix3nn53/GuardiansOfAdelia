@@ -5,15 +5,20 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram.HologramMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityRemoveMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.SmallFireball;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
@@ -80,7 +85,7 @@ public class WarriorSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 4);
         DamageMechanic damageMechanic = new DamageMechanic(10, 10, DamageMechanic.DamageType.MELEE);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
 
         skill.addTrigger(castTrigger);
 
@@ -138,7 +143,7 @@ public class WarriorSkills {
         CastTrigger castTrigger = new CastTrigger();
 
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
-                0, 1, 0, 200, true, SmallFireball.class, Particle.FLAME, ArrangementParticle.SPHERE, 0.5, 4);
+                0, 1, 0, 200, true, SmallFireball.class, Particle.FLAME, ArrangementParticle.SPHERE, 0.5, 4, null);
 
         DamageMechanic damageMechanic = new DamageMechanic(10, 10, DamageMechanic.DamageType.MELEE);
 
@@ -195,7 +200,6 @@ public class WarriorSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        //TODO debug buff ally and self
         Skill skill = new Skill("Victory Flag", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         CastTrigger castTrigger = new CastTrigger();
@@ -212,7 +216,7 @@ public class WarriorSkills {
         BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, 0.1, 40L, 0.03);
         PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, 41, 0);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6, 0, 0, 0, 0, 2, 0, 0);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6, 0, 0, 0, 0, 2, 0, 0, null);
 
         skill.addTrigger(castTrigger);
         castTrigger.addChildren(hologramMechanic);
@@ -317,6 +321,36 @@ public class WarriorSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Grand Skyfall", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+
+        CastTrigger castTrigger = new CastTrigger();
+
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, 1.5, 1, 0, 0.25);
+
+        LandTrigger landTrigger = new LandTrigger();
+
+        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, 0);//0 for infinite
+        ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL);
+
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, -0.1, 1, 0, 0, 0, 0, 1, 4L, 4, new Particle.DustOptions(Color.FUCHSIA, 2));
+
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 5);
+
+        DamageMechanic damageMechanic = new DamageMechanic(10, 10, DamageMechanic.DamageType.MELEE);
+
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, -0.6, 0.4, 0.1, 0, 0, 0, 1, new Particle.DustOptions(Color.YELLOW, 2));
+
+        skill.addTrigger(castTrigger);
+
+        castTrigger.addChildren(launchMechanic);
+        castTrigger.addChildren(immunityMechanic);
+        castTrigger.addChildren(particleAnimationMechanic);
+        castTrigger.addChildren(landTrigger);
+
+        landTrigger.addChildren(particleMechanic);
+        landTrigger.addChildren(immunityRemoveMechanic);
+        landTrigger.addChildren(areaTarget);
+
+        areaTarget.addChildren(damageMechanic);
 
         return skill;
     }

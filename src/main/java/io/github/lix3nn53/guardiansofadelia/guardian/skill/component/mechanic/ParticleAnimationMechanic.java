@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
@@ -7,12 +8,13 @@ import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParticleMechanic extends MechanicComponent {
+public class ParticleAnimationMechanic extends MechanicComponent {
 
     private static final Vector UP = new Vector(0, 1, 0);
 
@@ -31,11 +33,15 @@ public class ParticleMechanic extends MechanicComponent {
 
     private final double speed;
 
-    private final Particle.DustOptions dustOptions;
+    //animation
+    private final long frequency;
+    private final int repeatAmount;
 
-    public ParticleMechanic(Particle particle, ArrangementParticle arrangement, double radiusParticle,
-                            int amountParticle, double dx, double dy, double dz, double forward, double upward,
-                            double right, double speed, Particle.DustOptions dustOptions) {
+    Particle.DustOptions dustOptions;
+
+    public ParticleAnimationMechanic(Particle particle, ArrangementParticle arrangement, double radiusParticle,
+                                     int amountParticle, double dx, double dy, double dz, double forward, double upward,
+                                     double right, double speed, long frequency, int repeatAmount, Particle.DustOptions dustOptions) {
         this.particle = particle;
         this.arrangement = arrangement;
         this.radiusParticle = radiusParticle;
@@ -47,6 +53,8 @@ public class ParticleMechanic extends MechanicComponent {
         this.dx = dx;
         this.dy = dy;
         this.dz = dz;
+        this.frequency = frequency;
+        this.repeatAmount = repeatAmount;
         this.dustOptions = dustOptions;
     }
 
@@ -55,13 +63,26 @@ public class ParticleMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity ent : targets) {
-            Location location = ent.getLocation();
+            new BukkitRunnable() {
 
-            Vector dir = location.getDirection().setY(0).normalize();
-            Vector side = dir.clone().crossProduct(UP);
-            location.add(dir.multiply(forward)).add(0, upward, 0).add(side.multiply(right));
+                int counter;
 
-            ParticleUtil.play(location, particle, arrangement, radiusParticle, amountParticle, Direction.XZ, dx, dy, dz, speed, dustOptions);
+                @Override
+                public void run() {
+                    Location location = ent.getLocation();
+
+                    Vector dir = location.getDirection().setY(0).normalize();
+                    Vector side = dir.clone().crossProduct(UP);
+                    location.add(dir.multiply(forward)).add(0, upward, 0).add(side.multiply(right));
+
+                    ParticleUtil.play(location, particle, arrangement, radiusParticle, amountParticle, Direction.XZ, dx, dy, dz, speed, dustOptions);
+
+                    counter++;
+                    if (counter >= repeatAmount) {
+                        cancel();
+                    }
+                }
+            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, frequency);
         }
 
         return true;

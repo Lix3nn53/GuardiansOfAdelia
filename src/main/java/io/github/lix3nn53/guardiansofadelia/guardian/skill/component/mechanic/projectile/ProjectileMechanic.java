@@ -44,6 +44,7 @@ public class ProjectileMechanic extends MechanicComponent {
     private ArrangementParticle arrangement;
     private double radiusParticle;
     private int amountParticle;
+    Particle.DustOptions dustOptions;
 
     //Piercing
     private int piercing = 0;
@@ -71,7 +72,8 @@ public class ProjectileMechanic extends MechanicComponent {
     public ProjectileMechanic(SpreadType spreadType, double speed,
                               int amount, double angle, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType,
-                              Particle particle, ArrangementParticle arrangement, double radiusParticle, int amountParticle) {
+                              Particle particle, ArrangementParticle arrangement, double radiusParticle,
+                              int amountParticle, Particle.DustOptions dustOptions) {
         this.spreadType = spreadType;
         this.speed = speed;
         this.amount = amount;
@@ -86,7 +88,7 @@ public class ProjectileMechanic extends MechanicComponent {
         this.radius = 0;
         this.height = 0;
 
-        setParticle(particle, arrangement, radiusParticle, amountParticle);
+        setParticle(particle, arrangement, radiusParticle, amountParticle, dustOptions);
     }
 
     /**
@@ -95,7 +97,8 @@ public class ProjectileMechanic extends MechanicComponent {
     public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
                               int amount, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType,
-                              Particle particle, ArrangementParticle arrangement, double radiusParticle, int amountParticle) {
+                              Particle particle, ArrangementParticle arrangement, double radiusParticle,
+                              int amountParticle, Particle.DustOptions dustOptions) {
         this.spreadType = spreadType;
 
         this.radius = radius;
@@ -113,6 +116,7 @@ public class ProjectileMechanic extends MechanicComponent {
         this.range = range;
         this.projectileType = projectileType;
 
+        setParticle(particle, arrangement, radiusParticle, amountParticle, dustOptions);
     }
 
     /**
@@ -138,7 +142,7 @@ public class ProjectileMechanic extends MechanicComponent {
         this.range = range;
         this.projectileType = projectileType;
 
-        setParticle(particle, arrangement, radiusParticle, amountParticle);
+        setParticle(particle, arrangement, radiusParticle, amountParticle, dustOptions);
     }
 
     @Override
@@ -251,11 +255,12 @@ public class ProjectileMechanic extends MechanicComponent {
         this.piercing = piercing;
     }
 
-    public void setParticle(Particle particle, ArrangementParticle arrangement, double radiusParticle, int amountParticle) {
+    public void setParticle(Particle particle, ArrangementParticle arrangement, double radiusParticle, int amountParticle, Particle.DustOptions dustOptions) {
         this.particle = particle;
         this.arrangement = arrangement;
         this.radiusParticle = radiusParticle;
         this.amountParticle = amountParticle;
+        this.dustOptions = dustOptions;
     }
 
     private void startParticleAnimation(Projectile projectile) {
@@ -265,7 +270,7 @@ public class ProjectileMechanic extends MechanicComponent {
                 if (projectile.isValid()) {
                     Location location = projectile.getLocation();
 
-                    ParticleUtil.play(location, particle, arrangement, radiusParticle, amountParticle, Direction.XZ, 0, 0, 0, 0);
+                    ParticleUtil.play(location, particle, arrangement, radiusParticle, amountParticle, Direction.XZ, 0, 0, 0, 0, dustOptions);
                 } else {
                     cancel();
                 }

@@ -81,10 +81,4 @@ public class BuffMechanic extends MechanicComponent {
         lore.add(buffType.name() + " duration: " + (ticks / 20) + " seconds");
         return lore;
     }
-
-    public enum Relative {
-        CASTER,
-        BETWEEN,
-        TARGET
-    }
 }
