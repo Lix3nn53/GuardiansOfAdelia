@@ -58,6 +58,10 @@ public class SkillDataManager {
         }
     }
 
+    public static void clearFlags(String castKey) {
+        castKeyToSkillFlags.remove(castKey);
+    }
+
     public static void onRepeatTaskCreate(String castKey, BukkitTask bukkitTask) {
         if (castKeyToRepeatTasks.containsKey(castKey)) {
             castKeyToRepeatTasks.get(castKey).add(bukkitTask);

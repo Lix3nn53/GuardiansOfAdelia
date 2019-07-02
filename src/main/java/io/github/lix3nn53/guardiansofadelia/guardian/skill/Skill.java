@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -143,5 +144,14 @@ public class Skill {
 
     public void addTrigger(SkillComponent skillComponent) {
         triggers.add(skillComponent);
+    }
+
+    public InitializeTrigger getInitializeTrigger() {
+        for (SkillComponent skillComponent : triggers) {
+            if (skillComponent instanceof InitializeTrigger) {
+                return (InitializeTrigger) skillComponent;
+            }
+        }
+        return null;
     }
 }

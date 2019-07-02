@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class TriggerListener {
 
     private static HashMap<Player, LandTrigger> playerToLandTrigger = new HashMap<>();
+    private static HashMap<Player, InitializeTrigger> playerToInitializeTrigger = new HashMap<>();
 
     public static void onPlayerQuit(Player player) {
         playerToLandTrigger.remove(player);
@@ -20,6 +21,18 @@ public class TriggerListener {
         if (playerToLandTrigger.containsKey(player)) {
             playerToLandTrigger.get(player).callback(player);
             playerToLandTrigger.remove(player);
+        }
+    }
+
+    public static void onSkillLearn(Player player, InitializeTrigger initializeTrigger) {
+        initializeTrigger.startEffects();
+        playerToInitializeTrigger.put(player, initializeTrigger);
+    }
+
+    public static void onSkillUnlearn(Player player) {
+        if (playerToInitializeTrigger.containsKey(player)) {
+            playerToInitializeTrigger.get(player).stopEffects();
+            playerToInitializeTrigger.remove(player);
         }
     }
 }

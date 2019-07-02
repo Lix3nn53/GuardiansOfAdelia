@@ -6,24 +6,18 @@ import org.bukkit.entity.LivingEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Applies child components to the closest all nearby entities around
- * each of the current targets.
- */
 public class SelfTarget extends TargetComponent {
 
-    protected SelfTarget(boolean allies, boolean enemy, boolean self, int max) {
-        super(allies, enemy, self, max);
+    public SelfTarget() {
+        super(false, false, true, 1);
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+        List<LivingEntity> targetCaster = new ArrayList<>();
+        targetCaster.add(caster);
 
-        List<LivingEntity> newTargets = new ArrayList<>();
-
-        newTargets.add(caster);
-
-        return executeChildren(caster, skillLevel, newTargets, castKey);
+        return executeChildren(caster, skillLevel, targetCaster, castKey);
     }
 
     @Override

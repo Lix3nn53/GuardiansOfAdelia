@@ -10,7 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.im
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.ChatColor;
@@ -80,17 +80,17 @@ public class WarriorSkills {
 
         Skill skill = new Skill("Power Slash", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
-        CastTrigger castTrigger = new CastTrigger();
+        SelfTarget selfTarget = new SelfTarget();
 
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 4);
         DamageMechanic damageMechanic = new DamageMechanic(10, 10, DamageMechanic.DamageType.MELEE);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
 
-        skill.addTrigger(castTrigger);
+        skill.addTrigger(selfTarget);
 
-        castTrigger.addChildren(areaTarget);
-        castTrigger.addChildren(particleMechanic);
+        selfTarget.addChildren(areaTarget);
+        selfTarget.addChildren(particleMechanic);
 
         areaTarget.addChildren(damageMechanic);
 
@@ -140,7 +140,7 @@ public class WarriorSkills {
 
         Skill skill = new Skill("Flame Burst", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
-        CastTrigger castTrigger = new CastTrigger();
+        SelfTarget selfTarget = new SelfTarget();
 
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
                 0, 1, 0, 200, true, SmallFireball.class, Particle.FLAME, ArrangementParticle.SPHERE, 0.5, 4, null);
@@ -149,9 +149,9 @@ public class WarriorSkills {
 
         LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, 0, 0.75, 0, 0.1);
 
-        skill.addTrigger(castTrigger);
+        skill.addTrigger(selfTarget);
 
-        castTrigger.addChildren(projectileMechanic);
+        selfTarget.addChildren(projectileMechanic);
 
         projectileMechanic.addChildren(damageMechanic);
         projectileMechanic.addChildren(launchMechanic);
@@ -202,9 +202,9 @@ public class WarriorSkills {
 
         Skill skill = new Skill("Victory Flag", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
-        CastTrigger castTrigger = new CastTrigger();
+        SelfTarget selfTarget = new SelfTarget();
 
-        //Add HologramMechanic to CastTrigger's children
+        //Add HologramMechanic to SelfTarget's children
         HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000004, 30, ChatColor.AQUA + "< Victory-Flag %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
@@ -218,8 +218,8 @@ public class WarriorSkills {
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6, 0, 0, 0, 0, 2, 0, 0, null);
 
-        skill.addTrigger(castTrigger);
-        castTrigger.addChildren(hologramMechanic);
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(hologramMechanic);
         hologramMechanic.addChildren(repeatMechanic);
 
         //repeat part 1, area and effects
@@ -322,7 +322,7 @@ public class WarriorSkills {
 
         Skill skill = new Skill("Grand Skyfall", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
-        CastTrigger castTrigger = new CastTrigger();
+        SelfTarget selfTarget = new SelfTarget();
 
         LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, 1.5, 1, 0, 0.25);
 
@@ -339,12 +339,12 @@ public class WarriorSkills {
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, -0.6, 0.4, 0.1, 0, 0, 0, 1, new Particle.DustOptions(Color.YELLOW, 2));
 
-        skill.addTrigger(castTrigger);
+        skill.addTrigger(selfTarget);
 
-        castTrigger.addChildren(launchMechanic);
-        castTrigger.addChildren(immunityMechanic);
-        castTrigger.addChildren(particleAnimationMechanic);
-        castTrigger.addChildren(landTrigger);
+        selfTarget.addChildren(launchMechanic);
+        selfTarget.addChildren(immunityMechanic);
+        selfTarget.addChildren(particleAnimationMechanic);
+        selfTarget.addChildren(landTrigger);
 
         landTrigger.addChildren(particleMechanic);
         landTrigger.addChildren(immunityRemoveMechanic);

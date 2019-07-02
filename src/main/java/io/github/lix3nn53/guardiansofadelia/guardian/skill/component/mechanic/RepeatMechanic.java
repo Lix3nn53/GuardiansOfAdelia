@@ -15,6 +15,10 @@ public class RepeatMechanic extends MechanicComponent {
     private final long period;
     private final int repetitions;
 
+    /**
+     * @param period
+     * @param repetitions 0 for infinite
+     */
     public RepeatMechanic(long period, int repetitions) {
         this.period = period;
         this.repetitions = repetitions;
@@ -32,9 +36,11 @@ public class RepeatMechanic extends MechanicComponent {
             public void run() {
                 executeChildren(caster, skillLevel, targets, castKey);
 
-                counter++;
-                if (counter >= repetitions) {
-                    cancel();
+                if (repetitions != 0) {
+                    counter++;
+                    if (counter >= repetitions) {
+                        cancel();
+                    }
                 }
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, period);

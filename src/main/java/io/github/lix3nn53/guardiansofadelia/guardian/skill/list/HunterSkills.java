@@ -8,7 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.pr
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
@@ -72,7 +72,7 @@ public class HunterSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Piercing Arrow", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
-        CastTrigger castTrigger = new CastTrigger();
+        SelfTarget selfTarget = new SelfTarget();
 
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
                 0, 1, 0, 200, true, Arrow.class);
@@ -81,9 +81,9 @@ public class HunterSkills {
 
         projectileMechanic.addChildren(new DamageMechanic(10, 10, DamageMechanic.DamageType.MAGIC));
 
-        castTrigger.addChildren(projectileMechanic);
+        selfTarget.addChildren(projectileMechanic);
 
-        skill.addTrigger(castTrigger);
+        skill.addTrigger(selfTarget);
         return skill;
     }
 
@@ -270,9 +270,9 @@ public class HunterSkills {
 
         Skill skill = new Skill("Bear Trap", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
-        CastTrigger castTrigger = new CastTrigger();
+        SelfTarget selfTarget = new SelfTarget();
 
-        //Add HologramMechanic to CastTrigger's children
+        //Add HologramMechanic to SelfTarget's children
         HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000005, 30, ChatColor.DARK_GRAY + "< Trap %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
@@ -285,14 +285,14 @@ public class HunterSkills {
         PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, 60, 999);
         PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, 60, 999);
         SilenceMechanic silenceMechanic = new SilenceMechanic(3);
-        FlagSetMechanic setRemoveFlag = new FlagSetMechanic("shouldStopSkill");
+        FlagSetMechanic setRemoveFlag = new FlagSetMechanic("shouldStopSkill", 0);
 
         //Add FlagCondition to repeatMechanic's children
         //Add RemoveMechanic and RepeatCancelMechanic to FlagCondition's children
         FlagCondition removeCondition = new FlagCondition("shouldStopSkill", true);
 
-        skill.addTrigger(castTrigger);
-        castTrigger.addChildren(hologramMechanic);
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(hologramMechanic);
         hologramMechanic.addChildren(repeatMechanic);
 
         //repeat part 1, area and effects

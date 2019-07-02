@@ -7,7 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.pr
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.CastTrigger;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -73,7 +73,7 @@ public class MageSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Fireball", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
-        CastTrigger castTrigger = new CastTrigger();
+        SelfTarget selfTarget = new SelfTarget();
 
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
                 0, 1, 0, 200, true, Fireball.class);
@@ -84,9 +84,9 @@ public class MageSkills {
 
         projectileMechanic.addChildren(areaTarget);
 
-        castTrigger.addChildren(projectileMechanic);
+        selfTarget.addChildren(projectileMechanic);
 
-        skill.addTrigger(castTrigger);
+        skill.addTrigger(selfTarget);
 
         return skill;
     }
@@ -133,7 +133,7 @@ public class MageSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Lightning Bolt", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
-        CastTrigger castTrigger = new CastTrigger();
+        SelfTarget selfTarget = new SelfTarget();
 
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
                 0, 1, 0, 200, true, SmallFireball.class, Particle.VILLAGER_HAPPY, ArrangementParticle.SPHERE, 0.5, 4, null);
@@ -146,9 +146,9 @@ public class MageSkills {
 
         projectileMechanic.addChildren(areaTarget);
 
-        castTrigger.addChildren(projectileMechanic);
+        selfTarget.addChildren(projectileMechanic);
 
-        skill.addTrigger(castTrigger);
+        skill.addTrigger(selfTarget);
 
         return skill;
     }

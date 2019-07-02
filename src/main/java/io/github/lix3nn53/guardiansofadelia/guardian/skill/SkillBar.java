@@ -4,6 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -37,6 +39,18 @@ public class SkillBar {
         investedSkillPoints.add(ultimate);
 
         remakeSkillBar();
+
+        //activate init triggers
+        List<Skill> skillSet = SkillList.getSkillSet(rpgClass);
+        for (int i = 0; i <= 4; i++) {
+            if (investedSkillPoints.get(i) <= 0) continue;
+
+            Skill skill = skillSet.get(i);
+            InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
+            if (initializeTrigger != null) {
+                TriggerListener.onSkillLearn(player, initializeTrigger);
+            }
+        }
     }
 
     /**
@@ -55,6 +69,12 @@ public class SkillBar {
         int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel);
 
         if (getSkillPointsLeftToSpend() >= reqSkillPoints) {
+            if (currentSkillLevel == 0) {
+                InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
+                if (initializeTrigger != null) {
+                    TriggerListener.onSkillLearn(player, initializeTrigger);
+                }
+            }
             investedSkillPoints.set(skillIndex, invested + reqSkillPoints);
             remakeSkillBarIcon(skillIndex);
             return true;
@@ -72,8 +92,13 @@ public class SkillBar {
         Integer invested = investedSkillPoints.get(skillIndex);
         int currentSkillLevel = skill.getCurrentSkillLevel(invested);
 
-        if (currentSkillLevel <= 0) {
-            return false;
+        if (currentSkillLevel <= 0) return false;
+
+        if (currentSkillLevel == 1) {
+            InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
+            if (initializeTrigger != null) {
+                TriggerListener.onSkillUnlearn(player);
+            }
         }
 
         int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel - 1);
