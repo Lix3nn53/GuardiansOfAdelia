@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.HealthCondition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
@@ -282,11 +283,16 @@ public class WarriorSkills {
 
         TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(20L * 30);
 
+        HealthCondition healthCondition = new HealthCondition(0.1, 1);
+
         MessageMechanic messageMechanic = new MessageMechanic("tookPhysicalDamageTrigger activates MessageMechanic");
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.SPEED, 60, 2);
 
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(tookPhysicalDamageTrigger);
-        tookPhysicalDamageTrigger.addChildren(messageMechanic);
+        tookPhysicalDamageTrigger.addChildren(healthCondition);
+        healthCondition.addChildren(messageMechanic);
+        healthCondition.addChildren(potionEffectMechanic);
 
         return skill;
     }

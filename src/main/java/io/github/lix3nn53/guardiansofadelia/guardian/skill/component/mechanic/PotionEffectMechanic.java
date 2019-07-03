@@ -12,8 +12,8 @@ public class PotionEffectMechanic extends MechanicComponent {
 
     private final PotionEffect potionEffect;
 
-    public PotionEffectMechanic(PotionEffectType type, int duration, int amplifier) {
-        potionEffect = new PotionEffect(type, duration, amplifier, false, false, true);
+    public PotionEffectMechanic(PotionEffectType type, int ticks, int amplifier) {
+        potionEffect = new PotionEffect(type, ticks, amplifier, false, false, true);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class PotionEffectMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add(potionEffect.getType() + " duration: " + potionEffect.getDuration());
+        lore.add(potionEffect.getType() + " duration: " + (potionEffect.getDuration() / 20));
         lore.add(potionEffect.getType() + " tier: " + potionEffect.getAmplifier());
         return lore;
     }

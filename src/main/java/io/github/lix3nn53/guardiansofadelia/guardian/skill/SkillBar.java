@@ -48,8 +48,8 @@ public class SkillBar {
             Skill skill = skillSet.get(i);
             InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
             if (initializeTrigger != null) {
-                int currentSkillLevel = skill.getCurrentSkillLevel(getInvestedSkillPoints(i));
-                TriggerListener.onSkillUpgrade(player, initializeTrigger, currentSkillLevel);
+                int nextSkillLevel = skill.getCurrentSkillLevel(getInvestedSkillPoints(i));
+                TriggerListener.onSkillUpgrade(player, initializeTrigger, nextSkillLevel);
             }
         }
     }
@@ -93,11 +93,9 @@ public class SkillBar {
 
         if (currentSkillLevel <= 0) return false;
 
-        if (currentSkillLevel == 1) {
-            InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
-            if (initializeTrigger != null) {
-                TriggerListener.onSkillUnlearn(player);
-            }
+        InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
+        if (initializeTrigger != null) {
+            TriggerListener.onSkillDowngrade(player, initializeTrigger, currentSkillLevel - 1);
         }
 
         int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel - 1);

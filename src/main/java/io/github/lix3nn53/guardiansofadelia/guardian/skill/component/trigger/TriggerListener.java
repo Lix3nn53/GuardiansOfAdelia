@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TriggerListener {
+    //TODO problem: every player can have only one trigger of a type
 
     private static HashMap<Player, InitializeTrigger> playerToInitializeTrigger = new HashMap<>();
 
@@ -55,8 +56,8 @@ public class TriggerListener {
         }
     }
 
-    public static void onSkillUpgrade(Player player, InitializeTrigger initializeTrigger, int currentSkillLevel) {
-        onSkillUnlearn(player); //stop old init
+    public static void onSkillUpgrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel) {
+        stopInit(player); //stop old init
 
         int nextCastNumber = SkillDataManager.getNextCastNumber(player);
         String castKey = SkillDataManager.getCastKey(player, nextCastNumber);
@@ -64,12 +65,27 @@ public class TriggerListener {
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
 
-        initializeTrigger.startEffects(player, currentSkillLevel, targets, castKey);
+        initializeTrigger.startEffects(player, nextSkillLevel, targets, castKey);
         playerToInitializeTrigger.put(player, initializeTrigger);
     }
 
-    public static void onSkillUnlearn(Player player) {
+    public static void onSkillDowngrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel) {
+        stopInit(player);
+        if (nextSkillLevel == 0) return;
+
+        int nextCastNumber = SkillDataManager.getNextCastNumber(player);
+        String castKey = SkillDataManager.getCastKey(player, nextCastNumber);
+
+        List<LivingEntity> targets = new ArrayList<>();
+        targets.add(player);
+
+        initializeTrigger.startEffects(player, nextSkillLevel, targets, castKey);
+        playerToInitializeTrigger.put(player, initializeTrigger);
+    }
+
+    private static void stopInit(Player player) {
         if (playerToInitializeTrigger.containsKey(player)) {
+            player.sendMessage("StopEffects");
             playerToInitializeTrigger.get(player).stopEffects(player);
             playerToInitializeTrigger.remove(player);
         }
