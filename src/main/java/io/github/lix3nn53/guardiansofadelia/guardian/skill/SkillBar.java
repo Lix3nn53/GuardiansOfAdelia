@@ -48,7 +48,8 @@ public class SkillBar {
             Skill skill = skillSet.get(i);
             InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
             if (initializeTrigger != null) {
-                TriggerListener.onSkillLearn(player, initializeTrigger);
+                int currentSkillLevel = skill.getCurrentSkillLevel(getInvestedSkillPoints(i));
+                TriggerListener.onSkillUpgrade(player, initializeTrigger, currentSkillLevel);
             }
         }
     }
@@ -69,11 +70,9 @@ public class SkillBar {
         int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel);
 
         if (getSkillPointsLeftToSpend() >= reqSkillPoints) {
-            if (currentSkillLevel == 0) {
-                InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
-                if (initializeTrigger != null) {
-                    TriggerListener.onSkillLearn(player, initializeTrigger);
-                }
+            InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
+            if (initializeTrigger != null) {
+                TriggerListener.onSkillUpgrade(player, initializeTrigger, currentSkillLevel + 1);
             }
             investedSkillPoints.set(skillIndex, invested + reqSkillPoints);
             remakeSkillBarIcon(skillIndex);

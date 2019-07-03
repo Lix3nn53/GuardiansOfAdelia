@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
@@ -112,6 +113,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     }
 
                     Player playerTarget = (Player) target;
+                    if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
+                        TriggerListener.onPlayerTookMagicalDamage(playerTarget); //TookMagicalDamageTrigger
+                    } else {
+                        TriggerListener.onPlayerTookPhysicalDamage(playerTarget); //TookPhysicalDamageTrigger
+                    }
 
                     if (!isAttackerPlayer) { //we are managing this on onPlayerAttackEntity() method if attacker is player
                         //custom defense formula if target is another player attacked by mob
