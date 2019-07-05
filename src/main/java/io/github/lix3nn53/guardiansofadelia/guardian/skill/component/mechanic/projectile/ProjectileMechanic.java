@@ -154,6 +154,7 @@ public class ProjectileMechanic extends MechanicComponent {
         for (LivingEntity target : targets) {
             // Apply the spread type
             if (spreadType.equals(SpreadType.RAIN)) {
+                //TODO test projectile rain
                 ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amount);
 
                 for (Location loc : locs) {
