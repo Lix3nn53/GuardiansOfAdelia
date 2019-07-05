@@ -4,10 +4,12 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.PlayerTridentThrowManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -76,6 +78,10 @@ public class MyProjectileLaunchEvent implements Listener {
                             PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, projectile);
                         }
                     }
+                }
+            } else if (type.equals(Material.CROSSBOW)) {
+                if (projectile instanceof Arrow) {
+                    TriggerListener.onPlayerShootCrossbow(player, (Arrow) projectile);
                 }
             }
         } else if (shooter instanceof LivingEntity) {

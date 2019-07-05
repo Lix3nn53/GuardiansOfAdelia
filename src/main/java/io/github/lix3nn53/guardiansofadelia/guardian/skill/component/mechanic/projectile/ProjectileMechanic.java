@@ -45,7 +45,6 @@ public class ProjectileMechanic extends MechanicComponent {
     Particle.DustOptions dustOptions;
 
     //Piercing
-    private int piercing = 0;
 
     private String castKey;
 
@@ -189,11 +188,17 @@ public class ProjectileMechanic extends MechanicComponent {
 
                     if (projectileType != Arrow.class) {
                         p.teleport(target.getLocation().add(looking).add(0, upward + 0.5, 0).add(p.getVelocity()).setDirection(d));
-                    } else if (piercing > 0) {
+                    }/* else if (piercing > 0) {
                         //TODO arrow does not pierce
+
+                        NBTEntity ent = new NBTEntity(p);
+                        ent.setByte("ShotFromCrossbow", (byte) 1);
+                        ent.setByte("crit", (byte) 1);
+                        ent.setString("SoundEvent", "minecraft:item.crossbow.hit");
+
                         GuardiansOfAdelia.getInstance().getLogger().info("piercing");
                         ((Arrow) p).setPierceLevel(piercing);
-                    }
+                    }*/
 
                     p.setVelocity(d.multiply(speed));
                     projectiles.add(p);
@@ -250,9 +255,9 @@ public class ProjectileMechanic extends MechanicComponent {
         return new ArrayList<>();
     }
 
-    public void setPiercing(int piercing) {
+    /*public void setPiercing(int piercing) {
         this.piercing = piercing;
-    }
+    }*/
 
     public void setParticle(Particle particle, ArrangementParticle arrangement, double radiusParticle, int amountParticle, Particle.DustOptions dustOptions) {
         this.particle = particle;

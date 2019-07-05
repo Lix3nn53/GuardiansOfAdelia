@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -22,10 +23,21 @@ public class TriggerListener {
     private static HashMap<Player, RangedAttackTrigger> playerToRangedAttackTrigger = new HashMap<>();
     private static HashMap<Player, MagicAttackTrigger> playerToMagicAttackTrigger = new HashMap<>();
 
+    private static HashMap<Player, AddPiercingToArrowShootFromCrossbowTrigger> playerToAddPiercingToArrowShootFromCrossbowTrigger = new HashMap<>();
+
     public static void onPlayerQuit(Player player) {
+        playerToInitializeTrigger.remove(player);
+
         playerToLandTrigger.remove(player);
+
         playerToTookPhysicalDamageTrigger.remove(player);
         playerToTookMagicalDamageTrigger.remove(player);
+
+        playerToMeleeAttackTrigger.remove(player);
+        playerToRangedAttackTrigger.remove(player);
+        playerToMagicAttackTrigger.remove(player);
+
+        playerToAddPiercingToArrowShootFromCrossbowTrigger.remove(player);
     }
 
     public static void startListeningLandTrigger(Player player, LandTrigger landTrigger) {
@@ -91,6 +103,17 @@ public class TriggerListener {
         if (playerToMagicAttackTrigger.containsKey(player)) {
             playerToMagicAttackTrigger.get(player).callback(player);
             playerToMagicAttackTrigger.remove(player);
+        }
+    }
+
+    public static void startListeningAddPiercingToArrowShootFromCrossbowTrigger(Player player, AddPiercingToArrowShootFromCrossbowTrigger addPiercingToArrowShootFromCrossbowTrigger) {
+        playerToAddPiercingToArrowShootFromCrossbowTrigger.put(player, addPiercingToArrowShootFromCrossbowTrigger);
+    }
+
+    public static void onPlayerShootCrossbow(Player player, Arrow arrow) {
+        if (playerToAddPiercingToArrowShootFromCrossbowTrigger.containsKey(player)) {
+            playerToAddPiercingToArrowShootFromCrossbowTrigger.get(player).callback(arrow);
+            //playerToAddPiercingToArrowShootFromCrossbowTrigger.remove(player); DO NOT REMOVE SINCE THIS MECHANIC HAS NO COOLDOWN AND DOES NOT ADD ITSELF BACK
         }
     }
 
