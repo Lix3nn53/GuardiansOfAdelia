@@ -35,7 +35,7 @@ public class TookMagicalDamageTrigger extends TriggerComponent {
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningMagicalDamage((Player) target, tookMagicalDamageTrigger);
+                        TriggerListener.startListeningTookMagicalDamage((Player) target, tookMagicalDamageTrigger);
                     }
                 }
             }
@@ -62,7 +62,7 @@ public class TookMagicalDamageTrigger extends TriggerComponent {
         BukkitTask bukkitTask = new BukkitRunnable() {
             @Override
             public void run() {
-                TriggerListener.startListeningMagicalDamage(target, trigger);
+                TriggerListener.startListeningTookMagicalDamage(target, trigger);
             }
         }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
 

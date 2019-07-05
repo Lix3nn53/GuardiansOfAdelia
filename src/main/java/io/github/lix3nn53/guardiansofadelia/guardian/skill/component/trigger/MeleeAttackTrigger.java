@@ -11,14 +11,14 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TookPhysicalDamageTrigger extends TriggerComponent {
+public class MeleeAttackTrigger extends TriggerComponent {
 
     private final long cooldown;
     LivingEntity caster;
     int skillLevel;
     String castKey;
 
-    public TookPhysicalDamageTrigger(long cooldown) {
+    public MeleeAttackTrigger(long cooldown) {
         this.cooldown = cooldown;
     }
 
@@ -28,14 +28,14 @@ public class TookPhysicalDamageTrigger extends TriggerComponent {
         this.skillLevel = skillLevel;
         this.castKey = castKey;
 
-        TookPhysicalDamageTrigger tookPhysicalDamageTrigger = this;
+        MeleeAttackTrigger meleeAttackTrigger = this;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningTookPhysicalDamage((Player) target, tookPhysicalDamageTrigger);
+                        TriggerListener.startListeningMeleeAttack((Player) target, meleeAttackTrigger);
                     }
                 }
             }
@@ -57,12 +57,12 @@ public class TookPhysicalDamageTrigger extends TriggerComponent {
         targets.add(target);
         executeChildren(caster, skillLevel, targets, castKey);
 
-        TookPhysicalDamageTrigger trigger = this;
+        MeleeAttackTrigger trigger = this;
 
         BukkitTask bukkitTask = new BukkitRunnable() {
             @Override
             public void run() {
-                TriggerListener.startListeningTookPhysicalDamage(target, trigger);
+                TriggerListener.startListeningMeleeAttack(target, trigger);
             }
         }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
 
