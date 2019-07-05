@@ -14,8 +14,6 @@ import java.util.List;
 
 public class ParticleMechanic extends MechanicComponent {
 
-    private static final Vector UP = new Vector(0, 1, 0);
-
     private final Particle particle;
     private final ArrangementParticle arrangement;
     private final double radiusParticle;

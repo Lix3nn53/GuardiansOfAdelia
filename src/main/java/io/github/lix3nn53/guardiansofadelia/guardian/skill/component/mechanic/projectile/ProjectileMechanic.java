@@ -24,8 +24,6 @@ import java.util.List;
 
 public class ProjectileMechanic extends MechanicComponent {
 
-    private final Vector UP = new Vector(0, 1, 0);
-
     private final Class<? extends Projectile> projectileType;
     private final SpreadType spreadType;
     private final double radius;

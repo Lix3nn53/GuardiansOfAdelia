@@ -14,7 +14,6 @@ public class LaunchMechanic extends MechanicComponent {
     private final double upwardSpeed;
     private final double rightSpeed;
     private final double upwardPerLevel;
-    private Vector up = new Vector(0, 1, 0);
 
     public LaunchMechanic(Relative relative, double forwardSpeed, double upwardSpeed, double rightSpeed, double upwardPerLevel) {
         this.relative = relative;
@@ -41,7 +40,7 @@ public class LaunchMechanic extends MechanicComponent {
                 dir = ent.getLocation().getDirection().setY(0).normalize();
             }
 
-            final Vector nor = dir.clone().crossProduct(up);
+            final Vector nor = dir.clone().crossProduct(UP);
             dir.multiply(forwardSpeed);
             dir.add(nor.multiply(rightSpeed)).setY(upwardSpeedToUse);
 

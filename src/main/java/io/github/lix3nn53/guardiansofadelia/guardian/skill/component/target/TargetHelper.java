@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
@@ -81,5 +82,44 @@ public class TargetHelper {
         }
 
         return targets;
+    }
+
+    public static Location getOpenLocation(Location loc1, Location loc2, boolean throughWall) {
+        if (loc1.getX() == loc2.getX() && loc1.getY() == loc2.getY() && loc1.getZ() == loc2.getZ()) {
+            return loc1;
+        }
+
+
+        Vector slope = loc2.clone().subtract(loc1).toVector();
+        int steps = (int) (slope.length() * 4.0D) + 1;
+        slope.multiply(1.0D / steps);
+
+
+        if (throughWall) {
+
+            Location temp = loc2.clone();
+            while (temp.getBlock().getType().isSolid() && steps > 0) {
+
+                temp.subtract(slope);
+                steps--;
+            }
+            temp.setX(temp.getBlockX() + 0.5D);
+            temp.setZ(temp.getBlockZ() + 0.5D);
+            temp.setY((temp.getBlockY() + 1));
+            return temp;
+        }
+
+
+        Location temp = loc1.clone();
+        while (!temp.getBlock().getType().isSolid() && steps > 0) {
+
+            temp.add(slope);
+            steps--;
+        }
+        temp.subtract(slope);
+        temp.setX(temp.getBlockX() + 0.5D);
+        temp.setZ(temp.getBlockZ() + 0.5D);
+        temp.setY((temp.getBlockY() + 1));
+        return temp;
     }
 }
