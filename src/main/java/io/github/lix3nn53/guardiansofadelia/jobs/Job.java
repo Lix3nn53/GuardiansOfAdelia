@@ -34,9 +34,10 @@ public class Job {
     }
 
     public void addExperience(Player player, int experienceToAdd) {
+        if (this.level >= 8) return; //max level is 8
+
         this.experience += experienceToAdd;
         player.sendMessage(ChatColor.YELLOW + "Gained " + experienceToAdd + " " + jobType.getName() + ChatColor.YELLOW + " experience");
-
         int requiredExperienceToLevelUp = getRequiredExperienceToLevelUp();
 
         if (this.experience >= requiredExperienceToLevelUp) {
@@ -47,7 +48,9 @@ public class Job {
     }
 
     private int getRequiredExperienceToLevelUp() {
-        if (level == 2) {
+        if (level == 1) {
+            return 180;
+        } else if (level == 2) {
             return 320;
         } else if (level == 3) {
             return 560;
@@ -62,6 +65,6 @@ public class Job {
         } else if (level == 8) {
             return 2400;
         }
-        return 120;
+        return 2400;
     }
 }

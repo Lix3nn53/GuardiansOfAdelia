@@ -172,6 +172,12 @@ public class SkillBar {
             return false;
         }
 
+        int slot = skillIndex;
+
+        if (skillIndex > 3) {
+            slot--;
+        }
+
         List<Skill> skillSet = SkillList.getSkillSet(rpgClass);
 
         Skill skill = skillSet.get(skillIndex);
@@ -192,6 +198,7 @@ public class SkillBar {
 
         skillsOnCooldown.put(skillIndex, true);
 
+        int finalSlot = slot;
         new BukkitRunnable() {
 
             int seconds = 0;
@@ -207,10 +214,10 @@ public class SkillBar {
                     cancel();
                     skillsOnCooldown.remove(skillIndex);
                 } else {
-                    ItemStack item = inventory.getItem(skillIndex);
+                    ItemStack item = inventory.getItem(finalSlot);
                     if (InventoryUtils.isAirOrNull(item)) {
                         remakeSkillBarIcon(skillIndex);
-                        item = inventory.getItem(skillIndex);
+                        item = inventory.getItem(finalSlot);
                     }
                     item.setAmount(cooldown - seconds);
                 }

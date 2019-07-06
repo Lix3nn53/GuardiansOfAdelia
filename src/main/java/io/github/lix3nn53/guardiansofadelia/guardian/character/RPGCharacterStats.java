@@ -84,6 +84,8 @@ public class RPGCharacterStats {
     }
 
     public void giveExp(int give) {
+        if (player.getLevel() >= 90) return; //last level is 90
+
         int currentLevel = player.getLevel();
 
         this.totalExp += give;
@@ -94,6 +96,7 @@ public class RPGCharacterStats {
             int levelFromTotalExperience = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
             player.setLevel(levelFromTotalExperience);
         }
+
     }
 
     public void setCurrentHealth(int currentHealth) {

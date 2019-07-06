@@ -1,24 +1,22 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.TempEntity;
+import io.github.lix3nn53.guardiansofadelia.utilities.packetwrapper.WrapperPlayServerEntityDestroy;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
-import me.libraryaddict.disguise.DisguiseAPI;
-import me.libraryaddict.disguise.disguisetypes.DisguiseType;
-import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Projectile;
+import org.bukkit.entity.*;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,8 +151,6 @@ public class ProjectileMechanic extends MechanicComponent {
         this.castKey = castKey;
         this.caster = caster;
 
-        GuardiansOfAdelia.getInstance().getLogger().info("1");
-
         // Fire from each target
         ArrayList<Entity> projectiles = new ArrayList<Entity>();
         for (LivingEntity target : targets) {
@@ -171,7 +167,6 @@ public class ProjectileMechanic extends MechanicComponent {
                 }
             } else {
                 Vector dir = target.getLocation().getDirection();
-                GuardiansOfAdelia.getInstance().getLogger().info("2");
                 if (spreadType.equals(SpreadType.HORIZONTAL_CONE)) {
                     dir.setY(0);
                     dir.normalize();
@@ -183,13 +178,22 @@ public class ProjectileMechanic extends MechanicComponent {
 
                 ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount);
                 for (Vector d : dirs) {
-                    GuardiansOfAdelia.getInstance().getLogger().info("3");
                     Projectile p = caster.launchProjectile(projectileType);
 
                     if (particle != null) {
-                        //TODO disguise console warn spam
-                        MiscDisguise disguise = new MiscDisguise(DisguiseType.UNKNOWN);
-                        DisguiseAPI.disguiseToAll(p, disguise);
+                        WrapperPlayServerEntityDestroy destroy = new WrapperPlayServerEntityDestroy();
+                        destroy.setEntityIds(new int[]{p.getEntityId()});
+                        try {
+                            ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
+
+                            List<Player> players = p.getWorld().getPlayers();
+                            for (Player player : players) {
+                                protocolManager.sendServerPacket(player, destroy.getHandle());
+                            }
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+
                         startParticleAnimation(p);
                     }
 
@@ -253,7 +257,6 @@ public class ProjectileMechanic extends MechanicComponent {
         executeChildren((LivingEntity) projectile.getShooter(), skillLevel, targets, castKey);
 
         if (projectile instanceof Arrow) {
-            GuardiansOfAdelia.getInstance().getLogger().info("pierce level: " + ((Arrow) projectile).getPierceLevel());
             if (((Arrow) projectile).getPierceLevel() > 0) return;
         }
 

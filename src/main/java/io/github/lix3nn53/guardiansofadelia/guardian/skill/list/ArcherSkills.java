@@ -1,7 +1,23 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityRemoveMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.entity.Arrow;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +78,20 @@ public class ArcherSkills {
 
         Skill skill = new Skill("Blind Shot", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+        SelfTarget selfTarget = new SelfTarget();
+
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
+                0, 1, 0, 200, true, Arrow.class);
+
+        DamageMechanic damageMechanic = new DamageMechanic(10, 5, DamageMechanic.DamageType.RANGED);
+
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.BLINDNESS, 60, 2);
+
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(projectileMechanic);
+        projectileMechanic.addChildren(damageMechanic);
+        projectileMechanic.addChildren(potionEffectMechanic);
+
         return skill;
     }
 
@@ -107,6 +137,21 @@ public class ArcherSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Zephyr", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+
+        SelfTarget selfTarget = new SelfTarget();
+
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
+
+        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, 60, 99));
+        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, 60, 999));
+
+        skill.addTrigger(selfTarget);
+
+        selfTarget.addChildren(areaTarget);
+        selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SPEED, 180, 3));
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1.4, 4, 0, 0, 0,
+                0, 0.5, 0, 0, 5, 8, new Particle.DustOptions(Color.AQUA, 8));
+        selfTarget.addChildren(particleAnimationMechanic);
 
         return skill;
     }
@@ -154,6 +199,28 @@ public class ArcherSkills {
 
         Skill skill = new Skill("Purple Wings", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+        SelfTarget selfTarget = new SelfTarget();
+
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.CASTER, -1.25, 1.2, 0, 0.15);
+
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.SPELL_WITCH, ArrangementParticle.SPHERE, 1.2,
+                4, 0, 0, 0, 0, 0, 0, 0, 4, 10, null);
+
+        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, 0);
+
+        LandTrigger landTrigger = new LandTrigger();
+
+        ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL);
+
+
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(launchMechanic);
+        selfTarget.addChildren(particleAnimationMechanic);
+        selfTarget.addChildren(immunityMechanic);
+
+        selfTarget.addChildren(landTrigger);
+        landTrigger.addChildren(immunityRemoveMechanic);
+
         return skill;
     }
 
@@ -199,6 +266,16 @@ public class ArcherSkills {
 
         Skill skill = new Skill("Hop Hop", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+        InitializeTrigger initializeTrigger = new InitializeTrigger();
+
+        RepeatMechanic repeatMechanic = new RepeatMechanic(240, 0);
+
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.JUMP, 240, 2);
+
+        skill.addTrigger(initializeTrigger);
+        initializeTrigger.addChildren(repeatMechanic);
+
+        repeatMechanic.addChildren(potionEffectMechanic);
         return skill;
     }
 
@@ -244,6 +321,19 @@ public class ArcherSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Make It Rain", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+
+        SelfTarget selfTarget = new SelfTarget();
+
+        SingleTarget singleTarget = new SingleTarget(false, true, false, 1, 12, 4);
+
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 1.9, 16, 0,
+                0, 0, 200, true, Arrow.class);
+
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(singleTarget);
+        singleTarget.addChildren(projectileMechanic);
+        projectileMechanic.addChildren(new DamageMechanic(10, 5, DamageMechanic.DamageType.RANGED));
+        projectileMechanic.addChildren(new LaunchMechanic(LaunchMechanic.Relative.TARGET, 0, 2, 0, 1));
 
         return skill;
     }
