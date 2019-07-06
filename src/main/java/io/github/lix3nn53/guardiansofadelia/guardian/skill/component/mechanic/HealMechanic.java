@@ -28,7 +28,7 @@ public class HealMechanic extends MechanicComponent {
             double nextHealth = currentHealth + healAmount;
 
             if (healPercent > 0) {
-                nextHealth = nextHealth + (nextHealth * healPercent);
+                nextHealth = nextHealth + (maxHealth * healPercent);
             }
 
             if (nextHealth > maxHealth) {

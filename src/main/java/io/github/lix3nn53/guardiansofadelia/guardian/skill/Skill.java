@@ -129,11 +129,6 @@ public class Skill {
         return icon;
     }
 
-    public boolean canPlayersCast() {
-        //TODO
-        return true;
-    }
-
     public boolean cast(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
         boolean didCast = false;
         for (SkillComponent trigger : triggers) {

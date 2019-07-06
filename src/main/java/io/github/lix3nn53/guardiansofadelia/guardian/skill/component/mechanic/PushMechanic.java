@@ -12,17 +12,30 @@ public class PushMechanic extends MechanicComponent {
 
     private final PushType type;
     private final double speed;
+    private final boolean centerSelf;
 
-    public PushMechanic(PushType type, double speed) {
+    /**
+     * @param type
+     * @param speed
+     * @param centerSelf center = caster, if false: center = first target
+     */
+    public PushMechanic(PushType type, double speed, boolean centerSelf) {
         this.type = type;
         this.speed = speed;
+        this.centerSelf = centerSelf;
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
         if (targets.isEmpty()) return false;
 
-        Location center = caster.getLocation();
+        Location center;
+        if (centerSelf) {
+            center = caster.getLocation();
+        } else {
+            center = targets.get(0).getLocation();
+            targets.remove(0);
+        }
 
         boolean worked = false;
         for (LivingEntity target : targets) {
@@ -36,7 +49,6 @@ public class PushMechanic extends MechanicComponent {
             } else { // SCALED
                 vel.multiply(speed / vel.lengthSquared());
             }
-            vel.setY(vel.getY() / 5 + 0.5);
             target.setVelocity(vel);
             worked = true;
         }

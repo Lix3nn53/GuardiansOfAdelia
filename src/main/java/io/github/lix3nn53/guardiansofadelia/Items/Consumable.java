@@ -1,9 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.Items;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.HealMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.ManaMechanic;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -31,7 +35,9 @@ public enum Consumable {
             }
         }
 
-        //TODO Cast skill when item consumed
+        List<LivingEntity> targets = new ArrayList<>();
+        targets.add(player);
+        getSkillComponent().execute(player, skillLevel, targets, "potion");
 
         if (PersistentDataContainerUtil.hasInteger(itemStack, "consumableUsesLeft")) {
             int usesLeft = PersistentDataContainerUtil.getInteger(itemStack, "consumableUsesLeft");
@@ -52,26 +58,27 @@ public enum Consumable {
         }
     }
 
-    public String getSkillCode() {
+    //TODO complete skill components
+    public SkillComponent getSkillComponent() {
         switch (this) {
             case BUFF_PHYSICAL_DAMAGE:
-                return "buffPhysicalDamage";
+                return null;
             case BUFF_PHYSICAL_DEFENSE:
-                return "buffPhysicalDefense";
+                return null;
             case BUFF_MAGICAL_DAMAGE:
-                return "buffMagicalDamage";
+                return null;
             case BUFF_MAGICAL_DEFENSE:
-                return "buffMagicalDefense";
+                return null;
             case POTION_INSTANT_HEALTH:
-                return "potionInstantHealth";
+                return new HealMechanic(200, 0.5);
             case POTION_INSTANT_MANA:
-                return "potionInstantMana";
+                return new ManaMechanic(200, 0.5);
             case POTION_INSTANT_HYBRID:
-                return "potionInstantHybrid";
+                return null;
             case POTION_REGENERATION_HEALTH:
-                return "potionRegenerationHealth";
+                return null;
         }
-        return "";
+        return null;
     }
 
     public Material getMaterial() {

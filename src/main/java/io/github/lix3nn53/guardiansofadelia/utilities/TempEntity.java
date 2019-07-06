@@ -54,7 +54,7 @@ public class TempEntity implements LivingEntity {
     }
 
     public Location getEyeLocation() {
-        return getLocation().add(0, 1, 0);
+        return getLocation().clone().add(0, 1, 0);
     }
 
     @Override
@@ -329,7 +329,7 @@ public class TempEntity implements LivingEntity {
 
     @Override
     public Location getLocation() {
-        return null;
+        return this.loc;
     }
 
     @Override

@@ -24,6 +24,8 @@ import java.util.List;
 
 public class ProjectileMechanic extends MechanicComponent {
 
+    private LivingEntity caster;
+
     private final Class<? extends Projectile> projectileType;
     private final SpreadType spreadType;
     private final double radius;
@@ -42,9 +44,13 @@ public class ProjectileMechanic extends MechanicComponent {
     private ArrangementParticle arrangement;
     private double radiusParticle;
     private int amountParticle;
-    Particle.DustOptions dustOptions;
+    private Particle.DustOptions dustOptions;
 
     //Piercing
+
+    //very custom things
+    private boolean addCasterAsFirstTargetIfHitSuccess;
+    private boolean addCasterAsSecondTargetIfHitFail;
 
     private String castKey;
 
@@ -145,6 +151,7 @@ public class ProjectileMechanic extends MechanicComponent {
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
         this.castKey = castKey;
+        this.caster = caster;
 
         GuardiansOfAdelia.getInstance().getLogger().info("1");
 
@@ -217,17 +224,25 @@ public class ProjectileMechanic extends MechanicComponent {
      * @param hit        the entity hit by the projectile, if any
      */
     public void callback(Projectile projectile, Entity hit) {
+        ArrayList<LivingEntity> targets = new ArrayList<>();
+
+        boolean hitSuccess = false;
         if (hit == null) {
             if (projectile.isValid()) projectile.remove();
             if (mustHitToWork) return;
 
             hit = new TempEntity(projectile.getLocation());
+        } else if (addCasterAsFirstTargetIfHitSuccess) {
+            hitSuccess = true;
+            targets.add(caster);
         }
 
-
-        ArrayList<LivingEntity> targets = new ArrayList<>();
         if (hit instanceof LivingEntity) {
             targets.add((LivingEntity) hit);
+        }
+
+        if (!hitSuccess && addCasterAsSecondTargetIfHitFail) {
+            targets.add(caster);
         }
 
         int skillLevel = 1;
@@ -280,5 +295,13 @@ public class ProjectileMechanic extends MechanicComponent {
                 }
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 1L, 3L);
+    }
+
+    public void setAddCasterAsFirstTargetIfHitSuccess(boolean addCasterAsFirstTargetIfHitSuccess) {
+        this.addCasterAsFirstTargetIfHitSuccess = addCasterAsFirstTargetIfHitSuccess;
+    }
+
+    public void setAddCasterAsSecondTargetIfHitFail(boolean addCasterAsSecondTargetIfHitFail) {
+        this.addCasterAsSecondTargetIfHitFail = addCasterAsSecondTargetIfHitFail;
     }
 }
