@@ -70,9 +70,13 @@ public enum Consumable {
             case BUFF_MAGICAL_DEFENSE:
                 return null;
             case POTION_INSTANT_HEALTH:
-                return new HealMechanic(200, 0.5);
+                List<Integer> amounts = new ArrayList<>();
+                amounts.add(200);
+                return new HealMechanic(amounts, new ArrayList<>());
             case POTION_INSTANT_MANA:
-                return new ManaMechanic(200, 0.5);
+                amounts = new ArrayList<>();
+                amounts.add(200);
+                return new ManaMechanic(amounts, new ArrayList<>());
             case POTION_INSTANT_HYBRID:
                 return null;
             case POTION_REGENERATION_HEALTH:

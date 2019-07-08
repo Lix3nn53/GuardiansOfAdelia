@@ -18,9 +18,9 @@ public class BuffMechanic extends MechanicComponent {
 
     private final BuffType buffType;
     private final List<Double> multiplier;
-    private final long ticks;
+    private final List<Integer> ticks;
 
-    public BuffMechanic(BuffType buffType, List<Double> multiplier, long ticks) {
+    public BuffMechanic(BuffType buffType, List<Double> multiplier, List<Integer> ticks) {
         this.buffType = buffType;
         this.multiplier = multiplier;
         this.ticks = ticks;
@@ -67,7 +67,7 @@ public class BuffMechanic extends MechanicComponent {
                     }
                 }
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), ticks);
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), ticks.get(skillLevel - 1));
 
         return true;
     }
@@ -76,7 +76,7 @@ public class BuffMechanic extends MechanicComponent {
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
         lore.add(buffType.name() + " multiplier: " + multiplier);
-        lore.add(buffType.name() + " duration: " + (ticks / 20) + " seconds");
+        lore.add(buffType.name() + " duration: " + (ticks.get(skillLevel - 1) / 20) + " seconds");
         return lore;
     }
 }

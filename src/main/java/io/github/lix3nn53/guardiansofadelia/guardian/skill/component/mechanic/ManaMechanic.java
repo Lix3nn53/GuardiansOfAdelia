@@ -14,10 +14,10 @@ import java.util.UUID;
 
 public class ManaMechanic extends MechanicComponent {
 
-    private final List<Double> manaAmount;
+    private final List<Integer> manaAmount;
     private final List<Double> manaPercent;
 
-    public ManaMechanic(List<Double> manaAmount, List<Double> manaPercent) {
+    public ManaMechanic(List<Integer> manaAmount, List<Double> manaPercent) {
         this.manaAmount = manaAmount;
         this.manaPercent = manaPercent;
     }

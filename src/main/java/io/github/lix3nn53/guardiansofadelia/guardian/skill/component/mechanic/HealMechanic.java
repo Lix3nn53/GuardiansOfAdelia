@@ -9,10 +9,10 @@ import java.util.List;
 
 public class HealMechanic extends MechanicComponent {
 
-    private final List<Double> healAmount;
+    private final List<Integer> healAmount;
     private final List<Double> healPercent;
 
-    public HealMechanic(List<Double> healAmount, List<Double> healPercent) {
+    public HealMechanic(List<Integer> healAmount, List<Double> healPercent) {
         this.healAmount = healAmount;
         this.healPercent = healPercent;
     }

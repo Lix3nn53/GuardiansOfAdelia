@@ -86,8 +86,13 @@ public class WarriorSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 4);
-        DamageMechanic damageMechanic = new DamageMechanic(10, 10, DamageMechanic.DamageType.MELEE);
+        List<Double> radiuses = new ArrayList<>();
+        radiuses.add(3D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
+
+        List<Double> damages = new ArrayList<>();
+        damages.add(10D);
+        DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
 
@@ -146,12 +151,22 @@ public class WarriorSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
+        List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(1);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
                 0, 1, 0, 200, true, SmallFireball.class, Particle.FLAME, ArrangementParticle.SPHERE, 0.5, 4, null);
 
-        DamageMechanic damageMechanic = new DamageMechanic(10, 10, DamageMechanic.DamageType.MELEE);
+        List<Double> damages = new ArrayList<>();
+        damages.add(10D);
+        DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
-        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, 0, 0.75, 0, 0.1);
+        List<Double> forwards = new ArrayList<>();
+        forwards.add(0D);
+        List<Double> upwards = new ArrayList<>();
+        upwards.add(0.75);
+        upwards.add(0.8);
+        upwards.add(0.85);
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forwards, upwards, 0);
 
         skill.addTrigger(selfTarget);
 
@@ -209,16 +224,35 @@ public class WarriorSkills {
         SelfTarget selfTarget = new SelfTarget();
 
         //Add HologramMechanic to SelfTarget's children
-        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000004, 30, ChatColor.AQUA + "< Victory-Flag %caster% >");
+        List<Integer> seconds = new ArrayList<>();
+        seconds.add(30);
+        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000004, seconds, ChatColor.AQUA + "< Victory-Flag %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
-        RepeatMechanic repeatMechanic = new RepeatMechanic(40L, 15);
+        List<Integer> repetitions = new ArrayList<>();
+        repetitions.add(15);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(40L, repetitions);
 
         //Add areaTarget to repeatMechanic's children
-        AreaTarget areaTarget = new AreaTarget(true, false, true, 999, 9);
-        BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DAMAGE, 0.1, 40L, 0.03);
-        BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, 0.1, 40L, 0.03);
-        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, 41, 0);
+        List<Double> radiuses = new ArrayList<>();
+        radiuses.add(9D);
+        AreaTarget areaTarget = new AreaTarget(true, false, true, 999, radiuses);
+
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        List<Integer> amplifiers = new ArrayList<>();
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        List<Double> multipliers = new ArrayList<>();
+        multipliers.add(0.1);
+        BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks);
+        BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, multipliers, ticks);
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, ticks, amplifiers);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6, 0, 0, 0, 0, 2, 0, 0, null);
 
@@ -287,7 +321,17 @@ public class WarriorSkills {
         HealthCondition healthCondition = new HealthCondition(0.1, 1);
 
         MessageMechanic messageMechanic = new MessageMechanic("tookPhysicalDamageTrigger activates MessageMechanic");
-        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.SPEED, 60, 2);
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        List<Integer> amplifiers = new ArrayList<>();
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.SPEED, ticks, amplifiers);
 
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(tookPhysicalDamageTrigger);
@@ -343,18 +387,30 @@ public class WarriorSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
-        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, 1.5, 1, 0, 0.25);
+        List<Double> forwards = new ArrayList<>();
+        forwards.add(1.5);
+        List<Double> upwards = new ArrayList<>();
+        upwards.add(1D);
+        upwards.add(1.8);
+        upwards.add(1.85);
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forwards, upwards, 0);
 
         LandTrigger landTrigger = new LandTrigger();
 
-        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, 0);//0 for infinite
+        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>());//0 for infinite
         ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL);
 
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, -0.1, 1, 0, 0, 0, 0, 1, 4L, 4, new Particle.DustOptions(Color.FUCHSIA, 2));
+        List<Integer> repeatAmounts = new ArrayList<>();
+        repeatAmounts.add(15);
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, -0.1, 1, 0, 0, 0, 0, 1, 4L, repeatAmounts, new Particle.DustOptions(Color.FUCHSIA, 2));
 
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 5);
+        List<Double> radiuses = new ArrayList<>();
+        radiuses.add(9D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
-        DamageMechanic damageMechanic = new DamageMechanic(10, 10, DamageMechanic.DamageType.MELEE);
+        List<Double> damages = new ArrayList<>();
+        damages.add(9D);
+        DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, -0.6, 0.4, 0.1, 0, 0, 0, 1, new Particle.DustOptions(Color.YELLOW, 2));
 

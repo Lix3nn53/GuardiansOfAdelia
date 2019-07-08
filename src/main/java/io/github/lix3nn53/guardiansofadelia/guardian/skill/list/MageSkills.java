@@ -75,12 +75,18 @@ public class MageSkills {
         Skill skill = new Skill("Fireball", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
 
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
+        List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(1);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
                 0, 1, 0, 200, true, Fireball.class);
 
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
+        List<Double> radiuses = new ArrayList<>();
+        radiuses.add(3D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
-        areaTarget.addChildren(new DamageMechanic(10, 10, DamageMechanic.DamageType.MAGIC));
+        List<Double> damages = new ArrayList<>();
+        damages.add(10D);
+        areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
 
         projectileMechanic.addChildren(areaTarget);
 
@@ -135,14 +141,22 @@ public class MageSkills {
         Skill skill = new Skill("Lightning Bolt", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
 
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
+        List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(1);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
                 0, 1, 0, 200, true, SmallFireball.class, Particle.VILLAGER_HAPPY, ArrangementParticle.SPHERE, 0.5, 4, null);
 
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
+        List<Double> radiuses = new ArrayList<>();
+        radiuses.add(3D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
-        areaTarget.addChildren(new DamageMechanic(10, 10, DamageMechanic.DamageType.MAGIC));
+        List<Double> damages = new ArrayList<>();
+        damages.add(10D);
+        areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
         areaTarget.addChildren(new ParticleMechanic(Particle.VILLAGER_HAPPY, ArrangementParticle.CIRCLE, 2, 4, 0, 0, 0, 0, 0.5, 0, 0, null));
-        areaTarget.addChildren(new SilenceMechanic(3));
+        List<Integer> durations = new ArrayList<>();
+        durations.add(60);
+        areaTarget.addChildren(new SilenceMechanic(durations));
 
         projectileMechanic.addChildren(areaTarget);
 
