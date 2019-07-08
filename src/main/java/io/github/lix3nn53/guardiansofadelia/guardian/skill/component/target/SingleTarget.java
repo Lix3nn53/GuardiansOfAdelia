@@ -12,10 +12,10 @@ import java.util.List;
  */
 public class SingleTarget extends TargetComponent {
 
-    private final double range;
+    private final List<Double> range;
     private final double tolerance;
 
-    public SingleTarget(boolean allies, boolean enemy, boolean self, int max, double range, double tolerance) {
+    public SingleTarget(boolean allies, boolean enemy, boolean self, int max, List<Double> range, double tolerance) {
         super(allies, enemy, self, max);
         this.range = range;
         this.tolerance = tolerance;
@@ -27,7 +27,7 @@ public class SingleTarget extends TargetComponent {
         List<LivingEntity> single = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            List<LivingEntity> singleTargets = TargetHelper.getLivingTargets(target, range, tolerance);
+            List<LivingEntity> singleTargets = TargetHelper.getLivingTargets(target, range.get(skillLevel - 1), tolerance);
             singleTargets = determineTargets(caster, singleTargets);
             single.addAll(singleTargets);
         }

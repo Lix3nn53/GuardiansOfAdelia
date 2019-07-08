@@ -14,10 +14,10 @@ import java.util.UUID;
 
 public class ManaMechanic extends MechanicComponent {
 
-    private final double manaAmount;
-    private final double manaPercent;
+    private final List<Double> manaAmount;
+    private final List<Double> manaPercent;
 
-    public ManaMechanic(double manaAmount, double manaPercent) {
+    public ManaMechanic(List<Double> manaAmount, List<Double> manaPercent) {
         this.manaAmount = manaAmount;
         this.manaPercent = manaPercent;
     }
@@ -39,10 +39,12 @@ public class ManaMechanic extends MechanicComponent {
 
                         double maxMana = rpgCharacterStats.getTotalMaxMana();
 
-                        double nextMana = currentMana + manaAmount;
+                        double nextMana = currentMana + manaAmount.get(skillLevel - 1);
 
-                        if (manaPercent > 0) {
-                            nextMana = nextMana + (maxMana * manaPercent);
+                        if (!manaPercent.isEmpty()) {
+                            if (manaPercent.get(skillLevel - 1) > 0) {
+                                nextMana = nextMana + (maxMana * manaPercent.get(skillLevel - 1));
+                            }
                         }
 
                         if (nextMana > maxMana) {

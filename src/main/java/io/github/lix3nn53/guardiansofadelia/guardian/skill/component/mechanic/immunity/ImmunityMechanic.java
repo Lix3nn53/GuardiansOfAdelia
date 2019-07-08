@@ -12,13 +12,13 @@ import java.util.List;
 public class ImmunityMechanic extends MechanicComponent {
 
     private final EntityDamageEvent.DamageCause damageCause;
-    private final long ticks;
+    private final List<Long> ticks;
 
     /**
      * @param damageCause
-     * @param ticks       0 for infinite
+     * @param ticks       empty list for infinite
      */
-    public ImmunityMechanic(EntityDamageEvent.DamageCause damageCause, long ticks) {
+    public ImmunityMechanic(EntityDamageEvent.DamageCause damageCause, List<Long> ticks) {
         this.damageCause = damageCause;
         this.ticks = ticks;
     }
@@ -31,7 +31,7 @@ public class ImmunityMechanic extends MechanicComponent {
             ImmunityListener.addImmunity(ent, damageCause);
         }
 
-        if (ticks > 0) {
+        if (!ticks.isEmpty()) {
             new BukkitRunnable() { //remove buffs from buffed players
 
                 @Override
@@ -40,7 +40,7 @@ public class ImmunityMechanic extends MechanicComponent {
                         ImmunityListener.removeImmunity(ent, damageCause);
                     }
                 }
-            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), ticks);
+            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), ticks.get(skillLevel - 1));
         }
 
         return true;

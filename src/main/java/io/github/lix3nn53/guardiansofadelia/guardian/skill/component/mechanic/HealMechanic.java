@@ -9,10 +9,10 @@ import java.util.List;
 
 public class HealMechanic extends MechanicComponent {
 
-    private final double healAmount;
-    private final double healPercent;
+    private final List<Double> healAmount;
+    private final List<Double> healPercent;
 
-    public HealMechanic(double healAmount, double healPercent) {
+    public HealMechanic(List<Double> healAmount, List<Double> healPercent) {
         this.healAmount = healAmount;
         this.healPercent = healPercent;
     }
@@ -25,10 +25,12 @@ public class HealMechanic extends MechanicComponent {
             double currentHealth = ent.getHealth();
             double maxHealth = ent.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
 
-            double nextHealth = currentHealth + healAmount;
+            double nextHealth = currentHealth + healAmount.get(skillLevel - 1);
 
-            if (healPercent > 0) {
-                nextHealth = nextHealth + (maxHealth * healPercent);
+            if (!healPercent.isEmpty()) {
+                if (healPercent.get(skillLevel - 1) > 0) {
+                    nextHealth = nextHealth + (maxHealth * healPercent.get(skillLevel - 1));
+                }
             }
 
             if (nextHealth > maxHealth) {

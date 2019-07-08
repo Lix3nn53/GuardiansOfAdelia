@@ -10,24 +10,20 @@ import java.util.List;
 public class LaunchMechanic extends MechanicComponent {
 
     private final Relative relative;
-    private final double forwardSpeed;
-    private final double upwardSpeed;
+    private final List<Double> forwardSpeed;
+    private final List<Double> upwardSpeed;
     private final double rightSpeed;
-    private final double upwardPerLevel;
 
-    public LaunchMechanic(Relative relative, double forwardSpeed, double upwardSpeed, double rightSpeed, double upwardPerLevel) {
+    public LaunchMechanic(Relative relative, List<Double> forwardSpeed, List<Double> upwardSpeed, double rightSpeed) {
         this.relative = relative;
         this.forwardSpeed = forwardSpeed;
         this.upwardSpeed = upwardSpeed;
         this.rightSpeed = rightSpeed;
-        this.upwardPerLevel = upwardPerLevel;
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
         if (targets.isEmpty()) return false;
-
-        double upwardSpeedToUse = upwardSpeed + (upwardPerLevel * (skillLevel - 1));
 
         for (LivingEntity ent : targets) {
             final Vector dir;
@@ -41,8 +37,8 @@ public class LaunchMechanic extends MechanicComponent {
             }
 
             final Vector nor = dir.clone().crossProduct(UP);
-            dir.multiply(forwardSpeed);
-            dir.add(nor.multiply(rightSpeed)).setY(upwardSpeedToUse);
+            dir.multiply(forwardSpeed.get(skillLevel - 1));
+            dir.add(nor.multiply(rightSpeed)).setY(upwardSpeed.get(skillLevel - 1));
 
             ent.setVelocity(dir);
         }

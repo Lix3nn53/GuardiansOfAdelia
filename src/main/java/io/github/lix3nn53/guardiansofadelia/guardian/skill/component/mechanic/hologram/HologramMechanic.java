@@ -18,16 +18,16 @@ public class HologramMechanic extends MechanicComponent {
 
     private final Material HELMET;
     private final int CUSTOMMODELDATA;
-    private final int DURATION;
+    private final List<Integer> DURATION;
     private String DISPLAYTEXT = "displayText";
 
-    public HologramMechanic(Material helmet, int custommodeldata, int seconds) {
+    public HologramMechanic(Material helmet, int custommodeldata, List<Integer> seconds) {
         HELMET = helmet;
         CUSTOMMODELDATA = custommodeldata;
         DURATION = seconds;
     }
 
-    public HologramMechanic(Material helmet, int custommodeldata, int seconds, String displayText) {
+    public HologramMechanic(Material helmet, int custommodeldata, List<Integer> seconds, String displayText) {
         HELMET = helmet;
         CUSTOMMODELDATA = custommodeldata;
         DURATION = seconds;
@@ -38,11 +38,11 @@ public class HologramMechanic extends MechanicComponent {
      * passes created hologram to children
      *
      * @param caster
-     * @param level
+     * @param skillLevel
      * @param list
      * @return
      */
-    public boolean execute(LivingEntity caster, int level, List<LivingEntity> list, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> list, String castKey) {
         Location baseLocation = caster.getLocation();
 
         ArmorStand model = (ArmorStand) baseLocation.getWorld().spawnEntity(baseLocation, EntityType.ARMOR_STAND);
@@ -73,13 +73,13 @@ public class HologramMechanic extends MechanicComponent {
                     model.remove();
                 }
             }
-        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * DURATION);
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * DURATION.get(skillLevel - 1));
 
         //pass ArmorStand to children
         List<LivingEntity> armorStandList = new ArrayList<>();
         armorStandList.add(model);
 
-        return executeChildren(caster, level, armorStandList, castKey);
+        return executeChildren(caster, skillLevel, armorStandList, castKey);
     }
 
     @Override

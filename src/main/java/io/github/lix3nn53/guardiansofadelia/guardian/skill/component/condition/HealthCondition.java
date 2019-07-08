@@ -9,8 +9,8 @@ import java.util.List;
 
 public class HealthCondition extends ConditionComponent {
 
-    double minPercent;
-    double maxPercent;
+    private final double minPercent;
+    private final double maxPercent;
 
     public HealthCondition(double minPercent, double maxPercent) {
         this.minPercent = minPercent;

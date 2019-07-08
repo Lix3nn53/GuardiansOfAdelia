@@ -13,11 +13,11 @@ import java.util.List;
 public class TeleportMechanic extends MechanicComponent {
 
     private final boolean throughWalls;
-    private final double forward;
-    private final double upward;
-    private final double right;
+    private final List<Double> forward;
+    private final List<Double> upward;
+    private final List<Double> right;
 
-    public TeleportMechanic(boolean throughWalls, double forward, double upward, double right) {
+    public TeleportMechanic(boolean throughWalls, List<Double> forward, List<Double> upward, List<Double> right) {
         this.throughWalls = throughWalls;
         this.forward = forward;
         this.upward = upward;
@@ -30,8 +30,8 @@ public class TeleportMechanic extends MechanicComponent {
 
         for (LivingEntity target : targets) {
             Vector dir = target.getLocation().getDirection();
-            Vector side = dir.clone().crossProduct(UP).multiply(right);
-            Location loc = target.getLocation().add(dir.multiply(forward)).add(side).add(0, upward, 0).add(0, 1, 0);
+            Vector side = dir.clone().crossProduct(UP).multiply(right.get(skillLevel - 1));
+            Location loc = target.getLocation().add(dir.multiply(forward.get(skillLevel - 1))).add(side).add(0, upward.get(skillLevel - 1), 0).add(0, 1, 0);
             loc = TargetHelper.getOpenLocation(target.getLocation().add(0, 1, 0), loc, throughWalls);
             if (!loc.getBlock().getType().isSolid() && loc.getBlock().getRelative(BlockFace.DOWN).getType().isSolid()) {
                 loc.add(0, 1, 0);

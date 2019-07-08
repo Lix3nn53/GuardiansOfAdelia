@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class AreaTarget extends TargetComponent {
 
-    private final double radius;
+    private final List<Double> radius;
 
-    public AreaTarget(boolean allies, boolean enemy, boolean self, int max, double radius) {
+    public AreaTarget(boolean allies, boolean enemy, boolean self, int max, List<Double> radius) {
         super(allies, enemy, self, max);
         this.radius = radius;
     }
@@ -26,7 +26,7 @@ public class AreaTarget extends TargetComponent {
         List<LivingEntity> nearby = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            List<LivingEntity> nearbyTarget = Nearby.getLivingNearby(target, radius);
+            List<LivingEntity> nearbyTarget = Nearby.getLivingNearby(target, radius.get(skillLevel - 1));
             nearbyTarget = determineTargets(caster, nearbyTarget);
             nearby.addAll(nearbyTarget);
         }

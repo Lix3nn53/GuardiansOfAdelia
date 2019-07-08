@@ -11,7 +11,7 @@ import java.util.List;
 public class PushMechanic extends MechanicComponent {
 
     private final PushType type;
-    private final double speed;
+    private final List<Double> speed;
     private final boolean centerSelf;
 
     /**
@@ -19,7 +19,7 @@ public class PushMechanic extends MechanicComponent {
      * @param speed
      * @param centerSelf center = caster, if false: center = first target
      */
-    public PushMechanic(PushType type, double speed, boolean centerSelf) {
+    public PushMechanic(PushType type, List<Double> speed, boolean centerSelf) {
         this.type = type;
         this.speed = speed;
         this.centerSelf = centerSelf;
@@ -43,11 +43,11 @@ public class PushMechanic extends MechanicComponent {
             if (vel.lengthSquared() == 0) {
                 continue;
             } else if (type.equals(PushType.INVERSE)) {
-                vel.multiply(speed);
+                vel.multiply(speed.get(skillLevel - 1));
             } else if (type.equals(PushType.FIXED)) {
-                vel.multiply(speed / vel.length());
+                vel.multiply(speed.get(skillLevel - 1) / vel.length());
             } else { // SCALED
-                vel.multiply(speed / vel.lengthSquared());
+                vel.multiply(speed.get(skillLevel - 1) / vel.lengthSquared());
             }
             target.setVelocity(vel);
             worked = true;

@@ -80,12 +80,37 @@ public class ArcherSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
+        List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
                 0, 1, 0, 200, true, Arrow.class);
 
-        DamageMechanic damageMechanic = new DamageMechanic(10, 5, DamageMechanic.DamageType.RANGED);
+        List<Double> damageAmounts = new ArrayList<>();
+        damageAmounts.add(1D);
+        damageAmounts.add(1D);
+        damageAmounts.add(1D);
+        damageAmounts.add(1D);
+        damageAmounts.add(1D);
+        damageAmounts.add(1D);
+        DamageMechanic damageMechanic = new DamageMechanic(damageAmounts, DamageMechanic.DamageType.RANGED);
 
-        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.BLINDNESS, 60, 2);
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        List<Integer> amplifiers = new ArrayList<>();
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.BLINDNESS, ticks, amplifiers);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(projectileMechanic);
@@ -140,17 +165,44 @@ public class ArcherSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
+        List<Double> radiuses = new ArrayList<>();
+        radiuses.add(3D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
-        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, 60, 99));
-        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, 60, 999));
+        List<Integer> ccTicks = new ArrayList<>();
+        ccTicks.add(60);
+        ccTicks.add(60);
+        ccTicks.add(60);
+        ccTicks.add(60);
+        List<Integer> ccAmplifiers = new ArrayList<>();
+        ccTicks.add(2);
+        ccTicks.add(2);
+        ccTicks.add(2);
+        ccTicks.add(2);
+        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
+        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
 
         skill.addTrigger(selfTarget);
 
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        List<Integer> amplifiers = new ArrayList<>();
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
         selfTarget.addChildren(areaTarget);
-        selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SPEED, 180, 3));
+        selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SPEED, ticks, amplifiers));
+        List<Integer> repeatAmount = new ArrayList<>();
+        repeatAmount.add(8);
+        repeatAmount.add(2);
+        repeatAmount.add(2);
+        repeatAmount.add(2);
         ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1.4, 4, 0, 0, 0,
-                0, 0.5, 0, 0, 5, 8, new Particle.DustOptions(Color.AQUA, 8));
+                0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.AQUA, 8));
         selfTarget.addChildren(particleAnimationMechanic);
 
         return skill;
@@ -201,12 +253,21 @@ public class ArcherSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
-        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.CASTER, -1.25, 1.2, 0, 0.15);
+        List<Double> forwards = new ArrayList<>();
+        forwards.add(-1.25);
+        List<Double> upwards = new ArrayList<>();
+        upwards.add(1.2);
+        upwards.add(1.35);
+        upwards.add(1.5);
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forwards, upwards, 0);
 
+
+        List<Integer> repeatAmounts = new ArrayList<>();
+        repeatAmounts.add(10);
         ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.SPELL_WITCH, ArrangementParticle.SPHERE, 1.2,
-                4, 0, 0, 0, 0, 0, 0, 0, 4, 10, null);
+                4, 0, 0, 0, 0, 0, 0, 0, 4, repeatAmounts, null);
 
-        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, 0);
+        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>()); //send empty list for infinite
 
         LandTrigger landTrigger = new LandTrigger();
 
@@ -268,9 +329,19 @@ public class ArcherSkills {
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        RepeatMechanic repeatMechanic = new RepeatMechanic(240, 0);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(240, new ArrayList<>()); //empty list for infinite
 
-        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.JUMP, 240, 2);
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(240);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        List<Integer> amplifiers = new ArrayList<>();
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, amplifiers);
 
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(repeatMechanic);
@@ -324,16 +395,28 @@ public class ArcherSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
-        SingleTarget singleTarget = new SingleTarget(false, true, false, 1, 12, 4);
+        List<Double> ranges = new ArrayList<>();
+        ranges.add(12D);
+        SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
 
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 1.9, 16, 0,
+        List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(16);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 1.9, projectileAmounts, 0,
                 0, 0, 200, true, Arrow.class);
+
+        List<Integer> repeatAmounts = new ArrayList<>();
+        repeatAmounts.add(2);
+        repeatAmounts.add(2);
+        repeatAmounts.add(2);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(20, repeatAmounts);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(singleTarget);
-        singleTarget.addChildren(projectileMechanic);
-        projectileMechanic.addChildren(new DamageMechanic(10, 5, DamageMechanic.DamageType.RANGED));
-        projectileMechanic.addChildren(new LaunchMechanic(LaunchMechanic.Relative.TARGET, 0, 2, 0, 1));
+        singleTarget.addChildren(repeatMechanic);
+        repeatMechanic.addChildren(projectileMechanic);
+        List<Double> damages = new ArrayList<>();
+        damages.add(16D);
+        projectileMechanic.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
 
         return skill;
     }

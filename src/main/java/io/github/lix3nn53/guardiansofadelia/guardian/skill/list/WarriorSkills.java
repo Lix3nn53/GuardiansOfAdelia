@@ -41,6 +41,7 @@ public class WarriorSkills {
         return skills;
     }
 
+    //TODO fix
     private static Skill getOne() {
         List<String> description = new ArrayList<>();
         description.add("Deal damage to nearby enemies");

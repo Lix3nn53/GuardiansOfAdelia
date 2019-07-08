@@ -13,13 +13,13 @@ import java.util.List;
 public class RepeatMechanic extends MechanicComponent {
 
     private final long period;
-    private final int repetitions;
+    private final List<Integer> repetitions;
 
     /**
      * @param period
      * @param repetitions 0 for infinite
      */
-    public RepeatMechanic(long period, int repetitions) {
+    public RepeatMechanic(long period, List<Integer> repetitions) {
         this.period = period;
         this.repetitions = repetitions;
     }
@@ -36,9 +36,9 @@ public class RepeatMechanic extends MechanicComponent {
             public void run() {
                 executeChildren(caster, skillLevel, targets, castKey);
 
-                if (repetitions != 0) {
+                if (!repetitions.isEmpty()) {
                     counter++;
-                    if (counter >= repetitions) {
+                    if (counter >= repetitions.get(skillLevel - 1)) {
                         cancel();
                     }
                 }
@@ -53,7 +53,7 @@ public class RepeatMechanic extends MechanicComponent {
             public void run() {
                 SkillDataManager.removeRepeatTask(castKey, bukkitTask);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), period * repetitions);
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), period * repetitions.get(skillLevel - 1));
 
         return true;
     }

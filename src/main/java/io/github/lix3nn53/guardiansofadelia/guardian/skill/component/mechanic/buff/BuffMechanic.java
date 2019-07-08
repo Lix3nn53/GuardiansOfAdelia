@@ -17,15 +17,13 @@ import java.util.UUID;
 public class BuffMechanic extends MechanicComponent {
 
     private final BuffType buffType;
-    private final double multiplier;
-    private final double multiplierBonusPerLevel;
+    private final List<Double> multiplier;
     private final long ticks;
 
-    public BuffMechanic(BuffType buffType, double multiplier, long ticks, double multiplierBonusPerLevel) {
+    public BuffMechanic(BuffType buffType, List<Double> multiplier, long ticks) {
         this.buffType = buffType;
         this.multiplier = multiplier;
         this.ticks = ticks;
-        this.multiplierBonusPerLevel = multiplierBonusPerLevel;
     }
 
     @Override
@@ -34,7 +32,7 @@ public class BuffMechanic extends MechanicComponent {
 
         List<Player> buffedPlayers = new ArrayList<>();
 
-        double multiplierToUse = multiplier + (multiplierBonusPerLevel * (skillLevel - 1));
+        double multiplierToUse = multiplier.get(skillLevel - 1);
 
         for (LivingEntity ent : targets) {
             if (ent instanceof Player) {

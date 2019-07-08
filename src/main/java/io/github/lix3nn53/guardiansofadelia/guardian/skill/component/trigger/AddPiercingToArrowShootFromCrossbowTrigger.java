@@ -12,15 +12,14 @@ import java.util.List;
 
 public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent {
 
-    private final int piercingLevel;
-    private final int piercingLevelPerSkillLevel;
+    private final List<Integer> piercingLevel;
+
     LivingEntity caster;
     int skillLevel;
     String castKey;
 
-    public AddPiercingToArrowShootFromCrossbowTrigger(int piercingLevel, int piercingLevelPerSkillLevel) {
+    public AddPiercingToArrowShootFromCrossbowTrigger(List<Integer> piercingLevel) {
         this.piercingLevel = piercingLevel;
-        this.piercingLevelPerSkillLevel = piercingLevelPerSkillLevel;
     }
 
     @Override
@@ -54,6 +53,6 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
      * The callback when player lands that applies child components
      */
     public void callback(Arrow arrow) {
-        arrow.setPierceLevel(piercingLevel + ((skillLevel - 1) + piercingLevelPerSkillLevel));
+        arrow.setPierceLevel(piercingLevel.get(skillLevel - 1));
     }
 }

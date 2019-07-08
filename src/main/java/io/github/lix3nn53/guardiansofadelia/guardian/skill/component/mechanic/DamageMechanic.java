@@ -9,13 +9,11 @@ import java.util.List;
 
 public class DamageMechanic extends MechanicComponent {
 
-    private double baseDamage;
-    private double levelMultiplier;
+    private List<Double> damage;
     private DamageType damageType;
 
-    public DamageMechanic(double baseDamage, double levelMultiplier, DamageType damageType) {
-        this.baseDamage = baseDamage;
-        this.levelMultiplier = levelMultiplier;
+    public DamageMechanic(List<Double> damage, DamageType damageType) {
+        this.damage = damage;
         this.damageType = damageType;
     }
 
@@ -23,7 +21,7 @@ public class DamageMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
         if (targets.isEmpty()) return false;
 
-        double calcDamage = baseDamage + (levelMultiplier * skillLevel);
+        double calcDamage = damage.get(skillLevel - 1);
 
         for (LivingEntity ent : targets) {
             SkillUtils.setDamageType(damageType);
@@ -37,7 +35,7 @@ public class DamageMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add(damageType.name() + ": " + (int) (baseDamage + (levelMultiplier * skillLevel) + 0.5));
+        lore.add(damageType.name() + ": " + (int) (damage.get(skillLevel - 1) + 0.5));
         return lore;
     }
 

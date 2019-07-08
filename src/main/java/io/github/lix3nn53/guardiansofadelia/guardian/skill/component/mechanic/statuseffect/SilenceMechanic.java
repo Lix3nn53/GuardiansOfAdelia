@@ -10,9 +10,9 @@ import java.util.List;
 
 public class SilenceMechanic extends MechanicComponent {
 
-    private final long duration;
+    private final List<Integer> duration;
 
-    public SilenceMechanic(long duration) {
+    public SilenceMechanic(List<Integer> duration) {
         this.duration = duration;
     }
 
@@ -31,7 +31,7 @@ public class SilenceMechanic extends MechanicComponent {
                     StatusEffectManager.removeSilenced(target);
                 }
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), duration);
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), duration.get(skillLevel - 1));
 
         return true;
     }
@@ -39,7 +39,7 @@ public class SilenceMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add("Silence duration: " + (int) ((duration / 20) + 0.5) + " seconds");
+        lore.add("Silence duration: " + (int) ((duration.get(skillLevel - 1) / 20) + 0.5) + " seconds");
         return lore;
     }
 }

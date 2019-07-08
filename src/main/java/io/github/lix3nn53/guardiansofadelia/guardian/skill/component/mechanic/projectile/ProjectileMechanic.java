@@ -29,7 +29,7 @@ public class ProjectileMechanic extends MechanicComponent {
     private final double radius;
     private final double height;
     private final double speed;
-    private final int amount;
+    private final List<Integer> amount;
     private final double angle;
     private final double right;
     private final double upward;
@@ -53,7 +53,7 @@ public class ProjectileMechanic extends MechanicComponent {
     private String castKey;
 
     public ProjectileMechanic(SpreadType spreadType, double speed,
-                              int amount, double angle, double right, double upward, double forward,
+                              List<Integer> amount, double angle, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType) {
         this.spreadType = spreadType;
         this.speed = speed;
@@ -71,7 +71,7 @@ public class ProjectileMechanic extends MechanicComponent {
     }
 
     public ProjectileMechanic(SpreadType spreadType, double speed,
-                              int amount, double angle, double right, double upward, double forward,
+                              List<Integer> amount, double angle, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType,
                               Particle particle, ArrangementParticle arrangement, double radiusParticle,
                               int amountParticle, Particle.DustOptions dustOptions) {
@@ -96,7 +96,7 @@ public class ProjectileMechanic extends MechanicComponent {
      * For rain type projectile mechanics
      */
     public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
-                              int amount, double right, double upward, double forward,
+                              List<Integer> amount, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType,
                               Particle particle, ArrangementParticle arrangement, double radiusParticle,
                               int amountParticle, Particle.DustOptions dustOptions) {
@@ -124,7 +124,7 @@ public class ProjectileMechanic extends MechanicComponent {
      * For rain type projectile mechanics
      */
     public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
-                              int amount, double right, double upward, double forward,
+                              List<Integer> amount, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType) {
         this.spreadType = spreadType;
 
@@ -157,7 +157,7 @@ public class ProjectileMechanic extends MechanicComponent {
             // Apply the spread type
             if (spreadType.equals(SpreadType.RAIN)) {
                 //TODO test projectile rain
-                ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amount);
+                ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amount.get(skillLevel - 1));
 
                 for (Location loc : locs) {
                     Projectile p = caster.launchProjectile(projectileType);
@@ -176,7 +176,7 @@ public class ProjectileMechanic extends MechanicComponent {
                 Vector normal = looking.clone().crossProduct(UP);
                 looking.multiply(forward).add(normal.multiply(right));
 
-                ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount);
+                ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount.get(skillLevel - 1));
                 for (Vector d : dirs) {
                     Projectile p = caster.launchProjectile(projectileType);
 

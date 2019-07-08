@@ -9,12 +9,6 @@ import java.util.List;
 
 public class TauntMechanic extends MechanicComponent {
 
-    private final String message;
-
-    public TauntMechanic(String message) {
-        this.message = message;
-    }
-
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
         if (targets.isEmpty()) return false;

@@ -10,15 +10,22 @@ import java.util.List;
 
 public class PotionEffectMechanic extends MechanicComponent {
 
-    private final PotionEffect potionEffect;
+    private final PotionEffectType type;
+    private final List<Integer> ticks;
+    private final List<Integer> amplifier;
 
-    public PotionEffectMechanic(PotionEffectType type, int ticks, int amplifier) {
-        potionEffect = new PotionEffect(type, ticks, amplifier, false, false, true);
+    public PotionEffectMechanic(PotionEffectType type, List<Integer> ticks, List<Integer> amplifier) {
+        this.type = type;
+        this.ticks = ticks;
+        this.amplifier = amplifier;
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
         if (targets.isEmpty()) return false;
+
+        PotionEffect potionEffect = new PotionEffect(type, ticks.get(skillLevel - 1), amplifier.get(skillLevel - 1),
+                false, false, true);
 
         for (LivingEntity target : targets) {
             target.addPotionEffect(potionEffect, true);
@@ -30,8 +37,8 @@ public class PotionEffectMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add(potionEffect.getType() + " duration: " + (potionEffect.getDuration() / 20));
-        lore.add(potionEffect.getType() + " tier: " + potionEffect.getAmplifier());
+        lore.add(type.getName() + " duration: " + (ticks.get(skillLevel - 1) / 20));
+        lore.add(type.getName() + " tier: " + amplifier.get(skillLevel - 1));
         return lore;
     }
 }

@@ -33,13 +33,13 @@ public class ParticleAnimationMechanic extends MechanicComponent {
 
     //animation
     private final long frequency;
-    private final int repeatAmount;
+    private final List<Integer> repeatAmount;
 
     Particle.DustOptions dustOptions;
 
     public ParticleAnimationMechanic(Particle particle, ArrangementParticle arrangement, double radiusParticle,
                                      int amountParticle, double dx, double dy, double dz, double forward, double upward,
-                                     double right, double speed, long frequency, int repeatAmount, Particle.DustOptions dustOptions) {
+                                     double right, double speed, long frequency, List<Integer> repeatAmount, Particle.DustOptions dustOptions) {
         this.particle = particle;
         this.arrangement = arrangement;
         this.radiusParticle = radiusParticle;
@@ -76,7 +76,7 @@ public class ParticleAnimationMechanic extends MechanicComponent {
                     ParticleUtil.play(location, particle, arrangement, radiusParticle, amountParticle, Direction.XZ, dx, dy, dz, speed, dustOptions);
 
                     counter++;
-                    if (counter >= repeatAmount) {
+                    if (counter >= repeatAmount.get(skillLevel - 1)) {
                         cancel();
                     }
                 }

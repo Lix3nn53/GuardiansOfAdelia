@@ -85,16 +85,24 @@ public class HunterSkills {
         Skill skill = new Skill("Explosive Arrow", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
 
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30,
+        List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(1);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
                 0, 1, 0, 200, true, Arrow.class);
 
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
+        List<Double> radiuses = new ArrayList<>();
+        radiuses.add(3D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
         projectileMechanic.addChildren(areaTarget);
 
-        areaTarget.addChildren(new DamageMechanic(10, 10, DamageMechanic.DamageType.MAGIC));
+        List<Double> damages = new ArrayList<>();
+        damages.add(3D);
+        areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
 
-        PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, 1, true);
+        List<Double> speeds = new ArrayList<>();
+        speeds.add(1D);
+        PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         areaTarget.addChildren(pushMechanic);
 
@@ -148,10 +156,14 @@ public class HunterSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 4, 30,
+        List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(4);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
                 0, 1, 0, 200, true, Arrow.class);
 
-        projectileMechanic.addChildren(new DamageMechanic(10, 10, DamageMechanic.DamageType.RANGED));
+        List<Double> damages = new ArrayList<>();
+        damages.add(3D);
+        projectileMechanic.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
 
         selfTarget.addChildren(projectileMechanic);
 
@@ -206,19 +218,23 @@ public class HunterSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, 1, 30, 0, 0, 0, 90,
+        List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(1);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30, 0, 0, 0, 90,
                 false, SmallFireball.class, Particle.REDSTONE, ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.AQUA, 8));
         projectileMechanic.setAddCasterAsFirstTargetIfHitSuccess(true);
         projectileMechanic.setAddCasterAsSecondTargetIfHitFail(true);
 
-        PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, -4, false);
+        List<Double> speeds = new ArrayList<>();
+        speeds.add(-4D);
+        PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, false);
 
         selfTarget.addChildren(projectileMechanic);
 
         projectileMechanic.addChildren(pushMechanic);
 
         //add fall protection
-        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, 0);
+        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>()); //empty list for infinite
         projectileMechanic.addChildren(immunityMechanic);
 
         //remove fall protection
@@ -276,7 +292,9 @@ public class HunterSkills {
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        AddPiercingToArrowShootFromCrossbowTrigger addPiercingToArrowShootFromCrossbowTrigger = new AddPiercingToArrowShootFromCrossbowTrigger(1, 1);
+        List<Integer> pierceLevels = new ArrayList<>();
+        pierceLevels.add(1);
+        AddPiercingToArrowShootFromCrossbowTrigger addPiercingToArrowShootFromCrossbowTrigger = new AddPiercingToArrowShootFromCrossbowTrigger(pierceLevels);
 
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(addPiercingToArrowShootFromCrossbowTrigger);
@@ -331,19 +349,35 @@ public class HunterSkills {
         SelfTarget selfTarget = new SelfTarget();
 
         //Add HologramMechanic to SelfTarget's children
-        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000005, 30, ChatColor.DARK_GRAY + "< Trap %caster% >");
+        List<Integer> seconds = new ArrayList<>();
+        seconds.add(30);
+        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000005, seconds, ChatColor.DARK_GRAY + "< Trap %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
-        RepeatMechanic repeatMechanic = new RepeatMechanic(10L, 60);
+        List<Integer> repetitions = new ArrayList<>();
+        repetitions.add(30);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(10L, repetitions);
 
         //Add areaTarget to repeatMechanic's children
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, 3);
+        List<Double> radiuses = new ArrayList<>();
+        radiuses.add(3D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
         //Add effects and setRemoveFlag to areaTarget's children
-        PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, 60, 999);
-        PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, 60, 999);
-        SilenceMechanic silenceMechanic = new SilenceMechanic(3);
-        FlagSetMechanic setRemoveFlag = new FlagSetMechanic("shouldStopSkill", 0);
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        List<Integer> amplifiers = new ArrayList<>();
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, amplifiers);
+        PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
+        SilenceMechanic silenceMechanic = new SilenceMechanic(ticks);
+        FlagSetMechanic setRemoveFlag = new FlagSetMechanic("shouldStopSkill", new ArrayList<>());
 
         //Add FlagCondition to repeatMechanic's children
         //Add RemoveMechanic and RepeatCancelMechanic to FlagCondition's children
