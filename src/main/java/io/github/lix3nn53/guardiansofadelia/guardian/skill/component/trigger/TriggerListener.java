@@ -18,6 +18,7 @@ public class TriggerListener {
 
     private static HashMap<Player, TookPhysicalDamageTrigger> playerToTookPhysicalDamageTrigger = new HashMap<>();
     private static HashMap<Player, TookMagicalDamageTrigger> playerToTookMagicalDamageTrigger = new HashMap<>();
+    private static HashMap<Player, TookMeleeDamageTrigger> playerToTookMeleeDamageTrigger = new HashMap<>();
 
     private static HashMap<Player, MeleeAttackTrigger> playerToMeleeAttackTrigger = new HashMap<>();
     private static HashMap<Player, RangedAttackTrigger> playerToRangedAttackTrigger = new HashMap<>();
@@ -59,6 +60,17 @@ public class TriggerListener {
         if (playerToTookPhysicalDamageTrigger.containsKey(player)) {
             playerToTookPhysicalDamageTrigger.get(player).callback(player);
             playerToTookPhysicalDamageTrigger.remove(player);
+        }
+    }
+
+    public static void startListeningTookMeleeDamage(Player player, TookMeleeDamageTrigger tookMeleeDamageTrigger) {
+        playerToTookMeleeDamageTrigger.put(player, tookMeleeDamageTrigger);
+    }
+
+    public static void onPlayerTookMeleeDamage(Player player) {
+        if (playerToTookMeleeDamageTrigger.containsKey(player)) {
+            playerToTookMeleeDamageTrigger.get(player).callback(player);
+            playerToTookMeleeDamageTrigger.remove(player);
         }
     }
 

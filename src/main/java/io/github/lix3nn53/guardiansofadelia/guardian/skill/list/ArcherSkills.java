@@ -175,10 +175,7 @@ public class ArcherSkills {
         ccTicks.add(60);
         ccTicks.add(60);
         List<Integer> ccAmplifiers = new ArrayList<>();
-        ccTicks.add(2);
-        ccTicks.add(2);
-        ccTicks.add(2);
-        ccTicks.add(2);
+        ccTicks.add(999);
         areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
         areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
 

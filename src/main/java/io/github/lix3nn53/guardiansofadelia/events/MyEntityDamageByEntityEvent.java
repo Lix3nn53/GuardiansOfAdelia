@@ -117,6 +117,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         TriggerListener.onPlayerTookMagicalDamage(playerTarget); //TookMagicalDamageTrigger
                     } else {
                         TriggerListener.onPlayerTookPhysicalDamage(playerTarget); //TookPhysicalDamageTrigger
+
+                        if (damageType.equals(DamageMechanic.DamageType.MELEE)) {
+                            TriggerListener.onPlayerTookMeleeDamage(playerTarget); //TookMeleeDamageTrigger
+                        }
                     }
 
                     if (!isAttackerPlayer) { //we are managing this on onPlayerAttackEntity() method if attacker is player

@@ -1,18 +1,23 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.ParticleMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMeleeDamageTrigger;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.SmallFireball;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -209,6 +214,7 @@ public class MageSkills {
 
         Skill skill = new Skill("Shockwave", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+
         return skill;
     }
 
@@ -256,6 +262,35 @@ public class MageSkills {
 
         Skill skill = new Skill("Mental Fortitude", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+        InitializeTrigger initializeTrigger = new InitializeTrigger();
+
+        TookMeleeDamageTrigger tookMeleeDamageTrigger = new TookMeleeDamageTrigger(500);
+
+        List<Double> radiuses = new ArrayList<>();
+        radiuses.add(3D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
+
+        List<Integer> ccTicks = new ArrayList<>();
+        ccTicks.add(60);
+        ccTicks.add(60);
+        ccTicks.add(60);
+        ccTicks.add(60);
+        List<Integer> ccAmplifiers = new ArrayList<>();
+        ccAmplifiers.add(999);
+        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
+        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
+
+        List<Double> multipliers = new ArrayList<>();
+        multipliers.add(1.2);
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(200);
+        BuffMechanic buffMechanic = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks);
+
+        skill.addTrigger(initializeTrigger);
+        initializeTrigger.addChildren(tookMeleeDamageTrigger);
+        tookMeleeDamageTrigger.addChildren(areaTarget);
+        tookMeleeDamageTrigger.addChildren(buffMechanic);
+
         return skill;
     }
 
@@ -301,6 +336,34 @@ public class MageSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Inferno", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+
+        SelfTarget selfTarget = new SelfTarget();
+
+        List<Double> ranges = new ArrayList<>();
+        ranges.add(12D);
+        SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
+
+        List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(16);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 1.9, projectileAmounts, 0,
+                0, 0, 200, true, Fireball.class);
+
+        List<Integer> repeatAmounts = new ArrayList<>();
+        repeatAmounts.add(2);
+        repeatAmounts.add(2);
+        repeatAmounts.add(2);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(40, repeatAmounts);
+
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(singleTarget);
+        singleTarget.addChildren(repeatMechanic);
+        repeatMechanic.addChildren(projectileMechanic);
+        List<Double> damages = new ArrayList<>();
+        damages.add(16D);
+        projectileMechanic.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(80);
+        projectileMechanic.addChildren(new FireMechanic(ticks));
 
         return skill;
     }
