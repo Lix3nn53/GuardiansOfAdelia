@@ -13,10 +13,8 @@ import java.util.List;
  */
 public class InitializeTrigger extends TriggerComponent {
 
-    String castKey;
-
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
 
         return false;
     }
@@ -26,15 +24,13 @@ public class InitializeTrigger extends TriggerComponent {
         return new ArrayList<>();
     }
 
-    public void startEffects(Player caster, int skillLevel, List<LivingEntity> targets, String castKey) {
-        executeChildren(caster, skillLevel, targets, castKey);
-        this.castKey = castKey;
+    public void startEffects(Player caster, int skillLevel, List<LivingEntity> targets) {
+        executeChildren(caster, skillLevel, targets);
     }
 
 
     public void stopEffects(Player caster) {
-        SkillDataManager.stopRepeatTasksOfCast(castKey);
-        SkillDataManager.clearFlags(castKey);
+        SkillDataManager.onPlayerQuit(caster);
         TriggerListener.onPlayerQuit(caster);
     }
 }

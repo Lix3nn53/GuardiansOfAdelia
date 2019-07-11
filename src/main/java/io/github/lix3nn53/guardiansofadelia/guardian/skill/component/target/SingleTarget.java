@@ -22,7 +22,7 @@ public class SingleTarget extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
 
         List<LivingEntity> single = new ArrayList<>();
 
@@ -34,13 +34,17 @@ public class SingleTarget extends TargetComponent {
 
         if (single.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, single, castKey);
+        return executeChildren(caster, skillLevel, single);
     }
 
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("Cone range: " + range);
+        if (skillLevel == 0 || skillLevel == range.size()) {
+            lore.add("Radius: " + range.get(skillLevel));
+        } else {
+            lore.add("Radius: " + range.get(skillLevel - 1) + " -> " + range.get(skillLevel));
+        }
         return lore;
     }
 }

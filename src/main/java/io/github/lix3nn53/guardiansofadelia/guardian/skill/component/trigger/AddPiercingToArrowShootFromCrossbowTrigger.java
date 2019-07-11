@@ -16,17 +16,15 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
 
     LivingEntity caster;
     int skillLevel;
-    String castKey;
 
     public AddPiercingToArrowShootFromCrossbowTrigger(List<Integer> piercingLevel) {
         this.piercingLevel = piercingLevel;
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         this.caster = caster;
         this.skillLevel = skillLevel;
-        this.castKey = castKey;
 
         AddPiercingToArrowShootFromCrossbowTrigger rangedAttackTrigger = this;
 

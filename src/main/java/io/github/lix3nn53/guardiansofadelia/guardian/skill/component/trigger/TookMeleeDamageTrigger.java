@@ -16,17 +16,15 @@ public class TookMeleeDamageTrigger extends TriggerComponent {
     private final long cooldown;
     LivingEntity caster;
     int skillLevel;
-    String castKey;
 
     public TookMeleeDamageTrigger(long cooldown) {
         this.cooldown = cooldown;
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         this.caster = caster;
         this.skillLevel = skillLevel;
-        this.castKey = castKey;
 
         TookMeleeDamageTrigger tookPhysicalDamageTrigger = this;
 
@@ -55,7 +53,7 @@ public class TookMeleeDamageTrigger extends TriggerComponent {
     public void callback(Player target) {
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(target);
-        executeChildren(caster, skillLevel, targets, castKey);
+        executeChildren(caster, skillLevel, targets);
 
         TookMeleeDamageTrigger trigger = this;
 
@@ -66,6 +64,6 @@ public class TookMeleeDamageTrigger extends TriggerComponent {
             }
         }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
 
-        SkillDataManager.onRepeatTaskCreate(castKey, bukkitTask);
+        SkillDataManager.onRepeatTaskCreate(target, bukkitTask);
     }
 }

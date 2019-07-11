@@ -15,7 +15,7 @@ public class FireMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
@@ -30,7 +30,11 @@ public class FireMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add("Burn duration: " + (ticks.get(skillLevel - 1) / 20));
+        if (skillLevel == 0 || skillLevel == ticks.size()) {
+            lore.add("Burn duration: " + (ticks.get(skillLevel) / 20));
+        } else {
+            lore.add("Burn duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
+        }
         return lore;
     }
 }

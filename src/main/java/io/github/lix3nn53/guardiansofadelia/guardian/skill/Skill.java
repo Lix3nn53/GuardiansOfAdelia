@@ -129,10 +129,10 @@ public class Skill {
         return icon;
     }
 
-    public boolean cast(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean cast(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         boolean didCast = false;
         for (SkillComponent trigger : triggers) {
-            didCast = trigger.execute(caster, skillLevel, targets, castKey) || didCast;
+            didCast = trigger.execute(caster, skillLevel, targets) || didCast;
         }
         return didCast;
     }

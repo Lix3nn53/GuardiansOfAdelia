@@ -21,7 +21,7 @@ public class AreaTarget extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
 
         List<LivingEntity> nearby = new ArrayList<>();
 
@@ -33,13 +33,18 @@ public class AreaTarget extends TargetComponent {
 
         if (nearby.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, nearby, castKey);
+        return executeChildren(caster, skillLevel, nearby);
     }
 
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("Radius: " + radius);
+        if (skillLevel == 0 || skillLevel == radius.size()) {
+            lore.add("Radius: " + radius.get(skillLevel));
+        } else {
+            lore.add("Radius: " + radius.get(skillLevel - 1) + " -> " + radius.get(skillLevel));
+        }
+
         return lore;
     }
 }

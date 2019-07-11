@@ -17,14 +17,14 @@ public class DelayMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
         new BukkitRunnable() {
 
             @Override
             public void run() {
-                executeChildren(caster, skillLevel, targets, castKey);
+                executeChildren(caster, skillLevel, targets);
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), ticks);
 

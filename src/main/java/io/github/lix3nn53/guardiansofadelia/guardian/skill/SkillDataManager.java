@@ -9,88 +9,69 @@ import java.util.HashSet;
 
 public class SkillDataManager {
 
-    private static HashMap<LivingEntity, Integer> casterToCastNumber = new HashMap<>();
+    private static HashMap<LivingEntity, HashSet<String>> keyEntityToSkillFlags = new HashMap<>();
+    private static HashMap<LivingEntity, HashSet<BukkitTask>> keyEntityToRepeatTasks = new HashMap<>();
 
-    private static HashMap<String, HashSet<String>> castKeyToSkillFlags = new HashMap<>();
-    private static HashMap<String, HashSet<BukkitTask>> castKeyToRepeatTasks = new HashMap<>();
-
-    public static int getNextCastNumber(LivingEntity caster) {
-        if (casterToCastNumber.containsKey(caster)) {
-            int current = casterToCastNumber.get(caster);
-            current++;
-            casterToCastNumber.put(caster, current);
-            return current;
-        }
-
-        casterToCastNumber.put(caster, 1);
-        return 1;
-    }
-
-    public static String getCastKey(LivingEntity caster, int castNumber) {
-        int entityId = caster.getEntityId();
-        return entityId + "-" + castNumber;
-    }
-
-    public static void addFlag(String castKey, String flag) {
-        if (castKeyToSkillFlags.containsKey(castKey)) {
-            castKeyToSkillFlags.get(castKey).add(flag);
+    public static void addFlag(LivingEntity keyEntity, String flag) {
+        if (keyEntityToSkillFlags.containsKey(keyEntity)) {
+            keyEntityToSkillFlags.get(keyEntity).add(flag);
         } else {
             HashSet<String> flags = new HashSet<>();
             flags.add(flag);
-            castKeyToSkillFlags.put(castKey, flags);
+            keyEntityToSkillFlags.put(keyEntity, flags);
         }
     }
 
-    public static boolean hasFlag(String castKey, String flag) {
-        if (castKeyToSkillFlags.containsKey(castKey)) {
-            return castKeyToSkillFlags.get(castKey).contains(flag);
+    public static boolean hasFlag(LivingEntity keyEntity, String flag) {
+        if (keyEntityToSkillFlags.containsKey(keyEntity)) {
+            return keyEntityToSkillFlags.get(keyEntity).contains(flag);
         }
         return false;
     }
 
-    public static void removeFlag(String castKey, String flag) {
-        if (castKeyToSkillFlags.containsKey(castKey)) {
-            HashSet<String> strings = castKeyToSkillFlags.get(castKey);
+    public static void removeFlag(LivingEntity keyEntity, String flag) {
+        if (keyEntityToSkillFlags.containsKey(keyEntity)) {
+            HashSet<String> strings = keyEntityToSkillFlags.get(keyEntity);
             strings.remove(flag);
             if (strings.isEmpty()) {
-                castKeyToSkillFlags.remove(castKey);
+                keyEntityToSkillFlags.remove(keyEntity);
             }
         }
     }
 
-    public static void clearFlags(String castKey) {
-        castKeyToSkillFlags.remove(castKey);
+    public static void clearFlags(LivingEntity keyEntity) {
+        keyEntityToSkillFlags.remove(keyEntity);
     }
 
-    public static void onRepeatTaskCreate(String castKey, BukkitTask bukkitTask) {
-        if (castKeyToRepeatTasks.containsKey(castKey)) {
-            castKeyToRepeatTasks.get(castKey).add(bukkitTask);
+    public static void onRepeatTaskCreate(LivingEntity keyEntity, BukkitTask bukkitTask) {
+        if (keyEntityToRepeatTasks.containsKey(keyEntity)) {
+            keyEntityToRepeatTasks.get(keyEntity).add(bukkitTask);
         } else {
             HashSet<BukkitTask> tasks = new HashSet<>();
             tasks.add(bukkitTask);
-            castKeyToRepeatTasks.put(castKey, tasks);
+            keyEntityToRepeatTasks.put(keyEntity, tasks);
         }
     }
 
-    public static void removeRepeatTask(String castKey, BukkitTask bukkitTask) {
-        if (castKeyToRepeatTasks.containsKey(castKey)) {
-            HashSet<BukkitTask> tasks = castKeyToRepeatTasks.get(castKey);
+    public static void removeRepeatTask(LivingEntity keyEntity, BukkitTask bukkitTask) {
+        if (keyEntityToRepeatTasks.containsKey(keyEntity)) {
+            HashSet<BukkitTask> tasks = keyEntityToRepeatTasks.get(keyEntity);
             tasks.remove(bukkitTask);
             if (tasks.isEmpty()) {
-                castKeyToRepeatTasks.remove(castKey);
+                keyEntityToRepeatTasks.remove(keyEntity);
             }
         }
     }
 
-    public static void stopRepeatTasksOfCast(String castKey) {
-        if (castKeyToRepeatTasks.containsKey(castKey)) {
-            HashSet<BukkitTask> tasks = castKeyToRepeatTasks.get(castKey);
+    public static void stopRepeatTasksOfCast(LivingEntity keyEntity) {
+        if (keyEntityToRepeatTasks.containsKey(keyEntity)) {
+            HashSet<BukkitTask> tasks = keyEntityToRepeatTasks.get(keyEntity);
 
             for (BukkitTask bukkitTask : tasks) {
                 bukkitTask.cancel();
             }
 
-            castKeyToRepeatTasks.remove(castKey);
+            keyEntityToRepeatTasks.remove(keyEntity);
         }
     }
 
@@ -100,7 +81,8 @@ public class SkillDataManager {
      * @param player
      */
     public static void onPlayerQuit(Player player) {
-        casterToCastNumber.remove(player);
+        keyEntityToSkillFlags.remove(player);
+        keyEntityToRepeatTasks.remove(player);
     }
 
     /**
@@ -109,6 +91,7 @@ public class SkillDataManager {
      * @param livingEntity
      */
     public static void onEntityDeath(LivingEntity livingEntity) {
-        casterToCastNumber.remove(livingEntity);
+        keyEntityToSkillFlags.remove(livingEntity);
+        keyEntityToRepeatTasks.remove(livingEntity);
     }
 }

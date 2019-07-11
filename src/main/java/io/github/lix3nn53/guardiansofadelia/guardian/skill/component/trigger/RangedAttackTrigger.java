@@ -13,20 +13,18 @@ import java.util.List;
 
 public class RangedAttackTrigger extends TriggerComponent {
 
-    private final long cooldown;
+    private final List<Integer> cooldown;
     LivingEntity caster;
     int skillLevel;
-    String castKey;
 
-    public RangedAttackTrigger(long cooldown) {
+    public RangedAttackTrigger(List<Integer> cooldown) {
         this.cooldown = cooldown;
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         this.caster = caster;
         this.skillLevel = skillLevel;
-        this.castKey = castKey;
 
         RangedAttackTrigger rangedAttackTrigger = this;
 
@@ -55,7 +53,7 @@ public class RangedAttackTrigger extends TriggerComponent {
     public void callback(Player target) {
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(target);
-        executeChildren(caster, skillLevel, targets, castKey);
+        executeChildren(caster, skillLevel, targets);
 
         RangedAttackTrigger trigger = this;
 
@@ -64,8 +62,8 @@ public class RangedAttackTrigger extends TriggerComponent {
             public void run() {
                 TriggerListener.startListeningRangedAttack(target, trigger);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown.get(skillLevel - 1));
 
-        SkillDataManager.onRepeatTaskCreate(castKey, bukkitTask);
+        SkillDataManager.onRepeatTaskCreate(target, bukkitTask);
     }
 }

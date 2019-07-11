@@ -22,7 +22,7 @@ public class LaunchMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity ent : targets) {
@@ -49,6 +49,13 @@ public class LaunchMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
+        if (skillLevel == 0 || skillLevel == forwardSpeed.size()) {
+            lore.add("Forward speed: " + forwardSpeed.get(skillLevel));
+            lore.add("Upward speed: " + upwardSpeed.get(skillLevel));
+        } else {
+            lore.add("Forward speed: " + forwardSpeed.get(skillLevel - 1) + " -> " + forwardSpeed.get(skillLevel));
+            lore.add("Upward speed: " + upwardSpeed.get(skillLevel - 1) + " -> " + upwardSpeed.get(skillLevel));
+        }
         return lore;
     }
 

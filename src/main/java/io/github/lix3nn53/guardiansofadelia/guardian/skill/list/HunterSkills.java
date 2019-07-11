@@ -370,10 +370,10 @@ public class HunterSkills {
         ticks.add(60);
         ticks.add(60);
         List<Integer> amplifiers = new ArrayList<>();
-        ticks.add(2);
-        ticks.add(2);
-        ticks.add(2);
-        ticks.add(2);
+        amplifiers.add(2);
+        amplifiers.add(2);
+        amplifiers.add(2);
+        amplifiers.add(2);
         PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, amplifiers);
         PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
         SilenceMechanic silenceMechanic = new SilenceMechanic(ticks);
@@ -381,8 +381,9 @@ public class HunterSkills {
 
         //Add FlagCondition to repeatMechanic's children
         //Add RemoveMechanic and RepeatCancelMechanic to FlagCondition's children
-        FlagCondition removeCondition = new FlagCondition("shouldStopSkill", true);
+        FlagCondition shouldStopSkill = new FlagCondition("shouldStopSkill", true);
 
+        //TODO add remember mechanic to set/check flags on hologram and remove it after skill in done
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(hologramMechanic);
         hologramMechanic.addChildren(repeatMechanic);
@@ -392,13 +393,18 @@ public class HunterSkills {
         areaTarget.addChildren(stopJumping);
         areaTarget.addChildren(stopWalking);
         areaTarget.addChildren(silenceMechanic);
-        areaTarget.addChildren(setRemoveFlag);
+        SelfTarget selfTargetForFlagSet = new SelfTarget();
+        areaTarget.addChildren(selfTargetForFlagSet);
+        selfTargetForFlagSet.addChildren(setRemoveFlag);
 
         //repeat part 2, stop and remove
-        repeatMechanic.addChildren(removeCondition);
-        removeCondition.addChildren(new RemoveMechanic());
-        removeCondition.addChildren(new RepeatCancelMechanic());
-        removeCondition.addChildren(new FlagRemoveMechanic("shouldStopSkill"));
+        SelfTarget selfTargetForFlagCondition = new SelfTarget();
+        repeatMechanic.addChildren(selfTargetForFlagCondition);
+        selfTargetForFlagCondition.addChildren(shouldStopSkill);
+
+        shouldStopSkill.addChildren(new RemoveMechanic());
+        shouldStopSkill.addChildren(new RepeatCancelMechanic());
+        shouldStopSkill.addChildren(new FlagRemoveMechanic("shouldStopSkill"));
 
         return skill;
     }

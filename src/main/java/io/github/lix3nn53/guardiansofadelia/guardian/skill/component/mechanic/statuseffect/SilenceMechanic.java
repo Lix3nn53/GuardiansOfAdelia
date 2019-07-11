@@ -17,7 +17,7 @@ public class SilenceMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
@@ -39,7 +39,12 @@ public class SilenceMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add("Silence duration: " + (int) ((duration.get(skillLevel - 1) / 20) + 0.5) + " seconds");
+        if (skillLevel == 0 || skillLevel == duration.size()) {
+            lore.add("Silence duration: " + (int) ((duration.get(skillLevel) / 20) + 0.5) + " seconds");
+        } else {
+            lore.add("Silence duration: " + (int) ((duration.get(skillLevel - 1) / 20) + 0.5) + " seconds -> " + (int) ((duration.get(skillLevel) / 20) + 0.5));
+        }
+
         return lore;
     }
 }

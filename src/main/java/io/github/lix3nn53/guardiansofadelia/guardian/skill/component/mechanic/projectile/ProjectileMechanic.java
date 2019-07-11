@@ -147,7 +147,7 @@ public class ProjectileMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         this.castKey = castKey;
         this.caster = caster;
 
@@ -254,7 +254,7 @@ public class ProjectileMechanic extends MechanicComponent {
             skillLevel = PersistentDataContainerUtil.getInteger(projectile, "skillLevel");
         }
 
-        executeChildren((LivingEntity) projectile.getShooter(), skillLevel, targets, castKey);
+        executeChildren((LivingEntity) projectile.getShooter(), skillLevel, targets);
 
         if (projectile instanceof Arrow) {
             if (((Arrow) projectile).getPierceLevel() > 0) return;
@@ -266,8 +266,11 @@ public class ProjectileMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         ArrayList<String> lore = new ArrayList<>();
-
-        lore.add("Projectile amount: " + amount);
+        if (skillLevel == 0 || skillLevel == amount.size()) {
+            lore.add("Projectile amount: " + amount.get(skillLevel));
+        } else {
+            lore.add("Projectile amount: " + amount.get(skillLevel - 1) + " -> " + amount.get(skillLevel));
+        }
 
         //TODO
         return new ArrayList<>();

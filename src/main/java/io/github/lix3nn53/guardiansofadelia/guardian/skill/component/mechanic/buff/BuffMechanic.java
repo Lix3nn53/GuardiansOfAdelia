@@ -27,7 +27,7 @@ public class BuffMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
         List<Player> buffedPlayers = new ArrayList<>();
@@ -75,8 +75,14 @@ public class BuffMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add(buffType.name() + " multiplier: " + multiplier);
-        lore.add(buffType.name() + " duration: " + (ticks.get(skillLevel - 1) / 20) + " seconds");
+        if (skillLevel == 0 || skillLevel == multiplier.size()) {
+            lore.add(buffType.name() + " multiplier: " + multiplier.get(skillLevel));
+            lore.add(buffType.name() + " duration: " + (ticks.get(skillLevel) / 20));
+        } else {
+            lore.add(buffType.name() + " multiplier: " + multiplier.get(skillLevel - 1) + "x -> " + multiplier.get(skillLevel) + "x");
+            lore.add(buffType.name() + " duration: " + (ticks.get(skillLevel - 1) / 20) + " seconds -> " + (ticks.get(skillLevel) / 20));
+        }
+
         return lore;
     }
 }

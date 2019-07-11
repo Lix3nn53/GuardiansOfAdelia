@@ -18,7 +18,7 @@ public class DamageMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
         double calcDamage = damage.get(skillLevel - 1);
@@ -35,7 +35,12 @@ public class DamageMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add(damageType.name() + ": " + (int) (damage.get(skillLevel - 1) + 0.5));
+        if (skillLevel == 0 || skillLevel == damage.size()) {
+            lore.add(damageType.name() + ": " + (int) (damage.get(skillLevel) + 0.5));
+        } else {
+            lore.add(damageType.name() + ": " + (int) (damage.get(skillLevel - 1) + 0.5) + " -> " + (int) (damage.get(skillLevel) + 0.5));
+        }
+
         return lore;
     }
 

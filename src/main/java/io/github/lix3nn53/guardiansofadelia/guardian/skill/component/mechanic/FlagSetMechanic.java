@@ -12,23 +12,27 @@ import java.util.List;
 public class FlagSetMechanic extends MechanicComponent {
 
     private final String key;
-    private final List<Long> ticks;
+    private final List<Integer> ticks;
 
-    public FlagSetMechanic(String key, List<Long> ticks) {
+    public FlagSetMechanic(String key, List<Integer> ticks) {
         this.key = key;
         this.ticks = ticks;
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
-        SkillDataManager.addFlag(castKey, key);
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+        for (LivingEntity target : targets) {
+            SkillDataManager.addFlag(target, key);
+        }
 
         if (!ticks.isEmpty()) {
             new BukkitRunnable() { //remove buffs from buffed players
 
                 @Override
                 public void run() {
-                    SkillDataManager.removeFlag(castKey, key);
+                    for (LivingEntity target : targets) {
+                        SkillDataManager.removeFlag(target, key);
+                    }
                 }
             }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), ticks.get(skillLevel - 1));
         }

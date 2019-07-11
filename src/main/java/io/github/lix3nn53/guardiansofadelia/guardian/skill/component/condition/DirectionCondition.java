@@ -16,11 +16,11 @@ public class DirectionCondition extends ConditionComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
 
         for (LivingEntity target : targets) {
             if (TargetHelper.isInFront(caster, target) == isInFront) {
-                executeChildren(caster, skillLevel, targets, castKey);
+                executeChildren(caster, skillLevel, targets);
             }
         }
 

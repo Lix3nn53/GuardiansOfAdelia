@@ -9,7 +9,7 @@ public abstract class SkillComponent {
 
     private final List<SkillComponent> children = new ArrayList<>();
 
-    public abstract boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey);
+    public abstract boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets);
 
     /**
      * Use this in #execute method of SkillComponents
@@ -17,15 +17,14 @@ public abstract class SkillComponent {
      * @param caster
      * @param skillLevel
      * @param targets
-     * @param castKey    key to access global datas in SkillDataManager for this cast
      * @return
      */
-    protected boolean executeChildren(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    protected boolean executeChildren(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
         boolean worked = false;
         for (SkillComponent child : children) {
-            boolean passed = child.execute(caster, skillLevel, targets, castKey);
+            boolean passed = child.execute(caster, skillLevel, targets);
             worked = passed || worked;
         }
         return worked;

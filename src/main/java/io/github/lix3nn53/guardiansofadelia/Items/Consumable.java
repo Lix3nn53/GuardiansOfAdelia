@@ -37,7 +37,7 @@ public enum Consumable {
 
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
-        getSkillComponent().execute(player, skillLevel, targets, "potion");
+        getSkillComponent().execute(player, skillLevel, targets);
 
         if (PersistentDataContainerUtil.hasInteger(itemStack, "consumableUsesLeft")) {
             int usesLeft = PersistentDataContainerUtil.getInteger(itemStack, "consumableUsesLeft");

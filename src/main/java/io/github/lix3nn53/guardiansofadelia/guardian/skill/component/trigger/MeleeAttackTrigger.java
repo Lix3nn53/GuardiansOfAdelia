@@ -13,20 +13,18 @@ import java.util.List;
 
 public class MeleeAttackTrigger extends TriggerComponent {
 
-    private final long cooldown;
+    private final List<Integer> cooldown;
     LivingEntity caster;
     int skillLevel;
-    String castKey;
 
-    public MeleeAttackTrigger(long cooldown) {
+    public MeleeAttackTrigger(List<Integer> cooldown) {
         this.cooldown = cooldown;
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         this.caster = caster;
         this.skillLevel = skillLevel;
-        this.castKey = castKey;
 
         MeleeAttackTrigger meleeAttackTrigger = this;
 
@@ -55,7 +53,7 @@ public class MeleeAttackTrigger extends TriggerComponent {
     public void callback(Player target) {
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(target);
-        executeChildren(caster, skillLevel, targets, castKey);
+        executeChildren(caster, skillLevel, targets);
 
         MeleeAttackTrigger trigger = this;
 
@@ -64,8 +62,8 @@ public class MeleeAttackTrigger extends TriggerComponent {
             public void run() {
                 TriggerListener.startListeningMeleeAttack(target, trigger);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown.get(skillLevel - 1));
 
-        SkillDataManager.onRepeatTaskCreate(castKey, bukkitTask);
+        SkillDataManager.onRepeatTaskCreate(target, bukkitTask);
     }
 }

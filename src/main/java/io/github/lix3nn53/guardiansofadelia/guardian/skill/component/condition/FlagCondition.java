@@ -22,11 +22,14 @@ public class FlagCondition extends ConditionComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
-        boolean hasFlag = SkillDataManager.hasFlag(castKey, key);
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
 
-        if (hasFlag == isSet) {
-            return executeChildren(caster, skillLevel, targets, castKey);
+        for (LivingEntity target : targets) {
+            boolean hasFlag = SkillDataManager.hasFlag(target, key);
+
+            if (hasFlag == isSet) {
+                executeChildren(caster, skillLevel, targets);
+            }
         }
 
         return false;

@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -132,13 +131,10 @@ public class TriggerListener {
     public static void onSkillUpgrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel) {
         stopInit(player); //stop old init
 
-        int nextCastNumber = SkillDataManager.getNextCastNumber(player);
-        String castKey = SkillDataManager.getCastKey(player, nextCastNumber);
-
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
 
-        initializeTrigger.startEffects(player, nextSkillLevel, targets, castKey);
+        initializeTrigger.startEffects(player, nextSkillLevel, targets);
         playerToInitializeTrigger.put(player, initializeTrigger);
     }
 
@@ -146,13 +142,10 @@ public class TriggerListener {
         stopInit(player);
         if (nextSkillLevel == 0) return;
 
-        int nextCastNumber = SkillDataManager.getNextCastNumber(player);
-        String castKey = SkillDataManager.getCastKey(player, nextCastNumber);
-
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
 
-        initializeTrigger.startEffects(player, nextSkillLevel, targets, castKey);
+        initializeTrigger.startEffects(player, nextSkillLevel, targets);
         playerToInitializeTrigger.put(player, initializeTrigger);
     }
 

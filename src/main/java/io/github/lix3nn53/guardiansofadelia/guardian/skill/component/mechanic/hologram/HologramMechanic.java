@@ -42,7 +42,7 @@ public class HologramMechanic extends MechanicComponent {
      * @param list
      * @return
      */
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> list, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> list) {
         Location baseLocation = caster.getLocation();
 
         ArmorStand model = (ArmorStand) baseLocation.getWorld().spawnEntity(baseLocation, EntityType.ARMOR_STAND);
@@ -79,7 +79,7 @@ public class HologramMechanic extends MechanicComponent {
         List<LivingEntity> armorStandList = new ArrayList<>();
         armorStandList.add(model);
 
-        return executeChildren(caster, skillLevel, armorStandList, castKey);
+        return executeChildren(caster, skillLevel, armorStandList);
     }
 
     @Override

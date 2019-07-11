@@ -9,7 +9,7 @@ import java.util.List;
 public class RemoveMechanic extends MechanicComponent {
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {

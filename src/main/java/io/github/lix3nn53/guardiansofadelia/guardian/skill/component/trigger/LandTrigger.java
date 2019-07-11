@@ -13,13 +13,11 @@ public class LandTrigger extends TriggerComponent {
 
     LivingEntity caster;
     int skillLevel;
-    String castKey;
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         this.caster = caster;
         this.skillLevel = skillLevel;
-        this.castKey = castKey;
 
         LandTrigger landTrigger = this;
 
@@ -48,6 +46,6 @@ public class LandTrigger extends TriggerComponent {
     public void callback(Player target) {
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(target);
-        executeChildren(caster, skillLevel, targets, castKey);
+        executeChildren(caster, skillLevel, targets);
     }
 }

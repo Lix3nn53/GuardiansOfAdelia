@@ -18,7 +18,7 @@ public class HealthCondition extends ConditionComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
 
         for (LivingEntity target : targets) {
             double currentHealth = target.getHealth();
@@ -26,7 +26,7 @@ public class HealthCondition extends ConditionComponent {
             double value = currentHealth / maxHealth;
 
             if (value > minPercent && value <= maxPercent) {
-                executeChildren(caster, skillLevel, targets, castKey);
+                executeChildren(caster, skillLevel, targets);
             }
         }
 

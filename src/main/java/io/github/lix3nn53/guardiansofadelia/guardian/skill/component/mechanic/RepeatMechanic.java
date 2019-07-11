@@ -25,7 +25,7 @@ public class RepeatMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
         BukkitTask bukkitTask = new BukkitRunnable() {
@@ -34,7 +34,7 @@ public class RepeatMechanic extends MechanicComponent {
 
             @Override
             public void run() {
-                executeChildren(caster, skillLevel, targets, castKey);
+                executeChildren(caster, skillLevel, targets);
 
                 if (!repetitions.isEmpty()) {
                     counter++;
@@ -45,13 +45,13 @@ public class RepeatMechanic extends MechanicComponent {
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, period);
 
-        SkillDataManager.onRepeatTaskCreate(castKey, bukkitTask);
+        SkillDataManager.onRepeatTaskCreate(caster, bukkitTask);
 
         new BukkitRunnable() { //remove task from cast data holder after it stops
 
             @Override
             public void run() {
-                SkillDataManager.removeRepeatTask(castKey, bukkitTask);
+                SkillDataManager.removeRepeatTask(caster, bukkitTask);
             }
         }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), period * repetitions.get(skillLevel - 1));
 
@@ -61,7 +61,12 @@ public class RepeatMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add("Repeat every " + (int) (period / 20 + 0.5) + " seconds, " + repetitions + " times");
+        if (skillLevel == 0 || skillLevel == repetitions.size()) {
+            lore.add("Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel) + " times");
+        } else {
+            lore.add("Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel - 1) + " times -> " + repetitions.get(skillLevel) + " times");
+        }
+
         return lore;
     }
 }

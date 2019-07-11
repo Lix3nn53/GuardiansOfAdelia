@@ -189,9 +189,7 @@ public class SkillBar {
             return false;
         }
 
-        int nextCastNumber = SkillDataManager.getNextCastNumber(player);
-        String castKey = SkillDataManager.getCastKey(player, nextCastNumber);
-        skill.cast(player, skillLevel, null, castKey); //cast ends when this returns
+        skill.cast(player, skillLevel, null); //cast ends when this returns
 
         int cooldown = skill.getCooldown(skillLevel);
         PlayerInventory inventory = player.getInventory();

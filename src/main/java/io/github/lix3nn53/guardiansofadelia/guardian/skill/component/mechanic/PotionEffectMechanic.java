@@ -21,7 +21,7 @@ public class PotionEffectMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
         PotionEffect potionEffect = new PotionEffect(type, ticks.get(skillLevel - 1), amplifier.get(skillLevel - 1),
@@ -37,8 +37,13 @@ public class PotionEffectMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
-        lore.add(type.getName() + " duration: " + (ticks.get(skillLevel - 1) / 20));
-        lore.add(type.getName() + " tier: " + amplifier.get(skillLevel - 1));
+        if (skillLevel == 0 || skillLevel == ticks.size()) {
+            lore.add(type.getName() + " duration: " + (ticks.get(skillLevel) / 20));
+            lore.add(type.getName() + " tier: " + amplifier.get(skillLevel));
+        } else {
+            lore.add(type.getName() + " duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
+            lore.add(type.getName() + " tier: " + amplifier.get(skillLevel - 1) + " -> " + amplifier.get(skillLevel));
+        }
         return lore;
     }
 }

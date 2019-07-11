@@ -16,9 +16,10 @@ public class FlagRemoveMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, String castKey) {
-        SkillDataManager.removeFlag(castKey, key);
-
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+        for (LivingEntity target : targets) {
+            SkillDataManager.removeFlag(target, key);
+        }
         return true;
     }
 
