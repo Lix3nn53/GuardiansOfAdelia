@@ -1,6 +1,17 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.LaunchMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.PushMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.TauntMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMagicalDamageTrigger;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
@@ -63,6 +74,27 @@ public class KnightSkills {
 
         Skill skill = new Skill("Slice and Dice", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+        SelfTarget selfTarget = new SelfTarget();
+
+        List<Double> areas = new ArrayList<>();
+        areas.add(3D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+
+        List<Double> damages = new ArrayList<>();
+        damages.add(3D);
+        DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
+
+        List<Double> multiplier = new ArrayList<>();
+        multiplier.add(-0.1);
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(80);
+        BuffMechanic buffMechanic = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multiplier, ticks);
+
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(areaTarget);
+        areaTarget.addChildren(damageMechanic);
+        areaTarget.addChildren(buffMechanic);
+
         return skill;
     }
 
@@ -108,13 +140,29 @@ public class KnightSkills {
 
         Skill skill = new Skill("Devastate", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+        SelfTarget selfTarget = new SelfTarget();
+
+        List<Double> areas = new ArrayList<>();
+        areas.add(3D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+
+        List<Double> upward = new ArrayList<>();
+        upward.add(3D);
+        List<Double> forward = new ArrayList<>();
+        forward.add(0D);
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forward, upward, 0);
+
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(areaTarget);
+        areaTarget.addChildren(launchMechanic);
+
         return skill;
     }
 
     private static Skill getThree() {
         List<String> description = new ArrayList<>();
         description.add("Pull enemies around to yourself and");
-        description.add("taunt monsters.");
+        description.add("taunt pulled monsters.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -154,6 +202,23 @@ public class KnightSkills {
 
         Skill skill = new Skill("Battle Cry", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+        SelfTarget selfTarget = new SelfTarget();
+
+        List<Double> areas = new ArrayList<>();
+        areas.add(3D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+
+        List<Double> speeds = new ArrayList<>();
+        speeds.add(-4D);
+        PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
+
+        TauntMechanic tauntMechanic = new TauntMechanic();
+
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(areaTarget);
+        areaTarget.addChildren(pushMechanic);
+        areaTarget.addChildren(tauntMechanic);
+
         return skill;
     }
 
@@ -161,7 +226,7 @@ public class KnightSkills {
         List<String> description = new ArrayList<>();
         description.add("When you took any damage from a skill while");
         description.add("this skill is active, block it and");
-        description.add("gain shields.");
+        description.add("silence the attacker.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -199,7 +264,22 @@ public class KnightSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Block", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Spell Block", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+
+        InitializeTrigger initializeTrigger = new InitializeTrigger();
+
+        TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(500);
+
+        List<Integer> ccTicks = new ArrayList<>();
+        ccTicks.add(60);
+        ccTicks.add(60);
+        ccTicks.add(60);
+
+        SilenceMechanic silenceMechanic = new SilenceMechanic(ccTicks);
+
+        skill.addTrigger(initializeTrigger);
+        initializeTrigger.addChildren(tookMagicalDamageTrigger);
+        tookMagicalDamageTrigger.addChildren(silenceMechanic);
 
         return skill;
     }
@@ -246,6 +326,7 @@ public class KnightSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Wrath of Justice", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+
 
         return skill;
     }
