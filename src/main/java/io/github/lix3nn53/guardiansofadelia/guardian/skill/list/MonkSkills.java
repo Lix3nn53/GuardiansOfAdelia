@@ -1,7 +1,15 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.FlagCondition;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
 import org.bukkit.Material;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +70,20 @@ public class MonkSkills {
 
         Skill skill = new Skill("Iron Fist", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+        SelfTarget selfTarget = new SelfTarget();
+
+        List<Double> ranges = new ArrayList<>();
+        ranges.add(2D);
+        SingleTarget singleTarget = new SingleTarget(false, true, false, 999, ranges, 4);
+
+        List<Double> speeds = new ArrayList<>();
+        speeds.add(-2D);
+        PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
+
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(singleTarget);
+        singleTarget.addChildren(pushMechanic);
+
         return skill;
     }
 
@@ -107,6 +129,43 @@ public class MonkSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Tumble", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+
+        SelfTarget selfTarget = new SelfTarget();
+
+        //mechanics depending on flag
+        FlagCondition ifGoLeftIsSet = new FlagCondition("goLeft", true);
+
+        List<Double> upward = new ArrayList<>();
+        upward.add(3D);
+        List<Double> forward = new ArrayList<>();
+        forward.add(0D);
+        List<Double> right = new ArrayList<>();
+        right.add(0.8);
+        right.add(1D);
+        LaunchMechanic rightLaunch = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forward, upward, right);
+
+        List<Double> left = new ArrayList<>();
+        left.add(-0.8);
+        left.add(-1D);
+        LaunchMechanic leftLaunch = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forward, upward, left);
+
+        skill.addTrigger(selfTarget);
+
+        selfTarget.addChildren(ifGoLeftIsSet);
+        ifGoLeftIsSet.addChildren(leftLaunch);
+        FlagRemoveMechanic removeGoLeft = new FlagRemoveMechanic("goLeft");
+        ifGoLeftIsSet.addChildren(removeGoLeft);
+        FlagSetMechanic setDidLeftTrigger = new FlagSetMechanic("leftTrigger", new ArrayList<>());
+        ifGoLeftIsSet.addChildren(setDidLeftTrigger);
+
+        FlagCondition ifLeftDidNotTrigger = new FlagCondition("leftTrigger", false);
+        selfTarget.addChildren(ifLeftDidNotTrigger);
+        ifLeftDidNotTrigger.addChildren(rightLaunch);
+        FlagSetMechanic setLeft = new FlagSetMechanic("goLeft", new ArrayList<>());
+        ifLeftDidNotTrigger.addChildren(setLeft);
+
+        FlagRemoveMechanic removeDidLeftTrigger = new FlagRemoveMechanic("leftTrigger");
+        selfTarget.addChildren(removeDidLeftTrigger);
 
         return skill;
     }
@@ -154,6 +213,43 @@ public class MonkSkills {
         cooldowns.add(5);
 
         Skill skill = new Skill("Serenity", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+
+        SelfTarget selfTarget = new SelfTarget();
+
+        List<Integer> ccTicks = new ArrayList<>();
+        ccTicks.add(60);
+        ccTicks.add(60);
+        ccTicks.add(60);
+        ccTicks.add(60);
+        List<Integer> ccAmplifiers = new ArrayList<>();
+        ccTicks.add(999);
+        selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
+        selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
+        selfTarget.addChildren(new SilenceMechanic(ccTicks));
+
+        List<Integer> repetitions = new ArrayList<>();
+        repetitions.add(15);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(40L, repetitions);
+
+
+        List<Double> percents = new ArrayList<>();
+        percents.add(0.3);
+        repeatMechanic.addChildren(new HealMechanic(new ArrayList<>(), percents));
+
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(repeatMechanic);
+
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        List<Double> multipliers = new ArrayList<>();
+        multipliers.add(0.1);
+        BuffMechanic phyDef = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks);
+        BuffMechanic mgcDef = new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks);
+        selfTarget.addChildren(phyDef);
+        selfTarget.addChildren(mgcDef);
 
         return skill;
     }

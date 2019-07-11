@@ -256,8 +256,9 @@ public class ArcherSkills {
         upwards.add(1.2);
         upwards.add(1.35);
         upwards.add(1.5);
-        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forwards, upwards, 0);
-
+        List<Double> right = new ArrayList<>();
+        right.add(0D);
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forwards, upwards, right);
 
         List<Integer> repeatAmounts = new ArrayList<>();
         repeatAmounts.add(10);
@@ -269,7 +270,6 @@ public class ArcherSkills {
         LandTrigger landTrigger = new LandTrigger();
 
         ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL);
-
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(launchMechanic);

@@ -12,9 +12,9 @@ public class LaunchMechanic extends MechanicComponent {
     private final Relative relative;
     private final List<Double> forwardSpeed;
     private final List<Double> upwardSpeed;
-    private final double rightSpeed;
+    private final List<Double> rightSpeed;
 
-    public LaunchMechanic(Relative relative, List<Double> forwardSpeed, List<Double> upwardSpeed, double rightSpeed) {
+    public LaunchMechanic(Relative relative, List<Double> forwardSpeed, List<Double> upwardSpeed, List<Double> rightSpeed) {
         this.relative = relative;
         this.forwardSpeed = forwardSpeed;
         this.upwardSpeed = upwardSpeed;
@@ -38,7 +38,7 @@ public class LaunchMechanic extends MechanicComponent {
 
             final Vector nor = dir.clone().crossProduct(UP);
             dir.multiply(forwardSpeed.get(skillLevel - 1));
-            dir.add(nor.multiply(rightSpeed)).setY(upwardSpeed.get(skillLevel - 1));
+            dir.add(nor.multiply(rightSpeed.get(skillLevel - 1))).setY(upwardSpeed.get(skillLevel - 1));
 
             ent.setVelocity(dir);
         }

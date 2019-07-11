@@ -150,7 +150,9 @@ public class KnightSkills {
         upward.add(3D);
         List<Double> forward = new ArrayList<>();
         forward.add(0D);
-        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forward, upward, 0);
+        List<Double> right = new ArrayList<>();
+        right.add(0D);
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forward, upward, right);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(areaTarget);

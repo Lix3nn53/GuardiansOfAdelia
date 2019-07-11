@@ -166,7 +166,9 @@ public class WarriorSkills {
         upwards.add(0.75);
         upwards.add(0.8);
         upwards.add(0.85);
-        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forwards, upwards, 0);
+        List<Double> right = new ArrayList<>();
+        right.add(0D);
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forwards, upwards, right);
 
         skill.addTrigger(selfTarget);
 
@@ -393,7 +395,9 @@ public class WarriorSkills {
         upwards.add(1D);
         upwards.add(1.8);
         upwards.add(1.85);
-        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forwards, upwards, 0);
+        List<Double> right = new ArrayList<>();
+        right.add(0D);
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forwards, upwards, right);
 
         LandTrigger landTrigger = new LandTrigger();
 
