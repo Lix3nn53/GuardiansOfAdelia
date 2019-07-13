@@ -72,7 +72,7 @@ public class KnightSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Slice and Dice", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Slice and Dice", Material.IRON_HOE, 9, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -138,7 +138,7 @@ public class KnightSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Devastate", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Devastate", Material.IRON_HOE, 1, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -202,7 +202,7 @@ public class KnightSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Battle Cry", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Battle Cry", Material.IRON_HOE, 47, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -266,7 +266,7 @@ public class KnightSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Spell Block", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Spell Block", Material.IRON_HOE, 23, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
@@ -327,7 +327,7 @@ public class KnightSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Wrath of Justice", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Wrath of Justice", Material.IRON_HOE, 1, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
 
         return skill;

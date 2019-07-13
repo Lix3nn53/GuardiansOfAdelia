@@ -15,14 +15,14 @@ public class DisguiseMechanic extends MechanicComponent {
 
     private final DisguiseType disguiseType;
     private final boolean isAdult;
-    private final List<Long> ticks;
+    private final List<Integer> ticks;
 
     /**
      * @param disguiseType Must be mob type
      * @param isAdult
      * @param ticks
      */
-    public DisguiseMechanic(DisguiseType disguiseType, boolean isAdult, List<Long> ticks) {
+    public DisguiseMechanic(DisguiseType disguiseType, boolean isAdult, List<Integer> ticks) {
         this.disguiseType = disguiseType;
         this.isAdult = isAdult;
         this.ticks = ticks;

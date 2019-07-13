@@ -15,6 +15,7 @@ public class Skill {
 
     private final String name;
     private final Material material;
+    private final int customModelData;
     private final List<String> description;
 
     private final List<Integer> reqPlayerLevels;
@@ -26,9 +27,10 @@ public class Skill {
 
     private final List<SkillComponent> triggers = new ArrayList<>();
 
-    public Skill(String name, Material material, List<String> description, List<Integer> reqPlayerLevels, List<Integer> reqSkillPoints, List<Integer> manaCosts, List<Integer> cooldowns) {
+    public Skill(String name, Material material, int customModelData, List<String> description, List<Integer> reqPlayerLevels, List<Integer> reqSkillPoints, List<Integer> manaCosts, List<Integer> cooldowns) {
         this.name = name;
         this.material = material;
+        this.customModelData = customModelData;
         this.description = description;
         this.reqPlayerLevels = reqPlayerLevels;
         this.reqSkillPoints = reqSkillPoints;
@@ -90,6 +92,7 @@ public class Skill {
         ItemStack icon = new ItemStack(getMaterial());
 
         ItemMeta itemMeta = icon.getItemMeta();
+        itemMeta.setCustomModelData(customModelData);
 
         itemMeta.setDisplayName(getName() + " (" + skillLevel + "/" + getMaxSkillLevel() + ")");
         List<String> lore = new ArrayList<>();

@@ -1,12 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,13 +55,11 @@ public class TookMagicalDamageTrigger extends TriggerComponent {
 
         TookMagicalDamageTrigger trigger = this;
 
-        BukkitTask bukkitTask = new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
                 TriggerListener.startListeningTookMagicalDamage(target, trigger);
             }
         }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
-
-        SkillDataManager.onRepeatTaskCreate(target, bukkitTask);
     }
 }

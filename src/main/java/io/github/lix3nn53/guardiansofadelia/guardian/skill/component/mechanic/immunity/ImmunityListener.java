@@ -10,6 +10,7 @@ import java.util.List;
 public class ImmunityListener {
 
     private static HashMap<LivingEntity, List<EntityDamageEvent.DamageCause>> entityToImmunity = new HashMap<>();
+    private static List<LivingEntity> invincibleEntities = new ArrayList<>();
 
     public static void addImmunity(LivingEntity livingEntity, EntityDamageEvent.DamageCause damageCause) {
         if (entityToImmunity.containsKey(livingEntity)) {
@@ -30,10 +31,20 @@ public class ImmunityListener {
     }
 
     public static boolean isImmune(LivingEntity livingEntity, EntityDamageEvent.DamageCause damageCause) {
+        if (invincibleEntities.contains(livingEntity)) return true;
+
         if (entityToImmunity.containsKey(livingEntity)) {
             List<EntityDamageEvent.DamageCause> damageCauses = entityToImmunity.get(livingEntity);
             return damageCauses.contains(damageCause);
         }
         return false;
+    }
+
+    public static void addInvincible(LivingEntity livingEntity) {
+        invincibleEntities.add(livingEntity);
+    }
+
+    public static void removeInvincible(LivingEntity livingEntity) {
+        invincibleEntities.remove(livingEntity);
     }
 }

@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.RemoveNearbyHologramMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.FlagCondition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram.HologramMechanic;
@@ -82,7 +83,7 @@ public class HunterSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Explosive Arrow", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Explosive Arrow", Material.IRON_HOE, 20, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
 
         List<Integer> projectileAmounts = new ArrayList<>();
@@ -152,7 +153,7 @@ public class HunterSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Volley", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Volley", Material.IRON_HOE, 22, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -214,7 +215,7 @@ public class HunterSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Hookshot", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Hookshot", Material.IRON_HOE, 32, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -288,7 +289,7 @@ public class HunterSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Piercing Arrow", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Piercing Arrow", Material.IRON_HOE, 21, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
@@ -344,7 +345,7 @@ public class HunterSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Bear Trap", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Bear Trap", Material.IRON_HOE, 55, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -370,10 +371,10 @@ public class HunterSkills {
         ticks.add(60);
         ticks.add(60);
         List<Integer> amplifiers = new ArrayList<>();
-        amplifiers.add(2);
-        amplifiers.add(2);
-        amplifiers.add(2);
-        amplifiers.add(2);
+        amplifiers.add(999);
+        amplifiers.add(999);
+        amplifiers.add(999);
+        amplifiers.add(999);
         PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, amplifiers);
         PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
         SilenceMechanic silenceMechanic = new SilenceMechanic(ticks);
@@ -383,7 +384,6 @@ public class HunterSkills {
         //Add RemoveMechanic and RepeatCancelMechanic to FlagCondition's children
         FlagCondition shouldStopSkill = new FlagCondition("shouldStopSkill", true);
 
-        //TODO add remember mechanic to set/check flags on hologram and remove it after skill in done
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(hologramMechanic);
         hologramMechanic.addChildren(repeatMechanic);
@@ -393,6 +393,7 @@ public class HunterSkills {
         areaTarget.addChildren(stopJumping);
         areaTarget.addChildren(stopWalking);
         areaTarget.addChildren(silenceMechanic);
+        areaTarget.addChildren(new RemoveNearbyHologramMechanic(radiuses, ChatColor.DARK_GRAY + "< Trap %caster% >"));
         SelfTarget selfTargetForFlagSet = new SelfTarget();
         areaTarget.addChildren(selfTargetForFlagSet);
         selfTargetForFlagSet.addChildren(setRemoveFlag);
@@ -402,7 +403,6 @@ public class HunterSkills {
         repeatMechanic.addChildren(selfTargetForFlagCondition);
         selfTargetForFlagCondition.addChildren(shouldStopSkill);
 
-        shouldStopSkill.addChildren(new RemoveMechanic());
         shouldStopSkill.addChildren(new RepeatCancelMechanic());
         shouldStopSkill.addChildren(new FlagRemoveMechanic("shouldStopSkill"));
 

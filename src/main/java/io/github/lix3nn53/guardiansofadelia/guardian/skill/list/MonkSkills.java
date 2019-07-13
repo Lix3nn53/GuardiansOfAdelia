@@ -73,7 +73,7 @@ public class MonkSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Iron Fist", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Iron Fist", Material.IRON_HOE, 21, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -137,7 +137,7 @@ public class MonkSkills {
         cooldowns.add(2);
         cooldowns.add(2);
 
-        Skill skill = new Skill("Tumble", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Tumble", Material.IRON_HOE, 33, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -227,7 +227,7 @@ public class MonkSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Serenity", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Serenity", Material.IRON_HOE, 35, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -320,7 +320,7 @@ public class MonkSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Mark of Ocean", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Mark of Ocean", Material.IRON_HOE, 60, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -413,7 +413,7 @@ public class MonkSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Aqua Prison", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Aqua Prison", Material.IRON_HOE, 25, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 

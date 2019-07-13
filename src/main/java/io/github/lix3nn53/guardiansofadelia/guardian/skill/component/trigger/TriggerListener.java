@@ -88,9 +88,9 @@ public class TriggerListener {
         playerToMeleeAttackTrigger.put(player, meleeAttackTrigger);
     }
 
-    public static void onPlayerMeleeAttack(Player player) {
+    public static void onPlayerMeleeAttack(Player player, LivingEntity target) {
         if (playerToMeleeAttackTrigger.containsKey(player)) {
-            playerToMeleeAttackTrigger.get(player).callback(player);
+            playerToMeleeAttackTrigger.get(player).callback(player, target);
             playerToMeleeAttackTrigger.remove(player);
         }
     }
@@ -99,9 +99,9 @@ public class TriggerListener {
         playerToRangedAttackTrigger.put(player, rangedAttackTrigger);
     }
 
-    public static void onPlayerRangedAttack(Player player) {
+    public static void onPlayerRangedAttack(Player player, LivingEntity target) {
         if (playerToRangedAttackTrigger.containsKey(player)) {
-            playerToRangedAttackTrigger.get(player).callback(player);
+            playerToRangedAttackTrigger.get(player).callback(player, target);
             playerToRangedAttackTrigger.remove(player);
         }
     }
@@ -110,9 +110,9 @@ public class TriggerListener {
         playerToMagicAttackTrigger.put(player, magicAttackTrigger);
     }
 
-    public static void onPlayerMagicAttack(Player player) {
+    public static void onPlayerMagicAttack(Player player, LivingEntity target) {
         if (playerToMagicAttackTrigger.containsKey(player)) {
-            playerToMagicAttackTrigger.get(player).callback(player);
+            playerToMagicAttackTrigger.get(player).callback(player, target);
             playerToMagicAttackTrigger.remove(player);
         }
     }

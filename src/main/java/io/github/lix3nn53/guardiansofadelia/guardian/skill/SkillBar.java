@@ -105,6 +105,27 @@ public class SkillBar {
         return true;
     }
 
+    public boolean resetSkillPoints() {
+        investedSkillPoints.clear();
+        investedSkillPoints.add(0);
+        investedSkillPoints.add(0);
+        investedSkillPoints.add(0);
+        investedSkillPoints.add(0);
+        investedSkillPoints.add(0);
+
+        for (int skillIndex = 0; skillIndex < 5; skillIndex++) {
+            Skill skill = SkillList.getSkill(rpgClass, skillIndex);
+
+            InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
+            if (initializeTrigger != null) {
+                TriggerListener.onSkillDowngrade(player, initializeTrigger, 0);
+            }
+
+            remakeSkillBarIcon(skillIndex);
+        }
+        return true;
+    }
+
     public int getInvestedSkillPoints(int skillIndex) {
         return investedSkillPoints.get(skillIndex);
     }

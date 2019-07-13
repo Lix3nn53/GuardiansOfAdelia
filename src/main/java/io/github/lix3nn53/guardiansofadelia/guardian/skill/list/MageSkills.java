@@ -77,7 +77,7 @@ public class MageSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Fireball", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Fireball", Material.IRON_HOE, 12, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
 
         List<Integer> projectileAmounts = new ArrayList<>();
@@ -143,7 +143,7 @@ public class MageSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Lightning Bolt", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Lightning Bolt", Material.IRON_HOE, 7, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
 
         List<Integer> projectileAmounts = new ArrayList<>();
@@ -212,8 +212,25 @@ public class MageSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Shockwave", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Shockwave", Material.IRON_HOE, 11, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+        SelfTarget selfTarget = new SelfTarget();
+
+        List<Double> areas = new ArrayList<>();
+        areas.add(3D);
+        areas.add(3D);
+        areas.add(3D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+
+        List<Double> speeds = new ArrayList<>();
+        speeds.add(1.2D);
+        speeds.add(1.4D);
+        speeds.add(1.6D);
+        PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
+
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(areaTarget);
+        areaTarget.addChildren(pushMechanic);
 
         return skill;
     }
@@ -260,7 +277,7 @@ public class MageSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Mental Fortitude", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Mental Fortitude", Material.IRON_HOE, 10, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
@@ -335,20 +352,25 @@ public class MageSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Inferno", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Inferno", Material.IRON_HOE, 30, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Double> ranges = new ArrayList<>();
         ranges.add(12D);
+        ranges.add(12D);
+        ranges.add(12D);
         SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
 
         List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(16);
+        projectileAmounts.add(16);
         projectileAmounts.add(16);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 1.9, projectileAmounts, 0,
                 0, 0, 200, true, Fireball.class);
 
         List<Integer> repeatAmounts = new ArrayList<>();
+        repeatAmounts.add(2);
         repeatAmounts.add(2);
         repeatAmounts.add(2);
         repeatAmounts.add(2);
@@ -360,8 +382,13 @@ public class MageSkills {
         repeatMechanic.addChildren(projectileMechanic);
         List<Double> damages = new ArrayList<>();
         damages.add(16D);
+        damages.add(16D);
+        damages.add(16D);
         projectileMechanic.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
         List<Integer> ticks = new ArrayList<>();
+        ticks.add(80);
+        ticks.add(80);
+        ticks.add(80);
         ticks.add(80);
         projectileMechanic.addChildren(new FireMechanic(ticks));
 

@@ -226,15 +226,15 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 RPGClass rpgClass = activeCharacter.getRpgClass();
                 if (damageType.equals(DamageMechanic.DamageType.MAGIC)) { //Ranged overrides Magic so check magic first. You can not deal Magic damage without skills.
                     damage += rpgCharacterStats.getTotalMagicDamage(player, rpgClass); //add to spell damage
-                    TriggerListener.onPlayerMagicAttack(player);
+                    TriggerListener.onPlayerMagicAttack(player, livingTarget);
                 } else if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
                     if (isSkill) { //add full ranged damage to skills
                         damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClass);
-                        TriggerListener.onPlayerMagicAttack(player);
+                        TriggerListener.onPlayerMagicAttack(player, livingTarget);
                     } else { //add fire element and physical damage buff to projectiles fired without skills involved
                         damage += rpgCharacterStats.getFire().getIncrement();
                         damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
-                        TriggerListener.onPlayerRangedAttack(player);
+                        TriggerListener.onPlayerRangedAttack(player, livingTarget);
                     }
                 } else { //melee
                     ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
@@ -242,7 +242,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                     if (isSkill) { //Add full melee damage to skills
                         damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClass);
-                        TriggerListener.onPlayerMagicAttack(player);
+                        TriggerListener.onPlayerMagicAttack(player, livingTarget);
                     } else if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
                             || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
                         //Normal melee attack. Check for requirements then add fire and offhand bonus
@@ -277,7 +277,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         }
 
                         damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
-                        TriggerListener.onPlayerMeleeAttack(player);
+                        TriggerListener.onPlayerMeleeAttack(player, livingTarget);
                     }
                 }
 

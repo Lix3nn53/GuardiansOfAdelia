@@ -41,7 +41,6 @@ public class WarriorSkills {
         return skills;
     }
 
-    //TODO fix
     private static Skill getOne() {
         List<String> description = new ArrayList<>();
         description.add("Deal damage to nearby enemies");
@@ -82,7 +81,7 @@ public class WarriorSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Power Slash", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Power Slash", Material.IRON_HOE, 15, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -147,7 +146,7 @@ public class WarriorSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Flame Burst", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Flame Burst", Material.IRON_HOE, 57, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -221,7 +220,7 @@ public class WarriorSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Victory Flag", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Victory Flag", Material.IRON_HOE, 9, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -314,7 +313,7 @@ public class WarriorSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Death Rattle", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Death Rattle", Material.IRON_HOE, 47, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
@@ -385,7 +384,7 @@ public class WarriorSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Grand Skyfall", Material.ENCHANTED_BOOK, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Grand Skyfall", Material.IRON_HOE, 44, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
