@@ -594,6 +594,10 @@ public class MyInventoryClickEvent implements Listener {
         } else if (title.equals(ChatColor.AQUA + "Revive Gui")) {
             if (slot == 5) {
                 TombManager.startSearch(player);
+                player.closeInventory(); //calling inventory close event after startSearch doesn't cancel search
+            } else if (slot == 3) {
+                //inventory close event cancels tomb search so no need to call it twice
+                player.closeInventory();
             }
         } else if (title.equals(ChatColor.GOLD + "Bazaar")) {
             if (currentType.equals(Material.LIME_WOOL)) {

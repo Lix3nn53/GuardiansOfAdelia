@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
+import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -45,14 +46,17 @@ public class MyInventoryCloseEvent implements Listener {
                     if (bazaar != null) {
                         bazaar.removeCustomer(player);
                     }
-                } else if (guardianData.hasBazaar()) {
+                } else {
                     String title = event.getView().getTitle();
-                    if (title.equals(ChatColor.GOLD + "Edit your bazaar")) {
-                        Bazaar bazaar = guardianData.getBazaar();
-                        bazaar.setOpen(true);
+                    if (title.equals(ChatColor.AQUA + "Revive Gui")) {
+                        TombManager.cancelSearch(player);
+                    } else if (guardianData.hasBazaar()) {
+                        if (title.equals(ChatColor.GOLD + "Edit your bazaar")) {
+                            Bazaar bazaar = guardianData.getBazaar();
+                            bazaar.setOpen(true);
+                        }
                     }
                 }
-
                 guardianData.clearActiveGui();
             }
 

@@ -127,7 +127,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
             w.setGameRule(GameRule.MOB_GRIEFING, false);
             w.setGameRule(GameRule.NATURAL_REGENERATION, false);
             w.setGameRule(GameRule.SHOW_DEATH_MESSAGES, false);
-            w.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, false);
+            w.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
             w.setGameRule(GameRule.DISABLE_RAIDS, true);
             w.setTime(3000);
             if (w.getName().equals("arena")) {

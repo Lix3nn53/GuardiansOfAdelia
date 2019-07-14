@@ -157,9 +157,18 @@ public class TombManager {
         }
     }
 
+    public static void cancelSearch(Player player) {
+        if (player.getGameMode().equals(GameMode.ADVENTURE)) {
+            if (playerToTomb.containsKey(player)) {
+                Tomb tomb = playerToTomb.get(player);
+                tomb.remove();
+                player.sendMessage(ChatColor.GREEN + "You are spawned in nearest town..");
+            }
+        }
+    }
+
     public static void startSearch(Player player) {
         if (playerToTomb.containsKey(player)) {
-            player.closeInventory();
             player.setGameMode(GameMode.SPECTATOR);
         } else {
             player.sendMessage(ChatColor.RED + "You don't have a tomb");
