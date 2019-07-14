@@ -6,6 +6,9 @@ import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.event.NPCDespawnEvent;
+import net.citizensnpcs.api.event.NPCSpawnEvent;
+import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Entity;
@@ -26,12 +29,22 @@ public class MyChunkEvents implements Listener {
             if (shouldChunkEventRemove(chunkEntity)) {
                 SpawnerManager.onMobDeath(chunkEntity);
                 chunkEntity.remove();
-            } else {
-                createQuestIconBase(chunkEntity);
             }
         }
         SpawnerManager.activateSpawnersOnChunk(chunk);
         createCustomEntitiesOnChunkLoad(chunk);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onNPCSpawnEvent(NPCSpawnEvent event) {
+        NPC npc = event.getNPC();
+        QuestNPCManager.onNPCSpawn(npc);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onNPCDespawnEvent(NPCDespawnEvent event) {
+        NPC npc = event.getNPC();
+        QuestNPCManager.onNPCDespawn(npc);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -63,13 +76,5 @@ public class MyChunkEvents implements Listener {
         BazaarManager.onChunkLoad(chunkKey);
         TombManager.onChunkLoad(chunkKey);
         PortalManager.onChunkLoad(chunkKey);
-    }
-
-    private void createQuestIconBase(Entity chunkEntity) {
-        NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
-        if (npcRegistry.isNPC(chunkEntity)) {
-            //create quest icon on
-            QuestNPCManager.onChunkLoad(chunkEntity);
-        }
     }
 }

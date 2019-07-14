@@ -10,12 +10,10 @@ import io.github.lix3nn53.guardiansofadelia.quests.QuestIconType;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -213,9 +211,7 @@ public class QuestNPCManager {
         }
     }
 
-    public static void onChunkLoad(Entity entity) {
-        NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
-        NPC npc = npcRegistry.getNPC(entity);
+    public static void onNPCSpawn(NPC npc) {
         int npcId = npc.getId();
         if (npcNoToCanGiveQuests.containsKey(npcId)) {
             //create main hologram to disguise to players
@@ -225,6 +221,17 @@ public class QuestNPCManager {
             //create main hologram to disguise to players
             createHologramBase(npc, npcId);
             setNpcHologramForAllPlayers(npcId);
+        }
+    }
+
+    public static void onNPCDespawn(NPC npc) {
+        int npcId = npc.getId();
+        if (npcNoToHologram.containsKey(npcId)) {
+            QuestHologram questHologram = npcNoToHologram.get(npcId);
+            ArmorStand armorStand = questHologram.getHolo().getArmorStand();
+            if (armorStand.isValid()) {
+                armorStand.remove();
+            }
         }
     }
 
