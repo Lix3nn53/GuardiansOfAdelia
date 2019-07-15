@@ -43,9 +43,11 @@ public class LandTrigger extends TriggerComponent {
     /**
      * The callback when player lands that applies child components
      */
-    public void callback(Player target) {
+    public boolean callback(Player target) {
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(target);
-        executeChildren(caster, skillLevel, targets);
+        boolean cast = executeChildren(caster, skillLevel, targets);
+
+        return cast;
     }
 }

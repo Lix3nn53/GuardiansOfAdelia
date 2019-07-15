@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -27,10 +28,11 @@ public class SingleTarget extends TargetComponent {
         List<LivingEntity> single = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            List<LivingEntity> singleTargets = TargetHelper.getLivingTargets(target, range.get(skillLevel - 1), tolerance);
-            singleTargets = determineTargets(caster, singleTargets);
-            single.addAll(singleTargets);
+            LivingEntity singleTargets = TargetHelper.getLivingTarget(target, range.get(skillLevel - 1), tolerance);
+            single.add(singleTargets);
         }
+
+        single = determineTargets(caster, single);
 
         if (single.isEmpty()) return false;
 
@@ -41,9 +43,9 @@ public class SingleTarget extends TargetComponent {
     public List<String> getSkillLoreAdditions(int skillLevel) {
         ArrayList<String> lore = new ArrayList<>();
         if (skillLevel == 0 || skillLevel == range.size()) {
-            lore.add("Radius: " + range.get(skillLevel));
+            lore.add(ChatColor.YELLOW + "Radius: " + range.get(skillLevel));
         } else {
-            lore.add("Radius: " + range.get(skillLevel - 1) + " -> " + range.get(skillLevel));
+            lore.add(ChatColor.YELLOW + "Radius: " + range.get(skillLevel - 1) + " -> " + range.get(skillLevel));
         }
         return lore;
     }

@@ -19,13 +19,15 @@ public class MessageMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
+        boolean messageSent = false;
         for (LivingEntity ent : targets) {
             if (ent instanceof Player) {
+                messageSent = true;
                 ent.sendMessage(message);
             }
         }
 
-        return true;
+        return messageSent;
     }
 
     @Override

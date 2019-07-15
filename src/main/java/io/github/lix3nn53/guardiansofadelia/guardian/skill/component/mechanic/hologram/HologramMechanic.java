@@ -39,45 +39,50 @@ public class HologramMechanic extends MechanicComponent {
      *
      * @param caster
      * @param skillLevel
-     * @param list
+     * @param targets
      * @return
      */
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> list) {
-        Location baseLocation = caster.getLocation();
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+        if (targets.isEmpty()) return false;
 
-        ArmorStand model = (ArmorStand) baseLocation.getWorld().spawnEntity(baseLocation, EntityType.ARMOR_STAND);
-        if (HELMET != null) {
-            ItemStack itemStack = new ItemStack(HELMET);
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setCustomModelData(CUSTOMMODELDATA);
-            itemMeta.setUnbreakable(true);
-            itemStack.setItemMeta(itemMeta);
-            model.setHelmet(itemStack);
-        }
-
-        if (!DISPLAYTEXT.equals("displayText")) {
-            final String text = DISPLAYTEXT.replaceAll("%caster%", caster.getName());
-            model.setCustomName(text);
-            model.setCustomNameVisible(true);
-        }
-
-        model.setInvulnerable(true);
-        model.setGravity(false);
-        model.setVisible(false);
-        model.setSmall(true);
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (!model.isDead()) {
-                    model.remove();
-                }
-            }
-        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * DURATION.get(skillLevel - 1));
-
-        //pass ArmorStand to children
         List<LivingEntity> armorStandList = new ArrayList<>();
-        armorStandList.add(model);
+
+        for (LivingEntity target : targets) {
+            Location baseLocation = target.getLocation();
+
+            ArmorStand model = (ArmorStand) baseLocation.getWorld().spawnEntity(baseLocation, EntityType.ARMOR_STAND);
+            if (HELMET != null) {
+                ItemStack itemStack = new ItemStack(HELMET);
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                itemMeta.setCustomModelData(CUSTOMMODELDATA);
+                itemMeta.setUnbreakable(true);
+                itemStack.setItemMeta(itemMeta);
+                model.setHelmet(itemStack);
+            }
+
+            if (!DISPLAYTEXT.equals("displayText")) {
+                final String text = DISPLAYTEXT.replaceAll("%caster%", caster.getName());
+                model.setCustomName(text);
+                model.setCustomNameVisible(true);
+            }
+
+            model.setInvulnerable(true);
+            model.setGravity(false);
+            model.setVisible(false);
+            model.setSmall(true);
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    if (!model.isDead()) {
+                        model.remove();
+                    }
+                }
+            }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * DURATION.get(skillLevel - 1));
+
+            //pass ArmorStand to children
+            armorStandList.add(model);
+        }
 
         return executeChildren(caster, skillLevel, armorStandList);
     }

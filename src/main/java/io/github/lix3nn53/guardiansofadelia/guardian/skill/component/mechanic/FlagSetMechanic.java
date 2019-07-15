@@ -21,6 +21,8 @@ public class FlagSetMechanic extends MechanicComponent {
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+        if (targets.isEmpty()) return false;
+
         for (LivingEntity target : targets) {
             SkillDataManager.addFlag(target, key);
         }

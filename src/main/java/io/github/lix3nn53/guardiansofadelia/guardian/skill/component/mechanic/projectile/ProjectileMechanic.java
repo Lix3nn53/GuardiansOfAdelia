@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.packetwrapper.WrapperPlayS
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.*;
@@ -49,8 +50,6 @@ public class ProjectileMechanic extends MechanicComponent {
     //very custom things
     private boolean addCasterAsFirstTargetIfHitSuccess;
     private boolean addCasterAsSecondTargetIfHitFail;
-
-    private String castKey;
 
     public ProjectileMechanic(SpreadType spreadType, double speed,
                               List<Integer> amount, double angle, double right, double upward, double forward,
@@ -148,7 +147,8 @@ public class ProjectileMechanic extends MechanicComponent {
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
-        this.castKey = castKey;
+        if (targets.isEmpty()) return false;
+
         this.caster = caster;
 
         // Fire from each target
@@ -218,7 +218,7 @@ public class ProjectileMechanic extends MechanicComponent {
         }
         ProjectileListener.onSkillProjectileShoot(projectiles, this, skillLevel, (int) Math.ceil(range / Math.abs(speed)));
 
-        return targets.size() > 0;
+        return true;
     }
 
     /**
@@ -267,9 +267,9 @@ public class ProjectileMechanic extends MechanicComponent {
     public List<String> getSkillLoreAdditions(int skillLevel) {
         ArrayList<String> lore = new ArrayList<>();
         if (skillLevel == 0 || skillLevel == amount.size()) {
-            lore.add("Projectile amount: " + amount.get(skillLevel));
+            lore.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel));
         } else {
-            lore.add("Projectile amount: " + amount.get(skillLevel - 1) + " -> " + amount.get(skillLevel));
+            lore.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel - 1) + " -> " + amount.get(skillLevel));
         }
 
         //TODO

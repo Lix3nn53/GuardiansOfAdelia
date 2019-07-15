@@ -23,16 +23,18 @@ public class FlagCondition extends ConditionComponent {
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+        if (targets.isEmpty()) return false;
 
+        boolean success = false;
         for (LivingEntity target : targets) {
             boolean hasFlag = SkillDataManager.hasFlag(target, key);
 
             if (hasFlag == isSet) {
-                executeChildren(caster, skillLevel, targets);
+                success = executeChildren(caster, skillLevel, targets) || success;
             }
         }
 
-        return false;
+        return success;
     }
 
     @Override

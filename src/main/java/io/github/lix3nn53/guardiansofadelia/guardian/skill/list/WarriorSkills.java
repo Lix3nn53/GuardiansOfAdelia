@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Self
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookPhysicalDamageTrigger;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -88,6 +89,9 @@ public class WarriorSkills {
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(3D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
+        SelfTarget selfTargetForSound = new SelfTarget();
+        areaTarget.addChildren(selfTargetForSound);
+        selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_NORMAL));
 
         List<Double> damages = new ArrayList<>();
         damages.add(10D);
@@ -172,6 +176,7 @@ public class WarriorSkills {
         skill.addTrigger(selfTarget);
 
         selfTarget.addChildren(projectileMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_FIRE_SLASH));
 
         projectileMechanic.addChildren(damageMechanic);
         projectileMechanic.addChildren(launchMechanic);
@@ -259,6 +264,7 @@ public class WarriorSkills {
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(hologramMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_BUFF));
         hologramMechanic.addChildren(repeatMechanic);
 
         //repeat part 1, area and effects
@@ -337,7 +343,7 @@ public class WarriorSkills {
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(tookPhysicalDamageTrigger);
         tookPhysicalDamageTrigger.addChildren(healthCondition);
-        healthCondition.addChildren(messageMechanic);
+        healthCondition.addChildren(new SoundMechanic(GoaSound.SKILL_SCREAM));
         healthCondition.addChildren(potionEffectMechanic);
 
         return skill;
@@ -420,11 +426,13 @@ public class WarriorSkills {
         skill.addTrigger(selfTarget);
 
         selfTarget.addChildren(launchMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_JUMP));
         selfTarget.addChildren(immunityMechanic);
         selfTarget.addChildren(particleAnimationMechanic);
         selfTarget.addChildren(landTrigger);
 
         landTrigger.addChildren(particleMechanic);
+        landTrigger.addChildren(new SoundMechanic(GoaSound.SKILL_POWERFUL_LANDING));
         landTrigger.addChildren(immunityRemoveMechanic);
         landTrigger.addChildren(areaTarget);
 

@@ -189,7 +189,6 @@ public class SkillBar {
         }
 
         if (skillsOnCooldown.containsKey(skillIndex)) {
-            //TODO playSingleParticle sound to player on cast fail
             return false;
         }
 
@@ -210,7 +209,9 @@ public class SkillBar {
             return false;
         }
 
-        skill.cast(player, skillLevel, null); //cast ends when this returns
+        boolean cast = skill.cast(player, skillLevel, null);//cast ends when this returns
+
+        if (!cast) return false; //dont go on cooldown if cast failed
 
         int cooldown = skill.getCooldown(skillLevel);
         PlayerInventory inventory = player.getInventory();

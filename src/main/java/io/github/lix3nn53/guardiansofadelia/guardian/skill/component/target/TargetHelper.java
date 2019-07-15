@@ -35,6 +35,23 @@ public class TargetHelper {
         return targets;
     }
 
+    public static LivingEntity getLivingTarget(LivingEntity source, double range, double tolerance) {
+        List<LivingEntity> targets = getLivingTargets(source, range, tolerance);
+        if (targets.size() == 0) return null;
+        LivingEntity target = targets.get(0);
+        double minDistance = target.getLocation().distanceSquared(source.getLocation());
+        for (LivingEntity entity : targets) {
+
+            double distance = entity.getLocation().distanceSquared(source.getLocation());
+            if (distance < minDistance) {
+
+                minDistance = distance;
+                target = entity;
+            }
+        }
+        return target;
+    }
+
     public static boolean isInFront(Entity entity, Entity target) {
         Vector facing = entity.getLocation().getDirection();
         Vector relative = target.getLocation().subtract(entity.getLocation()).toVector();

@@ -12,6 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Self
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMeleeDamageTrigger;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -87,6 +88,10 @@ public class MageSkills {
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(3D);
+        radiuses.add(4D);
+        radiuses.add(3D);
+        radiuses.add(3D);
+        radiuses.add(3D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
         List<Double> damages = new ArrayList<>();
@@ -96,6 +101,7 @@ public class MageSkills {
         projectileMechanic.addChildren(areaTarget);
 
         selfTarget.addChildren(projectileMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_FIRE_SLASH));
 
         skill.addTrigger(selfTarget);
 
@@ -164,8 +170,10 @@ public class MageSkills {
         areaTarget.addChildren(new SilenceMechanic(durations));
 
         projectileMechanic.addChildren(areaTarget);
+        projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_FLUX));
 
         selfTarget.addChildren(projectileMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_NORMAL));
 
         skill.addTrigger(selfTarget);
 
@@ -231,6 +239,9 @@ public class MageSkills {
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(areaTarget);
         areaTarget.addChildren(pushMechanic);
+        SelfTarget selfTargetForSound = new SelfTarget();
+        areaTarget.addChildren(selfTargetForSound);
+        selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_SONIC_BOOM));
 
         return skill;
     }

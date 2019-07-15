@@ -288,7 +288,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 double random = Math.random();
                 boolean isCritical = false;
                 if (random <= totalCriticalChance) {
-                    damage = damage * 1.6D;
+                    damage += damage * rpgCharacterStats.getTotalCriticalDamageBonus();
                     isCritical = true;
                     Particle particle = Particle.CRIT;
                     targetLocation.getWorld().spawnParticle(particle, targetLocation.clone().add(0, 0.25, 0), 6);

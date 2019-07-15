@@ -3,16 +3,18 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.DirectionCondition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityRemoveMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.MeleeAttackTrigger;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import org.bukkit.Material;
 import org.bukkit.entity.Egg;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -37,8 +39,8 @@ public class RogueSkills {
 
     private static Skill getOne() {
         List<String> description = new ArrayList<>();
-        description.add("Throw dark particles around you");
-        description.add("that deals damage and blinds enemies");
+        description.add("Jump towards your target and deal damage.");
+        description.add("If you are behind your target also apply slow.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -76,15 +78,20 @@ public class RogueSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Smoke", Material.IRON_HOE, 32, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Claw Swipe", Material.IRON_HOE, 32, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
-        List<Double> areas = new ArrayList<>();
-        areas.add(3D);
-        areas.add(3D);
-        areas.add(3D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+        List<Double> ranges = new ArrayList<>();
+        ranges.add(6D);
+        ranges.add(6D);
+        ranges.add(6D);
+        ranges.add(6D);
+        ranges.add(6D);
+        ranges.add(6D);
+        SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
+
+        DirectionCondition directionCondition = new DirectionCondition(false);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(60);
@@ -92,14 +99,13 @@ public class RogueSkills {
         ticks.add(60);
         ticks.add(60);
         List<Integer> amplifiers = new ArrayList<>();
-        amplifiers.add(999);
-        amplifiers.add(999);
-        amplifiers.add(999);
-        amplifiers.add(999);
-        PotionEffectMechanic blindness = new PotionEffectMechanic(PotionEffectType.BLINDNESS, ticks, amplifiers);
+        amplifiers.add(3);
+        amplifiers.add(4);
+        amplifiers.add(5);
+        amplifiers.add(6);
+        PotionEffectMechanic slow = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
 
-        selfTarget.addChildren(areaTarget);
-        areaTarget.addChildren(blindness);
+        WarpTargetMechanic warpTargetMechanic = new WarpTargetMechanic(false);
 
         List<Double> damages = new ArrayList<>();
         damages.add(3D);
@@ -108,9 +114,14 @@ public class RogueSkills {
         damages.add(3D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
-        areaTarget.addChildren(damageMechanic);
-
         skill.addTrigger(selfTarget);
+        selfTarget.addChildren(singleTarget);
+        singleTarget.addChildren(directionCondition);
+        directionCondition.addChildren(slow);
+
+        singleTarget.addChildren(warpTargetMechanic);
+        singleTarget.addChildren(damageMechanic);
+        singleTarget.addChildren(new SoundMechanic(GoaSound.SKILL_POISON_SLASH));
 
         return skill;
     }
@@ -183,6 +194,7 @@ public class RogueSkills {
         selfTarget.addChildren(warpMechanic);
         selfTarget.addChildren(immunityMechanic);
         selfTarget.addChildren(landTrigger);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_PROJECTILE_VOID));
 
         landTrigger.addChildren(immunityRemoveMechanic);
 
@@ -252,6 +264,7 @@ public class RogueSkills {
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(repeatMechanic);
         repeatMechanic.addChildren(projectileMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_THROW_SMALL_OBJECT));
 
         List<Double> damages = new ArrayList<>();
         damages.add(3D);
@@ -332,6 +345,7 @@ public class RogueSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
+        //TODO skill including critic damage bonus
         description.add("Prepare for 3 seconds then");
         description.add("jump behind your target and");
         description.add("apply wither effect");
@@ -386,6 +400,23 @@ public class RogueSkills {
         SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
 
         WarpTargetMechanic warpTargetMechanic = new WarpTargetMechanic(false);
+
+
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        List<Integer> amplifiers = new ArrayList<>();
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        List<Double> multipliers = new ArrayList<>();
+        multipliers.add(0.1);
+        BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks);
+        BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, multipliers, ticks);
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, ticks, amplifiers);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(singleTarget);

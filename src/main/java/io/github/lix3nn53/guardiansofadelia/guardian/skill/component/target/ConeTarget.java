@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -28,9 +29,10 @@ public class ConeTarget extends TargetComponent {
 
         for (LivingEntity target : targets) {
             List<LivingEntity> coneTargets = TargetHelper.getConeTargets(target, angle, range);
-            coneTargets = determineTargets(caster, coneTargets);
             cone.addAll(coneTargets);
         }
+
+        cone = determineTargets(caster, cone);
 
         if (cone.isEmpty()) return false;
 
@@ -40,7 +42,7 @@ public class ConeTarget extends TargetComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("Cone range: " + range);
+        lore.add(ChatColor.YELLOW + "Cone range: " + range);
         return lore;
     }
 }

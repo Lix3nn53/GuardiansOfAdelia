@@ -34,6 +34,7 @@ public class BuffMechanic extends MechanicComponent {
 
         double multiplierToUse = multiplier.get(skillLevel - 1);
 
+        boolean buffedAPlayer = false;
         for (LivingEntity ent : targets) {
             if (ent instanceof Player) {
                 Player player = (Player) ent;
@@ -46,10 +47,13 @@ public class BuffMechanic extends MechanicComponent {
                         rpgCharacterStats.addToBuffMultiplier(buffType, multiplierToUse);
 
                         buffedPlayers.add(player);
+                        buffedAPlayer = true;
                     }
                 }
             }
         }
+
+        if (!buffedAPlayer) return false;
 
         new BukkitRunnable() { //remove buffs from buffed players
 
@@ -76,11 +80,11 @@ public class BuffMechanic extends MechanicComponent {
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
         if (skillLevel == 0 || skillLevel == multiplier.size()) {
-            lore.add(buffType.name() + " multiplier: " + multiplier.get(skillLevel));
-            lore.add(buffType.name() + " duration: " + (ticks.get(skillLevel) / 20));
+            lore.add(buffType.toString() + " bonus: " + multiplier.get(skillLevel));
+            lore.add(buffType.toString() + " duration: " + (ticks.get(skillLevel) / 20));
         } else {
-            lore.add(buffType.name() + " multiplier: " + multiplier.get(skillLevel - 1) + "x -> " + multiplier.get(skillLevel) + "x");
-            lore.add(buffType.name() + " duration: " + (ticks.get(skillLevel - 1) / 20) + " seconds -> " + (ticks.get(skillLevel) / 20));
+            lore.add(buffType.toString() + " bonus: " + multiplier.get(skillLevel - 1) + "x -> " + multiplier.get(skillLevel) + "x");
+            lore.add(buffType.toString() + " duration: " + (ticks.get(skillLevel - 1) / 20) + " seconds -> " + (ticks.get(skillLevel) / 20));
         }
 
         return lore;

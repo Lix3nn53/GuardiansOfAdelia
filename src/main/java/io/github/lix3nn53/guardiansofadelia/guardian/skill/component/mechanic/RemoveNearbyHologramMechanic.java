@@ -1,5 +1,6 @@
-package io.github.lix3nn53.guardiansofadelia.guardian.skill.component;
+package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -24,10 +25,10 @@ public class RemoveNearbyHologramMechanic extends MechanicComponent {
         double range = ranges.get(skillLevel - 1);
         final String text = displayName.replaceAll("%caster%", caster.getName());
 
+        boolean isRemoved = false;
+
         for (LivingEntity target : targets) {
             List<Entity> nearbyEntities = target.getNearbyEntities(range, range, range);
-
-            boolean isRemoved = false;
 
             for (Entity entity : nearbyEntities) {
                 if (entity instanceof ArmorStand) {
@@ -47,7 +48,7 @@ public class RemoveNearbyHologramMechanic extends MechanicComponent {
             }
         }
 
-        return true;
+        return isRemoved;
     }
 
     @Override

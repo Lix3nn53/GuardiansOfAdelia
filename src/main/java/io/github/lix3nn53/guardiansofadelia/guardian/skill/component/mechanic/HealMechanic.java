@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 
@@ -21,9 +22,12 @@ public class HealMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
+        boolean healed = false;
         for (LivingEntity ent : targets) {
             double currentHealth = ent.getHealth();
             double maxHealth = ent.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+
+            if (currentHealth == maxHealth) continue;
 
             double nextHealth = currentHealth;
 
@@ -44,14 +48,29 @@ public class HealMechanic extends MechanicComponent {
             }
 
             ent.setHealth(nextHealth);
+            healed = true;
         }
 
-        return true;
+        return healed;
     }
 
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
+        if (healAmount.get(skillLevel - 1) > 0) {
+            if (skillLevel == 0 || skillLevel == healAmount.size()) {
+                lore.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel));
+            } else {
+                lore.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel - 1) + " -> " + healAmount.get(skillLevel));
+            }
+        }
+        if (healPercent.get(skillLevel - 1) > 0) {
+            if (skillLevel == 0 || skillLevel == healPercent.size()) {
+                lore.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel) + "%");
+            } else {
+                lore.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel - 1) + "%" + " -> " + healPercent.get(skillLevel) + "%");
+            }
+        }
         return lore;
     }
 }

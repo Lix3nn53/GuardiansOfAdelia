@@ -11,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Self
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -76,7 +77,7 @@ public class ArcherSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Blind Shot", Material.IRON_HOE, 27, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Poison Arrow", Material.IRON_HOE, 27, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -110,10 +111,11 @@ public class ArcherSkills {
         ticks.add(2);
         ticks.add(2);
         ticks.add(2);
-        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.BLINDNESS, ticks, amplifiers);
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.POISON, ticks, amplifiers);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(projectileMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_POISON_ARROW));
         projectileMechanic.addChildren(damageMechanic);
         projectileMechanic.addChildren(potionEffectMechanic);
 
@@ -201,6 +203,7 @@ public class ArcherSkills {
         ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1.4, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.AQUA, 8));
         selfTarget.addChildren(particleAnimationMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_SONIC_BOOM));
 
         return skill;
     }
@@ -275,6 +278,7 @@ public class ArcherSkills {
         selfTarget.addChildren(launchMechanic);
         selfTarget.addChildren(particleAnimationMechanic);
         selfTarget.addChildren(immunityMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_VOID_SIGNAL));
 
         selfTarget.addChildren(landTrigger);
         landTrigger.addChildren(immunityRemoveMechanic);
@@ -411,6 +415,7 @@ public class ArcherSkills {
         selfTarget.addChildren(singleTarget);
         singleTarget.addChildren(repeatMechanic);
         repeatMechanic.addChildren(projectileMechanic);
+        repeatMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_ARROW_RAIN));
         List<Double> damages = new ArrayList<>();
         damages.add(16D);
         projectileMechanic.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));

@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.RemoveNearbyHologramMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.FlagCondition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram.HologramMechanic;
@@ -15,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Self
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.AddPiercingToArrowShootFromCrossbowTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -108,6 +108,7 @@ public class HunterSkills {
         areaTarget.addChildren(pushMechanic);
 
         selfTarget.addChildren(projectileMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_PROJECTILE_ICE));
 
         skill.addTrigger(selfTarget);
         return skill;
@@ -167,6 +168,7 @@ public class HunterSkills {
         projectileMechanic.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
 
         selfTarget.addChildren(projectileMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_MULTI_ARROW));
 
         skill.addTrigger(selfTarget);
 
@@ -231,6 +233,7 @@ public class HunterSkills {
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, false);
 
         selfTarget.addChildren(projectileMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_PROJECTILE_FIRE));
 
         projectileMechanic.addChildren(pushMechanic);
 
@@ -390,6 +393,7 @@ public class HunterSkills {
 
         //repeat part 1, area and effects
         repeatMechanic.addChildren(areaTarget);
+        areaTarget.addChildren(new SoundMechanic(GoaSound.SKILL_STUN_HIT));
         areaTarget.addChildren(stopJumping);
         areaTarget.addChildren(stopWalking);
         areaTarget.addChildren(silenceMechanic);

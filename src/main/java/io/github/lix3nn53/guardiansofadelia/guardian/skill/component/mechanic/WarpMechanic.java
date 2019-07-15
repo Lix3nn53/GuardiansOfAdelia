@@ -26,9 +26,7 @@ public class WarpMechanic extends MechanicComponent {
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
-        if (targets.size() == 0) {
-            return false;
-        }
+        if (targets.size() == 0) return false;
 
         for (LivingEntity target : targets) {
             Vector dir = target.getLocation().getDirection();
@@ -40,7 +38,7 @@ public class WarpMechanic extends MechanicComponent {
             }
             target.teleport(loc.subtract(0, 1, 0));
         }
-        return targets.size() > 0;
+        return true;
     }
 
     @Override

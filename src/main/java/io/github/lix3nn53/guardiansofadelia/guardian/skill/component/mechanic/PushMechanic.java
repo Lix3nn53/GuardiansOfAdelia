@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
@@ -37,7 +38,6 @@ public class PushMechanic extends MechanicComponent {
             targets.remove(0);
         }
 
-        boolean worked = false;
         for (LivingEntity target : targets) {
             final Vector vel = target.getLocation().subtract(center).toVector();
             if (vel.lengthSquared() == 0) {
@@ -50,14 +50,15 @@ public class PushMechanic extends MechanicComponent {
                 vel.multiply(speed.get(skillLevel - 1) / vel.lengthSquared());
             }
             target.setVelocity(vel);
-            worked = true;
         }
-        return worked;
+
+        return true;
     }
 
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.LIGHT_PURPLE + "Push speed: " + speed);
         return lore;
     }
 

@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -62,9 +63,9 @@ public class RepeatMechanic extends MechanicComponent {
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
         if (skillLevel == 0 || skillLevel == repetitions.size()) {
-            lore.add("Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel) + " times");
+            lore.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel) + " times");
         } else {
-            lore.add("Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel - 1) + " times -> " + repetitions.get(skillLevel) + " times");
+            lore.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel - 1) + " times -> " + repetitions.get(skillLevel) + " times");
         }
 
         return lore;

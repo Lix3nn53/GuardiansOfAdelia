@@ -46,8 +46,10 @@ public class TriggerListener {
 
     public static void onPlayerLandGround(Player player) {
         if (playerToLandTrigger.containsKey(player)) {
-            playerToLandTrigger.get(player).callback(player);
-            playerToLandTrigger.remove(player);
+            boolean callback = playerToLandTrigger.get(player).callback(player);
+            if (callback) {
+                playerToLandTrigger.remove(player);
+            }
         }
     }
 
@@ -57,8 +59,10 @@ public class TriggerListener {
 
     public static void onPlayerTookPhysicalDamage(Player player) {
         if (playerToTookPhysicalDamageTrigger.containsKey(player)) {
-            playerToTookPhysicalDamageTrigger.get(player).callback(player);
-            playerToTookPhysicalDamageTrigger.remove(player);
+            boolean callback = playerToTookPhysicalDamageTrigger.get(player).callback(player);
+            if (callback) {
+                playerToTookPhysicalDamageTrigger.remove(player);
+            }
         }
     }
 
@@ -68,8 +72,10 @@ public class TriggerListener {
 
     public static void onPlayerTookMeleeDamage(Player player) {
         if (playerToTookMeleeDamageTrigger.containsKey(player)) {
-            playerToTookMeleeDamageTrigger.get(player).callback(player);
-            playerToTookMeleeDamageTrigger.remove(player);
+            boolean callback = playerToTookMeleeDamageTrigger.get(player).callback(player);
+            if (callback) {
+                playerToTookMeleeDamageTrigger.remove(player);
+            }
         }
     }
 
@@ -79,8 +85,10 @@ public class TriggerListener {
 
     public static void onPlayerTookMagicalDamage(Player player) {
         if (playerToTookMagicalDamageTrigger.containsKey(player)) {
-            playerToTookMagicalDamageTrigger.get(player).callback(player);
-            playerToTookMagicalDamageTrigger.remove(player);
+            boolean callback = playerToTookMagicalDamageTrigger.get(player).callback(player);
+            if (callback) {
+                playerToTookMagicalDamageTrigger.remove(player);
+            }
         }
     }
 
@@ -90,8 +98,10 @@ public class TriggerListener {
 
     public static void onPlayerMeleeAttack(Player player, LivingEntity target) {
         if (playerToMeleeAttackTrigger.containsKey(player)) {
-            playerToMeleeAttackTrigger.get(player).callback(player, target);
-            playerToMeleeAttackTrigger.remove(player);
+            boolean callback = playerToMeleeAttackTrigger.get(player).callback(player, target);
+            if (callback) {
+                playerToMeleeAttackTrigger.remove(player);
+            }
         }
     }
 
@@ -101,8 +111,10 @@ public class TriggerListener {
 
     public static void onPlayerRangedAttack(Player player, LivingEntity target) {
         if (playerToRangedAttackTrigger.containsKey(player)) {
-            playerToRangedAttackTrigger.get(player).callback(player, target);
-            playerToRangedAttackTrigger.remove(player);
+            boolean callback = playerToRangedAttackTrigger.get(player).callback(player, target);
+            if (callback) {
+                playerToRangedAttackTrigger.remove(player);
+            }
         }
     }
 
@@ -112,8 +124,10 @@ public class TriggerListener {
 
     public static void onPlayerMagicAttack(Player player, LivingEntity target) {
         if (playerToMagicAttackTrigger.containsKey(player)) {
-            playerToMagicAttackTrigger.get(player).callback(player, target);
-            playerToMagicAttackTrigger.remove(player);
+            boolean callback = playerToMagicAttackTrigger.get(player).callback(player, target);
+            if (callback) {
+                playerToMagicAttackTrigger.remove(player);
+            }
         }
     }
 

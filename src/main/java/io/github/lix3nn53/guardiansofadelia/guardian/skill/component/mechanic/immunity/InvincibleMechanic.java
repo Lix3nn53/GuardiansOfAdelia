@@ -45,6 +45,11 @@ public class InvincibleMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(int skillLevel) {
         List<String> lore = new ArrayList<>();
+        if (skillLevel == 0 || skillLevel == ticks.size()) {
+            lore.add("Invincible duration: " + (ticks.get(skillLevel) / 20));
+        } else {
+            lore.add("Invincible duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
+        }
         return lore;
     }
 }

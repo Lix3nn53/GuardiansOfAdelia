@@ -149,7 +149,7 @@ public class MonkSkills {
         upward.add(0D);
         upward.add(0D);
         List<Double> forward = new ArrayList<>();
-        forward.add(0D);
+        forward.add(-0.4D);
         forward.add(0D);
         forward.add(0D);
         List<Double> right = new ArrayList<>();

@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -42,7 +43,11 @@ public class MyPlayerItemHeldEvent implements Listener {
                         skillIndex++; //ultimate index is one off
                     }
 
-                    activeCharacter.getSkillBar().castSkill(skillIndex);
+                    boolean success = activeCharacter.getSkillBar().castSkill(skillIndex);
+                    if (!success) {
+                        //play sound special to player on cast fail
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.6f, 0.6f);
+                    }
                     event.setCancelled(true);
                     return;
                 }

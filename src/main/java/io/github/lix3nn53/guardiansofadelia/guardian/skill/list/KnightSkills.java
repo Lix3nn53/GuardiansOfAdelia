@@ -1,10 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.LaunchMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.PushMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.TauntMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
@@ -12,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Area
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMagicalDamageTrigger;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
@@ -92,6 +90,9 @@ public class KnightSkills {
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(areaTarget);
+        SelfTarget selfTargetForSound = new SelfTarget();
+        areaTarget.addChildren(selfTargetForSound);
+        selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_SWORD_MULTI_SLASH));
         areaTarget.addChildren(damageMechanic);
         areaTarget.addChildren(buffMechanic);
 
@@ -156,6 +157,9 @@ public class KnightSkills {
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(areaTarget);
+        SelfTarget selfTargetForSound = new SelfTarget();
+        areaTarget.addChildren(selfTargetForSound);
+        selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_FIRE_SLASH));
         areaTarget.addChildren(launchMechanic);
 
         return skill;
@@ -217,6 +221,9 @@ public class KnightSkills {
         TauntMechanic tauntMechanic = new TauntMechanic();
 
         skill.addTrigger(selfTarget);
+        SelfTarget selfTargetForSound = new SelfTarget();
+        areaTarget.addChildren(selfTargetForSound);
+        selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_SCREAM));
         selfTarget.addChildren(areaTarget);
         areaTarget.addChildren(pushMechanic);
         areaTarget.addChildren(tauntMechanic);
@@ -288,6 +295,7 @@ public class KnightSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
+        //TODO place a giant sword that decreases attacks of nearby enemies
         description.add("Call power of justice, gain movement speed and");
         description.add("jump boost. Also your melee attacks ignites target");
 

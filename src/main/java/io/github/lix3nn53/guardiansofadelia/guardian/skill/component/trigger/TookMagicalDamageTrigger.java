@@ -48,10 +48,12 @@ public class TookMagicalDamageTrigger extends TriggerComponent {
     /**
      * The callback when player lands that applies child components
      */
-    public void callback(Player target) {
+    public boolean callback(Player target) {
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(target);
-        executeChildren(caster, skillLevel, targets);
+        boolean cast = executeChildren(caster, skillLevel, targets);
+
+        if (!cast) return false;
 
         TookMagicalDamageTrigger trigger = this;
 
@@ -61,5 +63,7 @@ public class TookMagicalDamageTrigger extends TriggerComponent {
                 TriggerListener.startListeningTookMagicalDamage(target, trigger);
             }
         }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
+
+        return true;
     }
 }
