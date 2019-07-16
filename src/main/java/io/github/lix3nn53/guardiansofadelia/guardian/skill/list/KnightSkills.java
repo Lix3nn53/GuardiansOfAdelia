@@ -36,21 +36,19 @@ public class KnightSkills {
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
-        reqLevels.add(5);
-        reqLevels.add(10);
-        reqLevels.add(15);
-        reqLevels.add(20);
-        reqLevels.add(25);
-        reqLevels.add(30);
+        reqLevels.add(8);
+        reqLevels.add(16);
+        reqLevels.add(24);
+        reqLevels.add(32);
+        reqLevels.add(48);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(1);
+        reqPoints.add(1);
+        reqPoints.add(1);
         reqPoints.add(2);
-        reqPoints.add(3);
-        reqPoints.add(4);
-        reqPoints.add(5);
-        reqPoints.add(6);
-        reqPoints.add(7);
+        reqPoints.add(2);
+        reqPoints.add(2);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -104,22 +102,20 @@ public class KnightSkills {
         description.add("Launch nearby targets upwards");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(1);
         reqLevels.add(5);
-        reqLevels.add(10);
-        reqLevels.add(15);
-        reqLevels.add(20);
-        reqLevels.add(25);
-        reqLevels.add(30);
+        reqLevels.add(12);
+        reqLevels.add(22);
+        reqLevels.add(35);
+        reqLevels.add(48);
+        reqLevels.add(55);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(1);
         reqPoints.add(2);
+        reqPoints.add(2);
         reqPoints.add(3);
-        reqPoints.add(4);
-        reqPoints.add(5);
-        reqPoints.add(6);
-        reqPoints.add(7);
+        reqPoints.add(3);
+        reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -171,22 +167,20 @@ public class KnightSkills {
         description.add("taunt pulled monsters.");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(1);
-        reqLevels.add(5);
         reqLevels.add(10);
-        reqLevels.add(15);
-        reqLevels.add(20);
-        reqLevels.add(25);
-        reqLevels.add(30);
+        reqLevels.add(18);
+        reqLevels.add(26);
+        reqLevels.add(38);
+        reqLevels.add(50);
+        reqLevels.add(64);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(1);
         reqPoints.add(2);
+        reqPoints.add(2);
         reqPoints.add(3);
-        reqPoints.add(4);
-        reqPoints.add(5);
-        reqPoints.add(6);
-        reqPoints.add(7);
+        reqPoints.add(3);
+        reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -238,22 +232,20 @@ public class KnightSkills {
         description.add("silence the attacker.");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(1);
-        reqLevels.add(5);
-        reqLevels.add(10);
-        reqLevels.add(15);
         reqLevels.add(20);
-        reqLevels.add(25);
         reqLevels.add(30);
+        reqLevels.add(40);
+        reqLevels.add(50);
+        reqLevels.add(60);
+        reqLevels.add(80);
 
         List<Integer> reqPoints = new ArrayList<>();
-        reqPoints.add(1);
         reqPoints.add(2);
-        reqPoints.add(3);
         reqPoints.add(4);
-        reqPoints.add(5);
+        reqPoints.add(4);
         reqPoints.add(6);
-        reqPoints.add(7);
+        reqPoints.add(6);
+        reqPoints.add(6);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -300,22 +292,20 @@ public class KnightSkills {
         description.add("jump boost. Also your melee attacks ignites target");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(1);
-        reqLevels.add(5);
-        reqLevels.add(10);
-        reqLevels.add(15);
-        reqLevels.add(20);
-        reqLevels.add(25);
-        reqLevels.add(30);
+        reqLevels.add(40);
+        reqLevels.add(50);
+        reqLevels.add(60);
+        reqLevels.add(70);
+        reqLevels.add(80);
+        reqLevels.add(90);
 
         List<Integer> reqPoints = new ArrayList<>();
-        reqPoints.add(1);
-        reqPoints.add(2);
-        reqPoints.add(3);
         reqPoints.add(4);
         reqPoints.add(5);
         reqPoints.add(6);
         reqPoints.add(7);
+        reqPoints.add(8);
+        reqPoints.add(9);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
