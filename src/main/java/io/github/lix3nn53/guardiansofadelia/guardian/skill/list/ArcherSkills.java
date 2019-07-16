@@ -39,7 +39,7 @@ public class ArcherSkills {
 
     private static Skill getOne() {
         List<String> description = new ArrayList<>();
-        description.add("Shoot an arrow that blinds target");
+        description.add("Shoot an arrow that poison target");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -64,16 +64,14 @@ public class ArcherSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
 
         Skill skill = new Skill("Poison Arrow", Material.IRON_HOE, 27, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -148,16 +146,14 @@ public class ArcherSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
 
         Skill skill = new Skill("Zephyr", Material.IRON_HOE, 33, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -232,16 +228,14 @@ public class ArcherSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
 
         Skill skill = new Skill("Purple Wings", Material.IRON_HOE, 41, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -307,16 +301,14 @@ public class ArcherSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
 
         Skill skill = new Skill("Hop Hop", Material.IRON_HOE, 44, description, reqLevels, reqPoints, manaCosts, cooldowns);
 

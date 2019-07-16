@@ -57,16 +57,14 @@ public class KnightSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
 
         Skill skill = new Skill("Slice and Dice", Material.IRON_HOE, 9, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -124,16 +122,14 @@ public class KnightSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
 
         Skill skill = new Skill("Devastate", Material.IRON_HOE, 1, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -189,16 +185,14 @@ public class KnightSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
 
         Skill skill = new Skill("Battle Cry", Material.IRON_HOE, 47, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -254,22 +248,20 @@ public class KnightSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(48);
+        cooldowns.add(48);
+        cooldowns.add(48);
+        cooldowns.add(48);
+        cooldowns.add(48);
+        cooldowns.add(48);
 
         Skill skill = new Skill("Spell Block", Material.IRON_HOE, 23, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(500);
+        TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(20L * 48);
 
         List<Integer> ccTicks = new ArrayList<>();
         ccTicks.add(60);
@@ -314,16 +306,14 @@ public class KnightSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
 
         Skill skill = new Skill("Wrath of Justice", Material.IRON_HOE, 1, description, reqLevels, reqPoints, manaCosts, cooldowns);
 

@@ -70,16 +70,14 @@ public class HunterSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
 
         Skill skill = new Skill("Explosive Arrow", Material.IRON_HOE, 20, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
@@ -139,16 +137,14 @@ public class HunterSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
 
         Skill skill = new Skill("Volley", Material.IRON_HOE, 22, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -200,16 +196,14 @@ public class HunterSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
 
         Skill skill = new Skill("Hookshot", Material.IRON_HOE, 32, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -273,10 +267,8 @@ public class HunterSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
         cooldowns.add(5);
         cooldowns.add(5);
         cooldowns.add(5);
@@ -327,16 +319,14 @@ public class HunterSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
 
         Skill skill = new Skill("Bear Trap", Material.IRON_HOE, 55, description, reqLevels, reqPoints, manaCosts, cooldowns);
 

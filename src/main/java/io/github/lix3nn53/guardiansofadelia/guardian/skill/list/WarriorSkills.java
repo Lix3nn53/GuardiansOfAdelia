@@ -69,16 +69,14 @@ public class WarriorSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
 
         Skill skill = new Skill("Power Slash", Material.IRON_HOE, 15, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -135,16 +133,14 @@ public class WarriorSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
 
         Skill skill = new Skill("Flame Burst", Material.IRON_HOE, 57, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -208,16 +204,14 @@ public class WarriorSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
 
         Skill skill = new Skill("Victory Flag", Material.IRON_HOE, 9, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -300,16 +294,14 @@ public class WarriorSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
 
         Skill skill = new Skill("Death Rattle", Material.IRON_HOE, 47, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -369,16 +361,14 @@ public class WarriorSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
 
         Skill skill = new Skill("Grand Skyfall", Material.IRON_HOE, 44, description, reqLevels, reqPoints, manaCosts, cooldowns);
 

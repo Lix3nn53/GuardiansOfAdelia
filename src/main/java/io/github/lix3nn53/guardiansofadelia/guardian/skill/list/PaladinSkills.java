@@ -68,16 +68,14 @@ public class PaladinSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
 
         Skill skill = new Skill("Hammerblow", Material.IRON_HOE, 46, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -138,16 +136,14 @@ public class PaladinSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
 
         Skill skill = new Skill("Heal", Material.IRON_HOE, 37, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -198,16 +194,14 @@ public class PaladinSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
 
         Skill skill = new Skill("Polymorph", Material.IRON_HOE, 55, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -261,16 +255,14 @@ public class PaladinSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
 
         Skill skill = new Skill("Resurrection", Material.IRON_HOE, 35, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -355,16 +347,14 @@ public class PaladinSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
 
         Skill skill = new Skill("Cosmic Radiance", Material.IRON_HOE, 18, description, reqLevels, reqPoints, manaCosts, cooldowns);
 

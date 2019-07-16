@@ -65,16 +65,14 @@ public class MageSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(3);
+        cooldowns.add(3);
+        cooldowns.add(3);
+        cooldowns.add(3);
+        cooldowns.add(3);
+        cooldowns.add(3);
 
         Skill skill = new Skill("Fireball", Material.IRON_HOE, 12, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
@@ -134,16 +132,14 @@ public class MageSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
 
         Skill skill = new Skill("Lightning Bolt", Material.IRON_HOE, 7, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
@@ -203,16 +199,14 @@ public class MageSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
 
         Skill skill = new Skill("Shockwave", Material.IRON_HOE, 11, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -272,19 +266,18 @@ public class MageSkills {
         manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(10);
+        cooldowns.add(10);
+        cooldowns.add(10);
+        cooldowns.add(10);
+        cooldowns.add(10);
+        cooldowns.add(10);
 
         Skill skill = new Skill("Mental Fortitude", Material.IRON_HOE, 10, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        TookMeleeDamageTrigger tookMeleeDamageTrigger = new TookMeleeDamageTrigger(500);
+        TookMeleeDamageTrigger tookMeleeDamageTrigger = new TookMeleeDamageTrigger(20L * 10);
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(3D);
@@ -342,16 +335,14 @@ public class MageSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
 
         Skill skill = new Skill("Inferno", Material.IRON_HOE, 30, description, reqLevels, reqPoints, manaCosts, cooldowns);
 

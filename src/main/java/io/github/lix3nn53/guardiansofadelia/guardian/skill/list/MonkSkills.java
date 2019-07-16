@@ -60,16 +60,14 @@ public class MonkSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
+        cooldowns.add(8);
 
         Skill skill = new Skill("Iron Fist", Material.IRON_HOE, 21, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -122,16 +120,14 @@ public class MonkSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(2);
-        cooldowns.add(2);
-        cooldowns.add(2);
-        cooldowns.add(2);
-        cooldowns.add(2);
-        cooldowns.add(2);
-        cooldowns.add(2);
+        cooldowns.add(4);
+        cooldowns.add(4);
+        cooldowns.add(4);
+        cooldowns.add(4);
+        cooldowns.add(4);
+        cooldowns.add(4);
 
         Skill skill = new Skill("Tumble", Material.IRON_HOE, 33, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -210,16 +206,14 @@ public class MonkSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(42);
+        cooldowns.add(42);
+        cooldowns.add(42);
+        cooldowns.add(42);
+        cooldowns.add(42);
+        cooldowns.add(42);
 
         Skill skill = new Skill("Serenity", Material.IRON_HOE, 35, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -301,10 +295,8 @@ public class MonkSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
         cooldowns.add(5);
         cooldowns.add(5);
         cooldowns.add(5);
@@ -392,16 +384,14 @@ public class MonkSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
 
         Skill skill = new Skill("Aqua Prison", Material.IRON_HOE, 25, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
