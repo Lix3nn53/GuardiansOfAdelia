@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TriggerListener {
-    //TODO problem: every player can have only one trigger of a type
+    //Every player can have only one trigger of a type
 
     private static HashMap<Player, InitializeTrigger> playerToInitializeTrigger = new HashMap<>();
 

@@ -329,10 +329,11 @@ public class RogueSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        //TODO skill including critic damage bonus
-        description.add("Prepare for 3 seconds then");
-        description.add("jump behind your target and");
-        description.add("apply wither effect");
+        //TODO make this skill add bonus range to other dash skills and/or add slow effect to shuriken
+        description.add("Become a phantom assassin and: ");
+        description.add("- Increase your critical chance");
+        description.add("(This can exceed the critical chance cap)");
+        description.add("- Increase your critical damage");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(40);
@@ -366,41 +367,23 @@ public class RogueSkills {
         cooldowns.add(64);
         cooldowns.add(64);
 
-        Skill skill = new Skill("Phantom Strike", Material.IRON_HOE, 45, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Phantom Assassin", Material.IRON_HOE, 45, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
-
-        List<Double> ranges = new ArrayList<>();
-        ranges.add(24D);
-        ranges.add(24D);
-        ranges.add(24D);
-        ranges.add(24D);
-        ranges.add(24D);
-        ranges.add(24D);
-        SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
-
-        WarpTargetMechanic warpTargetMechanic = new WarpTargetMechanic(false);
-
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(60);
         ticks.add(60);
         ticks.add(60);
         ticks.add(60);
-        List<Integer> amplifiers = new ArrayList<>();
-        ticks.add(2);
-        ticks.add(2);
-        ticks.add(2);
-        ticks.add(2);
         List<Double> multipliers = new ArrayList<>();
         multipliers.add(0.1);
-        BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks);
-        BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, multipliers, ticks);
-        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, ticks, amplifiers);
+        BuffMechanic critDamageBuff = new BuffMechanic(BuffType.CRIT_DAMAGE, multipliers, ticks);
+        BuffMechanic critChanceBuff = new BuffMechanic(BuffType.CRIT_CHANCE, multipliers, ticks);
 
         skill.addTrigger(selfTarget);
-        selfTarget.addChildren(singleTarget);
-        singleTarget.addChildren(warpTargetMechanic);
+        selfTarget.addChildren(critDamageBuff);
+        selfTarget.addChildren(critChanceBuff);
 
         return skill;
     }

@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.st
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -184,7 +185,8 @@ public class SkillBar {
 
     public boolean castSkill(int skillIndex) {
         if (StatusEffectManager.isSilenced(player)) {
-            //TODO silence info
+            //TODO test silence info
+            player.sendTitle(ChatColor.LIGHT_PURPLE + "", ChatColor.LIGHT_PURPLE + "Silenced..", 0, 20, 0);
             return false;
         }
 

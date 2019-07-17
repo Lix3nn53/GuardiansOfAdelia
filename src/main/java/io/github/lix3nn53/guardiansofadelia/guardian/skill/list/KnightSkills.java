@@ -4,13 +4,18 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram.HologramMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMagicalDamageTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -279,7 +284,7 @@ public class KnightSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        //TODO place a giant sword that decreases attacks of nearby enemies
+        //TODO giant sword or shield model and design skill effect/particles
         description.add("Call power of justice, gain movement speed and");
         description.add("jump boost. Also your melee attacks ignites target");
 
@@ -315,8 +320,55 @@ public class KnightSkills {
         cooldowns.add(64);
         cooldowns.add(64);
 
-        Skill skill = new Skill("Wrath of Justice", Material.IRON_HOE, 1, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Divine Judgement", Material.IRON_HOE, 1, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
+        SelfTarget selfTarget = new SelfTarget();
+
+        //Add HologramMechanic to SelfTarget's children
+        List<Integer> seconds = new ArrayList<>();
+        seconds.add(30);
+        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000004, seconds, ChatColor.AQUA + "< Victory-Flag %caster% >");
+
+        //Add repeatMechanic to hologramMechanic's children
+        List<Integer> repetitions = new ArrayList<>();
+        repetitions.add(15);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(40L, repetitions);
+
+        //Add areaTarget to repeatMechanic's children
+        List<Double> radiuses = new ArrayList<>();
+        radiuses.add(9D);
+        AreaTarget areaTarget = new AreaTarget(true, false, true, 999, radiuses);
+
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        List<Integer> amplifiers = new ArrayList<>();
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        ticks.add(2);
+        List<Double> multipliers = new ArrayList<>();
+        multipliers.add(0.1);
+        BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks);
+        BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, multipliers, ticks);
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, ticks, amplifiers);
+
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6, 0, 0, 0, 0, 2, 0, 0, null);
+
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(hologramMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_BUFF));
+        hologramMechanic.addChildren(repeatMechanic);
+
+        //repeat part 1, area and effects
+        repeatMechanic.addChildren(areaTarget);
+        areaTarget.addChildren(physicalDamageBuff);
+        areaTarget.addChildren(magicalDamageBuff);
+        areaTarget.addChildren(potionEffectMechanic);
+
+        repeatMechanic.addChildren(particleMechanic);
 
         return skill;
     }

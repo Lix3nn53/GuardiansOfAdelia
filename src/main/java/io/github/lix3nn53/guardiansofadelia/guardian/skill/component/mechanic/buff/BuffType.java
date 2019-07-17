@@ -7,7 +7,8 @@ public enum BuffType {
     PHYSICAL_DEFENSE,
     MAGIC_DAMAGE,
     MAGIC_DEFENSE,
-    CRIT_DAMAGE;
+    CRIT_DAMAGE,
+    CRIT_CHANCE;
 
     @Override
     public String toString() {
@@ -22,6 +23,8 @@ public enum BuffType {
                 return ChatColor.BLUE + "Magical Defense";
             case CRIT_DAMAGE:
                 return ChatColor.GOLD + "Critical Damage";
+            case CRIT_CHANCE:
+                return ChatColor.LIGHT_PURPLE + "Critical Chance";
         }
         return "";
     }

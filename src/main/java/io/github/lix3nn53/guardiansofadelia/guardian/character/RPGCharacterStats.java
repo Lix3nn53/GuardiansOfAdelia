@@ -49,6 +49,7 @@ public class RPGCharacterStats {
     private double magicalDamageBuff = 1;
     private double physicalDefenseBuff = 1;
     private double magicalDefenseBuff = 1;
+    private double criticalChanceBonusBuff = 0;
     private double criticalDamageBonusBuff = 0;
 
     public RPGCharacterStats(Player player) {
@@ -173,7 +174,14 @@ public class RPGCharacterStats {
     }
 
     public double getTotalCriticalChance() {
-        return criticalChance + wind.getIncrement();
+        double chance = criticalChance + wind.getIncrement();
+        if (chance > 0.4) {
+            chance = 0.4;
+        }
+
+        chance += criticalChanceBonusBuff;
+
+        return chance;
     }
 
     public double getTotalCriticalDamageBonus() {
@@ -633,6 +641,8 @@ public class RPGCharacterStats {
             this.magicalDefenseBuff += addToMultiplier;
         } else if (buffType.equals(BuffType.CRIT_DAMAGE)) {
             this.criticalDamageBonusBuff += addToMultiplier;
+        } else if (buffType.equals(BuffType.CRIT_CHANCE)) {
+            this.criticalChanceBonusBuff += addToMultiplier;
         }
     }
 
@@ -647,6 +657,8 @@ public class RPGCharacterStats {
             return this.magicalDefenseBuff;
         } else if (buffType.equals(BuffType.CRIT_DAMAGE)) {
             return this.criticalDamageBonusBuff;
+        } else if (buffType.equals(BuffType.CRIT_CHANCE)) {
+            return this.criticalChanceBonusBuff;
         }
         return 1;
     }

@@ -21,6 +21,8 @@ public class TookMagicalDamageTrigger extends TriggerComponent {
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+        if (targets.isEmpty()) return false;
+
         this.caster = caster;
         this.skillLevel = skillLevel;
 

@@ -156,7 +156,6 @@ public class ProjectileMechanic extends MechanicComponent {
         for (LivingEntity target : targets) {
             // Apply the spread type
             if (spreadType.equals(SpreadType.RAIN)) {
-                //TODO test projectile rain
                 ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amount.get(skillLevel - 1));
 
                 for (Location loc : locs) {
@@ -271,8 +270,6 @@ public class ProjectileMechanic extends MechanicComponent {
         } else {
             lore.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel - 1) + " -> " + amount.get(skillLevel));
         }
-
-        //TODO
         return new ArrayList<>();
     }
 
