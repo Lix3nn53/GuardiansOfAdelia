@@ -275,6 +275,7 @@ public class ArcherSkills {
     }
 
     private static Skill getPassive() {
+        //TODO o zaman her 3 vuruşta kritik şansı bonusu, max 5 kere falan stacklenebilir
         List<String> description = new ArrayList<>();
         description.add("Jump boost");
 

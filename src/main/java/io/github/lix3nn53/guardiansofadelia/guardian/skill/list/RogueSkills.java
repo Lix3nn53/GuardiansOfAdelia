@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.DirectionCondition;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.FlagCondition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
@@ -78,6 +79,10 @@ public class RogueSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
+        FlagCondition phantomCondition = new FlagCondition("phantom", false);
+
+        FlagCondition phantomCondition2 = new FlagCondition("phantom", true);
+
         List<Double> ranges = new ArrayList<>();
         ranges.add(6D);
         ranges.add(6D);
@@ -86,6 +91,15 @@ public class RogueSkills {
         ranges.add(6D);
         ranges.add(6D);
         SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
+
+        List<Double> ranges2 = new ArrayList<>();
+        ranges2.add(6D);
+        ranges2.add(6D);
+        ranges2.add(6D);
+        ranges2.add(6D);
+        ranges2.add(6D);
+        ranges2.add(6D);
+        SingleTarget singleTarget2 = new SingleTarget(false, true, false, 1, ranges2, 4);
 
         DirectionCondition directionCondition = new DirectionCondition(false);
 
@@ -111,7 +125,13 @@ public class RogueSkills {
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         skill.addTrigger(selfTarget);
-        selfTarget.addChildren(singleTarget);
+
+        selfTarget.addChildren(phantomCondition);
+        phantomCondition.addChildren(singleTarget);
+
+        selfTarget.addChildren(phantomCondition2);
+        phantomCondition2.addChildren(singleTarget2);
+
         singleTarget.addChildren(directionCondition);
         directionCondition.addChildren(slow);
 
@@ -124,7 +144,7 @@ public class RogueSkills {
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
-        description.add("Dash forward and gain shields and");
+        description.add("Dash forward and gain");
         description.add("resistance to fall damage");
 
         List<Integer> reqLevels = new ArrayList<>();
@@ -163,6 +183,8 @@ public class RogueSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
+        FlagCondition phantomCondition = new FlagCondition("phantom", false);
+
         List<Double> forwards = new ArrayList<>();
         forwards.add(1.5);
         List<Double> upwards = new ArrayList<>();
@@ -176,6 +198,16 @@ public class RogueSkills {
         right.add(0D);
         WarpMechanic warpMechanic = new WarpMechanic(false, forwards, upwards, right);
 
+        FlagCondition phantomCondition2 = new FlagCondition("phantom", true);
+
+        List<Double> forwards2 = new ArrayList<>();
+        forwards2.add(1.5);
+        List<Double> upwards2 = new ArrayList<>();
+        upwards2.add(1D);
+        upwards2.add(1.8);
+        upwards2.add(1.85);
+        WarpMechanic warpMechanic2 = new WarpMechanic(false, forwards2, upwards2, right);
+
         LandTrigger landTrigger = new LandTrigger();
 
         ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>());//0 for infinite
@@ -183,7 +215,12 @@ public class RogueSkills {
 
         skill.addTrigger(selfTarget);
 
-        selfTarget.addChildren(warpMechanic);
+        selfTarget.addChildren(phantomCondition);
+        phantomCondition.addChildren(warpMechanic);
+
+        selfTarget.addChildren(phantomCondition2);
+        phantomCondition2.addChildren(warpMechanic2);
+
         selfTarget.addChildren(immunityMechanic);
         selfTarget.addChildren(landTrigger);
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_PROJECTILE_VOID));
@@ -195,8 +232,7 @@ public class RogueSkills {
 
     private static Skill getThree() {
         List<String> description = new ArrayList<>();
-        description.add("Throw shurikens one by one that");
-        description.add("deals damage");
+        description.add("Throw shurikens one by one");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(10);
@@ -248,6 +284,20 @@ public class RogueSkills {
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
                 0, 1, 0, 200, true, Egg.class);
 
+        FlagCondition phantomCondition = new FlagCondition("phantom", true);
+
+        List<Integer> ticks = new ArrayList<>();
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        List<Integer> amplifiers = new ArrayList<>();
+        amplifiers.add(3);
+        amplifiers.add(4);
+        amplifiers.add(5);
+        amplifiers.add(6);
+        PotionEffectMechanic slow = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
+
         SelfTarget selfTarget = new SelfTarget();
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(repeatMechanic);
@@ -262,6 +312,8 @@ public class RogueSkills {
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
         projectileMechanic.addChildren(damageMechanic);
+        projectileMechanic.addChildren(phantomCondition);
+        phantomCondition.addChildren(slow);
 
         return skill;
     }
@@ -329,11 +381,13 @@ public class RogueSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        //TODO make this skill add bonus range to other dash skills and/or add slow effect to shuriken
-        description.add("Become a phantom assassin and: ");
+        description.add("Become a phantom assassin:");
         description.add("- Increase your critical chance");
         description.add("(This can exceed the critical chance cap)");
         description.add("- Increase your critical damage");
+        description.add("- Increase range of Claw Swipe");
+        description.add("- Increase range of Void Dash");
+        description.add("- Your shurikens slows the target");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(40);
@@ -380,10 +434,12 @@ public class RogueSkills {
         multipliers.add(0.1);
         BuffMechanic critDamageBuff = new BuffMechanic(BuffType.CRIT_DAMAGE, multipliers, ticks);
         BuffMechanic critChanceBuff = new BuffMechanic(BuffType.CRIT_CHANCE, multipliers, ticks);
+        FlagSetMechanic flagSetMechanic = new FlagSetMechanic("phantom", ticks);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(critDamageBuff);
         selfTarget.addChildren(critChanceBuff);
+        selfTarget.addChildren(flagSetMechanic);
 
         return skill;
     }

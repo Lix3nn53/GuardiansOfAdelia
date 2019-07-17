@@ -327,7 +327,8 @@ public class KnightSkills {
         //Add HologramMechanic to SelfTarget's children
         List<Integer> seconds = new ArrayList<>();
         seconds.add(30);
-        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000004, seconds, ChatColor.AQUA + "< Victory-Flag %caster% >");
+        HologramMechanic hologramMechanic = new HologramMechanic(Material.DIAMOND_SWORD, 10000005, seconds, ChatColor.AQUA + "< Victory-Flag %caster% >");
+        HologramMechanic hologramMechanic2 = new HologramMechanic(Material.SHIELD, 10000004, seconds);
 
         //Add repeatMechanic to hologramMechanic's children
         List<Integer> repetitions = new ArrayList<>();
@@ -351,14 +352,15 @@ public class KnightSkills {
         ticks.add(2);
         List<Double> multipliers = new ArrayList<>();
         multipliers.add(0.1);
-        BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks);
-        BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, multipliers, ticks);
+        BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks);
+        BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks);
         PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, ticks, amplifiers);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6, 0, 0, 0, 0, 2, 0, 0, null);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(hologramMechanic);
+        selfTarget.addChildren(hologramMechanic2);
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_BUFF));
         hologramMechanic.addChildren(repeatMechanic);
 
