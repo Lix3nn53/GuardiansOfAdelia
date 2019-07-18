@@ -9,8 +9,28 @@ import java.util.HashSet;
 
 public class SkillDataManager {
 
+    private static HashMap<LivingEntity, Integer> keyEntityToValue = new HashMap<>(); //currently only one value for one entity
     private static HashMap<LivingEntity, HashSet<String>> keyEntityToSkillFlags = new HashMap<>();
     private static HashMap<LivingEntity, HashSet<BukkitTask>> keyEntityToRepeatTasks = new HashMap<>();
+
+    public static void setValue(LivingEntity keyEntity, int value) {
+        keyEntityToValue.put(keyEntity, value);
+    }
+
+    public static void addValue(LivingEntity keyEntity, int value) {
+        int oldValue = 0;
+        if (keyEntityToValue.containsKey(keyEntity)) {
+            oldValue = keyEntityToValue.get(keyEntity);
+        }
+        keyEntityToValue.put(keyEntity, oldValue + value);
+    }
+
+    public static int getValue(LivingEntity keyEntity) {
+        if (keyEntityToValue.containsKey(keyEntity)) {
+            return keyEntityToValue.get(keyEntity);
+        }
+        return 0;
+    }
 
     public static void addFlag(LivingEntity keyEntity, String flag) {
         if (keyEntityToSkillFlags.containsKey(keyEntity)) {
@@ -83,6 +103,7 @@ public class SkillDataManager {
     public static void onPlayerQuit(Player player) {
         keyEntityToSkillFlags.remove(player);
         keyEntityToRepeatTasks.remove(player);
+        keyEntityToValue.remove(player);
     }
 
     /**
@@ -93,5 +114,6 @@ public class SkillDataManager {
     public static void onEntityDeath(LivingEntity livingEntity) {
         keyEntityToSkillFlags.remove(livingEntity);
         keyEntityToRepeatTasks.remove(livingEntity);
+        keyEntityToValue.remove(livingEntity);
     }
 }

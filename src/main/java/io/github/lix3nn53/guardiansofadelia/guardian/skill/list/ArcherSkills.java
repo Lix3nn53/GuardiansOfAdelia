@@ -1,7 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.ValueCondition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityRemoveMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
@@ -11,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Self
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.RangedAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.Color;
@@ -275,9 +279,9 @@ public class ArcherSkills {
     }
 
     private static Skill getPassive() {
-        //TODO o zaman her 3 vuruşta kritik şansı bonusu, max 5 kere falan stacklenebilir
         List<String> description = new ArrayList<>();
-        description.add("Jump boost");
+        description.add("Your every third successful projectile hit");
+        description.add("gives you bonus critical chance");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
@@ -304,18 +308,18 @@ public class ArcherSkills {
         manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
 
-        Skill skill = new Skill("Hop Hop", Material.IRON_HOE, 44, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Sharpshooter", Material.IRON_HOE, 44, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        RepeatMechanic repeatMechanic = new RepeatMechanic(240, new ArrayList<>()); //empty list for infinite
+        RangedAttackTrigger rangedAttackTrigger = new RangedAttackTrigger(cooldowns);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(240);
@@ -327,12 +331,30 @@ public class ArcherSkills {
         ticks.add(2);
         ticks.add(2);
         ticks.add(2);
-        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, amplifiers);
+        List<Double> multipliers = new ArrayList<>();
+        multipliers.add(0.1);
+        BuffMechanic buffMechanic = new BuffMechanic(BuffType.CRIT_CHANCE, multipliers, ticks);
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, ticks, amplifiers);
+
+        ValueCondition activateCondition = new ValueCondition(3, 3);
+        ValueSetMechanic valueSetMechanic = new ValueSetMechanic(0);
+
+        ValueCondition upValueCondition = new ValueCondition(0, 2);
+        ValueAddMechanic valueAddMechanic = new ValueAddMechanic(1);
 
         skill.addTrigger(initializeTrigger);
-        initializeTrigger.addChildren(repeatMechanic);
+        initializeTrigger.addChildren(rangedAttackTrigger);
 
-        repeatMechanic.addChildren(potionEffectMechanic);
+        rangedAttackTrigger.addChildren(activateCondition);
+        activateCondition.addChildren(buffMechanic);
+        activateCondition.addChildren(potionEffectMechanic);
+        activateCondition.addChildren(valueSetMechanic);
+        activateCondition.addChildren(new MessageMechanic("reset value"));
+
+        rangedAttackTrigger.addChildren(upValueCondition);
+        upValueCondition.addChildren(valueAddMechanic);
+        activateCondition.addChildren(new MessageMechanic("up value"));
+
         return skill;
     }
 
