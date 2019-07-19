@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -45,6 +46,10 @@ public class BuffMechanic extends MechanicComponent {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                         rpgCharacterStats.addToBuffMultiplier(buffType, multiplierToUse);
+
+                        //add +2 ticks to duration because of repeating buffs icons disappear otherwise. Amplifier 0 anyways
+                        PotionEffect potionEffect = new PotionEffect(buffType.getPotionEffectType(), ticks.get(skillLevel - 1) + 2, 0);
+                        player.addPotionEffect(potionEffect, true);
 
                         buffedPlayers.add(player);
                         buffedAPlayer = true;

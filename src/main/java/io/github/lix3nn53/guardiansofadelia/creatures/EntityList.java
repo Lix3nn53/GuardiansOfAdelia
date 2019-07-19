@@ -402,9 +402,9 @@ public class EntityList {
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(540D);
             entity.getEquipment().clear();
             PotionEffect invis = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1);
-            entity.addPotionEffect(invis, false);
+            entity.addPotionEffect(invis);
             PotionEffect glow = new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 1);
-            entity.addPotionEffect(glow, false);
+            entity.addPotionEffect(glow);
             setEntityExperience(entity, 584);
             setEntityDropTableNo(entity, 6);
             return entity;
@@ -439,18 +439,18 @@ public class EntityList {
             CaveSpider entity = (CaveSpider) EntityUtils.create(loc, ChatColor.YELLOW + "Ghost Spider", 2200D, EntityType.CAVE_SPIDER);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(520D);
             PotionEffect invis = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1);
-            entity.addPotionEffect(invis, false);
+            entity.addPotionEffect(invis);
             PotionEffect glow = new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 1);
-            entity.addPotionEffect(glow, false);
+            entity.addPotionEffect(glow);
             setEntityExperience(entity, 584);
             setEntityDropTableNo(entity, 6);
             return entity;
         } else if (mobcode.equals("desert6")) {
             Creeper entity = (Creeper) EntityUtils.create(loc, ChatColor.YELLOW + "Ghost Creeper", 2420D, EntityType.CREEPER);
             PotionEffect invis = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1);
-            entity.addPotionEffect(invis, false);
+            entity.addPotionEffect(invis);
             PotionEffect glow = new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 1);
-            entity.addPotionEffect(glow, false);
+            entity.addPotionEffect(glow);
             setEntityExperience(entity, 584);
             setEntityDropTableNo(entity, 6);
             return entity;

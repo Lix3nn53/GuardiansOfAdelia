@@ -13,9 +13,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Too
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -284,9 +284,8 @@ public class KnightSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        //TODO giant sword or shield model and design skill effect/particles
-        description.add("Call power of justice, gain movement speed and");
-        description.add("jump boost. Also your melee attacks ignites target");
+        description.add("Call Shield of the Heavens to protect");
+        description.add("your nearby allies!");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(40);
@@ -320,23 +319,29 @@ public class KnightSkills {
         cooldowns.add(64);
         cooldowns.add(64);
 
-        Skill skill = new Skill("Divine Judgement", Material.IRON_HOE, 1, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Shield of the Heavens", Material.IRON_HOE, 54, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         //Add HologramMechanic to SelfTarget's children
         List<Integer> seconds = new ArrayList<>();
         seconds.add(30);
-        HologramMechanic hologramMechanic = new HologramMechanic(Material.DIAMOND_SWORD, 10000005, seconds, ChatColor.AQUA + "< Victory-Flag %caster% >");
-        HologramMechanic hologramMechanic2 = new HologramMechanic(Material.SHIELD, 10000004, seconds);
+        seconds.add(30);
+        seconds.add(30);
+        HologramMechanic hologramMechanic = new HologramMechanic(Material.DIAMOND_SWORD, 10000005, seconds);
+        HologramMechanic hologramMechanic2 = new HologramMechanic(Material.SHIELD, 10000004, seconds, ChatColor.YELLOW + "< Shield-of-the-Heavens %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
         List<Integer> repetitions = new ArrayList<>();
-        repetitions.add(15);
-        RepeatMechanic repeatMechanic = new RepeatMechanic(40L, repetitions);
+        repetitions.add(10);
+        repetitions.add(10);
+        repetitions.add(10);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(60L, repetitions);
 
         //Add areaTarget to repeatMechanic's children
         List<Double> radiuses = new ArrayList<>();
+        radiuses.add(9D);
+        radiuses.add(9D);
         radiuses.add(9D);
         AreaTarget areaTarget = new AreaTarget(true, false, true, 999, radiuses);
 
@@ -345,18 +350,15 @@ public class KnightSkills {
         ticks.add(60);
         ticks.add(60);
         ticks.add(60);
-        List<Integer> amplifiers = new ArrayList<>();
-        ticks.add(2);
-        ticks.add(2);
-        ticks.add(2);
-        ticks.add(2);
         List<Double> multipliers = new ArrayList<>();
+        multipliers.add(0.1);
+        multipliers.add(0.1);
+        multipliers.add(0.1);
         multipliers.add(0.1);
         BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks);
         BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks);
-        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, ticks, amplifiers);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6, 0, 0, 0, 0, 2, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 9, 27, 0, 0, 0, 0, 2, 0, 0, new Particle.DustOptions(Color.YELLOW, 2));
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(hologramMechanic);
@@ -368,7 +370,6 @@ public class KnightSkills {
         repeatMechanic.addChildren(areaTarget);
         areaTarget.addChildren(physicalDamageBuff);
         areaTarget.addChildren(magicalDamageBuff);
-        areaTarget.addChildren(potionEffectMechanic);
 
         repeatMechanic.addChildren(particleMechanic);
 

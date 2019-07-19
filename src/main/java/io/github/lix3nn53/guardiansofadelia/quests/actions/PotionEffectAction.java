@@ -18,6 +18,6 @@ public class PotionEffectAction implements Action {
     @Override
     public void perform(Player player) {
         org.bukkit.potion.PotionEffect potionEffect = new org.bukkit.potion.PotionEffect(potionEffectType, duration, amplifier);
-        player.addPotionEffect(potionEffect);
+        player.addPotionEffect(potionEffect, true);
     }
 }

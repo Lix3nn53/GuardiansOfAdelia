@@ -25,8 +25,7 @@ public class PotionEffectMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;
 
-        PotionEffect potionEffect = new PotionEffect(type, ticks.get(skillLevel - 1), amplifier.get(skillLevel - 1),
-                false, false, true);
+        PotionEffect potionEffect = new PotionEffect(type, ticks.get(skillLevel - 1), amplifier.get(skillLevel - 1));
 
         for (LivingEntity target : targets) {
             target.addPotionEffect(potionEffect, true);

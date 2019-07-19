@@ -224,8 +224,8 @@ public class WarriorSkills {
 
         //Add repeatMechanic to hologramMechanic's children
         List<Integer> repetitions = new ArrayList<>();
-        repetitions.add(15);
-        RepeatMechanic repeatMechanic = new RepeatMechanic(40L, repetitions);
+        repetitions.add(10);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(60L, repetitions);
 
         //Add areaTarget to repeatMechanic's children
         List<Double> radiuses = new ArrayList<>();
@@ -237,16 +237,12 @@ public class WarriorSkills {
         ticks.add(60);
         ticks.add(60);
         ticks.add(60);
-        List<Integer> amplifiers = new ArrayList<>();
-        ticks.add(2);
-        ticks.add(2);
-        ticks.add(2);
-        ticks.add(2);
         List<Double> multipliers = new ArrayList<>();
+        multipliers.add(0.1);
+        multipliers.add(0.1);
         multipliers.add(0.1);
         BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks);
         BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, multipliers, ticks);
-        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.INCREASE_DAMAGE, ticks, amplifiers);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6, 0, 0, 0, 0, 2, 0, 0, null);
 
@@ -259,7 +255,6 @@ public class WarriorSkills {
         repeatMechanic.addChildren(areaTarget);
         areaTarget.addChildren(physicalDamageBuff);
         areaTarget.addChildren(magicalDamageBuff);
-        areaTarget.addChildren(potionEffectMechanic);
 
         repeatMechanic.addChildren(particleMechanic);
 
@@ -318,10 +313,10 @@ public class WarriorSkills {
         ticks.add(60);
         ticks.add(60);
         List<Integer> amplifiers = new ArrayList<>();
-        ticks.add(2);
-        ticks.add(2);
-        ticks.add(2);
-        ticks.add(2);
+        amplifiers.add(2);
+        amplifiers.add(2);
+        amplifiers.add(2);
+        amplifiers.add(2);
         PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.SPEED, ticks, amplifiers);
 
         skill.addTrigger(initializeTrigger);
