@@ -36,10 +36,10 @@ public class NameKey {
      *
      * @param from
      */
-    public NameKey(MinecraftKey from) {
+    /*public NameKey(MinecraftKey from) {
         this.namespace = from.b().toLowerCase();
         this.key = from.getKey().toLowerCase();
-    }
+    }*/
 
     /**
      * @return The namespace
