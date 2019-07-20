@@ -48,7 +48,7 @@ public class PetCompanion implements RPGGear {
         itemMeta.setUnbreakable(true);
         itemMeta.setDisplayName(name);
         itemMeta.setLore(lore);
-        itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         itemMeta.setCustomModelData(customModelData);
         this.itemStack.setItemMeta(itemMeta);
 

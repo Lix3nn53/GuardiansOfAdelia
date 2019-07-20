@@ -51,7 +51,7 @@ public class VanillaSlotHelmet implements VanillaSlot {
         List<String> lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         if (itemMeta instanceof Damageable) {
             Damageable damageable = (Damageable) itemMeta;
             damageable.setDamage(4);

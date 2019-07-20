@@ -36,8 +36,8 @@ public class KnightSkills {
 
     private static Skill getOne() {
         List<String> description = new ArrayList<>();
-        description.add("Damage nearby targets and");
-        description.add("reduce their physical defense");
+        description.add(ChatColor.GRAY + "Damage nearby targets and");
+        description.add(ChatColor.GRAY + "reduce their physical defense.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -71,22 +71,42 @@ public class KnightSkills {
         cooldowns.add(8);
         cooldowns.add(8);
 
-        Skill skill = new Skill("Slice and Dice", Material.IRON_HOE, 9, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Slice and Dice", 6, Material.IRON_HOE, 9, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Double> areas = new ArrayList<>();
         areas.add(3D);
+        areas.add(3.25D);
+        areas.add(3.5D);
+        areas.add(3.75D);
+        areas.add(4D);
+        areas.add(4.5D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Double> damages = new ArrayList<>();
         damages.add(3D);
+        damages.add(3D);
+        damages.add(3D);
+        damages.add(3D);
+        damages.add(3D);
+        damages.add(3D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         List<Double> multiplier = new ArrayList<>();
+        multiplier.add(-0.08);
         multiplier.add(-0.1);
+        multiplier.add(-0.12);
+        multiplier.add(-0.14);
+        multiplier.add(-0.16);
+        multiplier.add(-0.2);
         List<Integer> ticks = new ArrayList<>();
         ticks.add(80);
+        ticks.add(90);
+        ticks.add(100);
+        ticks.add(110);
+        ticks.add(120);
+        ticks.add(140);
         BuffMechanic buffMechanic = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multiplier, ticks);
 
         skill.addTrigger(selfTarget);
@@ -102,7 +122,7 @@ public class KnightSkills {
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
-        description.add("Launch nearby targets upwards");
+        description.add(ChatColor.GRAY + "Launch nearby targets upwards");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(5);
@@ -136,19 +156,39 @@ public class KnightSkills {
         cooldowns.add(16);
         cooldowns.add(16);
 
-        Skill skill = new Skill("Devastate", Material.IRON_HOE, 1, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Devastate", 6, Material.IRON_HOE, 1, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Double> areas = new ArrayList<>();
         areas.add(3D);
+        areas.add(3.5D);
+        areas.add(4D);
+        areas.add(5D);
+        areas.add(6D);
+        areas.add(8D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Double> upward = new ArrayList<>();
+        upward.add(1.5D);
+        upward.add(1.75D);
+        upward.add(2D);
+        upward.add(2.25D);
+        upward.add(2.5D);
         upward.add(3D);
         List<Double> forward = new ArrayList<>();
         forward.add(0D);
+        forward.add(0D);
+        forward.add(0D);
+        forward.add(0D);
+        forward.add(0D);
+        forward.add(0D);
         List<Double> right = new ArrayList<>();
+        right.add(0D);
+        right.add(0D);
+        right.add(0D);
+        right.add(0D);
+        right.add(0D);
         right.add(0D);
         LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forward, upward, right);
 
@@ -164,8 +204,8 @@ public class KnightSkills {
 
     private static Skill getThree() {
         List<String> description = new ArrayList<>();
-        description.add("Pull enemies around to yourself and");
-        description.add("taunt pulled monsters.");
+        description.add(ChatColor.GRAY + "Pull enemies around to yourself and");
+        description.add(ChatColor.GRAY + "taunt pulled monsters.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(10);
@@ -199,16 +239,26 @@ public class KnightSkills {
         cooldowns.add(24);
         cooldowns.add(24);
 
-        Skill skill = new Skill("Battle Cry", Material.IRON_HOE, 47, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Battle Cry", 6, Material.IRON_HOE, 47, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Double> areas = new ArrayList<>();
-        areas.add(3D);
+        areas.add(7D);
+        areas.add(8D);
+        areas.add(9D);
+        areas.add(10D);
+        areas.add(11D);
+        areas.add(12D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Double> speeds = new ArrayList<>();
+        speeds.add(-3D);
+        speeds.add(-3.25D);
+        speeds.add(-3.5D);
+        speeds.add(-3.75D);
         speeds.add(-4D);
+        speeds.add(-4.5D);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         TauntMechanic tauntMechanic = new TauntMechanic();
@@ -226,9 +276,8 @@ public class KnightSkills {
 
     private static Skill getPassive() {
         List<String> description = new ArrayList<>();
-        description.add("When you took any damage from a skill while");
-        description.add("this skill is active, block it and");
-        description.add("silence the attacker.");
+        description.add(ChatColor.GRAY + "When you took any damage from a skill while");
+        description.add(ChatColor.GRAY + "this skill is active, silence the attacker.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
@@ -262,16 +311,19 @@ public class KnightSkills {
         cooldowns.add(48);
         cooldowns.add(48);
 
-        Skill skill = new Skill("Spell Block", Material.IRON_HOE, 23, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Spell Block", 6, Material.IRON_HOE, 23, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
         TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(20L * 48);
 
         List<Integer> ccTicks = new ArrayList<>();
+        ccTicks.add(50);
         ccTicks.add(60);
-        ccTicks.add(60);
-        ccTicks.add(60);
+        ccTicks.add(70);
+        ccTicks.add(80);
+        ccTicks.add(90);
+        ccTicks.add(100);
 
         SilenceMechanic silenceMechanic = new SilenceMechanic(ccTicks);
 
@@ -284,8 +336,8 @@ public class KnightSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        description.add("Call Shield of the Heavens to protect");
-        description.add("your nearby allies!");
+        description.add(ChatColor.GRAY + "Call Shield of the Heavens to protect");
+        description.add(ChatColor.GRAY + "your nearby allies!");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(40);
@@ -319,30 +371,39 @@ public class KnightSkills {
         cooldowns.add(64);
         cooldowns.add(64);
 
-        Skill skill = new Skill("Shield of the Heavens", Material.IRON_HOE, 54, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Shield of the Heavens", 6, Material.IRON_HOE, 54, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         //Add HologramMechanic to SelfTarget's children
         List<Integer> seconds = new ArrayList<>();
+        seconds.add(24);
+        seconds.add(27);
         seconds.add(30);
-        seconds.add(30);
-        seconds.add(30);
+        seconds.add(33);
+        seconds.add(36);
+        seconds.add(42);
         HologramMechanic hologramMechanic = new HologramMechanic(Material.DIAMOND_SWORD, 10000005, seconds);
         HologramMechanic hologramMechanic2 = new HologramMechanic(Material.SHIELD, 10000004, seconds, ChatColor.YELLOW + "< Shield-of-the-Heavens %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
         List<Integer> repetitions = new ArrayList<>();
+        repetitions.add(8);
+        repetitions.add(9);
         repetitions.add(10);
-        repetitions.add(10);
-        repetitions.add(10);
+        repetitions.add(11);
+        repetitions.add(12);
+        repetitions.add(14);
         RepeatMechanic repeatMechanic = new RepeatMechanic(60L, repetitions);
 
         //Add areaTarget to repeatMechanic's children
         List<Double> radiuses = new ArrayList<>();
+        radiuses.add(8D);
         radiuses.add(9D);
-        radiuses.add(9D);
-        radiuses.add(9D);
+        radiuses.add(10D);
+        radiuses.add(11D);
+        radiuses.add(12D);
+        radiuses.add(14D);
         AreaTarget areaTarget = new AreaTarget(true, false, true, 999, radiuses);
 
         List<Integer> ticks = new ArrayList<>();
@@ -350,11 +411,15 @@ public class KnightSkills {
         ticks.add(60);
         ticks.add(60);
         ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
         List<Double> multipliers = new ArrayList<>();
+        multipliers.add(0.08);
         multipliers.add(0.1);
-        multipliers.add(0.1);
-        multipliers.add(0.1);
-        multipliers.add(0.1);
+        multipliers.add(0.12);
+        multipliers.add(0.14);
+        multipliers.add(0.16);
+        multipliers.add(0.2);
         BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks);
         BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks);
 

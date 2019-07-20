@@ -16,6 +16,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Ini
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.MeleeAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Egg;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -40,8 +41,8 @@ public class RogueSkills {
 
     private static Skill getOne() {
         List<String> description = new ArrayList<>();
-        description.add("Jump towards your target and deal damage.");
-        description.add("If you are behind your target also apply slow.");
+        description.add(ChatColor.GRAY + "Jump towards your target and deal damage.");
+        description.add(ChatColor.GRAY + "If you are behind your target also apply slow.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -75,7 +76,7 @@ public class RogueSkills {
         cooldowns.add(8);
         cooldowns.add(8);
 
-        Skill skill = new Skill("Claw Swipe", Material.IRON_HOE, 32, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Claw Swipe", 6, Material.IRON_HOE, 32, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -84,40 +85,46 @@ public class RogueSkills {
         FlagCondition phantomCondition2 = new FlagCondition("phantom", true);
 
         List<Double> ranges = new ArrayList<>();
-        ranges.add(6D);
-        ranges.add(6D);
-        ranges.add(6D);
-        ranges.add(6D);
-        ranges.add(6D);
-        ranges.add(6D);
+        ranges.add(2D);
+        ranges.add(2.5D);
+        ranges.add(3D);
+        ranges.add(3.5D);
+        ranges.add(4D);
+        ranges.add(5D);
         SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
 
         List<Double> ranges2 = new ArrayList<>();
-        ranges2.add(6D);
-        ranges2.add(6D);
-        ranges2.add(6D);
-        ranges2.add(6D);
-        ranges2.add(6D);
-        ranges2.add(6D);
+        ranges.add(4D);
+        ranges.add(4.5D);
+        ranges.add(5D);
+        ranges.add(5.5D);
+        ranges.add(6D);
+        ranges.add(8D);
         SingleTarget singleTarget2 = new SingleTarget(false, true, false, 1, ranges2, 4);
 
         DirectionCondition directionCondition = new DirectionCondition(false);
 
         List<Integer> ticks = new ArrayList<>();
+        ticks.add(40);
+        ticks.add(50);
         ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
+        ticks.add(70);
+        ticks.add(80);
+        ticks.add(100);
         List<Integer> amplifiers = new ArrayList<>();
+        amplifiers.add(2);
         amplifiers.add(3);
         amplifiers.add(4);
         amplifiers.add(5);
         amplifiers.add(6);
+        amplifiers.add(7);
         PotionEffectMechanic slow = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
 
         WarpTargetMechanic warpTargetMechanic = new WarpTargetMechanic(false);
 
         List<Double> damages = new ArrayList<>();
+        damages.add(3D);
+        damages.add(3D);
         damages.add(3D);
         damages.add(3D);
         damages.add(3D);
@@ -144,8 +151,8 @@ public class RogueSkills {
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
-        description.add("Dash forward and gain");
-        description.add("resistance to fall damage");
+        description.add(ChatColor.GRAY + "Dash forward and gain");
+        description.add(ChatColor.GRAY + "resistance to fall damage");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(5);
@@ -179,19 +186,29 @@ public class RogueSkills {
         cooldowns.add(16);
         cooldowns.add(16);
 
-        Skill skill = new Skill("Void Dash", Material.IRON_HOE, 10, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Void Dash", 6, Material.IRON_HOE, 10, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         FlagCondition phantomCondition = new FlagCondition("phantom", false);
 
         List<Double> forwards = new ArrayList<>();
-        forwards.add(1.5);
+        forwards.add(1.4);
+        forwards.add(1.6);
+        forwards.add(1.8);
+        forwards.add(2D);
+        forwards.add(2.2);
+        forwards.add(2.6);
         List<Double> upwards = new ArrayList<>();
-        upwards.add(1D);
+        upwards.add(1.7);
+        upwards.add(1.75);
         upwards.add(1.8);
         upwards.add(1.85);
+        upwards.add(1.9);
+        upwards.add(2D);
         List<Double> right = new ArrayList<>();
+        right.add(0D);
+        right.add(0D);
         right.add(0D);
         right.add(0D);
         right.add(0D);
@@ -201,12 +218,13 @@ public class RogueSkills {
         FlagCondition phantomCondition2 = new FlagCondition("phantom", true);
 
         List<Double> forwards2 = new ArrayList<>();
-        forwards2.add(1.5);
-        List<Double> upwards2 = new ArrayList<>();
-        upwards2.add(1D);
-        upwards2.add(1.8);
-        upwards2.add(1.85);
-        WarpMechanic warpMechanic2 = new WarpMechanic(false, forwards2, upwards2, right);
+        forwards2.add(1.6);
+        forwards2.add(1.8);
+        forwards2.add(2D);
+        forwards2.add(2.2);
+        forwards2.add(2.6);
+        forwards2.add(3D);
+        WarpMechanic warpMechanic2 = new WarpMechanic(false, forwards2, upwards, right);
 
         LandTrigger landTrigger = new LandTrigger();
 
@@ -232,7 +250,7 @@ public class RogueSkills {
 
     private static Skill getThree() {
         List<String> description = new ArrayList<>();
-        description.add("Throw shurikens one by one");
+        description.add(ChatColor.GRAY + "Throw shurikens one by one");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(10);
@@ -266,16 +284,19 @@ public class RogueSkills {
         cooldowns.add(24);
         cooldowns.add(24);
 
-        Skill skill = new Skill("Shurikens", Material.IRON_HOE, 56, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Shurikens", 6, Material.IRON_HOE, 56, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         List<Integer> repetitions = new ArrayList<>();
+        repetitions.add(2);
         repetitions.add(3);
         repetitions.add(4);
         repetitions.add(5);
         repetitions.add(6);
+        repetitions.add(7);
         RepeatMechanic repeatMechanic = new RepeatMechanic(10L, repetitions);
 
         List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(1);
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         projectileAmounts.add(1);
@@ -291,11 +312,15 @@ public class RogueSkills {
         ticks.add(60);
         ticks.add(60);
         ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
         List<Integer> amplifiers = new ArrayList<>();
+        amplifiers.add(2);
         amplifiers.add(3);
         amplifiers.add(4);
         amplifiers.add(5);
         amplifiers.add(6);
+        amplifiers.add(7);
         PotionEffectMechanic slow = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
 
         SelfTarget selfTarget = new SelfTarget();
@@ -305,6 +330,8 @@ public class RogueSkills {
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_THROW_SMALL_OBJECT));
 
         List<Double> damages = new ArrayList<>();
+        damages.add(3D);
+        damages.add(3D);
         damages.add(3D);
         damages.add(3D);
         damages.add(3D);
@@ -320,8 +347,8 @@ public class RogueSkills {
 
     private static Skill getPassive() {
         List<String> description = new ArrayList<>();
-        description.add("Deal bonus damage when you hit");
-        description.add("targets from behind with melee attacks");
+        description.add(ChatColor.GRAY + "Deal bonus damage when you hit");
+        description.add(ChatColor.GRAY + "targets from behind with melee attacks");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
@@ -355,7 +382,7 @@ public class RogueSkills {
         cooldowns.add(64);
         cooldowns.add(64);
 
-        Skill skill = new Skill("Backstab", Material.IRON_HOE, 17, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Backstab", 6, Material.IRON_HOE, 17, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
@@ -372,6 +399,8 @@ public class RogueSkills {
         damages.add(3D);
         damages.add(3D);
         damages.add(3D);
+        damages.add(3D);
+        damages.add(3D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         meleeAttackTrigger.addChildren(damageMechanic);
@@ -381,13 +410,13 @@ public class RogueSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        description.add("Become a phantom assassin:");
-        description.add("- Increase your critical chance");
-        description.add("(This can exceed the critical chance cap)");
-        description.add("- Increase your critical damage");
-        description.add("- Increase range of Claw Swipe");
-        description.add("- Increase range of Void Dash");
-        description.add("- Your shurikens slows the target");
+        description.add(ChatColor.GRAY + "Become a phantom assassin:");
+        description.add(ChatColor.GRAY + "- Increase your critical chance");
+        description.add(ChatColor.GRAY + "(This can exceed the critical chance cap)");
+        description.add(ChatColor.GRAY + "- Increase your critical damage");
+        description.add(ChatColor.GRAY + "- Increase range of Claw Swipe");
+        description.add(ChatColor.GRAY + "- Increase range of Void Dash");
+        description.add(ChatColor.GRAY + "- Your shurikens slows the target");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(40);
@@ -421,19 +450,33 @@ public class RogueSkills {
         cooldowns.add(64);
         cooldowns.add(64);
 
-        Skill skill = new Skill("Phantom Assassin", Material.IRON_HOE, 45, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Phantom Assassin", 6, Material.IRON_HOE, 45, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        List<Double> multipliers = new ArrayList<>();
-        multipliers.add(0.1);
-        BuffMechanic critDamageBuff = new BuffMechanic(BuffType.CRIT_DAMAGE, multipliers, ticks);
-        BuffMechanic critChanceBuff = new BuffMechanic(BuffType.CRIT_CHANCE, multipliers, ticks);
+        ticks.add(180);
+        ticks.add(200);
+        ticks.add(220);
+        ticks.add(240);
+        ticks.add(260);
+        ticks.add(300);
+        List<Double> damageMultipliers = new ArrayList<>();
+        damageMultipliers.add(0.2);
+        damageMultipliers.add(0.3);
+        damageMultipliers.add(0.4);
+        damageMultipliers.add(0.5);
+        damageMultipliers.add(0.6);
+        damageMultipliers.add(0.8);
+        BuffMechanic critDamageBuff = new BuffMechanic(BuffType.CRIT_DAMAGE, damageMultipliers, ticks);
+        List<Double> chanceMultipliers = new ArrayList<>();
+        chanceMultipliers.add(0.05);
+        chanceMultipliers.add(0.06);
+        chanceMultipliers.add(0.07);
+        chanceMultipliers.add(0.08);
+        chanceMultipliers.add(0.1);
+        chanceMultipliers.add(0.12);
+        BuffMechanic critChanceBuff = new BuffMechanic(BuffType.CRIT_CHANCE, chanceMultipliers, ticks);
         FlagSetMechanic flagSetMechanic = new FlagSetMechanic("phantom", ticks);
 
         skill.addTrigger(selfTarget);

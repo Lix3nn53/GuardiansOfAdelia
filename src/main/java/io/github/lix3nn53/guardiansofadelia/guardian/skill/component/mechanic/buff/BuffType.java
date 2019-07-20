@@ -15,17 +15,17 @@ public enum BuffType {
     public String toString() {
         switch (this) {
             case PHYSICAL_DAMAGE:
-                return ChatColor.RED + "Physical Damage";
+                return ChatColor.RED + "Physical Damage Buff";
             case PHYSICAL_DEFENSE:
-                return ChatColor.AQUA + "Physical Defense";
+                return ChatColor.AQUA + "Physical Defense Buff";
             case MAGIC_DAMAGE:
-                return ChatColor.DARK_AQUA + "Magical Damage";
+                return ChatColor.DARK_AQUA + "Magical Damage Buff";
             case MAGIC_DEFENSE:
-                return ChatColor.BLUE + "Magical Defense";
+                return ChatColor.BLUE + "Magical Defense Buff";
             case CRIT_DAMAGE:
-                return ChatColor.GOLD + "Critical Damage";
+                return ChatColor.GOLD + "Critical Damage Buff";
             case CRIT_CHANCE:
-                return ChatColor.LIGHT_PURPLE + "Critical Chance";
+                return ChatColor.LIGHT_PURPLE + "Critical Chance Buff";
         }
         return "";
     }

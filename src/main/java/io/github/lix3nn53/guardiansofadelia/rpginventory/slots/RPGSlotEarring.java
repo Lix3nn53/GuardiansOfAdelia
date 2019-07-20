@@ -30,7 +30,7 @@ public class RPGSlotEarring extends RPGSlotPassive implements RPGSlot {
         itemMeta.setLore(new ArrayList() {{
             add("");
         }});
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         if (itemMeta instanceof Damageable) {
             Damageable damageable = (Damageable) itemMeta;
             damageable.setDamage(9);

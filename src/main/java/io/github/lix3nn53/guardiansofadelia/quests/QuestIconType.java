@@ -15,7 +15,7 @@ public enum QuestIconType {
         ItemStack item = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta im = item.getItemMeta();
         im.setUnbreakable(true);
-        im.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        im.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         if (this.equals(QuestIconType.NEW)) {
             im.setCustomModelData(10000001);
         } else if (this.equals(QuestIconType.CURRENT)) {

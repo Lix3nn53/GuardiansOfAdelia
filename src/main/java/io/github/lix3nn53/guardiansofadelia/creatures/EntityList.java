@@ -770,7 +770,7 @@ public class EntityList {
             SkullMeta sim = (SkullMeta) head.getItemMeta();
             sim.setOwningPlayer(Bukkit.getPlayer("SheepKid"));
             sim.setUnbreakable(true);
-            sim.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+            sim.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             head.setItemMeta(sim);
 
             ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);

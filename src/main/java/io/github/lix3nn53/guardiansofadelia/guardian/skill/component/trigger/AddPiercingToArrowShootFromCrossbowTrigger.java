@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -45,6 +46,11 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (skillLevel == 0 || skillLevel == piercingLevel.size()) {
+            additions.add(ChatColor.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel));
+        } else {
+            additions.add(ChatColor.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel - 1) + " -> " + piercingLevel.get(skillLevel));
+        }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 

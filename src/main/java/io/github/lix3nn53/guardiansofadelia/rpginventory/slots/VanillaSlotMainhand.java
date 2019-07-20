@@ -28,7 +28,7 @@ public class VanillaSlotMainhand {
         itemMeta.setLore(new ArrayList() {{
             add("Only shields and daggers can be placed here");
         }});
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         if (itemMeta instanceof Damageable) {
             Damageable damageable = (Damageable) itemMeta;
             damageable.setDamage(15);

@@ -12,6 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Sing
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.MeleeAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.RangedAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.potion.PotionEffectType;
@@ -35,7 +36,7 @@ public class MonkSkills {
 
     private static Skill getOne() {
         List<String> description = new ArrayList<>();
-        description.add("Push your target with a powerful fist.");
+        description.add(ChatColor.GRAY + "Push your target with a powerful fist.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -69,12 +70,15 @@ public class MonkSkills {
         cooldowns.add(8);
         cooldowns.add(8);
 
-        Skill skill = new Skill("Iron Fist", Material.IRON_HOE, 21, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Iron Fist", 6, Material.IRON_HOE, 21, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Double> ranges = new ArrayList<>();
+        ranges.add(3D);
+        ranges.add(3.25D);
         ranges.add(3.5D);
+        ranges.add(3.75D);
         ranges.add(4D);
         ranges.add(4.5D);
         SingleTarget singleTarget = new SingleTarget(false, true, false, 999, ranges, 4);
@@ -83,6 +87,9 @@ public class MonkSkills {
         speeds.add(1.2D);
         speeds.add(1.4D);
         speeds.add(1.6D);
+        speeds.add(1.8D);
+        speeds.add(2D);
+        speeds.add(2.4D);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         skill.addTrigger(selfTarget);
@@ -94,8 +101,8 @@ public class MonkSkills {
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
-        description.add("Dash to one side.");
-        description.add("Direction changes each time.");
+        description.add(ChatColor.GRAY + "Dash slightly back to one side.");
+        description.add(ChatColor.GRAY + "Direction changes each time.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(5);
@@ -122,14 +129,14 @@ public class MonkSkills {
         manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(4);
-        cooldowns.add(4);
-        cooldowns.add(4);
-        cooldowns.add(4);
+        cooldowns.add(6);
+        cooldowns.add(6);
+        cooldowns.add(5);
+        cooldowns.add(5);
         cooldowns.add(4);
         cooldowns.add(4);
 
-        Skill skill = new Skill("Tumble", Material.IRON_HOE, 33, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Tumble", 6, Material.IRON_HOE, 33, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -140,20 +147,32 @@ public class MonkSkills {
         upward.add(0D);
         upward.add(0D);
         upward.add(0D);
+        upward.add(0D);
+        upward.add(0D);
+        upward.add(0D);
         List<Double> forward = new ArrayList<>();
         forward.add(-0.4D);
-        forward.add(0D);
-        forward.add(0D);
+        forward.add(-0.4D);
+        forward.add(-0.4D);
+        forward.add(-0.4D);
+        forward.add(-0.4D);
+        forward.add(-0.4D);
         List<Double> right = new ArrayList<>();
-        right.add(0.8);
-        right.add(1D);
         right.add(1.2D);
+        right.add(1.3D);
+        right.add(1.4D);
+        right.add(1.5D);
+        right.add(1.6D);
+        right.add(1.8D);
         LaunchMechanic rightLaunch = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forward, upward, right);
 
         List<Double> left = new ArrayList<>();
-        left.add(-0.8);
-        left.add(-1D);
-        left.add(-1.2D);
+        right.add(-1.2D);
+        right.add(-1.3D);
+        right.add(-1.4D);
+        right.add(-1.5D);
+        right.add(-1.6D);
+        right.add(-1.8D);
         LaunchMechanic leftLaunch = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forward, upward, left);
 
         skill.addTrigger(selfTarget);
@@ -179,9 +198,9 @@ public class MonkSkills {
 
     private static Skill getThree() {
         List<String> description = new ArrayList<>();
-        description.add("Make yourself invincible and start");
-        description.add("healing over time. You can't");
-        description.add("can't make any moves during this effect.");
+        description.add(ChatColor.GRAY + "Make yourself invincible and start");
+        description.add(ChatColor.GRAY + "healing over time. You can't");
+        description.add(ChatColor.GRAY + "can't make any moves during this effect.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(10);
@@ -215,16 +234,21 @@ public class MonkSkills {
         cooldowns.add(42);
         cooldowns.add(42);
 
-        Skill skill = new Skill("Serenity", Material.IRON_HOE, 35, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Serenity", 6, Material.IRON_HOE, 35, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Integer> ccTicks = new ArrayList<>();
-        ccTicks.add(60);
-        ccTicks.add(60);
-        ccTicks.add(60);
-        ccTicks.add(60);
+        ccTicks.add(120);
+        ccTicks.add(140);
+        ccTicks.add(160);
+        ccTicks.add(180);
+        ccTicks.add(200);
+        ccTicks.add(240);
         List<Integer> ccAmplifiers = new ArrayList<>();
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
         ccAmplifiers.add(999);
         ccAmplifiers.add(999);
         ccAmplifiers.add(999);
@@ -233,31 +257,41 @@ public class MonkSkills {
         selfTarget.addChildren(new SilenceMechanic(ccTicks));
 
         List<Integer> repetitions = new ArrayList<>();
-        repetitions.add(15);
-        repetitions.add(18);
-        repetitions.add(22);
-        RepeatMechanic repeatMechanic = new RepeatMechanic(40L, repetitions);
+        repetitions.add(6);
+        repetitions.add(7);
+        repetitions.add(8);
+        repetitions.add(9);
+        repetitions.add(10);
+        repetitions.add(12);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(20L, repetitions);
 
 
         List<Double> percents = new ArrayList<>();
-        percents.add(0.3);
         percents.add(0.5);
         percents.add(0.6);
+        percents.add(0.65);
+        percents.add(0.7);
+        percents.add(0.75);
+        percents.add(0.8);
         repeatMechanic.addChildren(new HealMechanic(new ArrayList<>(), percents));
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(repeatMechanic);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
+        ticks.add(120);
+        ticks.add(140);
+        ticks.add(160);
+        ticks.add(180);
+        ticks.add(200);
+        ticks.add(240);
         List<Double> multipliers = new ArrayList<>();
-        multipliers.add(0.1);
-        multipliers.add(0.12);
-        multipliers.add(0.15);
-        multipliers.add(0.18);
+        multipliers.add(0.6);
+        multipliers.add(0.65);
+        multipliers.add(0.7);
+        multipliers.add(0.75);
+        multipliers.add(0.8);
+        multipliers.add(0.9);
         BuffMechanic phyDef = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks);
         BuffMechanic mgcDef = new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks);
         selfTarget.addChildren(phyDef);
@@ -268,9 +302,9 @@ public class MonkSkills {
 
     private static Skill getPassive() {
         List<String> description = new ArrayList<>();
-        description.add("Marks the target you hit by throwing your spear.");
-        description.add("Melee attacks on marked targets will deal");
-        description.add("bonus damage and slow them.");
+        description.add(ChatColor.GRAY + "Marks the target you hit by throwing your spear.");
+        description.add(ChatColor.GRAY + "Melee attacks on marked targets will deal");
+        description.add(ChatColor.GRAY + "bonus damage and slow them.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
@@ -304,7 +338,7 @@ public class MonkSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Mark of Ocean", Material.IRON_HOE, 60, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Mark of Ocean", 6, Material.IRON_HOE, 60, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -316,6 +350,7 @@ public class MonkSkills {
         flagTicks.add(140);
         flagTicks.add(150);
         flagTicks.add(160);
+        flagTicks.add(180);
         FlagSetMechanic flagSetMechanic = new FlagSetMechanic("oceanMark", flagTicks);
 
         MeleeAttackTrigger meleeAttackTrigger = new MeleeAttackTrigger(cooldowns);
@@ -326,18 +361,24 @@ public class MonkSkills {
         damages.add(13D);
         damages.add(14D);
         damages.add(15D);
+        damages.add(15D);
+        damages.add(15D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
+        ticks.add(65);
+        ticks.add(70);
+        ticks.add(75);
+        ticks.add(80);
+        ticks.add(90);
         List<Integer> amplifiers = new ArrayList<>();
+        amplifiers.add(1);
         amplifiers.add(2);
         amplifiers.add(3);
         amplifiers.add(4);
         amplifiers.add(5);
+        amplifiers.add(6);
         PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
 
         FlagRemoveMechanic flagRemoveMechanic = new FlagRemoveMechanic("oceanMark");
@@ -358,8 +399,8 @@ public class MonkSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        description.add("Launch nearby enemies upwards and");
-        description.add("&5stun them in the air");
+        description.add(ChatColor.GRAY + "Launch nearby enemies upwards and");
+        description.add(ChatColor.GRAY + "stun them in the air");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(40);
@@ -393,22 +434,30 @@ public class MonkSkills {
         cooldowns.add(64);
         cooldowns.add(64);
 
-        Skill skill = new Skill("Aqua Prison", Material.IRON_HOE, 25, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Aqua Prison", 6, Material.IRON_HOE, 25, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Double> radiuses = new ArrayList<>();
-        radiuses.add(3D);
-        radiuses.add(3.5D);
         radiuses.add(4D);
+        radiuses.add(4.25D);
+        radiuses.add(4.5D);
+        radiuses.add(4.75D);
         radiuses.add(5D);
+        radiuses.add(5.5D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
         List<Double> upward = new ArrayList<>();
+        upward.add(2D);
         upward.add(3D);
         upward.add(4D);
         upward.add(5D);
+        upward.add(6D);
+        upward.add(7D);
         List<Double> forward = new ArrayList<>();
+        forward.add(0D);
+        forward.add(0D);
+        forward.add(0D);
         forward.add(0D);
         forward.add(0D);
         forward.add(0D);
@@ -416,14 +465,21 @@ public class MonkSkills {
         right.add(0D);
         right.add(0D);
         right.add(0D);
+        right.add(0D);
+        right.add(0D);
+        right.add(0D);
         LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forward, upward, right);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
+        ticks.add(140);
+        ticks.add(160);
+        ticks.add(180);
+        ticks.add(200);
+        ticks.add(240);
+        ticks.add(280);
         List<Integer> amplifiers = new ArrayList<>();
+        amplifiers.add(0);
+        amplifiers.add(0);
         amplifiers.add(0);
         amplifiers.add(0);
         amplifiers.add(0);
@@ -439,11 +495,13 @@ public class MonkSkills {
         areaTarget.addChildren(silenceMechanic);
 
         List<Integer> repeatAmount = new ArrayList<>();
+        repeatAmount.add(28);
+        repeatAmount.add(32);
+        repeatAmount.add(36);
         repeatAmount.add(40);
-        repeatAmount.add(50);
-        repeatAmount.add(60);
-        repeatAmount.add(70);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.WATER_BUBBLE, ArrangementParticle.CIRCLE, 1.4, 4, 0, 0, 0,
+        repeatAmount.add(48);
+        repeatAmount.add(56);
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.WATER_BUBBLE, ArrangementParticle.SPHERE, 1.4, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, null);
         selfTarget.addChildren(particleAnimationMechanic);
 

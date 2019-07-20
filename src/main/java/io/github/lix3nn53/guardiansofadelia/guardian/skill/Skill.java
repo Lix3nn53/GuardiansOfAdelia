@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Ini
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public class Skill {
 
     private final String name;
+    private final int maxSkillLevel;
     private final Material material;
     private final int customModelData;
     private final List<String> description;
@@ -27,8 +29,9 @@ public class Skill {
 
     private final List<SkillComponent> triggers = new ArrayList<>();
 
-    public Skill(String name, Material material, int customModelData, List<String> description, List<Integer> reqPlayerLevels, List<Integer> reqSkillPoints, List<Integer> manaCosts, List<Integer> cooldowns) {
+    public Skill(String name, int maxSkillLevel, Material material, int customModelData, List<String> description, List<Integer> reqPlayerLevels, List<Integer> reqSkillPoints, List<Integer> manaCosts, List<Integer> cooldowns) {
         this.name = name;
+        this.maxSkillLevel = maxSkillLevel;
         this.material = material;
         this.customModelData = customModelData;
         this.description = description;
@@ -113,8 +116,13 @@ public class Skill {
         lore.add(reqSkillPointsColor + "Required Skill Points: " + reqSkillPoints);
 
         lore.add(ChatColor.YELLOW + "------------------------------");
-        lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel));
-        lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel));
+        if (skillLevel == 0 || skillLevel == maxSkillLevel) {
+            lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel));
+            lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel));
+        } else {
+            lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel - 1) + " -> " + getManaCost(skillLevel));
+            lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel - 1) + " -> " + getCooldown(skillLevel));
+        }
 
         lore.add(ChatColor.YELLOW + "------------------------------");
         //skill attributes
@@ -126,6 +134,7 @@ public class Skill {
         lore.addAll(getDescription());
 
         itemMeta.setLore(lore);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         icon.setItemMeta(itemMeta);
         return icon;

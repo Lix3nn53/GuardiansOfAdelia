@@ -17,6 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Lan
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.RangedAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -43,7 +44,7 @@ public class ArcherSkills {
 
     private static Skill getOne() {
         List<String> description = new ArrayList<>();
-        description.add("Shoot an arrow that poison target");
+        description.add(ChatColor.GRAY + "Shoot an arrow that poisons target");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -70,19 +71,18 @@ public class ArcherSkills {
         manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
+        cooldowns.add(12);
+        cooldowns.add(11);
+        cooldowns.add(10);
+        cooldowns.add(9);
         cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
+        cooldowns.add(7);
 
-        Skill skill = new Skill("Poison Arrow", Material.IRON_HOE, 27, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Poison Arrow", 6, Material.IRON_HOE, 27, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Integer> projectileAmounts = new ArrayList<>();
-        projectileAmounts.add(1);
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         projectileAmounts.add(1);
@@ -103,12 +103,16 @@ public class ArcherSkills {
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
+        ticks.add(80);
+        ticks.add(100);
+        ticks.add(120);
+        ticks.add(140);
+        ticks.add(160);
         List<Integer> amplifiers = new ArrayList<>();
-        amplifiers.add(2);
-        amplifiers.add(2);
+        amplifiers.add(1);
+        amplifiers.add(1);
+        amplifiers.add(1);
+        amplifiers.add(1);
         amplifiers.add(2);
         amplifiers.add(2);
         PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.POISON, ticks, amplifiers);
@@ -124,8 +128,7 @@ public class ArcherSkills {
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
-        description.add("Root nearby targets and gain");
-        description.add("movement speed.");
+        description.add(ChatColor.GRAY + "Root nearby targets and gain movement speed");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(5);
@@ -159,22 +162,30 @@ public class ArcherSkills {
         cooldowns.add(16);
         cooldowns.add(16);
 
-        Skill skill = new Skill("Zephyr", Material.IRON_HOE, 33, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Zephyr", 6, Material.IRON_HOE, 33, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(3D);
-        radiuses.add(3D);
-        radiuses.add(3D);
+        radiuses.add(3.5D);
+        radiuses.add(4D);
+        radiuses.add(4.5D);
+        radiuses.add(5D);
+        radiuses.add(6D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
         List<Integer> ccTicks = new ArrayList<>();
+        ccTicks.add(40);
+        ccTicks.add(50);
         ccTicks.add(60);
-        ccTicks.add(60);
-        ccTicks.add(60);
-        ccTicks.add(60);
+        ccTicks.add(70);
+        ccTicks.add(80);
+        ccTicks.add(90);
         List<Integer> ccAmplifiers = new ArrayList<>();
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
         ccAmplifiers.add(999);
         ccAmplifiers.add(999);
         ccAmplifiers.add(999);
@@ -184,23 +195,29 @@ public class ArcherSkills {
         skill.addTrigger(selfTarget);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
+        ticks.add(80);
+        ticks.add(100);
+        ticks.add(120);
+        ticks.add(140);
+        ticks.add(160);
+        ticks.add(200);
         List<Integer> amplifiers = new ArrayList<>();
+        amplifiers.add(1);
         amplifiers.add(2);
-        amplifiers.add(2);
-        amplifiers.add(2);
-        amplifiers.add(2);
+        amplifiers.add(3);
+        amplifiers.add(4);
+        amplifiers.add(5);
+        amplifiers.add(6);
         selfTarget.addChildren(areaTarget);
         selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SPEED, ticks, amplifiers));
         List<Integer> repeatAmount = new ArrayList<>();
-        repeatAmount.add(8);
-        repeatAmount.add(2);
-        repeatAmount.add(2);
-        repeatAmount.add(2);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1.4, 4, 0, 0, 0,
+        repeatAmount.add(16);
+        repeatAmount.add(20);
+        repeatAmount.add(24);
+        repeatAmount.add(28);
+        repeatAmount.add(32);
+        repeatAmount.add(40);
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.AQUA, 8));
         selfTarget.addChildren(particleAnimationMechanic);
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_SONIC_BOOM));
@@ -210,8 +227,8 @@ public class ArcherSkills {
 
     private static Skill getThree() {
         List<String> description = new ArrayList<>();
-        description.add("Jump backwards into the air and");
-        description.add("gain resistance to fall damage.");
+        description.add(ChatColor.GRAY + "Jump backwards into the sky and");
+        description.add(ChatColor.GRAY + "gain resistance to fall damage");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(10);
@@ -245,30 +262,42 @@ public class ArcherSkills {
         cooldowns.add(24);
         cooldowns.add(24);
 
-        Skill skill = new Skill("Purple Wings", Material.IRON_HOE, 41, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Purple Wings", 6, Material.IRON_HOE, 41, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Double> forwards = new ArrayList<>();
         forwards.add(-1.25);
-        forwards.add(-1.25);
-        forwards.add(-1.25);
+        forwards.add(-1.3);
+        forwards.add(-1.35);
+        forwards.add(-1.4);
+        forwards.add(-1.45);
+        forwards.add(-1.5);
         List<Double> upwards = new ArrayList<>();
         upwards.add(1.2);
         upwards.add(1.35);
         upwards.add(1.5);
+        upwards.add(1.65);
+        upwards.add(1.8);
+        upwards.add(2D);
         List<Double> right = new ArrayList<>();
+        right.add(0D);
+        right.add(0D);
+        right.add(0D);
         right.add(0D);
         right.add(0D);
         right.add(0D);
         LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forwards, upwards, right);
 
         List<Integer> repeatAmounts = new ArrayList<>();
-        repeatAmounts.add(10);
-        repeatAmounts.add(10);
-        repeatAmounts.add(10);
+        repeatAmounts.add(20);
+        repeatAmounts.add(25);
+        repeatAmounts.add(30);
+        repeatAmounts.add(35);
+        repeatAmounts.add(40);
+        repeatAmounts.add(50);
         ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.SPELL_WITCH, ArrangementParticle.SPHERE, 1.2,
-                4, 0, 0, 0, 0, 0, 0, 0, 4, repeatAmounts, null);
+                8, 0, 0, 0, 0, 0, 0, 0, 5, repeatAmounts, null);
 
         ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>()); //send empty list for infinite
 
@@ -290,8 +319,9 @@ public class ArcherSkills {
 
     private static Skill getPassive() {
         List<String> description = new ArrayList<>();
-        description.add("Your every second successful projectile hit");
-        description.add("gives you bonus critical chance");
+        description.add(ChatColor.GRAY + "Your every third successful projectile hit");
+        description.add(ChatColor.GRAY + "gives you bonus critical chance");
+        description.add(ChatColor.GRAY + "(This can exceed the critical chance cap)");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
@@ -325,28 +355,32 @@ public class ArcherSkills {
         cooldowns.add(1);
         cooldowns.add(1);
 
-        Skill skill = new Skill("Sharpshooter", Material.IRON_HOE, 21, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Sharpshooter", 6, Material.IRON_HOE, 21, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
         RangedAttackTrigger rangedAttackTrigger = new RangedAttackTrigger(cooldowns);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(240);
-        ticks.add(240);
-        ticks.add(240);
-        ticks.add(240);
+        ticks.add(100);
+        ticks.add(120);
+        ticks.add(140);
+        ticks.add(160);
+        ticks.add(200);
+        ticks.add(220);
         List<Double> multipliers = new ArrayList<>();
+        multipliers.add(0.7);
+        multipliers.add(0.8);
+        multipliers.add(0.9);
         multipliers.add(0.1);
-        multipliers.add(0.1);
-        multipliers.add(0.1);
-        multipliers.add(0.1);
+        multipliers.add(0.12);
+        multipliers.add(0.14);
         BuffMechanic buffMechanic = new BuffMechanic(BuffType.CRIT_CHANCE, multipliers, ticks);
 
-        ValueCondition activateCondition = new ValueCondition(2, 2);
+        ValueCondition activateCondition = new ValueCondition(3, 3);
         ValueSetMechanic valueSetMechanic = new ValueSetMechanic(0);
 
-        ValueCondition upValueCondition = new ValueCondition(0, 1);
+        ValueCondition upValueCondition = new ValueCondition(0, 2);
         ValueAddMechanic valueAddMechanic = new ValueAddMechanic(1);
 
         skill.addTrigger(initializeTrigger);
@@ -357,21 +391,20 @@ public class ArcherSkills {
         selfTargetForActivate.addChildren(activateCondition);
         activateCondition.addChildren(buffMechanic);
         activateCondition.addChildren(valueSetMechanic);
-        activateCondition.addChildren(new MessageMechanic("reset value"));
+        activateCondition.addChildren(new SoundMechanic(GoaSound.SKILL_BUFF));
 
         SelfTarget selfTargetForUp = new SelfTarget();
         rangedAttackTrigger.addChildren(selfTargetForUp);
         selfTargetForUp.addChildren(upValueCondition);
         upValueCondition.addChildren(valueAddMechanic);
-        upValueCondition.addChildren(new MessageMechanic("up value"));
 
         return skill;
     }
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        description.add("Reveal an area with a flurry of arrows,");
-        description.add("dealing waves of damage to opponents.");
+        description.add(ChatColor.GRAY + "Reveal an area with a flurry of arrows,");
+        description.add(ChatColor.GRAY + "dealing waves of damage to opponents");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(40);
@@ -405,18 +438,23 @@ public class ArcherSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Make It Rain", Material.IRON_HOE, 48, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Make It Rain", 6, Material.IRON_HOE, 48, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Double> ranges = new ArrayList<>();
-        ranges.add(12D);
-        ranges.add(12D);
-        ranges.add(12D);
-        ranges.add(12D);
+        ranges.add(24D);
+        ranges.add(24D);
+        ranges.add(24D);
+        ranges.add(24D);
+        ranges.add(24D);
+        ranges.add(24D);
         SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
 
         List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(24);
+        projectileAmounts.add(24);
+        projectileAmounts.add(24);
         projectileAmounts.add(24);
         projectileAmounts.add(24);
         projectileAmounts.add(24);
@@ -424,9 +462,12 @@ public class ArcherSkills {
                 0, 0, 200, true, Arrow.class);
 
         List<Integer> repeatAmounts = new ArrayList<>();
-        repeatAmounts.add(2);
-        repeatAmounts.add(2);
-        repeatAmounts.add(2);
+        repeatAmounts.add(3);
+        repeatAmounts.add(3);
+        repeatAmounts.add(4);
+        repeatAmounts.add(4);
+        repeatAmounts.add(5);
+        repeatAmounts.add(6);
         RepeatMechanic repeatMechanic = new RepeatMechanic(20, repeatAmounts);
 
         skill.addTrigger(selfTarget);
@@ -435,6 +476,8 @@ public class ArcherSkills {
         repeatMechanic.addChildren(projectileMechanic);
         repeatMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_ARROW_RAIN));
         List<Double> damages = new ArrayList<>();
+        damages.add(16D);
+        damages.add(16D);
         damages.add(16D);
         damages.add(16D);
         damages.add(16D);

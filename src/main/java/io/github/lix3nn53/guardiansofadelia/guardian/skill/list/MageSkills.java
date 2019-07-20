@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Ini
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMeleeDamageTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Fireball;
@@ -39,8 +40,8 @@ public class MageSkills {
 
     private static Skill getOne() {
         List<String> description = new ArrayList<>();
-        description.add("Deals area damage if");
-        description.add("fireball hits a target.");
+        description.add(ChatColor.GRAY + "Shoot a fireball that deals damage to");
+        description.add(ChatColor.GRAY + "targets in area if it hits a target.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
@@ -74,23 +75,34 @@ public class MageSkills {
         cooldowns.add(3);
         cooldowns.add(3);
 
-        Skill skill = new Skill("Fireball", Material.IRON_HOE, 12, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Fireball", 6, Material.IRON_HOE, 12, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
 
         List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
                 0, 1, 0, 200, true, Fireball.class);
 
         List<Double> radiuses = new ArrayList<>();
+        radiuses.add(2.5D);
+        radiuses.add(2.75D);
         radiuses.add(3D);
+        radiuses.add(3.25D);
+        radiuses.add(3.5D);
         radiuses.add(4D);
-        radiuses.add(3D);
-        radiuses.add(3D);
-        radiuses.add(3D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
         List<Double> damages = new ArrayList<>();
+        damages.add(10D);
+        damages.add(10D);
+        damages.add(10D);
+        damages.add(10D);
+        damages.add(10D);
         damages.add(10D);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
 
@@ -106,8 +118,8 @@ public class MageSkills {
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
-        description.add("Shoot a lightning bolt that deals damage and");
-        description.add("silences targets in area if it hits a target.");
+        description.add(ChatColor.GRAY + "Shoot a lightning bolt that deals damage and");
+        description.add(ChatColor.GRAY + "silences targets in area if it hits a target.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(5);
@@ -141,25 +153,45 @@ public class MageSkills {
         cooldowns.add(12);
         cooldowns.add(12);
 
-        Skill skill = new Skill("Lightning Bolt", Material.IRON_HOE, 7, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Lightning Bolt", 6, Material.IRON_HOE, 7, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
 
         List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
                 0, 1, 0, 200, true, SmallFireball.class, Particle.VILLAGER_HAPPY,
                 ArrangementParticle.SPHERE, 0.5, 4, null, true);
 
         List<Double> radiuses = new ArrayList<>();
+        radiuses.add(2.5D);
+        radiuses.add(2.75D);
         radiuses.add(3D);
+        radiuses.add(3.25D);
+        radiuses.add(3.5D);
+        radiuses.add(4D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
         List<Double> damages = new ArrayList<>();
         damages.add(10D);
+        damages.add(10D);
+        damages.add(10D);
+        damages.add(10D);
+        damages.add(10D);
+        damages.add(10D);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
         areaTarget.addChildren(new ParticleMechanic(Particle.VILLAGER_HAPPY, ArrangementParticle.CIRCLE, 2, 4, 0, 0, 0, 0, 0.5, 0, 0, null));
         List<Integer> durations = new ArrayList<>();
+        durations.add(40);
+        durations.add(50);
         durations.add(60);
+        durations.add(70);
+        durations.add(80);
+        durations.add(100);
         areaTarget.addChildren(new SilenceMechanic(durations));
 
         projectileMechanic.addChildren(areaTarget);
@@ -175,7 +207,7 @@ public class MageSkills {
 
     private static Skill getThree() {
         List<String> description = new ArrayList<>();
-        description.add("Push nearby enemies and cleanse yourself.");
+        description.add(ChatColor.GRAY + "Push nearby enemies away.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(10);
@@ -209,20 +241,26 @@ public class MageSkills {
         cooldowns.add(16);
         cooldowns.add(16);
 
-        Skill skill = new Skill("Shockwave", Material.IRON_HOE, 11, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Shockwave", 6, Material.IRON_HOE, 11, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Double> areas = new ArrayList<>();
         areas.add(3D);
-        areas.add(3D);
-        areas.add(3D);
+        areas.add(3.25D);
+        areas.add(3.5D);
+        areas.add(3.75D);
+        areas.add(4D);
+        areas.add(4.5D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Double> speeds = new ArrayList<>();
+        speeds.add(1.6D);
         speeds.add(1.8D);
         speeds.add(2D);
         speeds.add(2.2D);
+        speeds.add(2.4D);
+        speeds.add(2.8D);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         skill.addTrigger(selfTarget);
@@ -237,9 +275,9 @@ public class MageSkills {
 
     private static Skill getPassive() {
         List<String> description = new ArrayList<>();
-        description.add("When you took physical damage while");
-        description.add("this skill is active, block it and");
-        description.add("gain shields.");
+        description.add(ChatColor.GRAY + "When you took physical damage while");
+        description.add(ChatColor.GRAY + "this skill is active, root nearby targets");
+        description.add(ChatColor.GRAY + "and gain physical defense buff.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
@@ -267,37 +305,59 @@ public class MageSkills {
         manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(10);
-        cooldowns.add(10);
-        cooldowns.add(10);
-        cooldowns.add(10);
-        cooldowns.add(10);
-        cooldowns.add(10);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
 
-        Skill skill = new Skill("Mental Fortitude", Material.IRON_HOE, 10, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Mental Fortitude", 6, Material.IRON_HOE, 10, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        TookMeleeDamageTrigger tookMeleeDamageTrigger = new TookMeleeDamageTrigger(20L * 10);
+        TookMeleeDamageTrigger tookMeleeDamageTrigger = new TookMeleeDamageTrigger(20L * 64);
 
-        List<Double> radiuses = new ArrayList<>();
-        radiuses.add(3D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
+        List<Double> areas = new ArrayList<>();
+        areas.add(3D);
+        areas.add(3.25D);
+        areas.add(3.5D);
+        areas.add(3.75D);
+        areas.add(4D);
+        areas.add(4.5D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Integer> ccTicks = new ArrayList<>();
+        ccTicks.add(40);
+        ccTicks.add(50);
         ccTicks.add(60);
-        ccTicks.add(60);
-        ccTicks.add(60);
-        ccTicks.add(60);
+        ccTicks.add(70);
+        ccTicks.add(80);
+        ccTicks.add(100);
         List<Integer> ccAmplifiers = new ArrayList<>();
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
         ccAmplifiers.add(999);
         areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
         areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
 
         List<Double> multipliers = new ArrayList<>();
-        multipliers.add(1.2);
+        multipliers.add(0.1);
+        multipliers.add(0.15);
+        multipliers.add(0.2);
+        multipliers.add(0.25);
+        multipliers.add(0.3);
+        multipliers.add(0.4);
         List<Integer> ticks = new ArrayList<>();
         ticks.add(200);
+        ticks.add(225);
+        ticks.add(250);
+        ticks.add(275);
+        ticks.add(300);
+        ticks.add(350);
         BuffMechanic buffMechanic = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks);
 
         skill.addTrigger(initializeTrigger);
@@ -310,11 +370,11 @@ public class MageSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        description.add("Summon a meteor from sky that hits");
-        description.add("nearby targets when it reaches ground.");
+        description.add(ChatColor.GRAY + "Summon a meteor from sky that hits");
+        description.add(ChatColor.GRAY + "nearby targets when it reaches ground.");
         description.add("");
-        description.add("The hit effect deals damage, ignites");
-        description.add("and launches targets to sky.");
+        description.add(ChatColor.GRAY + "The hit effect deals damage, ignites");
+        description.add(ChatColor.GRAY + "and launches targets to sky.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(40);
@@ -348,17 +408,23 @@ public class MageSkills {
         cooldowns.add(5);
         cooldowns.add(5);
 
-        Skill skill = new Skill("Chaos Meteor", Material.IRON_HOE, 30, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Chaos Meteor", 6, Material.IRON_HOE, 30, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
         List<Double> ranges = new ArrayList<>();
-        ranges.add(12D);
-        ranges.add(12D);
-        ranges.add(12D);
+        ranges.add(24D);
+        ranges.add(24D);
+        ranges.add(24D);
+        ranges.add(24D);
+        ranges.add(24D);
+        ranges.add(24D);
         SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
 
         List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         projectileAmounts.add(1);
@@ -367,16 +433,21 @@ public class MageSkills {
                 ArrangementParticle.SPHERE, 2, 32, null, false);
 
         List<Double> areas = new ArrayList<>();
+        areas.add(6D);
+        areas.add(7D);
         areas.add(8D);
-        areas.add(8D);
-        areas.add(8D);
+        areas.add(9D);
+        areas.add(10D);
+        areas.add(12D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Integer> repeatAmounts = new ArrayList<>();
-        repeatAmounts.add(2);
-        repeatAmounts.add(2);
-        repeatAmounts.add(2);
-        repeatAmounts.add(2);
+        repeatAmounts.add(1);
+        repeatAmounts.add(1);
+        repeatAmounts.add(1);
+        repeatAmounts.add(1);
+        repeatAmounts.add(1);
+        repeatAmounts.add(1);
         RepeatMechanic repeatMechanic = new RepeatMechanic(40, repeatAmounts);
 
         skill.addTrigger(selfTarget);
@@ -387,13 +458,18 @@ public class MageSkills {
         damages.add(16D);
         damages.add(16D);
         damages.add(16D);
+        damages.add(16D);
+        damages.add(16D);
+        damages.add(16D);
         projectileMechanic.addChildren(areaTarget);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
         List<Integer> ticks = new ArrayList<>();
         ticks.add(80);
-        ticks.add(80);
-        ticks.add(80);
-        ticks.add(80);
+        ticks.add(90);
+        ticks.add(100);
+        ticks.add(120);
+        ticks.add(140);
+        ticks.add(180);
         areaTarget.addChildren(new FireMechanic(ticks));
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.SPHERE, 4, 4,
@@ -401,14 +477,23 @@ public class MageSkills {
         projectileMechanic.addChildren(particleMechanic);
 
         List<Double> upward = new ArrayList<>();
+        upward.add(1.2D);
         upward.add(1.4D);
-        upward.add(1.4D);
-        upward.add(1.4D);
+        upward.add(1.6D);
+        upward.add(1.8D);
+        upward.add(2D);
+        upward.add(2.4D);
         List<Double> forward = new ArrayList<>();
         forward.add(0D);
         forward.add(0D);
         forward.add(0D);
+        forward.add(0D);
+        forward.add(0D);
+        forward.add(0D);
         List<Double> right = new ArrayList<>();
+        right.add(0D);
+        right.add(0D);
+        right.add(0D);
         right.add(0D);
         right.add(0D);
         right.add(0D);
