@@ -7,7 +7,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent {
@@ -45,8 +44,8 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        return new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 
     /**

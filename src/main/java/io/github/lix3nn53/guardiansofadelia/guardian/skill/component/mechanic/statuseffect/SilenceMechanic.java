@@ -2,10 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.s
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SilenceMechanic extends MechanicComponent {
@@ -37,14 +37,13 @@ public class SilenceMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0 || skillLevel == duration.size()) {
-            lore.add("Silence duration: " + (int) ((duration.get(skillLevel) / 20) + 0.5) + " seconds");
+            additions.add(ChatColor.AQUA + "Silence duration: " + (int) ((duration.get(skillLevel) / 20) + 0.5) + " seconds");
         } else {
-            lore.add("Silence duration: " + (int) ((duration.get(skillLevel - 1) / 20) + 0.5) + " seconds -> " + (int) ((duration.get(skillLevel) / 20) + 0.5));
+            additions.add(ChatColor.AQUA + "Silence duration: " + (int) ((duration.get(skillLevel - 1) / 20) + 0.5) + " seconds -> " + (int) ((duration.get(skillLevel) / 20) + 0.5));
         }
 
-        return lore;
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

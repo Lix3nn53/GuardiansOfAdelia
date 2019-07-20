@@ -23,6 +23,7 @@ public class AreaTarget extends TargetComponent {
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+        if (targets.isEmpty()) return false;
 
         List<LivingEntity> nearby = new ArrayList<>();
 
@@ -30,6 +31,8 @@ public class AreaTarget extends TargetComponent {
             List<LivingEntity> nearbyTarget = Nearby.getLivingNearby(target, radius.get(skillLevel - 1));
             nearby.addAll(nearbyTarget);
         }
+
+        if (nearby.isEmpty()) return false;
 
         nearby = determineTargets(caster, nearby);
 
@@ -39,14 +42,13 @@ public class AreaTarget extends TargetComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        ArrayList<String> lore = new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0 || skillLevel == radius.size()) {
-            lore.add(ChatColor.YELLOW + "Radius: " + radius.get(skillLevel));
+            additions.add(ChatColor.YELLOW + "Radius: " + radius.get(skillLevel));
         } else {
-            lore.add(ChatColor.YELLOW + "Radius: " + radius.get(skillLevel - 1) + " -> " + radius.get(skillLevel));
+            additions.add(ChatColor.YELLOW + "Radius: " + radius.get(skillLevel - 1) + " -> " + radius.get(skillLevel));
         }
 
-        return lore;
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

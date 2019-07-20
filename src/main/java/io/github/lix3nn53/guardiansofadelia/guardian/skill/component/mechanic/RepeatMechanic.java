@@ -8,7 +8,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RepeatMechanic extends MechanicComponent {
@@ -60,14 +59,13 @@ public class RepeatMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0 || skillLevel == repetitions.size()) {
-            lore.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel) + " times");
+            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel) + " times");
         } else {
-            lore.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel - 1) + " times -> " + repetitions.get(skillLevel) + " times");
+            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel - 1) + " times -> " + repetitions.get(skillLevel) + " times");
         }
 
-        return lore;
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

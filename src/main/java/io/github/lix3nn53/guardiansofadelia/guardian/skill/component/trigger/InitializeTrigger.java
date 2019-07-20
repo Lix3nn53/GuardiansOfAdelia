@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComp
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +19,8 @@ public class InitializeTrigger extends TriggerComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        return new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 
     public void startEffects(Player caster, int skillLevel, List<LivingEntity> targets) {

@@ -5,7 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HealMechanic extends MechanicComponent {
@@ -55,22 +54,21 @@ public class HealMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (healAmount.get(skillLevel - 1) > 0) {
             if (skillLevel == 0 || skillLevel == healAmount.size()) {
-                lore.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel));
+                additions.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel));
             } else {
-                lore.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel - 1) + " -> " + healAmount.get(skillLevel));
+                additions.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel - 1) + " -> " + healAmount.get(skillLevel));
             }
         }
         if (healPercent.get(skillLevel - 1) > 0) {
             if (skillLevel == 0 || skillLevel == healPercent.size()) {
-                lore.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel) + "%");
+                additions.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel) + "%");
             } else {
-                lore.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel - 1) + "%" + " -> " + healPercent.get(skillLevel) + "%");
+                additions.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel - 1) + "%" + " -> " + healPercent.get(skillLevel) + "%");
             }
         }
-        return lore;
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

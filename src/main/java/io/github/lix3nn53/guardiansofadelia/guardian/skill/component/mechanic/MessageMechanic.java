@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicCom
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MessageMechanic extends MechanicComponent {
@@ -31,8 +30,7 @@ public class MessageMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
-        return lore;
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

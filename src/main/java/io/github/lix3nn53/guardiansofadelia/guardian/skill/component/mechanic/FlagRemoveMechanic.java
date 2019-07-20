@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.entity.LivingEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FlagRemoveMechanic extends MechanicComponent {
@@ -27,7 +26,7 @@ public class FlagRemoveMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        return new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

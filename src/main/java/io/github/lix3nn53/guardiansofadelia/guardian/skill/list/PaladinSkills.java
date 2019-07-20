@@ -150,7 +150,7 @@ public class PaladinSkills {
         List<Integer> projectileAmounts = new ArrayList<>();
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
-                0, 1, 0, 200, false, SmallFireball.class, Particle.HEART, ArrangementParticle.SPHERE, 0.5, 4, null);
+                0, 1, 0, 200, false, SmallFireball.class, Particle.HEART, ArrangementParticle.SPHERE, 0.5, 4, null, true);
 
         List<Integer> amounts = new ArrayList<>();
         amounts.add(50);

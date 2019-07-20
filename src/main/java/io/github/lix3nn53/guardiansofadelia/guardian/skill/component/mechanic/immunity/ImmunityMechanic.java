@@ -2,11 +2,11 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.i
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ImmunityMechanic extends MechanicComponent {
@@ -47,16 +47,14 @@ public class ImmunityMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
-
-        if (ticks.isEmpty()) return lore;
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (ticks.isEmpty()) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0 || skillLevel == ticks.size()) {
-            lore.add(damageCause.toString() + " immunity duration: " + (ticks.get(skillLevel) / 20));
+            additions.add(ChatColor.GOLD + damageCause.toString() + " immunity duration: " + (ticks.get(skillLevel) / 20));
         } else {
-            lore.add(damageCause.toString() + " immunity duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
+            additions.add(ChatColor.GOLD + damageCause.toString() + " immunity duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
         }
-        return lore;
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

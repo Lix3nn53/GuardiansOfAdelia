@@ -55,6 +55,8 @@ public abstract class TargetComponent extends SkillComponent {
      * @return
      */
     private boolean isValidTarget(final LivingEntity caster, final LivingEntity target) {
+        if (target == null) return false;
+
         EntityType type = target.getType();
         if (type.equals(EntityType.ARMOR_STAND)) return false; //ignore list of target mechanics
 

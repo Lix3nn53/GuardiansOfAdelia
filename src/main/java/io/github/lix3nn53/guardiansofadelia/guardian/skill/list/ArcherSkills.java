@@ -89,7 +89,7 @@ public class ArcherSkills {
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         projectileAmounts.add(1);
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30,
                 0, 1, 0, 200, true, Arrow.class);
 
         List<Double> damageAmounts = new ArrayList<>();
@@ -290,7 +290,7 @@ public class ArcherSkills {
 
     private static Skill getPassive() {
         List<String> description = new ArrayList<>();
-        description.add("Your every third successful projectile hit");
+        description.add("Your every second successful projectile hit");
         description.add("gives you bonus critical chance");
 
         List<Integer> reqLevels = new ArrayList<>();
@@ -343,10 +343,10 @@ public class ArcherSkills {
         multipliers.add(0.1);
         BuffMechanic buffMechanic = new BuffMechanic(BuffType.CRIT_CHANCE, multipliers, ticks);
 
-        ValueCondition activateCondition = new ValueCondition(3, 3);
+        ValueCondition activateCondition = new ValueCondition(2, 2);
         ValueSetMechanic valueSetMechanic = new ValueSetMechanic(0);
 
-        ValueCondition upValueCondition = new ValueCondition(0, 2);
+        ValueCondition upValueCondition = new ValueCondition(0, 1);
         ValueAddMechanic valueAddMechanic = new ValueAddMechanic(1);
 
         skill.addTrigger(initializeTrigger);
@@ -396,10 +396,8 @@ public class ArcherSkills {
         manaCosts.add(5);
         manaCosts.add(5);
         manaCosts.add(5);
-        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
         cooldowns.add(5);
         cooldowns.add(5);
         cooldowns.add(5);
@@ -419,10 +417,10 @@ public class ArcherSkills {
         SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
 
         List<Integer> projectileAmounts = new ArrayList<>();
-        projectileAmounts.add(16);
-        projectileAmounts.add(16);
-        projectileAmounts.add(16);
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 1.9, projectileAmounts, 0,
+        projectileAmounts.add(24);
+        projectileAmounts.add(24);
+        projectileAmounts.add(24);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 1, projectileAmounts, 0,
                 0, 0, 200, true, Arrow.class);
 
         List<Integer> repeatAmounts = new ArrayList<>();

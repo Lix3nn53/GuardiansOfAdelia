@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionCo
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HealthCondition extends ConditionComponent {
@@ -36,7 +35,7 @@ public class HealthCondition extends ConditionComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        return new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

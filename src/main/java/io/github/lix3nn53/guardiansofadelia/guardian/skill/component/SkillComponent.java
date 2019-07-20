@@ -34,18 +34,13 @@ public abstract class SkillComponent {
         children.add(child);
     }
 
-    public abstract List<String> getSkillLoreAdditions(int skillLevel);
+    public abstract List<String> getSkillLoreAdditions(List<String> additions, int skillLevel);
 
-    /**
-     * Use this in #getSkillLoreAdditions method of SkillComponents
-     *
-     * @param skillLevel
-     * @return
-     */
-    public List<String> getSkillLoreAdditionsOfChildren(int skillLevel) {
-        List<String> additions = new ArrayList<>();
+    public List<String> getSkillLoreAdditionsOfChildren(List<String> additions, int skillLevel) {
+        if (children.isEmpty()) return additions;
+
         for (SkillComponent child : children) {
-            additions.addAll(child.getSkillLoreAdditions(skillLevel));
+            additions = child.getSkillLoreAdditions(additions, skillLevel);
         }
 
         return additions;

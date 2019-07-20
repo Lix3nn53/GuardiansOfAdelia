@@ -147,7 +147,8 @@ public class MageSkills {
         List<Integer> projectileAmounts = new ArrayList<>();
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
-                0, 1, 0, 200, true, SmallFireball.class, Particle.VILLAGER_HAPPY, ArrangementParticle.SPHERE, 0.5, 4, null);
+                0, 1, 0, 200, true, SmallFireball.class, Particle.VILLAGER_HAPPY,
+                ArrangementParticle.SPHERE, 0.5, 4, null, true);
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(3D);
@@ -219,9 +220,9 @@ public class MageSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Double> speeds = new ArrayList<>();
-        speeds.add(1.2D);
-        speeds.add(1.4D);
-        speeds.add(1.6D);
+        speeds.add(1.8D);
+        speeds.add(2D);
+        speeds.add(2.2D);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         skill.addTrigger(selfTarget);
@@ -309,8 +310,11 @@ public class MageSkills {
 
     private static Skill getUltimate() {
         List<String> description = new ArrayList<>();
-        description.add("Summon meteors");
-        description.add("todo");
+        description.add("Summon a meteor from sky that hits");
+        description.add("nearby targets when it reaches ground.");
+        description.add("");
+        description.add("The hit effect deals damage, ignites");
+        description.add("and launches targets to sky.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(40);
@@ -337,14 +341,14 @@ public class MageSkills {
         manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
+        cooldowns.add(5);
+        cooldowns.add(5);
+        cooldowns.add(5);
+        cooldowns.add(5);
+        cooldowns.add(5);
+        cooldowns.add(5);
 
-        Skill skill = new Skill("Inferno", Material.IRON_HOE, 30, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Chaos Meteor", Material.IRON_HOE, 30, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
@@ -355,11 +359,18 @@ public class MageSkills {
         SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
 
         List<Integer> projectileAmounts = new ArrayList<>();
-        projectileAmounts.add(16);
-        projectileAmounts.add(16);
-        projectileAmounts.add(16);
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 1.9, projectileAmounts, 0,
-                0, 0, 200, true, Fireball.class);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 0.4, projectileAmounts, 0,
+                0, 0, 200, false, Fireball.class, Particle.FLAME,
+                ArrangementParticle.SPHERE, 2, 32, null, false);
+
+        List<Double> areas = new ArrayList<>();
+        areas.add(8D);
+        areas.add(8D);
+        areas.add(8D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Integer> repeatAmounts = new ArrayList<>();
         repeatAmounts.add(2);
@@ -376,14 +387,34 @@ public class MageSkills {
         damages.add(16D);
         damages.add(16D);
         damages.add(16D);
-        projectileMechanic.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
+        projectileMechanic.addChildren(areaTarget);
+        areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
         List<Integer> ticks = new ArrayList<>();
         ticks.add(80);
         ticks.add(80);
         ticks.add(80);
         ticks.add(80);
-        projectileMechanic.addChildren(new FireMechanic(ticks));
+        areaTarget.addChildren(new FireMechanic(ticks));
 
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.SPHERE, 4, 4,
+                0, 0, 0, 0, 1, 0, 0, null);
+        projectileMechanic.addChildren(particleMechanic);
+
+        List<Double> upward = new ArrayList<>();
+        upward.add(1.4D);
+        upward.add(1.4D);
+        upward.add(1.4D);
+        List<Double> forward = new ArrayList<>();
+        forward.add(0D);
+        forward.add(0D);
+        forward.add(0D);
+        List<Double> right = new ArrayList<>();
+        right.add(0D);
+        right.add(0D);
+        right.add(0D);
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forward, upward, right);
+
+        areaTarget.addChildren(launchMechanic);
         return skill;
     }
 }

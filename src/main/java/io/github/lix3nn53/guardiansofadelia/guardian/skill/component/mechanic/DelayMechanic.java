@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicCom
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DelayMechanic extends MechanicComponent {
@@ -32,8 +31,7 @@ public class DelayMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
-        return lore;
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

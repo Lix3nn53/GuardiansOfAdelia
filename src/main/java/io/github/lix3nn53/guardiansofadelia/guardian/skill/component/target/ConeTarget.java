@@ -24,6 +24,7 @@ public class ConeTarget extends TargetComponent {
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+        if (targets.isEmpty()) return false;
 
         List<LivingEntity> cone = new ArrayList<>();
 
@@ -31,6 +32,8 @@ public class ConeTarget extends TargetComponent {
             List<LivingEntity> coneTargets = TargetHelper.getConeTargets(target, angle, range);
             cone.addAll(coneTargets);
         }
+
+        if (cone.isEmpty()) return false;
 
         cone = determineTargets(caster, cone);
 
@@ -40,9 +43,8 @@ public class ConeTarget extends TargetComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add(ChatColor.YELLOW + "Cone range: " + range);
-        return lore;
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        additions.add(ChatColor.YELLOW + "Cone range: " + range);
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

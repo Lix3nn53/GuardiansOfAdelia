@@ -5,7 +5,6 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RemoveNearbyHologramMechanic extends MechanicComponent {
@@ -52,7 +51,7 @@ public class RemoveNearbyHologramMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        return new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

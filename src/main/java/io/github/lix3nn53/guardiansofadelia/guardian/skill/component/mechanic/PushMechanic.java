@@ -6,7 +6,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PushMechanic extends MechanicComponent {
@@ -56,10 +55,13 @@ public class PushMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.LIGHT_PURPLE + "Push speed: " + speed);
-        return lore;
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (skillLevel == 0 || skillLevel == speed.size()) {
+            additions.add(ChatColor.AQUA + "Push speed: " + speed.get(skillLevel));
+        } else {
+            additions.add(ChatColor.AQUA + "Push speed: " + speed.get(skillLevel - 1) + " -> " + speed.get(skillLevel));
+        }
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 
     public enum PushType {

@@ -212,7 +212,7 @@ public class HunterSkills {
         List<Integer> projectileAmounts = new ArrayList<>();
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30, 0, 0, 0, 90,
-                false, SmallFireball.class, Particle.REDSTONE, ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.AQUA, 8));
+                false, SmallFireball.class, Particle.REDSTONE, ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.AQUA, 8), true);
         projectileMechanic.setAddCasterAsFirstTargetIfHitSuccess(true);
         projectileMechanic.setAddCasterAsSecondTargetIfHitFail(true);
 

@@ -6,7 +6,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicCom
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FlagSetMechanic extends MechanicComponent {
@@ -43,7 +42,7 @@ public class FlagSetMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        return new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

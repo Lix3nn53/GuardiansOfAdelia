@@ -9,7 +9,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -67,22 +66,21 @@ public class ManaMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (manaAmount.get(skillLevel - 1) > 0) {
             if (skillLevel == 0 || skillLevel == manaAmount.size()) {
-                lore.add(ChatColor.AQUA + "Health regen: " + manaAmount.get(skillLevel));
+                additions.add(ChatColor.AQUA + "Mana regen: " + manaAmount.get(skillLevel));
             } else {
-                lore.add(ChatColor.AQUA + "Health regen: " + manaAmount.get(skillLevel - 1) + " -> " + manaAmount.get(skillLevel));
+                additions.add(ChatColor.AQUA + "Mana regen: " + manaAmount.get(skillLevel - 1) + " -> " + manaAmount.get(skillLevel));
             }
         }
         if (manaPercent.get(skillLevel - 1) > 0) {
             if (skillLevel == 0 || skillLevel == manaPercent.size()) {
-                lore.add(ChatColor.AQUA + "Health regen: " + manaPercent.get(skillLevel) + "%");
+                additions.add(ChatColor.AQUA + "Mana regen: " + manaPercent.get(skillLevel) + "%");
             } else {
-                lore.add(ChatColor.AQUA + "Health regen: " + manaPercent.get(skillLevel - 1) + "%" + " -> " + manaPercent.get(skillLevel) + "%");
+                additions.add(ChatColor.AQUA + "Mana regen: " + manaPercent.get(skillLevel - 1) + "%" + " -> " + manaPercent.get(skillLevel) + "%");
             }
         }
-        return lore;
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

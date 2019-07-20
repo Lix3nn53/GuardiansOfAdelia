@@ -6,7 +6,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PotionEffectMechanic extends MechanicComponent {
@@ -35,16 +34,15 @@ public class PotionEffectMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0 || skillLevel == ticks.size()) {
-            lore.add(getEffectString() + " duration: " + (ticks.get(skillLevel) / 20));
-            lore.add(getEffectString() + " tier: " + amplifier.get(skillLevel));
+            additions.add(getEffectString() + " duration: " + (ticks.get(skillLevel) / 20));
+            additions.add(getEffectString() + " tier: " + amplifier.get(skillLevel));
         } else {
-            lore.add(getEffectString() + " duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
-            lore.add(getEffectString() + " tier: " + amplifier.get(skillLevel - 1) + " -> " + amplifier.get(skillLevel));
+            additions.add(getEffectString() + " duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
+            additions.add(getEffectString() + " tier: " + amplifier.get(skillLevel - 1) + " -> " + amplifier.get(skillLevel));
         }
-        return lore;
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 
     private String getEffectString() {
@@ -56,6 +54,10 @@ public class PotionEffectMechanic extends MechanicComponent {
             return ChatColor.LIGHT_PURPLE + "Speed";
         } else if (type.equals(PotionEffectType.LEVITATION)) {
             return ChatColor.AQUA + "Levitation";
+        } else if (type.equals(PotionEffectType.WITHER)) {
+            return ChatColor.DARK_PURPLE + "Wither";
+        } else if (type.equals(PotionEffectType.POISON)) {
+            return ChatColor.DARK_GREEN + "Poison";
         }
         return "NULL EFFECT TYPE";
     }

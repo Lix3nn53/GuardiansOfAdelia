@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionCo
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.TargetHelper;
 import org.bukkit.entity.LivingEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DirectionCondition extends ConditionComponent {
@@ -30,7 +29,7 @@ public class DirectionCondition extends ConditionComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        return new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

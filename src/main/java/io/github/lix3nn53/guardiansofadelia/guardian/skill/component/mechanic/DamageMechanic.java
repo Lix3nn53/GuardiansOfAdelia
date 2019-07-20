@@ -2,9 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DamageMechanic extends MechanicComponent {
@@ -33,19 +33,31 @@ public class DamageMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0 || skillLevel == damage.size()) {
-            lore.add(damageType.name() + ": " + (int) (damage.get(skillLevel) + 0.5));
+            additions.add(damageType.toString() + ": " + (int) (damage.get(skillLevel) + 0.5));
         } else {
-            lore.add(damageType.name() + ": " + (int) (damage.get(skillLevel - 1) + 0.5) + " -> " + (int) (damage.get(skillLevel) + 0.5));
+            additions.add(damageType.toString() + ": " + (int) (damage.get(skillLevel - 1) + 0.5) + " -> " + (int) (damage.get(skillLevel) + 0.5));
         }
 
-        return lore;
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 
 
     public enum DamageType {
-        MAGIC, MELEE, RANGED
+        MAGIC, MELEE, RANGED;
+
+        @Override
+        public String toString() {
+            switch (this) {
+                case MAGIC:
+                    return ChatColor.BLUE + "Magic Damage";
+                case MELEE:
+                    return ChatColor.RED + "Melee Damage";
+                case RANGED:
+                    return ChatColor.GOLD + "Ranged Damage";
+            }
+            return "NULL";
+        }
     }
 }

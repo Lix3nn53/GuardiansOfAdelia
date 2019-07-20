@@ -1,10 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LaunchMechanic extends MechanicComponent {
@@ -47,16 +47,15 @@ public class LaunchMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0 || skillLevel == forwardSpeed.size()) {
-            lore.add("Forward speed: " + forwardSpeed.get(skillLevel));
-            lore.add("Upward speed: " + upwardSpeed.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeed.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeed.get(skillLevel));
         } else {
-            lore.add("Forward speed: " + forwardSpeed.get(skillLevel - 1) + " -> " + forwardSpeed.get(skillLevel));
-            lore.add("Upward speed: " + upwardSpeed.get(skillLevel - 1) + " -> " + upwardSpeed.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeed.get(skillLevel - 1) + " -> " + forwardSpeed.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeed.get(skillLevel - 1) + " -> " + upwardSpeed.get(skillLevel));
         }
-        return lore;
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 
     public enum Relative {

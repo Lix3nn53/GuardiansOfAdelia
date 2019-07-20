@@ -24,6 +24,7 @@ public class SingleTarget extends TargetComponent {
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+        if (targets.isEmpty()) return false;
 
         List<LivingEntity> single = new ArrayList<>();
 
@@ -31,6 +32,8 @@ public class SingleTarget extends TargetComponent {
             LivingEntity singleTargets = TargetHelper.getLivingTarget(target, range.get(skillLevel - 1), tolerance);
             single.add(singleTargets);
         }
+
+        if (single.isEmpty()) return false;
 
         single = determineTargets(caster, single);
 
@@ -40,13 +43,12 @@ public class SingleTarget extends TargetComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        ArrayList<String> lore = new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0 || skillLevel == range.size()) {
-            lore.add(ChatColor.YELLOW + "Radius: " + range.get(skillLevel));
+            additions.add(ChatColor.YELLOW + "Range: " + range.get(skillLevel));
         } else {
-            lore.add(ChatColor.YELLOW + "Radius: " + range.get(skillLevel - 1) + " -> " + range.get(skillLevel));
+            additions.add(ChatColor.YELLOW + "Range: " + range.get(skillLevel - 1) + " -> " + range.get(skillLevel));
         }
-        return lore;
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

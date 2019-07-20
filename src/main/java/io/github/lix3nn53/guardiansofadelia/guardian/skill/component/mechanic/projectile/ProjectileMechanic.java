@@ -10,6 +10,9 @@ import io.github.lix3nn53.guardiansofadelia.utilities.packetwrapper.WrapperPlayS
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -44,6 +47,7 @@ public class ProjectileMechanic extends MechanicComponent {
     private double radiusParticle;
     private int amountParticle;
     private Particle.DustOptions dustOptions;
+    private boolean isProjectileInvisible = true;
 
     //Piercing
 
@@ -51,6 +55,9 @@ public class ProjectileMechanic extends MechanicComponent {
     private boolean addCasterAsFirstTargetIfHitSuccess;
     private boolean addCasterAsSecondTargetIfHitFail;
 
+    /**
+     * For spread types Cone and Horizontal_Cone, normal projectile
+     */
     public ProjectileMechanic(SpreadType spreadType, double speed,
                               List<Integer> amount, double angle, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType) {
@@ -69,11 +76,14 @@ public class ProjectileMechanic extends MechanicComponent {
         this.height = 0;
     }
 
+    /**
+     * For spread types Cone and Horizontal_Cone, particle projectile
+     */
     public ProjectileMechanic(SpreadType spreadType, double speed,
                               List<Integer> amount, double angle, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType,
                               Particle particle, ArrangementParticle arrangement, double radiusParticle,
-                              int amountParticle, Particle.DustOptions dustOptions) {
+                              int amountParticle, Particle.DustOptions dustOptions, boolean isProjectileInvisible) {
         this.spreadType = spreadType;
         this.speed = speed;
         this.amount = amount;
@@ -84,6 +94,7 @@ public class ProjectileMechanic extends MechanicComponent {
         this.range = range;
         this.mustHitToWork = mustHitToWork;
         this.projectileType = projectileType;
+        this.isProjectileInvisible = isProjectileInvisible;
 
         this.radius = 0;
         this.height = 0;
@@ -92,35 +103,7 @@ public class ProjectileMechanic extends MechanicComponent {
     }
 
     /**
-     * For rain type projectile mechanics
-     */
-    public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
-                              List<Integer> amount, double right, double upward, double forward,
-                              double range, boolean mustHitToWork, Class<? extends Projectile> projectileType,
-                              Particle particle, ArrangementParticle arrangement, double radiusParticle,
-                              int amountParticle, Particle.DustOptions dustOptions) {
-        this.spreadType = spreadType;
-
-        this.radius = radius;
-        this.height = height;
-
-        this.speed = speed;
-        this.amount = amount;
-        this.mustHitToWork = mustHitToWork;
-
-        this.angle = 0;
-
-        this.right = right;
-        this.upward = upward;
-        this.forward = forward;
-        this.range = range;
-        this.projectileType = projectileType;
-
-        setParticle(particle, arrangement, radiusParticle, amountParticle, dustOptions);
-    }
-
-    /**
-     * For rain type projectile mechanics
+     *  For spread type Rain, normal projectile
      */
     public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
                               List<Integer> amount, double right, double upward, double forward,
@@ -141,6 +124,33 @@ public class ProjectileMechanic extends MechanicComponent {
         this.forward = forward;
         this.range = range;
         this.projectileType = projectileType;
+    }
+
+    /**
+     *  For spread type Rain, particle projectile
+     */
+    public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
+                              List<Integer> amount, double right, double upward, double forward,
+                              double range, boolean mustHitToWork, Class<? extends Projectile> projectileType,
+                              Particle particle, ArrangementParticle arrangement, double radiusParticle,
+                              int amountParticle, Particle.DustOptions dustOptions, boolean isProjectileInvisible) {
+        this.spreadType = spreadType;
+
+        this.radius = radius;
+        this.height = height;
+
+        this.speed = speed;
+        this.amount = amount;
+        this.mustHitToWork = mustHitToWork;
+
+        this.angle = 0;
+
+        this.right = right;
+        this.upward = upward;
+        this.forward = forward;
+        this.range = range;
+        this.projectileType = projectileType;
+        this.isProjectileInvisible = isProjectileInvisible;
 
         setParticle(particle, arrangement, radiusParticle, amountParticle, dustOptions);
     }
@@ -159,10 +169,28 @@ public class ProjectileMechanic extends MechanicComponent {
                 ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amount.get(skillLevel - 1));
 
                 for (Location loc : locs) {
-                    Projectile p = caster.launchProjectile(projectileType);
-                    p.setVelocity(new Vector(0, speed, 0));
+                    Projectile p = caster.launchProjectile(Arrow.class);
+
+                    //Disguise projectile since only Arrow works with Rain type
+                    if (!this.isProjectileInvisible) {
+                        MiscDisguise disguise = null;
+                        if (projectileType == Fireball.class) {
+                            disguise = new MiscDisguise(DisguiseType.FIREBALL);
+                        } else if (projectileType == SmallFireball.class) {
+                            disguise = new MiscDisguise(DisguiseType.SMALL_FIREBALL);
+                        } else if (projectileType == Egg.class) {
+                            disguise = new MiscDisguise(DisguiseType.EGG);
+                        }
+                        if (disguise != null) {
+                            DisguiseAPI.disguiseToAll(p, disguise);
+                        }
+                    }
+
+                    p.setVelocity(new Vector(0, -speed, 0));
                     p.teleport(loc);
                     projectiles.add(p);
+
+                    changeToParticleProjectile(p);
                 }
             } else {
                 Vector dir = target.getLocation().getDirection();
@@ -179,22 +207,7 @@ public class ProjectileMechanic extends MechanicComponent {
                 for (Vector d : dirs) {
                     Projectile p = caster.launchProjectile(projectileType);
 
-                    if (particle != null) {
-                        WrapperPlayServerEntityDestroy destroy = new WrapperPlayServerEntityDestroy();
-                        destroy.setEntityIds(new int[]{p.getEntityId()});
-                        try {
-                            ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
-
-                            List<Player> players = p.getWorld().getPlayers();
-                            for (Player player : players) {
-                                protocolManager.sendServerPacket(player, destroy.getHandle());
-                            }
-                        } catch (InvocationTargetException e) {
-                            e.printStackTrace();
-                        }
-
-                        startParticleAnimation(p);
-                    }
+                    changeToParticleProjectile(p);
 
                     if (projectileType != Arrow.class) {
                         p.teleport(target.getLocation().add(looking).add(0, upward + 0.5, 0).add(p.getVelocity()).setDirection(d));
@@ -263,14 +276,13 @@ public class ProjectileMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        ArrayList<String> lore = new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0 || skillLevel == amount.size()) {
-            lore.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel));
+            additions.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel));
         } else {
-            lore.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel - 1) + " -> " + amount.get(skillLevel));
+            additions.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel - 1) + " -> " + amount.get(skillLevel));
         }
-        return new ArrayList<>();
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 
     /*public void setPiercing(int piercing) {
@@ -306,5 +318,26 @@ public class ProjectileMechanic extends MechanicComponent {
 
     public void setAddCasterAsSecondTargetIfHitFail(boolean addCasterAsSecondTargetIfHitFail) {
         this.addCasterAsSecondTargetIfHitFail = addCasterAsSecondTargetIfHitFail;
+    }
+
+    private void changeToParticleProjectile(Projectile p) {
+        if (particle != null) {
+            if (isProjectileInvisible) {
+                WrapperPlayServerEntityDestroy destroy = new WrapperPlayServerEntityDestroy();
+                destroy.setEntityIds(new int[]{p.getEntityId()});
+                try {
+                    ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
+
+                    List<Player> players = p.getWorld().getPlayers();
+                    for (Player player : players) {
+                        protocolManager.sendServerPacket(player, destroy.getHandle());
+                    }
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            startParticleAnimation(p);
+        }
     }
 }

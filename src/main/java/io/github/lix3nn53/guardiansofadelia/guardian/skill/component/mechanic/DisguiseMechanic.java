@@ -5,10 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicCom
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DisguiseMechanic extends MechanicComponent {
@@ -52,13 +52,12 @@ public class DisguiseMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(int skillLevel) {
-        List<String> lore = new ArrayList<>();
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0 || skillLevel == ticks.size()) {
-            lore.add("Disguise duration: " + (ticks.get(skillLevel) / 20));
+            additions.add(ChatColor.LIGHT_PURPLE + "Disguise duration: " + (ticks.get(skillLevel) / 20));
         } else {
-            lore.add("Disguise duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
+            additions.add(ChatColor.LIGHT_PURPLE + "Disguise duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
         }
-        return lore;
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }
