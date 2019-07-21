@@ -94,12 +94,12 @@ public class RogueSkills {
         SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
 
         List<Double> ranges2 = new ArrayList<>();
-        ranges.add(4D);
-        ranges.add(4.5D);
-        ranges.add(5D);
-        ranges.add(5.5D);
-        ranges.add(6D);
-        ranges.add(8D);
+        ranges2.add(4D);
+        ranges2.add(4.5D);
+        ranges2.add(5D);
+        ranges2.add(5.5D);
+        ranges2.add(6D);
+        ranges2.add(8D);
         SingleTarget singleTarget2 = new SingleTarget(false, true, false, 1, ranges2, 4);
 
         DirectionCondition directionCondition = new DirectionCondition(false);
@@ -479,10 +479,22 @@ public class RogueSkills {
         BuffMechanic critChanceBuff = new BuffMechanic(BuffType.CRIT_CHANCE, chanceMultipliers, ticks);
         FlagSetMechanic flagSetMechanic = new FlagSetMechanic("phantom", ticks);
 
+        List<Integer> amplifiers = new ArrayList<>();
+        amplifiers.add(1);
+        amplifiers.add(1);
+        amplifiers.add(1);
+        amplifiers.add(1);
+        amplifiers.add(1);
+        amplifiers.add(1);
+        PotionEffectMechanic invisibility = new PotionEffectMechanic(PotionEffectType.INVISIBILITY, ticks, amplifiers);
+        PotionEffectMechanic glowing = new PotionEffectMechanic(PotionEffectType.GLOWING, ticks, amplifiers);
+
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(critDamageBuff);
         selfTarget.addChildren(critChanceBuff);
         selfTarget.addChildren(flagSetMechanic);
+        selfTarget.addChildren(invisibility);
+        selfTarget.addChildren(glowing);
 
         return skill;
     }

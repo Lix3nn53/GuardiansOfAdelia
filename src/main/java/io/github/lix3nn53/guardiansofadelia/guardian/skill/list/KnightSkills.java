@@ -111,11 +111,13 @@ public class KnightSkills {
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(areaTarget);
+        areaTarget.addChildren(damageMechanic);
+        areaTarget.addChildren(buffMechanic);
+
+
         SelfTarget selfTargetForSound = new SelfTarget();
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_SWORD_MULTI_SLASH));
-        areaTarget.addChildren(damageMechanic);
-        areaTarget.addChildren(buffMechanic);
 
         return skill;
     }
@@ -194,10 +196,11 @@ public class KnightSkills {
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(areaTarget);
+        areaTarget.addChildren(launchMechanic);
+
         SelfTarget selfTargetForSound = new SelfTarget();
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_FIRE_SLASH));
-        areaTarget.addChildren(launchMechanic);
 
         return skill;
     }

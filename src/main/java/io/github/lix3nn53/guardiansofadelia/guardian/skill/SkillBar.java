@@ -211,7 +211,7 @@ public class SkillBar {
             return false;
         }
 
-        boolean cast = skill.cast(player, skillLevel, null);//cast ends when this returns
+        boolean cast = skill.cast(player, skillLevel, new ArrayList<>());//cast ends when this returns
 
         if (!cast) return false; //dont go on cooldown if cast failed
 

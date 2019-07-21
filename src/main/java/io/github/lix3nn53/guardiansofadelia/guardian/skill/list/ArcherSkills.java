@@ -90,7 +90,8 @@ public class ArcherSkills {
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30,
-                0, 1, 0, 200, true, Arrow.class);
+                0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
+                ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.GREEN, 2), false);
 
         List<Double> damageAmounts = new ArrayList<>();
         damageAmounts.add(1D);
@@ -452,13 +453,23 @@ public class ArcherSkills {
         SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
 
         List<Integer> projectileAmounts = new ArrayList<>();
-        projectileAmounts.add(24);
-        projectileAmounts.add(24);
-        projectileAmounts.add(24);
-        projectileAmounts.add(24);
-        projectileAmounts.add(24);
-        projectileAmounts.add(24);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 1, projectileAmounts, 0,
+                0, 0, 200, false, Arrow.class);
+
+        List<Integer> projectileAmountsVisual = new ArrayList<>();
+        projectileAmountsVisual.add(12);
+        projectileAmountsVisual.add(12);
+        projectileAmountsVisual.add(12);
+        projectileAmountsVisual.add(12);
+        projectileAmountsVisual.add(12);
+        projectileAmountsVisual.add(12);
+        ProjectileMechanic projectileMechanicVisual = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 1, projectileAmountsVisual, 0,
                 0, 0, 200, true, Arrow.class);
 
         List<Integer> repeatAmounts = new ArrayList<>();
@@ -470,11 +481,23 @@ public class ArcherSkills {
         repeatAmounts.add(6);
         RepeatMechanic repeatMechanic = new RepeatMechanic(20, repeatAmounts);
 
+        List<Double> areas = new ArrayList<>();
+        areas.add(8D);
+        areas.add(8D);
+        areas.add(8D);
+        areas.add(8D);
+        areas.add(8D);
+        areas.add(8D);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(singleTarget);
         singleTarget.addChildren(repeatMechanic);
+        repeatMechanic.addChildren(projectileMechanicVisual);
         repeatMechanic.addChildren(projectileMechanic);
         repeatMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_ARROW_RAIN));
+
+        projectileMechanic.addChildren(areaTarget);
         List<Double> damages = new ArrayList<>();
         damages.add(16D);
         damages.add(16D);
@@ -482,7 +505,7 @@ public class ArcherSkills {
         damages.add(16D);
         damages.add(16D);
         damages.add(16D);
-        projectileMechanic.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
+        areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
 
         return skill;
     }

@@ -118,7 +118,7 @@ public class WarriorSkills {
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
         description.add(ChatColor.GRAY + "Shoot a flame-burst that launches");
-        description.add(ChatColor.GRAY + "target them into the sky");
+        description.add(ChatColor.GRAY + "a target into the sky");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(5);
@@ -157,6 +157,11 @@ public class WarriorSkills {
         SelfTarget selfTarget = new SelfTarget();
 
         List<Integer> projectileAmounts = new ArrayList<>();
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
                 0, 1, 0, 200, true, SmallFireball.class, Particle.FLAME, ArrangementParticle.SPHERE, 0.5, 4, null, true);
@@ -352,7 +357,7 @@ public class WarriorSkills {
 
         TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(20L * 30);
 
-        HealthCondition healthCondition = new HealthCondition(0.1, 15);
+        HealthCondition healthCondition = new HealthCondition(0.0, 0.15);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(160);
@@ -370,11 +375,22 @@ public class WarriorSkills {
         amplifiers.add(7);
         PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.SPEED, ticks, amplifiers);
 
+        List<Integer> repeatAmount = new ArrayList<>();
+        repeatAmount.add(32);
+        repeatAmount.add(36);
+        repeatAmount.add(40);
+        repeatAmount.add(44);
+        repeatAmount.add(48);
+        repeatAmount.add(56);
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 4, 0, 0, 0,
+                0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.RED, 8));
+
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(tookPhysicalDamageTrigger);
         tookPhysicalDamageTrigger.addChildren(healthCondition);
         healthCondition.addChildren(new SoundMechanic(GoaSound.SKILL_SCREAM));
         healthCondition.addChildren(potionEffectMechanic);
+        healthCondition.addChildren(particleAnimationMechanic);
 
         return skill;
     }
