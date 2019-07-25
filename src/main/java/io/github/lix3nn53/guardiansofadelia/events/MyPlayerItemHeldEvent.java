@@ -38,12 +38,7 @@ public class MyPlayerItemHeldEvent implements Listener {
                         return;
                     }
 
-                    int skillIndex = newSlot;
-                    if (newSlot == 3) {
-                        skillIndex++; //ultimate index is one off
-                    }
-
-                    boolean success = activeCharacter.getSkillBar().castSkill(skillIndex);
+                    boolean success = activeCharacter.getSkillBar().castSkill(newSlot);
                     if (!success) {
                         //play sound special to player on cast fail
                         player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.6f, 0.6f);

@@ -11,8 +11,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Self
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.MeleeAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.RangedAttackTrigger;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.potion.PotionEffectType;
@@ -95,6 +97,9 @@ public class MonkSkills {
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(singleTarget);
         singleTarget.addChildren(pushMechanic);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_NORMAL, ArrangementParticle.CIRCLE, 1, 1, 0, 0, 0, 0, 0.5, 0, 0, null);
+        singleTarget.addChildren(particleMechanic);
+        singleTarget.addChildren(new SoundMechanic(GoaSound.SKILL_WIND_PUSH));
 
         return skill;
     }
@@ -167,12 +172,12 @@ public class MonkSkills {
         LaunchMechanic rightLaunch = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forward, upward, right);
 
         List<Double> left = new ArrayList<>();
-        right.add(-1.2D);
-        right.add(-1.3D);
-        right.add(-1.4D);
-        right.add(-1.5D);
-        right.add(-1.6D);
-        right.add(-1.8D);
+        left.add(-1.2D);
+        left.add(-1.3D);
+        left.add(-1.4D);
+        left.add(-1.5D);
+        left.add(-1.6D);
+        left.add(-1.8D);
         LaunchMechanic leftLaunch = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forward, upward, left);
 
         skill.addTrigger(selfTarget);
@@ -192,6 +197,7 @@ public class MonkSkills {
 
         FlagRemoveMechanic removeDidLeftTrigger = new FlagRemoveMechanic("leftTrigger");
         selfTarget.addChildren(removeDidLeftTrigger);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_PROJECTILE_VOID));
 
         return skill;
     }
@@ -297,6 +303,18 @@ public class MonkSkills {
         selfTarget.addChildren(phyDef);
         selfTarget.addChildren(mgcDef);
 
+        List<Integer> repeatAmounts = new ArrayList<>();
+        repeatAmounts.add(24);
+        repeatAmounts.add(28);
+        repeatAmounts.add(32);
+        repeatAmounts.add(36);
+        repeatAmounts.add(40);
+        repeatAmounts.add(48);
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1.8, 9, 0,
+                0, 0, 0, 1, 0, 1, 5L, repeatAmounts, new Particle.DustOptions(Color.YELLOW, 2));
+
+        selfTarget.addChildren(particleAnimationMechanic);
+
         return skill;
     }
 
@@ -393,6 +411,7 @@ public class MonkSkills {
         flagCondition.addChildren(damageMechanic);
         flagCondition.addChildren(potionEffectMechanic);
         flagCondition.addChildren(flagRemoveMechanic);
+        flagCondition.addChildren(new SoundMechanic(GoaSound.SKILL_SPLASH));
 
         return skill;
     }
@@ -501,9 +520,12 @@ public class MonkSkills {
         repeatAmount.add(40);
         repeatAmount.add(48);
         repeatAmount.add(56);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.WATER_BUBBLE, ArrangementParticle.SPHERE, 1.4, 4, 0, 0, 0,
+        ParticleAnimationMechanic particleAnimationMechanicBubble = new ParticleAnimationMechanic(Particle.WATER_BUBBLE, ArrangementParticle.SPHERE, 1.4, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, null);
-        selfTarget.addChildren(particleAnimationMechanic);
+        areaTarget.addChildren(particleAnimationMechanicBubble);
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1.4, 2, 0,
+                0, 0, 0, 0, 0, 1, 5L, repeatAmount, new Particle.DustOptions(Color.AQUA, 2));
+        areaTarget.addChildren(particleAnimationMechanic);
 
         return skill;
     }

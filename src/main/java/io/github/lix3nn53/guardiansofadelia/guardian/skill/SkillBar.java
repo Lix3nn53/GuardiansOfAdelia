@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class SkillBar {
 
-    private static HashMap<Integer, Boolean> skillsOnCooldown = new HashMap<>();
+    private static HashMap<String, Boolean> skillsOnCooldown = new HashMap<>();
     private final Player player;
     private final RPGClass rpgClass;
     private final List<Integer> investedSkillPoints = new ArrayList<>();
@@ -183,21 +183,18 @@ public class SkillBar {
         }
     }
 
-    public boolean castSkill(int skillIndex) {
+    public boolean castSkill(int slot) {
         if (StatusEffectManager.isSilenced(player)) {
-            //TODO test silence info
             player.sendTitle(ChatColor.LIGHT_PURPLE + "", ChatColor.LIGHT_PURPLE + "Silenced..", 0, 20, 0);
             return false;
         }
 
-        if (skillsOnCooldown.containsKey(skillIndex)) {
+        int skillIndex = slot;
+        if (slot == 3) skillIndex = 4; //ultimate is one off
+
+        if (skillsOnCooldown.containsKey("" + skillIndex)) {
+            player.sendMessage("Cast fail: on cooldown");
             return false;
-        }
-
-        int slot = skillIndex;
-
-        if (skillIndex > 3) {
-            slot--;
         }
 
         List<Skill> skillSet = SkillList.getSkillSet(rpgClass);
@@ -208,19 +205,23 @@ public class SkillBar {
         int skillLevel = skill.getCurrentSkillLevel(invested);
 
         if (skillLevel <= 0) {
+            player.sendMessage("Cast fail: skill level");
             return false;
         }
 
         boolean cast = skill.cast(player, skillLevel, new ArrayList<>());//cast ends when this returns
 
-        if (!cast) return false; //dont go on cooldown if cast failed
+        if (!cast) {
+            player.sendMessage("Cast fail: mechanics");
+            return false; //dont go on cooldown if cast failed
+        }
 
         int cooldown = skill.getCooldown(skillLevel);
         PlayerInventory inventory = player.getInventory();
 
-        skillsOnCooldown.put(skillIndex, true);
+        skillsOnCooldown.put("" + skillIndex, true);
 
-        int finalSlot = slot;
+        final int finalSkillIndex = skillIndex;
         new BukkitRunnable() {
 
             int seconds = 0;
@@ -228,18 +229,19 @@ public class SkillBar {
             @Override
             public void run() {
                 if (!player.isOnline()) {
+                    skillsOnCooldown.remove("" + finalSkillIndex);
                     cancel();
                     return;
                 }
 
                 if (seconds >= cooldown) {
                     cancel();
-                    skillsOnCooldown.remove(skillIndex);
+                    skillsOnCooldown.remove("" + finalSkillIndex);
                 } else {
-                    ItemStack item = inventory.getItem(finalSlot);
+                    ItemStack item = inventory.getItem(slot);
                     if (InventoryUtils.isAirOrNull(item)) {
-                        remakeSkillBarIcon(skillIndex);
-                        item = inventory.getItem(finalSlot);
+                        remakeSkillBarIcon(finalSkillIndex);
+                        item = inventory.getItem(slot);
                     }
                     item.setAmount(cooldown - seconds);
                 }

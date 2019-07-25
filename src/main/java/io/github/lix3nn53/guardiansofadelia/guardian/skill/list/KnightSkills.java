@@ -114,8 +114,10 @@ public class KnightSkills {
         areaTarget.addChildren(damageMechanic);
         areaTarget.addChildren(buffMechanic);
 
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ArrangementParticle.CIRCLE, 3.4, 7, 0, 0, 0, 0, 1, 0, 0, null);
 
         SelfTarget selfTargetForSound = new SelfTarget();
+        selfTargetForSound.addChildren(particleMechanic);
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_SWORD_MULTI_SLASH));
 
@@ -198,7 +200,10 @@ public class KnightSkills {
         selfTarget.addChildren(areaTarget);
         areaTarget.addChildren(launchMechanic);
 
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 3.4, 9, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.YELLOW, 2));
+
         SelfTarget selfTargetForSound = new SelfTarget();
+        areaTarget.addChildren(particleMechanic);
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_FIRE_SLASH));
 
@@ -268,7 +273,11 @@ public class KnightSkills {
 
         skill.addTrigger(selfTarget);
         SelfTarget selfTargetForSound = new SelfTarget();
+
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.FLAME, ArrangementParticle.CIRCLE, 9, 27, 0, 0, 0, 0, 1, 0, 0, null);
+
         areaTarget.addChildren(selfTargetForSound);
+        selfTargetForSound.addChildren(particleMechanic);
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_SCREAM));
         selfTarget.addChildren(areaTarget);
         areaTarget.addChildren(pushMechanic);
@@ -333,6 +342,8 @@ public class KnightSkills {
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(tookMagicalDamageTrigger);
         tookMagicalDamageTrigger.addChildren(silenceMechanic);
+        tookMagicalDamageTrigger.addChildren(new MessageMechanic(ChatColor.AQUA + "You got silenced by a knight passive skill.."));
+        tookMagicalDamageTrigger.addChildren(new SoundMechanic(GoaSound.SKILL_SPLASH));
 
         return skill;
     }
@@ -426,7 +437,7 @@ public class KnightSkills {
         BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks);
         BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 9, 27, 0, 0, 0, 0, 2, 0, 0, new Particle.DustOptions(Color.YELLOW, 2));
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 9, 27, 0, 0, 0, 0, 1.6, 0, 0, new Particle.DustOptions(Color.YELLOW, 2));
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(hologramMechanic);

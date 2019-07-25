@@ -91,7 +91,7 @@ public class ArcherSkills {
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30,
                 0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
-                ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.GREEN, 2), false);
+                ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.LIME, 2), false);
 
         List<Double> damageAmounts = new ArrayList<>();
         damageAmounts.add(1D);
@@ -218,6 +218,8 @@ public class ArcherSkills {
         repeatAmount.add(28);
         repeatAmount.add(32);
         repeatAmount.add(40);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.CIRCLE, 3.4, 2, 0, 0, 0, 0, 0.5, 0, 0, null);
+        selfTarget.addChildren(particleMechanic);
         ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.AQUA, 8));
         selfTarget.addChildren(particleAnimationMechanic);
@@ -298,7 +300,7 @@ public class ArcherSkills {
         repeatAmounts.add(40);
         repeatAmounts.add(50);
         ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.SPELL_WITCH, ArrangementParticle.SPHERE, 1.2,
-                8, 0, 0, 0, 0, 0, 0, 0, 5, repeatAmounts, null);
+                12, 0, 0, 0, 0, 0, 0, 0, 5, repeatAmounts, null);
 
         ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>()); //send empty list for infinite
 
@@ -497,6 +499,8 @@ public class ArcherSkills {
         repeatMechanic.addChildren(projectileMechanic);
         repeatMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_ARROW_RAIN));
 
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 9, 21, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.LIME, 2));
+        projectileMechanic.addChildren(particleMechanic);
         projectileMechanic.addChildren(areaTarget);
         List<Double> damages = new ArrayList<>();
         damages.add(16D);

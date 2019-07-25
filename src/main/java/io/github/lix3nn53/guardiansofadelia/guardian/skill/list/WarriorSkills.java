@@ -108,7 +108,7 @@ public class WarriorSkills {
         skill.addTrigger(selfTarget);
 
         selfTarget.addChildren(areaTarget);
-        selfTarget.addChildren(particleMechanic);
+        selfTargetForSound.addChildren(particleMechanic);
 
         areaTarget.addChildren(damageMechanic);
 
@@ -205,6 +205,7 @@ public class WarriorSkills {
 
         projectileMechanic.addChildren(damageMechanic);
         projectileMechanic.addChildren(launchMechanic);
+        projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_JUMP));
 
         return skill;
     }
@@ -297,7 +298,7 @@ public class WarriorSkills {
         BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks);
         BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, multipliers, ticks);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2, 6, 0, 0, 0, 0, 2, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2.4, 7, 0, 0, 0, 0, 1.8, 0, 0, null);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(hologramMechanic);
@@ -461,7 +462,7 @@ public class WarriorSkills {
 
         LandTrigger landTrigger = new LandTrigger();
 
-        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>());//0 for infinite
+        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>()); //0 for infinite
         ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL);
 
         List<Integer> repeatAmounts = new ArrayList<>();
@@ -491,7 +492,7 @@ public class WarriorSkills {
         damages.add(9D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, -0.6, 0.4, 0.1, 0, 0, 0, 1, new Particle.DustOptions(Color.YELLOW, 2));
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 11, 33, 0, 0, 0, 0, 0.5, 0, 0, null);
 
         skill.addTrigger(selfTarget);
 

@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Too
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Fireball;
@@ -196,6 +197,8 @@ public class MageSkills {
 
         projectileMechanic.addChildren(areaTarget);
         projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_FLUX));
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_HAPPY, ArrangementParticle.CIRCLE, 3.4, 11, 0, 0, 0, 0, 0.5, 0, 0, null);
+        projectileMechanic.addChildren(particleMechanic);
 
         selfTarget.addChildren(projectileMechanic);
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_NORMAL));
@@ -267,6 +270,8 @@ public class MageSkills {
         selfTarget.addChildren(areaTarget);
         areaTarget.addChildren(pushMechanic);
         SelfTarget selfTargetForSound = new SelfTarget();
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_LARGE, ArrangementParticle.CIRCLE, 1.2, 1, 0, 0, 0, 0, 0.5, 0, 0, null);
+        areaTarget.addChildren(particleMechanic);
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_SONIC_BOOM));
 
@@ -364,6 +369,9 @@ public class MageSkills {
         initializeTrigger.addChildren(tookMeleeDamageTrigger);
         tookMeleeDamageTrigger.addChildren(areaTarget);
         tookMeleeDamageTrigger.addChildren(buffMechanic);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 3.4, 11, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.AQUA, 2));
+        tookMeleeDamageTrigger.addChildren(particleMechanic);
+        areaTarget.addChildren(new MessageMechanic(ChatColor.AQUA + "You got rooted by a mage passive skill.."));
 
         return skill;
     }

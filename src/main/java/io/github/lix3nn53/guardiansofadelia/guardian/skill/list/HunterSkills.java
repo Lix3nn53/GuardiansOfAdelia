@@ -89,8 +89,9 @@ public class HunterSkills {
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         projectileAmounts.add(1);
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
-                0, 1, 0, 200, true, Arrow.class);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30,
+                0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
+                ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.RED, 2), false);
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(2D);
@@ -241,8 +242,13 @@ public class HunterSkills {
 
         List<Integer> projectileAmounts = new ArrayList<>();
         projectileAmounts.add(1);
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30, 0, 0, 0, 90,
-                false, SmallFireball.class, Particle.REDSTONE, ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.AQUA, 8), true);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        projectileAmounts.add(1);
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30, 0, 1, 0, 90,
+                false, SmallFireball.class, Particle.REDSTONE, ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.GRAY, 2), true);
         projectileMechanic.setAddCasterAsFirstTargetIfHitSuccess(true);
         projectileMechanic.setAddCasterAsSecondTargetIfHitFail(true);
 
@@ -432,6 +438,8 @@ public class HunterSkills {
 
         //repeat part 1, area and effects
         repeatMechanic.addChildren(areaTarget);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_LARGE, ArrangementParticle.CIRCLE, 1.4, 2, 0, 0, 0, 0, 0.8, 0, 0, null);
+        areaTarget.addChildren(particleMechanic);
         areaTarget.addChildren(new SoundMechanic(GoaSound.SKILL_STUN_HIT));
         areaTarget.addChildren(stopJumping);
         areaTarget.addChildren(stopWalking);

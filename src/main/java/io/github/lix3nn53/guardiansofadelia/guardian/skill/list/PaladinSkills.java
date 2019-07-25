@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Ini
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMagicalDamageTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookPhysicalDamageTrigger;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import org.bukkit.ChatColor;
@@ -114,13 +115,20 @@ public class PaladinSkills {
         areaTarget.addChildren(damageMechanic);
         areaTarget.addChildren(pushMechanic);
 
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ArrangementParticle.CIRCLE, 3.4, 7, 0, 0, 0, 0, 0.5, 0, 0, null);
+
+        SelfTarget selfTargetForSound = new SelfTarget();
+        selfTargetForSound.addChildren(particleMechanic);
+        areaTarget.addChildren(selfTargetForSound);
+        selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_WIND_PUSH));
+
         return skill;
     }
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
         description.add(ChatColor.GRAY + "Heal yourself and shoot a projectile");
-        description.add(ChatColor.GRAY + "that heals allies in area on hit");
+        description.add(ChatColor.GRAY + "that heals an ally on hit");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(5);
@@ -175,10 +183,11 @@ public class PaladinSkills {
         amounts.add(3500);
         projectileMechanic.addChildren(new HealMechanic(amounts, new ArrayList<>()));
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.HEART, ArrangementParticle.CIRCLE, 6, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.HEART, ArrangementParticle.CIRCLE, 1.4, 8, 0, 0, 0, 0, 0.5, 0, 0, null);
 
         skill.addTrigger(projectileMechanic);
         projectileMechanic.addChildren(particleMechanic);
+        projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_HEAL));
 
 
         return skill;
@@ -255,6 +264,12 @@ public class PaladinSkills {
         selfTarget.addChildren(areaTarget);
         areaTarget.addChildren(disguiseMechanic);
         areaTarget.addChildren(slow);
+
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SPELL_WITCH, ArrangementParticle.CIRCLE, 6.7, 27, 0, 0, 0, 0, 0.5, 0, 0, null);
+        SelfTarget selfTargetForSound = new SelfTarget();
+        selfTargetForSound.addChildren(particleMechanic);
+        areaTarget.addChildren(selfTargetForSound);
+        selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_PIG));
 
         return skill;
     }
@@ -357,6 +372,7 @@ public class PaladinSkills {
         healthCondition.addChildren(invis);
         healthCondition.addChildren(glowing);
         healthCondition.addChildren(immunityMechanic);
+        healthCondition.addChildren(new SoundMechanic(GoaSound.SKILL_BUFF));
 
         return skill;
     }
@@ -437,8 +453,8 @@ public class PaladinSkills {
         repeatAmounts.add(16);
         repeatAmounts.add(18);
         repeatAmounts.add(20);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, -0.1,
-                1, 0, 0, 0, 0, 1, 5L, repeatAmounts, new Particle.DustOptions(Color.FUCHSIA, 2));
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, 0,
+                0, 0, 0, 0, 0, 1, 5L, repeatAmounts, new Particle.DustOptions(Color.FUCHSIA, 2));
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(8D);
@@ -459,6 +475,7 @@ public class PaladinSkills {
         selfTarget.addChildren(landTrigger);
 
         landTrigger.addChildren(particleMechanic);
+        landTrigger.addChildren(new SoundMechanic(GoaSound.SKILL_BUFF));
         landTrigger.addChildren(immunityRemoveMechanic);
         landTrigger.addChildren(areaTarget);
         List<Integer> ticks = new ArrayList<>();

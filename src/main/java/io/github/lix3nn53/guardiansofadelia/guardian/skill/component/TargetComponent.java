@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component;
 
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
+import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -57,6 +58,7 @@ public abstract class TargetComponent extends SkillComponent {
     private boolean isValidTarget(final LivingEntity caster, final LivingEntity target) {
         if (target == null) return false;
 
+        if (CitizensAPI.getNPCRegistry().isNPC(target)) return false;
         EntityType type = target.getType();
         if (type.equals(EntityType.ARMOR_STAND)) return false; //ignore list of target mechanics
 
