@@ -499,7 +499,7 @@ public class ArcherSkills {
         repeatMechanic.addChildren(projectileMechanic);
         repeatMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_ARROW_RAIN));
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 9, 21, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.LIME, 2));
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 9, 21, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.ORANGE, 2));
         projectileMechanic.addChildren(particleMechanic);
         projectileMechanic.addChildren(areaTarget);
         List<Double> damages = new ArrayList<>();

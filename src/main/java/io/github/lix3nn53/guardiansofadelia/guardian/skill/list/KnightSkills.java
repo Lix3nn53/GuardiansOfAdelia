@@ -253,11 +253,11 @@ public class KnightSkills {
 
         List<Double> areas = new ArrayList<>();
         areas.add(7D);
+        areas.add(7.5D);
         areas.add(8D);
+        areas.add(8.5D);
         areas.add(9D);
         areas.add(10D);
-        areas.add(11D);
-        areas.add(12D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Double> speeds = new ArrayList<>();
@@ -274,7 +274,7 @@ public class KnightSkills {
         skill.addTrigger(selfTarget);
         SelfTarget selfTargetForSound = new SelfTarget();
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.FLAME, ArrangementParticle.CIRCLE, 9, 27, 0, 0, 0, 0, 1, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.FLAME, ArrangementParticle.CIRCLE, 7.5, 27, 0, 0, 0, 0, 1, 0, 0, null);
 
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(particleMechanic);

@@ -205,7 +205,7 @@ public class WarriorSkills {
 
         projectileMechanic.addChildren(damageMechanic);
         projectileMechanic.addChildren(launchMechanic);
-        projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_JUMP));
+        projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_STUN_HIT));
 
         return skill;
     }
@@ -472,7 +472,7 @@ public class WarriorSkills {
         repeatAmounts.add(16);
         repeatAmounts.add(18);
         repeatAmounts.add(20);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, -0.1, 1, 0, 0, 0, 0, 1, 4L, repeatAmounts, new Particle.DustOptions(Color.FUCHSIA, 2));
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, -0.1, 1, 0, 0, 0, 0, 1, 4L, repeatAmounts, new Particle.DustOptions(Color.ORANGE, 2));
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(8D);

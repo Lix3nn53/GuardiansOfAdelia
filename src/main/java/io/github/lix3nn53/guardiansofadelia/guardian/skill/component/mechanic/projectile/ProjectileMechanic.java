@@ -13,6 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
+import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -249,6 +250,8 @@ public class ProjectileMechanic extends MechanicComponent {
 
             hit = new TempEntity(projectile.getLocation());
         } else if (addCasterAsFirstTargetIfHitSuccess) {
+            if (CitizensAPI.getNPCRegistry().isNPC(hit)) return;
+
             hitSuccess = true;
             targets.add(caster);
         }

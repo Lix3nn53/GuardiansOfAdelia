@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.im
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityRemoveMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.DisarmMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
@@ -91,7 +92,7 @@ public class HunterSkills {
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30,
                 0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
-                ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.RED, 2), false);
+                ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.ORANGE, 2), false);
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(2D);
@@ -178,7 +179,7 @@ public class HunterSkills {
         projectileAmounts.add(7);
         projectileAmounts.add(8);
         projectileAmounts.add(9);
-        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
+        ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30,
                 0, 1, 0, 200, true, Arrow.class);
 
         List<Double> damages = new ArrayList<>();
@@ -425,6 +426,7 @@ public class HunterSkills {
         amplifiers.add(999);
         PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, amplifiers);
         PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
+        DisarmMechanic disarmMechanic = new DisarmMechanic(ticks);
         SilenceMechanic silenceMechanic = new SilenceMechanic(ticks);
         FlagSetMechanic setRemoveFlag = new FlagSetMechanic("shouldStopSkill", new ArrayList<>());
 
@@ -443,6 +445,7 @@ public class HunterSkills {
         areaTarget.addChildren(new SoundMechanic(GoaSound.SKILL_STUN_HIT));
         areaTarget.addChildren(stopJumping);
         areaTarget.addChildren(stopWalking);
+        areaTarget.addChildren(disarmMechanic);
         areaTarget.addChildren(silenceMechanic);
         areaTarget.addChildren(new RemoveNearbyHologramMechanic(radiuses, ChatColor.DARK_GRAY + "< Trap %caster% >"));
         SelfTarget selfTargetForFlagSet = new SelfTarget();

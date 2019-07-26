@@ -148,7 +148,7 @@ public class RogueSkills {
         singleTarget.addChildren(warpTargetMechanic);
         singleTarget.addChildren(damageMechanic);
         singleTarget.addChildren(new SoundMechanic(GoaSound.SKILL_POISON_SLASH));
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ArrangementParticle.CIRCLE, 1.2, 7, 0, 0, 0, 0, 0.8, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ArrangementParticle.CIRCLE, 1.2, 7, 0, 0, 0, 0, 1, 0, 0, null);
         singleTarget.addChildren(particleMechanic);
 
         return skill;
@@ -198,18 +198,18 @@ public class RogueSkills {
         FlagCondition phantomCondition = new FlagCondition("phantom", false);
 
         List<Double> forwards = new ArrayList<>();
-        forwards.add(1.4);
-        forwards.add(1.6);
-        forwards.add(1.8);
-        forwards.add(2D);
-        forwards.add(2.2);
-        forwards.add(2.6);
+        forwards.add(4D);
+        forwards.add(5D);
+        forwards.add(6D);
+        forwards.add(7D);
+        forwards.add(8D);
+        forwards.add(10D);
         List<Double> upwards = new ArrayList<>();
+        upwards.add(1.5);
+        upwards.add(1.5);
         upwards.add(1.7);
-        upwards.add(1.75);
+        upwards.add(1.7);
         upwards.add(1.8);
-        upwards.add(1.85);
-        upwards.add(1.9);
         upwards.add(2D);
         List<Double> right = new ArrayList<>();
         right.add(0D);
@@ -238,7 +238,7 @@ public class RogueSkills {
 
         skill.addTrigger(selfTarget);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1.2, 4, 0, 0, 0, 0, 0.5, 0, 0, new Particle.DustOptions(Color.PURPLE, 2));
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1.2, 4, 0, 0, 0, 0, 0.5, 0, 0, new Particle.DustOptions(Color.FUCHSIA, 2));
         selfTarget.addChildren(particleMechanic);
 
         selfTarget.addChildren(phantomCondition);
@@ -313,7 +313,7 @@ public class RogueSkills {
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30, 0, 1, 0, 90,
-                true, Egg.class, Particle.REDSTONE, ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.PURPLE, 2), false);
+                true, Egg.class, Particle.REDSTONE, ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.PURPLE, 0.8f), false);
 
         FlagCondition phantomCondition = new FlagCondition("phantom", true);
 
@@ -337,7 +337,7 @@ public class RogueSkills {
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(repeatMechanic);
         repeatMechanic.addChildren(projectileMechanic);
-        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_THROW_SMALL_OBJECT));
+        repeatMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_THROW_SMALL_OBJECT));
 
         List<Double> damages = new ArrayList<>();
         damages.add(3D);
@@ -516,8 +516,9 @@ public class RogueSkills {
         repeatAmount.add(52);
         repeatAmount.add(60);
         ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 4, 0, 0, 0,
-                0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.PURPLE, 8));
+                0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.PURPLE, 4));
         selfTarget.addChildren(particleAnimationMechanic);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_BUFF));
 
         return skill;
     }

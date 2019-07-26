@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
@@ -53,6 +54,14 @@ public class MyEntityDamageByEntityEvent implements Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
+
+        if (damager instanceof LivingEntity) {
+            if (StatusEffectManager.isDisarmed((LivingEntity) damager)) {
+                event.setCancelled(true);
+                return;
+            }
+        }
+
         Entity target = event.getEntity();
         boolean isSkill = false;
 
@@ -75,6 +84,15 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 isAttackerPlayer = true;
             } else if (damager instanceof Projectile) { //projectile is attacker
                 Projectile projectile = (Projectile) damager;
+                ProjectileSource shooter = projectile.getShooter();
+
+                if (shooter instanceof LivingEntity) {
+                    if (StatusEffectManager.isDisarmed((LivingEntity) shooter)) {
+                        event.setCancelled(true);
+                        return;
+                    }
+                }
+
                 if (PersistentDataContainerUtil.hasInteger(projectile, "rangedDamage")) { //projectile is fired by player without skills involved
                     int rangedDamage = PersistentDataContainerUtil.getInteger(projectile, "rangedDamage");
                     event.setDamage(rangedDamage);
@@ -84,7 +102,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     event.setCancelled(true);
                     return;
                 }
-                ProjectileSource shooter = projectile.getShooter();
+
                 if (shooter instanceof Player) {
                     Player player = (Player) shooter;
                     isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, damageType, isSkill);

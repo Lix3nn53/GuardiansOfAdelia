@@ -185,7 +185,7 @@ public class MageSkills {
         damages.add(10D);
         damages.add(10D);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
-        areaTarget.addChildren(new ParticleMechanic(Particle.VILLAGER_HAPPY, ArrangementParticle.CIRCLE, 2, 4, 0, 0, 0, 0, 0.5, 0, 0, null));
+        areaTarget.addChildren(new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 3.4, 11, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.TEAL, 2)));
         List<Integer> durations = new ArrayList<>();
         durations.add(40);
         durations.add(50);
@@ -409,12 +409,12 @@ public class MageSkills {
         manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
+        cooldowns.add(64);
 
         Skill skill = new Skill("Chaos Meteor", 6, Material.IRON_HOE, 30, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -469,8 +469,9 @@ public class MageSkills {
         damages.add(16D);
         damages.add(16D);
         damages.add(16D);
+        projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_FIRE_AURA));
         projectileMechanic.addChildren(areaTarget);
-        areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
+        areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
         List<Integer> ticks = new ArrayList<>();
         ticks.add(80);
         ticks.add(90);

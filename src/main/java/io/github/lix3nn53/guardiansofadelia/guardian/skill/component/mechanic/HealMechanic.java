@@ -31,15 +31,11 @@ public class HealMechanic extends MechanicComponent {
             double nextHealth = currentHealth;
 
             if (!healAmount.isEmpty()) {
-                if (healAmount.get(skillLevel - 1) > 0) {
-                    nextHealth = currentHealth + healAmount.get(skillLevel - 1);
-                }
+                nextHealth = currentHealth + healAmount.get(skillLevel - 1);
             }
 
             if (!healPercent.isEmpty()) {
-                if (healPercent.get(skillLevel - 1) > 0) {
-                    nextHealth = nextHealth + (maxHealth * healPercent.get(skillLevel - 1));
-                }
+                nextHealth = nextHealth + (maxHealth * healPercent.get(skillLevel - 1));
             }
 
             if (nextHealth > maxHealth) {

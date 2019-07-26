@@ -9,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.im
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.InvincibleMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.DisarmMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
@@ -115,7 +116,7 @@ public class PaladinSkills {
         areaTarget.addChildren(damageMechanic);
         areaTarget.addChildren(pushMechanic);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ArrangementParticle.CIRCLE, 3.4, 7, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ArrangementParticle.CIRCLE, 3.4, 7, 0, 0, 0, 0, 1, 0, 0, null);
 
         SelfTarget selfTargetForSound = new SelfTarget();
         selfTargetForSound.addChildren(particleMechanic);
@@ -172,7 +173,7 @@ public class PaladinSkills {
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
-                0, 1, 0, 200, true, SmallFireball.class, Particle.HEART, ArrangementParticle.SPHERE, 0.5, 4, null, true);
+                0, 1, 0, 200, false, SmallFireball.class, Particle.HEART, ArrangementParticle.SPHERE, 0.5, 4, null, true);
 
         List<Integer> amounts = new ArrayList<>();
         amounts.add(50);
@@ -185,8 +186,21 @@ public class PaladinSkills {
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.HEART, ArrangementParticle.CIRCLE, 1.4, 8, 0, 0, 0, 0, 0.5, 0, 0, null);
 
-        skill.addTrigger(projectileMechanic);
-        projectileMechanic.addChildren(particleMechanic);
+        SelfTarget selfTarget = new SelfTarget();
+        skill.addTrigger(selfTarget);
+        selfTarget.addChildren(projectileMechanic);
+
+        List<Double> areas = new ArrayList<>();
+        areas.add(3D);
+        areas.add(3.25D);
+        areas.add(3.5D);
+        areas.add(3.75D);
+        areas.add(4D);
+        areas.add(4.5D);
+        AreaTarget areaTarget = new AreaTarget(true, false, true, 999, areas);
+
+        projectileMechanic.addChildren(areaTarget);
+        areaTarget.addChildren(particleMechanic);
         projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_HEAL));
 
 
@@ -260,10 +274,13 @@ public class PaladinSkills {
         amplifiers.add(7);
         PotionEffectMechanic slow = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
 
+        DisarmMechanic disarmMechanic = new DisarmMechanic(ticks);
+
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(areaTarget);
         areaTarget.addChildren(disguiseMechanic);
         areaTarget.addChildren(slow);
+        areaTarget.addChildren(disarmMechanic);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SPELL_WITCH, ArrangementParticle.CIRCLE, 6.7, 27, 0, 0, 0, 0, 0.5, 0, 0, null);
         SelfTarget selfTargetForSound = new SelfTarget();
@@ -366,7 +383,14 @@ public class PaladinSkills {
         PotionEffectMechanic levitation = new PotionEffectMechanic(PotionEffectType.LEVITATION, ticks, amplifiers);
         PotionEffectMechanic invis = new PotionEffectMechanic(PotionEffectType.INVISIBILITY, ticks, amplifiers);
         PotionEffectMechanic glowing = new PotionEffectMechanic(PotionEffectType.GLOWING, ticks, amplifiers);
-        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, ticks);
+        List<Integer> ticksImmunity = new ArrayList<>();
+        ticksImmunity.add(240);
+        ticksImmunity.add(240);
+        ticksImmunity.add(240);
+        ticksImmunity.add(240);
+        ticksImmunity.add(240);
+        ticksImmunity.add(240);
+        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, ticksImmunity);
 
         healthCondition.addChildren(levitation);
         healthCondition.addChildren(invis);
@@ -454,7 +478,7 @@ public class PaladinSkills {
         repeatAmounts.add(18);
         repeatAmounts.add(20);
         ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, 0,
-                0, 0, 0, 0, 0, 1, 5L, repeatAmounts, new Particle.DustOptions(Color.FUCHSIA, 2));
+                0, 0, 0, 0, 0, 1, 5L, repeatAmounts, new Particle.DustOptions(Color.YELLOW, 2));
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(8D);
@@ -495,7 +519,7 @@ public class PaladinSkills {
         repeatAmounts2.add(32);
         repeatAmounts2.add(36);
         ParticleAnimationMechanic particleAnimationMechanic2 = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3,
-                -0.1, 1, 0, 0, 0.5, 0, 1, 5L, repeatAmounts2, new Particle.DustOptions(Color.FUCHSIA, 2));
+                -0.1, 1, 0, 0, 0.5, 0, 1, 5L, repeatAmounts2, new Particle.DustOptions(Color.YELLOW, 2));
 
         areaTarget.addChildren(particleAnimationMechanic2);
 

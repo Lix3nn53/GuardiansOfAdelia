@@ -99,7 +99,7 @@ public class MonkSkills {
         singleTarget.addChildren(pushMechanic);
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_NORMAL, ArrangementParticle.CIRCLE, 1, 1, 0, 0, 0, 0, 0.5, 0, 0, null);
         singleTarget.addChildren(particleMechanic);
-        singleTarget.addChildren(new SoundMechanic(GoaSound.SKILL_WIND_PUSH));
+        singleTarget.addChildren(new SoundMechanic(GoaSound.SKILL_PROJECTILE_FIRE));
 
         return skill;
     }
@@ -302,6 +302,7 @@ public class MonkSkills {
         BuffMechanic mgcDef = new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks);
         selfTarget.addChildren(phyDef);
         selfTarget.addChildren(mgcDef);
+        selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_BUFF));
 
         List<Integer> repeatAmounts = new ArrayList<>();
         repeatAmounts.add(24);

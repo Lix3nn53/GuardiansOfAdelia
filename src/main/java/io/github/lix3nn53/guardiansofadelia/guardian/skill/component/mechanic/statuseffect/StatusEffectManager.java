@@ -8,6 +8,7 @@ import java.util.List;
 public class StatusEffectManager {
 
     public static List<LivingEntity> silenced = new ArrayList<>();
+    public static List<LivingEntity> disarmed = new ArrayList<>();
 
     public static boolean isSilenced(LivingEntity livingEntity) {
         return silenced.contains(livingEntity);
@@ -19,5 +20,17 @@ public class StatusEffectManager {
 
     public static boolean removeSilenced(LivingEntity livingEntity) {
         return silenced.remove(livingEntity);
+    }
+
+    public static boolean isDisarmed(LivingEntity livingEntity) {
+        return disarmed.contains(livingEntity);
+    }
+
+    public static boolean setDisarmed(LivingEntity livingEntity) {
+        return disarmed.add(livingEntity);
+    }
+
+    public static boolean removeDisarmed(LivingEntity livingEntity) {
+        return disarmed.remove(livingEntity);
     }
 }

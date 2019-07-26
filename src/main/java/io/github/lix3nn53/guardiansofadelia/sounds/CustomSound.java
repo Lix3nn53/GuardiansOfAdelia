@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.sounds;
 
 import org.bukkit.Location;
+import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -18,7 +19,7 @@ public class CustomSound {
 
     public void play(Location location) {
         World world = location.getWorld();
-        world.playSound(location, sound, volume, pitch);
+        world.playSound(location, sound, SoundCategory.RECORDS, volume, pitch);
     }
 
     public void play(Player player) {
