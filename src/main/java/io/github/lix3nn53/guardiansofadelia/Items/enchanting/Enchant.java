@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
+//TODO melee damage buffs does not work after +3?? weird
 public class Enchant {
 
     private final Player player;
@@ -188,8 +189,6 @@ public class Enchant {
                 PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             } else if (type.equals(StatType.MAGICAL)) {
                 PersistentDataContainerUtil.putInteger("magicDamage", nextValue, this.itemStack);
-                int magicDamage = PersistentDataContainerUtil.getInteger(this.itemStack, "magicDamage");
-                player.sendMessage("new readMagicValue: " + magicDamage);
             }
         } else if (type.equals(StatType.PASSIVE)) {
             StatPassive stat = (StatPassive) StatUtils.getStat(itemStack);
@@ -389,8 +388,6 @@ public class Enchant {
                 PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             } else if (type.equals(StatType.MAGICAL)) {
                 PersistentDataContainerUtil.putInteger("magicDamage", nextValue, this.itemStack);
-                int magicDamage = PersistentDataContainerUtil.getInteger(this.itemStack, "magicDamage");
-                player.sendMessage("new readMagicValue: " + magicDamage);
             }
         } else if (type.equals(StatType.PASSIVE)) {
             StatPassive stat = (StatPassive) StatUtils.getStat(itemStack);

@@ -3,12 +3,13 @@ package io.github.lix3nn53.guardiansofadelia.Items.enchanting;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -136,7 +137,7 @@ public class EnchantGui extends GuiGeneric {
                     if (name.contains("1")) {
                         stoneLevel = 1;
                     } else if (name.contains("2")) {
-                        stoneLevel = 3;
+                        stoneLevel = 2;
                     } else if (name.contains("3")) {
                         stoneLevel = 3;
                     } else if (name.contains("4")) {
@@ -148,9 +149,6 @@ public class EnchantGui extends GuiGeneric {
                         boolean stoneFits = stoneLevel == requiredEnchantStoneLevel;
                         if (stoneFits) {
                             Location loc = owner.getLocation();
-                            World w = loc.getWorld();
-
-                            w.playSound(loc, "randoming", 0.5F, 0.9F);
 
                             GuiGeneric gui = this;
 
@@ -188,8 +186,12 @@ public class EnchantGui extends GuiGeneric {
                                         boolean success = enchant.enchantItem();
                                         if (success) {
                                             setSuccessGui();
+                                            CustomSound succ = GoaSound.SUCCESS.getCustomSound();
+                                            succ.play(loc);
                                         } else {
                                             setFailGui();
+                                            CustomSound fail = GoaSound.FAIL.getCustomSound();
+                                            fail.play(loc);
                                         }
                                         InventoryUtils.removeMaterialFromInventory(owner.getInventory(), enchantStone.getType(), 1);
                                         InventoryUtils.removeItemFromInventory(owner.getInventory(), itemToEnchant, 1);

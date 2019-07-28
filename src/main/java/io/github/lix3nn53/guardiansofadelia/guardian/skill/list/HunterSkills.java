@@ -103,7 +103,7 @@ public class HunterSkills {
         radiuses.add(4.5D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
-        projectileMechanic.addChildren(areaTarget);
+        ParticleMechanic explosionParticle = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.CIRCLE, 3.4, 2, 0, 0, 0, 0, 0.5, 0, 0, null);
 
         List<Double> damages = new ArrayList<>();
         damages.add(3D);
@@ -112,7 +112,6 @@ public class HunterSkills {
         damages.add(3D);
         damages.add(3D);
         damages.add(3D);
-        areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
 
         List<Double> speeds = new ArrayList<>();
         speeds.add(1.25);
@@ -123,10 +122,13 @@ public class HunterSkills {
         speeds.add(1.5);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
-        areaTarget.addChildren(pushMechanic);
-
         selfTarget.addChildren(projectileMechanic);
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_PROJECTILE_ICE));
+        projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_WIND_PUSH));
+        projectileMechanic.addChildren(areaTarget);
+        projectileMechanic.addChildren(explosionParticle);
+        areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
+        areaTarget.addChildren(pushMechanic);
 
         skill.addTrigger(selfTarget);
         return skill;

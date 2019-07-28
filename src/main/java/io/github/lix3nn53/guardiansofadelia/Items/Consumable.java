@@ -3,6 +3,9 @@ package io.github.lix3nn53.guardiansofadelia.Items;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.HealMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.ManaMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.RepeatMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -37,7 +40,10 @@ public enum Consumable {
 
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
-        getSkillComponent().execute(player, skillLevel, targets);
+        List<SkillComponent> componentList = getSkillComponents();
+        for (SkillComponent component : componentList) {
+            component.execute(player, skillLevel, targets);
+        }
 
         if (PersistentDataContainerUtil.hasInteger(itemStack, "consumableUsesLeft")) {
             int usesLeft = PersistentDataContainerUtil.getInteger(itemStack, "consumableUsesLeft");
@@ -58,31 +64,135 @@ public enum Consumable {
         }
     }
 
-    //TODO complete skill components
-    public SkillComponent getSkillComponent() {
+    public List<SkillComponent> getSkillComponents() {
+        List<SkillComponent> list = new ArrayList<>();
         switch (this) {
             case BUFF_PHYSICAL_DAMAGE:
-                return null;
+                List<Integer> ticks = new ArrayList<>();
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                List<Double> multipliers = new ArrayList<>();
+                multipliers.add(0.08);
+                multipliers.add(0.1);
+                multipliers.add(0.12);
+                multipliers.add(0.14);
+                multipliers.add(0.16);
+                multipliers.add(0.2);
+                list.add(new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks));
+                break;
             case BUFF_PHYSICAL_DEFENSE:
-                return null;
+                ticks = new ArrayList<>();
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                multipliers = new ArrayList<>();
+                multipliers.add(0.08);
+                multipliers.add(0.1);
+                multipliers.add(0.12);
+                multipliers.add(0.14);
+                multipliers.add(0.16);
+                multipliers.add(0.2);
+                list.add(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
+                break;
             case BUFF_MAGICAL_DAMAGE:
-                return null;
+                ticks = new ArrayList<>();
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                multipliers = new ArrayList<>();
+                multipliers.add(0.08);
+                multipliers.add(0.1);
+                multipliers.add(0.12);
+                multipliers.add(0.14);
+                multipliers.add(0.16);
+                multipliers.add(0.2);
+                list.add(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
+                break;
             case BUFF_MAGICAL_DEFENSE:
-                return null;
+                ticks = new ArrayList<>();
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                multipliers = new ArrayList<>();
+                multipliers.add(0.08);
+                multipliers.add(0.1);
+                multipliers.add(0.12);
+                multipliers.add(0.14);
+                multipliers.add(0.16);
+                multipliers.add(0.2);
+                list.add(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
+                break;
             case POTION_INSTANT_HEALTH:
                 List<Integer> amounts = new ArrayList<>();
                 amounts.add(200);
-                return new HealMechanic(amounts, new ArrayList<>());
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                list.add(new HealMechanic(amounts, new ArrayList<>()));
+                break;
             case POTION_INSTANT_MANA:
                 amounts = new ArrayList<>();
                 amounts.add(200);
-                return new ManaMechanic(amounts, new ArrayList<>());
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                list.add(new ManaMechanic(amounts, new ArrayList<>()));
+                break;
             case POTION_INSTANT_HYBRID:
-                return null;
+                List<Integer> amountsSecond = new ArrayList<>();
+                amountsSecond.add(200);
+                amountsSecond.add(200);
+                amountsSecond.add(200);
+                amountsSecond.add(200);
+                amountsSecond.add(200);
+                amountsSecond.add(200);
+                list.add(new HealMechanic(amountsSecond, new ArrayList<>()));
+                amounts = new ArrayList<>();
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                list.add(new ManaMechanic(amounts, new ArrayList<>()));
+                break;
             case POTION_REGENERATION_HEALTH:
-                return null;
+                List<Integer> repetitions = new ArrayList<>();
+                repetitions.add(2);
+                repetitions.add(3);
+                repetitions.add(4);
+                repetitions.add(5);
+                repetitions.add(6);
+                repetitions.add(7);
+                RepeatMechanic repeatMechanic = new RepeatMechanic(10L, repetitions);
+                amounts = new ArrayList<>();
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                repeatMechanic.addChildren(new HealMechanic(amounts, new ArrayList<>()));
+                list.add(repeatMechanic);
+                break;
         }
-        return null;
+        return list;
     }
 
     public Material getMaterial() {

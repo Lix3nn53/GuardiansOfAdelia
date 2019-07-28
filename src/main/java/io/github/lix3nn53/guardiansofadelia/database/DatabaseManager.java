@@ -66,6 +66,7 @@ public class DatabaseManager {
                     });
                     TablistUtils.updateTablist(player);
                     InventoryUtils.setMenuItemPlayer(player);
+                    rpgCharacter.getSkillBar().remakeSkillBar();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

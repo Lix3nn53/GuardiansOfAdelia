@@ -36,6 +36,7 @@ public class Tomb {
         this.tombModel.setCustomNameVisible(true);
         this.tombModel.setInvulnerable(true);
         this.tombModel.setGravity(false);
+        this.tombModel.setGlowing(true);
     }
 
     public void remove() {

@@ -19,7 +19,7 @@ public class RPGItemUtils {
         damage.set("Operation", new NBTTagInt(0));
         damage.set("UUIDLeast", new NBTTagInt(894654));
         damage.set("UUIDMost", new NBTTagInt(2872));
-        damage.set("RPGSlot", new NBTTagString("mainhand"));
+        damage.set("Slot", new NBTTagString("mainhand"));
         modifiers.add(damage);
         compound.set("AttributeModifiers", modifiers);
         nmsStack.setTag(compound);
@@ -66,7 +66,7 @@ public class RPGItemUtils {
         speed.set("Operation", new NBTTagInt(0));
         speed.set("UUIDLeast", new NBTTagInt(894654));
         speed.set("UUIDMost", new NBTTagInt(2872));
-        speed.set("RPGSlot", new NBTTagString("mainhand"));
+        speed.set("Slot", new NBTTagString("mainhand"));
         modifiers.add(speed);
         compound.set("AttributeModifiers", modifiers);
         nmsStack.setTag(compound);

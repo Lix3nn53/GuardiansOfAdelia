@@ -114,7 +114,7 @@ public class StatUtils {
 
     public static boolean hasStatType(Material mat) {
         return mat.equals(Material.DIAMOND_AXE) || mat.equals(Material.DIAMOND_PICKAXE) || mat.equals(Material.DIAMOND_SWORD) ||
-                mat.equals(Material.BOW) || mat.equals(Material.TRIDENT) || mat.equals(Material.DIAMOND_SHOVEL) ||
+                mat.equals(Material.BOW) || mat.equals(Material.CROSSBOW) || mat.equals(Material.TRIDENT) || mat.equals(Material.DIAMOND_SHOVEL) ||
                 mat.equals(Material.DIAMOND_HOE) || mat.equals(Material.DIAMOND_LEGGINGS) ||
                 mat.equals(Material.GOLDEN_LEGGINGS) ||
                 mat.equals(Material.IRON_LEGGINGS) ||
