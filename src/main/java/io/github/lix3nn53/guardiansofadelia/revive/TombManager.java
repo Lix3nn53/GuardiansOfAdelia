@@ -162,7 +162,7 @@ public class TombManager {
             if (playerToTomb.containsKey(player)) {
                 Tomb tomb = playerToTomb.get(player);
                 tomb.remove();
-                player.sendMessage(ChatColor.GREEN + "You are spawned in nearest town..");
+                player.sendMessage(ChatColor.GREEN + "Spawned in nearest town.");
             }
         }
     }

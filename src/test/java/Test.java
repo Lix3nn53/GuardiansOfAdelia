@@ -2,16 +2,23 @@ import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 public class Test {
 
     private static final HashMap<Character, Double> playerDamages = new HashMap<>();
 
+    private static final double MULTIPLIER = 0.1;
+
     public static void main(String[] args) {
 
-        HashMap<String, HashSet<String>> castKeyToSkillFlags = new HashMap<>();
+        int bonusValue = getBonusValue(5000);
+        System.out.println(bonusValue);
+        int newValue = 5000 + bonusValue;
+        int decreaseValue = getDecreaseValue(newValue);
+        System.out.println(decreaseValue);
+
+        /*HashMap<String, HashSet<String>> castKeyToSkillFlags = new HashMap<>();
 
         String castKey = "key";
 
@@ -39,7 +46,7 @@ public class Test {
             castKeyToSkillFlags.put(castKey, flags);
         }
 
-        System.out.println(castKeyToSkillFlags.toString());
+        System.out.println(castKeyToSkillFlags.toString());*/
 
        /* playerDamages.put('A', 1D);
         playerDamages.put('S', 1D);
@@ -70,6 +77,26 @@ public class Test {
         for (int level = 1; level <= 0; level++) {
             System.out.println("Level 1123213123123123123123");
         }*/
+    }
+
+    private static int getBonusValue(int value) {
+        int bonus = (int) ((value * MULTIPLIER) + 0.5);
+        if (bonus <= 1) {
+            return 1;
+        }
+        return bonus;
+    }
+
+    private static int getDecreaseValue(int value) {
+        double v1 = 1D - MULTIPLIER;
+        double v2 = v1 * (MULTIPLIER * MULTIPLIER);
+        double totalV = v1 + v2;
+
+        int bonus = (int) ((value * totalV) + 0.5);
+        if (bonus <= 1) {
+            return 1;
+        }
+        return bonus;
     }
 
     private static double expFormula(int level) {

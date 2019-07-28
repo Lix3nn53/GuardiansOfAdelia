@@ -29,6 +29,11 @@ public class GearPassive implements RPGGear {
         List<String> lore = new ArrayList<>();
 
         StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
+        int finalFire = (int) (statPassive.getFire() * bonusPercent);
+        int finalWater = (int) (statPassive.getWater() * bonusPercent);
+        int finalEarth = (int) (statPassive.getEarth() * bonusPercent);
+        int finalLightning = (int) (statPassive.getLightning() * bonusPercent);
+        int finalWind = (int) (statPassive.getWind() * bonusPercent);
 
         lore.add("");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
@@ -38,40 +43,40 @@ public class GearPassive implements RPGGear {
         lore.add(ChatColor.YELLOW + "----------------");
         lore.add(tier.getTierString());
         lore.add(ChatColor.YELLOW + "----------------");
-        if (statPassive.getFire() != 0) {
-            lore.add(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+" + (int) (statPassive.getFire() * bonusPercent));
+        if (finalFire != 0) {
+            lore.add(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+" + finalFire);
         }
-        if (statPassive.getWater() != 0) {
-            lore.add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + ChatColor.GRAY + "+" + (int) (statPassive.getWater() * bonusPercent));
+        if (finalWater != 0) {
+            lore.add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + ChatColor.GRAY + "+" + finalWater);
         }
-        if (statPassive.getEarth() != 0) {
-            lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + ChatColor.GRAY + "+" + (int) (statPassive.getEarth() * bonusPercent));
+        if (finalEarth != 0) {
+            lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + ChatColor.GRAY + "+" + finalEarth);
         }
-        if (statPassive.getLightning() != 0) {
-            lore.add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+" + (int) (statPassive.getLightning() * bonusPercent));
+        if (finalLightning != 0) {
+            lore.add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+" + finalLightning);
         }
-        if (statPassive.getWind() != 0) {
-            lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+" + (int) (statPassive.getWind() * bonusPercent));
+        if (finalWind != 0) {
+            lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+" + finalWind);
         }
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
         PersistentDataContainerUtil.putInteger("passive", passiveType, this.itemStack);
 
-        if (statPassive.getFire() != 0) {
-            PersistentDataContainerUtil.putInteger("fire", statPassive.getFire(), this.itemStack);
+        if (finalFire != 0) {
+            PersistentDataContainerUtil.putInteger("fire", finalFire, this.itemStack);
         }
-        if (statPassive.getWater() != 0) {
-            PersistentDataContainerUtil.putInteger("water", statPassive.getWater(), this.itemStack);
+        if (finalWater != 0) {
+            PersistentDataContainerUtil.putInteger("water", finalWater, this.itemStack);
         }
-        if (statPassive.getEarth() != 0) {
-            PersistentDataContainerUtil.putInteger("earth", statPassive.getEarth(), this.itemStack);
+        if (finalEarth != 0) {
+            PersistentDataContainerUtil.putInteger("earth", finalEarth, this.itemStack);
         }
-        if (statPassive.getLightning() != 0) {
-            PersistentDataContainerUtil.putInteger("lightning", statPassive.getLightning(), this.itemStack);
+        if (finalLightning != 0) {
+            PersistentDataContainerUtil.putInteger("lightning", finalLightning, this.itemStack);
         }
-        if (statPassive.getWind() != 0) {
-            PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), this.itemStack);
+        if (finalWind != 0) {
+            PersistentDataContainerUtil.putInteger("wind", finalWind, this.itemStack);
         }
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();

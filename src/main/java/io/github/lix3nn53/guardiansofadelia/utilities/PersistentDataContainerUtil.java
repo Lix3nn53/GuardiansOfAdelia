@@ -94,15 +94,12 @@ public class PersistentDataContainerUtil {
         return 0;
     }
 
-    public static ItemStack removeTag(ItemStack itemStack, String key) {
-        if (itemStack.hasItemMeta()) {
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
-            PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
-            persistentDataContainer.remove(namespacedKey);
-            itemStack.setItemMeta(itemMeta);
-        }
-        return itemStack;
+    public static void removeTag(ItemStack itemStack, String key) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
+        PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
+        persistentDataContainer.remove(namespacedKey);
+        itemStack.setItemMeta(itemMeta);
     }
 
     public static boolean hasInteger(Entity entity, String key) {

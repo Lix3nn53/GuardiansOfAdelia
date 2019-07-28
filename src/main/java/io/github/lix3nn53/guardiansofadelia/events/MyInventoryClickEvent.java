@@ -82,7 +82,7 @@ public class MyInventoryClickEvent implements Listener {
         int slot = event.getSlot();
 
         if (event.getAction() != InventoryAction.NOTHING) {
-            if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+            if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.PLAYER)) {
                 if (slot >= 0 && slot <= 3) { //skill bar
                     event.setCancelled(true);
                     player.sendMessage("Cancel event: hot bar skill item click");

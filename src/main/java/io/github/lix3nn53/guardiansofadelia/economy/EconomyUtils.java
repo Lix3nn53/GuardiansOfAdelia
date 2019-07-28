@@ -87,7 +87,7 @@ public class EconomyUtils {
             lore.remove(size - 1);
             itemMeta.setLore(lore);
             clone.setItemMeta(itemMeta);
-            clone = PersistentDataContainerUtil.removeTag(clone, "shopPrice");
+            PersistentDataContainerUtil.removeTag(clone, "shopPrice");
             return clone;
         }
         return itemStack;
