@@ -11,7 +11,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-//TODO melee damage buffs does not work after +3?? weird
 public class Enchant {
 
     private final Player player;
@@ -181,10 +180,7 @@ public class Enchant {
 
             if (type.equals(StatType.MELEE)) {
                 PersistentDataContainerUtil.putInteger("meleeDamage", nextValue, this.itemStack);
-                ItemStack newItemStack = new ItemStack(this.itemStack.getType());
-                newItemStack.setItemMeta(this.itemStack.getItemMeta());
-
-                this.itemStack = RPGItemUtils.setDamageWhenInMainHand(newItemStack, nextValue);
+                this.itemStack = RPGItemUtils.clearThenSetDamageWhenInMainHand(itemStack, nextValue);
             } else if (type.equals(StatType.HYBRID)) {
                 PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             } else if (type.equals(StatType.MAGICAL)) {
@@ -380,10 +376,7 @@ public class Enchant {
 
             if (type.equals(StatType.MELEE)) {
                 PersistentDataContainerUtil.putInteger("meleeDamage", nextValue, this.itemStack);
-                ItemStack newItemStack = new ItemStack(this.itemStack.getType());
-                newItemStack.setItemMeta(this.itemStack.getItemMeta());
-
-                this.itemStack = RPGItemUtils.setDamageWhenInMainHand(newItemStack, nextValue);
+                this.itemStack = RPGItemUtils.clearThenSetDamageWhenInMainHand(itemStack, nextValue);
             } else if (type.equals(StatType.HYBRID)) {
                 PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             } else if (type.equals(StatType.MAGICAL)) {
