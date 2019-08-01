@@ -284,10 +284,9 @@ public class RPGCharacterStats {
 
             StatType statType = StatUtils.getStatType(type);
 
-            switch (statType) {
-                case HYBRID:
-                    StatHybrid statHybrid = (StatHybrid) StatUtils.getStat(itemInMainHand);
-                    return statHybrid.getRangedDamage() + fireBonus;
+            if (statType == StatType.HYBRID) {
+                StatHybrid statHybrid = (StatHybrid) StatUtils.getStat(itemInMainHand);
+                return statHybrid.getRangedDamage() + fireBonus;
             }
         }
         return (int) (fireBonus * physicalDamageBuff + 0.5);

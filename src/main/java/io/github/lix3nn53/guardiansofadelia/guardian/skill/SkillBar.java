@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class SkillBar {
 
-    private static HashMap<String, Boolean> skillsOnCooldown = new HashMap<>();
+    private final HashMap<String, Boolean> skillsOnCooldown = new HashMap<>();
     private final Player player;
     private final RPGClass rpgClass;
     private final List<Integer> investedSkillPoints = new ArrayList<>();

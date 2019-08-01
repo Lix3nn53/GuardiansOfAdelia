@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class RPGItemUtils {
 
-    public static ItemStack setDamageWhenInMainHand(ItemStack item, int attack) {
+    /*public static ItemStack setDamageWhenInMainHand(ItemStack item, int attack) {
         net.minecraft.server.v1_14_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         NBTTagCompound compound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
         NBTTagList modifiers = compound.hasKey("AttributeModifiers")
@@ -25,7 +25,7 @@ public class RPGItemUtils {
         nmsStack.setTag(compound);
         item = CraftItemStack.asBukkitCopy(nmsStack);
         return item;
-    }
+    }*/
 
     public static ItemStack clearThenSetDamageWhenInMainHand(ItemStack item, int attack) {
         net.minecraft.server.v1_14_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
