@@ -80,4 +80,26 @@ public enum RPGClass {
         }
         return name;
     }
+
+    public int getBonusHealthForLevel(int level) {
+        double multiplier = 1;
+        if (this == RPGClass.ARCHER) {
+            multiplier = 1.75;
+        } else if (this == RPGClass.KNIGHT) {
+            multiplier = 1.85;
+        } else if (this == RPGClass.MAGE) {
+            multiplier = 1.75;
+        } else if (this == RPGClass.MONK) {
+            multiplier = 1.8;
+        } else if (this == RPGClass.ROGUE) {
+            multiplier = 1.8;
+        } else if (this == RPGClass.PALADIN) {
+            multiplier = 1.85;
+        } else if (this == RPGClass.WARRIOR) {
+            multiplier = 1.8;
+        } else if (this == RPGClass.HUNTER) {
+            multiplier = 1.75;
+        }
+        return (int) (Math.pow(level, multiplier) - (level) + 0.5);
+    }
 }

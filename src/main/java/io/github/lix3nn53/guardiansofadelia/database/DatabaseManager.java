@@ -19,6 +19,7 @@ import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -67,6 +68,8 @@ public class DatabaseManager {
                     TablistUtils.updateTablist(player);
                     InventoryUtils.setMenuItemPlayer(player);
                     rpgCharacter.getSkillBar().remakeSkillBar();
+                    rpgCharacter.getRpgCharacterStats().onMaxHealthChange();
+                    player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

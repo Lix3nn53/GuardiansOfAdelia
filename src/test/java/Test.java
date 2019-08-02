@@ -18,6 +18,11 @@ public class Test {
         int decreaseValue = getDecreaseValue(newValue);
         System.out.println(decreaseValue);
 
+        for (int level = 0; level <= 90; level++) {
+            System.out.println((int) (Math.pow(level, 1.75) - (level) + 0.5));
+
+        }
+
         /*HashMap<String, HashSet<String>> castKeyToSkillFlags = new HashMap<>();
 
         String castKey = "key";

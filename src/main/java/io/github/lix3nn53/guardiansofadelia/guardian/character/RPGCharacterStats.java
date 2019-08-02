@@ -3,6 +3,8 @@ package io.github.lix3nn53.guardiansofadelia.guardian.character;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
@@ -18,6 +20,8 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.UUID;
 
 public class RPGCharacterStats {
 
@@ -84,6 +88,7 @@ public class RPGCharacterStats {
         this.totalExp = totalExp;
         int levelFromTotalExperience = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
         player.setLevel(levelFromTotalExperience);
+        onMaxHealthChange();
     }
 
     public void giveExp(int give) {
@@ -98,6 +103,7 @@ public class RPGCharacterStats {
         if (totalExp >= totalExpForLevel) {
             int levelFromTotalExperience = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
             player.setLevel(levelFromTotalExperience);
+            onMaxHealthChange();
         }
 
     }
@@ -158,7 +164,18 @@ public class RPGCharacterStats {
             totalMaxHealth += shield.getMaxHealth();
         }
 
-        return (int) (totalMaxHealth + earth.getIncrement() + 0.5);
+        int bonusHealthForLevel = 0;
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (guardianData.hasActiveCharacter()) {
+                RPGClass rpgClass = guardianData.getActiveCharacter().getRpgClass();
+                int level = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
+                bonusHealthForLevel = rpgClass.getBonusHealthForLevel(level);
+            }
+        }
+
+        return (int) (totalMaxHealth + earth.getIncrement() + bonusHealthForLevel + 0.5);
     }
 
     public int getTotalMaxMana() {
