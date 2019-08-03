@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +23,7 @@ public class MyPlayerJoinEvent implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                GuardiansOfAdelia.getCharacterSelectionScreenManager().startCharacterSelection(player);
+                CharacterSelectionScreenManager.startCharacterSelection(player);
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 40L);
     }

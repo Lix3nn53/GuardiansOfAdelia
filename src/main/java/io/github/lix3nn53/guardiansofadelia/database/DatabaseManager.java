@@ -13,6 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.AdeliaRegionManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
@@ -129,13 +130,13 @@ public class DatabaseManager {
                 try {
                     Location lastLocationOfCharacter = databaseQueries.getLastLocationOfCharacter(uuid, charNo);
                     if (lastLocationOfCharacter != null) {
-                        GuardiansOfAdelia.getCharacterSelectionScreenManager().setCharLocation(uuid, charNo, lastLocationOfCharacter);
+                        CharacterSelectionScreenManager.setCharLocation(uuid, charNo, lastLocationOfCharacter);
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
 
-                List<ArmorStand> armorStands = GuardiansOfAdelia.getCharacterSelectionScreenManager().getCharacterNoToArmorStands().get(charNo);
+                List<ArmorStand> armorStands = CharacterSelectionScreenManager.getCharacterNoToArmorStands().get(charNo);
 
                 MobDisguise mobDisguise = new MobDisguise(DisguiseType.ARMOR_STAND, false);
                 LivingWatcher livingWatcher = mobDisguise.getWatcher();

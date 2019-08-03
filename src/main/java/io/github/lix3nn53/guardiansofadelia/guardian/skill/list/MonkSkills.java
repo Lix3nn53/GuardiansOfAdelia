@@ -376,12 +376,12 @@ public class MonkSkills {
         FlagCondition flagCondition = new FlagCondition("oceanMark", true);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(12D);
-        damages.add(13D);
-        damages.add(14D);
-        damages.add(15D);
-        damages.add(15D);
-        damages.add(15D);
+        damages.add(100D);
+        damages.add(200D);
+        damages.add(300D);
+        damages.add(400D);
+        damages.add(500D);
+        damages.add(600D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC);
 
         List<Integer> ticks = new ArrayList<>();

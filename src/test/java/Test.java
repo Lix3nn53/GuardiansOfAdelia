@@ -1,3 +1,4 @@
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-        int bonusValue = getBonusValue(5000);
+        /*int bonusValue = getBonusValue(5000);
         System.out.println(bonusValue);
         int newValue = 5000 + bonusValue;
         int decreaseValue = getDecreaseValue(newValue);
@@ -21,7 +22,17 @@ public class Test {
         for (int level = 0; level <= 90; level++) {
             System.out.println((int) (Math.pow(level, 1.75) - (level) + 0.5));
 
-        }
+        }*/
+
+        int totalDefense = 1197;
+
+        double damage = 2465;
+
+        double reduction = StatUtils.getDefenseReduction(totalDefense);
+
+        damage = damage * reduction;
+
+        System.out.println(damage);
 
         /*HashMap<String, HashSet<String>> castKeyToSkillFlags = new HashMap<>();
 

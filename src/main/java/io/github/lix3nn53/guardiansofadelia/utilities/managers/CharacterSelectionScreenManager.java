@@ -20,17 +20,17 @@ import java.util.function.Predicate;
 public class CharacterSelectionScreenManager {
 
     private static final HashMap<UUID, HashMap<Integer, Location>> charLocationsForSelection = new HashMap<>();
-    private final List<Location> armorStandLocationBases;
-    private final List<Player> players = new ArrayList<>();
-    private Location tutorialStart;
-    private Location characterSelectionCenter;
-    private HashMap<Integer, List<ArmorStand>> characterNoToArmorStands = new HashMap<>();
+    private static final List<Player> players = new ArrayList<>();
+    private static List<Location> armorStandLocationBases;
+    private static Location tutorialStart;
+    private static Location characterSelectionCenter;
+    private static HashMap<Integer, List<ArmorStand>> characterNoToArmorStands = new HashMap<>();
 
-    public CharacterSelectionScreenManager(List<Location> armorStandLocationBases) {
-        this.armorStandLocationBases = armorStandLocationBases;
+    public static void setArmorStandLocationBases(List<Location> armorStandLocationBases) {
+        CharacterSelectionScreenManager.armorStandLocationBases = armorStandLocationBases;
     }
 
-    private void createHolograms() {
+    private static void createHolograms() {
         //remove old armorStands since chunk events doesn't work for them. Because spawn chunks are always loaded.
         BoundingBox boundingBox = new BoundingBox(-2750, 41, 6108, -2772, 53, 6130);
         Predicate<Entity> predicate = entity -> entity.getType().equals(EntityType.ARMOR_STAND);
@@ -54,16 +54,16 @@ public class CharacterSelectionScreenManager {
         }
     }
 
-    public void startCharacterSelection(Player player) {
+    public static void startCharacterSelection(Player player) {
         if (players.isEmpty()) {
             createHolograms();
         }
         players.add(player);
         DatabaseManager.loadPlayerDataAndCharacterSelection(player);
-        player.teleport(this.characterSelectionCenter);
+        player.teleport(characterSelectionCenter);
     }
 
-    private void removeDisguisesFromPlayer(Player player) {
+    private static void removeDisguisesFromPlayer(Player player) {
         for (int charNo = 1; charNo <= 4; charNo++) {
             if (characterNoToArmorStands.containsKey(charNo)) {
                 List<ArmorStand> armorStands = characterNoToArmorStands.get(charNo);
@@ -77,46 +77,46 @@ public class CharacterSelectionScreenManager {
         }
     }
 
-    public HashMap<Integer, List<ArmorStand>> getCharacterNoToArmorStands() {
+    public static HashMap<Integer, List<ArmorStand>> getCharacterNoToArmorStands() {
         return characterNoToArmorStands;
     }
 
-    public void selectCharacter(Player player, int charNo, Location location) {
+    public static void selectCharacter(Player player, int charNo, Location location) {
         player.sendMessage("Loading character-" + charNo);
         DatabaseManager.loadCharacter(player, charNo, location);
         clear(player);
     }
 
-    public void clear(Player player) {
+    public static void clear(Player player) {
         removeDisguisesFromPlayer(player);
         players.remove(player);
         charLocationsForSelection.remove(player.getUniqueId());
     }
 
-    public Location getCharacterSelectionCenter() {
+    public static Location getCharacterSelectionCenter() {
         return characterSelectionCenter;
     }
 
-    public void setCharacterSelectionCenter(Location characterSelectionCenter) {
-        this.characterSelectionCenter = characterSelectionCenter;
+    public static void setCharacterSelectionCenter(Location characterSelectionCenter) {
+        CharacterSelectionScreenManager.characterSelectionCenter = characterSelectionCenter;
     }
 
-    public Location getTutorialStart() {
+    public static Location getTutorialStart() {
         return tutorialStart;
     }
 
-    public void setTutorialStart(Location tutorialStart) {
-        this.tutorialStart = tutorialStart;
+    public static void setTutorialStart(Location tutorialStart) {
+        CharacterSelectionScreenManager.tutorialStart = tutorialStart;
     }
 
-    public void createCharacter(Player player, int charNo, RPGClass rpgClass) {
+    public static void createCharacter(Player player, int charNo, RPGClass rpgClass) {
         player.sendMessage("Creating character-" + charNo);
         clear(player);
         //start tutorial
-        TutorialManager.startTutorial(player, rpgClass, charNo, this.tutorialStart);
+        TutorialManager.startTutorial(player, rpgClass, charNo, tutorialStart);
     }
 
-    public void setCharLocation(UUID uuid, int charNo, Location location) {
+    public static void setCharLocation(UUID uuid, int charNo, Location location) {
         HashMap<Integer, Location> integerLocationHashMap = new HashMap<>();
         if (charLocationsForSelection.containsKey(uuid)) {
             integerLocationHashMap = charLocationsForSelection.get(uuid);
@@ -128,7 +128,7 @@ public class CharacterSelectionScreenManager {
     /**
      * @return last leave location if valid else null
      */
-    public Location getCharLocation(Player player, int charNo) {
+    public static Location getCharLocation(Player player, int charNo) {
         UUID uuid = player.getUniqueId();
         if (charLocationsForSelection.containsKey(uuid)) {
             HashMap<Integer, Location> integerLocationHashMap = charLocationsForSelection.get(uuid);
@@ -142,7 +142,7 @@ public class CharacterSelectionScreenManager {
         return null;
     }
 
-    public boolean isPlayerInCharSelection(Player player) {
+    public static boolean isPlayerInCharSelection(Player player) {
         return players.contains(player);
     }
 }

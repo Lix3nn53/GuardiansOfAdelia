@@ -126,12 +126,12 @@ public class RogueSkills {
         WarpTargetMechanic warpTargetMechanic = new WarpTargetMechanic(false);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
+        damages.add(100D);
+        damages.add(200D);
+        damages.add(300D);
+        damages.add(400D);
+        damages.add(500D);
+        damages.add(600D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         skill.addTrigger(selfTarget);
@@ -340,12 +340,12 @@ public class RogueSkills {
         repeatMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_THROW_SMALL_OBJECT));
 
         List<Double> damages = new ArrayList<>();
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
+        damages.add(100D);
+        damages.add(200D);
+        damages.add(300D);
+        damages.add(400D);
+        damages.add(500D);
+        damages.add(600D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
         projectileMechanic.addChildren(damageMechanic);
@@ -405,12 +405,12 @@ public class RogueSkills {
         meleeAttackTrigger.addChildren(directionCondition);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
+        damages.add(100D);
+        damages.add(200D);
+        damages.add(300D);
+        damages.add(400D);
+        damages.add(500D);
+        damages.add(600D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         meleeAttackTrigger.addChildren(damageMechanic);

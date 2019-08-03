@@ -14,7 +14,6 @@ import io.github.lix3nn53.guardiansofadelia.quests.list.MainStoryQuests;
 import io.github.lix3nn53.guardiansofadelia.quests.list.TutorialQuests;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
-import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
@@ -30,20 +29,9 @@ import java.util.UUID;
 
 public class GuardiansOfAdelia extends JavaPlugin {
 
-    private static CharacterSelectionScreenManager CHARACTER_SELECTION_SCREEN_MANAGER;
-
     private static GuardiansOfAdelia instance;
-
     public static GuardiansOfAdelia getInstance() {
         return instance;
-    }
-
-    public static CharacterSelectionScreenManager getCharacterSelectionScreenManager() {
-        return CHARACTER_SELECTION_SCREEN_MANAGER;
-    }
-
-    public static void setCharacterSelectionScreenManager(CharacterSelectionScreenManager characterSelectionScreenManager) {
-        CHARACTER_SELECTION_SCREEN_MANAGER = characterSelectionScreenManager;
     }
 
     @Override

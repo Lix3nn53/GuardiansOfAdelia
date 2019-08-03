@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -26,13 +25,10 @@ public class VanillaSlotMainhand {
         itemMeta.setUnbreakable(true);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Right Hand Slot");
         itemMeta.setLore(new ArrayList() {{
-            add("Only shields and daggers can be placed here");
+            add("");
         }});
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(15);
-        }
+        itemMeta.setCustomModelData(10000013);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

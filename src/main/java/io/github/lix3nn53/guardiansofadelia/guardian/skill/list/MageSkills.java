@@ -99,12 +99,12 @@ public class MageSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(10D);
-        damages.add(10D);
-        damages.add(10D);
-        damages.add(10D);
-        damages.add(10D);
-        damages.add(10D);
+        damages.add(100D);
+        damages.add(200D);
+        damages.add(300D);
+        damages.add(400D);
+        damages.add(500D);
+        damages.add(600D);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
 
         projectileMechanic.addChildren(areaTarget);
@@ -178,12 +178,12 @@ public class MageSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(10D);
-        damages.add(10D);
-        damages.add(10D);
-        damages.add(10D);
-        damages.add(10D);
-        damages.add(10D);
+        damages.add(100D);
+        damages.add(200D);
+        damages.add(300D);
+        damages.add(400D);
+        damages.add(500D);
+        damages.add(600D);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
         areaTarget.addChildren(new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 3.4, 11, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.TEAL, 2)));
         List<Integer> durations = new ArrayList<>();
@@ -463,12 +463,12 @@ public class MageSkills {
         singleTarget.addChildren(repeatMechanic);
         repeatMechanic.addChildren(projectileMechanic);
         List<Double> damages = new ArrayList<>();
-        damages.add(16D);
-        damages.add(16D);
-        damages.add(16D);
-        damages.add(16D);
-        damages.add(16D);
-        damages.add(16D);
+        damages.add(100D);
+        damages.add(200D);
+        damages.add(300D);
+        damages.add(400D);
+        damages.add(500D);
+        damages.add(600D);
         projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_FIRE_AURA));
         projectileMechanic.addChildren(areaTarget);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));

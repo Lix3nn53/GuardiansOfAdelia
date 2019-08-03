@@ -106,12 +106,12 @@ public class HunterSkills {
         ParticleMechanic explosionParticle = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.CIRCLE, 3.4, 2, 0, 0, 0, 0, 0.5, 0, 0, null);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
+        damages.add(100D);
+        damages.add(200D);
+        damages.add(300D);
+        damages.add(400D);
+        damages.add(500D);
+        damages.add(600D);
 
         List<Double> speeds = new ArrayList<>();
         speeds.add(1.25);
@@ -185,12 +185,12 @@ public class HunterSkills {
                 0, 1, 0, 200, true, Arrow.class);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
-        damages.add(3D);
+        damages.add(100D);
+        damages.add(200D);
+        damages.add(300D);
+        damages.add(400D);
+        damages.add(500D);
+        damages.add(600D);
         projectileMechanic.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
 
         selfTarget.addChildren(projectileMechanic);

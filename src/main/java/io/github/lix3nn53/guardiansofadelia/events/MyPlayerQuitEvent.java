@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
@@ -9,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -25,7 +25,7 @@ public class MyPlayerQuitEvent implements Listener {
         GuardianDataManager.onPlayerQuit(player);
 
         GuildManager.onPlayerQuit(player);
-        GuardiansOfAdelia.getCharacterSelectionScreenManager().clear(player);
+        CharacterSelectionScreenManager.clear(player);
         MiniGameManager.onQuit(player);
         PartyManager.onPlayerQuit(player);
         PetManager.onPlayerQuit(player);

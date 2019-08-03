@@ -169,7 +169,8 @@ public class ConfigManager {
             Location location = new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
             locationList.add(location);
         }
-        GuardiansOfAdelia.setCharacterSelectionScreenManager(new CharacterSelectionScreenManager(locationList));
+
+        CharacterSelectionScreenManager.setArmorStandLocationBases(locationList);
 
         String worldNameCenter = characterSelectionConfig.getString("characterSelection" + "Center" + ".world");
         double xCenter = characterSelectionConfig.getDouble("characterSelection" + "Center" + ".x");
@@ -178,7 +179,7 @@ public class ConfigManager {
         float yawCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".yaw");
         float pitchCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".pitch");
         Location locationCenter = new Location(Bukkit.getWorld(worldNameCenter), xCenter, yCenter, zCenter, yawCenter, pitchCenter);
-        GuardiansOfAdelia.getCharacterSelectionScreenManager().setCharacterSelectionCenter(locationCenter);
+        CharacterSelectionScreenManager.setCharacterSelectionCenter(locationCenter);
 
         String worldNameTuto = characterSelectionConfig.getString("tutorialStart" + ".world");
         double xTuto = characterSelectionConfig.getDouble("tutorialStart" + ".x");
@@ -187,12 +188,11 @@ public class ConfigManager {
         float yawTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".yaw");
         float pitchTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".pitch");
         Location locationTuto = new Location(Bukkit.getWorld(worldNameTuto), xTuto, yTuto, zTuto, yawTuto, pitchTuto);
-        GuardiansOfAdelia.getCharacterSelectionScreenManager().setTutorialStart(locationTuto);
+        CharacterSelectionScreenManager.setTutorialStart(locationTuto);
     }
 
     private static void writeCharacterSelectionConfig() {
-        CharacterSelectionScreenManager characterSelectionScreenManager = GuardiansOfAdelia.getCharacterSelectionScreenManager();
-        Location characterSelectionCenter = characterSelectionScreenManager.getCharacterSelectionCenter();
+        Location characterSelectionCenter = CharacterSelectionScreenManager.getCharacterSelectionCenter();
         characterSelectionConfig.set("characterSelection" + "Center" + ".world", characterSelectionCenter.getWorld().getName());
         characterSelectionConfig.set("characterSelection" + "Center" + ".x", characterSelectionCenter.getX());
         characterSelectionConfig.set("characterSelection" + "Center" + ".y", characterSelectionCenter.getY());
@@ -200,7 +200,7 @@ public class ConfigManager {
         characterSelectionConfig.set("characterSelection" + "Center" + ".yaw", characterSelectionCenter.getYaw());
         characterSelectionConfig.set("characterSelection" + "Center" + ".pitch", characterSelectionCenter.getPitch());
 
-        Location tutorialStart = characterSelectionScreenManager.getTutorialStart();
+        Location tutorialStart = CharacterSelectionScreenManager.getTutorialStart();
         characterSelectionConfig.set("tutorialStart" + ".world", tutorialStart.getWorld().getName());
         characterSelectionConfig.set("tutorialStart" + ".x", tutorialStart.getX());
         characterSelectionConfig.set("tutorialStart" + ".y", tutorialStart.getY());
@@ -208,7 +208,7 @@ public class ConfigManager {
         characterSelectionConfig.set("tutorialStart" + ".yaw", tutorialStart.getYaw());
         characterSelectionConfig.set("tutorialStart" + ".pitch", tutorialStart.getPitch());
 
-        HashMap<Integer, List<ArmorStand>> characterNoToArmorStands = characterSelectionScreenManager.getCharacterNoToArmorStands();
+        HashMap<Integer, List<ArmorStand>> characterNoToArmorStands = CharacterSelectionScreenManager.getCharacterNoToArmorStands();
         for (Integer i : characterNoToArmorStands.keySet()) {
             Location location = characterNoToArmorStands.get(i).get(0).getLocation();
             characterSelectionConfig.set("characterSelectionHologram" + i + ".world", location.getWorld().getName());

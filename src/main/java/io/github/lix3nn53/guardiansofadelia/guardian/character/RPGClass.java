@@ -90,7 +90,7 @@ public enum RPGClass {
         } else if (this == RPGClass.MAGE) {
             multiplier = 1.75;
         } else if (this == RPGClass.MONK) {
-            multiplier = 1.8;
+            multiplier = 1.75;
         } else if (this == RPGClass.ROGUE) {
             multiplier = 1.8;
         } else if (this == RPGClass.PALADIN) {

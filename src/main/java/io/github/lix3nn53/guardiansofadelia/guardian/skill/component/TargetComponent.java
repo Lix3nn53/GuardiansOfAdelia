@@ -13,8 +13,8 @@ import java.util.List;
 
 public abstract class TargetComponent extends SkillComponent {
 
-    final int max;
-    final boolean self;
+    private final int max;
+    private final boolean self;
     private final boolean allies;
     private final boolean enemy;
 
@@ -66,9 +66,13 @@ public abstract class TargetComponent extends SkillComponent {
 
         if (allies && enemy) return true;
 
-        if (allies) return isAlly(caster, target);
+        boolean ally = isAlly(caster, target);
 
-        return true;
+        if (allies) return ally;
+
+        if (enemy) return !ally;
+
+        return false;
     }
 
     /**

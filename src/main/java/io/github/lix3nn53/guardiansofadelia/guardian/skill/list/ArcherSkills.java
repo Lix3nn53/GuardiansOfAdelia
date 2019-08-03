@@ -93,14 +93,14 @@ public class ArcherSkills {
                 0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
                 ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.LIME, 2), false);
 
-        List<Double> damageAmounts = new ArrayList<>();
-        damageAmounts.add(1D);
-        damageAmounts.add(1D);
-        damageAmounts.add(1D);
-        damageAmounts.add(1D);
-        damageAmounts.add(1D);
-        damageAmounts.add(1D);
-        DamageMechanic damageMechanic = new DamageMechanic(damageAmounts, DamageMechanic.DamageType.RANGED);
+        List<Double> damages = new ArrayList<>();
+        damages.add(100D);
+        damages.add(200D);
+        damages.add(300D);
+        damages.add(400D);
+        damages.add(500D);
+        damages.add(600D);
+        DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(60);
@@ -503,12 +503,12 @@ public class ArcherSkills {
         projectileMechanic.addChildren(particleMechanic);
         projectileMechanic.addChildren(areaTarget);
         List<Double> damages = new ArrayList<>();
-        damages.add(16D);
-        damages.add(16D);
-        damages.add(16D);
-        damages.add(16D);
-        damages.add(16D);
-        damages.add(16D);
+        damages.add(100D);
+        damages.add(200D);
+        damages.add(300D);
+        damages.add(400D);
+        damages.add(500D);
+        damages.add(600D);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
 
         return skill;

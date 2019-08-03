@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
@@ -306,49 +305,47 @@ public class MyInventoryClickEvent implements Listener {
                 charNoString = charNoString.replace(" Creation", "");
                 int charNo = Integer.parseInt(charNoString);
 
-                CharacterSelectionScreenManager characterSelectionScreenManager = GuardiansOfAdelia.getCharacterSelectionScreenManager();
                 if (currentName.contains("Knight")) {
-                    characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.KNIGHT);
+                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.KNIGHT);
                 } else if (currentName.contains("Paladin")) {
-                    characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.PALADIN);
+                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.PALADIN);
                 } else if (currentName.contains("Rogue")) {
-                    characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.ROGUE);
+                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.ROGUE);
                 } else if (currentName.contains("Archer")) {
-                    characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.ARCHER);
+                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.ARCHER);
                 } else if (currentName.contains("Mage")) {
-                    characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.MAGE);
+                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.MAGE);
                 } else if (currentName.contains("Warrior")) {
-                    characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.WARRIOR);
+                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.WARRIOR);
                 } else if (currentName.contains("Monk")) {
-                    characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.MONK);
+                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.MONK);
                 } else if (currentName.contains("Hunter")) {
-                    characterSelectionScreenManager.createCharacter(player, charNo, RPGClass.HUNTER);
+                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.HUNTER);
                 }
             } else if (title.contains("Selection")) {
                 String charNoString = title.replace(ChatColor.YELLOW + "Character ", "");
                 charNoString = charNoString.replace(" Selection", "");
                 int charNo = Integer.parseInt(charNoString);
 
-                CharacterSelectionScreenManager characterSelectionScreenManager = GuardiansOfAdelia.getCharacterSelectionScreenManager();
                 if (currentName.contains("Roumen")) {
                     Location location = TownManager.getTown(1).getLocation();
-                    characterSelectionScreenManager.selectCharacter(player, charNo, location);
+                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Port Veloa")) {
                     Location location = TownManager.getTown(2).getLocation();
-                    characterSelectionScreenManager.selectCharacter(player, charNo, location);
+                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Elderine")) {
                     Location location = TownManager.getTown(3).getLocation();
-                    characterSelectionScreenManager.selectCharacter(player, charNo, location);
+                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Uruga")) {
                     Location location = TownManager.getTown(4).getLocation();
-                    characterSelectionScreenManager.selectCharacter(player, charNo, location);
+                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Arberstol Ruins")) {
                     Location location = TownManager.getTown(5).getLocation();
-                    characterSelectionScreenManager.selectCharacter(player, charNo, location);
+                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("last location")) {
-                    Location charLocation = characterSelectionScreenManager.getCharLocation(player, charNo);
+                    Location charLocation = CharacterSelectionScreenManager.getCharLocation(player, charNo);
                     if (charLocation != null) {
-                        characterSelectionScreenManager.selectCharacter(player, charNo, charLocation);
+                        CharacterSelectionScreenManager.selectCharacter(player, charNo, charLocation);
                     } else {
                         player.sendMessage(ChatColor.RED + "Your saved quit-location is not valid");
                     }

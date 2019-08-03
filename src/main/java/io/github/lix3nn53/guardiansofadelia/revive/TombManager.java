@@ -12,7 +12,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -103,10 +102,7 @@ public class TombManager {
 
         ItemStack respawn = new ItemStack(Material.IRON_HOE);
         ItemMeta itemMeta = respawn.getItemMeta();
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(19);
-        }
+        itemMeta.setCustomModelData(10000018);
         itemMeta.setUnbreakable(true);
         itemMeta.setDisplayName(ChatColor.GREEN + "Respawn");
         itemMeta.setLore(new ArrayList() {{
@@ -122,10 +118,7 @@ public class TombManager {
         reviveGui.setItem(3, respawn);
 
         ItemStack soul = new ItemStack(Material.IRON_HOE);
-        if (itemMeta instanceof Damageable) {
-            Damageable damageable = (Damageable) itemMeta;
-            damageable.setDamage(73);
-        }
+        itemMeta.setCustomModelData(10000010);
         itemMeta.setDisplayName(ChatColor.AQUA + "Search your tomb in soul mode");
         itemMeta.setLore(new ArrayList() {{
             add("");

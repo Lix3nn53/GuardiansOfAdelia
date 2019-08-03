@@ -29,13 +29,12 @@ public class MyItemDespawnEvent implements Listener {
                 if (!armorStand.getPassengers().isEmpty()) {
                     if (armorStand.getPassengers().get(0).equals(entity)) {
                         event.setCancelled(true);
+                        return;
                     }
                 }
             }
         }
 
-        if (!event.isCancelled()) {
-            DropManager.onItemDespawn(itemStack);
-        }
+        DropManager.onItemDespawn(itemStack);
     }
 }
