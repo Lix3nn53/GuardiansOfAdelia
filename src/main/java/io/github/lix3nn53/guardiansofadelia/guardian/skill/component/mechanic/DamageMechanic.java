@@ -34,8 +34,10 @@ public class DamageMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (skillLevel == 0 || skillLevel == damage.size()) {
+        if (skillLevel == 0) {
             additions.add(damageType.toString() + ": " + (int) (damage.get(skillLevel) + 0.5));
+        } else if (skillLevel == damage.size()) {
+            additions.add(damageType.toString() + ": " + (int) (damage.get(skillLevel - 1) + 0.5));
         } else {
             additions.add(damageType.toString() + ": " + (int) (damage.get(skillLevel - 1) + 0.5) + " -> " + (int) (damage.get(skillLevel) + 0.5));
         }

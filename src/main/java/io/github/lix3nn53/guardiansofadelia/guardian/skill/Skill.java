@@ -50,23 +50,27 @@ public class Skill {
     }
 
     public int getMaxSkillLevel() {
-        return reqPlayerLevels.size() - 1;
+        return reqPlayerLevels.size();
     }
 
     public int getReqPlayerLevel(int skillLevel) {
-        return reqPlayerLevels.get(skillLevel);
+        if (skillLevel == 0) return reqPlayerLevels.get(0);
+        return reqPlayerLevels.get(skillLevel - 1);
     }
 
     public int getReqSkillPoints(int skillLevel) {
-        return reqSkillPoints.get(skillLevel);
+        if (skillLevel == 0) return reqSkillPoints.get(0);
+        return reqSkillPoints.get(skillLevel - 1);
     }
 
     public int getManaCost(int skillLevel) {
-        return manaCosts.get(skillLevel);
+        if (skillLevel == 0) return manaCosts.get(0);
+        return manaCosts.get(skillLevel - 1);
     }
 
     public int getCooldown(int skillLevel) {
-        return cooldowns.get(skillLevel);
+        if (skillLevel == 0) return cooldowns.get(0);
+        return cooldowns.get(skillLevel - 1);
     }
 
     public int getCurrentSkillLevel(int pointsInvested) {
@@ -116,12 +120,15 @@ public class Skill {
         lore.add(reqSkillPointsColor + "Required Skill Points: " + reqSkillPoints);
 
         lore.add(ChatColor.YELLOW + "------------------------------");
-        if (skillLevel == 0 || skillLevel == maxSkillLevel) {
+        if (skillLevel == 0) {
             lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel));
             lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel));
+        } else if (skillLevel == maxSkillLevel) {
+            lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel - 1));
+            lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel - 1));
         } else {
-            lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel - 1) + " -> " + getManaCost(skillLevel));
-            lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel - 1) + " -> " + getCooldown(skillLevel));
+            lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel) + " -> " + getManaCost(skillLevel));
+            lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel) + " -> " + getCooldown(skillLevel));
         }
 
         lore.add(ChatColor.YELLOW + "------------------------------");

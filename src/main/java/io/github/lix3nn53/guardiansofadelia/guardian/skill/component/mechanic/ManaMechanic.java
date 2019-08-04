@@ -66,15 +66,19 @@ public class ManaMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (!manaAmount.isEmpty()) {
-            if (skillLevel == 0 || skillLevel == manaAmount.size()) {
+            if (skillLevel == 0) {
                 additions.add(ChatColor.AQUA + "Mana regen: " + manaAmount.get(skillLevel));
+            } else if (skillLevel == manaAmount.size()) {
+                additions.add(ChatColor.AQUA + "Mana regen: " + manaAmount.get(skillLevel - 1));
             } else {
                 additions.add(ChatColor.AQUA + "Mana regen: " + manaAmount.get(skillLevel - 1) + " -> " + manaAmount.get(skillLevel));
             }
         }
         if (!manaPercent.isEmpty()) {
-            if (skillLevel == 0 || skillLevel == manaPercent.size()) {
+            if (skillLevel == 0) {
                 additions.add(ChatColor.AQUA + "Mana regen: " + manaPercent.get(skillLevel) + "%");
+            } else if (skillLevel == manaPercent.size()) {
+                additions.add(ChatColor.AQUA + "Mana regen: " + manaPercent.get(skillLevel - 1) + "%");
             } else {
                 additions.add(ChatColor.AQUA + "Mana regen: " + manaPercent.get(skillLevel - 1) + "%" + " -> " + manaPercent.get(skillLevel) + "%");
             }

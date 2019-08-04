@@ -83,9 +83,12 @@ public class BuffMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (skillLevel == 0 || skillLevel == multiplier.size()) {
+        if (skillLevel == 0) {
             additions.add(buffType.toString() + " bonus: " + multiplier.get(skillLevel));
             additions.add(buffType.toString() + " duration: " + (ticks.get(skillLevel) / 20));
+        } else if (skillLevel == multiplier.size()) {
+            additions.add(buffType.toString() + " bonus: " + multiplier.get(skillLevel - 1));
+            additions.add(buffType.toString() + " duration: " + (ticks.get(skillLevel - 1) / 20));
         } else {
             additions.add(buffType.toString() + " bonus: " + multiplier.get(skillLevel - 1) + "x -> " + multiplier.get(skillLevel) + "x");
             additions.add(buffType.toString() + " duration: " + (ticks.get(skillLevel - 1) / 20) + " seconds -> " + (ticks.get(skillLevel) / 20));

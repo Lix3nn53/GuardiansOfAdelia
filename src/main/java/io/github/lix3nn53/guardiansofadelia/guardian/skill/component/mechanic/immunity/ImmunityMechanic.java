@@ -50,8 +50,10 @@ public class ImmunityMechanic extends MechanicComponent {
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (ticks.isEmpty()) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
-        if (skillLevel == 0 || skillLevel == ticks.size()) {
+        if (skillLevel == 0) {
             additions.add(ChatColor.GOLD + damageCause.toString() + " immunity duration: " + (ticks.get(skillLevel) / 20));
+        } else if (skillLevel == ticks.size()) {
+            additions.add(ChatColor.GOLD + damageCause.toString() + " immunity duration: " + (ticks.get(skillLevel - 1) / 20));
         } else {
             additions.add(ChatColor.GOLD + damageCause.toString() + " immunity duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
         }

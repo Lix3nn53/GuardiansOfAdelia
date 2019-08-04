@@ -52,15 +52,19 @@ public class HealMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (!healAmount.isEmpty()) {
-            if (skillLevel == 0 || skillLevel == healAmount.size()) {
+            if (skillLevel == 0) {
                 additions.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel));
+            } else if (skillLevel == healAmount.size()) {
+                additions.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel - 1));
             } else {
                 additions.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel - 1) + " -> " + healAmount.get(skillLevel));
             }
         }
         if (!healPercent.isEmpty()) {
-            if (skillLevel == 0 || skillLevel == healPercent.size()) {
+            if (skillLevel == 0) {
                 additions.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel) + "%");
+            } else if (skillLevel == healPercent.size()) {
+                additions.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel - 1) + "%");
             } else {
                 additions.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel - 1) + "%" + " -> " + healPercent.get(skillLevel) + "%");
             }

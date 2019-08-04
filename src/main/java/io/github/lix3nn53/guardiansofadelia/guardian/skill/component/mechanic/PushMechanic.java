@@ -56,11 +56,14 @@ public class PushMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (skillLevel == 0 || skillLevel == speed.size()) {
+        if (skillLevel == 0) {
             additions.add(ChatColor.AQUA + "Push speed: " + speed.get(skillLevel));
+        } else if (skillLevel == speed.size()) {
+            additions.add(ChatColor.AQUA + "Push speed: " + speed.get(skillLevel - 1));
         } else {
             additions.add(ChatColor.AQUA + "Push speed: " + speed.get(skillLevel - 1) + " -> " + speed.get(skillLevel));
         }
+
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 

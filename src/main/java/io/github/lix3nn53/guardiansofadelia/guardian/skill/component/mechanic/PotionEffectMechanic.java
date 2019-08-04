@@ -35,9 +35,12 @@ public class PotionEffectMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (skillLevel == 0 || skillLevel == ticks.size()) {
+        if (skillLevel == 0) {
             additions.add(getEffectString() + " duration: " + (ticks.get(skillLevel) / 20));
             additions.add(getEffectString() + " tier: " + amplifier.get(skillLevel));
+        } else if (skillLevel == ticks.size()) {
+            additions.add(getEffectString() + " duration: " + (ticks.get(skillLevel - 1) / 20));
+            additions.add(getEffectString() + " tier: " + amplifier.get(skillLevel - 1));
         } else {
             additions.add(getEffectString() + " duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
             additions.add(getEffectString() + " tier: " + amplifier.get(skillLevel - 1) + " -> " + amplifier.get(skillLevel));

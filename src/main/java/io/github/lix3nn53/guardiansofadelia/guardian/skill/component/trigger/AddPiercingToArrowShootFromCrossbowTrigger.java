@@ -46,11 +46,14 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (skillLevel == 0 || skillLevel == piercingLevel.size()) {
+        if (skillLevel == 0) {
             additions.add(ChatColor.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel));
+        } else if (skillLevel == piercingLevel.size()) {
+            additions.add(ChatColor.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel - 1));
         } else {
             additions.add(ChatColor.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel - 1) + " -> " + piercingLevel.get(skillLevel));
         }
+
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 

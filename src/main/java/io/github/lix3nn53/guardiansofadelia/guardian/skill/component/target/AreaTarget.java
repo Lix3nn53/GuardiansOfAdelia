@@ -43,8 +43,10 @@ public class AreaTarget extends TargetComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (skillLevel == 0 || skillLevel == radius.size()) {
+        if (skillLevel == 0) {
             additions.add(ChatColor.YELLOW + "Radius: " + radius.get(skillLevel));
+        } else if (skillLevel == radius.size()) {
+            additions.add(ChatColor.YELLOW + "Radius: " + radius.get(skillLevel - 1));
         } else {
             additions.add(ChatColor.YELLOW + "Radius: " + radius.get(skillLevel - 1) + " -> " + radius.get(skillLevel));
         }

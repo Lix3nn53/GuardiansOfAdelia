@@ -53,8 +53,10 @@ public class DisguiseMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (skillLevel == 0 || skillLevel == ticks.size()) {
+        if (skillLevel == 0) {
             additions.add(ChatColor.LIGHT_PURPLE + "Disguise duration: " + (ticks.get(skillLevel) / 20));
+        } else if (skillLevel == ticks.size()) {
+            additions.add(ChatColor.LIGHT_PURPLE + "Disguise duration: " + (ticks.get(skillLevel - 1) / 20));
         } else {
             additions.add(ChatColor.LIGHT_PURPLE + "Disguise duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
         }

@@ -278,8 +278,10 @@ public class ProjectileMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (skillLevel == 0 || skillLevel == amount.size()) {
+        if (skillLevel == 0) {
             additions.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel));
+        } else if (skillLevel == amount.size()) {
+            additions.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel - 1));
         } else {
             additions.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel - 1) + " -> " + amount.get(skillLevel));
         }
