@@ -120,9 +120,7 @@ public class Test {
     }
 
     private static void asd() {
-        final DatabaseQueries databaseQueries = new DatabaseQueries();
-
-        databaseQueries.createTables();
+        DatabaseQueries.createTables();
 
         List<Integer> playersInGame = new ArrayList<>();
 

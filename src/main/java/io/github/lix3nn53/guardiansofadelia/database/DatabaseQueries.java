@@ -18,7 +18,6 @@ import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.managers.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -33,14 +32,12 @@ import java.util.UUID;
 
 public class DatabaseQueries {
 
-    private final ConnectionPoolManager pool = ConfigManager.loadDatabaseConfig();
-
-    public void onDisable() {
-        pool.closePool();
+    public static void onDisable() {
+        ConnectionPool.closePool();
     }
 
-    public void createTables() {
-        try (Connection connection = pool.getConnection();
+    public static void createTables() {
+        try (Connection connection = ConnectionPool.getConnection();
              Statement statement = connection.createStatement()) {
             statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_guild`\n" +
                     "(\n" +
@@ -130,10 +127,10 @@ public class DatabaseQueries {
     //GETTERS
 
     /* updates tabList of online friends */
-    public List<Player> getFriendsOfPlayer(UUID uuid) throws SQLException {
+    public static List<Player> getFriendsOfPlayer(UUID uuid) throws SQLException {
         String SQL_QUERY = "SELECT * FROM goa_player_friend WHERE uuid = ?";
         List<Player> friendList = new ArrayList<>();
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
@@ -156,10 +153,10 @@ public class DatabaseQueries {
         return friendList;
     }
 
-    public HashMap<UUID, PlayerRankInGuild> getGuildMembers(String guild) throws SQLException {
+    public static HashMap<UUID, PlayerRankInGuild> getGuildMembers(String guild) throws SQLException {
         String SQL_QUERY = "SELECT * FROM goa_player_guild WHERE name = ?";
-        HashMap<UUID, PlayerRankInGuild> members = new HashMap<UUID, PlayerRankInGuild>();
-        try (Connection con = pool.getConnection()) {
+        HashMap<UUID, PlayerRankInGuild> members = new HashMap<>();
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, guild);
@@ -185,10 +182,10 @@ public class DatabaseQueries {
         return members;
     }
 
-    public String getGuildNameOfPlayer(UUID uuid) throws SQLException {
+    public static String getGuildNameOfPlayer(UUID uuid) throws SQLException {
         String SQL_QUERY = "SELECT * FROM goa_player_guild WHERE uuid = ?";
         String guildName = null;
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
@@ -204,10 +201,10 @@ public class DatabaseQueries {
         return guildName;
     }
 
-    public GuardianData getGuardianDataWithStaffRankAndStorages(UUID uuid) throws SQLException {
+    public static GuardianData getGuardianDataWithStaffRankAndStorages(UUID uuid) throws SQLException {
         String SQL_QUERY = "SELECT * FROM goa_player WHERE uuid = ?";
         GuardianData guardianData = new GuardianData();
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
@@ -239,10 +236,10 @@ public class DatabaseQueries {
         return guardianData;
     }
 
-    public RPGCharacter getCharacterAndSetPlayerInventory(Player player, int characterNo) throws SQLException {
+    public static RPGCharacter getCharacterAndSetPlayerInventory(Player player, int characterNo) throws SQLException {
         String SQL_QUERY = "SELECT * FROM goa_player_character WHERE uuid = ? AND character_no = ?";
         RPGCharacter rpgCharacter = null;
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, player.getUniqueId().toString());
@@ -410,10 +407,10 @@ public class DatabaseQueries {
         return rpgCharacter;
     }
 
-    public Guild getGuild(Player player, String name) throws SQLException {
+    public static Guild getGuild(Player player, String name) throws SQLException {
         String SQL_QUERY = "SELECT * FROM goa_guild WHERE name = ?";
         Guild guild = null;
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, name);
@@ -469,10 +466,10 @@ public class DatabaseQueries {
         return guild;
     }
 
-    public Location getLastLocationOfCharacter(UUID uuid, int charNo) throws SQLException {
+    public static Location getLastLocationOfCharacter(UUID uuid, int charNo) throws SQLException {
         String SQL_QUERY = "SELECT location FROM goa_player_character WHERE uuid = ? AND character_no = ?";
         Location location = null;
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
@@ -495,10 +492,10 @@ public class DatabaseQueries {
         return location;
     }
 
-    public RPGClass getRPGClassCharacter(UUID uuid, int charNo) throws SQLException {
+    public static RPGClass getRPGClassCharacter(UUID uuid, int charNo) throws SQLException {
         String SQL_QUERY = "SELECT rpg_class FROM goa_player_character WHERE uuid = ? AND character_no = ?";
         RPGClass rpgClass = null;
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
@@ -516,10 +513,10 @@ public class DatabaseQueries {
         return rpgClass;
     }
 
-    public int getTotalExp(UUID uuid, int charNo) throws SQLException {
+    public static int getTotalExp(UUID uuid, int charNo) throws SQLException {
         String SQL_QUERY = "SELECT totalexp FROM goa_player_character WHERE uuid = ? AND character_no = ?";
         int totalexp = -1;
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
@@ -538,7 +535,7 @@ public class DatabaseQueries {
 
     //SETTERS
 
-    public int setGuildOfPlayer(UUID uuid, String guild, PlayerRankInGuild rank) throws SQLException {
+    public static int setGuildOfPlayer(UUID uuid, String guild, PlayerRankInGuild rank) throws SQLException {
         String SQL_QUERY = "INSERT INTO goa_player_guild \n" +
                 "\t(uuid, name, rank) \n" +
                 "VALUES \n" +
@@ -547,7 +544,7 @@ public class DatabaseQueries {
                 "\tuuid = VALUES(uuid),\n" +
                 "\tname = VALUES(name),\n" +
                 "\trank = VALUES(rank);";
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
@@ -562,7 +559,7 @@ public class DatabaseQueries {
         }
     }
 
-    public int setPlayerStaffRankAndStorages(UUID uuid, StaffRank rank, ItemStack[] personalStorage, ItemStack[] bazaarStorage) throws SQLException {
+    public static int setPlayerStaffRankAndStorages(UUID uuid, StaffRank rank, ItemStack[] personalStorage, ItemStack[] bazaarStorage) throws SQLException {
         String SQL_QUERY = "INSERT INTO goa_player \n" +
                 "\t(uuid, staff_rank, storage_personal, storage_bazaar) \n" +
                 "VALUES \n" +
@@ -572,7 +569,7 @@ public class DatabaseQueries {
                 "\tstaff_rank = VALUES(staff_rank),\n" +
                 "\tstorage_personal = VALUES(storage_personal),\n" +
                 "\tstorage_bazaar = VALUES(storage_bazaar);";
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
@@ -590,8 +587,8 @@ public class DatabaseQueries {
         }
     }
 
-    public boolean setFriendsOfPlayer(UUID uuid, List<Player> friendList) {
-        try (Connection connection = pool.getConnection();
+    public static boolean setFriendsOfPlayer(UUID uuid, List<Player> friendList) {
+        try (Connection connection = ConnectionPool.getConnection();
              Statement statement = connection.createStatement()) {
             statement.addBatch("DELETE FROM goa_player_friend WHERE uuid = '" + uuid.toString() + "'");
 
@@ -610,8 +607,8 @@ public class DatabaseQueries {
         return false;
     }
 
-    public boolean setMembersOfGuild(String guild, HashMap<UUID, PlayerRankInGuild> playerPlayerRankInGuildHashMap) {
-        try (Connection connection = pool.getConnection();
+    public static boolean setMembersOfGuild(String guild, HashMap<UUID, PlayerRankInGuild> playerPlayerRankInGuildHashMap) {
+        try (Connection connection = ConnectionPool.getConnection();
              Statement statement = connection.createStatement()) {
             statement.addBatch("DELETE FROM goa_player_guild WHERE name = '" + guild + "'");
 
@@ -630,7 +627,7 @@ public class DatabaseQueries {
         return false;
     }
 
-    public int setGuild(Guild guild) throws SQLException {
+    public static int setGuild(Guild guild) throws SQLException {
         String SQL_QUERY = "INSERT INTO goa_guild \n" +
                 "\t(name, tag, war_point, announcement, hall_level, bank_level, lab_level, storage) \n" +
                 "VALUES \n" +
@@ -644,7 +641,7 @@ public class DatabaseQueries {
                 "\tbank_level = VALUES(bank_level),\n" +
                 "\tlab_level = VALUES(lab_level),\n" +
                 "\tstorage = VALUES(storage);";
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, guild.getName());
@@ -665,7 +662,7 @@ public class DatabaseQueries {
         }
     }
 
-    public int setCharacter(UUID uuid, int charNo, RPGCharacter rpgCharacter, ItemStack[] inventory, Location location, ItemStack[] armorContent, ItemStack offHand) throws SQLException {
+    public static int setCharacter(UUID uuid, int charNo, RPGCharacter rpgCharacter, ItemStack[] inventory, Location location, ItemStack[] armorContent, ItemStack offHand) throws SQLException {
         String SQL_QUERY = "INSERT INTO goa_player_character \n" +
                 "\t(uuid, character_no, off_hand, slot_parrot, slot_necklace, slot_ring, slot_earring, slot_glove, " +
                 "slot_pet, chat_tag, job_type, job_level, job_experience, inventory, activequests, turnedinquests, location, armor_content, " +
@@ -703,7 +700,7 @@ public class DatabaseQueries {
                 "\tskill_three = VALUES(skill_three),\n" +
                 "\tskill_passive = VALUES(skill_passive),\n" +
                 "\tskill_ultimate = VALUES(skill_ultimate);";
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
@@ -865,9 +862,9 @@ public class DatabaseQueries {
 
     //CLEANERS
 
-    public void clearGuild(String guild) throws SQLException {
+    public static void clearGuild(String guild) throws SQLException {
         String SQL_QUERY = "DELETE FROM goa_guild WHERE name = ?";
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
             pst.setString(1, guild);
             pst.executeUpdate();
@@ -875,9 +872,9 @@ public class DatabaseQueries {
         }
     }
 
-    public void clearMembersOfGuild(String guild) throws SQLException {
+    public static void clearMembersOfGuild(String guild) throws SQLException {
         String SQL_QUERY = "DELETE FROM goa_player_guild WHERE name = ?";
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
             pst.setString(1, guild);
             pst.executeUpdate();
@@ -885,9 +882,9 @@ public class DatabaseQueries {
         }
     }
 
-    public void clearGuildOfPlayer(UUID uuid) throws SQLException {
+    public static void clearGuildOfPlayer(UUID uuid) throws SQLException {
         String SQL_QUERY = "DELETE FROM goa_player_guild WHERE uuid = ?";
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
             pst.setString(1, uuid.toString());
             pst.executeUpdate();
@@ -895,9 +892,9 @@ public class DatabaseQueries {
         }
     }
 
-    public void clearPlayerStaffRankAndStorages(UUID uuid) throws SQLException {
+    public static void clearPlayerStaffRankAndStorages(UUID uuid) throws SQLException {
         String SQL_QUERY = "DELETE FROM goa_player WHERE uuid = ?";
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
             pst.setString(1, uuid.toString());
             pst.executeUpdate();
@@ -905,9 +902,9 @@ public class DatabaseQueries {
         }
     }
 
-    public void clearFriendsOfPlayer(UUID uuid) throws SQLException {
+    public static void clearFriendsOfPlayer(UUID uuid) throws SQLException {
         String SQL_QUERY = "DELETE FROM goa_player_friend WHERE uuid = ?";
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
             pst.setString(1, uuid.toString());
             pst.executeUpdate();
@@ -915,9 +912,9 @@ public class DatabaseQueries {
         }
     }
 
-    public void clearCharacter(UUID uuid, int charNo) throws SQLException {
+    public static void clearCharacter(UUID uuid, int charNo) throws SQLException {
         String SQL_QUERY = "DELETE FROM goa_player_character WHERE uuid = ? AND character_no = ?";
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
             pst.setString(1, uuid.toString());
             pst.setInt(2, charNo);
@@ -928,10 +925,10 @@ public class DatabaseQueries {
 
     //BOOLEAN
 
-    public boolean characterExists(UUID uuid, int charNo) {
+    public static boolean characterExists(UUID uuid, int charNo) {
         boolean charExists = false;
         String SQL_QUERY = "SELECT inventory FROM goa_player_character WHERE uuid = ? AND character_no = ?";
-        try (Connection con = pool.getConnection()) {
+        try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());

@@ -27,8 +27,6 @@ import java.util.List;
 
 public class ProjectileMechanic extends MechanicComponent {
 
-    private LivingEntity caster;
-
     private final Class<? extends Projectile> projectileType;
     private final SpreadType spreadType;
     private final double radius;
@@ -41,7 +39,7 @@ public class ProjectileMechanic extends MechanicComponent {
     private final double forward;
     private final double range;
     private final boolean mustHitToWork;
-
+    private LivingEntity caster;
     //Particle projectile
     private Particle particle;
     private ArrangementParticle arrangement;
@@ -104,7 +102,7 @@ public class ProjectileMechanic extends MechanicComponent {
     }
 
     /**
-     *  For spread type Rain, normal projectile
+     * For spread type Rain, normal projectile
      */
     public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
                               List<Integer> amount, double right, double upward, double forward,
@@ -128,7 +126,7 @@ public class ProjectileMechanic extends MechanicComponent {
     }
 
     /**
-     *  For spread type Rain, particle projectile
+     * For spread type Rain, particle projectile
      */
     public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
                               List<Integer> amount, double right, double upward, double forward,

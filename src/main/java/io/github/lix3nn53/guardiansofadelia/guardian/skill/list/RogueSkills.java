@@ -385,12 +385,12 @@ public class RogueSkills {
         manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
 
         Skill skill = new Skill("Backstab", 6, Material.IRON_HOE, 17, description, reqLevels, reqPoints, manaCosts, cooldowns);
 

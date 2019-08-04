@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class GuardianDataManager {
 
-    private static HashMap<UUID, GuardianData> onlineGuardians = new HashMap<UUID, GuardianData>();
+    private static HashMap<UUID, GuardianData> onlineGuardians = new HashMap<>();
 
     public static GuardianData getGuardianData(UUID uuid) {
         if (onlineGuardians.containsKey(uuid)) {

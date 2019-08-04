@@ -30,6 +30,7 @@ import java.util.UUID;
 public class GuardiansOfAdelia extends JavaPlugin {
 
     private static GuardiansOfAdelia instance;
+
     public static GuardiansOfAdelia getInstance() {
         return instance;
     }

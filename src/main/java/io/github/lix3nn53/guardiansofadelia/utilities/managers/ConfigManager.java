@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
-import io.github.lix3nn53.guardiansofadelia.database.ConnectionPoolManager;
+import io.github.lix3nn53.guardiansofadelia.database.ConnectionPool;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
@@ -50,6 +50,7 @@ public class ConfigManager {
     }
 
     public static void loadConfigALL() {
+        loadDatabaseConfig();
         loadSpawners();
         loadCharacterSelectionConfig();
         loadTowns();
@@ -76,7 +77,7 @@ public class ConfigManager {
         }
     }
 
-    public static ConnectionPoolManager loadDatabaseConfig() {
+    public static void loadDatabaseConfig() {
         String hostname = databaseConfig.getString("hostname");
         String port = databaseConfig.getString("port");
         String database = databaseConfig.getString("database");
@@ -87,7 +88,7 @@ public class ConfigManager {
         int connectionTimeout = databaseConfig.getInt("connectionTimeout");
         String testQuery = databaseConfig.getString("testQuery");
 
-        return new ConnectionPoolManager(hostname, port, database, username, password, minimumConnections, maximumConnections, connectionTimeout, testQuery);
+        ConnectionPool.init(hostname, port, database, username, password, minimumConnections, maximumConnections, connectionTimeout, testQuery);
     }
 
     private static void createSpawners() {

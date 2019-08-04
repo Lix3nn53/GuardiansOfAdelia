@@ -32,9 +32,7 @@ public class MyNPCRightClickEvent implements Listener {
 
         if (id > 0 && id < 5) {
             //1-2-3-4 character selection npc
-            DatabaseQueries databaseQueries = new DatabaseQueries();
-
-            if (databaseQueries.characterExists(uuid, id)) {
+            if (DatabaseQueries.characterExists(uuid, id)) {
                 GuiGeneric characterTeleportationMenu = CharacterSelectionMenuList.characterSelectionMenu(id);
                 characterTeleportationMenu.openInventory(player);
             } else {

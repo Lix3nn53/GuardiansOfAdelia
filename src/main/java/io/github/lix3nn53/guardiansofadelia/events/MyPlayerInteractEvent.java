@@ -32,7 +32,7 @@ public class MyPlayerInteractEvent implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onEvent(PlayerInteractEvent event) {
         EquipmentSlot hand = event.getHand();
-        if (!hand.equals(EquipmentSlot.HAND)) {
+        if (hand != null && !hand.equals(EquipmentSlot.HAND)) {
             return;
         }
         Action action = event.getAction();
