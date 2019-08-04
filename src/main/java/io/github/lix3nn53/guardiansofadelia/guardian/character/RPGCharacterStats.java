@@ -121,6 +121,12 @@ public class RPGCharacterStats {
         onCurrentManaChange();
     }
 
+    public void consumeMana(int manaToConsume) {
+        this.currentMana -= manaToConsume;
+        if (this.currentMana < 0) this.currentMana = 0;
+        onCurrentManaChange();
+    }
+
     public void setDefense(int defense) {
         this.defense = defense;
     }

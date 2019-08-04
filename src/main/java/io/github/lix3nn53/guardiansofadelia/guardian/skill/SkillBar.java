@@ -2,6 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
@@ -16,6 +20,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Each player character has unique skill-bar
@@ -209,11 +214,31 @@ public class SkillBar {
             return false;
         }
 
+        RPGCharacterStats rpgCharacterStats = null;
+        int manaCost = skill.getManaCost(skillLevel);
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+                int currentMana = rpgCharacterStats.getCurrentMana();
+                if (currentMana < manaCost) {
+                    player.sendMessage("Cast fail: mana cost");
+                    return false;
+                }
+            }
+        }
+
         boolean cast = skill.cast(player, skillLevel, new ArrayList<>());//cast ends when this returns
 
         if (!cast) {
             player.sendMessage("Cast fail: mechanics");
-            return false; //dont go on cooldown if cast failed
+            return false; //dont go on cooldown and consume mana if cast failed
+        }
+
+        if (rpgCharacterStats != null) {
+            rpgCharacterStats.consumeMana(manaCost);
         }
 
         int cooldown = skill.getCooldown(skillLevel);

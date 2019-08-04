@@ -34,6 +34,24 @@ public class Test {
 
         System.out.println(damage);
 
+        List<String> activeSpawners = new ArrayList<>();
+        activeSpawners.add("A");
+        activeSpawners.add("B");
+        activeSpawners.add("C");
+        activeSpawners.add("D");
+        activeSpawners.add("E");
+
+        int howManyEachTime = 2;
+
+        System.out.println("size: " + activeSpawners.size());
+        for (int i = 0; i < activeSpawners.size(); i += howManyEachTime) {
+            System.out.println("i: " + i);
+            int min = Math.min(activeSpawners.size(), i + howManyEachTime);
+            System.out.println("min: " + min);
+            List<String> sub = activeSpawners.subList(i, Math.min(activeSpawners.size(), i + howManyEachTime));
+            System.out.println(sub);
+        }
+
         /*HashMap<String, HashSet<String>> castKeyToSkillFlags = new HashMap<>();
 
         String castKey = "key";

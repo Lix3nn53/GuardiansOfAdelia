@@ -75,6 +75,10 @@ public enum Consumable {
                 ticks.add(60);
                 ticks.add(60);
                 ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
                 List<Double> multipliers = new ArrayList<>();
                 multipliers.add(0.08);
                 multipliers.add(0.1);
@@ -86,6 +90,10 @@ public enum Consumable {
                 break;
             case BUFF_PHYSICAL_DEFENSE:
                 ticks = new ArrayList<>();
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
                 ticks.add(60);
                 ticks.add(60);
                 ticks.add(60);
@@ -109,6 +117,10 @@ public enum Consumable {
                 ticks.add(60);
                 ticks.add(60);
                 ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
                 multipliers = new ArrayList<>();
                 multipliers.add(0.08);
                 multipliers.add(0.1);
@@ -120,6 +132,10 @@ public enum Consumable {
                 break;
             case BUFF_MAGICAL_DEFENSE:
                 ticks = new ArrayList<>();
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
+                ticks.add(60);
                 ticks.add(60);
                 ticks.add(60);
                 ticks.add(60);
@@ -142,10 +158,19 @@ public enum Consumable {
                 amounts.add(200);
                 amounts.add(200);
                 amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
                 list.add(new HealMechanic(amounts, new ArrayList<>()));
                 break;
             case POTION_INSTANT_MANA:
                 amounts = new ArrayList<>();
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
                 amounts.add(200);
                 amounts.add(200);
                 amounts.add(200);
@@ -162,8 +187,16 @@ public enum Consumable {
                 amountsSecond.add(200);
                 amountsSecond.add(200);
                 amountsSecond.add(200);
+                amountsSecond.add(200);
+                amountsSecond.add(200);
+                amountsSecond.add(200);
+                amountsSecond.add(200);
                 list.add(new HealMechanic(amountsSecond, new ArrayList<>()));
                 amounts = new ArrayList<>();
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
                 amounts.add(200);
                 amounts.add(200);
                 amounts.add(200);
@@ -174,14 +207,22 @@ public enum Consumable {
                 break;
             case POTION_REGENERATION_HEALTH:
                 List<Integer> repetitions = new ArrayList<>();
-                repetitions.add(2);
-                repetitions.add(3);
-                repetitions.add(4);
                 repetitions.add(5);
                 repetitions.add(6);
                 repetitions.add(7);
+                repetitions.add(8);
+                repetitions.add(9);
+                repetitions.add(10);
+                repetitions.add(11);
+                repetitions.add(12);
+                repetitions.add(14);
+                repetitions.add(18);
                 RepeatMechanic repeatMechanic = new RepeatMechanic(10L, repetitions);
                 amounts = new ArrayList<>();
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
+                amounts.add(200);
                 amounts.add(200);
                 amounts.add(200);
                 amounts.add(200);

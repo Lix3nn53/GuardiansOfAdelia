@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class SpawnerManager {
@@ -60,10 +61,11 @@ public class SpawnerManager {
 
             @Override
             public void run() {
-                int howManyEachTime = 50;
-                for (Entity entity : mobToSpawner.keySet()) {
-                    if (!entity.isDead()) {
-                        Spawner spawner = mobToSpawner.get(entity);
+                Iterator it = mobToSpawner.keySet().iterator();
+                while (it.hasNext()) {
+                    Entity entity = (Entity) it.next();
+                    Spawner spawner = mobToSpawner.get(entity);
+                    if (entity.isValid()) {
                         Location location = spawner.getLocation();
                         double v = location.distanceSquared(entity.getLocation());
                         if (v >= 1453) {
@@ -72,8 +74,13 @@ public class SpawnerManager {
                                 ((Monster) entity).setTarget(null);
                             }
                         }
+                    } else {
+                        it.remove();
+                        spawner.onSpawnedEntityDeath();
                     }
                 }
+
+                int howManyEachTime = 50;
                 for (int i = 0; i < activeSpawners.size(); i += howManyEachTime) {
                     List<Spawner> sub = activeSpawners.subList(i, Math.min(activeSpawners.size(), i + howManyEachTime));
 
@@ -85,7 +92,7 @@ public class SpawnerManager {
                                     spawner.spawn();
                                 }
                             }
-                        }.runTaskLater(GuardiansOfAdelia.getInstance(), i / 2);
+                        }.runTaskLater(GuardiansOfAdelia.getInstance(), i * 2L);
                     } else {
                         for (Spawner spawner : sub) {
                             spawner.spawn();

@@ -41,7 +41,6 @@ public class EntityList {
         } else if (mobcode.equals("villager15")) {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.GREEN + "Veloa Villager", 60000D, EntityType.VILLAGER);
             entity.setAdult();
-            double d = Math.random();
             Villager.Profession[] values = Villager.Profession.values();
             int i = new Random().nextInt(values.length);
             Villager.Profession value = values[i];
