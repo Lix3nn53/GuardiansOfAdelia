@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.quests;
 
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -14,8 +13,6 @@ public enum QuestIconType {
     public ItemStack getHoloItem() {
         ItemStack item = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta im = item.getItemMeta();
-        im.setUnbreakable(true);
-        im.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         if (this.equals(QuestIconType.NEW)) {
             im.setCustomModelData(10000001);
         } else if (this.equals(QuestIconType.CURRENT)) {

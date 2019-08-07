@@ -24,17 +24,20 @@ public class Test {
 
         }*/
 
-        int totalDefense = 1197;
+        int totalDefense = 855;
 
-        double damage = 2465;
+        double weaponDamage = 2025;
+        for (double skillDamage = 100; skillDamage < 10000; skillDamage += 100) {
+            double damage = weaponDamage + skillDamage;
 
-        double reduction = StatUtils.getDefenseReduction(totalDefense);
+            double reduction = StatUtils.getDefenseReduction(totalDefense);
 
-        damage = damage * reduction;
+            damage = damage * reduction;
 
-        System.out.println(damage);
+            System.out.println("skillDamage: " + skillDamage + " // result: " + (int) (damage + 0.5));
+        }
 
-        List<String> activeSpawners = new ArrayList<>();
+        /*List<String> activeSpawners = new ArrayList<>();
         activeSpawners.add("A");
         activeSpawners.add("B");
         activeSpawners.add("C");
@@ -50,7 +53,7 @@ public class Test {
             System.out.println("min: " + min);
             List<String> sub = activeSpawners.subList(i, Math.min(activeSpawners.size(), i + howManyEachTime));
             System.out.println(sub);
-        }
+        }*/
 
         /*HashMap<String, HashSet<String>> castKeyToSkillFlags = new HashMap<>();
 

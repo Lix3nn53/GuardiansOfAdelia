@@ -6,6 +6,7 @@ import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.DroppedItemWatcher;
 import org.bukkit.Location;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -16,10 +17,9 @@ public class QuestHologram {
     private final Hologram holo;
 
     public QuestHologram(Location loc) {
-        QuestIconType questIconType = QuestIconType.EMPTY;
-        ItemStack holoItem = questIconType.getHoloItem();
+        ArmorStand rider = new Hologram(loc).getArmorStand();
 
-        holo = new Hologram(loc, holoItem);
+        holo = new Hologram(loc, rider);
     }
 
     public void disguiseToPlayer(QuestIconType type, Player p) {

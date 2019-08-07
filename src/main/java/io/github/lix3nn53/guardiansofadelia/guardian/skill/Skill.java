@@ -54,13 +54,13 @@ public class Skill {
     }
 
     public int getReqPlayerLevel(int skillLevel) {
-        if (skillLevel == 0) return reqPlayerLevels.get(0);
-        return reqPlayerLevels.get(skillLevel - 1);
+        if (skillLevel == maxSkillLevel) return 9000;
+        return reqSkillPoints.get(skillLevel);
     }
 
     public int getReqSkillPoints(int skillLevel) {
-        if (skillLevel == 0) return reqSkillPoints.get(0);
-        return reqSkillPoints.get(skillLevel - 1);
+        if (skillLevel == maxSkillLevel) return 9000;
+        return reqSkillPoints.get(skillLevel);
     }
 
     public int getManaCost(int skillLevel) {
@@ -116,7 +116,7 @@ public class Skill {
             reqSkillPointsColor = ChatColor.GREEN;
         }
 
-        lore.add(reqPlayerLevelColor + "Required Level: " + reqSkillPoints);
+        lore.add(reqPlayerLevelColor + "Required Level: " + reqPlayerLevel);
         lore.add(reqSkillPointsColor + "Required Skill Points: " + reqSkillPoints);
 
         lore.add(ChatColor.YELLOW + "------------------------------");

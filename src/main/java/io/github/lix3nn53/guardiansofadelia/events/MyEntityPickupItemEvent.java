@@ -23,10 +23,7 @@ public class MyEntityPickupItemEvent implements Listener {
     public void onEvent(EntityPickupItemEvent event) {
         ItemStack itemStack = event.getItem().getItemStack();
         Material type = itemStack.getType();
-        if (type.equals(Material.STONE_PICKAXE)) {
-            event.setCancelled(true);
-            return;
-        } else if (event.getEntityType().equals(EntityType.PLAYER)) {
+        if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player player = (Player) event.getEntity();
             if (!DropManager.canPickUp(player, itemStack)) {
                 event.setCancelled(true);

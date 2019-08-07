@@ -2,9 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.utilities.hologram;
 
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
-import org.bukkit.inventory.ItemStack;
 
 public class Hologram {
 
@@ -22,14 +21,13 @@ public class Hologram {
         type = HologramType.TEXT;
     }
 
-    public Hologram(Location loc, ItemStack itemStack) {
+    public Hologram(Location loc, Entity rider) {
         as = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
         as.setVisible(false);
         as.setGravity(false);
         as.setMarker(true);
         as.setInvulnerable(true);
-        Item item = loc.getWorld().dropItem(loc, itemStack);
-        as.addPassenger(item);
+        as.addPassenger(rider);
         type = HologramType.ITEM;
     }
 

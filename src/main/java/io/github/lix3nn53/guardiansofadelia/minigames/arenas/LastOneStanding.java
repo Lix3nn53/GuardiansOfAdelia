@@ -49,16 +49,15 @@ public class LastOneStanding extends Minigame {
 
     @Override
     public List<Integer> getWinnerTeams() {
+        List<Integer> teamsAlive = new ArrayList<>();
+
         for (int teamNo : getTeams().keySet()) {
             int livesOfTeam = getLivesOfTeam(teamNo);
             if (livesOfTeam > 0) {
-                //return last alive team
-                List<Integer> winner = new ArrayList<>();
-                winner.add(teamNo);
-                return winner;
+                teamsAlive.add(teamNo);
             }
         }
-        //return empty
-        return new ArrayList<>();
+
+        return teamsAlive;
     }
 }
