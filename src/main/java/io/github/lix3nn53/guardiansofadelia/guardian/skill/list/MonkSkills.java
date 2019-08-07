@@ -51,10 +51,10 @@ public class MonkSkills {
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(1);
         reqPoints.add(1);
-        reqPoints.add(1);
         reqPoints.add(2);
         reqPoints.add(2);
-        reqPoints.add(2);
+        reqPoints.add(3);
+        reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -118,12 +118,12 @@ public class MonkSkills {
         reqLevels.add(55);
 
         List<Integer> reqPoints = new ArrayList<>();
-        reqPoints.add(1);
         reqPoints.add(2);
         reqPoints.add(2);
         reqPoints.add(3);
         reqPoints.add(3);
-        reqPoints.add(3);
+        reqPoints.add(4);
+        reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -217,12 +217,12 @@ public class MonkSkills {
         reqLevels.add(64);
 
         List<Integer> reqPoints = new ArrayList<>();
-        reqPoints.add(1);
         reqPoints.add(2);
         reqPoints.add(2);
         reqPoints.add(3);
         reqPoints.add(3);
-        reqPoints.add(3);
+        reqPoints.add(4);
+        reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -335,11 +335,11 @@ public class MonkSkills {
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(2);
+        reqPoints.add(3);
+        reqPoints.add(3);
         reqPoints.add(4);
         reqPoints.add(4);
-        reqPoints.add(6);
-        reqPoints.add(6);
-        reqPoints.add(6);
+        reqPoints.add(5);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -431,12 +431,12 @@ public class MonkSkills {
         reqLevels.add(90);
 
         List<Integer> reqPoints = new ArrayList<>();
-        reqPoints.add(4);
         reqPoints.add(5);
         reqPoints.add(6);
         reqPoints.add(7);
         reqPoints.add(8);
         reqPoints.add(9);
+        reqPoints.add(10);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);

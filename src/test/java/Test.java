@@ -1,4 +1,3 @@
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 
 import java.util.ArrayList;
@@ -24,7 +23,23 @@ public class Test {
 
         }*/
 
-        int totalDefense = 855;
+        List<Double> downRatesForLevel = new ArrayList<>();
+        downRatesForLevel.add(0.75);
+        downRatesForLevel.add(0.6);
+        downRatesForLevel.add(0.45);
+        downRatesForLevel.add(0.325);
+        downRatesForLevel.add(0.2);
+        downRatesForLevel.add(0.125);
+        downRatesForLevel.add(0.05);
+        downRatesForLevel.add(0.02);
+
+        int maxValue = 1400;
+
+        for (double rate : downRatesForLevel) {
+            System.out.println(maxValue * rate);
+        }
+
+        /*int totalDefense = 855;
 
         double weaponDamage = 2025;
         for (double skillDamage = 100; skillDamage < 10000; skillDamage += 100) {
@@ -35,7 +50,7 @@ public class Test {
             damage = damage * reduction;
 
             System.out.println("skillDamage: " + skillDamage + " // result: " + (int) (damage + 0.5));
-        }
+        }*/
 
         /*List<String> activeSpawners = new ArrayList<>();
         activeSpawners.add("A");

@@ -27,6 +27,11 @@ public class MyEntityDamageEvent implements Listener {
             event.setDamage(10000D);
         } else if (cause.equals(EntityDamageEvent.DamageCause.SUFFOCATION)) {
             entity.teleport(entity.getLocation().clone().add(0, 5, 0));
+            event.setCancelled(true);
+            return;
+        } else if (cause.equals(EntityDamageEvent.DamageCause.STARVATION)) {
+            event.setCancelled(true);
+            return;
         }
 
         if (ImmunityListener.isImmune((LivingEntity) entity, cause)) {
@@ -50,11 +55,9 @@ public class MyEntityDamageEvent implements Listener {
                 party.getBoard().updateHP(player.getName(), (int) (player.getHealth() - finalDamage + 0.5));
             }
         } else if (entityType.equals(EntityType.WOLF) || entityType.equals(EntityType.HORSE)) {
-            if (entity instanceof LivingEntity) {
-                LivingEntity livingEntity = (LivingEntity) entity;
-                if (PetManager.isPet(livingEntity)) {
-                    PetManager.onPetTakeDamage(livingEntity, livingEntity.getHealth(), event.getFinalDamage());
-                }
+            LivingEntity livingEntity = (LivingEntity) entity;
+            if (PetManager.isPet(livingEntity)) {
+                PetManager.onPetTakeDamage(livingEntity, livingEntity.getHealth(), event.getFinalDamage());
             }
         }
     }

@@ -57,10 +57,10 @@ public class WarriorSkills {
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(1);
         reqPoints.add(1);
-        reqPoints.add(1);
         reqPoints.add(2);
         reqPoints.add(2);
-        reqPoints.add(2);
+        reqPoints.add(3);
+        reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -95,12 +95,12 @@ public class WarriorSkills {
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_NORMAL));
 
         List<Double> damages = new ArrayList<>();
-        damages.add(100D);
-        damages.add(200D);
-        damages.add(300D);
-        damages.add(400D);
-        damages.add(500D);
-        damages.add(600D);
+        damages.add(175D);
+        damages.add(280D);
+        damages.add(455D);
+        damages.add(630D);
+        damages.add(840D);
+        damages.add(1050D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
@@ -129,12 +129,12 @@ public class WarriorSkills {
         reqLevels.add(55);
 
         List<Integer> reqPoints = new ArrayList<>();
-        reqPoints.add(1);
         reqPoints.add(2);
         reqPoints.add(2);
         reqPoints.add(3);
         reqPoints.add(3);
-        reqPoints.add(3);
+        reqPoints.add(4);
+        reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -224,12 +224,12 @@ public class WarriorSkills {
         reqLevels.add(64);
 
         List<Integer> reqPoints = new ArrayList<>();
-        reqPoints.add(1);
         reqPoints.add(2);
         reqPoints.add(2);
         reqPoints.add(3);
         reqPoints.add(3);
-        reqPoints.add(3);
+        reqPoints.add(4);
+        reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -330,11 +330,11 @@ public class WarriorSkills {
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(2);
+        reqPoints.add(3);
+        reqPoints.add(3);
         reqPoints.add(4);
         reqPoints.add(4);
-        reqPoints.add(6);
-        reqPoints.add(6);
-        reqPoints.add(6);
+        reqPoints.add(5);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);
@@ -410,12 +410,12 @@ public class WarriorSkills {
         reqLevels.add(90);
 
         List<Integer> reqPoints = new ArrayList<>();
-        reqPoints.add(4);
         reqPoints.add(5);
         reqPoints.add(6);
         reqPoints.add(7);
         reqPoints.add(8);
         reqPoints.add(9);
+        reqPoints.add(10);
 
         List<Integer> manaCosts = new ArrayList<>();
         manaCosts.add(5);

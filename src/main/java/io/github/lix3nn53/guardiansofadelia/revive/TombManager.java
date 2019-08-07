@@ -102,8 +102,7 @@ public class TombManager {
 
         ItemStack respawn = new ItemStack(Material.IRON_HOE);
         ItemMeta itemMeta = respawn.getItemMeta();
-        itemMeta.setCustomModelData(10000018);
-        itemMeta.setUnbreakable(true);
+        itemMeta.setCustomModelData(18);
         itemMeta.setDisplayName(ChatColor.GREEN + "Respawn");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -118,7 +117,8 @@ public class TombManager {
         reviveGui.setItem(3, respawn);
 
         ItemStack soul = new ItemStack(Material.IRON_HOE);
-        itemMeta.setCustomModelData(10000010);
+        itemMeta = soul.getItemMeta();
+        itemMeta.setCustomModelData(10);
         itemMeta.setDisplayName(ChatColor.AQUA + "Search your tomb in soul mode");
         itemMeta.setLore(new ArrayList() {{
             add("");
