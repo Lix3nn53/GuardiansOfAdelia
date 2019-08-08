@@ -95,12 +95,12 @@ public class WarriorSkills {
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_NORMAL));
 
         List<Double> damages = new ArrayList<>();
-        damages.add(175D);
-        damages.add(280D);
-        damages.add(455D);
-        damages.add(630D);
-        damages.add(840D);
-        damages.add(1050D);
+        damages.add(100D);
+        damages.add(170D);
+        damages.add(240D);
+        damages.add(320D);
+        damages.add(400D);
+        damages.add(530D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
@@ -167,12 +167,12 @@ public class WarriorSkills {
                 0, 1, 0, 200, true, SmallFireball.class, Particle.FLAME, ArrangementParticle.SPHERE, 0.5, 4, null, true);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(100D);
-        damages.add(200D);
-        damages.add(300D);
-        damages.add(400D);
-        damages.add(500D);
-        damages.add(600D);
+        damages.add(142D);
+        damages.add(240D);
+        damages.add(324D);
+        damages.add(432D);
+        damages.add(540D);
+        damages.add(720D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         List<Double> forwards = new ArrayList<>();
@@ -484,12 +484,12 @@ public class WarriorSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(100D);
-        damages.add(200D);
-        damages.add(300D);
-        damages.add(400D);
-        damages.add(500D);
-        damages.add(600D);
+        damages.add(284D);
+        damages.add(462D);
+        damages.add(640D);
+        damages.add(853D);
+        damages.add(1065D);
+        damages.add(1420D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 11, 33, 0, 0, 0, 0, 0.5, 0, 0, null);

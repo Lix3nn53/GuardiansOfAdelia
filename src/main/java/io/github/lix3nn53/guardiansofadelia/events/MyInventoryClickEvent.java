@@ -457,25 +457,33 @@ public class MyInventoryClickEvent implements Listener {
         } else if (title.contains(ChatColor.AQUA + "Elements (Points:")) {
             if (rpgCharacter != null) {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
-
-                int pointsLeftToSpend = rpgCharacterStats.getAttributePointsLeftToSpend();
-                if (pointsLeftToSpend > 0) {
-                    Attribute attr = null;
-                    if (slot == 1) {
-                        attr = rpgCharacterStats.getFire();
-                    } else if (slot == 4) {
-                        attr = rpgCharacterStats.getWater();
-                    } else if (slot == 7) {
-                        attr = rpgCharacterStats.getEarth();
-                    } else if (slot == 20) {
-                        attr = rpgCharacterStats.getLightning();
-                    } else if (slot == 24) {
-                        attr = rpgCharacterStats.getWater();
-                    }
-                    if (attr != null) {
-                        attr.investOnePoint(rpgCharacterStats, true);
-                        GuiGeneric element = MenuList.element(player);
-                        element.openInventory(player);
+                Attribute attr = null;
+                if (slot == 1) {
+                    attr = rpgCharacterStats.getFire();
+                } else if (slot == 4) {
+                    attr = rpgCharacterStats.getWater();
+                } else if (slot == 7) {
+                    attr = rpgCharacterStats.getEarth();
+                } else if (slot == 20) {
+                    attr = rpgCharacterStats.getLightning();
+                } else if (slot == 24) {
+                    attr = rpgCharacterStats.getWind();
+                }
+                if (attr != null) {
+                    if (event.isLeftClick()) {
+                        int pointsLeftToSpend = rpgCharacterStats.getAttributePointsLeftToSpend();
+                        if (pointsLeftToSpend > 0) {
+                            attr.investOnePoint(rpgCharacterStats, true);
+                            GuiGeneric element = MenuList.element(player);
+                            element.openInventory(player);
+                        }
+                    } else if (event.isRightClick()) {
+                        int invested = attr.getInvested();
+                        if (invested > 0) {
+                            attr.downgradeOnePoint(rpgCharacterStats, true);
+                            GuiGeneric element = MenuList.element(player);
+                            element.openInventory(player);
+                        }
                     }
                 }
             }

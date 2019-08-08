@@ -33,7 +33,7 @@ public class Test {
         downRatesForLevel.add(0.05);
         downRatesForLevel.add(0.02);
 
-        int maxValue = 1400;
+        int maxValue = 480;
 
         for (double rate : downRatesForLevel) {
             System.out.println(maxValue * rate);

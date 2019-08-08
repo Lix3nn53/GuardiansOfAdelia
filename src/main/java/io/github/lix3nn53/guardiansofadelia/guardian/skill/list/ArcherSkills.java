@@ -94,12 +94,12 @@ public class ArcherSkills {
                 ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.LIME, 2), false);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(175D);
-        damages.add(280D);
-        damages.add(455D);
-        damages.add(630D);
-        damages.add(840D);
-        damages.add(1050D);
+        damages.add(90D);
+        damages.add(160D);
+        damages.add(220D);
+        damages.add(290D);
+        damages.add(360D);
+        damages.add(480D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
         List<Integer> ticks = new ArrayList<>();
@@ -475,12 +475,12 @@ public class ArcherSkills {
                 0, 0, 200, true, Arrow.class);
 
         List<Integer> repeatAmounts = new ArrayList<>();
+        repeatAmounts.add(1);
+        repeatAmounts.add(2);
+        repeatAmounts.add(2);
         repeatAmounts.add(3);
         repeatAmounts.add(3);
         repeatAmounts.add(4);
-        repeatAmounts.add(4);
-        repeatAmounts.add(5);
-        repeatAmounts.add(6);
         RepeatMechanic repeatMechanic = new RepeatMechanic(20, repeatAmounts);
 
         List<Double> areas = new ArrayList<>();
@@ -503,12 +503,12 @@ public class ArcherSkills {
         projectileMechanic.addChildren(particleMechanic);
         projectileMechanic.addChildren(areaTarget);
         List<Double> damages = new ArrayList<>();
-        damages.add(100D);
-        damages.add(200D);
-        damages.add(300D);
-        damages.add(400D);
-        damages.add(500D);
-        damages.add(600D);
+        damages.add(90D);
+        damages.add(160D);
+        damages.add(220D);
+        damages.add(290D);
+        damages.add(360D);
+        damages.add(480D);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
 
         return skill;

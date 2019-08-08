@@ -37,6 +37,13 @@ public class Attribute {
         }
     }
 
+    public void downgradeOnePoint(RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+        this.invested--;
+        if (fixDisplay) {
+            onValueChange(rpgCharacterStats);
+        }
+    }
+
     public int getTotalBonus() {
         return bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand + bonusFromOffhand + bonusFromPassive;
     }

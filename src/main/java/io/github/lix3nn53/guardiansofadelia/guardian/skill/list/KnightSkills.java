@@ -85,12 +85,12 @@ public class KnightSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(175D);
-        damages.add(280D);
-        damages.add(455D);
-        damages.add(630D);
-        damages.add(840D);
-        damages.add(1050D);
+        damages.add(90D);
+        damages.add(160D);
+        damages.add(220D);
+        damages.add(290D);
+        damages.add(360D);
+        damages.add(480D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         List<Double> multiplier = new ArrayList<>();
