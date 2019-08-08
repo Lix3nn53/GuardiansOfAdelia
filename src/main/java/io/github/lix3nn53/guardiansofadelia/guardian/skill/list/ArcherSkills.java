@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.im
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.FilterCurrentTargets;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
@@ -118,11 +119,14 @@ public class ArcherSkills {
         amplifiers.add(2);
         PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.POISON, ticks, amplifiers);
 
+        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 999);
+
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(projectileMechanic);
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_POISON_ARROW));
-        projectileMechanic.addChildren(damageMechanic);
-        projectileMechanic.addChildren(potionEffectMechanic);
+        projectileMechanic.addChildren(filterCurrentTargets);
+        filterCurrentTargets.addChildren(damageMechanic);
+        filterCurrentTargets.addChildren(potionEffectMechanic);
 
         return skill;
     }

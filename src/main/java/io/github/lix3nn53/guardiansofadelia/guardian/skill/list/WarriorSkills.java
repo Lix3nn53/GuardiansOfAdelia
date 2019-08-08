@@ -11,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.im
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.FilterCurrentTargets;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
@@ -198,14 +199,17 @@ public class WarriorSkills {
         right.add(0D);
         LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forwards, upwards, right);
 
+        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 999);
+
         skill.addTrigger(selfTarget);
 
         selfTarget.addChildren(projectileMechanic);
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_FIRE_SLASH));
 
-        projectileMechanic.addChildren(damageMechanic);
-        projectileMechanic.addChildren(launchMechanic);
-        projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_STUN_HIT));
+        projectileMechanic.addChildren(filterCurrentTargets);
+        filterCurrentTargets.addChildren(damageMechanic);
+        filterCurrentTargets.addChildren(launchMechanic);
+        filterCurrentTargets.addChildren(new SoundMechanic(GoaSound.SKILL_STUN_HIT));
 
         return skill;
     }

@@ -57,36 +57,20 @@ public abstract class TargetComponent extends SkillComponent {
      */
     private boolean isValidTarget(final LivingEntity caster, final LivingEntity target) {
         if (target == null) return false;
-
         if (CitizensAPI.getNPCRegistry().isNPC(target)) return false;
         EntityType type = target.getType();
         if (type.equals(EntityType.ARMOR_STAND)) return false; //ignore list of target mechanics
 
         if (caster == target) return self;
 
-        if (allies && enemy) return true;
+        if (allies == enemy) return allies;
 
-        boolean ally = isAlly(caster, target);
-
-        if (allies) return ally;
-
-        if (enemy) return !ally;
-
-        return false;
-    }
-
-    /**
-     * Checks whether or not something is an ally
-     *
-     * @param attacker the attacking entity
-     * @param target   the target entity
-     * @return true if an ally, false otherwise
-     */
-
-    private boolean isAlly(LivingEntity attacker, LivingEntity target) {
-
-        return !canAttack(attacker, target);
-
+        boolean isEnemy = canAttack(caster, target);
+        if (allies) {
+            return !isEnemy;
+        } else { //enemy = true
+            return isEnemy;
+        }
     }
 
     /**
@@ -112,6 +96,8 @@ public abstract class TargetComponent extends SkillComponent {
 
                     return true;
                 }
+
+                return false;
             } else if (target instanceof Tameable) {
                 Tameable tameable = (Tameable) target;
                 if (tameable.isTamed() && (tameable.getOwner() instanceof LivingEntity)) {
@@ -130,6 +116,7 @@ public abstract class TargetComponent extends SkillComponent {
                 }
             }
         }
+
         return true;
     }
 }

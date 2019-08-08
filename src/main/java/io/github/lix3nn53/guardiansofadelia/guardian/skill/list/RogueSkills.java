@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.im
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityRemoveMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.FilterCurrentTargets;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
@@ -348,8 +349,10 @@ public class RogueSkills {
         damages.add(480D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
-        projectileMechanic.addChildren(damageMechanic);
-        projectileMechanic.addChildren(phantomCondition);
+        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 999);
+        projectileMechanic.addChildren(filterCurrentTargets);
+        filterCurrentTargets.addChildren(damageMechanic);
+        filterCurrentTargets.addChildren(phantomCondition);
         phantomCondition.addChildren(slow);
 
         return skill;

@@ -11,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.pr
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.DisarmMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.FilterCurrentTargets;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.AddPiercingToArrowShootFromCrossbowTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
@@ -184,6 +185,8 @@ public class HunterSkills {
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30,
                 0, 1, 0, 200, true, Arrow.class);
 
+        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 999);
+
         List<Double> damages = new ArrayList<>();
         damages.add(90D);
         damages.add(160D);
@@ -191,9 +194,11 @@ public class HunterSkills {
         damages.add(290D);
         damages.add(360D);
         damages.add(480D);
-        projectileMechanic.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
+        DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
         selfTarget.addChildren(projectileMechanic);
+        projectileMechanic.addChildren(filterCurrentTargets);
+        filterCurrentTargets.addChildren(damageMechanic);
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_MULTI_ARROW));
 
         skill.addTrigger(selfTarget);
