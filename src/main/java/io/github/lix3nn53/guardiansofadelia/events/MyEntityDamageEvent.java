@@ -41,6 +41,10 @@ public class MyEntityDamageEvent implements Listener {
 
         double customNaturalDamage = getCustomNaturalDamage(cause, (LivingEntity) entity);
         if (customNaturalDamage > 0) {
+            if (entity instanceof Player) {
+                Player player = (Player) entity;
+                player.sendMessage("customNaturalDamage: " + customNaturalDamage);
+            }
             event.setDamage(customNaturalDamage);
         }
 
@@ -64,9 +68,10 @@ public class MyEntityDamageEvent implements Listener {
 
     private double getCustomNaturalDamage(EntityDamageEvent.DamageCause cause, LivingEntity entity) {
         double maxHealth = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-        //TODO balance natural damages
         if (cause.equals(EntityDamageEvent.DamageCause.FALL)) {
-            //TODO fall damage
+            float fallDistance = entity.getFallDistance();
+
+            return (fallDistance - 3) * (maxHealth / 80);
         } else if (cause.equals(EntityDamageEvent.DamageCause.POISON)) {
             return maxHealth / 100;
         } else if (cause.equals(EntityDamageEvent.DamageCause.WITHER)) {
@@ -74,15 +79,15 @@ public class MyEntityDamageEvent implements Listener {
         } else if (cause.equals(EntityDamageEvent.DamageCause.FIRE_TICK)) {
             return maxHealth / 100;
         } else if (cause.equals(EntityDamageEvent.DamageCause.FIRE)) {
-            return maxHealth / 100;
+            return maxHealth / 50;
         } else if (cause.equals(EntityDamageEvent.DamageCause.DROWNING)) {
-            return maxHealth / 100;
+            return maxHealth / 50;
         } else if (cause.equals(EntityDamageEvent.DamageCause.HOT_FLOOR)) {
             return maxHealth / 100;
         } else if (cause.equals(EntityDamageEvent.DamageCause.LAVA)) {
-            return maxHealth / 100;
+            return maxHealth / 50;
         } else if (cause.equals(EntityDamageEvent.DamageCause.CONTACT)) {
-            return maxHealth / 100;
+            return maxHealth / 50;
         }
         return -1;
     }

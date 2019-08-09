@@ -13,6 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarCustomerGui;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.economy.trading.Trade;
 import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeGui;
+import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeInvite;
 import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -21,7 +22,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
+import io.github.lix3nn53.guardiansofadelia.guild.Guild;
+import io.github.lix3nn53.guardiansofadelia.guild.GuildInvite;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
+import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
@@ -34,6 +38,7 @@ import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantPageType;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.SellGui;
+import io.github.lix3nn53.guardiansofadelia.party.PartyInvite;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
@@ -54,6 +59,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -794,6 +800,45 @@ public class MyInventoryClickEvent implements Listener {
                                 }
                             }
                         }
+                    }
+                }
+            }
+        } else if (title.contains(ChatColor.YELLOW + "Interact with ")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                String rightClickedName = title.replace(ChatColor.YELLOW + "Interact with ", "");
+                Player rightClicked = Bukkit.getPlayer(rightClickedName);
+                if (rightClicked == null) return;
+
+                if (rightClicked.isOnline()) {
+                    if (slot == 12) {
+                        String senderTitle = org.bukkit.ChatColor.AQUA + "Sent party invitation";
+                        String receiverMessage = org.bukkit.ChatColor.AQUA + player.getName() + " invites you to party"; //sender = player
+                        String receiverTitle = org.bukkit.ChatColor.AQUA + "Received party invitation";
+                        PartyInvite partyInvite = new PartyInvite(player, rightClicked, senderTitle, receiverMessage, receiverTitle); //receiver = rightClicked
+                        partyInvite.send();
+                        player.closeInventory();
+                    } else if (slot == 14) {
+                        if (GuildManager.inGuild(player)) {
+                            Guild guild = GuildManager.getGuild(player);
+                            PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
+                            if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
+                                String receiverMessage = org.bukkit.ChatColor.DARK_PURPLE + player.getName() + " invites you to " + guild.getName() + " guild"; //sender = player
+                                String receiverTitle = org.bukkit.ChatColor.DARK_PURPLE + "Received guild invitation";
+                                String senderTitle = org.bukkit.ChatColor.DARK_PURPLE + "Sent guild invitation";
+                                GuildInvite invite = new GuildInvite(player, rightClicked, senderTitle, receiverMessage, receiverTitle); //receiver = rightClicked
+                                invite.send();
+                            } else {
+                                player.sendMessage(org.bukkit.ChatColor.RED + "You must be guild leader or commander to invite players to guild");
+                            }
+                        }
+                        player.closeInventory();
+                    } else if (slot == 16) {
+                        String senderTitle = org.bukkit.ChatColor.GOLD + "Sent trade invitation";
+                        String receiverMessage = org.bukkit.ChatColor.GOLD + player.getName() + " invites you to trade"; //sender = player
+                        String receiverTitle = org.bukkit.ChatColor.GOLD + "Received trade invitation";
+                        TradeInvite tradeInvite = new TradeInvite(player, rightClicked, senderTitle, receiverMessage, receiverTitle); //receiver = rightClicked
+                        tradeInvite.send();
+                        player.closeInventory();
                     }
                 }
             }

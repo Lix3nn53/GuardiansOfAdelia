@@ -76,6 +76,7 @@ public class SpawnerManager {
                         }
                     } else {
                         it.remove();
+                        entity.remove();
                         spawner.onSpawnedEntityDeath();
                     }
                 }

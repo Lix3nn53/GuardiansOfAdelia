@@ -1,6 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -57,6 +62,20 @@ public class MyPlayerInteractEntityEvent implements Listener {
                             }
                         }
                     }
+                }
+            }
+        }
+
+        if (event.getRightClicked() instanceof Player) {
+            if (player.isSneaking()) {
+                Player rightClicked = (Player) event.getRightClicked();
+
+                NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
+                if (npcRegistry.isNPC(rightClicked)) return;
+
+                if (!player.getGameMode().equals(GameMode.SPECTATOR) && !player.getGameMode().equals(GameMode.SPECTATOR)) {
+                    GuiGeneric guiGeneric = MenuList.onShiftRightClickPlayer(rightClicked);
+                    guiGeneric.openInventory(player);
                 }
             }
         }

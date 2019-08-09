@@ -11,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillList;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
+import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.CharacterInfoSlot;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -546,6 +547,44 @@ public class MenuList {
         itemMeta.setDisplayName(ChatColor.RED + "Win By Most Kills");
         pvp.setItemMeta(itemMeta);
         guiGeneric.setItem(2, pvp);
+
+        return guiGeneric;
+    }
+
+    public static GuiGeneric onShiftRightClickPlayer(Player rightClicked) {
+        String rightClickedName = rightClicked.getName();
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.YELLOW + "Interact with " + rightClickedName, 0);
+
+        ItemStack infoItem = new CharacterInfoSlot(rightClicked).getItem();
+        guiGeneric.setItem(10, infoItem);
+
+        ItemStack party = new ItemStack(Material.LIGHT_BLUE_WOOL);
+        ItemMeta itemMeta = party.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.AQUA + "Party Invite");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Click to invite to party!");
+        }});
+        party.setItemMeta(itemMeta);
+        guiGeneric.setItem(12, party);
+
+        ItemStack guild = new ItemStack(Material.PURPLE_WOOL);
+        itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Guild Invite");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Click to invite to guild!");
+        }});
+        guild.setItemMeta(itemMeta);
+        guiGeneric.setItem(14, guild);
+
+        ItemStack trade = new ItemStack(Material.YELLOW_WOOL);
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Trade Invite");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Click to invite to trade!");
+        }});
+        trade.setItemMeta(itemMeta);
+        guiGeneric.setItem(16, trade);
 
         return guiGeneric;
     }
