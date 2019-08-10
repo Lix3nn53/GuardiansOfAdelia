@@ -456,22 +456,32 @@ public class RPGCharacterStats {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "fire");
             getFire().setBonus(equipmentSlot, this, bonus, false);
+        } else {
+            getFire().setBonus(equipmentSlot, this, 0, false);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "water");
             getWater().setBonus(equipmentSlot, this, bonus, fixDisplay);
+        } else {
+            getWater().setBonus(equipmentSlot, this, 0, false);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
             getEarth().setBonus(equipmentSlot, this, bonus, fixDisplay);
+        } else {
+            getEarth().setBonus(equipmentSlot, this, 0, false);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
             getLightning().setBonus(equipmentSlot, this, bonus, false);
+        } else {
+            getLightning().setBonus(equipmentSlot, this, 0, false);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
             getWind().setBonus(equipmentSlot, this, bonus, false);
+        } else {
+            getWind().setBonus(equipmentSlot, this, 0, false);
         }
     }
 
@@ -531,7 +541,8 @@ public class RPGCharacterStats {
 
         ItemStack itemInOffHand = inventory.getItemInOffHand();
         if (!InventoryUtils.isAirOrNull(itemInOffHand)) {
-            if (StatUtils.doesCharacterMeetRequirements(itemInOffHand, player, rpgClass)) {
+            Material type = itemInOffHand.getType();
+            if ((type.equals(Material.SHIELD) || type.equals(Material.DIAMOND_HOE)) && StatUtils.doesCharacterMeetRequirements(itemInOffHand, player, rpgClass)) {
                 onOffhandEquip(itemInOffHand, false);
             } else {
                 InventoryUtils.giveItemToPlayer(player, itemInOffHand);
