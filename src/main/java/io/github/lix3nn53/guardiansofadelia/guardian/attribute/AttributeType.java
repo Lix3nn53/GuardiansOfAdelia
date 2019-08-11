@@ -18,7 +18,7 @@ public enum AttributeType {
             case WATER:
                 return getIncrement() + " bonus max mana per point";
             case WIND:
-                return getIncrement() * 100 + "% bonus critical chance per point";
+                return getIncrement() * 100 + "% bonus critical chance per point(max 40%)";
         }
         return "description";
     }

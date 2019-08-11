@@ -31,15 +31,15 @@ public class CommandParty implements CommandExecutor {
                 player.sendMessage(ChatColor.YELLOW + "/party leader <player>");
             } else if (args[0].equalsIgnoreCase("invite")) {
                 if (args.length == 2) {
-                    if (!args[1].equalsIgnoreCase(player.getName())) {
-                        Player receiver = Bukkit.getPlayer(args[1]);
-                        if (receiver != null) {
-                            String senderTitle = ChatColor.AQUA + "Sent party invitation";
-                            String receiverMessage = ChatColor.AQUA + sender.getName() + " invites you to party";
-                            String receiverTitle = ChatColor.AQUA + "Received party invitation";
-                            PartyInvite partyInvite = new PartyInvite(player, receiver, senderTitle, receiverMessage, receiverTitle);
-                            partyInvite.send();
-                        }
+                    Player receiver = Bukkit.getPlayer(args[1]);
+                    if (receiver != null && receiver != sender) {
+                        String senderTitle = ChatColor.AQUA + "Sent party invitation";
+                        String receiverMessage = ChatColor.AQUA + sender.getName() + " invites you to party";
+                        String receiverTitle = ChatColor.AQUA + "Received party invitation";
+                        PartyInvite partyInvite = new PartyInvite(player, receiver, senderTitle, receiverMessage, receiverTitle);
+                        partyInvite.send();
+                    } else {
+                        player.sendMessage(ChatColor.RED + "You can't invite yourself!");
                     }
                 }
             } else if (args[0].equalsIgnoreCase("leave")) {

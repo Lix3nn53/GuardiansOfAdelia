@@ -4,6 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,50 +21,45 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(PlayerSwapHandItemsEvent event) {
-        ItemStack mainHandItem = event.getMainHandItem();
-        ItemStack offHandItem = event.getOffHandItem();
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
 
-        if (!InventoryUtils.isAirOrNull(mainHandItem)) {
-            Material mainHandItemType = mainHandItem.getType();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
 
-            if (mainHandItemType.equals(Material.SHIELD) || mainHandItemType.equals(Material.DIAMOND_HOE)) {
-                Player player = event.getPlayer();
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+                RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
+                RPGClass rpgClass = rpgCharacter.getRpgClass();
 
-                UUID uuid = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                ItemStack offHandItem = event.getMainHandItem(); //returns the item switched to mainhand, so it is in offhand before event
+                Material offHandItemType = offHandItem.getType();
+                boolean offHandUnequip = false;
+                if (!InventoryUtils.isAirOrNull(offHandItem)) {
 
-                    if (guardianData.hasActiveCharacter()) {
-                        RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
-
-                        if (StatUtils.doesCharacterMeetRequirements(mainHandItem, player, rpgCharacter.getRpgClass())) {
-                            rpgCharacter.getRpgCharacterStats().onOffhandEquip(mainHandItem, true);
-                        } else {
-                            event.setCancelled(true);
-                        }
+                    if (offHandItemType.equals(Material.SHIELD) || offHandItemType.equals(Material.DIAMOND_HOE)) {
+                        offHandUnequip = true; //do not call onOffhandUnequip here cuz event might get canceled
                     }
                 }
-            } else {
-                event.setCancelled(true);
-            }
-        } else if (!InventoryUtils.isAirOrNull(offHandItem)) {
-            Material offHandItemType = offHandItem.getType();
 
-            if (offHandItemType.equals(Material.SHIELD) || offHandItemType.equals(Material.DIAMOND_HOE)) {
-                Player player = event.getPlayer();
+                ItemStack mainHandItem = event.getOffHandItem(); //returns the item switched to offhand, so it is in mainhand before event
+                if (!InventoryUtils.isAirOrNull(mainHandItem)) {
+                    Material mainHandItemType = mainHandItem.getType();
 
-                UUID uuid = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if ((mainHandItemType.equals(Material.SHIELD) || mainHandItemType.equals(Material.DIAMOND_HOE)) && StatUtils.doesCharacterMeetRequirements(mainHandItem, player, rpgClass)) {
+                        rpgCharacterStats.removeMainHandBonuses(mainHandItem, rpgClass, true);
+                        if (offHandUnequip) rpgCharacterStats.setMainHandBonuses(offHandItem, rpgClass, true);
 
-                    if (guardianData.hasActiveCharacter()) {
-                        RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
-
-                        rpgCharacter.getRpgCharacterStats().onOffhandUnequip(offHandItem);
+                        rpgCharacterStats.onOffhandEquip(mainHandItem, true);
+                        if (mainHandItemType.equals(Material.SHIELD)) rpgCharacterStats.onMaxHealthChange();
+                    } else {
+                        event.setCancelled(true);
                     }
+                } else if (offHandUnequip) {
+                    rpgCharacterStats.setMainHandBonuses(offHandItem, rpgClass, true);
+                    rpgCharacterStats.onOffhandUnequip(offHandItem);
+                    if (offHandItemType.equals(Material.SHIELD)) rpgCharacterStats.onMaxHealthChange();
                 }
-            } else {
-                event.setCancelled(true);
             }
         }
     }

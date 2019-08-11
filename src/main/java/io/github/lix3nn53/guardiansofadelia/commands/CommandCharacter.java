@@ -27,6 +27,10 @@ public class CommandCharacter implements CommandExecutor {
                 if (args.length == 2) {
                     try {
                         int charNo = Integer.parseInt(args[1]);
+                        if (charNo < 1) {
+                            player.sendMessage(ChatColor.RED + "Character no can't be smaller than 1");
+                            return false;
+                        }
 
                         UUID uuid = player.getUniqueId();
 

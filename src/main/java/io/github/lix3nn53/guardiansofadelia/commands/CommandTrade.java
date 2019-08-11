@@ -20,15 +20,15 @@ public class CommandTrade implements CommandExecutor {
             if (args.length < 1) {
                 player.sendMessage(ChatColor.YELLOW + "/trade <player>");
             } else if (args.length == 1) {
-                if (!args[0].equalsIgnoreCase(player.getName())) {
-                    Player receiver = Bukkit.getPlayer(args[0]);
-                    if (receiver != null) {
-                        String senderTitle = ChatColor.GOLD + "Sent trade invitation";
-                        String receiverMessage = ChatColor.GOLD + sender.getName() + " invites you to trade";
-                        String receiverTitle = ChatColor.GOLD + "Received trade invitation";
-                        TradeInvite tradeInvite = new TradeInvite(player, receiver, senderTitle, receiverMessage, receiverTitle);
-                        tradeInvite.send();
-                    }
+                Player receiver = Bukkit.getPlayer(args[0]);
+                if (receiver != null && receiver != sender) {
+                    String senderTitle = ChatColor.GOLD + "Sent trade invitation";
+                    String receiverMessage = ChatColor.GOLD + sender.getName() + " invites you to trade";
+                    String receiverTitle = ChatColor.GOLD + "Received trade invitation";
+                    TradeInvite tradeInvite = new TradeInvite(player, receiver, senderTitle, receiverMessage, receiverTitle);
+                    tradeInvite.send();
+                } else {
+                    player.sendMessage(ChatColor.RED + "You can't invite yourself!");
                 }
             }
             // If the player (or console) uses our command correct, we can return true

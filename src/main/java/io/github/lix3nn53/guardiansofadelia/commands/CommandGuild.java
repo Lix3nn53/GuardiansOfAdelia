@@ -98,25 +98,25 @@ public class CommandGuild implements CommandExecutor {
                 }
             } else if (args[0].equals("invite")) {
                 if (args.length == 2) {
-                    if (!args[1].equalsIgnoreCase(player.getName())) {
-                        Player player2 = Bukkit.getPlayer(args[1]);
-                        if (player2 != null) {
-                            if (player2.isOnline()) {
-                                if (GuildManager.inGuild(player)) {
-                                    Guild guild = GuildManager.getGuild(player);
-                                    PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
-                                    if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
-                                        String receiverMessage = ChatColor.DARK_PURPLE + sender.getName() + " invites you to " + guild.getName() + " guild";
-                                        String receiverTitle = ChatColor.DARK_PURPLE + "Received guild invitation";
-                                        String senderTitle = ChatColor.DARK_PURPLE + "Sent guild invitation";
-                                        GuildInvite invite = new GuildInvite(player, player2, senderTitle, receiverMessage, receiverTitle);
-                                        invite.send();
-                                    } else {
-                                        player.sendMessage(ChatColor.RED + "You must be guild leader or commander to invite players to guild");
-                                    }
+                    Player player2 = Bukkit.getPlayer(args[1]);
+                    if (player2 != null && player != player2) {
+                        if (player2.isOnline()) {
+                            if (GuildManager.inGuild(player)) {
+                                Guild guild = GuildManager.getGuild(player);
+                                PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
+                                if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
+                                    String receiverMessage = ChatColor.DARK_PURPLE + sender.getName() + " invites you to " + guild.getName() + " guild";
+                                    String receiverTitle = ChatColor.DARK_PURPLE + "Received guild invitation";
+                                    String senderTitle = ChatColor.DARK_PURPLE + "Sent guild invitation";
+                                    GuildInvite invite = new GuildInvite(player, player2, senderTitle, receiverMessage, receiverTitle);
+                                    invite.send();
+                                } else {
+                                    player.sendMessage(ChatColor.RED + "You must be guild leader or commander to invite players to guild");
                                 }
                             }
                         }
+                    } else {
+                        player.sendMessage(ChatColor.RED + "You can't invite yourself!");
                     }
                 }
             } else if (args[0].equals("kick")) {

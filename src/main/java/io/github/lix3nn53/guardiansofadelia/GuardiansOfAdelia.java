@@ -129,7 +129,8 @@ public class GuardiansOfAdelia extends JavaPlugin {
                 w.setPVP(false);
                 w.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
             }
-            getLogger().info(w.getName() + " options set");
+            getLogger().info("World(" + w.getName() + ") options set");
+            getLogger().info("World(" + w.getName() + ") view distance: " + w.getViewDistance());
         }
 
         DatabaseManager.createTables();
