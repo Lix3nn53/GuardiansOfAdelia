@@ -467,7 +467,7 @@ public class WarriorSkills {
         LandTrigger landTrigger = new LandTrigger();
 
         ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>()); //0 for infinite
-        ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL);
+        ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL, 5);
 
         List<Integer> repeatAmounts = new ArrayList<>();
         repeatAmounts.add(10);

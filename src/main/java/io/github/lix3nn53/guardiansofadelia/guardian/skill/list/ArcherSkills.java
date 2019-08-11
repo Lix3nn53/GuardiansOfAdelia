@@ -310,7 +310,7 @@ public class ArcherSkills {
 
         LandTrigger landTrigger = new LandTrigger();
 
-        ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL);
+        ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL, 5);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(launchMechanic);

@@ -280,7 +280,7 @@ public class HunterSkills {
 
         //remove fall protection
         LandTrigger landTrigger = new LandTrigger();
-        ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL);
+        ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL, 5);
         selfTarget.addChildren(landTrigger);
         landTrigger.addChildren(immunityRemoveMechanic);
 
