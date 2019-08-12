@@ -9,16 +9,26 @@ import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
+import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.DroppedItemWatcher;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
@@ -102,12 +112,55 @@ public class RPGCharacterStats {
 
         int totalExpForLevel = RPGCharacterExperienceManager.getTotalExpForLevel(currentLevel + 1);
 
-        if (totalExp >= totalExpForLevel) {
+        if (totalExp >= totalExpForLevel) { //level up
             int levelFromTotalExperience = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
             player.setLevel(levelFromTotalExperience);
             onMaxHealthChange();
+            playLevelUpAnimation();
         }
 
+    }
+
+    private void playLevelUpAnimation() {
+        Location location = player.getLocation().add(0, 2.4, 0);
+        CustomSound customSound = GoaSound.LEVEL_UP.getCustomSound();
+        customSound.play(location);
+
+        new BukkitRunnable() {
+
+            ArmorStand armorStand;
+            ArmorStand rider;
+            int ticksPass = 0;
+            int ticksLimit = 100;
+
+            @Override
+            public void run() {
+                if (ticksPass == ticksLimit) {
+                    cancel();
+                    armorStand.remove();
+                    rider.remove();
+                } else if (ticksPass == 0) {
+                    rider = new Hologram(location).getArmorStand();
+                    armorStand = new Hologram(location, rider).getArmorStand();
+
+                    ItemStack holoItem = new ItemStack(Material.STONE_PICKAXE);
+                    ItemMeta im = holoItem.getItemMeta();
+                    im.setCustomModelData(10000034);
+                    holoItem.setItemMeta(im);
+
+                    MiscDisguise disguise = new MiscDisguise(DisguiseType.DROPPED_ITEM);
+                    DroppedItemWatcher watcher = (DroppedItemWatcher) disguise.getWatcher();
+                    watcher.setItemStack(holoItem);
+
+                    DisguiseAPI.disguiseToAll(rider, disguise);
+                }
+                Location location = player.getLocation().add(0, 2.4, 0);
+                armorStand.eject();
+                armorStand.teleport(location);
+                armorStand.addPassenger(rider);
+                ticksPass++;
+            }
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 2L);
     }
 
     public void setCurrentHealth(int currentHealth) {

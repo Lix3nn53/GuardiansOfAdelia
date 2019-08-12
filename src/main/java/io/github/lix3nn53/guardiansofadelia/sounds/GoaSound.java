@@ -45,7 +45,7 @@ public enum GoaSound {
     public CustomSound getCustomSound() {
         String sound = getSoundString();
         float volume = 0.5f;
-        float pitch = 0.9f;
+        float pitch = 1f;
 
         return new CustomSound(sound, volume, pitch);
     }
