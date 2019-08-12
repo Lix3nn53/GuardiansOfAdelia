@@ -98,27 +98,38 @@ public class RPGCharacterStats {
 
     public void setTotalExp(int totalExp) {
         this.totalExp = totalExp;
-        int levelFromTotalExperience = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
-        player.setLevel(levelFromTotalExperience);
-        onMaxHealthChange();
+        int level = RPGCharacterExperienceManager.getLevel(totalExp);
+        player.setLevel(level);
+        player.setExp(0);
     }
 
     public void giveExp(int give) {
         if (player.getLevel() >= 90) return; //last level is 90
 
-        int currentLevel = player.getLevel();
+        int currentLevel = RPGCharacterExperienceManager.getLevel(this.totalExp);
+        player.sendMessage("currentLevel: " + currentLevel);
 
         this.totalExp += give;
 
-        int totalExpForLevel = RPGCharacterExperienceManager.getTotalExpForLevel(currentLevel + 1);
+        int newLevel = RPGCharacterExperienceManager.getLevel(this.totalExp);
 
-        if (totalExp >= totalExpForLevel) { //level up
-            int levelFromTotalExperience = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
-            player.setLevel(levelFromTotalExperience);
-            onMaxHealthChange();
+        if (currentLevel < newLevel) { //level up
+            player.setLevel(newLevel);
+            currentLevel = newLevel;
+
             playLevelUpAnimation();
+
+            onMaxHealthChange();
         }
 
+        player.sendMessage("currentLevel-2: " + currentLevel);
+        float requiredExperience = RPGCharacterExperienceManager.getRequiredExperience(currentLevel);
+        player.sendMessage("requiredExperience: " + requiredExperience);
+        float currentExperience = RPGCharacterExperienceManager.getCurrentExperience(this.totalExp, currentLevel);
+        player.sendMessage("currentExperience: " + currentExperience);
+        float percentage = currentExperience / requiredExperience;
+        player.sendMessage("percentage: " + percentage);
+        player.setExp(percentage);
     }
 
     private void playLevelUpAnimation() {
@@ -231,7 +242,7 @@ public class RPGCharacterStats {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
                 RPGClass rpgClass = guardianData.getActiveCharacter().getRpgClass();
-                int level = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
+                int level = RPGCharacterExperienceManager.getLevel(totalExp);
                 bonusHealthForLevel = rpgClass.getBonusHealthForLevel(level);
             }
         }
@@ -387,7 +398,7 @@ public class RPGCharacterStats {
 
     public int getAttributePointsLeftToSpend() {
         int totalExp = getTotalExp();
-        int level = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
+        int level = RPGCharacterExperienceManager.getLevel(totalExp);
 
         int inventedPointsOnAttributes = getInvestedAttributePoints();
 

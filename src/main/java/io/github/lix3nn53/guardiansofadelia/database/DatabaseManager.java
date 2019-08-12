@@ -145,7 +145,7 @@ public class DatabaseManager {
                 try {
                     RPGClass rpgClassCharacter = DatabaseQueries.getRPGClassCharacter(uuid, charNo);
                     int totalExp = DatabaseQueries.getTotalExp(uuid, charNo);
-                    int level = RPGCharacterExperienceManager.getLevelFromTotalExperience(totalExp);
+                    int level = RPGCharacterExperienceManager.getLevel(totalExp);
 
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
                         DisguiseAPI.disguiseToPlayers(armorStands.get(2), mobDisguise, player);

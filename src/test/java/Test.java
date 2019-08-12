@@ -1,4 +1,5 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterExperienceManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,9 +36,22 @@ public class Test {
 
         int maxValue = 4000;
 
-        for (double rate : downRatesForLevel) {
-            System.out.println(maxValue * rate);
+        for (int level = 1; level <= 90; level++) {
+            int experience = (int) (10 + Math.round(5 * Math.pow(level, 3) / 4) + 0.5);
+            System.out.println(experience);
         }
+
+        int totalExperience = 10;
+        int level = RPGCharacterExperienceManager.getLevel(totalExperience);
+        int totalRequiredExperience = RPGCharacterExperienceManager.getTotalRequiredExperience(level);
+        int currentExperience = RPGCharacterExperienceManager.getCurrentExperience(totalExperience, level);
+        int requiredExperience = RPGCharacterExperienceManager.getRequiredExperience(level);
+
+        System.out.println(totalRequiredExperience);
+        System.out.println(level);
+        System.out.println(currentExperience);
+        System.out.println(requiredExperience);
+
 
         /*int totalDefense = 855;
 
@@ -125,7 +139,7 @@ public class Test {
             System.out.println("Level " + lvl + " TotalExp: " + exp);
         }
 
-        int experience = 0;
+        int totalExperience = 0;
         for (int level = 1; level <= 0; level++) {
             System.out.println("Level 1123213123123123123123");
         }*/

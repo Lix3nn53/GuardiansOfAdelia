@@ -1,44 +1,44 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RPGCharacterExperienceManager {
 
-    private static final HashMap<Integer, Integer> levelToTotalRequiredExperience = new HashMap<>();
+    private static final List<Integer> levelToRequiredExperience = new ArrayList<>();
 
     static {
-        int experience = 0;
         for (int level = 1; level <= 90; level++) {
-            experience += (int) (10 + Math.round(5 * Math.pow(level, 3) / 4) + 0.5);
-            levelToTotalRequiredExperience.put(level, experience);
+            int experience = (int) (10 + Math.round(5 * Math.pow(level, 3) / 4) + 0.5);
+            levelToRequiredExperience.add(experience);
         }
     }
 
-    public static int getLevelFromTotalExperience(int totalExp) {
-        for (int level = 1; level <= 90; level++) {
-            int experience = levelToTotalRequiredExperience.get(level);
+    public static int getLevel(int totalExp) {
+        int experience = 0;
+        for (int i = 0; i < 90; i++) {
+            experience += levelToRequiredExperience.get(i);
             if (totalExp < experience) {
-                return level;
+                return i + 1;
             }
         }
         return 90;
     }
 
     public static int getRequiredExperience(int level) {
-        if (level == 1) {
-            return levelToTotalRequiredExperience.get(level);
-        }
-        return levelToTotalRequiredExperience.get(level) - levelToTotalRequiredExperience.get(level - 1);
+        return levelToRequiredExperience.get(level - 1);
     }
 
     public static int getCurrentExperience(int totalExp, int level) {
-        if (level == 1) {
-            return totalExp;
-        }
-        return totalExp - levelToTotalRequiredExperience.get(level - 1);
+        int totalExpForLevel = getTotalRequiredExperience(level - 1);
+        return totalExp - totalExpForLevel;
     }
 
-    public static int getTotalExpForLevel(int level) {
-        return levelToTotalRequiredExperience.get(level);
+    public static int getTotalRequiredExperience(int level) {
+        int experience = 0;
+        for (int i = 0; i < level; i++) {
+            experience += levelToRequiredExperience.get(i);
+        }
+        return experience;
     }
 }

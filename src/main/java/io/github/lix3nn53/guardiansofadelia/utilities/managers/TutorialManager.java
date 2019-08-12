@@ -29,7 +29,7 @@ public class TutorialManager {
             RPGCharacter rpgCharacter = new RPGCharacter(rpgClass, player);
             guardianData.setActiveCharacter(rpgCharacter, charNo);
 
-            int totalExpForLevel = RPGCharacterExperienceManager.getTotalExpForLevel(90);
+            int totalExpForLevel = RPGCharacterExperienceManager.getTotalRequiredExperience(90);
             RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
             rpgCharacterStats.setTotalExp(totalExpForLevel);
 
