@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.F
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.DisarmMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
@@ -86,12 +87,12 @@ public class MonkSkills {
         SingleTarget singleTarget = new SingleTarget(false, true, false, 999, ranges, 4);
 
         List<Double> speeds = new ArrayList<>();
-        speeds.add(1.2D);
-        speeds.add(1.4D);
-        speeds.add(1.6D);
-        speeds.add(1.8D);
-        speeds.add(2D);
         speeds.add(2.4D);
+        speeds.add(2.8D);
+        speeds.add(3.2D);
+        speeds.add(3.6D);
+        speeds.add(4D);
+        speeds.add(4.8D);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         skill.addTrigger(selfTarget);
@@ -163,21 +164,21 @@ public class MonkSkills {
         forward.add(-0.4D);
         forward.add(-0.4D);
         List<Double> right = new ArrayList<>();
-        right.add(1.2D);
-        right.add(1.3D);
         right.add(1.4D);
-        right.add(1.5D);
         right.add(1.6D);
         right.add(1.8D);
+        right.add(2D);
+        right.add(2.2D);
+        right.add(2.4D);
         LaunchMechanic rightLaunch = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forward, upward, right);
 
         List<Double> left = new ArrayList<>();
-        left.add(-1.2D);
-        left.add(-1.3D);
         left.add(-1.4D);
-        left.add(-1.5D);
         left.add(-1.6D);
         left.add(-1.8D);
+        left.add(-2D);
+        left.add(-2.2D);
+        left.add(-2.4D);
         LaunchMechanic leftLaunch = new LaunchMechanic(LaunchMechanic.Relative.CASTER, forward, upward, left);
 
         skill.addTrigger(selfTarget);
@@ -261,6 +262,7 @@ public class MonkSkills {
         selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
         selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
         selfTarget.addChildren(new SilenceMechanic(ccTicks));
+        selfTarget.addChildren(new DisarmMechanic(ccTicks));
 
         List<Integer> repetitions = new ArrayList<>();
         repetitions.add(6);

@@ -30,8 +30,13 @@ public class MyPlayerItemHeldEvent implements Listener {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
                 int newSlot = event.getNewSlot();
+                int previousSlot = event.getPreviousSlot();
+
+                if (newSlot == previousSlot) {
+                    return;
+                }
+
                 if (newSlot >= 0 && newSlot <= 3) { //skill bar
-                    int previousSlot = event.getPreviousSlot();
                     if (previousSlot >= 0 && previousSlot <= 3) { //old slot is also skill bar
                         player.getInventory().setHeldItemSlot(4);
                         return;
@@ -46,7 +51,9 @@ public class MyPlayerItemHeldEvent implements Listener {
                     return;
                 }
 
-                int previousSlot = event.getPreviousSlot();
+                if (previousSlot >= 0 && previousSlot <= 3) { //skill bar
+                    return;
+                }
 
                 RPGClass rpgClass = activeCharacter.getRpgClass();
 

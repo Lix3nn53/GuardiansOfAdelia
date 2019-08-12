@@ -457,33 +457,33 @@ public class RPGCharacterStats {
     private void setPassiveStatBonuses(EquipmentSlot equipmentSlot, ItemStack itemStack, boolean fixDisplay) {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "fire");
-            getFire().setBonus(equipmentSlot, this, bonus, false);
+            getFire().setBonus(player, equipmentSlot, this, bonus, false);
         } else {
-            getFire().setBonus(equipmentSlot, this, 0, false);
+            getFire().setBonus(player, equipmentSlot, this, 0, false);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "water");
-            getWater().setBonus(equipmentSlot, this, bonus, fixDisplay);
+            getWater().setBonus(player, equipmentSlot, this, bonus, fixDisplay);
         } else {
-            getWater().setBonus(equipmentSlot, this, 0, false);
+            getWater().setBonus(player, equipmentSlot, this, 0, false);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
-            getEarth().setBonus(equipmentSlot, this, bonus, fixDisplay);
+            getEarth().setBonus(player, equipmentSlot, this, bonus, fixDisplay);
         } else {
-            getEarth().setBonus(equipmentSlot, this, 0, false);
+            getEarth().setBonus(player, equipmentSlot, this, 0, false);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
-            getLightning().setBonus(equipmentSlot, this, bonus, false);
+            getLightning().setBonus(player, equipmentSlot, this, bonus, false);
         } else {
-            getLightning().setBonus(equipmentSlot, this, 0, false);
+            getLightning().setBonus(player, equipmentSlot, this, 0, false);
         }
         if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
             int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
-            getWind().setBonus(equipmentSlot, this, bonus, false);
+            getWind().setBonus(player, equipmentSlot, this, bonus, false);
         } else {
-            getWind().setBonus(equipmentSlot, this, 0, false);
+            getWind().setBonus(player, equipmentSlot, this, 0, false);
         }
     }
 
@@ -607,23 +607,23 @@ public class RPGCharacterStats {
             //manage stats on item drop
             if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, "fire");
-                getFire().setBonus(EquipmentSlot.HAND, this, bonus, false);
+                getFire().setBonus(player, EquipmentSlot.HAND, this, bonus, false);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, "water");
-                getWater().setBonus(EquipmentSlot.HAND, this, bonus, fixDisplay);
+                getWater().setBonus(player, EquipmentSlot.HAND, this, bonus, fixDisplay);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
-                getEarth().setBonus(EquipmentSlot.HAND, this, bonus, fixDisplay);
+                getEarth().setBonus(player, EquipmentSlot.HAND, this, bonus, fixDisplay);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
-                getLightning().setBonus(EquipmentSlot.HAND, this, bonus, false);
+                getLightning().setBonus(player, EquipmentSlot.HAND, this, bonus, false);
             }
             if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
-                getWind().setBonus(EquipmentSlot.HAND, this, bonus, false);
+                getWind().setBonus(player, EquipmentSlot.HAND, this, bonus, false);
             }
             return true;
         }

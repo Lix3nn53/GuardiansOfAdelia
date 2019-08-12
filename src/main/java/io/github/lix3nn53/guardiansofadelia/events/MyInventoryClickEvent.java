@@ -130,11 +130,13 @@ public class MyInventoryClickEvent implements Listener {
         //Open RPG-Inventory
         if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.CRAFTING)) {
             event.setCancelled(true);
-            if (cursorType.equals(Material.AIR)) {
-                if (rpgCharacter != null) {
-                    GuiGeneric guiGeneric = rpgCharacter.getRpgInventory().formRPGInventory(player);
-                    guiGeneric.openInventory(player);
-                }
+            if (!cursorType.equals(Material.AIR)) {
+                InventoryUtils.giveItemToPlayer(player, cursor);
+                cursor.setAmount(0);
+            }
+            if (rpgCharacter != null) {
+                GuiGeneric guiGeneric = rpgCharacter.getRpgInventory().formRPGInventory(player);
+                guiGeneric.openInventory(player);
             }
             return;
         }
@@ -258,6 +260,10 @@ public class MyInventoryClickEvent implements Listener {
 
         if (currentName.equals(ChatColor.GREEN + "Menu")) {
             event.setCancelled(true);
+            if (!cursorType.equals(Material.AIR)) {
+                InventoryUtils.giveItemToPlayer(player, cursor);
+                cursor.setAmount(0);
+            }
             GuiGeneric guiGeneric = MenuList.mainMenu();
             guiGeneric.openInventory(player);
         } else if (title.equals(org.bukkit.ChatColor.GREEN + "Menu")) {

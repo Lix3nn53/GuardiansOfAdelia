@@ -29,6 +29,9 @@ public enum Consumable {
     POTION_INSTANT_HYBRID,
     POTION_REGENERATION_HEALTH;
 
+    private final double HYBIRD_NERF = 0.65;
+    private final double REGEN_NERF = 0.1;
+
     public void consume(Player player, int skillLevel, ItemStack itemStack) {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
             int reqLevel = PersistentDataContainerUtil.getInteger(itemStack, "reqLevel");
@@ -65,171 +68,123 @@ public enum Consumable {
     }
 
     public List<SkillComponent> getSkillComponents() {
+        List<Double> multipliers = new ArrayList<>(); //buff multipliers
+        multipliers.add(getBuffMultiplier(1));
+        multipliers.add(getBuffMultiplier(2));
+        multipliers.add(getBuffMultiplier(3));
+        multipliers.add(getBuffMultiplier(4));
+        multipliers.add(getBuffMultiplier(5));
+        multipliers.add(getBuffMultiplier(6));
+        multipliers.add(getBuffMultiplier(7));
+        multipliers.add(getBuffMultiplier(8));
+        multipliers.add(getBuffMultiplier(9));
+        multipliers.add(getBuffMultiplier(10));
+
+        List<Integer> ticks = new ArrayList<>(); //buff durations
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+        ticks.add(60);
+
         List<SkillComponent> list = new ArrayList<>();
         switch (this) {
             case BUFF_PHYSICAL_DAMAGE:
-                List<Integer> ticks = new ArrayList<>();
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                List<Double> multipliers = new ArrayList<>();
-                multipliers.add(0.08);
-                multipliers.add(0.1);
-                multipliers.add(0.12);
-                multipliers.add(0.14);
-                multipliers.add(0.16);
-                multipliers.add(0.2);
                 list.add(new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks));
                 break;
             case BUFF_PHYSICAL_DEFENSE:
-                ticks = new ArrayList<>();
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                multipliers = new ArrayList<>();
-                multipliers.add(0.08);
-                multipliers.add(0.1);
-                multipliers.add(0.12);
-                multipliers.add(0.14);
-                multipliers.add(0.16);
-                multipliers.add(0.2);
                 list.add(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
                 break;
             case BUFF_MAGICAL_DAMAGE:
-                ticks = new ArrayList<>();
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                multipliers = new ArrayList<>();
-                multipliers.add(0.08);
-                multipliers.add(0.1);
-                multipliers.add(0.12);
-                multipliers.add(0.14);
-                multipliers.add(0.16);
-                multipliers.add(0.2);
                 list.add(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
                 break;
             case BUFF_MAGICAL_DEFENSE:
-                ticks = new ArrayList<>();
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                ticks.add(60);
-                multipliers = new ArrayList<>();
-                multipliers.add(0.08);
-                multipliers.add(0.1);
-                multipliers.add(0.12);
-                multipliers.add(0.14);
-                multipliers.add(0.16);
-                multipliers.add(0.2);
                 list.add(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
                 break;
             case POTION_INSTANT_HEALTH:
-                List<Integer> amounts = new ArrayList<>();
-                amounts.add(80);
-                amounts.add(200);
-                amounts.add(500);
-                amounts.add(800);
-                amounts.add(1200);
-                amounts.add(1700);
-                amounts.add(2400);
-                amounts.add(3000);
-                amounts.add(3400);
-                amounts.add(4000);
-                list.add(new HealMechanic(amounts, new ArrayList<>()));
+                List<Integer> healAmounts = new ArrayList<>();
+                healAmounts.add(getInstantHealAmount(1));
+                healAmounts.add(getInstantHealAmount(2));
+                healAmounts.add(getInstantHealAmount(3));
+                healAmounts.add(getInstantHealAmount(4));
+                healAmounts.add(getInstantHealAmount(5));
+                healAmounts.add(getInstantHealAmount(6));
+                healAmounts.add(getInstantHealAmount(7));
+                healAmounts.add(getInstantHealAmount(8));
+                healAmounts.add(getInstantHealAmount(9));
+                healAmounts.add(getInstantHealAmount(10));
+                list.add(new HealMechanic(healAmounts, new ArrayList<>()));
                 break;
             case POTION_INSTANT_MANA:
-                amounts = new ArrayList<>();
-                amounts.add(40);
-                amounts.add(60);
-                amounts.add(80);
-                amounts.add(100);
-                amounts.add(120);
-                amounts.add(140);
-                amounts.add(160);
-                amounts.add(180);
-                amounts.add(200);
-                amounts.add(240);
-                list.add(new ManaMechanic(amounts, new ArrayList<>()));
+                List<Integer> manaAmounts = new ArrayList<>();
+                manaAmounts.add(getInstantManaAmount(1));
+                manaAmounts.add(getInstantManaAmount(2));
+                manaAmounts.add(getInstantManaAmount(3));
+                manaAmounts.add(getInstantManaAmount(4));
+                manaAmounts.add(getInstantManaAmount(5));
+                manaAmounts.add(getInstantManaAmount(6));
+                manaAmounts.add(getInstantManaAmount(7));
+                manaAmounts.add(getInstantManaAmount(8));
+                manaAmounts.add(getInstantManaAmount(9));
+                manaAmounts.add(getInstantManaAmount(10));
+                list.add(new ManaMechanic(manaAmounts, new ArrayList<>()));
                 break;
             case POTION_INSTANT_HYBRID:
-                List<Integer> amountsSecond = new ArrayList<>();
-                amountsSecond.add(200);
-                amountsSecond.add(200);
-                amountsSecond.add(200);
-                amountsSecond.add(200);
-                amountsSecond.add(200);
-                amountsSecond.add(200);
-                amountsSecond.add(200);
-                amountsSecond.add(200);
-                amountsSecond.add(200);
-                amountsSecond.add(200);
-                list.add(new HealMechanic(amountsSecond, new ArrayList<>()));
-                amounts = new ArrayList<>();
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                list.add(new ManaMechanic(amounts, new ArrayList<>()));
+                healAmounts = new ArrayList<>();
+                healAmounts.add((int) (getInstantHealAmount(1) * HYBIRD_NERF));
+                healAmounts.add((int) (getInstantHealAmount(2) * HYBIRD_NERF));
+                healAmounts.add((int) (getInstantHealAmount(3) * HYBIRD_NERF));
+                healAmounts.add((int) (getInstantHealAmount(4) * HYBIRD_NERF));
+                healAmounts.add((int) (getInstantHealAmount(5) * HYBIRD_NERF));
+                healAmounts.add((int) (getInstantHealAmount(6) * HYBIRD_NERF));
+                healAmounts.add((int) (getInstantHealAmount(7) * HYBIRD_NERF));
+                healAmounts.add((int) (getInstantHealAmount(8) * HYBIRD_NERF));
+                healAmounts.add((int) (getInstantHealAmount(9) * HYBIRD_NERF));
+                healAmounts.add((int) (getInstantHealAmount(10) * HYBIRD_NERF));
+                list.add(new HealMechanic(healAmounts, new ArrayList<>()));
+                manaAmounts = new ArrayList<>();
+                manaAmounts.add((int) (getInstantManaAmount(1) * HYBIRD_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(2) * HYBIRD_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(3) * HYBIRD_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(4) * HYBIRD_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(5) * HYBIRD_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(6) * HYBIRD_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(7) * HYBIRD_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(8) * HYBIRD_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(9) * HYBIRD_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(10) * HYBIRD_NERF));
+                list.add(new ManaMechanic(manaAmounts, new ArrayList<>()));
                 break;
             case POTION_REGENERATION_HEALTH:
                 List<Integer> repetitions = new ArrayList<>();
-                repetitions.add(5);
-                repetitions.add(6);
-                repetitions.add(7);
-                repetitions.add(8);
-                repetitions.add(9);
-                repetitions.add(10);
-                repetitions.add(11);
-                repetitions.add(12);
-                repetitions.add(14);
                 repetitions.add(18);
-                RepeatMechanic repeatMechanic = new RepeatMechanic(10L, repetitions);
-                amounts = new ArrayList<>();
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                repeatMechanic.addChildren(new HealMechanic(amounts, new ArrayList<>()));
+                repetitions.add(18);
+                repetitions.add(18);
+                repetitions.add(18);
+                repetitions.add(18);
+                repetitions.add(18);
+                repetitions.add(18);
+                repetitions.add(18);
+                repetitions.add(18);
+                repetitions.add(18);
+                RepeatMechanic repeatMechanic = new RepeatMechanic(20L, repetitions);
+                healAmounts = new ArrayList<>();
+                healAmounts.add((int) (getInstantHealAmount(1) * REGEN_NERF));
+                healAmounts.add((int) (getInstantHealAmount(2) * REGEN_NERF));
+                healAmounts.add((int) (getInstantHealAmount(3) * REGEN_NERF));
+                healAmounts.add((int) (getInstantHealAmount(4) * REGEN_NERF));
+                healAmounts.add((int) (getInstantHealAmount(5) * REGEN_NERF));
+                healAmounts.add((int) (getInstantHealAmount(6) * REGEN_NERF));
+                healAmounts.add((int) (getInstantHealAmount(7) * REGEN_NERF));
+                healAmounts.add((int) (getInstantHealAmount(8) * REGEN_NERF));
+                healAmounts.add((int) (getInstantHealAmount(9) * REGEN_NERF));
+                healAmounts.add((int) (getInstantHealAmount(10) * REGEN_NERF));
+                repeatMechanic.addChildren(new HealMechanic(healAmounts, new ArrayList<>()));
                 list.add(repeatMechanic);
                 break;
         }
@@ -270,6 +225,8 @@ public enum Consumable {
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.YELLOW + "Required Level: " + reqLevel);
+        lore.add("");
+        lore.addAll(getLoreTechnicalInfo(skillLevel));
         lore.add("");
         lore.add(ChatColor.GRAY + "Hold right click while this item");
         lore.add(ChatColor.GRAY + "is in your hand to use");
@@ -346,9 +303,119 @@ public enum Consumable {
                 lore.add(ChatColor.GRAY + "Restores health & mana");
                 break;
             case POTION_REGENERATION_HEALTH:
-                lore.add(ChatColor.GRAY + "Restores health every 2 seconds for 20 seconds");
+                lore.add(ChatColor.GRAY + "Restores health every seconds for 18 seconds");
                 break;
         }
         return lore;
+    }
+
+    public List<String> getLoreTechnicalInfo(int level) {
+        List<String> lore = new ArrayList<>();
+        switch (this) {
+            case BUFF_PHYSICAL_DAMAGE:
+                lore.add(ChatColor.RED + "Multiplier: " + getBuffMultiplier(level));
+                break;
+            case BUFF_PHYSICAL_DEFENSE:
+                lore.add(ChatColor.AQUA + "Multiplier: " + getBuffMultiplier(level));
+                break;
+            case BUFF_MAGICAL_DAMAGE:
+                lore.add(ChatColor.LIGHT_PURPLE + "Multiplier: " + getBuffMultiplier(level));
+                break;
+            case BUFF_MAGICAL_DEFENSE:
+                lore.add(ChatColor.GREEN + "Multiplier: " + getBuffMultiplier(level));
+                break;
+            case POTION_INSTANT_HEALTH:
+                lore.add(ChatColor.RED + "Restores: " + getInstantHealAmount(level));
+                break;
+            case POTION_INSTANT_MANA:
+                lore.add(ChatColor.AQUA + "Restores: " + getInstantManaAmount(level));
+                break;
+            case POTION_INSTANT_HYBRID:
+                lore.add(ChatColor.RED + "Restores: " + (int) (getInstantHealAmount(level) * HYBIRD_NERF));
+                lore.add(ChatColor.AQUA + "Restores: " + (int) (getInstantManaAmount(level) * HYBIRD_NERF));
+                break;
+            case POTION_REGENERATION_HEALTH:
+                lore.add(ChatColor.RED + "Restores: " + (int) (getInstantHealAmount(level) * REGEN_NERF));
+                break;
+        }
+        return lore;
+    }
+
+    public int getInstantHealAmount(int level) {
+        switch (level) {
+            case 1:
+                return 80;
+            case 2:
+                return 200;
+            case 3:
+                return 500;
+            case 4:
+                return 800;
+            case 5:
+                return 1200;
+            case 6:
+                return 1700;
+            case 7:
+                return 2400;
+            case 8:
+                return 3000;
+            case 9:
+                return 3400;
+            case 10:
+                return 4000;
+        }
+        return 80;
+    }
+
+    public int getInstantManaAmount(int level) {
+        switch (level) {
+            case 1:
+                return 60;
+            case 2:
+                return 80;
+            case 3:
+                return 120;
+            case 4:
+                return 160;
+            case 5:
+                return 180;
+            case 6:
+                return 200;
+            case 7:
+                return 240;
+            case 8:
+                return 280;
+            case 9:
+                return 320;
+            case 10:
+                return 400;
+        }
+        return 60;
+    }
+
+    public double getBuffMultiplier(int level) {
+        switch (level) {
+            case 1:
+                return 0.08;
+            case 2:
+                return 0.1;
+            case 3:
+                return 0.12;
+            case 4:
+                return 0.14;
+            case 5:
+                return 0.16;
+            case 6:
+                return 0.18;
+            case 7:
+                return 0.2;
+            case 8:
+                return 0.22;
+            case 9:
+                return 0.22;
+            case 10:
+                return 0.24;
+        }
+        return 0.08;
     }
 }

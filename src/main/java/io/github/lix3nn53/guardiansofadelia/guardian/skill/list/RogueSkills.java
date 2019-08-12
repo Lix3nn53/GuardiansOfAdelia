@@ -144,13 +144,18 @@ public class RogueSkills {
         phantomCondition2.addChildren(singleTarget2);
 
         singleTarget.addChildren(directionCondition);
+        singleTarget2.addChildren(directionCondition);
         directionCondition.addChildren(slow);
 
         singleTarget.addChildren(warpTargetMechanic);
+        singleTarget2.addChildren(warpTargetMechanic);
         singleTarget.addChildren(damageMechanic);
+        singleTarget2.addChildren(damageMechanic);
         singleTarget.addChildren(new SoundMechanic(GoaSound.SKILL_POISON_SLASH));
+        singleTarget2.addChildren(new SoundMechanic(GoaSound.SKILL_POISON_SLASH));
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ArrangementParticle.CIRCLE, 1.2, 7, 0, 0, 0, 0, 1, 0, 0, null);
         singleTarget.addChildren(particleMechanic);
+        singleTarget2.addChildren(particleMechanic);
 
         return skill;
     }
@@ -177,12 +182,12 @@ public class RogueSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(8);
+        manaCosts.add(9);
+        manaCosts.add(10);
+        manaCosts.add(11);
+        manaCosts.add(12);
+        manaCosts.add(14);
 
         List<Integer> cooldowns = new ArrayList<>();
         cooldowns.add(14);
@@ -224,12 +229,12 @@ public class RogueSkills {
         FlagCondition phantomCondition2 = new FlagCondition("phantom", true);
 
         List<Double> forwards2 = new ArrayList<>();
-        forwards2.add(1.6);
-        forwards2.add(1.8);
-        forwards2.add(2D);
-        forwards2.add(2.2);
-        forwards2.add(2.6);
-        forwards2.add(3D);
+        forwards2.add(6D);
+        forwards2.add(7D);
+        forwards2.add(8D);
+        forwards2.add(10D);
+        forwards2.add(12D);
+        forwards2.add(14D);
         WarpMechanic warpMechanic2 = new WarpMechanic(false, forwards2, upwards, right);
 
         LandTrigger landTrigger = new LandTrigger();

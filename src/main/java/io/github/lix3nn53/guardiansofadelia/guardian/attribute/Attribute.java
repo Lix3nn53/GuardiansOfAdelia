@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.attribute;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 
 public class Attribute {
@@ -96,24 +97,32 @@ public class Attribute {
         }
     }
 
-    public void setBonus(EquipmentSlot equipmentSlot, RPGCharacterStats rpgCharacterStats, int bonus, boolean fixDisplay) {
+    public void setBonus(Player player, EquipmentSlot equipmentSlot, RPGCharacterStats rpgCharacterStats, int bonus, boolean fixDisplay) {
+        int bonusPointDifference = 0;
+
         switch (equipmentSlot) {
             case HAND:
+                bonusPointDifference = bonus - this.bonusFromMainhand;
                 this.bonusFromMainhand = bonus;
                 break;
             case OFF_HAND:
+                bonusPointDifference = bonus - this.bonusFromOffhand;
                 this.bonusFromOffhand = bonus;
                 break;
             case FEET:
+                bonusPointDifference = bonus - this.bonusFromBoots;
                 this.bonusFromBoots = bonus;
                 break;
             case LEGS:
+                bonusPointDifference = bonus - this.bonusFromLeggings;
                 this.bonusFromLeggings = bonus;
                 break;
             case CHEST:
+                bonusPointDifference = bonus - this.bonusFromChestplate;
                 this.bonusFromChestplate = bonus;
                 break;
             case HEAD:
+                bonusPointDifference = bonus - this.bonusFromHelmet;
                 this.bonusFromHelmet = bonus;
                 break;
         }
@@ -121,6 +130,7 @@ public class Attribute {
         if (fixDisplay) {
             onValueChange(rpgCharacterStats);
         }
+        //onBonusChangeFillEmpty(player, rpgCharacterStats, bonusPointDifference);
     }
 
     public void addBonusToPassive(int bonus, RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
@@ -161,4 +171,48 @@ public class Attribute {
     public AttributeType getAttributeType() {
         return attributeType;
     }
+
+    /*public void onBonusChangeFillEmpty(Player player, RPGCharacterStats rpgCharacterStats, int bonusPointDifference) {
+        if (bonusPointDifference > 0) {
+            switch (attributeType) {
+                case EARTH:
+                    player.sendMessage("Bonus earth fix health");
+                    double increment = attributeType.getIncrement();
+                    double v = increment * bonusPointDifference;
+
+                    double currentHealth = player.getHealth();
+                    double maxHealth = player.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue();
+
+                    if (currentHealth == maxHealth) break;
+
+                    double nextHealth = currentHealth + v;
+
+                    if (nextHealth > maxHealth) {
+                        nextHealth = maxHealth;
+                    }
+
+                    player.setHealth(nextHealth);
+                    break;
+                case WATER:
+                    player.sendMessage("Bonus water fix mana");
+                    increment = attributeType.getIncrement();
+                    v = increment * bonusPointDifference;
+
+                    int currentMana = rpgCharacterStats.getCurrentMana();
+
+                    double maxMana = rpgCharacterStats.getTotalMaxMana();
+
+                    if (currentMana == maxMana) break;
+
+                    double nextMana = currentMana + v;
+
+                    if (nextMana > maxMana) {
+                        nextMana = maxMana;
+                    }
+
+                    rpgCharacterStats.setCurrentMana((int) nextMana);
+                    break;
+            }
+        }
+    }*/
 }

@@ -174,12 +174,12 @@ public class KnightSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Double> upward = new ArrayList<>();
-        upward.add(1.5D);
-        upward.add(1.75D);
+        upward.add(1.2D);
+        upward.add(1.4D);
+        upward.add(1.6D);
+        upward.add(1.8D);
         upward.add(2D);
-        upward.add(2.25D);
-        upward.add(2.5D);
-        upward.add(3D);
+        upward.add(2.4D);
         List<Double> forward = new ArrayList<>();
         forward.add(0D);
         forward.add(0D);

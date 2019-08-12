@@ -51,12 +51,15 @@ public class LaunchMechanic extends MechanicComponent {
         if (skillLevel == 0) {
             additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeed.get(skillLevel));
             additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeed.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeed.get(skillLevel));
         } else if (skillLevel == upwardSpeed.size()) {
             additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeed.get(skillLevel - 1));
             additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeed.get(skillLevel - 1));
+            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeed.get(skillLevel - 1));
         } else {
             additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeed.get(skillLevel - 1) + " -> " + forwardSpeed.get(skillLevel));
             additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeed.get(skillLevel - 1) + " -> " + upwardSpeed.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeed.get(skillLevel - 1) + " -> " + rightSpeed.get(skillLevel));
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }

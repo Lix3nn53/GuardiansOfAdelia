@@ -127,8 +127,8 @@ public class Skill {
             lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel - 1));
             lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel - 1));
         } else {
-            lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel) + " -> " + getManaCost(skillLevel));
-            lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel) + " -> " + getCooldown(skillLevel));
+            lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel - 1) + " -> " + getManaCost(skillLevel));
+            lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel - 1) + " -> " + getCooldown(skillLevel));
         }
 
         lore.add(ChatColor.YELLOW + "------------------------------");

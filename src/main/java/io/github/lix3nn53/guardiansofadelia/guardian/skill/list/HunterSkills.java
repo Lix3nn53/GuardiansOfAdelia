@@ -115,12 +115,12 @@ public class HunterSkills {
         damages.add(480D);
 
         List<Double> speeds = new ArrayList<>();
-        speeds.add(1.25);
-        speeds.add(1.3);
-        speeds.add(1.35);
-        speeds.add(1.4);
-        speeds.add(1.45);
-        speeds.add(1.5);
+        speeds.add(2.4D);
+        speeds.add(2.8D);
+        speeds.add(3.2D);
+        speeds.add(3.6D);
+        speeds.add(4D);
+        speeds.add(4.8D);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         selfTarget.addChildren(projectileMechanic);
