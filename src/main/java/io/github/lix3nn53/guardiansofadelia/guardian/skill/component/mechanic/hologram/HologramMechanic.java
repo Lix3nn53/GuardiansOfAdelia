@@ -74,7 +74,7 @@ public class HologramMechanic extends MechanicComponent {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if (!model.isDead()) {
+                    if (model.isValid()) {
                         model.remove();
                     }
                 }

@@ -24,6 +24,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -31,6 +32,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class CommandLix implements CommandExecutor {
@@ -98,10 +101,12 @@ public class CommandLix implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("debug")) {
-                ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-                if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "meleeDamage")) {
-                    int meleeDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "meleeDamage");
-                    player.sendMessage("melee damage: " + meleeDamage);
+                List<Entity> nearbyEntities = player.getNearbyEntities(3, 3, 3);
+                for (Entity entity : nearbyEntities) {
+                    player.sendMessage(entity.getType().toString());
+                    if (entity.isCustomNameVisible()) {
+                        player.sendMessage(Objects.requireNonNull(entity.getCustomName()));
+                    }
                 }
             } else if (args[0].equals("weapon")) {
                 if (args.length == 3) {

@@ -32,9 +32,9 @@ public class RPGCharacterStats {
     private final Attribute water = new Attribute(AttributeType.WATER);
     private final Attribute wind = new Attribute(AttributeType.WIND);
     private int totalExp;
-    private int maxHealth = 20;
-    private int maxMana = 20;
-    private int currentMana = 20;
+    private int maxHealth = 100;
+    private int maxMana = 100;
+    private int currentMana = 100;
     private int defense = 1;
     private int magicDefense = 1;
     private double criticalChance = 0.05;
@@ -69,6 +69,8 @@ public class RPGCharacterStats {
 
         //offhand slot
         shield = new ArmorStatHolder(0, 0, 0);
+
+        onMaxHealthChange();
 
         //start action bar scheduler
         new BukkitRunnable() {

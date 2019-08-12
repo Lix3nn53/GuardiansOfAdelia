@@ -65,19 +65,19 @@ public class PaladinSkills {
         reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(8);
+        manaCosts.add(9);
+        manaCosts.add(10);
+        manaCosts.add(11);
+        manaCosts.add(12);
+        manaCosts.add(14);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
+        cooldowns.add(14);
+        cooldowns.add(13);
+        cooldowns.add(12);
+        cooldowns.add(11);
+        cooldowns.add(10);
         cooldowns.add(8);
 
         Skill skill = new Skill("Hammerblow", 6, Material.IRON_HOE, 46, description, reqLevels, reqPoints, manaCosts, cooldowns);
@@ -148,20 +148,20 @@ public class PaladinSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(12);
+        manaCosts.add(13);
+        manaCosts.add(14);
+        manaCosts.add(15);
+        manaCosts.add(16);
+        manaCosts.add(18);
 
         List<Integer> cooldowns = new ArrayList<>();
+        cooldowns.add(24);
+        cooldowns.add(22);
+        cooldowns.add(20);
+        cooldowns.add(18);
         cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
+        cooldowns.add(14);
 
         Skill skill = new Skill("Heal", 6, Material.IRON_HOE, 37, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -228,20 +228,20 @@ public class PaladinSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(18);
+        manaCosts.add(20);
+        manaCosts.add(22);
+        manaCosts.add(24);
+        manaCosts.add(26);
+        manaCosts.add(28);
 
         List<Integer> cooldowns = new ArrayList<>();
+        cooldowns.add(32);
+        cooldowns.add(30);
+        cooldowns.add(28);
+        cooldowns.add(26);
         cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
+        cooldowns.add(20);
 
         Skill skill = new Skill("Polymorph", 6, Material.IRON_HOE, 55, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -313,37 +313,37 @@ public class PaladinSkills {
         reqPoints.add(5);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(64);
-        cooldowns.add(60);
-        cooldowns.add(56);
-        cooldowns.add(52);
-        cooldowns.add(48);
-        cooldowns.add(44);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
 
         Skill skill = new Skill("Resurrection", 6, Material.IRON_HOE, 35, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(20L * 30);
-        TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(20L * 30);
+        TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(900L);
+        TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(900L);
 
         HealthCondition healthCondition = new HealthCondition(0.0, 0.15);
 
         List<Integer> flagTicks = new ArrayList<>();
-        flagTicks.add(20 * 64);
-        flagTicks.add(20 * 60);
-        flagTicks.add(20 * 56);
-        flagTicks.add(20 * 52);
-        flagTicks.add(20 * 48);
-        flagTicks.add(20 * 44);
+        flagTicks.add(20 * 45);
+        flagTicks.add(20 * 45);
+        flagTicks.add(20 * 45);
+        flagTicks.add(20 * 45);
+        flagTicks.add(20 * 45);
+        flagTicks.add(20 * 45);
         FlagSetMechanic flagSetMechanic = new FlagSetMechanic("passiveCooldown", flagTicks);
         FlagCondition flagCondition = new FlagCondition("passiveCooldown", false);
 
@@ -423,20 +423,20 @@ public class PaladinSkills {
         reqPoints.add(10);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(24);
+        manaCosts.add(26);
+        manaCosts.add(28);
+        manaCosts.add(30);
+        manaCosts.add(32);
+        manaCosts.add(34);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
+        cooldowns.add(52);
+        cooldowns.add(48);
+        cooldowns.add(44);
+        cooldowns.add(40);
+        cooldowns.add(36);
+        cooldowns.add(32);
 
         Skill skill = new Skill("Cosmic Radiance", 6, Material.IRON_HOE, 18, description, reqLevels, reqPoints, manaCosts, cooldowns);
 

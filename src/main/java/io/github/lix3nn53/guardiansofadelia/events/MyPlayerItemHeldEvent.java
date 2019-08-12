@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -68,31 +67,25 @@ public class MyPlayerItemHeldEvent implements Listener {
 
                 //manage new item stats
                 ItemStack item = inventory.getItem(newSlot);
+                if (item == null) return;
+                Material type = item.getType();
+                boolean isWeapon = type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
+                        || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW);
 
-                if (item != null) {
-                    if (StatUtils.doesCharacterMeetRequirements(item, player, rpgClass)) {
-                        Material type = item.getType();
+                if (isWeapon) {
+                    RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+                    boolean meetRequirements = rpgCharacterStats.setMainHandBonuses(item, rpgClass, true);
 
-                        //manage stats on hold
-                        if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
-                                || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
-
-
-                            RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-                            boolean meetRequirements = rpgCharacterStats.setMainHandBonuses(item, rpgClass, true);
-
-                            //manage arrow in offhand
-                            if (type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
-                                if (meetRequirements) {
-                                    ItemStack arrow = OtherItems.getArrow(2);
-                                    inventory.setItemInOffHand(arrow);
-                                }
-                            } else {
-                                ItemStack itemInOffHand = inventory.getItemInOffHand();
-                                if (itemInOffHand.getType().equals(Material.ARROW)) {
-                                    inventory.setItemInOffHand(new ItemStack(Material.AIR));
-                                }
-                            }
+                    //manage arrow in offhand
+                    if (type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
+                        if (meetRequirements) {
+                            ItemStack arrow = OtherItems.getArrow(2);
+                            inventory.setItemInOffHand(arrow);
+                        }
+                    } else {
+                        ItemStack itemInOffHand = inventory.getItemInOffHand();
+                        if (itemInOffHand.getType().equals(Material.ARROW)) {
+                            inventory.setItemInOffHand(new ItemStack(Material.AIR));
                         }
                     }
                 } else {

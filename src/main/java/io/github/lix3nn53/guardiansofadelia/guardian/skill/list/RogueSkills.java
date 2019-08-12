@@ -65,19 +65,19 @@ public class RogueSkills {
         reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(8);
+        manaCosts.add(9);
+        manaCosts.add(10);
+        manaCosts.add(11);
+        manaCosts.add(12);
+        manaCosts.add(14);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
+        cooldowns.add(14);
+        cooldowns.add(13);
+        cooldowns.add(12);
+        cooldowns.add(11);
+        cooldowns.add(10);
         cooldowns.add(8);
 
         Skill skill = new Skill("Claw Swipe", 6, Material.IRON_HOE, 32, description, reqLevels, reqPoints, manaCosts, cooldowns);
@@ -89,21 +89,21 @@ public class RogueSkills {
         FlagCondition phantomCondition2 = new FlagCondition("phantom", true);
 
         List<Double> ranges = new ArrayList<>();
-        ranges.add(2D);
-        ranges.add(2.5D);
         ranges.add(3D);
         ranges.add(3.5D);
         ranges.add(4D);
+        ranges.add(4.5D);
         ranges.add(5D);
+        ranges.add(6D);
         SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
 
         List<Double> ranges2 = new ArrayList<>();
-        ranges2.add(4D);
-        ranges2.add(4.5D);
         ranges2.add(5D);
         ranges2.add(5.5D);
         ranges2.add(6D);
-        ranges2.add(8D);
+        ranges2.add(6.5D);
+        ranges2.add(7D);
+        ranges2.add(9D);
         SingleTarget singleTarget2 = new SingleTarget(false, true, false, 1, ranges2, 4);
 
         DirectionCondition directionCondition = new DirectionCondition(false);
@@ -185,12 +185,12 @@ public class RogueSkills {
         manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
+        cooldowns.add(14);
+        cooldowns.add(13);
+        cooldowns.add(12);
+        cooldowns.add(11);
+        cooldowns.add(10);
+        cooldowns.add(8);
 
         Skill skill = new Skill("Void Dash", 6, Material.IRON_HOE, 10, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -280,20 +280,20 @@ public class RogueSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(18);
+        manaCosts.add(20);
+        manaCosts.add(22);
+        manaCosts.add(24);
+        manaCosts.add(26);
+        manaCosts.add(28);
 
         List<Integer> cooldowns = new ArrayList<>();
+        cooldowns.add(32);
+        cooldowns.add(30);
+        cooldowns.add(28);
+        cooldowns.add(26);
         cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
+        cooldowns.add(20);
 
         Skill skill = new Skill("Shurikens", 6, Material.IRON_HOE, 56, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -380,12 +380,12 @@ public class RogueSkills {
         reqPoints.add(5);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
 
         List<Integer> cooldowns = new ArrayList<>();
         cooldowns.add(1);
@@ -450,20 +450,20 @@ public class RogueSkills {
         reqPoints.add(10);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(24);
+        manaCosts.add(26);
+        manaCosts.add(28);
+        manaCosts.add(30);
+        manaCosts.add(32);
+        manaCosts.add(34);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
+        cooldowns.add(52);
+        cooldowns.add(48);
+        cooldowns.add(44);
+        cooldowns.add(40);
+        cooldowns.add(36);
+        cooldowns.add(32);
 
         Skill skill = new Skill("Phantom Assassin", 6, Material.IRON_HOE, 45, description, reqLevels, reqPoints, manaCosts, cooldowns);
 

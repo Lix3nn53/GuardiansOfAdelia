@@ -56,19 +56,19 @@ public class KnightSkills {
         reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(8);
+        manaCosts.add(9);
+        manaCosts.add(10);
+        manaCosts.add(11);
+        manaCosts.add(12);
+        manaCosts.add(14);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
+        cooldowns.add(14);
+        cooldowns.add(13);
+        cooldowns.add(12);
+        cooldowns.add(11);
+        cooldowns.add(10);
         cooldowns.add(8);
 
         Skill skill = new Skill("Slice and Dice", 6, Material.IRON_HOE, 9, description, reqLevels, reqPoints, manaCosts, cooldowns);
@@ -145,20 +145,20 @@ public class KnightSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(12);
+        manaCosts.add(13);
+        manaCosts.add(14);
+        manaCosts.add(15);
+        manaCosts.add(16);
+        manaCosts.add(18);
 
         List<Integer> cooldowns = new ArrayList<>();
+        cooldowns.add(24);
+        cooldowns.add(22);
+        cooldowns.add(20);
+        cooldowns.add(18);
         cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
+        cooldowns.add(14);
 
         Skill skill = new Skill("Devastate", 6, Material.IRON_HOE, 1, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -232,20 +232,20 @@ public class KnightSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(24);
+        manaCosts.add(26);
+        manaCosts.add(28);
+        manaCosts.add(30);
+        manaCosts.add(32);
+        manaCosts.add(34);
 
         List<Integer> cooldowns = new ArrayList<>();
+        cooldowns.add(32);
+        cooldowns.add(30);
+        cooldowns.add(28);
+        cooldowns.add(26);
         cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
+        cooldowns.add(20);
 
         Skill skill = new Skill("Battle Cry", 6, Material.IRON_HOE, 47, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -308,26 +308,26 @@ public class KnightSkills {
         reqPoints.add(5);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(48);
-        cooldowns.add(48);
-        cooldowns.add(48);
-        cooldowns.add(48);
-        cooldowns.add(48);
-        cooldowns.add(48);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
 
         Skill skill = new Skill("Spell Block", 6, Material.IRON_HOE, 23, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(20L * 48);
+        TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(900L);
 
         List<Integer> ccTicks = new ArrayList<>();
         ccTicks.add(50);
@@ -370,20 +370,20 @@ public class KnightSkills {
         reqPoints.add(10);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(24);
+        manaCosts.add(26);
+        manaCosts.add(28);
+        manaCosts.add(30);
+        manaCosts.add(32);
+        manaCosts.add(34);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
+        cooldowns.add(52);
+        cooldowns.add(48);
+        cooldowns.add(44);
+        cooldowns.add(40);
+        cooldowns.add(36);
+        cooldowns.add(32);
 
         Skill skill = new Skill("Shield of the Heavens", 6, Material.IRON_HOE, 54, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -391,23 +391,23 @@ public class KnightSkills {
 
         //Add HologramMechanic to SelfTarget's children
         List<Integer> seconds = new ArrayList<>();
-        seconds.add(24);
-        seconds.add(27);
         seconds.add(30);
-        seconds.add(33);
-        seconds.add(36);
-        seconds.add(42);
+        seconds.add(30);
+        seconds.add(30);
+        seconds.add(30);
+        seconds.add(30);
+        seconds.add(30);
         HologramMechanic hologramMechanic = new HologramMechanic(Material.DIAMOND_SWORD, 10000005, seconds);
         HologramMechanic hologramMechanic2 = new HologramMechanic(Material.SHIELD, 10000004, seconds, ChatColor.YELLOW + "< Shield-of-the-Heavens %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
         List<Integer> repetitions = new ArrayList<>();
-        repetitions.add(8);
-        repetitions.add(9);
         repetitions.add(10);
-        repetitions.add(11);
-        repetitions.add(12);
-        repetitions.add(14);
+        repetitions.add(10);
+        repetitions.add(10);
+        repetitions.add(10);
+        repetitions.add(10);
+        repetitions.add(10);
         RepeatMechanic repeatMechanic = new RepeatMechanic(60L, repetitions);
 
         //Add areaTarget to repeatMechanic's children

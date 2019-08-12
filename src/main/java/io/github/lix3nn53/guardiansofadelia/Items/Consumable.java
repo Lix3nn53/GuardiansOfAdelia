@@ -153,30 +153,30 @@ public enum Consumable {
                 break;
             case POTION_INSTANT_HEALTH:
                 List<Integer> amounts = new ArrayList<>();
+                amounts.add(80);
                 amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
+                amounts.add(500);
+                amounts.add(800);
+                amounts.add(1200);
+                amounts.add(1700);
+                amounts.add(2400);
+                amounts.add(3000);
+                amounts.add(3400);
+                amounts.add(4000);
                 list.add(new HealMechanic(amounts, new ArrayList<>()));
                 break;
             case POTION_INSTANT_MANA:
                 amounts = new ArrayList<>();
+                amounts.add(40);
+                amounts.add(60);
+                amounts.add(80);
+                amounts.add(100);
+                amounts.add(120);
+                amounts.add(140);
+                amounts.add(160);
+                amounts.add(180);
                 amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
-                amounts.add(200);
+                amounts.add(240);
                 list.add(new ManaMechanic(amounts, new ArrayList<>()));
                 break;
             case POTION_INSTANT_HYBRID:

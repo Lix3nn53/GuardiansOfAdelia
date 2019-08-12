@@ -29,7 +29,7 @@ public class MainStoryQuests {
         story.add("with meeting villagers in Roumen.");
         List<Task> tasks = new ArrayList<>();
 
-        Task task = new TaskInteract(17);
+        Task task = new TaskInteract(8);
         ItemStack boat = OtherItems.getBoat();
         GiveItemAction giveItemAction = new GiveItemAction(boat);
         SendTitleAction sendTitleAction = new SendTitleAction("", ChatColor.GREEN + "Obtained Boat");
@@ -37,14 +37,14 @@ public class MainStoryQuests {
         task.addOnCompleteAction(sendTitleAction);
         tasks.add(task);
 
-        Task task1 = new TaskInteract(14);
+        Task task1 = new TaskInteract(13);
         GiveWeaponAction giveWeaponAction = new GiveWeaponAction(1, ItemTier.RARE, "Newbie", 1, 5, 2);
         SendTitleAction sendTitleAction1 = new SendTitleAction("", ChatColor.GREEN + "Obtained Weapon");
         task1.addOnCompleteAction(giveWeaponAction);
         task1.addOnCompleteAction(sendTitleAction1);
         tasks.add(task1);
 
-        Task task2 = new TaskInteract(16);
+        Task task2 = new TaskInteract(22);
         ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(1, 3);
         hpPotion.setAmount(10);
         ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(1, 3);

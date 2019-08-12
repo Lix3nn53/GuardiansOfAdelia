@@ -66,19 +66,19 @@ public class HunterSkills {
         reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(8);
+        manaCosts.add(9);
+        manaCosts.add(10);
+        manaCosts.add(11);
+        manaCosts.add(12);
+        manaCosts.add(14);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
+        cooldowns.add(14);
+        cooldowns.add(13);
+        cooldowns.add(12);
+        cooldowns.add(11);
+        cooldowns.add(10);
         cooldowns.add(8);
 
         Skill skill = new Skill("Explosive Arrow", 6, Material.IRON_HOE, 20, description, reqLevels, reqPoints, manaCosts, cooldowns);
@@ -156,20 +156,20 @@ public class HunterSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(12);
+        manaCosts.add(13);
+        manaCosts.add(14);
+        manaCosts.add(15);
+        manaCosts.add(16);
+        manaCosts.add(18);
 
         List<Integer> cooldowns = new ArrayList<>();
+        cooldowns.add(24);
+        cooldowns.add(22);
+        cooldowns.add(20);
+        cooldowns.add(18);
         cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
+        cooldowns.add(14);
 
         Skill skill = new Skill("Volley", 6, Material.IRON_HOE, 22, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -229,20 +229,20 @@ public class HunterSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(24);
+        manaCosts.add(26);
+        manaCosts.add(28);
+        manaCosts.add(30);
+        manaCosts.add(32);
+        manaCosts.add(34);
 
         List<Integer> cooldowns = new ArrayList<>();
+        cooldowns.add(32);
+        cooldowns.add(30);
+        cooldowns.add(28);
+        cooldowns.add(26);
         cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
-        cooldowns.add(24);
+        cooldowns.add(20);
 
         Skill skill = new Skill("Hookshot", 6, Material.IRON_HOE, 32, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -310,20 +310,20 @@ public class HunterSkills {
         reqPoints.add(5);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
 
         Skill skill = new Skill("Piercing Arrow", 6, Material.IRON_HOE, 21, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -367,20 +367,20 @@ public class HunterSkills {
         reqPoints.add(10);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(24);
+        manaCosts.add(26);
+        manaCosts.add(28);
+        manaCosts.add(30);
+        manaCosts.add(32);
+        manaCosts.add(34);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
+        cooldowns.add(52);
+        cooldowns.add(48);
+        cooldowns.add(44);
+        cooldowns.add(40);
+        cooldowns.add(36);
+        cooldowns.add(32);
 
         Skill skill = new Skill("Bear Trap", 6, Material.IRON_HOE, 55, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -388,22 +388,22 @@ public class HunterSkills {
 
         //Add HologramMechanic to SelfTarget's children
         List<Integer> seconds = new ArrayList<>();
-        seconds.add(30);
-        seconds.add(40);
-        seconds.add(50);
         seconds.add(60);
         seconds.add(70);
+        seconds.add(80);
         seconds.add(90);
+        seconds.add(100);
+        seconds.add(120);
         HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000005, seconds, ChatColor.DARK_GRAY + "< Trap %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
         List<Integer> repetitions = new ArrayList<>();
-        repetitions.add(60);
-        repetitions.add(80);
-        repetitions.add(100);
         repetitions.add(120);
         repetitions.add(140);
+        repetitions.add(160);
         repetitions.add(180);
+        repetitions.add(200);
+        repetitions.add(240);
         RepeatMechanic repeatMechanic = new RepeatMechanic(10L, repetitions);
 
         //Add areaTarget to repeatMechanic's children

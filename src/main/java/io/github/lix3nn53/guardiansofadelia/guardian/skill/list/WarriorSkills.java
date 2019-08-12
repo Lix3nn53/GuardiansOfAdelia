@@ -64,19 +64,19 @@ public class WarriorSkills {
         reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(8);
+        manaCosts.add(9);
+        manaCosts.add(10);
+        manaCosts.add(11);
+        manaCosts.add(12);
+        manaCosts.add(14);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
+        cooldowns.add(14);
+        cooldowns.add(13);
+        cooldowns.add(12);
+        cooldowns.add(11);
+        cooldowns.add(10);
         cooldowns.add(8);
 
         Skill skill = new Skill("Power Slash", 6, Material.IRON_HOE, 15, description, reqLevels, reqPoints, manaCosts, cooldowns);
@@ -138,20 +138,20 @@ public class WarriorSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(12);
+        manaCosts.add(13);
+        manaCosts.add(14);
+        manaCosts.add(15);
+        manaCosts.add(16);
+        manaCosts.add(18);
 
         List<Integer> cooldowns = new ArrayList<>();
+        cooldowns.add(24);
+        cooldowns.add(22);
+        cooldowns.add(20);
+        cooldowns.add(18);
         cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
-        cooldowns.add(16);
+        cooldowns.add(14);
 
         Skill skill = new Skill("Flame Burst", 6, Material.IRON_HOE, 57, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -236,20 +236,20 @@ public class WarriorSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(24);
+        manaCosts.add(26);
+        manaCosts.add(28);
+        manaCosts.add(30);
+        manaCosts.add(32);
+        manaCosts.add(34);
 
         List<Integer> cooldowns = new ArrayList<>();
         cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
+        cooldowns.add(60);
+        cooldowns.add(26);
+        cooldowns.add(52);
+        cooldowns.add(48);
+        cooldowns.add(44);
 
         Skill skill = new Skill("Victory Flag", 6, Material.IRON_HOE, 9, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -341,36 +341,36 @@ public class WarriorSkills {
         reqPoints.add(5);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
+        manaCosts.add(0);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
+        cooldowns.add(45);
 
         Skill skill = new Skill("Death Rattle", 6, Material.IRON_HOE, 47, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(20L * 30);
+        TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(900L);
 
         HealthCondition healthCondition = new HealthCondition(0.0, 0.15);
 
         List<Integer> ticks = new ArrayList<>();
+        ticks.add(120);
         ticks.add(160);
-        ticks.add(180);
         ticks.add(200);
-        ticks.add(220);
         ticks.add(240);
         ticks.add(280);
+        ticks.add(300);
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(2);
         amplifiers.add(3);
@@ -422,20 +422,20 @@ public class WarriorSkills {
         reqPoints.add(10);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
-        manaCosts.add(5);
+        manaCosts.add(24);
+        manaCosts.add(26);
+        manaCosts.add(28);
+        manaCosts.add(30);
+        manaCosts.add(32);
+        manaCosts.add(34);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
-        cooldowns.add(64);
+        cooldowns.add(52);
+        cooldowns.add(48);
+        cooldowns.add(44);
+        cooldowns.add(40);
+        cooldowns.add(36);
+        cooldowns.add(32);
 
         Skill skill = new Skill("Grand Skyfall", 6, Material.IRON_HOE, 44, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
