@@ -17,13 +17,11 @@ depend:
 commands:
   lix:
     description: Admin command
-    aliases:
-      - l
     permission: guardian.admin
     permission-message: You do not have permission!
-  lixskill:
-    description: Admin command utility for skills
-    permission: guardian.admin
+  spawner:
+    description: Spawner command
+    permission: guardian.spawner
     permission-message: You do not have permission!
   guild:
     description: Guild command

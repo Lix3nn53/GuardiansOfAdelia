@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.database.ConnectionPool;
@@ -59,7 +60,7 @@ public class ConfigManager {
     }
 
     public static void writeConfigALL() {
-
+        writeSpawners();
     }
 
     private static void createDatabaseConfig() {
@@ -115,10 +116,11 @@ public class ConfigManager {
             double y = spawnersConfig.getDouble("Spawners.s" + i + ".y");
             double z = spawnersConfig.getDouble("Spawners.s" + i + ".z");
             Location location = new Location(world, x, y, z);
-            String mobCode = spawnersConfig.getString("Spawners.s" + i + ".mob");
+            String adeliaEntityString = spawnersConfig.getString("Spawners.s" + i + ".mob");
+            AdeliaEntity adeliaEntity = AdeliaEntity.valueOf(adeliaEntityString);
             int amount = spawnersConfig.getInt("Spawners.s" + i + ".amount");
             int maxamount = spawnersConfig.getInt("Spawners.s" + i + ".maxamount");
-            Spawner spawner = new Spawner(location, mobCode, amount, maxamount);
+            Spawner spawner = new Spawner(location, adeliaEntity, amount, maxamount);
             SpawnerManager.addSpawner(spawner);
         }
     }
@@ -131,7 +133,7 @@ public class ConfigManager {
             spawnersConfig.set("Spawners.s" + i + ".y", spawner.getLocation().getY());
             spawnersConfig.set("Spawners.s" + i + ".z", spawner.getLocation().getZ());
             spawnersConfig.set("Spawners.s" + i + ".world", spawner.getLocation().getWorld().getName());
-            spawnersConfig.set("Spawners.s" + i + ".mob", spawner.getMobCode());
+            spawnersConfig.set("Spawners.s" + i + ".mob", spawner.getAdeliaEntity());
             spawnersConfig.set("Spawners.s" + i + ".amount", spawner.getAmountPerSpawn());
             spawnersConfig.set("Spawners.s" + i + ".maxamount", spawner.getMaxAmount());
         }

@@ -8,15 +8,12 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class SpawnerManager {
     private static HashMap<Entity, Spawner> mobToSpawner = new HashMap<>();
     private static HashMap<String, List<Spawner>> chunkKeyToSpawners = new HashMap<>();
-    private static List<Spawner> activeSpawners = new ArrayList<>();
+    private static Set<Spawner> activeSpawners = new HashSet<>();
 
     static void onSpawnerMobSpawn(Entity entity, Spawner spawner) {
         mobToSpawner.put(entity, spawner);
@@ -81,9 +78,10 @@ public class SpawnerManager {
                     }
                 }
 
+                List<Spawner> activeSpawnerList = new ArrayList<>(activeSpawners);
                 int howManyEachTime = 50;
-                for (int i = 0; i < activeSpawners.size(); i += howManyEachTime) {
-                    List<Spawner> sub = activeSpawners.subList(i, Math.min(activeSpawners.size(), i + howManyEachTime));
+                for (int i = 0; i < activeSpawnerList.size(); i += howManyEachTime) {
+                    List<Spawner> sub = activeSpawnerList.subList(i, Math.min(activeSpawnerList.size(), i + howManyEachTime));
 
                     if (i > 0) {
                         new BukkitRunnable() {

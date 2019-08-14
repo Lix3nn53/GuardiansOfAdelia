@@ -6,6 +6,8 @@ import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.events.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
@@ -19,6 +21,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -101,6 +104,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         this.getCommand("party").setExecutor(new CommandParty());
         this.getCommand("minigame").setExecutor(new CommandMinigame());
         this.getCommand("job").setExecutor(new CommandJob());
+        this.getCommand("spawner").setExecutor(new CommandSpawner());
 
         for (World w : Bukkit.getServer().getWorlds()) {
             w.setDifficulty(Difficulty.HARD);
@@ -135,6 +139,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
 
         DatabaseManager.createTables();
 
+        //save loop
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -154,6 +159,8 @@ public class GuardiansOfAdelia extends JavaPlugin {
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 60 * 5L, 20 * 60 * 5L);
 
+        startGlobalRegen(); //health & mana regen loop
+
         //DELAYED TASKS
         new BukkitRunnable() {
             @Override
@@ -171,5 +178,47 @@ public class GuardiansOfAdelia extends JavaPlugin {
     public void onDisable() {
         DatabaseManager.onDisable();
         ConfigManager.writeConfigALL();
+    }
+
+    private void startGlobalRegen() {
+        double healPercent = 0.05;
+        double manaPercent = 0.05;
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+                for (Player player : onlinePlayers) {
+                    UUID uuid = player.getUniqueId();
+                    if (GuardianDataManager.hasGuardianData(uuid)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                        if (guardianData.hasActiveCharacter()) {
+                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                            RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+
+                            double currentMana = rpgCharacterStats.getCurrentMana();
+                            double maxMana = rpgCharacterStats.getTotalMaxMana();
+                            if (currentMana < maxMana) {
+                                double nextMana = currentMana + (maxMana * manaPercent);
+                                if (nextMana > maxMana) {
+                                    nextMana = maxMana;
+                                }
+                                rpgCharacterStats.setCurrentMana((int) nextMana);
+                            }
+
+                            double currentHealth = player.getHealth();
+                            double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+                            if (currentHealth < maxMana) {
+                                double nextHealth = currentHealth + (maxHealth * healPercent);
+                                if (nextHealth > maxHealth) {
+                                    nextHealth = maxHealth;
+                                }
+                                player.setHealth(nextHealth);
+                            }
+                        }
+                    }
+                }
+            }
+        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 100L, 160L);
     }
 }

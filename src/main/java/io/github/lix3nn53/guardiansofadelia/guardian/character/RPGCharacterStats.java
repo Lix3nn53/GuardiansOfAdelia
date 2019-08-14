@@ -107,7 +107,6 @@ public class RPGCharacterStats {
         if (player.getLevel() >= 90) return; //last level is 90
 
         int currentLevel = RPGCharacterExperienceManager.getLevel(this.totalExp);
-        player.sendMessage("currentLevel: " + currentLevel);
 
         this.totalExp += give;
 
@@ -122,13 +121,9 @@ public class RPGCharacterStats {
             onMaxHealthChange();
         }
 
-        player.sendMessage("currentLevel-2: " + currentLevel);
         float requiredExperience = RPGCharacterExperienceManager.getRequiredExperience(currentLevel);
-        player.sendMessage("requiredExperience: " + requiredExperience);
         float currentExperience = RPGCharacterExperienceManager.getCurrentExperience(this.totalExp, currentLevel);
-        player.sendMessage("currentExperience: " + currentExperience);
         float percentage = currentExperience / requiredExperience;
-        player.sendMessage("percentage: " + percentage);
         player.setExp(percentage);
     }
 

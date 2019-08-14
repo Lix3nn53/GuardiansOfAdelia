@@ -1,20 +1,20 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.spawners;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.EntityList;
+import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
 public class Spawner {
 
     private final Location location;
-    private final String mobCode;
+    private final AdeliaEntity adeliaEntity;
     private final int amountPerSpawn;
     private final int maxAmount;
     private int spawnedEntityAmount = 0;
 
-    public Spawner(Location location, String mobCode, int amountPerSpawn, int maxAmount) {
+    public Spawner(Location location, AdeliaEntity adeliaEntity, int amountPerSpawn, int maxAmount) {
         this.location = location;
-        this.mobCode = mobCode;
+        this.adeliaEntity = adeliaEntity;
         this.amountPerSpawn = amountPerSpawn;
         this.maxAmount = maxAmount;
     }
@@ -22,7 +22,7 @@ public class Spawner {
     public void spawn() {
         for (int i = 0; i < amountPerSpawn; i++) {
             if (spawnedEntityAmount < maxAmount) {
-                Entity entity = EntityList.getMob(location, mobCode);
+                Entity entity = adeliaEntity.getMob(location);
                 spawnedEntityAmount++;
                 SpawnerManager.onSpawnerMobSpawn(entity, this);
             }
@@ -33,8 +33,8 @@ public class Spawner {
         spawnedEntityAmount--;
     }
 
-    public String getMobCode() {
-        return mobCode;
+    public AdeliaEntity getAdeliaEntity() {
+        return adeliaEntity;
     }
 
     public Location getLocation() {
