@@ -119,8 +119,11 @@ public class MageSkills {
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
-        description.add(ChatColor.GRAY + "Shoot a lightning bolt that deals damage and");
-        description.add(ChatColor.GRAY + "silences targets in area if it hits a target.");
+        description.add(ChatColor.GRAY + "Shoot a lightning bolt that deals damage, silences");
+        description.add(ChatColor.GRAY + "and confuses targets in area if it hits a target.");
+        description.add(ChatColor.GRAY + "");
+        description.add(ChatColor.AQUA + "Silence: " + ChatColor.GRAY + "Target can not cast skills");
+        description.add(ChatColor.DARK_PURPLE + "Confusion: " + ChatColor.GRAY + "Target's screen shakes");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(5);
@@ -194,6 +197,14 @@ public class MageSkills {
         durations.add(80);
         durations.add(100);
         areaTarget.addChildren(new SilenceMechanic(durations));
+        List<Integer> ccAmplifiers = new ArrayList<>();
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
+        ccAmplifiers.add(999);
+        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.CONFUSION, durations, ccAmplifiers));
 
         projectileMechanic.addChildren(areaTarget);
         projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_FLUX));

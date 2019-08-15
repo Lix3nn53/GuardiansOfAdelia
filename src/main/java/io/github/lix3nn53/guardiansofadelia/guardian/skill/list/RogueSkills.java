@@ -266,7 +266,7 @@ public class RogueSkills {
 
     private static Skill getThree() {
         List<String> description = new ArrayList<>();
-        description.add(ChatColor.GRAY + "Throw shurikens one by one");
+        description.add(ChatColor.GRAY + "Throw shrunkens one by one");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(10);
@@ -300,7 +300,7 @@ public class RogueSkills {
         cooldowns.add(24);
         cooldowns.add(20);
 
-        Skill skill = new Skill("Shurikens", 6, Material.IRON_HOE, 56, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill("Shrunkens", 6, Material.IRON_HOE, 56, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         List<Integer> repetitions = new ArrayList<>();
         repetitions.add(2);

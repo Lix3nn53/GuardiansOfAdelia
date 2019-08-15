@@ -3,15 +3,12 @@ package io.github.lix3nn53.guardiansofadelia.creatures;
 import io.github.lix3nn53.guardiansofadelia.Items.list.MonsterItem;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -39,8 +36,6 @@ public enum AdeliaEntity {
     //AREA-1
     LIZARD,
     LIZARD_POISONOUS,
-    TURTLE,
-    TURTLE_WATER,
     SLIME,
     SLIME_STICKY,
     //AREA-2
@@ -51,43 +46,44 @@ public enum AdeliaEntity {
     ZOMBIE_TANK,
     //AREA-3
     SKELETON_ARCHER,
-    SKELETON_WARRIOR,
+    SKELETON_FIGHTER,
+    SKELETON_ROGUE,
     SKELETON_MONK,
     SKELETON_MAGE,
     //AREA-4
     CREEPER,
     VEX,
-    EVOKER,
     SHULKER,
-    PHANTOM,
+    JELLYBEAN,
     //AREA-5
     PIRATE_SHOOTER,
     PIRATE_FIGHTER,
     PIRATE_SHARPSHOOTER,
     PIRATE_DUEL_MASTER,
     PIRATE_DROWNED,
-    PIRATE_DROWNED_JOCKEY,
     //AREA-6
-    NINJA,
+    NINJA_ROGUE,
     NINJA_SWORD_MASTER,
     NINJA_ARCHER,
-    NINJA_STAR,
+    NINJA_SHURINKEN,
     ZOMBIE_JOCKEY,
     TIMBERMAN,
     //AREA-7
     MUMMY,
     MUMMY_GHOST,
-    CAVALRY_SKELETON,
-    CAVALRY_SKELETON_ARCHER,
+    DESERT_SKELETON_CAVALRY,
+    DESERT_SKELETON_ARCHER,
     SPIDER,
+    SPIDER_GHOST,
     //AREA-8
     WITCH,
-    GOBLIN,
+    GOBLIN_ROGUE,
+    GOBLIN_FIGHTER,
     GOBLIN_MAGE,
     GOBLIN_JOCKEY,
     GOBLIN_SHAMAN,
     //AREA-9
-    ORC,
+    ORC_FIGHTER,
     ORC_MAGE,
     ORC_JOCKEY,
     ORC_SHAMAN,
@@ -96,12 +92,12 @@ public enum AdeliaEntity {
     BLAZE,
     //AREA-10
     ENDERMAN,
-    ILLUSIONER,
-    PILLAGER,
-    PILLAGER_HUNTER,
+    PHANTOM,
+    PILLAGER_ROGUE,
+    PILLAGER_MAGE,
     PILLAGER_RAVAGER,
     PILLAGER_SHAMAN,
-    PILLAGER_WARRIOR,
+    PILLAGER_FIGHTER,
     //DUNGEON-BOSSES
     BOSS_SLIME,
     BOSS_ZOMBIE,
@@ -193,29 +189,23 @@ public enum AdeliaEntity {
         } else if (this.equals(VILLAGER_SAILOR)) {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.AQUA + "Sailor", 100000D, EntityType.VILLAGER);
             entity.setAdult();
-            Villager.Profession[] values = Villager.Profession.values();
-            int i = new Random().nextInt(values.length);
-            Villager.Profession value = values[i];
-            entity.setProfession(value);
+            entity.setProfession(Villager.Profession.WEAPONSMITH);
             entity.setVillagerLevel(2);
             return entity;
         } else if (this.equals(VILLAGER_FARMER)) {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.YELLOW + "Farmer", 80000D, EntityType.VILLAGER);
             entity.setAdult();
-            Villager.Profession[] values = Villager.Profession.values();
-            int i = new Random().nextInt(values.length);
-            Villager.Profession value = values[i];
-            entity.setProfession(value);
+            entity.setProfession(Villager.Profession.FARMER);
             entity.setVillagerLevel(2);
             return entity;
         } else if (this.equals(TUTORIAL_1)) {
-            WitherSkeleton entity = (WitherSkeleton) EntityUtils.create(loc, ChatColor.RED + "Malephar's Cavalry", 1800D, EntityType.WITHER_SKELETON);
+            WitherSkeleton entity = (WitherSkeleton) EntityUtils.create(loc, ChatColor.RED + "Malephar's Soldier", 1800D, EntityType.WITHER_SKELETON);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(120D);
             ItemStack sword = MonsterItem.SWORD_DARK.getItem(0);
             entity.getEquipment().setItemInMainHand(sword);
             return entity;
         } else if (this.equals(TUTORIAL_2)) {
-            Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Malephar's Guard", 1200D, EntityType.STRAY);
+            Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Malephar's Ranger", 1200D, EntityType.STRAY);
             ItemStack bow = MonsterItem.BOW_DARK.getItem(500);
             entity.getEquipment().setItemInMainHand(bow);
             return entity;
@@ -259,20 +249,6 @@ public enum AdeliaEntity {
             Silverfish entity = (Silverfish) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Poisonous Lizard", 30D, EntityType.SILVERFISH);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(6D);
             setEntityExperience(entity, 2);
-            setEntityDropTableNo(entity, 0);
-            return entity;
-        } else if (this.equals(TURTLE)) {
-            Endermite entity = (Endermite) EntityUtils.create(loc, ChatColor.GREEN + "Wild Turtle", 30D, EntityType.ENDERMITE);
-            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(6D);
-            entity.setSilent(true);
-            setEntityExperience(entity, 3);
-            setEntityDropTableNo(entity, 0);
-            return entity;
-        } else if (this.equals(TURTLE_WATER)) {
-            Endermite entity = (Endermite) EntityUtils.create(loc, ChatColor.AQUA + "Water Turtle", 40D, EntityType.ENDERMITE);
-            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(6D);
-            entity.setSilent(true);
-            setEntityExperience(entity, 3);
             setEntityDropTableNo(entity, 0);
             return entity;
         } else if (this.equals(SLIME)) {
@@ -330,7 +306,7 @@ public enum AdeliaEntity {
             setEntityDropTableNo(entity, 1);
             return entity;
         } else if (this.equals(ZOMBIE_TANK)) {
-            Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Zomtank", 150D, EntityType.ZOMBIE);
+            Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Tank Zombie", 150D, EntityType.ZOMBIE);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(20D);
             entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.15D);
             entity.setBaby(false);
@@ -348,8 +324,8 @@ public enum AdeliaEntity {
             setEntityExperience(entity, 53);
             setEntityDropTableNo(entity, 2);
             return entity;
-        } else if (this.equals(SKELETON_WARRIOR)) {
-            Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.WHITE + "Warrior Skeleton", 280D, EntityType.SKELETON);
+        } else if (this.equals(SKELETON_FIGHTER)) {
+            Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.WHITE + "Fighter Skeleton", 280D, EntityType.SKELETON);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(60D);
             entity.getEquipment().clear();
             ItemStack sword = MonsterItem.SWORD_WOODEN.getItem(0);
@@ -357,8 +333,18 @@ public enum AdeliaEntity {
             setEntityExperience(entity, 53);
             setEntityDropTableNo(entity, 2);
             return entity;
+        } else if (this.equals(SKELETON_ROGUE)) {
+            Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.WHITE + "Rogue Skeleton", 280D, EntityType.SKELETON);
+            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(60D);
+            entity.getEquipment().clear();
+            ItemStack sword = MonsterItem.DAGGER_WOOD.getItem(0);
+            entity.getEquipment().setItemInMainHand(sword);
+            entity.getEquipment().setItemInOffHand(sword);
+            setEntityExperience(entity, 53);
+            setEntityDropTableNo(entity, 2);
+            return entity;
         } else if (this.equals(SKELETON_MONK)) {
-            Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.WHITE + "Hunter Skeleton", 260D, EntityType.SKELETON);
+            Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.WHITE + "Monk Skeleton", 260D, EntityType.SKELETON);
             entity.getEquipment().clear();
             ItemStack bow = MonsterItem.SPEAR_STEEL.getItem(0);
             entity.getEquipment().setItemInMainHand(bow);
@@ -378,29 +364,25 @@ public enum AdeliaEntity {
             setEntityExperience(entity, 68);
             setEntityDropTableNo(entity, 2);
             return entity;
-        } else if (this.equals(SHULKER)) {
-            Shulker entity = (Shulker) EntityUtils.create(loc, ChatColor.LIGHT_PURPLE + "Strawberry Jellybeans", 500D, EntityType.SHULKER);
-            setEntityExperience(entity, 142);
-            setEntityDropTableNo(entity, 3);
-            return entity;
-        } else if (this.equals(EVOKER)) {
-            Evoker entity = (Evoker) EntityUtils.create(loc, ChatColor.YELLOW + "Chocolate Cupcake", 680D, EntityType.EVOKER);
-            setEntityExperience(entity, 148);
-            setEntityDropTableNo(entity, 3);
-            return entity;
         } else if (this.equals(CREEPER)) {
             Creeper entity = (Creeper) EntityUtils.create(loc, ChatColor.AQUA + "Popping Rainbow", 620D, EntityType.CREEPER);
             entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3D);
             setEntityExperience(entity, 153);
             setEntityDropTableNo(entity, 3);
             return entity;
-        } else if (this.equals(ILLUSIONER)) {
-            Illusioner entity = (Illusioner) EntityUtils.create(loc, ChatColor.LIGHT_PURPLE + "IceCream", 720D, EntityType.ILLUSIONER);
+        } else if (this.equals(VEX)) {
+            Vex entity = (Vex) EntityUtils.create(loc, ChatColor.LIGHT_PURPLE + "Taffy Spirit", 720D, EntityType.VEX);
+            entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.4D);
             setEntityExperience(entity, 164);
             setEntityDropTableNo(entity, 3);
             return entity;
-        } else if (this.equals(PHANTOM)) {
-            Phantom entity = (Phantom) EntityUtils.create(loc, ChatColor.LIGHT_PURPLE + "IceCream", 720D, EntityType.PHANTOM);
+        } else if (this.equals(SHULKER)) {
+            Shulker entity = (Shulker) EntityUtils.create(loc, ChatColor.LIGHT_PURPLE + "Candy Box", 500D, EntityType.SHULKER);
+            setEntityExperience(entity, 142);
+            setEntityDropTableNo(entity, 3);
+            return entity;
+        } else if (this.equals(JELLYBEAN)) {
+            Endermite entity = (Endermite) EntityUtils.create(loc, ChatColor.LIGHT_PURPLE + "Jellybean", 720D, EntityType.ENDERMITE);
             entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.4D);
             setEntityExperience(entity, 164);
             setEntityDropTableNo(entity, 3);
@@ -448,7 +430,7 @@ public enum AdeliaEntity {
             setEntityDropTableNo(entity, 4);
             return entity;
         } else if (this.equals(PIRATE_DROWNED)) {
-            Drowned entity = (Drowned) EntityUtils.create(loc, ChatColor.DARK_AQUA + "Duel Master Pirate", 1200D, EntityType.DROWNED);
+            Drowned entity = (Drowned) EntityUtils.create(loc, ChatColor.DARK_AQUA + "Drowned Pirate", 1200D, EntityType.DROWNED);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(260D);
             entity.getEquipment().clear();
             ItemStack sword = MonsterItem.SPEAR_STEEL.getItem(400);
@@ -456,23 +438,8 @@ public enum AdeliaEntity {
             setEntityExperience(entity, 282);
             setEntityDropTableNo(entity, 4);
             return entity;
-        } else if (this.equals(PIRATE_DROWNED_JOCKEY)) {
-            Drowned entity = (Drowned) EntityUtils.create(loc, ChatColor.DARK_AQUA + "Duel Master Pirate", 1200D, EntityType.DROWNED);
-            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(260D);
-            entity.getEquipment().clear();
-            ItemStack sword = MonsterItem.SPEAR_STEEL.getItem(400);
-            entity.getEquipment().setItemInMainHand(sword);
-            entity.setBaby(true);
-
-            Chicken mount = (Chicken) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Zombie Chicken", 700D, EntityType.CHICKEN);
-            mount.addPassenger(entity);
-
-            setEntityExperience(mount, 253);
-            setEntityExperience(entity, 282);
-            setEntityDropTableNo(entity, 4);
-            return entity;
-        } else if (this.equals(NINJA_STAR)) {
-            Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Star Rogue", 1500D, EntityType.STRAY);
+        } else if (this.equals(NINJA_SHURINKEN)) {
+            Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Shrunken Ninja", 1500D, EntityType.STRAY);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(380D);
             entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2D);
             entity.getEquipment().clear();
@@ -481,8 +448,8 @@ public enum AdeliaEntity {
             setEntityExperience(entity, 420);
             setEntityDropTableNo(entity, 5);
             return entity;
-        } else if (this.equals(NINJA)) {
-            Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Rogue", 1500D, EntityType.STRAY);
+        } else if (this.equals(NINJA_ROGUE)) {
+            Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Ninja", 1500D, EntityType.STRAY);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(380D);
             entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3D);
             entity.getEquipment().clear();
@@ -493,7 +460,7 @@ public enum AdeliaEntity {
             setEntityDropTableNo(entity, 5);
             return entity;
         } else if (this.equals(NINJA_ARCHER)) {
-            Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Archer Rogue", 1500D, EntityType.STRAY);
+            Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Ranger Ninja", 1500D, EntityType.STRAY);
             entity.getEquipment().clear();
             ItemStack bow = MonsterItem.BOW_DARK.getItem(350);
             entity.getEquipment().setItemInMainHand(bow);
@@ -540,8 +507,8 @@ public enum AdeliaEntity {
             setEntityExperience(entity, 584);
             setEntityDropTableNo(entity, 6);
             return entity;
-        } else if (this.equals(CAVALRY_SKELETON_ARCHER)) {
-            Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.YELLOW + "Cavalry Archer Skeleton", 1800D, EntityType.SKELETON);
+        } else if (this.equals(DESERT_SKELETON_ARCHER)) {
+            Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.YELLOW + "Desert Archer Skeleton", 1800D, EntityType.SKELETON);
             entity.getEquipment().clear();
             ItemStack bow = MonsterItem.BOW_SATET.getItem(600);
             entity.getEquipment().setItemInMainHand(bow);
@@ -553,8 +520,8 @@ public enum AdeliaEntity {
             setEntityExperience(entity, 553);
             setEntityDropTableNo(entity, 6);
             return entity;
-        } else if (this.equals(CAVALRY_SKELETON)) {
-            Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.YELLOW + "Cavalry Skeleton", 2000D, EntityType.SKELETON);
+        } else if (this.equals(DESERT_SKELETON_CAVALRY)) {
+            Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.YELLOW + "Desert Cavalry Skeleton", 2000D, EntityType.SKELETON);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(540D);
             entity.getEquipment().clear();
             ItemStack sword = MonsterItem.SPEAR_RED.getItem(0);
@@ -568,6 +535,12 @@ public enum AdeliaEntity {
             setEntityDropTableNo(entity, 6);
             return entity;
         } else if (this.equals(SPIDER)) {
+            Spider entity = (Spider) EntityUtils.create(loc, ChatColor.YELLOW + "Desert Spider", 2200D, EntityType.SPIDER);
+            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(520D);
+            setEntityExperience(entity, 584);
+            setEntityDropTableNo(entity, 6);
+            return entity;
+        } else if (this.equals(SPIDER_GHOST)) {
             CaveSpider entity = (CaveSpider) EntityUtils.create(loc, ChatColor.YELLOW + "Ghost Spider", 2200D, EntityType.CAVE_SPIDER);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(520D);
             PotionEffect invis = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1);
@@ -597,12 +570,23 @@ public enum AdeliaEntity {
             setEntityExperience(entity, 720);
             setEntityDropTableNo(entity, 7);
             return entity;
-        } else if (this.equals(GOBLIN)) {
-            PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Goblin", 2800D, EntityType.PIG_ZOMBIE);
+        } else if (this.equals(GOBLIN_FIGHTER)) {
+            PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Fighter Goblin", 2800D, EntityType.PIG_ZOMBIE);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(740D);
             entity.getEquipment().clear();
             ItemStack sword = MonsterItem.SWORD_WOODEN.getItem(0);
             entity.getEquipment().setItemInMainHand(sword);
+            entity.setBaby(true);
+            setEntityExperience(entity, 750);
+            setEntityDropTableNo(entity, 7);
+            return entity;
+        } else if (this.equals(GOBLIN_ROGUE)) {
+            PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Rogue Goblin", 2800D, EntityType.PIG_ZOMBIE);
+            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(740D);
+            entity.getEquipment().clear();
+            ItemStack sword = MonsterItem.DAGGER_WOOD.getItem(0);
+            entity.getEquipment().setItemInMainHand(sword);
+            entity.getEquipment().setItemInOffHand(sword);
             entity.setBaby(true);
             setEntityExperience(entity, 750);
             setEntityDropTableNo(entity, 7);
@@ -633,8 +617,8 @@ public enum AdeliaEntity {
             setEntityExperience(entity, 750);
             setEntityDropTableNo(entity, 7);
             return entity;
-        } else if (this.equals(ORC)) {
-            PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Orc", 3750D, EntityType.PIG_ZOMBIE);
+        } else if (this.equals(ORC_FIGHTER)) {
+            PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Fighter Orc", 3750D, EntityType.PIG_ZOMBIE);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(920D);
             entity.getEquipment().clear();
             ItemStack sword = MonsterItem.SWORD_WOODEN.getItem(0);
@@ -721,18 +705,23 @@ public enum AdeliaEntity {
             setEntityExperience(entity, 1000);
             setEntityDropTableNo(entity, 9);
             return entity;
-        } else if (this.equals(PILLAGER)) {
-            Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Pillager", 9000D, EntityType.PILLAGER);
+        } else if (this.equals(PHANTOM)) {
+            Phantom entity = (Phantom) EntityUtils.create(loc, ChatColor.LIGHT_PURPLE + "IceCream", 720D, EntityType.PHANTOM);
+            setEntityExperience(entity, 164);
+            setEntityDropTableNo(entity, 3);
+            return entity;
+        } else if (this.equals(PILLAGER_ROGUE)) {
+            Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Rogue Pillager", 9000D, EntityType.PILLAGER);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
             entity.getEquipment().clear();
             setEntityExperience(entity, 1000);
             setEntityDropTableNo(entity, 9);
             return entity;
-        } else if (this.equals(PILLAGER_HUNTER)) {
+        } else if (this.equals(PILLAGER_MAGE)) {
             Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Hunter Pillager", 9000D, EntityType.PILLAGER);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
             entity.getEquipment().clear();
-            ItemStack item = MonsterItem.CROSSBOW_DARK.getItem(0);
+            ItemStack item = MonsterItem.STAFF_FIRE.getItem(0);
             entity.getEquipment().setItemInMainHand(item);
 
             setEntityExperience(entity, 1000);
@@ -742,6 +731,9 @@ public enum AdeliaEntity {
             Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Commander Pillager", 9000D, EntityType.PILLAGER);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
             entity.getEquipment().clear();
+            ItemStack item = MonsterItem.CROSSBOW_DARK.getItem(0);
+            entity.getEquipment().setItemInMainHand(item);
+
             Ravager mount = (Ravager) EntityUtils.create(loc, ChatColor.YELLOW + "Ravager", 1500D, EntityType.RAVAGER);
             mount.addPassenger(entity);
 
@@ -755,8 +747,8 @@ public enum AdeliaEntity {
             setEntityExperience(entity, 1000);
             setEntityDropTableNo(entity, 9);
             return entity;
-        } else if (this.equals(PILLAGER_WARRIOR)) {
-            Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Warrior Pillager", 9000D, EntityType.PILLAGER);
+        } else if (this.equals(PILLAGER_FIGHTER)) {
+            Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Fighter Pillager", 9000D, EntityType.PILLAGER);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
             setEntityExperience(entity, 1000);
             setEntityDropTableNo(entity, 9);
@@ -797,32 +789,10 @@ public enum AdeliaEntity {
             entity.getEquipment().setBoots(boots);
             return entity;
         } else if (this.equals(BOSS_COOK)) {
-            PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Mad Cook", 12500D, EntityType.PIG_ZOMBIE);
+            Evoker entity = (Evoker) EntityUtils.create(loc, ChatColor.YELLOW + "Evil Cook", 12500D, EntityType.EVOKER);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(360D);
-            entity.setBaby(false);
             entity.getEquipment().clear();
 
-            ItemStack snowball = new ItemStack(Material.SNOWBALL);
-            ItemStack cookie = new ItemStack(Material.COOKIE);
-
-            ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1);
-            SkullMeta sim = (SkullMeta) head.getItemMeta();
-            sim.setOwningPlayer(Bukkit.getPlayer("SheepKid"));
-            sim.setUnbreakable(true);
-            sim.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-            head.setItemMeta(sim);
-
-            ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
-            ItemStack leg = new ItemStack(Material.LEATHER_LEGGINGS);
-            ItemStack boot = new ItemStack(Material.LEATHER_BOOTS);
-
-            entity.getEquipment().setItemInMainHand(snowball);
-            entity.getEquipment().setItemInOffHand(cookie);
-            entity.getEquipment().setHelmet(head);
-            entity.getEquipment().setChestplate(chest);
-            entity.getEquipment().setLeggings(leg);
-            entity.getEquipment().setBoots(boot);
-            entity.setSilent(true);
             return entity;
         } else if (this.equals(BOSS_PIRATE)) {
             WitherSkeleton entity = (WitherSkeleton) EntityUtils.create(loc, ChatColor.DARK_AQUA + "Captain Barbaros", 20000D, EntityType.WITHER_SKELETON);

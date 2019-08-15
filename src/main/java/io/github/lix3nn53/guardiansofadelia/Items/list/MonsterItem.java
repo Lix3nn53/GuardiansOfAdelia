@@ -11,6 +11,7 @@ public enum MonsterItem {
     SWORD_STEEL,
     SWORD_BROAD,
     SWORD_FIRE,
+    DAGGER_WOOD,
     DAGGER_CRIMSON,
     SPEAR_STEEL,
     SPEAR_RED,
@@ -225,6 +226,12 @@ public enum MonsterItem {
                 itemStack = new ItemStack(Material.DIAMOND_HOE);
                 itemMeta = itemStack.getItemMeta();
                 itemMeta.setCustomModelData(10000003);
+                itemStack.setItemMeta(itemMeta);
+                return itemStack;
+            case DAGGER_WOOD:
+                itemStack = new ItemStack(Material.DIAMOND_HOE);
+                itemMeta = itemStack.getItemMeta();
+                itemMeta.setCustomModelData(10000001);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case DAGGER_CRIMSON:

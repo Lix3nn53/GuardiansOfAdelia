@@ -44,7 +44,7 @@ public class TutorialQuests {
         story2.add("We need more guardians to deal");
         story2.add("with darkness' foes!");
         List<Task> tasks2 = new ArrayList<>();
-        TaskKill taskKill2 = new TaskKill(ChatColor.RED + "Malephar's Cavalry", 5);
+        TaskKill taskKill2 = new TaskKill(ChatColor.RED + "Malephar's Soldier", 5);
         tasks2.add(taskKill2);
         Quest quest2 = new Quest(2, "To the rescue", story2, "Elysea needs your aid!", "Kill TASK_PROGRESS_1/5 Malephar's Cavalry then talk to " +
                 "Elysea",
@@ -62,7 +62,7 @@ public class TutorialQuests {
         List<String> story3 = new ArrayList<>();
         story3.add("Syvia found Malephar, the darkness returns?");
         List<Task> tasks3 = new ArrayList<>();
-        TaskKill taskKill3 = new TaskKill(ChatColor.RED + "Malephar's Guard", 5);
+        TaskKill taskKill3 = new TaskKill(ChatColor.RED + "Malephar's Ranger", 5);
         tasks3.add(taskKill3);
         Quest quest3 = new Quest(3, "Syvia's gift", story3, "Time to test power of elements!", "Kill TASK_PROGRESS_1/5 " +
                 "Malephar's Guard then talk to Syvia",
