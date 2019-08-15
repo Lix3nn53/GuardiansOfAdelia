@@ -20,9 +20,10 @@ import java.util.*;
 
 public class QuestNPCManager {
 
-    private static HashMap<Integer, List<Quest>> npcNoToCanGiveQuests = new HashMap<>();
-    private static HashMap<Integer, List<Quest>> npcNoToCanCompleteQuests = new HashMap<>();
-    private static HashMap<Integer, QuestHologram> npcNoToHologram = new HashMap<>();
+    private final static HashMap<Integer, List<Quest>> npcNoToCanGiveQuests = new HashMap<>();
+    private final static HashMap<Integer, List<Quest>> npcNoToCanCompleteQuests = new HashMap<>();
+    private final static HashMap<Integer, QuestHologram> npcNoToHologram = new HashMap<>();
+    private final static Set<ArmorStand> questHologramArmorStands = new HashSet<>(); //only for chunk events, weirdly, they don't work fine with npcNoToHologram
 
     public static GuiGeneric getQuestGui(Player player, int npcId) {
         NPC npc = CitizensAPI.getNPCRegistry().getById(npcId);
@@ -230,8 +231,12 @@ public class QuestNPCManager {
             QuestHologram questHologram = npcNoToHologram.get(npcId);
             ArmorStand armorStand = questHologram.getHolo().getArmorStand();
             if (armorStand.isValid()) {
+                if (!armorStand.getPassengers().isEmpty()) {
+                    armorStand.getPassengers().get(0).remove();
+                }
                 armorStand.remove();
             }
+            npcNoToHologram.remove(npcId);
         }
     }
 
@@ -246,6 +251,11 @@ public class QuestNPCManager {
             Location holoLocation = npc.getStoredLocation().clone();
             QuestHologram questHologram = new QuestHologram(holoLocation);
             npcNoToHologram.put(npcId, questHologram);
+            ArmorStand newArmorStand = questHologram.getHolo().getArmorStand();
+            questHologramArmorStands.add(newArmorStand);
+            if (!newArmorStand.getPassengers().isEmpty()) {
+                questHologramArmorStands.add((ArmorStand) newArmorStand.getPassengers().get(0));
+            }
         } else {
             QuestHologram questHologram = npcNoToHologram.get(npcId);
             ArmorStand armorStand = questHologram.getHolo().getArmorStand();
@@ -255,11 +265,21 @@ public class QuestNPCManager {
                     Location holoLocation = npc.getStoredLocation().clone();
                     questHologram = new QuestHologram(holoLocation);
                     npcNoToHologram.put(npcId, questHologram);
+                    ArmorStand newArmorStand = questHologram.getHolo().getArmorStand();
+                    questHologramArmorStands.add(newArmorStand);
+                    if (!newArmorStand.getPassengers().isEmpty()) {
+                        questHologramArmorStands.add((ArmorStand) newArmorStand.getPassengers().get(0));
+                    }
                 }
             } else {
                 Location holoLocation = npc.getStoredLocation().clone();
                 questHologram = new QuestHologram(holoLocation);
                 npcNoToHologram.put(npcId, questHologram);
+                ArmorStand newArmorStand = questHologram.getHolo().getArmorStand();
+                questHologramArmorStands.add(newArmorStand);
+                if (!newArmorStand.getPassengers().isEmpty()) {
+                    questHologramArmorStands.add((ArmorStand) newArmorStand.getPassengers().get(0));
+                }
             }
         }
     }
@@ -289,13 +309,8 @@ public class QuestNPCManager {
     }
 
     public static boolean isQuestIcon(ArmorStand armorStand) {
-        for (int npcNo : npcNoToHologram.keySet()) {
-            QuestHologram questHologram = npcNoToHologram.get(npcNo);
-            ArmorStand holo = questHologram.getHolo().getArmorStand();
+        for (ArmorStand holo : questHologramArmorStands) {
             if (holo.equals(armorStand)) return true;
-            if (!holo.getPassengers().isEmpty()) {
-                return holo.getPassengers().get(0).equals(armorStand);
-            }
         }
         return false;
     }

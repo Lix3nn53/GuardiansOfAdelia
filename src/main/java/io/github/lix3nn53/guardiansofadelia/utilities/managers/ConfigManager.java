@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class ConfigManager {
 
@@ -129,13 +130,15 @@ public class ConfigManager {
         int i = 1;
         List<Spawner> spawnerList = SpawnerManager.getSpawners();
         for (Spawner spawner : spawnerList) {
-            spawnersConfig.set("Spawners.s" + i + ".x", spawner.getLocation().getX());
-            spawnersConfig.set("Spawners.s" + i + ".y", spawner.getLocation().getY());
-            spawnersConfig.set("Spawners.s" + i + ".z", spawner.getLocation().getZ());
-            spawnersConfig.set("Spawners.s" + i + ".world", spawner.getLocation().getWorld().getName());
-            spawnersConfig.set("Spawners.s" + i + ".mob", spawner.getAdeliaEntity());
+            Location location = spawner.getLocation();
+            spawnersConfig.set("Spawners.s" + i + ".x", location.getX());
+            spawnersConfig.set("Spawners.s" + i + ".y", location.getY());
+            spawnersConfig.set("Spawners.s" + i + ".z", location.getZ());
+            spawnersConfig.set("Spawners.s" + i + ".world", Objects.requireNonNull(location.getWorld()).getName());
+            spawnersConfig.set("Spawners.s" + i + ".mob", spawner.getAdeliaEntity().name());
             spawnersConfig.set("Spawners.s" + i + ".amount", spawner.getAmountPerSpawn());
             spawnersConfig.set("Spawners.s" + i + ".maxamount", spawner.getMaxAmount());
+            i++;
         }
         spawnersConfig.set("SpawnerNumber", spawnerList.size());
         try {

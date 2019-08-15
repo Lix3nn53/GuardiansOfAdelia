@@ -42,7 +42,7 @@ public class MyChunkEvents implements Listener {
                     createCustomEntitiesOnChunkLoad(chunk);
                 }
             }
-        }.runTaskLater(GuardiansOfAdelia.getInstance(), 10L);
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

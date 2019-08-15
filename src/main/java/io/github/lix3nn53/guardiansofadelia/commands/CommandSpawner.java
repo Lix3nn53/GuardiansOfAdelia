@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -48,6 +49,9 @@ public class CommandSpawner implements CommandExecutor {
 
                         Spawner spawner = new Spawner(location, adeliaEntity, amountPerSpawn, maxAmount);
                         SpawnerManager.addSpawner(spawner);
+
+                        Chunk chunk = location.getChunk();
+                        SpawnerManager.activateSpawnersOnChunk(chunk);
                     } catch (Exception e) {
                         player.sendMessage(ChatColor.RED + "No such adeliaEntity");
                         return false;

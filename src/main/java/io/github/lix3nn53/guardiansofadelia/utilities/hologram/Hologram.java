@@ -28,7 +28,7 @@ public class Hologram {
         as.setMarker(true);
         as.setInvulnerable(true);
         as.addPassenger(rider);
-        type = HologramType.ITEM;
+        type = HologramType.PASSENGER;
     }
 
     public Hologram(Location loc) {
@@ -52,7 +52,7 @@ public class Hologram {
 
     public enum HologramType {
         TEXT,
-        ITEM,
+        PASSENGER,
         INVISIBLE
     }
 }
