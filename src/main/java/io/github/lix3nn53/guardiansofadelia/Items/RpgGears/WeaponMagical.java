@@ -90,6 +90,7 @@ public class WeaponMagical implements RPGGear {
         itemMeta.setDisplayName(name);
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(customModelDataId);
         this.itemStack.setItemMeta(itemMeta);
 

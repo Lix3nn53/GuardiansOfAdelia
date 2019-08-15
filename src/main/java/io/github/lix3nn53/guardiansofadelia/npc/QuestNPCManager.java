@@ -287,4 +287,16 @@ public class QuestNPCManager {
         }
         return 0;
     }
+
+    public static boolean isQuestIcon(ArmorStand armorStand) {
+        for (int npcNo : npcNoToHologram.keySet()) {
+            QuestHologram questHologram = npcNoToHologram.get(npcNo);
+            ArmorStand holo = questHologram.getHolo().getArmorStand();
+            if (holo.equals(armorStand)) return true;
+            if (!holo.getPassengers().isEmpty()) {
+                return holo.getPassengers().get(0).equals(armorStand);
+            }
+        }
+        return false;
+    }
 }

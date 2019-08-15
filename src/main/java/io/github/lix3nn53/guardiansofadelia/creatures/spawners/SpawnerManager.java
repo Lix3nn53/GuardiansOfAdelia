@@ -12,7 +12,7 @@ import java.util.*;
 
 public class SpawnerManager {
     private static HashMap<Entity, Spawner> mobToSpawner = new HashMap<>();
-    private static HashMap<String, List<Spawner>> chunkKeyToSpawners = new HashMap<>();
+    private static HashMap<String, Set<Spawner>> chunkKeyToSpawners = new HashMap<>();
     private static Set<Spawner> activeSpawners = new HashSet<>();
 
     static void onSpawnerMobSpawn(Entity entity, Spawner spawner) {
@@ -32,7 +32,7 @@ public class SpawnerManager {
         if (chunkKeyToSpawners.containsKey(chunkKey)) {
             chunkKeyToSpawners.get(chunkKey).add(spawner);
         } else {
-            List<Spawner> spawnerList = new ArrayList<>();
+            Set<Spawner> spawnerList = new HashSet<>();
             spawnerList.add(spawner);
             chunkKeyToSpawners.put(chunkKey, spawnerList);
         }
@@ -48,7 +48,7 @@ public class SpawnerManager {
     public static void deactivateSpawnersOnChunk(Chunk chunk) {
         String chunkKey = getChunkKey(chunk.getBlock(0, 0, 0).getLocation());
         if (chunkKeyToSpawners.containsKey(chunkKey)) {
-            List<Spawner> spawners = chunkKeyToSpawners.get(chunkKey);
+            Set<Spawner> spawners = chunkKeyToSpawners.get(chunkKey);
             activeSpawners.removeAll(spawners);
         }
     }
@@ -104,7 +104,7 @@ public class SpawnerManager {
 
     public static List<Spawner> getSpawners() {
         List<Spawner> spawners = new ArrayList<>();
-        for (List<Spawner> s : chunkKeyToSpawners.values()) {
+        for (Set<Spawner> s : chunkKeyToSpawners.values()) {
             spawners.addAll(s);
         }
         return spawners;

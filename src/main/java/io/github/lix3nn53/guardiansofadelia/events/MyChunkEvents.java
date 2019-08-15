@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
@@ -11,6 +12,7 @@ import net.citizensnpcs.api.event.NPCSpawnEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Chunk;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -18,21 +20,29 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class MyChunkEvents implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onChunkLoadEvent(ChunkLoadEvent event) {
         Chunk chunk = event.getChunk();
-        Entity[] chunkEntities = chunk.getEntities();
-        for (Entity chunkEntity : chunkEntities) {
-            if (shouldChunkEventRemove(chunkEntity)) {
-                SpawnerManager.onMobDeath(chunkEntity);
-                chunkEntity.remove();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (chunk.isLoaded()) {
+                    Entity[] chunkEntities = chunk.getEntities();
+                    for (Entity chunkEntity : chunkEntities) {
+                        if (shouldChunkEventRemove(chunkEntity)) {
+                            SpawnerManager.onMobDeath(chunkEntity);
+                            chunkEntity.remove();
+                        }
+                    }
+                    SpawnerManager.activateSpawnersOnChunk(chunk);
+                    createCustomEntitiesOnChunkLoad(chunk);
+                }
             }
-        }
-        SpawnerManager.activateSpawnersOnChunk(chunk);
-        createCustomEntitiesOnChunkLoad(chunk);
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 10L);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -50,14 +60,21 @@ public class MyChunkEvents implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onChunkUnloadEvent(ChunkUnloadEvent event) {
         Chunk chunk = event.getChunk();
-        Entity[] chunkEntities = chunk.getEntities();
-        for (Entity chunkEntity : chunkEntities) {
-            if (shouldChunkEventRemove(chunkEntity)) {
-                SpawnerManager.onMobDeath(chunkEntity);
-                chunkEntity.remove();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (!chunk.isLoaded()) {
+                    Entity[] chunkEntities = chunk.getEntities();
+                    for (Entity chunkEntity : chunkEntities) {
+                        if (shouldChunkEventRemove(chunkEntity)) {
+                            SpawnerManager.onMobDeath(chunkEntity);
+                            chunkEntity.remove();
+                        }
+                    }
+                    SpawnerManager.deactivateSpawnersOnChunk(chunk);
+                }
             }
-        }
-        SpawnerManager.deactivateSpawnersOnChunk(chunk);
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 100L);
     }
 
     private boolean shouldChunkEventRemove(Entity chunkEntity) {
@@ -66,6 +83,12 @@ public class MyChunkEvents implements Listener {
             return false;
         }
         EntityType type = chunkEntity.getType();
+
+        if (type.equals(EntityType.ARMOR_STAND)) {
+            boolean questIcon = QuestNPCManager.isQuestIcon((ArmorStand) chunkEntity);
+            if (questIcon) return false;
+        }
+
         return !(type.equals(EntityType.PLAYER) || type.equals(EntityType.ITEM_FRAME)
                 || type.equals(EntityType.PAINTING) || type.equals(EntityType.DROPPED_ITEM));
     }

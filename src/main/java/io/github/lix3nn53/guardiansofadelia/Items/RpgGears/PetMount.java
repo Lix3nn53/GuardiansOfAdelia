@@ -50,6 +50,7 @@ public class PetMount implements RPGGear {
         itemMeta.setDisplayName(name);
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(customModelData);
         this.itemStack.setItemMeta(itemMeta);
 

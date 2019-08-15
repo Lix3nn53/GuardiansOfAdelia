@@ -10,6 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 public class CommandSpawner implements CommandExecutor {
@@ -24,6 +25,7 @@ public class CommandSpawner implements CommandExecutor {
             Player player = (Player) sender;
             if (args.length < 1) {
                 player.sendMessage(ChatColor.YELLOW + "/spawner add <adeliaEntity> [amountPerSpawn] [maxAmount]");
+                player.sendMessage(ChatColor.YELLOW + "/spawner spawn <adeliaEntity>");
             } else if (args[0].equals("add")) {
                 if (args.length == 4) {
                     try {
@@ -46,6 +48,18 @@ public class CommandSpawner implements CommandExecutor {
 
                         Spawner spawner = new Spawner(location, adeliaEntity, amountPerSpawn, maxAmount);
                         SpawnerManager.addSpawner(spawner);
+                    } catch (Exception e) {
+                        player.sendMessage(ChatColor.RED + "No such adeliaEntity");
+                        return false;
+                    }
+                }
+            } else if (args[0].equals("spawn")) {
+                if (args.length == 2) {
+                    try {
+                        String adeliaEntityString = args[1];
+                        AdeliaEntity adeliaEntity = AdeliaEntity.valueOf(adeliaEntityString);
+
+                        Entity mob = adeliaEntity.getMob(player.getLocation());
                     } catch (Exception e) {
                         player.sendMessage(ChatColor.RED + "No such adeliaEntity");
                         return false;
