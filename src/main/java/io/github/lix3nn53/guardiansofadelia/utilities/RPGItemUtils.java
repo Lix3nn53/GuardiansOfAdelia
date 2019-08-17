@@ -4,6 +4,8 @@ import net.minecraft.server.v1_14_R1.*;
 import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Iterator;
+
 public class RPGItemUtils {
 
     /*public static ItemStack setDamageWhenInMainHand(ItemStack item, int attack) {
@@ -42,14 +44,14 @@ public class RPGItemUtils {
         damage.set("UUIDMost", new NBTTagInt(16));
         damage.set("Slot", new NBTTagString("mainhand"));
 
-        int size = modifiers.size();
-        for (int i = 0; i < size; ++i) {
-            NBTTagCompound nbtTagCompound = (NBTTagCompound) modifiers.get(i);
+        Iterator it = modifiers.iterator();
+        while (it.hasNext()) {
+            NBTTagCompound nbtTagCompound = (NBTTagCompound) it.next();
             if (nbtTagCompound.getString("AttributeName").equals("generic.attackDamage")) {
-                //noinspection SuspiciousListRemoveInLoop
-                modifiers.remove(i);
+                it.remove();
             }
         }
+
         modifiers.add(damage);
         compound.set("AttributeModifiers", modifiers);
         nmsStack.setTag(compound);

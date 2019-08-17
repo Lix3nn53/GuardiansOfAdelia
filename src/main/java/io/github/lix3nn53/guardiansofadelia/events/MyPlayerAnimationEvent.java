@@ -38,7 +38,7 @@ public class MyPlayerAnimationEvent implements Listener {
         Player player = event.getPlayer();
 
         if (player.getLocation().getWorld().getName().equals("world")) {
-            List<Entity> nearbyEntities = player.getNearbyEntities(1, 1, 1);
+            List<Entity> nearbyEntities = player.getNearbyEntities(2, 2, 2);
             for (Entity entity : nearbyEntities) {
                 if (entity.getType().equals(EntityType.ARMOR_STAND)) {
                     ArmorStand armorStand = (ArmorStand) entity;
@@ -48,6 +48,7 @@ public class MyPlayerAnimationEvent implements Listener {
                         if (theme != null) {
                             theme.getJoinQueueGui().openInventory(player);
                         }
+                        break;
                     } else if (BazaarManager.isBazaar(armorStand)) {
                         Player owner = BazaarManager.getOwner(armorStand);
                         UUID uuid = owner.getUniqueId();
@@ -56,11 +57,12 @@ public class MyPlayerAnimationEvent implements Listener {
                             if (guardianData.hasBazaar()) {
                                 Bazaar bazaar = guardianData.getBazaar();
                                 bazaar.showToCustomer(player);
-                                break;
                             }
                         }
+                        break;
                     } else if (TombManager.hasTomb(player)) {
                         TombManager.onReachToTomb(player);
+                        break;
                     }
                 }
             }

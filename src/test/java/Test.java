@@ -1,5 +1,4 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterExperienceManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +23,20 @@ public class Test {
 
         }*/
 
-        List<Double> downRatesForLevel = new ArrayList<>();
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            integerList.add(i);
+        }
+        int size = integerList.size();
+        for (int i = 0; i < size; i++) {
+            int integer = integerList.get(i);
+            System.out.println(integer);
+        }
+        for (int i = 0; i < size; ++i) {
+            int integer = integerList.get(i);
+            System.out.println(integer);
+        }
+        /*List<Double> downRatesForLevel = new ArrayList<>();
         downRatesForLevel.add(0.75);
         downRatesForLevel.add(0.6);
         downRatesForLevel.add(0.45);
@@ -50,7 +62,7 @@ public class Test {
         System.out.println(totalRequiredExperience);
         System.out.println(level);
         System.out.println(currentExperience);
-        System.out.println(requiredExperience);
+        System.out.println(requiredExperience);*/
 
 
         /*int totalDefense = 855;

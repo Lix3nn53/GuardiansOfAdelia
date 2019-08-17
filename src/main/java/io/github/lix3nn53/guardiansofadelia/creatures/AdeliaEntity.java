@@ -63,7 +63,7 @@ public enum AdeliaEntity {
     PIRATE_DROWNED,
     //AREA-6
     NINJA_ROGUE,
-    NINJA_SWORD_MASTER,
+    NINJA_ILLUSIONER,
     NINJA_ARCHER,
     NINJA_SHURINKEN,
     ZOMBIE_JOCKEY,
@@ -135,11 +135,6 @@ public enum AdeliaEntity {
             entity.setBaby();
             entity.setAgeLock(true);
 
-            Villager.Profession[] values = Villager.Profession.values();
-            int i = new Random().nextInt(values.length);
-            Villager.Profession value = values[i];
-            entity.setProfession(value);
-            entity.setVillagerLevel(2);
             return entity;
         } else if (this.equals(VILLAGER_1)) {
             Villager entity = (Villager) EntityUtils.create(loc, ChatColor.GREEN + "Roumen Villager", 40000D, EntityType.VILLAGER);
@@ -346,10 +341,8 @@ public enum AdeliaEntity {
         } else if (this.equals(SKELETON_MONK)) {
             Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.WHITE + "Monk Skeleton", 260D, EntityType.SKELETON);
             entity.getEquipment().clear();
-            ItemStack bow = MonsterItem.SPEAR_STEEL.getItem(0);
-            entity.getEquipment().setItemInMainHand(bow);
-            ItemStack helmet = MonsterItem.HELMET_CHAINMAIL.getItem(0);
-            entity.getEquipment().setHelmet(helmet);
+            ItemStack spear = MonsterItem.SPEAR_STEEL.getItem(0);
+            entity.getEquipment().setItemInMainHand(spear);
             setEntityExperience(entity, 60);
             setEntityDropTableNo(entity, 2);
             return entity;
@@ -433,6 +426,7 @@ public enum AdeliaEntity {
             Drowned entity = (Drowned) EntityUtils.create(loc, ChatColor.DARK_AQUA + "Drowned Pirate", 1200D, EntityType.DROWNED);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(260D);
             entity.getEquipment().clear();
+            entity.setBaby(false);
             ItemStack sword = MonsterItem.SPEAR_STEEL.getItem(400);
             entity.getEquipment().setItemInMainHand(sword);
             setEntityExperience(entity, 282);
@@ -456,6 +450,16 @@ public enum AdeliaEntity {
             ItemStack dagger = MonsterItem.DAGGER_CRIMSON.getItem(0);
             entity.getEquipment().setItemInMainHand(dagger);
             entity.getEquipment().setItemInOffHand(dagger);
+            setEntityExperience(entity, 420);
+            setEntityDropTableNo(entity, 5);
+            return entity;
+        } else if (this.equals(NINJA_ILLUSIONER)) {
+            Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Illusioner Ninja", 1500D, EntityType.STRAY);
+            entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(380D);
+            entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3D);
+            entity.getEquipment().clear();
+            ItemStack dagger = MonsterItem.STAFF_OCEAN.getItem(0);
+            entity.getEquipment().setItemInMainHand(dagger);
             setEntityExperience(entity, 420);
             setEntityDropTableNo(entity, 5);
             return entity;
@@ -700,13 +704,13 @@ public enum AdeliaEntity {
             setEntityDropTableNo(entity, 8);
             return entity;
         } else if (this.equals(ENDERMAN)) {
-            Enderman entity = (Enderman) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Void Enderman", 6000D, EntityType.ENDERMAN);
+            Enderman entity = (Enderman) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Void", 6000D, EntityType.ENDERMAN);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
             setEntityExperience(entity, 1000);
             setEntityDropTableNo(entity, 9);
             return entity;
         } else if (this.equals(PHANTOM)) {
-            Phantom entity = (Phantom) EntityUtils.create(loc, ChatColor.LIGHT_PURPLE + "IceCream", 720D, EntityType.PHANTOM);
+            Phantom entity = (Phantom) EntityUtils.create(loc, ChatColor.LIGHT_PURPLE + "Phantom", 720D, EntityType.PHANTOM);
             setEntityExperience(entity, 164);
             setEntityDropTableNo(entity, 3);
             return entity;
@@ -714,11 +718,17 @@ public enum AdeliaEntity {
             Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Rogue Pillager", 9000D, EntityType.PILLAGER);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
             entity.getEquipment().clear();
+
+            ItemStack item = MonsterItem.DAGGER_DARKEST.getItem(0);
+
+            entity.getEquipment().setItemInMainHand(item);
+            entity.getEquipment().setItemInOffHand(item);
+
             setEntityExperience(entity, 1000);
             setEntityDropTableNo(entity, 9);
             return entity;
         } else if (this.equals(PILLAGER_MAGE)) {
-            Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Hunter Pillager", 9000D, EntityType.PILLAGER);
+            Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Mage Pillager", 9000D, EntityType.PILLAGER);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
             entity.getEquipment().clear();
             ItemStack item = MonsterItem.STAFF_FIRE.getItem(0);
@@ -744,12 +754,23 @@ public enum AdeliaEntity {
         } else if (this.equals(PILLAGER_SHAMAN)) {
             Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Shaman Pillager", 9000D, EntityType.PILLAGER);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
+
+            ItemStack item = MonsterItem.STAFF_MOON.getItem(0);
+            entity.getEquipment().setItemInMainHand(item);
+
             setEntityExperience(entity, 1000);
             setEntityDropTableNo(entity, 9);
             return entity;
         } else if (this.equals(PILLAGER_FIGHTER)) {
             Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Fighter Pillager", 9000D, EntityType.PILLAGER);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
+
+            ItemStack item = MonsterItem.MACE_DARK.getItem(0);
+            ItemStack shield = MonsterItem.SHIELD_DARK.getItem(0);
+
+            entity.getEquipment().setItemInMainHand(item);
+            entity.getEquipment().setItemInOffHand(shield);
+
             setEntityExperience(entity, 1000);
             setEntityDropTableNo(entity, 9);
             return entity;

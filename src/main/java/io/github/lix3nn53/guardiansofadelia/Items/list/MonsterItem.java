@@ -13,6 +13,7 @@ public enum MonsterItem {
     SWORD_FIRE,
     DAGGER_WOOD,
     DAGGER_CRIMSON,
+    DAGGER_DARKEST,
     SPEAR_STEEL,
     SPEAR_RED,
     KATANA,
@@ -31,6 +32,8 @@ public enum MonsterItem {
     STAFF_LEAF,
     STAFF_BONE,
     STAFF_FIRE,
+    STAFF_OCEAN,
+    STAFF_MOON,
     HELMET_GOLDEN,
     HELMET_CHAINMAIL,
     HELMET_IRON,
@@ -38,11 +41,13 @@ public enum MonsterItem {
     CHESTPLATE_GOLDEN,
     LEGGINGS_IRON,
     LEGGINGS_GOLDEN,
+    MACE_DARK,
     BOOTS_IRON,
     BOOTS_GOLDEN,
     SHIELD_WOODEN,
     SHIELD_KNIGHT,
-    SHIELD_FIRE;
+    SHIELD_FIRE,
+    SHIELD_DARK;
 
     public ItemStack getItem(int rangedDamage) {
         switch (this) {
@@ -56,6 +61,12 @@ public enum MonsterItem {
                 itemStack = new ItemStack(Material.TRIDENT);
                 itemMeta = itemStack.getItemMeta();
                 itemMeta.setCustomModelData(10000003);
+                itemStack.setItemMeta(itemMeta);
+                return itemStack;
+            case MACE_DARK:
+                itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
+                itemMeta = itemStack.getItemMeta();
+                itemMeta.setCustomModelData(10000006);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case SWORD_DARK:
@@ -177,6 +188,18 @@ public enum MonsterItem {
                 itemMeta.setCustomModelData(10000004);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
+            case STAFF_OCEAN:
+                itemStack = new ItemStack(Material.DIAMOND_SHOVEL);
+                itemMeta = itemStack.getItemMeta();
+                itemMeta.setCustomModelData(10000010);
+                itemStack.setItemMeta(itemMeta);
+                return itemStack;
+            case STAFF_MOON:
+                itemStack = new ItemStack(Material.DIAMOND_SHOVEL);
+                itemMeta = itemStack.getItemMeta();
+                itemMeta.setCustomModelData(10000012);
+                itemStack.setItemMeta(itemMeta);
+                return itemStack;
             case HELMET_GOLDEN:
                 itemStack = new ItemStack(Material.GOLDEN_HELMET);
                 return itemStack;
@@ -216,6 +239,12 @@ public enum MonsterItem {
                 itemMeta.setCustomModelData(10000008);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
+            case SHIELD_DARK:
+                itemStack = new ItemStack(Material.SHIELD);
+                itemMeta = itemStack.getItemMeta();
+                itemMeta.setCustomModelData(10000006);
+                itemStack.setItemMeta(itemMeta);
+                return itemStack;
             case SHIELD_KNIGHT:
                 itemStack = new ItemStack(Material.SHIELD);
                 itemMeta = itemStack.getItemMeta();
@@ -238,6 +267,12 @@ public enum MonsterItem {
                 itemStack = new ItemStack(Material.DIAMOND_HOE);
                 itemMeta = itemStack.getItemMeta();
                 itemMeta.setCustomModelData(10000004);
+                itemStack.setItemMeta(itemMeta);
+                return itemStack;
+            case DAGGER_DARKEST:
+                itemStack = new ItemStack(Material.DIAMOND_HOE);
+                itemMeta = itemStack.getItemMeta();
+                itemMeta.setCustomModelData(10000011);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case STAR:

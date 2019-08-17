@@ -28,6 +28,11 @@ public class MyPlayerInteractEntityEvent implements Listener {
         if (!event.getHand().equals(EquipmentSlot.HAND)) {
             return;
         }
+        Entity rightClicked = event.getRightClicked();
+        if (rightClicked.getType().equals(EntityType.VILLAGER)) {
+            event.setCancelled(true);
+        }
+
         Player player = event.getPlayer();
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
         if (itemInMainHand.hasItemMeta()) {
@@ -35,46 +40,43 @@ public class MyPlayerInteractEntityEvent implements Listener {
             if (itemMeta.hasDisplayName()) {
                 if (itemInMainHand.getType().equals(Material.LAPIS_LAZULI)) { //right click with pet-food
                     String displayName = itemMeta.getDisplayName();
-                    Entity rightClicked = event.getRightClicked();
-                    if (rightClicked instanceof LivingEntity) {
+                    EntityType type = rightClicked.getType();
+                    if (type.equals(EntityType.HORSE) || type.equals(EntityType.WOLF)) {
                         LivingEntity livingEntity = (LivingEntity) rightClicked;
-                        EntityType type = livingEntity.getType();
-                        if (type.equals(EntityType.HORSE) || type.equals(EntityType.WOLF)) {
-                            AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-                            double maxHealth = attribute.getValue();
-                            double currentHealth = livingEntity.getHealth();
-                            if (currentHealth < maxHealth) {
-                                int healAmount = 100;
-                                if (displayName.contains("2")) {
-                                    healAmount = 500;
-                                } else if (displayName.contains("3")) {
-                                    healAmount = 1000;
-                                } else if (displayName.contains("4")) {
-                                    healAmount = 2000;
-                                }
-                                double setHealthAmount = currentHealth + healAmount;
-                                if (setHealthAmount > maxHealth) {
-                                    setHealthAmount = maxHealth;
-                                }
-                                livingEntity.setHealth(setHealthAmount);
-                            } else {
-                                player.sendMessage(ChatColor.RED + "Pet health is already full");
+                        AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+                        double maxHealth = attribute.getValue();
+                        double currentHealth = livingEntity.getHealth();
+                        if (currentHealth < maxHealth) {
+                            int healAmount = 100;
+                            if (displayName.contains("2")) {
+                                healAmount = 500;
+                            } else if (displayName.contains("3")) {
+                                healAmount = 1000;
+                            } else if (displayName.contains("4")) {
+                                healAmount = 2000;
                             }
+                            double setHealthAmount = currentHealth + healAmount;
+                            if (setHealthAmount > maxHealth) {
+                                setHealthAmount = maxHealth;
+                            }
+                            livingEntity.setHealth(setHealthAmount);
+                        } else {
+                            player.sendMessage(ChatColor.RED + "Pet health is already full");
                         }
                     }
                 }
             }
         }
 
-        if (event.getRightClicked() instanceof Player) {
+        if (rightClicked instanceof Player) {
             if (player.isSneaking()) {
-                Player rightClicked = (Player) event.getRightClicked();
+                Player rightClickedPlayer = (Player) rightClicked;
 
                 NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
-                if (npcRegistry.isNPC(rightClicked)) return;
+                if (npcRegistry.isNPC(rightClickedPlayer)) return;
 
                 if (!player.getGameMode().equals(GameMode.SPECTATOR) && !player.getGameMode().equals(GameMode.SPECTATOR)) {
-                    GuiGeneric guiGeneric = MenuList.onShiftRightClickPlayer(rightClicked);
+                    GuiGeneric guiGeneric = MenuList.onShiftRightClickPlayer(rightClickedPlayer);
                     guiGeneric.openInventory(player);
                 }
             }
