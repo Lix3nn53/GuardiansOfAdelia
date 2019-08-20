@@ -67,6 +67,12 @@
                     <include>database.yml</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/main/resources/soundtracks</directory>
+                <includes>
+                    <include>**/*.txt</include>
+                </includes>
+            </resource>
         </resources>
     </build>
 

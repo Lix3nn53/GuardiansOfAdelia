@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.quests.list.MainStoryQuests;
 import io.github.lix3nn53.guardiansofadelia.quests.list.TutorialQuests;
+import io.github.lix3nn53.guardiansofadelia.sounds.CustomSoundtrack;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.ConfigManager;
@@ -166,6 +167,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
             @Override
             public void run() {
                 SpawnerManager.startSpawners();
+                CustomSoundtrack.startPlayLoopForEveryone();
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 10 * 5L);
 

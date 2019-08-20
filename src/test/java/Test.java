@@ -23,7 +23,7 @@ public class Test {
 
         }*/
 
-        List<Integer> integerList = new ArrayList<>();
+        /*List<Integer> integerList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             integerList.add(i);
         }
@@ -35,7 +35,7 @@ public class Test {
         for (int i = 0; i < size; ++i) {
             int integer = integerList.get(i);
             System.out.println(integer);
-        }
+        }*/
         /*List<Double> downRatesForLevel = new ArrayList<>();
         downRatesForLevel.add(0.75);
         downRatesForLevel.add(0.6);
