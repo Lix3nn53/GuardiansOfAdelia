@@ -87,7 +87,7 @@ public class TutorialQuests {
         quest4.addOnCompleteAction(potionEffectAction);
         quest4.addOnCompleteAction(teleportAction);
         quest4.addOnCompleteAction(clearPotionEffectAction);
-        quest4.addOnCompleteAction(new SendTitleAction(ChatColor.YELLOW + "What **** happened?", ""));
+        quest4.addOnCompleteAction(new SendTitleAction(ChatColor.DARK_PURPLE + "Waking up..", ""));
         quest4.addOnCompleteAction(new FinishQuestAction(4));
         quest4.addOnCompleteAction(new StartQuestAction(5));
         quest4.addOnCompleteAction(new TutorialEndAction());
