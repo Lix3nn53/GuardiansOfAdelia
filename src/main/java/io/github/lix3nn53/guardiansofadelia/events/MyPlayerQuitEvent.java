@@ -7,7 +7,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Tri
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
-import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +19,6 @@ public class MyPlayerQuitEvent implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onEvent(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        PacketLimitter.onQuit(player);
 
         GuardianDataManager.onPlayerQuit(player);
 

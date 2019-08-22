@@ -7,46 +7,27 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 public class PacketLimitter {
-    public static HashMap<UUID, Integer> PacketsSent = new HashMap<UUID, Integer>();
+    private static final HashMap<Player, Integer> packetsSent = new HashMap<>();
 
-    public static HashMap<UUID, Integer> warnings = new HashMap<UUID, Integer>();
-
-    public static HashMap<UUID, Integer> kick = new HashMap<UUID, Integer>();
-
-    private static ProtocolManager protocolManager;
+    private static final ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
+    private static final int PACKET_LIMIT = 500;
 
     public static void register() {
-        protocolManager = ProtocolLibrary.getProtocolManager();
 
         new BukkitRunnable() {
 
             @Override
             public void run() {
-                PacketsSent.clear();
+                packetsSent.clear();
             }
-        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 53L, 53L);
-
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
-                for (UUID uuid : kick.keySet()) {
-                    Player p = Bukkit.getPlayer(uuid);
-                    p.kickPlayer("Too many packets");
-                    warnings.remove(uuid);
-                    kick.remove(uuid);
-                }
-            }
-        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 53L, 53L);
+        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 100L, 100L);
 
         protocolManager.addPacketListener(new PacketAdapter(GuardiansOfAdelia.getInstance(),
                 ListenerPriority.NORMAL,
@@ -435,36 +416,22 @@ public class PacketLimitter {
         });
     }
 
-    public static void onQuit(Player p) {
-        UUID uuid = p.getUniqueId();
-        PacketsSent.remove(uuid);
-        warnings.remove(uuid);
-        kick.remove(uuid);
-    }
+    private static boolean packetLimit(Player player) {
+        if (packetsSent.containsKey(player)) {
+            int sent = packetsSent.get(player) + 1;
+            packetsSent.put(player, sent);
+            if (sent > PACKET_LIMIT) {
+                new BukkitRunnable() {
 
-    private static boolean packetLimit(Player p) {
-        UUID uuid = p.getUniqueId();
-
-        if (PacketsSent.containsKey(uuid)) {
-            int sent = PacketsSent.get(uuid) + 1;
-            PacketsSent.put(uuid, sent);
-            if (sent > 800) {
-                p.sendMessage(ChatColor.RED + "Too many packets!");
-                if (warnings.containsKey(uuid)) {
-                    int warns = warnings.get(uuid);
-                    if (warns >= 3) {
-                        warnings.put(uuid, (warns + 1));
-                        kick.put(uuid, 1);
-                    } else {
-                        warnings.put(uuid, (warns + 1));
+                    @Override
+                    public void run() {
+                        player.kickPlayer(ChatColor.RED + "You are sending too many packets!");
                     }
-                } else {
-                    warnings.put(uuid, 1);
-                }
+                }.runTask(GuardiansOfAdelia.getInstance());
                 return true;
             }
         } else {
-            PacketsSent.put(uuid, 1);
+            packetsSent.put(player, 1);
         }
         return false;
     }

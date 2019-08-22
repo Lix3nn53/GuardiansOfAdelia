@@ -43,7 +43,10 @@ public class CustomSoundtrack {
         DATA_FOLDER = GuardiansOfAdelia.getInstance().getDataFolder();
 
         for (String name : songNames) {
-            GuardiansOfAdelia.getInstance().saveResource(name + ".txt", false);
+            File songTextFile = new File(DATA_FOLDER, name + ".txt");
+            if (!songTextFile.exists()) {
+                GuardiansOfAdelia.getInstance().saveResource(name + ".txt", false);
+            }
         }
 
         loadSongs();
@@ -52,6 +55,12 @@ public class CustomSoundtrack {
     public static void startPlayLoopForEveryone() {
         CURRENT_SONG_INDEX = 0;
         play(CURRENT_SONG_INDEX);
+        GuardiansOfAdelia.getInstance().getLogger().info("Start soundtrack loop");
+    }
+
+    public static void sendCurrentSongMessage(Player player) {
+        String songName = songNames.get(CURRENT_SONG_INDEX);
+        player.sendMessage(ChatColor.YELLOW + "Now playing: " + ChatColor.GOLD + songName);
     }
 
     private static void playNextForEveryone() {

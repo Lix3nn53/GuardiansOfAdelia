@@ -27,7 +27,7 @@ import java.util.Objects;
 
 public class ConfigManager {
 
-    private static File configFile;
+    private static File DATA_FOLDER;
     private static FileConfiguration spawnersConfig;
     private static FileConfiguration characterSelectionConfig;
     private static FileConfiguration townsConfig;
@@ -39,7 +39,7 @@ public class ConfigManager {
         if (!GuardiansOfAdelia.getInstance().getDataFolder().exists()) {
             GuardiansOfAdelia.getInstance().getDataFolder().mkdirs();
         }
-        configFile = GuardiansOfAdelia.getInstance().getDataFolder();
+        DATA_FOLDER = GuardiansOfAdelia.getInstance().getDataFolder();
     }
 
     public static void createConfigALL() {
@@ -65,7 +65,7 @@ public class ConfigManager {
     }
 
     private static void createDatabaseConfig() {
-        File customConfigFile = new File(configFile, "database.yml");
+        File customConfigFile = new File(DATA_FOLDER, "database.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
             GuardiansOfAdelia.getInstance().saveResource("database.yml", false);
@@ -94,7 +94,7 @@ public class ConfigManager {
     }
 
     private static void createSpawners() {
-        File customConfigFile = new File(configFile, "spawners.yml");
+        File customConfigFile = new File(DATA_FOLDER, "spawners.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
             GuardiansOfAdelia.getInstance().saveResource("spawners.yml", false);
@@ -112,6 +112,8 @@ public class ConfigManager {
         int spawnerNumber = spawnersConfig.getInt("SpawnerNumber");
         for (int i = 1; i <= spawnerNumber; i++) {
             String worldString = spawnersConfig.getString("Spawners.s" + i + ".world");
+            if (worldString == null) continue;
+
             World world = Bukkit.getWorld(worldString);
             double x = spawnersConfig.getDouble("Spawners.s" + i + ".x");
             double y = spawnersConfig.getDouble("Spawners.s" + i + ".y");
@@ -142,14 +144,14 @@ public class ConfigManager {
         }
         spawnersConfig.set("SpawnerNumber", spawnerList.size());
         try {
-            spawnersConfig.save(configFile + "/spawners.yml");
+            spawnersConfig.save(DATA_FOLDER + "/spawners.yml");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private static void createCharacterSelectionConfig() {
-        File customConfigFile = new File(configFile, "characterSelection.yml");
+        File customConfigFile = new File(DATA_FOLDER, "characterSelection.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
             GuardiansOfAdelia.getInstance().saveResource("characterSelection.yml", false);
@@ -225,14 +227,14 @@ public class ConfigManager {
             characterSelectionConfig.set("characterSelectionHologram" + i + ".pitch", location.getPitch());
         }
         try {
-            characterSelectionConfig.save(configFile + "/characterSelection.yml");
+            characterSelectionConfig.save(DATA_FOLDER + "/characterSelection.yml");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private static void createTowns() {
-        File customConfigFile = new File(configFile, "towns.yml");
+        File customConfigFile = new File(DATA_FOLDER, "towns.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
             GuardiansOfAdelia.getInstance().saveResource("towns.yml", false);
@@ -274,14 +276,14 @@ public class ConfigManager {
             characterSelectionConfig.set("town" + town.getNo() + ".pitch", location.getPitch());
         }
         try {
-            characterSelectionConfig.save(configFile + "/characterSelection.yml");
+            characterSelectionConfig.save(DATA_FOLDER + "/characterSelection.yml");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private static void createDungeons() {
-        File customConfigFile = new File(configFile, "dungeons.yml");
+        File customConfigFile = new File(DATA_FOLDER, "dungeons.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
             GuardiansOfAdelia.getInstance().saveResource("dungeons.yml", false);
@@ -335,14 +337,14 @@ public class ConfigManager {
             dungeonsConfig.set(code + ".bossMobName", dungeon.getBossMobName());
         }
         try {
-            dungeonsConfig.save(configFile + "/dungeons.yml");
+            dungeonsConfig.save(DATA_FOLDER + "/dungeons.yml");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private static void createDungeonGates() {
-        File customConfigFile = new File(configFile, "dungeonGates.yml");
+        File customConfigFile = new File(DATA_FOLDER, "dungeonGates.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
             GuardiansOfAdelia.getInstance().saveResource("dungeonGates.yml", false);
