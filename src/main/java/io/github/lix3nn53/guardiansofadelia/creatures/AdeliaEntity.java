@@ -12,6 +12,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public enum AdeliaEntity {
@@ -127,6 +129,28 @@ public enum AdeliaEntity {
 
     private static void setEntityDropTableNo(Entity entity, int dropTableNumber) {
         PersistentDataContainerUtil.putInteger("dropTableNumber", dropTableNumber, entity);
+    }
+
+    private void startSkillLoop(LivingEntity livingEntity) {
+        if (this.equals(ZOMBIE_VILLAGER)) {
+            List<EntitySkill> skills = new ArrayList<>();
+            skills.add(EntitySkill.AOE_SMALL_AROUND);
+            List<Integer> skillLevels = new ArrayList<>();
+            skillLevels.add(1);
+
+            EntitySkillSet entitySkillSet = new EntitySkillSet(skills, skillLevels, 120);
+
+            entitySkillSet.startSkillLoop(livingEntity);
+        } else if (this.equals(SKELETON_MAGE)) {
+            List<EntitySkill> skills = new ArrayList<>();
+            skills.add(EntitySkill.PROJECTILE_FIREBALL);
+            List<Integer> skillLevels = new ArrayList<>();
+            skillLevels.add(1);
+
+            EntitySkillSet entitySkillSet = new EntitySkillSet(skills, skillLevels, 80);
+
+            entitySkillSet.startSkillLoop(livingEntity);
+        }
     }
 
     public Entity getMob(Location loc) {
@@ -277,6 +301,7 @@ public enum AdeliaEntity {
             entity.getEquipment().setItemInMainHand(axe);
             setEntityExperience(entity, 14);
             setEntityDropTableNo(entity, 1);
+            startSkillLoop(entity);
             return entity;
         } else if (this.equals(ZOMBIE_SPLITTER)) {
             Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Splitter Zombie", 80D, EntityType.ZOMBIE);
@@ -356,6 +381,7 @@ public enum AdeliaEntity {
             entity.getEquipment().setHelmet(helmet);
             setEntityExperience(entity, 68);
             setEntityDropTableNo(entity, 2);
+            startSkillLoop(entity);
             return entity;
         } else if (this.equals(CREEPER)) {
             Creeper entity = (Creeper) EntityUtils.create(loc, ChatColor.AQUA + "Popping Rainbow", 620D, EntityType.CREEPER);

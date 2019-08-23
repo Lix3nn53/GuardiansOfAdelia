@@ -115,7 +115,7 @@ public abstract class TargetComponent extends SkillComponent {
                     return canAttack((LivingEntity) tameable.getOwner(), target);
                 }
             }
-        }
+        } else return target instanceof Player || target instanceof Tameable;
 
         return true;
     }
