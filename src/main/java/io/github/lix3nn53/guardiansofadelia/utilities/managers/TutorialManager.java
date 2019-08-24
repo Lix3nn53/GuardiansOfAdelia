@@ -36,9 +36,9 @@ public class TutorialManager {
             giveTutorialItems(player, rpgClass);
             player.teleport(startLocation);
 
-            player.sendTitle(ChatColor.DARK_PURPLE + "Malephar's Castle", ChatColor.GRAY + "Fall of the Adelia", 25, 35, 25);
+            player.sendTitle(ChatColor.DARK_PURPLE + "Aleesia's Castle", ChatColor.GRAY + "Fall of the Adelia", 25, 35, 25);
 
-            player.sendMessage(ChatColor.GRAY + "▁▂▃▄▅▆▇ " + ChatColor.DARK_PURPLE + "Malephar's Castle" + ChatColor.GRAY + " ▇▆▅▄▃▂▁");
+            player.sendMessage(ChatColor.GRAY + "▁▂▃▄▅▆▇ " + ChatColor.DARK_PURPLE + "Aleesia's Castle" + ChatColor.GRAY + " ▇▆▅▄▃▂▁");
             player.sendMessage(ChatColor.DARK_PURPLE + "---------- " + ChatColor.GRAY + "Fall of the Adelia" + ChatColor.DARK_PURPLE + " ----------");
             player.sendMessage("");
 

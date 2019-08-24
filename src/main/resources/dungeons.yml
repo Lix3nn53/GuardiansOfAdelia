@@ -373,7 +373,7 @@ DARKNESS1:
   pitch: 0.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §4Malephar
+  bossMobName: §5Aleesia
 DARKNESS2:
   x: 3522.5
   y: 151.5
@@ -383,7 +383,7 @@ DARKNESS2:
   pitch: 2.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §4Malephar
+  bossMobName: §5Aleesia
 DARKNESS3:
   x: 3530.5
   y: 151.5
@@ -393,7 +393,7 @@ DARKNESS3:
   pitch: -0.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §4Malephar
+  bossMobName: §5Aleesia
 DARKNESS4:
   x: 3553.5
   y: 151.5
@@ -403,4 +403,4 @@ DARKNESS4:
   pitch: 0.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §4Malephar
+  bossMobName: §5Aleesia

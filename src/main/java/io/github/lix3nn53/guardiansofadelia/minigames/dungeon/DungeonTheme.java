@@ -25,7 +25,7 @@ public enum DungeonTheme {
 
     public String getName() {
         if (this.equals(DungeonTheme.DARKNESS)) {
-            return "Malephar's Castle";
+            return "Aleesia's Castle";
         } else if (this.equals(DungeonTheme.DESERT)) {
             return "Desert's Heart";
         } else if (this.equals(DungeonTheme.SWAMP)) {
@@ -83,7 +83,7 @@ public enum DungeonTheme {
         GearLevel gearLevel = GearLevel.ZERO;
 
         if (this.equals(DungeonTheme.DARKNESS)) {
-            itemTag = "Malephar's";
+            itemTag = "Aleesia's";
             gearLevel = GearLevel.NINE;
         } else if (this.equals(DungeonTheme.DESERT)) {
             itemTag = "Sand ";

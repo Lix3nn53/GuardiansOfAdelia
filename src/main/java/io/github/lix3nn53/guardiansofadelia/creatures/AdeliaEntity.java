@@ -3,12 +3,18 @@ package io.github.lix3nn53.guardiansofadelia.creatures;
 import io.github.lix3nn53.guardiansofadelia.Items.list.MonsterItem;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import me.libraryaddict.disguise.disguisetypes.MobDisguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -218,19 +224,40 @@ public enum AdeliaEntity {
             entity.setVillagerLevel(2);
             return entity;
         } else if (this.equals(TUTORIAL_1)) {
-            WitherSkeleton entity = (WitherSkeleton) EntityUtils.create(loc, ChatColor.RED + "Malephar's Soldier", 1800D, EntityType.WITHER_SKELETON);
+            WitherSkeleton entity = (WitherSkeleton) EntityUtils.create(loc, ChatColor.RED + "Aleesia's Soldier", 1800D, EntityType.WITHER_SKELETON);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(120D);
             ItemStack sword = MonsterItem.SWORD_DARK.getItem(0);
             entity.getEquipment().setItemInMainHand(sword);
             return entity;
         } else if (this.equals(TUTORIAL_2)) {
-            Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Malephar's Ranger", 1200D, EntityType.STRAY);
+            Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Aleesia's Ranger", 1200D, EntityType.STRAY);
             ItemStack bow = MonsterItem.BOW_DARK.getItem(500);
             entity.getEquipment().setItemInMainHand(bow);
             return entity;
         } else if (this.equals(TUTORIAL_BOSS)) {
-            Wither entity = (Wither) EntityUtils.create(loc, ChatColor.RED + "Malephar", 100000D, EntityType.WITHER);
-            entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2D);
+            Wither entity = (Wither) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Aleesia", 100000D, EntityType.WITHER);
+            entity.setCustomNameVisible(true);
+
+            MobDisguise aleesiaDisguise = new MobDisguise(DisguiseType.ARMOR_STAND, false);
+
+            LivingWatcher watcher = aleesiaDisguise.getWatcher();
+
+            watcher.setCustomNameVisible(true);
+            watcher.setCustomName(ChatColor.DARK_PURPLE + "Aleesia");
+            watcher.setInvisible(true);
+            watcher.setNoGravity(true);
+
+            EntityEquipment mobEquipment = watcher.getEquipment();
+
+            ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setCustomModelData(10000011);
+            itemMeta.setUnbreakable(true);
+            itemStack.setItemMeta(itemMeta);
+            mobEquipment.setHelmet(itemStack);
+
+            DisguiseAPI.disguiseToAll(entity, aleesiaDisguise);
+
             return entity;
         } else if (this.equals(COW)) {
             Cow entity = (Cow) EntityUtils.create(loc, ChatColor.GREEN + "Cow", 1420D, EntityType.COW);
@@ -886,7 +913,29 @@ public enum AdeliaEntity {
             entity.getEquipment().setBoots(boot);
             return entity;
         } else if (this.equals(BOSS_DARKNESS)) {
-            Wither entity = (Wither) EntityUtils.create(loc, ChatColor.DARK_RED + "Malephar", 100000D, EntityType.WITHER);
+            Wither entity = (Wither) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Aleesia", 100000D, EntityType.WITHER);
+            entity.setCustomNameVisible(true);
+
+            MobDisguise aleesiaDisguise = new MobDisguise(DisguiseType.ARMOR_STAND, false);
+
+            LivingWatcher watcher = aleesiaDisguise.getWatcher();
+
+            watcher.setCustomNameVisible(true);
+            watcher.setCustomName(ChatColor.DARK_PURPLE + "Aleesia");
+            watcher.setInvisible(true);
+            watcher.setNoGravity(true);
+
+            EntityEquipment mobEquipment = watcher.getEquipment();
+
+            ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setCustomModelData(10000011);
+            itemMeta.setUnbreakable(true);
+            itemStack.setItemMeta(itemMeta);
+            mobEquipment.setHelmet(itemStack);
+
+            DisguiseAPI.disguiseToAll(entity, aleesiaDisguise);
+
             return entity;
         }
         return null;

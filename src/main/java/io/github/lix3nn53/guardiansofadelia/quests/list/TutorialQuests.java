@@ -44,9 +44,9 @@ public class TutorialQuests {
         story2.add("We need more guardians to deal");
         story2.add("with darkness' foes!");
         List<Task> tasks2 = new ArrayList<>();
-        TaskKill taskKill2 = new TaskKill(ChatColor.RED + "Malephar's Soldier", 5);
+        TaskKill taskKill2 = new TaskKill(ChatColor.RED + "Aleesia's Soldier", 5);
         tasks2.add(taskKill2);
-        Quest quest2 = new Quest(2, "To the rescue", story2, "Elysea needs your aid!", "Kill TASK_PROGRESS_1/5 Malephar's Cavalry then talk to " +
+        Quest quest2 = new Quest(2, "To the rescue", story2, "Elysea needs your aid!", "Kill TASK_PROGRESS_1/5 Aleesia's Cavalry then talk to " +
                 "Elysea",
                 "Use your element points from menu to gain elemental power.",
                 tasks2, itemPrizes, 0, 0, 90, 1, Material.RED_NETHER_BRICKS);
@@ -60,23 +60,23 @@ public class TutorialQuests {
         itemPrizes1.add(PassiveItemList.get(10, RPGSlotType.RING, ItemTier.COMMON, "Tutorial", 10, 20, 2));
         itemPrizes1.add(PassiveItemList.get(10, RPGSlotType.NECKLACE, ItemTier.COMMON, "Tutorial", 10, 20, 2));
         List<String> story3 = new ArrayList<>();
-        story3.add("Syvia found Malephar, the darkness returns?");
+        story3.add("Syvia found Aleesia, the darkness returns?");
         List<Task> tasks3 = new ArrayList<>();
-        TaskKill taskKill3 = new TaskKill(ChatColor.RED + "Malephar's Ranger", 5);
+        TaskKill taskKill3 = new TaskKill(ChatColor.RED + "Aleesia's Ranger", 5);
         tasks3.add(taskKill3);
         Quest quest3 = new Quest(3, "Syvia's gift", story3, "Time to test power of elements!", "Kill TASK_PROGRESS_1/5 " +
-                "Malephar's Guard then talk to Syvia",
+                "Aleesia's Guard then talk to Syvia",
                 "More element power?! Click bag icon from your inventory. Equip your jewelries to gain bonus elemental powers.",
                 tasks3, itemPrizes1, 0, 0, 90, 2, Material.RED_NETHER_BRICKS);
         QuestNPCManager.addQuest(quest3, 6, 7);
 
-        //syvia to malephar
+        //syvia to Aleesia
         List<String> story4 = new ArrayList<>();
         story4.add("We need to stop this before it harms Adelia!");
         List<Task> tasks4 = new ArrayList<>();
-        TaskDealDamage taskDealDamage = new TaskDealDamage(ChatColor.RED + "Malephar", 200);
+        TaskDealDamage taskDealDamage = new TaskDealDamage(ChatColor.RED + "Aleesia", 200);
         tasks4.add(taskDealDamage);
-        Quest quest4 = new Quest(4, "Hall of Darkness", story4, "Now you seem ready to face Malephar.. or are you?", "Time to face Malephar?!",
+        Quest quest4 = new Quest(4, "Hall of Darkness", story4, "Now you seem ready to face Aleesia.. or are you?", "Time to face Aleesia?!",
                 "", tasks4, itemPrizes, 0, 0, 90, 3, Material.RED_NETHER_BRICKS);
 
         PotionEffectAction potionEffectAction = new PotionEffectAction(PotionEffectType.BLINDNESS, 5 * 20, 3);
@@ -93,7 +93,7 @@ public class TutorialQuests {
         quest4.addOnCompleteAction(new TutorialEndAction());
         QuestNPCManager.addQuest(quest4, 7, 0);
 
-        //malephar to king of roumen
+        //Aleesia to king of roumen
         List<String> story5 = new ArrayList<>();
         story.add("TODO story of dream");
         List<Task> tasks5 = new ArrayList<>();
