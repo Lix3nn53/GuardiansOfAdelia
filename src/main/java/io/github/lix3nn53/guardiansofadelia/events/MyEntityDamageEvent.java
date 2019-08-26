@@ -43,7 +43,6 @@ public class MyEntityDamageEvent implements Listener {
         if (customNaturalDamage > 0) {
             if (entity instanceof Player) {
                 Player player = (Player) entity;
-                player.sendMessage("customNaturalDamage: " + customNaturalDamage);
             }
             event.setDamage(customNaturalDamage);
         }

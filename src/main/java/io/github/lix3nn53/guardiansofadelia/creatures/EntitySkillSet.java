@@ -26,6 +26,11 @@ public class EntitySkillSet {
 
             @Override
             public void run() {
+                if (skills.isEmpty()) {
+                    cancel();
+                    return;
+                }
+
                 if (!livingEntity.isValid()) { //stop loop if entity is not valid
                     cancel();
                     return;

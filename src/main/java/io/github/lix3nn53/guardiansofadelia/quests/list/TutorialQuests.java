@@ -74,7 +74,7 @@ public class TutorialQuests {
         List<String> story4 = new ArrayList<>();
         story4.add("We need to stop this before it harms Adelia!");
         List<Task> tasks4 = new ArrayList<>();
-        TaskDealDamage taskDealDamage = new TaskDealDamage(ChatColor.RED + "Aleesia", 200);
+        TaskDealDamage taskDealDamage = new TaskDealDamage(ChatColor.DARK_PURPLE + "Aleesia", 200);
         tasks4.add(taskDealDamage);
         Quest quest4 = new Quest(4, "Hall of Darkness", story4, "Now you seem ready to face Aleesia.. or are you?", "Time to face Aleesia?!",
                 "", tasks4, itemPrizes, 0, 0, 90, 3, Material.RED_NETHER_BRICKS);
