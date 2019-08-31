@@ -8,6 +8,9 @@ import io.github.lix3nn53.guardiansofadelia.database.ConnectionPool;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
+import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
+import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import org.bukkit.Bukkit;
@@ -34,6 +37,7 @@ public class ConfigManager {
     private static FileConfiguration dungeonsConfig;
     private static FileConfiguration dungeonGatesConfig;
     private static FileConfiguration databaseConfig;
+    private static FileConfiguration teleportPortals;
 
     public static void init() {
         if (!GuardiansOfAdelia.getInstance().getDataFolder().exists()) {
@@ -49,6 +53,7 @@ public class ConfigManager {
         createTowns();
         createDungeons();
         createDungeonGates();
+        createTeleportPortals();
     }
 
     public static void loadConfigALL() {
@@ -58,6 +63,7 @@ public class ConfigManager {
         loadTowns();
         loadDungeons();
         loadDungeonGates();
+        loadTeleportPortals();
     }
 
     public static void writeConfigALL() {
@@ -369,6 +375,50 @@ public class ConfigManager {
             float pitch = (float) dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".pitch");
             Location location = new Location(world, x, y, z, yaw, pitch);
             MiniGameManager.addMinigamePortal(location, dungeonTheme);
+        }
+    }
+
+    private static void createTeleportPortals() {
+        File customConfigFile = new File(DATA_FOLDER, "teleportPortals.yml");
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+            GuardiansOfAdelia.getInstance().saveResource("teleportPortals.yml", false);
+        }
+
+        teleportPortals = new YamlConfiguration();
+        try {
+            teleportPortals.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadTeleportPortals() {
+        int portalNumber = teleportPortals.getInt("PortalNumber");
+        for (int i = 1; i <= portalNumber; i++) {
+            String worldString = teleportPortals.getString("p" + i + ".world");
+            World world = Bukkit.getWorld(worldString);
+            double x = teleportPortals.getDouble("p" + i + ".x");
+            double y = teleportPortals.getDouble("p" + i + ".y");
+            double z = teleportPortals.getDouble("p" + i + ".z");
+            float yaw = (float) teleportPortals.getDouble("p" + i + ".yaw");
+            float pitch = (float) teleportPortals.getDouble("p" + i + ".pitch");
+            Location location = new Location(world, x, y, z, yaw, pitch);
+            PortalColor portalColor = PortalColor.valueOf(teleportPortals.getString("p" + i + ".color"));
+            Portal portal = new Portal(location, portalColor);
+
+            PortalManager.addPortal(portal);
+
+            String tpWorldString = teleportPortals.getString("p" + i + ".tpWorld");
+            World tpWorld = Bukkit.getWorld(tpWorldString);
+            double tpX = teleportPortals.getDouble("p" + i + ".tpX");
+            double tpY = teleportPortals.getDouble("p" + i + ".tpY");
+            double tpZ = teleportPortals.getDouble("p" + i + ".tpZ");
+            float tpYaw = (float) teleportPortals.getDouble("p" + i + ".tpYaw");
+            float tpPitch = (float) teleportPortals.getDouble("p" + i + ".tpPitch");
+            Location tpLocation = new Location(tpWorld, tpX, tpY, tpZ, tpYaw, tpPitch);
+
+            PortalManager.addInstantTeleportPortal(portal, tpLocation);
         }
     }
 }

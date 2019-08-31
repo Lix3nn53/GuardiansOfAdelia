@@ -30,19 +30,29 @@ public class MyChunkEvents implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (chunk.isLoaded()) {
-                    Entity[] chunkEntities = chunk.getEntities();
-                    for (Entity chunkEntity : chunkEntities) {
-                        if (shouldChunkEventRemove(chunkEntity)) {
-                            SpawnerManager.onMobDeath(chunkEntity);
-                            chunkEntity.remove();
-                        }
+                Entity[] chunkEntities = chunk.getEntities();
+                for (Entity chunkEntity : chunkEntities) {
+                    if (shouldChunkEventRemove(chunkEntity)) {
+                        SpawnerManager.onMobDeath(chunkEntity);
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                chunkEntity.remove();
+                            }
+                        }.runTask(GuardiansOfAdelia.getInstance());
                     }
-                    SpawnerManager.activateSpawnersOnChunk(chunk);
-                    createCustomEntitiesOnChunkLoad(chunk);
                 }
+
+                SpawnerManager.activateSpawnersOnChunk(chunk);
+
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        createCustomEntitiesOnChunkLoad(chunk);
+                    }
+                }.runTask(GuardiansOfAdelia.getInstance());
             }
-        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L);
+        }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -63,18 +73,21 @@ public class MyChunkEvents implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (!chunk.isLoaded()) {
-                    Entity[] chunkEntities = chunk.getEntities();
-                    for (Entity chunkEntity : chunkEntities) {
-                        if (shouldChunkEventRemove(chunkEntity)) {
-                            SpawnerManager.onMobDeath(chunkEntity);
-                            chunkEntity.remove();
-                        }
+                Entity[] chunkEntities = chunk.getEntities();
+                for (Entity chunkEntity : chunkEntities) {
+                    if (shouldChunkEventRemove(chunkEntity)) {
+                        SpawnerManager.onMobDeath(chunkEntity);
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                chunkEntity.remove();
+                            }
+                        }.runTask(GuardiansOfAdelia.getInstance());
                     }
-                    SpawnerManager.deactivateSpawnersOnChunk(chunk);
                 }
+                SpawnerManager.deactivateSpawnersOnChunk(chunk);
             }
-        }.runTaskLater(GuardiansOfAdelia.getInstance(), 100L);
+        }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
     }
 
     private boolean shouldChunkEventRemove(Entity chunkEntity) {

@@ -170,7 +170,7 @@ public class DatabaseManager {
             //if player is in character selection it is not safe to save
             return;
         }
-        if (player.getLocation().getWorld().getName().equals("begining")) { //tutorial
+        if (player.getLocation().getWorld().getName().equals("tutorial")) { //tutorial
             return;
         }
 

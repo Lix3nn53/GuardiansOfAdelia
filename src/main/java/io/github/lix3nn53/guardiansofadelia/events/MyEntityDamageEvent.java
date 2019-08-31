@@ -41,9 +41,6 @@ public class MyEntityDamageEvent implements Listener {
 
         double customNaturalDamage = getCustomNaturalDamage(cause, (LivingEntity) entity);
         if (customNaturalDamage > 0) {
-            if (entity instanceof Player) {
-                Player player = (Player) entity;
-            }
             event.setDamage(customNaturalDamage);
         }
 

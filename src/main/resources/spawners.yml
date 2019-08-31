@@ -1642,7 +1642,7 @@ Spawners:
     x: 57.0
     y: 75.0
     z: 2384.0
-    world: begining
+    world: tutorial
     mob: TUTORIAL_2
     amount: 1
     maxamount: 2
@@ -1650,23 +1650,23 @@ Spawners:
     x: 60.0
     y: 78.0
     z: 2395.0
-    world: begining
+    world: tutorial
     mob: TUTORIAL_2
     amount: 1
     maxamount: 2
   s226:
-    x: 56.0
+    x: 62.0
     y: 75.0
-    z: 2279.0
-    world: begining
+    z: 2286.0
+    world: tutorial
     mob: TUTORIAL_1
     amount: 1
     maxamount: 2
   s227:
-    x: 62.0
+    x: 56.0
     y: 75.0
-    z: 2286.0
-    world: begining
+    z: 2279.0
+    world: tutorial
     mob: TUTORIAL_1
     amount: 1
     maxamount: 2
@@ -1674,7 +1674,7 @@ Spawners:
     x: 62.0
     y: 75.0
     z: 2270.0
-    world: begining
+    world: tutorial
     mob: TUTORIAL_1
     amount: 1
     maxamount: 2
@@ -1682,7 +1682,7 @@ Spawners:
     x: 56.0
     y: 75.0
     z: 2261.0
-    world: begining
+    world: tutorial
     mob: TUTORIAL_1
     amount: 1
     maxamount: 2
@@ -1762,7 +1762,7 @@ Spawners:
     x: 58.0
     y: 83.0
     z: 2405.0
-    world: begining
+    world: tutorial
     mob: TUTORIAL_2
     amount: 1
     maxamount: 2
@@ -2530,7 +2530,7 @@ Spawners:
     x: 59.0
     y: 101.0
     z: 2606.0
-    world: begining
+    world: tutorial
     mob: TUTORIAL_BOSS
     amount: 1
     maxamount: 1
@@ -2567,16 +2567,16 @@ Spawners:
     amount: 1
     maxamount: 2
   s321:
-    x: -2097.0
-    y: 24.0
+    x: -2103.0
+    y: 14.0
     z: 3135.0
     world: world
     mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
   s322:
-    x: -2103.0
-    y: 14.0
+    x: -2097.0
+    y: 24.0
     z: 3135.0
     world: world
     mob: ZOMBIE_JOCKEY
@@ -2671,19 +2671,19 @@ Spawners:
     amount: 1
     maxamount: 2
   s334:
-    x: -2949.0
-    y: 67.0
-    z: 2857.0
-    world: world
-    mob: GOBLIN_FIGHTER
-    amount: 1
-    maxamount: 2
-  s335:
     x: -2959.0
     y: 67.0
     z: 2848.0
     world: world
     mob: WITCH
+    amount: 1
+    maxamount: 2
+  s335:
+    x: -2949.0
+    y: 67.0
+    z: 2857.0
+    world: world
+    mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
   s336:
@@ -2991,19 +2991,19 @@ Spawners:
     amount: 1
     maxamount: 2
   s374:
-    x: -1939.0
-    y: 69.0
-    z: 3783.0
-    world: world
-    mob: PIRATE_SHOOTER
-    amount: 1
-    maxamount: 2
-  s375:
     x: -1952.0
     y: 67.0
     z: 3790.0
     world: world
     mob: PIRATE_FIGHTER
+    amount: 1
+    maxamount: 2
+  s375:
+    x: -1939.0
+    y: 69.0
+    z: 3783.0
+    world: world
+    mob: PIRATE_SHOOTER
     amount: 1
     maxamount: 2
   s376:

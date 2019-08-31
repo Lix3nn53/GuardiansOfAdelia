@@ -73,8 +73,13 @@ public class SpawnerManager {
                         }
                     } else {
                         it.remove();
-                        entity.remove();
                         spawner.onSpawnedEntityDeath();
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                entity.remove();
+                            }
+                        }.runTask(GuardiansOfAdelia.getInstance());
                     }
                 }
 
@@ -83,23 +88,17 @@ public class SpawnerManager {
                 for (int i = 0; i < activeSpawnerList.size(); i += howManyEachTime) {
                     List<Spawner> sub = activeSpawnerList.subList(i, Math.min(activeSpawnerList.size(), i + howManyEachTime));
 
-                    if (i > 0) {
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                for (Spawner spawner : sub) {
-                                    spawner.spawn();
-                                }
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            for (Spawner spawner : sub) {
+                                spawner.spawn();
                             }
-                        }.runTaskLater(GuardiansOfAdelia.getInstance(), i * 2L);
-                    } else {
-                        for (Spawner spawner : sub) {
-                            spawner.spawn();
                         }
-                    }
+                    }.runTaskLater(GuardiansOfAdelia.getInstance(), i * 2L);
                 }
             }
-        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20 * 40L, 20 * 20L);
+        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 40L, 20 * 20L);
     }
 
     public static List<Spawner> getSpawners() {

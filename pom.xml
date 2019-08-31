@@ -65,6 +65,7 @@
                     <include>dungeons.yml</include>
                     <include>dungeonGates.yml</include>
                     <include>database.yml</include>
+                    <include>teleportPortals.yml</include>
                 </includes>
             </resource>
             <resource>

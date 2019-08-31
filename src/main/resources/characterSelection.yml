@@ -40,9 +40,9 @@ characterSelectionHologram4:
   yaw: -45.5
   pitch: -1
 tutorialStart:
-  world: begining
-  x: 268
-  y: 151.0
-  z: -830.5
-  yaw: -4.5
-  pitch: -9
+  world: tutorial
+  x: 694.5
+  y: 19.5
+  z: -267.5
+  yaw: 112.5
+  pitch: -4.5

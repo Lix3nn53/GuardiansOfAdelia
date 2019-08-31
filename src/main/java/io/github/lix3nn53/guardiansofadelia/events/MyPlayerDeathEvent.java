@@ -38,7 +38,7 @@ public class MyPlayerDeathEvent implements Listener {
                     } else {
                         TombManager.onDeath(player, deathLocation);
                     }
-                } else if (deathLocation.getWorld().getName().equals("begining")) {
+                } else if (deathLocation.getWorld().getName().equals("tutorial")) {
                     player.teleport(CharacterSelectionScreenManager.getTutorialStart());
                 } else if (MiniGameManager.isInMinigame(player)) {
                     MiniGameManager.onPlayerDeath(player);

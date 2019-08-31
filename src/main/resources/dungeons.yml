@@ -365,42 +365,42 @@ LAVA4:
   timeLimitInMinutes: 10
   bossMobName: §cWar Chief Drogoth
 DARKNESS1:
-  x: 3515.5
-  y: 151.5
-  z: 688.5
+  x: 3803.5
+  y: 19.5
+  z: 624.5
   world: dungeons
-  yaw: -179.5
-  pitch: 0.5
+  yaw: 112
+  pitch: -4.5
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §5Aleesia
 DARKNESS2:
-  x: 3522.5
-  y: 151.5
-  z: -210.5
+  x: 3810.5
+  y: 19.5
+  z: -276.5
   world: dungeons
-  yaw: -180.5
-  pitch: 2.5
+  yaw: 112
+  pitch: -4.5
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §5Aleesia
 DARKNESS3:
-  x: 3530.5
-  y: 151.5
-  z: -1069.5
+  x: 3818.5
+  y: 19.5
+  z: -1135.5
   world: dungeons
-  yaw: -180.5
-  pitch: -0.5
+  yaw: 112
+  pitch: -4.5
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §5Aleesia
 DARKNESS4:
-  x: 3553.5
-  y: 151.5
-  z: -1957.5
+  x: 3841.5
+  y: 19.5
+  z: -2026.5
   world: dungeons
-  yaw: -180.5
-  pitch: 0.5
+  yaw: 112
+  pitch: -4.5
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §5Aleesia
