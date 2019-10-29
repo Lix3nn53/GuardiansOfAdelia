@@ -10,7 +10,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -50,6 +52,18 @@ public class RequestHandler {
 
         Player playerExact = Bukkit.getPlayerExact(minecraftUsername);
         if (playerExact != null) {
+            InventoryView openInventory = playerExact.getOpenInventory();
+            String title = openInventory.getTitle();
+
+            if (title.contains("Premium Storage")) {
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        playerExact.closeInventory();
+                    }
+                }.runTask(GuardiansOfAdelia.getInstance());
+            }
+
             UUID uuid = playerExact.getUniqueId();
             if (GuardianDataManager.hasGuardianData(uuid)) {
                 GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
