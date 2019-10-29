@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
@@ -20,39 +19,22 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class MyChunkEvents implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onChunkLoadEvent(ChunkLoadEvent event) {
         Chunk chunk = event.getChunk();
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                Entity[] chunkEntities = chunk.getEntities();
-                for (Entity chunkEntity : chunkEntities) {
-                    if (shouldChunkEventRemove(chunkEntity)) {
-                        SpawnerManager.onMobDeath(chunkEntity);
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                chunkEntity.remove();
-                            }
-                        }.runTask(GuardiansOfAdelia.getInstance());
-                    }
-                }
-
-                SpawnerManager.activateSpawnersOnChunk(chunk);
-
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        createCustomEntitiesOnChunkLoad(chunk);
-                    }
-                }.runTask(GuardiansOfAdelia.getInstance());
+        Entity[] chunkEntities = chunk.getEntities();
+        for (Entity chunkEntity : chunkEntities) {
+            if (shouldChunkEventRemove(chunkEntity)) {
+                SpawnerManager.onMobDeath(chunkEntity);
+                chunkEntity.remove();
             }
-        }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
+        }
+
+        SpawnerManager.activateSpawnersOnChunk(chunk);
+        createCustomEntitiesOnChunkLoad(chunk);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -70,24 +52,14 @@ public class MyChunkEvents implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onChunkUnloadEvent(ChunkUnloadEvent event) {
         Chunk chunk = event.getChunk();
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                Entity[] chunkEntities = chunk.getEntities();
-                for (Entity chunkEntity : chunkEntities) {
-                    if (shouldChunkEventRemove(chunkEntity)) {
-                        SpawnerManager.onMobDeath(chunkEntity);
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                chunkEntity.remove();
-                            }
-                        }.runTask(GuardiansOfAdelia.getInstance());
-                    }
-                }
-                SpawnerManager.deactivateSpawnersOnChunk(chunk);
+        Entity[] chunkEntities = chunk.getEntities();
+        for (Entity chunkEntity : chunkEntities) {
+            if (shouldChunkEventRemove(chunkEntity)) {
+                SpawnerManager.onMobDeath(chunkEntity);
+                chunkEntity.remove();
             }
-        }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
+        }
+        SpawnerManager.deactivateSpawnersOnChunk(chunk);
     }
 
     private boolean shouldChunkEventRemove(Entity chunkEntity) {
