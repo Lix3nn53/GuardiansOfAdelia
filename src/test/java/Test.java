@@ -1,5 +1,12 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import io.github.lix3nn53.guardiansofadelia.socket.MySocketServer;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +17,9 @@ public class Test {
 
     private static final double MULTIPLIER = 0.1;
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
-        /*int bonusValue = getBonusValue(5000);
+     *//*int bonusValue = getBonusValue(5000);
         System.out.println(bonusValue);
         int newValue = 5000 + bonusValue;
         int decreaseValue = getDecreaseValue(newValue);
@@ -21,9 +28,9 @@ public class Test {
         for (int level = 0; level <= 90; level++) {
             System.out.println((int) (Math.pow(level, 1.75) - (level) + 0.5));
 
-        }*/
+        }*//*
 
-        /*List<Integer> integerList = new ArrayList<>();
+     *//*List<Integer> integerList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             integerList.add(i);
         }
@@ -35,8 +42,8 @@ public class Test {
         for (int i = 0; i < size; ++i) {
             int integer = integerList.get(i);
             System.out.println(integer);
-        }*/
-        /*List<Double> downRatesForLevel = new ArrayList<>();
+        }*//*
+     *//*List<Double> downRatesForLevel = new ArrayList<>();
         downRatesForLevel.add(0.75);
         downRatesForLevel.add(0.6);
         downRatesForLevel.add(0.45);
@@ -62,10 +69,10 @@ public class Test {
         System.out.println(totalRequiredExperience);
         System.out.println(level);
         System.out.println(currentExperience);
-        System.out.println(requiredExperience);*/
+        System.out.println(requiredExperience);*//*
 
 
-        /*int totalDefense = 855;
+     *//*int totalDefense = 855;
 
         double weaponDamage = 2025;
         for (double skillDamage = 100; skillDamage < 10000; skillDamage += 100) {
@@ -76,9 +83,9 @@ public class Test {
             damage = damage * reduction;
 
             System.out.println("skillDamage: " + skillDamage + " // result: " + (int) (damage + 0.5));
-        }*/
+        }*//*
 
-        /*List<String> activeSpawners = new ArrayList<>();
+     *//*List<String> activeSpawners = new ArrayList<>();
         activeSpawners.add("A");
         activeSpawners.add("B");
         activeSpawners.add("C");
@@ -94,9 +101,9 @@ public class Test {
             System.out.println("min: " + min);
             List<String> sub = activeSpawners.subList(i, Math.min(activeSpawners.size(), i + howManyEachTime));
             System.out.println(sub);
-        }*/
+        }*//*
 
-        /*HashMap<String, HashSet<String>> castKeyToSkillFlags = new HashMap<>();
+     *//*HashMap<String, HashSet<String>> castKeyToSkillFlags = new HashMap<>();
 
         String castKey = "key";
 
@@ -124,9 +131,9 @@ public class Test {
             castKeyToSkillFlags.put(castKey, flags);
         }
 
-        System.out.println(castKeyToSkillFlags.toString());*/
+        System.out.println(castKeyToSkillFlags.toString());*//*
 
-       /* playerDamages.put('A', 1D);
+     *//* playerDamages.put('A', 1D);
         playerDamages.put('S', 1D);
         playerDamages.put('D', 1D);
         playerDamages.put('F', 1D);
@@ -154,7 +161,54 @@ public class Test {
         int totalExperience = 0;
         for (int level = 1; level <= 0; level++) {
             System.out.println("Level 1123213123123123123123");
-        }*/
+        }*//*
+    }*/
+
+    private ServerSocket serverSocket;
+
+    public static void main(String[] args) throws IOException {
+        MySocketServer mySocketServer = new MySocketServer(25120);
+        mySocketServer.start();
+    }
+
+    public void start(int port) throws IOException {
+        serverSocket = new ServerSocket(port);
+        while (true)
+            new EchoClientHandler(serverSocket.accept()).start();
+    }
+
+    public void stop() throws IOException {
+        serverSocket.close();
+    }
+
+    private static class EchoClientHandler extends Thread {
+        private Socket clientSocket;
+        private PrintWriter out;
+        private BufferedReader in;
+
+        public EchoClientHandler(Socket socket) {
+            this.clientSocket = socket;
+        }
+
+        public void run() {
+            try {
+                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                in = new BufferedReader(
+                        new InputStreamReader(clientSocket.getInputStream()));
+
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    out.println(inputLine);
+                    System.out.println(inputLine);
+                }
+
+                in.close();
+                out.close();
+                clientSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static int getBonusValue(int value) {

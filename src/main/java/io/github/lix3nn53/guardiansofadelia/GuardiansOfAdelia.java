@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.quests.list.MainStoryQuests;
 import io.github.lix3nn53.guardiansofadelia.quests.list.TutorialQuests;
+import io.github.lix3nn53.guardiansofadelia.socket.MySocketServer;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.ConfigManager;
@@ -26,6 +27,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -173,6 +175,18 @@ public class GuardiansOfAdelia extends JavaPlugin {
         //REGISTER QUESTS FROM LISTS
         TutorialQuests.createQuests();
         MainStoryQuests.createQuests();
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                try {
+                    MySocketServer mySocketServer = new MySocketServer(25120);
+                    mySocketServer.start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
     }
 
     @Override

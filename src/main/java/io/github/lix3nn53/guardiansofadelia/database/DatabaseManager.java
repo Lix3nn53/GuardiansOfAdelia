@@ -180,8 +180,9 @@ public class DatabaseManager {
         StaffRank staffRank = guardianData.getStaffRank();
         ItemStack[] personalStorage = guardianData.getPersonalStorage();
         ItemStack[] bazaarStorage = guardianData.getBazaarStorage();
+        ItemStack[] premiumStorage = guardianData.getPremiumStorage();
         try {
-            DatabaseQueries.setPlayerStaffRankAndStorages(uuid, staffRank, personalStorage, bazaarStorage);
+            DatabaseQueries.setPlayerStaffRankAndStorages(uuid, staffRank, personalStorage, bazaarStorage, premiumStorage);
         } catch (SQLException e) {
             e.printStackTrace();
         }

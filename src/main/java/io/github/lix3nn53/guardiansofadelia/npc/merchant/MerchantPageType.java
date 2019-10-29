@@ -39,6 +39,7 @@ public enum MerchantPageType {
     PERSONAL_STORAGE,
     GUILD_STORAGE,
     BAZAAR_STORAGE,
+    PREMIUM_STORAGE,
     WEAPON,
     ARMOR,
     SHIELD,
@@ -66,6 +67,8 @@ public enum MerchantPageType {
                 return null;
             case BAZAAR_STORAGE:
                 return getBazaarStorageGui(player, resourceNpc);
+            case PREMIUM_STORAGE:
+                return getPremiumStorageGui(player, resourceNpc);
             case WEAPON:
                 return getWeaponShop(shopLevel, resourceNpc);
             case ARMOR:
@@ -146,6 +149,16 @@ public enum MerchantPageType {
         if (GuardianDataManager.hasGuardianData(uuid)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             return guardianData.getBazaarStorageGui();
+        }
+        return guiGeneric;
+    }
+
+    private GuiGeneric getPremiumStorageGui(Player player, int shopNpc) {
+        GuiGeneric guiGeneric = new GuiGeneric(54, "Premium Storage", shopNpc);
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            return guardianData.getPremiumStorageGui();
         }
         return guiGeneric;
     }

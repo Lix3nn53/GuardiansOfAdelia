@@ -20,6 +20,7 @@ public class GuardianData {
 
     private final GuiGeneric personalStorage = new GuiGeneric(54, "Personal Storage", 0);
     private final GuiGeneric bazaarStorage = new GuiGeneric(54, "Bazaar Storage", 0);
+    private final GuiGeneric premiumStorage = new GuiGeneric(54, "Premium Storage", 0);
 
     private RPGCharacter activeCharacter;
     private int activeCharacterNo = 0;
@@ -112,6 +113,14 @@ public class GuardianData {
         this.bazaarStorage.setContents(bazaarStorage);
     }
 
+    public ItemStack[] getPremiumStorage() {
+        return premiumStorage.getContents();
+    }
+
+    public void setPremiumStorage(ItemStack[] premiumStorage) {
+        this.premiumStorage.setContents(premiumStorage);
+    }
+
     public GuiGeneric getPersonalStorageGui() {
         return this.personalStorage;
     }
@@ -120,10 +129,23 @@ public class GuardianData {
         return this.bazaarStorage;
     }
 
+    public GuiGeneric getPremiumStorageGui() {
+        return this.premiumStorage;
+    }
+
     public boolean addToBazaarStorage(ItemStack itemStack) {
         if (this.bazaarStorage.anyEmpty()) {
             //inventory has empty slot
             this.bazaarStorage.addItem(itemStack);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addToPremiumStorage(ItemStack itemStack) {
+        if (this.premiumStorage.anyEmpty()) {
+            //inventory has empty slot
+            this.premiumStorage.addItem(itemStack);
             return true;
         }
         return false;

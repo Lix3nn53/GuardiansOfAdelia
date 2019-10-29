@@ -102,6 +102,14 @@ public class MerchantMenu extends GuiGeneric {
             itemMeta.setLore(lore3);
             bazaar.setItemMeta(itemMeta);
             setItem(22, bazaar, MerchantPageType.BAZAAR_STORAGE);
+
+            ItemStack premium = new ItemStack(Material.RED_WOOL);
+            itemMeta.setDisplayName("Premium Storage");
+            List<String> lore4 = new ArrayList<>();
+            lore4.add("");
+            itemMeta.setLore(lore4);
+            premium.setItemMeta(itemMeta);
+            setItem(24, premium, MerchantPageType.PREMIUM_STORAGE);
         } else if (merchantType.equals(MerchantType.MAGIC_SHOP)) {
             ItemStack weapons = new ItemStack(Material.MAGENTA_WOOL);
             ItemMeta itemMeta = weapons.getItemMeta();

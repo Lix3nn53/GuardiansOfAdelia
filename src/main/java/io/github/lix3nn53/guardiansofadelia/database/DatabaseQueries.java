@@ -57,6 +57,7 @@ public class DatabaseQueries {
                     " `staff_rank`       varchar(20) ,\n" +
                     " `storage_personal` text ,\n" +
                     " `storage_bazaar`   text ,\n" +
+                    " `storage_premium`   text ,\n" +
                     "PRIMARY KEY (`uuid`)\n" +
                     ");");
             statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player_character`\n" +
@@ -229,11 +230,39 @@ public class DatabaseQueries {
                     ItemStack[] itemStacks = ItemSerializer.restoreModdedStacks(storageBazaarString);
                     guardianData.setBazaarStorage(itemStacks);
                 }
+
+                String storagePremiumString = resultSet.getString("storage_premium");
+                if (!resultSet.wasNull()) {
+                    ItemStack[] itemStacks = ItemSerializer.restoreModdedStacks(storagePremiumString);
+                    guardianData.setPremiumStorage(itemStacks);
+                }
             }
             resultSet.close();
             pst.close();
         }
         return guardianData;
+    }
+
+    public static ItemStack[] getPremiumStorage(UUID uuid) throws SQLException {
+        String SQL_QUERY = "SELECT storage_premium FROM goa_player WHERE uuid = ?";
+        ItemStack[] itemStacks = null;
+        try (Connection con = ConnectionPool.getConnection()) {
+            PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+
+            pst.setString(1, uuid.toString());
+
+            ResultSet resultSet = pst.executeQuery();
+
+            if (resultSet.next()) {
+                String storagePremiumString = resultSet.getString("storage_premium");
+                if (!resultSet.wasNull()) {
+                    itemStacks = ItemSerializer.restoreModdedStacks(storagePremiumString);
+                }
+            }
+            resultSet.close();
+            pst.close();
+        }
+        return itemStacks;
     }
 
     public static RPGCharacter getCharacterAndSetPlayerInventory(Player player, int characterNo) throws SQLException {
@@ -559,16 +588,17 @@ public class DatabaseQueries {
         }
     }
 
-    public static int setPlayerStaffRankAndStorages(UUID uuid, StaffRank rank, ItemStack[] personalStorage, ItemStack[] bazaarStorage) throws SQLException {
+    public static int setPlayerStaffRankAndStorages(UUID uuid, StaffRank rank, ItemStack[] personalStorage, ItemStack[] bazaarStorage, ItemStack[] premiumStorage) throws SQLException {
         String SQL_QUERY = "INSERT INTO goa_player \n" +
-                "\t(uuid, staff_rank, storage_personal, storage_bazaar) \n" +
+                "\t(uuid, staff_rank, storage_personal, storage_bazaar, storage_premium) \n" +
                 "VALUES \n" +
-                "\t(?, ?, ?, ?)\n" +
+                "\t(?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
                 "\tuuid = VALUES(uuid),\n" +
                 "\tstaff_rank = VALUES(staff_rank),\n" +
                 "\tstorage_personal = VALUES(storage_personal),\n" +
-                "\tstorage_bazaar = VALUES(storage_bazaar);";
+                "\tstorage_bazaar = VALUES(storage_bazaar),\n" +
+                "\tstorage_premium = VALUES(storage_premium);";
         try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
@@ -578,6 +608,31 @@ public class DatabaseQueries {
             pst.setString(3, personalStorageString);
             String bazaarStorageString = ItemSerializer.saveModdedStacksData(bazaarStorage);
             pst.setString(4, bazaarStorageString);
+            String premiumStorageString = ItemSerializer.saveModdedStacksData(premiumStorage);
+            pst.setString(5, premiumStorageString);
+
+            //2 = replaced, 1 = new row added
+            int returnValue = pst.executeUpdate();
+
+            pst.close();
+            return returnValue;
+        }
+    }
+
+    public static int setPremiumStorage(UUID uuid, ItemStack[] premiumStorage) throws SQLException {
+        String SQL_QUERY = "INSERT INTO goa_player \n" +
+                "\t(uuid, storage_premium) \n" +
+                "VALUES \n" +
+                "\t(?, ?)\n" +
+                "ON DUPLICATE KEY UPDATE\n" +
+                "\tuuid = VALUES(uuid),\n" +
+                "\tstorage_premium = VALUES(storage_premium);";
+        try (Connection con = ConnectionPool.getConnection()) {
+            PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+
+            pst.setString(1, uuid.toString());
+            String premiumStorageString = ItemSerializer.saveModdedStacksData(premiumStorage);
+            pst.setString(2, premiumStorageString);
 
             //2 = replaced, 1 = new row added
             int returnValue = pst.executeUpdate();
@@ -946,5 +1001,27 @@ public class DatabaseQueries {
             e.printStackTrace();
         }
         return charExists;
+    }
+
+    public static boolean uuidExists(UUID uuid) {
+        boolean exists = false;
+        String SQL_QUERY = "SELECT uuid FROM goa_player WHERE uuid = ?";
+        try (Connection con = ConnectionPool.getConnection()) {
+            PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+
+            pst.setString(1, uuid.toString());
+
+            ResultSet resultSet = pst.executeQuery();
+
+            if (resultSet.next()) {
+                //row exists
+                exists = true;
+            }
+            resultSet.close();
+            pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exists;
     }
 }
