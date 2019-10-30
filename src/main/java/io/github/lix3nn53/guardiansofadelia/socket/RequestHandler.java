@@ -27,6 +27,7 @@ import java.util.UUID;
 public class RequestHandler {
 
     private final PrintWriter out;
+    private String responseMessage = "noResponse";
 
     public RequestHandler(PrintWriter out) {
         this.out = out;
@@ -68,6 +69,7 @@ public class RequestHandler {
             if (GuardianDataManager.hasGuardianData(uuid)) {
                 GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                 success = guardianData.addToPremiumStorage(weapon);
+                if (!success) this.responseMessage = "Your premium-storage is full!";
             }
         } else {
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(minecraftUsername);
@@ -77,9 +79,10 @@ public class RequestHandler {
 
         JSONObject jsonResponse = new JSONObject();
         if (!success) {
-            jsonResponse.put("error", "");
+            jsonResponse.put("error", this.responseMessage);
         } else {
-            jsonResponse.put("success", "");
+            this.responseMessage = "Added " + weapon.getItemMeta().getDisplayName() + " to your premium-inventory!";
+            jsonResponse.put("success", this.responseMessage);
         }
 
         sendResponse(jsonResponse.toJSONString());
@@ -90,7 +93,10 @@ public class RequestHandler {
     }
 
     private boolean addItemToPremiumStorage(UUID uuid, ItemStack itemStack) {
-        if (!uuidExists(uuid)) return false;
+        if (!uuidExists(uuid)) {
+            this.responseMessage = "You must be logged in to game server at least once!";
+            return false;
+        }
 
         try {
             ItemStack[] premiumStorage = DatabaseQueries.getPremiumStorage(uuid);
@@ -99,7 +105,10 @@ public class RequestHandler {
 
             if (premiumStorage != null) list = new ArrayList<>(Arrays.asList(premiumStorage));
 
-            if (list.size() >= 54) return false;
+            if (list.size() >= 54) {
+                this.responseMessage = "Your premium-storage is full!";
+                return false;
+            }
 
             list.add(itemStack);
             ItemStack[] newPremiumStorage = list.toArray(new ItemStack[0]);
@@ -110,6 +119,7 @@ public class RequestHandler {
             e.printStackTrace();
         }
 
+        this.responseMessage = "A database error occurred.";
         return false;
     }
 

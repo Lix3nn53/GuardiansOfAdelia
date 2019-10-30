@@ -55,9 +55,9 @@ public class DatabaseQueries {
                     "(\n" +
                     " `uuid`             varchar(40) NOT NULL ,\n" +
                     " `staff_rank`       varchar(20) ,\n" +
-                    " `storage_personal` text ,\n" +
-                    " `storage_bazaar`   text ,\n" +
-                    " `storage_premium`   text ,\n" +
+                    " `storage_personal` mediumtext ,\n" +
+                    " `storage_bazaar`   mediumtext ,\n" +
+                    " `storage_premium`   mediumtext ,\n" +
                     "PRIMARY KEY (`uuid`)\n" +
                     ");");
             statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player_character`\n" +
@@ -75,7 +75,7 @@ public class DatabaseQueries {
                     " `job_type`       varchar(45) NULL ,\n" +
                     " `job_level`      smallint NULL ,\n" +
                     " `job_experience` mediumint NULL ,\n" +
-                    " `inventory`      text NOT NULL ,\n" +
+                    " `inventory`      mediumtext NOT NULL ,\n" +
                     " `turnedinquests` text NULL ,\n" +
                     " `activequests`   text NULL ,\n" +
                     " `location`       text NOT NULL ,\n" +
