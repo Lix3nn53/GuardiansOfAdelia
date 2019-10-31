@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.quests.list;
+package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
@@ -17,15 +17,18 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainStoryQuests {
+public class RoumenQuests {
 
     public static void createQuests() {
+        createQuestOne();
+        createQuestTwo();
+    }
 
-        //king of roumen first quest
+    private static void createQuestOne() {
         List<String> story = new ArrayList<>();
-        story.add("You need to master power of elements and join");
-        story.add("Guardians of Adelia to end darkness.");
-        story.add("But this is a long journey, let's start");
+        story.add("You need to master power of elements and become");
+        story.add("a Guardian of Adelia to fight against darkness.");
+        story.add("But this will be a long journey, let's start");
         story.add("with meeting villagers in Roumen.");
         List<Task> tasks = new ArrayList<>();
 
@@ -46,9 +49,7 @@ public class MainStoryQuests {
 
         Task task2 = new TaskInteract(22);
         ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(1, 3);
-        hpPotion.setAmount(10);
         ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(1, 3);
-        manaPotion.setAmount(10);
         GiveItemAction giveItemAction1 = new GiveItemAction(hpPotion);
         GiveItemAction giveItemAction2 = new GiveItemAction(manaPotion);
         task2.addOnCompleteAction(giveItemAction1);
@@ -60,13 +61,27 @@ public class MainStoryQuests {
         List<ItemStack> itemPrizes = new ArrayList<>();
         String obj = "Talk to Item Merchant TASK_PROGRESS_1/1\n" + "Talk to Blacksmith TASK_PROGRESS_2/1\n" +
                 "Talk to Magical Item Merchant TASK_PROGRESS_3/1\n"
-                + "Then go back to King of Roumen\n";
-        Quest quest1 = new Quest(6, "Another newbie?", story,
+                + "Then meet Sergeant Armin in building near city entrance\n";
+        Quest quest = new Quest(6, "Another newbie?", story,
                 "Time to meet villagers!", obj,
                 "", tasks, itemPrizes, 10, 10, 0, 5,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest1, 31, 31);
+        QuestNPCManager.addQuest(quest, 31, 32);
+    }
 
-        //king of roumen 2nd quest
+    private static void createQuestTwo() {
+        List<String> story = new ArrayList<>();
+        story.add("Hobbits are having difficulties because of");
+        story.add("strange behavior of creatures in forest.");
+        story.add("This is your first task as a Guardian!");
+        story.add("Can you save the Hobbit Village?");
+        List<Task> tasks = new ArrayList<>();
+        List<ItemStack> itemPrizes = new ArrayList<>();
+        String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.\nDon't forget to use your boat!";
+        Quest quest = new Quest(7, "Meet the hobbits!", story,
+                startMsg, startMsg + "\nTalk with hobbit Village Elder Odo",
+                "", tasks, itemPrizes, 10, 10, 0, 6,
+                Material.GRASS_BLOCK);
+        QuestNPCManager.addQuest(quest, 32, 33);
     }
 }

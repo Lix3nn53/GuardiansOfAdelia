@@ -452,13 +452,17 @@ public class MenuList {
         guiGeneric.setItem(8, city);
 
         ItemStack npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GOLD + "King of Roumen #19");
+        itemMeta.setDisplayName(ChatColor.GOLD + "King of Roumen #31");
         npc.setItemMeta(itemMeta);
         guiGeneric.setItem(18, npc);
 
-        itemMeta.setDisplayName(ChatColor.GREEN + "Hogpen #20");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Sergeant Armin #32");
         npc.setItemMeta(itemMeta);
         guiGeneric.setItem(19, npc);
+
+        itemMeta.setDisplayName(ChatColor.GREEN + "Village Elder Odo #33");
+        npc.setItemMeta(itemMeta);
+        guiGeneric.setItem(20, npc);
 
         return guiGeneric;
     }

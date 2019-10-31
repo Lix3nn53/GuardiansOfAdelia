@@ -12,8 +12,8 @@ import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
-import io.github.lix3nn53.guardiansofadelia.quests.list.MainStoryQuests;
 import io.github.lix3nn53.guardiansofadelia.quests.list.TutorialQuests;
+import io.github.lix3nn53.guardiansofadelia.quests.list.mainstory.MainStoryQuests;
 import io.github.lix3nn53.guardiansofadelia.socket.MySocketServer;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
@@ -84,6 +84,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MyPlayerTakeLecternBookEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyProjectileHitEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyProjectileLaunchEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyVehicleDestroyEvent(), this);
 
         //init managers
         ConfigManager.init();
@@ -134,6 +135,9 @@ public class GuardiansOfAdelia extends JavaPlugin {
             } else {
                 w.setPVP(false);
                 w.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+                if (w.getName().equals("tutorial")) {
+                    w.setTime(18000);
+                }
             }
             getLogger().info("World(" + w.getName() + ") options set");
             getLogger().info("World(" + w.getName() + ") view distance: " + w.getViewDistance());
