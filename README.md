@@ -1,16 +1,16 @@
 # GuardiansOfAdelia
 
-My personal spigot(https://www.spigotmc.org/) plugin project to create a MMORPG minecraft server.
+My personal [Spigot](https://www.spigotmc.org/) plugin project to create a MMORPG minecraft server.
 
 ## Dependencies
-* HikariCP (https://github.com/brettwooldridge/HikariCP)
-* Spigot (https://github.com/SpigotMC)
-* ProtocolLib (https://github.com/dmulloy2/ProtocolLib)
-* Citizens (https://github.com/CitizensDev/Citizens2)
-* LibsDisguises (https://github.com/libraryaddict/LibsDisguises)
-* LuckPerms (https://github.com/lucko/LuckPerms)
-* WorldEdit (https://github.com/EngineHub/WorldEdit)
-* WorldGuard (https://github.com/EngineHub/WorldGuard)
+* [HikariCP](https://github.com/brettwooldridge/HikariCP)
+* [Spigot](https://github.com/SpigotMC)
+* [ProtocolLib](https://github.com/dmulloy2/ProtocolLib)
+* [Citizens](https://github.com/CitizensDev/Citizens2)
+* [LibsDisguises](https://github.com/libraryaddict/LibsDisguises)
+* [LuckPerms](https://github.com/lucko/LuckPerms)
+* [WorldEdit](https://github.com/EngineHub/WorldEdit)
+* [WorldGuard](https://github.com/EngineHub/WorldGuard)
 
 ## Features
 
