@@ -1,4 +1,5 @@
 # GuardiansOfAdelia
+# Made by Geik
 
 My personal spigot(https://www.spigotmc.org/) plugin project to create a MMORPG minecraft server.
 
