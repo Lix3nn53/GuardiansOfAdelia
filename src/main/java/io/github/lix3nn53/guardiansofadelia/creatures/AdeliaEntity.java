@@ -944,7 +944,7 @@ public enum AdeliaEntity {
             setCustomDamage(entity, 24);
             livingEntity = entity;
         } else if (this.equals(BOSS_ZOMBIE)) {
-            Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Zombie Leader", 2000D, EntityType.ZOMBIE);
+            Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Zombie Subject#471", 2000D, EntityType.ZOMBIE);
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(60D);
             entity.setBaby(false);
             entity.getEquipment().clear();

@@ -187,9 +187,19 @@ public final class Quest {
             }
 
             lore.add("");
-            for (String st : story) {
-                lore.add(ChatColor.ITALIC.toString() + ChatColor.YELLOW + st);
+
+            Material type = questItem.getType();
+            if (type.equals(Material.RED_WOOL)) {
+                //sporiler protection
+                lore.add(ChatColor.ITALIC.toString() + ChatColor.RED + "SPOILER PROTECTION");
+                lore.add(ChatColor.ITALIC.toString() + ChatColor.RED + "You can't see the lore of this quest before");
+                lore.add(ChatColor.ITALIC.toString() + ChatColor.RED + "you meet the requirements.");
+            } else {
+                for (String st : story) {
+                    lore.add(ChatColor.ITALIC.toString() + ChatColor.YELLOW + st);
+                }
             }
+
             itemMeta.setLore(lore);
         }
         questItem.setItemMeta(itemMeta);

@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.quests.actions.GiveWeaponAction;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.SendTitleAction;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskInteract;
+import io.github.lix3nn53.guardiansofadelia.quests.task.TaskKill;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -17,11 +18,15 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoumenQuests {
+public class QuestsPhaseOne {
 
     public static void createQuests() {
         createQuestOne();
         createQuestTwo();
+        createQuestThree();
+        createQuestFour();
+        createQuestFive();
+        createQuestSix();
     }
 
     private static void createQuestOne() {
@@ -71,17 +76,97 @@ public class RoumenQuests {
 
     private static void createQuestTwo() {
         List<String> story = new ArrayList<>();
+        story.add("Forest of Slumber is most important resource");
+        story.add("for Hobbit Village.");
         story.add("Hobbits are having difficulties because of");
-        story.add("strange behavior of creatures in forest.");
+        story.add("monsters in Forest of Slumber.");
         story.add("This is your first task as a Guardian!");
         story.add("Can you save the Hobbit Village?");
         List<Task> tasks = new ArrayList<>();
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.\nDon't forget to use your boat!";
-        Quest quest = new Quest(7, "Meet the hobbits!", story,
+        Quest quest = new Quest(7, "Lets meet the hobbits!", story,
                 startMsg, startMsg + "\nTalk with hobbit Village Elder Odo",
                 "", tasks, itemPrizes, 10, 10, 0, 6,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 32, 33);
+    }
+
+    private static void createQuestThree() {
+        List<String> story = new ArrayList<>();
+        story.add("Hobbit Adventurer Milo is fighting alone in");
+        story.add("Forest of Slumber. Help him to restore the");
+        story.add("peace in the forest.");
+
+        List<Task> tasks = new ArrayList<>();
+        TaskKill taskKill = new TaskKill(ChatColor.GREEN + "Wild Lizard", 7);
+        tasks.add(taskKill);
+        TaskKill taskKill2 = new TaskKill(ChatColor.DARK_GREEN + "Poisonous Lizard", 5);
+        tasks.add(taskKill2);
+
+        List<ItemStack> itemPrizes = new ArrayList<>();
+        String objectiveText = "Lets enter Forest of Slumber!\nKill TASK_PROGRESS_1/7 Wild Lizard and TASK_PROGRESS_2/5 Poisonous Lizard\nThen talk to Adventurer Milo";
+        Quest quest = new Quest(8, "First combat!", story,
+                "startMsg", objectiveText,
+                "", tasks, itemPrizes, 10, 10, 0, 7,
+                Material.GRASS_BLOCK);
+        QuestNPCManager.addQuest(quest, 33, 34);
+    }
+
+    private static void createQuestFour() {
+        List<String> story = new ArrayList<>();
+        story.add("Sticky monsters appeared in the woods,");
+        story.add("lets deal with them and learn where they");
+        story.add("came from.");
+
+        List<Task> tasks = new ArrayList<>();
+        TaskKill taskKill = new TaskKill(ChatColor.GREEN + "Baby Slime", 14);
+        tasks.add(taskKill);
+        TaskKill taskKill2 = new TaskKill(ChatColor.GREEN + "Sticky Slime", 9);
+        tasks.add(taskKill2);
+
+        List<ItemStack> itemPrizes = new ArrayList<>();
+        String objectiveText = "Kill TASK_PROGRESS_1/9 Baby Slime and TASK_PROGRESS_2/14 Sticky Slime\nThen talk to Adventurer Milo";
+        Quest quest = new Quest(9, "Sticky situation", story,
+                "startMsg", objectiveText,
+                "", tasks, itemPrizes, 10, 10, 0, 8,
+                Material.GRASS_BLOCK);
+        QuestNPCManager.addQuest(quest, 34, 34);
+    }
+
+    private static void createQuestFive() {
+        List<String> story = new ArrayList<>();
+        story.add("We have found the magical portal that");
+        story.add("slimes comes from. Lets go in and stop them!");
+
+        List<Task> tasks = new ArrayList<>();
+        TaskKill taskKill = new TaskKill(ChatColor.GOLD + "King Slime", 1);
+        tasks.add(taskKill);
+
+        List<ItemStack> itemPrizes = new ArrayList<>();
+        String objectiveText = "Kill King Slime TASK_PROGRESS_1/1\nThen talk to Adventurer Milo";
+        Quest quest = new Quest(10, "Arcade dungeon!", story,
+                "startMsg", objectiveText,
+                "", tasks, itemPrizes, 10, 10, 0, 9,
+                Material.GRASS_BLOCK);
+        QuestNPCManager.addQuest(quest, 34, 34);
+    }
+
+    private static void createQuestSix() {
+        List<String> story = new ArrayList<>();
+        story.add("Lets bring the good news to hobbit elder then");
+        story.add("report to Sergeant Armin.");
+
+        List<Task> tasks = new ArrayList<>();
+        Task task = new TaskInteract(33);
+        tasks.add(task);
+
+        List<ItemStack> itemPrizes = new ArrayList<>();
+        String objectiveText = "Bring good news about Forest of Slumber to Village Elder OdoTASK_PROGRESS_1/1\nThen report back to Sergeant Armin";
+        Quest quest = new Quest(11, "Good news!", story,
+                "startMsg", objectiveText,
+                "", tasks, itemPrizes, 10, 10, 0, 10,
+                Material.GRASS_BLOCK);
+        QuestNPCManager.addQuest(quest, 34, 32);
     }
 }

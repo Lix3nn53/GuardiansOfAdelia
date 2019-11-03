@@ -99,9 +99,9 @@ public class TutorialQuests {
 
         //Aleesia to king of roumen
         List<String> story5 = new ArrayList<>();
-        story5.add("You woke up from a dream of the past.");
-        story5.add("Guardians lost against Aleesia brought darkness to");
-        story5.add("our world, Adelia.");
+        story5.add("You woke up from a dream of the past. In that dream,");
+        story5.add("Guardians lost the battle against Aleesia. Darkness");
+        story5.add("is slowly conquering the lands of Adelia...");
         List<Task> tasks5 = new ArrayList<>();
         List<ItemStack> itemPrizes5 = new ArrayList<>();
         Quest quest5 = new Quest(5, "A fresh start", story5,
