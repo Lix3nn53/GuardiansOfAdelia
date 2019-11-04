@@ -21,6 +21,7 @@ public class QuestsPhaseTwo {
         createQuestFour();
         createQuestFive();
         createQuestSix();
+        createQuestSeven();
     }
 
     private static void createQuestOne() {
@@ -31,7 +32,7 @@ public class QuestsPhaseTwo {
         List<Task> tasks = new ArrayList<>();
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.\nDon't forget to use your boat!";
-        Quest quest = new Quest(12, "The Rotten City!", story,
+        Quest quest = new Quest(12, "Zombie invasion", story,
                 startMsg, "Talk with Dr. Rintarou",
                 "", tasks, itemPrizes, 10, 10, 0, 11,
                 Material.GRASS_BLOCK);
@@ -40,9 +41,9 @@ public class QuestsPhaseTwo {
 
     private static void createQuestTwo() {
         List<String> story = new ArrayList<>();
-        story.add("Hobbit Adventurer Milo is fighting alone in");
-        story.add("Forest of Slumber. Help him to restore the");
-        story.add("peace in the forest.");
+        story.add("Dr. Rintarou wants you to enter");
+        story.add("Rotten City and see if you can handle");
+        story.add("a few zombies.");
 
         List<Task> tasks = new ArrayList<>();
         TaskKill taskKill = new TaskKill(ChatColor.DARK_GREEN + "Zombie", 12);
@@ -52,8 +53,8 @@ public class QuestsPhaseTwo {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Time to enter Rotten City\nKill TASK_PROGRESS_1/12 Zombie and TASK_PROGRESS_2/8 Zombie Villager\nThen talk to Dr. Rintarou";
-        Quest quest = new Quest(13, "Zombie invasion!", story,
-                "startMsg", objectiveText,
+        Quest quest = new Quest(13, "The Rotten City", story,
+                "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, 12,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 35);
@@ -61,9 +62,8 @@ public class QuestsPhaseTwo {
 
     private static void createQuestThree() {
         List<String> story = new ArrayList<>();
-        story.add("Hobbit Adventurer Milo is fighting alone in");
-        story.add("Forest of Slumber. Help him to restore the");
-        story.add("peace in the forest.");
+        story.add("Dr. Rintarou needs zombie parts");
+        story.add("for his experiments.");
 
         List<Task> tasks = new ArrayList<>();
         TaskCollect taskCollect = new TaskCollect(ChatColor.DARK_GREEN + "Rotten Flesh", 12);
@@ -72,7 +72,7 @@ public class QuestsPhaseTwo {
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Dr. Rintarou needs zombie parts for his experiments\nCollect TASK_PROGRESS_1/12 Rotten Flesh\nThen talk to Dr. Rintarou";
         Quest quest = new Quest(14, "Disgusting experiments", story,
-                "startMsg", objectiveText,
+                "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, 13,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 35);
@@ -80,9 +80,8 @@ public class QuestsPhaseTwo {
 
     private static void createQuestFour() {
         List<String> story = new ArrayList<>();
-        story.add("Hobbit Adventurer Milo is fighting alone in");
-        story.add("Forest of Slumber. Help him to restore the");
-        story.add("peace in the forest.");
+        story.add("Dr. Rintarou needs zombie brains");
+        story.add("for his final experiment.");
 
         List<Task> tasks = new ArrayList<>();
         TaskCollect taskCollect = new TaskCollect(ChatColor.LIGHT_PURPLE + "Zombie Brain", 12);
@@ -90,8 +89,8 @@ public class QuestsPhaseTwo {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Dr. Rintarou needs zombie brains for his final experiment\nCollect TASK_PROGRESS_1/18 Zombie Brain\nThen talk to Dr. Rintarou";
-        Quest quest = new Quest(15, "Disgusting experiments", story,
-                "startMsg", objectiveText,
+        Quest quest = new Quest(15, "Pink jellies", story,
+                "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, 14,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 35);
@@ -99,14 +98,15 @@ public class QuestsPhaseTwo {
 
     private static void createQuestFive() {
         List<String> story = new ArrayList<>();
-        story.add("Lets bring the good news to hobbit elder then");
-        story.add("report to Sergeant Armin.");
+        story.add("Report to Sergeant Armin that you helped");
+        story.add("Dr. Rintarou on his final experiment and");
+        story.add("waiting for results.");
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report to Sergent Armin that you helped Dr. Rintarou finish his experiments";
-        Quest quest = new Quest(16, "Good news!", story,
-                "startMsg", objectiveText,
+        String objectiveText = "Report to Sergent Armin that you helped Dr. Rintarou on his final experiment";
+        Quest quest = new Quest(16, "Experiment reports", story,
+                "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, 15,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 32);
@@ -114,32 +114,37 @@ public class QuestsPhaseTwo {
 
     private static void createQuestSix() {
         List<String> story = new ArrayList<>();
-        story.add("We have found the magical portal that");
-        story.add("slimes comes from. Lets go in and stop them!");
+        story.add("Sergeant Armin's troops found a strange");
+        story.add("zombie that seems really dangerous.");
+        story.add("Stop that zombie then ask Dr. Rintarou");
+        story.add("about it.");
 
         List<Task> tasks = new ArrayList<>();
         TaskKill taskKill = new TaskKill(ChatColor.DARK_GREEN + "Zombie Subject#471", 1);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Kill the zombie Dr. Rintarou enchanted TASK_PROGRESS_1/1\nThen talk to Dr. Rintarou";
-        Quest quest = new Quest(17, "Arcade dungeon!", story,
-                "startMsg", objectiveText,
+        String objectiveText = "<Dungeon>\nKill Zombie Subject#471 TASK_PROGRESS_1/1\nThen talk to Dr. Rintarou";
+        Quest quest = new Quest(17, "Stronger zombies!?", story,
+                "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, 16,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 34, 34);
+        QuestNPCManager.addQuest(quest, 32, 35);
     }
 
     private static void createQuestSeven() {
         List<String> story = new ArrayList<>();
-        story.add("Report back to Sergeant Armin");
-        story.add("report to Sergeant Armin.");
+        story.add("Dr. Rintarou created stronger zombies");
+        story.add("to help the fight against darkness.");
+        story.add("But now that Guardians defeated his");
+        story.add("strongest experiment, he gave up and");
+        story.add("started working a cure for zombies.");
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Sergent Armin, Dr. Rintarou started working on a cure!";
-        Quest quest = new Quest(18, "Good news!", story,
-                "startMsg", objectiveText,
+        String objectiveText = "Report back to Sergent Armin that Dr. Rintarou started working on a cure!";
+        Quest quest = new Quest(18, "Dr. Rintarou is back to normal", story,
+                "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, 17,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 32);

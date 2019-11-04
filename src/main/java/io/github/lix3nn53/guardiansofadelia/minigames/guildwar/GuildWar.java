@@ -32,7 +32,7 @@ public class GuildWar extends Minigame {
 
     public GuildWar(int maxPoint, String mapName, int roomNo, List<Location> startLocations, List<Location> flagGroundLocations) {
         super("GuildWar", ChatColor.DARK_PURPLE, mapName, roomNo, 1, 10, 2, startLocations,
-                15, 2, TownManager.getTown(1), 999, 0, 20, 0);
+                15, 2, TownManager.getTown(1).getLocation(), 999, 0, 20, 0);
         this.maxPoint = maxPoint;
         for (Location flagGround : flagGroundLocations) {
             castles.add(new Castle(flagGround.getBlock()));

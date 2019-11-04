@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
@@ -19,7 +20,7 @@ public class Dungeon extends Minigame {
 
     public Dungeon(int levelReq, int timeLimitInMinutes, DungeonTheme theme, int roomNo, List<Location> startLocation, String bossMobName) {
         super("Dungeon " + theme.getName(), ChatColor.AQUA, theme.getName(), roomNo, levelReq, 4, 1, startLocation, timeLimitInMinutes,
-                1, theme.getDefaultTown(), 4, 0, 24, 1);
+                1, MiniGameManager.getPortalLocationOfDungeonTheme(theme), 4, 0, 24, 1);
         this.theme = theme;
         this.bossMobName = bossMobName;
         reformParties();

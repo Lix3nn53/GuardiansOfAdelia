@@ -3,7 +3,6 @@ package io.github.lix3nn53.guardiansofadelia.minigames;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
-import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -23,7 +22,7 @@ public abstract class Minigame {
     private final String mapName;
     private final HashMap<Integer, Integer> teamToScore = new HashMap<>();
     private final List<Location> startLocations;
-    private final Town backTown;
+    private final Location backLocation;
     private final int levelReq;
     private final int roomNo;
     private final int queueTimeLimitInMinutes;
@@ -42,11 +41,11 @@ public abstract class Minigame {
     private boolean isInGame = false;
 
     public Minigame(String gameTypeName, ChatColor gameColor, String mapName, int roomNo, int levelReq, int teamSize, int teamAmount, List<Location> startLocations, int timeLimitInMinutes,
-                    int queueTimeLimitInMinutes, Town backTown, int maxLives, int minTeamsAlive, int respawnDelayInSeconds, int requiredPlayerAmountToStart) {
+                    int queueTimeLimitInMinutes, Location backLocation, int maxLives, int minTeamsAlive, int respawnDelayInSeconds, int requiredPlayerAmountToStart) {
         this.gameTypeName = gameTypeName;
         this.gameColor = gameColor;
         this.mapName = mapName;
-        this.backTown = backTown;
+        this.backLocation = backLocation;
         this.levelReq = levelReq;
         this.timeLimitInMinutes = timeLimitInMinutes;
         this.startLocations = startLocations;
@@ -180,7 +179,7 @@ public abstract class Minigame {
                         if (isInGame) {
                             for (Player member : getPlayersInGame()) {
                                 MiniGameManager.removePlayer(member);
-                                member.teleport(backTown.getLocation());
+                                member.teleport(backLocation);
                                 member.setGameMode(GameMode.ADVENTURE);
                                 if (PartyManager.inParty(member)) {
                                     Party party = PartyManager.getParty(member);
@@ -352,7 +351,7 @@ public abstract class Minigame {
     public void leave(Player player) {
         if (player.isOnline()) {
             if (!player.getLocation().getWorld().getName().equals("world")) {
-                player.teleport(this.backTown.getLocation());
+                player.teleport(this.backLocation);
             }
             player.sendMessage(ChatColor.RED + "You have left " + getMinigameName());
         }
@@ -401,10 +400,6 @@ public abstract class Minigame {
 
     public List<Location> getStartLocations() {
         return startLocations;
-    }
-
-    public Town getBackTown() {
-        return backTown;
     }
 
     public int getRoomNo() {

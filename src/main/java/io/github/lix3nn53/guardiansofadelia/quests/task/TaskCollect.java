@@ -37,6 +37,17 @@ public final class TaskCollect implements Task {
         return lore;
     }
 
+    public String getObjectiveStringNoProgress() {
+        ChatColor color;
+        if (isCompleted()) {
+            color = ChatColor.GREEN;
+        } else {
+            color = ChatColor.YELLOW;
+        }
+        String lore = color + "Collect " + amountNeeded + " " + itemName;
+        return lore;
+    }
+
     @Override
     public boolean isCompleted() {
         return progress >= amountNeeded;

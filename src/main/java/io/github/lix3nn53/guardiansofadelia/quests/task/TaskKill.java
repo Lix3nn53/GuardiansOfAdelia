@@ -39,6 +39,17 @@ public final class TaskKill implements Task {
         return lore;
     }
 
+    public String getObjectiveStringNoProgress() {
+        ChatColor color;
+        if (isCompleted()) {
+            color = ChatColor.GREEN;
+        } else {
+            color = ChatColor.YELLOW;
+        }
+        String lore = color + "Kill " + amountNeeded + " " + mobName;
+        return lore;
+    }
+
     @Override
     public boolean isCompleted() {
         return progress >= amountNeeded;

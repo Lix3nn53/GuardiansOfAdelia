@@ -7,6 +7,8 @@ public interface Task {
 
     String getObjectiveString();
 
+    String getObjectiveStringNoProgress();
+
     boolean isCompleted();
 
     boolean progress(Player player);

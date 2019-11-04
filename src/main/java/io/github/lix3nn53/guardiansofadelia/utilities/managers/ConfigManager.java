@@ -51,8 +51,8 @@ public class ConfigManager {
         createSpawners();
         createCharacterSelectionConfig();
         createTowns();
-        createDungeons();
         createDungeonGates();
+        createDungeons();
         createTeleportPortals();
     }
 
@@ -61,8 +61,8 @@ public class ConfigManager {
         loadSpawners();
         loadCharacterSelectionConfig();
         loadTowns();
-        loadDungeons();
         loadDungeonGates();
+        loadDungeons();
         loadTeleportPortals();
     }
 

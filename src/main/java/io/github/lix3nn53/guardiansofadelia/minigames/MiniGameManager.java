@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.guildwar.GuildWar;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
+import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -137,6 +138,16 @@ public class MiniGameManager {
         Portal portal = new Portal(location, dungeonTheme.getPortalColor());
         portalToDungeonTheme.put(portal, dungeonTheme);
         PortalManager.addPortal(portal);
+    }
+
+    public static Location getPortalLocationOfDungeonTheme(DungeonTheme dungeonTheme) {
+        for (Portal portal : portalToDungeonTheme.keySet()) {
+            DungeonTheme dungeonThemeLoop = portalToDungeonTheme.get(portal);
+            if (dungeonTheme.equals(dungeonThemeLoop)) {
+                return portal.getBaseLocation();
+            }
+        }
+        return TownManager.getTown(1).getLocation();
     }
 
     public static Set<Portal> getDungeonPortals() {

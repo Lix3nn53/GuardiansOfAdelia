@@ -39,6 +39,17 @@ public final class TaskGift implements Task {
         return lore;
     }
 
+    public String getObjectiveStringNoProgress() {
+        ChatColor color;
+        if (isCompleted()) {
+            color = ChatColor.GREEN;
+        } else {
+            color = ChatColor.YELLOW;
+        }
+        String lore = color + "Give " + amountNeeded + " " + item.getItemMeta().getDisplayName() + " to " + entityName;
+        return lore;
+    }
+
     @Override
     public boolean isCompleted() {
         return progress >= amountNeeded;

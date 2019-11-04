@@ -38,6 +38,17 @@ public final class TaskReach implements Task {
         return lore;
     }
 
+    public String getObjectiveStringNoProgress() {
+        ChatColor color;
+        if (isCompleted()) {
+            color = ChatColor.GREEN;
+        } else {
+            color = ChatColor.YELLOW;
+        }
+        String lore = color + "Go to " + blockLoc + " and click " + blockMat.toString() + " block";
+        return lore;
+    }
+
     @Override
     public boolean isCompleted() {
         return completed > 0;

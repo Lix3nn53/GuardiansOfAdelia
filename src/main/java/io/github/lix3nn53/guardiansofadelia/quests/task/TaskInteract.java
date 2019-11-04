@@ -39,6 +39,19 @@ public final class TaskInteract implements Task {
         return lore;
     }
 
+    public String getObjectiveStringNoProgress() {
+        NPCRegistry registry = CitizensAPI.getNPCRegistry();
+        NPC npc = registry.getById(npcId);
+        ChatColor color;
+        if (isCompleted()) {
+            color = ChatColor.GREEN;
+        } else {
+            color = ChatColor.YELLOW;
+        }
+        String lore = color + "Talk to " + npc.getName();
+        return lore;
+    }
+
     @Override
     public boolean isCompleted() {
         return completed > 0;

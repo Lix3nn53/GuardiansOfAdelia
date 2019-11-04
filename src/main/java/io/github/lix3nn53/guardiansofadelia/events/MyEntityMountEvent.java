@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -28,6 +30,11 @@ public class MyEntityMountEvent implements Listener {
                         PetManager.onMount(livingMount);
                     }
                 }
+            }
+        } else {
+            NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
+            if (npcRegistry.isNPC(rider)) {
+                e.setCancelled(true);
             }
         }
     }

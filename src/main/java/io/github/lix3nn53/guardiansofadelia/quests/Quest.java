@@ -157,11 +157,14 @@ public final class Quest {
                 lore.set(0, ChatColor.GREEN + "Click to accept this quest");
             }
 
-            lore.add("");
-            lore.add(ChatColor.LIGHT_PURPLE + "Objectives");
-            for (Task t : tasks) {
-                lore.add(t.getObjectiveString());
+            if (!tasks.isEmpty()) {
+                lore.add("");
+                lore.add(ChatColor.LIGHT_PURPLE + "Objectives");
+                for (Task t : tasks) {
+                    lore.add(t.getObjectiveStringNoProgress());
+                }
             }
+
             lore.add("");
             lore.add(ChatColor.GOLD + "Prizes");
             lore.add(ChatColor.YELLOW + "Experience: " + expPrize);
@@ -189,7 +192,7 @@ public final class Quest {
             lore.add("");
 
             Material type = questItem.getType();
-            if (type.equals(Material.RED_WOOL)) {
+            if (type.equals(Material.GRAY_WOOL)) {
                 //sporiler protection
                 lore.add(ChatColor.ITALIC.toString() + ChatColor.RED + "SPOILER PROTECTION");
                 lore.add(ChatColor.ITALIC.toString() + ChatColor.RED + "You can't see the lore of this quest before");

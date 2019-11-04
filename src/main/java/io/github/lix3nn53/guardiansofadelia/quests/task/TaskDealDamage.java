@@ -38,6 +38,17 @@ public final class TaskDealDamage implements Task {
         return lore;
     }
 
+    public String getObjectiveStringNoProgress() {
+        ChatColor color;
+        if (isCompleted()) {
+            color = ChatColor.GREEN;
+        } else {
+            color = ChatColor.YELLOW;
+        }
+        String lore = color + "Deal " + damageNeeded + " damage to " + mobName;
+        return lore;
+    }
+
     @Override
     public boolean isCompleted() {
         return progress >= damageNeeded;
