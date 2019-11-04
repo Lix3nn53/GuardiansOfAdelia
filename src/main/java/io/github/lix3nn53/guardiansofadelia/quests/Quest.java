@@ -7,15 +7,13 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
-import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
-import io.github.lix3nn53.guardiansofadelia.quests.task.TaskDealDamage;
-import io.github.lix3nn53.guardiansofadelia.quests.task.TaskInteract;
-import io.github.lix3nn53.guardiansofadelia.quests.task.TaskKill;
+import io.github.lix3nn53.guardiansofadelia.quests.task.*;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.advancements.Advancement;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -336,6 +334,14 @@ public final class Quest {
         for (Action action : getOnTurnInActions()) {
             action.perform(player);
         }
+
+        for (Task task : this.tasks) {
+            if (task instanceof TaskCollect) {
+                TaskCollect taskCollect = (TaskCollect) task;
+                String displayName = taskCollect.getItemStack().getItemMeta().getDisplayName();
+                InventoryUtils.removeAllFromInventoryByName(player.getInventory(), displayName);
+            }
+        }
     }
 
     public void onComplete(Player player) {
@@ -409,6 +415,47 @@ public final class Quest {
                         this.onComplete(questOwner);
                     }
                     return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean progressCollectTasks(Player questOwner, String itemName, int amount) {
+        for (Task task : this.tasks) {
+            if (task instanceof TaskCollect) {
+                TaskCollect taskCollect = (TaskCollect) task;
+                if (taskCollect.getItemStack().getItemMeta().getDisplayName().equals(itemName)) {
+                    int alreadyInInventory = InventoryUtils.getHowManyInventoryHasFromName(questOwner.getInventory(), itemName);
+                    taskCollect.setProgress(alreadyInInventory + amount);
+
+                    TablistUtils.updateTablist(questOwner);
+                    if (this.isCompleted()) {
+                        this.onComplete(questOwner);
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean triggerQuestItemDrop(Player questOwner, LivingEntity livingTarget) {
+        if (!livingTarget.isCustomNameVisible()) return false;
+
+        String customName = livingTarget.getCustomName();
+
+        for (Task task : this.tasks) {
+            if (task instanceof TaskCollect) {
+                TaskCollect taskCollect = (TaskCollect) task;
+                List<String> nameOfMobsItemDropsFrom = taskCollect.getNameOfMobsItemDropsFrom();
+                if (nameOfMobsItemDropsFrom.contains(customName)) {
+                    double random = Math.random();
+                    if (random < taskCollect.getChance()) {
+                        ItemStack itemStack = taskCollect.getItemStack();
+                        World world = livingTarget.getWorld();
+                        world.dropItemNaturally(livingTarget.getLocation(), itemStack);
+                    }
                 }
             }
         }

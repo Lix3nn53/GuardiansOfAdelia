@@ -41,7 +41,7 @@ public enum DungeonTheme {
         } else if (this.equals(DungeonTheme.LAVA)) {
             return "Dwarven Kingdom Ruins";
         } else if (this.equals(DungeonTheme.ZOMBIE)) {
-            return "Lair of the Zombie Leader";
+            return "Lair of the Zombie Subjects";
         }
         return "Sticky Sky Island";
     }

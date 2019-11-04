@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
+import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
@@ -66,7 +67,13 @@ public class QuestsPhaseTwo {
         story.add("for his experiments.");
 
         List<Task> tasks = new ArrayList<>();
-        TaskCollect taskCollect = new TaskCollect(ChatColor.DARK_GREEN + "Rotten Flesh", 12);
+        List<String> nameOfMobsItemDropsFrom = new ArrayList<>();
+        nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Zombie");
+        nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Zombie Villager");
+        nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Splitter Zombie");
+        nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Shaman Zombie");
+        nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Tank Zombie");
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.72, QuestItems.getQuestItem(14), 12);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -84,7 +91,13 @@ public class QuestsPhaseTwo {
         story.add("for his final experiment.");
 
         List<Task> tasks = new ArrayList<>();
-        TaskCollect taskCollect = new TaskCollect(ChatColor.LIGHT_PURPLE + "Zombie Brain", 12);
+        List<String> nameOfMobsItemDropsFrom = new ArrayList<>();
+        nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Zombie");
+        nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Zombie Villager");
+        nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Splitter Zombie");
+        nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Shaman Zombie");
+        nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Tank Zombie");
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(15), 18);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -138,7 +151,7 @@ public class QuestsPhaseTwo {
         story.add("to help the fight against darkness.");
         story.add("But now that Guardians defeated his");
         story.add("strongest experiment, he gave up and");
-        story.add("started working a cure for zombies.");
+        story.add("started working on a cure for zombies.");
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();

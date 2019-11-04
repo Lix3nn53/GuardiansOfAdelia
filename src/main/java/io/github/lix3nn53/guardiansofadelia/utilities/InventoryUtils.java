@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
@@ -8,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,13 +75,23 @@ public class InventoryUtils {
     }
 
     public static void giveItemToPlayer(Player player, ItemStack itemStack) {
+        if (itemStack.getType().equals(Material.AIR)) return;
+
         if (player.getInventory().firstEmpty() != -1) {
             player.getInventory().addItem(itemStack);
         } else {
-            player.getWorld().dropItemNaturally(player.getLocation(), itemStack);
+            //make sure entity add is sync
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.getWorld().dropItemNaturally(player.getLocation(), itemStack);
+                }
+            }.runTask(GuardiansOfAdelia.getInstance());
+
             player.sendMessage(ChatColor.LIGHT_PURPLE + "Inventory Full !");
             player.sendMessage(ChatColor.RED + "Your item have been dropped near you since your inventory is full");
         }
+
     }
 
     public static void removeItemFromInventory(Inventory inventory, ItemStack itemStack, int amount) {
@@ -148,6 +160,33 @@ public class InventoryUtils {
             }
         }
         return false;
+    }
+
+    public static int getHowManyInventoryHasFromName(Inventory inventory, String searchName) {
+        int count = 0;
+        ItemStack[] items = inventory.getContents();
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null && items[i].hasItemMeta()) {
+                ItemMeta itemMeta = items[i].getItemMeta();
+                if (itemMeta.hasDisplayName() && itemMeta.getDisplayName().equals(searchName)) {
+                    count += items[i].getAmount();
+                }
+            }
+        }
+        return count;
+    }
+
+    public static void removeAllFromInventoryByName(Inventory inventory, String searchName) {
+        ItemStack[] inventoryContents = inventory.getContents();
+        for (int i = 0; i < inventoryContents.length; i++) {
+            if (inventoryContents[i] != null && inventoryContents[i].hasItemMeta()) {
+                ItemMeta itemMeta = inventoryContents[i].getItemMeta();
+                if (itemMeta.hasDisplayName() && itemMeta.getDisplayName().equals(searchName)) {
+                    inventoryContents[i] = null;
+                }
+            }
+        }
+        inventory.setContents(inventoryContents);
     }
 
     public static boolean isArmorEquippedOnRelatedSlot(ArmorType armorTypeOfCurrentItem, Player player) {

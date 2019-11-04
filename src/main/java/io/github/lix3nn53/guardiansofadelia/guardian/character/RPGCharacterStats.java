@@ -603,7 +603,9 @@ public class RPGCharacterStats {
         ItemStack itemInOffHand = inventory.getItemInOffHand();
         if (!InventoryUtils.isAirOrNull(itemInOffHand)) {
             Material type = itemInOffHand.getType();
-            if ((type.equals(Material.SHIELD) || type.equals(Material.DIAMOND_HOE)) && StatUtils.doesCharacterMeetRequirements(itemInOffHand, player, rpgClass)) {
+            if ((type.equals(Material.SHIELD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.ARROW) ||
+                    type.equals(Material.TIPPED_ARROW) || type.equals(Material.SPECTRAL_ARROW)) &&
+                    StatUtils.doesCharacterMeetRequirements(itemInOffHand, player, rpgClass)) {
                 onOffhandEquip(itemInOffHand, false);
             } else {
                 InventoryUtils.giveItemToPlayer(player, itemInOffHand);

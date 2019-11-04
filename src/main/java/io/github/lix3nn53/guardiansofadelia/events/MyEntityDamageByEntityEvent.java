@@ -363,8 +363,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     //progress kill tasks
                     for (Quest quest : questList) {
                         quest.progressKillTasks(player, livingTarget);
+                        quest.triggerQuestItemDrop(player, livingTarget);
                     }
                     PartyManager.progressMobKillTasksOfOtherMembers(player, livingTarget);
+                    PartyManager.triggerQuestItemDropOfOtherMembers(player, livingTarget);
 
                     if (MiniGameManager.isInMinigame(player)) {
                         if (livingTarget.getType().equals(EntityType.PLAYER)) {

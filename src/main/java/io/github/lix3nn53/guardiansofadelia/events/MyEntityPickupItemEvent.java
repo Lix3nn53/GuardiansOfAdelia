@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -14,7 +15,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.List;
 import java.util.UUID;
 
 public class MyEntityPickupItemEvent implements Listener {
@@ -28,6 +31,22 @@ public class MyEntityPickupItemEvent implements Listener {
             if (!DropManager.canPickUp(player, itemStack)) {
                 event.setCancelled(true);
                 return;
+            }
+
+            //progress collect tasks for quests
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            if (itemMeta.hasDisplayName()) {
+                UUID uniqueId = player.getUniqueId();
+                if (GuardianDataManager.hasGuardianData(uniqueId)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+                    if (guardianData.hasActiveCharacter()) {
+                        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                        List<Quest> questList = activeCharacter.getQuestList();
+                        for (Quest quest : questList) {
+                            quest.progressCollectTasks(player, itemMeta.getDisplayName(), itemStack.getAmount());
+                        }
+                    }
+                }
             }
 
             PlayerInventory inventory = player.getInventory();

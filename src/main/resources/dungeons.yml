@@ -53,7 +53,7 @@ ZOMBIE1:
   pitch: 5.7
   levelReq: 10
   timeLimitInMinutes: 10
-  bossMobName: §2Zombie Leader
+  bossMobName: §2Zombie Subject#471
 ZOMBIE2:
   x: -57.5
   y: 112.5
@@ -63,7 +63,7 @@ ZOMBIE2:
   pitch: 6
   levelReq: 10
   timeLimitInMinutes: 10
-  bossMobName: §2Zombie Leader
+  bossMobName: §2Zombie Subject#471
 ZOMBIE3:
   x: -75.5
   y: 112.5
@@ -73,7 +73,7 @@ ZOMBIE3:
   pitch: 3.75
   levelReq: 10
   timeLimitInMinutes: 10
-  bossMobName: §2Zombie Leader
+  bossMobName: §2Zombie Subject#471
 ZOMBIE4:
   x: -77.53
   y: 112.5
@@ -83,7 +83,7 @@ ZOMBIE4:
   pitch: 5.5
   levelReq: 10
   timeLimitInMinutes: 10
-  bossMobName: §2Zombie Leader
+  bossMobName: §2Zombie Subject#471
 MAGIC_FOREST1:
   x: 350.53
   y: 111.5
