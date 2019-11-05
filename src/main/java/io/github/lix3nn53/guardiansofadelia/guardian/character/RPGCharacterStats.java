@@ -117,8 +117,10 @@ public class RPGCharacterStats {
             currentLevel = newLevel;
 
             playLevelUpAnimation();
-
             onMaxHealthChange();
+            String levelUpMessage = getLevelUpMessage(newLevel);
+            player.sendMessage(levelUpMessage);
+            player.sendTitle(ChatColor.GOLD + "Level Up!", ChatColor.YELLOW + "Your new level is " + ChatColor.GOLD + newLevel, 30, 80, 30);
         }
 
         float requiredExperience = RPGCharacterExperienceManager.getRequiredExperience(currentLevel);
@@ -757,5 +759,23 @@ public class RPGCharacterStats {
             return this.criticalChanceBonusBuff;
         }
         return 1;
+    }
+
+    private String getLevelUpMessage(int newLevel) {
+        String message = ChatColor.GOLD + "Level up! " + ChatColor.YELLOW + "Congratulations, your new level is " + ChatColor.GOLD + newLevel + "";
+        int lastNum = newLevel % 10;
+        switch (lastNum) {
+            case 0:
+                message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.RED + "weapons";
+            case 2:
+                message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "boots!";
+            case 4:
+                message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "helmets";
+            case 6:
+                message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "leggings";
+            case 8:
+                message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "chestplates";
+        }
+        return message;
     }
 }
