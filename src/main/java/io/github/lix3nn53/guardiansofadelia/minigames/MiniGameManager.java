@@ -190,7 +190,7 @@ public class MiniGameManager {
         }
     }
 
-    public static void onMobKillDungeon(Player player, LivingEntity livingEntity) {
+    public static void onMobKill(Player player, LivingEntity livingEntity) {
         if (playerToMinigame.containsKey(player)) {
             if (playerToMinigame.get(player) instanceof Dungeon) {
                 Dungeon dungeon = (Dungeon) playerToMinigame.get(player);
