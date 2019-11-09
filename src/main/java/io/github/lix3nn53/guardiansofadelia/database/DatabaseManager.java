@@ -19,6 +19,7 @@ import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.ArmorStand;
@@ -149,11 +150,11 @@ public class DatabaseManager {
 
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
                         DisguiseAPI.disguiseToPlayers(armorStands.get(2), mobDisguise, player);
-                        livingWatcher.setCustomName("Level: " + level);
+                        livingWatcher.setCustomName(ChatColor.GOLD + "Level: " + ChatColor.WHITE + level);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(1), mobDisguise, player);
-                        livingWatcher.setCustomName("Total Experience: " + totalExp);
+                        livingWatcher.setCustomName(ChatColor.DARK_PURPLE + "Total Experience: " + ChatColor.WHITE + totalExp);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(0), mobDisguise, player);
-                        livingWatcher.setCustomName("Class: " + rpgClassCharacter.getClassString());
+                        livingWatcher.setCustomName(ChatColor.GRAY + "Class: " + rpgClassCharacter.getClassString());
                     });
                 } catch (SQLException e) {
                     e.printStackTrace();
