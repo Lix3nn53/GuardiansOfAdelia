@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-class MobDropGenerator {
+public class MobDropGenerator {
 
     private static HashMap<Integer, List<ItemStack>> dropTables = new HashMap<>();
 

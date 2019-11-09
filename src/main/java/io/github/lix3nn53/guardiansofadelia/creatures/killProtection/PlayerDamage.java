@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.creatures.drops;
+package io.github.lix3nn53.guardiansofadelia.creatures.killProtection;
 
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
@@ -7,11 +7,11 @@ import org.bukkit.entity.Player;
 import java.util.*;
 import java.util.stream.Collectors;
 
-final class DropDamage {
+final class PlayerDamage {
 
     private final HashMap<Player, Integer> playerDamages = new HashMap<>();
 
-    public void dealDamage(Player player, double damageDouble) {
+    void dealDamage(Player player, double damageDouble) {
         int damage = (int) (damageDouble + 0.5);
         if (PartyManager.inParty(player)) {
             Party party = PartyManager.getParty(player);
@@ -34,7 +34,7 @@ final class DropDamage {
         }
     }
 
-    public List<Player> getBestPlayers() {
+    List<Player> getBestPlayers() {
         List<Player> players = new ArrayList<>();
         if (!playerDamages.isEmpty()) {
             double max = Collections.max(playerDamages.values());

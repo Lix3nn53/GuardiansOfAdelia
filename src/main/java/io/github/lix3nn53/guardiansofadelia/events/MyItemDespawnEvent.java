@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropProtectionManager;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,6 +15,6 @@ public class MyItemDespawnEvent implements Listener {
         Item entity = event.getEntity();
         ItemStack itemStack = entity.getItemStack();
 
-        DropManager.onItemDespawn(itemStack);
+        DropProtectionManager.onItemDespawn(itemStack);
     }
 }

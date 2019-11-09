@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.killProtection.KillProtectionManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
@@ -25,7 +25,7 @@ public class MyEntityDeathEvent implements Listener {
         } else if (!entityType.equals(EntityType.PLAYER)) {
 
             SpawnerManager.onMobDeath(entity);
-            DropManager.onMobDeath(entity, event);
+            KillProtectionManager.onMobDeath(entity, event);
             SkillDataManager.onEntityDeath(entity);
         }
     }

@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropProtectionManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -28,7 +28,7 @@ public class MyEntityPickupItemEvent implements Listener {
         Material type = itemStack.getType();
         if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player player = (Player) event.getEntity();
-            if (!DropManager.canPickUp(player, itemStack)) {
+            if (!DropProtectionManager.canPickUp(player, itemStack)) {
                 event.setCancelled(true);
                 return;
             }
@@ -77,7 +77,7 @@ public class MyEntityPickupItemEvent implements Listener {
 
 
         if (!event.isCancelled()) {
-            DropManager.onItemDespawn(itemStack);
+            DropProtectionManager.onItemDespawn(itemStack);
         }
     }
 

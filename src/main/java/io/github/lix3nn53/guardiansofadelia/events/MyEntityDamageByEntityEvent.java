@@ -3,8 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.events;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
-import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropManager;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.killProtection.KillProtectionManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -16,8 +15,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.Da
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
-import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
-import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
@@ -36,13 +33,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class MyEntityDamageByEntityEvent implements Listener {
-
-    private static int getExperience(Entity entity) {
-        if (PersistentDataContainerUtil.hasInteger(entity, "experience")) {
-            return PersistentDataContainerUtil.getInteger(entity, "experience");
-        }
-        return 0;
-    }
 
     private static int getCustomDamage(Entity entity) {
         if (PersistentDataContainerUtil.hasInteger(entity, "customDamage")) {
@@ -340,51 +330,21 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 double finalDamage = event.getFinalDamage();
 
+                double protectionDamage = finalDamage;
+                double livingTargetHealth = livingTarget.getHealth();
+                //on Kill
+                if (finalDamage >= livingTargetHealth) {
+                    protectionDamage = livingTargetHealth;
+                    //onKill mechanics moved to KillProtectionManager#onMobDeath
+                }
+                KillProtectionManager.onPlayerDealDamageToLivingEntity(player, livingTarget, (int) (protectionDamage + 0.5));
+
                 //progress deal damage tasks
                 List<Quest> questList = activeCharacter.getQuestList();
                 for (Quest quest : questList) {
-                    quest.progressDealDamageTasks(player, livingTarget, (int) (finalDamage + 0.5));
+                    quest.progressDealDamageTasks(player, livingTarget, (int) (protectionDamage + 0.5));
                 }
-                PartyManager.progressDealDamageTasksOfOtherMembers(player, livingTarget, finalDamage);
-
-                //on Kill
-                if (finalDamage >= livingTarget.getHealth()) {
-
-                    int experience = getExperience(livingTarget);
-                    if (experience > 0) {
-                        if (PartyManager.inParty(player)) {
-                            PartyManager.shareExpOnMobKill(player, experience);
-                        } else {
-                            rpgCharacterStats.giveExp(experience);
-                            PetExperienceManager.giveExperienceToActivePet(player, experience);
-                        }
-                    }
-
-                    //progress kill tasks
-                    for (Quest quest : questList) {
-                        quest.progressKillTasks(player, livingTarget);
-                        quest.triggerQuestItemDrop(player, livingTarget);
-                    }
-                    PartyManager.progressMobKillTasksOfOtherMembers(player, livingTarget);
-                    PartyManager.triggerQuestItemDropOfOtherMembers(player, livingTarget);
-
-                    if (MiniGameManager.isInMinigame(player)) {
-                        if (livingTarget.getType().equals(EntityType.PLAYER)) {
-                            MiniGameManager.onPlayerKill(player);
-                        } else {
-                            MiniGameManager.onMobKillDungeon(player, livingTarget);
-                        }
-                    }
-
-                    if (livingTarget.getType().equals(EntityType.COW) || livingTarget.getType().equals(EntityType.SHEEP)) {
-                        ItemStack itemStack = GatheringType.HUNTING.onHunt(player);
-                        if (itemStack != null) {
-                            Item item = livingTarget.getWorld().dropItemNaturally(targetLocation.add(0, 0.5, 0), itemStack);
-                            DropManager.setItem(item.getItemStack(), player);
-                        }
-                    }
-                }
-                DropManager.onPlayerDealDamageToMob(player, livingTarget, (int) (finalDamage + 0.5));
+                PartyManager.progressDealDamageTasksOfOtherMembers(player, livingTarget, protectionDamage);
 
                 //indicator
                 ChatColor indicatorColor = ChatColor.RED;

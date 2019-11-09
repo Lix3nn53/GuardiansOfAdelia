@@ -1,9 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.drops;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -11,21 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DropManager {
+public class DropProtectionManager {
 
-    private static HashMap<LivingEntity, DropDamage> dropDamages = new HashMap<>();
     private static HashMap<ItemStack, List<Player>> droppedItemOwners = new HashMap<>();
-
-    public static void onPlayerDealDamageToMob(Player attacker, LivingEntity damaged, double damage) {
-        if (dropDamages.containsKey(damaged)) {
-            DropDamage dropDamage = dropDamages.get(damaged);
-            dropDamage.dealDamage(attacker, damage);
-        } else {
-            DropDamage dropDamage = new DropDamage();
-            dropDamage.dealDamage(attacker, damage);
-            dropDamages.put(damaged, dropDamage);
-        }
-    }
 
     public static boolean canPickUp(Player player, ItemStack itemStack) {
         if (droppedItemOwners.containsKey(itemStack)) {
@@ -50,22 +36,6 @@ public class DropManager {
         players.add(player);
         droppedItemOwners.put(itemStack, players);
         startItemTimer(itemStack);
-    }
-
-    public static void onMobDeath(LivingEntity entity, EntityDeathEvent event) {
-        if (dropDamages.containsKey(entity)) {
-            DropDamage dropDamage = dropDamages.get(entity);
-            dropDamages.remove(entity);
-            List<Player> bestPlayers = dropDamage.getBestPlayers();
-            List<ItemStack> drops = MobDropGenerator.getDrops(entity);
-            if (!drops.isEmpty()) {
-                for (ItemStack itemStack : drops) {
-                    droppedItemOwners.put(itemStack, bestPlayers);
-                    startItemTimer(itemStack);
-                }
-                event.getDrops().addAll(drops);
-            }
-        }
     }
 
     private static void startItemTimer(ItemStack itemStack) {
