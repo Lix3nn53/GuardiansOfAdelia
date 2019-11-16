@@ -1,8 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.Items;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,28 +17,40 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class PrizeChest {
 
-    String name;
-    List<ItemStack> prizePool = new ArrayList<>();
+    private final String name;
 
     public PrizeChest(String name) {
-        this.name = name;
+        this.name = ChatColor.GOLD + name + " Prize Chest";
     }
 
-    public void addItem(ItemStack itemStack, int amountToAdd) {
-        for (int i = 0; i < amountToAdd; i++) {
-            prizePool.add(itemStack);
+    /**
+     * @param dungeonTheme
+     * @param type         0 for Weapon, 1 for Jewelry, 2 for Armor
+     */
+    public PrizeChest(DungeonTheme dungeonTheme, int type) {
+        String chestName = ChatColor.GOLD + dungeonTheme.getName() + " Prize Chest";
+
+        if (type == 0) {
+            chestName = chestName + " (Weapon)";
+        } else if (type == 1) {
+            chestName = chestName + " (Jewelry)";
+        } else if (type == 2) {
+            chestName = chestName + " (Armor)";
         }
+
+        this.name = chestName;
     }
 
-    public void addItemList(List<ItemStack> itemStackList) {
-        prizePool.addAll(itemStackList);
+    public String getName() {
+        return name;
     }
 
-    public void play(Player player) {
-        GuiGeneric chestGui = new GuiGeneric(27, "Opening Prize-Chest " + name, 0);
+    public void play(Player player, List<ItemStack> prizePool) {
+        GuiGeneric chestGui = new GuiGeneric(27, "Opening Prize-Chest " + getName(), 0);
 
         ItemStack fillGlass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta fillMeta = fillGlass.getItemMeta();
@@ -68,20 +82,24 @@ public class PrizeChest {
 
         CustomSound sound = GoaSound.WHEEL_OF_FORTUNE.getCustomSound();
         sound.play(player.getLocation());
+        chestGui.openInventory(player);
+
+        int size = prizePool.size();
+        int slideCountRandom = new Random().nextInt(size / 2); //random start index
+        int slideLimit = slideCountRandom + 12; //slide 12 times
 
         new BukkitRunnable() {
 
-            int slideCount = 0;
-            int size = prizePool.size();
-            int slideLimit = Math.min(size / 2, 33);
+            int slideCount = slideCountRandom; //random start index
 
             @Override
             public void run() {
-                if (slideCount >= size) {
-                    slideCount = 0;
-                }
                 for (int i = 0; i < 9; i++) {
-                    ItemStack item = prizePool.get(slideCount + i);
+                    int index = slideCount + i;
+
+                    if (index >= size) index = index % size;
+
+                    ItemStack item = prizePool.get(index);
                     chestGui.setItem(i + 9, item);
                 }
                 if (slideCount > slideLimit) {
@@ -91,9 +109,12 @@ public class PrizeChest {
                     sound.play(player.getLocation());
 
                     ItemStack[] content = chestGui.getContents();
-                    GuiGeneric prizeGui = new GuiGeneric(27, ChatColor.YELLOW + "Result Prize-Chest " + name, 0);
+                    GuiGeneric prizeGui = new GuiGeneric(27, ChatColor.YELLOW + "Result Prize-Chest " + getName(), 0);
                     prizeGui.setContents(content);
                     prizeGui.openInventory(player);
+
+                    ItemStack item = prizeGui.getItem(13);
+                    InventoryUtils.giveItemToPlayer(player, item);
                 }
                 slideCount++;
             }
@@ -106,23 +127,14 @@ public class PrizeChest {
         itemMeta.setCustomModelData(10000035);
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GOLD + "Number of items: " + ChatColor.GRAY + prizePool.size());
-        lore.add("");
+        lore.add(ChatColor.GRAY + "Right click while holding to open!");
 
-        itemMeta.setDisplayName(name);
+        itemMeta.setDisplayName(getName());
         itemMeta.setLore(lore);
         itemMeta.setUnbreakable(true);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

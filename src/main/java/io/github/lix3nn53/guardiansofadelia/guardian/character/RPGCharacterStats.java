@@ -767,14 +767,19 @@ public class RPGCharacterStats {
         switch (lastNum) {
             case 0:
                 message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.RED + "weapons";
+                break;
             case 2:
                 message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "boots!";
+                break;
             case 4:
                 message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "helmets";
+                break;
             case 6:
                 message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "leggings";
+                break;
             case 8:
                 message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "chestplates";
+                break;
         }
         return message;
     }

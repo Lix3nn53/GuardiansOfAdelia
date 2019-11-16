@@ -141,7 +141,7 @@ public class Skill {
         lore.addAll(getDescription());
 
         itemMeta.setLore(lore);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
 
         icon.setItemMeta(itemMeta);
         return icon;

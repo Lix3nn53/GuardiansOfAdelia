@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
@@ -10,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -25,6 +27,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
 import java.util.UUID;
 
 public class MyPlayerInteractEvent implements Listener {
@@ -64,6 +67,19 @@ public class MyPlayerInteractEvent implements Listener {
                     String teleportScroll = PersistentDataContainerUtil.getString(itemInMainHand, "teleportScroll");
                     TeleportScroll teleportScrollLocation = TeleportScroll.valueOf(teleportScroll);
                     teleportScrollLocation.teleport(player, itemInMainHand);
+                }
+            } else if (itemInMainHandType.equals(Material.STONE_PICKAXE)) {
+                if (PersistentDataContainerUtil.hasString(itemInMainHand, "prizeDungeon")) { //dungeon chests
+                    String dungeonThemeString = PersistentDataContainerUtil.getString(itemInMainHand, "prizeDungeon");
+                    int type = PersistentDataContainerUtil.getInteger(itemInMainHand, "prizeType");
+
+                    DungeonTheme dungeonTheme = DungeonTheme.valueOf(dungeonThemeString);
+
+                    List<ItemStack> itemStacks = dungeonTheme.generateChestItems(type);
+
+                    PrizeChest prizeChest = new PrizeChest(dungeonTheme, type);
+                    prizeChest.play(player, itemStacks);
+                    player.getInventory().setItemInMainHand(null);
                 }
             } else {
                 Block clickedBlock = event.getClickedBlock();

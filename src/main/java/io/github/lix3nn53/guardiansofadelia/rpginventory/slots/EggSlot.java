@@ -42,7 +42,7 @@ public class EggSlot {
         itemMeta.setLore(new ArrayList() {{
             add("");
         }});
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(10000012);
         itemStack.setItemMeta(itemMeta);
         return itemStack;

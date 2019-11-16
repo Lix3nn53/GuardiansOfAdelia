@@ -40,6 +40,7 @@ public class GearArmor implements RPGGear {
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+" + health);
         lore.add(ChatColor.AQUA + "■ Defense: " + ChatColor.GRAY + "+" + defense);
         lore.add(ChatColor.BLUE + "✦ Magic Defense: " + ChatColor.GRAY + "+" + magicDefense);
+        lore.add(ChatColor.YELLOW + "----------------");
         lore.add(tier.getTierString());
         lore.add(ChatColor.YELLOW + "----------------");
         if (statPassive.getFire() != 0) {
@@ -86,8 +87,7 @@ public class GearArmor implements RPGGear {
         itemMeta.setUnbreakable(true);
         itemMeta.setDisplayName(name);
         itemMeta.setLore(lore);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         this.itemStack.setItemMeta(itemMeta);
 
         this.tier = tier;

@@ -39,6 +39,7 @@ public class WeaponMelee implements RPGGear {
         lore.add(ChatColor.YELLOW + "----------------");
         lore.add(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+" + damage);
         lore.add(ChatColor.AQUA + "ø Attack Speed: " + attackSpeed.getLoreString());
+        lore.add(ChatColor.YELLOW + "----------------");
         lore.add(tier.getTierString());
         lore.add(ChatColor.YELLOW + "----------------");
         if (statPassive.getFire() != 0) {
@@ -86,8 +87,7 @@ public class WeaponMelee implements RPGGear {
         itemMeta.setUnbreakable(true);
         itemMeta.setDisplayName(name);
         itemMeta.setLore(lore);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(customModelDataId);
         this.itemStack.setItemMeta(itemMeta);
 

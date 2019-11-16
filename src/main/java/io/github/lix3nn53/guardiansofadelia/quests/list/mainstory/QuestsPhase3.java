@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestsPhaseTwo {
+public class QuestsPhase3 {
 
     public static void createQuests() {
         createQuestOne();
@@ -30,12 +30,14 @@ public class QuestsPhaseTwo {
         story.add("Dr. Rintarou is working to find a cure for");
         story.add("zombies. Go to the camp near Rotten City");
         story.add("and ask Dr. Rintarou how you can help.");
+        List<Integer> requiredQuests = new ArrayList<>();
+        requiredQuests.add(11);
         List<Task> tasks = new ArrayList<>();
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.\nDon't forget to use your boat!";
         Quest quest = new Quest(12, "Zombie invasion", story,
                 startMsg, "Talk with Dr. Rintarou",
-                "", tasks, itemPrizes, 10, 10, 0, 11,
+                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 32, 35);
     }
@@ -45,6 +47,8 @@ public class QuestsPhaseTwo {
         story.add("Dr. Rintarou wants you to enter");
         story.add("Rotten City and see if you can handle");
         story.add("a few zombies.");
+        List<Integer> requiredQuests = new ArrayList<>();
+        requiredQuests.add(12);
 
         List<Task> tasks = new ArrayList<>();
         TaskKill taskKill = new TaskKill(ChatColor.DARK_GREEN + "Zombie", 12);
@@ -56,7 +60,7 @@ public class QuestsPhaseTwo {
         String objectiveText = "Time to enter Rotten City\nKill TASK_PROGRESS_1/12 Zombie and TASK_PROGRESS_2/8 Zombie Villager\nThen talk to Dr. Rintarou";
         Quest quest = new Quest(13, "The Rotten City", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, 12,
+                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 35);
     }
@@ -65,6 +69,8 @@ public class QuestsPhaseTwo {
         List<String> story = new ArrayList<>();
         story.add("Dr. Rintarou needs zombie parts");
         story.add("for his experiments.");
+        List<Integer> requiredQuests = new ArrayList<>();
+        requiredQuests.add(13);
 
         List<Task> tasks = new ArrayList<>();
         List<String> nameOfMobsItemDropsFrom = new ArrayList<>();
@@ -80,7 +86,7 @@ public class QuestsPhaseTwo {
         String objectiveText = "Dr. Rintarou needs zombie parts for his experiments\nCollect TASK_PROGRESS_1/12 Rotten Flesh\nThen talk to Dr. Rintarou";
         Quest quest = new Quest(14, "Disgusting experiments", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, 13,
+                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 35);
     }
@@ -89,6 +95,8 @@ public class QuestsPhaseTwo {
         List<String> story = new ArrayList<>();
         story.add("Dr. Rintarou needs zombie brains");
         story.add("for his final experiment.");
+        List<Integer> requiredQuests = new ArrayList<>();
+        requiredQuests.add(14);
 
         List<Task> tasks = new ArrayList<>();
         List<String> nameOfMobsItemDropsFrom = new ArrayList<>();
@@ -104,7 +112,7 @@ public class QuestsPhaseTwo {
         String objectiveText = "Dr. Rintarou needs zombie brains for his final experiment\nCollect TASK_PROGRESS_1/18 Zombie Brain\nThen talk to Dr. Rintarou";
         Quest quest = new Quest(15, "Pink jellies", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, 14,
+                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 35);
     }
@@ -114,13 +122,15 @@ public class QuestsPhaseTwo {
         story.add("Report to Sergeant Armin that you helped");
         story.add("Dr. Rintarou on his final experiment and");
         story.add("waiting for results.");
+        List<Integer> requiredQuests = new ArrayList<>();
+        requiredQuests.add(15);
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Report to Sergent Armin that you helped Dr. Rintarou on his final experiment";
         Quest quest = new Quest(16, "Experiment reports", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, 15,
+                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 32);
     }
@@ -131,6 +141,8 @@ public class QuestsPhaseTwo {
         story.add("zombie that seems really dangerous.");
         story.add("Stop that zombie then ask Dr. Rintarou");
         story.add("about it.");
+        List<Integer> requiredQuests = new ArrayList<>();
+        requiredQuests.add(16);
 
         List<Task> tasks = new ArrayList<>();
         TaskKill taskKill = new TaskKill(ChatColor.DARK_GREEN + "Zombie Subject#471", 1);
@@ -140,7 +152,7 @@ public class QuestsPhaseTwo {
         String objectiveText = "<Dungeon>\nKill Zombie Subject#471 TASK_PROGRESS_1/1\nThen talk to Dr. Rintarou";
         Quest quest = new Quest(17, "Stronger zombies!?", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, 16,
+                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 32, 35);
     }
@@ -152,13 +164,15 @@ public class QuestsPhaseTwo {
         story.add("But now that Guardians defeated his");
         story.add("strongest experiment, he gave up and");
         story.add("started working on a cure for zombies.");
+        List<Integer> requiredQuests = new ArrayList<>();
+        requiredQuests.add(17);
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Report back to Sergent Armin that Dr. Rintarou started working on a cure!";
         Quest quest = new Quest(18, "Dr. Rintarou is back to normal", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, 17,
+                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 32);
     }

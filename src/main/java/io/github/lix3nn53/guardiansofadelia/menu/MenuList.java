@@ -34,7 +34,7 @@ public class MenuList {
         ItemMeta itemMeta = guide.getItemMeta();
         itemMeta.setCustomModelData(10000024);
         itemMeta.setUnbreakable(true);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setDisplayName(ChatColor.GREEN + "Guides");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -136,7 +136,7 @@ public class MenuList {
         ItemMeta itemMeta = skills.getItemMeta();
         itemMeta.setCustomModelData(10000031);
         itemMeta.setUnbreakable(true);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Skills");
         itemMeta.setLore(new ArrayList() {{
             add("");

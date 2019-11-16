@@ -218,7 +218,7 @@ public class EnchantGui extends GuiGeneric {
         itemMeta.setDisplayName(ChatColor.GREEN + "Success");
         itemMeta.setCustomModelData(10000005);
         itemMeta.setUnbreakable(true);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         success.setItemMeta(itemMeta);
 
         InventoryUtils.fillWithItem(this, success);
@@ -230,7 +230,7 @@ public class EnchantGui extends GuiGeneric {
         itemMeta.setDisplayName(ChatColor.RED + "Fail");
         itemMeta.setCustomModelData(10000006);
         itemMeta.setUnbreakable(true);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         fail.setItemMeta(itemMeta);
 
         InventoryUtils.fillWithItem(this, fail);

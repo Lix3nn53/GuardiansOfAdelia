@@ -111,7 +111,7 @@ public class TombManager {
             add(ChatColor.GRAY + "Close your inventory to continue.");
 
         }});
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         respawn.setItemMeta(itemMeta);
 
         reviveGui.setItem(3, respawn);

@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
-import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
@@ -31,8 +30,7 @@ public class Dungeon extends Minigame {
         super.endGame();
         List<Integer> winnerTeam = getWinnerTeams();
         if (!winnerTeam.isEmpty()) {
-            PrizeChest prizeChest = theme.getPrizeChest();
-            ItemStack prizeItem = prizeChest.getChest();
+            ItemStack prizeItem = theme.getPrizeChest();
 
             Party party = getTeams().get(winnerTeam.get(0));
             for (Player member : party.getMembers()) {

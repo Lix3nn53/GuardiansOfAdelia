@@ -50,7 +50,7 @@ public class VanillaSlotHelmet implements VanillaSlot {
         List<String> lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(10000002);
         itemStack.setItemMeta(itemMeta);
         return itemStack;

@@ -33,13 +33,16 @@ public class TutorialQuests {
         story.add("Can Adelia overcome this threat after such a long time?");
         List<Task> tasks = new ArrayList<>();
         List<ItemStack> itemPrizes = new ArrayList<>();
+        List<Integer> requiredQuests = new ArrayList<>();
         Quest quest1 = new Quest(1, "Entrance to the unknown", story,
                 ChatColor.LIGHT_PURPLE + "Hold" + ChatColor.BOLD + " TAB KEY " + ChatColor.RESET + ChatColor.LIGHT_PURPLE + "to see your quest list!", "Talk to Arnas!",
                 "Learn your skills to get ready for fight. Open menu by clicking Menu-Book from your inventory(E key), then learn your skills from character menu to get ready to fight!",
-                tasks, itemPrizes, 0, 0, 90, 0, Material.RED_NETHER_BRICKS);
+                tasks, itemPrizes, 0, 0, 90, requiredQuests, Material.RED_NETHER_BRICKS);
         QuestNPCManager.addQuest(quest1, 0, 5);
 
         //arnas to elysea
+        List<Integer> requiredQuests2 = new ArrayList<>();
+        requiredQuests2.add(1);
         List<String> story2 = new ArrayList<>();
         story2.add("We need more guardians to deal");
         story2.add("with darkness' foes!");
@@ -51,10 +54,12 @@ public class TutorialQuests {
                 "\nKill TASK_PROGRESS_1/5 Aleesia's Cavalry then talk to " +
                 "Elysea\n",
                 "Spend your element points from character-menu to get stronger.",
-                tasks2, itemPrizes, 0, 0, 90, 1, Material.RED_NETHER_BRICKS);
+                tasks2, itemPrizes, 0, 0, 90, requiredQuests2, Material.RED_NETHER_BRICKS);
         QuestNPCManager.addQuest(quest2, 5, 6);
 
         //elysea to syvia
+        List<Integer> requiredQuests3 = new ArrayList<>();
+        requiredQuests3.add(2);
         List<ItemStack> itemPrizes1 = new ArrayList<>();
         itemPrizes1.add(PassiveItemList.get(5, RPGSlotType.PARROT, ItemTier.COMMON, "Tutorial", 10, 20, 2));
         itemPrizes1.add(PassiveItemList.get(10, RPGSlotType.EARRING, ItemTier.COMMON, "Tutorial", 10, 20, 2));
@@ -70,10 +75,12 @@ public class TutorialQuests {
                 "\nKill TASK_PROGRESS_1/5 " +
                 "Aleesia's Ranger then talk to Syvia\n",
                 "Equip jewelries from RPG-Inventory to gain even more elemental power! To open RPG-Inventory click one of crafting slots from your inventory.",
-                tasks3, itemPrizes1, 0, 0, 90, 2, Material.RED_NETHER_BRICKS);
+                tasks3, itemPrizes1, 0, 0, 90, requiredQuests3, Material.RED_NETHER_BRICKS);
         QuestNPCManager.addQuest(quest3, 6, 7);
 
         //syvia to Aleesia
+        List<Integer> requiredQuests4 = new ArrayList<>();
+        requiredQuests4.add(3);
         List<String> story4 = new ArrayList<>();
         story4.add("We need to stop this before it harms Adelia!");
         List<Task> tasks4 = new ArrayList<>();
@@ -81,7 +88,7 @@ public class TutorialQuests {
         tasks4.add(taskDealDamage);
         Quest quest4 = new Quest(4, "Hall of Darkness", story4, "Now you seem ready to face Aleesia.. or are you?", "Equip jewelries from RPG-Inventory to gain even more elemental power!" +
                 "\nTo open RPG-Inventory click one of crafting slots from your inventory.\nNow you seem ready to face Aleesia.. or are you?\n" + ChatColor.LIGHT_PURPLE + "Enter the portal(Left-Mouse-Click when nearby)",
-                "", tasks4, itemPrizes, 0, 0, 90, 3, Material.RED_NETHER_BRICKS);
+                "", tasks4, itemPrizes, 0, 0, 90, requiredQuests4, Material.RED_NETHER_BRICKS);
 
         PotionEffectAction potionEffectAction = new PotionEffectAction(PotionEffectType.BLINDNESS, 5 * 20, 3);
         Location teleportAfterTutorial = new Location(Bukkit.getWorld("world"), -3018.5, 95.5, 4920, -175.6f, -9.2f);
@@ -98,6 +105,8 @@ public class TutorialQuests {
         QuestNPCManager.addQuest(quest4, 7, 0);
 
         //Aleesia to king of roumen
+        List<Integer> requiredQuests5 = new ArrayList<>();
+        requiredQuests5.add(4);
         List<String> story5 = new ArrayList<>();
         story5.add("You woke up from a dream of the past. In that dream,");
         story5.add("Guardians lost the battle against Aleesia. Darkness");
@@ -107,7 +116,7 @@ public class TutorialQuests {
         Quest quest5 = new Quest(5, "A fresh start", story5,
                 "Get out of the ship and follow the path to meet King of Roumen", "Talk with King of Roumen to learn what happened",
                 "",
-                tasks5, itemPrizes5, 0, 0, 1, 4, Material.GRASS_BLOCK);
+                tasks5, itemPrizes5, 0, 0, 1, requiredQuests5, Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest5, 0, 31);
     }
 

@@ -17,7 +17,7 @@ public class CharacterSelectionMenuList {
         ItemStack s1 = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = s1.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(10000009);
         itemMeta.setDisplayName(ChatColor.AQUA + "Knight");
         itemMeta.setLore(new ArrayList() {{
@@ -33,7 +33,6 @@ public class CharacterSelectionMenuList {
             add(ChatColor.YELLOW + "Knights battle foes at close range while");
             add(ChatColor.YELLOW + "allies support them from all sides.");
         }});
-        itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         s1.setItemMeta(itemMeta);
         guiGeneric.setItem(20, s1);
 
@@ -181,8 +180,7 @@ public class CharacterSelectionMenuList {
         ItemMeta itemMeta = lastLocation.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Teleport to your last location");
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         lastLocation.setItemMeta(itemMeta);
         guiGeneric.setItem(11, lastLocation);
 

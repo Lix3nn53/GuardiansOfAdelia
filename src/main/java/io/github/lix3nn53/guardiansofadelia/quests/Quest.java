@@ -37,7 +37,7 @@ public final class Quest {
     private final int moneyPrize;
     private final int expPrize;
     private final int requiredLevel;
-    private final int requiredQuest;
+    private final List<Integer> requiredQuests;
     private final Material advancementMaterial;
     private final List<Action> onAcceptActions = new ArrayList<>();
     private final List<Action> onCompleteActions = new ArrayList<>();
@@ -48,7 +48,7 @@ public final class Quest {
     public Quest(
             final int questID, final String name, final List<String> story, final String startMsg, final String objectiveText, final String turnInMsg,
             final List<Task> tasks, final List<ItemStack> itemPrizes, final int moneyPrize, final int expPrize,
-            final int requiredLevel, final int requiredQuest, Material advancementMaterial) {
+            final int requiredLevel, final List<Integer> requiredQuests, Material advancementMaterial) {
         this.questID = questID;
         this.name = name;
         this.story = story;
@@ -60,7 +60,7 @@ public final class Quest {
         this.moneyPrize = moneyPrize;
         this.expPrize = expPrize;
         this.requiredLevel = requiredLevel;
-        this.requiredQuest = requiredQuest;
+        this.requiredQuests = requiredQuests;
         this.advancementMaterial = advancementMaterial;
     }
 
@@ -70,7 +70,7 @@ public final class Quest {
     public Quest(Quest questToCopy) {
         this(questToCopy.getQuestID(), questToCopy.getName(), questToCopy.getStory(), questToCopy.getStartMsg(), questToCopy.getObjectiveText(), questToCopy.getTurnInMsg(),
                 questToCopy.getTasks(), questToCopy.getItemPrizes(), questToCopy.getMoneyPrize(), questToCopy.getExpPrize(),
-                questToCopy.getRequiredLevel(), questToCopy.getRequiredQuest(), questToCopy.getAdvancementMaterial());
+                questToCopy.getRequiredLevel(), questToCopy.getRequiredQuests(), questToCopy.getAdvancementMaterial());
         List<Action> copyOnAcceptActions = questToCopy.getOnAcceptActions();
 
         this.onAcceptActions.addAll(copyOnAcceptActions);
@@ -112,8 +112,8 @@ public final class Quest {
                 return false;
             }
         }
-        if (requiredQuest != 0) {
-            return turnedInQuests.contains(requiredQuest);
+        if (!requiredQuests.isEmpty()) {
+            return turnedInQuests.containsAll(requiredQuests);
         }
 
         return true;
@@ -179,11 +179,11 @@ public final class Quest {
                     lore.add(ChatColor.RED + "Required Level: " + requiredLevel);
                 }
             }
-            if (requiredQuest != 0) {
-                if (turnedInQuests.contains(requiredQuest)) {
-                    lore.add(ChatColor.GREEN + "Required Quest: " + requiredQuest);
+            if (!requiredQuests.isEmpty()) {
+                if (turnedInQuests.containsAll(requiredQuests)) {
+                    lore.add(ChatColor.GREEN + "Required Quests: " + requiredQuests);
                 } else {
-                    lore.add(ChatColor.RED + "Required Quest: " + requiredQuest);
+                    lore.add(ChatColor.RED + "Required Quests: " + requiredQuests);
                 }
             }
 
@@ -275,8 +275,8 @@ public final class Quest {
         return requiredLevel;
     }
 
-    public int getRequiredQuest() {
-        return requiredQuest;
+    public List<Integer> getRequiredQuests() {
+        return requiredQuests;
     }
 
     public Material getAdvancementMaterial() {
@@ -300,6 +300,15 @@ public final class Quest {
         player.sendMessage(ChatColor.DARK_PURPLE + "You have turned in " + ChatColor.LIGHT_PURPLE + getName());
         Advancement onTurnInAdvancement = QuestAdvancements.getOnTurnInAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
         onTurnInAdvancement.displayToast(player);
+
+        for (Task task : this.tasks) {
+            if (task instanceof TaskCollect) {
+                TaskCollect taskCollect = (TaskCollect) task;
+                String displayName = taskCollect.getItemStack().getItemMeta().getDisplayName();
+                InventoryUtils.removeAllFromInventoryByName(player.getInventory(), displayName);
+            }
+        }
+
         if (!getItemPrizes().isEmpty()) {
             for (ItemStack itemStack : getItemPrizes()) {
                 InventoryUtils.giveItemToPlayer(player, itemStack);
@@ -333,14 +342,6 @@ public final class Quest {
 
         for (Action action : getOnTurnInActions()) {
             action.perform(player);
-        }
-
-        for (Task task : this.tasks) {
-            if (task instanceof TaskCollect) {
-                TaskCollect taskCollect = (TaskCollect) task;
-                String displayName = taskCollect.getItemStack().getItemMeta().getDisplayName();
-                InventoryUtils.removeAllFromInventoryByName(player.getInventory(), displayName);
-            }
         }
     }
 

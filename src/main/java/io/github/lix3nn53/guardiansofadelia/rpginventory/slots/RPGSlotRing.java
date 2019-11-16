@@ -29,7 +29,7 @@ public class RPGSlotRing extends RPGSlotPassive implements RPGSlot {
         itemMeta.setLore(new ArrayList() {{
             add("");
         }});
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(10000010);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
