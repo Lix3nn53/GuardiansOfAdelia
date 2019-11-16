@@ -4,6 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
@@ -12,7 +14,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 public enum GatheringType {
     WOODCUTTING,
@@ -127,9 +131,13 @@ public enum GatheringType {
         int amount = rand.nextInt(5);
 
         if (amount > 0) {
-            ItemStack ingredient = getGatheredIngredient(amount);
-            player.sendTitle(ChatColor.GREEN + "Gathering Success", ChatColor.YELLOW + "" + ingredient.getAmount() + "x " + ingredient.getItemMeta().getDisplayName(), 30, 80, 30);
-            return ingredient;
+            Ingredient ingredient = getGatheredIngredient();
+            ItemStack ingItemStack = ingredient.getItemStack(amount);
+            player.sendTitle(ChatColor.GREEN + "Gathering Success", ChatColor.YELLOW + "" + ingItemStack.getAmount() + "x " + ingItemStack.getItemMeta().getDisplayName(), 30, 80, 30);
+
+            progressGatheringTasks(player, ingredient, amount);
+
+            return ingItemStack;
         } else {
             player.sendTitle(ChatColor.RED + "Gathering Failed", ChatColor.YELLOW + "Maybe next time..", 30, 80, 30);
         }
@@ -142,79 +150,98 @@ public enum GatheringType {
         int amount = rand.nextInt(5);
 
         if (amount > 0) {
-            ItemStack ingredient = getGatheredIngredient(amount);
-            player.sendTitle(ChatColor.GREEN + "Gathering Success", ChatColor.YELLOW + "" + ingredient.getAmount() + "x " + ingredient.getItemMeta().getDisplayName(), 30, 80, 30);
-            return ingredient;
+            Ingredient ingredient = getGatheredIngredient();
+            ItemStack ingItemStack = ingredient.getItemStack(amount);
+            player.sendTitle(ChatColor.GREEN + "Gathering Success", ChatColor.YELLOW + "" + ingItemStack.getAmount() + "x " + ingItemStack.getItemMeta().getDisplayName(), 30, 80, 30);
+
+            progressGatheringTasks(player, ingredient, amount);
+
+            return ingItemStack;
         } else {
             player.sendTitle(ChatColor.RED + "Gathering Failed", ChatColor.YELLOW + "Maybe next time..", 30, 80, 30);
         }
         return null;
     }
 
-    public ItemStack getGatheredIngredient(int amount) {
+    public Ingredient getGatheredIngredient() {
         double random = Math.random();
         switch (this) {
             case WOODCUTTING:
                 if (random < 0.7) {
-                    return Ingredient.WOODCUTTING_LOG.getItemStack(amount);
+                    return Ingredient.WOODCUTTING_LOG;
                 } else {
-                    return Ingredient.WOODCUTTING_PLANK.getItemStack(amount);
+                    return Ingredient.WOODCUTTING_PLANK;
                 }
             case HARVESTING_FLOWER:
                 if (random < 0.25) {
-                    return Ingredient.HARVESTING_ROSE.getItemStack(amount);
+                    return Ingredient.HARVESTING_ROSE;
                 } else if (random < 0.5) {
-                    return Ingredient.HARVESTING_STRING.getItemStack(amount);
+                    return Ingredient.HARVESTING_STRING;
                 } else if (random < 0.65) {
-                    return Ingredient.HARVESTING_CHERRY.getItemStack(amount);
+                    return Ingredient.HARVESTING_CHERRY;
                 } else if (random < 0.8) {
-                    return Ingredient.HARVESTING_SILK.getItemStack(amount);
+                    return Ingredient.HARVESTING_SILK;
                 } else if (random < 0.9) {
-                    return Ingredient.HARVESTING_PLUM_FLOWER.getItemStack(amount);
+                    return Ingredient.HARVESTING_PLUM_FLOWER;
                 } else if (random < 1D) {
-                    return Ingredient.HARVESTING_SOFT_SILK.getItemStack(amount);
+                    return Ingredient.HARVESTING_SOFT_SILK;
                 }
             case FISHING:
                 if (random < 0.7) {
-                    return Ingredient.FISHING_COD.getItemStack(amount);
+                    return Ingredient.FISHING_COD;
                 } else {
-                    return Ingredient.FISHING_SALMON.getItemStack(amount);
+                    return Ingredient.FISHING_SALMON;
                 }
             case MINING_ORE:
                 if (random < 0.25) {
-                    return Ingredient.MINING_ORE_COPPER.getItemStack(amount);
+                    return Ingredient.MINING_ORE_COPPER;
                 } else if (random < 0.55) {
-                    return Ingredient.MINING_ORE_IRON.getItemStack(amount);
+                    return Ingredient.MINING_ORE_IRON;
                 } else if (random < 0.75) {
-                    return Ingredient.MINING_ORE_STEEL.getItemStack(amount);
+                    return Ingredient.MINING_ORE_STEEL;
                 } else if (random < 0.9) {
-                    return Ingredient.MINING_ORE_DIAMOND.getItemStack(amount);
+                    return Ingredient.MINING_ORE_DIAMOND;
                 } else if (random < 1D) {
-                    return Ingredient.MINING_ORE_TITANIUM.getItemStack(amount);
+                    return Ingredient.MINING_ORE_TITANIUM;
                 }
             case MINING_JEWELRY:
                 if (random < 0.25) {
-                    return Ingredient.MINING_JEWEL_GOLD_DUST.getItemStack(amount);
+                    return Ingredient.MINING_JEWEL_GOLD_DUST;
                 } else if (random < 0.55) {
-                    return Ingredient.MINING_JEWEL_JADE.getItemStack(amount);
+                    return Ingredient.MINING_JEWEL_JADE;
                 } else if (random < 0.75) {
-                    return Ingredient.MINING_JEWEL_AMETHYST.getItemStack(amount);
+                    return Ingredient.MINING_JEWEL_AMETHYST;
                 } else if (random < 0.9) {
-                    return Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(amount);
+                    return Ingredient.MINING_JEWEL_SAPPHIRE;
                 } else if (random < 1D) {
-                    return Ingredient.MINING_JEWEL_RUBY.getItemStack(amount);
+                    return Ingredient.MINING_JEWEL_RUBY;
                 }
             case HUNTING:
                 if (random < 0.4) {
-                    return Ingredient.HUNTING_LEATHER_WORN.getItemStack(amount);
+                    return Ingredient.HUNTING_LEATHER_WORN;
                 }
                 if (random < 0.7) {
-                    return Ingredient.HUNTING_BEEF.getItemStack(amount);
+                    return Ingredient.HUNTING_BEEF;
                 } else {
-                    return Ingredient.HUNTING_LEATHER_HEAVY.getItemStack(amount);
+                    return Ingredient.HUNTING_LEATHER_HEAVY;
                 }
         }
-        return Ingredient.WOODCUTTING_PLANK.getItemStack(amount);
+        return Ingredient.WOODCUTTING_PLANK;
+    }
+
+    private void progressGatheringTasks(Player player, Ingredient ingredient, int amount) {
+        UUID uniqueId = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uniqueId)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                List<Quest> questList = activeCharacter.getQuestList();
+                for (Quest quest : questList) {
+                    quest.progressGatheringTasks(player, ingredient, amount);
+                }
+            }
+        }
     }
 }
 

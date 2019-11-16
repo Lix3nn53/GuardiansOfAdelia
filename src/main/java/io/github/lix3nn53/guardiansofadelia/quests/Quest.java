@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.quests;
 
+import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -429,6 +430,24 @@ public final class Quest {
                 if (taskCollect.getItemStack().getItemMeta().getDisplayName().equals(itemName)) {
                     int alreadyInInventory = InventoryUtils.getHowManyInventoryHasFromName(questOwner.getInventory(), itemName);
                     taskCollect.setProgress(alreadyInInventory + amount);
+
+                    TablistUtils.updateTablist(questOwner);
+                    if (this.isCompleted()) {
+                        this.onComplete(questOwner);
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean progressGatheringTasks(Player questOwner, Ingredient ingredient, int amount) {
+        for (Task task : this.tasks) {
+            if (task instanceof TaskGathering) {
+                TaskGathering taskCollect = (TaskGathering) task;
+                if (taskCollect.getIngredient().equals(ingredient)) {
+                    taskCollect.progressBy(questOwner, amount);
 
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
