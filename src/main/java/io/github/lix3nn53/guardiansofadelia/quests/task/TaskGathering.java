@@ -27,25 +27,20 @@ public final class TaskGathering implements Task {
         return taskCopy;
     }
 
-    public String getObjectiveString() {
-        ChatColor color;
-        if (isCompleted()) {
-            color = ChatColor.GREEN;
-        } else {
-            color = ChatColor.YELLOW;
-        }
-        String lore = color + "Gather " + progress + "/" + amountNeeded + " " + ingredient.getItemStack(1).getItemMeta().getDisplayName();
-        return lore;
+    public String getTablistInfoString() {
+        ChatColor chatColor = getChatColor();
+
+        return chatColor + "Gather " + getProgress() + "/" + getRequiredProgress() + " " + ingredient.getItemStack(1).getItemMeta().getDisplayName();
     }
 
-    public String getObjectiveStringNoProgress() {
+    public String getItemLoreString() {
         ChatColor color;
         if (isCompleted()) {
             color = ChatColor.GREEN;
         } else {
             color = ChatColor.YELLOW;
         }
-        String lore = color + "Collect " + amountNeeded + " " + ingredient.getItemStack(1).getItemMeta().getDisplayName();
+        String lore = color + "Gather " + amountNeeded + " " + ingredient.getItemStack(1).getItemMeta().getDisplayName();
         return lore;
     }
 
@@ -87,6 +82,11 @@ public final class TaskGathering implements Task {
     }
 
     @Override
+    public int getRequiredProgress() {
+        return amountNeeded;
+    }
+
+    @Override
     public void setProgress(int progress) {
         this.progress = progress;
     }
@@ -111,5 +111,10 @@ public final class TaskGathering implements Task {
 
     public Ingredient getIngredient() {
         return ingredient;
+    }
+
+    @Override
+    public ChatColor getChatColor() {
+        return ChatColor.GOLD;
     }
 }

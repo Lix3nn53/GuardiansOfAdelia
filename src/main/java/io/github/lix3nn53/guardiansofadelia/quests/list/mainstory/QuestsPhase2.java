@@ -57,8 +57,8 @@ public class QuestsPhase2 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Time to enter Rotten City\nKill TASK_PROGRESS_1/12 Zombie and TASK_PROGRESS_2/8 Zombie Villager\nThen talk to Dr. Rintarou";
-        Quest quest = new Quest(13, "The Rotten City", story,
+        String objectiveText = "Time to enter Rotten City\nTASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk to Dr. Rintarou";
+        Quest quest = new Quest(13, "Rotten City", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -83,7 +83,7 @@ public class QuestsPhase2 {
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Dr. Rintarou needs zombie parts for his experiments\nCollect TASK_PROGRESS_1/12 Rotten Flesh\nThen talk to Dr. Rintarou";
+        String objectiveText = "Dr. Rintarou needs zombie parts for his experiments\nTASK_PROGRESS_1\nThen talk to Dr. Rintarou";
         Quest quest = new Quest(14, "Disgusting experiments", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
@@ -109,7 +109,7 @@ public class QuestsPhase2 {
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Dr. Rintarou needs zombie brains for his final experiment\nCollect TASK_PROGRESS_1/18 Zombie Brain\nThen talk to Dr. Rintarou";
+        String objectiveText = "Dr. Rintarou needs zombie brains for his final experiment\nTASK_PROGRESS_1\nThen talk to Dr. Rintarou";
         Quest quest = new Quest(15, "Pink jellies", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
@@ -151,7 +151,7 @@ public class QuestsPhase2 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nKill Zombie Subject#471 TASK_PROGRESS_1/1\nThen talk to Dr. Rintarou";
+        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nThen talk to Dr. Rintarou";
         Quest quest = new Quest(17, "Stronger zombies!?", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
@@ -172,7 +172,7 @@ public class QuestsPhase2 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Report back to Sergent Armin that Dr. Rintarou started working on a cure!";
-        Quest quest = new Quest(18, "Dr. Rintarou is back to normal", story,
+        Quest quest = new Quest(18, "Came back to his senses", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);

@@ -1116,7 +1116,7 @@ public enum AdeliaEntity {
                 break;
             }
             case BOSS_SKELETON: {
-                Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Dark Magic Master", 5000D, EntityType.SKELETON);
+                Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Dark Magician Nimzuth", 5000D, EntityType.SKELETON);
                 entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(150D);
                 entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.18D);
                 entity.getEquipment().clear();

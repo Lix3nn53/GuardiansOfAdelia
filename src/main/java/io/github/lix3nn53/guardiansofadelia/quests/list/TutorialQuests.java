@@ -51,7 +51,7 @@ public class TutorialQuests {
         tasks2.add(taskKill2);
         Quest quest2 = new Quest(2, "To the rescue", story2, "Elysea needs your aid!", "Open menu by clicking Menu-Book from your inventory(E key), then.." +
                 "\n..learn your skills from character menu to get ready to fight!" +
-                "\nKill TASK_PROGRESS_1/5 Aleesia's Cavalry then talk to " +
+                "\nTASK_PROGRESS_1 then talk to " +
                 "Elysea\n",
                 "Spend your element points from character-menu to get stronger.",
                 tasks2, itemPrizes, 0, 0, 90, requiredQuests2, Material.RED_NETHER_BRICKS);
@@ -72,8 +72,7 @@ public class TutorialQuests {
         TaskKill taskKill3 = new TaskKill(ChatColor.RED + "Aleesia's Ranger", 5);
         tasks3.add(taskKill3);
         Quest quest3 = new Quest(3, "Syvia's gift", story3, "Time to test power of elements!", "Spend your element points from character-menu to get stronger." +
-                "\nKill TASK_PROGRESS_1/5 " +
-                "Aleesia's Ranger then talk to Syvia\n",
+                "\nTASK_PROGRESS_1 then talk to Syvia\n",
                 "Equip jewelries from RPG-Inventory to gain even more elemental power! To open RPG-Inventory click one of crafting slots from your inventory.",
                 tasks3, itemPrizes1, 0, 0, 90, requiredQuests3, Material.RED_NETHER_BRICKS);
         QuestNPCManager.addQuest(quest3, 6, 7);

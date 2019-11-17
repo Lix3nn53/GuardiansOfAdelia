@@ -34,10 +34,10 @@ public class TablistUtils {
                 List<Quest> questList = activeCharacter.getQuestList();
                 if (!questList.isEmpty()) {
                     header.append("\n" + ChatColor.DARK_PURPLE + "QUESTS");
+                    header.append("\n");
 
-                    int i = 1;
                     for (Quest quest : questList) {
-                        header.append("\n" + ChatColor.LIGHT_PURPLE);
+                        header.append(ChatColor.LIGHT_PURPLE);
                         header.append(quest.getName() + ": ");
                         header.append(ChatColor.WHITE + quest.getObjectiveTextForTablist());
                         header.append("\n");

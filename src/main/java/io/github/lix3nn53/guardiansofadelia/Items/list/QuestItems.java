@@ -32,6 +32,15 @@ public class QuestItems {
         }});
         item2.setItemMeta(im);
         questNoToItem.put(15, item2);
+
+        ItemStack item3 = new ItemStack(Material.BONE);
+        im.setDisplayName(ChatColor.LIGHT_PURPLE + "Magical Bone");
+        im.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Quest item for #23");
+        }});
+        item3.setItemMeta(im);
+        questNoToItem.put(23, item3);
     }
 
     public static ItemStack getQuestItem(int questNo) {

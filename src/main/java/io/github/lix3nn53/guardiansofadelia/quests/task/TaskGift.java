@@ -28,26 +28,20 @@ public final class TaskGift implements Task {
         return taskCopy;
     }
 
-    public String getObjectiveString() {
-        ChatColor color;
-        if (isCompleted()) {
-            color = ChatColor.GREEN;
-        } else {
-            color = ChatColor.YELLOW;
-        }
-        String lore = color + "Give " + progress + "/" + amountNeeded + " " + item.getItemMeta().getDisplayName() + " to " + entityName;
-        return lore;
+    public String getTablistInfoString() {
+        ChatColor chatColor = getChatColor();
+
+        return chatColor + "Give " + getProgress() + "/" + getRequiredProgress() + " " + item.getItemMeta().getDisplayName() + " to " + entityName;
     }
 
-    public String getObjectiveStringNoProgress() {
+    public String getItemLoreString() {
         ChatColor color;
         if (isCompleted()) {
             color = ChatColor.GREEN;
         } else {
             color = ChatColor.YELLOW;
         }
-        String lore = color + "Give " + amountNeeded + " " + item.getItemMeta().getDisplayName() + " to " + entityName;
-        return lore;
+        return color + "Give " + amountNeeded + " " + item.getItemMeta().getDisplayName() + " to " + entityName;
     }
 
     @Override
@@ -75,6 +69,11 @@ public final class TaskGift implements Task {
     }
 
     @Override
+    public int getRequiredProgress() {
+        return amountNeeded;
+    }
+
+    @Override
     public void setProgress(int progress) {
         this.progress = progress;
     }
@@ -86,5 +85,10 @@ public final class TaskGift implements Task {
 
     public void setOnCompleteActions(List<Action> onCompleteActions) {
         this.onCompleteActions = onCompleteActions;
+    }
+
+    @Override
+    public ChatColor getChatColor() {
+        return ChatColor.LIGHT_PURPLE;
     }
 }

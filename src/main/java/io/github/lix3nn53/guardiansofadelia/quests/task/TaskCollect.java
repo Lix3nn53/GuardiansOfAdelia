@@ -31,18 +31,13 @@ public final class TaskCollect implements Task {
         return taskCopy;
     }
 
-    public String getObjectiveString() {
-        ChatColor color;
-        if (isCompleted()) {
-            color = ChatColor.GREEN;
-        } else {
-            color = ChatColor.YELLOW;
-        }
-        String lore = color + "Collect " + progress + "/" + amountNeeded + " " + itemStack.getItemMeta().getDisplayName();
-        return lore;
+    public String getTablistInfoString() {
+        ChatColor chatColor = getChatColor();
+
+        return chatColor + "Collect " + getProgress() + "/" + getRequiredProgress() + " " + itemStack.getItemMeta().getDisplayName();
     }
 
-    public String getObjectiveStringNoProgress() {
+    public String getItemLoreString() {
         ChatColor color;
         if (isCompleted()) {
             color = ChatColor.GREEN;
@@ -82,6 +77,11 @@ public final class TaskCollect implements Task {
         this.progress = progress;
     }
 
+    @Override
+    public int getRequiredProgress() {
+        return amountNeeded;
+    }
+
     public void setProgress(Player player, int progress) {
         this.progress = progress;
         if (isCompleted()) {
@@ -110,5 +110,10 @@ public final class TaskCollect implements Task {
 
     public double getChance() {
         return chance;
+    }
+
+    @Override
+    public ChatColor getChatColor() {
+        return ChatColor.YELLOW;
     }
 }

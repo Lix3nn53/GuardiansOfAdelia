@@ -66,9 +66,9 @@ public class QuestsPhase1 {
         tasks.add(task2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String obj = "Talk to Item Merchant TASK_PROGRESS_1/1\n" + "Talk to Blacksmith TASK_PROGRESS_2/1\n" +
-                "Talk to Magical Item Merchant TASK_PROGRESS_3/1\n"
-                + "Then meet Sergeant Armin in building near city entrance\n";
+        String obj = "TASK_PROGRESS_1\n" + "TASK_PROGRESS_2\n" +
+                "TASK_PROGRESS_3\n"
+                + "Then meet Sergeant Armin in building near city entrance";
         Quest quest = new Quest(6, "Another newbie?", story,
                 "Time to meet villagers of Roumen!", obj,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
@@ -89,7 +89,7 @@ public class QuestsPhase1 {
         List<Task> tasks = new ArrayList<>();
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.\nDon't forget to use your boat!";
-        Quest quest = new Quest(7, "Lets meet the hobbits", story,
+        Quest quest = new Quest(7, "Meet the hobbits", story,
                 startMsg, startMsg + "\nTalk with hobbit Village Elder Odo",
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -111,7 +111,7 @@ public class QuestsPhase1 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Lets enter Forest of Slumber!\nKill TASK_PROGRESS_1/7 Wild Lizard and TASK_PROGRESS_2/5 Poisonous Lizard\nThen talk to Adventurer Milo";
+        String objectiveText = "Lets enter Forest of Slumber!\nTASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk to Adventurer Milo";
         Quest quest = new Quest(8, "First combat", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
@@ -134,7 +134,7 @@ public class QuestsPhase1 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Kill TASK_PROGRESS_1/14 Baby Slime and TASK_PROGRESS_2/9 Sticky Slime\nThen talk to Adventurer Milo";
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk to Adventurer Milo";
         Quest quest = new Quest(9, "Sticky situation", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
@@ -154,7 +154,7 @@ public class QuestsPhase1 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nKill King Slime TASK_PROGRESS_1/1\nThen talk to Adventurer Milo";
+        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nThen talk to Adventurer Milo";
         Quest quest = new Quest(10, "Arcade dungeon", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
@@ -174,7 +174,7 @@ public class QuestsPhase1 {
         tasks.add(task);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Bring good news about Forest of Slumber to Village Elder Odo TASK_PROGRESS_1/1\nThen report back to Sergeant Armin";
+        String objectiveText = "Bring good news about Forest of Slumber\nTASK_PROGRESS_1\nThen report back to Sergeant Armin";
         Quest quest = new Quest(11, "Good news", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,

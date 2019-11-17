@@ -26,20 +26,16 @@ public final class TaskInteract implements Task {
         return taskCopy;
     }
 
-    public String getObjectiveString() {
+    public String getTablistInfoString() {
+        ChatColor chatColor = getChatColor();
+
         NPCRegistry registry = CitizensAPI.getNPCRegistry();
         NPC npc = registry.getById(npcId);
-        ChatColor color;
-        if (isCompleted()) {
-            color = ChatColor.GREEN;
-        } else {
-            color = ChatColor.YELLOW;
-        }
-        String lore = color + "Talk to " + npc.getName();
-        return lore;
+
+        return chatColor + "Talk to " + npc.getName();
     }
 
-    public String getObjectiveStringNoProgress() {
+    public String getItemLoreString() {
         NPCRegistry registry = CitizensAPI.getNPCRegistry();
         NPC npc = registry.getById(npcId);
         ChatColor color;
@@ -48,8 +44,7 @@ public final class TaskInteract implements Task {
         } else {
             color = ChatColor.YELLOW;
         }
-        String lore = color + "Talk to " + npc.getName();
-        return lore;
+        return color + "Talk to " + npc.getName();
     }
 
     @Override
@@ -88,6 +83,11 @@ public final class TaskInteract implements Task {
     }
 
     @Override
+    public int getRequiredProgress() {
+        return 1;
+    }
+
+    @Override
     public void setProgress(int progress) {
         this.completed = progress;
     }
@@ -99,5 +99,10 @@ public final class TaskInteract implements Task {
 
     public void setOnCompleteActions(List<Action> onCompleteActions) {
         this.onCompleteActions = onCompleteActions;
+    }
+
+    @Override
+    public ChatColor getChatColor() {
+        return ChatColor.GREEN;
     }
 }

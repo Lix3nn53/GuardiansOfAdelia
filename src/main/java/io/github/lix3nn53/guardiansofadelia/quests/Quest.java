@@ -160,7 +160,7 @@ public final class Quest {
                 lore.add("");
                 lore.add(ChatColor.LIGHT_PURPLE + "Objectives");
                 for (Task t : tasks) {
-                    lore.add(t.getObjectiveStringNoProgress());
+                    lore.add(t.getItemLoreString());
                 }
             }
 
@@ -382,8 +382,8 @@ public final class Quest {
         String replaceTaskValues = getObjectiveText();
         int i = 1;
         for (Task task : this.getTasks()) {
-            int progress = task.getProgress();
-            replaceTaskValues = replaceTaskValues.replace("TASK_PROGRESS_" + i, progress + "");
+            String tablistInfoString = task.getTablistInfoString();
+            replaceTaskValues = replaceTaskValues.replace("TASK_PROGRESS_" + i, tablistInfoString + ChatColor.RESET);
             i++;
         }
         return replaceTaskValues;
@@ -468,6 +468,7 @@ public final class Quest {
         for (Task task : this.tasks) {
             if (task instanceof TaskCollect) {
                 TaskCollect taskCollect = (TaskCollect) task;
+                if (taskCollect.isCompleted()) continue;
                 List<String> nameOfMobsItemDropsFrom = taskCollect.getNameOfMobsItemDropsFrom();
                 if (nameOfMobsItemDropsFrom.contains(customName)) {
                     double random = Math.random();

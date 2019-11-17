@@ -27,26 +27,20 @@ public final class TaskReach implements Task {
         return taskCopy;
     }
 
-    public String getObjectiveString() {
-        ChatColor color;
-        if (isCompleted()) {
-            color = ChatColor.GREEN;
-        } else {
-            color = ChatColor.YELLOW;
-        }
-        String lore = color + "Go to " + blockLoc + " and click " + blockMat.toString() + " block";
-        return lore;
+    public String getTablistInfoString() {
+        ChatColor chatColor = getChatColor();
+
+        return chatColor + "Go to " + blockLoc + " and click " + blockMat.toString() + " block";
     }
 
-    public String getObjectiveStringNoProgress() {
+    public String getItemLoreString() {
         ChatColor color;
         if (isCompleted()) {
             color = ChatColor.GREEN;
         } else {
             color = ChatColor.YELLOW;
         }
-        String lore = color + "Go to " + blockLoc + " and click " + blockMat.toString() + " block";
-        return lore;
+        return color + "Go to " + blockLoc + " and click " + blockMat.toString() + " block";
     }
 
     @Override
@@ -74,6 +68,11 @@ public final class TaskReach implements Task {
     }
 
     @Override
+    public int getRequiredProgress() {
+        return 1;
+    }
+
+    @Override
     public void setProgress(int progress) {
         this.completed = progress;
     }
@@ -85,5 +84,10 @@ public final class TaskReach implements Task {
 
     public void setOnCompleteActions(List<Action> onCompleteActions) {
         this.onCompleteActions = onCompleteActions;
+    }
+
+    @Override
+    public ChatColor getChatColor() {
+        return ChatColor.AQUA;
     }
 }

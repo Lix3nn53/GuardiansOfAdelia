@@ -27,18 +27,13 @@ public final class TaskDealDamage implements Task {
         return taskCopy;
     }
 
-    public String getObjectiveString() {
-        ChatColor color;
-        if (isCompleted()) {
-            color = ChatColor.GREEN;
-        } else {
-            color = ChatColor.YELLOW;
-        }
-        String lore = color + "Deal " + progress + "/" + damageNeeded + " damage to " + mobName;
-        return lore;
+    public String getTablistInfoString() {
+        ChatColor chatColor = getChatColor();
+
+        return chatColor + "Deal " + getProgress() + "/" + getRequiredProgress() + " damage to " + mobName;
     }
 
-    public String getObjectiveStringNoProgress() {
+    public String getItemLoreString() {
         ChatColor color;
         if (isCompleted()) {
             color = ChatColor.GREEN;
@@ -87,6 +82,11 @@ public final class TaskDealDamage implements Task {
     }
 
     @Override
+    public int getRequiredProgress() {
+        return damageNeeded;
+    }
+
+    @Override
     public void setProgress(int progress) {
         this.progress = progress;
     }
@@ -108,5 +108,10 @@ public final class TaskDealDamage implements Task {
 
     public void setOnCompleteActions(List<Action> onCompleteActions) {
         this.onCompleteActions = onCompleteActions;
+    }
+
+    @Override
+    public ChatColor getChatColor() {
+        return ChatColor.RED;
     }
 }

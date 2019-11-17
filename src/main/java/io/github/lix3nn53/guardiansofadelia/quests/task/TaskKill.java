@@ -28,26 +28,20 @@ public final class TaskKill implements Task {
         return taskCopy;
     }
 
-    public String getObjectiveString() {
-        ChatColor color;
-        if (isCompleted()) {
-            color = ChatColor.GREEN;
-        } else {
-            color = ChatColor.YELLOW;
-        }
-        String lore = color + "Kill " + progress + "/" + amountNeeded + " " + mobName;
-        return lore;
+    public String getTablistInfoString() {
+        ChatColor chatColor = getChatColor();
+
+        return chatColor + "Kill " + getProgress() + "/" + getRequiredProgress() + " " + mobName;
     }
 
-    public String getObjectiveStringNoProgress() {
+    public String getItemLoreString() {
         ChatColor color;
         if (isCompleted()) {
             color = ChatColor.GREEN;
         } else {
             color = ChatColor.YELLOW;
         }
-        String lore = color + "Kill " + amountNeeded + " " + mobName;
-        return lore;
+        return color + "Kill " + amountNeeded + " " + mobName;
     }
 
     @Override
@@ -75,6 +69,11 @@ public final class TaskKill implements Task {
     }
 
     @Override
+    public int getRequiredProgress() {
+        return amountNeeded;
+    }
+
+    @Override
     public void setProgress(int progress) {
         this.progress = progress;
     }
@@ -96,5 +95,10 @@ public final class TaskKill implements Task {
 
     public void setOnCompleteActions(List<Action> onCompleteActions) {
         this.onCompleteActions = onCompleteActions;
+    }
+
+    @Override
+    public ChatColor getChatColor() {
+        return ChatColor.RED;
     }
 }
