@@ -9,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.*;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -287,7 +288,10 @@ public class RPGInventory {
         return mainhandSlot;
     }
 
-    public boolean onShiftClick(ItemStack itemStack, Player player, int slot, Inventory topInventory) {
+    public boolean onShiftClick(ItemStack itemStack, Player player, int slot, Inventory topInventory, RPGClass rpgClass) {
+        boolean doesCharacterMeetRequirements = StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass);
+        if (!doesCharacterMeetRequirements) return false;
+
         ItemStack oldItemOnSlot = null;
         boolean change = false;
         RPGSlotType rpgSlotType = null;
@@ -399,7 +403,10 @@ public class RPGInventory {
         }
     }
 
-    public boolean onCursorClickWithItem(Player player, int slot, ItemStack cursor, Inventory topInventory) {
+    public boolean onCursorClickWithItem(Player player, int slot, ItemStack cursor, Inventory topInventory, RPGClass rpgClass) {
+        boolean doesCharacterMeetRequirements = StatUtils.doesCharacterMeetRequirements(cursor, player, rpgClass);
+        if (!doesCharacterMeetRequirements) return false;
+
         if (slot == RPGSlotType.PARROT.getSlotNo()) {
             RPGSlotParrot rpgSlot = getParrotSlot();
             if (!rpgSlot.isEmpty()) {

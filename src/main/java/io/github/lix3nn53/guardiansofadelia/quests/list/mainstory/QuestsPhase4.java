@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestsPhase3 {
+public class QuestsPhase4 {
 
     public static void createQuests() {
         createQuestOne();
@@ -27,126 +27,124 @@ public class QuestsPhase3 {
 
     private static void createQuestOne() {
         List<String> story = new ArrayList<>();
-        story.add("The darkness' effects on Forest of Mist");
-        story.add("is killing magical beings.");
-        story.add("Talk to Timberman Franky, he knows much");
-        story.add("more about the forest.");
+        story.add("Congratulations! You improved a lot since");
+        story.add("you you have become a Guardian. You are ready");
+        story.add("to move the port city, Elderine.");
         List<Integer> requiredQuests = new ArrayList<>();
-        requiredQuests.add(18);
+        requiredQuests.add(26);
         List<Task> tasks = new ArrayList<>();
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
-        Quest quest = new Quest(19, "Forest of Mist", story,
-                startMsg, "Talk with Timberman Franky",
+        Quest quest = new Quest(27, "Elderine", story,
+                startMsg, "Go to port city Elderine then talk with Captain Leanna",
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 32, 36);
+        QuestNPCManager.addQuest(quest, 32, 39);
     }
 
     private static void createQuestTwo() {
         List<String> story = new ArrayList<>();
-        story.add("Franky can't gather woods because");
-        story.add("of monsters. Get this axe and bring");
-        story.add("him some woods.");
+        story.add("Villagers are having a hard time because of");
+        story.add("reduction of resources. Do some fishing and");
+        story.add("give them to villagers. So you can get a");
+        story.add("warm welcome to Elderine.");
         List<Integer> requiredQuests = new ArrayList<>();
-        requiredQuests.add(19);
+        requiredQuests.add(27);
 
         List<Task> tasks = new ArrayList<>();
-        TaskGathering taskGathering = new TaskGathering(Ingredient.WOODCUTTING_PLANK, 6);
-        tasks.add(taskGathering);
-        TaskGathering taskGathering2 = new TaskGathering(Ingredient.WOODCUTTING_LOG, 4);
-        tasks.add(taskGathering2);
+        ItemStack itemStack = Ingredient.FISHING_COD.getItemStack(1);
+        TaskGift taskGift = new TaskGift(5, itemStack, "");
+        tasks.add(taskGift);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2" + " for Franky";
-        Quest quest = new Quest(20, "Woodcutting", story,
+        String objectiveText = "TASK_PROGRESS_1\nThen talk back to Captain Lenna";
+        Quest quest = new Quest(28, "Fishing", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 36, 36);
+        QuestNPCManager.addQuest(quest, 39, 39);
     }
 
     private static void createQuestThree() {
         List<String> story = new ArrayList<>();
-        story.add("Forest fairies fighting darkness");
-        story.add("by themselves. Talk with the fairy in");
-        story.add("middle of Forest of Mist.");
+        story.add("Pastry chef can't make tasty");
+        story.add("cakes anymore!");
+        story.add("Help Pastry Chef Jasper in Candy Valley.");
         List<Integer> requiredQuests = new ArrayList<>();
-        requiredQuests.add(19);
-
+        requiredQuests.add(28);
         List<Task> tasks = new ArrayList<>();
-
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Talk with Forest Fairy";
-        Quest quest = new Quest(21, "Forest Fairies", story,
-                "", objectiveText,
+        String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
+        Quest quest = new Quest(29, "Candy Valley", story,
+                startMsg, "Talk with Pastry Chef Jasper",
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 36, 37);
+        QuestNPCManager.addQuest(quest, 39, 39);
     }
 
     private static void createQuestFour() {
         List<String> story = new ArrayList<>();
-        story.add("Help forest fairies on their battle");
+        story.add("The tastes of candies in Candy Valley");
+        story.add("became really bad after Aleesia's darkness");
+        story.add("came upon us. Hunt down some bad candies.");
         List<Integer> requiredQuests = new ArrayList<>();
-        requiredQuests.add(21);
+        requiredQuests.add(29);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.WHITE + "Archer Skeleton", 20);
+        TaskKill taskKill = new TaskKill(ChatColor.AQUA + "Popping Rainbow", 20);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.WHITE + "Fighter Skeleton", 20);
+        TaskKill taskKill2 = new TaskKill(ChatColor.LIGHT_PURPLE + "Jellybean", 20);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to the Forest Fairy";
-        Quest quest = new Quest(22, "Fighter bones", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
+        Quest quest = new Quest(30, "Wipe out the baddies", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 37, 37);
+        QuestNPCManager.addQuest(quest, 39, 39);
     }
 
     private static void createQuestFive() {
         List<String> story = new ArrayList<>();
-        story.add("Collect magical bones from");
-        story.add("skeletons to find the source");
-        story.add("of their magic!");
+        story.add("Collect some candies and bring");
+        story.add("them to Jasper. So he can try to");
+        story.add("find whats wrong with them.");
         List<Integer> requiredQuests = new ArrayList<>();
-        requiredQuests.add(21);
+        requiredQuests.add(29);
 
         List<Task> tasks = new ArrayList<>();
         List<String> nameOfMobsItemDropsFrom = new ArrayList<>();
-        nameOfMobsItemDropsFrom.add(ChatColor.WHITE + "Archer Skeleton");
-        nameOfMobsItemDropsFrom.add(ChatColor.WHITE + "Fighter Skeleton");
-        nameOfMobsItemDropsFrom.add(ChatColor.WHITE + "Rogue Skeleton");
-        nameOfMobsItemDropsFrom.add(ChatColor.WHITE + "Monk Skeleton");
-        nameOfMobsItemDropsFrom.add(ChatColor.WHITE + "Mage Skeleton");
+        nameOfMobsItemDropsFrom.add(ChatColor.AQUA + "Popping Rainbow");
+        nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Taffy Spirit");
+        nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Candy Box");
+        nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Jellybean");
         TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(23), 24);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nfrom skeletons then talk back to the Forest Fairy";
-        Quest quest = new Quest(23, "Magical bones", story,
+        String objectiveText = "TASK_PROGRESS_1\nfrom candies then talk back to Pastry Chef Jasper";
+        Quest quest = new Quest(31, "Sugars with bad taste", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 37, 37);
+        QuestNPCManager.addQuest(quest, 39, 39);
     }
 
     private static void createQuestSix() {
         List<String> story = new ArrayList<>();
-        story.add("Mage skeletons are too hard to handle");
-        story.add("for forest fairies.");
+        story.add("Flying candies? What kind of magic is this?");
+        story.add("Candies are supposed to taste good not fly.");
         List<Integer> requiredQuests = new ArrayList<>();
-        requiredQuests.add(21);
+        requiredQuests.add(29);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.WHITE + "Mage Skeleton", 12);
+        TaskKill taskKill = new TaskKill(ChatColor.LIGHT_PURPLE + "Taffy Spirit", 12);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nthen talk back to the Forest Fairy";
-        Quest quest = new Quest(24, "Magical mage bones", story,
+        String objectiveText = "TASK_PROGRESS_1\nthen talk back to the Pastry Chef Jasper";
+        Quest quest = new Quest(32, "Flying candies", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);

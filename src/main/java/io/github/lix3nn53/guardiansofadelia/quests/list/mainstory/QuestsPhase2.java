@@ -35,7 +35,7 @@ public class QuestsPhase2 {
         List<Task> tasks = new ArrayList<>();
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.\nDon't forget to use your boat!";
-        Quest quest = new Quest(12, "Zombie invasion", story,
+        Quest quest = new Quest(12, "Rotten City", story,
                 startMsg, "Talk with Dr. Rintarou",
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -58,7 +58,7 @@ public class QuestsPhase2 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Time to enter Rotten City\nTASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk to Dr. Rintarou";
-        Quest quest = new Quest(13, "Rotten City", story,
+        Quest quest = new Quest(13, "Zombie invasion", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);

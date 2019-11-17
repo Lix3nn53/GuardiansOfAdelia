@@ -62,7 +62,9 @@ public class GearArmor implements RPGGear {
         this.itemStack = new ItemStack(material);
         this.itemStack = RPGItemUtils.resetArmor(this.itemStack);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
-        PersistentDataContainerUtil.putString("reqClass", rpgClass.toString(), this.itemStack);
+        if (!rpgClass.equals(RPGClass.NO_CLASS)) {
+            PersistentDataContainerUtil.putString("reqClass", rpgClass.toString(), this.itemStack);
+        }
         PersistentDataContainerUtil.putInteger("health", health, this.itemStack);
         PersistentDataContainerUtil.putInteger("defense", defense, this.itemStack);
         PersistentDataContainerUtil.putInteger("magicDefense", magicDefense, this.itemStack);

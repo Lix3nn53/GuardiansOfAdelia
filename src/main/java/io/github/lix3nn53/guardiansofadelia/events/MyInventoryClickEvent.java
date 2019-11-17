@@ -593,18 +593,19 @@ public class MyInventoryClickEvent implements Listener {
             }
         } else if (title.equals(ChatColor.YELLOW.toString() + ChatColor.BOLD + "RPG Inventory")) {
             RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
+            RPGClass rpgClass = rpgCharacter.getRpgClass();
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 event.setCancelled(true);
                 if (cursorType.equals(Material.AIR)) {
                     boolean change = rpgInventory.onCursorClickWithAir(player, slot, topInventory, event.isShiftClick());
                 } else {
-                    boolean change = rpgInventory.onCursorClickWithItem(player, slot, cursor, topInventory);
+                    boolean change = rpgInventory.onCursorClickWithItem(player, slot, cursor, topInventory, rpgClass);
                 }
             } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
                 if (cursorType.equals(Material.AIR)) {
                     if (event.isShiftClick()) {
                         event.setCancelled(true);
-                        boolean change = rpgInventory.onShiftClick(current, player, slot, topInventory);
+                        boolean change = rpgInventory.onShiftClick(current, player, slot, topInventory, rpgClass);
                     }
                 }
             }
