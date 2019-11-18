@@ -6,5 +6,6 @@ public class MainStoryQuests {
         QuestsPhase1.createQuests();
         QuestsPhase2.createQuests();
         QuestsPhase3.createQuests();
+        QuestsPhase4.createQuests();
     }
 }

@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.attribute;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 
@@ -45,8 +46,12 @@ public class Attribute {
         }
     }
 
-    public int getTotalBonus() {
-        return bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand + bonusFromOffhand + bonusFromPassive;
+    public int getTotalBonus(int playerLevel, RPGClass playerClass) {
+        return bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand + bonusFromOffhand + bonusFromPassive + getBonusFromLevel(playerLevel, playerClass);
+    }
+
+    public int getBonusFromLevel(int playerLevel, RPGClass playerClass) {
+        return playerClass.getAttributeBonusForLevel(this.attributeType, playerLevel);
     }
 
     public void clearEquipment(RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
@@ -147,8 +152,8 @@ public class Attribute {
         }
     }
 
-    public double getIncrement() {
-        return (invested + getTotalBonus()) * attributeType.getIncrement();
+    public double getIncrement(int playerLevel, RPGClass playerClass) {
+        return (invested + getTotalBonus(playerLevel, playerClass)) * attributeType.getIncrement();
     }
 
     private void onValueChange(RPGCharacterStats rpgCharacterStats) {

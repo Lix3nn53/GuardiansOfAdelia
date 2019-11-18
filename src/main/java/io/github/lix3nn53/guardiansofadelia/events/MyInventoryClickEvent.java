@@ -66,6 +66,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -87,10 +88,15 @@ public class MyInventoryClickEvent implements Listener {
         int slot = event.getSlot();
 
         if (event.getAction() != InventoryAction.NOTHING) {
-            if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.PLAYER)) {
+            if (event.getClick().equals(ClickType.NUMBER_KEY)) {
+                int hotbarButton = event.getHotbarButton();
+                if (hotbarButton >= 0 && hotbarButton <= 3) { //skill bar
+                    event.setCancelled(true);
+                    return;
+                }
+            } else if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.PLAYER)) {
                 if (slot >= 0 && slot <= 3) { //skill bar
                     event.setCancelled(true);
-                    player.sendMessage("Cancel event: hot bar skill item click");
                     return;
                 }
             }

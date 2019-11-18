@@ -4,7 +4,10 @@ import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import io.github.lix3nn53.guardiansofadelia.quests.task.*;
+import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
+import io.github.lix3nn53.guardiansofadelia.quests.task.TaskCollect;
+import io.github.lix3nn53.guardiansofadelia.quests.task.TaskGift;
+import io.github.lix3nn53.guardiansofadelia.quests.task.TaskKill;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -53,7 +56,7 @@ public class QuestsPhase4 {
 
         List<Task> tasks = new ArrayList<>();
         ItemStack itemStack = Ingredient.FISHING_COD.getItemStack(1);
-        TaskGift taskGift = new TaskGift(5, itemStack, "");
+        TaskGift taskGift = new TaskGift(5, itemStack, ChatColor.GREEN + "Elderine Villager");
         tasks.add(taskGift);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -79,7 +82,7 @@ public class QuestsPhase4 {
                 startMsg, "Talk with Pastry Chef Jasper",
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 39, 39);
+        QuestNPCManager.addQuest(quest, 39, 38);
     }
 
     private static void createQuestFour() {
@@ -102,7 +105,7 @@ public class QuestsPhase4 {
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 39, 39);
+        QuestNPCManager.addQuest(quest, 38, 38);
     }
 
     private static void createQuestFive() {
@@ -119,7 +122,7 @@ public class QuestsPhase4 {
         nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Taffy Spirit");
         nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Candy Box");
         nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Jellybean");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(23), 24);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 24);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -128,7 +131,7 @@ public class QuestsPhase4 {
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 39, 39);
+        QuestNPCManager.addQuest(quest, 38, 38);
     }
 
     private static void createQuestSix() {
@@ -143,56 +146,50 @@ public class QuestsPhase4 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nthen talk back to the Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nthen talk back to Pastry Chef Jasper";
         Quest quest = new Quest(32, "Flying candies", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 37, 37);
+        QuestNPCManager.addQuest(quest, 38, 38);
     }
 
     private static void createQuestSeven() {
         List<String> story = new ArrayList<>();
-        story.add("Thanks to your effort forest fairies");
-        story.add("found the source of dark magic that");
-        story.add("controls skeletons.");
+        story.add("We have found that there is a evil cook");
+        story.add("that spoils tastes of sugars.");
         List<Integer> requiredQuests = new ArrayList<>();
-        requiredQuests.add(20);
-        requiredQuests.add(21);
-        requiredQuests.add(22);
-        requiredQuests.add(23);
-        requiredQuests.add(24);
+        requiredQuests.add(30);
+        requiredQuests.add(31);
+        requiredQuests.add(32);
         List<Task> tasks = new ArrayList<>();
 
-        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Dark Magician Nimzuth", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Evil Cook", 1);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Forest Fairy";
-        Quest quest = new Quest(25, "The source of dark magic", story,
+        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
+        Quest quest = new Quest(33, "Evil cook", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 37, 37);
+        QuestNPCManager.addQuest(quest, 38, 38);
     }
 
     private static void createQuestEight() {
         List<String> story = new ArrayList<>();
-        story.add("Report back that you destroyed the");
-        story.add("source of dark magic in Forest of Mist.");
+        story.add("Report back that candies tastes");
+        story.add("amazing one again.");
         List<Integer> requiredQuests = new ArrayList<>();
-        requiredQuests.add(25);
+        requiredQuests.add(33);
         List<Task> tasks = new ArrayList<>();
 
-        Task task = new TaskInteract(36);
-        tasks.add(task);
-
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nthen report back to Sergent Armin.";
-        Quest quest = new Quest(26, "Forest fairies are safe", story,
+        String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
+        Quest quest = new Quest(34, "Tasteful sugars", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
                 Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest, 37, 32);
+        QuestNPCManager.addQuest(quest, 38, 39);
     }
 }

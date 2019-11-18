@@ -63,6 +63,19 @@ public final class TaskGift implements Task {
         return false;
     }
 
+    public boolean progressBy(Player player, int increment) {
+        if (progress < amountNeeded) {
+            progress += increment;
+            if (isCompleted()) {
+                for (Action action : onCompleteActions) {
+                    action.perform(player);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public int getProgress() {
         return this.progress;
@@ -90,5 +103,13 @@ public final class TaskGift implements Task {
     @Override
     public ChatColor getChatColor() {
         return ChatColor.LIGHT_PURPLE;
+    }
+
+    public ItemStack getItem() {
+        return item;
+    }
+
+    public String getEntityName() {
+        return entityName;
     }
 }

@@ -1,12 +1,5 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.socket.MySocketServer;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,197 +10,38 @@ public class Test {
 
     private static final double MULTIPLIER = 0.1;
 
-    /*public static void main(String[] args) {
-
-     *//*int bonusValue = getBonusValue(5000);
-        System.out.println(bonusValue);
-        int newValue = 5000 + bonusValue;
-        int decreaseValue = getDecreaseValue(newValue);
-        System.out.println(decreaseValue);
-
-        for (int level = 0; level <= 90; level++) {
-            System.out.println((int) (Math.pow(level, 1.75) - (level) + 0.5));
-
-        }*//*
-
-     *//*List<Integer> integerList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            integerList.add(i);
-        }
-        int size = integerList.size();
-        for (int i = 0; i < size; i++) {
-            int integer = integerList.get(i);
-            System.out.println(integer);
-        }
-        for (int i = 0; i < size; ++i) {
-            int integer = integerList.get(i);
-            System.out.println(integer);
-        }*//*
-     *//*List<Double> downRatesForLevel = new ArrayList<>();
-        downRatesForLevel.add(0.75);
-        downRatesForLevel.add(0.6);
-        downRatesForLevel.add(0.45);
-        downRatesForLevel.add(0.325);
-        downRatesForLevel.add(0.2);
-        downRatesForLevel.add(0.125);
-        downRatesForLevel.add(0.05);
-        downRatesForLevel.add(0.02);
-
-        int maxValue = 4000;
-
+    public static void main(String[] args) {
         for (int level = 1; level <= 90; level++) {
-            int experience = (int) (10 + Math.round(5 * Math.pow(level, 3) / 4) + 0.5);
-            System.out.println(experience);
-        }
+            int tier = 1;
+            double multiplier = 1.2 + (tier * 0.1);
 
-        int totalExperience = 10;
-        int level = RPGCharacterExperienceManager.getLevel(totalExperience);
-        int totalRequiredExperience = RPGCharacterExperienceManager.getTotalRequiredExperience(level);
-        int currentExperience = RPGCharacterExperienceManager.getCurrentExperience(totalExperience, level);
-        int requiredExperience = RPGCharacterExperienceManager.getRequiredExperience(level);
+            int result1 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
 
-        System.out.println(totalRequiredExperience);
-        System.out.println(level);
-        System.out.println(currentExperience);
-        System.out.println(requiredExperience);*//*
+            tier = 2;
+            multiplier = 1.2 + (tier * 0.1);
 
+            int result2 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
 
-     *//*int totalDefense = 855;
+            tier = 3;
+            multiplier = 1.2 + (tier * 0.1);
 
-        double weaponDamage = 2025;
-        for (double skillDamage = 100; skillDamage < 10000; skillDamage += 100) {
-            double damage = weaponDamage + skillDamage;
+            int result3 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
 
-            double reduction = StatUtils.getDefenseReduction(totalDefense);
+            tier = 4;
+            multiplier = 1.2 + (tier * 0.1);
 
-            damage = damage * reduction;
+            int result4 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
 
-            System.out.println("skillDamage: " + skillDamage + " // result: " + (int) (damage + 0.5));
-        }*//*
+            tier = 5;
+            multiplier = 1.2 + (tier * 0.1);
 
-     *//*List<String> activeSpawners = new ArrayList<>();
-        activeSpawners.add("A");
-        activeSpawners.add("B");
-        activeSpawners.add("C");
-        activeSpawners.add("D");
-        activeSpawners.add("E");
+            int result5 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
 
-        int howManyEachTime = 2;
+            tier = 6;
+            multiplier = 1.2 + (tier * 0.1);
 
-        System.out.println("size: " + activeSpawners.size());
-        for (int i = 0; i < activeSpawners.size(); i += howManyEachTime) {
-            System.out.println("i: " + i);
-            int min = Math.min(activeSpawners.size(), i + howManyEachTime);
-            System.out.println("min: " + min);
-            List<String> sub = activeSpawners.subList(i, Math.min(activeSpawners.size(), i + howManyEachTime));
-            System.out.println(sub);
-        }*//*
-
-     *//*HashMap<String, HashSet<String>> castKeyToSkillFlags = new HashMap<>();
-
-        String castKey = "key";
-
-        String flag = "flag";
-
-
-        if (castKeyToSkillFlags.containsKey(castKey)) {
-            HashSet<String> flags = castKeyToSkillFlags.get(castKey);
-            flags.add(flag);
-            castKeyToSkillFlags.put(castKey, flags);
-        } else {
-            HashSet<String> flags = new HashSet<>();
-            flags.add(flag);
-            castKeyToSkillFlags.put(castKey, flags);
-        }
-
-
-        flag = "flag2";
-
-        if (castKeyToSkillFlags.containsKey(castKey)) {
-            castKeyToSkillFlags.get(castKey).add(flag);
-        } else {
-            HashSet<String> flags = new HashSet<>();
-            flags.add(flag);
-            castKeyToSkillFlags.put(castKey, flags);
-        }
-
-        System.out.println(castKeyToSkillFlags.toString());*//*
-
-     *//* playerDamages.put('A', 1D);
-        playerDamages.put('S', 1D);
-        playerDamages.put('D', 1D);
-        playerDamages.put('F', 1D);
-        playerDamages.put('g', 1D);
-        playerDamages.put('h', 1D);
-        playerDamages.put('j', 1D);
-        playerDamages.put('k', 2D);
-
-        double max = Collections.max(playerDamages.values());
-        List<Character> collect = playerDamages.entrySet().stream()
-                .filter(entry -> entry.getValue() == max)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-
-        for (char ch : collect) {
-            System.out.println(ch);
-        }
-
-        for (int lvl = 0; lvl <=90; lvl++) {
-            //double exp = x * lvl * lvl + y * lvl + z;
-            double exp = expFormula(lvl);
-            System.out.println("Level " + lvl + " TotalExp: " + exp);
-        }
-
-        int totalExperience = 0;
-        for (int level = 1; level <= 0; level++) {
-            System.out.println("Level 1123213123123123123123");
-        }*//*
-    }*/
-
-    private ServerSocket serverSocket;
-
-    public static void main(String[] args) throws IOException {
-        MySocketServer mySocketServer = new MySocketServer(25120);
-        mySocketServer.start();
-    }
-
-    public void start(int port) throws IOException {
-        serverSocket = new ServerSocket(port);
-        while (true)
-            new EchoClientHandler(serverSocket.accept()).start();
-    }
-
-    public void stop() throws IOException {
-        serverSocket.close();
-    }
-
-    private static class EchoClientHandler extends Thread {
-        private Socket clientSocket;
-        private PrintWriter out;
-        private BufferedReader in;
-
-        public EchoClientHandler(Socket socket) {
-            this.clientSocket = socket;
-        }
-
-        public void run() {
-            try {
-                out = new PrintWriter(clientSocket.getOutputStream(), true);
-                in = new BufferedReader(
-                        new InputStreamReader(clientSocket.getInputStream()));
-
-                String inputLine;
-                while ((inputLine = in.readLine()) != null) {
-                    out.println(inputLine);
-                    System.out.println(inputLine);
-                }
-
-                in.close();
-                out.close();
-                clientSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            int result6 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
+            System.out.println(level + ": " + result1 + " - " + result2 + " - " + result3 + " - " + result4 + " - " + result5 + " - " + result6);
         }
     }
 

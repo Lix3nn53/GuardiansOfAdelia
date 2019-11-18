@@ -238,7 +238,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClass);
                         TriggerListener.onPlayerMagicAttack(player, livingTarget);
                     } else { //add fire element and physical damage buff to projectiles fired without skills involved
-                        damage += rpgCharacterStats.getFire().getIncrement();
+                        damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClass);
                         damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
                         TriggerListener.onPlayerRangedAttack(player, livingTarget);
                         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.6F, 0.4F);
@@ -273,7 +273,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             }
                         }
 
-                        damage += rpgCharacterStats.getFire().getIncrement(); //add to weapon damage
+                        damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClass); //add to weapon damage
 
                         //add damage bonus from offhand
                         ItemStack itemInOffHand = player.getInventory().getItemInOffHand();

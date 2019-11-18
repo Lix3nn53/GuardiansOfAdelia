@@ -23,13 +23,13 @@ public final class RPGCharacter {
     private ChatTag chatTag = ChatTag.NOVICE;
 
     public RPGCharacter(RPGClass rpgClass, Player player, int one, int two, int three, int passive, int ultimate) {
-        rpgCharacterStats = new RPGCharacterStats(player);
+        rpgCharacterStats = new RPGCharacterStats(player, rpgClass);
         this.rpgClass = rpgClass;
         this.skillBar = new SkillBar(player, rpgClass, one, two, three, passive, ultimate);
     }
 
     public RPGCharacter(RPGClass rpgClass, Player player) {
-        rpgCharacterStats = new RPGCharacterStats(player);
+        rpgCharacterStats = new RPGCharacterStats(player, rpgClass);
         this.rpgClass = rpgClass;
         this.skillBar = new SkillBar(player, rpgClass, 0, 0, 0, 0, 0);
     }

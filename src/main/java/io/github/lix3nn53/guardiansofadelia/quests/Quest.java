@@ -391,6 +391,7 @@ public final class Quest {
 
     public boolean progressKillTasks(Player questOwner, LivingEntity livingTarget) {
         for (Task task : this.tasks) {
+            if (task.isCompleted()) continue;
             if (task instanceof TaskKill) {
                 TaskKill taskKill = (TaskKill) task;
                 boolean didProgress = taskKill.progress(livingTarget, questOwner);
@@ -408,6 +409,7 @@ public final class Quest {
 
     public boolean progressDealDamageTasks(Player questOwner, LivingEntity livingTarget, int damage) {
         for (Task task : this.tasks) {
+            if (task.isCompleted()) continue;
             if (task instanceof TaskDealDamage) {
                 TaskDealDamage taskDealDamage = (TaskDealDamage) task;
                 boolean didProgress = taskDealDamage.progress(livingTarget, damage, questOwner);
@@ -425,6 +427,7 @@ public final class Quest {
 
     public boolean progressCollectTasks(Player questOwner, String itemName, int amount) {
         for (Task task : this.tasks) {
+            if (task.isCompleted()) continue;
             if (task instanceof TaskCollect) {
                 TaskCollect taskCollect = (TaskCollect) task;
                 if (taskCollect.getItemStack().getItemMeta().getDisplayName().equals(itemName)) {
@@ -444,10 +447,46 @@ public final class Quest {
 
     public boolean progressGatheringTasks(Player questOwner, Ingredient ingredient, int amount) {
         for (Task task : this.tasks) {
+            if (task.isCompleted()) continue;
             if (task instanceof TaskGathering) {
                 TaskGathering taskCollect = (TaskGathering) task;
                 if (taskCollect.getIngredient().equals(ingredient)) {
                     taskCollect.progressBy(questOwner, amount);
+
+                    TablistUtils.updateTablist(questOwner);
+                    if (this.isCompleted()) {
+                        this.onComplete(questOwner);
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean progressGiftTasks(Player questOwner, String itemName, int amountInHand, String clickedEntityName) {
+        for (Task task : this.tasks) {
+            if (task.isCompleted()) continue;
+            if (task instanceof TaskGift) {
+                TaskGift taskGift = (TaskGift) task;
+                if (!taskGift.getEntityName().equals(clickedEntityName)) continue;
+                if (taskGift.getItem().getItemMeta().getDisplayName().equals(itemName)) {
+                    int requiredProgress = taskGift.getRequiredProgress();
+                    int progress = taskGift.getProgress();
+
+                    int leftToComplete = requiredProgress - progress;
+
+                    int amountToRemoveFromHand = leftToComplete; //if leftToComplete <= amountInHand
+
+                    if (leftToComplete > amountInHand) {
+                        amountToRemoveFromHand = amountInHand;
+                    }
+
+                    taskGift.progressBy(questOwner, amountToRemoveFromHand);
+
+                    //remove from hand
+                    ItemStack itemInMainHand = questOwner.getInventory().getItemInMainHand();
+                    itemInMainHand.setAmount(amountInHand - amountToRemoveFromHand);
 
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
@@ -466,9 +505,9 @@ public final class Quest {
         String customName = livingTarget.getCustomName();
 
         for (Task task : this.tasks) {
+            if (task.isCompleted()) continue;
             if (task instanceof TaskCollect) {
                 TaskCollect taskCollect = (TaskCollect) task;
-                if (taskCollect.isCompleted()) continue;
                 List<String> nameOfMobsItemDropsFrom = taskCollect.getNameOfMobsItemDropsFrom();
                 if (nameOfMobsItemDropsFrom.contains(customName)) {
                     double random = Math.random();
@@ -485,6 +524,7 @@ public final class Quest {
 
     public boolean progressInteractTasks(Player questOwner, int npcId) {
         for (Task task : this.tasks) {
+            if (task.isCompleted()) continue;
             if (task instanceof TaskInteract) {
                 TaskInteract taskInteract = (TaskInteract) task;
                 boolean didProgress = taskInteract.progress(npcId, questOwner);

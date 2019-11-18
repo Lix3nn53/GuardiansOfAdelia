@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import org.bukkit.ChatColor;
 
 public enum RPGClass {
@@ -81,25 +82,108 @@ public enum RPGClass {
         return name;
     }
 
-    public int getBonusHealthForLevel(int level) {
-        double multiplier = 1;
+    public int getAttributeBonusForLevel(AttributeType attributeType, int level) {
+        int tier = 1;
         if (this == RPGClass.ARCHER) {
-            multiplier = 1.75;
+            if (attributeType.equals(AttributeType.FIRE)) {
+                tier = 4;
+            } else if (attributeType.equals(AttributeType.WATER)) {
+                tier = 4;
+            } else if (attributeType.equals(AttributeType.EARTH)) {
+                tier = 2;
+            } else if (attributeType.equals(AttributeType.LIGHTNING)) {
+                tier = 3;
+            } else if (attributeType.equals(AttributeType.WIND)) {
+                tier = 1;
+            }
         } else if (this == RPGClass.KNIGHT) {
-            multiplier = 1.85;
+            if (attributeType.equals(AttributeType.FIRE)) {
+                tier = 3;
+            } else if (attributeType.equals(AttributeType.WATER)) {
+                tier = 3;
+            } else if (attributeType.equals(AttributeType.EARTH)) {
+                tier = 6;
+            } else if (attributeType.equals(AttributeType.LIGHTNING)) {
+                tier = 1;
+            } else if (attributeType.equals(AttributeType.WIND)) {
+                tier = 1;
+            }
         } else if (this == RPGClass.MAGE) {
-            multiplier = 1.75;
+            if (attributeType.equals(AttributeType.FIRE)) {
+                tier = 1;
+            } else if (attributeType.equals(AttributeType.WATER)) {
+                tier = 5;
+            } else if (attributeType.equals(AttributeType.EARTH)) {
+                tier = 2;
+            } else if (attributeType.equals(AttributeType.LIGHTNING)) {
+                tier = 5;
+            } else if (attributeType.equals(AttributeType.WIND)) {
+                tier = 1;
+            }
         } else if (this == RPGClass.MONK) {
-            multiplier = 1.75;
+            if (attributeType.equals(AttributeType.FIRE)) {
+                tier = 4;
+            } else if (attributeType.equals(AttributeType.WATER)) {
+                tier = 2;
+            } else if (attributeType.equals(AttributeType.EARTH)) {
+                tier = 4;
+            } else if (attributeType.equals(AttributeType.LIGHTNING)) {
+                tier = 3;
+            } else if (attributeType.equals(AttributeType.WIND)) {
+                tier = 1;
+            }
         } else if (this == RPGClass.ROGUE) {
-            multiplier = 1.8;
+            if (attributeType.equals(AttributeType.FIRE)) {
+                tier = 5;
+            } else if (attributeType.equals(AttributeType.WATER)) {
+                tier = 3;
+            } else if (attributeType.equals(AttributeType.EARTH)) {
+                tier = 3;
+            } else if (attributeType.equals(AttributeType.LIGHTNING)) {
+                tier = 1;
+            } else if (attributeType.equals(AttributeType.WIND)) {
+                tier = 2;
+            }
         } else if (this == RPGClass.PALADIN) {
-            multiplier = 1.85;
+            if (attributeType.equals(AttributeType.FIRE)) {
+                tier = 2;
+            } else if (attributeType.equals(AttributeType.WATER)) {
+                tier = 4;
+            } else if (attributeType.equals(AttributeType.EARTH)) {
+                tier = 4;
+            } else if (attributeType.equals(AttributeType.LIGHTNING)) {
+                tier = 3;
+            } else if (attributeType.equals(AttributeType.WIND)) {
+                tier = 1;
+            }
         } else if (this == RPGClass.WARRIOR) {
-            multiplier = 1.8;
+            if (attributeType.equals(AttributeType.FIRE)) {
+                tier = 6;
+            } else if (attributeType.equals(AttributeType.WATER)) {
+                tier = 1;
+            } else if (attributeType.equals(AttributeType.EARTH)) {
+                tier = 5;
+            } else if (attributeType.equals(AttributeType.LIGHTNING)) {
+                tier = 1;
+            } else if (attributeType.equals(AttributeType.WIND)) {
+                tier = 1;
+            }
         } else if (this == RPGClass.HUNTER) {
-            multiplier = 1.75;
+            if (attributeType.equals(AttributeType.FIRE)) {
+                tier = 5;
+            } else if (attributeType.equals(AttributeType.WATER)) {
+                tier = 2;
+            } else if (attributeType.equals(AttributeType.EARTH)) {
+                tier = 3;
+            } else if (attributeType.equals(AttributeType.LIGHTNING)) {
+                tier = 2;
+            } else if (attributeType.equals(AttributeType.WIND)) {
+                tier = 2;
+            }
         }
-        return (int) (Math.pow(level, multiplier) - (level) + 0.5);
+
+        double multiplier = 1.2 + (tier * 0.1);
+
+        return (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
     }
 }

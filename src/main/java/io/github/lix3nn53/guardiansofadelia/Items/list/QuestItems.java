@@ -46,7 +46,7 @@ public class QuestItems {
         im.setDisplayName(ChatColor.LIGHT_PURPLE + "Bad tasting sugar");
         im.setLore(new ArrayList() {{
             add("");
-            add(ChatColor.GRAY + "Quest item for #23");
+            add(ChatColor.GRAY + "Quest item for #31");
         }});
         item4.setItemMeta(im);
         questNoToItem.put(31, item4);

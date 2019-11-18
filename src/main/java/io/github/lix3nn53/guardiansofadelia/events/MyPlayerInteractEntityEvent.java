@@ -1,6 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPCRegistry;
@@ -20,6 +24,9 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.List;
+import java.util.UUID;
 
 public class MyPlayerInteractEntityEvent implements Listener {
 
@@ -62,6 +69,18 @@ public class MyPlayerInteractEntityEvent implements Listener {
                             livingEntity.setHealth(setHealthAmount);
                         } else {
                             player.sendMessage(ChatColor.RED + "Pet health is already full");
+                        }
+                    }
+                } else if (rightClicked.isCustomNameVisible()) {
+                    UUID uniqueId = player.getUniqueId();
+                    if (GuardianDataManager.hasGuardianData(uniqueId)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+                        if (guardianData.hasActiveCharacter()) {
+                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                            List<Quest> questList = activeCharacter.getQuestList();
+                            for (Quest quest : questList) {
+                                quest.progressGiftTasks(player, itemMeta.getDisplayName(), itemInMainHand.getAmount(), rightClicked.getCustomName());
+                            }
                         }
                     }
                 }

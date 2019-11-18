@@ -3,8 +3,6 @@ package io.github.lix3nn53.guardiansofadelia.guardian.character;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
@@ -31,11 +29,10 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.UUID;
-
 public class RPGCharacterStats {
 
     private final Player player;
+    private final RPGClass rpgClass;
     private final Attribute fire = new Attribute(AttributeType.FIRE);
     private final Attribute lightning = new Attribute(AttributeType.LIGHTNING);
     private final Attribute earth = new Attribute(AttributeType.EARTH);
@@ -47,8 +44,8 @@ public class RPGCharacterStats {
     private int currentMana = 100;
     private int defense = 1;
     private int magicDefense = 1;
-    private double criticalChance = 0.05;
-    private double criticalDamageBonus = 0.5;
+    private double baseCriticalChance = 0.05;
+    private double baseCriticalDamageBonus = 0.6;
     //armor slots
     private ArmorStatHolder helmet;
     private ArmorStatHolder chestplate;
@@ -66,8 +63,9 @@ public class RPGCharacterStats {
     private double criticalChanceBonusBuff = 0;
     private double criticalDamageBonusBuff = 0;
 
-    public RPGCharacterStats(Player player) {
+    public RPGCharacterStats(Player player, RPGClass rpgClass) {
         this.player = player;
+        this.rpgClass = rpgClass;
 
         player.setLevel(1);
         player.setHealthScale(20);
@@ -233,22 +231,11 @@ public class RPGCharacterStats {
             totalMaxHealth += shield.getMaxHealth();
         }
 
-        int bonusHealthForLevel = 0;
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-            if (guardianData.hasActiveCharacter()) {
-                RPGClass rpgClass = guardianData.getActiveCharacter().getRpgClass();
-                int level = RPGCharacterExperienceManager.getLevel(totalExp);
-                bonusHealthForLevel = rpgClass.getBonusHealthForLevel(level);
-            }
-        }
-
-        return (int) (totalMaxHealth + earth.getIncrement() + bonusHealthForLevel + 0.5);
+        return (int) (totalMaxHealth + earth.getIncrement(player.getLevel(), rpgClass) + 0.5);
     }
 
     public int getTotalMaxMana() {
-        return (int) (maxMana + water.getIncrement() + 0.5);
+        return (int) (maxMana + water.getIncrement(player.getLevel(), rpgClass) + 0.5);
     }
 
     public int getTotalDefense() {
@@ -260,7 +247,7 @@ public class RPGCharacterStats {
     }
 
     public double getTotalCriticalChance() {
-        double chance = criticalChance + wind.getIncrement();
+        double chance = baseCriticalChance + wind.getIncrement(player.getLevel(), rpgClass);
         if (chance > 0.4) {
             chance = 0.4;
         }
@@ -271,11 +258,11 @@ public class RPGCharacterStats {
     }
 
     public double getTotalCriticalDamageBonus() {
-        return criticalDamageBonus + criticalDamageBonusBuff;
+        return baseCriticalDamageBonus + criticalDamageBonusBuff;
     }
 
     public int getTotalMagicDamage(Player player, RPGClass rpgClass) {
-        int lightningBonus = (int) (lightning.getIncrement() + 0.5);
+        int lightningBonus = (int) (lightning.getIncrement(player.getLevel(), rpgClass) + 0.5);
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
 
@@ -305,7 +292,7 @@ public class RPGCharacterStats {
     }
 
     public int getTotalMeleeDamage(Player player, RPGClass rpgClass) {
-        int bonus = (int) (fire.getIncrement() + 0.5) + damageBonusFromOffhand;
+        int bonus = (int) (fire.getIncrement(player.getLevel(), rpgClass) + 0.5) + damageBonusFromOffhand;
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
 
@@ -346,7 +333,7 @@ public class RPGCharacterStats {
     }
 
     public int getTotalRangedDamage(Player player, RPGClass rpgClass) {
-        int fireBonus = (int) (fire.getIncrement() + 0.5);
+        int fireBonus = (int) (fire.getIncrement(player.getLevel(), rpgClass) + 0.5);
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
 

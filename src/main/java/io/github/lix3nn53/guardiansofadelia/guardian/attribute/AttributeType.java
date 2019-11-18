@@ -32,9 +32,9 @@ public enum AttributeType {
             case EARTH:
                 return 5;
             case WATER:
-                return 5;
+                return 1;
             case WIND:
-                return 0.005;
+                return 0.001;
         }
         return 1;
     }
