@@ -46,8 +46,8 @@ public class Attribute {
         }
     }
 
-    public int getTotalBonus(int playerLevel, RPGClass playerClass) {
-        return bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand + bonusFromOffhand + bonusFromPassive + getBonusFromLevel(playerLevel, playerClass);
+    public int getBonusFromEquipment() {
+        return bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand + bonusFromOffhand + bonusFromPassive;
     }
 
     public int getBonusFromLevel(int playerLevel, RPGClass playerClass) {
@@ -153,7 +153,7 @@ public class Attribute {
     }
 
     public double getIncrement(int playerLevel, RPGClass playerClass) {
-        return (invested + getTotalBonus(playerLevel, playerClass)) * attributeType.getIncrement();
+        return (invested + getBonusFromEquipment() + getBonusFromLevel(playerLevel, playerClass)) * attributeType.getIncrementPerPoint();
     }
 
     private void onValueChange(RPGCharacterStats rpgCharacterStats) {

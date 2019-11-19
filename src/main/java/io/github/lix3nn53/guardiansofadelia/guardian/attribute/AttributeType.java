@@ -10,20 +10,20 @@ public enum AttributeType {
     public String getDescription() {
         switch (this) {
             case FIRE:
-                return getIncrement() + " bonus physical damage per point";
+                return getIncrementPerPoint() + " bonus physical damage per point";
             case LIGHTNING:
-                return getIncrement() + " bonus magic damage per point";
+                return getIncrementPerPoint() + " bonus magic damage per point";
             case EARTH:
-                return getIncrement() + " bonus max health per point";
+                return getIncrementPerPoint() + " bonus max health per point";
             case WATER:
-                return getIncrement() + " bonus max mana per point";
+                return getIncrementPerPoint() + " bonus max mana per point";
             case WIND:
-                return getIncrement() * 100 + "% bonus critical chance per point(max 40%)";
+                return getIncrementPerPoint() * 100 + "% bonus critical chance per point(max 40%)";
         }
         return "description";
     }
 
-    public double getIncrement() {
+    public double getIncrementPerPoint() {
         switch (this) {
             case FIRE:
                 return 1;

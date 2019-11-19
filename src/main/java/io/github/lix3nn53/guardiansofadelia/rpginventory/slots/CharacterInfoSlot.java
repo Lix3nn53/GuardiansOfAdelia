@@ -49,6 +49,12 @@ public class CharacterInfoSlot {
                 int health = (int) (player.getHealth() + 0.5);
                 double criticalChance = rpgCharacterStats.getTotalCriticalChance() * 100;
 
+                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute fire = rpgCharacterStats.getFire();
+                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute water = rpgCharacterStats.getWater();
+                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute earth = rpgCharacterStats.getEarth();
+                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute lightning = rpgCharacterStats.getLightning();
+                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute wind = rpgCharacterStats.getWind();
+
                 skullMeta.setLore(new ArrayList() {{
                     add("");
                     add(ChatColor.LIGHT_PURPLE + "Class: " + ChatColor.GRAY + "" + className);
@@ -64,11 +70,12 @@ public class CharacterInfoSlot {
                     add(ChatColor.BLUE + "✦ Magic Defense: " + ChatColor.GRAY + rpgCharacterStats.getTotalMagicDefense());
                     add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + criticalChance + "%");
                     add(ChatColor.YELLOW + "----------------");
-                    add(ChatColor.RED + "☄" + ChatColor.GRAY + " Fire: " + rpgCharacterStats.getFire().getTotalBonus(level, rpgClass) + " (+" + rpgCharacterStats.getFire().getInvested() + ")");
-                    add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + rpgCharacterStats.getWater().getTotalBonus(level, rpgClass) + " (+" + rpgCharacterStats.getWater().getInvested() + ")");
-                    add(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + rpgCharacterStats.getEarth().getTotalBonus(level, rpgClass) + " (+" + rpgCharacterStats.getEarth().getInvested() + ")");
-                    add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + rpgCharacterStats.getLightning().getTotalBonus(level, rpgClass) + " (+" + rpgCharacterStats.getLightning().getInvested() + ")");
-                    add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + rpgCharacterStats.getWind().getTotalBonus(level, rpgClass) + " (+" + rpgCharacterStats.getWind().getInvested() + ")");
+                    add(ChatColor.GRAY + "(equipment + level + points)");
+                    add(ChatColor.RED + "☄" + ChatColor.GRAY + " Fire: " + fire.getBonusFromEquipment() + " + " + fire.getBonusFromLevel(level, rpgClass) + " + " + fire.getInvested());
+                    add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + water.getBonusFromEquipment() + " + " + water.getBonusFromLevel(level, rpgClass) + " + " + water.getInvested());
+                    add(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + earth.getBonusFromEquipment() + " + " + earth.getBonusFromLevel(level, rpgClass) + " + " + earth.getInvested());
+                    add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + lightning.getBonusFromEquipment() + " + " + lightning.getBonusFromLevel(level, rpgClass) + " + " + lightning.getInvested());
+                    add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + wind.getBonusFromEquipment() + " + " + wind.getBonusFromLevel(level, rpgClass) + " + " + wind.getInvested());
                 }});
                 itemStack.setItemMeta(skullMeta);
                 return itemStack;
