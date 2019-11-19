@@ -510,7 +510,6 @@ public enum MerchantPageType {
                     continue;
                 }
                 lines.add(new MerchantGuiLine());
-                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 2, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -521,13 +520,13 @@ public enum MerchantPageType {
                         lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
+                lineIndex++;
             }
             for (RPGClass rpgClass : RPGClass.values()) {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
                 lines.add(new MerchantGuiLine());
-                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 3, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -538,6 +537,7 @@ public enum MerchantPageType {
                         lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
+                lineIndex++;
             }
         } else if (shopLevel == 4) {
             for (RPGClass rpgClass : RPGClass.values()) {
@@ -545,7 +545,6 @@ public enum MerchantPageType {
                     continue;
                 }
                 lines.add(new MerchantGuiLine());
-                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 4, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -556,13 +555,13 @@ public enum MerchantPageType {
                         lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
+                lineIndex++;
             }
             for (RPGClass rpgClass : RPGClass.values()) {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
                 lines.add(new MerchantGuiLine());
-                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 5, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -573,6 +572,7 @@ public enum MerchantPageType {
                         lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
+                lineIndex++;
             }
         } else if (shopLevel == 5) {
             for (RPGClass rpgClass : RPGClass.values()) {
@@ -580,7 +580,6 @@ public enum MerchantPageType {
                     continue;
                 }
                 lines.add(new MerchantGuiLine());
-                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 6, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -591,13 +590,13 @@ public enum MerchantPageType {
                         lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
+                lineIndex++;
             }
             for (RPGClass rpgClass : RPGClass.values()) {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
                 lines.add(new MerchantGuiLine());
-                lineIndex++;
                 for (ArmorType armorType : ArmorType.values()) {
                     ItemStack weapon = Armors.getArmor(armorType, rpgClass, 7, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
@@ -608,6 +607,7 @@ public enum MerchantPageType {
                         lines.get(lineIndex).addWord(weapon, 1);
                     }
                 }
+                lineIndex++;
             }
         }
 

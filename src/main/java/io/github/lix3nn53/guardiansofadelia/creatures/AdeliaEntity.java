@@ -1155,7 +1155,7 @@ public enum AdeliaEntity {
                 break;
             }
             case BOSS_ICE: {
-                Vindicator entity = (Vindicator) EntityUtils.create(loc, ChatColor.AQUA + "Makvurn", 32500D, EntityType.VINDICATOR);
+                Vindicator entity = (Vindicator) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Necromancer King", 32500D, EntityType.VINDICATOR);
                 entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(900D);
                 ItemStack axe = MonsterItem.AXE_FROST.getItem(0);
                 entity.getEquipment().clear();
@@ -1171,7 +1171,7 @@ public enum AdeliaEntity {
                 break;
             }
             case BOSS_SWAMP: {
-                Witch entity = (Witch) EntityUtils.create(loc, ChatColor.BLUE + "Mage Woz", 60000D, EntityType.WITCH);
+                Witch entity = (Witch) EntityUtils.create(loc, ChatColor.BLUE + "Guardian Esobel", 60000D, EntityType.WITCH);
                 entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1800D);
                 entity.getEquipment().clear();
                 ItemStack bow = MonsterItem.BOW_SATET.getItem(500);

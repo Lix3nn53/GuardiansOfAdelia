@@ -93,7 +93,7 @@ MAGIC_FOREST1:
   pitch: -0.9
   levelReq: 15
   timeLimitInMinutes: 10
-  bossMobName: §5Dark Magic Master
+  bossMobName: §5Dark Magician Nimzuth
 MAGIC_FOREST2:
   x: 351.5
   y: 111.5
@@ -103,7 +103,7 @@ MAGIC_FOREST2:
   pitch: -0.9
   levelReq: 15
   timeLimitInMinutes: 10
-  bossMobName: §5Dark Magic Master
+  bossMobName: §5Dark Magician Nimzuth
 MAGIC_FOREST3:
   x: 336.5
   y: 111.5
@@ -113,7 +113,7 @@ MAGIC_FOREST3:
   pitch: -0.5
   levelReq: 15
   timeLimitInMinutes: 10
-  bossMobName: §5Dark Magic Master
+  bossMobName: §5Dark Magician Nimzuth
 MAGIC_FOREST4:
   x: 325.5
   y: 111.5
@@ -123,7 +123,7 @@ MAGIC_FOREST4:
   pitch: -1.5
   levelReq: 15
   timeLimitInMinutes: 10
-  bossMobName: §5Dark Magic Master
+  bossMobName: §5Dark Magician Nimzuth
 ICE_CREAM1:
   x: 2925.5
   y: 23.5
@@ -213,7 +213,7 @@ ICE1:
   pitch: 1.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §bMakvurn
+  bossMobName: §5Necromancer King
 ICE2:
   x: 4130.5
   y: 61.5
@@ -223,7 +223,7 @@ ICE2:
   pitch: 1.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §bMakvurn
+  bossMobName: §5Necromancer King
 ICE3:
   x: 4138.5
   y: 61.5
@@ -233,7 +233,7 @@ ICE3:
   pitch: 0.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §bMakvurn
+  bossMobName: §5Necromancer King
 ICE4:
   x: 4154.5
   y: 61.5
@@ -243,7 +243,7 @@ ICE4:
   pitch: 1.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §bMakvurn
+  bossMobName: §5Necromancer King
 DESERT1:
   x: 1984
   y: 54.5
@@ -293,7 +293,7 @@ SWAMP1:
   pitch: 5.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §9Mage Woz
+  bossMobName: §9Guardian Esobel
 SWAMP2:
   x: 1446.5
   y: 77.5
@@ -303,7 +303,7 @@ SWAMP2:
   pitch: 2.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §9Mage Woz
+  bossMobName: §9Guardian Esobel
 SWAMP3:
   x: 1455
   y: 77.5
@@ -313,7 +313,7 @@ SWAMP3:
   pitch: 5.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §9Mage Woz
+  bossMobName: §9Guardian Esobel
 SWAMP4:
   x: 1437.5
   y: 77.5
@@ -323,7 +323,7 @@ SWAMP4:
   pitch: 2.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §9Mage Woz
+  bossMobName: §9Guardian Esobel
 LAVA1:
   x: 2503.5
   y: 64.5
