@@ -30,7 +30,7 @@ public final class TaskReach implements Task {
     public String getTablistInfoString() {
         ChatColor chatColor = getChatColor();
 
-        return chatColor + "Go to " + blockLoc + " and click " + blockMat.toString() + " block";
+        return chatColor + "Go to " + blockLoc + " and click " + blockMat.toString() + " block " + completed + "/1";
     }
 
     public String getItemLoreString() {
@@ -40,7 +40,7 @@ public final class TaskReach implements Task {
         } else {
             color = ChatColor.YELLOW;
         }
-        return color + "Go to " + blockLoc + " and click " + blockMat.toString() + " block";
+        return color + "Go to " + blockLoc.toString() + " and click " + blockMat.toString() + " block";
     }
 
     @Override
@@ -58,6 +58,22 @@ public final class TaskReach implements Task {
                 }
             }
             return true;
+        }
+        return false;
+    }
+
+    public boolean progress(Player player, Location targetBlockLoc) {
+        double distanceSquared = targetBlockLoc.distanceSquared(this.blockLoc);
+
+        int maxDistance = 81;
+
+        player.sendMessage("distanceSquared: " + distanceSquared);
+
+        if (distanceSquared <= maxDistance) {
+            if (progress(player)) {
+                player.sendMessage(ChatColor.YELLOW + "Quest reach " + this.blockLoc.toString());
+                return true;
+            }
         }
         return false;
     }

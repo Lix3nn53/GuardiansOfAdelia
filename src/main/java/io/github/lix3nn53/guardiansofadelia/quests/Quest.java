@@ -13,6 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.advancements.Advancement;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
@@ -528,6 +529,24 @@ public final class Quest {
             if (task instanceof TaskInteract) {
                 TaskInteract taskInteract = (TaskInteract) task;
                 boolean didProgress = taskInteract.progress(npcId, questOwner);
+                if (didProgress) {
+                    TablistUtils.updateTablist(questOwner);
+                    if (this.isCompleted()) {
+                        this.onComplete(questOwner);
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean progressReachTasks(Player questOwner, Location targetBlockLoc) {
+        for (Task task : this.tasks) {
+            if (task.isCompleted()) continue;
+            if (task instanceof TaskReach) {
+                TaskReach taskReach = (TaskReach) task;
+                boolean didProgress = taskReach.progress(questOwner, targetBlockLoc);
                 if (didProgress) {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {

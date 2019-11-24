@@ -5,11 +5,13 @@ import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -28,6 +30,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,6 +43,29 @@ public class MyPlayerAnimationEvent implements Listener {
         }
 
         Player player = event.getPlayer();
+
+        HashSet<Material> transparentBlocks = new HashSet<>();
+        transparentBlocks.add(Material.AIR);
+        transparentBlocks.add(Material.WATER);
+
+        Block targetBlock = player.getTargetBlock(transparentBlocks, 5);
+        Material type = targetBlock.getType();
+
+        //quest TaskReach
+        if (type.equals(Material.EMERALD_BLOCK) || type.equals(Material.GOLD_BLOCK) || type.equals(Material.REDSTONE_BLOCK) || type.equals(Material.DIAMOND_BLOCK)) {
+            UUID uniqueId = player.getUniqueId();
+            if (GuardianDataManager.hasGuardianData(uniqueId)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                    List<Quest> questList = activeCharacter.getQuestList();
+                    for (Quest quest : questList) {
+                        quest.progressReachTasks(player, targetBlock.getLocation());
+                    }
+                }
+            }
+            return;
+        }
 
         List<Entity> nearbyEntities = player.getNearbyEntities(2, 2, 2);
         for (Entity entity : nearbyEntities) {
@@ -95,9 +121,6 @@ public class MyPlayerAnimationEvent implements Listener {
         if (!itemInMainHand.hasItemMeta()) return;
         ItemMeta itemMeta = itemInMainHand.getItemMeta();
         if (itemMeta.hasCustomModelData()) return;
-
-        Block targetBlock = player.getTargetBlock(null, 5);
-        Material type = targetBlock.getType();
 
         if (type.equals(Material.EMERALD_ORE) || type.equals(Material.GOLD_ORE) || type.equals(Material.REDSTONE_ORE) || type.equals(Material.LAPIS_ORE)) {
             Material handType = itemInMainHand.getType();

@@ -99,7 +99,7 @@ public class QuestsPhase3 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to the Forest Fairy";
-        Quest quest = new Quest(22, "Skeleton hunt #1", story,
+        Quest quest = new Quest(22, "Skeleton hunt 1", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 30000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -146,7 +146,7 @@ public class QuestsPhase3 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nthen talk back to the Forest Fairy";
-        Quest quest = new Quest(24, "Skeleton hunt #2", story,
+        Quest quest = new Quest(24, "Skeleton hunt 2", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 30000, 0, requiredQuests,
                 Material.GRASS_BLOCK);

@@ -43,14 +43,14 @@ public class QuestsPhase10 {
         requiredQuests.add(79);
 
         List<Task> tasks = new ArrayList<>();
-        Location reachLocation = new Location(Bukkit.getWorld("world"), -3018.5, 95.5, 4920);
+        Location reachLocation = new Location(Bukkit.getWorld("world"), -4742.5, 140.5, 2151.5);
         TaskReach taskReach = new TaskReach(reachLocation, Material.EMERALD_BLOCK);
         tasks.add(taskReach);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(80, "ggggggggggggggggg", story,
-                startMsg, "Go to port city Elderine then talk with Captain Leanna",
+                startMsg, "TASK_PROGRESS_1\nThen talk back to Archangel",
                 "", tasks, itemPrizes, 10, 272000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 49);
@@ -71,7 +71,7 @@ public class QuestsPhase10 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Archangel";
         Quest quest = new Quest(81, "Darkness hunt", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 544000, 0, requiredQuests,
@@ -94,8 +94,8 @@ public class QuestsPhase10 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(82, "Pillager hunt #1", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Archangel";
+        Quest quest = new Quest(82, "Pillager hunt 1", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 544000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -117,8 +117,8 @@ public class QuestsPhase10 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(83, "Pillager hunt #2", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Archangel";
+        Quest quest = new Quest(83, "Pillager hunt 2", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 544000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -134,12 +134,12 @@ public class QuestsPhase10 {
         requiredQuests.add(80);
 
         List<Task> tasks = new ArrayList<>();
-        Location reachLocation = new Location(Bukkit.getWorld("world"), -3018.5, 95.5, 4920);
+        Location reachLocation = new Location(Bukkit.getWorld("world"), -4375.5, 41.5, 1576.5);
         TaskReach taskReach = new TaskReach(reachLocation, Material.REDSTONE_BLOCK);
         tasks.add(taskReach);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nThen talk back to Archangel";
         Quest quest = new Quest(84, "Activate the portal", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 544000, 0, requiredQuests,
@@ -166,7 +166,7 @@ public class QuestsPhase10 {
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nfrom candies then talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nfrom pillagers then talk back to Archangel";
         Quest quest = new Quest(85, "Dark souls", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 544000, 0, requiredQuests,
@@ -189,8 +189,8 @@ public class QuestsPhase10 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
-        Quest quest = new Quest(86, "Pillager hunt #3", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nthen talk back to Archangel";
+        Quest quest = new Quest(86, "Pillager hunt 3", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 544000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -211,7 +211,7 @@ public class QuestsPhase10 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
+        String objectiveText = "Talk with Eohr in Temple of Elements";
         Quest quest = new Quest(87, "Temple of Elements", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 68000, 0, requiredQuests,
@@ -231,7 +231,7 @@ public class QuestsPhase10 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
+        String objectiveText = "TASK_PROGRESS_1\nTime to face the nightmare!";
         Quest quest = new Quest(88, "The nightmare", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 1088000, 0, requiredQuests,
@@ -248,8 +248,8 @@ public class QuestsPhase10 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
-        Quest quest = new Quest(89, "Bring back the light #Alberstol Ruins", story,
+        String objectiveText = "Bring the light of elements to Archangel";
+        Quest quest = new Quest(89, "Bring back the light-Alberstol Ruins", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 68000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -265,8 +265,8 @@ public class QuestsPhase10 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
-        Quest quest = new Quest(90, "Bring back the light #Uruga", story,
+        String objectiveText = "Bring the light of elements to Commander Erwin";
+        Quest quest = new Quest(90, "Bring back the light-Uruga", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 68000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -282,8 +282,8 @@ public class QuestsPhase10 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
-        Quest quest = new Quest(91, "Bring back the light #Elderine", story,
+        String objectiveText = "Bring the light of elements to Captain Lenna";
+        Quest quest = new Quest(91, "Bring back the light-Elderine", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 68000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -299,8 +299,8 @@ public class QuestsPhase10 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
-        Quest quest = new Quest(92, "Bring back the light #Roumen", story,
+        String objectiveText = "Bring the light of elements to Sergeant Armin";
+        Quest quest = new Quest(92, "Bring back the light-Roumen", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 68000, 0, requiredQuests,
                 Material.GRASS_BLOCK);

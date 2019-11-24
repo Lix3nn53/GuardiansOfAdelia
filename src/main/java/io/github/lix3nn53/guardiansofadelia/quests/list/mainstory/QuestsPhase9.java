@@ -44,7 +44,7 @@ public class QuestsPhase9 {
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(68, "Gatekeeper", story,
-                startMsg, "Go to port city Elderine then talk with Captain Leanna",
+                startMsg, "Talk with the Gatekeeper in Uruga",
                 "", tasks, itemPrizes, 10, 53000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 42, 47);
@@ -59,12 +59,12 @@ public class QuestsPhase9 {
         requiredQuests.add(68);
 
         List<Task> tasks = new ArrayList<>();
-        Location reachLocation = new Location(Bukkit.getWorld("world"), -3018.5, 95.5, 4920);
+        Location reachLocation = new Location(Bukkit.getWorld("world"), -3311.5, 89.5, 2207);
         TaskReach taskReach = new TaskReach(reachLocation, Material.GOLD_BLOCK);
         tasks.add(taskReach);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nThen talk back to the Gatekeeper";
         Quest quest = new Quest(69, "Gatekeeper's trial", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 212000, 0, requiredQuests,
@@ -83,7 +83,7 @@ public class QuestsPhase9 {
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(70, "Alberstol Ruins", story,
-                startMsg, "Go to port city Elderine then talk with Captain Leanna",
+                startMsg, "Go to city of angels, Alberstol Ruins then talk with Archangel",
                 "", tasks, itemPrizes, 10, 53000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 47, 49);
@@ -100,7 +100,7 @@ public class QuestsPhase9 {
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(71, "Burning Rock", story,
-                startMsg, "Go to port city Elderine then talk with Captain Leanna",
+                startMsg, "Go to the Burning Rock then talk with Vruhag",
                 "", tasks, itemPrizes, 10, 53000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 48);
@@ -121,7 +121,7 @@ public class QuestsPhase9 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Vruhag";
         Quest quest = new Quest(72, "Flaming hunt", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 424000, 0, requiredQuests,
@@ -144,8 +144,8 @@ public class QuestsPhase9 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(73, "Orc hunt #1", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Vruhag";
+        Quest quest = new Quest(73, "Orc hunt 1", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 424000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -167,8 +167,8 @@ public class QuestsPhase9 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(74, "Orc hunt #2", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Vruhag";
+        Quest quest = new Quest(74, "Orc hunt 2", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 424000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -184,12 +184,12 @@ public class QuestsPhase9 {
         requiredQuests.add(71);
 
         List<Task> tasks = new ArrayList<>();
-        Location reachLocation = new Location(Bukkit.getWorld("world"), -3018.5, 95.5, 4920);
+        Location reachLocation = new Location(Bukkit.getWorld("world"), -3998.5, 23.5, 2193);
         TaskReach taskReach = new TaskReach(reachLocation, Material.DIAMOND_BLOCK);
         tasks.add(taskReach);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nThen talk back to Vruhag";
         Quest quest = new Quest(75, "gggggggggggg", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 424000, 0, requiredQuests,
@@ -216,7 +216,7 @@ public class QuestsPhase9 {
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nfrom candies then talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nfrom orcs then talk back to Vruhag";
         Quest quest = new Quest(76, "Fire spirit", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 424000, 0, requiredQuests,
@@ -236,8 +236,8 @@ public class QuestsPhase9 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
-        Quest quest = new Quest(77, "Orc hunt #3", story,
+        String objectiveText = "TASK_PROGRESS_1\nthen talk to Vruhag";
+        Quest quest = new Quest(77, "Orc hunt 3", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 424000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -261,7 +261,7 @@ public class QuestsPhase9 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
+        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Vruhag";
         Quest quest = new Quest(78, "The Warchief", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 848000, 0, requiredQuests,
@@ -278,7 +278,7 @@ public class QuestsPhase9 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
+        String objectiveText = "Report back to Archangel orcs regained their freedom";
         Quest quest = new Quest(79, "Burning rock report", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 53000, 0, requiredQuests,

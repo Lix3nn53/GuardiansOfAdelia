@@ -37,7 +37,7 @@ public class QuestsPhase8 {
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(60, "Guardian camp", story,
-                startMsg, "Go to port city Elderine then talk with Captain Leanna",
+                startMsg, "Go to guardian camp and talk with Guardian Raignald",
                 "", tasks, itemPrizes, 10, 50000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 42, 44);
@@ -58,8 +58,8 @@ public class QuestsPhase8 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(61, "Goblin hunt #1", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Guardian Raignald";
+        Quest quest = new Quest(61, "Goblin hunt 1", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -79,8 +79,8 @@ public class QuestsPhase8 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(62, "Goblin hunt #2", story,
+        String objectiveText = "TASK_PROGRESS_1\nThen talk back to Guardian Raignald";
+        Quest quest = new Quest(62, "Goblin hunt 2", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -102,8 +102,8 @@ public class QuestsPhase8 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(63, "Goblin hunt #3", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Guardian Iohne";
+        Quest quest = new Quest(63, "Goblin hunt 3", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -129,7 +129,7 @@ public class QuestsPhase8 {
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nfrom candies then talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nfrom goblins then talk back to Guardian Raignald";
         Quest quest = new Quest(64, "Goblin", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
@@ -149,7 +149,7 @@ public class QuestsPhase8 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nthen talk to Guardian Afra";
         Quest quest = new Quest(65, "Witch hunt", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
@@ -173,7 +173,7 @@ public class QuestsPhase8 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
+        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Guardian Raignald";
         Quest quest = new Quest(66, "The betrayal", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 880000, 0, requiredQuests,
@@ -190,7 +190,7 @@ public class QuestsPhase8 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
+        String objectiveText = "Report back to Commander Erwin that traitor Esobel is defeated";
         Quest quest = new Quest(67, "Swamp of Dawn report", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 60000, 0, requiredQuests,

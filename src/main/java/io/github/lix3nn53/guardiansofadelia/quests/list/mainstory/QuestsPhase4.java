@@ -61,7 +61,7 @@ public class QuestsPhase4 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Captain Lenna";
-        Quest quest = new Quest(28, "Fishing #1", story,
+        Quest quest = new Quest(28, "Fishing 1", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 36000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -185,7 +185,7 @@ public class QuestsPhase4 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
+        String objectiveText = "Report back to Captain Senna that candies tastes amazing once again";
         Quest quest = new Quest(34, "Tasteful again", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 12000, 0, requiredQuests,

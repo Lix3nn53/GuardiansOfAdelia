@@ -40,7 +40,7 @@ public class QuestsPhase5 {
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(35, "Sea of Greed", story,
-                startMsg, "Go to port city Elderine then talk with Captain Leanna",
+                startMsg, "Go to viking village and talk with Sailor Skamkel",
                 "", tasks, itemPrizes, 10, 12000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 39, 40);
@@ -61,8 +61,8 @@ public class QuestsPhase5 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(36, "Pirate hunt #1", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Sailor Skamkel";
+        Quest quest = new Quest(36, "Pirate hunt 1", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 120000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -82,8 +82,8 @@ public class QuestsPhase5 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(37, "Pirate hunt #2", story,
+        String objectiveText = "TASK_PROGRESS_1\nThen talk back to Sailor Skamkel";
+        Quest quest = new Quest(37, "Pirate hunt 2", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 120000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -99,12 +99,12 @@ public class QuestsPhase5 {
         requiredQuests.add(35);
 
         List<Task> tasks = new ArrayList<>();
-        Location reachLocation = new Location(Bukkit.getWorld("world"), -3018.5, 95.5, 4920);
+        Location reachLocation = new Location(Bukkit.getWorld("world"), -2257.5, 40.5, 3631.5);
         TaskReach taskReach = new TaskReach(reachLocation, Material.GOLD_BLOCK);
         tasks.add(taskReach);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nThen talk back to Sailor Skamkel";
         Quest quest = new Quest(38, "Treasure hunt", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 120000, 0, requiredQuests,
@@ -130,7 +130,7 @@ public class QuestsPhase5 {
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nfrom candies then talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nfrom pirates then talk back to Sailor Skamkel";
         Quest quest = new Quest(39, "Pirate hats", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 120000, 0, requiredQuests,
@@ -152,8 +152,8 @@ public class QuestsPhase5 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
-        Quest quest = new Quest(40, "Pirate hunt #3", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nthen talk to Sailor Skamkel";
+        Quest quest = new Quest(40, "Pirate hunt 3", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 120000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -176,7 +176,7 @@ public class QuestsPhase5 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
+        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Sailor Skamkel";
         Quest quest = new Quest(41, "The captain's soul", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 240000, 0, requiredQuests,
@@ -193,7 +193,7 @@ public class QuestsPhase5 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
+        String objectiveText = "Report back to Captain Senna that vikings rule Sea of Greed once again";
         Quest quest = new Quest(42, "Sea of Greed report", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 18000, 0, requiredQuests,

@@ -66,10 +66,15 @@ public class SpawnerManager {
                         Location location = spawner.getLocation();
                         double v = location.distanceSquared(entity.getLocation());
                         if (v >= 1453) {
-                            entity.teleport(location);
-                            if (entity instanceof Monster) {
-                                ((Monster) entity).setTarget(null);
-                            }
+                            new BukkitRunnable() {
+                                @Override
+                                public void run() {
+                                    entity.teleport(location);
+                                    if (entity instanceof Monster) {
+                                        ((Monster) entity).setTarget(null);
+                                    }
+                                }
+                            }.runTask(GuardiansOfAdelia.getInstance());
                         }
                     } else {
                         it.remove();

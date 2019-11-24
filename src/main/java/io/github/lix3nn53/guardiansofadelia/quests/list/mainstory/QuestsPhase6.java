@@ -40,7 +40,7 @@ public class QuestsPhase6 {
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(43, "Kahal Plains", story,
-                startMsg, "Go to port city Elderine then talk with Captain Leanna",
+                startMsg, "Cross the Sea of Greed and talk to Ashild in Kahal Plains",
                 "", tasks, itemPrizes, 10, 20000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 39, 41);
@@ -61,8 +61,8 @@ public class QuestsPhase6 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(44, "Frozen hunt #1", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Ashild";
+        Quest quest = new Quest(44, "Frozen hunt 1", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 200000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -82,7 +82,7 @@ public class QuestsPhase6 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nThen talk back to Ashild";
         Quest quest = new Quest(45, "Little jockeys", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 200000, 0, requiredQuests,
@@ -99,12 +99,12 @@ public class QuestsPhase6 {
         requiredQuests.add(43);
 
         List<Task> tasks = new ArrayList<>();
-        Location reachLocation = new Location(Bukkit.getWorld("world"), -3018.5, 95.5, 4920);
+        Location reachLocation = new Location(Bukkit.getWorld("world"), -2039.5, 7.5, 3133.5);
         TaskReach taskReach = new TaskReach(reachLocation, Material.EMERALD_BLOCK);
         tasks.add(taskReach);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nThen talk back to Ashild";
         Quest quest = new Quest(46, "Bottom of the cave", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 200000, 0, requiredQuests,
@@ -130,7 +130,7 @@ public class QuestsPhase6 {
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "TASK_PROGRESS_1\nfrom candies then talk back to Pastry Chef Jasper";
+        String objectiveText = "TASK_PROGRESS_1\nfrom frozens then talk back to Ashild";
         Quest quest = new Quest(47, "Frozen shards", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 200000, 0, requiredQuests,
@@ -152,8 +152,8 @@ public class QuestsPhase6 {
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
-        Quest quest = new Quest(48, "Frozen hunt #2", story,
+        String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nthen talk to Ashild";
+        Quest quest = new Quest(48, "Frozen hunt 2", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 200000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -176,7 +176,7 @@ public class QuestsPhase6 {
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
+        String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Ashild";
         Quest quest = new Quest(49, "The necromancer", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 400000, 0, requiredQuests,
@@ -193,7 +193,7 @@ public class QuestsPhase6 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
+        String objectiveText = "Report back to Captain Senna that Necromancer King is defeated";
         Quest quest = new Quest(50, "Kahal Plains report", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 30000, 0, requiredQuests,
