@@ -1164,7 +1164,7 @@ public enum AdeliaEntity {
                 break;
             }
             case BOSS_DESERT: {
-                Husk entity = (Husk) EntityUtils.create(loc, ChatColor.YELLOW + "Selket", 45000D, EntityType.HUSK);
+                Husk entity = (Husk) EntityUtils.create(loc, ChatColor.YELLOW + "Pharaoh", 45000D, EntityType.HUSK);
                 entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
                 entity.getEquipment().clear();
                 livingEntity = entity;
@@ -1180,7 +1180,7 @@ public enum AdeliaEntity {
                 break;
             }
             case BOSS_LAVA: {
-                PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.RED + "War Chief Drogoth", 75000D, EntityType.PIG_ZOMBIE);
+                PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.RED + "Warchief Drogoth", 75000D, EntityType.PIG_ZOMBIE);
                 entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(2500D);
                 entity.setBaby(false);
                 ItemStack sword = MonsterItem.AXE_TITAN.getItem(0);

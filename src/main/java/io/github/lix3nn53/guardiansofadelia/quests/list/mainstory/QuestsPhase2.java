@@ -37,7 +37,7 @@ public class QuestsPhase2 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.\nDon't forget to use your boat!";
         Quest quest = new Quest(12, "Rotten City", story,
                 startMsg, "Talk with Dr. Rintarou",
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 1000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 32, 35);
     }
@@ -60,7 +60,7 @@ public class QuestsPhase2 {
         String objectiveText = "Time to enter Rotten City\nTASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk to Dr. Rintarou";
         Quest quest = new Quest(13, "Zombie invasion", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 7000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 35);
     }
@@ -86,7 +86,7 @@ public class QuestsPhase2 {
         String objectiveText = "Dr. Rintarou needs zombie parts for his experiments\nTASK_PROGRESS_1\nThen talk to Dr. Rintarou";
         Quest quest = new Quest(14, "Disgusting experiments", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 7000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 35);
     }
@@ -105,14 +105,14 @@ public class QuestsPhase2 {
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Splitter Zombie");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Shaman Zombie");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Tank Zombie");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(15), 18);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(15), 8);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Dr. Rintarou needs zombie brains for his final experiment\nTASK_PROGRESS_1\nThen talk to Dr. Rintarou";
         Quest quest = new Quest(15, "Pink jellies", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 7000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 35);
     }
@@ -132,7 +132,7 @@ public class QuestsPhase2 {
         String objectiveText = "Report to Sergent Armin that you helped Dr. Rintarou on his final experiment";
         Quest quest = new Quest(16, "Experiment reports", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 3500, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 32);
     }
@@ -152,9 +152,9 @@ public class QuestsPhase2 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nThen talk to Dr. Rintarou";
-        Quest quest = new Quest(17, "Stronger zombies!?", story,
+        Quest quest = new Quest(17, "Zombie subjects!?", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 14000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 32, 35);
     }
@@ -172,9 +172,9 @@ public class QuestsPhase2 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Report back to Sergent Armin that Dr. Rintarou started working on a cure!";
-        Quest quest = new Quest(18, "Came back to his senses", story,
+        Quest quest = new Quest(18, "Back to his senses", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 2500, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 35, 32);
     }

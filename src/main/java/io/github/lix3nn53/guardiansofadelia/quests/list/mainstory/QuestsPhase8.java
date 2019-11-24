@@ -36,9 +36,9 @@ public class QuestsPhase8 {
         List<Task> tasks = new ArrayList<>();
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
-        Quest quest = new Quest(60, "Vikings", story,
+        Quest quest = new Quest(60, "Guardian camp", story,
                 startMsg, "Go to port city Elderine then talk with Captain Leanna",
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 50000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 42, 44);
     }
@@ -52,16 +52,16 @@ public class QuestsPhase8 {
         requiredQuests.add(60);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Fighter Goblin", 20);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Fighter Goblin", 1);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Rogue Goblin", 20);
+        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Rogue Goblin", 1);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(61, "Wipe out the baddies", story,
+        Quest quest = new Quest(61, "Goblin hunt #1", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 44, 44);
     }
@@ -75,14 +75,14 @@ public class QuestsPhase8 {
         requiredQuests.add(60);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Jockey Goblin", 20);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Jockey Goblin", 1);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(62, "Wipe out the baddies", story,
+        Quest quest = new Quest(62, "Goblin hunt #2", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 44, 44);
     }
@@ -96,16 +96,16 @@ public class QuestsPhase8 {
         requiredQuests.add(60);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Mage Goblin", 20);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Mage Goblin", 1);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Shaman Goblin", 20);
+        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Shaman Goblin", 1);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(63, "Wipe out the baddies", story,
+        Quest quest = new Quest(63, "Goblin hunt #3", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 45, 45);
     }
@@ -125,14 +125,14 @@ public class QuestsPhase8 {
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Shaman Goblin");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Mage Goblin");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Jockey Goblin");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 24);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 1);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nfrom candies then talk back to Pastry Chef Jasper";
-        Quest quest = new Quest(64, "Sugars with bad taste", story,
+        Quest quest = new Quest(64, "Goblin", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 44, 44);
     }
@@ -145,14 +145,14 @@ public class QuestsPhase8 {
         requiredQuests.add(60);
         List<Task> tasks = new ArrayList<>();
 
-        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Witch", 12);
+        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Witch", 1);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
-        Quest quest = new Quest(65, "Evil cook", story,
+        Quest quest = new Quest(65, "Witch hunt", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 46, 46);
     }
@@ -174,9 +174,9 @@ public class QuestsPhase8 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Pastry Chef Jasper";
-        Quest quest = new Quest(66, "Evil cook", story,
+        Quest quest = new Quest(66, "The betrayal", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 880000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 44, 44);
     }
@@ -191,9 +191,9 @@ public class QuestsPhase8 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Report back to Captain Senna that candies tastes amazing one again.";
-        Quest quest = new Quest(67, "Tasteful sugars", story,
+        Quest quest = new Quest(67, "Swamp of Dawn report", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 10, 60000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 44, 42);
     }

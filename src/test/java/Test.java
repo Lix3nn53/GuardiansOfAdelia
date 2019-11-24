@@ -11,8 +11,9 @@ public class Test {
     private static final double MULTIPLIER = 0.1;
 
     public static void main(String[] args) {
+        int totalExp = 0;
         for (int level = 1; level <= 90; level++) {
-            int tier = 1;
+            /*int tier = 1;
             double multiplier = 1.2 + (tier * 0.1);
 
             int result1 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
@@ -41,7 +42,10 @@ public class Test {
             multiplier = 1.2 + (tier * 0.1);
 
             int result6 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
-            System.out.println(level + ": " + result1 + " - " + result2 + " - " + result3 + " - " + result4 + " - " + result5 + " - " + result6);
+            System.out.println(level + ": " + result1 + " - " + result2 + " - " + result3 + " - " + result4 + " - " + result5 + " - " + result6);*/
+            int experience = (int) (10 + Math.round(5 * Math.pow(level, 3) / 4) + 0.5);
+            totalExp += experience;
+            System.out.println(level + ": " + experience + " total: " + totalExp);
         }
     }
 

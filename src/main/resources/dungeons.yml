@@ -11,7 +11,7 @@ SLIME1:
   world: dungeons
   yaw: 20
   pitch: -0.3
-  levelReq: 5
+  levelReq: 6
   timeLimitInMinutes: 10
   bossMobName: §6King Slime
 SLIME2:
@@ -21,7 +21,7 @@ SLIME2:
   world: dungeons
   yaw: -341
   pitch: 2
-  levelReq: 5
+  levelReq: 6
   timeLimitInMinutes: 10
   bossMobName: §6King Slime
 SLIME3:
@@ -31,7 +31,7 @@ SLIME3:
   world: dungeons
   yaw: -341
   pitch: 0.45
-  levelReq: 5
+  levelReq: 6
   timeLimitInMinutes: 10
   bossMobName: §6King Slime
 SLIME4:
@@ -41,7 +41,7 @@ SLIME4:
   world: dungeons
   yaw: -338.5
   pitch: -1.35
-  levelReq: 5
+  levelReq: 6
   timeLimitInMinutes: 10
   bossMobName: §6King Slime
 ZOMBIE1:
@@ -51,7 +51,7 @@ ZOMBIE1:
   world: dungeons
   yaw: -286.5
   pitch: 5.7
-  levelReq: 10
+  levelReq: 12
   timeLimitInMinutes: 10
   bossMobName: §2Zombie Subject#471
 ZOMBIE2:
@@ -61,7 +61,7 @@ ZOMBIE2:
   world: dungeons
   yaw: -287
   pitch: 6
-  levelReq: 10
+  levelReq: 12
   timeLimitInMinutes: 10
   bossMobName: §2Zombie Subject#471
 ZOMBIE3:
@@ -71,7 +71,7 @@ ZOMBIE3:
   world: dungeons
   yaw: -285.8
   pitch: 3.75
-  levelReq: 10
+  levelReq: 12
   timeLimitInMinutes: 10
   bossMobName: §2Zombie Subject#471
 ZOMBIE4:
@@ -81,7 +81,7 @@ ZOMBIE4:
   world: dungeons
   yaw: -288.5
   pitch: 5.5
-  levelReq: 10
+  levelReq: 12
   timeLimitInMinutes: 10
   bossMobName: §2Zombie Subject#471
 MAGIC_FOREST1:
@@ -91,7 +91,7 @@ MAGIC_FOREST1:
   world: dungeons
   yaw: -183
   pitch: -0.9
-  levelReq: 15
+  levelReq: 18
   timeLimitInMinutes: 10
   bossMobName: §5Dark Magician Nimzuth
 MAGIC_FOREST2:
@@ -101,7 +101,7 @@ MAGIC_FOREST2:
   world: dungeons
   yaw: -192.5
   pitch: -0.9
-  levelReq: 15
+  levelReq: 18
   timeLimitInMinutes: 10
   bossMobName: §5Dark Magician Nimzuth
 MAGIC_FOREST3:
@@ -111,7 +111,7 @@ MAGIC_FOREST3:
   world: dungeons
   yaw: -193.5
   pitch: -0.5
-  levelReq: 15
+  levelReq: 18
   timeLimitInMinutes: 10
   bossMobName: §5Dark Magician Nimzuth
 MAGIC_FOREST4:
@@ -121,7 +121,7 @@ MAGIC_FOREST4:
   world: dungeons
   yaw: -192.5
   pitch: -1.5
-  levelReq: 15
+  levelReq: 18
   timeLimitInMinutes: 10
   bossMobName: §5Dark Magician Nimzuth
 ICE_CREAM1:
@@ -253,7 +253,7 @@ DESERT1:
   pitch: 0.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §eSelket
+  bossMobName: §ePharaoh
 DESERT2:
   x: 1956.5
   y: 54.5
@@ -263,7 +263,7 @@ DESERT2:
   pitch: -1.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §eSelket
+  bossMobName: §ePharaoh
 DESERT3:
   x: 1939.5
   y: 54.5
@@ -273,7 +273,7 @@ DESERT3:
   pitch: -0.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §eSelket
+  bossMobName: §ePharaoh
 DESERT4:
   x: 1900.5
   y: 54.5
@@ -283,7 +283,7 @@ DESERT4:
   pitch: -0.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §eSelket
+  bossMobName: §ePharaoh
 SWAMP1:
   x: 1478.5
   y: 77.5
@@ -333,7 +333,7 @@ LAVA1:
   pitch: 5.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §cWar Chief Drogoth
+  bossMobName: §cWarchief Drogoth
 LAVA2:
   x: 2494.5
   y: 64.5
@@ -343,7 +343,7 @@ LAVA2:
   pitch: -1.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §cWar Chief Drogoth
+  bossMobName: §cWarchief Drogoth
 LAVA3:
   x: 2483.5
   y: 64.5
@@ -353,7 +353,7 @@ LAVA3:
   pitch: -4.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §cWar Chief Drogoth
+  bossMobName: §cWarchief Drogoth
 LAVA4:
   x: 2479.5
   y: 64.5
@@ -363,7 +363,7 @@ LAVA4:
   pitch: -2.5
   levelReq: 20
   timeLimitInMinutes: 10
-  bossMobName: §cWar Chief Drogoth
+  bossMobName: §cWarchief Drogoth
 DARKNESS1:
   x: 3803.5
   y: 19.5
