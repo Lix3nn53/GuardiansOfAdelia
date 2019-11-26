@@ -31,9 +31,11 @@ public class QuestsPhase6 {
 
     private static void createQuestOne() {
         List<String> story = new ArrayList<>();
-        story.add("Congratulations! You improved a lot since");
-        story.add("you you have become a Guardian. You are ready");
-        story.add("to move the port city, Elderine.");
+        story.add("Kahal Plains is a important bridge");
+        story.add("that connects Elderine and Uruga.");
+        story.add("But frozen monsters is a threat");
+        story.add("to travelers. Find viking warrior Ashild");
+        story.add("who is fighting frozens and help her.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(42);
         List<Task> tasks = new ArrayList<>();
@@ -48,16 +50,14 @@ public class QuestsPhase6 {
 
     private static void createQuestTwo() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Hunt frozens to make the bridge to Uruga safer.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(43);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.AQUA + "Frozen Rogue", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.AQUA + "Frozen Rogue", 47);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.AQUA + "Frozen Ranger", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.AQUA + "Frozen Ranger", 47);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -71,14 +71,13 @@ public class QuestsPhase6 {
 
     private static void createQuestThree() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Jockeys are defending the cave, hunt");
+        story.add("them to be able to discover the cave.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(43);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.DARK_GREEN + "Jockey Zombie", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.DARK_GREEN + "Jockey Zombie", 35);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -92,9 +91,8 @@ public class QuestsPhase6 {
 
     private static void createQuestFour() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Find out what jockeys are defending");
+        story.add("insede the cave.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(43);
 
@@ -114,9 +112,8 @@ public class QuestsPhase6 {
 
     private static void createQuestFive() {
         List<String> story = new ArrayList<>();
-        story.add("Collect some candies and bring");
-        story.add("them to Jasper. So he can try to");
-        story.add("find whats wrong with them.");
+        story.add("Collect some frozen shards and bring");
+        story.add("them to Ashild.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(43);
 
@@ -126,7 +123,7 @@ public class QuestsPhase6 {
         nameOfMobsItemDropsFrom.add(ChatColor.AQUA + "Frozen Illusioner");
         nameOfMobsItemDropsFrom.add(ChatColor.AQUA + "Frozen Ranger");
         nameOfMobsItemDropsFrom.add(ChatColor.AQUA + "Frozen Timberman");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 1);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 30);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -140,15 +137,15 @@ public class QuestsPhase6 {
 
     private static void createQuestSix() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("Some of the frozens are more dangerous than others.");
+        story.add("Hunt them to make the bridge to Uruga safer.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(43);
         List<Task> tasks = new ArrayList<>();
 
-        TaskKill taskKill = new TaskKill(ChatColor.AQUA + "Frozen Illusioner", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.AQUA + "Frozen Illusioner", 40);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.AQUA + "Frozen Timberman", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.AQUA + "Frozen Timberman", 40);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -162,8 +159,9 @@ public class QuestsPhase6 {
 
     private static void createQuestSeven() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("Ashild discovered a necromancer cave.");
+        story.add("That necromancer must be the reason of frozens.");
+        story.add("Defeat him and clear frozens for good.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(44);
         requiredQuests.add(45);
@@ -186,14 +184,14 @@ public class QuestsPhase6 {
 
     private static void createQuestEight() {
         List<String> story = new ArrayList<>();
-        story.add("Report back that candies tastes");
-        story.add("amazing one again.");
+        story.add("Report back that Necromancer King is defeated so");
+        story.add("Kahal Plains are safe for travelers again.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(49);
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that Necromancer King is defeated";
+        String objectiveText = "Report back to Captain Senna, Kahal Plains are safe for travelers again";
         Quest quest = new Quest(50, "Kahal Plains report", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 30000, 0, requiredQuests,

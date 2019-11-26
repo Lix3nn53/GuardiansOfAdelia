@@ -115,9 +115,9 @@ public class QuestsPhase9 {
         requiredQuests.add(71);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.RED + "Blaze", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.RED + "Blaze", 60);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.RED + "Magma Cube", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.RED + "Magma Cube", 60);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -138,9 +138,9 @@ public class QuestsPhase9 {
         requiredQuests.add(71);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Fighter Orc", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Fighter Orc", 72);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Gladiator Orc", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Gladiator Orc", 72);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -161,9 +161,9 @@ public class QuestsPhase9 {
         requiredQuests.add(71);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Shaman Orc", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Shaman Orc", 60);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Mage Orc", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Mage Orc", 60);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -212,7 +212,7 @@ public class QuestsPhase9 {
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Jockey Orc");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Shaman Orc");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Mage Orc");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 1);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 60);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -232,7 +232,7 @@ public class QuestsPhase9 {
         requiredQuests.add(71);
         List<Task> tasks = new ArrayList<>();
 
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Jockey Orc", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Jockey Orc", 45);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

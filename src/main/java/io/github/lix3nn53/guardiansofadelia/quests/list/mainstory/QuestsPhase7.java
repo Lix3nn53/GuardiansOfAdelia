@@ -31,16 +31,16 @@ public class QuestsPhase7 {
 
     private static void createQuestOne() {
         List<String> story = new ArrayList<>();
-        story.add("Congratulations! You improved a lot since");
-        story.add("you you have become a Guardian. You are ready");
-        story.add("to move the port city, Elderine.");
+        story.add("You have become a strong Guardian.");
+        story.add("We need Guardians like you in the");
+        story.add("capital city, Uruga.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(50);
         List<Task> tasks = new ArrayList<>();
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(51, "Uruga", story,
-                startMsg, "Go to kingdom Uruga then talk with Commander Erwin",
+                startMsg, "Go to capital city, Uruga then talk with Commander Erwin",
                 "", tasks, itemPrizes, 10, 35000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 39, 42);
@@ -56,7 +56,7 @@ public class QuestsPhase7 {
         requiredQuests.add(51);
 
         List<Task> tasks = new ArrayList<>();
-        ItemStack itemStack = Ingredient.FISHING_SALMON.getItemStack(1);
+        ItemStack itemStack = Ingredient.FISHING_SALMON.getItemStack(5);
         TaskGift taskGift = new TaskGift(5, itemStack, ChatColor.GREEN + "Uruga Villager");
         tasks.add(taskGift);
 
@@ -71,9 +71,9 @@ public class QuestsPhase7 {
 
     private static void createQuestThree() {
         List<String> story = new ArrayList<>();
-        story.add("Congratulations! You improved a lot since");
-        story.add("you you have become a Guardian. You are ready");
-        story.add("to move the port city, Elderine.");
+        story.add("Archaeologist Robin is working on a research");
+        story.add("about mummies. She is our best chance to find Pharaoh.");
+        story.add("You can find her in a small village at Sand Hill.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(52);
         List<Task> tasks = new ArrayList<>();
@@ -88,16 +88,16 @@ public class QuestsPhase7 {
 
     private static void createQuestFour() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Robin needs to be safe to continue her");
+        story.add("research. Hunt some mummies to make");
+        story.add("Sand Hill safer.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(53);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Mummy", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Mummy", 53);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Ghost Mummy", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Ghost Mummy", 53);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -111,14 +111,14 @@ public class QuestsPhase7 {
 
     private static void createQuestFive() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Robin needs to be safe to continue her");
+        story.add("research. Hunt some spiders to make");
+        story.add("Sand Hill safer.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(53);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Ghost Spider", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Ghost Spider", 41);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -132,9 +132,7 @@ public class QuestsPhase7 {
 
     private static void createQuestSix() {
         List<String> story = new ArrayList<>();
-        story.add("Collect some candies and bring");
-        story.add("them to Jasper. So he can try to");
-        story.add("find whats wrong with them.");
+        story.add("Collect some mummy bandages for robin.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(53);
 
@@ -142,7 +140,7 @@ public class QuestsPhase7 {
         List<String> nameOfMobsItemDropsFrom = new ArrayList<>();
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Mummy");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Ghost Mummy");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 1);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 41);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -156,15 +154,16 @@ public class QuestsPhase7 {
 
     private static void createQuestSeven() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("Robin needs to be safe to continue her");
+        story.add("research. Hunt some skeletons to make");
+        story.add("Sand Hill safer.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(53);
         List<Task> tasks = new ArrayList<>();
 
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Desert Archer Skeleton", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Desert Archer Skeleton", 41);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Desert Cavalry Skeleton", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Desert Cavalry Skeleton", 41);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -178,8 +177,8 @@ public class QuestsPhase7 {
 
     private static void createQuestEight() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("Robin found the ancient gate that");
+        story.add("will lead us to the Cursed King.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(54);
         requiredQuests.add(55);
@@ -201,14 +200,14 @@ public class QuestsPhase7 {
 
     private static void createQuestNine() {
         List<String> story = new ArrayList<>();
-        story.add("Report back that candies tastes");
-        story.add("amazing one again.");
+        story.add("Report back that curse is removed thanks");
+        story.add("to Robin's research.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(58);
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Commander Erwin that Cursed King is defeated";
+        String objectiveText = "Report back to Commander Erwin, curse is removed from Sand Hill";
         Quest quest = new Quest(59, "Sand Hill report", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 45000, 0, requiredQuests,

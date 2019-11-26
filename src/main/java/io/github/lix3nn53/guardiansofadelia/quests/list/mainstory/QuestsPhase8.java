@@ -52,9 +52,9 @@ public class QuestsPhase8 {
         requiredQuests.add(60);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Fighter Goblin", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Fighter Goblin", 64);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Rogue Goblin", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Rogue Goblin", 64);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -75,7 +75,7 @@ public class QuestsPhase8 {
         requiredQuests.add(60);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Jockey Goblin", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Jockey Goblin", 50);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -96,9 +96,9 @@ public class QuestsPhase8 {
         requiredQuests.add(60);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Mage Goblin", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.YELLOW + "Mage Goblin", 50);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Shaman Goblin", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Shaman Goblin", 50);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -125,7 +125,7 @@ public class QuestsPhase8 {
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Shaman Goblin");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Mage Goblin");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Jockey Goblin");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 1);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 47);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -145,7 +145,7 @@ public class QuestsPhase8 {
         requiredQuests.add(60);
         List<Task> tasks = new ArrayList<>();
 
-        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Witch", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Witch", 41);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

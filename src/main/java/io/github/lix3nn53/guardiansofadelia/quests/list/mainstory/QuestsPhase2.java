@@ -79,7 +79,7 @@ public class QuestsPhase2 {
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Splitter Zombie");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Shaman Zombie");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Tank Zombie");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.72, QuestItems.getQuestItem(14), 12);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.72, QuestItems.getQuestItem(14), 9);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -105,7 +105,7 @@ public class QuestsPhase2 {
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Splitter Zombie");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Shaman Zombie");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Tank Zombie");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(15), 8);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(15), 9);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

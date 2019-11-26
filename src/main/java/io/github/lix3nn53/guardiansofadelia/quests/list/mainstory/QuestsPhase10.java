@@ -65,9 +65,9 @@ public class QuestsPhase10 {
         requiredQuests.add(80);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Void", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Void", 91);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.LIGHT_PURPLE + "Phantom", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.LIGHT_PURPLE + "Phantom", 91);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -88,9 +88,9 @@ public class QuestsPhase10 {
         requiredQuests.add(80);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Fighter Pillager", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Fighter Pillager", 91);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.DARK_PURPLE + "Rogue Pillager", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.DARK_PURPLE + "Rogue Pillager", 91);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -111,9 +111,9 @@ public class QuestsPhase10 {
         requiredQuests.add(80);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Mage Pillager", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Mage Pillager", 91);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.DARK_PURPLE + "Shaman Pillager", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.DARK_PURPLE + "Shaman Pillager", 91);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -162,7 +162,7 @@ public class QuestsPhase10 {
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_PURPLE + "Mage Pillager");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_PURPLE + "Rogue Pillager");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_PURPLE + "Shaman Pillager");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 1);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 91);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -183,9 +183,9 @@ public class QuestsPhase10 {
         List<Task> tasks = new ArrayList<>();
 
 
-        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Commander Pillager", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Commander Pillager", 91);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Ravager", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Ravager", 91);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

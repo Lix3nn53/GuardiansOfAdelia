@@ -105,9 +105,9 @@ public class QuestsPhase1 {
         requiredQuests.add(7);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.GREEN + "Wild Lizard", 7);
+        TaskKill taskKill = new TaskKill(ChatColor.GREEN + "Wild Lizard", 6);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.DARK_GREEN + "Poisonous Lizard", 5);
+        TaskKill taskKill2 = new TaskKill(ChatColor.DARK_GREEN + "Poisonous Lizard", 4);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -128,9 +128,9 @@ public class QuestsPhase1 {
         requiredQuests.add(8);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.GREEN + "Baby Slime", 12);
+        TaskKill taskKill = new TaskKill(ChatColor.GREEN + "Baby Slime", 9);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.GREEN + "Sticky Slime", 8);
+        TaskKill taskKill2 = new TaskKill(ChatColor.GREEN + "Sticky Slime", 7);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

@@ -31,9 +31,9 @@ public class QuestsPhase5 {
 
     private static void createQuestOne() {
         List<String> story = new ArrayList<>();
-        story.add("Congratulations! You improved a lot since");
-        story.add("you you have become a Guardian. You are ready");
-        story.add("to move the port city, Elderine.");
+        story.add("Vikings are fighting with ghosts");
+        story.add("of pirates to regain their freedom");
+        story.add("at the sea.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(34);
         List<Task> tasks = new ArrayList<>();
@@ -48,16 +48,15 @@ public class QuestsPhase5 {
 
     private static void createQuestTwo() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Shooter and fighter pirates are");
+        story.add("weakest of them. Lets see if you can handle?");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(35);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.DARK_AQUA + "Shooter Pirate", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.DARK_AQUA + "Shooter Pirate", 35);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.DARK_AQUA + "Fighter Pirate", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.DARK_AQUA + "Fighter Pirate", 35);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -71,14 +70,13 @@ public class QuestsPhase5 {
 
     private static void createQuestThree() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Drowned pirates are so strong under");
+        story.add("the sea. We need to get rid of them.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(35);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.DARK_AQUA + "Drowned Pirate", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.DARK_AQUA + "Drowned Pirate", 27);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -92,9 +90,8 @@ public class QuestsPhase5 {
 
     private static void createQuestFour() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("There is a ship wreck in Sea of Greed.");
+        story.add("There might be some valuable treasure.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(35);
 
@@ -114,9 +111,9 @@ public class QuestsPhase5 {
 
     private static void createQuestFive() {
         List<String> story = new ArrayList<>();
-        story.add("Collect some candies and bring");
-        story.add("them to Jasper. So he can try to");
-        story.add("find whats wrong with them.");
+        story.add("All of the pirates are wearing the");
+        story.add("same hat. Collect some pirate hats to");
+        story.add("find the reason behind it.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(35);
 
@@ -126,7 +123,7 @@ public class QuestsPhase5 {
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_AQUA + "Fighter Pirate");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_AQUA + "Sharpshooter Pirate");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_AQUA + "Duel Master Pirate");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 1);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 20);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -140,15 +137,15 @@ public class QuestsPhase5 {
 
     private static void createQuestSix() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("There are some high ranked pirates on");
+        story.add("those ships. We must capture them.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(35);
         List<Task> tasks = new ArrayList<>();
 
-        TaskKill taskKill = new TaskKill(ChatColor.DARK_AQUA + "Sharpshooter Pirate", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.DARK_AQUA + "Sharpshooter Pirate", 24);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.DARK_AQUA + "Duel Master Pirate", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.DARK_AQUA + "Duel Master Pirate", 24);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -162,8 +159,8 @@ public class QuestsPhase5 {
 
     private static void createQuestSeven() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("We found the location of their captain's");
+        story.add("ship. The key for our freedom must be there.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(36);
         requiredQuests.add(37);
@@ -186,8 +183,7 @@ public class QuestsPhase5 {
 
     private static void createQuestEight() {
         List<String> story = new ArrayList<>();
-        story.add("Report back that candies tastes");
-        story.add("amazing one again.");
+        story.add("Report back that vikings rule Sea of Greed once again.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(41);
         List<Task> tasks = new ArrayList<>();

@@ -50,12 +50,12 @@ public class QuestsPhase4 {
         story.add("Villagers are having a hard time because of");
         story.add("reduction of resources. Do some fishing and");
         story.add("give them to villagers. So you can get a");
-        story.add("warm welcome to Elderine.");
+        story.add("warm welcome in Elderine.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(27);
 
         List<Task> tasks = new ArrayList<>();
-        ItemStack itemStack = Ingredient.FISHING_COD.getItemStack(1);
+        ItemStack itemStack = Ingredient.FISHING_COD.getItemStack(5);
         TaskGift taskGift = new TaskGift(5, itemStack, ChatColor.GREEN + "Elderine Villager");
         tasks.add(taskGift);
 
@@ -94,9 +94,9 @@ public class QuestsPhase4 {
         requiredQuests.add(29);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.AQUA + "Popping Rainbow", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.AQUA + "Popping Rainbow", 28);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.LIGHT_PURPLE + "Jellybean", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.LIGHT_PURPLE + "Jellybean", 28);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -122,7 +122,7 @@ public class QuestsPhase4 {
         nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Taffy Spirit");
         nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Candy Box");
         nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Jellybean");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 1);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 16);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -142,7 +142,7 @@ public class QuestsPhase4 {
         requiredQuests.add(29);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.LIGHT_PURPLE + "Taffy Spirit", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.LIGHT_PURPLE + "Taffy Spirit", 24);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

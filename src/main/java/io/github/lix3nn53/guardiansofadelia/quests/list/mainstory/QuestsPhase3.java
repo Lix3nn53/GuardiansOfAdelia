@@ -92,9 +92,9 @@ public class QuestsPhase3 {
         requiredQuests.add(21);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.WHITE + "Archer Skeleton", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.WHITE + "Archer Skeleton", 21);
         tasks.add(taskKill);
-        TaskKill taskKill2 = new TaskKill(ChatColor.WHITE + "Fighter Skeleton", 1);
+        TaskKill taskKill2 = new TaskKill(ChatColor.WHITE + "Fighter Skeleton", 21);
         tasks.add(taskKill2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -121,7 +121,7 @@ public class QuestsPhase3 {
         nameOfMobsItemDropsFrom.add(ChatColor.WHITE + "Rogue Skeleton");
         nameOfMobsItemDropsFrom.add(ChatColor.WHITE + "Monk Skeleton");
         nameOfMobsItemDropsFrom.add(ChatColor.WHITE + "Mage Skeleton");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(23), 1);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(23), 14);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -141,7 +141,7 @@ public class QuestsPhase3 {
         requiredQuests.add(21);
 
         List<Task> tasks = new ArrayList<>();
-        TaskKill taskKill = new TaskKill(ChatColor.WHITE + "Mage Skeleton", 1);
+        TaskKill taskKill = new TaskKill(ChatColor.WHITE + "Mage Skeleton", 12);
         tasks.add(taskKill);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
