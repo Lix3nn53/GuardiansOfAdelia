@@ -28,15 +28,15 @@ public class QuestsPhase8 {
 
     private static void createQuestOne() {
         List<String> story = new ArrayList<>();
-        story.add("Congratulations! You improved a lot since");
-        story.add("you you have become a Guardian. You are ready");
-        story.add("to move the port city, Elderine.");
+        story.add("A guardian is lost! Talk with his");
+        story.add("party, they are camping near the");
+        story.add("2nd entrance of Uruga.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(59);
         List<Task> tasks = new ArrayList<>();
         List<ItemStack> itemPrizes = new ArrayList<>();
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
-        Quest quest = new Quest(60, "Guardian camp", story,
+        Quest quest = new Quest(60, "Lost guardian", story,
                 startMsg, "Go to guardian camp and talk with Guardian Raignald",
                 "", tasks, itemPrizes, 10, 50000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -45,9 +45,9 @@ public class QuestsPhase8 {
 
     private static void createQuestTwo() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("The party thinks goblins are keeping");
+        story.add("Esobel as prisoner. Hunt some goblins");
+        story.add("to find clues.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(60);
 
@@ -68,9 +68,9 @@ public class QuestsPhase8 {
 
     private static void createQuestThree() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("The party thinks goblins are keeping");
+        story.add("Esobel as prisoner. Hunt some goblins");
+        story.add("to find clues.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(60);
 
@@ -89,9 +89,9 @@ public class QuestsPhase8 {
 
     private static void createQuestFour() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("The party thinks goblins are keeping");
+        story.add("Esobel as prisoner. Hunt some goblins");
+        story.add("to find clues.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(60);
 
@@ -112,9 +112,8 @@ public class QuestsPhase8 {
 
     private static void createQuestFive() {
         List<String> story = new ArrayList<>();
-        story.add("Collect some candies and bring");
-        story.add("them to Jasper. So he can try to");
-        story.add("find whats wrong with them.");
+        story.add("Collect some of the flags goblins");
+        story.add("????????");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(60);
 

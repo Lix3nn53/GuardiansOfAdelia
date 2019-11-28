@@ -15,7 +15,7 @@ class Helmets {
         String name = "Leather Helmet";
         Material material = Material.LEATHER_HELMET;
         int level = 4;
-        int health = 18;
+        int health = 10;
         int defense = 10;
         int magicDefense = 7;
         boolean isColorful = false;
@@ -24,7 +24,7 @@ class Helmets {
             if (placementNumber == 2) {
                 name = "Hide Helmet";
                 level = 14;
-                health = 36;
+                health = 20;
                 defense = 14;
                 magicDefense = 10;
             }
@@ -32,49 +32,49 @@ class Helmets {
             if (placementNumber == 1) {
                 name = "Leaf Helmet";
                 level = 24;
-                health = 180;
+                health = 40;
                 defense = 27;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Forest Fairy Helmet";
                 level = 34;
-                health = 300;
+                health = 60;
                 defense = 42;
                 magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Hunter Helmet";
                 level = 44;
-                health = 470;
+                health = 90;
                 defense = 70;
                 magicDefense = 50;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 4) {
                 name = "Speedy Helmet";
                 level = 54;
-                health = 650;
+                health = 130;
                 defense = 100;
                 magicDefense = 65;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 5) {
                 name = "White Wolf Helmet";
                 level = 64;
-                health = 870;
+                health = 170;
                 defense = 130;
                 magicDefense = 87;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 6) {
                 name = "Moottalis Helmet";
                 level = 74;
-                health = 1100;
+                health = 220;
                 defense = 165;
                 magicDefense = 110;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Helmet";
                 level = 84;
-                health = 1450;
+                health = 290;
                 defense = 218;
                 magicDefense = 144;
                 material = Material.CHAINMAIL_HELMET;
@@ -83,49 +83,49 @@ class Helmets {
             if (placementNumber == 1) {
                 name = "BlueSky Helmet";
                 level = 24;
-                health = 357;
+                health = 70;
                 defense = 35;
                 magicDefense = 14;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Sky Fairy Helmet";
                 level = 34;
-                health = 570;
+                health = 120;
                 defense = 58;
                 magicDefense = 22;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Half Plate Helmet";
                 level = 44;
-                health = 940;
+                health = 190;
                 defense = 92;
                 magicDefense = 37;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 4) {
                 name = "Mighty Plate Helmet";
                 level = 54;
-                health = 1280;
+                health = 260;
                 defense = 128;
                 magicDefense = 51;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 5) {
                 name = "Elisa Helmet";
                 level = 64;
-                health = 1720;
+                health = 340;
                 defense = 172;
                 magicDefense = 68;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 6) {
                 name = "Gloria Helmet";
                 level = 74;
-                health = 2140;
+                health = 420;
                 defense = 214;
                 magicDefense = 85;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Helmet";
                 level = 84;
-                health = 2800;
+                health = 560;
                 defense = 280;
                 magicDefense = 114;
                 material = Material.DIAMOND_HELMET;
@@ -134,49 +134,49 @@ class Helmets {
             if (placementNumber == 1) {
                 name = "Silk Helmet";
                 level = 24;
-                health = 180;
+                health = 40;
                 defense = 18;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Eli Helmet";
                 level = 34;
-                health = 300;
+                health = 60;
                 defense = 28;
                 magicDefense = 28;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Wisdom Circlet";
                 level = 44;
-                health = 470;
+                health = 90;
                 defense = 48;
                 magicDefense = 48;
                 material = Material.GOLDEN_HELMET;
             } else if (placementNumber == 4) {
                 name = "Wizardy Circlet";
                 level = 54;
-                health = 680;
+                health = 130;
                 defense = 64;
                 magicDefense = 64;
                 material = Material.GOLDEN_HELMET;
             } else if (placementNumber == 5) {
                 name = "Xhar Circlet";
                 level = 64;
-                health = 870;
+                health = 170;
                 defense = 90;
                 magicDefense = 90;
                 material = Material.GOLDEN_HELMET;
             } else if (placementNumber == 6) {
                 name = "Chamor Circlet";
                 level = 74;
-                health = 1090;
+                health = 220;
                 defense = 105;
                 magicDefense = 105;
                 material = Material.GOLDEN_HELMET;
             } else if (placementNumber == 7) {
                 name = "Neferti Circlet";
                 level = 84;
-                health = 1450;
+                health = 290;
                 defense = 150;
                 magicDefense = 150;
                 material = Material.GOLDEN_HELMET;
@@ -185,49 +185,49 @@ class Helmets {
             if (placementNumber == 1) {
                 name = "Sunset Helmet";
                 level = 24;
-                health = 272;
+                health = 60;
                 defense = 27;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Dark Wind Helmet";
                 level = 34;
-                health = 440;
+                health = 90;
                 defense = 42;
                 magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Terra Helmet";
                 level = 44;
-                health = 710;
+                health = 140;
                 defense = 70;
                 magicDefense = 48;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 4) {
                 name = "Lupy Helmet";
                 level = 54;
-                health = 980;
+                health = 200;
                 defense = 100;
                 magicDefense = 65;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 5) {
                 name = "White Fox Helmet";
                 level = 64;
-                health = 1320;
+                health = 270;
                 defense = 130;
                 magicDefense = 88;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 6) {
                 name = "Luna Helmet";
                 level = 74;
-                health = 1600;
+                health = 320;
                 defense = 165;
                 magicDefense = 110;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 7) {
                 name = "Shadow Helmet";
                 level = 84;
-                health = 2180;
+                health = 440;
                 defense = 218;
                 magicDefense = 144;
                 material = Material.CHAINMAIL_HELMET;
@@ -236,49 +236,49 @@ class Helmets {
             if (placementNumber == 1) {
                 name = "Sunrise Helmet";
                 level = 24;
-                health = 280;
+                health = 60;
                 defense = 21;
                 magicDefense = 28;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "August Helmet";
                 level = 34;
-                health = 450;
+                health = 90;
                 defense = 34;
                 magicDefense = 45;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Rhythm Helmet";
                 level = 44;
-                health = 740;
+                health = 150;
                 defense = 55;
                 magicDefense = 74;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 4) {
                 name = "Eleaza Helmet";
                 level = 54;
-                health = 1020;
+                health = 210;
                 defense = 78;
                 magicDefense = 102;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 5) {
                 name = "Gaia Helmet";
                 level = 64;
-                health = 1350;
+                health = 270;
                 defense = 102;
                 magicDefense = 138;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 6) {
                 name = "Holyshion Helmet";
                 level = 74;
-                health = 1720;
+                health = 350;
                 defense = 128;
                 magicDefense = 172;
                 material = Material.DIAMOND_HELMET;
             } else if (placementNumber == 7) {
                 name = "Khraje Helmet";
                 level = 84;
-                health = 2300;
+                health = 460;
                 defense = 170;
                 magicDefense = 228;
                 material = Material.DIAMOND_HELMET;
@@ -287,49 +287,49 @@ class Helmets {
             if (placementNumber == 1) {
                 name = "Magma Helmet";
                 level = 24;
-                health = 360;
+                health = 70;
                 defense = 27;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Fire Spirit Helmet";
                 level = 34;
-                health = 580;
+                health = 120;
                 defense = 44;
                 magicDefense = 28;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Light Plate Helmet";
                 level = 44;
-                health = 940;
+                health = 190;
                 defense = 70;
                 magicDefense = 48;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 4) {
                 name = "Fury Plate Helmet";
                 level = 54;
-                health = 1300;
+                health = 260;
                 defense = 98;
                 magicDefense = 64;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 5) {
                 name = "Ceres Helmet";
                 level = 64;
-                health = 1740;
+                health = 350;
                 defense = 130;
                 magicDefense = 88;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 6) {
                 name = "Zakar Helmet";
                 level = 74;
-                health = 2180;
+                health = 440;
                 defense = 164;
                 magicDefense = 108;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 7) {
                 name = "Raxes Helmet";
                 level = 84;
-                health = 2900;
+                health = 580;
                 defense = 218;
                 magicDefense = 144;
                 material = Material.IRON_HELMET;
@@ -338,49 +338,49 @@ class Helmets {
             if (placementNumber == 1) {
                 name = "Seaweed Helmet";
                 level = 24;
-                health = 360;
+                health = 70;
                 defense = 27;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Kelp Helmet";
                 level = 34;
-                health = 580;
+                health = 120;
                 defense = 44;
                 magicDefense = 28;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Coral Helmet";
                 level = 44;
-                health = 940;
+                health = 190;
                 defense = 70;
                 magicDefense = 48;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 4) {
                 name = "Aqua Helmet";
                 level = 54;
-                health = 1300;
+                health = 260;
                 defense = 98;
                 magicDefense = 64;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 5) {
                 name = "Water Spirit Helmet";
                 level = 64;
-                health = 1740;
+                health = 350;
                 defense = 130;
                 magicDefense = 88;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 6) {
                 name = "Mera Helmet";
                 level = 74;
-                health = 2180;
+                health = 440;
                 defense = 164;
                 magicDefense = 108;
                 material = Material.IRON_HELMET;
             } else if (placementNumber == 7) {
                 name = "Atlantean Helmet";
                 level = 84;
-                health = 2900;
+                health = 580;
                 defense = 218;
                 magicDefense = 144;
                 material = Material.IRON_HELMET;
@@ -389,49 +389,49 @@ class Helmets {
             if (placementNumber == 1) {
                 name = "Leaf Helmet";
                 level = 24;
-                health = 272;
+                health = 60;
                 defense = 27;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Forest Fairy Helmet";
                 level = 34;
-                health = 440;
+                health = 90;
                 defense = 42;
                 magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Hunter Helmet";
                 level = 44;
-                health = 710;
+                health = 140;
                 defense = 70;
                 magicDefense = 50;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 4) {
                 name = "Speedy Helmet";
                 level = 54;
-                health = 980;
+                health = 200;
                 defense = 100;
                 magicDefense = 65;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 5) {
                 name = "White Wolf Helmet";
                 level = 64;
-                health = 1320;
+                health = 270;
                 defense = 130;
                 magicDefense = 87;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 6) {
                 name = "Moottalis Helmet";
                 level = 74;
-                health = 1600;
+                health = 320;
                 defense = 165;
                 magicDefense = 110;
                 material = Material.CHAINMAIL_HELMET;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Helmet";
                 level = 84;
-                health = 2180;
+                health = 440;
                 defense = 218;
                 magicDefense = 144;
                 material = Material.CHAINMAIL_HELMET;

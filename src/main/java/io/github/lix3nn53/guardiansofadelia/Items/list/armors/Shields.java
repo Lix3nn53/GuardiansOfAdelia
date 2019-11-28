@@ -14,87 +14,87 @@ public class Shields {
         Material material = Material.SHIELD;
         int customModelDataId = 10000001;
         int level = 1;
-        int health = 85;
+        int health = 20;
         int defense = 8;
         int magicDefense = 3;
 
         if (rpgClass.equals(RPGClass.KNIGHT)) {
             if (placementNumber == 2) {
-                health = 214;
+                health = 40;
                 defense = 21;
                 magicDefense = 8;
             } else if (placementNumber == 3) {
-                health = 535;
+                health = 110;
                 defense = 53;
                 magicDefense = 21;
             } else if (placementNumber == 4) {
-                health = 850;
+                health = 170;
                 defense = 85;
                 magicDefense = 34;
             } else if (placementNumber == 5) {
-                health = 1400;
+                health = 280;
                 defense = 140;
                 magicDefense = 55;
             } else if (placementNumber == 6) {
-                health = 1920;
+                health = 380;
                 defense = 192;
                 magicDefense = 77;
             } else if (placementNumber == 7) {
-                health = 2600;
+                health = 520;
                 defense = 250;
                 magicDefense = 102;
             } else if (placementNumber == 8) {
-                health = 3200;
+                health = 640;
                 defense = 320;
                 magicDefense = 128;
             } else if (placementNumber == 9) {
-                health = 4200;
+                health = 840;
                 defense = 426;
                 magicDefense = 171;
             } else if (placementNumber == 10) {
-                health = 5550;
+                health = 1100;
                 defense = 562;
                 magicDefense = 225;
             }
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
             if (placementNumber == 1) {
-                health = 70;
+                health = 15;
                 defense = 5;
                 magicDefense = 6;
             } else if (placementNumber == 2) {
-                health = 170;
+                health = 30;
                 defense = 12;
                 magicDefense = 17;
             } else if (placementNumber == 3) {
-                health = 420;
+                health = 80;
                 defense = 32;
                 magicDefense = 42;
             } else if (placementNumber == 4) {
-                health = 680;
+                health = 130;
                 defense = 50;
                 magicDefense = 70;
             } else if (placementNumber == 5) {
-                health = 1100;
+                health = 220;
                 defense = 84;
                 magicDefense = 112;
             } else if (placementNumber == 6) {
-                health = 1550;
+                health = 310;
                 defense = 115;
                 magicDefense = 153;
             } else if (placementNumber == 7) {
-                health = 2050;
+                health = 410;
                 defense = 153;
                 magicDefense = 204;
             } else if (placementNumber == 8) {
-                health = 2570;
+                health = 510;
                 defense = 192;
                 magicDefense = 258;
             } else if (placementNumber == 9) {
-                health = 3400;
+                health = 680;
                 defense = 255;
                 magicDefense = 342;
             } else if (placementNumber == 10) {
-                health = 4500;
+                health = 900;
                 defense = 336;
                 magicDefense = 450;
             }

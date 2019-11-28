@@ -116,8 +116,7 @@ public class RPGCharacterStats {
 
             playLevelUpAnimation();
             onMaxHealthChange();
-            String levelUpMessage = getLevelUpMessage(newLevel);
-            player.sendMessage(levelUpMessage);
+            sendLevelUpMessage(newLevel);
             player.sendTitle(ChatColor.GOLD + "Level Up!", ChatColor.YELLOW + "Your new level is " + ChatColor.GOLD + newLevel, 30, 80, 30);
         }
 
@@ -748,26 +747,34 @@ public class RPGCharacterStats {
         return 1;
     }
 
-    private String getLevelUpMessage(int newLevel) {
-        String message = ChatColor.GOLD + "Level up! " + ChatColor.YELLOW + "Congratulations, your new level is " + ChatColor.GOLD + newLevel + "";
+    private void sendLevelUpMessage(int newLevel) {
+        player.sendMessage(ChatColor.GOLD + "Level up! " + ChatColor.YELLOW + "Congratulations, your new level is " + ChatColor.GOLD + newLevel + "");
+        int fireBonus = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, newLevel - 1);
+        int waterBonus = rpgClass.getAttributeBonusForLevel(AttributeType.WATER, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.WATER, newLevel - 1);
+        int earthBonus = rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, newLevel - 1);
+        int lightningBonus = rpgClass.getAttributeBonusForLevel(AttributeType.LIGHTNING, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.LIGHTNING, newLevel - 1);
+        int windBonus = rpgClass.getAttributeBonusForLevel(AttributeType.WIND, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.WIND, newLevel - 1);
+
+        player.sendMessage(ChatColor.RED + "+" + fireBonus + " Fire " + ChatColor.BLUE + "+" + waterBonus + " Water " + ChatColor.DARK_GREEN + "+" + earthBonus + " Earth "
+                + ChatColor.AQUA + "+" + lightningBonus + " Lightning " + ChatColor.WHITE + "+" + windBonus + " Wind");
+
         int lastNum = newLevel % 10;
         switch (lastNum) {
             case 0:
-                message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.RED + "weapons";
+                player.sendMessage(ChatColor.YELLOW + "You can equip stronger " + ChatColor.RED + "weapons");
                 break;
             case 2:
-                message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "boots!";
+                player.sendMessage(ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "boots!");
                 break;
             case 4:
-                message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "helmets";
+                player.sendMessage(ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "helmets");
                 break;
             case 6:
-                message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "leggings";
+                player.sendMessage(ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "leggings");
                 break;
             case 8:
-                message += ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "chestplates";
+                player.sendMessage(ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "chestplates");
                 break;
         }
-        return message;
     }
 }

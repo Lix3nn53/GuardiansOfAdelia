@@ -182,8 +182,8 @@ public enum RPGClass {
             }
         }
 
-        double multiplier = 1.2 + (tier * 0.1);
+        double multiplier = 1.45 + (tier * 0.05);
 
-        return (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
+        return (level * (tier - 1) / 2) + (int) ((Math.pow(level, multiplier) / 9) + 0.5);
     }
 }

@@ -1,4 +1,6 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,42 +13,19 @@ public class Test {
     private static final double MULTIPLIER = 0.1;
 
     public static void main(String[] args) {
-        int totalExp = 0;
-        for (int level = 1; level <= 90; level++) {
-            /*int tier = 1;
-            double multiplier = 1.2 + (tier * 0.1);
+        int level = 90;
+        for (RPGClass rpgClass : RPGClass.values()) {
+            if (rpgClass.equals(RPGClass.NO_CLASS)) continue;
+            int fire = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, level);
+            int water = rpgClass.getAttributeBonusForLevel(AttributeType.WATER, level);
+            int earth = rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, level);
+            int lightning = rpgClass.getAttributeBonusForLevel(AttributeType.LIGHTNING, level);
+            int wind = rpgClass.getAttributeBonusForLevel(AttributeType.WIND, level);
 
-            int result1 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
-
-            tier = 2;
-            multiplier = 1.2 + (tier * 0.1);
-
-            int result2 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
-
-            tier = 3;
-            multiplier = 1.2 + (tier * 0.1);
-
-            int result3 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
-
-            tier = 4;
-            multiplier = 1.2 + (tier * 0.1);
-
-            int result4 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
-
-            tier = 5;
-            multiplier = 1.2 + (tier * 0.1);
-
-            int result5 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
-
-            tier = 6;
-            multiplier = 1.2 + (tier * 0.1);
-
-            int result6 = (int) (level * (tier - 1) + (Math.pow(level, multiplier) / 12) + 0.5);
-            System.out.println(level + ": " + result1 + " - " + result2 + " - " + result3 + " - " + result4 + " - " + result5 + " - " + result6);*/
-            int experience = (int) (10 + Math.round(5 * Math.pow(level, 3) / 4) + 0.5);
-            totalExp += experience;
-            System.out.println(level + ": " + experience + " total: " + totalExp);
+            System.out.println("Level " + level + " Class " + rpgClass.toString());
+            System.out.println("Fire" + fire + " Water" + water + " Earth" + earth + " Lightning" + lightning + " Wind" + wind);
         }
+
     }
 
     private static int getBonusValue(int value) {

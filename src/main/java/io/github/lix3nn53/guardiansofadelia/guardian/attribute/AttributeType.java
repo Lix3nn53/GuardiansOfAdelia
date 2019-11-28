@@ -30,7 +30,7 @@ public enum AttributeType {
             case LIGHTNING:
                 return 1;
             case EARTH:
-                return 5;
+                return 10;
             case WATER:
                 return 1;
             case WIND:
