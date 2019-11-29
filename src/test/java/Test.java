@@ -1,6 +1,5 @@
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +12,7 @@ public class Test {
     private static final double MULTIPLIER = 0.1;
 
     public static void main(String[] args) {
-        int level = 90;
+        /*int level = 90;
         for (RPGClass rpgClass : RPGClass.values()) {
             if (rpgClass.equals(RPGClass.NO_CLASS)) continue;
             int fire = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, level);
@@ -24,8 +23,15 @@ public class Test {
 
             System.out.println("Level " + level + " Class " + rpgClass.toString());
             System.out.println("Fire" + fire + " Water" + water + " Earth" + earth + " Lightning" + lightning + " Wind" + wind);
-        }
+        }*/
 
+        int totalDefense = 2000;
+        double damage = 1800;
+
+        double reduction = StatUtils.getDefenseReduction(totalDefense);
+
+        damage = damage * reduction;
+        System.out.println("damage: " + damage);
     }
 
     private static int getBonusValue(int value) {

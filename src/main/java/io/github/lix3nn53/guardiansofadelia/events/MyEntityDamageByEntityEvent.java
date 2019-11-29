@@ -321,8 +321,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             double reduction = StatUtils.getDefenseReduction(totalDefense);
 
                             damage = damage * reduction;
-
-                            event.setDamage(damage);
                         }
                     }
                 }

@@ -15,87 +15,87 @@ public class Shields {
         int customModelDataId = 10000001;
         int level = 1;
         int health = 30;
-        int defense = 8;
-        int magicDefense = 3;
+        int defense = 10;
+        int magicDefense = 5;
 
         if (rpgClass.equals(RPGClass.KNIGHT)) {
             if (placementNumber == 2) {
                 health = 70;
-                defense = 21;
-                magicDefense = 8;
+                defense = 20;
+                magicDefense = 10;
             } else if (placementNumber == 3) {
                 health = 180;
-                defense = 53;
-                magicDefense = 21;
+                defense = 50;
+                magicDefense = 20;
             } else if (placementNumber == 4) {
                 health = 280;
-                defense = 85;
-                magicDefense = 34;
+                defense = 90;
+                magicDefense = 40;
             } else if (placementNumber == 5) {
                 health = 450;
                 defense = 140;
-                magicDefense = 55;
+                magicDefense = 60;
             } else if (placementNumber == 6) {
                 health = 610;
-                defense = 192;
-                magicDefense = 77;
+                defense = 190;
+                magicDefense = 80;
             } else if (placementNumber == 7) {
                 health = 830;
                 defense = 250;
-                magicDefense = 102;
+                magicDefense = 100;
             } else if (placementNumber == 8) {
                 health = 1000;
                 defense = 320;
-                magicDefense = 128;
+                magicDefense = 120;
             } else if (placementNumber == 9) {
                 health = 1400;
-                defense = 426;
-                magicDefense = 171;
+                defense = 420;
+                magicDefense = 170;
             } else if (placementNumber == 10) {
                 health = 1800;
-                defense = 562;
-                magicDefense = 225;
+                defense = 550;
+                magicDefense = 220;
             }
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
             if (placementNumber == 1) {
                 health = 25;
                 defense = 5;
-                magicDefense = 6;
+                magicDefense = 10;
             } else if (placementNumber == 2) {
                 health = 50;
-                defense = 12;
-                magicDefense = 17;
+                defense = 15;
+                magicDefense = 20;
             } else if (placementNumber == 3) {
                 health = 120;
-                defense = 32;
-                magicDefense = 42;
+                defense = 30;
+                magicDefense = 40;
             } else if (placementNumber == 4) {
                 health = 210;
                 defense = 50;
                 magicDefense = 70;
             } else if (placementNumber == 5) {
                 health = 350;
-                defense = 84;
-                magicDefense = 112;
+                defense = 90;
+                magicDefense = 110;
             } else if (placementNumber == 6) {
                 health = 500;
-                defense = 115;
-                magicDefense = 153;
+                defense = 120;
+                magicDefense = 150;
             } else if (placementNumber == 7) {
                 health = 650;
-                defense = 153;
-                magicDefense = 204;
+                defense = 160;
+                magicDefense = 200;
             } else if (placementNumber == 8) {
                 health = 820;
-                defense = 192;
-                magicDefense = 258;
+                defense = 200;
+                magicDefense = 260;
             } else if (placementNumber == 9) {
                 health = 1100;
-                defense = 255;
-                magicDefense = 342;
+                defense = 270;
+                magicDefense = 340;
             } else if (placementNumber == 10) {
                 health = 1500;
-                defense = 336;
+                defense = 340;
                 magicDefense = 450;
             }
         }

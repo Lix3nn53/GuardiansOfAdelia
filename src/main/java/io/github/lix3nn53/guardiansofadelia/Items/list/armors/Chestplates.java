@@ -16,8 +16,8 @@ class Chestplates {
         Material material = Material.LEATHER_CHESTPLATE;
         int level = 8;
         int health = 40;
-        int defense = 28;
-        int magicDefense = 24;
+        int defense = 30;
+        int magicDefense = 20;
         boolean isColorful = false;
 
         if (rpgClass.equals(RPGClass.NO_CLASS)) {
@@ -25,16 +25,16 @@ class Chestplates {
                 name = "Hide Chestplate";
                 level = 18;
                 health = 80;
-                defense = 42;
-                magicDefense = 33;
+                defense = 40;
+                magicDefense = 30;
             }
         } else if (rpgClass.equals(RPGClass.ARCHER)) {
             if (placementNumber == 1) {
                 name = "Leaf Chestplate";
                 level = 28;
                 health = 140;
-                defense = 53;
-                magicDefense = 38;
+                defense = 50;
+                magicDefense = 40;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Forest Fairy Chestplate";
@@ -47,14 +47,14 @@ class Chestplates {
                 name = "Hunter Chestplate";
                 level = 48;
                 health = 320;
-                defense = 141;
-                magicDefense = 94;
+                defense = 140;
+                magicDefense = 90;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 4) {
                 name = "Speedy Chestplate";
                 level = 58;
                 health = 450;
-                defense = 196;
+                defense = 200;
                 magicDefense = 130;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 5) {
@@ -62,20 +62,20 @@ class Chestplates {
                 level = 68;
                 health = 560;
                 defense = 260;
-                magicDefense = 174;
+                magicDefense = 170;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 6) {
                 name = "Moottalis Chestplate";
                 level = 78;
                 health = 720;
-                defense = 325;
-                magicDefense = 218;
+                defense = 320;
+                magicDefense = 210;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Chestplate";
                 level = 88;
                 health = 940;
-                defense = 435;
+                defense = 430;
                 magicDefense = 290;
                 material = Material.CHAINMAIL_CHESTPLATE;
             }
@@ -84,22 +84,22 @@ class Chestplates {
                 name = "BlueSky Chestplate";
                 level = 28;
                 health = 240;
-                defense = 71;
-                magicDefense = 28;
+                defense = 70;
+                magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Sky Fairy Chestplate";
                 level = 38;
                 health = 370;
-                defense = 114;
-                magicDefense = 45;
+                defense = 110;
+                magicDefense = 40;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Half Plate Chestplate";
                 level = 48;
                 health = 600;
-                defense = 185;
-                magicDefense = 74;
+                defense = 180;
+                magicDefense = 70;
                 material = Material.DIAMOND_CHESTPLATE;
             } else if (placementNumber == 4) {
                 name = "Mighty Plate Chestplate";
@@ -112,15 +112,15 @@ class Chestplates {
                 name = "Elisa Chestplate";
                 level = 68;
                 health = 1100;
-                defense = 342;
-                magicDefense = 135;
+                defense = 340;
+                magicDefense = 130;
                 material = Material.DIAMOND_CHESTPLATE;
             } else if (placementNumber == 6) {
                 name = "Gloria Chestplate";
                 level = 78;
                 health = 1400;
-                defense = 424;
-                magicDefense = 171;
+                defense = 420;
+                magicDefense = 170;
                 material = Material.DIAMOND_CHESTPLATE;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Chestplate";
@@ -135,8 +135,8 @@ class Chestplates {
                 name = "Silk Chestplate";
                 level = 28;
                 health = 140;
-                defense = 38;
-                magicDefense = 38;
+                defense = 40;
+                magicDefense = 40;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Eli Chestplate";
@@ -156,29 +156,29 @@ class Chestplates {
                 name = "Wizardy Chestplate";
                 level = 58;
                 health = 450;
-                defense = 128;
-                magicDefense = 128;
+                defense = 130;
+                magicDefense = 130;
                 material = Material.GOLDEN_CHESTPLATE;
             } else if (placementNumber == 5) {
                 name = "Xhar Chestplate";
                 level = 68;
                 health = 570;
-                defense = 174;
-                magicDefense = 174;
+                defense = 170;
+                magicDefense = 170;
                 material = Material.GOLDEN_CHESTPLATE;
             } else if (placementNumber == 6) {
                 name = "Chamor Chestplate";
                 level = 78;
                 health = 720;
-                defense = 216;
-                magicDefense = 216;
+                defense = 220;
+                magicDefense = 220;
                 material = Material.GOLDEN_CHESTPLATE;
             } else if (placementNumber == 7) {
                 name = "Neferti Chestplate";
                 level = 88;
                 health = 940;
-                defense = 288;
-                magicDefense = 288;
+                defense = 290;
+                magicDefense = 290;
                 material = Material.GOLDEN_CHESTPLATE;
             }
         } else if (rpgClass.equals(RPGClass.ROGUE)) {
@@ -186,28 +186,28 @@ class Chestplates {
                 name = "Sunset Chestplate";
                 level = 28;
                 health = 180;
-                defense = 53;
-                magicDefense = 38;
+                defense = 50;
+                magicDefense = 40;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Dark Wind Chestplate";
                 level = 38;
                 health = 290;
                 defense = 90;
-                magicDefense = 58;
+                magicDefense = 60;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Terra Chestplate";
                 level = 48;
                 health = 470;
-                defense = 141;
-                magicDefense = 94;
+                defense = 140;
+                magicDefense = 90;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 4) {
                 name = "Lupy Chestplate";
                 level = 58;
                 health = 630;
-                defense = 196;
+                defense = 200;
                 magicDefense = 130;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 5) {
@@ -215,21 +215,21 @@ class Chestplates {
                 level = 68;
                 health = 850;
                 defense = 260;
-                magicDefense = 174;
+                magicDefense = 170;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 6) {
                 name = "Luna Chestplate";
                 level = 78;
                 health = 1050;
-                defense = 325;
-                magicDefense = 218;
+                defense = 320;
+                magicDefense = 220;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 7) {
                 name = "Shadow Chestplate";
                 level = 88;
                 health = 1400;
-                defense = 435;
-                magicDefense = 288;
+                defense = 430;
+                magicDefense = 290;
                 material = Material.CHAINMAIL_CHESTPLATE;
             }
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
@@ -237,43 +237,43 @@ class Chestplates {
                 name = "Sunrise Chestplate";
                 level = 28;
                 health = 190;
-                defense = 42;
-                magicDefense = 57;
+                defense = 40;
+                magicDefense = 60;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "August Chestplate";
                 level = 38;
                 health = 290;
-                defense = 68;
-                magicDefense = 91;
+                defense = 70;
+                magicDefense = 90;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Rhythm Chestplate";
                 level = 48;
                 health = 470;
-                defense = 112;
-                magicDefense = 148;
+                defense = 110;
+                magicDefense = 150;
                 material = Material.DIAMOND_CHESTPLATE;
             } else if (placementNumber == 4) {
                 name = "Eleaza Chestplate";
                 level = 58;
                 health = 650;
-                defense = 154;
-                magicDefense = 205;
+                defense = 150;
+                magicDefense = 210;
                 material = Material.DIAMOND_CHESTPLATE;
             } else if (placementNumber == 5) {
                 name = "Gaia Chestplate";
                 level = 68;
                 health = 900;
-                defense = 205;
-                magicDefense = 274;
+                defense = 210;
+                magicDefense = 270;
                 material = Material.DIAMOND_CHESTPLATE;
             } else if (placementNumber == 6) {
                 name = "Holyshion Chestplate";
                 level = 78;
                 health = 1100;
-                defense = 258;
-                magicDefense = 342;
+                defense = 260;
+                magicDefense = 340;
                 material = Material.DIAMOND_CHESTPLATE;
             } else if (placementNumber == 7) {
                 name = "Khraje Chestplate";
@@ -288,28 +288,28 @@ class Chestplates {
                 name = "Magma Chestplate";
                 level = 28;
                 health = 240;
-                defense = 53;
-                magicDefense = 35;
+                defense = 50;
+                magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Fire Spirit Chestplate";
                 level = 38;
                 health = 370;
-                defense = 88;
-                magicDefense = 58;
+                defense = 90;
+                magicDefense = 60;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Light Plate Chestplate";
                 level = 48;
                 health = 610;
-                defense = 142;
-                magicDefense = 96;
+                defense = 140;
+                magicDefense = 90;
                 material = Material.IRON_CHESTPLATE;
             } else if (placementNumber == 4) {
                 name = "Fury Plate Chestplate";
                 level = 58;
                 health = 840;
-                defense = 196;
+                defense = 200;
                 magicDefense = 130;
                 material = Material.IRON_CHESTPLATE;
             } else if (placementNumber == 5) {
@@ -317,21 +317,21 @@ class Chestplates {
                 level = 68;
                 health = 1100;
                 defense = 260;
-                magicDefense = 174;
+                magicDefense = 170;
                 material = Material.IRON_CHESTPLATE;
             } else if (placementNumber == 6) {
                 name = "Zakar Chestplate";
                 level = 78;
                 health = 1400;
-                defense = 328;
-                magicDefense = 218;
+                defense = 330;
+                magicDefense = 220;
                 material = Material.IRON_CHESTPLATE;
             } else if (placementNumber == 7) {
                 name = "Raxes Chestplate";
                 level = 88;
                 health = 1900;
-                defense = 432;
-                magicDefense = 288;
+                defense = 430;
+                magicDefense = 290;
                 material = Material.IRON_CHESTPLATE;
             }
         } else if (rpgClass.equals(RPGClass.MONK)) {
@@ -339,28 +339,28 @@ class Chestplates {
                 name = "Seaweed Chestplate";
                 level = 28;
                 health = 240;
-                defense = 53;
-                magicDefense = 35;
+                defense = 50;
+                magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Kelp Chestplate";
                 level = 38;
                 health = 370;
-                defense = 88;
-                magicDefense = 58;
+                defense = 90;
+                magicDefense = 60;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Coral Chestplate";
                 level = 48;
                 health = 610;
-                defense = 142;
-                magicDefense = 96;
+                defense = 140;
+                magicDefense = 90;
                 material = Material.IRON_CHESTPLATE;
             } else if (placementNumber == 4) {
                 name = "Aqua Chestplate";
                 level = 58;
                 health = 840;
-                defense = 196;
+                defense = 200;
                 magicDefense = 130;
                 material = Material.IRON_CHESTPLATE;
             } else if (placementNumber == 5) {
@@ -368,21 +368,21 @@ class Chestplates {
                 level = 68;
                 health = 1100;
                 defense = 260;
-                magicDefense = 174;
+                magicDefense = 170;
                 material = Material.IRON_CHESTPLATE;
             } else if (placementNumber == 6) {
                 name = "Mera Chestplate";
                 level = 78;
                 health = 1400;
-                defense = 328;
-                magicDefense = 218;
+                defense = 330;
+                magicDefense = 220;
                 material = Material.IRON_CHESTPLATE;
             } else if (placementNumber == 7) {
                 name = "Atlantean Chestplate";
                 level = 88;
                 health = 1900;
-                defense = 432;
-                magicDefense = 288;
+                defense = 430;
+                magicDefense = 290;
                 material = Material.IRON_CHESTPLATE;
             }
         } else if (rpgClass.equals(RPGClass.HUNTER)) {
@@ -390,8 +390,8 @@ class Chestplates {
                 name = "Leaf Chestplate";
                 level = 28;
                 health = 180;
-                defense = 53;
-                magicDefense = 38;
+                defense = 50;
+                magicDefense = 40;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Forest Fairy Chestplate";
@@ -404,14 +404,14 @@ class Chestplates {
                 name = "Hunter Chestplate";
                 level = 48;
                 health = 470;
-                defense = 141;
-                magicDefense = 94;
+                defense = 140;
+                magicDefense = 90;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 4) {
                 name = "Speedy Chestplate";
                 level = 58;
                 health = 630;
-                defense = 196;
+                defense = 200;
                 magicDefense = 130;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 5) {
@@ -419,20 +419,20 @@ class Chestplates {
                 level = 68;
                 health = 850;
                 defense = 260;
-                magicDefense = 174;
+                magicDefense = 170;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 6) {
                 name = "Moottalis Chestplate";
                 level = 78;
                 health = 1050;
                 defense = 325;
-                magicDefense = 218;
+                magicDefense = 220;
                 material = Material.CHAINMAIL_CHESTPLATE;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Chestplate";
                 level = 88;
                 health = 1400;
-                defense = 435;
+                defense = 420;
                 magicDefense = 290;
                 material = Material.CHAINMAIL_CHESTPLATE;
             }

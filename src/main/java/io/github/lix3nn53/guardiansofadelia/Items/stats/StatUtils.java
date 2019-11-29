@@ -192,6 +192,6 @@ public class StatUtils {
     }
 
     public static double getDefenseReduction(int totalDefense) {
-        return (1 - (totalDefense / (totalDefense + 3000.0))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
+        return (1 - (totalDefense / (totalDefense + 2000.0))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
     }
 }

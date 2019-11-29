@@ -16,8 +16,8 @@ class Leggings {
         Material material = Material.LEATHER_LEGGINGS;
         int level = 6;
         int health = 30;
-        int defense = 16;
-        int magicDefense = 12;
+        int defense = 20;
+        int magicDefense = 10;
         boolean isColorful = false;
 
         if (rpgClass.equals(RPGClass.NO_CLASS)) {
@@ -25,8 +25,8 @@ class Leggings {
                 name = "Hide Leggings";
                 level = 16;
                 health = 60;
-                defense = 24;
-                magicDefense = 18;
+                defense = 30;
+                magicDefense = 20;
             }
         } else if (rpgClass.equals(RPGClass.ARCHER)) {
             if (placementNumber == 1) {
@@ -34,20 +34,20 @@ class Leggings {
                 level = 26;
                 health = 100;
                 defense = 40;
-                magicDefense = 26;
+                magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Forest Fairy Leggings";
                 level = 36;
                 health = 150;
-                defense = 64;
-                magicDefense = 42;
+                defense = 70;
+                magicDefense = 40;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Hunter Leggings";
                 level = 46;
                 health = 240;
-                defense = 105;
+                defense = 110;
                 magicDefense = 70;
                 material = Material.CHAINMAIL_LEGGINGS;
             } else if (placementNumber == 4) {
@@ -68,15 +68,15 @@ class Leggings {
                 name = "Moottalis Leggings";
                 level = 76;
                 health = 520;
-                defense = 245;
-                magicDefense = 162;
+                defense = 250;
+                magicDefense = 160;
                 material = Material.CHAINMAIL_LEGGINGS;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Leggings";
                 level = 86;
                 health = 720;
-                defense = 325;
-                magicDefense = 218;
+                defense = 320;
+                magicDefense = 210;
                 material = Material.CHAINMAIL_LEGGINGS;
             }
         } else if (rpgClass.equals(RPGClass.KNIGHT)) {
@@ -84,50 +84,50 @@ class Leggings {
                 name = "BlueSky Leggings";
                 level = 26;
                 health = 180;
-                defense = 53;
-                magicDefense = 21;
+                defense = 60;
+                magicDefense = 20;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Sky Fairy Leggings";
                 level = 36;
                 health = 280;
-                defense = 85;
-                magicDefense = 34;
+                defense = 90;
+                magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Half Plate Leggings";
                 level = 46;
                 health = 450;
                 defense = 140;
-                magicDefense = 55;
+                magicDefense = 60;
                 material = Material.DIAMOND_LEGGINGS;
             } else if (placementNumber == 4) {
                 name = "Mighty Plate Leggings";
                 level = 56;
                 health = 640;
-                defense = 192;
-                magicDefense = 77;
+                defense = 190;
+                magicDefense = 80;
                 material = Material.DIAMOND_LEGGINGS;
             } else if (placementNumber == 5) {
                 name = "Elisa Leggings";
                 level = 66;
                 health = 850;
                 defense = 250;
-                magicDefense = 102;
+                magicDefense = 100;
                 material = Material.DIAMOND_LEGGINGS;
             } else if (placementNumber == 6) {
                 name = "Gloria Leggings";
                 level = 76;
                 health = 1000;
                 defense = 320;
-                magicDefense = 128;
+                magicDefense = 120;
                 material = Material.DIAMOND_LEGGINGS;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Leggings";
                 level = 86;
                 health = 1400;
-                defense = 426;
-                magicDefense = 171;
+                defense = 420;
+                magicDefense = 170;
                 material = Material.DIAMOND_LEGGINGS;
             }
         } else if (rpgClass.equals(RPGClass.MAGE)) {
@@ -135,15 +135,15 @@ class Leggings {
                 name = "Silk Leggings";
                 level = 26;
                 health = 100;
-                defense = 28;
-                magicDefense = 28;
+                defense = 30;
+                magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Eli Leggings";
                 level = 36;
                 health = 150;
-                defense = 45;
-                magicDefense = 45;
+                defense = 50;
+                magicDefense = 50;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Wisdom Leggings";
@@ -163,22 +163,22 @@ class Leggings {
                 name = "Xhar Leggings";
                 level = 66;
                 health = 450;
-                defense = 128;
-                magicDefense = 128;
+                defense = 130;
+                magicDefense = 130;
                 material = Material.GOLDEN_LEGGINGS;
             } else if (placementNumber == 6) {
                 name = "Chamor Leggings";
                 level = 76;
                 health = 550;
-                defense = 164;
-                magicDefense = 164;
+                defense = 160;
+                magicDefense = 160;
                 material = Material.GOLDEN_LEGGINGS;
             } else if (placementNumber == 7) {
                 name = "Neferti Leggings";
                 level = 86;
                 health = 720;
-                defense = 216;
-                magicDefense = 216;
+                defense = 210;
+                magicDefense = 210;
                 material = Material.GOLDEN_LEGGINGS;
             }
         } else if (rpgClass.equals(RPGClass.ROGUE)) {
@@ -187,20 +187,20 @@ class Leggings {
                 level = 26;
                 health = 150;
                 defense = 40;
-                magicDefense = 27;
+                magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Dark Wind Leggings";
                 level = 36;
                 health = 210;
-                defense = 64;
-                magicDefense = 44;
+                defense = 70;
+                magicDefense = 40;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Terra Leggings";
                 level = 46;
                 health = 340;
-                defense = 105;
+                defense = 100;
                 magicDefense = 70;
                 material = Material.CHAINMAIL_LEGGINGS;
             } else if (placementNumber == 4) {
@@ -208,7 +208,7 @@ class Leggings {
                 level = 56;
                 health = 470;
                 defense = 150;
-                magicDefense = 98;
+                magicDefense = 100;
                 material = Material.CHAINMAIL_LEGGINGS;
             } else if (placementNumber == 5) {
                 name = "White Fox Leggings";
@@ -221,15 +221,15 @@ class Leggings {
                 name = "Luna Leggings";
                 level = 76;
                 health = 800;
-                defense = 245;
-                magicDefense = 164;
+                defense = 240;
+                magicDefense = 160;
                 material = Material.CHAINMAIL_LEGGINGS;
             } else if (placementNumber == 7) {
                 name = "Shadow Leggings";
                 level = 86;
                 health = 1100;
-                defense = 325;
-                magicDefense = 218;
+                defense = 320;
+                magicDefense = 210;
                 material = Material.CHAINMAIL_LEGGINGS;
             }
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
@@ -237,22 +237,22 @@ class Leggings {
                 name = "Sunrise Leggings";
                 level = 26;
                 health = 150;
-                defense = 32;
-                magicDefense = 42;
+                defense = 30;
+                magicDefense = 40;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "August Leggings";
                 level = 36;
                 health = 230;
-                defense = 51;
-                magicDefense = 68;
+                defense = 50;
+                magicDefense = 70;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Rhythm Leggings";
                 level = 46;
                 health = 360;
-                defense = 84;
-                magicDefense = 112;
+                defense = 90;
+                magicDefense = 110;
                 material = Material.DIAMOND_LEGGINGS;
             } else if (placementNumber == 4) {
                 name = "Eleaza Leggings";
@@ -265,22 +265,22 @@ class Leggings {
                 name = "Gaia Leggings";
                 level = 66;
                 health = 670;
-                defense = 155;
-                magicDefense = 205;
+                defense = 160;
+                magicDefense = 200;
                 material = Material.DIAMOND_LEGGINGS;
             } else if (placementNumber == 6) {
                 name = "Holyshion Leggings";
                 level = 76;
                 health = 840;
-                defense = 192;
-                magicDefense = 258;
+                defense = 200;
+                magicDefense = 250;
                 material = Material.DIAMOND_LEGGINGS;
             } else if (placementNumber == 7) {
                 name = "Khraje Leggings";
                 level = 86;
                 health = 1100;
-                defense = 255;
-                magicDefense = 342;
+                defense = 250;
+                magicDefense = 340;
                 material = Material.DIAMOND_LEGGINGS;
             }
         } else if (rpgClass.equals(RPGClass.WARRIOR)) {
@@ -289,49 +289,49 @@ class Leggings {
                 level = 26;
                 health = 180;
                 defense = 40;
-                magicDefense = 28;
+                magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Fire Spirit Leggings";
                 level = 36;
                 health = 290;
-                defense = 65;
-                magicDefense = 44;
+                defense = 70;
+                magicDefense = 40;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Light Plate Leggings";
                 level = 46;
                 health = 470;
-                defense = 108;
+                defense = 110;
                 magicDefense = 70;
                 material = Material.IRON_LEGGINGS;
             } else if (placementNumber == 4) {
                 name = "Fury Plate Leggings";
                 level = 56;
                 health = 640;
-                defense = 148;
-                magicDefense = 98;
+                defense = 140;
+                magicDefense = 90;
                 material = Material.IRON_LEGGINGS;
             } else if (placementNumber == 5) {
                 name = "Ceres Leggings";
                 level = 66;
                 health = 830;
-                defense = 196;
+                defense = 190;
                 magicDefense = 130;
                 material = Material.IRON_LEGGINGS;
             } else if (placementNumber == 6) {
                 name = "Zakar Leggings";
                 level = 76;
                 health = 1000;
-                defense = 245;
-                magicDefense = 164;
+                defense = 240;
+                magicDefense = 160;
                 material = Material.IRON_LEGGINGS;
             } else if (placementNumber == 7) {
                 name = "Raxes Leggings";
                 level = 86;
                 health = 1400;
-                defense = 328;
-                magicDefense = 216;
+                defense = 320;
+                magicDefense = 210;
                 material = Material.IRON_LEGGINGS;
             }
         } else if (rpgClass.equals(RPGClass.MONK)) {
@@ -340,49 +340,49 @@ class Leggings {
                 level = 26;
                 health = 180;
                 defense = 40;
-                magicDefense = 28;
+                magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Kelp Leggings";
                 level = 36;
                 health = 290;
-                defense = 65;
-                magicDefense = 44;
+                defense = 70;
+                magicDefense = 40;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Coral Leggings";
                 level = 46;
                 health = 470;
-                defense = 108;
+                defense = 110;
                 magicDefense = 70;
                 material = Material.IRON_LEGGINGS;
             } else if (placementNumber == 4) {
                 name = "Aqua Leggings";
                 level = 56;
                 health = 640;
-                defense = 148;
-                magicDefense = 98;
+                defense = 150;
+                magicDefense = 100;
                 material = Material.IRON_LEGGINGS;
             } else if (placementNumber == 5) {
                 name = "Water Spirit Leggings";
                 level = 66;
                 health = 830;
-                defense = 196;
+                defense = 200;
                 magicDefense = 130;
                 material = Material.IRON_LEGGINGS;
             } else if (placementNumber == 6) {
                 name = "Mera Leggings";
                 level = 76;
                 health = 1000;
-                defense = 245;
-                magicDefense = 164;
+                defense = 240;
+                magicDefense = 160;
                 material = Material.IRON_LEGGINGS;
             } else if (placementNumber == 7) {
                 name = "Atlantean Leggings";
                 level = 86;
                 health = 1400;
-                defense = 328;
-                magicDefense = 216;
+                defense = 320;
+                magicDefense = 210;
                 material = Material.IRON_LEGGINGS;
             }
         } else if (rpgClass.equals(RPGClass.HUNTER)) {
@@ -391,20 +391,20 @@ class Leggings {
                 level = 26;
                 health = 150;
                 defense = 40;
-                magicDefense = 26;
+                magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Forest Fairy Leggings";
                 level = 36;
                 health = 210;
-                defense = 64;
-                magicDefense = 42;
+                defense = 70;
+                magicDefense = 40;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Hunter Leggings";
                 level = 46;
                 health = 340;
-                defense = 105;
+                defense = 110;
                 magicDefense = 70;
                 material = Material.CHAINMAIL_LEGGINGS;
             } else if (placementNumber == 4) {
@@ -425,15 +425,15 @@ class Leggings {
                 name = "Moottalis Leggings";
                 level = 76;
                 health = 800;
-                defense = 245;
-                magicDefense = 162;
+                defense = 240;
+                magicDefense = 160;
                 material = Material.CHAINMAIL_LEGGINGS;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Leggings";
                 level = 86;
                 health = 1100;
-                defense = 325;
-                magicDefense = 218;
+                defense = 320;
+                magicDefense = 220;
                 material = Material.CHAINMAIL_LEGGINGS;
             }
         }
