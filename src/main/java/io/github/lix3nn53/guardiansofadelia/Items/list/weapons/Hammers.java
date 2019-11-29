@@ -16,54 +16,54 @@ class Hammers {
         int customModelDataId = 10000001;
         int level = 1;
         RPGClass rpgClass = RPGClass.PALADIN;
-        int damage = 4;
+        int damage = 10;
         AttackSpeed attackSpeed = AttackSpeed.SLOW;
 
         if (placementNumber == 2) {
             name = "Stout Mace";
             customModelDataId = 10000002;
             level = 10;
-            damage = 16;
+            damage = 18;
         } else if (placementNumber == 3) {
             name = "Steel Hammer";
             customModelDataId = 10000003;
             level = 20;
-            damage = 40;
+            damage = 30;
         } else if (placementNumber == 4) {
             name = "War Hammer";
             customModelDataId = 10000004;
             level = 30;
-            damage = 100;
+            damage = 75;
         } else if (placementNumber == 5) {
             name = "Wind Hammer";
             customModelDataId = 10000005;
             level = 40;
-            damage = 160;
+            damage = 120;
         } else if (placementNumber == 6) {
             name = "Mace of Doom";
             customModelDataId = 10000006;
             level = 50;
-            damage = 260;
+            damage = 190;
         } else if (placementNumber == 7) {
             name = "Volcano Hammer";
             customModelDataId = 10000008;
             level = 60;
-            damage = 360;
+            damage = 270;
         } else if (placementNumber == 8) {
             name = "Emerald Hammer";
             customModelDataId = 10000010;
             level = 70;
-            damage = 480;
+            damage = 360;
         } else if (placementNumber == 9) {
             name = "Lightbringer Hammer";
             customModelDataId = 10000012;
             level = 80;
-            damage = 600;
+            damage = 450;
         } else if (placementNumber == 10) {
             name = "Guardian Angel Hammer";
             customModelDataId = 10000014;
             level = 90;
-            damage = 800;
+            damage = 600;
         }
 
         final WeaponMelee weapon = new WeaponMelee(name, tier, itemTag, material, customModelDataId, level, rpgClass, damage, bonusPercent,

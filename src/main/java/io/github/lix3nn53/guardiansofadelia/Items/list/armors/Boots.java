@@ -15,7 +15,7 @@ class Boots {
         String name = "Leather Boots";
         Material material = Material.LEATHER_BOOTS;
         int level = 2;
-        int health = 10;
+        int health = 20;
         int defense = 10;
         int magicDefense = 7;
         boolean isColorful = false;
@@ -24,7 +24,7 @@ class Boots {
             if (placementNumber == 2) {
                 name = "Hide Boots";
                 level = 12;
-                health = 20;
+                health = 40;
                 defense = 14;
                 magicDefense = 10;
             }
@@ -32,49 +32,49 @@ class Boots {
             if (placementNumber == 1) {
                 name = "Leaf Boots";
                 level = 22;
-                health = 40;
+                health = 70;
                 defense = 27;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Forest Fairy Boots";
                 level = 32;
-                health = 60;
+                health = 100;
                 defense = 42;
                 magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Hunter Boots";
                 level = 42;
-                health = 90;
+                health = 150;
                 defense = 70;
                 magicDefense = 50;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 4) {
                 name = "Speedy Boots";
                 level = 52;
-                health = 130;
+                health = 210;
                 defense = 100;
                 magicDefense = 65;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 5) {
                 name = "White Wolf Boots";
                 level = 62;
-                health = 170;
+                health = 270;
                 defense = 130;
                 magicDefense = 87;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 6) {
                 name = "Moottalis Boots";
                 level = 72;
-                health = 220;
+                health = 350;
                 defense = 165;
                 magicDefense = 110;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Boots";
                 level = 82;
-                health = 290;
+                health = 470;
                 defense = 218;
                 magicDefense = 144;
                 material = Material.CHAINMAIL_BOOTS;
@@ -83,49 +83,49 @@ class Boots {
             if (placementNumber == 1) {
                 name = "BlueSky Boots";
                 level = 22;
-                health = 70;
+                health = 120;
                 defense = 35;
                 magicDefense = 14;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Sky Fairy Boots";
                 level = 32;
-                health = 120;
+                health = 190;
                 defense = 58;
                 magicDefense = 22;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Half Plate Boots";
                 level = 42;
-                health = 190;
+                health = 310;
                 defense = 92;
                 magicDefense = 37;
                 material = Material.DIAMOND_BOOTS;
             } else if (placementNumber == 4) {
                 name = "Mighty Plate Boots";
                 level = 52;
-                health = 260;
+                health = 420;
                 defense = 128;
                 magicDefense = 51;
                 material = Material.DIAMOND_BOOTS;
             } else if (placementNumber == 5) {
                 name = "Elisa Boots";
                 level = 62;
-                health = 340;
+                health = 550;
                 defense = 172;
                 magicDefense = 68;
                 material = Material.DIAMOND_BOOTS;
             } else if (placementNumber == 6) {
                 name = "Gloria Boots";
                 level = 72;
-                health = 420;
+                health = 680;
                 defense = 214;
                 magicDefense = 85;
                 material = Material.DIAMOND_BOOTS;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Boots";
                 level = 82;
-                health = 560;
+                health = 900;
                 defense = 280;
                 magicDefense = 114;
                 material = Material.DIAMOND_BOOTS;
@@ -134,49 +134,49 @@ class Boots {
             if (placementNumber == 1) {
                 name = "Silk Boots";
                 level = 22;
-                health = 40;
+                health = 70;
                 defense = 18;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Eli Boots";
                 level = 32;
-                health = 60;
+                health = 100;
                 defense = 28;
                 magicDefense = 28;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Wisdom Boots";
                 level = 42;
-                health = 90;
+                health = 150;
                 defense = 48;
                 magicDefense = 48;
                 material = Material.GOLDEN_BOOTS;
             } else if (placementNumber == 4) {
                 name = "Wizardy Boots";
                 level = 52;
-                health = 130;
+                health = 210;
                 defense = 64;
                 magicDefense = 64;
                 material = Material.GOLDEN_BOOTS;
             } else if (placementNumber == 5) {
                 name = "Xhar Boots";
                 level = 62;
-                health = 170;
+                health = 270;
                 defense = 90;
                 magicDefense = 90;
                 material = Material.GOLDEN_BOOTS;
             } else if (placementNumber == 6) {
                 name = "Chamor Boots";
                 level = 72;
-                health = 220;
+                health = 350;
                 defense = 105;
                 magicDefense = 105;
                 material = Material.GOLDEN_BOOTS;
             } else if (placementNumber == 7) {
                 name = "Neferti Boots";
                 level = 82;
-                health = 290;
+                health = 470;
                 defense = 150;
                 magicDefense = 150;
                 material = Material.GOLDEN_BOOTS;
@@ -185,49 +185,49 @@ class Boots {
             if (placementNumber == 1) {
                 name = "Sunset Boots";
                 level = 22;
-                health = 60;
+                health = 90;
                 defense = 27;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Dark Wind Boots";
                 level = 32;
-                health = 90;
+                health = 150;
                 defense = 42;
                 magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Terra Boots";
                 level = 42;
-                health = 140;
+                health = 220;
                 defense = 70;
                 magicDefense = 48;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 4) {
                 name = "Lupy Boots";
                 level = 52;
-                health = 200;
+                health = 320;
                 defense = 100;
                 magicDefense = 65;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 5) {
                 name = "White Fox Boots";
                 level = 62;
-                health = 270;
+                health = 430;
                 defense = 130;
                 magicDefense = 88;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 6) {
                 name = "Luna Boots";
                 level = 72;
-                health = 320;
+                health = 500;
                 defense = 165;
                 magicDefense = 110;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 7) {
                 name = "Shadow Boots";
                 level = 82;
-                health = 440;
+                health = 700;
                 defense = 218;
                 magicDefense = 144;
                 material = Material.CHAINMAIL_BOOTS;
@@ -236,49 +236,49 @@ class Boots {
             if (placementNumber == 1) {
                 name = "Sunrise Boots";
                 level = 22;
-                health = 60;
+                health = 90;
                 defense = 21;
                 magicDefense = 28;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "August Boots";
                 level = 32;
-                health = 90;
+                health = 150;
                 defense = 34;
                 magicDefense = 45;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Rhythm Boots";
                 level = 42;
-                health = 150;
+                health = 240;
                 defense = 55;
                 magicDefense = 74;
                 material = Material.DIAMOND_BOOTS;
             } else if (placementNumber == 4) {
                 name = "Eleaza Boots";
                 level = 52;
-                health = 210;
+                health = 330;
                 defense = 78;
                 magicDefense = 102;
                 material = Material.DIAMOND_BOOTS;
             } else if (placementNumber == 5) {
                 name = "Gaia Boots";
                 level = 62;
-                health = 270;
+                health = 430;
                 defense = 102;
                 magicDefense = 138;
                 material = Material.DIAMOND_BOOTS;
             } else if (placementNumber == 6) {
                 name = "Holyshion Boots";
                 level = 72;
-                health = 350;
+                health = 560;
                 defense = 128;
                 magicDefense = 172;
                 material = Material.DIAMOND_BOOTS;
             } else if (placementNumber == 7) {
                 name = "Khraje Boots";
                 level = 82;
-                health = 460;
+                health = 740;
                 defense = 170;
                 magicDefense = 228;
                 material = Material.DIAMOND_BOOTS;
@@ -287,49 +287,49 @@ class Boots {
             if (placementNumber == 1) {
                 name = "Magma Boots";
                 level = 22;
-                health = 70;
+                health = 110;
                 defense = 27;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Fire Spirit Boots";
                 level = 32;
-                health = 120;
+                health = 190;
                 defense = 44;
                 magicDefense = 28;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Light Plate Boots";
                 level = 42;
-                health = 190;
+                health = 300;
                 defense = 70;
                 magicDefense = 48;
                 material = Material.IRON_BOOTS;
             } else if (placementNumber == 4) {
                 name = "Fury Plate Boots";
                 level = 52;
-                health = 260;
+                health = 420;
                 defense = 98;
                 magicDefense = 64;
                 material = Material.IRON_BOOTS;
             } else if (placementNumber == 5) {
                 name = "Ceres Boots";
                 level = 62;
-                health = 350;
+                health = 560;
                 defense = 130;
                 magicDefense = 88;
                 material = Material.IRON_BOOTS;
             } else if (placementNumber == 6) {
                 name = "Zakar Boots";
                 level = 72;
-                health = 440;
+                health = 700;
                 defense = 164;
                 magicDefense = 108;
                 material = Material.IRON_BOOTS;
             } else if (placementNumber == 7) {
                 name = "Raxes Boots";
                 level = 82;
-                health = 580;
+                health = 920;
                 defense = 218;
                 magicDefense = 144;
                 material = Material.IRON_BOOTS;
@@ -338,49 +338,49 @@ class Boots {
             if (placementNumber == 1) {
                 name = "Seaweed Boots";
                 level = 22;
-                health = 70;
+                health = 110;
                 defense = 27;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Kelp Boots";
                 level = 32;
-                health = 120;
+                health = 190;
                 defense = 44;
                 magicDefense = 28;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Coral Boots";
                 level = 42;
-                health = 190;
+                health = 300;
                 defense = 70;
                 magicDefense = 48;
                 material = Material.IRON_BOOTS;
             } else if (placementNumber == 4) {
                 name = "Aqua Boots";
                 level = 52;
-                health = 260;
+                health = 420;
                 defense = 98;
                 magicDefense = 64;
                 material = Material.IRON_BOOTS;
             } else if (placementNumber == 5) {
                 name = "Water Spirit Boots";
                 level = 62;
-                health = 350;
+                health = 560;
                 defense = 130;
                 magicDefense = 88;
                 material = Material.IRON_BOOTS;
             } else if (placementNumber == 6) {
                 name = "Mera Boots";
                 level = 72;
-                health = 440;
+                health = 700;
                 defense = 164;
                 magicDefense = 108;
                 material = Material.IRON_BOOTS;
             } else if (placementNumber == 7) {
                 name = "Atlantean Boots";
                 level = 82;
-                health = 580;
+                health = 920;
                 defense = 218;
                 magicDefense = 144;
                 material = Material.IRON_BOOTS;
@@ -389,49 +389,49 @@ class Boots {
             if (placementNumber == 1) {
                 name = "Leaf Boots";
                 level = 22;
-                health = 60;
+                health = 90;
                 defense = 27;
                 magicDefense = 18;
                 isColorful = true;
             } else if (placementNumber == 2) {
                 name = "Forest Fairy Boots";
                 level = 32;
-                health = 90;
+                health = 140;
                 defense = 42;
                 magicDefense = 30;
                 isColorful = true;
             } else if (placementNumber == 3) {
                 name = "Hunter Boots";
                 level = 42;
-                health = 140;
+                health = 230;
                 defense = 70;
                 magicDefense = 50;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 4) {
                 name = "Speedy Boots";
                 level = 52;
-                health = 200;
+                health = 320;
                 defense = 100;
                 magicDefense = 65;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 5) {
                 name = "White Wolf Boots";
                 level = 62;
-                health = 270;
+                health = 430;
                 defense = 130;
                 magicDefense = 87;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 6) {
                 name = "Moottalis Boots";
                 level = 72;
-                health = 320;
+                health = 510;
                 defense = 165;
                 magicDefense = 110;
                 material = Material.CHAINMAIL_BOOTS;
             } else if (placementNumber == 7) {
                 name = "Darkshuter Boots";
                 level = 82;
-                health = 440;
+                health = 700;
                 defense = 218;
                 magicDefense = 144;
                 material = Material.CHAINMAIL_BOOTS;

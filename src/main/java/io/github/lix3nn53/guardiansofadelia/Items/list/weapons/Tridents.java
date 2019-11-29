@@ -17,8 +17,8 @@ class Tridents {
         int customModelDataId = 10000001;
         int level = 1;
         RPGClass rpgClass = RPGClass.MONK;
-        int meleeDamage = 8;
-        int rangedDamage = 6; //do not add bonusPercent to rangedDamage because WeaponRanged constructor already does that
+        int meleeDamage = 12;
+        int rangedDamage = 10; //do not add bonusPercent to rangedDamage because WeaponRanged constructor already does that
 
         AttackSpeed attackSpeed = AttackSpeed.NORMAL;
 
@@ -26,56 +26,56 @@ class Tridents {
             name = "Steel Spear";
             customModelDataId = 10000002;
             level = 10;
-            meleeDamage = 32;
-            rangedDamage = 24;
+            meleeDamage = 20;
+            rangedDamage = 16;
         } else if (placementNumber == 3) {
             name = "Crimson Spear";
             customModelDataId = 10000003;
             level = 20;
-            meleeDamage = 80;
-            rangedDamage = 64;
+            meleeDamage = 50;
+            rangedDamage = 40;
         } else if (placementNumber == 4) {
             name = "Spear of Teva";
             customModelDataId = 10000004;
             level = 30;
-            meleeDamage = 200;
-            rangedDamage = 160;
+            meleeDamage = 120;
+            rangedDamage = 100;
         } else if (placementNumber == 5) {
             name = "Seashell Spear";
             customModelDataId = 10000005;
             level = 40;
-            meleeDamage = 320;
-            rangedDamage = 260;
+            meleeDamage = 200;
+            rangedDamage = 160;
         } else if (placementNumber == 6) {
             name = "Midian Spear";
             customModelDataId = 10000006;
             level = 50;
-            meleeDamage = 530;
-            rangedDamage = 420;
+            meleeDamage = 310;
+            rangedDamage = 255;
         } else if (placementNumber == 7) {
             name = "RedEye SpearRENAME";
             customModelDataId = 10000008;
             level = 60;
-            meleeDamage = 720;
-            rangedDamage = 580;
+            meleeDamage = 430;
+            rangedDamage = 360;
         } else if (placementNumber == 8) {
             name = "Nebula Spear";
             customModelDataId = 10000010;
             level = 70;
-            meleeDamage = 960;
-            rangedDamage = 760;
+            meleeDamage = 570;
+            rangedDamage = 480;
         } else if (placementNumber == 9) {
             name = "Royal Spear";
             customModelDataId = 10000012;
             level = 80;
-            meleeDamage = 1200;
-            rangedDamage = 960;
+            meleeDamage = 720;
+            rangedDamage = 600;
         } else if (placementNumber == 10) {
             name = "Ocean Spirit Spear";
             customModelDataId = 10000014;
             level = 90;
-            meleeDamage = 1600;
-            rangedDamage = 1280;
+            meleeDamage = 960;
+            rangedDamage = 800;
         }
 
         meleeDamage = (int) ((meleeDamage * bonusPercent) + 0.5); //add bonusPercent to meleeDamage because WeaponRanged constructor adds only to rangedDamage

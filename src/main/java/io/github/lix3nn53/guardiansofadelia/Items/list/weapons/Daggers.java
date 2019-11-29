@@ -16,54 +16,54 @@ class Daggers {
         int customModelDataId = 10000001;
         int level = 1;
         RPGClass rpgClass = RPGClass.ROGUE;
-        int damage = 5;
+        int damage = 8;
         AttackSpeed attackSpeed = AttackSpeed.FAST;
 
         if (placementNumber == 2) {
             name = "Steel Dagger";
             customModelDataId = 10000002;
             level = 10;
-            damage = 20;
+            damage = 12;
         } else if (placementNumber == 3) {
             name = "Katana";
             customModelDataId = 10000003;
             level = 20;
-            damage = 50;
+            damage = 25;
         } else if (placementNumber == 4) {
             name = "Crimson Dagger";
             customModelDataId = 10000004;
             level = 30;
-            damage = 125;
+            damage = 65;
         } else if (placementNumber == 5) {
             name = "Jade Dagger";
             customModelDataId = 10000005;
             level = 40;
-            damage = 200;
+            damage = 100;
         } else if (placementNumber == 6) {
             name = "Frozen Dagger";
             customModelDataId = 10000006;
             level = 50;
-            damage = 325;
+            damage = 160;
         } else if (placementNumber == 7) {
             name = "Shadow Claws";
             customModelDataId = 10000008;
             level = 60;
-            damage = 450;
+            damage = 225;
         } else if (placementNumber == 8) {
             name = "Dagger of Doom";
             customModelDataId = 10000010;
             level = 70;
-            damage = 600;
+            damage = 300;
         } else if (placementNumber == 9) {
             name = "Blue Wind Dagger";
             customModelDataId = 10000012;
             level = 80;
-            damage = 750;
+            damage = 375;
         } else if (placementNumber == 10) {
             name = "Twin Blades of Shadow";
             customModelDataId = 10000014;
             level = 90;
-            damage = 1000;
+            damage = 500;
         }
 
         final WeaponMelee weapon = new WeaponMelee(name, tier, itemTag, material, customModelDataId, level, rpgClass, damage, bonusPercent,

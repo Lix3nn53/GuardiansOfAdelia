@@ -86,11 +86,11 @@ public enum RPGClass {
         int tier = 1;
         if (this == RPGClass.ARCHER) {
             if (attributeType.equals(AttributeType.FIRE)) {
-                tier = 4;
+                tier = 6;
             } else if (attributeType.equals(AttributeType.WATER)) {
-                tier = 4;
+                tier = 3;
             } else if (attributeType.equals(AttributeType.EARTH)) {
-                tier = 2;
+                tier = 6;
             } else if (attributeType.equals(AttributeType.LIGHTNING)) {
                 tier = 3;
             } else if (attributeType.equals(AttributeType.WIND)) {
@@ -98,11 +98,11 @@ public enum RPGClass {
             }
         } else if (this == RPGClass.KNIGHT) {
             if (attributeType.equals(AttributeType.FIRE)) {
-                tier = 3;
+                tier = 5;
             } else if (attributeType.equals(AttributeType.WATER)) {
                 tier = 3;
             } else if (attributeType.equals(AttributeType.EARTH)) {
-                tier = 6;
+                tier = 10;
             } else if (attributeType.equals(AttributeType.LIGHTNING)) {
                 tier = 1;
             } else if (attributeType.equals(AttributeType.WIND)) {
@@ -112,33 +112,33 @@ public enum RPGClass {
             if (attributeType.equals(AttributeType.FIRE)) {
                 tier = 1;
             } else if (attributeType.equals(AttributeType.WATER)) {
-                tier = 5;
+                tier = 3;
             } else if (attributeType.equals(AttributeType.EARTH)) {
-                tier = 2;
+                tier = 6;
             } else if (attributeType.equals(AttributeType.LIGHTNING)) {
-                tier = 5;
+                tier = 9;
             } else if (attributeType.equals(AttributeType.WIND)) {
                 tier = 1;
             }
         } else if (this == RPGClass.MONK) {
             if (attributeType.equals(AttributeType.FIRE)) {
-                tier = 4;
+                tier = 6;
             } else if (attributeType.equals(AttributeType.WATER)) {
-                tier = 2;
-            } else if (attributeType.equals(AttributeType.EARTH)) {
                 tier = 4;
+            } else if (attributeType.equals(AttributeType.EARTH)) {
+                tier = 7;
             } else if (attributeType.equals(AttributeType.LIGHTNING)) {
-                tier = 3;
+                tier = 2;
             } else if (attributeType.equals(AttributeType.WIND)) {
                 tier = 1;
             }
         } else if (this == RPGClass.ROGUE) {
             if (attributeType.equals(AttributeType.FIRE)) {
-                tier = 5;
+                tier = 7;
             } else if (attributeType.equals(AttributeType.WATER)) {
-                tier = 3;
+                tier = 4;
             } else if (attributeType.equals(AttributeType.EARTH)) {
-                tier = 3;
+                tier = 7;
             } else if (attributeType.equals(AttributeType.LIGHTNING)) {
                 tier = 1;
             } else if (attributeType.equals(AttributeType.WIND)) {
@@ -146,11 +146,11 @@ public enum RPGClass {
             }
         } else if (this == RPGClass.PALADIN) {
             if (attributeType.equals(AttributeType.FIRE)) {
-                tier = 2;
+                tier = 5;
             } else if (attributeType.equals(AttributeType.WATER)) {
-                tier = 4;
+                tier = 3;
             } else if (attributeType.equals(AttributeType.EARTH)) {
-                tier = 4;
+                tier = 8;
             } else if (attributeType.equals(AttributeType.LIGHTNING)) {
                 tier = 3;
             } else if (attributeType.equals(AttributeType.WIND)) {
@@ -158,11 +158,11 @@ public enum RPGClass {
             }
         } else if (this == RPGClass.WARRIOR) {
             if (attributeType.equals(AttributeType.FIRE)) {
-                tier = 6;
+                tier = 9;
             } else if (attributeType.equals(AttributeType.WATER)) {
                 tier = 1;
             } else if (attributeType.equals(AttributeType.EARTH)) {
-                tier = 5;
+                tier = 8;
             } else if (attributeType.equals(AttributeType.LIGHTNING)) {
                 tier = 1;
             } else if (attributeType.equals(AttributeType.WIND)) {
@@ -170,19 +170,19 @@ public enum RPGClass {
             }
         } else if (this == RPGClass.HUNTER) {
             if (attributeType.equals(AttributeType.FIRE)) {
-                tier = 5;
+                tier = 9;
             } else if (attributeType.equals(AttributeType.WATER)) {
-                tier = 2;
+                tier = 1;
             } else if (attributeType.equals(AttributeType.EARTH)) {
-                tier = 3;
+                tier = 7;
             } else if (attributeType.equals(AttributeType.LIGHTNING)) {
-                tier = 2;
+                tier = 1;
             } else if (attributeType.equals(AttributeType.WIND)) {
                 tier = 2;
             }
         }
 
-        double multiplier = 1.45 + (tier * 0.05);
+        double multiplier = 1.4 + (tier * 0.025);
 
         return (level * (tier - 1) / 2) + (int) ((Math.pow(level, multiplier) / 9) + 0.5);
     }
