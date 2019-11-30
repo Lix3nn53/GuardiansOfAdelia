@@ -50,11 +50,11 @@ public class PaladinSkills {
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
-        reqLevels.add(8);
-        reqLevels.add(16);
-        reqLevels.add(24);
-        reqLevels.add(32);
-        reqLevels.add(48);
+        reqLevels.add(13);
+        reqLevels.add(25);
+        reqLevels.add(37);
+        reqLevels.add(49);
+        reqLevels.add(61);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(1);
@@ -65,20 +65,20 @@ public class PaladinSkills {
         reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(8);
-        manaCosts.add(9);
-        manaCosts.add(10);
-        manaCosts.add(11);
-        manaCosts.add(12);
-        manaCosts.add(14);
+        manaCosts.add(15);
+        manaCosts.add(15);
+        manaCosts.add(15);
+        manaCosts.add(15);
+        manaCosts.add(15);
+        manaCosts.add(15);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(14);
-        cooldowns.add(13);
-        cooldowns.add(12);
-        cooldowns.add(11);
         cooldowns.add(10);
-        cooldowns.add(8);
+        cooldowns.add(10);
+        cooldowns.add(10);
+        cooldowns.add(10);
+        cooldowns.add(10);
+        cooldowns.add(10);
 
         Skill skill = new Skill("Hammerblow", 6, Material.IRON_HOE, 46, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -94,12 +94,12 @@ public class PaladinSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(90D);
-        damages.add(160D);
-        damages.add(220D);
-        damages.add(290D);
-        damages.add(360D);
-        damages.add(480D);
+        damages.add(20.0);
+        damages.add(50.0);
+        damages.add(190.0);
+        damages.add(300.0);
+        damages.add(420.0);
+        damages.add(700.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         List<Double> speeds = new ArrayList<>();
@@ -132,12 +132,12 @@ public class PaladinSkills {
         description.add(ChatColor.GRAY + "that heals an ally on hit");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(5);
-        reqLevels.add(12);
-        reqLevels.add(22);
-        reqLevels.add(35);
-        reqLevels.add(48);
-        reqLevels.add(55);
+        reqLevels.add(8);
+        reqLevels.add(20);
+        reqLevels.add(32);
+        reqLevels.add(44);
+        reqLevels.add(56);
+        reqLevels.add(68);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(2);
@@ -148,20 +148,20 @@ public class PaladinSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(12);
-        manaCosts.add(13);
-        manaCosts.add(14);
-        manaCosts.add(15);
-        manaCosts.add(16);
-        manaCosts.add(18);
+        manaCosts.add(20);
+        manaCosts.add(22);
+        manaCosts.add(24);
+        manaCosts.add(26);
+        manaCosts.add(28);
+        manaCosts.add(30);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(24);
-        cooldowns.add(22);
         cooldowns.add(20);
-        cooldowns.add(18);
-        cooldowns.add(16);
-        cooldowns.add(14);
+        cooldowns.add(20);
+        cooldowns.add(20);
+        cooldowns.add(20);
+        cooldowns.add(20);
+        cooldowns.add(20);
 
         Skill skill = new Skill("Heal", 6, Material.IRON_HOE, 37, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -176,12 +176,12 @@ public class PaladinSkills {
                 0, 1, 0, 200, false, SmallFireball.class, Particle.HEART, ArrangementParticle.SPHERE, 0.5, 4, null, true);
 
         List<Integer> amounts = new ArrayList<>();
-        amounts.add(50);
-        amounts.add(250);
-        amounts.add(500);
-        amounts.add(1500);
-        amounts.add(2500);
-        amounts.add(3500);
+        amounts.add(160);
+        amounts.add(400);
+        amounts.add(800);
+        amounts.add(1300);
+        amounts.add(1800);
+        amounts.add(3000);
         projectileMechanic.addChildren(new HealMechanic(amounts, new ArrayList<>()));
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.HEART, ArrangementParticle.CIRCLE, 1.4, 8, 0, 0, 0, 0, 0.5, 0, 0, null);
@@ -212,12 +212,12 @@ public class PaladinSkills {
         description.add(ChatColor.GRAY + "Transform nearby enemies into pigs!");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(10);
-        reqLevels.add(18);
-        reqLevels.add(26);
-        reqLevels.add(38);
-        reqLevels.add(50);
-        reqLevels.add(64);
+        reqLevels.add(12);
+        reqLevels.add(24);
+        reqLevels.add(36);
+        reqLevels.add(48);
+        reqLevels.add(60);
+        reqLevels.add(72);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(2);
@@ -228,20 +228,20 @@ public class PaladinSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(18);
         manaCosts.add(20);
         manaCosts.add(22);
         manaCosts.add(24);
         manaCosts.add(26);
         manaCosts.add(28);
+        manaCosts.add(30);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(32);
         cooldowns.add(30);
-        cooldowns.add(28);
-        cooldowns.add(26);
-        cooldowns.add(24);
-        cooldowns.add(20);
+        cooldowns.add(30);
+        cooldowns.add(30);
+        cooldowns.add(30);
+        cooldowns.add(30);
+        cooldowns.add(30);
 
         Skill skill = new Skill("Polymorph", 6, Material.IRON_HOE, 55, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -258,11 +258,11 @@ public class PaladinSkills {
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(80);
+        ticks.add(90);
         ticks.add(100);
+        ticks.add(110);
         ticks.add(120);
         ticks.add(140);
-        ticks.add(160);
-        ticks.add(200);
         DisguiseMechanic disguiseMechanic = new DisguiseMechanic(DisguiseType.PIG, false, ticks);
 
         List<Integer> amplifiers = new ArrayList<>();
@@ -298,10 +298,10 @@ public class PaladinSkills {
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
-        reqLevels.add(30);
-        reqLevels.add(40);
+        reqLevels.add(35);
         reqLevels.add(50);
         reqLevels.add(60);
+        reqLevels.add(70);
         reqLevels.add(80);
 
         List<Integer> reqPoints = new ArrayList<>();
@@ -321,12 +321,12 @@ public class PaladinSkills {
         manaCosts.add(0);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(45);
-        cooldowns.add(45);
-        cooldowns.add(45);
-        cooldowns.add(45);
-        cooldowns.add(45);
-        cooldowns.add(45);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
 
         Skill skill = new Skill("Resurrection", 6, Material.IRON_HOE, 35, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -338,12 +338,12 @@ public class PaladinSkills {
         HealthCondition healthCondition = new HealthCondition(0.0, 0.15);
 
         List<Integer> flagTicks = new ArrayList<>();
-        flagTicks.add(20 * 45);
-        flagTicks.add(20 * 45);
-        flagTicks.add(20 * 45);
-        flagTicks.add(20 * 45);
-        flagTicks.add(20 * 45);
-        flagTicks.add(20 * 45);
+        flagTicks.add(20 * 60);
+        flagTicks.add(20 * 60);
+        flagTicks.add(20 * 60);
+        flagTicks.add(20 * 60);
+        flagTicks.add(20 * 60);
+        flagTicks.add(20 * 60);
         FlagSetMechanic flagSetMechanic = new FlagSetMechanic("passiveCooldown", flagTicks);
         FlagCondition flagCondition = new FlagCondition("passiveCooldown", false);
 
@@ -423,20 +423,20 @@ public class PaladinSkills {
         reqPoints.add(10);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(24);
-        manaCosts.add(26);
-        manaCosts.add(28);
-        manaCosts.add(30);
-        manaCosts.add(32);
-        manaCosts.add(34);
+        manaCosts.add(40);
+        manaCosts.add(42);
+        manaCosts.add(44);
+        manaCosts.add(46);
+        manaCosts.add(48);
+        manaCosts.add(50);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(52);
-        cooldowns.add(48);
-        cooldowns.add(44);
-        cooldowns.add(40);
-        cooldowns.add(36);
-        cooldowns.add(32);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
 
         Skill skill = new Skill("Cosmic Radiance", 6, Material.IRON_HOE, 18, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -508,7 +508,7 @@ public class PaladinSkills {
         ticks.add(140);
         ticks.add(150);
         ticks.add(160);
-        ticks.add(180);
+        ticks.add(200);
         areaTarget.addChildren(new InvincibleMechanic(ticks));
 
         List<Integer> repeatAmounts2 = new ArrayList<>();
@@ -517,7 +517,7 @@ public class PaladinSkills {
         repeatAmounts2.add(28);
         repeatAmounts2.add(30);
         repeatAmounts2.add(32);
-        repeatAmounts2.add(36);
+        repeatAmounts2.add(40);
         ParticleAnimationMechanic particleAnimationMechanic2 = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3,
                 -0.1, 1, 0, 0, 0.5, 0, 1, 5L, repeatAmounts2, new Particle.DustOptions(Color.YELLOW, 2));
 

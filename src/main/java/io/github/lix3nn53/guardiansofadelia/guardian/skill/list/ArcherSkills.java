@@ -49,11 +49,11 @@ public class ArcherSkills {
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
-        reqLevels.add(8);
-        reqLevels.add(16);
-        reqLevels.add(24);
-        reqLevels.add(32);
-        reqLevels.add(48);
+        reqLevels.add(13);
+        reqLevels.add(25);
+        reqLevels.add(37);
+        reqLevels.add(49);
+        reqLevels.add(61);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(1);
@@ -64,20 +64,20 @@ public class ArcherSkills {
         reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(8);
+        manaCosts.add(5);
+        manaCosts.add(7);
         manaCosts.add(9);
-        manaCosts.add(10);
         manaCosts.add(11);
-        manaCosts.add(12);
-        manaCosts.add(14);
+        manaCosts.add(13);
+        manaCosts.add(15);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(14);
-        cooldowns.add(13);
-        cooldowns.add(12);
-        cooldowns.add(11);
-        cooldowns.add(10);
-        cooldowns.add(8);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
 
         Skill skill = new Skill("Poison Arrow", 6, Material.IRON_HOE, 27, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -95,21 +95,21 @@ public class ArcherSkills {
                 ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.LIME, 2), false);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(90D);
-        damages.add(160D);
-        damages.add(220D);
-        damages.add(290D);
-        damages.add(360D);
-        damages.add(480D);
+        damages.add(16.0);
+        damages.add(40.0);
+        damages.add(160.0);
+        damages.add(260.0);
+        damages.add(360.0);
+        damages.add(600.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(60);
-        ticks.add(80);
+        ticks.add(70);
+        ticks.add(90);
         ticks.add(100);
+        ticks.add(110);
         ticks.add(120);
         ticks.add(140);
-        ticks.add(160);
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(1);
         amplifiers.add(1);
@@ -136,12 +136,12 @@ public class ArcherSkills {
         description.add(ChatColor.GRAY + "Root nearby targets and gain movement speed");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(5);
-        reqLevels.add(12);
-        reqLevels.add(22);
-        reqLevels.add(35);
-        reqLevels.add(48);
-        reqLevels.add(55);
+        reqLevels.add(8);
+        reqLevels.add(20);
+        reqLevels.add(32);
+        reqLevels.add(44);
+        reqLevels.add(56);
+        reqLevels.add(68);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(2);
@@ -152,76 +152,49 @@ public class ArcherSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(12);
-        manaCosts.add(13);
-        manaCosts.add(14);
         manaCosts.add(15);
-        manaCosts.add(16);
-        manaCosts.add(18);
+        manaCosts.add(17);
+        manaCosts.add(19);
+        manaCosts.add(21);
+        manaCosts.add(23);
+        manaCosts.add(25);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(24);
-        cooldowns.add(22);
-        cooldowns.add(20);
         cooldowns.add(18);
-        cooldowns.add(16);
-        cooldowns.add(14);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
 
         Skill skill = new Skill("Zephyr", 6, Material.IRON_HOE, 33, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
-        List<Double> radiuses = new ArrayList<>();
-        radiuses.add(3D);
-        radiuses.add(3.5D);
-        radiuses.add(4D);
-        radiuses.add(4.5D);
-        radiuses.add(5D);
-        radiuses.add(6D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
-
-        List<Integer> ccTicks = new ArrayList<>();
-        ccTicks.add(40);
-        ccTicks.add(50);
-        ccTicks.add(60);
-        ccTicks.add(70);
-        ccTicks.add(80);
-        ccTicks.add(90);
-        List<Integer> ccAmplifiers = new ArrayList<>();
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
-        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
-
         skill.addTrigger(selfTarget);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(80);
+        ticks.add(80);
+        ticks.add(80);
+        ticks.add(90);
         ticks.add(100);
         ticks.add(120);
-        ticks.add(140);
-        ticks.add(160);
-        ticks.add(200);
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(1);
         amplifiers.add(2);
         amplifiers.add(3);
         amplifiers.add(4);
+        amplifiers.add(4);
         amplifiers.add(5);
-        amplifiers.add(6);
-        selfTarget.addChildren(areaTarget);
         selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SPEED, ticks, amplifiers));
         List<Integer> repeatAmount = new ArrayList<>();
         repeatAmount.add(16);
+        repeatAmount.add(16);
+        repeatAmount.add(16);
+        repeatAmount.add(18);
         repeatAmount.add(20);
         repeatAmount.add(24);
-        repeatAmount.add(28);
-        repeatAmount.add(32);
-        repeatAmount.add(40);
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.CIRCLE, 3.4, 2, 0, 0, 0, 0, 0.5, 0, 0, null);
         selfTarget.addChildren(particleMechanic);
         ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 4, 0, 0, 0,
@@ -238,12 +211,12 @@ public class ArcherSkills {
         description.add(ChatColor.GRAY + "gain resistance to fall damage");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(10);
-        reqLevels.add(18);
-        reqLevels.add(26);
-        reqLevels.add(38);
-        reqLevels.add(50);
-        reqLevels.add(64);
+        reqLevels.add(12);
+        reqLevels.add(24);
+        reqLevels.add(36);
+        reqLevels.add(48);
+        reqLevels.add(60);
+        reqLevels.add(72);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(2);
@@ -254,20 +227,20 @@ public class ArcherSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
+        manaCosts.add(20);
+        manaCosts.add(22);
         manaCosts.add(24);
         manaCosts.add(26);
         manaCosts.add(28);
         manaCosts.add(30);
-        manaCosts.add(32);
-        manaCosts.add(34);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(32);
-        cooldowns.add(30);
-        cooldowns.add(28);
-        cooldowns.add(26);
-        cooldowns.add(24);
-        cooldowns.add(20);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
 
         Skill skill = new Skill("Purple Wings", 6, Material.IRON_HOE, 41, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -332,10 +305,10 @@ public class ArcherSkills {
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
-        reqLevels.add(30);
-        reqLevels.add(40);
+        reqLevels.add(35);
         reqLevels.add(50);
         reqLevels.add(60);
+        reqLevels.add(70);
         reqLevels.add(80);
 
         List<Integer> reqPoints = new ArrayList<>();
@@ -369,19 +342,19 @@ public class ArcherSkills {
         RangedAttackTrigger rangedAttackTrigger = new RangedAttackTrigger(cooldowns);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(120);
-        ticks.add(140);
-        ticks.add(160);
-        ticks.add(180);
-        ticks.add(220);
-        ticks.add(240);
+        ticks.add(280);
+        ticks.add(300);
+        ticks.add(320);
+        ticks.add(340);
+        ticks.add(360);
+        ticks.add(400);
         List<Double> multipliers = new ArrayList<>();
-        multipliers.add(0.7);
-        multipliers.add(0.8);
-        multipliers.add(0.9);
+        multipliers.add(0.04);
+        multipliers.add(0.05);
+        multipliers.add(0.06);
+        multipliers.add(0.07);
+        multipliers.add(0.08);
         multipliers.add(0.1);
-        multipliers.add(0.12);
-        multipliers.add(0.14);
         BuffMechanic buffMechanic = new BuffMechanic(BuffType.CRIT_CHANCE, multipliers, ticks);
 
         ValueCondition activateCondition = new ValueCondition(3, 3);
@@ -430,20 +403,20 @@ public class ArcherSkills {
         reqPoints.add(10);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(24);
-        manaCosts.add(26);
-        manaCosts.add(28);
-        manaCosts.add(30);
-        manaCosts.add(32);
-        manaCosts.add(34);
+        manaCosts.add(40);
+        manaCosts.add(45);
+        manaCosts.add(50);
+        manaCosts.add(55);
+        manaCosts.add(60);
+        manaCosts.add(60);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(52);
-        cooldowns.add(48);
-        cooldowns.add(44);
         cooldowns.add(40);
-        cooldowns.add(36);
-        cooldowns.add(32);
+        cooldowns.add(40);
+        cooldowns.add(40);
+        cooldowns.add(40);
+        cooldowns.add(40);
+        cooldowns.add(40);
 
         Skill skill = new Skill("Make It Rain", 6, Material.IRON_HOE, 48, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -485,7 +458,7 @@ public class ArcherSkills {
         repeatAmounts.add(3);
         repeatAmounts.add(3);
         repeatAmounts.add(4);
-        RepeatMechanic repeatMechanic = new RepeatMechanic(20, repeatAmounts);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(28, repeatAmounts);
 
         List<Double> areas = new ArrayList<>();
         areas.add(8D);
@@ -507,12 +480,12 @@ public class ArcherSkills {
         projectileMechanic.addChildren(particleMechanic);
         projectileMechanic.addChildren(areaTarget);
         List<Double> damages = new ArrayList<>();
-        damages.add(90D);
-        damages.add(160D);
-        damages.add(220D);
-        damages.add(290D);
-        damages.add(360D);
-        damages.add(480D);
+        damages.add(64.0);
+        damages.add(160.0);
+        damages.add(320.0);
+        damages.add(520.0);
+        damages.add(720.0);
+        damages.add(1200.0);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
 
         return skill;

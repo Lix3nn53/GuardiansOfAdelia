@@ -1,4 +1,3 @@
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 
 import java.util.ArrayList;
@@ -12,6 +11,18 @@ public class Test {
     private static final double MULTIPLIER = 0.1;
 
     public static void main(String[] args) {
+        List<Double> downRatesForLevel = new ArrayList<>();
+        downRatesForLevel.add(0.75);
+        downRatesForLevel.add(0.45);
+        downRatesForLevel.add(0.325);
+        downRatesForLevel.add(0.2);
+        downRatesForLevel.add(0.05);
+        downRatesForLevel.add(0.02);
+
+        int value = 1200;
+        for (double rate : downRatesForLevel) {
+            System.out.println(value * rate);
+        }
         /*int level = 90;
         for (RPGClass rpgClass : RPGClass.values()) {
             if (rpgClass.equals(RPGClass.NO_CLASS)) continue;
@@ -25,13 +36,13 @@ public class Test {
             System.out.println("Fire" + fire + " Water" + water + " Earth" + earth + " Lightning" + lightning + " Wind" + wind);
         }*/
 
-        int totalDefense = 2000;
+        /*int totalDefense = 2000;
         double damage = 1800;
 
         double reduction = StatUtils.getDefenseReduction(totalDefense);
 
         damage = damage * reduction;
-        System.out.println("damage: " + damage);
+        System.out.println("damage: " + damage);*/
     }
 
     private static int getBonusValue(int value) {

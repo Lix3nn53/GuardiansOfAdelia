@@ -49,11 +49,11 @@ public class WarriorSkills {
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
-        reqLevels.add(8);
-        reqLevels.add(16);
-        reqLevels.add(24);
-        reqLevels.add(32);
-        reqLevels.add(48);
+        reqLevels.add(13);
+        reqLevels.add(25);
+        reqLevels.add(37);
+        reqLevels.add(49);
+        reqLevels.add(61);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(1);
@@ -64,20 +64,20 @@ public class WarriorSkills {
         reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(8);
+        manaCosts.add(5);
+        manaCosts.add(7);
         manaCosts.add(9);
-        manaCosts.add(10);
         manaCosts.add(11);
-        manaCosts.add(12);
-        manaCosts.add(14);
+        manaCosts.add(13);
+        manaCosts.add(15);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(14);
-        cooldowns.add(13);
         cooldowns.add(12);
-        cooldowns.add(11);
-        cooldowns.add(10);
-        cooldowns.add(8);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
 
         Skill skill = new Skill("Power Slash", 6, Material.IRON_HOE, 15, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -96,12 +96,13 @@ public class WarriorSkills {
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_NORMAL));
 
         List<Double> damages = new ArrayList<>();
-        damages.add(100D);
-        damages.add(170D);
-        damages.add(240D);
-        damages.add(320D);
-        damages.add(400D);
-        damages.add(530D);
+        damages.add(24.0);
+        damages.add(60.0);
+        damages.add(240.0);
+        damages.add(390.0);
+        damages.add(540.0);
+        damages.add(900.0);
+
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
@@ -122,12 +123,12 @@ public class WarriorSkills {
         description.add(ChatColor.GRAY + "a target into the sky");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(5);
-        reqLevels.add(12);
-        reqLevels.add(22);
-        reqLevels.add(35);
-        reqLevels.add(48);
-        reqLevels.add(55);
+        reqLevels.add(8);
+        reqLevels.add(20);
+        reqLevels.add(32);
+        reqLevels.add(44);
+        reqLevels.add(56);
+        reqLevels.add(68);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(2);
@@ -138,20 +139,20 @@ public class WarriorSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(12);
-        manaCosts.add(13);
-        manaCosts.add(14);
         manaCosts.add(15);
-        manaCosts.add(16);
-        manaCosts.add(18);
+        manaCosts.add(17);
+        manaCosts.add(19);
+        manaCosts.add(21);
+        manaCosts.add(23);
+        manaCosts.add(25);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(24);
-        cooldowns.add(22);
-        cooldowns.add(20);
-        cooldowns.add(18);
         cooldowns.add(16);
-        cooldowns.add(14);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
 
         Skill skill = new Skill("Flame Burst", 6, Material.IRON_HOE, 57, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -220,12 +221,12 @@ public class WarriorSkills {
         description.add(ChatColor.GRAY + "gives damage buff to nearby allies");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(10);
-        reqLevels.add(18);
-        reqLevels.add(26);
-        reqLevels.add(38);
-        reqLevels.add(50);
-        reqLevels.add(64);
+        reqLevels.add(12);
+        reqLevels.add(24);
+        reqLevels.add(36);
+        reqLevels.add(48);
+        reqLevels.add(60);
+        reqLevels.add(72);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(2);
@@ -236,20 +237,20 @@ public class WarriorSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
+        manaCosts.add(20);
         manaCosts.add(24);
-        manaCosts.add(26);
         manaCosts.add(28);
-        manaCosts.add(30);
         manaCosts.add(32);
-        manaCosts.add(34);
+        manaCosts.add(36);
+        manaCosts.add(40);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(64);
-        cooldowns.add(60);
-        cooldowns.add(26);
-        cooldowns.add(52);
-        cooldowns.add(48);
-        cooldowns.add(44);
+        cooldowns.add(90);
+        cooldowns.add(90);
+        cooldowns.add(90);
+        cooldowns.add(90);
+        cooldowns.add(90);
+        cooldowns.add(90);
 
         Skill skill = new Skill("Victory Flag", 6, Material.IRON_HOE, 9, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -257,23 +258,23 @@ public class WarriorSkills {
 
         //Add HologramMechanic to SelfTarget's children
         List<Integer> seconds = new ArrayList<>();
-        seconds.add(24);
-        seconds.add(27);
-        seconds.add(30);
-        seconds.add(33);
-        seconds.add(36);
-        seconds.add(42);
+        seconds.add(40);
+        seconds.add(40);
+        seconds.add(40);
+        seconds.add(40);
+        seconds.add(40);
+        seconds.add(40);
         HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000004, seconds, ChatColor.AQUA + "< Victory-Flag %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
         List<Integer> repetitions = new ArrayList<>();
-        repetitions.add(8);
-        repetitions.add(9);
-        repetitions.add(10);
-        repetitions.add(11);
-        repetitions.add(12);
-        repetitions.add(14);
-        RepeatMechanic repeatMechanic = new RepeatMechanic(60L, repetitions);
+        repetitions.add(20);
+        repetitions.add(20);
+        repetitions.add(20);
+        repetitions.add(20);
+        repetitions.add(20);
+        repetitions.add(20);
+        RepeatMechanic repeatMechanic = new RepeatMechanic(40L, repetitions);
 
         //Add areaTarget to repeatMechanic's children
         List<Double> radiuses = new ArrayList<>();
@@ -286,12 +287,12 @@ public class WarriorSkills {
         AreaTarget areaTarget = new AreaTarget(true, false, true, 999, radiuses);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
+        ticks.add(41);
+        ticks.add(41);
+        ticks.add(41);
+        ticks.add(41);
+        ticks.add(41);
+        ticks.add(41);
         List<Double> multipliers = new ArrayList<>();
         multipliers.add(0.08);
         multipliers.add(0.1);
@@ -326,10 +327,10 @@ public class WarriorSkills {
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
-        reqLevels.add(30);
-        reqLevels.add(40);
+        reqLevels.add(35);
         reqLevels.add(50);
         reqLevels.add(60);
+        reqLevels.add(70);
         reqLevels.add(80);
 
         List<Integer> reqPoints = new ArrayList<>();
@@ -366,11 +367,11 @@ public class WarriorSkills {
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(120);
+        ticks.add(140);
         ticks.add(160);
+        ticks.add(180);
         ticks.add(200);
         ticks.add(240);
-        ticks.add(280);
-        ticks.add(300);
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(2);
         amplifiers.add(3);
@@ -381,12 +382,12 @@ public class WarriorSkills {
         PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.SPEED, ticks, amplifiers);
 
         List<Integer> repeatAmount = new ArrayList<>();
+        repeatAmount.add(24);
+        repeatAmount.add(28);
         repeatAmount.add(32);
         repeatAmount.add(36);
         repeatAmount.add(40);
-        repeatAmount.add(44);
         repeatAmount.add(48);
-        repeatAmount.add(56);
         ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.RED, 8));
 
@@ -422,20 +423,20 @@ public class WarriorSkills {
         reqPoints.add(10);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(24);
-        manaCosts.add(26);
-        manaCosts.add(28);
-        manaCosts.add(30);
-        manaCosts.add(32);
-        manaCosts.add(34);
+        manaCosts.add(50);
+        manaCosts.add(50);
+        manaCosts.add(50);
+        manaCosts.add(50);
+        manaCosts.add(50);
+        manaCosts.add(50);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(52);
-        cooldowns.add(48);
-        cooldowns.add(44);
-        cooldowns.add(40);
-        cooldowns.add(36);
-        cooldowns.add(32);
+        cooldowns.add(50);
+        cooldowns.add(50);
+        cooldowns.add(50);
+        cooldowns.add(50);
+        cooldowns.add(50);
+        cooldowns.add(50);
 
         Skill skill = new Skill("Grand Skyfall", 6, Material.IRON_HOE, 44, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -488,12 +489,12 @@ public class WarriorSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(284D);
-        damages.add(462D);
-        damages.add(640D);
-        damages.add(853D);
-        damages.add(1065D);
-        damages.add(1420D);
+        damages.add(200.0);
+        damages.add(480.0);
+        damages.add(960.0);
+        damages.add(1600.0);
+        damages.add(2200.0);
+        damages.add(3600.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 11, 33, 0, 0, 0, 0, 0.5, 0, 0, null);

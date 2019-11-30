@@ -43,11 +43,11 @@ public class MonkSkills {
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(1);
-        reqLevels.add(8);
-        reqLevels.add(16);
-        reqLevels.add(24);
-        reqLevels.add(32);
-        reqLevels.add(48);
+        reqLevels.add(13);
+        reqLevels.add(25);
+        reqLevels.add(37);
+        reqLevels.add(49);
+        reqLevels.add(61);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(1);
@@ -58,20 +58,20 @@ public class MonkSkills {
         reqPoints.add(3);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(8);
+        manaCosts.add(5);
+        manaCosts.add(7);
         manaCosts.add(9);
-        manaCosts.add(10);
         manaCosts.add(11);
-        manaCosts.add(12);
-        manaCosts.add(14);
+        manaCosts.add(13);
+        manaCosts.add(15);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(14);
-        cooldowns.add(13);
         cooldowns.add(12);
-        cooldowns.add(11);
-        cooldowns.add(10);
-        cooldowns.add(8);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
 
         Skill skill = new Skill("Iron Fist", 6, Material.IRON_HOE, 21, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -97,6 +97,15 @@ public class MonkSkills {
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(singleTarget);
+        List<Double> damages = new ArrayList<>();
+        damages.add(30.0);
+        damages.add(70.0);
+        damages.add(260.0);
+        damages.add(450.0);
+        damages.add(600.0);
+        damages.add(1000.0);
+
+        singleTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
         singleTarget.addChildren(pushMechanic);
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_NORMAL, ArrangementParticle.CIRCLE, 1, 1, 0, 0, 0, 0, 0.5, 0, 0, null);
         singleTarget.addChildren(particleMechanic);
@@ -111,12 +120,12 @@ public class MonkSkills {
         description.add(ChatColor.GRAY + "Direction changes each time.");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(5);
-        reqLevels.add(12);
-        reqLevels.add(22);
-        reqLevels.add(35);
-        reqLevels.add(48);
-        reqLevels.add(55);
+        reqLevels.add(8);
+        reqLevels.add(20);
+        reqLevels.add(32);
+        reqLevels.add(44);
+        reqLevels.add(56);
+        reqLevels.add(68);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(2);
@@ -127,12 +136,12 @@ public class MonkSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(4);
         manaCosts.add(5);
-        manaCosts.add(6);
-        manaCosts.add(7);
-        manaCosts.add(8);
-        manaCosts.add(9);
+        manaCosts.add(5);
+        manaCosts.add(5);
+        manaCosts.add(5);
+        manaCosts.add(5);
+        manaCosts.add(5);
 
         List<Integer> cooldowns = new ArrayList<>();
         cooldowns.add(6);
@@ -210,12 +219,12 @@ public class MonkSkills {
         description.add(ChatColor.GRAY + "can't make any moves during this effect.");
 
         List<Integer> reqLevels = new ArrayList<>();
-        reqLevels.add(10);
-        reqLevels.add(18);
-        reqLevels.add(26);
-        reqLevels.add(38);
-        reqLevels.add(50);
-        reqLevels.add(64);
+        reqLevels.add(12);
+        reqLevels.add(24);
+        reqLevels.add(36);
+        reqLevels.add(48);
+        reqLevels.add(60);
+        reqLevels.add(72);
 
         List<Integer> reqPoints = new ArrayList<>();
         reqPoints.add(2);
@@ -226,20 +235,20 @@ public class MonkSkills {
         reqPoints.add(4);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(24);
-        manaCosts.add(26);
-        manaCosts.add(28);
         manaCosts.add(30);
         manaCosts.add(32);
         manaCosts.add(34);
+        manaCosts.add(36);
+        manaCosts.add(38);
+        manaCosts.add(40);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(64);
-        cooldowns.add(60);
-        cooldowns.add(26);
-        cooldowns.add(52);
-        cooldowns.add(48);
-        cooldowns.add(44);
+        cooldowns.add(30);
+        cooldowns.add(30);
+        cooldowns.add(30);
+        cooldowns.add(30);
+        cooldowns.add(30);
+        cooldowns.add(30);
 
         Skill skill = new Skill("Serenity", 6, Material.IRON_HOE, 35, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -329,10 +338,10 @@ public class MonkSkills {
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
-        reqLevels.add(30);
-        reqLevels.add(40);
+        reqLevels.add(35);
         reqLevels.add(50);
         reqLevels.add(60);
+        reqLevels.add(70);
         reqLevels.add(80);
 
         List<Integer> reqPoints = new ArrayList<>();
@@ -366,24 +375,24 @@ public class MonkSkills {
         RangedAttackTrigger rangedAttackTrigger = new RangedAttackTrigger(cooldowns);
 
         List<Integer> flagTicks = new ArrayList<>();
-        flagTicks.add(120);
-        flagTicks.add(130);
-        flagTicks.add(140);
-        flagTicks.add(150);
-        flagTicks.add(160);
-        flagTicks.add(180);
+        flagTicks.add(200);
+        flagTicks.add(200);
+        flagTicks.add(200);
+        flagTicks.add(200);
+        flagTicks.add(200);
+        flagTicks.add(200);
         FlagSetMechanic flagSetMechanic = new FlagSetMechanic("oceanMark", flagTicks);
 
         MeleeAttackTrigger meleeAttackTrigger = new MeleeAttackTrigger(cooldowns);
         FlagCondition flagCondition = new FlagCondition("oceanMark", true);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(100D);
-        damages.add(200D);
-        damages.add(300D);
-        damages.add(400D);
-        damages.add(500D);
-        damages.add(600D);
+        damages.add(30.0);
+        damages.add(70.0);
+        damages.add(260.0);
+        damages.add(450.0);
+        damages.add(600.0);
+        damages.add(1000.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC);
 
         List<Integer> ticks = new ArrayList<>();
@@ -441,20 +450,20 @@ public class MonkSkills {
         reqPoints.add(10);
 
         List<Integer> manaCosts = new ArrayList<>();
-        manaCosts.add(24);
-        manaCosts.add(26);
-        manaCosts.add(28);
-        manaCosts.add(30);
-        manaCosts.add(32);
-        manaCosts.add(34);
+        manaCosts.add(50);
+        manaCosts.add(55);
+        manaCosts.add(60);
+        manaCosts.add(65);
+        manaCosts.add(70);
+        manaCosts.add(70);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(52);
-        cooldowns.add(48);
-        cooldowns.add(44);
         cooldowns.add(40);
-        cooldowns.add(36);
-        cooldowns.add(32);
+        cooldowns.add(40);
+        cooldowns.add(40);
+        cooldowns.add(40);
+        cooldowns.add(40);
+        cooldowns.add(40);
 
         Skill skill = new Skill("Aqua Prison", 6, Material.IRON_HOE, 25, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -493,12 +502,12 @@ public class MonkSkills {
         LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forward, upward, right);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(140);
         ticks.add(160);
+        ticks.add(170);
         ticks.add(180);
+        ticks.add(190);
         ticks.add(200);
         ticks.add(240);
-        ticks.add(280);
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(0);
         amplifiers.add(0);
@@ -517,12 +526,12 @@ public class MonkSkills {
         areaTarget.addChildren(silenceMechanic);
 
         List<Integer> repeatAmount = new ArrayList<>();
-        repeatAmount.add(28);
         repeatAmount.add(32);
+        repeatAmount.add(34);
         repeatAmount.add(36);
+        repeatAmount.add(38);
         repeatAmount.add(40);
         repeatAmount.add(48);
-        repeatAmount.add(56);
         ParticleAnimationMechanic particleAnimationMechanicBubble = new ParticleAnimationMechanic(Particle.WATER_BUBBLE, ArrangementParticle.SPHERE, 1.4, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, null);
         areaTarget.addChildren(particleAnimationMechanicBubble);
