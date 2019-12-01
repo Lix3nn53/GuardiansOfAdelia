@@ -4,6 +4,7 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.ProjectileRepeatProtector;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.TempEntity;
 import io.github.lix3nn53.guardiansofadelia.utilities.packetwrapper.WrapperPlayServerEntityDestroy;
@@ -24,6 +25,7 @@ import org.bukkit.util.Vector;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ProjectileMechanic extends MechanicComponent {
 
@@ -159,6 +161,7 @@ public class ProjectileMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         this.caster = caster;
+        UUID skillKey = UUID.randomUUID(); //skill key to put into projectile
 
         // Fire from each target
         ArrayList<Entity> projectiles = new ArrayList<Entity>();
@@ -169,6 +172,8 @@ public class ProjectileMechanic extends MechanicComponent {
 
                 for (Location loc : locs) {
                     Projectile p = caster.launchProjectile(Arrow.class);
+
+                    PersistentDataContainerUtil.putString("skillCastKey", skillKey.toString(), p); //put skill key
 
                     //Disguise projectile since only Arrow works with Rain type
                     if (!this.isProjectileInvisible) {
@@ -206,6 +211,7 @@ public class ProjectileMechanic extends MechanicComponent {
                 for (Vector d : dirs) {
                     Projectile p = caster.launchProjectile(projectileType);
 
+                    PersistentDataContainerUtil.putString("skillCastKey", skillKey.toString(), p); //put skill key
                     changeToParticleProjectile(p);
 
                     if (projectileType != Arrow.class) {
@@ -255,7 +261,11 @@ public class ProjectileMechanic extends MechanicComponent {
         }
 
         if (hit instanceof LivingEntity) {
-            targets.add((LivingEntity) hit);
+            boolean b = ProjectileRepeatProtector.shouldSkillWorkOnProjectileHitToEntity(hit, projectile);
+
+            if (b) {
+                targets.add((LivingEntity) hit);
+            }
         }
 
         if (!hitSuccess && addCasterAsSecondTargetIfHitFail) {

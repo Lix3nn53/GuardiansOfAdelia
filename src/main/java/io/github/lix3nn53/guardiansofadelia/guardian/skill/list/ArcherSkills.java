@@ -183,10 +183,10 @@ public class ArcherSkills {
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(1);
         amplifiers.add(2);
+        amplifiers.add(2);
+        amplifiers.add(3);
         amplifiers.add(3);
         amplifiers.add(4);
-        amplifiers.add(4);
-        amplifiers.add(5);
         selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SPEED, ticks, amplifiers));
         List<Integer> repeatAmount = new ArrayList<>();
         repeatAmount.add(16);
