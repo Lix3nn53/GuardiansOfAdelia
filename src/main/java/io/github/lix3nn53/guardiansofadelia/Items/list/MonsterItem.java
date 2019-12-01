@@ -94,7 +94,6 @@ public enum MonsterItem {
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case SWORD_FIRE:
-                BROAD:
                 itemStack = new ItemStack(Material.DIAMOND_SWORD);
                 itemMeta = itemStack.getItemMeta();
                 itemMeta.setCustomModelData(10000008);

@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory.slots;
 
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -55,6 +56,12 @@ public class CharacterInfoSlot {
                 final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute lightning = rpgCharacterStats.getLightning();
                 final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute wind = rpgCharacterStats.getWind();
 
+                final int totalDefense = rpgCharacterStats.getTotalDefense();
+                double phyReduction = StatUtils.getDefenseReduction(totalDefense);
+
+                final int totalMagicDefense = rpgCharacterStats.getTotalMagicDefense();
+                double mgcReduction = StatUtils.getDefenseReduction(totalMagicDefense);
+
                 skullMeta.setLore(new ArrayList() {{
                     add("");
                     add(ChatColor.LIGHT_PURPLE + "Class: " + ChatColor.GRAY + "" + className);
@@ -66,8 +73,8 @@ public class CharacterInfoSlot {
                     add(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + rpgCharacterStats.getTotalMeleeDamage(player, rpgClass));
                     add(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + rpgCharacterStats.getTotalRangedDamage(player, rpgClass));
                     add(ChatColor.DARK_AQUA + "✦ Magic Damage: " + ChatColor.GRAY + rpgCharacterStats.getTotalMagicDamage(player, rpgClass));
-                    add(ChatColor.AQUA + "■ Defense: " + ChatColor.GRAY + rpgCharacterStats.getTotalDefense());
-                    add(ChatColor.BLUE + "✦ Magic Defense: " + ChatColor.GRAY + rpgCharacterStats.getTotalMagicDefense());
+                    add(ChatColor.AQUA + "■ Defense: " + ChatColor.GRAY + totalDefense + " (" + (int) (((1.0 - phyReduction) * 100) + 0.5) + "% reduction)");
+                    add(ChatColor.BLUE + "✦ Magic Defense: " + ChatColor.GRAY + totalMagicDefense + " (" + (int) (((1.0 - mgcReduction) * 100) + 0.5) + "% reduction)");
                     add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + criticalChance + "%");
                     add(ChatColor.YELLOW + "----------------");
                     add(ChatColor.GRAY + "(equipment + level + points)");

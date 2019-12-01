@@ -75,8 +75,6 @@ public class MyEntityShootBowEvent implements Listener {
                     if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "rangedDamage")) {
                         int rangedDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "rangedDamage");
                         Entity projectile = event.getProjectile();
-                        float force = event.getForce();
-                        rangedDamage = (int) ((rangedDamage * force) + 0.5);
                         PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, projectile);
                     }
                 }

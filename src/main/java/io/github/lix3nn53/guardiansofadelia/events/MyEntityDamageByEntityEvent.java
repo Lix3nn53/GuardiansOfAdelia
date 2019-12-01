@@ -113,9 +113,12 @@ public class MyEntityDamageByEntityEvent implements Listener {
             //TARGET
             if (!isEventCanceled) {
                 if (target.getType().equals(EntityType.PLAYER)) { //player is target
+                    double damage = event.getDamage();
+
                     int customDamage = getCustomDamage(damager);
                     if (customDamage > 0) {
                         event.setDamage(customDamage);
+                        damage = customDamage; //so vanilla def is not included if target is player
                     }
 
                     Player playerTarget = (Player) target;
@@ -135,7 +138,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         if (GuardianDataManager.hasGuardianData(uniqueId)) {
                             GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
                             if (guardianData.hasActiveCharacter()) {
-                                double damage = event.getDamage();
 
                                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
@@ -308,6 +310,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     if (GuardianDataManager.hasGuardianData(targetUniqueId)) {
                         GuardianData targetGuardianData = GuardianDataManager.getGuardianData(targetUniqueId);
                         if (targetGuardianData.hasActiveCharacter()) {
+                            playerTarget.sendMessage("base: " + damage);
 
                             RPGCharacter targetActiveCharacter = targetGuardianData.getActiveCharacter();
 
@@ -321,6 +324,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             double reduction = StatUtils.getDefenseReduction(totalDefense);
 
                             damage = damage * reduction;
+                            playerTarget.sendMessage("calc: " + damage);
                         }
                     }
                 }

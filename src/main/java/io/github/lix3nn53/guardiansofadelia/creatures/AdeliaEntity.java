@@ -376,15 +376,15 @@ public enum AdeliaEntity {
                 break;
             }
             case TUTORIAL_1: {
-                WitherSkeleton entity = (WitherSkeleton) EntityUtils.create(loc, ChatColor.RED + "Aleesia's Soldier", 1800D, EntityType.WITHER_SKELETON);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(120D);
+                WitherSkeleton entity = (WitherSkeleton) EntityUtils.create(loc, ChatColor.RED + "Aleesia's Soldier", 2800D, EntityType.WITHER_SKELETON);
+                setCustomDamage(entity, 1000);
                 ItemStack sword = MonsterItem.SWORD_DARK.getItem(0);
                 entity.getEquipment().setItemInMainHand(sword);
                 livingEntity = entity;
                 break;
             }
             case TUTORIAL_2: {
-                Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Aleesia's Ranger", 1200D, EntityType.STRAY);
+                Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Aleesia's Ranger", 1600D, EntityType.STRAY);
                 ItemStack bow = MonsterItem.BOW_DARK.getItem(500);
                 entity.getEquipment().setItemInMainHand(bow);
                 livingEntity = entity;
@@ -456,7 +456,7 @@ public enum AdeliaEntity {
             }
             case LIZARD: {
                 Silverfish entity = (Silverfish) EntityUtils.create(loc, ChatColor.GREEN + "Wild Lizard", 20D, EntityType.SILVERFISH);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(6D);
+                setCustomDamage(entity, 1000);
                 setEntityExperience(entity, 2);
                 setEntityDropTableNo(entity, 0);
                 livingEntity = entity;
@@ -464,7 +464,7 @@ public enum AdeliaEntity {
             }
             case LIZARD_POISONOUS: {
                 Silverfish entity = (Silverfish) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Poisonous Lizard", 20D, EntityType.SILVERFISH);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(6D);
+                setCustomDamage(entity, 1000);
                 setEntityExperience(entity, 2);
                 setEntityDropTableNo(entity, 0);
                 livingEntity = entity;
@@ -490,7 +490,7 @@ public enum AdeliaEntity {
             }
             case ZOMBIE: {
                 Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Zombie", 50D, EntityType.ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(20D);
+                setCustomDamage(entity, 1000);
                 entity.setBaby(false);
                 entity.getEquipment().clear();
                 setEntityExperience(entity, 12);
@@ -500,7 +500,7 @@ public enum AdeliaEntity {
             }
             case ZOMBIE_VILLAGER: {
                 ZombieVillager entity = (ZombieVillager) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Zombie Villager", 60D, EntityType.ZOMBIE_VILLAGER);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(24D);
+                setCustomDamage(entity, 1000);
                 entity.setBaby(false);
                 entity.getEquipment().clear();
                 ItemStack axe = MonsterItem.AXE_WOODEN.getItem(0);
@@ -512,7 +512,7 @@ public enum AdeliaEntity {
             }
             case ZOMBIE_SPLITTER: {
                 Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Splitter Zombie", 50D, EntityType.ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(10D);
+                setCustomDamage(entity, 1000);
                 entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2D);
                 entity.setBaby(false);
                 entity.getEquipment().clear();
@@ -523,7 +523,7 @@ public enum AdeliaEntity {
             }
             case ZOMBIE_SHAMAN: {
                 Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Shaman Zombie", 50D, EntityType.ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(15D);
+                setCustomDamage(entity, 1000);
                 entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.18D);
                 entity.setBaby(false);
                 entity.getEquipment().clear();
@@ -538,7 +538,7 @@ public enum AdeliaEntity {
             }
             case ZOMBIE_TANK: {
                 Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Tank Zombie", 80D, EntityType.ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(20D);
+                setCustomDamage(entity, 1000);
                 entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.15D);
                 entity.setBaby(false);
                 entity.getEquipment().clear();
@@ -561,7 +561,7 @@ public enum AdeliaEntity {
             }
             case SKELETON_FIGHTER: {
                 Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.WHITE + "Fighter Skeleton", 150D, EntityType.SKELETON);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(60D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack sword = MonsterItem.SWORD_WOODEN.getItem(0);
                 entity.getEquipment().setItemInMainHand(sword);
@@ -572,7 +572,7 @@ public enum AdeliaEntity {
             }
             case SKELETON_ROGUE: {
                 Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.WHITE + "Rogue Skeleton", 120D, EntityType.SKELETON);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(60D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack sword = MonsterItem.DAGGER_WOOD.getItem(0);
                 entity.getEquipment().setItemInMainHand(sword);
@@ -650,7 +650,7 @@ public enum AdeliaEntity {
             }
             case PIRATE_FIGHTER: {
                 Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.DARK_AQUA + "Fighter Pirate", 720D, EntityType.SKELETON);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(220D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack sword = MonsterItem.SWORD_STEEL.getItem(0);
                 entity.getEquipment().setItemInMainHand(sword);
@@ -675,7 +675,7 @@ public enum AdeliaEntity {
             }
             case PIRATE_DUEL_MASTER: {
                 WitherSkeleton entity = (WitherSkeleton) EntityUtils.create(loc, ChatColor.DARK_AQUA + "Duel Master Pirate", 780D, EntityType.WITHER_SKELETON);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(260D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack sword = MonsterItem.KATANA.getItem(0);
                 entity.getEquipment().setItemInMainHand(sword);
@@ -688,7 +688,7 @@ public enum AdeliaEntity {
             }
             case PIRATE_DROWNED: {
                 Drowned entity = (Drowned) EntityUtils.create(loc, ChatColor.DARK_AQUA + "Drowned Pirate", 700D, EntityType.DROWNED);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(260D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 entity.setBaby(false);
                 ItemStack sword = MonsterItem.SPEAR_STEEL.getItem(400);
@@ -700,7 +700,7 @@ public enum AdeliaEntity {
             }
             case FROZEN_ROGUE: {
                 Stray entity = (Stray) EntityUtils.create(loc, ChatColor.AQUA + "Frozen Rogue", 1400D, EntityType.STRAY);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(380D);
+                setCustomDamage(entity, 1000);
                 entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3D);
                 entity.getEquipment().clear();
                 ItemStack dagger = MonsterItem.DAGGER_CRIMSON.getItem(0);
@@ -713,7 +713,7 @@ public enum AdeliaEntity {
             }
             case FROZEN_ILLUSIONER: {
                 Stray entity = (Stray) EntityUtils.create(loc, ChatColor.AQUA + "Frozen Illusioner", 1200D, EntityType.STRAY);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(380D);
+                setCustomDamage(entity, 1000);
                 entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3D);
                 entity.getEquipment().clear();
                 ItemStack dagger = MonsterItem.STAFF_OCEAN.getItem(0);
@@ -736,7 +736,7 @@ public enum AdeliaEntity {
             case ZOMBIE_JOCKEY: {
                 Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Jockey Zombie", 900D, EntityType.ZOMBIE);
                 entity.getEquipment().clear();
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(320D);
+                setCustomDamage(entity, 1000);
                 entity.setBaby(true);
 
                 Chicken mount = (Chicken) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Zombie Chicken", 400D, EntityType.CHICKEN);
@@ -750,7 +750,7 @@ public enum AdeliaEntity {
             }
             case TIMBERMAN: {
                 Vindicator entity = (Vindicator) EntityUtils.create(loc, ChatColor.AQUA + "Frozen Timberman", 1500D, EntityType.VINDICATOR);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(420D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack axe = MonsterItem.AXE_WOODEN.getItem(0);
                 entity.getEquipment().setItemInMainHand(axe);
@@ -761,7 +761,7 @@ public enum AdeliaEntity {
             }
             case MUMMY: {
                 Husk entity = (Husk) EntityUtils.create(loc, ChatColor.YELLOW + "Mummy", 1900D, EntityType.HUSK);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(520D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 setEntityExperience(entity, 553);
                 setEntityDropTableNo(entity, 6);
@@ -770,7 +770,7 @@ public enum AdeliaEntity {
             }
             case MUMMY_GHOST: {
                 Husk entity = (Husk) EntityUtils.create(loc, ChatColor.YELLOW + "Ghost Mummy", 2100D, EntityType.HUSK);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(540D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 PotionEffect invis = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1);
                 entity.addPotionEffect(invis);
@@ -798,7 +798,7 @@ public enum AdeliaEntity {
             }
             case DESERT_SKELETON_CAVALRY: {
                 Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.YELLOW + "Desert Cavalry Skeleton", 1900D, EntityType.SKELETON);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(540D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack sword = MonsterItem.SPEAR_RED.getItem(0);
                 entity.getEquipment().setItemInMainHand(sword);
@@ -814,7 +814,7 @@ public enum AdeliaEntity {
             }
             case SPIDER: {
                 Spider entity = (Spider) EntityUtils.create(loc, ChatColor.YELLOW + "Desert Spider", 1900D, EntityType.SPIDER);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(520D);
+                setCustomDamage(entity, 1000);
                 setEntityExperience(entity, 584);
                 setEntityDropTableNo(entity, 6);
                 livingEntity = entity;
@@ -822,7 +822,7 @@ public enum AdeliaEntity {
             }
             case SPIDER_GHOST: {
                 CaveSpider entity = (CaveSpider) EntityUtils.create(loc, ChatColor.YELLOW + "Ghost Spider", 2100D, EntityType.CAVE_SPIDER);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(520D);
+                setCustomDamage(entity, 1000);
                 PotionEffect invis = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1);
                 entity.addPotionEffect(invis);
                 PotionEffect glow = new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 1);
@@ -841,7 +841,7 @@ public enum AdeliaEntity {
             }
             case GOBLIN_JOCKEY: {
                 PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Jockey Goblin", 2000D, EntityType.PIG_ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(640D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 entity.setBaby(true);
                 ItemStack sword = MonsterItem.SWORD_WOODEN.getItem(0);
@@ -858,7 +858,7 @@ public enum AdeliaEntity {
             }
             case GOBLIN_FIGHTER: {
                 PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Fighter Goblin", 3200D, EntityType.PIG_ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(740D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack sword = MonsterItem.SWORD_WOODEN.getItem(0);
                 entity.getEquipment().setItemInMainHand(sword);
@@ -870,7 +870,7 @@ public enum AdeliaEntity {
             }
             case GOBLIN_ROGUE: {
                 PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Rogue Goblin", 2800D, EntityType.PIG_ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(740D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack sword = MonsterItem.DAGGER_WOOD.getItem(0);
                 entity.getEquipment().setItemInMainHand(sword);
@@ -883,7 +883,7 @@ public enum AdeliaEntity {
             }
             case GOBLIN_MAGE: {
                 PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Mage Goblin", 2400D, EntityType.PIG_ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(700D);
+                setCustomDamage(entity, 1000);
                 entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.15D);
                 entity.getEquipment().clear();
                 ItemStack wand = MonsterItem.STAFF_WOODEN.getItem(0);
@@ -898,7 +898,7 @@ public enum AdeliaEntity {
             }
             case GOBLIN_SHAMAN: {
                 PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Shaman Goblin", 2400D, EntityType.PIG_ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(700D);
+                setCustomDamage(entity, 1000);
                 entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.15D);
                 entity.getEquipment().clear();
                 ItemStack wand = MonsterItem.STAFF_LEAF.getItem(0);
@@ -913,7 +913,7 @@ public enum AdeliaEntity {
             }
             case ORC_FIGHTER: {
                 PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Fighter Orc", 4500D, EntityType.PIG_ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(920D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack sword = MonsterItem.SWORD_WOODEN.getItem(0);
                 entity.getEquipment().setItemInMainHand(sword);
@@ -925,7 +925,7 @@ public enum AdeliaEntity {
             }
             case ORC_JOCKEY: {
                 PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Jockey Orc", 2800D, EntityType.PIG_ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(820D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack sword = MonsterItem.SWORD_WOODEN.getItem(0);
                 entity.getEquipment().setItemInMainHand(sword);
@@ -942,7 +942,7 @@ public enum AdeliaEntity {
             }
             case ORC_GLADIATOR: {
                 PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Gladiator Orc", 5000D, EntityType.PIG_ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(960D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack sword = MonsterItem.SWORD_STEEL.getItem(0);
                 ItemStack chest = MonsterItem.CHESTPLATE_IRON.getItem(0);
@@ -962,7 +962,7 @@ public enum AdeliaEntity {
             }
             case ORC_SHAMAN: {
                 PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Shaman Orc", 3400D, EntityType.PIG_ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(900D);
+                setCustomDamage(entity, 1000);
                 entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.15D);
                 entity.getEquipment().clear();
                 ItemStack wand = MonsterItem.STAFF_LEAF.getItem(0);
@@ -977,7 +977,7 @@ public enum AdeliaEntity {
             }
             case ORC_MAGE: {
                 PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.YELLOW + "Mage Orc", 3400D, EntityType.PIG_ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(900D);
+                setCustomDamage(entity, 1000);
                 entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.15D);
                 entity.getEquipment().clear();
                 ItemStack wand = MonsterItem.STAFF_FIRE.getItem(0);
@@ -1001,7 +1001,7 @@ public enum AdeliaEntity {
             }
             case BLAZE: {
                 Blaze entity = (Blaze) EntityUtils.create(loc, ChatColor.RED + "Blaze", 2800D, EntityType.BLAZE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(900D);
+                setCustomDamage(entity, 1000);
                 setEntityExperience(entity, 880);
                 setEntityDropTableNo(entity, 8);
                 livingEntity = entity;
@@ -1009,7 +1009,7 @@ public enum AdeliaEntity {
             }
             case ENDERMAN: {
                 Enderman entity = (Enderman) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Void", 7200D, EntityType.ENDERMAN);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
+                setCustomDamage(entity, 1000);
                 setEntityExperience(entity, 1000);
                 setEntityDropTableNo(entity, 9);
                 livingEntity = entity;
@@ -1024,7 +1024,7 @@ public enum AdeliaEntity {
             }
             case PILLAGER_ROGUE: {
                 Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Rogue Pillager", 8000D, EntityType.PILLAGER);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
 
                 ItemStack item = MonsterItem.DAGGER_DARKEST.getItem(0);
@@ -1039,7 +1039,7 @@ public enum AdeliaEntity {
             }
             case PILLAGER_MAGE: {
                 Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Mage Pillager", 7000D, EntityType.PILLAGER);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack item = MonsterItem.STAFF_FIRE.getItem(0);
                 entity.getEquipment().setItemInMainHand(item);
@@ -1051,7 +1051,7 @@ public enum AdeliaEntity {
             }
             case PILLAGER_RAVAGER: {
                 Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Commander Pillager", 10000D, EntityType.PILLAGER);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack item = MonsterItem.CROSSBOW_DARK.getItem(0);
                 entity.getEquipment().setItemInMainHand(item);
@@ -1067,7 +1067,7 @@ public enum AdeliaEntity {
             }
             case PILLAGER_SHAMAN: {
                 Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Shaman Pillager", 7000D, EntityType.PILLAGER);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
+                setCustomDamage(entity, 1000);
 
                 ItemStack item = MonsterItem.STAFF_MOON.getItem(0);
                 entity.getEquipment().setItemInMainHand(item);
@@ -1079,7 +1079,7 @@ public enum AdeliaEntity {
             }
             case PILLAGER_FIGHTER: {
                 Pillager entity = (Pillager) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Fighter Pillager", 9000D, EntityType.PILLAGER);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
+                setCustomDamage(entity, 1000);
 
                 ItemStack item = MonsterItem.MACE_DARK.getItem(0);
                 ItemStack shield = MonsterItem.SHIELD_DARK.getItem(0);
@@ -1101,7 +1101,7 @@ public enum AdeliaEntity {
             }
             case BOSS_ZOMBIE: {
                 Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Zombie Subject#471", 1000D, EntityType.ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(60D);
+                setCustomDamage(entity, 1000);
                 entity.setBaby(false);
                 entity.getEquipment().clear();
                 ItemStack sword = MonsterItem.SWORD_STEEL.getItem(0);
@@ -1117,7 +1117,7 @@ public enum AdeliaEntity {
             }
             case BOSS_SKELETON: {
                 Skeleton entity = (Skeleton) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Dark Magician Nimzuth", 2400D, EntityType.SKELETON);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(150D);
+                setCustomDamage(entity, 1000);
                 entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.18D);
                 entity.getEquipment().clear();
                 ItemStack wand = MonsterItem.STAFF_FIRE.getItem(0);
@@ -1135,7 +1135,7 @@ public enum AdeliaEntity {
             }
             case BOSS_COOK: {
                 Evoker entity = (Evoker) EntityUtils.create(loc, ChatColor.YELLOW + "Evil Cook", 7500D, EntityType.EVOKER);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(360D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
 
                 livingEntity = entity;
@@ -1143,7 +1143,7 @@ public enum AdeliaEntity {
             }
             case BOSS_PIRATE: {
                 WitherSkeleton entity = (WitherSkeleton) EntityUtils.create(loc, ChatColor.DARK_AQUA + "Captain Barbaros", 15000D, EntityType.WITHER_SKELETON);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(600D);
+                setCustomDamage(entity, 1000);
                 ItemStack sword = MonsterItem.KATANA.getItem(0);
                 ItemStack helmet = MonsterItem.PIRATE_HAT.getItem(0);
                 ItemStack pistol = MonsterItem.PIRATE_PISTOL.getItem(500);
@@ -1156,7 +1156,7 @@ public enum AdeliaEntity {
             }
             case BOSS_ICE: {
                 Vindicator entity = (Vindicator) EntityUtils.create(loc, ChatColor.DARK_PURPLE + "Necromancer King", 30000D, EntityType.VINDICATOR);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(900D);
+                setCustomDamage(entity, 1000);
                 ItemStack axe = MonsterItem.AXE_FROST.getItem(0);
                 entity.getEquipment().clear();
                 entity.getEquipment().setItemInMainHand(axe);
@@ -1165,14 +1165,14 @@ public enum AdeliaEntity {
             }
             case BOSS_DESERT: {
                 Husk entity = (Husk) EntityUtils.create(loc, ChatColor.YELLOW + "Pharaoh", 45000D, EntityType.HUSK);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 livingEntity = entity;
                 break;
             }
             case BOSS_SWAMP: {
                 Witch entity = (Witch) EntityUtils.create(loc, ChatColor.BLUE + "Guardian Esobel", 70000D, EntityType.WITCH);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1800D);
+                setCustomDamage(entity, 1000);
                 entity.getEquipment().clear();
                 ItemStack bow = MonsterItem.BOW_SATET.getItem(500);
                 entity.getEquipment().setItemInMainHand(bow);
@@ -1181,7 +1181,7 @@ public enum AdeliaEntity {
             }
             case BOSS_LAVA: {
                 PigZombie entity = (PigZombie) EntityUtils.create(loc, ChatColor.RED + "Warchief Drogoth", 100000D, EntityType.PIG_ZOMBIE);
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(2500D);
+                setCustomDamage(entity, 1000);
                 entity.setBaby(false);
                 ItemStack sword = MonsterItem.AXE_TITAN.getItem(0);
                 ItemStack chest = new ItemStack(Material.DIAMOND_CHESTPLATE);
