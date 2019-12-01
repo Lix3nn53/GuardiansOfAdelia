@@ -11,8 +11,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.pr
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.FilterCurrentTargets;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.LocationTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.RangedAttackTrigger;
@@ -133,7 +133,7 @@ public class ArcherSkills {
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
-        description.add(ChatColor.GRAY + "Root nearby targets and gain movement speed");
+        description.add(ChatColor.GRAY + "Gain movement speed");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(8);
@@ -299,7 +299,7 @@ public class ArcherSkills {
 
     private static Skill getPassive() {
         List<String> description = new ArrayList<>();
-        description.add(ChatColor.GRAY + "Your every third successful projectile hit");
+        description.add(ChatColor.GRAY + "Your every second successful projectile hit");
         description.add(ChatColor.GRAY + "gives you bonus critical chance");
         description.add(ChatColor.GRAY + "(This can exceed the critical chance cap)");
 
@@ -342,12 +342,12 @@ public class ArcherSkills {
         RangedAttackTrigger rangedAttackTrigger = new RangedAttackTrigger(cooldowns);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(280);
-        ticks.add(300);
-        ticks.add(320);
-        ticks.add(340);
-        ticks.add(360);
-        ticks.add(400);
+        ticks.add(120);
+        ticks.add(140);
+        ticks.add(160);
+        ticks.add(180);
+        ticks.add(200);
+        ticks.add(240);
         List<Double> multipliers = new ArrayList<>();
         multipliers.add(0.04);
         multipliers.add(0.05);
@@ -357,10 +357,10 @@ public class ArcherSkills {
         multipliers.add(0.1);
         BuffMechanic buffMechanic = new BuffMechanic(BuffType.CRIT_CHANCE, multipliers, ticks);
 
-        ValueCondition activateCondition = new ValueCondition(3, 3);
+        ValueCondition activateCondition = new ValueCondition(2, 2);
         ValueSetMechanic valueSetMechanic = new ValueSetMechanic(0);
 
-        ValueCondition upValueCondition = new ValueCondition(0, 2);
+        ValueCondition upValueCondition = new ValueCondition(0, 1);
         ValueAddMechanic valueAddMechanic = new ValueAddMechanic(1);
 
         skill.addTrigger(initializeTrigger);
@@ -422,14 +422,14 @@ public class ArcherSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
-        List<Double> ranges = new ArrayList<>();
-        ranges.add(24D);
-        ranges.add(24D);
-        ranges.add(24D);
-        ranges.add(24D);
-        ranges.add(24D);
-        ranges.add(24D);
-        SingleTarget singleTarget = new SingleTarget(false, true, false, 1, ranges, 4);
+        List<Integer> ranges = new ArrayList<>();
+        ranges.add(24);
+        ranges.add(24);
+        ranges.add(24);
+        ranges.add(24);
+        ranges.add(24);
+        ranges.add(24);
+        LocationTarget locationTarget = new LocationTarget(false, true, false, 1, ranges);
 
         List<Integer> projectileAmounts = new ArrayList<>();
         projectileAmounts.add(1);
@@ -470,8 +470,8 @@ public class ArcherSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         skill.addTrigger(selfTarget);
-        selfTarget.addChildren(singleTarget);
-        singleTarget.addChildren(repeatMechanic);
+        selfTarget.addChildren(locationTarget);
+        locationTarget.addChildren(repeatMechanic);
         repeatMechanic.addChildren(projectileMechanicVisual);
         repeatMechanic.addChildren(projectileMechanic);
         repeatMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_ARROW_RAIN));
