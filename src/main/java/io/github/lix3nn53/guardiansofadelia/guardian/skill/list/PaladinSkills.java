@@ -176,12 +176,12 @@ public class PaladinSkills {
                 0, 1, 0, 200, false, SmallFireball.class, Particle.HEART, ArrangementParticle.SPHERE, 0.5, 4, null, true);
 
         List<Integer> amounts = new ArrayList<>();
-        amounts.add(160);
-        amounts.add(400);
-        amounts.add(800);
-        amounts.add(1300);
-        amounts.add(1800);
-        amounts.add(3000);
+        amounts.add(200);
+        amounts.add(500);
+        amounts.add(1000);
+        amounts.add(1600);
+        amounts.add(2200);
+        amounts.add(3600);
         projectileMechanic.addChildren(new HealMechanic(amounts, new ArrayList<>()));
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.HEART, ArrangementParticle.CIRCLE, 1.4, 8, 0, 0, 0, 0, 0.5, 0, 0, null);

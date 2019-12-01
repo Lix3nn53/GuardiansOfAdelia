@@ -299,7 +299,7 @@ public class ArcherSkills {
 
     private static Skill getPassive() {
         List<String> description = new ArrayList<>();
-        description.add(ChatColor.GRAY + "Your every second successful projectile hit");
+        description.add(ChatColor.GRAY + "Your every 2nd successful projectile hit");
         description.add(ChatColor.GRAY + "gives you bonus critical chance");
         description.add(ChatColor.GRAY + "(This can exceed the critical chance cap)");
 

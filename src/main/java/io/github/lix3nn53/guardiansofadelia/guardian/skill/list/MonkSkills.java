@@ -214,7 +214,7 @@ public class MonkSkills {
 
     private static Skill getThree() {
         List<String> description = new ArrayList<>();
-        description.add(ChatColor.GRAY + "Make yourself invincible and start");
+        description.add(ChatColor.GRAY + "Increase your defenses and start");
         description.add(ChatColor.GRAY + "healing over time. You can't");
         description.add(ChatColor.GRAY + "can't make any moves during this effect.");
 

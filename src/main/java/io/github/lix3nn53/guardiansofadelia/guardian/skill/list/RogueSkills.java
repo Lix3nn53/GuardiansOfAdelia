@@ -393,12 +393,12 @@ public class RogueSkills {
         manaCosts.add(0);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
-        cooldowns.add(5);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
+        cooldowns.add(1);
 
         Skill skill = new Skill("Backstab", 6, Material.IRON_HOE, 17, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -413,13 +413,12 @@ public class RogueSkills {
         meleeAttackTrigger.addChildren(directionCondition);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(100.0);
-        damages.add(240.0);
-        damages.add(480.0);
-        damages.add(800.0);
-        damages.add(1220.0);
-        damages.add(1800.0);
-
+        damages.add(70.0);
+        damages.add(140.0);
+        damages.add(280.0);
+        damages.add(450.0);
+        damages.add(600.0);
+        damages.add(1000.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         meleeAttackTrigger.addChildren(damageMechanic);

@@ -61,6 +61,8 @@ public class PotionEffectMechanic extends MechanicComponent {
             return ChatColor.DARK_PURPLE + "Wither";
         } else if (type.equals(PotionEffectType.POISON)) {
             return ChatColor.DARK_GREEN + "Poison";
+        } else if (type.equals(PotionEffectType.ABSORPTION)) {
+            return ChatColor.YELLOW + "Shield";
         }
         return "NULL EFFECT TYPE";
     }

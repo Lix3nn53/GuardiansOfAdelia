@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import org.bukkit.ChatColor;
 
 public enum RPGClass {
+    NO_CLASS,
     ARCHER,
     KNIGHT,
     MAGE,
@@ -11,8 +12,7 @@ public enum RPGClass {
     ROGUE,
     PALADIN,
     WARRIOR,
-    HUNTER,
-    NO_CLASS;
+    HUNTER;
 
     public String getClassString() {
         ChatColor color = ChatColor.GREEN;

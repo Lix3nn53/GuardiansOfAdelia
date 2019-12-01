@@ -2,8 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
@@ -269,12 +267,12 @@ public class MageSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Double> speeds = new ArrayList<>();
-        speeds.add(1.6D);
-        speeds.add(1.8D);
         speeds.add(2D);
-        speeds.add(2.2D);
-        speeds.add(2.4D);
-        speeds.add(2.8D);
+        speeds.add(2.1);
+        speeds.add(2.2);
+        speeds.add(2.3);
+        speeds.add(2.4);
+        speeds.add(2.8);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         skill.addTrigger(selfTarget);
@@ -293,7 +291,7 @@ public class MageSkills {
         List<String> description = new ArrayList<>();
         description.add(ChatColor.GRAY + "When you took physical damage while");
         description.add(ChatColor.GRAY + "this skill is active, root nearby targets");
-        description.add(ChatColor.GRAY + "and gain physical defense buff.");
+        description.add(ChatColor.GRAY + "and gain a shield.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
@@ -359,29 +357,29 @@ public class MageSkills {
         areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
         areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
 
-        List<Double> multipliers = new ArrayList<>();
-        multipliers.add(0.1);
-        multipliers.add(0.15);
-        multipliers.add(0.2);
-        multipliers.add(0.25);
-        multipliers.add(0.3);
-        multipliers.add(0.4);
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(200);
-        ticks.add(225);
-        ticks.add(250);
-        ticks.add(275);
-        ticks.add(300);
-        ticks.add(350);
-        BuffMechanic buffMechanic = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks);
+        ticks.add(500);
+        ticks.add(500);
+        ticks.add(500);
+        ticks.add(500);
+        ticks.add(500);
+        ticks.add(500);
+        List<Integer> amplifiers = new ArrayList<>();
+        amplifiers.add(100);
+        amplifiers.add(200);
+        amplifiers.add(300);
+        amplifiers.add(450);
+        amplifiers.add(600);
+        amplifiers.add(1000);
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.ABSORPTION, ticks, amplifiers);
 
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(tookMeleeDamageTrigger);
         tookMeleeDamageTrigger.addChildren(areaTarget);
-        tookMeleeDamageTrigger.addChildren(buffMechanic);
+        tookMeleeDamageTrigger.addChildren(potionEffectMechanic);
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 3.4, 11, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.AQUA, 2));
         tookMeleeDamageTrigger.addChildren(particleMechanic);
-        areaTarget.addChildren(new MessageMechanic(ChatColor.AQUA + "You got rooted by a mage passive skill.."));
+        areaTarget.addChildren(new MessageMechanic(ChatColor.AQUA + "You got rooted by a mage's passive skill.."));
 
         return skill;
     }

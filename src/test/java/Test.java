@@ -19,7 +19,7 @@ public class Test {
         downRatesForLevel.add(0.05);
         downRatesForLevel.add(0.02);
 
-        int value = 1200;
+        int value = 1333;
         for (double rate : downRatesForLevel) {
             System.out.println(value * rate);
         }
