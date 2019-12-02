@@ -1,4 +1,3 @@
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 
 import java.util.ArrayList;
@@ -12,39 +11,43 @@ public class Test {
     private static final double MULTIPLIER = 0.1;
 
     public static void main(String[] args) {
-        /*List<Double> downRatesForLevel = new ArrayList<>();
+        List<Double> downRatesForLevel = new ArrayList<>();
         downRatesForLevel.add(0.75);
+        downRatesForLevel.add(0.6);
         downRatesForLevel.add(0.45);
         downRatesForLevel.add(0.325);
         downRatesForLevel.add(0.2);
+        downRatesForLevel.add(0.1);
         downRatesForLevel.add(0.05);
         downRatesForLevel.add(0.02);
+        downRatesForLevel.add(0.01);
 
-        int value = 1333;
+        int value = 640;
         for (double rate : downRatesForLevel) {
             System.out.println(value * rate);
-        }*/
-        /*int level = 90;
-        for (RPGClass rpgClass : RPGClass.values()) {
+        }
+        /*for (RPGClass rpgClass : RPGClass.values()) {
             if (rpgClass.equals(RPGClass.NO_CLASS)) continue;
-            int fire = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, level);
-            int water = rpgClass.getAttributeBonusForLevel(AttributeType.WATER, level);
-            int earth = rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, level);
-            int lightning = rpgClass.getAttributeBonusForLevel(AttributeType.LIGHTNING, level);
-            int wind = rpgClass.getAttributeBonusForLevel(AttributeType.WIND, level);
+            for (int level = 1; level < 91; level++) {
+                int fire = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, level);
+                int water = rpgClass.getAttributeBonusForLevel(AttributeType.WATER, level);
+                int earth = rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, level);
+                int lightning = rpgClass.getAttributeBonusForLevel(AttributeType.LIGHTNING, level);
+                int wind = rpgClass.getAttributeBonusForLevel(AttributeType.WIND, level);
 
-            System.out.println("Level " + level + " Class " + rpgClass.toString());
-            System.out.println("Fire" + fire + " Water" + water + " Earth" + earth + " Lightning" + lightning + " Wind" + wind);
+                System.out.println("Level " + level + " Class " + rpgClass.toString());
+                System.out.println("Fire" + fire + " Water" + water + " Earth" + earth + " Lightning" + lightning + " Wind" + wind);
+            }
         }*/
 
-        int totalDefense = 2400;
+        /*int totalDefense = 2400;
         double damage = 1000;
 
         double reduction = StatUtils.getDefenseReduction(totalDefense);
 
         damage = damage * reduction;
         System.out.println("damage: " + damage);
-        System.out.println("defense: " + totalDefense + " (" + (int) (((1.0 - reduction) * 100) + 0.5) + "% reduction)");
+        System.out.println("defense: " + totalDefense + " (" + (int) (((1.0 - reduction) * 100) + 0.5) + "% reduction)");*/
     }
 
     private static int getBonusValue(int value) {
