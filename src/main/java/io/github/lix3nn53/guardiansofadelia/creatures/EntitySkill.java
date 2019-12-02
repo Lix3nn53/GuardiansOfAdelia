@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.creatures;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
@@ -34,13 +34,22 @@ public enum EntitySkill {
     AOE_SILENCE,
     AOE_BURN,
     SKYFALL,
-    TELEPORT;
+    SINGLE_TELEPORT,
+    SINGLE_STUN;
 
-    private static HashMap<EntitySkill, TargetComponent> skillTrigger = new HashMap<>();
+    private static HashMap<EntitySkill, SkillComponent> skillTrigger = new HashMap<>(); //target list contains target of monster at start
 
     static {
-        //PROJECTILE_FIREBALL
+        readySkillProjectileFireball();
+        readySkillProjectilePoisonArrow();
+        readySkillAoeDamage();
+    }
 
+    public static SkillComponent getSkillTrigger(EntitySkill entitySkill) {
+        return skillTrigger.get(entitySkill);
+    }
+
+    private static void readySkillProjectileFireball() {
         ProjectileMechanic projectileFireball = new ProjectileMechanic(SpreadType.CONE, 1.9, singleProjectile(), 30,
                 0, 1, 0, 200, true, Fireball.class);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, smallAreaRadius());
@@ -53,32 +62,15 @@ public enum EntitySkill {
         projectileFireball.addChildren(areaTarget);
         areaTarget.addChildren(new DamageMechanic(magicDamages(), DamageMechanic.DamageType.MAGIC));
         skillTrigger.put(PROJECTILE_FIREBALL, fireballTrigger);
+    }
 
-        //AOE_DAMAGE
-
-        SelfTarget aoeSmallAroundTrigger = new SelfTarget();
-        SelfTarget selfTargetForSound = new SelfTarget();
-        areaTarget = new AreaTarget(false, true, false, 999, smallAreaRadius());
-        areaTarget.addChildren(selfTargetForSound);
-        selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_NORMAL));
-        DamageMechanic damageMechanic = new DamageMechanic(meleeDamages(), DamageMechanic.DamageType.MELEE);
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
-        aoeSmallAroundTrigger.addChildren(new HoloMessageMechanic(ChatColor.AQUA + "Lightning!", 70));
-        delayMechanic = new DelayMechanic(25);
-        aoeSmallAroundTrigger.addChildren(delayMechanic);
-        delayMechanic.addChildren(areaTarget);
-        selfTargetForSound.addChildren(particleMechanic);
-        areaTarget.addChildren(damageMechanic);
-        skillTrigger.put(AOE_DAMAGE, aoeSmallAroundTrigger);
-
-        //PROJECTILE_POISON
-
+    private static void readySkillProjectilePoisonArrow() {
         ProjectileMechanic projectilePoisonArrow = new ProjectileMechanic(SpreadType.CONE, 2.7, singleProjectile(), 30,
                 0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
                 ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.LIME, 2), false);
         SelfTarget poisonArrowTrigger = new SelfTarget();
         poisonArrowTrigger.addChildren(new HoloMessageMechanic(ChatColor.RED + "Green!", 70));
-        delayMechanic = new DelayMechanic(25);
+        DelayMechanic delayMechanic = new DelayMechanic(25);
         poisonArrowTrigger.addChildren(delayMechanic);
         delayMechanic.addChildren(projectilePoisonArrow);
         delayMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_FIRE_SLASH));
@@ -88,8 +80,21 @@ public enum EntitySkill {
         skillTrigger.put(PROJECTILE_FIREBALL, poisonArrowTrigger);
     }
 
-    public static TargetComponent getSkillTrigger(EntitySkill entitySkill) {
-        return skillTrigger.get(entitySkill);
+    private static void readySkillAoeDamage() {
+        SelfTarget aoeSmallAroundTrigger = new SelfTarget();
+        SelfTarget selfTargetForSound = new SelfTarget();
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, smallAreaRadius());
+        areaTarget.addChildren(selfTargetForSound);
+        selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_NORMAL));
+        DamageMechanic damageMechanic = new DamageMechanic(meleeDamages(), DamageMechanic.DamageType.MELEE);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
+        aoeSmallAroundTrigger.addChildren(new HoloMessageMechanic(ChatColor.AQUA + "Lightning!", 70));
+        DelayMechanic delayMechanic = new DelayMechanic(25);
+        aoeSmallAroundTrigger.addChildren(delayMechanic);
+        delayMechanic.addChildren(areaTarget);
+        selfTargetForSound.addChildren(particleMechanic);
+        areaTarget.addChildren(damageMechanic);
+        skillTrigger.put(AOE_DAMAGE, aoeSmallAroundTrigger);
     }
 
     //EntitySkills needs 10 skill level so 10 value for each list attribute of skill

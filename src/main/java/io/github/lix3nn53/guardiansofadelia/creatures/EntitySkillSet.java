@@ -36,9 +36,11 @@ public class EntitySkillSet {
                     return;
                 }
 
+                List<LivingEntity> targets = new ArrayList<>();
                 if (livingEntity instanceof Mob) { //do not cast skill if there is no target
                     LivingEntity target = ((Mob) livingEntity).getTarget();
                     if (target == null) return;
+                    targets.add(target); //add current single target to skill target list
                 }
 
                 int index = 0;
@@ -50,7 +52,7 @@ public class EntitySkillSet {
                 EntitySkill skill = skills.get(index);
                 int level = skillLevels.get(index);
 
-                EntitySkill.getSkillTrigger(skill).execute(livingEntity, level, new ArrayList<>());
+                EntitySkill.getSkillTrigger(skill).execute(livingEntity, level, targets);
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 40L, cooldown);
     }
