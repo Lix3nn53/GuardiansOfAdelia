@@ -139,27 +139,27 @@ public enum AdeliaEntity {
     private void startSkillLoop(LivingEntity livingEntity) {
         List<EntitySkill> skills = new ArrayList<>();
         List<Integer> skillLevels = new ArrayList<>();
-        long cooldown = 120;
+        long cooldown = 160;
 
         switch (this) {
             case LIZARD_POISONOUS:
-                skills.add(EntitySkill.AOE_SMALL_AROUND);
+                skills.add(EntitySkill.AOE_DAMAGE);
                 skillLevels.add(1);
                 break;
             case SLIME_STICKY:
-                skills.add(EntitySkill.AOE_SMALL_AROUND);
+                skills.add(EntitySkill.AOE_DAMAGE);
                 skillLevels.add(1);
                 break;
             case ZOMBIE_VILLAGER:
-                skills.add(EntitySkill.AOE_SMALL_AROUND);
+                skills.add(EntitySkill.AOE_DAMAGE);
                 skillLevels.add(1);
                 break;
             case ZOMBIE_SPLITTER:
-                skills.add(EntitySkill.AOE_SMALL_AROUND);
+                skills.add(EntitySkill.AOE_DAMAGE);
                 skillLevels.add(1);
                 break;
             case ZOMBIE_SHAMAN:
-                skills.add(EntitySkill.AOE_SMALL_AROUND);
+                skills.add(EntitySkill.AOE_DAMAGE);
                 skillLevels.add(1);
                 break;
             case SKELETON_MAGE:
@@ -377,7 +377,7 @@ public enum AdeliaEntity {
             }
             case TUTORIAL_1: {
                 WitherSkeleton entity = (WitherSkeleton) EntityUtils.create(loc, ChatColor.RED + "Aleesia's Soldier", 2800D, EntityType.WITHER_SKELETON);
-                setCustomDamage(entity, 1000);
+                setCustomDamage(entity, 400);
                 ItemStack sword = MonsterItem.SWORD_DARK.getItem(0);
                 entity.getEquipment().setItemInMainHand(sword);
                 livingEntity = entity;
@@ -385,7 +385,7 @@ public enum AdeliaEntity {
             }
             case TUTORIAL_2: {
                 Stray entity = (Stray) EntityUtils.create(loc, ChatColor.RED + "Aleesia's Ranger", 1600D, EntityType.STRAY);
-                ItemStack bow = MonsterItem.BOW_DARK.getItem(500);
+                ItemStack bow = MonsterItem.BOW_DARK.getItem(200);
                 entity.getEquipment().setItemInMainHand(bow);
                 livingEntity = entity;
                 break;

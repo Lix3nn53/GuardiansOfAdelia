@@ -11,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -44,6 +45,31 @@ public class ChatManager {
                     Location location = player.getLocation().add(0, 2.4, 0);
                     armorStand.teleport(location);
                     ticksPass++;
+                }
+            }
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 2L);
+    }
+
+    public static void chatHologramEntity(Entity entity, String message, int durationTicks) {
+        Location location = entity.getLocation().add(0, 2.4, 0);
+
+        new BukkitRunnable() {
+
+            ArmorStand armorStand;
+            int ticksPass = 0;
+
+            @Override
+            public void run() {
+                if (ticksPass == durationTicks) {
+                    cancel();
+                    armorStand.remove();
+                } else {
+                    if (ticksPass == 0) {
+                        armorStand = new Hologram(location, ChatColor.YELLOW + "< " + ChatColor.GRAY + message + ChatColor.YELLOW + " >").getArmorStand();
+                    }
+                    Location location = entity.getLocation().add(0, 2.4, 0);
+                    armorStand.teleport(location);
+                    ticksPass += 2;
                 }
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 2L);
