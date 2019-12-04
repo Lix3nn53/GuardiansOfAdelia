@@ -6,7 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.ProjectileRepeatProtector;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.github.lix3nn53.guardiansofadelia.utilities.TempEntity;
+import io.github.lix3nn53.guardiansofadelia.utilities.TemporaryEntity;
 import io.github.lix3nn53.guardiansofadelia.utilities.packetwrapper.WrapperPlayServerEntityDestroy;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
@@ -252,7 +252,7 @@ public class ProjectileMechanic extends MechanicComponent {
             if (projectile.isValid()) projectile.remove();
             if (mustHitToWork) return;
 
-            hit = new TempEntity(projectile.getLocation());
+            hit = new TemporaryEntity(projectile.getLocation());
         } else if (addCasterAsFirstTargetIfHitSuccess) {
             if (CitizensAPI.getNPCRegistry().isNPC(hit)) return;
 

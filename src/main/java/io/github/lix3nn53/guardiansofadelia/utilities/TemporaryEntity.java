@@ -1,6 +1,5 @@
-package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
+package io.github.lix3nn53.guardiansofadelia.utilities;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.Nearby;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;

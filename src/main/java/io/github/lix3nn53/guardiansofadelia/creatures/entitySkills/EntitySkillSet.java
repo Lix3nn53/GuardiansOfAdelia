@@ -1,6 +1,7 @@
-package io.github.lix3nn53.guardiansofadelia.creatures;
+package io.github.lix3nn53.guardiansofadelia.creatures.entitySkills;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -11,11 +12,11 @@ import java.util.Random;
 
 public class EntitySkillSet {
 
-    private final List<EntitySkill> skills;
+    private final List<SkillComponent> skills;
     private final List<Integer> skillLevels;
     private final long cooldown;
 
-    public EntitySkillSet(List<EntitySkill> skills, List<Integer> skillLevels, long cooldown) {
+    public EntitySkillSet(List<SkillComponent> skills, List<Integer> skillLevels, long cooldown) {
         this.skills = skills;
         this.skillLevels = skillLevels;
         this.cooldown = cooldown;
@@ -49,10 +50,10 @@ public class EntitySkillSet {
                     index = getRandomIndex();
                 }
 
-                EntitySkill skill = skills.get(index);
+                SkillComponent skill = skills.get(index);
                 int level = skillLevels.get(index);
 
-                EntitySkill.getSkillTrigger(skill).execute(livingEntity, level, targets);
+                skill.execute(livingEntity, level, targets);
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 40L, cooldown);
     }
