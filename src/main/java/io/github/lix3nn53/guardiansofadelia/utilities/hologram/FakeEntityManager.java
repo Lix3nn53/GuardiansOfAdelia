@@ -1,10 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.hologram;
 
-class FakeHologramManager {
+class FakeEntityManager {
 
     private static int LASTEST_ENTITY_ID = 1700500;
 
-    static void onFakeEntitySpawn() {
+    static void onFakeEntityCreate() {
         LASTEST_ENTITY_ID++;
     }
 

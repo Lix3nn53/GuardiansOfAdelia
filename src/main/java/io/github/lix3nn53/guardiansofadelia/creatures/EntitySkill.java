@@ -16,7 +16,6 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public enum EntitySkill {
@@ -37,64 +36,111 @@ public enum EntitySkill {
     SINGLE_TELEPORT,
     SINGLE_STUN;
 
-    private static HashMap<EntitySkill, SkillComponent> skillTrigger = new HashMap<>(); //target list contains target of monster at start
-
-    static {
-        readySkillProjectileFireball();
-        readySkillProjectilePoisonArrow();
-        readySkillAoeDamage();
-    }
-
     public static SkillComponent getSkillTrigger(EntitySkill entitySkill) {
-        return skillTrigger.get(entitySkill);
+        switch (entitySkill) {
+            case PROJECTILE_FIREBALL:
+                return getSkillProjectileFireball();
+            case PROJECTILE_POISON:
+                return getSkillProjectilePoisonArrow();
+            case PROJECTILE_ZOMBIE_SPIT:
+                break;
+            case PROJECTILE_PIRATE_GUN:
+                break;
+            case PROJECTILE_VOLLEY:
+                break;
+            case AOE_DAMAGE:
+                return getSkillAoeDamage();
+            case AOE_PULL:
+                break;
+            case AOE_LAUNCH:
+                break;
+            case AOE_HEAL:
+                break;
+            case AOE_EXPLOSION:
+                break;
+            case AOE_CONFUSE:
+                break;
+            case AOE_SILENCE:
+                break;
+            case AOE_BURN:
+                break;
+            case SKYFALL:
+                break;
+            case SINGLE_TELEPORT:
+                break;
+            case SINGLE_STUN:
+                break;
+        }
+
+        return null;
     }
 
-    private static void readySkillProjectileFireball() {
+    private static SkillComponent getSkillProjectileFireball() {
         ProjectileMechanic projectileFireball = new ProjectileMechanic(SpreadType.CONE, 1.9, singleProjectile(), 30,
                 0, 1, 0, 200, true, Fireball.class);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, smallAreaRadius());
-        SelfTarget fireballTrigger = new SelfTarget();
-        fireballTrigger.addChildren(new HoloMessageMechanic(ChatColor.RED + "Buuuurrrn!", 70));
+        SelfTarget trigger = new SelfTarget();
+        trigger.addChildren(new HoloMessageMechanic(ChatColor.RED + "Buuuurrrn!", 70));
         DelayMechanic delayMechanic = new DelayMechanic(25);
-        fireballTrigger.addChildren(delayMechanic);
+        trigger.addChildren(delayMechanic);
         delayMechanic.addChildren(projectileFireball);
         delayMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_FIRE_SLASH));
         projectileFireball.addChildren(areaTarget);
         areaTarget.addChildren(new DamageMechanic(magicDamages(), DamageMechanic.DamageType.MAGIC));
-        skillTrigger.put(PROJECTILE_FIREBALL, fireballTrigger);
+
+        return trigger;
     }
 
-    private static void readySkillProjectilePoisonArrow() {
+    private static SkillComponent getSkillProjectilePoisonArrow() {
         ProjectileMechanic projectilePoisonArrow = new ProjectileMechanic(SpreadType.CONE, 2.7, singleProjectile(), 30,
                 0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
                 ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.LIME, 2), false);
-        SelfTarget poisonArrowTrigger = new SelfTarget();
-        poisonArrowTrigger.addChildren(new HoloMessageMechanic(ChatColor.RED + "Green!", 70));
+        SelfTarget trigger = new SelfTarget();
+        trigger.addChildren(new HoloMessageMechanic(ChatColor.RED + "Green!", 70));
         DelayMechanic delayMechanic = new DelayMechanic(25);
-        poisonArrowTrigger.addChildren(delayMechanic);
+        trigger.addChildren(delayMechanic);
         delayMechanic.addChildren(projectilePoisonArrow);
         delayMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_FIRE_SLASH));
         projectilePoisonArrow.addChildren(new DamageMechanic(rangedDamages(), DamageMechanic.DamageType.RANGED));
         PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.POISON, poisonDuration(), poisonAmplifiers());
         projectilePoisonArrow.addChildren(potionEffectMechanic);
-        skillTrigger.put(PROJECTILE_FIREBALL, poisonArrowTrigger);
+
+        return trigger;
     }
 
-    private static void readySkillAoeDamage() {
-        SelfTarget aoeSmallAroundTrigger = new SelfTarget();
+    private static SkillComponent getSkillZombieSpit() {
+        ProjectileMechanic projectileZombieSpit = new ProjectileMechanic(SpreadType.CONE, 1.7, tripleProjectile(), 30,
+                0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
+                ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.LIME, 2), false);
+        SelfTarget trigger = new SelfTarget();
+        trigger.addChildren(new HoloMessageMechanic(ChatColor.RED + "Brrggrg!", 70));
+        DelayMechanic delayMechanic = new DelayMechanic(25);
+        trigger.addChildren(delayMechanic);
+        delayMechanic.addChildren(projectileZombieSpit);
+        delayMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_SPLASH));
+        projectileZombieSpit.addChildren(new DamageMechanic(rangedDamages(), DamageMechanic.DamageType.MAGIC));
+        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.SLOW, slowDuration(), slowAmplifiers());
+        projectileZombieSpit.addChildren(potionEffectMechanic);
+
+        return trigger;
+    }
+
+    private static SkillComponent getSkillAoeDamage() {
+        SelfTarget trigger = new SelfTarget();
         SelfTarget selfTargetForSound = new SelfTarget();
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, smallAreaRadius());
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_NORMAL));
         DamageMechanic damageMechanic = new DamageMechanic(meleeDamages(), DamageMechanic.DamageType.MELEE);
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
-        aoeSmallAroundTrigger.addChildren(new HoloMessageMechanic(ChatColor.AQUA + "Lightning!", 70));
+        trigger.addChildren(new HoloMessageMechanic(ChatColor.AQUA + "Lightning!", 70));
         DelayMechanic delayMechanic = new DelayMechanic(25);
-        aoeSmallAroundTrigger.addChildren(delayMechanic);
+        trigger.addChildren(delayMechanic);
         delayMechanic.addChildren(areaTarget);
         selfTargetForSound.addChildren(particleMechanic);
         areaTarget.addChildren(damageMechanic);
-        skillTrigger.put(AOE_DAMAGE, aoeSmallAroundTrigger);
+
+        return trigger;
     }
 
     //EntitySkills needs 10 skill level so 10 value for each list attribute of skill
@@ -163,6 +209,22 @@ public enum EntitySkill {
         return singleProjectile;
     }
 
+    private static List<Integer> tripleProjectile() {
+        List<Integer> singleProjectile = new ArrayList<>();
+        singleProjectile.add(3);
+        singleProjectile.add(3);
+        singleProjectile.add(3);
+        singleProjectile.add(3);
+        singleProjectile.add(3);
+        singleProjectile.add(3);
+        singleProjectile.add(3);
+        singleProjectile.add(3);
+        singleProjectile.add(3);
+        singleProjectile.add(3);
+
+        return singleProjectile;
+    }
+
     private static List<Double> smallAreaRadius() {
         List<Double> smallAreaRadius = new ArrayList<>();
         smallAreaRadius.add(2.5D);
@@ -201,6 +263,38 @@ public enum EntitySkill {
         poisonAmplifiers.add(1);
         poisonAmplifiers.add(1);
         poisonAmplifiers.add(1);
+        poisonAmplifiers.add(2);
+        poisonAmplifiers.add(2);
+        poisonAmplifiers.add(2);
+        poisonAmplifiers.add(2);
+        poisonAmplifiers.add(3);
+        poisonAmplifiers.add(3);
+
+        return poisonAmplifiers;
+    }
+
+    private static List<Integer> slowDuration() {
+        List<Integer> poisonDuration = new ArrayList<>();
+        poisonDuration.add(50);
+        poisonDuration.add(50);
+        poisonDuration.add(50);
+        poisonDuration.add(50);
+        poisonDuration.add(50);
+        poisonDuration.add(50);
+        poisonDuration.add(50);
+        poisonDuration.add(50);
+        poisonDuration.add(50);
+        poisonDuration.add(50);
+
+        return poisonDuration;
+    }
+
+    private static List<Integer> slowAmplifiers() {
+        List<Integer> poisonAmplifiers = new ArrayList<>();
+        poisonAmplifiers.add(2);
+        poisonAmplifiers.add(2);
+        poisonAmplifiers.add(2);
+        poisonAmplifiers.add(2);
         poisonAmplifiers.add(2);
         poisonAmplifiers.add(2);
         poisonAmplifiers.add(2);

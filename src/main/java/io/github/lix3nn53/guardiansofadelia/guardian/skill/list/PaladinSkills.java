@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.FlagCondition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.HealthCondition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityMechanic;
@@ -332,27 +331,15 @@ public class PaladinSkills {
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(900L);
-        TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(900L);
+        TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(cooldowns);
+        TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(cooldowns);
 
         HealthCondition healthCondition = new HealthCondition(0.0, 0.15);
-
-        List<Integer> flagTicks = new ArrayList<>();
-        flagTicks.add(20 * 60);
-        flagTicks.add(20 * 60);
-        flagTicks.add(20 * 60);
-        flagTicks.add(20 * 60);
-        flagTicks.add(20 * 60);
-        flagTicks.add(20 * 60);
-        FlagSetMechanic flagSetMechanic = new FlagSetMechanic("passiveCooldown", flagTicks);
-        FlagCondition flagCondition = new FlagCondition("passiveCooldown", false);
 
         skill.addTrigger(initializeTrigger);
 
         initializeTrigger.addChildren(tookPhysicalDamageTrigger);
-        tookPhysicalDamageTrigger.addChildren(flagCondition);
-        flagCondition.addChildren(healthCondition);
-        healthCondition.addChildren(flagSetMechanic);
+        tookPhysicalDamageTrigger.addChildren(healthCondition);
         List<Double> percents = new ArrayList<>();
         percents.add(0.3);
         percents.add(0.35);
@@ -364,7 +351,6 @@ public class PaladinSkills {
         healthCondition.addChildren(healMechanic);
 
         initializeTrigger.addChildren(tookMagicalDamageTrigger);
-        tookMagicalDamageTrigger.addChildren(flagCondition);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(120);

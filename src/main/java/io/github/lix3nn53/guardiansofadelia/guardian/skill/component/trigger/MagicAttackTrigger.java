@@ -11,11 +11,11 @@ import java.util.List;
 
 public class MagicAttackTrigger extends TriggerComponent {
 
-    private final long cooldown;
+    private final List<Integer> cooldown;
     LivingEntity caster;
     int skillLevel;
 
-    public MagicAttackTrigger(long cooldown) {
+    public MagicAttackTrigger(List<Integer> cooldown) {
         this.cooldown = cooldown;
     }
 
@@ -64,7 +64,7 @@ public class MagicAttackTrigger extends TriggerComponent {
             public void run() {
                 TriggerListener.startListeningMagicAttack(attacker, trigger);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown.get(skillLevel - 1) * 20);
 
         return true;
     }

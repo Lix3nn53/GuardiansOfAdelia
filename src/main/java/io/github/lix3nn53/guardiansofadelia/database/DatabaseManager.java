@@ -53,7 +53,6 @@ public class DatabaseManager {
         DatabaseQueries.createTables();
     }
 
-    /* updates tabList of player */
     public static void loadCharacter(Player player, int charNo, Location location) {
         Bukkit.getScheduler().runTaskAsynchronously(GuardiansOfAdelia.getInstance(), () -> {
             UUID uuid = player.getUniqueId();
@@ -68,8 +67,9 @@ public class DatabaseManager {
                     TablistUtils.updateTablist(player);
                     InventoryUtils.setMenuItemPlayer(player);
                     rpgCharacter.getSkillBar().remakeSkillBar();
-                    rpgCharacter.getRpgCharacterStats().onMaxHealthChange();
                     player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+                    int totalMaxMana = rpgCharacter.getRpgCharacterStats().getTotalMaxMana();
+                    rpgCharacter.getRpgCharacterStats().setCurrentMana(totalMaxMana);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -77,7 +77,6 @@ public class DatabaseManager {
         });
     }
 
-    /* updates tabList of player */
     public static void loadPlayerDataAndCharacterSelection(Player player) {
         player.sendMessage("Loading your player data..");
         UUID uuid = player.getUniqueId();

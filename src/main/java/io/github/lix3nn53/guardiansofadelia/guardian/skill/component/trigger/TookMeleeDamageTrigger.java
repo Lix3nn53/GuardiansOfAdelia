@@ -11,11 +11,11 @@ import java.util.List;
 
 public class TookMeleeDamageTrigger extends TriggerComponent {
 
-    private final long cooldown;
+    private final List<Integer> cooldown;
     LivingEntity caster;
     int skillLevel;
 
-    public TookMeleeDamageTrigger(long cooldown) {
+    public TookMeleeDamageTrigger(List<Integer> cooldown) {
         this.cooldown = cooldown;
     }
 
@@ -50,9 +50,9 @@ public class TookMeleeDamageTrigger extends TriggerComponent {
     /**
      * The callback when player lands that applies child components
      */
-    public boolean callback(Player target) {
+    public boolean callback(Player player, LivingEntity attacker) {
         ArrayList<LivingEntity> targets = new ArrayList<>();
-        targets.add(target);
+        targets.add(attacker);
         boolean cast = executeChildren(caster, skillLevel, targets);
 
         if (!cast) return false;
@@ -62,9 +62,9 @@ public class TookMeleeDamageTrigger extends TriggerComponent {
         new BukkitRunnable() {
             @Override
             public void run() {
-                TriggerListener.startListeningTookMeleeDamage(target, trigger);
+                TriggerListener.startListeningTookMeleeDamage(player, trigger);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown.get(skillLevel - 1) * 20);
 
         return true;
     }

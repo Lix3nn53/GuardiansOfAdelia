@@ -361,7 +361,7 @@ public class WarriorSkills {
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(900L);
+        TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(cooldowns);
 
         HealthCondition healthCondition = new HealthCondition(0.0, 0.15);
 

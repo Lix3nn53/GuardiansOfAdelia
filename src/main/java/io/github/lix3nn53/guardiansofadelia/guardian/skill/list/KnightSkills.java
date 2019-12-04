@@ -327,7 +327,7 @@ public class KnightSkills {
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(900L);
+        TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(cooldowns);
 
         List<Integer> ccTicks = new ArrayList<>();
         ccTicks.add(60);

@@ -11,11 +11,11 @@ import java.util.List;
 
 public class TookMagicalDamageTrigger extends TriggerComponent {
 
-    private final long cooldown;
+    private final List<Integer> cooldown;
     LivingEntity caster;
     int skillLevel;
 
-    public TookMagicalDamageTrigger(long cooldown) {
+    public TookMagicalDamageTrigger(List<Integer> cooldown) {
         this.cooldown = cooldown;
     }
 
@@ -50,9 +50,9 @@ public class TookMagicalDamageTrigger extends TriggerComponent {
     /**
      * The callback when player lands that applies child components
      */
-    public boolean callback(Player target) {
+    public boolean callback(Player player, LivingEntity attacker) {
         ArrayList<LivingEntity> targets = new ArrayList<>();
-        targets.add(target);
+        targets.add(attacker);
         boolean cast = executeChildren(caster, skillLevel, targets);
 
         if (!cast) return false;
@@ -62,9 +62,9 @@ public class TookMagicalDamageTrigger extends TriggerComponent {
         new BukkitRunnable() {
             @Override
             public void run() {
-                TriggerListener.startListeningTookMagicalDamage(target, trigger);
+                TriggerListener.startListeningTookMagicalDamage(player, trigger);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown.get(skillLevel - 1) * 20);
 
         return true;
     }

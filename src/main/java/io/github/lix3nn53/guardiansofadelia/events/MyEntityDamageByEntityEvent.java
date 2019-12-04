@@ -20,7 +20,7 @@ import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.github.lix3nn53.guardiansofadelia.utilities.hologram.FakeIndicator;
+import io.github.lix3nn53.guardiansofadelia.utilities.hologram.DamageIndicator;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -122,13 +122,24 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     }
 
                     Player playerTarget = (Player) target;
-                    if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
-                        TriggerListener.onPlayerTookMagicalDamage(playerTarget); //TookMagicalDamageTrigger
-                    } else {
-                        TriggerListener.onPlayerTookPhysicalDamage(playerTarget); //TookPhysicalDamageTrigger
+                    LivingEntity damageSource = null;
+                    if (damager instanceof Projectile) { //projectile is attacker
+                        Projectile projectile = (Projectile) damager;
+                        ProjectileSource shooter = projectile.getShooter();
+                        if (shooter instanceof LivingEntity) damageSource = (LivingEntity) shooter;
+                    } else if (damager instanceof LivingEntity) {
+                        damageSource = (LivingEntity) damager;
+                    }
 
-                        if (damageType.equals(DamageMechanic.DamageType.MELEE)) {
-                            TriggerListener.onPlayerTookMeleeDamage(playerTarget); //TookMeleeDamageTrigger
+                    if (damageSource != null) {
+                        if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
+                            TriggerListener.onPlayerTookMagicalDamage(playerTarget, damageSource); //TookMagicalDamageTrigger
+                        } else {
+                            TriggerListener.onPlayerTookPhysicalDamage(playerTarget, damageSource); //TookPhysicalDamageTrigger
+
+                            if (damageType.equals(DamageMechanic.DamageType.MELEE)) {
+                                TriggerListener.onPlayerTookMeleeDamage(playerTarget, damageSource); //TookMeleeDamageTrigger
+                            }
                         }
                     }
 
@@ -371,7 +382,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     indicatorColor = ChatColor.GOLD;
                 }
                 String text = indicatorColor.toString() + (int) (finalDamage + 0.5) + " " + indicatorIcon;
-                FakeIndicator.showPlayer(player, text, targetLocation);
+                double targetHeight = livingTarget.getHeight();
+                DamageIndicator.spawnNonPacket(text, targetLocation.clone().add(0, targetHeight + 0.5, 0));
 
                 //show bossbar
                 HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5), indicatorColor, indicatorIcon);

@@ -329,7 +329,7 @@ public class MageSkills {
 
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
-        TookMeleeDamageTrigger tookMeleeDamageTrigger = new TookMeleeDamageTrigger(900L);
+        TookMeleeDamageTrigger tookMeleeDamageTrigger = new TookMeleeDamageTrigger(cooldowns);
 
         List<Double> areas = new ArrayList<>();
         areas.add(3D);

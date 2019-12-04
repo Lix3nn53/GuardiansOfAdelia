@@ -39,11 +39,11 @@ public class SilenceMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0) {
-            additions.add(ChatColor.AQUA + "Silence duration: " + (int) ((duration.get(skillLevel) / 20) + 0.5) + " seconds");
+            additions.add(ChatColor.AQUA + "Silence duration: " + ((duration.get(skillLevel) / 20)) + " seconds");
         } else if (skillLevel == duration.size()) {
-            additions.add(ChatColor.AQUA + "Silence duration: " + (int) ((duration.get(skillLevel - 1) / 20) + 0.5) + " seconds");
+            additions.add(ChatColor.AQUA + "Silence duration: " + ((duration.get(skillLevel - 1) / 20)) + " seconds");
         } else {
-            additions.add(ChatColor.AQUA + "Silence duration: " + (int) ((duration.get(skillLevel - 1) / 20) + 0.5) + " seconds -> " + (int) ((duration.get(skillLevel) / 20) + 0.5));
+            additions.add(ChatColor.AQUA + "Silence duration: " + ((duration.get(skillLevel - 1) / 20)) + " seconds -> " + (int) ((duration.get(skillLevel) / 20) + 0.5));
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
