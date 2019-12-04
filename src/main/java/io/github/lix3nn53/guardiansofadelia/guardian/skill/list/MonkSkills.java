@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.st
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SingleTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.MeleeAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.RangedAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
@@ -370,7 +371,7 @@ public class MonkSkills {
 
         Skill skill = new Skill("Mark of Ocean", 6, Material.IRON_HOE, 60, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
-        SelfTarget selfTarget = new SelfTarget();
+        InitializeTrigger initializeTrigger = new InitializeTrigger();
 
         RangedAttackTrigger rangedAttackTrigger = new RangedAttackTrigger(cooldowns);
 
@@ -413,12 +414,12 @@ public class MonkSkills {
 
         FlagRemoveMechanic flagRemoveMechanic = new FlagRemoveMechanic("oceanMark");
 
-        skill.addTrigger(selfTarget);
+        skill.addTrigger(initializeTrigger);
 
-        selfTarget.addChildren(rangedAttackTrigger);
+        initializeTrigger.addChildren(rangedAttackTrigger);
         rangedAttackTrigger.addChildren(flagSetMechanic);
 
-        selfTarget.addChildren(meleeAttackTrigger);
+        initializeTrigger.addChildren(meleeAttackTrigger);
         meleeAttackTrigger.addChildren(flagCondition);
         flagCondition.addChildren(damageMechanic);
         flagCondition.addChildren(potionEffectMechanic);

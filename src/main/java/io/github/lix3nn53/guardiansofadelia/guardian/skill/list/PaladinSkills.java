@@ -333,13 +333,15 @@ public class PaladinSkills {
 
         TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(cooldowns);
         TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(cooldowns);
+        SelfTarget selfTarget = new SelfTarget();
 
         HealthCondition healthCondition = new HealthCondition(0.0, 0.15);
 
         skill.addTrigger(initializeTrigger);
 
         initializeTrigger.addChildren(tookPhysicalDamageTrigger);
-        tookPhysicalDamageTrigger.addChildren(healthCondition);
+        tookPhysicalDamageTrigger.addChildren(selfTarget);
+        selfTarget.addChildren(healthCondition);
         List<Double> percents = new ArrayList<>();
         percents.add(0.3);
         percents.add(0.35);
@@ -351,6 +353,8 @@ public class PaladinSkills {
         healthCondition.addChildren(healMechanic);
 
         initializeTrigger.addChildren(tookMagicalDamageTrigger);
+        tookMagicalDamageTrigger.addChildren(selfTarget);
+        selfTarget.addChildren(healthCondition);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(120);

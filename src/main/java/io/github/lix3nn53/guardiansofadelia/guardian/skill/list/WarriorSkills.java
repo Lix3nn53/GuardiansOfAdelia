@@ -362,6 +362,7 @@ public class WarriorSkills {
         InitializeTrigger initializeTrigger = new InitializeTrigger();
 
         TookPhysicalDamageTrigger tookPhysicalDamageTrigger = new TookPhysicalDamageTrigger(cooldowns);
+        SelfTarget selfTarget = new SelfTarget();
 
         HealthCondition healthCondition = new HealthCondition(0.0, 0.15);
 
@@ -393,7 +394,8 @@ public class WarriorSkills {
 
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(tookPhysicalDamageTrigger);
-        tookPhysicalDamageTrigger.addChildren(healthCondition);
+        tookPhysicalDamageTrigger.addChildren(selfTarget);
+        selfTarget.addChildren(healthCondition);
         healthCondition.addChildren(new SoundMechanic(GoaSound.SKILL_SCREAM));
         healthCondition.addChildren(potionEffectMechanic);
         healthCondition.addChildren(particleAnimationMechanic);
