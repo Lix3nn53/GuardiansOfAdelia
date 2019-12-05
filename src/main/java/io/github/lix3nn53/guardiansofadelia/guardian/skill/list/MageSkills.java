@@ -457,19 +457,9 @@ public class MageSkills {
         areas.add(12D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
-        List<Integer> repeatAmounts = new ArrayList<>();
-        repeatAmounts.add(1);
-        repeatAmounts.add(1);
-        repeatAmounts.add(1);
-        repeatAmounts.add(1);
-        repeatAmounts.add(1);
-        repeatAmounts.add(1);
-        RepeatMechanic repeatMechanic = new RepeatMechanic(40, repeatAmounts);
-
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(singleTarget);
-        singleTarget.addChildren(repeatMechanic);
-        repeatMechanic.addChildren(projectileMechanic);
+        singleTarget.addChildren(projectileMechanic);
         List<Double> damages = new ArrayList<>();
         damages.add(480D);
         damages.add(780D);

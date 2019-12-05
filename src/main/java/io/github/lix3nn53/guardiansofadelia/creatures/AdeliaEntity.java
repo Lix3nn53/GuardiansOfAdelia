@@ -5,16 +5,19 @@ import io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.EntitySkillCo
 import io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.EntitySkillSet;
 import io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.EntitySkills;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.ParticleMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.TeleportTargetMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
@@ -54,7 +57,6 @@ public enum AdeliaEntity {
     //AREA-2
     ZOMBIE,
     ZOMBIE_VILLAGER,
-    ZOMBIE_SHAMAN,
     ZOMBIE_SPLITTER,
     ZOMBIE_TANK,
     //AREA-3
@@ -123,8 +125,7 @@ public enum AdeliaEntity {
     BOSS_DARKNESS;
 
     /**
-     * Use this is entity doesn't have the GENERIC_ATTACK_DAMAGE attribute but can attack
-     * For example slimes and killer rabbits
+     * Use this instead of minecraft attack attribute of entity
      *
      * @param entity
      * @param customDamage
@@ -144,213 +145,162 @@ public enum AdeliaEntity {
     private void startSkillLoop(LivingEntity livingEntity) {
         List<SkillComponent> skills = new ArrayList<>();
         List<Integer> skillLevels = new ArrayList<>();
-        long cooldown = 160;
+        long cooldown = 150;
 
         if (this == AdeliaEntity.LIZARD_POISONOUS) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON, 80, 1));
+            SkillComponent trigger = EntitySkills.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Shoosh!", 40, children, GoaSound.SKILL_BUFF, Color.LIME, 1, 2.7);
             skills.add(trigger);
             skillLevels.add(1);
         } else if (this == AdeliaEntity.SLIME_STICKY) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentPullMechanic());
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.SLIME, 3, 12, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.GREEN + "Kyaa!", 40, children, GoaSound.SKILL_SPLASH, particleMechanic);
             skills.add(trigger);
             skillLevels.add(1);
         } else if (this == AdeliaEntity.ZOMBIE_VILLAGER) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MELEE));
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.VILLAGER_ANGRY, 3, 8, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.DARK_GREEN + "Grr!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
             skills.add(trigger);
             skillLevels.add(1);
         } else if (this == AdeliaEntity.ZOMBIE_SPLITTER) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
-            skillLevels.add(1);
-        } else if (this == AdeliaEntity.ZOMBIE_SHAMAN) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.SLOW, 80, 2));
+            SkillComponent trigger = EntitySkills.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Brgrgg!", 40, children, GoaSound.SKILL_BUFF, Color.LIME, 1, 1.7);
             skills.add(trigger);
             skillLevels.add(1);
         } else if (this == AdeliaEntity.SKELETON_MAGE) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            SkillComponent trigger = EntitySkills.getSkillProjectileFireball(ChatColor.RED + "Burrn!", 40, children, GoaSound.SKILL_PROJECTILE_FIRE, 1);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.CREEPER) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentPushMechanic());
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.EXPLOSION_HUGE, 3, 4, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "BOOM!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.JELLYBEAN) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentPushMechanic());
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.EXPLOSION_HUGE, 3, 4, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.LIGHT_PURPLE + "Confetti!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.PIRATE_SHARPSHOOTER) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            AreaTarget componentAreaTarget = EntitySkillComponents.getComponentAreaTarget(4);
+            componentAreaTarget.addChildren(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.RANGED));
+            componentAreaTarget.addChildren(EntitySkillComponents.getComponentPushMechanic());
+            children.add(componentAreaTarget);
+            SkillComponent trigger = EntitySkills.getSkillProjectileArrow(ChatColor.RED + "Firee!", 40, children, GoaSound.SKILL_PROJECTILE_FIRE, Color.ORANGE, 1);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.PIRATE_DUEL_MASTER) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MELEE));
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 3, 8, new Particle.DustOptions(Color.AQUA, 2));
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Slash!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.FROZEN_ILLUSIONER) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.CONFUSION, 80, 2));
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 3, 8, new Particle.DustOptions(Color.PURPLE, 2));
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Voo!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.MUMMY_GHOST) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(new TeleportTargetMechanic(true, true));
+            SkillComponent trigger = EntitySkills.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Shoosh!", 40, children, GoaSound.SKILL_BUFF, Color.YELLOW, 1, 2.7);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.WITCH) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
+            AreaTarget componentAreaTarget = EntitySkillComponents.getComponentAreaTarget(9);
+            componentAreaTarget.addChildren(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            componentAreaTarget.addChildren(EntitySkillComponents.getComponentLaunchMechanic());
+            children.add(componentAreaTarget);
+            ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.SPHERE, 4, 4,
+                    0, 0, 0, 0, 1, 0, 0, null);
+            children.add(particleMechanic);
+            SkillComponent projectileNova = EntitySkills.getSkillProjectileNova(ChatColor.DARK_PURPLE + "Dragon Fireball!", 40, children, GoaSound.SKILL_BUFF, 1, Particle.DRAGON_BREATH);
+
+            skills.add(projectileNova);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.GOBLIN_MAGE) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            SkillComponent trigger = EntitySkills.getSkillProjectileFireball(ChatColor.RED + "Burrn!", 40, children, GoaSound.SKILL_PROJECTILE_FIRE, 1);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.GOBLIN_SHAMAN) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentHealByAmount());
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 3, 8, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Heal!", 10, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.ORC_GLADIATOR) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MELEE));
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 3, 8, new Particle.DustOptions(Color.AQUA, 2));
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Slash!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.ORC_SHAMAN) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentHealByAmount());
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 3, 8, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Heal!", 10, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.ORC_MAGE) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            SkillComponent trigger = EntitySkills.getSkillProjectileFireball(ChatColor.RED + "Burrn!", 40, children, GoaSound.SKILL_PROJECTILE_FIRE, 1);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.PILLAGER_MAGE) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            SkillComponent trigger = EntitySkills.getSkillProjectileFireball(ChatColor.RED + "Burrn!", 40, children, GoaSound.SKILL_PROJECTILE_FIRE, 1);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.PILLAGER_SHAMAN) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
+            children.add(EntitySkillComponents.getComponentHealByAmount());
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 3, 8, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Heal!", 10, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
             skills.add(trigger);
             skillLevels.add(1);
-            cooldown = 80;
         } else if (this == AdeliaEntity.BOSS_SLIME) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
-            skillLevels.add(1);
-            cooldown = 80;
+
         } else if (this == AdeliaEntity.BOSS_ZOMBIE) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
-            skillLevels.add(1);
-            cooldown = 80;
+
         } else if (this == AdeliaEntity.BOSS_SKELETON) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
-            skillLevels.add(1);
-            cooldown = 80;
+
         } else if (this == AdeliaEntity.BOSS_COOK) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
-            skillLevels.add(1);
-            cooldown = 80;
+
         } else if (this == AdeliaEntity.BOSS_PIRATE) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
-            skillLevels.add(1);
-            cooldown = 80;
+
         } else if (this == AdeliaEntity.BOSS_ICE) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
-            skillLevels.add(1);
-            cooldown = 80;
+
         } else if (this == AdeliaEntity.BOSS_DESERT) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
-            skillLevels.add(1);
-            cooldown = 80;
+
         } else if (this == AdeliaEntity.BOSS_SWAMP) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
-            skillLevels.add(1);
-            cooldown = 80;
+
         } else if (this == AdeliaEntity.BOSS_LAVA) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
-            skillLevels.add(1);
-            cooldown = 80;
+
         } else if (this == AdeliaEntity.BOSS_DARKNESS) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle("hfdger", 1, 2.7, Color.LIME, children);
-            skills.add(trigger);
-            skillLevels.add(1);
-            cooldown = 80;
+
         }
 
         EntitySkillSet entitySkillSet = new EntitySkillSet(skills, skillLevels, cooldown);
@@ -582,21 +532,6 @@ public enum AdeliaEntity {
                 entity.setBaby(false);
                 entity.getEquipment().clear();
                 setEntityExperience(entity, 14);
-                setEntityDropTableNo(entity, 1);
-                livingEntity = entity;
-                break;
-            }
-            case ZOMBIE_SHAMAN: {
-                Zombie entity = (Zombie) EntityUtils.create(loc, ChatColor.DARK_GREEN + "Shaman Zombie", 50D, EntityType.ZOMBIE);
-                setCustomDamage(entity, 10);
-                entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.18D);
-                entity.setBaby(false);
-                entity.getEquipment().clear();
-                ItemStack wand = MonsterItem.STAFF_LEAF.getItem(0);
-                entity.getEquipment().setItemInMainHand(wand);
-                ItemStack circlet = MonsterItem.HELMET_GOLDEN.getItem(0);
-                entity.getEquipment().setHelmet(circlet);
-                setEntityExperience(entity, 16);
                 setEntityDropTableNo(entity, 1);
                 livingEntity = entity;
                 break;

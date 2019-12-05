@@ -24,7 +24,8 @@ public class ChatManager {
     private static final List<Player> chatCooldown = new ArrayList<>();
 
     public static void chatHologram(Player player, String message) {
-        Location location = player.getLocation().add(0, 2.4, 0);
+        double height = player.getHeight();
+        Location location = player.getLocation().clone().add(0, height + 0.4, 0);
 
         new BukkitRunnable() {
 
@@ -42,7 +43,7 @@ public class ChatManager {
                     if (ticksPass == 0) {
                         armorStand = new Hologram(location, ChatColor.YELLOW + "< " + ChatColor.GRAY + message + ChatColor.YELLOW + " >").getArmorStand();
                     }
-                    Location location = player.getLocation().add(0, 2.4, 0);
+                    Location location = player.getLocation().clone().add(0, height + 0.4, 0);
                     armorStand.teleport(location);
                     ticksPass++;
                 }
@@ -51,7 +52,8 @@ public class ChatManager {
     }
 
     public static void chatHologramEntity(Entity entity, String message, int durationTicks) {
-        Location location = entity.getLocation().add(0, 2.4, 0);
+        double height = entity.getHeight();
+        Location location = entity.getLocation().clone().add(0, height + 0.4, 0);
 
         new BukkitRunnable() {
 
@@ -67,7 +69,7 @@ public class ChatManager {
                     if (ticksPass == 0) {
                         armorStand = new Hologram(location, ChatColor.YELLOW + "< " + ChatColor.GRAY + message + ChatColor.YELLOW + " >").getArmorStand();
                     }
-                    Location location = entity.getLocation().add(0, 2.4, 0);
+                    Location location = entity.getLocation().clone().add(0, height + 0.4, 0);
                     armorStand.teleport(location);
                     ticksPass += 2;
                 }
