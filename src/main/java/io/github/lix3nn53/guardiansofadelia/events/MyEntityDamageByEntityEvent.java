@@ -42,8 +42,12 @@ public class MyEntityDamageByEntityEvent implements Listener {
         return 0;
     }
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEvent(EntityDamageByEntityEvent event) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.sendMessage("Cause: " + event.getCause());
+            player.sendMessage("Damage: " + event.getDamage());
+        }
         Entity damager = event.getDamager();
 
         if (damager instanceof LivingEntity) {
@@ -113,13 +117,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
             //TARGET
             if (!isEventCanceled) {
                 if (target.getType().equals(EntityType.PLAYER)) { //player is target
-                    double damage = event.getDamage();
-
-                    int customDamage = getCustomDamage(damager);
-                    if (customDamage > 0) {
-                        event.setDamage(customDamage);
-                        damage = customDamage; //so vanilla def is not included if target is player
-                    }
 
                     Player playerTarget = (Player) target;
                     LivingEntity damageSource = null;
@@ -129,6 +126,18 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         if (shooter instanceof LivingEntity) damageSource = (LivingEntity) shooter;
                     } else if (damager instanceof LivingEntity) {
                         damageSource = (LivingEntity) damager;
+                    }
+
+                    double damage = event.getDamage();
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        player.sendMessage("Damage2: " + event.getDamage());
+                    }
+                    if (!isSkill) { //deal mob damage if melee or projectile
+                        int customDamage = getCustomDamage(damageSource);
+                        if (customDamage > 0) {
+                            event.setDamage(customDamage);
+                            damage = customDamage; //so vanilla def is not included if target is player
+                        }
                     }
 
                     if (damageSource != null) {
@@ -164,6 +173,12 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 damage = damage * reduction;
 
                                 event.setDamage(damage);
+
+                                for (Player player : Bukkit.getOnlinePlayers()) {
+                                    player.sendMessage(reduction + "");
+                                    player.sendMessage("FinalDamage: " + event.getFinalDamage());
+                                    player.sendMessage(damageType.toString());
+                                }
                             }
                         }
                     }
@@ -321,7 +336,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     if (GuardianDataManager.hasGuardianData(targetUniqueId)) {
                         GuardianData targetGuardianData = GuardianDataManager.getGuardianData(targetUniqueId);
                         if (targetGuardianData.hasActiveCharacter()) {
-                            playerTarget.sendMessage("base: " + damage);
+                            playerTarget.sendMessage("vs player base: " + damage);
 
                             RPGCharacter targetActiveCharacter = targetGuardianData.getActiveCharacter();
 
@@ -335,7 +350,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             double reduction = StatUtils.getDefenseReduction(totalDefense);
 
                             damage = damage * reduction;
-                            playerTarget.sendMessage("calc: " + damage);
+                            playerTarget.sendMessage("vs player calc: " + damage);
                         }
                     }
                 }

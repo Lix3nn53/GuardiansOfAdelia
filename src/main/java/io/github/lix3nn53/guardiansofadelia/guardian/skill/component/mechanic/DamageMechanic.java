@@ -2,8 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 
@@ -24,6 +26,11 @@ public class DamageMechanic extends MechanicComponent {
         double calcDamage = damage.get(skillLevel - 1);
 
         for (LivingEntity ent : targets) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.sendMessage("caster: " + caster.getName() + "");
+                player.sendMessage("Target: " + ent.getName() + "");
+                player.sendMessage("Damage Mechanic: " + calcDamage + "");
+            }
             SkillUtils.setDamageType(damageType);
             ent.setNoDamageTicks(0);
             ent.damage(calcDamage, caster);

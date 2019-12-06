@@ -267,12 +267,12 @@ public class MageSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
 
         List<Double> speeds = new ArrayList<>();
-        speeds.add(2D);
-        speeds.add(2.1);
-        speeds.add(2.2);
-        speeds.add(2.3);
-        speeds.add(2.4);
+        speeds.add(2.6);
         speeds.add(2.8);
+        speeds.add(3.0);
+        speeds.add(3.2D);
+        speeds.add(3.4);
+        speeds.add(4D);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         skill.addTrigger(selfTarget);
@@ -375,10 +375,13 @@ public class MageSkills {
 
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(tookMeleeDamageTrigger);
-        tookMeleeDamageTrigger.addChildren(areaTarget);
-        tookMeleeDamageTrigger.addChildren(potionEffectMechanic);
+        SelfTarget selfTarget = new SelfTarget();
+        selfTarget.addChildren(new MessageMechanic(ChatColor.AQUA + "Your passive skill rooted enemies around you.."));
+        tookMeleeDamageTrigger.addChildren(selfTarget);
+        selfTarget.addChildren(areaTarget);
+        selfTarget.addChildren(potionEffectMechanic);
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 3.4, 11, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.AQUA, 2));
-        tookMeleeDamageTrigger.addChildren(particleMechanic);
+        selfTarget.addChildren(particleMechanic);
         areaTarget.addChildren(new MessageMechanic(ChatColor.AQUA + "You got rooted by a mage's passive skill.."));
 
         return skill;

@@ -307,6 +307,16 @@ public class TemporaryEntity implements LivingEntity {
     }
 
     @Override
+    public double getAbsorptionAmount() {
+        return 0;
+    }
+
+    @Override
+    public void setAbsorptionAmount(double v) {
+
+    }
+
+    @Override
     public double getMaxHealth() {
         return 1;
     }

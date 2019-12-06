@@ -149,138 +149,138 @@ public enum AdeliaEntity {
 
         if (this == AdeliaEntity.LIZARD_POISONOUS) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON, 80, 1));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Shoosh!", 40, children, GoaSound.SKILL_BUFF, Color.LIME, 1, 2.7);
+            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.POISON, 50, 1));
+            SkillComponent trigger = EntitySkills.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Shoosh!", 40, children, GoaSound.SKILL_POISON_SLASH, Color.LIME, 1, 2.7);
             skills.add(trigger);
             skillLevels.add(1);
         } else if (this == AdeliaEntity.SLIME_STICKY) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentPullMechanic());
-            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.SLIME, 3, 12, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.GREEN + "Kyaa!", 40, children, GoaSound.SKILL_SPLASH, particleMechanic);
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.SLIME, 3.6, 12, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.GREEN + "Kyaa!", 40, children, 4, GoaSound.SKILL_SPLASH, particleMechanic);
             skills.add(trigger);
             skillLevels.add(1);
         } else if (this == AdeliaEntity.ZOMBIE_VILLAGER) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MELEE));
-            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.VILLAGER_ANGRY, 3, 8, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.DARK_GREEN + "Grr!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.VILLAGER_ANGRY, 2.8, 8, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.DARK_GREEN + "Grr!", 40, children, 3.2, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
             skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(2);
         } else if (this == AdeliaEntity.ZOMBIE_SPLITTER) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.SLOW, 80, 2));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Brgrgg!", 40, children, GoaSound.SKILL_BUFF, Color.LIME, 1, 1.7);
+            SkillComponent trigger = EntitySkills.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Brgrgg!", 40, children, GoaSound.SKILL_SPLASH, Color.LIME, 3, 1.4);
             skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(2);
         } else if (this == AdeliaEntity.SKELETON_MAGE) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            AreaTarget componentAreaTarget = EntitySkillComponents.getComponentAreaTarget(2.8);
+            componentAreaTarget.addChildren(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            children.add(componentAreaTarget);
             SkillComponent trigger = EntitySkills.getSkillProjectileFireball(ChatColor.RED + "Burrn!", 40, children, GoaSound.SKILL_PROJECTILE_FIRE, 1);
             skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(3);
         } else if (this == AdeliaEntity.CREEPER) {
             List<SkillComponent> children = new ArrayList<>();
+            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
             children.add(EntitySkillComponents.getComponentPushMechanic());
-            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.EXPLOSION_HUGE, 3, 4, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "BOOM!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.EXPLOSION_HUGE, 4.2, 4, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "BOOM!", 40, children, 4.2, GoaSound.SKILL_SONIC_BOOM, particleMechanic);
             skills.add(trigger);
-            skillLevels.add(1);
-        } else if (this == AdeliaEntity.JELLYBEAN) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPushMechanic());
-            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.EXPLOSION_HUGE, 3, 4, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.LIGHT_PURPLE + "Confetti!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
-            skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(4);
         } else if (this == AdeliaEntity.PIRATE_SHARPSHOOTER) {
             List<SkillComponent> children = new ArrayList<>();
             AreaTarget componentAreaTarget = EntitySkillComponents.getComponentAreaTarget(4);
             componentAreaTarget.addChildren(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.RANGED));
             componentAreaTarget.addChildren(EntitySkillComponents.getComponentPushMechanic());
             children.add(componentAreaTarget);
-            SkillComponent trigger = EntitySkills.getSkillProjectileArrow(ChatColor.RED + "Firee!", 40, children, GoaSound.SKILL_PROJECTILE_FIRE, Color.ORANGE, 1);
+            SkillComponent trigger = EntitySkills.getSkillProjectileArrow(ChatColor.RED + "Firee!", 40, children, GoaSound.SKILL_SONIC_BOOM, Color.ORANGE, 1);
             skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(5);
         } else if (this == AdeliaEntity.PIRATE_DUEL_MASTER) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MELEE));
-            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 3, 8, new Particle.DustOptions(Color.AQUA, 2));
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Slash!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 2.8, 8, new Particle.DustOptions(Color.AQUA, 2));
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Slash!", 40, children, 3.2, GoaSound.SKILL_SWORD_MULTI_SLASH, particleMechanic);
             skills.add(trigger);
-            skillLevels.add(1);
-        } else if (this == AdeliaEntity.FROZEN_ILLUSIONER) {
-            List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentPotionEffectMechanic(PotionEffectType.CONFUSION, 80, 2));
-            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 3, 8, new Particle.DustOptions(Color.PURPLE, 2));
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Voo!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
-            skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(5);
         } else if (this == AdeliaEntity.MUMMY_GHOST) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(new TeleportTargetMechanic(true, true));
-            SkillComponent trigger = EntitySkills.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Shoosh!", 40, children, GoaSound.SKILL_BUFF, Color.YELLOW, 1, 2.7);
+            SkillComponent trigger = EntitySkills.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Shoosh!", 40, children, GoaSound.SKILL_VOID_SIGNAL, Color.YELLOW, 1, 2.7);
             skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(7);
         } else if (this == AdeliaEntity.WITCH) {
             List<SkillComponent> children = new ArrayList<>();
-            AreaTarget componentAreaTarget = EntitySkillComponents.getComponentAreaTarget(9);
+            AreaTarget componentAreaTarget = EntitySkillComponents.getComponentAreaTarget(3.6);
             componentAreaTarget.addChildren(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
             componentAreaTarget.addChildren(EntitySkillComponents.getComponentLaunchMechanic());
             children.add(componentAreaTarget);
             ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.SPHERE, 4, 4,
                     0, 0, 0, 0, 1, 0, 0, null);
             children.add(particleMechanic);
-            SkillComponent projectileNova = EntitySkills.getSkillProjectileNova(ChatColor.DARK_PURPLE + "Dragon Fireball!", 40, children, GoaSound.SKILL_BUFF, 1, Particle.DRAGON_BREATH);
+            SkillComponent projectileNova = EntitySkills.getSkillProjectileNova(ChatColor.DARK_PURPLE + "Dragon Fireball!", 40, children, GoaSound.SKILL_FIRE_AURA, 1, Particle.DRAGON_BREATH);
 
             skills.add(projectileNova);
-            skillLevels.add(1);
+            skillLevels.add(8);
         } else if (this == AdeliaEntity.GOBLIN_MAGE) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            AreaTarget componentAreaTarget = EntitySkillComponents.getComponentAreaTarget(2.8);
+            componentAreaTarget.addChildren(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            children.add(componentAreaTarget);
             SkillComponent trigger = EntitySkills.getSkillProjectileFireball(ChatColor.RED + "Burrn!", 40, children, GoaSound.SKILL_PROJECTILE_FIRE, 1);
             skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(8);
         } else if (this == AdeliaEntity.GOBLIN_SHAMAN) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentHealByAmount());
-            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 3, 8, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Heal!", 10, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 8, 12, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Don't fall, fools!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic);
             skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(8);
         } else if (this == AdeliaEntity.ORC_GLADIATOR) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MELEE));
-            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 3, 8, new Particle.DustOptions(Color.AQUA, 2));
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Slash!", 40, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 2.8, 8, new Particle.DustOptions(Color.AQUA, 2));
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Slash!", 40, children, 2.8, GoaSound.SKILL_SWORD_MULTI_SLASH, particleMechanic);
             skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(9);
         } else if (this == AdeliaEntity.ORC_SHAMAN) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentHealByAmount());
-            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 3, 8, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Heal!", 10, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 8, 12, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Stop them, fools!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic);
             skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(9);
         } else if (this == AdeliaEntity.ORC_MAGE) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            AreaTarget componentAreaTarget = EntitySkillComponents.getComponentAreaTarget(2.8);
+            componentAreaTarget.addChildren(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            children.add(componentAreaTarget);
             SkillComponent trigger = EntitySkills.getSkillProjectileFireball(ChatColor.RED + "Burrn!", 40, children, GoaSound.SKILL_PROJECTILE_FIRE, 1);
             skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(9);
         } else if (this == AdeliaEntity.PILLAGER_MAGE) {
             List<SkillComponent> children = new ArrayList<>();
-            children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
-            SkillComponent trigger = EntitySkills.getSkillProjectileFireball(ChatColor.RED + "Burrn!", 40, children, GoaSound.SKILL_PROJECTILE_FIRE, 1);
-            skills.add(trigger);
-            skillLevels.add(1);
+            AreaTarget componentAreaTarget = EntitySkillComponents.getComponentAreaTarget(3.6);
+            componentAreaTarget.addChildren(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
+            componentAreaTarget.addChildren(EntitySkillComponents.getComponentLaunchMechanic());
+            children.add(componentAreaTarget);
+            ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.SPHERE, 4, 4,
+                    0, 0, 0, 0, 1, 0, 0, null);
+            children.add(particleMechanic);
+            SkillComponent projectileNova = EntitySkills.getSkillProjectileNova(ChatColor.DARK_PURPLE + "Dragon Fireball!", 40, children, GoaSound.SKILL_FIRE_AURA, 1, Particle.DRAGON_BREATH);
+
+            skills.add(projectileNova);
+            skillLevels.add(10);
         } else if (this == AdeliaEntity.PILLAGER_SHAMAN) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentHealByAmount());
-            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 3, 8, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Heal!", 10, children, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 8, 12, null);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Stop them, fools!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic);
             skills.add(trigger);
-            skillLevels.add(1);
+            skillLevels.add(10);
         } else if (this == AdeliaEntity.BOSS_SLIME) {
 
         } else if (this == AdeliaEntity.BOSS_ZOMBIE) {
@@ -716,11 +716,10 @@ public enum AdeliaEntity {
                 break;
             }
             case FROZEN_ILLUSIONER: {
-                Stray entity = (Stray) EntityUtils.create(loc, ChatColor.AQUA + "Frozen Illusioner", 1200D, EntityType.STRAY);
+                Illusioner entity = (Illusioner) EntityUtils.create(loc, ChatColor.AQUA + "Frozen Illusioner", 1200D, EntityType.ILLUSIONER);
                 setCustomDamage(entity, 190);
-                entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3D);
                 entity.getEquipment().clear();
-                ItemStack dagger = MonsterItem.STAFF_OCEAN.getItem(0);
+                ItemStack dagger = MonsterItem.BOW_DARK.getItem(0);
                 entity.getEquipment().setItemInMainHand(dagger);
                 setEntityExperience(entity, 420);
                 setEntityDropTableNo(entity, 5);

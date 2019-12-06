@@ -13,6 +13,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
@@ -26,14 +28,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 public class CommandLix implements CommandExecutor {
@@ -100,14 +100,14 @@ public class CommandLix implements CommandExecutor {
                         }
                     }
                 }
+            } else if (args[0].equals("fly")) {
+                boolean allowFlight = player.getAllowFlight();
+                player.setFlying(!allowFlight);
             } else if (args[0].equals("debug")) {
-                List<Entity> nearbyEntities = player.getNearbyEntities(3, 3, 3);
-                for (Entity entity : nearbyEntities) {
-                    player.sendMessage(entity.getType().toString());
-                    if (entity.isCustomNameVisible()) {
-                        player.sendMessage(Objects.requireNonNull(entity.getCustomName()));
-                    }
-                }
+                LivingEntity caster = AdeliaEntity.SLIME.getMob(player.getLocation());
+                SkillUtils.setDamageType(DamageMechanic.DamageType.MELEE);
+                player.setNoDamageTicks(0);
+                player.damage(100, caster);
             } else if (args[0].equals("weapon")) {
                 if (args.length == 3) {
                     RPGClass rpgClass = RPGClass.valueOf(args[1]);

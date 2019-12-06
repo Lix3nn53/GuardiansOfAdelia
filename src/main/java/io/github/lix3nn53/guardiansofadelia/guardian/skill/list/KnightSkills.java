@@ -344,6 +344,9 @@ public class KnightSkills {
         tookMagicalDamageTrigger.addChildren(silenceMechanic);
         tookMagicalDamageTrigger.addChildren(new MessageMechanic(ChatColor.AQUA + "You got silenced by a knight's passive skill.."));
         tookMagicalDamageTrigger.addChildren(new SoundMechanic(GoaSound.SKILL_SPLASH));
+        SelfTarget selfTarget = new SelfTarget();
+        tookMagicalDamageTrigger.addChildren(selfTarget);
+        selfTarget.addChildren(new MessageMechanic(ChatColor.AQUA + "Your passive skill silenced the attacker.."));
 
         return skill;
     }

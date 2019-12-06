@@ -105,31 +105,31 @@ public class EntitySkills {
         return emptyComponent;
     }
 
-    public static SkillComponent getSkillAoeAround(String holoWarnMessage, int delay, List<SkillComponent> children, GoaSound goaSound, ParticleMechanic particleMechanic) {
+    public static SkillComponent getSkillAoeAround(String holoWarnMessage, int delay, List<SkillComponent> children, double radius, GoaSound goaSound, ParticleMechanic particleMechanic) {
         SelfTarget trigger = new SelfTarget();
         SelfTarget selfTargetForSound = new SelfTarget();
-        List<Double> smallAreaRadius = new ArrayList<>();
-        smallAreaRadius.add(2.5D);
-        smallAreaRadius.add(2.75D);
-        smallAreaRadius.add(3D);
-        smallAreaRadius.add(3.25D);
-        smallAreaRadius.add(3.5D);
-        smallAreaRadius.add(4D);
-        smallAreaRadius.add(4D);
-        smallAreaRadius.add(4D);
-        smallAreaRadius.add(4D);
-        smallAreaRadius.add(4D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, smallAreaRadius);
+        List<Double> radiusList = new ArrayList<>();
+        radiusList.add(radius);
+        radiusList.add(radius);
+        radiusList.add(radius);
+        radiusList.add(radius);
+        radiusList.add(radius);
+        radiusList.add(radius);
+        radiusList.add(radius);
+        radiusList.add(radius);
+        radiusList.add(radius);
+        radiusList.add(radius);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiusList);
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(new SoundMechanic(goaSound));
         trigger.addChildren(new HoloMessageMechanic(holoWarnMessage, 70));
         DelayMechanic delayMechanic = new DelayMechanic(delay);
         trigger.addChildren(delayMechanic);
-        delayMechanic.addChildren(areaTarget);
-        selfTargetForSound.addChildren(particleMechanic);
         for (SkillComponent child : children) {
             areaTarget.addChildren(child);
         }
+        delayMechanic.addChildren(areaTarget);
+        selfTargetForSound.addChildren(particleMechanic);
 
         return trigger;
     }

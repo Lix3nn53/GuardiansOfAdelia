@@ -354,7 +354,6 @@ public class PaladinSkills {
 
         initializeTrigger.addChildren(tookMagicalDamageTrigger);
         tookMagicalDamageTrigger.addChildren(selfTarget);
-        selfTarget.addChildren(healthCondition);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(120);
