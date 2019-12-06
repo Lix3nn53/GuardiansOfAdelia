@@ -282,7 +282,14 @@ public enum AdeliaEntity {
             skills.add(trigger);
             skillLevels.add(10);
         } else if (this == AdeliaEntity.BOSS_SLIME) {
-
+            List<SkillComponent> children = new ArrayList<>();
+            List<AdeliaEntity> adeliaEntities = new ArrayList<>();
+            adeliaEntities.add(SLIME);
+            children.add(EntitySkillComponents.getComponentSpawnEntity(adeliaEntities, 2));
+            ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 8, 8, new Particle.DustOptions(Color.AQUA, 2));
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.GREEN + "Heelp!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic);
+            skills.add(trigger);
+            skillLevels.add(10);
         } else if (this == AdeliaEntity.BOSS_ZOMBIE) {
 
         } else if (this == AdeliaEntity.BOSS_SKELETON) {

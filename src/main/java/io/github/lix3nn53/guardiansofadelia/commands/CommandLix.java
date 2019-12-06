@@ -13,8 +13,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
@@ -104,10 +102,11 @@ public class CommandLix implements CommandExecutor {
                 boolean allowFlight = player.getAllowFlight();
                 player.setFlying(!allowFlight);
             } else if (args[0].equals("debug")) {
-                LivingEntity caster = AdeliaEntity.SLIME.getMob(player.getLocation());
-                SkillUtils.setDamageType(DamageMechanic.DamageType.MELEE);
-                player.setNoDamageTicks(0);
-                player.damage(100, caster);
+                Location location = player.getLocation();
+                LivingEntity entity = (LivingEntity) location.getWorld().spawnEntity(location, EntityType.ZOMBIE);
+                //LivingEntity entity2 = (LivingEntity) location.getWorld().spawnEntity(location, EntityType.ZOMBIE);
+                entity.setNoDamageTicks(0);
+                player.damage(200, entity);
             } else if (args[0].equals("weapon")) {
                 if (args.length == 3) {
                     RPGClass rpgClass = RPGClass.valueOf(args[1]);
