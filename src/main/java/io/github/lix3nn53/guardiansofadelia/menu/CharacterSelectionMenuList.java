@@ -221,7 +221,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(22, city4);
 
         ItemStack city5 = new ItemStack(Material.LIGHT_BLUE_WOOL, 5);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Teleport to Arberstol Ruins");
+        itemMeta.setDisplayName(ChatColor.AQUA + "Teleport to Alberstol Ruins");
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.YELLOW + "Required level: 70");

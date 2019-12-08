@@ -35,9 +35,10 @@ public class QuestsPhase9 {
 
     private static void createQuestOne() {
         List<String> story = new ArrayList<>();
-        story.add("Congratulations! You improved a lot since");
-        story.add("you you have become a Guardian. You are ready");
-        story.add("to move the port city, Elderine.");
+        story.add("You have become one of the strongest");
+        story.add("Guardians in Adelia. You must go");
+        story.add("to Alberstol Ruins, fallen city of angels.");
+        story.add("But to do so, you need permission from the Gatekeeper.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(67);
         List<Task> tasks = new ArrayList<>();
@@ -52,9 +53,10 @@ public class QuestsPhase9 {
 
     private static void createQuestTwo() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("To be able to use the portal you");
+        story.add("must complete Gatekeeper's trial.");
+        story.add("Gatekeeper wants you to conquer the tower");
+        story.add("at Burning Rock's entrance.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(68);
 
@@ -199,9 +201,8 @@ public class QuestsPhase9 {
 
     private static void createQuestNine() {
         List<String> story = new ArrayList<>();
-        story.add("Collect some candies and bring");
-        story.add("them to Jasper. So he can try to");
-        story.add("find whats wrong with them.");
+        story.add("Collect some of the flags orcs");
+        story.add("are carrying to identify.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(71);
 

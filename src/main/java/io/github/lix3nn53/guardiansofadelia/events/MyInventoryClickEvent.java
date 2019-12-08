@@ -357,7 +357,7 @@ public class MyInventoryClickEvent implements Listener {
                 } else if (currentName.contains("Uruga")) {
                     Location location = TownManager.getTown(4).getLocation();
                     CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
-                } else if (currentName.contains("Arberstol Ruins")) {
+                } else if (currentName.contains("Alberstol Ruins")) {
                     Location location = TownManager.getTown(5).getLocation();
                     CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("last location")) {

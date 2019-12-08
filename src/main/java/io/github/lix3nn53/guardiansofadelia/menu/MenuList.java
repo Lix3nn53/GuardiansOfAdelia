@@ -447,7 +447,7 @@ public class MenuList {
         city.setItemMeta(itemMeta);
         guiGeneric.setItem(6, city);
 
-        itemMeta.setDisplayName(ChatColor.AQUA + "Arberstol Ruins #5");
+        itemMeta.setDisplayName(ChatColor.AQUA + "Alberstol Ruins #5");
         city.setItemMeta(itemMeta);
         guiGeneric.setItem(8, city);
 

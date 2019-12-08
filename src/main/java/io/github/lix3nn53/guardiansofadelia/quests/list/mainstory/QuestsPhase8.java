@@ -113,7 +113,7 @@ public class QuestsPhase8 {
     private static void createQuestFive() {
         List<String> story = new ArrayList<>();
         story.add("Collect some of the flags goblins");
-        story.add("????????");
+        story.add("are carrying to identify.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(60);
 
@@ -138,8 +138,10 @@ public class QuestsPhase8 {
 
     private static void createQuestSix() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("Some dark magic users are");
+        story.add("walking around goblins.");
+        story.add("Maybe they are the ones controlling");
+        story.add("goblins and bringing them together?");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(60);
         List<Task> tasks = new ArrayList<>();
@@ -158,8 +160,8 @@ public class QuestsPhase8 {
 
     private static void createQuestSeven() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("We have found where they are");
+        story.add("keeping Esobel hostage.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(61);
         requiredQuests.add(62);
@@ -182,14 +184,14 @@ public class QuestsPhase8 {
 
     private static void createQuestEight() {
         List<String> story = new ArrayList<>();
-        story.add("Report back that candies tastes");
-        story.add("amazing one again.");
+        story.add("Report back that Esobel's lust for power");
+        story.add("made him a pray for darkness.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(66);
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Commander Erwin that traitor Esobel is defeated";
+        String objectiveText = "Report back to Commander Erwin that Esobel is stopped";
         Quest quest = new Quest(67, "Swamp of Dawn report", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 60000, 0, requiredQuests,
