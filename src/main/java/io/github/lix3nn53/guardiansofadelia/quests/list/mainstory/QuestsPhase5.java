@@ -123,7 +123,7 @@ public class QuestsPhase5 {
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_AQUA + "Fighter Pirate");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_AQUA + "Sharpshooter Pirate");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_AQUA + "Duel Master Pirate");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 20);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(39), 20);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

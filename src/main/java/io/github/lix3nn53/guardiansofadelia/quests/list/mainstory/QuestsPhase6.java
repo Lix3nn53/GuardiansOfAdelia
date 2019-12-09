@@ -92,7 +92,7 @@ public class QuestsPhase6 {
     private static void createQuestFour() {
         List<String> story = new ArrayList<>();
         story.add("Find out what jockeys are defending");
-        story.add("insede the cave.");
+        story.add("inside the cave.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(43);
 
@@ -123,7 +123,7 @@ public class QuestsPhase6 {
         nameOfMobsItemDropsFrom.add(ChatColor.AQUA + "Frozen Illusioner");
         nameOfMobsItemDropsFrom.add(ChatColor.AQUA + "Frozen Ranger");
         nameOfMobsItemDropsFrom.add(ChatColor.AQUA + "Frozen Timberman");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 30);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(47), 30);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

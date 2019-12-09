@@ -76,9 +76,8 @@ public class QuestsPhase9 {
 
     private static void createQuestThree() {
         List<String> story = new ArrayList<>();
-        story.add("Congratulations! You improved a lot since");
-        story.add("you you have become a Guardian. You are ready");
-        story.add("to move the port city, Elderine.");
+        story.add("You can enter the portal to Alberstol Ruins.");
+        story.add("Go and talk with the Archangel.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(69);
         List<Task> tasks = new ArrayList<>();
@@ -93,9 +92,9 @@ public class QuestsPhase9 {
 
     private static void createQuestFour() {
         List<String> story = new ArrayList<>();
-        story.add("Congratulations! You improved a lot since");
-        story.add("you you have become a Guardian. You are ready");
-        story.add("to move the port city, Elderine.");
+        story.add("Orcs have become very aggressive lately.");
+        story.add("Talk with Vruhag, an orc guardian, to learn");
+        story.add("whats happening.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(70);
         List<Task> tasks = new ArrayList<>();
@@ -110,9 +109,8 @@ public class QuestsPhase9 {
 
     private static void createQuestFive() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Fire monsters are destroying the land.");
+        story.add("We have to stop them for good.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(71);
 
@@ -133,9 +131,8 @@ public class QuestsPhase9 {
 
     private static void createQuestSix() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Orcs are being controlled Aleesia's");
+        story.add("dark magic. We have to stop them.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(71);
 
@@ -156,9 +153,8 @@ public class QuestsPhase9 {
 
     private static void createQuestSeven() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Orcs are being controlled Aleesia's");
+        story.add("dark magic. We have to stop them.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(71);
 
@@ -179,9 +175,8 @@ public class QuestsPhase9 {
 
     private static void createQuestEight() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Find out what jockeys are defending");
+        story.add("inside the cave.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(71);
 
@@ -213,7 +208,7 @@ public class QuestsPhase9 {
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Jockey Orc");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Shaman Orc");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Mage Orc");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 60);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(76), 60);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -227,8 +222,8 @@ public class QuestsPhase9 {
 
     private static void createQuestTen() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("Orcs are being controlled Aleesia's");
+        story.add("dark magic. We have to stop them.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(71);
         List<Task> tasks = new ArrayList<>();
@@ -247,8 +242,9 @@ public class QuestsPhase9 {
 
     private static void createQuestEleven() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("We have found basement of the");
+        story.add("orc warchief, Drogoth. If we defeat");
+        story.add("him, it might remove the curse.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(72);
         requiredQuests.add(73);
@@ -272,14 +268,14 @@ public class QuestsPhase9 {
 
     private static void createQuestTwelve() {
         List<String> story = new ArrayList<>();
-        story.add("Report back that candies tastes");
-        story.add("amazing one again.");
+        story.add("Report back that the orcs");
+        story.add("regained their will.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(78);
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Archangel orcs regained their freedom";
+        String objectiveText = "Report back to Archangel orcs regained their will";
         Quest quest = new Quest(79, "Burning rock report", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 53000, 0, requiredQuests,

@@ -140,7 +140,7 @@ public class QuestsPhase7 {
         List<String> nameOfMobsItemDropsFrom = new ArrayList<>();
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Mummy");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Ghost Mummy");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 41);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(56), 41);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

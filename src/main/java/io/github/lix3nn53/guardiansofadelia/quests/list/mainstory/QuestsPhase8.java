@@ -124,7 +124,7 @@ public class QuestsPhase8 {
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Shaman Goblin");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Mage Goblin");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Jockey Goblin");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 47);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(64), 47);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

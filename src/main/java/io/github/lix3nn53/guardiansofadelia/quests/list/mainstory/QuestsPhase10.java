@@ -36,9 +36,9 @@ public class QuestsPhase10 {
 
     private static void createQuestOne() {
         List<String> story = new ArrayList<>();
-        story.add("Congratulations! You improved a lot since");
-        story.add("you you have become a Guardian. You are ready");
-        story.add("to move the port city, Elderine.");
+        story.add("Archangel wants you to complete");
+        story.add("a challenge. Go and repair the flag");
+        story.add("of Alberstol Ruins.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(79);
 
@@ -58,9 +58,9 @@ public class QuestsPhase10 {
 
     private static void createQuestTwo() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Creatures of darkness deforming the");
+        story.add("lands of Adelia. We have to stop them");
+        story.add("before it's too late.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(80);
 
@@ -81,9 +81,8 @@ public class QuestsPhase10 {
 
     private static void createQuestThree() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Villagers who lost to their desires,");
+        story.add("lost their souls and became pillagers.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(80);
 
@@ -104,9 +103,8 @@ public class QuestsPhase10 {
 
     private static void createQuestFour() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Villagers who lost to their desires,");
+        story.add("lost their souls and became pillagers.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(80);
 
@@ -127,9 +125,9 @@ public class QuestsPhase10 {
 
     private static void createQuestFive() {
         List<String> story = new ArrayList<>();
-        story.add("The tastes of candies in Candy Valley");
-        story.add("became really bad after Aleesia's darkness");
-        story.add("came upon us. Hunt down some bad candies.");
+        story.add("Temple of Spirit is conquered by Aleesia.");
+        story.add("We need to regain control of the temple");
+        story.add("to use the portal to Aleesia's Castle.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(80);
 
@@ -140,7 +138,7 @@ public class QuestsPhase10 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Archangel";
-        Quest quest = new Quest(84, "Activate the portal", story,
+        Quest quest = new Quest(84, "Temple of Spirit", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 544000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -149,9 +147,8 @@ public class QuestsPhase10 {
 
     private static void createQuestSix() {
         List<String> story = new ArrayList<>();
-        story.add("Collect some candies and bring");
-        story.add("them to Jasper. So he can try to");
-        story.add("find whats wrong with them.");
+        story.add("Collect dark souls from pillagers");
+        story.add("so Archangel can find their sources.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(80);
 
@@ -162,7 +159,7 @@ public class QuestsPhase10 {
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_PURPLE + "Mage Pillager");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_PURPLE + "Rogue Pillager");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_PURPLE + "Shaman Pillager");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 91);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(85), 91);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -176,8 +173,8 @@ public class QuestsPhase10 {
 
     private static void createQuestSeven() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("Villagers who lost to their desires,");
+        story.add("lost their souls and became pillagers.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(80);
         List<Task> tasks = new ArrayList<>();
@@ -199,8 +196,8 @@ public class QuestsPhase10 {
 
     private static void createQuestEight() {
         List<String> story = new ArrayList<>();
-        story.add("We have found that there is a evil cook");
-        story.add("that spoils tastes of sugars.");
+        story.add("Talk with Eohr in Temple of Elements to");
+        story.add("get ready for the last battle.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(81);
         requiredQuests.add(82);
@@ -221,8 +218,8 @@ public class QuestsPhase10 {
 
     private static void createQuestNine() {
         List<String> story = new ArrayList<>();
-        story.add("Report back that candies tastes");
-        story.add("amazing one again.");
+        story.add("The battle to decide Adelia's fate.");
+        story.add("Let the power of the elements be with you!");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(87);
 
@@ -232,7 +229,7 @@ public class QuestsPhase10 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nTime to face the nightmare!";
-        Quest quest = new Quest(88, "The nightmare", story,
+        Quest quest = new Quest(88, "Facing the nightmare", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 1088000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -241,15 +238,14 @@ public class QuestsPhase10 {
 
     private static void createQuestTen() {
         List<String> story = new ArrayList<>();
-        story.add("Report back that candies tastes");
-        story.add("amazing one again.");
+        story.add("Bring back the light to Alberstol Ruins.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(88);
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Bring the light of elements to Archangel";
-        Quest quest = new Quest(89, "Bring back the light-Alberstol Ruins", story,
+        Quest quest = new Quest(89, "Bring back the light to Alberstol Ruins", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 68000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -258,15 +254,14 @@ public class QuestsPhase10 {
 
     private static void createQuestEleven() {
         List<String> story = new ArrayList<>();
-        story.add("Report back that candies tastes");
-        story.add("amazing one again.");
+        story.add("Bring back the light to Uruga.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(89);
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Bring the light of elements to Commander Erwin";
-        Quest quest = new Quest(90, "Bring back the light-Uruga", story,
+        Quest quest = new Quest(90, "Bring back the light to Uruga", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 68000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -275,15 +270,14 @@ public class QuestsPhase10 {
 
     private static void createQuestTwelve() {
         List<String> story = new ArrayList<>();
-        story.add("Report back that candies tastes");
-        story.add("amazing one again.");
+        story.add("Bring back the light to Elderine.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(90);
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Bring the light of elements to Captain Lenna";
-        Quest quest = new Quest(91, "Bring back the light-Elderine", story,
+        Quest quest = new Quest(91, "Bring back the light to Elderine", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 68000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
@@ -292,15 +286,14 @@ public class QuestsPhase10 {
 
     private static void createQuestThirteen() {
         List<String> story = new ArrayList<>();
-        story.add("Report back that candies tastes");
-        story.add("amazing one again.");
+        story.add("Bring back the light to Roumen.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(91);
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Bring the light of elements to Sergeant Armin";
-        Quest quest = new Quest(92, "Bring back the light-Roumen", story,
+        Quest quest = new Quest(92, "Bring back the light to Roumen", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 68000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
