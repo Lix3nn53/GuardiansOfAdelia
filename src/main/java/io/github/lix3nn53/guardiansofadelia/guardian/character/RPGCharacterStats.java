@@ -118,6 +118,8 @@ public class RPGCharacterStats {
             onMaxHealthChange();
             sendLevelUpMessage(newLevel);
             player.sendTitle(ChatColor.GOLD + "Level Up!", ChatColor.YELLOW + "Your new level is " + ChatColor.GOLD + newLevel, 30, 80, 30);
+            player.setHealth(player.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue());
+            setCurrentMana(getTotalMaxMana());
         }
 
         float requiredExperience = RPGCharacterExperienceManager.getRequiredExperience(currentLevel);

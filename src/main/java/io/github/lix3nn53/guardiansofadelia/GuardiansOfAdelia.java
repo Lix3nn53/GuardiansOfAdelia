@@ -229,7 +229,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
 
                             double currentHealth = player.getHealth();
                             double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-                            if (currentHealth < maxMana) {
+                            if (currentHealth < maxHealth) {
                                 double nextHealth = currentHealth + (maxHealth * healPercent);
                                 if (nextHealth > maxHealth) {
                                     nextHealth = maxHealth;

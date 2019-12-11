@@ -200,7 +200,7 @@ public class WarriorSkills {
         right.add(0D);
         LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forwards, upwards, right);
 
-        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 99;
+        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 99);
 
         skill.addTrigger(selfTarget);
 

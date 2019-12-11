@@ -25,6 +25,7 @@ public class TombManager {
 
     private static HashMap<Player, Tomb> playerToTomb = new HashMap<>();
     private static HashMap<String, List<Tomb>> chunkKeyToTomb = new HashMap<>();
+    private static List<Player> playersInTombCooldown = new ArrayList<>();
 
     public static boolean hasTomb(Player player) {
         return playerToTomb.containsKey(player);
@@ -33,6 +34,11 @@ public class TombManager {
     public static void onDeath(Player player, Location deathLocation) {
         Town town = TownManager.getNearestTown(deathLocation);
         player.teleport(town.getLocation());
+
+        if (playersInTombCooldown.contains(player)) {
+            player.sendMessage(ChatColor.RED + "You can't search for your tomb again. Your soul needs 5 minutes between deaths.");
+            return;
+        }
 
         Tomb tomb = new Tomb(player, deathLocation);
         String chunkKey = SpawnerManager.getChunkKey(deathLocation);
@@ -46,6 +52,7 @@ public class TombManager {
             chunkKeyToTomb.put(chunkKey, tombs);
         }
         playerToTomb.put(player, tomb);
+        playersInTombCooldown.add(player);
 
         openDeathGui(player);
 
@@ -72,6 +79,15 @@ public class TombManager {
                 }
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 10L);
+
+        //remove from playersInTombCooldown after 5 minutes
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                playersInTombCooldown.remove(player);
+            }
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 300L);
     }
 
     public static void onChunkLoad(String chunkKey) {

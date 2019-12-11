@@ -1,17 +1,66 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.towns.Town;
+import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.npc.NPCRegistry;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPortalEvent;
 
+import java.util.List;
+import java.util.UUID;
+
 public class MyPlayerPortalEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(PlayerPortalEvent event) {
         Player player = event.getPlayer();
-        player.sendMessage("teleporrrrrrrrrrrrrrt portaaaaaaal eventerino");
+        Location location = player.getLocation();
+
+        Town town = TownManager.getTown(5);
+        Location alberstolRuinsBase = town.getLocation();
+        double distanceSquared = location.distanceSquared(alberstolRuinsBase);
+
+        if (distanceSquared < 1200) { //portal to Alberstol Ruins at Uruga
+            World world = Bukkit.getWorld("world");
+            Location toAlberstolRuins = new Location(world, -2558.5, 63.5, 2744.5, -90, -2);
+            player.teleport(toAlberstolRuins);
+            player.sendTitle(ChatColor.DARK_PURPLE + "Uruga", ChatColor.LIGHT_PURPLE + "", 25, 35, 25);
+        } else {
+            UUID uuid = player.getUniqueId();
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+            List<Integer> turnedInQuests = activeCharacter.getTurnedInQuests();
+
+            if (turnedInQuests.contains(69)) {
+                NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
+                NPC npcGatekeeper = npcRegistry.getById(47);
+
+                Location gatekeeperLocation = npcGatekeeper.getStoredLocation();
+                double distanceSquared2 = location.distanceSquared(gatekeeperLocation);
+
+                if (distanceSquared2 < 900) { //portal to Alberstol Ruins at Uruga
+                    World world = Bukkit.getWorld("world");
+                    Location toAlberstolRuins = new Location(world, -4835.5, 103.5, 2236.5, -80, -2);
+                    player.teleport(toAlberstolRuins);
+                    player.sendTitle(ChatColor.DARK_PURPLE + "Alberstol Ruins", ChatColor.LIGHT_PURPLE + "", 25, 35, 25);
+                }
+            } else {
+                player.sendMessage(ChatColor.RED + "You can't enter this portal without Gatekeeper's permission.");
+            }
+        }
     }
 
 }
