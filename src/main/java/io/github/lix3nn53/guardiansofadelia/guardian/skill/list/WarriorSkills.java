@@ -90,7 +90,7 @@ public class WarriorSkills {
         radiuses.add(4D);
         radiuses.add(4.5D);
         radiuses.add(5D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, radiuses);
         SelfTarget selfTargetForSound = new SelfTarget();
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_NORMAL));
@@ -200,7 +200,7 @@ public class WarriorSkills {
         right.add(0D);
         LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forwards, upwards, right);
 
-        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 999);
+        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 99;
 
         skill.addTrigger(selfTarget);
 
@@ -284,7 +284,7 @@ public class WarriorSkills {
         radiuses.add(11D);
         radiuses.add(12D);
         radiuses.add(14D);
-        AreaTarget areaTarget = new AreaTarget(true, false, true, 999, radiuses);
+        AreaTarget areaTarget = new AreaTarget(true, false, true, 99, radiuses);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(41);
@@ -488,7 +488,7 @@ public class WarriorSkills {
         radiuses.add(11D);
         radiuses.add(12D);
         radiuses.add(14D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, radiuses);
 
         List<Double> damages = new ArrayList<>();
         damages.add(200.0);

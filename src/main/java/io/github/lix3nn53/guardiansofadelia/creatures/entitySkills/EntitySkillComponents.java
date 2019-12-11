@@ -13,18 +13,6 @@ import java.util.List;
 public class EntitySkillComponents {
 
     public static ParticleMechanic getComponentParticleMechanic(Particle particle, double radius, int amount, Particle.DustOptions dustOptions) {
-        List<Double> list = new ArrayList<>();
-        list.add(2.5D);
-        list.add(2.75D);
-        list.add(3D);
-        list.add(3.25D);
-        list.add(3.5D);
-        list.add(4D);
-        list.add(4D);
-        list.add(4D);
-        list.add(4D);
-        list.add(4D);
-
         return new ParticleMechanic(particle, ArrangementParticle.CIRCLE, radius, amount, 0, 0, 0, 0, 0.5, 0, 0, dustOptions);
     }
 
@@ -35,11 +23,11 @@ public class EntitySkillComponents {
         list.add(3D);
         list.add(3.25D);
         list.add(3.5D);
+        list.add(3.75D);
         list.add(4D);
-        list.add(4D);
-        list.add(4D);
-        list.add(4D);
-        list.add(4D);
+        list.add(4.25D);
+        list.add(4.5D);
+        list.add(5D);
 
         return new PushMechanic(PushMechanic.PushType.FIXED, list, true);
     }
@@ -81,9 +69,9 @@ public class EntitySkillComponents {
         speeds.add(-3.5D);
         speeds.add(-3.75D);
         speeds.add(-4D);
+        speeds.add(-4.25D);
         speeds.add(-4.5D);
         speeds.add(-5D);
-        speeds.add(-5.5D);
 
         return new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
     }
@@ -151,16 +139,16 @@ public class EntitySkillComponents {
 
     public static DamageMechanic getComponentDamageMechanic(DamageMechanic.DamageType type) {
         List<Double> damages = new ArrayList<>();
-        damages.add(180D);
-        damages.add(292D);
-        damages.add(405D);
-        damages.add(540D);
-        damages.add(675D);
-        damages.add(900D);
-        damages.add(900D);
-        damages.add(900D);
-        damages.add(900D);
-        damages.add(900D);
+        damages.add(10D);
+        damages.add(20D);
+        damages.add(35D);
+        damages.add(70D);
+        damages.add(140D);
+        damages.add(320D);
+        damages.add(450D);
+        damages.add(600D);
+        damages.add(750D);
+        damages.add(1000D);
 
         return new DamageMechanic(damages, type);
     }

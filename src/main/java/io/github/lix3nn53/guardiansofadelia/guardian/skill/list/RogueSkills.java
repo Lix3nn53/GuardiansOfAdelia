@@ -354,7 +354,7 @@ public class RogueSkills {
         damages.add(450D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
-        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 999);
+        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 99);
         projectileMechanic.addChildren(filterCurrentTargets);
         filterCurrentTargets.addChildren(damageMechanic);
         filterCurrentTargets.addChildren(phantomCondition);

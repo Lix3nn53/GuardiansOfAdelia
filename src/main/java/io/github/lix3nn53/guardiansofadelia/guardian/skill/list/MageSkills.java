@@ -94,7 +94,7 @@ public class MageSkills {
         radiuses.add(3.25D);
         radiuses.add(3.5D);
         radiuses.add(4D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, radiuses);
 
         List<Double> damages = new ArrayList<>();
         damages.add(20.0);
@@ -176,7 +176,7 @@ public class MageSkills {
         radiuses.add(3.25D);
         radiuses.add(3.5D);
         radiuses.add(4D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, radiuses);
 
         List<Double> damages = new ArrayList<>();
         damages.add(30D);
@@ -196,12 +196,12 @@ public class MageSkills {
         durations.add(100);
         areaTarget.addChildren(new SilenceMechanic(durations));
         List<Integer> ccAmplifiers = new ArrayList<>();
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
         areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.CONFUSION, durations, ccAmplifiers));
 
         projectileMechanic.addChildren(areaTarget);
@@ -264,7 +264,7 @@ public class MageSkills {
         areas.add(3.75D);
         areas.add(4D);
         areas.add(4.5D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         List<Double> speeds = new ArrayList<>();
         speeds.add(2.6);
@@ -338,7 +338,7 @@ public class MageSkills {
         areas.add(3.75D);
         areas.add(4D);
         areas.add(4.5D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         List<Integer> ccTicks = new ArrayList<>();
         ccTicks.add(40);
@@ -348,12 +348,12 @@ public class MageSkills {
         ccTicks.add(80);
         ccTicks.add(100);
         List<Integer> ccAmplifiers = new ArrayList<>();
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
         areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
         areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
 
@@ -458,7 +458,7 @@ public class MageSkills {
         areas.add(9D);
         areas.add(10D);
         areas.add(12D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(singleTarget);

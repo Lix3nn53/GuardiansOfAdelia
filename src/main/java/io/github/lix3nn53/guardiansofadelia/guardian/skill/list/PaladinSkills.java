@@ -90,7 +90,7 @@ public class PaladinSkills {
         areas.add(3.75D);
         areas.add(4D);
         areas.add(4.5D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         List<Double> damages = new ArrayList<>();
         damages.add(20.0);
@@ -196,7 +196,7 @@ public class PaladinSkills {
         areas.add(3.75D);
         areas.add(4D);
         areas.add(4.5D);
-        AreaTarget areaTarget = new AreaTarget(true, false, true, 999, areas);
+        AreaTarget areaTarget = new AreaTarget(true, false, true, 99, areas);
 
         projectileMechanic.addChildren(areaTarget);
         areaTarget.addChildren(particleMechanic);
@@ -253,7 +253,7 @@ public class PaladinSkills {
         areas.add(7D);
         areas.add(8D);
         areas.add(10D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(80);
@@ -476,7 +476,7 @@ public class PaladinSkills {
         radiuses.add(11D);
         radiuses.add(12D);
         radiuses.add(14D);
-        AreaTarget areaTarget = new AreaTarget(true, false, true, 999, radiuses);
+        AreaTarget areaTarget = new AreaTarget(true, false, true, 99, radiuses);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 8, 3, -0.6, 0.4, 0.1, 0, 0, 0, 1, new Particle.DustOptions(Color.YELLOW, 2));
 

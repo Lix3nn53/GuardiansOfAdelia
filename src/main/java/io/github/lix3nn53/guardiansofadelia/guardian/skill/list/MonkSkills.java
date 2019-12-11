@@ -85,7 +85,7 @@ public class MonkSkills {
         ranges.add(3.75D);
         ranges.add(4D);
         ranges.add(4.5D);
-        SingleTarget singleTarget = new SingleTarget(false, true, false, 999, ranges, 4);
+        SingleTarget singleTarget = new SingleTarget(false, true, false, 99, ranges, 4);
 
         List<Double> speeds = new ArrayList<>();
         speeds.add(2.4D);
@@ -263,12 +263,12 @@ public class MonkSkills {
         ccTicks.add(200);
         ccTicks.add(240);
         List<Integer> ccAmplifiers = new ArrayList<>();
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
-        ccAmplifiers.add(999);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
+        ccAmplifiers.add(99);
         selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
         selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
         selfTarget.addChildren(new SilenceMechanic(ccTicks));
@@ -477,7 +477,7 @@ public class MonkSkills {
         radiuses.add(4.75D);
         radiuses.add(5D);
         radiuses.add(5.5D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, radiuses);
 
         List<Double> upward = new ArrayList<>();
         upward.add(2D);

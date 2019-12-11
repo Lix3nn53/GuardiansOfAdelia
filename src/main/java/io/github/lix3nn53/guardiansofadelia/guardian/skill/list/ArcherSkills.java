@@ -119,7 +119,7 @@ public class ArcherSkills {
         amplifiers.add(2);
         PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.POISON, ticks, amplifiers);
 
-        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 999);
+        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 99);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(projectileMechanic);
@@ -467,7 +467,7 @@ public class ArcherSkills {
         areas.add(8D);
         areas.add(8D);
         areas.add(8D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(locationTarget);

@@ -102,7 +102,7 @@ public class HunterSkills {
         radiuses.add(3.5D);
         radiuses.add(4D);
         radiuses.add(4.5D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, radiuses);
 
         ParticleMechanic explosionParticle = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.CIRCLE, 3.4, 2, 0, 0, 0, 0, 0.5, 0, 0, null);
 
@@ -185,7 +185,7 @@ public class HunterSkills {
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30,
                 0, 1, 0, 200, true, Arrow.class);
 
-        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 999);
+        FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 99);
 
         List<Double> damages = new ArrayList<>();
         damages.add(24.0);
@@ -414,7 +414,7 @@ public class HunterSkills {
         radiuses.add(3D);
         radiuses.add(3D);
         radiuses.add(3D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiuses);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, radiuses);
 
         //Add effects and setRemoveFlag to areaTarget's children
         List<Integer> ticks = new ArrayList<>();
@@ -425,12 +425,12 @@ public class HunterSkills {
         ticks.add(100);
         ticks.add(120);
         List<Integer> amplifiers = new ArrayList<>();
-        amplifiers.add(999);
-        amplifiers.add(999);
-        amplifiers.add(999);
-        amplifiers.add(999);
-        amplifiers.add(999);
-        amplifiers.add(999);
+        amplifiers.add(99);
+        amplifiers.add(99);
+        amplifiers.add(99);
+        amplifiers.add(99);
+        amplifiers.add(99);
+        amplifiers.add(99);
         PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, amplifiers);
         PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
         DisarmMechanic disarmMechanic = new DisarmMechanic(ticks);

@@ -82,7 +82,7 @@ public class KnightSkills {
         areas.add(3.75D);
         areas.add(4D);
         areas.add(4.5D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         List<Double> damages = new ArrayList<>();
         damages.add(12.0);
@@ -171,7 +171,7 @@ public class KnightSkills {
         areas.add(5D);
         areas.add(6D);
         areas.add(8D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         List<Double> upward = new ArrayList<>();
         upward.add(1.2D);
@@ -258,7 +258,7 @@ public class KnightSkills {
         areas.add(8.5D);
         areas.add(9D);
         areas.add(10D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, areas);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         List<Double> speeds = new ArrayList<>();
         speeds.add(-3D);
@@ -421,7 +421,7 @@ public class KnightSkills {
         radiuses.add(11D);
         radiuses.add(12D);
         radiuses.add(14D);
-        AreaTarget areaTarget = new AreaTarget(true, false, true, 999, radiuses);
+        AreaTarget areaTarget = new AreaTarget(true, false, true, 99, radiuses);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(41);

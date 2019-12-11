@@ -37,7 +37,7 @@ public class EntitySkills {
         smallAreaRadius.add(4D);
         smallAreaRadius.add(4D);
         smallAreaRadius.add(4D);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, smallAreaRadius);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, smallAreaRadius);
         SelfTarget trigger = new SelfTarget();
         trigger.addChildren(new HoloMessageMechanic(holoWarnMessage, 70));
         DelayMechanic delayMechanic = new DelayMechanic(delay);
@@ -119,7 +119,7 @@ public class EntitySkills {
         radiusList.add(radius);
         radiusList.add(radius);
         radiusList.add(radius);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 999, radiusList);
+        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, radiusList);
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(new SoundMechanic(goaSound));
         trigger.addChildren(new HoloMessageMechanic(holoWarnMessage, 70));
