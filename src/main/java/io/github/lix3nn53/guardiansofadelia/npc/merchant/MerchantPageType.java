@@ -9,11 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Shields;
-import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
-import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
@@ -44,8 +40,6 @@ public enum MerchantPageType {
     ARMOR,
     SHIELD,
     ENCHANT,
-    COMPANION,
-    MOUNT,
     TOOL,
     UTILITY,
     POTIONS,
@@ -77,10 +71,10 @@ public enum MerchantPageType {
                 return getShieldShop(shopLevel, resourceNpc);
             case ENCHANT:
                 return getEnchantGui(player, 0);
-            case COMPANION:
+            /*case COMPANION:
                 return getCompanionShop(shopLevel, resourceNpc);
             case MOUNT:
-                return getMountShop(shopLevel, resourceNpc);
+                return getMountShop(shopLevel, resourceNpc);*/
             case TOOL:
                 return getToolShop(shopLevel, resourceNpc);
             case UTILITY:
@@ -167,7 +161,7 @@ public enum MerchantPageType {
         return new EnchantGui();
     }
 
-    private GuiBookGeneric getCompanionShop(int shopLevel, int shopNpc) {
+    /*private GuiBookGeneric getCompanionShop(int shopLevel, int shopNpc) {
         List<MerchantGuiLine> lines = new ArrayList<>();
         lines.add(new MerchantGuiLine());
         int lineIndex = 0;
@@ -284,7 +278,7 @@ public enum MerchantPageType {
             weapon_shop.addPage(page);
         }
         return weapon_shop;
-    }
+    }*/
 
     private GuiBookGeneric getWeaponShop(int shopLevel, int shopNpc) {
         List<MerchantGuiLine> lines = new ArrayList<>();

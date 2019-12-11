@@ -20,12 +20,12 @@ public class PetMount implements RPGGear {
     private final int level;
     private ItemStack itemStack;
 
-    public PetMount(Mount mount, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel) {
+    public PetMount(Mount mount, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int petBaseHealth, double petBaseSpeed, double petBaseJump) {
         String name = tier.getTierColor() + mount.getName();
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + mount.getName();
         }
-        int mountHealth = PetManager.getMountHealth(1);
+        int mountHealth = PetManager.getMountHealth(1, petBaseHealth);
 
         List<String> lore = new ArrayList<>();
         lore.add("");
@@ -36,14 +36,17 @@ public class PetMount implements RPGGear {
         lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(1));
         lore.add(ChatColor.YELLOW + "----------------");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + mountHealth);
-        lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + PetManager.getMountSpeed(1));
-        lore.add(ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + PetManager.getMountJump(1));
+        lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + PetManager.getMountSpeed(1, petBaseSpeed));
+        lore.add(ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + PetManager.getMountJump(1, petBaseJump));
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);
         PersistentDataContainerUtil.putString("petCode", mount.toString(), this.itemStack);
         PersistentDataContainerUtil.putInteger("petExp", 0, this.itemStack);
         PersistentDataContainerUtil.putInteger("petCurrentHealth", mountHealth - 1, this.itemStack);
+        PersistentDataContainerUtil.putInteger("petBaseHealth", petBaseHealth, this.itemStack);
+        PersistentDataContainerUtil.putDouble("petBaseSpeed", petBaseSpeed, this.itemStack);
+        PersistentDataContainerUtil.putDouble("petBaseJump", petBaseJump, this.itemStack);
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);

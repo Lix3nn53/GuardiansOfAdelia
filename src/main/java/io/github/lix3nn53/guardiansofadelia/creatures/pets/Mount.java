@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.pets;
 
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Horse;
 
@@ -71,5 +72,25 @@ public enum Mount {
                 return 10000007;
         }
         return 10000007;
+    }
+
+    public ItemTier getItemTier() {
+        switch (this) {
+            case BLACK:
+                return ItemTier.COMMON;
+            case BROWN:
+                return ItemTier.COMMON;
+            case CHESTNUT:
+                return ItemTier.COMMON;
+            case CREAMY:
+                return ItemTier.COMMON;
+            case DARK_BROWN:
+                return ItemTier.COMMON;
+            case GRAY:
+                return ItemTier.COMMON;
+            case WHITE:
+                return ItemTier.COMMON;
+        }
+        return ItemTier.COMMON;
     }
 }

@@ -47,11 +47,6 @@ public class MerchantManager {
         setMerchant(24, new MerchantMenu(MerchantType.MAGIC_SHOP, 3, 24));
         setMerchant(25, new MerchantMenu(MerchantType.MAGIC_SHOP, 4, 25));
         setMerchant(26, new MerchantMenu(MerchantType.MAGIC_SHOP, 5, 26));
-
-        setMerchant(27, new MerchantMenu(MerchantType.PET_SHOP, 1, 27));
-        setMerchant(28, new MerchantMenu(MerchantType.PET_SHOP, 3, 28));
-        setMerchant(29, new MerchantMenu(MerchantType.PET_SHOP, 4, 29));
-        setMerchant(30, new MerchantMenu(MerchantType.PET_SHOP, 5, 30));
     }
 
     public static boolean onSellItemClick(Player player, int slot) {

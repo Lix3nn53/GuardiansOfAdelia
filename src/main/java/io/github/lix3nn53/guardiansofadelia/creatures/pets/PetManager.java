@@ -67,67 +67,66 @@ public class PetManager {
         return respawnDelay;
     }
 
-    private static LivingEntity getPet(Player owner, String petCode, int currentHP, int petLevel) {
-        if (isCompanionCode(petCode)) {
-            Companion companion = Companion.valueOf(petCode);
-            String petName = companion.getName();
-            int damage = getCompanionDamage(petLevel);
-            int maxHP = getCompanionHealth(petLevel);
+    private static LivingEntity getCompanionPet(Player owner, String petCode, int currentHP, int petLevel, double baseDamage, double baseHealth) {
+        Companion companion = Companion.valueOf(petCode);
+        String petName = companion.getName();
+        int damage = getCompanionDamage(petLevel, baseDamage);
+        int maxHP = getCompanionHealth(petLevel, baseHealth);
 
-            if (currentHP <= 0) {
-                currentHP = (int) ((maxHP * 0.4) + 0.5);
-            } else if (currentHP > maxHP) {
-                currentHP = maxHP;
-            }
-
-            Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
-            petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "lvl" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
-            Wolf wolf = (Wolf) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.WOLF);
-            wolf.setAdult();
-            wolf.setTamed(true);
-            wolf.setOwner(owner);
-            wolf.setSilent(true);
-            wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_MOVEMENT_SPEED);
-            wolf.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage);
-            wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
-            wolf.setHealth(currentHP);
-            companion.disguise(wolf);
-            return wolf;
-        } else if (isMountCode(petCode)) {
-            Mount mount = Mount.valueOf(petCode);
-            String petName = mount.getName();
-            Horse.Color color = mount.getColor();
-            ItemStack armor = new ItemStack(Material.AIR);
-
-            double mountSpeed = getMountSpeed(petLevel);
-            double jumpStrength = getMountJump(petLevel);
-            int maxHP = getMountHealth(petLevel);
-
-            if (currentHP <= 0) {
-                currentHP = (int) ((maxHP * 0.4) + 0.5);
-            } else if (currentHP > maxHP) {
-                currentHP = maxHP;
-            }
-
-            Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
-            petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "lvl" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
-            Horse horse = (Horse) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.HORSE);
-            horse.setTamed(true);
-            horse.setAdult();
-            horse.setStyle(Horse.Style.NONE);
-            horse.getInventory().setSaddle(OtherItems.getSaddle());
-            horse.setColor(color);
-            horse.setOwner(owner);
-            horse.setHealth(currentHP);
-            horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_MOVEMENT_SPEED);
-            horse.getAttribute(Attribute.HORSE_JUMP_STRENGTH).setBaseValue(jumpStrength);
-            if (!armor.getType().equals(Material.AIR)) {
-                horse.getInventory().setArmor(armor);
-            }
-            PersistentDataContainerUtil.putDouble("mountSpeed", mountSpeed, horse);
-            return horse;
+        if (currentHP <= 0) {
+            currentHP = (int) ((maxHP * 0.4) + 0.5);
+        } else if (currentHP > maxHP) {
+            currentHP = maxHP;
         }
-        return null;
+
+        Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
+        petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "lvl" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
+        Wolf wolf = (Wolf) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.WOLF);
+        wolf.setAdult();
+        wolf.setTamed(true);
+        wolf.setOwner(owner);
+        wolf.setSilent(true);
+        wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_MOVEMENT_SPEED);
+        wolf.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage);
+        wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
+        wolf.setHealth(currentHP);
+        companion.disguise(wolf);
+        return wolf;
+    }
+
+    private static LivingEntity getMountPet(Player owner, String petCode, int currentHP, int petLevel, double baseHealth, double baseSpeed, double baseJump) {
+        Mount mount = Mount.valueOf(petCode);
+        String petName = mount.getName();
+        Horse.Color color = mount.getColor();
+        ItemStack armor = new ItemStack(Material.AIR);
+
+        int maxHP = getMountHealth(petLevel, baseHealth);
+        double mountSpeed = getMountSpeed(petLevel, baseSpeed);
+        double jumpStrength = getMountJump(petLevel, baseJump);
+
+        if (currentHP <= 0) {
+            currentHP = (int) ((maxHP * 0.4) + 0.5);
+        } else if (currentHP > maxHP) {
+            currentHP = maxHP;
+        }
+
+        Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
+        petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "lvl" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
+        Horse horse = (Horse) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.HORSE);
+        horse.setTamed(true);
+        horse.setAdult();
+        horse.setStyle(Horse.Style.NONE);
+        horse.getInventory().setSaddle(OtherItems.getSaddle());
+        horse.setColor(color);
+        horse.setOwner(owner);
+        horse.setHealth(currentHP);
+        horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_MOVEMENT_SPEED);
+        horse.getAttribute(Attribute.HORSE_JUMP_STRENGTH).setBaseValue(jumpStrength);
+        if (!armor.getType().equals(Material.AIR)) {
+            horse.getInventory().setArmor(armor);
+        }
+        PersistentDataContainerUtil.putDouble("mountSpeed", mountSpeed, horse);
+        return horse;
     }
 
     private static boolean isCompanionCode(String id) {
@@ -241,8 +240,16 @@ public class PetManager {
         }
     }
 
-    private static void spawnPet(Player player, String petCode, int petCurrentHealth, int petLevel) {
-        LivingEntity pet = getPet(player, petCode, petCurrentHealth, petLevel);
+    private static void spawnCompanionPet(Player player, String petCode, int petCurrentHealth, int petLevel, double baseDamage, double baseHealth) {
+        LivingEntity pet = getCompanionPet(player, petCode, petCurrentHealth, petLevel, baseDamage, baseHealth);
+        if (pet != null) {
+            petToPlayer.put(pet, player);
+            playerToPet.put(player, pet);
+        }
+    }
+
+    private static void spawnMountPet(Player player, String petCode, int petCurrentHealth, int petLevel, double baseHealth, double baseSpeed, double baseJump) {
+        LivingEntity pet = getMountPet(player, petCode, petCurrentHealth, petLevel, baseHealth, baseSpeed, baseJump);
         if (pet != null) {
             petToPlayer.put(pet, player);
             playerToPet.put(player, pet);
@@ -265,7 +272,16 @@ public class PetManager {
                             int petExp = PersistentDataContainerUtil.getInteger(egg, "petExp");
                             int levelFromExp = PetExperienceManager.getLevelFromExp(petExp);
 
-                            spawnPet(player, petCode, petCurrentHealth, levelFromExp);
+                            //new values
+                            double petBaseHealth = PersistentDataContainerUtil.getInteger(egg, "petBaseHealth");
+                            if (isCompanionCode(petCode)) {
+                                double petBaseDamage = PersistentDataContainerUtil.getInteger(egg, "petBaseDamage");
+                                spawnCompanionPet(player, petCode, petCurrentHealth, levelFromExp, petBaseHealth, petBaseDamage);
+                            } else if (isMountCode(petCode)) {
+                                double petBaseSpeed = PersistentDataContainerUtil.getDouble(egg, "petBaseSpeed");
+                                double petBaseJump = PersistentDataContainerUtil.getDouble(egg, "petBaseJump");
+                                spawnMountPet(player, petCode, petCurrentHealth, levelFromExp, petBaseHealth, petBaseSpeed, petBaseJump);
+                            }
                         }
                     }
                 } else {
@@ -343,7 +359,7 @@ public class PetManager {
         pet.teleport(newPetLoc);
     }
 
-    public static int getCompanionHealth(int petLevel) {
+    public static int getCompanionHealth(int petLevel, double baseHealth) {
         switch (petLevel) {
             case 2:
                 return 250;
@@ -371,7 +387,7 @@ public class PetManager {
         return 120;
     }
 
-    public static int getCompanionDamage(int petLevel) {
+    public static int getCompanionDamage(int petLevel, double baseDamage) {
         switch (petLevel) {
             case 2:
                 return 24;
@@ -399,7 +415,7 @@ public class PetManager {
         return 12;
     }
 
-    public static int getMountHealth(int petLevel) {
+    public static int getMountHealth(int petLevel, double baseHealth) {
         switch (petLevel) {
             case 2:
                 return 400;
@@ -427,7 +443,7 @@ public class PetManager {
         return 200;
     }
 
-    public static double getMountSpeed(int petLevel) {
+    public static double getMountSpeed(int petLevel, double baseSpeed) {
         switch (petLevel) {
             case 2:
                 return 0.4;
@@ -455,7 +471,7 @@ public class PetManager {
         return 0.35;
     }
 
-    public static double getMountJump(int petLevel) {
+    public static double getMountJump(int petLevel, double baseJump) {
         switch (petLevel) {
             case 2:
                 return 0.75;

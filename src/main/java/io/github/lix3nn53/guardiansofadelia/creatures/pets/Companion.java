@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.pets;
 
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
@@ -378,5 +379,73 @@ public enum Companion {
                 return 10000003;
         }
         return 10000001;
+    }
+
+    public ItemTier getItemTier() {
+        switch (this) {
+            case CHICKEN:
+                return ItemTier.COMMON;
+            case SHEEP:
+                return ItemTier.COMMON;
+            case COW:
+                return ItemTier.COMMON;
+            case PIG:
+                return ItemTier.COMMON;
+            case CAT_ALL_BLACK:
+                return ItemTier.COMMON;
+            case CAT_BLACK:
+                return ItemTier.COMMON;
+            case CAT_BRITISH_SHORTHAIR:
+                return ItemTier.COMMON;
+            case CAT_CALICO:
+                return ItemTier.COMMON;
+            case CAT_JELLIE:
+                return ItemTier.COMMON;
+            case CAT_PERSIAN:
+                return ItemTier.COMMON;
+            case CAT_RAGDOLL:
+                return ItemTier.COMMON;
+            case CAT_RED:
+                return ItemTier.COMMON;
+            case CAT_SIAMESE:
+                return ItemTier.COMMON;
+            case CAT_TABBY:
+                return ItemTier.COMMON;
+            case CAT_WHITE:
+                return ItemTier.COMMON;
+            case RABBIT_BLACK:
+                return ItemTier.COMMON;
+            case RABBIT_BLACK_AND_WHITE:
+                return ItemTier.COMMON;
+            case RABBIT_BROWN:
+                return ItemTier.COMMON;
+            case RABBIT_GOLD:
+                return ItemTier.COMMON;
+            case RABBIT_SALT_AND_PEPPER:
+                return ItemTier.COMMON;
+            case RABBIT_WHITE:
+                return ItemTier.COMMON;
+            case CHOCOLATE:
+                return ItemTier.COMMON;
+            case WOLF:
+                return ItemTier.COMMON;
+            case TURTLE:
+                return ItemTier.COMMON;
+            case POLAR_BEAR:
+                return ItemTier.COMMON;
+            case PANDA:
+                return ItemTier.COMMON;
+            case ICE_CREAM:
+                return ItemTier.COMMON;
+            case FOX_RED:
+                return ItemTier.COMMON;
+            case FOX_SNOW:
+                return ItemTier.COMMON;
+            case VEX:
+                return ItemTier.COMMON;
+            case MINI_DRAGON:
+                return ItemTier.COMMON;
+        }
+        return ItemTier.COMMON;
     }
 }

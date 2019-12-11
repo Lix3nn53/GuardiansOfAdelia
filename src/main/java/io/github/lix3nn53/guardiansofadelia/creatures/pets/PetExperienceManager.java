@@ -124,15 +124,20 @@ public class PetExperienceManager {
                     lore.set(4, ChatColor.GOLD + "Level: " + ChatColor.GRAY + nextLevel);
 
                     if (lore.get(1).contains("Companion")) {
-                        int damage = PetManager.getCompanionDamage(nextLevel);
-                        int maxHP = PetManager.getCompanionHealth(nextLevel);
+                        double petBaseDamage = PersistentDataContainerUtil.getInteger(egg, "petBaseDamage");
+                        double petBaseHealth = PersistentDataContainerUtil.getInteger(egg, "petBaseHealth");
+                        int damage = PetManager.getCompanionDamage(nextLevel, petBaseDamage);
+                        int maxHP = PetManager.getCompanionHealth(nextLevel, petBaseHealth);
                         lore.set(7, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
                         lore.set(8, ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + damage);
                         player.sendMessage(ChatColor.GOLD + "DEBUG pet COMPANION level up");
                     } else {
-                        double movementSpeed = PetManager.getMountSpeed(nextLevel);
-                        double jumpStrength = PetManager.getMountJump(nextLevel);
-                        int maxHP = PetManager.getMountHealth(nextLevel);
+                        double petBaseHealth = PersistentDataContainerUtil.getInteger(egg, "petBaseHealth");
+                        double petBaseSpeed = PersistentDataContainerUtil.getDouble(egg, "petBaseSpeed");
+                        double petBaseJump = PersistentDataContainerUtil.getDouble(egg, "petBaseJump");
+                        double movementSpeed = PetManager.getMountSpeed(nextLevel, petBaseSpeed);
+                        double jumpStrength = PetManager.getMountJump(nextLevel, petBaseJump);
+                        int maxHP = PetManager.getMountHealth(nextLevel, petBaseHealth);
                         lore.set(7, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
                         lore.set(8, ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + movementSpeed);
                         lore.set(9, ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + jumpStrength);

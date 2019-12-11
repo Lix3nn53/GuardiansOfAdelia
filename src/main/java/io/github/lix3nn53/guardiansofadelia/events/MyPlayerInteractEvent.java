@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
+import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
@@ -71,7 +72,8 @@ public class MyPlayerInteractEvent implements Listener {
             } else if (itemInMainHandType.equals(Material.STONE_PICKAXE)) {
                 if (PersistentDataContainerUtil.hasString(itemInMainHand, "prizeDungeon")) { //dungeon chests
                     String dungeonThemeString = PersistentDataContainerUtil.getString(itemInMainHand, "prizeDungeon");
-                    int type = PersistentDataContainerUtil.getInteger(itemInMainHand, "prizeType");
+                    int typeIndex = PersistentDataContainerUtil.getInteger(itemInMainHand, "prizeType");
+                    PrizeChestType type = PrizeChestType.values()[typeIndex];
 
                     DungeonTheme dungeonTheme = DungeonTheme.valueOf(dungeonThemeString);
 

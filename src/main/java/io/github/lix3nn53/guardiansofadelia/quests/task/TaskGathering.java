@@ -82,13 +82,13 @@ public final class TaskGathering implements Task {
     }
 
     @Override
-    public int getRequiredProgress() {
-        return amountNeeded;
+    public void setProgress(int progress) {
+        this.progress = progress;
     }
 
     @Override
-    public void setProgress(int progress) {
-        this.progress = progress;
+    public int getRequiredProgress() {
+        return amountNeeded;
     }
 
     public void setProgress(Player player, int progress) {

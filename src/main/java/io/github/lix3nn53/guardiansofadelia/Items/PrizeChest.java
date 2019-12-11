@@ -31,15 +31,17 @@ public class PrizeChest {
      * @param dungeonTheme
      * @param type         0 for Weapon, 1 for Jewelry, 2 for Armor
      */
-    public PrizeChest(DungeonTheme dungeonTheme, int type) {
+    public PrizeChest(DungeonTheme dungeonTheme, PrizeChestType type) {
         String chestName = ChatColor.GOLD + dungeonTheme.getName() + " Prize Chest";
 
-        if (type == 0) {
+        if (type.equals(PrizeChestType.WEAPON)) {
             chestName = chestName + " (Weapon)";
-        } else if (type == 1) {
-            chestName = chestName + " (Jewelry)";
-        } else if (type == 2) {
+        } else if (type.equals(PrizeChestType.ARMOR)) {
             chestName = chestName + " (Armor)";
+        } else if (type.equals(PrizeChestType.JEWELRY)) {
+            chestName = chestName + " (Jewelry)";
+        } else if (type.equals(PrizeChestType.PET)) {
+            chestName = chestName + " (Pet)";
         }
 
         this.name = chestName;

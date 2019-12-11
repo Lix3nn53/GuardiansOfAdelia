@@ -82,13 +82,13 @@ public final class TaskDealDamage implements Task {
     }
 
     @Override
-    public int getRequiredProgress() {
-        return damageNeeded;
+    public void setProgress(int progress) {
+        this.progress = progress;
     }
 
     @Override
-    public void setProgress(int progress) {
-        this.progress = progress;
+    public int getRequiredProgress() {
+        return damageNeeded;
     }
 
     public boolean progress(LivingEntity livingEntity, int damageDeal, Player player) {

@@ -20,12 +20,12 @@ public class PetCompanion implements RPGGear {
     private final int level;
     private ItemStack itemStack;
 
-    public PetCompanion(Companion companion, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel) {
+    public PetCompanion(Companion companion, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int petBaseDamage, int petBaseHealth) {
         String name = tier.getTierColor() + companion.getName();
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + companion.getName();
         }
-        int companionHealth = PetManager.getCompanionHealth(1);
+        int companionHealth = PetManager.getCompanionHealth(1, petBaseHealth);
 
         List<String> lore = new ArrayList<>();
         lore.add("");
@@ -36,13 +36,15 @@ public class PetCompanion implements RPGGear {
         lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(1));
         lore.add(ChatColor.YELLOW + "----------------");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + companionHealth);
-        lore.add(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + PetManager.getCompanionDamage(1));
+        lore.add(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + PetManager.getCompanionDamage(1, petBaseDamage));
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);
         PersistentDataContainerUtil.putString("petCode", companion.toString(), this.itemStack);
         PersistentDataContainerUtil.putInteger("petExp", 0, this.itemStack);
         PersistentDataContainerUtil.putInteger("petCurrentHealth", companionHealth - 1, this.itemStack);
+        PersistentDataContainerUtil.putInteger("petBaseDamage", petBaseDamage, this.itemStack);
+        PersistentDataContainerUtil.putInteger("petBaseHealth", petBaseHealth, this.itemStack);
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);

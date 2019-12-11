@@ -6,8 +6,7 @@ public enum MerchantType {
     BLACKSMITH,
     STORAGE_KEEPER,
     MAGIC_SHOP,
-    TOOL_SHOP,
-    PET_SHOP;
+    TOOL_SHOP;
 
     public String getName() {
         if (this.equals(MerchantType.BLACKSMITH)) {
@@ -18,9 +17,9 @@ public enum MerchantType {
             return ChatColor.LIGHT_PURPLE + "Magical Item Shop";
         } else if (this.equals(MerchantType.TOOL_SHOP)) {
             return ChatColor.YELLOW + "Item Shop";
-        } else if (this.equals(MerchantType.PET_SHOP)) {
+        }/* else if (this.equals(MerchantType.PET_SHOP)) {
             return ChatColor.YELLOW + "Pet Shop";
-        }
+        }*/
         return "???";
     }
 
@@ -31,9 +30,9 @@ public enum MerchantType {
             return true;
         } else if (this.equals(MerchantType.MAGIC_SHOP)) {
             return true;
-        } else if (this.equals(MerchantType.TOOL_SHOP)) {
-            return true;
-        } else return this.equals(MerchantType.PET_SHOP);
+        } else {
+            return this.equals(MerchantType.TOOL_SHOP);
+        } /*else return this.equals(MerchantType.PET_SHOP);*/
     }
 
     public boolean canSell() {
@@ -43,8 +42,8 @@ public enum MerchantType {
             return false;
         } else if (this.equals(MerchantType.MAGIC_SHOP)) {
             return true;
-        } else if (this.equals(MerchantType.TOOL_SHOP)) {
-            return true;
-        } else return this.equals(MerchantType.PET_SHOP);
+        } else {
+            return this.equals(MerchantType.TOOL_SHOP);
+        } /*else return this.equals(MerchantType.PET_SHOP);*/
     }
 }

@@ -83,13 +83,13 @@ public final class TaskInteract implements Task {
     }
 
     @Override
-    public int getRequiredProgress() {
-        return 1;
+    public void setProgress(int progress) {
+        this.completed = progress;
     }
 
     @Override
-    public void setProgress(int progress) {
-        this.completed = progress;
+    public int getRequiredProgress() {
+        return 1;
     }
 
     @Override

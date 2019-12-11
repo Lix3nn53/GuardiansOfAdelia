@@ -144,7 +144,7 @@ public class MerchantMenu extends GuiGeneric {
             itemMeta.setLore(lore2);
             armors.setItemMeta(itemMeta);
             setItem(20, armors, MerchantPageType.UTILITY);
-        } else if (merchantType.equals(MerchantType.PET_SHOP)) {
+        }/* else if (merchantType.equals(MerchantType.PET_SHOP)) {
             ItemStack weapons = new ItemStack(Material.YELLOW_WOOL);
             ItemMeta itemMeta = weapons.getItemMeta();
             itemMeta.setDisplayName("Companions");
@@ -161,7 +161,7 @@ public class MerchantMenu extends GuiGeneric {
             itemMeta.setLore(lore2);
             armors.setItemMeta(itemMeta);
             setItem(20, armors, MerchantPageType.MOUNT);
-        }
+        }*/
     }
 
     public void setItem(int index, ItemStack item, MerchantPageType button) {

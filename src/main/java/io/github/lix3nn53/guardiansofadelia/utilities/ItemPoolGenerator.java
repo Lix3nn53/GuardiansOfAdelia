@@ -6,8 +6,12 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Shields;
+import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
+import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import org.bukkit.inventory.ItemStack;
@@ -224,6 +228,20 @@ public class ItemPoolGenerator {
         temp.add(PassiveItemList.get(gearLevel.getWeaponAndPassiveNo(), RPGSlotType.NECKLACE, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(PassiveItemList.get(gearLevel.getWeaponAndPassiveNo(), RPGSlotType.EARRING, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(PassiveItemList.get(gearLevel.getWeaponAndPassiveNo(), RPGSlotType.PARROT, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+
+        return temp;
+    }
+
+    public static List<ItemStack> generateEggs(GearLevel gearLevel) {
+        List<ItemStack> temp = new ArrayList<>();
+
+        for (Companion companion : Companion.values()) {
+            temp.add(Companions.get(companion, gearLevel));
+        }
+
+        for (Mount mount : Mount.values()) {
+            temp.add(Mounts.get(mount, gearLevel));
+        }
 
         return temp;
     }

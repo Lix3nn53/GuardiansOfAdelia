@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
@@ -118,14 +119,14 @@ public class CommandLix implements CommandExecutor {
                 if (args.length == 2) {
                     Companion mount = Companion.valueOf(args[1]);
 
-                    ItemStack egg = Companions.get(mount, ItemTier.COMMON, 20);
+                    ItemStack egg = Companions.get(mount, GearLevel.NINE);
                     InventoryUtils.giveItemToPlayer(player, egg);
                 }
             } else if (args[0].equals("mount")) {
                 if (args.length == 2) {
                     Mount mount = Mount.valueOf(args[1]);
 
-                    ItemStack egg = Mounts.get(mount, ItemTier.COMMON, 20);
+                    ItemStack egg = Mounts.get(mount, GearLevel.NINE);
                     InventoryUtils.giveItemToPlayer(player, egg);
                 }
             } else if (args[0].equals("stone")) {
