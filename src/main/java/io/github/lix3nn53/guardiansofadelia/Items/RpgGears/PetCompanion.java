@@ -28,6 +28,7 @@ public class PetCompanion implements RPGGear {
         int companionHealth = PetManager.getCompanionHealth(1, petBaseHealth);
 
         List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Egg");
         lore.add("");
         lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Companion");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
@@ -36,7 +37,7 @@ public class PetCompanion implements RPGGear {
         lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(1));
         lore.add("");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + companionHealth);
-        lore.add(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + PetManager.getCompanionDamage(1, petBaseDamage));
+        lore.add(ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + PetManager.getCompanionDamage(1, petBaseDamage));
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);

@@ -35,16 +35,20 @@ public class PotionEffectMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (skillLevel == 0) {
-            additions.add(getEffectString() + " duration: " + (ticks.get(skillLevel) / 20));
-            additions.add(getEffectString() + " tier: " + amplifier.get(skillLevel));
-        } else if (skillLevel == ticks.size()) {
-            additions.add(getEffectString() + " duration: " + (ticks.get(skillLevel - 1) / 20));
-            additions.add(getEffectString() + " tier: " + amplifier.get(skillLevel - 1));
-        } else {
-            additions.add(getEffectString() + " duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
-            additions.add(getEffectString() + " tier: " + amplifier.get(skillLevel - 1) + " -> " + amplifier.get(skillLevel));
+        String effectString = getEffectString();
+        if (effectString != null) {
+            if (skillLevel == 0) {
+                additions.add(effectString + " duration: " + (ticks.get(skillLevel) / 20));
+                additions.add(effectString + " tier: " + amplifier.get(skillLevel));
+            } else if (skillLevel == ticks.size()) {
+                additions.add(effectString + " duration: " + (ticks.get(skillLevel - 1) / 20));
+                additions.add(effectString + " tier: " + amplifier.get(skillLevel - 1));
+            } else {
+                additions.add(effectString + " duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
+                additions.add(effectString + " tier: " + amplifier.get(skillLevel - 1) + " -> " + amplifier.get(skillLevel));
+            }
         }
+
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 
@@ -64,6 +68,6 @@ public class PotionEffectMechanic extends MechanicComponent {
         } else if (type.equals(PotionEffectType.ABSORPTION)) {
             return ChatColor.YELLOW + "Shield";
         }
-        return "NULL EFFECT TYPE";
+        return null;
     }
 }

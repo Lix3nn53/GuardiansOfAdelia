@@ -142,7 +142,7 @@ public class Enchant {
                 StatMagical stat = (StatMagical) StatUtils.getStat(itemStack);
                 baseValue = stat.getMagicDamage();
             } else if (type.equals(StatType.MELEE)) {
-                statString = ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+";
+                statString = ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             } else if (type.equals(StatType.HYBRID)) {
@@ -201,31 +201,31 @@ public class Enchant {
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
                 if (stat.getFire() != 0) {
-                    if (line.contains(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+")) {
+                    if (line.contains(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+")) {
                         lineToChangeFire = i;
                         changeCounter++;
                     }
                 }
                 if (stat.getWater() != 0) {
-                    if (line.contains(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + ChatColor.GRAY + "+")) {
+                    if (line.contains(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+")) {
                         lineToChangeWater = i;
                         changeCounter++;
                     }
                 }
                 if (stat.getEarth() != 0) {
-                    if (line.contains(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + ChatColor.GRAY + "+")) {
+                    if (line.contains(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+")) {
                         lineToChangeEarth = i;
                         changeCounter++;
                     }
                 }
                 if (stat.getLightning() != 0) {
-                    if (line.contains(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+")) {
+                    if (line.contains(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+")) {
                         lineToChangeLightning = i;
                         changeCounter++;
                     }
                 }
                 if (stat.getWind() != 0) {
-                    if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+")) {
+                    if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+")) {
                         lineToChangeWind = i;
                         changeCounter++;
                     }
@@ -338,7 +338,7 @@ public class Enchant {
                 StatMagical stat = (StatMagical) StatUtils.getStat(itemStack);
                 baseValue = stat.getMagicDamage();
             } else if (type.equals(StatType.MELEE)) {
-                statString = ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+";
+                statString = ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             } else if (type.equals(StatType.HYBRID)) {
@@ -397,31 +397,31 @@ public class Enchant {
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
                 if (stat.getFire() != 0) {
-                    if (line.contains(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+")) {
+                    if (line.contains(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+")) {
                         lineToChangeFire = i;
                         changeCounter++;
                     }
                 }
                 if (stat.getWater() != 0) {
-                    if (line.contains(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + ChatColor.GRAY + "+")) {
+                    if (line.contains(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+")) {
                         lineToChangeWater = i;
                         changeCounter++;
                     }
                 }
                 if (stat.getEarth() != 0) {
-                    if (line.contains(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + ChatColor.GRAY + "+")) {
+                    if (line.contains(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+")) {
                         lineToChangeEarth = i;
                         changeCounter++;
                     }
                 }
                 if (stat.getLightning() != 0) {
-                    if (line.contains(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+")) {
+                    if (line.contains(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+")) {
                         lineToChangeLightning = i;
                         changeCounter++;
                     }
                 }
                 if (stat.getWind() != 0) {
-                    if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+")) {
+                    if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+")) {
                         lineToChangeWind = i;
                         changeCounter++;
                     }

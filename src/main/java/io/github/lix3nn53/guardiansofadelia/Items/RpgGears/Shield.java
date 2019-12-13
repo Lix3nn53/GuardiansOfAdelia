@@ -31,6 +31,7 @@ public class Shield implements RPGGear {
 
         StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
+        lore.add(ChatColor.GRAY + "Shield");
         lore.add("");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         if (!rpgClass.equals(RPGClass.NO_CLASS)) {
@@ -41,23 +42,23 @@ public class Shield implements RPGGear {
         lore.add(ChatColor.AQUA + "■ Defense: " + ChatColor.GRAY + "+" + defense);
         lore.add(ChatColor.BLUE + "✦ Magic Defense: " + ChatColor.GRAY + "+" + magicDefense);
         lore.add("");
-        lore.add(tier.getTierString());
-        lore.add("");
         if (statPassive.getFire() != 0) {
-            lore.add(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
+            lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
         }
         if (statPassive.getWater() != 0) {
-            lore.add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
+            lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
         }
         if (statPassive.getEarth() != 0) {
-            lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
+            lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
         }
         if (statPassive.getLightning() != 0) {
-            lore.add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
+            lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
         }
         if (statPassive.getWind() != 0) {
-            lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
+            lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
         }
+        lore.add("");
+        lore.add(tier.getTierString());
 
         this.itemStack = new ItemStack(material);
         this.itemStack = RPGItemUtils.resetArmor(this.itemStack);

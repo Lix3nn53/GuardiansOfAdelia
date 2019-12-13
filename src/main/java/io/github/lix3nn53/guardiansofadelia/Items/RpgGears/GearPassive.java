@@ -35,29 +35,30 @@ public class GearPassive implements RPGGear {
         int finalLightning = (int) (statPassive.getLightning() * bonusPercent);
         int finalWind = (int) (statPassive.getWind() * bonusPercent);
 
+        lore.add(ChatColor.GRAY + "Passive Item");
         lore.add("");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         if (!rpgClass.equals(RPGClass.NO_CLASS)) {
             lore.add(ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassString());
         }
         lore.add("");
-        lore.add(tier.getTierString());
-        lore.add("");
         if (finalFire != 0) {
-            lore.add(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+" + finalFire);
+            lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + finalFire);
         }
         if (finalWater != 0) {
-            lore.add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + ChatColor.GRAY + "+" + finalWater);
+            lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + finalWater);
         }
         if (finalEarth != 0) {
-            lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + ChatColor.GRAY + "+" + finalEarth);
+            lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + finalEarth);
         }
         if (finalLightning != 0) {
-            lore.add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+" + finalLightning);
+            lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + finalLightning);
         }
         if (finalWind != 0) {
-            lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+" + finalWind);
+            lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + finalWind);
         }
+        lore.add("");
+        lore.add(tier.getTierString());
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);

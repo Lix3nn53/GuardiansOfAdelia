@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.TargetHelper;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.LivingEntity;
@@ -42,6 +43,13 @@ public class WarpMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (skillLevel == 0) {
+            additions.add(ChatColor.YELLOW + "Warp forward: " + forward.get(skillLevel));
+        } else if (skillLevel == forward.size()) {
+            additions.add(ChatColor.YELLOW + "Warp forward: " + forward.get(skillLevel - 1));
+        } else {
+            additions.add(ChatColor.YELLOW + "Warp forward: " + forward.get(skillLevel - 1) + " -> " + forward.get(skillLevel));
+        }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

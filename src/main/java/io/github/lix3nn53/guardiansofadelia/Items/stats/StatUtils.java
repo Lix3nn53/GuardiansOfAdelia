@@ -146,23 +146,23 @@ public class StatUtils {
 
                 List<String> lore = itemMeta.getLore();
                 if (statPassive.getFire() != 0) {
-                    lore.add(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
+                    lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
                     PersistentDataContainerUtil.putInteger("fire", statPassive.getFire(), itemStack);
                 }
                 if (statPassive.getWater() != 0) {
-                    lore.add(ChatColor.BLUE + "◎ " + ChatColor.GRAY + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
+                    lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
                     PersistentDataContainerUtil.putInteger("water", statPassive.getWater(), itemStack);
                 }
                 if (statPassive.getEarth() != 0) {
-                    lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.GRAY + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
+                    lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
                     PersistentDataContainerUtil.putInteger("earth", statPassive.getEarth(), itemStack);
                 }
                 if (statPassive.getLightning() != 0) {
-                    lore.add(ChatColor.AQUA + "ϟ " + ChatColor.GRAY + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
+                    lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
                     PersistentDataContainerUtil.putInteger("lightning", statPassive.getLightning(), itemStack);
                 }
                 if (statPassive.getWind() != 0) {
-                    lore.add(ChatColor.WHITE + "๑ " + ChatColor.GRAY + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
+                    lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
                     PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), itemStack);
                 }
                 itemMeta.setLore(lore);

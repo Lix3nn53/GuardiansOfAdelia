@@ -28,6 +28,7 @@ public class PetMount implements RPGGear {
         int mountHealth = PetManager.getMountHealth(1, petBaseHealth);
 
         List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Egg");
         lore.add("");
         lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Mount");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
