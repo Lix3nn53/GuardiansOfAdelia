@@ -105,7 +105,7 @@ public class EntitySkills {
         return emptyComponent;
     }
 
-    public static SkillComponent getSkillAoeAround(String holoWarnMessage, int delay, List<SkillComponent> children, double radius, GoaSound goaSound, ParticleMechanic particleMechanic) {
+    public static SkillComponent getSkillAoeAround(String holoWarnMessage, int delay, List<SkillComponent> children, double radius, GoaSound goaSound, ParticleMechanic particleMechanic, boolean targetEnemy) {
         SelfTarget trigger = new SelfTarget();
         SelfTarget selfTargetForSound = new SelfTarget();
         List<Double> radiusList = new ArrayList<>();
@@ -119,7 +119,7 @@ public class EntitySkills {
         radiusList.add(radius);
         radiusList.add(radius);
         radiusList.add(radius);
-        AreaTarget areaTarget = new AreaTarget(false, true, false, 99, radiusList);
+        AreaTarget areaTarget = new AreaTarget(!targetEnemy, targetEnemy, !targetEnemy, 99, radiusList);
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(new SoundMechanic(goaSound));
         trigger.addChildren(new HoloMessageMechanic(holoWarnMessage, 70));

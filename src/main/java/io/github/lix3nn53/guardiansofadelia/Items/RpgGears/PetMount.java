@@ -31,10 +31,10 @@ public class PetMount implements RPGGear {
         lore.add("");
         lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Mount");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
-        lore.add(ChatColor.YELLOW + "----------------");
+        lore.add("");
         lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + 1);
         lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(1));
-        lore.add(ChatColor.YELLOW + "----------------");
+        lore.add("");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + mountHealth);
         lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + PetManager.getMountSpeed(1, petBaseSpeed));
         lore.add(ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + PetManager.getMountJump(1, petBaseJump));
@@ -43,7 +43,7 @@ public class PetMount implements RPGGear {
         PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);
         PersistentDataContainerUtil.putString("petCode", mount.toString(), this.itemStack);
         PersistentDataContainerUtil.putInteger("petExp", 0, this.itemStack);
-        PersistentDataContainerUtil.putInteger("petCurrentHealth", mountHealth - 1, this.itemStack);
+        PersistentDataContainerUtil.putInteger("petCurrentHealth", mountHealth, this.itemStack);
         PersistentDataContainerUtil.putInteger("petBaseHealth", petBaseHealth, this.itemStack);
         PersistentDataContainerUtil.putDouble("petBaseSpeed", petBaseSpeed, this.itemStack);
         PersistentDataContainerUtil.putDouble("petBaseJump", petBaseJump, this.itemStack);

@@ -37,13 +37,13 @@ public class WeaponRanged implements RPGGear {
         lore.add("");
         lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         lore.add(ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassString());
-        lore.add(ChatColor.YELLOW + "----------------");
+        lore.add("");
         lore.add(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+" + rangedDamage);
         lore.add(ChatColor.RED + "➹ Damage: " + ChatColor.GRAY + "+" + damage);
         lore.add(ChatColor.AQUA + "ø Attack Speed: " + attackSpeed.getLoreString());
-        lore.add(ChatColor.YELLOW + "----------------");
+        lore.add("");
         lore.add(tier.getTierString());
-        lore.add(ChatColor.YELLOW + "----------------");
+        lore.add("");
         if (statPassive.getFire() != 0) {
             lore.add(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
         }

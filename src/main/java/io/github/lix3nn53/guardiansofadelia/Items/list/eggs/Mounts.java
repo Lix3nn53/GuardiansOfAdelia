@@ -20,80 +20,74 @@ public class Mounts {
     }
 
     private static int getBaseHealth(GearLevel gearLevel) {
-        int damage = 10; //GearLevel.ZERO
-
         if (gearLevel.equals(GearLevel.ONE)) {
-            damage = 15;
+            return 180;
         } else if (gearLevel.equals(GearLevel.TWO)) {
-            damage = 15;
+            return 360;
         } else if (gearLevel.equals(GearLevel.THREE)) {
-            damage = 15;
+            return 750;
         } else if (gearLevel.equals(GearLevel.FOUR)) {
-            damage = 15;
+            return 1200;
         } else if (gearLevel.equals(GearLevel.FIVE)) {
-            damage = 15;
+            return 1900;
         } else if (gearLevel.equals(GearLevel.SIX)) {
-            damage = 15;
+            return 2800;
         } else if (gearLevel.equals(GearLevel.SEVEN)) {
-            damage = 15;
+            return 4000;
         } else if (gearLevel.equals(GearLevel.EIGHT)) {
-            damage = 15;
+            return 6000;
         } else if (gearLevel.equals(GearLevel.NINE)) {
-            damage = 15;
+            return 9000;
         }
 
-        return damage;
+        return 100; //GearLevel.ZERO
     }
 
     private static double getBaseSpeed(GearLevel gearLevel) {
-        double damage = 10; //GearLevel.ZERO
-
         if (gearLevel.equals(GearLevel.ONE)) {
-            damage = 15;
+            return 1.25;
         } else if (gearLevel.equals(GearLevel.TWO)) {
-            damage = 15;
+            return 1.3;
         } else if (gearLevel.equals(GearLevel.THREE)) {
-            damage = 15;
+            return 1.35;
         } else if (gearLevel.equals(GearLevel.FOUR)) {
-            damage = 15;
+            return 1.4;
         } else if (gearLevel.equals(GearLevel.FIVE)) {
-            damage = 15;
+            return 1.45;
         } else if (gearLevel.equals(GearLevel.SIX)) {
-            damage = 15;
+            return 1.5;
         } else if (gearLevel.equals(GearLevel.SEVEN)) {
-            damage = 15;
+            return 1.55;
         } else if (gearLevel.equals(GearLevel.EIGHT)) {
-            damage = 15;
+            return 1.6;
         } else if (gearLevel.equals(GearLevel.NINE)) {
-            damage = 15;
+            return 1.65;
         }
 
-        return damage;
+        return 1.2; //GearLevel.ZERO
     }
 
     private static double getBaseJump(GearLevel gearLevel) {
-        double damage = 10; //GearLevel.ZERO
-
         if (gearLevel.equals(GearLevel.ONE)) {
-            damage = 15;
+            return 1.25;
         } else if (gearLevel.equals(GearLevel.TWO)) {
-            damage = 15;
+            return 1.3;
         } else if (gearLevel.equals(GearLevel.THREE)) {
-            damage = 15;
+            return 1.35;
         } else if (gearLevel.equals(GearLevel.FOUR)) {
-            damage = 15;
+            return 1.4;
         } else if (gearLevel.equals(GearLevel.FIVE)) {
-            damage = 15;
+            return 1.45;
         } else if (gearLevel.equals(GearLevel.SIX)) {
-            damage = 15;
+            return 1.5;
         } else if (gearLevel.equals(GearLevel.SEVEN)) {
-            damage = 15;
+            return 1.55;
         } else if (gearLevel.equals(GearLevel.EIGHT)) {
-            damage = 15;
+            return 1.6;
         } else if (gearLevel.equals(GearLevel.NINE)) {
-            damage = 15;
+            return 1.65;
         }
 
-        return damage;
+        return 1.2; //GearLevel.ZERO
     }
 }

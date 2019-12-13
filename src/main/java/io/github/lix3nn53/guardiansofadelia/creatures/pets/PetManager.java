@@ -31,7 +31,7 @@ public class PetManager {
     private final static List<Player> deathPetPlayerList = new ArrayList<>();
     private static HashMap<LivingEntity, Player> petToPlayer = new HashMap<>();
     private static HashMap<Player, LivingEntity> playerToPet = new HashMap<>();
-    private static double PET_MOVEMENT_SPEED = 0.75D;
+    private static double PET_FOLLOW_MOVEMENT_SPEED = 0.75D;
     private static long respawnDelay = 20 * 300L;
     private static Method craftEntity_getHandle, navigationAbstract_a, entityInsentient_getNavigation;
     private static Class<?> entityInsentientClass = MinecraftReflection.getMinecraftClass("EntityInsentient");
@@ -80,13 +80,13 @@ public class PetManager {
         }
 
         Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
-        petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "lvl" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
+        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
         Wolf wolf = (Wolf) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.WOLF);
         wolf.setAdult();
         wolf.setTamed(true);
         wolf.setOwner(owner);
         wolf.setSilent(true);
-        wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_MOVEMENT_SPEED);
+        wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_FOLLOW_MOVEMENT_SPEED);
         wolf.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage);
         wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
         wolf.setHealth(currentHP);
@@ -111,7 +111,7 @@ public class PetManager {
         }
 
         Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
-        petName += " " + ChatColor.WHITE + "<" + owner.getName() + ">" + ChatColor.GOLD + "lvl" + petLevel + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
+        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
         Horse horse = (Horse) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.HORSE);
         horse.setTamed(true);
         horse.setAdult();
@@ -120,7 +120,7 @@ public class PetManager {
         horse.setColor(color);
         horse.setOwner(owner);
         horse.setHealth(currentHP);
-        horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_MOVEMENT_SPEED);
+        horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_FOLLOW_MOVEMENT_SPEED);
         horse.getAttribute(Attribute.HORSE_JUMP_STRENGTH).setBaseValue(jumpStrength);
         if (!armor.getType().equals(Material.AIR)) {
             horse.getInventory().setArmor(armor);
@@ -157,7 +157,7 @@ public class PetManager {
     }
 
     public static void onDismount(LivingEntity mount) {
-        mount.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_MOVEMENT_SPEED);
+        mount.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_FOLLOW_MOVEMENT_SPEED);
     }
 
     public static void onPetDeath(LivingEntity livingEntity) {
@@ -276,7 +276,7 @@ public class PetManager {
                             double petBaseHealth = PersistentDataContainerUtil.getInteger(egg, "petBaseHealth");
                             if (isCompanionCode(petCode)) {
                                 double petBaseDamage = PersistentDataContainerUtil.getInteger(egg, "petBaseDamage");
-                                spawnCompanionPet(player, petCode, petCurrentHealth, levelFromExp, petBaseHealth, petBaseDamage);
+                                spawnCompanionPet(player, petCode, petCurrentHealth, levelFromExp, petBaseDamage, petBaseHealth);
                             } else if (isMountCode(petCode)) {
                                 double petBaseSpeed = PersistentDataContainerUtil.getDouble(egg, "petBaseSpeed");
                                 double petBaseJump = PersistentDataContainerUtil.getDouble(egg, "petBaseJump");
@@ -341,7 +341,7 @@ public class PetManager {
                 }
             }
 
-            double speedModifier = PET_MOVEMENT_SPEED;
+            double speedModifier = PET_FOLLOW_MOVEMENT_SPEED;
 
             try {
                 Object insentient = entityInsentientClass.cast(craftEntity_getHandle.invoke(activePet));
@@ -360,142 +360,212 @@ public class PetManager {
     }
 
     public static int getCompanionHealth(int petLevel, double baseHealth) {
+        double multiplier = 1;
+
         switch (petLevel) {
             case 2:
-                return 250;
+                multiplier = 1.1;
+                break;
             case 3:
-                return 600;
+                multiplier = 1.2;
+                break;
             case 4:
-                return 1000;
+                multiplier = 1.3;
+                break;
             case 5:
-                return 1600;
+                multiplier = 1.4;
+                break;
             case 6:
-                return 2400;
+                multiplier = 1.5;
+                break;
             case 7:
-                return 3200;
+                multiplier = 1.6;
+                break;
             case 8:
-                return 4000;
+                multiplier = 1.7;
+                break;
             case 9:
-                return 5000;
+                multiplier = 1.8;
+                break;
             case 10:
-                return 6000;
+                multiplier = 1.9;
+                break;
             case 11:
-                return 7500;
+                multiplier = 2.0;
+                break;
             case 12:
-                return 9000;
+                multiplier = 2.1;
+                break;
         }
-        return 120;
+
+        return (int) (baseHealth * multiplier + 0.5);
     }
 
     public static int getCompanionDamage(int petLevel, double baseDamage) {
+        double multiplier = 1;
+
         switch (petLevel) {
             case 2:
-                return 24;
+                multiplier = 1.1;
+                break;
             case 3:
-                return 60;
+                multiplier = 1.2;
+                break;
             case 4:
-                return 120;
+                multiplier = 1.3;
+                break;
             case 5:
-                return 200;
+                multiplier = 1.4;
+                break;
             case 6:
-                return 300;
+                multiplier = 1.5;
+                break;
             case 7:
-                return 400;
+                multiplier = 1.6;
+                break;
             case 8:
-                return 500;
+                multiplier = 1.7;
+                break;
             case 9:
-                return 700;
+                multiplier = 1.8;
+                break;
             case 10:
-                return 900;
+                multiplier = 1.9;
+                break;
             case 11:
-                return 1200;
+                multiplier = 2.0;
+                break;
             case 12:
-                return 1500;
+                multiplier = 2.1;
+                break;
         }
-        return 12;
+
+        return (int) (baseDamage * multiplier + 0.5);
     }
 
     public static int getMountHealth(int petLevel, double baseHealth) {
+        double multiplier = 1;
+
         switch (petLevel) {
             case 2:
-                return 400;
+                multiplier = 1.1;
+                break;
             case 3:
-                return 900;
+                multiplier = 1.2;
+                break;
             case 4:
-                return 1500;
+                multiplier = 1.3;
+                break;
             case 5:
-                return 2400;
+                multiplier = 1.4;
+                break;
             case 6:
-                return 3600;
+                multiplier = 1.5;
+                break;
             case 7:
-                return 4800;
+                multiplier = 1.6;
+                break;
             case 8:
-                return 6000;
+                multiplier = 1.7;
+                break;
             case 9:
-                return 7400;
+                multiplier = 1.8;
+                break;
             case 10:
-                return 9000;
+                multiplier = 1.9;
+                break;
             case 11:
-                return 12000;
+                multiplier = 2.0;
+                break;
             case 12:
-                return 15000;
+                multiplier = 2.1;
+                break;
         }
-        return 200;
+
+        return (int) (baseHealth * multiplier + 0.5);
     }
 
     public static double getMountSpeed(int petLevel, double baseSpeed) {
+        double multiplier = 1;
+
         switch (petLevel) {
             case 2:
-                return 0.4;
+                multiplier = 1.05;
+                break;
             case 3:
-                return 0.45;
+                multiplier = 1.1;
+                break;
             case 4:
-                return 0.5;
+                multiplier = 1.15;
+                break;
             case 5:
-                return 0.55;
+                multiplier = 1.2;
+                break;
             case 6:
-                return 0.6;
+                multiplier = 1.25;
+                break;
             case 7:
-                return 0.65;
+                multiplier = 1.3;
+                break;
             case 8:
-                return 0.7;
+                multiplier = 1.35;
+                break;
             case 9:
-                return 0.75;
+                multiplier = 1.4;
+                break;
             case 10:
-                return 0.8;
+                multiplier = 1.45;
+                break;
             case 11:
-                return 0.85;
+                multiplier = 1.5;
+                break;
             case 12:
-                return 0.9;
+                multiplier = 1.55;
+                break;
         }
-        return 0.35;
+
+        return (int) (baseSpeed * multiplier + 0.5);
     }
 
     public static double getMountJump(int petLevel, double baseJump) {
+        double multiplier = 1;
+
         switch (petLevel) {
             case 2:
-                return 0.75;
+                multiplier = 1.05;
+                break;
             case 3:
-                return 0.8;
+                multiplier = 1.1;
+                break;
             case 4:
-                return 0.85;
+                multiplier = 1.15;
+                break;
             case 5:
-                return 0.9;
+                multiplier = 1.2;
+                break;
             case 6:
-                return 0.95;
+                multiplier = 1.25;
+                break;
             case 7:
-                return 1;
+                multiplier = 1.3;
+                break;
             case 8:
-                return 1.05;
+                multiplier = 1.35;
+                break;
             case 9:
-                return 1.1;
+                multiplier = 1.4;
+                break;
             case 10:
-                return 1.15;
+                multiplier = 1.45;
+                break;
             case 11:
-                return 1.2;
+                multiplier = 1.5;
+                break;
             case 12:
-                return 1.25;
+                multiplier = 1.55;
+                break;
         }
-        return 0.7;
+
+        return (int) (baseJump * multiplier + 0.5);
     }
 }

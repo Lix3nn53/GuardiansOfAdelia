@@ -95,7 +95,15 @@ public class EntitySkillComponents {
         forward.add(0D);
         forward.add(0D);
         forward.add(0D);
+        forward.add(0D);
+        forward.add(0D);
+        forward.add(0D);
+        forward.add(0D);
         List<Double> right = new ArrayList<>();
+        right.add(0D);
+        right.add(0D);
+        right.add(0D);
+        right.add(0D);
         right.add(0D);
         right.add(0D);
         right.add(0D);

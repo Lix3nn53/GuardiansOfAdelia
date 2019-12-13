@@ -30,7 +30,7 @@ public enum EnchantStone {
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(ChatColor.BLUE + "Enchant Stone Tier 2");
             itemMeta.setLore(new ArrayList() {{
-                add(ChatColor.YELLOW + "----------------");
+                add("");
                 add(ChatColor.GRAY + "Magical stone to enchant items");
                 add(ChatColor.GRAY + "For +3, +4 ve +5 items");
 
@@ -42,7 +42,7 @@ public enum EnchantStone {
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Enchant Stone Tier 3");
             itemMeta.setLore(new ArrayList() {{
-                add(ChatColor.YELLOW + "----------------");
+                add("");
                 add(ChatColor.GRAY + "Magical stone to enchant items");
                 add(ChatColor.GRAY + "For +6, +7 ve +8 items");
 
@@ -54,7 +54,7 @@ public enum EnchantStone {
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(ChatColor.RED + "Enchant Stone Tier 4");
             itemMeta.setLore(new ArrayList() {{
-                add(ChatColor.YELLOW + "----------------");
+                add("");
                 add(ChatColor.GRAY + "Magical stone to enchant items");
                 add(ChatColor.GRAY + "For +9, +10 ve +11 items");
 
@@ -66,7 +66,7 @@ public enum EnchantStone {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GREEN + "Enchant Stone Tier 1");
         itemMeta.setLore(new ArrayList() {{
-            add(ChatColor.YELLOW + "----------------");
+            add("");
             add(ChatColor.GRAY + "Magical stone to enchant items");
             add(ChatColor.GRAY + "For +0, +1 ve +2 items");
 

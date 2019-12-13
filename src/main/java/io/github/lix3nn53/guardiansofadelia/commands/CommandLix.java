@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
@@ -28,7 +29,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -53,8 +53,8 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix tp [town|?] <num>");
                 player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
                 player.sendMessage(ChatColor.BLUE + "/lix weapon [class] <num>");
-                player.sendMessage(ChatColor.BLUE + "/lix companion [type]");
-                player.sendMessage(ChatColor.BLUE + "/lix mount [type]");
+                player.sendMessage(ChatColor.BLUE + "/lix companion [type] <num>");
+                player.sendMessage(ChatColor.BLUE + "/lix mount [type] <num>");
                 player.sendMessage(ChatColor.BLUE + "/lix stone <grade> <amount>");
                 player.sendMessage(ChatColor.BLUE + "/lix passive [parrot|earring|necklace|glove|ring] <num>");
                 player.sendMessage(ChatColor.BLUE + "/lix model portal<1-5>");
@@ -103,11 +103,9 @@ public class CommandLix implements CommandExecutor {
                 boolean allowFlight = player.getAllowFlight();
                 player.setFlying(!allowFlight);
             } else if (args[0].equals("debug")) {
-                Location location = player.getLocation();
-                LivingEntity entity = (LivingEntity) location.getWorld().spawnEntity(location, EntityType.ZOMBIE);
-                //LivingEntity entity2 = (LivingEntity) location.getWorld().spawnEntity(location, EntityType.ZOMBIE);
-                entity.setNoDamageTicks(0);
-                player.damage(200, entity);
+                int i = Integer.parseInt(args[1]);
+                ItemStack prizeChest = DungeonTheme.values()[i].getPrizeChest();
+                InventoryUtils.giveItemToPlayer(player, prizeChest);
             } else if (args[0].equals("weapon")) {
                 if (args.length == 3) {
                     RPGClass rpgClass = RPGClass.valueOf(args[1]);
@@ -116,17 +114,19 @@ public class CommandLix implements CommandExecutor {
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("companion")) {
-                if (args.length == 2) {
+                if (args.length == 3) {
                     Companion mount = Companion.valueOf(args[1]);
+                    int i = Integer.parseInt(args[2]);
 
-                    ItemStack egg = Companions.get(mount, GearLevel.NINE);
+                    ItemStack egg = Companions.get(mount, GearLevel.values()[i]);
                     InventoryUtils.giveItemToPlayer(player, egg);
                 }
             } else if (args[0].equals("mount")) {
-                if (args.length == 2) {
+                if (args.length == 3) {
                     Mount mount = Mount.valueOf(args[1]);
+                    int i = Integer.parseInt(args[2]);
 
-                    ItemStack egg = Mounts.get(mount, GearLevel.NINE);
+                    ItemStack egg = Mounts.get(mount, GearLevel.values()[i]);
                     InventoryUtils.giveItemToPlayer(player, egg);
                 }
             } else if (args[0].equals("stone")) {

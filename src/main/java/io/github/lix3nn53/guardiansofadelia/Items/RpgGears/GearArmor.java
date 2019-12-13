@@ -36,13 +36,13 @@ public class GearArmor implements RPGGear {
         if (!rpgClass.equals(RPGClass.NO_CLASS)) {
             lore.add(ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassString());
         }
-        lore.add(ChatColor.YELLOW + "----------------");
+        lore.add("");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+" + health);
         lore.add(ChatColor.AQUA + "■ Defense: " + ChatColor.GRAY + "+" + defense);
         lore.add(ChatColor.BLUE + "✦ Magic Defense: " + ChatColor.GRAY + "+" + magicDefense);
-        lore.add(ChatColor.YELLOW + "----------------");
+        lore.add("");
         lore.add(tier.getTierString());
-        lore.add(ChatColor.YELLOW + "----------------");
+        lore.add("");
         if (statPassive.getFire() != 0) {
             lore.add(ChatColor.RED + "☄ " + ChatColor.GRAY + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
         }

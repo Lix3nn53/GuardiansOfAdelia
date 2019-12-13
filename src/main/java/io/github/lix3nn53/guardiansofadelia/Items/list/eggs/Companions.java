@@ -20,54 +20,50 @@ public class Companions {
     }
 
     private static int getBaseDamage(GearLevel gearLevel) {
-        int damage = 10; //GearLevel.ZERO
-
         if (gearLevel.equals(GearLevel.ONE)) {
-            damage = 15;
+            return 20;
         } else if (gearLevel.equals(GearLevel.TWO)) {
-            damage = 15;
+            return 40;
         } else if (gearLevel.equals(GearLevel.THREE)) {
-            damage = 15;
+            return 60;
         } else if (gearLevel.equals(GearLevel.FOUR)) {
-            damage = 15;
+            return 90;
         } else if (gearLevel.equals(GearLevel.FIVE)) {
-            damage = 15;
+            return 120;
         } else if (gearLevel.equals(GearLevel.SIX)) {
-            damage = 15;
+            return 180;
         } else if (gearLevel.equals(GearLevel.SEVEN)) {
-            damage = 15;
+            return 240;
         } else if (gearLevel.equals(GearLevel.EIGHT)) {
-            damage = 15;
+            return 310;
         } else if (gearLevel.equals(GearLevel.NINE)) {
-            damage = 15;
+            return 400;
         }
 
-        return damage;
+        return 10; //GearLevel.ZERO
     }
 
     private static int getBaseHealth(GearLevel gearLevel) {
-        int damage = 10; //GearLevel.ZERO
-
         if (gearLevel.equals(GearLevel.ONE)) {
-            damage = 15;
+            return 120;
         } else if (gearLevel.equals(GearLevel.TWO)) {
-            damage = 15;
+            return 240;
         } else if (gearLevel.equals(GearLevel.THREE)) {
-            damage = 15;
+            return 500;
         } else if (gearLevel.equals(GearLevel.FOUR)) {
-            damage = 15;
+            return 900;
         } else if (gearLevel.equals(GearLevel.FIVE)) {
-            damage = 15;
+            return 1400;
         } else if (gearLevel.equals(GearLevel.SIX)) {
-            damage = 15;
+            return 2000;
         } else if (gearLevel.equals(GearLevel.SEVEN)) {
-            damage = 15;
+            return 2800;
         } else if (gearLevel.equals(GearLevel.EIGHT)) {
-            damage = 15;
+            return 4000;
         } else if (gearLevel.equals(GearLevel.NINE)) {
-            damage = 15;
+            return 6000;
         }
 
-        return damage;
+        return 60; //GearLevel.ZERO
     }
 }

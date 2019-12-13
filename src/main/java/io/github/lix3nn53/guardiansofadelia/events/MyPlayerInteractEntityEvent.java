@@ -1,16 +1,21 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Entity;
@@ -30,17 +35,26 @@ import java.util.UUID;
 
 public class MyPlayerInteractEntityEvent implements Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    public void onEventNormal(PlayerInteractEntityEvent event) {
+        Entity rightClicked = event.getRightClicked();
+        if (rightClicked.getType().equals(EntityType.VILLAGER)) {
+            NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
+            if (!npcRegistry.isNPC(rightClicked)) {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
     public void onEvent(PlayerInteractEntityEvent event) {
         if (!event.getHand().equals(EquipmentSlot.HAND)) {
             return;
         }
-        Entity rightClicked = event.getRightClicked();
-        if (rightClicked.getType().equals(EntityType.VILLAGER)) {
-            event.setCancelled(true);
-        }
 
+        Entity rightClicked = event.getRightClicked();
         Player player = event.getPlayer();
+
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
         if (itemInMainHand.hasItemMeta()) {
             ItemMeta itemMeta = itemInMainHand.getItemMeta();
@@ -56,17 +70,24 @@ public class MyPlayerInteractEntityEvent implements Listener {
                         if (currentHealth < maxHealth) {
                             int healAmount = 100;
                             if (displayName.contains("2")) {
-                                healAmount = 500;
+                                healAmount = 200;
                             } else if (displayName.contains("3")) {
-                                healAmount = 1000;
+                                healAmount = 400;
                             } else if (displayName.contains("4")) {
-                                healAmount = 2000;
+                                healAmount = 800;
+                            } else if (displayName.contains("5")) {
+                                healAmount = 1200;
                             }
                             double setHealthAmount = currentHealth + healAmount;
                             if (setHealthAmount > maxHealth) {
                                 setHealthAmount = maxHealth;
                             }
                             livingEntity.setHealth(setHealthAmount);
+                            player.sendMessage("" + setHealthAmount);
+                            PetManager.onPetTakeDamage(livingEntity, currentHealth, -healAmount);
+                            int amount = itemInMainHand.getAmount();
+                            itemInMainHand.setAmount(amount - 1);
+                            ParticleUtil.play(livingEntity.getLocation().add(0, 1.2, 0), Particle.HEART, ArrangementParticle.CIRCLE, 1.2, 6, Direction.XZ, 0, 0, 0, 0, null);
                         } else {
                             player.sendMessage(ChatColor.RED + "Pet health is already full");
                         }

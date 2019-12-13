@@ -60,11 +60,13 @@ public class OtherItems {
             if (tier == 1) {
                 add(ChatColor.GRAY + "Restores 100 health");
             } else if (tier == 2) {
-                add(ChatColor.GRAY + "Restores 500 health");
+                add(ChatColor.GRAY + "Restores 200 health");
             } else if (tier == 3) {
-                add(ChatColor.GRAY + "Restores 1000 health");
+                add(ChatColor.GRAY + "Restores 400 health");
             } else if (tier == 4) {
-                add(ChatColor.GRAY + "Restores 2000 health");
+                add(ChatColor.GRAY + "Restores 800 health");
+            } else if (tier == 5) {
+                add(ChatColor.GRAY + "Restores 1200 health");
             }
         }});
         itemStack.setItemMeta(itemMeta);

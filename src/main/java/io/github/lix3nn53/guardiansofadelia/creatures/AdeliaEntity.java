@@ -157,14 +157,14 @@ public enum AdeliaEntity {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentPullMechanic());
             ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.SLIME, 3.6, 12, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.GREEN + "Kyaa!", 40, children, 4, GoaSound.SKILL_SPLASH, particleMechanic);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.GREEN + "Kyaa!", 40, children, 4, GoaSound.SKILL_SPLASH, particleMechanic, true);
             skills.add(trigger);
             skillLevels.add(1);
         } else if (this == AdeliaEntity.ZOMBIE_VILLAGER) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MELEE));
             ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.VILLAGER_ANGRY, 2.8, 8, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.DARK_GREEN + "Grr!", 40, children, 3.2, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.DARK_GREEN + "Grr!", 40, children, 3.2, GoaSound.SKILL_LIGHTNING_NORMAL, particleMechanic, true);
             skills.add(trigger);
             skillLevels.add(2);
         } else if (this == AdeliaEntity.ZOMBIE_SPLITTER) {
@@ -186,7 +186,7 @@ public enum AdeliaEntity {
             children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MAGIC));
             children.add(EntitySkillComponents.getComponentPushMechanic());
             ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.EXPLOSION_HUGE, 4.2, 4, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "BOOM!", 40, children, 4.2, GoaSound.SKILL_SONIC_BOOM, particleMechanic);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "BOOM!", 40, children, 4.2, GoaSound.SKILL_SONIC_BOOM, particleMechanic, true);
             skills.add(trigger);
             skillLevels.add(4);
         } else if (this == AdeliaEntity.PIRATE_SHARPSHOOTER) {
@@ -202,7 +202,7 @@ public enum AdeliaEntity {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MELEE));
             ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 2.8, 8, new Particle.DustOptions(Color.AQUA, 2));
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Slash!", 40, children, 3.2, GoaSound.SKILL_SWORD_MULTI_SLASH, particleMechanic);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Slash!", 40, children, 3.2, GoaSound.SKILL_SWORD_MULTI_SLASH, particleMechanic, true);
             skills.add(trigger);
             skillLevels.add(5);
         } else if (this == AdeliaEntity.MUMMY_GHOST) {
@@ -236,21 +236,21 @@ public enum AdeliaEntity {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentHealByAmount());
             ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 8, 12, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Don't fall, fools!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Don't fall, fools!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic, false);
             skills.add(trigger);
             skillLevels.add(8);
         } else if (this == AdeliaEntity.ORC_GLADIATOR) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentDamageMechanic(DamageMechanic.DamageType.MELEE));
             ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 2.8, 8, new Particle.DustOptions(Color.AQUA, 2));
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Slash!", 40, children, 2.8, GoaSound.SKILL_SWORD_MULTI_SLASH, particleMechanic);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Slash!", 40, children, 2.8, GoaSound.SKILL_SWORD_MULTI_SLASH, particleMechanic, true);
             skills.add(trigger);
             skillLevels.add(9);
         } else if (this == AdeliaEntity.ORC_SHAMAN) {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentHealByAmount());
             ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 8, 12, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Stop them, fools!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Stop them, fools!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic, false);
             skills.add(trigger);
             skillLevels.add(9);
         } else if (this == AdeliaEntity.ORC_MAGE) {
@@ -278,7 +278,7 @@ public enum AdeliaEntity {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentHealByAmount());
             ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.HEART, 8, 12, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Stop them, fools!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.AQUA + "Stop them, fools!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic, false);
             skills.add(trigger);
             skillLevels.add(10);
         } else if (this == AdeliaEntity.BOSS_SLIME) {
@@ -287,7 +287,7 @@ public enum AdeliaEntity {
             adeliaEntities.add(SLIME);
             children.add(EntitySkillComponents.getComponentSpawnEntity(adeliaEntities, 2));
             ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.REDSTONE, 8, 8, new Particle.DustOptions(Color.AQUA, 2));
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.GREEN + "Heelp!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.GREEN + "Heelp!", 10, children, 8, GoaSound.SKILL_HEAL, particleMechanic, true);
             skills.add(trigger);
             skillLevels.add(10);
         } else if (this == AdeliaEntity.BOSS_ZOMBIE) {

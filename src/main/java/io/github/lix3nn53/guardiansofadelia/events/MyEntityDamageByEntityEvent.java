@@ -202,35 +202,38 @@ public class MyEntityDamageByEntityEvent implements Listener {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                //on player attack to pet
-                if (livingTarget.getType().equals(EntityType.WOLF) || livingTarget.getType().equals(EntityType.HORSE)) {
-                    boolean pvp = livingTarget.getWorld().getPVP();
-                    if (pvp) {
-                        if (PetManager.isPet(livingTarget)) {
-                            Player owner = PetManager.getOwner(livingTarget);
-                            //attack own pet
-                            if (owner.equals(player)) {
-                                event.setCancelled(true);
-                                return true;
-                            } else {
-                                //attack pet of party member
-                                if (PartyManager.inParty(player)) {
-                                    if (PartyManager.getParty(player).getMembers().contains(owner)) {
-                                        event.setCancelled(true);
-                                        return true;
+
+                double damage = event.getDamage();
+                boolean isCritical = false;
+                Location targetLocation = livingTarget.getLocation();
+
+                if (!isPet) { //attacker is not player's pet
+                    if (livingTarget.getType().equals(EntityType.WOLF) || livingTarget.getType().equals(EntityType.HORSE)) { //on player attack to pet
+                        boolean pvp = livingTarget.getWorld().getPVP();
+                        if (pvp) {
+                            if (PetManager.isPet(livingTarget)) {
+                                Player owner = PetManager.getOwner(livingTarget);
+                                //attack own pet
+                                if (owner.equals(player)) {
+                                    event.setCancelled(true);
+                                    return true;
+                                } else {
+                                    //attack pet of party member
+                                    if (PartyManager.inParty(player)) {
+                                        if (PartyManager.getParty(player).getMembers().contains(owner)) {
+                                            event.setCancelled(true);
+                                            return true;
+                                        }
                                     }
                                 }
                             }
+                        } else {
+                            event.setCancelled(true);
+                            return true;
                         }
-                    } else {
-                        event.setCancelled(true);
-                        return true;
                     }
-                }
 
-                if (!isPet) { //attacker is Pet so don't edit pet's target
-                    //if player has active pet manage pet's target
-                    if (PetManager.hasActivePet(player)) {
+                    if (PetManager.hasActivePet(player)) { //if player has active pet manage pet's target
                         LivingEntity activePet = PetManager.getActivePet(player);
                         if (activePet instanceof Wolf) {
                             Wolf wolf = (Wolf) activePet;
@@ -239,82 +242,77 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             }
                         }
                     }
-                }
 
-                //custom damage modifiers
-                double damage = event.getDamage();
-
-                RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-                RPGClass rpgClass = activeCharacter.getRpgClass();
-                if (damageType.equals(DamageMechanic.DamageType.MAGIC)) { //Ranged overrides Magic so check magic first. You can not deal Magic damage without skills.
-                    damage += rpgCharacterStats.getTotalMagicDamage(player, rpgClass); //add to spell damage
-                    TriggerListener.onPlayerMagicAttack(player, livingTarget);
-                } else if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
-                    if (isSkill) { //add full ranged damage to skills
-                        damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClass);
+                    //custom damage modifiers
+                    RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+                    RPGClass rpgClass = activeCharacter.getRpgClass();
+                    if (damageType.equals(DamageMechanic.DamageType.MAGIC)) { //Ranged overrides Magic so check magic first. You can not deal Magic damage without skills.
+                        damage += rpgCharacterStats.getTotalMagicDamage(player, rpgClass); //add to spell damage
                         TriggerListener.onPlayerMagicAttack(player, livingTarget);
-                    } else { //add fire element and physical damage buff to projectiles fired without skills involved
-                        damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClass);
-                        damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
-                        TriggerListener.onPlayerRangedAttack(player, livingTarget);
-                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.6F, 0.4F);
+                    } else if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
+                        if (isSkill) { //add full ranged damage to skills
+                            damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClass);
+                            TriggerListener.onPlayerMagicAttack(player, livingTarget);
+                        } else { //add fire element and physical damage buff to projectiles fired without skills involved
+                            damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClass);
+                            damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
+                            TriggerListener.onPlayerRangedAttack(player, livingTarget);
+                            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.6F, 0.4F);
+                        }
+                    } else { //melee
+                        ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+                        Material type = itemInMainHand.getType();
+
+                        if (isSkill) { //Add full melee damage to skills
+                            damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClass);
+                            TriggerListener.onPlayerMagicAttack(player, livingTarget);
+                        } else if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
+                                || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
+                            //Normal melee attack. Check for requirements then add fire and offhand bonus
+
+                            if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "reqLevel")) {
+                                int reqLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "reqLevel");
+                                if (player.getLevel() < reqLevel) {
+                                    event.setCancelled(true);
+                                    player.sendMessage("Required level for this weapon is " + reqLevel);
+                                    return false;
+                                }
+                            }
+
+                            if (PersistentDataContainerUtil.hasString(itemInMainHand, "reqClass")) {
+                                String reqClassString = PersistentDataContainerUtil.getString(itemInMainHand, "reqClass");
+                                RPGClass reqClass = RPGClass.valueOf(reqClassString);
+                                if (!rpgClass.equals(reqClass)) {
+                                    event.setCancelled(true);
+                                    player.sendMessage("Required class for this weapon is " + reqClass.getClassString());
+                                    return false;
+                                }
+                            }
+
+                            damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClass); //add to weapon damage
+
+                            //add damage bonus from offhand
+                            ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
+                            if (!InventoryUtils.isAirOrNull(itemInMainHand)) {
+                                if (itemInOffHand.getType().equals(Material.DIAMOND_HOE)) {
+                                    damage += rpgCharacterStats.getTotalDamageBonusFromOffhand();
+                                }
+                            }
+
+                            damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
+                            TriggerListener.onPlayerMeleeAttack(player, livingTarget);
+                        }
                     }
-                } else { //melee
-                    ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-                    Material type = itemInMainHand.getType();
 
-                    if (isSkill) { //Add full melee damage to skills
-                        damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClass);
-                        TriggerListener.onPlayerMagicAttack(player, livingTarget);
-                    } else if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
-                            || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
-                        //Normal melee attack. Check for requirements then add fire and offhand bonus
-
-                        if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "reqLevel")) {
-                            int reqLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "reqLevel");
-                            if (player.getLevel() < reqLevel) {
-                                event.setCancelled(true);
-                                player.sendMessage("Required level for this weapon is " + reqLevel);
-                                return false;
-                            }
-                        }
-
-                        if (PersistentDataContainerUtil.hasString(itemInMainHand, "reqClass")) {
-                            String reqClassString = PersistentDataContainerUtil.getString(itemInMainHand, "reqClass");
-                            RPGClass reqClass = RPGClass.valueOf(reqClassString);
-                            if (!rpgClass.equals(reqClass)) {
-                                event.setCancelled(true);
-                                player.sendMessage("Required class for this weapon is " + reqClass.getClassString());
-                                return false;
-                            }
-                        }
-
-                        damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClass); //add to weapon damage
-
-                        //add damage bonus from offhand
-                        ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
-                        if (!InventoryUtils.isAirOrNull(itemInMainHand)) {
-                            if (itemInOffHand.getType().equals(Material.DIAMOND_HOE)) {
-                                damage += rpgCharacterStats.getTotalDamageBonusFromOffhand();
-                            }
-                        }
-
-                        damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
-                        TriggerListener.onPlayerMeleeAttack(player, livingTarget);
+                    //add critical damage right before defense
+                    double totalCriticalChance = rpgCharacterStats.getTotalCriticalChance();
+                    double random = Math.random();
+                    if (random <= totalCriticalChance) {
+                        damage += damage * rpgCharacterStats.getTotalCriticalDamageBonus();
+                        isCritical = true;
+                        Particle particle = Particle.CRIT;
+                        targetLocation.getWorld().spawnParticle(particle, targetLocation.clone().add(0, 0.25, 0), 6);
                     }
-                }
-
-                Location targetLocation = livingTarget.getLocation();
-
-                //add critical damage right before defense
-                double totalCriticalChance = rpgCharacterStats.getTotalCriticalChance();
-                double random = Math.random();
-                boolean isCritical = false;
-                if (random <= totalCriticalChance) {
-                    damage += damage * rpgCharacterStats.getTotalCriticalDamageBonus();
-                    isCritical = true;
-                    Particle particle = Particle.CRIT;
-                    targetLocation.getWorld().spawnParticle(particle, targetLocation.clone().add(0, 0.25, 0), 6);
                 }
 
                 //custom defense formula if target is another player
@@ -376,6 +374,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 } else if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
                     indicatorColor = ChatColor.AQUA;
                     indicatorIcon = "✧";
+                } else if (isPet) {
+                    indicatorColor = ChatColor.LIGHT_PURPLE;
+                    indicatorIcon = ">.<";
                 }
 
                 if (isCritical) {

@@ -119,7 +119,7 @@ public class Skill {
         lore.add(reqPlayerLevelColor + "Required Level: " + reqPlayerLevel);
         lore.add(reqSkillPointsColor + "Required Skill Points: " + reqSkillPoints);
 
-        lore.add(ChatColor.YELLOW + "------------------------------");
+        lore.add("");
         if (skillLevel == 0) {
             lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel));
             lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel));
@@ -131,13 +131,13 @@ public class Skill {
             lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel - 1) + " -> " + getCooldown(skillLevel));
         }
 
-        lore.add(ChatColor.YELLOW + "------------------------------");
+        lore.add("");
         //skill attributes
         for (SkillComponent trigger : triggers) {
             lore.addAll(trigger.getSkillLoreAdditions(new ArrayList<>(), skillLevel));
         }
 
-        lore.add(ChatColor.YELLOW + "------------------------------");
+        lore.add("");
         lore.addAll(getDescription());
 
         itemMeta.setLore(lore);
