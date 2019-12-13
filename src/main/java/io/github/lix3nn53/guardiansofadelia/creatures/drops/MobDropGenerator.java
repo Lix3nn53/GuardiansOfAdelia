@@ -50,7 +50,7 @@ public class MobDropGenerator {
             }
 
             ItemTier tier = ItemTier.RARE;
-            int minNumberofStats = tier.getMinNumberOfStats();
+            int minNumberOfStats = tier.getMinNumberOfStatsNormal();
             int minStatValue = gearLevel.getMinStatValue();
             int maxStatValue = gearLevel.getMaxStatValue();
 
@@ -64,7 +64,7 @@ public class MobDropGenerator {
             int dropType = rand.nextInt(3);
 
             if (dropType == 0) {
-                ItemStack droppedItem = Weapons.getWeapon(RPGClass.WARRIOR, gearLevel.getWeaponAndPassiveNo(), tier, "", minStatValue, maxStatValue, minNumberofStats);
+                ItemStack droppedItem = Weapons.getWeapon(RPGClass.WARRIOR, gearLevel.getWeaponAndPassiveNo(), tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);
             } else if (dropType == 1) {
                 if (gearLevel.equals(GearLevel.ZERO) || gearLevel.equals(GearLevel.ONE)) {
@@ -73,10 +73,11 @@ public class MobDropGenerator {
                 // Obtain a number between [0 - 3].
                 int armorTypeRandom = rand.nextInt(4);
                 ArmorType armorType = ArmorType.values()[armorTypeRandom];
-                ItemStack droppedItem = Armors.getArmor(armorType, rpgClass, gearLevel.getArmorNo(), tier, "", minStatValue, maxStatValue, minNumberofStats);
+                ItemStack droppedItem = Armors.getArmor(armorType, rpgClass, gearLevel.getArmorNo(), tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);
             } else if (dropType == 2) {
-                ItemStack droppedItem = PassiveItemList.get(gearLevel.getWeaponAndPassiveNo(), RPGSlotType.RING, tier, "", minStatValue, maxStatValue, minNumberofStats);
+                minNumberOfStats = tier.getMinNumberOfStatsPassive();
+                ItemStack droppedItem = PassiveItemList.get(gearLevel.getWeaponAndPassiveNo(), RPGSlotType.RING, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);
             }
         }

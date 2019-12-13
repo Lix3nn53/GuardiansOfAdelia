@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
@@ -379,7 +380,7 @@ public class MyInventoryClickEvent implements Listener {
                     GuiGeneric job = MenuList.job(player);
                     job.openInventory(player);
                 } else if (currentName.equals(ChatColor.AQUA + "Chat Tag")) {
-                    GuiGeneric chatTag = MenuList.chatTag();
+                    GuiGeneric chatTag = MenuList.chatTag(player);
                     chatTag.openInventory(player);
                 }
             }
@@ -854,6 +855,16 @@ public class MyInventoryClickEvent implements Listener {
                         player.closeInventory();
                     }
                 }
+            }
+        } else if (title.contains(org.bukkit.ChatColor.AQUA + "Chat Tag")) {
+            if (currentType.equals(Material.LIME_WOOL)) {
+                String stripColor = ChatColor.stripColor(currentName);
+
+                ChatTag chatTag = ChatTag.valueOf(stripColor);
+
+                rpgCharacter.setChatTag(chatTag);
+
+                player.sendMessage(ChatColor.YELLOW + "You selected a new chat tag: " + chatTag.getChatColor() + chatTag.toString());
             }
         }
     }

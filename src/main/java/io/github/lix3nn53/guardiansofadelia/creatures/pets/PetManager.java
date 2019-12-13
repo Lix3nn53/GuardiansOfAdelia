@@ -31,7 +31,7 @@ public class PetManager {
     private final static List<Player> deathPetPlayerList = new ArrayList<>();
     private static HashMap<LivingEntity, Player> petToPlayer = new HashMap<>();
     private static HashMap<Player, LivingEntity> playerToPet = new HashMap<>();
-    private static double PET_FOLLOW_MOVEMENT_SPEED = 0.75D;
+    private static double PET_FOLLOW_MOVEMENT_SPEED = 0.7D;
     private static long respawnDelay = 20 * 300L;
     private static Method craftEntity_getHandle, navigationAbstract_a, entityInsentient_getNavigation;
     private static Class<?> entityInsentientClass = MinecraftReflection.getMinecraftClass("EntityInsentient");
@@ -94,15 +94,13 @@ public class PetManager {
         return wolf;
     }
 
-    private static LivingEntity getMountPet(Player owner, String petCode, int currentHP, int petLevel, double baseHealth, double baseSpeed, double baseJump) {
+    private static LivingEntity getMountPet(Player owner, String petCode, int currentHP, int petLevel, double baseHealth, double mountSpeed, double jumpStrength) {
         Mount mount = Mount.valueOf(petCode);
         String petName = mount.getName();
         Horse.Color color = mount.getColor();
         ItemStack armor = new ItemStack(Material.AIR);
 
         int maxHP = getMountHealth(petLevel, baseHealth);
-        double mountSpeed = getMountSpeed(petLevel, baseSpeed);
-        double jumpStrength = getMountJump(petLevel, baseJump);
 
         if (currentHP <= 0) {
             currentHP = (int) ((maxHP * 0.4) + 0.5);
@@ -483,89 +481,5 @@ public class PetManager {
         }
 
         return (int) (baseHealth * multiplier + 0.5);
-    }
-
-    public static double getMountSpeed(int petLevel, double baseSpeed) {
-        double multiplier = 1;
-
-        switch (petLevel) {
-            case 2:
-                multiplier = 1.05;
-                break;
-            case 3:
-                multiplier = 1.1;
-                break;
-            case 4:
-                multiplier = 1.15;
-                break;
-            case 5:
-                multiplier = 1.2;
-                break;
-            case 6:
-                multiplier = 1.25;
-                break;
-            case 7:
-                multiplier = 1.3;
-                break;
-            case 8:
-                multiplier = 1.35;
-                break;
-            case 9:
-                multiplier = 1.4;
-                break;
-            case 10:
-                multiplier = 1.45;
-                break;
-            case 11:
-                multiplier = 1.5;
-                break;
-            case 12:
-                multiplier = 1.55;
-                break;
-        }
-
-        return (int) (baseSpeed * multiplier + 0.5);
-    }
-
-    public static double getMountJump(int petLevel, double baseJump) {
-        double multiplier = 1;
-
-        switch (petLevel) {
-            case 2:
-                multiplier = 1.05;
-                break;
-            case 3:
-                multiplier = 1.1;
-                break;
-            case 4:
-                multiplier = 1.15;
-                break;
-            case 5:
-                multiplier = 1.2;
-                break;
-            case 6:
-                multiplier = 1.25;
-                break;
-            case 7:
-                multiplier = 1.3;
-                break;
-            case 8:
-                multiplier = 1.35;
-                break;
-            case 9:
-                multiplier = 1.4;
-                break;
-            case 10:
-                multiplier = 1.45;
-                break;
-            case 11:
-                multiplier = 1.5;
-                break;
-            case 12:
-                multiplier = 1.55;
-                break;
-        }
-
-        return (int) (baseJump * multiplier + 0.5);
     }
 }

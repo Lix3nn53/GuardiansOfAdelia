@@ -45,49 +45,49 @@ public class Mounts {
 
     private static double getBaseSpeed(GearLevel gearLevel) {
         if (gearLevel.equals(GearLevel.ONE)) {
-            return 1.25;
+            return 0.24;
         } else if (gearLevel.equals(GearLevel.TWO)) {
-            return 1.3;
+            return 0.26;
         } else if (gearLevel.equals(GearLevel.THREE)) {
-            return 1.35;
+            return 0.28;
         } else if (gearLevel.equals(GearLevel.FOUR)) {
-            return 1.4;
+            return 0.3;
         } else if (gearLevel.equals(GearLevel.FIVE)) {
-            return 1.45;
+            return 0.32;
         } else if (gearLevel.equals(GearLevel.SIX)) {
-            return 1.5;
+            return 0.34;
         } else if (gearLevel.equals(GearLevel.SEVEN)) {
-            return 1.55;
+            return 0.36;
         } else if (gearLevel.equals(GearLevel.EIGHT)) {
-            return 1.6;
+            return 0.38;
         } else if (gearLevel.equals(GearLevel.NINE)) {
-            return 1.65;
+            return 0.4;
         }
 
-        return 1.2; //GearLevel.ZERO
+        return 0.22; //GearLevel.ZERO
     }
 
     private static double getBaseJump(GearLevel gearLevel) {
         if (gearLevel.equals(GearLevel.ONE)) {
-            return 1.25;
+            return 0.85;
         } else if (gearLevel.equals(GearLevel.TWO)) {
-            return 1.3;
+            return 0.9;
         } else if (gearLevel.equals(GearLevel.THREE)) {
-            return 1.35;
+            return 0.95;
         } else if (gearLevel.equals(GearLevel.FOUR)) {
-            return 1.4;
+            return 1.0;
         } else if (gearLevel.equals(GearLevel.FIVE)) {
-            return 1.45;
+            return 1.05;
         } else if (gearLevel.equals(GearLevel.SIX)) {
-            return 1.5;
+            return 1.1;
         } else if (gearLevel.equals(GearLevel.SEVEN)) {
-            return 1.55;
+            return 1.15;
         } else if (gearLevel.equals(GearLevel.EIGHT)) {
-            return 1.6;
+            return 1.2;
         } else if (gearLevel.equals(GearLevel.NINE)) {
-            return 1.65;
+            return 1.25;
         }
 
-        return 1.2; //GearLevel.ZERO
+        return 0.8; //GearLevel.ZERO
     }
 }

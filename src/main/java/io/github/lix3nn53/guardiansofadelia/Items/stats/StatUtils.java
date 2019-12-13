@@ -141,8 +141,13 @@ public class StatUtils {
     public static void addRandomPassiveStats(ItemStack itemStack, GearLevel gearLevel, ItemTier itemTier) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasLore()) {
-            if (hasStatType(itemStack.getType())) {
-                StatPassive statPassive = new StatPassive(gearLevel.getMinStatValue(), gearLevel.getMaxStatValue(), itemTier.getMinNumberOfStats());
+            Material type = itemStack.getType();
+            if (hasStatType(type)) {
+                int minNumberOfStats = itemTier.getMinNumberOfStatsNormal();
+                if (type.equals(Material.SHEARS)) { //passive item
+                    minNumberOfStats = itemTier.getMinNumberOfStatsPassive();
+                }
+                StatPassive statPassive = new StatPassive(gearLevel.getMinStatValue(), gearLevel.getMaxStatValue(), minNumberOfStats);
 
                 List<String> lore = itemMeta.getLore();
                 if (statPassive.getFire() != 0) {

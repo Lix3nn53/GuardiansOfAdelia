@@ -19,7 +19,7 @@ public class GearPassive implements RPGGear {
     private final int level;
     private ItemStack itemStack;
 
-    public GearPassive(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int passiveType, int level, RPGClass rpgClass,
+    public GearPassive(String name, ItemTier tier, String itemTag, int customModelDataId, int passiveType, int level, RPGClass rpgClass,
                        int minStatValue, int maxStatValue, int minNumberOfStats, double bonusPercent) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
@@ -60,7 +60,7 @@ public class GearPassive implements RPGGear {
         lore.add("");
         lore.add(tier.getTierString());
 
-        this.itemStack = new ItemStack(material);
+        this.itemStack = new ItemStack(Material.SHEARS);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
         PersistentDataContainerUtil.putInteger("passive", passiveType, this.itemStack);
 

@@ -39,16 +39,16 @@ public enum ItemTier {
     public double getBonusMultiplier() {
         double percent = 1;
         if (this == ItemTier.RARE) {
-            percent = 1.15;
+            percent = 1.1;
         } else if (this == ItemTier.MYSTIC) {
-            percent = 1.3;
+            percent = 1.2;
         } else if (this == ItemTier.LEGENDARY) {
-            percent = 1.5;
+            percent = 1.4;
         }
         return percent;
     }
 
-    public int getMinNumberOfStats() {
+    public int getMinNumberOfStatsNormal() {
         int number = 0;
         if (this == ItemTier.RARE) {
             number = 1;
@@ -56,6 +56,18 @@ public enum ItemTier {
             number = 2;
         } else if (this == ItemTier.LEGENDARY) {
             number = 3;
+        }
+        return number;
+    }
+
+    public int getMinNumberOfStatsPassive() {
+        int number = 1;
+        if (this == ItemTier.RARE) {
+            number = 2;
+        } else if (this == ItemTier.MYSTIC) {
+            number = 3;
+        } else if (this == ItemTier.LEGENDARY) {
+            number = 4;
         }
         return number;
     }

@@ -19,12 +19,7 @@ public enum ChatTag {
     THIEF, //THIEF TAGS
     RINGLEADER,
     TRICKSTER,
-    SHADOW,
-    HOBBIT, //MAP-AREA-QUEST-LINE TAGS
-    CANDY,
-    SNOWMAN,
-    GHOST,
-    LAVAWALKER;
+    SHADOW;
 
     public ChatColor getChatColor() {
         switch (this) {
@@ -60,17 +55,45 @@ public enum ChatTag {
                 return ChatColor.LIGHT_PURPLE;
             case SHADOW:
                 return ChatColor.DARK_PURPLE;
-            case HOBBIT:
-                return ChatColor.GREEN;
-            case CANDY:
-                return ChatColor.LIGHT_PURPLE;
-            case SNOWMAN:
-                return ChatColor.AQUA;
-            case GHOST:
-                return ChatColor.YELLOW;
-            case LAVAWALKER:
-                return ChatColor.RED;
         }
         return ChatColor.GRAY;
+    }
+
+    public int getRequiredQuest() {
+        switch (this) {
+            case SENIOR:
+                return 27;
+            case LORD:
+                return 51;
+            case HERO:
+                return 70;
+            case TITAN:
+                return 92;
+            case BRAVE:
+                return 999;
+            case GLADIATOR:
+                return 999;
+            case CHAMPION:
+                return 999;
+            case DRAGON:
+                return 999;
+            case MAGICIAN:
+                return 999;
+            case SAGE:
+                return 999;
+            case WIZARD:
+                return 999;
+            case ETERNAL:
+                return 999;
+            case THIEF:
+                return 999;
+            case RINGLEADER:
+                return 999;
+            case TRICKSTER:
+                return 999;
+            case SHADOW:
+                return 999;
+        }
+        return 1;
     }
 }

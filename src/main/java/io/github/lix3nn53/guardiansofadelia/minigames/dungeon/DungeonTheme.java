@@ -140,7 +140,6 @@ public enum DungeonTheme {
             chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, itemTag, gearLevel));
         } else if (type.equals(PrizeChestType.PET)) {
             chestItems.addAll(ItemPoolGenerator.generateEggs(gearLevel));
-            chestItems.addAll(ItemPoolGenerator.generateEggs(gearLevel));
         }
 
         return chestItems;

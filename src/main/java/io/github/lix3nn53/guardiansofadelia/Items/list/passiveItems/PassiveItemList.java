@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.GearPassive;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class PassiveItemList {
@@ -12,7 +11,6 @@ public class PassiveItemList {
     public static ItemStack get(int placementNumber, RPGSlotType rpgSlotType, ItemTier tier, String itemTag, int minStatValue,
                                 int maxStatValue, int minNumberofStats) {
         String name = "Stone Ring";
-        Material material = Material.SHEARS;
         int customModelDataId = 10000001;
         int level = 2;
         RPGClass rpgClass = RPGClass.NO_CLASS;
@@ -206,7 +204,7 @@ public class PassiveItemList {
             }
         }
 
-        final GearPassive passive = new GearPassive(name, tier, itemTag, material, customModelDataId, passiveTypeNum, level, rpgClass, minStatValue,
+        final GearPassive passive = new GearPassive(name, tier, itemTag, customModelDataId, passiveTypeNum, level, rpgClass, minStatValue,
                 maxStatValue, minNumberofStats, tier.getBonusMultiplier());
 
         return passive.getItemStack();

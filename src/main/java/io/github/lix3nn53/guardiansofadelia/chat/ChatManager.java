@@ -112,16 +112,22 @@ public class ChatManager {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             StaffRank staffRank = guardianData.getStaffRank();
             if (!staffRank.equals(StaffRank.NONE)) {
-                prefix += ChatColor.DARK_GRAY + "[" + staffRank.getChatColor() + staffRank.toString() + ChatColor.DARK_GRAY + "]";
+                String s = staffRank.toString();
+                s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+                prefix += ChatColor.DARK_GRAY + "[" + staffRank.getChatColor() + s + ChatColor.DARK_GRAY + "]";
             }
             if (GuildManager.inGuild(player)) {
                 Guild guild = GuildManager.getGuild(player);
-                prefix += ChatColor.DARK_GRAY + "[" + ChatColor.DARK_PURPLE + guild.getName() + ChatColor.DARK_GRAY + "]";
+                String s = guild.getName();
+                s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+                prefix += ChatColor.DARK_GRAY + "[" + ChatColor.DARK_PURPLE + s + ChatColor.DARK_GRAY + "]";
             }
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 ChatTag chatTag = activeCharacter.getChatTag();
-                prefix += ChatColor.DARK_GRAY + "[" + chatTag.getChatColor() + chatTag.toString() + ChatColor.DARK_GRAY + "]";
+                String s = chatTag.toString();
+                s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+                prefix += ChatColor.DARK_GRAY + "[" + chatTag.getChatColor() + s + ChatColor.DARK_GRAY + "]";
             }
         }
         return prefix + ChatColor.GRAY + " ";

@@ -7,11 +7,9 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Shields;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
-import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import org.bukkit.inventory.ItemStack;
@@ -22,7 +20,7 @@ import java.util.List;
 public class ItemPoolGenerator {
 
     public static List<ItemStack> generateWeapons(ItemTier tier, String itemTag, GearLevel gearLevel) {
-        int minNumberofStats = tier.getMinNumberOfStats();
+        int minNumberofStats = tier.getMinNumberOfStatsNormal();
         int minStatValue = gearLevel.getMinStatValue();
         int maxStatValue = gearLevel.getMaxStatValue();
 
@@ -42,7 +40,7 @@ public class ItemPoolGenerator {
     }
 
     public static List<ItemStack> generatePassives(ItemTier tier, String itemTag, GearLevel gearLevel) {
-        int minNumberofStats = tier.getMinNumberOfStats();
+        int minNumberofStats = tier.getMinNumberOfStatsPassive();
         int minStatValue = gearLevel.getMinStatValue();
         int maxStatValue = gearLevel.getMaxStatValue();
 
@@ -58,7 +56,7 @@ public class ItemPoolGenerator {
     }
 
     public static List<ItemStack> generateArmors(ItemTier tier, String itemTag, GearLevel gearLevel) {
-        int minNumberofStats = tier.getMinNumberOfStats();
+        int minNumberofStats = tier.getMinNumberOfStatsNormal();
         int minStatValue = gearLevel.getMinStatValue();
         int maxStatValue = gearLevel.getMaxStatValue();
 
@@ -239,9 +237,10 @@ public class ItemPoolGenerator {
             temp.add(Companions.get(companion, gearLevel));
         }
 
+        /*TODO mount eggs are disabled, stay this way?
         for (Mount mount : Mount.values()) {
             temp.add(Mounts.get(mount, gearLevel));
-        }
+        }*/
 
         return temp;
     }

@@ -1,4 +1,5 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import net.md_5.bungee.api.ChatColor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +12,11 @@ public class Test {
     private static final double MULTIPLIER = 0.1;
 
     public static void main(String[] args) {
-        List<Double> downRatesForLevel = new ArrayList<>();
+        String currentName = ChatColor.GOLD + "Test";
+        System.out.println(currentName);
+        String stripColor = ChatColor.stripColor(currentName);
+        System.out.println(stripColor);
+        /*List<Double> downRatesForLevel = new ArrayList<>();
         downRatesForLevel.add(0.75);
         downRatesForLevel.add(0.6);
         downRatesForLevel.add(0.45);
@@ -25,7 +30,7 @@ public class Test {
         int value = 640;
         for (double rate : downRatesForLevel) {
             System.out.println(value * rate);
-        }
+        }*/
         /*for (RPGClass rpgClass : RPGClass.values()) {
             if (rpgClass.equals(RPGClass.NO_CLASS)) continue;
             for (int level = 1; level < 91; level++) {

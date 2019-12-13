@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.menu;
 
+import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -407,9 +408,43 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric chatTag() {
+    public static GuiGeneric chatTag(Player player) {
         GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.AQUA + "Chat Tag", 0);
 
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                List<Integer> turnedInQuests = activeCharacter.getTurnedInQuests();
+
+                int i = 0;
+                for (ChatTag chatTag : ChatTag.values()) {
+                    int requiredQuest = chatTag.getRequiredQuest();
+                    ItemStack itemStack = new ItemStack(Material.RED_WOOL);
+                    ChatColor questColor = ChatColor.RED;
+                    if (turnedInQuests.contains(requiredQuest)) {
+                        itemStack = new ItemStack(Material.LIME_WOOL);
+                        questColor = ChatColor.GREEN;
+                    }
+
+                    ItemMeta itemMeta = itemStack.getItemMeta();
+                    itemMeta.setDisplayName(chatTag.getChatColor() + chatTag.toString());
+
+                    List<String> lore = new ArrayList<>();
+                    lore.add("");
+                    lore.add(questColor + "Required quest no: " + requiredQuest);
+                    lore.add("");
+                    lore.add(ChatColor.GRAY + "Click to select this chat tag");
+                    itemMeta.setLore(lore);
+
+                    itemStack.setItemMeta(itemMeta);
+
+                    guiGeneric.setItem(i, itemStack);
+                    i++;
+                }
+            }
+        }
 
         return guiGeneric;
     }

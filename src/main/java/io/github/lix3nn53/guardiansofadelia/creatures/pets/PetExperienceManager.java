@@ -133,14 +133,8 @@ public class PetExperienceManager {
                         player.sendMessage(ChatColor.GOLD + "DEBUG pet COMPANION level up");
                     } else {
                         double petBaseHealth = PersistentDataContainerUtil.getInteger(egg, "petBaseHealth");
-                        double petBaseSpeed = PersistentDataContainerUtil.getDouble(egg, "petBaseSpeed");
-                        double petBaseJump = PersistentDataContainerUtil.getDouble(egg, "petBaseJump");
-                        double movementSpeed = PetManager.getMountSpeed(nextLevel, petBaseSpeed);
-                        double jumpStrength = PetManager.getMountJump(nextLevel, petBaseJump);
                         int maxHP = PetManager.getMountHealth(nextLevel, petBaseHealth);
                         lore.set(7, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
-                        lore.set(8, ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + movementSpeed);
-                        lore.set(9, ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + jumpStrength);
                         player.sendMessage(ChatColor.GOLD + "DEBUG pet MOUNT level up");
                     }
 

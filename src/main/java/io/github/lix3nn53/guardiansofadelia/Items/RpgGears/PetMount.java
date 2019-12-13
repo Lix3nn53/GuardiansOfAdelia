@@ -37,8 +37,8 @@ public class PetMount implements RPGGear {
         lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(1));
         lore.add("");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + mountHealth);
-        lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + PetManager.getMountSpeed(1, petBaseSpeed));
-        lore.add(ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + PetManager.getMountJump(1, petBaseJump));
+        lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + petBaseSpeed);
+        lore.add(ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + petBaseJump);
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);

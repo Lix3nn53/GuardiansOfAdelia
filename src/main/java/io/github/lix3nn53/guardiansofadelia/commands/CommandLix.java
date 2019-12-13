@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
@@ -33,6 +34,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.List;
 import java.util.UUID;
 
 public class CommandLix implements CommandExecutor {
@@ -51,6 +53,7 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_PURPLE + "/lix exp <player> <amount>");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "---- UTILS ----");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix tp [town|?] <num>");
+                player.sendMessage(ChatColor.DARK_PURPLE + "/lix quest t - turn ins current quests tasks");
                 player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
                 player.sendMessage(ChatColor.BLUE + "/lix weapon [class] <num>");
                 player.sendMessage(ChatColor.BLUE + "/lix companion [type] <num>");
@@ -99,6 +102,27 @@ public class CommandLix implements CommandExecutor {
                         }
                     }
                 }
+            } else if (args[0].equals("quest")) {
+                if (args.length == 2) {
+                    if (args[1].equals("t")) {
+                        UUID uuid = player.getUniqueId();
+                        if (GuardianDataManager.hasGuardianData(uuid)) {
+                            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                            if (guardianData.hasActiveCharacter()) {
+                                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                                List<Quest> questList = activeCharacter.getQuestList();
+
+                                for (Quest quest : questList) {
+                                    activeCharacter.getTurnedInQuests().add(quest.getQuestID());
+                                    quest.onTurnIn(player);
+                                }
+
+                                questList.clear();
+                            }
+                        }
+                    }
+                }
             } else if (args[0].equals("fly")) {
                 boolean allowFlight = player.getAllowFlight();
                 player.setFlying(!allowFlight);
@@ -110,7 +134,7 @@ public class CommandLix implements CommandExecutor {
                 if (args.length == 3) {
                     RPGClass rpgClass = RPGClass.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
-                    ItemStack weapon = Weapons.getWeapon(rpgClass, no, ItemTier.LEGENDARY, "Command", 0, 0, 0);
+                    ItemStack weapon = Weapons.getWeapon(rpgClass, no, ItemTier.LEGENDARY, "Command", 20, 40, 5);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("companion")) {

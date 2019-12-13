@@ -94,23 +94,23 @@ public enum GearLevel {
     public int getMinStatValue() {
         switch (this) {
             case ONE:
-                return 5;
+                return 2;
             case TWO:
-                return 10;
+                return 4;
             case THREE:
-                return 15;
+                return 6;
             case FOUR:
-                return 20;
+                return 8;
             case FIVE:
-                return 25;
+                return 10;
             case SIX:
-                return 30;
+                return 12;
             case SEVEN:
-                return 35;
+                return 14;
             case EIGHT:
-                return 40;
+                return 16;
             case NINE:
-                return 50;
+                return 18;
         }
         return 1;
     }
@@ -118,25 +118,25 @@ public enum GearLevel {
     public int getMaxStatValue() {
         switch (this) {
             case ONE:
-                return 10;
+                return 6;
             case TWO:
-                return 15;
+                return 8;
             case THREE:
-                return 20;
+                return 10;
             case FOUR:
-                return 25;
+                return 12;
             case FIVE:
-                return 30;
+                return 16;
             case SIX:
-                return 35;
+                return 20;
             case SEVEN:
-                return 40;
+                return 24;
             case EIGHT:
-                return 45;
+                return 28;
             case NINE:
-                return 50;
+                return 32;
         }
-        return 5;
+        return 4;
     }
 
     public int getWeaponAndPassiveNo() {
