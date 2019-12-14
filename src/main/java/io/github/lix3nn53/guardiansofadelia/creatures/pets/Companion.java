@@ -46,7 +46,8 @@ public enum Companion {
     FOX_RED,
     FOX_SNOW,
     VEX,
-    MINI_DRAGON;
+    MINI_DRAGON,
+    BEE;
 
     public String getName() {
         switch (this) {
@@ -112,6 +113,8 @@ public enum Companion {
                 return ChatColor.AQUA + "Vex";
             case MINI_DRAGON:
                 return ChatColor.RED + "Baby Dragon";
+            case BEE:
+                return ChatColor.GOLD + "Bee";
         }
         return "NULL_COMPANION";
     }
@@ -310,6 +313,11 @@ public enum Companion {
                 disguise = disguise.setReplaceSounds(true);
                 DisguiseAPI.disguiseToAll(wolf, disguise);
                 break;
+            case BEE:
+                disguise = new MobDisguise(DisguiseType.BEE, true);
+                disguise = disguise.setReplaceSounds(true);
+                DisguiseAPI.disguiseToAll(wolf, disguise);
+                break;
         }
     }
 
@@ -377,6 +385,8 @@ public enum Companion {
                 return 10000010;
             case MINI_DRAGON:
                 return 10000003;
+            case BEE:
+                return 10000002;
         }
         return 10000001;
     }
@@ -444,6 +454,8 @@ public enum Companion {
             case VEX:
                 return ItemTier.COMMON;
             case MINI_DRAGON:
+                return ItemTier.COMMON;
+            case BEE:
                 return ItemTier.COMMON;
         }
         return ItemTier.COMMON;
