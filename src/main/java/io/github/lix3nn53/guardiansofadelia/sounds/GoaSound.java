@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.sounds;
 
+import org.bukkit.Sound;
+
 public enum GoaSound {
     LEVEL_UP,
     WHEEL_OF_FORTUNE,
@@ -40,18 +42,24 @@ public enum GoaSound {
     SKILL_SWORD_MULTI_SLASH,
     SKILL_THROW_SMALL_OBJECT,
     SKILL_VOID_SIGNAL,
-    SKILL_WIND_PUSH;
+    SKILL_WIND_PUSH,
+    VANILLA_UI_TOAST_CHALLENGE_COMPLETE;
 
     public CustomSound getCustomSound() {
-        String sound = getSoundString();
         float volume = 0.5f;
         float pitch = 1f;
 
-        return new CustomSound(sound, volume, pitch);
-    }
+        String name = this.name();
 
-    private String getSoundString() {
-        String sound = this.name().toLowerCase().replace("skill_", "skill.");
-        return sound;
+        if (name.contains("VANILLA_")) {
+            name = name.replace("VANILLA_", "");
+            Sound sound = Sound.valueOf(name);
+
+            return new CustomSound(sound, volume, pitch);
+        } else {
+            String soundString = name.replace("SKILL_", "SKILL.").toLowerCase();
+
+            return new CustomSound(soundString, volume, pitch);
+        }
     }
 }

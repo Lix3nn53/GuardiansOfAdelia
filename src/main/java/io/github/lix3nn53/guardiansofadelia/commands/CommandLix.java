@@ -17,6 +17,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
+import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
@@ -52,8 +54,9 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_PURPLE + "/lix setstaff <player> [NONE|OWNER|ADMIN|DEVELOPER|BUILDER|SUPPORT|YOUTUBER|TRAINEE]");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/lix exp <player> <amount>");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "---- UTILS ----");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix sound <sound>");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix tp [town|?] <num>");
-                player.sendMessage(ChatColor.DARK_PURPLE + "/lix quest t - turn ins current quests tasks");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix quest t - turn ins current quests tasks");
                 player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
                 player.sendMessage(ChatColor.BLUE + "/lix weapon [class] <num>");
                 player.sendMessage(ChatColor.BLUE + "/lix companion [type] <num>");
@@ -122,6 +125,12 @@ public class CommandLix implements CommandExecutor {
                             }
                         }
                     }
+                }
+            } else if (args[0].equals("sound")) {
+                if (args.length == 2) {
+                    GoaSound goaSound = GoaSound.valueOf(args[1]);
+                    CustomSound customSound = goaSound.getCustomSound();
+                    customSound.play(player);
                 }
             } else if (args[0].equals("fly")) {
                 boolean allowFlight = player.getAllowFlight();
