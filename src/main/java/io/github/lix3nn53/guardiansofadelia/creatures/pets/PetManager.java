@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.creatures.pets;
 import com.comphenix.protocol.utility.MinecraftReflection;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -87,7 +88,7 @@ public class PetManager {
         wolf.setOwner(owner);
         wolf.setSilent(true);
         wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_FOLLOW_MOVEMENT_SPEED);
-        wolf.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage);
+        AdeliaEntity.setCustomDamage(wolf, damage); //wolf.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage);
         wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
         wolf.setHealth(currentHP);
         companion.disguise(wolf);

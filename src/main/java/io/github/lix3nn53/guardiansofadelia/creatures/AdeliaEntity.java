@@ -130,7 +130,7 @@ public enum AdeliaEntity {
      * @param entity
      * @param customDamage
      */
-    private static void setCustomDamage(Entity entity, int customDamage) {
+    public static void setCustomDamage(Entity entity, int customDamage) {
         PersistentDataContainerUtil.putInteger("customDamage", customDamage, entity);
     }
 

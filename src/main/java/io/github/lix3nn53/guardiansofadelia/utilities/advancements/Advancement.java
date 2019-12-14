@@ -4,12 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.server.v1_14_R1.*;
-import net.minecraft.server.v1_14_R1.IChatBaseComponent.ChatSerializer;
+import net.minecraft.server.v1_15_R1.*;
+import net.minecraft.server.v1_15_R1.IChatBaseComponent.ChatSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Warning;
-import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;
@@ -40,7 +40,7 @@ public class Advancement {
     private Set<String> savedCriterionNames = null;
     @SerializedName("criteriaRequirements")
     private String[][] savedCriteriaRequirements = null;
-    private transient net.minecraft.server.v1_14_R1.Advancement savedAdvancement = null;
+    private transient net.minecraft.server.v1_15_R1.Advancement savedAdvancement = null;
     private transient HashMap<String, Boolean> savedHiddenStatus;
 
     /**
@@ -247,8 +247,8 @@ public class Advancement {
 
         advRequirements = Arrays.stream(fixedRequirements.toArray()).toArray(String[][]::new);
 
-        net.minecraft.server.v1_14_R1.AdvancementDisplay saveDisplay = new net.minecraft.server.v1_14_R1.AdvancementDisplay(icon, display.getTitle().getBaseComponent(), display.getDescription().getBaseComponent(), backgroundTexture, display.getFrame().getNMS(), display.isToastShown(), display.isAnnouncedToChat(), true);
-        net.minecraft.server.v1_14_R1.Advancement saveAdv = new net.minecraft.server.v1_14_R1.Advancement(notName, getParent() == null ? null : getParent().getSavedAdvancement(), saveDisplay, advRewards, advCriteria, advRequirements);
+        net.minecraft.server.v1_15_R1.AdvancementDisplay saveDisplay = new net.minecraft.server.v1_15_R1.AdvancementDisplay(icon, display.getTitle().getBaseComponent(), display.getDescription().getBaseComponent(), backgroundTexture, display.getFrame().getNMS(), display.isToastShown(), display.isAnnouncedToChat(), true);
+        net.minecraft.server.v1_15_R1.Advancement saveAdv = new net.minecraft.server.v1_15_R1.Advancement(notName, getParent() == null ? null : getParent().getSavedAdvancement(), saveDisplay, advRewards, advCriteria, advRequirements);
 
 
         HashMap<MinecraftKey, AdvancementProgress> prg = new HashMap<>();
@@ -415,11 +415,11 @@ public class Advancement {
     }
 
     @Warning(reason = "Unsafe")
-    public void saveAdvancement(net.minecraft.server.v1_14_R1.Advancement save) {
+    public void saveAdvancement(net.minecraft.server.v1_15_R1.Advancement save) {
         savedAdvancement = save;
     }
 
-    public net.minecraft.server.v1_14_R1.Advancement getSavedAdvancement() {
+    public net.minecraft.server.v1_15_R1.Advancement getSavedAdvancement() {
         return savedAdvancement;
     }
 

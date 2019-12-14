@@ -71,7 +71,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
             //DAMAGER
             if (damager.getType().equals(EntityType.PLAYER)) { //player is attacker
                 Player player = (Player) damager;
-                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, damageType, isSkill);
+                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, null, damageType, isSkill);
                 isAttackerPlayer = true;
             } else if (damager instanceof Projectile) { //projectile is attacker
                 Projectile projectile = (Projectile) damager;
@@ -96,7 +96,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 if (shooter instanceof Player) {
                     Player player = (Player) shooter;
-                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, false, damageType, isSkill);
+                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, null, damageType, isSkill);
                     isAttackerPlayer = true;
                 }
             } else if (damager instanceof LivingEntity) {
@@ -104,7 +104,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     Wolf wolf = (Wolf) damager;
                     if (PetManager.isPet(wolf)) { //pet is attacker
                         Player owner = PetManager.getOwner(wolf);
-                        isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, true, damageType, isSkill);
+                        isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, wolf, damageType, isSkill);
                         isAttackerPlayer = true;
                     }
                 }
@@ -193,10 +193,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
      * @param event
      * @param player
      * @param livingTarget
-     * @param isPet        isAttackerPet else attacker is Player
+     * @param pet = player's pet if attacker is the pet
      * @return isEventCanceled
      */
-    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, boolean isPet, DamageMechanic.DamageType damageType, boolean isSkill) {
+    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, Wolf pet, DamageMechanic.DamageType damageType, boolean isSkill) {
         UUID uniqueId = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uniqueId)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
@@ -207,7 +207,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 boolean isCritical = false;
                 Location targetLocation = livingTarget.getLocation();
 
-                if (!isPet) { //attacker is not player's pet
+                if (pet == null) { //attacker is not player's pet
                     if (livingTarget.getType().equals(EntityType.WOLF) || livingTarget.getType().equals(EntityType.HORSE)) { //on player attack to pet
                         boolean pvp = livingTarget.getWorld().getPVP();
                         if (pvp) {
@@ -313,6 +313,12 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         Particle particle = Particle.CRIT;
                         targetLocation.getWorld().spawnParticle(particle, targetLocation.clone().add(0, 0.25, 0), 6);
                     }
+                } else {
+                    int customDamage = getCustomDamage(pet);
+                    if (customDamage > 0) {
+                        event.setDamage(customDamage);
+                        damage = customDamage; //so vanilla def is not included if target is player
+                    }
                 }
 
                 //custom defense formula if target is another player
@@ -374,7 +380,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 } else if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
                     indicatorColor = ChatColor.AQUA;
                     indicatorIcon = "✧";
-                } else if (isPet) {
+                } else if (pet != null) {
                     indicatorColor = ChatColor.LIGHT_PURPLE;
                     indicatorIcon = ">.<";
                 }
