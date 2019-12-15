@@ -196,7 +196,7 @@ public class QuestsPhase9 {
 
     private static void createQuestNine() {
         List<String> story = new ArrayList<>();
-        story.add("Collect some of the flags orcs");
+        story.add("Collect some of the banners orcs");
         story.add("are carrying to identify.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(71);
@@ -213,7 +213,7 @@ public class QuestsPhase9 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nfrom orcs then talk back to Vruhag";
-        Quest quest = new Quest(76, "Fire spirit", story,
+        Quest quest = new Quest(76, "Orc Banners", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 424000, 0, requiredQuests,
                 Material.GRASS_BLOCK);

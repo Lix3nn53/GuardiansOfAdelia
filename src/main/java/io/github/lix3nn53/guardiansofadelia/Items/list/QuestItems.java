@@ -21,8 +21,9 @@ public class QuestItems {
             item.setItemMeta(im);
             return item;
         } else if (questNo == 15) {
-            ItemStack item = new ItemStack(Material.ROTTEN_FLESH);
+            ItemStack item = new ItemStack(Material.BLUE_DYE);
             ItemMeta im = item.getItemMeta();
+            im.setCustomModelData(1);
             im.setDisplayName(ChatColor.LIGHT_PURPLE + "Zombie Brain");
             im.setLore(new ArrayList() {{
                 add("");
@@ -31,9 +32,10 @@ public class QuestItems {
             item.setItemMeta(im);
             return item;
         } else if (questNo == 23) {
-            ItemStack item = new ItemStack(Material.ROTTEN_FLESH);
+            ItemStack item = new ItemStack(Material.BLUE_DYE);
             ItemMeta im = item.getItemMeta();
-            im.setDisplayName(ChatColor.GRAY + "Magical Bone");
+            im.setCustomModelData(2);
+            im.setDisplayName(ChatColor.DARK_PURPLE + "Magical Bone");
             im.setLore(new ArrayList() {{
                 add("");
                 add(ChatColor.GRAY + "Quest item for #23");
@@ -43,7 +45,8 @@ public class QuestItems {
         } else if (questNo == 31) {
             ItemStack item = new ItemStack(Material.PINK_DYE);
             ItemMeta im = item.getItemMeta();
-            im.setDisplayName(ChatColor.LIGHT_PURPLE + "Bad tasting sugar");
+            im.setCustomModelData(3);
+            im.setDisplayName(ChatColor.GREEN + "Bad tasting sugar");
             im.setLore(new ArrayList() {{
                 add("");
                 add(ChatColor.GRAY + "Quest item for #31");
@@ -51,9 +54,9 @@ public class QuestItems {
             item.setItemMeta(im);
             return item;
         } else if (questNo == 39) {
-            ItemStack item = new ItemStack(Material.ROTTEN_FLESH);
+            ItemStack item = MonsterItem.PIRATE_HAT.getItem(0);
             ItemMeta im = item.getItemMeta();
-            im.setDisplayName(ChatColor.GRAY + "Pirate Hat");
+            im.setDisplayName(ChatColor.DARK_GRAY + "Pirate Hat");
             im.setLore(new ArrayList() {{
                 add("");
                 add(ChatColor.GRAY + "Quest item for #39");
@@ -61,9 +64,10 @@ public class QuestItems {
             item.setItemMeta(im);
             return item;
         } else if (questNo == 47) {
-            ItemStack item = new ItemStack(Material.ROTTEN_FLESH);
+            ItemStack item = new ItemStack(Material.BLUE_DYE);
             ItemMeta im = item.getItemMeta();
-            im.setDisplayName(ChatColor.GRAY + "Frozen Shard");
+            im.setCustomModelData(4);
+            im.setDisplayName(ChatColor.AQUA + "Frozen Shard");
             im.setLore(new ArrayList() {{
                 add("");
                 add(ChatColor.GRAY + "Quest item for #47");
@@ -71,9 +75,10 @@ public class QuestItems {
             item.setItemMeta(im);
             return item;
         } else if (questNo == 56) {
-            ItemStack item = new ItemStack(Material.ROTTEN_FLESH);
+            ItemStack item = new ItemStack(Material.BLUE_DYE);
             ItemMeta im = item.getItemMeta();
-            im.setDisplayName(ChatColor.GRAY + "Mummy Bandage");
+            im.setCustomModelData(5);
+            im.setDisplayName(ChatColor.YELLOW + "Mummy Bandage");
             im.setLore(new ArrayList() {{
                 add("");
                 add(ChatColor.GRAY + "Quest item for #56");
@@ -81,9 +86,10 @@ public class QuestItems {
             item.setItemMeta(im);
             return item;
         } else if (questNo == 64) {
-            ItemStack item = new ItemStack(Material.ROTTEN_FLESH);
+            ItemStack item = new ItemStack(Material.BLUE_DYE);
             ItemMeta im = item.getItemMeta();
-            im.setDisplayName(ChatColor.GRAY + "Goblin Flag");
+            im.setCustomModelData(6);
+            im.setDisplayName(ChatColor.GREEN + "Goblin Banner");
             im.setLore(new ArrayList() {{
                 add("");
                 add(ChatColor.GRAY + "Quest item for #64");
@@ -91,9 +97,10 @@ public class QuestItems {
             item.setItemMeta(im);
             return item;
         } else if (questNo == 76) {
-            ItemStack item = new ItemStack(Material.ROTTEN_FLESH);
+            ItemStack item = new ItemStack(Material.BLUE_DYE);
             ItemMeta im = item.getItemMeta();
-            im.setDisplayName(ChatColor.GRAY + "Orc Flag");
+            im.setCustomModelData(7);
+            im.setDisplayName(ChatColor.RED + "Orc Banner");
             im.setLore(new ArrayList() {{
                 add("");
                 add(ChatColor.GRAY + "Quest item for #76");
@@ -101,9 +108,10 @@ public class QuestItems {
             item.setItemMeta(im);
             return item;
         } else if (questNo == 85) {
-            ItemStack item = new ItemStack(Material.ROTTEN_FLESH);
+            ItemStack item = new ItemStack(Material.BLUE_DYE);
             ItemMeta im = item.getItemMeta();
-            im.setDisplayName(ChatColor.GRAY + "Dark Soul");
+            im.setCustomModelData(8);
+            im.setDisplayName(ChatColor.DARK_PURPLE + "Dark Soul");
             im.setLore(new ArrayList() {{
                 add("");
                 add(ChatColor.GRAY + "Quest item for #85");

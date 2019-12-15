@@ -112,7 +112,7 @@ public class QuestsPhase8 {
 
     private static void createQuestFive() {
         List<String> story = new ArrayList<>();
-        story.add("Collect some of the flags goblins");
+        story.add("Collect some of the banners goblins");
         story.add("are carrying to identify.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(60);
@@ -129,7 +129,7 @@ public class QuestsPhase8 {
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nfrom goblins then talk back to Guardian Raignald";
-        Quest quest = new Quest(64, "Goblin", story,
+        Quest quest = new Quest(64, "Goblin Banners", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);

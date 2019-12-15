@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
@@ -57,6 +58,7 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix sound <sound>");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix tp [town|?] <num>");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix quest t - turn ins current quests tasks");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix quest a <num> - accept quest tasks");
                 player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
                 player.sendMessage(ChatColor.BLUE + "/lix weapon [class] <num>");
                 player.sendMessage(ChatColor.BLUE + "/lix companion [type] <num>");
@@ -122,6 +124,23 @@ public class CommandLix implements CommandExecutor {
                                 }
 
                                 questList.clear();
+                            }
+                        }
+                    }
+                } else if (args.length == 3) {
+                    if (args[1].equals("a")) {
+                        UUID uuid = player.getUniqueId();
+                        if (GuardianDataManager.hasGuardianData(uuid)) {
+                            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                            if (guardianData.hasActiveCharacter()) {
+                                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                                Quest questCopyById = QuestNPCManager.getQuestCopyById(Integer.parseInt(args[2]));
+
+                                boolean questListIsNotFull = activeCharacter.acceptQuest(questCopyById, player);
+                                if (!questListIsNotFull) {
+                                    player.sendMessage(net.md_5.bungee.api.ChatColor.RED + "Your quest list is full");
+                                }
                             }
                         }
                     }
