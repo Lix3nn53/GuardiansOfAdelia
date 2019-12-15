@@ -17,10 +17,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EnchantGui extends GuiGeneric {
 
-    public EnchantGui() {
+    public EnchantGui(Player player) {
         super(27, ChatColor.AQUA + "Item Enchanting", 0);
 
         ItemStack itemGlass = new ItemStack(Material.RED_STAINED_GLASS_PANE, 1);
@@ -41,20 +42,11 @@ public class EnchantGui extends GuiGeneric {
         itemGlass.setItemMeta(im);
         ItemMeta im2 = finalGlass.getItemMeta();
         im2.setDisplayName(ChatColor.GREEN + "Enchant success rates:");
-        im2.setLore(new ArrayList() {{
-            add(ChatColor.GRAY + "0 -> 1 = 84%");
-            add(ChatColor.GRAY + "1 -> 2 = 8%");
-            add(ChatColor.GRAY + "2 -> 3 = 76%");
-            add(ChatColor.GRAY + "3 -> 4 = 72%");
-            add(ChatColor.GRAY + "4 -> 5 = 67%");
-            add(ChatColor.GRAY + "5 -> 6 = 60%");
-            add(ChatColor.GRAY + "6 -> 7 = 53%");
-            add(ChatColor.GRAY + "7 -> 8 = 47%");
-            add(ChatColor.GRAY + "8 -> 9 = 40%");
-            add(ChatColor.GRAY + "9 -> 10 = 32%");
-            add(ChatColor.GRAY + "10 -> 11 = 26%");
-            add(ChatColor.GRAY + "11 -> 12 = 20%");
-        }});
+        List<String> lore = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            lore.add(ChatColor.GRAY.toString() + i + " -> " + (i + 1) + " = " + (int) (EnchantManager.getChance(player, i) * 100) + "%");
+        }
+        im2.setLore(lore);
         finalGlass.setItemMeta(im2);
         ItemMeta im3 = stoneGlass.getItemMeta();
         im3.setDisplayName(ChatColor.AQUA + "Place the appropriate level of");

@@ -9,9 +9,13 @@ public class Test {
 
     private static final HashMap<Character, Double> playerDamages = new HashMap<>();
 
-    private static final double MULTIPLIER = 0.1;
+    private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) {
+        int value = 1000;
+        int z = (int) ((value * MULTIPLIER) + 0.5);
+        System.out.println(z);
+        System.out.println((int) ((z / MULTIPLIER) + 0.5));
         String currentName = ChatColor.GOLD + "Test";
         System.out.println(currentName);
         String stripColor = ChatColor.stripColor(currentName);

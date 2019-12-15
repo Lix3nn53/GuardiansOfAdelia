@@ -70,7 +70,7 @@ public enum MerchantPageType {
             case SHIELD:
                 return getShieldShop(shopLevel, resourceNpc);
             case ENCHANT:
-                return getEnchantGui(player, 0);
+                return getEnchantGui(player, resourceNpc);
             /*case COMPANION:
                 return getCompanionShop(shopLevel, resourceNpc);
             case MOUNT:
@@ -158,7 +158,7 @@ public enum MerchantPageType {
     }
 
     private GuiGeneric getEnchantGui(Player player, int shopNpc) {
-        return new EnchantGui();
+        return new EnchantGui(player);
     }
 
     /*private GuiBookGeneric getCompanionShop(int shopLevel, int shopNpc) {

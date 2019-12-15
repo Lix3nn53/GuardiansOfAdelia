@@ -233,6 +233,8 @@ public class MyInventoryClickEvent implements Listener {
                         if (enchantStoneMaterials.contains(currentType)) {
                             enchantGui.setEnchantStone(current);
                         } else if (StatUtils.hasStatType(currentType)) {
+                            if (currentType.equals(Material.SHEARS))
+                                return; //TODO enchanting passive items are disabled. Stay this way?
                             enchantGui.setItemToEnchant(current);
                         }
                     }

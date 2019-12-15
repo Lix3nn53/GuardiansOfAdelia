@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -14,7 +13,7 @@ import java.util.List;
 public class Enchant {
 
     private final Player player;
-    private final double MULTIPLIER = 0.05;
+    private final double MULTIPLIER = 1.05;
     private ItemStack itemStack;
     private int currentEnchantLevel;
 
@@ -27,7 +26,7 @@ public class Enchant {
 
     public boolean enchantItem() {
         double roll = Math.random();
-        double chance = getChance();
+        double chance = EnchantManager.getChance(player, currentEnchantLevel);
         boolean isSuccess = roll <= chance;
         if (isSuccess) {
             successItem();
@@ -42,56 +41,12 @@ public class Enchant {
         return this.itemStack;
     }
 
-    private double getChance() {
-        if (player.getGameMode().equals(GameMode.CREATIVE)) {
-            return 1;
-        }
-        if (this.currentEnchantLevel == 0) {
-            return 0.84;
-        } else if (this.currentEnchantLevel == 1) {
-            return 0.8;
-        } else if (this.currentEnchantLevel == 2) {
-            return 0.76;
-        } else if (this.currentEnchantLevel == 3) {
-            return 0.72;
-        } else if (this.currentEnchantLevel == 4) {
-            return 0.67;
-        } else if (this.currentEnchantLevel == 5) {
-            return 0.6;
-        } else if (this.currentEnchantLevel == 6) {
-            return 0.53;
-        } else if (this.currentEnchantLevel == 7) {
-            return 0.47;
-        } else if (this.currentEnchantLevel == 8) {
-            return 0.4;
-        } else if (this.currentEnchantLevel == 9) {
-            return 0.32;
-        } else if (this.currentEnchantLevel == 10) {
-            return 0.26;
-        } else if (this.currentEnchantLevel == 11) {
-            return 0.2;
-        }
-        return 0;
+    private int getNextValue(int value) {
+        return (int) ((value * MULTIPLIER) + 0.5);
     }
 
-    private int getBonusValue(int value) {
-        int bonus = (int) ((value * MULTIPLIER) + 0.5);
-        if (bonus <= 1) {
-            return 1;
-        }
-        return bonus;
-    }
-
-    private int getDecreasedValue(int value) {
-        double v1 = 1D - MULTIPLIER;
-        double v2 = v1 * (MULTIPLIER * MULTIPLIER);
-        double totalV = v1 + v2;
-
-        int bonus = (int) ((value * totalV) + 0.5);
-        if (bonus <= 1) {
-            return 1;
-        }
-        return bonus;
+    private int getPreviousValue(int value) {
+        return (int) ((value / MULTIPLIER) + 0.5);
     }
 
     private void successItem() {
@@ -119,7 +74,7 @@ public class Enchant {
         } else if (this.currentEnchantLevel == 7) {
             name = name.replace("+7", "+8");
         } else if (this.currentEnchantLevel == 8) {
-            startGlowing();
+            startGlowing(itemMeta);
             name = name.replace("+8", "+9");
         } else if (this.currentEnchantLevel == 9) {
             name = name.replace("+9", "+10");
@@ -158,7 +113,7 @@ public class Enchant {
             player.sendMessage("SUCC");
             player.sendMessage("statString: " + statString);
             player.sendMessage("baseValue: " + baseValue);
-            int nextValue = baseValue + getBonusValue(baseValue);
+            int nextValue = getNextValue(baseValue);
             player.sendMessage("nextValue: " + nextValue);
 
             int lineToChange = -1;
@@ -185,6 +140,8 @@ public class Enchant {
                 PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             } else if (type.equals(StatType.MAGICAL)) {
                 PersistentDataContainerUtil.putInteger("magicDamage", nextValue, this.itemStack);
+            } else {
+                PersistentDataContainerUtil.putInteger("health", nextValue, this.itemStack);
             }
         } else if (type.equals(StatType.PASSIVE)) {
             StatPassive stat = (StatPassive) StatUtils.getStat(itemStack);
@@ -235,31 +192,31 @@ public class Enchant {
                 }
             }
 
-            int nextFireValue = stat.getFire() + getBonusValue(stat.getFire());
+            int nextFireValue = getNextValue(stat.getFire());
             if (lineToChangeFire != -1) {
                 String line = lore.get(lineToChangeFire);
                 String newLine = line.replace(stat.getFire() + "", nextFireValue + "");
                 lore.set(lineToChangeFire, newLine);
             }
-            int nextWaterValue = stat.getWater() + getBonusValue(stat.getWater());
+            int nextWaterValue = getNextValue(stat.getWater());
             if (lineToChangeWater != -1) {
                 String line = lore.get(lineToChangeWater);
                 String newLine = line.replace(stat.getWater() + "", nextWaterValue + "");
                 lore.set(lineToChangeWater, newLine);
             }
-            int nextEarthValue = stat.getEarth() + getBonusValue(stat.getEarth());
+            int nextEarthValue = getNextValue(stat.getEarth());
             if (lineToChangeEarth != -1) {
                 String line = lore.get(lineToChangeEarth);
                 String newLine = line.replace(stat.getEarth() + "", nextEarthValue + "");
                 lore.set(lineToChangeEarth, newLine);
             }
-            int nextLightningValue = stat.getLightning() + getBonusValue(stat.getLightning());
+            int nextLightningValue = getNextValue(stat.getLightning());
             if (lineToChangeLightning != -1) {
                 String line = lore.get(lineToChangeLightning);
                 String newLine = line.replace(stat.getLightning() + "", nextLightningValue + "");
                 lore.set(lineToChangeLightning, newLine);
             }
-            int nextWindValue = stat.getWind() + getBonusValue(stat.getWind());
+            int nextWindValue = getNextValue(stat.getWind());
             if (lineToChangeWind != -1) {
                 String line = lore.get(lineToChangeWind);
                 String newLine = line.replace(stat.getWind() + "", nextWindValue + "");
@@ -315,7 +272,7 @@ public class Enchant {
         } else if (this.currentEnchantLevel == 8) {
             name = name.replace("+8", "+7");
         } else if (this.currentEnchantLevel == 9) {
-            extinguish();
+            extinguish(itemMeta);
             name = name.replace("+9", "+8");
         } else if (this.currentEnchantLevel == 10) {
             name = name.replace("+10", "+9");
@@ -354,7 +311,7 @@ public class Enchant {
             player.sendMessage("FAIL");
             player.sendMessage("statString: " + statString);
             player.sendMessage("baseValue: " + baseValue);
-            int nextValue = getDecreasedValue(baseValue);
+            int nextValue = getPreviousValue(baseValue);
             player.sendMessage("nextValue: " + nextValue);
 
             int lineToChange = -1;
@@ -381,6 +338,8 @@ public class Enchant {
                 PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             } else if (type.equals(StatType.MAGICAL)) {
                 PersistentDataContainerUtil.putInteger("magicDamage", nextValue, this.itemStack);
+            } else {
+                PersistentDataContainerUtil.putInteger("health", nextValue, this.itemStack);
             }
         } else if (type.equals(StatType.PASSIVE)) {
             StatPassive stat = (StatPassive) StatUtils.getStat(itemStack);
@@ -431,31 +390,31 @@ public class Enchant {
                 }
             }
 
-            int nextFireValue = getDecreasedValue(stat.getFire());
+            int nextFireValue = getPreviousValue(stat.getFire());
             if (lineToChangeFire != -1) {
                 String line = lore.get(lineToChangeFire);
                 String newLine = line.replace(stat.getFire() + "", nextFireValue + "");
                 lore.set(lineToChangeFire, newLine);
             }
-            int nextWaterValue = getDecreasedValue(stat.getWater());
+            int nextWaterValue = getPreviousValue(stat.getWater());
             if (lineToChangeWater != -1) {
                 String line = lore.get(lineToChangeWater);
                 String newLine = line.replace(stat.getWater() + "", nextWaterValue + "");
                 lore.set(lineToChangeWater, newLine);
             }
-            int nextEarthValue = getDecreasedValue(stat.getEarth());
+            int nextEarthValue = getPreviousValue(stat.getEarth());
             if (lineToChangeEarth != -1) {
                 String line = lore.get(lineToChangeEarth);
                 String newLine = line.replace(stat.getEarth() + "", nextEarthValue + "");
                 lore.set(lineToChangeEarth, newLine);
             }
-            int nextLightningValue = getDecreasedValue(stat.getLightning());
+            int nextLightningValue = getPreviousValue(stat.getLightning());
             if (lineToChangeLightning != -1) {
                 String line = lore.get(lineToChangeLightning);
                 String newLine = line.replace(stat.getLightning() + "", nextLightningValue + "");
                 lore.set(lineToChangeLightning, newLine);
             }
-            int nextWindValue = getDecreasedValue(stat.getWind());
+            int nextWindValue = getPreviousValue(stat.getWind());
             if (lineToChangeWind != -1) {
                 String line = lore.get(lineToChangeWind);
                 String newLine = line.replace(stat.getWind() + "", nextWindValue + "");
@@ -484,26 +443,26 @@ public class Enchant {
         currentEnchantLevel--;
     }
 
-    private void startGlowing() {
-        ItemMeta itemMeta = itemStack.getItemMeta();
+    private void startGlowing(ItemMeta itemMeta) {
         if (itemMeta.hasCustomModelData()) {
             int customModelData = itemMeta.getCustomModelData();
             if (customModelData >= 6) {
                 customModelData++;
                 itemMeta.setCustomModelData(customModelData);
                 itemStack.setItemMeta(itemMeta);
+                player.sendMessage("new customModelData: " + customModelData);
             }
         }
     }
 
-    private void extinguish() {
-        ItemMeta itemMeta = itemStack.getItemMeta();
+    private void extinguish(ItemMeta itemMeta) {
         if (itemMeta.hasCustomModelData()) {
             int customModelData = itemMeta.getCustomModelData();
             if (customModelData >= 7) {
                 customModelData--;
                 itemMeta.setCustomModelData(customModelData);
                 itemStack.setItemMeta(itemMeta);
+                player.sendMessage("new customModelData: " + customModelData);
             }
         }
     }
