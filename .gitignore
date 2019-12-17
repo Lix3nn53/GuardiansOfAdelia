@@ -1,5 +1,6 @@
 .idea/
 /target
+src/main/resources/database.yml
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
