@@ -1,5 +1,5 @@
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import net.md_5.bungee.api.ChatColor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,14 +12,22 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) {
-        int value = 1000;
+        for (GearLevel gearLevelOfItem : GearLevel.values()) {
+            int multiplier = gearLevelOfItem.getWeaponAndPassiveNo();
+
+            double value = multiplier / 2.0;
+
+            int i = (int) ((multiplier * multiplier) / value + 0.5);
+            System.out.println(i);
+        }
+        /*int value = 1000;
         int z = (int) ((value * MULTIPLIER) + 0.5);
         System.out.println(z);
         System.out.println((int) ((z / MULTIPLIER) + 0.5));
         String currentName = ChatColor.GOLD + "Test";
         System.out.println(currentName);
         String stripColor = ChatColor.stripColor(currentName);
-        System.out.println(stripColor);
+        System.out.println(stripColor);*/
         /*List<Double> downRatesForLevel = new ArrayList<>();
         downRatesForLevel.add(0.75);
         downRatesForLevel.add(0.6);

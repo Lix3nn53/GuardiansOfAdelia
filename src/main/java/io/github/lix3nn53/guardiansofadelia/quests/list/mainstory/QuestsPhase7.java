@@ -41,7 +41,7 @@ public class QuestsPhase7 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(51, "Uruga", story,
                 startMsg, "Go to capital city, Uruga then talk with Commander Erwin",
-                "", tasks, itemPrizes, 10, 35000, 0, requiredQuests,
+                "", tasks, itemPrizes, 35, 35000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 39, 42);
     }
@@ -64,7 +64,7 @@ public class QuestsPhase7 {
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Commander Erwin";
         Quest quest = new Quest(52, "Fishing 2", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 160000, 0, requiredQuests,
+                "", tasks, itemPrizes, 35, 160000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 42, 42);
     }
@@ -81,7 +81,7 @@ public class QuestsPhase7 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(53, "Sand Hill", story,
                 startMsg, "Go to Sand Hill then talk with Archaeologist Robin",
-                "", tasks, itemPrizes, 10, 40000, 0, requiredQuests,
+                "", tasks, itemPrizes, 35, 40000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 42, 43);
     }
@@ -104,7 +104,7 @@ public class QuestsPhase7 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Archaeologist Robin";
         Quest quest = new Quest(54, "Mummy hunt 1", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 320000, 0, requiredQuests,
+                "", tasks, itemPrizes, 35, 320000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 43, 43);
     }
@@ -125,7 +125,7 @@ public class QuestsPhase7 {
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Archaeologist Robin";
         Quest quest = new Quest(55, "Ghost Spider hunt", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 320000, 0, requiredQuests,
+                "", tasks, itemPrizes, 35, 320000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 43, 43);
     }
@@ -147,7 +147,7 @@ public class QuestsPhase7 {
         String objectiveText = "TASK_PROGRESS_1\nfrom mummies then talk back to Archaeologist Robin";
         Quest quest = new Quest(56, "Mummy bandages", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 320000, 0, requiredQuests,
+                "", tasks, itemPrizes, 35, 320000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 43, 43);
     }
@@ -170,7 +170,7 @@ public class QuestsPhase7 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nthen talk to Archaeologist Robin";
         Quest quest = new Quest(57, "Desert-skeleton hunt", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 320000, 0, requiredQuests,
+                "", tasks, itemPrizes, 35, 320000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 43, 43);
     }
@@ -193,7 +193,7 @@ public class QuestsPhase7 {
         String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Archaeologist Robin";
         Quest quest = new Quest(58, "The Cursed King", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 640000, 0, requiredQuests,
+                "", tasks, itemPrizes, 35, 640000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 43, 43);
     }
@@ -210,7 +210,7 @@ public class QuestsPhase7 {
         String objectiveText = "Report back to Commander Erwin, curse is removed from Sand Hill";
         Quest quest = new Quest(59, "Sand Hill report", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 45000, 0, requiredQuests,
+                "", tasks, itemPrizes, 35, 45000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 43, 42);
     }

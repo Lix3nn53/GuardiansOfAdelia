@@ -93,61 +93,12 @@ public class SellGui extends GuiGeneric {
     }
 
     private int getSellValue(ItemStack itemStack) {
-        int value = 4;
-        double multiplier = 1;
-
         GearLevel gearLevelOfItem = GearLevel.getGearLevelOfItem(itemStack);
-        int weaponAndPassiveNo = gearLevelOfItem.getWeaponAndPassiveNo();
+        int multiplier = gearLevelOfItem.getWeaponAndPassiveNo();
 
-        switch (weaponAndPassiveNo) {
-            case 1:
-                value = 12;
-                break;
-            case 2:
-                value = 24;
-                break;
-            case 3:
-                value = 32;
-                break;
-            case 4:
-                value = 48;
-                break;
-            case 5:
-                value = 64;
-                break;
-            case 6:
-                value = 80;
-                break;
-            case 7:
-                value = 96;
-                break;
-            case 8:
-                value = 128;
-                break;
-            case 9:
-                value = 160;
-                break;
-            case 10:
-                value = 224;
-            default:
-                break;
-        }
+        double value = multiplier / 2.0;
 
-        if (itemStack.hasItemMeta()) {
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            if (itemMeta.hasDisplayName()) {
-                String displayName = itemMeta.getDisplayName();
-                if (displayName.startsWith(ChatColor.BLUE.toString())) {
-                    multiplier = 1.2;
-                } else if (displayName.startsWith(ChatColor.DARK_PURPLE.toString())) {
-                    multiplier = 1.5;
-                } else if (displayName.startsWith(ChatColor.GOLD.toString())) {
-                    multiplier = 2;
-                }
-            }
-        }
-
-        return (int) (value * multiplier * itemStack.getAmount() + 0.5);
+        return (int) ((multiplier * multiplier) / value + 0.5);
     }
 
     public void finish(Player player) {

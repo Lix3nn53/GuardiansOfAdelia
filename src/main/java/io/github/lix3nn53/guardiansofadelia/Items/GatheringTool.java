@@ -286,45 +286,45 @@ public enum GatheringTool {
     public int getDurability() {
         switch (this) {
             case WOODEN_FISHING_ROD:
-                return 10;
+                return 8;
             case STONE_FISHING_ROD:
-                return 20;
+                return 12;
             case IRON_FISHING_ROD:
-                return 35;
+                return 16;
             case GOLDEN_FISHING_ROD:
-                return 50;
+                return 20;
             case DIAMOND_FISHING_ROD:
-                return 70;
+                return 30;
             case WOODEN_HOE:
-                return 10;
+                return 8;
             case STONE_HOE:
-                return 20;
+                return 12;
             case IRON_HOE:
-                return 35;
+                return 16;
             case GOLDEN_HOE:
-                return 50;
+                return 20;
             case DIAMOND_HOE:
-                return 70;
+                return 30;
             case WOODEN_PICKAXE:
-                return 10;
+                return 8;
             case STONE_PICKAXE:
-                return 20;
+                return 12;
             case IRON_PICKAXE:
-                return 35;
+                return 16;
             case GOLDEN_PICKAXE:
-                return 50;
-            case DIAMOND_PICKAXE:
-                return 70;
-            case WOODEN_AXE:
-                return 10;
-            case STONE_AXE:
                 return 20;
+            case DIAMOND_PICKAXE:
+                return 30;
+            case WOODEN_AXE:
+                return 8;
+            case STONE_AXE:
+                return 12;
             case IRON_AXE:
-                return 35;
+                return 16;
             case GOLDEN_AXE:
-                return 50;
+                return 20;
             case DIAMOND_AXE:
-                return 70;
+                return 30;
         }
         return 15;
     }

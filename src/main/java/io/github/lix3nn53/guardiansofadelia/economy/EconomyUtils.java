@@ -14,7 +14,7 @@ import java.util.List;
 public class EconomyUtils {
 
     public static List<Coin> priceToCoins(int price) {
-        int copperAmount = 0;
+        int copperAmount;
         int silverAmount = 0;
         int goldAmount = 0;
         if (price > 63) {
@@ -27,11 +27,13 @@ public class EconomyUtils {
         } else {
             copperAmount = price;
         }
+
         List<Coin> coins = new ArrayList<>();
 
         coins.add(new Coin(CoinType.COPPER, copperAmount));
         coins.add(new Coin(CoinType.SILVER, silverAmount));
         coins.add(new Coin(CoinType.GOLD, goldAmount));
+
         return coins;
     }
 

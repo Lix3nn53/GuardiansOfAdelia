@@ -38,7 +38,7 @@ public class QuestsPhase3 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(19, "Forest of Mist", story,
                 startMsg, "Talk with Timberman Franky",
-                "", tasks, itemPrizes, 10, 3000, 0, requiredQuests,
+                "", tasks, itemPrizes, 11, 3000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 32, 36);
     }
@@ -61,7 +61,7 @@ public class QuestsPhase3 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2" + " for Franky";
         Quest quest = new Quest(20, "Woodcutting", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 15000, 0, requiredQuests,
+                "", tasks, itemPrizes, 11, 15000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 36, 36);
     }
@@ -80,7 +80,7 @@ public class QuestsPhase3 {
         String objectiveText = "Talk with Forest Fairy";
         Quest quest = new Quest(21, "Forest fairies", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 15000, 0, requiredQuests,
+                "", tasks, itemPrizes, 11, 15000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 36, 37);
     }
@@ -101,7 +101,7 @@ public class QuestsPhase3 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to the Forest Fairy";
         Quest quest = new Quest(22, "Skeleton hunt 1", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 30000, 0, requiredQuests,
+                "", tasks, itemPrizes, 11, 30000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 37, 37);
     }
@@ -128,7 +128,7 @@ public class QuestsPhase3 {
         String objectiveText = "TASK_PROGRESS_1\nfrom skeletons then talk back to the Forest Fairy";
         Quest quest = new Quest(23, "Magical bones", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 30000, 0, requiredQuests,
+                "", tasks, itemPrizes, 11, 30000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 37, 37);
     }
@@ -148,7 +148,7 @@ public class QuestsPhase3 {
         String objectiveText = "TASK_PROGRESS_1\nthen talk back to the Forest Fairy";
         Quest quest = new Quest(24, "Skeleton hunt 2", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 30000, 0, requiredQuests,
+                "", tasks, itemPrizes, 11, 30000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 37, 37);
     }
@@ -173,7 +173,7 @@ public class QuestsPhase3 {
         String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Forest Fairy";
         Quest quest = new Quest(25, "The source of dark magic", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 60000, 0, requiredQuests,
+                "", tasks, itemPrizes, 11, 60000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 37, 37);
     }
@@ -193,7 +193,7 @@ public class QuestsPhase3 {
         String objectiveText = "TASK_PROGRESS_1\nthen report back to Sergent Armin.";
         Quest quest = new Quest(26, "Forest fairies are safe", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 4000, 0, requiredQuests,
+                "", tasks, itemPrizes, 11, 4000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 37, 32);
     }

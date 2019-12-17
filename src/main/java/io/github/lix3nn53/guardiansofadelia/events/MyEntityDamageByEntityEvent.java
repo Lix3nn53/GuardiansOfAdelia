@@ -193,7 +193,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
      * @param event
      * @param player
      * @param livingTarget
-     * @param pet = player's pet if attacker is the pet
+     * @param pet          = player's pet if attacker is the pet
      * @return isEventCanceled
      */
     private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, Wolf pet, DamageMechanic.DamageType damageType, boolean isSkill) {

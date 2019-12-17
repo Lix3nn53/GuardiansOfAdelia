@@ -38,7 +38,7 @@ public class QuestsPhase8 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(60, "Lost guardian", story,
                 startMsg, "Go to guardian camp and talk with Guardian Raignald",
-                "", tasks, itemPrizes, 10, 50000, 0, requiredQuests,
+                "", tasks, itemPrizes, 44, 50000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 42, 44);
     }
@@ -61,7 +61,7 @@ public class QuestsPhase8 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Guardian Raignald";
         Quest quest = new Quest(61, "Goblin hunt 1", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
+                "", tasks, itemPrizes, 44, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 44, 44);
     }
@@ -82,7 +82,7 @@ public class QuestsPhase8 {
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Guardian Raignald";
         Quest quest = new Quest(62, "Goblin hunt 2", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
+                "", tasks, itemPrizes, 44, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 44, 44);
     }
@@ -105,7 +105,7 @@ public class QuestsPhase8 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Guardian Iohne";
         Quest quest = new Quest(63, "Goblin hunt 3", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
+                "", tasks, itemPrizes, 44, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 45, 45);
     }
@@ -131,7 +131,7 @@ public class QuestsPhase8 {
         String objectiveText = "TASK_PROGRESS_1\nfrom goblins then talk back to Guardian Raignald";
         Quest quest = new Quest(64, "Goblin Banners", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
+                "", tasks, itemPrizes, 44, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 44, 44);
     }
@@ -153,7 +153,7 @@ public class QuestsPhase8 {
         String objectiveText = "TASK_PROGRESS_1\nthen talk to Guardian Afra";
         Quest quest = new Quest(65, "Witch hunt", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 440000, 0, requiredQuests,
+                "", tasks, itemPrizes, 44, 440000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 46, 46);
     }
@@ -177,7 +177,7 @@ public class QuestsPhase8 {
         String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Guardian Raignald";
         Quest quest = new Quest(66, "The betrayal", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 880000, 0, requiredQuests,
+                "", tasks, itemPrizes, 44, 880000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 44, 44);
     }
@@ -194,7 +194,7 @@ public class QuestsPhase8 {
         String objectiveText = "Report back to Commander Erwin that Esobel is stopped";
         Quest quest = new Quest(67, "Swamp of Dawn report", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 10, 60000, 0, requiredQuests,
+                "", tasks, itemPrizes, 44, 60000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 44, 42);
     }
