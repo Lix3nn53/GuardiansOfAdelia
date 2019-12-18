@@ -376,7 +376,7 @@ public class ConfigManager {
 
     private static void loadDungeons() {
         for (DungeonTheme dungeonTheme : DungeonTheme.values()) {
-            for (int i = 1; i <= 4; i++) {
+            for (int i = 1; i <= 2; i++) { //loading first 2 room of each dungeon
                 String code = dungeonTheme.toString() + i;
                 String worldString = dungeonsConfig.getString(code + ".world");
                 World world = Bukkit.getWorld(worldString);

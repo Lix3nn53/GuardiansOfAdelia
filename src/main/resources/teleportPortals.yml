@@ -4,7 +4,7 @@
 #                  Portal Data                   #
 # ---------------------------------------------- #
 
-PortalNumber: 1
+PortalNumber: 3
 p1:
   x: 386.5
   y: 33.5
@@ -17,5 +17,33 @@ p1:
   tpY: 15.5
   tpZ: -756.5
   tpWorld: tutorial
+  tpYaw: 180
+  tpPitch: -4.8
+p2:
+  x: 3495.5
+  y: 33.5
+  z: 434.5
+  world: dungeons
+  yaw: -90
+  pitch: 0
+  color: PURPLE
+  tpX: -388.5
+  tpY: 15.5
+  tpZ: 3277.5
+  tpWorld: aleesia
+  tpYaw: 180
+  tpPitch: -4.8
+p3:
+  x: 3502.5
+  y: 33.5
+  z: -466.5
+  world: dungeons
+  yaw: -90
+  pitch: 0
+  color: PURPLE
+  tpX: -389.5
+  tpY: 14.5
+  tpZ: 2482.5
+  tpWorld: aleesia
   tpYaw: 180
   tpPitch: -4.8

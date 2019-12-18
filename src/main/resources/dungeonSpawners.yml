@@ -1,0 +1,168 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#          Spawner List of world Dungeons        #
+# ---------------------------------------------- #
+
+SpawnerNumber: 18
+Spawners:
+  s1:
+    x: 4606.0
+    y: 68.0
+    z: -232.0
+    world: dungeons
+    mob: BOSS_PIRATE
+    amount: 1
+    maxamount: 1
+  s2:
+    x: 2534.0
+    y: 96.0
+    z: 222.0
+    world: dungeons
+    mob: BOSS_LAVA
+    amount: 1
+    maxamount: 1
+  s3:
+    x: 981.0
+    y: 115.0
+    z: 64.0
+    world: dungeons
+    mob: BOSS_SLIME
+    amount: 1
+    maxamount: 1
+  s4:
+    x: 1555.0
+    y: 57.0
+    z: 450.0
+    world: dungeons
+    mob: BOSS_SWAMP
+    amount: 1
+    maxamount: 1
+  s5:
+    x: 978.0
+    y: 115.0
+    z: 535.0
+    world: dungeons
+    mob: BOSS_SLIME
+    amount: 1
+    maxamount: 1
+  s6:
+    x: 2925.0
+    y: 43.0
+    z: -162.0
+    world: dungeons
+    mob: BOSS_COOK
+    amount: 1
+    maxamount: 1
+  s7:
+    x: 1016.0
+    y: 21.0
+    z: 542.0
+    world: dungeons
+    mob: LIZARD
+    amount: 1
+    maxamount: 2
+  s8:
+    x: -124.0
+    y: 107.0
+    z: 518.0
+    world: dungeons
+    mob: BOSS_ZOMBIE
+    amount: 1
+    maxamount: 1
+  s9:
+    x: 4608.0
+    y: 68.0
+    z: 418.0
+    world: dungeons
+    mob: BOSS_PIRATE
+    amount: 1
+    maxamount: 1
+  s10:
+    x: 4039.0
+    y: 9.0
+    z: 438.0
+    world: dungeons
+    mob: BOSS_ICE
+    amount: 1
+    maxamount: 1
+  s11:
+    x: 2084.0
+    y: 14.0
+    z: 5.0
+    world: dungeons
+    mob: BOSS_DESERT
+    amount: 1
+    maxamount: 1
+  s12:
+    x: 2933.0
+    y: 43.0
+    z: 450.0
+    world: dungeons
+    mob: BOSS_COOK
+    amount: 1
+    maxamount: 1
+  s13:
+    x: 377.0
+    y: 109.0
+    z: 211.0
+    world: dungeons
+    mob: BOSS_SKELETON
+    amount: 1
+    maxamount: 1
+  s14:
+    x: 1525.0
+    y: 57.0
+    z: -244.0
+    world: dungeons
+    mob: BOSS_SWAMP
+    amount: 1
+    maxamount: 1
+  s15:
+    x: 4029.0
+    y: 9.0
+    z: -186.0
+    world: dungeons
+    mob: BOSS_ICE
+    amount: 1
+    maxamount: 1
+  s162:
+    x: 2112.0
+    y: 14.0
+    z: 623.0
+    world: dungeons
+    mob: BOSS_DESERT
+    amount: 1
+    maxamount: 1
+  s17:
+    x: -115.0
+    y: 107.0
+    z: 63.0
+    world: dungeons
+    mob: BOSS_ZOMBIE
+    amount: 1
+    maxamount: 1
+  s18:
+    x: 377.0
+    y: 109.0
+    z: -661.0
+    world: dungeons
+    mob: BOSS_SKELETON
+    amount: 1
+    maxamount: 1
+  s19:
+    x: 377.0
+    y: 109.0
+    z: -661.0
+    world: dungeons
+    mob: BOSS_SKELETON
+    amount: 1
+    maxamount: 1
+  s16:
+    x: 2527.0
+    y: 96.0
+    z: -549.0
+    world: dungeons
+    mob: BOSS_LAVA
+    amount: 1
+    maxamount: 1

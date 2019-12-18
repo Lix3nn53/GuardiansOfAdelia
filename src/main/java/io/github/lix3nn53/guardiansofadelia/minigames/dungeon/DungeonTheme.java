@@ -184,6 +184,7 @@ public enum DungeonTheme {
         room.setItemMeta(itemMeta);
         guiGeneric.setItem(11, room);
 
+        /*TODO disabled room 3 and 4 of dungeons for maintainability, stay this way?
         dungeon = MiniGameManager.getDungeon(this, 3);
         itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #3 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
         room.setItemMeta(itemMeta);
@@ -204,7 +205,7 @@ public enum DungeonTheme {
             room.setType(Material.RED_WOOL);
         }
         room.setItemMeta(itemMeta);
-        guiGeneric.setItem(15, room);
+        guiGeneric.setItem(15, room);*/
 
         return guiGeneric;
     }
