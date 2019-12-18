@@ -17,7 +17,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,14 +25,9 @@ import java.util.UUID;
 
 public class RequestHandler {
 
-    private final PrintWriter out;
     private String responseMessage = "noResponse";
 
-    public RequestHandler(PrintWriter out) {
-        this.out = out;
-    }
-
-    public void onRequest(String inputLine) throws ParseException {
+    public String onPurchase(String inputLine) throws ParseException {
         GuardiansOfAdelia.getInstance().getLogger().info("Request" + inputLine);
 
         JSONParser parser = new JSONParser();
@@ -85,11 +79,7 @@ public class RequestHandler {
             jsonResponse.put("success", this.responseMessage);
         }
 
-        sendResponse(jsonResponse.toJSONString());
-    }
-
-    private void sendResponse(String response) {
-        out.println(response);
+        return jsonResponse.toJSONString();
     }
 
     private boolean addItemToPremiumStorage(UUID uuid, ItemStack itemStack) {

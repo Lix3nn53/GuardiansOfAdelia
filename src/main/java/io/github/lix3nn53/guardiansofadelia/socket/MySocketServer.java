@@ -1,25 +1,34 @@
 package io.github.lix3nn53.guardiansofadelia.socket;
 
+import com.corundumstudio.socketio.Configuration;
+import com.corundumstudio.socketio.SocketIOServer;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-
-import java.io.IOException;
-import java.net.ServerSocket;
 
 public class MySocketServer {
 
-    private final ServerSocket serverSocket;
+    private final Configuration config = new Configuration();
+    private final SocketIOServer server;
 
-    public MySocketServer(int port) throws IOException {
-        this.serverSocket = new ServerSocket(port);
+    public MySocketServer(int port) {
+        this.config.setHostname("localhost");
+        this.config.setPort(9092);
+
+        this.server = new SocketIOServer(this.config);
+
+        this.server.addEventListener("purchase", WebProduct.class, (socketIOClient, webProduct, ackRequest) -> {
+            webProduct.getProductId();
+
+            socketIOClient.sendEvent("chatevent", "data");
+        });
     }
 
-    public void start() throws IOException {
-        GuardiansOfAdelia.getInstance().getLogger().info("Listening on port " + serverSocket.getLocalPort());
-        while (true)
-            new ClientListener(serverSocket.accept()).start();
+    public void start() throws InterruptedException {
+        GuardiansOfAdelia.getInstance().getLogger().info("Listening on port " + config.getPort());
+        this.server.start();
     }
 
-    public void stop() throws IOException {
-        serverSocket.close();
+    public void stop() {
+        GuardiansOfAdelia.getInstance().getLogger().info("Listening on port " + config.getPort());
+        this.server.stop();
     }
 }

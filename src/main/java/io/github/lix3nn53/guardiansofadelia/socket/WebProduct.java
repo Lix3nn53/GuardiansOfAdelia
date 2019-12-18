@@ -8,21 +8,36 @@ public class WebProduct {
     private int credits;
     private ItemStack itemStack;
 
+    public WebProduct() {
+    }
+
     public WebProduct(int productId, int credits, ItemStack itemStack) {
         this.productId = productId;
         this.credits = credits;
         this.itemStack = itemStack;
     }
 
-    public int productId() {
+    public int getProductId() {
         return productId;
     }
 
-    public int getCost() {
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public int getCredits() {
         return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
     }
 
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    public void setItemStack(ItemStack itemStack) {
+        this.itemStack = itemStack;
     }
 }
