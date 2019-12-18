@@ -4,7 +4,7 @@
 #                 Spawner List                   #
 # ---------------------------------------------- #
 
-SpawnerNumber: 453
+SpawnerNumber: 446
 Spawners:
   s1:
     x: -2484.0
@@ -27,7 +27,7 @@ Spawners:
     y: 77.0
     z: 3211.0
     world: world
-    mob: NINJA_ROGUE
+    mob: FROZEN_ROGUE
     amount: 1
     maxamount: 2
   s4:
@@ -67,7 +67,7 @@ Spawners:
     y: 76.0
     z: 3331.0
     world: world
-    mob: NINJA_ILLUSIONER
+    mob: FROZEN_ILLUSIONER
     amount: 1
     maxamount: 2
   s9:
@@ -126,23 +126,7 @@ Spawners:
     mob: VILLAGER_4
     amount: 1
     maxamount: 2
-  s18:
-    x: -2760.0
-    y: 67.0
-    z: 4416.0
-    world: world
-    mob: ZOMBIE_SHAMAN
-    amount: 1
-    maxamount: 2
   s19:
-    x: -2375.0
-    y: 67.0
-    z: 2608.0
-    world: world
-    mob: VILLAGER_4
-    amount: 1
-    maxamount: 2
-  s20:
     x: -2227.0
     y: 61.0
     z: 4961.0
@@ -150,7 +134,7 @@ Spawners:
     mob: SKELETON_MAGE
     amount: 1
     maxamount: 2
-  s21:
+  s20:
     x: -1867.0
     y: 67.0
     z: 4537.0
@@ -158,7 +142,7 @@ Spawners:
     mob: CREEPER
     amount: 1
     maxamount: 2
-  s22:
+  s21:
     x: -3134.0
     y: 65.0
     z: 2107.0
@@ -166,7 +150,7 @@ Spawners:
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s23:
+  s22:
     x: -1743.0
     y: 88.0
     z: 4528.0
@@ -174,7 +158,7 @@ Spawners:
     mob: VEX
     amount: 2
     maxamount: 4
-  s24:
+  s23:
     x: -2342.0
     y: 61.0
     z: 4845.0
@@ -182,7 +166,7 @@ Spawners:
     mob: SKELETON_ROGUE
     amount: 1
     maxamount: 2
-  s25:
+  s24:
     x: -2006.0
     y: 65.0
     z: 4493.0
@@ -190,7 +174,7 @@ Spawners:
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
-  s26:
+  s25:
     x: -2010.0
     y: 66.0
     z: 4561.0
@@ -198,7 +182,7 @@ Spawners:
     mob: CREEPER
     amount: 1
     maxamount: 2
-  s27:
+  s26:
     x: -2242.0
     y: 57.0
     z: 3741.0
@@ -206,7 +190,7 @@ Spawners:
     mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
-  s28:
+  s27:
     x: -3907.0
     y: 64.0
     z: 2272.0
@@ -214,7 +198,7 @@ Spawners:
     mob: ORC_SHAMAN
     amount: 1
     maxamount: 2
-  s29:
+  s28:
     x: -3909.0
     y: 64.0
     z: 2258.0
@@ -222,7 +206,7 @@ Spawners:
     mob: ORC_JOCKEY
     amount: 1
     maxamount: 2
-  s30:
+  s29:
     x: -4056.0
     y: 66.0
     z: 2528.0
@@ -230,7 +214,7 @@ Spawners:
     mob: ORC_MAGE
     amount: 1
     maxamount: 2
-  s31:
+  s30:
     x: -3028.0
     y: 72.0
     z: 3011.0
@@ -238,15 +222,15 @@ Spawners:
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s32:
+  s31:
     x: -2596.0
     y: 95.0
     z: 3542.0
     world: world
-    mob: NINJA_ARCHER
+    mob: FROZEN_ARCHER
     amount: 1
     maxamount: 2
-  s33:
+  s32:
     x: -3900.0
     y: 63.0
     z: 1693.0
@@ -254,7 +238,7 @@ Spawners:
     mob: PILLAGER_ROGUE
     amount: 1
     maxamount: 2
-  s34:
+  s33:
     x: -3249.0
     y: 65.0
     z: 4903.0
@@ -262,7 +246,7 @@ Spawners:
     mob: LIZARD
     amount: 1
     maxamount: 2
-  s35:
+  s34:
     x: -3040.0
     y: 69.0
     z: 2928.0
@@ -270,7 +254,7 @@ Spawners:
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s36:
+  s35:
     x: -2362.0
     y: 143.0
     z: 1861.0
@@ -278,7 +262,7 @@ Spawners:
     mob: MUMMY
     amount: 1
     maxamount: 2
-  s37:
+  s36:
     x: -3261.0
     y: 64.0
     z: 4892.0
@@ -286,7 +270,7 @@ Spawners:
     mob: LIZARD
     amount: 1
     maxamount: 2
-  s38:
+  s37:
     x: -3253.0
     y: 65.0
     z: 4803.0
@@ -294,7 +278,7 @@ Spawners:
     mob: LIZARD_POISONOUS
     amount: 1
     maxamount: 2
-  s39:
+  s38:
     x: -2227.0
     y: 61.0
     z: 4886.0
@@ -302,7 +286,7 @@ Spawners:
     mob: SKELETON_ROGUE
     amount: 1
     maxamount: 2
-  s40:
+  s39:
     x: -2908.0
     y: 66.0
     z: 2907.0
@@ -310,15 +294,15 @@ Spawners:
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s42:
-    x: -2252.0
-    y: 58.0
-    z: 3637.0
+  s40:
+    x: -2398.0
+    y: 74.0
+    z: 3166.0
     world: world
-    mob: PIRATE_DROWNED
+    mob: FROZEN_ARCHER
     amount: 1
     maxamount: 2
-  s43:
+  s42:
     x: -4137.0
     y: 63.0
     z: 1542.0
@@ -326,7 +310,7 @@ Spawners:
     mob: PILLAGER_SHAMAN
     amount: 1
     maxamount: 2
-  s44:
+  s43:
     x: -2249.0
     y: 45.0
     z: 3612.0
@@ -334,7 +318,7 @@ Spawners:
     mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
-  s45:
+  s44:
     x: -2343.0
     y: 61.0
     z: 4930.0
@@ -342,31 +326,15 @@ Spawners:
     mob: SKELETON_ARCHER
     amount: 1
     maxamount: 2
-  s46:
-    x: -2885.0
-    y: 66.0
-    z: 4401.0
-    world: world
-    mob: ZOMBIE_SHAMAN
-    amount: 1
-    maxamount: 2
-  s47:
+  s45:
     x: -2211.0
     y: 70.0
     z: 3302.0
     world: world
-    mob: NINJA_ROGUE
+    mob: FROZEN_ROGUE
     amount: 1
     maxamount: 2
-  s48:
-    x: -4820.0
-    y: 107.0
-    z: 2190.0
-    world: world
-    mob: VILLAGER_5
-    amount: 1
-    maxamount: 2
-  s49:
+  s47:
     x: -2615.0
     y: 66.0
     z: 4396.0
@@ -374,7 +342,7 @@ Spawners:
     mob: ZOMBIE_TANK
     amount: 1
     maxamount: 2
-  s50:
+  s48:
     x: -2355.0
     y: 138.0
     z: 1704.0
@@ -382,7 +350,7 @@ Spawners:
     mob: DESERT_SKELETON_CAVALRY
     amount: 1
     maxamount: 2
-  s51:
+  s49:
     x: -2887.0
     y: 65.0
     z: 2486.0
@@ -390,7 +358,7 @@ Spawners:
     mob: WITCH
     amount: 1
     maxamount: 2
-  s52:
+  s50:
     x: -2696.0
     y: 71.0
     z: 4851.0
@@ -398,7 +366,15 @@ Spawners:
     mob: SHEEP_BABY
     amount: 1
     maxamount: 2
-  s53:
+  s51:
+    x: 483.0
+    y: 22.0
+    z: -467.0
+    world: tutorial
+    mob: TUTORIAL_2
+    amount: 1
+    maxamount: 2
+  s52:
     x: -2242.0
     y: 61.0
     z: 4770.0
@@ -406,7 +382,7 @@ Spawners:
     mob: SKELETON_ARCHER
     amount: 1
     maxamount: 2
-  s54:
+  s53:
     x: -3199.0
     y: 66.0
     z: 4586.0
@@ -414,7 +390,7 @@ Spawners:
     mob: SLIME
     amount: 1
     maxamount: 2
-  s55:
+  s54:
     x: -3267.0
     y: 66.0
     z: 4814.0
@@ -422,12 +398,20 @@ Spawners:
     mob: LIZARD_POISONOUS
     amount: 1
     maxamount: 2
-  s58:
+  s55:
     x: -3795.0
     y: 64.0
-    z: 1562.0
+    z: 1487.0
     world: world
     mob: ENDERMAN
+    amount: 1
+    maxamount: 2
+  s58:
+    x: 483.0
+    y: 22.0
+    z: -449.0
+    world: tutorial
+    mob: TUTORIAL_2
     amount: 1
     maxamount: 2
   s59:
@@ -759,14 +743,6 @@ Spawners:
     amount: 1
     maxamount: 2
   s104:
-    x: -2604.0
-    y: 66.0
-    z: 4455.0
-    world: world
-    mob: ZOMBIE_SHAMAN
-    amount: 1
-    maxamount: 2
-  s105:
     x: -4026.0
     y: 64.0
     z: 2127.0
@@ -774,7 +750,7 @@ Spawners:
     mob: ORC_GLADIATOR
     amount: 1
     maxamount: 2
-  s106:
+  s105:
     x: -3656.0
     y: 65.0
     z: 2244.0
@@ -783,14 +759,6 @@ Spawners:
     amount: 1
     maxamount: 2
   s107:
-    x: -2358.0
-    y: 61.0
-    z: 4876.0
-    world: world
-    mob: SKELETON_MONK
-    amount: 1
-    maxamount: 2
-  s108:
     x: -3153.0
     y: 62.0
     z: 4495.0
@@ -798,7 +766,7 @@ Spawners:
     mob: SLIME
     amount: 1
     maxamount: 2
-  s109:
+  s108:
     x: -2317.0
     y: 61.0
     z: 4969.0
@@ -806,7 +774,7 @@ Spawners:
     mob: SKELETON_ROGUE
     amount: 1
     maxamount: 2
-  s110:
+  s109:
     x: -3161.0
     y: 62.0
     z: 4518.0
@@ -814,7 +782,7 @@ Spawners:
     mob: SLIME_STICKY
     amount: 1
     maxamount: 2
-  s111:
+  s110:
     x: -3695.0
     y: 65.0
     z: 1657.0
@@ -822,7 +790,7 @@ Spawners:
     mob: PILLAGER_RAVAGER
     amount: 1
     maxamount: 2
-  s112:
+  s111:
     x: -2456.0
     y: 131.0
     z: 1893.0
@@ -830,7 +798,7 @@ Spawners:
     mob: SPIDER_GHOST
     amount: 1
     maxamount: 2
-  s113:
+  s112:
     x: -2464.0
     y: 132.0
     z: 1848.0
@@ -838,7 +806,7 @@ Spawners:
     mob: MUMMY
     amount: 1
     maxamount: 2
-  s114:
+  s113:
     x: -3051.0
     y: 67.0
     z: 2868.0
@@ -846,7 +814,7 @@ Spawners:
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
-  s115:
+  s114:
     x: -1919.0
     y: 62.0
     z: 4499.0
@@ -854,7 +822,7 @@ Spawners:
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
-  s116:
+  s115:
     x: -3829.0
     y: 71.0
     z: 1559.0
@@ -862,7 +830,7 @@ Spawners:
     mob: PHANTOM
     amount: 1
     maxamount: 2
-  s117:
+  s116:
     x: -2680.0
     y: 66.0
     z: 4827.0
@@ -870,7 +838,7 @@ Spawners:
     mob: COW_BABY
     amount: 1
     maxamount: 2
-  s118:
+  s117:
     x: -2683.0
     y: 65.0
     z: 4928.0
@@ -878,7 +846,7 @@ Spawners:
     mob: SHEEP_BABY
     amount: 1
     maxamount: 2
-  s119:
+  s118:
     x: -3835.0
     y: 68.0
     z: 1446.0
@@ -886,7 +854,7 @@ Spawners:
     mob: PHANTOM
     amount: 1
     maxamount: 2
-  s120:
+  s119:
     x: -3835.0
     y: 64.0
     z: 2260.0
@@ -894,7 +862,7 @@ Spawners:
     mob: ORC_GLADIATOR
     amount: 1
     maxamount: 2
-  s121:
+  s120:
     x: -2478.0
     y: 62.0
     z: 2664.0
@@ -902,7 +870,7 @@ Spawners:
     mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
-  s122:
+  s121:
     x: -2307.0
     y: 61.0
     z: 4811.0
@@ -910,7 +878,7 @@ Spawners:
     mob: SKELETON_ARCHER
     amount: 1
     maxamount: 2
-  s123:
+  s122:
     x: -2999.0
     y: 75.0
     z: 4816.0
@@ -918,7 +886,7 @@ Spawners:
     mob: VILLAGER_1
     amount: 1
     maxamount: 2
-  s124:
+  s123:
     x: -2086.0
     y: 66.0
     z: 4196.0
@@ -926,7 +894,7 @@ Spawners:
     mob: VILLAGER_3
     amount: 1
     maxamount: 2
-  s125:
+  s124:
     x: -1904.0
     y: 62.0
     z: 4510.0
@@ -934,7 +902,7 @@ Spawners:
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s126:
+  s125:
     x: -2338.0
     y: 62.0
     z: 4774.0
@@ -942,7 +910,7 @@ Spawners:
     mob: SKELETON_MAGE
     amount: 1
     maxamount: 2
-  s127:
+  s126:
     x: -3383.0
     y: 69.0
     z: 2244.0
@@ -950,7 +918,7 @@ Spawners:
     mob: BLAZE
     amount: 1
     maxamount: 2
-  s128:
+  s127:
     x: -2922.0
     y: 66.0
     z: 2622.0
@@ -958,7 +926,7 @@ Spawners:
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s129:
+  s128:
     x: -4028.0
     y: 59.0
     z: 1326.0
@@ -966,7 +934,7 @@ Spawners:
     mob: PILLAGER_FIGHTER
     amount: 1
     maxamount: 2
-  s130:
+  s129:
     x: -2450.0
     y: 116.0
     z: 2038.0
@@ -974,7 +942,7 @@ Spawners:
     mob: MUMMY_GHOST
     amount: 1
     maxamount: 2
-  s131:
+  s130:
     x: -2607.0
     y: 66.0
     z: 4766.0
@@ -983,14 +951,6 @@ Spawners:
     amount: 1
     maxamount: 2
   s132:
-    x: -2481.0
-    y: 65.0
-    z: 3151.0
-    world: world
-    mob: TIMBERMAN
-    amount: 1
-    maxamount: 2
-  s133:
     x: -2997.0
     y: 73.0
     z: 4876.0
@@ -998,7 +958,7 @@ Spawners:
     mob: VILLAGER_1
     amount: 1
     maxamount: 2
-  s134:
+  s133:
     x: -2309.0
     y: 61.0
     z: 4894.0
@@ -1006,23 +966,23 @@ Spawners:
     mob: SKELETON_ARCHER
     amount: 1
     maxamount: 2
-  s135:
+  s134:
     x: -2481.0
     y: 75.0
     z: 3118.0
     world: world
-    mob: NINJA_ARCHER
+    mob: FROZEN_ARCHER
+    amount: 1
+    maxamount: 2
+  s135:
+    x: -2081.0
+    y: 66.0
+    z: 4270.0
+    world: world
+    mob: VILLAGER_SAILOR
     amount: 1
     maxamount: 2
   s137:
-    x: -2029.0
-    y: 64.0
-    z: 4176.0
-    world: world
-    mob: VILLAGER_3
-    amount: 1
-    maxamount: 2
-  s138:
     x: -3224.0
     y: 67.0
     z: 4899.0
@@ -1030,7 +990,7 @@ Spawners:
     mob: LIZARD
     amount: 1
     maxamount: 2
-  s139:
+  s138:
     x: -3217.0
     y: 67.0
     z: 4893.0
@@ -1038,7 +998,7 @@ Spawners:
     mob: LIZARD
     amount: 1
     maxamount: 2
-  s140:
+  s139:
     x: -2926.0
     y: 68.0
     z: 4397.0
@@ -1046,7 +1006,7 @@ Spawners:
     mob: ZOMBIE_VILLAGER
     amount: 1
     maxamount: 2
-  s141:
+  s140:
     x: -2913.0
     y: 67.0
     z: 4409.0
@@ -1054,7 +1014,7 @@ Spawners:
     mob: ZOMBIE_SPLITTER
     amount: 1
     maxamount: 2
-  s142:
+  s141:
     x: -2925.0
     y: 70.0
     z: 2416.0
@@ -1062,7 +1022,7 @@ Spawners:
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s143:
+  s142:
     x: -3637.0
     y: 65.0
     z: 2240.0
@@ -1070,7 +1030,7 @@ Spawners:
     mob: ORC_FIGHTER
     amount: 1
     maxamount: 2
-  s144:
+  s143:
     x: -2071.0
     y: 75.0
     z: 3627.0
@@ -1078,7 +1038,7 @@ Spawners:
     mob: PIRATE_SHOOTER
     amount: 1
     maxamount: 2
-  s145:
+  s144:
     x: -4177.0
     y: 64.0
     z: 1570.0
@@ -1086,7 +1046,7 @@ Spawners:
     mob: ENDERMAN
     amount: 1
     maxamount: 2
-  s146:
+  s145:
     x: -4186.0
     y: 75.0
     z: 1585.0
@@ -1094,7 +1054,7 @@ Spawners:
     mob: PHANTOM
     amount: 1
     maxamount: 2
-  s147:
+  s146:
     x: -3499.0
     y: 63.0
     z: 2241.0
@@ -1102,7 +1062,7 @@ Spawners:
     mob: MAGMA_CUBE
     amount: 1
     maxamount: 2
-  s148:
+  s147:
     x: -2327.0
     y: 143.0
     z: 1607.0
@@ -1110,7 +1070,7 @@ Spawners:
     mob: DESERT_SKELETON_CAVALRY
     amount: 1
     maxamount: 2
-  s149:
+  s148:
     x: -2152.0
     y: 61.0
     z: 4751.0
@@ -1118,7 +1078,7 @@ Spawners:
     mob: SKELETON_MAGE
     amount: 1
     maxamount: 2
-  s150:
+  s149:
     x: -2358.0
     y: 71.0
     z: 3132.0
@@ -1126,7 +1086,7 @@ Spawners:
     mob: TIMBERMAN
     amount: 1
     maxamount: 2
-  s151:
+  s150:
     x: -3236.0
     y: 65.0
     z: 1829.0
@@ -1134,7 +1094,7 @@ Spawners:
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s152:
+  s151:
     x: -2088.0
     y: 66.0
     z: 3749.0
@@ -1142,15 +1102,15 @@ Spawners:
     mob: PIRATE_DUEL_MASTER
     amount: 1
     maxamount: 2
-  s154:
-    x: -3235.0
-    y: 65.0
-    z: 1783.0
+  s152:
+    x: -4002.0
+    y: 59.0
+    z: 1260.0
     world: world
-    mob: GOBLIN_MAGE
+    mob: PILLAGER_MAGE
     amount: 1
     maxamount: 2
-  s155:
+  s154:
     x: -2797.0
     y: 68.0
     z: 4395.0
@@ -1158,7 +1118,7 @@ Spawners:
     mob: ZOMBIE_SPLITTER
     amount: 1
     maxamount: 2
-  s156:
+  s155:
     x: -2088.0
     y: 71.0
     z: 3724.0
@@ -1166,7 +1126,7 @@ Spawners:
     mob: PIRATE_SHARPSHOOTER
     amount: 1
     maxamount: 1
-  s157:
+  s156:
     x: -2088.0
     y: 66.0
     z: 3765.0
@@ -1174,7 +1134,7 @@ Spawners:
     mob: PIRATE_SHARPSHOOTER
     amount: 1
     maxamount: 1
-  s158:
+  s157:
     x: -2038.0
     y: 65.0
     z: 4556.0
@@ -1182,15 +1142,7 @@ Spawners:
     mob: VEX
     amount: 2
     maxamount: 4
-  s159:
-    x: -2317.0
-    y: 73.0
-    z: 3215.0
-    world: world
-    mob: NINJA_SHURINKEN
-    amount: 1
-    maxamount: 2
-  s160:
+  s158:
     x: -3640.0
     y: 63.0
     z: 1598.0
@@ -1198,7 +1150,7 @@ Spawners:
     mob: PILLAGER_SHAMAN
     amount: 1
     maxamount: 2
-  s161:
+  s159:
     x: -2441.0
     y: 61.0
     z: 4851.0
@@ -1206,7 +1158,7 @@ Spawners:
     mob: SKELETON_ROGUE
     amount: 1
     maxamount: 2
-  s162:
+  s160:
     x: -3155.0
     y: 65.0
     z: 2082.0
@@ -1214,15 +1166,7 @@ Spawners:
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
-  s163:
-    x: -2320.0
-    y: 76.0
-    z: 3253.0
-    world: world
-    mob: TIMBERMAN
-    amount: 1
-    maxamount: 2
-  s164:
+  s162:
     x: -1794.0
     y: 89.0
     z: 4644.0
@@ -1230,7 +1174,7 @@ Spawners:
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
-  s165:
+  s163:
     x: -2115.0
     y: 24.0
     z: 3139.0
@@ -1238,7 +1182,7 @@ Spawners:
     mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
-  s166:
+  s164:
     x: -2494.0
     y: 62.0
     z: 2721.0
@@ -1246,7 +1190,7 @@ Spawners:
     mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
-  s167:
+  s165:
     x: -3163.0
     y: 65.0
     z: 2162.0
@@ -1254,23 +1198,23 @@ Spawners:
     mob: WITCH
     amount: 1
     maxamount: 2
+  s166:
+    x: -2087.0
+    y: 62.0
+    z: 3952.0
+    world: world
+    mob: VILLAGER_SAILOR
+    amount: 1
+    maxamount: 2
+  s167:
+    x: -3678.0
+    y: 54.0
+    z: 1390.0
+    world: world
+    mob: PILLAGER_FIGHTER
+    amount: 1
+    maxamount: 2
   s170:
-    x: -2873.0
-    y: 77.0
-    z: 5152.0
-    world: world
-    mob: VILLAGER_HOBBIT
-    amount: 1
-    maxamount: 2
-  s171:
-    x: -2104.0
-    y: 66.0
-    z: 4152.0
-    world: world
-    mob: VILLAGER_3
-    amount: 1
-    maxamount: 2
-  s172:
     x: -2002.0
     y: 64.0
     z: 4203.0
@@ -1278,7 +1222,7 @@ Spawners:
     mob: VILLAGER_3
     amount: 1
     maxamount: 2
-  s173:
+  s171:
     x: -3140.0
     y: 62.0
     z: 4464.0
@@ -1286,7 +1230,7 @@ Spawners:
     mob: SLIME_STICKY
     amount: 1
     maxamount: 2
-  s174:
+  s172:
     x: -1773.0
     y: 88.0
     z: 4534.0
@@ -1294,7 +1238,15 @@ Spawners:
     mob: CREEPER
     amount: 1
     maxamount: 2
-  s176:
+  s173:
+    x: -2908.0
+    y: 65.0
+    z: 2872.0
+    world: world
+    mob: GOBLIN_JOCKEY
+    amount: 1
+    maxamount: 2
+  s174:
     x: -1761.0
     y: 89.0
     z: 4582.0
@@ -1302,7 +1254,7 @@ Spawners:
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s178:
+  s176:
     x: -4058.0
     y: 63.0
     z: 2110.0
@@ -1310,15 +1262,15 @@ Spawners:
     mob: ORC_MAGE
     amount: 1
     maxamount: 2
-  s179:
-    x: -4062.0
-    y: 64.0
-    z: 2131.0
+  s178:
+    x: -2368.0
+    y: 62.0
+    z: 2858.0
     world: world
-    mob: ORC_SHAMAN
+    mob: VILLAGER_4
     amount: 1
     maxamount: 2
-  s181:
+  s179:
     x: -3655.0
     y: 65.0
     z: 1474.0
@@ -1326,15 +1278,7 @@ Spawners:
     mob: PILLAGER_ROGUE
     amount: 1
     maxamount: 2
-  s182:
-    x: -3368.0
-    y: 69.0
-    z: 2219.0
-    world: world
-    mob: BLAZE
-    amount: 1
-    maxamount: 2
-  s183:
+  s181:
     x: -2016.0
     y: 66.0
     z: 4479.0
@@ -1342,23 +1286,23 @@ Spawners:
     mob: CREEPER
     amount: 1
     maxamount: 2
+  s182:
+    x: -3659.0
+    y: 65.0
+    z: 1322.0
+    world: world
+    mob: PILLAGER_RAVAGER
+    amount: 1
+    maxamount: 2
+  s183:
+    x: -2701.0
+    y: 67.0
+    z: 4391.0
+    world: world
+    mob: ZOMBIE_SPLITTER
+    amount: 1
+    maxamount: 2
   s187:
-    x: -2322.0
-    y: 77.0
-    z: 3395.0
-    world: world
-    mob: NINJA_ILLUSIONER
-    amount: 1
-    maxamount: 2
-  s188:
-    x: -4219.0
-    y: 74.0
-    z: 1577.0
-    world: world
-    mob: PHANTOM
-    amount: 1
-    maxamount: 2
-  s189:
     x: -3362.0
     y: 69.0
     z: 2244.0
@@ -1366,7 +1310,7 @@ Spawners:
     mob: BLAZE
     amount: 1
     maxamount: 2
-  s190:
+  s188:
     x: -3148.0
     y: 65.0
     z: 2592.0
@@ -1374,7 +1318,7 @@ Spawners:
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s191:
+  s189:
     x: -2768.0
     y: 65.0
     z: 4915.0
@@ -1382,7 +1326,7 @@ Spawners:
     mob: SHEEP_BABY
     amount: 1
     maxamount: 2
-  s192:
+  s190:
     x: -2339.0
     y: 138.0
     z: 1568.0
@@ -1390,7 +1334,7 @@ Spawners:
     mob: DESERT_SKELETON_CAVALRY
     amount: 1
     maxamount: 2
-  s193:
+  s191:
     x: -2575.0
     y: 66.0
     z: 4778.0
@@ -1398,7 +1342,7 @@ Spawners:
     mob: VILLAGER_2
     amount: 1
     maxamount: 2
-  s194:
+  s192:
     x: -2667.0
     y: 65.0
     z: 4962.0
@@ -1406,7 +1350,7 @@ Spawners:
     mob: COW_BABY
     amount: 1
     maxamount: 2
-  s195:
+  s193:
     x: -3269.0
     y: 65.0
     z: 1909.0
@@ -1414,7 +1358,7 @@ Spawners:
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
-  s196:
+  s194:
     x: -4048.0
     y: 59.0
     z: 1734.0
@@ -1422,7 +1366,7 @@ Spawners:
     mob: PILLAGER_SHAMAN
     amount: 1
     maxamount: 2
-  s197:
+  s195:
     x: -3845.0
     y: 58.0
     z: 1251.0
@@ -1430,15 +1374,7 @@ Spawners:
     mob: PILLAGER_RAVAGER
     amount: 1
     maxamount: 2
-  s198:
-    x: -2905.0
-    y: 67.0
-    z: 4429.0
-    world: world
-    mob: ZOMBIE_TANK
-    amount: 1
-    maxamount: 2
-  s199:
+  s197:
     x: -2755.0
     y: 67.0
     z: 4850.0
@@ -1446,7 +1382,7 @@ Spawners:
     mob: SHEEP_BABY
     amount: 1
     maxamount: 2
-  s200:
+  s198:
     x: -2761.0
     y: 66.0
     z: 4884.0
@@ -1454,7 +1390,7 @@ Spawners:
     mob: COW_BABY
     amount: 1
     maxamount: 2
-  s201:
+  s199:
     x: -4149.0
     y: 64.0
     z: 1625.0
@@ -1462,7 +1398,7 @@ Spawners:
     mob: ENDERMAN
     amount: 1
     maxamount: 2
-  s202:
+  s200:
     x: -2905.0
     y: 69.0
     z: 2540.0
@@ -1470,7 +1406,7 @@ Spawners:
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s203:
+  s201:
     x: -2547.0
     y: 110.0
     z: 1928.0
@@ -1478,7 +1414,7 @@ Spawners:
     mob: MUMMY
     amount: 1
     maxamount: 2
-  s204:
+  s202:
     x: -3721.0
     y: 64.0
     z: 2201.0
@@ -1486,7 +1422,7 @@ Spawners:
     mob: ORC_GLADIATOR
     amount: 1
     maxamount: 2
-  s205:
+  s203:
     x: -2139.0
     y: 26.0
     z: 3136.0
@@ -1494,7 +1430,7 @@ Spawners:
     mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
-  s206:
+  s204:
     x: -2337.0
     y: 138.0
     z: 1777.0
@@ -1502,7 +1438,7 @@ Spawners:
     mob: DESERT_SKELETON_ARCHER
     amount: 1
     maxamount: 2
-  s207:
+  s205:
     x: -3164.0
     y: 66.0
     z: 2739.0
@@ -1510,7 +1446,7 @@ Spawners:
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
-  s208:
+  s206:
     x: -2919.0
     y: 68.0
     z: 2940.0
@@ -1519,22 +1455,6 @@ Spawners:
     amount: 1
     maxamount: 2
   s209:
-    x: -4207.0
-    y: 63.0
-    z: 1595.0
-    world: world
-    mob: ENDERMAN
-    amount: 1
-    maxamount: 2
-  s210:
-    x: -3267.0
-    y: 65.0
-    z: 2076.0
-    world: world
-    mob: GOBLIN_SHAMAN
-    amount: 1
-    maxamount: 2
-  s211:
     x: -2351.0
     y: 143.0
     z: 1812.0
@@ -1542,7 +1462,7 @@ Spawners:
     mob: DESERT_SKELETON_CAVALRY
     amount: 1
     maxamount: 2
-  s212:
+  s210:
     x: -2907.0
     y: 65.0
     z: 2295.0
@@ -1550,7 +1470,7 @@ Spawners:
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s213:
+  s211:
     x: -2107.0
     y: 62.0
     z: 3950.0
@@ -1558,7 +1478,7 @@ Spawners:
     mob: VILLAGER_SAILOR
     amount: 1
     maxamount: 2
-  s214:
+  s212:
     x: -2569.0
     y: 66.0
     z: 4481.0
@@ -1566,39 +1486,7 @@ Spawners:
     mob: ZOMBIE_VILLAGER
     amount: 1
     maxamount: 2
-  s215:
-    x: -2908.0
-    y: 70.0
-    z: 2358.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s216:
-    x: -2879.0
-    y: 66.0
-    z: 5109.0
-    world: world
-    mob: VILLAGER_HOBBIT
-    amount: 1
-    maxamount: 2
   s217:
-    x: -2419.0
-    y: 61.0
-    z: 4826.0
-    world: world
-    mob: SKELETON_MONK
-    amount: 1
-    maxamount: 2
-  s218:
-    x: -3279.0
-    y: 63.0
-    z: 2236.0
-    world: world
-    mob: WITCH
-    amount: 1
-    maxamount: 2
-  s219:
     x: -2802.0
     y: 66.0
     z: 4434.0
@@ -1606,7 +1494,7 @@ Spawners:
     mob: ZOMBIE_VILLAGER
     amount: 1
     maxamount: 2
-  s220:
+  s218:
     x: -2430.0
     y: 61.0
     z: 4904.0
@@ -1614,7 +1502,7 @@ Spawners:
     mob: SKELETON_FIGHTER
     amount: 1
     maxamount: 2
-  s221:
+  s219:
     x: -3845.0
     y: 63.0
     z: 1452.0
@@ -1622,7 +1510,7 @@ Spawners:
     mob: ENDERMAN
     amount: 1
     maxamount: 2
-  s222:
+  s220:
     x: -3163.0
     y: 67.0
     z: 2861.0
@@ -1630,7 +1518,15 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s223:
+  s221:
+    x: -3960.0
+    y: 38.0
+    z: 2197.0
+    world: world
+    mob: ORC_JOCKEY
+    amount: 1
+    maxamount: 2
+  s222:
     x: -2958.0
     y: 67.0
     z: 2908.0
@@ -1638,71 +1534,31 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
+  s223:
+    x: -1947.0
+    y: 70.0
+    z: 4677.0
+    world: world
+    mob: VEX
+    amount: 2
+    maxamount: 4
   s224:
-    x: 57.0
-    y: 75.0
-    z: 2384.0
-    world: tutorial
-    mob: TUTORIAL_2
-    amount: 1
-    maxamount: 2
-  s225:
-    x: 60.0
-    y: 78.0
-    z: 2395.0
-    world: tutorial
-    mob: TUTORIAL_2
-    amount: 1
-    maxamount: 2
-  s226:
-    x: 62.0
-    y: 75.0
-    z: 2286.0
-    world: tutorial
-    mob: TUTORIAL_1
-    amount: 1
-    maxamount: 2
-  s227:
-    x: 56.0
-    y: 75.0
-    z: 2279.0
-    world: tutorial
-    mob: TUTORIAL_1
-    amount: 1
-    maxamount: 2
-  s228:
-    x: 62.0
-    y: 75.0
-    z: 2270.0
-    world: tutorial
-    mob: TUTORIAL_1
-    amount: 1
-    maxamount: 2
-  s229:
-    x: 56.0
-    y: 75.0
-    z: 2261.0
-    world: tutorial
-    mob: TUTORIAL_1
-    amount: 1
-    maxamount: 2
-  s231:
     x: -2455.0
     y: 70.0
     z: 3143.0
     world: world
-    mob: NINJA_ROGUE
+    mob: FROZEN_ROGUE
     amount: 1
     maxamount: 2
-  s232:
+  s225:
     x: -2449.0
     y: 69.0
     z: 3103.0
     world: world
-    mob: NINJA_ILLUSIONER
+    mob: FROZEN_ILLUSIONER
     amount: 1
     maxamount: 2
-  s233:
+  s226:
     x: -2569.0
     y: 66.0
     z: 4454.0
@@ -1710,7 +1566,7 @@ Spawners:
     mob: ZOMBIE
     amount: 1
     maxamount: 2
-  s234:
+  s227:
     x: -3868.0
     y: 63.0
     z: 2332.0
@@ -1718,7 +1574,7 @@ Spawners:
     mob: ORC_SHAMAN
     amount: 1
     maxamount: 2
-  s235:
+  s228:
     x: -3871.0
     y: 63.0
     z: 2313.0
@@ -1726,7 +1582,7 @@ Spawners:
     mob: ORC_FIGHTER
     amount: 1
     maxamount: 2
-  s236:
+  s229:
     x: -3865.0
     y: 63.0
     z: 2288.0
@@ -1734,15 +1590,7 @@ Spawners:
     mob: ORC_MAGE
     amount: 1
     maxamount: 2
-  s237:
-    x: -2827.0
-    y: 65.0
-    z: 4792.0
-    world: world
-    mob: VILLAGER_FARMER
-    amount: 1
-    maxamount: 2
-  s238:
+  s231:
     x: -2046.0
     y: 65.0
     z: 3644.0
@@ -1750,7 +1598,7 @@ Spawners:
     mob: PIRATE_FIGHTER
     amount: 1
     maxamount: 2
-  s239:
+  s232:
     x: -1940.0
     y: 63.0
     z: 4507.0
@@ -1758,15 +1606,7 @@ Spawners:
     mob: CREEPER
     amount: 1
     maxamount: 2
-  s240:
-    x: 58.0
-    y: 83.0
-    z: 2405.0
-    world: tutorial
-    mob: TUTORIAL_2
-    amount: 1
-    maxamount: 2
-  s241:
+  s233:
     x: -1946.0
     y: 64.0
     z: 4490.0
@@ -1774,7 +1614,7 @@ Spawners:
     mob: VEX
     amount: 2
     maxamount: 4
-  s242:
+  s234:
     x: -1946.0
     y: 66.0
     z: 4581.0
@@ -1782,7 +1622,7 @@ Spawners:
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s243:
+  s235:
     x: -1952.0
     y: 64.0
     z: 4548.0
@@ -1790,7 +1630,7 @@ Spawners:
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
-  s244:
+  s236:
     x: -1946.0
     y: 67.0
     z: 4617.0
@@ -1798,7 +1638,15 @@ Spawners:
     mob: CREEPER
     amount: 1
     maxamount: 2
-  s246:
+  s237:
+    x: -2293.0
+    y: 143.0
+    z: 1644.0
+    world: world
+    mob: DESERT_SKELETON_ARCHER
+    amount: 1
+    maxamount: 2
+  s238:
     x: -3233.0
     y: 64.0
     z: 4530.0
@@ -1806,7 +1654,7 @@ Spawners:
     mob: SLIME_STICKY
     amount: 1
     maxamount: 2
-  s247:
+  s239:
     x: -2445.0
     y: 63.0
     z: 2620.0
@@ -1814,15 +1662,7 @@ Spawners:
     mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
-  s248:
-    x: -2678.0
-    y: 66.0
-    z: 4400.0
-    world: world
-    mob: ZOMBIE_SHAMAN
-    amount: 1
-    maxamount: 2
-  s249:
+  s240:
     x: -3848.0
     y: 63.0
     z: 1746.0
@@ -1830,7 +1670,7 @@ Spawners:
     mob: PILLAGER_SHAMAN
     amount: 1
     maxamount: 2
-  s250:
+  s241:
     x: -2277.0
     y: 81.0
     z: 3319.0
@@ -1838,7 +1678,7 @@ Spawners:
     mob: TIMBERMAN
     amount: 1
     maxamount: 2
-  s251:
+  s242:
     x: -2095.0
     y: 14.0
     z: 3147.0
@@ -1846,15 +1686,7 @@ Spawners:
     mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
-  s252:
-    x: -3229.0
-    y: 65.0
-    z: 2373.0
-    world: world
-    mob: GOBLIN_FIGHTER
-    amount: 1
-    maxamount: 2
-  s253:
+  s244:
     x: -3697.0
     y: 66.0
     z: 1302.0
@@ -1862,28 +1694,84 @@ Spawners:
     mob: PILLAGER_ROGUE
     amount: 1
     maxamount: 2
-  s254:
-    x: -2185.0
-    y: 61.0
-    z: 4735.0
-    world: world
-    mob: SKELETON_MONK
-    amount: 1
-    maxamount: 2
-  s255:
+  s246:
     x: -2285.0
     y: 72.0
     z: 3259.0
     world: world
-    mob: NINJA_ARCHER
+    mob: FROZEN_ARCHER
     amount: 1
     maxamount: 2
-  s256:
+  s247:
     x: -2288.0
     y: 67.0
     z: 3225.0
     world: world
-    mob: NINJA_ROGUE
+    mob: FROZEN_ROGUE
+    amount: 1
+    maxamount: 2
+  s248:
+    x: -4237.0
+    y: 64.0
+    z: 1519.0
+    world: world
+    mob: ENDERMAN
+    amount: 1
+    maxamount: 2
+  s249:
+    x: 545.0
+    y: 28.0
+    z: -450.0
+    world: tutorial
+    mob: TUTORIAL_2
+    amount: 1
+    maxamount: 2
+  s250:
+    x: -3200.0
+    y: 66.0
+    z: 4895.0
+    world: world
+    mob: LIZARD
+    amount: 1
+    maxamount: 2
+  s251:
+    x: -4895.0
+    y: 119.0
+    z: 2072.0
+    world: world
+    mob: VILLAGER_5
+    amount: 1
+    maxamount: 2
+  s252:
+    x: -2831.0
+    y: 68.0
+    z: 4399.0
+    world: world
+    mob: ZOMBIE_TANK
+    amount: 1
+    maxamount: 2
+  s253:
+    x: -2161.0
+    y: 64.0
+    z: 4253.0
+    world: world
+    mob: VILLAGER_FARMER
+    amount: 1
+    maxamount: 2
+  s254:
+    x: -2828.0
+    y: 67.0
+    z: 4445.0
+    world: world
+    mob: ZOMBIE
+    amount: 1
+    maxamount: 2
+  s255:
+    x: -2703.0
+    y: 66.0
+    z: 4792.0
+    world: world
+    mob: SHEEP_BABY
     amount: 1
     maxamount: 2
   s12:
@@ -1903,27 +1791,27 @@ Spawners:
     amount: 1
     maxamount: 2
   s41:
-    x: -2398.0
-    y: 74.0
-    z: 3166.0
+    x: -2252.0
+    y: 58.0
+    z: 3637.0
     world: world
-    mob: NINJA_ARCHER
+    mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
   s56:
-    x: -3795.0
-    y: 64.0
-    z: 1487.0
-    world: world
-    mob: ENDERMAN
-    amount: 1
-    maxamount: 2
-  s57:
     x: -3279.0
     y: 65.0
     z: 4853.0
     world: world
     mob: LIZARD_POISONOUS
+    amount: 1
+    maxamount: 2
+  s57:
+    x: -3795.0
+    y: 64.0
+    z: 1562.0
+    world: world
+    mob: ENDERMAN
     amount: 1
     maxamount: 2
   s83:
@@ -1959,46 +1847,38 @@ Spawners:
     amount: 1
     maxamount: 2
   s136:
-    x: -2081.0
-    y: 66.0
-    z: 4270.0
+    x: -2029.0
+    y: 64.0
+    z: 4176.0
     world: world
-    mob: VILLAGER_SAILOR
+    mob: VILLAGER_3
     amount: 1
     maxamount: 2
   s153:
-    x: -4002.0
-    y: 59.0
-    z: 1260.0
+    x: -3235.0
+    y: 65.0
+    z: 1783.0
     world: world
-    mob: PILLAGER_MAGE
+    mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
   s168:
-    x: -2087.0
-    y: 62.0
-    z: 3952.0
+    x: -2873.0
+    y: 77.0
+    z: 5152.0
     world: world
-    mob: VILLAGER_SAILOR
+    mob: VILLAGER_HOBBIT
     amount: 1
     maxamount: 2
   s169:
-    x: -3678.0
-    y: 54.0
-    z: 1390.0
+    x: -2104.0
+    y: 66.0
+    z: 4152.0
     world: world
-    mob: PILLAGER_FIGHTER
+    mob: VILLAGER_3
     amount: 1
     maxamount: 2
   s175:
-    x: -2908.0
-    y: 65.0
-    z: 2872.0
-    world: world
-    mob: GOBLIN_JOCKEY
-    amount: 1
-    maxamount: 2
-  s177:
     x: -1775.0
     y: 89.0
     z: 4609.0
@@ -2006,31 +1886,23 @@ Spawners:
     mob: VEX
     amount: 2
     maxamount: 4
-  s180:
-    x: -2368.0
-    y: 62.0
-    z: 2858.0
+  s177:
+    x: -4062.0
+    y: 64.0
+    z: 2131.0
     world: world
-    mob: VILLAGER_4
+    mob: ORC_SHAMAN
+    amount: 1
+    maxamount: 2
+  s180:
+    x: -3368.0
+    y: 69.0
+    z: 2219.0
+    world: world
+    mob: BLAZE
     amount: 1
     maxamount: 2
   s184:
-    x: -3659.0
-    y: 65.0
-    z: 1322.0
-    world: world
-    mob: PILLAGER_RAVAGER
-    amount: 1
-    maxamount: 2
-  s185:
-    x: -2701.0
-    y: 67.0
-    z: 4391.0
-    world: world
-    mob: ZOMBIE_SPLITTER
-    amount: 1
-    maxamount: 2
-  s186:
     x: -2454.0
     y: 62.0
     z: 2566.0
@@ -2038,95 +1910,39 @@ Spawners:
     mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
+  s185:
+    x: -2322.0
+    y: 77.0
+    z: 3395.0
+    world: world
+    mob: FROZEN_ILLUSIONER
+    amount: 1
+    maxamount: 2
+  s186:
+    x: -4219.0
+    y: 74.0
+    z: 1577.0
+    world: world
+    mob: PHANTOM
+    amount: 1
+    maxamount: 2
   s230:
-    x: -1947.0
-    y: 70.0
-    z: 4677.0
-    world: world
-    mob: VEX
-    amount: 2
-    maxamount: 4
-  s245:
-    x: -2293.0
-    y: 143.0
-    z: 1644.0
-    world: world
-    mob: DESERT_SKELETON_ARCHER
-    amount: 1
-    maxamount: 2
-  s257:
-    x: -4237.0
-    y: 64.0
-    z: 1519.0
-    world: world
-    mob: ENDERMAN
-    amount: 1
-    maxamount: 2
-  s258:
-    x: -3200.0
-    y: 66.0
-    z: 4895.0
-    world: world
-    mob: LIZARD
-    amount: 1
-    maxamount: 2
-  s259:
-    x: -4895.0
-    y: 119.0
-    z: 2072.0
-    world: world
-    mob: VILLAGER_5
-    amount: 1
-    maxamount: 2
-  s260:
-    x: -2817.0
-    y: 67.0
-    z: 4371.0
-    world: world
-    mob: ZOMBIE_SHAMAN
-    amount: 1
-    maxamount: 2
-  s261:
-    x: -2831.0
-    y: 68.0
-    z: 4399.0
-    world: world
-    mob: ZOMBIE_TANK
-    amount: 1
-    maxamount: 2
-  s262:
-    x: -2161.0
-    y: 64.0
-    z: 4253.0
+    x: -2827.0
+    y: 65.0
+    z: 4792.0
     world: world
     mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
-  s263:
-    x: -2828.0
-    y: 67.0
-    z: 4445.0
+  s245:
+    x: -2185.0
+    y: 61.0
+    z: 4735.0
     world: world
-    mob: ZOMBIE
+    mob: SKELETON_MONK
     amount: 1
     maxamount: 2
-  s264:
-    x: -2703.0
-    y: 66.0
-    z: 4792.0
-    world: world
-    mob: SHEEP_BABY
-    amount: 1
-    maxamount: 2
-  s265:
-    x: -2060.0
-    y: 4.0
-    z: 3133.0
-    world: world
-    mob: ZOMBIE_JOCKEY
-    amount: 1
-    maxamount: 2
-  s266:
+  s257:
     x: -2056.0
     y: 4.0
     z: 3151.0
@@ -2134,7 +1950,7 @@ Spawners:
     mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
-  s267:
+  s258:
     x: -2049.0
     y: 4.0
     z: 3116.0
@@ -2142,7 +1958,7 @@ Spawners:
     mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
-  s268:
+  s259:
     x: -2147.0
     y: 71.0
     z: 3554.0
@@ -2150,7 +1966,7 @@ Spawners:
     mob: PIRATE_SHARPSHOOTER
     amount: 1
     maxamount: 1
-  s269:
+  s260:
     x: -2147.0
     y: 66.0
     z: 3579.0
@@ -2158,7 +1974,7 @@ Spawners:
     mob: PIRATE_DUEL_MASTER
     amount: 1
     maxamount: 2
-  s270:
+  s261:
     x: -2542.0
     y: 114.0
     z: 1873.0
@@ -2166,7 +1982,7 @@ Spawners:
     mob: MUMMY_GHOST
     amount: 1
     maxamount: 2
-  s271:
+  s262:
     x: -4111.0
     y: 59.0
     z: 1794.0
@@ -2174,7 +1990,7 @@ Spawners:
     mob: PILLAGER_ROGUE
     amount: 1
     maxamount: 2
-  s272:
+  s263:
     x: -2147.0
     y: 66.0
     z: 3593.0
@@ -2182,7 +1998,7 @@ Spawners:
     mob: PIRATE_SHARPSHOOTER
     amount: 1
     maxamount: 1
-  s273:
+  s264:
     x: -2541.0
     y: 119.0
     z: 1824.0
@@ -2190,7 +2006,7 @@ Spawners:
     mob: SPIDER_GHOST
     amount: 1
     maxamount: 2
-  s274:
+  s265:
     x: -3826.0
     y: 63.0
     z: 1683.0
@@ -2198,7 +2014,7 @@ Spawners:
     mob: PILLAGER_MAGE
     amount: 1
     maxamount: 2
-  s275:
+  s266:
     x: -3263.0
     y: 64.0
     z: 4784.0
@@ -2206,7 +2022,7 @@ Spawners:
     mob: LIZARD_POISONOUS
     amount: 1
     maxamount: 2
-  s276:
+  s267:
     x: -2384.0
     y: 143.0
     z: 1594.0
@@ -2214,7 +2030,7 @@ Spawners:
     mob: DESERT_SKELETON_ARCHER
     amount: 1
     maxamount: 2
-  s277:
+  s268:
     x: -3174.0
     y: 66.0
     z: 2650.0
@@ -2222,7 +2038,7 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s278:
+  s269:
     x: -3170.0
     y: 67.0
     z: 4552.0
@@ -2230,7 +2046,7 @@ Spawners:
     mob: SLIME
     amount: 1
     maxamount: 2
-  s279:
+  s270:
     x: -1807.0
     y: 89.0
     z: 4611.0
@@ -2238,7 +2054,7 @@ Spawners:
     mob: CREEPER
     amount: 1
     maxamount: 2
-  s280:
+  s271:
     x: -1793.0
     y: 88.0
     z: 4531.0
@@ -2246,7 +2062,7 @@ Spawners:
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
-  s281:
+  s272:
     x: -2385.0
     y: 61.0
     z: 4912.0
@@ -2254,7 +2070,7 @@ Spawners:
     mob: SKELETON_MAGE
     amount: 1
     maxamount: 2
-  s282:
+  s273:
     x: -3241.0
     y: 71.0
     z: 2235.0
@@ -2262,7 +2078,7 @@ Spawners:
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s283:
+  s274:
     x: -3239.0
     y: 64.0
     z: 2184.0
@@ -2270,15 +2086,7 @@ Spawners:
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
-  s284:
-    x: -2650.0
-    y: 64.0
-    z: 3460.0
-    world: world
-    mob: NINJA_SHURINKEN
-    amount: 1
-    maxamount: 2
-  s285:
+  s275:
     x: -2961.0
     y: 68.0
     z: 2988.0
@@ -2286,7 +2094,7 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s286:
+  s276:
     x: -3046.0
     y: 65.0
     z: 2218.0
@@ -2294,7 +2102,7 @@ Spawners:
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s287:
+  s277:
     x: -3246.0
     y: 65.0
     z: 2119.0
@@ -2302,7 +2110,7 @@ Spawners:
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s288:
+  s278:
     x: -2572.0
     y: 115.0
     z: 1848.0
@@ -2310,7 +2118,7 @@ Spawners:
     mob: MUMMY
     amount: 1
     maxamount: 2
-  s289:
+  s279:
     x: -3900.0
     y: 64.0
     z: 1440.0
@@ -2318,15 +2126,7 @@ Spawners:
     mob: ENDERMAN
     amount: 1
     maxamount: 2
-  s290:
-    x: -2572.0
-    y: 108.0
-    z: 1887.0
-    world: world
-    mob: MUMMY
-    amount: 1
-    maxamount: 2
-  s291:
+  s281:
     x: -3059.0
     y: 66.0
     z: 2793.0
@@ -2334,7 +2134,7 @@ Spawners:
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s292:
+  s282:
     x: -3179.0
     y: 66.0
     z: 2517.0
@@ -2342,7 +2142,7 @@ Spawners:
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
-  s293:
+  s283:
     x: -3176.0
     y: 68.0
     z: 2469.0
@@ -2350,7 +2150,7 @@ Spawners:
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s294:
+  s284:
     x: -4085.0
     y: 62.0
     z: 1382.0
@@ -2358,7 +2158,7 @@ Spawners:
     mob: PILLAGER_RAVAGER
     amount: 1
     maxamount: 2
-  s295:
+  s285:
     x: -4067.0
     y: 60.0
     z: 1668.0
@@ -2366,7 +2166,7 @@ Spawners:
     mob: PILLAGER_RAVAGER
     amount: 1
     maxamount: 2
-  s296:
+  s286:
     x: -2933.0
     y: 67.0
     z: 2701.0
@@ -2374,7 +2174,7 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s297:
+  s287:
     x: -2042.0
     y: 66.0
     z: 4253.0
@@ -2382,7 +2182,7 @@ Spawners:
     mob: VILLAGER_SAILOR
     amount: 1
     maxamount: 2
-  s298:
+  s288:
     x: -4629.0
     y: 120.0
     z: 2356.0
@@ -2390,7 +2190,7 @@ Spawners:
     mob: VILLAGER_5
     amount: 1
     maxamount: 2
-  s299:
+  s289:
     x: -3975.0
     y: 63.0
     z: 1721.0
@@ -2398,7 +2198,7 @@ Spawners:
     mob: PILLAGER_RAVAGER
     amount: 1
     maxamount: 2
-  s300:
+  s290:
     x: -3237.0
     y: 65.0
     z: 2024.0
@@ -2406,7 +2206,7 @@ Spawners:
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s301:
+  s291:
     x: -4082.0
     y: 64.0
     z: 2147.0
@@ -2414,7 +2214,7 @@ Spawners:
     mob: ORC_FIGHTER
     amount: 1
     maxamount: 2
-  s302:
+  s292:
     x: -2938.0
     y: 66.0
     z: 2576.0
@@ -2422,7 +2222,7 @@ Spawners:
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
-  s303:
+  s293:
     x: -2059.0
     y: 66.0
     z: 4159.0
@@ -2430,7 +2230,7 @@ Spawners:
     mob: VILLAGER_3
     amount: 1
     maxamount: 2
-  s304:
+  s294:
     x: -3238.0
     y: 66.0
     z: 1957.0
@@ -2438,7 +2238,7 @@ Spawners:
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s305:
+  s295:
     x: -1926.0
     y: 72.0
     z: 4710.0
@@ -2446,7 +2246,7 @@ Spawners:
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s306:
+  s296:
     x: -2054.0
     y: 64.0
     z: 4078.0
@@ -2454,7 +2254,7 @@ Spawners:
     mob: VILLAGER_3
     amount: 1
     maxamount: 2
-  s307:
+  s297:
     x: -1923.0
     y: 70.0
     z: 4648.0
@@ -2462,7 +2262,7 @@ Spawners:
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
-  s308:
+  s298:
     x: -3182.0
     y: 67.0
     z: 2372.0
@@ -2470,7 +2270,7 @@ Spawners:
     mob: WITCH
     amount: 1
     maxamount: 2
-  s309:
+  s299:
     x: -2038.0
     y: 64.0
     z: 4009.0
@@ -2478,7 +2278,7 @@ Spawners:
     mob: VILLAGER_3
     amount: 1
     maxamount: 2
-  s310:
+  s300:
     x: -3224.0
     y: 65.0
     z: 1681.0
@@ -2486,15 +2286,15 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s311:
+  s301:
     x: -2561.0
     y: 75.0
     z: 3370.0
     world: world
-    mob: NINJA_ARCHER
+    mob: FROZEN_ARCHER
     amount: 1
     maxamount: 2
-  s312:
+  s302:
     x: -2402.0
     y: 109.0
     z: 2050.0
@@ -2502,7 +2302,7 @@ Spawners:
     mob: MUMMY
     amount: 1
     maxamount: 2
-  s313:
+  s303:
     x: -2100.0
     y: 14.0
     z: 3162.0
@@ -2510,7 +2310,7 @@ Spawners:
     mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
-  s314:
+  s304:
     x: -2066.0
     y: 67.0
     z: 4246.0
@@ -2518,7 +2318,7 @@ Spawners:
     mob: VILLAGER_SAILOR
     amount: 1
     maxamount: 2
-  s315:
+  s305:
     x: -2671.0
     y: 66.0
     z: 4376.0
@@ -2526,15 +2326,7 @@ Spawners:
     mob: ZOMBIE_TANK
     amount: 1
     maxamount: 2
-  s316:
-    x: 59.0
-    y: 101.0
-    z: 2606.0
-    world: tutorial
-    mob: TUTORIAL_BOSS
-    amount: 1
-    maxamount: 1
-  s317:
+  s306:
     x: -3894.0
     y: 60.0
     z: 1261.0
@@ -2542,7 +2334,7 @@ Spawners:
     mob: PILLAGER_ROGUE
     amount: 1
     maxamount: 2
-  s318:
+  s307:
     x: -2938.0
     y: 67.0
     z: 4416.0
@@ -2550,7 +2342,7 @@ Spawners:
     mob: ZOMBIE
     amount: 1
     maxamount: 2
-  s319:
+  s308:
     x: -2908.0
     y: 64.0
     z: 5082.0
@@ -2558,7 +2350,7 @@ Spawners:
     mob: VILLAGER_HOBBIT
     amount: 1
     maxamount: 2
-  s320:
+  s309:
     x: -2160.0
     y: 65.0
     z: 4052.0
@@ -2566,7 +2358,7 @@ Spawners:
     mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
-  s321:
+  s310:
     x: -2103.0
     y: 14.0
     z: 3135.0
@@ -2574,7 +2366,7 @@ Spawners:
     mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
-  s322:
+  s311:
     x: -2097.0
     y: 24.0
     z: 3135.0
@@ -2582,15 +2374,31 @@ Spawners:
     mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
-  s323:
+  s312:
     x: -2304.0
     y: 78.0
     z: 3370.0
     world: world
-    mob: NINJA_ROGUE
+    mob: FROZEN_ROGUE
     amount: 1
     maxamount: 2
-  s324:
+  s313:
+    x: 569.0
+    y: 28.0
+    z: -400.0
+    world: tutorial
+    mob: TUTORIAL_1
+    amount: 1
+    maxamount: 2
+  s314:
+    x: 573.0
+    y: 29.0
+    z: -372.0
+    world: tutorial
+    mob: TUTORIAL_1
+    amount: 1
+    maxamount: 2
+  s315:
     x: -3162.0
     y: 65.0
     z: 1691.0
@@ -2598,7 +2406,7 @@ Spawners:
     mob: WITCH
     amount: 1
     maxamount: 2
-  s325:
+  s316:
     x: -2408.0
     y: 144.0
     z: 1850.0
@@ -2606,7 +2414,7 @@ Spawners:
     mob: MUMMY_GHOST
     amount: 1
     maxamount: 2
-  s326:
+  s317:
     x: -4065.0
     y: 63.0
     z: 1594.0
@@ -2614,7 +2422,7 @@ Spawners:
     mob: PILLAGER_FIGHTER
     amount: 1
     maxamount: 2
-  s327:
+  s318:
     x: -3180.0
     y: 65.0
     z: 2130.0
@@ -2622,7 +2430,7 @@ Spawners:
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s328:
+  s319:
     x: -4074.0
     y: 63.0
     z: 1514.0
@@ -2630,15 +2438,15 @@ Spawners:
     mob: PILLAGER_MAGE
     amount: 1
     maxamount: 2
-  s329:
+  s320:
     x: -2351.0
     y: 79.0
     z: 3181.0
     world: world
-    mob: NINJA_ILLUSIONER
+    mob: FROZEN_ILLUSIONER
     amount: 1
     maxamount: 2
-  s330:
+  s321:
     x: -4078.0
     y: 63.0
     z: 1455.0
@@ -2646,15 +2454,7 @@ Spawners:
     mob: PILLAGER_ROGUE
     amount: 1
     maxamount: 2
-  s331:
-    x: -2297.0
-    y: 79.0
-    z: 3282.0
-    world: world
-    mob: NINJA_SHURINKEN
-    amount: 1
-    maxamount: 2
-  s332:
+  s322:
     x: -4251.0
     y: 63.0
     z: 1576.0
@@ -2662,7 +2462,7 @@ Spawners:
     mob: ENDERMAN
     amount: 1
     maxamount: 2
-  s333:
+  s323:
     x: -2812.0
     y: 63.0
     z: 5118.0
@@ -2670,7 +2470,7 @@ Spawners:
     mob: VILLAGER_HOBBIT
     amount: 1
     maxamount: 2
-  s334:
+  s324:
     x: -2959.0
     y: 67.0
     z: 2848.0
@@ -2678,7 +2478,7 @@ Spawners:
     mob: WITCH
     amount: 1
     maxamount: 2
-  s335:
+  s325:
     x: -2949.0
     y: 67.0
     z: 2857.0
@@ -2686,7 +2486,7 @@ Spawners:
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s336:
+  s326:
     x: -2968.0
     y: 66.0
     z: 2304.0
@@ -2694,7 +2494,7 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s337:
+  s327:
     x: -4804.0
     y: 106.0
     z: 2157.0
@@ -2702,15 +2502,7 @@ Spawners:
     mob: VILLAGER_5
     amount: 1
     maxamount: 2
-  s338:
-    x: -1982.0
-    y: 69.0
-    z: 4675.0
-    world: world
-    mob: CREEPER
-    amount: 1
-    maxamount: 2
-  s339:
+  s329:
     x: -1976.0
     y: 69.0
     z: 4647.0
@@ -2718,7 +2510,7 @@ Spawners:
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s340:
+  s330:
     x: -2722.0
     y: 67.0
     z: 4353.0
@@ -2726,7 +2518,7 @@ Spawners:
     mob: ZOMBIE_VILLAGER
     amount: 1
     maxamount: 2
-  s341:
+  s331:
     x: -2263.0
     y: 42.0
     z: 3653.0
@@ -2734,7 +2526,7 @@ Spawners:
     mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
-  s342:
+  s332:
     x: -3926.0
     y: 50.0
     z: 1226.0
@@ -2742,7 +2534,7 @@ Spawners:
     mob: PILLAGER_SHAMAN
     amount: 1
     maxamount: 2
-  s343:
+  s333:
     x: -2736.0
     y: 68.0
     z: 4387.0
@@ -2750,7 +2542,7 @@ Spawners:
     mob: ZOMBIE
     amount: 1
     maxamount: 2
-  s344:
+  s334:
     x: -3113.0
     y: 67.0
     z: 2880.0
@@ -2758,7 +2550,7 @@ Spawners:
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s345:
+  s335:
     x: -3307.0
     y: 65.0
     z: 1836.0
@@ -2766,7 +2558,7 @@ Spawners:
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s346:
+  s336:
     x: -2268.0
     y: 60.0
     z: 3626.0
@@ -2774,7 +2566,7 @@ Spawners:
     mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
-  s347:
+  s337:
     x: -3740.0
     y: 63.0
     z: 1578.0
@@ -2782,7 +2574,7 @@ Spawners:
     mob: ENDERMAN
     amount: 1
     maxamount: 2
-  s348:
+  s338:
     x: -2499.0
     y: 74.0
     z: 3363.0
@@ -2790,7 +2582,7 @@ Spawners:
     mob: TIMBERMAN
     amount: 1
     maxamount: 2
-  s349:
+  s339:
     x: -4022.0
     y: 65.0
     z: 2459.0
@@ -2798,7 +2590,7 @@ Spawners:
     mob: ORC_SHAMAN
     amount: 1
     maxamount: 2
-  s350:
+  s340:
     x: -1974.0
     y: 68.0
     z: 4627.0
@@ -2806,7 +2598,7 @@ Spawners:
     mob: VEX
     amount: 2
     maxamount: 4
-  s351:
+  s341:
     x: -1972.0
     y: 66.0
     z: 4604.0
@@ -2814,7 +2606,7 @@ Spawners:
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
-  s352:
+  s342:
     x: -1976.0
     y: 64.0
     z: 4512.0
@@ -2822,7 +2614,7 @@ Spawners:
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s353:
+  s343:
     x: -3112.0
     y: 66.0
     z: 2805.0
@@ -2830,7 +2622,7 @@ Spawners:
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
-  s354:
+  s344:
     x: -2509.0
     y: 143.0
     z: 1700.0
@@ -2838,7 +2630,7 @@ Spawners:
     mob: SPIDER_GHOST
     amount: 1
     maxamount: 2
-  s355:
+  s345:
     x: -1846.0
     y: 90.0
     z: 4698.0
@@ -2846,7 +2638,7 @@ Spawners:
     mob: VEX
     amount: 2
     maxamount: 4
-  s356:
+  s346:
     x: -3886.0
     y: 65.0
     z: 2149.0
@@ -2854,7 +2646,7 @@ Spawners:
     mob: ORC_JOCKEY
     amount: 1
     maxamount: 2
-  s357:
+  s347:
     x: -1848.0
     y: 91.0
     z: 4663.0
@@ -2862,7 +2654,7 @@ Spawners:
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s358:
+  s348:
     x: -2963.0
     y: 69.0
     z: 2462.0
@@ -2870,15 +2662,15 @@ Spawners:
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s359:
+  s349:
     x: -2592.0
     y: 91.0
     z: 3532.0
     world: world
-    mob: NINJA_ILLUSIONER
+    mob: FROZEN_ILLUSIONER
     amount: 1
     maxamount: 2
-  s360:
+  s350:
     x: -4030.0
     y: 65.0
     z: 2491.0
@@ -2886,7 +2678,7 @@ Spawners:
     mob: ORC_FIGHTER
     amount: 1
     maxamount: 2
-  s361:
+  s351:
     x: -2544.0
     y: 66.0
     z: 4786.0
@@ -2894,7 +2686,7 @@ Spawners:
     mob: VILLAGER_2
     amount: 1
     maxamount: 2
-  s362:
+  s352:
     x: -3754.0
     y: 59.0
     z: 1263.0
@@ -2902,7 +2694,7 @@ Spawners:
     mob: PILLAGER_MAGE
     amount: 1
     maxamount: 2
-  s363:
+  s353:
     x: -3770.0
     y: 63.0
     z: 2297.0
@@ -2910,7 +2702,7 @@ Spawners:
     mob: ORC_FIGHTER
     amount: 1
     maxamount: 2
-  s364:
+  s354:
     x: -2410.0
     y: 67.0
     z: 2717.0
@@ -2918,15 +2710,7 @@ Spawners:
     mob: VILLAGER_4
     amount: 1
     maxamount: 2
-  s365:
-    x: -2578.0
-    y: 78.0
-    z: 3489.0
-    world: world
-    mob: NINJA_SHURINKEN
-    amount: 1
-    maxamount: 2
-  s366:
+  s355:
     x: -1966.0
     y: 62.0
     z: 4448.0
@@ -2934,7 +2718,7 @@ Spawners:
     mob: VEX
     amount: 2
     maxamount: 4
-  s367:
+  s356:
     x: -2387.0
     y: 130.0
     z: 1945.0
@@ -2942,7 +2726,7 @@ Spawners:
     mob: SPIDER
     amount: 1
     maxamount: 2
-  s368:
+  s357:
     x: -2965.0
     y: 66.0
     z: 2649.0
@@ -2950,7 +2734,7 @@ Spawners:
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s369:
+  s358:
     x: -2393.0
     y: 121.0
     z: 1980.0
@@ -2958,7 +2742,7 @@ Spawners:
     mob: MUMMY
     amount: 1
     maxamount: 2
-  s370:
+  s359:
     x: -2973.0
     y: 66.0
     z: 2719.0
@@ -2966,7 +2750,7 @@ Spawners:
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s371:
+  s360:
     x: -2620.0
     y: 64.0
     z: 4944.0
@@ -2974,7 +2758,7 @@ Spawners:
     mob: SHEEP_BABY
     amount: 1
     maxamount: 2
-  s372:
+  s361:
     x: -2429.0
     y: 63.0
     z: 2840.0
@@ -2982,23 +2766,7 @@ Spawners:
     mob: VILLAGER_4
     amount: 1
     maxamount: 2
-  s373:
-    x: -1949.0
-    y: 54.0
-    z: 3685.0
-    world: world
-    mob: PIRATE_DROWNED
-    amount: 1
-    maxamount: 2
-  s374:
-    x: -1952.0
-    y: 67.0
-    z: 3790.0
-    world: world
-    mob: PIRATE_FIGHTER
-    amount: 1
-    maxamount: 2
-  s375:
+  s363:
     x: -1939.0
     y: 69.0
     z: 3783.0
@@ -3006,7 +2774,15 @@ Spawners:
     mob: PIRATE_SHOOTER
     amount: 1
     maxamount: 2
-  s376:
+  s364:
+    x: -1952.0
+    y: 67.0
+    z: 3790.0
+    world: world
+    mob: PIRATE_FIGHTER
+    amount: 1
+    maxamount: 2
+  s365:
     x: -3757.0
     y: 66.0
     z: 1701.0
@@ -3014,7 +2790,7 @@ Spawners:
     mob: PILLAGER_FIGHTER
     amount: 1
     maxamount: 2
-  s377:
+  s366:
     x: -3315.0
     y: 64.0
     z: 2072.0
@@ -3022,7 +2798,7 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s378:
+  s367:
     x: -2056.0
     y: 65.0
     z: 3613.0
@@ -3030,7 +2806,7 @@ Spawners:
     mob: PIRATE_SHOOTER
     amount: 1
     maxamount: 2
-  s379:
+  s368:
     x: -2645.0
     y: 67.0
     z: 4420.0
@@ -3038,7 +2814,7 @@ Spawners:
     mob: ZOMBIE_VILLAGER
     amount: 1
     maxamount: 2
-  s380:
+  s369:
     x: -2499.0
     y: 138.0
     z: 1774.0
@@ -3046,7 +2822,7 @@ Spawners:
     mob: MUMMY_GHOST
     amount: 1
     maxamount: 2
-  s381:
+  s370:
     x: -2647.0
     y: 66.0
     z: 4387.0
@@ -3054,7 +2830,7 @@ Spawners:
     mob: ZOMBIE
     amount: 1
     maxamount: 2
-  s382:
+  s371:
     x: -4015.0
     y: 64.0
     z: 2356.0
@@ -3062,7 +2838,7 @@ Spawners:
     mob: ORC_FIGHTER
     amount: 1
     maxamount: 2
-  s383:
+  s372:
     x: -1830.0
     y: 70.0
     z: 4534.0
@@ -3070,7 +2846,7 @@ Spawners:
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s384:
+  s373:
     x: -3318.0
     y: 65.0
     z: 1923.0
@@ -3078,7 +2854,15 @@ Spawners:
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s385:
+  s374:
+    x: 581.0
+    y: 29.0
+    z: -339.0
+    world: tutorial
+    mob: TUTORIAL_1
+    amount: 1
+    maxamount: 2
+  s375:
     x: -2171.0
     y: 61.0
     z: 4914.0
@@ -3086,7 +2870,7 @@ Spawners:
     mob: SKELETON_MONK
     amount: 1
     maxamount: 2
-  s386:
+  s376:
     x: -4009.0
     y: 64.0
     z: 2386.0
@@ -3094,7 +2878,7 @@ Spawners:
     mob: ORC_MAGE
     amount: 1
     maxamount: 2
-  s387:
+  s377:
     x: -2199.0
     y: 70.0
     z: 4139.0
@@ -3102,15 +2886,15 @@ Spawners:
     mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
-  s388:
+  s378:
     x: -2634.0
     y: 83.0
     z: 3534.0
     world: world
-    mob: NINJA_ROGUE
+    mob: FROZEN_ROGUE
     amount: 1
     maxamount: 2
-  s389:
+  s379:
     x: -3535.0
     y: 62.0
     z: 2247.0
@@ -3118,7 +2902,7 @@ Spawners:
     mob: MAGMA_CUBE
     amount: 1
     maxamount: 2
-  s390:
+  s380:
     x: -3738.0
     y: 63.0
     z: 1311.0
@@ -3126,7 +2910,7 @@ Spawners:
     mob: PILLAGER_SHAMAN
     amount: 1
     maxamount: 2
-  s391:
+  s381:
     x: -3319.0
     y: 65.0
     z: 1875.0
@@ -3134,7 +2918,7 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s392:
+  s382:
     x: -3104.0
     y: 65.0
     z: 2409.0
@@ -3142,7 +2926,7 @@ Spawners:
     mob: WITCH
     amount: 1
     maxamount: 2
-  s393:
+  s383:
     x: -4699.0
     y: 107.0
     z: 2277.0
@@ -3150,15 +2934,15 @@ Spawners:
     mob: VILLAGER_5
     amount: 1
     maxamount: 2
-  s394:
+  s384:
     x: -2527.0
     y: 77.0
     z: 3360.0
     world: world
-    mob: NINJA_ILLUSIONER
+    mob: FROZEN_ILLUSIONER
     amount: 1
     maxamount: 2
-  s395:
+  s385:
     x: -3525.0
     y: 62.0
     z: 2225.0
@@ -3166,7 +2950,7 @@ Spawners:
     mob: MAGMA_CUBE
     amount: 1
     maxamount: 2
-  s396:
+  s386:
     x: -2191.0
     y: 57.0
     z: 3777.0
@@ -3174,15 +2958,7 @@ Spawners:
     mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
-  s397:
-    x: -2318.0
-    y: 70.0
-    z: 3144.0
-    world: world
-    mob: NINJA_SHURINKEN
-    amount: 1
-    maxamount: 2
-  s398:
+  s387:
     x: -3557.0
     y: 62.0
     z: 2252.0
@@ -3190,7 +2966,7 @@ Spawners:
     mob: MAGMA_CUBE
     amount: 1
     maxamount: 2
-  s399:
+  s388:
     x: -3221.0
     y: 69.0
     z: 4608.0
@@ -3198,7 +2974,7 @@ Spawners:
     mob: SLIME
     amount: 1
     maxamount: 2
-  s400:
+  s389:
     x: -2191.0
     y: 57.0
     z: 3718.0
@@ -3206,7 +2982,7 @@ Spawners:
     mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
-  s401:
+  s390:
     x: -3805.0
     y: 64.0
     z: 2155.0
@@ -3214,7 +2990,7 @@ Spawners:
     mob: ORC_JOCKEY
     amount: 1
     maxamount: 2
-  s402:
+  s391:
     x: -3226.0
     y: 64.0
     z: 4566.0
@@ -3222,7 +2998,7 @@ Spawners:
     mob: SLIME
     amount: 1
     maxamount: 2
-  s403:
+  s392:
     x: -3583.0
     y: 63.0
     z: 1424.0
@@ -3230,7 +3006,7 @@ Spawners:
     mob: PILLAGER_SHAMAN
     amount: 1
     maxamount: 2
-  s404:
+  s393:
     x: -3227.0
     y: 64.0
     z: 4510.0
@@ -3238,7 +3014,7 @@ Spawners:
     mob: SLIME_STICKY
     amount: 1
     maxamount: 2
-  s405:
+  s394:
     x: -2989.0
     y: 68.0
     z: 2507.0
@@ -3246,15 +3022,7 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s406:
-    x: -2262.0
-    y: 61.0
-    z: 4913.0
-    world: world
-    mob: SKELETON_FIGHTER
-    amount: 1
-    maxamount: 2
-  s407:
+  s396:
     x: -4006.0
     y: 64.0
     z: 2443.0
@@ -3262,7 +3030,7 @@ Spawners:
     mob: ORC_GLADIATOR
     amount: 1
     maxamount: 2
-  s408:
+  s397:
     x: -2261.0
     y: 61.0
     z: 4851.0
@@ -3270,7 +3038,7 @@ Spawners:
     mob: SKELETON_FIGHTER
     amount: 1
     maxamount: 2
-  s409:
+  s398:
     x: -3991.0
     y: 63.0
     z: 1793.0
@@ -3278,7 +3046,7 @@ Spawners:
     mob: PILLAGER_MAGE
     amount: 1
     maxamount: 2
-  s410:
+  s399:
     x: -1965.0
     y: 63.0
     z: 4545.0
@@ -3286,7 +3054,7 @@ Spawners:
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s411:
+  s400:
     x: -2582.0
     y: 63.0
     z: 4908.0
@@ -3294,7 +3062,7 @@ Spawners:
     mob: COW_BABY
     amount: 1
     maxamount: 2
-  s412:
+  s401:
     x: -1966.0
     y: 64.0
     z: 4578.0
@@ -3302,7 +3070,7 @@ Spawners:
     mob: VEX
     amount: 2
     maxamount: 4
-  s413:
+  s402:
     x: -1864.0
     y: 73.0
     z: 4733.0
@@ -3310,7 +3078,7 @@ Spawners:
     mob: CREEPER
     amount: 1
     maxamount: 2
-  s414:
+  s403:
     x: -1957.0
     y: 64.0
     z: 4565.0
@@ -3318,7 +3086,7 @@ Spawners:
     mob: CREEPER
     amount: 1
     maxamount: 2
-  s415:
+  s404:
     x: -3939.0
     y: 63.0
     z: 1476.0
@@ -3326,7 +3094,7 @@ Spawners:
     mob: ENDERMAN
     amount: 1
     maxamount: 2
-  s416:
+  s405:
     x: -3215.0
     y: 66.0
     z: 2086.0
@@ -3334,7 +3102,7 @@ Spawners:
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s417:
+  s406:
     x: -2419.0
     y: 138.0
     z: 1591.0
@@ -3342,7 +3110,7 @@ Spawners:
     mob: DESERT_SKELETON_CAVALRY
     amount: 1
     maxamount: 2
-  s418:
+  s407:
     x: -3210.0
     y: 67.0
     z: 2161.0
@@ -3350,15 +3118,15 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s419:
+  s408:
     x: -2251.0
     y: 79.0
     z: 3295.0
     world: world
-    mob: NINJA_ARCHER
+    mob: FROZEN_ARCHER
     amount: 1
     maxamount: 2
-  s420:
+  s409:
     x: -2978.0
     y: 66.0
     z: 2264.0
@@ -3366,7 +3134,7 @@ Spawners:
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s421:
+  s410:
     x: -3218.0
     y: 66.0
     z: 2802.0
@@ -3374,7 +3142,7 @@ Spawners:
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s422:
+  s411:
     x: -2527.0
     y: 142.0
     z: 1635.0
@@ -3382,7 +3150,7 @@ Spawners:
     mob: DESERT_SKELETON_CAVALRY
     amount: 1
     maxamount: 2
-  s423:
+  s412:
     x: -3084.0
     y: 66.0
     z: 2184.0
@@ -3390,7 +3158,7 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s424:
+  s413:
     x: -3051.0
     y: 73.0
     z: 4871.0
@@ -3398,7 +3166,7 @@ Spawners:
     mob: VILLAGER_1
     amount: 1
     maxamount: 2
-  s425:
+  s414:
     x: -2066.0
     y: 5.0
     z: 3114.0
@@ -3406,7 +3174,7 @@ Spawners:
     mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
-  s426:
+  s415:
     x: -3006.0
     y: 69.0
     z: 2953.0
@@ -3414,7 +3182,7 @@ Spawners:
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s427:
+  s416:
     x: -2261.0
     y: 61.0
     z: 4986.0
@@ -3422,7 +3190,7 @@ Spawners:
     mob: SKELETON_MONK
     amount: 1
     maxamount: 2
-  s428:
+  s417:
     x: -2999.0
     y: 69.0
     z: 2884.0
@@ -3430,7 +3198,7 @@ Spawners:
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
-  s429:
+  s418:
     x: -2484.0
     y: 61.0
     z: 4880.0
@@ -3438,7 +3206,7 @@ Spawners:
     mob: SKELETON_FIGHTER
     amount: 1
     maxamount: 2
-  s430:
+  s419:
     x: -2617.0
     y: 79.0
     z: 3558.0
@@ -3446,7 +3214,7 @@ Spawners:
     mob: TIMBERMAN
     amount: 1
     maxamount: 2
-  s431:
+  s420:
     x: -2525.0
     y: 128.0
     z: 1800.0
@@ -3454,15 +3222,15 @@ Spawners:
     mob: SPIDER
     amount: 1
     maxamount: 2
-  s432:
+  s421:
     x: -2609.0
     y: 82.0
     z: 3529.0
     world: world
-    mob: NINJA_ROGUE
+    mob: FROZEN_ROGUE
     amount: 1
     maxamount: 2
-  s433:
+  s422:
     x: -3212.0
     y: 64.0
     z: 2266.0
@@ -3470,7 +3238,7 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s434:
+  s423:
     x: -3088.0
     y: 65.0
     z: 2571.0
@@ -3478,7 +3246,7 @@ Spawners:
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
-  s435:
+  s424:
     x: -3202.0
     y: 68.0
     z: 2319.0
@@ -3486,7 +3254,7 @@ Spawners:
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s436:
+  s425:
     x: -2387.0
     y: 68.0
     z: 2636.0
@@ -3494,7 +3262,7 @@ Spawners:
     mob: VILLAGER_4
     amount: 1
     maxamount: 2
-  s437:
+  s426:
     x: -2977.0
     y: 72.0
     z: 2790.0
@@ -3502,7 +3270,7 @@ Spawners:
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s438:
+  s427:
     x: -2395.0
     y: 67.0
     z: 2676.0
@@ -3510,7 +3278,7 @@ Spawners:
     mob: VILLAGER_4
     amount: 1
     maxamount: 2
-  s439:
+  s428:
     x: -1930.0
     y: 59.0
     z: 3640.0
@@ -3518,7 +3286,15 @@ Spawners:
     mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
-  s440:
+  s429:
+    x: 374.0
+    y: 3.0
+    z: -1005.0
+    world: tutorial
+    mob: TUTORIAL_BOSS
+    amount: 1
+    maxamount: 1
+  s430:
     x: -1850.0
     y: 70.0
     z: 4550.0
@@ -3526,7 +3302,7 @@ Spawners:
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
-  s441:
+  s431:
     x: -3035.0
     y: 74.0
     z: 4852.0
@@ -3534,7 +3310,7 @@ Spawners:
     mob: VILLAGER_1
     amount: 1
     maxamount: 2
-  s442:
+  s432:
     x: -2291.0
     y: 61.0
     z: 4746.0
@@ -3542,7 +3318,7 @@ Spawners:
     mob: SKELETON_ROGUE
     amount: 1
     maxamount: 2
-  s443:
+  s433:
     x: -3923.0
     y: 65.0
     z: 1529.0
@@ -3550,7 +3326,15 @@ Spawners:
     mob: ENDERMAN
     amount: 1
     maxamount: 2
-  s444:
+  s434:
+    x: -3985.0
+    y: 35.0
+    z: 2220.0
+    world: world
+    mob: ORC_JOCKEY
+    amount: 1
+    maxamount: 2
+  s435:
     x: -3930.0
     y: 67.0
     z: 1464.0
@@ -3558,7 +3342,7 @@ Spawners:
     mob: PHANTOM
     amount: 1
     maxamount: 2
-  s445:
+  s436:
     x: -3193.0
     y: 65.0
     z: 1745.0
@@ -3566,7 +3350,15 @@ Spawners:
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s446:
+  s437:
+    x: -3989.0
+    y: 24.0
+    z: 2202.0
+    world: world
+    mob: ORC_JOCKEY
+    amount: 1
+    maxamount: 2
+  s438:
     x: -1930.0
     y: 65.0
     z: 3802.0
@@ -3574,7 +3366,7 @@ Spawners:
     mob: PIRATE_FIGHTER
     amount: 1
     maxamount: 2
-  s447:
+  s439:
     x: -3581.0
     y: 63.0
     z: 1495.0
@@ -3582,7 +3374,7 @@ Spawners:
     mob: PILLAGER_MAGE
     amount: 1
     maxamount: 2
-  s448:
+  s440:
     x: -2987.0
     y: 66.0
     z: 2570.0
@@ -3590,7 +3382,7 @@ Spawners:
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s449:
+  s441:
     x: -2940.0
     y: 72.0
     z: 4805.0
@@ -3598,7 +3390,7 @@ Spawners:
     mob: VILLAGER_1
     amount: 1
     maxamount: 2
-  s450:
+  s442:
     x: -4807.0
     y: 104.0
     z: 2331.0
@@ -3606,7 +3398,7 @@ Spawners:
     mob: VILLAGER_5
     amount: 1
     maxamount: 2
-  s451:
+  s443:
     x: -3543.0
     y: 62.0
     z: 2212.0
@@ -3614,12 +3406,76 @@ Spawners:
     mob: MAGMA_CUBE
     amount: 1
     maxamount: 2
-  s452:
+  s444:
     x: -2148.0
     y: 61.0
     z: 4854.0
     world: world
     mob: SKELETON_MAGE
+    amount: 1
+    maxamount: 2
+  s445:
+    x: -3758.0
+    y: 69.0
+    z: 1551.0
+    world: world
+    mob: PHANTOM
+    amount: 1
+    maxamount: 2
+  s446:
+    x: -3758.0
+    y: 69.0
+    z: 1551.0
+    world: world
+    mob: PHANTOM
+    amount: 1
+    maxamount: 2
+  s447:
+    x: -4807.0
+    y: 104.0
+    z: 2331.0
+    world: world
+    mob: VILLAGER_5
+    amount: 1
+    maxamount: 2
+  s448:
+    x: -3543.0
+    y: 62.0
+    z: 2212.0
+    world: world
+    mob: MAGMA_CUBE
+    amount: 1
+    maxamount: 2
+  s449:
+    x: -2148.0
+    y: 61.0
+    z: 4854.0
+    world: world
+    mob: SKELETON_MAGE
+    amount: 1
+    maxamount: 2
+  s450:
+    x: -3758.0
+    y: 69.0
+    z: 1551.0
+    world: world
+    mob: PHANTOM
+    amount: 1
+    maxamount: 2
+  s451:
+    x: -3758.0
+    y: 69.0
+    z: 1551.0
+    world: world
+    mob: PHANTOM
+    amount: 1
+    maxamount: 2
+  s452:
+    x: -3758.0
+    y: 69.0
+    z: 1551.0
+    world: world
+    mob: PHANTOM
     amount: 1
     maxamount: 2
   s453:
@@ -3628,5 +3484,149 @@ Spawners:
     z: 1551.0
     world: world
     mob: PHANTOM
+    amount: 1
+    maxamount: 2
+  s131:
+    x: -2481.0
+    y: 65.0
+    z: 3151.0
+    world: world
+    mob: TIMBERMAN
+    amount: 1
+    maxamount: 2
+  s196:
+    x: -2905.0
+    y: 67.0
+    z: 4429.0
+    world: world
+    mob: ZOMBIE_TANK
+    amount: 1
+    maxamount: 2
+  s207:
+    x: -4207.0
+    y: 63.0
+    z: 1595.0
+    world: world
+    mob: ENDERMAN
+    amount: 1
+    maxamount: 2
+  s208:
+    x: -3267.0
+    y: 65.0
+    z: 2076.0
+    world: world
+    mob: GOBLIN_SHAMAN
+    amount: 1
+    maxamount: 2
+  s213:
+    x: -2908.0
+    y: 70.0
+    z: 2358.0
+    world: world
+    mob: GOBLIN_MAGE
+    amount: 1
+    maxamount: 2
+  s214:
+    x: -2879.0
+    y: 66.0
+    z: 5109.0
+    world: world
+    mob: VILLAGER_HOBBIT
+    amount: 1
+    maxamount: 2
+  s215:
+    x: -2419.0
+    y: 61.0
+    z: 4826.0
+    world: world
+    mob: SKELETON_MONK
+    amount: 1
+    maxamount: 2
+  s216:
+    x: -3279.0
+    y: 63.0
+    z: 2236.0
+    world: world
+    mob: WITCH
+    amount: 1
+    maxamount: 2
+  s161:
+    x: -2320.0
+    y: 76.0
+    z: 3253.0
+    world: world
+    mob: TIMBERMAN
+    amount: 1
+    maxamount: 2
+  s280:
+    x: -2572.0
+    y: 108.0
+    z: 1887.0
+    world: world
+    mob: MUMMY
+    amount: 1
+    maxamount: 2
+  s328:
+    x: -1982.0
+    y: 69.0
+    z: 4675.0
+    world: world
+    mob: CREEPER
+    amount: 1
+    maxamount: 2
+  s362:
+    x: -1949.0
+    y: 54.0
+    z: 3685.0
+    world: world
+    mob: PIRATE_DROWNED
+    amount: 1
+    maxamount: 2
+  s395:
+    x: -2262.0
+    y: 61.0
+    z: 4913.0
+    world: world
+    mob: SKELETON_FIGHTER
+    amount: 1
+    maxamount: 2
+  s18:
+    x: -2375.0
+    y: 67.0
+    z: 2608.0
+    world: world
+    mob: VILLAGER_4
+    amount: 1
+    maxamount: 2
+  s46:
+    x: -4820.0
+    y: 107.0
+    z: 2190.0
+    world: world
+    mob: VILLAGER_5
+    amount: 1
+    maxamount: 2
+  s106:
+    x: -2358.0
+    y: 61.0
+    z: 4876.0
+    world: world
+    mob: SKELETON_MONK
+    amount: 1
+    maxamount: 2
+  s243:
+    x: -3229.0
+    y: 65.0
+    z: 2373.0
+    world: world
+    mob: GOBLIN_FIGHTER
+    amount: 1
+    maxamount: 2
+  s256:
+    x: -2060.0
+    y: 4.0
+    z: 3133.0
+    world: world
+    mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2

@@ -32,6 +32,7 @@ public class ConfigManager {
 
     private static File DATA_FOLDER;
     private static FileConfiguration spawnersConfig;
+    private static FileConfiguration dungeonSpawnersConfig;
     private static FileConfiguration characterSelectionConfig;
     private static FileConfiguration townsConfig;
     private static FileConfiguration dungeonsConfig;
@@ -49,6 +50,7 @@ public class ConfigManager {
     public static void createConfigALL() {
         createDatabaseConfig();
         createSpawners();
+        createDungeonSpawners();
         createCharacterSelectionConfig();
         createTowns();
         createDungeonGates();
@@ -59,6 +61,7 @@ public class ConfigManager {
     public static void loadConfigALL() {
         loadDatabaseConfig();
         loadSpawners();
+        loadDungeonSpawners();
         loadCharacterSelectionConfig();
         loadTowns();
         loadDungeonGates();
@@ -68,6 +71,7 @@ public class ConfigManager {
 
     public static void writeConfigALL() {
         writeSpawners();
+        writeDungeonSpawners();
     }
 
     private static void createDatabaseConfig() {
@@ -137,8 +141,13 @@ public class ConfigManager {
     private static void writeSpawners() {
         int i = 1;
         List<Spawner> spawnerList = SpawnerManager.getSpawners();
+        int nonIncludedCount = 0;
         for (Spawner spawner : spawnerList) {
             Location location = spawner.getLocation();
+            if (location.getWorld().getName().equals("dungeons")) { //only dungeon spawners are seperate
+                nonIncludedCount++;
+                continue;
+            }
             spawnersConfig.set("Spawners.s" + i + ".x", location.getX());
             spawnersConfig.set("Spawners.s" + i + ".y", location.getY());
             spawnersConfig.set("Spawners.s" + i + ".z", location.getZ());
@@ -148,9 +157,71 @@ public class ConfigManager {
             spawnersConfig.set("Spawners.s" + i + ".maxamount", spawner.getMaxAmount());
             i++;
         }
-        spawnersConfig.set("SpawnerNumber", spawnerList.size());
+        spawnersConfig.set("SpawnerNumber", spawnerList.size() - nonIncludedCount);
         try {
             spawnersConfig.save(DATA_FOLDER + "/spawners.yml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void createDungeonSpawners() {
+        File customConfigFile = new File(DATA_FOLDER, "dungeonSpawners.yml");
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+            GuardiansOfAdelia.getInstance().saveResource("dungeonSpawners.yml", false);
+        }
+
+        dungeonSpawnersConfig = new YamlConfiguration();
+        try {
+            dungeonSpawnersConfig.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadDungeonSpawners() {
+        int spawnerNumber = dungeonSpawnersConfig.getInt("SpawnerNumber");
+        for (int i = 1; i <= spawnerNumber; i++) {
+            String worldString = dungeonSpawnersConfig.getString("Spawners.s" + i + ".world");
+            if (worldString == null) continue;
+
+            World world = Bukkit.getWorld(worldString);
+            double x = dungeonSpawnersConfig.getDouble("Spawners.s" + i + ".x");
+            double y = dungeonSpawnersConfig.getDouble("Spawners.s" + i + ".y");
+            double z = dungeonSpawnersConfig.getDouble("Spawners.s" + i + ".z");
+            Location location = new Location(world, x, y, z);
+            String adeliaEntityString = dungeonSpawnersConfig.getString("Spawners.s" + i + ".mob");
+            AdeliaEntity adeliaEntity = AdeliaEntity.valueOf(adeliaEntityString);
+            int amount = dungeonSpawnersConfig.getInt("Spawners.s" + i + ".amount");
+            int maxamount = dungeonSpawnersConfig.getInt("Spawners.s" + i + ".maxamount");
+            Spawner spawner = new Spawner(location, adeliaEntity, amount, maxamount);
+            SpawnerManager.addSpawner(spawner);
+        }
+    }
+
+    private static void writeDungeonSpawners() {
+        int i = 1;
+        List<Spawner> spawnerList = SpawnerManager.getSpawners();
+        int nonIncludedCount = 0;
+        for (Spawner spawner : spawnerList) {
+            Location location = spawner.getLocation();
+            if (!location.getWorld().getName().equals("dungeons")) {
+                nonIncludedCount++;
+                continue;
+            }
+            dungeonSpawnersConfig.set("Spawners.s" + i + ".x", location.getX());
+            dungeonSpawnersConfig.set("Spawners.s" + i + ".y", location.getY());
+            dungeonSpawnersConfig.set("Spawners.s" + i + ".z", location.getZ());
+            dungeonSpawnersConfig.set("Spawners.s" + i + ".world", Objects.requireNonNull(location.getWorld()).getName());
+            dungeonSpawnersConfig.set("Spawners.s" + i + ".mob", spawner.getAdeliaEntity().name());
+            dungeonSpawnersConfig.set("Spawners.s" + i + ".amount", spawner.getAmountPerSpawn());
+            dungeonSpawnersConfig.set("Spawners.s" + i + ".maxamount", spawner.getMaxAmount());
+            i++;
+        }
+        dungeonSpawnersConfig.set("SpawnerNumber", spawnerList.size() - nonIncludedCount);
+        try {
+            dungeonSpawnersConfig.save(DATA_FOLDER + "/dungeonSpawners.yml");
         } catch (IOException e) {
             e.printStackTrace();
         }
