@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.socket;
 
+import com.corundumstudio.socketio.SocketIOClient;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
@@ -13,37 +14,31 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class RequestHandler {
 
-    private String responseMessage = "noResponse";
+    private final static HashMap<String, WebProduct> productIdToWebProduct = new HashMap<>();
 
-    public String onPurchase(String inputLine) throws ParseException {
-        GuardiansOfAdelia.getInstance().getLogger().info("Request" + inputLine);
+    public static boolean onPurchase(SocketIOClient socketIOClient, WebPurchase webPurchase) {
+        String responseMessage = "noResponse";
 
-        JSONParser parser = new JSONParser();
-        JSONObject json = (JSONObject) parser.parse(inputLine);
+        String minecraftUsername = webPurchase.getMinecraftUsername();
+        String productId = webPurchase.getProductId();
+        int payment = webPurchase.getPayment();
 
-        String minecraftUsername = (String) json.get("minecraftUsername");
-        int productId = Math.toIntExact((Long) json.get("productId"));
-        int credits = Math.toIntExact((Long) json.get("credits"));
+        if (!productIdToWebProduct.containsKey(productId)) {
+            socketIOClient.sendEvent("purchaseFail", webPurchase);
+            return false;
+        }
 
         GuardiansOfAdelia.getInstance().getLogger().info("minecraftUsername: " + minecraftUsername);
         GuardiansOfAdelia.getInstance().getLogger().info("productId: " + productId);
-        GuardiansOfAdelia.getInstance().getLogger().info("credits: " + credits);
+        GuardiansOfAdelia.getInstance().getLogger().info("payment: " + payment);
 
         ItemStack weapon = Weapons.getWeapon(RPGClass.WARRIOR, 1, ItemTier.COMMON, "", 1, 1, 1);
-
-        boolean success = false;
 
         Player playerExact = Bukkit.getPlayerExact(minecraftUsername);
         if (playerExact != null) {
@@ -62,58 +57,47 @@ public class RequestHandler {
             UUID uuid = playerExact.getUniqueId();
             if (GuardianDataManager.hasGuardianData(uuid)) {
                 GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-                success = guardianData.addToPremiumStorage(weapon);
-                if (!success) this.responseMessage = "Your premium-storage is full!";
+                boolean success = guardianData.addToPremiumStorage(weapon);
+                if (!success) responseMessage = "Your premium-storage is full!";
             }
-        } else {
+        } else { //player is offline
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(minecraftUsername);
             UUID uuid = offlinePlayer.getUniqueId();
-            success = addItemToPremiumStorage(uuid, weapon);
-        }
 
-        JSONObject jsonResponse = new JSONObject();
-        if (!success) {
-            jsonResponse.put("error", this.responseMessage);
-        } else {
-            this.responseMessage = "Added " + weapon.getItemMeta().getDisplayName() + " to your premium-inventory!";
-            jsonResponse.put("success", this.responseMessage);
-        }
-
-        return jsonResponse.toJSONString();
-    }
-
-    private boolean addItemToPremiumStorage(UUID uuid, ItemStack itemStack) {
-        if (!uuidExists(uuid)) {
-            this.responseMessage = "You must be logged in to game server at least once!";
-            return false;
-        }
-
-        try {
-            ItemStack[] premiumStorage = DatabaseQueries.getPremiumStorage(uuid);
-
-            List<ItemStack> list = new ArrayList<>();
-
-            if (premiumStorage != null) list = new ArrayList<>(Arrays.asList(premiumStorage));
-
-            if (list.size() >= 54) {
-                this.responseMessage = "Your premium-storage is full!";
+            if (!uuidExists(uuid)) {
+                responseMessage = "You must be logged in to game server at least once!";
                 return false;
             }
 
-            list.add(itemStack);
-            ItemStack[] newPremiumStorage = list.toArray(new ItemStack[0]);
-            DatabaseQueries.setPremiumStorage(uuid, newPremiumStorage);
+            try {
+                ItemStack[] premiumStorage = DatabaseQueries.getPremiumStorage(uuid);
 
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
+                List<ItemStack> list = new ArrayList<>();
+
+                if (premiumStorage != null) list = new ArrayList<>(Arrays.asList(premiumStorage));
+
+                if (list.size() >= 54) {
+                    responseMessage = "Your premium-storage is full!";
+                    return false;
+                }
+
+                list.add(weapon);
+                ItemStack[] newPremiumStorage = list.toArray(new ItemStack[0]);
+                DatabaseQueries.setPremiumStorage(uuid, newPremiumStorage);
+
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            responseMessage = "A database error occurred.";
+            return false;
         }
 
-        this.responseMessage = "A database error occurred.";
-        return false;
+        return true;
     }
 
-    private boolean uuidExists(UUID uuid) {
+    private static boolean uuidExists(UUID uuid) {
         return DatabaseQueries.uuidExists(uuid);
     }
 }

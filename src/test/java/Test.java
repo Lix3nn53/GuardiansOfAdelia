@@ -1,5 +1,5 @@
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import io.github.lix3nn53.guardiansofadelia.socket.MySocketServer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,15 +11,14 @@ public class Test {
 
     private static final double MULTIPLIER = 1.05;
 
-    public static void main(String[] args) {
-        for (GearLevel gearLevelOfItem : GearLevel.values()) {
-            int multiplier = gearLevelOfItem.getWeaponAndPassiveNo();
+    public static void main(String[] args) throws InterruptedException {
+        MySocketServer server = new MySocketServer("localhost", 9092);
 
-            double value = multiplier / 2.0;
+        server.start();
 
-            int i = (int) ((multiplier * multiplier) / value + 0.5);
-            System.out.println(i);
-        }
+        Thread.sleep(Integer.MAX_VALUE);
+
+        server.stop();
         /*int value = 1000;
         int z = (int) ((value * MULTIPLIER) + 0.5);
         System.out.println(z);

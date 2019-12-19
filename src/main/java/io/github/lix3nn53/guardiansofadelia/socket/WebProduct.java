@@ -4,40 +4,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class WebProduct {
 
-    private int productId;
-    private int credits;
-    private ItemStack itemStack;
+    private final int cost;
+    private final ItemStack itemStack;
 
-    public WebProduct() {
-    }
-
-    public WebProduct(int productId, int credits, ItemStack itemStack) {
-        this.productId = productId;
-        this.credits = credits;
-        this.itemStack = itemStack;
-    }
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public int getCredits() {
-        return credits;
-    }
-
-    public void setCredits(int credits) {
-        this.credits = credits;
-    }
-
-    public ItemStack getItemStack() {
-        return itemStack;
-    }
-
-    public void setItemStack(ItemStack itemStack) {
+    public WebProduct(int cost, ItemStack itemStack) {
+        this.cost = cost;
         this.itemStack = itemStack;
     }
 }
