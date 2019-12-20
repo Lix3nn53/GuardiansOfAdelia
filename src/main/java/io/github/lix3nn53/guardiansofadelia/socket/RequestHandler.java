@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.socket;
 
-import com.corundumstudio.socketio.SocketIOClient;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
@@ -15,30 +14,35 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.SQLException;
 import java.util.*;
 
 public class RequestHandler {
 
-    private final static HashMap<String, WebProduct> productIdToWebProduct = new HashMap<>();
+    private final static HashMap<Integer, WebProduct> productIdToWebProduct = new HashMap<>();
 
-    public static boolean onPurchase(SocketIOClient socketIOClient, WebPurchase webPurchase) {
-        String responseMessage = "noResponse";
+    static {
+        //List of items
+        ItemStack weapon = Weapons.getWeapon(RPGClass.WARRIOR, 1, ItemTier.COMMON, "", 1, 1, 1);
+        productIdToWebProduct.put(1, new WebProduct(1, weapon));
+    }
 
+    public static WebResponse onPurchase(WebPurchase webPurchase) {
         String minecraftUsername = webPurchase.getMinecraftUsername();
-        String productId = webPurchase.getProductId();
+        int productId = webPurchase.getProductId();
         int payment = webPurchase.getPayment();
 
         if (!productIdToWebProduct.containsKey(productId)) {
-            socketIOClient.sendEvent("purchaseFail", webPurchase);
-            return false;
+            return new WebResponse(false, "No such product1", minecraftUsername, productId);
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info("minecraftUsername: " + minecraftUsername);
-        GuardiansOfAdelia.getInstance().getLogger().info("productId: " + productId);
-        GuardiansOfAdelia.getInstance().getLogger().info("payment: " + payment);
+        WebProduct webProduct = productIdToWebProduct.get(productId);
+        int cost = webProduct.getCost();
 
-        ItemStack weapon = Weapons.getWeapon(RPGClass.WARRIOR, 1, ItemTier.COMMON, "", 1, 1, 1);
+        if (cost != payment) {
+            return new WebResponse(false, "No such product2", minecraftUsername, productId);
+        }
+
+        ItemStack itemStack = webProduct.getItemStack();
 
         Player playerExact = Bukkit.getPlayerExact(minecraftUsername);
         if (playerExact != null) {
@@ -57,16 +61,17 @@ public class RequestHandler {
             UUID uuid = playerExact.getUniqueId();
             if (GuardianDataManager.hasGuardianData(uuid)) {
                 GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-                boolean success = guardianData.addToPremiumStorage(weapon);
-                if (!success) responseMessage = "Your premium-storage is full!";
+                boolean success = guardianData.addToPremiumStorage(itemStack);
+                if (!success) {
+                    return new WebResponse(false, "Your premium-storage is full!", minecraftUsername, productId);
+                }
             }
         } else { //player is offline
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(minecraftUsername);
             UUID uuid = offlinePlayer.getUniqueId();
 
             if (!uuidExists(uuid)) {
-                responseMessage = "You must be logged in to game server at least once!";
-                return false;
+                return new WebResponse(false, "You must be logged in to game server at least once!", minecraftUsername, productId);
             }
 
             try {
@@ -77,24 +82,21 @@ public class RequestHandler {
                 if (premiumStorage != null) list = new ArrayList<>(Arrays.asList(premiumStorage));
 
                 if (list.size() >= 54) {
-                    responseMessage = "Your premium-storage is full!";
-                    return false;
+                    return new WebResponse(false, "Your premium-storage is full!", minecraftUsername, productId);
                 }
 
-                list.add(weapon);
+                list.add(itemStack);
                 ItemStack[] newPremiumStorage = list.toArray(new ItemStack[0]);
                 DatabaseQueries.setPremiumStorage(uuid, newPremiumStorage);
-
-                return true;
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-            }
 
-            responseMessage = "A database error occurred.";
-            return false;
+                return new WebResponse(false, "A database error occurred.", minecraftUsername, productId);
+            }
         }
 
-        return true;
+        GuardiansOfAdelia.getInstance().getLogger().info("Web purchase: " + minecraftUsername + " bought " + itemStack.getItemMeta().getDisplayName() + " for " + payment + " credits!");
+        return new WebResponse(true, "Item purchased successfully!", minecraftUsername, productId);
     }
 
     private static boolean uuidExists(UUID uuid) {

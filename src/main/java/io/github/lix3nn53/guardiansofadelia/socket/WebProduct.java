@@ -11,4 +11,12 @@ public class WebProduct {
         this.cost = cost;
         this.itemStack = itemStack;
     }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public ItemStack getItemStack() {
+        return itemStack;
+    }
 }

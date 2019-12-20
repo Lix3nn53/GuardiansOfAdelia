@@ -17,7 +17,10 @@ public class MySocketServer {
         this.server.addEventListener("purchase", WebPurchase.class, (socketIOClient, webPurchase, ackRequest) -> {
             System.out.println("webPurchase: " + webPurchase.toString());
 
-            socketIOClient.sendEvent("purchaseSuccess", webPurchase);
+            WebResponse webResponse = RequestHandler.onPurchase(webPurchase);
+            System.out.println("webResponse: " + webResponse.toString());
+
+            socketIOClient.sendEvent("purchaseResult", webResponse);
         });
     }
 

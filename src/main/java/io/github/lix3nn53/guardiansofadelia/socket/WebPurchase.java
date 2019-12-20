@@ -2,17 +2,20 @@ package io.github.lix3nn53.guardiansofadelia.socket;
 
 public class WebPurchase {
 
-    private final String productId;
-    private final int payment;
-    private final String minecraftUsername;
+    private int productId;
+    private int payment;
+    private String minecraftUsername;
 
-    public WebPurchase(String productId, int payment, String minecraftUsername) {
+    public WebPurchase() {
+    }
+
+    public WebPurchase(int productId, int payment, String minecraftUsername) {
         this.productId = productId;
         this.payment = payment;
         this.minecraftUsername = minecraftUsername;
     }
 
-    public String getProductId() {
+    public int getProductId() {
         return productId;
     }
 
@@ -22,5 +25,27 @@ public class WebPurchase {
 
     public String getMinecraftUsername() {
         return minecraftUsername;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public void setPayment(int payment) {
+        this.payment = payment;
+    }
+
+    public void setMinecraftUsername(String minecraftUsername) {
+        this.minecraftUsername = minecraftUsername;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("WebPurchase{");
+        sb.append("productId=").append(productId);
+        sb.append(", payment=").append(payment);
+        sb.append(", minecraftUsername='").append(minecraftUsername).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
