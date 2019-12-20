@@ -19,20 +19,20 @@ public class WebPurchase {
         return productId;
     }
 
-    public int getPayment() {
-        return payment;
-    }
-
-    public String getMinecraftUsername() {
-        return minecraftUsername;
-    }
-
     public void setProductId(int productId) {
         this.productId = productId;
     }
 
+    public int getPayment() {
+        return payment;
+    }
+
     public void setPayment(int payment) {
         this.payment = payment;
+    }
+
+    public String getMinecraftUsername() {
+        return minecraftUsername;
     }
 
     public void setMinecraftUsername(String minecraftUsername) {

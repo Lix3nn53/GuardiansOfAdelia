@@ -695,6 +695,11 @@ public class MyInventoryClickEvent implements Listener {
                 clickedInventory.setItem(slot, new ItemStack(Material.AIR));
 
             }
+        } else if (title.equals("Premium Storage")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                InventoryUtils.giveItemToPlayer(player, current);
+                clickedInventory.setItem(slot, new ItemStack(Material.AIR));
+            }
         } else if (title.contains("Join dungeon: ")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 if (currentType.equals(Material.LIME_WOOL)) {

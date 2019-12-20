@@ -1,12 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.socket;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.socket.products.PetSkin;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -22,8 +20,19 @@ public class RequestHandler {
 
     static {
         //List of items
-        ItemStack weapon = Weapons.getWeapon(RPGClass.WARRIOR, 1, ItemTier.COMMON, "", 1, 1, 1);
-        productIdToWebProduct.put(1, new WebProduct(1, weapon));
+        ItemStack petSkin = PetSkin.ICE_CREAM.getItemStack();
+        ItemStack petSkin1 = PetSkin.FOX_RED.getItemStack();
+        ItemStack petSkin2 = PetSkin.FOX_SNOW.getItemStack();
+        ItemStack petSkin3 = PetSkin.VEX.getItemStack();
+        ItemStack petSkin4 = PetSkin.MINI_DRAGON.getItemStack();
+        ItemStack petSkin5 = PetSkin.BEE.getItemStack();
+
+        productIdToWebProduct.put(1, new WebProduct(1, petSkin));
+        productIdToWebProduct.put(2, new WebProduct(1, petSkin1));
+        productIdToWebProduct.put(3, new WebProduct(1, petSkin2));
+        productIdToWebProduct.put(4, new WebProduct(1, petSkin3));
+        productIdToWebProduct.put(5, new WebProduct(1, petSkin4));
+        productIdToWebProduct.put(6, new WebProduct(1, petSkin5));
     }
 
     public static WebResponse onPurchase(WebPurchase webPurchase) {

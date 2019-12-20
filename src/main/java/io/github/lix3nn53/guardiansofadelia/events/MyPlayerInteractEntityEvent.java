@@ -1,11 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
@@ -90,6 +93,46 @@ public class MyPlayerInteractEntityEvent implements Listener {
                             ParticleUtil.play(livingEntity.getLocation().add(0, 1.2, 0), Particle.HEART, ArrangementParticle.CIRCLE, 1.2, 6, Direction.XZ, 0, 0, 0, 0, null);
                         } else {
                             player.sendMessage(ChatColor.RED + "Pet health is already full");
+                        }
+                    }
+                } else if (itemInMainHand.getType().equals(Material.STONE_HOE)) { //right click with pet skin
+                    EntityType type = rightClicked.getType();
+                    if (!type.equals(EntityType.WOLF)) return;
+
+                    if (!PersistentDataContainerUtil.hasString(itemInMainHand, "petSkinCode")) return;
+
+                    LivingEntity wolf = (LivingEntity) rightClicked;
+                    if (!PetManager.isPet(wolf)) return;
+
+                    Player owner = PetManager.getOwner(wolf);
+                    if (!player.equals(owner)) return;
+
+                    UUID uuid = player.getUniqueId();
+                    if (GuardianDataManager.hasGuardianData(uuid)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                        if (guardianData.hasActiveCharacter()) {
+                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                            EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
+
+                            if (eggSlot.isEmpty()) return;
+
+                            ItemStack itemOnSlot = eggSlot.getItemOnSlot();
+
+                            String petSkinCode = PersistentDataContainerUtil.getString(itemInMainHand, "petSkinCode");
+                            PersistentDataContainerUtil.putString("petCode", petSkinCode, itemOnSlot);
+
+                            //change values of itemOnSlot
+                            ItemMeta onSlotItemMeta = itemOnSlot.getItemMeta();
+                            onSlotItemMeta.setDisplayName(Companion.valueOf(petSkinCode).getName());
+                            if (itemMeta.hasCustomModelData())
+                                onSlotItemMeta.setCustomModelData(itemMeta.getCustomModelData());
+                            itemOnSlot.setItemMeta(onSlotItemMeta);
+
+                            PetManager.respawnPet(owner);
+
+                            int amount = itemInMainHand.getAmount();
+                            itemInMainHand.setAmount(amount - 1);
                         }
                     }
                 } else if (rightClicked.isCustomNameVisible()) {

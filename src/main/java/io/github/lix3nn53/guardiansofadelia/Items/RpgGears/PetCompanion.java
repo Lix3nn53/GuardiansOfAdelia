@@ -21,7 +21,7 @@ public class PetCompanion implements RPGGear {
     private ItemStack itemStack;
 
     public PetCompanion(Companion companion, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int petBaseDamage, int petBaseHealth) {
-        String name = tier.getTierColor() + companion.getName();
+        String name = companion.getName();
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + companion.getName();
         }
