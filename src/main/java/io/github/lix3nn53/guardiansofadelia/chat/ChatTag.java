@@ -6,8 +6,8 @@ public enum ChatTag {
     NOVICE, //MAIN-QUEST-LINE TAGS
     SENIOR,
     LORD,
-    HERO,
-    TITAN,
+    GUARDIAN,
+    SUPREME,
     BRAVE, //WARRIOR TAGS
     GLADIATOR,
     CHAMPION,
@@ -27,9 +27,9 @@ public enum ChatTag {
                 return ChatColor.YELLOW;
             case LORD:
                 return ChatColor.GREEN;
-            case HERO:
+            case GUARDIAN:
                 return ChatColor.GOLD;
-            case TITAN:
+            case SUPREME:
                 return ChatColor.AQUA;
             case BRAVE:
                 return ChatColor.GRAY;
@@ -65,9 +65,9 @@ public enum ChatTag {
                 return 27;
             case LORD:
                 return 51;
-            case HERO:
+            case GUARDIAN:
                 return 70;
-            case TITAN:
+            case SUPREME:
                 return 92;
             case BRAVE:
                 return 999;
