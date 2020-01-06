@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.database;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
+import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -10,7 +12,6 @@ import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.AdeliaRegionManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
@@ -82,7 +83,7 @@ public class DatabaseManager {
         UUID uuid = player.getUniqueId();
         Bukkit.getScheduler().runTaskAsynchronously(GuardiansOfAdelia.getInstance(), () -> {
             try {
-                GuardianData guardianData = DatabaseQueries.getGuardianDataWithStaffRankAndStorages(uuid);
+                GuardianData guardianData = DatabaseQueries.getGuardianDataWithRanksAndStorages(uuid);
 
                 List<Player> friendsOfPlayer = DatabaseQueries.getFriendsOfPlayer(uuid);
                 guardianData.setFriends(friendsOfPlayer);
@@ -119,7 +120,7 @@ public class DatabaseManager {
     //Not async, must run async
     private static void loadCharacterSelectionAndFormHolograms(Player player) {
         player.sendMessage("Preparing character selection..");
-        for (int charNo = 1; charNo <= 4; charNo++) {
+        for (int charNo = 1; charNo <= 8; charNo++) {
             boolean characterExists = DatabaseQueries.characterExists(player.getUniqueId(), charNo);
             if (characterExists) {
                 UUID uuid = player.getUniqueId();
@@ -178,11 +179,12 @@ public class DatabaseManager {
 
         //player
         StaffRank staffRank = guardianData.getStaffRank();
+        PremiumRank premiumRank = guardianData.getPremiumRank();
         ItemStack[] personalStorage = guardianData.getPersonalStorage();
         ItemStack[] bazaarStorage = guardianData.getBazaarStorage();
         ItemStack[] premiumStorage = guardianData.getPremiumStorage();
         try {
-            DatabaseQueries.setPlayerStaffRankAndStorages(uuid, staffRank, personalStorage, bazaarStorage, premiumStorage);
+            DatabaseQueries.setPlayerRanksAndStorages(uuid, staffRank, premiumRank, personalStorage, bazaarStorage, premiumStorage);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -236,7 +238,7 @@ public class DatabaseManager {
     public static void clearPlayer(UUID uuid) {
         try {
             DatabaseQueries.clearFriendsOfPlayer(uuid);
-            DatabaseQueries.clearPlayerStaffRankAndStorages(uuid);
+            DatabaseQueries.clearPlayerRanksAndStorages(uuid);
             DatabaseQueries.clearGuildOfPlayer(uuid);
         } catch (SQLException e) {
             e.printStackTrace();

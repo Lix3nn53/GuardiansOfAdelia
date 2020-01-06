@@ -20,23 +20,51 @@ characterSelectionHologram1:
   pitch: 90.0
 characterSelectionHologram2:
   world: world
+  x: -2750.5
+  y: 45.5
+  z: 6119.5
+  yaw: -316.5
+  pitch: 90.0
+characterSelectionHologram3:
+  world: world
   x: -2753.5
   y: 45.5
   z: 6126.5
   yaw: -226.5
   pitch: -2
-characterSelectionHologram3:
+characterSelectionHologram4:
+  world: world
+  x: -2760.5
+  y: 45.5
+  z: 6129.5
+  yaw: -226.5
+  pitch: -2
+characterSelectionHologram5:
   world: world
   x: -2767.5
   y: 45.5
   z: 6126.5
   yaw: -135
   pitch: -0.5
-characterSelectionHologram4:
+characterSelectionHologram6:
+  world: world
+  x: -2770.5
+  y: 45.5
+  z: 6119.5
+  yaw: -135
+  pitch: -0.5
+characterSelectionHologram7:
   world: world
   x: -2767.5
   y: 45.5
   z: 6112.5
+  yaw: -45.5
+  pitch: -1
+characterSelectionHologram8:
+  world: world
+  x: -2760.5
+  y: 45.5
+  z: 6109.5
   yaw: -45.5
   pitch: -1
 tutorialStart:

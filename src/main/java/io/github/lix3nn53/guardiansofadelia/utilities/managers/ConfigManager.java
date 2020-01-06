@@ -249,7 +249,7 @@ public class ConfigManager {
 
     private static void loadCharacterSelectionConfig() {
         List<Location> locationList = new ArrayList<>();
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i < 9; i++) {
             String worldName = characterSelectionConfig.getString("characterSelectionHologram" + i + ".world");
             double x = characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".x");
             double y = characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".y");

@@ -382,7 +382,7 @@ public class MyInventoryClickEvent implements Listener {
                     GuiGeneric job = MenuList.job(player);
                     job.openInventory(player);
                 } else if (currentName.equals(ChatColor.AQUA + "Chat Tag")) {
-                    GuiGeneric chatTag = MenuList.chatTag(player);
+                    GuiGeneric chatTag = MenuList.chatTagQuests(player);
                     chatTag.openInventory(player);
                 }
             }

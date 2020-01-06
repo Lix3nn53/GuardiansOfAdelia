@@ -6,7 +6,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
-import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -115,6 +114,12 @@ public class ChatManager {
                 String s = staffRank.toString();
                 s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
                 prefix += ChatColor.DARK_GRAY + "[" + staffRank.getChatColor() + s + ChatColor.DARK_GRAY + "]";
+            }
+            PremiumRank premiumRank = guardianData.getPremiumRank();
+            if (!premiumRank.equals(PremiumRank.NONE)) {
+                String s = premiumRank.toString();
+                s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+                prefix += ChatColor.DARK_GRAY + "[" + premiumRank.getChatColor() + s + ChatColor.DARK_GRAY + "]";
             }
             if (GuildManager.inGuild(player)) {
                 Guild guild = GuildManager.getGuild(player);

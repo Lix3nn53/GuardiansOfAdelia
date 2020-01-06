@@ -2,6 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.database;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
+import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
+import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -16,7 +18,6 @@ import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
-import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -55,6 +56,7 @@ public class DatabaseQueries {
                     "(\n" +
                     " `uuid`             varchar(40) NOT NULL ,\n" +
                     " `staff_rank`       varchar(20) ,\n" +
+                    " `premium_rank`       varchar(20) ,\n" +
                     " `storage_personal` mediumtext ,\n" +
                     " `storage_bazaar`   mediumtext ,\n" +
                     " `storage_premium`   mediumtext ,\n" +
@@ -202,7 +204,7 @@ public class DatabaseQueries {
         return guildName;
     }
 
-    public static GuardianData getGuardianDataWithStaffRankAndStorages(UUID uuid) throws SQLException {
+    public static GuardianData getGuardianDataWithRanksAndStorages(UUID uuid) throws SQLException {
         String SQL_QUERY = "SELECT * FROM goa_player WHERE uuid = ?";
         GuardianData guardianData = new GuardianData();
         try (Connection con = ConnectionPool.getConnection()) {
@@ -217,6 +219,12 @@ public class DatabaseQueries {
                 if (!resultSet.wasNull()) {
                     StaffRank staffRank = StaffRank.valueOf(staffRankString);
                     guardianData.setStaffRank(staffRank);
+                }
+
+                String premiumRankString = resultSet.getString("premium_rank");
+                if (!resultSet.wasNull()) {
+                    PremiumRank premiumRank = PremiumRank.valueOf(premiumRankString);
+                    guardianData.setPremiumRank(premiumRank);
                 }
 
                 String storagePersonalString = resultSet.getString("storage_personal");
@@ -588,14 +596,15 @@ public class DatabaseQueries {
         }
     }
 
-    public static int setPlayerStaffRankAndStorages(UUID uuid, StaffRank rank, ItemStack[] personalStorage, ItemStack[] bazaarStorage, ItemStack[] premiumStorage) throws SQLException {
+    public static int setPlayerRanksAndStorages(UUID uuid, StaffRank staffRank, PremiumRank premiumRank, ItemStack[] personalStorage, ItemStack[] bazaarStorage, ItemStack[] premiumStorage) throws SQLException {
         String SQL_QUERY = "INSERT INTO goa_player \n" +
-                "\t(uuid, staff_rank, storage_personal, storage_bazaar, storage_premium) \n" +
+                "\t(uuid, staff_rank, premium_rank, storage_personal, storage_bazaar, storage_premium) \n" +
                 "VALUES \n" +
-                "\t(?, ?, ?, ?, ?)\n" +
+                "\t(?, ?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
                 "\tuuid = VALUES(uuid),\n" +
                 "\tstaff_rank = VALUES(staff_rank),\n" +
+                "\tpremium_rank = VALUES(premium_rank),\n" +
                 "\tstorage_personal = VALUES(storage_personal),\n" +
                 "\tstorage_bazaar = VALUES(storage_bazaar),\n" +
                 "\tstorage_premium = VALUES(storage_premium);";
@@ -603,13 +612,14 @@ public class DatabaseQueries {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
-            pst.setString(2, rank.name());
+            pst.setString(2, staffRank.name());
+            pst.setString(3, premiumRank.name());
             String personalStorageString = ItemSerializer.saveModdedStacksData(personalStorage);
-            pst.setString(3, personalStorageString);
+            pst.setString(4, personalStorageString);
             String bazaarStorageString = ItemSerializer.saveModdedStacksData(bazaarStorage);
-            pst.setString(4, bazaarStorageString);
+            pst.setString(5, bazaarStorageString);
             String premiumStorageString = ItemSerializer.saveModdedStacksData(premiumStorage);
-            pst.setString(5, premiumStorageString);
+            pst.setString(6, premiumStorageString);
 
             //2 = replaced, 1 = new row added
             int returnValue = pst.executeUpdate();
@@ -947,7 +957,7 @@ public class DatabaseQueries {
         }
     }
 
-    public static void clearPlayerStaffRankAndStorages(UUID uuid) throws SQLException {
+    public static void clearPlayerRanksAndStorages(UUID uuid) throws SQLException {
         String SQL_QUERY = "DELETE FROM goa_player WHERE uuid = ?";
         try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);

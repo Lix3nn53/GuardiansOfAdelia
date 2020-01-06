@@ -38,7 +38,7 @@ public class TutorialQuests {
                 ChatColor.LIGHT_PURPLE + "Hold" + ChatColor.BOLD + " TAB KEY " + ChatColor.RESET + ChatColor.LIGHT_PURPLE + "to see your quest list!", "Talk to Arnas!",
                 "Learn your skills to get ready for fight. Open menu by clicking Menu-Book from your inventory(E key), then learn your skills from character menu to get ready to fight!",
                 tasks, itemPrizes, 0, 0, 90, requiredQuests, Material.RED_NETHER_BRICKS);
-        QuestNPCManager.addQuest(quest1, 0, 5);
+        QuestNPCManager.addQuest(quest1, 0, 9);
 
         //arnas to elysea
         List<Integer> requiredQuests2 = new ArrayList<>();
@@ -55,7 +55,7 @@ public class TutorialQuests {
                 "Elysea\n",
                 "Spend your element points from character-menu to get stronger.",
                 tasks2, itemPrizes, 0, 0, 90, requiredQuests2, Material.RED_NETHER_BRICKS);
-        QuestNPCManager.addQuest(quest2, 5, 6);
+        QuestNPCManager.addQuest(quest2, 9, 10);
 
         //elysea to syvia
         List<Integer> requiredQuests3 = new ArrayList<>();
@@ -75,7 +75,7 @@ public class TutorialQuests {
                 "\nTASK_PROGRESS_1 then talk to Syvia\n",
                 "Equip jewelries from RPG-Inventory to gain even more elemental power! To open RPG-Inventory click one of crafting slots from your inventory.",
                 tasks3, itemPrizes1, 0, 0, 90, requiredQuests3, Material.RED_NETHER_BRICKS);
-        QuestNPCManager.addQuest(quest3, 6, 7);
+        QuestNPCManager.addQuest(quest3, 10, 11);
 
         //syvia to Aleesia
         List<Integer> requiredQuests4 = new ArrayList<>();
@@ -101,7 +101,7 @@ public class TutorialQuests {
         quest4.addOnCompleteAction(new FinishQuestAction(4));
         quest4.addOnCompleteAction(new StartQuestAction(5));
         quest4.addOnCompleteAction(new TutorialEndAction());
-        QuestNPCManager.addQuest(quest4, 7, 0);
+        QuestNPCManager.addQuest(quest4, 11, 0);
 
         //Aleesia to king of roumen
         List<Integer> requiredQuests5 = new ArrayList<>();

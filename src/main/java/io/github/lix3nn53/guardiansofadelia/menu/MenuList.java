@@ -408,7 +408,7 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric chatTag(Player player) {
+    public static GuiGeneric chatTagQuests(Player player) {
         GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.AQUA + "Chat Tag", 0);
 
         UUID uuid = player.getUniqueId();

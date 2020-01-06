@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.utilities;
+package io.github.lix3nn53.guardiansofadelia.chat;
 
 import org.bukkit.ChatColor;
 

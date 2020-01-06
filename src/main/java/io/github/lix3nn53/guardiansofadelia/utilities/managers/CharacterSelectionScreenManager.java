@@ -64,7 +64,7 @@ public class CharacterSelectionScreenManager {
     }
 
     private static void removeDisguisesFromPlayer(Player player) {
-        for (int charNo = 1; charNo <= 4; charNo++) {
+        for (int charNo = 1; charNo <= 8; charNo++) {
             if (characterNoToArmorStands.containsKey(charNo)) {
                 List<ArmorStand> armorStands = characterNoToArmorStands.get(charNo);
                 for (ArmorStand armorStand : armorStands) {

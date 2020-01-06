@@ -30,8 +30,8 @@ public class MyNPCRightClickEvent implements Listener {
         NPC npc = event.getNPC();
         int id = npc.getId();
 
-        if (id > 0 && id < 5) {
-            //1-2-3-4 character selection npc
+        if (id > 0 && id < 9) {
+            //1-2-3-4-5-6-7-8 character selection npc
             if (DatabaseQueries.characterExists(uuid, id)) {
                 GuiGeneric characterTeleportationMenu = CharacterSelectionMenuList.characterSelectionMenu(id);
                 characterTeleportationMenu.openInventory(player);

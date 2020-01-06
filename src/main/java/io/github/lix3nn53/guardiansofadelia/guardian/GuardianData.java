@@ -1,9 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.guardian;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
+import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.utilities.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
@@ -29,6 +30,7 @@ public class GuardianData {
     private BukkitTask inviteTimeoutTask;
 
     private StaffRank staffRank = StaffRank.NONE;
+    private PremiumRank premiumRank = PremiumRank.NONE;
 
     private List<Player> friends = new ArrayList<>();
 
@@ -209,5 +211,13 @@ public class GuardianData {
 
     public void setStaffRank(StaffRank staffRank) {
         this.staffRank = staffRank;
+    }
+
+    public PremiumRank getPremiumRank() {
+        return premiumRank;
+    }
+
+    public void setPremiumRank(PremiumRank premiumRank) {
+        this.premiumRank = premiumRank;
     }
 }
