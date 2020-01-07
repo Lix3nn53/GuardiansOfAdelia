@@ -8,6 +8,8 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemL
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
+import io.github.lix3nn53.guardiansofadelia.socket.BoostPremiumManager;
+import io.github.lix3nn53.guardiansofadelia.socket.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
@@ -25,8 +27,13 @@ public class MobDropGenerator {
         if (dropTableNumber < 0 || dropTableNumber >= 10) return drops;
 
         double random = Math.random();
-        if (random < 0.1D) { //drop rate
+        double dropRate = 0.1;
 
+        if (BoostPremiumManager.isBoostActive(BoostPremium.LOOT)) {
+            dropRate += 0.1;
+        }
+
+        if (random < dropRate) {
             GearLevel gearLevel = GearLevel.ZERO;
 
             if (dropTableNumber == 1) {

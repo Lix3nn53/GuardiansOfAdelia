@@ -16,33 +16,33 @@ public class AutomaticShutdown {
     }
 
     private static Date getNextRestartTime() {
-        Calendar midnight = getMidnight();
-        Calendar noon = getNoon();
+        Calendar night = getNightTime();
+        Calendar noon = getNoonTime();
 
         Calendar currentTime = Calendar.getInstance();
 
         if (noon.after(currentTime)) {
             return noon.getTime();
         } else {
-            return midnight.getTime();
+            return night.getTime();
         }
     }
 
-    private static Calendar getMidnight() {
+    private static Calendar getNightTime() {
         Calendar midnight = Calendar.getInstance();
 
-        midnight.set(Calendar.HOUR_OF_DAY, 23);
-        midnight.set(Calendar.MINUTE, 59);
-        midnight.set(Calendar.SECOND, 59);
+        midnight.set(Calendar.HOUR_OF_DAY, 1); //one hour before + 59 minutes
+        midnight.set(Calendar.MINUTE, 59); //because delay of restart is 1 minute
+        midnight.set(Calendar.SECOND, 0);
 
         return midnight;
     }
 
-    private static Calendar getNoon() {
+    private static Calendar getNoonTime() {
         Calendar noon = Calendar.getInstance();
 
-        noon.set(Calendar.HOUR_OF_DAY, 12);
-        noon.set(Calendar.MINUTE, 0);
+        noon.set(Calendar.HOUR_OF_DAY, 13); //one hour before + 59 minutes
+        noon.set(Calendar.MINUTE, 59); //because delay of restart is 1 minute
         noon.set(Calendar.SECOND, 0);
 
         return noon;

@@ -28,4 +28,7 @@ public class BoostPremiumManager {
         return false;
     }
 
+    public static boolean isBoostActive(BoostPremium boostType) {
+        return activeBoosts.contains(boostType);
+    }
 }

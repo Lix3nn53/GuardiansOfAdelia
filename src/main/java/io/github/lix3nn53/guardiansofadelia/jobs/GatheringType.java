@@ -6,6 +6,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.socket.BoostPremiumManager;
+import io.github.lix3nn53.guardiansofadelia.socket.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
@@ -35,6 +37,11 @@ public enum GatheringType {
                 final double startPosX = player.getLocation().getX();
                 final double startPosY = player.getLocation().getY();
                 final double startPosZ = player.getLocation().getZ();
+
+                long period = 28;
+                if (BoostPremiumManager.isBoostActive(BoostPremium.GATHER)) {
+                    period = 14;
+                }
 
                 new BukkitRunnable() {
 
@@ -97,7 +104,7 @@ public enum GatheringType {
                         }
                         secsRun++;
                     }
-                }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 28L);
+                }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, period);
             }
         }
     }

@@ -9,6 +9,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.socket.BoostPremiumManager;
+import io.github.lix3nn53.guardiansofadelia.socket.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
@@ -52,6 +54,9 @@ public class KillProtectionManager {
 
             //calculate before loop
             int expToGiveEachPlayer = getExperience(livingTarget);
+            if (BoostPremiumManager.isBoostActive(BoostPremium.EXPERIENCE)) {
+                expToGiveEachPlayer = expToGiveEachPlayer * 2;
+            }
             if (expToGiveEachPlayer > 0) {
                 if (bestPlayers.size() > 1) {
                     double expMultiplier = 1 - (0.1 * bestPlayers.size());
