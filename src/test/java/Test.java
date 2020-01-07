@@ -1,6 +1,6 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.socket.MySocketServer;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,13 +12,15 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException {
-        MySocketServer server = new MySocketServer("localhost", 9092);
+        LocalDate now = LocalDate.now();
+        System.out.println("Before setTime: " + now.toString());
+        /*MySocketServer server = new MySocketServer("localhost", 9092);
 
         server.start();
 
         Thread.sleep(Integer.MAX_VALUE);
 
-        server.stop();
+        server.stop();*/
         /*int value = 1000;
         int z = (int) ((value * MULTIPLIER) + 0.5);
         System.out.println(z);

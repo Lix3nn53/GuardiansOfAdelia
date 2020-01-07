@@ -26,6 +26,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +59,7 @@ public class DatabaseQueries {
                     " `uuid`             varchar(40) NOT NULL ,\n" +
                     " `staff_rank`       varchar(20) ,\n" +
                     " `premium_rank`       varchar(20) ,\n" +
+                    " `premium_rank_date`       datetime ,\n" +
                     " `storage_personal` mediumtext ,\n" +
                     " `storage_bazaar`   mediumtext ,\n" +
                     " `storage_premium`   mediumtext ,\n" +
@@ -653,18 +656,38 @@ public class DatabaseQueries {
     }
 
     public static int setPremiumRank(UUID uuid, PremiumRank premiumRank) throws SQLException {
+        LocalDate now = LocalDate.now();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDateString = sdf.format(now);
+
         String SQL_QUERY = "INSERT INTO goa_player \n" +
-                "\t(uuid, premium_rank) \n" +
+                "\t(uuid, premium_rank, premium_rank_date) \n" +
                 "VALUES \n" +
-                "\t(?, ?)\n" +
+                "\t(?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
                 "\tuuid = VALUES(uuid),\n" +
-                "\tpremium_rank = VALUES(premium_rank);";
+                "\tpremium_rank = VALUES(premium_rank),\n" +
+                "\tpremium_rank_date = VALUES(premium_rank_date);";
         try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
             pst.setString(2, premiumRank.name());
+            pst.setString(2, currentDateString);
+
+            //2 = replaced, 1 = new row added
+            int returnValue = pst.executeUpdate();
+
+            pst.close();
+            return returnValue;
+        }
+    }
+
+    public static int clearExpiredPremiumRanks() throws SQLException {
+        String SQL_QUERY = ("UPDATE goa_player SET premium_rank=NULL,premium_rank_date=NULL WHERE premium_rank_date < DATE_SUB(NOW(), INTERVAL 1 MONTH)");
+
+        try (Connection con = ConnectionPool.getConnection()) {
+            PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             //2 = replaced, 1 = new row added
             int returnValue = pst.executeUpdate();

@@ -17,6 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.quests.list.mainstory.MainStoryQuest
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.ConfigManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.shutdown.AutomaticShutdown;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
@@ -179,6 +180,9 @@ public class GuardiansOfAdelia extends JavaPlugin {
         //REGISTER QUESTS FROM LISTS
         TutorialQuests.createQuests();
         MainStoryQuests.createQuests();
+
+        //Automatic Shutdown
+        AutomaticShutdown.onEnable();
     }
 
     @Override
