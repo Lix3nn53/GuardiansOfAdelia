@@ -652,6 +652,28 @@ public class DatabaseQueries {
         }
     }
 
+    public static int setPremiumRank(UUID uuid, PremiumRank premiumRank) throws SQLException {
+        String SQL_QUERY = "INSERT INTO goa_player \n" +
+                "\t(uuid, premium_rank) \n" +
+                "VALUES \n" +
+                "\t(?, ?)\n" +
+                "ON DUPLICATE KEY UPDATE\n" +
+                "\tuuid = VALUES(uuid),\n" +
+                "\tpremium_rank = VALUES(premium_rank);";
+        try (Connection con = ConnectionPool.getConnection()) {
+            PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+
+            pst.setString(1, uuid.toString());
+            pst.setString(2, premiumRank.name());
+
+            //2 = replaced, 1 = new row added
+            int returnValue = pst.executeUpdate();
+
+            pst.close();
+            return returnValue;
+        }
+    }
+
     public static boolean setFriendsOfPlayer(UUID uuid, List<Player> friendList) {
         try (Connection connection = ConnectionPool.getConnection();
              Statement statement = connection.createStatement()) {

@@ -95,45 +95,47 @@ public class MyPlayerInteractEntityEvent implements Listener {
                             player.sendMessage(ChatColor.RED + "Pet health is already full");
                         }
                     }
-                } else if (itemInMainHand.getType().equals(Material.STONE_HOE)) { //right click with pet skin
+                } else if (itemInMainHand.getType().equals(Material.BLACK_DYE)) { //right click with premium item
                     EntityType type = rightClicked.getType();
-                    if (!type.equals(EntityType.WOLF)) return;
+                    if (type.equals(EntityType.WOLF)) {
+                        if (!PersistentDataContainerUtil.hasString(itemInMainHand, "petSkinCode")) return;
 
-                    if (!PersistentDataContainerUtil.hasString(itemInMainHand, "petSkinCode")) return;
+                        LivingEntity wolf = (LivingEntity) rightClicked;
+                        if (!PetManager.isPet(wolf)) return;
 
-                    LivingEntity wolf = (LivingEntity) rightClicked;
-                    if (!PetManager.isPet(wolf)) return;
+                        Player owner = PetManager.getOwner(wolf);
+                        if (!player.equals(owner)) return;
 
-                    Player owner = PetManager.getOwner(wolf);
-                    if (!player.equals(owner)) return;
+                        UUID uuid = player.getUniqueId();
+                        if (GuardianDataManager.hasGuardianData(uuid)) {
+                            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                            if (guardianData.hasActiveCharacter()) {
+                                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
-                    UUID uuid = player.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-                        if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                                EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
 
-                            EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
+                                if (eggSlot.isEmpty()) return;
 
-                            if (eggSlot.isEmpty()) return;
+                                ItemStack itemOnSlot = eggSlot.getItemOnSlot();
 
-                            ItemStack itemOnSlot = eggSlot.getItemOnSlot();
+                                String petSkinCode = PersistentDataContainerUtil.getString(itemInMainHand, "petSkinCode");
+                                PersistentDataContainerUtil.putString("petCode", petSkinCode, itemOnSlot);
 
-                            String petSkinCode = PersistentDataContainerUtil.getString(itemInMainHand, "petSkinCode");
-                            PersistentDataContainerUtil.putString("petCode", petSkinCode, itemOnSlot);
+                                //change values of itemOnSlot
+                                ItemMeta onSlotItemMeta = itemOnSlot.getItemMeta();
+                                onSlotItemMeta.setDisplayName(Companion.valueOf(petSkinCode).getName());
+                                if (itemMeta.hasCustomModelData())
+                                    onSlotItemMeta.setCustomModelData(itemMeta.getCustomModelData());
+                                itemOnSlot.setItemMeta(onSlotItemMeta);
 
-                            //change values of itemOnSlot
-                            ItemMeta onSlotItemMeta = itemOnSlot.getItemMeta();
-                            onSlotItemMeta.setDisplayName(Companion.valueOf(petSkinCode).getName());
-                            if (itemMeta.hasCustomModelData())
-                                onSlotItemMeta.setCustomModelData(itemMeta.getCustomModelData());
-                            itemOnSlot.setItemMeta(onSlotItemMeta);
+                                PetManager.respawnPet(owner);
 
-                            PetManager.respawnPet(owner);
-
-                            int amount = itemInMainHand.getAmount();
-                            itemInMainHand.setAmount(amount - 1);
+                                int amount = itemInMainHand.getAmount();
+                                itemInMainHand.setAmount(amount - 1);
+                            }
                         }
+                    } else if (PersistentDataContainerUtil.hasString(itemInMainHand, "boostCode")) {
+
                     }
                 } else if (rightClicked.isCustomNameVisible()) {
                     UUID uniqueId = player.getUniqueId();
