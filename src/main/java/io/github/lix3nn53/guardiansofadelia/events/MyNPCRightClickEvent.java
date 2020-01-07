@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -32,6 +33,26 @@ public class MyNPCRightClickEvent implements Listener {
 
         if (id > 0 && id < 9) {
             //1-2-3-4-5-6-7-8 character selection npc
+            PremiumRank requiredRank = PremiumRank.NONE;
+            if (id > 6) requiredRank = PremiumRank.TITAN;
+            else if (id > 4) requiredRank = PremiumRank.LEGEND;
+            else if (id > 2) requiredRank = PremiumRank.HERO;
+
+            if (!requiredRank.equals(PremiumRank.NONE)) {
+                int requiredOrdinal = requiredRank.ordinal();
+
+                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                PremiumRank premiumRank = guardianData.getPremiumRank();
+
+                int playerOrdinal = premiumRank.ordinal();
+
+                if (requiredOrdinal > playerOrdinal) {
+                    player.sendMessage("Required rank for this character slot is " + requiredRank.toString());
+                    return;
+                }
+            }
+
+
             if (DatabaseQueries.characterExists(uuid, id)) {
                 GuiGeneric characterTeleportationMenu = CharacterSelectionMenuList.characterSelectionMenu(id);
                 characterTeleportationMenu.openInventory(player);

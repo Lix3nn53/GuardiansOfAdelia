@@ -31,6 +31,7 @@ public class AutomaticShutdown {
     private static Calendar getNightTime() {
         Calendar midnight = Calendar.getInstance();
 
+        midnight.add(Calendar.DATE, 1); //tomorrow
         midnight.set(Calendar.HOUR_OF_DAY, 1); //one hour before + 59 minutes
         midnight.set(Calendar.MINUTE, 59); //because delay of restart is 1 minute
         midnight.set(Calendar.SECOND, 0);
