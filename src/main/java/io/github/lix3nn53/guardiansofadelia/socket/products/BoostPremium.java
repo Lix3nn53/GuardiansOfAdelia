@@ -17,8 +17,9 @@ public enum BoostPremium {
     GATHER;
 
     public ItemStack getItemStack() {
-        String s = this.name().toLowerCase();
-        String itemName = ChatColor.LIGHT_PURPLE + s + " Boost";
+        String input = this.name();
+        String s = input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
+        String itemName = getChatColor() + s + " Boost";
 
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.GRAY + "Boost");
@@ -34,9 +35,39 @@ public enum BoostPremium {
         itemMeta.setDisplayName(itemName);
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(3);
+        itemMeta.setCustomModelData(getCustomModelData());
         itemStack.setItemMeta(itemMeta);
 
         return itemStack;
+    }
+
+    public ChatColor getChatColor() {
+        switch (this) {
+            case EXPERIENCE:
+                return ChatColor.LIGHT_PURPLE;
+            case LOOT:
+                return ChatColor.YELLOW;
+            case ENCHANT:
+                return ChatColor.AQUA;
+            case GATHER:
+                return ChatColor.GREEN;
+        }
+
+        return ChatColor.GRAY;
+    }
+
+    public int getCustomModelData() {
+        switch (this) {
+            case EXPERIENCE:
+                return 5;
+            case LOOT:
+                return 6;
+            case ENCHANT:
+                return 7;
+            case GATHER:
+                return 8;
+        }
+
+        return 0;
     }
 }

@@ -22,7 +22,7 @@ public enum HelmetSkin {
         String itemName = ChatColor.LIGHT_PURPLE + s + " Helmet Skin";
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY + "Helmet Skin");
+        lore.add(ChatColor.GRAY + "Premium");
         lore.add("");
         lore.add(ChatColor.GOLD + "Usage: ");
         lore.add(ChatColor.YELLOW + "1 - Right click while you are holding this item.");

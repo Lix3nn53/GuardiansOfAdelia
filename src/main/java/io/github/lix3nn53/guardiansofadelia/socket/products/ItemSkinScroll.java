@@ -12,10 +12,10 @@ import java.util.List;
 public class ItemSkinScroll {
 
     public ItemStack getItemStack(int amount) {
-        String itemName = ChatColor.GOLD + "Item Skin Scroll";
+        String itemName = ChatColor.GOLD + "Weapon/Shield Skin Scroll";
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY + "Item Skin");
+        lore.add(ChatColor.GRAY + "Premium");
         lore.add("");
         lore.add(ChatColor.GOLD + "Usage: ");
         lore.add(ChatColor.YELLOW + "1 - Right click while you are holding this item.");

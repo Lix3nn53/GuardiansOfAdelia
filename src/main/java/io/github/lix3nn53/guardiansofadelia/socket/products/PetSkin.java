@@ -25,7 +25,7 @@ public enum PetSkin {
         String itemName = companion.getName() + ChatColor.LIGHT_PURPLE + " Pet Skin";
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY + "Pet Skin");
+        lore.add(ChatColor.GRAY + "Premium");
         lore.add("");
         lore.add(ChatColor.GOLD + "Usage: ");
         lore.add(ChatColor.YELLOW + "1 - Equip the pet you want to apply this skin to.");

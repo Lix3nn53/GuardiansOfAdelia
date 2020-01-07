@@ -68,6 +68,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MyNPCRightClickEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerAnimationEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerBedEnterEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyPlayerCommandPreprocessEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerDeathEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerDropItemEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerEggThrowEvent(), this);
@@ -106,6 +107,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         this.getCommand("invite").setExecutor(new CommandInvite());
         this.getCommand("trade").setExecutor(new CommandTrade());
         this.getCommand("party").setExecutor(new CommandParty());
+        this.getCommand("safe-stop").setExecutor(new CommandSafeStop());
         this.getCommand("minigame").setExecutor(new CommandMinigame());
         this.getCommand("job").setExecutor(new CommandJob());
         this.getCommand("spawner").setExecutor(new CommandSpawner());

@@ -5,19 +5,22 @@ import org.bukkit.inventory.ItemStack;
 
 public class WebProduct {
 
+    private final String productName;
     private final WebProductType type;
     private final int cost;
     private final ItemStack itemStack;
     private final PremiumRank premiumRank;
 
-    public WebProduct(WebProductType type, int cost, ItemStack itemStack) {
+    public WebProduct(String productName, WebProductType type, int cost, ItemStack itemStack) {
+        this.productName = productName;
         this.type = type;
         this.cost = cost;
         this.itemStack = itemStack;
         this.premiumRank = PremiumRank.NONE;
     }
 
-    public WebProduct(WebProductType type, int cost, ItemStack itemStack, PremiumRank premiumRank) {
+    public WebProduct(String productName, WebProductType type, int cost, ItemStack itemStack, PremiumRank premiumRank) {
+        this.productName = productName;
         this.type = type;
         this.cost = cost;
         this.itemStack = itemStack;
@@ -38,5 +41,9 @@ public class WebProduct {
 
     public PremiumRank getPremiumRank() {
         return premiumRank;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 }

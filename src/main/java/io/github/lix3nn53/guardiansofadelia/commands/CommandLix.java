@@ -19,6 +19,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
+import io.github.lix3nn53.guardiansofadelia.socket.RequestHandler;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
@@ -66,6 +67,7 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.BLUE + "/lix stone <grade> <amount>");
                 player.sendMessage(ChatColor.BLUE + "/lix passive [parrot|earring|necklace|glove|ring] <num>");
                 player.sendMessage(ChatColor.BLUE + "/lix model portal<1-5>");
+                player.sendMessage(ChatColor.BLUE + "/lix premium item-id<1-24>");
             } else if (args[0].equals("exp")) {
                 if (args.length == 3) {
                     int expToGive = Integer.parseInt(args[2]);
@@ -225,6 +227,12 @@ public class CommandLix implements CommandExecutor {
                     armorStand.setVisible(false);
                     armorStand.setInvulnerable(true);
                     armorStand.setGravity(false);
+                }
+            } else if (args[0].equals("premium")) {
+                if (args.length == 2) {
+                    int itemID = Integer.parseInt(args[1]);
+
+                    RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
                 AdeliaEntity.BOSS_DARKNESS.getMob(player.getLocation());
