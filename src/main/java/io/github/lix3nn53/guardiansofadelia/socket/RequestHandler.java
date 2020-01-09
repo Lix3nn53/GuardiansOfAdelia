@@ -176,7 +176,7 @@ public class RequestHandler {
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info("Web purchase: " + minecraftUsername + " bought " + webProduct.getProductName() + " for " + payment + " credits!");
-        Bukkit.broadcastMessage(ChatColor.GOLD + "Thanks for your support! " + ChatColor.GRAY + minecraftUsername + " bought " + webProduct.getProductName() + " from web-store!");
+        Bukkit.broadcastMessage(ChatColor.GOLD + "Thanks for your support! " + ChatColor.GRAY + minecraftUsername + " bought " + webProduct.getProductName() + ChatColor.GRAY + " from web-store!");
         return new WebResponse(true, "Item purchased successfully!", minecraftUsername, productId);
     }
 
@@ -217,7 +217,7 @@ public class RequestHandler {
         }
 
 
-        Bukkit.broadcastMessage(ChatColor.GOLD + "Thanks for your support! " + ChatColor.GRAY + player.getName() + " bought " + webProduct.getProductName() + " from web-store!");
+        Bukkit.broadcastMessage(ChatColor.GOLD + "Thanks for your support! " + ChatColor.GRAY + player.getName() + " bought " + webProduct.getProductName() + ChatColor.GRAY + " from web-store!");
     }
 
     private static boolean uuidExists(UUID uuid) {

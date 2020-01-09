@@ -28,7 +28,7 @@ public class SkinChest {
         itemMeta.setDisplayName(itemName);
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(2);
+        itemMeta.setCustomModelData(4);
         itemStack.setItemMeta(itemMeta);
         itemStack.setAmount(amount);
 

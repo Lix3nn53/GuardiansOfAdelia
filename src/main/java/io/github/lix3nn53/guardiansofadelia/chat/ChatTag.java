@@ -96,10 +96,4 @@ public enum ChatTag {
         }
         return 1;
     }
-
-    @Override
-    public String toString() {
-        String input = this.name();
-        return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
-    }
 }

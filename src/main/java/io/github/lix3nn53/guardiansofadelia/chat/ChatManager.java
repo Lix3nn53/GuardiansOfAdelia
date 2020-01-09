@@ -112,13 +112,11 @@ public class ChatManager {
             StaffRank staffRank = guardianData.getStaffRank();
             if (!staffRank.equals(StaffRank.NONE)) {
                 String s = staffRank.toString();
-                s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
                 prefix += ChatColor.DARK_GRAY + "[" + staffRank.getChatColor() + s + ChatColor.DARK_GRAY + "]";
             }
             PremiumRank premiumRank = guardianData.getPremiumRank();
             if (!premiumRank.equals(PremiumRank.NONE)) {
                 String s = premiumRank.toString();
-                s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
                 prefix += ChatColor.DARK_GRAY + "[" + premiumRank.getChatColor() + s + ChatColor.DARK_GRAY + "]";
             }
             if (GuildManager.inGuild(player)) {

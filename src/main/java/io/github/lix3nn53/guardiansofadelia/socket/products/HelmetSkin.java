@@ -18,7 +18,7 @@ public enum HelmetSkin {
     CROWN;
 
     public ItemStack getItemStack() {
-        String s = this.name().toLowerCase().replaceAll("_", "");
+        String s = this.name().toLowerCase().replaceAll("_", " ");
         String itemName = ChatColor.LIGHT_PURPLE + s + " Helmet Skin";
 
         List<String> lore = new ArrayList<>();
