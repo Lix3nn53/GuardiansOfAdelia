@@ -27,14 +27,15 @@ import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public class GuardiansOfAdelia extends JavaPlugin implements PluginMessageListener {
+public class GuardiansOfAdelia extends JavaPlugin {
+
+    public static PluginChannelListener pluginChannelListener;
 
     private static GuardiansOfAdelia instance;
 
@@ -189,9 +190,10 @@ public class GuardiansOfAdelia extends JavaPlugin implements PluginMessageListen
         //Automatic Shutdown
         AutomaticShutdown.onEnable();
 
-        //register bungee channels
-        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
-        this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        // allow to send to BungeeCord
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "BungeeCord", pluginChannelListener = new PluginChannelListener());
+        // gets a Message from Bungee
     }
 
     @Override
@@ -242,7 +244,6 @@ public class GuardiansOfAdelia extends JavaPlugin implements PluginMessageListen
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 100L, 160L);
     }
 
-    @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
         if (!channel.equals("BungeeCord")) {
             return;
@@ -258,6 +259,7 @@ public class GuardiansOfAdelia extends JavaPlugin implements PluginMessageListen
             Bukkit.getLogger().info("webPurchase");
             String argument = in.readUTF();
             Bukkit.getLogger().info(argument);
+
         }
     }
 }

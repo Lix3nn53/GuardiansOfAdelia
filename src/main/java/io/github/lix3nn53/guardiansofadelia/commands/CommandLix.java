@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
@@ -8,7 +9,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
-import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -37,7 +37,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -235,7 +237,14 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-                AdeliaEntity.BOSS_DARKNESS.getMob(player.getLocation());
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        String response = GuardiansOfAdelia.pluginChannelListener.get(player, args[1], Arrays.asList(args));
+
+                        player.sendMessage(ChatColor.BLUE + "Got: " + "\n" + ChatColor.GREEN + response);
+                    }
+                }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
             }
 
             // If the player (or console) uses our command correct, we can return true
