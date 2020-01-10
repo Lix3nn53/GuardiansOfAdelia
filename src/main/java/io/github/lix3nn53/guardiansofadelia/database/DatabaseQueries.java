@@ -26,7 +26,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -657,8 +656,7 @@ public class DatabaseQueries {
 
     public static int setPremiumRank(UUID uuid, PremiumRank premiumRank) throws SQLException {
         LocalDate now = LocalDate.now();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDateString = sdf.format(now);
+        String currentDateString = now.toString();
 
         String SQL_QUERY = "INSERT INTO goa_player \n" +
                 "\t(uuid, premium_rank, premium_rank_date) \n" +
@@ -673,7 +671,7 @@ public class DatabaseQueries {
 
             pst.setString(1, uuid.toString());
             pst.setString(2, premiumRank.name());
-            pst.setString(2, currentDateString);
+            pst.setString(3, currentDateString);
 
             //2 = replaced, 1 = new row added
             int returnValue = pst.executeUpdate();

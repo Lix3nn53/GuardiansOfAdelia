@@ -1,6 +1,6 @@
-import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +12,9 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException {
-        System.out.println(PremiumRank.TITAN.toString());
+        LocalDate now = LocalDate.now();
+        String currentDateString = now.toString();
+        System.out.println(currentDateString);
         /*MySocketServer server = new MySocketServer("localhost", 9092);
 
         server.start();
