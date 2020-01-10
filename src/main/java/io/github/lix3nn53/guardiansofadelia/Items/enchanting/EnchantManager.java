@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items.enchanting;
 
-import io.github.lix3nn53.guardiansofadelia.socket.BoostPremiumManager;
-import io.github.lix3nn53.guardiansofadelia.socket.products.BoostPremium;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

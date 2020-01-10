@@ -11,7 +11,6 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
-import io.github.lix3nn53.guardiansofadelia.socket.MySocketServer;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import org.bukkit.Bukkit;
@@ -21,7 +20,6 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +39,6 @@ public class ConfigManager {
     private static FileConfiguration dungeonGatesConfig;
     private static FileConfiguration databaseConfig;
     private static FileConfiguration teleportPortals;
-    private static FileConfiguration socketServer;
 
     public static void init() {
         if (!GuardiansOfAdelia.getInstance().getDataFolder().exists()) {
@@ -59,7 +56,6 @@ public class ConfigManager {
         createDungeonGates();
         createDungeons();
         createTeleportPortals();
-        createSocketServer();
     }
 
     public static void loadConfigALL() {
@@ -71,7 +67,6 @@ public class ConfigManager {
         loadDungeonGates();
         loadDungeons();
         loadTeleportPortals();
-        loadSocketServer();
     }
 
     public static void writeConfigALL() {
@@ -496,33 +491,5 @@ public class ConfigManager {
 
             PortalManager.addInstantTeleportPortal(portal, tpLocation);
         }
-    }
-
-    private static void createSocketServer() {
-        File customConfigFile = new File(DATA_FOLDER, "socketServer.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-            GuardiansOfAdelia.getInstance().saveResource("socketServer.yml", false);
-        }
-
-        socketServer = new YamlConfiguration();
-        try {
-            socketServer.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void loadSocketServer() {
-        String hostname = socketServer.getString("hostname");
-        int port = socketServer.getInt("port");
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                MySocketServer mySocketServer = new MySocketServer(hostname, port);
-                mySocketServer.start();
-            }
-        }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
     }
 }

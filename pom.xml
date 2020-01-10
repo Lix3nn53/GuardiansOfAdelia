@@ -67,7 +67,6 @@
                     <include>dungeonGates.yml</include>
                     <include>database.yml</include>
                     <include>teleportPortals.yml</include>
-                    <include>socketServer.yml</include>
                 </includes>
             </resource>
             <resource>
@@ -149,12 +148,6 @@
             <version>7.0.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.corundumstudio.socketio</groupId>
-            <artifactId>netty-socketio</artifactId>
-            <version>1.7.17</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

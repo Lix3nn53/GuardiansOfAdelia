@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.socket;
+package io.github.lix3nn53.guardiansofadelia.bungeelistener.web;
 
 public class WebPurchase {
 

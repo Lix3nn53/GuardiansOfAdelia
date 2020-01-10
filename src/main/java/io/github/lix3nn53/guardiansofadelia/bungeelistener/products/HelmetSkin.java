@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.socket.products;
+package io.github.lix3nn53.guardiansofadelia.bungeelistener.products;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;

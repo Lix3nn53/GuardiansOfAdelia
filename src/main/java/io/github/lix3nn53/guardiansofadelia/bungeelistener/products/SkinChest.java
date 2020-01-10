@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.socket.products;
+package io.github.lix3nn53.guardiansofadelia.bungeelistener.products;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -9,10 +9,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemSkinScroll {
+public class SkinChest {
 
     public ItemStack getItemStack(int amount) {
-        String itemName = ChatColor.GOLD + "Weapon/Shield Skin Scroll";
+        String itemName = ChatColor.GOLD + "Skin Chest";
 
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.GRAY + "Premium");
@@ -28,7 +28,7 @@ public class ItemSkinScroll {
         itemMeta.setDisplayName(itemName);
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(2);
+        itemMeta.setCustomModelData(4);
         itemStack.setItemMeta(itemMeta);
         itemStack.setAmount(amount);
 

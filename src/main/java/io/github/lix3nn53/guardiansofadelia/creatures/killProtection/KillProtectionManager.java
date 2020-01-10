@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.killProtection;
 
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropProtectionManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.MobDropGenerator;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
@@ -9,8 +11,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import io.github.lix3nn53.guardiansofadelia.socket.BoostPremiumManager;
-import io.github.lix3nn53.guardiansofadelia.socket.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.*;

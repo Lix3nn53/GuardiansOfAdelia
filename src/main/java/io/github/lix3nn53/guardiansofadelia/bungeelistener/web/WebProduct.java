@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.socket;
+package io.github.lix3nn53.guardiansofadelia.bungeelistener.web;
 
 import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
 import org.bukkit.inventory.ItemStack;

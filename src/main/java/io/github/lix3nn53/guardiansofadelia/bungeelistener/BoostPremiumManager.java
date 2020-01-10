@@ -1,7 +1,7 @@
-package io.github.lix3nn53.guardiansofadelia.socket;
+package io.github.lix3nn53.guardiansofadelia.bungeelistener;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.socket.products.BoostPremium;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashSet;

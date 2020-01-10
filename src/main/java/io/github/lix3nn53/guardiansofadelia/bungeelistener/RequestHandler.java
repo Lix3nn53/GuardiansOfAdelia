@@ -1,11 +1,15 @@
-package io.github.lix3nn53.guardiansofadelia.socket;
+package io.github.lix3nn53.guardiansofadelia.bungeelistener;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.*;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.web.WebProduct;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.web.WebProductType;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.web.WebPurchase;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.web.WebResponse;
 import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import io.github.lix3nn53.guardiansofadelia.socket.products.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.PluginChannelListener;
 import io.github.lix3nn53.guardiansofadelia.commands.*;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
