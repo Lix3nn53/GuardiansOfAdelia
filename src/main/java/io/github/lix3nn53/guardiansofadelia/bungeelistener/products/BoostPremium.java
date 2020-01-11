@@ -16,7 +16,7 @@ public enum BoostPremium {
     ENCHANT,
     GATHER;
 
-    public ItemStack getItemStack() {
+    public ItemStack getItemStack(int amount) {
         String input = this.name();
         String s = input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
         String itemName = getChatColor() + s + " Boost";
@@ -37,6 +37,7 @@ public enum BoostPremium {
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(getCustomModelData());
         itemStack.setItemMeta(itemMeta);
+        itemStack.setAmount(amount);
 
         return itemStack;
     }
