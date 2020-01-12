@@ -112,6 +112,8 @@ public final class TaskDealDamage implements Task {
 
     @Override
     public ChatColor getChatColor() {
+        if (isCompleted()) return ChatColor.GREEN;
+
         return ChatColor.RED;
     }
 }

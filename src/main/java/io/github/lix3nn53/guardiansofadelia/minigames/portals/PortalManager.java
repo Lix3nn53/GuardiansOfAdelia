@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.portals;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
-import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.List;
 public class PortalManager {
 
     private static HashMap<String, List<Portal>> chunkKeyToPortal = new HashMap<>();
-    private static HashMap<Portal, Location> portalToLocation = new HashMap<>();
+    private static HashMap<Portal, InstantTeleportPortal> portalToLocation = new HashMap<>();
 
     public static void onChunkLoad(String chunkKey) {
         if (chunkKeyToPortal.containsKey(chunkKey)) {
@@ -62,15 +61,15 @@ public class PortalManager {
         return null;
     }
 
-    public static void addInstantTeleportPortal(Portal portal, Location location) {
-        portalToLocation.put(portal, location);
+    public static void addInstantTeleportPortal(Portal portal, InstantTeleportPortal instantTeleportPortal) {
+        portalToLocation.put(portal, instantTeleportPortal);
     }
 
     public static boolean isInstantTeleportPortal(Portal portal) {
         return portalToLocation.containsKey(portal);
     }
 
-    public static Location getInstantTeleportLocation(Portal portal) {
+    public static InstantTeleportPortal getInstantTeleportPortal(Portal portal) {
         return portalToLocation.get(portal);
     }
 }

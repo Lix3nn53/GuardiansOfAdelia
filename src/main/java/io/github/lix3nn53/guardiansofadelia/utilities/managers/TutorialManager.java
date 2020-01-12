@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -38,8 +39,9 @@ public class TutorialManager {
 
             player.sendTitle(ChatColor.DARK_PURPLE + "Aleesia's Castle", ChatColor.GRAY + "Fall of the Adelia", 25, 35, 25);
 
-            player.sendMessage(ChatColor.GRAY + "▁▂▃▄▅▆▇ " + ChatColor.DARK_PURPLE + "Aleesia's Castle" + ChatColor.GRAY + " ▇▆▅▄▃▂▁");
-            player.sendMessage(ChatColor.DARK_PURPLE + "---------- " + ChatColor.GRAY + "Fall of the Adelia" + ChatColor.DARK_PURPLE + " ----------");
+            MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "▁▂▃▄▅▆▇ " + ChatColor.DARK_PURPLE + "Aleesia's Castle" + ChatColor.GRAY + " ▇▆▅▄▃▂▁    ");
+            MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "---------- " + ChatColor.GRAY + "Fall of the Adelia" + ChatColor.DARK_PURPLE + " ----------");
+
             player.sendMessage("");
 
             Quest tutorialStartQuest = QuestNPCManager.getQuestCopyById(1);

@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
@@ -70,7 +71,7 @@ public final class TaskInteract implements Task {
         if (npcId == this.npcId) {
             if (progress(player)) {
                 NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
-                player.sendMessage(ChatColor.YELLOW + "Quest interact with " + npcRegistry.getById(npcId).getName() + "");
+                MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + "Quest Interact" + ChatColor.GRAY + " with " + npcRegistry.getById(npcId).getName());
                 return true;
             }
         }
@@ -103,6 +104,8 @@ public final class TaskInteract implements Task {
 
     @Override
     public ChatColor getChatColor() {
-        return ChatColor.GREEN;
+        if (isCompleted()) return ChatColor.GREEN;
+
+        return ChatColor.RED;
     }
 }

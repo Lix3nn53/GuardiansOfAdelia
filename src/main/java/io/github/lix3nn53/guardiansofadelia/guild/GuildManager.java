@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guild;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -39,7 +40,7 @@ public class GuildManager {
                 if (!uuid.equals(player.getUniqueId())) {
                     Player member = Bukkit.getPlayer(uuid);
                     if (member != null) {
-                        member.sendMessage(ChatColor.DARK_PURPLE + "Guild member " + ChatColor.WHITE + player.getName() + ChatColor.DARK_PURPLE + " joined the server.");
+                        MessageUtils.sendCenteredMessage(member, ChatColor.DARK_PURPLE + "Guild member " + ChatColor.WHITE + player.getName() + ChatColor.DARK_PURPLE + " joined the server");
                     }
                 }
             }

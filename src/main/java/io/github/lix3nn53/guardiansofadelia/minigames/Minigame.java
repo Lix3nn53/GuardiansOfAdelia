@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -150,18 +151,20 @@ public abstract class Minigame {
                 Party party = teams.get(teamNo);
                 for (Player member : party.getMembers()) {
                     if (member.isOnline()) {
+                        MessageUtils.sendCenteredMessage(member, ChatColor.GRAY + "------------------------");
                         if (winnerTeams.contains(teamNo)) {
                             if (winnerTeams.size() == 1) {
                                 member.sendTitle(ChatColor.GREEN + "Congratulations!", ChatColor.YELLOW + "", 30, 80, 30);
-                                member.sendMessage("You have have won the " + ChatColor.GREEN + getMinigameName() + " !");
+                                MessageUtils.sendCenteredMessage(member, "You have have won the " + ChatColor.GREEN + getMinigameName() + " !");
                             } else {
                                 member.sendTitle(ChatColor.GREEN + "Tie!", ChatColor.YELLOW + "", 30, 80, 30);
-                                member.sendMessage("You are sharing first place with another team in " + ChatColor.GREEN + getMinigameName());
+                                MessageUtils.sendCenteredMessage(member, "You are sharing first place with another team in " + ChatColor.GREEN + getMinigameName());
                             }
                         } else {
                             member.sendTitle(ChatColor.RED + "Failed..", ChatColor.YELLOW + "", 30, 80, 30);
-                            member.sendMessage("You lose the " + ChatColor.GREEN + getMinigameName());
+                            MessageUtils.sendCenteredMessage(member, "You lose the " + ChatColor.GREEN + getMinigameName());
                         }
+                        MessageUtils.sendCenteredMessage(member, ChatColor.GRAY + "------------------------");
                         member.setGameMode(GameMode.SPECTATOR);
                     }
                 }
@@ -201,7 +204,7 @@ public abstract class Minigame {
                     } else {
                         for (Player member : getPlayersInGame()) {
                             if (member.isOnline()) {
-                                member.sendMessage(getGameColor() + "You will be teleported in " + (15 - (count * 5)) + " seconds.");
+                                MessageUtils.sendCenteredMessage(member, getGameColor() + "You will be teleported in " + (15 - (count * 5)) + " seconds");
                             }
                         }
                         count++;
@@ -260,7 +263,7 @@ public abstract class Minigame {
                 if (!getPlayersInGame().contains(player) && getPlayersInGame().size() < this.teamAmount * this.teamSize) {
                     addPlayer(player);
                     for (Player member : getPlayersInGame()) {
-                        member.sendMessage(player.getName() + getGameColor() + " joined queue for " + getMinigameName());
+                        MessageUtils.sendCenteredMessage(member, player.getName() + getGameColor() + " joined queue for " + getMinigameName());
                     }
                     MiniGameManager.addPlayer(player, this);
                     onPlayerJoinQueueCountdownCheck();
@@ -276,7 +279,7 @@ public abstract class Minigame {
     public void onPlayerJoinQueueCountdownCheck() {
         if (this.requiredPlayerAmountToStart == getPlayersInGame().size()) {
             for (Player member : getPlayersInGame()) {
-                member.sendMessage(getGameColor() + "Begin start countdown for " + getMinigameName());
+                MessageUtils.sendCenteredMessage(member, getGameColor() + "Countdown for " + getMinigameName() + " has started");
             }
             //start countdown
             this.queueCountDown = new BukkitRunnable() {
@@ -292,7 +295,7 @@ public abstract class Minigame {
                     } else {
                         for (Player member : getPlayersInGame()) {
                             if (member.isOnline()) {
-                                member.sendMessage(getGameColor().toString() + (queueTimeLimitInMinutes * 60 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
+                                MessageUtils.sendCenteredMessage(member, getGameColor().toString() + (queueTimeLimitInMinutes * 60 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
                             }
                         }
                         count++;
@@ -308,7 +311,7 @@ public abstract class Minigame {
             if (this.queueCountDown != null) {
                 if (!this.queueCountDown.isCancelled()) {
                     for (Player member : getPlayersInGame()) {
-                        member.sendMessage(ChatColor.RED + "Cancel start countdown for " + getMinigameName());
+                        MessageUtils.sendCenteredMessage(member, ChatColor.RED + "Countdown for " + getMinigameName() + " is canceled");
                     }
                     this.queueCountDown.cancel();
                 }
@@ -353,7 +356,7 @@ public abstract class Minigame {
             if (!player.getLocation().getWorld().getName().equals("world")) {
                 player.teleport(this.backLocation);
             }
-            player.sendMessage(ChatColor.RED + "You have left " + getMinigameName());
+            MessageUtils.sendCenteredMessage(player, ChatColor.RED + "You have left " + getMinigameName());
         }
 
         int teamOfPlayer = getTeamOfPlayer(player);

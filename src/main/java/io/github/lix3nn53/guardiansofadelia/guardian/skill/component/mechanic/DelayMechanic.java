@@ -23,7 +23,9 @@ public class DelayMechanic extends MechanicComponent {
 
             @Override
             public void run() {
-                executeChildren(caster, skillLevel, targets);
+                if (!caster.isDead()) {
+                    executeChildren(caster, skillLevel, targets);
+                }
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), ticks);
 

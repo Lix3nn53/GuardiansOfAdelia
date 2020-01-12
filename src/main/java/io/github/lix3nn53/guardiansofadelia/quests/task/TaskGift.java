@@ -102,7 +102,9 @@ public final class TaskGift implements Task {
 
     @Override
     public ChatColor getChatColor() {
-        return ChatColor.LIGHT_PURPLE;
+        if (isCompleted()) return ChatColor.GREEN;
+
+        return ChatColor.RED;
     }
 
     public ItemStack getItem() {

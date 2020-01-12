@@ -9,12 +9,12 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.minigames.portals.InstantTeleportPortal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
@@ -74,25 +74,27 @@ public class MyPlayerAnimationEvent implements Listener {
                 Portal portal = PortalManager.getPortalFromArmorStand(armorStand);
                 if (portal != null) { //portal model
                     if (PortalManager.isInstantTeleportPortal(portal)) {
-                        Location instantTeleportLocation = PortalManager.getInstantTeleportLocation(portal);
-                        new BukkitRunnable() {
+                        InstantTeleportPortal instantTeleport = PortalManager.getInstantTeleportPortal(portal);
+                        if (instantTeleport.canTeleport(player)) {
+                            new BukkitRunnable() {
 
-                            int timeoutSecond = 3;
-                            int seconds = 0;
+                                int timeoutSecond = 3;
+                                int seconds = 0;
 
-                            @Override
-                            public void run() {
-                                int i = timeoutSecond - seconds;
-                                if (i <= 0) {
-                                    player.teleport(instantTeleportLocation);
-                                    cancel();
-                                    return;
+                                @Override
+                                public void run() {
+                                    int i = timeoutSecond - seconds;
+                                    if (i <= 0) {
+                                        player.teleport(instantTeleport.getDestination());
+                                        cancel();
+                                        return;
+                                    }
+                                    player.sendTitle("", ChatColor.AQUA + "Teleporting in.. " + i, 5, 20, 5);
+                                    seconds++;
                                 }
-                                player.sendTitle("", ChatColor.AQUA + "Teleporting in.. " + i, 5, 20, 5);
-                                seconds++;
-                            }
-                        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20L);
-                    } else {
+                            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20L);
+                        }
+                    } else { //dungeon portal
                         DungeonTheme theme = MiniGameManager.getDungeonFromPortal(portal);
                         if (theme != null) {
                             theme.getJoinQueueGui().openInventory(player);

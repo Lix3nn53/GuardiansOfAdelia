@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -161,7 +162,7 @@ public class GuildWar extends Minigame {
                                                 Player member = Bukkit.getPlayer(uuid);
                                                 if (member != null) {
                                                     if (member.isOnline()) {
-                                                        member.sendMessage(getGameColor() + "Guild '" + guild.getName() + "' joined GuildWar #" + getRoomNo());
+                                                        MessageUtils.sendCenteredMessage(member, getGameColor() + "Guild '" + guild.getName() + "' joined GuildWar #" + getRoomNo());
                                                     }
                                                 }
                                             }
@@ -186,7 +187,7 @@ public class GuildWar extends Minigame {
         if (!getPlayersInGame().contains(player) && getPlayersInGame().size() < getTeamAmount() * getTeamSize()) {
             if (addPlayer(player)) {
                 for (Player member : getPlayersInGame()) {
-                    member.sendMessage(getGameColor() + player.getName() + " joined queue for " + getMinigameName());
+                    MessageUtils.sendCenteredMessage(member, getGameColor() + player.getName() + " joined queue for " + getMinigameName());
                 }
                 MiniGameManager.addPlayer(player, this);
                 onPlayerJoinQueueCountdownCheck();
@@ -221,7 +222,7 @@ public class GuildWar extends Minigame {
     public void onPlayerJoinQueueCountdownCheck() {
         if (this.guilds.size() == getTeamAmount()) {
             for (Player member : getPlayersInGame()) {
-                member.sendMessage(getGameColor() + "Begin start countdown for " + getMinigameName());
+                MessageUtils.sendCenteredMessage(member, getGameColor() + "Begin start countdown for " + getMinigameName());
             }
             //start countdown
             BukkitRunnable queueCountDown = new BukkitRunnable() {
@@ -237,7 +238,7 @@ public class GuildWar extends Minigame {
                     } else {
                         for (Player member : getPlayersInGame()) {
                             if (member.isOnline()) {
-                                member.sendMessage(getGameColor().toString() + (getQueueTimeLimitInMinutes() * 60 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
+                                MessageUtils.sendCenteredMessage(member, getGameColor().toString() + (getQueueTimeLimitInMinutes() * 60 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
                             }
                         }
                         count++;
@@ -275,7 +276,9 @@ public class GuildWar extends Minigame {
                 msg.append(")");
             }
             for (Player player : getPlayersInGame()) {
-                player.sendMessage(msg.toString());
+                MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+                MessageUtils.sendCenteredMessage(player, msg.toString());
+                MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
             }
         }
     }

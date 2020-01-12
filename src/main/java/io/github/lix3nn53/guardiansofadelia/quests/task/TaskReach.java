@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -71,7 +72,7 @@ public final class TaskReach implements Task {
 
         if (distanceSquared <= maxDistance) {
             if (progress(player)) {
-                player.sendMessage(ChatColor.YELLOW + "Quest reach " + this.blockLoc.toString());
+                MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + "Quest reach " + this.blockLoc.toString());
                 return true;
             }
         }
@@ -104,6 +105,8 @@ public final class TaskReach implements Task {
 
     @Override
     public ChatColor getChatColor() {
-        return ChatColor.AQUA;
+        if (isCompleted()) return ChatColor.GREEN;
+
+        return ChatColor.RED;
     }
 }

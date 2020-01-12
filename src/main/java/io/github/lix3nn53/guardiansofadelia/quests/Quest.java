@@ -12,6 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.quests.task.*;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.advancements.Advancement;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -299,7 +300,14 @@ public final class Quest {
     }
 
     public void onTurnIn(Player player) {
-        player.sendMessage(ChatColor.DARK_PURPLE + "You have turned in " + ChatColor.LIGHT_PURPLE + getName());
+        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "Quest Turn In");
+        MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + getName());
+        if (!getTurnInMsg().equals("")) {
+            MessageUtils.sendCenteredMessage(player, getTurnInMsg());
+        }
+        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+
         Advancement onTurnInAdvancement = QuestAdvancements.getOnTurnInAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
         onTurnInAdvancement.displayToast(player);
 
@@ -334,10 +342,6 @@ public final class Quest {
             }
         }
 
-        if (!getTurnInMsg().equals("")) {
-            player.sendMessage(ChatColor.YELLOW + getTurnInMsg());
-        }
-
         TablistUtils.updateTablist(player);
 
         QuestNPCManager.setAllNpcHologramForPlayer(player);
@@ -348,7 +352,10 @@ public final class Quest {
     }
 
     public void onComplete(Player player) {
-        player.sendMessage(ChatColor.DARK_PURPLE + "You have completed " + ChatColor.LIGHT_PURPLE + getName());
+        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "Quest Complete");
+        MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + getName());
+        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
         Advancement onCompleteAdvancement = QuestAdvancements.getOnCompleteAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
         onCompleteAdvancement.displayToast(player);
 
@@ -361,12 +368,16 @@ public final class Quest {
     }
 
     public void onAccept(Player player) {
-        player.sendMessage(ChatColor.DARK_PURPLE + "You have accepted " + ChatColor.LIGHT_PURPLE + getName());
+        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "Quest Accept");
+        MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + getName());
+        if (!getStartMsg().equals("")) {
+            MessageUtils.sendCenteredMessage(player, getStartMsg());
+        }
+        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+
         Advancement onAcceptAdvancement = QuestAdvancements.getOnAcceptAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
         onAcceptAdvancement.displayToast(player);
-        if (!getStartMsg().equals("")) {
-            player.sendMessage(ChatColor.YELLOW + getStartMsg());
-        }
         TablistUtils.updateTablist(player);
 
         int whoCanGiveThisQuest = QuestNPCManager.getWhoCanGiveThisQuest(getQuestID());

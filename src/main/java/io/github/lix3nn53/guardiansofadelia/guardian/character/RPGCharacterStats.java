@@ -11,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
@@ -750,33 +751,52 @@ public class RPGCharacterStats {
     }
 
     private void sendLevelUpMessage(int newLevel) {
-        player.sendMessage(ChatColor.GOLD + "Level up! " + ChatColor.YELLOW + "Congratulations, your new level is " + ChatColor.GOLD + newLevel + "");
+        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatColor.GOLD + "Level up!");
+        MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Congratulations, your new level is " + ChatColor.GOLD + newLevel + "");
+
+        int lastNum = newLevel % 10;
+        switch (lastNum) {
+            case 0:
+                player.sendMessage("");
+                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You can equip stronger " + ChatColor.GOLD + "weapons");
+                break;
+            case 2:
+                player.sendMessage("");
+                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You can equip stronger " + ChatColor.GOLD + "boots!");
+                break;
+            case 4:
+                player.sendMessage("");
+                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You can equip stronger " + ChatColor.GOLD + "helmets");
+                break;
+            case 6:
+                player.sendMessage("");
+                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You can equip stronger " + ChatColor.GOLD + "leggings");
+                break;
+            case 8:
+                player.sendMessage("");
+                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You can equip stronger " + ChatColor.GOLD + "chestplates");
+                break;
+        }
+
         int fireBonus = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, newLevel - 1);
         int waterBonus = rpgClass.getAttributeBonusForLevel(AttributeType.WATER, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.WATER, newLevel - 1);
         int earthBonus = rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, newLevel - 1);
         int lightningBonus = rpgClass.getAttributeBonusForLevel(AttributeType.LIGHTNING, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.LIGHTNING, newLevel - 1);
         int windBonus = rpgClass.getAttributeBonusForLevel(AttributeType.WIND, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.WIND, newLevel - 1);
 
-        player.sendMessage(ChatColor.RED + "+" + fireBonus + " Fire " + ChatColor.BLUE + "+" + waterBonus + " Water " + ChatColor.DARK_GREEN + "+" + earthBonus + " Earth "
-                + ChatColor.AQUA + "+" + lightningBonus + " Lightning " + ChatColor.WHITE + "+" + windBonus + " Wind");
-
-        int lastNum = newLevel % 10;
-        switch (lastNum) {
-            case 0:
-                player.sendMessage(ChatColor.YELLOW + "You can equip stronger " + ChatColor.RED + "weapons");
-                break;
-            case 2:
-                player.sendMessage(ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "boots!");
-                break;
-            case 4:
-                player.sendMessage(ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "helmets");
-                break;
-            case 6:
-                player.sendMessage(ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "leggings");
-                break;
-            case 8:
-                player.sendMessage(ChatColor.YELLOW + "You can equip stronger " + ChatColor.AQUA + "chestplates");
-                break;
+        if (fireBonus + waterBonus + earthBonus + lightningBonus + windBonus > 0) {
+            player.sendMessage("");
+            MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Stats Gained");
+            final StringBuilder sb = new StringBuilder();
+            if (fireBonus > 0) sb.append(ChatColor.RED + "+" + fireBonus + " Fire ");
+            if (waterBonus > 0) sb.append(ChatColor.BLUE + "+" + waterBonus + " Water ");
+            if (earthBonus > 0) sb.append(ChatColor.DARK_GREEN + "+" + earthBonus + " Earth ");
+            if (lightningBonus > 0) sb.append(ChatColor.AQUA + "+" + lightningBonus + " Lightning ");
+            if (windBonus > 0) sb.append(ChatColor.WHITE + "+" + windBonus + " Wind");
+            MessageUtils.sendCenteredMessage(player, sb.toString());
         }
+
+        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
     }
 }

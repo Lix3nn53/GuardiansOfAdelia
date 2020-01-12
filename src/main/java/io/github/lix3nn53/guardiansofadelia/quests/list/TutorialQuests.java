@@ -35,8 +35,8 @@ public class TutorialQuests {
         List<ItemStack> itemPrizes = new ArrayList<>();
         List<Integer> requiredQuests = new ArrayList<>();
         Quest quest1 = new Quest(1, "Entrance to the unknown", story,
-                ChatColor.LIGHT_PURPLE + "Hold" + ChatColor.BOLD + " TAB KEY " + ChatColor.RESET + ChatColor.LIGHT_PURPLE + "to see your quest list!", "Talk to Arnas!",
-                "Learn your skills to get ready for fight. Open menu by clicking Menu-Book from your inventory(E key), then learn your skills from character menu to get ready to fight!",
+                ChatColor.YELLOW + "Hold" + ChatColor.BOLD + ChatColor.GOLD + " TAB KEY " + ChatColor.RESET + ChatColor.YELLOW + "to see your quest list!", "Talk to Arnas!",
+                "Accept your new quest from Arnas",
                 tasks, itemPrizes, 0, 0, 90, requiredQuests, Material.RED_NETHER_BRICKS);
         QuestNPCManager.addQuest(quest1, 0, 9);
 
@@ -49,11 +49,11 @@ public class TutorialQuests {
         List<Task> tasks2 = new ArrayList<>();
         TaskKill taskKill2 = new TaskKill(ChatColor.RED + "Aleesia's Soldier", 5);
         tasks2.add(taskKill2);
-        Quest quest2 = new Quest(2, "To the rescue", story2, "Elysea needs your aid!", "Open menu by clicking Menu-Book from your inventory(E key), then.." +
+        Quest quest2 = new Quest(2, "To the rescue", story2, "Learn your skills to get ready! Open menu by clicking Menu-Book from your inventory(E key), then learn your skills from character menu to get ready to fight!", "Open menu by clicking Menu-Book from your inventory(E key), then.." +
                 "\n..learn your skills from character menu to get ready to fight!" +
                 "\nTASK_PROGRESS_1 then talk to " +
                 "Elysea\n",
-                "Spend your element points from character-menu to get stronger.",
+                "Accept your new quest from Elysea",
                 tasks2, itemPrizes, 0, 0, 90, requiredQuests2, Material.RED_NETHER_BRICKS);
         QuestNPCManager.addQuest(quest2, 9, 10);
 
@@ -71,7 +71,7 @@ public class TutorialQuests {
         List<Task> tasks3 = new ArrayList<>();
         TaskKill taskKill3 = new TaskKill(ChatColor.RED + "Aleesia's Ranger", 5);
         tasks3.add(taskKill3);
-        Quest quest3 = new Quest(3, "Syvia's gift", story3, "Time to test power of elements!", "Spend your element points from character-menu to get stronger." +
+        Quest quest3 = new Quest(3, "Syvia's gift", story3, "Spend your element points from character-menu to get stronger.", "Spend your element points from character-menu to get stronger." +
                 "\nTASK_PROGRESS_1 then talk to Syvia\n",
                 "Equip jewelries from RPG-Inventory to gain even more elemental power! To open RPG-Inventory click one of crafting slots from your inventory.",
                 tasks3, itemPrizes1, 0, 0, 90, requiredQuests3, Material.RED_NETHER_BRICKS);

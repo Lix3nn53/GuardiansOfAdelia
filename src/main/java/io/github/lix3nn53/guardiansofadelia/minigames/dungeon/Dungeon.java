@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -34,7 +35,10 @@ public class Dungeon extends Minigame {
 
             Party party = getTeams().get(winnerTeam.get(0));
             for (Player member : party.getMembers()) {
-                member.sendMessage(getGameColor() + "Dungeon prize: " + prizeItem.getItemMeta().getDisplayName());
+                MessageUtils.sendCenteredMessage(member, ChatColor.GRAY + "------------------------");
+                MessageUtils.sendCenteredMessage(member, getGameColor() + "Dungeon Prize");
+                MessageUtils.sendCenteredMessage(member, prizeItem.getItemMeta().getDisplayName());
+                MessageUtils.sendCenteredMessage(member, ChatColor.GRAY + "------------------------");
                 InventoryUtils.giveItemToPlayer(member, prizeItem);
             }
         }

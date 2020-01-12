@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.minigames.arenas;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -31,7 +32,7 @@ public class LastOneStanding extends Minigame {
             msg.append(")");
 
             for (Player player : getPlayersInGame()) {
-                player.sendMessage(msg.toString());
+                MessageUtils.sendCenteredMessage(player, msg.toString());
             }
         }
     }

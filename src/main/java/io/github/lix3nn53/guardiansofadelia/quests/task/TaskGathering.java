@@ -115,6 +115,8 @@ public final class TaskGathering implements Task {
 
     @Override
     public ChatColor getChatColor() {
-        return ChatColor.GOLD;
+        if (isCompleted()) return ChatColor.GREEN;
+
+        return ChatColor.RED;
     }
 }

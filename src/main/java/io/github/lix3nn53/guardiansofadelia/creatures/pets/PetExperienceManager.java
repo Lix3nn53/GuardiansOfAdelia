@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -144,7 +145,7 @@ public class PetExperienceManager {
                     eggSlot.setItemOnSlot(egg);
 
                     PetManager.respawnPet(player);
-                    player.sendMessage(ChatColor.GOLD + "Your pet has leveled up!");
+                    MessageUtils.sendCenteredMessage(player, ChatColor.GOLD + "Your pet has leveled up!");
                 }
             }
         }

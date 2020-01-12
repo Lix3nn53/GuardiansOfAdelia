@@ -157,7 +157,7 @@ public enum AdeliaEntity {
             List<SkillComponent> children = new ArrayList<>();
             children.add(EntitySkillComponents.getComponentPullMechanic());
             ParticleMechanic particleMechanic = EntitySkillComponents.getComponentParticleMechanic(Particle.SLIME, 3.6, 12, null);
-            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.GREEN + "Kyaa!", 40, children, 4, GoaSound.SKILL_SPLASH, particleMechanic, true);
+            SkillComponent trigger = EntitySkills.getSkillAoeAround(ChatColor.GREEN + "Kyaa!", 40, children, 7, GoaSound.SKILL_SPLASH, particleMechanic, true);
             skills.add(trigger);
             skillLevels.add(1);
         } else if (this == AdeliaEntity.ZOMBIE_VILLAGER) {
@@ -493,8 +493,11 @@ public enum AdeliaEntity {
                 break;
             }
             case SLIME: {
-                Slime entity = (Slime) EntityUtils.create(loc, ChatColor.GREEN + "Baby Slime", 30D, EntityType.SLIME);
+                double hp = 30D;
+                Slime entity = (Slime) EntityUtils.create(loc, ChatColor.GREEN + "Baby Slime", hp, EntityType.SLIME);
                 entity.setSize(2);
+                entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(hp);
+                entity.setHealth(hp);
                 setEntityExperience(entity, 5);
                 setEntityDropTableNo(entity, 0);
                 setCustomDamage(entity, 7);
@@ -502,8 +505,11 @@ public enum AdeliaEntity {
                 break;
             }
             case SLIME_STICKY: {
-                Slime entity = (Slime) EntityUtils.create(loc, ChatColor.GREEN + "Sticky Slime", 40D, EntityType.SLIME);
+                double hp = 40D;
+                Slime entity = (Slime) EntityUtils.create(loc, ChatColor.GREEN + "Sticky Slime", hp, EntityType.SLIME);
                 entity.setSize(3);
+                entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(hp);
+                entity.setHealth(hp);
                 setEntityExperience(entity, 7);
                 setEntityDropTableNo(entity, 0);
                 setCustomDamage(entity, 9);
@@ -1104,8 +1110,11 @@ public enum AdeliaEntity {
                 break;
             }
             case BOSS_SLIME: {
-                Slime entity = (Slime) EntityUtils.create(loc, ChatColor.GOLD + "King Slime", 600D, EntityType.SLIME);
+                double hp = 600D;
+                Slime entity = (Slime) EntityUtils.create(loc, ChatColor.GOLD + "King Slime", hp, EntityType.SLIME);
                 entity.setSize(6);
+                entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(hp);
+                entity.setHealth(hp);
                 setCustomDamage(entity, 24);
                 livingEntity = entity;
                 break;

@@ -114,6 +114,8 @@ public final class TaskCollect implements Task {
 
     @Override
     public ChatColor getChatColor() {
-        return ChatColor.YELLOW;
+        if (isCompleted()) return ChatColor.GREEN;
+
+        return ChatColor.RED;
     }
 }

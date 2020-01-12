@@ -47,6 +47,7 @@ import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -674,8 +675,8 @@ public class MyInventoryClickEvent implements Listener {
             } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
                 BazaarManager.setPlayerSettingMoneyOfItem(player, current);
                 player.closeInventory();
-                player.sendMessage(ChatColor.GOLD + "Enter a price for item: " + currentName);
-                player.sendMessage(ChatColor.YELLOW + "(Enter a number to chat without '/' or anything)");
+                MessageUtils.sendCenteredMessage(player, ChatColor.GOLD + "Enter a price for item: " + currentName);
+                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "(Enter a number to chat without '/' or anything)");
             }
         } else if (title.equals("Bazaar Storage")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
@@ -871,7 +872,7 @@ public class MyInventoryClickEvent implements Listener {
 
                 rpgCharacter.setChatTag(chatTag);
 
-                player.sendMessage(ChatColor.YELLOW + "You selected a new chat tag: " + chatTag.getChatColor() + chatTag.toString());
+                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You selected a new chat tag: " + chatTag.getChatColor() + chatTag.toString());
             }
         }
     }

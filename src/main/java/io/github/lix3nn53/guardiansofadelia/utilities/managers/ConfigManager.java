@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.database.ConnectionPool;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.minigames.portals.InstantTeleportPortal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
@@ -489,7 +490,11 @@ public class ConfigManager {
             float tpPitch = (float) teleportPortals.getDouble("p" + i + ".tpPitch");
             Location tpLocation = new Location(tpWorld, tpX, tpY, tpZ, tpYaw, tpPitch);
 
-            PortalManager.addInstantTeleportPortal(portal, tpLocation);
+            int requiredQuestNoAccepted = teleportPortals.getInt("p" + i + ".requiredQuestNoAccepted");
+            int requiredQuestNoTurnedIn = teleportPortals.getInt("p" + i + ".requiredQuestNoTurnedIn");
+
+            InstantTeleportPortal instantTeleportPortal = new InstantTeleportPortal(tpLocation, requiredQuestNoAccepted, requiredQuestNoTurnedIn);
+            PortalManager.addInstantTeleportPortal(portal, instantTeleportPortal);
         }
     }
 }
