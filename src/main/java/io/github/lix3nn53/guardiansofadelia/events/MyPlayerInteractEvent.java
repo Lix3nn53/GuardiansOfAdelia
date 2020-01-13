@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -83,6 +84,10 @@ public class MyPlayerInteractEvent implements Listener {
                     prizeChest.play(player, itemStacks);
                     player.getInventory().setItemInMainHand(null);
                 }
+            } else if (itemInMainHandType.equals(Material.BLACK_DYE)) {
+                if (!itemInMainHand.hasItemMeta()) return;
+
+                new WeaponOrShieldSkinApplyGui().openInventory(player);
             } else {
                 Block clickedBlock = event.getClickedBlock();
                 if (clickedBlock == null) return;

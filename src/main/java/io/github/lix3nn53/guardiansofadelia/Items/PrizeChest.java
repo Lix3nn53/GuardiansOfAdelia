@@ -126,7 +126,7 @@ public class PrizeChest {
     public ItemStack getChest() {
         ItemStack itemStack = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setCustomModelData(10000035);
+        itemMeta.setCustomModelData(35);
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.GRAY + "Right click while holding to open!");

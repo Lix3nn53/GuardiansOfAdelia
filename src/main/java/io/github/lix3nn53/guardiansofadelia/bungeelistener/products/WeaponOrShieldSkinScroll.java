@@ -11,7 +11,7 @@ import java.util.List;
 
 public class WeaponOrShieldSkinScroll {
 
-    public ItemStack getItemStack(int amount) {
+    public static ItemStack getItemStack(int amount) {
         String itemName = ChatColor.GOLD + "Weapon/Shield Skin Scroll";
 
         List<String> lore = new ArrayList<>();

@@ -31,9 +31,9 @@ public class RequestHandler {
         productIdToWebProduct.put(3, new WebProduct(ChatColor.LIGHT_PURPLE + "Titan Rank", WebProductType.RANK, 600, null, PremiumRank.TITAN));
 
         //List of items
-        ItemStack itemSkinScroll1 = new WeaponOrShieldSkinScroll().getItemStack(1);
-        ItemStack itemSkinScroll2 = new WeaponOrShieldSkinScroll().getItemStack(2);
-        ItemStack itemSkinScroll5 = new WeaponOrShieldSkinScroll().getItemStack(5);
+        ItemStack itemSkinScroll1 = WeaponOrShieldSkinScroll.getItemStack(1);
+        ItemStack itemSkinScroll2 = WeaponOrShieldSkinScroll.getItemStack(2);
+        ItemStack itemSkinScroll5 = WeaponOrShieldSkinScroll.getItemStack(5);
         productIdToWebProduct.put(4, new WebProduct(ChatColor.LIGHT_PURPLE + "Weapon/Shield Skin Scroll x1", WebProductType.ITEM, 50, itemSkinScroll1));
         productIdToWebProduct.put(5, new WebProduct(ChatColor.LIGHT_PURPLE + "Weapon/Shield Skin Scroll x2", WebProductType.ITEM, 100, itemSkinScroll2));
         productIdToWebProduct.put(6, new WebProduct(ChatColor.LIGHT_PURPLE + "Weapon/Shield Skin Scroll x5", WebProductType.ITEM, 200, itemSkinScroll5));

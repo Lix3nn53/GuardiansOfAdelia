@@ -19,7 +19,7 @@ public class CraftingGuiManager {
         GuiGeneric guiGeneric = new GuiGeneric(27, craftingType.toString() + " Crafting Level Selection", 0);
         ItemStack itemStack = new ItemStack(Material.STONE_PICKAXE, 10);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setCustomModelData(10000036);
+        itemMeta.setCustomModelData(36);
         itemMeta.setDisplayName(ChatColor.GOLD + "Level 20~29");
         itemMeta.setLore(new ArrayList() {{
             add("");

@@ -94,46 +94,70 @@ public class InventoryUtils {
 
     }
 
-    public static void removeItemFromInventory(Inventory inventory, ItemStack itemStack, int amount) {
+    public static boolean removeItemFromInventory(Inventory inventory, ItemStack itemStack, int amount) {
         ItemStack[] inventoryContents = inventory.getContents();
+
+        int removedAmount = 0;
+
         for (int i = 0; i < inventoryContents.length; i++) {
             if (inventoryContents[i] != null) {
                 if (inventoryContents[i].isSimilar(itemStack)) {
                     if (inventoryContents[i].getAmount() > amount) {
                         inventoryContents[i].setAmount(inventoryContents[i].getAmount() - amount);
+                        removedAmount = amount;
                         break;
                     } else if (inventoryContents[i].getAmount() == amount) {
                         inventoryContents[i] = null;
+                        removedAmount = amount;
                         break;
                     } else {
                         amount -= inventoryContents[i].getAmount();
                         inventoryContents[i] = null;
+                        removedAmount += amount;
                     }
                 }
             }
         }
-        inventory.setContents(inventoryContents);
+
+        if (removedAmount == amount) {
+            inventory.setContents(inventoryContents);
+            return true;
+        }
+
+        return false;
     }
 
-    public static void removeMaterialFromInventory(Inventory inventory, Material material, int amount) {
+    public static boolean removeMaterialFromInventory(Inventory inventory, Material material, int amount) {
         ItemStack[] inventoryContents = inventory.getContents();
+
+        int removedAmount = 0;
+
         for (int i = 0; i < inventoryContents.length; i++) {
             if (inventoryContents[i] != null) {
                 if (inventoryContents[i].getType().equals(material)) {
                     if (inventoryContents[i].getAmount() > amount) {
                         inventoryContents[i].setAmount(inventoryContents[i].getAmount() - amount);
+                        removedAmount = amount;
                         break;
                     } else if (inventoryContents[i].getAmount() == amount) {
                         inventoryContents[i] = null;
+                        removedAmount = amount;
                         break;
                     } else {
                         amount -= inventoryContents[i].getAmount();
                         inventoryContents[i] = null;
+                        removedAmount += amount;
                     }
                 }
             }
         }
-        inventory.setContents(inventoryContents);
+
+        if (removedAmount == amount) {
+            inventory.setContents(inventoryContents);
+            return true;
+        }
+
+        return false;
     }
 
     public static void setMenuItemPlayer(Player player) {

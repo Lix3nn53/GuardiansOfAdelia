@@ -5,7 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
-import io.github.lix3nn53.guardiansofadelia.bungeelistener.ingame.WeaponOrShieldSkinApplyGui;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
@@ -243,16 +243,18 @@ public class MyInventoryClickEvent implements Listener {
                     event.setCancelled(true);
                     WeaponOrShieldSkinApplyGui weaponOrShieldSkinApplyGui = (WeaponOrShieldSkinApplyGui) activeGui;
                     if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                        boolean b = weaponOrShieldSkinApplyGui.onConfirm();
-                        if (b) {
-                            player.closeInventory();
-                            MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
-                            MessageUtils.sendCenteredMessage(player, "Applied Skin <" + weaponOrShieldSkinApplyGui.getSkinName() + ">");
-                            MessageUtils.sendCenteredMessage(player, "to " + weaponOrShieldSkinApplyGui.getItemOnSlot().getItemMeta().getDisplayName());
-                            MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
+                        if (currentType.equals(Material.LIME_WOOL)) {
+                            boolean b = weaponOrShieldSkinApplyGui.onConfirm(player);
+                            if (b) {
+                                player.closeInventory();
+                                MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
+                                MessageUtils.sendCenteredMessage(player, "Applied Skin");
+                                MessageUtils.sendCenteredMessage(player, "to " + weaponOrShieldSkinApplyGui.getItemOnSlot().getItemMeta().getDisplayName());
+                                MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
+                            }
                         }
                     } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
-                        boolean b = weaponOrShieldSkinApplyGui.setWeaponOrShield(current);
+                        boolean b = weaponOrShieldSkinApplyGui.setWeaponOrShield(current, slot);
                         if (!b) player.sendMessage(weaponOrShieldSkinApplyGui.getNotFitErrorMessage());
                     }
                 }

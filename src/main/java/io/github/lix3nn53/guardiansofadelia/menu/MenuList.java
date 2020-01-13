@@ -33,7 +33,7 @@ public class MenuList {
 
         ItemStack guide = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = guide.getItemMeta();
-        itemMeta.setCustomModelData(10000024);
+        itemMeta.setCustomModelData(24);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setDisplayName(ChatColor.GREEN + "Guides");
@@ -46,7 +46,7 @@ public class MenuList {
         guiGeneric.setItem(10, guide);
 
         ItemStack compass = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000023);
+        itemMeta.setCustomModelData(23);
         itemMeta.setDisplayName(ChatColor.AQUA + "Compass");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -57,7 +57,7 @@ public class MenuList {
         guiGeneric.setItem(12, compass);
 
         ItemStack map = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000026);
+        itemMeta.setCustomModelData(26);
         itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Maps");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -67,7 +67,7 @@ public class MenuList {
         guiGeneric.setItem(14, map);
 
         ItemStack news = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000022);
+        itemMeta.setCustomModelData(22);
         itemMeta.setDisplayName(ChatColor.AQUA + "Announcements and News");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -87,7 +87,7 @@ public class MenuList {
         guiGeneric.setItem(28, character);
 
         ItemStack guild = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000025);
+        itemMeta.setCustomModelData(25);
         itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Guild");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -97,7 +97,7 @@ public class MenuList {
         guiGeneric.setItem(30, guild);
 
         ItemStack minigames = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000029);
+        itemMeta.setCustomModelData(29);
         itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Minigames");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -107,7 +107,7 @@ public class MenuList {
         guiGeneric.setItem(32, minigames);
 
         ItemStack bazaar = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000027);
+        itemMeta.setCustomModelData(27);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Bazaar");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -117,7 +117,7 @@ public class MenuList {
         guiGeneric.setItem(34, bazaar);
 
         ItemStack donation = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000028);
+        itemMeta.setCustomModelData(28);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Donation ♥");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -135,7 +135,7 @@ public class MenuList {
 
         ItemStack skills = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = skills.getItemMeta();
-        itemMeta.setCustomModelData(10000031);
+        itemMeta.setCustomModelData(31);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Skills");
@@ -148,7 +148,7 @@ public class MenuList {
         guiGeneric.setItem(9, skills);
 
         ItemStack elements = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000037);
+        itemMeta.setCustomModelData(37);
         itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Elements");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -159,7 +159,7 @@ public class MenuList {
         guiGeneric.setItem(11, elements);
 
         ItemStack job = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000030);
+        itemMeta.setCustomModelData(30);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Job");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -169,7 +169,7 @@ public class MenuList {
         guiGeneric.setItem(13, job);
 
         ItemStack chat = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000033);
+        itemMeta.setCustomModelData(33);
         itemMeta.setDisplayName(ChatColor.AQUA + "Chat Tag");
         itemMeta.setLore(new ArrayList() {{
             add("");

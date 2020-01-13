@@ -1,8 +1,11 @@
-package io.github.lix3nn53.guardiansofadelia.bungeelistener.ingame;
+package io.github.lix3nn53.guardiansofadelia.bungeelistener.gui;
 
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.WeaponOrShieldSkinScroll;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -12,15 +15,14 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
 
     private final int emptySlot = 11;
     private final int confirmSlot = 15;
-    private final String skinName;
+    private int slotOfItemInPlayerInventory;
 
-    public WeaponOrShieldSkinApplyGui(String skinName) {
-        super(27, ChatColor.GOLD + "Weapon/Shield Skin Apply (" + skinName + ")", 0);
-        this.skinName = skinName;
+    public WeaponOrShieldSkinApplyGui() {
+        super(27, ChatColor.GOLD + "Weapon/Shield Skin Apply", 0);
 
         ItemStack glass = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
         ItemMeta itemMeta = glass.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Weapon/Shield Skin Apply (" + skinName + ")");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Weapon/Shield Skin Apply");
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GRAY + "1 - Click to the item you want to apply skin on");
@@ -36,7 +38,6 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
                 itemMeta.setDisplayName(ChatColor.GREEN + "Click to apply skin!");
                 itemMeta.setLore(new ArrayList() {{
                     add("");
-                    add(ChatColor.GRAY + "Skin: " + skinName);
                 }});
                 confirm.setItemMeta(itemMeta);
                 setItem(i, confirm);
@@ -46,7 +47,7 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
         }
     }
 
-    public boolean setWeaponOrShield(ItemStack itemStack) {
+    public boolean setWeaponOrShield(ItemStack itemStack, int slotOfItemInPlayerInventory) {
         ItemMeta itemMeta = itemStack.getItemMeta();
 
         if (!itemMeta.hasCustomModelData()) return false;
@@ -63,26 +64,32 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
         if (!isWeaponOrShield) return false;
 
         setItem(emptySlot, itemStack);
+        this.slotOfItemInPlayerInventory = slotOfItemInPlayerInventory;
 
         return true;
     }
 
-    public boolean onConfirm() {
+    public boolean onConfirm(Player player) {
         ItemStack itemStack = getItemOnSlot();
         if (itemStack == null) return false;
         if (itemStack.getType().equals(Material.AIR)) return false;
-        if (itemStack.hasItemMeta()) return false;
+        if (!itemStack.hasItemMeta()) return false;
+
+        if (!InventoryUtils.removeItemFromInventory(player.getInventory(), WeaponOrShieldSkinScroll.getItemStack(1), 1))
+            return false;
 
         ItemMeta itemMeta = itemStack.getItemMeta();
 
         if (itemMeta.hasCustomModelData()) {
             int customModelData = itemMeta.getCustomModelData();
             if (customModelData >= 6) {
-                customModelData++;
-                itemMeta.setCustomModelData(customModelData);
-                itemStack.setItemMeta(itemMeta);
-
-                return true;
+                if (customModelData % 2 == 0) { //only even numbers cuz odd numbers are already glowing
+                    customModelData++;
+                    itemMeta.setCustomModelData(customModelData);
+                    itemStack.setItemMeta(itemMeta);
+                    player.getInventory().setItem(this.slotOfItemInPlayerInventory, itemStack);
+                    return true;
+                }
             }
         }
 
@@ -91,10 +98,6 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
 
     public ItemStack getItemOnSlot() {
         return getItem(emptySlot);
-    }
-
-    public String getSkinName() {
-        return skinName;
     }
 
     public String getNotFitErrorMessage() {

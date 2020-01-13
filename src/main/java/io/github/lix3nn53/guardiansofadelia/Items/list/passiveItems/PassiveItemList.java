@@ -94,98 +94,98 @@ public class PassiveItemList {
                 level = 84;
             } else if (placementNumber == 10) {
                 name = "Moon Stone Gloves";
-                customModelDataId = 10000020;
+                customModelDataId = 20;
                 level = 90;
             }
         } else if (rpgSlotType.equals(RPGSlotType.NECKLACE)) {
             passiveTypeNum = 3;
             if (placementNumber == 1) {
                 name = "Stone Necklace";
-                customModelDataId = 10000021;
+                customModelDataId = 21;
                 level = 6;
             } else if (placementNumber == 2) {
                 name = "Leaf Necklace";
-                customModelDataId = 10000022;
+                customModelDataId = 22;
                 level = 16;
             } else if (placementNumber == 3) {
                 name = "Gold Necklace";
-                customModelDataId = 10000023;
+                customModelDataId = 23;
                 level = 26;
             } else if (placementNumber == 4) {
                 name = "Fire Necklace";
-                customModelDataId = 10000024;
+                customModelDataId = 24;
                 level = 36;
             } else if (placementNumber == 5) {
                 name = "Ocean Necklace";
-                customModelDataId = 10000025;
+                customModelDataId = 25;
                 level = 46;
             } else if (placementNumber == 6) {
                 name = "Lapis Necklace";
-                customModelDataId = 10000026;
+                customModelDataId = 26;
                 level = 56;
             } else if (placementNumber == 7) {
                 name = "Lightning Necklace";
-                customModelDataId = 10000027;
+                customModelDataId = 27;
                 level = 66;
             } else if (placementNumber == 8) {
                 name = "Amethyst Necklace";
-                customModelDataId = 10000028;
+                customModelDataId = 28;
                 level = 76;
             } else if (placementNumber == 9) {
                 name = "Ruby Necklace";
-                customModelDataId = 10000029;
+                customModelDataId = 29;
                 level = 86;
             } else if (placementNumber == 10) {
                 name = "Moon Stone Necklace";
-                customModelDataId = 10000030;
+                customModelDataId = 30;
                 level = 90;
             }
         } else if (rpgSlotType.equals(RPGSlotType.EARRING)) {
             passiveTypeNum = 4;
             if (placementNumber == 1) {
                 name = "Stone Earrings";
-                customModelDataId = 10000031;
+                customModelDataId = 31;
                 level = 8;
             } else if (placementNumber == 2) {
                 name = "Leaf Earrings";
-                customModelDataId = 10000032;
+                customModelDataId = 32;
                 level = 18;
             } else if (placementNumber == 3) {
                 name = "Gold Earrings";
-                customModelDataId = 10000033;
+                customModelDataId = 33;
                 level = 28;
             } else if (placementNumber == 4) {
                 name = "Fire Earrings";
-                customModelDataId = 10000034;
+                customModelDataId = 34;
                 level = 38;
             } else if (placementNumber == 5) {
                 name = "Ocean Earrings";
-                customModelDataId = 10000035;
+                customModelDataId = 35;
                 level = 48;
             } else if (placementNumber == 6) {
                 name = "Lapis Earrings";
-                customModelDataId = 10000036;
+                customModelDataId = 36;
                 level = 58;
             } else if (placementNumber == 7) {
                 name = "Lightning Earrings";
-                customModelDataId = 10000037;
+                customModelDataId = 37;
                 level = 68;
             } else if (placementNumber == 8) {
                 name = "Amethyst Earrings";
-                customModelDataId = 10000038;
+                customModelDataId = 38;
                 level = 78;
             } else if (placementNumber == 9) {
                 name = "Ruby Earrings";
-                customModelDataId = 10000039;
+                customModelDataId = 39;
                 level = 88;
             } else if (placementNumber == 10) {
                 name = "Moon Stone Earrings";
-                customModelDataId = 10000040;
+                customModelDataId = 40;
                 level = 90;
             }
         } else if (rpgSlotType.equals(RPGSlotType.PARROT)) {
             passiveTypeNum = 5;
-            customModelDataId = 10000041;
+            customModelDataId = 41;
             if (placementNumber == 1) {
                 name = "Gray Parrot";
                 level = 20;
