@@ -28,7 +28,7 @@ public class VanillaSlotMainhand {
             add("");
         }});
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(10000013);
+        itemMeta.setCustomModelData(13);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

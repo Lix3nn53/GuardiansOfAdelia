@@ -12,7 +12,7 @@ public class Shields {
                                 int maxStatValue, int minNumberOfStats) {
         String name = "Wooden Shield";
         Material material = Material.SHIELD;
-        int customModelDataId = 10000001;
+        int customModelDataId = 1;
         int level = 1;
         int health = 30;
         int defense = 10;
@@ -103,39 +103,39 @@ public class Shields {
         if (placementNumber == 2) {
             name = "Steel Shield";
             level = 10;
-            customModelDataId = 10000002;
+            customModelDataId = 2;
         } else if (placementNumber == 3) {
             name = "Bulwark";
             level = 20;
-            customModelDataId = 10000003;
+            customModelDataId = 3;
         } else if (placementNumber == 4) {
             name = "Battle Shield";
             level = 30;
-            customModelDataId = 10000004;
+            customModelDataId = 4;
         } else if (placementNumber == 5) {
             name = "Heroic Shield";
             level = 40;
-            customModelDataId = 10000005;
+            customModelDataId = 5;
         } else if (placementNumber == 6) {
             name = "Shield of Doom";
             level = 50;
-            customModelDataId = 10000006;
+            customModelDataId = 6;
         } else if (placementNumber == 7) {
             name = "Fire Spirit Shield";
             level = 60;
-            customModelDataId = 10000008;
+            customModelDataId = 8;
         } else if (placementNumber == 8) {
             name = "Titanic Nature Shield";
             level = 70;
-            customModelDataId = 10000010;
+            customModelDataId = 10;
         } else if (placementNumber == 9) {
             name = "Water Fairy Shield";
             level = 80;
-            customModelDataId = 10000012;
+            customModelDataId = 12;
         } else if (placementNumber == 10) {
             name = "Hellas Shield";
             level = 90;
-            customModelDataId = 10000014;
+            customModelDataId = 14;
         }
 
         health = (int) ((health * healthBonus) + 0.5);

@@ -30,7 +30,7 @@ public class RPGSlotNecklace extends RPGSlotPassive implements RPGSlot {
             add("");
         }});
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(10000011);
+        itemMeta.setCustomModelData(11);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

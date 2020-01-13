@@ -49,7 +49,7 @@ public class VanillaSlotOffhand implements VanillaSlot {
             add("Only shields and daggers can be placed here");
         }});
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(10000008);
+        itemMeta.setCustomModelData(8);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

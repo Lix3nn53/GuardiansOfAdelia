@@ -14,7 +14,7 @@ class Tridents {
                                 int maxStatValue, int minNumberofStats) {
         String name = "Wooden Spear";
         Material material = Material.TRIDENT;
-        int customModelDataId = 10000001;
+        int customModelDataId = 1;
         int level = 1;
         RPGClass rpgClass = RPGClass.MONK;
         int meleeDamage = 12;
@@ -24,55 +24,55 @@ class Tridents {
 
         if (placementNumber == 2) {
             name = "Steel Spear";
-            customModelDataId = 10000002;
+            customModelDataId = 2;
             level = 10;
             meleeDamage = 20;
             rangedDamage = 16;
         } else if (placementNumber == 3) {
             name = "Crimson Spear";
-            customModelDataId = 10000003;
+            customModelDataId = 3;
             level = 20;
             meleeDamage = 50;
             rangedDamage = 40;
         } else if (placementNumber == 4) {
             name = "Spear of Teva";
-            customModelDataId = 10000004;
+            customModelDataId = 4;
             level = 30;
             meleeDamage = 120;
             rangedDamage = 100;
         } else if (placementNumber == 5) {
             name = "Seashell Spear";
-            customModelDataId = 10000005;
+            customModelDataId = 5;
             level = 40;
             meleeDamage = 200;
             rangedDamage = 160;
         } else if (placementNumber == 6) {
             name = "Midian Spear";
-            customModelDataId = 10000006;
+            customModelDataId = 6;
             level = 50;
             meleeDamage = 310;
             rangedDamage = 255;
         } else if (placementNumber == 7) {
             name = "RedEye SpearRENAME";
-            customModelDataId = 10000008;
+            customModelDataId = 8;
             level = 60;
             meleeDamage = 430;
             rangedDamage = 360;
         } else if (placementNumber == 8) {
             name = "Nebula Spear";
-            customModelDataId = 10000010;
+            customModelDataId = 10;
             level = 70;
             meleeDamage = 570;
             rangedDamage = 480;
         } else if (placementNumber == 9) {
             name = "Royal Spear";
-            customModelDataId = 10000012;
+            customModelDataId = 12;
             level = 80;
             meleeDamage = 720;
             rangedDamage = 600;
         } else if (placementNumber == 10) {
             name = "Ocean Spirit Spear";
-            customModelDataId = 10000014;
+            customModelDataId = 14;
             level = 90;
             meleeDamage = 960;
             rangedDamage = 800;

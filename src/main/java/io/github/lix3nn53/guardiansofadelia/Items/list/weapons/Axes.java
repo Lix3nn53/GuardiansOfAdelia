@@ -13,7 +13,7 @@ class Axes {
                                 int maxStatValue, int minNumberofStats) {
         String name = "Short Axe";
         Material material = Material.DIAMOND_AXE;
-        int durability = 10000001;
+        int durability = 1;
         int level = 1;
         RPGClass rpgClass = RPGClass.WARRIOR;
         int damage = 12;
@@ -21,47 +21,47 @@ class Axes {
 
         if (placementNumber == 2) {
             name = "Battle Axe";
-            durability = 10000002;
+            durability = 2;
             level = 10;
             damage = 24;
         } else if (placementNumber == 3) {
             name = "Valor Axe";
-            durability = 10000003;
+            durability = 3;
             level = 20;
             damage = 60;
         } else if (placementNumber == 4) {
             name = "Frozen Axe";
-            durability = 10000004;
+            durability = 4;
             level = 30;
             damage = 150;
         } else if (placementNumber == 5) {
             name = "Sword of Doom";
-            durability = 10000005;
+            durability = 5;
             level = 40;
             damage = 240;
         } else if (placementNumber == 6) {
             name = "Shadow Axe";
-            durability = 10000006;
+            durability = 6;
             level = 50;
             damage = 380;
         } else if (placementNumber == 7) {
             name = "Claymore";
-            durability = 10000008;
+            durability = 8;
             level = 60;
             damage = 540;
         } else if (placementNumber == 8) {
             name = "Dragon Sword";
-            durability = 10000010;
+            durability = 10;
             level = 70;
             damage = 720;
         } else if (placementNumber == 9) {
             name = "Soul Reaper";
-            durability = 10000012;
+            durability = 12;
             level = 80;
             damage = 900;
         } else if (placementNumber == 10) {
             name = "Titanic Axe";
-            durability = 10000014;
+            durability = 14;
             level = 90;
             damage = 1200;
         }

@@ -57,21 +57,21 @@ public enum Mount {
     public int getEggCustomModelData() {
         switch (this) {
             case BLACK:
-                return 10000007;
+                return 7;
             case BROWN:
-                return 10000007;
+                return 7;
             case CHESTNUT:
-                return 10000007;
+                return 7;
             case CREAMY:
-                return 10000007;
+                return 7;
             case DARK_BROWN:
-                return 10000007;
+                return 7;
             case GRAY:
-                return 10000007;
+                return 7;
             case WHITE:
-                return 10000007;
+                return 7;
         }
-        return 10000007;
+        return 7;
     }
 
     public ItemTier getItemTier() {

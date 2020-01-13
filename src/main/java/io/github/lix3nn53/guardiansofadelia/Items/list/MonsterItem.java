@@ -54,149 +54,149 @@ public enum MonsterItem {
             case SPEAR_STEEL:
                 ItemStack itemStack = new ItemStack(Material.TRIDENT);
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000002);
+                itemMeta.setCustomModelData(2);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case SPEAR_RED:
                 itemStack = new ItemStack(Material.TRIDENT);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000003);
+                itemMeta.setCustomModelData(3);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case MACE_DARK:
                 itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000006);
+                itemMeta.setCustomModelData(6);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case SWORD_DARK:
                 itemStack = new ItemStack(Material.DIAMOND_SWORD);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000006);
+                itemMeta.setCustomModelData(6);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case SWORD_WOODEN:
                 itemStack = new ItemStack(Material.DIAMOND_SWORD);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000001);
+                itemMeta.setCustomModelData(1);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case SWORD_STEEL:
                 itemStack = new ItemStack(Material.DIAMOND_SWORD);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000002);
+                itemMeta.setCustomModelData(2);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case SWORD_BROAD:
                 itemStack = new ItemStack(Material.DIAMOND_SWORD);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000004);
+                itemMeta.setCustomModelData(4);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case SWORD_FIRE:
                 itemStack = new ItemStack(Material.DIAMOND_SWORD);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000008);
+                itemMeta.setCustomModelData(8);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case BOW_DARK:
                 itemStack = new ItemStack(Material.BOW);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000008);
+                itemMeta.setCustomModelData(8);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, itemStack);
                 return itemStack;
             case BOW_SATET:
                 itemStack = new ItemStack(Material.BOW);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000003);
+                itemMeta.setCustomModelData(3);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, itemStack);
                 return itemStack;
             case BOW_WOODEN:
                 itemStack = new ItemStack(Material.BOW);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000001);
+                itemMeta.setCustomModelData(1);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, itemStack);
                 return itemStack;
             case CROSSBOW_DARK:
                 itemStack = new ItemStack(Material.CROSSBOW);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000008);
+                itemMeta.setCustomModelData(8);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, itemStack);
                 return itemStack;
             case PIRATE_PISTOL:
                 itemStack = new ItemStack(Material.BOW);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000016);
+                itemMeta.setCustomModelData(16);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case PIRATE_HAT:
                 itemStack = new ItemStack(Material.IRON_SHOVEL);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000008);
+                itemMeta.setCustomModelData(8);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case AXE_WOODEN:
                 itemStack = new ItemStack(Material.DIAMOND_AXE);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000001);
+                itemMeta.setCustomModelData(1);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case AXE_BATTLE:
                 itemStack = new ItemStack(Material.DIAMOND_AXE);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000002);
+                itemMeta.setCustomModelData(2);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case AXE_FROST:
                 itemStack = new ItemStack(Material.DIAMOND_AXE);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000004);
+                itemMeta.setCustomModelData(4);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case AXE_TITAN:
                 itemStack = new ItemStack(Material.DIAMOND_AXE);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000014);
+                itemMeta.setCustomModelData(14);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case STAFF_WOODEN:
                 itemStack = new ItemStack(Material.DIAMOND_SHOVEL);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000001);
+                itemMeta.setCustomModelData(1);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case STAFF_LEAF:
                 itemStack = new ItemStack(Material.DIAMOND_SHOVEL);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000002);
+                itemMeta.setCustomModelData(2);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case STAFF_BONE:
                 itemStack = new ItemStack(Material.DIAMOND_SHOVEL);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000003);
+                itemMeta.setCustomModelData(3);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case STAFF_FIRE:
                 itemStack = new ItemStack(Material.DIAMOND_SHOVEL);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000004);
+                itemMeta.setCustomModelData(4);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case STAFF_OCEAN:
                 itemStack = new ItemStack(Material.DIAMOND_SHOVEL);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000010);
+                itemMeta.setCustomModelData(10);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case STAFF_MOON:
                 itemStack = new ItemStack(Material.DIAMOND_SHOVEL);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000012);
+                itemMeta.setCustomModelData(12);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case HELMET_GOLDEN:
@@ -229,49 +229,49 @@ public enum MonsterItem {
             case SHIELD_WOODEN:
                 itemStack = new ItemStack(Material.SHIELD);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000001);
+                itemMeta.setCustomModelData(1);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case SHIELD_FIRE:
                 itemStack = new ItemStack(Material.SHIELD);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000008);
+                itemMeta.setCustomModelData(8);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case SHIELD_DARK:
                 itemStack = new ItemStack(Material.SHIELD);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000006);
+                itemMeta.setCustomModelData(6);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case SHIELD_KNIGHT:
                 itemStack = new ItemStack(Material.SHIELD);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000004);
+                itemMeta.setCustomModelData(4);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case KATANA:
                 itemStack = new ItemStack(Material.DIAMOND_HOE);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000003);
+                itemMeta.setCustomModelData(3);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case DAGGER_WOOD:
                 itemStack = new ItemStack(Material.DIAMOND_HOE);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000001);
+                itemMeta.setCustomModelData(1);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case DAGGER_CRIMSON:
                 itemStack = new ItemStack(Material.DIAMOND_HOE);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000004);
+                itemMeta.setCustomModelData(4);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case DAGGER_DARKEST:
                 itemStack = new ItemStack(Material.DIAMOND_HOE);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000011);
+                itemMeta.setCustomModelData(11);
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             case STAR:

@@ -13,7 +13,7 @@ class Bows {
                                 int maxStatValue, int minNumberofStats) {
         String name = "Short Bow";
         Material material = Material.BOW;
-        int customModelDataId = 10000001;
+        int customModelDataId = 1;
         int level = 1;
         RPGClass rpgClass = RPGClass.ARCHER;
         int rangedDamage = 10;
@@ -21,47 +21,47 @@ class Bows {
 
         if (placementNumber == 2) {
             name = "Light Bow";
-            customModelDataId = 10000002;
+            customModelDataId = 2;
             level = 10;
             rangedDamage = 16;
         } else if (placementNumber == 3) {
             name = "Crossbow";
-            customModelDataId = 10000003;
+            customModelDataId = 3;
             level = 20;
             rangedDamage = 40;
         } else if (placementNumber == 4) {
             name = "Battle Bow";
-            customModelDataId = 10000004;
+            customModelDataId = 4;
             level = 30;
             rangedDamage = 100;
         } else if (placementNumber == 5) {
             name = "Satet Bow";
-            customModelDataId = 10000005;
+            customModelDataId = 5;
             level = 40;
             rangedDamage = 160;
         } else if (placementNumber == 6) {
             name = "Leaf Fairy Bow";
-            customModelDataId = 10000006;
+            customModelDataId = 6;
             level = 50;
             rangedDamage = 255;
         } else if (placementNumber == 7) {
             name = "Crossbow of Doom";
-            customModelDataId = 10000008;
+            customModelDataId = 8;
             level = 60;
             rangedDamage = 360;
         } else if (placementNumber == 8) {
             name = "Unicorn Bow";
-            customModelDataId = 10000010;
+            customModelDataId = 10;
             level = 70;
             rangedDamage = 480;
         } else if (placementNumber == 9) {
             name = "Zephyr Bow";
-            customModelDataId = 10000012;
+            customModelDataId = 12;
             level = 80;
             rangedDamage = 600;
         } else if (placementNumber == 10) {
             name = "Arcade Bow";
-            customModelDataId = 10000014;
+            customModelDataId = 14;
             level = 90;
             rangedDamage = 800;
         }

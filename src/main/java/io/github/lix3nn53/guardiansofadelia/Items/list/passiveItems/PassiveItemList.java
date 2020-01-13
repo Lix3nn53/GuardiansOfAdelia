@@ -11,7 +11,7 @@ public class PassiveItemList {
     public static ItemStack get(int placementNumber, RPGSlotType rpgSlotType, ItemTier tier, String itemTag, int minStatValue,
                                 int maxStatValue, int minNumberofStats) {
         String name = "Stone Ring";
-        int customModelDataId = 10000001;
+        int customModelDataId = 1;
         int level = 2;
         RPGClass rpgClass = RPGClass.NO_CLASS;
         int passiveTypeNum = 1;
@@ -19,78 +19,78 @@ public class PassiveItemList {
         if (rpgSlotType.equals(RPGSlotType.RING)) {
             if (placementNumber == 2) {
                 name = "Leaf Ring";
-                customModelDataId = 10000002;
+                customModelDataId = 2;
                 level = 12;
             } else if (placementNumber == 3) {
                 name = "Gold Ring";
-                customModelDataId = 10000003;
+                customModelDataId = 3;
                 level = 22;
             } else if (placementNumber == 4) {
                 name = "Fire Ring";
-                customModelDataId = 10000004;
+                customModelDataId = 4;
                 level = 32;
             } else if (placementNumber == 5) {
                 name = "Ocean Ring";
-                customModelDataId = 10000005;
+                customModelDataId = 5;
                 level = 42;
             } else if (placementNumber == 6) {
                 name = "Lapis Ring";
-                customModelDataId = 10000006;
+                customModelDataId = 6;
                 level = 52;
             } else if (placementNumber == 7) {
                 name = "Lightning Ring";
-                customModelDataId = 10000007;
+                customModelDataId = 7;
                 level = 62;
             } else if (placementNumber == 8) {
                 name = "Amethyst Ring";
-                customModelDataId = 10000008;
+                customModelDataId = 8;
                 level = 72;
             } else if (placementNumber == 9) {
                 name = "Ruby Ring";
-                customModelDataId = 10000009;
+                customModelDataId = 9;
                 level = 82;
             } else if (placementNumber == 10) {
                 name = "Moon Stone Ring";
-                customModelDataId = 10000010;
+                customModelDataId = 10;
                 level = 90;
             }
         } else if (rpgSlotType.equals(RPGSlotType.GLOVE)) {
             passiveTypeNum = 2;
             if (placementNumber == 1) {
                 name = "Short Gloves";
-                customModelDataId = 10000011;
+                customModelDataId = 11;
                 level = 4;
             } else if (placementNumber == 2) {
                 name = "Cloth Gloves";
-                customModelDataId = 10000012;
+                customModelDataId = 12;
                 level = 14;
             } else if (placementNumber == 3) {
                 name = "Leather Gloves";
-                customModelDataId = 10000013;
+                customModelDataId = 13;
                 level = 24;
             } else if (placementNumber == 4) {
                 name = "Chainmail Gloves";
-                customModelDataId = 10000014;
+                customModelDataId = 14;
                 level = 34;
             } else if (placementNumber == 5) {
                 name = "Iron Gloves";
-                customModelDataId = 10000015;
+                customModelDataId = 15;
                 level = 44;
             } else if (placementNumber == 6) {
                 name = "Amethyst Gloves";
-                customModelDataId = 10000016;
+                customModelDataId = 16;
                 level = 54;
             } else if (placementNumber == 7) {
                 name = "Gold Gloves";
-                customModelDataId = 10000017;
+                customModelDataId = 17;
                 level = 64;
             } else if (placementNumber == 8) {
                 name = "Quartz Gloves";
-                customModelDataId = 10000018;
+                customModelDataId = 18;
                 level = 74;
             } else if (placementNumber == 9) {
                 name = "Titanium Gloves";
-                customModelDataId = 10000019;
+                customModelDataId = 19;
                 level = 84;
             } else if (placementNumber == 10) {
                 name = "Moon Stone Gloves";

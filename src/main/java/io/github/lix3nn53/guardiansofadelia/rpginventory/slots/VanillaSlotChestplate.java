@@ -50,7 +50,7 @@ public class VanillaSlotChestplate implements VanillaSlot {
             add("");
         }});
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(10000003);
+        itemMeta.setCustomModelData(3);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

@@ -30,7 +30,7 @@ public class RPGSlotParrot extends RPGSlotPassive implements RPGSlot {
             add("");
         }});
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(10000015);
+        itemMeta.setCustomModelData(15);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

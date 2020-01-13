@@ -34,7 +34,7 @@ public class PetExperienceManager {
     }
 
     public static int getLevelFromExp(int eggExp) {
-        if (eggExp >= 1000000) {
+        if (eggExp >= ) {
             return 12;
         } else if (eggExp >= 800000) {
             return 11;
@@ -80,7 +80,7 @@ public class PetExperienceManager {
         } else if (eggLevel == 10) {
             return "800000";
         } else if (eggLevel == 11) {
-            return "1000000";
+            return "";
         } else if (eggLevel == 12) {
             return "∞";
         }

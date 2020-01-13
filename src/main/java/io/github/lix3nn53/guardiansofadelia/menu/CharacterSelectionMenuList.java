@@ -18,7 +18,7 @@ public class CharacterSelectionMenuList {
         ItemMeta itemMeta = s1.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(10000009);
+        itemMeta.setCustomModelData(9);
         itemMeta.setDisplayName(ChatColor.AQUA + "Knight");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -37,7 +37,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(20, s1);
 
         ItemStack s2 = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000008);
+        itemMeta.setCustomModelData(8);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Paladin");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -56,7 +56,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(6, s2);
 
         ItemStack s3 = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000012);
+        itemMeta.setCustomModelData(12);
         itemMeta.setDisplayName(ChatColor.RED + "Warrior");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -75,7 +75,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(2, s3);
 
         ItemStack s4 = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000011);
+        itemMeta.setCustomModelData(11);
         itemMeta.setDisplayName(ChatColor.BLUE + "Rogue");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -94,7 +94,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(22, s4);
 
         ItemStack s5 = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000007);
+        itemMeta.setCustomModelData(7);
         itemMeta.setDisplayName(ChatColor.GREEN + "Archer");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -113,7 +113,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(24, s5);
 
         ItemStack s6 = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000010);
+        itemMeta.setCustomModelData(10);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Mage");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -132,7 +132,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(4, s6);
 
         ItemStack s7 = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000015);
+        itemMeta.setCustomModelData(15);
         itemMeta.setDisplayName(ChatColor.GOLD + "Monk");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -152,7 +152,7 @@ public class CharacterSelectionMenuList {
         guiGeneric.setItem(38, s7);
 
         ItemStack s8 = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(10000016);
+        itemMeta.setCustomModelData(16);
         itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Hunter");
         itemMeta.setLore(new ArrayList() {{
             add("");

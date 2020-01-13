@@ -50,7 +50,7 @@ public class VanillaSlotLeggings implements VanillaSlot {
             add("");
         }});
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(10000004);
+        itemMeta.setCustomModelData(4);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

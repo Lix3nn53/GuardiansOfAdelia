@@ -433,7 +433,7 @@ public enum AdeliaEntity {
 
                 ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(10000011);
+                itemMeta.setCustomModelData(11);
                 itemMeta.setUnbreakable(true);
                 itemStack.setItemMeta(itemMeta);
                 mobEquipment.setHelmet(itemStack);

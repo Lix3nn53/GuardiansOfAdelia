@@ -14,13 +14,13 @@ public enum QuestIconType {
         ItemStack item = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta im = item.getItemMeta();
         if (this.equals(QuestIconType.NEW)) {
-            im.setCustomModelData(10000001);
+            im.setCustomModelData(1);
         } else if (this.equals(QuestIconType.CURRENT)) {
-            im.setCustomModelData(10000002);
+            im.setCustomModelData(2);
         } else if (this.equals(QuestIconType.COMPLETED)) {
-            im.setCustomModelData(10000003);
+            im.setCustomModelData(3);
         } else if (this.equals(QuestIconType.EMPTY)) {
-            im.setCustomModelData(10000004);
+            im.setCustomModelData(4);
         }
         item.setItemMeta(im);
 

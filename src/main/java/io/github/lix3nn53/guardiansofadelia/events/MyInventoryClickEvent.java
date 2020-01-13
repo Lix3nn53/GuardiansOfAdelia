@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.ingame.WeaponOrShieldSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
@@ -109,7 +110,6 @@ public class MyInventoryClickEvent implements Listener {
         if (current != null) {
             currentType = current.getType();
         }
-
 
         ItemStack cursor = event.getCursor();
         Material cursorType = Material.AIR;
@@ -238,6 +238,22 @@ public class MyInventoryClickEvent implements Listener {
                                 return; //TODO enchanting passive items are disabled. Stay this way?
                             enchantGui.setItemToEnchant(current);
                         }
+                    }
+                } else if (activeGui instanceof WeaponOrShieldSkinApplyGui) {
+                    event.setCancelled(true);
+                    WeaponOrShieldSkinApplyGui weaponOrShieldSkinApplyGui = (WeaponOrShieldSkinApplyGui) activeGui;
+                    if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                        boolean b = weaponOrShieldSkinApplyGui.onConfirm();
+                        if (b) {
+                            player.closeInventory();
+                            MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
+                            MessageUtils.sendCenteredMessage(player, "Applied Skin <" + weaponOrShieldSkinApplyGui.getSkinName() + ">");
+                            MessageUtils.sendCenteredMessage(player, "to " + weaponOrShieldSkinApplyGui.getItemOnSlot().getItemMeta().getDisplayName());
+                            MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
+                        }
+                    } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+                        boolean b = weaponOrShieldSkinApplyGui.setWeaponOrShield(current);
+                        if (!b) player.sendMessage(weaponOrShieldSkinApplyGui.getNotFitErrorMessage());
                     }
                 }
                 if (!title.equals("Bazaar Storage")) {

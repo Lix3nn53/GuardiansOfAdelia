@@ -124,7 +124,7 @@ public class Bazaar {
         this.bazaarModel = (ArmorStand) baseLocation.getWorld().spawnEntity(baseLocation, EntityType.ARMOR_STAND);
         ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setCustomModelData(10000003);
+        itemMeta.setCustomModelData(3);
         itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
         this.bazaarModel.setHelmet(itemStack);

@@ -30,7 +30,7 @@ public class RPGSlotGlove extends RPGSlotPassive implements RPGSlot {
             add("");
         }});
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(10000006);
+        itemMeta.setCustomModelData(6);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

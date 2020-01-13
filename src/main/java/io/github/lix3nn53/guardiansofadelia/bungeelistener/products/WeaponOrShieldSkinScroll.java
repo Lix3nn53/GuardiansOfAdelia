@@ -9,7 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemSkinScroll {
+public class WeaponOrShieldSkinScroll {
 
     public ItemStack getItemStack(int amount) {
         String itemName = ChatColor.GOLD + "Weapon/Shield Skin Scroll";

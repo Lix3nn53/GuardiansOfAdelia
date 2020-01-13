@@ -13,7 +13,7 @@ class Staffs {
                                 int maxStatValue, int minNumberofStats) {
         String name = "Short Staff";
         Material material = Material.DIAMOND_SHOVEL;
-        int customModelDataId = 10000001;
+        int customModelDataId = 1;
         int level = 1;
         RPGClass rpgClass = RPGClass.MAGE;
         int magicDamage = 10;
@@ -21,47 +21,47 @@ class Staffs {
 
         if (placementNumber == 2) {
             name = "Leaf Fairy Staff";
-            customModelDataId = 10000002;
+            customModelDataId = 2;
             level = 10;
             magicDamage = 20;
         } else if (placementNumber == 3) {
             name = "Zest Staff";
-            customModelDataId = 10000003;
+            customModelDataId = 3;
             level = 20;
             magicDamage = 50;
         } else if (placementNumber == 4) {
             name = "Dinah Wand";
-            customModelDataId = 10000004;
+            customModelDataId = 4;
             level = 30;
             magicDamage = 125;
         } else if (placementNumber == 5) {
             name = "Nether Fire Staff";
-            customModelDataId = 10000005;
+            customModelDataId = 5;
             level = 40;
             magicDamage = 200;
         } else if (placementNumber == 6) {
             name = "Water Fairy Staff";
-            customModelDataId = 10000006;
+            customModelDataId = 6;
             level = 50;
             magicDamage = 320;
         } else if (placementNumber == 7) {
             name = "Fairy Staff";
-            customModelDataId = 10000008;
+            customModelDataId = 8;
             level = 60;
             magicDamage = 450;
         } else if (placementNumber == 8) {
             name = "Ocean Staff";
-            customModelDataId = 10000010;
+            customModelDataId = 10;
             level = 70;
             magicDamage = 600;
         } else if (placementNumber == 9) {
             name = "Crystal of Swamp";
-            customModelDataId = 10000012;
+            customModelDataId = 12;
             level = 80;
             magicDamage = 750;
         } else if (placementNumber == 10) {
             name = "Neferti Staff";
-            customModelDataId = 10000014;
+            customModelDataId = 14;
             level = 90;
             magicDamage = 1000;
         }

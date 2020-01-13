@@ -324,71 +324,71 @@ public enum Companion {
     public int getEggCustomModelData() {
         switch (this) {
             case CHICKEN:
-                return 10000009;
+                return 9;
             case SHEEP:
-                return 10000017;
+                return 17;
             case COW:
-                return 10000013;
+                return 13;
             case PIG:
-                return 10000005;
+                return 5;
             case CAT_ALL_BLACK:
-                return 10000006;
+                return 6;
             case CAT_BLACK:
-                return 10000006;
+                return 6;
             case CAT_BRITISH_SHORTHAIR:
-                return 10000006;
+                return 6;
             case CAT_CALICO:
-                return 10000006;
+                return 6;
             case CAT_JELLIE:
-                return 10000006;
+                return 6;
             case CAT_PERSIAN:
-                return 10000006;
+                return 6;
             case CAT_RAGDOLL:
-                return 10000006;
+                return 6;
             case CAT_RED:
-                return 10000006;
+                return 6;
             case CAT_SIAMESE:
-                return 10000006;
+                return 6;
             case CAT_TABBY:
-                return 10000006;
+                return 6;
             case CAT_WHITE:
-                return 10000006;
+                return 6;
             case RABBIT_BLACK:
-                return 10000018;
+                return 18;
             case RABBIT_BLACK_AND_WHITE:
-                return 10000018;
+                return 18;
             case RABBIT_BROWN:
-                return 10000018;
+                return 18;
             case RABBIT_GOLD:
-                return 10000018;
+                return 18;
             case RABBIT_SALT_AND_PEPPER:
-                return 10000018;
+                return 18;
             case RABBIT_WHITE:
-                return 10000018;
+                return 18;
             case CHOCOLATE:
-                return 10000013;
+                return 13;
             case WOLF:
-                return 10000016;
+                return 16;
             case TURTLE:
-                return 10000001;
+                return 1;
             case POLAR_BEAR:
-                return 10000004;
+                return 4;
             case PANDA:
-                return 10000014;
+                return 14;
             case ICE_CREAM:
-                return 10000015;
+                return 15;
             case FOX_RED:
-                return 10000011;
+                return 11;
             case FOX_SNOW:
-                return 10000004;
+                return 4;
             case VEX:
-                return 10000010;
+                return 10;
             case MINI_DRAGON:
-                return 10000003;
+                return 3;
             case BEE:
-                return 10000002;
+                return 2;
         }
-        return 10000001;
+        return 1;
     }
 
     public ItemTier getItemTier() {

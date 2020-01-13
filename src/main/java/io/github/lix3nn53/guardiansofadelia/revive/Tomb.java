@@ -27,7 +27,7 @@ public class Tomb {
         this.tombModel = (ArmorStand) baseLocation.getWorld().spawnEntity(baseLocation, EntityType.ARMOR_STAND);
         ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setCustomModelData(10000001);
+        itemMeta.setCustomModelData(1);
         itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
         this.tombModel.setHelmet(itemStack);

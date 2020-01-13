@@ -394,7 +394,7 @@ public class HunterSkills {
         seconds.add(90);
         seconds.add(100);
         seconds.add(120);
-        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 10000005, seconds, ChatColor.DARK_GRAY + "< Trap %caster% >");
+        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 5, seconds, ChatColor.DARK_GRAY + "< Trap %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
         List<Integer> repetitions = new ArrayList<>();

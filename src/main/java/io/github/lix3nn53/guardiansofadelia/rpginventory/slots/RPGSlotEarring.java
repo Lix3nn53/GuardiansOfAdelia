@@ -30,7 +30,7 @@ public class RPGSlotEarring extends RPGSlotPassive implements RPGSlot {
             add("");
         }});
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(10000007);
+        itemMeta.setCustomModelData(7);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

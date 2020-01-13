@@ -210,15 +210,15 @@ public class CommandLix implements CommandExecutor {
                     ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
                     ItemMeta itemMeta = itemStack.getItemMeta();
                     if (args[1].equals("portal1")) {
-                        itemMeta.setCustomModelData(10000006);
+                        itemMeta.setCustomModelData(6);
                     } else if (args[1].equals("portal2")) {
-                        itemMeta.setCustomModelData(10000007);
+                        itemMeta.setCustomModelData(7);
                     } else if (args[1].equals("portal3")) {
-                        itemMeta.setCustomModelData(10000008);
+                        itemMeta.setCustomModelData(8);
                     } else if (args[1].equals("portal4")) {
-                        itemMeta.setCustomModelData(10000009);
+                        itemMeta.setCustomModelData(9);
                     } else if (args[1].equals("portal5")) {
-                        itemMeta.setCustomModelData(10000010);
+                        itemMeta.setCustomModelData(10);
                     }
                     itemMeta.setUnbreakable(true);
                     itemStack.setItemMeta(itemMeta);

@@ -208,7 +208,7 @@ public class EnchantGui extends GuiGeneric {
         ItemStack success = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = success.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GREEN + "Success");
-        itemMeta.setCustomModelData(10000005);
+        itemMeta.setCustomModelData(5);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         success.setItemMeta(itemMeta);
@@ -220,7 +220,7 @@ public class EnchantGui extends GuiGeneric {
         ItemStack fail = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = fail.getItemMeta();
         itemMeta.setDisplayName(ChatColor.RED + "Fail");
-        itemMeta.setCustomModelData(10000006);
+        itemMeta.setCustomModelData(6);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         fail.setItemMeta(itemMeta);

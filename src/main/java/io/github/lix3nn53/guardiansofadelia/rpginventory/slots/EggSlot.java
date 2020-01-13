@@ -43,7 +43,7 @@ public class EggSlot {
             add("");
         }});
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(10000012);
+        itemMeta.setCustomModelData(12);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
