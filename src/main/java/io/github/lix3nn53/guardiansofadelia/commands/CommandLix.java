@@ -7,7 +7,9 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
@@ -234,7 +236,7 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-
+                BoostPremiumManager.tellBungeeToActivateBoost(player, BoostPremium.EXPERIENCE);
             }
 
             // If the player (or console) uses our command correct, we can return true

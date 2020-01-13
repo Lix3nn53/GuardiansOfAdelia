@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.web.WebPurchase;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.web.WebResponse;
 import org.bukkit.Bukkit;
@@ -49,6 +50,12 @@ public class PluginChannelListener implements PluginMessageListener {
                 responseToSend.add(String.valueOf(responseProductId));
 
                 sendToBungeeCord(player, "webPurchaseResponse", responseToSend);
+            } else if (subchannel.equalsIgnoreCase("premiumBoostActivate")) {
+                String boostString = in.readUTF();
+
+                BoostPremium boostPremium = BoostPremium.valueOf(boostString);
+
+                BoostPremiumManager.activateBoostOnThisServer(boostPremium);
             }
         } catch (IOException e) {
             e.printStackTrace();
