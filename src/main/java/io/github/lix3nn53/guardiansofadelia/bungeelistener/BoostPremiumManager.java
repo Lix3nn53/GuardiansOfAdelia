@@ -28,7 +28,7 @@ public class BoostPremiumManager {
             public void run() {
                 activeBoosts.remove(boostType);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 60 * 20L);//20 minutes
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 60 * 40L); //40 minutes
 
         if (boostTimers.containsKey(boostType)) {
             boostTimers.get(boostType).cancel();

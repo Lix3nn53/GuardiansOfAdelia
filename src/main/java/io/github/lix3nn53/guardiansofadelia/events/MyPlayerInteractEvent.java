@@ -5,7 +5,9 @@ import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -13,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
+import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
@@ -28,6 +31,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 import java.util.UUID;
@@ -64,6 +68,9 @@ public class MyPlayerInteractEvent implements Listener {
                         }
                     }
                 }
+            } else if (itemInMainHandType.equals(Material.COMPASS)) {
+                GuiGeneric compass = MenuList.compass();
+                compass.openInventory(player);
             } else if (itemInMainHandType.equals(Material.PAPER)) {
                 if (PersistentDataContainerUtil.hasString(itemInMainHand, "teleportScroll")) {
                     String teleportScroll = PersistentDataContainerUtil.getString(itemInMainHand, "teleportScroll");
@@ -85,9 +92,26 @@ public class MyPlayerInteractEvent implements Listener {
                     player.getInventory().setItemInMainHand(null);
                 }
             } else if (itemInMainHandType.equals(Material.BLACK_DYE)) {
+                event.setCancelled(true);
                 if (!itemInMainHand.hasItemMeta()) return;
+                if (!itemInMainHand.getItemMeta().hasDisplayName()) return;
 
-                new WeaponOrShieldSkinApplyGui().openInventory(player);
+                ItemMeta itemMeta = itemInMainHand.getItemMeta();
+                String displayName = itemMeta.getDisplayName();
+
+                if (displayName.equals(ChatColor.GOLD + "Weapon/Shield Skin Scroll")) {
+
+                    new WeaponOrShieldSkinApplyGui().openInventory(player);
+                } else if (PersistentDataContainerUtil.hasString(itemInMainHand, "boostCode")) {
+                    String boostCode = PersistentDataContainerUtil.getString(itemInMainHand, "boostCode");
+
+                    BoostPremium boostPremium = BoostPremium.valueOf(boostCode);
+
+                    BoostPremiumManager.tellBungeeToActivateBoost(player, boostPremium);
+                    int amount = itemInMainHand.getAmount();
+                    itemInMainHand.setAmount(amount - 1);
+                }
+
             } else {
                 Block clickedBlock = event.getClickedBlock();
                 if (clickedBlock == null) return;

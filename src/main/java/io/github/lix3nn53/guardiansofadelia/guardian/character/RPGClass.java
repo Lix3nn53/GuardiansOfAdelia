@@ -82,6 +82,25 @@ public enum RPGClass {
         return name;
     }
 
+    public int getClassIconCustomModelData() {
+        if (this == RPGClass.KNIGHT) {
+            return 9;
+        } else if (this == RPGClass.MAGE) {
+            return 10;
+        } else if (this == RPGClass.MONK) {
+            return 15;
+        } else if (this == RPGClass.ROGUE) {
+            return 11;
+        } else if (this == RPGClass.PALADIN) {
+            return 8;
+        } else if (this == RPGClass.WARRIOR) {
+            return 12;
+        } else if (this == RPGClass.HUNTER) {
+            return 16;
+        }
+        return 7;
+    }
+
     public int getAttributeBonusForLevel(AttributeType attributeType, int level) {
         int tier = 1;
         if (this == RPGClass.ARCHER) {

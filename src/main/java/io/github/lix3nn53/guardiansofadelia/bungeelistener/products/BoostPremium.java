@@ -28,7 +28,7 @@ public enum BoostPremium {
         lore.add(ChatColor.YELLOW + "1 - Right click while you are holding this item.");
 
         ItemStack itemStack = new ItemStack(Material.BLACK_DYE);
-        PersistentDataContainerUtil.putString("boostCode", this.toString(), itemStack);
+        PersistentDataContainerUtil.putString("boostCode", this.name(), itemStack);
 
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);

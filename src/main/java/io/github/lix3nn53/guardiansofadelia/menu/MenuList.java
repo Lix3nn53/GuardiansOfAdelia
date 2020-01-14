@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.menu;
 
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
@@ -8,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillList;
@@ -28,26 +31,15 @@ import java.util.UUID;
 
 public class MenuList {
 
-    public static GuiGeneric mainMenu() {
+    public static GuiGeneric mainMenu(GuardianData guardianData) {
         GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.GREEN + "Menu", 0);
 
-        ItemStack guide = new ItemStack(Material.STONE_PICKAXE);
-        ItemMeta itemMeta = guide.getItemMeta();
-        itemMeta.setCustomModelData(24);
+        ItemStack compass = new ItemStack(Material.STONE_PICKAXE);
+        ItemMeta itemMeta = compass.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setDisplayName(ChatColor.GREEN + "Guides");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "All about Guardians of Adelia!");
-
-        }});
-        guide.setItemMeta(itemMeta);
-        guiGeneric.setItem(10, guide);
-
-        ItemStack compass = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(23);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Compass");
+        itemMeta.setDisplayName(ChatColor.BLUE + "Compass");
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GRAY + "Choose where you want to go and");
@@ -66,25 +58,16 @@ public class MenuList {
         map.setItemMeta(itemMeta);
         guiGeneric.setItem(14, map);
 
-        ItemStack news = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(22);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Announcements and News");
+        ItemStack character = new ItemStack(Material.STONE_PICKAXE);
+        RPGClass rpgClass = guardianData.getActiveCharacter().getRpgClass();
+        itemMeta.setCustomModelData(rpgClass.getClassIconCustomModelData());
+        itemMeta.setDisplayName(ChatColor.GREEN + "Character");
         itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Read Announcements and News about Guardians of Adelia");
-        }});
-        news.setItemMeta(itemMeta);
-        guiGeneric.setItem(16, news);
-
-        ItemStack character = new ItemStack(Material.PLAYER_HEAD);
-        SkullMeta skullMeta = (SkullMeta) character.getItemMeta();
-        skullMeta.setDisplayName(ChatColor.GOLD + "Character");
-        skullMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GRAY + "Manage your character");
         }});
-        character.setItemMeta(skullMeta);
-        guiGeneric.setItem(28, character);
+        character.setItemMeta(itemMeta);
+        guiGeneric.setItem(10, character);
 
         ItemStack guild = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(25);
@@ -94,7 +77,7 @@ public class MenuList {
             add(ChatColor.GRAY + "United we stand divided we fall!");
         }});
         guild.setItemMeta(itemMeta);
-        guiGeneric.setItem(30, guild);
+        guiGeneric.setItem(16, guild);
 
         ItemStack minigames = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(29);
@@ -108,24 +91,34 @@ public class MenuList {
 
         ItemStack bazaar = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(27);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Bazaar");
+        itemMeta.setDisplayName(ChatColor.GOLD + "Bazaar");
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GRAY + "Manage your bazaar!");
         }});
         bazaar.setItemMeta(itemMeta);
-        guiGeneric.setItem(34, bazaar);
+        guiGeneric.setItem(30, bazaar);
+
+        ItemStack activeBoosts = new ItemStack(Material.STONE_PICKAXE);
+        itemMeta.setCustomModelData(38);
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Server Boosts");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "See if the server boost are active or not");
+        }});
+        activeBoosts.setItemMeta(itemMeta);
+        guiGeneric.setItem(48, activeBoosts);
 
         ItemStack donation = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(28);
-        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Donation ♥");
+        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "WebStore ♥");
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GRAY + "Donations are not required but helps me so");
             add(ChatColor.GRAY + "I can keep working on this project. Thanks <3");
         }});
         donation.setItemMeta(itemMeta);
-        guiGeneric.setItem(49, donation);
+        guiGeneric.setItem(50, donation);
 
         return guiGeneric;
     }
@@ -456,7 +449,7 @@ public class MenuList {
     }
 
     public static GuiGeneric compass() {
-        GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.AQUA + "Compass", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.BLUE + "Compass", 0);
 
         ItemStack city = new ItemStack(Material.LIGHT_BLUE_WOOL);
         ItemMeta itemMeta = city.getItemMeta();
@@ -624,6 +617,61 @@ public class MenuList {
         }});
         trade.setItemMeta(itemMeta);
         guiGeneric.setItem(16, trade);
+
+        return guiGeneric;
+    }
+
+    public static GuiGeneric serverBoostMenu() {
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.YELLOW + "Server Boosts", 0);
+
+        ItemStack boostExperience = new ItemStack(Material.RED_WOOL);
+        ItemMeta itemMeta = boostExperience.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Experience Boost");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "2x exp gained from slaying monsters");
+        }});
+        boostExperience.setItemMeta(itemMeta);
+        if (BoostPremiumManager.isBoostActive(BoostPremium.EXPERIENCE)) {
+            boostExperience.setType(Material.LIME_WOOL);
+        }
+        guiGeneric.setItem(10, boostExperience);
+
+        ItemStack boostLoot = new ItemStack(Material.RED_WOOL);
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Loot Boost");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "2x chance of monsters droping item when they die");
+        }});
+        boostLoot.setItemMeta(itemMeta);
+        if (BoostPremiumManager.isBoostActive(BoostPremium.LOOT)) {
+            boostLoot.setType(Material.LIME_WOOL);
+        }
+        guiGeneric.setItem(12, boostLoot);
+
+        ItemStack boostEnchant = new ItemStack(Material.RED_WOOL);
+        itemMeta.setDisplayName(ChatColor.AQUA + "Enchant Boost");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Increases success rate of item enchanting by 15%");
+        }});
+        boostEnchant.setItemMeta(itemMeta);
+        if (BoostPremiumManager.isBoostActive(BoostPremium.ENCHANT)) {
+            boostEnchant.setType(Material.LIME_WOOL);
+        }
+        guiGeneric.setItem(14, boostEnchant);
+
+        ItemStack boostGather = new ItemStack(Material.RED_WOOL);
+        itemMeta.setDisplayName(ChatColor.GREEN + "Gather Boost");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "2x gathering speed ");
+        }});
+        boostGather.setItemMeta(itemMeta);
+        if (BoostPremiumManager.isBoostActive(BoostPremium.GATHER)) {
+            boostGather.setType(Material.LIME_WOOL);
+        }
+        guiGeneric.setItem(16, boostGather);
 
         return guiGeneric;
     }

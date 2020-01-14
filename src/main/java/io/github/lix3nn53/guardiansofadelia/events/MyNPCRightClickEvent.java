@@ -52,7 +52,6 @@ public class MyNPCRightClickEvent implements Listener {
                 }
             }
 
-
             if (DatabaseQueries.characterExists(uuid, id)) {
                 GuiGeneric characterTeleportationMenu = CharacterSelectionMenuList.characterSelectionMenu(id);
                 characterTeleportationMenu.openInventory(player);

@@ -292,13 +292,13 @@ public class MyInventoryClickEvent implements Listener {
                 InventoryUtils.giveItemToPlayer(player, cursor);
                 cursor.setAmount(0);
             }
-            GuiGeneric guiGeneric = MenuList.mainMenu();
+            GuiGeneric guiGeneric = MenuList.mainMenu(guardianData);
             guiGeneric.openInventory(player);
         } else if (title.equals(org.bukkit.ChatColor.GREEN + "Menu")) {
             if (currentName.equals(ChatColor.GREEN + "Guides")) {
                 GuiGeneric guide = MenuList.guide();
                 guide.openInventory(player);
-            } else if (currentName.equals(ChatColor.AQUA + "Compass")) {
+            } else if (currentName.equals(ChatColor.BLUE + "Compass")) {
                 GuiGeneric compass = MenuList.compass();
                 compass.openInventory(player);
             } else if (currentName.equals(ChatColor.DARK_GREEN + "Maps")) {
@@ -309,15 +309,7 @@ public class MyInventoryClickEvent implements Listener {
                 message.setColor(ChatColor.GREEN);
                 message.setBold(true);
                 player.spigot().sendMessage(message);
-            } else if (currentName.equals(ChatColor.AQUA + "Announcements and News")) {
-                player.closeInventory();
-                TextComponent message = new TextComponent(" Announcements and News ! (Click Me)");
-                message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://guardiansofadelia.com/#t2"));
-                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click to see Announcements and News from our website").color(ChatColor.AQUA).create()));
-                message.setColor(ChatColor.AQUA);
-                message.setBold(true);
-                player.spigot().sendMessage(message);
-            } else if (currentName.equals(ChatColor.GOLD + "Character")) {
+            } else if (currentName.equals(ChatColor.GREEN + "Character")) {
                 GuiGeneric character = MenuList.character();
                 character.openInventory(player);
             } else if (currentName.equals(ChatColor.DARK_PURPLE + "Guild")) {
@@ -327,7 +319,7 @@ public class MyInventoryClickEvent implements Listener {
             } else if (currentName.equals(ChatColor.DARK_PURPLE + "Minigames")) {
                 GuiGeneric minigames = MenuList.minigames();
                 minigames.openInventory(player);
-            } else if (currentName.equals(ChatColor.YELLOW + "Bazaar")) {
+            } else if (currentName.equals(ChatColor.GOLD + "Bazaar")) {
                 GuiGeneric bazaar = MenuList.bazaar(player);
                 bazaar.openInventory(player);
             } else if (currentName.equals(ChatColor.LIGHT_PURPLE + "Donation ♥")) {
@@ -338,6 +330,9 @@ public class MyInventoryClickEvent implements Listener {
                 message.setColor(ChatColor.LIGHT_PURPLE);
                 message.setBold(true);
                 player.spigot().sendMessage(message);
+            } else if (currentName.equals(ChatColor.YELLOW + "Server Boosts")) {
+                GuiGeneric serverBoostMenu = MenuList.serverBoostMenu();
+                serverBoostMenu.openInventory(player);
             }
         } else if (title.contains("Character")) {
             if (title.contains("Creation")) {
@@ -480,7 +475,7 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        } else if (title.equals(ChatColor.AQUA + "Compass")) {
+        } else if (title.equals(ChatColor.BLUE + "Compass")) {
             if (currentType.equals(Material.LIGHT_BLUE_WOOL)) {
                 String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
