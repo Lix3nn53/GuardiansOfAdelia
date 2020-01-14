@@ -6,12 +6,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class BoostPremiumManager {
 
     private final static Set<BoostPremium> activeBoosts = new HashSet<>();
     private final static HashMap<BoostPremium, BukkitTask> boostTimers = new HashMap<>();
+    private final static HashMap<BoostPremium, LocalDateTime> endTimes = new HashMap<>();
 
     public static void tellBungeeToActivateBoost(Player player, BoostPremium boostType) {
         List<String> args = new ArrayList<>();
@@ -35,9 +38,20 @@ public class BoostPremiumManager {
         }
 
         boostTimers.put(boostType, bukkitTask);
+        endTimes.put(boostType, LocalDateTime.now());
     }
 
     public static boolean isBoostActive(BoostPremium boostType) {
         return activeBoosts.contains(boostType);
+    }
+
+    public static long getMinutesLeft(BoostPremium boostType) {
+        if (!endTimes.containsKey(boostType)) return 0;
+
+        LocalDateTime localDate = endTimes.get(boostType);
+
+        LocalDateTime now = LocalDateTime.now();
+
+        return now.until(localDate, ChronoUnit.MINUTES);
     }
 }

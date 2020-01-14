@@ -627,50 +627,58 @@ public class MenuList {
         ItemStack boostExperience = new ItemStack(Material.RED_WOOL);
         ItemMeta itemMeta = boostExperience.getItemMeta();
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Experience Boost");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "2x exp gained from slaying monsters");
-        }});
-        boostExperience.setItemMeta(itemMeta);
+        List<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "2x exp gained from slaying monsters");
         if (BoostPremiumManager.isBoostActive(BoostPremium.EXPERIENCE)) {
             boostExperience.setType(Material.LIME_WOOL);
+            lore.add("");
+            lore.add("Minutes left: " + BoostPremiumManager.getMinutesLeft(BoostPremium.EXPERIENCE));
         }
+        itemMeta.setLore(lore);
+        boostExperience.setItemMeta(itemMeta);
         guiGeneric.setItem(10, boostExperience);
 
         ItemStack boostLoot = new ItemStack(Material.RED_WOOL);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Loot Boost");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "2x chance of monsters droping item when they die");
-        }});
-        boostLoot.setItemMeta(itemMeta);
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "2x chance of monsters droping item when they die");
         if (BoostPremiumManager.isBoostActive(BoostPremium.LOOT)) {
             boostLoot.setType(Material.LIME_WOOL);
+            lore.add("");
+            lore.add("Minutes left: " + BoostPremiumManager.getMinutesLeft(BoostPremium.LOOT));
         }
+        itemMeta.setLore(lore);
+        boostLoot.setItemMeta(itemMeta);
         guiGeneric.setItem(12, boostLoot);
 
         ItemStack boostEnchant = new ItemStack(Material.RED_WOOL);
         itemMeta.setDisplayName(ChatColor.AQUA + "Enchant Boost");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Increases success rate of item enchanting by 15%");
-        }});
-        boostEnchant.setItemMeta(itemMeta);
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Increases success rate of item enchanting by 15%");
         if (BoostPremiumManager.isBoostActive(BoostPremium.ENCHANT)) {
             boostEnchant.setType(Material.LIME_WOOL);
+            lore.add("");
+            lore.add("Minutes left: " + BoostPremiumManager.getMinutesLeft(BoostPremium.ENCHANT));
         }
+        itemMeta.setLore(lore);
+        boostEnchant.setItemMeta(itemMeta);
         guiGeneric.setItem(14, boostEnchant);
 
         ItemStack boostGather = new ItemStack(Material.RED_WOOL);
         itemMeta.setDisplayName(ChatColor.GREEN + "Gather Boost");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "2x gathering speed ");
-        }});
-        boostGather.setItemMeta(itemMeta);
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "2x gathering speed ");
         if (BoostPremiumManager.isBoostActive(BoostPremium.GATHER)) {
             boostGather.setType(Material.LIME_WOOL);
+            lore.add("");
+            lore.add("Minutes left: " + BoostPremiumManager.getMinutesLeft(BoostPremium.GATHER));
         }
+        itemMeta.setLore(lore);
+        boostGather.setItemMeta(itemMeta);
         guiGeneric.setItem(16, boostGather);
 
         return guiGeneric;
