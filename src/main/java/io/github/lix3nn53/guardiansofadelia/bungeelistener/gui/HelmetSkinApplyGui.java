@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.gui;
 
-import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.WeaponOrShieldSkinScroll;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
@@ -11,18 +11,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
+public class HelmetSkinApplyGui extends GuiGeneric {
 
     private final int emptySlot = 11;
     private final int confirmSlot = 15;
+    private final HelmetSkin helmetSkin;
     private int slotOfItemInPlayerInventory;
 
-    public WeaponOrShieldSkinApplyGui() {
-        super(27, ChatColor.GOLD + "Weapon/Shield Skin Apply", 0);
+    public HelmetSkinApplyGui(HelmetSkin helmetSkin) {
+        super(27, ChatColor.GOLD + "Helmet Skin Apply", 0);
+        this.helmetSkin = helmetSkin;
 
         ItemStack glass = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
         ItemMeta itemMeta = glass.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Weapon/Shield Skin Apply");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Helmet Skin Apply");
         itemMeta.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GRAY + "1 - Right click while holding this item");
@@ -48,21 +50,13 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
         }
     }
 
-    public boolean setWeaponOrShield(ItemStack itemStack, int slotOfItemInPlayerInventory) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-
-        if (!itemMeta.hasCustomModelData()) return false;
-
-        int customModelData = itemMeta.getCustomModelData();
-        if (customModelData < 6) return false;
-
+    public boolean setHelmet(ItemStack itemStack, int slotOfItemInPlayerInventory) {
         Material type = itemStack.getType();
 
-        boolean isWeaponOrShield = type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL)
-                || type.equals(Material.DIAMOND_AXE) || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT)
-                || type.equals(Material.BOW) || type.equals(Material.CROSSBOW) || type.equals(Material.SHIELD);
+        boolean isHelmet = type.equals(Material.CHAINMAIL_HELMET) || type.equals(Material.IRON_HELMET) || type.equals(Material.DIAMOND_HELMET)
+                || type.equals(Material.GOLDEN_HELMET) || type.equals(Material.LEATHER_HELMET) || type.equals(HelmetSkin.getHelmetMaterial());
 
-        if (!isWeaponOrShield) return false;
+        if (!isHelmet) return false;
 
         setItem(emptySlot, itemStack);
         this.slotOfItemInPlayerInventory = slotOfItemInPlayerInventory;
@@ -76,25 +70,17 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
         if (itemStack.getType().equals(Material.AIR)) return false;
         if (!itemStack.hasItemMeta()) return false;
 
-        if (!InventoryUtils.removeItemFromInventory(player.getInventory(), WeaponOrShieldSkinScroll.getItemStack(1), 1))
+        if (!InventoryUtils.removeItemFromInventory(player.getInventory(), this.helmetSkin.getItemStack(), 1))
             return false;
+
+        itemStack.setType(HelmetSkin.getHelmetMaterial());
 
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        if (itemMeta.hasCustomModelData()) {
-            int customModelData = itemMeta.getCustomModelData();
-            if (customModelData >= 6) {
-                if (customModelData % 2 == 0) { //only even numbers cuz odd numbers are already glowing
-                    customModelData++;
-                    itemMeta.setCustomModelData(customModelData);
-                    itemStack.setItemMeta(itemMeta);
-                    player.getInventory().setItem(this.slotOfItemInPlayerInventory, itemStack);
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        itemMeta.setCustomModelData(this.helmetSkin.getHelmetCustomModelData());
+        itemStack.setItemMeta(itemMeta);
+        player.getInventory().setItem(this.slotOfItemInPlayerInventory, itemStack);
+        return true;
     }
 
     public ItemStack getItemOnSlot() {
@@ -102,6 +88,6 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
     }
 
     public String getNotFitErrorMessage() {
-        return ChatColor.RED + "Item must be a weapon or shield AND have a requirement level higher than or equals to level 50";
+        return ChatColor.RED + "Item must be a helmet";
     }
 }

@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory.slots;
 
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,7 +17,7 @@ public class VanillaSlotHelmet implements VanillaSlot {
     public boolean doesFit(ItemStack itemStack) {
         Material mat = itemStack.getType();
         if (!(mat.equals(Material.CHAINMAIL_HELMET) || mat.equals(Material.DIAMOND_HELMET) || mat.equals(Material.GOLDEN_HELMET)
-                || mat.equals(Material.IRON_HELMET) || mat.equals(Material.LEATHER_HELMET))) {
+                || mat.equals(Material.IRON_HELMET) || mat.equals(Material.LEATHER_HELMET) || mat.equals(HelmetSkin.getHelmetMaterial()))) {
             return false;
         }
         return false;

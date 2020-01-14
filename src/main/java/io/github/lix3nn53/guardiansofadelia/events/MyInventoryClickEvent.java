@@ -4,8 +4,11 @@ import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.HelmetSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
@@ -73,6 +76,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -90,6 +94,20 @@ public class MyInventoryClickEvent implements Listener {
         Inventory clickedInventory = event.getClickedInventory();
         int slot = event.getSlot();
 
+        ItemStack current = event.getCurrentItem();
+        Material currentType = Material.AIR;
+        if (current != null) {
+            currentType = current.getType();
+        }
+
+        ItemStack cursor = event.getCursor();
+        Material cursorType = Material.AIR;
+        if (cursor != null) {
+            cursorType = cursor.getType();
+        }
+
+        String title = event.getView().getTitle();
+
         if (event.getAction() != InventoryAction.NOTHING) {
             if (event.getClick().equals(ClickType.NUMBER_KEY)) {
                 int hotbarButton = event.getHotbarButton();
@@ -105,16 +123,39 @@ public class MyInventoryClickEvent implements Listener {
             }
         }
 
-        ItemStack current = event.getCurrentItem();
-        Material currentType = Material.AIR;
-        if (current != null) {
-            currentType = current.getType();
-        }
-
-        ItemStack cursor = event.getCursor();
-        Material cursorType = Material.AIR;
-        if (cursor != null) {
-            cursorType = cursor.getType();
+        if (title.equals("Crafting")) {
+            if (event.isShiftClick()) {
+                if (currentType.equals(HelmetSkin.getHelmetMaterial())) {
+                    InventoryType.SlotType slotType = event.getSlotType();
+                    if (slotType.equals(InventoryType.SlotType.CONTAINER) || slotType.equals(InventoryType.SlotType.QUICKBAR)) {
+                        EntityEquipment equipment = player.getEquipment();
+                        ItemStack helmet = equipment.getHelmet();
+                        equipment.setHelmet(current);
+                        clickedInventory.setItem(slot, helmet);
+                        event.setCancelled(true);
+                        return;
+                    } else if (event.getRawSlot() == ArmorType.HELMET.getSlot()) {
+                        PlayerInventory playerInventory = player.getInventory();
+                        if (playerInventory.firstEmpty() != -1) { //has empty slot
+                            EntityEquipment equipment = player.getEquipment();
+                            ItemStack helmet = equipment.getHelmet();
+                            equipment.setHelmet(null);
+                            InventoryUtils.giveItemToPlayer(player, helmet);
+                            event.setCancelled(true);
+                            return;
+                        }
+                    }
+                }
+            } else if (event.getRawSlot() == ArmorType.HELMET.getSlot()) {
+                if (cursorType.equals(HelmetSkin.getHelmetMaterial())) {
+                    EntityEquipment equipment = player.getEquipment();
+                    ItemStack helmet = equipment.getHelmet();
+                    equipment.setHelmet(cursor);
+                    player.setItemOnCursor(helmet);
+                    event.setCancelled(true);
+                    return;
+                }
+            }
         }
 
         UUID uuid = player.getUniqueId();
@@ -155,8 +196,6 @@ public class MyInventoryClickEvent implements Listener {
         if (!(event.getCurrentItem().getItemMeta().hasDisplayName())) return;
 
         Gui activeGui = null;
-
-        String title = event.getView().getTitle();
 
         if (guardianData != null) {
             if (guardianData.hasActiveGui()) {
@@ -256,6 +295,24 @@ public class MyInventoryClickEvent implements Listener {
                     } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
                         boolean b = weaponOrShieldSkinApplyGui.setWeaponOrShield(current, slot);
                         if (!b) player.sendMessage(weaponOrShieldSkinApplyGui.getNotFitErrorMessage());
+                    }
+                } else if (activeGui instanceof HelmetSkinApplyGui) {
+                    event.setCancelled(true);
+                    HelmetSkinApplyGui helmetSkinApplyGui = (HelmetSkinApplyGui) activeGui;
+                    if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                        if (currentType.equals(Material.LIME_WOOL)) {
+                            boolean b = helmetSkinApplyGui.onConfirm(player);
+                            if (b) {
+                                player.closeInventory();
+                                MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
+                                MessageUtils.sendCenteredMessage(player, "Applied Skin");
+                                MessageUtils.sendCenteredMessage(player, "to " + helmetSkinApplyGui.getItemOnSlot().getItemMeta().getDisplayName());
+                                MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
+                            }
+                        }
+                    } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+                        boolean b = helmetSkinApplyGui.setHelmet(current, slot);
+                        if (!b) player.sendMessage(helmetSkinApplyGui.getNotFitErrorMessage());
                     }
                 }
                 if (!title.equals("Bazaar Storage")) {

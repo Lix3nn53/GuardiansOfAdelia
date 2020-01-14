@@ -38,7 +38,7 @@ public class BoostPremiumManager {
         }
 
         boostTimers.put(boostType, bukkitTask);
-        endTimes.put(boostType, LocalDateTime.now());
+        endTimes.put(boostType, LocalDateTime.now().plus(40, ChronoUnit.MINUTES));
     }
 
     public static boolean isBoostActive(BoostPremium boostType) {

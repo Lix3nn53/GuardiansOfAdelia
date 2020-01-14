@@ -17,6 +17,10 @@ public enum HelmetSkin {
     WINGS_DRAGON_WHITE,
     CROWN;
 
+    public static Material getHelmetMaterial() {
+        return Material.IRON_SHOVEL;
+    }
+
     public ItemStack getItemStack() {
         String s = this.name().toLowerCase().replaceAll("_", " ");
         String itemName = ChatColor.LIGHT_PURPLE + s + " Helmet Skin";
@@ -41,5 +45,22 @@ public enum HelmetSkin {
         itemStack.setItemMeta(itemMeta);
 
         return itemStack;
+    }
+
+    public int getHelmetCustomModelData() {
+        switch (this) {
+            case WINGS_ANGEL:
+                return 1;
+            case WINGS_DEMON:
+                return 2;
+            case WINGS_DRAGON_DARK:
+                return 3;
+            case WINGS_DRAGON_WHITE:
+                return 4;
+            case CROWN:
+                return 9;
+        }
+
+        return 1;
     }
 }

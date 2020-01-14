@@ -6,8 +6,10 @@ import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.HelmetSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -29,6 +31,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -63,6 +66,12 @@ public class MyPlayerInteractEvent implements Listener {
 
                         if (StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgCharacter.getRpgClass())) {
                             rpgCharacter.getRpgCharacterStats().onArmorEquip(itemInMainHand, true);
+
+                            if (itemInMainHandType.equals(HelmetSkin.getHelmetMaterial())) {
+                                EntityEquipment equipment = player.getEquipment();
+                                equipment.setHelmet(itemInMainHand);
+                                equipment.setItemInMainHand(null);
+                            }
                         } else {
                             event.setCancelled(true);
                         }
@@ -102,6 +111,12 @@ public class MyPlayerInteractEvent implements Listener {
                 if (displayName.equals(ChatColor.GOLD + "Weapon/Shield Skin Scroll")) {
 
                     new WeaponOrShieldSkinApplyGui().openInventory(player);
+                } else if (PersistentDataContainerUtil.hasString(itemInMainHand, "helmetSkinCode")) {
+                    String helmetSkinCode = PersistentDataContainerUtil.getString(itemInMainHand, "helmetSkinCode");
+
+                    HelmetSkin helmetSkin = HelmetSkin.valueOf(helmetSkinCode);
+
+                    new HelmetSkinApplyGui(helmetSkin).openInventory(player);
                 } else if (PersistentDataContainerUtil.hasString(itemInMainHand, "boostCode")) {
                     String boostCode = PersistentDataContainerUtil.getString(itemInMainHand, "boostCode");
 

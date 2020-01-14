@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.stats;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
@@ -104,6 +105,7 @@ public class StatUtils {
                 mat.equals(Material.IRON_CHESTPLATE) ||
                 mat.equals(Material.CHAINMAIL_CHESTPLATE) ||
                 mat.equals(Material.LEATHER_CHESTPLATE) ||
+                mat.equals(HelmetSkin.getHelmetMaterial()) ||
                 mat.equals(Material.IRON_SWORD)) {
             type = StatType.HEALTH;
         } else if (mat.equals(Material.SHEARS)) {
@@ -135,6 +137,7 @@ public class StatUtils {
                 mat.equals(Material.IRON_CHESTPLATE) ||
                 mat.equals(Material.CHAINMAIL_CHESTPLATE) ||
                 mat.equals(Material.LEATHER_CHESTPLATE) ||
+                mat.equals(HelmetSkin.getHelmetMaterial()) ||
                 mat.equals(Material.IRON_SWORD) || mat.equals(Material.SHEARS);
     }
 

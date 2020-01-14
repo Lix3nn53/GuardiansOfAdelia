@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.armors;
 
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,7 +15,8 @@ public enum ArmorType {
     public static ArmorType getArmorType(Material material) {
         if (material.equals(Material.AIR)) return null;
         String type = material.name();
-        if (type.endsWith("_HELMET") || type.endsWith("_SKULL")) return HELMET;
+        if (type.endsWith("_HELMET") || type.endsWith("_SKULL") || material.equals(HelmetSkin.getHelmetMaterial()))
+            return HELMET;
         else if (type.endsWith("_CHESTPLATE")) return CHESTPLATE;
         else if (type.endsWith("_LEGGINGS")) return LEGGINGS;
         else if (type.endsWith("_BOOTS")) return BOOTS;
