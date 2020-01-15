@@ -96,7 +96,7 @@ public class RequestHandler {
         productIdToWebProduct.put(32, new WebProduct(ChatColor.GREEN + "Gather Boost x5", WebProductType.ITEM, 200, boostGather5));
     }
 
-    public static WebResponse onPurchase(WebPurchase webPurchase) {
+    static WebResponse onPurchase(WebPurchase webPurchase) {
         String minecraftUsername = webPurchase.getMinecraftUsername();
         int productId = webPurchase.getProductId();
         int payment = webPurchase.getPayment();
@@ -241,5 +241,23 @@ public class RequestHandler {
 
     private static boolean uuidExists(UUID uuid) {
         return DatabaseQueries.uuidExists(uuid);
+    }
+
+    public static List<ItemStack> getSkinChestItemPool() {
+        List<ItemStack> skinPool = new ArrayList<>();
+
+        for (int id : productIdToWebProduct.keySet()) {
+            WebProduct webProduct = productIdToWebProduct.get(id);
+
+            WebProductType type = webProduct.getType();
+
+            if (type.equals(WebProductType.ITEM)) {
+                if (id < 18) {
+                    skinPool.add(webProduct.getItemStack());
+                }
+            }
+        }
+
+        return skinPool;
     }
 }

@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.HelmetSkinApplyGu
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.SkinChest;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -117,6 +118,13 @@ public class MyPlayerInteractEvent implements Listener {
                     HelmetSkin helmetSkin = HelmetSkin.valueOf(helmetSkinCode);
 
                     new HelmetSkinApplyGui(helmetSkin).openInventory(player);
+                } else if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "skinChest")) {
+
+                    SkinChest skinChest = new SkinChest();
+
+                    skinChest.play(player);
+                    int amount = itemInMainHand.getAmount();
+                    itemInMainHand.setAmount(amount - 1);
                 } else if (PersistentDataContainerUtil.hasString(itemInMainHand, "boostCode")) {
                     String boostCode = PersistentDataContainerUtil.getString(itemInMainHand, "boostCode");
 

@@ -56,7 +56,7 @@ public enum HelmetSkin {
             case WINGS_DRAGON_DARK:
                 return 3;
             case WINGS_DRAGON_WHITE:
-                return 4;
+                return 5;
             case CROWN:
                 return 9;
         }

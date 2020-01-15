@@ -113,7 +113,7 @@ public class QuestsPhase1 {
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "Lets enter Forest of Slumber!\nTASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk to Adventurer Milo";
         Quest quest = new Quest(8, "Forest of Slumber", story,
-                "", objectiveText,
+                "Don't forget to select Adventurer Milo as your compass target!", objectiveText,
                 "", tasks, itemPrizes, 4, 500, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 33, 34);

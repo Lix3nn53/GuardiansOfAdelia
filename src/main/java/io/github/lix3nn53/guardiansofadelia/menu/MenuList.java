@@ -15,8 +15,12 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillList;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
+import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.CharacterInfoSlot;
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiLineGeneric;
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiPage;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -322,13 +326,13 @@ public class MenuList {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 if (activeCharacter.hasJob()) {
                     Job job = activeCharacter.getJob();
-
+                    final JobType jobType = job.getJobType();
                     ItemStack character = new ItemStack(Material.PLAYER_HEAD);
                     SkullMeta skullMeta = (SkullMeta) character.getItemMeta();
                     skullMeta.setDisplayName(ChatColor.YELLOW + "Character Job");
                     skullMeta.setLore(new ArrayList() {{
                         add("");
-                        add(ChatColor.WHITE + "Job: " + job.getJobType().getName());
+                        add(ChatColor.WHITE + "Job: " + jobType.getName());
                         add(ChatColor.WHITE + "Job level: " + job.getLevel());
                         add(ChatColor.WHITE + "Job experience: " + job.getExperience());
                     }});
@@ -338,21 +342,26 @@ public class MenuList {
                     ItemStack jobGuide = new ItemStack(Material.PLAYER_HEAD);
                     ItemMeta itemMeta = jobGuide.getItemMeta();
                     itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Crafting Guide");
-                    itemMeta.setLore(new ArrayList() {{
-                        add("");
-                        add(ChatColor.RED + "Weaponsmith");
-                        add(ChatColor.GRAY + "Left click grindstone to craft melee weapons");
-                        add(ChatColor.GRAY + "Left click fletching table to craft ranged weapons");
-                        add(ChatColor.AQUA + "Armorsmith");
-                        add(ChatColor.GRAY + "Left click anvil to craft heavy armors");
-                        add(ChatColor.GRAY + "Left click loom to craft light armors");
-                        add(ChatColor.LIGHT_PURPLE + "Alchemist");
-                        add(ChatColor.GRAY + "Left click brewing stand to craft potions");
-                        add(ChatColor.GRAY + "Left click campfire to craft foods");
-                        add(ChatColor.GOLD + "Jeweller");
-                        add(ChatColor.GRAY + "Left click smithing table to craft jewels");
-                        add(ChatColor.GRAY + "Left click enchanting table to craft enchant stones");
-                    }});
+                    List<String> lore = new ArrayList<>();
+                    lore.add("");
+                    if (jobType.equals(JobType.WEAPONSMITH)) {
+                        lore.add(ChatColor.RED + "Weaponsmith");
+                        lore.add(ChatColor.GRAY + "Left click grindstone to craft melee weapons");
+                        lore.add(ChatColor.GRAY + "Left click fletching table to craft ranged weapons");
+                    } else if (jobType.equals(JobType.ARMORSMITH)) {
+                        lore.add(ChatColor.AQUA + "Armorsmith");
+                        lore.add(ChatColor.GRAY + "Left click anvil to craft heavy armors");
+                        lore.add(ChatColor.GRAY + "Left click loom to craft light armors");
+                    } else if (jobType.equals(JobType.ALCHEMIST)) {
+                        lore.add(ChatColor.LIGHT_PURPLE + "Alchemist");
+                        lore.add(ChatColor.GRAY + "Left click brewing stand to craft potions");
+                        lore.add(ChatColor.GRAY + "Left click campfire to craft foods");
+                    } else if (jobType.equals(JobType.JEWELLER)) {
+                        lore.add(ChatColor.GOLD + "Jeweller");
+                        lore.add(ChatColor.GRAY + "Left click smithing table to craft jewels");
+                        lore.add(ChatColor.GRAY + "Left click enchanting table to craft enchant stones");
+                    }
+                    itemMeta.setLore(lore);
                     jobGuide.setItemMeta(itemMeta);
                     guiGeneric.setItem(11, jobGuide);
 
@@ -448,8 +457,11 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric compass() {
-        GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.BLUE + "Compass", 0);
+    public static GuiBookGeneric compass() {
+        GuiBookGeneric guiBookGeneric = new GuiBookGeneric(ChatColor.BLUE + "Compass", 0);
+
+        GuiPage page1 = new GuiPage();
+        GuiLineGeneric page1Line1 = new GuiLineGeneric();
 
         ItemStack city = new ItemStack(Material.LIGHT_BLUE_WOOL);
         ItemMeta itemMeta = city.getItemMeta();
@@ -461,38 +473,142 @@ public class MenuList {
             add(ChatColor.GRAY + "If you dont have a compass this will give you one.");
         }});
         city.setItemMeta(itemMeta);
-        guiGeneric.setItem(0, city);
+        page1Line1.addWord(city);
 
         itemMeta.setDisplayName(ChatColor.AQUA + "Port Veloa #2");
         city.setItemMeta(itemMeta);
-        guiGeneric.setItem(2, city);
+        page1Line1.addWord(city);
 
         itemMeta.setDisplayName(ChatColor.AQUA + "Elderine #3");
         city.setItemMeta(itemMeta);
-        guiGeneric.setItem(4, city);
+        page1Line1.addWord(city);
 
         itemMeta.setDisplayName(ChatColor.AQUA + "Uruga #4");
         city.setItemMeta(itemMeta);
-        guiGeneric.setItem(6, city);
+        page1Line1.addWord(city);
 
         itemMeta.setDisplayName(ChatColor.AQUA + "Alberstol Ruins #5");
         city.setItemMeta(itemMeta);
-        guiGeneric.setItem(8, city);
+        page1Line1.addWord(city);
 
+
+        GuiLineGeneric page1Line2 = new GuiLineGeneric();
         ItemStack npc = new ItemStack(Material.LIME_WOOL);
         itemMeta.setDisplayName(ChatColor.GOLD + "King of Roumen #31");
         npc.setItemMeta(itemMeta);
-        guiGeneric.setItem(18, npc);
+        page1Line2.addWord(npc);
 
         itemMeta.setDisplayName(ChatColor.YELLOW + "Sergeant Armin #32");
         npc.setItemMeta(itemMeta);
-        guiGeneric.setItem(19, npc);
+        page1Line2.addWord(npc);
 
         itemMeta.setDisplayName(ChatColor.GREEN + "Village Elder Odo #33");
         npc.setItemMeta(itemMeta);
-        guiGeneric.setItem(20, npc);
+        page1Line2.addWord(npc);
 
-        return guiGeneric;
+        itemMeta.setDisplayName(ChatColor.GREEN + "Adventurer Milo #34");
+        npc.setItemMeta(itemMeta);
+        page1Line2.addWord(npc);
+
+        GuiLineGeneric page1Line3 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.AQUA + "Dr. Rintarou #35");
+        npc.setItemMeta(itemMeta);
+        page1Line3.addWord(npc);
+
+        GuiLineGeneric page1Line4 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Timberman Franky #36");
+        npc.setItemMeta(itemMeta);
+        page1Line4.addWord(npc);
+
+        itemMeta.setDisplayName(ChatColor.GREEN + "Forest Fairy #37");
+        npc.setItemMeta(itemMeta);
+        page1Line4.addWord(npc);
+
+        GuiPage page2 = new GuiPage();
+        GuiLineGeneric page2Line1 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Pastry Chef Jasper #38");
+        npc.setItemMeta(itemMeta);
+        page2Line1.addWord(npc);
+
+        GuiLineGeneric page2Line2 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Captain Lenna #39");
+        npc.setItemMeta(itemMeta);
+        page2Line2.addWord(npc);
+
+        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Sailor Skamkel #40");
+        npc.setItemMeta(itemMeta);
+        page2Line2.addWord(npc);
+
+        GuiLineGeneric page2Line3 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.AQUA + "Ashild #41");
+        npc.setItemMeta(itemMeta);
+        page2Line3.addWord(npc);
+
+        GuiLineGeneric page2Line4 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Commander Erwin #42");
+        npc.setItemMeta(itemMeta);
+        page2Line4.addWord(npc);
+
+        GuiPage page3 = new GuiPage();
+        GuiLineGeneric page3Line1 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Archaeologist Robin #43");
+        npc.setItemMeta(itemMeta);
+        page3Line1.addWord(npc);
+
+        GuiLineGeneric page3Line2 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Raignald #44");
+        npc.setItemMeta(itemMeta);
+        page3Line2.addWord(npc);
+        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Iohne #45");
+        npc.setItemMeta(itemMeta);
+        page3Line2.addWord(npc);
+        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Afra #46");
+        npc.setItemMeta(itemMeta);
+        page3Line2.addWord(npc);
+
+        GuiLineGeneric page3Line3 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.GOLD + "Gatekeeper #47");
+        npc.setItemMeta(itemMeta);
+        page3Line3.addWord(npc);
+
+        GuiLineGeneric page3Line4 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Vruhag #48");
+        npc.setItemMeta(itemMeta);
+        page3Line4.addWord(npc);
+
+        GuiPage page4 = new GuiPage();
+        GuiLineGeneric page4Line1 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Archangel #49");
+        npc.setItemMeta(itemMeta);
+        page4Line1.addWord(npc);
+
+        itemMeta.setDisplayName(ChatColor.BLUE + "Eohr #50");
+        npc.setItemMeta(itemMeta);
+        page4Line1.addWord(npc);
+
+        page1.addLine(page1Line1);
+        page1.addLine(page1Line2);
+        page1.addLine(page1Line3);
+        page1.addLine(page1Line4);
+
+        page2.addLine(page2Line1);
+        page2.addLine(page2Line2);
+        page2.addLine(page2Line3);
+        page2.addLine(page2Line4);
+
+        page3.addLine(page3Line1);
+        page3.addLine(page3Line2);
+        page3.addLine(page3Line3);
+        page3.addLine(page3Line4);
+
+        page4.addLine(page4Line1);
+
+        guiBookGeneric.addPage(page1);
+        guiBookGeneric.addPage(page2);
+        guiBookGeneric.addPage(page3);
+        guiBookGeneric.addPage(page4);
+
+        return guiBookGeneric;
     }
 
     public static GuiGeneric guild() {

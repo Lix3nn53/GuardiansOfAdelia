@@ -1,7 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.products;
 
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -18,9 +22,7 @@ public class SkinChest {
         lore.add(ChatColor.GRAY + "Premium");
         lore.add("");
         lore.add(ChatColor.GOLD + "Usage: ");
-        lore.add(ChatColor.YELLOW + "1 - Right click while you are holding this item.");
-        lore.add(ChatColor.YELLOW + "2 - Place your weapon/shield to empty slot.");
-        lore.add(ChatColor.YELLOW + "3 - Click green wool to confirm and apply skin.");
+        lore.add(ChatColor.GRAY + "1 - Right click while holding to open!");
 
         ItemStack itemStack = new ItemStack(Material.BLACK_DYE);
 
@@ -32,6 +34,14 @@ public class SkinChest {
         itemStack.setItemMeta(itemMeta);
         itemStack.setAmount(amount);
 
+        PersistentDataContainerUtil.putInteger("skinChest", 1, itemStack);
+
         return itemStack;
+    }
+
+    public void play(Player player) {
+        List<ItemStack> skinChestItemPool = RequestHandler.getSkinChestItemPool();
+
+        InventoryUtils.play(player, skinChestItemPool, "Premium Skin");
     }
 }
