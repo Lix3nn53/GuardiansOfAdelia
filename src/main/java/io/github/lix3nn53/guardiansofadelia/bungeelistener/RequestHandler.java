@@ -66,9 +66,9 @@ public class RequestHandler {
         ItemStack skinChest1 = new SkinChest().getItemStack(1);
         ItemStack skinChest2 = new SkinChest().getItemStack(2);
         ItemStack skinChest5 = new SkinChest().getItemStack(5);
-        productIdToWebProduct.put(18, new WebProduct(ChatColor.GOLD + "Skin Chest x1", WebProductType.ITEM, 50, skinChest1));
-        productIdToWebProduct.put(19, new WebProduct(ChatColor.GOLD + "Skin Chest x2", WebProductType.ITEM, 100, skinChest2));
-        productIdToWebProduct.put(20, new WebProduct(ChatColor.GOLD + "Skin Chest x5", WebProductType.ITEM, 200, skinChest5));
+        productIdToWebProduct.put(18, new WebProduct(ChatColor.GOLD + "Skin Chest x1", WebProductType.ITEM, 100, skinChest1));
+        productIdToWebProduct.put(19, new WebProduct(ChatColor.GOLD + "Skin Chest x2", WebProductType.ITEM, 200, skinChest2));
+        productIdToWebProduct.put(20, new WebProduct(ChatColor.GOLD + "Skin Chest x5", WebProductType.ITEM, 400, skinChest5));
 
         ItemStack boostExp1 = BoostPremium.EXPERIENCE.getItemStack(1);
         ItemStack boostExp2 = BoostPremium.EXPERIENCE.getItemStack(2);
