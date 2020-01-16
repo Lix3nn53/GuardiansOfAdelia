@@ -13,6 +13,8 @@ import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
+import io.github.lix3nn53.guardiansofadelia.economy.Coin;
+import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -197,6 +199,19 @@ public class CommandLix implements CommandExecutor {
                         enchantStone = EnchantStone.TIER_FOUR;
                     }
                     InventoryUtils.giveItemToPlayer(player, enchantStone.getItemSTack(amount));
+                }
+            } else if (args[0].equals("coin")) {
+                if (args.length == 2) {
+                    try {
+                        int price = Integer.parseInt(args[1]);
+                        List<Coin> coins = EconomyUtils.priceToCoins(price);
+
+                        for (Coin coin : coins) {
+                            InventoryUtils.giveItemToPlayer(player, coin.getCoin());
+                        }
+                    } catch (NumberFormatException e) {
+                        player.sendMessage(ChatColor.YELLOW + "(Enter a number)");
+                    }
                 }
             } else if (args[0].equals("passive")) {
                 if (args.length == 3) {

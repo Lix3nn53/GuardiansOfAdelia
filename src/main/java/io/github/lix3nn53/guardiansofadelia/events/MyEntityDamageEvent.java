@@ -35,8 +35,8 @@ public class MyEntityDamageEvent implements Listener {
         } else if (cause.equals(EntityDamageEvent.DamageCause.FALL)) {
             if (entity.getType().equals(EntityType.HORSE)) {
                 event.setCancelled(true);
+                return;
             }
-            return;
         }
 
         if (ImmunityListener.isImmune((LivingEntity) entity, cause)) {

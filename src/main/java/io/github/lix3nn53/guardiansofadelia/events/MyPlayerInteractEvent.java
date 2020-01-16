@@ -79,7 +79,7 @@ public class MyPlayerInteractEvent implements Listener {
                     }
                 }
             } else if (itemInMainHandType.equals(Material.COMPASS)) {
-                GuiGeneric compass = MenuList.compass();
+                GuiBookGeneric compass = MenuList.compass();
                 compass.openInventory(player);
             } else if (itemInMainHandType.equals(Material.PAPER)) {
                 if (PersistentDataContainerUtil.hasString(itemInMainHand, "teleportScroll")) {

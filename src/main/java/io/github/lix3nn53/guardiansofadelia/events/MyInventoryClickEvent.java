@@ -356,7 +356,7 @@ public class MyInventoryClickEvent implements Listener {
                 GuiGeneric guide = MenuList.guide();
                 guide.openInventory(player);
             } else if (currentName.equals(ChatColor.BLUE + "Compass")) {
-                GuiGeneric compass = MenuList.compass();
+                GuiBookGeneric compass = MenuList.compass();
                 compass.openInventory(player);
             } else if (currentName.equals(ChatColor.DARK_GREEN + "Maps")) {
                 player.closeInventory();
@@ -532,7 +532,7 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        } else if (title.equals(ChatColor.BLUE + "Compass")) {
+        } else if (title.contains(ChatColor.BLUE + "Compass")) {
             if (currentType.equals(Material.LIGHT_BLUE_WOOL)) {
                 String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
