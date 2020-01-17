@@ -42,21 +42,23 @@ public class WeaponMagical implements RPGGear {
         lore.add(ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + "+" + damage);
         lore.add(ChatColor.DARK_AQUA + "✦ Magic Damage: " + ChatColor.GRAY + "+" + magicDamage);
         lore.add(ChatColor.AQUA + "ø Attack Speed: " + attackSpeed.getLoreString());
-        lore.add("");
-        if (statPassive.getFire() != 0) {
-            lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
-        }
-        if (statPassive.getWater() != 0) {
-            lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
-        }
-        if (statPassive.getEarth() != 0) {
-            lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
-        }
-        if (statPassive.getLightning() != 0) {
-            lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
-        }
-        if (statPassive.getWind() != 0) {
-            lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
+        if (!statPassive.isEmpty()) {
+            lore.add("");
+            if (statPassive.getFire() != 0) {
+                lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
+            }
+            if (statPassive.getWater() != 0) {
+                lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
+            }
+            if (statPassive.getEarth() != 0) {
+                lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
+            }
+            if (statPassive.getLightning() != 0) {
+                lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
+            }
+            if (statPassive.getWind() != 0) {
+                lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
+            }
         }
         lore.add("");
         lore.add(tier.getTierString());

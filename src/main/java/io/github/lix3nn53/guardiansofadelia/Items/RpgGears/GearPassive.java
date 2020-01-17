@@ -41,21 +41,23 @@ public class GearPassive implements RPGGear {
         if (!rpgClass.equals(RPGClass.NO_CLASS)) {
             lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassString());
         }
-        lore.add("");
-        if (finalFire != 0) {
-            lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + finalFire);
-        }
-        if (finalWater != 0) {
-            lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + finalWater);
-        }
-        if (finalEarth != 0) {
-            lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + finalEarth);
-        }
-        if (finalLightning != 0) {
-            lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + finalLightning);
-        }
-        if (finalWind != 0) {
-            lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + finalWind);
+        if (!statPassive.isEmpty()) {
+            lore.add("");
+            if (finalFire != 0) {
+                lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + finalFire);
+            }
+            if (finalWater != 0) {
+                lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + finalWater);
+            }
+            if (finalEarth != 0) {
+                lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + finalEarth);
+            }
+            if (finalLightning != 0) {
+                lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + finalLightning);
+            }
+            if (finalWind != 0) {
+                lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + finalWind);
+            }
         }
         lore.add("");
         lore.add(tier.getTierString());

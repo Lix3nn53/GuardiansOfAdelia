@@ -67,6 +67,10 @@ public class StatPassive implements Stat {
         return wind;
     }
 
+    public boolean isEmpty() {
+        return (fire + water + earth + lightning + wind) < 1;
+    }
+
     private void satisfyOneRandomly(int minStatValue, int maxStatValue) {
         List<String> unUsedElements = new ArrayList<>();
         if (this.fire == 0) {
