@@ -63,7 +63,7 @@ public class MobDropGenerator {
 
             Random rand = new Random();
 
-            // Obtain a number between [0 - 6].
+            // Obtain a number between [1 - 7].
             int rpgClassRandom = rand.nextInt(7);
             RPGClass rpgClass = RPGClass.values()[rpgClassRandom + 1]; //+1 to ignore NO_CLASS
 

@@ -1,9 +1,12 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class Test {
 
@@ -15,6 +18,19 @@ public class Test {
         LocalDate now = LocalDate.now();
         String currentDateString = now.toString();
         System.out.println(currentDateString);
+
+        for (int i = 0; i < 15; i++) {
+            Random rand = new Random();
+
+            int rpgClassRandom = rand.nextInt(7);
+            RPGClass rpgClass = RPGClass.values()[rpgClassRandom + 1]; //+1 to ignore NO_CLASS
+
+            // Obtain a number between [0 - 2].
+            int dropType = rand.nextInt(3);
+
+            System.out.println(rpgClass.toString());
+            System.out.println("dropType: " + dropType);
+        }
         /*MySocketServer server = new MySocketServer("localhost", 9092);
 
         server.start();
@@ -45,7 +61,7 @@ public class Test {
         for (double rate : downRatesForLevel) {
             System.out.println(value * rate);
         }*/
-        /*for (RPGClass rpgClass : RPGClass.values()) {
+        for (RPGClass rpgClass : RPGClass.values()) {
             if (rpgClass.equals(RPGClass.NO_CLASS)) continue;
             for (int level = 1; level < 91; level++) {
                 int fire = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, level);
@@ -57,7 +73,7 @@ public class Test {
                 System.out.println("Level " + level + " Class " + rpgClass.toString());
                 System.out.println("Fire" + fire + " Water" + water + " Earth" + earth + " Lightning" + lightning + " Wind" + wind);
             }
-        }*/
+        }
 
         /*int totalDefense = 2400;
         double damage = 1000;

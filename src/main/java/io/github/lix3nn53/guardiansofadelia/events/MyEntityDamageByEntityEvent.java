@@ -42,7 +42,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
         return 0;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
 
@@ -122,6 +122,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         if (shooter instanceof LivingEntity) damageSource = (LivingEntity) shooter;
                     } else if (damager instanceof LivingEntity) {
                         damageSource = (LivingEntity) damager;
+                    }
+                    if (damager instanceof EvokerFangs) { //evokerFangs is attacker
+                        EvokerFangs evokerFangs = (EvokerFangs) damager;
+                        LivingEntity owner = evokerFangs.getOwner();
+                        if (owner != null) damageSource = owner;
                     }
 
                     double damage = event.getDamage();
