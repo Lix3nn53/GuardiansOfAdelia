@@ -37,9 +37,9 @@ public class GearPassive implements RPGGear {
 
         lore.add(ChatColor.GRAY + "Passive Item");
         lore.add("");
-        lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
+        lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         if (!rpgClass.equals(RPGClass.NO_CLASS)) {
-            lore.add(ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassString());
+            lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassString());
         }
         lore.add("");
         if (finalFire != 0) {

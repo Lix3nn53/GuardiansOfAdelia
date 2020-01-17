@@ -31,7 +31,7 @@ public class PetCompanion implements RPGGear {
         lore.add(ChatColor.GRAY + "Egg");
         lore.add("");
         lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Companion");
-        lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
+        lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
         lore.add("");
         lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + 1);
         lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(1));

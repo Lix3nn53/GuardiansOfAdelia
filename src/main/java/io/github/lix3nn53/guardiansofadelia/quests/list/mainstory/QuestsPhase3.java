@@ -1,9 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GatheringTool;
 import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.quests.actions.GiveItemAction;
 import io.github.lix3nn53.guardiansofadelia.quests.task.*;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -64,6 +66,10 @@ public class QuestsPhase3 {
                 "", tasks, itemPrizes, 11, 15000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 36, 36);
+
+        ItemStack itemStack = GatheringTool.WOODEN_AXE.getItemStack();
+        GiveItemAction giveItemAction = new GiveItemAction(itemStack);
+        quest.addOnAcceptAction(giveItemAction);
     }
 
     private static void createQuestThree() {

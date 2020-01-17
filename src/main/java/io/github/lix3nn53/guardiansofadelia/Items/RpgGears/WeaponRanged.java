@@ -36,8 +36,8 @@ public class WeaponRanged implements RPGGear {
 
         lore.add(ChatColor.GRAY + "Ranged Weapon");
         lore.add("");
-        lore.add(ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
-        lore.add(ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassString());
+        lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
+        lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassString());
         lore.add("");
         lore.add(ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + "+" + damage);
         lore.add(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+" + rangedDamage);

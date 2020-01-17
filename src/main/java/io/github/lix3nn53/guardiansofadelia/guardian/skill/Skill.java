@@ -55,7 +55,7 @@ public class Skill {
 
     public int getReqPlayerLevel(int skillLevel) {
         if (skillLevel == maxSkillLevel) return 9000;
-        return reqSkillPoints.get(skillLevel);
+        return reqPlayerLevels.get(skillLevel);
     }
 
     public int getReqSkillPoints(int skillLevel) {

@@ -1,9 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GatheringTool;
 import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.quests.actions.GiveItemAction;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskCollect;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskGift;
@@ -48,8 +50,8 @@ public class QuestsPhase4 {
     private static void createQuestTwo() {
         List<String> story = new ArrayList<>();
         story.add("Villagers are having a hard time because of");
-        story.add("reduction of resources. Do some fishing and");
-        story.add("give them to villagers. So you can get a");
+        story.add("reduction of resources. Get this fishing rod");
+        story.add("and give some to villagers. So you can get a");
         story.add("warm welcome in Elderine.");
         List<Integer> requiredQuests = new ArrayList<>();
         requiredQuests.add(27);
@@ -66,6 +68,10 @@ public class QuestsPhase4 {
                 "", tasks, itemPrizes, 15, 36000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 39, 39);
+
+        ItemStack fishingRod = GatheringTool.WOODEN_FISHING_ROD.getItemStack();
+        GiveItemAction giveItemAction = new GiveItemAction(fishingRod);
+        quest.addOnAcceptAction(giveItemAction);
     }
 
     private static void createQuestThree() {
