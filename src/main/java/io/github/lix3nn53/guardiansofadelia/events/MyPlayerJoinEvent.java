@@ -19,12 +19,15 @@ public class MyPlayerJoinEvent implements Listener {
         player.setGameMode(GameMode.ADVENTURE);
         player.getInventory().clear();
 
+        final String resourcePackAddress = "https://drive.google.com/uc?export=download&id=1SNr-HrzYxhHPZ9yZ0Lf1F2PTl_b5aCXI";
+
         //character selection handles loading data too
         new BukkitRunnable() {
             @Override
             public void run() {
                 CharacterSelectionScreenManager.startCharacterSelection(player);
                 //TODO CustomSoundtrack.sendCurrentSongMessage(player);
+                player.setResourcePack(resourcePackAddress);
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 40L);
     }

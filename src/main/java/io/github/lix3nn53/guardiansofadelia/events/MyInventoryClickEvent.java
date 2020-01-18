@@ -545,6 +545,13 @@ public class MyInventoryClickEvent implements Listener {
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
                 CompassManager.setCompassItemNPC(player, i);
+            } else if (currentType.equals(Material.MAGENTA_WOOL)) {
+                String displayName = itemMeta.getDisplayName();
+                String[] split = displayName.split("#");
+                int i = Integer.parseInt(split[1]);
+                DungeonTheme value = DungeonTheme.values()[i + 1];
+                Location portalLocationOfDungeonTheme = MiniGameManager.getPortalLocationOfDungeonTheme(value);
+                CompassManager.setCompassItemLocation(player, value.getName(), portalLocationOfDungeonTheme);
             }
         } else if (title.contains(ChatColor.AQUA + "Elements (Points:")) {
             if (rpgCharacter != null) {

@@ -191,7 +191,7 @@ public class QuestsPhase4 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that candies tastes amazing once again";
+        String objectiveText = "Report back to Captain Lenna that candies tastes amazing once again";
         Quest quest = new Quest(34, "Tasteful again", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 15, 12000, 0, requiredQuests,

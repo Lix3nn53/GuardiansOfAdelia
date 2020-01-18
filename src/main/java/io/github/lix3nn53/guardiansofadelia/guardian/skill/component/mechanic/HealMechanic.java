@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -24,7 +25,11 @@ public class HealMechanic extends MechanicComponent {
         boolean healed = false;
         for (LivingEntity ent : targets) {
             double currentHealth = ent.getHealth();
-            double maxHealth = ent.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+
+            AttributeInstance attribute = ent.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+            if (attribute == null) continue;
+
+            double maxHealth = attribute.getValue();
 
             if (currentHealth == maxHealth) continue;
 

@@ -189,7 +189,7 @@ public class QuestsPhase5 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna that vikings rule Sea of Greed once again";
+        String objectiveText = "Report back to Captain Lenna that vikings rule Sea of Greed once again";
         Quest quest = new Quest(42, "Sea of Greed report", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 21, 18000, 0, requiredQuests,

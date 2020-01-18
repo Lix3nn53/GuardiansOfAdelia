@@ -16,6 +16,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillList;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.CharacterInfoSlot;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -496,119 +497,136 @@ public class MenuList {
         page1Line1.addWord(city);
 
         GuiLineGeneric page1Line2 = new GuiLineGeneric();
+        GuiLineGeneric page1Line3 = new GuiLineGeneric();
+        ItemStack dungeon;
+
+        int i = 1;
+        for (DungeonTheme dungeonTheme : DungeonTheme.values()) {
+            dungeon = new ItemStack(Material.MAGENTA_WOOL);
+            itemMeta.setDisplayName(dungeonTheme.getName() + " #" + i);
+            dungeon.setItemMeta(itemMeta);
+            if (page1Line2.isEmpty()) {
+                page1Line2.addWord(dungeon);
+            } else {
+                page1Line3.addWord(dungeon);
+            }
+            i++;
+        }
+
+        GuiLineGeneric page1Line4 = new GuiLineGeneric();
         ItemStack npc = new ItemStack(Material.LIME_WOOL);
         itemMeta.setDisplayName(ChatColor.GOLD + "King of Roumen #31");
-        npc.setItemMeta(itemMeta);
-        page1Line2.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Sergeant Armin #32");
-        npc.setItemMeta(itemMeta);
-        page1Line2.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GREEN + "Village Elder Odo #33");
-        npc.setItemMeta(itemMeta);
-        page1Line2.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GREEN + "Adventurer Milo #34");
-        npc.setItemMeta(itemMeta);
-        page1Line2.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiLineGeneric page1Line3 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.AQUA + "Dr. Rintarou #35");
-        npc.setItemMeta(itemMeta);
-        page1Line3.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiLineGeneric page1Line4 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Timberman Franky #36");
         npc.setItemMeta(itemMeta);
         page1Line4.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GREEN + "Forest Fairy #37");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Sergeant Armin #32");
+        npc.setItemMeta(itemMeta);
+        page1Line4.addWord(npc);
+
+        npc = new ItemStack(Material.LIME_WOOL);
+        itemMeta.setDisplayName(ChatColor.GREEN + "Village Elder Odo #33");
+        npc.setItemMeta(itemMeta);
+        page1Line4.addWord(npc);
+
+        npc = new ItemStack(Material.LIME_WOOL);
+        itemMeta.setDisplayName(ChatColor.GREEN + "Adventurer Milo #34");
         npc.setItemMeta(itemMeta);
         page1Line4.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
         GuiLineGeneric page1Line5 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Pastry Chef Jasper #38");
+        itemMeta.setDisplayName(ChatColor.AQUA + "Dr. Rintarou #35");
         npc.setItemMeta(itemMeta);
         page1Line5.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
-        GuiPage page2 = new GuiPage();
         GuiLineGeneric page2Line1 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Captain Lenna #39");
+        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Timberman Franky #36");
         npc.setItemMeta(itemMeta);
         page2Line1.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Sailor Skamkel #40");
+        itemMeta.setDisplayName(ChatColor.GREEN + "Forest Fairy #37");
         npc.setItemMeta(itemMeta);
         page2Line1.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
         GuiLineGeneric page2Line2 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.AQUA + "Ashild #41");
+        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Pastry Chef Jasper #38");
         npc.setItemMeta(itemMeta);
         page2Line2.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
+        GuiPage page2 = new GuiPage();
         GuiLineGeneric page2Line3 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Commander Erwin #42");
+        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Captain Lenna #39");
+        npc.setItemMeta(itemMeta);
+        page2Line3.addWord(npc);
+
+        npc = new ItemStack(Material.LIME_WOOL);
+        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Sailor Skamkel #40");
         npc.setItemMeta(itemMeta);
         page2Line3.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
         GuiLineGeneric page2Line4 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Archaeologist Robin #43");
+        itemMeta.setDisplayName(ChatColor.AQUA + "Ashild #41");
         npc.setItemMeta(itemMeta);
         page2Line4.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
         GuiLineGeneric page2Line5 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Raignald #44");
+        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Commander Erwin #42");
         npc.setItemMeta(itemMeta);
         page2Line5.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Iohne #45");
-        npc.setItemMeta(itemMeta);
-        page2Line5.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Afra #46");
-        npc.setItemMeta(itemMeta);
-        page2Line5.addWord(npc);
-
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiPage page3 = new GuiPage();
         GuiLineGeneric page3Line1 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Gatekeeper #47");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Archaeologist Robin #43");
         npc.setItemMeta(itemMeta);
         page3Line1.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
         GuiLineGeneric page3Line2 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Vruhag #48");
+        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Raignald #44");
         npc.setItemMeta(itemMeta);
         page3Line2.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
+        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Iohne #45");
+        npc.setItemMeta(itemMeta);
+        page3Line2.addWord(npc);
+
+        npc = new ItemStack(Material.LIME_WOOL);
+        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Afra #46");
+        npc.setItemMeta(itemMeta);
+        page3Line2.addWord(npc);
+
+
+        npc = new ItemStack(Material.LIME_WOOL);
+        GuiPage page3 = new GuiPage();
         GuiLineGeneric page3Line3 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Archangel #49");
+        itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Gatekeeper #47");
         npc.setItemMeta(itemMeta);
         page3Line3.addWord(npc);
 
         npc = new ItemStack(Material.LIME_WOOL);
+        GuiLineGeneric page3Line4 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Vruhag #48");
+        npc.setItemMeta(itemMeta);
+        page3Line4.addWord(npc);
+
+        npc = new ItemStack(Material.LIME_WOOL);
+        GuiLineGeneric page3Line5 = new GuiLineGeneric();
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Archangel #49");
+        npc.setItemMeta(itemMeta);
+        page3Line5.addWord(npc);
+
+        npc = new ItemStack(Material.LIME_WOOL);
         itemMeta.setDisplayName(ChatColor.BLUE + "Eohr #50");
         npc.setItemMeta(itemMeta);
-        page3Line3.addWord(npc);
+        page3Line5.addWord(npc);
 
         page1.addLine(page1Line1);
         page1.addLine(page1Line2);
@@ -616,15 +634,17 @@ public class MenuList {
         page1.addLine(page1Line4);
         page1.addLine(page1Line5);
 
-        page2.addLine(page2Line1);
-        page2.addLine(page2Line2);
+        page1.addLine(page2Line1);
+        page1.addLine(page2Line2);
         page2.addLine(page2Line3);
         page2.addLine(page2Line4);
         page2.addLine(page2Line5);
 
-        page3.addLine(page3Line1);
-        page3.addLine(page3Line2);
+        page2.addLine(page3Line1);
+        page2.addLine(page3Line2);
         page3.addLine(page3Line3);
+        page3.addLine(page3Line4);
+        page3.addLine(page3Line5);
 
         guiBookGeneric.addPage(page1);
         guiBookGeneric.addPage(page2);

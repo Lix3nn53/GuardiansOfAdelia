@@ -53,8 +53,13 @@ public class TargetHelper {
     }
 
     public static boolean isInFront(Entity entity, Entity target) {
-        Vector facing = entity.getLocation().getDirection();
-        Vector relative = target.getLocation().subtract(entity.getLocation()).toVector();
+        Location entityLocation = entity.getLocation();
+        Location targetLocation = target.getLocation();
+
+        if (!entityLocation.getWorld().getName().equals(targetLocation.getWorld().getName())) return false;
+
+        Vector facing = entityLocation.getDirection();
+        Vector relative = targetLocation.subtract(entityLocation).toVector();
 
 
         return (facing.dot(relative) >= 0.0D);

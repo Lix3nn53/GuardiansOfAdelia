@@ -662,6 +662,7 @@ public enum AdeliaEntity {
                 entity.getEquipment().setHelmet(helmet);
                 setEntityExperience(entity, 253);
                 setEntityDropTableNo(entity, 4);
+                setCustomDamage(entity, 100);
                 livingEntity = entity;
                 break;
             }
@@ -687,6 +688,7 @@ public enum AdeliaEntity {
                 entity.getEquipment().setHelmet(helmet);
                 setEntityExperience(entity, 282);
                 setEntityDropTableNo(entity, 4);
+                setCustomDamage(entity, 120);
                 livingEntity = entity;
                 break;
             }

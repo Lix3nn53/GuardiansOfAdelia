@@ -191,7 +191,7 @@ public class QuestsPhase6 {
         List<Task> tasks = new ArrayList<>();
 
         List<ItemStack> itemPrizes = new ArrayList<>();
-        String objectiveText = "Report back to Captain Senna, Kahal Plains are safe for travelers again";
+        String objectiveText = "Report back to Captain Lenna, Kahal Plains are safe for travelers again";
         Quest quest = new Quest(50, "Kahal Plains report", story,
                 "", objectiveText,
                 "", tasks, itemPrizes, 27, 30000, 0, requiredQuests,
