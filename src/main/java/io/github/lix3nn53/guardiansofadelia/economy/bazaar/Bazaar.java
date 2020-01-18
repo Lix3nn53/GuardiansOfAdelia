@@ -212,7 +212,9 @@ public class Bazaar {
         }
 
         BazaarManager.clearBazaarToPlayer(bazaarModel);
-        this.bazaarModel.remove();
+        if (!bazaarModel.isDead()) {
+            this.bazaarModel.remove();
+        }
 
         this.open = false;
 

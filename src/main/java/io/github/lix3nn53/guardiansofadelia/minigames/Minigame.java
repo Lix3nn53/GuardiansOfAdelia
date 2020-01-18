@@ -259,6 +259,10 @@ public abstract class Minigame {
 
     public boolean joinQueue(Player player) {
         if (!this.isInGame) {
+            if (!player.getWorld().getName().equals("world")) {
+                player.sendMessage(ChatColor.RED + "You must be in normal world");
+                return false;
+            }
             if (!MiniGameManager.isInMinigame(player)) {
                 if (!getPlayersInGame().contains(player) && getPlayersInGame().size() < this.teamAmount * this.teamSize) {
                     addPlayer(player);
@@ -272,6 +276,7 @@ public abstract class Minigame {
             } else {
                 player.sendMessage(ChatColor.RED + "You are already in a minigame");
             }
+
         }
         return false;
     }
