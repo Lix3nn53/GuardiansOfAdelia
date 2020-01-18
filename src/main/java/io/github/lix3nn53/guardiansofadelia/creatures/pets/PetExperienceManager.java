@@ -100,7 +100,7 @@ public class PetExperienceManager {
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
-                    lore.set(5, ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + nextExperience + " / " + getNextExperienceTarget(currentLevel));
+                    lore.set(6, ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + nextExperience + " / " + getNextExperienceTarget(currentLevel));
                     itemMeta.setLore(lore);
                     egg.setItemMeta(itemMeta);
 
@@ -122,20 +122,20 @@ public class PetExperienceManager {
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
-                    lore.set(4, ChatColor.GOLD + "Level: " + ChatColor.GRAY + nextLevel);
+                    lore.set(5, ChatColor.GOLD + "Level: " + ChatColor.GRAY + nextLevel);
 
                     if (lore.get(1).contains("Companion")) {
                         double petBaseDamage = PersistentDataContainerUtil.getInteger(egg, "petBaseDamage");
                         double petBaseHealth = PersistentDataContainerUtil.getInteger(egg, "petBaseHealth");
                         int damage = PetManager.getCompanionDamage(nextLevel, petBaseDamage);
                         int maxHP = PetManager.getCompanionHealth(nextLevel, petBaseHealth);
-                        lore.set(7, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
-                        lore.set(8, ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + damage);
+                        lore.set(8, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
+                        lore.set(9, ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + damage);
                         player.sendMessage(ChatColor.GOLD + "DEBUG pet COMPANION level up");
                     } else {
                         double petBaseHealth = PersistentDataContainerUtil.getInteger(egg, "petBaseHealth");
                         int maxHP = PetManager.getMountHealth(nextLevel, petBaseHealth);
-                        lore.set(7, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
+                        lore.set(8, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
                         player.sendMessage(ChatColor.GOLD + "DEBUG pet MOUNT level up");
                     }
 

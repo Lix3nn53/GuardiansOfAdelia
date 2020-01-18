@@ -61,6 +61,10 @@ commands:
     description: Character command
     permission: guardian.player
     permission-message: You do not have permission!
+  rp:
+    description: Resource pack command
+    permission: guardian.player
+    permission-message: You do not have permission!
   safe-stop:
     description: Safely shuts down the server
     permission: guardian.admin

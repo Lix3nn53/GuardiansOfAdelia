@@ -36,6 +36,7 @@ import java.util.UUID;
 
 public class GuardiansOfAdelia extends JavaPlugin {
 
+    public static final String ResourcePackAddress = "https://drive.google.com/uc?export=download&id=1SNr-HrzYxhHPZ9yZ0Lf1F2PTl_b5aCXI";
     public static PluginChannelListener pluginChannelListener;
 
     private static GuardiansOfAdelia instance;
@@ -112,6 +113,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         this.getCommand("invite").setExecutor(new CommandInvite());
         this.getCommand("trade").setExecutor(new CommandTrade());
         this.getCommand("party").setExecutor(new CommandParty());
+        this.getCommand("rp").setExecutor(new CommandResourcePack());
         this.getCommand("safe-stop").setExecutor(new CommandSafeStop());
         this.getCommand("minigame").setExecutor(new CommandMinigame());
         this.getCommand("job").setExecutor(new CommandJob());

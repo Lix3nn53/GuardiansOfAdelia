@@ -27,10 +27,10 @@ public class MobDropGenerator {
         if (dropTableNumber < 0 || dropTableNumber >= 10) return drops;
 
         double random = Math.random();
-        double dropRate = 0.1;
+        double dropRate = 0.6;
 
         if (BoostPremiumManager.isBoostActive(BoostPremium.LOOT)) {
-            dropRate += 0.1;
+            dropRate *= 2D;
         }
 
         if (random < dropRate) {
@@ -71,7 +71,7 @@ public class MobDropGenerator {
             int dropType = rand.nextInt(3);
 
             if (dropType == 0) {
-                ItemStack droppedItem = Weapons.getWeapon(RPGClass.WARRIOR, gearLevel.getWeaponAndPassiveNo(), tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack droppedItem = Weapons.getWeapon(rpgClass, gearLevel.getWeaponAndPassiveNo(), tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);
             } else if (dropType == 1) {
                 if (gearLevel.equals(GearLevel.ZERO) || gearLevel.equals(GearLevel.ONE)) {
@@ -84,7 +84,11 @@ public class MobDropGenerator {
                 drops.add(droppedItem);
             } else if (dropType == 2) {
                 minNumberOfStats = tier.getMinNumberOfStatsPassive();
-                ItemStack droppedItem = PassiveItemList.get(gearLevel.getWeaponAndPassiveNo(), RPGSlotType.RING, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+
+                int passiveType = rand.nextInt(5);
+                RPGSlotType rpgSlotType = RPGSlotType.values()[passiveType];
+
+                ItemStack droppedItem = PassiveItemList.get(gearLevel.getWeaponAndPassiveNo(), rpgSlotType, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);
             }
         }
