@@ -54,8 +54,9 @@ public class QuestItems {
             item.setItemMeta(im);
             return item;
         } else if (questNo == 39) {
-            ItemStack item = MonsterItem.PIRATE_HAT.getItem(0);
+            ItemStack item = new ItemStack(Material.BLUE_DYE);
             ItemMeta im = item.getItemMeta();
+            im.setCustomModelData(9);
             im.setDisplayName(ChatColor.DARK_GRAY + "Pirate Hat");
             im.setLore(new ArrayList() {{
                 add("");

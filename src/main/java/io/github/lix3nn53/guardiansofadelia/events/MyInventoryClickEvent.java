@@ -549,7 +549,7 @@ public class MyInventoryClickEvent implements Listener {
                 String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
-                DungeonTheme value = DungeonTheme.values()[i + 1];
+                DungeonTheme value = DungeonTheme.values()[i - 1];
                 Location portalLocationOfDungeonTheme = MiniGameManager.getPortalLocationOfDungeonTheme(value);
                 CompassManager.setCompassItemLocation(player, value.getName(), portalLocationOfDungeonTheme);
             }

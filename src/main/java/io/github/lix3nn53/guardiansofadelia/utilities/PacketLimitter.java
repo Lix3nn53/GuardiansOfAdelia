@@ -17,7 +17,7 @@ public class PacketLimitter {
     private static final HashMap<Player, Integer> packetsSent = new HashMap<>();
 
     private static final ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
-    private static final int PACKET_LIMIT = 553;
+    private static final int PACKET_LIMIT = 753;
 
     public static void register() {
 

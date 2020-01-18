@@ -234,6 +234,8 @@ public class ItemPoolGenerator {
         List<ItemStack> temp = new ArrayList<>();
 
         for (Companion companion : Companion.values()) {
+            if (companion.equals(Companion.BEE) || companion.equals(Companion.FOX_RED) || companion.equals(Companion.FOX_SNOW) || companion.equals(Companion.MINI_DRAGON)
+                    || companion.equals(Companion.VEX) || companion.equals(Companion.ICE_CREAM)) continue;
             temp.add(Companions.get(companion, gearLevel));
         }
 

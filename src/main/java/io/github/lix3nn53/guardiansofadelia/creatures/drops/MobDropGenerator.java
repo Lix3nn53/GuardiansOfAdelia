@@ -27,7 +27,7 @@ public class MobDropGenerator {
         if (dropTableNumber < 0 || dropTableNumber >= 10) return drops;
 
         double random = Math.random();
-        double dropRate = 0.6;
+        double dropRate = 0.06;
 
         if (BoostPremiumManager.isBoostActive(BoostPremium.LOOT)) {
             dropRate *= 2D;
@@ -85,8 +85,8 @@ public class MobDropGenerator {
             } else if (dropType == 2) {
                 minNumberOfStats = tier.getMinNumberOfStatsPassive();
 
-                int passiveType = rand.nextInt(5);
-                RPGSlotType rpgSlotType = RPGSlotType.values()[passiveType];
+                int passiveType = rand.nextInt(4);
+                RPGSlotType rpgSlotType = RPGSlotType.values()[passiveType + 1]; //+1 to ignore parrot
 
                 ItemStack droppedItem = PassiveItemList.get(gearLevel.getWeaponAndPassiveNo(), rpgSlotType, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);

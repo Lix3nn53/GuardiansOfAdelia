@@ -89,11 +89,13 @@ public class TutorialQuests {
                 "\nTo open RPG-Inventory click one of crafting slots from your inventory.\nNow you seem ready to face Aleesia.. or are you?\n" + ChatColor.LIGHT_PURPLE + "Enter the portal(Left-Mouse-Click when nearby)",
                 "", tasks4, itemPrizes, 0, 0, 90, requiredQuests4, Material.RED_NETHER_BRICKS);
 
+        InvincibleGiveAction invincibleGiveAction = new InvincibleGiveAction(40);
         PotionEffectAction potionEffectAction = new PotionEffectAction(PotionEffectType.BLINDNESS, 5 * 20, 3);
         Location teleportAfterTutorial = new Location(Bukkit.getWorld("world"), -3018.5, 95.5, 4920, -175.6f, -9.2f);
         TeleportAction teleportAction = new TeleportAction(teleportAfterTutorial, 10L);
         ClearPotionEffectAction clearPotionEffectAction = new ClearPotionEffectAction(PotionEffectType.WITHER);
 
+        quest4.addOnCompleteAction(invincibleGiveAction);
         quest4.addOnCompleteAction(potionEffectAction);
         quest4.addOnCompleteAction(teleportAction);
         quest4.addOnCompleteAction(clearPotionEffectAction);

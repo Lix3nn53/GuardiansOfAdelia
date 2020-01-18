@@ -124,7 +124,7 @@ public class PetExperienceManager {
                     List<String> lore = itemMeta.getLore();
                     lore.set(5, ChatColor.GOLD + "Level: " + ChatColor.GRAY + nextLevel);
 
-                    if (lore.get(1).contains("Companion")) {
+                    if (lore.get(2).contains("Companion")) {
                         double petBaseDamage = PersistentDataContainerUtil.getInteger(egg, "petBaseDamage");
                         double petBaseHealth = PersistentDataContainerUtil.getInteger(egg, "petBaseHealth");
                         int damage = PetManager.getCompanionDamage(nextLevel, petBaseDamage);

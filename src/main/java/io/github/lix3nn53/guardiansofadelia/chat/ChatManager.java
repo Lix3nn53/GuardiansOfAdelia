@@ -121,7 +121,7 @@ public class ChatManager {
             }
             if (GuildManager.inGuild(player)) {
                 Guild guild = GuildManager.getGuild(player);
-                String s = guild.getName();
+                String s = guild.getTag();
                 s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
                 prefix += ChatColor.DARK_GRAY + "[" + ChatColor.DARK_PURPLE + s + ChatColor.DARK_GRAY + "]";
             }

@@ -44,11 +44,14 @@ public enum CraftingType {
     public List<ItemStack> getItemsToCraft(GearLevel gearLevel) {
         ItemTier tier = ItemTier.MYSTIC;
         String itemTag = "Weaponsmith's";
-        List<ItemStack> itemStackList = ItemPoolGenerator.generateRangedWeaponsNoStats(tier, itemTag, gearLevel);
+        List<ItemStack> itemStackList = new ArrayList<>();
 
         switch (this) {
-            case WEAPON_RANGED:
+            case WEAPON_MELEE:
                 itemStackList = ItemPoolGenerator.generateMeleeWeaponsNoStats(tier, itemTag, gearLevel);
+                break;
+            case WEAPON_RANGED:
+                itemStackList = ItemPoolGenerator.generateRangedWeaponsNoStats(tier, itemTag, gearLevel);
                 break;
             case ARMOR_HEAVY:
                 itemTag = "Armorsmith's";

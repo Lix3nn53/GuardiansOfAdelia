@@ -113,28 +113,29 @@ public class CraftingGuiManager {
 
         //create pages
         int i = 0;
+        int stoneTier = 0;
         for (ItemStack itemStack : itemStackList) {
             //create lines
             CraftingLine craftingLine = new CraftingLine(itemStack);
 
             //add ingredients to craftingLine
             List<ItemStack> ingredients = new ArrayList<>();
-            if (i == 0) {
+            if (stoneTier == 0) {
                 ingredients.add(Ingredient.MINING_JEWEL_GOLD_DUST.getItemStack(8));
                 ingredients.add(Ingredient.MINING_JEWEL_JADE.getItemStack(4));
-            } else if (i == 1) {
+            } else if (stoneTier == 1) {
                 ingredients.add(Ingredient.MINING_JEWEL_JADE.getItemStack(12));
                 ingredients.add(Ingredient.MINING_JEWEL_AMETHYST.getItemStack(8));
-            } else if (i == 2) {
+            } else if (stoneTier == 2) {
                 ingredients.add(Ingredient.MINING_JEWEL_JADE.getItemStack(12));
                 ingredients.add(Ingredient.MINING_JEWEL_AMETHYST.getItemStack(8));
                 ingredients.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(4));
-            } else if (i == 3) {
+            } else if (stoneTier == 3) {
                 ingredients.add(Ingredient.MINING_JEWEL_AMETHYST.getItemStack(12));
                 ingredients.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(8));
                 ingredients.add(Ingredient.MINING_JEWEL_RUBY.getItemStack(4));
             }
-
+            stoneTier++;
             for (ItemStack ingredient : ingredients) {
                 craftingLine.addWord(ingredient);
             }
