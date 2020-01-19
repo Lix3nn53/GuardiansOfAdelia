@@ -99,7 +99,7 @@ public class RPGCharacterStats {
         this.totalExp = totalExp;
         int level = RPGCharacterExperienceManager.getLevel(totalExp);
         player.setLevel(level);
-        player.setExp(0);
+        updateExpBar(level);
     }
 
     public void giveExp(int give) {
@@ -123,9 +123,16 @@ public class RPGCharacterStats {
             setCurrentMana(getTotalMaxMana());
         }
 
+        updateExpBar(currentLevel);
+    }
+
+    private void updateExpBar(int currentLevel) {
         float requiredExperience = RPGCharacterExperienceManager.getRequiredExperience(currentLevel);
         float currentExperience = RPGCharacterExperienceManager.getCurrentExperience(this.totalExp, currentLevel);
         float percentage = currentExperience / requiredExperience;
+        if (percentage >= 1) {
+            percentage = 0.99f;
+        }
         player.setExp(percentage);
     }
 

@@ -951,6 +951,12 @@ public class MyInventoryClickEvent implements Listener {
 
                 MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You selected a new chat tag: " + chatTag.getChatColor() + chatTag.toString());
             }
+        } else if (title.equals(org.bukkit.ChatColor.YELLOW + "Select item to show in chat")) {
+            TextComponent message = new TextComponent(" Maps ! (Click Me)");
+            message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new ComponentBuilder("Click to see Maps from our website").color(ChatColor.AQUA).create()));
+            message.setColor(ChatColor.GREEN);
+            message.setBold(true);
+            player.spigot().sendMessage(message);
         }
     }
 

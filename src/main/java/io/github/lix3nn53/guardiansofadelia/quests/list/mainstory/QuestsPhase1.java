@@ -55,8 +55,8 @@ public class QuestsPhase1 {
         tasks.add(task1);
 
         Task task2 = new TaskInteract(26);
-        ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(1, 3);
-        ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(1, 3);
+        ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(1, 10);
+        ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(1, 10);
         GiveItemAction giveItemAction1 = new GiveItemAction(hpPotion);
         GiveItemAction giveItemAction2 = new GiveItemAction(manaPotion);
         task2.addOnCompleteAction(giveItemAction1);

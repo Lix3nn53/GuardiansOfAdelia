@@ -86,11 +86,9 @@ public class TutorialManager {
             player.getInventory().setItemInOffHand(mainHand);
         }
 
-        ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(10, 3);
+        ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(10, 10);
         InventoryUtils.giveItemToPlayer(player, hpPotion);
-        InventoryUtils.giveItemToPlayer(player, hpPotion);
-        ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(10, 3);
-        InventoryUtils.giveItemToPlayer(player, manaPotion);
+        ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(10, 10);
         InventoryUtils.giveItemToPlayer(player, manaPotion);
     }
 }

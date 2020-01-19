@@ -29,6 +29,10 @@ commands:
       - g
     permission: guardian.player
     permission-message: You do not have permission!
+  chat:
+    description: Chat command
+    permission: guardian.player
+    permission-message: You do not have permission!
   invite:
     description: Invite command
     aliases:

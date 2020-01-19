@@ -47,7 +47,7 @@ public enum Consumable {
         for (SkillComponent component : componentList) {
             component.execute(player, skillLevel, targets);
         }
-
+        int amount = itemStack.getAmount();
         if (PersistentDataContainerUtil.hasInteger(itemStack, "consumableUsesLeft")) {
             int usesLeft = PersistentDataContainerUtil.getInteger(itemStack, "consumableUsesLeft");
             if (usesLeft > 1) {
@@ -60,10 +60,10 @@ public enum Consumable {
                     itemStack.setItemMeta(itemMeta);
                 }
             } else {
-                itemStack.setAmount(0);
+                itemStack.setAmount(amount - 1);
             }
         } else {
-            itemStack.setAmount(0);
+            itemStack.setAmount(amount - 1);
         }
     }
 

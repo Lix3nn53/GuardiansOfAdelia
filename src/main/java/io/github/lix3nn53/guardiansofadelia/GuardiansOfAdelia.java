@@ -88,6 +88,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MyPlayerPickupArrowEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerPortalEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerQuitEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyPlayerResourcePackStatusEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerSwapHandItemsEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerTakeLecternBookEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerTeleportEvent(), this);
@@ -109,6 +110,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
 
         //set command executors
         this.getCommand("character").setExecutor(new CommandCharacter());
+        this.getCommand("chat").setExecutor(new CommandChat());
         this.getCommand("guild").setExecutor(new CommandGuild());
         this.getCommand("lix").setExecutor(new CommandLix());
         this.getCommand("invite").setExecutor(new CommandInvite());
@@ -176,7 +178,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 60 * 5L, 20 * 60 * 5L);
 
-        startGlobalRegen(); //health & mana regen loop
+        //startGlobalRegen(); //health & mana regen loop
 
         //DELAYED TASKS
         new BukkitRunnable() {
