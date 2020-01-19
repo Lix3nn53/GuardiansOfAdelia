@@ -1009,9 +1009,12 @@ public enum AdeliaEntity {
                 break;
             }
             case MAGMA_CUBE: {
-                MagmaCube entity = (MagmaCube) EntityUtils.create(loc, ChatColor.RED + "Magma Cube", 4000D, EntityType.MAGMA_CUBE);
+                double hp = 4000D;
+                MagmaCube entity = (MagmaCube) EntityUtils.create(loc, ChatColor.RED + "Magma Cube", hp, EntityType.MAGMA_CUBE);
                 setCustomDamage(entity, 420);
                 entity.setSize(3);
+                entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(hp);
+                entity.setHealth(hp);
                 setEntityExperience(entity, 880);
                 setEntityDropTableNo(entity, 8);
                 livingEntity = entity;

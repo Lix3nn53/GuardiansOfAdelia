@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileListener;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -14,6 +15,9 @@ public class MyProjectileHitEvent implements Listener {
     public void onEvent(ProjectileHitEvent event) {
         Projectile entity = event.getEntity();
         Entity hitEntity = event.getHitEntity();
+        if (entity.getShooter() instanceof Player) {
+            ((Player) entity.getShooter()).sendMessage("ProjectileHitEvent: " + hitEntity);
+        }
 
         ProjectileListener.onSkillProjectileLand(entity, hitEntity);
 

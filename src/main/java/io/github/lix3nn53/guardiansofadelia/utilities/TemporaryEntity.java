@@ -31,9 +31,19 @@ import java.util.UUID;
 public class TemporaryEntity implements LivingEntity {
 
     private Location location;
+    private final LivingEntity caster;
 
-    public TemporaryEntity(Location location) {
+    public TemporaryEntity(Location location, LivingEntity caster) {
         this.location = location;
+        if (!(caster instanceof TemporaryEntity)) {
+            this.caster = caster;
+        } else {
+            this.caster = null;
+        }
+    }
+
+    public LivingEntity getCaster() {
+        return caster;
     }
 
     @Override

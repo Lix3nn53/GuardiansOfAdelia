@@ -56,8 +56,6 @@ public class TargetHelper {
         Location entityLocation = entity.getLocation();
         Location targetLocation = target.getLocation();
 
-        if (!entityLocation.getWorld().getName().equals(targetLocation.getWorld().getName())) return false;
-
         Vector facing = entityLocation.getDirection();
         Vector relative = targetLocation.subtract(entityLocation).toVector();
 

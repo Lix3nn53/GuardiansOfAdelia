@@ -31,6 +31,10 @@ public class CommandParty implements CommandExecutor {
                 player.sendMessage(ChatColor.YELLOW + "/party leader <player>");
             } else if (args[0].equalsIgnoreCase("invite")) {
                 if (args.length == 2) {
+                    if (MiniGameManager.isInMinigame(player)) {
+                        player.sendMessage(ChatColor.RED + "You can't invite players to a minigame party!");
+                        return false;
+                    }
                     Player receiver = Bukkit.getPlayer(args[1]);
                     if (receiver != null && receiver != sender) {
                         String senderTitle = ChatColor.AQUA + "Sent party invitation";

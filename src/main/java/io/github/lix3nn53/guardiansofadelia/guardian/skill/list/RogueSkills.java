@@ -408,6 +408,9 @@ public class RogueSkills {
 
         DirectionCondition directionCondition = new DirectionCondition(false);
 
+        SelfTarget selfTarget = new SelfTarget();
+        MessageMechanic debug = new MessageMechanic("BACKSTAB");
+
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(meleeAttackTrigger);
         meleeAttackTrigger.addChildren(directionCondition);
@@ -420,6 +423,9 @@ public class RogueSkills {
         damages.add(600.0);
         damages.add(1000.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
+
+        directionCondition.addChildren(selfTarget);
+        selfTarget.addChildren(debug);
 
         directionCondition.addChildren(damageMechanic);
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 0.8, 4, 0, 0, 0, 0, 0.5, 0, 0, null);

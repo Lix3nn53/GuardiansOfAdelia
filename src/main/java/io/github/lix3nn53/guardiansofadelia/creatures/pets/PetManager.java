@@ -196,6 +196,19 @@ public class PetManager {
         }
     }
 
+    public static void onPetSetHealth(LivingEntity livingEntity, double currentHealth, int setHealth) {
+        if (!livingEntity.isDead()) {
+            if (PetManager.isPet(livingEntity)) {
+                int currentHealthInteger = (int) (currentHealth + 0.5);
+                String customName = livingEntity.getCustomName();
+                String replace = customName.replace(currentHealthInteger + "/", setHealth + "/");
+                livingEntity.setCustomName(replace);
+
+                updateCurrentHealthSavedInEgg(livingEntity, setHealth);
+            }
+        }
+    }
+
     public static void onPetHeal(LivingEntity livingEntity, double currentHealth, double healAmount) {
         if (!livingEntity.isDead()) {
             if (PetManager.isPet(livingEntity)) {

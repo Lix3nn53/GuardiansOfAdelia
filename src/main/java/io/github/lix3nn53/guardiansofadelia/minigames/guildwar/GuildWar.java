@@ -185,7 +185,7 @@ public class GuildWar extends Minigame {
 
     private boolean tryJoinQueue(Player player) {
         if (!getPlayersInGame().contains(player) && getPlayersInGame().size() < getTeamAmount() * getTeamSize()) {
-            if (addPlayer(player)) {
+            if (addPlayerNoCheck(player)) {
                 for (Player member : getPlayersInGame()) {
                     MessageUtils.sendCenteredMessage(member, getGameColor() + player.getName() + " joined queue for " + getMinigameName());
                 }
@@ -198,7 +198,7 @@ public class GuildWar extends Minigame {
     }
 
     @Override
-    public boolean addPlayer(Player player) {
+    public boolean addPlayerNoCheck(Player player) {
         if (GuildManager.inGuild(player)) {
             Guild guild = GuildManager.getGuild(player);
             if (guilds.contains(guild)) {

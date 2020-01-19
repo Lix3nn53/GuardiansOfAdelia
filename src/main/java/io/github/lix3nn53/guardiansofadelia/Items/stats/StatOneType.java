@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.stats;
 
 public class StatOneType implements Stat {
 
-    int value;
+    private int value;
 
     public StatOneType(int value) {
         this.value = value;

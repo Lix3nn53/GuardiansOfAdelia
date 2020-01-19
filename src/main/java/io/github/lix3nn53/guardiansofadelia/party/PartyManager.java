@@ -20,6 +20,12 @@ public class PartyManager {
         playerToParty.put(player2, party);
     }
 
+    public static void addParty(List<Player> players, Party party) {
+        for (Player player : players) {
+            playerToParty.put(player, party);
+        }
+    }
+
     public static Party getParty(Player player) {
         return playerToParty.get(player);
     }

@@ -86,8 +86,8 @@ public class MyPlayerInteractEntityEvent implements Listener {
                                 setHealthAmount = maxHealth;
                             }
                             livingEntity.setHealth(setHealthAmount);
-                            player.sendMessage("" + setHealthAmount);
-                            PetManager.onPetTakeDamage(livingEntity, currentHealth, -healAmount);
+                            int setHealthInt = (int) (setHealthAmount + 0.5);
+                            PetManager.onPetSetHealth(livingEntity, currentHealth, setHealthInt);
                             int amount = itemInMainHand.getAmount();
                             itemInMainHand.setAmount(amount - 1);
                             ParticleUtil.play(livingEntity.getLocation().add(0, 1.2, 0), Particle.HEART, ArrangementParticle.CIRCLE, 1.2, 6, Direction.XZ, 0, 0, 0, 0, null);

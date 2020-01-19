@@ -96,6 +96,8 @@ public class CommandChat implements CommandExecutor {
                         }
                     }
                 }
+
+                guiGeneric.openInventory(player);
             }
             // If the player (or console) uses our command correct, we can return true
             return true;

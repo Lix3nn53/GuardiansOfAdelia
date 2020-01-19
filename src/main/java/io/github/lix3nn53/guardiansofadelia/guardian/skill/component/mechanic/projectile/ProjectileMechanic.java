@@ -254,7 +254,11 @@ public class ProjectileMechanic extends MechanicComponent {
             if (projectile.isValid()) projectile.remove();
             if (mustHitToWork) return;
 
-            hit = new TemporaryEntity(projectile.getLocation());
+            hit = new TemporaryEntity(projectile.getLocation(), caster);
+
+            if (projectile instanceof Player) {
+                ((Player) projectile.getShooter()).sendMessage("3");
+            }
         } else if (addCasterAsFirstTargetIfHitSuccess) {
             if (CitizensAPI.getNPCRegistry().isNPC(hit)) return;
 
@@ -263,6 +267,10 @@ public class ProjectileMechanic extends MechanicComponent {
         }
 
         if (hit instanceof LivingEntity) {
+
+            if (projectile instanceof Player) {
+                ((Player) projectile.getShooter()).sendMessage("4");
+            }
             boolean b = ProjectileRepeatProtector.shouldSkillWorkOnProjectileHitToEntity(hit, projectile);
 
             if (b) {
@@ -276,6 +284,9 @@ public class ProjectileMechanic extends MechanicComponent {
 
         int skillLevel = 1;
         if (PersistentDataContainerUtil.hasInteger(projectile, "skillLevel")) {
+            if (projectile instanceof Player) {
+                ((Player) projectile.getShooter()).sendMessage("5");
+            }
             skillLevel = PersistentDataContainerUtil.getInteger(projectile, "skillLevel");
         }
 

@@ -173,6 +173,7 @@ public abstract class Minigame {
             new BukkitRunnable() {
 
                 int count = 0;
+                List<Player> playersInGame = getPlayersInGame();
 
                 @Override
                 public void run() {
@@ -180,7 +181,7 @@ public abstract class Minigame {
                         cancel();
 
                         if (isInGame) {
-                            for (Player member : getPlayersInGame()) {
+                            for (Player member : playersInGame) {
                                 MiniGameManager.removePlayer(member);
                                 member.teleport(backLocation);
                                 member.setGameMode(GameMode.ADVENTURE);
@@ -200,9 +201,11 @@ public abstract class Minigame {
                             }
                             teamDeathCount.clear();
                             gameCountDown.cancel();
+
+                            createNormalPartyAfterMinigame(playersInGame);
                         }
                     } else {
-                        for (Player member : getPlayersInGame()) {
+                        for (Player member : playersInGame) {
                             if (member.isOnline()) {
                                 MessageUtils.sendCenteredMessage(member, getGameColor() + "You will be teleported in " + (15 - (count * 5)) + " seconds");
                             }
@@ -211,6 +214,14 @@ public abstract class Minigame {
                     }
                 }
             }.runTaskTimer(GuardiansOfAdelia.getInstance(), 5L, 20 * 5L);
+        }
+    }
+
+    private void createNormalPartyAfterMinigame(List<Player> players) {
+        if (players.size() <= 4) {
+            Party party = new Party(players, 4, 2, ChatColor.AQUA);
+
+            PartyManager.addParty(players, party);
         }
     }
 
@@ -230,7 +241,7 @@ public abstract class Minigame {
         this.queueCountDown = queueCountDown;
     }
 
-    public boolean addPlayer(Player player) {
+    public boolean addPlayerNoCheck(Player player) {
         if (PartyManager.inParty(player)) {
             Party party = PartyManager.getParty(player);
             party.leave(player);
@@ -258,6 +269,57 @@ public abstract class Minigame {
     }
 
     public boolean joinQueue(Player player) {
+        if (PartyManager.inParty(player)) {
+            Party party = PartyManager.getParty(player);
+            List<Player> partyMembers = party.getMembers();
+            boolean canPartyJoin = canPartyJoin(partyMembers);
+            if (canPartyJoin) {
+                party.destroy();
+
+                for (Player partyMember : partyMembers) {
+                    addPlayerNoCheck(partyMember);
+                    for (Player member : getPlayersInGame()) {
+                        MessageUtils.sendCenteredMessage(member, partyMember.getName() + getGameColor() + " joined queue for " + getMinigameName());
+                    }
+                    MiniGameManager.addPlayer(partyMember, this);
+                    onPlayerJoinQueueCountdownCheck();
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        return addPlayerWithChecks(player);
+    }
+
+    private boolean canPartyJoin(List<Player> partyMembers) {
+        if (!this.isInGame) {
+            int emptySize = getEmptySize();
+            if (partyMembers.size() > emptySize) {
+                partyMembers.get(0).sendMessage(ChatColor.RED + "There is not enough space for your party");
+                return false;
+            }
+            for (Player player : partyMembers) {
+                if (!player.getWorld().getName().equals("world")) {
+                    player.sendMessage(ChatColor.RED + "You must be in normal world");
+                    return false;
+                }
+                if (!MiniGameManager.isInMinigame(player)) {
+                    if (!getPlayersInGame().contains(player) && getPlayersInGame().size() < this.teamAmount * this.teamSize) {
+                        return true;
+                    }
+                } else {
+                    player.sendMessage(ChatColor.RED + "You are already in a minigame");
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean addPlayerWithChecks(Player player) {
         if (!this.isInGame) {
             if (!player.getWorld().getName().equals("world")) {
                 player.sendMessage(ChatColor.RED + "You must be in normal world");
@@ -265,7 +327,7 @@ public abstract class Minigame {
             }
             if (!MiniGameManager.isInMinigame(player)) {
                 if (!getPlayersInGame().contains(player) && getPlayersInGame().size() < this.teamAmount * this.teamSize) {
-                    addPlayer(player);
+                    addPlayerNoCheck(player);
                     for (Player member : getPlayersInGame()) {
                         MessageUtils.sendCenteredMessage(member, player.getName() + getGameColor() + " joined queue for " + getMinigameName());
                     }
@@ -275,9 +337,10 @@ public abstract class Minigame {
                 }
             } else {
                 player.sendMessage(ChatColor.RED + "You are already in a minigame");
+                return false;
             }
-
         }
+
         return false;
     }
 
@@ -350,6 +413,12 @@ public abstract class Minigame {
 
     public int getMaxPlayerSize() {
         return this.teamAmount * this.teamSize;
+    }
+
+    public int getEmptySize() {
+        int playersInGameAmount = getPlayersInGame().size();
+        int maxPlayerSize = getMaxPlayerSize();
+        return maxPlayerSize - playersInGameAmount;
     }
 
     public int getPlayersInGameSize() {

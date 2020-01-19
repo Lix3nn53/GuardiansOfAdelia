@@ -74,7 +74,7 @@ public class StatUtils {
 
             return new StatPassive(fire, water, earth, lightning, wind);
         }
-        return null;
+        return new StatOneType(0);
     }
 
     public static StatType getStatType(Material mat) {

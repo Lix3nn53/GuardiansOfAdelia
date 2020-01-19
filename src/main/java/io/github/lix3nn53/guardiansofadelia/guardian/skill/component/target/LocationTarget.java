@@ -37,7 +37,7 @@ public class LocationTarget extends TargetComponent {
 
             Block targetBlock = target.getTargetBlock(transparentBlocks, range.get(skillLevel - 1));
 
-            TemporaryEntity temporaryEntity = new TemporaryEntity(targetBlock.getLocation().clone().add(0, 0.5, 0));
+            TemporaryEntity temporaryEntity = new TemporaryEntity(targetBlock.getLocation().clone().add(0, 0.5, 0), caster);
 
             temporaryEntities.add(temporaryEntity);
         }

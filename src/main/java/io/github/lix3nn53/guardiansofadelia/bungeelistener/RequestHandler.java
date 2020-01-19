@@ -236,7 +236,7 @@ public class RequestHandler {
         }
 
 
-        Bukkit.broadcastMessage(ChatColor.GOLD + "Thanks for your support! " + ChatColor.GRAY + player.getName() + " bought " + webProduct.getProductName() + ChatColor.GRAY + " from web-store!");
+        //Bukkit.broadcastMessage(ChatColor.GOLD + "Thanks for your support! " + ChatColor.GRAY + player.getName() + " bought " + webProduct.getProductName() + ChatColor.GRAY + " from web-store!");
     }
 
     private static boolean uuidExists(UUID uuid) {

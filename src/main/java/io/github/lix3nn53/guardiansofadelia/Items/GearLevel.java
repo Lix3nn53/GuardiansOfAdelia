@@ -166,23 +166,23 @@ public enum GearLevel {
     public int getArmorNo() {
         switch (this) {
             case ONE:
-                return 2;
-            case TWO:
                 return 1;
-            case THREE:
+            case TWO:
                 return 2;
+            case THREE:
+                return 1;
             case FOUR:
-                return 3;
+                return 2;
             case FIVE:
-                return 4;
+                return 3;
             case SIX:
-                return 5;
+                return 4;
             case SEVEN:
-                return 6;
+                return 5;
             case EIGHT:
-                return 7;
+                return 6;
             case NINE:
-                return 8;
+                return 7;
         }
         return 1;
     }
