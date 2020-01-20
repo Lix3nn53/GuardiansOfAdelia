@@ -409,7 +409,7 @@ public class RogueSkills {
         DirectionCondition directionCondition = new DirectionCondition(false);
 
         SelfTarget selfTarget = new SelfTarget();
-        MessageMechanic debug = new MessageMechanic("BACKSTAB");
+        MessageMechanic debug = new MessageMechanic(ChatColor.GOLD + "You dealt extra damage with your passive");
 
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(meleeAttackTrigger);

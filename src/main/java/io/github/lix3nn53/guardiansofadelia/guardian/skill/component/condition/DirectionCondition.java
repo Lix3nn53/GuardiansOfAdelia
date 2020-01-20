@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionCo
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.TargetHelper;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 
 import java.util.List;
 
@@ -28,11 +27,8 @@ public class DirectionCondition extends ConditionComponent {
 
             if (!worldName.equals(worldTarget.getName())) continue;
 
-            boolean inFront = TargetHelper.isInFront(caster, target);
-            if (caster instanceof Player) {
-                Player player = (Player) caster;
-                player.sendMessage("inFront: " + inFront);
-            }
+            boolean inFront = TargetHelper.isInFront(target, caster);
+
             if (inFront == workWhenInFront) {
                 success = executeChildren(caster, skillLevel, targets) || success;
             }

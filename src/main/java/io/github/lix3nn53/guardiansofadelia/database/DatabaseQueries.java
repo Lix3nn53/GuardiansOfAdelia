@@ -654,7 +654,7 @@ public class DatabaseQueries {
         }
     }
 
-    public static int setPremiumRank(UUID uuid, PremiumRank premiumRank) throws SQLException {
+    public static int setPremiumRankWithDate(UUID uuid, PremiumRank premiumRank) throws SQLException {
         LocalDate now = LocalDate.now();
         String currentDateString = now.toString();
 
@@ -682,7 +682,7 @@ public class DatabaseQueries {
     }
 
     public static int clearExpiredPremiumRanks() throws SQLException {
-        String SQL_QUERY = ("UPDATE goa_player SET premium_rank=NULL,premium_rank_date=NULL WHERE premium_rank_date < DATE_SUB(NOW(), INTERVAL 1 MONTH)");
+        String SQL_QUERY = ("UPDATE goa_player SET premium_rank=NULL,premium_rank_date=NULL WHERE premium_rank_date < DATE_SUB(NOW(), INTERVAL 1 MONTH) OR premium_rank_date IS NULL");
 
         try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);

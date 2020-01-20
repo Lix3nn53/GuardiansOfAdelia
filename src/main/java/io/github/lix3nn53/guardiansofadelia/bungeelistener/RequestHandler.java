@@ -176,6 +176,14 @@ public class RequestHandler {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                     guardianData.setPremiumRank(premiumRank);
                 }
+
+                try {
+                    DatabaseQueries.setPremiumRankWithDate(uuid, premiumRank);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    return new WebResponse(false, "A database error occurred.", minecraftUsername, productId);
+                }
             } else { //player is offline
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(minecraftUsername);
                 UUID uuid = offlinePlayer.getUniqueId();
@@ -185,7 +193,7 @@ public class RequestHandler {
                 }
 
                 try {
-                    DatabaseQueries.setPremiumRank(uuid, premiumRank);
+                    DatabaseQueries.setPremiumRankWithDate(uuid, premiumRank);
                 } catch (Exception e) {
                     e.printStackTrace();
 

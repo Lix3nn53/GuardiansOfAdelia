@@ -52,14 +52,13 @@ public class TargetHelper {
         return target;
     }
 
-    public static boolean isInFront(Entity attacker, Entity target) {
-        Location entityLocation = attacker.getLocation();
-        Location targetLocation = target.getLocation();
+    public static boolean isInFront(Entity source, Entity recipient) {
+        // Get the necessary vectors
+        Vector facing = source.getLocation().getDirection();
+        Vector relative = recipient.getLocation().subtract(source.getLocation()).toVector();
 
-        Vector facing = entityLocation.getDirection();
-        Vector relative = targetLocation.subtract(entityLocation).toVector();
-
-        return (facing.dot(relative) >= 0.0D);
+        // If the dot product is positive, the recipient is in front
+        return facing.dot(relative) >= 0;
     }
 
     public static List<LivingEntity> getConeTargets(LivingEntity source, double arc, double range) {
