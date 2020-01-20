@@ -52,13 +52,12 @@ public class TargetHelper {
         return target;
     }
 
-    public static boolean isInFront(Entity entity, Entity target) {
-        Location entityLocation = entity.getLocation();
+    public static boolean isInFront(Entity attacker, Entity target) {
+        Location entityLocation = attacker.getLocation();
         Location targetLocation = target.getLocation();
 
         Vector facing = entityLocation.getDirection();
         Vector relative = targetLocation.subtract(entityLocation).toVector();
-
 
         return (facing.dot(relative) >= 0.0D);
     }

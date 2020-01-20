@@ -1,7 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.list.*;
 import org.bukkit.ChatColor;
+
+import java.util.List;
 
 public enum RPGClass {
     NO_CLASS,
@@ -205,5 +209,24 @@ public enum RPGClass {
         double tierD = tier;
 
         return (int) ((levelD * ((levelD * tierD) / 125)) + 0.5);
+    }
+
+    public List<Skill> getSkillSet() {
+        if (this == RPGClass.KNIGHT) {
+            return KnightSkills.getSet();
+        } else if (this == RPGClass.MAGE) {
+            return MageSkills.getSet();
+        } else if (this == RPGClass.MONK) {
+            return MonkSkills.getSet();
+        } else if (this == RPGClass.ROGUE) {
+            return RogueSkills.getSet();
+        } else if (this == RPGClass.PALADIN) {
+            return PaladinSkills.getSet();
+        } else if (this == RPGClass.WARRIOR) {
+            return WarriorSkills.getSet();
+        } else if (this == RPGClass.HUNTER) {
+            return HunterSkills.getSet();
+        }
+        return ArcherSkills.getSet();
     }
 }

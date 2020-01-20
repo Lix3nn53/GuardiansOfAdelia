@@ -10,10 +10,10 @@ import java.util.List;
 
 public class DirectionCondition extends ConditionComponent {
 
-    private final boolean isInFront;
+    private final boolean workWhenInFront;
 
-    public DirectionCondition(boolean isInFront) {
-        this.isInFront = isInFront;
+    public DirectionCondition(boolean workWhenInFront) {
+        this.workWhenInFront = workWhenInFront;
     }
 
     @Override
@@ -28,14 +28,14 @@ public class DirectionCondition extends ConditionComponent {
 
             if (!worldName.equals(worldTarget.getName())) continue;
 
-            if (TargetHelper.isInFront(caster, target) == isInFront) {
+            boolean inFront = TargetHelper.isInFront(caster, target);
+            if (caster instanceof Player) {
+                Player player = (Player) caster;
+                player.sendMessage("inFront: " + inFront);
+            }
+            if (inFront == workWhenInFront) {
                 success = executeChildren(caster, skillLevel, targets) || success;
             }
-        }
-
-        if (caster instanceof Player) {
-            Player player = (Player) caster;
-            player.sendMessage("Backstab: " + success);
         }
 
         return success;

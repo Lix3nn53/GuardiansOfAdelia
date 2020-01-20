@@ -93,11 +93,18 @@ public class TriggerListener {
     }
 
     public static void startListeningMeleeAttack(Player player, MeleeAttackTrigger meleeAttackTrigger) {
+        player.sendMessage("startListeningMeleeAttack");
         playerToMeleeAttackTrigger.put(player, meleeAttackTrigger);
     }
 
     public static void onPlayerMeleeAttack(Player player, LivingEntity target) {
+        player.sendMessage("onPlayerMeleeAttack-1");
         if (playerToMeleeAttackTrigger.containsKey(player)) {
+            player.sendMessage("onPlayerMeleeAttack-2");
+            LivingEntity caster = playerToMeleeAttackTrigger.get(player).getCaster();
+            if (caster instanceof Player) {
+                player.sendMessage("Caster of triggered passive: " + caster.getName());
+            }
             boolean callback = playerToMeleeAttackTrigger.get(player).callback(player, target);
             if (callback) {
                 playerToMeleeAttackTrigger.remove(player);

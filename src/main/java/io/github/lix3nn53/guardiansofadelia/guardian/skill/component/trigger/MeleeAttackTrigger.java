@@ -19,6 +19,10 @@ public class MeleeAttackTrigger extends TriggerComponent {
         this.cooldown = cooldown;
     }
 
+    public LivingEntity getCaster() {
+        return caster;
+    }
+
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
         if (targets.isEmpty()) return false;

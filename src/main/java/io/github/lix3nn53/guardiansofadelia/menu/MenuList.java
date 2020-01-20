@@ -13,7 +13,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillList;
 import io.github.lix3nn53.guardiansofadelia.jobs.Job;
 import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
@@ -194,7 +193,7 @@ public class MenuList {
                 int pointsLeft = skillBar.getSkillPointsLeftToSpend();
                 guiGeneric = new GuiGeneric(27, ChatColor.LIGHT_PURPLE + "Skills (Points: " + pointsLeft + ")", 0);
 
-                List<Skill> skillSet = SkillList.getSkillSet(rpgCharacter.getRpgClass());
+                List<Skill> skillSet = rpgCharacter.getSkillBar().getSkillSet();
 
                 Skill skillOne = skillSet.get(0);
                 int investedSkillPoints = skillBar.getInvestedSkillPoints(0);

@@ -6,7 +6,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
@@ -29,12 +28,12 @@ public class SkillBar {
 
     private final HashMap<String, Boolean> skillsOnCooldown = new HashMap<>();
     private final Player player;
-    private final RPGClass rpgClass;
     private final List<Integer> investedSkillPoints = new ArrayList<>();
+    private final List<Skill> skillSet;
 
-    public SkillBar(Player player, RPGClass rpgClass, int one, int two, int three, int passive, int ultimate) {
+    public SkillBar(Player player, int one, int two, int three, int passive, int ultimate, List<Skill> skillSet) {
         this.player = player;
-        this.rpgClass = rpgClass;
+        this.skillSet = skillSet;
 
         player.getInventory().setHeldItemSlot(4);
 
@@ -47,11 +46,10 @@ public class SkillBar {
         remakeSkillBar();
 
         //activate init triggers
-        List<Skill> skillSet = SkillList.getSkillSet(rpgClass);
         for (int i = 0; i <= 4; i++) {
             if (investedSkillPoints.get(i) <= 0) continue;
 
-            Skill skill = skillSet.get(i);
+            Skill skill = this.skillSet.get(i);
             InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
             if (initializeTrigger != null) {
                 int nextSkillLevel = skill.getCurrentSkillLevel(getInvestedSkillPoints(i));
@@ -64,7 +62,7 @@ public class SkillBar {
      * @param skillIndex 0,1,2 normal skills, 3 passive, 4 ultimate
      */
     public boolean upgradeSkill(int skillIndex) {
-        Skill skill = SkillList.getSkill(rpgClass, skillIndex);
+        Skill skill = this.skillSet.get(skillIndex);
 
         Integer invested = investedSkillPoints.get(skillIndex);
         int currentSkillLevel = skill.getCurrentSkillLevel(invested);
@@ -95,7 +93,7 @@ public class SkillBar {
      * @param skillIndex 0,1,2 normal skills, 3 passive, 4 ultimate
      */
     public boolean downgradeSkill(int skillIndex) {
-        Skill skill = SkillList.getSkill(rpgClass, skillIndex);
+        Skill skill = this.skillSet.get(skillIndex);
 
         Integer invested = investedSkillPoints.get(skillIndex);
         int currentSkillLevel = skill.getCurrentSkillLevel(invested);
@@ -123,7 +121,7 @@ public class SkillBar {
         investedSkillPoints.add(0);
 
         for (int skillIndex = 0; skillIndex < 5; skillIndex++) {
-            Skill skill = SkillList.getSkill(rpgClass, skillIndex);
+            Skill skill = this.skillSet.get(skillIndex);
 
             InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
             if (initializeTrigger != null) {
@@ -150,7 +148,6 @@ public class SkillBar {
     }
 
     public void remakeSkillBar() {
-        List<Skill> skillSet = SkillList.getSkillSet(rpgClass);
         for (int i = 0; i < investedSkillPoints.size(); i++) {
             int slot = i;
 
@@ -162,7 +159,7 @@ public class SkillBar {
 
             Integer invested = investedSkillPoints.get(i);
             if (invested > 0) {
-                Skill skill = skillSet.get(i);
+                Skill skill = this.skillSet.get(i);
                 ItemStack icon = skill.getIcon(player.getLevel(), getSkillPointsLeftToSpend(), invested);
                 player.getInventory().setItem(slot, icon);
             } else {
@@ -172,7 +169,6 @@ public class SkillBar {
     }
 
     public void remakeSkillBarIcon(int skillIndex) {
-        List<Skill> skillSet = SkillList.getSkillSet(rpgClass);
         int slot = skillIndex;
 
         if (skillIndex == 3) { //don't place passive skill on hot-bar
@@ -183,7 +179,7 @@ public class SkillBar {
 
         Integer invested = investedSkillPoints.get(skillIndex);
         if (invested > 0) {
-            Skill skill = skillSet.get(skillIndex);
+            Skill skill = this.skillSet.get(skillIndex);
             ItemStack icon = skill.getIcon(player.getLevel(), getSkillPointsLeftToSpend(), invested);
             player.getInventory().setItem(slot, icon);
         } else {
@@ -205,9 +201,7 @@ public class SkillBar {
             return false;
         }
 
-        List<Skill> skillSet = SkillList.getSkillSet(rpgClass);
-
-        Skill skill = skillSet.get(skillIndex);
+        Skill skill = this.skillSet.get(skillIndex);
 
         Integer invested = investedSkillPoints.get(skillIndex);
         int skillLevel = skill.getCurrentSkillLevel(invested);
@@ -278,5 +272,9 @@ public class SkillBar {
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 20L);
 
         return true;
+    }
+
+    public List<Skill> getSkillSet() {
+        return this.skillSet;
     }
 }

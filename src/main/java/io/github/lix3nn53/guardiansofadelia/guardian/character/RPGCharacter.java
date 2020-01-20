@@ -25,13 +25,13 @@ public final class RPGCharacter {
     public RPGCharacter(RPGClass rpgClass, Player player, int one, int two, int three, int passive, int ultimate) {
         rpgCharacterStats = new RPGCharacterStats(player, rpgClass);
         this.rpgClass = rpgClass;
-        this.skillBar = new SkillBar(player, rpgClass, one, two, three, passive, ultimate);
+        this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet());
     }
 
     public RPGCharacter(RPGClass rpgClass, Player player) {
         rpgCharacterStats = new RPGCharacterStats(player, rpgClass);
         this.rpgClass = rpgClass;
-        this.skillBar = new SkillBar(player, rpgClass, 0, 0, 0, 0, 0);
+        this.skillBar = new SkillBar(player, 0, 0, 0, 0, 0, rpgClass.getSkillSet());
     }
 
     public RPGClass getRpgClass() {
