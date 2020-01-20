@@ -127,8 +127,8 @@ public class PaladinSkills {
 
     private static Skill getTwo() {
         List<String> description = new ArrayList<>();
-        description.add(ChatColor.GRAY + "Heal yourself and shoot a projectile");
-        description.add(ChatColor.GRAY + "that heals an ally on hit");
+        description.add(ChatColor.GRAY + "Shoot a projectile and heal allies");
+        description.add(ChatColor.GRAY + "around where it hits.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(8);
@@ -181,7 +181,7 @@ public class PaladinSkills {
         amounts.add(1600);
         amounts.add(2200);
         amounts.add(3600);
-        projectileMechanic.addChildren(new HealMechanic(amounts, new ArrayList<>()));
+        HealMechanic healMechanic = new HealMechanic(amounts, new ArrayList<>());
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.HEART, ArrangementParticle.CIRCLE, 1.4, 8, 0, 0, 0, 0, 0.5, 0, 0, null);
 
@@ -200,8 +200,8 @@ public class PaladinSkills {
 
         projectileMechanic.addChildren(areaTarget);
         areaTarget.addChildren(particleMechanic);
+        areaTarget.addChildren(healMechanic);
         projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_HEAL));
-
 
         return skill;
     }

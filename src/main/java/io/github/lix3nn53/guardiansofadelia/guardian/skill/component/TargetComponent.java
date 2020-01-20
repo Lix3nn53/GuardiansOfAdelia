@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component;
 
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
-import io.github.lix3nn53.guardiansofadelia.utilities.TemporaryEntity;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -107,10 +106,6 @@ public abstract class TargetComponent extends SkillComponent {
 
                     return canAttack(attacker, (LivingEntity) tameable.getOwner());
                 }
-            } else if (target instanceof TemporaryEntity) {
-                TemporaryEntity temporaryEntity = (TemporaryEntity) target;
-                LivingEntity caster = temporaryEntity.getCaster();
-                return canAttack(attacker, caster);
             }
         } else if (attacker instanceof Tameable) {
             if (target instanceof Player) {
