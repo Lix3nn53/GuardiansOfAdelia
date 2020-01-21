@@ -51,10 +51,10 @@ public class MyEntityPickupItemEvent implements Listener {
 
             PlayerInventory inventory = player.getInventory();
 
-            int heldItemSlot = inventory.getHeldItemSlot();
+            //int heldItemSlot = inventory.getHeldItemSlot();
             int firstEmpty = inventory.firstEmpty();
 
-            if (firstEmpty == heldItemSlot) { //pickup and hold
+            if (firstEmpty == 4) { //pickup and hold
                 if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
                         || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
 

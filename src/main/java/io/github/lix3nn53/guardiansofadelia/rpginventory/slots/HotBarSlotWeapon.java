@@ -9,21 +9,21 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class VanillaSlotMainhand {
+public class HotBarSlotWeapon {
 
     public boolean isEmpty(Player player) {
-        return player.getInventory().getItemInMainHand() == null;
+        return player.getInventory().getItem(4) == null;
     }
 
     public ItemStack getItemOnSlot(Player player) {
-        return player.getInventory().getItemInMainHand();
+        return player.getInventory().getItem(4);
     }
 
     public ItemStack getFillItem() {
         ItemStack itemStack = new ItemStack(Material.IRON_AXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Right Hand Slot");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Weapon Slot");
         itemMeta.setLore(new ArrayList() {{
             add("");
         }});

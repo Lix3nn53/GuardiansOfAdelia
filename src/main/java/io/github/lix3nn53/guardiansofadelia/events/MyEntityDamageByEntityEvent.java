@@ -275,11 +275,17 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
                             //Normal melee attack. Check for requirements then add fire and offhand bonus
 
+                            if (player.getInventory().getHeldItemSlot() != 4) {
+                                event.setCancelled(true);
+                                player.sendMessage(ChatColor.RED + "You can only attack with weapon slot(5)");
+                                return false;
+                            }
+
                             if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "reqLevel")) {
                                 int reqLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "reqLevel");
                                 if (player.getLevel() < reqLevel) {
                                     event.setCancelled(true);
-                                    player.sendMessage("Required level for this weapon is " + reqLevel);
+                                    player.sendMessage(ChatColor.RED + "Required level for this weapon is " + reqLevel);
                                     return false;
                                 }
                             }
@@ -289,7 +295,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 RPGClass reqClass = RPGClass.valueOf(reqClassString);
                                 if (!rpgClass.equals(reqClass)) {
                                     event.setCancelled(true);
-                                    player.sendMessage("Required class for this weapon is " + reqClass.getClassString());
+                                    player.sendMessage(ChatColor.RED + "Required class for this weapon is " + reqClass.getClassString());
                                     return false;
                                 }
                             }

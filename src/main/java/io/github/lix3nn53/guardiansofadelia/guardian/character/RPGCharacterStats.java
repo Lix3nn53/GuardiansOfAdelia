@@ -591,7 +591,7 @@ public class RPGCharacterStats {
 
         PlayerInventory inventory = player.getInventory();
 
-        ItemStack itemInMainHand = inventory.getItemInMainHand();
+        ItemStack itemInMainHand = inventory.getItem(4);
         if (!InventoryUtils.isAirOrNull(itemInMainHand)) {
             if (StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) {
                 setPassiveStatBonuses(EquipmentSlot.HAND, itemInMainHand, false);

@@ -44,7 +44,7 @@ public class RPGInventory {
     private VanillaSlotLeggings leggingsSlot = new VanillaSlotLeggings();
     private VanillaSlotBoots bootsSlot = new VanillaSlotBoots();
     private VanillaSlotOffhand offhandSlot = new VanillaSlotOffhand();
-    private VanillaSlotMainhand mainhandSlot = new VanillaSlotMainhand();
+    private HotBarSlotWeapon hotBarSlotWeapon = new HotBarSlotWeapon();
 
     public GuiGeneric formRPGInventory(Player player) {
         if (parrotSlot.isEmpty()) {
@@ -113,10 +113,10 @@ public class RPGInventory {
             rpgGui.setItem(RPGSlotType.OFFHAND.getSlotNo(), offhandSlot.getItemOnSlot(player));
         }
 
-        if (mainhandSlot.isEmpty(player)) {
-            rpgGui.setItem(RPGSlotType.MAINHAND.getSlotNo(), mainhandSlot.getFillItem());
+        if (hotBarSlotWeapon.isEmpty(player)) {
+            rpgGui.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.MAINHAND.getSlotNo(), mainhandSlot.getItemOnSlot(player));
+            rpgGui.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getItemOnSlot(player));
         }
 
         rpgGui.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
@@ -284,8 +284,8 @@ public class RPGInventory {
         return offhandSlot;
     }
 
-    public VanillaSlotMainhand getMainhandSlot() {
-        return mainhandSlot;
+    public HotBarSlotWeapon getHotBarSlotWeapon() {
+        return hotBarSlotWeapon;
     }
 
     public boolean onShiftClick(ItemStack itemStack, Player player, int slot, Inventory topInventory, RPGClass rpgClass) {

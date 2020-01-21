@@ -1,10 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -57,9 +57,9 @@ public class MyPlayerItemHeldEvent implements Listener {
 
                 RPGClass rpgClass = activeCharacter.getRpgClass();
 
-                //remove old item stats
                 PlayerInventory inventory = player.getInventory();
-                ItemStack oldItem = inventory.getItem(previousSlot);
+                //remove old item stats
+                /*ItemStack oldItem = inventory.getItem(previousSlot);
                 if (oldItem != null) {
                     Material type = oldItem.getType();
 
@@ -70,30 +70,21 @@ public class MyPlayerItemHeldEvent implements Listener {
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                         rpgCharacterStats.removeMainHandBonuses(oldItem, rpgClass, true);
                     }
-                }
+                }*/
 
                 //manage new item stats
                 ItemStack item = inventory.getItem(newSlot);
                 if (item == null) return;
                 Material type = item.getType();
-                boolean isWeapon = type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
-                        || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW);
+                /*boolean isWeapon = type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
+                        || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW);*/
 
-                if (isWeapon) {
-                    RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-                    boolean meetRequirements = rpgCharacterStats.setMainHandBonuses(item, rpgClass, true);
-
-                    //manage arrow in offhand
-                    if (type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
-                        if (meetRequirements) {
-                            ItemStack arrow = OtherItems.getArrow(2);
-                            inventory.setItemInOffHand(arrow);
-                        }
-                    } else {
-                        ItemStack itemInOffHand = inventory.getItemInOffHand();
-                        if (itemInOffHand.getType().equals(Material.ARROW)) {
-                            inventory.setItemInOffHand(new ItemStack(Material.AIR));
-                        }
+                //manage arrow in offhand
+                if ((type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) && newSlot == 4) { //weapon slot is 4
+                    boolean meetRequirements = StatUtils.doesCharacterMeetRequirements(item, player, rpgClass);
+                    if (meetRequirements) {
+                        ItemStack arrow = OtherItems.getArrow(2);
+                        inventory.setItemInOffHand(arrow);
                     }
                 } else {
                     ItemStack itemInOffHand = inventory.getItemInOffHand();
