@@ -329,9 +329,6 @@ public class RPGCharacterStats {
             switch (statType) {
                 case MELEE:
                     StatOneType stat = (StatOneType) StatUtils.getStat(itemInMainHand);
-                    if (stat.getValue() == 0) {
-                        player.sendMessage("0 damage from mainhand");
-                    }
                     return stat.getValue() + bonus;
                 case HYBRID:
                     StatHybrid statHybrid = (StatHybrid) StatUtils.getStat(itemInMainHand);

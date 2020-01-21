@@ -50,6 +50,19 @@ public class CommandGuild implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_PURPLE + "/guild destroy - destroy the guild");
             } else if (args[0].equals("create")) {
                 if (args.length == 3) {
+                    String name = args[1];
+                    String tag = args[2];
+
+                    if (name.length() > 20) {
+                        player.sendMessage(ChatColor.RED + "Max guild name length is 20");
+                        return false;
+                    }
+
+                    if (tag.length() > 5) {
+                        player.sendMessage(ChatColor.RED + "Max guild tag length is 5");
+                        return false;
+                    }
+
                     int price = 64 * 2;
                     if (EconomyUtils.pay(player, price)) {
                         Guild guild = new Guild(args[1], args[2]);

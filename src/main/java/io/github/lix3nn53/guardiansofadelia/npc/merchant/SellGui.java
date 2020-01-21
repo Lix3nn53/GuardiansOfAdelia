@@ -54,7 +54,9 @@ public class SellGui extends GuiGeneric {
         setItem(48, bronzeGlass);
     }
 
-    public void addItemToSell(ItemStack itemStack, int slotNoInPlayerInventory) {
+    public boolean addItemToSell(ItemStack itemStack, int slotNoInPlayerInventory) {
+        if (!InventoryUtils.canSellMaterial(itemStack.getType())) return false;
+
         if (!slotNoToRemoveFromPlayerInv.contains(slotNoInPlayerInventory)) {
             addItem(itemStack);
             slotNoToRemoveFromPlayerInv.add(slotNoInPlayerInventory);
@@ -90,6 +92,8 @@ public class SellGui extends GuiGeneric {
             bronze.setItemMeta(itemMeta);
             setItem(48, bronze);
         }
+
+        return true;
     }
 
     private int getSellValue(ItemStack itemStack) {

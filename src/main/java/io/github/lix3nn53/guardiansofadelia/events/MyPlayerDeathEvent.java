@@ -5,8 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -46,6 +48,8 @@ public class MyPlayerDeathEvent implements Listener {
                     Town town = TownManager.getTown(1);
                     player.teleport(town.getLocation());
                 }
+
+                InventoryUtils.removeAllFromInventoryByMaterial(player.getInventory(), Material.COMPASS);
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 5L);
     }

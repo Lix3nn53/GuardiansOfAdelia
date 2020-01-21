@@ -81,16 +81,17 @@ public enum Consumable {
         multipliers.add(getBuffMultiplier(10));
 
         List<Integer> ticks = new ArrayList<>(); //buff durations
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
+        int duration = 20 * 60 * 10; //10 minutes
+        ticks.add(duration);
+        ticks.add(duration);
+        ticks.add(duration);
+        ticks.add(duration);
+        ticks.add(duration);
+        ticks.add(duration);
+        ticks.add(duration);
+        ticks.add(duration);
+        ticks.add(duration);
+        ticks.add(duration);
 
         List<SkillComponent> list = new ArrayList<>();
         switch (this) {
@@ -282,16 +283,16 @@ public enum Consumable {
         List<String> lore = new ArrayList<>();
         switch (this) {
             case BUFF_PHYSICAL_DAMAGE:
-                lore.add(ChatColor.GRAY + "Increases physical damage for 20 minutes");
+                lore.add(ChatColor.GRAY + "Increases physical damage for 10 minutes");
                 break;
             case BUFF_PHYSICAL_DEFENSE:
-                lore.add(ChatColor.GRAY + "Increases physical defense for 20 minutes");
+                lore.add(ChatColor.GRAY + "Increases physical defense for 10 minutes");
                 break;
             case BUFF_MAGICAL_DAMAGE:
-                lore.add(ChatColor.GRAY + "Increases magical damage for 20 minutes");
+                lore.add(ChatColor.GRAY + "Increases magical damage for 10 minutes");
                 break;
             case BUFF_MAGICAL_DEFENSE:
-                lore.add(ChatColor.GRAY + "Increases magical defense for 20 minutes");
+                lore.add(ChatColor.GRAY + "Increases magical defense for 10 minutes");
                 break;
             case POTION_INSTANT_HEALTH:
                 lore.add(ChatColor.GRAY + "Restores health");

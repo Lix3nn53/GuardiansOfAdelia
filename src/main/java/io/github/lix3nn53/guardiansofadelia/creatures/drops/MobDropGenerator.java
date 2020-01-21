@@ -74,7 +74,7 @@ public class MobDropGenerator {
                 ItemStack droppedItem = Weapons.getWeapon(rpgClass, gearLevel.getWeaponAndPassiveNo(), tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);
             } else if (dropType == 1) {
-                if (gearLevel.equals(GearLevel.ZERO) || gearLevel.equals(GearLevel.ONE)) {
+                if (gearLevel.equals(GearLevel.ZERO) || gearLevel.equals(GearLevel.ONE) || gearLevel.equals(GearLevel.TWO)) {
                     rpgClass = RPGClass.NO_CLASS;
                 }
                 // Obtain a number between [0 - 3].

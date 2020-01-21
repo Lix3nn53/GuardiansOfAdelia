@@ -245,6 +245,9 @@ public class MyInventoryClickEvent implements Listener {
                                 trade.removeItemFromTrade(player, slot);
                             }
                         } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+                            if (!InventoryUtils.canTradeMaterial(currentType)) {
+                                player.sendMessage(ChatColor.RED + "You can't trade this item");
+                            }
                             trade.addItem(player, slot);
                         }
                     }
@@ -257,7 +260,10 @@ public class MyInventoryClickEvent implements Listener {
                             sellGui.finish(player);
                         }
                     } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
-                        sellGui.addItemToSell(current, slot);
+                        boolean b = sellGui.addItemToSell(current, slot);
+                        if (!b) {
+                            player.sendMessage(ChatColor.RED + "You can't sell this item");
+                        }
                     }
                 } else if (activeGui instanceof EnchantGui) {
                     EnchantGui enchantGui = (EnchantGui) activeGui;
@@ -423,15 +429,27 @@ public class MyInventoryClickEvent implements Listener {
                     Location location = TownManager.getTown(1).getLocation();
                     CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Port Veloa")) {
+                    int charLevel = CharacterSelectionScreenManager.getCharLevel(player, charNo);
+                    if (charLevel < 10) return;
+
                     Location location = TownManager.getTown(2).getLocation();
                     CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Elderine")) {
+                    int charLevel = CharacterSelectionScreenManager.getCharLevel(player, charNo);
+                    if (charLevel < 20) return;
+
                     Location location = TownManager.getTown(3).getLocation();
                     CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Uruga")) {
+                    int charLevel = CharacterSelectionScreenManager.getCharLevel(player, charNo);
+                    if (charLevel < 40) return;
+
                     Location location = TownManager.getTown(4).getLocation();
                     CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("Alberstol Ruins")) {
+                    int charLevel = CharacterSelectionScreenManager.getCharLevel(player, charNo);
+                    if (charLevel < 70) return;
+
                     Location location = TownManager.getTown(5).getLocation();
                     CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 } else if (currentName.contains("last location")) {

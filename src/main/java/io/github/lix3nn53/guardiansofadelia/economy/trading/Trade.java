@@ -77,8 +77,12 @@ public class Trade {
 
     private void finish() {
         if (tradeGui1.didAccept() && tradeGui2.didAccept()) {
-            tradeGui1.giveItemsToReceiverAndRemoveFromOwner();
-            tradeGui2.giveItemsToReceiverAndRemoveFromOwner();
+            tradeGui1.removeFromOwnerAndStore();
+            tradeGui2.removeFromOwnerAndStore();
+
+            tradeGui1.giveItemsToReceiver();
+            tradeGui2.giveItemsToReceiver();
+
             tradeGui1.getOwner().closeInventory();
             tradeGui2.getOwner().closeInventory();
         }

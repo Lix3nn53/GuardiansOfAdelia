@@ -633,14 +633,14 @@ public class MenuList {
         page1.addLine(page1Line4);
         page1.addLine(page1Line5);
 
-        page1.addLine(page2Line1);
-        page1.addLine(page2Line2);
+        page2.addLine(page2Line1);
+        page2.addLine(page2Line2);
         page2.addLine(page2Line3);
         page2.addLine(page2Line4);
         page2.addLine(page2Line5);
 
-        page2.addLine(page3Line1);
-        page2.addLine(page3Line2);
+        page3.addLine(page3Line1);
+        page3.addLine(page3Line2);
         page3.addLine(page3Line3);
         page3.addLine(page3Line4);
         page3.addLine(page3Line5);

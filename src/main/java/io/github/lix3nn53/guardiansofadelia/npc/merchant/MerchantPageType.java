@@ -849,38 +849,38 @@ public enum MerchantPageType {
 
         MerchantGuiLine line1 = new MerchantGuiLine();
         ItemStack hpPotion1 = Consumable.POTION_INSTANT_HEALTH.getItemStack(1, 10);
-        line1.addWord(hpPotion1, 10);
+        line1.addWord(hpPotion1, 8);
         ItemStack manaPotion1 = Consumable.POTION_INSTANT_MANA.getItemStack(1, 10);
-        line1.addWord(manaPotion1, 10);
+        line1.addWord(manaPotion1, 8);
         guiPage.addLine(line1);
 
         if (shopLevel >= 2) {
             MerchantGuiLine line = new MerchantGuiLine();
             ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(2, 10);
-            line.addWord(hpPotion, 20);
+            line.addWord(hpPotion, 16);
             ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(2, 10);
-            line.addWord(manaPotion, 20);
+            line.addWord(manaPotion, 16);
             guiPage.addLine(line);
             if (shopLevel >= 3) {
                 line = new MerchantGuiLine();
                 hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(3, 10);
-                line.addWord(hpPotion, 40);
+                line.addWord(hpPotion, 32);
                 manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(3, 10);
-                line.addWord(manaPotion, 40);
+                line.addWord(manaPotion, 32);
                 guiPage.addLine(line);
                 if (shopLevel >= 4) {
                     line = new MerchantGuiLine();
                     hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(4, 10);
-                    line.addWord(hpPotion, 60);
+                    line.addWord(hpPotion, 48);
                     manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(4, 10);
-                    line.addWord(manaPotion, 60);
+                    line.addWord(manaPotion, 48);
                     guiPage.addLine(line);
                     if (shopLevel >= 5) {
                         line = new MerchantGuiLine();
                         hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(5, 10);
-                        line.addWord(hpPotion, 80);
+                        line.addWord(hpPotion, 60);
                         manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(5, 10);
-                        line.addWord(manaPotion, 80);
+                        line.addWord(manaPotion, 60);
                         guiPage.addLine(line);
                     }
                 }

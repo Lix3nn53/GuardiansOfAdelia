@@ -696,22 +696,7 @@ public class DatabaseQueries {
     }
 
     public static boolean setFriendsOfPlayer(UUID uuid, List<Player> friendList) {
-        try (Connection connection = ConnectionPool.getConnection();
-             Statement statement = connection.createStatement()) {
-            statement.addBatch("DELETE FROM goa_player_friend WHERE uuid = '" + uuid.toString() + "'");
 
-            for (Player friend : friendList) {
-                statement.addBatch("INSERT INTO goa_player_friend \n" +
-                        "\t(uuid, friend_uuid) \n" +
-                        "VALUES \n" +
-                        "\t('" + uuid.toString() + "', '" + friend.getUniqueId().toString() + "')");
-            }
-
-            statement.executeBatch();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return false;
     }
 

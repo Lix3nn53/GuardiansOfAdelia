@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class TradeGui extends GuiGeneric {
 
@@ -156,16 +157,28 @@ public class TradeGui extends GuiGeneric {
         setItem(slotNoOnThisReceive, new ItemStack(Material.AIR));
     }
 
-    public void giveItemsToReceiverAndRemoveFromOwner() {
+    private final List<ItemStack> itemsToGive = new ArrayList<>();
+
+    public void removeFromOwnerAndStore() {
         StringBuilder giftStr = new StringBuilder();
-        for (int i : slotNoInPlayerToGift.keySet()) {
-            ItemStack giftItem = slotNoInPlayerToGift.get(i);
+        for (int slotNoInPlayer : slotNoInPlayerToGift.keySet()) {
+            ItemStack giftItem = slotNoInPlayerToGift.get(slotNoInPlayer);
+            itemsToGive.add(giftItem);
+
+            //remove
+            owner.getInventory().setItem(slotNoInPlayer, null);
+
+            //string
+            giftStr.append(giftItem.getItemMeta().getDisplayName()).append("x").append(giftItem.getAmount()).append(" ");
+        }
+    }
+
+    public void giveItemsToReceiver() {
+        StringBuilder giftStr = new StringBuilder();
+        for (ItemStack giftItem : itemsToGive) {
 
             //give
             InventoryUtils.giveItemToPlayer(receiver, giftItem);
-
-            //remove
-            owner.getInventory().setItem(i, new ItemStack(Material.AIR));
 
             //string
             giftStr.append(giftItem.getItemMeta().getDisplayName()).append("x").append(giftItem.getAmount()).append(" ");

@@ -59,6 +59,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MyEntityDamageEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityDeathEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityDismountEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyEntityDropItemEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityMountEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityPickupItemEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyEntityRegainHealthEvent(), this);
@@ -111,6 +112,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         //set command executors
         this.getCommand("character").setExecutor(new CommandCharacter());
         this.getCommand("chat").setExecutor(new CommandChat());
+        this.getCommand("destroyitem").setExecutor(new CommandDestroyItem());
         this.getCommand("guild").setExecutor(new CommandGuild());
         this.getCommand("lix").setExecutor(new CommandLix());
         this.getCommand("invite").setExecutor(new CommandInvite());
@@ -179,6 +181,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 60 * 5L, 20 * 60 * 5L);
 
         //startGlobalRegen(); //health & mana regen loop
+        startGlobalManaRegen(0.4);
 
         //DELAYED TASKS
         new BukkitRunnable() {
@@ -242,6 +245,37 @@ public class GuardiansOfAdelia extends JavaPlugin {
                                     nextHealth = maxHealth;
                                 }
                                 player.setHealth(nextHealth);
+                            }
+                        }
+                    }
+                }
+            }
+        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 100L, 160L);
+    }
+
+    private void startGlobalManaRegen(double maxManaPercent) {
+        double manaPercent = 0.05;
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+                for (Player player : onlinePlayers) {
+                    UUID uuid = player.getUniqueId();
+                    if (GuardianDataManager.hasGuardianData(uuid)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                        if (guardianData.hasActiveCharacter()) {
+                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                            RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+
+                            double currentMana = rpgCharacterStats.getCurrentMana();
+                            double maxMana = rpgCharacterStats.getTotalMaxMana();
+                            if (currentMana < (maxMana * maxManaPercent)) {
+                                double nextMana = currentMana + (maxMana * manaPercent);
+                                if (nextMana > maxMana) {
+                                    nextMana = maxMana;
+                                }
+                                rpgCharacterStats.setCurrentMana((int) nextMana);
                             }
                         }
                     }

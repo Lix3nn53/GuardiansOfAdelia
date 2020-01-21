@@ -197,7 +197,7 @@ public class SkillBar {
         if (slot == 3) skillIndex = 4; //ultimate is one off
 
         if (skillsOnCooldown.containsKey("" + skillIndex)) {
-            player.sendMessage("Cast fail: on cooldown");
+            player.sendMessage(ChatColor.RED + "Skill is on cooldown");
             return false;
         }
 
@@ -207,7 +207,7 @@ public class SkillBar {
         int skillLevel = skill.getCurrentSkillLevel(invested);
 
         if (skillLevel <= 0) {
-            player.sendMessage("Cast fail: skill level");
+            player.sendMessage(ChatColor.RED + "You haven't learned that skill");
             return false;
         }
 
@@ -221,7 +221,7 @@ public class SkillBar {
                 rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                 int currentMana = rpgCharacterStats.getCurrentMana();
                 if (currentMana < manaCost) {
-                    player.sendMessage("Cast fail: mana cost");
+                    player.sendMessage(ChatColor.RED + "Not enough mana");
                     return false;
                 }
             }
@@ -230,7 +230,7 @@ public class SkillBar {
         boolean cast = skill.cast(player, skillLevel, new ArrayList<>());//cast ends when this returns
 
         if (!cast) {
-            player.sendMessage("Cast fail: mechanics");
+            player.sendMessage(ChatColor.RED + "Failed to cast skill");
             return false; //dont go on cooldown and consume mana if cast failed
         }
 

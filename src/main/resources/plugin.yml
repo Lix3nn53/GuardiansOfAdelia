@@ -33,6 +33,10 @@ commands:
     description: Chat command
     permission: guardian.player
     permission-message: You do not have permission!
+  destroyitem:
+    description: Item destroy command
+    permission: guardian.player
+    permission-message: You do not have permission!
   invite:
     description: Invite command
     aliases:

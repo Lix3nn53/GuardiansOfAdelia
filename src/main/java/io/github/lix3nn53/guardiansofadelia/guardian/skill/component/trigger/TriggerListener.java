@@ -165,7 +165,7 @@ public class TriggerListener {
 
     private static void stopInit(Player player) {
         if (playerToInitializeTrigger.containsKey(player)) {
-            player.sendMessage("StopEffects");
+            //debug player.sendMessage("StopEffects");
             playerToInitializeTrigger.get(player).stopEffects(player);
             playerToInitializeTrigger.remove(player);
         }

@@ -20,6 +20,7 @@ import java.util.function.Predicate;
 public class CharacterSelectionScreenManager {
 
     private static final HashMap<UUID, HashMap<Integer, Location>> charLocationsForSelection = new HashMap<>();
+    private static final HashMap<UUID, HashMap<Integer, Integer>> charLevelsForSelection = new HashMap<>();
     private static final List<Player> players = new ArrayList<>();
     private static List<Location> armorStandLocationBases;
     private static Location tutorialStart;
@@ -91,6 +92,7 @@ public class CharacterSelectionScreenManager {
         removeDisguisesFromPlayer(player);
         players.remove(player);
         charLocationsForSelection.remove(player.getUniqueId());
+        charLevelsForSelection.remove(player.getUniqueId());
     }
 
     public static Location getCharacterSelectionCenter() {
@@ -125,6 +127,15 @@ public class CharacterSelectionScreenManager {
         charLocationsForSelection.put(uuid, integerLocationHashMap);
     }
 
+    public static void setCharLevel(UUID uuid, int charNo, int level) {
+        HashMap<Integer, Integer> integerLevelHashMap = new HashMap<>();
+        if (charLevelsForSelection.containsKey(uuid)) {
+            integerLevelHashMap = charLevelsForSelection.get(uuid);
+        }
+        integerLevelHashMap.put(charNo, level);
+        charLevelsForSelection.put(uuid, integerLevelHashMap);
+    }
+
     /**
      * @return last leave location if valid else null
      */
@@ -140,6 +151,17 @@ public class CharacterSelectionScreenManager {
             }
         }
         return null;
+    }
+
+    public static int getCharLevel(Player player, int charNo) {
+        UUID uuid = player.getUniqueId();
+        if (charLevelsForSelection.containsKey(uuid)) {
+            HashMap<Integer, Integer> integerLevelHashMap = charLevelsForSelection.get(uuid);
+            if (integerLevelHashMap.containsKey(charNo)) {
+                return integerLevelHashMap.get(charNo);
+            }
+        }
+        return 1;
     }
 
     public static boolean isPlayerInCharSelection(Player player) {

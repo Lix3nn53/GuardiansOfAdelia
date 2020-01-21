@@ -1,10 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import io.github.lix3nn53.guardiansofadelia.party.Party;
+import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 
@@ -49,6 +52,16 @@ public class HealMechanic extends MechanicComponent {
 
             ent.setHealth(nextHealth);
             healed = true;
+
+            //update partyboard
+            if (ent instanceof Player) {
+                Player player = (Player) ent;
+
+                if (PartyManager.inParty(player)) {
+                    Party party = PartyManager.getParty(player);
+                    party.getBoard().updateHP(player.getName(), (int) (nextHealth + 0.5));
+                }
+            }
         }
 
         return healed;

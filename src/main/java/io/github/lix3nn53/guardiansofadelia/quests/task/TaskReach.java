@@ -31,7 +31,8 @@ public final class TaskReach implements Task {
     public String getTablistInfoString() {
         ChatColor chatColor = getChatColor();
 
-        return chatColor + "Go to " + blockLoc + " and click " + blockMat.toString() + " block " + completed + "/1";
+        return chatColor + "Go to x: " + blockLoc.getBlockX() + " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + " in "
+                + blockLoc.getWorld().getName() + " and click " + blockMat.toString();
     }
 
     public String getItemLoreString() {
@@ -41,7 +42,8 @@ public final class TaskReach implements Task {
         } else {
             color = ChatColor.YELLOW;
         }
-        return color + "Go to " + blockLoc.toString() + " and click " + blockMat.toString() + " block";
+        return color + "Go to x: " + blockLoc.getBlockX() + " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + " in "
+                + blockLoc.getWorld().getName() + " and click " + blockMat.toString();
     }
 
     @Override

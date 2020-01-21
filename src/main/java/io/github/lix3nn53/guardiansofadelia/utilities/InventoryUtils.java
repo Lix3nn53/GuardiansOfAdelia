@@ -216,6 +216,18 @@ public class InventoryUtils {
         inventory.setContents(inventoryContents);
     }
 
+    public static void removeAllFromInventoryByMaterial(Inventory inventory, Material material) {
+        ItemStack[] inventoryContents = inventory.getContents();
+        for (int i = 0; i < inventoryContents.length; i++) {
+            if (inventoryContents[i] != null) {
+                if (inventoryContents[i].getType().equals(material)) {
+                    inventoryContents[i] = null;
+                }
+            }
+        }
+        inventory.setContents(inventoryContents);
+    }
+
     public static boolean isArmorEquippedOnRelatedSlot(ArmorType armorTypeOfCurrentItem, Player player) {
         if (armorTypeOfCurrentItem.equals(ArmorType.HELMET)) {
             return !isAirOrNull(player.getInventory().getHelmet());
@@ -307,5 +319,16 @@ public class InventoryUtils {
                 slideCount++;
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 10L, 5L);
+    }
+
+    public static boolean canSellMaterial(Material material) {
+        return !(material.equals(Material.IRON_INGOT) || material.equals(Material.GOLD_INGOT) || material.equals(Material.DIAMOND) //coins
+                || material.equals(Material.ROTTEN_FLESH) || material.equals(Material.PINK_DYE) || material.equals(Material.BLUE_DYE) //quest items
+                || material.equals(Material.COMPASS));
+    }
+
+    public static boolean canTradeMaterial(Material material) {
+        return !(material.equals(Material.ROTTEN_FLESH) || material.equals(Material.PINK_DYE) || material.equals(Material.BLUE_DYE) //quest items
+                || material.equals(Material.COMPASS));
     }
 }

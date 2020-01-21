@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Shields;
@@ -20,6 +21,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 
 public class TutorialManager {
@@ -68,22 +70,27 @@ public class TutorialManager {
         ItemStack leggings = Armors.getArmor(ArmorType.LEGGINGS, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
         ItemStack boots = Armors.getArmor(ArmorType.BOOTS, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
 
-        player.getInventory().setHelmet(helmet);
-        player.getInventory().setChestplate(chest);
-        player.getInventory().setLeggings(leggings);
-        player.getInventory().setBoots(boots);
+        PlayerInventory playerInventory = player.getInventory();
+
+        playerInventory.setHelmet(helmet);
+        playerInventory.setChestplate(chest);
+        playerInventory.setLeggings(leggings);
+        playerInventory.setBoots(boots);
 
         ItemStack mainHand = Weapons.getWeapon(rpgClass, 10, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        player.getInventory().setItem(4, mainHand);
+        playerInventory.setItem(4, mainHand);
 
         if (rpgClass.equals(RPGClass.KNIGHT)) {
             ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
-            player.getInventory().setItemInOffHand(shield);
+            playerInventory.setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
             ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
-            player.getInventory().setItemInOffHand(shield);
+            playerInventory.setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.ROGUE)) {
-            player.getInventory().setItemInOffHand(mainHand);
+            playerInventory.setItemInOffHand(mainHand);
+        } else if (rpgClass.equals(RPGClass.ARCHER) || rpgClass.equals(RPGClass.HUNTER)) {
+            ItemStack arrow = OtherItems.getArrow(2);
+            playerInventory.setItemInOffHand(arrow);
         }
 
         ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(10, 10);
