@@ -49,22 +49,22 @@ public class Job {
 
     private int getRequiredExperienceToLevelUp() {
         if (level == 1) {
-            return 180;
+            return 90;
         } else if (level == 2) {
-            return 320;
+            return 140;
         } else if (level == 3) {
-            return 560;
+            return 200;
         } else if (level == 4) {
-            return 800;
+            return 270;
         } else if (level == 5) {
-            return 1120;
+            return 450;
         } else if (level == 6) {
-            return 1440;
+            return 560;
         } else if (level == 7) {
-            return 1760;
+            return 680;
         } else if (level == 8) {
-            return 2400;
+            return 800;
         }
-        return 2400;
+        return 800;
     }
 }

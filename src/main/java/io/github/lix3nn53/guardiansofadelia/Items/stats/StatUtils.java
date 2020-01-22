@@ -142,40 +142,53 @@ public class StatUtils {
     }
 
     public static void addRandomPassiveStats(ItemStack itemStack, GearLevel gearLevel, ItemTier itemTier) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        if (itemMeta.hasLore()) {
-            Material type = itemStack.getType();
-            if (hasStatType(type)) {
-                int minNumberOfStats = itemTier.getMinNumberOfStatsNormal();
-                if (type.equals(Material.SHEARS)) { //passive item
-                    minNumberOfStats = itemTier.getMinNumberOfStatsPassive();
-                }
-                StatPassive statPassive = new StatPassive(gearLevel.getMinStatValue(), gearLevel.getMaxStatValue(), minNumberOfStats);
-
-                List<String> lore = itemMeta.getLore();
-                if (statPassive.getFire() != 0) {
-                    lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
-                    PersistentDataContainerUtil.putInteger("fire", statPassive.getFire(), itemStack);
-                }
-                if (statPassive.getWater() != 0) {
-                    lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
-                    PersistentDataContainerUtil.putInteger("water", statPassive.getWater(), itemStack);
-                }
-                if (statPassive.getEarth() != 0) {
-                    lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
-                    PersistentDataContainerUtil.putInteger("earth", statPassive.getEarth(), itemStack);
-                }
-                if (statPassive.getLightning() != 0) {
-                    lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
-                    PersistentDataContainerUtil.putInteger("lightning", statPassive.getLightning(), itemStack);
-                }
-                if (statPassive.getWind() != 0) {
-                    lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
-                    PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), itemStack);
-                }
-                itemMeta.setLore(lore);
-                itemStack.setItemMeta(itemMeta);
+        Material type = itemStack.getType();
+        if (hasStatType(type)) {
+            int minNumberOfStats = itemTier.getMinNumberOfStatsNormal();
+            if (type.equals(Material.SHEARS)) { //passive item
+                minNumberOfStats = itemTier.getMinNumberOfStatsPassive();
             }
+
+            StatPassive statPassive = new StatPassive(gearLevel.getMinStatValue(), gearLevel.getMaxStatValue(), minNumberOfStats);
+
+            //add persistent data before getting itemMeta so we don't lost them
+            if (statPassive.getFire() != 0) {
+                PersistentDataContainerUtil.putInteger("fire", statPassive.getFire(), itemStack);
+            }
+            if (statPassive.getWater() != 0) {
+                PersistentDataContainerUtil.putInteger("water", statPassive.getWater(), itemStack);
+            }
+            if (statPassive.getEarth() != 0) {
+                PersistentDataContainerUtil.putInteger("earth", statPassive.getEarth(), itemStack);
+            }
+            if (statPassive.getLightning() != 0) {
+                PersistentDataContainerUtil.putInteger("lightning", statPassive.getLightning(), itemStack);
+            }
+            if (statPassive.getWind() != 0) {
+                PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), itemStack);
+            }
+
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            List<String> lore = itemMeta.getLore();
+
+            if (statPassive.getFire() != 0) {
+                lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
+            }
+            if (statPassive.getWater() != 0) {
+                lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
+            }
+            if (statPassive.getEarth() != 0) {
+                lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
+            }
+            if (statPassive.getLightning() != 0) {
+                lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
+            }
+            if (statPassive.getWind() != 0) {
+                lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
+            }
+
+            itemMeta.setLore(lore);
+            itemStack.setItemMeta(itemMeta);
         }
     }
 

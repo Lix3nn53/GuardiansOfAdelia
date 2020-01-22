@@ -38,9 +38,9 @@ public enum GatheringType {
                 final double startPosY = player.getLocation().getY();
                 final double startPosZ = player.getLocation().getZ();
 
-                long period = 28;
+                long period = 20;
                 if (BoostPremiumManager.isBoostActive(BoostPremium.GATHER)) {
-                    period = 14;
+                    period = period / 2;
                 }
 
                 new BukkitRunnable() {
