@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +23,7 @@ public class MyPlayerFishEvent implements Listener {
             Player player = event.getPlayer();
 
             ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-            ItemStack gatheredIngredient = GatheringType.FISHING.playerGather(player, itemInMainHand);
+            ItemStack gatheredIngredient = GatheringManager.finishGathering(player, itemInMainHand, GatheringType.FISHING);
             if (gatheredIngredient != null) {
                 caught.setItemStack(gatheredIngredient);
             } else {

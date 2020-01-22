@@ -1,8 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GatheringTool;
 import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringTool;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.GiveItemAction;
@@ -67,7 +68,7 @@ public class QuestsPhase3 {
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 36, 36);
 
-        ItemStack itemStack = GatheringTool.WOODEN_AXE.getItemStack();
+        ItemStack itemStack = GatheringTool.AXE.getItemStack(GatheringToolTier.WOODEN);
         GiveItemAction giveItemAction = new GiveItemAction(itemStack);
         quest.addOnAcceptAction(giveItemAction);
     }

@@ -47,7 +47,7 @@ public class Job {
         }
     }
 
-    private int getRequiredExperienceToLevelUp() {
+    public int getRequiredExperienceToLevelUp() {
         if (level == 1) {
             return 90;
         } else if (level == 2) {
@@ -65,6 +65,6 @@ public class Job {
         } else if (level == 8) {
             return 800;
         }
-        return 800;
+        return 999999;
     }
 }

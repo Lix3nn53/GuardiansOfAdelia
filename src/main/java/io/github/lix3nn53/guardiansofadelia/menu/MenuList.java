@@ -334,7 +334,7 @@ public class MenuList {
                         add("");
                         add(ChatColor.WHITE + "Job: " + jobType.getName());
                         add(ChatColor.WHITE + "Job level: " + job.getLevel());
-                        add(ChatColor.WHITE + "Job experience: " + job.getExperience());
+                        add(ChatColor.WHITE + "Job experience: " + job.getExperience() + "/" + job.getRequiredExperienceToLevelUp());
                     }});
                     character.setItemMeta(skullMeta);
                     guiGeneric.setItem(9, character);

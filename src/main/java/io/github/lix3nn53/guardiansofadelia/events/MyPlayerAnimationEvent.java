@@ -6,7 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.InstantTeleportPortal;
@@ -49,10 +49,10 @@ public class MyPlayerAnimationEvent implements Listener {
         transparentBlocks.add(Material.WATER);
 
         Block targetBlock = player.getTargetBlock(transparentBlocks, 5);
-        Material type = targetBlock.getType();
+        Material targetType = targetBlock.getType();
 
         //quest TaskReach
-        if (type.equals(Material.EMERALD_BLOCK) || type.equals(Material.GOLD_BLOCK) || type.equals(Material.REDSTONE_BLOCK) || type.equals(Material.DIAMOND_BLOCK)) {
+        if (targetType.equals(Material.EMERALD_BLOCK) || targetType.equals(Material.GOLD_BLOCK) || targetType.equals(Material.REDSTONE_BLOCK) || targetType.equals(Material.DIAMOND_BLOCK)) {
             UUID uniqueId = player.getUniqueId();
             if (GuardianDataManager.hasGuardianData(uniqueId)) {
                 GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
@@ -124,37 +124,6 @@ public class MyPlayerAnimationEvent implements Listener {
         ItemMeta itemMeta = itemInMainHand.getItemMeta();
         if (itemMeta.hasCustomModelData()) return;
 
-        if (type.equals(Material.EMERALD_ORE) || type.equals(Material.GOLD_ORE) || type.equals(Material.REDSTONE_ORE) || type.equals(Material.LAPIS_ORE)) {
-            Material handType = itemInMainHand.getType();
-            if (handType.equals(Material.WOODEN_PICKAXE) || handType.equals(Material.STONE_PICKAXE) || handType.equals(Material.IRON_PICKAXE)
-                    || handType.equals(Material.GOLDEN_PICKAXE) || handType.equals(Material.DIAMOND_PICKAXE)) {
-                GatheringType.MINING_JEWELRY.startGatheringAnimation(player, itemInMainHand);
-            }
-        } else if (type.equals(Material.COAL_ORE) || type.equals(Material.IRON_ORE) || type.equals(Material.DIAMOND_ORE)) {
-            Material handType = itemInMainHand.getType();
-            if (handType.equals(Material.WOODEN_PICKAXE) || handType.equals(Material.STONE_PICKAXE) || handType.equals(Material.IRON_PICKAXE)
-                    || handType.equals(Material.GOLDEN_PICKAXE) || handType.equals(Material.DIAMOND_PICKAXE)) {
-                GatheringType.MINING_ORE.startGatheringAnimation(player, itemInMainHand);
-            }
-        } else if (type.equals(Material.DANDELION) || type.equals(Material.POPPY)
-                || type.equals(Material.BLUE_ORCHID) || type.equals(Material.ALLIUM) || type.equals(Material.AZURE_BLUET) || type.equals(Material.RED_TULIP)
-                || type.equals(Material.ORANGE_TULIP) || type.equals(Material.WHITE_TULIP) || type.equals(Material.PINK_TULIP) || type.equals(Material.OXEYE_DAISY)
-                || type.equals(Material.CORNFLOWER) || type.equals(Material.LILY_OF_THE_VALLEY) || type.equals(Material.WITHER_ROSE) || type.equals(Material.SUNFLOWER)
-                || type.equals(Material.LILAC) || type.equals(Material.ROSE_BUSH) || type.equals(Material.PEONY)) {
-            Material handType = itemInMainHand.getType();
-            if (handType.equals(Material.WOODEN_HOE) || handType.equals(Material.STONE_HOE) || handType.equals(Material.IRON_HOE)
-                    || handType.equals(Material.GOLDEN_HOE) || handType.equals(Material.DIAMOND_HOE)) {
-                GatheringType.HARVESTING_FLOWER.startGatheringAnimation(player, itemInMainHand);
-            }
-        } else if (type.equals(Material.ACACIA_WOOD) || type.equals(Material.BIRCH_WOOD)
-                || type.equals(Material.DARK_OAK_WOOD) || type.equals(Material.JUNGLE_WOOD) || type.equals(Material.OAK_WOOD) || type.equals(Material.SPRUCE_WOOD)
-                || type.equals(Material.ACACIA_LOG) || type.equals(Material.BIRCH_LOG)
-                || type.equals(Material.DARK_OAK_LOG) || type.equals(Material.JUNGLE_LOG) || type.equals(Material.OAK_LOG) || type.equals(Material.SPRUCE_LOG)) {
-            Material handType = itemInMainHand.getType();
-            if (handType.equals(Material.WOODEN_AXE) || handType.equals(Material.STONE_AXE) || handType.equals(Material.IRON_AXE)
-                    || handType.equals(Material.GOLDEN_AXE) || handType.equals(Material.DIAMOND_AXE)) {
-                GatheringType.WOODCUTTING.startGatheringAnimation(player, itemInMainHand);
-            }
-        }
+        GatheringManager.startGathering(player, itemInMainHand, targetType);
     }
 }

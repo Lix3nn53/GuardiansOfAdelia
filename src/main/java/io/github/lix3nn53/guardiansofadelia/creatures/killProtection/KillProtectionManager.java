@@ -9,7 +9,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
-import io.github.lix3nn53.guardiansofadelia.jobs.GatheringType;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Location;
@@ -91,7 +92,7 @@ public class KillProtectionManager {
 
                         //hunting
                         if (livingTarget.getType().equals(EntityType.COW) || livingTarget.getType().equals(EntityType.SHEEP)) {
-                            ItemStack itemStack = GatheringType.HUNTING.onHunt(player);
+                            ItemStack itemStack = GatheringManager.finishGathering(player, null, GatheringType.HUNTING);
                             if (itemStack != null) {
                                 Location targetLocation = livingTarget.getLocation();
                                 Item item = livingTarget.getWorld().dropItemNaturally(targetLocation.add(0, 0.5, 0), itemStack);
