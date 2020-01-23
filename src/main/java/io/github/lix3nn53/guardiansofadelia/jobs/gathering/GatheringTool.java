@@ -51,8 +51,7 @@ public enum GatheringTool {
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
                 break;
             case HOE:
-                String materialStr = gatheringToolTier.name();
-                materialStr += this.name();
+                String materialStr = gatheringToolTier.name() + "_" + this.name();
                 itemStack = new ItemStack(Material.valueOf(materialStr));
                 itemMeta = itemStack.getItemMeta();
                 itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Hoe" + " (" + durability + " Uses left)");
@@ -65,8 +64,7 @@ public enum GatheringTool {
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
                 break;
             case PICKAXE:
-                materialStr = gatheringToolTier.name();
-                materialStr += this.name();
+                materialStr = gatheringToolTier.name() + "_" + this.name();
                 itemStack = new ItemStack(Material.valueOf(materialStr));
                 itemMeta = itemStack.getItemMeta();
                 itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Pickaxe" + " (" + durability + " Uses left)");
@@ -79,8 +77,7 @@ public enum GatheringTool {
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
                 break;
             case AXE:
-                materialStr = gatheringToolTier.name();
-                materialStr += this.name();
+                materialStr = gatheringToolTier.name() + "_" + this.name();
                 itemStack = new ItemStack(Material.valueOf(materialStr));
                 itemMeta = itemStack.getItemMeta();
                 itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Axe" + " (" + durability + " Uses left)");

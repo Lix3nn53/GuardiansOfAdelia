@@ -26,24 +26,27 @@ public class GatheringManager {
 
     static {
         initToolToBlockMap();
+        initBlockToIngredientMap();
+        initGatheringTypeToIngredientMap();
     }
 
-    public static boolean startGathering(Player player, ItemStack itemInHand, Material targetBlock) {
+    public static void startGathering(Player player, ItemStack itemInHand, Material targetBlock) {
+        player.sendMessage("1");
+
         GatheringTool gatheringTool = GatheringTool.materialToGatheringTool(itemInHand.getType());
 
-        if (gatheringTool == null) return false;
+        if (gatheringTool == null) return;
+        player.sendMessage("2");
 
         if (gatheringToolToBlocks.containsKey(gatheringTool)) {
+            player.sendMessage("3");
             List<Material> materials = gatheringToolToBlocks.get(gatheringTool);
 
             if (materials.contains(targetBlock)) {
+                player.sendMessage("4");
                 startGatheringAnimation(player, gatheringTool, itemInHand, targetBlock);
-
-                return true;
             }
         }
-
-        return false;
     }
 
     private static ItemStack finishGathering(Player player, ItemStack itemInHand, GatheringTool gatheringTool, Material targetBlock) {
@@ -267,14 +270,94 @@ public class GatheringManager {
         hoeBlocks.add(Material.LILAC);
         hoeBlocks.add(Material.ROSE_BUSH);
         hoeBlocks.add(Material.PEONY);
-        gatheringToolToBlocks.put(GatheringTool.AXE, hoeBlocks);
+        gatheringToolToBlocks.put(GatheringTool.HOE, hoeBlocks);
     }
 
     private static void initBlockToIngredientMap() {
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(Ingredient.WOODCUTTING_LOG);
+        ingredients.add(Ingredient.WOODCUTTING_PLANK);
+        blockToIngredients.put(Material.ACACIA_WOOD, ingredients);
+        blockToIngredients.put(Material.BIRCH_WOOD, ingredients);
+        blockToIngredients.put(Material.DARK_OAK_WOOD, ingredients);
+        blockToIngredients.put(Material.JUNGLE_WOOD, ingredients);
+        blockToIngredients.put(Material.OAK_WOOD, ingredients);
+        blockToIngredients.put(Material.SPRUCE_WOOD, ingredients);
+        blockToIngredients.put(Material.ACACIA_LOG, ingredients);
+        blockToIngredients.put(Material.BIRCH_LOG, ingredients);
+        blockToIngredients.put(Material.DARK_OAK_LOG, ingredients);
+        blockToIngredients.put(Material.JUNGLE_LOG, ingredients);
+        blockToIngredients.put(Material.OAK_LOG, ingredients);
+        blockToIngredients.put(Material.SPRUCE_LOG, ingredients);
+
+        ingredients = new ArrayList<>();
+        ingredients.add(Ingredient.HARVESTING_ROSE);
+        ingredients.add(Ingredient.HARVESTING_STRING);
+        ingredients.add(Ingredient.HARVESTING_CHERRY);
+        ingredients.add(Ingredient.HARVESTING_SILK);
+        ingredients.add(Ingredient.HARVESTING_PLUM_FLOWER);
+        ingredients.add(Ingredient.HARVESTING_SOFT_SILK);
+        blockToIngredients.put(Material.DANDELION, ingredients);
+        blockToIngredients.put(Material.POPPY, ingredients);
+        blockToIngredients.put(Material.BLUE_ORCHID, ingredients);
+        blockToIngredients.put(Material.ALLIUM, ingredients);
+        blockToIngredients.put(Material.AZURE_BLUET, ingredients);
+        blockToIngredients.put(Material.RED_TULIP, ingredients);
+        blockToIngredients.put(Material.ORANGE_TULIP, ingredients);
+        blockToIngredients.put(Material.WHITE_TULIP, ingredients);
+        blockToIngredients.put(Material.PINK_TULIP, ingredients);
+        blockToIngredients.put(Material.OXEYE_DAISY, ingredients);
+        blockToIngredients.put(Material.CORNFLOWER, ingredients);
+        blockToIngredients.put(Material.LILY_OF_THE_VALLEY, ingredients);
+        blockToIngredients.put(Material.WITHER_ROSE, ingredients);
+        blockToIngredients.put(Material.SUNFLOWER, ingredients);
+        blockToIngredients.put(Material.LILAC, ingredients);
+        blockToIngredients.put(Material.ROSE_BUSH, ingredients);
+        blockToIngredients.put(Material.PEONY, ingredients);
+
+        ingredients = new ArrayList<>();
+        ingredients.add(Ingredient.MINING_JEWEL_JADE);
+        blockToIngredients.put(Material.EMERALD_ORE, ingredients);
+
+        ingredients = new ArrayList<>();
+        ingredients.add(Ingredient.MINING_ORE_COPPER);
+        blockToIngredients.put(Material.COAL_ORE, ingredients);
+
+        ingredients = new ArrayList<>();
+        ingredients.add(Ingredient.MINING_ORE_IRON);
+        ingredients.add(Ingredient.MINING_ORE_STEEL);
+        blockToIngredients.put(Material.IRON_ORE, ingredients);
+
+        ingredients = new ArrayList<>();
+        ingredients.add(Ingredient.MINING_ORE_DIAMOND);
+        ingredients.add(Ingredient.MINING_ORE_TITANIUM);
+        blockToIngredients.put(Material.DIAMOND_ORE, ingredients);
+
+        ingredients = new ArrayList<>();
+        ingredients.add(Ingredient.MINING_JEWEL_GOLD_DUST);
+        blockToIngredients.put(Material.GOLD_ORE, ingredients);
+
+        ingredients = new ArrayList<>();
+        ingredients.add(Ingredient.MINING_JEWEL_AMETHYST);
+        ingredients.add(Ingredient.MINING_JEWEL_SAPPHIRE);
+        blockToIngredients.put(Material.LAPIS_ORE, ingredients);
+
+        ingredients = new ArrayList<>();
+        ingredients.add(Ingredient.MINING_JEWEL_RUBY);
+        blockToIngredients.put(Material.REDSTONE_ORE, ingredients);
 
     }
 
     private static void initGatheringTypeToIngredientMap() {
+        List<Ingredient> huntingIngredients = new ArrayList<>();
+        huntingIngredients.add(Ingredient.HUNTING_LEATHER_WORN);
+        huntingIngredients.add(Ingredient.HUNTING_BEEF);
+        huntingIngredients.add(Ingredient.HUNTING_LEATHER_HEAVY);
+        gatheringTypeToIngredients.put(GatheringType.HUNTING, huntingIngredients);
 
+        List<Ingredient> fishingIngredients = new ArrayList<>();
+        fishingIngredients.add(Ingredient.FISHING_COD);
+        fishingIngredients.add(Ingredient.FISHING_SALMON);
+        gatheringTypeToIngredients.put(GatheringType.FISHING, fishingIngredients);
     }
 }
