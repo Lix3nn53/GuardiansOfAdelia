@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -31,19 +32,14 @@ public class GatheringManager {
     }
 
     public static void startGathering(Player player, ItemStack itemInHand, Material targetBlock) {
-        player.sendMessage("1");
-
         GatheringTool gatheringTool = GatheringTool.materialToGatheringTool(itemInHand.getType());
 
         if (gatheringTool == null) return;
-        player.sendMessage("2");
 
         if (gatheringToolToBlocks.containsKey(gatheringTool)) {
-            player.sendMessage("3");
             List<Material> materials = gatheringToolToBlocks.get(gatheringTool);
 
             if (materials.contains(targetBlock)) {
-                player.sendMessage("4");
                 startGatheringAnimation(player, gatheringTool, itemInHand, targetBlock);
             }
         }
@@ -201,7 +197,10 @@ public class GatheringManager {
                             }
                         } else if (secsRun == 5) {
                             cancel();
-                            finishGathering(player, itemStackTool, gatheringTool, targetBlock);
+                            ItemStack ingredient = finishGathering(player, itemStackTool, gatheringTool, targetBlock);
+                            if (ingredient != null) {
+                                InventoryUtils.giveItemToPlayer(player, ingredient);
+                            }
                             guardianData.setGathering(false);
                         }
                         secsRun++;
@@ -270,6 +269,13 @@ public class GatheringManager {
         hoeBlocks.add(Material.LILAC);
         hoeBlocks.add(Material.ROSE_BUSH);
         hoeBlocks.add(Material.PEONY);
+        hoeBlocks.add(Material.ACACIA_LEAVES);
+        hoeBlocks.add(Material.BIRCH_LEAVES);
+        hoeBlocks.add(Material.DARK_OAK_LEAVES);
+        hoeBlocks.add(Material.JUNGLE_LEAVES);
+        hoeBlocks.add(Material.OAK_LEAVES);
+        hoeBlocks.add(Material.SPRUCE_LEAVES);
+        hoeBlocks.add(Material.COBWEB);
         gatheringToolToBlocks.put(GatheringTool.HOE, hoeBlocks);
     }
 
@@ -292,11 +298,7 @@ public class GatheringManager {
 
         ingredients = new ArrayList<>();
         ingredients.add(Ingredient.HARVESTING_ROSE);
-        ingredients.add(Ingredient.HARVESTING_STRING);
-        ingredients.add(Ingredient.HARVESTING_CHERRY);
-        ingredients.add(Ingredient.HARVESTING_SILK);
         ingredients.add(Ingredient.HARVESTING_PLUM_FLOWER);
-        ingredients.add(Ingredient.HARVESTING_SOFT_SILK);
         blockToIngredients.put(Material.DANDELION, ingredients);
         blockToIngredients.put(Material.POPPY, ingredients);
         blockToIngredients.put(Material.BLUE_ORCHID, ingredients);
@@ -314,6 +316,21 @@ public class GatheringManager {
         blockToIngredients.put(Material.LILAC, ingredients);
         blockToIngredients.put(Material.ROSE_BUSH, ingredients);
         blockToIngredients.put(Material.PEONY, ingredients);
+
+        ingredients = new ArrayList<>();
+        ingredients.add(Ingredient.HARVESTING_CHERRY);
+        blockToIngredients.put(Material.ACACIA_LEAVES, ingredients);
+        blockToIngredients.put(Material.BIRCH_LEAVES, ingredients);
+        blockToIngredients.put(Material.DARK_OAK_LEAVES, ingredients);
+        blockToIngredients.put(Material.JUNGLE_LEAVES, ingredients);
+        blockToIngredients.put(Material.OAK_LEAVES, ingredients);
+        blockToIngredients.put(Material.SPRUCE_LEAVES, ingredients);
+
+        ingredients = new ArrayList<>();
+        ingredients.add(Ingredient.HARVESTING_STRING);
+        ingredients.add(Ingredient.HARVESTING_SILK);
+        ingredients.add(Ingredient.HARVESTING_SOFT_SILK);
+        blockToIngredients.put(Material.COBWEB, ingredients);
 
         ingredients = new ArrayList<>();
         ingredients.add(Ingredient.MINING_JEWEL_JADE);
