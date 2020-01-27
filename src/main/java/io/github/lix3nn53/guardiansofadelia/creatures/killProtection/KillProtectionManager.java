@@ -11,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringType;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Location;
@@ -65,6 +66,16 @@ public class KillProtectionManager {
                         expMultiplier = 0.5D;
                     }
                     expToGiveEachPlayer = (int) (expToGiveEachPlayer * expMultiplier);
+                }
+            }
+
+            //run only once
+            Player once = bestPlayers.get(0);
+            if (MiniGameManager.isInMinigame(once)) {
+                if (livingTarget.getType().equals(EntityType.PLAYER)) {
+                    MiniGameManager.onPlayerKill(once);
+                } else {
+                    MiniGameManager.onMobKill(once, livingTarget);
                 }
             }
 

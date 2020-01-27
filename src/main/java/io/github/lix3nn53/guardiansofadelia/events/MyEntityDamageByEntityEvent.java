@@ -15,7 +15,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.Da
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
-import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
@@ -364,15 +363,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 //on Kill
                 if (finalDamage >= livingTargetHealth) {
                     protectionDamage = livingTargetHealth;
-                    /*onKill mechanics moved to KillProtectionManager#onMobDeath
-                    but minigame mechanics is still here because we don't want KillProtection for them*/
-                    if (MiniGameManager.isInMinigame(player)) {
-                        if (livingTarget.getType().equals(EntityType.PLAYER)) {
-                            MiniGameManager.onPlayerKill(player);
-                        } else {
-                            MiniGameManager.onMobKill(player, livingTarget);
-                        }
-                    }
+                    //onKill mechanics moved to KillProtectionManager#onMobDeath
                 }
                 KillProtectionManager.onPlayerDealDamageToLivingEntity(player, livingTarget, (int) (protectionDamage + 0.5));
 

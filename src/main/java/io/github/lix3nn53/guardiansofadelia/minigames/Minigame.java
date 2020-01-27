@@ -218,7 +218,7 @@ public abstract class Minigame {
     }
 
     private void createNormalPartyAfterMinigame(List<Player> players) {
-        if (players.size() <= 4) {
+        if (players.size() > 1 && players.size() <= 4) {
             Party party = new Party(players, 4, 2, ChatColor.AQUA);
 
             PartyManager.addParty(players, party);

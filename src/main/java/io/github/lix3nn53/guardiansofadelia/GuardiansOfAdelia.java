@@ -36,7 +36,7 @@ import java.util.UUID;
 
 public class GuardiansOfAdelia extends JavaPlugin {
 
-    public static final String ResourcePackAddress = "https://drive.google.com/uc?export=download&id=1SNr-HrzYxhHPZ9yZ0Lf1F2PTl_b5aCXI";
+    public static final String ResourcePackAddress = "https://drive.google.com/uc?export=download&id=1mU0hGGY8uzym3jgKxaiVUwNGz36FXm3l";
     public static PluginChannelListener pluginChannelListener;
 
     private static GuardiansOfAdelia instance;
@@ -140,6 +140,8 @@ public class GuardiansOfAdelia extends JavaPlugin {
             w.setGameRule(GameRule.SHOW_DEATH_MESSAGES, false);
             w.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
             w.setGameRule(GameRule.DISABLE_RAIDS, true);
+            w.setGameRule(GameRule.DO_PATROL_SPAWNING, false);
+            w.setGameRule(GameRule.DO_TRADER_SPAWNING, false);
             w.setTime(3000);
             if (w.getName().equals("arena")) {
                 w.setPVP(true);
