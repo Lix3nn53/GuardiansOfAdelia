@@ -64,12 +64,12 @@ public class KnightSkills {
         manaCosts.add(15);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
 
         Skill skill = new Skill("Slice and Dice", 6, Material.IRON_HOE, 9, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -153,12 +153,12 @@ public class KnightSkills {
         manaCosts.add(25);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
 
         Skill skill = new Skill("Devastate", 6, Material.IRON_HOE, 1, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -240,12 +240,12 @@ public class KnightSkills {
         manaCosts.add(30);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
 
         Skill skill = new Skill("Battle Cry", 6, Material.IRON_HOE, 47, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -316,12 +316,12 @@ public class KnightSkills {
         manaCosts.add(0);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(45);
-        cooldowns.add(45);
-        cooldowns.add(45);
-        cooldowns.add(45);
-        cooldowns.add(45);
-        cooldowns.add(45);
+        cooldowns.add(40);
+        cooldowns.add(40);
+        cooldowns.add(40);
+        cooldowns.add(40);
+        cooldowns.add(40);
+        cooldowns.add(40);
 
         Skill skill = new Skill("Spell Block", 6, Material.IRON_HOE, 23, description, reqLevels, reqPoints, manaCosts, cooldowns);
 

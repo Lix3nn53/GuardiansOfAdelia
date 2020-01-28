@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.list;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.FlagCondition;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.NearbyEntityCondition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram.HologramMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityMechanic;
@@ -23,6 +24,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffectType;
@@ -74,12 +76,12 @@ public class HunterSkills {
         manaCosts.add(20);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
-        cooldowns.add(15);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
 
         Skill skill = new Skill("Explosive Arrow", 6, Material.IRON_HOE, 20, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SelfTarget selfTarget = new SelfTarget();
@@ -164,12 +166,12 @@ public class HunterSkills {
         manaCosts.add(20);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
+        cooldowns.add(16);
 
         Skill skill = new Skill("Volley", 6, Material.IRON_HOE, 22, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -237,12 +239,12 @@ public class HunterSkills {
         manaCosts.add(40);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(25);
-        cooldowns.add(25);
-        cooldowns.add(25);
-        cooldowns.add(25);
-        cooldowns.add(25);
-        cooldowns.add(25);
+        cooldowns.add(21);
+        cooldowns.add(21);
+        cooldowns.add(21);
+        cooldowns.add(21);
+        cooldowns.add(21);
+        cooldowns.add(21);
 
         Skill skill = new Skill("Hookshot", 6, Material.IRON_HOE, 32, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -375,25 +377,27 @@ public class HunterSkills {
         manaCosts.add(30);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(25);
-        cooldowns.add(25);
-        cooldowns.add(25);
-        cooldowns.add(25);
-        cooldowns.add(25);
+        cooldowns.add(35);
+        cooldowns.add(33);
+        cooldowns.add(31);
+        cooldowns.add(29);
+        cooldowns.add(27);
         cooldowns.add(25);
 
         Skill skill = new Skill("Bear Trap", 6, Material.IRON_HOE, 55, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
+        NearbyEntityCondition nearbyEntityCondition = new NearbyEntityCondition(EntityType.ARMOR_STAND, "< Trap", 6D, false);
+
         //Add HologramMechanic to SelfTarget's children
         List<Integer> seconds = new ArrayList<>();
+        seconds.add(50);
+        seconds.add(55);
         seconds.add(60);
+        seconds.add(65);
         seconds.add(70);
         seconds.add(80);
-        seconds.add(90);
-        seconds.add(100);
-        seconds.add(120);
         HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 5, seconds, ChatColor.DARK_GRAY + "< Trap %caster% >");
 
         //Add repeatMechanic to hologramMechanic's children
@@ -408,12 +412,12 @@ public class HunterSkills {
 
         //Add areaTarget to repeatMechanic's children
         List<Double> radiuses = new ArrayList<>();
-        radiuses.add(3D);
-        radiuses.add(3D);
-        radiuses.add(3D);
-        radiuses.add(3D);
-        radiuses.add(3D);
-        radiuses.add(3D);
+        radiuses.add(2.4D);
+        radiuses.add(2.4D);
+        radiuses.add(2.4D);
+        radiuses.add(2.4D);
+        radiuses.add(2.4D);
+        radiuses.add(2.4D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 99, radiuses);
 
         //Add effects and setRemoveFlag to areaTarget's children
@@ -424,25 +428,33 @@ public class HunterSkills {
         ticks.add(90);
         ticks.add(100);
         ticks.add(120);
-        List<Integer> amplifiers = new ArrayList<>();
-        amplifiers.add(99);
-        amplifiers.add(99);
-        amplifiers.add(99);
-        amplifiers.add(99);
-        amplifiers.add(99);
-        amplifiers.add(99);
-        PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, amplifiers);
-        PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
+        List<Integer> jumpAmplifiers = new ArrayList<>();
+        jumpAmplifiers.add(-99);
+        jumpAmplifiers.add(-99);
+        jumpAmplifiers.add(-99);
+        jumpAmplifiers.add(-99);
+        jumpAmplifiers.add(-99);
+        jumpAmplifiers.add(-99);
+        List<Integer> slowAmplifiers = new ArrayList<>();
+        slowAmplifiers.add(99);
+        slowAmplifiers.add(99);
+        slowAmplifiers.add(99);
+        slowAmplifiers.add(99);
+        slowAmplifiers.add(99);
+        slowAmplifiers.add(99);
+        PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, jumpAmplifiers);
+        PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, slowAmplifiers);
         DisarmMechanic disarmMechanic = new DisarmMechanic(ticks);
         SilenceMechanic silenceMechanic = new SilenceMechanic(ticks);
-        FlagSetMechanic setRemoveFlag = new FlagSetMechanic("shouldStopSkill", new ArrayList<>());
+        FlagSetMechanic setRemoveFlag = new FlagSetMechanic("shouldStopSkill", new ArrayList<>(), true);
 
         //Add FlagCondition to repeatMechanic's children
         //Add RemoveMechanic and RepeatCancelMechanic to FlagCondition's children
-        FlagCondition shouldStopSkill = new FlagCondition("shouldStopSkill", true);
+        FlagCondition shouldStopSkill = new FlagCondition("shouldStopSkill", true, true);
 
         skill.addTrigger(selfTarget);
-        selfTarget.addChildren(hologramMechanic);
+        selfTarget.addChildren(nearbyEntityCondition);
+        nearbyEntityCondition.addChildren(hologramMechanic);
         hologramMechanic.addChildren(repeatMechanic);
 
         //repeat part 1, area and effects
@@ -465,7 +477,7 @@ public class HunterSkills {
         selfTargetForFlagCondition.addChildren(shouldStopSkill);
 
         shouldStopSkill.addChildren(new RepeatCancelMechanic());
-        shouldStopSkill.addChildren(new FlagRemoveMechanic("shouldStopSkill"));
+        shouldStopSkill.addChildren(new FlagRemoveMechanic("shouldStopSkill", true));
 
         return skill;
     }

@@ -9,8 +9,8 @@ import java.util.List;
 public class RepeatCancelMechanic extends MechanicComponent {
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
-        SkillDataManager.stopRepeatTasksOfCast(caster);
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+        SkillDataManager.stopRepeatTasksOfCast(caster, castCounter);
         return true;
     }
 

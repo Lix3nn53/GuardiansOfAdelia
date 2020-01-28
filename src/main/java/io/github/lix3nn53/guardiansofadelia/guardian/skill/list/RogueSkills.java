@@ -84,9 +84,9 @@ public class RogueSkills {
 
         SelfTarget selfTarget = new SelfTarget();
 
-        FlagCondition phantomCondition = new FlagCondition("phantom", false);
+        FlagCondition phantomCondition = new FlagCondition("phantom", false, false);
 
-        FlagCondition phantomCondition2 = new FlagCondition("phantom", true);
+        FlagCondition phantomCondition2 = new FlagCondition("phantom", true, false);
 
         List<Double> ranges = new ArrayList<>();
         ranges.add(3D);
@@ -190,18 +190,18 @@ public class RogueSkills {
         manaCosts.add(20);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
-        cooldowns.add(8);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
+        cooldowns.add(12);
 
         Skill skill = new Skill("Void Dash", 6, Material.IRON_HOE, 10, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
         SelfTarget selfTarget = new SelfTarget();
 
-        FlagCondition phantomCondition = new FlagCondition("phantom", false);
+        FlagCondition phantomCondition = new FlagCondition("phantom", false, false);
 
         List<Double> forwards = new ArrayList<>();
         forwards.add(4D);
@@ -226,7 +226,7 @@ public class RogueSkills {
         right.add(0D);
         WarpMechanic warpMechanic = new WarpMechanic(false, forwards, upwards, right);
 
-        FlagCondition phantomCondition2 = new FlagCondition("phantom", true);
+        FlagCondition phantomCondition2 = new FlagCondition("phantom", true, false);
 
         List<Double> forwards2 = new ArrayList<>();
         forwards2.add(6D);
@@ -293,12 +293,12 @@ public class RogueSkills {
         manaCosts.add(30);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(30);
-        cooldowns.add(30);
-        cooldowns.add(30);
-        cooldowns.add(30);
-        cooldowns.add(30);
-        cooldowns.add(30);
+        cooldowns.add(28);
+        cooldowns.add(28);
+        cooldowns.add(28);
+        cooldowns.add(28);
+        cooldowns.add(28);
+        cooldowns.add(28);
 
         Skill skill = new Skill("Shrunkens", 6, Material.IRON_HOE, 56, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -321,7 +321,7 @@ public class RogueSkills {
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30, 0, 1, 0, 90,
                 true, Egg.class, Particle.REDSTONE, ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.PURPLE, 0.8f), false);
 
-        FlagCondition phantomCondition = new FlagCondition("phantom", true);
+        FlagCondition phantomCondition = new FlagCondition("phantom", true, false);
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(60);
@@ -331,12 +331,12 @@ public class RogueSkills {
         ticks.add(60);
         ticks.add(60);
         List<Integer> amplifiers = new ArrayList<>();
+        amplifiers.add(1);
+        amplifiers.add(1);
+        amplifiers.add(2);
         amplifiers.add(2);
         amplifiers.add(3);
         amplifiers.add(4);
-        amplifiers.add(5);
-        amplifiers.add(6);
-        amplifiers.add(7);
         PotionEffectMechanic slow = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
 
         SelfTarget selfTarget = new SelfTarget();
@@ -469,12 +469,12 @@ public class RogueSkills {
         manaCosts.add(60);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(50);
-        cooldowns.add(50);
-        cooldowns.add(50);
-        cooldowns.add(50);
-        cooldowns.add(50);
-        cooldowns.add(50);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
+        cooldowns.add(60);
 
         Skill skill = new Skill("Phantom Assassin", 6, Material.IRON_HOE, 45, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -503,7 +503,7 @@ public class RogueSkills {
         chanceMultipliers.add(0.1);
         chanceMultipliers.add(0.12);
         BuffMechanic critChanceBuff = new BuffMechanic(BuffType.CRIT_CHANCE, chanceMultipliers, ticks);
-        FlagSetMechanic flagSetMechanic = new FlagSetMechanic("phantom", ticks);
+        FlagSetMechanic flagSetMechanic = new FlagSetMechanic("phantom", ticks, false);
 
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(1);

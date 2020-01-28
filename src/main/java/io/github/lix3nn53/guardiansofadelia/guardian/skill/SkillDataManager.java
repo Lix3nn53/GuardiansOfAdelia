@@ -11,7 +11,7 @@ public class SkillDataManager {
 
     private static HashMap<LivingEntity, Integer> keyEntityToValue = new HashMap<>(); //currently only one value for one entity
     private static HashMap<LivingEntity, HashSet<String>> keyEntityToSkillFlags = new HashMap<>();
-    private static HashMap<LivingEntity, HashSet<BukkitTask>> keyEntityToRepeatTasks = new HashMap<>();
+    private static HashMap<LivingEntity, HashMap<Integer, BukkitTask>> keyEntityToCastCounterToRepeatTask = new HashMap<>();
 
     public static void setValue(LivingEntity keyEntity, int value) {
         keyEntityToValue.put(keyEntity, value);
@@ -63,35 +63,41 @@ public class SkillDataManager {
         keyEntityToSkillFlags.remove(keyEntity);
     }
 
-    public static void onRepeatTaskCreate(LivingEntity keyEntity, BukkitTask bukkitTask) {
-        if (keyEntityToRepeatTasks.containsKey(keyEntity)) {
-            keyEntityToRepeatTasks.get(keyEntity).add(bukkitTask);
+    public static void onRepeatTaskCreate(LivingEntity keyEntity, BukkitTask bukkitTask, int castCounter) {
+        if (keyEntityToCastCounterToRepeatTask.containsKey(keyEntity)) {
+            HashMap<Integer, BukkitTask> hashMap = keyEntityToCastCounterToRepeatTask.get(keyEntity);
+            hashMap.put(castCounter, bukkitTask);
         } else {
-            HashSet<BukkitTask> tasks = new HashSet<>();
-            tasks.add(bukkitTask);
-            keyEntityToRepeatTasks.put(keyEntity, tasks);
+            HashMap<Integer, BukkitTask> hashMap = new HashMap<>();
+            hashMap.put(castCounter, bukkitTask);
+            keyEntityToCastCounterToRepeatTask.put(keyEntity, hashMap);
         }
     }
 
-    public static void removeRepeatTask(LivingEntity keyEntity, BukkitTask bukkitTask) {
-        if (keyEntityToRepeatTasks.containsKey(keyEntity)) {
-            HashSet<BukkitTask> tasks = keyEntityToRepeatTasks.get(keyEntity);
-            tasks.remove(bukkitTask);
-            if (tasks.isEmpty()) {
-                keyEntityToRepeatTasks.remove(keyEntity);
+    public static void removeRepeatTask(LivingEntity keyEntity, int castCounter) {
+        if (keyEntityToCastCounterToRepeatTask.containsKey(keyEntity)) {
+            HashMap<Integer, BukkitTask> hashMap = keyEntityToCastCounterToRepeatTask.get(keyEntity);
+            hashMap.remove(castCounter);
+            if (hashMap.isEmpty()) {
+                keyEntityToCastCounterToRepeatTask.remove(keyEntity);
             }
         }
     }
 
-    public static void stopRepeatTasksOfCast(LivingEntity keyEntity) {
-        if (keyEntityToRepeatTasks.containsKey(keyEntity)) {
-            HashSet<BukkitTask> tasks = keyEntityToRepeatTasks.get(keyEntity);
+    public static void stopRepeatTasksOfCast(LivingEntity keyEntity, int castCounter) {
+        if (keyEntityToCastCounterToRepeatTask.containsKey(keyEntity)) {
+            HashMap<Integer, BukkitTask> hashMap = keyEntityToCastCounterToRepeatTask.get(keyEntity);
 
-            for (BukkitTask bukkitTask : tasks) {
+            if (hashMap.containsKey(castCounter)) {
+                BukkitTask bukkitTask = hashMap.get(castCounter);
                 bukkitTask.cancel();
-            }
 
-            keyEntityToRepeatTasks.remove(keyEntity);
+                hashMap.remove(castCounter);
+
+                if (hashMap.isEmpty()) {
+                    keyEntityToCastCounterToRepeatTask.remove(keyEntity);
+                }
+            }
         }
     }
 
@@ -102,7 +108,7 @@ public class SkillDataManager {
      */
     public static void onPlayerQuit(Player player) {
         keyEntityToSkillFlags.remove(player);
-        keyEntityToRepeatTasks.remove(player);
+        keyEntityToCastCounterToRepeatTask.remove(player);
         keyEntityToValue.remove(player);
     }
 
@@ -113,7 +119,7 @@ public class SkillDataManager {
      */
     public static void onEntityDeath(LivingEntity livingEntity) {
         keyEntityToSkillFlags.remove(livingEntity);
-        keyEntityToRepeatTasks.remove(livingEntity);
+        keyEntityToCastCounterToRepeatTask.remove(livingEntity);
         keyEntityToValue.remove(livingEntity);
     }
 }

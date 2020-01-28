@@ -17,7 +17,7 @@ public class ValueCondition extends ConditionComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         boolean success = false;
@@ -25,7 +25,7 @@ public class ValueCondition extends ConditionComponent {
             int value = SkillDataManager.getValue(target);
 
             if (value >= minValue && value <= maxValue) {
-                success = executeChildren(caster, skillLevel, targets) || success;
+                success = executeChildren(caster, skillLevel, targets, castCounter) || success;
             }
         }
 

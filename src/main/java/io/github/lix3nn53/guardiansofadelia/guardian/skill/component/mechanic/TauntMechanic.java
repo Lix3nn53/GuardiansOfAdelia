@@ -9,7 +9,7 @@ import java.util.List;
 public class TauntMechanic extends MechanicComponent {
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         boolean taunted = false;

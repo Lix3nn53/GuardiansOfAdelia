@@ -14,17 +14,19 @@ public class MagicAttackTrigger extends TriggerComponent {
     private final List<Integer> cooldown;
     LivingEntity caster;
     int skillLevel;
+    int castCounter;
 
     public MagicAttackTrigger(List<Integer> cooldown) {
         this.cooldown = cooldown;
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         this.caster = caster;
         this.skillLevel = skillLevel;
+        this.castCounter = castCounter;
 
         MagicAttackTrigger magicAttackTrigger = this;
 
@@ -53,7 +55,7 @@ public class MagicAttackTrigger extends TriggerComponent {
     public boolean callback(Player attacker, LivingEntity target) {
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(target);
-        boolean cast = executeChildren(caster, skillLevel, targets);
+        boolean cast = executeChildren(caster, skillLevel, targets, castCounter);
 
         if (!cast) return false;
 

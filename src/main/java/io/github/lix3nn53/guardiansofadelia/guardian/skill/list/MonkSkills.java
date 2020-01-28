@@ -157,7 +157,7 @@ public class MonkSkills {
         SelfTarget selfTarget = new SelfTarget();
 
         //mechanics depending on flag
-        FlagCondition ifGoLeftIsSet = new FlagCondition("goLeft", true);
+        FlagCondition ifGoLeftIsSet = new FlagCondition("goLeft", true, false);
 
         List<Double> upward = new ArrayList<>();
         upward.add(0D);
@@ -195,18 +195,18 @@ public class MonkSkills {
 
         selfTarget.addChildren(ifGoLeftIsSet);
         ifGoLeftIsSet.addChildren(leftLaunch);
-        FlagRemoveMechanic removeGoLeft = new FlagRemoveMechanic("goLeft");
+        FlagRemoveMechanic removeGoLeft = new FlagRemoveMechanic("goLeft", false);
         ifGoLeftIsSet.addChildren(removeGoLeft);
-        FlagSetMechanic setDidLeftTrigger = new FlagSetMechanic("leftTrigger", new ArrayList<>());
+        FlagSetMechanic setDidLeftTrigger = new FlagSetMechanic("leftTrigger", new ArrayList<>(), false);
         ifGoLeftIsSet.addChildren(setDidLeftTrigger);
 
-        FlagCondition ifLeftDidNotTrigger = new FlagCondition("leftTrigger", false);
+        FlagCondition ifLeftDidNotTrigger = new FlagCondition("leftTrigger", false, false);
         selfTarget.addChildren(ifLeftDidNotTrigger);
         ifLeftDidNotTrigger.addChildren(rightLaunch);
-        FlagSetMechanic setLeft = new FlagSetMechanic("goLeft", new ArrayList<>());
+        FlagSetMechanic setLeft = new FlagSetMechanic("goLeft", new ArrayList<>(), false);
         ifLeftDidNotTrigger.addChildren(setLeft);
 
-        FlagRemoveMechanic removeDidLeftTrigger = new FlagRemoveMechanic("leftTrigger");
+        FlagRemoveMechanic removeDidLeftTrigger = new FlagRemoveMechanic("leftTrigger", false);
         selfTarget.addChildren(removeDidLeftTrigger);
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_PROJECTILE_VOID));
 
@@ -335,7 +335,7 @@ public class MonkSkills {
         List<String> description = new ArrayList<>();
         description.add(ChatColor.GRAY + "Marks the target you hit by throwing your spear.");
         description.add(ChatColor.GRAY + "Melee attacks on marked targets will deal");
-        description.add(ChatColor.GRAY + "bonus damage and slow them.");
+        description.add(ChatColor.GRAY + "bonus damage and root them.");
 
         List<Integer> reqLevels = new ArrayList<>();
         reqLevels.add(20);
@@ -382,10 +382,10 @@ public class MonkSkills {
         flagTicks.add(200);
         flagTicks.add(200);
         flagTicks.add(200);
-        FlagSetMechanic flagSetMechanic = new FlagSetMechanic("oceanMark", flagTicks);
+        FlagSetMechanic flagSetMechanic = new FlagSetMechanic("oceanMark", flagTicks, false);
 
         MeleeAttackTrigger meleeAttackTrigger = new MeleeAttackTrigger(cooldowns);
-        FlagCondition flagCondition = new FlagCondition("oceanMark", true);
+        FlagCondition flagCondition = new FlagCondition("oceanMark", true, false);
 
         List<Double> damages = new ArrayList<>();
         damages.add(30.0);
@@ -397,22 +397,30 @@ public class MonkSkills {
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC);
 
         List<Integer> ticks = new ArrayList<>();
+        ticks.add(40);
+        ticks.add(45);
+        ticks.add(50);
+        ticks.add(55);
         ticks.add(60);
-        ticks.add(65);
         ticks.add(70);
-        ticks.add(75);
-        ticks.add(80);
-        ticks.add(90);
-        List<Integer> amplifiers = new ArrayList<>();
-        amplifiers.add(1);
-        amplifiers.add(2);
-        amplifiers.add(3);
-        amplifiers.add(4);
-        amplifiers.add(5);
-        amplifiers.add(6);
-        PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
+        List<Integer> jumpAmplifiers = new ArrayList<>();
+        jumpAmplifiers.add(-99);
+        jumpAmplifiers.add(-99);
+        jumpAmplifiers.add(-99);
+        jumpAmplifiers.add(-99);
+        jumpAmplifiers.add(-99);
+        jumpAmplifiers.add(-99);
+        List<Integer> slowAmplifiers = new ArrayList<>();
+        slowAmplifiers.add(99);
+        slowAmplifiers.add(99);
+        slowAmplifiers.add(99);
+        slowAmplifiers.add(99);
+        slowAmplifiers.add(99);
+        slowAmplifiers.add(99);
+        PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, jumpAmplifiers);
+        PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, slowAmplifiers);
 
-        FlagRemoveMechanic flagRemoveMechanic = new FlagRemoveMechanic("oceanMark");
+        FlagRemoveMechanic flagRemoveMechanic = new FlagRemoveMechanic("oceanMark", false);
 
         skill.addTrigger(initializeTrigger);
 
@@ -422,7 +430,8 @@ public class MonkSkills {
         initializeTrigger.addChildren(meleeAttackTrigger);
         meleeAttackTrigger.addChildren(flagCondition);
         flagCondition.addChildren(damageMechanic);
-        flagCondition.addChildren(potionEffectMechanic);
+        flagCondition.addChildren(stopJumping);
+        flagCondition.addChildren(stopWalking);
         flagCondition.addChildren(flagRemoveMechanic);
         flagCondition.addChildren(new SoundMechanic(GoaSound.SKILL_SPLASH));
 

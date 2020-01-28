@@ -23,7 +23,7 @@ public class ConeTarget extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         List<LivingEntity> cone = new ArrayList<>();
@@ -39,7 +39,7 @@ public class ConeTarget extends TargetComponent {
 
         if (cone.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, cone);
+        return executeChildren(caster, skillLevel, cone, castCounter);
     }
 
     @Override

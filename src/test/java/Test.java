@@ -1,12 +1,8 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 public class Test {
 
@@ -15,7 +11,47 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException {
-        LocalDate now = LocalDate.now();
+        final HashMap<Integer, List<String>> playerToConsumableOnCooldowns = new HashMap<>();
+
+        int player = 1;
+        String customConsumable = "customConsumable";
+
+        if (playerToConsumableOnCooldowns.containsKey(player)) {
+            List<String> strings = playerToConsumableOnCooldowns.get(player);
+
+            if (strings.contains(customConsumable)) return;
+
+            strings.add(customConsumable);
+        } else {
+            List<String> strings = new ArrayList<>();
+            strings.add("asdfg");
+            strings.add(customConsumable);
+            playerToConsumableOnCooldowns.put(player, strings);
+        }
+
+        if (playerToConsumableOnCooldowns.containsKey(player)) {
+            List<String> strings = playerToConsumableOnCooldowns.get(player);
+            System.out.println(strings);
+        }
+
+        if (playerToConsumableOnCooldowns.containsKey(player)) {
+            List<String> strings = playerToConsumableOnCooldowns.get(player);
+
+            if (strings.contains(customConsumable)) {
+                strings.remove(customConsumable);
+                if (strings.isEmpty()) {
+                    playerToConsumableOnCooldowns.remove(player);
+                }
+            }
+        }
+
+        if (playerToConsumableOnCooldowns.containsKey(player)) {
+            List<String> strings = playerToConsumableOnCooldowns.get(player);
+            System.out.println(strings);
+        } else {
+            System.out.println("123");
+        }
+        /*LocalDate now = LocalDate.now();
         String currentDateString = now.toString();
         System.out.println(currentDateString);
 
@@ -30,7 +66,7 @@ public class Test {
 
             System.out.println(rpgClass.toString());
             System.out.println("dropType: " + dropType);
-        }
+        }*/
         /*MySocketServer server = new MySocketServer("localhost", 9092);
 
         server.start();
@@ -61,7 +97,7 @@ public class Test {
         for (double rate : downRatesForLevel) {
             System.out.println(value * rate);
         }*/
-        for (RPGClass rpgClass : RPGClass.values()) {
+        /*for (RPGClass rpgClass : RPGClass.values()) {
             if (rpgClass.equals(RPGClass.NO_CLASS)) continue;
             for (int level = 1; level < 91; level++) {
                 int fire = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, level);
@@ -73,7 +109,7 @@ public class Test {
                 System.out.println("Level " + level + " Class " + rpgClass.toString());
                 System.out.println("Fire" + fire + " Water" + water + " Earth" + earth + " Lightning" + lightning + " Wind" + wind);
             }
-        }
+        }*/
 
         /*int totalDefense = 2400;
         double damage = 1000;

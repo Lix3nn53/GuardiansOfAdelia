@@ -42,6 +42,7 @@ public class ProjectileMechanic extends MechanicComponent {
     private final double range;
     private final boolean mustHitToWork;
     private LivingEntity caster;
+    private int castCounter;
     //Particle projectile
     private Particle particle;
     private ArrangementParticle arrangement;
@@ -157,10 +158,11 @@ public class ProjectileMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         this.caster = caster;
+        this.castCounter = castCounter;
         UUID skillKey = UUID.randomUUID(); //skill key to put into projectile
 
         // Fire from each target
@@ -290,7 +292,7 @@ public class ProjectileMechanic extends MechanicComponent {
             skillLevel = PersistentDataContainerUtil.getInteger(projectile, "skillLevel");
         }
 
-        executeChildren((LivingEntity) projectile.getShooter(), skillLevel, targets);
+        executeChildren((LivingEntity) projectile.getShooter(), skillLevel, targets, castCounter);
 
         if (projectile instanceof Arrow) {
             if (((Arrow) projectile).getPierceLevel() > 0) return;

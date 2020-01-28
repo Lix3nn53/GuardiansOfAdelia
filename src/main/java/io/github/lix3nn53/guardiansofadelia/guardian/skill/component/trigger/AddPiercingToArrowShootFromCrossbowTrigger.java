@@ -22,7 +22,7 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         this.caster = caster;

@@ -15,6 +15,7 @@ public class EntitySkillSet {
     private final List<SkillComponent> skills;
     private final List<Integer> skillLevels;
     private final long cooldown;
+    private int castCounter = 0;
 
     public EntitySkillSet(List<SkillComponent> skills, List<Integer> skillLevels, long cooldown) {
         this.skills = skills;
@@ -53,7 +54,8 @@ public class EntitySkillSet {
                 SkillComponent skill = skills.get(index);
                 int level = skillLevels.get(index);
 
-                skill.execute(livingEntity, level, targets);
+                skill.execute(livingEntity, level, targets, castCounter);
+                castCounter++;
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 40L, cooldown);
     }

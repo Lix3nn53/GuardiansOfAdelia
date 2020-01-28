@@ -14,17 +14,19 @@ public class TookPhysicalDamageTrigger extends TriggerComponent {
     private final List<Integer> cooldown;
     LivingEntity caster;
     int skillLevel;
+    int castCounter;
 
     public TookPhysicalDamageTrigger(List<Integer> cooldown) {
         this.cooldown = cooldown;
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         this.caster = caster;
         this.skillLevel = skillLevel;
+        this.castCounter = castCounter;
 
         TookPhysicalDamageTrigger tookPhysicalDamageTrigger = this;
 
@@ -53,7 +55,7 @@ public class TookPhysicalDamageTrigger extends TriggerComponent {
     public boolean callback(Player player, LivingEntity attacker) {
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(attacker);
-        boolean cast = executeChildren(caster, skillLevel, targets);
+        boolean cast = executeChildren(caster, skillLevel, targets, castCounter);
 
         if (!cast) return false;
 

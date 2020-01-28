@@ -13,11 +13,11 @@ public class SelfTarget extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         List<LivingEntity> targetCaster = new ArrayList<>();
         targetCaster.add(caster);
 
-        return executeChildren(caster, skillLevel, targetCaster);
+        return executeChildren(caster, skillLevel, targetCaster, castCounter);
     }
 
     @Override

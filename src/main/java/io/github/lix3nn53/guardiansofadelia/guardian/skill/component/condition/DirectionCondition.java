@@ -16,7 +16,7 @@ public class DirectionCondition extends ConditionComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         boolean success = false;
@@ -30,7 +30,7 @@ public class DirectionCondition extends ConditionComponent {
             boolean inFront = TargetHelper.isInFront(target, caster);
 
             if (inFront == workWhenInFront) {
-                success = executeChildren(caster, skillLevel, targets) || success;
+                success = executeChildren(caster, skillLevel, targets, castCounter) || success;
             }
         }
 

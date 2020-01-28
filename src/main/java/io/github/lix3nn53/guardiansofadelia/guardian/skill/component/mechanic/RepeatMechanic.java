@@ -25,7 +25,7 @@ public class RepeatMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         BukkitTask bukkitTask = new BukkitRunnable() {
@@ -34,7 +34,7 @@ public class RepeatMechanic extends MechanicComponent {
 
             @Override
             public void run() {
-                executeChildren(caster, skillLevel, targets);
+                executeChildren(caster, skillLevel, targets, castCounter);
 
                 if (!repetitions.isEmpty()) {
                     counter++;
@@ -45,13 +45,13 @@ public class RepeatMechanic extends MechanicComponent {
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, period);
 
-        SkillDataManager.onRepeatTaskCreate(caster, bukkitTask);
+        SkillDataManager.onRepeatTaskCreate(caster, bukkitTask, castCounter);
 
         new BukkitRunnable() { //remove task from cast data holder after it stops
 
             @Override
             public void run() {
-                SkillDataManager.removeRepeatTask(caster, bukkitTask);
+                SkillDataManager.removeRepeatTask(caster, castCounter);
             }
         }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), period * repetitions.get(skillLevel - 1));
 

@@ -321,10 +321,10 @@ public abstract class Minigame {
 
     private boolean addPlayerWithChecks(Player player) {
         if (!this.isInGame) {
-            if (!player.getWorld().getName().equals("world")) {
+            /*if (!player.getWorld().getName().equals("world")) {
                 player.sendMessage(ChatColor.RED + "You must be in normal world");
                 return false;
-            }
+            }*/
             if (!MiniGameManager.isInMinigame(player)) {
                 if (!getPlayersInGame().contains(player) && getPlayersInGame().size() < this.teamAmount * this.teamSize) {
                     addPlayerNoCheck(player);

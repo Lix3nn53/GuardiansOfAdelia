@@ -9,17 +9,23 @@ import java.util.List;
 public class FlagRemoveMechanic extends MechanicComponent {
 
     private final String key;
+    private final boolean isUniqueCast;
 
-    public FlagRemoveMechanic(String key) {
+    public FlagRemoveMechanic(String key, boolean isUniqueCast) {
         this.key = key;
+        this.isUniqueCast = isUniqueCast;
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
-            SkillDataManager.removeFlag(target, key);
+            if (isUniqueCast) {
+                SkillDataManager.removeFlag(target, key + castCounter);
+            } else {
+                SkillDataManager.removeFlag(target, key);
+            }
         }
 
         return true;

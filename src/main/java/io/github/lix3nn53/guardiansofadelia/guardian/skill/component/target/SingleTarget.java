@@ -23,7 +23,7 @@ public class SingleTarget extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         List<LivingEntity> single = new ArrayList<>();
@@ -39,7 +39,7 @@ public class SingleTarget extends TargetComponent {
 
         if (single.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, single);
+        return executeChildren(caster, skillLevel, single, castCounter);
     }
 
     @Override

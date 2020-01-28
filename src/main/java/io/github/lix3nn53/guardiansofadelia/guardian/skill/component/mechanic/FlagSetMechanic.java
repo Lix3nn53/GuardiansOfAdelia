@@ -12,18 +12,24 @@ public class FlagSetMechanic extends MechanicComponent {
 
     private final String key;
     private final List<Integer> ticks;
+    private final boolean isUniqueCast;
 
-    public FlagSetMechanic(String key, List<Integer> ticks) {
+    public FlagSetMechanic(String key, List<Integer> ticks, boolean isUniqueCast) {
         this.key = key;
         this.ticks = ticks;
+        this.isUniqueCast = isUniqueCast;
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
-            SkillDataManager.addFlag(target, key);
+            if (isUniqueCast) {
+                SkillDataManager.addFlag(target, key + castCounter);
+            } else {
+                SkillDataManager.addFlag(target, key);
+            }
         }
 
         if (!ticks.isEmpty()) {
@@ -32,7 +38,11 @@ public class FlagSetMechanic extends MechanicComponent {
                 @Override
                 public void run() {
                     for (LivingEntity target : targets) {
-                        SkillDataManager.removeFlag(target, key);
+                        if (isUniqueCast) {
+                            SkillDataManager.removeFlag(target, key + castCounter);
+                        } else {
+                            SkillDataManager.removeFlag(target, key);
+                        }
                     }
                 }
             }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), ticks.get(skillLevel - 1));

@@ -22,7 +22,7 @@ public class AreaTarget extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         List<LivingEntity> nearby = new ArrayList<>();
@@ -38,7 +38,7 @@ public class AreaTarget extends TargetComponent {
 
         if (nearby.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, nearby);
+        return executeChildren(caster, skillLevel, nearby, castCounter);
     }
 
     @Override

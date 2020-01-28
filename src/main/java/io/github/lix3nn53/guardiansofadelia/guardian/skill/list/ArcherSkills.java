@@ -104,12 +104,12 @@ public class ArcherSkills {
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(70);
-        ticks.add(90);
-        ticks.add(100);
-        ticks.add(110);
-        ticks.add(120);
         ticks.add(140);
+        ticks.add(160);
+        ticks.add(180);
+        ticks.add(200);
+        ticks.add(220);
+        ticks.add(240);
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(1);
         amplifiers.add(1);

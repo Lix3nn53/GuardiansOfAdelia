@@ -25,7 +25,7 @@ public class LocationTarget extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         List<LivingEntity> temporaryEntities = new ArrayList<>();
@@ -48,7 +48,7 @@ public class LocationTarget extends TargetComponent {
 
         if (temporaryEntities.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, temporaryEntities);
+        return executeChildren(caster, skillLevel, temporaryEntities, castCounter);
     }
 
     @Override

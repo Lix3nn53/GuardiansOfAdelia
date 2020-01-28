@@ -9,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.im
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.DisarmMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
@@ -155,12 +156,12 @@ public class PaladinSkills {
         manaCosts.add(30);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
-        cooldowns.add(20);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
+        cooldowns.add(18);
 
         Skill skill = new Skill("Heal", 6, Material.IRON_HOE, 37, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -235,12 +236,12 @@ public class PaladinSkills {
         manaCosts.add(30);
 
         List<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(30);
-        cooldowns.add(30);
-        cooldowns.add(30);
-        cooldowns.add(30);
-        cooldowns.add(30);
-        cooldowns.add(30);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
+        cooldowns.add(24);
 
         Skill skill = new Skill("Polymorph", 6, Material.IRON_HOE, 55, description, reqLevels, reqPoints, manaCosts, cooldowns);
 
@@ -256,12 +257,12 @@ public class PaladinSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         List<Integer> ticks = new ArrayList<>();
+        ticks.add(60);
+        ticks.add(65);
+        ticks.add(70);
+        ticks.add(75);
         ticks.add(80);
-        ticks.add(90);
         ticks.add(100);
-        ticks.add(110);
-        ticks.add(120);
-        ticks.add(140);
         DisguiseMechanic disguiseMechanic = new DisguiseMechanic(DisguiseType.PIG, false, ticks);
 
         List<Integer> amplifiers = new ArrayList<>();
@@ -273,6 +274,8 @@ public class PaladinSkills {
         amplifiers.add(7);
         PotionEffectMechanic slow = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
 
+        SilenceMechanic silenceMechanic = new SilenceMechanic(ticks);
+
         DisarmMechanic disarmMechanic = new DisarmMechanic(ticks);
 
         skill.addTrigger(selfTarget);
@@ -280,6 +283,7 @@ public class PaladinSkills {
         areaTarget.addChildren(disguiseMechanic);
         areaTarget.addChildren(slow);
         areaTarget.addChildren(disarmMechanic);
+        areaTarget.addChildren(silenceMechanic);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SPELL_WITCH, ArrangementParticle.CIRCLE, 6.7, 27, 0, 0, 0, 0, 0.5, 0, 0, null);
         SelfTarget selfTargetForSound = new SelfTarget();

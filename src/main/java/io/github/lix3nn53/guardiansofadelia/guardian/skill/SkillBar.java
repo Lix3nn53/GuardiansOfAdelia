@@ -31,6 +31,8 @@ public class SkillBar {
     private final List<Integer> investedSkillPoints = new ArrayList<>();
     private final List<Skill> skillSet;
 
+    private int castCounter = 0;
+
     public SkillBar(Player player, int one, int two, int three, int passive, int ultimate, List<Skill> skillSet) {
         this.player = player;
         this.skillSet = skillSet;
@@ -53,7 +55,8 @@ public class SkillBar {
             InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
             if (initializeTrigger != null) {
                 int nextSkillLevel = skill.getCurrentSkillLevel(getInvestedSkillPoints(i));
-                TriggerListener.onSkillUpgrade(player, initializeTrigger, nextSkillLevel);
+                TriggerListener.onSkillUpgrade(player, initializeTrigger, nextSkillLevel, castCounter);
+                castCounter++;
             }
         }
     }
@@ -78,7 +81,8 @@ public class SkillBar {
             if (player.getLevel() >= reqPlayerLevel) {
                 InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
                 if (initializeTrigger != null) {
-                    TriggerListener.onSkillUpgrade(player, initializeTrigger, currentSkillLevel + 1);
+                    TriggerListener.onSkillUpgrade(player, initializeTrigger, currentSkillLevel + 1, castCounter);
+                    castCounter++;
                 }
                 investedSkillPoints.set(skillIndex, invested + reqSkillPoints);
                 remakeSkillBarIcon(skillIndex);
@@ -102,7 +106,7 @@ public class SkillBar {
 
         InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
         if (initializeTrigger != null) {
-            TriggerListener.onSkillDowngrade(player, initializeTrigger, currentSkillLevel - 1);
+            TriggerListener.onSkillDowngrade(player, initializeTrigger, currentSkillLevel - 1, castCounter);
         }
 
         int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel - 1);
@@ -125,7 +129,8 @@ public class SkillBar {
 
             InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
             if (initializeTrigger != null) {
-                TriggerListener.onSkillDowngrade(player, initializeTrigger, 0);
+                TriggerListener.onSkillDowngrade(player, initializeTrigger, 0, castCounter);
+                castCounter++;
             }
 
             remakeSkillBarIcon(skillIndex);
@@ -227,12 +232,14 @@ public class SkillBar {
             }
         }
 
-        boolean cast = skill.cast(player, skillLevel, new ArrayList<>());//cast ends when this returns
+        boolean cast = skill.cast(player, skillLevel, new ArrayList<>(), castCounter);//cast ends when this returns
 
         if (!cast) {
             player.sendMessage(ChatColor.RED + "Failed to cast skill");
             return false; //dont go on cooldown and consume mana if cast failed
         }
+
+        castCounter++;
 
         if (rpgCharacterStats != null) {
             rpgCharacterStats.consumeMana(manaCost);

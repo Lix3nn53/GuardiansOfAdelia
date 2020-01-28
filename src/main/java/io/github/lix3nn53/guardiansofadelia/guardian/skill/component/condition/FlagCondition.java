@@ -10,26 +10,34 @@ public class FlagCondition extends ConditionComponent {
 
     private final String key;
     private final boolean isSet;
+    private final boolean isUnique;
 
     /**
      * @param key
      * @param isSet check to true or false
      */
-    public FlagCondition(String key, boolean isSet) {
+    public FlagCondition(String key, boolean isSet, boolean isUnique) {
         this.key = key;
         this.isSet = isSet;
+        this.isUnique = isUnique;
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         boolean success = false;
         for (LivingEntity target : targets) {
-            boolean hasFlag = SkillDataManager.hasFlag(target, key);
+            boolean hasFlag;
+
+            if (isUnique) {
+                hasFlag = SkillDataManager.hasFlag(target, key + castCounter);
+            } else {
+                hasFlag = SkillDataManager.hasFlag(target, key);
+            }
 
             if (hasFlag == isSet) {
-                success = executeChildren(caster, skillLevel, targets) || success;
+                success = executeChildren(caster, skillLevel, targets, castCounter) || success;
             }
         }
 

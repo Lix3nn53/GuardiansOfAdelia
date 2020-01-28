@@ -13,7 +13,7 @@ import java.util.List;
 public class InitializeTrigger extends TriggerComponent {
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
 
         return false;
     }
@@ -23,8 +23,8 @@ public class InitializeTrigger extends TriggerComponent {
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 
-    public void startEffects(Player caster, int skillLevel, List<LivingEntity> targets) {
-        executeChildren(caster, skillLevel, targets);
+    public void startEffects(Player caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+        executeChildren(caster, skillLevel, targets, castCounter);
     }
 
 

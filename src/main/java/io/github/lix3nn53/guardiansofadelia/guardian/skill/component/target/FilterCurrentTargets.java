@@ -16,14 +16,14 @@ public class FilterCurrentTargets extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
         targets = determineTargets(caster, targets);
 
         if (targets.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, targets);
+        return executeChildren(caster, skillLevel, targets, castCounter);
     }
 
     @Override

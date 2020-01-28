@@ -45,7 +45,7 @@ public enum Consumable {
         targets.add(player);
         List<SkillComponent> componentList = getSkillComponents();
         for (SkillComponent component : componentList) {
-            component.execute(player, skillLevel, targets);
+            component.execute(player, skillLevel, targets, 0);
         }
         int amount = itemStack.getAmount();
         if (PersistentDataContainerUtil.hasInteger(itemStack, "consumableUsesLeft")) {

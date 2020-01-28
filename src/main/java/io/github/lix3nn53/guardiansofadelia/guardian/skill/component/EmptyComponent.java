@@ -7,8 +7,8 @@ import java.util.List;
 public class EmptyComponent extends SkillComponent {
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets) {
-        return executeChildren(caster, skillLevel, targets);
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+        return executeChildren(caster, skillLevel, targets, castCounter);
     }
 
     @Override

@@ -142,24 +142,24 @@ public class TriggerListener {
         }
     }
 
-    public static void onSkillUpgrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel) {
+    public static void onSkillUpgrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel, int castCounter) {
         stopInit(player); //stop old init
 
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
 
-        initializeTrigger.startEffects(player, nextSkillLevel, targets);
+        initializeTrigger.startEffects(player, nextSkillLevel, targets, castCounter);
         playerToInitializeTrigger.put(player, initializeTrigger);
     }
 
-    public static void onSkillDowngrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel) {
+    public static void onSkillDowngrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel, int castCounter) {
         stopInit(player);
         if (nextSkillLevel == 0) return;
 
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
 
-        initializeTrigger.startEffects(player, nextSkillLevel, targets);
+        initializeTrigger.startEffects(player, nextSkillLevel, targets, castCounter);
         playerToInitializeTrigger.put(player, initializeTrigger);
     }
 
