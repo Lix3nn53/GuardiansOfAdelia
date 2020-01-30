@@ -45,7 +45,7 @@ public class MiniGameManager {
         List<Location> lastOneStandingStartLocations2 = new ArrayList<>();
         lastOneStandingStartLocations2.add(new Location(Bukkit.getWorld("arena"), -22.5, 68.5, 303.5, -80, -2));
         lastOneStandingStartLocations2.add(new Location(Bukkit.getWorld("arena"), 60.5, 68.5, 318.5, 100, -2));
-        LastOneStanding lastOneStandingRoom2 = new LastOneStanding("Royal Duel", 1, 3, 2, lastOneStandingStartLocations2, 2, 2, 2, 2);
+        LastOneStanding lastOneStandingRoom2 = new LastOneStanding("Royal Duel", 1, 3, 2, lastOneStandingStartLocations2, 2, 2, 2, 4);
         lastOneStandingList.add(lastOneStandingRoom2);
 
         List<Location> lastOneStandingStartLocations3 = new ArrayList<>();
@@ -173,9 +173,9 @@ public class MiniGameManager {
         }
     }
 
-    public static void onPlayerKill(Player killer) {
-        if (playerToMinigame.containsKey(killer)) {
-            playerToMinigame.get(killer).onPlayerKill(killer);
+    public static void onPlayerDealDamageToPlayer(Player attacker, Player defender) {
+        if (playerToMinigame.containsKey(attacker)) {
+            playerToMinigame.get(attacker).onPlayerDealDamageToPlayer(attacker, defender);
         }
     }
 

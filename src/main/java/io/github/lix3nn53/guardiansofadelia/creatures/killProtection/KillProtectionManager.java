@@ -72,9 +72,7 @@ public class KillProtectionManager {
             //run only once
             Player once = bestPlayers.get(0);
             if (MiniGameManager.isInMinigame(once)) {
-                if (livingTarget.getType().equals(EntityType.PLAYER)) {
-                    MiniGameManager.onPlayerKill(once);
-                } else {
+                if (!livingTarget.getType().equals(EntityType.PLAYER)) {
                     MiniGameManager.onMobKill(once, livingTarget);
                 }
             }

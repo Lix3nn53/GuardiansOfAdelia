@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.guildwar;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
@@ -18,7 +17,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,7 +52,7 @@ public class GuildWar extends Minigame {
     }
 
     @Override
-    public void onPlayerKill(Player killer) {
+    public void onPlayerDealDamageToPlayer(Player attacker, Player defender) {
         //Override so it doesn't give any score
     }
 
@@ -190,7 +188,7 @@ public class GuildWar extends Minigame {
                     MessageUtils.sendCenteredMessage(member, getGameColor() + player.getName() + " joined queue for " + getMinigameName());
                 }
                 MiniGameManager.addPlayer(player, this);
-                onPlayerJoinQueueCountdownCheck();
+                onPlayerJoinQueueCountdownCheck(false);
                 return true;
             }
         }
@@ -219,34 +217,12 @@ public class GuildWar extends Minigame {
     }
 
     @Override
-    public void onPlayerJoinQueueCountdownCheck() {
+    public void onPlayerJoinQueueCountdownCheck(boolean checkPlayerSize) {
         if (this.guilds.size() == getTeamAmount()) {
-            for (Player member : getPlayersInGame()) {
-                MessageUtils.sendCenteredMessage(member, getGameColor() + "Begin start countdown for " + getMinigameName());
+            if (this.getQueueCountDown() != null) {
+                if (!this.getQueueCountDown().isCancelled()) return;
             }
-            //start countdown
-            BukkitRunnable queueCountDown = new BukkitRunnable() {
-
-                int count = 0;
-
-                @Override
-                public void run() {
-                    if (count * 10 == getQueueTimeLimitInTenSeconds() * 60) {
-                        //start minigame
-                        cancel();
-                        startGame();
-                    } else {
-                        for (Player member : getPlayersInGame()) {
-                            if (member.isOnline()) {
-                                MessageUtils.sendCenteredMessage(member, getGameColor().toString() + (getQueueTimeLimitInTenSeconds() * 60 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
-                            }
-                        }
-                        count++;
-                    }
-                }
-            };
-            queueCountDown.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20 * 10L);
-            setQueueCountDown(queueCountDown);
+            super.onPlayerJoinQueueCountdownCheck(false);
         }
     }
 

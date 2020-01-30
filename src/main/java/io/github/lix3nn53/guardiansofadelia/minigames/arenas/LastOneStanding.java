@@ -61,4 +61,15 @@ public class LastOneStanding extends Minigame {
 
         return teamsAlive;
     }
+
+    @Override
+    public void onPlayerDealDamageToPlayer(Player attacker, Player defender) {
+        //empty, kills does not give score in this mode
+    }
+
+    @Override
+    public void onPlayerDeath(Player player) {
+        addScore(player, -1);
+        super.onPlayerDeath(player);
+    }
 }

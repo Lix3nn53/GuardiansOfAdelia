@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.Da
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
@@ -342,6 +343,14 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 //custom defense formula if target is another player
                 if (livingTarget.getType().equals(EntityType.PLAYER)) {
                     Player playerTarget = (Player) livingTarget;
+
+                    //minigame deal damage listener
+                    if (MiniGameManager.isInMinigame(player)) {
+                        if (livingTarget.getType().equals(EntityType.PLAYER)) {
+                            MiniGameManager.onPlayerDealDamageToPlayer(player, playerTarget);
+                        }
+                    }
+
                     UUID targetUniqueId = playerTarget.getUniqueId();
                     if (GuardianDataManager.hasGuardianData(targetUniqueId)) {
                         GuardianData targetGuardianData = GuardianDataManager.getGuardianData(targetUniqueId);
