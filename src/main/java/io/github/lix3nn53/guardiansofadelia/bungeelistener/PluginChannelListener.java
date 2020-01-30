@@ -31,9 +31,9 @@ public class PluginChannelListener implements PluginMessageListener {
             if (subchannel.equalsIgnoreCase("webPurchase")) {
                 int productId = Integer.parseInt(in.readUTF());
                 int payment = Integer.parseInt(in.readUTF());
-                String minecraftUsername = in.readUTF();
+                String minecraftUuid = in.readUTF();
 
-                WebPurchase webPurchase = new WebPurchase(productId, payment, minecraftUsername);
+                WebPurchase webPurchase = new WebPurchase(productId, payment, minecraftUuid);
                 GuardiansOfAdelia.getInstance().getLogger().info(webPurchase.toString());
                 WebResponse webResponse = RequestHandler.onPurchase(webPurchase);
                 GuardiansOfAdelia.getInstance().getLogger().info(webResponse.toString());
@@ -41,12 +41,12 @@ public class PluginChannelListener implements PluginMessageListener {
                 List<String> responseToSend = new ArrayList<>();
                 boolean responseSuccess = webResponse.isSuccess();
                 String responseMsg = webResponse.getMsg();
-                String responseMinecraftUsername = webResponse.getMinecraftUsername();
+                String responseMinecraftUuid = webResponse.getMinecraftUuid();
                 int responseProductId = webResponse.getProductId();
 
                 responseToSend.add(String.valueOf(responseSuccess));
                 responseToSend.add(responseMsg);
-                responseToSend.add(responseMinecraftUsername);
+                responseToSend.add(responseMinecraftUuid);
                 responseToSend.add(String.valueOf(responseProductId));
 
                 sendToBungeeCord(player, "webPurchaseResponse", responseToSend);

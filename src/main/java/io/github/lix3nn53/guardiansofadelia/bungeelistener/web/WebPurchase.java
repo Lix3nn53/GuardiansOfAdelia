@@ -4,15 +4,15 @@ public class WebPurchase {
 
     private int productId;
     private int payment;
-    private String minecraftUsername;
+    private String minecraftUuid;
 
     public WebPurchase() {
     }
 
-    public WebPurchase(int productId, int payment, String minecraftUsername) {
+    public WebPurchase(int productId, int payment, String minecraftUuid) {
         this.productId = productId;
         this.payment = payment;
-        this.minecraftUsername = minecraftUsername;
+        this.minecraftUuid = minecraftUuid;
     }
 
     public int getProductId() {
@@ -31,12 +31,12 @@ public class WebPurchase {
         this.payment = payment;
     }
 
-    public String getMinecraftUsername() {
-        return minecraftUsername;
+    public String getMinecraftUuid() {
+        return minecraftUuid;
     }
 
-    public void setMinecraftUsername(String minecraftUsername) {
-        this.minecraftUsername = minecraftUsername;
+    public void setMinecraftUuid(String minecraftUuid) {
+        this.minecraftUuid = minecraftUuid;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class WebPurchase {
         final StringBuilder sb = new StringBuilder("WebPurchase{");
         sb.append("productId=").append(productId);
         sb.append(", payment=").append(payment);
-        sb.append(", minecraftUsername='").append(minecraftUsername).append('\'');
+        sb.append(", minecraftUuid='").append(minecraftUuid).append('\'');
         sb.append('}');
         return sb.toString();
     }

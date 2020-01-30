@@ -97,53 +97,57 @@ public class RequestHandler {
     }
 
     static WebResponse onPurchase(WebPurchase webPurchase) {
-        String minecraftUsername = webPurchase.getMinecraftUsername();
+        String minecraftUuidString = webPurchase.getMinecraftUuid();
+        UUID minecraftUuid = UUID.fromString(minecraftUuidString);
         int productId = webPurchase.getProductId();
         int payment = webPurchase.getPayment();
 
+        String playerName = "NULL";
+
         if (!productIdToWebProduct.containsKey(productId)) {
-            return new WebResponse(false, "No such product1", minecraftUsername, productId);
+            return new WebResponse(false, "No such product1", minecraftUuidString, productId);
         }
 
         WebProduct webProduct = productIdToWebProduct.get(productId);
         int cost = webProduct.getCost();
 
         if (cost != payment) {
-            return new WebResponse(false, "No such product2", minecraftUsername, productId);
+            return new WebResponse(false, "No such product2", minecraftUuidString, productId);
         }
 
         WebProductType type = webProduct.getType();
         if (type.equals(WebProductType.ITEM)) {
             ItemStack itemStack = webProduct.getItemStack();
 
-            Player playerExact = Bukkit.getPlayerExact(minecraftUsername);
-            if (playerExact != null) {
-                InventoryView openInventory = playerExact.getOpenInventory();
+            Player player = Bukkit.getPlayer(minecraftUuid);
+            if (player != null) {
+                InventoryView openInventory = player.getOpenInventory();
                 String title = openInventory.getTitle();
 
                 if (title.contains("Premium Storage")) {
                     new BukkitRunnable() {
                         @Override
                         public void run() {
-                            playerExact.closeInventory();
+                            player.closeInventory();
                         }
                     }.runTask(GuardiansOfAdelia.getInstance());
                 }
 
-                UUID uuid = playerExact.getUniqueId();
+                UUID uuid = player.getUniqueId();
                 if (GuardianDataManager.hasGuardianData(uuid)) {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                     boolean success = guardianData.addToPremiumStorage(itemStack);
                     if (!success) {
-                        return new WebResponse(false, "Your premium-storage is full!", minecraftUsername, productId);
+                        return new WebResponse(false, "Your premium-storage is full!", minecraftUuidString, productId);
                     }
+                    playerName = player.getName();
                 }
             } else { //player is offline
-                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(minecraftUsername);
+                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(minecraftUuid);
                 UUID uuid = offlinePlayer.getUniqueId();
 
                 if (!uuidExists(uuid)) {
-                    return new WebResponse(false, "You must be logged in to game server at least once!", minecraftUsername, productId);
+                    return new WebResponse(false, "You must be logged in to game server at least once!", minecraftUuidString, productId);
                 }
 
                 try {
@@ -154,24 +158,25 @@ public class RequestHandler {
                     if (premiumStorage != null) list = new ArrayList<>(Arrays.asList(premiumStorage));
 
                     if (list.size() >= 54) {
-                        return new WebResponse(false, "Your premium-storage is full!", minecraftUsername, productId);
+                        return new WebResponse(false, "Your premium-storage is full!", minecraftUuidString, productId);
                     }
 
                     list.add(itemStack);
                     ItemStack[] newPremiumStorage = list.toArray(new ItemStack[0]);
                     DatabaseQueries.setPremiumStorage(uuid, newPremiumStorage);
+                    playerName = offlinePlayer.getName();
                 } catch (Exception e) {
                     e.printStackTrace();
 
-                    return new WebResponse(false, "A database error occurred.", minecraftUsername, productId);
+                    return new WebResponse(false, "A database error occurred.", minecraftUuidString, productId);
                 }
             }
         } else if (type.equals(WebProductType.RANK)) {
             PremiumRank premiumRank = webProduct.getPremiumRank();
 
-            Player playerExact = Bukkit.getPlayerExact(minecraftUsername);
-            if (playerExact != null) {
-                UUID uuid = playerExact.getUniqueId();
+            Player player = Bukkit.getPlayer(minecraftUuid);
+            if (player != null) {
+                UUID uuid = player.getUniqueId();
                 if (GuardianDataManager.hasGuardianData(uuid)) {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                     guardianData.setPremiumRank(premiumRank);
@@ -179,32 +184,35 @@ public class RequestHandler {
 
                 try {
                     DatabaseQueries.setPremiumRankWithDate(uuid, premiumRank);
+                    playerName = player.getName();
                 } catch (Exception e) {
                     e.printStackTrace();
 
-                    return new WebResponse(false, "A database error occurred.", minecraftUsername, productId);
+                    return new WebResponse(false, "A database error occurred.", minecraftUuidString, productId);
                 }
             } else { //player is offline
-                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(minecraftUsername);
+                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(minecraftUuid);
                 UUID uuid = offlinePlayer.getUniqueId();
 
                 if (!uuidExists(uuid)) {
-                    return new WebResponse(false, "You must be logged in to game server at least once!", minecraftUsername, productId);
+                    return new WebResponse(false, "You must be logged in to game server at least once!", minecraftUuidString, productId);
                 }
 
                 try {
                     DatabaseQueries.setPremiumRankWithDate(uuid, premiumRank);
+
+                    playerName = offlinePlayer.getName();
                 } catch (Exception e) {
                     e.printStackTrace();
 
-                    return new WebResponse(false, "A database error occurred.", minecraftUsername, productId);
+                    return new WebResponse(false, "A database error occurred.", minecraftUuidString, productId);
                 }
             }
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info("Web purchase: " + minecraftUsername + " bought " + webProduct.getProductName() + " for " + payment + " credits!");
-        Bukkit.broadcastMessage(ChatColor.GOLD + "Thanks for your support! " + ChatColor.GRAY + minecraftUsername + " bought " + webProduct.getProductName() + ChatColor.GRAY + " from web-store!");
-        return new WebResponse(true, "Item purchased successfully!", minecraftUsername, productId);
+        GuardiansOfAdelia.getInstance().getLogger().info("Web purchase: " + playerName + " bought " + webProduct.getProductName() + " for " + payment + " credits!");
+        Bukkit.broadcastMessage(ChatColor.GOLD + "Thanks for your support! " + ChatColor.GRAY + playerName + " bought " + webProduct.getProductName() + ChatColor.GRAY + " from web-store!");
+        return new WebResponse(true, "Item purchased successfully!", minecraftUuidString, productId);
     }
 
     public static void test(int productId, Player player) {
