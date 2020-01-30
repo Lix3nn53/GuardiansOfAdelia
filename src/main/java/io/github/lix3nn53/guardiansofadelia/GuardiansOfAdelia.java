@@ -36,7 +36,7 @@ import java.util.UUID;
 
 public class GuardiansOfAdelia extends JavaPlugin {
 
-    public static final String ResourcePackAddress = "https://drive.google.com/uc?export=download&id=1mU0hGGY8uzym3jgKxaiVUwNGz36FXm3l";
+    public static String ResourcePackURL;
     public static PluginChannelListener pluginChannelListener;
 
     private static GuardiansOfAdelia instance;

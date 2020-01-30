@@ -97,19 +97,19 @@ public class ArcherSkills {
         List<Double> damages = new ArrayList<>();
         damages.add(16.0);
         damages.add(40.0);
-        damages.add(160.0);
-        damages.add(260.0);
-        damages.add(360.0);
-        damages.add(600.0);
+        damages.add(120.0);
+        damages.add(200.0);
+        damages.add(290.0);
+        damages.add(480.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
         List<Integer> ticks = new ArrayList<>();
+        ticks.add(80);
+        ticks.add(90);
+        ticks.add(100);
+        ticks.add(110);
+        ticks.add(120);
         ticks.add(140);
-        ticks.add(160);
-        ticks.add(180);
-        ticks.add(200);
-        ticks.add(220);
-        ticks.add(240);
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(1);
         amplifiers.add(1);
@@ -174,8 +174,8 @@ public class ArcherSkills {
         skill.addTrigger(selfTarget);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(80);
-        ticks.add(80);
+        ticks.add(60);
+        ticks.add(70);
         ticks.add(80);
         ticks.add(90);
         ticks.add(100);
@@ -189,8 +189,8 @@ public class ArcherSkills {
         amplifiers.add(4);
         selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SPEED, ticks, amplifiers));
         List<Integer> repeatAmount = new ArrayList<>();
-        repeatAmount.add(16);
-        repeatAmount.add(16);
+        repeatAmount.add(12);
+        repeatAmount.add(14);
         repeatAmount.add(16);
         repeatAmount.add(18);
         repeatAmount.add(20);
@@ -342,12 +342,12 @@ public class ArcherSkills {
         RangedAttackTrigger rangedAttackTrigger = new RangedAttackTrigger(cooldowns);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(120);
-        ticks.add(140);
         ticks.add(160);
         ticks.add(180);
         ticks.add(200);
+        ticks.add(220);
         ticks.add(240);
+        ticks.add(300);
         List<Double> multipliers = new ArrayList<>();
         multipliers.add(0.04);
         multipliers.add(0.05);
@@ -482,10 +482,10 @@ public class ArcherSkills {
         List<Double> damages = new ArrayList<>();
         damages.add(64.0);
         damages.add(160.0);
-        damages.add(320.0);
-        damages.add(520.0);
-        damages.add(720.0);
-        damages.add(1200.0);
+        damages.add(250.0);
+        damages.add(410.0);
+        damages.add(570.0);
+        damages.add(900.0);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.RANGED));
 
         return skill;

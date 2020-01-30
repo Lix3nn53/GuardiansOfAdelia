@@ -25,7 +25,7 @@ public class MyPlayerJoinEvent implements Listener {
             public void run() {
                 CharacterSelectionScreenManager.startCharacterSelection(player);
                 //TODO CustomSoundtrack.sendCurrentSongMessage(player);
-                player.setResourcePack(GuardiansOfAdelia.ResourcePackAddress);
+                player.setResourcePack(GuardiansOfAdelia.ResourcePackURL);
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 40L);
     }

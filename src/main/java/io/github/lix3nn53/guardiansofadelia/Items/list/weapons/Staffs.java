@@ -28,42 +28,42 @@ class Staffs {
             name = "Zest Staff";
             customModelDataId = 3;
             level = 20;
-            magicDamage = 50;
+            magicDamage = 40;
         } else if (placementNumber == 4) {
             name = "Dinah Wand";
             customModelDataId = 4;
             level = 30;
-            magicDamage = 125;
+            magicDamage = 100;
         } else if (placementNumber == 5) {
             name = "Nether Fire Staff";
             customModelDataId = 5;
             level = 40;
-            magicDamage = 200;
+            magicDamage = 160;
         } else if (placementNumber == 6) {
             name = "Water Fairy Staff";
             customModelDataId = 6;
             level = 50;
-            magicDamage = 320;
+            magicDamage = 250;
         } else if (placementNumber == 7) {
             name = "Fairy Staff";
             customModelDataId = 8;
             level = 60;
-            magicDamage = 450;
+            magicDamage = 360;
         } else if (placementNumber == 8) {
             name = "Ocean Staff";
             customModelDataId = 10;
             level = 70;
-            magicDamage = 600;
+            magicDamage = 480;
         } else if (placementNumber == 9) {
             name = "Crystal of Swamp";
             customModelDataId = 12;
             level = 80;
-            magicDamage = 750;
+            magicDamage = 600;
         } else if (placementNumber == 10) {
             name = "Neferti Staff";
             customModelDataId = 14;
             level = 90;
-            magicDamage = 1000;
+            magicDamage = 800;
         }
 
         int damage = magicDamage / 4;

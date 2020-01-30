@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.im
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.DisarmMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.RootMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.FilterCurrentTargets;
@@ -111,18 +112,18 @@ public class HunterSkills {
         List<Double> damages = new ArrayList<>();
         damages.add(24.0);
         damages.add(60.0);
-        damages.add(240.0);
-        damages.add(390.0);
-        damages.add(540.0);
-        damages.add(900.0);
+        damages.add(180.0);
+        damages.add(300.0);
+        damages.add(420.0);
+        damages.add(720.0);
 
         List<Double> speeds = new ArrayList<>();
-        speeds.add(2.4D);
-        speeds.add(2.8D);
-        speeds.add(3.2D);
-        speeds.add(3.6D);
-        speeds.add(4D);
-        speeds.add(4.8D);
+        speeds.add(2D);
+        speeds.add(2.4);
+        speeds.add(2.8);
+        speeds.add(3.2);
+        speeds.add(3.6);
+        speeds.add(4.2);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         selfTarget.addChildren(projectileMechanic);
@@ -192,10 +193,10 @@ public class HunterSkills {
         List<Double> damages = new ArrayList<>();
         damages.add(24.0);
         damages.add(60.0);
-        damages.add(240.0);
-        damages.add(390.0);
-        damages.add(540.0);
-        damages.add(900.0);
+        damages.add(180.0);
+        damages.add(300.0);
+        damages.add(420.0);
+        damages.add(720.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
         selfTarget.addChildren(projectileMechanic);
@@ -442,7 +443,7 @@ public class HunterSkills {
         slowAmplifiers.add(99);
         slowAmplifiers.add(99);
         slowAmplifiers.add(99);
-        PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, jumpAmplifiers);
+        RootMechanic root = new RootMechanic(ticks, true);
         PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, slowAmplifiers);
         DisarmMechanic disarmMechanic = new DisarmMechanic(ticks);
         SilenceMechanic silenceMechanic = new SilenceMechanic(ticks);
@@ -462,7 +463,7 @@ public class HunterSkills {
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_LARGE, ArrangementParticle.CIRCLE, 1.4, 2, 0, 0, 0, 0, 0.8, 0, 0, null);
         areaTarget.addChildren(particleMechanic);
         areaTarget.addChildren(new SoundMechanic(GoaSound.SKILL_STUN_HIT));
-        areaTarget.addChildren(stopJumping);
+        areaTarget.addChildren(root);
         areaTarget.addChildren(stopWalking);
         areaTarget.addChildren(disarmMechanic);
         areaTarget.addChildren(silenceMechanic);

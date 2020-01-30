@@ -33,7 +33,7 @@ public class GuildWar extends Minigame {
 
     public GuildWar(int maxPoint, String mapName, int roomNo, List<Location> startLocations, List<Location> flagGroundLocations) {
         super("GuildWar", ChatColor.DARK_PURPLE, mapName, roomNo, 1, 10, 2, startLocations,
-                15, 2, TownManager.getTown(1).getLocation(), 99, 0, 20, 0);
+                15, 10, TownManager.getTown(1).getLocation(), 99, 0, 20, 0);
         this.maxPoint = maxPoint;
         for (Location flagGround : flagGroundLocations) {
             castles.add(new Castle(flagGround.getBlock()));
@@ -231,14 +231,14 @@ public class GuildWar extends Minigame {
 
                 @Override
                 public void run() {
-                    if (count * 10 == getQueueTimeLimitInMinutes() * 60) {
+                    if (count * 10 == getQueueTimeLimitInTenSeconds() * 60) {
                         //start minigame
                         cancel();
                         startGame();
                     } else {
                         for (Player member : getPlayersInGame()) {
                             if (member.isOnline()) {
-                                MessageUtils.sendCenteredMessage(member, getGameColor().toString() + (getQueueTimeLimitInMinutes() * 60 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
+                                MessageUtils.sendCenteredMessage(member, getGameColor().toString() + (getQueueTimeLimitInTenSeconds() * 60 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
                             }
                         }
                         count++;

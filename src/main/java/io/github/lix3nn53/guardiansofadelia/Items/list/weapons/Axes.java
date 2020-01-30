@@ -28,42 +28,42 @@ class Axes {
             name = "Valor Axe";
             durability = 3;
             level = 20;
-            damage = 60;
+            damage = 48;
         } else if (placementNumber == 4) {
             name = "Frozen Axe";
             durability = 4;
             level = 30;
-            damage = 150;
+            damage = 120;
         } else if (placementNumber == 5) {
             name = "Sword of Doom";
             durability = 5;
             level = 40;
-            damage = 240;
+            damage = 190;
         } else if (placementNumber == 6) {
             name = "Shadow Axe";
             durability = 6;
             level = 50;
-            damage = 380;
+            damage = 300;
         } else if (placementNumber == 7) {
             name = "Claymore";
             durability = 8;
             level = 60;
-            damage = 540;
+            damage = 430;
         } else if (placementNumber == 8) {
             name = "Dragon Sword";
             durability = 10;
             level = 70;
-            damage = 720;
+            damage = 580;
         } else if (placementNumber == 9) {
             name = "Soul Reaper";
             durability = 12;
             level = 80;
-            damage = 900;
+            damage = 720;
         } else if (placementNumber == 10) {
             name = "Titanic Axe";
             durability = 14;
             level = 90;
-            damage = 1200;
+            damage = 960;
         }
 
         final WeaponMelee axe = new WeaponMelee(name, tier, itemTag, material, durability, level, rpgClass, damage, bonusPercent,

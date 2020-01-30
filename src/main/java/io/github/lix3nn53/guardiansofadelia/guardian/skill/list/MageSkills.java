@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.RootMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
@@ -102,7 +103,7 @@ public class MageSkills {
         damages.add(200.0);
         damages.add(325.0);
         damages.add(450.0);
-        damages.add(750.0);
+        damages.add(720.0);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
 
         projectileMechanic.addChildren(areaTarget);
@@ -355,7 +356,7 @@ public class MageSkills {
         ccAmplifiers.add(99);
         ccAmplifiers.add(99);
         areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
-        areaTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
+        areaTarget.addChildren(new RootMechanic(ccTicks, true));
 
         List<Integer> ticks = new ArrayList<>();
         ticks.add(500);

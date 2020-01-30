@@ -39,6 +39,7 @@ public class ConfigManager {
     private static FileConfiguration dungeonsConfig;
     private static FileConfiguration dungeonGatesConfig;
     private static FileConfiguration databaseConfig;
+    private static FileConfiguration resourcePackConfig;
     private static FileConfiguration teleportPortals;
 
     public static void init() {
@@ -50,6 +51,7 @@ public class ConfigManager {
 
     public static void createConfigALL() {
         createDatabaseConfig();
+        createResourcePackConfig();
         createSpawners();
         createDungeonSpawners();
         createCharacterSelectionConfig();
@@ -61,6 +63,7 @@ public class ConfigManager {
 
     public static void loadConfigALL() {
         loadDatabaseConfig();
+        loadResourcePackConfig();
         loadSpawners();
         loadDungeonSpawners();
         loadCharacterSelectionConfig();
@@ -102,6 +105,25 @@ public class ConfigManager {
         String testQuery = databaseConfig.getString("testQuery");
 
         ConnectionPool.init(hostname, port, database, username, password, minimumConnections, maximumConnections, connectionTimeout, testQuery);
+    }
+
+    private static void createResourcePackConfig() {
+        File customConfigFile = new File(DATA_FOLDER, "resourcepack.yml");
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+            GuardiansOfAdelia.getInstance().saveResource("resourcepack.yml", false);
+        }
+
+        resourcePackConfig = new YamlConfiguration();
+        try {
+            resourcePackConfig.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadResourcePackConfig() {
+        GuardiansOfAdelia.ResourcePackURL = resourcePackConfig.getString("url");
     }
 
     private static void createSpawners() {

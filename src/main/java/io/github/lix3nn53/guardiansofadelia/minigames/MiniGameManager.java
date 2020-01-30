@@ -39,13 +39,13 @@ public class MiniGameManager {
         List<Location> lastOneStandingStartLocations1 = new ArrayList<>();
         lastOneStandingStartLocations1.add(new Location(Bukkit.getWorld("arena"), -22.5, 68.5, 181.5, -80, -2));
         lastOneStandingStartLocations1.add(new Location(Bukkit.getWorld("arena"), 60.5, 68.5, 196.5, 100, -2));
-        LastOneStanding lastOneStandingRoom1 = new LastOneStanding("Royal Duel", 1, 3, 1, lastOneStandingStartLocations1, 1, 2, 2, 2);
+        LastOneStanding lastOneStandingRoom1 = new LastOneStanding("Royal Duel", 1, 3, 1, lastOneStandingStartLocations1, 1, 2, 1, 2);
         lastOneStandingList.add(lastOneStandingRoom1);
 
         List<Location> lastOneStandingStartLocations2 = new ArrayList<>();
         lastOneStandingStartLocations2.add(new Location(Bukkit.getWorld("arena"), -22.5, 68.5, 303.5, -80, -2));
         lastOneStandingStartLocations2.add(new Location(Bukkit.getWorld("arena"), 60.5, 68.5, 318.5, 100, -2));
-        LastOneStanding lastOneStandingRoom2 = new LastOneStanding("Royal Duel", 1, 3, 2, lastOneStandingStartLocations2, 1, 2, 2, 2);
+        LastOneStanding lastOneStandingRoom2 = new LastOneStanding("Royal Duel", 1, 3, 2, lastOneStandingStartLocations2, 2, 2, 2, 2);
         lastOneStandingList.add(lastOneStandingRoom2);
 
         List<Location> lastOneStandingStartLocations3 = new ArrayList<>();
@@ -55,8 +55,8 @@ public class MiniGameManager {
         lastOneStandingList.add(lastOneStandingRoom3);
 
         List<Location> lastOneStandingStartLocations4 = new ArrayList<>();
-        lastOneStandingStartLocations3.add(new Location(Bukkit.getWorld("arena"), 140.5, 72.5, 759.5, 95, -4));
-        lastOneStandingStartLocations3.add(new Location(Bukkit.getWorld("arena"), -33.5, 72.5, 741.5, -84, -1));
+        lastOneStandingStartLocations4.add(new Location(Bukkit.getWorld("arena"), 140.5, 72.5, 759.5, 95, -4));
+        lastOneStandingStartLocations4.add(new Location(Bukkit.getWorld("arena"), -33.5, 72.5, 741.5, -84, -1));
         LastOneStanding lastOneStandingRoom4 = new LastOneStanding("Battle of Biomes", 1, 3, 4, lastOneStandingStartLocations4, 2, 2, 2, 4);
         lastOneStandingList.add(lastOneStandingRoom4);
 

@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.DisarmMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.RootMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
@@ -88,12 +89,12 @@ public class MonkSkills {
         SingleTarget singleTarget = new SingleTarget(false, true, false, 99, ranges, 4);
 
         List<Double> speeds = new ArrayList<>();
-        speeds.add(2.4D);
-        speeds.add(2.8D);
-        speeds.add(3.2D);
-        speeds.add(3.6D);
-        speeds.add(4D);
-        speeds.add(4.8D);
+        speeds.add(2D);
+        speeds.add(2.4);
+        speeds.add(2.8);
+        speeds.add(3.2);
+        speeds.add(3.6);
+        speeds.add(4.2);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         skill.addTrigger(selfTarget);
@@ -262,15 +263,7 @@ public class MonkSkills {
         ccTicks.add(180);
         ccTicks.add(200);
         ccTicks.add(240);
-        List<Integer> ccAmplifiers = new ArrayList<>();
-        ccAmplifiers.add(99);
-        ccAmplifiers.add(99);
-        ccAmplifiers.add(99);
-        ccAmplifiers.add(99);
-        ccAmplifiers.add(99);
-        ccAmplifiers.add(99);
-        selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.SLOW, ccTicks, ccAmplifiers));
-        selfTarget.addChildren(new PotionEffectMechanic(PotionEffectType.JUMP, ccTicks, ccAmplifiers));
+        selfTarget.addChildren(new RootMechanic(ccTicks, true));
         selfTarget.addChildren(new SilenceMechanic(ccTicks));
         selfTarget.addChildren(new DisarmMechanic(ccTicks));
 
@@ -285,12 +278,12 @@ public class MonkSkills {
 
 
         List<Double> percents = new ArrayList<>();
-        percents.add(0.5);
-        percents.add(0.6);
-        percents.add(0.65);
-        percents.add(0.7);
-        percents.add(0.75);
-        percents.add(0.8);
+        percents.add(0.02);
+        percents.add(0.03);
+        percents.add(0.04);
+        percents.add(0.05);
+        percents.add(0.06);
+        percents.add(0.08);
         repeatMechanic.addChildren(new HealMechanic(new ArrayList<>(), percents));
 
         skill.addTrigger(selfTarget);
@@ -304,12 +297,12 @@ public class MonkSkills {
         ticks.add(200);
         ticks.add(240);
         List<Double> multipliers = new ArrayList<>();
-        multipliers.add(0.6);
-        multipliers.add(0.65);
         multipliers.add(0.7);
         multipliers.add(0.75);
         multipliers.add(0.8);
+        multipliers.add(0.85);
         multipliers.add(0.9);
+        multipliers.add(1D);
         BuffMechanic phyDef = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks);
         BuffMechanic mgcDef = new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks);
         selfTarget.addChildren(phyDef);
@@ -388,21 +381,21 @@ public class MonkSkills {
         FlagCondition flagCondition = new FlagCondition("oceanMark", true, false);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(30.0);
-        damages.add(70.0);
-        damages.add(260.0);
-        damages.add(450.0);
+        damages.add(40.0);
+        damages.add(90.0);
+        damages.add(200.0);
+        damages.add(360.0);
+        damages.add(480.0);
         damages.add(600.0);
-        damages.add(1000.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC);
 
         List<Integer> ticks = new ArrayList<>();
+        ticks.add(20);
+        ticks.add(25);
+        ticks.add(30);
+        ticks.add(35);
         ticks.add(40);
-        ticks.add(45);
         ticks.add(50);
-        ticks.add(55);
-        ticks.add(60);
-        ticks.add(70);
         List<Integer> jumpAmplifiers = new ArrayList<>();
         jumpAmplifiers.add(-99);
         jumpAmplifiers.add(-99);
@@ -417,7 +410,7 @@ public class MonkSkills {
         slowAmplifiers.add(99);
         slowAmplifiers.add(99);
         slowAmplifiers.add(99);
-        PotionEffectMechanic stopJumping = new PotionEffectMechanic(PotionEffectType.JUMP, ticks, jumpAmplifiers);
+        RootMechanic root = new RootMechanic(ticks, true);
         PotionEffectMechanic stopWalking = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, slowAmplifiers);
 
         FlagRemoveMechanic flagRemoveMechanic = new FlagRemoveMechanic("oceanMark", false);
@@ -430,7 +423,7 @@ public class MonkSkills {
         initializeTrigger.addChildren(meleeAttackTrigger);
         meleeAttackTrigger.addChildren(flagCondition);
         flagCondition.addChildren(damageMechanic);
-        flagCondition.addChildren(stopJumping);
+        flagCondition.addChildren(root);
         flagCondition.addChildren(stopWalking);
         flagCondition.addChildren(flagRemoveMechanic);
         flagCondition.addChildren(new SoundMechanic(GoaSound.SKILL_SPLASH));
@@ -512,12 +505,12 @@ public class MonkSkills {
         LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forward, upward, right);
 
         List<Integer> ticks = new ArrayList<>();
-        ticks.add(160);
-        ticks.add(170);
-        ticks.add(180);
-        ticks.add(190);
-        ticks.add(200);
-        ticks.add(240);
+        ticks.add(40);
+        ticks.add(50);
+        ticks.add(60);
+        ticks.add(70);
+        ticks.add(80);
+        ticks.add(100);
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(0);
         amplifiers.add(0);
@@ -526,6 +519,7 @@ public class MonkSkills {
         amplifiers.add(0);
         amplifiers.add(0);
         PotionEffectMechanic levitation = new PotionEffectMechanic(PotionEffectType.LEVITATION, ticks, amplifiers);
+        RootMechanic root = new RootMechanic(ticks, false);
 
         SilenceMechanic silenceMechanic = new SilenceMechanic(ticks);
 
@@ -534,14 +528,15 @@ public class MonkSkills {
         areaTarget.addChildren(launchMechanic);
         areaTarget.addChildren(levitation);
         areaTarget.addChildren(silenceMechanic);
+        areaTarget.addChildren(root);
 
         List<Integer> repeatAmount = new ArrayList<>();
-        repeatAmount.add(32);
-        repeatAmount.add(34);
-        repeatAmount.add(36);
-        repeatAmount.add(38);
-        repeatAmount.add(40);
-        repeatAmount.add(48);
+        repeatAmount.add(8);
+        repeatAmount.add(10);
+        repeatAmount.add(12);
+        repeatAmount.add(14);
+        repeatAmount.add(16);
+        repeatAmount.add(20);
         ParticleAnimationMechanic particleAnimationMechanicBubble = new ParticleAnimationMechanic(Particle.WATER_BUBBLE, ArrangementParticle.SPHERE, 1.4, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, null);
         areaTarget.addChildren(particleAnimationMechanicBubble);

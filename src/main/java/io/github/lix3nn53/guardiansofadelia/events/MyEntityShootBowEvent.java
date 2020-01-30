@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -60,6 +61,11 @@ public class MyEntityShootBowEvent implements Listener {
                                 int rangedDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "rangedDamage");
                                 Entity projectile = event.getProjectile();
                                 float force = event.getForce();
+                                if (force < 0.7) {
+                                    player.sendMessage(ChatColor.RED + "Shooting force must be higher than 0.7 to shoot an arrow");
+                                    event.setCancelled(true);
+                                    return;
+                                }
                                 rangedDamage = (int) ((rangedDamage * force) + 0.5);
                                 PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, projectile);
                             }

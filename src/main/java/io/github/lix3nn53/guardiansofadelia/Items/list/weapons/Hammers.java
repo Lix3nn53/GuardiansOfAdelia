@@ -33,37 +33,37 @@ class Hammers {
             name = "War Hammer";
             customModelDataId = 4;
             level = 30;
-            damage = 75;
+            damage = 60;
         } else if (placementNumber == 5) {
             name = "Wind Hammer";
             customModelDataId = 5;
             level = 40;
-            damage = 120;
+            damage = 100;
         } else if (placementNumber == 6) {
             name = "Mace of Doom";
             customModelDataId = 6;
             level = 50;
-            damage = 190;
+            damage = 150;
         } else if (placementNumber == 7) {
             name = "Volcano Hammer";
             customModelDataId = 8;
             level = 60;
-            damage = 270;
+            damage = 220;
         } else if (placementNumber == 8) {
             name = "Emerald Hammer";
             customModelDataId = 10;
             level = 70;
-            damage = 360;
+            damage = 290;
         } else if (placementNumber == 9) {
             name = "Lightbringer Hammer";
             customModelDataId = 12;
             level = 80;
-            damage = 450;
+            damage = 360;
         } else if (placementNumber == 10) {
             name = "Guardian Angel Hammer";
             customModelDataId = 14;
             level = 90;
-            damage = 600;
+            damage = 480;
         }
 
         final WeaponMelee weapon = new WeaponMelee(name, tier, itemTag, material, customModelDataId, level, rpgClass, damage, bonusPercent,

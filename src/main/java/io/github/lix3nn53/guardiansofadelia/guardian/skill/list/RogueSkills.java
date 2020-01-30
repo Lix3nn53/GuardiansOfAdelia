@@ -109,30 +109,30 @@ public class RogueSkills {
         DirectionCondition directionCondition = new DirectionCondition(false);
 
         List<Integer> ticks = new ArrayList<>();
+        ticks.add(40);
+        ticks.add(45);
         ticks.add(60);
         ticks.add(65);
         ticks.add(70);
-        ticks.add(75);
         ticks.add(80);
-        ticks.add(100);
         List<Integer> amplifiers = new ArrayList<>();
+        amplifiers.add(1);
+        amplifiers.add(2);
         amplifiers.add(2);
         amplifiers.add(3);
+        amplifiers.add(3);
         amplifiers.add(4);
-        amplifiers.add(5);
-        amplifiers.add(6);
-        amplifiers.add(7);
         PotionEffectMechanic slow = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
 
         WarpTargetMechanic warpTargetMechanic = new WarpTargetMechanic(false);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(100D);
-        damages.add(170D);
-        damages.add(240D);
+        damages.add(80D);
+        damages.add(140D);
+        damages.add(190D);
+        damages.add(250D);
         damages.add(320D);
-        damages.add(400D);
-        damages.add(530D);
+        damages.add(410D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         skill.addTrigger(selfTarget);
@@ -324,17 +324,17 @@ public class RogueSkills {
         FlagCondition phantomCondition = new FlagCondition("phantom", true, false);
 
         List<Integer> ticks = new ArrayList<>();
+        ticks.add(40);
+        ticks.add(45);
         ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
-        ticks.add(60);
+        ticks.add(65);
+        ticks.add(70);
+        ticks.add(80);
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(1);
-        amplifiers.add(1);
         amplifiers.add(2);
         amplifiers.add(2);
+        amplifiers.add(3);
         amplifiers.add(3);
         amplifiers.add(4);
         PotionEffectMechanic slow = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
@@ -350,8 +350,8 @@ public class RogueSkills {
         damages.add(60D);
         damages.add(120D);
         damages.add(200D);
-        damages.add(270D);
-        damages.add(450D);
+        damages.add(260D);
+        damages.add(420D);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.RANGED);
 
         FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 99);
@@ -418,10 +418,10 @@ public class RogueSkills {
         List<Double> damages = new ArrayList<>();
         damages.add(70.0);
         damages.add(140.0);
-        damages.add(280.0);
-        damages.add(450.0);
-        damages.add(600.0);
-        damages.add(1000.0);
+        damages.add(220.0);
+        damages.add(360.0);
+        damages.add(480.0);
+        damages.add(720.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         directionCondition.addChildren(selfTarget);
@@ -481,19 +481,19 @@ public class RogueSkills {
         SelfTarget selfTarget = new SelfTarget();
 
         List<Integer> ticks = new ArrayList<>();
+        ticks.add(160);
         ticks.add(180);
         ticks.add(200);
         ticks.add(220);
         ticks.add(240);
-        ticks.add(260);
-        ticks.add(300);
+        ticks.add(280);
         List<Double> damageMultipliers = new ArrayList<>();
+        damageMultipliers.add(0.1);
+        damageMultipliers.add(0.15);
         damageMultipliers.add(0.2);
+        damageMultipliers.add(0.25);
         damageMultipliers.add(0.3);
         damageMultipliers.add(0.4);
-        damageMultipliers.add(0.5);
-        damageMultipliers.add(0.6);
-        damageMultipliers.add(0.8);
         BuffMechanic critDamageBuff = new BuffMechanic(BuffType.CRIT_DAMAGE, damageMultipliers, ticks);
         List<Double> chanceMultipliers = new ArrayList<>();
         chanceMultipliers.add(0.05);
@@ -523,12 +523,12 @@ public class RogueSkills {
         selfTarget.addChildren(glowing);
 
         List<Integer> repeatAmount = new ArrayList<>();
+        repeatAmount.add(32);
         repeatAmount.add(36);
         repeatAmount.add(40);
         repeatAmount.add(44);
         repeatAmount.add(48);
-        repeatAmount.add(52);
-        repeatAmount.add(60);
+        repeatAmount.add(56);
         ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.PURPLE, 4));
         selfTarget.addChildren(particleAnimationMechanic);

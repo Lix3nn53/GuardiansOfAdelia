@@ -28,42 +28,42 @@ class Bows {
             name = "Crossbow";
             customModelDataId = 3;
             level = 20;
-            rangedDamage = 40;
+            rangedDamage = 32;
         } else if (placementNumber == 4) {
             name = "Battle Bow";
             customModelDataId = 4;
             level = 30;
-            rangedDamage = 100;
+            rangedDamage = 80;
         } else if (placementNumber == 5) {
             name = "Satet Bow";
             customModelDataId = 5;
             level = 40;
-            rangedDamage = 160;
+            rangedDamage = 128;
         } else if (placementNumber == 6) {
             name = "Leaf Fairy Bow";
             customModelDataId = 6;
             level = 50;
-            rangedDamage = 255;
+            rangedDamage = 205;
         } else if (placementNumber == 7) {
             name = "Crossbow of Doom";
             customModelDataId = 8;
             level = 60;
-            rangedDamage = 360;
+            rangedDamage = 290;
         } else if (placementNumber == 8) {
             name = "Unicorn Bow";
             customModelDataId = 10;
             level = 70;
-            rangedDamage = 480;
+            rangedDamage = 390;
         } else if (placementNumber == 9) {
             name = "Zephyr Bow";
             customModelDataId = 12;
             level = 80;
-            rangedDamage = 600;
+            rangedDamage = 480;
         } else if (placementNumber == 10) {
             name = "Arcade Bow";
             customModelDataId = 14;
             level = 90;
-            rangedDamage = 800;
+            rangedDamage = 640;
         }
 
         int damage = rangedDamage / 4;

@@ -98,10 +98,10 @@ public class WarriorSkills {
         List<Double> damages = new ArrayList<>();
         damages.add(24.0);
         damages.add(60.0);
-        damages.add(240.0);
-        damages.add(390.0);
-        damages.add(540.0);
-        damages.add(900.0);
+        damages.add(180.0);
+        damages.add(300.0);
+        damages.add(420.0);
+        damages.add(720.0);
 
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
@@ -169,12 +169,12 @@ public class WarriorSkills {
                 0, 1, 0, 200, true, SmallFireball.class, Particle.FLAME, ArrangementParticle.SPHERE, 0.5, 4, null, true);
 
         List<Double> damages = new ArrayList<>();
-        damages.add(142D);
-        damages.add(240D);
-        damages.add(324D);
-        damages.add(432D);
-        damages.add(540D);
-        damages.add(720D);
+        damages.add(24.0);
+        damages.add(60.0);
+        damages.add(180.0);
+        damages.add(300.0);
+        damages.add(420.0);
+        damages.add(720.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         List<Double> forwards = new ArrayList<>();
@@ -376,10 +376,10 @@ public class WarriorSkills {
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(2);
         amplifiers.add(3);
+        amplifiers.add(3);
+        amplifiers.add(4);
         amplifiers.add(4);
         amplifiers.add(5);
-        amplifiers.add(6);
-        amplifiers.add(7);
         PotionEffectMechanic potionEffectMechanic = new PotionEffectMechanic(PotionEffectType.SPEED, ticks, amplifiers);
 
         List<Integer> repeatAmount = new ArrayList<>();
@@ -493,10 +493,10 @@ public class WarriorSkills {
         List<Double> damages = new ArrayList<>();
         damages.add(200.0);
         damages.add(480.0);
-        damages.add(960.0);
-        damages.add(1600.0);
-        damages.add(2200.0);
-        damages.add(3600.0);
+        damages.add(760.0);
+        damages.add(1200.0);
+        damages.add(1800.0);
+        damages.add(2600.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 11, 33, 0, 0, 0, 0, 0.5, 0, 0, null);

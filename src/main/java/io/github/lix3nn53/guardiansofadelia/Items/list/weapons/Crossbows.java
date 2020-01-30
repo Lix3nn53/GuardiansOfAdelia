@@ -28,42 +28,42 @@ class Crossbows {
             name = "Crossbow";
             customModelDataId = 3;
             level = 20;
-            rangedDamage = 60;
+            rangedDamage = 48;
         } else if (placementNumber == 4) {
             name = "Battle Crossbow";
             customModelDataId = 4;
             level = 30;
-            rangedDamage = 150;
+            rangedDamage = 120;
         } else if (placementNumber == 5) {
             name = "Satet Crossbow";
             customModelDataId = 5;
             level = 40;
-            rangedDamage = 240;
+            rangedDamage = 190;
         } else if (placementNumber == 6) {
             name = "Leaf Fairy Crossbow";
             customModelDataId = 6;
             level = 50;
-            rangedDamage = 380;
+            rangedDamage = 300;
         } else if (placementNumber == 7) {
             name = "Crossbow of Doom";
             customModelDataId = 8;
             level = 60;
-            rangedDamage = 540;
+            rangedDamage = 430;
         } else if (placementNumber == 8) {
             name = "Unicorn Crossbow";
             customModelDataId = 10;
             level = 70;
-            rangedDamage = 720;
+            rangedDamage = 580;
         } else if (placementNumber == 9) {
             name = "Zephyr Crossbow";
             customModelDataId = 12;
             level = 80;
-            rangedDamage = 900;
+            rangedDamage = 720;
         } else if (placementNumber == 10) {
             name = "Arcade Crossbow";
             customModelDataId = 14;
             level = 90;
-            rangedDamage = 1200;
+            rangedDamage = 960;
         }
 
         int damage = rangedDamage / 4;

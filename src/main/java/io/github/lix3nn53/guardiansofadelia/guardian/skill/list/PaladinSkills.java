@@ -96,10 +96,10 @@ public class PaladinSkills {
         List<Double> damages = new ArrayList<>();
         damages.add(20.0);
         damages.add(50.0);
-        damages.add(190.0);
-        damages.add(300.0);
-        damages.add(420.0);
-        damages.add(700.0);
+        damages.add(150.0);
+        damages.add(240.0);
+        damages.add(360.0);
+        damages.add(580.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
         List<Double> speeds = new ArrayList<>();
@@ -263,7 +263,7 @@ public class PaladinSkills {
         ticks.add(75);
         ticks.add(80);
         ticks.add(100);
-        DisguiseMechanic disguiseMechanic = new DisguiseMechanic(DisguiseType.PIG, false, ticks);
+        DisguiseMechanic disguiseMechanic = new DisguiseMechanic(DisguiseType.PIG, true, ticks);
 
         List<Integer> amplifiers = new ArrayList<>();
         amplifiers.add(2);
@@ -347,11 +347,11 @@ public class PaladinSkills {
         tookPhysicalDamageTrigger.addChildren(selfTarget);
         selfTarget.addChildren(healthCondition);
         List<Double> percents = new ArrayList<>();
-        percents.add(0.3);
-        percents.add(0.35);
         percents.add(0.4);
+        percents.add(0.45);
         percents.add(0.5);
-        percents.add(0.6);
+        percents.add(0.55);
+        percents.add(0.60);
         percents.add(0.8);
         HealMechanic healMechanic = new HealMechanic(new ArrayList<>(), percents);
         healthCondition.addChildren(healMechanic);
@@ -460,7 +460,7 @@ public class PaladinSkills {
 
         LandTrigger landTrigger = new LandTrigger();
 
-        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>());//0 for infinite
+        ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>()); //0 for infinite
         ImmunityRemoveMechanic immunityRemoveMechanic = new ImmunityRemoveMechanic(EntityDamageEvent.DamageCause.FALL, 5);
 
         List<Integer> repeatAmounts = new ArrayList<>();

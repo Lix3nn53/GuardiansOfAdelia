@@ -20,7 +20,7 @@ public class Dungeon extends Minigame {
 
     public Dungeon(int levelReq, int timeLimitInMinutes, DungeonTheme theme, int roomNo, List<Location> startLocation, String bossMobName) {
         super("Dungeon " + theme.getName(), ChatColor.AQUA, theme.getName(), roomNo, levelReq, 4, 1, startLocation, timeLimitInMinutes,
-                1, MiniGameManager.getPortalLocationOfDungeonTheme(theme), 4, 0, 24, 1);
+                5, MiniGameManager.getPortalLocationOfDungeonTheme(theme), 4, 0, 24, 1);
         this.theme = theme;
         this.bossMobName = bossMobName;
         reformParties();

@@ -88,8 +88,8 @@ public class KnightSkills {
         damages.add(12.0);
         damages.add(30.0);
         damages.add(120.0);
-        damages.add(195.0);
-        damages.add(270.0);
+        damages.add(200.0);
+        damages.add(280.0);
         damages.add(450.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
@@ -174,12 +174,12 @@ public class KnightSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         List<Double> upward = new ArrayList<>();
-        upward.add(1.2D);
-        upward.add(1.4D);
-        upward.add(1.6D);
-        upward.add(1.8D);
-        upward.add(2D);
-        upward.add(2.4D);
+        upward.add(1.2);
+        upward.add(1.3);
+        upward.add(1.4);
+        upward.add(1.5);
+        upward.add(1.6);
+        upward.add(1.8);
         List<Double> forward = new ArrayList<>();
         forward.add(0D);
         forward.add(0D);
@@ -261,12 +261,12 @@ public class KnightSkills {
         AreaTarget areaTarget = new AreaTarget(false, true, false, 99, areas);
 
         List<Double> speeds = new ArrayList<>();
+        speeds.add(-2.5D);
+        speeds.add(-2.75D);
         speeds.add(-3D);
-        speeds.add(-3.25D);
-        speeds.add(-3.5D);
-        speeds.add(-3.75D);
+        speeds.add(-3.25);
+        speeds.add(-3.5);
         speeds.add(-4D);
-        speeds.add(-4.5D);
         PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speeds, true);
 
         TauntMechanic tauntMechanic = new TauntMechanic();
@@ -330,12 +330,12 @@ public class KnightSkills {
         TookMagicalDamageTrigger tookMagicalDamageTrigger = new TookMagicalDamageTrigger(cooldowns);
 
         List<Integer> ccTicks = new ArrayList<>();
-        ccTicks.add(60);
         ccTicks.add(70);
+        ccTicks.add(75);
         ccTicks.add(80);
+        ccTicks.add(85);
         ccTicks.add(90);
         ccTicks.add(100);
-        ccTicks.add(120);
 
         SilenceMechanic silenceMechanic = new SilenceMechanic(ccTicks);
 

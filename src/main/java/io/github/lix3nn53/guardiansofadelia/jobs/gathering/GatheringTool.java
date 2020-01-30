@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -44,9 +45,10 @@ public enum GatheringTool {
                 itemMeta.setDisplayName(ChatColor.GREEN + "Fishing Rod" + " (" + durability + " Uses left)");
                 itemMeta.setLore(new ArrayList() {{
                     add("");
-                    add(ChatColor.GRAY + "Material collection tool");
+                    add(ChatColor.GREEN + "Fishing: " + ChatColor.YELLOW + "Raw Cod, Raw Salmon");
                 }});
                 itemMeta.setUnbreakable(true);
+                itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
                 break;
@@ -57,9 +59,12 @@ public enum GatheringTool {
                 itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Hoe" + " (" + durability + " Uses left)");
                 itemMeta.setLore(new ArrayList() {{
                     add("");
-                    add(ChatColor.GRAY + "Material collection tool");
+                    add(ChatColor.GREEN + "Flowers: " + ChatColor.YELLOW + "Rose");
+                    add(ChatColor.GREEN + "Leaves: " + ChatColor.YELLOW + "Cherry");
+                    add(ChatColor.GREEN + "Cob Webs: " + ChatColor.YELLOW + "String, Silk, Soft Silk");
                 }});
                 itemMeta.setUnbreakable(true);
+                itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
                 break;
@@ -70,9 +75,16 @@ public enum GatheringTool {
                 itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Pickaxe" + " (" + durability + " Uses left)");
                 itemMeta.setLore(new ArrayList() {{
                     add("");
-                    add(ChatColor.GRAY + "Material collection tool");
+                    add(ChatColor.GREEN + "Coal Ore: " + ChatColor.YELLOW + "Copper Mine");
+                    add(ChatColor.GREEN + "Iron Ore: " + ChatColor.YELLOW + "Iron Mine, Steel Mine");
+                    add(ChatColor.GREEN + "Gold Ore: " + ChatColor.YELLOW + "Gold Dust");
+                    add(ChatColor.GREEN + "Redstone Ore: " + ChatColor.YELLOW + "Ruby Stone");
+                    add(ChatColor.GREEN + "Lapis Ore: " + ChatColor.YELLOW + "Amethyst Stone, Sapphire Stone");
+                    add(ChatColor.GREEN + "Emerald Ore: " + ChatColor.YELLOW + "Jade Stone");
+                    add(ChatColor.GREEN + "Diamond Ore: " + ChatColor.YELLOW + "Diamond Mine, Titanium Mine");
                 }});
                 itemMeta.setUnbreakable(true);
+                itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
                 break;
@@ -83,9 +95,10 @@ public enum GatheringTool {
                 itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Axe" + " (" + durability + " Uses left)");
                 itemMeta.setLore(new ArrayList() {{
                     add("");
-                    add(ChatColor.GRAY + "Material collection tool");
+                    add(ChatColor.GREEN + "Logs: " + ChatColor.YELLOW + "Wooden Plank, Wood Log");
                 }});
                 itemMeta.setUnbreakable(true);
+                itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
                 break;
