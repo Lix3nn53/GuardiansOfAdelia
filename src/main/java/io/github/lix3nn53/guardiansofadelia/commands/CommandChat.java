@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
+import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -29,6 +30,19 @@ public class CommandChat implements CommandExecutor {
             if (args.length < 1) {
                 player.sendMessage(ChatColor.YELLOW + "/chat item - show item in chat");
             } else if (args[0].equals("item")) {
+
+                UUID uuid = player.getUniqueId();
+                if (!GuardianDataManager.hasGuardianData(uuid)) return false;
+
+                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+                PremiumRank premiumRank = guardianData.getPremiumRank();
+
+                if (!(premiumRank.equals(PremiumRank.LEGEND) || premiumRank.equals(PremiumRank.TITAN))) {
+                    player.sendMessage(ChatColor.RED + "Required premium rank to display items in chat is " + ChatColor.GOLD + "LEGEND");
+                    return false;
+                }
+
                 GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.YELLOW + "Select item to show in chat", 0);
 
                 ItemStack filler = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
@@ -41,6 +55,8 @@ public class CommandChat implements CommandExecutor {
 
                 for (ItemStack itemStack : inventory.getContents()) {
                     if (itemStack == null) continue;
+                    Material type = itemStack.getType();
+                    if (type.equals(Material.BOOK) || type.equals(Material.IRON_HOE)) continue;
                     guiGeneric.addItem(itemStack);
                 }
 
@@ -57,43 +73,39 @@ public class CommandChat implements CommandExecutor {
                     guiGeneric.addItem(itemStack);
                 }
 
-                UUID uuid = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-                    if (guardianData.hasActiveCharacter()) {
-                        filler = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
-                        itemMeta = filler.getItemMeta();
-                        itemMeta.setDisplayName(ChatColor.GRAY + "Equipped passive items");
-                        filler.setItemMeta(itemMeta);
-                        guiGeneric.addItem(filler);
+                if (guardianData.hasActiveCharacter()) {
+                    filler = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+                    itemMeta = filler.getItemMeta();
+                    itemMeta.setDisplayName(ChatColor.GRAY + "Equipped passive items");
+                    filler.setItemMeta(itemMeta);
+                    guiGeneric.addItem(filler);
 
-                        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
-                        RPGInventory rpgInventory = activeCharacter.getRpgInventory();
+                    RPGInventory rpgInventory = activeCharacter.getRpgInventory();
 
-                        if (!rpgInventory.getRingSlot().isEmpty()) {
-                            guiGeneric.addItem(rpgInventory.getRingSlot().getItemOnSlot());
-                        }
+                    if (!rpgInventory.getRingSlot().isEmpty()) {
+                        guiGeneric.addItem(rpgInventory.getRingSlot().getItemOnSlot());
+                    }
 
-                        if (!rpgInventory.getEarringSlot().isEmpty()) {
-                            guiGeneric.addItem(rpgInventory.getEarringSlot().getItemOnSlot());
-                        }
+                    if (!rpgInventory.getEarringSlot().isEmpty()) {
+                        guiGeneric.addItem(rpgInventory.getEarringSlot().getItemOnSlot());
+                    }
 
-                        if (!rpgInventory.getNecklaceSlot().isEmpty()) {
-                            guiGeneric.addItem(rpgInventory.getNecklaceSlot().getItemOnSlot());
-                        }
+                    if (!rpgInventory.getNecklaceSlot().isEmpty()) {
+                        guiGeneric.addItem(rpgInventory.getNecklaceSlot().getItemOnSlot());
+                    }
 
-                        if (!rpgInventory.getGloveSlot().isEmpty()) {
-                            guiGeneric.addItem(rpgInventory.getGloveSlot().getItemOnSlot());
-                        }
+                    if (!rpgInventory.getGloveSlot().isEmpty()) {
+                        guiGeneric.addItem(rpgInventory.getGloveSlot().getItemOnSlot());
+                    }
 
-                        if (!rpgInventory.getParrotSlot().isEmpty()) {
-                            guiGeneric.addItem(rpgInventory.getParrotSlot().getItemOnSlot());
-                        }
+                    if (!rpgInventory.getParrotSlot().isEmpty()) {
+                        guiGeneric.addItem(rpgInventory.getParrotSlot().getItemOnSlot());
+                    }
 
-                        if (!rpgInventory.getEggSlot().isEmpty()) {
-                            guiGeneric.addItem(rpgInventory.getEggSlot().getItemOnSlot());
-                        }
+                    if (!rpgInventory.getEggSlot().isEmpty()) {
+                        guiGeneric.addItem(rpgInventory.getEggSlot().getItemOnSlot());
                     }
                 }
 
