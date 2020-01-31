@@ -42,11 +42,13 @@ public class PluginChannelListener implements PluginMessageListener {
                 boolean responseSuccess = webResponse.isSuccess();
                 String responseMsg = webResponse.getMsg();
                 String responseMinecraftUuid = webResponse.getMinecraftUuid();
+                String responseMinecraftUsername = webResponse.getMinecraftUsername();
                 int responseProductId = webResponse.getProductId();
 
                 responseToSend.add(String.valueOf(responseSuccess));
                 responseToSend.add(responseMsg);
                 responseToSend.add(responseMinecraftUuid);
+                responseToSend.add(responseMinecraftUsername);
                 responseToSend.add(String.valueOf(responseProductId));
 
                 sendToBungeeCord(player, "webPurchaseResponse", responseToSend);

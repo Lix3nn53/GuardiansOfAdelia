@@ -102,17 +102,17 @@ public class RequestHandler {
         int productId = webPurchase.getProductId();
         int payment = webPurchase.getPayment();
 
-        String playerName = "NULL";
+        String minecraftUsername = "NULL";
 
         if (!productIdToWebProduct.containsKey(productId)) {
-            return new WebResponse(false, "No such product1", minecraftUuidString, productId);
+            return new WebResponse(false, "No such product1", minecraftUuidString, minecraftUsername, productId);
         }
 
         WebProduct webProduct = productIdToWebProduct.get(productId);
         int cost = webProduct.getCost();
 
         if (cost != payment) {
-            return new WebResponse(false, "No such product2", minecraftUuidString, productId);
+            return new WebResponse(false, "No such product2", minecraftUuidString, minecraftUsername, productId);
         }
 
         WebProductType type = webProduct.getType();
@@ -121,6 +121,7 @@ public class RequestHandler {
 
             Player player = Bukkit.getPlayer(minecraftUuid);
             if (player != null) {
+                minecraftUsername = player.getName();
                 InventoryView openInventory = player.getOpenInventory();
                 String title = openInventory.getTitle();
 
@@ -138,17 +139,18 @@ public class RequestHandler {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                     boolean success = guardianData.addToPremiumStorage(itemStack);
                     if (!success) {
-                        return new WebResponse(false, "Your premium-storage is full!", minecraftUuidString, productId);
+                        return new WebResponse(false, "Your premium-storage is full!", minecraftUuidString, minecraftUsername, productId);
                     }
-                    playerName = player.getName();
                 }
             } else { //player is offline
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(minecraftUuid);
                 UUID uuid = offlinePlayer.getUniqueId();
 
                 if (!uuidExists(uuid)) {
-                    return new WebResponse(false, "You must be logged in to game server at least once!", minecraftUuidString, productId);
+                    return new WebResponse(false, "You must be logged in to game server at least once!", minecraftUuidString, minecraftUsername, productId);
                 }
+
+                minecraftUsername = offlinePlayer.getName();
 
                 try {
                     ItemStack[] premiumStorage = DatabaseQueries.getPremiumStorage(uuid);
@@ -158,17 +160,16 @@ public class RequestHandler {
                     if (premiumStorage != null) list = new ArrayList<>(Arrays.asList(premiumStorage));
 
                     if (list.size() >= 54) {
-                        return new WebResponse(false, "Your premium-storage is full!", minecraftUuidString, productId);
+                        return new WebResponse(false, "Your premium-storage is full!", minecraftUuidString, minecraftUsername, productId);
                     }
 
                     list.add(itemStack);
                     ItemStack[] newPremiumStorage = list.toArray(new ItemStack[0]);
                     DatabaseQueries.setPremiumStorage(uuid, newPremiumStorage);
-                    playerName = offlinePlayer.getName();
                 } catch (Exception e) {
                     e.printStackTrace();
 
-                    return new WebResponse(false, "A database error occurred.", minecraftUuidString, productId);
+                    return new WebResponse(false, "A database error occurred.", minecraftUuidString, minecraftUsername, productId);
                 }
             }
         } else if (type.equals(WebProductType.RANK)) {
@@ -176,6 +177,7 @@ public class RequestHandler {
 
             Player player = Bukkit.getPlayer(minecraftUuid);
             if (player != null) {
+                minecraftUsername = player.getName();
                 UUID uuid = player.getUniqueId();
                 if (GuardianDataManager.hasGuardianData(uuid)) {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -184,35 +186,33 @@ public class RequestHandler {
 
                 try {
                     DatabaseQueries.setPremiumRankWithDate(uuid, premiumRank);
-                    playerName = player.getName();
                 } catch (Exception e) {
                     e.printStackTrace();
 
-                    return new WebResponse(false, "A database error occurred.", minecraftUuidString, productId);
+                    return new WebResponse(false, "A database error occurred.", minecraftUuidString, minecraftUsername, productId);
                 }
             } else { //player is offline
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(minecraftUuid);
                 UUID uuid = offlinePlayer.getUniqueId();
 
                 if (!uuidExists(uuid)) {
-                    return new WebResponse(false, "You must be logged in to game server at least once!", minecraftUuidString, productId);
+                    return new WebResponse(false, "You must be logged in to game server at least once!", minecraftUuidString, minecraftUsername, productId);
                 }
 
                 try {
                     DatabaseQueries.setPremiumRankWithDate(uuid, premiumRank);
 
-                    playerName = offlinePlayer.getName();
+                    minecraftUsername = offlinePlayer.getName();
                 } catch (Exception e) {
                     e.printStackTrace();
 
-                    return new WebResponse(false, "A database error occurred.", minecraftUuidString, productId);
+                    return new WebResponse(false, "A database error occurred.", minecraftUuidString, minecraftUsername, productId);
                 }
             }
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info("Web purchase: " + playerName + " bought " + webProduct.getProductName() + " for " + payment + " credits!");
-        Bukkit.broadcastMessage(ChatColor.GOLD + "Thanks for your support! " + ChatColor.GRAY + playerName + " bought " + webProduct.getProductName() + ChatColor.GRAY + " from web-store!");
-        return new WebResponse(true, "Item purchased successfully!", minecraftUuidString, productId);
+        GuardiansOfAdelia.getInstance().getLogger().info("Web purchase: " + minecraftUsername + " bought " + webProduct.getProductName() + " for " + payment + " credits!");
+        return new WebResponse(true, "Item purchased successfully!", minecraftUuidString, minecraftUsername, productId);
     }
 
     public static void test(int productId, Player player) {
