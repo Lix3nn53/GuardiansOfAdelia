@@ -16,10 +16,6 @@ public class OtherItems {
         im.setLore(new ArrayList() {{
             add("");
             add(ChatColor.GRAY + "");
-            add("");
-            add(ChatColor.GREEN + "✔ ");
-            add(ChatColor.GREEN + "✔ ");
-
         }});
         item.setItemMeta(im);
         return item;

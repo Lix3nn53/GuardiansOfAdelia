@@ -43,7 +43,7 @@ public class QuestsPhase6 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(43, "Kahal Plains", story,
                 startMsg, "Cross the Sea of Greed and talk to Ashild in Kahal Plains",
-                "", tasks, itemPrizes, 27, 20000, 0, requiredQuests,
+                "", tasks, itemPrizes, 27, 16000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 39, 41);
     }
@@ -64,7 +64,7 @@ public class QuestsPhase6 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Ashild";
         Quest quest = new Quest(44, "Frozen hunt 1", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 27, 200000, 0, requiredQuests,
+                "", tasks, itemPrizes, 27, 160000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 41, 41);
     }
@@ -84,7 +84,7 @@ public class QuestsPhase6 {
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Ashild";
         Quest quest = new Quest(45, "Little jockeys", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 27, 200000, 0, requiredQuests,
+                "", tasks, itemPrizes, 27, 160000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 41, 41);
     }
@@ -105,7 +105,7 @@ public class QuestsPhase6 {
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Ashild";
         Quest quest = new Quest(46, "Bottom of the cave", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 27, 200000, 0, requiredQuests,
+                "", tasks, itemPrizes, 27, 160000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 41, 41);
     }
@@ -130,7 +130,7 @@ public class QuestsPhase6 {
         String objectiveText = "TASK_PROGRESS_1\nfrom frozens then talk back to Ashild";
         Quest quest = new Quest(47, "Frozen shards", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 27, 200000, 0, requiredQuests,
+                "", tasks, itemPrizes, 27, 160000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 41, 41);
     }
@@ -152,7 +152,7 @@ public class QuestsPhase6 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nthen talk to Ashild";
         Quest quest = new Quest(48, "Frozen hunt 2", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 27, 200000, 0, requiredQuests,
+                "", tasks, itemPrizes, 27, 160000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 41, 41);
     }
@@ -177,7 +177,7 @@ public class QuestsPhase6 {
         String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Ashild";
         Quest quest = new Quest(49, "The necromancer", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 27, 400000, 0, requiredQuests,
+                "", tasks, itemPrizes, 27, 320000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 41, 41);
     }
@@ -194,7 +194,7 @@ public class QuestsPhase6 {
         String objectiveText = "Report back to Captain Lenna, Kahal Plains are safe for travelers again";
         Quest quest = new Quest(50, "Kahal Plains report", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 27, 30000, 0, requiredQuests,
+                "", tasks, itemPrizes, 27, 24000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 41, 39);
     }

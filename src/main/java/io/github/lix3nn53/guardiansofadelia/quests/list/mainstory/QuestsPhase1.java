@@ -71,7 +71,7 @@ public class QuestsPhase1 {
                 + "Then meet Sergeant Armin in building near city entrance";
         Quest quest = new Quest(6, "Welcome to Adelia", story,
                 "Time to meet villagers of Roumen!", obj,
-                "", tasks, itemPrizes, 4, 10, 0, requiredQuests,
+                "", tasks, itemPrizes, 4, 40, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 31, 32);
     }
@@ -91,7 +91,7 @@ public class QuestsPhase1 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.\nDon't forget to use your boat!";
         Quest quest = new Quest(7, "Meet the hobbits", story,
                 startMsg, startMsg + "\nTalk with hobbit Village Elder Odo",
-                "", tasks, itemPrizes, 4, 20, 0, requiredQuests,
+                "", tasks, itemPrizes, 4, 80, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 32, 33);
     }
@@ -114,7 +114,7 @@ public class QuestsPhase1 {
         String objectiveText = "Lets enter Forest of Slumber!\nTASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk to Adventurer Milo";
         Quest quest = new Quest(8, "Forest of Slumber", story,
                 "Don't forget to select Adventurer Milo as your compass target!", objectiveText,
-                "", tasks, itemPrizes, 4, 500, 0, requiredQuests,
+                "", tasks, itemPrizes, 4, 200, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 33, 34);
     }
@@ -137,7 +137,7 @@ public class QuestsPhase1 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk to Adventurer Milo";
         Quest quest = new Quest(9, "Sticky situation", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 4, 700, 0, requiredQuests,
+                "", tasks, itemPrizes, 4, 500, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 34, 34);
     }
@@ -157,7 +157,7 @@ public class QuestsPhase1 {
         String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nThen talk to Adventurer Milo";
         Quest quest = new Quest(10, "Sticky tower", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 4, 1000, 0, requiredQuests,
+                "", tasks, itemPrizes, 4, 800, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 34, 34);
     }
@@ -177,7 +177,7 @@ public class QuestsPhase1 {
         String objectiveText = "Bring good news about Forest of Slumber\nTASK_PROGRESS_1\nThen report back to Sergeant Armin";
         Quest quest = new Quest(11, "Forest of Slumber report", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 4, 100, 0, requiredQuests,
+                "", tasks, itemPrizes, 4, 80, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 34, 32);
     }

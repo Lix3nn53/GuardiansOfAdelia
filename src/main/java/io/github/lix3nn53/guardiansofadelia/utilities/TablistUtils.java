@@ -21,7 +21,7 @@ public class TablistUtils {
 
     public static void updateTablist(Player player) {
         UUID uuid = player.getUniqueId();
-        StringBuilder header = new StringBuilder(player.getDisplayName());
+        StringBuilder header = new StringBuilder(ChatColor.GOLD + "Guardians of Adelia");
         header.append("\n");
         StringBuilder footer = new StringBuilder();
         if (GuardianDataManager.hasGuardianData(uuid)) {

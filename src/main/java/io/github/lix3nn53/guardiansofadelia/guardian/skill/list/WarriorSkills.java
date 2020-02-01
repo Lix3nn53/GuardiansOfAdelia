@@ -184,13 +184,13 @@ public class WarriorSkills {
         forwards.add(0D);
         forwards.add(0D);
         forwards.add(0D);
-        List<Double> upwards = new ArrayList<>();
-        upwards.add(1.7);
-        upwards.add(1.75);
-        upwards.add(1.8);
-        upwards.add(1.85);
-        upwards.add(1.9);
-        upwards.add(2D);
+        List<Double> upward = new ArrayList<>();
+        upward.add(1.2);
+        upward.add(1.3);
+        upward.add(1.4);
+        upward.add(1.5);
+        upward.add(1.6);
+        upward.add(1.8);
         List<Double> right = new ArrayList<>();
         right.add(0D);
         right.add(0D);
@@ -198,7 +198,7 @@ public class WarriorSkills {
         right.add(0D);
         right.add(0D);
         right.add(0D);
-        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forwards, upwards, right);
+        LaunchMechanic launchMechanic = new LaunchMechanic(LaunchMechanic.Relative.TARGET, forwards, upward, right);
 
         FilterCurrentTargets filterCurrentTargets = new FilterCurrentTargets(false, true, false, 99);
 

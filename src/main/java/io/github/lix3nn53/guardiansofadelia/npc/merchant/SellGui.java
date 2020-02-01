@@ -100,9 +100,7 @@ public class SellGui extends GuiGeneric {
         GearLevel gearLevelOfItem = GearLevel.getGearLevelOfItem(itemStack);
         int multiplier = gearLevelOfItem.getWeaponAndPassiveNo();
 
-        double value = multiplier / 2.0;
-
-        return (int) ((multiplier * multiplier) / value + 0.5);
+        return (int) ((multiplier * multiplier) + 0.5) * itemStack.getAmount();
     }
 
     public void finish(Player player) {

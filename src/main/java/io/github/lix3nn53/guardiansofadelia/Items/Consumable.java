@@ -29,7 +29,7 @@ public enum Consumable {
     POTION_INSTANT_HYBRID,
     POTION_REGENERATION_HEALTH;
 
-    private final double HYBIRD_NERF = 0.65;
+    private final double HYBIRD_NERF = 0.6;
     private final double REGEN_NERF = 0.1;
 
     public void consume(Player player, int skillLevel, ItemStack itemStack) {
@@ -371,25 +371,25 @@ public enum Consumable {
     public int getInstantManaAmount(int level) {
         switch (level) {
             case 1:
-                return 60;
+                return 40;
             case 2:
-                return 80;
+                return 60;
             case 3:
-                return 120;
+                return 80;
             case 4:
-                return 160;
+                return 100;
             case 5:
-                return 180;
+                return 120;
             case 6:
-                return 200;
+                return 140;
             case 7:
-                return 240;
+                return 160;
             case 8:
-                return 280;
+                return 180;
             case 9:
-                return 320;
+                return 200;
             case 10:
-                return 400;
+                return 240;
         }
         return 60;
     }

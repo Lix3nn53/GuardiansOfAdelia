@@ -51,7 +51,7 @@ public class QuestsPhase10 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(80, "ggggggggggggggggg", story,
                 startMsg, "TASK_PROGRESS_1\nThen talk back to Archangel",
-                "", tasks, itemPrizes, 64, 272000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 220000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 49);
     }
@@ -74,7 +74,7 @@ public class QuestsPhase10 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Archangel";
         Quest quest = new Quest(81, "Darkness hunt", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 544000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 420000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 49);
     }
@@ -96,7 +96,7 @@ public class QuestsPhase10 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Archangel";
         Quest quest = new Quest(82, "Pillager hunt 1", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 544000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 420000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 49);
     }
@@ -118,7 +118,7 @@ public class QuestsPhase10 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Archangel";
         Quest quest = new Quest(83, "Pillager hunt 2", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 544000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 420000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 49);
     }
@@ -140,7 +140,7 @@ public class QuestsPhase10 {
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Archangel";
         Quest quest = new Quest(84, "Temple of Spirit", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 544000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 420000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 49);
     }
@@ -166,7 +166,7 @@ public class QuestsPhase10 {
         String objectiveText = "TASK_PROGRESS_1\nfrom pillagers then talk back to Archangel";
         Quest quest = new Quest(85, "Dark souls", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 544000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 420000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 49);
     }
@@ -179,7 +179,6 @@ public class QuestsPhase10 {
         requiredQuests.add(80);
         List<Task> tasks = new ArrayList<>();
 
-
         TaskKill taskKill = new TaskKill(ChatColor.DARK_PURPLE + "Commander Pillager", 91);
         tasks.add(taskKill);
         TaskKill taskKill2 = new TaskKill(ChatColor.YELLOW + "Ravager", 91);
@@ -189,7 +188,7 @@ public class QuestsPhase10 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nthen talk back to Archangel";
         Quest quest = new Quest(86, "Pillager hunt 3", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 544000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 420000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 49);
     }
@@ -211,7 +210,7 @@ public class QuestsPhase10 {
         String objectiveText = "Talk with Eohr in Temple of Elements";
         Quest quest = new Quest(87, "Temple of Elements", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 68000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 55000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 50);
     }
@@ -231,7 +230,7 @@ public class QuestsPhase10 {
         String objectiveText = "TASK_PROGRESS_1\nTime to face the nightmare!";
         Quest quest = new Quest(88, "Facing the nightmare", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 1088000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 8608000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 50, 50);
     }
@@ -247,7 +246,7 @@ public class QuestsPhase10 {
         String objectiveText = "Bring the light of elements to Archangel";
         Quest quest = new Quest(89, "Bring back the light to Alberstol Ruins", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 68000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 55000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 50, 49);
     }
@@ -263,7 +262,7 @@ public class QuestsPhase10 {
         String objectiveText = "Bring the light of elements to Commander Erwin";
         Quest quest = new Quest(90, "Bring back the light to Uruga", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 68000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 55000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 42);
     }
@@ -279,7 +278,7 @@ public class QuestsPhase10 {
         String objectiveText = "Bring the light of elements to Captain Lenna";
         Quest quest = new Quest(91, "Bring back the light to Elderine", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 68000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 55000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 42, 39);
     }
@@ -295,7 +294,7 @@ public class QuestsPhase10 {
         String objectiveText = "Bring the light of elements to Sergeant Armin";
         Quest quest = new Quest(92, "Bring back the light to Roumen", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 64, 68000, 0, requiredQuests,
+                "", tasks, itemPrizes, 64, 55000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 39, 32);
     }

@@ -1,6 +1,5 @@
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +12,11 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException {
+        for (GearLevel gearLevel : GearLevel.values()) {
+            int multiplier = gearLevel.getWeaponAndPassiveNo();
+
+            System.out.println("value: " + (int) ((multiplier * multiplier) + 0.5));
+        }
         /*LocalDate now = LocalDate.now();
         String currentDateString = now.toString();
         System.out.println(currentDateString);
@@ -59,7 +63,7 @@ public class Test {
         for (double rate : downRatesForLevel) {
             System.out.println(value * rate);
         }*/
-        for (RPGClass rpgClass : RPGClass.values()) {
+        /*for (RPGClass rpgClass : RPGClass.values()) {
             if (rpgClass.equals(RPGClass.NO_CLASS)) continue;
             for (int level = 90; level < 91; level++) {
                 int fire = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, level);
@@ -71,7 +75,7 @@ public class Test {
                 System.out.println("Level " + level + " Class " + rpgClass.toString());
                 System.out.println("Fire" + fire + " Water" + water + " Earth" + earth + " Lightning" + lightning + " Wind" + wind);
             }
-        }
+        }*/
 
         /*int totalDefense = 2400;
         double damage = 1000;

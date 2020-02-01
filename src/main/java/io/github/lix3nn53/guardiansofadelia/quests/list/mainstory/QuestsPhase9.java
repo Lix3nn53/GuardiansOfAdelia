@@ -46,7 +46,7 @@ public class QuestsPhase9 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(68, "Gatekeeper", story,
                 startMsg, "Talk with the Gatekeeper in Uruga",
-                "", tasks, itemPrizes, 54, 53000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 42000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 42, 47);
     }
@@ -69,7 +69,7 @@ public class QuestsPhase9 {
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to the Gatekeeper";
         Quest quest = new Quest(69, "Gatekeeper's trial", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 54, 212000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 170000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 47, 47);
     }
@@ -85,7 +85,7 @@ public class QuestsPhase9 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(70, "Alberstol Ruins", story,
                 startMsg, "Go to city of angels, Alberstol Ruins then talk with Archangel",
-                "", tasks, itemPrizes, 54, 53000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 42000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 47, 49);
     }
@@ -102,7 +102,7 @@ public class QuestsPhase9 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(71, "Burning Rock", story,
                 startMsg, "Go to the Burning Rock then talk with Vruhag",
-                "", tasks, itemPrizes, 54, 53000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 42000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 49, 48);
     }
@@ -124,7 +124,7 @@ public class QuestsPhase9 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Vruhag";
         Quest quest = new Quest(72, "Flaming hunt", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 54, 424000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 340000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 48, 48);
     }
@@ -146,7 +146,7 @@ public class QuestsPhase9 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Vruhag";
         Quest quest = new Quest(73, "Orc hunt 1", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 54, 424000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 340000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 48, 48);
     }
@@ -168,7 +168,7 @@ public class QuestsPhase9 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Vruhag";
         Quest quest = new Quest(74, "Orc hunt 2", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 54, 424000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 340000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 48, 48);
     }
@@ -189,7 +189,7 @@ public class QuestsPhase9 {
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Vruhag";
         Quest quest = new Quest(75, "Lava cave", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 54, 424000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 340000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 48, 48);
     }
@@ -215,7 +215,7 @@ public class QuestsPhase9 {
         String objectiveText = "TASK_PROGRESS_1\nfrom orcs then talk back to Vruhag";
         Quest quest = new Quest(76, "Orc Banners", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 54, 424000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 340000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 48, 48);
     }
@@ -235,7 +235,7 @@ public class QuestsPhase9 {
         String objectiveText = "TASK_PROGRESS_1\nthen talk to Vruhag";
         Quest quest = new Quest(77, "Orc hunt 3", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 54, 424000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 340000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 48, 48);
     }
@@ -261,7 +261,7 @@ public class QuestsPhase9 {
         String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Vruhag";
         Quest quest = new Quest(78, "The Warchief", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 54, 848000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 680000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 48, 48);
     }
@@ -278,7 +278,7 @@ public class QuestsPhase9 {
         String objectiveText = "Report back to Archangel orcs regained their will";
         Quest quest = new Quest(79, "Burning rock report", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 54, 53000, 0, requiredQuests,
+                "", tasks, itemPrizes, 54, 42000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 48, 49);
     }

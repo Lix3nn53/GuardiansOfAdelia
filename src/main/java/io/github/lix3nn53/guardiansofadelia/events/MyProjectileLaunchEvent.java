@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.PlayerTridentThrowManager;
@@ -28,6 +29,18 @@ public class MyProjectileLaunchEvent implements Listener {
     public void onEvent(ProjectileLaunchEvent event) {
         Projectile projectile = event.getEntity();
         ProjectileSource shooter = projectile.getShooter();
+
+        if (shooter instanceof LivingEntity) {
+            if (StatusEffectManager.isDisarmed((LivingEntity) shooter)) {
+                event.setCancelled(true);
+                if (shooter instanceof Player) {
+                    Player player = (Player) shooter;
+
+                    player.sendTitle("", ChatColor.RED + "Disarmed..", 0, 20, 0);
+                }
+                return;
+            }
+        }
 
         if (shooter instanceof Player) {
             Player player = (Player) shooter;

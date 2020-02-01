@@ -28,7 +28,7 @@ public class CommandParty implements CommandExecutor {
                 player.sendMessage(ChatColor.YELLOW + "/party invite <player>");
                 player.sendMessage(ChatColor.YELLOW + "/party leave");
                 player.sendMessage(ChatColor.YELLOW + "/party kick <player>");
-                player.sendMessage(ChatColor.YELLOW + "/party leader <player>");
+                //player.sendMessage(ChatColor.YELLOW + "/party leader <player>");
             } else if (args[0].equalsIgnoreCase("invite")) {
                 if (args.length == 2) {
                     if (MiniGameManager.isInMinigame(player)) {
@@ -63,7 +63,7 @@ public class CommandParty implements CommandExecutor {
                         }
                     }
                 }
-            } else if (args[0].equalsIgnoreCase("leader")) {
+            }/* else if (args[0].equalsIgnoreCase("leader")) {
                 if (args.length == 2) {
                     if (!args[1].equalsIgnoreCase(player.getName())) {
                         Player receiver = Bukkit.getPlayer(args[1]);
@@ -75,7 +75,7 @@ public class CommandParty implements CommandExecutor {
                         }
                     }
                 }
-            }
+            }*/
             // If the player (or console) uses our command correct, we can return true
             return true;
         }

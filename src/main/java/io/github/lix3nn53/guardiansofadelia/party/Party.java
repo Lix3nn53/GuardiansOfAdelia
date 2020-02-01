@@ -13,13 +13,9 @@ public final class Party {
     private final int minSize;
     private final List<Player> members;
     private final BoardWithPlayers board;
-    private Player leader;
 
     public Party(List<Player> members, int size, int minSize, ChatColor teamColor) {
         this.members = members;
-        if (!members.isEmpty()) {
-            this.leader = members.get(0);
-        }
         List<String> topLines = new ArrayList<>();
         this.board = new BoardWithPlayers(members, ChatColor.AQUA + "Party", topLines, teamColor);
         this.size = size;
@@ -33,9 +29,6 @@ public final class Party {
 
     public Party(List<Player> members, int size, int minSize, BoardWithPlayers boardWithPlayers) {
         this.members = members;
-        if (!members.isEmpty()) {
-            this.leader = members.get(0);
-        }
         this.board = boardWithPlayers;
         this.size = size;
         if (minSize < 1) {
@@ -51,7 +44,7 @@ public final class Party {
     }
 
     public Player getLeader() {
-        return leader;
+        return members.get(0);
     }
 
     public boolean addMember(Player player) {
@@ -60,9 +53,6 @@ public final class Party {
                 members.add(player);
                 board.remake(this.members);
                 PartyManager.addMember(player, this);
-                if (members.size() == 1) {
-                    this.leader = player;
-                }
                 return true;
             }
         }
@@ -104,25 +94,36 @@ public final class Party {
                 PartyManager.removeMember(member);
             }
         } else {
-            if (player.getUniqueId().equals(leader.getUniqueId())) {
-                leader = members.get(0);
-            }
             board.remake(this.members);
         }
         board.hide(player);
         PartyManager.removeMember(player);
     }
 
-    public void setNewLeader(Player setter, Player player) {
-        if (setter.getUniqueId().equals(leader.getUniqueId())) {
-            if (members.contains(player)) {
-                if (!player.getUniqueId().equals(leader.getUniqueId())) {
-                    leader = player;
-                    board.remake(this.members);
-                }
-            }
+    /*public void setNewLeader(Player setter, Player player) {
+        Player leader = getLeader();
+
+        if (!setter.equals(leader)) {
+            setter.sendMessage(ChatColor.RED + "You must be party leader");
+            return;
         }
-    }
+
+        if (!members.contains(player)) {
+            setter.sendMessage(ChatColor.RED + player.getName() + " is not a member of your party");
+            return;
+        }
+
+        if (player.equals(leader)) {
+            setter.sendMessage(ChatColor.RED + "You can't select yourself");
+            return;
+        }
+
+        this.members.clear();
+        this.members.add(player);
+        this.members.add(leader);
+
+        board.remake(this.members);
+    }*/
 
     public BoardWithPlayers getBoard() {
         return board;

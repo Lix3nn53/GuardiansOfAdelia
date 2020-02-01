@@ -182,10 +182,9 @@ public abstract class Minigame {
                     cancel();
 
                     if (isInGame) {
-                        HashMap<Integer, Party> teamsMap = getTeams();
                         List<List<Player>> teamsList = new ArrayList<>();
-                        for (Party party : teamsMap.values()) {
-                            teamsList.add(party.getMembers());
+                        for (Party party : teams.values()) {
+                            teamsList.add(new ArrayList<>(party.getMembers()));
                         }
 
                         for (Player member : playersInGame) {

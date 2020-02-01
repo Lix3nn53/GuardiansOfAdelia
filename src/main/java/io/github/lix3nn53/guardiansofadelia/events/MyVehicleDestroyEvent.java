@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
-import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropProtectionManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -21,12 +21,12 @@ public class MyVehicleDestroyEvent implements Listener {
         if (vehicle.getType().equals(EntityType.BOAT)) {
             ItemStack boat = OtherItems.getBoat();
 
-            Item item = vehicle.getWorld().dropItemNaturally(vehicle.getLocation(), boat);
-
             if (event.getAttacker() instanceof Player) {
                 Player player = (Player) event.getAttacker();
 
-                DropProtectionManager.setItem(item.getItemStack(), player);
+                InventoryUtils.giveItemToPlayer(player, boat);
+            } else {
+                Item item = vehicle.getWorld().dropItemNaturally(vehicle.getLocation(), boat);
             }
         }
     }

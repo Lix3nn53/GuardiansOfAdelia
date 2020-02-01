@@ -41,7 +41,7 @@ public class QuestsPhase5 {
         String startMsg = ChatColor.YELLOW + "Click" + ChatColor.BOLD + " Compass Icon " + ChatColor.RESET + ChatColor.YELLOW + "from menu-book and select your destination NPC.";
         Quest quest = new Quest(35, "Sea of Greed", story,
                 startMsg, "Go to viking village and talk with Sailor Skamkel",
-                "", tasks, itemPrizes, 21, 12000, 0, requiredQuests,
+                "", tasks, itemPrizes, 21, 9000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 39, 40);
     }
@@ -63,7 +63,7 @@ public class QuestsPhase5 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nThen talk back to Sailor Skamkel";
         Quest quest = new Quest(36, "Pirate hunt 1", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 21, 120000, 0, requiredQuests,
+                "", tasks, itemPrizes, 21, 90000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 40, 40);
     }
@@ -83,7 +83,7 @@ public class QuestsPhase5 {
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Sailor Skamkel";
         Quest quest = new Quest(37, "Pirate hunt 2", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 21, 120000, 0, requiredQuests,
+                "", tasks, itemPrizes, 21, 90000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 40, 40);
     }
@@ -104,7 +104,7 @@ public class QuestsPhase5 {
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Sailor Skamkel";
         Quest quest = new Quest(38, "Treasure hunt", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 21, 120000, 0, requiredQuests,
+                "", tasks, itemPrizes, 21, 90000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 40, 40);
     }
@@ -130,7 +130,7 @@ public class QuestsPhase5 {
         String objectiveText = "TASK_PROGRESS_1\nfrom pirates then talk back to Sailor Skamkel";
         Quest quest = new Quest(39, "Pirate hats", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 21, 120000, 0, requiredQuests,
+                "", tasks, itemPrizes, 21, 90000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 40, 40);
     }
@@ -152,7 +152,7 @@ public class QuestsPhase5 {
         String objectiveText = "TASK_PROGRESS_1\nTASK_PROGRESS_2\nthen talk to Sailor Skamkel";
         Quest quest = new Quest(40, "Pirate hunt 3", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 21, 120000, 0, requiredQuests,
+                "", tasks, itemPrizes, 21, 90000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 40, 40);
     }
@@ -176,7 +176,7 @@ public class QuestsPhase5 {
         String objectiveText = "<Dungeon>\nTASK_PROGRESS_1\nthen talk to Sailor Skamkel";
         Quest quest = new Quest(41, "The captain's soul", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 21, 240000, 0, requiredQuests,
+                "", tasks, itemPrizes, 21, 190000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 40, 40);
     }
@@ -192,7 +192,7 @@ public class QuestsPhase5 {
         String objectiveText = "Report back to Captain Lenna that vikings rule Sea of Greed once again";
         Quest quest = new Quest(42, "Sea of Greed report", story,
                 "", objectiveText,
-                "", tasks, itemPrizes, 21, 18000, 0, requiredQuests,
+                "", tasks, itemPrizes, 21, 15000, 0, requiredQuests,
                 Material.GRASS_BLOCK);
         QuestNPCManager.addQuest(quest, 40, 39);
     }
