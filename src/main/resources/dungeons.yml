@@ -1,7 +1,7 @@
 # ---------------------------------------------- #
 #              General Configuration             #
 # ---------------------------------------------- #
-#                 Town Information               #
+#               Dungeon Information              #
 # ---------------------------------------------- #
 
 SLIME1:
@@ -33,6 +33,15 @@ SLIME2:
   levelReq: 5
   timeLimitInMinutes: 10
   bossMobName: §6King Slime
+  checkpoints:
+    count: 1
+    loc1:
+      x: 1027
+      y: 73.5
+      z: 60
+      world: dungeons
+      yaw: 110
+      pitch: -0.3
 SLIME3:
   x: 1040
   y: 21.5
@@ -103,6 +112,15 @@ MAGIC_FOREST1:
   levelReq: 15
   timeLimitInMinutes: 10
   bossMobName: §5Dark Magician Nimzuth
+  checkpoints:
+    count: 1
+    loc1:
+      x: 374
+      y: 119.5
+      z: 304
+      world: dungeons
+      yaw: 160
+      pitch: 3
 MAGIC_FOREST2:
   x: 351.5
   y: 111.5
@@ -113,6 +131,15 @@ MAGIC_FOREST2:
   levelReq: 15
   timeLimitInMinutes: 10
   bossMobName: §5Dark Magician Nimzuth
+  checkpoints:
+    count: 1
+    loc1:
+      x: 374
+      y: 119.5
+      z: -568
+      world: dungeons
+      yaw: 160
+      pitch: 3
 MAGIC_FOREST3:
   x: 336.5
   y: 111.5
@@ -143,6 +170,15 @@ ICE_CREAM1:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §eEvil Cook
+  checkpoints:
+    count: 1
+    loc1:
+      x: 3011
+      y: 47.5
+      z: 420
+      world: dungeons
+      yaw: 70
+      pitch: 2
 ICE_CREAM2:
   x: 2917.5
   y: 23.5
@@ -153,6 +189,15 @@ ICE_CREAM2:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §eEvil Cook
+  checkpoints:
+    count: 1
+    loc1:
+      x: 3003
+      y: 47.5
+      z: -192
+      world: dungeons
+      yaw: 70
+      pitch: 2
 ICE_CREAM3:
   x: 2914.5
   y: 23.5
@@ -183,6 +228,15 @@ PIRATE1:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §3Captain Barbaros
+  checkpoints:
+    count: 1
+    loc1:
+      x: 4524
+      y: 66.5
+      z: 535
+      world: dungeons
+      yaw: -160
+      pitch: 2
 PIRATE2:
   x: 4451.5
   y: 66.5
@@ -193,6 +247,15 @@ PIRATE2:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §3Captain Barbaros
+  checkpoints:
+    count: 1
+    loc1:
+      x: 4522
+      y: 66.5
+      z: -115
+      world: dungeons
+      yaw: -160
+      pitch: 2
 PIRATE3:
   x: 4461.53
   y: 66.0
@@ -223,6 +286,15 @@ ICE1:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §5Necromancer King
+  checkpoints:
+    count: 1
+    loc1:
+      x: 4021
+      y: 57.5
+      z: 544
+      world: dungeons
+      yaw: 160
+      pitch: 2
 ICE2:
   x: 4130.5
   y: 61.5
@@ -233,6 +305,15 @@ ICE2:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §5Necromancer King
+  checkpoints:
+    count: 1
+    loc1:
+      x: 4011
+      y: 57.5
+      z: -80
+      world: dungeons
+      yaw: 160
+      pitch: 2
 ICE3:
   x: 4138.5
   y: 61.5
@@ -263,6 +344,15 @@ DESERT1:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §ePharaoh
+  checkpoints:
+    count: 1
+    loc1:
+      x: 2081
+      y: 54.5
+      z: 490
+      world: dungeons
+      yaw: 110
+      pitch: -0.3
 DESERT2:
   x: 1956.5
   y: 54.5
@@ -273,6 +363,15 @@ DESERT2:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §ePharaoh
+  checkpoints:
+    count: 1
+    loc1:
+      x: 2053
+      y: 54.5
+      z: -127
+      world: dungeons
+      yaw: 110
+      pitch: -0.3
 DESERT3:
   x: 1939.5
   y: 54.5
@@ -303,6 +402,15 @@ SWAMP1:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §9Guardian Esobel
+  checkpoints:
+    count: 1
+    loc1:
+      x: 1540
+      y: 58.5
+      z: 585
+      world: dungeons
+      yaw: 180
+      pitch: -0.3
 SWAMP2:
   x: 1446.5
   y: 77.5
@@ -313,6 +421,15 @@ SWAMP2:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §9Guardian Esobel
+  checkpoints:
+    count: 1
+    loc1:
+      x: 1510
+      y: 58.5
+      z: -108
+      world: dungeons
+      yaw: 180
+      pitch: -0.3
 SWAMP3:
   x: 1455
   y: 77.5
@@ -343,6 +460,15 @@ LAVA1:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §cWarchief Drogoth
+  checkpoints:
+    count: 1
+    loc1:
+      x: 2534
+      y: 96.5
+      z: 367
+      world: dungeons
+      yaw: 180
+      pitch: -0.3
 LAVA2:
   x: 2494.5
   y: 64.5
@@ -353,6 +479,15 @@ LAVA2:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §cWarchief Drogoth
+  checkpoints:
+    count: 1
+    loc1:
+      x: 2527
+      y: 96.5
+      z: -403
+      world: dungeons
+      yaw: 180
+      pitch: -0.3
 LAVA3:
   x: 2483.5
   y: 64.5
@@ -383,6 +518,15 @@ DARKNESS1:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §5Aleesia
+  checkpoints:
+    count: 1
+    loc1:
+      x: -389
+      y: 11.5
+      z: 3261
+      world: aleesia
+      yaw: 180
+      pitch: -0.3
 DARKNESS2:
   x: 3810.5
   y: 19.5
@@ -393,6 +537,15 @@ DARKNESS2:
   levelReq: 20
   timeLimitInMinutes: 10
   bossMobName: §5Aleesia
+  checkpoints:
+    count: 1
+    loc1:
+      x: -389
+      y: 11.5
+      z: 2467
+      world: aleesia
+      yaw: 180
+      pitch: -0.3
 DARKNESS3:
   x: 3818.5
   y: 19.5

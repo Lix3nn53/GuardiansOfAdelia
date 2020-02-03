@@ -602,6 +602,9 @@ public abstract class Minigame {
                     break;
                 }
             }
+        } else if (teamToCheckpoint.containsKey(teamOfPlayer)) {
+            Checkpoint checkpoint = teamToCheckpoint.get(teamOfPlayer);
+            startWatchLocation = checkpoint.getLocation();
         }
         return startWatchLocation;
     }
