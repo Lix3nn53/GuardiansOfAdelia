@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.database.ConnectionPool;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.InstantTeleportPortal;
@@ -415,7 +416,24 @@ public class ConfigManager {
                 String bossMobName = dungeonsConfig.getString(code + ".bossMobName");
                 List<Location> locations = new ArrayList<>();
                 locations.add(location);
-                Dungeon dungeon = new Dungeon(levelReq, timeLimitInMinutes, dungeonTheme, i, locations, bossMobName);
+
+                List<Checkpoint> checkpoints = new ArrayList<>();
+                int checkpointCount = dungeonsConfig.getInt(code + ".checkpoints.count");
+
+                for (int checkpointNumber = 1; checkpointNumber <= checkpointCount; checkpointNumber++) {
+                    String worldStringC = dungeonsConfig.getString(code + ".checkpoints.loc" + checkpointNumber + ".world");
+                    World worldC = Bukkit.getWorld(worldStringC);
+                    double xC = dungeonsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".x");
+                    double yC = dungeonsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".y");
+                    double zC = dungeonsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".z");
+                    float yawC = (float) dungeonsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".yaw");
+                    float pitchC = (float) dungeonsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".pitch");
+                    Location locationC = new Location(worldC, xC, yC, zC, yawC, pitchC);
+
+                    checkpoints.add(new Checkpoint(locationC));
+                }
+
+                Dungeon dungeon = new Dungeon(levelReq, timeLimitInMinutes, dungeonTheme, i, locations, bossMobName, checkpoints);
                 MiniGameManager.addDungeon(dungeonTheme, i, dungeon);
             }
         }

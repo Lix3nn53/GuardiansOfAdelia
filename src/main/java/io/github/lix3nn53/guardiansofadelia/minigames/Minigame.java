@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.minigames;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
+import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
@@ -42,9 +44,12 @@ public abstract class Minigame {
     private boolean isInGame = false;
 
     private final HashMap<Player, Player> playerToLastDamager = new HashMap<>();
+    private final List<Checkpoint> checkpoints;
+    private final HashMap<Integer, Checkpoint> teamToCheckpoint = new HashMap<>();
+
 
     public Minigame(String gameTypeName, ChatColor gameColor, String mapName, int roomNo, int levelReq, int teamSize, int teamAmount, List<Location> startLocations, int timeLimitInMinutes,
-                    int queueTimeLimitInTenSeconds, Location backLocation, int maxLives, int minTeamsAlive, int respawnDelayInSeconds, int requiredPlayerAmountToStart) {
+                    int queueTimeLimitInTenSeconds, Location backLocation, int maxLives, int minTeamsAlive, int respawnDelayInSeconds, int requiredPlayerAmountToStart, List<Checkpoint> checkpoints) {
         this.gameTypeName = gameTypeName;
         this.gameColor = gameColor;
         this.mapName = mapName;
@@ -60,6 +65,10 @@ public abstract class Minigame {
         this.minTeamsAlive = minTeamsAlive;
         this.respawnDelayInSeconds = respawnDelayInSeconds;
         this.requiredPlayerAmountToStart = requiredPlayerAmountToStart;
+        this.checkpoints = checkpoints;
+        for (Checkpoint checkpoint : checkpoints) {
+            CheckpointManager.addCheckpoint(checkpoint);
+        }
 
         this.gameCountDown = new BukkitRunnable() {
             @Override
@@ -198,14 +207,15 @@ public abstract class Minigame {
                         }
 
                         isInGame = false;
-                        Minigame.this.teams.clear();
+                        teams.clear();
                         teamToScore.clear();
+                        teamDeathCount.clear();
+                        teamToCheckpoint.clear();
                         for (int i = 1; i <= teamAmount; i++) {
                             BoardWithPlayers boardWithPlayers = new BoardWithPlayers(new ArrayList<>(), gameTypeName, getScoreboardTopLines(), getTeamTextColor(i));
                             Minigame.this.teams.put(i, new Party(new ArrayList<>(), teamSize, 1, boardWithPlayers));
                             teamToScore.put(i, 0);
                         }
-                        teamDeathCount.clear();
 
                         createNormalPartyAfterMinigame(teamsList);
                     }
@@ -626,6 +636,23 @@ public abstract class Minigame {
         return ChatColor.WHITE;
     }
 
+    public boolean onCheckpointSet(Player player, Checkpoint checkpoint) {
+        int teamOfPlayer = getTeamOfPlayer(player);
+        if (teamOfPlayer > -1) {
+            if (checkpoints.contains(checkpoint)) {
+                teamToCheckpoint.put(teamOfPlayer, checkpoint);
+                Party party = teams.get(teamOfPlayer);
+                for (Player member : party.getMembers()) {
+                    MessageUtils.sendCenteredMessage(member, ChatColor.DARK_GREEN + "-- " + ChatColor.GREEN + "New Checkpoint Set" + ChatColor.DARK_GREEN + " --");
+                }
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void onPlayerDeath(Player player) {
         if (playerToLastDamager.containsKey(player)) {
             Player attacker = playerToLastDamager.get(player);
@@ -657,7 +684,11 @@ public abstract class Minigame {
                         for (Integer teamNo : teams.keySet()) {
                             Party party = teams.get(teamNo);
                             if (party.getMembers().contains(player)) {
-                                player.teleport(startLocations.get(teamNo - 1));
+                                Location respawnLocation = startLocations.get(teamNo - 1);
+                                if (teamToCheckpoint.containsKey(teamNo)) {
+                                    respawnLocation = teamToCheckpoint.get(teamNo).getLocation();
+                                }
+                                player.teleport(respawnLocation);
                                 player.setGameMode(GameMode.ADVENTURE);
                                 break;
                             }

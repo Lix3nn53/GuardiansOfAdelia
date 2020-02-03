@@ -8,6 +8,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
+import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.InstantTeleportPortal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
@@ -115,6 +117,15 @@ public class MyPlayerAnimationEvent implements Listener {
                 } else if (TombManager.hasTomb(player)) {
                     TombManager.onReachToTomb(player);
                     break;
+                } else {
+                    Checkpoint checkpoint = CheckpointManager.getCheckpointFromArmorStand(armorStand);
+                    if (checkpoint != null) { //portal model
+                        if (MiniGameManager.isInMinigame(player)) {
+                            boolean b = MiniGameManager.onCheckpointSet(player, checkpoint);
+
+                        }
+                        break;
+                    }
                 }
             }
         }

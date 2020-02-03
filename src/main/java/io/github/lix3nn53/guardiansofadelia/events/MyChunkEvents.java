@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
@@ -84,5 +85,6 @@ public class MyChunkEvents implements Listener {
         BazaarManager.onChunkLoad(chunkKey);
         TombManager.onChunkLoad(chunkKey);
         PortalManager.onChunkLoad(chunkKey);
+        CheckpointManager.onChunkLoad(chunkKey);
     }
 }

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.minigames;
 
 import io.github.lix3nn53.guardiansofadelia.minigames.arenas.LastOneStanding;
 import io.github.lix3nn53.guardiansofadelia.minigames.arenas.WinByMostKills;
+import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.guildwar.GuildWar;
@@ -188,6 +189,15 @@ public class MiniGameManager {
                 player.sendMessage(ChatColor.RED + "You are not in a minigame");
             }
         }
+    }
+
+    public static boolean onCheckpointSet(Player player, Checkpoint checkpoint) {
+        if (playerToMinigame.containsKey(player)) {
+            Minigame minigame = playerToMinigame.get(player);
+            return minigame.onCheckpointSet(player, checkpoint);
+        }
+
+        return false;
     }
 
     public static void onMobKill(Player player, LivingEntity livingEntity) {

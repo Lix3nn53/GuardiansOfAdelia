@@ -15,7 +15,7 @@ public class LastOneStanding extends Minigame {
 
     public LastOneStanding(String mapName, int levelReq, int timeLimitInMinutes, int roomNo, List<Location> startLocations, int teamSize, int teamAmount, int maxLives, int requiredPlayerAmountToStart) {
         super("LastOneStanding", ChatColor.GOLD, mapName, roomNo, levelReq, teamSize, teamAmount, startLocations,
-                timeLimitInMinutes, 2, TownManager.getTown(1).getLocation(), maxLives, 1, 20, requiredPlayerAmountToStart);
+                timeLimitInMinutes, 2, TownManager.getTown(1).getLocation(), maxLives, 1, 20, requiredPlayerAmountToStart, new ArrayList<>());
     }
 
     @Override

@@ -11,9 +11,18 @@ SLIME1:
   world: dungeons
   yaw: 20
   pitch: -0.3
-  levelReq: 6
+  levelReq: 5
   timeLimitInMinutes: 10
   bossMobName: §6King Slime
+  checkpoints:
+    count: 1
+    loc1:
+      x: 1025
+      y: 73.5
+      z: 532
+      world: dungeons
+      yaw: 110
+      pitch: -0.3
 SLIME2:
   x: 1032
   y: 21.5
@@ -21,7 +30,7 @@ SLIME2:
   world: dungeons
   yaw: -341
   pitch: 2
-  levelReq: 6
+  levelReq: 5
   timeLimitInMinutes: 10
   bossMobName: §6King Slime
 SLIME3:
@@ -31,7 +40,7 @@ SLIME3:
   world: dungeons
   yaw: -341
   pitch: 0.45
-  levelReq: 6
+  levelReq: 5
   timeLimitInMinutes: 10
   bossMobName: §6King Slime
 SLIME4:
@@ -41,7 +50,7 @@ SLIME4:
   world: dungeons
   yaw: -338.5
   pitch: -1.35
-  levelReq: 6
+  levelReq: 5
   timeLimitInMinutes: 10
   bossMobName: §6King Slime
 ZOMBIE1:
@@ -51,7 +60,7 @@ ZOMBIE1:
   world: dungeons
   yaw: -286.5
   pitch: 5.7
-  levelReq: 12
+  levelReq: 10
   timeLimitInMinutes: 10
   bossMobName: §2Zombie Subject#471
 ZOMBIE2:
@@ -61,7 +70,7 @@ ZOMBIE2:
   world: dungeons
   yaw: -287
   pitch: 6
-  levelReq: 12
+  levelReq: 10
   timeLimitInMinutes: 10
   bossMobName: §2Zombie Subject#471
 ZOMBIE3:
@@ -71,7 +80,7 @@ ZOMBIE3:
   world: dungeons
   yaw: -285.8
   pitch: 3.75
-  levelReq: 12
+  levelReq: 10
   timeLimitInMinutes: 10
   bossMobName: §2Zombie Subject#471
 ZOMBIE4:
@@ -81,7 +90,7 @@ ZOMBIE4:
   world: dungeons
   yaw: -288.5
   pitch: 5.5
-  levelReq: 12
+  levelReq: 10
   timeLimitInMinutes: 10
   bossMobName: §2Zombie Subject#471
 MAGIC_FOREST1:
@@ -91,7 +100,7 @@ MAGIC_FOREST1:
   world: dungeons
   yaw: -183
   pitch: -0.9
-  levelReq: 18
+  levelReq: 15
   timeLimitInMinutes: 10
   bossMobName: §5Dark Magician Nimzuth
 MAGIC_FOREST2:
@@ -101,7 +110,7 @@ MAGIC_FOREST2:
   world: dungeons
   yaw: -192.5
   pitch: -0.9
-  levelReq: 18
+  levelReq: 15
   timeLimitInMinutes: 10
   bossMobName: §5Dark Magician Nimzuth
 MAGIC_FOREST3:
@@ -111,7 +120,7 @@ MAGIC_FOREST3:
   world: dungeons
   yaw: -193.5
   pitch: -0.5
-  levelReq: 18
+  levelReq: 15
   timeLimitInMinutes: 10
   bossMobName: §5Dark Magician Nimzuth
 MAGIC_FOREST4:
@@ -121,7 +130,7 @@ MAGIC_FOREST4:
   world: dungeons
   yaw: -192.5
   pitch: -1.5
-  levelReq: 18
+  levelReq: 15
   timeLimitInMinutes: 10
   bossMobName: §5Dark Magician Nimzuth
 ICE_CREAM1:
