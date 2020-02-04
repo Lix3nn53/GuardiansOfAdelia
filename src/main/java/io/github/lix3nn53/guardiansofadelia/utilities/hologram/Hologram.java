@@ -7,10 +7,15 @@ import org.bukkit.entity.EntityType;
 
 public class Hologram {
 
-    private final ArmorStand as;
+    private final Location loc;
+    private String title;
+    private Entity rider;
+    private ArmorStand as;
     private final HologramType type;
 
     public Hologram(Location loc, String title) {
+        this.loc = loc;
+        this.title = title;
         as = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
         as.setVisible(false);
         as.setGravity(false);
@@ -22,6 +27,8 @@ public class Hologram {
     }
 
     public Hologram(Location loc, Entity rider) {
+        this.loc = loc;
+        this.rider = rider;
         as = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
         as.setVisible(false);
         as.setGravity(false);
@@ -32,6 +39,7 @@ public class Hologram {
     }
 
     public Hologram(Location loc) {
+        this.loc = loc;
         as = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
         as.setVisible(false);
         as.setGravity(false);
@@ -54,5 +62,24 @@ public class Hologram {
         TEXT,
         PASSENGER,
         INVISIBLE
+    }
+
+    public void respawn() {
+        as = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
+        as.setVisible(false);
+        as.setGravity(false);
+        as.setMarker(true);
+        as.setInvulnerable(true);
+        as.setCustomNameVisible(true);
+        if (title != null) {
+            as.setCustomName(title);
+        }
+        if (rider != null) {
+            as.addPassenger(rider);
+        }
+    }
+
+    public Location getLocation() {
+        return loc;
     }
 }

@@ -1,0 +1,16 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#                 Hologram List                  #
+# ---------------------------------------------- #
+
+HologramCount: 1
+Hologram1:
+  x: 610.0
+  y: 21.5
+  z: -314.0
+  world: tutorial
+  texts:
+    - '&dLearn your skills to get ready!'
+    - 'Open menu by clicking Menu-Book from your inventory(E key),'
+    - 'enter character then skills menu to give points to your skills.'

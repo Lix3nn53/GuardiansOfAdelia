@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManag
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.NPCDespawnEvent;
 import net.citizensnpcs.api.event.NPCSpawnEvent;
@@ -86,5 +87,6 @@ public class MyChunkEvents implements Listener {
         TombManager.onChunkLoad(chunkKey);
         PortalManager.onChunkLoad(chunkKey);
         CheckpointManager.onChunkLoad(chunkKey);
+        HologramManager.onChunkLoad(chunkKey);
     }
 }

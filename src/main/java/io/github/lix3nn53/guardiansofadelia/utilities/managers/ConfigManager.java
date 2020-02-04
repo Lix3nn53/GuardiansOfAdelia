@@ -15,7 +15,9 @@ import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -41,6 +43,7 @@ public class ConfigManager {
     private static FileConfiguration dungeonGatesConfig;
     private static FileConfiguration databaseConfig;
     private static FileConfiguration resourcePackConfig;
+    private static FileConfiguration hologramsConfig;
     private static FileConfiguration teleportPortals;
 
     public static void init() {
@@ -60,6 +63,7 @@ public class ConfigManager {
         createDungeonGates();
         createDungeons();
         createTeleportPortals();
+        createHologramsConfig();
     }
 
     public static void loadConfigALL() {
@@ -72,6 +76,7 @@ public class ConfigManager {
         loadDungeonGates();
         loadDungeons();
         loadTeleportPortals();
+        loadHologramsConfig();
     }
 
     public static void writeConfigALL() {
@@ -123,8 +128,49 @@ public class ConfigManager {
         }
     }
 
+    private static void createHologramsConfig() {
+        File customConfigFile = new File(DATA_FOLDER, "holograms.yml");
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+            GuardiansOfAdelia.getInstance().saveResource("holograms.yml", false);
+        }
+
+        hologramsConfig = new YamlConfiguration();
+        try {
+            hologramsConfig.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void loadResourcePackConfig() {
         GuardiansOfAdelia.ResourcePackURL = resourcePackConfig.getString("url");
+    }
+
+    public static void loadHologramsConfig() {
+        int hologramCount = hologramsConfig.getInt("HologramCount");
+        for (int i = 1; i <= hologramCount; i++) {
+            String worldString = hologramsConfig.getString("Hologram" + i + ".world");
+            if (worldString == null) continue;
+
+            World world = Bukkit.getWorld(worldString);
+            double x = hologramsConfig.getDouble("Hologram" + i + ".x");
+            double y = hologramsConfig.getDouble("Hologram" + i + ".y");
+            double z = hologramsConfig.getDouble("Hologram" + i + ".z");
+            Location location = new Location(world, x, y, z);
+
+            List<String> texts = hologramsConfig.getStringList("Hologram" + i + ".texts");
+
+            for (int index = texts.size() - 1; index >= 0; index--) {
+                String text = texts.get(index);
+
+                String s = ChatColor.translateAlternateColorCodes('&', text);
+                Hologram hologram = new Hologram(location.clone(), s);
+                location.add(0, 0.4, 0);
+
+                HologramManager.addHologram(hologram);
+            }
+        }
     }
 
     private static void createSpawners() {
