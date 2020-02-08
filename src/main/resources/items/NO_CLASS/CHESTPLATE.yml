@@ -1,0 +1,22 @@
+# ---------------------------------------------- #
+#             Database Configuration             #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 2
+i1:
+  name: "Leather Chestplate"
+  level: 8
+  health: 30
+  defense: 30
+  magicDefense: 20
+  material: LEATHER_CHESTPLATE
+i2:
+  name: "Hide Chestplate"
+  level: 18
+  health: 60
+  defense: 40
+  magicDefense: 30
+  material: LEATHER_CHESTPLATE
+  

@@ -1,0 +1,56 @@
+# ---------------------------------------------- #
+#             Database Configuration             #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 7
+i1:
+  name: "Seaweed Helmet"
+  level: 24
+  health: 90
+  defense: 30
+  magicDefense: 20
+  material: LEATHER_HELMET
+i2:
+  name: "Kelp Helmet"
+  level: 34
+  health: 150
+  defense: 40
+  magicDefense: 30
+  material: LEATHER_HELMET
+i3:
+  name: "Coral Helmet"
+  level: 44
+  health: 240
+  defense: 70
+  magicDefense: 50
+  material: IRON_HELMET
+i4:
+  name: "Aqua Helmet"
+  level: 54
+  health: 340
+  defense: 100
+  magicDefense: 60
+  material: IRON_HELMET
+i5:
+  name: "Water Spirit Helmet"
+  level: 64
+  health: 450
+  defense: 125
+  magicDefense: 90
+  material: IRON_HELMET
+i6:
+  name: "Mera Helmet"
+  level: 74
+  health: 560
+  defense: 160
+  magicDefense: 110
+  material: IRON_HELMET
+i7:
+  name: "Atlantean Helmet"
+  level: 84
+  health: 740
+  defense: 210
+  magicDefense: 140
+  material: IRON_HELMET

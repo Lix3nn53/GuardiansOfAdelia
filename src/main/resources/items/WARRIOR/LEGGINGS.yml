@@ -1,0 +1,56 @@
+# ---------------------------------------------- #
+#             Database Configuration             #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 7
+i1:
+  name: "Magma Leggings"
+  level: 26
+  health: 150
+  defense: 40
+  magicDefense: 30
+  material: LEATHER_LEGGINGS
+i2:
+  name: "Fire Spirit Leggings"
+  level: 36
+  health: 240
+  defense: 70
+  magicDefense: 40
+  material: LEATHER_LEGGINGS
+i3:
+  name: "Light Plate Leggings"
+  level: 46
+  health: 380
+  defense: 110
+  magicDefense: 70
+  material: IRON_LEGGINGS
+i4:
+  name: "Fury Plate Leggings"
+  level: 56
+  health: 510
+  defense: 140
+  magicDefense: 90
+  material: IRON_LEGGINGS
+i5:
+  name: "Ceres Leggings"
+  level: 66
+  health: 670
+  defense: 190
+  magicDefense: 130
+  material: IRON_LEGGINGS
+i6:
+  name: "Zakar Leggings"
+  level: 76
+  health: 800
+  defense: 240
+  magicDefense: 160
+  material: IRON_LEGGINGS
+i7:
+  name: "Raxes Leggings"
+  level: 86
+  health: 1100
+  defense: 320
+  magicDefense: 210
+  material: IRON_LEGGINGS

@@ -1,0 +1,56 @@
+# ---------------------------------------------- #
+#             Database Configuration             #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 7
+i1:
+  name: "Sunrise Chestplate"
+  level: 28
+  health: 150
+  defense: 40
+  magicDefense: 60
+  material: LEATHER_CHESTPLATE
+i2:
+  name: "August Chestplate"
+  level: 38
+  health: 230
+  defense: 70
+  magicDefense: 90
+  material: LEATHER_CHESTPLATE
+i3:
+  name: "Rhythm Chestplate"
+  level: 48
+  health: 370
+  defense: 110
+  magicDefense: 150
+  material: DIAMOND_CHESTPLATE
+i4:
+  name: "Eleaza Chestplate"
+  level: 58
+  health: 520
+  defense: 150
+  magicDefense: 210
+  material: DIAMOND_CHESTPLATE
+i5:
+  name: "Gaia Chestplate"
+  level: 68
+  health: 720
+  defense: 210
+  magicDefense: 270
+  material: DIAMOND_CHESTPLATE
+i6:
+  name: "Holyshion Chestplate"
+  level: 78
+  health: 880
+  defense: 260
+  magicDefense: 340
+  material: DIAMOND_CHESTPLATE
+i7:
+  name: "Khraje Chestplate"
+  level: 88
+  health: 1100
+  defense: 340
+  magicDefense: 450
+  material: DIAMOND_CHESTPLATE

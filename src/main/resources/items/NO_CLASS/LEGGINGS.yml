@@ -1,0 +1,21 @@
+# ---------------------------------------------- #
+#             Database Configuration             #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 2
+i1:
+  name: "Leather Leggings"
+  level: 6
+  health: 24
+  defense: 20
+  magicDefense: 10
+  material: LEATHER_LEGGINGS
+i2:
+  name: "Hide Leggings"
+  level: 16
+  health: 48
+  defense: 30
+  magicDefense: 20
+  material: LEATHER_LEGGINGS

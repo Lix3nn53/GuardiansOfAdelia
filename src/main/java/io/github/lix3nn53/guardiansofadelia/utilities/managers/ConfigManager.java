@@ -1,10 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorItemTemplate;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.database.ConnectionPool;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
@@ -16,10 +20,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -46,6 +47,8 @@ public class ConfigManager {
     private static FileConfiguration hologramsConfig;
     private static FileConfiguration teleportPortals;
 
+    private final static HashMap<String, FileConfiguration> itemListConfiguration = new HashMap<>();
+
     public static void init() {
         if (!GuardiansOfAdelia.getInstance().getDataFolder().exists()) {
             GuardiansOfAdelia.getInstance().getDataFolder().mkdirs();
@@ -64,6 +67,7 @@ public class ConfigManager {
         createDungeons();
         createTeleportPortals();
         createHologramsConfig();
+        createItemList();
     }
 
     public static void loadConfigALL() {
@@ -77,6 +81,7 @@ public class ConfigManager {
         loadDungeons();
         loadTeleportPortals();
         loadHologramsConfig();
+        loadItemList();
     }
 
     public static void writeConfigALL() {
@@ -185,6 +190,64 @@ public class ConfigManager {
             spawnersConfig.load(customConfigFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void createItemList() {
+        for (RPGClass rpgClass : RPGClass.values()) {
+            for (ArmorType armorType : ArmorType.values()) {
+                String fileName = armorType.toString() + ".yml";
+                String filePath = DATA_FOLDER + File.separator + "items" + File.separator + rpgClass.toString();
+                File customConfigFile = new File(filePath, fileName);
+                if (!customConfigFile.exists()) {
+                    customConfigFile.getParentFile().mkdirs();
+
+                    try {
+                        customConfigFile.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                YamlConfiguration yamlConfiguration = new YamlConfiguration();
+                try {
+                    yamlConfiguration.load(customConfigFile);
+                    itemListConfiguration.put(rpgClass.toString() + armorType.toString(), yamlConfiguration);
+                } catch (IOException | InvalidConfigurationException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private static void loadItemList() {
+        for (RPGClass rpgClass : RPGClass.values()) {
+            for (ArmorType armorType : ArmorType.values()) {
+                FileConfiguration fileConfiguration = itemListConfiguration.get(rpgClass.toString() + armorType.toString());
+                int itemCount = fileConfiguration.getInt("itemCount");
+
+                List<ArmorItemTemplate> armorItemTemplates = new ArrayList<>();
+
+                for (int i = 1; i <= itemCount; i++) {
+                    String nameStr = fileConfiguration.getString("i" + i + ".name");
+                    int level = fileConfiguration.getInt("i" + i + ".level");
+                    int health = fileConfiguration.getInt("i" + i + ".health");
+                    int defense = fileConfiguration.getInt("i" + i + ".defense");
+                    int magicDefense = fileConfiguration.getInt("i" + i + ".magicDefense");
+                    String materialStr = fileConfiguration.getString("i" + i + ".material");
+
+                    GuardiansOfAdelia.getInstance().getLogger().info(materialStr);
+                    String name = ChatColor.translateAlternateColorCodes('&', nameStr);
+                    Material material = Material.valueOf(materialStr);
+
+                    ArmorItemTemplate armorItemTemplate = new ArmorItemTemplate(name, level, health, defense, magicDefense, material);
+                    armorItemTemplates.add(armorItemTemplate);
+                }
+                String key = rpgClass.toString() + armorType.toString();
+                GuardiansOfAdelia.getInstance().getLogger().info(key);
+                GuardiansOfAdelia.getInstance().getLogger().info("size: " + armorItemTemplates.size());
+                Armors.put(key, armorItemTemplates);
+            }
         }
     }
 

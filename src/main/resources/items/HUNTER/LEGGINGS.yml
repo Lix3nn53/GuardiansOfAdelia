@@ -1,0 +1,56 @@
+# ---------------------------------------------- #
+#             Database Configuration             #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 7
+i1:
+  name: "Leaf Leggings"
+  level: 26
+  health: 120
+  defense: 40
+  magicDefense: 30
+  material: LEATHER_LEGGINGS
+i2:
+  name: "Forest Fairy Leggings"
+  level: 36
+  health: 170
+  defense: 70
+  magicDefense: 40
+  material: LEATHER_LEGGINGS
+i3:
+  name: "Hunter Leggings"
+  level: 46
+  health: 270
+  defense: 110
+  magicDefense: 70
+  material: CHAINMAIL_LEGGINGS
+i4:
+  name: "Speedy Leggings"
+  level: 56
+  health: 380
+  defense: 150
+  magicDefense: 100
+  material: CHAINMAIL_LEGGINGS
+i5:
+  name: "White Wolf Leggings"
+  level: 66
+  health: 490
+  defense: 200
+  magicDefense: 130
+  material: CHAINMAIL_LEGGINGS
+i6:
+  name: "Moottalis Leggings"
+  level: 76
+  health: 640
+  defense: 240
+  magicDefense: 160
+  material: CHAINMAIL_LEGGINGS
+i7:
+  name: "Darkshuter Leggings"
+  level: 86
+  health: 880
+  defense: 320
+  magicDefense: 220
+  material: CHAINMAIL_LEGGINGS

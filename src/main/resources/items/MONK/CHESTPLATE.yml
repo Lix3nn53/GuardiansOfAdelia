@@ -1,0 +1,56 @@
+# ---------------------------------------------- #
+#             Database Configuration             #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 7
+i1:
+  name: "Seaweed Chestplate"
+  level: 28
+  health: 190
+  defense: 50
+  magicDefense: 30
+  material: LEATHER_CHESTPLATE
+i2:
+  name: "Kelp Chestplate"
+  level: 38
+  health: 290
+  defense: 90
+  magicDefense: 60
+  material: LEATHER_CHESTPLATE
+i3:
+  name: "Coral Chestplate"
+  level: 48
+  health: 490
+  defense: 140
+  magicDefense: 90
+  material: IRON_CHESTPLATE
+i4:
+  name: "Aqua Chestplate"
+  level: 58
+  health: 670
+  defense: 200
+  magicDefense: 130
+  material: IRON_CHESTPLATE
+i5:
+  name: "Water Spirit Chestplate"
+  level: 68
+  health: 900
+  defense: 260
+  magicDefense: 170
+  material: IRON_CHESTPLATE
+i6:
+  name: "Mera Chestplate"
+  level: 78
+  health: 1100
+  defense: 330
+  magicDefense: 220
+  material: IRON_CHESTPLATE
+i7:
+  name: "Atlantean Chestplate"
+  level: 88
+  health: 1500
+  defense: 430
+  magicDefense: 290
+  material: IRON_CHESTPLATE
