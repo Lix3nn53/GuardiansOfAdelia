@@ -28,4 +28,23 @@ public class Weapons {
         return null;
     }
 
+    public static void add(RPGClass rpgClass, WeaponItemTemplate weaponItemTemplate) {
+        if (rpgClass.equals(RPGClass.WARRIOR)) {
+            Axes.add(weaponItemTemplate);
+        } else if (rpgClass.equals(RPGClass.ARCHER)) {
+            Bows.add(weaponItemTemplate);
+        } else if (rpgClass.equals(RPGClass.ROGUE)) {
+            Daggers.add(weaponItemTemplate);
+        } else if (rpgClass.equals(RPGClass.PALADIN)) {
+            Hammers.add(weaponItemTemplate);
+        } else if (rpgClass.equals(RPGClass.MAGE)) {
+            Staffs.add(weaponItemTemplate);
+        } else if (rpgClass.equals(RPGClass.KNIGHT)) {
+            Swords.add(weaponItemTemplate);
+        } else if (rpgClass.equals(RPGClass.MONK)) {
+            Tridents.add(weaponItemTemplate);
+        } else if (rpgClass.equals(RPGClass.HUNTER)) {
+            Crossbows.add(weaponItemTemplate);
+        }
+    }
 }

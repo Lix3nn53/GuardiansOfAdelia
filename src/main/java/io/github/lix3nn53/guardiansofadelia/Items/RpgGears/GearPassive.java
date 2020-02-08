@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -19,7 +20,7 @@ public class GearPassive implements RPGGear {
     private final int level;
     private ItemStack itemStack;
 
-    public GearPassive(String name, ItemTier tier, String itemTag, int customModelDataId, int passiveType, int level, RPGClass rpgClass,
+    public GearPassive(String name, ItemTier tier, String itemTag, int customModelData, RPGSlotType passiveType, int level, RPGClass rpgClass,
                        int minStatValue, int maxStatValue, int minNumberOfStats, double bonusPercent) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
@@ -64,7 +65,7 @@ public class GearPassive implements RPGGear {
 
         this.itemStack = new ItemStack(Material.SHEARS);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
-        PersistentDataContainerUtil.putInteger("passive", passiveType, this.itemStack);
+        PersistentDataContainerUtil.putString("passive", passiveType.name(), this.itemStack);
 
         if (finalFire != 0) {
             PersistentDataContainerUtil.putInteger("fire", finalFire, this.itemStack);
@@ -87,7 +88,7 @@ public class GearPassive implements RPGGear {
         itemMeta.setDisplayName(name);
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(customModelDataId);
+        itemMeta.setCustomModelData(customModelData);
         this.itemStack.setItemMeta(itemMeta);
 
         this.tier = tier;

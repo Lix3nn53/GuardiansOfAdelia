@@ -1,0 +1,57 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 10
+i1:
+  name: "Short Dagger"
+  customModelData: 1
+  level: 1
+  damage: 8
+i2:
+  name: "Steel Dagger"
+  customModelData: 2
+  level: 10
+  damage: 12
+i3:
+  name: "Katana"
+  customModelData: 3
+  level: 20
+  damage: 20
+i4:
+  name: "Crimson Dagger"
+  customModelData: 4
+  level: 30
+  damage: 50
+i5:
+  name: "Jade Dagger"
+  customModelData: 5
+  level: 40
+  damage: 80
+i6:
+  name: "Frozen Dagger"
+  customModelData: 6
+  level: 50
+  damage: 128
+i7:
+  name: "Shadow Claws"
+  customModelData: 8
+  level: 60
+  damage: 180
+i8:
+  name: "Dagger of Doom"
+  customModelData: 10
+  level: 70
+  damage: 240
+i9:
+  name: "Blue Wind Dagger"
+  customModelData: 12
+  level: 80
+  damage: 300
+i10:
+  name: "Twin Blades of Shadow"
+  customModelData: 14
+  level: 90
+  damage: 400

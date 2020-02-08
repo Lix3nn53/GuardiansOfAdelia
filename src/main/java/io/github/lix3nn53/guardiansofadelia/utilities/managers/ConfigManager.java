@@ -4,6 +4,10 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorItemTemplate;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
+import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
+import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemTemplate;
+import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponItemTemplate;
+import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
@@ -17,6 +21,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.portals.InstantTeleportPor
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
+import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
@@ -47,7 +52,9 @@ public class ConfigManager {
     private static FileConfiguration hologramsConfig;
     private static FileConfiguration teleportPortals;
 
-    private final static HashMap<String, FileConfiguration> itemListConfiguration = new HashMap<>();
+    private final static HashMap<String, FileConfiguration> armorItemsConfigurations = new HashMap<>();
+    private final static HashMap<RPGSlotType, FileConfiguration> passiveItemsConfigurations = new HashMap<>();
+    private final static HashMap<RPGClass, FileConfiguration> weaponItemsConfigurations = new HashMap<>();
 
     public static void init() {
         if (!GuardiansOfAdelia.getInstance().getDataFolder().exists()) {
@@ -67,7 +74,9 @@ public class ConfigManager {
         createDungeons();
         createTeleportPortals();
         createHologramsConfig();
-        createItemList();
+        createItemArmors();
+        createItemPassives();
+        createItemWeapons();
     }
 
     public static void loadConfigALL() {
@@ -81,7 +90,9 @@ public class ConfigManager {
         loadDungeons();
         loadTeleportPortals();
         loadHologramsConfig();
-        loadItemList();
+        loadItemArmors();
+        loadItemPassives();
+        loadItemWeapons();
     }
 
     public static void writeConfigALL() {
@@ -193,11 +204,11 @@ public class ConfigManager {
         }
     }
 
-    private static void createItemList() {
+    private static void createItemArmors() {
         for (RPGClass rpgClass : RPGClass.values()) {
             for (ArmorType armorType : ArmorType.values()) {
                 String fileName = armorType.toString() + ".yml";
-                String filePath = DATA_FOLDER + File.separator + "items" + File.separator + rpgClass.toString();
+                String filePath = DATA_FOLDER + File.separator + "items" + File.separator + "armors" + File.separator + rpgClass.toString();
                 File customConfigFile = new File(filePath, fileName);
                 if (!customConfigFile.exists()) {
                     customConfigFile.getParentFile().mkdirs();
@@ -212,7 +223,7 @@ public class ConfigManager {
                 YamlConfiguration yamlConfiguration = new YamlConfiguration();
                 try {
                     yamlConfiguration.load(customConfigFile);
-                    itemListConfiguration.put(rpgClass.toString() + armorType.toString(), yamlConfiguration);
+                    armorItemsConfigurations.put(rpgClass.toString() + armorType.toString(), yamlConfiguration);
                 } catch (IOException | InvalidConfigurationException e) {
                     e.printStackTrace();
                 }
@@ -220,10 +231,10 @@ public class ConfigManager {
         }
     }
 
-    private static void loadItemList() {
+    private static void loadItemArmors() {
         for (RPGClass rpgClass : RPGClass.values()) {
             for (ArmorType armorType : ArmorType.values()) {
-                FileConfiguration fileConfiguration = itemListConfiguration.get(rpgClass.toString() + armorType.toString());
+                FileConfiguration fileConfiguration = armorItemsConfigurations.get(rpgClass.toString() + armorType.toString());
                 int itemCount = fileConfiguration.getInt("itemCount");
 
                 List<ArmorItemTemplate> armorItemTemplates = new ArrayList<>();
@@ -236,7 +247,6 @@ public class ConfigManager {
                     int magicDefense = fileConfiguration.getInt("i" + i + ".magicDefense");
                     String materialStr = fileConfiguration.getString("i" + i + ".material");
 
-                    GuardiansOfAdelia.getInstance().getLogger().info(materialStr);
                     String name = ChatColor.translateAlternateColorCodes('&', nameStr);
                     Material material = Material.valueOf(materialStr);
 
@@ -244,9 +254,107 @@ public class ConfigManager {
                     armorItemTemplates.add(armorItemTemplate);
                 }
                 String key = rpgClass.toString() + armorType.toString();
-                GuardiansOfAdelia.getInstance().getLogger().info(key);
-                GuardiansOfAdelia.getInstance().getLogger().info("size: " + armorItemTemplates.size());
                 Armors.put(key, armorItemTemplates);
+            }
+        }
+    }
+
+    private static void createItemPassives() {
+        RPGSlotType[] values = RPGSlotType.values();
+
+        for (int value = 0; value < 5; value++) {
+            RPGSlotType rpgSlotType = values[value];
+            String fileName = rpgSlotType.toString() + ".yml";
+            String filePath = DATA_FOLDER + File.separator + "items" + File.separator + "passives";
+            File customConfigFile = new File(filePath, fileName);
+            if (!customConfigFile.exists()) {
+                customConfigFile.getParentFile().mkdirs();
+
+                try {
+                    customConfigFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            YamlConfiguration yamlConfiguration = new YamlConfiguration();
+            try {
+                yamlConfiguration.load(customConfigFile);
+                passiveItemsConfigurations.put(rpgSlotType, yamlConfiguration);
+            } catch (IOException | InvalidConfigurationException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void loadItemPassives() {
+        RPGSlotType[] values = RPGSlotType.values();
+
+        for (int value = 0; value < 5; value++) {
+            RPGSlotType rpgSlotType = values[value];
+            FileConfiguration fileConfiguration = passiveItemsConfigurations.get(rpgSlotType);
+            int itemCount = fileConfiguration.getInt("itemCount");
+
+            List<PassiveItemTemplate> passiveItemTemplates = new ArrayList<>();
+
+            for (int i = 1; i <= itemCount; i++) {
+                String nameStr = fileConfiguration.getString("i" + i + ".name");
+                int customModelData = fileConfiguration.getInt("i" + i + ".customModelData");
+                int level = fileConfiguration.getInt("i" + i + ".level");
+
+                String name = ChatColor.translateAlternateColorCodes('&', nameStr);
+
+                PassiveItemTemplate passiveItemTemplate = new PassiveItemTemplate(name, customModelData, level);
+                passiveItemTemplates.add(passiveItemTemplate);
+            }
+            PassiveItemList.put(rpgSlotType, passiveItemTemplates);
+        }
+    }
+
+    private static void createItemWeapons() {
+        for (RPGClass rpgClass : RPGClass.values()) {
+            if (rpgClass.equals(RPGClass.NO_CLASS)) continue;
+
+            String fileName = rpgClass.toString() + ".yml";
+            String filePath = DATA_FOLDER + File.separator + "items" + File.separator + "weapons";
+            File customConfigFile = new File(filePath, fileName);
+            if (!customConfigFile.exists()) {
+                customConfigFile.getParentFile().mkdirs();
+
+                try {
+                    customConfigFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            YamlConfiguration yamlConfiguration = new YamlConfiguration();
+            try {
+                yamlConfiguration.load(customConfigFile);
+                weaponItemsConfigurations.put(rpgClass, yamlConfiguration);
+            } catch (IOException | InvalidConfigurationException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void loadItemWeapons() {
+        for (RPGClass rpgClass : RPGClass.values()) {
+            if (rpgClass.equals(RPGClass.NO_CLASS)) continue;
+
+            FileConfiguration fileConfiguration = weaponItemsConfigurations.get(rpgClass);
+            int itemCount = fileConfiguration.getInt("itemCount");
+
+            for (int i = 1; i <= itemCount; i++) {
+                String nameStr = fileConfiguration.getString("i" + i + ".name");
+                int customModelData = fileConfiguration.getInt("i" + i + ".customModelData");
+                int level = fileConfiguration.getInt("i" + i + ".level");
+                int damage = fileConfiguration.getInt("i" + i + ".damage");
+
+                String name = ChatColor.translateAlternateColorCodes('&', nameStr);
+
+                WeaponItemTemplate weaponItemTemplate = new WeaponItemTemplate(name, customModelData, level, damage);
+                Weapons.add(rpgClass, weaponItemTemplate);
             }
         }
     }

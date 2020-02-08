@@ -1,0 +1,56 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 7
+i1:
+  name: "BlueSky Leggings"
+  level: 26
+  health: 140
+  defense: 60
+  magicDefense: 20
+  material: LEATHER_LEGGINGS
+i2:
+  name: "Sky Fairy Leggings"
+  level: 36
+  health: 220
+  defense: 90
+  magicDefense: 30
+  material: LEATHER_LEGGINGS
+i3:
+  name: "Half Plate Leggings"
+  level: 46
+  health: 360
+  defense: 140
+  magicDefense: 60
+  material: DIAMOND_LEGGINGS
+i4:
+  name: "Mighty Plate Leggings"
+  level: 56
+  health: 500
+  defense: 190
+  magicDefense: 80
+  material: DIAMOND_LEGGINGS
+i5:
+  name: "Elisa Leggings"
+  level: 66
+  health: 680
+  defense: 250
+  magicDefense: 100
+  material: DIAMOND_LEGGINGS
+i6:
+  name: "Gloria Leggings"
+  level: 76
+  health: 800
+  defense: 320
+  magicDefense: 120
+  material: DIAMOND_LEGGINGS
+i7:
+  name: "Darkshuter Leggings"
+  level: 86
+  health: 1100
+  defense: 420
+  magicDefense: 170
+  material: DIAMOND_LEGGINGS

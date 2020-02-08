@@ -1,0 +1,56 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 7
+i1:
+  name: "Leaf Chestplate"
+  level: 28
+  health: 110
+  defense: 50
+  magicDefense: 40
+  material: LEATHER_CHESTPLATE
+i2:
+  name: "Forest Fairy Chestplate"
+  level: 38
+  health: 160
+  defense: 90
+  magicDefense: 60
+  material: LEATHER_CHESTPLATE
+i3:
+  name: "Hunter Chestplate"
+  level: 48
+  health: 260
+  defense: 140
+  magicDefense: 90
+  material: CHAINMAIL_CHESTPLATE
+i4:
+  name: "Speedy Chestplate"
+  level: 58
+  health: 360
+  defense: 200
+  magicDefense: 130
+  material: CHAINMAIL_CHESTPLATE
+i5:
+  name: "White Wolf Chestplate"
+  level: 68
+  health: 450
+  defense: 260
+  magicDefense: 170
+  material: CHAINMAIL_CHESTPLATE
+i6:
+  name: "Moottalis Chestplate"
+  level: 78
+  health: 580
+  defense: 320
+  magicDefense: 210
+  material: CHAINMAIL_CHESTPLATE
+i7:
+  name: "Darkshuter Chestplate"
+  level: 88
+  health: 750
+  defense: 430
+  magicDefense: 290
+  material: CHAINMAIL_CHESTPLATE

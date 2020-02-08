@@ -7,68 +7,33 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Axes {
+
+    private final static List<WeaponItemTemplate> weaponItemTemplates = new ArrayList<>();
 
     public static ItemStack get(int placementNumber, ItemTier tier, String itemTag, double bonusPercent, int minStatValue,
                                 int maxStatValue, int minNumberofStats) {
-        String name = "Short Axe";
         Material material = Material.DIAMOND_AXE;
-        int durability = 1;
-        int level = 1;
         RPGClass rpgClass = RPGClass.WARRIOR;
-        int damage = 12;
         AttackSpeed attackSpeed = AttackSpeed.SLOW;
 
-        if (placementNumber == 2) {
-            name = "Battle Axe";
-            durability = 2;
-            level = 10;
-            damage = 24;
-        } else if (placementNumber == 3) {
-            name = "Valor Axe";
-            durability = 3;
-            level = 20;
-            damage = 48;
-        } else if (placementNumber == 4) {
-            name = "Frozen Axe";
-            durability = 4;
-            level = 30;
-            damage = 120;
-        } else if (placementNumber == 5) {
-            name = "Sword of Doom";
-            durability = 5;
-            level = 40;
-            damage = 190;
-        } else if (placementNumber == 6) {
-            name = "Shadow Axe";
-            durability = 6;
-            level = 50;
-            damage = 300;
-        } else if (placementNumber == 7) {
-            name = "Claymore";
-            durability = 8;
-            level = 60;
-            damage = 430;
-        } else if (placementNumber == 8) {
-            name = "Dragon Sword";
-            durability = 10;
-            level = 70;
-            damage = 580;
-        } else if (placementNumber == 9) {
-            name = "Soul Reaper";
-            durability = 12;
-            level = 80;
-            damage = 720;
-        } else if (placementNumber == 10) {
-            name = "Titanic Axe";
-            durability = 14;
-            level = 90;
-            damage = 960;
-        }
+        WeaponItemTemplate template = weaponItemTemplates.get(placementNumber - 1);
 
-        final WeaponMelee axe = new WeaponMelee(name, tier, itemTag, material, durability, level, rpgClass, damage, bonusPercent,
+        String name = template.getName();
+        int customModelData = template.getCustomModelData();
+        int level = template.getLevel();
+        int meleeDamage = template.getDamage();
+
+        final WeaponMelee axe = new WeaponMelee(name, tier, itemTag, material, customModelData, level, rpgClass, meleeDamage, bonusPercent,
                 attackSpeed, minStatValue, maxStatValue, minNumberofStats);
         return axe.getItemStack();
+    }
+
+    protected static void add(WeaponItemTemplate weaponItemTemplate) {
+        weaponItemTemplates.add(weaponItemTemplate);
     }
 
 }

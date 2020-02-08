@@ -1,0 +1,56 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 7
+i1:
+  name: "Sunset Chestplate"
+  level: 28
+  health: 150
+  defense: 50
+  magicDefense: 40
+  material: LEATHER_CHESTPLATE
+i2:
+  name: "Dark Wind Chestplate"
+  level: 38
+  health: 230
+  defense: 90
+  magicDefense: 60
+  material: LEATHER_CHESTPLATE
+i3:
+  name: "Terra Chestplate"
+  level: 48
+  health: 370
+  defense: 140
+  magicDefense: 90
+  material: CHAINMAIL_CHESTPLATE
+i4:
+  name: "Lupy Chestplate"
+  level: 58
+  health: 500
+  defense: 200
+  magicDefense: 130
+  material: CHAINMAIL_CHESTPLATE
+i5:
+  name: "White Fox Chestplate"
+  level: 68
+  health: 680
+  defense: 260
+  magicDefense: 170
+  material: CHAINMAIL_CHESTPLATE
+i6:
+  name: "Luna Chestplate"
+  level: 78
+  health: 840
+  defense: 320
+  magicDefense: 220
+  material: CHAINMAIL_CHESTPLATE
+i7:
+  name: "Shadow Chestplate"
+  level: 88
+  health: 1100
+  defense: 430
+  magicDefense: 290
+  material: CHAINMAIL_CHESTPLATE

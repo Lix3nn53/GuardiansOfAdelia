@@ -1,0 +1,56 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 7
+i1:
+  name: "Silk Boots"
+  level: 22
+  health: 50
+  defense: 20
+  magicDefense: 20
+  material: LEATHER_BOOTS
+i2:
+  name: "Eli Boots"
+  level: 32
+  health: 80
+  defense: 30
+  magicDefense: 30
+  material: LEATHER_BOOTS
+i3:
+  name: "Wisdom Boots"
+  level: 42
+  health: 120
+  defense: 50
+  magicDefense: 50
+  material: GOLDEN_BOOTS
+i4:
+  name: "Wizardy Boots"
+  level: 52
+  health: 170
+  defense: 70
+  magicDefense: 70
+  material: GOLDEN_BOOTS
+i5:
+  name: "Xhar Boots"
+  level: 62
+  health: 220
+  defense: 90
+  magicDefense: 90
+  material: GOLDEN_BOOTS
+i6:
+  name: "Chamor Boots"
+  level: 72
+  health: 280
+  defense: 105
+  magicDefense: 105
+  material: GOLDEN_BOOTS
+i7:
+  name: "Neferti Boots"
+  level: 82
+  health: 380
+  defense: 150
+  magicDefense: 150
+  material: GOLDEN_BOOTS

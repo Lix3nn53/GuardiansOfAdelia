@@ -1,0 +1,47 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 10
+i1:
+  name: "Short Gloves"
+  customModelData: 11
+  level: 4
+i2:
+  name: "Cloth Gloves"
+  customModelData: 12
+  level: 14
+i3:
+  name: "Leather Gloves"
+  customModelData: 13
+  level: 24
+i4:
+  name: "Chainmail Gloves"
+  customModelData: 14
+  level: 34
+i5:
+  name: "Iron Gloves"
+  customModelData: 15
+  level: 44
+i6:
+  name: "Amethyst Gloves"
+  customModelData: 16
+  level: 54
+i7:
+  name: "Gold Gloves"
+  customModelData: 17
+  level: 64
+i8:
+  name: "Quartz Gloves"
+  customModelData: 18
+  level: 74
+i9:
+  name: "Titanium Gloves"
+  customModelData: 19
+  level: 84
+i10:
+  name: "Moon Stone Gloves"
+  customModelData: 20
+  level: 90

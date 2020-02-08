@@ -1,0 +1,57 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 10
+i1:
+  name: "Short Axe"
+  customModelData: 1
+  level: 1
+  damage: 12
+i2:
+  name: "Battle Axe"
+  customModelData: 2
+  level: 10
+  damage: 24
+i3:
+  name: "Valor Axe"
+  customModelData: 3
+  level: 20
+  damage: 48
+i4:
+  name: "Frozen Axe"
+  customModelData: 4
+  level: 30
+  damage: 120
+i5:
+  name: "Sword of Doom"
+  customModelData: 5
+  level: 40
+  damage: 190
+i6:
+  name: "Shadow Axe"
+  customModelData: 6
+  level: 50
+  damage: 300
+i7:
+  name: "Claymore"
+  customModelData: 8
+  level: 60
+  damage: 430
+i8:
+  name: "Dragon Sword"
+  customModelData: 10
+  level: 70
+  damage: 580
+i9:
+  name: "Soul Reaper"
+  customModelData: 12
+  level: 80
+  damage: 720
+i10:
+  name: "Titanic Axe"
+  customModelData: 14
+  level: 90
+  damage: 960

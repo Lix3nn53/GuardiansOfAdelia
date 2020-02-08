@@ -1,0 +1,56 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 7
+i1:
+  name: "Leaf Helmet"
+  level: 24
+  health: 50
+  defense: 30
+  magicDefense: 20
+  material: LEATHER_HELMET
+i2:
+  name: "Forest Fairy Helmet"
+  level: 34
+  health: 80
+  defense: 40
+  magicDefense: 30
+  material: LEATHER_HELMET
+i3:
+  name: "Hunter Helmet"
+  level: 44
+  health: 120
+  defense: 70
+  magicDefense: 50
+  material: CHAINMAIL_HELMET
+i4:
+  name: "Speedy Helmet"
+  level: 54
+  health: 170
+  defense: 100
+  magicDefense: 65
+  material: CHAINMAIL_HELMET
+i5:
+  name: "White Wolf Helmet"
+  level: 64
+  health: 220
+  defense: 130
+  magicDefense: 90
+  material: CHAINMAIL_HELMET
+i6:
+  name: "Moottalis Helmet"
+  level: 74
+  health: 280
+  defense: 165
+  magicDefense: 110
+  material: CHAINMAIL_HELMET
+i7:
+  name: "Darkshuter Helmet"
+  level: 84
+  health: 380
+  defense: 220
+  magicDefense: 140
+  material: CHAINMAIL_HELMET

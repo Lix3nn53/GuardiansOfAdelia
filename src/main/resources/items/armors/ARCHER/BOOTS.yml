@@ -1,0 +1,56 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 7
+i1:
+  name: "Leaf Boots"
+  level: 22
+  health: 50
+  defense: 30
+  magicDefense: 20
+  material: LEATHER_BOOTS
+i2:
+  name: "Forest Fairy Boots"
+  level: 32
+  health: 80
+  defense: 40
+  magicDefense: 30
+  material: LEATHER_BOOTS
+i3:
+  name: "Hunter Boots"
+  level: 42
+  health: 120
+  defense: 70
+  magicDefense: 50
+  material: CHAINMAIL_BOOTS
+i4:
+  name: "Speedy Boots"
+  level: 52
+  health: 170
+  defense: 100
+  magicDefense: 65
+  material: CHAINMAIL_BOOTS
+i5:
+  name: "White Wolf Boots"
+  level: 62
+  health: 220
+  defense: 130
+  magicDefense: 90
+  material: CHAINMAIL_BOOTS
+i6:
+  name: "Moottalis Boots"
+  level: 72
+  health: 280
+  defense: 165
+  magicDefense: 110
+  material: CHAINMAIL_BOOTS
+i7:
+  name: "Darkshuter Boots"
+  level: 82
+  health: 380
+  defense: 220
+  magicDefense: 140
+  material: CHAINMAIL_BOOTS

@@ -11,12 +11,12 @@ import java.util.ArrayList;
 
 public class RPGSlotNecklace extends RPGSlotPassive implements RPGSlot {
 
-    private final int passiveTypeNum = 3;
+    private final RPGSlotType passiveType = RPGSlotType.NECKLACE;
 
     public boolean doesFit(ItemStack itemStack) {
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "passive")) {
-            Integer typeNum = PersistentDataContainerUtil.getInteger(itemStack, "passive");
-            return typeNum == this.passiveTypeNum;
+        if (PersistentDataContainerUtil.hasString(itemStack, "passive")) {
+            String typeStr = PersistentDataContainerUtil.getString(itemStack, "passive");
+            return RPGSlotType.valueOf(typeStr).equals(this.passiveType);
         }
         return false;
     }

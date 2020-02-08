@@ -7,69 +7,34 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Staffs {
+
+    private final static List<WeaponItemTemplate> weaponItemTemplates = new ArrayList<>();
 
     public static ItemStack get(int placementNumber, ItemTier tier, String itemTag, double bonusPercent, int minStatValue,
                                 int maxStatValue, int minNumberofStats) {
-        String name = "Short Staff";
         Material material = Material.DIAMOND_SHOVEL;
-        int customModelDataId = 1;
-        int level = 1;
         RPGClass rpgClass = RPGClass.MAGE;
-        int magicDamage = 10;
         AttackSpeed attackSpeed = AttackSpeed.SLOW;
 
-        if (placementNumber == 2) {
-            name = "Leaf Fairy Staff";
-            customModelDataId = 2;
-            level = 10;
-            magicDamage = 20;
-        } else if (placementNumber == 3) {
-            name = "Zest Staff";
-            customModelDataId = 3;
-            level = 20;
-            magicDamage = 40;
-        } else if (placementNumber == 4) {
-            name = "Dinah Wand";
-            customModelDataId = 4;
-            level = 30;
-            magicDamage = 100;
-        } else if (placementNumber == 5) {
-            name = "Nether Fire Staff";
-            customModelDataId = 5;
-            level = 40;
-            magicDamage = 160;
-        } else if (placementNumber == 6) {
-            name = "Water Fairy Staff";
-            customModelDataId = 6;
-            level = 50;
-            magicDamage = 250;
-        } else if (placementNumber == 7) {
-            name = "Fairy Staff";
-            customModelDataId = 8;
-            level = 60;
-            magicDamage = 360;
-        } else if (placementNumber == 8) {
-            name = "Ocean Staff";
-            customModelDataId = 10;
-            level = 70;
-            magicDamage = 480;
-        } else if (placementNumber == 9) {
-            name = "Crystal of Swamp";
-            customModelDataId = 12;
-            level = 80;
-            magicDamage = 600;
-        } else if (placementNumber == 10) {
-            name = "Neferti Staff";
-            customModelDataId = 14;
-            level = 90;
-            magicDamage = 800;
-        }
+        WeaponItemTemplate template = weaponItemTemplates.get(placementNumber - 1);
+
+        String name = template.getName();
+        int customModelData = template.getCustomModelData();
+        int level = template.getLevel();
+        int magicDamage = template.getDamage();
 
         int damage = magicDamage / 4;
 
-        final WeaponMagical weapon = new WeaponMagical(name, tier, itemTag, material, customModelDataId, level, rpgClass, damage, magicDamage, bonusPercent,
+        final WeaponMagical weapon = new WeaponMagical(name, tier, itemTag, material, customModelData, level, rpgClass, damage, magicDamage, bonusPercent,
                 attackSpeed, minStatValue, maxStatValue, minNumberofStats);
         return weapon.getItemStack();
+    }
+
+    protected static void add(WeaponItemTemplate weaponItemTemplate) {
+        weaponItemTemplates.add(weaponItemTemplate);
     }
 }

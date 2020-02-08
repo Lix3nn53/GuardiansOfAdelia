@@ -1,0 +1,57 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 10
+i1:
+  name: "Short Crossbow"
+  customModelData: 1
+  level: 1
+  int damage: 12
+i2:
+  name: "Light Crossbow"
+  customModelData: 2
+  level: 10
+  damage: 24
+i3:
+  name: "Crossbow"
+  customModelData: 3
+  level: 20
+  damage: 48
+i4:
+  name: "Battle Crossbow"
+  customModelData: 4
+  level: 30
+  damage: 120
+i5:
+  name: "Satet Crossbow"
+  customModelData: 5
+  level: 40
+  damage: 190
+i6:
+  name: "Leaf Fairy Crossbow"
+  customModelData: 6
+  level: 50
+  damage: 300
+i7:
+  name: "Crossbow of Doom"
+  customModelData: 8
+  level: 60
+  damage: 430
+i8:
+  name: "Unicorn Crossbow"
+  customModelData: 10
+  level: 70
+  damage: 580
+i9:
+  name: "Zephyr Crossbow"
+  customModelData: 12
+  level: 80
+  damage: 720
+i10:
+  name: "Arcade Crossbow"
+  customModelData: 14
+  level: 90
+  damage: 960

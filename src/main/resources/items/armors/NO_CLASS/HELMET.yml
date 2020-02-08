@@ -1,0 +1,22 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 2
+i1:
+  name: "Leather Helmet"
+  level: 4
+  health: 20
+  defense: 10
+  magicDefense: 5
+  material: LEATHER_HELMET
+i2:
+  name: "Hide Helmet"
+  level: 14
+  health: 30
+  defense: 15
+  magicDefense: 10
+  material: LEATHER_HELMET
+  

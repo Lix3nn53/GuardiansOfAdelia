@@ -1,0 +1,47 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 10
+i1:
+  name: "Stone Ring"
+  customModelData: 1
+  level: 2
+i2:
+  name: "Leaf Ring"
+  customModelData: 2
+  level: 12
+i3:
+  name: "Gold Ring"
+  customModelData: 3
+  level: 22
+i4:
+  name: "Fire Ring"
+  customModelData: 4
+  level: 32
+i5:
+  name: "Ocean Ring"
+  customModelData: 5
+  level: 42
+i6:
+  name: "Lapis Ring"
+  customModelData: 6
+  level: 52
+i7:
+  name: "Lightning Ring"
+  customModelData: 7
+  level: 62
+i8:
+  name: "Amethyst Ring"
+  customModelData: 8
+  level: 72
+i9:
+  name: "Ruby Ring"
+  customModelData: 9
+  level: 82
+i10:
+  name: "Moon Stone Ring"
+  customModelData: 10
+  level: 90

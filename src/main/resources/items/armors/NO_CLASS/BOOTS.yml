@@ -1,0 +1,21 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 2
+i1:
+  name: "Leaf Boots"
+  level: 2
+  health: 20
+  defense: 10
+  magicDefense: 5
+  material: LEATHER_BOOTS
+i2:
+  name: "Hide Boots"
+  level: 12
+  health: 30
+  defense: 15
+  magicDefense: 10
+  material: LEATHER_BOOTS
