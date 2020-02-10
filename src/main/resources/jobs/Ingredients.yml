@@ -1,0 +1,114 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                 Ingredients                    #
+# ---------------------------------------------- #
+
+ingredientCount: 8
+i1:
+  name: "&eRaw Beef"
+  customModelData: 0
+  ingredientLevel: 3
+  jobsCanUse:
+    - '&dAlchemist'
+  extraText:
+    - '--'
+i2:
+  name: "&eWorn Leather"
+  customModelData: 0
+  ingredientLevel: 1
+  jobsCanUse:
+    - '&dArmorsmith'
+  extraText:
+    - '--'
+i3:
+  name: "&eHeavy Leather"
+  customModelData: 0
+  ingredientLevel: 4
+  jobsCanUse:
+    - '&dArmorsmith'
+  extraText:
+    - '--'
+i4:
+  name: "&eRaw Cod"
+  customModelData: 0
+  ingredientLevel: 3
+  jobsCanUse:
+    - '&dAlchemist'
+  extraText:
+    - '--'
+i5:
+  name: "&eRaw Salmon"
+  customModelData: 0
+  ingredientLevel: 5
+  jobsCanUse:
+    - '&dAlchemist'
+  extraText:
+    - '--'
+i6:
+  name: "&eString"
+  customModelData: 0
+  ingredientLevel: 1
+  jobsCanUse:
+    - '&dWEAPONSMITH'
+    - '&dARMORSMITH'
+  extraText:
+    - '--'
+i7:
+  name: "&eSilk"
+  customModelData: 0
+  ingredientLevel: 3
+  jobsCanUse:
+    - '&dWEAPONSMITH'
+    - '&dARMORSMITH'
+  extraText:
+    - '--'
+i8:
+  name: "&eSoft Silk"
+  customModelData: 0
+  ingredientLevel: 5
+  jobsCanUse:
+    - '&dWEAPONSMITH'
+    - '&dARMORSMITH'
+  extraText:
+    - '--'
+i9:
+  name: "&eRose"
+  customModelData: 0
+  ingredientLevel: 5
+  jobsCanUse:
+    - '&dAlchemist'
+  extraText:
+    - '--'
+i10:
+  name: "&eCherry"
+  customModelData: 0
+  ingredientLevel: 5
+  jobsCanUse:
+    - '&dAlchemist'
+  extraText:
+    - '--'
+i12:
+  name: "&eCopper Mine"
+  customModelData: 0
+  ingredientLevel: 5
+  jobsCanUse:
+    - '&dAlchemist'
+  extraText:
+    - '--'
+i13:
+  name: "&eIron Mine"
+  customModelData: 0
+  ingredientLevel: 5
+  jobsCanUse:
+    - '&dAlchemist'
+  extraText:
+    - '--'
+i14:
+  name: "&eSteel Mine"
+  customModelData: 0
+  ingredientLevel: 5
+  jobsCanUse:
+    - '&dAlchemist'
+  extraText:
+    - '--'

@@ -1,0 +1,20 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                 Ingredients                    #
+# ---------------------------------------------- #
+
+gatheringTypeCount: 5
+g1:
+  ingredients:
+    - 1
+    - 2
+    - 3
+  gatheringTypes:
+    - 'HUNTING'
+g2:
+  ingredients:
+    - 4
+    - 5
+  gatheringTypes:
+    - 'FISHING'

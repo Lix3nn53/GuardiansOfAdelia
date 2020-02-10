@@ -34,32 +34,12 @@ public class MobDropGenerator {
         }
 
         if (random < dropRate) {
-            GearLevel gearLevel = GearLevel.ZERO;
-
-            if (dropTableNumber == 1) {
-                gearLevel = GearLevel.ONE;
-            } else if (dropTableNumber == 2) {
-                gearLevel = GearLevel.TWO;
-            } else if (dropTableNumber == 3) {
-                gearLevel = GearLevel.THREE;
-            } else if (dropTableNumber == 4) {
-                gearLevel = GearLevel.FOUR;
-            } else if (dropTableNumber == 5) {
-                gearLevel = GearLevel.FIVE;
-            } else if (dropTableNumber == 6) {
-                gearLevel = GearLevel.SIX;
-            } else if (dropTableNumber == 7) {
-                gearLevel = GearLevel.SEVEN;
-            } else if (dropTableNumber == 8) {
-                gearLevel = GearLevel.EIGHT;
-            } else if (dropTableNumber == 9) {
-                gearLevel = GearLevel.NINE;
-            }
+            int gearLevel = dropTableNumber;
 
             ItemTier tier = ItemTier.RARE;
             int minNumberOfStats = tier.getMinNumberOfStatsNormal();
-            int minStatValue = gearLevel.getMinStatValue();
-            int maxStatValue = gearLevel.getMaxStatValue();
+            int minStatValue = GearLevel.getMinStatValue(gearLevel);
+            int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
 
             Random rand = new Random();
 
@@ -71,16 +51,16 @@ public class MobDropGenerator {
             int dropType = rand.nextInt(3);
 
             if (dropType == 0) {
-                ItemStack droppedItem = Weapons.getWeapon(rpgClass, gearLevel.getWeaponAndPassiveNo(), tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack droppedItem = Weapons.getWeapon(rpgClass, gearLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);
             } else if (dropType == 1) {
-                if (gearLevel.equals(GearLevel.ZERO) || gearLevel.equals(GearLevel.ONE) || gearLevel.equals(GearLevel.TWO)) {
+                if (gearLevel < 3) {
                     rpgClass = RPGClass.NO_CLASS;
                 }
                 // Obtain a number between [0 - 3].
                 int armorTypeRandom = rand.nextInt(4);
                 ArmorType armorType = ArmorType.values()[armorTypeRandom];
-                ItemStack droppedItem = Armors.getArmor(armorType, rpgClass, gearLevel.getArmorNo(), tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack droppedItem = Armors.getArmor(armorType, rpgClass, gearLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);
             } else if (dropType == 2) {
                 minNumberOfStats = tier.getMinNumberOfStatsPassive();
@@ -88,7 +68,7 @@ public class MobDropGenerator {
                 int passiveType = rand.nextInt(4);
                 RPGSlotType rpgSlotType = RPGSlotType.values()[passiveType + 1]; //+1 to ignore parrot
 
-                ItemStack droppedItem = PassiveItemList.get(gearLevel.getWeaponAndPassiveNo(), rpgSlotType, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack droppedItem = PassiveItemList.get(gearLevel, 0, rpgSlotType, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);
             }
         }

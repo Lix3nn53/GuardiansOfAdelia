@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.armors;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.GearArmor;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
@@ -8,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,9 +17,11 @@ public class Armors {
 
     private final static HashMap<String, List<ArmorItemTemplate>> rpgClassToArmorTemplate = new HashMap<>();
 
-    public static ItemStack getArmor(ArmorType armorType, RPGClass rpgClass, int placementNumber, ItemTier tier, String itemTag, int minStatValue,
+    public static ItemStack getArmor(ArmorType armorType, RPGClass rpgClass, int gearLevel, int itemIndex, ItemTier tier, String itemTag, int minStatValue,
                                      int maxStatValue, int minNumberOfStats) {
-        ArmorItemTemplate template = rpgClassToArmorTemplate.get(rpgClass.toString() + armorType.toString()).get(placementNumber - 1);
+
+        List<ArmorItemTemplate> templates = rpgClassToArmorTemplate.get(rpgClass.toString() + armorType.toString() + gearLevel);
+        ArmorItemTemplate template = templates.get(itemIndex);
 
         String name = template.getName();
         Material material = template.getMaterial();
@@ -54,7 +58,15 @@ public class Armors {
         return gearArmor.getItemStack();
     }
 
-    public static void put(String key, List<ArmorItemTemplate> armorItemTemplates) {
-        rpgClassToArmorTemplate.put(key, armorItemTemplates);
+    public static void put(RPGClass rpgClass, ArmorType armorType, ArmorItemTemplate armorItemTemplate) {
+        int gearLevel = GearLevel.getGearLevel(armorItemTemplate.getLevel());
+        String key = rpgClass.toString() + armorType.toString() + gearLevel;
+
+        List<ArmorItemTemplate> list = new ArrayList<>();
+        if (rpgClassToArmorTemplate.containsKey(key)) {
+            list = rpgClassToArmorTemplate.get(key);
+        }
+        list.add(armorItemTemplate);
+        rpgClassToArmorTemplate.put(key, list);
     }
 }

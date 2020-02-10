@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -21,15 +20,10 @@ import java.util.*;
 
 public class GatheringManager {
 
+    private final static HashMap<Integer, Ingredient> ingredientHashMap = new HashMap<>();
     private final static HashMap<GatheringTool, List<Material>> gatheringToolToBlocks = new HashMap<>();
-    private final static HashMap<Material, List<Ingredient>> blockToIngredients = new HashMap<>();
-    private final static HashMap<GatheringType, List<Ingredient>> gatheringTypeToIngredients = new HashMap<>();
-
-    static {
-        initToolToBlockMap();
-        initBlockToIngredientMap();
-        initGatheringTypeToIngredientMap();
-    }
+    private final static HashMap<Material, List<Integer>> blockToIngredients = new HashMap<>();
+    private final static HashMap<GatheringType, List<Integer>> gatheringTypeToIngredients = new HashMap<>();
 
     public static void startGathering(Player player, ItemStack itemInHand, Material targetBlock) {
         GatheringTool gatheringTool = GatheringTool.materialToGatheringTool(itemInHand.getType());
@@ -70,7 +64,15 @@ public class GatheringManager {
             List<Material> materials = gatheringToolToBlocks.get(gatheringTool);
 
             if (materials.contains(targetBlock)) {
-                return blockToIngredients.get(targetBlock);
+                List<Integer> integers = blockToIngredients.get(targetBlock);
+
+                List<Ingredient> ingredients = new ArrayList<>();
+
+                for (int i : integers) {
+                    ingredients.add(ingredientHashMap.get(i));
+                }
+
+                return ingredients;
             }
         }
 
@@ -79,7 +81,15 @@ public class GatheringManager {
 
     private static List<Ingredient> getIngredients(GatheringType gatheringType) {
         if (gatheringTypeToIngredients.containsKey(gatheringType)) {
-            return gatheringTypeToIngredients.get(gatheringType);
+            List<Integer> integers = gatheringTypeToIngredients.get(gatheringType);
+
+            List<Ingredient> ingredients = new ArrayList<>();
+
+            for (int i : integers) {
+                ingredients.add(ingredientHashMap.get(i));
+            }
+
+            return ingredients;
         }
 
         return null;
@@ -127,6 +137,10 @@ public class GatheringManager {
                 player.sendMessage(ChatColor.RED + "Your gathering tool is broken");
             }
         }
+    }
+
+    public static Ingredient getIngredient(int i) {
+        return ingredientHashMap.get(i);
     }
 
     private static void startGatheringAnimation(final Player player, GatheringTool gatheringTool, ItemStack itemStackTool, Material targetBlock) {
@@ -225,156 +239,34 @@ public class GatheringManager {
         }
     }
 
-    private static void initToolToBlockMap() {
-        List<Material> axeBlocks = new ArrayList<>();
-        axeBlocks.add(Material.ACACIA_WOOD);
-        axeBlocks.add(Material.BIRCH_WOOD);
-        axeBlocks.add(Material.DARK_OAK_WOOD);
-        axeBlocks.add(Material.JUNGLE_WOOD);
-        axeBlocks.add(Material.OAK_WOOD);
-        axeBlocks.add(Material.SPRUCE_WOOD);
-        axeBlocks.add(Material.ACACIA_LOG);
-        axeBlocks.add(Material.BIRCH_LOG);
-        axeBlocks.add(Material.DARK_OAK_LOG);
-        axeBlocks.add(Material.JUNGLE_LOG);
-        axeBlocks.add(Material.OAK_LOG);
-        axeBlocks.add(Material.SPRUCE_LOG);
-        gatheringToolToBlocks.put(GatheringTool.AXE, axeBlocks);
-
-        List<Material> pickaxeBlocks = new ArrayList<>();
-        pickaxeBlocks.add(Material.EMERALD_ORE);
-        pickaxeBlocks.add(Material.GOLD_ORE);
-        pickaxeBlocks.add(Material.REDSTONE_ORE);
-        pickaxeBlocks.add(Material.LAPIS_ORE);
-        pickaxeBlocks.add(Material.COAL_ORE);
-        pickaxeBlocks.add(Material.IRON_ORE);
-        pickaxeBlocks.add(Material.DIAMOND_ORE);
-        gatheringToolToBlocks.put(GatheringTool.PICKAXE, pickaxeBlocks);
-
-        List<Material> hoeBlocks = new ArrayList<>();
-        hoeBlocks.add(Material.DANDELION);
-        hoeBlocks.add(Material.POPPY);
-        hoeBlocks.add(Material.BLUE_ORCHID);
-        hoeBlocks.add(Material.ALLIUM);
-        hoeBlocks.add(Material.AZURE_BLUET);
-        hoeBlocks.add(Material.RED_TULIP);
-        hoeBlocks.add(Material.ORANGE_TULIP);
-        hoeBlocks.add(Material.WHITE_TULIP);
-        hoeBlocks.add(Material.PINK_TULIP);
-        hoeBlocks.add(Material.OXEYE_DAISY);
-        hoeBlocks.add(Material.CORNFLOWER);
-        hoeBlocks.add(Material.LILY_OF_THE_VALLEY);
-        hoeBlocks.add(Material.WITHER_ROSE);
-        hoeBlocks.add(Material.SUNFLOWER);
-        hoeBlocks.add(Material.LILAC);
-        hoeBlocks.add(Material.ROSE_BUSH);
-        hoeBlocks.add(Material.PEONY);
-        hoeBlocks.add(Material.ACACIA_LEAVES);
-        hoeBlocks.add(Material.BIRCH_LEAVES);
-        hoeBlocks.add(Material.DARK_OAK_LEAVES);
-        hoeBlocks.add(Material.JUNGLE_LEAVES);
-        hoeBlocks.add(Material.OAK_LEAVES);
-        hoeBlocks.add(Material.SPRUCE_LEAVES);
-        hoeBlocks.add(Material.COBWEB);
-        gatheringToolToBlocks.put(GatheringTool.HOE, hoeBlocks);
+    public static void putIngredient(int i, Ingredient ingredient) {
+        ingredientHashMap.put(i, ingredient);
     }
 
-    private static void initBlockToIngredientMap() {
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.WOODCUTTING_LOG);
-        ingredients.add(Ingredient.WOODCUTTING_PLANK);
-        blockToIngredients.put(Material.ACACIA_WOOD, ingredients);
-        blockToIngredients.put(Material.BIRCH_WOOD, ingredients);
-        blockToIngredients.put(Material.DARK_OAK_WOOD, ingredients);
-        blockToIngredients.put(Material.JUNGLE_WOOD, ingredients);
-        blockToIngredients.put(Material.OAK_WOOD, ingredients);
-        blockToIngredients.put(Material.SPRUCE_WOOD, ingredients);
-        blockToIngredients.put(Material.ACACIA_LOG, ingredients);
-        blockToIngredients.put(Material.BIRCH_LOG, ingredients);
-        blockToIngredients.put(Material.DARK_OAK_LOG, ingredients);
-        blockToIngredients.put(Material.JUNGLE_LOG, ingredients);
-        blockToIngredients.put(Material.OAK_LOG, ingredients);
-        blockToIngredients.put(Material.SPRUCE_LOG, ingredients);
-
-        ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.HARVESTING_ROSE);
-        ingredients.add(Ingredient.HARVESTING_PLUM_FLOWER);
-        blockToIngredients.put(Material.DANDELION, ingredients);
-        blockToIngredients.put(Material.POPPY, ingredients);
-        blockToIngredients.put(Material.BLUE_ORCHID, ingredients);
-        blockToIngredients.put(Material.ALLIUM, ingredients);
-        blockToIngredients.put(Material.AZURE_BLUET, ingredients);
-        blockToIngredients.put(Material.RED_TULIP, ingredients);
-        blockToIngredients.put(Material.ORANGE_TULIP, ingredients);
-        blockToIngredients.put(Material.WHITE_TULIP, ingredients);
-        blockToIngredients.put(Material.PINK_TULIP, ingredients);
-        blockToIngredients.put(Material.OXEYE_DAISY, ingredients);
-        blockToIngredients.put(Material.CORNFLOWER, ingredients);
-        blockToIngredients.put(Material.LILY_OF_THE_VALLEY, ingredients);
-        blockToIngredients.put(Material.WITHER_ROSE, ingredients);
-        blockToIngredients.put(Material.SUNFLOWER, ingredients);
-        blockToIngredients.put(Material.LILAC, ingredients);
-        blockToIngredients.put(Material.ROSE_BUSH, ingredients);
-        blockToIngredients.put(Material.PEONY, ingredients);
-
-        ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.HARVESTING_CHERRY);
-        blockToIngredients.put(Material.ACACIA_LEAVES, ingredients);
-        blockToIngredients.put(Material.BIRCH_LEAVES, ingredients);
-        blockToIngredients.put(Material.DARK_OAK_LEAVES, ingredients);
-        blockToIngredients.put(Material.JUNGLE_LEAVES, ingredients);
-        blockToIngredients.put(Material.OAK_LEAVES, ingredients);
-        blockToIngredients.put(Material.SPRUCE_LEAVES, ingredients);
-
-        ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.HARVESTING_STRING);
-        ingredients.add(Ingredient.HARVESTING_SILK);
-        ingredients.add(Ingredient.HARVESTING_SOFT_SILK);
-        blockToIngredients.put(Material.COBWEB, ingredients);
-
-        ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.MINING_JEWEL_JADE);
-        blockToIngredients.put(Material.EMERALD_ORE, ingredients);
-
-        ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.MINING_ORE_COPPER);
-        blockToIngredients.put(Material.COAL_ORE, ingredients);
-
-        ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.MINING_ORE_IRON);
-        ingredients.add(Ingredient.MINING_ORE_STEEL);
-        blockToIngredients.put(Material.IRON_ORE, ingredients);
-
-        ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.MINING_ORE_DIAMOND);
-        ingredients.add(Ingredient.MINING_ORE_TITANIUM);
-        blockToIngredients.put(Material.DIAMOND_ORE, ingredients);
-
-        ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.MINING_JEWEL_GOLD_DUST);
-        blockToIngredients.put(Material.GOLD_ORE, ingredients);
-
-        ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.MINING_JEWEL_AMETHYST);
-        ingredients.add(Ingredient.MINING_JEWEL_SAPPHIRE);
-        blockToIngredients.put(Material.LAPIS_ORE, ingredients);
-
-        ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.MINING_JEWEL_RUBY);
-        blockToIngredients.put(Material.REDSTONE_ORE, ingredients);
-
+    public static void putToolToBlock(GatheringTool gatheringTool, Material block) {
+        List<Material> blocks = new ArrayList<>();
+        if (gatheringToolToBlocks.containsKey(gatheringTool)) {
+            blocks = gatheringToolToBlocks.get(gatheringTool);
+        }
+        blocks.add(block);
+        gatheringToolToBlocks.put(gatheringTool, blocks);
     }
 
-    private static void initGatheringTypeToIngredientMap() {
-        List<Ingredient> huntingIngredients = new ArrayList<>();
-        huntingIngredients.add(Ingredient.HUNTING_LEATHER_WORN);
-        huntingIngredients.add(Ingredient.HUNTING_BEEF);
-        huntingIngredients.add(Ingredient.HUNTING_LEATHER_HEAVY);
-        gatheringTypeToIngredients.put(GatheringType.HUNTING, huntingIngredients);
+    public static void putBlockToIngredient(Material block, int ingredient) {
+        List<Integer> ingredients = new ArrayList<>();
+        if (blockToIngredients.containsKey(block)) {
+            ingredients = blockToIngredients.get(block);
+        }
+        ingredients.add(ingredient);
+        blockToIngredients.put(block, ingredients);
+    }
 
-        List<Ingredient> fishingIngredients = new ArrayList<>();
-        fishingIngredients.add(Ingredient.FISHING_COD);
-        fishingIngredients.add(Ingredient.FISHING_SALMON);
-        gatheringTypeToIngredients.put(GatheringType.FISHING, fishingIngredients);
+    public static void putGatheringTypeToIngredient(GatheringType gatheringType, int ingredient) {
+        List<Integer> ingredients = new ArrayList<>();
+        if (gatheringTypeToIngredients.containsKey(gatheringType)) {
+            ingredients = gatheringTypeToIngredients.get(gatheringType);
+        }
+        ingredients.add(ingredient);
+        gatheringTypeToIngredients.put(gatheringType, ingredients);
     }
 }

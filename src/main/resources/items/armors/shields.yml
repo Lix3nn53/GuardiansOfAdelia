@@ -1,0 +1,167 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+itemCount: 20
+i1:
+  name: "Wooden Shield"
+  customModelData: 1
+  level: 1
+  health: 24
+  defense: 10
+  magicDefense: 5
+  class: KNIGHT
+i2:
+  name: "Steel Shield"
+  level: 10
+  customModelData: 2
+  health: 56
+  defense: 20
+  magicDefense: 10
+  class: KNIGHT
+i3:
+  name: "Bulwark"
+  level: 20
+  customModelData: 3
+  health: 140
+  defense: 50
+  magicDefense: 20
+  class: KNIGHT
+i4:
+  name: "Battle Shield"
+  level: 30
+  customModelData: 4
+  health: 220
+  defense: 90
+  magicDefense: 40
+  class: KNIGHT
+i5:
+  name: "Heroic Shield"
+  level: 40
+  customModelData: 5
+  health: 360
+  defense: 140
+  magicDefense: 60
+  class: KNIGHT
+i6:
+  name: "Shield of Doom"
+  level: 50
+  customModelData: 6
+  health: 490
+  defense: 190
+  magicDefense: 80
+  class: KNIGHT
+i7:
+  name: "Fire Spirit Shield"
+  level: 60
+  customModelData: 8
+  health: 670
+  defense: 250
+  magicDefense: 100
+  class: KNIGHT
+i8:
+  name: "Titanic Nature Shield"
+  level: 70
+  customModelData: 10
+  health: 800
+  defense: 320
+  magicDefense: 120
+  class: KNIGHT
+i9:
+  name: "Water Fairy Shield"
+  level: 80
+  customModelData: 12
+  health: 1100
+  defense: 420
+  magicDefense: 170
+  class: KNIGHT
+i10:
+  name: "Hellas Shield"
+  level: 90
+  customModelData: 14
+  health: 1450
+  defense: 550
+  magicDefense: 220
+  class: KNIGHT
+i11:
+  name: "Wooden Shield"
+  customModelData: 1
+  level: 1
+  health: 20
+  defense: 5
+  magicDefense: 10
+  class: PALADIN
+i12:
+  name: "Steel Shield"
+  level: 10
+  customModelData: 2
+  health: 40
+  defense: 15
+  magicDefense: 20
+  class: PALADIN
+i13:
+  name: "Bulwark"
+  level: 20
+  customModelData: 3
+  health: 100
+  defense: 30
+  magicDefense: 40
+  class: PALADIN
+i14:
+  name: "Battle Shield"
+  level: 30
+  customModelData: 4
+  health: 170
+  defense: 50
+  magicDefense: 70
+  class: PALADIN
+i15:
+  name: "Heroic Shield"
+  level: 40
+  customModelData: 5
+  health: 280
+  defense: 90
+  magicDefense: 110
+  class: PALADIN
+i16:
+  name: "Shield of Doom"
+  level: 50
+  customModelData: 6
+  health: 400
+  defense: 120
+  magicDefense: 150
+  class: PALADIN
+i17:
+  name: "Fire Spirit Shield"
+  level: 60
+  customModelData: 8
+  health: 520
+  defense: 160
+  magicDefense: 200
+  class: PALADIN
+i18:
+  name: "Titanic Nature Shield"
+  level: 70
+  customModelData: 10
+  health: 650
+  defense: 200
+  magicDefense: 260
+  class: PALADIN
+i19:
+  name: "Water Fairy Shield"
+  level: 80
+  customModelData: 12
+  health: 880
+  defense: 270
+  magicDefense: 340
+  class: PALADIN
+i20:
+  name: "Hellas Shield"
+  level: 90
+  customModelData: 14
+  health: 1200
+  defense: 340
+  magicDefense: 450
+  class: PALADIN

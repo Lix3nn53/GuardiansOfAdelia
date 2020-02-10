@@ -285,8 +285,8 @@ public class MyPlayerInteractEvent implements Listener {
                             if (activeCharacter.hasJob()) {
                                 Job job = activeCharacter.getJob();
                                 if (job.getJobType().equals(JobType.JEWELLER)) {
-                                    GuiBookGeneric enchantStoneCraftingBook = CraftingGuiManager.getEnchantStoneCraftingBook();
-                                    enchantStoneCraftingBook.openInventory(player);
+                                    GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.ENCHANT_STONE);
+                                    levelSelection.openInventory(player);
                                 } else {
                                     player.sendMessage(ChatColor.RED + "Only jewellers can craft enchant stones");
                                 }

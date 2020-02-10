@@ -1,0 +1,59 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                 Ingredients                    #
+# ---------------------------------------------- #
+
+toolCount: 3
+t1:
+  gatheringTool: AXE
+  targetBlocks:
+    - 'ACACIA_WOOD'
+    - 'BIRCH_WOOD'
+    - 'DARK_OAK_WOOD'
+    - 'JUNGLE_WOOD'
+    - 'OAK_WOOD'
+    - 'SPRUCE_WOOD'
+    - 'ACACIA_LOG'
+    - 'BIRCH_LOG'
+    - 'DARK_OAK_LOG'
+    - 'JUNGLE_LOG'
+    - 'OAK_LOG'
+    - 'SPRUCE_LOG'
+t2:
+  gatheringTool: PICKAXE
+  targetBlocks:
+    - 'EMERALD_ORE'
+    - 'GOLD_ORE'
+    - 'REDSTONE_ORE'
+    - 'LAPIS_ORE'
+    - 'COAL_ORE'
+    - 'IRON_ORE'
+    - 'DIAMOND_ORE'
+t3:
+  gatheringTool: HOE
+  targetBlocks:
+    - 'DANDELION'
+    - 'POPPY'
+    - 'BLUE_ORCHID'
+    - 'ALLIUM'
+    - 'AZURE_BLUET'
+    - 'RED_TULIP'
+    - 'ORANGE_TULIP'
+    - 'WHITE_TULIP'
+    - 'PINK_TULIP'
+    - 'OXEYE_DAISY'
+    - 'CORNFLOWER'
+    - 'LILY_OF_THE_VALLEY'
+    - 'WITHER_ROSE'
+    - 'SUNFLOWER'
+    - 'LILAC'
+    - 'ROSE_BUSH'
+    - 'PEONY'
+    - 'ACACIA_LEAVES'
+    - 'BIRCH_LEAVES'
+    - 'DARK_OAK_LEAVES'
+    - 'JUNGLE_LEAVES'
+    - 'OAK_LEAVES'
+    - 'SPRUCE_LEAVES'
+    - 'COBWEB'

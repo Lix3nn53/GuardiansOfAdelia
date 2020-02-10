@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
-import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringTool;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.GiveItemAction;

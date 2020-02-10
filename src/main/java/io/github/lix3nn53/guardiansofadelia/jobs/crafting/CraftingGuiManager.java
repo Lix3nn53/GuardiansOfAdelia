@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiPage;
@@ -67,8 +66,8 @@ public class CraftingGuiManager {
         return guiGeneric;
     }
 
-    public static GuiBookGeneric getCraftingBook(CraftingType craftingType, GearLevel gearLevel) {
-        GuiBookGeneric craftingBook = new GuiBookGeneric(craftingType.getName() + " Level" + gearLevel.getMinLevel() + "~" + gearLevel.getMaxLevel() + " Crafting", 0);
+    public static GuiBookGeneric getCraftingBook(CraftingType craftingType, int gearLevel) {
+        GuiBookGeneric craftingBook = new GuiBookGeneric(craftingType.getName() + " Level" + GearLevel.getMinLevel(gearLevel) + "~" + GearLevel.getMaxLevel(gearLevel) + " Crafting", 0);
 
         List<ItemStack> itemStackList = craftingType.getItemsToCraft(gearLevel);
 
@@ -81,61 +80,7 @@ public class CraftingGuiManager {
             //create lines
             CraftingLine craftingLine = new CraftingLine(itemStack);
             //add ingredients to craftingLine
-            List<ItemStack> ingredients = craftingType.getIngredients(gearLevel, itemStack.getType());
-            for (ItemStack ingredient : ingredients) {
-                craftingLine.addWord(ingredient);
-            }
-
-            //add lines to page, if full create new page and add it to the pageList
-            if (guiPageList.get(i).isEmpty()) {
-                guiPageList.get(i).addLine(craftingLine);
-            } else {
-                guiPageList.add(new GuiPage());
-                i++;
-                guiPageList.get(i).addLine(craftingLine);
-            }
-        }
-
-        //add pages from temporary list to book
-        craftingBook.setPages(guiPageList);
-
-        return craftingBook;
-    }
-
-    public static GuiBookGeneric getEnchantStoneCraftingBook() {
-        CraftingType craftingType = CraftingType.ENCHANT_STONE;
-        GuiBookGeneric craftingBook = new GuiBookGeneric(craftingType.getName() + " " + " Crafting", 0);
-
-        List<ItemStack> itemStackList = craftingType.getItemsToCraft(null);
-
-        List<GuiPage> guiPageList = new ArrayList<>();
-        guiPageList.add(new GuiPage());
-
-        //create pages
-        int i = 0;
-        int stoneTier = 0;
-        for (ItemStack itemStack : itemStackList) {
-            //create lines
-            CraftingLine craftingLine = new CraftingLine(itemStack);
-
-            //add ingredients to craftingLine
-            List<ItemStack> ingredients = new ArrayList<>();
-            if (stoneTier == 0) {
-                ingredients.add(Ingredient.MINING_JEWEL_GOLD_DUST.getItemStack(8));
-                ingredients.add(Ingredient.MINING_JEWEL_JADE.getItemStack(4));
-            } else if (stoneTier == 1) {
-                ingredients.add(Ingredient.MINING_JEWEL_JADE.getItemStack(12));
-                ingredients.add(Ingredient.MINING_JEWEL_AMETHYST.getItemStack(8));
-            } else if (stoneTier == 2) {
-                ingredients.add(Ingredient.MINING_JEWEL_JADE.getItemStack(12));
-                ingredients.add(Ingredient.MINING_JEWEL_AMETHYST.getItemStack(8));
-                ingredients.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(4));
-            } else if (stoneTier == 3) {
-                ingredients.add(Ingredient.MINING_JEWEL_AMETHYST.getItemStack(12));
-                ingredients.add(Ingredient.MINING_JEWEL_SAPPHIRE.getItemStack(8));
-                ingredients.add(Ingredient.MINING_JEWEL_RUBY.getItemStack(4));
-            }
-            stoneTier++;
+            List<ItemStack> ingredients = CraftingManager.getCraftingTypeAndLevelToIngredients(craftingType, gearLevel);
             for (ItemStack ingredient : ingredients) {
                 craftingLine.addWord(ingredient);
             }

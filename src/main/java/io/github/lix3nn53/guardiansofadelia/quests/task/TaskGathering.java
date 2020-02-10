@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
-import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

@@ -1,9 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorItemTemplate;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.*;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemTemplate;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponItemTemplate;
@@ -13,6 +11,10 @@ import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.database.ConnectionPool;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringTool;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringType;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
@@ -55,6 +57,12 @@ public class ConfigManager {
     private final static HashMap<String, FileConfiguration> armorItemsConfigurations = new HashMap<>();
     private final static HashMap<RPGSlotType, FileConfiguration> passiveItemsConfigurations = new HashMap<>();
     private final static HashMap<RPGClass, FileConfiguration> weaponItemsConfigurations = new HashMap<>();
+    private static FileConfiguration shieldsConfig;
+
+    private static FileConfiguration ingredientsConfig;
+    private static FileConfiguration blockToIngredients;
+    private static FileConfiguration gatheringTypeToIngredients;
+    private static FileConfiguration gatheringToolToBlocks;
 
     public static void init() {
         if (!GuardiansOfAdelia.getInstance().getDataFolder().exists()) {
@@ -237,8 +245,6 @@ public class ConfigManager {
                 FileConfiguration fileConfiguration = armorItemsConfigurations.get(rpgClass.toString() + armorType.toString());
                 int itemCount = fileConfiguration.getInt("itemCount");
 
-                List<ArmorItemTemplate> armorItemTemplates = new ArrayList<>();
-
                 for (int i = 1; i <= itemCount; i++) {
                     String nameStr = fileConfiguration.getString("i" + i + ".name");
                     int level = fileConfiguration.getInt("i" + i + ".level");
@@ -251,10 +257,8 @@ public class ConfigManager {
                     Material material = Material.valueOf(materialStr);
 
                     ArmorItemTemplate armorItemTemplate = new ArmorItemTemplate(name, level, health, defense, magicDefense, material);
-                    armorItemTemplates.add(armorItemTemplate);
+                    Armors.put(rpgClass, armorType, armorItemTemplate);
                 }
-                String key = rpgClass.toString() + armorType.toString();
-                Armors.put(key, armorItemTemplates);
             }
         }
     }
@@ -295,8 +299,6 @@ public class ConfigManager {
             FileConfiguration fileConfiguration = passiveItemsConfigurations.get(rpgSlotType);
             int itemCount = fileConfiguration.getInt("itemCount");
 
-            List<PassiveItemTemplate> passiveItemTemplates = new ArrayList<>();
-
             for (int i = 1; i <= itemCount; i++) {
                 String nameStr = fileConfiguration.getString("i" + i + ".name");
                 int customModelData = fileConfiguration.getInt("i" + i + ".customModelData");
@@ -305,9 +307,8 @@ public class ConfigManager {
                 String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
                 PassiveItemTemplate passiveItemTemplate = new PassiveItemTemplate(name, customModelData, level);
-                passiveItemTemplates.add(passiveItemTemplate);
+                PassiveItemList.put(rpgSlotType, passiveItemTemplate);
             }
-            PassiveItemList.put(rpgSlotType, passiveItemTemplates);
         }
     }
 
@@ -355,6 +356,199 @@ public class ConfigManager {
 
                 WeaponItemTemplate weaponItemTemplate = new WeaponItemTemplate(name, customModelData, level, damage);
                 Weapons.add(rpgClass, weaponItemTemplate);
+            }
+        }
+    }
+
+    private static void createItemShields() {
+        String fileName = "shields.yml";
+        String filePath = DATA_FOLDER + File.separator + "items" + File.separator + "armors";
+        File customConfigFile = new File(filePath, fileName);
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+
+            try {
+                customConfigFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        shieldsConfig = new YamlConfiguration();
+        try {
+            shieldsConfig.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadItemShields() {
+        int itemCount = shieldsConfig.getInt("itemCount");
+
+        for (int i = 1; i <= itemCount; i++) {
+            String nameStr = shieldsConfig.getString("i" + i + ".name");
+            int customModelData = shieldsConfig.getInt("i" + i + ".customModelData");
+            int level = shieldsConfig.getInt("i" + i + ".level");
+            int health = shieldsConfig.getInt("i" + i + ".health");
+            int defense = shieldsConfig.getInt("i" + i + ".defense");
+            int magicDefense = shieldsConfig.getInt("i" + i + ".magicDefense");
+            String rpgClassStr = shieldsConfig.getString("i" + i + ".class");
+
+            String name = ChatColor.translateAlternateColorCodes('&', nameStr);
+            RPGClass rpgClass = RPGClass.valueOf(rpgClassStr);
+
+            ShieldItemTemplate shieldItemTemplate = new ShieldItemTemplate(name, level, health, defense, magicDefense, customModelData);
+            Shields.add(rpgClass, shieldItemTemplate);
+        }
+    }
+
+    private static void createIngredients() {
+        String fileName = "Ingredients.yml";
+        String filePath = DATA_FOLDER + File.separator + "jobs";
+        File customConfigFile = new File(filePath, fileName);
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+
+            try {
+                customConfigFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ingredientsConfig = new YamlConfiguration();
+        try {
+            ingredientsConfig.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadIngredients() {
+        int itemCount = ingredientsConfig.getInt("ingredientCount");
+
+        for (int i = 1; i <= itemCount; i++) {
+            String nameStr = ingredientsConfig.getString("i" + i + ".name");
+            int customModelData = ingredientsConfig.getInt("i" + i + ".customModelData");
+            int ingredientLevel = ingredientsConfig.getInt("i" + i + ".ingredientLevel");
+            List<String> jobsCanUse = ingredientsConfig.getStringList("i" + i + ".jobsCanUse");
+            List<String> extraText = ingredientsConfig.getStringList("i" + i + ".extraText");
+
+            String name = ChatColor.translateAlternateColorCodes('&', nameStr);
+
+            Ingredient ingredient = new Ingredient(i, name, ingredientLevel, jobsCanUse, extraText, customModelData);
+
+            GatheringManager.putIngredient(i, ingredient);
+        }
+    }
+
+    private static void createGatheringToolToBlocks() {
+        String fileName = "GatheringToolToBlock.yml";
+        String filePath = DATA_FOLDER + File.separator + "jobs";
+        File customConfigFile = new File(filePath, fileName);
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+
+            try {
+                customConfigFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        gatheringToolToBlocks = new YamlConfiguration();
+        try {
+            gatheringToolToBlocks.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadGatheringToolToBlocks() {
+        int itemCount = gatheringToolToBlocks.getInt("toolCount");
+
+        for (int i = 1; i <= itemCount; i++) {
+            String gatheringToolStr = gatheringToolToBlocks.getString("t" + i + ".gatheringTool");
+            List<String> targetBlocks = gatheringToolToBlocks.getStringList("i" + i + ".targetBlocks");
+
+            GatheringTool gatheringTool = GatheringTool.valueOf(gatheringToolStr);
+
+            for (String str : targetBlocks) {
+                GatheringManager.putToolToBlock(gatheringTool, Material.valueOf(str));
+            }
+        }
+    }
+
+    private static void createBlockToIngredients() {
+        String fileName = "BlockToIngredients.yml";
+        String filePath = DATA_FOLDER + File.separator + "jobs";
+        File customConfigFile = new File(filePath, fileName);
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+
+            try {
+                customConfigFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        blockToIngredients = new YamlConfiguration();
+        try {
+            blockToIngredients.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadBlockToIngredients() {
+        int itemCount = blockToIngredients.getInt("blockCount");
+
+        for (int i = 1; i <= itemCount; i++) {
+            List<Integer> ingredients = blockToIngredients.getIntegerList("b" + i + ".ingredients");
+            List<String> sourceBlocks = blockToIngredients.getStringList("b" + i + ".sourceBlocks");
+
+            for (String str : sourceBlocks) {
+                for (int ingredient : ingredients) {
+                    GatheringManager.putBlockToIngredient(Material.valueOf(str), ingredient);
+                }
+            }
+        }
+    }
+
+    private static void createGatheringTypeToIngredients() {
+        String fileName = "GatheringTypeToIngredients.yml";
+        String filePath = DATA_FOLDER + File.separator + "jobs";
+        File customConfigFile = new File(filePath, fileName);
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+
+            try {
+                customConfigFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        gatheringTypeToIngredients = new YamlConfiguration();
+        try {
+            gatheringTypeToIngredients.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadGatheringTypeToIngredients() {
+        int itemCount = gatheringTypeToIngredients.getInt("ingredientCount");
+
+        for (int i = 1; i <= itemCount; i++) {
+            List<Integer> ingredients = gatheringTypeToIngredients.getIntegerList("g" + i + ".ingredients");
+            List<String> sourceGatheringTypes = gatheringTypeToIngredients.getStringList("i" + i + ".gatheringTypes");
+
+            for (String str : sourceGatheringTypes) {
+                for (Integer ingredient : ingredients) {
+                    GatheringManager.putGatheringTypeToIngredient(GatheringType.valueOf(str), ingredient);
+                }
             }
         }
     }

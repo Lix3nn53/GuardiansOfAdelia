@@ -296,7 +296,7 @@ public enum MerchantPageType {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 1, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, 1, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 4);
                 } else {
@@ -310,7 +310,7 @@ public enum MerchantPageType {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 2, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, 2, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 8);
                 } else {
@@ -324,7 +324,7 @@ public enum MerchantPageType {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 3, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, 3, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 14);
                 } else {
@@ -337,7 +337,7 @@ public enum MerchantPageType {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 4, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, 4, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 21);
                 } else {
@@ -351,7 +351,7 @@ public enum MerchantPageType {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 5, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, 5, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 30);
                 } else {
@@ -365,7 +365,7 @@ public enum MerchantPageType {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 6, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, 6, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 42);
                 } else {
@@ -378,7 +378,7 @@ public enum MerchantPageType {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 7, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, 7, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 55);
                 } else {
@@ -392,7 +392,7 @@ public enum MerchantPageType {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 8, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, 8, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 70);
                 } else {
@@ -405,7 +405,7 @@ public enum MerchantPageType {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 9, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, 9, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 120);
                 } else {
@@ -419,7 +419,7 @@ public enum MerchantPageType {
                 if (rpgClass.equals(RPGClass.NO_CLASS)) {
                     continue;
                 }
-                ItemStack weapon = Weapons.getWeapon(rpgClass, 10, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, 10, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 160);
                 } else {
@@ -467,7 +467,7 @@ public enum MerchantPageType {
                 } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                     price = 4;
                 }
-                ItemStack weapon = Armors.getArmor(armorType, RPGClass.NO_CLASS, 1, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Armors.getArmor(armorType, RPGClass.NO_CLASS, 1, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -485,7 +485,7 @@ public enum MerchantPageType {
                 } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                     price = 8;
                 }
-                ItemStack weapon = Armors.getArmor(armorType, RPGClass.NO_CLASS, 2, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Armors.getArmor(armorType, RPGClass.NO_CLASS, 2, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -507,7 +507,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 14;
                     }
-                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 1, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 1, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -530,7 +530,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 21;
                     }
-                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 2, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 2, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -553,7 +553,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 30;
                     }
-                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 3, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 3, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -577,7 +577,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 42;
                     }
-                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 4, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 4, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -600,7 +600,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 55;
                     }
-                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 5, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 5, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -624,7 +624,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 70;
                     }
-                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 6, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 6, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -647,7 +647,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 120;
                     }
-                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 7, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = Armors.getArmor(armorType, rpgClass, 7, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -700,7 +700,7 @@ public enum MerchantPageType {
                     price = 10;
                 }
                 RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = Shields.get(rpgClass, i, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Shields.get(rpgClass, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -718,7 +718,7 @@ public enum MerchantPageType {
                     price = 10;
                 }
                 RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = Shields.get(rpgClass, i, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Shields.get(rpgClass, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -735,7 +735,7 @@ public enum MerchantPageType {
                     price = 28;
                 }
                 RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = Shields.get(rpgClass, i, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Shields.get(rpgClass, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -753,7 +753,7 @@ public enum MerchantPageType {
                     price = 28;
                 }
                 RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = Shields.get(rpgClass, i, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Shields.get(rpgClass, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -768,7 +768,7 @@ public enum MerchantPageType {
                     price = 50;
                 }
                 RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = Shields.get(rpgClass, i, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Shields.get(rpgClass, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -784,7 +784,7 @@ public enum MerchantPageType {
                     price = 50;
                 }
                 RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = Shields.get(rpgClass, i, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Shields.get(rpgClass, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -799,7 +799,7 @@ public enum MerchantPageType {
                     price = 120;
                 }
                 RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = Shields.get(rpgClass, i, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Shields.get(rpgClass, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -815,7 +815,7 @@ public enum MerchantPageType {
                     price = 120;
                 }
                 RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = Shields.get(rpgClass, i, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Shields.get(rpgClass, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {

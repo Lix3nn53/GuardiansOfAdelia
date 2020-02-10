@@ -8,19 +8,21 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 class Crossbows {
 
-    private final static List<WeaponItemTemplate> weaponItemTemplates = new ArrayList<>();
+    private final static HashMap<Integer, List<WeaponItemTemplate>> weaponItemTemplates = new HashMap<>();
 
-    public static ItemStack get(int placementNumber, ItemTier tier, String itemTag, double bonusPercent, int minStatValue,
+    public static ItemStack get(int gearLevel, int itemIndex, ItemTier tier, String itemTag, double bonusPercent, int minStatValue,
                                 int maxStatValue, int minNumberofStats) {
         Material material = Material.CROSSBOW;
         RPGClass rpgClass = RPGClass.HUNTER;
         AttackSpeed attackSpeed = AttackSpeed.SLOW;
 
-        WeaponItemTemplate template = weaponItemTemplates.get(placementNumber - 1);
+        List<WeaponItemTemplate> templates = weaponItemTemplates.get(gearLevel);
+        WeaponItemTemplate template = templates.get(itemIndex);
 
         String name = template.getName();
         int customModelData = template.getCustomModelData();
@@ -34,7 +36,12 @@ class Crossbows {
         return weapon.getItemStack();
     }
 
-    protected static void add(WeaponItemTemplate weaponItemTemplate) {
-        weaponItemTemplates.add(weaponItemTemplate);
+    protected static void add(WeaponItemTemplate weaponItemTemplate, int placementNumber) {
+        List<WeaponItemTemplate> list = new ArrayList<>();
+        if (weaponItemTemplates.containsKey(placementNumber)) {
+            list = weaponItemTemplates.get(placementNumber);
+        }
+        list.add(weaponItemTemplate);
+        weaponItemTemplates.put(placementNumber, list);
     }
 }

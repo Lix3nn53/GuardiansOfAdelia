@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
-import io.github.lix3nn53.guardiansofadelia.Items.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringTool;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
@@ -9,7 +8,6 @@ import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.GiveItemAction;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskCollect;
-import io.github.lix3nn53.guardiansofadelia.quests.task.TaskGift;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskKill;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -58,9 +56,6 @@ public class QuestsPhase4 {
         requiredQuests.add(27);
 
         List<Task> tasks = new ArrayList<>();
-        ItemStack itemStack = Ingredient.FISHING_COD.getItemStack(5);
-        TaskGift taskGift = new TaskGift(5, itemStack, ChatColor.GREEN + "Elderine Villager");
-        tasks.add(taskGift);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
         String objectiveText = "TASK_PROGRESS_1\nThen talk back to Captain Lenna";

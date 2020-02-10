@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
@@ -167,7 +166,7 @@ public class CommandLix implements CommandExecutor {
                 if (args.length == 3) {
                     RPGClass rpgClass = RPGClass.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
-                    ItemStack weapon = Weapons.getWeapon(rpgClass, no, ItemTier.LEGENDARY, "Command", 20, 40, 5);
+                    ItemStack weapon = Weapons.getWeapon(rpgClass, no, 0, ItemTier.LEGENDARY, "Command", 20, 40, 5);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("companion")) {
@@ -175,7 +174,7 @@ public class CommandLix implements CommandExecutor {
                     Companion mount = Companion.valueOf(args[1]);
                     int i = Integer.parseInt(args[2]);
 
-                    ItemStack egg = Companions.get(mount, GearLevel.values()[i]);
+                    ItemStack egg = Companions.get(mount, i);
                     InventoryUtils.giveItemToPlayer(player, egg);
                 }
             } else if (args[0].equals("mount")) {
@@ -183,7 +182,7 @@ public class CommandLix implements CommandExecutor {
                     Mount mount = Mount.valueOf(args[1]);
                     int i = Integer.parseInt(args[2]);
 
-                    ItemStack egg = Mounts.get(mount, GearLevel.values()[i]);
+                    ItemStack egg = Mounts.get(mount, i);
                     InventoryUtils.giveItemToPlayer(player, egg);
                 }
             } else if (args[0].equals("stone")) {
@@ -217,7 +216,7 @@ public class CommandLix implements CommandExecutor {
                 if (args.length == 3) {
                     RPGSlotType rpgSlotType = RPGSlotType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
-                    ItemStack passive = PassiveItemList.get(no, rpgSlotType, ItemTier.LEGENDARY, "Command", 0, 100, 2);
+                    ItemStack passive = PassiveItemList.get(no, 0, rpgSlotType, ItemTier.LEGENDARY, "Command", 0, 100, 2);
                     InventoryUtils.giveItemToPlayer(player, passive);
                 }
             } else if (args[0].equals("model")) {

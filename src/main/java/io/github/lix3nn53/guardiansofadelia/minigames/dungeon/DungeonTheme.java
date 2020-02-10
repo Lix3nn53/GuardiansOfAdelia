@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
@@ -97,47 +96,47 @@ public enum DungeonTheme {
      */
     public List<ItemStack> generateChestItems(PrizeChestType type) {
         String itemTag = "Sticky";
-        GearLevel gearLevel = GearLevel.ZERO;
+        int gearLevel = 0;
 
         if (this.equals(DungeonTheme.DARKNESS)) {
             itemTag = "Aleesia's";
-            gearLevel = GearLevel.NINE;
+            gearLevel = 9;
         } else if (this.equals(DungeonTheme.DESERT)) {
             itemTag = "Sand ";
-            gearLevel = GearLevel.SIX;
+            gearLevel = 6;
         } else if (this.equals(DungeonTheme.SWAMP)) {
             itemTag = "Woz's";
-            gearLevel = GearLevel.SEVEN;
+            gearLevel = 7;
         } else if (this.equals(DungeonTheme.ICE_CREAM)) {
             itemTag = "Sugar";
-            gearLevel = GearLevel.THREE;
+            gearLevel = 3;
         } else if (this.equals(DungeonTheme.ICE)) {
             itemTag = "Frozen";
-            gearLevel = GearLevel.FIVE;
+            gearLevel = 5;
         } else if (this.equals(DungeonTheme.MAGIC_FOREST)) {
             itemTag = "Magical";
-            gearLevel = GearLevel.TWO;
+            gearLevel = 2;
         } else if (this.equals(DungeonTheme.PIRATE)) {
             itemTag = "Haunted";
-            gearLevel = GearLevel.FOUR;
+            gearLevel = 4;
         } else if (this.equals(DungeonTheme.LAVA)) {
             itemTag = "Burning";
-            gearLevel = GearLevel.EIGHT;
+            gearLevel = 8;
         } else if (this.equals(DungeonTheme.ZOMBIE)) {
             itemTag = "Rotten";
-            gearLevel = GearLevel.ONE;
+            gearLevel = 1;
         }
 
         ArrayList<ItemStack> chestItems = new ArrayList<>();
         if (type.equals(PrizeChestType.WEAPON)) {
-            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, itemTag, gearLevel));
-            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, itemTag, gearLevel));
+            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, itemTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, itemTag, gearLevel, 0));
         } else if (type.equals(PrizeChestType.ARMOR)) {
-            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, itemTag, gearLevel));
-            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, itemTag, gearLevel));
+            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, itemTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, itemTag, gearLevel, 0));
         } else if (type.equals(PrizeChestType.JEWELRY)) {
-            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.MYSTIC, itemTag, gearLevel));
-            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, itemTag, gearLevel));
+            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.MYSTIC, itemTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, itemTag, gearLevel, 0));
         } else if (type.equals(PrizeChestType.PET)) {
             chestItems.addAll(ItemPoolGenerator.generateEggs(gearLevel));
         }
