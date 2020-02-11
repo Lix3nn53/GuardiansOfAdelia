@@ -14,15 +14,15 @@ import java.util.UUID;
 
 public class GiveWeaponAction implements Action {
 
-    private final int placementNumber;
+    private final int gearLevel;
     private final ItemTier tier;
     private final String itemTag;
     private final int minStatValue;
     private final int maxStatValue;
     private final int minNumberOfStats;
 
-    public GiveWeaponAction(int placementNumber, ItemTier tier, String itemTag, int minStatValue, int maxStatValue, int minNumberOfStats) {
-        this.placementNumber = placementNumber;
+    public GiveWeaponAction(int gearLevel, ItemTier tier, String itemTag, int minStatValue, int maxStatValue, int minNumberOfStats) {
+        this.gearLevel = gearLevel;
         this.tier = tier;
         this.itemTag = itemTag;
         this.minStatValue = minStatValue;
@@ -38,7 +38,7 @@ public class GiveWeaponAction implements Action {
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 RPGClass rpgClass = activeCharacter.getRpgClass();
-                ItemStack weapon = Weapons.getWeapon(rpgClass, placementNumber, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = Weapons.getWeapon(rpgClass, gearLevel, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
                 InventoryUtils.giveItemToPlayer(player, weapon);
             }
         }

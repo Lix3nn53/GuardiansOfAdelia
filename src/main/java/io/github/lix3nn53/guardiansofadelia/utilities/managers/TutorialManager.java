@@ -65,10 +65,10 @@ public class TutorialManager {
         int minNumberOfStats = 2;
         String itemTag = "Tutorial";
 
-        ItemStack helmet = Armors.getArmor(ArmorType.HELMET, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack chest = Armors.getArmor(ArmorType.CHESTPLATE, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack leggings = Armors.getArmor(ArmorType.LEGGINGS, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack boots = Armors.getArmor(ArmorType.BOOTS, rpgClass, 7, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack helmet = Armors.getArmor(ArmorType.HELMET, rpgClass, 7, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack chest = Armors.getArmor(ArmorType.CHESTPLATE, rpgClass, 7, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack leggings = Armors.getArmor(ArmorType.LEGGINGS, rpgClass, 7, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack boots = Armors.getArmor(ArmorType.BOOTS, rpgClass, 7, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
 
         PlayerInventory playerInventory = player.getInventory();
 
@@ -77,14 +77,14 @@ public class TutorialManager {
         playerInventory.setLeggings(leggings);
         playerInventory.setBoots(boots);
 
-        ItemStack mainHand = Weapons.getWeapon(rpgClass, 10, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack mainHand = Weapons.getWeapon(rpgClass, 10, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
         playerInventory.setItem(4, mainHand);
 
         if (rpgClass.equals(RPGClass.KNIGHT)) {
-            ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+            ItemStack shield = Shields.get(rpgClass, 10, 0, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
             playerInventory.setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
-            ItemStack shield = Shields.get(rpgClass, 10, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+            ItemStack shield = Shields.get(rpgClass, 10, 0, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
             playerInventory.setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.ROGUE)) {
             playerInventory.setItemInOffHand(mainHand);

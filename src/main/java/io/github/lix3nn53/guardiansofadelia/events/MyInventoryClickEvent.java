@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
@@ -821,36 +820,14 @@ public class MyInventoryClickEvent implements Listener {
                             String replace = title.replace(" Crafting Level Selection", "");
                             CraftingType craftingType = CraftingType.valueOf(replace);
 
-                            GearLevel gearLevel = GearLevel.TWO;
-                            int reqJobLevel = 1;
-                            if (currentName.equals(ChatColor.GOLD + "Level 30~39")) {
-                                gearLevel = GearLevel.THREE;
-                                reqJobLevel = 2;
-                            } else if (currentName.equals(ChatColor.GOLD + "Level 40~49")) {
-                                gearLevel = GearLevel.FOUR;
-                                reqJobLevel = 3;
-                            } else if (currentName.equals(ChatColor.GOLD + "Level 50~59")) {
-                                gearLevel = GearLevel.FIVE;
-                                reqJobLevel = 4;
-                            } else if (currentName.equals(ChatColor.GOLD + "Level 60~69")) {
-                                gearLevel = GearLevel.SIX;
-                                reqJobLevel = 5;
-                            } else if (currentName.equals(ChatColor.GOLD + "Level 70~79")) {
-                                gearLevel = GearLevel.SEVEN;
-                                reqJobLevel = 6;
-                            } else if (currentName.equals(ChatColor.GOLD + "Level 80~89")) {
-                                gearLevel = GearLevel.EIGHT;
-                                reqJobLevel = 7;
-                            } else if (currentName.equals(ChatColor.GOLD + "Level 90~99")) {
-                                gearLevel = GearLevel.NINE;
-                                reqJobLevel = 8;
-                            }
+                            String s = currentName.replaceAll(ChatColor.GOLD + "Level ", "");
+                            int craftingLevel = Integer.parseInt(s);
 
-                            if (jobLevel >= reqJobLevel) {
-                                GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, gearLevel);
+                            if (jobLevel >= craftingLevel) {
+                                GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, craftingLevel);
                                 craftingBook.openInventory(player);
                             } else {
-                                player.sendMessage(ChatColor.RED + "Required job-level to craft " + currentName + ChatColor.RED + " items is " + reqJobLevel);
+                                player.sendMessage(ChatColor.RED + "Required job-level to craft " + currentName + ChatColor.RED + " items is " + craftingLevel);
                             }
                         }
                     }
@@ -889,24 +866,12 @@ public class MyInventoryClickEvent implements Listener {
                                     if (hasIngredients) {
                                         ItemStack clone = current.clone();
 
-                                        GearLevel gearLevel = GearLevel.TWO;
-                                        if (title.contains("30~39")) {
-                                            gearLevel = GearLevel.THREE;
-                                        } else if (title.contains("40~49")) {
-                                            gearLevel = GearLevel.FOUR;
-                                        } else if (title.contains("50~59")) {
-                                            gearLevel = GearLevel.FIVE;
-                                        } else if (title.contains("60~69")) {
-                                            gearLevel = GearLevel.SIX;
-                                        } else if (title.contains("70~79")) {
-                                            gearLevel = GearLevel.SEVEN;
-                                        } else if (title.contains("80~89")) {
-                                            gearLevel = GearLevel.EIGHT;
-                                        } else if (title.contains("90~99")) {
-                                            gearLevel = GearLevel.NINE;
-                                        }
+                                        String[] split = title.split("Level ");
 
-                                        StatUtils.addRandomPassiveStats(clone, gearLevel, ItemTier.MYSTIC);
+                                        String levelStr = split[1];
+                                        int level = Integer.parseInt(levelStr);
+
+                                        StatUtils.addRandomPassiveStats(clone, level, ItemTier.MYSTIC);
 
                                         for (ItemStack ingredient : ingredients) {
                                             InventoryUtils.removeMaterialFromInventory(player.getInventory(), ingredient.getType(), ingredient.getAmount());

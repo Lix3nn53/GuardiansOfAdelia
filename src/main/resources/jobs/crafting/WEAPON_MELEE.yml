@@ -1,0 +1,38 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                    Crafting                    #
+# ---------------------------------------------- #
+
+levelCount: 1
+level1:
+  requiredJobLevel: 1
+  itemSetCount: 2
+  itemSet1:
+    classes:
+      - WARRIOR
+      - ROGUE
+    gearLevel: 1
+    index: 1
+    tier: MYSTIC
+    tag: "Weaponsmith's"
+    ingredients:
+      - 1
+      - 2
+    ingredientAmounts:
+      - 4
+      - 6
+  itemSet2:
+    classes:
+      - KNIGHT
+      - PALADIN
+    gearLevel: 1
+    index: 1
+    tier: MYSTIC
+    tag: "Weaponsmith's"
+    ingredients:
+      - 1
+      - 2
+    ingredientAmounts:
+      - 6
+      - 4

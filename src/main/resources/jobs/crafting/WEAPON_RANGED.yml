@@ -1,0 +1,38 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                    Crafting                    #
+# ---------------------------------------------- #
+
+levelCount: 1
+level1:
+  requiredJobLevel: 1
+  itemSetCount: 2
+  itemSet1:
+    classes:
+      - ARCHER
+      - HUNTER
+    gearLevel: 1
+    index: 1
+    tier: MYSTIC
+    tag: "Weaponsmith's"
+    ingredients:
+      - 1
+      - 2
+    ingredientAmounts:
+      - 4
+      - 6
+  itemSet2:
+    classes:
+      - MAGE
+      - MONK
+    gearLevel: 1
+    index: 1
+    tier: MYSTIC
+    tag: "Weaponsmith's"
+    ingredients:
+      - 1
+      - 2
+    ingredientAmounts:
+      - 6
+      - 4

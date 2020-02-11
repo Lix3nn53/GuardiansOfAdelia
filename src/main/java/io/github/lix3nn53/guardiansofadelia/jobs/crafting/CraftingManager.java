@@ -1,8 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
-import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -11,32 +9,31 @@ import java.util.List;
 
 public class CraftingManager {
 
-    private final static HashMap<String, List<Integer>> craftingTypeAndLevelToIngredients = new HashMap<>();
-    private final static HashMap<String, List<Integer>> craftingTypeAndLevelToIngredientAmounts = new HashMap<>();
+    private final static HashMap<String, List<CraftingLine>> craftingTypeAndLevelToCraftingLine = new HashMap<>();
 
-    public static void putCraftingTypeAndLevelToIngredients(CraftingType craftingType, GearLevel gearLevel, List<Integer> ingredients, List<Integer> amounts) {
-        String key = craftingType.toString() + gearLevel.toString();
-        craftingTypeAndLevelToIngredients.put(key, ingredients);
-        craftingTypeAndLevelToIngredientAmounts.put(key, amounts);
-    }
+    public static void putCraftingTypeAndLevelToCraftingLine(ItemStack itemStack, CraftingType craftingType, int craftingLevel, List<Integer> ingredients, List<Integer> ingredientAmounts) {
+        String key = craftingType.toString() + craftingLevel;
 
-    public static List<ItemStack> getCraftingTypeAndLevelToIngredients(CraftingType craftingType, int gearLevel) {
-        List<ItemStack> list = new ArrayList<>();
-
-        String key = craftingType.toString() + gearLevel;
-        List<Integer> ingredients = craftingTypeAndLevelToIngredients.get(key);
-        List<Integer> amounts = craftingTypeAndLevelToIngredientAmounts.get(key);
+        CraftingLine craftingLine = new CraftingLine(itemStack);
 
         for (int i = 0; i < ingredients.size(); i++) {
-            int ingredientNo = ingredients.get(i);
-            int amount = amounts.get(i);
+            int ingredient = ingredients.get(i);
+            int amount = ingredientAmounts.get(i);
+            ItemStack ingredientItem = GatheringManager.getIngredient(ingredient).getItemStack(amount);
 
-            Ingredient ingredient = GatheringManager.getIngredient(ingredientNo);
-            ItemStack itemStack = ingredient.getItemStack(amount);
-
-            list.add(itemStack);
+            craftingLine.addWord(ingredientItem);
         }
 
-        return list;
+        List<CraftingLine> craftingLines = new ArrayList<>();
+        if (craftingTypeAndLevelToCraftingLine.containsKey(key)) {
+            craftingLines = craftingTypeAndLevelToCraftingLine.get(key);
+        }
+        craftingLines.add(craftingLine);
+        craftingTypeAndLevelToCraftingLine.put(key, craftingLines);
+    }
+
+    public static List<CraftingLine> getCraftingTypeAndLevelToCraftingLines(CraftingType craftingType, int craftingLevel) {
+        String key = craftingType.toString() + craftingLevel;
+        return craftingTypeAndLevelToCraftingLine.get(key);
     }
 }

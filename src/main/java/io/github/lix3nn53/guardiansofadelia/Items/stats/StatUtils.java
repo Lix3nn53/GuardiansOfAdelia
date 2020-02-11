@@ -141,7 +141,7 @@ public class StatUtils {
                 mat.equals(Material.IRON_SWORD) || mat.equals(Material.SHEARS);
     }
 
-    public static void addRandomPassiveStats(ItemStack itemStack, GearLevel gearLevel, ItemTier itemTier) {
+    public static void addRandomPassiveStats(ItemStack itemStack, int gearLevel, ItemTier itemTier) {
         Material type = itemStack.getType();
         if (hasStatType(type)) {
             int minNumberOfStats = itemTier.getMinNumberOfStatsNormal();
@@ -149,7 +149,7 @@ public class StatUtils {
                 minNumberOfStats = itemTier.getMinNumberOfStatsPassive();
             }
 
-            StatPassive statPassive = new StatPassive(gearLevel.getMinStatValue(), gearLevel.getMaxStatValue(), minNumberOfStats);
+            StatPassive statPassive = new StatPassive(GearLevel.getMinStatValue(gearLevel), GearLevel.getMaxStatValue(gearLevel), minNumberOfStats);
 
             //add persistent data before getting itemMeta so we don't lost them
             if (statPassive.getFire() != 0) {

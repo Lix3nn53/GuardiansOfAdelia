@@ -19,7 +19,7 @@ import io.github.lix3nn53.guardiansofadelia.quests.list.TutorialQuests;
 import io.github.lix3nn53.guardiansofadelia.quests.list.mainstory.MainStoryQuests;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
-import io.github.lix3nn53.guardiansofadelia.utilities.managers.ConfigManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.shutdown.AutomaticShutdown;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
