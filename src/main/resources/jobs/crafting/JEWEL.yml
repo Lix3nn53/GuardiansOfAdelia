@@ -6,32 +6,20 @@
 
 levelCount: 1
 level1:
-  itemSetCount: 2
+  itemSetCount: 1
   itemSet1:
-    classes:
-      - ARCHER
-      - HUNTER
+    slotTypes:
+      - EARRING
+      - NECKLACE
+      - GLOVE
+      - RING
     gearLevel: 1
     index: 1
     tier: MYSTIC
-    tag: "Weaponsmith's"
+    tag: "Jeweller's"
     ingredients:
       - 1
       - 2
     ingredientAmounts:
       - 4
       - 6
-  itemSet2:
-    classes:
-      - MAGE
-      - MONK
-    gearLevel: 1
-    index: 1
-    tier: MYSTIC
-    tag: "Weaponsmith's"
-    ingredients:
-      - 1
-      - 2
-    ingredientAmounts:
-      - 6
-      - 4

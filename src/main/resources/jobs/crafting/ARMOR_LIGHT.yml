@@ -6,7 +6,6 @@
 
 levelCount: 1
 level1:
-  requiredJobLevel: 1
   itemSetCount: 2
   itemSet1:
     classes:

@@ -4,10 +4,12 @@ import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
+import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
+import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -30,6 +32,7 @@ public class JobCraftingConfigurations {
     static void loadConfigs() {
         loadCraftingRecipesWeapon();
         loadCraftingRecipesArmor();
+        loadCraftingRecipesJewel();
     }
 
     private static void createCraftingRecipes() {
@@ -149,5 +152,37 @@ public class JobCraftingConfigurations {
         }
 
         return newList;
+    }
+
+    private static void loadCraftingRecipesJewel() {
+        CraftingType craftingType = CraftingType.JEWEL;
+        FileConfiguration fileConfiguration = craftingConfigurations.get(craftingType);
+        int levelCount = fileConfiguration.getInt("levelCount");
+
+        for (int level = 1; level <= levelCount; level++) {
+            int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
+
+            for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
+                List<String> slotTypesStr = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".slotTypes");
+                int gearLevel = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
+                int index = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".index");
+                String tierStr = fileConfiguration.getString("level" + level + ".itemSet" + itemSet + ".tier");
+                ItemTier itemTier = ItemTier.valueOf(tierStr);
+                String tag = fileConfiguration.getString("level" + level + ".itemSet" + itemSet + ".tag");
+                List<Integer> ingredients = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredients");
+                List<Integer> ingredientAmounts = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredientAmounts");
+
+                for (String rpgSlotTypeStr : slotTypesStr) {
+                    RPGSlotType rpgSlotType = RPGSlotType.valueOf(rpgSlotTypeStr);
+
+                    int minNumberOfStatsPassive = itemTier.getMinNumberOfStatsPassive();
+                    int minStatValue = GearLevel.getMinStatValue(gearLevel);
+                    int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
+                    ItemStack passive = PassiveItemList.get(gearLevel, index, rpgSlotType, itemTier, tag, minStatValue, maxStatValue, minNumberOfStatsPassive);
+
+                    CraftingManager.putCraftingTypeAndLevelToCraftingLine(passive, craftingType, level, ingredients, ingredientAmounts);
+                }
+            }
+        }
     }
 }
