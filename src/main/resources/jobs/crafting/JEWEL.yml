@@ -14,7 +14,7 @@ level1:
       - GLOVE
       - RING
     gearLevel: 1
-    index: 1
+    index: 0
     tier: MYSTIC
     tag: "Jeweller's"
     ingredients:

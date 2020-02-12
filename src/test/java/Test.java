@@ -1,4 +1,3 @@
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 
 import java.util.ArrayList;
@@ -12,11 +11,6 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException {
-        for (GearLevel gearLevel : GearLevel.values()) {
-            int multiplier = gearLevel.getWeaponAndPassiveNo();
-
-            System.out.println("value: " + (int) ((multiplier * multiplier) + 0.5));
-        }
         /*LocalDate now = LocalDate.now();
         String currentDateString = now.toString();
         System.out.println(currentDateString);

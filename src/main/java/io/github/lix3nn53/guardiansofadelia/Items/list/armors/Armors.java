@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.armors;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.GearArmor;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
@@ -20,7 +21,16 @@ public class Armors {
     public static ItemStack getArmor(ArmorType armorType, RPGClass rpgClass, int gearLevel, int itemIndex, ItemTier tier, String itemTag, int minStatValue,
                                      int maxStatValue, int minNumberOfStats) {
 
-        List<ArmorItemTemplate> templates = rpgClassToArmorTemplate.get(rpgClass.toString() + armorType.toString() + gearLevel);
+        String key = rpgClass.toString() + armorType.toString() + gearLevel;
+        List<ArmorItemTemplate> templates = rpgClassToArmorTemplate.get(key);
+
+        if (templates == null || templates.size() <= itemIndex) {
+            GuardiansOfAdelia.getInstance().getLogger().info("NULL ARMOR");
+            GuardiansOfAdelia.getInstance().getLogger().info("key: " + key);
+            GuardiansOfAdelia.getInstance().getLogger().info("itemIndex: " + itemIndex);
+            return null;
+        }
+
         ArmorItemTemplate template = templates.get(itemIndex);
 
         String name = template.getName();

@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
 import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringTool;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
-import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.GiveItemAction;
@@ -55,9 +55,9 @@ public class QuestsPhase3 {
         requiredQuests.add(19);
 
         List<Task> tasks = new ArrayList<>();
-        TaskGathering taskGathering = new TaskGathering(Ingredient.WOODCUTTING_PLANK, 6);
+        TaskGathering taskGathering = new TaskGathering(GatheringManager.getIngredient(1), 6);
         tasks.add(taskGathering);
-        TaskGathering taskGathering2 = new TaskGathering(Ingredient.WOODCUTTING_LOG, 4);
+        TaskGathering taskGathering2 = new TaskGathering(GatheringManager.getIngredient(1), 4);
         tasks.add(taskGathering2);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

@@ -18,6 +18,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
@@ -70,6 +71,7 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.BLUE + "/lix passive [parrot|earring|necklace|glove|ring] <num>");
                 player.sendMessage(ChatColor.BLUE + "/lix model portal<1-5>");
                 player.sendMessage(ChatColor.BLUE + "/lix premium item-id<1-24>");
+                player.sendMessage(ChatColor.BLUE + "/lix ingredient id amount");
             } else if (args[0].equals("exp")) {
                 if (args.length == 3) {
                     int expToGive = Integer.parseInt(args[2]);
@@ -198,6 +200,15 @@ public class CommandLix implements CommandExecutor {
                         enchantStone = EnchantStone.TIER_FOUR;
                     }
                     InventoryUtils.giveItemToPlayer(player, enchantStone.getItemSTack(amount));
+                }
+            } else if (args[0].equals("ingredient")) {
+                if (args.length == 3) {
+                    int no = Integer.parseInt(args[1]);
+                    int amount = Integer.parseInt(args[2]);
+
+                    ItemStack itemStack = GatheringManager.getIngredient(no).getItemStack(amount);
+
+                    InventoryUtils.giveItemToPlayer(player, itemStack);
                 }
             } else if (args[0].equals("coin")) {
                 if (args.length == 2) {

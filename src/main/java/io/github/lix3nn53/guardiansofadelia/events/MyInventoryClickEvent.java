@@ -868,13 +868,17 @@ public class MyInventoryClickEvent implements Listener {
 
                                         String[] split = title.split("Level ");
 
-                                        String levelStr = split[1];
-                                        int level = Integer.parseInt(levelStr);
+                                        String levelStrWithPage = split[1];
 
-                                        StatUtils.addRandomPassiveStats(clone, level, ItemTier.MYSTIC);
+                                        String[] split2 = levelStrWithPage.split(" Page");
+
+                                        String levelStr = split2[0];
+                                        int craftingLevel = Integer.parseInt(levelStr);
+
+                                        StatUtils.addRandomPassiveStats(clone, craftingLevel, ItemTier.MYSTIC);
 
                                         for (ItemStack ingredient : ingredients) {
-                                            InventoryUtils.removeMaterialFromInventory(player.getInventory(), ingredient.getType(), ingredient.getAmount());
+                                            InventoryUtils.removeItemFromInventory(player.getInventory(), ingredient, ingredient.getAmount());
                                         }
                                         InventoryUtils.giveItemToPlayer(player, clone);
                                         rpgCharacter.getJob().addExperience(player, jobExpToGive);

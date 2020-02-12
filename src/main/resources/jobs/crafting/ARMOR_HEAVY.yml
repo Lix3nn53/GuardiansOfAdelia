@@ -12,9 +12,9 @@ level1:
       - WARRIOR
       - ROGUE
     gearLevel: 1
-    index: 1
+    index: 0
     tier: MYSTIC
-    tag: "Weaponsmith's"
+    tag: "Armorsmith's"
     ingredients:
       - 1
       - 2
@@ -26,9 +26,9 @@ level1:
       - KNIGHT
       - PALADIN
     gearLevel: 1
-    index: 1
+    index: 0
     tier: MYSTIC
-    tag: "Weaponsmith's"
+    tag: "Armorsmith's"
     ingredients:
       - 1
       - 2

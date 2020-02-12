@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
@@ -129,6 +130,11 @@ public class JobCraftingConfigurations {
 
                         for (ArmorType armorType : ArmorType.values()) {
                             ItemStack armor = Armors.getArmor(armorType, rpgClass, gearLevel, index, itemTier, tag, minStatValue, maxStatValue, minNumberOfStatsNormal);
+
+                            if (armor == null) {
+                                GuardiansOfAdelia.getInstance().getLogger().info("CRAFTING RECIPE NULL ARMOR");
+                                continue;
+                            }
 
                             double multiplier = 1;
                             if (armorType.equals(ArmorType.LEGGINGS)) {

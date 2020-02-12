@@ -42,6 +42,7 @@ public class ConfigManager {
     }
 
     public static void createConfigALL() {
+        JobGatheringConfigurations.createConfigs();
         createResourcePackConfig();
         createCharacterSelectionConfig();
         createTowns();
@@ -50,11 +51,12 @@ public class ConfigManager {
         DatabaseConfiguration.createConfigs();
         DungeonConfiguration.createConfigs();
         ItemConfigurations.createConfigs();
-        JobGatheringConfigurations.createConfigs();
+        JobCraftingConfigurations.createConfigs();
         SpawnerConfiguration.createConfigs();
     }
 
     public static void loadConfigALL() {
+        JobGatheringConfigurations.loadConfigs();
         loadResourcePackConfig();
         loadCharacterSelectionConfig();
         loadTowns();
@@ -63,7 +65,7 @@ public class ConfigManager {
         DatabaseConfiguration.loadConfigs();
         DungeonConfiguration.loadConfigs();
         ItemConfigurations.loadConfigs();
-        JobGatheringConfigurations.loadConfigs();
+        JobCraftingConfigurations.loadConfigs();
         SpawnerConfiguration.loadConfigs();
     }
 

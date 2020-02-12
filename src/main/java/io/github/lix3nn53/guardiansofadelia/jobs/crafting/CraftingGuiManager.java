@@ -18,49 +18,19 @@ public class CraftingGuiManager {
         ItemStack itemStack = new ItemStack(Material.STONE_PICKAXE, 10);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setCustomModelData(36);
-        itemMeta.setDisplayName(ChatColor.GOLD + "Level 1");
         itemMeta.setLore(new ArrayList() {{
             add("");
-            add(ChatColor.GRAY + "Click to craft items of this crafting level.");
+            add(ChatColor.GRAY + "Click to craft items of this crafting-level.");
         }});
-        itemStack.setItemMeta(itemMeta);
-        itemStack.setAmount(2);
-        guiGeneric.setItem(9, itemStack);
 
-        itemMeta.setDisplayName(ChatColor.GOLD + "Level 2");
-        itemStack.setItemMeta(itemMeta);
-        itemStack.setAmount(3);
-        guiGeneric.setItem(10, itemStack);
+        List<Integer> craftingTypeToLevels = CraftingManager.getCraftingTypeToLevels(craftingType);
 
-        itemMeta.setDisplayName(ChatColor.GOLD + "Level 3");
-        itemStack.setItemMeta(itemMeta);
-        itemStack.setAmount(4);
-        guiGeneric.setItem(11, itemStack);
-
-        itemMeta.setDisplayName(ChatColor.GOLD + "Level 4");
-        itemStack.setItemMeta(itemMeta);
-        itemStack.setAmount(5);
-        guiGeneric.setItem(12, itemStack);
-
-        itemMeta.setDisplayName(ChatColor.GOLD + "Level 5");
-        itemStack.setItemMeta(itemMeta);
-        itemStack.setAmount(6);
-        guiGeneric.setItem(13, itemStack);
-
-        itemMeta.setDisplayName(ChatColor.GOLD + "Level 6");
-        itemStack.setItemMeta(itemMeta);
-        itemStack.setAmount(7);
-        guiGeneric.setItem(14, itemStack);
-
-        itemMeta.setDisplayName(ChatColor.GOLD + "Level 7");
-        itemStack.setItemMeta(itemMeta);
-        itemStack.setAmount(8);
-        guiGeneric.setItem(15, itemStack);
-
-        itemMeta.setDisplayName(ChatColor.GOLD + "Level 8");
-        itemStack.setItemMeta(itemMeta);
-        itemStack.setAmount(9);
-        guiGeneric.setItem(16, itemStack);
+        for (int level : craftingTypeToLevels) {
+            itemMeta.setDisplayName(ChatColor.GOLD + "Level " + level);
+            itemStack.setAmount(level);
+            itemStack.setItemMeta(itemMeta);
+            guiGeneric.setItem(8 + level, itemStack);
+        }
 
         return guiGeneric;
     }

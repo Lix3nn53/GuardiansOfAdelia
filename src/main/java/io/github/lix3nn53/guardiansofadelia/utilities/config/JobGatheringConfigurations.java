@@ -22,17 +22,17 @@ public class JobGatheringConfigurations {
     private static FileConfiguration gatheringToolToBlocks;
 
     static void createConfigs() {
+        createIngredients();
         createBlockToIngredients();
         createGatheringToolToBlocks();
         createGatheringTypeToIngredients();
-        createIngredients();
     }
 
     static void loadConfigs() {
+        loadIngredients();
         loadBlockToIngredients();
         loadGatheringToolToBlocks();
         loadGatheringTypeToIngredients();
-        loadIngredients();
     }
 
     private static void createIngredients() {
@@ -102,7 +102,7 @@ public class JobGatheringConfigurations {
 
         for (int i = 1; i <= itemCount; i++) {
             String gatheringToolStr = gatheringToolToBlocks.getString("t" + i + ".gatheringTool");
-            List<String> targetBlocks = gatheringToolToBlocks.getStringList("i" + i + ".targetBlocks");
+            List<String> targetBlocks = gatheringToolToBlocks.getStringList("t" + i + ".targetBlocks");
 
             GatheringTool gatheringTool = GatheringTool.valueOf(gatheringToolStr);
 
