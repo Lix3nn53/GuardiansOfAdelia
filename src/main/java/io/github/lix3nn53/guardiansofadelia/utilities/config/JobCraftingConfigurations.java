@@ -1,7 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
+import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
@@ -33,6 +35,9 @@ public class JobCraftingConfigurations {
         loadCraftingRecipesWeapon();
         loadCraftingRecipesArmor();
         loadCraftingRecipesJewel();
+        loadCraftingRecipesPotion();
+        loadCraftingRecipesFood();
+        loadCraftingRecipesEnchantStone();
     }
 
     private static void createCraftingRecipes() {
@@ -182,6 +187,80 @@ public class JobCraftingConfigurations {
 
                     CraftingManager.putCraftingTypeAndLevelToCraftingLine(passive, craftingType, level, ingredients, ingredientAmounts);
                 }
+            }
+        }
+    }
+
+    private static void loadCraftingRecipesPotion() {
+        CraftingType craftingType = CraftingType.POTION;
+        FileConfiguration fileConfiguration = craftingConfigurations.get(craftingType);
+        int levelCount = fileConfiguration.getInt("levelCount");
+
+        for (int level = 1; level <= levelCount; level++) {
+            int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
+
+            for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
+                List<String> consumableTypesStr = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".consumableTypes");
+                int skillLevel = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".skillLevel");
+                int uses = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".uses");
+                List<Integer> ingredients = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredients");
+                List<Integer> ingredientAmounts = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredientAmounts");
+
+                for (String consumableTypeStr : consumableTypesStr) {
+                    Consumable consumable = Consumable.valueOf(consumableTypeStr);
+
+                    ItemStack itemStack = consumable.getItemStack(skillLevel, uses);
+
+                    CraftingManager.putCraftingTypeAndLevelToCraftingLine(itemStack, craftingType, level, ingredients, ingredientAmounts);
+                }
+            }
+        }
+    }
+
+    private static void loadCraftingRecipesFood() {
+        CraftingType craftingType = CraftingType.FOOD;
+        FileConfiguration fileConfiguration = craftingConfigurations.get(craftingType);
+        int levelCount = fileConfiguration.getInt("levelCount");
+
+        for (int level = 1; level <= levelCount; level++) {
+            int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
+
+            for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
+                List<String> consumableTypesStr = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".consumableTypes");
+                int skillLevel = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".skillLevel");
+                int uses = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".uses");
+                List<Integer> ingredients = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredients");
+                List<Integer> ingredientAmounts = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredientAmounts");
+
+                for (String consumableTypeStr : consumableTypesStr) {
+                    Consumable consumable = Consumable.valueOf(consumableTypeStr);
+
+                    ItemStack itemStack = consumable.getItemStack(skillLevel, uses);
+
+                    CraftingManager.putCraftingTypeAndLevelToCraftingLine(itemStack, craftingType, level, ingredients, ingredientAmounts);
+                }
+            }
+        }
+    }
+
+    private static void loadCraftingRecipesEnchantStone() {
+        CraftingType craftingType = CraftingType.ENCHANT_STONE;
+        FileConfiguration fileConfiguration = craftingConfigurations.get(craftingType);
+        int levelCount = fileConfiguration.getInt("levelCount");
+
+        for (int level = 1; level <= levelCount; level++) {
+            int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
+
+            for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
+                String stoneTier = fileConfiguration.getString("level" + level + ".itemSet" + itemSet + ".stoneTier");
+                int stoneAmount = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".stoneAmount");
+                List<Integer> ingredients = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredients");
+                List<Integer> ingredientAmounts = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredientAmounts");
+
+                EnchantStone enchantStone = EnchantStone.valueOf(stoneTier);
+                ItemStack itemStack = enchantStone.getItemSTack(stoneAmount);
+
+                CraftingManager.putCraftingTypeAndLevelToCraftingLine(itemStack, craftingType, level, ingredients, ingredientAmounts);
             }
         }
     }

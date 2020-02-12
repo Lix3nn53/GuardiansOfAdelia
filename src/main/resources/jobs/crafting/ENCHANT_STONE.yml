@@ -1,0 +1,18 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                    Crafting                    #
+# ---------------------------------------------- #
+
+levelCount: 1
+level1:
+  itemSetCount: 1
+  itemSet1:
+    stoneTier: TIER_ONE
+    stoneAmount: 1
+    ingredients:
+      - 1
+      - 2
+    ingredientAmounts:
+      - 4
+      - 6
