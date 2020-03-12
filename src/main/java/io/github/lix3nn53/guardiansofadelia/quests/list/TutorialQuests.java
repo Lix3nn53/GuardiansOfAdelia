@@ -61,7 +61,7 @@ public class TutorialQuests {
         List<Integer> requiredQuests3 = new ArrayList<>();
         requiredQuests3.add(2);
         List<ItemStack> itemPrizes1 = new ArrayList<>();
-        itemPrizes1.add(PassiveItemList.get(8, 0, RPGSlotType.PARROT, ItemTier.COMMON, "Tutorial", 10, 20, 2));
+        itemPrizes1.add(PassiveItemList.get(9, 0, RPGSlotType.PARROT, ItemTier.COMMON, "Tutorial", 10, 20, 2));
         itemPrizes1.add(PassiveItemList.get(9, 0, RPGSlotType.EARRING, ItemTier.COMMON, "Tutorial", 10, 20, 2));
         itemPrizes1.add(PassiveItemList.get(9, 0, RPGSlotType.GLOVE, ItemTier.COMMON, "Tutorial", 10, 20, 2));
         itemPrizes1.add(PassiveItemList.get(9, 0, RPGSlotType.RING, ItemTier.COMMON, "Tutorial", 10, 20, 2));

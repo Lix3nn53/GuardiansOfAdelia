@@ -15,7 +15,7 @@ public class GearLevel {
     }
 
     public static int getGearLevel(int reqLevel) {
-        return reqLevel / 10;
+        return (reqLevel / 10) + 1;
     }
 
     public static int getMinLevel(int gearLevel) {
