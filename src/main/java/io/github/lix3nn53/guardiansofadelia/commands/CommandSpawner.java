@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
+import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import org.bukkit.ChatColor;
@@ -31,7 +32,7 @@ public class CommandSpawner implements CommandExecutor {
                 if (args.length == 4) {
                     try {
                         String adeliaEntityString = args[1];
-                        AdeliaEntity adeliaEntity = AdeliaEntity.valueOf(adeliaEntityString);
+                        AdeliaEntity adeliaEntity = AdeliaEntityManager.getEntity(adeliaEntityString);
 
                         Block block = player.getTargetBlock(null, 5);
 
@@ -61,7 +62,7 @@ public class CommandSpawner implements CommandExecutor {
                 if (args.length == 2) {
                     try {
                         String adeliaEntityString = args[1];
-                        AdeliaEntity adeliaEntity = AdeliaEntity.valueOf(adeliaEntityString);
+                        AdeliaEntity adeliaEntity = AdeliaEntityManager.getEntity(adeliaEntityString);
 
                         Entity mob = adeliaEntity.getMob(player.getLocation());
                     } catch (Exception e) {

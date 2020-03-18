@@ -1,10 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.minigames.portals.InstantTeleportPortal;
-import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
-import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
-import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
@@ -32,7 +28,6 @@ public class ConfigManager {
     private static FileConfiguration townsConfig;
     private static FileConfiguration resourcePackConfig;
     private static FileConfiguration hologramsConfig;
-    private static FileConfiguration teleportPortals;
 
     public static void init() {
         if (!GuardiansOfAdelia.getInstance().getDataFolder().exists()) {
@@ -42,11 +37,12 @@ public class ConfigManager {
     }
 
     public static void createConfigALL() {
+        EntityConfigurations.createConfigs();
         JobGatheringConfigurations.createConfigs();
         createResourcePackConfig();
         createCharacterSelectionConfig();
         createTowns();
-        createTeleportPortals();
+        TeleportPortalsConfiguration.createConfigs();
         createHologramsConfig();
         DatabaseConfiguration.createConfigs();
         DungeonConfiguration.createConfigs();
@@ -56,11 +52,12 @@ public class ConfigManager {
     }
 
     public static void loadConfigALL() {
+        EntityConfigurations.loadConfigs();
         JobGatheringConfigurations.loadConfigs();
         loadResourcePackConfig();
         loadCharacterSelectionConfig();
         loadTowns();
-        loadTeleportPortals();
+        TeleportPortalsConfiguration.loadConfigs();
         loadHologramsConfig();
         DatabaseConfiguration.loadConfigs();
         DungeonConfiguration.loadConfigs();
@@ -262,54 +259,6 @@ public class ConfigManager {
             characterSelectionConfig.save(ConfigManager.DATA_FOLDER + "/characterSelection.yml");
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    private static void createTeleportPortals() {
-        File customConfigFile = new File(ConfigManager.DATA_FOLDER, "teleportPortals.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-            GuardiansOfAdelia.getInstance().saveResource("teleportPortals.yml", false);
-        }
-
-        teleportPortals = new YamlConfiguration();
-        try {
-            teleportPortals.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void loadTeleportPortals() {
-        int portalNumber = teleportPortals.getInt("PortalNumber");
-        for (int i = 1; i <= portalNumber; i++) {
-            String worldString = teleportPortals.getString("p" + i + ".world");
-            World world = Bukkit.getWorld(worldString);
-            double x = teleportPortals.getDouble("p" + i + ".x");
-            double y = teleportPortals.getDouble("p" + i + ".y");
-            double z = teleportPortals.getDouble("p" + i + ".z");
-            float yaw = (float) teleportPortals.getDouble("p" + i + ".yaw");
-            float pitch = (float) teleportPortals.getDouble("p" + i + ".pitch");
-            Location location = new Location(world, x, y, z, yaw, pitch);
-            PortalColor portalColor = PortalColor.valueOf(teleportPortals.getString("p" + i + ".color"));
-            Portal portal = new Portal(location, portalColor);
-
-            PortalManager.addPortal(portal);
-
-            String tpWorldString = teleportPortals.getString("p" + i + ".tpWorld");
-            World tpWorld = Bukkit.getWorld(tpWorldString);
-            double tpX = teleportPortals.getDouble("p" + i + ".tpX");
-            double tpY = teleportPortals.getDouble("p" + i + ".tpY");
-            double tpZ = teleportPortals.getDouble("p" + i + ".tpZ");
-            float tpYaw = (float) teleportPortals.getDouble("p" + i + ".tpYaw");
-            float tpPitch = (float) teleportPortals.getDouble("p" + i + ".tpPitch");
-            Location tpLocation = new Location(tpWorld, tpX, tpY, tpZ, tpYaw, tpPitch);
-
-            int requiredQuestNoAccepted = teleportPortals.getInt("p" + i + ".requiredQuestNoAccepted");
-            int requiredQuestNoTurnedIn = teleportPortals.getInt("p" + i + ".requiredQuestNoTurnedIn");
-
-            InstantTeleportPortal instantTeleportPortal = new InstantTeleportPortal(tpLocation, requiredQuestNoAccepted, requiredQuestNoTurnedIn);
-            PortalManager.addInstantTeleportPortal(portal, instantTeleportPortal);
         }
     }
 }

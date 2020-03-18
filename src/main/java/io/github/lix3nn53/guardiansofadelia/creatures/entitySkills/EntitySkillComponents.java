@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.entitySkills;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
@@ -161,7 +160,7 @@ public class EntitySkillComponents {
         return new DamageMechanic(damages, type);
     }
 
-    public static SpawnEntityMechanic getComponentSpawnEntity(List<AdeliaEntity> adeliaEntities, int amountPerSpawn) {
+    public static SpawnEntityMechanic getComponentSpawnEntity(List<String> adeliaEntities, int amountPerSpawn) {
         return new SpawnEntityMechanic(adeliaEntities, amountPerSpawn);
     }
 }

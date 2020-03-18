@@ -1,0 +1,542 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+count: 57
+i1:
+  key: "TUTORIAL_1"
+  type: "WITHER_SKELETON"
+  name: "Aleesia's Soldier"
+  damage: 400
+  maxHealth: 2800
+  mainHand: "SWORD_DARK"
+i2:
+  key: "TUTORIAL_2"
+  type: "STRAY"
+  name: "Aleesia's Ranger"
+  damage: 200
+  maxHealth: 1600
+  mainHand: "BOW_DARK"
+i3:
+  key: "TUTORIAL_BOSS"
+  type: "WITHER"
+  name: "Aleesia"
+  damage: 3000
+  maxHealth: 200000
+  disguise: "ALEESIA"
+i4:
+  key: "LIZARD"
+  type: "SILVERFISH"
+  name: "Wild Lizard"
+  damage: 5
+  maxHealth: 20
+  experience: 2
+  dropTableNumber: 0
+i5:
+  key: "LIZARD_POISONOUS"
+  type: "SILVERFISH"
+  name: "Poisonous Lizard"
+  damage: 5
+  maxHealth: 20
+  experience: 3
+  dropTableNumber: 0
+i6:
+  key: "SLIME"
+  type: "SLIME"
+  name: "Baby Slime"
+  damage: 7
+  maxHealth: 30
+  experience: 5
+  dropTableNumber: 0
+  size: 2
+i7:
+  key: "SLIME_STICKY"
+  type: "SLIME"
+  name: "Sticky Slime"
+  damage: 9
+  maxHealth: 40
+  experience: 7
+  dropTableNumber: 0
+  size: 3
+i8:
+  key: "ZOMBIE"
+  type: "ZOMBIE"
+  name: "Zombie"
+  damage: 12
+  maxHealth: 50
+  experience: 12
+  dropTableNumber: 1
+i9:
+  key: "ZOMBIE_VILLAGER"
+  type: "ZOMBIE_VILLAGER"
+  name: "Zombie Villager"
+  damage: 14
+  maxHealth: 60
+  experience: 14
+  dropTableNumber: 1
+i10:
+  key: "ZOMBIE_SPLITTER"
+  type: "ZOMBIE"
+  name: "Splitter Zombie"
+  damage: 12
+  maxHealth: 50
+  experience: 14
+  dropTableNumber: 1
+  movementSpeed: 0.15
+i11:
+  key: "ZOMBIE_TANK"
+  type: "ZOMBIE"
+  name: "Tank Zombie"
+  damage: 10
+  maxHealth: 80
+  experience: 18
+  dropTableNumber: 1
+  offhand: "SHIELD_WOODEN"
+i12:
+  key: "SKELETON_ARCHER"
+  type: "SKELETON"
+  name: "Archer Skeleton"
+  damage: 20
+  maxHealth: 120
+  experience: 53
+  dropTableNumber: 2
+  mainhand: "BOW_WOODEN"
+i13:
+  key: "SKELETON_FIGHTER"
+  type: "SKELETON"
+  name: "Fighter Skeleton"
+  damage: 30
+  maxHealth: 150
+  experience: 53
+  dropTableNumber: 2
+  mainhand: "SWORD_WOODEN"
+i14:
+  key: "SKELETON_ROGUE"
+  type: "SKELETON"
+  name: "Rogue Skeleton"
+  damage: 25
+  maxHealth: 120
+  experience: 53
+  dropTableNumber: 2
+  mainhand: "DAGGER_WOOD"
+  offhand: "DAGGER_WOOD"
+i15:
+  key: "SKELETON_MONK"
+  type: "SKELETON"
+  name: "Monk Skeleton"
+  damage: 25
+  maxHealth: 120
+  experience: 60
+  dropTableNumber: 2
+  mainhand: "SPEAR_STEEL"
+i16:
+  key: "SKELETON_MAGE"
+  type: "SKELETON"
+  name: "Mage Skeleton"
+  damage: 20
+  maxHealth: 120
+  experience: 68
+  dropTableNumber: 2
+  mainhand: "STAFF_BONE"
+  helmet: "HELMET_GOLDEN"
+  movementSpeed: 0.15
+i17:
+  key: "CREEPER"
+  type: "CREEPER"
+  name: "Popping Rainbow"
+  maxHealth: 320
+  experience: 153
+  dropTableNumber: 3
+  movementSpeed: 0.3
+i18:
+  key: "VEX"
+  type: "VEX"
+  name: "Taffy Spirit"
+  maxHealth: 280
+  damage: 60
+  experience: 164
+  dropTableNumber: 3
+  movementSpeed: 0.4
+i19:
+  key: "SHULKER"
+  type: "SHULKER"
+  name: "Candy Box"
+  maxHealth: 400
+  experience: 153
+  dropTableNumber: 3
+i20:
+  key: "JELLYBEAN"
+  type: "ENDERMITE"
+  name: "Jellybean"
+  maxHealth: 320
+  damage: 60
+  experience: 153
+  dropTableNumber: 3
+  movementSpeed: 0.4
+i21:
+  key: "PIRATE_SHOOTER"
+  type: "SKELETON"
+  name: "Shooter Pirate"
+  maxHealth: 640
+  damage: 100
+  experience: 253
+  dropTableNumber: 4
+  mainhand: "PIRATE_PISTOL"
+  helmet: "PIRATE_HAT"
+i22:
+  key: "PIRATE_FIGHTER"
+  type: "SKELETON"
+  name: "Fighter Pirate"
+  maxHealth: 720
+  damage: 100
+  experience: 253
+  dropTableNumber: 4
+  mainhand: "SWORD_STEEL"
+  helmet: "PIRATE_HAT"
+i23:
+  key: "PIRATE_SHARPSHOOTER"
+  type: "WITHER_SKELETON"
+  name: "Sharpshooter Pirate"
+  maxHealth: 700
+  damage: 120
+  experience: 282
+  dropTableNumber: 4
+  mainhand: "PIRATE_PISTOL"
+  helmet: "PIRATE_HAT"
+i24:
+  key: "PIRATE_DUEL_MASTER"
+  type: "WITHER_SKELETON"
+  name: "Duel Master Pirate"
+  maxHealth: 780
+  damage: 140
+  experience: 282
+  dropTableNumber: 4
+  mainhand: "KATANA"
+  helmet: "PIRATE_HAT"
+i25:
+  key: "PIRATE_DROWNED"
+  type: "DROWNED"
+  name: "Drowned Pirate"
+  maxHealth: 700
+  damage: 100
+  experience: 282
+  dropTableNumber: 4
+  mainhand: "SPEAR_STEEL"
+i26:
+  key: "FROZEN_ROGUE"
+  type: "STRAY"
+  name: "Frozen Rogue"
+  maxHealth: 1400
+  damage: 210
+  experience: 420
+  dropTableNumber: 5
+  mainhand: "DAGGER_CRIMSON"
+  offhand: "DAGGER_CRIMSON"
+i27:
+  key: "FROZEN_ILLUSIONER"
+  type: "ILLUSIONER"
+  name: "Frozen Illusioner"
+  maxHealth: 1200
+  damage: 190
+  experience: 420
+  dropTableNumber: 5
+  mainhand: "BOW_DARK"
+i28:
+  key: "FROZEN_ARCHER"
+  type: "STRAY"
+  name: "Frozen Ranger"
+  maxHealth: 1400
+  damage: 200
+  experience: 420
+  dropTableNumber: 5
+  mainhand: "BOW_DARK"
+i29:
+  key: "ZOMBIE_JOCKEY"
+  type: "ZOMBIE"
+  name: "Jockey Zombie"
+  maxHealth: 1400
+  damage: 210
+  experience: 420
+  dropTableNumber: 5
+  mountType: "CHICKEN"
+  mountName: "Zombie Chicken"
+i30:
+  key: "TIMBERMAN"
+  type: "VINDICATOR"
+  name: "Frozen Rogue"
+  maxHealth: 1500
+  damage: 240
+  experience: 450
+  dropTableNumber: 5
+  mainhand: "AXE_WOODEN"
+i31:
+  key: "MUMMY"
+  type: "HUSK"
+  name: "Mummy"
+  maxHealth: 1900
+  damage: 280
+  experience: 553
+  dropTableNumber: 6
+i32:
+  key: "MUMMY_GHOST"
+  type: "HUSK"
+  name: "Mummy"
+  maxHealth: 2100
+  damage: 300
+  experience: 584
+  dropTableNumber: 6
+  potionEffectTypeList:
+    - "INVISIBILITY"
+    - "GLOWING"
+i33:
+  key: "DESERT_SKELETON_ARCHER"
+  type: "SKELETON"
+  name: "Desert Archer Skeleton"
+  maxHealth: 1700
+  damage: 250
+  experience: 553
+  dropTableNumber: 6
+  mainhand: "BOW_SATET"
+  mountType: "SPIDER"
+  mountName: "Desert Spider"
+i34:
+  key: "DESERT_SKELETON_CAVALRY"
+  type: "SKELETON"
+  name: "Desert Cavalry Skeleton"
+  maxHealth: 1900
+  damage: 300
+  experience: 553
+  dropTableNumber: 6
+  mainhand: "SPEAR_RED"
+  mountType: "SPIDER"
+  mountName: "Desert Spider"
+i35:
+  key: "SPIDER"
+  type: "SPIDER"
+  name: "Desert Spider"
+  maxHealth: 1900
+  damage: 250
+  experience: 584
+  dropTableNumber: 6
+i36:
+  key: "SPIDER_GHOST"
+  type: "SPIDER"
+  name: "Ghost Spider"
+  maxHealth: 1900
+  damage: 300
+  experience: 584
+  dropTableNumber: 6
+  potionEffectTypeList:
+    - "INVISIBILITY"
+    - "GLOWING"
+i37:
+  key: "WITCH"
+  type: "WITCH"
+  name: "Witch"
+  maxHealth: 3400
+  experience: 764
+  dropTableNumber: 7
+i38:
+  key: "GOBLIN_JOCKEY"
+  type: "PIG_ZOMBIE"
+  name: "Jockey Goblin"
+  isBaby: true
+  maxHealth: 2000
+  damage: 240
+  experience: 720
+  dropTableNumber: 7
+  mainhand: "SWORD_WOODEN"
+  mountType: "CHICKEN"
+  mountName: "Goblin Chicken"
+i39:
+  key: "GOBLIN_FIGHTER"
+  type: "PIG_ZOMBIE"
+  name: "Fighter Goblin"
+  isBaby: true
+  maxHealth: 3200
+  damage: 380
+  experience: 750
+  dropTableNumber: 7
+  mainhand: "SWORD_WOODEN"
+i40:
+  key: "GOBLIN_ROGUE"
+  type: "PIG_ZOMBIE"
+  name: "Rogue Goblin"
+  isBaby: true
+  maxHealth: 2800
+  damage: 320
+  experience: 750
+  dropTableNumber: 7
+  mainhand: "DAGGER_WOOD"
+i41:
+  key: "GOBLIN_MAGE"
+  type: "PIG_ZOMBIE"
+  name: "Mage Goblin"
+  isBaby: true
+  maxHealth: 2400
+  damage: 300
+  experience: 750
+  dropTableNumber: 7
+  mainhand: "STAFF_WOODEN"
+  helmet: "HELMET_GOLDEN"
+  movementSpeed: 0.15
+i42:
+  key: "GOBLIN_SHAMAN"
+  type: "PIG_ZOMBIE"
+  name: "Shaman Goblin"
+  isBaby: true
+  maxHealth: 2400
+  damage: 300
+  experience: 750
+  dropTableNumber: 7
+  mainhand: "STAFF_LEAF"
+  helmet: "HELMET_GOLDEN"
+  movementSpeed: 0.15
+i43:
+  key: "ORC_FIGHTER"
+  type: "PIG_ZOMBIE"
+  name: "Fighter Orc"
+  maxHealth: 4500
+  damage: 480
+  experience: 880
+  dropTableNumber: 8
+  mainhand: "SWORD_WOODEN"
+i44:
+  key: "ORC_JOCKEY"
+  type: "PIG_ZOMBIE"
+  name: "Jockey Orc"
+  maxHealth: 2800
+  damage: 320
+  experience: 860
+  dropTableNumber: 8
+  mainhand: "SWORD_WOODEN"
+  mountType: "CHICKEN"
+  mountName: "Goblin Chicken"
+i45:
+  key: "ORC_GLADIATOR"
+  type: "PIG_ZOMBIE"
+  name: "Gladiator Orc"
+  maxHealth: 5000
+  damage: 500
+  experience: 920
+  dropTableNumber: 8
+  mainhand: "SWORD_WOODEN"
+  shield: "SHIELD_KNIGHT"
+  chestplate: "CHESTPLATE_IRON"
+  leggings: "LEGGINGS_IRON"
+  boots: "BOOTS_IRON"
+i46:
+  key: "ORC_MAGE"
+  type: "PIG_ZOMBIE"
+  name: "Mage Orc"
+  maxHealth: 3400
+  damage: 400
+  experience: 920
+  dropTableNumber: 8
+  mainhand: "STAFF_FIRE"
+  helmet: "HELMET_GOLDEN"
+  movementSpeed: 0.15
+i47:
+  key: "ORC_SHAMAN"
+  type: "PIG_ZOMBIE"
+  name: "Mage Shaman"
+  maxHealth: 3400
+  damage: 400
+  experience: 920
+  dropTableNumber: 8
+  mainhand: "STAFF_LEAF"
+  helmet: "HELMET_GOLDEN"
+  movementSpeed: 0.15
+i48:
+  key: "MAGMA_CUBE"
+  type: "MAGMA_CUBE"
+  name: "Magma Cube"
+  maxHealth: 4000
+  damage: 420
+  experience: 880
+  dropTableNumber: 8
+i49:
+  key: "BLAZE"
+  type: "BLAZE"
+  name: "Blaze"
+  maxHealth: 2800
+  damage: 340
+  experience: 880
+  dropTableNumber: 8
+i50:
+  key: "ENDERMAN"
+  type: "ENDERMAN"
+  name: "Enderman"
+  maxHealth: 7200
+  damage: 640
+  experience: 1000
+  dropTableNumber: 9
+i51:
+  key: "PHANTOM"
+  type: "PHANTOM"
+  name: "Phantom"
+  maxHealth: 5400
+  damage: 530
+  experience: 940
+  dropTableNumber: 9
+i52:
+  key: "PILLAGER_ROGUE"
+  type: "PILLAGER"
+  name: "Rogue Pillager"
+  maxHealth: 8000
+  damage: 700
+  experience: 1000
+  dropTableNumber: 9
+  mainhand: "DAGGER_DARKEST"
+  offhand: "DAGGER_DARKEST"
+i53:
+  key: "PILLAGER_MAGE"
+  type: "PILLAGER"
+  name: "Mage Pillager"
+  maxHealth: 7000
+  damage: 500
+  experience: 1000
+  dropTableNumber: 9
+  mainhand: "STAFF_FIRE"
+i54:
+  key: "PILLAGER_ROGUE"
+  type: "PILLAGER"
+  name: "Rogue Pillager"
+  maxHealth: 8000
+  damage: 700
+  experience: 1000
+  dropTableNumber: 9
+  mainhand: "DAGGER_DARKEST"
+  offhand: "DAGGER_DARKEST"
+i55:
+  key: "PILLAGER_RAVAGER"
+  type: "PILLAGER"
+  name: "Rogue Pillager"
+  maxHealth: 8000
+  damage: 700
+  experience: 1000
+  dropTableNumber: 9
+  mainhand: "CROSSBOW_DARK"
+  mountType: "RAVAGER"
+  mountName: "Ravager"
+i56:
+  key: "PILLAGER_SHAMAN"
+  type: "PILLAGER"
+  name: "Shaman Pillager"
+  maxHealth: 7000
+  damage: 500
+  experience: 1000
+  dropTableNumber: 9
+  mainhand: "STAFF_MOON"
+i57:
+  key: "PILLAGER_FIGHTER"
+  type: "PILLAGER"
+  name: "Fighter Pillager"
+  maxHealth: 9000
+  damage: 800
+  experience: 1000
+  dropTableNumber: 9
+  mainhand: "MACE_DARK"
+  offhand: "SHIELD_DARK"

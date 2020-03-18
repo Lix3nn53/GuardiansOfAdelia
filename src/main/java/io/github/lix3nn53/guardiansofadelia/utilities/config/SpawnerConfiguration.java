@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
+import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import org.bukkit.Bukkit;
@@ -63,7 +64,7 @@ public class SpawnerConfiguration {
             double z = spawnersConfig.getDouble("Spawners.s" + i + ".z");
             Location location = new Location(world, x, y, z);
             String adeliaEntityString = spawnersConfig.getString("Spawners.s" + i + ".mob");
-            AdeliaEntity adeliaEntity = AdeliaEntity.valueOf(adeliaEntityString);
+            AdeliaEntity adeliaEntity = AdeliaEntityManager.getEntity(adeliaEntityString);
             int amount = spawnersConfig.getInt("Spawners.s" + i + ".amount");
             int maxamount = spawnersConfig.getInt("Spawners.s" + i + ".maxamount");
             Spawner spawner = new Spawner(location, adeliaEntity, amount, maxamount);
@@ -85,7 +86,7 @@ public class SpawnerConfiguration {
             spawnersConfig.set("Spawners.s" + i + ".y", location.getY());
             spawnersConfig.set("Spawners.s" + i + ".z", location.getZ());
             spawnersConfig.set("Spawners.s" + i + ".world", Objects.requireNonNull(location.getWorld()).getName());
-            spawnersConfig.set("Spawners.s" + i + ".mob", spawner.getAdeliaEntity().name());
+            spawnersConfig.set("Spawners.s" + i + ".mob", spawner.getAdeliaEntity().getAdeliaEntityKey());
             spawnersConfig.set("Spawners.s" + i + ".amount", spawner.getAmountPerSpawn());
             spawnersConfig.set("Spawners.s" + i + ".maxamount", spawner.getMaxAmount());
             i++;
@@ -125,7 +126,7 @@ public class SpawnerConfiguration {
             double z = dungeonSpawnersConfig.getDouble("Spawners.s" + i + ".z");
             Location location = new Location(world, x, y, z);
             String adeliaEntityString = dungeonSpawnersConfig.getString("Spawners.s" + i + ".mob");
-            AdeliaEntity adeliaEntity = AdeliaEntity.valueOf(adeliaEntityString);
+            AdeliaEntity adeliaEntity = AdeliaEntityManager.getEntity(adeliaEntityString);
             int amount = dungeonSpawnersConfig.getInt("Spawners.s" + i + ".amount");
             int maxamount = dungeonSpawnersConfig.getInt("Spawners.s" + i + ".maxamount");
             Spawner spawner = new Spawner(location, adeliaEntity, amount, maxamount);
@@ -147,7 +148,7 @@ public class SpawnerConfiguration {
             dungeonSpawnersConfig.set("Spawners.s" + i + ".y", location.getY());
             dungeonSpawnersConfig.set("Spawners.s" + i + ".z", location.getZ());
             dungeonSpawnersConfig.set("Spawners.s" + i + ".world", Objects.requireNonNull(location.getWorld()).getName());
-            dungeonSpawnersConfig.set("Spawners.s" + i + ".mob", spawner.getAdeliaEntity().name());
+            dungeonSpawnersConfig.set("Spawners.s" + i + ".mob", spawner.getAdeliaEntity().getAdeliaEntityKey());
             dungeonSpawnersConfig.set("Spawners.s" + i + ".amount", spawner.getAmountPerSpawn());
             dungeonSpawnersConfig.set("Spawners.s" + i + ".maxamount", spawner.getMaxAmount());
             i++;
