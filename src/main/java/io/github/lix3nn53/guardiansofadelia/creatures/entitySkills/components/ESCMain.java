@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.creatures.entitySkills;
+package io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.components;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.EmptyComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
@@ -21,14 +21,12 @@ import org.bukkit.entity.Fireball;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum EntitySkill {
-    PROJECTILE_FIREBALL,
-    PROJECTILE_ARROW,
-    PROJECTILE_PARTICLE,
-    NOVA,
-    AOE;
+/**
+ * Entity Skill Component Main
+ */
+public class ESCMain {
 
-    public SkillComponent getSkillProjectileFireball(String holoWarnMessage, int delay, List<SkillComponent> children, GoaSound goaSound, int projectileAmount) {
+    public static SkillComponent getSkillProjectileFireball(String holoWarnMessage, int delay, List<SkillComponent> children, GoaSound goaSound, int projectileAmount) {
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmountToList(projectileAmount), 30,
                 0, 1, 0, 200, true, Fireball.class);
         List<Double> smallAreaRadius = new ArrayList<>();
@@ -57,7 +55,7 @@ public enum EntitySkill {
         return trigger;
     }
 
-    public SkillComponent getSkillProjectileArrow(String holoWarnMessage, int delay, List<SkillComponent> children, GoaSound goaSound, Color color, int projectileAmount) {
+    public static SkillComponent getSkillProjectileArrow(String holoWarnMessage, int delay, List<SkillComponent> children, GoaSound goaSound, Color color, int projectileAmount) {
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmountToList(projectileAmount), 30,
                 0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
                 ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(color, 2), false);
@@ -74,7 +72,7 @@ public enum EntitySkill {
         return trigger;
     }
 
-    public SkillComponent getSkillProjectileParticle(String holoWarnMessage, int delay, List<SkillComponent> children, GoaSound goaSound, Color color, int projectileAmount, double speed) {
+    public static SkillComponent getSkillProjectileParticle(String holoWarnMessage, int delay, List<SkillComponent> children, GoaSound goaSound, Color color, int projectileAmount, double speed) {
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, speed, projectileAmountToList(projectileAmount), 30,
                 0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
                 ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(color, 2), true);
@@ -91,7 +89,7 @@ public enum EntitySkill {
         return trigger;
     }
 
-    public SkillComponent getSkillProjectileNova(String holoWarnMessage, int delay, List<SkillComponent> children, GoaSound goaSound, int projectileAmount, Particle particle) {
+    public static SkillComponent getSkillProjectileNova(String holoWarnMessage, int delay, List<SkillComponent> children, GoaSound goaSound, int projectileAmount, Particle particle) {
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 0.4, projectileAmountToList(projectileAmount), 0,
                 0, 0, 200, false, DragonFireball.class, particle,
                 ArrangementParticle.SPHERE, 2, 32, null, false);
@@ -110,7 +108,7 @@ public enum EntitySkill {
         return emptyComponent;
     }
 
-    public SkillComponent getSkillAoeAround(String holoWarnMessage, int delay, List<SkillComponent> children, double radius, GoaSound goaSound, ParticleMechanic particleMechanic, boolean targetEnemy) {
+    public static SkillComponent getSkillAoeAround(String holoWarnMessage, int delay, List<SkillComponent> children, double radius, GoaSound goaSound, ParticleMechanic particleMechanic, boolean targetEnemy) {
         SelfTarget trigger = new SelfTarget();
         SelfTarget selfTargetForSound = new SelfTarget();
         List<Double> radiusList = new ArrayList<>();
@@ -139,7 +137,7 @@ public enum EntitySkill {
         return trigger;
     }
 
-    private List<Integer> projectileAmountToList(int projectileAmount) {
+    private static List<Integer> projectileAmountToList(int projectileAmount) {
         List<Integer> singleProjectile = new ArrayList<>();
         singleProjectile.add(projectileAmount);
         singleProjectile.add(projectileAmount);

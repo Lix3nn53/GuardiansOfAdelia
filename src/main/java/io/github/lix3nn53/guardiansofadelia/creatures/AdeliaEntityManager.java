@@ -16,16 +16,16 @@ public class AdeliaEntityManager {
 
     public static AdeliaEntity getEntity(String entityKey) {
         if (!keyToEntity.containsKey(entityKey)) {
-            GuardiansOfAdelia.getInstance().getLogger().info("WRONG KEY: " + entityKey);
+            GuardiansOfAdelia.getInstance().getLogger().info("WRONG ENTITY KEY: " + entityKey);
         }
         return keyToEntity.get(entityKey);
     }
 
-    private static void putSkillSet(String entityKey, int craftingLevel) {
+    public static void putSkillSet(String entityKey, EntitySkillSet entitySkillSet) {
+        keyToSkillSet.put(entityKey, entitySkillSet);
     }
 
     public static EntitySkillSet getSkillSet(String entityKey) {
-
-        return null;
+        return keyToSkillSet.get(entityKey);
     }
 }
