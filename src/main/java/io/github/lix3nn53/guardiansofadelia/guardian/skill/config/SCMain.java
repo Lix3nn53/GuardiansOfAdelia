@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.components;
+package io.github.lix3nn53.guardiansofadelia.guardian.skill.config;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.EmptyComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Entity Skill Component Main
+ * SkillComponents Main
  */
-public class ESCMain {
+public class SCMain {
 
     public static SkillComponent getSkillProjectileFireball(String holoWarnMessage, int delay, List<SkillComponent> children, GoaSound goaSound, int projectileAmount) {
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmountToList(projectileAmount), 30,

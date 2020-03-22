@@ -1,9 +1,9 @@
-package io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.components;
+package io.github.lix3nn53.guardiansofadelia.guardian.skill.config;
 
 /**
  * Entity Skill Component Type
  */
-public enum ESCType {
+public enum SCType {
     //MAIN TYPES
     FIREBALL,
     ARROW,

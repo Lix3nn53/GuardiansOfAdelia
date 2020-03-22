@@ -2,16 +2,15 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.EntitySkillSet;
-import io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.components.ESCMain;
-import io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.components.ESCSmall;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.config.SCMain;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.potion.PotionEffectType;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,26 +57,36 @@ public class EntitySkillConfigurations {
         int count = fileConfiguration.getInt("count");
 
         for (int i = 1; i <= count; i++) {
-            String adeliaEntityKey = fileConfiguration.getString("i" + i + ".key");
+            String adeliaEntityKey = fileConfiguration.getString("i" + i + ".mobkey");
 
             List<SkillComponent> skills = new ArrayList<>();
             List<Integer> skillLevels = new ArrayList<>();
 
             long cooldown = fileConfiguration.getInt("i" + i + ".cooldown");
 
-            skillLevels.add(fileConfiguration.getInt("i" + i + ".skillLevel"));
+            int skillCount = fileConfiguration.getInt("i" + i + ".skillCount");
 
+            for (int y = 1; y <= skillCount; y++) {
+                int skillLevel = fileConfiguration.getInt("i" + i + ".skill" + y + ".skillLevel");
+                int childComponentCount = fileConfiguration.getInt("i" + i + ".skill" + y + ".childComponentCount");
+
+                for (int k = 1; k <= childComponentCount; k++) {
+                    ConfigurationSection configurationSection = fileConfiguration.getConfigurationSection("i" + i + ".skill" + y + ".child" + k);
+
+                }
+
+                skillLevels.add(skillLevel);
+            }
 
             List<SkillComponent> children = new ArrayList<>();
 
-            int childCount = fileConfiguration.getInt("i" + i + ".childCount");
+            int childCount = fileConfiguration.getInt("i" + i + ".componentCount");
 
             for (int y = 1; y <= childCount; y++) {
-                children.add(ESCSmall.getComponentPotionEffectMechanic(PotionEffectType.POISON, 50, 1));
 
             }
 
-            SkillComponent trigger = ESCMain.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Shoosh!", 40, children, GoaSound.SKILL_POISON_SLASH, Color.LIME, 1, 2.7);
+            SkillComponent trigger = SCMain.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Shoosh!", 40, children, GoaSound.SKILL_POISON_SLASH, Color.LIME, 1, 2.7);
             skills.add(trigger);
 
             EntitySkillSet entitySkillSet = new EntitySkillSet(skills, skillLevels, cooldown);

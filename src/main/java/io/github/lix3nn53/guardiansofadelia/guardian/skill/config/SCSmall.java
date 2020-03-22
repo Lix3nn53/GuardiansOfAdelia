@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.components;
+package io.github.lix3nn53.guardiansofadelia.guardian.skill.config;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Entity Skill Component Small
+ * SkillConfigComponents Small
  */
-public class ESCSmall {
+public class SCSmall {
 
     public static ParticleMechanic getComponentParticleMechanic(Particle particle, double radius, int amount, Particle.DustOptions dustOptions) {
         return new ParticleMechanic(particle, ArrangementParticle.CIRCLE, radius, amount, 0, 0, 0, 0, 0.5, 0, 0, dustOptions);
