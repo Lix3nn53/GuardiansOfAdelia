@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -13,6 +14,10 @@ public class DelayMechanic extends MechanicComponent {
 
     public DelayMechanic(long ticks) {
         this.ticks = ticks;
+    }
+
+    public DelayMechanic(ConfigurationSection configurationSection) {
+        this.ticks = configurationSection.getLong("ticks");
     }
 
     @Override

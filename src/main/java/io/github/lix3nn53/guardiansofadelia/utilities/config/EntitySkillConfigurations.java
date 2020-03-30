@@ -3,10 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.EntitySkillSet;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.config.SCMain;
-import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.config.SkillComponentLoader;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -57,37 +54,28 @@ public class EntitySkillConfigurations {
         int count = fileConfiguration.getInt("count");
 
         for (int i = 1; i <= count; i++) {
+            //skill set
             String adeliaEntityKey = fileConfiguration.getString("i" + i + ".mobkey");
-
-            List<SkillComponent> skills = new ArrayList<>();
-            List<Integer> skillLevels = new ArrayList<>();
-
             long cooldown = fileConfiguration.getInt("i" + i + ".cooldown");
 
             int skillCount = fileConfiguration.getInt("i" + i + ".skillCount");
 
-            for (int y = 1; y <= skillCount; y++) {
-                int skillLevel = fileConfiguration.getInt("i" + i + ".skill" + y + ".skillLevel");
-                int childComponentCount = fileConfiguration.getInt("i" + i + ".skill" + y + ".childComponentCount");
+            List<SkillComponent> skills = new ArrayList<>();
+            List<Integer> skillLevels = new ArrayList<>();
 
-                for (int k = 1; k <= childComponentCount; k++) {
-                    ConfigurationSection configurationSection = fileConfiguration.getConfigurationSection("i" + i + ".skill" + y + ".child" + k);
+            //skill
+            for (int skill = 1; skill <= skillCount; skill++) {
+                ConfigurationSection configurationSection = fileConfiguration.getConfigurationSection("i" + i + ".skill" + skill);
 
-                }
-
+                int skillLevel = fileConfiguration.getInt("i" + i + ".skill" + skill + ".skillLevel");
                 skillLevels.add(skillLevel);
+
+                //trigger component
+                ConfigurationSection componentSection = fileConfiguration.getConfigurationSection("i" + i + ".skill" + skill + ".trigger");
+                SkillComponent triggerComponent = SkillComponentLoader.loadSection(componentSection);
+
+                skills.add(triggerComponent);
             }
-
-            List<SkillComponent> children = new ArrayList<>();
-
-            int childCount = fileConfiguration.getInt("i" + i + ".componentCount");
-
-            for (int y = 1; y <= childCount; y++) {
-
-            }
-
-            SkillComponent trigger = SCMain.getSkillProjectileParticle(ChatColor.DARK_GREEN + "Shoosh!", 40, children, GoaSound.SKILL_POISON_SLASH, Color.LIME, 1, 2.7);
-            skills.add(trigger);
 
             EntitySkillSet entitySkillSet = new EntitySkillSet(skills, skillLevels, cooldown);
 

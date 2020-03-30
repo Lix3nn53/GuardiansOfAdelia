@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -12,6 +13,12 @@ public class SoundMechanic extends MechanicComponent {
 
     public SoundMechanic(GoaSound goaSound) {
         this.goaSound = goaSound;
+    }
+
+    public SoundMechanic(ConfigurationSection configurationSection) {
+        String goaSound = configurationSection.getString("goaSound");
+
+        this.goaSound = GoaSound.valueOf(goaSound);
     }
 
     @Override

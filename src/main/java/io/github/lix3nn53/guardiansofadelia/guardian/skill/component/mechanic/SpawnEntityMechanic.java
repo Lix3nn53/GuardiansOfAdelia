@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
 import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -14,6 +15,14 @@ public class SpawnEntityMechanic extends MechanicComponent {
 
     public SpawnEntityMechanic(List<String> adeliaEntity, int amountPerSpawn) {
         this.adeliaEntity = adeliaEntity;
+        this.amountPerSpawn = amountPerSpawn;
+    }
+
+    public SpawnEntityMechanic(ConfigurationSection configurationSection) {
+        List<String> adeliaEntityList = configurationSection.getStringList("adeliaEntityList");
+        int amountPerSpawn = configurationSection.getInt("amountPerSpawn");
+
+        this.adeliaEntity = adeliaEntityList;
         this.amountPerSpawn = amountPerSpawn;
     }
 

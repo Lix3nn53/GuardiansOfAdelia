@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.Nearby;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -19,6 +20,12 @@ public class AreaTarget extends TargetComponent {
     public AreaTarget(boolean allies, boolean enemy, boolean self, int max, List<Double> radius) {
         super(allies, enemy, self, max);
         this.radius = radius;
+    }
+
+    public AreaTarget(ConfigurationSection configurationSection) {
+        super(configurationSection);
+
+        this.radius = configurationSection.getDoubleList("radiusList");
     }
 
     @Override

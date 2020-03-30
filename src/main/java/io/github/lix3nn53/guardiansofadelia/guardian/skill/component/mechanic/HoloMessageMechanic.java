@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.chat.ChatManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -15,6 +16,15 @@ public class HoloMessageMechanic extends MechanicComponent {
         this.message = message;
         this.durationTicks = durationTicks;
     }
+
+    public HoloMessageMechanic(ConfigurationSection configurationSection) {
+        String message = configurationSection.getString("message");
+        int durationTicks = configurationSection.getInt("durationTicks");
+
+        this.message = message;
+        this.durationTicks = durationTicks;
+    }
+
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {

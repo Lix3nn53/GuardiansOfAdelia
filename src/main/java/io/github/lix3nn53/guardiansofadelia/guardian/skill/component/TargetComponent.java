@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import net.citizensnpcs.api.CitizensAPI;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -19,6 +20,18 @@ public abstract class TargetComponent extends SkillComponent {
     private final boolean enemy;
 
     protected TargetComponent(boolean allies, boolean enemy, boolean self, int max) {
+        this.allies = allies;
+        this.enemy = enemy;
+        this.max = max;
+        this.self = self;
+    }
+
+    protected TargetComponent(ConfigurationSection configurationSection) {
+        boolean allies = configurationSection.getBoolean("allies");
+        boolean enemy = configurationSection.getBoolean("enemy");
+        boolean self = configurationSection.getBoolean("self");
+        int max = configurationSection.getInt("max");
+
         this.allies = allies;
         this.enemy = enemy;
         this.max = max;

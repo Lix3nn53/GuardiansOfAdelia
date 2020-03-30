@@ -4,8 +4,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicCom
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
@@ -44,6 +46,35 @@ public class ParticleMechanic extends MechanicComponent {
         this.dx = dx;
         this.dy = dy;
         this.dz = dz;
+        this.dustOptions = dustOptions;
+    }
+
+    public ParticleMechanic(ConfigurationSection configurationSection) {
+        String typeStr = configurationSection.getString("type");
+
+        double radiusParticle = configurationSection.getDouble("radius");
+        int amountParticle = configurationSection.getInt("amount");
+
+        Particle.DustOptions dustOptions = null;
+
+        if (configurationSection.contains("dustColor")) {
+            int dustColor = configurationSection.getInt("dustColor");
+            int dustSize = configurationSection.getInt("dustSize");
+
+            dustOptions = new Particle.DustOptions(Color.fromRGB(dustColor), dustSize);
+        }
+
+        this.particle = Particle.valueOf(typeStr);
+        this.arrangement = ArrangementParticle.CIRCLE;
+        this.radiusParticle = radiusParticle;
+        this.amountParticle = amountParticle;
+        this.forward = 0;
+        this.upward = 0.5;
+        this.right = 0;
+        this.speed = 0;
+        this.dx = 0;
+        this.dy = 0;
+        this.dz = 0;
         this.dustOptions = dustOptions;
     }
 

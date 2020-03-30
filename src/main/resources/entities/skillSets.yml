@@ -4,30 +4,43 @@
 #                     Items                      #
 # ---------------------------------------------- #
 
-count: 10
+count: 1
 i1:
   mobkey: "BOSS_SLIME"
   cooldown: 12
   skillCount: 2
   skill1:
     skillLevel: 1
-    childComponentCount: 1
-    child1:
-      componentType: "AOE_AROUND"
-      warnText: "Heeelp!"
-      delay: 10
-      radius: 8
-      sound: "SKILL_HEAL"
-      targetEnemy: true
-      particle:
-        type: "REDSTONE"
-        radius: 8
-        amount: 8
-        dustColor: 65535
-        dustSize: 2
-      childComponentCount: 1
+    trigger:
+      componentType: "SelfTarget"
+      childComponentCount: 2
       child1:
-        componentType: "SPAWN_ENTITY"
-        entityAmount: 2
-        entitiesToSpawn:
-          - "SLIME"
+        componentType: "HoloMessageMechanic"
+        message: "Heelp!"
+        durationTicks: 30
+      child2:
+        componentType: "DelayMechanic"
+        childComponentCount: 1
+        ticks: 70
+        child1:
+          componentType: "AreaTarget"
+          childComponentCount: 2
+          allies: false
+          enemy: true
+          self: false
+          max: 10
+          radiusList:
+            - 8
+          child1:
+            componentType: "SelfTarget"
+            childComponentCount: 1
+            child1:
+              componentType: "SoundMechanic"
+              goaSound: "SKILL_HEAL"
+          child2:
+            componentType: "SpawnEntityMechanic"
+            amountPerSpawn: 1
+            adeliaEntityList:
+              - "SLIME"
+              - "SLIME_STICKY"
+
