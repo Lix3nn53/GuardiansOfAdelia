@@ -54,6 +54,10 @@ public class EntitySkillSet {
                 SkillComponent skill = skills.get(index);
                 int level = skillLevels.get(index);
 
+                GuardiansOfAdelia.getInstance().getLogger().info(livingEntity.toString());
+                GuardiansOfAdelia.getInstance().getLogger().info("" + level);
+                GuardiansOfAdelia.getInstance().getLogger().info("" + targets);
+                GuardiansOfAdelia.getInstance().getLogger().info("" + castCounter);
                 skill.execute(livingEntity, level, targets, castCounter);
                 castCounter++;
             }
@@ -63,5 +67,9 @@ public class EntitySkillSet {
     private int getRandomIndex() {
         int size = skills.size();
         return new Random().nextInt(size);
+    }
+
+    public List<SkillComponent> getSkills() {
+        return skills;
     }
 }

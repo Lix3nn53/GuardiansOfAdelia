@@ -18,6 +18,14 @@ public class HoloMessageMechanic extends MechanicComponent {
     }
 
     public HoloMessageMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("message")) {
+            configLoadError("message");
+        }
+
+        if (!configurationSection.contains("durationTicks")) {
+            configLoadError("durationTicks");
+        }
+
         String message = configurationSection.getString("message");
         int durationTicks = configurationSection.getInt("durationTicks");
 

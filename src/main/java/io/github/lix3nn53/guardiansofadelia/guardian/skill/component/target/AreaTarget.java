@@ -25,6 +25,10 @@ public class AreaTarget extends TargetComponent {
     public AreaTarget(ConfigurationSection configurationSection) {
         super(configurationSection);
 
+        if (!configurationSection.contains("radiusList")) {
+            configLoadError("radiusList");
+        }
+
         this.radius = configurationSection.getDoubleList("radiusList");
     }
 

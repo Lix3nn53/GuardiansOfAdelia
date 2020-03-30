@@ -19,6 +19,14 @@ public class SpawnEntityMechanic extends MechanicComponent {
     }
 
     public SpawnEntityMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("adeliaEntityList")) {
+            configLoadError("adeliaEntityList");
+        }
+
+        if (!configurationSection.contains("amountPerSpawn")) {
+            configLoadError("amountPerSpawn");
+        }
+
         List<String> adeliaEntityList = configurationSection.getStringList("adeliaEntityList");
         int amountPerSpawn = configurationSection.getInt("amountPerSpawn");
 

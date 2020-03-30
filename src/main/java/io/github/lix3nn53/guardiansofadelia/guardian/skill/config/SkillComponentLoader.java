@@ -1,9 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.config;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.List;
 public class SkillComponentLoader {
 
     public static SkillComponent loadSection(ConfigurationSection configurationSection) {
+        GuardiansOfAdelia.getInstance().getLogger().info(configurationSection.getCurrentPath());
+        GuardiansOfAdelia.getInstance().getLogger().info(configurationSection.toString());
         SkillComponent skillComponent = loadComponent(configurationSection);
 
         boolean hasChild = hasChild(configurationSection);
@@ -24,7 +28,7 @@ public class SkillComponentLoader {
             }
         }
 
-        return null;
+        return skillComponent;
     }
 
     private static SkillComponent loadComponent(ConfigurationSection configurationSection) {
@@ -45,6 +49,8 @@ public class SkillComponentLoader {
         } else if (componentType.equals(SelfTarget.class.getSimpleName())) {
             return new SelfTarget();
         }
+
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER");
 
         return null;
     }

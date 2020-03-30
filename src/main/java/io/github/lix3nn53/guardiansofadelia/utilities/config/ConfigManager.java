@@ -38,6 +38,7 @@ public class ConfigManager {
 
     public static void createConfigALL() {
         EntityConfigurations.createConfigs();
+        EntitySkillConfigurations.createConfigs();
         JobGatheringConfigurations.createConfigs();
         createResourcePackConfig();
         createCharacterSelectionConfig();
@@ -53,6 +54,7 @@ public class ConfigManager {
 
     public static void loadConfigALL() {
         EntityConfigurations.loadConfigs();
+        EntitySkillConfigurations.loadConfigs();
         JobGatheringConfigurations.loadConfigs();
         loadResourcePackConfig();
         loadCharacterSelectionConfig();

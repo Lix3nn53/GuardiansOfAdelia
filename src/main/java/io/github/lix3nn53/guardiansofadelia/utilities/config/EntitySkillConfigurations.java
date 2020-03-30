@@ -12,19 +12,18 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class EntitySkillConfigurations {
 
-    private final static HashMap<String, FileConfiguration> fileNameToConfiguration = new HashMap<>();
+    private static FileConfiguration fileConfiguration;
 
     static void createConfigs() {
         createConfig("monsterSkills.yml");
     }
 
     static void loadConfigs() {
-        loadEntities("monsterSkills.yml");
+        loadConfig("monsterSkills.yml");
     }
 
     private static void createConfig(String fileName) {
@@ -43,14 +42,13 @@ public class EntitySkillConfigurations {
         YamlConfiguration yamlConfiguration = new YamlConfiguration();
         try {
             yamlConfiguration.load(customConfigFile);
-            fileNameToConfiguration.put(fileName, yamlConfiguration);
+            fileConfiguration = yamlConfiguration;
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
     }
 
-    private static void loadEntities(String fileName) {
-        FileConfiguration fileConfiguration = fileNameToConfiguration.get(fileName);
+    private static void loadConfig(String fileName) {
         int count = fileConfiguration.getInt("count");
 
         for (int i = 1; i <= count; i++) {
@@ -65,8 +63,6 @@ public class EntitySkillConfigurations {
 
             //skill
             for (int skill = 1; skill <= skillCount; skill++) {
-                ConfigurationSection configurationSection = fileConfiguration.getConfigurationSection("i" + i + ".skill" + skill);
-
                 int skillLevel = fileConfiguration.getInt("i" + i + ".skill" + skill + ".skillLevel");
                 skillLevels.add(skillLevel);
 

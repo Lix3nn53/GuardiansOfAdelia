@@ -8,7 +8,7 @@ count: 1
 i1:
   mobkey: "BOSS_SLIME"
   cooldown: 12
-  skillCount: 2
+  skillCount: 1
   skill1:
     skillLevel: 1
     trigger:

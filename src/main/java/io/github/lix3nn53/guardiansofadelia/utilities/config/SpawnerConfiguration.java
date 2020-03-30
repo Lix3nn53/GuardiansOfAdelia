@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -15,7 +16,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 public class SpawnerConfiguration {
 
@@ -56,9 +56,20 @@ public class SpawnerConfiguration {
         int spawnerNumber = spawnersConfig.getInt("SpawnerNumber");
         for (int i = 1; i <= spawnerNumber; i++) {
             String worldString = spawnersConfig.getString("Spawners.s" + i + ".world");
-            if (worldString == null) continue;
+            if (worldString == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "Spawner string null");
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "index: " + i);
+                continue;
+            }
 
             World world = Bukkit.getWorld(worldString);
+
+            if (world == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "Spawner string not valid");
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "index: " + i);
+                continue;
+            }
+
             double x = spawnersConfig.getDouble("Spawners.s" + i + ".x");
             double y = spawnersConfig.getDouble("Spawners.s" + i + ".y");
             double z = spawnersConfig.getDouble("Spawners.s" + i + ".z");
@@ -78,6 +89,11 @@ public class SpawnerConfiguration {
         int nonIncludedCount = 0;
         for (Spawner spawner : spawnerList) {
             Location location = spawner.getLocation();
+            if (location.getWorld() == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "SPAWNER WRITE NULL WORLD");
+                continue;
+            }
+
             if (location.getWorld().getName().equals("dungeons")) { //only dungeon spawners are seperate
                 nonIncludedCount++;
                 continue;
@@ -85,7 +101,7 @@ public class SpawnerConfiguration {
             spawnersConfig.set("Spawners.s" + i + ".x", location.getX());
             spawnersConfig.set("Spawners.s" + i + ".y", location.getY());
             spawnersConfig.set("Spawners.s" + i + ".z", location.getZ());
-            spawnersConfig.set("Spawners.s" + i + ".world", Objects.requireNonNull(location.getWorld()).getName());
+            spawnersConfig.set("Spawners.s" + i + ".world", location.getWorld().getName());
             spawnersConfig.set("Spawners.s" + i + ".mob", spawner.getAdeliaEntity().getAdeliaEntityKey());
             spawnersConfig.set("Spawners.s" + i + ".amount", spawner.getAmountPerSpawn());
             spawnersConfig.set("Spawners.s" + i + ".maxamount", spawner.getMaxAmount());
@@ -118,9 +134,20 @@ public class SpawnerConfiguration {
         int spawnerNumber = dungeonSpawnersConfig.getInt("SpawnerNumber");
         for (int i = 1; i <= spawnerNumber; i++) {
             String worldString = dungeonSpawnersConfig.getString("Spawners.s" + i + ".world");
-            if (worldString == null) continue;
+            if (worldString == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "DungeonSpawner string null");
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "index: " + i);
+                continue;
+            }
 
             World world = Bukkit.getWorld(worldString);
+
+            if (world == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "DungeonSpawner string not valid");
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "index: " + i);
+                continue;
+            }
+
             double x = dungeonSpawnersConfig.getDouble("Spawners.s" + i + ".x");
             double y = dungeonSpawnersConfig.getDouble("Spawners.s" + i + ".y");
             double z = dungeonSpawnersConfig.getDouble("Spawners.s" + i + ".z");
@@ -140,6 +167,11 @@ public class SpawnerConfiguration {
         int nonIncludedCount = 0;
         for (Spawner spawner : spawnerList) {
             Location location = spawner.getLocation();
+            if (location.getWorld() == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "DUNGEON SPAWNER WRITE NULL WORLD");
+                continue;
+            }
+
             if (!location.getWorld().getName().equals("dungeons")) {
                 nonIncludedCount++;
                 continue;
@@ -147,7 +179,7 @@ public class SpawnerConfiguration {
             dungeonSpawnersConfig.set("Spawners.s" + i + ".x", location.getX());
             dungeonSpawnersConfig.set("Spawners.s" + i + ".y", location.getY());
             dungeonSpawnersConfig.set("Spawners.s" + i + ".z", location.getZ());
-            dungeonSpawnersConfig.set("Spawners.s" + i + ".world", Objects.requireNonNull(location.getWorld()).getName());
+            dungeonSpawnersConfig.set("Spawners.s" + i + ".world", location.getWorld().getName());
             dungeonSpawnersConfig.set("Spawners.s" + i + ".mob", spawner.getAdeliaEntity().getAdeliaEntityKey());
             dungeonSpawnersConfig.set("Spawners.s" + i + ".amount", spawner.getAmountPerSpawn());
             dungeonSpawnersConfig.set("Spawners.s" + i + ".maxamount", spawner.getMaxAmount());

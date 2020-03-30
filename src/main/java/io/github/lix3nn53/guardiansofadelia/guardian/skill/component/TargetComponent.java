@@ -27,6 +27,22 @@ public abstract class TargetComponent extends SkillComponent {
     }
 
     protected TargetComponent(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("allies")) {
+            configLoadError("allies");
+        }
+
+        if (!configurationSection.contains("enemy")) {
+            configLoadError("enemy");
+        }
+
+        if (!configurationSection.contains("self")) {
+            configLoadError("self");
+        }
+
+        if (!configurationSection.contains("max")) {
+            configLoadError("max");
+        }
+
         boolean allies = configurationSection.getBoolean("allies");
         boolean enemy = configurationSection.getBoolean("enemy");
         boolean self = configurationSection.getBoolean("self");

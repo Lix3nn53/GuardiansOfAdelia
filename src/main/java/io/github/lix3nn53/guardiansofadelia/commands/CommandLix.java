@@ -6,10 +6,10 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
-import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
-import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
+import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.EntitySkillSet;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
 import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
@@ -20,6 +20,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
@@ -42,6 +43,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -261,7 +263,13 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-                BoostPremiumManager.tellBungeeToActivateBoost(player, BoostPremium.EXPERIENCE);
+                EntitySkillSet skillSet = AdeliaEntityManager.getSkillSet("BOSS_SLIME");
+
+                List<SkillComponent> skills = skillSet.getSkills();
+
+                SkillComponent skillComponent = skills.get(0);
+
+                skillComponent.execute(player, 1, new ArrayList<>(), 1);
             }
 
             // If the player (or console) uses our command correct, we can return true

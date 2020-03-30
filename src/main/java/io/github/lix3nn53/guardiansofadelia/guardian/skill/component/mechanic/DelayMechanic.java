@@ -17,6 +17,10 @@ public class DelayMechanic extends MechanicComponent {
     }
 
     public DelayMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("ticks")) {
+            configLoadError("ticks");
+        }
+
         this.ticks = configurationSection.getLong("ticks");
     }
 

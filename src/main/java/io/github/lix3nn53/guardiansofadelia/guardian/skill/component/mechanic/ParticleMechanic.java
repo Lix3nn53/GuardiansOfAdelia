@@ -50,6 +50,18 @@ public class ParticleMechanic extends MechanicComponent {
     }
 
     public ParticleMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("type")) {
+            configLoadError("type");
+        }
+
+        if (!configurationSection.contains("radius")) {
+            configLoadError("radius");
+        }
+
+        if (!configurationSection.contains("amount")) {
+            configLoadError("amount");
+        }
+
         String typeStr = configurationSection.getString("type");
 
         double radiusParticle = configurationSection.getDouble("radius");

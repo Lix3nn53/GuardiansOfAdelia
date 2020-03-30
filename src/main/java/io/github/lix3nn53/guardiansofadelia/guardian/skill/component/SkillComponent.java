@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -44,5 +46,10 @@ public abstract class SkillComponent {
         }
 
         return additions;
+    }
+
+    public void configLoadError(String section) {
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "ERROR WHILE LOADING SKILL: ");
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "Section: " + section);
     }
 }

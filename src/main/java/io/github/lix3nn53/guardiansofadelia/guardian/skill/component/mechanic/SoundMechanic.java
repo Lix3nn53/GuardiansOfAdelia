@@ -16,6 +16,10 @@ public class SoundMechanic extends MechanicComponent {
     }
 
     public SoundMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("goaSound")) {
+            configLoadError("goaSound");
+        }
+
         String goaSound = configurationSection.getString("goaSound");
 
         this.goaSound = GoaSound.valueOf(goaSound);
