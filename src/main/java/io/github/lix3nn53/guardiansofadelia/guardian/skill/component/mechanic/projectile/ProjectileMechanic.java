@@ -8,16 +8,18 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.Pr
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.TemporaryEntity;
 import io.github.lix3nn53.guardiansofadelia.utilities.packetwrapper.WrapperPlayServerEntityDestroy;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -34,7 +36,7 @@ public class ProjectileMechanic extends MechanicComponent {
     private final double radius;
     private final double height;
     private final double speed;
-    private final List<Integer> amount;
+    private final List<Integer> amountList;
     private final double angle;
     private final double right;
     private final double upward;
@@ -44,10 +46,10 @@ public class ProjectileMechanic extends MechanicComponent {
     private LivingEntity caster;
     private int castCounter;
     //Particle projectile
-    private Particle particle;
-    private ArrangementParticle arrangement;
-    private double radiusParticle;
-    private int amountParticle;
+    private Particle particleType;
+    private ParticleArrangement particleArrangement;
+    private double particleRadius;
+    private int particleAmount;
     private Particle.DustOptions dustOptions;
     private boolean isProjectileInvisible = true;
 
@@ -61,11 +63,11 @@ public class ProjectileMechanic extends MechanicComponent {
      * For spread types Cone and Horizontal_Cone, normal projectile
      */
     public ProjectileMechanic(SpreadType spreadType, double speed,
-                              List<Integer> amount, double angle, double right, double upward, double forward,
+                              List<Integer> amountList, double angle, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType) {
         this.spreadType = spreadType;
         this.speed = speed;
-        this.amount = amount;
+        this.amountList = amountList;
         this.angle = angle;
         this.right = right;
         this.upward = upward;
@@ -82,13 +84,13 @@ public class ProjectileMechanic extends MechanicComponent {
      * For spread types Cone and Horizontal_Cone, particle projectile
      */
     public ProjectileMechanic(SpreadType spreadType, double speed,
-                              List<Integer> amount, double angle, double right, double upward, double forward,
+                              List<Integer> amountList, double angle, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType,
-                              Particle particle, ArrangementParticle arrangement, double radiusParticle,
-                              int amountParticle, Particle.DustOptions dustOptions, boolean isProjectileInvisible) {
+                              Particle particleType, ParticleArrangement particleArrangement, double particleRadius,
+                              int particleAmount, Particle.DustOptions dustOptions, boolean isProjectileInvisible) {
         this.spreadType = spreadType;
         this.speed = speed;
-        this.amount = amount;
+        this.amountList = amountList;
         this.angle = angle;
         this.right = right;
         this.upward = upward;
@@ -101,14 +103,14 @@ public class ProjectileMechanic extends MechanicComponent {
         this.radius = 0;
         this.height = 0;
 
-        setParticle(particle, arrangement, radiusParticle, amountParticle, dustOptions);
+        setParticle(particleType, particleArrangement, particleRadius, particleAmount, dustOptions);
     }
 
     /**
      * For spread type Rain, normal projectile
      */
     public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
-                              List<Integer> amount, double right, double upward, double forward,
+                              List<Integer> amountList, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType) {
         this.spreadType = spreadType;
 
@@ -116,7 +118,7 @@ public class ProjectileMechanic extends MechanicComponent {
         this.height = height;
 
         this.speed = speed;
-        this.amount = amount;
+        this.amountList = amountList;
         this.mustHitToWork = mustHitToWork;
 
         this.angle = 0;
@@ -132,17 +134,17 @@ public class ProjectileMechanic extends MechanicComponent {
      * For spread type Rain, particle projectile
      */
     public ProjectileMechanic(SpreadType spreadType, double radius, double height, double speed,
-                              List<Integer> amount, double right, double upward, double forward,
+                              List<Integer> amountList, double right, double upward, double forward,
                               double range, boolean mustHitToWork, Class<? extends Projectile> projectileType,
-                              Particle particle, ArrangementParticle arrangement, double radiusParticle,
-                              int amountParticle, Particle.DustOptions dustOptions, boolean isProjectileInvisible) {
+                              Particle particleType, ParticleArrangement particleArrangement, double particleRadius,
+                              int particleAmount, Particle.DustOptions dustOptions, boolean isProjectileInvisible) {
         this.spreadType = spreadType;
 
         this.radius = radius;
         this.height = height;
 
         this.speed = speed;
-        this.amount = amount;
+        this.amountList = amountList;
         this.mustHitToWork = mustHitToWork;
 
         this.angle = 0;
@@ -154,7 +156,64 @@ public class ProjectileMechanic extends MechanicComponent {
         this.projectileType = projectileType;
         this.isProjectileInvisible = isProjectileInvisible;
 
-        setParticle(particle, arrangement, radiusParticle, amountParticle, dustOptions);
+        setParticle(particleType, particleArrangement, particleRadius, particleAmount, dustOptions);
+    }
+
+    public ProjectileMechanic(ConfigurationSection configurationSection) throws ClassNotFoundException {
+        String projectileClass = configurationSection.getString("projectileClass");
+        this.projectileType = (Class<? extends Projectile>) Class.forName("org.bukkit.entity." + projectileClass);
+
+        spreadType = SpreadType.valueOf(configurationSection.getString("spreadType"));
+        speed = configurationSection.getDouble("speed");
+        amountList = configurationSection.getIntegerList("amountList");
+        angle = configurationSection.getDouble("angle");
+        right = configurationSection.getDouble("right");
+        upward = configurationSection.getDouble("upward");
+        forward = configurationSection.getDouble("forward");
+        range = configurationSection.getDouble("range");
+        mustHitToWork = configurationSection.getBoolean("mustHitToWork");
+
+        if (spreadType.equals(SpreadType.RAIN)) {
+            radius = configurationSection.getDouble("radius");
+            height = configurationSection.getDouble("height");
+        } else {
+            radius = 0;
+            height = 0;
+        }
+
+        //Particle projectile
+        if (configurationSection.contains("particleType")) {
+            Particle particleType = Particle.valueOf(configurationSection.getString("particleType"));
+            ParticleArrangement particleArrangement = ParticleArrangement.valueOf(configurationSection.getString("particleArrangement"));
+            double particleRadius = configurationSection.getDouble("particleRadius");
+            int particleAmount = configurationSection.getInt("particleAmount");
+
+            if (configurationSection.contains("dustColor")) {
+                int dustColor = configurationSection.getInt("dustColor");
+                int dustSize = configurationSection.getInt("dustSize");
+
+                Particle.DustOptions dustOptions = new Particle.DustOptions(Color.fromRGB(dustColor), dustSize);
+
+                setParticle(particleType, particleArrangement, particleRadius, particleAmount, dustOptions);
+            } else {
+                setParticle(particleType, particleArrangement, particleRadius, particleAmount, null);
+            }
+        }
+
+        if (configurationSection.contains("isProjectileInvisible")) {
+            isProjectileInvisible = configurationSection.getBoolean("isProjectileInvisible");
+        }
+
+        //Piercing
+
+        //very custom things
+        if (configurationSection.contains("isProjectileInvisible")) {
+            addCasterAsFirstTargetIfHitSuccess = configurationSection.getBoolean("isProjectileInvisible");
+        }
+
+        if (configurationSection.contains("isProjectileInvisible")) {
+            addCasterAsSecondTargetIfHitFail = configurationSection.getBoolean("isProjectileInvisible");
+        }
     }
 
     @Override
@@ -170,7 +229,7 @@ public class ProjectileMechanic extends MechanicComponent {
         for (LivingEntity target : targets) {
             // Apply the spread type
             if (spreadType.equals(SpreadType.RAIN)) {
-                ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amount.get(skillLevel - 1));
+                ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amountList.get(skillLevel - 1));
 
                 for (Location loc : locs) {
                     Projectile p = caster.launchProjectile(Arrow.class);
@@ -211,7 +270,7 @@ public class ProjectileMechanic extends MechanicComponent {
                 Vector normal = looking.clone().crossProduct(UP);
                 looking.multiply(forward).add(normal.multiply(right));
 
-                ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount.get(skillLevel - 1));
+                ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amountList.get(skillLevel - 1));
                 for (Vector d : dirs) {
                     Projectile p = caster.launchProjectile(projectileType);
 
@@ -304,11 +363,11 @@ public class ProjectileMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0) {
-            additions.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel));
-        } else if (skillLevel == amount.size()) {
-            additions.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel - 1));
+            additions.add(ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel));
+        } else if (skillLevel == amountList.size()) {
+            additions.add(ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel - 1));
         } else {
-            additions.add(ChatColor.YELLOW + "Projectile amount: " + amount.get(skillLevel - 1) + " -> " + amount.get(skillLevel));
+            additions.add(ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel - 1) + " -> " + amountList.get(skillLevel));
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
@@ -317,11 +376,11 @@ public class ProjectileMechanic extends MechanicComponent {
         this.piercing = piercing;
     }*/
 
-    public void setParticle(Particle particle, ArrangementParticle arrangement, double radiusParticle, int amountParticle, Particle.DustOptions dustOptions) {
-        this.particle = particle;
-        this.arrangement = arrangement;
-        this.radiusParticle = radiusParticle;
-        this.amountParticle = amountParticle;
+    public void setParticle(Particle particle, ParticleArrangement arrangement, double radiusParticle, int amountParticle, Particle.DustOptions dustOptions) {
+        this.particleType = particle;
+        this.particleArrangement = arrangement;
+        this.particleRadius = radiusParticle;
+        this.particleAmount = amountParticle;
         this.dustOptions = dustOptions;
     }
 
@@ -332,7 +391,7 @@ public class ProjectileMechanic extends MechanicComponent {
                 if (projectile.isValid()) {
                     Location location = projectile.getLocation();
 
-                    ParticleUtil.play(location, particle, arrangement, radiusParticle, amountParticle, Direction.XZ, 0, 0, 0, 0, dustOptions);
+                    ParticleUtil.play(location, particleType, particleArrangement, particleRadius, particleAmount, Direction.XZ, 0, 0, 0, 0, dustOptions);
                 } else {
                     cancel();
                 }
@@ -349,7 +408,7 @@ public class ProjectileMechanic extends MechanicComponent {
     }
 
     private void changeToParticleProjectile(Projectile p) {
-        if (particle != null) {
+        if (particleType != null) {
             if (isProjectileInvisible) {
                 WrapperPlayServerEntityDestroy destroy = new WrapperPlayServerEntityDestroy();
                 destroy.setEntityIds(new int[]{p.getEntityId()});

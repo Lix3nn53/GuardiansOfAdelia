@@ -15,7 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Ini
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.MeleeAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.RangedAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -109,7 +109,7 @@ public class MonkSkills {
 
         singleTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
         singleTarget.addChildren(pushMechanic);
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_NORMAL, ArrangementParticle.CIRCLE, 1, 1, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_NORMAL, ParticleArrangement.CIRCLE, 1, 1, 0, 0, 0, 0, 0.5, 0, 0, null);
         singleTarget.addChildren(particleMechanic);
         singleTarget.addChildren(new SoundMechanic(GoaSound.SKILL_PROJECTILE_FIRE));
 
@@ -316,7 +316,7 @@ public class MonkSkills {
         repeatAmounts.add(36);
         repeatAmounts.add(40);
         repeatAmounts.add(48);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1.8, 9, 0,
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 1.8, 9, 0,
                 0, 0, 0, 1, 0, 1, 5L, repeatAmounts, new Particle.DustOptions(Color.YELLOW, 2));
 
         selfTarget.addChildren(particleAnimationMechanic);
@@ -537,10 +537,10 @@ public class MonkSkills {
         repeatAmount.add(14);
         repeatAmount.add(16);
         repeatAmount.add(20);
-        ParticleAnimationMechanic particleAnimationMechanicBubble = new ParticleAnimationMechanic(Particle.WATER_BUBBLE, ArrangementParticle.SPHERE, 1.4, 4, 0, 0, 0,
+        ParticleAnimationMechanic particleAnimationMechanicBubble = new ParticleAnimationMechanic(Particle.WATER_BUBBLE, ParticleArrangement.SPHERE, 1.4, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, null);
         areaTarget.addChildren(particleAnimationMechanicBubble);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1.4, 2, 0,
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 1.4, 2, 0,
                 0, 0, 0, 0, 0, 1, 5L, repeatAmount, new Particle.DustOptions(Color.AQUA, 2));
         areaTarget.addChildren(particleAnimationMechanic);
 

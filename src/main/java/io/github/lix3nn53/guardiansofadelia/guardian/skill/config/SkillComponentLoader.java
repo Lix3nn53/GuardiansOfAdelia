@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.config;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import org.bukkit.ChatColor;
@@ -34,6 +35,11 @@ public class SkillComponentLoader {
     private static SkillComponent loadComponent(ConfigurationSection configurationSection) {
         String componentType = configurationSection.getString("componentType");
 
+        if (componentType == null) {
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NULL COMPONENT TYPE");
+            return null;
+        }
+
         if (componentType.equals(ParticleMechanic.class.getSimpleName())) {
             return new ParticleMechanic(configurationSection);
         } else if (componentType.equals(AreaTarget.class.getSimpleName())) {
@@ -48,6 +54,22 @@ public class SkillComponentLoader {
             return new SpawnEntityMechanic(configurationSection);
         } else if (componentType.equals(SelfTarget.class.getSimpleName())) {
             return new SelfTarget();
+        } else if (componentType.equals(PushMechanic.class.getSimpleName())) {
+            return new PushMechanic(configurationSection);
+        } else if (componentType.equals(PotionEffectMechanic.class.getSimpleName())) {
+            return new PotionEffectMechanic(configurationSection);
+        } else if (componentType.equals(LaunchMechanic.class.getSimpleName())) {
+            return new LaunchMechanic(configurationSection);
+        } else if (componentType.equals(HealMechanic.class.getSimpleName())) {
+            return new HealMechanic(configurationSection);
+        } else if (componentType.equals(DamageMechanic.class.getSimpleName())) {
+            return new DamageMechanic(configurationSection);
+        } else if (componentType.equals(ProjectileMechanic.class.getSimpleName())) {
+            try {
+                return new ProjectileMechanic(configurationSection);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER");

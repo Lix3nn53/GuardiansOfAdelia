@@ -14,12 +14,12 @@ public class ParticleUtil {
      *
      * @param loc location to center the effect around
      */
-    public static void play(Location loc, Particle particle, ArrangementParticle arrangement, double radius, int amount, Direction dir, double dx, double dy, double dz, double speed, Particle.DustOptions dustOptions) {
-        if (arrangement.equals(ArrangementParticle.CIRCLE)) {
+    public static void play(Location loc, Particle particle, ParticleArrangement arrangement, double radius, int amount, Direction dir, double dx, double dy, double dz, double speed, Particle.DustOptions dustOptions) {
+        if (arrangement.equals(ParticleArrangement.CIRCLE)) {
             fillCircle(loc, particle, radius, amount, dir, dx, dy, dz, speed, dustOptions);
-        } else if (arrangement.equals(ArrangementParticle.SPHERE)) {
+        } else if (arrangement.equals(ParticleArrangement.SPHERE)) {
             fillSphere(loc, particle, radius, amount, dx, dy, dz, speed, dustOptions);
-        } else if (arrangement.equals(ArrangementParticle.HEMISPHERE)) {
+        } else if (arrangement.equals(ParticleArrangement.HEMISPHERE)) {
             fillHemisphere(loc, particle, radius, amount, dx, dy, dz, speed, dustOptions);
         }
     }

@@ -10,11 +10,11 @@ import java.util.List;
 
 public class SpawnEntityMechanic extends MechanicComponent {
 
-    private final List<String> adeliaEntity;
+    private final List<String> adeliaEntityList;
     private final int amountPerSpawn;
 
-    public SpawnEntityMechanic(List<String> adeliaEntity, int amountPerSpawn) {
-        this.adeliaEntity = adeliaEntity;
+    public SpawnEntityMechanic(List<String> adeliaEntityList, int amountPerSpawn) {
+        this.adeliaEntityList = adeliaEntityList;
         this.amountPerSpawn = amountPerSpawn;
     }
 
@@ -30,7 +30,7 @@ public class SpawnEntityMechanic extends MechanicComponent {
         List<String> adeliaEntityList = configurationSection.getStringList("adeliaEntityList");
         int amountPerSpawn = configurationSection.getInt("amountPerSpawn");
 
-        this.adeliaEntity = adeliaEntityList;
+        this.adeliaEntityList = adeliaEntityList;
         this.amountPerSpawn = amountPerSpawn;
     }
 
@@ -39,7 +39,7 @@ public class SpawnEntityMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
-            for (String ent : adeliaEntity) {
+            for (String ent : adeliaEntityList) {
                 for (int i = 0; i < amountPerSpawn; i++) {
                     AdeliaEntity entity = AdeliaEntityManager.getEntity(ent);
                     entity.getMob(target.getLocation());

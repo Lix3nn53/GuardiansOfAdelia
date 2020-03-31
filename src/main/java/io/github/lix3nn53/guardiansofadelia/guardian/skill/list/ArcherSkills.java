@@ -17,7 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Ini
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.RangedAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -92,7 +92,7 @@ public class ArcherSkills {
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30,
                 0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
-                ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.LIME, 2), false);
+                ParticleArrangement.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.LIME, 2), false);
 
         List<Double> damages = new ArrayList<>();
         damages.add(16.0);
@@ -195,9 +195,9 @@ public class ArcherSkills {
         repeatAmount.add(18);
         repeatAmount.add(20);
         repeatAmount.add(24);
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.CIRCLE, 3.4, 2, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_HUGE, ParticleArrangement.CIRCLE, 3.4, 2, 0, 0, 0, 0, 0.5, 0, 0, null);
         selfTarget.addChildren(particleMechanic);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 4, 0, 0, 0,
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 1, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.AQUA, 8));
         selfTarget.addChildren(particleAnimationMechanic);
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_SONIC_BOOM));
@@ -276,7 +276,7 @@ public class ArcherSkills {
         repeatAmounts.add(35);
         repeatAmounts.add(40);
         repeatAmounts.add(50);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.SPELL_WITCH, ArrangementParticle.SPHERE, 1.2,
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.SPELL_WITCH, ParticleArrangement.SPHERE, 1.2,
                 12, 0, 0, 0, 0, 0, 0, 0, 5, repeatAmounts, null);
 
         ImmunityMechanic immunityMechanic = new ImmunityMechanic(EntityDamageEvent.DamageCause.FALL, new ArrayList<>()); //send empty list for infinite
@@ -476,7 +476,7 @@ public class ArcherSkills {
         repeatMechanic.addChildren(projectileMechanic);
         repeatMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_ARROW_RAIN));
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 9, 21, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.ORANGE, 2));
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 9, 21, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.ORANGE, 2));
         projectileMechanic.addChildren(particleMechanic);
         projectileMechanic.addChildren(areaTarget);
         List<Double> damages = new ArrayList<>();

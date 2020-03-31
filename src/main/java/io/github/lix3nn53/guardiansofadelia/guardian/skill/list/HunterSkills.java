@@ -19,7 +19,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Add
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -96,7 +96,7 @@ public class HunterSkills {
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30,
                 0, 1, 0, 200, true, Arrow.class, Particle.REDSTONE,
-                ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.ORANGE, 2), false);
+                ParticleArrangement.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.ORANGE, 2), false);
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(2D);
@@ -107,7 +107,7 @@ public class HunterSkills {
         radiuses.add(4.5D);
         AreaTarget areaTarget = new AreaTarget(false, true, false, 99, radiuses);
 
-        ParticleMechanic explosionParticle = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.CIRCLE, 3.4, 2, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic explosionParticle = new ParticleMechanic(Particle.EXPLOSION_HUGE, ParticleArrangement.CIRCLE, 3.4, 2, 0, 0, 0, 0, 0.5, 0, 0, null);
 
         List<Double> damages = new ArrayList<>();
         damages.add(24.0);
@@ -259,7 +259,7 @@ public class HunterSkills {
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30, 0, 1, 0, 90,
-                false, SmallFireball.class, Particle.REDSTONE, ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.GRAY, 2), true);
+                false, SmallFireball.class, Particle.REDSTONE, ParticleArrangement.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.GRAY, 2), true);
         projectileMechanic.setAddCasterAsFirstTargetIfHitSuccess(true);
         projectileMechanic.setAddCasterAsSecondTargetIfHitFail(true);
 
@@ -460,7 +460,7 @@ public class HunterSkills {
 
         //repeat part 1, area and effects
         repeatMechanic.addChildren(areaTarget);
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_LARGE, ArrangementParticle.CIRCLE, 1.4, 2, 0, 0, 0, 0, 0.8, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_LARGE, ParticleArrangement.CIRCLE, 1.4, 2, 0, 0, 0, 0, 0.8, 0, 0, null);
         areaTarget.addChildren(particleMechanic);
         areaTarget.addChildren(new SoundMechanic(GoaSound.SKILL_STUN_HIT));
         areaTarget.addChildren(root);

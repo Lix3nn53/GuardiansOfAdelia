@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
@@ -10,15 +11,38 @@ import java.util.List;
 public class LaunchMechanic extends MechanicComponent {
 
     private final Relative relative;
-    private final List<Double> forwardSpeed;
-    private final List<Double> upwardSpeed;
-    private final List<Double> rightSpeed;
+    private final List<Double> forwardSpeedList;
+    private final List<Double> upwardSpeedList;
+    private final List<Double> rightSpeedList;
 
-    public LaunchMechanic(Relative relative, List<Double> forwardSpeed, List<Double> upwardSpeed, List<Double> rightSpeed) {
+    public LaunchMechanic(Relative relative, List<Double> forwardSpeedList, List<Double> upwardSpeedList, List<Double> rightSpeedList) {
         this.relative = relative;
-        this.forwardSpeed = forwardSpeed;
-        this.upwardSpeed = upwardSpeed;
-        this.rightSpeed = rightSpeed;
+        this.forwardSpeedList = forwardSpeedList;
+        this.upwardSpeedList = upwardSpeedList;
+        this.rightSpeedList = rightSpeedList;
+    }
+
+    public LaunchMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("relative")) {
+            configLoadError("relative");
+        }
+
+        if (!configurationSection.contains("forwardSpeedList")) {
+            configLoadError("forwardSpeedList");
+        }
+
+        if (!configurationSection.contains("upwardSpeedList")) {
+            configLoadError("upwardSpeedList");
+        }
+
+        if (!configurationSection.contains("rightSpeedList")) {
+            configLoadError("rightSpeedList");
+        }
+
+        this.relative = Relative.valueOf(configurationSection.getString("relative"));
+        this.forwardSpeedList = configurationSection.getDoubleList("forwardSpeedList");
+        this.upwardSpeedList = configurationSection.getDoubleList("upwardSpeedList");
+        this.rightSpeedList = configurationSection.getDoubleList("rightSpeedList");
     }
 
     @Override
@@ -37,8 +61,8 @@ public class LaunchMechanic extends MechanicComponent {
             }
 
             final Vector nor = dir.clone().crossProduct(UP);
-            dir.multiply(forwardSpeed.get(skillLevel - 1));
-            dir.add(nor.multiply(rightSpeed.get(skillLevel - 1))).setY(upwardSpeed.get(skillLevel - 1));
+            dir.multiply(forwardSpeedList.get(skillLevel - 1));
+            dir.add(nor.multiply(rightSpeedList.get(skillLevel - 1))).setY(upwardSpeedList.get(skillLevel - 1));
 
             ent.setVelocity(dir);
         }
@@ -49,17 +73,17 @@ public class LaunchMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0) {
-            additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeed.get(skillLevel));
-            additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeed.get(skillLevel));
-            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeed.get(skillLevel));
-        } else if (skillLevel == upwardSpeed.size()) {
-            additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeed.get(skillLevel - 1));
-            additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeed.get(skillLevel - 1));
-            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeed.get(skillLevel - 1));
+            additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeedList.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeedList.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeedList.get(skillLevel));
+        } else if (skillLevel == upwardSpeedList.size()) {
+            additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeedList.get(skillLevel - 1));
+            additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeedList.get(skillLevel - 1));
+            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeedList.get(skillLevel - 1));
         } else {
-            additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeed.get(skillLevel - 1) + " -> " + forwardSpeed.get(skillLevel));
-            additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeed.get(skillLevel - 1) + " -> " + upwardSpeed.get(skillLevel));
-            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeed.get(skillLevel - 1) + " -> " + rightSpeed.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeedList.get(skillLevel - 1) + " -> " + forwardSpeedList.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeedList.get(skillLevel - 1) + " -> " + upwardSpeedList.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeedList.get(skillLevel - 1) + " -> " + rightSpeedList.get(skillLevel));
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }

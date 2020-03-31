@@ -12,7 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Sing
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMeleeDamageTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -168,7 +168,7 @@ public class MageSkills {
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
                 0, 1, 0, 200, true, SmallFireball.class, Particle.VILLAGER_HAPPY,
-                ArrangementParticle.SPHERE, 0.5, 4, null, true);
+                ParticleArrangement.SPHERE, 0.5, 4, null, true);
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(2.5D);
@@ -187,7 +187,7 @@ public class MageSkills {
         damages.add(320.0);
         damages.add(540.0);
         areaTarget.addChildren(new DamageMechanic(damages, DamageMechanic.DamageType.MAGIC));
-        areaTarget.addChildren(new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 3.4, 11, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.TEAL, 2)));
+        areaTarget.addChildren(new ParticleMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 3.4, 11, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.TEAL, 2)));
         List<Integer> durations = new ArrayList<>();
         durations.add(40);
         durations.add(45);
@@ -207,7 +207,7 @@ public class MageSkills {
 
         projectileMechanic.addChildren(areaTarget);
         projectileMechanic.addChildren(new SoundMechanic(GoaSound.SKILL_LIGHTNING_FLUX));
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_HAPPY, ArrangementParticle.CIRCLE, 3.4, 11, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_HAPPY, ParticleArrangement.CIRCLE, 3.4, 11, 0, 0, 0, 0, 0.5, 0, 0, null);
         projectileMechanic.addChildren(particleMechanic);
 
         selfTarget.addChildren(projectileMechanic);
@@ -280,7 +280,7 @@ public class MageSkills {
         selfTarget.addChildren(areaTarget);
         areaTarget.addChildren(pushMechanic);
         SelfTarget selfTargetForSound = new SelfTarget();
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_LARGE, ArrangementParticle.CIRCLE, 1.2, 1, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_LARGE, ParticleArrangement.CIRCLE, 1.2, 1, 0, 0, 0, 0, 0.5, 0, 0, null);
         areaTarget.addChildren(particleMechanic);
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(new SoundMechanic(GoaSound.SKILL_SONIC_BOOM));
@@ -381,7 +381,7 @@ public class MageSkills {
         tookMeleeDamageTrigger.addChildren(selfTarget);
         selfTarget.addChildren(areaTarget);
         selfTarget.addChildren(potionEffectMechanic);
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 3.4, 11, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.AQUA, 2));
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 3.4, 11, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.AQUA, 2));
         selfTarget.addChildren(particleMechanic);
         areaTarget.addChildren(new MessageMechanic(ChatColor.AQUA + "You got rooted by a mage's passive skill.."));
 
@@ -450,7 +450,7 @@ public class MageSkills {
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.RAIN, 8, 12, 0.4, projectileAmounts, 0,
                 0, 0, 200, false, Fireball.class, Particle.FLAME,
-                ArrangementParticle.SPHERE, 2, 32, null, false);
+                ParticleArrangement.SPHERE, 2, 32, null, false);
 
         List<Double> areas = new ArrayList<>();
         areas.add(6D);
@@ -483,7 +483,7 @@ public class MageSkills {
         ticks.add(180);
         areaTarget.addChildren(new FireMechanic(ticks));
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_HUGE, ArrangementParticle.SPHERE, 4, 4,
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.EXPLOSION_HUGE, ParticleArrangement.SPHERE, 4, 4,
                 0, 0, 0, 0, 1, 0, 0, null);
         projectileMechanic.addChildren(particleMechanic);
 

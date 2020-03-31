@@ -17,7 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Lan
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMagicalDamageTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookPhysicalDamageTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -116,7 +116,7 @@ public class PaladinSkills {
         areaTarget.addChildren(damageMechanic);
         areaTarget.addChildren(pushMechanic);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ArrangementParticle.CIRCLE, 3.4, 7, 0, 0, 0, 0, 1, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ParticleArrangement.CIRCLE, 3.4, 7, 0, 0, 0, 0, 1, 0, 0, null);
 
         SelfTarget selfTargetForSound = new SelfTarget();
         selfTargetForSound.addChildren(particleMechanic);
@@ -173,7 +173,7 @@ public class PaladinSkills {
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
-                0, 1, 0, 200, false, SmallFireball.class, Particle.HEART, ArrangementParticle.SPHERE, 0.5, 4, null, true);
+                0, 1, 0, 200, false, SmallFireball.class, Particle.HEART, ParticleArrangement.SPHERE, 0.5, 4, null, true);
 
         List<Integer> amounts = new ArrayList<>();
         amounts.add(200);
@@ -184,7 +184,7 @@ public class PaladinSkills {
         amounts.add(3600);
         HealMechanic healMechanic = new HealMechanic(amounts, new ArrayList<>());
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.HEART, ArrangementParticle.CIRCLE, 1.4, 8, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.HEART, ParticleArrangement.CIRCLE, 1.4, 8, 0, 0, 0, 0, 0.5, 0, 0, null);
 
         SelfTarget selfTarget = new SelfTarget();
         skill.addTrigger(selfTarget);
@@ -285,7 +285,7 @@ public class PaladinSkills {
         areaTarget.addChildren(disarmMechanic);
         areaTarget.addChildren(silenceMechanic);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SPELL_WITCH, ArrangementParticle.CIRCLE, 6.7, 27, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SPELL_WITCH, ParticleArrangement.CIRCLE, 6.7, 27, 0, 0, 0, 0, 0.5, 0, 0, null);
         SelfTarget selfTargetForSound = new SelfTarget();
         selfTargetForSound.addChildren(particleMechanic);
         areaTarget.addChildren(selfTargetForSound);
@@ -470,7 +470,7 @@ public class PaladinSkills {
         repeatAmounts.add(16);
         repeatAmounts.add(18);
         repeatAmounts.add(20);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, 0,
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 1, 3, 0,
                 0, 0, 0, 0, 0, 1, 5L, repeatAmounts, new Particle.DustOptions(Color.YELLOW, 2));
 
         List<Double> radiuses = new ArrayList<>();
@@ -482,7 +482,7 @@ public class PaladinSkills {
         radiuses.add(14D);
         AreaTarget areaTarget = new AreaTarget(true, false, true, 99, radiuses);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 8, 3, -0.6, 0.4, 0.1, 0, 0, 0, 1, new Particle.DustOptions(Color.YELLOW, 2));
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 8, 3, -0.6, 0.4, 0.1, 0, 0, 0, 1, new Particle.DustOptions(Color.YELLOW, 2));
 
         skill.addTrigger(selfTarget);
 
@@ -511,7 +511,7 @@ public class PaladinSkills {
         repeatAmounts2.add(30);
         repeatAmounts2.add(32);
         repeatAmounts2.add(40);
-        ParticleAnimationMechanic particleAnimationMechanic2 = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3,
+        ParticleAnimationMechanic particleAnimationMechanic2 = new ParticleAnimationMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 1, 3,
                 -0.1, 1, 0, 0, 0.5, 0, 1, 5L, repeatAmounts2, new Particle.DustOptions(Color.YELLOW, 2));
 
         areaTarget.addChildren(particleAnimationMechanic2);

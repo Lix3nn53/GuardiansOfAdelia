@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -13,12 +14,25 @@ import java.util.List;
 
 public class HealMechanic extends MechanicComponent {
 
-    private final List<Integer> healAmount;
-    private final List<Double> healPercent;
+    private final List<Integer> healAmountList;
+    private final List<Double> healPercentList;
 
-    public HealMechanic(List<Integer> healAmount, List<Double> healPercent) {
-        this.healAmount = healAmount;
-        this.healPercent = healPercent;
+    public HealMechanic(List<Integer> healAmountList, List<Double> healPercentList) {
+        this.healAmountList = healAmountList;
+        this.healPercentList = healPercentList;
+    }
+
+    public HealMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("healAmountList")) {
+            configLoadError("healAmountList");
+        }
+
+        if (!configurationSection.contains("healPercentList")) {
+            configLoadError("healPercentList");
+        }
+
+        this.healAmountList = configurationSection.getIntegerList("healAmountList");
+        this.healPercentList = configurationSection.getDoubleList("healPercentList");
     }
 
     @Override
@@ -38,12 +52,12 @@ public class HealMechanic extends MechanicComponent {
 
             double nextHealth = currentHealth;
 
-            if (!healAmount.isEmpty()) {
-                nextHealth = currentHealth + healAmount.get(skillLevel - 1);
+            if (!healAmountList.isEmpty()) {
+                nextHealth = currentHealth + healAmountList.get(skillLevel - 1);
             }
 
-            if (!healPercent.isEmpty()) {
-                nextHealth = nextHealth + (maxHealth * healPercent.get(skillLevel - 1));
+            if (!healPercentList.isEmpty()) {
+                nextHealth = nextHealth + (maxHealth * healPercentList.get(skillLevel - 1));
             }
 
             if (nextHealth > maxHealth) {
@@ -69,22 +83,22 @@ public class HealMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!healAmount.isEmpty()) {
+        if (!healAmountList.isEmpty()) {
             if (skillLevel == 0) {
-                additions.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel));
-            } else if (skillLevel == healAmount.size()) {
-                additions.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel - 1));
+                additions.add(ChatColor.GREEN + "Health regen: " + healAmountList.get(skillLevel));
+            } else if (skillLevel == healAmountList.size()) {
+                additions.add(ChatColor.GREEN + "Health regen: " + healAmountList.get(skillLevel - 1));
             } else {
-                additions.add(ChatColor.GREEN + "Health regen: " + healAmount.get(skillLevel - 1) + " -> " + healAmount.get(skillLevel));
+                additions.add(ChatColor.GREEN + "Health regen: " + healAmountList.get(skillLevel - 1) + " -> " + healAmountList.get(skillLevel));
             }
         }
-        if (!healPercent.isEmpty()) {
+        if (!healPercentList.isEmpty()) {
             if (skillLevel == 0) {
-                additions.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel) + "%");
-            } else if (skillLevel == healPercent.size()) {
-                additions.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel - 1) + "%");
+                additions.add(ChatColor.GREEN + "Health regen: " + healPercentList.get(skillLevel) + "%");
+            } else if (skillLevel == healPercentList.size()) {
+                additions.add(ChatColor.GREEN + "Health regen: " + healPercentList.get(skillLevel - 1) + "%");
             } else {
-                additions.add(ChatColor.GREEN + "Health regen: " + healPercent.get(skillLevel - 1) + "%" + " -> " + healPercent.get(skillLevel) + "%");
+                additions.add(ChatColor.GREEN + "Health regen: " + healPercentList.get(skillLevel - 1) + "%" + " -> " + healPercentList.get(skillLevel) + "%");
             }
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

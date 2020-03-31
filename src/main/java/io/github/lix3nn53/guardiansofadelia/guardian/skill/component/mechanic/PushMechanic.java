@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
@@ -10,19 +11,37 @@ import java.util.List;
 
 public class PushMechanic extends MechanicComponent {
 
-    private final PushType type;
-    private final List<Double> speed;
+    private final PushType pushType;
+    private final List<Double> speedList;
     private final boolean centerSelf;
 
     /**
-     * @param type
-     * @param speed
+     * @param pushType
+     * @param speedList
      * @param centerSelf center = caster, if false: center = first target
      */
-    public PushMechanic(PushType type, List<Double> speed, boolean centerSelf) {
-        this.type = type;
-        this.speed = speed;
+    public PushMechanic(PushType pushType, List<Double> speedList, boolean centerSelf) {
+        this.pushType = pushType;
+        this.speedList = speedList;
         this.centerSelf = centerSelf;
+    }
+
+    public PushMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("pushType")) {
+            configLoadError("pushType");
+        }
+
+        if (!configurationSection.contains("speedList")) {
+            configLoadError("speedList");
+        }
+
+        if (!configurationSection.contains("centerSelf")) {
+            configLoadError("centerSelf");
+        }
+
+        this.pushType = PushType.valueOf(configurationSection.getString("pushType"));
+        this.speedList = configurationSection.getDoubleList("speedList");
+        this.centerSelf = configurationSection.getBoolean("centerSelf");
     }
 
     @Override
@@ -41,12 +60,12 @@ public class PushMechanic extends MechanicComponent {
             final Vector vel = target.getLocation().subtract(center).toVector();
             if (vel.lengthSquared() == 0) {
                 continue;
-            } else if (type.equals(PushType.INVERSE)) {
-                vel.multiply(speed.get(skillLevel - 1));
-            } else if (type.equals(PushType.FIXED)) {
-                vel.multiply(speed.get(skillLevel - 1) / vel.length());
+            } else if (pushType.equals(PushType.INVERSE)) {
+                vel.multiply(speedList.get(skillLevel - 1));
+            } else if (pushType.equals(PushType.FIXED)) {
+                vel.multiply(speedList.get(skillLevel - 1) / vel.length());
             } else { // SCALED
-                vel.multiply(speed.get(skillLevel - 1) / vel.lengthSquared());
+                vel.multiply(speedList.get(skillLevel - 1) / vel.lengthSquared());
             }
             target.setVelocity(vel);
         }
@@ -57,11 +76,11 @@ public class PushMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0) {
-            additions.add(ChatColor.AQUA + "Push speed: " + speed.get(skillLevel));
-        } else if (skillLevel == speed.size()) {
-            additions.add(ChatColor.AQUA + "Push speed: " + speed.get(skillLevel - 1));
+            additions.add(ChatColor.AQUA + "Push speed: " + speedList.get(skillLevel));
+        } else if (skillLevel == speedList.size()) {
+            additions.add(ChatColor.AQUA + "Push speed: " + speedList.get(skillLevel - 1));
         } else {
-            additions.add(ChatColor.AQUA + "Push speed: " + speed.get(skillLevel - 1) + " -> " + speed.get(skillLevel));
+            additions.add(ChatColor.AQUA + "Push speed: " + speedList.get(skillLevel - 1) + " -> " + speedList.get(skillLevel));
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

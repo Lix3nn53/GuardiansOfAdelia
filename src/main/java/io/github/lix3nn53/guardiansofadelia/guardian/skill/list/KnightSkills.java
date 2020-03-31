@@ -11,7 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Self
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMagicalDamageTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -114,7 +114,7 @@ public class KnightSkills {
         areaTarget.addChildren(damageMechanic);
         areaTarget.addChildren(buffMechanic);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ArrangementParticle.CIRCLE, 3.4, 7, 0, 0, 0, 0, 1, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ParticleArrangement.CIRCLE, 3.4, 7, 0, 0, 0, 0, 1, 0, 0, null);
 
         SelfTarget selfTargetForSound = new SelfTarget();
         selfTargetForSound.addChildren(particleMechanic);
@@ -200,7 +200,7 @@ public class KnightSkills {
         selfTarget.addChildren(areaTarget);
         areaTarget.addChildren(launchMechanic);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 3.4, 9, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.YELLOW, 2));
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 3.4, 9, 0, 0, 0, 0, 1, 0, 0, new Particle.DustOptions(Color.YELLOW, 2));
 
         SelfTarget selfTargetForSound = new SelfTarget();
         areaTarget.addChildren(particleMechanic);
@@ -274,7 +274,7 @@ public class KnightSkills {
         skill.addTrigger(selfTarget);
         SelfTarget selfTargetForSound = new SelfTarget();
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.FLAME, ArrangementParticle.CIRCLE, 7.5, 27, 0, 0, 0, 0, 1, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.FLAME, ParticleArrangement.CIRCLE, 7.5, 27, 0, 0, 0, 0, 1, 0, 0, null);
 
         areaTarget.addChildren(selfTargetForSound);
         selfTargetForSound.addChildren(particleMechanic);
@@ -440,7 +440,7 @@ public class KnightSkills {
         BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks);
         BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 9, 27, 0, 0, 0, 0, 1.6, 0, 0, new Particle.DustOptions(Color.YELLOW, 2));
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 9, 27, 0, 0, 0, 0, 1.6, 0, 0, new Particle.DustOptions(Color.YELLOW, 2));
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(hologramMechanic);

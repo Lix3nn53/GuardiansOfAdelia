@@ -17,7 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Ini
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.MeleeAttackTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -153,7 +153,7 @@ public class RogueSkills {
         singleTarget2.addChildren(damageMechanic);
         singleTarget.addChildren(new SoundMechanic(GoaSound.SKILL_POISON_SLASH));
         singleTarget2.addChildren(new SoundMechanic(GoaSound.SKILL_POISON_SLASH));
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ArrangementParticle.CIRCLE, 1.2, 7, 0, 0, 0, 0, 1, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.SWEEP_ATTACK, ParticleArrangement.CIRCLE, 1.2, 7, 0, 0, 0, 0, 1, 0, 0, null);
         singleTarget.addChildren(particleMechanic);
         singleTarget2.addChildren(particleMechanic);
 
@@ -244,7 +244,7 @@ public class RogueSkills {
 
         skill.addTrigger(selfTarget);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1.2, 4, 0, 0, 0, 0, 0.5, 0, 0, new Particle.DustOptions(Color.FUCHSIA, 2));
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 1.2, 4, 0, 0, 0, 0, 0.5, 0, 0, new Particle.DustOptions(Color.FUCHSIA, 2));
         selfTarget.addChildren(particleMechanic);
 
         selfTarget.addChildren(phantomCondition);
@@ -319,7 +319,7 @@ public class RogueSkills {
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 2.7, projectileAmounts, 30, 0, 1, 0, 90,
-                true, Egg.class, Particle.REDSTONE, ArrangementParticle.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.PURPLE, 0.8f), false);
+                true, Egg.class, Particle.REDSTONE, ParticleArrangement.CIRCLE, 0.5, 4, new Particle.DustOptions(Color.PURPLE, 0.8f), false);
 
         FlagCondition phantomCondition = new FlagCondition("phantom", true, false);
 
@@ -428,7 +428,7 @@ public class RogueSkills {
         selfTarget.addChildren(debug);
 
         directionCondition.addChildren(damageMechanic);
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 0.8, 4, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ParticleArrangement.CIRCLE, 0.8, 4, 0, 0, 0, 0, 0.5, 0, 0, null);
         directionCondition.addChildren(particleMechanic);
 
         return skill;
@@ -529,7 +529,7 @@ public class RogueSkills {
         repeatAmount.add(44);
         repeatAmount.add(48);
         repeatAmount.add(56);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 4, 0, 0, 0,
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 1, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.PURPLE, 4));
         selfTarget.addChildren(particleAnimationMechanic);
         selfTarget.addChildren(new SoundMechanic(GoaSound.SKILL_BUFF));

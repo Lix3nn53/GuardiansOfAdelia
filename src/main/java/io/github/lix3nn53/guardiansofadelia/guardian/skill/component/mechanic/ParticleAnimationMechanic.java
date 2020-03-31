@@ -2,8 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ParticleAnimationMechanic extends MechanicComponent {
 
     private final Particle particle;
-    private final ArrangementParticle arrangement;
+    private final ParticleArrangement arrangement;
     private final double radiusParticle;
     private final int amountParticle;
 
@@ -36,7 +36,7 @@ public class ParticleAnimationMechanic extends MechanicComponent {
 
     Particle.DustOptions dustOptions;
 
-    public ParticleAnimationMechanic(Particle particle, ArrangementParticle arrangement, double radiusParticle,
+    public ParticleAnimationMechanic(Particle particle, ParticleArrangement arrangement, double radiusParticle,
                                      int amountParticle, double dx, double dy, double dz, double forward, double upward,
                                      double right, double speed, long frequency, List<Integer> repeatAmount, Particle.DustOptions dustOptions) {
         this.particle = particle;

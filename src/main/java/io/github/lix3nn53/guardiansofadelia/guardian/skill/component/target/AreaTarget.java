@@ -15,11 +15,11 @@ import java.util.List;
  */
 public class AreaTarget extends TargetComponent {
 
-    private final List<Double> radius;
+    private final List<Double> radiusList;
 
-    public AreaTarget(boolean allies, boolean enemy, boolean self, int max, List<Double> radius) {
+    public AreaTarget(boolean allies, boolean enemy, boolean self, int max, List<Double> radiusList) {
         super(allies, enemy, self, max);
-        this.radius = radius;
+        this.radiusList = radiusList;
     }
 
     public AreaTarget(ConfigurationSection configurationSection) {
@@ -29,7 +29,7 @@ public class AreaTarget extends TargetComponent {
             configLoadError("radiusList");
         }
 
-        this.radius = configurationSection.getDoubleList("radiusList");
+        this.radiusList = configurationSection.getDoubleList("radiusList");
     }
 
     @Override
@@ -39,7 +39,7 @@ public class AreaTarget extends TargetComponent {
         List<LivingEntity> nearby = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            List<LivingEntity> nearbyTarget = Nearby.getLivingNearby(target, radius.get(skillLevel - 1));
+            List<LivingEntity> nearbyTarget = Nearby.getLivingNearby(target, radiusList.get(skillLevel - 1));
             nearby.addAll(nearbyTarget);
         }
 
@@ -55,11 +55,11 @@ public class AreaTarget extends TargetComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0) {
-            additions.add(ChatColor.YELLOW + "Radius: " + radius.get(skillLevel));
-        } else if (skillLevel == radius.size()) {
-            additions.add(ChatColor.YELLOW + "Radius: " + radius.get(skillLevel - 1));
+            additions.add(ChatColor.YELLOW + "Radius: " + radiusList.get(skillLevel));
+        } else if (skillLevel == radiusList.size()) {
+            additions.add(ChatColor.YELLOW + "Radius: " + radiusList.get(skillLevel - 1));
         } else {
-            additions.add(ChatColor.YELLOW + "Radius: " + radius.get(skillLevel - 1) + " -> " + radius.get(skillLevel));
+            additions.add(ChatColor.YELLOW + "Radius: " + radiusList.get(skillLevel - 1) + " -> " + radiusList.get(skillLevel));
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

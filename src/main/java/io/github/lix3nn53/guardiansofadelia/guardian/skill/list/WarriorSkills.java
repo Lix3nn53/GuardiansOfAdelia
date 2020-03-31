@@ -17,7 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Ini
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookPhysicalDamageTrigger;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ArrangementParticle;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -105,7 +105,7 @@ public class WarriorSkills {
 
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ParticleArrangement.CIRCLE, 3, 20, 0, 0, 0, 0, 0.5, 0, 0, null);
 
         skill.addTrigger(selfTarget);
 
@@ -166,7 +166,7 @@ public class WarriorSkills {
         projectileAmounts.add(1);
         projectileAmounts.add(1);
         ProjectileMechanic projectileMechanic = new ProjectileMechanic(SpreadType.CONE, 1.9, projectileAmounts, 30,
-                0, 1, 0, 200, true, SmallFireball.class, Particle.FLAME, ArrangementParticle.SPHERE, 0.5, 4, null, true);
+                0, 1, 0, 200, true, SmallFireball.class, Particle.FLAME, ParticleArrangement.SPHERE, 0.5, 4, null, true);
 
         List<Double> damages = new ArrayList<>();
         damages.add(24.0);
@@ -303,7 +303,7 @@ public class WarriorSkills {
         BuffMechanic physicalDamageBuff = new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks);
         BuffMechanic magicalDamageBuff = new BuffMechanic(BuffType.MAGIC_DAMAGE, multipliers, ticks);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ArrangementParticle.CIRCLE, 2.4, 7, 0, 0, 0, 0, 1.8, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.CRIT, ParticleArrangement.CIRCLE, 2.4, 7, 0, 0, 0, 0, 1.8, 0, 0, null);
 
         skill.addTrigger(selfTarget);
         selfTarget.addChildren(hologramMechanic);
@@ -389,7 +389,7 @@ public class WarriorSkills {
         repeatAmount.add(36);
         repeatAmount.add(40);
         repeatAmount.add(48);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 4, 0, 0, 0,
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 1, 4, 0, 0, 0,
                 0, 0.5, 0, 0, 5, repeatAmount, new Particle.DustOptions(Color.RED, 8));
 
         skill.addTrigger(initializeTrigger);
@@ -479,7 +479,7 @@ public class WarriorSkills {
         repeatAmounts.add(16);
         repeatAmounts.add(18);
         repeatAmounts.add(20);
-        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ArrangementParticle.CIRCLE, 1, 3, -0.1, 1, 0, 0, 0, 0, 1, 4L, repeatAmounts, new Particle.DustOptions(Color.ORANGE, 2));
+        ParticleAnimationMechanic particleAnimationMechanic = new ParticleAnimationMechanic(Particle.REDSTONE, ParticleArrangement.CIRCLE, 1, 3, -0.1, 1, 0, 0, 0, 0, 1, 4L, repeatAmounts, new Particle.DustOptions(Color.ORANGE, 2));
 
         List<Double> radiuses = new ArrayList<>();
         radiuses.add(8D);
@@ -499,7 +499,7 @@ public class WarriorSkills {
         damages.add(2600.0);
         DamageMechanic damageMechanic = new DamageMechanic(damages, DamageMechanic.DamageType.MELEE);
 
-        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ArrangementParticle.CIRCLE, 11, 33, 0, 0, 0, 0, 0.5, 0, 0, null);
+        ParticleMechanic particleMechanic = new ParticleMechanic(Particle.VILLAGER_ANGRY, ParticleArrangement.CIRCLE, 11, 33, 0, 0, 0, 0, 0.5, 0, 0, null);
 
         skill.addTrigger(selfTarget);
 

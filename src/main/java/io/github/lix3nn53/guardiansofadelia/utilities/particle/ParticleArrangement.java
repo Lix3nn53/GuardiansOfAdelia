@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle;
 
-public enum ArrangementParticle {
+public enum ParticleArrangement {
     CIRCLE,
     SPHERE,
     HEMISPHERE
