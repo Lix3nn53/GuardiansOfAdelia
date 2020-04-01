@@ -1,0 +1,30 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+count: 10
+i1:
+  questID: 1
+  npcToTakeFrom: 0
+  npcToComplete: 9
+  name: "asd"
+  story:
+    - ""
+    - ""
+  startMsg: ""
+  objectiveText: ""
+  turnInMsg: ""
+  moneyPrize: 10
+  expPrize: 10
+  requiredLevel: 1
+  requiredQuests:
+    - 1
+  advancementMaterial: ""
+  taskCount: 1
+  task1:
+    taskType: "TaskKill"
+  itemPrizeCount: 1
+  itemPrize1:
+    itemType: ""

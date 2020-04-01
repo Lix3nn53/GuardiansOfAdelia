@@ -50,6 +50,7 @@ public class ConfigManager {
         ItemConfigurations.createConfigs();
         JobCraftingConfigurations.createConfigs();
         SpawnerConfiguration.createConfigs();
+        QuestConfigurations.createConfigs();
     }
 
     public static void loadConfigALL() {
@@ -66,6 +67,7 @@ public class ConfigManager {
         ItemConfigurations.loadConfigs();
         JobCraftingConfigurations.loadConfigs();
         SpawnerConfiguration.loadConfigs();
+        QuestConfigurations.loadConfigs();
     }
 
     public static void writeConfigALL() {

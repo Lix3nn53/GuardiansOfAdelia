@@ -212,4 +212,8 @@ public class AdeliaEntity {
     public String getAdeliaEntityKey() {
         return adeliaEntityKey;
     }
+
+    public String getName() {
+        return name;
+    }
 }
