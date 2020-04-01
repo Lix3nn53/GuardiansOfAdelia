@@ -1,29 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
-import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
-import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import io.github.lix3nn53.guardiansofadelia.quests.actions.*;
-import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
-import io.github.lix3nn53.guardiansofadelia.quests.task.TaskDealDamage;
-import io.github.lix3nn53.guardiansofadelia.quests.task.TaskKill;
-import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffectType;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class TutorialQuests {
 
     public static void createQuests() {
 
-        //start to arnas
+        /*//start to arnas
         List<String> story = new ArrayList<>();
         story.add("Adelia had been living in peace for a long time so");
         story.add("the need for Guardians decreased over time.");
@@ -61,7 +42,7 @@ public class TutorialQuests {
         List<Integer> requiredQuests3 = new ArrayList<>();
         requiredQuests3.add(2);
         List<ItemStack> itemPrizes1 = new ArrayList<>();
-        itemPrizes1.add(PassiveItemList.get(9, 0, RPGSlotType.PARROT, ItemTier.COMMON, "Tutorial", 10, 20, 2));
+        itemPrizes1.add(PassiveItemList.get(9, 0, RPGSlotType.PARROT, ItemTier.LEGENDARY, "Tutorial", 10, 20, 2));
         itemPrizes1.add(PassiveItemList.get(9, 0, RPGSlotType.EARRING, ItemTier.COMMON, "Tutorial", 10, 20, 2));
         itemPrizes1.add(PassiveItemList.get(9, 0, RPGSlotType.GLOVE, ItemTier.COMMON, "Tutorial", 10, 20, 2));
         itemPrizes1.add(PassiveItemList.get(9, 0, RPGSlotType.RING, ItemTier.COMMON, "Tutorial", 10, 20, 2));
@@ -118,7 +99,7 @@ public class TutorialQuests {
                 "Get out of the ship and follow the path to meet King of Roumen", "Talk with King of Roumen to learn what happened",
                 "",
                 tasks5, itemPrizes5, 0, 0, 1, requiredQuests5, Material.GRASS_BLOCK);
-        QuestNPCManager.addQuest(quest5, 0, 31);
+        QuestNPCManager.addQuest(quest5, 0, 31);*/
     }
 
 }

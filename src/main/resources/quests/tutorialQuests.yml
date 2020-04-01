@@ -1,30 +1,189 @@
 # ---------------------------------------------- #
-#             Item list Configuration            #
+#            Quest list Configuration            #
 # ---------------------------------------------- #
-#                     Items                      #
+#                     Quests                     #
 # ---------------------------------------------- #
 
-count: 10
+count: 5
 i1:
   questID: 1
   npcToTakeFrom: 0
   npcToComplete: 9
-  name: "asd"
+  name: "Entrance to the unknown"
   story:
-    - ""
-    - ""
-  startMsg: ""
-  objectiveText: ""
-  turnInMsg: ""
-  moneyPrize: 10
-  expPrize: 10
-  requiredLevel: 1
+    - "Adelia had been living in peace for a long time so"
+    - "the need for Guardians decreased over time."
+    - "You are one of a few Guardians of this era."
+    - "Suddenly a strange dark castle appeared"
+    - "in wild lands of Adelia."
+    - "Can Adelia overcome this threat after such a long time?"
+  startMsg: "&eHold &l&6TAB KEY &r&eto see your quest list!"
+  objectiveTextList:
+    - "Talk to Arnas!"
+  turnInMsg: "Accept your new quest from Arnas"
+  moneyPrize: 0
+  expPrize: 0
+  requiredLevel: 90
+  advancementMaterial: "RED_NETHER_BRICKS"
+i2:
+  questID: 2
+  npcToTakeFrom: 9
+  npcToComplete: 10
+  name: "To the rescue"
+  story:
+    - "We need more guardians to deal"
+    - "with darkness' foes!"
+  startMsg: "Learn your skills to get ready! Open menu by clicking Menu-Book from your inventory(E key), then learn your skills from character menu to get ready to fight!"
+  objectiveTextList:
+    - "Open menu by clicking Menu-Book from your inventory(E key), then.."
+    - "..learn your skills from character menu to get ready to fight!"
+    - "TASK_PROGRESS_1 then talk to Elysea"
+  turnInMsg: "Accept your new quest from Elysea"
+  moneyPrize: 0
+  expPrize: 0
+  requiredLevel: 90
   requiredQuests:
     - 1
-  advancementMaterial: ""
+  advancementMaterial: "RED_NETHER_BRICKS"
   taskCount: 1
   task1:
     taskType: "TaskKill"
-  itemPrizeCount: 1
+    mobKey: "TUTORIAL_1"
+    amountNeeded: 5
+i3:
+  questID: 3
+  npcToTakeFrom: 10
+  npcToComplete: 11
+  name: "Syvia's gift"
+  story:
+    - "We need more guardians to deal"
+    - "with darkness' foes!"
+  startMsg: "Spend your element points from character-menu to get stronger."
+  objectiveTextList:
+    - "Spend your element points from character-menu to get stronger."
+    - "TASK_PROGRESS_1 then talk to Syvia"
+  turnInMsg: "Equip jewelries from RPG-Inventory to gain even more elemental power! To open RPG-Inventory click one of crafting slots from your inventory."
+  moneyPrize: 0
+  expPrize: 0
+  requiredLevel: 90
+  requiredQuests:
+    - 2
+  advancementMaterial: "RED_NETHER_BRICKS"
+  taskCount: 1
+  task1:
+    taskType: "TaskKill"
+    mobKey: "TUTORIAL_2"
+    amountNeeded: 5
+  itemPrizeCount: 5
   itemPrize1:
-    itemType: ""
+    itemType: "Passive"
+    gearLevel: 9
+    itemIndex: 0
+    rpgSlotType: "PARROT"
+    itemTier: "LEGENDARY"
+    itemTag: "Tutorial"
+  itemPrize2:
+    itemType: "Passive"
+    gearLevel: 9
+    itemIndex: 0
+    rpgSlotType: "EARRING"
+    itemTier: "LEGENDARY"
+    itemTag: "Tutorial"
+  itemPrize3:
+    itemType: "Passive"
+    gearLevel: 9
+    itemIndex: 0
+    rpgSlotType: "GLOVE"
+    itemTier: "LEGENDARY"
+    itemTag: "Tutorial"
+  itemPrize4:
+    itemType: "Passive"
+    gearLevel: 9
+    itemIndex: 0
+    rpgSlotType: "RING"
+    itemTier: "LEGENDARY"
+    itemTag: "Tutorial"
+  itemPrize5:
+    itemType: "Passive"
+    gearLevel: 9
+    itemIndex: 0
+    rpgSlotType: "NECKLACE"
+    itemTier: "LEGENDARY"
+    itemTag: "Tutorial"
+i4:
+  questID: 4
+  npcToTakeFrom: 11
+  npcToComplete: 0
+  name: "Hall of Darkness"
+  story:
+    - "We need to stop this before it harms Adelia!"
+  startMsg: "Now you seem ready to face Aleesia.. or are you?"
+  objectiveTextList:
+    - "Equip jewelries from RPG-Inventory to gain even more elemental power!"
+    - "To open RPG-Inventory click one of crafting slots from your inventory."
+    - "Now you seem ready to face Aleesia.. or are you?"
+    - "Enter the portal(Left-Mouse-Click when nearby)"
+  turnInMsg: ""
+  moneyPrize: 0
+  expPrize: 0
+  requiredLevel: 90
+  requiredQuests:
+    - 3
+  advancementMaterial: "RED_NETHER_BRICKS"
+  taskCount: 1
+  task1:
+    taskType: "TaskDealDamage"
+    mobKey: "TUTORIAL_BOSS"
+    damageNeeded: 200
+  onCompleteActionCount: 8
+  onCompleteAction1:
+    actionType: "InvincibleGiveAction"
+    duration: 40
+  onCompleteAction2:
+    actionType: "PotionEffectAction"
+    potionEffectType: "BLINDNESS"
+    duration: 100
+    amplifier: 3
+  onCompleteAction3:
+    actionType: "TeleportAction"
+    delay: 10
+    world: "world"
+    x: -3018.5
+    y: 95.5
+    z: 4920
+    yaw: -175.6
+    pitch: -9.2
+  onCompleteAction4:
+    actionType: "ClearPotionEffectAction"
+    potionEffectType: "WITHER"
+  onCompleteAction5:
+    actionType: "SendTitleAction"
+    top: "Waking up.."
+    bottom: ""
+  onCompleteAction6:
+    actionType: "FinishQuestAction"
+    questId: 4
+  onCompleteAction7:
+    actionType: "StartQuestAction"
+    questId: 5
+  onCompleteAction8:
+    actionType: "TutorialEndAction"
+i5:
+  questID: 5
+  npcToTakeFrom: 0
+  npcToComplete: 31
+  name: "To the rescue"
+  story:
+    - "You woke up from a dream of the past. In that dream,"
+    - "Guardians lost the battle against Aleesia. Darkness"
+    - "is slowly conquering the lands of Adelia..."
+  startMsg: "Get out of the ship and follow the path to meet King of Roumen"
+  objectiveTextList:
+    - "Talk with King of Roumen to learn what happened"
+  turnInMsg: ""
+  moneyPrize: 0
+  expPrize: 0
+  requiredLevel: 1
+  requiredQuests:
+    - 4
+  advancementMaterial: "GRASS_BLOCK"

@@ -54,9 +54,9 @@ public class ItemReferenceLoader {
             RPGSlotType rpgSlotType = RPGSlotType.valueOf(configurationSection.getString("rpgSlotType"));
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
             String itemTag = configurationSection.getString("itemTag");
-            int minStatValue = configurationSection.getInt("minStatValue");
-            int maxStatValue = configurationSection.getInt("maxStatValue");
-            int minNumberOfStats = configurationSection.getInt("minNumberOfStats");
+            int minStatValue = GearLevel.getMinStatValue(gearLevel);
+            int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
+            int minNumberOfStats = itemTier.getMinNumberOfStatsPassive();
 
             return PassiveItemList.get(gearLevel, itemIndex, rpgSlotType, itemTier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
         } else if (itemType.equals("Weapon")) {
