@@ -14,19 +14,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntitySkillConfigurations {
+public class EntitySkillSetConfigurations {
 
+    private static final List<FileConfiguration> questLineConfigurations = new ArrayList<>();
     private static FileConfiguration fileConfiguration;
 
     static void createConfigs() {
-        createConfig("monsterSkills.yml");
+        createConfig("config.yml", true);
+        createSkillSetConfigs();
     }
 
     static void loadConfigs() {
-        loadConfig("monsterSkills.yml");
+        loadSkillSetConfigs();
     }
 
-    private static void createConfig(String fileName) {
+    private static void createConfig(String fileName, boolean isMain) {
         String filePath = ConfigManager.DATA_FOLDER + File.separator + "entities";
         File customConfigFile = new File(filePath, fileName);
         if (!customConfigFile.exists()) {
@@ -42,32 +44,42 @@ public class EntitySkillConfigurations {
         YamlConfiguration yamlConfiguration = new YamlConfiguration();
         try {
             yamlConfiguration.load(customConfigFile);
-            fileConfiguration = yamlConfiguration;
+            if (isMain) {
+                fileConfiguration = yamlConfiguration;
+            } else {
+                questLineConfigurations.add(yamlConfiguration);
+            }
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
     }
 
-    private static void loadConfig(String fileName) {
-        int count = fileConfiguration.getInt("count");
+    private static void createSkillSetConfigs() {
+        List<String> questLineList = fileConfiguration.getStringList("entityList");
 
-        for (int i = 1; i <= count; i++) {
+        for (String fileName : questLineList) {
+            createConfig(fileName + ".yml", false);
+        }
+    }
+
+    private static void loadSkillSetConfigs() {
+        for (FileConfiguration skillSetConfiguration : questLineConfigurations) {
             //skill set
-            String adeliaEntityKey = fileConfiguration.getString("i" + i + ".mobkey");
-            long cooldown = fileConfiguration.getInt("i" + i + ".cooldown");
+            String adeliaEntityKey = skillSetConfiguration.getString("mobkey");
+            long cooldown = skillSetConfiguration.getInt("cooldown");
 
-            int skillCount = fileConfiguration.getInt("i" + i + ".skillCount");
+            int skillCount = skillSetConfiguration.getInt("skillCount");
 
             List<SkillComponent> skills = new ArrayList<>();
             List<Integer> skillLevels = new ArrayList<>();
 
             //skill
             for (int skill = 1; skill <= skillCount; skill++) {
-                int skillLevel = fileConfiguration.getInt("i" + i + ".skill" + skill + ".skillLevel");
+                int skillLevel = skillSetConfiguration.getInt("skill" + skill + ".skillLevel");
                 skillLevels.add(skillLevel);
 
                 //trigger component
-                ConfigurationSection componentSection = fileConfiguration.getConfigurationSection("i" + i + ".skill" + skill + ".trigger");
+                ConfigurationSection componentSection = skillSetConfiguration.getConfigurationSection("skill" + skill + ".trigger");
                 SkillComponent triggerComponent = SkillComponentLoader.loadSection(componentSection);
 
                 skills.add(triggerComponent);
