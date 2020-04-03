@@ -8,9 +8,9 @@ levelCount: 1
 level1:
   itemSetCount: 2
   itemSet1:
-    classes:
-      - ARCHER
-      - HUNTER
+    gearType:
+      - BOW
+      - CROSSBOW
     gearLevel: 1
     index: 0
     tier: MYSTIC

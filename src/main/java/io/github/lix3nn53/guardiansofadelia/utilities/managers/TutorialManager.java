@@ -1,33 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
-import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Shields;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterExperienceManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
-import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 
 public class TutorialManager {
 
     public static void startTutorial(Player player, RPGClass rpgClass, int charNo, Location startLocation) {
-        if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
+        /*if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
             RPGCharacter rpgCharacter = new RPGCharacter(rpgClass, player);
             guardianData.setActiveCharacter(rpgCharacter, charNo);
@@ -54,11 +35,11 @@ public class TutorialManager {
 
             rpgCharacterStats.setCurrentHealth(rpgCharacterStats.getTotalMaxHealth());
             rpgCharacterStats.setCurrentMana(rpgCharacterStats.getTotalMaxMana());
-        }
+        }*/
     }
 
     private static void giveTutorialItems(Player player, RPGClass rpgClass) {
-        InventoryUtils.setMenuItemPlayer(player);
+        /*InventoryUtils.setMenuItemPlayer(player);
         ItemTier tier = ItemTier.COMMON;
         int minStatValue = 10;
         int maxStatValue = 50;
@@ -81,10 +62,10 @@ public class TutorialManager {
         playerInventory.setItem(4, mainHand);
 
         if (rpgClass.equals(RPGClass.KNIGHT)) {
-            ItemStack shield = Shields.get(rpgClass, 10, 0, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+            ItemStack shield = ShieldManager.get(rpgClass, 10, 0, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
             playerInventory.setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.PALADIN)) {
-            ItemStack shield = Shields.get(rpgClass, 10, 0, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+            ItemStack shield = ShieldManager.get(rpgClass, 10, 0, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
             playerInventory.setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.ROGUE)) {
             playerInventory.setItemInOffHand(mainHand);
@@ -96,6 +77,6 @@ public class TutorialManager {
         ItemStack hpPotion = Consumable.POTION_INSTANT_HEALTH.getItemStack(10, 10);
         InventoryUtils.giveItemToPlayer(player, hpPotion);
         ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(10, 10);
-        InventoryUtils.giveItemToPlayer(player, manaPotion);
+        InventoryUtils.giveItemToPlayer(player, manaPotion);*/
     }
 }

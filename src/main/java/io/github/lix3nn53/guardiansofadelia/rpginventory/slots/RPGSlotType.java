@@ -43,4 +43,66 @@ public enum RPGSlotType {
         }
         return 30;
     }
+
+    public String getDisplayName() {
+        if (this == RPGSlotType.PARROT) {
+            return "Parrot";
+        } else if (this == RPGSlotType.EARRING) {
+            return "Earring";
+        } else if (this == RPGSlotType.NECKLACE) {
+            return "Necklace";
+        } else if (this == RPGSlotType.GLOVE) {
+            return "Glove";
+        } else if (this == RPGSlotType.RING) {
+            return "Ring";
+        } else if (this == RPGSlotType.CHARACTER_INFO) {
+            return "Character Info";
+        } else if (this == RPGSlotType.PET) {
+            return "Pet";
+        } else if (this == RPGSlotType.HELMET) {
+            return "Helmet";
+        } else if (this == RPGSlotType.CHESTPLATE) {
+            return "Chestplate";
+        } else if (this == RPGSlotType.LEGGINGS) {
+            return "Leggings";
+        } else if (this == RPGSlotType.BOOTS) {
+            return "Boots";
+        } else if (this == RPGSlotType.OFFHAND) {
+            return "Offhand";
+        }
+
+        return "Mainhand";
+    }
+
+    public int getCustomModelDataOffset() { //for passive sets
+        if (this == RPGSlotType.PARROT) {
+            return 1;
+        } else if (this == RPGSlotType.EARRING) {
+            return 2;
+        } else if (this == RPGSlotType.NECKLACE) {
+            return 3;
+        } else if (this == RPGSlotType.GLOVE) {
+            return 4;
+        } else if (this == RPGSlotType.RING) {
+            return 0;
+        }
+
+        return 0;
+    }
+
+    public int getReqLevelOffset() { //for passive sets
+        if (this == RPGSlotType.PARROT) {
+            return 8;
+        } else if (this == RPGSlotType.EARRING) {
+            return 2;
+        } else if (this == RPGSlotType.NECKLACE) {
+            return 4;
+        } else if (this == RPGSlotType.GLOVE) {
+            return 6;
+        } else if (this == RPGSlotType.RING) {
+            return 0;
+        }
+
+        return 0;
+    }
 }

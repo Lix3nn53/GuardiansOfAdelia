@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
@@ -19,8 +18,9 @@ public class GearPassive implements RPGGear {
     private final String itemTag;
     private final int level;
     private ItemStack itemStack;
+    private RPGGearType gearType = RPGGearType.PASSIVE;
 
-    public GearPassive(String name, ItemTier tier, String itemTag, int customModelData, RPGSlotType passiveType, int level, RPGClass rpgClass,
+    public GearPassive(String name, ItemTier tier, String itemTag, int customModelData, RPGSlotType passiveType, int level,
                        int minStatValue, int maxStatValue, int minNumberOfStats, double bonusPercent) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
@@ -36,12 +36,9 @@ public class GearPassive implements RPGGear {
         int finalLightning = (int) (statPassive.getLightning() * bonusPercent);
         int finalWind = (int) (statPassive.getWind() * bonusPercent);
 
-        lore.add(ChatColor.GRAY + "Passive Item");
+        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: " + gearType.getDisplayName());
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
-        if (!rpgClass.equals(RPGClass.NO_CLASS)) {
-            lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassString());
-        }
         if (!statPassive.isEmpty()) {
             lore.add("");
             if (finalFire != 0) {
@@ -99,6 +96,11 @@ public class GearPassive implements RPGGear {
     @Override
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    @Override
+    public RPGGearType getGearType() {
+        return gearType;
     }
 
     @Override

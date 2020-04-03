@@ -19,6 +19,7 @@ public class PetMount implements RPGGear {
     private final String itemTag;
     private final int level;
     private ItemStack itemStack;
+    private RPGGearType gearType = RPGGearType.EGG_MOUNT;
 
     public PetMount(Mount mount, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int petBaseHealth, double petBaseSpeed, double petBaseJump) {
         String name = tier.getTierColor() + mount.getName();
@@ -28,7 +29,7 @@ public class PetMount implements RPGGear {
         int mountHealth = PetManager.getMountHealth(1, petBaseHealth);
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY + "Egg");
+        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: " + gearType.getDisplayName());
         lore.add("");
         lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Mount");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
@@ -65,6 +66,11 @@ public class PetMount implements RPGGear {
     @Override
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    @Override
+    public RPGGearType getGearType() {
+        return gearType;
     }
 
     @Override

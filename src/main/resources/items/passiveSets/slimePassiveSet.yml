@@ -1,0 +1,12 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+count: 1
+i1:
+  gearType: "Passive"
+  name: "Slime"
+  baseCustomModelData: 1
+  baseLevel: 24

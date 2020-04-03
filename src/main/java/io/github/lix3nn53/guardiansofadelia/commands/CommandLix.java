@@ -1,11 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
-import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
+import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
+import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
@@ -19,7 +20,6 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
@@ -168,9 +168,9 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage("size: " + spawners.size());
             } else if (args[0].equals("weapon")) {
                 if (args.length == 3) {
-                    RPGClass rpgClass = RPGClass.valueOf(args[1]);
+                    RPGGearType rpgGearType = RPGGearType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
-                    ItemStack weapon = Weapons.getWeapon(rpgClass, no, 0, ItemTier.LEGENDARY, "Command", 20, 40, 5);
+                    ItemStack weapon = WeaponManager.get(rpgGearType, no, 0, ItemTier.LEGENDARY, "Command", 20, 40, 5);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("companion")) {
@@ -229,7 +229,7 @@ public class CommandLix implements CommandExecutor {
                 if (args.length == 3) {
                     RPGSlotType rpgSlotType = RPGSlotType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
-                    ItemStack passive = PassiveItemList.get(no, 0, rpgSlotType, ItemTier.LEGENDARY, "Command", 0, 100, 2);
+                    ItemStack passive = PassiveManager.get(RPGGearType.PASSIVE, no, 0, rpgSlotType, ItemTier.LEGENDARY, "Command", 0, 100, 2);
                     InventoryUtils.giveItemToPlayer(player, passive);
                 }
             } else if (args[0].equals("model")) {

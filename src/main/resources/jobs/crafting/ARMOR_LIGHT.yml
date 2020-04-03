@@ -8,9 +8,8 @@ levelCount: 1
 level1:
   itemSetCount: 2
   itemSet1:
-    classes:
-      - WARRIOR
-      - ROGUE
+    gearType:
+      - LIGHT_ARMOR
     gearLevel: 1
     index: 0
     tier: MYSTIC

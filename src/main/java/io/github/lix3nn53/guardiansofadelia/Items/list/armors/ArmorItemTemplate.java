@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.armors;
 
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
 import org.bukkit.Material;
 
 public class ArmorItemTemplate {
@@ -9,14 +10,16 @@ public class ArmorItemTemplate {
     private final int defense;
     private final int magicDefense;
     private final Material material;
+    private final RPGGearType gearType;
 
-    public ArmorItemTemplate(String name, int level, int health, int defense, int magicDefense, Material material) {
+    public ArmorItemTemplate(String name, int level, int health, int defense, int magicDefense, Material material, RPGGearType gearType) {
         this.name = name;
         this.level = level;
         this.health = health;
         this.defense = defense;
         this.magicDefense = magicDefense;
         this.material = material;
+        this.gearType = gearType;
     }
 
     public String getName() {
@@ -41,5 +44,9 @@ public class ArmorItemTemplate {
 
     public Material getMaterial() {
         return material;
+    }
+
+    public RPGGearType getGearType() {
+        return gearType;
     }
 }

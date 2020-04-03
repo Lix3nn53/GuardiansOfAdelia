@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import org.bukkit.ChatColor;
@@ -18,10 +17,10 @@ public class WeaponMelee implements RPGGear {
     private final ItemTier tier;
     private final String itemTag;
     private final int level;
-    private final RPGClass rpgClass;
+    private final RPGGearType gearType;
     private ItemStack itemStack;
 
-    public WeaponMelee(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, RPGClass rpgClass, int damage,
+    public WeaponMelee(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, RPGGearType gearType, int damage,
                        double bonusPercent, AttackSpeed attackSpeed, int minStatValue, int maxStatValue, int minNumberOfStats) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
@@ -33,10 +32,9 @@ public class WeaponMelee implements RPGGear {
 
         StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
-        lore.add(ChatColor.GRAY + "Melee Weapon");
+        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: " + gearType.getDisplayName());
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
-        lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassString());
         lore.add("");
         lore.add(ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + "+" + damage);
         lore.add(ChatColor.AQUA + "ø Attack Speed: " + attackSpeed.getLoreString());
@@ -63,7 +61,7 @@ public class WeaponMelee implements RPGGear {
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
-        PersistentDataContainerUtil.putString("reqClass", rpgClass.toString(), this.itemStack);
+        PersistentDataContainerUtil.putString("gearType", gearType.toString(), this.itemStack);
 
         this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSppedValue());
         this.itemStack = RPGItemUtils.clearThenSetDamageWhenInMainHand(this.itemStack, damage);
@@ -97,12 +95,17 @@ public class WeaponMelee implements RPGGear {
         this.tier = tier;
         this.itemTag = itemTag;
         this.level = level;
-        this.rpgClass = rpgClass;
+        this.gearType = gearType;
     }
 
     @Override
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    @Override
+    public RPGGearType getGearType() {
+        return gearType;
     }
 
     @Override
@@ -118,9 +121,5 @@ public class WeaponMelee implements RPGGear {
     @Override
     public int getLevel() {
         return level;
-    }
-
-    public RPGClass getRpgClass() {
-        return rpgClass;
     }
 }

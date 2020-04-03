@@ -1,18 +1,21 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.weapons;
 
-public class WeaponItemTemplate {
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
 
+public class WeaponItemTemplate {
 
     private final String name;
     private final int customModelData;
-    private final int level;
+    private final int requiredLevel;
     private final int damage;
+    private final RPGGearType gearType;
 
-    public WeaponItemTemplate(String name, int customModelData, int level, int damage) {
+    public WeaponItemTemplate(String name, int customModelData, int requiredLevel, int damage, RPGGearType gearType) {
         this.name = name;
         this.customModelData = customModelData;
-        this.level = level;
+        this.requiredLevel = requiredLevel;
         this.damage = damage;
+        this.gearType = gearType;
     }
 
     public String getName() {
@@ -23,11 +26,15 @@ public class WeaponItemTemplate {
         return customModelData;
     }
 
-    public int getLevel() {
-        return level;
+    public int getRequiredLevel() {
+        return requiredLevel;
     }
 
     public int getDamage() {
         return damage;
+    }
+
+    public RPGGearType getGearType() {
+        return gearType;
     }
 }

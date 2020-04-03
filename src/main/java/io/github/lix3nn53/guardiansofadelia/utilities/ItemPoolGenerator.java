@@ -3,15 +3,9 @@ package io.github.lix3nn53.guardiansofadelia.utilities;
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Shields;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
-import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -27,14 +21,14 @@ public class ItemPoolGenerator {
         //7*3 weapon
         List<ItemStack> temp = new ArrayList<>();
 
-        temp.add(Weapons.getWeapon(RPGClass.WARRIOR, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        /*temp.add(Weapons.getWeapon(RPGClass.WARRIOR, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.ARCHER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.ROGUE, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.PALADIN, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.MAGE, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.KNIGHT, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.MONK, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(Weapons.getWeapon(RPGClass.HUNTER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(Weapons.getWeapon(RPGClass.HUNTER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));*/
 
         return temp;
     }
@@ -46,11 +40,11 @@ public class ItemPoolGenerator {
 
         List<ItemStack> temp = new ArrayList<>();
 
-        temp.add(PassiveItemList.get(gearLevel, itemIndex, RPGSlotType.RING, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(PassiveItemList.get(gearLevel, itemIndex, RPGSlotType.GLOVE, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(PassiveItemList.get(gearLevel, itemIndex, RPGSlotType.NECKLACE, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(PassiveItemList.get(gearLevel, itemIndex, RPGSlotType.EARRING, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(PassiveItemList.get(gearLevel, itemIndex, RPGSlotType.PARROT, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        /*temp.add(PassiveManager.get(gearLevel, itemIndex, RPGSlotType.RING, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(PassiveManager.get(gearLevel, itemIndex, RPGSlotType.GLOVE, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(PassiveManager.get(gearLevel, itemIndex, RPGSlotType.NECKLACE, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(PassiveManager.get(gearLevel, itemIndex, RPGSlotType.EARRING, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(PassiveManager.get(gearLevel, itemIndex, RPGSlotType.PARROT, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));*/
 
         return temp;
     }
@@ -63,10 +57,10 @@ public class ItemPoolGenerator {
         List<ItemStack> temp = new ArrayList<>();
 
         for (RPGClass rpgClass : RPGClass.values()) {
-            temp.add(Armors.getArmor(ArmorType.HELMET, rpgClass, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+            /*temp.add(Armors.getArmor(ArmorType.HELMET, rpgClass, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
             temp.add(Armors.getArmor(ArmorType.CHESTPLATE, rpgClass, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
             temp.add(Armors.getArmor(ArmorType.LEGGINGS, rpgClass, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-            temp.add(Armors.getArmor(ArmorType.BOOTS, rpgClass, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+            temp.add(Armors.getArmor(ArmorType.BOOTS, rpgClass, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));*/
         }
 
         return temp;
@@ -102,10 +96,10 @@ public class ItemPoolGenerator {
         //7*3 weapon
         List<ItemStack> temp = new ArrayList<>();
 
-        temp.add(Weapons.getWeapon(RPGClass.WARRIOR, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        /*temp.add(Weapons.getWeapon(RPGClass.WARRIOR, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.ROGUE, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.PALADIN, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(Weapons.getWeapon(RPGClass.KNIGHT, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(Weapons.getWeapon(RPGClass.KNIGHT, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));*/
 
         return temp;
     }
@@ -118,10 +112,10 @@ public class ItemPoolGenerator {
         //7*3 weapon
         List<ItemStack> temp = new ArrayList<>();
 
-        temp.add(Weapons.getWeapon(RPGClass.ARCHER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        /*temp.add(Weapons.getWeapon(RPGClass.ARCHER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.MAGE, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Weapons.getWeapon(RPGClass.MONK, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(Weapons.getWeapon(RPGClass.HUNTER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(Weapons.getWeapon(RPGClass.HUNTER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));*/
 
         return temp;
     }
@@ -133,17 +127,17 @@ public class ItemPoolGenerator {
 
         List<ItemStack> temp = new ArrayList<>();
 
-        temp.add(Armors.getArmor(ArmorType.HELMET, RPGClass.KNIGHT, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+       /* temp.add(Armors.getArmor(ArmorType.HELMET, RPGClass.KNIGHT, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.CHESTPLATE, RPGClass.KNIGHT, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.LEGGINGS, RPGClass.KNIGHT, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.BOOTS, RPGClass.KNIGHT, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(Shields.get(RPGClass.KNIGHT, gearLevel, itemIndex, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberofStats));
+        temp.add(ShieldManager.get(RPGClass.KNIGHT, gearLevel, itemIndex, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberofStats));
 
         temp.add(Armors.getArmor(ArmorType.HELMET, RPGClass.PALADIN, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.CHESTPLATE, RPGClass.PALADIN, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.LEGGINGS, RPGClass.PALADIN, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.BOOTS, RPGClass.PALADIN, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(Shields.get(RPGClass.PALADIN, gearLevel, itemIndex, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberofStats));
+        temp.add(ShieldManager.get(RPGClass.PALADIN, gearLevel, itemIndex, tier, itemTag, tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberofStats));
 
         temp.add(Armors.getArmor(ArmorType.HELMET, RPGClass.WARRIOR, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.CHESTPLATE, RPGClass.WARRIOR, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
@@ -153,7 +147,7 @@ public class ItemPoolGenerator {
         temp.add(Armors.getArmor(ArmorType.HELMET, RPGClass.MONK, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.CHESTPLATE, RPGClass.MONK, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.LEGGINGS, RPGClass.MONK, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(Armors.getArmor(ArmorType.BOOTS, RPGClass.MONK, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(Armors.getArmor(ArmorType.BOOTS, RPGClass.MONK, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));*/
 
         return temp;
     }
@@ -165,7 +159,7 @@ public class ItemPoolGenerator {
 
         List<ItemStack> temp = new ArrayList<>();
 
-        temp.add(Armors.getArmor(ArmorType.HELMET, RPGClass.ARCHER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        /*temp.add(Armors.getArmor(ArmorType.HELMET, RPGClass.ARCHER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.CHESTPLATE, RPGClass.ARCHER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.LEGGINGS, RPGClass.ARCHER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.BOOTS, RPGClass.ARCHER, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
@@ -183,7 +177,7 @@ public class ItemPoolGenerator {
         temp.add(Armors.getArmor(ArmorType.HELMET, RPGClass.ROGUE, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.CHESTPLATE, RPGClass.ROGUE, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
         temp.add(Armors.getArmor(ArmorType.LEGGINGS, RPGClass.ROGUE, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(Armors.getArmor(ArmorType.BOOTS, RPGClass.ROGUE, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(Armors.getArmor(ArmorType.BOOTS, RPGClass.ROGUE, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));*/
 
         return temp;
     }
@@ -195,11 +189,11 @@ public class ItemPoolGenerator {
 
         List<ItemStack> temp = new ArrayList<>();
 
-        temp.add(PassiveItemList.get(gearLevel, itemIndex, RPGSlotType.RING, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(PassiveItemList.get(gearLevel, itemIndex, RPGSlotType.GLOVE, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(PassiveItemList.get(gearLevel, itemIndex, RPGSlotType.NECKLACE, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(PassiveItemList.get(gearLevel, itemIndex, RPGSlotType.EARRING, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
-        temp.add(PassiveItemList.get(gearLevel, itemIndex, RPGSlotType.PARROT, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        /*temp.add(PassiveManager.get(gearLevel, itemIndex, RPGSlotType.RING, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(PassiveManager.get(gearLevel, itemIndex, RPGSlotType.GLOVE, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(PassiveManager.get(gearLevel, itemIndex, RPGSlotType.NECKLACE, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(PassiveManager.get(gearLevel, itemIndex, RPGSlotType.EARRING, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
+        temp.add(PassiveManager.get(gearLevel, itemIndex, RPGSlotType.PARROT, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));*/
 
         return temp;
     }

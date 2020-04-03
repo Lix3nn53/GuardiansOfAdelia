@@ -47,7 +47,10 @@ public class ConfigManager {
         createHologramsConfig();
         DatabaseConfiguration.createConfigs();
         DungeonConfiguration.createConfigs();
-        ItemConfigurations.createConfigs();
+        ItemArmorSetConfigurations.createConfigs();
+        ItemPassiveSetConfigurations.createConfigs();
+        ItemShieldConfigurations.createConfigs();
+        ItemWeaponConfigurations.createConfigs();
         JobCraftingConfigurations.createConfigs();
         SpawnerConfiguration.createConfigs();
         QuestConfigurations.createConfigs();
@@ -64,7 +67,10 @@ public class ConfigManager {
         loadHologramsConfig();
         DatabaseConfiguration.loadConfigs();
         DungeonConfiguration.loadConfigs();
-        ItemConfigurations.loadConfigs();
+        ItemArmorSetConfigurations.loadConfigs();
+        ItemPassiveSetConfigurations.loadConfigs();
+        ItemShieldConfigurations.loadConfigs();
+        ItemWeaponConfigurations.loadConfigs();
         JobCraftingConfigurations.loadConfigs();
         SpawnerConfiguration.loadConfigs();
         QuestConfigurations.loadConfigs();

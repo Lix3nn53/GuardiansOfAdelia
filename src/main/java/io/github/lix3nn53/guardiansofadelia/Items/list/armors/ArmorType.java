@@ -47,4 +47,42 @@ public enum ArmorType {
         }
         return inventory.getHelmet();
     }
+
+    public double getAttributeReduction() {
+        switch (this) {
+            case HELMET:
+            case BOOTS:
+                return 0.4;
+            case LEGGINGS:
+                return 0.7;
+        }
+
+        return 1;
+    }
+
+    public String getDisplayName() {
+        switch (this) {
+            case CHESTPLATE:
+                return "Chestplate";
+            case LEGGINGS:
+                return "Leggings";
+            case BOOTS:
+                return "Boots";
+        }
+
+        return "Helmet";
+    }
+
+    public int getReqLevelAddition() {
+        switch (this) {
+            case CHESTPLATE:
+                return 8;
+            case LEGGINGS:
+                return 6;
+            case BOOTS:
+                return 2;
+        }
+
+        return 4;
+    }
 }

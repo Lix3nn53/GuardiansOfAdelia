@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import org.bukkit.ChatColor;
@@ -19,8 +18,9 @@ public class GearArmor implements RPGGear {
     private final String itemTag;
     private final int level;
     private ItemStack itemStack;
+    private RPGGearType gearType;
 
-    public GearArmor(String name, ItemTier tier, String itemTag, Material material, int level, RPGClass rpgClass, int health,
+    public GearArmor(String name, ItemTier tier, String itemTag, Material material, int level, RPGGearType gearType, int health,
                      int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
@@ -31,12 +31,9 @@ public class GearArmor implements RPGGear {
 
         StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
-        lore.add(ChatColor.GRAY + "Armor");
+        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: " + gearType.getDisplayName());
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
-        if (!rpgClass.equals(RPGClass.NO_CLASS)) {
-            lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Class: " + rpgClass.getClassString());
-        }
         lore.add("");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+" + health);
         lore.add(ChatColor.AQUA + "■ Defense: " + ChatColor.GRAY + "+" + defense);
@@ -65,9 +62,7 @@ public class GearArmor implements RPGGear {
         this.itemStack = new ItemStack(material);
         this.itemStack = RPGItemUtils.resetArmor(this.itemStack);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
-        if (!rpgClass.equals(RPGClass.NO_CLASS)) {
-            PersistentDataContainerUtil.putString("reqClass", rpgClass.toString(), this.itemStack);
-        }
+        PersistentDataContainerUtil.putString("gearType", gearType.toString(), this.itemStack);
         PersistentDataContainerUtil.putInteger("health", health, this.itemStack);
         PersistentDataContainerUtil.putInteger("defense", defense, this.itemStack);
         PersistentDataContainerUtil.putInteger("magicDefense", magicDefense, this.itemStack);
@@ -98,11 +93,17 @@ public class GearArmor implements RPGGear {
         this.tier = tier;
         this.itemTag = itemTag;
         this.level = level;
+        this.gearType = gearType;
     }
 
     @Override
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    @Override
+    public RPGGearType getGearType() {
+        return gearType;
     }
 
     @Override

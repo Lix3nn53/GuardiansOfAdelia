@@ -1,26 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.Items.config;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.Armors;
-import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
-import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveItemList;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.Weapons;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 
 public class ItemReferenceLoader {
 
     public static ItemStack loadItemReference(ConfigurationSection configurationSection) {
-        String itemType = configurationSection.getString("itemType");
+        /*String itemType = configurationSection.getString("itemType");
 
         if (itemType == null) {
             GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NULL ITEM TYPE");
@@ -58,7 +44,7 @@ public class ItemReferenceLoader {
             int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
             int minNumberOfStats = itemTier.getMinNumberOfStatsPassive();
 
-            return PassiveItemList.get(gearLevel, itemIndex, rpgSlotType, itemTier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+            return PassiveManager.get(gearLevel, itemIndex, rpgSlotType, itemTier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
         } else if (itemType.equals("Weapon")) {
             RPGClass rpgClass = RPGClass.valueOf(configurationSection.getString("rpgClass"));
             int gearLevel = configurationSection.getInt("gearLevel");
@@ -86,7 +72,7 @@ public class ItemReferenceLoader {
             return teleportScroll.getScroll(amount, reqLevel);
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH ITEM TYPE IN LOADER");
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH ITEM TYPE IN LOADER");*/
 
         return null;
     }

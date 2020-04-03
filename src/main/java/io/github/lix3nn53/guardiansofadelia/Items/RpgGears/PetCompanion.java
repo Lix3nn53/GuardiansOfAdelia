@@ -19,6 +19,7 @@ public class PetCompanion implements RPGGear {
     private final String itemTag;
     private final int level;
     private ItemStack itemStack;
+    private RPGGearType gearType = RPGGearType.EGG_COMPANION;
 
     public PetCompanion(Companion companion, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int petBaseDamage, int petBaseHealth) {
         String name = companion.getName();
@@ -28,7 +29,7 @@ public class PetCompanion implements RPGGear {
         int companionHealth = PetManager.getCompanionHealth(1, petBaseHealth);
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY + "Egg");
+        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: " + gearType.getDisplayName());
         lore.add("");
         lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Companion");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
@@ -63,6 +64,11 @@ public class PetCompanion implements RPGGear {
     @Override
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    @Override
+    public RPGGearType getGearType() {
+        return gearType;
     }
 
     @Override
