@@ -17,15 +17,18 @@ public class WeaponMelee implements RPGGear {
     private final ItemTier tier;
     private final String itemTag;
     private final int level;
-    private final RPGGearType gearType;
+    private final WeaponGearType gearType;
     private ItemStack itemStack;
 
-    public WeaponMelee(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, RPGGearType gearType, int damage,
-                       double bonusPercent, AttackSpeed attackSpeed, int minStatValue, int maxStatValue, int minNumberOfStats) {
+    public WeaponMelee(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, WeaponGearType gearType, int damage,
+                       AttackSpeed attackSpeed, int minStatValue, int maxStatValue, int minNumberOfStats) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + name;
         }
+
+        double bonusPercent = tier.getBonusMultiplier();
+
         damage = (int) ((damage * bonusPercent) + 0.5);
 
         List<String> lore = new ArrayList<>();
@@ -63,7 +66,7 @@ public class WeaponMelee implements RPGGear {
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
         PersistentDataContainerUtil.putString("gearType", gearType.toString(), this.itemStack);
 
-        this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSppedValue());
+        this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSpeedValue());
         this.itemStack = RPGItemUtils.clearThenSetDamageWhenInMainHand(this.itemStack, damage);
 
         PersistentDataContainerUtil.putInteger("meleeDamage", damage, this.itemStack);
@@ -103,8 +106,7 @@ public class WeaponMelee implements RPGGear {
         return itemStack;
     }
 
-    @Override
-    public RPGGearType getGearType() {
+    public WeaponGearType getGearType() {
         return gearType;
     }
 

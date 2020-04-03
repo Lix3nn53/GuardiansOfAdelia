@@ -14,18 +14,22 @@ import java.util.List;
 
 public class Shield implements RPGGear {
 
-    private final RPGGearType gearType;
+    private final ShieldGearType gearType;
     private final ItemTier tier;
     private final String itemTag;
     private final int level;
     private ItemStack itemStack;
 
-    public Shield(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, RPGGearType gearType, int health,
+    public Shield(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, ShieldGearType gearType, int health,
                   int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + name;
         }
+
+        double bonusPercent = tier.getBonusMultiplier();
+
+        health = (int) ((health * bonusPercent) + 0.5);
 
         List<String> lore = new ArrayList<>();
 
@@ -102,8 +106,7 @@ public class Shield implements RPGGear {
         return itemStack;
     }
 
-    @Override
-    public RPGGearType getGearType() {
+    public ShieldGearType getGearType() {
         return gearType;
     }
 

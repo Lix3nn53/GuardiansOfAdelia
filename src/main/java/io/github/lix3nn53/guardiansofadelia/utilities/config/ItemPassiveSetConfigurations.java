@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveSet;
 import org.bukkit.ChatColor;
@@ -65,15 +64,13 @@ public class ItemPassiveSetConfigurations {
             int itemCount = itemSetConfiguration.getInt("count");
 
             for (int i = 1; i <= itemCount; i++) {
-                String gearTypeStr = itemSetConfiguration.getString("i" + i + ".gearType");
-                RPGGearType gearType = RPGGearType.valueOf(gearTypeStr);
                 String nameStr = itemSetConfiguration.getString("i" + i + ".name");
                 int baseCustomModelData = itemSetConfiguration.getInt("i" + i + ".baseCustomModelData");
                 int baseLevel = itemSetConfiguration.getInt("i" + i + ".baseLevel");
 
                 String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-                PassiveSet passiveSet = new PassiveSet(name, baseCustomModelData, baseLevel, gearType);
+                PassiveSet passiveSet = new PassiveSet(name, baseCustomModelData, baseLevel);
 
                 PassiveManager.add(passiveSet);
             }

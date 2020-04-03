@@ -6,7 +6,8 @@ import org.bukkit.ChatColor;
 public enum AttackSpeed {
     SLOW,
     NORMAL,
-    FAST;
+    FAST,
+    RAPID;
 
     public String getLoreString() {
         ChatColor color = ChatColor.GRAY;
@@ -17,16 +18,21 @@ public enum AttackSpeed {
         } else if (this == AttackSpeed.FAST) {
             color = ChatColor.GRAY;
             name = "Fast";
+        } else if (this == AttackSpeed.RAPID) {
+            color = ChatColor.GRAY;
+            name = "Rapid";
         }
         return color + name;
     }
 
-    public double getSppedValue() {
-        double speed = -3D;
+    public double getSpeedValue() {
+        double speed = -4D;
         if (this == AttackSpeed.NORMAL) {
-            speed = -2.6;
+            speed = -3.2;
         } else if (this == AttackSpeed.FAST) {
-            speed = -2.1;
+            speed = -2.6;
+        } else if (this == AttackSpeed.RAPID) {
+            speed = -1.8;
         }
         return speed;
     }

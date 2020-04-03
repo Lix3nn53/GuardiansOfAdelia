@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.list.*;
@@ -228,5 +230,45 @@ public enum RPGClass {
             return HunterSkills.getSet();
         }
         return ArcherSkills.getSet();
+    }
+
+    public WeaponGearType getDefaultWeaponGearType() {
+        if (this == RPGClass.KNIGHT) {
+            return WeaponGearType.SWORD;
+        } else if (this == RPGClass.MAGE) {
+            return WeaponGearType.STAFF;
+        } else if (this == RPGClass.MONK) {
+            return WeaponGearType.SPEAR;
+        } else if (this == RPGClass.ROGUE) {
+            return WeaponGearType.DAGGER;
+        } else if (this == RPGClass.PALADIN) {
+            return WeaponGearType.MACE;
+        } else if (this == RPGClass.WARRIOR) {
+            return WeaponGearType.BATTLE_AXE;
+        } else if (this == RPGClass.HUNTER) {
+            return WeaponGearType.CROSSBOW;
+        }
+
+        return WeaponGearType.BOW;
+    }
+
+    public ArmorGearType getDefaultArmorGearType() {
+        if (this == RPGClass.KNIGHT) {
+            return ArmorGearType.HEAVY_ARMOR;
+        } else if (this == RPGClass.MAGE) {
+            return ArmorGearType.LIGHT_ARMOR;
+        } else if (this == RPGClass.MONK) {
+            return ArmorGearType.MEDIUM_ARMOR;
+        } else if (this == RPGClass.ROGUE) {
+            return ArmorGearType.LIGHT_ARMOR;
+        } else if (this == RPGClass.PALADIN) {
+            return ArmorGearType.HEAVY_ARMOR;
+        } else if (this == RPGClass.WARRIOR) {
+            return ArmorGearType.MEDIUM_ARMOR;
+        } else if (this == RPGClass.HUNTER) {
+            return ArmorGearType.LIGHT_ARMOR;
+        }
+
+        return ArmorGearType.LIGHT_ARMOR;
     }
 }

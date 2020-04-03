@@ -3,8 +3,9 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
@@ -77,7 +78,7 @@ public class JobCraftingConfigurations {
                 int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
 
                 for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
-                    List<String> gearTypeStrList = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".gearType");
+                    List<String> gearTypeStrList = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".weaponGearType");
                     int gearLevel = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
                     int index = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".index");
                     String tierStr = fileConfiguration.getString("level" + level + ".itemSet" + itemSet + ".tier");
@@ -87,7 +88,7 @@ public class JobCraftingConfigurations {
                     List<Integer> ingredientAmounts = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredientAmounts");
 
                     for (String gearTypeStr : gearTypeStrList) {
-                        RPGGearType gearType = RPGGearType.valueOf(gearTypeStr);
+                        WeaponGearType gearType = WeaponGearType.valueOf(gearTypeStr);
 
                         int minNumberOfStatsNormal = itemTier.getMinNumberOfStatsNormal();
                         int minStatValue = GearLevel.getMinStatValue(gearLevel);
@@ -112,7 +113,7 @@ public class JobCraftingConfigurations {
                 int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
 
                 for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
-                    List<String> gearTypeStrList = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".gearType");
+                    List<String> gearTypeStrList = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".armorGearType");
                     int gearLevel = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
                     int index = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".index");
                     String tierStr = fileConfiguration.getString("level" + level + ".itemSet" + itemSet + ".tier");
@@ -122,7 +123,7 @@ public class JobCraftingConfigurations {
                     List<Integer> ingredientAmounts = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredientAmounts");
 
                     for (String gearTypeStr : gearTypeStrList) {
-                        RPGGearType gearType = RPGGearType.valueOf(gearTypeStr);
+                        ArmorGearType gearType = ArmorGearType.valueOf(gearTypeStr);
 
                         int minNumberOfStatsNormal = itemTier.getMinNumberOfStatsNormal();
                         int minStatValue = GearLevel.getMinStatValue(gearLevel);
@@ -189,7 +190,7 @@ public class JobCraftingConfigurations {
                     int minNumberOfStatsPassive = itemTier.getMinNumberOfStatsPassive();
                     int minStatValue = GearLevel.getMinStatValue(gearLevel);
                     int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
-                    ItemStack passive = PassiveManager.get(RPGGearType.PASSIVE, gearLevel, index, rpgSlotType, itemTier, tag, minStatValue, maxStatValue, minNumberOfStatsPassive);
+                    ItemStack passive = PassiveManager.get(gearLevel, index, rpgSlotType, itemTier, tag, minStatValue, maxStatValue, minNumberOfStatsPassive);
 
                     CraftingManager.putCraftingTypeAndLevelToCraftingLine(passive, craftingType, level, ingredients, ingredientAmounts);
                 }

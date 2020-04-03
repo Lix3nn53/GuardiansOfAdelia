@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.armors;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.GearArmor;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -13,22 +13,20 @@ import java.util.List;
 
 public class ArmorManager {
 
-    private final static HashMap<String, List<ArmorSet>> gearTypeAndLevelToArmorSets = new HashMap<>();
+    private final static HashMap<Integer, List<ArmorSet>> gearLevelToArmorSets = new HashMap<>();
 
-    public static ItemStack get(ArmorType armorType, RPGGearType gearType, int gearLevel, int itemIndex, ItemTier tier, String itemTag, int minStatValue,
+    public static ItemStack get(ArmorType armorType, ArmorGearType gearType, int gearLevel, int itemIndex, ItemTier tier, String itemTag, int minStatValue,
                                 int maxStatValue, int minNumberOfStats) {
-
-        String key = gearType.toString() + gearLevel;
-        List<ArmorSet> templates = gearTypeAndLevelToArmorSets.get(key);
+        List<ArmorSet> templates = gearLevelToArmorSets.get(gearLevel);
 
         ArmorSet armorSet = templates.get(itemIndex);
 
         String name = armorSet.getName(armorType);
-        Material material = armorSet.getMaterial(armorType);
+        Material material = armorSet.getMaterial(armorType, gearType);
         int level = armorSet.getReqLevel(armorType);
-        int health = armorSet.getHealth(armorType);
-        int defense = armorSet.getDefense(armorType);
-        int magicDefense = armorSet.getMagicDefense(armorType);
+        int health = armorSet.getHealth(armorType, gearType);
+        int defense = armorSet.getDefense(armorType, gearType);
+        int magicDefense = armorSet.getMagicDefense(armorType, gearType);
 
         final GearArmor gearArmor = new GearArmor(name, tier, itemTag, material, level,
                 gearType, health,
@@ -38,17 +36,14 @@ public class ArmorManager {
     }
 
     public static void add(ArmorSet armorSet) {
-        RPGGearType gearType = armorSet.getGearType();
         int gearLevel = GearLevel.getGearLevel(armorSet.getBaseReqLevel());
 
-        String key = gearType.toString() + gearLevel;
-
         List<ArmorSet> list = new ArrayList<>();
-        if (gearTypeAndLevelToArmorSets.containsKey(key)) {
-            list = gearTypeAndLevelToArmorSets.get(key);
+        if (gearLevelToArmorSets.containsKey(gearLevel)) {
+            list = gearLevelToArmorSets.get(gearLevel);
         }
 
         list.add(armorSet);
-        gearTypeAndLevelToArmorSets.put(key, list);
+        gearLevelToArmorSets.put(gearLevel, list);
     }
 }

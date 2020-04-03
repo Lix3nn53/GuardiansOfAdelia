@@ -17,17 +17,22 @@ public class WeaponRanged implements RPGGear {
     private final ItemTier tier;
     private final String itemTag;
     private final int level;
-    private final RPGGearType gearType;
+    private final WeaponGearType gearType;
     private ItemStack itemStack;
 
-    public WeaponRanged(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, RPGGearType gearType,
-                        int damage, int rangedDamage, double bonusPercent, AttackSpeed attackSpeed, int minStatValue,
+    public WeaponRanged(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, WeaponGearType gearType,
+                        int rangedDamage, AttackSpeed attackSpeed, int minStatValue,
                         int maxStatValue, int minNumberOfStats) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + name;
         }
+
+        double bonusPercent = tier.getBonusMultiplier();
+        double meleeDamagePercent = 0.4;
+
         rangedDamage = (int) ((rangedDamage * bonusPercent) + 0.5);
+        int meleeDamage = (int) ((rangedDamage * meleeDamagePercent) + 0.5);
 
         List<String> lore = new ArrayList<>();
 
@@ -37,7 +42,7 @@ public class WeaponRanged implements RPGGear {
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         lore.add("");
-        lore.add(ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + "+" + damage);
+        lore.add(ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + "+" + meleeDamage);
         lore.add(ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+" + rangedDamage);
         lore.add(ChatColor.AQUA + "ø Attack Speed: " + attackSpeed.getLoreString());
         if (!statPassive.isEmpty()) {
@@ -65,10 +70,10 @@ public class WeaponRanged implements RPGGear {
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
         PersistentDataContainerUtil.putString("gearType", gearType.toString(), this.itemStack);
 
-        this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSppedValue());
-        this.itemStack = RPGItemUtils.clearThenSetDamageWhenInMainHand(this.itemStack, damage);
+        this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSpeedValue());
+        this.itemStack = RPGItemUtils.clearThenSetDamageWhenInMainHand(this.itemStack, meleeDamage);
 
-        PersistentDataContainerUtil.putInteger("meleeDamage", damage, this.itemStack);
+        PersistentDataContainerUtil.putInteger("meleeDamage", meleeDamage, this.itemStack);
         PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, this.itemStack);
 
         if (statPassive.getFire() != 0) {
@@ -106,8 +111,7 @@ public class WeaponRanged implements RPGGear {
         return itemStack;
     }
 
-    @Override
-    public RPGGearType getGearType() {
+    public WeaponGearType getGearType() {
         return gearType;
     }
 

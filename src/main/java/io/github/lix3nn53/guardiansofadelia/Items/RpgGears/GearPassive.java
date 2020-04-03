@@ -18,14 +18,15 @@ public class GearPassive implements RPGGear {
     private final String itemTag;
     private final int level;
     private ItemStack itemStack;
-    private RPGGearType gearType = RPGGearType.PASSIVE;
 
     public GearPassive(String name, ItemTier tier, String itemTag, int customModelData, RPGSlotType passiveType, int level,
-                       int minStatValue, int maxStatValue, int minNumberOfStats, double bonusPercent) {
+                       int minStatValue, int maxStatValue, int minNumberOfStats) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + name;
         }
+
+        double bonusPercent = tier.getBonusMultiplier();
 
         List<String> lore = new ArrayList<>();
 
@@ -36,7 +37,7 @@ public class GearPassive implements RPGGear {
         int finalLightning = (int) (statPassive.getLightning() * bonusPercent);
         int finalWind = (int) (statPassive.getWind() * bonusPercent);
 
-        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: " + gearType.getDisplayName());
+        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: Passive");
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         if (!statPassive.isEmpty()) {
@@ -96,11 +97,6 @@ public class GearPassive implements RPGGear {
     @Override
     public ItemStack getItemStack() {
         return itemStack;
-    }
-
-    @Override
-    public RPGGearType getGearType() {
-        return gearType;
     }
 
     @Override

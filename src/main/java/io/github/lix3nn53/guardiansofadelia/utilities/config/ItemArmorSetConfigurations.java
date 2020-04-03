@@ -1,8 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorMaterial;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSet;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -66,18 +64,16 @@ public class ItemArmorSetConfigurations {
             int itemCount = itemSetConfiguration.getInt("count");
 
             for (int i = 1; i <= itemCount; i++) {
-                String gearTypeStr = itemSetConfiguration.getString("i" + i + ".gearType");
-                RPGGearType gearType = RPGGearType.valueOf(gearTypeStr);
+                String gearTypeStr = itemSetConfiguration.getString("i" + i + ".armorGearType");
                 String nameStr = itemSetConfiguration.getString("i" + i + ".name");
                 int baseLevelReq = itemSetConfiguration.getInt("i" + i + ".baseLevelReq");
                 int health = itemSetConfiguration.getInt("i" + i + ".health");
                 int defense = itemSetConfiguration.getInt("i" + i + ".defense");
                 int magicDefense = itemSetConfiguration.getInt("i" + i + ".magicDefense");
-                ArmorMaterial armorMaterial = ArmorMaterial.valueOf(itemSetConfiguration.getString("i" + i + ".armorMaterial"));
 
                 String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-                ArmorSet armorSet = new ArmorSet(name, baseLevelReq, health, defense, magicDefense, armorMaterial, gearType);
+                ArmorSet armorSet = new ArmorSet(name, baseLevelReq, health, defense, magicDefense);
 
                 ArmorManager.add(armorSet);
             }

@@ -1,8 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ShieldItemTemplate;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ShieldManager;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ShieldSet;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemShieldConfigurations {
+public class ItemShieldSetConfigurations {
     private static final List<FileConfiguration> shieldConfigurations = new ArrayList<>();
     private static FileConfiguration fileConfiguration;
 
@@ -27,7 +26,7 @@ public class ItemShieldConfigurations {
     }
 
     private static void createConfig(String fileName, boolean isMain) {
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "items" + File.separator + "shields";
+        String filePath = ConfigManager.DATA_FOLDER + File.separator + "items" + File.separator + "shieldSets";
         File customConfigFile = new File(filePath, fileName);
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
@@ -65,8 +64,6 @@ public class ItemShieldConfigurations {
             int itemCount = itemSetConfiguration.getInt("count");
 
             for (int i = 1; i <= itemCount; i++) {
-                String gearTypeStr = itemSetConfiguration.getString("i" + i + ".gearType");
-                RPGGearType gearType = RPGGearType.valueOf(gearTypeStr);
                 String nameStr = itemSetConfiguration.getString("i" + i + ".name");
                 int customModelData = itemSetConfiguration.getInt("i" + i + ".customModelData");
                 int level = itemSetConfiguration.getInt("i" + i + ".level");
@@ -76,9 +73,9 @@ public class ItemShieldConfigurations {
 
                 String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-                ShieldItemTemplate template = new ShieldItemTemplate(name, customModelData, level, health, defense, magicDefense, gearType);
+                ShieldSet shieldSet = new ShieldSet(name, customModelData, level, health, defense, magicDefense);
 
-                ShieldManager.add(template);
+                ShieldManager.add(shieldSet);
             }
         }
     }

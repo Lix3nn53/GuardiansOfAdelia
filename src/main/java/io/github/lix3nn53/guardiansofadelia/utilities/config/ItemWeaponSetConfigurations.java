@@ -1,8 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponItemTemplate;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
+import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponSet;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemWeaponConfigurations {
+public class ItemWeaponSetConfigurations {
     private static final List<FileConfiguration> weaponSetConfigurations = new ArrayList<>();
     private static FileConfiguration fileConfiguration;
 
@@ -27,7 +26,7 @@ public class ItemWeaponConfigurations {
     }
 
     private static void createConfig(String fileName, boolean isMain) {
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "items" + File.separator + "weapons";
+        String filePath = ConfigManager.DATA_FOLDER + File.separator + "items" + File.separator + "weaponSets";
         File customConfigFile = new File(filePath, fileName);
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
@@ -65,8 +64,6 @@ public class ItemWeaponConfigurations {
             int itemCount = itemSetConfiguration.getInt("count");
 
             for (int i = 1; i <= itemCount; i++) {
-                String gearTypeStr = itemSetConfiguration.getString("i" + i + ".gearType");
-                RPGGearType gearType = RPGGearType.valueOf(gearTypeStr);
                 String nameStr = itemSetConfiguration.getString("i" + i + ".name");
                 int customModelData = itemSetConfiguration.getInt("i" + i + ".customModelData");
                 int level = itemSetConfiguration.getInt("i" + i + ".level");
@@ -74,9 +71,9 @@ public class ItemWeaponConfigurations {
 
                 String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-                WeaponItemTemplate weaponItemTemplate = new WeaponItemTemplate(name, customModelData, level, damage, gearType);
+                WeaponSet weaponSet = new WeaponSet(name, customModelData, level, damage);
 
-                WeaponManager.add(weaponItemTemplate);
+                WeaponManager.add(weaponSet);
             }
         }
     }

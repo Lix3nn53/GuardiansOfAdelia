@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -37,7 +37,9 @@ public class GiveWeaponAction implements Action {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                ItemStack weapon = WeaponManager.get(RPGGearType.SWORD, gearLevel, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+                WeaponGearType defaultWeaponGearType = activeCharacter.getRpgClass().getDefaultWeaponGearType();
+
+                ItemStack weapon = WeaponManager.get(defaultWeaponGearType, gearLevel, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
                 InventoryUtils.giveItemToPlayer(player, weapon);
             }
         }

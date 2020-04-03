@@ -18,14 +18,18 @@ public class GearArmor implements RPGGear {
     private final String itemTag;
     private final int level;
     private ItemStack itemStack;
-    private RPGGearType gearType;
+    private ArmorGearType gearType;
 
-    public GearArmor(String name, ItemTier tier, String itemTag, Material material, int level, RPGGearType gearType, int health,
+    public GearArmor(String name, ItemTier tier, String itemTag, Material material, int level, ArmorGearType gearType, int health,
                      int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + name;
         }
+
+        double bonusPercent = tier.getBonusMultiplier();
+
+        health = (int) ((health * bonusPercent) + 0.5);
 
         List<String> lore = new ArrayList<>();
 
@@ -101,8 +105,7 @@ public class GearArmor implements RPGGear {
         return itemStack;
     }
 
-    @Override
-    public RPGGearType getGearType() {
+    public ArmorGearType getGearType() {
         return gearType;
     }
 

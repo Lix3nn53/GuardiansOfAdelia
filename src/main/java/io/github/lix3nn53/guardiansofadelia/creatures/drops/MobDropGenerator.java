@@ -1,10 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.drops;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
@@ -43,29 +46,48 @@ public class MobDropGenerator {
 
             Random rand = new Random();
 
-            // Obtain a number between [1 - 7].
-            int rpgClassRandom = rand.nextInt(7);
-            RPGGearType gearType = RPGGearType.values()[rpgClassRandom + 1]; //+1 to ignore NO_CLASS
-
-            // Obtain a number between [0 - 2].
+            // Obtain a number to select between weapon, <armor or shield> and passive
             int dropType = rand.nextInt(3);
 
             if (dropType == 0) {
+                WeaponGearType[] values = WeaponGearType.values();
+                int gearRandom = rand.nextInt(values.length);
+
+                WeaponGearType gearType = values[gearRandom];
+
                 ItemStack droppedItem = WeaponManager.get(gearType, gearLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);
             } else if (dropType == 1) {
-                // Obtain a number between [0 - 3].
-                int armorTypeRandom = rand.nextInt(4);
-                ArmorType armorType = ArmorType.values()[armorTypeRandom];
-                ItemStack droppedItem = ArmorManager.get(armorType, gearType, gearLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                drops.add(droppedItem);
+                double shieldChange = 0.2;
+                double armorOrShieldRandom = Math.random(); //armor or shield?
+
+                if (armorOrShieldRandom < shieldChange) { //shield
+                    ShieldGearType[] values = ShieldGearType.values();
+                    int gearRandom = rand.nextInt(values.length);
+
+                    ShieldGearType gearType = values[gearRandom];
+
+                    ItemStack droppedItem = ShieldManager.get(gearType, gearLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    drops.add(droppedItem);
+                } else {
+                    ArmorType[] armorTypes = ArmorType.values();
+                    int armorTypeRandom = rand.nextInt(armorTypes.length);
+                    ArmorType armorType = armorTypes[armorTypeRandom];
+
+                    ArmorGearType[] armorGearTypes = ArmorGearType.values();
+                    int armorGearTypeRandom = rand.nextInt(armorGearTypes.length);
+                    ArmorGearType armorGearType = armorGearTypes[armorGearTypeRandom];
+
+                    ItemStack droppedItem = ArmorManager.get(armorType, armorGearType, gearLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    drops.add(droppedItem);
+                }
             } else if (dropType == 2) {
                 minNumberOfStats = tier.getMinNumberOfStatsPassive();
 
                 int passiveType = rand.nextInt(4);
                 RPGSlotType rpgSlotType = RPGSlotType.values()[passiveType + 1]; //+1 to ignore parrot
 
-                ItemStack droppedItem = PassiveManager.get(RPGGearType.PASSIVE, gearLevel, 0, rpgSlotType, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack droppedItem = PassiveManager.get(gearLevel, 0, rpgSlotType, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 drops.add(droppedItem);
             }
         }

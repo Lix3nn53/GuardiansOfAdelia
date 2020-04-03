@@ -49,8 +49,8 @@ public class ConfigManager {
         DungeonConfiguration.createConfigs();
         ItemArmorSetConfigurations.createConfigs();
         ItemPassiveSetConfigurations.createConfigs();
-        ItemShieldConfigurations.createConfigs();
-        ItemWeaponConfigurations.createConfigs();
+        ItemShieldSetConfigurations.createConfigs();
+        ItemWeaponSetConfigurations.createConfigs();
         JobCraftingConfigurations.createConfigs();
         SpawnerConfiguration.createConfigs();
         QuestConfigurations.createConfigs();
@@ -69,8 +69,8 @@ public class ConfigManager {
         DungeonConfiguration.loadConfigs();
         ItemArmorSetConfigurations.loadConfigs();
         ItemPassiveSetConfigurations.loadConfigs();
-        ItemShieldConfigurations.loadConfigs();
-        ItemWeaponConfigurations.loadConfigs();
+        ItemShieldSetConfigurations.loadConfigs();
+        ItemWeaponSetConfigurations.loadConfigs();
         JobCraftingConfigurations.loadConfigs();
         SpawnerConfiguration.loadConfigs();
         QuestConfigurations.loadConfigs();

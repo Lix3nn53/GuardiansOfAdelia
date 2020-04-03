@@ -1,15 +1,21 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ShieldManager;
+import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
+import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
@@ -163,70 +169,70 @@ public enum MerchantPageType {
         return new EnchantGui(player);
     }
 
-    /*private GuiBookGeneric getCompanionShop(int shopLevel, int shopNpc) {
+    private GuiBookGeneric getCompanionShop(int shopLevel, int shopNpc) {
         List<MerchantGuiLine> lines = new ArrayList<>();
         lines.add(new MerchantGuiLine());
         int lineIndex = 0;
 
         if (shopLevel == 1) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.WOLF, ItemTier.COMMON, 20), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.WOLF, 20), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.PIG, ItemTier.COMMON, 20), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.PIG, 20), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.SHEEP, ItemTier.COMMON, 20), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.SHEEP, 20), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.COW, ItemTier.COMMON, 20), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.COW, 20), 1);
         } else if (shopLevel == 3) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_ALL_BLACK, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_BLACK, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_BRITISH_SHORTHAIR, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_CALICO, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_JELLIE, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_PERSIAN, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_ALL_BLACK, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_BLACK, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_BRITISH_SHORTHAIR, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_CALICO, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_JELLIE, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_PERSIAN, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_RAGDOLL, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_RED, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_SIAMESE, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_TABBY, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_WHITE, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_RAGDOLL, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_RED, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_SIAMESE, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_TABBY, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_WHITE, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BLACK, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BLACK_AND_WHITE, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BROWN, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_GOLD, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_SALT_AND_PEPPER, ItemTier.COMMON, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_WHITE, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BLACK, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BLACK_AND_WHITE, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BROWN, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_GOLD, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_SALT_AND_PEPPER, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_WHITE, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.CHICKEN, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CHICKEN, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.CHOCOLATE, ItemTier.COMMON, 30), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.CHOCOLATE, 30), 1);
         } else if (shopLevel == 4) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.POLAR_BEAR, ItemTier.COMMON, 50), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.POLAR_BEAR, 50), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.PANDA, ItemTier.COMMON, 50), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.PANDA, 50), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.TURTLE, ItemTier.COMMON, 50), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.TURTLE, 50), 1);
         } else if (shopLevel == 5) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.FOX_RED, ItemTier.COMMON, 70), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.FOX_SNOW, ItemTier.COMMON, 70), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.FOX_RED, 70), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.FOX_SNOW, 70), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.ICE_CREAM, ItemTier.COMMON, 70), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.ICE_CREAM, 70), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.MINI_DRAGON, ItemTier.COMMON, 70), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.MINI_DRAGON, 70), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.VEX, ItemTier.COMMON, 70), 1);
+            lines.get(lineIndex).addWord(Companions.get(Companion.VEX, 70), 1);
         }
 
         List<GuiPage> guiPages = new ArrayList<>();
@@ -254,13 +260,13 @@ public enum MerchantPageType {
         lines.add(new MerchantGuiLine());
         int lineIndex = 0;
 
-        lines.get(lineIndex).addWord(Mounts.get(Mount.BLACK, ItemTier.COMMON, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.BROWN, ItemTier.COMMON, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.CHESTNUT, ItemTier.COMMON, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.CREAMY, ItemTier.COMMON, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.DARK_BROWN, ItemTier.COMMON, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.GRAY, ItemTier.COMMON, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.WHITE, ItemTier.COMMON, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.BLACK, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.BROWN, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.CHESTNUT, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.CREAMY, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.DARK_BROWN, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.GRAY, 40), 1);
+        lines.get(lineIndex).addWord(Mounts.get(Mount.WHITE, 40), 1);
 
         List<GuiPage> guiPages = new ArrayList<>();
         guiPages.add(new GuiPage());
@@ -280,7 +286,7 @@ public enum MerchantPageType {
             weapon_shop.addPage(page);
         }
         return weapon_shop;
-    }*/
+    }
 
     private GuiBookGeneric getWeaponShop(int shopLevel, int shopNpc) {
         List<MerchantGuiLine> lines = new ArrayList<>();
@@ -293,7 +299,7 @@ public enum MerchantPageType {
         int lineIndex = 0;
 
         if (shopLevel == 1) {
-            for (RPGGearType gearType : RPGGearType.values()) {
+            for (WeaponGearType gearType : WeaponGearType.values()) {
                 ItemStack weapon = WeaponManager.get(gearType, 1, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 4);
@@ -304,7 +310,7 @@ public enum MerchantPageType {
             }
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            for (RPGGearType gearType : RPGGearType.values()) {
+            for (WeaponGearType gearType : WeaponGearType.values()) {
                 ItemStack weapon = WeaponManager.get(gearType, 2, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 8);
@@ -315,7 +321,7 @@ public enum MerchantPageType {
             }
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            for (RPGGearType gearType : RPGGearType.values()) {
+            for (WeaponGearType gearType : WeaponGearType.values()) {
                 ItemStack weapon = WeaponManager.get(gearType, 3, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 14);
@@ -325,7 +331,7 @@ public enum MerchantPageType {
                 }
             }
         } else if (shopLevel == 3) {
-            for (RPGGearType gearType : RPGGearType.values()) {
+            for (WeaponGearType gearType : WeaponGearType.values()) {
                 ItemStack weapon = WeaponManager.get(gearType, 4, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 21);
@@ -336,7 +342,7 @@ public enum MerchantPageType {
             }
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            for (RPGGearType gearType : RPGGearType.values()) {
+            for (WeaponGearType gearType : WeaponGearType.values()) {
                 ItemStack weapon = WeaponManager.get(gearType, 5, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 30);
@@ -347,7 +353,7 @@ public enum MerchantPageType {
             }
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            for (RPGGearType gearType : RPGGearType.values()) {
+            for (WeaponGearType gearType : WeaponGearType.values()) {
                 ItemStack weapon = WeaponManager.get(gearType, 6, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 42);
@@ -357,7 +363,7 @@ public enum MerchantPageType {
                 }
             }
         } else if (shopLevel == 4) {
-            for (RPGGearType gearType : RPGGearType.values()) {
+            for (WeaponGearType gearType : WeaponGearType.values()) {
                 ItemStack weapon = WeaponManager.get(gearType, 7, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 55);
@@ -368,7 +374,7 @@ public enum MerchantPageType {
             }
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            for (RPGGearType gearType : RPGGearType.values()) {
+            for (WeaponGearType gearType : WeaponGearType.values()) {
                 ItemStack weapon = WeaponManager.get(gearType, 8, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 70);
@@ -378,7 +384,7 @@ public enum MerchantPageType {
                 }
             }
         } else if (shopLevel == 5) {
-            for (RPGGearType gearType : RPGGearType.values()) {
+            for (WeaponGearType gearType : WeaponGearType.values()) {
                 ItemStack weapon = WeaponManager.get(gearType, 9, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 120);
@@ -389,7 +395,7 @@ public enum MerchantPageType {
             }
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            for (RPGGearType gearType : RPGGearType.values()) {
+            for (WeaponGearType gearType : WeaponGearType.values()) {
                 ItemStack weapon = WeaponManager.get(gearType, 10, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, 160);
@@ -438,7 +444,7 @@ public enum MerchantPageType {
                 } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                     price = 4;
                 }
-                ItemStack weapon = ArmorManager.get(armorType, RPGGearType.LIGHT_ARMOR, 1, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 1, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -456,7 +462,7 @@ public enum MerchantPageType {
                 } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                     price = 8;
                 }
-                ItemStack weapon = ArmorManager.get(armorType, RPGGearType.LIGHT_ARMOR, 2, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 2, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -478,7 +484,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 14;
                     }
-                    ItemStack weapon = ArmorManager.get(armorType, RPGGearType.LIGHT_ARMOR, 1, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 1, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -501,7 +507,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 21;
                     }
-                    ItemStack weapon = ArmorManager.get(armorType, RPGGearType.LIGHT_ARMOR, 2, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 2, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -524,7 +530,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 30;
                     }
-                    ItemStack weapon = ArmorManager.get(armorType, RPGGearType.LIGHT_ARMOR, 3, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 3, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -548,7 +554,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 42;
                     }
-                    ItemStack weapon = ArmorManager.get(armorType, RPGGearType.LIGHT_ARMOR, 4, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 4, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -571,7 +577,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 55;
                     }
-                    ItemStack weapon = ArmorManager.get(armorType, RPGGearType.LIGHT_ARMOR, 5, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 5, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -595,7 +601,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 70;
                     }
-                    ItemStack weapon = ArmorManager.get(armorType, RPGGearType.LIGHT_ARMOR, 6, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 6, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -618,7 +624,7 @@ public enum MerchantPageType {
                     } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                         price = 120;
                     }
-                    ItemStack weapon = ArmorManager.get(armorType, RPGGearType.LIGHT_ARMOR, 7, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 7, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                     if (lines.get(lineIndex).isEmpty()) {
                         lines.get(lineIndex).addWord(weapon, price);
                     } else {
@@ -671,7 +677,7 @@ public enum MerchantPageType {
                     price = 10;
                 }
                 RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = ShieldManager.get(RPGGearType.SHIELD, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -689,7 +695,7 @@ public enum MerchantPageType {
                     price = 10;
                 }
                 RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = ShieldManager.get(RPGGearType.SHIELD, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -706,7 +712,7 @@ public enum MerchantPageType {
                     price = 28;
                 }
                 RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = ShieldManager.get(RPGGearType.SHIELD, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -724,7 +730,7 @@ public enum MerchantPageType {
                     price = 28;
                 }
                 RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = ShieldManager.get(RPGGearType.SHIELD, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -739,7 +745,7 @@ public enum MerchantPageType {
                     price = 50;
                 }
                 RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = ShieldManager.get(RPGGearType.SHIELD, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -755,7 +761,7 @@ public enum MerchantPageType {
                     price = 50;
                 }
                 RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = ShieldManager.get(RPGGearType.SHIELD, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -770,7 +776,7 @@ public enum MerchantPageType {
                     price = 120;
                 }
                 RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = ShieldManager.get(RPGGearType.SHIELD, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {
@@ -786,7 +792,7 @@ public enum MerchantPageType {
                     price = 120;
                 }
                 RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = ShieldManager.get(RPGGearType.SHIELD, i, 0, tier, "", tier.getBonusMultiplier(), minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(weapon, price);
                 } else {

@@ -2,8 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.Items.list.armors;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.RPGGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.Shield;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -13,42 +13,37 @@ import java.util.List;
 
 public class ShieldManager {
 
-    private final static HashMap<String, List<ShieldItemTemplate>> gearTypeAndLevelToShields = new HashMap<>();
+    private final static HashMap<Integer, List<ShieldSet>> gearLevelToShields = new HashMap<>();
 
-    public static ItemStack get(RPGGearType gearType, int gearLevel, int itemIndex, ItemTier tier, String itemTag, double healthBonus, int minStatValue,
+    public static ItemStack get(ShieldGearType gearType, int gearLevel, int itemIndex, ItemTier tier, String itemTag, int minStatValue,
                                 int maxStatValue, int minNumberOfStats) {
-        String key = gearType.toString() + gearLevel;
         Material material = Material.SHIELD;
 
-        List<ShieldItemTemplate> shieldItemTemplates = gearTypeAndLevelToShields.get(key);
-        ShieldItemTemplate template = shieldItemTemplates.get(itemIndex);
+        List<ShieldSet> shieldItemTemplates = gearLevelToShields.get(gearLevel);
+        ShieldSet template = shieldItemTemplates.get(itemIndex);
 
-        String name = template.getName();
+        String name = template.getName(gearType);
         int customModelData = template.getCustomModelData();
-        int defense = template.getDefense();
-        int magicDefense = template.getMagicDefense();
-        int health = template.getHealth();
-        int level = template.getLevel();
-
-        health = (int) ((health * healthBonus) + 0.5);
+        int defense = template.getDefense(gearType);
+        int magicDefense = template.getMagicDefense(gearType);
+        int health = template.getHealth(gearType);
+        int level = template.getReqLevel();
 
         final Shield shield = new Shield(name, tier, itemTag, material, customModelData, level,
-                RPGGearType.SHIELD, health,
+                gearType, health,
                 defense, magicDefense, minStatValue, maxStatValue, minNumberOfStats);
         return shield.getItemStack();
     }
 
-    public static void add(ShieldItemTemplate shieldItemTemplate) {
-        RPGGearType gearType = shieldItemTemplate.getGearType();
-        int gearLevel = GearLevel.getGearLevel(shieldItemTemplate.getLevel());
-        String key = gearType.toString() + gearLevel;
+    public static void add(ShieldSet shieldSet) {
+        int gearLevel = GearLevel.getGearLevel(shieldSet.getReqLevel());
 
-        List<ShieldItemTemplate> list = new ArrayList<>();
-        if (gearTypeAndLevelToShields.containsKey(key)) {
-            list = gearTypeAndLevelToShields.get(key);
+        List<ShieldSet> list = new ArrayList<>();
+        if (gearLevelToShields.containsKey(gearLevel)) {
+            list = gearLevelToShields.get(gearLevel);
         }
 
-        list.add(shieldItemTemplate);
-        gearTypeAndLevelToShields.put(key, list);
+        list.add(shieldSet);
+        gearLevelToShields.put(gearLevel, list);
     }
 }
