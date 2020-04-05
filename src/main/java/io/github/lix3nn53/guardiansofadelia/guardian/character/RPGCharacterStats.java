@@ -278,20 +278,7 @@ public class RPGCharacterStats {
         Material type = itemInMainHand.getType();
 
         if (type.equals(Material.DIAMOND_SHOVEL)) {
-            if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "reqLevel")) {
-                int reqLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "reqLevel");
-                if (player.getLevel() < reqLevel) {
-                    return lightningBonus;
-                }
-            }
-
-            if (PersistentDataContainerUtil.hasString(itemInMainHand, "reqClass")) {
-                String reqClassString = PersistentDataContainerUtil.getString(itemInMainHand, "reqClass");
-                RPGClass reqClass = RPGClass.valueOf(reqClassString);
-                if (!rpgClass.equals(reqClass)) {
-                    return lightningBonus;
-                }
-            }
+            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return lightningBonus;
 
             if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "magicDamage")) {
                 return lightningBonus + PersistentDataContainerUtil.getInteger(itemInMainHand, "magicDamage");
@@ -309,20 +296,7 @@ public class RPGCharacterStats {
 
         if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
                 || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
-            if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "reqLevel")) {
-                int reqLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "reqLevel");
-                if (player.getLevel() < reqLevel) {
-                    return bonus;
-                }
-            }
-
-            if (PersistentDataContainerUtil.hasString(itemInMainHand, "reqClass")) {
-                String reqClassString = PersistentDataContainerUtil.getString(itemInMainHand, "reqClass");
-                RPGClass reqClass = RPGClass.valueOf(reqClassString);
-                if (!rpgClass.equals(reqClass)) {
-                    return bonus;
-                }
-            }
+            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return bonus;
 
             StatType statType = StatUtils.getStatType(type);
 
@@ -349,20 +323,7 @@ public class RPGCharacterStats {
         Material type = itemInMainHand.getType();
 
         if (type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
-            if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "reqLevel")) {
-                int reqLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "reqLevel");
-                if (player.getLevel() < reqLevel) {
-                    return fireBonus;
-                }
-            }
-
-            if (PersistentDataContainerUtil.hasString(itemInMainHand, "reqClass")) {
-                String reqClassString = PersistentDataContainerUtil.getString(itemInMainHand, "reqClass");
-                RPGClass reqClass = RPGClass.valueOf(reqClassString);
-                if (!rpgClass.equals(reqClass)) {
-                    return fireBonus;
-                }
-            }
+            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return fireBonus;
 
             StatType statType = StatUtils.getStatType(type);
 

@@ -30,8 +30,6 @@ import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildInvite;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
-import io.github.lix3nn53.guardiansofadelia.jobs.Job;
-import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
@@ -636,21 +634,8 @@ public class MyInventoryClickEvent implements Listener {
                 }
             }
         } else if (title.equals(ChatColor.YELLOW + "Job")) {
-            if (rpgCharacter != null) {
-                if (!rpgCharacter.hasJob()) {
-                    if (currentType.equals(Material.RED_WOOL)) {
-                        rpgCharacter.setJob(new Job(JobType.WEAPONSMITH));
-                    } else if (currentType.equals(Material.LIGHT_BLUE_WOOL)) {
-                        rpgCharacter.setJob(new Job(JobType.ARMORSMITH));
-                    } else if (currentType.equals(Material.MAGENTA_WOOL)) {
-                        rpgCharacter.setJob(new Job(JobType.ALCHEMIST));
-                    } else if (currentType.equals(Material.YELLOW_WOOL)) {
-                        rpgCharacter.setJob(new Job(JobType.JEWELLER));
-                    }
-                    GuiGeneric job = MenuList.job(player);
-                    job.openInventory(player);
-                }
-            }
+            //TODO click events on job menu?
+            //TODO change the name of job menu to crafting menu?
         } else if (title.equals(ChatColor.DARK_PURPLE + "Guild")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 if (currentName.equals(ChatColor.RED + "Join Guild War")) {
@@ -814,16 +799,15 @@ public class MyInventoryClickEvent implements Listener {
                 if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                     if (currentType.equals(Material.STONE_PICKAXE)) {
                         if (rpgCharacter != null) {
-                            Job job = rpgCharacter.getJob();
-                            int jobLevel = job.getLevel();
-
                             String replace = title.replace(" Crafting Level Selection", "");
                             CraftingType craftingType = CraftingType.valueOf(replace);
+
+                            int currentLevel = rpgCharacter.getCraftingStats().getCurrentLevel(craftingType);
 
                             String s = currentName.replaceAll(ChatColor.GOLD + "Level ", "");
                             int craftingLevel = Integer.parseInt(s);
 
-                            if (jobLevel >= craftingLevel) {
+                            if (currentLevel >= craftingLevel) {
                                 GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, craftingLevel);
                                 craftingBook.openInventory(player);
                             } else {
@@ -866,7 +850,7 @@ public class MyInventoryClickEvent implements Listener {
                                     if (hasIngredients) {
                                         ItemStack clone = current.clone();
 
-                                        String[] split = title.split("Level ");
+                                        String[] split = title.split(" Crafting Level ");
 
                                         String levelStrWithPage = split[1];
 
@@ -881,7 +865,10 @@ public class MyInventoryClickEvent implements Listener {
                                             InventoryUtils.removeItemFromInventory(player.getInventory(), ingredient, ingredient.getAmount());
                                         }
                                         InventoryUtils.giveItemToPlayer(player, clone);
-                                        rpgCharacter.getJob().addExperience(player, jobExpToGive);
+
+                                        CraftingType craftingType = CraftingType.valueOf(split[0]);
+
+                                        rpgCharacter.getCraftingStats().addExperience(player, craftingType, jobExpToGive);
                                     }
                                 }
                             }

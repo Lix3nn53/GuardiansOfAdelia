@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
-import io.github.lix3nn53.guardiansofadelia.jobs.Job;
+import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import org.bukkit.entity.Player;
@@ -14,12 +14,17 @@ import java.util.Optional;
 public final class RPGCharacter {
 
     private final RPGInventory rpgInventory = new RPGInventory();
+
     private final RPGClass rpgClass;
     private final SkillBar skillBar;
+
     private final RPGCharacterStats rpgCharacterStats;
+
     private List<Quest> questList = new ArrayList<>();
     private List<Integer> turnedInQuests = new ArrayList<Integer>();
-    private Job job;
+
+    private final RPGCharacterCraftingStats craftingStats = new RPGCharacterCraftingStats();
+
     private ChatTag chatTag = ChatTag.NOVICE;
 
     public RPGCharacter(RPGClass rpgClass, Player player, int one, int two, int three, int passive, int ultimate) {
@@ -85,18 +90,6 @@ public final class RPGCharacter {
         return rpgInventory;
     }
 
-    public boolean hasJob() {
-        return job != null;
-    }
-
-    public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
-    }
-
     public ChatTag getChatTag() {
         return chatTag;
     }
@@ -116,5 +109,9 @@ public final class RPGCharacter {
 
     public SkillBar getSkillBar() {
         return skillBar;
+    }
+
+    public RPGCharacterCraftingStats getCraftingStats() {
+        return craftingStats;
     }
 }

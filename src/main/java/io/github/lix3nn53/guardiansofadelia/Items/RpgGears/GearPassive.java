@@ -37,7 +37,7 @@ public class GearPassive implements RPGGear {
         int finalLightning = (int) (statPassive.getLightning() * bonusPercent);
         int finalWind = (int) (statPassive.getWind() * bonusPercent);
 
-        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: Passive");
+        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Passive Gear");
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         if (!statPassive.isEmpty()) {

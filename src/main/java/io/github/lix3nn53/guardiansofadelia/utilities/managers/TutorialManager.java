@@ -8,7 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ShieldManager;
+import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -70,10 +70,10 @@ public class TutorialManager {
 
         ArmorGearType armorGearType = rpgClass.getDefaultArmorGearType();
 
-        ItemStack helmet = ArmorManager.get(ArmorType.HELMET, armorGearType, 7, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack chest = ArmorManager.get(ArmorType.CHESTPLATE, armorGearType, 7, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack leggings = ArmorManager.get(ArmorType.LEGGINGS, armorGearType, 7, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack boots = ArmorManager.get(ArmorType.BOOTS, armorGearType, 7, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack helmet = ArmorManager.get(ArmorType.HELMET, armorGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack chest = ArmorManager.get(ArmorType.CHESTPLATE, armorGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack leggings = ArmorManager.get(ArmorType.LEGGINGS, armorGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack boots = ArmorManager.get(ArmorType.BOOTS, armorGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
 
         PlayerInventory playerInventory = player.getInventory();
 
@@ -84,13 +84,13 @@ public class TutorialManager {
 
         WeaponGearType mainhandGearType = rpgClass.getDefaultWeaponGearType();
 
-        ItemStack mainHand = WeaponManager.get(mainhandGearType, 10, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack mainHand = WeaponManager.get(mainhandGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
         playerInventory.setItem(4, mainHand);
 
         if (rpgClass.equals(RPGClass.KNIGHT) || rpgClass.equals(RPGClass.PALADIN)) {
             ShieldGearType shieldGearType = ShieldGearType.SHIELD;
 
-            ItemStack shield = ShieldManager.get(shieldGearType, 10, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+            ItemStack shield = ShieldManager.get(shieldGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
 
             playerInventory.setItemInOffHand(shield);
         } else if (rpgClass.equals(RPGClass.ROGUE)) {

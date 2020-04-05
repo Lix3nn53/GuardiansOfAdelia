@@ -10,15 +10,14 @@ import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
+import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringTool;
@@ -248,11 +247,11 @@ public enum MerchantPageType {
             }
         }
 
-        GuiBookGeneric weapon_shop = new GuiBookGeneric("Companion Shop", shopNpc);
+        GuiBookGeneric merchantShop = new GuiBookGeneric("Companion Shop", shopNpc);
         for (GuiPage page : guiPages) {
-            weapon_shop.addPage(page);
+            merchantShop.addPage(page);
         }
-        return weapon_shop;
+        return merchantShop;
     }
 
     private GuiBookGeneric getMountShop(int shopLevel, int shopNpc) {
@@ -281,11 +280,11 @@ public enum MerchantPageType {
             }
         }
 
-        GuiBookGeneric weapon_shop = new GuiBookGeneric("Mount Shop", shopNpc);
+        GuiBookGeneric merchantShop = new GuiBookGeneric("Mount Shop", shopNpc);
         for (GuiPage page : guiPages) {
-            weapon_shop.addPage(page);
+            merchantShop.addPage(page);
         }
-        return weapon_shop;
+        return merchantShop;
     }
 
     private GuiBookGeneric getWeaponShop(int shopLevel, int shopNpc) {
@@ -298,111 +297,58 @@ public enum MerchantPageType {
         int minNumberOfStats = 0;
         int lineIndex = 0;
 
-        if (shopLevel == 1) {
-            for (WeaponGearType gearType : WeaponGearType.values()) {
-                ItemStack weapon = WeaponManager.get(gearType, 1, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 4);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
+        lines.add(new MerchantGuiLine());
+
+        for (WeaponGearType weaponGearType : WeaponGearType.values()) {
+            int price = 99999999;
+
+            switch (weaponGearType) {
+                case SWORD:
+                    price = 3;
+                    break;
+                case MACE:
+                    price = 3;
+                    break;
+                case DAGGER:
+                    price = 3;
+                    break;
+                case WAR_AXE:
+                    price = 3;
+                    break;
+                case BATTLE_AXE:
+                    price = 3;
+                    break;
+                case GREAT_SWORD:
+                    price = 3;
+                    break;
+                case WAR_HAMMER:
+                    price = 3;
+                    break;
+                case SPEAR:
+                    price = 3;
+                    break;
+                case BOW:
+                    price = 3;
+                    break;
+                case CROSSBOW:
+                    price = 3;
+                    break;
+                case WAND:
+                    price = 3;
+                    break;
+                case STAFF:
+                    price = 3;
+                    break;
             }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            for (WeaponGearType gearType : WeaponGearType.values()) {
-                ItemStack weapon = WeaponManager.get(gearType, 2, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 8);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            for (WeaponGearType gearType : WeaponGearType.values()) {
-                ItemStack weapon = WeaponManager.get(gearType, 3, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 14);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-        } else if (shopLevel == 3) {
-            for (WeaponGearType gearType : WeaponGearType.values()) {
-                ItemStack weapon = WeaponManager.get(gearType, 4, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 21);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            for (WeaponGearType gearType : WeaponGearType.values()) {
-                ItemStack weapon = WeaponManager.get(gearType, 5, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 30);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            for (WeaponGearType gearType : WeaponGearType.values()) {
-                ItemStack weapon = WeaponManager.get(gearType, 6, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 42);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-        } else if (shopLevel == 4) {
-            for (WeaponGearType gearType : WeaponGearType.values()) {
-                ItemStack weapon = WeaponManager.get(gearType, 7, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 55);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            for (WeaponGearType gearType : WeaponGearType.values()) {
-                ItemStack weapon = WeaponManager.get(gearType, 8, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 70);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-        } else if (shopLevel == 5) {
-            for (WeaponGearType gearType : WeaponGearType.values()) {
-                ItemStack weapon = WeaponManager.get(gearType, 9, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 120);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            for (WeaponGearType gearType : WeaponGearType.values()) {
-                ItemStack weapon = WeaponManager.get(gearType, 10, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, 160);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
+
+            ItemStack itemStack = WeaponManager.get(weaponGearType, shopLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+
+            if (lines.get(lineIndex).isEmpty()) {
+                lines.get(lineIndex).addWord(itemStack, price);
+            } else {
+                lines.add(new MerchantGuiLine());
+                lineIndex++;
+                lines.get(lineIndex).addWord(itemStack, price);
             }
         }
 
@@ -419,11 +365,11 @@ public enum MerchantPageType {
             }
         }
 
-        GuiBookGeneric weapon_shop = new GuiBookGeneric("Weapon Shop", shopNpc);
+        GuiBookGeneric merchantShop = new GuiBookGeneric("Weapon Shop", shopNpc);
         for (GuiPage page : guiPages) {
-            weapon_shop.addPage(page);
+            merchantShop.addPage(page);
         }
-        return weapon_shop;
+        return merchantShop;
     }
 
     private GuiBookGeneric getArmorShop(int shopLevel, int shopNpc) {
@@ -435,8 +381,9 @@ public enum MerchantPageType {
         int minNumberOfStats = 0;
         int lineIndex = 0;
 
-        if (shopLevel == 1) {
-            lines.add(new MerchantGuiLine());
+        lines.add(new MerchantGuiLine());
+
+        for (ArmorGearType armorGearType : ArmorGearType.values()) {
             for (ArmorType armorType : ArmorType.values()) {
                 int price = 2; //boots and helmet
                 if (armorType.equals(ArmorType.LEGGINGS)) {
@@ -444,196 +391,16 @@ public enum MerchantPageType {
                 } else if (armorType.equals(ArmorType.CHESTPLATE)) {
                     price = 4;
                 }
-                ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 1, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+
+                ItemStack itemStack = ArmorManager.get(armorType, armorGearType, shopLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+
                 if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, price);
+                    lines.get(lineIndex).addWord(itemStack, price);
                 } else {
                     lines.add(new MerchantGuiLine());
                     lineIndex++;
-                    lines.get(lineIndex).addWord(weapon, price);
+                    lines.get(lineIndex).addWord(itemStack, price);
                 }
-            }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            for (ArmorType armorType : ArmorType.values()) {
-                int price = 4; //boots and helmet
-                if (armorType.equals(ArmorType.LEGGINGS)) {
-                    price = 6;
-                } else if (armorType.equals(ArmorType.CHESTPLATE)) {
-                    price = 8;
-                }
-                ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 2, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, price);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                    lines.get(lineIndex).addWord(weapon, price);
-                }
-            }
-            for (RPGClass rpgClass : RPGClass.values()) {
-                if (rpgClass.equals(RPGClass.NO_CLASS)) {
-                    continue;
-                }
-                lines.add(new MerchantGuiLine());
-                lineIndex++;
-                for (ArmorType armorType : ArmorType.values()) {
-                    int price = 6; //boots and helmet
-                    if (armorType.equals(ArmorType.LEGGINGS)) {
-                        price = 10;
-                    } else if (armorType.equals(ArmorType.CHESTPLATE)) {
-                        price = 14;
-                    }
-                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 1, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                    if (lines.get(lineIndex).isEmpty()) {
-                        lines.get(lineIndex).addWord(weapon, price);
-                    } else {
-                        lines.add(new MerchantGuiLine());
-                        lineIndex++;
-                        lines.get(lineIndex).addWord(weapon, price);
-                    }
-                }
-            }
-        } else if (shopLevel == 3) {
-            for (RPGClass rpgClass : RPGClass.values()) {
-                if (rpgClass.equals(RPGClass.NO_CLASS)) {
-                    continue;
-                }
-                lines.add(new MerchantGuiLine());
-                for (ArmorType armorType : ArmorType.values()) {
-                    int price = 9; //boots and helmet
-                    if (armorType.equals(ArmorType.LEGGINGS)) {
-                        price = 14;
-                    } else if (armorType.equals(ArmorType.CHESTPLATE)) {
-                        price = 21;
-                    }
-                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 2, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                    if (lines.get(lineIndex).isEmpty()) {
-                        lines.get(lineIndex).addWord(weapon, price);
-                    } else {
-                        lines.add(new MerchantGuiLine());
-                        lineIndex++;
-                        lines.get(lineIndex).addWord(weapon, price);
-                    }
-                }
-                lineIndex++;
-            }
-            for (RPGClass rpgClass : RPGClass.values()) {
-                if (rpgClass.equals(RPGClass.NO_CLASS)) {
-                    continue;
-                }
-                lines.add(new MerchantGuiLine());
-                for (ArmorType armorType : ArmorType.values()) {
-                    int price = 14; //boots and helmet
-                    if (armorType.equals(ArmorType.LEGGINGS)) {
-                        price = 20;
-                    } else if (armorType.equals(ArmorType.CHESTPLATE)) {
-                        price = 30;
-                    }
-                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 3, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                    if (lines.get(lineIndex).isEmpty()) {
-                        lines.get(lineIndex).addWord(weapon, price);
-                    } else {
-                        lines.add(new MerchantGuiLine());
-                        lineIndex++;
-                        lines.get(lineIndex).addWord(weapon, price);
-                    }
-                }
-                lineIndex++;
-            }
-        } else if (shopLevel == 4) {
-            for (RPGClass rpgClass : RPGClass.values()) {
-                if (rpgClass.equals(RPGClass.NO_CLASS)) {
-                    continue;
-                }
-                lines.add(new MerchantGuiLine());
-                for (ArmorType armorType : ArmorType.values()) {
-                    int price = 19; //boots and helmet
-                    if (armorType.equals(ArmorType.LEGGINGS)) {
-                        price = 28;
-                    } else if (armorType.equals(ArmorType.CHESTPLATE)) {
-                        price = 42;
-                    }
-                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 4, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                    if (lines.get(lineIndex).isEmpty()) {
-                        lines.get(lineIndex).addWord(weapon, price);
-                    } else {
-                        lines.add(new MerchantGuiLine());
-                        lineIndex++;
-                        lines.get(lineIndex).addWord(weapon, price);
-                    }
-                }
-                lineIndex++;
-            }
-            for (RPGClass rpgClass : RPGClass.values()) {
-                if (rpgClass.equals(RPGClass.NO_CLASS)) {
-                    continue;
-                }
-                lines.add(new MerchantGuiLine());
-                for (ArmorType armorType : ArmorType.values()) {
-                    int price = 30; //boots and helmet
-                    if (armorType.equals(ArmorType.LEGGINGS)) {
-                        price = 42;
-                    } else if (armorType.equals(ArmorType.CHESTPLATE)) {
-                        price = 55;
-                    }
-                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 5, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                    if (lines.get(lineIndex).isEmpty()) {
-                        lines.get(lineIndex).addWord(weapon, price);
-                    } else {
-                        lines.add(new MerchantGuiLine());
-                        lineIndex++;
-                        lines.get(lineIndex).addWord(weapon, price);
-                    }
-                }
-                lineIndex++;
-            }
-        } else if (shopLevel == 5) {
-            for (RPGClass rpgClass : RPGClass.values()) {
-                if (rpgClass.equals(RPGClass.NO_CLASS)) {
-                    continue;
-                }
-                lines.add(new MerchantGuiLine());
-                for (ArmorType armorType : ArmorType.values()) {
-                    int price = 40; //boots and helmet
-                    if (armorType.equals(ArmorType.LEGGINGS)) {
-                        price = 50;
-                    } else if (armorType.equals(ArmorType.CHESTPLATE)) {
-                        price = 70;
-                    }
-                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 6, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                    if (lines.get(lineIndex).isEmpty()) {
-                        lines.get(lineIndex).addWord(weapon, price);
-                    } else {
-                        lines.add(new MerchantGuiLine());
-                        lineIndex++;
-                        lines.get(lineIndex).addWord(weapon, price);
-                    }
-                }
-                lineIndex++;
-            }
-            for (RPGClass rpgClass : RPGClass.values()) {
-                if (rpgClass.equals(RPGClass.NO_CLASS)) {
-                    continue;
-                }
-                lines.add(new MerchantGuiLine());
-                for (ArmorType armorType : ArmorType.values()) {
-                    int price = 70; //boots and helmet
-                    if (armorType.equals(ArmorType.LEGGINGS)) {
-                        price = 90;
-                    } else if (armorType.equals(ArmorType.CHESTPLATE)) {
-                        price = 120;
-                    }
-                    ItemStack weapon = ArmorManager.get(armorType, ArmorGearType.LIGHT_ARMOR, 7, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                    if (lines.get(lineIndex).isEmpty()) {
-                        lines.get(lineIndex).addWord(weapon, price);
-                    } else {
-                        lines.add(new MerchantGuiLine());
-                        lineIndex++;
-                        lines.get(lineIndex).addWord(weapon, price);
-                    }
-                }
-                lineIndex++;
             }
         }
 
@@ -651,11 +418,11 @@ public enum MerchantPageType {
             }
         }
 
-        GuiBookGeneric weapon_shop = new GuiBookGeneric("Armor Shop", shopNpc);
+        GuiBookGeneric merchantShop = new GuiBookGeneric("Armor Shop", shopNpc);
         for (GuiPage page : guiPages) {
-            weapon_shop.addPage(page);
+            merchantShop.addPage(page);
         }
-        return weapon_shop;
+        return merchantShop;
     }
 
     private GuiBookGeneric getShieldShop(int shopLevel, int shopNpc) {
@@ -668,138 +435,23 @@ public enum MerchantPageType {
         int minNumberOfStats = 0;
         int lineIndex = 0;
 
-        if (shopLevel == 1) {
-            for (int i = 1; i <= 3; i++) {
-                int price = 3;
-                if (i == 2) {
-                    price = 6;
-                } else if (i == 3) {
-                    price = 10;
-                }
-                RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+        lines.add(new MerchantGuiLine());
+
+        for (ShieldGearType shieldGearType : ShieldGearType.values()) {
+            int price = 2; //buckler
+            if (shieldGearType.equals(ShieldGearType.SHIELD)) {
+                price = 3;
+            }
+
+            ItemStack itemStack = ShieldManager.get(shieldGearType, shopLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+
                 if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, price);
+                    lines.get(lineIndex).addWord(itemStack, price);
                 } else {
                     lines.add(new MerchantGuiLine());
                     lineIndex++;
+                    lines.get(lineIndex).addWord(itemStack, price);
                 }
-            }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            for (int i = 1; i <= 3; i++) {
-                int price = 3;
-                if (i == 2) {
-                    price = 6;
-                } else if (i == 3) {
-                    price = 10;
-                }
-                RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, price);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-        } else if (shopLevel == 3) {
-            for (int i = 4; i <= 6; i++) {
-                int price = 14;
-                if (i == 5) {
-                    price = 20;
-                } else if (i == 6) {
-                    price = 28;
-                }
-                RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, price);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            for (int i = 4; i <= 6; i++) {
-                int price = 14;
-                if (i == 5) {
-                    price = 20;
-                } else if (i == 6) {
-                    price = 28;
-                }
-                RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, price);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-        } else if (shopLevel == 4) {
-            for (int i = 7; i <= 8; i++) {
-                int price = 42;
-                if (i == 8) {
-                    price = 50;
-                }
-                RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, price);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            for (int i = 7; i <= 8; i++) {
-                int price = 42;
-                if (i == 8) {
-                    price = 50;
-                }
-                RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, price);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-        } else if (shopLevel == 5) {
-            for (int i = 9; i <= 10; i++) {
-                int price = 90;
-                if (i == 10) {
-                    price = 120;
-                }
-                RPGClass rpgClass = RPGClass.KNIGHT;
-                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, price);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            for (int i = 9; i <= 10; i++) {
-                int price = 90;
-                if (i == 10) {
-                    price = 120;
-                }
-                RPGClass rpgClass = RPGClass.PALADIN;
-                ItemStack weapon = ShieldManager.get(ShieldGearType.SHIELD, i, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(weapon, price);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
-                }
-            }
         }
 
         List<GuiPage> guiPages = new ArrayList<>();
@@ -815,11 +467,11 @@ public enum MerchantPageType {
             }
         }
 
-        GuiBookGeneric weapon_shop = new GuiBookGeneric("Shield Shop", shopNpc);
+        GuiBookGeneric merchantShop = new GuiBookGeneric("Shield Shop", shopNpc);
         for (GuiPage page : guiPages) {
-            weapon_shop.addPage(page);
+            merchantShop.addPage(page);
         }
-        return weapon_shop;
+        return merchantShop;
     }
 
     private GuiBookGeneric getPotionShop(int shopLevel, int shopNpc) {

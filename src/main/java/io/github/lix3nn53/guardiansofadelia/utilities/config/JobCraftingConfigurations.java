@@ -6,7 +6,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
@@ -39,7 +38,6 @@ public class JobCraftingConfigurations {
         loadCraftingRecipesJewel();
         loadCraftingRecipesPotion();
         loadCraftingRecipesFood();
-        loadCraftingRecipesEnchantStone();
     }
 
     private static void createCraftingRecipes() {
@@ -246,28 +244,6 @@ public class JobCraftingConfigurations {
 
                     CraftingManager.putCraftingTypeAndLevelToCraftingLine(itemStack, craftingType, level, ingredients, ingredientAmounts);
                 }
-            }
-        }
-    }
-
-    private static void loadCraftingRecipesEnchantStone() {
-        CraftingType craftingType = CraftingType.ENCHANT_STONE;
-        FileConfiguration fileConfiguration = craftingConfigurations.get(craftingType);
-        int levelCount = fileConfiguration.getInt("levelCount");
-
-        for (int level = 1; level <= levelCount; level++) {
-            int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
-
-            for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
-                String stoneTier = fileConfiguration.getString("level" + level + ".itemSet" + itemSet + ".stoneTier");
-                int stoneAmount = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".stoneAmount");
-                List<Integer> ingredients = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredients");
-                List<Integer> ingredientAmounts = fileConfiguration.getIntegerList("level" + level + ".itemSet" + itemSet + ".ingredientAmounts");
-
-                EnchantStone enchantStone = EnchantStone.valueOf(stoneTier);
-                ItemStack itemStack = enchantStone.getItemSTack(stoneAmount);
-
-                CraftingManager.putCraftingTypeAndLevelToCraftingLine(itemStack, craftingType, level, ingredients, ingredientAmounts);
             }
         }
     }

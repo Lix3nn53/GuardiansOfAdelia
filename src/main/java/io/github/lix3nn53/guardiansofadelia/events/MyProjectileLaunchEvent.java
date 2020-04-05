@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -65,26 +66,9 @@ public class MyProjectileLaunchEvent implements Listener {
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
-                        if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "reqLevel")) {
-                            int reqLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "reqLevel");
-                            if (player.getLevel() < reqLevel) {
-                                event.setCancelled(true);
-                                player.sendMessage("Required level for this weapon is " + reqLevel);
-                                return;
-                            }
-                        }
-
                         RPGClass rpgClass = activeCharacter.getRpgClass();
 
-                        if (PersistentDataContainerUtil.hasString(itemInMainHand, "reqClass")) {
-                            String reqClassString = PersistentDataContainerUtil.getString(itemInMainHand, "reqClass");
-                            RPGClass reqClass = RPGClass.valueOf(reqClassString);
-                            if (!rpgClass.equals(reqClass)) {
-                                event.setCancelled(true);
-                                player.sendMessage("Required class for this weapon is " + reqClass.getClassString());
-                                return;
-                            }
-                        }
+                        if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return;
 
                         if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "rangedDamage")) {
                             int rangedDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "rangedDamage");

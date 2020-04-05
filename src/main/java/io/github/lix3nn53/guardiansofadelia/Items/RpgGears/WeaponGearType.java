@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponDamageType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.Material;
 
@@ -80,10 +80,10 @@ public enum WeaponGearType {
                 break;
         }
 
-        return null;
+        return classList;
     }
 
-    public WeaponType getWeaponType() {
+    public WeaponDamageType getWeaponType() {
         switch (this) {
             case SWORD:
             case WAR_HAMMER:
@@ -92,14 +92,14 @@ public enum WeaponGearType {
             case WAR_AXE:
             case DAGGER:
             case MACE:
-                return WeaponType.MELEE;
+                return WeaponDamageType.MELEE;
             case SPEAR:
             case CROSSBOW:
             case BOW:
-                return WeaponType.RANGED;
+                return WeaponDamageType.RANGED;
             case WAND:
             case STAFF:
-                return WeaponType.MAGICAL;
+                return WeaponDamageType.MAGICAL;
         }
 
         return null;

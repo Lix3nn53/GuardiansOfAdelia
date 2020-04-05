@@ -27,15 +27,15 @@ public class WeaponManager {
         int level = template.getRequiredLevel();
         int mainDamage = template.getDamage(gearType);
 
-        WeaponType weaponType = gearType.getWeaponType();
+        WeaponDamageType weaponDamageType = gearType.getWeaponType();
 
-        if (weaponType.equals(WeaponType.MELEE)) {
+        if (weaponDamageType.equals(WeaponDamageType.MELEE)) {
             return new WeaponMelee(name, tier, itemTag, material, customModelData, level, gearType, mainDamage,
                     attackSpeed, minStatValue, maxStatValue, minNumberofStats).getItemStack();
-        } else if (weaponType.equals(WeaponType.RANGED)) {
+        } else if (weaponDamageType.equals(WeaponDamageType.RANGED)) {
             return new WeaponRanged(name, tier, itemTag, material, customModelData, level, gearType, mainDamage,
                     attackSpeed, minStatValue, maxStatValue, minNumberofStats).getItemStack();
-        } else if (weaponType.equals(WeaponType.MAGICAL)) {
+        } else if (weaponDamageType.equals(WeaponDamageType.MAGICAL)) {
             int meleeDamage = mainDamage / 4;
 
             return new WeaponMagical(name, tier, itemTag, material, customModelData, level, gearType, meleeDamage, mainDamage,

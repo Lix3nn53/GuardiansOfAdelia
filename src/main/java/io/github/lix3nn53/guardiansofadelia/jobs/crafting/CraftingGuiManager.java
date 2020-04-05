@@ -36,7 +36,7 @@ public class CraftingGuiManager {
     }
 
     public static GuiBookGeneric getCraftingBook(CraftingType craftingType, int craftingLevel) {
-        GuiBookGeneric craftingBook = new GuiBookGeneric(craftingType.getName() + " Crafting Level " + craftingLevel, 0);
+        GuiBookGeneric craftingBook = new GuiBookGeneric(craftingType.toString() + " Crafting Level " + craftingLevel, 0);
 
         List<GuiPage> guiPageList = new ArrayList<>();
         guiPageList.add(new GuiPage());

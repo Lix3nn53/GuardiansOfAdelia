@@ -289,24 +289,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 return false;
                             }
 
-                            if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "reqLevel")) {
-                                int reqLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "reqLevel");
-                                if (player.getLevel() < reqLevel) {
-                                    event.setCancelled(true);
-                                    player.sendMessage(ChatColor.RED + "Required level for this weapon is " + reqLevel);
-                                    return false;
-                                }
-                            }
-
-                            if (PersistentDataContainerUtil.hasString(itemInMainHand, "reqClass")) {
-                                String reqClassString = PersistentDataContainerUtil.getString(itemInMainHand, "reqClass");
-                                RPGClass reqClass = RPGClass.valueOf(reqClassString);
-                                if (!rpgClass.equals(reqClass)) {
-                                    event.setCancelled(true);
-                                    player.sendMessage(ChatColor.RED + "Required class for this weapon is " + reqClass.getClassString());
-                                    return false;
-                                }
-                            }
+                            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass))
+                                return false;
 
                             damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClass); //add to weapon damage
 

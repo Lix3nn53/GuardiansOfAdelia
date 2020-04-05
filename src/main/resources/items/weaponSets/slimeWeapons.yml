@@ -6,8 +6,7 @@
 
 count: 1
 i1:
-  gearType: "CROSSBOW"
-  name: "Short Crossbow"
+  name: "Short"
   customModelData: 1
   level: 1
   damage: 12

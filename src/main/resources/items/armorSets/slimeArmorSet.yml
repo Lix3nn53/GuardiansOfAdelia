@@ -6,10 +6,8 @@
 
 count: 1
 i1:
-  gearType: "LIGHT_ARMOR"
   name: "Slime"
   baseLevelReq: 1
   health: 24
   defense: 10
   magicDefense: 5
-  armorMaterial: "LEATHER"

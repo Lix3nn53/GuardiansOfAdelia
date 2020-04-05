@@ -12,8 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
-import io.github.lix3nn53.guardiansofadelia.jobs.Job;
-import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
+import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
@@ -25,6 +24,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -76,9 +76,7 @@ public class DatabaseQueries {
                     " `slot_glove`     text NULL ,\n" +
                     " `slot_pet`       text NULL ,\n" +
                     " `chat_tag`       varchar(45) NULL ,\n" +
-                    " `job_type`       varchar(45) NULL ,\n" +
-                    " `job_level`      smallint NULL ,\n" +
-                    " `job_experience` mediumint NULL ,\n" +
+                    " `crafting_experiences` text NOT NULL ,\n" +
                     " `inventory`      mediumtext NOT NULL ,\n" +
                     " `turnedinquests` text NULL ,\n" +
                     " `activequests`   text NULL ,\n" +
@@ -231,24 +229,26 @@ public class DatabaseQueries {
 
                 String storagePersonalString = resultSet.getString("storage_personal");
                 if (!resultSet.wasNull()) {
-                    ItemStack[] itemStacks = ItemSerializer.restoreModdedStacks(storagePersonalString);
+                    ItemStack[] itemStacks = ItemSerializer.itemStackArrayFromBase64(storagePersonalString);
                     guardianData.setPersonalStorage(itemStacks);
                 }
 
                 String storageBazaarString = resultSet.getString("storage_bazaar");
                 if (!resultSet.wasNull()) {
-                    ItemStack[] itemStacks = ItemSerializer.restoreModdedStacks(storageBazaarString);
+                    ItemStack[] itemStacks = ItemSerializer.itemStackArrayFromBase64(storageBazaarString);
                     guardianData.setBazaarStorage(itemStacks);
                 }
 
                 String storagePremiumString = resultSet.getString("storage_premium");
                 if (!resultSet.wasNull()) {
-                    ItemStack[] itemStacks = ItemSerializer.restoreModdedStacks(storagePremiumString);
+                    ItemStack[] itemStacks = ItemSerializer.itemStackArrayFromBase64(storagePremiumString);
                     guardianData.setPremiumStorage(itemStacks);
                 }
             }
             resultSet.close();
             pst.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return guardianData;
     }
@@ -266,11 +266,13 @@ public class DatabaseQueries {
             if (resultSet.next()) {
                 String storagePremiumString = resultSet.getString("storage_premium");
                 if (!resultSet.wasNull()) {
-                    itemStacks = ItemSerializer.restoreModdedStacks(storagePremiumString);
+                    itemStacks = ItemSerializer.itemStackArrayFromBase64(storagePremiumString);
                 }
             }
             resultSet.close();
             pst.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return itemStacks;
     }
@@ -318,65 +320,85 @@ public class DatabaseQueries {
                 String offHand = resultSet.getString("off_hand");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    player.getInventory().setItemInOffHand(ItemSerializer.restoreModdedItem(offHand));
+                    player.getInventory().setItemInOffHand(ItemSerializer.itemStackFromBase64(offHand));
                 }
 
                 String parrot = resultSet.getString("slot_parrot");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setParrot(ItemSerializer.restoreModdedItem(parrot), player));
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                        try {
+                            rpgInventory.setParrot(ItemSerializer.itemStackFromBase64(parrot), player);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
 
                 String necklace = resultSet.getString("slot_necklace");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setNecklace(ItemSerializer.restoreModdedItem(necklace), player));
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                        try {
+                            rpgInventory.setNecklace(ItemSerializer.itemStackFromBase64(necklace), player);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
 
                 String ring = resultSet.getString("slot_ring");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setRing(ItemSerializer.restoreModdedItem(ring), player));
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                        try {
+                            rpgInventory.setRing(ItemSerializer.itemStackFromBase64(ring), player);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
 
                 String earring = resultSet.getString("slot_earring");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setEarring(ItemSerializer.restoreModdedItem(earring), player));
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                        try {
+                            rpgInventory.setEarring(ItemSerializer.itemStackFromBase64(earring), player);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
 
                 String glove = resultSet.getString("slot_glove");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setGlove(ItemSerializer.restoreModdedItem(glove), player));
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                        try {
+                            rpgInventory.setGlove(ItemSerializer.itemStackFromBase64(glove), player);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
 
                 String pet = resultSet.getString("slot_pet");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> rpgInventory.setEgg(ItemSerializer.restoreModdedItem(pet), player));
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                        try {
+                            rpgInventory.setEgg(ItemSerializer.itemStackFromBase64(pet), player);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                     Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> PetManager.onEggEquip(player), 40L);
                 }
 
-                String jobString = resultSet.getString("job_type");
+                String craftingExperiencesString = resultSet.getString("crafting_experiences");
                 if (!resultSet.wasNull()) {
-                    //if NOT NULL
-                    JobType jobType = JobType.valueOf(jobString);
-                    Job job = new Job(jobType);
-
-                    int jobLevel = resultSet.getInt("job_level");
-                    if (!resultSet.wasNull()) {
-                        //if NOT NULL
-                        job.setLevel(jobLevel);
-                    }
-
-                    int jobExperience = resultSet.getInt("job_experience");
-                    if (!resultSet.wasNull()) {
-                        //if NOT NULL
-                        job.setExperience(jobExperience);
-                    }
-
-                    rpgCharacter.setJob(job);
+                    rpgCharacter.getCraftingStats().loadDatabaseString(craftingExperiencesString);
                 }
 
                 String chatTagString = resultSet.getString("chat_tag");
@@ -426,14 +448,14 @@ public class DatabaseQueries {
                 String inventoryString = resultSet.getString("inventory");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    ItemStack[] itemStacks = ItemSerializer.restoreModdedStacks(inventoryString);
+                    ItemStack[] itemStacks = ItemSerializer.itemStackArrayFromBase64(inventoryString);
                     player.getInventory().setContents(itemStacks);
                 }
 
                 String armorContentString = resultSet.getString("armor_content");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    ItemStack[] itemStacks = ItemSerializer.restoreModdedStacks(armorContentString);
+                    ItemStack[] itemStacks = ItemSerializer.itemStackArrayFromBase64(armorContentString);
                     player.getInventory().setArmorContents(itemStacks);
                 }
 
@@ -442,6 +464,8 @@ public class DatabaseQueries {
             }
             resultSet.close();
             pst.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return rpgCharacter;
     }
@@ -494,13 +518,15 @@ public class DatabaseQueries {
                     String storageString = resultSet.getString("storage");
                     if (!resultSet.wasNull()) {
                         //if NOT NULL
-                        ItemStack[] itemStacks = ItemSerializer.restoreModdedStacks(storageString);
+                        ItemStack[] itemStacks = ItemSerializer.itemStackArrayFromBase64(storageString);
                         guild.setGuildStorage(itemStacks);
                     }
                 }
             }
             resultSet.close();
             pst.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return guild;
     }
@@ -616,11 +642,11 @@ public class DatabaseQueries {
             pst.setString(1, uuid.toString());
             pst.setString(2, staffRank.name());
             pst.setString(3, premiumRank.name());
-            String personalStorageString = ItemSerializer.saveModdedStacksData(personalStorage);
+            String personalStorageString = ItemSerializer.itemStackArrayToBase64(personalStorage);
             pst.setString(4, personalStorageString);
-            String bazaarStorageString = ItemSerializer.saveModdedStacksData(bazaarStorage);
+            String bazaarStorageString = ItemSerializer.itemStackArrayToBase64(bazaarStorage);
             pst.setString(5, bazaarStorageString);
-            String premiumStorageString = ItemSerializer.saveModdedStacksData(premiumStorage);
+            String premiumStorageString = ItemSerializer.itemStackArrayToBase64(premiumStorage);
             pst.setString(6, premiumStorageString);
 
             //2 = replaced, 1 = new row added
@@ -643,7 +669,7 @@ public class DatabaseQueries {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
-            String premiumStorageString = ItemSerializer.saveModdedStacksData(premiumStorage);
+            String premiumStorageString = ItemSerializer.itemStackArrayToBase64(premiumStorage);
             pst.setString(2, premiumStorageString);
 
             //2 = replaced, 1 = new row added
@@ -744,7 +770,7 @@ public class DatabaseQueries {
             pst.setInt(5, guild.getHallLevel());
             pst.setInt(6, guild.getBankLevel());
             pst.setInt(7, guild.getLabLevel());
-            String moddedStacksData = ItemSerializer.saveModdedStacksData(guild.getGuildStorage());
+            String moddedStacksData = ItemSerializer.itemStackArrayToBase64(guild.getGuildStorage());
             pst.setString(8, moddedStacksData);
 
             //2 = replaced, 1 = new row added
@@ -758,10 +784,10 @@ public class DatabaseQueries {
     public static int setCharacter(UUID uuid, int charNo, RPGCharacter rpgCharacter, ItemStack[] inventory, Location location, ItemStack[] armorContent, ItemStack offHand) throws SQLException {
         String SQL_QUERY = "INSERT INTO goa_player_character \n" +
                 "\t(uuid, character_no, off_hand, slot_parrot, slot_necklace, slot_ring, slot_earring, slot_glove, " +
-                "slot_pet, chat_tag, job_type, job_level, job_experience, inventory, activequests, turnedinquests, location, armor_content, " +
+                "slot_pet, chat_tag, crafting_experiences, inventory, activequests, turnedinquests, location, armor_content, " +
                 "rpg_class, totalexp, attr_fire, attr_water, attr_earth, attr_lightning, attr_wind, skill_one, skill_two, skill_three, skill_passive, skill_ultimate) \n" +
                 "VALUES \n" +
-                "\t(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n" +
+                "\t(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
                 "\tuuid = VALUES(uuid),\n" +
                 "\tcharacter_no = VALUES(character_no),\n" +
@@ -773,9 +799,7 @@ public class DatabaseQueries {
                 "\tslot_glove = VALUES(slot_glove),\n" +
                 "\tslot_pet = VALUES(slot_pet),\n" +
                 "\tchat_tag = VALUES(chat_tag),\n" +
-                "\tjob_type = VALUES(job_type),\n" +
-                "\tjob_level = VALUES(job_level),\n" +
-                "\tjob_experience = VALUES(job_experience),\n" +
+                "\tcrafting_experiences = VALUES(crafting_experiences),\n" +
                 "\tinventory = VALUES(inventory),\n" +
                 "\tactivequests = VALUES(activequests),\n" +
                 "\tturnedinquests = VALUES(turnedinquests),\n" +
@@ -799,63 +823,57 @@ public class DatabaseQueries {
             pst.setString(1, uuid.toString());
             pst.setInt(2, charNo);
             if (offHand != null) {
-                String itemString = ItemSerializer.saveModdedItemData(offHand);
+                String itemString = ItemSerializer.itemStackToBase64(offHand);
                 pst.setString(3, itemString);
             } else {
                 pst.setNull(3, Types.BLOB);
             }
             if (!rpgCharacter.getRpgInventory().getParrotSlot().isEmpty()) {
-                String itemString = ItemSerializer.saveModdedItemData(rpgCharacter.getRpgInventory().getParrotSlot().getItemOnSlot());
+                String itemString = ItemSerializer.itemStackToBase64(rpgCharacter.getRpgInventory().getParrotSlot().getItemOnSlot());
                 pst.setString(4, itemString);
             } else {
                 pst.setNull(4, Types.BLOB);
             }
             if (!rpgCharacter.getRpgInventory().getNecklaceSlot().isEmpty()) {
-                String itemString = ItemSerializer.saveModdedItemData(rpgCharacter.getRpgInventory().getNecklaceSlot().getItemOnSlot());
+                String itemString = ItemSerializer.itemStackToBase64(rpgCharacter.getRpgInventory().getNecklaceSlot().getItemOnSlot());
                 pst.setString(5, itemString);
             } else {
                 pst.setNull(5, Types.BLOB);
             }
             if (!rpgCharacter.getRpgInventory().getRingSlot().isEmpty()) {
-                String itemString = ItemSerializer.saveModdedItemData(rpgCharacter.getRpgInventory().getRingSlot().getItemOnSlot());
+                String itemString = ItemSerializer.itemStackToBase64(rpgCharacter.getRpgInventory().getRingSlot().getItemOnSlot());
                 pst.setString(6, itemString);
             } else {
                 pst.setNull(6, Types.BLOB);
             }
             if (!rpgCharacter.getRpgInventory().getEarringSlot().isEmpty()) {
-                String itemString = ItemSerializer.saveModdedItemData(rpgCharacter.getRpgInventory().getEarringSlot().getItemOnSlot());
+                String itemString = ItemSerializer.itemStackToBase64(rpgCharacter.getRpgInventory().getEarringSlot().getItemOnSlot());
                 pst.setString(7, itemString);
             } else {
                 pst.setNull(7, Types.BLOB);
             }
             if (!rpgCharacter.getRpgInventory().getGloveSlot().isEmpty()) {
-                String itemString = ItemSerializer.saveModdedItemData(rpgCharacter.getRpgInventory().getGloveSlot().getItemOnSlot());
+                String itemString = ItemSerializer.itemStackToBase64(rpgCharacter.getRpgInventory().getGloveSlot().getItemOnSlot());
                 pst.setString(8, itemString);
             } else {
                 pst.setNull(8, Types.BLOB);
             }
             if (!rpgCharacter.getRpgInventory().getEggSlot().isEmpty()) {
-                String itemString = ItemSerializer.saveModdedItemData(rpgCharacter.getRpgInventory().getEggSlot().getItemOnSlot());
+                String itemString = ItemSerializer.itemStackToBase64(rpgCharacter.getRpgInventory().getEggSlot().getItemOnSlot());
                 pst.setString(9, itemString);
             } else {
                 pst.setNull(9, Types.BLOB);
             }
             pst.setString(10, rpgCharacter.getChatTag().name());
-            if (rpgCharacter.hasJob()) {
-                Job job = rpgCharacter.getJob();
-                pst.setString(11, job.getJobType().name());
-                pst.setInt(12, job.getLevel());
-                pst.setInt(13, job.getExperience());
-            } else {
-                pst.setNull(11, Types.BLOB);
-                pst.setNull(12, Types.SMALLINT);
-                pst.setNull(13, Types.INTEGER);
-            }
+
+            RPGCharacterCraftingStats craftingStats = rpgCharacter.getCraftingStats();
+            pst.setString(11, craftingStats.getDatabaseString());
+
             if (inventory.length > 0) {
-                String moddedStacksData = ItemSerializer.saveModdedStacksData(inventory);
-                pst.setString(14, moddedStacksData);
+                String moddedStacksData = ItemSerializer.itemStackArrayToBase64(inventory);
+                pst.setString(12, moddedStacksData);
             } else {
-                pst.setNull(14, Types.BLOB);
+                pst.setNull(12, Types.BLOB);
             }
             if (!rpgCharacter.getQuestList().isEmpty()) {
                 List<Quest> questList = rpgCharacter.getQuestList();
@@ -876,9 +894,9 @@ public class DatabaseQueries {
                     }
                 }
                 String string = stringBuilder.toString();
-                pst.setString(15, string);
+                pst.setString(13, string);
             } else {
-                pst.setNull(15, Types.BLOB);
+                pst.setNull(13, Types.BLOB);
             }
             if (!rpgCharacter.getTurnedInQuests().isEmpty()) {
                 List<Integer> turnedInQuestList = rpgCharacter.getTurnedInQuests();
@@ -891,9 +909,9 @@ public class DatabaseQueries {
                     stringBuilder.append(questNo);
                 }
                 String string = stringBuilder.toString();
-                pst.setString(16, string);
+                pst.setString(14, string);
             } else {
-                pst.setNull(16, Types.BLOB);
+                pst.setNull(14, Types.BLOB);
             }
             if (location != null) {
                 String locationString = location.getWorld().getName() +
@@ -903,47 +921,47 @@ public class DatabaseQueries {
                         (int) (location.getY() + 0.5) +
                         ";" +
                         (int) (location.getZ() + 0.5);
-                pst.setString(17, locationString);
+                pst.setString(15, locationString);
             } else {
-                pst.setNull(17, Types.BLOB);
+                pst.setNull(15, Types.BLOB);
             }
             if (armorContent.length > 0) {
-                String moddedStacksData = ItemSerializer.saveModdedStacksData(armorContent);
-                pst.setString(18, moddedStacksData);
+                String moddedStacksData = ItemSerializer.itemStackArrayToBase64(armorContent);
+                pst.setString(16, moddedStacksData);
             } else {
-                pst.setNull(18, Types.BLOB);
+                pst.setNull(16, Types.BLOB);
             }
 
             RPGClass rpgClass = rpgCharacter.getRpgClass();
-            pst.setString(19, rpgClass.toString());
+            pst.setString(17, rpgClass.toString());
 
             RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
 
             int totalExp = rpgCharacterStats.getTotalExp();
-            pst.setInt(20, totalExp);
+            pst.setInt(18, totalExp);
 
             int fire = rpgCharacterStats.getFire().getInvested();
-            pst.setInt(21, fire);
+            pst.setInt(19, fire);
             int water = rpgCharacterStats.getWater().getInvested();
-            pst.setInt(22, water);
+            pst.setInt(20, water);
             int earth = rpgCharacterStats.getEarth().getInvested();
-            pst.setInt(23, earth);
+            pst.setInt(21, earth);
             int lightning = rpgCharacterStats.getLightning().getInvested();
-            pst.setInt(24, lightning);
+            pst.setInt(22, lightning);
             int wind = rpgCharacterStats.getWind().getInvested();
-            pst.setInt(25, wind);
+            pst.setInt(23, wind);
 
             SkillBar skillBar = rpgCharacter.getSkillBar();
             int skill_one = skillBar.getInvestedSkillPoints(0);
-            pst.setInt(26, skill_one);
+            pst.setInt(24, skill_one);
             int skill_two = skillBar.getInvestedSkillPoints(1);
-            pst.setInt(27, skill_two);
+            pst.setInt(25, skill_two);
             int skill_three = skillBar.getInvestedSkillPoints(2);
-            pst.setInt(28, skill_three);
+            pst.setInt(26, skill_three);
             int skill_passive = skillBar.getInvestedSkillPoints(3);
-            pst.setInt(29, skill_passive);
+            pst.setInt(27, skill_passive);
             int skill_ultimate = skillBar.getInvestedSkillPoints(4);
-            pst.setInt(30, skill_ultimate);
+            pst.setInt(28, skill_ultimate);
 
             //2 = replaced, 1 = new row added
             int returnValue = pst.executeUpdate();

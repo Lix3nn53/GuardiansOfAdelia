@@ -64,7 +64,6 @@ public class ItemArmorSetConfigurations {
             int itemCount = itemSetConfiguration.getInt("count");
 
             for (int i = 1; i <= itemCount; i++) {
-                String gearTypeStr = itemSetConfiguration.getString("i" + i + ".armorGearType");
                 String nameStr = itemSetConfiguration.getString("i" + i + ".name");
                 int baseLevelReq = itemSetConfiguration.getInt("i" + i + ".baseLevelReq");
                 int health = itemSetConfiguration.getInt("i" + i + ".health");

@@ -6,7 +6,6 @@
 
 count: 1
 i1:
-  gearType: "Passive"
   name: "Slime"
   baseCustomModelData: 1
-  baseLevel: 24
+  baseLevel: 1

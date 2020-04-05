@@ -1,7 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.Items.stats;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
@@ -11,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StatUtils {
@@ -201,11 +205,39 @@ public class StatUtils {
             }
         }
 
-        if (PersistentDataContainerUtil.hasString(itemStack, "reqClass")) {
-            String reqClassString = PersistentDataContainerUtil.getString(itemStack, "reqClass");
-            RPGClass reqClass = RPGClass.valueOf(reqClassString);
-            if (!rpgClass.equals(reqClass)) {
-                player.sendMessage("Required class for this item is " + reqClass.getClassString());
+        if (PersistentDataContainerUtil.hasString(itemStack, "gearType")) {
+            String gearTypeString = PersistentDataContainerUtil.getString(itemStack, "gearType");
+
+            List<RPGClass> requiredClasses = new ArrayList<>();
+
+            for (WeaponGearType c : WeaponGearType.values()) {
+                if (c.name().equals(gearTypeString)) {
+                    requiredClasses.addAll(c.getRequiredClasses());
+                }
+            }
+
+            if (requiredClasses.isEmpty()) {
+                for (ArmorGearType c : ArmorGearType.values()) {
+                    if (c.name().equals(gearTypeString)) {
+                        requiredClasses.addAll(c.getRequiredClasses());
+                    }
+                }
+            }
+
+            if (requiredClasses.isEmpty()) {
+                for (ShieldGearType c : ShieldGearType.values()) {
+                    if (c.name().equals(gearTypeString)) {
+                        requiredClasses.addAll(c.getRequiredClasses());
+                    }
+                }
+            }
+
+            if (!requiredClasses.contains(rpgClass)) {
+                StringBuilder requiredClassesString = new StringBuilder();
+                for (RPGClass rpgClassLoop : requiredClasses) {
+                    requiredClassesString.append(rpgClassLoop.getClassString());
+                }
+                player.sendMessage("Required class for this item is " + requiredClassesString.toString());
                 return false;
             }
         }

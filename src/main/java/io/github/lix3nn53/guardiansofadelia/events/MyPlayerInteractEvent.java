@@ -14,8 +14,6 @@ import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.SkinChest;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.jobs.Job;
-import io.github.lix3nn53.guardiansofadelia.jobs.JobType;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
@@ -148,18 +146,8 @@ public class MyPlayerInteractEvent implements Listener {
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                         if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            if (activeCharacter.hasJob()) {
-                                Job job = activeCharacter.getJob();
-                                if (job.getJobType().equals(JobType.ALCHEMIST)) {
-                                    GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.FOOD);
-                                    levelSelection.openInventory(player);
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "Only alchemists can craft foods");
-                                }
-                            } else {
-                                player.sendMessage(ChatColor.RED + "Only alchemists can craft foods");
-                            }
+                            GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.FOOD);
+                            levelSelection.openInventory(player);
                         }
                     }
                 } else if (clickedBlockType.equals(Material.BREWING_STAND)) {
@@ -167,18 +155,8 @@ public class MyPlayerInteractEvent implements Listener {
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                         if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            if (activeCharacter.hasJob()) {
-                                Job job = activeCharacter.getJob();
-                                if (job.getJobType().equals(JobType.ALCHEMIST)) {
-                                    GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.POTION);
-                                    levelSelection.openInventory(player);
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "Only alchemists can craft potions");
-                                }
-                            } else {
-                                player.sendMessage(ChatColor.RED + "Only alchemists can craft potions");
-                            }
+                            GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.POTION);
+                            levelSelection.openInventory(player);
                         }
                     }
                 } else if (clickedBlockType.equals(Material.GRINDSTONE)) {
@@ -186,18 +164,8 @@ public class MyPlayerInteractEvent implements Listener {
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                         if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            if (activeCharacter.hasJob()) {
-                                Job job = activeCharacter.getJob();
-                                if (job.getJobType().equals(JobType.WEAPONSMITH)) {
-                                    GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.WEAPON_MELEE);
-                                    levelSelection.openInventory(player);
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "Only weaponsmiths can craft melee weapons");
-                                }
-                            } else {
-                                player.sendMessage(ChatColor.RED + "Only weaponsmiths can craft melee weapons");
-                            }
+                            GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.WEAPON_MELEE);
+                            levelSelection.openInventory(player);
                         }
                     }
                 } else if (clickedBlockType.equals(Material.FLETCHING_TABLE)) {
@@ -205,18 +173,8 @@ public class MyPlayerInteractEvent implements Listener {
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                         if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            if (activeCharacter.hasJob()) {
-                                Job job = activeCharacter.getJob();
-                                if (job.getJobType().equals(JobType.WEAPONSMITH)) {
-                                    GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.WEAPON_RANGED);
-                                    levelSelection.openInventory(player);
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "Only weaponsmiths can craft ranged weapons");
-                                }
-                            } else {
-                                player.sendMessage(ChatColor.RED + "Only weaponsmiths can craft ranged weapons");
-                            }
+                            GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.WEAPON_RANGED);
+                            levelSelection.openInventory(player);
                         }
                     }
                 } else if (clickedBlockType.equals(Material.ANVIL)) {
@@ -224,18 +182,8 @@ public class MyPlayerInteractEvent implements Listener {
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                         if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            if (activeCharacter.hasJob()) {
-                                Job job = activeCharacter.getJob();
-                                if (job.getJobType().equals(JobType.ARMORSMITH)) {
-                                    GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.ARMOR_HEAVY);
-                                    levelSelection.openInventory(player);
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "Only armorsmiths can craft heavy armors");
-                                }
-                            } else {
-                                player.sendMessage(ChatColor.RED + "Only armorsmiths can craft heavy armors");
-                            }
+                            GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.ARMOR_HEAVY);
+                            levelSelection.openInventory(player);
                         }
                     }
                 } else if (clickedBlockType.equals(Material.LOOM)) {
@@ -243,18 +191,8 @@ public class MyPlayerInteractEvent implements Listener {
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                         if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            if (activeCharacter.hasJob()) {
-                                Job job = activeCharacter.getJob();
-                                if (job.getJobType().equals(JobType.ARMORSMITH)) {
-                                    GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.ARMOR_LIGHT);
-                                    levelSelection.openInventory(player);
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "Only armorsmiths can craft light armors");
-                                }
-                            } else {
-                                player.sendMessage(ChatColor.RED + "Only armorsmiths can craft light armors");
-                            }
+                            GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.ARMOR_LIGHT);
+                            levelSelection.openInventory(player);
                         }
                     }
                 } else if (clickedBlockType.equals(Material.SMITHING_TABLE)) {
@@ -262,37 +200,8 @@ public class MyPlayerInteractEvent implements Listener {
                     if (GuardianDataManager.hasGuardianData(uuid)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                         if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            if (activeCharacter.hasJob()) {
-                                Job job = activeCharacter.getJob();
-                                if (job.getJobType().equals(JobType.JEWELLER)) {
-                                    GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.JEWEL);
-                                    levelSelection.openInventory(player);
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "Only jewellers can craft jewels");
-                                }
-                            } else {
-                                player.sendMessage(ChatColor.RED + "Only jewellers can craft jewels");
-                            }
-                        }
-                    }
-                } else if (clickedBlockType.equals(Material.ENCHANTING_TABLE)) {
-                    event.setCancelled(true);
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-                        if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            if (activeCharacter.hasJob()) {
-                                Job job = activeCharacter.getJob();
-                                if (job.getJobType().equals(JobType.JEWELLER)) {
-                                    GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.ENCHANT_STONE);
-                                    levelSelection.openInventory(player);
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "Only jewellers can craft enchant stones");
-                                }
-                            } else {
-                                player.sendMessage(ChatColor.RED + "Only jewellers can craft enchant stones");
-                            }
+                            GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.JEWEL);
+                            levelSelection.openInventory(player);
                         }
                     }
                 } else if (clickedBlockType.equals(Material.CHEST) || clickedBlockType.equals(Material.BARREL) || clickedBlockType.equals(Material.ENDER_CHEST)

@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.weapons;
 
-public enum WeaponType {
+public enum WeaponDamageType {
     MELEE,
     RANGED,
     MAGICAL

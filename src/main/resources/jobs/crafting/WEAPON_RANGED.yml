@@ -8,7 +8,7 @@ levelCount: 1
 level1:
   itemSetCount: 2
   itemSet1:
-    gearType:
+    weaponGearType:
       - BOW
       - CROSSBOW
     gearLevel: 1

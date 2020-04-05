@@ -77,35 +77,35 @@ i3:
   itemPrizeCount: 5
   itemPrize1:
     itemType: "Passive"
-    gearLevel: 9
+    gearLevel: 1
     itemIndex: 0
     rpgSlotType: "PARROT"
     itemTier: "LEGENDARY"
     itemTag: "Tutorial"
   itemPrize2:
     itemType: "Passive"
-    gearLevel: 9
+    gearLevel: 1
     itemIndex: 0
     rpgSlotType: "EARRING"
     itemTier: "LEGENDARY"
     itemTag: "Tutorial"
   itemPrize3:
     itemType: "Passive"
-    gearLevel: 9
+    gearLevel: 1
     itemIndex: 0
     rpgSlotType: "GLOVE"
     itemTier: "LEGENDARY"
     itemTag: "Tutorial"
   itemPrize4:
     itemType: "Passive"
-    gearLevel: 9
+    gearLevel: 1
     itemIndex: 0
     rpgSlotType: "RING"
     itemTier: "LEGENDARY"
     itemTag: "Tutorial"
   itemPrize5:
     itemType: "Passive"
-    gearLevel: 9
+    gearLevel: 1
     itemIndex: 0
     rpgSlotType: "NECKLACE"
     itemTier: "LEGENDARY"

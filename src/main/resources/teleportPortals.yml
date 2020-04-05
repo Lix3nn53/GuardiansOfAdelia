@@ -6,16 +6,16 @@
 
 PortalNumber: 3
 p1:
-  x: 386.5
-  y: 33.5
-  z: -457.5
+  x: 237.5
+  y: 39.5
+  z: 270.5
   world: tutorial
-  yaw: -90
+  yaw: -135
   pitch: 0
   color: PURPLE
-  tpX: 374.5
-  tpY: 15.5
-  tpZ: -756.5
+  tpX: 260.5
+  tpY: 72.5
+  tpZ: 270.5
   tpWorld: tutorial
   tpYaw: 180
   tpPitch: -4.8

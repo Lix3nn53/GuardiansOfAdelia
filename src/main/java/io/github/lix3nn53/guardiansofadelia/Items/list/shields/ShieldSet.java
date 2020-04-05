@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.Items.list.armors;
+package io.github.lix3nn53.guardiansofadelia.Items.list.shields;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import org.bukkit.Material;

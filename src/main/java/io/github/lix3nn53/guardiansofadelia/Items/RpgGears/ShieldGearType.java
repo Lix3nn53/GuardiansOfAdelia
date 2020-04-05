@@ -26,7 +26,7 @@ public enum ShieldGearType {
                 break;
         }
 
-        return null;
+        return classList;
     }
 
     public Material getMaterial() {

@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
 import org.bukkit.inventory.ItemStack;
 
@@ -15,25 +14,22 @@ public enum CraftingType {
     ARMOR_LIGHT,
     POTION,
     FOOD,
-    JEWEL,
-    ENCHANT_STONE;
+    JEWEL;
 
     public String getName() {
         switch (this) {
             case WEAPON_RANGED:
-                return "Ranged Weapon";
+                return "Ranged Weapon Crafting";
             case ARMOR_HEAVY:
-                return "Heavy Armor";
+                return "Heavy Armor Crafting";
             case ARMOR_LIGHT:
-                return "Light Armor";
+                return "Light Armor Crafting";
             case POTION:
-                return "Potion";
+                return "Potion Crafting";
             case FOOD:
-                return "Food";
+                return "Food Crafting";
             case JEWEL:
-                return "Jewel";
-            case ENCHANT_STONE:
-                return "Enchant Stone";
+                return "Jewel Crafting";
         }
         return "Melee Weapon";
     }
@@ -67,13 +63,6 @@ public enum CraftingType {
             case JEWEL:
                 itemTag = "Jeweller's";
                 itemStackList = ItemPoolGenerator.generatePassivesNoStats(tier, itemTag, gearLevel, 0);
-                break;
-            case ENCHANT_STONE:
-                itemStackList = new ArrayList<>();
-                itemStackList.add(EnchantStone.TIER_ONE.getItemSTack(1));
-                itemStackList.add(EnchantStone.TIER_TWO.getItemSTack(1));
-                itemStackList.add(EnchantStone.TIER_THREE.getItemSTack(1));
-                itemStackList.add(EnchantStone.TIER_FOUR.getItemSTack(1));
                 break;
         }
         return itemStackList;

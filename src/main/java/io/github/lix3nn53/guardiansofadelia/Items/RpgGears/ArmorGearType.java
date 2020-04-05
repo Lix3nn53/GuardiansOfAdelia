@@ -33,7 +33,7 @@ public enum ArmorGearType {
                 break;
         }
 
-        return null;
+        return classList;
     }
 
     public String getDisplayName() {
