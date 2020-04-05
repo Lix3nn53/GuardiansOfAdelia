@@ -1,16 +1,8 @@
-# ---------------------------------------------- #
-#              General Configuration             #
-# ---------------------------------------------- #
-#                 Spawner List                   #
-# ---------------------------------------------- #
-
-SpawnerNumber: 453
 Spawners:
   s1:
     x: -2484.0
     y: 114.0
     z: 2017.0
-    world: world
     mob: MUMMY
     amount: 1
     maxamount: 2
@@ -18,7 +10,6 @@ Spawners:
     x: -3417.0
     y: 66.0
     z: 2241.0
-    world: world
     mob: BLAZE
     amount: 1
     maxamount: 2
@@ -26,7 +17,6 @@ Spawners:
     x: -2349.0
     y: 77.0
     z: 3211.0
-    world: world
     mob: FROZEN_ROGUE
     amount: 1
     maxamount: 2
@@ -34,7 +24,6 @@ Spawners:
     x: -3592.0
     y: 63.0
     z: 1500.0
-    world: world
     mob: PILLAGER_RAVAGER
     amount: 1
     maxamount: 2
@@ -42,7 +31,6 @@ Spawners:
     x: -3672.0
     y: 65.0
     z: 2247.0
-    world: world
     mob: ORC_SHAMAN
     amount: 1
     maxamount: 2
@@ -50,7 +38,6 @@ Spawners:
     x: -3136.0
     y: 66.0
     z: 2528.0
-    world: world
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
@@ -58,7 +45,6 @@ Spawners:
     x: -3004.0
     y: 67.0
     z: 2353.0
-    world: world
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
@@ -66,7 +52,6 @@ Spawners:
     x: -2236.0
     y: 76.0
     z: 3331.0
-    world: world
     mob: FROZEN_ILLUSIONER
     amount: 1
     maxamount: 2
@@ -74,7 +59,6 @@ Spawners:
     x: -2394.0
     y: 61.0
     z: 4795.0
-    world: world
     mob: SKELETON_FIGHTER
     amount: 1
     maxamount: 2
@@ -82,7 +66,6 @@ Spawners:
     x: -2396.0
     y: 63.0
     z: 2844.0
-    world: world
     mob: VILLAGER_4
     amount: 1
     maxamount: 2
@@ -90,7 +73,13 @@ Spawners:
     x: -3667.0
     y: 65.0
     z: 2165.0
-    world: world
+    mob: ORC_JOCKEY
+    amount: 1
+    maxamount: 2
+  s12:
+    x: -3789.0
+    y: 63.0
+    z: 2265.0
     mob: ORC_JOCKEY
     amount: 1
     maxamount: 2
@@ -98,7 +87,6 @@ Spawners:
     x: -3273.0
     y: 66.0
     z: 1808.0
-    world: world
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
@@ -106,15 +94,20 @@ Spawners:
     x: -2838.0
     y: 65.0
     z: 5127.0
-    world: world
     mob: VILLAGER_HOBBIT
+    amount: 1
+    maxamount: 2
+  s15:
+    x: -2116.0
+    y: 63.0
+    z: 4048.0
+    mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
   s16:
     x: -3275.0
     y: 65.0
     z: 1857.0
-    world: world
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
@@ -122,7 +115,13 @@ Spawners:
     x: -2397.0
     y: 62.0
     z: 2877.0
-    world: world
+    mob: VILLAGER_4
+    amount: 1
+    maxamount: 2
+  s18:
+    x: -2375.0
+    y: 67.0
+    z: 2608.0
     mob: VILLAGER_4
     amount: 1
     maxamount: 2
@@ -130,7 +129,6 @@ Spawners:
     x: -2227.0
     y: 61.0
     z: 4961.0
-    world: world
     mob: SKELETON_MAGE
     amount: 1
     maxamount: 2
@@ -138,7 +136,6 @@ Spawners:
     x: -1867.0
     y: 67.0
     z: 4537.0
-    world: world
     mob: CREEPER
     amount: 1
     maxamount: 2
@@ -146,7 +143,6 @@ Spawners:
     x: -3134.0
     y: 65.0
     z: 2107.0
-    world: world
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
@@ -154,7 +150,6 @@ Spawners:
     x: -1743.0
     y: 88.0
     z: 4528.0
-    world: world
     mob: VEX
     amount: 2
     maxamount: 4
@@ -162,7 +157,6 @@ Spawners:
     x: -2342.0
     y: 61.0
     z: 4845.0
-    world: world
     mob: SKELETON_ROGUE
     amount: 1
     maxamount: 2
@@ -170,7 +164,6 @@ Spawners:
     x: -2006.0
     y: 65.0
     z: 4493.0
-    world: world
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
@@ -178,7 +171,6 @@ Spawners:
     x: -2010.0
     y: 66.0
     z: 4561.0
-    world: world
     mob: CREEPER
     amount: 1
     maxamount: 2
@@ -186,7 +178,6 @@ Spawners:
     x: -2242.0
     y: 57.0
     z: 3741.0
-    world: world
     mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
@@ -194,7 +185,6 @@ Spawners:
     x: -3907.0
     y: 64.0
     z: 2272.0
-    world: world
     mob: ORC_SHAMAN
     amount: 1
     maxamount: 2
@@ -202,7 +192,6 @@ Spawners:
     x: -3909.0
     y: 64.0
     z: 2258.0
-    world: world
     mob: ORC_JOCKEY
     amount: 1
     maxamount: 2
@@ -210,7 +199,6 @@ Spawners:
     x: -4056.0
     y: 66.0
     z: 2528.0
-    world: world
     mob: ORC_MAGE
     amount: 1
     maxamount: 2
@@ -218,7 +206,6 @@ Spawners:
     x: -3028.0
     y: 72.0
     z: 3011.0
-    world: world
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
@@ -226,7 +213,6 @@ Spawners:
     x: -2596.0
     y: 95.0
     z: 3542.0
-    world: world
     mob: FROZEN_ARCHER
     amount: 1
     maxamount: 2
@@ -234,7 +220,6 @@ Spawners:
     x: -3900.0
     y: 63.0
     z: 1693.0
-    world: world
     mob: PILLAGER_ROGUE
     amount: 1
     maxamount: 2
@@ -242,7 +227,6 @@ Spawners:
     x: -3249.0
     y: 65.0
     z: 4903.0
-    world: world
     mob: LIZARD
     amount: 1
     maxamount: 2
@@ -250,7 +234,6 @@ Spawners:
     x: -3040.0
     y: 69.0
     z: 2928.0
-    world: world
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
@@ -258,7 +241,6 @@ Spawners:
     x: -2362.0
     y: 143.0
     z: 1861.0
-    world: world
     mob: MUMMY
     amount: 1
     maxamount: 2
@@ -266,7 +248,6 @@ Spawners:
     x: -3261.0
     y: 64.0
     z: 4892.0
-    world: world
     mob: LIZARD
     amount: 1
     maxamount: 2
@@ -274,7 +255,6 @@ Spawners:
     x: -3253.0
     y: 65.0
     z: 4803.0
-    world: world
     mob: LIZARD_POISONOUS
     amount: 1
     maxamount: 2
@@ -282,7 +262,6 @@ Spawners:
     x: -2227.0
     y: 61.0
     z: 4886.0
-    world: world
     mob: SKELETON_ROGUE
     amount: 1
     maxamount: 2
@@ -290,7 +269,6 @@ Spawners:
     x: -2908.0
     y: 66.0
     z: 2907.0
-    world: world
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
@@ -298,15 +276,20 @@ Spawners:
     x: -2398.0
     y: 74.0
     z: 3166.0
-    world: world
     mob: FROZEN_ARCHER
+    amount: 1
+    maxamount: 2
+  s41:
+    x: -2252.0
+    y: 58.0
+    z: 3637.0
+    mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
   s42:
     x: -4137.0
     y: 63.0
     z: 1542.0
-    world: world
     mob: PILLAGER_SHAMAN
     amount: 1
     maxamount: 2
@@ -314,7 +297,6 @@ Spawners:
     x: -2249.0
     y: 45.0
     z: 3612.0
-    world: world
     mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
@@ -322,7 +304,6 @@ Spawners:
     x: -2343.0
     y: 61.0
     z: 4930.0
-    world: world
     mob: SKELETON_ARCHER
     amount: 1
     maxamount: 2
@@ -330,679 +311,664 @@ Spawners:
     x: -2211.0
     y: 70.0
     z: 3302.0
-    world: world
     mob: FROZEN_ROGUE
     amount: 1
     maxamount: 2
-  s47:
+  s46:
     x: -4820.0
     y: 107.0
     z: 2190.0
-    world: world
     mob: VILLAGER_5
     amount: 1
     maxamount: 2
-  s48:
+  s47:
     x: -2615.0
     y: 66.0
     z: 4396.0
-    world: world
     mob: ZOMBIE_TANK
     amount: 1
     maxamount: 2
-  s49:
+  s48:
     x: -2355.0
     y: 138.0
     z: 1704.0
-    world: world
     mob: DESERT_SKELETON_CAVALRY
     amount: 1
     maxamount: 2
-  s50:
+  s49:
     x: -2887.0
     y: 65.0
     z: 2486.0
-    world: world
     mob: WITCH
     amount: 1
     maxamount: 2
-  s51:
+  s50:
     x: -2696.0
     y: 71.0
     z: 4851.0
-    world: world
     mob: SHEEP_BABY
     amount: 1
     maxamount: 2
-  s52:
-    x: 483.0
-    y: 22.0
-    z: -467.0
-    world: tutorial
-    mob: TUTORIAL_2
-    amount: 1
-    maxamount: 2
-  s53:
+  s51:
     x: -2242.0
     y: 61.0
     z: 4770.0
-    world: world
     mob: SKELETON_ARCHER
     amount: 1
     maxamount: 2
-  s54:
+  s52:
     x: -3199.0
     y: 66.0
     z: 4586.0
-    world: world
     mob: SLIME
     amount: 1
     maxamount: 2
-  s55:
+  s53:
     x: -3267.0
     y: 66.0
     z: 4814.0
-    world: world
+    mob: LIZARD_POISONOUS
+    amount: 1
+    maxamount: 2
+  s54:
+    x: -3795.0
+    y: 64.0
+    z: 1487.0
+    mob: ENDERMAN
+    amount: 1
+    maxamount: 2
+  s55:
+    x: -3279.0
+    y: 65.0
+    z: 4853.0
+    mob: LIZARD_POISONOUS
+    amount: 1
+    maxamount: 2
+  s56:
+    x: -3795.0
+    y: 64.0
+    z: 1562.0
+    mob: ENDERMAN
+    amount: 1
+    maxamount: 2
+  s57:
+    x: -3273.0
+    y: 66.0
+    z: 4873.0
     mob: LIZARD_POISONOUS
     amount: 1
     maxamount: 2
   s58:
-    x: -3795.0
-    y: 64.0
-    z: 1562.0
-    world: world
-    mob: ENDERMAN
-    amount: 1
-    maxamount: 2
-  s59:
-    x: 483.0
-    y: 22.0
-    z: -449.0
-    world: tutorial
-    mob: TUTORIAL_2
-    amount: 1
-    maxamount: 2
-  s60:
-    x: -3273.0
-    y: 66.0
-    z: 4873.0
-    world: world
-    mob: LIZARD_POISONOUS
-    amount: 1
-    maxamount: 2
-  s61:
     x: -3200.0
     y: 66.0
     z: 2701.0
-    world: world
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s62:
+  s59:
     x: -3269.0
     y: 65.0
     z: 4832.0
-    world: world
     mob: LIZARD_POISONOUS
     amount: 1
     maxamount: 2
-  s63:
+  s60:
     x: -2471.0
     y: 118.0
     z: 1988.0
-    world: world
     mob: MUMMY_GHOST
     amount: 1
     maxamount: 2
-  s64:
+  s61:
     x: -2853.0
     y: 67.0
     z: 4419.0
-    world: world
     mob: ZOMBIE_VILLAGER
     amount: 1
     maxamount: 2
-  s65:
+  s62:
     x: -2857.0
     y: 66.0
     z: 4378.0
-    world: world
     mob: ZOMBIE_SPLITTER
     amount: 1
     maxamount: 2
-  s66:
+  s63:
     x: -2466.0
     y: 124.0
     z: 1944.0
-    world: world
     mob: SPIDER
     amount: 1
     maxamount: 2
-  s67:
+  s64:
     x: -2219.0
     y: 61.0
     z: 3743.0
-    world: world
     mob: PIRATE_DUEL_MASTER
     amount: 1
     maxamount: 2
-  s68:
+  s65:
     x: -3641.0
     y: 65.0
     z: 2194.0
-    world: world
     mob: ORC_JOCKEY
     amount: 1
     maxamount: 2
-  s69:
+  s66:
     x: -2216.0
     y: 63.0
     z: 3727.0
-    world: world
     mob: PIRATE_SHARPSHOOTER
     amount: 1
     maxamount: 1
-  s70:
+  s67:
     x: -3616.0
     y: 66.0
     z: 1542.0
-    world: world
     mob: PILLAGER_FIGHTER
     amount: 1
     maxamount: 2
-  s71:
+  s68:
     x: -2220.0
     y: 70.0
     z: 3769.0
-    world: world
     mob: PIRATE_SHOOTER
     amount: 1
     maxamount: 2
-  s72:
+  s69:
     x: -2483.0
     y: 61.0
     z: 2517.0
-    world: world
     mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
-  s73:
+  s70:
     x: -2979.0
     y: 73.0
     z: 4842.0
-    world: world
     mob: VILLAGER_1
+    amount: 1
+    maxamount: 2
+  s71:
+    x: -3198.0
+    y: 67.0
+    z: 2817.0
+    mob: WITCH
+    amount: 1
+    maxamount: 2
+  s72:
+    x: -3037.0
+    y: 65.0
+    z: 2455.0
+    mob: WITCH
+    amount: 1
+    maxamount: 2
+  s73:
+    x: -2384.0
+    y: 115.0
+    z: 2022.0
+    mob: MUMMY_GHOST
     amount: 1
     maxamount: 2
   s74:
     x: -3198.0
     y: 67.0
-    z: 2817.0
-    world: world
-    mob: WITCH
+    z: 2782.0
+    mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
   s75:
-    x: -3037.0
-    y: 65.0
-    z: 2455.0
-    world: world
-    mob: WITCH
-    amount: 1
-    maxamount: 2
-  s76:
-    x: -2384.0
-    y: 115.0
-    z: 2022.0
-    world: world
-    mob: MUMMY_GHOST
-    amount: 1
-    maxamount: 2
-  s77:
-    x: -3198.0
-    y: 67.0
-    z: 2782.0
-    world: world
-    mob: GOBLIN_FIGHTER
-    amount: 1
-    maxamount: 2
-  s78:
     x: -1876.0
     y: 66.0
     z: 4507.0
-    world: world
     mob: VEX
     amount: 2
     maxamount: 4
-  s79:
+  s76:
     x: -3040.0
     y: 67.0
     z: 2547.0
-    world: world
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s80:
+  s77:
     x: -2465.0
     y: 131.0
     z: 1808.0
-    world: world
     mob: SPIDER_GHOST
     amount: 1
     maxamount: 2
-  s81:
+  s78:
     x: -3282.0
     y: 65.0
     z: 1712.0
-    world: world
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s82:
+  s79:
     x: -3395.0
     y: 69.0
     z: 2229.0
-    world: world
     mob: BLAZE
     amount: 1
     maxamount: 2
-  s84:
+  s80:
+    x: -2235.0
+    y: 62.0
+    z: 3765.0
+    mob: PIRATE_FIGHTER
+    amount: 1
+    maxamount: 2
+  s81:
     x: -3645.0
     y: 65.0
     z: 1645.0
-    world: world
     mob: PILLAGER_ROGUE
     amount: 1
     maxamount: 2
-  s85:
+  s82:
     x: -1903.0
     y: 73.0
     z: 4718.0
-    world: world
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
-  s86:
+  s83:
     x: -1970.0
     y: 65.0
     z: 4477.0
-    world: world
     mob: CREEPER
     amount: 1
     maxamount: 2
-  s87:
+  s84:
     x: -1972.0
     y: 62.0
     z: 4445.0
-    world: world
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s88:
+  s85:
     x: -2773.0
     y: 67.0
     z: 4370.0
-    world: world
     mob: ZOMBIE_TANK
     amount: 1
     maxamount: 2
-  s89:
+  s86:
     x: -4186.0
     y: 74.0
     z: 1609.0
-    world: world
     mob: PHANTOM
     amount: 1
     maxamount: 2
-  s90:
+  s87:
     x: -2377.0
     y: 139.0
     z: 1897.0
-    world: world
     mob: SPIDER_GHOST
     amount: 1
     maxamount: 2
-  s91:
+  s88:
+    x: 545.0
+    y: 28.0
+    z: -450.0
+    mob: TUTORIAL_2
+    amount: 1
+    maxamount: 2
+  s89:
     x: -2886.0
     y: 70.0
     z: 2941.0
-    world: world
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s92:
+  s90:
     x: -2864.0
     y: 68.0
     z: 4771.0
-    world: world
     mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
-  s93:
+  s91:
     x: -1998.0
     y: 64.0
     z: 4525.0
-    world: world
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
-  s94:
+  s92:
     x: -4023.0
     y: 64.0
     z: 2394.0
-    world: world
     mob: ORC_JOCKEY
     amount: 1
     maxamount: 2
-  s97:
+  s93:
+    x: -3032.0
+    y: 65.0
+    z: 2257.0
+    mob: GOBLIN_MAGE
+    amount: 1
+    maxamount: 2
+  s94:
+    x: -3619.0
+    y: 65.0
+    z: 1374.0
+    mob: PILLAGER_MAGE
+    amount: 1
+    maxamount: 2
+  s95:
     x: -2191.0
     y: 61.0
     z: 4825.0
-    world: world
     mob: SKELETON_FIGHTER
     amount: 1
     maxamount: 2
-  s99:
+  s96:
+    x: -2462.0
+    y: 63.0
+    z: 4881.0
+    mob: SKELETON_ARCHER
+    amount: 1
+    maxamount: 2
+  s97:
     x: -2874.0
     y: 66.0
     z: 4435.0
-    world: world
     mob: ZOMBIE
     amount: 1
     maxamount: 2
-  s100:
+  s98:
     x: -2722.0
     y: 65.0
     z: 4897.0
-    world: world
+    mob: COW_BABY
+    amount: 1
+    maxamount: 2
+  s99:
+    x: -3911.0
+    y: 63.0
+    z: 1805.0
+    mob: PILLAGER_FIGHTER
+    amount: 1
+    maxamount: 2
+  s100:
+    x: -2728.0
+    y: 66.0
+    z: 4831.0
     mob: COW_BABY
     amount: 1
     maxamount: 2
   s101:
-    x: -3911.0
-    y: 63.0
-    z: 1805.0
-    world: world
+    x: -3799.0
+    y: 61.0
+    z: 1315.0
     mob: PILLAGER_FIGHTER
     amount: 1
     maxamount: 2
   s102:
-    x: -2728.0
-    y: 66.0
-    z: 4831.0
-    world: world
-    mob: COW_BABY
-    amount: 1
-    maxamount: 2
-  s103:
-    x: -3799.0
-    y: 61.0
-    z: 1315.0
-    world: world
-    mob: PILLAGER_FIGHTER
-    amount: 1
-    maxamount: 2
-  s104:
     x: -2607.0
     y: 66.0
     z: 4423.0
-    world: world
     mob: ZOMBIE_SPLITTER
     amount: 1
     maxamount: 2
-  s105:
+  s103:
     x: -4026.0
     y: 64.0
     z: 2127.0
-    world: world
     mob: ORC_GLADIATOR
     amount: 1
     maxamount: 2
-  s107:
+  s104:
+    x: -3656.0
+    y: 65.0
+    z: 2244.0
+    mob: ORC_MAGE
+    amount: 1
+    maxamount: 2
+  s105:
     x: -2358.0
     y: 61.0
     z: 4876.0
-    world: world
     mob: SKELETON_MONK
     amount: 1
     maxamount: 2
-  s108:
+  s106:
     x: -3153.0
     y: 62.0
     z: 4495.0
-    world: world
     mob: SLIME
     amount: 1
     maxamount: 2
-  s109:
+  s107:
     x: -2317.0
     y: 61.0
     z: 4969.0
-    world: world
     mob: SKELETON_ROGUE
     amount: 1
     maxamount: 2
-  s110:
+  s108:
     x: -3161.0
     y: 62.0
     z: 4518.0
-    world: world
     mob: SLIME_STICKY
     amount: 1
     maxamount: 2
-  s111:
+  s109:
     x: -3695.0
     y: 65.0
     z: 1657.0
-    world: world
     mob: PILLAGER_RAVAGER
     amount: 1
     maxamount: 2
-  s112:
+  s110:
     x: -2456.0
     y: 131.0
     z: 1893.0
-    world: world
     mob: SPIDER_GHOST
     amount: 1
     maxamount: 2
-  s113:
+  s111:
     x: -2464.0
     y: 132.0
     z: 1848.0
-    world: world
     mob: MUMMY
     amount: 1
     maxamount: 2
-  s114:
+  s112:
     x: -3051.0
     y: 67.0
     z: 2868.0
-    world: world
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
-  s115:
+  s113:
     x: -1919.0
     y: 62.0
     z: 4499.0
-    world: world
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
-  s116:
+  s114:
     x: -3829.0
     y: 71.0
     z: 1559.0
-    world: world
     mob: PHANTOM
     amount: 1
     maxamount: 2
-  s117:
+  s115:
     x: -2680.0
     y: 66.0
     z: 4827.0
-    world: world
     mob: COW_BABY
     amount: 1
     maxamount: 2
-  s118:
+  s116:
     x: -2683.0
     y: 65.0
     z: 4928.0
-    world: world
     mob: SHEEP_BABY
     amount: 1
     maxamount: 2
-  s119:
+  s117:
     x: -3835.0
     y: 68.0
     z: 1446.0
-    world: world
     mob: PHANTOM
     amount: 1
     maxamount: 2
-  s120:
+  s118:
     x: -3835.0
     y: 64.0
     z: 2260.0
-    world: world
     mob: ORC_GLADIATOR
     amount: 1
     maxamount: 2
-  s121:
+  s119:
     x: -2478.0
     y: 62.0
     z: 2664.0
-    world: world
     mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
-  s122:
+  s120:
     x: -2307.0
     y: 61.0
     z: 4811.0
-    world: world
     mob: SKELETON_ARCHER
     amount: 1
     maxamount: 2
-  s123:
+  s121:
     x: -2999.0
     y: 75.0
     z: 4816.0
-    world: world
     mob: VILLAGER_1
     amount: 1
     maxamount: 2
-  s124:
+  s122:
     x: -2086.0
     y: 66.0
     z: 4196.0
-    world: world
     mob: VILLAGER_3
     amount: 1
     maxamount: 2
-  s125:
+  s123:
     x: -1904.0
     y: 62.0
     z: 4510.0
-    world: world
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s126:
+  s124:
     x: -2338.0
     y: 62.0
     z: 4774.0
-    world: world
     mob: SKELETON_MAGE
     amount: 1
     maxamount: 2
-  s127:
+  s125:
     x: -3383.0
     y: 69.0
     z: 2244.0
-    world: world
     mob: BLAZE
     amount: 1
     maxamount: 2
-  s128:
+  s126:
     x: -2922.0
     y: 66.0
     z: 2622.0
-    world: world
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s129:
+  s127:
     x: -4028.0
     y: 59.0
     z: 1326.0
-    world: world
     mob: PILLAGER_FIGHTER
     amount: 1
     maxamount: 2
-  s130:
+  s128:
+    x: -396.0
+    y: 3.0
+    z: 2230.0
+    mob: BOSS_DARKNESS
+    amount: 1
+    maxamount: 1
+  s129:
     x: -2450.0
     y: 116.0
     z: 2038.0
-    world: world
     mob: MUMMY_GHOST
     amount: 1
     maxamount: 2
-  s132:
+  s130:
+    x: -2607.0
+    y: 66.0
+    z: 4766.0
+    mob: VILLAGER_2
+    amount: 1
+    maxamount: 2
+  s131:
     x: -2481.0
     y: 65.0
     z: 3151.0
-    world: world
     mob: TIMBERMAN
     amount: 1
     maxamount: 2
-  s133:
+  s132:
     x: -2997.0
     y: 73.0
     z: 4876.0
-    world: world
     mob: VILLAGER_1
     amount: 1
     maxamount: 2
-  s134:
+  s133:
     x: -2309.0
     y: 61.0
     z: 4894.0
-    world: world
     mob: SKELETON_ARCHER
     amount: 1
     maxamount: 2
-  s135:
+  s134:
     x: -2481.0
     y: 75.0
     z: 3118.0
-    world: world
     mob: FROZEN_ARCHER
     amount: 1
     maxamount: 2
-  s137:
+  s135:
+    x: -2081.0
+    y: 66.0
+    z: 4270.0
+    mob: VILLAGER_SAILOR
+    amount: 1
+    maxamount: 2
+  s136:
     x: -2029.0
     y: 64.0
     z: 4176.0
-    world: world
     mob: VILLAGER_3
     amount: 1
     maxamount: 2
-  s138:
+  s137:
     x: -3224.0
     y: 67.0
     z: 4899.0
-    world: world
     mob: LIZARD
+    amount: 1
+    maxamount: 2
+  s138:
+    x: 569.0
+    y: 28.0
+    z: -400.0
+    mob: TUTORIAL_1
     amount: 1
     maxamount: 2
   s139:
     x: -3217.0
     y: 67.0
     z: 4893.0
-    world: world
     mob: LIZARD
     amount: 1
     maxamount: 2
@@ -1010,7 +976,6 @@ Spawners:
     x: -2926.0
     y: 68.0
     z: 4397.0
-    world: world
     mob: ZOMBIE_VILLAGER
     amount: 1
     maxamount: 2
@@ -1018,7 +983,6 @@ Spawners:
     x: -2913.0
     y: 67.0
     z: 4409.0
-    world: world
     mob: ZOMBIE_SPLITTER
     amount: 1
     maxamount: 2
@@ -1026,7 +990,6 @@ Spawners:
     x: -2925.0
     y: 70.0
     z: 2416.0
-    world: world
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
@@ -1034,7 +997,6 @@ Spawners:
     x: -3637.0
     y: 65.0
     z: 2240.0
-    world: world
     mob: ORC_FIGHTER
     amount: 1
     maxamount: 2
@@ -1042,7 +1004,6 @@ Spawners:
     x: -2071.0
     y: 75.0
     z: 3627.0
-    world: world
     mob: PIRATE_SHOOTER
     amount: 1
     maxamount: 2
@@ -1050,7 +1011,6 @@ Spawners:
     x: -4177.0
     y: 64.0
     z: 1570.0
-    world: world
     mob: ENDERMAN
     amount: 1
     maxamount: 2
@@ -1058,7 +1018,6 @@ Spawners:
     x: -4186.0
     y: 75.0
     z: 1585.0
-    world: world
     mob: PHANTOM
     amount: 1
     maxamount: 2
@@ -1066,7 +1025,6 @@ Spawners:
     x: -3499.0
     y: 63.0
     z: 2241.0
-    world: world
     mob: MAGMA_CUBE
     amount: 1
     maxamount: 2
@@ -1074,7 +1032,6 @@ Spawners:
     x: -2327.0
     y: 143.0
     z: 1607.0
-    world: world
     mob: DESERT_SKELETON_CAVALRY
     amount: 1
     maxamount: 2
@@ -1082,7 +1039,6 @@ Spawners:
     x: -2152.0
     y: 61.0
     z: 4751.0
-    world: world
     mob: SKELETON_MAGE
     amount: 1
     maxamount: 2
@@ -1090,7 +1046,6 @@ Spawners:
     x: -2358.0
     y: 71.0
     z: 3132.0
-    world: world
     mob: TIMBERMAN
     amount: 1
     maxamount: 2
@@ -1098,7 +1053,6 @@ Spawners:
     x: -3236.0
     y: 65.0
     z: 1829.0
-    world: world
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
@@ -1106,15 +1060,20 @@ Spawners:
     x: -2088.0
     y: 66.0
     z: 3749.0
-    world: world
     mob: PIRATE_DUEL_MASTER
+    amount: 1
+    maxamount: 2
+  s153:
+    x: -4002.0
+    y: 59.0
+    z: 1260.0
+    mob: PILLAGER_MAGE
     amount: 1
     maxamount: 2
   s154:
     x: -3235.0
     y: 65.0
     z: 1783.0
-    world: world
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
@@ -1122,7 +1081,6 @@ Spawners:
     x: -2797.0
     y: 68.0
     z: 4395.0
-    world: world
     mob: ZOMBIE_SPLITTER
     amount: 1
     maxamount: 2
@@ -1130,7 +1088,6 @@ Spawners:
     x: -2088.0
     y: 71.0
     z: 3724.0
-    world: world
     mob: PIRATE_SHARPSHOOTER
     amount: 1
     maxamount: 1
@@ -1138,2183 +1095,1931 @@ Spawners:
     x: -2088.0
     y: 66.0
     z: 3765.0
-    world: world
     mob: PIRATE_SHARPSHOOTER
     amount: 1
     maxamount: 1
   s158:
+    x: 573.0
+    y: 29.0
+    z: -372.0
+    mob: TUTORIAL_1
+    amount: 1
+    maxamount: 2
+  s159:
     x: -2038.0
     y: 65.0
     z: 4556.0
-    world: world
     mob: VEX
     amount: 2
     maxamount: 4
-  s159:
+  s160:
     x: -3640.0
     y: 63.0
     z: 1598.0
-    world: world
     mob: PILLAGER_SHAMAN
     amount: 1
     maxamount: 2
-  s160:
+  s161:
     x: -2441.0
     y: 61.0
     z: 4851.0
-    world: world
     mob: SKELETON_ROGUE
     amount: 1
     maxamount: 2
   s162:
-    x: -2320.0
-    y: 76.0
-    z: 3253.0
-    world: world
-    mob: TIMBERMAN
+    x: -3155.0
+    y: 65.0
+    z: 2082.0
+    mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
   s163:
-    x: -1794.0
-    y: 89.0
-    z: 4644.0
-    world: world
-    mob: JELLYBEAN
-    amount: 2
-    maxamount: 4
+    x: 374.0
+    y: 3.0
+    z: -1005.0
+    mob: TUTORIAL_BOSS
+    amount: 1
+    maxamount: 1
   s164:
-    x: -2115.0
-    y: 24.0
-    z: 3139.0
-    world: world
-    mob: ZOMBIE_JOCKEY
+    x: -2320.0
+    y: 76.0
+    z: 3253.0
+    mob: TIMBERMAN
     amount: 1
     maxamount: 2
   s165:
-    x: -2494.0
-    y: 62.0
-    z: 2721.0
-    world: world
-    mob: VILLAGER_FARMER
-    amount: 1
-    maxamount: 2
+    x: -1794.0
+    y: 89.0
+    z: 4644.0
+    mob: JELLYBEAN
+    amount: 2
+    maxamount: 4
   s166:
-    x: -3163.0
-    y: 65.0
-    z: 2162.0
-    world: world
-    mob: WITCH
+    x: -2115.0
+    y: 24.0
+    z: 3139.0
+    mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
   s167:
+    x: -2494.0
+    y: 62.0
+    z: 2721.0
+    mob: VILLAGER_FARMER
+    amount: 1
+    maxamount: 2
+  s168:
+    x: -3163.0
+    y: 65.0
+    z: 2162.0
+    mob: WITCH
+    amount: 1
+    maxamount: 2
+  s169:
     x: -2087.0
     y: 62.0
     z: 3952.0
-    world: world
     mob: VILLAGER_SAILOR
     amount: 1
     maxamount: 2
   s170:
-    x: -2104.0
-    y: 66.0
-    z: 4152.0
-    world: world
-    mob: VILLAGER_3
-    amount: 1
-    maxamount: 2
-  s171:
-    x: -2002.0
-    y: 64.0
-    z: 4203.0
-    world: world
-    mob: VILLAGER_3
-    amount: 1
-    maxamount: 2
-  s172:
-    x: -3140.0
-    y: 62.0
-    z: 4464.0
-    world: world
-    mob: SLIME_STICKY
-    amount: 1
-    maxamount: 2
-  s173:
-    x: -1773.0
-    y: 88.0
-    z: 4534.0
-    world: world
-    mob: CREEPER
-    amount: 1
-    maxamount: 2
-  s174:
-    x: -2908.0
-    y: 65.0
-    z: 2872.0
-    world: world
-    mob: GOBLIN_JOCKEY
-    amount: 1
-    maxamount: 2
-  s176:
-    x: -1775.0
-    y: 89.0
-    z: 4609.0
-    world: world
-    mob: VEX
-    amount: 2
-    maxamount: 4
-  s178:
-    x: -4062.0
-    y: 64.0
-    z: 2131.0
-    world: world
-    mob: ORC_SHAMAN
-    amount: 1
-    maxamount: 2
-  s179:
-    x: -2368.0
-    y: 62.0
-    z: 2858.0
-    world: world
-    mob: VILLAGER_4
-    amount: 1
-    maxamount: 2
-  s181:
-    x: -396.0
-    y: 3.0
-    z: 2230.0
-    world: aleesia
-    mob: BOSS_DARKNESS
-    amount: 1
-    maxamount: 1
-  s182:
-    x: -3368.0
-    y: 69.0
-    z: 2219.0
-    world: world
-    mob: BLAZE
-    amount: 1
-    maxamount: 2
-  s183:
-    x: -2016.0
-    y: 66.0
-    z: 4479.0
-    world: world
-    mob: CREEPER
-    amount: 1
-    maxamount: 2
-  s187:
-    x: -2322.0
-    y: 77.0
-    z: 3395.0
-    world: world
-    mob: FROZEN_ILLUSIONER
-    amount: 1
-    maxamount: 2
-  s188:
-    x: -4219.0
-    y: 74.0
-    z: 1577.0
-    world: world
-    mob: PHANTOM
-    amount: 1
-    maxamount: 2
-  s189:
-    x: -3362.0
-    y: 69.0
-    z: 2244.0
-    world: world
-    mob: BLAZE
-    amount: 1
-    maxamount: 2
-  s190:
-    x: -3148.0
-    y: 65.0
-    z: 2592.0
-    world: world
-    mob: GOBLIN_JOCKEY
-    amount: 1
-    maxamount: 2
-  s191:
-    x: -2768.0
-    y: 65.0
-    z: 4915.0
-    world: world
-    mob: SHEEP_BABY
-    amount: 1
-    maxamount: 2
-  s192:
-    x: -2339.0
-    y: 138.0
-    z: 1568.0
-    world: world
-    mob: DESERT_SKELETON_CAVALRY
-    amount: 1
-    maxamount: 2
-  s193:
-    x: -2575.0
-    y: 66.0
-    z: 4778.0
-    world: world
-    mob: VILLAGER_2
-    amount: 1
-    maxamount: 2
-  s194:
-    x: -2667.0
-    y: 65.0
-    z: 4962.0
-    world: world
-    mob: COW_BABY
-    amount: 1
-    maxamount: 2
-  s195:
-    x: -3269.0
-    y: 65.0
-    z: 1909.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s197:
-    x: -3845.0
-    y: 58.0
-    z: 1251.0
-    world: world
-    mob: PILLAGER_RAVAGER
-    amount: 1
-    maxamount: 2
-  s198:
-    x: -2905.0
-    y: 67.0
-    z: 4429.0
-    world: world
-    mob: ZOMBIE_TANK
-    amount: 1
-    maxamount: 2
-  s199:
-    x: -2755.0
-    y: 67.0
-    z: 4850.0
-    world: world
-    mob: SHEEP_BABY
-    amount: 1
-    maxamount: 2
-  s200:
-    x: -2761.0
-    y: 66.0
-    z: 4884.0
-    world: world
-    mob: COW_BABY
-    amount: 1
-    maxamount: 2
-  s201:
-    x: -4149.0
-    y: 64.0
-    z: 1625.0
-    world: world
-    mob: ENDERMAN
-    amount: 1
-    maxamount: 2
-  s202:
-    x: -2905.0
-    y: 69.0
-    z: 2540.0
-    world: world
-    mob: GOBLIN_SHAMAN
-    amount: 1
-    maxamount: 2
-  s203:
-    x: -2547.0
-    y: 110.0
-    z: 1928.0
-    world: world
-    mob: MUMMY
-    amount: 1
-    maxamount: 2
-  s204:
-    x: -3721.0
-    y: 64.0
-    z: 2201.0
-    world: world
-    mob: ORC_GLADIATOR
-    amount: 1
-    maxamount: 2
-  s205:
-    x: -2139.0
-    y: 26.0
-    z: 3136.0
-    world: world
-    mob: ZOMBIE_JOCKEY
-    amount: 1
-    maxamount: 2
-  s206:
-    x: -2337.0
-    y: 138.0
-    z: 1777.0
-    world: world
-    mob: DESERT_SKELETON_ARCHER
-    amount: 1
-    maxamount: 2
-  s209:
-    x: -4207.0
-    y: 63.0
-    z: 1595.0
-    world: world
-    mob: ENDERMAN
-    amount: 1
-    maxamount: 2
-  s210:
-    x: -3267.0
-    y: 65.0
-    z: 2076.0
-    world: world
-    mob: GOBLIN_SHAMAN
-    amount: 1
-    maxamount: 2
-  s211:
-    x: -2351.0
-    y: 143.0
-    z: 1812.0
-    world: world
-    mob: DESERT_SKELETON_CAVALRY
-    amount: 1
-    maxamount: 2
-  s212:
-    x: -2907.0
-    y: 65.0
-    z: 2295.0
-    world: world
-    mob: GOBLIN_JOCKEY
-    amount: 1
-    maxamount: 2
-  s217:
-    x: -2419.0
-    y: 61.0
-    z: 4826.0
-    world: world
-    mob: SKELETON_MONK
-    amount: 1
-    maxamount: 2
-  s218:
-    x: -3279.0
-    y: 63.0
-    z: 2236.0
-    world: world
-    mob: WITCH
-    amount: 1
-    maxamount: 2
-  s219:
-    x: -2802.0
-    y: 66.0
-    z: 4434.0
-    world: world
-    mob: ZOMBIE_VILLAGER
-    amount: 1
-    maxamount: 2
-  s220:
-    x: -2430.0
-    y: 61.0
-    z: 4904.0
-    world: world
-    mob: SKELETON_FIGHTER
-    amount: 1
-    maxamount: 2
-  s221:
-    x: -3845.0
-    y: 63.0
-    z: 1452.0
-    world: world
-    mob: ENDERMAN
-    amount: 1
-    maxamount: 2
-  s222:
-    x: -3163.0
-    y: 67.0
-    z: 2861.0
-    world: world
-    mob: GOBLIN_ROGUE
-    amount: 1
-    maxamount: 2
-  s223:
-    x: -3960.0
-    y: 38.0
-    z: 2197.0
-    world: world
-    mob: ORC_JOCKEY
-    amount: 1
-    maxamount: 2
-  s224:
-    x: -2958.0
-    y: 67.0
-    z: 2908.0
-    world: world
-    mob: GOBLIN_ROGUE
-    amount: 1
-    maxamount: 2
-  s225:
-    x: -1947.0
-    y: 70.0
-    z: 4677.0
-    world: world
-    mob: VEX
-    amount: 2
-    maxamount: 4
-  s226:
-    x: -2455.0
-    y: 70.0
-    z: 3143.0
-    world: world
-    mob: FROZEN_ROGUE
-    amount: 1
-    maxamount: 2
-  s227:
-    x: -2449.0
-    y: 69.0
-    z: 3103.0
-    world: world
-    mob: FROZEN_ILLUSIONER
-    amount: 1
-    maxamount: 2
-  s228:
-    x: -2569.0
-    y: 66.0
-    z: 4454.0
-    world: world
-    mob: ZOMBIE
-    amount: 1
-    maxamount: 2
-  s229:
-    x: -3868.0
-    y: 63.0
-    z: 2332.0
-    world: world
-    mob: ORC_SHAMAN
-    amount: 1
-    maxamount: 2
-  s231:
-    x: -3865.0
-    y: 63.0
-    z: 2288.0
-    world: world
-    mob: ORC_MAGE
-    amount: 1
-    maxamount: 2
-  s232:
-    x: -2827.0
-    y: 65.0
-    z: 4792.0
-    world: world
-    mob: VILLAGER_FARMER
-    amount: 1
-    maxamount: 2
-  s233:
-    x: -2046.0
-    y: 65.0
-    z: 3644.0
-    world: world
-    mob: PIRATE_FIGHTER
-    amount: 1
-    maxamount: 2
-  s234:
-    x: -1940.0
-    y: 63.0
-    z: 4507.0
-    world: world
-    mob: CREEPER
-    amount: 1
-    maxamount: 2
-  s235:
-    x: -1946.0
-    y: 64.0
-    z: 4490.0
-    world: world
-    mob: VEX
-    amount: 2
-    maxamount: 4
-  s236:
-    x: -1946.0
-    y: 66.0
-    z: 4581.0
-    world: world
-    mob: SHULKER
-    amount: 1
-    maxamount: 1
-  s237:
-    x: -1952.0
-    y: 64.0
-    z: 4548.0
-    world: world
-    mob: JELLYBEAN
-    amount: 2
-    maxamount: 4
-  s238:
-    x: -1946.0
-    y: 67.0
-    z: 4617.0
-    world: world
-    mob: CREEPER
-    amount: 1
-    maxamount: 2
-  s239:
-    x: -2293.0
-    y: 143.0
-    z: 1644.0
-    world: world
-    mob: DESERT_SKELETON_ARCHER
-    amount: 1
-    maxamount: 2
-  s240:
-    x: -3233.0
-    y: 64.0
-    z: 4530.0
-    world: world
-    mob: SLIME_STICKY
-    amount: 1
-    maxamount: 2
-  s241:
-    x: -2445.0
-    y: 63.0
-    z: 2620.0
-    world: world
-    mob: VILLAGER_FARMER
-    amount: 1
-    maxamount: 2
-  s242:
-    x: -3848.0
-    y: 63.0
-    z: 1746.0
-    world: world
-    mob: PILLAGER_SHAMAN
-    amount: 1
-    maxamount: 2
-  s244:
-    x: -2095.0
-    y: 14.0
-    z: 3147.0
-    world: world
-    mob: ZOMBIE_JOCKEY
-    amount: 1
-    maxamount: 2
-  s246:
-    x: -3697.0
-    y: 66.0
-    z: 1302.0
-    world: world
-    mob: PILLAGER_ROGUE
-    amount: 1
-    maxamount: 2
-  s247:
-    x: -2185.0
-    y: 61.0
-    z: 4735.0
-    world: world
-    mob: SKELETON_MONK
-    amount: 1
-    maxamount: 2
-  s248:
-    x: -2285.0
-    y: 72.0
-    z: 3259.0
-    world: world
-    mob: FROZEN_ARCHER
-    amount: 1
-    maxamount: 2
-  s249:
-    x: -2288.0
-    y: 67.0
-    z: 3225.0
-    world: world
-    mob: FROZEN_ROGUE
-    amount: 1
-    maxamount: 2
-  s250:
-    x: -4237.0
-    y: 64.0
-    z: 1519.0
-    world: world
-    mob: ENDERMAN
-    amount: 1
-    maxamount: 2
-  s251:
-    x: 545.0
-    y: 28.0
-    z: -450.0
-    world: tutorial
-    mob: TUTORIAL_2
-    amount: 1
-    maxamount: 2
-  s252:
-    x: -3200.0
-    y: 66.0
-    z: 4895.0
-    world: world
-    mob: LIZARD
-    amount: 1
-    maxamount: 2
-  s253:
-    x: -4895.0
-    y: 119.0
-    z: 2072.0
-    world: world
-    mob: VILLAGER_5
-    amount: 1
-    maxamount: 2
-  s254:
-    x: -2831.0
-    y: 68.0
-    z: 4399.0
-    world: world
-    mob: ZOMBIE_TANK
-    amount: 1
-    maxamount: 2
-  s255:
-    x: -2161.0
-    y: 64.0
-    z: 4253.0
-    world: world
-    mob: VILLAGER_FARMER
-    amount: 1
-    maxamount: 2
-  s12:
-    x: -3789.0
-    y: 63.0
-    z: 2265.0
-    world: world
-    mob: ORC_JOCKEY
-    amount: 1
-    maxamount: 2
-  s15:
-    x: -2116.0
-    y: 63.0
-    z: 4048.0
-    world: world
-    mob: VILLAGER_FARMER
-    amount: 1
-    maxamount: 2
-  s41:
-    x: -2252.0
-    y: 58.0
-    z: 3637.0
-    world: world
-    mob: PIRATE_DROWNED
-    amount: 1
-    maxamount: 2
-  s56:
-    x: -3795.0
-    y: 64.0
-    z: 1487.0
-    world: world
-    mob: ENDERMAN
-    amount: 1
-    maxamount: 2
-  s57:
-    x: -3279.0
-    y: 65.0
-    z: 4853.0
-    world: world
-    mob: LIZARD_POISONOUS
-    amount: 1
-    maxamount: 2
-  s83:
-    x: -2235.0
-    y: 62.0
-    z: 3765.0
-    world: world
-    mob: PIRATE_FIGHTER
-    amount: 1
-    maxamount: 2
-  s95:
-    x: -3032.0
-    y: 65.0
-    z: 2257.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s96:
-    x: -3619.0
-    y: 65.0
-    z: 1374.0
-    world: world
-    mob: PILLAGER_MAGE
-    amount: 1
-    maxamount: 2
-  s98:
-    x: -2462.0
-    y: 63.0
-    z: 4881.0
-    world: world
-    mob: SKELETON_ARCHER
-    amount: 1
-    maxamount: 2
-  s136:
-    x: -2081.0
-    y: 66.0
-    z: 4270.0
-    world: world
-    mob: VILLAGER_SAILOR
-    amount: 1
-    maxamount: 2
-  s153:
-    x: -4002.0
-    y: 59.0
-    z: 1260.0
-    world: world
-    mob: PILLAGER_MAGE
-    amount: 1
-    maxamount: 2
-  s168:
     x: -3678.0
     y: 54.0
     z: 1390.0
-    world: world
     mob: PILLAGER_FIGHTER
     amount: 1
     maxamount: 2
-  s169:
+  s171:
     x: -2873.0
     y: 77.0
     z: 5152.0
-    world: world
     mob: VILLAGER_HOBBIT
     amount: 1
     maxamount: 2
+  s172:
+    x: -2104.0
+    y: 66.0
+    z: 4152.0
+    mob: VILLAGER_3
+    amount: 1
+    maxamount: 2
+  s173:
+    x: -2002.0
+    y: 64.0
+    z: 4203.0
+    mob: VILLAGER_3
+    amount: 1
+    maxamount: 2
+  s174:
+    x: -3140.0
+    y: 62.0
+    z: 4464.0
+    mob: SLIME_STICKY
+    amount: 1
+    maxamount: 2
   s175:
+    x: -1773.0
+    y: 88.0
+    z: 4534.0
+    mob: CREEPER
+    amount: 1
+    maxamount: 2
+  s176:
+    x: -2908.0
+    y: 65.0
+    z: 2872.0
+    mob: GOBLIN_JOCKEY
+    amount: 1
+    maxamount: 2
+  s177:
     x: -1761.0
     y: 89.0
     z: 4582.0
-    world: world
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s177:
+  s178:
+    x: -1775.0
+    y: 89.0
+    z: 4609.0
+    mob: VEX
+    amount: 2
+    maxamount: 4
+  s179:
     x: -4058.0
     y: 63.0
     z: 2110.0
-    world: world
     mob: ORC_MAGE
     amount: 1
     maxamount: 2
   s180:
+    x: -4062.0
+    y: 64.0
+    z: 2131.0
+    mob: ORC_SHAMAN
+    amount: 1
+    maxamount: 2
+  s181:
+    x: -2368.0
+    y: 62.0
+    z: 2858.0
+    mob: VILLAGER_4
+    amount: 1
+    maxamount: 2
+  s182:
     x: -3655.0
     y: 65.0
     z: 1474.0
-    world: world
     mob: PILLAGER_ROGUE
     amount: 1
     maxamount: 2
+  s183:
+    x: -3368.0
+    y: 69.0
+    z: 2219.0
+    mob: BLAZE
+    amount: 1
+    maxamount: 2
   s184:
-    x: -3659.0
-    y: 65.0
-    z: 1322.0
-    world: world
-    mob: PILLAGER_RAVAGER
+    x: -2016.0
+    y: 66.0
+    z: 4479.0
+    mob: CREEPER
     amount: 1
     maxamount: 2
   s185:
-    x: -2701.0
-    y: 67.0
-    z: 4391.0
-    world: world
-    mob: ZOMBIE_SPLITTER
+    x: -3659.0
+    y: 65.0
+    z: 1322.0
+    mob: PILLAGER_RAVAGER
     amount: 1
     maxamount: 2
   s186:
+    x: -2701.0
+    y: 67.0
+    z: 4391.0
+    mob: ZOMBIE_SPLITTER
+    amount: 1
+    maxamount: 2
+  s187:
     x: -2454.0
     y: 62.0
     z: 2566.0
-    world: world
     mob: VILLAGER_FARMER
     amount: 1
     maxamount: 2
-  s230:
-    x: -3871.0
-    y: 63.0
-    z: 2313.0
-    world: world
-    mob: ORC_FIGHTER
+  s188:
+    x: -2322.0
+    y: 77.0
+    z: 3395.0
+    mob: FROZEN_ILLUSIONER
     amount: 1
     maxamount: 2
-  s245:
-    x: -3229.0
+  s189:
+    x: -4219.0
+    y: 74.0
+    z: 1577.0
+    mob: PHANTOM
+    amount: 1
+    maxamount: 2
+  s190:
+    x: -3362.0
+    y: 69.0
+    z: 2244.0
+    mob: BLAZE
+    amount: 1
+    maxamount: 2
+  s191:
+    x: -3148.0
     y: 65.0
-    z: 2373.0
-    world: world
-    mob: GOBLIN_FIGHTER
+    z: 2592.0
+    mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s257:
-    x: -2703.0
-    y: 66.0
-    z: 4792.0
-    world: world
+  s192:
+    x: -2768.0
+    y: 65.0
+    z: 4915.0
     mob: SHEEP_BABY
     amount: 1
     maxamount: 2
-  s258:
-    x: -2060.0
-    y: 4.0
-    z: 3133.0
-    world: world
+  s193:
+    x: -2339.0
+    y: 138.0
+    z: 1568.0
+    mob: DESERT_SKELETON_CAVALRY
+    amount: 1
+    maxamount: 2
+  s194:
+    x: -2575.0
+    y: 66.0
+    z: 4778.0
+    mob: VILLAGER_2
+    amount: 1
+    maxamount: 2
+  s195:
+    x: -2667.0
+    y: 65.0
+    z: 4962.0
+    mob: COW_BABY
+    amount: 1
+    maxamount: 2
+  s196:
+    x: -3269.0
+    y: 65.0
+    z: 1909.0
+    mob: GOBLIN_MAGE
+    amount: 1
+    maxamount: 2
+  s197:
+    x: -4048.0
+    y: 59.0
+    z: 1734.0
+    mob: PILLAGER_SHAMAN
+    amount: 1
+    maxamount: 2
+  s198:
+    x: -3845.0
+    y: 58.0
+    z: 1251.0
+    mob: PILLAGER_RAVAGER
+    amount: 1
+    maxamount: 2
+  s199:
+    x: -2905.0
+    y: 67.0
+    z: 4429.0
+    mob: ZOMBIE_TANK
+    amount: 1
+    maxamount: 2
+  s200:
+    x: -2755.0
+    y: 67.0
+    z: 4850.0
+    mob: SHEEP_BABY
+    amount: 1
+    maxamount: 2
+  s201:
+    x: -2761.0
+    y: 66.0
+    z: 4884.0
+    mob: COW_BABY
+    amount: 1
+    maxamount: 2
+  s202:
+    x: -4149.0
+    y: 64.0
+    z: 1625.0
+    mob: ENDERMAN
+    amount: 1
+    maxamount: 2
+  s203:
+    x: -2905.0
+    y: 69.0
+    z: 2540.0
+    mob: GOBLIN_SHAMAN
+    amount: 1
+    maxamount: 2
+  s204:
+    x: -2547.0
+    y: 110.0
+    z: 1928.0
+    mob: MUMMY
+    amount: 1
+    maxamount: 2
+  s205:
+    x: 581.0
+    y: 29.0
+    z: -339.0
+    mob: TUTORIAL_1
+    amount: 1
+    maxamount: 2
+  s206:
+    x: -3721.0
+    y: 64.0
+    z: 2201.0
+    mob: ORC_GLADIATOR
+    amount: 1
+    maxamount: 2
+  s207:
+    x: -2139.0
+    y: 26.0
+    z: 3136.0
     mob: ZOMBIE_JOCKEY
+    amount: 1
+    maxamount: 2
+  s208:
+    x: -2337.0
+    y: 138.0
+    z: 1777.0
+    mob: DESERT_SKELETON_ARCHER
+    amount: 1
+    maxamount: 2
+  s209:
+    x: -3164.0
+    y: 66.0
+    z: 2739.0
+    mob: GOBLIN_MAGE
+    amount: 1
+    maxamount: 2
+  s210:
+    x: -2919.0
+    y: 68.0
+    z: 2940.0
+    mob: GOBLIN_MAGE
+    amount: 1
+    maxamount: 2
+  s211:
+    x: -4207.0
+    y: 63.0
+    z: 1595.0
+    mob: ENDERMAN
+    amount: 1
+    maxamount: 2
+  s212:
+    x: -3267.0
+    y: 65.0
+    z: 2076.0
+    mob: GOBLIN_SHAMAN
+    amount: 1
+    maxamount: 2
+  s213:
+    x: -2351.0
+    y: 143.0
+    z: 1812.0
+    mob: DESERT_SKELETON_CAVALRY
+    amount: 1
+    maxamount: 2
+  s214:
+    x: -2907.0
+    y: 65.0
+    z: 2295.0
+    mob: GOBLIN_JOCKEY
+    amount: 1
+    maxamount: 2
+  s215:
+    x: -2107.0
+    y: 62.0
+    z: 3950.0
+    mob: VILLAGER_SAILOR
+    amount: 1
+    maxamount: 2
+  s216:
+    x: -2569.0
+    y: 66.0
+    z: 4481.0
+    mob: ZOMBIE_VILLAGER
+    amount: 1
+    maxamount: 2
+  s217:
+    x: -2908.0
+    y: 70.0
+    z: 2358.0
+    mob: GOBLIN_MAGE
+    amount: 1
+    maxamount: 2
+  s218:
+    x: -2879.0
+    y: 66.0
+    z: 5109.0
+    mob: VILLAGER_HOBBIT
+    amount: 1
+    maxamount: 2
+  s219:
+    x: -2419.0
+    y: 61.0
+    z: 4826.0
+    mob: SKELETON_MONK
+    amount: 1
+    maxamount: 2
+  s220:
+    x: -3279.0
+    y: 63.0
+    z: 2236.0
+    mob: WITCH
+    amount: 1
+    maxamount: 2
+  s221:
+    x: -2802.0
+    y: 66.0
+    z: 4434.0
+    mob: ZOMBIE_VILLAGER
+    amount: 1
+    maxamount: 2
+  s222:
+    x: -2430.0
+    y: 61.0
+    z: 4904.0
+    mob: SKELETON_FIGHTER
+    amount: 1
+    maxamount: 2
+  s223:
+    x: -3845.0
+    y: 63.0
+    z: 1452.0
+    mob: ENDERMAN
+    amount: 1
+    maxamount: 2
+  s224:
+    x: -3163.0
+    y: 67.0
+    z: 2861.0
+    mob: GOBLIN_ROGUE
+    amount: 1
+    maxamount: 2
+  s225:
+    x: -3960.0
+    y: 38.0
+    z: 2197.0
+    mob: ORC_JOCKEY
+    amount: 1
+    maxamount: 2
+  s226:
+    x: -2958.0
+    y: 67.0
+    z: 2908.0
+    mob: GOBLIN_ROGUE
+    amount: 1
+    maxamount: 2
+  s227:
+    x: -1947.0
+    y: 70.0
+    z: 4677.0
+    mob: VEX
+    amount: 2
+    maxamount: 4
+  s228:
+    x: -2455.0
+    y: 70.0
+    z: 3143.0
+    mob: FROZEN_ROGUE
+    amount: 1
+    maxamount: 2
+  s229:
+    x: -2449.0
+    y: 69.0
+    z: 3103.0
+    mob: FROZEN_ILLUSIONER
+    amount: 1
+    maxamount: 2
+  s230:
+    x: -2569.0
+    y: 66.0
+    z: 4454.0
+    mob: ZOMBIE
+    amount: 1
+    maxamount: 2
+  s231:
+    x: -3868.0
+    y: 63.0
+    z: 2332.0
+    mob: ORC_SHAMAN
+    amount: 1
+    maxamount: 2
+  s232:
+    x: -3871.0
+    y: 63.0
+    z: 2313.0
+    mob: ORC_FIGHTER
+    amount: 1
+    maxamount: 2
+  s233:
+    x: -3865.0
+    y: 63.0
+    z: 2288.0
+    mob: ORC_MAGE
+    amount: 1
+    maxamount: 2
+  s234:
+    x: -2827.0
+    y: 65.0
+    z: 4792.0
+    mob: VILLAGER_FARMER
+    amount: 1
+    maxamount: 2
+  s235:
+    x: -2046.0
+    y: 65.0
+    z: 3644.0
+    mob: PIRATE_FIGHTER
+    amount: 1
+    maxamount: 2
+  s236:
+    x: -1940.0
+    y: 63.0
+    z: 4507.0
+    mob: CREEPER
+    amount: 1
+    maxamount: 2
+  s237:
+    x: -1946.0
+    y: 64.0
+    z: 4490.0
+    mob: VEX
+    amount: 2
+    maxamount: 4
+  s238:
+    x: -1946.0
+    y: 66.0
+    z: 4581.0
+    mob: SHULKER
+    amount: 1
+    maxamount: 1
+  s239:
+    x: -1952.0
+    y: 64.0
+    z: 4548.0
+    mob: JELLYBEAN
+    amount: 2
+    maxamount: 4
+  s240:
+    x: -1946.0
+    y: 67.0
+    z: 4617.0
+    mob: CREEPER
+    amount: 1
+    maxamount: 2
+  s241:
+    x: -2293.0
+    y: 143.0
+    z: 1644.0
+    mob: DESERT_SKELETON_ARCHER
+    amount: 1
+    maxamount: 2
+  s242:
+    x: -3233.0
+    y: 64.0
+    z: 4530.0
+    mob: SLIME_STICKY
+    amount: 1
+    maxamount: 2
+  s243:
+    x: -2445.0
+    y: 63.0
+    z: 2620.0
+    mob: VILLAGER_FARMER
+    amount: 1
+    maxamount: 2
+  s244:
+    x: -3848.0
+    y: 63.0
+    z: 1746.0
+    mob: PILLAGER_SHAMAN
+    amount: 1
+    maxamount: 2
+  s245:
+    x: -2277.0
+    y: 81.0
+    z: 3319.0
+    mob: TIMBERMAN
+    amount: 1
+    maxamount: 2
+  s246:
+    x: -2095.0
+    y: 14.0
+    z: 3147.0
+    mob: ZOMBIE_JOCKEY
+    amount: 1
+    maxamount: 2
+  s247:
+    x: -3229.0
+    y: 65.0
+    z: 2373.0
+    mob: GOBLIN_FIGHTER
+    amount: 1
+    maxamount: 2
+  s248:
+    x: -3697.0
+    y: 66.0
+    z: 1302.0
+    mob: PILLAGER_ROGUE
+    amount: 1
+    maxamount: 2
+  s249:
+    x: -2185.0
+    y: 61.0
+    z: 4735.0
+    mob: SKELETON_MONK
+    amount: 1
+    maxamount: 2
+  s250:
+    x: -2285.0
+    y: 72.0
+    z: 3259.0
+    mob: FROZEN_ARCHER
+    amount: 1
+    maxamount: 2
+  s251:
+    x: -2288.0
+    y: 67.0
+    z: 3225.0
+    mob: FROZEN_ROGUE
+    amount: 1
+    maxamount: 2
+  s252:
+    x: -4237.0
+    y: 64.0
+    z: 1519.0
+    mob: ENDERMAN
+    amount: 1
+    maxamount: 2
+  s253:
+    x: -396.0
+    y: 3.0
+    z: 3029.0
+    mob: BOSS_DARKNESS
+    amount: 1
+    maxamount: 1
+  s254:
+    x: -3200.0
+    y: 66.0
+    z: 4895.0
+    mob: LIZARD
+    amount: 1
+    maxamount: 2
+  s255:
+    x: -4895.0
+    y: 119.0
+    z: 2072.0
+    mob: VILLAGER_5
+    amount: 1
+    maxamount: 2
+  s256:
+    x: -2831.0
+    y: 68.0
+    z: 4399.0
+    mob: ZOMBIE_TANK
+    amount: 1
+    maxamount: 2
+  s257:
+    x: -2161.0
+    y: 64.0
+    z: 4253.0
+    mob: VILLAGER_FARMER
+    amount: 1
+    maxamount: 2
+  s258:
+    x: -2828.0
+    y: 67.0
+    z: 4445.0
+    mob: ZOMBIE
     amount: 1
     maxamount: 2
   s259:
-    x: -2056.0
-    y: 4.0
-    z: 3151.0
-    world: world
-    mob: ZOMBIE_JOCKEY
+    x: -2703.0
+    y: 66.0
+    z: 4792.0
+    mob: SHEEP_BABY
     amount: 1
     maxamount: 2
   s260:
-    x: -2049.0
+    x: -2060.0
     y: 4.0
-    z: 3116.0
-    world: world
+    z: 3133.0
     mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
   s261:
-    x: -2147.0
-    y: 71.0
-    z: 3554.0
-    world: world
-    mob: PIRATE_SHARPSHOOTER
+    x: -2056.0
+    y: 4.0
+    z: 3151.0
+    mob: ZOMBIE_JOCKEY
     amount: 1
-    maxamount: 1
+    maxamount: 2
   s262:
-    x: -2147.0
-    y: 66.0
-    z: 3579.0
-    world: world
-    mob: PIRATE_DUEL_MASTER
+    x: -2049.0
+    y: 4.0
+    z: 3116.0
+    mob: ZOMBIE_JOCKEY
     amount: 1
     maxamount: 2
   s263:
-    x: -2542.0
-    y: 114.0
-    z: 1873.0
-    world: world
-    mob: MUMMY_GHOST
-    amount: 1
-    maxamount: 2
-  s264:
-    x: -4111.0
-    y: 59.0
-    z: 1794.0
-    world: world
-    mob: PILLAGER_ROGUE
-    amount: 1
-    maxamount: 2
-  s265:
     x: -2147.0
-    y: 66.0
-    z: 3593.0
-    world: world
+    y: 71.0
+    z: 3554.0
     mob: PIRATE_SHARPSHOOTER
     amount: 1
     maxamount: 1
+  s264:
+    x: -2147.0
+    y: 66.0
+    z: 3579.0
+    mob: PIRATE_DUEL_MASTER
+    amount: 1
+    maxamount: 2
+  s265:
+    x: -2542.0
+    y: 114.0
+    z: 1873.0
+    mob: MUMMY_GHOST
+    amount: 1
+    maxamount: 2
   s266:
-    x: -2541.0
-    y: 119.0
-    z: 1824.0
-    world: world
-    mob: SPIDER_GHOST
+    x: -4111.0
+    y: 59.0
+    z: 1794.0
+    mob: PILLAGER_ROGUE
     amount: 1
     maxamount: 2
   s267:
-    x: -3826.0
-    y: 63.0
-    z: 1683.0
-    world: world
-    mob: PILLAGER_MAGE
+    x: -2147.0
+    y: 66.0
+    z: 3593.0
+    mob: PIRATE_SHARPSHOOTER
     amount: 1
-    maxamount: 2
+    maxamount: 1
   s268:
-    x: -3263.0
-    y: 64.0
-    z: 4784.0
-    world: world
-    mob: LIZARD_POISONOUS
+    x: -2541.0
+    y: 119.0
+    z: 1824.0
+    mob: SPIDER_GHOST
     amount: 1
     maxamount: 2
   s269:
-    x: -2384.0
-    y: 143.0
-    z: 1594.0
-    world: world
-    mob: DESERT_SKELETON_ARCHER
+    x: -3826.0
+    y: 63.0
+    z: 1683.0
+    mob: PILLAGER_MAGE
     amount: 1
     maxamount: 2
   s270:
-    x: -3174.0
-    y: 66.0
-    z: 2650.0
-    world: world
-    mob: GOBLIN_ROGUE
+    x: 483.0
+    y: 22.0
+    z: -449.0
+    mob: TUTORIAL_2
     amount: 1
     maxamount: 2
   s271:
-    x: -3170.0
-    y: 67.0
-    z: 4552.0
-    world: world
-    mob: SLIME
+    x: -3263.0
+    y: 64.0
+    z: 4784.0
+    mob: LIZARD_POISONOUS
     amount: 1
     maxamount: 2
   s272:
-    x: -1807.0
-    y: 89.0
-    z: 4611.0
-    world: world
-    mob: CREEPER
+    x: -2384.0
+    y: 143.0
+    z: 1594.0
+    mob: DESERT_SKELETON_ARCHER
     amount: 1
     maxamount: 2
   s273:
-    x: -1793.0
-    y: 88.0
-    z: 4531.0
-    world: world
-    mob: JELLYBEAN
-    amount: 2
-    maxamount: 4
-  s274:
-    x: -2385.0
-    y: 61.0
-    z: 4912.0
-    world: world
-    mob: SKELETON_MAGE
-    amount: 1
-    maxamount: 2
-  s275:
-    x: -3241.0
-    y: 71.0
-    z: 2235.0
-    world: world
-    mob: GOBLIN_SHAMAN
-    amount: 1
-    maxamount: 2
-  s276:
-    x: -3239.0
-    y: 64.0
-    z: 2184.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s277:
-    x: -2961.0
-    y: 68.0
-    z: 2988.0
-    world: world
+    x: -3174.0
+    y: 66.0
+    z: 2650.0
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
+  s274:
+    x: -3170.0
+    y: 67.0
+    z: 4552.0
+    mob: SLIME
+    amount: 1
+    maxamount: 2
+  s275:
+    x: -1807.0
+    y: 89.0
+    z: 4611.0
+    mob: CREEPER
+    amount: 1
+    maxamount: 2
+  s276:
+    x: -1793.0
+    y: 88.0
+    z: 4531.0
+    mob: JELLYBEAN
+    amount: 2
+    maxamount: 4
+  s277:
+    x: -2385.0
+    y: 61.0
+    z: 4912.0
+    mob: SKELETON_MAGE
+    amount: 1
+    maxamount: 2
   s278:
-    x: -3046.0
-    y: 65.0
-    z: 2218.0
-    world: world
+    x: -3241.0
+    y: 71.0
+    z: 2235.0
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
   s279:
-    x: -3246.0
-    y: 65.0
-    z: 2119.0
-    world: world
-    mob: GOBLIN_FIGHTER
+    x: -3239.0
+    y: 64.0
+    z: 2184.0
+    mob: GOBLIN_MAGE
+    amount: 1
+    maxamount: 2
+  s280:
+    x: -2961.0
+    y: 68.0
+    z: 2988.0
+    mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
   s281:
-    x: -3900.0
-    y: 64.0
-    z: 1440.0
-    world: world
-    mob: ENDERMAN
-    amount: 1
-    maxamount: 2
-  s282:
-    x: -2572.0
-    y: 108.0
-    z: 1887.0
-    world: world
-    mob: MUMMY
-    amount: 1
-    maxamount: 2
-  s283:
-    x: -3059.0
-    y: 66.0
-    z: 2793.0
-    world: world
-    mob: GOBLIN_FIGHTER
-    amount: 1
-    maxamount: 2
-  s284:
-    x: -3179.0
-    y: 66.0
-    z: 2517.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s285:
-    x: -3176.0
-    y: 68.0
-    z: 2469.0
-    world: world
+    x: -3046.0
+    y: 65.0
+    z: 2218.0
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s286:
-    x: -4085.0
-    y: 62.0
-    z: 1382.0
-    world: world
-    mob: PILLAGER_RAVAGER
-    amount: 1
-    maxamount: 2
-  s287:
-    x: -4067.0
-    y: 60.0
-    z: 1668.0
-    world: world
-    mob: PILLAGER_RAVAGER
-    amount: 1
-    maxamount: 2
-  s288:
-    x: -2933.0
-    y: 67.0
-    z: 2701.0
-    world: world
-    mob: GOBLIN_ROGUE
-    amount: 1
-    maxamount: 2
-  s289:
-    x: -2042.0
-    y: 66.0
-    z: 4253.0
-    world: world
-    mob: VILLAGER_SAILOR
-    amount: 1
-    maxamount: 2
-  s290:
-    x: -4629.0
-    y: 120.0
-    z: 2356.0
-    world: world
-    mob: VILLAGER_5
-    amount: 1
-    maxamount: 2
-  s291:
-    x: -3975.0
-    y: 63.0
-    z: 1721.0
-    world: world
-    mob: PILLAGER_RAVAGER
-    amount: 1
-    maxamount: 2
-  s292:
-    x: -3237.0
+  s282:
+    x: -3246.0
     y: 65.0
-    z: 2024.0
-    world: world
-    mob: GOBLIN_JOCKEY
-    amount: 1
-    maxamount: 2
-  s293:
-    x: -4082.0
-    y: 64.0
-    z: 2147.0
-    world: world
-    mob: ORC_FIGHTER
-    amount: 1
-    maxamount: 2
-  s294:
-    x: -2938.0
-    y: 66.0
-    z: 2576.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s295:
-    x: -2059.0
-    y: 66.0
-    z: 4159.0
-    world: world
-    mob: VILLAGER_3
-    amount: 1
-    maxamount: 2
-  s296:
-    x: -3238.0
-    y: 66.0
-    z: 1957.0
-    world: world
+    z: 2119.0
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s297:
-    x: -1926.0
-    y: 72.0
-    z: 4710.0
-    world: world
-    mob: SHULKER
-    amount: 1
-    maxamount: 1
-  s298:
-    x: -2054.0
-    y: 64.0
-    z: 4078.0
-    world: world
-    mob: VILLAGER_3
-    amount: 1
-    maxamount: 2
-  s299:
-    x: -1923.0
-    y: 70.0
-    z: 4648.0
-    world: world
-    mob: JELLYBEAN
-    amount: 2
-    maxamount: 4
-  s300:
-    x: -3182.0
-    y: 67.0
-    z: 2372.0
-    world: world
-    mob: WITCH
-    amount: 1
-    maxamount: 2
-  s301:
-    x: -2038.0
-    y: 64.0
-    z: 4009.0
-    world: world
-    mob: VILLAGER_3
-    amount: 1
-    maxamount: 2
-  s302:
-    x: -3224.0
-    y: 65.0
-    z: 1681.0
-    world: world
-    mob: GOBLIN_ROGUE
-    amount: 1
-    maxamount: 2
-  s303:
-    x: -2561.0
-    y: 75.0
-    z: 3370.0
-    world: world
-    mob: FROZEN_ARCHER
-    amount: 1
-    maxamount: 2
-  s304:
-    x: -2402.0
-    y: 109.0
-    z: 2050.0
-    world: world
+  s283:
+    x: -2572.0
+    y: 115.0
+    z: 1848.0
     mob: MUMMY
     amount: 1
     maxamount: 2
-  s305:
-    x: -2100.0
-    y: 14.0
-    z: 3162.0
-    world: world
-    mob: ZOMBIE_JOCKEY
-    amount: 1
-    maxamount: 2
-  s306:
-    x: -2066.0
-    y: 67.0
-    z: 4246.0
-    world: world
-    mob: VILLAGER_SAILOR
-    amount: 1
-    maxamount: 2
-  s307:
-    x: -2671.0
-    y: 66.0
-    z: 4376.0
-    world: world
-    mob: ZOMBIE_TANK
-    amount: 1
-    maxamount: 2
-  s308:
-    x: -3894.0
-    y: 60.0
-    z: 1261.0
-    world: world
-    mob: PILLAGER_ROGUE
-    amount: 1
-    maxamount: 2
-  s309:
-    x: -2938.0
-    y: 67.0
-    z: 4416.0
-    world: world
-    mob: ZOMBIE
-    amount: 1
-    maxamount: 2
-  s310:
-    x: -2908.0
+  s284:
+    x: -3900.0
     y: 64.0
-    z: 5082.0
-    world: world
-    mob: VILLAGER_HOBBIT
-    amount: 1
-    maxamount: 2
-  s311:
-    x: -2160.0
-    y: 65.0
-    z: 4052.0
-    world: world
-    mob: VILLAGER_FARMER
-    amount: 1
-    maxamount: 2
-  s312:
-    x: -2097.0
-    y: 24.0
-    z: 3135.0
-    world: world
-    mob: ZOMBIE_JOCKEY
-    amount: 1
-    maxamount: 2
-  s313:
-    x: -2103.0
-    y: 14.0
-    z: 3135.0
-    world: world
-    mob: ZOMBIE_JOCKEY
-    amount: 1
-    maxamount: 2
-  s314:
-    x: -2304.0
-    y: 78.0
-    z: 3370.0
-    world: world
-    mob: FROZEN_ROGUE
-    amount: 1
-    maxamount: 2
-  s315:
-    x: 569.0
-    y: 28.0
-    z: -400.0
-    world: tutorial
-    mob: TUTORIAL_1
-    amount: 1
-    maxamount: 2
-  s316:
-    x: 573.0
-    y: 29.0
-    z: -372.0
-    world: tutorial
-    mob: TUTORIAL_1
-    amount: 1
-    maxamount: 2
-  s317:
-    x: -3162.0
-    y: 65.0
-    z: 1691.0
-    world: world
-    mob: WITCH
-    amount: 1
-    maxamount: 2
-  s318:
-    x: -2408.0
-    y: 144.0
-    z: 1850.0
-    world: world
-    mob: MUMMY_GHOST
-    amount: 1
-    maxamount: 2
-  s319:
-    x: -4065.0
-    y: 63.0
-    z: 1594.0
-    world: world
-    mob: PILLAGER_FIGHTER
-    amount: 1
-    maxamount: 2
-  s320:
-    x: -3180.0
-    y: 65.0
-    z: 2130.0
-    world: world
-    mob: GOBLIN_FIGHTER
-    amount: 1
-    maxamount: 2
-  s321:
-    x: -4074.0
-    y: 63.0
-    z: 1514.0
-    world: world
-    mob: PILLAGER_MAGE
-    amount: 1
-    maxamount: 2
-  s322:
-    x: -2351.0
-    y: 79.0
-    z: 3181.0
-    world: world
-    mob: FROZEN_ILLUSIONER
-    amount: 1
-    maxamount: 2
-  s323:
-    x: -4078.0
-    y: 63.0
-    z: 1455.0
-    world: world
-    mob: PILLAGER_ROGUE
-    amount: 1
-    maxamount: 2
-  s324:
-    x: -4251.0
-    y: 63.0
-    z: 1576.0
-    world: world
+    z: 1440.0
     mob: ENDERMAN
     amount: 1
     maxamount: 2
-  s325:
-    x: -2812.0
-    y: 63.0
-    z: 5118.0
-    world: world
-    mob: VILLAGER_HOBBIT
+  s285:
+    x: -2572.0
+    y: 108.0
+    z: 1887.0
+    mob: MUMMY
     amount: 1
     maxamount: 2
-  s326:
-    x: -2949.0
-    y: 67.0
-    z: 2857.0
-    world: world
+  s286:
+    x: -3059.0
+    y: 66.0
+    z: 2793.0
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
+  s287:
+    x: -3179.0
+    y: 66.0
+    z: 2517.0
+    mob: GOBLIN_MAGE
+    amount: 1
+    maxamount: 2
+  s288:
+    x: -3176.0
+    y: 68.0
+    z: 2469.0
+    mob: GOBLIN_SHAMAN
+    amount: 1
+    maxamount: 2
+  s289:
+    x: -4085.0
+    y: 62.0
+    z: 1382.0
+    mob: PILLAGER_RAVAGER
+    amount: 1
+    maxamount: 2
+  s290:
+    x: -4067.0
+    y: 60.0
+    z: 1668.0
+    mob: PILLAGER_RAVAGER
+    amount: 1
+    maxamount: 2
+  s291:
+    x: -2933.0
+    y: 67.0
+    z: 2701.0
+    mob: GOBLIN_ROGUE
+    amount: 1
+    maxamount: 2
+  s292:
+    x: 483.0
+    y: 22.0
+    z: -467.0
+    mob: TUTORIAL_2
+    amount: 1
+    maxamount: 2
+  s293:
+    x: -2042.0
+    y: 66.0
+    z: 4253.0
+    mob: VILLAGER_SAILOR
+    amount: 1
+    maxamount: 2
+  s294:
+    x: -4629.0
+    y: 120.0
+    z: 2356.0
+    mob: VILLAGER_5
+    amount: 1
+    maxamount: 2
+  s295:
+    x: -3975.0
+    y: 63.0
+    z: 1721.0
+    mob: PILLAGER_RAVAGER
+    amount: 1
+    maxamount: 2
+  s296:
+    x: -3237.0
+    y: 65.0
+    z: 2024.0
+    mob: GOBLIN_JOCKEY
+    amount: 1
+    maxamount: 2
+  s297:
+    x: -4082.0
+    y: 64.0
+    z: 2147.0
+    mob: ORC_FIGHTER
+    amount: 1
+    maxamount: 2
+  s298:
+    x: -2938.0
+    y: 66.0
+    z: 2576.0
+    mob: GOBLIN_MAGE
+    amount: 1
+    maxamount: 2
+  s299:
+    x: -2059.0
+    y: 66.0
+    z: 4159.0
+    mob: VILLAGER_3
+    amount: 1
+    maxamount: 2
+  s300:
+    x: -3238.0
+    y: 66.0
+    z: 1957.0
+    mob: GOBLIN_FIGHTER
+    amount: 1
+    maxamount: 2
+  s301:
+    x: -1926.0
+    y: 72.0
+    z: 4710.0
+    mob: SHULKER
+    amount: 1
+    maxamount: 1
+  s302:
+    x: -2054.0
+    y: 64.0
+    z: 4078.0
+    mob: VILLAGER_3
+    amount: 1
+    maxamount: 2
+  s303:
+    x: -1923.0
+    y: 70.0
+    z: 4648.0
+    mob: JELLYBEAN
+    amount: 2
+    maxamount: 4
+  s304:
+    x: -3182.0
+    y: 67.0
+    z: 2372.0
+    mob: WITCH
+    amount: 1
+    maxamount: 2
+  s305:
+    x: -2038.0
+    y: 64.0
+    z: 4009.0
+    mob: VILLAGER_3
+    amount: 1
+    maxamount: 2
+  s306:
+    x: -3224.0
+    y: 65.0
+    z: 1681.0
+    mob: GOBLIN_ROGUE
+    amount: 1
+    maxamount: 2
+  s307:
+    x: -2561.0
+    y: 75.0
+    z: 3370.0
+    mob: FROZEN_ARCHER
+    amount: 1
+    maxamount: 2
+  s308:
+    x: -2402.0
+    y: 109.0
+    z: 2050.0
+    mob: MUMMY
+    amount: 1
+    maxamount: 2
+  s309:
+    x: -2100.0
+    y: 14.0
+    z: 3162.0
+    mob: ZOMBIE_JOCKEY
+    amount: 1
+    maxamount: 2
+  s310:
+    x: -2066.0
+    y: 67.0
+    z: 4246.0
+    mob: VILLAGER_SAILOR
+    amount: 1
+    maxamount: 2
+  s311:
+    x: -2671.0
+    y: 66.0
+    z: 4376.0
+    mob: ZOMBIE_TANK
+    amount: 1
+    maxamount: 2
+  s312:
+    x: -3894.0
+    y: 60.0
+    z: 1261.0
+    mob: PILLAGER_ROGUE
+    amount: 1
+    maxamount: 2
+  s313:
+    x: -2938.0
+    y: 67.0
+    z: 4416.0
+    mob: ZOMBIE
+    amount: 1
+    maxamount: 2
+  s314:
+    x: -2908.0
+    y: 64.0
+    z: 5082.0
+    mob: VILLAGER_HOBBIT
+    amount: 1
+    maxamount: 2
+  s315:
+    x: -2160.0
+    y: 65.0
+    z: 4052.0
+    mob: VILLAGER_FARMER
+    amount: 1
+    maxamount: 2
+  s316:
+    x: -2097.0
+    y: 24.0
+    z: 3135.0
+    mob: ZOMBIE_JOCKEY
+    amount: 1
+    maxamount: 2
+  s317:
+    x: -2103.0
+    y: 14.0
+    z: 3135.0
+    mob: ZOMBIE_JOCKEY
+    amount: 1
+    maxamount: 2
+  s318:
+    x: -2304.0
+    y: 78.0
+    z: 3370.0
+    mob: FROZEN_ROGUE
+    amount: 1
+    maxamount: 2
+  s319:
+    x: -3162.0
+    y: 65.0
+    z: 1691.0
+    mob: WITCH
+    amount: 1
+    maxamount: 2
+  s320:
+    x: -2408.0
+    y: 144.0
+    z: 1850.0
+    mob: MUMMY_GHOST
+    amount: 1
+    maxamount: 2
+  s321:
+    x: -4065.0
+    y: 63.0
+    z: 1594.0
+    mob: PILLAGER_FIGHTER
+    amount: 1
+    maxamount: 2
+  s322:
+    x: -3180.0
+    y: 65.0
+    z: 2130.0
+    mob: GOBLIN_FIGHTER
+    amount: 1
+    maxamount: 2
+  s323:
+    x: -4074.0
+    y: 63.0
+    z: 1514.0
+    mob: PILLAGER_MAGE
+    amount: 1
+    maxamount: 2
+  s324:
+    x: -2351.0
+    y: 79.0
+    z: 3181.0
+    mob: FROZEN_ILLUSIONER
+    amount: 1
+    maxamount: 2
+  s325:
+    x: -4078.0
+    y: 63.0
+    z: 1455.0
+    mob: PILLAGER_ROGUE
+    amount: 1
+    maxamount: 2
+  s326:
+    x: -4251.0
+    y: 63.0
+    z: 1576.0
+    mob: ENDERMAN
+    amount: 1
+    maxamount: 2
   s327:
+    x: -2812.0
+    y: 63.0
+    z: 5118.0
+    mob: VILLAGER_HOBBIT
+    amount: 1
+    maxamount: 2
+  s328:
     x: -2959.0
     y: 67.0
     z: 2848.0
-    world: world
     mob: WITCH
     amount: 1
     maxamount: 2
   s329:
-    x: -4804.0
-    y: 106.0
-    z: 2157.0
-    world: world
-    mob: VILLAGER_5
-    amount: 1
-    maxamount: 2
-  s330:
-    x: -1982.0
-    y: 69.0
-    z: 4675.0
-    world: world
-    mob: CREEPER
-    amount: 1
-    maxamount: 2
-  s331:
-    x: -1976.0
-    y: 69.0
-    z: 4647.0
-    world: world
-    mob: SHULKER
-    amount: 1
-    maxamount: 1
-  s332:
-    x: -2722.0
+    x: -2949.0
     y: 67.0
-    z: 4353.0
-    world: world
-    mob: ZOMBIE_VILLAGER
-    amount: 1
-    maxamount: 2
-  s333:
-    x: -2263.0
-    y: 42.0
-    z: 3653.0
-    world: world
-    mob: PIRATE_DROWNED
-    amount: 1
-    maxamount: 2
-  s334:
-    x: -3926.0
-    y: 50.0
-    z: 1226.0
-    world: world
-    mob: PILLAGER_SHAMAN
-    amount: 1
-    maxamount: 2
-  s335:
-    x: -2736.0
-    y: 68.0
-    z: 4387.0
-    world: world
-    mob: ZOMBIE
-    amount: 1
-    maxamount: 2
-  s336:
-    x: -3113.0
-    y: 67.0
-    z: 2880.0
-    world: world
-    mob: GOBLIN_SHAMAN
-    amount: 1
-    maxamount: 2
-  s337:
-    x: -3307.0
-    y: 65.0
-    z: 1836.0
-    world: world
+    z: 2857.0
     mob: GOBLIN_FIGHTER
     amount: 1
     maxamount: 2
-  s338:
-    x: -2268.0
-    y: 60.0
-    z: 3626.0
-    world: world
-    mob: PIRATE_DROWNED
-    amount: 1
-    maxamount: 2
-  s339:
-    x: -3740.0
-    y: 63.0
-    z: 1578.0
-    world: world
-    mob: ENDERMAN
-    amount: 1
-    maxamount: 2
-  s340:
-    x: -2499.0
-    y: 74.0
-    z: 3363.0
-    world: world
-    mob: TIMBERMAN
-    amount: 1
-    maxamount: 2
-  s341:
-    x: -4022.0
-    y: 65.0
-    z: 2459.0
-    world: world
-    mob: ORC_SHAMAN
-    amount: 1
-    maxamount: 2
-  s342:
-    x: -1974.0
-    y: 68.0
-    z: 4627.0
-    world: world
-    mob: VEX
-    amount: 2
-    maxamount: 4
-  s343:
-    x: -1972.0
+  s330:
+    x: -2968.0
     y: 66.0
-    z: 4604.0
-    world: world
-    mob: JELLYBEAN
-    amount: 2
-    maxamount: 4
-  s344:
-    x: -1976.0
-    y: 64.0
-    z: 4512.0
-    world: world
-    mob: SHULKER
-    amount: 1
-    maxamount: 1
-  s345:
-    x: -3112.0
-    y: 66.0
-    z: 2805.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s346:
-    x: -2509.0
-    y: 143.0
-    z: 1700.0
-    world: world
-    mob: SPIDER_GHOST
-    amount: 1
-    maxamount: 2
-  s347:
-    x: -1846.0
-    y: 90.0
-    z: 4698.0
-    world: world
-    mob: VEX
-    amount: 2
-    maxamount: 4
-  s348:
-    x: -3886.0
-    y: 65.0
-    z: 2149.0
-    world: world
-    mob: ORC_JOCKEY
-    amount: 1
-    maxamount: 2
-  s349:
-    x: -1848.0
-    y: 91.0
-    z: 4663.0
-    world: world
-    mob: SHULKER
-    amount: 1
-    maxamount: 1
-  s350:
-    x: -2963.0
-    y: 69.0
-    z: 2462.0
-    world: world
-    mob: GOBLIN_JOCKEY
-    amount: 1
-    maxamount: 2
-  s351:
-    x: -2592.0
-    y: 91.0
-    z: 3532.0
-    world: world
-    mob: FROZEN_ILLUSIONER
-    amount: 1
-    maxamount: 2
-  s352:
-    x: -4030.0
-    y: 65.0
-    z: 2491.0
-    world: world
-    mob: ORC_FIGHTER
-    amount: 1
-    maxamount: 2
-  s353:
-    x: -2544.0
-    y: 66.0
-    z: 4786.0
-    world: world
-    mob: VILLAGER_2
-    amount: 1
-    maxamount: 2
-  s354:
-    x: -3754.0
-    y: 59.0
-    z: 1263.0
-    world: world
-    mob: PILLAGER_MAGE
-    amount: 1
-    maxamount: 2
-  s355:
-    x: -3770.0
-    y: 63.0
-    z: 2297.0
-    world: world
-    mob: ORC_FIGHTER
-    amount: 1
-    maxamount: 2
-  s356:
-    x: -2410.0
-    y: 67.0
-    z: 2717.0
-    world: world
-    mob: VILLAGER_4
-    amount: 1
-    maxamount: 2
-  s357:
-    x: -1966.0
-    y: 62.0
-    z: 4448.0
-    world: world
-    mob: VEX
-    amount: 2
-    maxamount: 4
-  s358:
-    x: -2387.0
-    y: 130.0
-    z: 1945.0
-    world: world
-    mob: SPIDER
-    amount: 1
-    maxamount: 2
-  s359:
-    x: -2965.0
-    y: 66.0
-    z: 2649.0
-    world: world
-    mob: GOBLIN_JOCKEY
-    amount: 1
-    maxamount: 2
-  s360:
-    x: -2393.0
-    y: 121.0
-    z: 1980.0
-    world: world
-    mob: MUMMY
-    amount: 1
-    maxamount: 2
-  s361:
-    x: -2973.0
-    y: 66.0
-    z: 2719.0
-    world: world
-    mob: GOBLIN_SHAMAN
-    amount: 1
-    maxamount: 2
-  s363:
-    x: -2429.0
-    y: 63.0
-    z: 2840.0
-    world: world
-    mob: VILLAGER_4
-    amount: 1
-    maxamount: 2
-  s364:
-    x: -1949.0
-    y: 54.0
-    z: 3685.0
-    world: world
-    mob: PIRATE_DROWNED
-    amount: 1
-    maxamount: 2
-  s365:
-    x: -1952.0
-    y: 67.0
-    z: 3790.0
-    world: world
-    mob: PIRATE_FIGHTER
-    amount: 1
-    maxamount: 2
-  s366:
-    x: -1939.0
-    y: 69.0
-    z: 3783.0
-    world: world
-    mob: PIRATE_SHOOTER
-    amount: 1
-    maxamount: 2
-  s367:
-    x: -3757.0
-    y: 66.0
-    z: 1701.0
-    world: world
-    mob: PILLAGER_FIGHTER
-    amount: 1
-    maxamount: 2
-  s368:
-    x: -3315.0
-    y: 64.0
-    z: 2072.0
-    world: world
+    z: 2304.0
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s369:
-    x: -2056.0
-    y: 65.0
-    z: 3613.0
-    world: world
-    mob: PIRATE_SHOOTER
-    amount: 1
-    maxamount: 2
-  s370:
-    x: -2645.0
-    y: 67.0
-    z: 4420.0
-    world: world
-    mob: ZOMBIE_VILLAGER
-    amount: 1
-    maxamount: 2
-  s371:
-    x: -2499.0
-    y: 138.0
-    z: 1774.0
-    world: world
-    mob: MUMMY_GHOST
-    amount: 1
-    maxamount: 2
-  s372:
-    x: -2647.0
-    y: 66.0
-    z: 4387.0
-    world: world
-    mob: ZOMBIE
-    amount: 1
-    maxamount: 2
-  s373:
-    x: -4015.0
-    y: 64.0
-    z: 2356.0
-    world: world
-    mob: ORC_FIGHTER
-    amount: 1
-    maxamount: 2
-  s374:
-    x: -1830.0
-    y: 70.0
-    z: 4534.0
-    world: world
-    mob: SHULKER
-    amount: 1
-    maxamount: 1
-  s375:
-    x: -3318.0
-    y: 65.0
-    z: 1923.0
-    world: world
-    mob: GOBLIN_SHAMAN
-    amount: 1
-    maxamount: 2
-  s376:
-    x: 581.0
-    y: 29.0
-    z: -339.0
-    world: tutorial
-    mob: TUTORIAL_1
-    amount: 1
-    maxamount: 2
-  s377:
-    x: -2171.0
-    y: 61.0
-    z: 4914.0
-    world: world
-    mob: SKELETON_MONK
-    amount: 1
-    maxamount: 2
-  s378:
-    x: -4009.0
-    y: 64.0
-    z: 2386.0
-    world: world
-    mob: ORC_MAGE
-    amount: 1
-    maxamount: 2
-  s379:
-    x: -2199.0
-    y: 70.0
-    z: 4139.0
-    world: world
-    mob: VILLAGER_FARMER
-    amount: 1
-    maxamount: 2
-  s380:
-    x: -2634.0
-    y: 83.0
-    z: 3534.0
-    world: world
-    mob: FROZEN_ROGUE
-    amount: 1
-    maxamount: 2
-  s381:
-    x: -3535.0
-    y: 62.0
-    z: 2247.0
-    world: world
-    mob: MAGMA_CUBE
-    amount: 1
-    maxamount: 2
-  s382:
-    x: -3738.0
-    y: 63.0
-    z: 1311.0
-    world: world
-    mob: PILLAGER_SHAMAN
-    amount: 1
-    maxamount: 2
-  s383:
-    x: -3319.0
-    y: 65.0
-    z: 1875.0
-    world: world
-    mob: GOBLIN_ROGUE
-    amount: 1
-    maxamount: 2
-  s384:
-    x: -3104.0
-    y: 65.0
-    z: 2409.0
-    world: world
-    mob: WITCH
-    amount: 1
-    maxamount: 2
-  s385:
-    x: -4699.0
-    y: 107.0
-    z: 2277.0
-    world: world
+  s331:
+    x: -4804.0
+    y: 106.0
+    z: 2157.0
     mob: VILLAGER_5
     amount: 1
     maxamount: 2
-  s386:
-    x: -2527.0
-    y: 77.0
-    z: 3360.0
-    world: world
-    mob: FROZEN_ILLUSIONER
-    amount: 1
-    maxamount: 2
-  s387:
-    x: -3525.0
-    y: 62.0
-    z: 2225.0
-    world: world
-    mob: MAGMA_CUBE
-    amount: 1
-    maxamount: 2
-  s388:
-    x: -2191.0
-    y: 57.0
-    z: 3777.0
-    world: world
-    mob: PIRATE_DROWNED
-    amount: 1
-    maxamount: 2
-  s389:
-    x: -3557.0
-    y: 62.0
-    z: 2252.0
-    world: world
-    mob: MAGMA_CUBE
-    amount: 1
-    maxamount: 2
-  s390:
-    x: -3221.0
+  s332:
+    x: -1982.0
     y: 69.0
-    z: 4608.0
-    world: world
-    mob: SLIME
+    z: 4675.0
+    mob: CREEPER
     amount: 1
     maxamount: 2
-  s391:
-    x: -2191.0
-    y: 57.0
-    z: 3718.0
-    world: world
+  s333:
+    x: -1976.0
+    y: 69.0
+    z: 4647.0
+    mob: SHULKER
+    amount: 1
+    maxamount: 1
+  s334:
+    x: -2722.0
+    y: 67.0
+    z: 4353.0
+    mob: ZOMBIE_VILLAGER
+    amount: 1
+    maxamount: 2
+  s335:
+    x: -2263.0
+    y: 42.0
+    z: 3653.0
     mob: PIRATE_DROWNED
     amount: 1
     maxamount: 2
-  s392:
-    x: -3805.0
+  s336:
+    x: -3926.0
+    y: 50.0
+    z: 1226.0
+    mob: PILLAGER_SHAMAN
+    amount: 1
+    maxamount: 2
+  s337:
+    x: -2736.0
+    y: 68.0
+    z: 4387.0
+    mob: ZOMBIE
+    amount: 1
+    maxamount: 2
+  s338:
+    x: -3113.0
+    y: 67.0
+    z: 2880.0
+    mob: GOBLIN_SHAMAN
+    amount: 1
+    maxamount: 2
+  s339:
+    x: -3307.0
+    y: 65.0
+    z: 1836.0
+    mob: GOBLIN_FIGHTER
+    amount: 1
+    maxamount: 2
+  s340:
+    x: -2268.0
+    y: 60.0
+    z: 3626.0
+    mob: PIRATE_DROWNED
+    amount: 1
+    maxamount: 2
+  s341:
+    x: -3740.0
+    y: 63.0
+    z: 1578.0
+    mob: ENDERMAN
+    amount: 1
+    maxamount: 2
+  s342:
+    x: -2499.0
+    y: 74.0
+    z: 3363.0
+    mob: TIMBERMAN
+    amount: 1
+    maxamount: 2
+  s343:
+    x: -4022.0
+    y: 65.0
+    z: 2459.0
+    mob: ORC_SHAMAN
+    amount: 1
+    maxamount: 2
+  s344:
+    x: -1974.0
+    y: 68.0
+    z: 4627.0
+    mob: VEX
+    amount: 2
+    maxamount: 4
+  s345:
+    x: -1972.0
+    y: 66.0
+    z: 4604.0
+    mob: JELLYBEAN
+    amount: 2
+    maxamount: 4
+  s346:
+    x: -1976.0
     y: 64.0
-    z: 2155.0
-    world: world
+    z: 4512.0
+    mob: SHULKER
+    amount: 1
+    maxamount: 1
+  s347:
+    x: -3112.0
+    y: 66.0
+    z: 2805.0
+    mob: GOBLIN_MAGE
+    amount: 1
+    maxamount: 2
+  s348:
+    x: -2509.0
+    y: 143.0
+    z: 1700.0
+    mob: SPIDER_GHOST
+    amount: 1
+    maxamount: 2
+  s349:
+    x: -1846.0
+    y: 90.0
+    z: 4698.0
+    mob: VEX
+    amount: 2
+    maxamount: 4
+  s350:
+    x: -3886.0
+    y: 65.0
+    z: 2149.0
     mob: ORC_JOCKEY
     amount: 1
     maxamount: 2
-  s393:
-    x: -3226.0
+  s351:
+    x: -1848.0
+    y: 91.0
+    z: 4663.0
+    mob: SHULKER
+    amount: 1
+    maxamount: 1
+  s352:
+    x: -2963.0
+    y: 69.0
+    z: 2462.0
+    mob: GOBLIN_JOCKEY
+    amount: 1
+    maxamount: 2
+  s353:
+    x: -2592.0
+    y: 91.0
+    z: 3532.0
+    mob: FROZEN_ILLUSIONER
+    amount: 1
+    maxamount: 2
+  s354:
+    x: -4030.0
+    y: 65.0
+    z: 2491.0
+    mob: ORC_FIGHTER
+    amount: 1
+    maxamount: 2
+  s355:
+    x: -2544.0
+    y: 66.0
+    z: 4786.0
+    mob: VILLAGER_2
+    amount: 1
+    maxamount: 2
+  s356:
+    x: -3754.0
+    y: 59.0
+    z: 1263.0
+    mob: PILLAGER_MAGE
+    amount: 1
+    maxamount: 2
+  s357:
+    x: -3770.0
+    y: 63.0
+    z: 2297.0
+    mob: ORC_FIGHTER
+    amount: 1
+    maxamount: 2
+  s358:
+    x: -2410.0
+    y: 67.0
+    z: 2717.0
+    mob: VILLAGER_4
+    amount: 1
+    maxamount: 2
+  s359:
+    x: -1966.0
+    y: 62.0
+    z: 4448.0
+    mob: VEX
+    amount: 2
+    maxamount: 4
+  s360:
+    x: -2387.0
+    y: 130.0
+    z: 1945.0
+    mob: SPIDER
+    amount: 1
+    maxamount: 2
+  s361:
+    x: -2965.0
+    y: 66.0
+    z: 2649.0
+    mob: GOBLIN_JOCKEY
+    amount: 1
+    maxamount: 2
+  s362:
+    x: -2393.0
+    y: 121.0
+    z: 1980.0
+    mob: MUMMY
+    amount: 1
+    maxamount: 2
+  s363:
+    x: -2973.0
+    y: 66.0
+    z: 2719.0
+    mob: GOBLIN_SHAMAN
+    amount: 1
+    maxamount: 2
+  s364:
+    x: -2620.0
     y: 64.0
-    z: 4566.0
-    world: world
+    z: 4944.0
+    mob: SHEEP_BABY
+    amount: 1
+    maxamount: 2
+  s365:
+    x: -2429.0
+    y: 63.0
+    z: 2840.0
+    mob: VILLAGER_4
+    amount: 1
+    maxamount: 2
+  s366:
+    x: -1949.0
+    y: 54.0
+    z: 3685.0
+    mob: PIRATE_DROWNED
+    amount: 1
+    maxamount: 2
+  s367:
+    x: -1939.0
+    y: 69.0
+    z: 3783.0
+    mob: PIRATE_SHOOTER
+    amount: 1
+    maxamount: 2
+  s368:
+    x: -1952.0
+    y: 67.0
+    z: 3790.0
+    mob: PIRATE_FIGHTER
+    amount: 1
+    maxamount: 2
+  s369:
+    x: -3757.0
+    y: 66.0
+    z: 1701.0
+    mob: PILLAGER_FIGHTER
+    amount: 1
+    maxamount: 2
+  s370:
+    x: -3315.0
+    y: 64.0
+    z: 2072.0
+    mob: GOBLIN_ROGUE
+    amount: 1
+    maxamount: 2
+  s371:
+    x: -2056.0
+    y: 65.0
+    z: 3613.0
+    mob: PIRATE_SHOOTER
+    amount: 1
+    maxamount: 2
+  s372:
+    x: -2645.0
+    y: 67.0
+    z: 4420.0
+    mob: ZOMBIE_VILLAGER
+    amount: 1
+    maxamount: 2
+  s373:
+    x: -2499.0
+    y: 138.0
+    z: 1774.0
+    mob: MUMMY_GHOST
+    amount: 1
+    maxamount: 2
+  s374:
+    x: -2647.0
+    y: 66.0
+    z: 4387.0
+    mob: ZOMBIE
+    amount: 1
+    maxamount: 2
+  s375:
+    x: -4015.0
+    y: 64.0
+    z: 2356.0
+    mob: ORC_FIGHTER
+    amount: 1
+    maxamount: 2
+  s376:
+    x: -1830.0
+    y: 70.0
+    z: 4534.0
+    mob: SHULKER
+    amount: 1
+    maxamount: 1
+  s377:
+    x: -3318.0
+    y: 65.0
+    z: 1923.0
+    mob: GOBLIN_SHAMAN
+    amount: 1
+    maxamount: 2
+  s378:
+    x: -2171.0
+    y: 61.0
+    z: 4914.0
+    mob: SKELETON_MONK
+    amount: 1
+    maxamount: 2
+  s379:
+    x: -4009.0
+    y: 64.0
+    z: 2386.0
+    mob: ORC_MAGE
+    amount: 1
+    maxamount: 2
+  s380:
+    x: -2199.0
+    y: 70.0
+    z: 4139.0
+    mob: VILLAGER_FARMER
+    amount: 1
+    maxamount: 2
+  s381:
+    x: -2634.0
+    y: 83.0
+    z: 3534.0
+    mob: FROZEN_ROGUE
+    amount: 1
+    maxamount: 2
+  s382:
+    x: -3535.0
+    y: 62.0
+    z: 2247.0
+    mob: MAGMA_CUBE
+    amount: 1
+    maxamount: 2
+  s383:
+    x: -3738.0
+    y: 63.0
+    z: 1311.0
+    mob: PILLAGER_SHAMAN
+    amount: 1
+    maxamount: 2
+  s384:
+    x: -3319.0
+    y: 65.0
+    z: 1875.0
+    mob: GOBLIN_ROGUE
+    amount: 1
+    maxamount: 2
+  s385:
+    x: -3104.0
+    y: 65.0
+    z: 2409.0
+    mob: WITCH
+    amount: 1
+    maxamount: 2
+  s386:
+    x: -4699.0
+    y: 107.0
+    z: 2277.0
+    mob: VILLAGER_5
+    amount: 1
+    maxamount: 2
+  s387:
+    x: -2527.0
+    y: 77.0
+    z: 3360.0
+    mob: FROZEN_ILLUSIONER
+    amount: 1
+    maxamount: 2
+  s388:
+    x: -3525.0
+    y: 62.0
+    z: 2225.0
+    mob: MAGMA_CUBE
+    amount: 1
+    maxamount: 2
+  s389:
+    x: -2191.0
+    y: 57.0
+    z: 3777.0
+    mob: PIRATE_DROWNED
+    amount: 1
+    maxamount: 2
+  s390:
+    x: -3557.0
+    y: 62.0
+    z: 2252.0
+    mob: MAGMA_CUBE
+    amount: 1
+    maxamount: 2
+  s391:
+    x: -3221.0
+    y: 69.0
+    z: 4608.0
     mob: SLIME
     amount: 1
     maxamount: 2
+  s392:
+    x: -2191.0
+    y: 57.0
+    z: 3718.0
+    mob: PIRATE_DROWNED
+    amount: 1
+    maxamount: 2
+  s393:
+    x: -3805.0
+    y: 64.0
+    z: 2155.0
+    mob: ORC_JOCKEY
+    amount: 1
+    maxamount: 2
   s394:
+    x: -3226.0
+    y: 64.0
+    z: 4566.0
+    mob: SLIME
+    amount: 1
+    maxamount: 2
+  s395:
     x: -3583.0
     y: 63.0
     z: 1424.0
-    world: world
     mob: PILLAGER_SHAMAN
     amount: 1
     maxamount: 2
   s396:
-    x: -2989.0
-    y: 68.0
-    z: 2507.0
-    world: world
-    mob: GOBLIN_ROGUE
+    x: -3227.0
+    y: 64.0
+    z: 4510.0
+    mob: SLIME_STICKY
     amount: 1
     maxamount: 2
   s397:
-    x: -2262.0
-    y: 61.0
-    z: 4913.0
-    world: world
-    mob: SKELETON_FIGHTER
+    x: -2989.0
+    y: 68.0
+    z: 2507.0
+    mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
   s398:
-    x: -4006.0
-    y: 64.0
-    z: 2443.0
-    world: world
-    mob: ORC_GLADIATOR
-    amount: 1
-    maxamount: 2
-  s399:
-    x: -2261.0
+    x: -2262.0
     y: 61.0
-    z: 4851.0
-    world: world
+    z: 4913.0
     mob: SKELETON_FIGHTER
     amount: 1
     maxamount: 2
+  s399:
+    x: -4006.0
+    y: 64.0
+    z: 2443.0
+    mob: ORC_GLADIATOR
+    amount: 1
+    maxamount: 2
   s400:
-    x: -3991.0
-    y: 63.0
-    z: 1793.0
-    world: world
-    mob: PILLAGER_MAGE
+    x: -2261.0
+    y: 61.0
+    z: 4851.0
+    mob: SKELETON_FIGHTER
     amount: 1
     maxamount: 2
   s401:
+    x: -3991.0
+    y: 63.0
+    z: 1793.0
+    mob: PILLAGER_MAGE
+    amount: 1
+    maxamount: 2
+  s402:
     x: -1965.0
     y: 63.0
     z: 4545.0
-    world: world
     mob: SHULKER
     amount: 1
     maxamount: 1
-  s402:
+  s403:
     x: -2582.0
     y: 63.0
     z: 4908.0
-    world: world
     mob: COW_BABY
     amount: 1
     maxamount: 2
-  s403:
+  s404:
     x: -1966.0
     y: 64.0
     z: 4578.0
-    world: world
     mob: VEX
     amount: 2
     maxamount: 4
-  s404:
+  s405:
     x: -1864.0
     y: 73.0
     z: 4733.0
-    world: world
-    mob: CREEPER
-    amount: 1
-    maxamount: 2
-  s405:
-    x: -1957.0
-    y: 64.0
-    z: 4565.0
-    world: world
     mob: CREEPER
     amount: 1
     maxamount: 2
   s406:
-    x: -3939.0
-    y: 63.0
-    z: 1476.0
-    world: world
-    mob: ENDERMAN
+    x: -1957.0
+    y: 64.0
+    z: 4565.0
+    mob: CREEPER
     amount: 1
     maxamount: 2
   s407:
-    x: -3215.0
-    y: 66.0
-    z: 2086.0
-    world: world
-    mob: GOBLIN_SHAMAN
+    x: -3939.0
+    y: 63.0
+    z: 1476.0
+    mob: ENDERMAN
     amount: 1
     maxamount: 2
   s408:
-    x: -2419.0
-    y: 138.0
-    z: 1591.0
-    world: world
-    mob: DESERT_SKELETON_CAVALRY
-    amount: 1
-    maxamount: 2
-  s409:
-    x: -3210.0
-    y: 67.0
-    z: 2161.0
-    world: world
-    mob: GOBLIN_ROGUE
-    amount: 1
-    maxamount: 2
-  s410:
-    x: -2251.0
-    y: 79.0
-    z: 3295.0
-    world: world
-    mob: FROZEN_ARCHER
-    amount: 1
-    maxamount: 2
-  s411:
-    x: -2978.0
+    x: -3215.0
     y: 66.0
-    z: 2264.0
-    world: world
-    mob: GOBLIN_FIGHTER
-    amount: 1
-    maxamount: 2
-  s412:
-    x: -3218.0
-    y: 66.0
-    z: 2802.0
-    world: world
-    mob: GOBLIN_JOCKEY
-    amount: 1
-    maxamount: 2
-  s413:
-    x: -2527.0
-    y: 142.0
-    z: 1635.0
-    world: world
-    mob: DESERT_SKELETON_CAVALRY
-    amount: 1
-    maxamount: 2
-  s414:
-    x: -3084.0
-    y: 66.0
-    z: 2184.0
-    world: world
-    mob: GOBLIN_ROGUE
-    amount: 1
-    maxamount: 2
-  s415:
-    x: -3051.0
-    y: 73.0
-    z: 4871.0
-    world: world
-    mob: VILLAGER_1
-    amount: 1
-    maxamount: 2
-  s416:
-    x: -2066.0
-    y: 5.0
-    z: 3114.0
-    world: world
-    mob: ZOMBIE_JOCKEY
-    amount: 1
-    maxamount: 2
-  s417:
-    x: -3006.0
-    y: 69.0
-    z: 2953.0
-    world: world
+    z: 2086.0
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
-  s418:
-    x: -2261.0
-    y: 61.0
-    z: 4986.0
-    world: world
-    mob: SKELETON_MONK
+  s409:
+    x: -2419.0
+    y: 138.0
+    z: 1591.0
+    mob: DESERT_SKELETON_CAVALRY
     amount: 1
     maxamount: 2
-  s419:
-    x: -2999.0
-    y: 69.0
-    z: 2884.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s420:
-    x: -2484.0
-    y: 61.0
-    z: 4880.0
-    world: world
-    mob: SKELETON_FIGHTER
-    amount: 1
-    maxamount: 2
-  s421:
-    x: -2617.0
-    y: 79.0
-    z: 3558.0
-    world: world
-    mob: TIMBERMAN
-    amount: 1
-    maxamount: 2
-  s422:
-    x: -2525.0
-    y: 128.0
-    z: 1800.0
-    world: world
-    mob: SPIDER
-    amount: 1
-    maxamount: 2
-  s423:
-    x: -2609.0
-    y: 82.0
-    z: 3529.0
-    world: world
-    mob: FROZEN_ROGUE
-    amount: 1
-    maxamount: 2
-  s424:
-    x: -3212.0
-    y: 64.0
-    z: 2266.0
-    world: world
+  s410:
+    x: -3210.0
+    y: 67.0
+    z: 2161.0
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
-  s425:
-    x: -3088.0
-    y: 65.0
-    z: 2571.0
-    world: world
+  s411:
+    x: -2251.0
+    y: 79.0
+    z: 3295.0
+    mob: FROZEN_ARCHER
+    amount: 1
+    maxamount: 2
+  s412:
+    x: -2978.0
+    y: 66.0
+    z: 2264.0
+    mob: GOBLIN_FIGHTER
+    amount: 1
+    maxamount: 2
+  s413:
+    x: -3218.0
+    y: 66.0
+    z: 2802.0
+    mob: GOBLIN_JOCKEY
+    amount: 1
+    maxamount: 2
+  s414:
+    x: -2527.0
+    y: 142.0
+    z: 1635.0
+    mob: DESERT_SKELETON_CAVALRY
+    amount: 1
+    maxamount: 2
+  s415:
+    x: -3084.0
+    y: 66.0
+    z: 2184.0
+    mob: GOBLIN_ROGUE
+    amount: 1
+    maxamount: 2
+  s416:
+    x: -3051.0
+    y: 73.0
+    z: 4871.0
+    mob: VILLAGER_1
+    amount: 1
+    maxamount: 2
+  s417:
+    x: -2066.0
+    y: 5.0
+    z: 3114.0
+    mob: ZOMBIE_JOCKEY
+    amount: 1
+    maxamount: 2
+  s418:
+    x: -3006.0
+    y: 69.0
+    z: 2953.0
+    mob: GOBLIN_SHAMAN
+    amount: 1
+    maxamount: 2
+  s419:
+    x: -2261.0
+    y: 61.0
+    z: 4986.0
+    mob: SKELETON_MONK
+    amount: 1
+    maxamount: 2
+  s420:
+    x: -2999.0
+    y: 69.0
+    z: 2884.0
     mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
+  s421:
+    x: -2484.0
+    y: 61.0
+    z: 4880.0
+    mob: SKELETON_FIGHTER
+    amount: 1
+    maxamount: 2
+  s422:
+    x: -2617.0
+    y: 79.0
+    z: 3558.0
+    mob: TIMBERMAN
+    amount: 1
+    maxamount: 2
+  s423:
+    x: -2525.0
+    y: 128.0
+    z: 1800.0
+    mob: SPIDER
+    amount: 1
+    maxamount: 2
+  s424:
+    x: -2609.0
+    y: 82.0
+    z: 3529.0
+    mob: FROZEN_ROGUE
+    amount: 1
+    maxamount: 2
+  s425:
+    x: -3212.0
+    y: 64.0
+    z: 2266.0
+    mob: GOBLIN_ROGUE
+    amount: 1
+    maxamount: 2
   s426:
-    x: -3202.0
-    y: 68.0
-    z: 2319.0
-    world: world
-    mob: GOBLIN_JOCKEY
+    x: -3088.0
+    y: 65.0
+    z: 2571.0
+    mob: GOBLIN_MAGE
     amount: 1
     maxamount: 2
   s427:
-    x: -2387.0
+    x: -3202.0
     y: 68.0
-    z: 2636.0
-    world: world
-    mob: VILLAGER_4
-    amount: 1
-    maxamount: 2
-  s428:
-    x: -2977.0
-    y: 72.0
-    z: 2790.0
-    world: world
+    z: 2319.0
     mob: GOBLIN_JOCKEY
     amount: 1
     maxamount: 2
-  s429:
-    x: -2395.0
-    y: 67.0
-    z: 2676.0
-    world: world
+  s428:
+    x: -2387.0
+    y: 68.0
+    z: 2636.0
     mob: VILLAGER_4
     amount: 1
     maxamount: 2
+  s429:
+    x: -2977.0
+    y: 72.0
+    z: 2790.0
+    mob: GOBLIN_JOCKEY
+    amount: 1
+    maxamount: 2
   s430:
-    x: -1930.0
-    y: 59.0
-    z: 3640.0
-    world: world
-    mob: PIRATE_DROWNED
+    x: -2395.0
+    y: 67.0
+    z: 2676.0
+    mob: VILLAGER_4
     amount: 1
     maxamount: 2
   s431:
-    x: 374.0
-    y: 3.0
-    z: -1005.0
-    world: tutorial
-    mob: TUTORIAL_BOSS
+    x: -1930.0
+    y: 59.0
+    z: 3640.0
+    mob: PIRATE_DROWNED
     amount: 1
-    maxamount: 1
+    maxamount: 2
   s432:
     x: -1850.0
     y: 70.0
     z: 4550.0
-    world: world
     mob: JELLYBEAN
     amount: 2
     maxamount: 4
@@ -3322,7 +3027,6 @@ Spawners:
     x: -3035.0
     y: 74.0
     z: 4852.0
-    world: world
     mob: VILLAGER_1
     amount: 1
     maxamount: 2
@@ -3330,7 +3034,6 @@ Spawners:
     x: -2291.0
     y: 61.0
     z: 4746.0
-    world: world
     mob: SKELETON_ROGUE
     amount: 1
     maxamount: 2
@@ -3338,7 +3041,6 @@ Spawners:
     x: -3923.0
     y: 65.0
     z: 1529.0
-    world: world
     mob: ENDERMAN
     amount: 1
     maxamount: 2
@@ -3346,7 +3048,6 @@ Spawners:
     x: -3985.0
     y: 35.0
     z: 2220.0
-    world: world
     mob: ORC_JOCKEY
     amount: 1
     maxamount: 2
@@ -3354,7 +3055,6 @@ Spawners:
     x: -3930.0
     y: 67.0
     z: 1464.0
-    world: world
     mob: PHANTOM
     amount: 1
     maxamount: 2
@@ -3362,7 +3062,6 @@ Spawners:
     x: -3193.0
     y: 65.0
     z: 1745.0
-    world: world
     mob: GOBLIN_SHAMAN
     amount: 1
     maxamount: 2
@@ -3370,7 +3069,6 @@ Spawners:
     x: -3989.0
     y: 24.0
     z: 2202.0
-    world: world
     mob: ORC_JOCKEY
     amount: 1
     maxamount: 2
@@ -3378,7 +3076,6 @@ Spawners:
     x: -1930.0
     y: 65.0
     z: 3802.0
-    world: world
     mob: PIRATE_FIGHTER
     amount: 1
     maxamount: 2
@@ -3386,7 +3083,6 @@ Spawners:
     x: -3581.0
     y: 63.0
     z: 1495.0
-    world: world
     mob: PILLAGER_MAGE
     amount: 1
     maxamount: 2
@@ -3394,7 +3090,6 @@ Spawners:
     x: -2987.0
     y: 66.0
     z: 2570.0
-    world: world
     mob: GOBLIN_ROGUE
     amount: 1
     maxamount: 2
@@ -3402,7 +3097,6 @@ Spawners:
     x: -2940.0
     y: 72.0
     z: 4805.0
-    world: world
     mob: VILLAGER_1
     amount: 1
     maxamount: 2
@@ -3410,7 +3104,6 @@ Spawners:
     x: -4807.0
     y: 104.0
     z: 2331.0
-    world: world
     mob: VILLAGER_5
     amount: 1
     maxamount: 2
@@ -3418,7 +3111,6 @@ Spawners:
     x: -3543.0
     y: 62.0
     z: 2212.0
-    world: world
     mob: MAGMA_CUBE
     amount: 1
     maxamount: 2
@@ -3426,7 +3118,6 @@ Spawners:
     x: -2148.0
     y: 61.0
     z: 4854.0
-    world: world
     mob: SKELETON_MAGE
     amount: 1
     maxamount: 2
@@ -3434,7 +3125,6 @@ Spawners:
     x: -2148.0
     y: 61.0
     z: 4854.0
-    world: world
     mob: SKELETON_MAGE
     amount: 1
     maxamount: 2
@@ -3442,7 +3132,6 @@ Spawners:
     x: -3758.0
     y: 69.0
     z: 1551.0
-    world: world
     mob: PHANTOM
     amount: 1
     maxamount: 2
@@ -3450,7 +3139,6 @@ Spawners:
     x: -3758.0
     y: 69.0
     z: 1551.0
-    world: world
     mob: PHANTOM
     amount: 1
     maxamount: 2
@@ -3458,7 +3146,6 @@ Spawners:
     x: -3758.0
     y: 69.0
     z: 1551.0
-    world: world
     mob: PHANTOM
     amount: 1
     maxamount: 2
@@ -3466,7 +3153,6 @@ Spawners:
     x: -3758.0
     y: 69.0
     z: 1551.0
-    world: world
     mob: PHANTOM
     amount: 1
     maxamount: 2
@@ -3474,7 +3160,6 @@ Spawners:
     x: -3758.0
     y: 69.0
     z: 1551.0
-    world: world
     mob: PHANTOM
     amount: 1
     maxamount: 2
@@ -3482,151 +3167,7 @@ Spawners:
     x: -3758.0
     y: 69.0
     z: 1551.0
-    world: world
     mob: PHANTOM
     amount: 1
     maxamount: 2
-  s131:
-    x: -2607.0
-    y: 66.0
-    z: 4766.0
-    world: world
-    mob: VILLAGER_2
-    amount: 1
-    maxamount: 2
-  s196:
-    x: -4048.0
-    y: 59.0
-    z: 1734.0
-    world: world
-    mob: PILLAGER_SHAMAN
-    amount: 1
-    maxamount: 2
-  s207:
-    x: -3164.0
-    y: 66.0
-    z: 2739.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s208:
-    x: -2919.0
-    y: 68.0
-    z: 2940.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s213:
-    x: -2107.0
-    y: 62.0
-    z: 3950.0
-    world: world
-    mob: VILLAGER_SAILOR
-    amount: 1
-    maxamount: 2
-  s214:
-    x: -2569.0
-    y: 66.0
-    z: 4481.0
-    world: world
-    mob: ZOMBIE_VILLAGER
-    amount: 1
-    maxamount: 2
-  s215:
-    x: -2908.0
-    y: 70.0
-    z: 2358.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s216:
-    x: -2879.0
-    y: 66.0
-    z: 5109.0
-    world: world
-    mob: VILLAGER_HOBBIT
-    amount: 1
-    maxamount: 2
-  s161:
-    x: -3155.0
-    y: 65.0
-    z: 2082.0
-    world: world
-    mob: GOBLIN_MAGE
-    amount: 1
-    maxamount: 2
-  s280:
-    x: -2572.0
-    y: 115.0
-    z: 1848.0
-    world: world
-    mob: MUMMY
-    amount: 1
-    maxamount: 2
-  s328:
-    x: -2968.0
-    y: 66.0
-    z: 2304.0
-    world: world
-    mob: GOBLIN_ROGUE
-    amount: 1
-    maxamount: 2
-  s362:
-    x: -2620.0
-    y: 64.0
-    z: 4944.0
-    world: world
-    mob: SHEEP_BABY
-    amount: 1
-    maxamount: 2
-  s395:
-    x: -3227.0
-    y: 64.0
-    z: 4510.0
-    world: world
-    mob: SLIME_STICKY
-    amount: 1
-    maxamount: 2
-  s18:
-    x: -2375.0
-    y: 67.0
-    z: 2608.0
-    world: world
-    mob: VILLAGER_4
-    amount: 1
-    maxamount: 2
-  s46:
-    x: -396.0
-    y: 3.0
-    z: 3029.0
-    world: aleesia
-    mob: BOSS_DARKNESS
-    amount: 1
-    maxamount: 1
-  s106:
-    x: -3656.0
-    y: 65.0
-    z: 2244.0
-    world: world
-    mob: ORC_MAGE
-    amount: 1
-    maxamount: 2
-  s243:
-    x: -2277.0
-    y: 81.0
-    z: 3319.0
-    world: world
-    mob: TIMBERMAN
-    amount: 1
-    maxamount: 2
-  s256:
-    x: -2828.0
-    y: 67.0
-    z: 4445.0
-    world: world
-    mob: ZOMBIE
-    amount: 1
-    maxamount: 2
+SpawnerCount: 453
