@@ -10,72 +10,73 @@ import java.util.List;
 public enum WeaponGearType {
     //One handed Melee Weapons
     SWORD,
-    MACE,
     DAGGER,
-    WAR_AXE,
     //Two handed Melee Weapons
     BATTLE_AXE,
-    GREAT_SWORD,
     WAR_HAMMER,
+    GREAT_SWORD,
     //Ranged + Melee weapons
     SPEAR,
     //Ranged Weapons
     BOW,
     CROSSBOW,
     //Magic Weapons
-    WAND,
-    STAFF;
+    STAFF, //staff
+    WAND; //wand
 
     public List<RPGClass> getRequiredClasses() {
         List<RPGClass> classList = new ArrayList<>();
 
         switch (this) {
+            //ONE HANDED MELEE
             case SWORD:
                 classList.add(RPGClass.KNIGHT);
+                classList.add(RPGClass.PALADIN);
+                classList.add(RPGClass.WARRIOR);
                 classList.add(RPGClass.ROGUE);
-                classList.add(RPGClass.PALADIN);
-                classList.add(RPGClass.MONK);
-                break;
-            case MACE:
-                classList.add(RPGClass.KNIGHT);
-                classList.add(RPGClass.PALADIN);
                 break;
             case DAGGER:
+                classList.add(RPGClass.ROGUE);
                 classList.add(RPGClass.ARCHER);
-                classList.add(RPGClass.MAGE);
-                classList.add(RPGClass.ROGUE);
                 classList.add(RPGClass.HUNTER);
+                classList.add(RPGClass.MAGE);
                 break;
-            case WAR_AXE:
-                classList.add(RPGClass.ROGUE);
+            //TWO HANDED MELEE
+            case BATTLE_AXE:
+                classList.add(RPGClass.KNIGHT);
+                classList.add(RPGClass.PALADIN);
                 classList.add(RPGClass.WARRIOR);
                 break;
-            case BATTLE_AXE:
+            case WAR_HAMMER:
+                classList.add(RPGClass.KNIGHT);
+                classList.add(RPGClass.PALADIN);
                 classList.add(RPGClass.WARRIOR);
                 break;
             case GREAT_SWORD:
                 classList.add(RPGClass.KNIGHT);
-                classList.add(RPGClass.WARRIOR);
-                classList.add(RPGClass.MONK);
-                break;
-            case WAR_HAMMER:
                 classList.add(RPGClass.PALADIN);
+                classList.add(RPGClass.WARRIOR);
                 break;
+            //TWO HANDED HYBRID
             case SPEAR:
                 classList.add(RPGClass.MONK);
                 break;
+            //TWO HANDED RANGED
             case BOW:
                 classList.add(RPGClass.ARCHER);
                 classList.add(RPGClass.HUNTER);
+                classList.add(RPGClass.ROGUE);
                 break;
             case CROSSBOW:
                 classList.add(RPGClass.ARCHER);
                 classList.add(RPGClass.HUNTER);
+                classList.add(RPGClass.ROGUE);
                 break;
-            case WAND:
+            //TWO HANDED MAGICAL
+            case STAFF:
                 classList.add(RPGClass.MAGE);
                 break;
-            case STAFF:
+            case WAND:
                 classList.add(RPGClass.MAGE);
                 break;
         }
@@ -86,19 +87,17 @@ public enum WeaponGearType {
     public WeaponDamageType getWeaponType() {
         switch (this) {
             case SWORD:
-            case WAR_HAMMER:
             case GREAT_SWORD:
             case BATTLE_AXE:
-            case WAR_AXE:
+            case WAR_HAMMER:
             case DAGGER:
-            case MACE:
                 return WeaponDamageType.MELEE;
             case SPEAR:
             case CROSSBOW:
             case BOW:
                 return WeaponDamageType.RANGED;
-            case WAND:
             case STAFF:
+            case WAND:
                 return WeaponDamageType.MAGICAL;
         }
 
@@ -108,18 +107,14 @@ public enum WeaponGearType {
     public Material getMaterial() {
         switch (this) {
             case SWORD:
-                return Material.DIAMOND_SWORD;
-            case MACE:
-                return Material.IRON_SWORD;
+                return Material.GOLDEN_HOE;
             case DAGGER:
                 return Material.DIAMOND_HOE;
-            case WAR_AXE:
-                return Material.IRON_HOE;
             case BATTLE_AXE:
                 return Material.DIAMOND_AXE;
-            case GREAT_SWORD:
-                return Material.IRON_AXE;
             case WAR_HAMMER:
+                return Material.DIAMOND_SWORD;
+            case GREAT_SWORD:
                 return Material.GOLDEN_AXE;
             case SPEAR:
                 return Material.TRIDENT;
@@ -127,64 +122,31 @@ public enum WeaponGearType {
                 return Material.BOW;
             case CROSSBOW:
                 return Material.CROSSBOW;
-            case WAND:
-                return Material.IRON_SHOVEL;
             case STAFF:
+                return Material.GOLDEN_SHOVEL;
+            case WAND:
                 return Material.DIAMOND_SHOVEL;
         }
 
         return null;
     }
 
-    public String getDisplayName() {
-        switch (this) {
-            case SWORD:
-                return "Sword";
-            case MACE:
-                return "Mace";
-            case DAGGER:
-                return "Dagger";
-            case WAR_AXE:
-                return "WarAxe";
-            case BATTLE_AXE:
-                return "BattleAxe";
-            case GREAT_SWORD:
-                return "GreatSword";
-            case WAR_HAMMER:
-                return "WarHammer";
-            case SPEAR:
-                return "Spear";
-            case BOW:
-                return "Bow";
-            case CROSSBOW:
-                return "Crossbow";
-            case WAND:
-                return "Wand";
-            case STAFF:
-                return "Staff";
-        }
-
-        return "";
-    }
-
     public AttackSpeed getAttackSpeed() {
         switch (this) {
-            case SPEAR:
-            case GREAT_SWORD:
-            case WAND:
-            case STAFF:
-            case BOW:
-            case CROSSBOW:
-                return AttackSpeed.NORMAL;
             case SWORD:
-            case MACE:
-            case WAR_AXE:
+            case STAFF:
                 return AttackSpeed.FAST;
             case DAGGER:
                 return AttackSpeed.RAPID;
             case BATTLE_AXE:
             case WAR_HAMMER:
+            case CROSSBOW:
                 return AttackSpeed.SLOW;
+            case GREAT_SWORD:
+            case SPEAR:
+            case BOW:
+            case WAND:
+                return AttackSpeed.NORMAL;
         }
 
         return AttackSpeed.SLOW;
@@ -193,31 +155,54 @@ public enum WeaponGearType {
     public double getDamageReduction() {
         switch (this) {
             case SWORD:
-                return 0.5;
-            case MACE:
-                return 0.5;
+                return 0.6;
             case DAGGER:
-                return 0.5;
-            case WAR_AXE:
-                return 0.5;
+                return 0.4;
             case BATTLE_AXE:
-                return 0.5;
-            case GREAT_SWORD:
-                return 0.5;
+                return 1;
             case WAR_HAMMER:
-                return 0.5;
+                return 0.8;
+            case GREAT_SWORD:
+                return 0.8;
             case SPEAR:
                 return 0.5;
             case BOW:
-                return 0.5;
+                return 0.6;
             case CROSSBOW:
-                return 0.5;
-            case WAND:
-                return 0.5;
+                return 0.8;
             case STAFF:
-                return 0.5;
+                return 0.4;
+            case WAND:
+                return 0.6;
         }
 
         return 0;
+    }
+
+    public String getDisplayName() {
+        switch (this) {
+            case SWORD:
+                return "Sword";
+            case DAGGER:
+                return "Dagger";
+            case BATTLE_AXE:
+                return "BattleAxe";
+            case WAR_HAMMER:
+                return "WarHammer";
+            case GREAT_SWORD:
+                return "GreatSword";
+            case SPEAR:
+                return "Spear";
+            case BOW:
+                return "Bow";
+            case CROSSBOW:
+                return "Crossbow";
+            case STAFF:
+                return "Staff";
+            case WAND:
+                return "Wand";
+        }
+
+        return "WEAPON GEAR NAME BUG";
     }
 }

@@ -306,13 +306,7 @@ public enum MerchantPageType {
                 case SWORD:
                     price = 3;
                     break;
-                case MACE:
-                    price = 3;
-                    break;
                 case DAGGER:
-                    price = 3;
-                    break;
-                case WAR_AXE:
                     price = 3;
                     break;
                 case BATTLE_AXE:
@@ -333,10 +327,10 @@ public enum MerchantPageType {
                 case CROSSBOW:
                     price = 3;
                     break;
-                case WAND:
+                case STAFF:
                     price = 3;
                     break;
-                case STAFF:
+                case WAND:
                     price = 3;
                     break;
             }

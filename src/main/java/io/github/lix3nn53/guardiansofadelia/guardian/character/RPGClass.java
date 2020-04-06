@@ -236,13 +236,13 @@ public enum RPGClass {
         if (this == RPGClass.KNIGHT) {
             return WeaponGearType.SWORD;
         } else if (this == RPGClass.MAGE) {
-            return WeaponGearType.STAFF;
+            return WeaponGearType.WAND;
         } else if (this == RPGClass.MONK) {
             return WeaponGearType.SPEAR;
         } else if (this == RPGClass.ROGUE) {
             return WeaponGearType.DAGGER;
         } else if (this == RPGClass.PALADIN) {
-            return WeaponGearType.MACE;
+            return WeaponGearType.WAR_HAMMER;
         } else if (this == RPGClass.WARRIOR) {
             return WeaponGearType.BATTLE_AXE;
         } else if (this == RPGClass.HUNTER) {
