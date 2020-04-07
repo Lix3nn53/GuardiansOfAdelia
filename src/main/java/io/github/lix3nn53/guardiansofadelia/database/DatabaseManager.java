@@ -28,6 +28,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class DatabaseManager {
@@ -83,7 +84,7 @@ public class DatabaseManager {
         UUID uuid = player.getUniqueId();
         Bukkit.getScheduler().runTaskAsynchronously(GuardiansOfAdelia.getInstance(), () -> {
             try {
-                GuardianData guardianData = DatabaseQueries.getGuardianDataWithRanksAndStorages(uuid);
+                GuardianData guardianData = DatabaseQueries.getGuardianData(uuid);
 
                 List<Player> friendsOfPlayer = DatabaseQueries.getFriendsOfPlayer(uuid);
                 guardianData.setFriends(friendsOfPlayer);
@@ -179,13 +180,14 @@ public class DatabaseManager {
         UUID uuid = player.getUniqueId();
 
         //player
+        LocalDate lastPrizeDate = guardianData.getDailyRewardInfo().getLastObtainDate();
         StaffRank staffRank = guardianData.getStaffRank();
         PremiumRank premiumRank = guardianData.getPremiumRank();
         ItemStack[] personalStorage = guardianData.getPersonalStorage();
         ItemStack[] bazaarStorage = guardianData.getBazaarStorage();
         ItemStack[] premiumStorage = guardianData.getPremiumStorage();
         try {
-            DatabaseQueries.setPlayerRanksAndStorages(uuid, staffRank, premiumRank, personalStorage, bazaarStorage, premiumStorage);
+            DatabaseQueries.setGuardianData(uuid, lastPrizeDate, staffRank, premiumRank, personalStorage, bazaarStorage, premiumStorage);
         } catch (SQLException e) {
             e.printStackTrace();
         }

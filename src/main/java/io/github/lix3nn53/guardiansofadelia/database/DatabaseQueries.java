@@ -56,9 +56,10 @@ public class DatabaseQueries {
             statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player`\n" +
                     "(\n" +
                     " `uuid`             varchar(40) NOT NULL ,\n" +
+                    " `daily_last_date`       date ,\n" +
                     " `staff_rank`       varchar(20) ,\n" +
                     " `premium_rank`       varchar(20) ,\n" +
-                    " `premium_rank_date`       datetime ,\n" +
+                    " `premium_rank_date`       date ,\n" +
                     " `storage_personal` mediumtext ,\n" +
                     " `storage_bazaar`   mediumtext ,\n" +
                     " `storage_premium`   mediumtext ,\n" +
@@ -204,7 +205,7 @@ public class DatabaseQueries {
         return guildName;
     }
 
-    public static GuardianData getGuardianDataWithRanksAndStorages(UUID uuid) throws SQLException {
+    public static GuardianData getGuardianData(UUID uuid) throws SQLException {
         String SQL_QUERY = "SELECT * FROM goa_player WHERE uuid = ?";
         GuardianData guardianData = new GuardianData();
         try (Connection con = ConnectionPool.getConnection()) {
@@ -243,6 +244,11 @@ public class DatabaseQueries {
                 if (!resultSet.wasNull()) {
                     ItemStack[] itemStacks = ItemSerializer.itemStackArrayFromBase64(storagePremiumString);
                     guardianData.setPremiumStorage(itemStacks);
+                }
+
+                LocalDate dailyLastDate = resultSet.getObject("daily_last_date", LocalDate.class);
+                if (!resultSet.wasNull()) {
+                    guardianData.getDailyRewardInfo().setLastObtainDate(dailyLastDate);
                 }
             }
             resultSet.close();
@@ -624,13 +630,14 @@ public class DatabaseQueries {
         }
     }
 
-    public static int setPlayerRanksAndStorages(UUID uuid, StaffRank staffRank, PremiumRank premiumRank, ItemStack[] personalStorage, ItemStack[] bazaarStorage, ItemStack[] premiumStorage) throws SQLException {
+    public static int setGuardianData(UUID uuid, LocalDate lastPrizeDate, StaffRank staffRank, PremiumRank premiumRank, ItemStack[] personalStorage, ItemStack[] bazaarStorage, ItemStack[] premiumStorage) throws SQLException {
         String SQL_QUERY = "INSERT INTO goa_player \n" +
-                "\t(uuid, staff_rank, premium_rank, storage_personal, storage_bazaar, storage_premium) \n" +
+                "\t(uuid, daily_last_date, staff_rank, premium_rank, storage_personal, storage_bazaar, storage_premium) \n" +
                 "VALUES \n" +
-                "\t(?, ?, ?, ?, ?, ?)\n" +
+                "\t(?, ?, ?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
                 "\tuuid = VALUES(uuid),\n" +
+                "\tdaily_last_date = VALUES(daily_last_date),\n" +
                 "\tstaff_rank = VALUES(staff_rank),\n" +
                 "\tpremium_rank = VALUES(premium_rank),\n" +
                 "\tstorage_personal = VALUES(storage_personal),\n" +
@@ -640,14 +647,15 @@ public class DatabaseQueries {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
             pst.setString(1, uuid.toString());
-            pst.setString(2, staffRank.name());
-            pst.setString(3, premiumRank.name());
+            pst.setObject(2, lastPrizeDate);
+            pst.setString(3, staffRank.name());
+            pst.setString(4, premiumRank.name());
             String personalStorageString = ItemSerializer.itemStackArrayToBase64(personalStorage);
-            pst.setString(4, personalStorageString);
+            pst.setString(5, personalStorageString);
             String bazaarStorageString = ItemSerializer.itemStackArrayToBase64(bazaarStorage);
-            pst.setString(5, bazaarStorageString);
+            pst.setString(6, bazaarStorageString);
             String premiumStorageString = ItemSerializer.itemStackArrayToBase64(premiumStorage);
-            pst.setString(6, premiumStorageString);
+            pst.setString(7, premiumStorageString);
 
             //2 = replaced, 1 = new row added
             int returnValue = pst.executeUpdate();

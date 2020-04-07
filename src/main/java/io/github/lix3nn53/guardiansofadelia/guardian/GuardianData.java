@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
@@ -40,6 +41,8 @@ public class GuardianData {
     private boolean isGathering;
 
     private Bazaar bazaar;
+
+    private DailyRewardInfo dailyRewardInfo = new DailyRewardInfo();
 
     public GuardianData() {
         personalStorage.setLocked(false);
@@ -219,5 +222,9 @@ public class GuardianData {
 
     public void setPremiumRank(PremiumRank premiumRank) {
         this.premiumRank = premiumRank;
+    }
+
+    public DailyRewardInfo getDailyRewardInfo() {
+        return dailyRewardInfo;
     }
 }
