@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.rewards;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.DateUtils;
@@ -13,12 +14,40 @@ import java.util.UUID;
 
 public class DailyRewardHandler {
 
-    private static final int MAX_DAYS = 7;
+    private static final ItemStack[] itemPrizes = new ItemStack[7]; //A week is 7 days
 
-    private static final ItemStack[] itemPrizes = new ItemStack[MAX_DAYS];
+    public static void setReward(int day, ItemStack itemStack) {
+        if (day < 1 || day > 7) {
+            throw new IllegalArgumentException();
+        }
 
-    public static void setReward(int index, ItemStack itemStack) {
-        itemPrizes[index] = itemStack;
+        itemPrizes[day - 1] = itemStack;
+    }
+
+    public static ItemStack[] getRewards() {
+        return itemPrizes;
+    }
+
+    public static int getCurrentIndex() {
+        return DateUtils.getDayOfTheWeek();
+    }
+
+    public static int getIndexOfDate(LocalDate date) {
+        if (date == null) {
+            GuardiansOfAdelia.getInstance().getLogger().info("null");
+            return 0;
+        }
+
+        boolean dateInCurrentWeek = DateUtils.isDateInCurrentWeek(date);
+
+        if (!dateInCurrentWeek) { //return first index if date is older than current week
+            GuardiansOfAdelia.getInstance().getLogger().info("dateInCurrentWeek false");
+            return 0;
+        }
+
+        GuardiansOfAdelia.getInstance().getLogger().info("ChronoField");
+
+        return date.get(ChronoField.DAY_OF_WEEK);
     }
 
     public static void giveReward(Player player) {
@@ -35,33 +64,23 @@ public class DailyRewardHandler {
 
         if (!canGetReward) return;
 
+        int index = DateUtils.getDayOfTheWeek() - 1;
+        ItemStack itemPrize = itemPrizes[index];
+
+        if (itemPrize == null) return;
+
         dailyRewardInfo.setLastObtainDate(LocalDate.now());
-
-        int dayOfTheWeek = DateUtils.getDayOfTheWeek();
-        ItemStack itemPrize = itemPrizes[dayOfTheWeek];
-
         InventoryUtils.giveItemToPlayer(player, itemPrize);
     }
 
     private static boolean canGetReward(DailyRewardInfo dailyRewardInfo) {
         LocalDate lastPrizeDate = dailyRewardInfo.getLastObtainDate();
 
-        if (lastPrizeDate == null) return true;
-
-        //get day of the week for lastPrizeDate
-        int lastPrizeDateDayOfTheWeek = lastPrizeDate.get(ChronoField.DAY_OF_WEEK);
-
-        boolean dateInCurrentWeek = DateUtils.isDateInCurrentWeek(lastPrizeDate);
+        int indexOfDate = getIndexOfDate(lastPrizeDate);
 
         //get day of the week for current day
         int dayOfTheWeek = DateUtils.getDayOfTheWeek();
 
-        if (dateInCurrentWeek) { //do we need to check streak?
-            return dayOfTheWeek - 1 == lastPrizeDateDayOfTheWeek; //return true if player got yesterday's prize, false otherwise
-        }
-
-        //if date is not in the current week, check if we are in the first day
-
-        return dayOfTheWeek == 1;
+        return indexOfDate == dayOfTheWeek - 1; //is yesterday
     }
 }

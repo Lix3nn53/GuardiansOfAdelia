@@ -37,6 +37,7 @@ public class ConfigManager {
     }
 
     public static void createConfigALL() {
+        RewardDailyConfigurations.createConfigs();
         EntityConfigurations.createConfigs();
         EntitySkillSetConfigurations.createConfigs();
         JobGatheringConfigurations.createConfigs();
@@ -57,6 +58,7 @@ public class ConfigManager {
     }
 
     public static void loadConfigALL() {
+        RewardDailyConfigurations.loadConfigs();
         EntityConfigurations.loadConfigs();
         EntitySkillSetConfigurations.loadConfigs();
         JobGatheringConfigurations.loadConfigs();
@@ -77,6 +79,7 @@ public class ConfigManager {
     }
 
     public static void writeConfigALL() {
+        RewardDailyConfigurations.writeConfigs();
         SpawnerConfiguration.writeConfigs();
     }
 

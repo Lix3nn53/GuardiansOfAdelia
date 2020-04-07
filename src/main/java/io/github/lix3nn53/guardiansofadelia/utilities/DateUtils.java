@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
 
 public class DateUtils {
 
@@ -26,12 +27,9 @@ public class DateUtils {
 
     public static boolean isDateInCurrentWeek(LocalDate targetDate) {
         LocalDate now = LocalDate.now();
-        int year = now.getYear();
-        int week = now.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
 
-        int targetYear = targetDate.getYear();
-        int targetWeek = targetDate.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
+        long weeksBetween = ChronoUnit.WEEKS.between(now, targetDate);
 
-        return week == targetWeek && year == targetYear;
+        return weeksBetween == 0;
     }
 }

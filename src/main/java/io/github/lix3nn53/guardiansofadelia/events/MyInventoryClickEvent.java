@@ -43,6 +43,7 @@ import io.github.lix3nn53.guardiansofadelia.npc.merchant.SellGui;
 import io.github.lix3nn53.guardiansofadelia.party.PartyInvite;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
+import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
@@ -948,6 +949,13 @@ public class MyInventoryClickEvent implements Listener {
             }
 
             player.closeInventory();
+        } else if (title.equals(org.bukkit.ChatColor.YELLOW + "Daily Reward Claim")) {
+            if (currentType.equals(Material.LIME_WOOL)) {
+                DailyRewardHandler.giveReward(player);
+
+                GuiGeneric guiGeneric = MenuList.dailyRewardsMenu(player);
+                guiGeneric.openInventory(player);
+            }
         }
     }
 

@@ -1,16 +1,12 @@
-import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
-import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
-import io.github.lix3nn53.guardiansofadelia.database.ConnectionPool;
-import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import org.bukkit.inventory.ItemStack;
+import io.github.lix3nn53.guardiansofadelia.utilities.DateUtils;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class Test {
 
@@ -19,33 +15,17 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException, SQLException {
-        String hostname = "localhost";
-        String port = "3306";
-        String database = "goa";
-        String username = "lixtrinn";
-        String password = "asdsadfsafsabJK19034783ayu3wl12mgkj647nsdm9sf9dsfj9dsf82h32f8h2hf82f8hfhf2k2";
-        int minimumConnections = 5;
-        int maximumConnections = 20;
-        int connectionTimeout = 30000;
-        String testQuery = "SELECT 1";
+        LocalDate localDate = LocalDate.now().with(ChronoField.DAY_OF_MONTH, 7);
+        boolean dateInCurrentWeek = DateUtils.isDateInCurrentWeek(localDate);
 
-        ConnectionPool.init(hostname, port, database, username, password, minimumConnections, maximumConnections, connectionTimeout, testQuery);
+        LocalDate firstDayOfTheWeek = DateUtils.getFirstDayOfTheWeek();
+        System.out.println("firstDayOfTheWeek: " + firstDayOfTheWeek);
+        int dayOfTheWeek = DateUtils.getDayOfTheWeek();
+        System.out.println("dayOfTheWeek: " + dayOfTheWeek);
+        System.out.println("dateInCurrentWeek: " + dateInCurrentWeek);
+        boolean sameDay = DateUtils.isSameDay(LocalDate.now().with(ChronoField.DAY_OF_WEEK, 1), LocalDate.now());
+        System.out.println("sameDay: " + sameDay);
 
-        DatabaseManager.createTables();
-
-        LocalDate lastPrizeDate = LocalDate.now();
-        StaffRank staffRank = StaffRank.NONE;
-        PremiumRank premiumRank = PremiumRank.TITAN;
-        ItemStack[] personalStorage = new ItemStack[5];
-        ItemStack[] bazaarStorage = new ItemStack[5];
-        ItemStack[] premiumStorage = new ItemStack[5];
-        try {
-            DatabaseQueries.setGuardianData(new UUID(1, 1), lastPrizeDate, staffRank, premiumRank, personalStorage, bazaarStorage, premiumStorage);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        DatabaseQueries.getGuardianData(new UUID(1, 1));
 
         /*LocalDate now = LocalDate.now();
         String currentDateString = now.toString();

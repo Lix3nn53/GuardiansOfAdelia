@@ -9,27 +9,25 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManag
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
-import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
-import io.github.lix3nn53.guardiansofadelia.creatures.entitySkills.EntitySkillSet;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
-import io.github.lix3nn53.guardiansofadelia.creatures.spawners.Spawner;
-import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
+import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -43,6 +41,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -52,29 +51,57 @@ public class CommandLix implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (!command.getName().equals("lix")) {
+        if (!command.getName().equals("admin")) {
             return false;
         }
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
                 player.sendMessage(ChatColor.DARK_PURPLE + "---- ADMIN ----");
-                player.sendMessage(ChatColor.DARK_PURPLE + "/lix setstaff <player> [NONE|OWNER|ADMIN|DEVELOPER|BUILDER|SUPPORT|YOUTUBER|TRAINEE]");
-                player.sendMessage(ChatColor.DARK_PURPLE + "/lix exp <player> <amount>");
+                player.sendMessage(ChatColor.DARK_PURPLE + "/admin setstaff <player> [NONE|OWNER|ADMIN|DEVELOPER|BUILDER|SUPPORT|YOUTUBER|TRAINEE]");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "---- UTILS ----");
-                player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix sound <sound>");
-                player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix tp [town|?] <num>");
-                player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix quest t - turn ins current quests tasks");
-                player.sendMessage(ChatColor.LIGHT_PURPLE + "/lix quest a <num> - accept quest tasks");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "/admin fly");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "/admin tp town <num>");
+                player.sendMessage(ChatColor.BLUE + "---- RPG ----");
+                player.sendMessage(ChatColor.BLUE + "/admin exp <player> <amount>");
+                player.sendMessage(ChatColor.BLUE + "---- OTHER ----");
+                player.sendMessage(ChatColor.BLUE + "/admin setdaily");
+                player.sendMessage(ChatColor.BLUE + "/admin model portal<1-5>");
+                player.sendMessage(ChatColor.BLUE + "/admin sound <sound>");
+                player.sendMessage(ChatColor.DARK_PURPLE + "---- QUEST ----");
+                player.sendMessage(ChatColor.DARK_PURPLE + "/admin quest t - turn ins current quests tasks");
+                player.sendMessage(ChatColor.DARK_PURPLE + "/admin quest a <num> - accept quest tasks");
                 player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
-                player.sendMessage(ChatColor.BLUE + "/lix weapon [class] <num>");
-                player.sendMessage(ChatColor.BLUE + "/lix companion [type] <num>");
-                player.sendMessage(ChatColor.BLUE + "/lix mount [type] <num>");
-                player.sendMessage(ChatColor.BLUE + "/lix stone <grade> <amount>");
-                player.sendMessage(ChatColor.BLUE + "/lix passive [parrot|earring|necklace|glove|ring] <num>");
-                player.sendMessage(ChatColor.BLUE + "/lix model portal<1-5>");
-                player.sendMessage(ChatColor.BLUE + "/lix premium item-id<1-24>");
-                player.sendMessage(ChatColor.BLUE + "/lix ingredient id amount");
+                player.sendMessage(ChatColor.BLUE + "/admin coin <num>");
+                player.sendMessage(ChatColor.BLUE + "/admin weapon [class] <num>");
+                player.sendMessage(ChatColor.BLUE + "/admin companion [type] <num>");
+                player.sendMessage(ChatColor.BLUE + "/admin mount [type] <num>");
+                player.sendMessage(ChatColor.BLUE + "/admin stone <grade> <amount>");
+                player.sendMessage(ChatColor.BLUE + "/admin passive [parrot|earring|necklace|glove|ring] <num>");
+                player.sendMessage(ChatColor.BLUE + "/admin premium item-id<1-24>");
+                player.sendMessage(ChatColor.BLUE + "/admin ingredient id amount");
+            } else if (args[0].equals("setdaily")) {
+                GuiGeneric guiGeneric = new GuiGeneric(9, ChatColor.YELLOW + "Set Daily Rewards", 0);
+
+                ItemStack filler = new ItemStack(Material.BLACK_STAINED_GLASS);
+                ItemMeta itemMeta = filler.getItemMeta();
+                itemMeta.setDisplayName("");
+                itemMeta.setLore(new ArrayList<>());
+                filler.setItemMeta(itemMeta);
+                guiGeneric.setItem(0, filler);
+                guiGeneric.setItem(8, filler);
+
+                ItemStack[] rewards = DailyRewardHandler.getRewards();
+                int i = 1;
+                for (ItemStack itemStack : rewards) {
+                    if (itemStack == null) continue;
+
+                    guiGeneric.setItem(i, itemStack);
+                    i++;
+                }
+
+                guiGeneric.setLocked(false);
+                guiGeneric.openInventory(player);
             } else if (args[0].equals("exp")) {
                 if (args.length == 3) {
                     int expToGive = Integer.parseInt(args[2]);
@@ -163,9 +190,6 @@ public class CommandLix implements CommandExecutor {
             } else if (args[0].equals("fly")) {
                 boolean allowFlight = player.getAllowFlight();
                 player.setFlying(!allowFlight);
-            } else if (args[0].equals("debug")) {
-                List<Spawner> spawners = SpawnerManager.getSpawners();
-                player.sendMessage("size: " + spawners.size());
             } else if (args[0].equals("weapon")) {
                 if (args.length == 3) {
                     WeaponGearType weaponGearType = WeaponGearType.valueOf(args[1]);
@@ -263,13 +287,12 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-                EntitySkillSet skillSet = AdeliaEntityManager.getSkillSet("BOSS_SLIME");
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
 
-                List<SkillComponent> skills = skillSet.getSkills();
+                DailyRewardInfo dailyRewardInfo = guardianData.getDailyRewardInfo();
+                LocalDate lastObtainDate = dailyRewardInfo.getLastObtainDate();
 
-                SkillComponent skillComponent = skills.get(0);
-
-                skillComponent.execute(player, 1, new ArrayList<>(), 1);
+                player.sendMessage(lastObtainDate.toString());
             }
 
             // If the player (or console) uses our command correct, we can return true

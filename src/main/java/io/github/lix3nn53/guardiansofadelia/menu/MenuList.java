@@ -16,6 +16,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
+import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.CharacterInfoSlot;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -28,6 +30,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -796,6 +799,123 @@ public class MenuList {
         boostGather.setItemMeta(itemMeta);
         guiGeneric.setItem(16, boostGather);
 
+        return guiGeneric;
+    }
+
+    public static GuiGeneric dailyRewardsMenu(Player player) {
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.YELLOW + "Daily Reward Claim", 0);
+
+        UUID uuid = player.getUniqueId();
+        if (!GuardianDataManager.hasGuardianData(uuid)) return guiGeneric;
+
+        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+        ItemStack pastFail = new ItemStack(Material.RED_WOOL);
+        ItemMeta itemMeta = pastFail.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.RED + "You missed this reward");
+        List<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "");
+        itemMeta.setLore(lore);
+        pastFail.setItemMeta(itemMeta);
+
+        ItemStack pastSuccess = new ItemStack(Material.GREEN_WOOL);
+        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "You claimed this reward");
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "");
+        itemMeta.setLore(lore);
+        pastSuccess.setItemMeta(itemMeta);
+
+        ItemStack available = new ItemStack(Material.LIME_WOOL);
+        itemMeta.setDisplayName(ChatColor.GREEN + "You can claim today's reward");
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "");
+        itemMeta.setLore(lore);
+        available.setItemMeta(itemMeta);
+
+        ItemStack notAvailableToday = new ItemStack(Material.PURPLE_WOOL);
+        itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "You can't claim today's reward");
+        lore = new ArrayList<>();
+        lore.add(ChatColor.DARK_PURPLE + "because you missed yesterday's reward.");
+        itemMeta.setLore(lore);
+        notAvailableToday.setItemMeta(itemMeta);
+
+        ItemStack notAvailable = new ItemStack(Material.GRAY_WOOL);
+        itemMeta.setDisplayName(ChatColor.GRAY + "Not available yet");
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "");
+        itemMeta.setLore(lore);
+        notAvailable.setItemMeta(itemMeta);
+
+        DailyRewardInfo dailyRewardInfo = guardianData.getDailyRewardInfo();
+        LocalDate lastObtainDate = dailyRewardInfo.getLastObtainDate();
+
+        int playerIndex = DailyRewardHandler.getIndexOfDate(lastObtainDate);
+        player.sendMessage("playerIndex: " + playerIndex);
+        int currentIndex = DailyRewardHandler.getCurrentIndex();
+        player.sendMessage("currentIndex: " + currentIndex);
+
+        //today
+        if (currentIndex - 1 == playerIndex) {
+            guiGeneric.setItem(currentIndex, available);
+            guiGeneric.setItem(currentIndex + 18, available);
+        } else {
+            guiGeneric.setItem(currentIndex, notAvailableToday);
+            guiGeneric.setItem(currentIndex + 18, notAvailableToday);
+        }
+
+        //past success
+        for (int i = 1; i <= playerIndex; i++) {
+            guiGeneric.setItem(i, pastSuccess);
+            guiGeneric.setItem(i + 18, pastSuccess);
+        }
+
+        //past fail
+        for (int i = playerIndex + 1; i < currentIndex; i++) {
+            if (i == 0) continue;
+
+            guiGeneric.setItem(i, pastFail);
+            guiGeneric.setItem(i + 18, pastFail);
+        }
+
+        //future non-available
+        for (int i = currentIndex + 1; i < 8; i++) {
+            guiGeneric.setItem(i, notAvailable);
+            guiGeneric.setItem(i + 18, notAvailable);
+        }
+
+        ItemStack filler = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Daily Rewards");
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Every week, you bla bla TODO explanation");
+        itemMeta.setLore(lore);
+        filler.setItemMeta(itemMeta);
+
+        int fillerIndex = 0;
+        guiGeneric.setItem(fillerIndex, filler);
+        guiGeneric.setItem(fillerIndex + 9, filler);
+        guiGeneric.setItem(fillerIndex + 18, filler);
+
+        fillerIndex = 8;
+        guiGeneric.setItem(fillerIndex, filler);
+        guiGeneric.setItem(fillerIndex + 9, filler);
+        guiGeneric.setItem(fillerIndex + 18, filler);
+
+        ItemStack[] rewards = DailyRewardHandler.getRewards();
+        int i = 10;
+        for (ItemStack itemStack : rewards) {
+            if (itemStack == null) continue;
+
+            guiGeneric.setItem(i, itemStack);
+            i++;
+        }
+
+        guiGeneric.setLocked(true);
+        guiGeneric.lockOwnInventory();
         return guiGeneric;
     }
 }

@@ -15,7 +15,7 @@ depend:
   - WorldEdit
   - WorldGuard
 commands:
-  lix:
+  admin:
     description: Admin command
     permission: guardian.admin
     permission-message: You do not have permission!
@@ -62,6 +62,10 @@ commands:
     permission: guardian.player
     permission-message: You do not have permission!
   job:
+    description: Job command
+    permission: guardian.player
+    permission-message: You do not have permission!
+  reward:
     description: Job command
     permission: guardian.player
     permission-message: You do not have permission!
