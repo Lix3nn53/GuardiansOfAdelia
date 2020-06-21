@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.rewards;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.DateUtils;
@@ -34,18 +33,14 @@ public class DailyRewardHandler {
 
     public static int getIndexOfDate(LocalDate date) {
         if (date == null) {
-            GuardiansOfAdelia.getInstance().getLogger().info("null");
             return 0;
         }
 
         boolean dateInCurrentWeek = DateUtils.isDateInCurrentWeek(date);
 
         if (!dateInCurrentWeek) { //return first index if date is older than current week
-            GuardiansOfAdelia.getInstance().getLogger().info("dateInCurrentWeek false");
             return 0;
         }
-
-        GuardiansOfAdelia.getInstance().getLogger().info("ChronoField");
 
         return date.get(ChronoField.DAY_OF_WEEK);
     }

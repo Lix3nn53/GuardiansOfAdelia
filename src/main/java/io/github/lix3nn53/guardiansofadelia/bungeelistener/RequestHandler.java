@@ -179,8 +179,16 @@ public class RequestHandler {
             if (player != null) {
                 minecraftUsername = player.getName();
                 UUID uuid = player.getUniqueId();
+                PremiumRank currentRank = null;
+                GuardianData guardianData;
                 if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    guardianData = GuardianDataManager.getGuardianData(uuid);
+                    currentRank = guardianData.getPremiumRank();
+                    if (currentRank.equals(PremiumRank.NONE)) {
+                        if (currentRank.ordinal() >= premiumRank.ordinal()) {
+                            return new WebResponse(false, "You already have a rank that is higher or equal to this rank.", minecraftUuidString, minecraftUsername, productId);
+                        }
+                    }
                     guardianData.setPremiumRank(premiumRank);
                 }
 
@@ -188,7 +196,11 @@ public class RequestHandler {
                     DatabaseQueries.setPremiumRankWithDate(uuid, premiumRank);
                 } catch (Exception e) {
                     e.printStackTrace();
-
+                    //Revert online player rank if we get a database error
+                    if (currentRank != null) {
+                        guardianData = GuardianDataManager.getGuardianData(uuid);
+                        guardianData.setPremiumRank(currentRank);
+                    }
                     return new WebResponse(false, "A database error occurred.", minecraftUuidString, minecraftUsername, productId);
                 }
             } else { //player is offline
@@ -200,6 +212,13 @@ public class RequestHandler {
                 }
 
                 try {
+                    PremiumRank currentRank = DatabaseQueries.getPremiumRank(uuid);
+                    if (currentRank.equals(PremiumRank.NONE)) {
+                        if (currentRank.ordinal() >= premiumRank.ordinal()) {
+                            return new WebResponse(false, "You already have a rank that is higher or equal to this rank.", minecraftUuidString, minecraftUsername, productId);
+                        }
+                    }
+
                     DatabaseQueries.setPremiumRankWithDate(uuid, premiumRank);
 
                     minecraftUsername = offlinePlayer.getName();

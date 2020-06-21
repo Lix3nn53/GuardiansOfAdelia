@@ -715,6 +715,30 @@ public class DatabaseQueries {
         }
     }
 
+    public static PremiumRank getPremiumRank(UUID uuid) throws SQLException {
+        String SQL_QUERY = "SELECT premium_rank FROM goa_player WHERE uuid = ?";
+        PremiumRank premiumRank = null;
+        try (Connection con = ConnectionPool.getConnection()) {
+            PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+
+            pst.setString(1, uuid.toString());
+
+            ResultSet resultSet = pst.executeQuery();
+
+            if (resultSet.next()) {
+                String premiumRankString = resultSet.getString("premium_rank");
+                if (!resultSet.wasNull()) {
+                    premiumRank = PremiumRank.valueOf(premiumRankString);
+                }
+            }
+            resultSet.close();
+            pst.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return premiumRank;
+    }
+
     public static int clearExpiredPremiumRanks() throws SQLException {
         String SQL_QUERY = ("UPDATE goa_player SET premium_rank=NULL,premium_rank_date=NULL WHERE premium_rank_date < DATE_SUB(NOW(), INTERVAL 1 MONTH) OR premium_rank_date IS NULL");
 

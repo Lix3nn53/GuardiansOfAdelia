@@ -21,8 +21,8 @@ public enum WeaponGearType {
     BOW,
     CROSSBOW,
     //Magic Weapons
-    STAFF, //staff
-    WAND; //wand
+    STAFF,
+    WAND;
 
     public List<RPGClass> getRequiredClasses() {
         List<RPGClass> classList = new ArrayList<>();
