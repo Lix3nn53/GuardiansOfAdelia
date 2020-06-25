@@ -272,8 +272,28 @@ public class TemporaryEntity implements LivingEntity {
     }
 
     @Override
+    public void attack(Entity entity) {
+
+    }
+
+    @Override
+    public void swingMainHand() {
+
+    }
+
+    @Override
+    public void swingOffHand() {
+
+    }
+
+    @Override
     public boolean isCollidable() {
         return false;
+    }
+
+    @Override
+    public Set<UUID> getCollidableExemptions() {
+        return null;
     }
 
     @Override
