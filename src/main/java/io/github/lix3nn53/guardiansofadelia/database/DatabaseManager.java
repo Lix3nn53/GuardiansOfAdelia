@@ -138,11 +138,26 @@ public class DatabaseManager {
 
                 List<ArmorStand> armorStands = CharacterSelectionScreenManager.getCharacterNoToArmorStands().get(charNo);
 
-                MobDisguise mobDisguise = new MobDisguise(DisguiseType.ARMOR_STAND, false);
-                LivingWatcher livingWatcher = mobDisguise.getWatcher();
-                livingWatcher.setInvisible(true);
-                livingWatcher.setNoGravity(true);
-                livingWatcher.setCustomNameVisible(true);
+                MobDisguise mobDisguiseBase1 = new MobDisguise(DisguiseType.ARMOR_STAND, false);
+                MobDisguise mobDisguise1 = mobDisguiseBase1.setModifyBoundingBox(false);
+                LivingWatcher livingWatcher1 = mobDisguise1.getWatcher();
+                livingWatcher1.setInvisible(true);
+                livingWatcher1.setNoGravity(true);
+                livingWatcher1.setCustomNameVisible(true);
+
+                MobDisguise mobDisguiseBase2 = new MobDisguise(DisguiseType.ARMOR_STAND, false);
+                MobDisguise mobDisguise2 = mobDisguiseBase2.setModifyBoundingBox(false);
+                LivingWatcher livingWatcher2 = mobDisguise2.getWatcher();
+                livingWatcher2.setInvisible(true);
+                livingWatcher2.setNoGravity(true);
+                livingWatcher2.setCustomNameVisible(true);
+
+                MobDisguise mobDisguiseBase3 = new MobDisguise(DisguiseType.ARMOR_STAND, false);
+                MobDisguise mobDisguise3 = mobDisguiseBase3.setModifyBoundingBox(false);
+                LivingWatcher livingWatcher3 = mobDisguise3.getWatcher();
+                livingWatcher3.setInvisible(true);
+                livingWatcher3.setNoGravity(true);
+                livingWatcher3.setCustomNameVisible(true);
 
                 try {
                     RPGClass rpgClassCharacter = DatabaseQueries.getRPGClassCharacter(uuid, charNo);
@@ -151,12 +166,14 @@ public class DatabaseManager {
                     CharacterSelectionScreenManager.setCharLevel(uuid, charNo, level);
 
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                        DisguiseAPI.disguiseToPlayers(armorStands.get(2), mobDisguise, player);
-                        livingWatcher.setCustomName(ChatColor.GOLD + "Level: " + ChatColor.WHITE + level);
-                        DisguiseAPI.disguiseToPlayers(armorStands.get(1), mobDisguise, player);
-                        livingWatcher.setCustomName(ChatColor.DARK_PURPLE + "Total Experience: " + ChatColor.WHITE + totalExp);
-                        DisguiseAPI.disguiseToPlayers(armorStands.get(0), mobDisguise, player);
-                        livingWatcher.setCustomName(ChatColor.GRAY + "Class: " + rpgClassCharacter.getClassString());
+                        livingWatcher1.setCustomName(ChatColor.GOLD + "Level: " + ChatColor.WHITE + level);
+                        DisguiseAPI.disguiseToPlayers(armorStands.get(2), mobDisguise1, player);
+
+                        livingWatcher2.setCustomName(ChatColor.DARK_PURPLE + "Total Experience: " + ChatColor.WHITE + totalExp);
+                        DisguiseAPI.disguiseToPlayers(armorStands.get(1), mobDisguise2, player);
+
+                        livingWatcher3.setCustomName(ChatColor.GRAY + "Class: " + rpgClassCharacter.getClassString());
+                        DisguiseAPI.disguiseToPlayers(armorStands.get(0), mobDisguise3, player);
                     });
                 } catch (SQLException e) {
                     e.printStackTrace();
