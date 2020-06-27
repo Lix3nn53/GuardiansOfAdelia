@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,8 @@ public final class RPGCharacter {
     private final RPGInventory rpgInventory = new RPGInventory();
 
     private final RPGClass rpgClass;
-    private final SkillBar skillBar;
+    private final HashMap<RPGClass, RPGClassStats> unlockedClasses;
+    private SkillBar skillBar;
 
     private final RPGCharacterStats rpgCharacterStats;
 
@@ -27,20 +29,54 @@ public final class RPGCharacter {
 
     private ChatTag chatTag = ChatTag.NOVICE;
 
-    public RPGCharacter(RPGClass rpgClass, Player player, int one, int two, int three, int passive, int ultimate) {
+    public RPGCharacter(RPGClass rpgClass, HashMap<RPGClass, RPGClassStats> unlockedClasses, Player player, int one, int two, int three, int passive, int ultimate) {
         rpgCharacterStats = new RPGCharacterStats(player, rpgClass);
         this.rpgClass = rpgClass;
+        this.unlockedClasses = unlockedClasses;
         this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet());
     }
 
-    public RPGCharacter(RPGClass rpgClass, Player player) {
+    public RPGCharacter(RPGClass rpgClass, HashMap<RPGClass, RPGClassStats> unlockedClasses, Player player) {
         rpgCharacterStats = new RPGCharacterStats(player, rpgClass);
         this.rpgClass = rpgClass;
+        this.unlockedClasses = unlockedClasses;
         this.skillBar = new SkillBar(player, 0, 0, 0, 0, 0, rpgClass.getSkillSet());
     }
 
     public RPGClass getRpgClass() {
         return rpgClass;
+    }
+
+    public HashMap<RPGClass, RPGClassStats> getUnlockedClasses() {
+        return unlockedClasses;
+    }
+
+    public void unlockClass(RPGClass newClass) {
+        if (!unlockedClasses.containsKey(newClass)) {
+            RPGClassStats rpgClassStats = new RPGClassStats();
+            unlockedClasses.put(newClass, rpgClassStats);
+        }
+    }
+
+    public boolean changeClass(Player player, RPGClass newClass) {
+        if (!unlockedClasses.containsKey(newClass)) {
+            return false;
+        }
+
+        RPGClassStats rpgClassStats = unlockedClasses.get(newClass);
+        int one = rpgClassStats.getOne();
+        int two = rpgClassStats.getTwo();
+        int three = rpgClassStats.getThree();
+        int passive = rpgClassStats.getPassive();
+        int ultimate = rpgClassStats.getUltimate();
+
+        this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet());
+        skillBar.remakeSkillBar();
+
+        rpgCharacterStats.setRpgClass(newClass);
+        rpgCharacterStats.recalculateEquipment(rpgClass);
+
+        return true;
     }
 
     public boolean acceptQuest(Quest quest, Player player) {

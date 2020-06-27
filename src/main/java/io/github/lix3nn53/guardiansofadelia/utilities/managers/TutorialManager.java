@@ -12,10 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterExperienceManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
@@ -26,13 +23,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.HashMap;
+
 
 public class TutorialManager {
 
     public static void startTutorial(Player player, RPGClass rpgClass, int charNo, Location startLocation) {
         if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
-            RPGCharacter rpgCharacter = new RPGCharacter(rpgClass, player);
+            HashMap<RPGClass, RPGClassStats> unlockedClasses = new HashMap<>();
+            RPGCharacter rpgCharacter = new RPGCharacter(rpgClass, unlockedClasses, player);
             guardianData.setActiveCharacter(rpgCharacter, charNo);
 
             int totalExpForLevel = RPGCharacterExperienceManager.getTotalRequiredExperience(90);

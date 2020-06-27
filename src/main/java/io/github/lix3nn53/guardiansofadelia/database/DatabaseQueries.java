@@ -9,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
@@ -84,6 +85,7 @@ public class DatabaseQueries {
                     " `location`       text NOT NULL ,\n" +
                     " `armor_content`  text NOT NULL ,\n" +
                     " `rpg_class`      varchar(45) NOT NULL ,\n" +
+                    " `unlocked_classes`      text NULL ,\n" +
                     " `totalexp`       int NOT NULL ,\n" +
                     " `attr_fire`      smallint NOT NULL ,\n" +
                     " `attr_water`     smallint NOT NULL ,\n" +
@@ -298,13 +300,31 @@ public class DatabaseQueries {
                 String rpgClassString = resultSet.getString("rpg_class");
                 RPGClass rpgClass = RPGClass.valueOf(rpgClassString);
 
+                String unlockedClassesString = resultSet.getString("unlocked_classes");
+                String[] classWithDataArray = unlockedClassesString.split(";");
+                HashMap<RPGClass, RPGClassStats> unlockedClasses = new HashMap<>();
+                for (String classWithData : classWithDataArray) {
+                    String[] classDataArray = classWithData.split("-");
+
+                    RPGClass unlockedClass = RPGClass.valueOf(classDataArray[0]);
+                    int totalExp = Integer.parseInt(classDataArray[1]);
+                    int one = Integer.parseInt(classDataArray[2]);
+                    int two = Integer.parseInt(classDataArray[3]);
+                    int three = Integer.parseInt(classDataArray[4]);
+                    int passive = Integer.parseInt(classDataArray[5]);
+                    int ultimate = Integer.parseInt(classDataArray[6]);
+
+                    RPGClassStats rpgClassStats = new RPGClassStats(totalExp, one, two, three, passive, ultimate);
+                    unlockedClasses.put(unlockedClass, rpgClassStats);
+                }
+
                 int skill_one = resultSet.getInt("skill_one");
                 int skill_two = resultSet.getInt("skill_two");
                 int skill_three = resultSet.getInt("skill_three");
                 int skill_passive = resultSet.getInt("skill_passive");
                 int skill_ultimate = resultSet.getInt("skill_ultimate");
 
-                rpgCharacter = new RPGCharacter(rpgClass, player, skill_one, skill_two, skill_three, skill_passive, skill_ultimate);
+                rpgCharacter = new RPGCharacter(rpgClass, unlockedClasses, player, skill_one, skill_two, skill_three, skill_passive, skill_ultimate);
                 RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
 
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
@@ -817,7 +837,7 @@ public class DatabaseQueries {
         String SQL_QUERY = "INSERT INTO goa_player_character \n" +
                 "\t(uuid, character_no, off_hand, slot_parrot, slot_necklace, slot_ring, slot_earring, slot_glove, " +
                 "slot_pet, chat_tag, crafting_experiences, inventory, activequests, turnedinquests, location, armor_content, " +
-                "rpg_class, totalexp, attr_fire, attr_water, attr_earth, attr_lightning, attr_wind, skill_one, skill_two, skill_three, skill_passive, skill_ultimate) \n" +
+                "rpg_class, unlocked_classes, totalexp, attr_fire, attr_water, attr_earth, attr_lightning, attr_wind, skill_one, skill_two, skill_three, skill_passive, skill_ultimate) \n" +
                 "VALUES \n" +
                 "\t(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
@@ -838,6 +858,7 @@ public class DatabaseQueries {
                 "\tlocation = VALUES(location),\n" +
                 "\tarmor_content = VALUES(armor_content),\n" +
                 "\trpg_class = VALUES(rpg_class),\n" +
+                "\tunlocked_classes = VALUES(unlocked_classes),\n" +
                 "\ttotalexp = VALUES(totalexp),\n" +
                 "\tattr_fire = VALUES(attr_fire),\n" +
                 "\tattr_water = VALUES(attr_water),\n" +
@@ -967,33 +988,60 @@ public class DatabaseQueries {
             RPGClass rpgClass = rpgCharacter.getRpgClass();
             pst.setString(17, rpgClass.toString());
 
+            HashMap<RPGClass, RPGClassStats> unlockedClasses = rpgCharacter.getUnlockedClasses();
+            StringBuilder unlockedClassesString = new StringBuilder();
+            int i = 0;
+            for (RPGClass unlockedClass : unlockedClasses.keySet()) {
+                if (i > 0) {
+                    unlockedClassesString.append(";");
+                }
+                RPGClassStats rpgClassStats = unlockedClasses.get(unlockedClass);
+
+                unlockedClassesString.append(unlockedClass.toString());
+                unlockedClassesString.append("-");
+                unlockedClassesString.append(rpgClassStats.getTotalExp());
+                unlockedClassesString.append("-");
+                unlockedClassesString.append(rpgClassStats.getOne());
+                unlockedClassesString.append("-");
+                unlockedClassesString.append(rpgClassStats.getTwo());
+                unlockedClassesString.append("-");
+                unlockedClassesString.append(rpgClassStats.getThree());
+                unlockedClassesString.append("-");
+                unlockedClassesString.append(rpgClassStats.getPassive());
+                unlockedClassesString.append("-");
+                unlockedClassesString.append(rpgClassStats.getUltimate());
+
+                i++;
+            }
+            pst.setString(18, unlockedClassesString.toString());
+
             RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
 
             int totalExp = rpgCharacterStats.getTotalExp();
-            pst.setInt(18, totalExp);
+            pst.setInt(19, totalExp);
 
             int fire = rpgCharacterStats.getFire().getInvested();
-            pst.setInt(19, fire);
+            pst.setInt(20, fire);
             int water = rpgCharacterStats.getWater().getInvested();
-            pst.setInt(20, water);
+            pst.setInt(21, water);
             int earth = rpgCharacterStats.getEarth().getInvested();
-            pst.setInt(21, earth);
+            pst.setInt(22, earth);
             int lightning = rpgCharacterStats.getLightning().getInvested();
-            pst.setInt(22, lightning);
+            pst.setInt(23, lightning);
             int wind = rpgCharacterStats.getWind().getInvested();
-            pst.setInt(23, wind);
+            pst.setInt(24, wind);
 
             SkillBar skillBar = rpgCharacter.getSkillBar();
             int skill_one = skillBar.getInvestedSkillPoints(0);
-            pst.setInt(24, skill_one);
+            pst.setInt(25, skill_one);
             int skill_two = skillBar.getInvestedSkillPoints(1);
-            pst.setInt(25, skill_two);
+            pst.setInt(26, skill_two);
             int skill_three = skillBar.getInvestedSkillPoints(2);
-            pst.setInt(26, skill_three);
+            pst.setInt(27, skill_three);
             int skill_passive = skillBar.getInvestedSkillPoints(3);
-            pst.setInt(27, skill_passive);
+            pst.setInt(28, skill_passive);
             int skill_ultimate = skillBar.getInvestedSkillPoints(4);
-            pst.setInt(28, skill_ultimate);
+            pst.setInt(29, skill_ultimate);
 
             //2 = replaced, 1 = new row added
             int returnValue = pst.executeUpdate();

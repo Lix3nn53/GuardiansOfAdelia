@@ -33,7 +33,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class RPGCharacterStats {
 
     private final Player player;
-    private final RPGClass rpgClass;
+    private RPGClass rpgClass;
     private final Attribute fire = new Attribute(AttributeType.FIRE);
     private final Attribute lightning = new Attribute(AttributeType.LIGHTNING);
     private final Attribute earth = new Attribute(AttributeType.EARTH);
@@ -89,6 +89,10 @@ public class RPGCharacterStats {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 10L);
+    }
+
+    public void setRpgClass(RPGClass rpgClass) {
+        this.rpgClass = rpgClass;
     }
 
     public int getTotalExp() {
