@@ -23,6 +23,19 @@ public enum ArmorType {
         return null;
     }
 
+    public static ArmorType getArmorType(ItemStack itemStack) {
+        if (itemStack == null) return null;
+        Material material = itemStack.getType();
+        if (material.equals(Material.AIR)) return null;
+        String type = material.name();
+        if (type.endsWith("_HELMET") || type.endsWith("_SKULL") || material.equals(HelmetSkin.getHelmetMaterial()))
+            return HELMET;
+        else if (type.endsWith("_CHESTPLATE")) return CHESTPLATE;
+        else if (type.endsWith("_LEGGINGS")) return LEGGINGS;
+        else if (type.endsWith("_BOOTS")) return BOOTS;
+        return null;
+    }
+
     public int getSlot() {
         switch (this) {
             case CHESTPLATE:

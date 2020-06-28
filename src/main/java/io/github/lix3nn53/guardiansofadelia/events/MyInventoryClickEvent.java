@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
@@ -79,6 +80,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -166,6 +168,19 @@ public class MyInventoryClickEvent implements Listener {
             if (guardianData.hasActiveCharacter()) {
                 rpgCharacter = guardianData.getActiveCharacter();
 
+                if (event.getAction() != InventoryAction.NOTHING) {
+                    if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.PLAYER)) {
+                        RPGCharacter rpgCharacterForEquipment = guardianData.getActiveCharacter();
+                        RPGClass rpgClass = rpgCharacter.getRpgClass();
+
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                rpgCharacterForEquipment.getRpgCharacterStats().recalculateEquipment(rpgClass);
+                            }
+                        }.runTaskLater(GuardiansOfAdelia.getInstance(), 1L);
+                    }
+                }
                 /*
                 //manage armor and offhand attributes for player character
                 if (event.getAction() != InventoryAction.NOTHING) {
@@ -459,7 +474,10 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             } else {
-                if (currentName.equals(ChatColor.LIGHT_PURPLE + "Skills")) {
+                if (currentName.equals(ChatColor.YELLOW + "Class")) {
+                    GuiGeneric classManage = MenuList.classManage(player);
+                    classManage.openInventory(player);
+                } else if (currentName.equals(ChatColor.LIGHT_PURPLE + "Skills")) {
                     GuiGeneric skill = MenuList.skill(player);
                     skill.openInventory(player);
                 } else if (currentName.equals(ChatColor.DARK_GREEN + "Elements")) {
@@ -602,6 +620,25 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
+        } else if (title.contains(ChatColor.YELLOW + "Class Manager")) {
+            if (rpgCharacter != null) {
+                if (slot == 3) {
+                    GuiGeneric guiGeneric = MenuList.classChange(player);
+                    guiGeneric.openInventory(player);
+                }
+            }
+        } else if (title.contains(ChatColor.YELLOW + "Class Change")) {
+            if (rpgCharacter != null) {
+                if (currentType.equals(Material.LIME_WOOL)) {
+                    String displayName = itemMeta.getDisplayName();
+                    String stripColor = ChatColor.stripColor(displayName);
+                    String s = stripColor.toUpperCase();
+                    RPGClass rpgClass = RPGClass.valueOf(s);
+
+                    rpgCharacter.changeClass(player, rpgClass);
+                    player.closeInventory();
+                }
+            }
         } else if (title.contains(ChatColor.LIGHT_PURPLE + "Skills (Points: ")) {
             if (rpgCharacter != null) {
                 SkillBar skillBar = rpgCharacter.getSkillBar();
@@ -620,7 +657,7 @@ public class MyInventoryClickEvent implements Listener {
                 }
                 if (skillIndex != -1) {
                     if (event.isLeftClick()) {
-                        boolean upgradeSkill = skillBar.upgradeSkill(skillIndex);
+                        boolean upgradeSkill = skillBar.upgradeSkill(skillIndex, rpgCharacter.getRPGClassStats());
                         if (upgradeSkill) {
                             GuiGeneric skill = MenuList.skill(player);
                             skill.openInventory(player);

@@ -85,7 +85,7 @@ public class DatabaseQueries {
                     " `location`       text NOT NULL ,\n" +
                     " `armor_content`  text NOT NULL ,\n" +
                     " `rpg_class`      varchar(45) NOT NULL ,\n" +
-                    " `unlocked_classes`      text NULL ,\n" +
+                    " `unlocked_classes`      mediumtext NULL ,\n" +
                     " `totalexp`       int NOT NULL ,\n" +
                     " `attr_fire`      smallint NOT NULL ,\n" +
                     " `attr_water`     smallint NOT NULL ,\n" +

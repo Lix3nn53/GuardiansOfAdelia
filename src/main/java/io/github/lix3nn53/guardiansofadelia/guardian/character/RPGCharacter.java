@@ -16,7 +16,7 @@ public final class RPGCharacter {
 
     private final RPGInventory rpgInventory = new RPGInventory();
 
-    private final RPGClass rpgClass;
+    private RPGClass rpgClass;
     private final HashMap<RPGClass, RPGClassStats> unlockedClasses;
     private SkillBar skillBar;
 
@@ -51,6 +51,14 @@ public final class RPGCharacter {
         return unlockedClasses;
     }
 
+    public RPGClassStats getRPGClassStats(RPGClass rpgClass) {
+        return unlockedClasses.get(rpgClass);
+    }
+
+    public RPGClassStats getRPGClassStats() {
+        return unlockedClasses.get(this.rpgClass);
+    }
+
     public void unlockClass(RPGClass newClass) {
         if (!unlockedClasses.containsKey(newClass)) {
             RPGClassStats rpgClassStats = new RPGClassStats();
@@ -63,6 +71,7 @@ public final class RPGCharacter {
             return false;
         }
 
+        this.rpgClass = newClass;
         RPGClassStats rpgClassStats = unlockedClasses.get(newClass);
         int one = rpgClassStats.getOne();
         int two = rpgClassStats.getTwo();

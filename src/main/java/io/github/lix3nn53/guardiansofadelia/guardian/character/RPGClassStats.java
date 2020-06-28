@@ -1,19 +1,27 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RPGClassStats {
     private int totalExp = 0;
-    private int one, two, three, passive, ultimate = 0;
+    private final List<Integer> investedSkillPoints = new ArrayList<>();
 
     public RPGClassStats(int totalExp, int one, int two, int three, int passive, int ultimate) {
         this.totalExp = totalExp;
-        this.one = one;
-        this.two = two;
-        this.three = three;
-        this.passive = passive;
-        this.ultimate = ultimate;
+        investedSkillPoints.add(one);
+        investedSkillPoints.add(two);
+        investedSkillPoints.add(three);
+        investedSkillPoints.add(passive);
+        investedSkillPoints.add(ultimate);
     }
 
     public RPGClassStats() {
+        investedSkillPoints.add(0);
+        investedSkillPoints.add(0);
+        investedSkillPoints.add(0);
+        investedSkillPoints.add(0);
+        investedSkillPoints.add(0);
     }
 
     public int getTotalExp() {
@@ -25,42 +33,29 @@ public class RPGClassStats {
     }
 
     public int getOne() {
-        return one;
-    }
-
-    public void setOne(int one) {
-        this.one = one;
+        return investedSkillPoints.get(0);
     }
 
     public int getTwo() {
-        return two;
-    }
-
-    public void setTwo(int two) {
-        this.two = two;
+        return investedSkillPoints.get(1);
     }
 
     public int getThree() {
-        return three;
-    }
-
-    public void setThree(int three) {
-        this.three = three;
+        return investedSkillPoints.get(2);
     }
 
     public int getPassive() {
-        return passive;
-    }
-
-    public void setPassive(int passive) {
-        this.passive = passive;
+        return investedSkillPoints.get(3);
     }
 
     public int getUltimate() {
-        return ultimate;
+        return investedSkillPoints.get(4);
     }
 
-    public void setUltimate(int ultimate) {
-        this.ultimate = ultimate;
+    public void setInvestedSkillPoint(int index, int points) {
+        if (index > 4) return;
+
+        investedSkillPoints.set(index, points);
     }
+
 }

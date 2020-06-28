@@ -8,9 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
@@ -32,6 +30,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -137,6 +136,18 @@ public class MenuList {
         itemMeta.setCustomModelData(31);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Class");
+        itemMeta.setLore(new ArrayList() {{
+            add("");
+            add(ChatColor.GRAY + "Manage your character's class!");
+
+        }});
+        skills.setItemMeta(itemMeta);
+        guiGeneric.setItem(9, skills);
+
+        itemMeta.setCustomModelData(31);
+        itemMeta.setUnbreakable(true);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Skills");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -144,7 +155,7 @@ public class MenuList {
 
         }});
         skills.setItemMeta(itemMeta);
-        guiGeneric.setItem(9, skills);
+        guiGeneric.setItem(11, skills);
 
         ItemStack elements = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(37);
@@ -155,7 +166,7 @@ public class MenuList {
             add(ChatColor.GRAY + "let the compass lead you!");
         }});
         elements.setItemMeta(itemMeta);
-        guiGeneric.setItem(11, elements);
+        guiGeneric.setItem(13, elements);
 
         ItemStack job = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(30);
@@ -165,7 +176,7 @@ public class MenuList {
             add(ChatColor.GRAY + "Manage your character's job!");
         }});
         job.setItemMeta(itemMeta);
-        guiGeneric.setItem(13, job);
+        guiGeneric.setItem(15, job);
 
         ItemStack chat = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(33);
@@ -175,7 +186,107 @@ public class MenuList {
             add(ChatColor.GRAY + "Select your chat tag!");
         }});
         chat.setItemMeta(itemMeta);
-        guiGeneric.setItem(15, chat);
+        guiGeneric.setItem(17, chat);
+
+        return guiGeneric;
+    }
+
+    public static GuiGeneric classManage(Player player) {
+        GuiGeneric guiGeneric = null;
+
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+            if (guardianData.hasActiveCharacter()) {
+                guiGeneric = new GuiGeneric(9, ChatColor.YELLOW + "Class Manager", 0);
+
+                RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+
+                RPGClass rpgClass = rpgCharacter.getRpgClass();
+                RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats(rpgClass);
+                int totalExp = rpgClassStats.getTotalExp();
+                int classLevel = RPGClassExperienceManager.getLevel(totalExp);
+
+                ItemStack itemStack = new ItemStack(Material.STONE_PICKAXE);
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+                itemMeta.setCustomModelData(33);
+                itemMeta.setDisplayName(ChatColor.YELLOW + "Class Info");
+                List<String> lore = new ArrayList<>();
+                lore.add("");
+                lore.add("Class: " + rpgClass.getClassString());
+                lore.add("Rank: " + classLevel);
+                itemMeta.setLore(lore);
+                itemStack.setItemMeta(itemMeta);
+                guiGeneric.setItem(1, itemStack);
+
+                itemMeta.setCustomModelData(32);
+                itemMeta.setDisplayName(ChatColor.GOLD + "Change Class");
+                lore.clear();
+                lore.add("");
+                lore.add("Change to one of the classes you unlocked");
+                itemMeta.setLore(lore);
+                itemStack.setItemMeta(itemMeta);
+                guiGeneric.setItem(3, itemStack);
+            }
+        }
+
+        return guiGeneric;
+    }
+
+    public static GuiGeneric classChange(Player player) {
+        GuiGeneric guiGeneric = null;
+
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+            if (guardianData.hasActiveCharacter()) {
+                guiGeneric = new GuiGeneric(27, ChatColor.YELLOW + "Class Change", 0);
+
+                RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+
+                HashMap<RPGClass, RPGClassStats> unlockedClasses = rpgCharacter.getUnlockedClasses();
+                RPGClass[] values = RPGClass.values();
+
+                int modCounter = 0;
+                for (int i = 0; i < values.length; i++) {
+                    RPGClass value = values[i];
+                    ItemStack itemStack = new ItemStack(Material.RED_WOOL);
+                    ItemMeta meta = itemStack.getItemMeta();
+                    meta.setDisplayName(value.getClassString());
+
+                    if (unlockedClasses.containsKey(value)) {
+                        int totalExp = unlockedClasses.get(value).getTotalExp();
+                        itemStack.setType(Material.LIME_WOOL);
+                        List<String> lore = new ArrayList<>();
+                        lore.add("");
+                        lore.add("Class: " + value.getClassString());
+                        lore.add("Rank: " + RPGClassExperienceManager.getLevel(totalExp));
+                        lore.add("");
+                        lore.add(ChatColor.GREEN + "Click to change to this class!");
+                        meta.setLore(lore);
+                    }
+
+                    itemStack.setItemMeta(meta);
+
+                    guiGeneric.setItem(i * 2 - modCounter, itemStack);
+                    int mod = (i * 2 + 1 - modCounter) % 9;
+                    if (mod == 0) {
+                        modCounter++;
+                    }
+                }
+
+                for (RPGClass unlockedClass : unlockedClasses.keySet()) {
+                    RPGClassStats rpgClassStats = unlockedClasses.get(unlockedClass);
+                    int totalExp = rpgClassStats.getTotalExp();
+                    int classLevel = RPGClassExperienceManager.getLevel(totalExp);
+
+
+                }
+            }
+        }
 
         return guiGeneric;
     }

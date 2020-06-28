@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
@@ -64,7 +65,7 @@ public class SkillBar {
     /**
      * @param skillIndex 0,1,2 normal skills, 3 passive, 4 ultimate
      */
-    public boolean upgradeSkill(int skillIndex) {
+    public boolean upgradeSkill(int skillIndex, RPGClassStats rpgClassStats) {
         Skill skill = this.skillSet.get(skillIndex);
 
         Integer invested = investedSkillPoints.get(skillIndex);
@@ -84,8 +85,11 @@ public class SkillBar {
                     TriggerListener.onSkillUpgrade(player, initializeTrigger, currentSkillLevel + 1, castCounter);
                     castCounter++;
                 }
-                investedSkillPoints.set(skillIndex, invested + reqSkillPoints);
+                int newInvested = invested + reqSkillPoints;
+                investedSkillPoints.set(skillIndex, newInvested);
                 remakeSkillBarIcon(skillIndex);
+
+                rpgClassStats.setInvestedSkillPoint(skillIndex, newInvested);
                 return true;
             }
         }

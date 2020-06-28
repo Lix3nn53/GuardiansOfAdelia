@@ -32,6 +32,7 @@ public class TutorialManager {
         if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
             HashMap<RPGClass, RPGClassStats> unlockedClasses = new HashMap<>();
+            unlockedClasses.put(rpgClass, new RPGClassStats());
             RPGCharacter rpgCharacter = new RPGCharacter(rpgClass, unlockedClasses, player);
             guardianData.setActiveCharacter(rpgCharacter, charNo);
 

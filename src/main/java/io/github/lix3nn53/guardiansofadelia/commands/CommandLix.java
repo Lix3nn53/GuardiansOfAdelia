@@ -16,6 +16,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
@@ -64,6 +65,7 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/admin tp town <num>");
                 player.sendMessage(ChatColor.BLUE + "---- RPG ----");
                 player.sendMessage(ChatColor.BLUE + "/admin exp <player> <amount>");
+                player.sendMessage(ChatColor.BLUE + "/admin class unlock <player> <newClass>");
                 player.sendMessage(ChatColor.BLUE + "---- OTHER ----");
                 player.sendMessage(ChatColor.BLUE + "/admin setdaily");
                 player.sendMessage(ChatColor.BLUE + "/admin model portal<1-5>");
@@ -71,6 +73,7 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_PURPLE + "---- QUEST ----");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin quest t - turn ins current quests tasks");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin quest a <num> - accept quest tasks");
+                player.sendMessage(ChatColor.DARK_PURPLE + "/admin quest gui <npcNo> - open quest gui of an npc");
                 player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
                 player.sendMessage(ChatColor.BLUE + "/admin coin <num>");
                 player.sendMessage(ChatColor.BLUE + "/admin weapon [class] <num>");
@@ -117,6 +120,24 @@ public class CommandLix implements CommandExecutor {
                         }
                     }
                 }
+            } else if (args[0].equals("class")) {
+                if (args[1].equals("unlock")) {
+                    if (args.length == 4) {
+                        Player player2 = Bukkit.getPlayer(args[2]);
+                        RPGClass newClass = RPGClass.valueOf(args[3].toUpperCase());
+                        if (player2 != null) {
+                            UUID uuid = player2.getUniqueId();
+                            if (GuardianDataManager.hasGuardianData(uuid)) {
+                                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                                if (guardianData.hasActiveCharacter()) {
+                                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                                    activeCharacter.unlockClass(newClass);
+                                    player2.sendMessage("Unlocked class: " + newClass.getClassString());
+                                }
+                            }
+                        }
+                    }
+                }
             } else if (args[0].equals("setstaff")) {
                 if (args.length == 3) {
                     try {
@@ -144,40 +165,48 @@ public class CommandLix implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("quest")) {
-                if (args.length == 2) {
-                    if (args[1].equals("t")) {
-                        UUID uuid = player.getUniqueId();
-                        if (GuardianDataManager.hasGuardianData(uuid)) {
-                            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-                            if (guardianData.hasActiveCharacter()) {
-                                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                if (args[1].equals("t")) {
+                    if (args.length != 2) return false;
+                    UUID uuid = player.getUniqueId();
+                    if (GuardianDataManager.hasGuardianData(uuid)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                        if (guardianData.hasActiveCharacter()) {
+                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
-                                List<Quest> questList = activeCharacter.getQuestList();
+                            List<Quest> questList = activeCharacter.getQuestList();
 
-                                for (Quest quest : questList) {
-                                    activeCharacter.getTurnedInQuests().add(quest.getQuestID());
-                                    quest.onTurnIn(player);
-                                }
+                            for (Quest quest : questList) {
+                                activeCharacter.getTurnedInQuests().add(quest.getQuestID());
+                                quest.onTurnIn(player);
+                            }
 
-                                questList.clear();
+                            questList.clear();
+                        }
+                    }
+                } else if (args[1].equals("a")) {
+                    if (args.length != 3) return false;
+                    UUID uuid = player.getUniqueId();
+                    if (GuardianDataManager.hasGuardianData(uuid)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                        if (guardianData.hasActiveCharacter()) {
+                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                            Quest questCopyById = QuestNPCManager.getQuestCopyById(Integer.parseInt(args[2]));
+
+                            boolean questListIsNotFull = activeCharacter.acceptQuest(questCopyById, player);
+                            if (!questListIsNotFull) {
+                                player.sendMessage(net.md_5.bungee.api.ChatColor.RED + "Your quest list is full");
                             }
                         }
                     }
-                } else if (args.length == 3) {
-                    if (args[1].equals("a")) {
-                        UUID uuid = player.getUniqueId();
-                        if (GuardianDataManager.hasGuardianData(uuid)) {
-                            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-                            if (guardianData.hasActiveCharacter()) {
-                                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-
-                                Quest questCopyById = QuestNPCManager.getQuestCopyById(Integer.parseInt(args[2]));
-
-                                boolean questListIsNotFull = activeCharacter.acceptQuest(questCopyById, player);
-                                if (!questListIsNotFull) {
-                                    player.sendMessage(net.md_5.bungee.api.ChatColor.RED + "Your quest list is full");
-                                }
-                            }
+                } else if (args[1].equals("gui")) {
+                    if (args.length != 3) return false;
+                    UUID uuid = player.getUniqueId();
+                    if (GuardianDataManager.hasGuardianData(uuid)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                        if (guardianData.hasActiveCharacter()) {
+                            GuiGeneric questGui = QuestNPCManager.getQuestGui(player, Integer.parseInt(args[2]));
+                            questGui.openInventory(player);
                         }
                     }
                 }
