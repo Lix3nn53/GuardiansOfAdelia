@@ -65,6 +65,8 @@ public class SkillBar {
      * @param skillIndex 0,1,2 normal skills, 3 passive, 4 ultimate
      */
     public boolean upgradeSkill(int skillIndex, RPGClassStats rpgClassStats) {
+        if (!this.skillSet.containsKey(skillIndex)) return false;
+
         Skill skill = this.skillSet.get(skillIndex);
 
         Integer invested = investedSkillPoints.get(skillIndex);
@@ -100,6 +102,8 @@ public class SkillBar {
      * @param skillIndex 0,1,2 normal skills, 3 passive, 4 ultimate
      */
     public boolean downgradeSkill(int skillIndex) {
+        if (!this.skillSet.containsKey(skillIndex)) return false;
+
         Skill skill = this.skillSet.get(skillIndex);
 
         Integer invested = investedSkillPoints.get(skillIndex);

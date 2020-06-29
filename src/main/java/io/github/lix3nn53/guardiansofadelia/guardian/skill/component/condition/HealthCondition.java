@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -14,6 +15,19 @@ public class HealthCondition extends ConditionComponent {
     public HealthCondition(double minPercent, double maxPercent) {
         this.minPercent = minPercent;
         this.maxPercent = maxPercent;
+    }
+
+    public HealthCondition(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("minPercent")) {
+            configLoadError("minPercent");
+        }
+
+        if (!configurationSection.contains("maxPercent")) {
+            configLoadError("maxPercent");
+        }
+
+        this.minPercent = configurationSection.getDouble("minPercent");
+        this.maxPercent = configurationSection.getDouble("maxPercent");
     }
 
     @Override

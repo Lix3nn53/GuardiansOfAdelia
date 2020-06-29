@@ -1,0 +1,453 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+color: "RED"
+classIconCustomModelData: 12
+attributeTierFire: 6
+attributeTierWater: 1
+attributeTierEarth: 6
+attributeTierLightning: 1
+attributeTierWind: 1
+defaultWeaponGearType: "BATTLE_AXE"
+defaultArmorGearType: "MEDIUM_ARMOR"
+skillOne:
+  name: "Power Slash"
+  customModelData: 15
+  description:
+    - "Deal damage to nearby enemies"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+  trigger:
+    componentType: "SelfTarget"
+    childComponentCount: 1
+    child1:
+      componentType: "AreaTarget"
+      childComponentCount: 2
+      allies: false
+      enemy: true
+      self: false
+      max: 10
+      radiusList:
+        - 2.5
+        - 3
+        - 3.5
+        - 4
+        - 4.5
+        - 5
+      child1:
+        componentType: "DamageMechanic"
+          damageType: "MELEE"
+          damageList:
+            - 24
+            - 60
+            - 180
+            - 300
+            - 420
+            - 720
+      child2:
+        componentType: "SelfTarget"
+        childComponentCount: 2
+        child1:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_LIGHTNING_NORMAL"
+        child2:
+          componentType: "ParticleMechanic"
+          type: "VILLAGER_ANGRY"
+          radius: 3
+          amount: 20
+skillTwo:
+  name: "Flame Burst"
+  customModelData: 57
+  description:
+    - "Shoot a flame-burst that launches"
+    - "a target into the sky"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+  trigger:
+    componentType: "SelfTarget"
+    childComponentCount: 2
+    child1:
+      componentType: "ProjectileMechanic"
+      childComponentCount: 1
+      projectileClass: "SmallFireball"
+      spreadType: "CONE"
+      speed: 1.9
+      amountList:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      angle: 30
+      right: 0
+      upward: 1
+      forward: 0
+      range: 200
+      mustHitToWork: true
+      particleType: "FLAME"
+      particleArrangement: "SPHERE"
+      particleRadius: 0.5
+      particleAmount: 4
+      isProjectileInvisible: true
+      child1:
+        componentType: "FilterCurrentTargets"
+        childComponentCount: 3
+        allies: false
+        enemy: true
+        self: false
+        max: 10
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "MELEE"
+          damageList:
+            - 24
+            - 60
+            - 180
+            - 300
+            - 420
+            - 720
+        child2:
+          componentType: "LaunchMechanic"
+          relative: "TARGET"
+          forwardSpeedList:
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+          upwardSpeedList:
+            - 1.2
+            - 1.3
+            - 1.4
+            - 1.5
+            - 1.6
+            - 1.8
+          rightSpeedList:
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+        child3:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_STUN_HIT"
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_FIRE_SLASH"
+skillThree:
+  name: "Victory Flag"
+  customModelData: 9
+  description:
+    - "Place a flag at your location that"
+    - "gives damage buff to nearby allies"
+  manaCosts:
+    - 20
+    - 24
+    - 28
+    - 32
+    - 36
+    - 40
+  cooldowns:
+    - 90
+    - 90
+    - 90
+    - 90
+    - 90
+    - 90
+  trigger:
+    componentType: "SelfTarget"
+    childComponentCount: 2
+    child1:
+      componentType: "HologramMechanic"
+      helmetType: "IRON_PICKAXE"
+      customModelData: 4
+      durations:
+        - 40
+        - 40
+        - 40
+        - 40
+        - 40
+        - 40
+      displayText: "< Victory-Flag %caster% >"
+      childComponentCount: 1
+      child1:
+        componentType: "RepeatMechanic"
+        period: 40
+        repetitions:
+          - 20
+          - 20
+          - 20
+          - 20
+          - 20
+          - 20
+        childComponentCount: 2
+        child1:
+          componentType: "AreaTarget"
+          childComponentCount: 2
+          allies: true
+          enemy: false
+          self: true
+          max: 10
+          radiusList:
+            - 8
+            - 9
+            - 10
+            - 11
+            - 12
+            - 14
+          child1:
+            componentType: "BuffMechanic"
+            buffType: "PHYSICAL_DAMAGE"
+            multiplier:
+              - 0.08
+              - 0.1
+              - 0.12
+              - 0.14
+              - 0.16
+              - 0.2
+            ticks:
+              - 41
+              - 41
+              - 41
+              - 41
+              - 41
+              - 41
+          child2:
+            componentType: "BuffMechanic"
+            buffType: "MAGIC_DAMAGE"
+            multiplier:
+              - 0.08
+              - 0.1
+              - 0.12
+              - 0.14
+              - 0.16
+              - 0.2
+            ticks:
+              - 41
+              - 41
+              - 41
+              - 41
+              - 41
+              - 41
+        child2:
+          componentType: "ParticleMechanic"
+          type: "CRIT"
+          radius: 2.4
+          amount: 7
+          upward: 1.8
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_BUFF"
+skillPassive:
+  name: "Death Rattle"
+  customModelData: 47
+  description:
+    - "If you take physical damage that leaves you with less than 15% health,"
+    - "unleash your rage and gain movement speed and jump boost."
+  manaCosts:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  cooldowns:
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+  trigger:
+    componentType: "InitializeTrigger"
+    childComponentCount: 1
+    child1:
+      componentType: "TookPhysicalDamageTrigger"
+      cooldowns:
+        - 40
+        - 40
+        - 40
+        - 40
+        - 40
+        - 40
+      childComponentCount: 1
+      child1:
+        componentType: "SelfTarget"
+        childComponentCount: 1
+        child1:
+          componentType: "HealthCondition"
+          minPercent: 0.0
+          maxPercent: 0.15
+          childComponentCount: 3
+          child1:
+            componentType: "SoundMechanic"
+            goaSound: "SKILL_SCREAM"
+          child2:
+            componentType: "PotionEffectMechanic"
+            potionEffectType: "SPEED"
+            tickList:
+              - 120
+              - 140
+              - 160
+              - 180
+              - 200
+              - 240
+            amplifierList:
+              - 2
+              - 3
+              - 3
+              - 4
+              - 4
+              - 5
+          child3:
+            componentType: "ParticleAnimationMechanic"
+            type: "REDSTONE"
+            radius: 1
+            amount: 4
+            frequency: 5
+            repeatAmount:
+              - 24
+              - 28
+              - 32
+              - 36
+              - 40
+              - 48
+            dustColor: 16711680
+            dustSize: 8
+skillUltimate:
+  name: "Grand Skyfall"
+  customModelData: 44
+  description:
+    - "Jump forward into the air. When you land deal"
+    - "damage and launch nearby enemies into the sky."
+  manaCosts:
+    - 50
+    - 50
+    - 50
+    - 50
+    - 50
+    - 50
+  cooldowns:
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+  trigger:
+    componentType: "SelfTarget"
+    childComponentCount: 5
+    child1:
+      componentType: "LaunchMechanic"
+      relative: "TARGET"
+      forwardSpeedList:
+        - 1.4
+        - 1.5
+        - 1.6
+        - 1.7
+        - 1.8
+        - 2
+      upwardSpeedList:
+        - 1.7
+        - 1.75
+        - 1.8
+        - 1.85
+        - 1.9
+        - 2
+      rightSpeedList:
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_JUMP"
+    child3:
+      componentType: "ImmunityMechanic"
+      damageCause: "FALL"
+    child4:
+      componentType: "ParticleAnimationMechanic"
+      type: "REDSTONE"
+      radius: 1
+      amount: 3
+      frequency: 4
+      repeatAmount:
+        - 10
+        - 12
+        - 14
+        - 16
+        - 18
+        - 20
+      dustColor: 16753920
+      dustSize: 2
+    child5:
+      componentType: "LandTrigger"
+      childComponentCount: 4
+      child1:
+        componentType: "ParticleMechanic"
+        type: "VILLAGER_ANGRY"
+        radius: 11
+        amount: 33
+      child2:
+        componentType: "SoundMechanic"
+        goaSound: "SKILL_POWERFUL_LANDING"
+      child3:
+        componentType: "ImmunityRemoveMechanic"
+        damageCause: FALL
+        delay: 5
+      child4:
+        componentType: "AreaTarget"
+        childComponentCount: 2
+        allies: false
+        enemy: true
+        self: false
+        max: 20
+        radiusList:
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 14
+        child1:
+          componentType: "DamageMechanic"
+            damageType: "MELEE"
+            damageList:
+              - 200
+              - 480
+              - 760
+              - 1200
+              - 1800
+              - 2600

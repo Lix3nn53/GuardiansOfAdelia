@@ -5,8 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicCom
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -88,5 +90,55 @@ public class ParticleAnimationMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    }
+
+    public ParticleAnimationMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("type")) {
+            configLoadError("type");
+        }
+
+        if (!configurationSection.contains("radius")) {
+            configLoadError("radius");
+        }
+
+        if (!configurationSection.contains("amount")) {
+            configLoadError("amount");
+        }
+
+        if (!configurationSection.contains("frequency")) {
+            configLoadError("frequency");
+        }
+
+        if (!configurationSection.contains("repeatAmount")) {
+            configLoadError("repeatAmount");
+        }
+
+        double radiusParticle = configurationSection.getDouble("radius");
+        int amountParticle = configurationSection.getInt("amount");
+
+        Particle.DustOptions dustOptions = null;
+
+        if (configurationSection.contains("dustColor")) {
+            int dustColor = configurationSection.getInt("dustColor");
+            int dustSize = configurationSection.getInt("dustSize");
+
+            dustOptions = new Particle.DustOptions(Color.fromRGB(dustColor), dustSize);
+        }
+
+        this.particle = Particle.valueOf(configurationSection.getString("type"));
+        this.arrangement = configurationSection.contains("arrangement") ? ParticleArrangement.valueOf(configurationSection.getString("arrangement")) : ParticleArrangement.CIRCLE;
+        this.radiusParticle = radiusParticle;
+        this.amountParticle = amountParticle;
+        this.forward = 0;
+        this.upward = configurationSection.contains("upward") ? configurationSection.getDouble("upward") : 0.5;
+        this.right = 0;
+        this.speed = 0;
+        this.dx = 0;
+        this.dy = 0;
+        this.dz = 0;
+        this.dustOptions = dustOptions;
+
+        this.frequency = configurationSection.getInt("frequency");
+        this.repeatAmount = configurationSection.getIntegerList("repeatAmount");
     }
 }

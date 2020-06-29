@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.i
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -16,6 +17,19 @@ public class ImmunityRemoveMechanic extends MechanicComponent {
     public ImmunityRemoveMechanic(EntityDamageEvent.DamageCause damageCause, int delay) {
         this.damageCause = damageCause;
         this.delay = delay;
+    }
+
+    public ImmunityRemoveMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("damageCause")) {
+            configLoadError("damageCause");
+        }
+
+        if (!configurationSection.contains("delay")) {
+            configLoadError("delay");
+        }
+
+        this.damageCause = EntityDamageEvent.DamageCause.valueOf(configurationSection.getString("damageCause"));
+        this.delay = configurationSection.getInt("delay");
     }
 
     @Override
