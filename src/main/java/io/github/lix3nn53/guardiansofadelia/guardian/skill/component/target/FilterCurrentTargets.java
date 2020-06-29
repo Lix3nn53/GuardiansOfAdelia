@@ -33,7 +33,7 @@ public class FilterCurrentTargets extends TargetComponent {
     }
 
     public FilterCurrentTargets(ConfigurationSection configurationSection) {
-        super(configurationSection.getBoolean("allies"), configurationSection.getBoolean("enemy"), configurationSection.getBoolean("self"), configurationSection.getInt("max"));
+        super(configurationSection);
 
         if (!configurationSection.contains("allies")) {
             configLoadError("allies");

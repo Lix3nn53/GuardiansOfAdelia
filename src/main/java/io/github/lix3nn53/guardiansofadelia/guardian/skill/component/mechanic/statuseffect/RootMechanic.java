@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.s
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -16,6 +17,19 @@ public class RootMechanic extends MechanicComponent {
     public RootMechanic(List<Integer> duration, boolean lockY) {
         this.duration = duration;
         this.lockY = lockY;
+    }
+
+    public RootMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("durations")) {
+            configLoadError("durations");
+        }
+
+        if (!configurationSection.contains("lockY")) {
+            configLoadError("lockY");
+        }
+
+        this.duration = configurationSection.getIntegerList("durations");
+        this.lockY = configurationSection.getBoolean("lockY");
     }
 
     @Override

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -20,6 +21,21 @@ public class SingleTarget extends TargetComponent {
         super(allies, enemy, self, max);
         this.range = range;
         this.tolerance = tolerance;
+    }
+
+    public SingleTarget(ConfigurationSection configurationSection) {
+        super(configurationSection);
+
+        if (!configurationSection.contains("ranges")) {
+            configLoadError("ranges");
+        }
+
+        if (!configurationSection.contains("tolerance")) {
+            configLoadError("tolerance");
+        }
+
+        this.range = configurationSection.getDoubleList("ranges");
+        this.tolerance = configurationSection.getDouble("tolerance");
     }
 
     @Override

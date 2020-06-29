@@ -9,11 +9,14 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.ho
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityRemoveMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.RootMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.FilterCurrentTargets;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMeleeDamageTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookPhysicalDamageTrigger;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -101,6 +104,18 @@ public class SkillComponentLoader {
             return new LandTrigger();
         } else if (componentType.equals(ImmunityRemoveMechanic.class.getSimpleName())) {
             return new ImmunityRemoveMechanic(configurationSection);
+        } else if (componentType.equals(ImmunityRemoveMechanic.class.getSimpleName())) {
+            return new ImmunityRemoveMechanic(configurationSection);
+        } else if (componentType.equals(SilenceMechanic.class.getSimpleName())) {
+            return new SilenceMechanic(configurationSection);
+        } else if (componentType.equals(TookMeleeDamageTrigger.class.getSimpleName())) {
+            return new TookMeleeDamageTrigger(configurationSection);
+        } else if (componentType.equals(RootMechanic.class.getSimpleName())) {
+            return new RootMechanic(configurationSection);
+        } else if (componentType.equals(MessageMechanic.class.getSimpleName())) {
+            return new MessageMechanic(configurationSection);
+        } else if (componentType.equals(FireMechanic.class.getSimpleName())) {
+            return new FireMechanic(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER");

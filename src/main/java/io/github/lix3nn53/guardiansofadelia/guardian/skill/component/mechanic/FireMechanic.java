@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -12,6 +13,14 @@ public class FireMechanic extends MechanicComponent {
 
     public FireMechanic(List<Integer> ticks) {
         this.ticks = ticks;
+    }
+
+    public FireMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("ticks")) {
+            configLoadError("ticks");
+        }
+
+        this.ticks = configurationSection.getIntegerList("ticks");
     }
 
     @Override
