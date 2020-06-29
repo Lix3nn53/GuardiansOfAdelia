@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -69,5 +70,18 @@ public class RepeatMechanic extends MechanicComponent {
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    }
+
+    public RepeatMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("period")) {
+            configLoadError("period");
+        }
+
+        if (!configurationSection.contains("repetitions")) {
+            configLoadError("repetitions");
+        }
+
+        this.period = configurationSection.getInt("period");
+        this.repetitions = configurationSection.getIntegerList("repetitions");
     }
 }

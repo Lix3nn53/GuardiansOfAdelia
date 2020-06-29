@@ -19,7 +19,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,22 +28,22 @@ public class SkillBar {
 
     private final HashMap<String, Boolean> skillsOnCooldown = new HashMap<>();
     private final Player player;
-    private final List<Integer> investedSkillPoints = new ArrayList<>();
-    private final List<Skill> skillSet;
+    private final HashMap<Integer, Integer> investedSkillPoints = new HashMap<>();
+    private final HashMap<Integer, Skill> skillSet;
 
     private int castCounter = 0;
 
-    public SkillBar(Player player, int one, int two, int three, int passive, int ultimate, List<Skill> skillSet) {
+    public SkillBar(Player player, int one, int two, int three, int passive, int ultimate, HashMap<Integer, Skill> skillSet) {
         this.player = player;
         this.skillSet = skillSet;
 
         player.getInventory().setHeldItemSlot(4);
 
-        investedSkillPoints.add(one);
-        investedSkillPoints.add(two);
-        investedSkillPoints.add(three);
-        investedSkillPoints.add(passive);
-        investedSkillPoints.add(ultimate);
+        investedSkillPoints.put(0, one);
+        investedSkillPoints.put(1, two);
+        investedSkillPoints.put(2, three);
+        investedSkillPoints.put(3, passive);
+        investedSkillPoints.put(4, ultimate);
 
         remakeSkillBar();
 
@@ -86,7 +85,7 @@ public class SkillBar {
                     castCounter++;
                 }
                 int newInvested = invested + reqSkillPoints;
-                investedSkillPoints.set(skillIndex, newInvested);
+                investedSkillPoints.put(skillIndex, newInvested);
                 remakeSkillBarIcon(skillIndex);
 
                 rpgClassStats.setInvestedSkillPoint(skillIndex, newInvested);
@@ -115,18 +114,18 @@ public class SkillBar {
 
         int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel - 1);
 
-        investedSkillPoints.set(skillIndex, invested - reqSkillPoints);
+        investedSkillPoints.put(skillIndex, invested - reqSkillPoints);
         remakeSkillBarIcon(skillIndex);
         return true;
     }
 
     public boolean resetSkillPoints() {
         investedSkillPoints.clear();
-        investedSkillPoints.add(0);
-        investedSkillPoints.add(0);
-        investedSkillPoints.add(0);
-        investedSkillPoints.add(0);
-        investedSkillPoints.add(0);
+        investedSkillPoints.put(0, 0);
+        investedSkillPoints.put(1, 0);
+        investedSkillPoints.put(2, 0);
+        investedSkillPoints.put(3, 0);
+        investedSkillPoints.put(4, 0);
 
         for (int skillIndex = 0; skillIndex < 5; skillIndex++) {
             Skill skill = this.skillSet.get(skillIndex);
@@ -149,7 +148,7 @@ public class SkillBar {
     public int getSkillPointsLeftToSpend() {
         int result = player.getLevel();
 
-        for (int invested : investedSkillPoints) {
+        for (int invested : investedSkillPoints.values()) {
             result -= invested;
         }
 
@@ -285,7 +284,7 @@ public class SkillBar {
         return true;
     }
 
-    public List<Skill> getSkillSet() {
+    public HashMap<Integer, Skill> getSkillSet() {
         return this.skillSet;
     }
 }

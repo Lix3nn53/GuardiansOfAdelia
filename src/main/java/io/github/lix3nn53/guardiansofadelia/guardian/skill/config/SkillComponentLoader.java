@@ -3,8 +3,11 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.config;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram.HologramMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.FilterCurrentTargets;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -70,6 +73,14 @@ public class SkillComponentLoader {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
+        } else if (componentType.equals(FilterCurrentTargets.class.getSimpleName())) {
+            return new FilterCurrentTargets(configurationSection);
+        } else if (componentType.equals(HologramMechanic.class.getSimpleName())) {
+            return new HologramMechanic(configurationSection);
+        } else if (componentType.equals(RepeatMechanic.class.getSimpleName())) {
+            return new RepeatMechanic(configurationSection);
+        } else if (componentType.equals(BuffMechanic.class.getSimpleName())) {
+            return new BuffMechanic(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER");

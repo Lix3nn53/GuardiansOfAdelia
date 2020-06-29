@@ -74,12 +74,12 @@ public class ParticleMechanic extends MechanicComponent {
             dustOptions = new Particle.DustOptions(Color.fromRGB(dustColor), dustSize);
         }
 
-        this.particleType = Particle.valueOf(configurationSection.getString("particleType"));
-        this.arrangement = ParticleArrangement.CIRCLE;
+        this.particleType = Particle.valueOf(configurationSection.getString("type"));
+        this.arrangement = configurationSection.contains("arrangement") ? ParticleArrangement.valueOf(configurationSection.getString("arrangement")) : ParticleArrangement.CIRCLE;
         this.radiusParticle = radiusParticle;
         this.amountParticle = amountParticle;
         this.forward = 0;
-        this.upward = 0.5;
+        this.upward = configurationSection.contains("upward") ? configurationSection.getDouble("upward") : 0.5;
         this.right = 0;
         this.speed = 0;
         this.dx = 0;

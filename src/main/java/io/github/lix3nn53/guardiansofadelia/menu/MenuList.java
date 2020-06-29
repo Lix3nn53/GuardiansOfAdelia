@@ -306,52 +306,62 @@ public class MenuList {
                 int pointsLeft = skillBar.getSkillPointsLeftToSpend();
                 guiGeneric = new GuiGeneric(27, ChatColor.LIGHT_PURPLE + "Skills (Points: " + pointsLeft + ")", 0);
 
-                List<Skill> skillSet = rpgCharacter.getSkillBar().getSkillSet();
+                HashMap<Integer, Skill> skillSet = rpgCharacter.getSkillBar().getSkillSet();
 
-                Skill skillOne = skillSet.get(0);
-                int investedSkillPoints = skillBar.getInvestedSkillPoints(0);
-                ItemStack icon = skillOne.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
-                ItemMeta itemMeta = icon.getItemMeta();
-                String displayName = itemMeta.getDisplayName();
-                itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
-                icon.setItemMeta(itemMeta);
-                guiGeneric.setItem(1, icon);
+                if (skillSet.containsKey(0)) {
+                    Skill skillOne = skillSet.get(0);
+                    int investedSkillPoints = skillBar.getInvestedSkillPoints(0);
+                    ItemStack icon = skillOne.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+                    ItemMeta itemMeta = icon.getItemMeta();
+                    String displayName = itemMeta.getDisplayName();
+                    itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+                    icon.setItemMeta(itemMeta);
+                    guiGeneric.setItem(1, icon);
+                }
 
-                Skill skillTwo = skillSet.get(1);
-                investedSkillPoints = skillBar.getInvestedSkillPoints(1);
-                icon = skillTwo.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
-                itemMeta = icon.getItemMeta();
-                displayName = itemMeta.getDisplayName();
-                itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
-                icon.setItemMeta(itemMeta);
-                guiGeneric.setItem(4, icon);
+                if (skillSet.containsKey(1)) {
+                    Skill skillTwo = skillSet.get(1);
+                    int investedSkillPoints = skillBar.getInvestedSkillPoints(1);
+                    ItemStack icon = skillTwo.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+                    ItemMeta itemMeta = icon.getItemMeta();
+                    String displayName = itemMeta.getDisplayName();
+                    itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+                    icon.setItemMeta(itemMeta);
+                    guiGeneric.setItem(4, icon);
+                }
 
-                Skill skillThree = skillSet.get(2);
-                investedSkillPoints = skillBar.getInvestedSkillPoints(2);
-                icon = skillThree.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
-                itemMeta = icon.getItemMeta();
-                displayName = itemMeta.getDisplayName();
-                itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
-                icon.setItemMeta(itemMeta);
-                guiGeneric.setItem(7, icon);
+                if (skillSet.containsKey(2)) {
+                    Skill skillThree = skillSet.get(2);
+                    int investedSkillPoints = skillBar.getInvestedSkillPoints(2);
+                    ItemStack icon = skillThree.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+                    ItemMeta itemMeta = icon.getItemMeta();
+                    String displayName = itemMeta.getDisplayName();
+                    itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+                    icon.setItemMeta(itemMeta);
+                    guiGeneric.setItem(7, icon);
+                }
 
-                Skill skillFour = skillSet.get(3);
-                investedSkillPoints = skillBar.getInvestedSkillPoints(3);
-                icon = skillFour.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
-                itemMeta = icon.getItemMeta();
-                displayName = itemMeta.getDisplayName();
-                itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
-                icon.setItemMeta(itemMeta);
-                guiGeneric.setItem(20, icon);
+                if (skillSet.containsKey(3)) {
+                    Skill skillFour = skillSet.get(3);
+                    int investedSkillPoints = skillBar.getInvestedSkillPoints(3);
+                    ItemStack icon = skillFour.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+                    ItemMeta itemMeta = icon.getItemMeta();
+                    String displayName = itemMeta.getDisplayName();
+                    itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+                    icon.setItemMeta(itemMeta);
+                    guiGeneric.setItem(20, icon);
+                }
 
-                Skill skillFive = skillSet.get(4);
-                investedSkillPoints = skillBar.getInvestedSkillPoints(4);
-                icon = skillFive.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
-                itemMeta = icon.getItemMeta();
-                displayName = itemMeta.getDisplayName();
-                itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
-                icon.setItemMeta(itemMeta);
-                guiGeneric.setItem(24, icon);
+                if (skillSet.containsKey(4)) {
+                    Skill skillFive = skillSet.get(4);
+                    int investedSkillPoints = skillBar.getInvestedSkillPoints(4);
+                    ItemStack icon = skillFive.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+                    ItemMeta itemMeta = icon.getItemMeta();
+                    String displayName = itemMeta.getDisplayName();
+                    itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+                    icon.setItemMeta(itemMeta);
+                    guiGeneric.setItem(24, icon);
+                }
             }
         }
 

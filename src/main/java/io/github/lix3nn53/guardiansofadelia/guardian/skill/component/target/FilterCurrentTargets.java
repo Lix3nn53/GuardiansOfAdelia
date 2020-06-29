@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -29,5 +30,25 @@ public class FilterCurrentTargets extends TargetComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    }
+
+    public FilterCurrentTargets(ConfigurationSection configurationSection) {
+        super(configurationSection.getBoolean("allies"), configurationSection.getBoolean("enemy"), configurationSection.getBoolean("self"), configurationSection.getInt("max"));
+
+        if (!configurationSection.contains("allies")) {
+            configLoadError("allies");
+        }
+
+        if (!configurationSection.contains("enemy")) {
+            configLoadError("enemy");
+        }
+
+        if (!configurationSection.contains("self")) {
+            configLoadError("self");
+        }
+
+        if (!configurationSection.contains("max")) {
+            configLoadError("max");
+        }
     }
 }

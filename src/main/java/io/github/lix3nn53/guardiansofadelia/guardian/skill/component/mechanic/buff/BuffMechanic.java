@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -95,5 +96,23 @@ public class BuffMechanic extends MechanicComponent {
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    }
+
+    public BuffMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("buffType")) {
+            configLoadError("buffType");
+        }
+
+        if (!configurationSection.contains("multiplier")) {
+            configLoadError("multiplier");
+        }
+
+        if (!configurationSection.contains("ticks")) {
+            configLoadError("ticks");
+        }
+
+        this.buffType = BuffType.valueOf(configurationSection.getString("buffType"));
+        this.multiplier = configurationSection.getDoubleList("multiplier");
+        this.ticks = configurationSection.getIntegerList("ticks");
     }
 }

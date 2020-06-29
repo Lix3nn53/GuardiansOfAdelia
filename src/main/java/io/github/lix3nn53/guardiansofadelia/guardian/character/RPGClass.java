@@ -7,7 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.list.*;
 import org.bukkit.ChatColor;
 
-import java.util.List;
+import java.util.HashMap;
 
 public enum RPGClass {
     NO_CLASS,
@@ -213,7 +213,7 @@ public enum RPGClass {
         return (int) ((levelD * ((levelD * tierD) / 125)) + 0.5);
     }
 
-    public List<Skill> getSkillSet() {
+    public HashMap<Integer, Skill> getSkillSet() {
         if (this == RPGClass.KNIGHT) {
             return KnightSkills.getSet();
         } else if (this == RPGClass.MAGE) {

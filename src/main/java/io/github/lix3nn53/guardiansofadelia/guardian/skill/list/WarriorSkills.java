@@ -27,18 +27,19 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class WarriorSkills {
 
-    public static List<Skill> getSet() {
-        List<Skill> skills = new ArrayList<>();
+    public static HashMap<Integer, Skill> getSet() {
+        HashMap<Integer, Skill> skills = new HashMap<>();
 
-        skills.add(getOne());
-        skills.add(getTwo());
-        skills.add(getThree());
-        skills.add(getPassive());
-        skills.add(getUltimate());
+        skills.put(0, getOne());
+        skills.put(1, getTwo());
+        skills.put(2, getThree());
+        skills.put(3, getPassive());
+        skills.put(4, getUltimate());
 
         return skills;
     }
