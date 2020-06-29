@@ -33,7 +33,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class RPGCharacterStats {
 
     private final Player player;
-    private RPGClass rpgClass;
+    private String rpgClassStr;
     private final Attribute fire = new Attribute(AttributeType.FIRE);
     private final Attribute lightning = new Attribute(AttributeType.LIGHTNING);
     private final Attribute earth = new Attribute(AttributeType.EARTH);
@@ -64,9 +64,9 @@ public class RPGCharacterStats {
     private double criticalChanceBonusBuff = 0;
     private double criticalDamageBonusBuff = 0;
 
-    public RPGCharacterStats(Player player, RPGClass rpgClass) {
+    public RPGCharacterStats(Player player, String rpgClassStr) {
         this.player = player;
-        this.rpgClass = rpgClass;
+        this.rpgClassStr = rpgClassStr;
 
         player.setLevel(1);
         player.setHealthScale(20);
@@ -91,8 +91,8 @@ public class RPGCharacterStats {
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 10L);
     }
 
-    public void setRpgClass(RPGClass rpgClass) {
-        this.rpgClass = rpgClass;
+    public void setRpgClassStr(String rpgClassStr) {
+        this.rpgClassStr = rpgClassStr;
     }
 
     public int getTotalExp() {
@@ -244,11 +244,11 @@ public class RPGCharacterStats {
             totalMaxHealth += shield.getMaxHealth();
         }
 
-        return (int) (totalMaxHealth + earth.getIncrement(player.getLevel(), rpgClass) + 0.5);
+        return (int) (totalMaxHealth + earth.getIncrement(player.getLevel(), rpgClassStr) + 0.5);
     }
 
     public int getTotalMaxMana() {
-        return (int) (maxMana + water.getIncrement(player.getLevel(), rpgClass) + 0.5);
+        return (int) (maxMana + water.getIncrement(player.getLevel(), rpgClassStr) + 0.5);
     }
 
     public int getTotalDefense() {
@@ -260,7 +260,7 @@ public class RPGCharacterStats {
     }
 
     public double getTotalCriticalChance() {
-        double chance = baseCriticalChance + wind.getIncrement(player.getLevel(), rpgClass);
+        double chance = baseCriticalChance + wind.getIncrement(player.getLevel(), rpgClassStr);
         if (chance > 0.4) {
             chance = 0.4;
         }
@@ -274,7 +274,7 @@ public class RPGCharacterStats {
         return baseCriticalDamageBonus + criticalDamageBonusBuff;
     }
 
-    public int getTotalMagicDamage(Player player, RPGClass rpgClass) {
+    public int getTotalMagicDamage(Player player, String rpgClass) {
         int lightningBonus = (int) (lightning.getIncrement(player.getLevel(), rpgClass) + 0.5);
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
@@ -291,7 +291,7 @@ public class RPGCharacterStats {
         return (int) (lightningBonus * magicalDamageBuff + 0.5);
     }
 
-    public int getTotalMeleeDamage(Player player, RPGClass rpgClass) {
+    public int getTotalMeleeDamage(Player player, String rpgClass) {
         int bonus = (int) (fire.getIncrement(player.getLevel(), rpgClass) + 0.5) + damageBonusFromOffhand;
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
@@ -319,7 +319,7 @@ public class RPGCharacterStats {
         return (int) (bonus * physicalDamageBuff + 0.5);
     }
 
-    public int getTotalRangedDamage(Player player, RPGClass rpgClass) {
+    public int getTotalRangedDamage(Player player, String rpgClass) {
         int fireBonus = (int) (fire.getIncrement(player.getLevel(), rpgClass) + 0.5);
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
@@ -538,7 +538,7 @@ public class RPGCharacterStats {
         onCurrentManaChange();
     }
 
-    public void recalculateEquipment(RPGClass rpgClass) {
+    public void recalculateEquipment(String rpgClass) {
         getFire().clearEquipment(this, false);
         getWater().clearEquipment(this, false);
         getEarth().clearEquipment(this, false);
@@ -625,7 +625,7 @@ public class RPGCharacterStats {
         return (int) (damageBonusFromOffhand * physicalDamageBuff + 0.5);
     }
 
-    public boolean setMainHandBonuses(ItemStack itemStack, RPGClass rpgClass, boolean fixDisplay) {
+    public boolean setMainHandBonuses(ItemStack itemStack, String rpgClass, boolean fixDisplay) {
         if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
 
             //manage stats on item drop
@@ -654,7 +654,7 @@ public class RPGCharacterStats {
         return false;
     }
 
-    public boolean removeMainHandBonuses(ItemStack itemStack, RPGClass rpgClass, boolean fixDisplay) {
+    public boolean removeMainHandBonuses(ItemStack itemStack, String rpgClass, boolean fixDisplay) {
         if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
 
             //manage stats on item drop
@@ -678,7 +678,7 @@ public class RPGCharacterStats {
         return false;
     }
 
-    public void clearMainHandBonuses(RPGClass rpgClass, boolean fixDisplay) {
+    public void clearMainHandBonuses() {
         getFire().removeBonus(EquipmentSlot.HAND, this, false);
         getWater().removeBonus(EquipmentSlot.HAND, this, false);
         getEarth().removeBonus(EquipmentSlot.HAND, this, false);
@@ -751,6 +751,7 @@ public class RPGCharacterStats {
                 break;
         }
 
+        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         int fireBonus = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, newLevel - 1);
         int waterBonus = rpgClass.getAttributeBonusForLevel(AttributeType.WATER, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.WATER, newLevel - 1);
         int earthBonus = rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, newLevel - 1);

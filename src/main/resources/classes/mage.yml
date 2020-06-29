@@ -13,6 +13,12 @@ attributeTierLightning: 6
 attributeTierWind: 0
 defaultWeaponGearType: "WAND"
 defaultArmorGearType: "LIGHT_ARMOR"
+weaponGearTypes:
+  - ""
+armorGearTypes:
+  - "LIGHT_ARMOR"
+  - "MEDIUM_ARMOR"
+hasDefaultOffhand: false
 skillOne:
   name: "Fireball"
   customModelData: 12

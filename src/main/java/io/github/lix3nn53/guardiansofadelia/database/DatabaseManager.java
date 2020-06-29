@@ -7,7 +7,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterExperienceManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
@@ -160,7 +159,7 @@ public class DatabaseManager {
                 livingWatcher3.setCustomNameVisible(true);
 
                 try {
-                    RPGClass rpgClassCharacter = DatabaseQueries.getRPGClassCharacter(uuid, charNo);
+                    String rpgClassCharacter = DatabaseQueries.getRPGClassCharacter(uuid, charNo);
                     int totalExp = DatabaseQueries.getTotalExp(uuid, charNo);
                     int level = RPGCharacterExperienceManager.getLevel(totalExp);
                     CharacterSelectionScreenManager.setCharLevel(uuid, charNo, level);
@@ -172,7 +171,7 @@ public class DatabaseManager {
                         livingWatcher2.setCustomName(ChatColor.DARK_PURPLE + "Total Experience: " + ChatColor.WHITE + totalExp);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(1), mobDisguise2, player);
 
-                        livingWatcher3.setCustomName(ChatColor.GRAY + "Class: " + rpgClassCharacter.getClassString());
+                        livingWatcher3.setCustomName(ChatColor.GRAY + "Class: " + rpgClassCharacter);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(0), mobDisguise3, player);
                     });
                 } catch (SQLException e) {

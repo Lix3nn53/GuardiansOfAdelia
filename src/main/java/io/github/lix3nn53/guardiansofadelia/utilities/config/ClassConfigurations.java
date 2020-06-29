@@ -1,7 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.config.SkillComponentLoader;
@@ -80,6 +84,12 @@ public class ClassConfigurations {
             int attributeTierEarth = fileConfiguration.getInt("attributeTierEarth");
             int attributeTierLightning = fileConfiguration.getInt("attributeTierLightning");
             int attributeTierWind = fileConfiguration.getInt("attributeTierWind");
+            HashMap<AttributeType, Integer> attributeTiers = new HashMap<>();
+            attributeTiers.put(AttributeType.FIRE, attributeTierFire);
+            attributeTiers.put(AttributeType.WATER, attributeTierWater);
+            attributeTiers.put(AttributeType.EARTH, attributeTierEarth);
+            attributeTiers.put(AttributeType.LIGHTNING, attributeTierLightning);
+            attributeTiers.put(AttributeType.WIND, attributeTierWind);
 
 
             String defaultWeaponGearTypeStr = fileConfiguration.getString("defaultWeaponGearType");
@@ -116,6 +126,42 @@ public class ClassConfigurations {
                 Skill skill = loadSkill(skillSection, 0);
                 skillSet.put(4, skill);
             }
+
+            List<ShieldGearType> shieldGearTypes = new ArrayList<>();
+            if (fileConfiguration.contains("shieldGearTypes")) {
+                List<String> gearTypes = fileConfiguration.getStringList("shieldGearTypes");
+                for (String gearType : gearTypes) {
+                    ShieldGearType shieldGearType = ShieldGearType.valueOf(gearType);
+                    shieldGearTypes.add(shieldGearType);
+                }
+            }
+            List<WeaponGearType> weaponGearTypes = new ArrayList<>();
+            if (fileConfiguration.contains("weaponGearTypes")) {
+                List<String> gearTypes = fileConfiguration.getStringList("weaponGearTypes");
+                for (String gearType : gearTypes) {
+                    WeaponGearType weaponGearType = WeaponGearType.valueOf(gearType);
+                    weaponGearTypes.add(weaponGearType);
+                }
+            }
+            List<ArmorGearType> armorGearTypes = new ArrayList<>();
+            if (fileConfiguration.contains("armorGearTypes")) {
+                List<String> gearTypes = fileConfiguration.getStringList("armorGearTypes");
+                for (String gearType : gearTypes) {
+                    ArmorGearType armorGearType = ArmorGearType.valueOf(gearType);
+                    armorGearTypes.add(armorGearType);
+                }
+            }
+
+            boolean hasDefaultOffhand = fileConfiguration.getBoolean("hasDefaultOffhand");
+            boolean isDefaultOffhandWeapon = false;
+            if (hasDefaultOffhand) {
+                isDefaultOffhandWeapon = fileConfiguration.getBoolean("isDefaultOffhandWeapon");
+            }
+
+            RPGClass rpgClass = new RPGClass(color, className, classIconCustomModelData, attributeTiers, skillSet, defaultWeaponGearType,
+                    defaultArmorGearType, shieldGearTypes, weaponGearTypes, armorGearTypes, hasDefaultOffhand, isDefaultOffhandWeapon);
+
+            RPGClassManager.addClass(className, rpgClass);
         }
     }
 

@@ -1,33 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.Material;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public enum ShieldGearType {
     BUCKLER,
     SHIELD;
-
-    public List<RPGClass> getRequiredClasses() {
-        List<RPGClass> classList = new ArrayList<>();
-
-        switch (this) {
-            case BUCKLER:
-                classList.add(RPGClass.KNIGHT);
-                classList.add(RPGClass.PALADIN);
-                classList.add(RPGClass.MONK);
-                classList.add(RPGClass.WARRIOR);
-                break;
-            case SHIELD:
-                classList.add(RPGClass.KNIGHT);
-                classList.add(RPGClass.PALADIN);
-                break;
-        }
-
-        return classList;
-    }
 
     public Material getMaterial() {
         switch (this) {

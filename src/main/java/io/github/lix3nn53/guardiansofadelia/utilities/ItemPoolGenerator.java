@@ -2,10 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.utilities;
 
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class ItemPoolGenerator {
 
         List<ItemStack> temp = new ArrayList<>();
 
-        for (RPGClass rpgClass : RPGClass.values()) {
+        for (ArmorGearType armorGearType : ArmorGearType.values()) {
             /*temp.add(Armors.getArmor(ArmorType.HELMET, rpgClass, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
             temp.add(Armors.getArmor(ArmorType.CHESTPLATE, rpgClass, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));
             temp.add(Armors.getArmor(ArmorType.LEGGINGS, rpgClass, gearLevel, itemIndex, tier, itemTag, minStatValue, maxStatValue, minNumberofStats));

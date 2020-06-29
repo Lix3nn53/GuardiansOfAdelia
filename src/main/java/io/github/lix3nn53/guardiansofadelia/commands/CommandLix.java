@@ -16,7 +16,6 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
@@ -124,7 +123,7 @@ public class CommandLix implements CommandExecutor {
                 if (args[1].equals("unlock")) {
                     if (args.length == 4) {
                         Player player2 = Bukkit.getPlayer(args[2]);
-                        RPGClass newClass = RPGClass.valueOf(args[3].toUpperCase());
+                        String newClass = args[3];
                         if (player2 != null) {
                             UUID uuid = player2.getUniqueId();
                             if (GuardianDataManager.hasGuardianData(uuid)) {
@@ -132,7 +131,7 @@ public class CommandLix implements CommandExecutor {
                                 if (guardianData.hasActiveCharacter()) {
                                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                                     activeCharacter.unlockClass(newClass);
-                                    player2.sendMessage("Unlocked class: " + newClass.getClassString());
+                                    player2.sendMessage("Unlocked class: " + newClass);
                                 }
                             }
                         }

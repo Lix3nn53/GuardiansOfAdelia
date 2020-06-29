@@ -19,28 +19,30 @@ import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.HashMap;
+import java.util.List;
 
 
 public class TutorialManager {
 
-    public static void startTutorial(Player player, RPGClass rpgClass, int charNo, Location startLocation) {
+    public static void startTutorial(Player player, String rpgClassStr, int charNo, Location startLocation) {
         if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
-            HashMap<RPGClass, RPGClassStats> unlockedClasses = new HashMap<>();
-            unlockedClasses.put(rpgClass, new RPGClassStats());
-            RPGCharacter rpgCharacter = new RPGCharacter(rpgClass, unlockedClasses, player);
+            HashMap<String, RPGClassStats> unlockedClasses = new HashMap<>();
+            unlockedClasses.put(rpgClassStr, new RPGClassStats());
+            RPGCharacter rpgCharacter = new RPGCharacter(rpgClassStr, unlockedClasses, player);
             guardianData.setActiveCharacter(rpgCharacter, charNo);
 
             int totalExpForLevel = RPGCharacterExperienceManager.getTotalRequiredExperience(90);
             RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
             rpgCharacterStats.setTotalExp(totalExpForLevel);
 
-            giveTutorialItems(player, rpgClass);
+            giveTutorialItems(player, rpgClassStr);
             player.teleport(startLocation);
 
             player.sendTitle(ChatColor.DARK_PURPLE + "Aleesia's Castle", ChatColor.GRAY + "Fall of the Adelia", 25, 35, 25);
@@ -53,7 +55,7 @@ public class TutorialManager {
             Quest tutorialStartQuest = QuestNPCManager.getQuestCopyById(1);
             rpgCharacter.acceptQuest(tutorialStartQuest, player);
 
-            rpgCharacter.getRpgCharacterStats().recalculateEquipment(rpgCharacter.getRpgClass());
+            rpgCharacter.getRpgCharacterStats().recalculateEquipment(rpgCharacter.getRpgClassStr());
             rpgCharacter.getRpgCharacterStats().recalculateRPGInventory(rpgCharacter.getRpgInventory());
 
             rpgCharacterStats.setCurrentHealth(rpgCharacterStats.getTotalMaxHealth());
@@ -61,7 +63,7 @@ public class TutorialManager {
         }
     }
 
-    private static void giveTutorialItems(Player player, RPGClass rpgClass) {
+    private static void giveTutorialItems(Player player, String rpgClassStr) {
         InventoryUtils.setMenuItemPlayer(player);
         ItemTier tier = ItemTier.COMMON;
         int minStatValue = 10;
@@ -69,6 +71,7 @@ public class TutorialManager {
         int minNumberOfStats = 2;
         String itemTag = "Tutorial";
 
+        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         ArmorGearType armorGearType = rpgClass.getDefaultArmorGearType();
 
         ItemStack helmet = ArmorManager.get(ArmorType.HELMET, armorGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
@@ -85,18 +88,23 @@ public class TutorialManager {
 
         WeaponGearType mainhandGearType = rpgClass.getDefaultWeaponGearType();
 
-        ItemStack mainHand = WeaponManager.get(mainhandGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        playerInventory.setItem(4, mainHand);
+        ItemStack mainWeapon = WeaponManager.get(mainhandGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        playerInventory.setItem(4, mainWeapon);
 
-        if (rpgClass.equals(RPGClass.KNIGHT) || rpgClass.equals(RPGClass.PALADIN)) {
-            ShieldGearType shieldGearType = ShieldGearType.SHIELD;
+        if (rpgClass.hasDefaultOffhand()) {
+            boolean defaultOffhandWeapon = rpgClass.isDefaultOffhandWeapon();
+            if (defaultOffhandWeapon) {
+                playerInventory.setItemInOffHand(mainWeapon);
+            } else {
+                List<ShieldGearType> shieldGearTypes = rpgClass.getShieldGearTypes();
+                if (!shieldGearTypes.isEmpty()) {
+                    ShieldGearType shieldGearType = shieldGearTypes.get(0);
 
-            ItemStack shield = ShieldManager.get(shieldGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-
-            playerInventory.setItemInOffHand(shield);
-        } else if (rpgClass.equals(RPGClass.ROGUE)) {
-            playerInventory.setItemInOffHand(mainHand);
-        } else if (rpgClass.equals(RPGClass.ARCHER) || rpgClass.equals(RPGClass.HUNTER)) {
+                    ItemStack shield = ShieldManager.get(shieldGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+                    playerInventory.setItemInOffHand(shield);
+                }
+            }
+        } else if (mainhandGearType.getMaterial().equals(Material.BOW) || mainhandGearType.getMaterial().equals(Material.CROSSBOW)) {
             ItemStack arrow = OtherItems.getArrow(2);
             playerInventory.setItemInOffHand(arrow);
         }

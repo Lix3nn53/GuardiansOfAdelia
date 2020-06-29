@@ -6,7 +6,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -62,11 +61,9 @@ public class MyPlayerDropItemEvent implements Listener {
                 GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                 if (guardianData.hasActiveCharacter()) {
                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                    RPGClass rpgClass = activeCharacter.getRpgClass();
-
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                    rpgCharacterStats.clearMainHandBonuses(rpgClass, true);
+                    rpgCharacterStats.clearMainHandBonuses();
                 }
             }
         }

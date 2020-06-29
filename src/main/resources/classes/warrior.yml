@@ -13,6 +13,12 @@ attributeTierLightning: 1
 attributeTierWind: 1
 defaultWeaponGearType: "BATTLE_AXE"
 defaultArmorGearType: "MEDIUM_ARMOR"
+weaponGearTypes:
+  - ""
+armorGearTypes:
+  - "MEDIUM_ARMOR"
+  - "HEAVY_ARMOR"
+hasDefaultOffhand: false
 skillOne:
   name: "Power Slash"
   customModelData: 15

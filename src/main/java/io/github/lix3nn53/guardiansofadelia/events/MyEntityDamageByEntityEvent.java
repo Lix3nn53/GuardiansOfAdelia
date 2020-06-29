@@ -9,7 +9,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
@@ -258,16 +257,16 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                     //custom damage modifiers
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-                    RPGClass rpgClass = activeCharacter.getRpgClass();
+                    String rpgClassStr = activeCharacter.getRpgClassStr();
                     if (damageType.equals(DamageMechanic.DamageType.MAGIC)) { //Ranged overrides Magic so check magic first. You can not deal Magic damage without skills.
-                        damage += rpgCharacterStats.getTotalMagicDamage(player, rpgClass); //add to spell damage
+                        damage += rpgCharacterStats.getTotalMagicDamage(player, rpgClassStr); //add to spell damage
                         TriggerListener.onPlayerMagicAttack(player, livingTarget);
                     } else if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
                         if (isSkill) { //add full ranged damage to skills
-                            damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClass);
+                            damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClassStr);
                             TriggerListener.onPlayerMagicAttack(player, livingTarget);
                         } else { //add fire element and physical damage buff to projectiles fired without skills involved
-                            damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClass);
+                            damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClassStr);
                             damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
                             TriggerListener.onPlayerRangedAttack(player, livingTarget);
                             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.6F, 0.4F);
@@ -277,7 +276,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         Material type = itemInMainHand.getType();
 
                         if (isSkill) { //Add full melee damage to skills
-                            damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClass);
+                            damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClassStr);
                             TriggerListener.onPlayerMagicAttack(player, livingTarget);
                         } else if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
                                 || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
@@ -289,10 +288,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 return false;
                             }
 
-                            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass))
+                            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr))
                                 return false;
 
-                            damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClass); //add to weapon damage
+                            damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClassStr); //add to weapon damage
 
                             //add damage bonus from offhand
                             ItemStack itemInOffHand = player.getInventory().getItemInOffHand();

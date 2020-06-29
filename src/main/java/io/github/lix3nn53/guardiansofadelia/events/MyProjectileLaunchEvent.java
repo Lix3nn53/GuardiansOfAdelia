@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
@@ -66,9 +65,9 @@ public class MyProjectileLaunchEvent implements Listener {
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
-                        RPGClass rpgClass = activeCharacter.getRpgClass();
+                        String rpgClassStr = activeCharacter.getRpgClassStr();
 
-                        if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return;
+                        if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr)) return;
 
                         if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "rangedDamage")) {
                             int rangedDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "rangedDamage");

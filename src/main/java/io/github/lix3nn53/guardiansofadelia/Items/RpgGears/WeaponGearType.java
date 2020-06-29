@@ -1,11 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponDamageType;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.Material;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public enum WeaponGearType {
     //One handed Melee Weapons
@@ -23,66 +19,6 @@ public enum WeaponGearType {
     //Magic Weapons
     STAFF,
     WAND;
-
-    public List<RPGClass> getRequiredClasses() {
-        List<RPGClass> classList = new ArrayList<>();
-
-        switch (this) {
-            //ONE HANDED MELEE
-            case SWORD:
-                classList.add(RPGClass.KNIGHT);
-                classList.add(RPGClass.PALADIN);
-                classList.add(RPGClass.WARRIOR);
-                classList.add(RPGClass.ROGUE);
-                break;
-            case DAGGER:
-                classList.add(RPGClass.ROGUE);
-                classList.add(RPGClass.ARCHER);
-                classList.add(RPGClass.HUNTER);
-                classList.add(RPGClass.MAGE);
-                break;
-            //TWO HANDED MELEE
-            case BATTLE_AXE:
-                classList.add(RPGClass.KNIGHT);
-                classList.add(RPGClass.PALADIN);
-                classList.add(RPGClass.WARRIOR);
-                break;
-            case WAR_HAMMER:
-                classList.add(RPGClass.KNIGHT);
-                classList.add(RPGClass.PALADIN);
-                classList.add(RPGClass.WARRIOR);
-                break;
-            case GREAT_SWORD:
-                classList.add(RPGClass.KNIGHT);
-                classList.add(RPGClass.PALADIN);
-                classList.add(RPGClass.WARRIOR);
-                break;
-            //TWO HANDED HYBRID
-            case SPEAR:
-                classList.add(RPGClass.MONK);
-                break;
-            //TWO HANDED RANGED
-            case BOW:
-                classList.add(RPGClass.ARCHER);
-                classList.add(RPGClass.HUNTER);
-                classList.add(RPGClass.ROGUE);
-                break;
-            case CROSSBOW:
-                classList.add(RPGClass.ARCHER);
-                classList.add(RPGClass.HUNTER);
-                classList.add(RPGClass.ROGUE);
-                break;
-            //TWO HANDED MAGICAL
-            case STAFF:
-                classList.add(RPGClass.MAGE);
-                break;
-            case WAND:
-                classList.add(RPGClass.MAGE);
-                break;
-        }
-
-        return classList;
-    }
 
     public WeaponDamageType getWeaponType() {
         switch (this) {
@@ -204,5 +140,32 @@ public enum WeaponGearType {
         }
 
         return "WEAPON GEAR NAME BUG";
+    }
+
+    public boolean canEquipToOffHand() {
+        switch (this) {
+            case SWORD:
+                return false;
+            case DAGGER:
+                return true;
+            case BATTLE_AXE:
+                return false;
+            case WAR_HAMMER:
+                return false;
+            case GREAT_SWORD:
+                return false;
+            case SPEAR:
+                return false;
+            case BOW:
+                return false;
+            case CROSSBOW:
+                return false;
+            case STAFF:
+                return false;
+            case WAND:
+                return false;
+        }
+
+        return false;
     }
 }

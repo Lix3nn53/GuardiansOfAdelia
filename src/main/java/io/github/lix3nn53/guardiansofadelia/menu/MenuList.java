@@ -29,10 +29,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class MenuList {
 
@@ -64,7 +61,8 @@ public class MenuList {
         guiGeneric.setItem(14, map);
 
         ItemStack character = new ItemStack(Material.STONE_PICKAXE);
-        RPGClass rpgClass = guardianData.getActiveCharacter().getRpgClass();
+        String rpgClassStr = guardianData.getActiveCharacter().getRpgClassStr();
+        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         itemMeta.setCustomModelData(rpgClass.getClassIconCustomModelData());
         itemMeta.setDisplayName(ChatColor.GREEN + "Character");
         itemMeta.setLore(new ArrayList() {{
@@ -203,7 +201,8 @@ public class MenuList {
 
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
-                RPGClass rpgClass = rpgCharacter.getRpgClass();
+                String rpgClassStr = rpgCharacter.getRpgClassStr();
+                RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
                 RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats(rpgClass);
                 int totalExp = rpgClassStats.getTotalExp();
                 int classLevel = RPGClassExperienceManager.getLevel(totalExp);
@@ -247,18 +246,21 @@ public class MenuList {
 
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
-                HashMap<RPGClass, RPGClassStats> unlockedClasses = rpgCharacter.getUnlockedClasses();
-                RPGClass[] values = RPGClass.values();
+                HashMap<String, RPGClassStats> unlockedClasses = rpgCharacter.getUnlockedClasses();
+
+                Set<String> valuesSet = RPGClassManager.getClassNames();
+                List<String> values = new ArrayList<>(valuesSet);
 
                 int modCounter = 0;
-                for (int i = 0; i < values.length; i++) {
-                    RPGClass value = values[i];
+                for (int i = 0; i < values.size(); i++) {
+                    String valueStr = values.get(i);
+                    RPGClass value = RPGClassManager.getClass(valueStr);
                     ItemStack itemStack = new ItemStack(Material.RED_WOOL);
                     ItemMeta meta = itemStack.getItemMeta();
                     meta.setDisplayName(value.getClassString());
 
-                    if (unlockedClasses.containsKey(value)) {
-                        int totalExp = unlockedClasses.get(value).getTotalExp();
+                    if (unlockedClasses.containsKey(valueStr)) {
+                        int totalExp = unlockedClasses.get(valueStr).getTotalExp();
                         itemStack.setType(Material.LIME_WOOL);
                         List<String> lore = new ArrayList<>();
                         lore.add("");
@@ -276,14 +278,6 @@ public class MenuList {
                     if (mod == 0) {
                         modCounter++;
                     }
-                }
-
-                for (RPGClass unlockedClass : unlockedClasses.keySet()) {
-                    RPGClassStats rpgClassStats = unlockedClasses.get(unlockedClass);
-                    int totalExp = rpgClassStats.getTotalExp();
-                    int classLevel = RPGClassExperienceManager.getLevel(totalExp);
-
-
                 }
             }
         }

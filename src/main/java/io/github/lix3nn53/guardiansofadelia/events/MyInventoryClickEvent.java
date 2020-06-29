@@ -25,7 +25,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildInvite;
@@ -171,12 +170,12 @@ public class MyInventoryClickEvent implements Listener {
                 if (event.getAction() != InventoryAction.NOTHING) {
                     if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.PLAYER)) {
                         RPGCharacter rpgCharacterForEquipment = guardianData.getActiveCharacter();
-                        RPGClass rpgClass = rpgCharacter.getRpgClass();
+                        String rpgClassStr = rpgCharacter.getRpgClassStr();
 
                         new BukkitRunnable() {
                             @Override
                             public void run() {
-                                rpgCharacterForEquipment.getRpgCharacterStats().recalculateEquipment(rpgClass);
+                                rpgCharacterForEquipment.getRpgCharacterStats().recalculateEquipment(rpgClassStr);
                             }
                         }.runTaskLater(GuardiansOfAdelia.getInstance(), 1L);
                     }
@@ -416,23 +415,8 @@ public class MyInventoryClickEvent implements Listener {
                 charNoString = charNoString.replace(" Creation", "");
                 int charNo = Integer.parseInt(charNoString);
 
-                if (currentName.contains("Knight")) {
-                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.KNIGHT);
-                } else if (currentName.contains("Paladin")) {
-                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.PALADIN);
-                } else if (currentName.contains("Rogue")) {
-                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.ROGUE);
-                } else if (currentName.contains("Archer")) {
-                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.ARCHER);
-                } else if (currentName.contains("Mage")) {
-                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.MAGE);
-                } else if (currentName.contains("Warrior")) {
-                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.WARRIOR);
-                } else if (currentName.contains("Monk")) {
-                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.MONK);
-                } else if (currentName.contains("Hunter")) {
-                    CharacterSelectionScreenManager.createCharacter(player, charNo, RPGClass.HUNTER);
-                }
+                String rpgClassStr = ChatColor.stripColor(currentName);
+                CharacterSelectionScreenManager.createCharacter(player, charNo, rpgClassStr);
             } else if (title.contains("Selection")) {
                 String charNoString = title.replace(ChatColor.YELLOW + "Character ", "");
                 charNoString = charNoString.replace(" Selection", "");
@@ -632,10 +616,9 @@ public class MyInventoryClickEvent implements Listener {
                 if (currentType.equals(Material.LIME_WOOL)) {
                     String displayName = itemMeta.getDisplayName();
                     String stripColor = ChatColor.stripColor(displayName);
-                    String s = stripColor.toUpperCase();
-                    RPGClass rpgClass = RPGClass.valueOf(s);
+                    String rpgClassStr = stripColor.toUpperCase();
 
-                    rpgCharacter.changeClass(player, rpgClass);
+                    rpgCharacter.changeClass(player, rpgClassStr);
                     player.closeInventory();
                 }
             }
@@ -720,19 +703,19 @@ public class MyInventoryClickEvent implements Listener {
             }
         } else if (title.equals(ChatColor.YELLOW.toString() + ChatColor.BOLD + "RPG Inventory")) {
             RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
-            RPGClass rpgClass = rpgCharacter.getRpgClass();
+            String rpgClassStr = rpgCharacter.getRpgClassStr();
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 event.setCancelled(true);
                 if (cursorType.equals(Material.AIR)) {
                     boolean change = rpgInventory.onCursorClickWithAir(player, slot, topInventory, event.isShiftClick());
                 } else {
-                    boolean change = rpgInventory.onCursorClickWithItem(player, slot, cursor, topInventory, rpgClass);
+                    boolean change = rpgInventory.onCursorClickWithItem(player, slot, cursor, topInventory, rpgClassStr);
                 }
             } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
                 if (cursorType.equals(Material.AIR)) {
                     if (event.isShiftClick()) {
                         event.setCancelled(true);
-                        boolean change = rpgInventory.onShiftClick(current, player, slot, topInventory, rpgClass);
+                        boolean change = rpgInventory.onShiftClick(current, player, slot, topInventory, rpgClassStr);
                     }
                 }
             }

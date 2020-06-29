@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -37,9 +36,9 @@ public class MyEntityShootBowEvent implements Listener {
                         if (guardianData.hasActiveCharacter()) {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
-                            RPGClass rpgClass = activeCharacter.getRpgClass();
+                            String rpgClassStr = activeCharacter.getRpgClassStr();
 
-                            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return;
+                            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr)) return;
 
                             if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "rangedDamage")) {
                                 int rangedDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "rangedDamage");

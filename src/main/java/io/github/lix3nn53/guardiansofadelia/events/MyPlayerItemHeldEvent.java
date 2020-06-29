@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -55,7 +54,7 @@ public class MyPlayerItemHeldEvent implements Listener {
                     return;
                 }
 
-                RPGClass rpgClass = activeCharacter.getRpgClass();
+                String rpgClassStr = activeCharacter.getRpgClassStr();
 
                 PlayerInventory inventory = player.getInventory();
                 //remove old item stats
@@ -81,7 +80,7 @@ public class MyPlayerItemHeldEvent implements Listener {
 
                 //manage arrow in offhand
                 if ((type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) && newSlot == 4) { //weapon slot is 4
-                    boolean meetRequirements = StatUtils.doesCharacterMeetRequirements(item, player, rpgClass);
+                    boolean meetRequirements = StatUtils.doesCharacterMeetRequirements(item, player, rpgClassStr);
                     if (meetRequirements) {
                         ItemStack arrow = OtherItems.getArrow(2);
                         inventory.setItemInOffHand(arrow);

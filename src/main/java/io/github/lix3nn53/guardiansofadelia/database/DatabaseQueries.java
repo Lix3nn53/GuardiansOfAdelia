@@ -8,7 +8,6 @@ import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
@@ -298,15 +297,14 @@ public class DatabaseQueries {
 
             if (resultSet.next()) {
                 String rpgClassString = resultSet.getString("rpg_class");
-                RPGClass rpgClass = RPGClass.valueOf(rpgClassString);
 
                 String unlockedClassesString = resultSet.getString("unlocked_classes");
                 String[] classWithDataArray = unlockedClassesString.split(";");
-                HashMap<RPGClass, RPGClassStats> unlockedClasses = new HashMap<>();
+                HashMap<String, RPGClassStats> unlockedClasses = new HashMap<>();
                 for (String classWithData : classWithDataArray) {
                     String[] classDataArray = classWithData.split("-");
 
-                    RPGClass unlockedClass = RPGClass.valueOf(classDataArray[0]);
+                    String unlockedClassStr = classDataArray[0];
                     int totalExp = Integer.parseInt(classDataArray[1]);
                     int one = Integer.parseInt(classDataArray[2]);
                     int two = Integer.parseInt(classDataArray[3]);
@@ -315,7 +313,7 @@ public class DatabaseQueries {
                     int ultimate = Integer.parseInt(classDataArray[6]);
 
                     RPGClassStats rpgClassStats = new RPGClassStats(totalExp, one, two, three, passive, ultimate);
-                    unlockedClasses.put(unlockedClass, rpgClassStats);
+                    unlockedClasses.put(unlockedClassStr, rpgClassStats);
                 }
 
                 int skill_one = resultSet.getInt("skill_one");
@@ -324,7 +322,7 @@ public class DatabaseQueries {
                 int skill_passive = resultSet.getInt("skill_passive");
                 int skill_ultimate = resultSet.getInt("skill_ultimate");
 
-                rpgCharacter = new RPGCharacter(rpgClass, unlockedClasses, player, skill_one, skill_two, skill_three, skill_passive, skill_ultimate);
+                rpgCharacter = new RPGCharacter(rpgClassString, unlockedClasses, player, skill_one, skill_two, skill_three, skill_passive, skill_ultimate);
                 RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
 
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
@@ -485,7 +483,7 @@ public class DatabaseQueries {
                     player.getInventory().setArmorContents(itemStacks);
                 }
 
-                rpgCharacter.getRpgCharacterStats().recalculateEquipment(rpgCharacter.getRpgClass());
+                rpgCharacter.getRpgCharacterStats().recalculateEquipment(rpgCharacter.getRpgClassStr());
                 rpgCharacter.getRpgCharacterStats().recalculateRPGInventory(rpgCharacter.getRpgInventory());
             }
             resultSet.close();
@@ -583,9 +581,9 @@ public class DatabaseQueries {
         return location;
     }
 
-    public static RPGClass getRPGClassCharacter(UUID uuid, int charNo) throws SQLException {
+    public static String getRPGClassCharacter(UUID uuid, int charNo) throws SQLException {
         String SQL_QUERY = "SELECT rpg_class FROM goa_player_character WHERE uuid = ? AND character_no = ?";
-        RPGClass rpgClass = null;
+        String rpgClass = null;
         try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
@@ -595,8 +593,7 @@ public class DatabaseQueries {
             ResultSet resultSet = pst.executeQuery();
 
             if (resultSet.next()) {
-                String rpgClassString = resultSet.getString("rpg_class");
-                rpgClass = RPGClass.valueOf(rpgClassString);
+                rpgClass = resultSet.getString("rpg_class");
             }
             resultSet.close();
             pst.close();
@@ -985,19 +982,19 @@ public class DatabaseQueries {
                 pst.setNull(16, Types.BLOB);
             }
 
-            RPGClass rpgClass = rpgCharacter.getRpgClass();
-            pst.setString(17, rpgClass.toString());
+            String rpgClassStr = rpgCharacter.getRpgClassStr();
+            pst.setString(17, rpgClassStr);
 
-            HashMap<RPGClass, RPGClassStats> unlockedClasses = rpgCharacter.getUnlockedClasses();
+            HashMap<String, RPGClassStats> unlockedClasses = rpgCharacter.getUnlockedClasses();
             StringBuilder unlockedClassesString = new StringBuilder();
             int i = 0;
-            for (RPGClass unlockedClass : unlockedClasses.keySet()) {
+            for (String unlockedClass : unlockedClasses.keySet()) {
                 if (i > 0) {
                     unlockedClassesString.append(";");
                 }
                 RPGClassStats rpgClassStats = unlockedClasses.get(unlockedClass);
 
-                unlockedClassesString.append(unlockedClass.toString());
+                unlockedClassesString.append(unlockedClass);
                 unlockedClassesString.append("-");
                 unlockedClassesString.append(rpgClassStats.getTotalExp());
                 unlockedClassesString.append("-");

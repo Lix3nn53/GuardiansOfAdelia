@@ -16,8 +16,8 @@ public final class RPGCharacter {
 
     private final RPGInventory rpgInventory = new RPGInventory();
 
-    private RPGClass rpgClass;
-    private final HashMap<RPGClass, RPGClassStats> unlockedClasses;
+    private final HashMap<String, RPGClassStats> unlockedClasses;
+    private String rpgClassStr;
     private SkillBar skillBar;
 
     private final RPGCharacterStats rpgCharacterStats;
@@ -29,25 +29,27 @@ public final class RPGCharacter {
 
     private ChatTag chatTag = ChatTag.NOVICE;
 
-    public RPGCharacter(RPGClass rpgClass, HashMap<RPGClass, RPGClassStats> unlockedClasses, Player player, int one, int two, int three, int passive, int ultimate) {
-        rpgCharacterStats = new RPGCharacterStats(player, rpgClass);
-        this.rpgClass = rpgClass;
+    public RPGCharacter(String rpgClassStr, HashMap<String, RPGClassStats> unlockedClasses, Player player, int one, int two, int three, int passive, int ultimate) {
+        rpgCharacterStats = new RPGCharacterStats(player, rpgClassStr);
+        this.rpgClassStr = rpgClassStr;
         this.unlockedClasses = unlockedClasses;
+        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet());
     }
 
-    public RPGCharacter(RPGClass rpgClass, HashMap<RPGClass, RPGClassStats> unlockedClasses, Player player) {
-        rpgCharacterStats = new RPGCharacterStats(player, rpgClass);
-        this.rpgClass = rpgClass;
+    public RPGCharacter(String rpgClassStr, HashMap<String, RPGClassStats> unlockedClasses, Player player) {
+        rpgCharacterStats = new RPGCharacterStats(player, rpgClassStr);
+        this.rpgClassStr = rpgClassStr;
         this.unlockedClasses = unlockedClasses;
+        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         this.skillBar = new SkillBar(player, 0, 0, 0, 0, 0, rpgClass.getSkillSet());
     }
 
-    public RPGClass getRpgClass() {
-        return rpgClass;
+    public String getRpgClassStr() {
+        return rpgClassStr;
     }
 
-    public HashMap<RPGClass, RPGClassStats> getUnlockedClasses() {
+    public HashMap<String, RPGClassStats> getUnlockedClasses() {
         return unlockedClasses;
     }
 
@@ -56,34 +58,35 @@ public final class RPGCharacter {
     }
 
     public RPGClassStats getRPGClassStats() {
-        return unlockedClasses.get(this.rpgClass);
+        return unlockedClasses.get(this.rpgClassStr);
     }
 
-    public void unlockClass(RPGClass newClass) {
+    public void unlockClass(String newClass) {
         if (!unlockedClasses.containsKey(newClass)) {
             RPGClassStats rpgClassStats = new RPGClassStats();
             unlockedClasses.put(newClass, rpgClassStats);
         }
     }
 
-    public boolean changeClass(Player player, RPGClass newClass) {
-        if (!unlockedClasses.containsKey(newClass)) {
+    public boolean changeClass(Player player, String newClassStr) {
+        if (!unlockedClasses.containsKey(newClassStr)) {
             return false;
         }
 
-        this.rpgClass = newClass;
-        RPGClassStats rpgClassStats = unlockedClasses.get(newClass);
+        this.rpgClassStr = newClassStr;
+        RPGClassStats rpgClassStats = unlockedClasses.get(newClassStr);
         int one = rpgClassStats.getOne();
         int two = rpgClassStats.getTwo();
         int three = rpgClassStats.getThree();
         int passive = rpgClassStats.getPassive();
         int ultimate = rpgClassStats.getUltimate();
 
+        RPGClass rpgClass = RPGClassManager.getClass(newClassStr);
         this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet());
         skillBar.remakeSkillBar();
 
-        rpgCharacterStats.setRpgClass(newClass);
-        rpgCharacterStats.recalculateEquipment(rpgClass);
+        rpgCharacterStats.setRpgClassStr(newClassStr);
+        rpgCharacterStats.recalculateEquipment(rpgClassStr);
 
         return true;
     }

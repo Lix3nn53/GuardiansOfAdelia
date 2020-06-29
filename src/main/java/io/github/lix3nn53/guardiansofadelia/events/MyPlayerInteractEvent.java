@@ -63,7 +63,7 @@ public class MyPlayerInteractEvent implements Listener {
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
-                        if (StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgCharacter.getRpgClass())) {
+                        if (StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgCharacter.getRpgClassStr())) {
                             rpgCharacter.getRpgCharacterStats().onArmorEquip(itemInMainHand, true);
 
                             if (itemInMainHandType.equals(HelmetSkin.getHelmetMaterial())) {

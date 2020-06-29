@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
@@ -111,11 +110,11 @@ public class CharacterSelectionScreenManager {
         CharacterSelectionScreenManager.tutorialStart = tutorialStart;
     }
 
-    public static void createCharacter(Player player, int charNo, RPGClass rpgClass) {
+    public static void createCharacter(Player player, int charNo, String rpgClassStr) {
         player.sendMessage("Creating character-" + charNo);
         clear(player);
         //start tutorial
-        TutorialManager.startTutorial(player, rpgClass, charNo, tutorialStart);
+        TutorialManager.startTutorial(player, rpgClassStr, charNo, tutorialStart);
     }
 
     public static void setCharLocation(UUID uuid, int charNo, Location location) {

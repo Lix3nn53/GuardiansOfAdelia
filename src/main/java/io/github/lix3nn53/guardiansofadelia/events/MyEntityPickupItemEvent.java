@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropProtectionManage
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -63,9 +62,9 @@ public class MyEntityPickupItemEvent implements Listener {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                         if (guardianData.hasActiveCharacter()) {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            RPGClass rpgClass = activeCharacter.getRpgClass();
+                            String rpgClassStr = activeCharacter.getRpgClassStr();
 
-                            activeCharacter.getRpgCharacterStats().setMainHandBonuses(itemStack, rpgClass, true);
+                            activeCharacter.getRpgCharacterStats().setMainHandBonuses(itemStack, rpgClassStr, true);
                         }
                     }
                 }

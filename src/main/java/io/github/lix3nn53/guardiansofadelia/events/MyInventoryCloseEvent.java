@@ -75,7 +75,7 @@ public class MyInventoryCloseEvent implements Listener {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                rpgCharacterStats.recalculateEquipment(activeCharacter.getRpgClass());
+                rpgCharacterStats.recalculateEquipment(activeCharacter.getRpgClassStr());
             }
         }
         MerchantManager.clearSellItemClick(player);
