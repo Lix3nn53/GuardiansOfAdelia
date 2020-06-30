@@ -292,9 +292,6 @@ public enum MerchantPageType {
         lines.add(new MerchantGuiLine());
 
         ItemTier tier = ItemTier.COMMON;
-        int minStatValue = 0;
-        int maxStatValue = 0;
-        int minNumberOfStats = 0;
         int lineIndex = 0;
 
         lines.add(new MerchantGuiLine());
@@ -335,7 +332,7 @@ public enum MerchantPageType {
                     break;
             }
 
-            ItemStack itemStack = WeaponManager.get(weaponGearType, shopLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+            ItemStack itemStack = WeaponManager.get(weaponGearType, shopLevel, 0, tier, "", true);
 
             if (lines.get(lineIndex).isEmpty()) {
                 lines.get(lineIndex).addWord(itemStack, price);
@@ -370,9 +367,6 @@ public enum MerchantPageType {
         List<MerchantGuiLine> lines = new ArrayList<>();
 
         ItemTier tier = ItemTier.COMMON;
-        int minStatValue = 0;
-        int maxStatValue = 0;
-        int minNumberOfStats = 0;
         int lineIndex = 0;
 
         lines.add(new MerchantGuiLine());
@@ -386,7 +380,7 @@ public enum MerchantPageType {
                     price = 4;
                 }
 
-                ItemStack itemStack = ArmorManager.get(armorType, armorGearType, shopLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack itemStack = ArmorManager.get(armorType, armorGearType, shopLevel, 0, tier, "", true);
 
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(itemStack, price);
@@ -424,9 +418,6 @@ public enum MerchantPageType {
         lines.add(new MerchantGuiLine());
 
         ItemTier tier = ItemTier.COMMON;
-        int minStatValue = 0;
-        int maxStatValue = 0;
-        int minNumberOfStats = 0;
         int lineIndex = 0;
 
         lines.add(new MerchantGuiLine());
@@ -437,7 +428,7 @@ public enum MerchantPageType {
                 price = 3;
             }
 
-            ItemStack itemStack = ShieldManager.get(shieldGearType, shopLevel, 0, tier, "", minStatValue, maxStatValue, minNumberOfStats);
+            ItemStack itemStack = ShieldManager.get(shieldGearType, shopLevel, 0, tier, "", true);
 
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(itemStack, price);

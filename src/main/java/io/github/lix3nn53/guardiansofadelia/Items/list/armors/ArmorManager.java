@@ -15,8 +15,11 @@ public class ArmorManager {
 
     private final static HashMap<Integer, List<ArmorSet>> gearLevelToArmorSets = new HashMap<>();
 
-    public static ItemStack get(ArmorType armorType, ArmorGearType gearType, int gearLevel, int itemIndex, ItemTier tier, String itemTag, int minStatValue,
-                                int maxStatValue, int minNumberOfStats) {
+    public static ItemStack get(ArmorType armorType, ArmorGearType gearType, int gearLevel, int itemIndex, ItemTier tier, String itemTag, boolean noStats) {
+        int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfStatsNormal();
+        int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel);
+        int maxStatValue = noStats ? 0 : GearLevel.getMaxStatValue(gearLevel);
+
         List<ArmorSet> templates = gearLevelToArmorSets.get(gearLevel);
 
         ArmorSet armorSet = templates.get(itemIndex);

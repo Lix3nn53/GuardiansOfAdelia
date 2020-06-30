@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
 import org.bukkit.Bukkit;
@@ -39,11 +38,8 @@ public class ActionLoader {
             int gearLevel = configurationSection.getInt("gearLevel");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
             String itemTag = configurationSection.getString("itemTag");
-            int minStatValue = GearLevel.getMinStatValue(gearLevel);
-            int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
-            int minNumberOfStats = itemTier.getMinNumberOfStatsNormal();
 
-            return new GiveWeaponAction(gearLevel, itemTier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+            return new GiveWeaponAction(gearLevel, itemTier, itemTag);
         } else if (actionType.equals(InvincibleGiveAction.class.getSimpleName())) {
             long duration = configurationSection.getLong("duration");
 

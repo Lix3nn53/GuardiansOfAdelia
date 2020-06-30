@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.Items.config;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
@@ -37,11 +36,8 @@ public class ItemReferenceLoader {
             int itemIndex = configurationSection.getInt("itemIndex");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
             String itemTag = configurationSection.getString("itemTag");
-            int minStatValue = GearLevel.getMinStatValue(gearLevel);
-            int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
-            int minNumberOfStats = itemTier.getMinNumberOfStatsNormal();
 
-            return ArmorManager.get(armorType, gearType, gearLevel, itemIndex, itemTier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+            return ArmorManager.get(armorType, gearType, gearLevel, itemIndex, itemTier, itemTag, false);
         } else if (itemType.equals("Egg")) {
             String petType = configurationSection.getString("petType");
 
@@ -57,33 +53,24 @@ public class ItemReferenceLoader {
             RPGSlotType rpgSlotType = RPGSlotType.valueOf(configurationSection.getString("rpgSlotType"));
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
             String itemTag = configurationSection.getString("itemTag");
-            int minStatValue = GearLevel.getMinStatValue(gearLevel);
-            int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
-            int minNumberOfStats = itemTier.getMinNumberOfStatsPassive();
 
-            return PassiveManager.get(gearLevel, itemIndex, rpgSlotType, itemTier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+            return PassiveManager.get(gearLevel, itemIndex, rpgSlotType, itemTier, itemTag, false);
         } else if (itemType.equals("Weapon")) {
             WeaponGearType gearType = WeaponGearType.valueOf(configurationSection.getString("weaponGearType"));
             int gearLevel = configurationSection.getInt("gearLevel");
             int itemIndex = configurationSection.getInt("itemIndex");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
             String itemTag = configurationSection.getString("itemTag");
-            int minStatValue = GearLevel.getMinStatValue(gearLevel);
-            int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
-            int minNumberOfStats = itemTier.getMinNumberOfStatsNormal();
 
-            return WeaponManager.get(gearType, gearLevel, itemIndex, itemTier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+            return WeaponManager.get(gearType, gearLevel, itemIndex, itemTier, itemTag, false);
         } else if (itemType.equals("Shield")) {
             ShieldGearType gearType = ShieldGearType.valueOf(configurationSection.getString("shieldGearType"));
             int gearLevel = configurationSection.getInt("gearLevel");
             int itemIndex = configurationSection.getInt("itemIndex");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
             String itemTag = configurationSection.getString("itemTag");
-            int minStatValue = GearLevel.getMinStatValue(gearLevel);
-            int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
-            int minNumberOfStats = itemTier.getMinNumberOfStatsNormal();
 
-            return ShieldManager.get(gearType, gearLevel, itemIndex, itemTier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+            return ShieldManager.get(gearType, gearLevel, itemIndex, itemTier, itemTag, false);
         } else if (itemType.equals("Consumable")) {
             Consumable consumable = Consumable.valueOf(configurationSection.getString("consumable"));
 

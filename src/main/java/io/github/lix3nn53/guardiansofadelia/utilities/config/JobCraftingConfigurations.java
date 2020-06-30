@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
@@ -88,10 +87,7 @@ public class JobCraftingConfigurations {
                     for (String gearTypeStr : gearTypeStrList) {
                         WeaponGearType gearType = WeaponGearType.valueOf(gearTypeStr);
 
-                        int minNumberOfStatsNormal = itemTier.getMinNumberOfStatsNormal();
-                        int minStatValue = GearLevel.getMinStatValue(gearLevel);
-                        int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
-                        ItemStack weapon = WeaponManager.get(gearType, gearLevel, index, itemTier, tag, minStatValue, maxStatValue, minNumberOfStatsNormal);
+                        ItemStack weapon = WeaponManager.get(gearType, gearLevel, index, itemTier, tag, false);
 
                         CraftingManager.putCraftingTypeAndLevelToCraftingLine(weapon, craftingType, level, ingredients, ingredientAmounts);
                     }
@@ -123,12 +119,8 @@ public class JobCraftingConfigurations {
                     for (String gearTypeStr : gearTypeStrList) {
                         ArmorGearType gearType = ArmorGearType.valueOf(gearTypeStr);
 
-                        int minNumberOfStatsNormal = itemTier.getMinNumberOfStatsNormal();
-                        int minStatValue = GearLevel.getMinStatValue(gearLevel);
-                        int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
-
                         for (ArmorType armorType : ArmorType.values()) {
-                            ItemStack armor = ArmorManager.get(armorType, gearType, gearLevel, index, itemTier, tag, minStatValue, maxStatValue, minNumberOfStatsNormal);
+                            ItemStack armor = ArmorManager.get(armorType, gearType, gearLevel, index, itemTier, tag, false);
 
                             if (armor == null) {
                                 GuardiansOfAdelia.getInstance().getLogger().info("CRAFTING RECIPE NULL ARMOR");
@@ -185,10 +177,7 @@ public class JobCraftingConfigurations {
                 for (String rpgSlotTypeStr : slotTypesStr) {
                     RPGSlotType rpgSlotType = RPGSlotType.valueOf(rpgSlotTypeStr);
 
-                    int minNumberOfStatsPassive = itemTier.getMinNumberOfStatsPassive();
-                    int minStatValue = GearLevel.getMinStatValue(gearLevel);
-                    int maxStatValue = GearLevel.getMaxStatValue(gearLevel);
-                    ItemStack passive = PassiveManager.get(gearLevel, index, rpgSlotType, itemTier, tag, minStatValue, maxStatValue, minNumberOfStatsPassive);
+                    ItemStack passive = PassiveManager.get(gearLevel, index, rpgSlotType, itemTier, tag, false);
 
                     CraftingManager.putCraftingTypeAndLevelToCraftingLine(passive, craftingType, level, ingredients, ingredientAmounts);
                 }

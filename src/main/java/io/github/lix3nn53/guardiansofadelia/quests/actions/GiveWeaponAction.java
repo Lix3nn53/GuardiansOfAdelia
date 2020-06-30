@@ -19,17 +19,11 @@ public class GiveWeaponAction implements Action {
     private final int gearLevel;
     private final ItemTier tier;
     private final String itemTag;
-    private final int minStatValue;
-    private final int maxStatValue;
-    private final int minNumberOfStats;
 
-    public GiveWeaponAction(int gearLevel, ItemTier tier, String itemTag, int minStatValue, int maxStatValue, int minNumberOfStats) {
+    public GiveWeaponAction(int gearLevel, ItemTier tier, String itemTag) {
         this.gearLevel = gearLevel;
         this.tier = tier;
         this.itemTag = itemTag;
-        this.minStatValue = minStatValue;
-        this.maxStatValue = maxStatValue;
-        this.minNumberOfStats = minNumberOfStats;
     }
 
     @Override
@@ -43,7 +37,7 @@ public class GiveWeaponAction implements Action {
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
                 WeaponGearType defaultWeaponGearType = rpgClass.getDefaultWeaponGearType();
 
-                ItemStack weapon = WeaponManager.get(defaultWeaponGearType, gearLevel, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+                ItemStack weapon = WeaponManager.get(defaultWeaponGearType, gearLevel, 0, tier, itemTag, false);
                 InventoryUtils.giveItemToPlayer(player, weapon);
             }
         }

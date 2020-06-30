@@ -66,18 +66,15 @@ public class TutorialManager {
     private static void giveTutorialItems(Player player, String rpgClassStr) {
         InventoryUtils.setMenuItemPlayer(player);
         ItemTier tier = ItemTier.COMMON;
-        int minStatValue = 10;
-        int maxStatValue = 50;
-        int minNumberOfStats = 2;
         String itemTag = "Tutorial";
 
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         ArmorGearType armorGearType = rpgClass.getDefaultArmorGearType();
 
-        ItemStack helmet = ArmorManager.get(ArmorType.HELMET, armorGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack chest = ArmorManager.get(ArmorType.CHESTPLATE, armorGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack leggings = ArmorManager.get(ArmorType.LEGGINGS, armorGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
-        ItemStack boots = ArmorManager.get(ArmorType.BOOTS, armorGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack helmet = ArmorManager.get(ArmorType.HELMET, armorGearType, 1, 0, tier, itemTag, false);
+        ItemStack chest = ArmorManager.get(ArmorType.CHESTPLATE, armorGearType, 1, 0, tier, itemTag, false);
+        ItemStack leggings = ArmorManager.get(ArmorType.LEGGINGS, armorGearType, 1, 0, tier, itemTag, false);
+        ItemStack boots = ArmorManager.get(ArmorType.BOOTS, armorGearType, 1, 0, tier, itemTag, false);
 
         PlayerInventory playerInventory = player.getInventory();
 
@@ -88,7 +85,7 @@ public class TutorialManager {
 
         WeaponGearType mainhandGearType = rpgClass.getDefaultWeaponGearType();
 
-        ItemStack mainWeapon = WeaponManager.get(mainhandGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+        ItemStack mainWeapon = WeaponManager.get(mainhandGearType, 1, 0, tier, itemTag, false);
         playerInventory.setItem(4, mainWeapon);
 
         if (rpgClass.hasDefaultOffhand()) {
@@ -100,7 +97,7 @@ public class TutorialManager {
                 if (!shieldGearTypes.isEmpty()) {
                     ShieldGearType shieldGearType = shieldGearTypes.get(0);
 
-                    ItemStack shield = ShieldManager.get(shieldGearType, 1, 0, tier, itemTag, minStatValue, maxStatValue, minNumberOfStats);
+                    ItemStack shield = ShieldManager.get(shieldGearType, 1, 0, tier, itemTag, false);
                     playerInventory.setItemInOffHand(shield);
                 }
             }

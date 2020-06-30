@@ -15,8 +15,11 @@ public class ShieldManager {
 
     private final static HashMap<Integer, List<ShieldSet>> gearLevelToShields = new HashMap<>();
 
-    public static ItemStack get(ShieldGearType gearType, int gearLevel, int itemIndex, ItemTier tier, String itemTag, int minStatValue,
-                                int maxStatValue, int minNumberOfStats) {
+    public static ItemStack get(ShieldGearType gearType, int gearLevel, int itemIndex, ItemTier tier, String itemTag, boolean noStats) {
+        int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfStatsNormal();
+        int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel);
+        int maxStatValue = noStats ? 0 : GearLevel.getMaxStatValue(gearLevel);
+
         Material material = Material.SHIELD;
 
         List<ShieldSet> shieldItemTemplates = gearLevelToShields.get(gearLevel);

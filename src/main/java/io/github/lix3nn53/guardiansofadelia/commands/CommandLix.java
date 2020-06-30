@@ -222,7 +222,7 @@ public class CommandLix implements CommandExecutor {
                 if (args.length == 3) {
                     WeaponGearType weaponGearType = WeaponGearType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
-                    ItemStack weapon = WeaponManager.get(weaponGearType, no, 0, ItemTier.LEGENDARY, "Command", 20, 40, 5);
+                    ItemStack weapon = WeaponManager.get(weaponGearType, no, 0, ItemTier.LEGENDARY, "Command", false);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("companion")) {
@@ -281,7 +281,7 @@ public class CommandLix implements CommandExecutor {
                 if (args.length == 3) {
                     RPGSlotType rpgSlotType = RPGSlotType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
-                    ItemStack passive = PassiveManager.get(no, 0, rpgSlotType, ItemTier.LEGENDARY, "Command", 0, 100, 2);
+                    ItemStack passive = PassiveManager.get(no, 0, rpgSlotType, ItemTier.LEGENDARY, "Command", false);
                     InventoryUtils.giveItemToPlayer(player, passive);
                 }
             } else if (args[0].equals("model")) {
