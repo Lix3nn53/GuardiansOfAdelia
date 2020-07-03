@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.events;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.HelmetSkinApplyGui;
@@ -53,9 +53,9 @@ public class MyPlayerInteractEvent implements Listener {
             ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
             Material itemInMainHandType = itemInMainHand.getType();
 
-            ArmorType armorType = ArmorType.getArmorType(itemInMainHandType);
+            ArmorSlot armorSlot = ArmorSlot.getArmorSlot(itemInMainHandType);
 
-            if (armorType != null) {
+            if (armorSlot != null) {
                 UUID uuid = player.getUniqueId();
                 if (GuardianDataManager.hasGuardianData(uuid)) {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);

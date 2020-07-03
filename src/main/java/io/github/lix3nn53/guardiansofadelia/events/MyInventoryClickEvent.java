@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.HelmetSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
@@ -133,7 +133,7 @@ public class MyInventoryClickEvent implements Listener {
                         clickedInventory.setItem(slot, helmet);
                         event.setCancelled(true);
                         return;
-                    } else if (event.getRawSlot() == ArmorType.HELMET.getSlot()) {
+                    } else if (event.getRawSlot() == ArmorSlot.HELMET.getSlot()) {
                         PlayerInventory playerInventory = player.getInventory();
                         if (playerInventory.firstEmpty() != -1) { //has empty slot
                             EntityEquipment equipment = player.getEquipment();
@@ -145,7 +145,7 @@ public class MyInventoryClickEvent implements Listener {
                         }
                     }
                 }
-            } else if (event.getRawSlot() == ArmorType.HELMET.getSlot()) {
+            } else if (event.getRawSlot() == ArmorSlot.HELMET.getSlot()) {
                 if (cursorType.equals(HelmetSkin.getHelmetMaterial())) {
                     EntityEquipment equipment = player.getEquipment();
                     ItemStack helmet = equipment.getHelmet();

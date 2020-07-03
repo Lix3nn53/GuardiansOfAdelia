@@ -6,7 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingManager;
@@ -119,8 +119,8 @@ public class JobCraftingConfigurations {
                     for (String gearTypeStr : gearTypeStrList) {
                         ArmorGearType gearType = ArmorGearType.valueOf(gearTypeStr);
 
-                        for (ArmorType armorType : ArmorType.values()) {
-                            ItemStack armor = ArmorManager.get(armorType, gearType, gearLevel, index, itemTier, tag, false);
+                        for (ArmorSlot armorSlot : ArmorSlot.values()) {
+                            ItemStack armor = ArmorManager.get(armorSlot, gearType, gearLevel, index, itemTier, tag, false);
 
                             if (armor == null) {
                                 GuardiansOfAdelia.getInstance().getLogger().info("CRAFTING RECIPE NULL ARMOR");
@@ -128,9 +128,9 @@ public class JobCraftingConfigurations {
                             }
 
                             double multiplier = 1;
-                            if (armorType.equals(ArmorType.LEGGINGS)) {
+                            if (armorSlot.equals(ArmorSlot.LEGGINGS)) {
                                 multiplier = 0.75;
-                            } else if (armorType.equals(ArmorType.BOOTS) || armorType.equals(ArmorType.HELMET)) {
+                            } else if (armorSlot.equals(ArmorSlot.BOOTS) || armorSlot.equals(ArmorSlot.HELMET)) {
                                 multiplier = 0.5;
                             }
 

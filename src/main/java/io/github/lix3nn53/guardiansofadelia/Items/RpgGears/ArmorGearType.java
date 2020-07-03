@@ -1,20 +1,43 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorMaterial;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public enum ArmorGearType {
-    LIGHT_ARMOR,
-    MEDIUM_ARMOR,
-    HEAVY_ARMOR;
+    EARTH_ARMOR,
+    FIRE_ARMOR,
+    LIGHTNING_ARMOR,
+    WATER_ARMOR,
+    WIND_ARMOR;
+
+    public static ArmorGearType typeOf(ItemStack itemStack) {
+        if (PersistentDataContainerUtil.hasString(itemStack, "gearType")) {
+            String gearTypeStr = PersistentDataContainerUtil.getString(itemStack, "gearType");
+            try {
+                return ArmorGearType.valueOf(gearTypeStr);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        return null;
+    }
 
     public String getDisplayName() {
         switch (this) {
-            case LIGHT_ARMOR:
-                return "Light Armor";
-            case MEDIUM_ARMOR:
-                return "Medium Armor";
-            case HEAVY_ARMOR:
-                return "Heavy Armor";
+            case EARTH_ARMOR:
+                return "Earth Armor";
+            case FIRE_ARMOR:
+                return "Fire Armor";
+            case LIGHTNING_ARMOR:
+                return "Lightning Robe";
+            case WATER_ARMOR:
+                return "Water Armor";
+            case WIND_ARMOR:
+                return "Wind Armor";
         }
 
         return "";
@@ -22,11 +45,14 @@ public enum ArmorGearType {
 
     public double getHealthReduction() {
         switch (this) {
-            case HEAVY_ARMOR:
+            case EARTH_ARMOR:
                 return 1;
-            case MEDIUM_ARMOR:
-                return 0.6;
-            case LIGHT_ARMOR:
+            case FIRE_ARMOR:
+                return 0.7;
+            case WATER_ARMOR:
+            case WIND_ARMOR:
+                return 0.5;
+            case LIGHTNING_ARMOR:
                 return 0.4;
         }
 
@@ -35,11 +61,14 @@ public enum ArmorGearType {
 
     public double getPhysicalDefenseReduction() {
         switch (this) {
-            case HEAVY_ARMOR:
+            case EARTH_ARMOR:
                 return 1;
-            case MEDIUM_ARMOR:
-                return 0.6;
-            case LIGHT_ARMOR:
+            case FIRE_ARMOR:
+                return 0.7;
+            case WATER_ARMOR:
+            case WIND_ARMOR:
+                return 0.5;
+            case LIGHTNING_ARMOR:
                 return 0.4;
         }
 
@@ -48,11 +77,14 @@ public enum ArmorGearType {
 
     public double getMagicDefenseReduction() {
         switch (this) {
-            case HEAVY_ARMOR:
+            case LIGHTNING_ARMOR:
                 return 1;
-            case MEDIUM_ARMOR:
-                return 0.6;
-            case LIGHT_ARMOR:
+            case WATER_ARMOR:
+            case WIND_ARMOR:
+                return 0.7;
+            case FIRE_ARMOR:
+                return 0.5;
+            case EARTH_ARMOR:
                 return 0.4;
         }
 
@@ -61,14 +93,52 @@ public enum ArmorGearType {
 
     public ArmorMaterial getArmorMaterial() {
         switch (this) {
-            case HEAVY_ARMOR:
+            case EARTH_ARMOR:
+                return ArmorMaterial.NETHERITE;
+            case FIRE_ARMOR:
                 return ArmorMaterial.DIAMOND;
-            case MEDIUM_ARMOR:
+            case LIGHTNING_ARMOR:
                 return ArmorMaterial.IRON;
-            case LIGHT_ARMOR:
+            case WATER_ARMOR:
                 return ArmorMaterial.CHAINMAIL;
+            case WIND_ARMOR:
+                return ArmorMaterial.GOLDEN;
         }
 
         return null;
+    }
+
+    public void applySetEffect(Player player) {
+        switch (this) {
+            case EARTH_ARMOR:
+                player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0.7);
+                player.sendMessage("Armor set activated: knockback resistance");
+                break;
+            case FIRE_ARMOR:
+                break;
+            case LIGHTNING_ARMOR:
+                break;
+            case WATER_ARMOR:
+                break;
+            case WIND_ARMOR:
+                break;
+        }
+    }
+
+    public void clearSetEffect(Player player) {
+        switch (this) {
+            case EARTH_ARMOR:
+                player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0);
+                player.sendMessage("Armor set deactivated: knockback resistance");
+                break;
+            case FIRE_ARMOR:
+                break;
+            case LIGHTNING_ARMOR:
+                break;
+            case WATER_ARMOR:
+                break;
+            case WIND_ARMOR:
+                break;
+        }
     }
 }

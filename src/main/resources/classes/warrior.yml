@@ -8,13 +8,16 @@ color: "RED"
 classIconCustomModelData: 12
 attributeTierFire: 6
 attributeTierWater: 1
-attributeTierEarth: 6
+attributeTierEarth: 7
 attributeTierLightning: 1
-attributeTierWind: 1
+attributeTierWind: 0
 defaultWeaponGearType: "BATTLE_AXE"
 defaultArmorGearType: "MEDIUM_ARMOR"
 weaponGearTypes:
-  - ""
+  - "SWORD"
+  - "BATTLE_AXE"
+  - "WAR_HAMMER"
+  - "GREAT_SWORD"
 armorGearTypes:
   - "MEDIUM_ARMOR"
   - "HEAVY_ARMOR"

@@ -5,7 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
@@ -66,15 +66,15 @@ public class MobDropGenerator {
                     ItemStack droppedItem = ShieldManager.get(gearType, gearLevel, 0, tier, "", false);
                     drops.add(droppedItem);
                 } else {
-                    ArmorType[] armorTypes = ArmorType.values();
-                    int armorTypeRandom = rand.nextInt(armorTypes.length);
-                    ArmorType armorType = armorTypes[armorTypeRandom];
+                    ArmorSlot[] armorSlots = ArmorSlot.values();
+                    int armorTypeRandom = rand.nextInt(armorSlots.length);
+                    ArmorSlot armorSlot = armorSlots[armorTypeRandom];
 
                     ArmorGearType[] armorGearTypes = ArmorGearType.values();
                     int armorGearTypeRandom = rand.nextInt(armorGearTypes.length);
                     ArmorGearType armorGearType = armorGearTypes[armorGearTypeRandom];
 
-                    ItemStack droppedItem = ArmorManager.get(armorType, armorGearType, gearLevel, 0, tier, "", false);
+                    ItemStack droppedItem = ArmorManager.get(armorSlot, armorGearType, gearLevel, 0, tier, "", false);
                     drops.add(droppedItem);
                 }
             } else if (dropType == 2) {

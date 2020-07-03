@@ -3,13 +3,14 @@ package io.github.lix3nn53.guardiansofadelia.Items.list.armors;
 import org.bukkit.Material;
 
 public enum ArmorMaterial {
-    LEATHER,
-    IRON,
-    GOLDEN,
+    NETHERITE,
     DIAMOND,
-    CHAINMAIL;
+    IRON,
+    CHAINMAIL,
+    GOLDEN,
+    LEATHER;
 
-    public Material getMaterial(ArmorType armorType) {
-        return Material.valueOf(this.name() + "_" + armorType.name());
+    public Material getMaterial(ArmorSlot armorSlot) {
+        return Material.valueOf(this.name() + "_" + armorSlot.name());
     }
 }

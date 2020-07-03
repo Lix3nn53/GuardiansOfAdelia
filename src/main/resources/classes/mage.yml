@@ -14,7 +14,9 @@ attributeTierWind: 0
 defaultWeaponGearType: "WAND"
 defaultArmorGearType: "LIGHT_ARMOR"
 weaponGearTypes:
-  - ""
+  - "DAGGER"
+  - "STAFF"
+  - "WAND"
 armorGearTypes:
   - "LIGHT_ARMOR"
   - "MEDIUM_ARMOR"

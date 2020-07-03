@@ -1,0 +1,46 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+color: "GREEN"
+classIconCustomModelData: 16
+attributeTierFire: 6
+attributeTierWater: 1
+attributeTierEarth: 6
+attributeTierLightning: 1
+attributeTierWind: 1
+defaultWeaponGearType: "CROSSBOW"
+defaultArmorGearType: "LIGHT_ARMOR"
+weaponGearTypes:
+  - "DAGGER"
+  - "BOW"
+  - "CROSSBOW"
+armorGearTypes:
+  - "MEDIUM_ARMOR"
+  - "HEAVY_ARMOR"
+hasDefaultOffhand: false
+skillOne:
+  name: "Power Slash"
+  customModelData: 15
+  description:
+    - "Deal damage to nearby enemies"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+  trigger:
+    componentType: "SelfTarget"
+    childComponentCount: 1
+    child1:

@@ -15,21 +15,21 @@ public class ArmorManager {
 
     private final static HashMap<Integer, List<ArmorSet>> gearLevelToArmorSets = new HashMap<>();
 
-    public static ItemStack get(ArmorType armorType, ArmorGearType gearType, int gearLevel, int itemIndex, ItemTier tier, String itemTag, boolean noStats) {
+    public static ItemStack get(ArmorSlot armorSlot, ArmorGearType gearType, int gearLevel, int setIndex, ItemTier tier, String itemTag, boolean noStats) {
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfStatsNormal();
         int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel);
         int maxStatValue = noStats ? 0 : GearLevel.getMaxStatValue(gearLevel);
 
-        List<ArmorSet> templates = gearLevelToArmorSets.get(gearLevel);
+        List<ArmorSet> sets = gearLevelToArmorSets.get(gearLevel);
 
-        ArmorSet armorSet = templates.get(itemIndex);
+        ArmorSet armorSet = sets.get(setIndex);
 
-        String name = armorSet.getName(armorType);
-        Material material = armorSet.getMaterial(armorType, gearType);
-        int level = armorSet.getReqLevel(armorType);
-        int health = armorSet.getHealth(armorType, gearType);
-        int defense = armorSet.getDefense(armorType, gearType);
-        int magicDefense = armorSet.getMagicDefense(armorType, gearType);
+        String name = armorSet.getName(armorSlot);
+        Material material = armorSet.getMaterial(armorSlot, gearType);
+        int level = armorSet.getReqLevel(armorSlot);
+        int health = armorSet.getHealth(armorSlot, gearType);
+        int defense = armorSet.getDefense(armorSlot, gearType);
+        int magicDefense = armorSet.getMagicDefense(armorSlot, gearType);
 
         final GearArmor gearArmor = new GearArmor(name, tier, itemTag, material, level,
                 gearType, health,

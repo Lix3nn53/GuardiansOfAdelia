@@ -6,13 +6,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-public enum ArmorType {
+public enum ArmorSlot {
     HELMET,
     CHESTPLATE,
     LEGGINGS,
     BOOTS;
 
-    public static ArmorType getArmorType(Material material) {
+    public static ArmorSlot getArmorSlot(Material material) {
         if (material.equals(Material.AIR)) return null;
         String type = material.name();
         if (type.endsWith("_HELMET") || type.endsWith("_SKULL") || material.equals(HelmetSkin.getHelmetMaterial()))
@@ -23,12 +23,12 @@ public enum ArmorType {
         return null;
     }
 
-    public static ArmorType getArmorType(ItemStack itemStack) {
+    public static ArmorSlot getArmorSlot(ItemStack itemStack) {
         if (itemStack == null) return null;
-        Material material = itemStack.getType();
-        if (material.equals(Material.AIR)) return null;
-        String type = material.name();
-        if (type.endsWith("_HELMET") || type.endsWith("_SKULL") || material.equals(HelmetSkin.getHelmetMaterial()))
+        Material mat = itemStack.getType();
+        if (mat.equals(Material.AIR)) return null;
+        String type = mat.name();
+        if (type.endsWith("_HELMET") || type.endsWith("_SKULL") || mat.equals(HelmetSkin.getHelmetMaterial()))
             return HELMET;
         else if (type.endsWith("_CHESTPLATE")) return CHESTPLATE;
         else if (type.endsWith("_LEGGINGS")) return LEGGINGS;

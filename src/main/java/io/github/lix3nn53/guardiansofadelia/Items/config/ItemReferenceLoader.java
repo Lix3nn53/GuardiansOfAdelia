@@ -8,7 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
@@ -30,14 +30,14 @@ public class ItemReferenceLoader {
         }
 
         if (itemType.equals("Armor")) {
-            ArmorType armorType = ArmorType.valueOf(configurationSection.getString("armorType"));
+            ArmorSlot armorSlot = ArmorSlot.valueOf(configurationSection.getString("armorType"));
             ArmorGearType gearType = ArmorGearType.valueOf(configurationSection.getString("armorGearType"));
             int gearLevel = configurationSection.getInt("gearLevel");
             int itemIndex = configurationSection.getInt("itemIndex");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
             String itemTag = configurationSection.getString("itemTag");
 
-            return ArmorManager.get(armorType, gearType, gearLevel, itemIndex, itemTier, itemTag, false);
+            return ArmorManager.get(armorSlot, gearType, gearLevel, itemIndex, itemTier, itemTag, false);
         } else if (itemType.equals("Egg")) {
             String petType = configurationSection.getString("petType");
 

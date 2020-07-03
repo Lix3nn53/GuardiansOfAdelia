@@ -18,28 +18,28 @@ public class ArmorSet {
         this.magicDefense = magicDefense;
     }
 
-    public String getName(ArmorType armorType) {
-        return name + " " + armorType.getDisplayName();
+    public String getName(ArmorSlot armorSlot) {
+        return name + " " + armorSlot.getDisplayName();
     }
 
-    public int getReqLevel(ArmorType armorType) {
-        return baseReqLevel + armorType.getReqLevelAddition();
+    public int getReqLevel(ArmorSlot armorSlot) {
+        return baseReqLevel + armorSlot.getReqLevelAddition();
     }
 
-    public int getHealth(ArmorType armorType, ArmorGearType gearType) {
-        return (int) (health * armorType.getAttributeReduction() * gearType.getHealthReduction() + 0.5);
+    public int getHealth(ArmorSlot armorSlot, ArmorGearType gearType) {
+        return (int) (health * armorSlot.getAttributeReduction() * gearType.getHealthReduction() + 0.5);
     }
 
-    public int getDefense(ArmorType armorType, ArmorGearType gearType) {
-        return (int) (defense * armorType.getAttributeReduction() * gearType.getPhysicalDefenseReduction() + 0.5);
+    public int getDefense(ArmorSlot armorSlot, ArmorGearType gearType) {
+        return (int) (defense * armorSlot.getAttributeReduction() * gearType.getPhysicalDefenseReduction() + 0.5);
     }
 
-    public int getMagicDefense(ArmorType armorType, ArmorGearType gearType) {
-        return (int) (magicDefense * armorType.getAttributeReduction() * gearType.getMagicDefenseReduction() + 0.5);
+    public int getMagicDefense(ArmorSlot armorSlot, ArmorGearType gearType) {
+        return (int) (magicDefense * armorSlot.getAttributeReduction() * gearType.getMagicDefenseReduction() + 0.5);
     }
 
-    public Material getMaterial(ArmorType armorType, ArmorGearType gearType) {
-        return gearType.getArmorMaterial().getMaterial(armorType);
+    public Material getMaterial(ArmorSlot armorSlot, ArmorGearType gearType) {
+        return gearType.getArmorMaterial().getMaterial(armorSlot);
     }
 
     public int getBaseReqLevel() {

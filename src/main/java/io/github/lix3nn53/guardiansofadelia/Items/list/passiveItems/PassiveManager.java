@@ -14,14 +14,14 @@ public class PassiveManager {
 
     private final static HashMap<Integer, List<PassiveSet>> gearLevelToPassives = new HashMap<>();
 
-    public static ItemStack get(int gearLevel, int itemIndex, RPGSlotType rpgSlotType, ItemTier tier, String itemTag, boolean noStats) {
+    public static ItemStack get(int gearLevel, int setIndex, RPGSlotType rpgSlotType, ItemTier tier, String itemTag, boolean noStats) {
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfStatsPassive();
         int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel);
         int maxStatValue = noStats ? 0 : GearLevel.getMaxStatValue(gearLevel);
 
-        List<PassiveSet> templates = gearLevelToPassives.get(gearLevel);
+        List<PassiveSet> sets = gearLevelToPassives.get(gearLevel);
 
-        PassiveSet template = templates.get(itemIndex);
+        PassiveSet template = sets.get(setIndex);
 
         String name = template.getName(rpgSlotType);
         int level = template.getLevel(rpgSlotType);

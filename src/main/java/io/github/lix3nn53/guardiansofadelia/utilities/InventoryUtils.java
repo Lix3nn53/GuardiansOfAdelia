@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -228,14 +228,14 @@ public class InventoryUtils {
         inventory.setContents(inventoryContents);
     }
 
-    public static boolean isArmorEquippedOnRelatedSlot(ArmorType armorTypeOfCurrentItem, Player player) {
-        if (armorTypeOfCurrentItem.equals(ArmorType.HELMET)) {
+    public static boolean isArmorEquippedOnRelatedSlot(ArmorSlot armorSlotOfCurrentItem, Player player) {
+        if (armorSlotOfCurrentItem.equals(ArmorSlot.HELMET)) {
             return !isAirOrNull(player.getInventory().getHelmet());
-        } else if (armorTypeOfCurrentItem.equals(ArmorType.CHESTPLATE)) {
+        } else if (armorSlotOfCurrentItem.equals(ArmorSlot.CHESTPLATE)) {
             return !isAirOrNull(player.getInventory().getChestplate());
-        } else if (armorTypeOfCurrentItem.equals(ArmorType.LEGGINGS)) {
+        } else if (armorSlotOfCurrentItem.equals(ArmorSlot.LEGGINGS)) {
             return !isAirOrNull(player.getInventory().getLeggings());
-        } else if (armorTypeOfCurrentItem.equals(ArmorType.BOOTS)) {
+        } else if (armorSlotOfCurrentItem.equals(ArmorSlot.BOOTS)) {
             return !isAirOrNull(player.getInventory().getBoots());
         }
 

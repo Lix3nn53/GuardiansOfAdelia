@@ -9,7 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
 import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
@@ -372,15 +372,15 @@ public enum MerchantPageType {
         lines.add(new MerchantGuiLine());
 
         for (ArmorGearType armorGearType : ArmorGearType.values()) {
-            for (ArmorType armorType : ArmorType.values()) {
+            for (ArmorSlot armorSlot : ArmorSlot.values()) {
                 int price = 2; //boots and helmet
-                if (armorType.equals(ArmorType.LEGGINGS)) {
+                if (armorSlot.equals(ArmorSlot.LEGGINGS)) {
                     price = 3;
-                } else if (armorType.equals(ArmorType.CHESTPLATE)) {
+                } else if (armorSlot.equals(ArmorSlot.CHESTPLATE)) {
                     price = 4;
                 }
 
-                ItemStack itemStack = ArmorManager.get(armorType, armorGearType, shopLevel, 0, tier, "", true);
+                ItemStack itemStack = ArmorManager.get(armorSlot, armorGearType, shopLevel, 0, tier, "", true);
 
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(itemStack, price);
