@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -19,6 +20,14 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
 
     public AddPiercingToArrowShootFromCrossbowTrigger(List<Integer> piercingLevel) {
         this.piercingLevel = piercingLevel;
+    }
+
+    public AddPiercingToArrowShootFromCrossbowTrigger(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("piercingLevels")) {
+            configLoadError("piercingLevels");
+        }
+
+        this.piercingLevel = configurationSection.getIntegerList("piercingLevels");
     }
 
     @Override

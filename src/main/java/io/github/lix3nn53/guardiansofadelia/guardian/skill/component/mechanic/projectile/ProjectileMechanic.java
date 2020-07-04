@@ -200,6 +200,14 @@ public class ProjectileMechanic extends MechanicComponent {
             }
         }
 
+        //custom options
+        if (configurationSection.contains("addCasterAsFirstTargetIfHitSuccess")) {
+            this.addCasterAsFirstTargetIfHitSuccess = configurationSection.getBoolean("addCasterAsFirstTargetIfHitSuccess");
+        }
+        if (configurationSection.contains("addCasterAsSecondTargetIfHitFail")) {
+            this.addCasterAsSecondTargetIfHitFail = configurationSection.getBoolean("addCasterAsSecondTargetIfHitFail");
+        }
+
         if (configurationSection.contains("isProjectileInvisible")) {
             isProjectileInvisible = configurationSection.getBoolean("isProjectileInvisible");
         }
@@ -327,6 +335,7 @@ public class ProjectileMechanic extends MechanicComponent {
             targets.add(caster);
         }
 
+        //add hit to target list
         if (hit instanceof LivingEntity) {
 
             if (projectile instanceof Player) {

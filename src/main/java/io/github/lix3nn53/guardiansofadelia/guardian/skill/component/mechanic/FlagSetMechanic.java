@@ -3,9 +3,11 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FlagSetMechanic extends MechanicComponent {
@@ -18,6 +20,25 @@ public class FlagSetMechanic extends MechanicComponent {
         this.key = key;
         this.ticks = ticks;
         this.isUniqueCast = isUniqueCast;
+    }
+
+    public FlagSetMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("key")) {
+            configLoadError("key");
+        }
+
+        if (!configurationSection.contains("isUniqueCast")) {
+            configLoadError("isUniqueCast");
+        }
+
+        this.key = configurationSection.getString("key");
+        this.isUniqueCast = configurationSection.getBoolean("isUniqueCast");
+
+        if (!configurationSection.contains("ticks")) {
+            this.ticks = configurationSection.getIntegerList("ticks");
+        } else {
+            this.ticks = new ArrayList<>();
+        }
     }
 
     @Override

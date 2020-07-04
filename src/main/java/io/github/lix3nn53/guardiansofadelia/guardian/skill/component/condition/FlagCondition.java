@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -20,6 +21,24 @@ public class FlagCondition extends ConditionComponent {
         this.key = key;
         this.isSet = isSet;
         this.isUnique = isUnique;
+    }
+
+    public FlagCondition(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("key")) {
+            configLoadError("key");
+        }
+
+        if (!configurationSection.contains("isSet")) {
+            configLoadError("isSet");
+        }
+
+        if (!configurationSection.contains("isUnique")) {
+            configLoadError("isUnique");
+        }
+
+        this.key = configurationSection.getString("key");
+        this.isSet = configurationSection.getBoolean("isSet");
+        this.isUnique = configurationSection.getBoolean("isUnique");
     }
 
     @Override

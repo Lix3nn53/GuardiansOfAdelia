@@ -22,17 +22,18 @@ armorGearTypes:
   - "HEAVY_ARMOR"
 hasDefaultOffhand: false
 skillOne:
-  name: "Power Slash"
-  customModelData: 15
+  name: "Explosive Arrow"
+  customModelData: 20
   description:
-    - "Deal damage to nearby enemies"
+    - "Shoot an arrow that deals area"
+    - "damage and pushes targets"
   manaCosts:
-    - 5
-    - 7
-    - 9
-    - 11
-    - 13
-    - 15
+    - 10
+    - 12
+    - 14
+    - 16
+    - 18
+    - 20
   cooldowns:
     - 12
     - 12
@@ -42,5 +43,384 @@ skillOne:
     - 12
   trigger:
     componentType: "SelfTarget"
+    childComponentCount: 2
+    child1:
+      componentType: "ProjectileMechanic"
+      projectileClass: "Arrow"
+      spreadType: "CONE"
+      speed: 2.7
+      amountList:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      angle: 30
+      right: 0
+      upward: 1
+      forward: 0
+      range: 200
+      mustHitToWork: true
+      particleType: "REDSTONE"
+      particleArrangement: "CIRCLE"
+      particleRadius: 0.5
+      particleAmount: 4
+      isProjectileInvisible: false
+      dustColor: 16753920
+      dustSize: 2
+      childComponentCount: 3
+      child1:
+        componentType: "AreaTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 30
+        radiusList:
+          - 2
+          - 2.5
+          - 3
+          - 3.5
+          - 4
+          - 4.5
+        childComponentCount: 2
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "RANGED"
+          damageList:
+            - 24
+            - 60
+            - 180
+            - 300
+            - 420
+            - 720
+        child2:
+          componentType: "PushMechanic"
+          pushType: "FIXED"
+          speedList:
+            - 2
+            - 2.4
+            - 2.8
+            - 3.2
+            - 3.6
+            - 4.2
+          centerSelf: true
+      child2:
+        componentType: "ParticleMechanic"
+        type: "EXPLOSION_HUGE"
+        radius: 3.4
+        amount: 2
+        upward: 0.5
+      child3:
+        componentType: "SoundMechanic"
+        goaSound: "SKILL_WIND_PUSH"
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_PROJECTILE_ICE"
+skillTwo:
+  name: "Volley"
+  customModelData: 22
+  description:
+    - "Fire multiple arrows in a cone"
+  manaCosts:
+    - 10
+    - 12
+    - 14
+    - 16
+    - 18
+    - 20
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+    childComponentCount: 2
+    child1:
+      componentType: "ProjectileMechanic"
+      projectileClass: "Arrow"
+      spreadType: "CONE"
+      speed: 2.7
+      amountList:
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+      angle: 30
+      right: 0
+      upward: 1
+      forward: 0
+      range: 200
+      mustHitToWork: true
+      childComponentCount: 3
+      child1:
+        componentType: "FilterCurrentTargets"
+        childComponentCount: 1
+        allies: false
+        enemy: true
+        self: false
+        max: 10
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "RANGED"
+          damageList:
+            - 24
+            - 60
+            - 180
+            - 300
+            - 420
+            - 720
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_MULTI_ARROW"
+skillThree:
+  name: "Hookshot"
+  customModelData: 32
+  description:
+    - "Fire a grapple particle projectile."
+    - "If it collides with terrain dash towards it,"
+    - "if it hits a target pull the target."
+  manaCosts:
+    - 30
+    - 32
+    - 34
+    - 36
+    - 38
+    - 40
+  cooldowns:
+    - 21
+    - 21
+    - 21
+    - 21
+    - 21
+    - 21
+  trigger:
+    componentType: "SelfTarget"
+    childComponentCount: 3
+    child1:
+      componentType: "ProjectileMechanic"
+      projectileClass: "Arrow"
+      spreadType: "CONE"
+      speed: 1.9
+      amountList:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      angle: 30
+      right: 0
+      upward: 1
+      forward: 0
+      range: 90
+      mustHitToWork: false
+      particleType: "REDSTONE"
+      particleArrangement: "CIRCLE"
+      particleRadius: 0.5
+      particleAmount: 4
+      isProjectileInvisible: true
+      dustColor: 8421504
+      dustSize: 2
+      addCasterAsFirstTargetIfHitSuccess: true
+      addCasterAsSecondTargetIfHitFail: true
+      childComponentCount: 2
+      child1:
+        componentType: "PushMechanic"
+        pushType: "FIXED"
+        speedList:
+          - -3
+          - -3.25
+          - -3.5
+          - -3.75
+          - -4
+          - -4.5
+        centerSelf: false
+      child2:
+        componentType: "ImmunityMechanic"
+        damageCause: "FALL"
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_PROJECTILE_FIRE"
+    child3:
+      componentType: "LandTrigger"
+      childComponentCount: 1
+      child1:
+        componentType: "ImmunityRemoveMechanic"
+        damageCause: FALL
+        delay: 5
+skillPassive:
+  name: "Piercing Arrow"
+  customModelData: 21
+  description:
+    - "Your arrows shot from crossbows pierces through targets"
+  manaCosts:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  cooldowns:
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+  trigger:
+    componentType: "InitializeTrigger"
     childComponentCount: 1
     child1:
+      componentType: "AddPiercingToArrowShootFromCrossbowTrigger"
+      piercingLevels:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+skillUltimate:
+  name: "Bear Trap"
+  customModelData: 55
+  description:
+    - "Place a trap that triggers when"
+    - "an enemy steps on it."
+    - "Stuns and marks the target when triggered."
+  manaCosts:
+    - 30
+    - 30
+    - 30
+    - 30
+    - 30
+    - 30
+  cooldowns:
+    - 35
+    - 33
+    - 31
+    - 29
+    - 27
+    - 25
+  trigger:
+    componentType: "SelfTarget"
+    childComponentCount: 1
+    child1:
+      componentType: "NearbyEntityCondition"
+      entityType: ""
+      displayNameContains: "< Trap"
+      radius: 6
+      mustExist: false
+      childComponentCount: 1
+      child1:
+        componentType: "HologramMechanic"
+        helmetType: "IRON_PICKAXE"
+        customModelData: 5
+        durations:
+          - 50
+          - 55
+          - 60
+          - 65
+          - 70
+          - 80
+        displayText: "< Trap %caster% >"
+        childComponentCount: 1
+        child1:
+          componentType: "RepeatMechanic"
+          period: 10
+          repetitions:
+            - 120
+            - 140
+            - 160
+            - 180
+            - 200
+            - 240
+          childComponentCount: 2
+          child1:
+            componentType: "AreaTarget"
+            allies: false
+            enemy: true
+            self: false
+            max: 30
+            radiusList:
+              - 2
+              - 2.5
+              - 3
+              - 3.5
+              - 4
+              - 4.5
+            childComponentCount: 8
+            child1:
+              componentType: "ParticleMechanic"
+              type: "EXPLOSION_LARGE"
+              radius: 1.4
+              amount: 2
+              upward: 0.8
+            child2:
+              componentType: "DisarmMechanic"
+              durations:
+                - 60
+                - 70
+                - 80
+                - 90
+                - 100
+                - 120
+            child3:
+              componentType: "RootMechanic"
+              durations:
+                - 60
+                - 70
+                - 80
+                - 90
+                - 100
+                - 120
+              lockY: true
+            child4:
+              componentType: "SilenceMechanic"
+              durations:
+                - 60
+                - 70
+                - 80
+                - 90
+                - 100
+                - 120
+            child5:
+              componentType: "RemoveNearbyHologramMechanic"
+              displayName: "< Trap %caster% >"
+              ranges:
+                - 2.4
+                - 2.4
+                - 2.4
+                - 2.4
+                - 2.4
+                - 2.4
+            child6:
+              componentType: "SoundMechanic"
+              goaSound: "SKILL_STUN_HIT"
+            child7:
+              componentType: "SelfTarget"
+              childComponentCount: 1
+              child1:
+                componentType: "FlagSetMechanic"
+                key: ""
+                isUniqueCast: true
+          child2:
+            componentType: "SelfTarget"
+            childComponentCount: 1
+            child1:
+              componentType: "FlagCondition"
+              key: "shouldStopSkill"
+              isSet: true
+              isUnique: true
+              childComponentCount: 2
+              child1:
+                componentType: "RepeatCancelMechanic"
+              child2:
+                componentType: "FlagRemoveMechanic"
+                key: "shouldStopSkill"
+                isUniqueCast: true
+

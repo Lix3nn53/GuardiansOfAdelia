@@ -35,6 +35,28 @@ public class HologramMechanic extends MechanicComponent {
         DISPLAYTEXT = displayText;
     }
 
+    public HologramMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("helmetType")) {
+            configLoadError("helmetType");
+        }
+
+        if (!configurationSection.contains("customModelData")) {
+            configLoadError("customModelData");
+        }
+
+        if (!configurationSection.contains("durations")) {
+            configLoadError("durations");
+        }
+
+        this.HELMET = Material.valueOf(configurationSection.getString("helmetType"));
+        this.CUSTOMMODELDATA = configurationSection.getInt("customModelData");
+        this.DURATION = configurationSection.getIntegerList("durations");
+
+        if (configurationSection.contains("displayText")) {
+            this.DISPLAYTEXT = configurationSection.getString("displayText");
+        }
+    }
+
     /**
      * passes created hologram to children
      *
@@ -91,27 +113,5 @@ public class HologramMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
-    }
-
-    public HologramMechanic(ConfigurationSection configurationSection) {
-        if (!configurationSection.contains("helmetType")) {
-            configLoadError("helmetType");
-        }
-
-        if (!configurationSection.contains("customModelData")) {
-            configLoadError("customModelData");
-        }
-
-        if (!configurationSection.contains("durations")) {
-            configLoadError("durations");
-        }
-
-        this.HELMET = Material.valueOf(configurationSection.getString("helmetType"));
-        this.CUSTOMMODELDATA = configurationSection.getInt("customModelData");
-        this.DURATION = configurationSection.getIntegerList("durations");
-
-        if (configurationSection.contains("displayText")) {
-            this.DISPLAYTEXT = configurationSection.getString("displayText");
-        }
     }
 }

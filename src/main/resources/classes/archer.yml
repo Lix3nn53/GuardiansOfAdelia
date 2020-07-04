@@ -62,7 +62,7 @@ skillOne:
       range: 200
       mustHitToWork: true
       particleType: "REDSTONE"
-      particleArrangement: "SPHERE"
+      particleArrangement: "CIRCLE"
       particleRadius: 0.5
       particleAmount: 4
       isProjectileInvisible: false

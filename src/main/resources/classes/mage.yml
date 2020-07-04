@@ -132,7 +132,7 @@ skillTwo:
       range: 200
       mustHitToWork: true
       particleType: "VILLAGER_HAPPY"
-      particleArrangement: "SPHERE"
+      particleArrangement: "CIRCLE"
       particleRadius: 0.5
       particleAmount: 4
       isProjectileInvisible: true
@@ -403,7 +403,7 @@ skillUltimate:
         range: 200
         mustHitToWork: false
         particleType: "FLAME"
-        particleArrangement: "SPHERE"
+        particleArrangement: "CIRCLE"
         particleRadius: 2
         particleAmount: 32
         isProjectileInvisible: false

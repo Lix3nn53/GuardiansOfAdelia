@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -15,6 +16,19 @@ public class RemoveNearbyHologramMechanic extends MechanicComponent {
     public RemoveNearbyHologramMechanic(List<Double> ranges, String displayName) {
         this.ranges = ranges;
         this.displayName = displayName;
+    }
+
+    public RemoveNearbyHologramMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("ranges")) {
+            configLoadError("ranges");
+        }
+
+        if (!configurationSection.contains("displayName")) {
+            configLoadError("displayName");
+        }
+
+        this.displayName = configurationSection.getString("displayName");
+        this.ranges = configurationSection.getDoubleList("ranges");
     }
 
     @Override

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.Nearby;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -20,6 +21,29 @@ public class NearbyEntityCondition extends ConditionComponent {
         this.displayNameContains = displayNameContains;
         this.radius = radius;
         this.mustExist = mustExist;
+    }
+
+    public NearbyEntityCondition(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("entityType")) {
+            configLoadError("entityType");
+        }
+
+        if (!configurationSection.contains("displayNameContains")) {
+            configLoadError("displayNameContains");
+        }
+
+        if (!configurationSection.contains("radius")) {
+            configLoadError("radius");
+        }
+
+        if (!configurationSection.contains("mustExist")) {
+            configLoadError("mustExist");
+        }
+
+        this.entityType = EntityType.valueOf(configurationSection.getString("entityType"));
+        this.displayNameContains = configurationSection.getString("displayNameContains");
+        this.radius = configurationSection.getDouble("radius");
+        this.mustExist = configurationSection.getBoolean("mustExist");
     }
 
     @Override

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -14,6 +15,19 @@ public class FlagRemoveMechanic extends MechanicComponent {
     public FlagRemoveMechanic(String key, boolean isUniqueCast) {
         this.key = key;
         this.isUniqueCast = isUniqueCast;
+    }
+
+    public FlagRemoveMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("key")) {
+            configLoadError("key");
+        }
+
+        if (!configurationSection.contains("isUniqueCast")) {
+            configLoadError("isUniqueCast");
+        }
+
+        this.key = configurationSection.getString("key");
+        this.isUniqueCast = configurationSection.getBoolean("isUniqueCast");
     }
 
     @Override

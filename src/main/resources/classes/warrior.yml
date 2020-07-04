@@ -122,7 +122,7 @@ skillTwo:
       range: 200
       mustHitToWork: true
       particleType: "FLAME"
-      particleArrangement: "SPHERE"
+      particleArrangement: "CIRCLE"
       particleRadius: 0.5
       particleAmount: 4
       isProjectileInvisible: true

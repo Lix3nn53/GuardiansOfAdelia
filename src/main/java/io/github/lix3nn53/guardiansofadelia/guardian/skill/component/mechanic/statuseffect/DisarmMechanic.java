@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.s
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -14,6 +15,14 @@ public class DisarmMechanic extends MechanicComponent {
 
     public DisarmMechanic(List<Integer> duration) {
         this.duration = duration;
+    }
+
+    public DisarmMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("durations")) {
+            configLoadError("durations");
+        }
+
+        this.duration = configurationSection.getIntegerList("durations");
     }
 
     @Override
