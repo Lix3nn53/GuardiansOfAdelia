@@ -340,7 +340,7 @@ i37:
   dropTableNumber: 7
 i38:
   key: "GOBLIN_JOCKEY"
-  type: "PIG_ZOMBIE"
+  type: "PIGLIN"
   name: "Jockey Goblin"
   isBaby: true
   maxHealth: 2000
@@ -352,7 +352,7 @@ i38:
   mountName: "Goblin Chicken"
 i39:
   key: "GOBLIN_FIGHTER"
-  type: "PIG_ZOMBIE"
+  type: "PIGLIN"
   name: "Fighter Goblin"
   isBaby: true
   maxHealth: 3200
@@ -362,7 +362,7 @@ i39:
   mainhand: "SWORD_WOODEN"
 i40:
   key: "GOBLIN_ROGUE"
-  type: "PIG_ZOMBIE"
+  type: "PIGLIN"
   name: "Rogue Goblin"
   isBaby: true
   maxHealth: 2800
@@ -372,7 +372,7 @@ i40:
   mainhand: "DAGGER_WOOD"
 i41:
   key: "GOBLIN_MAGE"
-  type: "PIG_ZOMBIE"
+  type: "PIGLIN"
   name: "Mage Goblin"
   isBaby: true
   maxHealth: 2400
@@ -384,7 +384,7 @@ i41:
   movementSpeed: 0.15
 i42:
   key: "GOBLIN_SHAMAN"
-  type: "PIG_ZOMBIE"
+  type: "PIGLIN"
   name: "Shaman Goblin"
   isBaby: true
   maxHealth: 2400
@@ -396,7 +396,7 @@ i42:
   movementSpeed: 0.15
 i43:
   key: "ORC_FIGHTER"
-  type: "PIG_ZOMBIE"
+  type: "PIGLIN"
   name: "Fighter Orc"
   maxHealth: 4500
   damage: 480
@@ -405,7 +405,7 @@ i43:
   mainhand: "SWORD_WOODEN"
 i44:
   key: "ORC_JOCKEY"
-  type: "PIG_ZOMBIE"
+  type: "PIGLIN"
   name: "Jockey Orc"
   maxHealth: 2800
   damage: 320
@@ -416,7 +416,7 @@ i44:
   mountName: "Goblin Chicken"
 i45:
   key: "ORC_GLADIATOR"
-  type: "PIG_ZOMBIE"
+  type: "PIGLIN"
   name: "Gladiator Orc"
   maxHealth: 5000
   damage: 500
@@ -429,7 +429,7 @@ i45:
   boots: "BOOTS_IRON"
 i46:
   key: "ORC_MAGE"
-  type: "PIG_ZOMBIE"
+  type: "PIGLIN"
   name: "Mage Orc"
   maxHealth: 3400
   damage: 400
@@ -440,7 +440,7 @@ i46:
   movementSpeed: 0.15
 i47:
   key: "ORC_SHAMAN"
-  type: "PIG_ZOMBIE"
+  type: "PIGLIN"
   name: "Mage Shaman"
   maxHealth: 3400
   damage: 400

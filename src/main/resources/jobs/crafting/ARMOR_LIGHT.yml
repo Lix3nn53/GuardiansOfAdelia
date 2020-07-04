@@ -9,7 +9,7 @@ level1:
   itemSetCount: 2
   itemSet1:
     armorGearType:
-      - LIGHT_ARMOR
+      - WIND_ARMOR
     gearLevel: 1
     index: 0
     tier: MYSTIC

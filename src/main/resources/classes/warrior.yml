@@ -12,15 +12,15 @@ attributeTierEarth: 7
 attributeTierLightning: 1
 attributeTierWind: 0
 defaultWeaponGearType: "BATTLE_AXE"
-defaultArmorGearType: "MEDIUM_ARMOR"
+defaultArmorGearType: "FIRE_ARMOR"
 weaponGearTypes:
   - "SWORD"
   - "BATTLE_AXE"
   - "WAR_HAMMER"
   - "GREAT_SWORD"
 armorGearTypes:
-  - "MEDIUM_ARMOR"
-  - "HEAVY_ARMOR"
+  - "FIRE_ARMOR"
+  - "EARTH_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Power Slash"
@@ -43,10 +43,8 @@ skillOne:
     - 12
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 1
     child1:
       componentType: "AreaTarget"
-      childComponentCount: 2
       allies: false
       enemy: true
       self: false
@@ -60,17 +58,16 @@ skillOne:
         - 5
       child1:
         componentType: "DamageMechanic"
-          damageType: "MELEE"
-          damageList:
-            - 24
-            - 60
-            - 180
-            - 300
-            - 420
-            - 720
+        damageType: "MELEE"
+        damageList:
+          - 24
+          - 60
+          - 180
+          - 300
+          - 420
+          - 720
       child2:
         componentType: "SelfTarget"
-        childComponentCount: 2
         child1:
           componentType: "SoundMechanic"
           goaSound: "SKILL_LIGHTNING_NORMAL"
@@ -101,10 +98,8 @@ skillTwo:
     - 12
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 2
     child1:
       componentType: "ProjectileMechanic"
-      childComponentCount: 1
       projectileClass: "SmallFireball"
       spreadType: "CONE"
       speed: 1.9
@@ -128,7 +123,6 @@ skillTwo:
       isProjectileInvisible: true
       child1:
         componentType: "FilterCurrentTargets"
-        childComponentCount: 3
         allies: false
         enemy: true
         self: false
@@ -195,7 +189,6 @@ skillThree:
     - 90
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 2
     child1:
       componentType: "HologramMechanic"
       helmetType: "IRON_PICKAXE"
@@ -208,7 +201,6 @@ skillThree:
         - 40
         - 40
       displayText: "< Victory-Flag %caster% >"
-      childComponentCount: 1
       child1:
         componentType: "RepeatMechanic"
         period: 40
@@ -219,10 +211,8 @@ skillThree:
           - 20
           - 20
           - 20
-        childComponentCount: 2
         child1:
           componentType: "AreaTarget"
-          childComponentCount: 2
           allies: true
           enemy: false
           self: true
@@ -299,7 +289,6 @@ skillPassive:
     - 40
   trigger:
     componentType: "InitializeTrigger"
-    childComponentCount: 1
     child1:
       componentType: "TookPhysicalDamageTrigger"
       cooldowns:
@@ -309,15 +298,12 @@ skillPassive:
         - 40
         - 40
         - 40
-      childComponentCount: 1
       child1:
         componentType: "SelfTarget"
-        childComponentCount: 1
         child1:
           componentType: "HealthCondition"
           minPercent: 0.0
           maxPercent: 0.15
-          childComponentCount: 3
           child1:
             componentType: "SoundMechanic"
             goaSound: "SKILL_SCREAM"
@@ -375,7 +361,6 @@ skillUltimate:
     - 40
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 5
     child1:
       componentType: "LaunchMechanic"
       relative: "TARGET"
@@ -423,7 +408,6 @@ skillUltimate:
       dustSize: 2
     child5:
       componentType: "LandTrigger"
-      childComponentCount: 4
       child1:
         componentType: "ParticleMechanic"
         type: "VILLAGER_ANGRY"
@@ -438,7 +422,6 @@ skillUltimate:
         delay: 5
       child4:
         componentType: "AreaTarget"
-        childComponentCount: 2
         allies: false
         enemy: true
         self: false
@@ -452,11 +435,11 @@ skillUltimate:
           - 14
         child1:
           componentType: "DamageMechanic"
-            damageType: "MELEE"
-            damageList:
-              - 200
-              - 480
-              - 760
-              - 1200
-              - 1800
-              - 2600
+          damageType: "MELEE"
+          damageList:
+            - 200
+            - 480
+            - 760
+            - 1200
+            - 1800
+            - 2600

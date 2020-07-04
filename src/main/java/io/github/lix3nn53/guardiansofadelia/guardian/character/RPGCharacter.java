@@ -16,31 +16,29 @@ public final class RPGCharacter {
 
     private final RPGInventory rpgInventory = new RPGInventory();
 
-    private final HashMap<String, RPGClassStats> unlockedClasses;
+    private final HashMap<String, RPGClassStats> unlockedClasses = new HashMap<>();
     private String rpgClassStr;
     private SkillBar skillBar;
 
     private final RPGCharacterStats rpgCharacterStats;
 
     private List<Quest> questList = new ArrayList<>();
-    private List<Integer> turnedInQuests = new ArrayList<Integer>();
+    private List<Integer> turnedInQuests = new ArrayList<>();
 
     private final RPGCharacterCraftingStats craftingStats = new RPGCharacterCraftingStats();
 
     private ChatTag chatTag = ChatTag.NOVICE;
 
-    public RPGCharacter(String rpgClassStr, HashMap<String, RPGClassStats> unlockedClasses, Player player, int one, int two, int three, int passive, int ultimate) {
+    public RPGCharacter(String rpgClassStr, Player player, int one, int two, int three, int passive, int ultimate) {
         rpgCharacterStats = new RPGCharacterStats(player, rpgClassStr);
-        this.rpgClassStr = rpgClassStr;
-        this.unlockedClasses = unlockedClasses;
+        this.rpgClassStr = rpgClassStr.toUpperCase();
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet());
     }
 
-    public RPGCharacter(String rpgClassStr, HashMap<String, RPGClassStats> unlockedClasses, Player player) {
+    public RPGCharacter(String rpgClassStr, Player player) {
         rpgCharacterStats = new RPGCharacterStats(player, rpgClassStr);
-        this.rpgClassStr = rpgClassStr;
-        this.unlockedClasses = unlockedClasses;
+        this.rpgClassStr = rpgClassStr.toUpperCase();
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         this.skillBar = new SkillBar(player, 0, 0, 0, 0, 0, rpgClass.getSkillSet());
     }
@@ -53,39 +51,43 @@ public final class RPGCharacter {
         return unlockedClasses;
     }
 
-    public RPGClassStats getRPGClassStats(RPGClass rpgClass) {
-        return unlockedClasses.get(rpgClass);
+    public RPGClassStats getRPGClassStats(String rpgClassStr) {
+        return unlockedClasses.get(rpgClassStr.toUpperCase());
     }
 
     public RPGClassStats getRPGClassStats() {
-        return unlockedClasses.get(this.rpgClassStr);
+        return unlockedClasses.get(this.rpgClassStr.toUpperCase());
     }
 
     public void unlockClass(String newClass) {
-        if (!unlockedClasses.containsKey(newClass)) {
+        String s = newClass.toUpperCase();
+        if (!unlockedClasses.containsKey(s)) {
             RPGClassStats rpgClassStats = new RPGClassStats();
-            unlockedClasses.put(newClass, rpgClassStats);
+            unlockedClasses.put(s, rpgClassStats);
         }
     }
 
     public boolean changeClass(Player player, String newClassStr) {
-        if (!unlockedClasses.containsKey(newClassStr)) {
+        String s = newClassStr.toUpperCase();
+        if (!unlockedClasses.containsKey(s)) {
             return false;
         }
 
-        this.rpgClassStr = newClassStr;
-        RPGClassStats rpgClassStats = unlockedClasses.get(newClassStr);
+        if (this.rpgClassStr.equals(s)) return false;
+
+        this.rpgClassStr = s;
+        RPGClassStats rpgClassStats = unlockedClasses.get(s);
         int one = rpgClassStats.getOne();
         int two = rpgClassStats.getTwo();
         int three = rpgClassStats.getThree();
         int passive = rpgClassStats.getPassive();
         int ultimate = rpgClassStats.getUltimate();
 
-        RPGClass rpgClass = RPGClassManager.getClass(newClassStr);
+        RPGClass rpgClass = RPGClassManager.getClass(s);
         this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet());
         skillBar.remakeSkillBar();
 
-        rpgCharacterStats.setRpgClassStr(newClassStr);
+        rpgCharacterStats.setRpgClassStr(s);
         rpgCharacterStats.recalculateEquipment(rpgClassStr);
 
         return true;

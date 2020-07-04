@@ -633,6 +633,9 @@ public class RPGCharacterStats {
         boolean wearingSameArmorType = isWearingSameArmorType(helmetType, chestplateType, leggingsType, bootsType);
         if (wearingSameArmorType) {
             GearSetEffect setEffect = helmetType.getSetEffect();
+            if (this.armorGearTypeSetEffect != null) {
+                if (this.armorGearTypeSetEffect.equals(setEffect)) return;
+            }
             setEffect.applySetEffect(player);
             this.armorGearTypeSetEffect = setEffect;
         } else if (this.armorGearTypeSetEffect != null) {

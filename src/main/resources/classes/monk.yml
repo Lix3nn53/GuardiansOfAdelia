@@ -12,12 +12,12 @@ attributeTierEarth: 6
 attributeTierLightning: 1
 attributeTierWind: 0
 defaultWeaponGearType: "SPEAR"
-defaultArmorGearType: "MEDIUM_ARMOR"
+defaultArmorGearType: "FIRE_ARMOR"
 weaponGearTypes:
   - "SPEAR"
 armorGearTypes:
-  - "MEDIUM_ARMOR"
-  - "HEAVY_ARMOR"
+  - "FIRE_ARMOR"
+  - "EARTH_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Power Slash"
@@ -40,5 +40,4 @@ skillOne:
     - 12
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 1
     child1:

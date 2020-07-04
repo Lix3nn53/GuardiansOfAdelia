@@ -12,15 +12,15 @@ attributeTierEarth: 9
 attributeTierLightning: 1
 attributeTierWind: 0
 defaultWeaponGearType: "SWORD"
-defaultArmorGearType: "HEAVY_ARMOR"
+defaultArmorGearType: "EARTH_ARMOR"
 weaponGearTypes:
   - "SWORD"
   - "BATTLE_AXE"
   - "WAR_HAMMER"
   - "GREAT_SWORD"
 armorGearTypes:
-  - "MEDIUM_ARMOR"
-  - "HEAVY_ARMOR"
+  - "FIRE_ARMOR"
+  - "EARTH_ARMOR"
 hasDefaultOffhand: true
 isDefaultOffhandWeapon: false
 skillOne:
@@ -44,5 +44,4 @@ skillOne:
     - 12
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 1
     child1:

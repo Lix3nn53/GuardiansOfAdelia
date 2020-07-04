@@ -12,14 +12,14 @@ attributeTierEarth: 5
 attributeTierLightning: 6
 attributeTierWind: 0
 defaultWeaponGearType: "WAND"
-defaultArmorGearType: "LIGHT_ARMOR"
+defaultArmorGearType: "WIND_ARMOR"
 weaponGearTypes:
   - "DAGGER"
   - "STAFF"
   - "WAND"
 armorGearTypes:
-  - "LIGHT_ARMOR"
-  - "MEDIUM_ARMOR"
+  - "WIND_ARMOR"
+  - "FIRE_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Fireball"
@@ -43,7 +43,6 @@ skillOne:
     - 4
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 2
     child1:
       componentType: "ProjectileMechanic"
       projectileClass: "Fireball"
@@ -62,10 +61,8 @@ skillOne:
       forward: 0
       range: 200
       mustHitToWork: true
-      childComponentCount: 1
       child1:
         componentType: "AreaTarget"
-        childComponentCount: 1
         allies: false
         enemy: true
         self: false
@@ -79,14 +76,14 @@ skillOne:
           - 4
         child1:
           componentType: "DamageMechanic"
-            damageType: "MAGIC"
-            damageList:
-              - 20
-              - 50
-              - 200
-              - 325
-              - 450
-              - 720
+          damageType: "MAGIC"
+          damageList:
+            - 20
+            - 50
+            - 200
+            - 325
+            - 450
+            - 720
     child2:
       componentType: "SoundMechanic"
       goaSound: "SKILL_FIRE_SLASH"
@@ -112,7 +109,6 @@ skillTwo:
     - 12
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 2
     child1:
       componentType: "ProjectileMechanic"
       projectileClass: "SmallFireball"
@@ -136,10 +132,8 @@ skillTwo:
       particleRadius: 0.5
       particleAmount: 4
       isProjectileInvisible: true
-      childComponentCount: 3
       child1:
         componentType: "AreaTarget"
-        childComponentCount: 4
         allies: false
         enemy: true
         self: false
@@ -153,14 +147,14 @@ skillTwo:
           - 4
         child1:
           componentType: "DamageMechanic"
-            damageType: "MAGIC"
-            damageList:
-              - 30
-              - 70
-              - 150
-              - 240
-              - 320
-              - 540
+          damageType: "MAGIC"
+          damageList:
+            - 30
+            - 70
+            - 150
+            - 240
+            - 320
+            - 540
         child2:
           componentType: "ParticleMechanic"
           type: "REDSTONE"
@@ -228,10 +222,8 @@ skillThree:
     - 14
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 1
     child1:
       componentType: "AreaTarget"
-      childComponentCount: 3
       allies: false
       enemy: true
       self: false
@@ -262,7 +254,6 @@ skillThree:
         upward: 0.5
       child3:
         componentType: "SelfTarget"
-        childComponentCount: 1
         child1:
           componentType: "SoundMechanic"
           goaSound: "SKILL_SONIC_BOOM"
@@ -288,7 +279,6 @@ skillPassive:
     - 40
   trigger:
     componentType: "InitializeTrigger"
-    childComponentCount: 1
     child1:
       componentType: "TookMeleeDamageTrigger"
       cooldowns:
@@ -298,18 +288,14 @@ skillPassive:
         - 40
         - 40
         - 40
-      childComponentCount: 1
       child1:
         componentType: "SelfTarget"
-        childComponentCount: 1
         child1:
           componentType: "HealthCondition"
           minPercent: 0.0
           maxPercent: 0.15
-          childComponentCount: 2
           child1:
             componentType: "AreaTarget"
-            childComponentCount: 2
             allies: false
             enemy: true
             self: false
@@ -367,7 +353,6 @@ skillUltimate:
     - 40
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 1
     child1:
       componentType: "SingleTarget"
       allies: false
@@ -382,7 +367,6 @@ skillUltimate:
         - 24
         - 24
       tolerance: 4
-      childComponentCount:
       child1:
         componentType: "ProjectileMechanic"
         projectileClass: "Fireball"
@@ -407,10 +391,8 @@ skillUltimate:
         particleRadius: 2
         particleAmount: 32
         isProjectileInvisible: false
-        childComponentCount: 3
         child1:
           componentType: "AreaTarget"
-          childComponentCount: 3
           allies: false
           enemy: true
           self: false

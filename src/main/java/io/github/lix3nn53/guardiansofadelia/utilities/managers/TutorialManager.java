@@ -24,7 +24,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -33,9 +32,8 @@ public class TutorialManager {
     public static void startTutorial(Player player, String rpgClassStr, int charNo, Location startLocation) {
         if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
-            HashMap<String, RPGClassStats> unlockedClasses = new HashMap<>();
-            unlockedClasses.put(rpgClassStr, new RPGClassStats());
-            RPGCharacter rpgCharacter = new RPGCharacter(rpgClassStr, unlockedClasses, player);
+            RPGCharacter rpgCharacter = new RPGCharacter(rpgClassStr, player);
+            rpgCharacter.unlockClass(rpgClassStr);
             guardianData.setActiveCharacter(rpgCharacter, charNo);
 
             int totalExpForLevel = RPGCharacterExperienceManager.getTotalRequiredExperience(90);

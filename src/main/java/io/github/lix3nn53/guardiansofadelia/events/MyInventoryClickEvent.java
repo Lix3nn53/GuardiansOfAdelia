@@ -618,8 +618,8 @@ public class MyInventoryClickEvent implements Listener {
                     String stripColor = ChatColor.stripColor(displayName);
                     String rpgClassStr = stripColor.toUpperCase();
 
-                    rpgCharacter.changeClass(player, rpgClassStr);
-                    player.closeInventory();
+                    boolean b = rpgCharacter.changeClass(player, rpgClassStr);
+                    if (b) player.closeInventory();
                 }
             }
         } else if (title.contains(ChatColor.LIGHT_PURPLE + "Skills (Points: ")) {

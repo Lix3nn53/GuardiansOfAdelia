@@ -12,15 +12,15 @@ attributeTierEarth: 6
 attributeTierLightning: 1
 attributeTierWind: 1
 defaultWeaponGearType: "DAGGER"
-defaultArmorGearType: "LIGHT_ARMOR"
+defaultArmorGearType: "WIND_ARMOR"
 weaponGearTypes:
   - "DAGGER"
   - "SWORD"
   - "BOW"
   - "CROSSBOW"
 armorGearTypes:
-  - "MEDIUM_ARMOR"
-  - "HEAVY_ARMOR"
+  - "FIRE_ARMOR"
+  - "EARTH_ARMOR"
 hasDefaultOffhand: true
 isDefaultOffhandWeapon: true
 skillOne:
@@ -44,5 +44,4 @@ skillOne:
     - 12
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 1
     child1:

@@ -12,14 +12,14 @@ attributeTierEarth: 6
 attributeTierLightning: 1
 attributeTierWind: 1
 defaultWeaponGearType: "CROSSBOW"
-defaultArmorGearType: "LIGHT_ARMOR"
+defaultArmorGearType: "WIND_ARMOR"
 weaponGearTypes:
   - "DAGGER"
   - "BOW"
   - "CROSSBOW"
 armorGearTypes:
-  - "MEDIUM_ARMOR"
-  - "HEAVY_ARMOR"
+  - "FIRE_ARMOR"
+  - "EARTH_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Explosive Arrow"
@@ -43,7 +43,6 @@ skillOne:
     - 12
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 2
     child1:
       componentType: "ProjectileMechanic"
       projectileClass: "Arrow"
@@ -69,7 +68,6 @@ skillOne:
       isProjectileInvisible: false
       dustColor: 16753920
       dustSize: 2
-      childComponentCount: 3
       child1:
         componentType: "AreaTarget"
         allies: false
@@ -83,7 +81,6 @@ skillOne:
           - 3.5
           - 4
           - 4.5
-        childComponentCount: 2
         child1:
           componentType: "DamageMechanic"
           damageType: "RANGED"
@@ -138,7 +135,6 @@ skillTwo:
     - 16
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 2
     child1:
       componentType: "ProjectileMechanic"
       projectileClass: "Arrow"
@@ -157,10 +153,8 @@ skillTwo:
       forward: 0
       range: 200
       mustHitToWork: true
-      childComponentCount: 3
       child1:
         componentType: "FilterCurrentTargets"
-        childComponentCount: 1
         allies: false
         enemy: true
         self: false
@@ -201,7 +195,6 @@ skillThree:
     - 21
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 3
     child1:
       componentType: "ProjectileMechanic"
       projectileClass: "Arrow"
@@ -229,7 +222,6 @@ skillThree:
       dustSize: 2
       addCasterAsFirstTargetIfHitSuccess: true
       addCasterAsSecondTargetIfHitFail: true
-      childComponentCount: 2
       child1:
         componentType: "PushMechanic"
         pushType: "FIXED"
@@ -249,7 +241,6 @@ skillThree:
       goaSound: "SKILL_PROJECTILE_FIRE"
     child3:
       componentType: "LandTrigger"
-      childComponentCount: 1
       child1:
         componentType: "ImmunityRemoveMechanic"
         damageCause: FALL
@@ -275,7 +266,6 @@ skillPassive:
     - 1
   trigger:
     componentType: "InitializeTrigger"
-    childComponentCount: 1
     child1:
       componentType: "AddPiercingToArrowShootFromCrossbowTrigger"
       piercingLevels:
@@ -308,14 +298,12 @@ skillUltimate:
     - 25
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 1
     child1:
       componentType: "NearbyEntityCondition"
-      entityType: ""
+      entityType: "ARMOR_STAND"
       displayNameContains: "< Trap"
       radius: 6
       mustExist: false
-      childComponentCount: 1
       child1:
         componentType: "HologramMechanic"
         helmetType: "IRON_PICKAXE"
@@ -328,7 +316,6 @@ skillUltimate:
           - 70
           - 80
         displayText: "< Trap %caster% >"
-        childComponentCount: 1
         child1:
           componentType: "RepeatMechanic"
           period: 10
@@ -339,7 +326,6 @@ skillUltimate:
             - 180
             - 200
             - 240
-          childComponentCount: 2
           child1:
             componentType: "AreaTarget"
             allies: false
@@ -353,7 +339,6 @@ skillUltimate:
               - 3.5
               - 4
               - 4.5
-            childComponentCount: 8
             child1:
               componentType: "ParticleMechanic"
               type: "EXPLOSION_LARGE"
@@ -403,20 +388,17 @@ skillUltimate:
               goaSound: "SKILL_STUN_HIT"
             child7:
               componentType: "SelfTarget"
-              childComponentCount: 1
               child1:
                 componentType: "FlagSetMechanic"
                 key: ""
                 isUniqueCast: true
           child2:
             componentType: "SelfTarget"
-            childComponentCount: 1
             child1:
               componentType: "FlagCondition"
               key: "shouldStopSkill"
               isSet: true
               isUnique: true
-              childComponentCount: 2
               child1:
                 componentType: "RepeatCancelMechanic"
               child2:

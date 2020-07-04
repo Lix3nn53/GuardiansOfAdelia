@@ -15,10 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.pr
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.DisarmMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.RootMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.FilterCurrentTargets;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.LocationTarget;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.*;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -30,13 +27,12 @@ public class SkillComponentLoader {
 
     public static SkillComponent loadSection(ConfigurationSection configurationSection) {
         GuardiansOfAdelia.getInstance().getLogger().info(configurationSection.getCurrentPath());
-        GuardiansOfAdelia.getInstance().getLogger().info(configurationSection.toString());
         SkillComponent skillComponent = loadComponent(configurationSection);
 
-        boolean hasChild = hasChild(configurationSection);
+        int childComponentCount = getChildComponentCount(configurationSection);
 
-        if (hasChild) {
-            List<SkillComponent> children = loadChildrenOfSection(configurationSection);
+        if (childComponentCount > 0) {
+            List<SkillComponent> children = loadChildrenOfSection(configurationSection, childComponentCount);
 
             for (SkillComponent child : children) {
                 skillComponent.addChildren(child);
@@ -142,34 +138,47 @@ public class SkillComponentLoader {
             return new FlagSetMechanic(configurationSection);
         } else if (componentType.equals(DisarmMechanic.class.getSimpleName())) {
             return new DisarmMechanic(configurationSection);
+        } else if (componentType.equals(ValueSetMechanic.class.getSimpleName())) {
+            return new ValueSetMechanic(configurationSection);
+        } else if (componentType.equals(SingleTarget.class.getSimpleName())) {
+            return new SingleTarget(configurationSection);
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info("NO SUCH COMPONENT IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info("NO SUCH COMPONENT IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info("NO SUCH COMPONENT IN LOADER: " + componentType);
 
         return null;
     }
 
-    private static boolean hasChild(ConfigurationSection configurationSection) {
-        int childComponentCount = configurationSection.getInt("childComponentCount");
+    private static int getChildComponentCount(ConfigurationSection configurationSection) {
+        int count = 0;
+        while (true) {
+            boolean contains = configurationSection.contains("child" + (count + 1));
+            if (contains) {
+                count++;
+            } else {
+                break;
+            }
+        }
 
-        return childComponentCount > 0;
+        return count;
     }
 
-    private static List<SkillComponent> loadChildrenOfSection(ConfigurationSection configurationSection) {
-        int childComponentCount = configurationSection.getInt("childComponentCount");
-
+    private static List<SkillComponent> loadChildrenOfSection(ConfigurationSection configurationSection, int childComponentCount) {
         List<SkillComponent> children = new ArrayList<>();
 
         for (int i = 1; i <= childComponentCount; i++) {
+            GuardiansOfAdelia.getInstance().getLogger().info(configurationSection.getCurrentPath() + ".child" + i);
             ConfigurationSection childSection = configurationSection.getConfigurationSection("child" + i);
 
             SkillComponent child = loadComponent(childSection);
             children.add(child);
 
-            boolean hasChild = hasChild(childSection);
+            int childComponentCountOfChild = getChildComponentCount(childSection);
 
-            if (hasChild) {
-                List<SkillComponent> childrenOfChild = loadChildrenOfSection(childSection);
+            if (childComponentCountOfChild > 0) {
+                List<SkillComponent> childrenOfChild = loadChildrenOfSection(childSection, childComponentCountOfChild);
 
                 for (SkillComponent childOfChild : childrenOfChild) {
                     child.addChildren(childOfChild);

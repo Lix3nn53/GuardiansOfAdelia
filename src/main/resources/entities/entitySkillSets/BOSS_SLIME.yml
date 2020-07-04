@@ -10,18 +10,15 @@ skill1:
   skillLevel: 1
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 2
     child1:
       componentType: "HoloMessageMechanic"
       message: "Heelp!"
       durationTicks: 30
     child2:
       componentType: "DelayMechanic"
-      childComponentCount: 1
       ticks: 25
       child1:
         componentType: "AreaTarget"
-        childComponentCount: 2
         allies: false
         enemy: true
         self: false
@@ -30,7 +27,6 @@ skill1:
           - 8
         child1:
           componentType: "SelfTarget"
-          childComponentCount: 1
           child1:
             componentType: "SoundMechanic"
             goaSound: "SKILL_HEAL"

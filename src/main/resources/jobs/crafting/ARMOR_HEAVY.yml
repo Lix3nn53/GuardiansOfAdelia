@@ -9,7 +9,7 @@ level1:
   itemSetCount: 2
   itemSet1:
     armorGearType:
-      - HEAVY_ARMOR
+      - EARTH_ARMOR
     gearLevel: 1
     index: 0
     tier: MYSTIC

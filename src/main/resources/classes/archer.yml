@@ -12,14 +12,14 @@ attributeTierEarth: 5
 attributeTierLightning: 1
 attributeTierWind: 0
 defaultWeaponGearType: "BOW"
-defaultArmorGearType: "LIGHT_ARMOR"
+defaultArmorGearType: "WIND_ARMOR"
 weaponGearTypes:
   - "DAGGER"
   - "BOW"
   - "CROSSBOW"
 armorGearTypes:
-  - "MEDIUM_ARMOR"
-  - "HEAVY_ARMOR"
+  - "FIRE_ARMOR"
+  - "EARTH_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Poison Arrow"
@@ -42,7 +42,6 @@ skillOne:
     - 16
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 2
     child1:
       componentType: "ProjectileMechanic"
       projectileClass: "Arrow"
@@ -68,14 +67,12 @@ skillOne:
       isProjectileInvisible: false
       dustColor: 65280
       dustSize: 2
-      childComponentCount: 1
       child1:
         componentType: "FilterCurrentTargets"
         allies: false
         enemy: true
         self: false
         max: 20
-        childComponentCount: 2
         child1:
           componentType: "DamageMechanic"
           damageType: "RANGED"
@@ -127,7 +124,6 @@ skillTwo:
     - 18
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 4
     child1:
       componentType: "PotionEffectMechanic"
       potionEffectType: "SPEED"
@@ -191,7 +187,6 @@ skillThree:
     - 18
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 5
     child1:
       componentType: "LaunchMechanic"
       relative: "CASTER"
@@ -237,7 +232,6 @@ skillThree:
       goaSound: "SKILL_VOID_SIGNAL"
     child5:
       componentType: "LandTrigger"
-      childComponentCount: 1
       child1:
         componentType: "ImmunityRemoveMechanic"
         damageCause: FALL
@@ -265,7 +259,6 @@ skillPassive:
     - 1
   trigger:
     componentType: "InitializeTrigger"
-    childComponentCount: 1
     child1:
       componentType: "RangedAttackTrigger"
       cooldowns:
@@ -275,15 +268,12 @@ skillPassive:
         - 1
         - 1
         - 1
-      childComponentCount: 2
       child1:
         componentType: "SelfTarget"
-        childComponentCount: 1
         child1:
           componentType: "ValueCondition"
           minValue: 2
           maxValue: 2
-          childComponentCount: 3
           child1:
             componentType: "BuffMechanic"
             buffType: "CRIT_CHANCE"
@@ -309,12 +299,10 @@ skillPassive:
             goaSound: "SKILL_BUFF"
       child2:
         componentType: "SelfTarget"
-        childComponentCount: 1
         child1:
           componentType: "ValueCondition"
           minValue: 0
           maxValue: 1
-          childComponentCount: 1
           child1:
             componentType: "ValueAddMechanic"
             valueToAdd: 1
@@ -340,7 +328,6 @@ skillUltimate:
     - 40
   trigger:
     componentType: "SelfTarget"
-    childComponentCount: 5
     child1:
       componentType: "LocationTarget"
       allies: false
@@ -354,7 +341,6 @@ skillUltimate:
         - 24
         - 24
         - 24
-      childComponentCount: 1
       child1:
         componentType: "RepeatMechanic"
         period: 28
@@ -365,7 +351,6 @@ skillUltimate:
           - 3
           - 3
           - 4
-        childComponentCount: 3
         child1:
           componentType: "ProjectileMechanic"
           projectileClass: "Arrow"
@@ -404,7 +389,6 @@ skillUltimate:
           forward: 0
           range: 200
           mustHitToWork: false
-          childComponentCount: 2
           child1:
             componentType: "ParticleMechanic"
             type: "REDSTONE"
@@ -415,7 +399,6 @@ skillUltimate:
             dustSize: 2
           child2:
             componentType: "AreaTarget"
-            childComponentCount: 3
             allies: false
             enemy: true
             self: false

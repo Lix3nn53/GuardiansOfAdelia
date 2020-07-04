@@ -203,7 +203,7 @@ public class MenuList {
 
                 String rpgClassStr = rpgCharacter.getRpgClassStr();
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-                RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats(rpgClass);
+                RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats(rpgClassStr);
                 int totalExp = rpgClassStats.getTotalExp();
                 int classLevel = RPGClassExperienceManager.getLevel(totalExp);
 
@@ -260,14 +260,20 @@ public class MenuList {
                     meta.setDisplayName(value.getClassString());
 
                     if (unlockedClasses.containsKey(valueStr)) {
+                        String rpgClassStr = rpgCharacter.getRpgClassStr();
                         int totalExp = unlockedClasses.get(valueStr).getTotalExp();
-                        itemStack.setType(Material.LIME_WOOL);
                         List<String> lore = new ArrayList<>();
                         lore.add("");
                         lore.add("Class: " + value.getClassString());
                         lore.add("Rank: " + RPGClassExperienceManager.getLevel(totalExp));
                         lore.add("");
-                        lore.add(ChatColor.GREEN + "Click to change to this class!");
+                        if (valueStr.equalsIgnoreCase(rpgClassStr)) {
+                            itemStack.setType(Material.PURPLE_WOOL);
+                            lore.add(ChatColor.LIGHT_PURPLE + "This is your current class");
+                        } else {
+                            itemStack.setType(Material.LIME_WOOL);
+                            lore.add(ChatColor.GREEN + "Click to change to this class!");
+                        }
                         meta.setLore(lore);
                     }
 

@@ -79,7 +79,7 @@ i8:
   mainhand: "BOW_SATET"
 i9:
   key: "BOSS_LAVA"
-  type: "PIG_ZOMBIE"
+  type: "PIGLIN"
   name: "Warchief Drogoth"
   maxHealth: 100000D
   damage: 2000

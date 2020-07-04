@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
@@ -29,7 +30,7 @@ public class ClassConfigurations {
 
     static void createConfigs() {
         createConfig("config", true);
-        createQuestLineConfigs();
+        createClassConfigs();
     }
 
     static void loadConfigs() {
@@ -62,19 +63,21 @@ public class ClassConfigurations {
         }
     }
 
-    private static void createQuestLineConfigs() {
+    private static void createClassConfigs() {
         List<String> classList = fileConfiguration.getStringList("classList");
 
         for (String fileName : classList) {
-            createConfig(fileName + ".yml", false);
+            createConfig(fileName, false);
         }
     }
 
     private static void loadClassConfigs() {
         for (String className : classNameToConfiguration.keySet()) {
+            GuardiansOfAdelia.getInstance().getLogger().info("className: " + className);
             FileConfiguration fileConfiguration = classNameToConfiguration.get(className);
 
             String colorStr = fileConfiguration.getString("color");
+            GuardiansOfAdelia.getInstance().getLogger().info("colorStr: " + colorStr);
             ChatColor color = ChatColor.valueOf(colorStr);
 
             int classIconCustomModelData = fileConfiguration.getInt("classIconCustomModelData");
@@ -108,22 +111,22 @@ public class ClassConfigurations {
             }
             if (fileConfiguration.contains("skillTwo")) {
                 ConfigurationSection skillSection = fileConfiguration.getConfigurationSection("skillTwo");
-                Skill skill = loadSkill(skillSection, 0);
+                Skill skill = loadSkill(skillSection, 1);
                 skillSet.put(1, skill);
             }
             if (fileConfiguration.contains("skillThree")) {
                 ConfigurationSection skillSection = fileConfiguration.getConfigurationSection("skillThree");
-                Skill skill = loadSkill(skillSection, 0);
+                Skill skill = loadSkill(skillSection, 2);
                 skillSet.put(2, skill);
             }
             if (fileConfiguration.contains("skillPassive")) {
                 ConfigurationSection skillSection = fileConfiguration.getConfigurationSection("skillPassive");
-                Skill skill = loadSkill(skillSection, 0);
+                Skill skill = loadSkill(skillSection, 3);
                 skillSet.put(3, skill);
             }
             if (fileConfiguration.contains("skillUltimate")) {
                 ConfigurationSection skillSection = fileConfiguration.getConfigurationSection("skillUltimate");
-                Skill skill = loadSkill(skillSection, 0);
+                Skill skill = loadSkill(skillSection, 4);
                 skillSet.put(4, skill);
             }
 
