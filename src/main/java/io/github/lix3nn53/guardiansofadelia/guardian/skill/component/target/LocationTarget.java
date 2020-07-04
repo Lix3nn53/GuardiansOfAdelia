@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.TemporaryEntity;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -22,6 +23,16 @@ public class LocationTarget extends TargetComponent {
     public LocationTarget(boolean allies, boolean enemy, boolean self, int max, List<Integer> range) {
         super(allies, enemy, self, max);
         this.range = range;
+    }
+
+    public LocationTarget(ConfigurationSection configurationSection) {
+        super(configurationSection);
+
+        if (!configurationSection.contains("ranges")) {
+            configLoadError("ranges");
+        }
+
+        this.range = configurationSection.getIntegerList("ranges");
     }
 
     @Override

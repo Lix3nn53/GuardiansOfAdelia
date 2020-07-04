@@ -22,10 +22,10 @@ armorGearTypes:
   - "HEAVY_ARMOR"
 hasDefaultOffhand: false
 skillOne:
-  name: "Power Slash"
-  customModelData: 15
+  name: "Poison Arrow"
+  customModelData: 27
   description:
-    - "Deal damage to nearby enemies"
+    - "Shoot an arrow that poisons target"
   manaCosts:
     - 5
     - 7
@@ -34,13 +34,410 @@ skillOne:
     - 13
     - 15
   cooldowns:
-    - 12
-    - 12
-    - 12
-    - 12
-    - 12
-    - 12
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
   trigger:
     componentType: "SelfTarget"
+    childComponentCount: 2
+    child1:
+      componentType: "ProjectileMechanic"
+      projectileClass: "Arrow"
+      spreadType: "CONE"
+      speed: 2.7
+      amountList:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      angle: 30
+      right: 0
+      upward: 1
+      forward: 0
+      range: 200
+      mustHitToWork: true
+      particleType: "REDSTONE"
+      particleArrangement: "SPHERE"
+      particleRadius: 0.5
+      particleAmount: 4
+      isProjectileInvisible: false
+      dustColor: 65280
+      dustSize: 2
+      childComponentCount: 1
+      child1:
+        componentType: "FilterCurrentTargets"
+        allies: false
+        enemy: true
+        self: false
+        max: 20
+        childComponentCount: 2
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "RANGED"
+          damageList:
+            - 16
+            - 40
+            - 120
+            - 200
+            - 290
+            - 480
+        child2:
+          componentType: "PotionEffectMechanic"
+          potionEffectType: "CONFUSION"
+          tickList:
+            - 140
+            - 150
+            - 160
+            - 170
+            - 180
+            - 200
+          amplifierList:
+            - 1
+            - 1
+            - 1
+            - 2
+            - 2
+            - 2
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_POISON_ARROW"
+skillTwo:
+  name: "Zephyr"
+  customModelData: 33
+  description:
+    - "Gain movement speed"
+  manaCosts:
+    - 15
+    - 17
+    - 19
+    - 21
+    - 23
+    - 25
+  cooldowns:
+    - 18
+    - 18
+    - 18
+    - 18
+    - 18
+    - 18
+  trigger:
+    componentType: "SelfTarget"
+    childComponentCount: 4
+    child1:
+      componentType: "PotionEffectMechanic"
+      potionEffectType: "SPEED"
+      tickList:
+        - 60
+        - 70
+        - 80
+        - 90
+        - 100
+        - 120
+      amplifierList:
+        - 1
+        - 2
+        - 2
+        - 3
+        - 3
+        - 4
+    child2:
+      componentType: "ParticleMechanic"
+      type: "EXPLOSION_HUGE"
+      radius: 3.4
+      amount: 2
+      upward: 0.5
+    child3:
+      componentType: "ParticleAnimationMechanic"
+      type: "REDSTONE"
+      radius: 1
+      amount: 4
+      frequency: 5
+      repeatAmount:
+        - 12
+        - 14
+        - 16
+        - 18
+        - 20
+        - 24
+      dustColor: 65535
+      dustSize: 8
+    child4:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_SONIC_BOOM"
+skillThree:
+  name: "Purple Wings"
+  customModelData: 41
+  description:
+    - "Jump backwards into the sky and"
+    - "gain resistance to fall damage"
+  manaCosts:
+    - 20
+    - 22
+    - 24
+    - 26
+    - 28
+    - 30
+  cooldowns:
+    - 18
+    - 18
+    - 18
+    - 18
+    - 18
+    - 18
+  trigger:
+    componentType: "SelfTarget"
+    childComponentCount: 5
+    child1:
+      componentType: "LaunchMechanic"
+      relative: "CASTER"
+      forwardSpeedList:
+        - -1.25
+        - -1.3
+        - -1.35
+        - -1.4
+        - -1.45
+        - -1.5
+      upwardSpeedList:
+        - 1.2
+        - 1.35
+        - 1.5
+        - 1.65
+        - 1.8
+        - 2
+      rightSpeedList:
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+    child2:
+      componentType: "ParticleAnimationMechanic"
+      type: "SPELL_WITCH"
+      radius: 1.2
+      amount: 12
+      frequency: 5
+      repeatAmount:
+        - 20
+        - 25
+        - 30
+        - 35
+        - 40
+        - 50
+    child3:
+      componentType: "ImmunityMechanic"
+      damageCause: "FALL"
+    child4:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_VOID_SIGNAL"
+    child5:
+      componentType: "LandTrigger"
+      childComponentCount: 1
+      child1:
+        componentType: "ImmunityRemoveMechanic"
+        damageCause: FALL
+        delay: 5
+skillPassive:
+  name: "Sharpshooter"
+  customModelData: 21
+  description:
+    - "Your every 2nd successful projectile hit"
+    - "gives you bonus critical chance"
+    - "(This can exceed the critical chance cap)"
+  manaCosts:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  cooldowns:
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+  trigger:
+    componentType: "InitializeTrigger"
     childComponentCount: 1
     child1:
+      componentType: "RangedAttackTrigger"
+      cooldowns:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      childComponentCount: 2
+      child1:
+        componentType: "SelfTarget"
+        childComponentCount: 1
+        child1:
+          componentType: "ValueCondition"
+          minValue: 2
+          maxValue: 2
+          childComponentCount: 3
+          child1:
+            componentType: "BuffMechanic"
+            buffType: "CRIT_CHANCE"
+            multiplier:
+              - 0.04
+              - 0.05
+              - 0.06
+              - 0.07
+              - 0.08
+              - 0.1
+            ticks:
+              - 160
+              - 180
+              - 200
+              - 220
+              - 240
+              - 300
+          child2:
+            componentType: "ValueSetMechanic"
+            value: 0
+          child3:
+            componentType: "SoundMechanic"
+            goaSound: "SKILL_BUFF"
+      child2:
+        componentType: "SelfTarget"
+        childComponentCount: 1
+        child1:
+          componentType: "ValueCondition"
+          minValue: 0
+          maxValue: 1
+          childComponentCount: 1
+          child1:
+            componentType: "ValueAddMechanic"
+            valueToAdd: 1
+skillUltimate:
+  name: "Make It Rain"
+  customModelData: 48
+  description:
+    - "Reveal an area with a flurry of arrows,"
+    - "dealing waves of damage to opponents"
+  manaCosts:
+    - 40
+    - 45
+    - 50
+    - 55
+    - 60
+    - 60
+  cooldowns:
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+  trigger:
+    componentType: "SelfTarget"
+    childComponentCount: 5
+    child1:
+      componentType: "LocationTarget"
+      allies: false
+      self: false
+      enemy: true
+      max: 30
+      ranges:
+        - 24
+        - 24
+        - 24
+        - 24
+        - 24
+        - 24
+      childComponentCount: 1
+      child1:
+        componentType: "RepeatMechanic"
+        period: 28
+        repetitions:
+          - 1
+          - 2
+          - 2
+          - 3
+          - 3
+          - 4
+        childComponentCount: 3
+        child1:
+          componentType: "ProjectileMechanic"
+          projectileClass: "Arrow"
+          spreadType: "RAIN"
+          height: 12
+          radius: 8
+          speed: 1
+          amountList:
+            - 12
+            - 12
+            - 12
+            - 12
+            - 12
+            - 12
+          right: 0
+          upward: 0
+          forward: 0
+          range: 200
+          mustHitToWork: true
+        child2:
+          componentType: "ProjectileMechanic"
+          projectileClass: "Arrow"
+          spreadType: "RAIN"
+          height: 12
+          radius: 8
+          speed: 1
+          amountList:
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+          right: 0
+          upward: 0
+          forward: 0
+          range: 200
+          mustHitToWork: false
+          childComponentCount: 2
+          child1:
+            componentType: "ParticleMechanic"
+            type: "REDSTONE"
+            radius: 9
+            amount: 21
+            upward: 1
+            dustColor: 16753920
+            dustSize: 2
+          child2:
+            componentType: "AreaTarget"
+            childComponentCount: 3
+            allies: false
+            enemy: true
+            self: false
+            max: 30
+            radiusList:
+              - 8
+              - 8
+              - 8
+              - 8
+              - 8
+              - 8
+            child1:
+              componentType: "DamageMechanic"
+              damageType: "RANGED"
+              damageList:
+                - 64
+                - 160
+                - 250
+                - 410
+                - 570
+                - 900
+        child3:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_ARROW_RAIN"
+

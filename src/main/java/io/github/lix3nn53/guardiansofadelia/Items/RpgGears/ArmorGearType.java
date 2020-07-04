@@ -2,8 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorMaterial;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public enum ArmorGearType {
@@ -108,37 +106,20 @@ public enum ArmorGearType {
         return null;
     }
 
-    public void applySetEffect(Player player) {
+    public GearSetEffect getSetEffect() {
         switch (this) {
             case EARTH_ARMOR:
-                player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0.7);
-                player.sendMessage("Armor set activated: knockback resistance");
-                break;
+                return GearSetEffect.KNOCKBACK_RESISTANCE;
             case FIRE_ARMOR:
-                break;
+                return GearSetEffect.KNOCKBACK_RESISTANCE;
             case LIGHTNING_ARMOR:
-                break;
+                return GearSetEffect.KNOCKBACK_RESISTANCE;
             case WATER_ARMOR:
-                break;
+                return GearSetEffect.MANA_REGEN;
             case WIND_ARMOR:
-                break;
+                return GearSetEffect.CRITICAL_DAMAGE;
         }
-    }
 
-    public void clearSetEffect(Player player) {
-        switch (this) {
-            case EARTH_ARMOR:
-                player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0);
-                player.sendMessage("Armor set deactivated: knockback resistance");
-                break;
-            case FIRE_ARMOR:
-                break;
-            case LIGHTNING_ARMOR:
-                break;
-            case WATER_ARMOR:
-                break;
-            case WIND_ARMOR:
-                break;
-        }
+        return null;
     }
 }

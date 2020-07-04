@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.config;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.HealthCondition;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.ValueCondition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram.HologramMechanic;
@@ -13,11 +14,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.st
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.FilterCurrentTargets;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.LocationTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.LandTrigger;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookMeleeDamageTrigger;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TookPhysicalDamageTrigger;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.*;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -116,9 +115,17 @@ public class SkillComponentLoader {
             return new MessageMechanic(configurationSection);
         } else if (componentType.equals(FireMechanic.class.getSimpleName())) {
             return new FireMechanic(configurationSection);
+        } else if (componentType.equals(RangedAttackTrigger.class.getSimpleName())) {
+            return new RangedAttackTrigger(configurationSection);
+        } else if (componentType.equals(ValueCondition.class.getSimpleName())) {
+            return new ValueCondition(configurationSection);
+        } else if (componentType.equals(ValueAddMechanic.class.getSimpleName())) {
+            return new ValueAddMechanic(configurationSection);
+        } else if (componentType.equals(LocationTarget.class.getSimpleName())) {
+            return new LocationTarget(configurationSection);
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER");
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);
 
         return null;
     }

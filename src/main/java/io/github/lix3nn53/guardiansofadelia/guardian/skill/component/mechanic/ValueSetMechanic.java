@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -12,6 +13,14 @@ public class ValueSetMechanic extends MechanicComponent {
 
     public ValueSetMechanic(int value) {
         this.value = value;
+    }
+
+    public ValueSetMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("value")) {
+            configLoadError("value");
+        }
+
+        this.value = configurationSection.getInt("value");
     }
 
     @Override

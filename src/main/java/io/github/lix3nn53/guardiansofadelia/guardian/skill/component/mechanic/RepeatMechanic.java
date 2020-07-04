@@ -25,6 +25,19 @@ public class RepeatMechanic extends MechanicComponent {
         this.repetitions = repetitions;
     }
 
+    public RepeatMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("period")) {
+            configLoadError("period");
+        }
+
+        if (!configurationSection.contains("repetitions")) {
+            configLoadError("repetitions");
+        }
+
+        this.period = configurationSection.getInt("period");
+        this.repetitions = configurationSection.getIntegerList("repetitions");
+    }
+
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
@@ -70,18 +83,5 @@ public class RepeatMechanic extends MechanicComponent {
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
-    }
-
-    public RepeatMechanic(ConfigurationSection configurationSection) {
-        if (!configurationSection.contains("period")) {
-            configLoadError("period");
-        }
-
-        if (!configurationSection.contains("repetitions")) {
-            configLoadError("repetitions");
-        }
-
-        this.period = configurationSection.getInt("period");
-        this.repetitions = configurationSection.getIntegerList("repetitions");
     }
 }

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.GearSetEffect;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
@@ -65,7 +66,7 @@ public class RPGCharacterStats {
     private double criticalChanceBonusBuff = 0;
     private double criticalDamageBonusBuff = 0;
 
-    private ArmorGearType armorGearTypeSetEffect = null;
+    private GearSetEffect armorGearTypeSetEffect = null;
 
     public RPGCharacterStats(Player player, String rpgClassStr) {
         this.player = player;
@@ -631,8 +632,9 @@ public class RPGCharacterStats {
         onCurrentManaChange();
         boolean wearingSameArmorType = isWearingSameArmorType(helmetType, chestplateType, leggingsType, bootsType);
         if (wearingSameArmorType) {
-            this.armorGearTypeSetEffect = helmetType;
-            helmetType.applySetEffect(player);
+            GearSetEffect setEffect = helmetType.getSetEffect();
+            setEffect.applySetEffect(player);
+            this.armorGearTypeSetEffect = setEffect;
         } else if (this.armorGearTypeSetEffect != null) {
             this.armorGearTypeSetEffect.clearSetEffect(player);
             this.armorGearTypeSetEffect = null;

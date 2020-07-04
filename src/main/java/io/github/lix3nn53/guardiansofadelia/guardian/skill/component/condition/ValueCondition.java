@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -14,6 +15,19 @@ public class ValueCondition extends ConditionComponent {
     public ValueCondition(int minValue, int maxValue) {
         this.minValue = minValue;
         this.maxValue = maxValue;
+    }
+
+    public ValueCondition(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("minValue")) {
+            configLoadError("minValue");
+        }
+
+        if (!configurationSection.contains("maxValue")) {
+            configLoadError("maxValue");
+        }
+
+        this.minValue = configurationSection.getInt("minValue");
+        this.maxValue = configurationSection.getInt("maxValue");
     }
 
     @Override
