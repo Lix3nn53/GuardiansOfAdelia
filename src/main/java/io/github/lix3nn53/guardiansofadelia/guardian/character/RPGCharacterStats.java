@@ -3,6 +3,8 @@ package io.github.lix3nn53.guardiansofadelia.guardian.character;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.GearSetEffect;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
@@ -442,30 +444,53 @@ public class RPGCharacterStats {
     }
 
     public void onOffhandEquip(ItemStack itemStack, boolean fixDisplay) {
-        Material material = itemStack.getType();
-        if (material.equals(Material.SHIELD)) {
-            int health = 0;
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "health")) {
-                health = PersistentDataContainerUtil.getInteger(itemStack, "health");
+        if (PersistentDataContainerUtil.hasString(itemStack, "gearType")) {
+            String gearTypeStr = PersistentDataContainerUtil.getString(itemStack, "gearType");
+
+            boolean isShield = false;
+            for (ShieldGearType c : ShieldGearType.values()) {
+                if (c.name().equals(gearTypeStr)) {
+                    isShield = true;
+                    break;
+                }
             }
 
-            int defense = 0;
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "defense")) {
-                defense = PersistentDataContainerUtil.getInteger(itemStack, "defense");
-            }
+            if (isShield) {
+                int health = 0;
+                if (PersistentDataContainerUtil.hasInteger(itemStack, "health")) {
+                    health = PersistentDataContainerUtil.getInteger(itemStack, "health");
+                }
 
-            int magicDefense = 0;
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "magicDefense")) {
-                magicDefense = PersistentDataContainerUtil.getInteger(itemStack, "magicDefense");
-            }
+                int defense = 0;
+                if (PersistentDataContainerUtil.hasInteger(itemStack, "defense")) {
+                    defense = PersistentDataContainerUtil.getInteger(itemStack, "defense");
+                }
 
-            shield = new ArmorStatHolder(health, defense, magicDefense);
-            setPassiveStatBonuses(EquipmentSlot.OFF_HAND, itemStack, fixDisplay);
-        } else if (material.equals(Material.DIAMOND_HOE)) {
-            StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
-            int damage = stat.getValue();
-            damageBonusFromOffhand = (int) ((damage * 0.6) + 0.5);
-            setPassiveStatBonuses(EquipmentSlot.OFF_HAND, itemStack, fixDisplay);
+                int magicDefense = 0;
+                if (PersistentDataContainerUtil.hasInteger(itemStack, "magicDefense")) {
+                    magicDefense = PersistentDataContainerUtil.getInteger(itemStack, "magicDefense");
+                }
+
+                shield = new ArmorStatHolder(health, defense, magicDefense);
+                setPassiveStatBonuses(EquipmentSlot.OFF_HAND, itemStack, fixDisplay);
+            } else {
+                WeaponGearType weaponGearType = null;
+                for (WeaponGearType c : WeaponGearType.values()) {
+                    if (c.name().equals(gearTypeStr)) {
+                        weaponGearType = c;
+                        break;
+                    }
+                }
+
+                if (weaponGearType != null) {
+                    if (weaponGearType.canEquipToOffHand()) {
+                        StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
+                        int damage = stat.getValue();
+                        damageBonusFromOffhand = (int) ((damage * 0.6) + 0.5);
+                        setPassiveStatBonuses(EquipmentSlot.OFF_HAND, itemStack, fixDisplay);
+                    }
+                }
+            }
         }
     }
 

@@ -135,7 +135,7 @@ public class Enchant {
 
             if (type.equals(StatType.MELEE)) {
                 PersistentDataContainerUtil.putInteger("meleeDamage", nextValue, this.itemStack);
-                this.itemStack = RPGItemUtils.clearThenSetDamageWhenInMainHand(itemStack, nextValue);
+                this.itemStack = RPGItemUtils.setDamage(itemStack, nextValue);
             } else if (type.equals(StatType.HYBRID)) {
                 PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             } else if (type.equals(StatType.MAGICAL)) {
@@ -333,7 +333,7 @@ public class Enchant {
 
             if (type.equals(StatType.MELEE)) {
                 PersistentDataContainerUtil.putInteger("meleeDamage", nextValue, this.itemStack);
-                this.itemStack = RPGItemUtils.clearThenSetDamageWhenInMainHand(itemStack, nextValue);
+                this.itemStack = RPGItemUtils.setDamage(itemStack, nextValue);
             } else if (type.equals(StatType.HYBRID)) {
                 PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             } else if (type.equals(StatType.MAGICAL)) {

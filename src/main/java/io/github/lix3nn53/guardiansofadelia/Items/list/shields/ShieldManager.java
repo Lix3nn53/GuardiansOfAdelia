@@ -20,7 +20,7 @@ public class ShieldManager {
         int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel);
         int maxStatValue = noStats ? 0 : GearLevel.getMaxStatValue(gearLevel);
 
-        Material material = Material.SHIELD;
+        Material material = gearType.getMaterial();
 
         List<ShieldSet> sets = gearLevelToShields.get(gearLevel);
         ShieldSet template = sets.get(setIndex);

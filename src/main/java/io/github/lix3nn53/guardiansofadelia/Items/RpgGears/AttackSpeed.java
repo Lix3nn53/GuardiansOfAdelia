@@ -26,13 +26,13 @@ public enum AttackSpeed {
     }
 
     public double getSpeedValue() {
-        double speed = -3.4D;
+        double speed = -3;
         if (this == AttackSpeed.NORMAL) {
-            speed = -3.05;
+            speed = -2.75;
         } else if (this == AttackSpeed.FAST) {
-            speed = -2.6;
+            speed = -2.5;
         } else if (this == AttackSpeed.RAPID) {
-            speed = -2.1;
+            speed = -2.25;
         }
         return speed;
     }

@@ -17,7 +17,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Tri
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.DamageIndicator;
 import org.bukkit.*;
@@ -293,6 +292,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                             damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClassStr); //add to weapon damage
 
+                            /*
+                            DO NOT add damage bonus from offhand manually, it is added via vanilla attributes
                             //add damage bonus from offhand
                             ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
                             if (!InventoryUtils.isAirOrNull(itemInMainHand)) {
@@ -300,6 +301,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                     damage += rpgCharacterStats.getTotalDamageBonusFromOffhand();
                                 }
                             }
+                            */
 
                             damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
                             TriggerListener.onPlayerMeleeAttack(player, livingTarget);

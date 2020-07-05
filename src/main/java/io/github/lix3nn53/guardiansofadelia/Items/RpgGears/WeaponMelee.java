@@ -67,7 +67,7 @@ public class WeaponMelee implements RPGGear {
         PersistentDataContainerUtil.putString("gearType", gearType.toString(), this.itemStack);
 
         this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSpeedValue());
-        this.itemStack = RPGItemUtils.clearThenSetDamageWhenInMainHand(this.itemStack, damage);
+        this.itemStack = RPGItemUtils.setDamage(this.itemStack, damage);
 
         PersistentDataContainerUtil.putInteger("meleeDamage", damage, this.itemStack);
 

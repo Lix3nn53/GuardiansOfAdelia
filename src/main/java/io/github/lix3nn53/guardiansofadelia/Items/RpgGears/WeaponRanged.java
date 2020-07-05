@@ -71,7 +71,7 @@ public class WeaponRanged implements RPGGear {
         PersistentDataContainerUtil.putString("gearType", gearType.toString(), this.itemStack);
 
         this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSpeedValue());
-        this.itemStack = RPGItemUtils.clearThenSetDamageWhenInMainHand(this.itemStack, meleeDamage);
+        this.itemStack = RPGItemUtils.setDamage(this.itemStack, meleeDamage);
 
         PersistentDataContainerUtil.putInteger("meleeDamage", meleeDamage, this.itemStack);
         PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, this.itemStack);
