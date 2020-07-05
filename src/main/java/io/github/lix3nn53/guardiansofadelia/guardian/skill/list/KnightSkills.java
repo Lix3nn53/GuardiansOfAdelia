@@ -401,8 +401,8 @@ public class KnightSkills {
         seconds.add(40);
         seconds.add(40);
         seconds.add(40);
-        HologramMechanic hologramMechanic = new HologramMechanic(Material.DIAMOND_SWORD, 5, seconds);
-        HologramMechanic hologramMechanic2 = new HologramMechanic(Material.SHIELD, 4, seconds, ChatColor.YELLOW + "< Shield-of-the-Heavens %caster% >");
+        HologramMechanic hologramMechanic = new HologramMechanic(Material.DIAMOND_SWORD, 5, seconds, false);
+        HologramMechanic hologramMechanic2 = new HologramMechanic(Material.SHIELD, 4, seconds, ChatColor.YELLOW + "< Shield-of-the-Heavens %caster% >", false);
 
         //Add repeatMechanic to hologramMechanic's children
         List<Integer> repetitions = new ArrayList<>();

@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -21,18 +22,21 @@ public class HologramMechanic extends MechanicComponent {
     private final int CUSTOMMODELDATA;
     private final List<Integer> DURATION;
     private String DISPLAYTEXT = "displayText";
+    private boolean SAVE = false;
 
-    public HologramMechanic(Material helmet, int custommodeldata, List<Integer> seconds) {
+    public HologramMechanic(Material helmet, int custommodeldata, List<Integer> seconds, boolean save) {
         HELMET = helmet;
         CUSTOMMODELDATA = custommodeldata;
         DURATION = seconds;
+        SAVE = save;
     }
 
-    public HologramMechanic(Material helmet, int custommodeldata, List<Integer> seconds, String displayText) {
+    public HologramMechanic(Material helmet, int custommodeldata, List<Integer> seconds, String displayText, boolean save) {
         HELMET = helmet;
         CUSTOMMODELDATA = custommodeldata;
         DURATION = seconds;
         DISPLAYTEXT = displayText;
+        SAVE = save;
     }
 
     public HologramMechanic(ConfigurationSection configurationSection) {
@@ -54,6 +58,10 @@ public class HologramMechanic extends MechanicComponent {
 
         if (configurationSection.contains("displayText")) {
             this.DISPLAYTEXT = configurationSection.getString("displayText");
+        }
+
+        if (configurationSection.contains("save")) {
+            this.SAVE = configurationSection.getBoolean("save");
         }
     }
 
@@ -94,11 +102,19 @@ public class HologramMechanic extends MechanicComponent {
             model.setVisible(false);
             model.setSmall(true);
 
+            if (SAVE) {
+                SkillDataManager.onSkillEntityCreateWithSaveOption(caster, model, castCounter);
+            }
+
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     if (model.isValid()) {
-                        model.remove();
+                        if (SAVE) {
+                            SkillDataManager.removeSavedEntity(caster, castCounter, model);
+                        } else {
+                            model.remove();
+                        }
                     }
                 }
             }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * DURATION.get(skillLevel - 1));

@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicCom
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -40,8 +41,14 @@ public class RootMechanic extends MechanicComponent {
 
         for (LivingEntity target : targets) {
             StatusEffectManager.setRooted(target, lockY);
-            PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOW, duration.get(skillLevel - 1), 1);
+
+            int amplifier = 99;
+            if (target instanceof Player) {
+                amplifier = 1;
+            }
+            PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOW, duration.get(skillLevel - 1), amplifier);
             target.addPotionEffect(potionEffect);
+
         }
 
         new BukkitRunnable() {

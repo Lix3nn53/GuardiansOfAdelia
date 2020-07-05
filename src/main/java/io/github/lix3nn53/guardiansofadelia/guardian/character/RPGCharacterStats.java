@@ -494,14 +494,37 @@ public class RPGCharacterStats {
         }
     }
 
-    public void onOffhandUnequip(ItemStack offhand) {
-        Material material = offhand.getType();
-        if (material.equals(Material.SHIELD)) {
-            shield = new ArmorStatHolder(0, 0, 0);
-            removePassiveStatBonuses(EquipmentSlot.OFF_HAND);
-        } else if (material.equals(Material.DIAMOND_HOE)) {
-            damageBonusFromOffhand = 0;
-            removePassiveStatBonuses(EquipmentSlot.OFF_HAND);
+    public void onOffhandUnequip(ItemStack itemStack) {
+        if (PersistentDataContainerUtil.hasString(itemStack, "gearType")) {
+            String gearTypeStr = PersistentDataContainerUtil.getString(itemStack, "gearType");
+
+            boolean isShield = false;
+            for (ShieldGearType c : ShieldGearType.values()) {
+                if (c.name().equals(gearTypeStr)) {
+                    isShield = true;
+                    break;
+                }
+            }
+
+            if (isShield) {
+                shield = new ArmorStatHolder(0, 0, 0);
+                removePassiveStatBonuses(EquipmentSlot.OFF_HAND);
+            } else {
+                WeaponGearType weaponGearType = null;
+                for (WeaponGearType c : WeaponGearType.values()) {
+                    if (c.name().equals(gearTypeStr)) {
+                        weaponGearType = c;
+                        break;
+                    }
+                }
+
+                if (weaponGearType != null) {
+                    if (weaponGearType.canEquipToOffHand()) {
+                        damageBonusFromOffhand = 0;
+                        removePassiveStatBonuses(EquipmentSlot.OFF_HAND);
+                    }
+                }
+            }
         }
     }
 
@@ -594,12 +617,38 @@ public class RPGCharacterStats {
 
         ItemStack itemInOffHand = inventory.getItemInOffHand();
         if (!InventoryUtils.isAirOrNull(itemInOffHand)) {
-            Material type = itemInOffHand.getType();
-            if ((type.equals(Material.SHIELD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.ARROW) ||
-                    type.equals(Material.TIPPED_ARROW) || type.equals(Material.SPECTRAL_ARROW)) &&
-                    StatUtils.doesCharacterMeetRequirements(itemInOffHand, player, rpgClass)) {
-                onOffhandEquip(itemInOffHand, false);
-            } else {
+            if (PersistentDataContainerUtil.hasString(itemInOffHand, "gearType")) {
+                String gearTypeStr = PersistentDataContainerUtil.getString(itemInOffHand, "gearType");
+
+                boolean isShield = false;
+                for (ShieldGearType c : ShieldGearType.values()) {
+                    if (c.name().equals(gearTypeStr)) {
+                        isShield = true;
+                        break;
+                    }
+                }
+
+                if (isShield) {
+                    if (StatUtils.doesCharacterMeetRequirements(itemInOffHand, player, rpgClass)) {
+                        onOffhandEquip(itemInOffHand, false);
+                    }
+                } else {
+                    WeaponGearType weaponGearType = null;
+                    for (WeaponGearType c : WeaponGearType.values()) {
+                        if (c.name().equals(gearTypeStr)) {
+                            weaponGearType = c;
+                            break;
+                        }
+                    }
+
+                    if (weaponGearType != null && weaponGearType.canEquipToOffHand()) {
+                        onOffhandEquip(itemInOffHand, false);
+                    } else {
+                        InventoryUtils.giveItemToPlayer(player, itemInOffHand);
+                        itemInOffHand.setAmount(0);
+                    }
+                }
+            } else if (!itemInOffHand.getType().equals(Material.ARROW)) {
                 InventoryUtils.giveItemToPlayer(player, itemInOffHand);
                 itemInOffHand.setAmount(0);
             }

@@ -316,6 +316,7 @@ skillUltimate:
           - 70
           - 80
         displayText: "< Trap %caster% >"
+        save: true
         child1:
           componentType: "RepeatMechanic"
           period: 10
@@ -374,15 +375,7 @@ skillUltimate:
                 - 100
                 - 120
             child5:
-              componentType: "RemoveNearbyHologramMechanic"
-              displayName: "< Trap %caster% >"
-              ranges:
-                - 2.4
-                - 2.4
-                - 2.4
-                - 2.4
-                - 2.4
-                - 2.4
+              componentType: "RemoveSavedEntities"
             child6:
               componentType: "SoundMechanic"
               goaSound: "SKILL_STUN_HIT"
@@ -390,7 +383,7 @@ skillUltimate:
               componentType: "SelfTarget"
               child1:
                 componentType: "FlagSetMechanic"
-                key: ""
+                key: "shouldStopSkill"
                 isUniqueCast: true
           child2:
             componentType: "SelfTarget"

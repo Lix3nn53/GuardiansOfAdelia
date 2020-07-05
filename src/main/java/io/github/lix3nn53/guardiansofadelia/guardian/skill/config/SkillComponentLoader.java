@@ -132,8 +132,8 @@ public class SkillComponentLoader {
             return new RepeatCancelMechanic();
         } else if (componentType.equals(FlagRemoveMechanic.class.getSimpleName())) {
             return new FlagRemoveMechanic(configurationSection);
-        } else if (componentType.equals(RemoveNearbyHologramMechanic.class.getSimpleName())) {
-            return new RemoveNearbyHologramMechanic(configurationSection);
+        } else if (componentType.equals(RemoveSavedEntities.class.getSimpleName())) {
+            return new RemoveSavedEntities();
         } else if (componentType.equals(FlagSetMechanic.class.getSimpleName())) {
             return new FlagSetMechanic(configurationSection);
         } else if (componentType.equals(DisarmMechanic.class.getSimpleName())) {

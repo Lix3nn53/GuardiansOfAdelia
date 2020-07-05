@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -12,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -82,6 +84,10 @@ public class MyPlayerItemHeldEvent implements Listener {
                 if ((type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) && newSlot == 4) { //weapon slot is 4
                     boolean meetRequirements = StatUtils.doesCharacterMeetRequirements(item, player, rpgClassStr);
                     if (meetRequirements) {
+                        ItemStack itemInOffHand = player.getInventory().getItem(EquipmentSlot.OFF_HAND);
+                        if (!InventoryUtils.isAirOrNull(itemInOffHand)) {
+                            InventoryUtils.giveItemToPlayer(player, itemInOffHand);
+                        }
                         ItemStack arrow = OtherItems.getArrow(2);
                         inventory.setItemInOffHand(arrow);
                     }

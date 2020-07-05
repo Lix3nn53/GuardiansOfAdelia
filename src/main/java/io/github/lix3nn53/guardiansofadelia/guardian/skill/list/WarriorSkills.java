@@ -265,7 +265,7 @@ public class WarriorSkills {
         seconds.add(40);
         seconds.add(40);
         seconds.add(40);
-        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 4, seconds, ChatColor.AQUA + "< Victory-Flag %caster% >");
+        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 4, seconds, ChatColor.AQUA + "< Victory-Flag %caster% >", false);
 
         //Add repeatMechanic to hologramMechanic's children
         List<Integer> repetitions = new ArrayList<>();

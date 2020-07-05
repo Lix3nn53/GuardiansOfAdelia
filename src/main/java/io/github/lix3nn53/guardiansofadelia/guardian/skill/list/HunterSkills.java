@@ -400,7 +400,7 @@ public class HunterSkills {
         seconds.add(65);
         seconds.add(70);
         seconds.add(80);
-        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 5, seconds, ChatColor.DARK_GRAY + "< Trap %caster% >");
+        HologramMechanic hologramMechanic = new HologramMechanic(Material.IRON_PICKAXE, 5, seconds, ChatColor.DARK_GRAY + "< Trap %caster% >", true);
 
         //Add repeatMechanic to hologramMechanic's children
         List<Integer> repetitions = new ArrayList<>();
@@ -468,7 +468,7 @@ public class HunterSkills {
         areaTarget.addChildren(stopWalking);
         areaTarget.addChildren(disarmMechanic);
         areaTarget.addChildren(silenceMechanic);
-        areaTarget.addChildren(new RemoveNearbyHologramMechanic(radiuses, ChatColor.DARK_GRAY + "< Trap %caster% >"));
+        areaTarget.addChildren(new RemoveSavedEntities());
         SelfTarget selfTargetForFlagSet = new SelfTarget();
         areaTarget.addChildren(selfTargetForFlagSet);
         selfTargetForFlagSet.addChildren(setRemoveFlag);
