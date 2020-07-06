@@ -94,14 +94,6 @@ public class ClassConfigurations {
             attributeTiers.put(AttributeType.LIGHTNING, attributeTierLightning);
             attributeTiers.put(AttributeType.WIND, attributeTierWind);
 
-
-            String defaultWeaponGearTypeStr = fileConfiguration.getString("defaultWeaponGearType");
-            WeaponGearType defaultWeaponGearType = WeaponGearType.valueOf(defaultWeaponGearTypeStr);
-
-            String defaultArmorGearTypeStr = fileConfiguration.getString("defaultArmorGearType");
-            ArmorGearType defaultArmorGearType = ArmorGearType.valueOf(defaultArmorGearTypeStr);
-
-
             HashMap<Integer, Skill> skillSet = new HashMap<>();
 
             if (fileConfiguration.contains("skillOne")) {
@@ -161,8 +153,8 @@ public class ClassConfigurations {
                 isDefaultOffhandWeapon = fileConfiguration.getBoolean("isDefaultOffhandWeapon");
             }
 
-            RPGClass rpgClass = new RPGClass(color, className, classIconCustomModelData, attributeTiers, skillSet, defaultWeaponGearType,
-                    defaultArmorGearType, shieldGearTypes, weaponGearTypes, armorGearTypes, hasDefaultOffhand, isDefaultOffhandWeapon);
+            RPGClass rpgClass = new RPGClass(color, className, classIconCustomModelData, attributeTiers, skillSet,
+                    shieldGearTypes, weaponGearTypes, armorGearTypes, hasDefaultOffhand, isDefaultOffhandWeapon);
 
             RPGClassManager.addClass(className, rpgClass);
         }

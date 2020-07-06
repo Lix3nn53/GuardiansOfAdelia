@@ -11,15 +11,13 @@ attributeTierWater: 4
 attributeTierEarth: 5
 attributeTierLightning: 6
 attributeTierWind: 0
-defaultWeaponGearType: "WAND"
-defaultArmorGearType: "WIND_ARMOR"
 weaponGearTypes:
+  - "WAND"
   - "DAGGER"
   - "STAFF"
-  - "WAND"
 armorGearTypes:
+  - "LIGHTNING_ARMOR"
   - "WIND_ARMOR"
-  - "FIRE_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Fireball"

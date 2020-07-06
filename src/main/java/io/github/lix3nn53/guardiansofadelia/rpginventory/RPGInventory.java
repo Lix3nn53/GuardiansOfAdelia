@@ -28,7 +28,7 @@ import java.util.UUID;
 
 public class RPGInventory {
 
-    private final GuiGeneric rpgGui = new GuiGeneric(54, ChatColor.YELLOW.toString() + ChatColor.BOLD + "RPG Inventory", 0);
+    private final GuiGeneric rpgGui = new GuiGeneric(54, ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + "RPG Inventory", 0);
 
     private final List<Player> petSpawnCooldownList = new ArrayList<>();
 

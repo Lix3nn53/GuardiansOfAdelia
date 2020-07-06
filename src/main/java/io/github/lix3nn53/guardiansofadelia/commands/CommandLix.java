@@ -75,7 +75,7 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin quest gui <npcNo> - open quest gui of an npc");
                 player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
                 player.sendMessage(ChatColor.BLUE + "/admin coin <num>");
-                player.sendMessage(ChatColor.BLUE + "/admin weapon [class] <num>");
+                player.sendMessage(ChatColor.BLUE + "/admin weapon [type] <num>");
                 player.sendMessage(ChatColor.BLUE + "/admin companion [type] <num>");
                 player.sendMessage(ChatColor.BLUE + "/admin mount [type] <num>");
                 player.sendMessage(ChatColor.BLUE + "/admin stone <grade> <amount>");

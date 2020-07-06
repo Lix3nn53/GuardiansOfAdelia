@@ -11,8 +11,6 @@ attributeTierWater: 4
 attributeTierEarth: 6
 attributeTierLightning: 1
 attributeTierWind: 0
-defaultWeaponGearType: "SPEAR"
-defaultArmorGearType: "FIRE_ARMOR"
 weaponGearTypes:
   - "SPEAR"
 armorGearTypes:

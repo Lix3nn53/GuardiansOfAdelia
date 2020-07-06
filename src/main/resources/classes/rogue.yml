@@ -11,16 +11,14 @@ attributeTierWater: 3
 attributeTierEarth: 6
 attributeTierLightning: 1
 attributeTierWind: 1
-defaultWeaponGearType: "DAGGER"
-defaultArmorGearType: "WIND_ARMOR"
 weaponGearTypes:
   - "DAGGER"
   - "SWORD"
   - "BOW"
   - "CROSSBOW"
 armorGearTypes:
+  - "WIND_ARMOR"
   - "FIRE_ARMOR"
-  - "EARTH_ARMOR"
 hasDefaultOffhand: true
 isDefaultOffhandWeapon: true
 skillOne:

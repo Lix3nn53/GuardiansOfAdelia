@@ -16,8 +16,6 @@ public class RPGClass {
     private final int customModelData;
     private final HashMap<AttributeType, Integer> attributeTiers;
     private final HashMap<Integer, Skill> skillSet;
-    private final WeaponGearType defaultWeaponGearType;
-    private final ArmorGearType defaultArmorGearType;
 
     private final List<ShieldGearType> shieldGearTypes;
     private final List<WeaponGearType> weaponGearTypes;
@@ -27,14 +25,12 @@ public class RPGClass {
     private final boolean isDefaultOffhandWeapon;
 
     public RPGClass(ChatColor color, String name, int customModelData, HashMap<AttributeType, Integer> attributeTiers,
-                    HashMap<Integer, Skill> skillSet, WeaponGearType defaultWeaponGearType, ArmorGearType defaultArmorGearType, List<ShieldGearType> shieldGearTypes, List<WeaponGearType> weaponGearTypes, List<ArmorGearType> armorGearTypes, boolean hasDefaultOffhand, boolean isDefaultOffhandWeapon) {
+                    HashMap<Integer, Skill> skillSet, List<ShieldGearType> shieldGearTypes, List<WeaponGearType> weaponGearTypes, List<ArmorGearType> armorGearTypes, boolean hasDefaultOffhand, boolean isDefaultOffhandWeapon) {
         this.color = color;
         this.name = name;
         this.customModelData = customModelData;
         this.attributeTiers = attributeTiers;
         this.skillSet = skillSet;
-        this.defaultWeaponGearType = defaultWeaponGearType;
-        this.defaultArmorGearType = defaultArmorGearType;
         this.shieldGearTypes = shieldGearTypes;
         this.weaponGearTypes = weaponGearTypes;
         this.armorGearTypes = armorGearTypes;
@@ -71,7 +67,7 @@ public class RPGClass {
     }
 
     public WeaponGearType getDefaultWeaponGearType() {
-        return defaultWeaponGearType;
+        return weaponGearTypes.get(0);
     }
 
     public boolean hasDefaultOffhand() {
@@ -83,7 +79,7 @@ public class RPGClass {
     }
 
     public ArmorGearType getDefaultArmorGearType() {
-        return defaultArmorGearType;
+        return armorGearTypes.get(0);
     }
 
     public List<ShieldGearType> getShieldGearTypes() {

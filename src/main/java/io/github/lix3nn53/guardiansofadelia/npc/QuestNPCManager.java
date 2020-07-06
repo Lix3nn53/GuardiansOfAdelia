@@ -29,7 +29,7 @@ public class QuestNPCManager {
         NPC npc = CitizensAPI.getNPCRegistry().getById(npcId);
 
         if (npc != null) {
-            GuiGeneric questMenu = new GuiGeneric(27, ChatColor.YELLOW + "Quest List of " + npc.getName(), npcId);
+            GuiGeneric questMenu = new GuiGeneric(27, ChatColor.DARK_GRAY + "Quest List of " + npc.getName(), npcId);
 
             if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
                 List<Quest> npcQuestList = new ArrayList<>();

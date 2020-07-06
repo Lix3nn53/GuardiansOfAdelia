@@ -43,15 +43,15 @@ public enum WeaponGearType {
     public Material getMaterial() {
         switch (this) {
             case SWORD:
-                return Material.GOLDEN_HOE;
+                return Material.NETHERITE_SWORD;
             case DAGGER:
-                return Material.DIAMOND_HOE;
+                return Material.NETHERITE_HOE;
             case BATTLE_AXE:
-                return Material.DIAMOND_AXE;
+                return Material.NETHERITE_AXE;
             case WAR_HAMMER:
-                return Material.DIAMOND_SWORD;
+                return Material.NETHERITE_PICKAXE;
             case GREAT_SWORD:
-                return Material.GOLDEN_AXE;
+                return Material.DIAMOND_AXE;
             case SPEAR:
                 return Material.TRIDENT;
             case BOW:
@@ -59,9 +59,9 @@ public enum WeaponGearType {
             case CROSSBOW:
                 return Material.CROSSBOW;
             case STAFF:
-                return Material.GOLDEN_SHOVEL;
-            case WAND:
                 return Material.DIAMOND_SHOVEL;
+            case WAND:
+                return Material.NETHERITE_SHOVEL;
         }
 
         return null;
@@ -167,5 +167,9 @@ public enum WeaponGearType {
         }
 
         return false;
+    }
+
+    public boolean getReduceMeleeDamage() {
+        return this != WeaponGearType.SPEAR;
     }
 }

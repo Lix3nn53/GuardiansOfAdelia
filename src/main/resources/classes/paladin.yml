@@ -11,16 +11,14 @@ attributeTierWater: 4
 attributeTierEarth: 7
 attributeTierLightning: 2
 attributeTierWind: 0
-defaultWeaponGearType: "WAR_HAMMER"
-defaultArmorGearType: "EARTH_ARMOR"
 weaponGearTypes:
+  - "WAR_HAMMER"
   - "SWORD"
   - "BATTLE_AXE"
-  - "WAR_HAMMER"
   - "GREAT_SWORD"
 armorGearTypes:
-  - "FIRE_ARMOR"
   - "EARTH_ARMOR"
+  - "FIRE_ARMOR"
 hasDefaultOffhand: true
 isDefaultOffhandWeapon: false
 skillOne:

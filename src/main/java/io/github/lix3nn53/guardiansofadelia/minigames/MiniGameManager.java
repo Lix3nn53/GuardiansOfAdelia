@@ -269,7 +269,7 @@ public class MiniGameManager {
     }
 
     public static GuiGeneric getGuildWarJoinGui() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_PURPLE + "Join Guild War", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Join Guild War", 0);
 
         int i = 9;
         for (GuildWar guildWar : guildWarList) {

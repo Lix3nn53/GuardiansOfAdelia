@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class CharacterSelectionMenuList {
 
     public static GuiGeneric getCharacterCreationMenu(int charNo) {
-        GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.YELLOW + "Character " + charNo + " Creation", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.DARK_GRAY + "Character " + charNo + " Creation", 0);
 
         ItemStack s1 = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = s1.getItemMeta();
@@ -174,7 +174,7 @@ public class CharacterSelectionMenuList {
     }
 
     public static GuiGeneric characterSelectionMenu(int charNo) {
-        GuiGeneric guiGeneric = new GuiGeneric(36, ChatColor.YELLOW + "Character " + charNo + " Selection", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(36, ChatColor.DARK_GRAY + "Character " + charNo + " Selection", 0);
 
         ItemStack lastLocation = new ItemStack(Material.MAGENTA_WOOL);
         ItemMeta itemMeta = lastLocation.getItemMeta();

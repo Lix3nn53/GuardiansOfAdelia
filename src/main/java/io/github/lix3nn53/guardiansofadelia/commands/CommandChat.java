@@ -43,7 +43,7 @@ public class CommandChat implements CommandExecutor {
                     return false;
                 }
 
-                GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.YELLOW + "Select item to show in chat", 0);
+                GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.DARK_GRAY + "Select item to show in chat", 0);
 
                 ItemStack filler = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
                 ItemMeta itemMeta = filler.getItemMeta();

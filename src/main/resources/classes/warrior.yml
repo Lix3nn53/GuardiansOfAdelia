@@ -11,11 +11,9 @@ attributeTierWater: 1
 attributeTierEarth: 7
 attributeTierLightning: 1
 attributeTierWind: 0
-defaultWeaponGearType: "BATTLE_AXE"
-defaultArmorGearType: "FIRE_ARMOR"
 weaponGearTypes:
-  - "SWORD"
   - "BATTLE_AXE"
+  - "SWORD"
   - "WAR_HAMMER"
   - "GREAT_SWORD"
 armorGearTypes:

@@ -37,7 +37,7 @@ public class WeaponManager {
                     attackSpeed, minStatValue, maxStatValue, minNumberOfStats).getItemStack();
         } else if (weaponDamageType.equals(WeaponDamageType.RANGED)) {
             return new WeaponRanged(name, tier, itemTag, material, customModelData, level, gearType, mainDamage,
-                    attackSpeed, minStatValue, maxStatValue, minNumberOfStats).getItemStack();
+                    attackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearType.getReduceMeleeDamage()).getItemStack();
         } else if (weaponDamageType.equals(WeaponDamageType.MAGICAL)) {
             int meleeDamage = mainDamage / 4;
 

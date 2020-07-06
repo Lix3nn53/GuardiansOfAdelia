@@ -11,15 +11,13 @@ attributeTierWater: 3
 attributeTierEarth: 5
 attributeTierLightning: 1
 attributeTierWind: 0
-defaultWeaponGearType: "BOW"
-defaultArmorGearType: "WIND_ARMOR"
 weaponGearTypes:
-  - "DAGGER"
   - "BOW"
+  - "DAGGER"
   - "CROSSBOW"
 armorGearTypes:
+  - "WIND_ARMOR"
   - "FIRE_ARMOR"
-  - "EARTH_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Poison Arrow"

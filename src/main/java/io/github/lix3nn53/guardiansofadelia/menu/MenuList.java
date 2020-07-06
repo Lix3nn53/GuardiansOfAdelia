@@ -34,7 +34,7 @@ import java.util.*;
 public class MenuList {
 
     public static GuiGeneric mainMenu(GuardianData guardianData) {
-        GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.GREEN + "Menu", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.DARK_GRAY + "Guardians of Adelia", 0);
 
         ItemStack compass = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = compass.getItemMeta();
@@ -197,7 +197,7 @@ public class MenuList {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
 
             if (guardianData.hasActiveCharacter()) {
-                guiGeneric = new GuiGeneric(9, ChatColor.YELLOW + "Class Manager", 0);
+                guiGeneric = new GuiGeneric(9, ChatColor.DARK_GRAY + "Class Manager", 0);
 
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
@@ -242,7 +242,7 @@ public class MenuList {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
 
             if (guardianData.hasActiveCharacter()) {
-                guiGeneric = new GuiGeneric(27, ChatColor.YELLOW + "Class Change", 0);
+                guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Class Change", 0);
 
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
@@ -259,10 +259,15 @@ public class MenuList {
                     ItemMeta meta = itemStack.getItemMeta();
                     meta.setDisplayName(value.getClassString());
 
+                    List<String> lore = new ArrayList<>();
+                    lore.add("");
+                    lore.add("Default weapon: " + value.getDefaultWeaponGearType().getDisplayName());
+                    lore.add("Default armor: " + value.getDefaultArmorGearType().getDisplayName());
+                    lore.add("");
+                    lore.add("");
                     if (unlockedClasses.containsKey(valueStr)) {
                         String rpgClassStr = rpgCharacter.getRpgClassStr();
                         int totalExp = unlockedClasses.get(valueStr).getTotalExp();
-                        List<String> lore = new ArrayList<>();
                         lore.add("");
                         lore.add("Class: " + value.getClassString());
                         lore.add("Rank: " + RPGClassExperienceManager.getLevel(totalExp));
@@ -304,7 +309,7 @@ public class MenuList {
                 SkillBar skillBar = rpgCharacter.getSkillBar();
 
                 int pointsLeft = skillBar.getSkillPointsLeftToSpend();
-                guiGeneric = new GuiGeneric(27, ChatColor.LIGHT_PURPLE + "Skills (Points: " + pointsLeft + ")", 0);
+                guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Skills (Points: " + pointsLeft + ")", 0);
 
                 HashMap<Integer, Skill> skillSet = rpgCharacter.getSkillBar().getSkillSet();
 
@@ -380,7 +385,7 @@ public class MenuList {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
 
                 int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
-                guiGeneric = new GuiGeneric(27, ChatColor.AQUA + "Elements (Points: " + pointsLeft + ")", 0);
+                guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Elements (Points: " + pointsLeft + ")", 0);
 
                 Attribute fireStat = rpgCharacterStats.getFire();
                 ItemStack fire = new ItemStack(Material.PAPER);
@@ -440,7 +445,7 @@ public class MenuList {
     }
 
     public static GuiGeneric job(Player player) {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.YELLOW + "Job", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Job", 0);
 
         UUID uuid = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uuid)) {
@@ -493,7 +498,7 @@ public class MenuList {
     }
 
     public static GuiGeneric chatTagQuests(Player player) {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.AQUA + "Chat Tag", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Chat Tag", 0);
 
         UUID uuid = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uuid)) {
@@ -534,13 +539,13 @@ public class MenuList {
     }
 
     public static GuiGeneric guide() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.GREEN + "Guides", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Guides", 0);
 
         return guiGeneric;
     }
 
     public static GuiBookGeneric compass() {
-        GuiBookGeneric guiBookGeneric = new GuiBookGeneric(ChatColor.BLUE + "Compass", 0);
+        GuiBookGeneric guiBookGeneric = new GuiBookGeneric(ChatColor.DARK_GRAY + "Compass", 0);
 
         GuiPage page1 = new GuiPage();
         GuiLineGeneric page1Line1 = new GuiLineGeneric();
@@ -735,7 +740,7 @@ public class MenuList {
     }
 
     public static GuiGeneric guild() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_PURPLE + "Guild", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Guild", 0);
 
         ItemStack guildWar = new ItemStack(Material.RED_WOOL);
         ItemMeta itemMeta = guildWar.getItemMeta();
@@ -751,7 +756,7 @@ public class MenuList {
     }
 
     public static GuiGeneric bazaar(Player player) {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.GOLD + "Bazaar", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Bazaar", 0);
 
         ItemStack info = new ItemStack(Material.YELLOW_WOOL);
         ItemMeta itemMeta = info.getItemMeta();
@@ -803,7 +808,7 @@ public class MenuList {
     }
 
     public static GuiGeneric minigames() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.GOLD + "MiniGames", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "MiniGames", 0);
 
         ItemStack pvp = new ItemStack(Material.RED_WOOL);
         ItemMeta itemMeta = pvp.getItemMeta();
@@ -824,7 +829,7 @@ public class MenuList {
 
     public static GuiGeneric onShiftRightClickPlayer(Player rightClicked) {
         String rightClickedName = rightClicked.getName();
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.YELLOW + "Interact with " + rightClickedName, 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Interact with " + rightClickedName, 0);
 
         ItemStack infoItem = new CharacterInfoSlot(rightClicked).getItem();
         guiGeneric.setItem(10, infoItem);
@@ -861,7 +866,7 @@ public class MenuList {
     }
 
     public static GuiGeneric serverBoostMenu() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.YELLOW + "Server Boosts", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Server Boosts", 0);
 
         ItemStack boostExperience = new ItemStack(Material.RED_WOOL);
         ItemMeta itemMeta = boostExperience.getItemMeta();
@@ -924,7 +929,7 @@ public class MenuList {
     }
 
     public static GuiGeneric dailyRewardsMenu(Player player) {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.YELLOW + "Daily Reward Claim", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Daily Reward Claim", 0);
 
         UUID uuid = player.getUniqueId();
         if (!GuardianDataManager.hasGuardianData(uuid)) return guiGeneric;

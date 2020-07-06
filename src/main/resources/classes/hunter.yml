@@ -11,15 +11,13 @@ attributeTierWater: 1
 attributeTierEarth: 6
 attributeTierLightning: 1
 attributeTierWind: 1
-defaultWeaponGearType: "CROSSBOW"
-defaultArmorGearType: "WIND_ARMOR"
 weaponGearTypes:
-  - "DAGGER"
-  - "BOW"
   - "CROSSBOW"
+  - "BOW"
+  - "DAGGER"
 armorGearTypes:
+  - "WIND_ARMOR"
   - "FIRE_ARMOR"
-  - "EARTH_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Explosive Arrow"

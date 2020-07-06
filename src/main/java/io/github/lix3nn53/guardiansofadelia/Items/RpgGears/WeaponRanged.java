@@ -22,7 +22,7 @@ public class WeaponRanged implements RPGGear {
 
     public WeaponRanged(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, WeaponGearType gearType,
                         int rangedDamage, AttackSpeed attackSpeed, int minStatValue,
-                        int maxStatValue, int minNumberOfStats) {
+                        int maxStatValue, int minNumberOfStats, boolean reduceMeleeDamage) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + name;
@@ -30,6 +30,9 @@ public class WeaponRanged implements RPGGear {
 
         double bonusPercent = tier.getBonusMultiplier();
         double meleeDamagePercent = 0.4;
+        if (!reduceMeleeDamage) {
+            meleeDamagePercent = 1;
+        }
 
         rangedDamage = (int) ((rangedDamage * bonusPercent) + 0.5);
         int meleeDamage = (int) ((rangedDamage * meleeDamagePercent) + 0.5);
