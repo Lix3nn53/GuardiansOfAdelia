@@ -4,7 +4,10 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
-color: "GREEN"
+color: "DARK_GREEN"
+description:
+  - "Their hunting techniques"
+  - "makes anyone a prey for the deadly arrows."
 classIconCustomModelData: 16
 attributeTierFire: 6
 attributeTierWater: 1

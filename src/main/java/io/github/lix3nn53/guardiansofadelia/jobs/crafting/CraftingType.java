@@ -14,7 +14,8 @@ public enum CraftingType {
     ARMOR_LIGHT,
     POTION,
     FOOD,
-    JEWEL;
+    JEWEL,
+    ENCHANT_STONE;
 
     public String getName() {
         switch (this) {
@@ -30,6 +31,8 @@ public enum CraftingType {
                 return "Food Crafting";
             case JEWEL:
                 return "Jewel Crafting";
+            case ENCHANT_STONE:
+                return "Enchant-Stone Crafting";
         }
         return "Melee Weapon";
     }

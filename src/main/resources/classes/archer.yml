@@ -5,6 +5,10 @@
 # ---------------------------------------------- #
 
 color: "GREEN"
+description:
+  - "The Archer has lots of movement and"
+  - "dexterity, allowing you to kite your target"
+  - "and deal damage from long distances."
 classIconCustomModelData: 7
 attributeTierFire: 4
 attributeTierWater: 3

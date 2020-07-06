@@ -5,6 +5,10 @@
 # ---------------------------------------------- #
 
 color: "LIGHT_PURPLE"
+description:
+  - "The Mage may be frail and weak in body,"
+  - "but that is a worthy sacrifice for"
+  - "the strength of the mind."
 classIconCustomModelData: 10
 attributeTierFire: 1
 attributeTierWater: 4

@@ -367,7 +367,7 @@ public class MyInventoryClickEvent implements Listener {
                 InventoryUtils.giveItemToPlayer(player, cursor);
                 cursor.setAmount(0);
             }
-            GuiGeneric guiGeneric = MenuList.mainMenu(guardianData);
+            GuiGeneric guiGeneric = MenuList.mainMenu();
             guiGeneric.openInventory(player);
         } else if (title.equals(ChatColor.DARK_GRAY + "Guardians of Adelia")) {
             if (currentName.equals(ChatColor.GREEN + "Guides")) {
@@ -385,7 +385,7 @@ public class MyInventoryClickEvent implements Listener {
                 message.setBold(true);
                 player.spigot().sendMessage(message);
             } else if (currentName.equals(ChatColor.GREEN + "Character")) {
-                GuiGeneric character = MenuList.character();
+                GuiGeneric character = MenuList.character(guardianData);
                 character.openInventory(player);
             } else if (currentName.equals(ChatColor.DARK_PURPLE + "Guild")) {
                 if (GuildManager.inGuild(player)) {

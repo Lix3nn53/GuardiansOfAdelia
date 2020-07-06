@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -15,61 +17,53 @@ public enum GearSetEffect {
     ATTACK_SPEED_INCREASE,
     ATTACK_SPEED_DECREASE;
 
-    public void applySetEffect(Player player) {
-        player.sendMessage("Gear set effect activated:");
+    public void applySetEffect(Player player, String setName) {
+        MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + "Gear Set Effect Activated: " + setName);
         switch (this) {
             case KNOCKBACK_RESISTANCE:
                 player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0.7);
-                player.sendMessage("knockback resistance");
+                MessageUtils.sendCenteredMessage(player, "Knockback resistance");
                 break;
             case SLOW_FALLING:
                 PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOW_FALLING, Integer.MAX_VALUE, 1);
                 player.addPotionEffect(potionEffect);
-                player.sendMessage("SLOW_FALLING");
+                MessageUtils.sendCenteredMessage(player, "Slow falling");
                 break;
             case SWIMMING_SPEED:
                 potionEffect = new PotionEffect(PotionEffectType.DOLPHINS_GRACE, Integer.MAX_VALUE, 1);
                 player.addPotionEffect(potionEffect);
-                player.sendMessage("SWIMMING_SPEED");
+                MessageUtils.sendCenteredMessage(player, "Swimming speed increase");
                 break;
             case ATTACK_SPEED_INCREASE:
                 potionEffect = new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 1);
                 player.addPotionEffect(potionEffect);
-                player.sendMessage("ATTACK_SPEED_INCREASE");
+                MessageUtils.sendCenteredMessage(player, "Attack speed increase");
                 break;
             case ATTACK_SPEED_DECREASE:
                 potionEffect = new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 1);
                 player.addPotionEffect(potionEffect);
-                player.sendMessage("ATTACK_SPEED_DECREASE");
+                MessageUtils.sendCenteredMessage(player, "Attack speed decrease");
                 break;
         }
     }
 
     public void clearSetEffect(Player player) {
-        player.sendMessage("Gear set effect deactivated:");
+        MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "Gear Set Effect Deactivated");
         switch (this) {
             case KNOCKBACK_RESISTANCE:
                 player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0);
-                player.sendMessage("knockback resistance");
                 break;
             case SLOW_FALLING:
                 player.removePotionEffect(PotionEffectType.SLOW_FALLING);
-                player.sendMessage("SLOW_FALLING");
                 break;
             case SWIMMING_SPEED:
                 player.removePotionEffect(PotionEffectType.DOLPHINS_GRACE);
-                player.sendMessage("SLOW_FALLING");
-                player.sendMessage("SWIMMING_SPEED");
                 break;
             case ATTACK_SPEED_INCREASE:
                 player.removePotionEffect(PotionEffectType.FAST_DIGGING);
-                player.sendMessage("SLOW_FALLING");
-                player.sendMessage("ATTACK_SPEED_INCREASE");
                 break;
             case ATTACK_SPEED_DECREASE:
                 player.removePotionEffect(PotionEffectType.SLOW_DIGGING);
-                player.sendMessage("SLOW_FALLING");
-                player.sendMessage("ATTACK_SPEED_DECREASE");
                 break;
         }
     }

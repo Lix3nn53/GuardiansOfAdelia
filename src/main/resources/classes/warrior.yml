@@ -5,6 +5,10 @@
 # ---------------------------------------------- #
 
 color: "RED"
+description:
+  - "Thanks to their strength, fearlessness and"
+  - "superior combat skills, warriors are"
+  - "always ready to take on any enemy."
 classIconCustomModelData: 12
 attributeTierFire: 6
 attributeTierWater: 1

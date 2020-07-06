@@ -24,8 +24,11 @@ public class RPGClass {
     private final boolean hasDefaultOffhand;
     private final boolean isDefaultOffhandWeapon;
 
+    private final List<String> description;
+
     public RPGClass(ChatColor color, String name, int customModelData, HashMap<AttributeType, Integer> attributeTiers,
-                    HashMap<Integer, Skill> skillSet, List<ShieldGearType> shieldGearTypes, List<WeaponGearType> weaponGearTypes, List<ArmorGearType> armorGearTypes, boolean hasDefaultOffhand, boolean isDefaultOffhandWeapon) {
+                    HashMap<Integer, Skill> skillSet, List<ShieldGearType> shieldGearTypes, List<WeaponGearType> weaponGearTypes,
+                    List<ArmorGearType> armorGearTypes, boolean hasDefaultOffhand, boolean isDefaultOffhandWeapon, List<String> description) {
         this.color = color;
         this.name = name;
         this.customModelData = customModelData;
@@ -36,6 +39,7 @@ public class RPGClass {
         this.armorGearTypes = armorGearTypes;
         this.hasDefaultOffhand = hasDefaultOffhand;
         this.isDefaultOffhandWeapon = isDefaultOffhandWeapon;
+        this.description = description;
     }
 
     public String getClassString() {
@@ -60,6 +64,10 @@ public class RPGClass {
         double tierD = tier;
 
         return (int) ((levelD * ((levelD * tierD) / 125)) + 0.5);
+    }
+
+    public HashMap<AttributeType, Integer> getAttributeTiers() {
+        return attributeTiers;
     }
 
     public HashMap<Integer, Skill> getSkillSet() {
@@ -92,5 +100,9 @@ public class RPGClass {
 
     public List<ArmorGearType> getArmorGearTypes() {
         return armorGearTypes;
+    }
+
+    public List<String> getDescription() {
+        return description;
     }
 }

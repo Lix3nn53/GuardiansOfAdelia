@@ -5,7 +5,11 @@
 # ---------------------------------------------- #
 
 classList:
-  - "warrior"
   - "archer"
-  - "mage"
   - "hunter"
+  - "knight"
+  - "mage"
+  - "monk"
+  - "paladin"
+  - "rogue"
+  - "warrior"

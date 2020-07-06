@@ -204,6 +204,15 @@ public class MyPlayerInteractEvent implements Listener {
                             levelSelection.openInventory(player);
                         }
                     }
+                } else if (clickedBlockType.equals(Material.ENCHANTING_TABLE)) {
+                    event.setCancelled(true);
+                    if (GuardianDataManager.hasGuardianData(uuid)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                        if (guardianData.hasActiveCharacter()) {
+                            GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.ENCHANT_STONE);
+                            levelSelection.openInventory(player);
+                        }
+                    }
                 } else if (clickedBlockType.equals(Material.CHEST) || clickedBlockType.equals(Material.BARREL) || clickedBlockType.equals(Material.ENDER_CHEST)
                         || clickedBlockType.equals(Material.TRAPPED_CHEST) || clickedBlockType.equals(Material.CHEST_MINECART) || clickedBlockType.equals(Material.CRAFTING_TABLE)) {
                     event.setCancelled(true);

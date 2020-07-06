@@ -1,5 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.menu;
 
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
@@ -8,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
@@ -33,7 +37,7 @@ import java.util.*;
 
 public class MenuList {
 
-    public static GuiGeneric mainMenu(GuardianData guardianData) {
+    public static GuiGeneric mainMenu() {
         GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.DARK_GRAY + "Guardians of Adelia", 0);
 
         ItemStack compass = new ItemStack(Material.STONE_PICKAXE);
@@ -61,9 +65,7 @@ public class MenuList {
         guiGeneric.setItem(14, map);
 
         ItemStack character = new ItemStack(Material.STONE_PICKAXE);
-        String rpgClassStr = guardianData.getActiveCharacter().getRpgClassStr();
-        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-        itemMeta.setCustomModelData(rpgClass.getClassIconCustomModelData());
+        itemMeta.setCustomModelData(40);
         itemMeta.setDisplayName(ChatColor.GREEN + "Character");
         itemMeta.setLore(new ArrayList() {{
             add("");
@@ -126,20 +128,24 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric character() {
+    public static GuiGeneric character(GuardianData guardianData) {
         GuiGeneric guiGeneric = new GuiGeneric(27, "Character", 0);
 
         ItemStack skills = new ItemStack(Material.STONE_PICKAXE);
+        String rpgClassStr = guardianData.getActiveCharacter().getRpgClassStr();
+        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
+        int classIconCustomModelData = rpgClass.getClassIconCustomModelData();
         ItemMeta itemMeta = skills.getItemMeta();
-        itemMeta.setCustomModelData(31);
+        itemMeta.setCustomModelData(classIconCustomModelData);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Class");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Manage your character's class!");
-
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Manage your character's class!");
+        lore.add("");
+        lore.add("Current Class: " + rpgClass.getClassString());
+        itemMeta.setLore(lore);
         skills.setItemMeta(itemMeta);
         guiGeneric.setItem(9, skills);
 
@@ -207,10 +213,8 @@ public class MenuList {
                 int totalExp = rpgClassStats.getTotalExp();
                 int classLevel = RPGClassExperienceManager.getLevel(totalExp);
 
-                ItemStack itemStack = new ItemStack(Material.STONE_PICKAXE);
+                ItemStack itemStack = new ItemStack(Material.LIME_WOOL);
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-                itemMeta.setCustomModelData(33);
                 itemMeta.setDisplayName(ChatColor.YELLOW + "Class Info");
                 List<String> lore = new ArrayList<>();
                 lore.add("");
@@ -256,20 +260,49 @@ public class MenuList {
                     String valueStr = values.get(i);
                     RPGClass value = RPGClassManager.getClass(valueStr);
                     ItemStack itemStack = new ItemStack(Material.RED_WOOL);
-                    ItemMeta meta = itemStack.getItemMeta();
-                    meta.setDisplayName(value.getClassString());
+                    ItemMeta itemMeta = itemStack.getItemMeta();
+                    String classString = value.getClassString();
+                    itemMeta.setDisplayName(classString.toUpperCase());
+
+                    List<String> description = value.getDescription();
+                    List<WeaponGearType> weaponGearTypes = value.getWeaponGearTypes();
+                    List<ArmorGearType> armorGearTypes = value.getArmorGearTypes();
+                    List<ShieldGearType> shieldGearTypes = value.getShieldGearTypes();
+                    HashMap<AttributeType, Integer> attributeTiers = value.getAttributeTiers();
+                    String fire = ChatColor.RED.toString() + attributeTiers.get(AttributeType.FIRE);
+                    String water = ChatColor.BLUE.toString() + attributeTiers.get(AttributeType.WATER);
+                    String earth = ChatColor.DARK_GREEN.toString() + attributeTiers.get(AttributeType.EARTH);
+                    String lightning = ChatColor.AQUA.toString() + attributeTiers.get(AttributeType.LIGHTNING);
+                    String wind = ChatColor.WHITE.toString() + attributeTiers.get(AttributeType.WIND);
 
                     List<String> lore = new ArrayList<>();
+                    for (String line : description) {
+                        lore.add(line);
+                    }
                     lore.add("");
-                    lore.add("Default weapon: " + value.getDefaultWeaponGearType().getDisplayName());
-                    lore.add("Default armor: " + value.getDefaultArmorGearType().getDisplayName());
-                    lore.add("");
+
+                    lore.add(ChatColor.GREEN + "Attributes");
+                    lore.add("  " + fire + " " + water + " " + earth + " " + lightning + " " + wind + " ");
+
+                    lore.add(ChatColor.RED + "Weapons");
+                    for (WeaponGearType type : weaponGearTypes) {
+                        lore.add("  - " + type.getDisplayName());
+                    }
+                    lore.add(ChatColor.AQUA + "Armors");
+                    for (ArmorGearType type : armorGearTypes) {
+                        lore.add("  - " + type.getDisplayName());
+                    }
+                    if (!shieldGearTypes.isEmpty()) {
+                        lore.add(ChatColor.BLUE + "Shields");
+                        for (ShieldGearType type : shieldGearTypes) {
+                            lore.add("  - " + type.getDisplayName());
+                        }
+                    }
+
                     lore.add("");
                     if (unlockedClasses.containsKey(valueStr)) {
                         String rpgClassStr = rpgCharacter.getRpgClassStr();
                         int totalExp = unlockedClasses.get(valueStr).getTotalExp();
-                        lore.add("");
-                        lore.add("Class: " + value.getClassString());
                         lore.add("Rank: " + RPGClassExperienceManager.getLevel(totalExp));
                         lore.add("");
                         if (valueStr.equalsIgnoreCase(rpgClassStr)) {
@@ -279,10 +312,12 @@ public class MenuList {
                             itemStack.setType(Material.LIME_WOOL);
                             lore.add(ChatColor.GREEN + "Click to change to this class!");
                         }
-                        meta.setLore(lore);
+                    } else {
+                        lore.add(ChatColor.RED + "You haven't unlock this class");
                     }
 
-                    itemStack.setItemMeta(meta);
+                    itemMeta.setLore(lore);
+                    itemStack.setItemMeta(itemMeta);
 
                     guiGeneric.setItem(i * 2 - modCounter, itemStack);
                     int mod = (i * 2 + 1 - modCounter) % 9;
@@ -445,7 +480,7 @@ public class MenuList {
     }
 
     public static GuiGeneric job(Player player) {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Job", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(45, ChatColor.DARK_GRAY + "Job", 0);
 
         UUID uuid = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uuid)) {
@@ -455,12 +490,11 @@ public class MenuList {
 
                 RPGCharacterCraftingStats craftingStats = activeCharacter.getCraftingStats();
 
-                int slot = 9;
+                int slot = 10;
                 for (CraftingType craftingType : CraftingType.values()) {
-                    ItemStack craftingInfo = new ItemStack(Material.LIME_WOOL);
+                    ItemStack craftingInfo = new ItemStack(Material.NETHERITE_SWORD);
                     ItemMeta itemMeta = craftingInfo.getItemMeta();
 
-                    itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Crafting Info");
                     List<String> lore = new ArrayList<>();
                     lore.add("");
                     int currentLevel = craftingStats.getCurrentLevel(craftingType);
@@ -468,28 +502,55 @@ public class MenuList {
                     lore.add("Experience: " + craftingStats.getTotalExperience(craftingType));
                     lore.add("Required Experience: " + craftingStats.getTotalRequiredExperience(currentLevel + 1));
 
+                    lore.add("");
+
                     if (craftingType.equals(CraftingType.WEAPON_MELEE)) {
-                        lore.add(ChatColor.RED + "Weaponsmith");
+                        //slot = 10;
+                        itemMeta.setDisplayName(ChatColor.RED + "Melee Weaponsmith");
                         lore.add(ChatColor.GRAY + "Left click grindstone to craft melee weapons");
+                    }
+                    if (craftingType.equals(CraftingType.WEAPON_RANGED)) {
+                        slot = 12;
+                        craftingInfo.setType(Material.BOW);
+                        itemMeta.setDisplayName(ChatColor.RED + "Ranged Weaponsmith");
                         lore.add(ChatColor.GRAY + "Left click fletching table to craft ranged weapons");
-                    } else if (craftingType.equals(CraftingType.ARMOR_LIGHT)) {
-                        lore.add(ChatColor.AQUA + "Armorsmith");
+                    } else if (craftingType.equals(CraftingType.ARMOR_HEAVY)) {
+                        slot = 14;
+                        craftingInfo.setType(Material.NETHERITE_CHESTPLATE);
+                        itemMeta.setDisplayName(ChatColor.AQUA + "Heavy Armorsmith");
                         lore.add(ChatColor.GRAY + "Left click anvil to craft heavy armors");
+                    } else if (craftingType.equals(CraftingType.ARMOR_LIGHT)) {
+                        slot = 16;
+                        craftingInfo.setType(Material.LEATHER_CHESTPLATE);
+                        itemMeta.setDisplayName(ChatColor.AQUA + "Light Armorsmith");
                         lore.add(ChatColor.GRAY + "Left click loom to craft light armors");
                     } else if (craftingType.equals(CraftingType.POTION)) {
-                        lore.add(ChatColor.LIGHT_PURPLE + "Alchemist");
+                        slot = 28;
+                        craftingInfo.setType(Material.POTION);
+                        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Potion Alchemist");
                         lore.add(ChatColor.GRAY + "Left click brewing stand to craft potions");
+                    } else if (craftingType.equals(CraftingType.FOOD)) {
+                        slot = 30;
+                        craftingInfo.setType(Material.COOKED_BEEF);
+                        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Food Alchemist");
                         lore.add(ChatColor.GRAY + "Left click campfire to craft foods");
                     } else if (craftingType.equals(CraftingType.JEWEL)) {
-                        lore.add(ChatColor.GOLD + "Jeweller");
+                        slot = 32;
+                        craftingInfo.setType(Material.EMERALD);
+                        itemMeta.setDisplayName(ChatColor.GOLD + "Jeweller");
                         lore.add(ChatColor.GRAY + "Left click smithing table to craft jewels");
-                        lore.add(ChatColor.GRAY + "Left click enchanting table to craft enchant stones");
+                    } else if (craftingType.equals(CraftingType.ENCHANT_STONE)) {
+                        slot = 34;
+                        craftingInfo.setType(Material.ENCHANTED_BOOK);
+                        itemMeta.setDisplayName(ChatColor.GOLD + "Enchant-Stone Crafting");
+                        lore.add(ChatColor.GRAY + "Left click enchanting table to enchant stones");
                     }
                     itemMeta.setLore(lore);
+                    itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                     craftingInfo.setItemMeta(itemMeta);
                     guiGeneric.setItem(slot, craftingInfo);
 
-                    slot++;
+                    slot += 3;
                 }
             }
         }

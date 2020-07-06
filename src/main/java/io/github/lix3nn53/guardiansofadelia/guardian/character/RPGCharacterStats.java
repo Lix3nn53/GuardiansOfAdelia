@@ -710,7 +710,7 @@ public class RPGCharacterStats {
             if (this.armorGearTypeSetEffect != null) {
                 if (this.armorGearTypeSetEffect.equals(setEffect)) return;
             }
-            setEffect.applySetEffect(player);
+            setEffect.applySetEffect(player, helmetType.getDisplayName());
             this.armorGearTypeSetEffect = setEffect;
         } else if (this.armorGearTypeSetEffect != null) {
             this.armorGearTypeSetEffect.clearSetEffect(player);

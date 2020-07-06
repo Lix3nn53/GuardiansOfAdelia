@@ -31,7 +31,7 @@ public enum ArmorGearType {
             case FIRE_ARMOR:
                 return "Fire Armor";
             case LIGHTNING_ARMOR:
-                return "Lightning Robe";
+                return "Lightning Armor";
             case WATER_ARMOR:
                 return "Water Armor";
             case WIND_ARMOR:
