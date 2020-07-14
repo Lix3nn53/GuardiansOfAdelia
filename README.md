@@ -16,21 +16,13 @@ My personal spigot(https://www.spigotmc.org/) plugin project to create a MMORPG 
 
 Please note that these features are for my personal server. It probably will not work in any other setup.
 * Characters
-  * You can create up to 4 different characters with 1 minecraft account.
+  * You can create different characters with 1 minecraft account.
   * Create new character or select an existing one to play when you join server.
 * Classes
-  * You have to select a class for your character when you are creating one.
-  * There are 8 different classes you can select;
-  * Warrior: Deals heavy damage with their two handed weapons but slow on feet
-  * Rogue: Good at dealing high damage to a single target, also dual wielding daggers looks cool
-  * Knight: Filling up tank role with thier heavy armor and shield
-  * Paladin: Supports their allies with buffs and heals
-  * Archer: Deals damage from long ranged and has the ability kit to keep that range
-  * Hunter: Deals high damage from long range with their crossbows. Uses traps to hunt their targets
-  * Mage: Deals area damage and controls targets with elemental abilities
-  * Monk: While they are feared opponents in close range their weapons, spear, can be thrown to fight at long range
+  * You can create new classes via configs.
+  * You can setup elements, gears class can use and skill set in configuration.
 * Attributes
-  * A character has 7 attributes: Max health and mana, physical damage and defense, magical damage and defense and critical chance.
+  * A character's attributes define his/her power in different areas. Some of the main attributes are: Max health and mana, physical damage and defense, magical damage and defense and critical chance.
   * Your base attributes increases as you level up. Equipments adds their attributes to your character when you equip them.
   * There are elements which increases your attributes as you gain more point in them;
   * Fire: increases physical damage
@@ -40,10 +32,12 @@ Please note that these features are for my personal server. It probably will not
   * Wind: increases critical chance
   * You can gain more points on elements by investing element points you gain by leveling up or equiping items which has element bonuses on them.
 * Skills
+  * You can create skills in class and mob skill set configs.
   * Invest skill points to learn or upgrade your skills
   * Use 1-2-3-4 hot bar keys to cast skills via SkillBar
   * Combine SkillComponents to create skill mechanics. Component types are trigger, target, mechanic, condition.
 * Quests
+  * You can create quests via configs.
   * Icons: 
     Quest icons appear on NPCs and disguises themselfs to each player differently. 
     If player has a completed quest from this NPC, he/she will see a 3D Q icon.
@@ -64,7 +58,10 @@ Please note that these features are for my personal server. It probably will not
 * Merchants
   * Open a gui on right click to NPC.
     Select specific actions from this gui like buying/selling items, managing your storages, enchanting items..
+* Entities
+  * You can create entities with skill sets via configs.
 * Spawners
+  * You can create spawners via configs.
   * Spawns X of a customized entity on a location every Y seconds. Can't have more than Z spawned entities at once.
 * RPG-Inventory
   * Equip jewelries to gain bonus stats
@@ -96,16 +93,13 @@ Please note that these features are for my personal server. It probably will not
   * Subclass of minigames
   * Join dungeons with up to 4 players
   * Kill dungeon boss before timeout to gain a prize chest
-* Jobs
-  * There are 4 type of jobs. Weaponsmith, armorsmith, alchemist, jeweller
-  * Weaponsmith crafts ranged & melee weapons. Armorsmith crafts heavy & light armor. Alchemist crafts potions & foods(buff). Jeweller crafts jewels & enchanting stones.
-  * There are 4 type of gathering tools. Axe, hoe, pickaxe, fishing rod. Tools lose durability when you gather ingredients with them.
-  * There are 6 types of gathering. Woodcutting, harvesting_flower, fishing, mining_ore, mining_jewelry, hunting
-  * You can open crafting gui by right clicking certain blocks like anvil, grindstone etc
+* Crafting
+  * There are 8 type of crafting. 
+  * Each crafting type has an unique block that open crafting gui when you right click like anvil, grindstone etc
   * On crafting gui, select the level of items you want to create, then craft by clicking on items at cost of ingredients
   * You can gain job experience by crafting and unlock higher level crafts
 * Pets
-  * Buy eggs from pet-merchants and equip to spawn your pet. When spawned your pet will follow you
+  * Equip an egg to spawn pet. When spawned your pet will follow you
   * There are 2 types of pets. Companions and mounts
   * Companions have health and meleeDamage attributes. They attack your enemies to protect you
   * Mounts have health, speed and jump attributes. You can mount and ride them to travel faster
