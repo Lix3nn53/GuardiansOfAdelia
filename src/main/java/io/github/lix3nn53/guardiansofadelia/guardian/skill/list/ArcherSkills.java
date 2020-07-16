@@ -358,11 +358,11 @@ public class ArcherSkills {
         multipliers.add(0.1);
         BuffMechanic buffMechanic = new BuffMechanic(BuffType.CRIT_CHANCE, multipliers, ticks);
 
-        ValueCondition activateCondition = new ValueCondition(2, 2);
-        ValueSetMechanic valueSetMechanic = new ValueSetMechanic(0);
+        ValueCondition activateCondition = new ValueCondition("sharpshooter", 2, 2);
+        ValueSetMechanic valueSetMechanic = new ValueSetMechanic("sharpshooter", 0);
 
-        ValueCondition upValueCondition = new ValueCondition(0, 1);
-        ValueAddMechanic valueAddMechanic = new ValueAddMechanic(1);
+        ValueCondition upValueCondition = new ValueCondition("sharpshooter", 0, 1);
+        ValueAddMechanic valueAddMechanic = new ValueAddMechanic("sharpshooter", 1);
 
         skill.addTrigger(initializeTrigger);
         initializeTrigger.addChildren(rangedAttackTrigger);

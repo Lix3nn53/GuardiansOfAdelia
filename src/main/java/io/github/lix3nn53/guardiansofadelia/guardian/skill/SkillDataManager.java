@@ -12,26 +12,42 @@ import java.util.List;
 
 public class SkillDataManager {
 
-    private static HashMap<LivingEntity, Integer> keyEntityToValue = new HashMap<>(); //currently only one value for one entity
+    private static HashMap<LivingEntity, HashMap<String, Integer>> keyEntityPlusKeyToValue = new HashMap<>(); //currently only one value for one entity
     private static HashMap<LivingEntity, HashSet<String>> keyEntityToSkillFlags = new HashMap<>();
     private static HashMap<LivingEntity, HashMap<Integer, BukkitTask>> keyEntityPlusCastCounterToRepeatTask = new HashMap<>();
     private static HashMap<LivingEntity, HashMap<Integer, List<Entity>>> keyEntityPlusCastCounterToSavedEntities = new HashMap<>();
 
-    public static void setValue(LivingEntity keyEntity, int value) {
-        keyEntityToValue.put(keyEntity, value);
-    }
-
-    public static void addValue(LivingEntity keyEntity, int value) {
-        int oldValue = 0;
-        if (keyEntityToValue.containsKey(keyEntity)) {
-            oldValue = keyEntityToValue.get(keyEntity);
+    public static void setValue(LivingEntity keyEntity, String key, int value) {
+        if (keyEntityPlusKeyToValue.containsKey(keyEntity)) {
+            HashMap<String, Integer> hashMap = keyEntityPlusKeyToValue.get(keyEntity);
+            hashMap.put(key, value);
+            keyEntityPlusKeyToValue.put(keyEntity, hashMap);
+        } else {
+            HashMap<String, Integer> hashMap = new HashMap<>();
+            hashMap.put(key, value);
+            keyEntityPlusKeyToValue.put(keyEntity, hashMap);
         }
-        keyEntityToValue.put(keyEntity, oldValue + value);
     }
 
-    public static int getValue(LivingEntity keyEntity) {
-        if (keyEntityToValue.containsKey(keyEntity)) {
-            return keyEntityToValue.get(keyEntity);
+    public static void addValue(LivingEntity keyEntity, String key, int value) {
+        if (keyEntityPlusKeyToValue.containsKey(keyEntity)) {
+            HashMap<String, Integer> hashMap = keyEntityPlusKeyToValue.get(keyEntity);
+            int oldValue = 0;
+            if (hashMap.containsKey(key)) {
+                oldValue = hashMap.get(key);
+            }
+            hashMap.put(key, oldValue + value);
+            keyEntityPlusKeyToValue.put(keyEntity, hashMap);
+        } else {
+            HashMap<String, Integer> hashMap = new HashMap<>();
+            hashMap.put(key, value);
+            keyEntityPlusKeyToValue.put(keyEntity, hashMap);
+        }
+    }
+
+    public static int getValue(LivingEntity keyEntity, String key) {
+        if (keyEntityPlusKeyToValue.containsKey(keyEntity)) {
+            return keyEntityPlusKeyToValue.get(keyEntity).get(key);
         }
         return 0;
     }
@@ -159,7 +175,7 @@ public class SkillDataManager {
     public static void onPlayerQuit(Player player) {
         keyEntityToSkillFlags.remove(player);
         keyEntityPlusCastCounterToRepeatTask.remove(player);
-        keyEntityToValue.remove(player);
+        keyEntityPlusKeyToValue.remove(player);
     }
 
     /**
@@ -170,6 +186,6 @@ public class SkillDataManager {
     public static void onEntityDeath(LivingEntity livingEntity) {
         keyEntityToSkillFlags.remove(livingEntity);
         keyEntityPlusCastCounterToRepeatTask.remove(livingEntity);
-        keyEntityToValue.remove(livingEntity);
+        keyEntityPlusKeyToValue.remove(livingEntity);
     }
 }

@@ -9,17 +9,24 @@ import java.util.List;
 
 public class ValueSetMechanic extends MechanicComponent {
 
+    private final String key;
     private final int value;
 
-    public ValueSetMechanic(int value) {
+    public ValueSetMechanic(String key, int value) {
+        this.key = key;
         this.value = value;
     }
 
     public ValueSetMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("key")) {
+            configLoadError("key");
+        }
+
         if (!configurationSection.contains("value")) {
             configLoadError("value");
         }
 
+        this.key = configurationSection.getString("key");
         this.value = configurationSection.getInt("value");
     }
 
@@ -28,7 +35,7 @@ public class ValueSetMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity ent : targets) {
-            SkillDataManager.setValue(ent, value);
+            SkillDataManager.setValue(ent, key, value);
         }
 
         return true;

@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.TargetHelper;
 import org.bukkit.World;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
@@ -13,6 +14,14 @@ public class DirectionCondition extends ConditionComponent {
 
     public DirectionCondition(boolean workWhenInFront) {
         this.workWhenInFront = workWhenInFront;
+    }
+
+    public DirectionCondition(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("workWhenInFront")) {
+            configLoadError("workWhenInFront");
+        }
+
+        this.workWhenInFront = configurationSection.getBoolean("workWhenInFront");
     }
 
     @Override

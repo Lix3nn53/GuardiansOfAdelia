@@ -274,6 +274,7 @@ skillPassive:
         componentType: "SelfTarget"
         child1:
           componentType: "ValueCondition"
+          key: "sharpshooter"
           minValue: 2
           maxValue: 2
           child1:
@@ -295,6 +296,7 @@ skillPassive:
               - 300
           child2:
             componentType: "ValueSetMechanic"
+            key: "sharpshooter"
             value: 0
           child3:
             componentType: "SoundMechanic"
@@ -303,10 +305,12 @@ skillPassive:
         componentType: "SelfTarget"
         child1:
           componentType: "ValueCondition"
+          key: "sharpshooter"
           minValue: 0
           maxValue: 1
           child1:
             componentType: "ValueAddMechanic"
+            key: "sharpshooter"
             valueToAdd: 1
 skillUltimate:
   name: "Make It Rain"

@@ -2,10 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.config;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.FlagCondition;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.HealthCondition;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.NearbyEntityCondition;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.ValueCondition;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram.HologramMechanic;
@@ -142,6 +139,8 @@ public class SkillComponentLoader {
             return new ValueSetMechanic(configurationSection);
         } else if (componentType.equals(SingleTarget.class.getSimpleName())) {
             return new SingleTarget(configurationSection);
+        } else if (componentType.equals(DirectionCondition.class.getSimpleName())) {
+            return new DirectionCondition(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info("NO SUCH COMPONENT IN LOADER: " + componentType);
