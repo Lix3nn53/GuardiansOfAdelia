@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -20,6 +21,19 @@ public class ManaMechanic extends MechanicComponent {
     public ManaMechanic(List<Integer> manaAmount, List<Double> manaPercent) {
         this.manaAmount = manaAmount;
         this.manaPercent = manaPercent;
+    }
+
+    public ManaMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("healAmountList")) {
+            configLoadError("healAmountList");
+        }
+
+        if (!configurationSection.contains("healPercentList")) {
+            configLoadError("healPercentList");
+        }
+
+        this.manaAmount = configurationSection.getIntegerList("healAmountList");
+        this.manaPercent = configurationSection.getDoubleList("healPercentList");
     }
 
     @Override

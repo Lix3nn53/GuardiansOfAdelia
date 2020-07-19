@@ -3,9 +3,11 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.i
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InvincibleMechanic extends MechanicComponent {
@@ -17,6 +19,14 @@ public class InvincibleMechanic extends MechanicComponent {
      */
     public InvincibleMechanic(List<Integer> ticks) {
         this.ticks = ticks;
+    }
+
+    public InvincibleMechanic(ConfigurationSection configurationSection) {
+        if (configurationSection.contains("ticks")) {
+            this.ticks = configurationSection.getIntegerList("ticks");
+        } else {
+            this.ticks = new ArrayList<>();
+        }
     }
 
     @Override

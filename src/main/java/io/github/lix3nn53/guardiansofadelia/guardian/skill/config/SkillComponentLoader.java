@@ -5,9 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillCompon
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram.HologramMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityRemoveMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.InvincibleMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.InvincibleRemoveMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.DisarmMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.RootMechanic;
@@ -51,6 +52,8 @@ public class SkillComponentLoader {
             return new ParticleMechanic(configurationSection);
         } else if (componentType.equals(AreaTarget.class.getSimpleName())) {
             return new AreaTarget(configurationSection);
+        } else if (componentType.equals(ConeTarget.class.getSimpleName())) {
+            return new ConeTarget(configurationSection);
         } else if (componentType.equals(SoundMechanic.class.getSimpleName())) {
             return new SoundMechanic(configurationSection);
         } else if (componentType.equals(HoloMessageMechanic.class.getSimpleName())) {
@@ -141,6 +144,24 @@ public class SkillComponentLoader {
             return new SingleTarget(configurationSection);
         } else if (componentType.equals(DirectionCondition.class.getSimpleName())) {
             return new DirectionCondition(configurationSection);
+        } else if (componentType.equals(MagicAttackTrigger.class.getSimpleName())) {
+            return new MagicAttackTrigger(configurationSection);
+        } else if (componentType.equals(MeleeAttackTrigger.class.getSimpleName())) {
+            return new MeleeAttackTrigger(configurationSection);
+        } else if (componentType.equals(TookMagicalDamageTrigger.class.getSimpleName())) {
+            return new TookMagicalDamageTrigger(configurationSection);
+        } else if (componentType.equals(ManaMechanic.class.getSimpleName())) {
+            return new ManaMechanic(configurationSection);
+        } else if (componentType.equals(TauntMechanic.class.getSimpleName())) {
+            return new TauntMechanic();
+        } else if (componentType.equals(WarpMechanic.class.getSimpleName())) {
+            return new WarpMechanic(configurationSection);
+        } else if (componentType.equals(WarpTargetMechanic.class.getSimpleName())) {
+            return new WarpTargetMechanic(configurationSection);
+        } else if (componentType.equals(InvincibleMechanic.class.getSimpleName())) {
+            return new InvincibleMechanic(configurationSection);
+        } else if (componentType.equals(InvincibleRemoveMechanic.class.getSimpleName())) {
+            return new InvincibleRemoveMechanic(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info("NO SUCH COMPONENT IN LOADER: " + componentType);

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -13,13 +14,28 @@ import java.util.List;
  */
 public class ConeTarget extends TargetComponent {
 
-    private final double angle;
-    private final double range;
+    private final List<Double> angleList;
+    private final List<Double> rangeList;
 
-    public ConeTarget(boolean allies, boolean enemy, boolean self, int max, double angle, double range) {
+    public ConeTarget(boolean allies, boolean enemy, boolean self, int max, List<Double> angleList, List<Double> rangeList) {
         super(allies, enemy, self, max);
-        this.angle = angle;
-        this.range = range;
+        this.angleList = angleList;
+        this.rangeList = rangeList;
+    }
+
+    public ConeTarget(ConfigurationSection configurationSection) {
+        super(configurationSection);
+
+        if (!configurationSection.contains("angleList")) {
+            configLoadError("angleList");
+        }
+
+        if (!configurationSection.contains("rangeList")) {
+            configLoadError("rangeList");
+        }
+
+        this.angleList = configurationSection.getDoubleList("angleList");
+        this.rangeList = configurationSection.getDoubleList("rangeList");
     }
 
     @Override
@@ -29,7 +45,7 @@ public class ConeTarget extends TargetComponent {
         List<LivingEntity> cone = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            List<LivingEntity> coneTargets = TargetHelper.getConeTargets(target, angle, range);
+            List<LivingEntity> coneTargets = TargetHelper.getConeTargets(target, angleList.get(skillLevel - 1), rangeList.get(skillLevel - 1));
             cone.addAll(coneTargets);
         }
 
@@ -44,7 +60,7 @@ public class ConeTarget extends TargetComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        additions.add(ChatColor.YELLOW + "Cone range: " + range);
+        additions.add(ChatColor.YELLOW + "Cone range: " + rangeList);
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

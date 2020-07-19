@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Targ
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.BlockFace;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
@@ -22,6 +23,29 @@ public class WarpMechanic extends MechanicComponent {
         this.forward = forward;
         this.upward = upward;
         this.right = right;
+    }
+
+    public WarpMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("throughWalls")) {
+            configLoadError("throughWalls");
+        }
+
+        if (!configurationSection.contains("forwardList")) {
+            configLoadError("forwardList");
+        }
+
+        if (!configurationSection.contains("upwardList")) {
+            configLoadError("upwardList");
+        }
+
+        if (!configurationSection.contains("rightList")) {
+            configLoadError("rightList");
+        }
+
+        this.throughWalls = configurationSection.getBoolean("throughWalls");
+        this.forward = configurationSection.getDoubleList("forwardList");
+        this.upward = configurationSection.getDoubleList("upwardList");
+        this.right = configurationSection.getDoubleList("rightList");
     }
 
     @Override

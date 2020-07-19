@@ -16,6 +16,10 @@ public class FilterCurrentTargets extends TargetComponent {
         super(allies, enemy, self, max);
     }
 
+    public FilterCurrentTargets(ConfigurationSection configurationSection) {
+        super(configurationSection);
+    }
+
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
@@ -30,25 +34,5 @@ public class FilterCurrentTargets extends TargetComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
-    }
-
-    public FilterCurrentTargets(ConfigurationSection configurationSection) {
-        super(configurationSection);
-
-        if (!configurationSection.contains("allies")) {
-            configLoadError("allies");
-        }
-
-        if (!configurationSection.contains("enemy")) {
-            configLoadError("enemy");
-        }
-
-        if (!configurationSection.contains("self")) {
-            configLoadError("self");
-        }
-
-        if (!configurationSection.contains("max")) {
-            configLoadError("max");
-        }
     }
 }

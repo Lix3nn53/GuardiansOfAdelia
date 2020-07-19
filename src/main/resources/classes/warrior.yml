@@ -229,7 +229,7 @@ skillThree:
           child1:
             componentType: "BuffMechanic"
             buffType: "PHYSICAL_DAMAGE"
-            multiplier:
+            multipliers:
               - 0.08
               - 0.1
               - 0.12
@@ -246,7 +246,7 @@ skillThree:
           child2:
             componentType: "BuffMechanic"
             buffType: "MAGIC_DAMAGE"
-            multiplier:
+            multipliers:
               - 0.08
               - 0.1
               - 0.12

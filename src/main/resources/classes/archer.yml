@@ -280,7 +280,7 @@ skillPassive:
           child1:
             componentType: "BuffMechanic"
             buffType: "CRIT_CHANCE"
-            multiplier:
+            multipliers:
               - 0.04
               - 0.05
               - 0.06

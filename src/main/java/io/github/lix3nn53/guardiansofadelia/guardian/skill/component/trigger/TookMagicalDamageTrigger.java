@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -18,6 +19,14 @@ public class TookMagicalDamageTrigger extends TriggerComponent {
 
     public TookMagicalDamageTrigger(List<Integer> cooldown) {
         this.cooldown = cooldown;
+    }
+
+    public TookMagicalDamageTrigger(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("cooldowns")) {
+            configLoadError("cooldowns");
+        }
+
+        this.cooldown = configurationSection.getIntegerList("cooldowns");
     }
 
     @Override

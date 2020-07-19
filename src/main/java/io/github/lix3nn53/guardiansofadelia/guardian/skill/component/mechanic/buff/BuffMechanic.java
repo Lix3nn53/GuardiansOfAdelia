@@ -28,6 +28,24 @@ public class BuffMechanic extends MechanicComponent {
         this.ticks = ticks;
     }
 
+    public BuffMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("buffType")) {
+            configLoadError("buffType");
+        }
+
+        if (!configurationSection.contains("multipliers")) {
+            configLoadError("multipliers");
+        }
+
+        if (!configurationSection.contains("ticks")) {
+            configLoadError("ticks");
+        }
+
+        this.buffType = BuffType.valueOf(configurationSection.getString("buffType"));
+        this.multiplier = configurationSection.getDoubleList("multipliers");
+        this.ticks = configurationSection.getIntegerList("ticks");
+    }
+
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
@@ -96,23 +114,5 @@ public class BuffMechanic extends MechanicComponent {
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
-    }
-
-    public BuffMechanic(ConfigurationSection configurationSection) {
-        if (!configurationSection.contains("buffType")) {
-            configLoadError("buffType");
-        }
-
-        if (!configurationSection.contains("multiplier")) {
-            configLoadError("multiplier");
-        }
-
-        if (!configurationSection.contains("ticks")) {
-            configLoadError("ticks");
-        }
-
-        this.buffType = BuffType.valueOf(configurationSection.getString("buffType"));
-        this.multiplier = configurationSection.getDoubleList("multiplier");
-        this.ticks = configurationSection.getIntegerList("ticks");
     }
 }

@@ -32,6 +32,13 @@ skill1:
             goaSound: "SKILL_HEAL"
         child2:
           componentType: "SpawnEntityMechanic"
+          durations:
+            - 900
+            - 900
+            - 900
+            - 900
+            - 900
+            - 900
           amountPerSpawn: 1
           adeliaEntityList:
             - "SLIME"

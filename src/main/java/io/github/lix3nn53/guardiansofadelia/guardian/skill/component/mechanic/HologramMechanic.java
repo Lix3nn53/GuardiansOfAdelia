@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.hologram;
+package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
@@ -109,12 +109,10 @@ public class HologramMechanic extends MechanicComponent {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if (model.isValid()) {
-                        if (SAVE) {
-                            SkillDataManager.removeSavedEntity(caster, castCounter, model);
-                        } else {
-                            model.remove();
-                        }
+                    if (SAVE) {
+                        SkillDataManager.removeSavedEntity(caster, castCounter, model);
+                    } else {
+                        model.remove();
                     }
                 }
             }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * DURATION.get(skillLevel - 1));

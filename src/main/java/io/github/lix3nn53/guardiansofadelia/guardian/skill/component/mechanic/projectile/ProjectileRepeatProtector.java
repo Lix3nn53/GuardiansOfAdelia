@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
+package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
