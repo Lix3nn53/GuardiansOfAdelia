@@ -57,41 +57,6 @@ public class ParticleAnimationMechanic extends MechanicComponent {
         this.dustOptions = dustOptions;
     }
 
-    @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
-        if (targets.isEmpty()) return false;
-
-        for (LivingEntity ent : targets) {
-            new BukkitRunnable() {
-
-                int counter;
-
-                @Override
-                public void run() {
-                    Location location = ent.getLocation();
-
-                    Vector dir = location.getDirection().setY(0).normalize();
-                    Vector side = dir.clone().crossProduct(UP);
-                    location.add(dir.multiply(forward)).add(0, upward, 0).add(side.multiply(right));
-
-                    ParticleUtil.play(location, particle, arrangement, radiusParticle, amountParticle, Direction.XZ, dx, dy, dz, speed, dustOptions);
-
-                    counter++;
-                    if (counter >= repeatAmount.get(skillLevel - 1)) {
-                        cancel();
-                    }
-                }
-            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, frequency);
-        }
-
-        return true;
-    }
-
-    @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
-    }
-
     public ParticleAnimationMechanic(ConfigurationSection configurationSection) {
         if (!configurationSection.contains("type")) {
             configLoadError("type");
@@ -140,5 +105,40 @@ public class ParticleAnimationMechanic extends MechanicComponent {
 
         this.frequency = configurationSection.getInt("frequency");
         this.repeatAmount = configurationSection.getIntegerList("repeatAmount");
+    }
+
+    @Override
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+        if (targets.isEmpty()) return false;
+
+        for (LivingEntity ent : targets) {
+            new BukkitRunnable() {
+
+                int counter;
+
+                @Override
+                public void run() {
+                    Location location = ent.getLocation();
+
+                    Vector dir = location.getDirection().setY(0).normalize();
+                    Vector side = dir.clone().crossProduct(UP);
+                    location.add(dir.multiply(forward)).add(0, upward, 0).add(side.multiply(right));
+
+                    ParticleUtil.play(location, particle, arrangement, radiusParticle, amountParticle, Direction.XZ, dx, dy, dz, speed, dustOptions);
+
+                    counter++;
+                    if (counter >= repeatAmount.get(skillLevel - 1)) {
+                        cancel();
+                    }
+                }
+            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, frequency);
+        }
+
+        return true;
+    }
+
+    @Override
+    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

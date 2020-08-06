@@ -162,6 +162,8 @@ public class SkillComponentLoader {
             return new InvincibleMechanic(configurationSection);
         } else if (componentType.equals(InvincibleRemoveMechanic.class.getSimpleName())) {
             return new InvincibleRemoveMechanic(configurationSection);
+        } else if (componentType.equals(DisguiseMechanic.class.getSimpleName())) {
+            return new DisguiseMechanic(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info("NO SUCH COMPONENT IN LOADER: " + componentType);

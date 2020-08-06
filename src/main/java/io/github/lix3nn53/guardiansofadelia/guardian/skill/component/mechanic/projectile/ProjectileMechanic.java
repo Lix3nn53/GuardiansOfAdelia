@@ -212,15 +212,6 @@ public class ProjectileMechanic extends MechanicComponent {
         }
 
         //Piercing
-
-        //very custom things
-        if (configurationSection.contains("isProjectileInvisible")) {
-            addCasterAsFirstTargetIfHitSuccess = configurationSection.getBoolean("isProjectileInvisible");
-        }
-
-        if (configurationSection.contains("isProjectileInvisible")) {
-            addCasterAsSecondTargetIfHitFail = configurationSection.getBoolean("isProjectileInvisible");
-        }
     }
 
     @Override

@@ -6,6 +6,7 @@ import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -26,6 +27,24 @@ public class DisguiseMechanic extends MechanicComponent {
         this.disguiseType = disguiseType;
         this.isAdult = isAdult;
         this.ticks = ticks;
+    }
+
+    public DisguiseMechanic(ConfigurationSection configurationSection) {
+        if (!configurationSection.contains("disguiseType")) {
+            configLoadError("disguiseType");
+        }
+
+        if (!configurationSection.contains("isAdult")) {
+            configLoadError("isAdult");
+        }
+
+        if (!configurationSection.contains("ticks")) {
+            configLoadError("ticks");
+        }
+
+        this.disguiseType = DisguiseType.valueOf(configurationSection.getString("disguiseType"));
+        this.isAdult = configurationSection.getBoolean("isAdult");
+        this.ticks = configurationSection.getIntegerList("ticks");
     }
 
     @Override

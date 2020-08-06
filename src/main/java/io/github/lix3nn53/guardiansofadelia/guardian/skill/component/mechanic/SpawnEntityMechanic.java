@@ -9,6 +9,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpawnEntityMechanic extends MechanicComponent {
@@ -43,7 +44,12 @@ public class SpawnEntityMechanic extends MechanicComponent {
 
         this.adeliaEntityList = adeliaEntityList;
         this.amountPerSpawn = amountPerSpawn;
-        this.DURATION = configurationSection.getIntegerList("durations");
+
+        if (configurationSection.contains("durations")) {
+            this.DURATION = configurationSection.getIntegerList("durations");
+        } else {
+            this.DURATION = new ArrayList<>();
+        }
 
         if (configurationSection.contains("save")) {
             this.SAVE = configurationSection.getBoolean("save");
@@ -63,16 +69,18 @@ public class SpawnEntityMechanic extends MechanicComponent {
                         SkillDataManager.onSkillEntityCreateWithSaveOption(caster, mob, castCounter);
                     }
 
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            if (SAVE) {
-                                SkillDataManager.removeSavedEntity(caster, castCounter, mob);
-                            } else {
-                                mob.remove();
+                    if (!this.DURATION.isEmpty()) {
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                if (SAVE) {
+                                    SkillDataManager.removeSavedEntity(caster, castCounter, mob);
+                                } else {
+                                    mob.remove();
+                                }
                             }
-                        }
-                    }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * DURATION.get(skillLevel - 1));
+                        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * DURATION.get(skillLevel - 1));
+                    }
                 }
             }
         }
