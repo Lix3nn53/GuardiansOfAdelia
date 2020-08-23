@@ -4,8 +4,7 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
-count: 5
-i1:
+quest1:
   questID: 1
   npcToTakeFrom: 0
   npcToComplete: 9
@@ -25,7 +24,7 @@ i1:
   expPrize: 0
   requiredLevel: 90
   advancementMaterial: "RED_NETHER_BRICKS"
-i2:
+quest2:
   questID: 2
   npcToTakeFrom: 9
   npcToComplete: 10
@@ -45,12 +44,11 @@ i2:
   requiredQuests:
     - 1
   advancementMaterial: "RED_NETHER_BRICKS"
-  taskCount: 1
   task1:
     taskType: "TaskKill"
     mobKey: "TUTORIAL_1"
     amountNeeded: 5
-i3:
+quest3:
   questID: 3
   npcToTakeFrom: 10
   npcToComplete: 11
@@ -69,12 +67,10 @@ i3:
   requiredQuests:
     - 2
   advancementMaterial: "RED_NETHER_BRICKS"
-  taskCount: 1
   task1:
     taskType: "TaskKill"
     mobKey: "TUTORIAL_2"
     amountNeeded: 5
-  itemPrizeCount: 5
   itemPrize1:
     itemType: "Passive"
     gearLevel: 1
@@ -110,7 +106,7 @@ i3:
     rpgSlotType: "NECKLACE"
     itemTier: "LEGENDARY"
     itemTag: "Tutorial"
-i4:
+quest4:
   questID: 4
   npcToTakeFrom: 11
   npcToComplete: 0
@@ -130,12 +126,10 @@ i4:
   requiredQuests:
     - 3
   advancementMaterial: "RED_NETHER_BRICKS"
-  taskCount: 1
   task1:
     taskType: "TaskDealDamage"
     mobKey: "TUTORIAL_BOSS"
     damageNeeded: 200
-  onCompleteActionCount: 8
   onCompleteAction1:
     actionType: "InvincibleGiveAction"
     duration: 40
@@ -168,7 +162,7 @@ i4:
     questId: 5
   onCompleteAction8:
     actionType: "TutorialEndAction"
-i5:
+quest5:
   questID: 5
   npcToTakeFrom: 0
   npcToComplete: 31

@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.quests.actions.ActionLoader;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskLoader;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -69,28 +70,29 @@ public class QuestConfigurations {
     private static void loadQuestLineConfigs() {
         for (FileConfiguration questLineConfiguration : questLineConfigurations) {
 
-            int count = questLineConfiguration.getInt("count");
+            int questCount = getChildComponentCount(questLineConfiguration, "quest");
 
-            for (int i = 1; i <= count; i++) {
-                int questID = questLineConfiguration.getInt("i" + i + ".questID");
+            for (int i = 1; i <= questCount; i++) {
+                ConfigurationSection section = questLineConfiguration.getConfigurationSection("quest" + i);
+                int questID = section.getInt("questID");
 
-                int npcToTakeFrom = questLineConfiguration.getInt("i" + i + ".npcToTakeFrom");
-                int npcToComplete = questLineConfiguration.getInt("i" + i + ".npcToComplete");
+                int npcToTakeFrom = section.getInt("npcToTakeFrom");
+                int npcToComplete = section.getInt("npcToComplete");
 
-                String name = questLineConfiguration.getString("i" + i + ".name");
+                String name = section.getString("name");
 
-                List<String> story = questLineConfiguration.getStringList("i" + i + ".story");
+                List<String> story = section.getStringList("story");
 
                 String startMsg = "";
-                if (questLineConfiguration.contains("i" + i + ".startMsg")) {
-                    startMsg = questLineConfiguration.getString("i" + i + ".startMsg");
+                if (section.contains("startMsg")) {
+                    startMsg = section.getString("startMsg");
                 }
                 String turnInMsg = "";
-                if (questLineConfiguration.contains("i" + i + ".turnInMsg")) {
-                    turnInMsg = questLineConfiguration.getString("i" + i + ".turnInMsg");
+                if (section.contains("turnInMsg")) {
+                    turnInMsg = section.getString("turnInMsg");
                 }
 
-                List<String> objectiveTextList = questLineConfiguration.getStringList("i" + i + ".objectiveTextList");
+                List<String> objectiveTextList = section.getStringList("objectiveTextList");
                 StringBuilder objectiveText = new StringBuilder(objectiveTextList.get(0));
                 if (objectiveTextList.size() > 1) {
                     for (int lineIndex = 1; lineIndex < objectiveTextList.size(); lineIndex++) {
@@ -100,33 +102,29 @@ public class QuestConfigurations {
                     }
                 }
 
-                int moneyPrize = questLineConfiguration.getInt("i" + i + ".moneyPrize");
-                int expPrize = questLineConfiguration.getInt("i" + i + ".expPrize");
-                int requiredLevel = questLineConfiguration.getInt("i" + i + ".requiredLevel");
+                int moneyPrize = section.getInt("moneyPrize");
+                int expPrize = section.getInt("expPrize");
+                int requiredLevel = section.getInt("requiredLevel");
 
                 List<Integer> requiredQuests = new ArrayList<>();
-                if (questLineConfiguration.contains("i" + i + ".requiredQuests")) {
-                    requiredQuests = questLineConfiguration.getIntegerList("i" + i + ".requiredQuests");
+                if (section.contains("requiredQuests")) {
+                    requiredQuests = section.getIntegerList("requiredQuests");
                 }
 
-                Material advancementMaterial = Material.valueOf(questLineConfiguration.getString("i" + i + ".advancementMaterial"));
+                Material advancementMaterial = Material.valueOf(section.getString("advancementMaterial"));
 
+                int taskCount = getChildComponentCount(section, "task");
                 List<Task> tasks = new ArrayList<>();
-                if (questLineConfiguration.contains("i" + i + ".taskCount")) {
-                    int childCount = questLineConfiguration.getInt("i" + i + ".taskCount");
-                    for (int c = 1; c <= childCount; c++) {
-                        Task task = TaskLoader.load(questLineConfiguration.getConfigurationSection("i" + i + ".task" + c));
-                        tasks.add(task);
-                    }
+                for (int c = 1; c <= taskCount; c++) {
+                    Task task = TaskLoader.load(section.getConfigurationSection("task" + c));
+                    tasks.add(task);
                 }
 
+                int itemPrizeCount = getChildComponentCount(section, "itemPrize");
                 List<ItemStack> itemPrizes = new ArrayList<>();
-                if (questLineConfiguration.contains("i" + i + ".itemPrizeCount")) {
-                    int childCount = questLineConfiguration.getInt("i" + i + ".itemPrizeCount");
-                    for (int c = 1; c <= childCount; c++) {
-                        ItemStack item = ItemReferenceLoader.loadItemReference(questLineConfiguration.getConfigurationSection("i" + i + ".itemPrize" + c));
-                        itemPrizes.add(item);
-                    }
+                for (int c = 1; c <= itemPrizeCount; c++) {
+                    ItemStack item = ItemReferenceLoader.loadItemReference(section.getConfigurationSection("itemPrize" + c));
+                    itemPrizes.add(item);
                 }
 
                 Quest quest = new Quest(questID, name, story,
@@ -134,35 +132,43 @@ public class QuestConfigurations {
                         turnInMsg,
                         tasks, itemPrizes, moneyPrize, expPrize, requiredLevel, requiredQuests, advancementMaterial);
 
-                if (questLineConfiguration.contains("i" + i + ".onAcceptActionCount")) {
-                    int childCount = questLineConfiguration.getInt("i" + i + ".onAcceptActionCount");
-                    for (int c = 1; c <= childCount; c++) {
-                        Action action = ActionLoader.load(questLineConfiguration.getConfigurationSection("i" + i + ".onAcceptAction" + c));
+                int onAcceptActionCount = getChildComponentCount(section, "onAcceptAction");
+                for (int c = 1; c <= onAcceptActionCount; c++) {
+                    Action action = ActionLoader.load(section.getConfigurationSection("onAcceptAction" + c));
 
-                        quest.addOnAcceptAction(action);
-                    }
+                    quest.addOnAcceptAction(action);
                 }
 
-                if (questLineConfiguration.contains("i" + i + ".onCompleteActionCount")) {
-                    int childCount = questLineConfiguration.getInt("i" + i + ".onCompleteActionCount");
-                    for (int c = 1; c <= childCount; c++) {
-                        Action action = ActionLoader.load(questLineConfiguration.getConfigurationSection("i" + i + ".onCompleteAction" + c));
+                int onCompleteActionCount = getChildComponentCount(section, "onCompleteAction");
+                for (int c = 1; c <= onCompleteActionCount; c++) {
+                    Action action = ActionLoader.load(section.getConfigurationSection("onCompleteAction" + c));
 
-                        quest.addOnCompleteAction(action);
-                    }
+                    quest.addOnCompleteAction(action);
                 }
 
-                if (questLineConfiguration.contains("i" + i + ".onTurnInActionCount")) {
-                    int childCount = questLineConfiguration.getInt("i" + i + ".onTurnInActionCount");
-                    for (int c = 1; c <= childCount; c++) {
-                        Action action = ActionLoader.load(questLineConfiguration.getConfigurationSection("i" + i + ".onTurnInAction" + c));
+                int onTurnInActionCount = getChildComponentCount(section, "onTurnInAction");
+                for (int c = 1; c <= onTurnInActionCount; c++) {
+                    Action action = ActionLoader.load(section.getConfigurationSection("onTurnInAction" + c));
 
-                        quest.addOnTurnInAction(action);
-                    }
+                    quest.addOnTurnInAction(action);
                 }
 
                 QuestNPCManager.addQuest(quest, npcToTakeFrom, npcToComplete);
             }
         }
+    }
+
+    private static int getChildComponentCount(ConfigurationSection configurationSection, String text) {
+        int count = 0;
+        while (true) {
+            boolean contains = configurationSection.contains(text + (count + 1));
+            if (contains) {
+                count++;
+            } else {
+                break;
+            }
+        }
+
+        return count;
     }
 }

@@ -76,9 +76,9 @@ public class TaskLoader {
         } else if (componentType.equals(TaskReach.class.getSimpleName())) {
             World world = Bukkit.getWorld(configurationSection.getString("world"));
 
-            double x = configurationSection.getDouble(".x");
-            double y = configurationSection.getDouble(".y");
-            double z = configurationSection.getDouble(".z");
+            double x = configurationSection.getDouble("x");
+            double y = configurationSection.getDouble("y");
+            double z = configurationSection.getDouble("z");
 
             Location location = new Location(world, x, y, z);
 

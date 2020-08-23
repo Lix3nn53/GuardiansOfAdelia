@@ -125,7 +125,7 @@ public class RogueSkills {
         amplifiers.add(4);
         PotionEffectMechanic slow = new PotionEffectMechanic(PotionEffectType.SLOW, ticks, amplifiers);
 
-        WarpTargetMechanic warpTargetMechanic = new WarpTargetMechanic(false);
+        WarpTargetMechanic warpTargetMechanic = new WarpTargetMechanic(true, false);
 
         List<Double> damages = new ArrayList<>();
         damages.add(80D);
