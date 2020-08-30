@@ -45,9 +45,10 @@ public class VanillaSlotOffhand implements VanillaSlot {
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Left Hand Slot");
-        itemMeta.setLore(new ArrayList() {{
-            add("Only shields and daggers can be placed here");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add("Only shields and daggers can be placed here");
+        itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(8);
         itemStack.setItemMeta(itemMeta);

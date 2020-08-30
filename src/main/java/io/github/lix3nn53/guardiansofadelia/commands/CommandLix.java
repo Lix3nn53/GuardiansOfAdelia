@@ -89,7 +89,9 @@ public class CommandLix implements CommandExecutor {
                 ItemStack filler = new ItemStack(Material.BLACK_STAINED_GLASS);
                 ItemMeta itemMeta = filler.getItemMeta();
                 itemMeta.setDisplayName("");
-                itemMeta.setLore(new ArrayList<>());
+                ArrayList<String> lore = new ArrayList<>();
+                lore.add("");
+                itemMeta.setLore(lore);
                 filler.setItemMeta(itemMeta);
                 guiGeneric.setItem(0, filler);
                 guiGeneric.setItem(8, filler);

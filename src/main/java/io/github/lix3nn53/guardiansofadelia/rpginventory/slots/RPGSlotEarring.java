@@ -26,9 +26,11 @@ public class RPGSlotEarring extends RPGSlotPassive implements RPGSlot {
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Earrings Slot");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
+        lore.add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
+        itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(7);
         itemStack.setItemMeta(itemMeta);

@@ -46,9 +46,9 @@ public class VanillaSlotLeggings implements VanillaSlot {
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Leggings Slot");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(4);
         itemStack.setItemMeta(itemMeta);

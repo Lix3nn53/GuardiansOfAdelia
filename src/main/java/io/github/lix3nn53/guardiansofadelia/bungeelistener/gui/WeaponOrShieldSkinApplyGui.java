@@ -22,13 +22,13 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
 
         ItemStack glass = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
         ItemMeta itemMeta = glass.getItemMeta();
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "1 - Right click while holding this item");
+        lore.add(ChatColor.GRAY + "2 - Click to the item you want to apply skin on");
+        lore.add(ChatColor.GRAY + "3 - Confirm by clicking the lime wool");
+        itemMeta.setLore(lore);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Weapon/Shield Skin Apply");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "1 - Right click while holding this item");
-            add(ChatColor.GRAY + "2 - Click to the item you want to apply skin on");
-            add(ChatColor.GRAY + "3 - Confirm by clicking the lime wool");
-        }});
         glass.setItemMeta(itemMeta);
         setItem(16, glass);
 
@@ -37,9 +37,8 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
             if (i == confirmSlot) {
                 ItemStack confirm = new ItemStack(Material.LIME_WOOL);
                 itemMeta.setDisplayName(ChatColor.GREEN + "Click to apply skin!");
-                itemMeta.setLore(new ArrayList() {{
-                    add("");
-                }});
+                lore = new ArrayList<>();
+                lore.add("");
                 confirm.setItemMeta(itemMeta);
                 setItem(i, confirm);
                 continue;

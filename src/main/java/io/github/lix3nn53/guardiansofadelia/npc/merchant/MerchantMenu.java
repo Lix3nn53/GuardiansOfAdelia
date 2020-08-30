@@ -22,10 +22,10 @@ public class MerchantMenu extends GuiGeneric {
             ItemStack sellItem = new ItemStack(Material.ORANGE_WOOL);
             ItemMeta statusItemMeta = sellItem.getItemMeta();
             statusItemMeta.setDisplayName(ChatColor.GOLD + "Sell Items");
-            statusItemMeta.setLore(new ArrayList() {{
-                add("");
-                add(ChatColor.YELLOW + "Sell your item for coins");
-            }});
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.YELLOW + "Sell your item for coins");
+            statusItemMeta.setLore(lore);
             sellItem.setItemMeta(statusItemMeta);
             setItem(nextSlotNo, sellItem, MerchantPageType.SELL);
             nextSlotNo += 2;
@@ -34,11 +34,11 @@ public class MerchantMenu extends GuiGeneric {
             ItemStack coinConvertItem = new ItemStack(Material.YELLOW_WOOL);
             ItemMeta statusItemMeta = coinConvertItem.getItemMeta();
             statusItemMeta.setDisplayName(ChatColor.YELLOW + "Convert coins");
-            statusItemMeta.setLore(new ArrayList() {{
-                add("");
-                add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
-                add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
-            }});
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
+            lore.add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
+            statusItemMeta.setLore(lore);
             coinConvertItem.setItemMeta(statusItemMeta);
             setItem(nextSlotNo, coinConvertItem, MerchantPageType.CONVERT);
         }

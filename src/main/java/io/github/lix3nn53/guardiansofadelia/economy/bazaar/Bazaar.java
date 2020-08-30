@@ -159,14 +159,14 @@ public class Bazaar {
         ItemStack glassInfo = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
         ItemMeta itemMeta = glassInfo.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GOLD + "Click an item in your inventory to add");
-        itemMeta.setLore(new ArrayList() {{
-            add(ChatColor.GOLD + "to your bazaar. Click an item in your bazaar");
-            add(ChatColor.GOLD + "to remove from your bazaar.");
-            add("");
-            add(ChatColor.GREEN + "Click green wool to set up your bazaar");
-            add("");
-            add(ChatColor.RED + "Click red wool to destroy your bazaar");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GOLD + "to your bazaar. Click an item in your bazaar");
+        lore.add(ChatColor.GOLD + "to remove from your bazaar.");
+        lore.add("");
+        lore.add(ChatColor.GREEN + "Click green wool to set up your bazaar");
+        lore.add("");
+        lore.add(ChatColor.RED + "Click red wool to destroy your bazaar");
+        itemMeta.setLore(lore);
         glassInfo.setItemMeta(itemMeta);
         for (int i = 18; i <= 26; i++) {
             customerGui.setItem(i, glassInfo);

@@ -218,16 +218,18 @@ public class MiniGameManager {
             ItemStack room = new ItemStack(Material.LIME_WOOL);
             ItemMeta itemMeta = room.getItemMeta();
             itemMeta.setDisplayName(ChatColor.GREEN + lastOneStanding.getMinigameName() + " (" + lastOneStanding.getPlayersInGameSize() + "/" + lastOneStanding.getMaxPlayerSize() + ")");
-            itemMeta.setLore(new ArrayList() {{
-                add("");
-                add(ChatColor.GREEN + "Map: " + ChatColor.WHITE + lastOneStanding.getMapName());
-                add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + lastOneStanding.getLevelReq());
-                add(ChatColor.GOLD + "Team amount: " + ChatColor.WHITE + lastOneStanding.getTeamAmount());
-                add(ChatColor.GOLD + "Team size: " + ChatColor.WHITE + lastOneStanding.getTeamSize());
-                add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + lastOneStanding.getTimeLimitInMinutes() + " minute(s)");
-                add("");
-                add(ChatColor.GRAY + "Click to join this room!");
-            }});
+
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GREEN + "Map: " + ChatColor.WHITE + lastOneStanding.getMapName());
+            lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + lastOneStanding.getLevelReq());
+            lore.add(ChatColor.GOLD + "Team amount: " + ChatColor.WHITE + lastOneStanding.getTeamAmount());
+            lore.add(ChatColor.GOLD + "Team size: " + ChatColor.WHITE + lastOneStanding.getTeamSize());
+            lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + lastOneStanding.getTimeLimitInMinutes() + " minute(s)");
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Click to join this room!");
+            itemMeta.setLore(lore);
+
             room.setItemMeta(itemMeta);
             if (lastOneStanding.isInGame()) {
                 room.setType(Material.RED_WOOL);
@@ -247,16 +249,18 @@ public class MiniGameManager {
             ItemStack room = new ItemStack(Material.LIME_WOOL);
             ItemMeta itemMeta = room.getItemMeta();
             itemMeta.setDisplayName(ChatColor.GREEN + winByMostKills.getMinigameName() + " (" + winByMostKills.getPlayersInGameSize() + "/" + winByMostKills.getMaxPlayerSize() + ")");
-            itemMeta.setLore(new ArrayList() {{
-                add("");
-                add(ChatColor.GREEN + "Map: " + ChatColor.WHITE + winByMostKills.getMapName());
-                add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + winByMostKills.getLevelReq());
-                add(ChatColor.GOLD + "Team amount: " + ChatColor.WHITE + winByMostKills.getTeamAmount());
-                add(ChatColor.GOLD + "Team size: " + ChatColor.WHITE + winByMostKills.getTeamSize());
-                add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + winByMostKills.getTimeLimitInMinutes() + " minute(s)");
-                add("");
-                add(ChatColor.GRAY + "Click to join this room!");
-            }});
+
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GREEN + "Map: " + ChatColor.WHITE + winByMostKills.getMapName());
+            lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + winByMostKills.getLevelReq());
+            lore.add(ChatColor.GOLD + "Team amount: " + ChatColor.WHITE + winByMostKills.getTeamAmount());
+            lore.add(ChatColor.GOLD + "Team size: " + ChatColor.WHITE + winByMostKills.getTeamSize());
+            lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + winByMostKills.getTimeLimitInMinutes() + " minute(s)");
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Click to join this room!");
+            itemMeta.setLore(lore);
+
             room.setItemMeta(itemMeta);
             if (winByMostKills.isInGame()) {
                 room.setType(Material.RED_WOOL);
@@ -276,15 +280,17 @@ public class MiniGameManager {
             ItemStack room = new ItemStack(Material.LIME_WOOL);
             ItemMeta itemMeta = room.getItemMeta();
             itemMeta.setDisplayName(ChatColor.GREEN + guildWar.getMinigameName() + " (" + guildWar.getPlayersInGameSize() + "/" + guildWar.getMaxPlayerSize() + ")");
-            itemMeta.setLore(new ArrayList() {{
-                add("");
-                add(ChatColor.GREEN + "Map: " + ChatColor.WHITE + guildWar.getMapName());
-                add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + guildWar.getLevelReq());
-                add(ChatColor.GOLD + "Team size: " + ChatColor.WHITE + guildWar.getTeamSize());
-                add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + guildWar.getTimeLimitInMinutes() + " minute(s)");
-                add("");
-                add(ChatColor.GRAY + "Click to join this room!");
-            }});
+
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GREEN + "Map: " + ChatColor.WHITE + guildWar.getMapName());
+            lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + guildWar.getLevelReq());
+            lore.add(ChatColor.GOLD + "Team size: " + ChatColor.WHITE + guildWar.getTeamSize());
+            lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + guildWar.getTimeLimitInMinutes() + " minute(s)");
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Click to join this room!");
+            itemMeta.setLore(lore);
+
             room.setItemMeta(itemMeta);
             if (guildWar.isInGame()) {
                 room.setType(Material.RED_WOOL);

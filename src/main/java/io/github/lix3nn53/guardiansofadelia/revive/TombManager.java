@@ -23,9 +23,9 @@ import java.util.List;
 
 public class TombManager {
 
-    private static HashMap<Player, Tomb> playerToTomb = new HashMap<>();
-    private static HashMap<String, List<Tomb>> chunkKeyToTomb = new HashMap<>();
-    private static List<Player> playersInTombCooldown = new ArrayList<>();
+    private static final HashMap<Player, Tomb> playerToTomb = new HashMap<>();
+    private static final HashMap<String, List<Tomb>> chunkKeyToTomb = new HashMap<>();
+    private static final List<Player> playersInTombCooldown = new ArrayList<>();
 
     public static boolean hasTomb(Player player) {
         return playerToTomb.containsKey(player);
@@ -59,7 +59,7 @@ public class TombManager {
         new BukkitRunnable() {
 
             int count = 0;
-            int timeLimitIn10Seconds = 12;
+            final int timeLimitIn10Seconds = 12;
 
             @Override
             public void run() {
@@ -120,13 +120,12 @@ public class TombManager {
         ItemMeta itemMeta = respawn.getItemMeta();
         itemMeta.setCustomModelData(18);
         itemMeta.setDisplayName(ChatColor.GREEN + "Respawn");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "You have respawn in nearest town");
-            add(ChatColor.GRAY + "to your death location.");
-            add(ChatColor.GRAY + "Close your inventory to continue.");
-
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "You have respawn in nearest town");
+        lore.add(ChatColor.GRAY + "to your death location.");
+        lore.add(ChatColor.GRAY + "Close your inventory to continue.");
+        itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         respawn.setItemMeta(itemMeta);
 
@@ -136,14 +135,14 @@ public class TombManager {
         itemMeta = soul.getItemMeta();
         itemMeta.setCustomModelData(10);
         itemMeta.setDisplayName(ChatColor.AQUA + "Search your tomb in soul mode");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Find your tomb and left");
-            add(ChatColor.GRAY + "click near it to respawn");
-            add(ChatColor.RED + "Time limit is 2 minutes after your death");
-            add(ChatColor.GRAY + "You will respawn here if you cant");
-            add(ChatColor.GRAY + "find your tomb in time");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Find your tomb and left");
+        lore.add(ChatColor.GRAY + "click near it to respawn");
+        lore.add(ChatColor.RED + "Time limit is 2 minutes after your death");
+        lore.add(ChatColor.GRAY + "You will respawn here if you cant");
+        lore.add(ChatColor.GRAY + "find your tomb in time");
+        itemMeta.setLore(lore);
         soul.setItemMeta(itemMeta);
 
         reviveGui.setItem(5, soul);

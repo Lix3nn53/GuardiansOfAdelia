@@ -32,13 +32,13 @@ public class CraftingLine implements GuiLine {
         ItemStack infoGlass = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
         ItemMeta itemMeta = infoGlass.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GOLD + "Crafting Guide");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.YELLOW + "You need ingredients on left side of this line");
-            add(ChatColor.YELLOW + "to create the item on right side of this line.");
-            add("");
-            add(ChatColor.GREEN + "If you have enough ingredients, click on the item you want to craft.");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "You need ingredients on left side of this line");
+        lore.add(ChatColor.YELLOW + "to create the item on right side of this line.");
+        lore.add("");
+        lore.add(ChatColor.GREEN + "If you have enough ingredients, click on the item you want to craft.");
+        itemMeta.setLore(lore);
         infoGlass.setItemMeta(itemMeta);
         line.add(infoGlass);
         line.add(itemToCreate);

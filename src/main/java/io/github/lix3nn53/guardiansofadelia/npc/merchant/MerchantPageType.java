@@ -103,11 +103,11 @@ public enum MerchantPageType {
         ItemStack silverToBronze = new ItemStack(Material.IRON_INGOT, 64);
         ItemMeta itemMeta = silverToBronze.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GREEN + "Bronze Coin");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
-            add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
+        lore.add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
+        itemMeta.setLore(lore);
         silverToBronze.setItemMeta(itemMeta);
         guiGeneric.setItem(0, silverToBronze);
 

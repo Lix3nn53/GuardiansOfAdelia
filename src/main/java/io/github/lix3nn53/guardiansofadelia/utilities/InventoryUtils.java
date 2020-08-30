@@ -167,10 +167,10 @@ public class InventoryUtils {
         ItemStack menu = new ItemStack(Material.BOOK);
         ItemMeta im = menu.getItemMeta();
         im.setDisplayName(ChatColor.GREEN + "Menu");
-        im.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Click to open the menu!");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Click to open the menu!");
+        im.setLore(lore);
         menu.setItemMeta(im);
         player.getInventory().setItem(17, menu);
     }

@@ -36,16 +36,16 @@ public class TradeGui extends GuiGeneric {
         ItemStack middle = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
         ItemMeta middleItemMeta = middle.getItemMeta();
         middleItemMeta.setDisplayName(ChatColor.GREEN + "Trade Guide");
-        middleItemMeta.setLore(new ArrayList() {{
-            add(ChatColor.GOLD + "Click on items you want to add to trade");
-            add(ChatColor.GOLD + "or remove from trade.");
-            add("");
-            add(ChatColor.YELLOW + "Click on yellow wool to");
-            add(ChatColor.YELLOW + "lock the trade for both players.");
-            add("");
-            add(ChatColor.GREEN + "After trade is locked both players need");
-            add(ChatColor.GREEN + "to click green wool to complete the trade.");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GOLD + "Click on items you want to add to trade");
+        lore.add(ChatColor.GOLD + "or remove from trade.");
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "Click on yellow wool to");
+        lore.add(ChatColor.YELLOW + "lock the trade for both players.");
+        lore.add("");
+        lore.add(ChatColor.GREEN + "After trade is locked both players need");
+        lore.add(ChatColor.GREEN + "to click green wool to complete the trade.");
+        middleItemMeta.setLore(lore);
         middle.setItemMeta(middleItemMeta);
         for (int i = 23; i < 25; i++) {
             setItem(i, middle);
@@ -55,10 +55,10 @@ public class TradeGui extends GuiGeneric {
         ItemStack status = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
         ItemMeta statusItemMeta = status.getItemMeta();
         statusItemMeta.setDisplayName(ChatColor.GOLD + "TRADE STATUS");
-        statusItemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.YELLOW + "Players are selecting items to trade");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "Players are selecting items to trade");
+        statusItemMeta.setLore(lore);
         status.setItemMeta(statusItemMeta);
         setItem(4, status);
         setItem(13, status);
@@ -68,10 +68,10 @@ public class TradeGui extends GuiGeneric {
         ItemStack otherSide = new ItemStack(Material.RED_STAINED_GLASS_PANE);
         ItemMeta otherSideItemMeta = otherSide.getItemMeta();
         otherSideItemMeta.setDisplayName(ChatColor.YELLOW + receiver.getName() + "'s Items");
-        otherSideItemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.YELLOW + "You will receive this items");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "You will receive this items");
+        otherSideItemMeta.setLore(lore);
         otherSide.setItemMeta(otherSideItemMeta);
         for (int i = 18; i < 22; i++) {
             setItem(i, otherSide);
@@ -81,21 +81,21 @@ public class TradeGui extends GuiGeneric {
         ItemStack lock = new ItemStack(Material.YELLOW_WOOL);
         ItemMeta lockItemMeta = lock.getItemMeta();
         lockItemMeta.setDisplayName(ChatColor.YELLOW.toString() + "Lock the Trade");
-        lockItemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.YELLOW + "Locks the trade for both players");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "Locks the trade for both players");
+        lockItemMeta.setLore(lore);
         lock.setItemMeta(lockItemMeta);
         setItem(25, lock);
 
         ItemStack finish = new ItemStack(Material.LIME_WOOL);
         ItemMeta finishItemMeta = finish.getItemMeta();
         finishItemMeta.setDisplayName(ChatColor.GREEN.toString() + "Accept the Trade");
-        finishItemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GREEN + "After trade is locked, both players must");
-            add(ChatColor.GREEN + "accept to complete the trade.");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GREEN + "After trade is locked, both players must");
+        lore.add(ChatColor.GREEN + "accept to complete the trade.");
+        finishItemMeta.setLore(lore);
         finish.setItemMeta(finishItemMeta);
         setItem(26, finish);
     }
@@ -192,10 +192,10 @@ public class TradeGui extends GuiGeneric {
         ItemStack status = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
         ItemMeta statusItemMeta = status.getItemMeta();
         statusItemMeta.setDisplayName(ChatColor.GOLD + "TRADE STATUS");
-        statusItemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GOLD + "One of the players LOCKED the trade");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GOLD + "One of the players LOCKED the trade");
+        statusItemMeta.setLore(lore);
         status.setItemMeta(statusItemMeta);
         setItem(4, status);
         setItem(13, status);
@@ -205,16 +205,16 @@ public class TradeGui extends GuiGeneric {
         ItemStack middle = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
         ItemMeta middleItemMeta = middle.getItemMeta();
         middleItemMeta.setDisplayName(ChatColor.GOLD + "Trade Guide");
-        middleItemMeta.setLore(new ArrayList() {{
-            add(ChatColor.GOLD + "Click on items you want to add to trade");
-            add(ChatColor.GOLD + "or remove from trade.");
-            add("");
-            add(ChatColor.YELLOW + "Click on yellow wool to");
-            add(ChatColor.YELLOW + "lock the trade for both players.");
-            add("");
-            add(ChatColor.GREEN + "After trade is locked both players need");
-            add(ChatColor.GREEN + "to click green wool to complete the trade.");
-        }});
+        lore = new ArrayList<>();
+        lore.add(ChatColor.GOLD + "Click on items you want to add to trade");
+        lore.add(ChatColor.GOLD + "or remove from trade.");
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "Click on yellow wool to");
+        lore.add(ChatColor.YELLOW + "lock the trade for both players.");
+        lore.add("");
+        lore.add(ChatColor.GREEN + "After trade is locked both players need");
+        lore.add(ChatColor.GREEN + "to click green wool to complete the trade.");
+        middleItemMeta.setLore(lore);
         middle.setItemMeta(middleItemMeta);
         setItem(25, middle);
     }
@@ -226,11 +226,11 @@ public class TradeGui extends GuiGeneric {
         ItemStack status = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
         ItemMeta statusItemMeta = status.getItemMeta();
         statusItemMeta.setDisplayName(ChatColor.GOLD + "TRADE STATUS");
-        statusItemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GREEN + "You have accepted the trade and");
-            add(ChatColor.GREEN + "waiting for other player to accept");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GREEN + "You have accepted the trade and");
+        lore.add(ChatColor.GREEN + "waiting for other player to accept");
+        statusItemMeta.setLore(lore);
         status.setItemMeta(statusItemMeta);
         setItem(4, status);
         setItem(13, status);
@@ -240,16 +240,16 @@ public class TradeGui extends GuiGeneric {
         ItemStack middle = new ItemStack(Material.RED_STAINED_GLASS_PANE);
         ItemMeta middleItemMeta = middle.getItemMeta();
         middleItemMeta.setDisplayName(ChatColor.GOLD + "Trade Guide");
-        middleItemMeta.setLore(new ArrayList() {{
-            add(ChatColor.GOLD + "Click on items you want to add to trade");
-            add(ChatColor.GOLD + "or remove from trade.");
-            add("");
-            add(ChatColor.YELLOW + "Click on yellow wool to");
-            add(ChatColor.YELLOW + "lock the trade for both players.");
-            add("");
-            add(ChatColor.GREEN + "After trade is locked both players need");
-            add(ChatColor.GREEN + "to click green wool to complete the trade.");
-        }});
+        lore = new ArrayList<>();
+        lore.add(ChatColor.GOLD + "Click on items you want to add to trade");
+        lore.add(ChatColor.GOLD + "or remove from trade.");
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "Click on yellow wool to");
+        lore.add(ChatColor.YELLOW + "lock the trade for both players.");
+        lore.add("");
+        lore.add(ChatColor.GREEN + "After trade is locked both players need");
+        lore.add(ChatColor.GREEN + "to click green wool to complete the trade.");
+        middleItemMeta.setLore(lore);
         middle.setItemMeta(middleItemMeta);
         setItem(26, middle);
     }

@@ -29,48 +29,44 @@ public enum EnchantStone {
             ItemStack item = new ItemStack(Material.BRICK, amount);
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(ChatColor.BLUE + "Enchant Stone Tier 2");
-            itemMeta.setLore(new ArrayList() {{
-                add("");
-                add(ChatColor.GRAY + "Magical stone to enchant items");
-                add(ChatColor.GRAY + "For +3, +4 ve +5 items");
-
-            }});
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Magical stone to enchant items");
+            lore.add(ChatColor.GRAY + "For +3, +4 ve +5 items");
+            itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
             return item;
         } else if (this.equals(EnchantStone.TIER_THREE)) {
             ItemStack item = new ItemStack(Material.CLAY_BALL, amount);
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Enchant Stone Tier 3");
-            itemMeta.setLore(new ArrayList() {{
-                add("");
-                add(ChatColor.GRAY + "Magical stone to enchant items");
-                add(ChatColor.GRAY + "For +6, +7 ve +8 items");
-
-            }});
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Magical stone to enchant items");
+            lore.add(ChatColor.GRAY + "For +6, +7 ve +8 items");
+            itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
             return item;
         } else if (this.equals(EnchantStone.TIER_FOUR)) {
             ItemStack item = new ItemStack(Material.GOLD_NUGGET, amount);
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(ChatColor.RED + "Enchant Stone Tier 4");
-            itemMeta.setLore(new ArrayList() {{
-                add("");
-                add(ChatColor.GRAY + "Magical stone to enchant items");
-                add(ChatColor.GRAY + "For +9, +10 ve +11 items");
-
-            }});
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Magical stone to enchant items");
+            lore.add(ChatColor.GRAY + "For +9, +10 ve +11 items");
+            itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
             return item;
         }
         ItemStack item = new ItemStack(Material.FLINT, amount);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GREEN + "Enchant Stone Tier 1");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Magical stone to enchant items");
-            add(ChatColor.GRAY + "For +0, +1 ve +2 items");
-
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Magical stone to enchant items");
+        lore.add(ChatColor.GRAY + "For +0, +1 ve +2 items");
+        itemMeta.setLore(lore);
         item.setItemMeta(itemMeta);
         return item;
     }

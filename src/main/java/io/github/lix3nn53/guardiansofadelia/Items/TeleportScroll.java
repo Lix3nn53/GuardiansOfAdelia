@@ -172,17 +172,19 @@ public class TeleportScroll {
         ItemMeta itemMeta = scroll.getItemMeta();
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Teleport Scroll " + ChatColor.DARK_PURPLE +
                 "(" + ChatColor.AQUA + getName() + ChatColor.DARK_PURPLE + ")");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.YELLOW + "Required Level: " + level);
-            add("");
-            add(ChatColor.BLUE + "Right click while holding this");
-            add(ChatColor.BLUE + "to start teleporting.");
-            add(ChatColor.BLUE + "You will be teleported to");
-            add(ChatColor.AQUA + getName() + ChatColor.BLUE + " in 5 seconds.");
-            add("");
-            add(ChatColor.RED + "If you move, the teleportation will be canceled!");
-        }});
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "Required Level: " + level);
+        lore.add("");
+        lore.add(ChatColor.BLUE + "Right click while holding this");
+        lore.add(ChatColor.BLUE + "to start teleporting.");
+        lore.add(ChatColor.BLUE + "You will be teleported to");
+        lore.add(ChatColor.AQUA + getName() + ChatColor.BLUE + " in 5 seconds.");
+        lore.add("");
+        lore.add(ChatColor.RED + "If you move, the teleportation will be canceled!");
+        itemMeta.setLore(lore);
+
         scroll.setItemMeta(itemMeta);
         PersistentDataContainerUtil.putInteger("reqLevel", level, scroll);
         PersistentDataContainerUtil.putString("teleportScroll", toString(), scroll);

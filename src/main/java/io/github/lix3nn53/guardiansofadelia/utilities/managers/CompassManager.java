@@ -22,11 +22,12 @@ public class CompassManager {
         ItemStack itemStack = new ItemStack(Material.COMPASS);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ChatColor.BLUE + "Compass " + ChatColor.WHITE + "( " + npc.getName() + ChatColor.WHITE + " )");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Right click while holding to select compass target");
-            add(ChatColor.DARK_GRAY + "NPC: #" + npcNo);
-        }});
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Right click while holding to select compass target");
+        lore.add(ChatColor.DARK_GRAY + "NPC: #" + npcNo);
+        itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
         InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.COMPASS, 1);
 
@@ -39,11 +40,11 @@ public class CompassManager {
         ItemStack itemStack = new ItemStack(Material.COMPASS);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ChatColor.BLUE + "Compass " + ChatColor.WHITE + "( " + locationName + ChatColor.WHITE + " )");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Right click while holding to select compass target");
-            add(ChatColor.DARK_GRAY + "Location: #" + locationName);
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Right click while holding to select compass target");
+        lore.add(ChatColor.DARK_GRAY + "Location: #" + locationName);
+        itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
         InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.COMPASS, 1);
 

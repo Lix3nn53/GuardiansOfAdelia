@@ -26,9 +26,9 @@ public class RPGSlotParrot extends RPGSlotPassive implements RPGSlot {
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Parrot Slot");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(15);
         itemStack.setItemMeta(itemMeta);

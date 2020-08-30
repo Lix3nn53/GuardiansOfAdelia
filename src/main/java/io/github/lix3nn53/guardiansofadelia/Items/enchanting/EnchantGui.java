@@ -17,7 +17,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class EnchantGui extends GuiGeneric {
 
@@ -31,18 +30,18 @@ public class EnchantGui extends GuiGeneric {
         ItemStack wool = new ItemStack(Material.EMERALD_BLOCK, 1);
         ItemMeta im = itemGlass.getItemMeta();
         im.setDisplayName(ChatColor.YELLOW + "§ePlace the item you");
-        im.setLore(new ArrayList() {{
-            add(ChatColor.YELLOW + "want to enchant here.");
-            add("");
-            add(ChatColor.GOLD + "Enhanceable items: ");
-            add(ChatColor.GRAY + "Armors and Shields");
-            add(ChatColor.GRAY + "Weapons");
-            add(ChatColor.GRAY + "Jewelry, Gloves, Parrots");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.YELLOW + "want to enchant here.");
+        lore.add("");
+        lore.add(ChatColor.GOLD + "Enhanceable items: ");
+        lore.add(ChatColor.GRAY + "Armors and Shields");
+        lore.add(ChatColor.GRAY + "Weapons");
+        lore.add(ChatColor.GRAY + "Jewelry, Gloves, Parrots");
+        im.setLore(lore);
         itemGlass.setItemMeta(im);
         ItemMeta im2 = finalGlass.getItemMeta();
         im2.setDisplayName(ChatColor.GREEN + "Enchant success rates:");
-        List<String> lore = new ArrayList<>();
+        lore = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             lore.add(ChatColor.GRAY.toString() + i + " -> " + (i + 1) + " = " + (int) (EnchantManager.getChance(player, i) * 100) + "%");
         }
@@ -50,25 +49,25 @@ public class EnchantGui extends GuiGeneric {
         finalGlass.setItemMeta(im2);
         ItemMeta im3 = stoneGlass.getItemMeta();
         im3.setDisplayName(ChatColor.AQUA + "Place the appropriate level of");
-        im3.setLore(new ArrayList() {{
-            add(ChatColor.AQUA + "enchant stone here.");
-            add("");
-            add(ChatColor.DARK_AQUA + "for +0~2 items > Level 1 enchant stone");
-            add(ChatColor.DARK_AQUA + "for +3~5 items > Level 2 enchant stone");
-            add(ChatColor.DARK_AQUA + "for +6~8 items > Level 3 enchant stone");
-            add(ChatColor.DARK_AQUA + "for +9~11 items > Level 4 enchant stone");
-        }});
+        lore = new ArrayList<>();
+        lore.add(ChatColor.AQUA + "enchant stone here.");
+        lore.add("");
+        lore.add(ChatColor.DARK_AQUA + "for +0~2 items > Level 1 enchant stone");
+        lore.add(ChatColor.DARK_AQUA + "for +3~5 items > Level 2 enchant stone");
+        lore.add(ChatColor.DARK_AQUA + "for +6~8 items > Level 3 enchant stone");
+        lore.add(ChatColor.DARK_AQUA + "for +9~11 items > Level 4 enchant stone");
+        im3.setLore(lore);
         stoneGlass.setItemMeta(im3);
         ItemMeta im4 = wool.getItemMeta();
         im4.setDisplayName(ChatColor.GREEN + "After you place the item");
-        im4.setLore(new ArrayList() {{
-            add(ChatColor.GREEN + "and the enchant stone");
-            add(ChatColor.GREEN + "click emerald block to enchant!");
-            add("");
-            add(ChatColor.RED + "Warning:");
-            add(ChatColor.GRAY + "If it fails the enchant level");
-            add(ChatColor.GRAY + "of item decreases");
-        }});
+        lore = new ArrayList<>();
+        lore.add(ChatColor.GREEN + "and the enchant stone");
+        lore.add(ChatColor.GREEN + "click emerald block to enchant!");
+        lore.add("");
+        lore.add(ChatColor.RED + "Warning:");
+        lore.add(ChatColor.GRAY + "If it fails the enchant level");
+        lore.add(ChatColor.GRAY + "of item decreases");
+        im4.setLore(lore);
         wool.setItemMeta(im4);
 
         setItem(0, itemGlass);

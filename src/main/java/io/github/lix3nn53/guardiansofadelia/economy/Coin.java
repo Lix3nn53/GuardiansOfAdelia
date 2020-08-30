@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Coin {
 
-    private CoinType type;
-    private int amount;
+    private final CoinType type;
+    private final int amount;
 
     public Coin(CoinType type, int amount) {
         this.type = type;
@@ -51,11 +51,11 @@ public class Coin {
                 money = new ItemStack(Material.DIAMOND, amount);
                 itemMeta.setDisplayName(ChatColor.GOLD + "Gold Coin");
             }
-            itemMeta.setLore(new ArrayList() {{
-                add("");
-                add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
-                add(ChatColor.WHITE + "64 Silver = " + ChatColor.GOLD + "1 Gold");
-            }});
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
+            lore.add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
+            itemMeta.setLore(lore);
             money.setItemMeta(itemMeta);
 
             return money;

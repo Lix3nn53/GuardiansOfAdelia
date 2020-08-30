@@ -18,10 +18,10 @@ public class CraftingGuiManager {
         ItemStack itemStack = new ItemStack(Material.STONE_PICKAXE, 10);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setCustomModelData(36);
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Click to craft items of this crafting-level.");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Click to craft items of this crafting-level.");
+        itemMeta.setLore(lore);
 
         List<Integer> craftingTypeToLevels = CraftingManager.getCraftingTypeToLevels(craftingType);
 

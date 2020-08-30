@@ -46,82 +46,82 @@ public class MenuList {
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(23);
         itemMeta.setDisplayName(ChatColor.BLUE + "Compass");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Choose where you want to go and");
-            add(ChatColor.GRAY + "let the compass lead you!");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Choose where you want to go and");
+        lore.add(ChatColor.GRAY + "let the compass lead you!");
+        itemMeta.setLore(lore);
         compass.setItemMeta(itemMeta);
         guiGeneric.setItem(12, compass);
 
         ItemStack map = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(26);
         itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Maps");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Explore the Adelia!");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Explore the Adelia!");
+        itemMeta.setLore(lore);
         map.setItemMeta(itemMeta);
         guiGeneric.setItem(14, map);
 
         ItemStack character = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(40);
         itemMeta.setDisplayName(ChatColor.GREEN + "Character");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Manage your character");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Manage your character");
+        itemMeta.setLore(lore);
         character.setItemMeta(itemMeta);
         guiGeneric.setItem(10, character);
 
         ItemStack guild = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(25);
         itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Guild");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "United we stand divided we fall!");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "United we stand divided we fall!");
+        itemMeta.setLore(lore);
         guild.setItemMeta(itemMeta);
         guiGeneric.setItem(16, guild);
 
         ItemStack minigames = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(29);
         itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Minigames");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Have fun in different game modes!");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        itemMeta.setLore(lore);
+        lore.add(ChatColor.GRAY + "Have fun in different game modes!");
         minigames.setItemMeta(itemMeta);
         guiGeneric.setItem(32, minigames);
 
         ItemStack bazaar = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(27);
         itemMeta.setDisplayName(ChatColor.GOLD + "Bazaar");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Manage your bazaar!");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Manage your bazaar!");
+        itemMeta.setLore(lore);
         bazaar.setItemMeta(itemMeta);
         guiGeneric.setItem(30, bazaar);
 
         ItemStack activeBoosts = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(38);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Server Boosts");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "See if the server boost are active or not");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "See if the server boost are active or not");
+        itemMeta.setLore(lore);
         activeBoosts.setItemMeta(itemMeta);
         guiGeneric.setItem(48, activeBoosts);
 
         ItemStack donation = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(28);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "WebStore ♥");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Donations are not required but helps me so");
-            add(ChatColor.GRAY + "I can keep working on this project. Thanks <3");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Donations are not required but helps me so");
+        lore.add(ChatColor.GRAY + "I can keep working on this project. Thanks <3");
+        itemMeta.setLore(lore);
         donation.setItemMeta(itemMeta);
         guiGeneric.setItem(50, donation);
 
@@ -153,42 +153,41 @@ public class MenuList {
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Skills");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Learn and master skills!");
-
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Learn and master skills!");
+        itemMeta.setLore(lore);
         skills.setItemMeta(itemMeta);
         guiGeneric.setItem(11, skills);
 
         ItemStack elements = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(37);
         itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Elements");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Choose where you want to go and");
-            add(ChatColor.GRAY + "let the compass lead you!");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Choose where you want to go and");
+        lore.add(ChatColor.GRAY + "let the compass lead you!");
+        itemMeta.setLore(lore);
         elements.setItemMeta(itemMeta);
         guiGeneric.setItem(13, elements);
 
         ItemStack job = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(30);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Job");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Manage your character's job!");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Manage your character's job!");
+        itemMeta.setLore(lore);
         job.setItemMeta(itemMeta);
         guiGeneric.setItem(15, job);
 
         ItemStack chat = new ItemStack(Material.STONE_PICKAXE);
         itemMeta.setCustomModelData(33);
         itemMeta.setDisplayName(ChatColor.AQUA + "Chat Tag");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Select your chat tag!");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Select your chat tag!");
+        itemMeta.setLore(lore);
         chat.setItemMeta(itemMeta);
         guiGeneric.setItem(17, chat);
 
@@ -275,10 +274,7 @@ public class MenuList {
                     String lightning = ChatColor.AQUA.toString() + attributeTiers.get(AttributeType.LIGHTNING);
                     String wind = ChatColor.WHITE.toString() + attributeTiers.get(AttributeType.WIND);
 
-                    List<String> lore = new ArrayList<>();
-                    for (String line : description) {
-                        lore.add(line);
-                    }
+                    List<String> lore = new ArrayList<>(description);
                     lore.add("");
 
                     lore.add(ChatColor.GREEN + "Attributes");
@@ -424,53 +420,53 @@ public class MenuList {
 
                 Attribute fireStat = rpgCharacterStats.getFire();
                 ItemStack fire = new ItemStack(Material.PAPER);
-                ItemMeta ıtemMeta = fire.getItemMeta();
-                ıtemMeta.setDisplayName(ChatColor.RED + "Fire (Invested: " + fireStat.getInvested() + ")");
-                ıtemMeta.setLore(new ArrayList() {{
-                    add("");
-                    add(fireStat.getAttributeType().getDescription());
-                }});
-                fire.setItemMeta(ıtemMeta);
+                ItemMeta itemMeta = fire.getItemMeta();
+                itemMeta.setDisplayName(ChatColor.RED + "Fire (Invested: " + fireStat.getInvested() + ")");
+                ArrayList<String> lore = new ArrayList<>();
+                lore.add("");
+                lore.add(fireStat.getAttributeType().getDescription());
+                itemMeta.setLore(lore);
+                fire.setItemMeta(itemMeta);
                 guiGeneric.setItem(1, fire);
 
                 Attribute waterStat = rpgCharacterStats.getWater();
                 ItemStack water = new ItemStack(Material.PAPER);
-                ıtemMeta.setDisplayName(ChatColor.BLUE + "Water (Invested: " + waterStat.getInvested() + ")");
-                ıtemMeta.setLore(new ArrayList() {{
-                    add("");
-                    add(waterStat.getAttributeType().getDescription());
-                }});
-                water.setItemMeta(ıtemMeta);
+                itemMeta.setDisplayName(ChatColor.BLUE + "Water (Invested: " + waterStat.getInvested() + ")");
+                lore = new ArrayList<>();
+                lore.add("");
+                lore.add(waterStat.getAttributeType().getDescription());
+                itemMeta.setLore(lore);
+                water.setItemMeta(itemMeta);
                 guiGeneric.setItem(4, water);
 
                 Attribute earthStat = rpgCharacterStats.getEarth();
                 ItemStack earth = new ItemStack(Material.PAPER);
-                ıtemMeta.setDisplayName(ChatColor.DARK_GREEN + "Earth (Invested: " + earthStat.getInvested() + ")");
-                ıtemMeta.setLore(new ArrayList() {{
-                    add("");
-                    add(earthStat.getAttributeType().getDescription());
-                }});
-                earth.setItemMeta(ıtemMeta);
+                itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Earth (Invested: " + earthStat.getInvested() + ")");
+                lore = new ArrayList<>();
+                lore.add("");
+                lore.add(earthStat.getAttributeType().getDescription());
+                itemMeta.setLore(lore);
+                earth.setItemMeta(itemMeta);
                 guiGeneric.setItem(7, earth);
 
                 Attribute lightningStat = rpgCharacterStats.getLightning();
                 ItemStack lightning = new ItemStack(Material.PAPER);
-                ıtemMeta.setDisplayName(ChatColor.AQUA + "Lightning (Invested: " + lightningStat.getInvested() + ")");
-                ıtemMeta.setLore(new ArrayList() {{
-                    add("");
-                    add(lightningStat.getAttributeType().getDescription());
-                }});
-                lightning.setItemMeta(ıtemMeta);
+                itemMeta.setDisplayName(ChatColor.AQUA + "Lightning (Invested: " + lightningStat.getInvested() + ")");
+                lore = new ArrayList<>();
+                lore.add("");
+                lore.add(lightningStat.getAttributeType().getDescription());
+                itemMeta.setLore(lore);
+                lightning.setItemMeta(itemMeta);
                 guiGeneric.setItem(20, lightning);
 
                 Attribute windStat = rpgCharacterStats.getWind();
                 ItemStack wind = new ItemStack(Material.PAPER);
-                ıtemMeta.setDisplayName(ChatColor.WHITE + "Wind (Invested: " + windStat.getInvested() + ")");
-                ıtemMeta.setLore(new ArrayList() {{
-                    add("");
-                    add(windStat.getAttributeType().getDescription());
-                }});
-                wind.setItemMeta(ıtemMeta);
+                itemMeta.setDisplayName(ChatColor.WHITE + "Wind (Invested: " + windStat.getInvested() + ")");
+                lore = new ArrayList<>();
+                lore.add("");
+                lore.add(windStat.getAttributeType().getDescription());
+                itemMeta.setLore(lore);
+                wind.setItemMeta(itemMeta);
                 guiGeneric.setItem(24, wind);
             }
         }
@@ -600,9 +596,8 @@ public class MenuList {
     }
 
     public static GuiGeneric guide() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Guides", 0);
 
-        return guiGeneric;
+        return new GuiGeneric(27, ChatColor.DARK_GRAY + "Guides", 0);
     }
 
     public static GuiBookGeneric compass() {
@@ -614,12 +609,12 @@ public class MenuList {
         ItemStack city = new ItemStack(Material.LIGHT_BLUE_WOOL);
         ItemMeta itemMeta = city.getItemMeta();
         itemMeta.setDisplayName(ChatColor.AQUA + "Roumen #1");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Click to select your compass target!");
-            add("");
-            add(ChatColor.GRAY + "If you dont have a compass this will give you one.");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Click to select your compass target!");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "If you dont have a compass this will give you one.");
+        itemMeta.setLore(lore);
         city.setItemMeta(itemMeta);
         page1Line1.addWord(city);
 
@@ -806,10 +801,10 @@ public class MenuList {
         ItemStack guildWar = new ItemStack(Material.RED_WOOL);
         ItemMeta itemMeta = guildWar.getItemMeta();
         itemMeta.setDisplayName(ChatColor.RED + "Join Guild War");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Click to join a guild war");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Click to join a guild war");
+        itemMeta.setLore(lore);
         guildWar.setItemMeta(itemMeta);
         guiGeneric.setItem(17, guildWar);
 
@@ -846,22 +841,22 @@ public class MenuList {
             }
         }
         if (!hasBazaar) {
-            itemMeta.setLore(new ArrayList() {{
-                add("");
-                add(ChatColor.GRAY + "CLOSED");
-            }});
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "CLOSED");
+            itemMeta.setLore(lore);
         }
         info.setItemMeta(itemMeta);
         guiGeneric.setItem(12, info);
 
         ItemStack open = new ItemStack(Material.LIME_WOOL);
         itemMeta.setDisplayName(ChatColor.GREEN + "Open/Edit your bazaar");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Set up a bazaar in your current location");
-            add("");
-            add(ChatColor.GRAY + "Edit your bazaar if you already have one");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Set up a bazaar in your current location");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Edit your bazaar if you already have one");
+        itemMeta.setLore(lore);
         open.setItemMeta(itemMeta);
         guiGeneric.setItem(14, open);
 
@@ -874,10 +869,10 @@ public class MenuList {
         ItemStack pvp = new ItemStack(Material.RED_WOOL);
         ItemMeta itemMeta = pvp.getItemMeta();
         itemMeta.setDisplayName(ChatColor.RED + "Last One Standing");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Click to join this minigame");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Click to join this minigame");
+        itemMeta.setLore(lore);
         pvp.setItemMeta(itemMeta);
         guiGeneric.setItem(0, pvp);
 
@@ -898,28 +893,28 @@ public class MenuList {
         ItemStack party = new ItemStack(Material.LIGHT_BLUE_WOOL);
         ItemMeta itemMeta = party.getItemMeta();
         itemMeta.setDisplayName(ChatColor.AQUA + "Party Invite");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Click to invite to party!");
-        }});
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Click to invite to party!");
+        itemMeta.setLore(lore);
         party.setItemMeta(itemMeta);
         guiGeneric.setItem(12, party);
 
         ItemStack guild = new ItemStack(Material.PURPLE_WOOL);
         itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Guild Invite");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Click to invite to guild!");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Click to invite to guild!");
+        itemMeta.setLore(lore);
         guild.setItemMeta(itemMeta);
         guiGeneric.setItem(14, guild);
 
         ItemStack trade = new ItemStack(Material.YELLOW_WOOL);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Trade Invite");
-        itemMeta.setLore(new ArrayList() {{
-            add("");
-            add(ChatColor.GRAY + "Click to invite to trade!");
-        }});
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Click to invite to trade!");
+        itemMeta.setLore(lore);
         trade.setItemMeta(itemMeta);
         guiGeneric.setItem(16, trade);
 
