@@ -82,7 +82,8 @@ public class MyPlayerInteractEvent implements Listener {
             } else if (itemInMainHandType.equals(Material.PAPER)) {
                 if (PersistentDataContainerUtil.hasString(itemInMainHand, "teleportScroll")) {
                     String teleportScroll = PersistentDataContainerUtil.getString(itemInMainHand, "teleportScroll");
-                    TeleportScroll teleportScrollLocation = TeleportScroll.valueOf(teleportScroll);
+
+                    TeleportScroll teleportScrollLocation = new TeleportScroll(teleportScroll);
                     teleportScrollLocation.teleport(player, itemInMainHand);
                 }
             } else if (itemInMainHandType.equals(Material.STONE_PICKAXE)) {

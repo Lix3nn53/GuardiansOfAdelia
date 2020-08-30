@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
@@ -123,7 +122,7 @@ public class QuestsPhase6 {
         nameOfMobsItemDropsFrom.add(ChatColor.AQUA + "Frozen Illusioner");
         nameOfMobsItemDropsFrom.add(ChatColor.AQUA + "Frozen Ranger");
         nameOfMobsItemDropsFrom.add(ChatColor.AQUA + "Frozen Timberman");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(47), 30);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, new ItemStack(Material.ACACIA_BOAT), 30);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

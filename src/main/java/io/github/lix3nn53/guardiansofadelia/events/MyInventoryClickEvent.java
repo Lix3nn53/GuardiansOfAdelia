@@ -60,9 +60,9 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -380,7 +380,7 @@ public class MyInventoryClickEvent implements Listener {
                 player.closeInventory();
                 TextComponent message = new TextComponent(" Maps ! (Click Me)");
                 message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://guardiansofadelia.com/#t5"));
-                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click to see Maps from our website").color(ChatColor.AQUA).create()));
+                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.AQUA + "Click to see Maps from our website")));
                 message.setColor(ChatColor.GREEN);
                 message.setBold(true);
                 player.spigot().sendMessage(message);
@@ -401,7 +401,7 @@ public class MyInventoryClickEvent implements Listener {
                 player.closeInventory();
                 TextComponent message = new TextComponent(" Donation ♥ ! (Click Me)");
                 message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://guardiansofadelia.com/#t6"));
-                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click to see donate ♥").color(ChatColor.AQUA).create()));
+                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.LIGHT_PURPLE + "Click to donate ♥")));
                 message.setColor(ChatColor.LIGHT_PURPLE);
                 message.setBold(true);
                 player.spigot().sendMessage(message);
@@ -952,15 +952,15 @@ public class MyInventoryClickEvent implements Listener {
             TextComponent message = new TextComponent(ChatColor.YELLOW + player.getName() + " shows an item to chat: ");
 
             TextComponent itemMessage = new TextComponent(currentName);
-            ComponentBuilder componentBuilder = new ComponentBuilder(currentName);
+            StringBuilder stringBuilder = new StringBuilder(currentName);
             if (itemMeta.hasLore()) {
                 List<String> lore = itemMeta.getLore();
                 for (String line : lore) {
-                    componentBuilder.append("\n");
-                    componentBuilder.append(line);
+                    stringBuilder.append("\n");
+                    stringBuilder.append(line);
                 }
             }
-            itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, componentBuilder.create()));
+            message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(stringBuilder.toString())));
 
             message.addExtra(itemMessage);
 

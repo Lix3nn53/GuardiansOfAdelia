@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringTool;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
@@ -124,7 +123,7 @@ public class QuestsPhase4 {
         nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Taffy Spirit");
         nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Candy Box");
         nameOfMobsItemDropsFrom.add(ChatColor.LIGHT_PURPLE + "Jellybean");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(31), 16);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, new ItemStack(Material.ACACIA_BOAT), 16);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

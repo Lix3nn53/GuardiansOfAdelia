@@ -46,7 +46,7 @@ public class PotionEffectMechanic extends MechanicComponent {
         PotionEffect potionEffect = new PotionEffect(potionEffectType, tickList.get(skillLevel - 1), amplifierList.get(skillLevel - 1));
 
         for (LivingEntity target : targets) {
-            target.addPotionEffect(potionEffect, true);
+            target.addPotionEffect(potionEffect);
         }
 
         return true;

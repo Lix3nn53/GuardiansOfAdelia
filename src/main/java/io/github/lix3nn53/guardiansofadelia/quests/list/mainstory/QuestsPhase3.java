@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringTool;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
@@ -128,7 +127,7 @@ public class QuestsPhase3 {
         nameOfMobsItemDropsFrom.add(ChatColor.WHITE + "Rogue Skeleton");
         nameOfMobsItemDropsFrom.add(ChatColor.WHITE + "Monk Skeleton");
         nameOfMobsItemDropsFrom.add(ChatColor.WHITE + "Mage Skeleton");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(23), 14);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, new ItemStack(Material.ACACIA_BOAT), 14);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

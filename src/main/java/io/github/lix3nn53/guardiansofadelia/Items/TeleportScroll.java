@@ -3,13 +3,10 @@ package io.github.lix3nn53.guardiansofadelia.Items;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,39 +15,48 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 
-public enum TeleportScroll {
-    ROUMEN,
-    PORT_VELOA,
-    ELDERINE,
-    URUGA,
-    ALBERSTOL_RUINS;
+public class TeleportScroll {
+    private final Location location;
+    private final String name;
+
+    public TeleportScroll(Location location, String name) {
+        this.location = location;
+        this.name = name;
+    }
+
+    public TeleportScroll(String toString) {
+        String[] split = toString.split("\\.");
+        World world = Bukkit.getWorld(split[0]);
+        int x = Integer.parseInt(split[1]);
+        int y = Integer.parseInt(split[2]);
+        int z = Integer.parseInt(split[3]);
+        float yaw = Float.parseFloat(split[4]);
+        float pitch = Float.parseFloat(split[5]);
+        String name = split[6];
+
+        this.location = new Location(world, x, y, z, yaw, pitch);
+        this.name = name;
+    }
 
     public Location getLocation() {
-        switch (this) {
-            case PORT_VELOA:
-                return TownManager.getTown(2).getLocation();
-            case ELDERINE:
-                return TownManager.getTown(3).getLocation();
-            case URUGA:
-                return TownManager.getTown(4).getLocation();
-            case ALBERSTOL_RUINS:
-                return TownManager.getTown(5).getLocation();
-        }
-        return TownManager.getTown(1).getLocation();
+        return location;
     }
 
     public String getName() {
-        switch (this) {
-            case PORT_VELOA:
-                return "Port Veloa";
-            case ELDERINE:
-                return "Elderine";
-            case URUGA:
-                return "Uruga";
-            case ALBERSTOL_RUINS:
-                return "Alberstol Ruins";
-        }
-        return "Roumen";
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder(location.getWorld().getName());
+        sb.append(".");
+        sb.append(location.getBlockX()).append(".");
+        sb.append(location.getBlockY()).append(".");
+        sb.append(location.getBlockZ()).append(".");
+        sb.append(location.getYaw()).append(".");
+        sb.append(location.getPitch()).append(".");
+        sb.append(name);
+        return sb.toString();
     }
 
     public void teleport(Player player, ItemStack scroll) {

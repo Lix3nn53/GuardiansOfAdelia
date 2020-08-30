@@ -15,9 +15,12 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
-import org.bukkit.ChatColor;
+import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.List;
 
 public class ItemReferenceLoader {
 
@@ -30,7 +33,7 @@ public class ItemReferenceLoader {
         }
 
         if (itemType.equals("Armor")) {
-            ArmorSlot armorSlot = ArmorSlot.valueOf(configurationSection.getString("armorType"));
+            ArmorSlot armorSlot = ArmorSlot.valueOf(configurationSection.getString("armorSlot"));
             ArmorGearType gearType = ArmorGearType.valueOf(configurationSection.getString("armorGearType"));
             int gearLevel = configurationSection.getInt("gearLevel");
             int itemIndex = configurationSection.getInt("itemIndex");
@@ -51,6 +54,11 @@ public class ItemReferenceLoader {
             int gearLevel = configurationSection.getInt("gearLevel");
             int itemIndex = configurationSection.getInt("itemIndex");
             RPGSlotType rpgSlotType = RPGSlotType.valueOf(configurationSection.getString("rpgSlotType"));
+            int reqLevelOffset = rpgSlotType.getReqLevelOffset();
+            if (reqLevelOffset == 9999) {
+                GuardiansOfAdelia.getInstance().getLogger().info("WRONG PASSIVE RPG-SLOT-TYPE");
+                return null;
+            }
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
             String itemTag = configurationSection.getString("itemTag");
 
@@ -79,12 +87,41 @@ public class ItemReferenceLoader {
 
             return consumable.getItemStack(skillLevel, uses);
         } else if (itemType.equals("TeleportScroll")) {
-            TeleportScroll teleportScroll = TeleportScroll.valueOf(configurationSection.getString("teleportScroll"));
+            String worldStr = configurationSection.getString("world");
+            World world = Bukkit.getWorld(worldStr);
+            int x = configurationSection.getInt("x");
+            int y = configurationSection.getInt("y");
+            int z = configurationSection.getInt("z");
+            float yaw = (float) configurationSection.getDouble("yaw");
+            float pitch = (float) configurationSection.getDouble("pitch");
+
+            Location location = new Location(world, x, y, z, yaw, pitch);
+            String name = configurationSection.getString("name");
+            TeleportScroll teleportScroll = new TeleportScroll(location, name);
 
             int reqLevel = configurationSection.getInt("reqLevel");
             int amount = configurationSection.getInt("amount");
 
             return teleportScroll.getScroll(amount, reqLevel);
+        } else if (itemType.equals("Basic")) {
+            String materialStr = configurationSection.getString("material");
+            Material material = Material.valueOf(materialStr);
+            String name = configurationSection.getString("name");
+            List<String> lore = configurationSection.getStringList("lore");
+
+            ItemStack item = new ItemStack(material);
+            ItemMeta im = item.getItemMeta();
+            im.setDisplayName(name);
+            im.setLore(lore);
+
+            if (configurationSection.contains("customModelData")) {
+                int customModelData = configurationSection.getInt("customModelData");
+                im.setCustomModelData(customModelData);
+            }
+
+            item.setItemMeta(im);
+
+            return item;
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH ITEM TYPE IN LOADER");

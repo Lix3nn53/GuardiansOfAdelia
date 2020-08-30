@@ -103,6 +103,6 @@ public enum RPGSlotType {
             return 0;
         }
 
-        return 0;
+        return 9999;
     }
 }

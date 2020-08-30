@@ -4,9 +4,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.entity.Player;
 
 public class Invite {
@@ -42,13 +42,13 @@ public class Invite {
 
             TextComponent messageMain = new TextComponent("Accept");
             messageMain.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/invite accept"));
-            messageMain.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Accept the invite").color(ChatColor.GREEN).create()));
+            messageMain.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.GREEN + "Accept the invite")));
             messageMain.setBold(true);
             messageMain.setColor(ChatColor.GREEN);
 
             TextComponent messageReject = new TextComponent("Reject");
             messageReject.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/invite reject"));
-            messageReject.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Reject the invite").color(ChatColor.RED).create()));
+            messageMain.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.RED + "Reject the invite")));
             messageReject.setBold(true);
             messageReject.setColor(ChatColor.RED);
 

@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
@@ -79,7 +78,7 @@ public class QuestsPhase2 {
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Splitter Zombie");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Shaman Zombie");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Tank Zombie");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.72, QuestItems.getQuestItem(14), 9);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.72, new ItemStack(Material.ACACIA_BOAT), 9);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();
@@ -105,7 +104,7 @@ public class QuestsPhase2 {
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Splitter Zombie");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Shaman Zombie");
         nameOfMobsItemDropsFrom.add(ChatColor.DARK_GREEN + "Tank Zombie");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(15), 9);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, new ItemStack(Material.ACACIA_BOAT), 9);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

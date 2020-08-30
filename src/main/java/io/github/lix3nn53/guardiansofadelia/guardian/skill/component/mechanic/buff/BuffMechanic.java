@@ -68,7 +68,7 @@ public class BuffMechanic extends MechanicComponent {
 
                         //add +2 ticks to duration because of repeating buffs icons disappear otherwise. Amplifier 0 anyways
                         PotionEffect potionEffect = new PotionEffect(buffType.getPotionEffectType(), ticks.get(skillLevel - 1) + 2, 0);
-                        player.addPotionEffect(potionEffect, true);
+                        player.addPotionEffect(potionEffect);
 
                         buffedPlayers.add(player);
                         buffedAPlayer = true;

@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
@@ -124,7 +123,7 @@ public class QuestsPhase8 {
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Shaman Goblin");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Mage Goblin");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Jockey Goblin");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(64), 47);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, new ItemStack(Material.ACACIA_BOAT), 47);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

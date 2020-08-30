@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -30,7 +31,8 @@ public class Tomb {
         itemMeta.setCustomModelData(1);
         itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
-        this.tombModel.setHelmet(itemStack);
+        EntityEquipment equipment = tombModel.getEquipment();
+        equipment.setHelmet(itemStack);
         this.tombModel.setVisible(false);
         this.tombModel.setCustomName(ChatColor.DARK_PURPLE + "< Tomb " + ChatColor.LIGHT_PURPLE + owner.getName() + ChatColor.DARK_PURPLE + " >");
         this.tombModel.setCustomNameVisible(true);

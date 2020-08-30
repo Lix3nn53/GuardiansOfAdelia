@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.EulerAngle;
@@ -34,7 +35,8 @@ public class Portal {
         itemMeta.setCustomModelData(this.portalColor.getCustomModelData());
         itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
-        armorStand.setHelmet(itemStack);
+        EntityEquipment equipment = armorStand.getEquipment();
+        equipment.setHelmet(itemStack);
         armorStand.setVisible(false);
         armorStand.setInvulnerable(true);
         armorStand.setGravity(false);

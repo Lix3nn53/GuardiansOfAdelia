@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
-import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
@@ -34,8 +33,8 @@ public class TaskLoader {
             }
 
             double chance = configurationSection.getDouble("chance");
-            int questNoOfItem = configurationSection.getInt("questNoOfItem");
-            ItemStack questItem = QuestItems.getQuestItem(questNoOfItem);
+            ConfigurationSection itemDrop = configurationSection.getConfigurationSection("itemDrop");
+            ItemStack questItem = ItemReferenceLoader.loadItemReference(itemDrop);
             int amountNeeded = configurationSection.getInt("amountNeeded");
 
             return new TaskCollect(nameOfMobsItemDropsFrom, chance, questItem, amountNeeded);

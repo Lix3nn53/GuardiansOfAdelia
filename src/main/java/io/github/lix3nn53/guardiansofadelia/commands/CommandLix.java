@@ -38,6 +38,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -303,7 +304,8 @@ public class CommandLix implements CommandExecutor {
                     }
                     itemMeta.setUnbreakable(true);
                     itemStack.setItemMeta(itemMeta);
-                    armorStand.setHelmet(itemStack);
+                    EntityEquipment equipment = armorStand.getEquipment();
+                    equipment.setHelmet(itemStack);
                     armorStand.setVisible(false);
                     armorStand.setInvulnerable(true);
                     armorStand.setGravity(false);

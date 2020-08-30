@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.quests.list.mainstory;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.QuestItems;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
@@ -208,7 +207,7 @@ public class QuestsPhase9 {
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Jockey Orc");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Shaman Orc");
         nameOfMobsItemDropsFrom.add(ChatColor.YELLOW + "Mage Orc");
-        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, QuestItems.getQuestItem(76), 60);
+        TaskCollect taskCollect = new TaskCollect(nameOfMobsItemDropsFrom, 0.64, new ItemStack(Material.ACACIA_BOAT), 60);
         tasks.add(taskCollect);
 
         List<ItemStack> itemPrizes = new ArrayList<>();

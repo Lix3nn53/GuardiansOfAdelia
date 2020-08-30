@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
@@ -510,7 +509,8 @@ public enum MerchantPageType {
     private GuiBookGeneric getTeleportScrollShop(int shopLevel, int shopNpc) {
         MerchantGuiLine line1 = new MerchantGuiLine();
 
-        line1.addWord(TeleportScroll.ROUMEN.getScroll(1, 1), 4);
+        // TODO create scrolls for npc shop
+        /*line1.addWord(TeleportScroll.ROUMEN.getScroll(1, 1), 4);
 
         line1.addWord(TeleportScroll.PORT_VELOA.getScroll(1, 5), 4);
 
@@ -522,7 +522,7 @@ public enum MerchantPageType {
                     line1.addWord(TeleportScroll.ALBERSTOL_RUINS.getScroll(1, 70), 14);
                 }
             }
-        }
+        }*/
 
         GuiPage guiPage = new GuiPage();
         guiPage.addLine(line1);

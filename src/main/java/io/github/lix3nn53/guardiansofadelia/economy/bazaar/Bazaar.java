@@ -13,6 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -28,7 +29,7 @@ public class Bazaar {
     private ArmorStand bazaarModel;
     private boolean open = false;
     private int moneyEarned = 0;
-    private Location baseLocation;
+    private final Location baseLocation;
 
     public Bazaar(Player owner) {
         this.owner = owner;
@@ -127,7 +128,8 @@ public class Bazaar {
         itemMeta.setCustomModelData(3);
         itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
-        this.bazaarModel.setHelmet(itemStack);
+        EntityEquipment equipment = this.bazaarModel.getEquipment();
+        equipment.setHelmet(itemStack);
         this.bazaarModel.setVisible(false);
         this.bazaarModel.setCustomName(ChatColor.GOLD + "< Bazaar " + ChatColor.YELLOW + owner.getName() + ChatColor.GOLD + " >");
         this.bazaarModel.setCustomNameVisible(true);

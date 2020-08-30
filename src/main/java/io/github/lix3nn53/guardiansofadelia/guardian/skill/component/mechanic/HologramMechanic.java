@@ -9,6 +9,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -88,7 +89,8 @@ public class HologramMechanic extends MechanicComponent {
                 itemMeta.setCustomModelData(CUSTOMMODELDATA);
                 itemMeta.setUnbreakable(true);
                 itemStack.setItemMeta(itemMeta);
-                model.setHelmet(itemStack);
+                EntityEquipment equipment = model.getEquipment();
+                equipment.setHelmet(itemStack);
             }
 
             if (!DISPLAYTEXT.equals("displayText")) {
