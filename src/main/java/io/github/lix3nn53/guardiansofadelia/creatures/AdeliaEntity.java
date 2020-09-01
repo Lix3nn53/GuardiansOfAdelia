@@ -33,7 +33,6 @@ public class AdeliaEntity {
     int damage;
     int maxHealth;
     int experience;
-    int dropTableNumber = -1;
 
     double movementSpeed;
 
@@ -59,7 +58,7 @@ public class AdeliaEntity {
 
     public AdeliaEntity(String adeliaEntityKey, EntityType entityType, String name, MonsterItem mainHand, MonsterItem offHand,
                         MonsterItem helmet, MonsterItem chestplate, MonsterItem leggings, MonsterItem boots, int damage, int maxHealth,
-                        int experience, int dropTableNumber, double movementSpeed, int size, boolean isBaby, boolean isVillagerProfessionRandom,
+                        int experience, double movementSpeed, int size, boolean isBaby, boolean isVillagerProfessionRandom,
                         Villager.Profession villagerProfession, AdeliaEntityDisguise disguise, EntityType mountType, String mountName,
                         List<PotionEffectType> potionEffectTypeList) {
         this.adeliaEntityKey = adeliaEntityKey;
@@ -74,7 +73,6 @@ public class AdeliaEntity {
         this.damage = damage;
         this.maxHealth = maxHealth;
         this.experience = experience;
-        this.dropTableNumber = dropTableNumber;
         this.movementSpeed = movementSpeed;
         this.size = size;
         this.isBaby = isBaby;
@@ -96,12 +94,8 @@ public class AdeliaEntity {
         PersistentDataContainerUtil.putInteger("customDamage", customDamage, entity);
     }
 
-    private static void setEntityExperience(Entity entity, int experience) {
+    public static void setEntityExperience(Entity entity, int experience) {
         PersistentDataContainerUtil.putInteger("experience", experience, entity);
-    }
-
-    private static void setEntityDropTableNo(Entity entity, int dropTableNumber) {
-        PersistentDataContainerUtil.putInteger("dropTableNumber", dropTableNumber, entity);
     }
 
     public LivingEntity getMob(Location loc) {
@@ -110,7 +104,6 @@ public class AdeliaEntity {
 
         setCustomDamage(livingEntity, this.damage);
         setEntityExperience(livingEntity, this.experience);
-        if (dropTableNumber >= 0) setEntityDropTableNo(livingEntity, this.dropTableNumber);
 
         EntityEquipment equipment = livingEntity.getEquipment();
         if (equipment != null) {
@@ -215,5 +208,9 @@ public class AdeliaEntity {
 
     public String getName() {
         return name;
+    }
+
+    public int getExperience() {
+        return experience;
     }
 }

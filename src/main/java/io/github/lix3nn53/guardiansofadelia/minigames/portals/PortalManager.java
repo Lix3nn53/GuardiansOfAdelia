@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.portals;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import org.bukkit.entity.ArmorStand;
 
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import java.util.List;
 
 public class PortalManager {
 
-    private static HashMap<String, List<Portal>> chunkKeyToPortal = new HashMap<>();
-    private static HashMap<Portal, InstantTeleportPortal> portalToLocation = new HashMap<>();
+    private static final HashMap<String, List<Portal>> chunkKeyToPortal = new HashMap<>();
+    private static final HashMap<Portal, InstantTeleportPortal> portalToLocation = new HashMap<>();
 
     public static void onChunkLoad(String chunkKey) {
         if (chunkKeyToPortal.containsKey(chunkKey)) {
@@ -22,7 +22,7 @@ public class PortalManager {
     }
 
     public static void removePortal(Portal portal) {
-        String chunkKey = SpawnerManager.getChunkKey(portal.getBaseLocation());
+        String chunkKey = LocationUtils.getChunkKey(portal.getBaseLocation());
         if (chunkKeyToPortal.containsKey(chunkKey)) {
             List<Portal> portals = chunkKeyToPortal.get(chunkKey);
             portals.remove(portal);
@@ -35,7 +35,7 @@ public class PortalManager {
     }
 
     public static void addPortal(Portal portal) {
-        String chunkKey = SpawnerManager.getChunkKey(portal.getBaseLocation());
+        String chunkKey = LocationUtils.getChunkKey(portal.getBaseLocation());
         if (chunkKeyToPortal.containsKey(chunkKey)) {
             List<Portal> portals = chunkKeyToPortal.get(chunkKey);
             portals.add(portal);

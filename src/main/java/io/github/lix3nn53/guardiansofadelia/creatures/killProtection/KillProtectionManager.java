@@ -14,9 +14,9 @@ import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDeathEvent;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -25,7 +25,7 @@ import java.util.UUID;
 
 public class KillProtectionManager {
 
-    private static HashMap<LivingEntity, PlayerDamage> livingEntityToDamages = new HashMap<>();
+    private static final HashMap<LivingEntity, PlayerDamage> livingEntityToDamages = new HashMap<>();
 
     public static void onPlayerDealDamageToLivingEntity(Player attacker, LivingEntity damaged, double damage) {
         if (livingEntityToDamages.containsKey(damaged)) {
@@ -38,7 +38,11 @@ public class KillProtectionManager {
         }
     }
 
-    public static void onMobDeath(LivingEntity livingTarget, EntityDeathEvent event) {
+    /**
+     * @param livingTarget
+     * @param mythicEvent
+     */
+    public static void onLivingEntityDeath(LivingEntity livingTarget, MythicMobDeathEvent mythicEvent) {
         if (livingEntityToDamages.containsKey(livingTarget)) {
             PlayerDamage playerDamage = livingEntityToDamages.get(livingTarget);
             livingEntityToDamages.remove(livingTarget);
@@ -46,12 +50,15 @@ public class KillProtectionManager {
             if (bestPlayers.isEmpty()) return;
 
             //drops
-            List<ItemStack> drops = MobDropGenerator.getDrops(livingTarget);
-            if (!drops.isEmpty()) {
-                for (ItemStack itemStack : drops) {
-                    DropProtectionManager.setItem(itemStack, bestPlayers);
+            if (mythicEvent != null) {
+                double mobLevel = mythicEvent.getMobLevel();
+                List<ItemStack> drops = MobDropGenerator.getDrops((int) (mobLevel + 0.5));
+                if (!drops.isEmpty()) {
+                    for (ItemStack itemStack : drops) {
+                        DropProtectionManager.setItem(itemStack, bestPlayers);
+                    }
+                    mythicEvent.getDrops().addAll(drops);
                 }
-                event.getDrops().addAll(drops);
             }
 
             //calculate before loop

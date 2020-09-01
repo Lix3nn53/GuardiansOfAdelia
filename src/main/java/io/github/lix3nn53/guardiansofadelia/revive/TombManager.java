@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.revive;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -41,7 +41,7 @@ public class TombManager {
         }
 
         Tomb tomb = new Tomb(player, deathLocation);
-        String chunkKey = SpawnerManager.getChunkKey(deathLocation);
+        String chunkKey = LocationUtils.getChunkKey(deathLocation);
         if (chunkKeyToTomb.containsKey(chunkKey)) {
             List<Tomb> tombs = chunkKeyToTomb.get(chunkKey);
             tombs.add(tomb);
@@ -100,7 +100,7 @@ public class TombManager {
     }
 
     public static void onTombRemove(Tomb tomb) {
-        String chunkKey = SpawnerManager.getChunkKey(tomb.getBaseLocation());
+        String chunkKey = LocationUtils.getChunkKey(tomb.getBaseLocation());
         if (chunkKeyToTomb.containsKey(chunkKey)) {
             List<Tomb> tombs = chunkKeyToTomb.get(chunkKey);
             tombs.remove(tomb);

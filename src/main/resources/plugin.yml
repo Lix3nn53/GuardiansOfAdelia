@@ -14,14 +14,11 @@ depend:
   - LuckPerms
   - WorldEdit
   - WorldGuard
+  - MythicMobs
 commands:
   admin:
     description: Admin command
     permission: guardian.admin
-    permission-message: You do not have permission!
-  spawner:
-    description: Spawner command
-    permission: guardian.spawner
     permission-message: You do not have permission!
   guild:
     description: Guild command

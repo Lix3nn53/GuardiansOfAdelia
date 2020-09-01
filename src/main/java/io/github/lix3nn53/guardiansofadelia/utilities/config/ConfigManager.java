@@ -39,8 +39,6 @@ public class ConfigManager {
     public static void createConfigALL() {
         ClassConfigurations.createConfigs();
         RewardDailyConfigurations.createConfigs();
-        EntityConfigurations.createConfigs();
-        EntitySkillSetConfigurations.createConfigs();
         JobGatheringConfigurations.createConfigs();
         createResourcePackConfig();
         createCharacterSelectionConfig();
@@ -54,15 +52,12 @@ public class ConfigManager {
         ItemShieldSetConfigurations.createConfigs();
         ItemWeaponSetConfigurations.createConfigs();
         JobCraftingConfigurations.createConfigs();
-        SpawnerConfiguration.createConfigs();
         QuestConfigurations.createConfigs();
     }
 
     public static void loadConfigALL() {
         ClassConfigurations.loadConfigs();
         RewardDailyConfigurations.loadConfigs();
-        EntityConfigurations.loadConfigs();
-        EntitySkillSetConfigurations.loadConfigs();
         JobGatheringConfigurations.loadConfigs();
         loadResourcePackConfig();
         loadCharacterSelectionConfig();
@@ -76,13 +71,11 @@ public class ConfigManager {
         ItemShieldSetConfigurations.loadConfigs();
         ItemWeaponSetConfigurations.loadConfigs();
         JobCraftingConfigurations.loadConfigs();
-        SpawnerConfiguration.loadConfigs();
         QuestConfigurations.loadConfigs();
     }
 
     public static void writeConfigALL() {
         RewardDailyConfigurations.writeConfigs();
-        SpawnerConfiguration.writeConfigs();
     }
 
     private static void createResourcePackConfig() {

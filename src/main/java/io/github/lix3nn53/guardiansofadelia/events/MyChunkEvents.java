@@ -1,11 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.NPCDespawnEvent;
@@ -30,12 +30,10 @@ public class MyChunkEvents implements Listener {
         Entity[] chunkEntities = chunk.getEntities();
         for (Entity chunkEntity : chunkEntities) {
             if (shouldChunkEventRemove(chunkEntity)) {
-                SpawnerManager.onMobDeath(chunkEntity);
                 chunkEntity.remove();
             }
         }
 
-        SpawnerManager.activateSpawnersOnChunk(chunk);
         createCustomEntitiesOnChunkLoad(chunk);
     }
 
@@ -57,11 +55,9 @@ public class MyChunkEvents implements Listener {
         Entity[] chunkEntities = chunk.getEntities();
         for (Entity chunkEntity : chunkEntities) {
             if (shouldChunkEventRemove(chunkEntity)) {
-                SpawnerManager.onMobDeath(chunkEntity);
                 chunkEntity.remove();
             }
         }
-        SpawnerManager.deactivateSpawnersOnChunk(chunk);
     }
 
     private boolean shouldChunkEventRemove(Entity chunkEntity) {
@@ -81,7 +77,7 @@ public class MyChunkEvents implements Listener {
     }
 
     private void createCustomEntitiesOnChunkLoad(Chunk chunk) {
-        String chunkKey = SpawnerManager.getChunkKey(chunk.getBlock(0, 0, 0).getLocation());
+        String chunkKey = LocationUtils.getChunkKey(chunk.getBlock(0, 0, 0).getLocation());
         //create bazaar models
         BazaarManager.onChunkLoad(chunkKey);
         TombManager.onChunkLoad(chunkKey);

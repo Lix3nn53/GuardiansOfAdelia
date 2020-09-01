@@ -4,7 +4,6 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.PluginChannelListener;
 import io.github.lix3nn53.guardiansofadelia.commands.*;
-import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.events.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -123,7 +122,6 @@ public class GuardiansOfAdelia extends JavaPlugin {
         this.getCommand("safe-stop").setExecutor(new CommandSafeStop());
         this.getCommand("minigame").setExecutor(new CommandMinigame());
         this.getCommand("job").setExecutor(new CommandJob());
-        this.getCommand("spawner").setExecutor(new CommandSpawner());
 
         for (World w : Bukkit.getServer().getWorlds()) {
             w.setDifficulty(Difficulty.HARD);
@@ -187,13 +185,14 @@ public class GuardiansOfAdelia extends JavaPlugin {
         startGlobalManaRegen(0.4);
 
         //DELAYED TASKS
+        /* TODO
         new BukkitRunnable() {
             @Override
             public void run() {
-                SpawnerManager.startSpawners();
-                //TODO CustomSoundtrack.startPlayLoopForEveryone();
+                CustomSoundtrack.startPlayLoopForEveryone();
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 10 * 5L);
+        */
 
         //REGISTER QUESTS FROM LISTS
         TutorialQuests.createQuests();

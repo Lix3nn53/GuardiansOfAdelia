@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.drops;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
@@ -12,8 +13,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
-import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -22,11 +21,8 @@ import java.util.Random;
 
 public class MobDropGenerator {
 
-    public static List<ItemStack> getDrops(Entity entity) {
+    public static List<ItemStack> getDrops(int entityLevel) {
         List<ItemStack> drops = new ArrayList<>();
-
-        int dropTableNumber = getDropTableNumber(entity);
-        if (dropTableNumber < 0 || dropTableNumber >= 10) return drops;
 
         double random = Math.random();
         double dropRate = 0.06;
@@ -36,7 +32,7 @@ public class MobDropGenerator {
         }
 
         if (random < dropRate) {
-            int gearLevel = dropTableNumber;
+            int gearLevel = GearLevel.getGearLevel(entityLevel);
 
             ItemTier tier = ItemTier.RARE;
 
@@ -86,12 +82,5 @@ public class MobDropGenerator {
             }
         }
         return drops;
-    }
-
-    private static int getDropTableNumber(Entity entity) {
-        if (PersistentDataContainerUtil.hasInteger(entity, "dropTableNumber")) {
-            return PersistentDataContainerUtil.getInteger(entity, "dropTableNumber");
-        }
-        return -1;
     }
 }

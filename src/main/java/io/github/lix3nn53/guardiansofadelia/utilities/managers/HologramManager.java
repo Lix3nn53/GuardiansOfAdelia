@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import org.bukkit.entity.ArmorStand;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class HologramManager {
 
-    private static HashMap<String, List<Hologram>> chunkKeyToHologram = new HashMap<>();
+    private static final HashMap<String, List<Hologram>> chunkKeyToHologram = new HashMap<>();
 
     public static void onChunkLoad(String chunkKey) {
         if (chunkKeyToHologram.containsKey(chunkKey)) {
@@ -22,7 +22,7 @@ public class HologramManager {
     }
 
     public static void removeHologram(Hologram hologram) {
-        String chunkKey = SpawnerManager.getChunkKey(hologram.getLocation());
+        String chunkKey = LocationUtils.getChunkKey(hologram.getLocation());
         if (chunkKeyToHologram.containsKey(chunkKey)) {
             List<Hologram> holograms = chunkKeyToHologram.get(chunkKey);
             holograms.remove(hologram);
@@ -35,7 +35,7 @@ public class HologramManager {
     }
 
     public static void addHologram(Hologram hologram) {
-        String chunkKey = SpawnerManager.getChunkKey(hologram.getLocation());
+        String chunkKey = LocationUtils.getChunkKey(hologram.getLocation());
         if (chunkKeyToHologram.containsKey(chunkKey)) {
             List<Hologram> holograms = chunkKeyToHologram.get(chunkKey);
             holograms.add(hologram);

@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.economy.bazaar;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.spawners.SpawnerManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -13,9 +13,9 @@ import java.util.List;
 
 public class BazaarManager {
 
-    private static HashMap<ArmorStand, Player> bazaarToPlayer = new HashMap<>();
-    private static HashMap<String, List<Bazaar>> chunkKeyToBazaar = new HashMap<>();
-    private static HashMap<Player, ItemStack> playerToCurrentlySettingMoneyOfItem = new HashMap<>();
+    private static final HashMap<ArmorStand, Player> bazaarToPlayer = new HashMap<>();
+    private static final HashMap<String, List<Bazaar>> chunkKeyToBazaar = new HashMap<>();
+    private static final HashMap<Player, ItemStack> playerToCurrentlySettingMoneyOfItem = new HashMap<>();
 
     public static boolean isBazaar(ArmorStand entity) {
         return bazaarToPlayer.containsKey(entity);
@@ -31,7 +31,7 @@ public class BazaarManager {
     }
 
     public static void onBazaarRemove(Bazaar bazaar) {
-        String chunkKey = SpawnerManager.getChunkKey(bazaar.getBaseLocation());
+        String chunkKey = LocationUtils.getChunkKey(bazaar.getBaseLocation());
         if (chunkKeyToBazaar.containsKey(chunkKey)) {
             List<Bazaar> bazaars = chunkKeyToBazaar.get(chunkKey);
             bazaars.remove(bazaar);
@@ -44,7 +44,7 @@ public class BazaarManager {
     }
 
     public static void onBazaarCreate(Location location, Bazaar bazaar) {
-        String chunkKey = SpawnerManager.getChunkKey(location);
+        String chunkKey = LocationUtils.getChunkKey(location);
         if (chunkKeyToBazaar.containsKey(chunkKey)) {
             List<Bazaar> bazaars = chunkKeyToBazaar.get(chunkKey);
             bazaars.add(bazaar);

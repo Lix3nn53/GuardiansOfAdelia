@@ -66,4 +66,9 @@ public class LocationUtils {
         return baseLocation.clone().add(x1, Math.random() + 0.8 - 2, z1);
     }
 
+    public static String getChunkKey(Location location) {
+        World world = location.getWorld();
+        if (world == null) return null;
+        return world.getName() + "|" + (location.getBlockX() >> 4) + "," + (location.getBlockZ() >> 4);
+    }
 }

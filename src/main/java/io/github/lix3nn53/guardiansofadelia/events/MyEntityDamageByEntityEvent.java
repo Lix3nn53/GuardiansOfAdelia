@@ -25,6 +25,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -59,10 +60,14 @@ public class MyEntityDamageByEntityEvent implements Listener {
         boolean isSkill = false;
 
         DamageMechanic.DamageType damageType = DamageMechanic.DamageType.MELEE;
-        if (SkillUtils.isSkillDamage()) {
+        EntityDamageEvent.DamageCause damageCause = event.getCause();
+        if (SkillUtils.isSkillDamage()) { //For own skill system
             isSkill = true;
             damageType = SkillUtils.getDamageType();
             SkillUtils.clearSkillDamage();
+        } else if (damageCause.equals(EntityDamageEvent.DamageCause.CUSTOM)) { //For mythic mobs
+            isSkill = true; // TODO hope this does not broke own skill system
+            damageType = DamageMechanic.DamageType.MAGIC;
         }
 
         if (target instanceof LivingEntity) {
