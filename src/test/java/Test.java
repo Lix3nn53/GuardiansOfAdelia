@@ -1,9 +1,6 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.utilities.DateUtils;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +12,19 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException, SQLException {
-        LocalDate localDate = LocalDate.now().with(ChronoField.DAY_OF_MONTH, 7);
+
+        for (int mobLevel = 1; mobLevel <= 50; mobLevel++) {
+            int baseExp = (int) (2 + Math.round(10 * Math.pow(mobLevel, 2) / 16) + 0.5);
+
+            for (int playerLevel = 1; playerLevel <= 50; playerLevel++) {
+                System.out.println("mobLevel: " + mobLevel);
+                System.out.println("baseExp: " + baseExp);
+                int exp = (int) (baseExp * (Math.pow(playerLevel, 2) / Math.pow(mobLevel, 2)) + 0.5);
+                System.out.println("playerLevel: " + playerLevel);
+                System.out.println("exp: " + exp);
+            }
+        }
+        /*LocalDate localDate = LocalDate.now().with(ChronoField.DAY_OF_MONTH, 7);
         boolean dateInCurrentWeek = DateUtils.isDateInCurrentWeek(localDate);
 
         LocalDate firstDayOfTheWeek = DateUtils.getFirstDayOfTheWeek();
@@ -24,7 +33,7 @@ public class Test {
         System.out.println("dayOfTheWeek: " + dayOfTheWeek);
         System.out.println("dateInCurrentWeek: " + dateInCurrentWeek);
         boolean sameDay = DateUtils.isSameDay(LocalDate.now().with(ChronoField.DAY_OF_WEEK, 1), LocalDate.now());
-        System.out.println("sameDay: " + sameDay);
+        System.out.println("sameDay: " + sameDay);*/
 
 
         /*LocalDate now = LocalDate.now();

@@ -2,9 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
-import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
@@ -27,9 +28,16 @@ public class TaskLoader {
 
             List<String> nameOfMobsItemDropsFrom = new ArrayList<>();
             for (String key : keyOfMobsItemDropsFrom) {
-                String name = AdeliaEntityManager.getEntity(key).getName();
+                MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+                if (mythicMob == null) {
+                    GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskCollect mythicMob null: " + key);
 
-                nameOfMobsItemDropsFrom.add(name);
+                    return null;
+                }
+                String displayName = mythicMob.getDisplayName().get();
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskCollect MM: " + key + "-" + displayName);
+
+                nameOfMobsItemDropsFrom.add(displayName);
             }
 
             double chance = configurationSection.getDouble("chance");
@@ -39,12 +47,20 @@ public class TaskLoader {
 
             return new TaskCollect(nameOfMobsItemDropsFrom, chance, questItem, amountNeeded);
         } else if (componentType.equals(TaskDealDamage.class.getSimpleName())) {
-            String mobKey = configurationSection.getString("mobKey");
-            String name = AdeliaEntityManager.getEntity(mobKey).getName();
+            String key = configurationSection.getString("mobKey");
+
+            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+            if (mythicMob == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskDealDamage mythicMob null: " + key);
+
+                return null;
+            }
+            String displayName = mythicMob.getDisplayName().get();
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskDealDamage MM: " + key + "-" + displayName);
 
             int damageNeeded = configurationSection.getInt("damageNeeded");
 
-            return new TaskDealDamage(name, damageNeeded);
+            return new TaskDealDamage(displayName, damageNeeded);
         } else if (componentType.equals(TaskGathering.class.getSimpleName())) {
             int ingredientIndex = configurationSection.getInt("ingredientIndex");
             Ingredient ingredient = GatheringManager.getIngredient(ingredientIndex);
@@ -53,25 +69,41 @@ public class TaskLoader {
 
             return new TaskGathering(ingredient, amountNeeded);
         } else if (componentType.equals(TaskGift.class.getSimpleName())) {
-            String mobKey = configurationSection.getString("mobKey");
-            String name = AdeliaEntityManager.getEntity(mobKey).getName();
+            String key = configurationSection.getString("mobKey");
+
+            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+            if (mythicMob == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskGift mythicMob null: " + key);
+
+                return null;
+            }
+            String displayName = mythicMob.getDisplayName().get();
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskGift MM: " + key + "-" + displayName);
 
             ItemStack itemStack = ItemReferenceLoader.loadItemReference(configurationSection.getConfigurationSection("item"));
 
             int amountNeeded = configurationSection.getInt("amountNeeded");
 
-            return new TaskGift(amountNeeded, itemStack, name);
+            return new TaskGift(amountNeeded, itemStack, displayName);
         } else if (componentType.equals(TaskInteract.class.getSimpleName())) {
             int npcId = configurationSection.getInt("npcId");
 
             return new TaskInteract(npcId);
         } else if (componentType.equals(TaskKill.class.getSimpleName())) {
-            String mobKey = configurationSection.getString("mobKey");
-            String name = AdeliaEntityManager.getEntity(mobKey).getName();
+            String key = configurationSection.getString("mobKey");
+
+            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+            if (mythicMob == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskKill mythicMob null: " + key);
+
+                return null;
+            }
+            String displayName = mythicMob.getDisplayName().get();
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskKill MM: " + key + "-" + displayName);
 
             int amountNeeded = configurationSection.getInt("amountNeeded");
 
-            return new TaskKill(name, amountNeeded);
+            return new TaskKill(displayName, amountNeeded);
         } else if (componentType.equals(TaskReach.class.getSimpleName())) {
             World world = Bukkit.getWorld(configurationSection.getString("world"));
 

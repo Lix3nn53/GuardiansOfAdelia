@@ -34,11 +34,21 @@ public class MobDropGenerator {
         if (random < dropRate) {
             int gearLevel = GearLevel.getGearLevel(entityLevel);
 
-            ItemTier tier = ItemTier.RARE;
+            //Tier
+            double mysticTierChange = 0.05;
+            double rareTierChange = mysticTierChange + 0.4;
+            double tierRandom = Math.random(); //Common or rare?
 
-            Random rand = new Random();
+            ItemTier tier = ItemTier.COMMON;
+
+            if (tierRandom < mysticTierChange) {
+                tier = ItemTier.MYSTIC;
+            } else if (tierRandom < rareTierChange) {
+                tier = ItemTier.RARE;
+            }
 
             // Obtain a number to select between weapon, <armor or shield> and passive
+            Random rand = new Random();
             int dropType = rand.nextInt(3);
 
             if (dropType == 0) {
@@ -51,9 +61,9 @@ public class MobDropGenerator {
                 drops.add(droppedItem);
             } else if (dropType == 1) {
                 double shieldChange = 0.2;
-                double armorOrShieldRandom = Math.random(); //armor or shield?
+                double armorOrShieldRandom = Math.random(); // armor or shield?
 
-                if (armorOrShieldRandom < shieldChange) { //shield
+                if (armorOrShieldRandom < shieldChange) { // shield
                     ShieldGearType[] values = ShieldGearType.values();
                     int gearRandom = rand.nextInt(values.length);
 
@@ -73,9 +83,9 @@ public class MobDropGenerator {
                     ItemStack droppedItem = ArmorManager.get(armorSlot, armorGearType, gearLevel, 0, tier, "", false);
                     drops.add(droppedItem);
                 }
-            } else if (dropType == 2) {
+            } else { // dropType == 2
                 int passiveType = rand.nextInt(4);
-                RPGSlotType rpgSlotType = RPGSlotType.values()[passiveType + 1]; //+1 to ignore parrot
+                RPGSlotType rpgSlotType = RPGSlotType.values()[passiveType + 1]; // +1 to ignore parrot
 
                 ItemStack droppedItem = PassiveManager.get(gearLevel, 0, rpgSlotType, tier, "", false);
                 drops.add(droppedItem);

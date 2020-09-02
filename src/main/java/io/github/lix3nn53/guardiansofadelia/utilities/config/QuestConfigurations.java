@@ -117,6 +117,7 @@ public class QuestConfigurations {
                 List<Task> tasks = new ArrayList<>();
                 for (int c = 1; c <= taskCount; c++) {
                     Task task = TaskLoader.load(section.getConfigurationSection("task" + c));
+                    if (task == null) continue;
                     tasks.add(task);
                 }
 

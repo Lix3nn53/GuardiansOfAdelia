@@ -13,10 +13,12 @@ import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDeathEvent;
 import org.bukkit.Location;
-import org.bukkit.entity.*;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -50,29 +52,15 @@ public class KillProtectionManager {
             if (bestPlayers.isEmpty()) return;
 
             //drops
+            int mobLevel = 0;
             if (mythicEvent != null) {
-                double mobLevel = mythicEvent.getMobLevel();
-                List<ItemStack> drops = MobDropGenerator.getDrops((int) (mobLevel + 0.5));
+                mobLevel = (int) (mythicEvent.getMobLevel() + 0.5);
+                List<ItemStack> drops = MobDropGenerator.getDrops(mobLevel);
                 if (!drops.isEmpty()) {
                     for (ItemStack itemStack : drops) {
                         DropProtectionManager.setItem(itemStack, bestPlayers);
                     }
                     mythicEvent.getDrops().addAll(drops);
-                }
-            }
-
-            //calculate before loop
-            int expToGiveEachPlayer = getExperience(livingTarget);
-            if (BoostPremiumManager.isBoostActive(BoostPremium.EXPERIENCE)) {
-                expToGiveEachPlayer = expToGiveEachPlayer * 2;
-            }
-            if (expToGiveEachPlayer > 0) {
-                if (bestPlayers.size() > 1) {
-                    double expMultiplier = 1 - (0.1 * bestPlayers.size());
-                    if (expMultiplier < 0.5D) {
-                        expMultiplier = 0.5D;
-                    }
-                    expToGiveEachPlayer = (int) (expToGiveEachPlayer * expMultiplier);
                 }
             }
 
@@ -94,9 +82,10 @@ public class KillProtectionManager {
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
                         //exp
-                        if (expToGiveEachPlayer > 0) {
-                            rpgCharacterStats.giveExp(expToGiveEachPlayer);
-                            PetExperienceManager.giveExperienceToActivePet(player, expToGiveEachPlayer);
+                        int expToGive = getExperience(mobLevel, player.getLevel(), bestPlayers.size());
+                        if (expToGive > 0) {
+                            rpgCharacterStats.giveExp(expToGive);
+                            PetExperienceManager.giveExperienceToActivePet(player, expToGive);
                         }
 
                         //quest, progress kill tasks
@@ -121,10 +110,22 @@ public class KillProtectionManager {
         }
     }
 
-    private static int getExperience(Entity entity) {
-        if (PersistentDataContainerUtil.hasInteger(entity, "experience")) {
-            return PersistentDataContainerUtil.getInteger(entity, "experience");
+    private static int getExperience(int mobLevel, int playerLevel, int shareCount) {
+        int exp = (int) (2 + Math.round(10 * Math.pow(mobLevel, 2) / 16) + 0.5);
+
+        if (playerLevel > mobLevel) {
+            exp = (int) (exp * (Math.pow(mobLevel, 3) / Math.pow(playerLevel, 3)) + 0.5);
+        } else {
+            exp = (int) (exp * (Math.pow(playerLevel, 3) / Math.pow(mobLevel, 3)) + 0.5);
         }
-        return 0;
+
+        //Share
+        if (shareCount > 1) {
+            double expMultiplier = 1 - (0.1 * shareCount);
+
+            exp = (int) (exp * expMultiplier + 0.5);
+        }
+
+        return BoostPremiumManager.isBoostActive(BoostPremium.EXPERIENCE) ? exp * 2 : exp;
     }
 }

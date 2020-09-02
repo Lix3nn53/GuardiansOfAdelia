@@ -1,10 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
-import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntityManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
+import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
+import io.lumine.xikage.mythicmobs.mobs.MobManager;
+import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -61,10 +64,15 @@ public class SpawnEntityMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
-            for (String ent : adeliaEntityList) {
+            for (String key : adeliaEntityList) {
                 for (int i = 0; i < amountPerSpawn; i++) {
-                    AdeliaEntity entity = AdeliaEntityManager.getEntity(ent);
-                    LivingEntity mob = entity.getMob(target.getLocation());
+                    MobManager mobManager = MythicMobs.inst().getMobManager();
+                    Location location = target.getLocation();
+
+                    ActiveMob activeMob = mobManager.spawnMob(key, location);
+                    AbstractEntity entity = activeMob.getEntity();
+                    LivingEntity mob = (LivingEntity) entity.getBukkitEntity();
+
                     if (SAVE) {
                         SkillDataManager.onSkillEntityCreateWithSaveOption(caster, mob, castCounter);
                     }

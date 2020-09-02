@@ -3,7 +3,6 @@ package io.github.lix3nn53.guardiansofadelia.creatures.pets;
 import com.comphenix.protocol.utility.MinecraftReflection;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
-import io.github.lix3nn53.guardiansofadelia.creatures.AdeliaEntity;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -30,12 +29,12 @@ import java.util.UUID;
 public class PetManager {
 
     private final static List<Player> deathPetPlayerList = new ArrayList<>();
-    private static HashMap<LivingEntity, Player> petToPlayer = new HashMap<>();
-    private static HashMap<Player, LivingEntity> playerToPet = new HashMap<>();
-    private static double PET_FOLLOW_MOVEMENT_SPEED = 0.7D;
-    private static long respawnDelay = 20 * 300L;
+    private static final HashMap<LivingEntity, Player> petToPlayer = new HashMap<>();
+    private static final HashMap<Player, LivingEntity> playerToPet = new HashMap<>();
+    private static final double PET_FOLLOW_MOVEMENT_SPEED = 0.7D;
+    private static final long respawnDelay = 20 * 300L;
     private static Method craftEntity_getHandle, navigationAbstract_a, entityInsentient_getNavigation;
-    private static Class<?> entityInsentientClass = MinecraftReflection.getMinecraftClass("EntityInsentient");
+    private static final Class<?> entityInsentientClass = MinecraftReflection.getMinecraftClass("EntityInsentient");
 
     static {
         try {
@@ -88,7 +87,7 @@ public class PetManager {
         wolf.setOwner(owner);
         wolf.setSilent(true);
         wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_FOLLOW_MOVEMENT_SPEED);
-        AdeliaEntity.setCustomDamage(wolf, damage); //wolf.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage);
+        PersistentDataContainerUtil.putInteger("customDamage", damage, wolf);
         wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
         wolf.setHealth(currentHP);
         companion.disguise(wolf);

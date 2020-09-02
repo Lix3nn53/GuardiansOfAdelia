@@ -39,7 +39,6 @@ public class ConfigManager {
     public static void createConfigALL() {
         ClassConfigurations.createConfigs();
         RewardDailyConfigurations.createConfigs();
-        EntityConfigurations.createConfigs();
         JobGatheringConfigurations.createConfigs();
         createResourcePackConfig();
         createCharacterSelectionConfig();
@@ -59,7 +58,6 @@ public class ConfigManager {
     public static void loadConfigALL() {
         ClassConfigurations.loadConfigs();
         RewardDailyConfigurations.loadConfigs();
-        EntityConfigurations.loadConfigs();
         JobGatheringConfigurations.loadConfigs();
         loadResourcePackConfig();
         loadCharacterSelectionConfig();

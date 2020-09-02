@@ -20,7 +20,6 @@ import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
-import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
@@ -28,6 +27,10 @@ import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
+import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
+import io.lumine.xikage.mythicmobs.mobs.MobManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -37,12 +40,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -319,12 +322,13 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
+                MobManager mobManager = MythicMobs.inst().getMobManager();
+                Location location = player.getLocation();
 
-                DailyRewardInfo dailyRewardInfo = guardianData.getDailyRewardInfo();
-                LocalDate lastObtainDate = dailyRewardInfo.getLastObtainDate();
-
-                player.sendMessage(lastObtainDate.toString());
+                ActiveMob activeMob = mobManager.spawnMob("SkeletalKnight", location);
+                AbstractEntity entity = activeMob.getEntity();
+                LivingEntity mob = (LivingEntity) entity.getBukkitEntity();
+                player.sendMessage(mob.getCustomName());
             }
 
             // If the player (or console) uses our command correct, we can return true
