@@ -40,6 +40,8 @@ public class Eggs {
 
             return false;
         }
+        String displayName = mythicMob.getDisplayName().get();
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "Eggs MM: " + key + "-" + displayName);
 
         return true;
     }

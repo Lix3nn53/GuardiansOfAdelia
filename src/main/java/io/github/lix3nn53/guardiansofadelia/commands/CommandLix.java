@@ -228,7 +228,7 @@ public class CommandLix implements CommandExecutor {
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("egg")) {
-                if (args.length == 3) {
+                if (args.length == 4) {
                     String petCode = args[1];
                     int gearLevel = Integer.parseInt(args[2]);
                     int petLevel = Integer.parseInt(args[3]);

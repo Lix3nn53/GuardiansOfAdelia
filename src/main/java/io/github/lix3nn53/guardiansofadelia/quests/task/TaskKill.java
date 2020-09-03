@@ -79,12 +79,13 @@ public final class TaskKill implements Task {
     }
 
     public boolean progress(LivingEntity livingEntity, Player player) {
-        if (livingEntity.isCustomNameVisible()) {
-            String customName = livingEntity.getCustomName();
-            if (customName.equals(this.mobName)) {
-                return progress(player);
-            }
+        String customName = livingEntity.getCustomName();
+        if (customName == null) return false;
+
+        if (customName.equals(this.mobName)) {
+            return progress(player);
         }
+
         return false;
     }
 

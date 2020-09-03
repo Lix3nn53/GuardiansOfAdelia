@@ -71,6 +71,7 @@ public class KillProtectionManager {
                     MiniGameManager.onMobKill(once, livingTarget);
                 }
             }
+            once.sendMessage("Killed mobLevel: " + mobLevel);
 
             //run for each player
             for (Player player : bestPlayers) {

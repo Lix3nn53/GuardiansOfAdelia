@@ -81,9 +81,11 @@ public class PetManager {
         pet.setSilent(true);
         pet.setTamed(true);
         pet.setOwner(owner);
+        pet.setCustomNameVisible(true);
 
         // health
-        int maxHP = (int) (pet.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + 0.5);
+        int maxHP = (int) (pet.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + 0.5);
+        GuardiansOfAdelia.getInstance().getLogger().info("Pet maxHP: " + maxHP);
         if (currentHP <= 0) {
             currentHP = (int) ((maxHP * 0.4) + 0.5);
         } else if (currentHP > maxHP) {
@@ -208,7 +210,7 @@ public class PetManager {
         }
     }
 
-    private static void spawnPet(Player player, String petCode, int petCurrentHealth, int petLevel) {
+    private static void spawnPet(Player player, String petCode, int petLevel, int petCurrentHealth) {
         LivingEntity pet = getPet(player, petCode, petLevel, petCurrentHealth);
         petToPlayer.put(pet, player);
         playerToPet.put(player, pet);

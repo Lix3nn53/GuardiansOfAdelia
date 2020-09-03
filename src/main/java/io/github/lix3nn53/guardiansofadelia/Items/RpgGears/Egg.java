@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.Eggs;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
@@ -30,7 +31,9 @@ public class Egg implements RPGGear {
             name = tier.getTierColor() + itemTag + " " + name;
         }
         int health = PetManager.getHealth(petKey, petLevel);
+        GuardiansOfAdelia.getInstance().getLogger().info("egg health: " + health);
         int damage = PetManager.getDamage(petKey, petLevel);
+        GuardiansOfAdelia.getInstance().getLogger().info("egg damage: " + damage);
 
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: Egg");
