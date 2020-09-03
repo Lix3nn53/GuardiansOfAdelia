@@ -3,14 +3,11 @@ package io.github.lix3nn53.guardiansofadelia.commands;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
-import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
-import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
+import io.github.lix3nn53.guardiansofadelia.Items.list.Eggs;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -80,8 +77,7 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
                 player.sendMessage(ChatColor.BLUE + "/admin coin <num>");
                 player.sendMessage(ChatColor.BLUE + "/admin weapon [type] <num>");
-                player.sendMessage(ChatColor.BLUE + "/admin companion [type] <num>");
-                player.sendMessage(ChatColor.BLUE + "/admin mount [type] <num>");
+                player.sendMessage(ChatColor.BLUE + "/admin egg [type] <gearLevel> <petLevel>");
                 player.sendMessage(ChatColor.BLUE + "/admin stone <grade> <amount>");
                 player.sendMessage(ChatColor.BLUE + "/admin passive [parrot|earring|necklace|glove|ring] <num>");
                 player.sendMessage(ChatColor.BLUE + "/admin premium item-id<1-24>");
@@ -231,20 +227,13 @@ public class CommandLix implements CommandExecutor {
                     ItemStack weapon = WeaponManager.get(weaponGearType, no, 0, ItemTier.LEGENDARY, "Command", false);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
-            } else if (args[0].equals("companion")) {
+            } else if (args[0].equals("egg")) {
                 if (args.length == 3) {
-                    Companion mount = Companion.valueOf(args[1]);
-                    int i = Integer.parseInt(args[2]);
+                    String petCode = args[1];
+                    int gearLevel = Integer.parseInt(args[2]);
+                    int petLevel = Integer.parseInt(args[3]);
 
-                    ItemStack egg = Companions.get(mount, i);
-                    InventoryUtils.giveItemToPlayer(player, egg);
-                }
-            } else if (args[0].equals("mount")) {
-                if (args.length == 3) {
-                    Mount mount = Mount.valueOf(args[1]);
-                    int i = Integer.parseInt(args[2]);
-
-                    ItemStack egg = Mounts.get(mount, i);
+                    ItemStack egg = Eggs.get(petCode, gearLevel, petLevel);
                     InventoryUtils.giveItemToPlayer(player, egg);
                 }
             } else if (args[0].equals("stone")) {

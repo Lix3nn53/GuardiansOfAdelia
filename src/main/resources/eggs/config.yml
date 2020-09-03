@@ -1,0 +1,14 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+egg1:
+  mythicMobCode: ""
+  customModelData: 1
+  itemTier: "COMMON"
+egg2:
+  mythicMobCode: ""
+  customModelData: 2
+  itemTier: "RARE"

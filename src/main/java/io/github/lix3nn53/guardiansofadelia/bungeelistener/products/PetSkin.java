@@ -1,7 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.products;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
@@ -20,9 +21,11 @@ public enum PetSkin {
     BEE;
 
     public ItemStack getItemStack() {
-        String name = name();
-        Companion companion = Companion.valueOf(name);
-        String itemName = companion.getName() + ChatColor.LIGHT_PURPLE + " Pet Skin";
+        String skinName = name();
+        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(skinName);
+
+        String displayName = mythicMob.getDisplayName().get();
+        String itemName = displayName + ChatColor.LIGHT_PURPLE + " Pet Skin";
 
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.GRAY + "Premium");
@@ -32,7 +35,7 @@ public enum PetSkin {
         lore.add(ChatColor.YELLOW + "2 - Right click to your pet when you are holding this.");
 
         ItemStack itemStack = new ItemStack(Material.BLACK_DYE);
-        PersistentDataContainerUtil.putString("petSkinCode", companion.toString(), itemStack);
+        PersistentDataContainerUtil.putString("petSkinCode", skinName, itemStack);
 
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);

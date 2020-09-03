@@ -1,9 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
@@ -13,39 +14,52 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PetCompanion implements RPGGear {
+public class Egg implements RPGGear {
 
     private final ItemTier tier;
     private final String itemTag;
     private final int level;
-    private ItemStack itemStack;
+    private final ItemStack itemStack;
 
-    public PetCompanion(Companion companion, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int petBaseDamage, int petBaseHealth) {
-        String name = companion.getName();
+    public Egg(String petKey, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int petLevel) {
+        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(petKey);
+
+        String name = mythicMob.getDisplayName().get();
         if (itemTag != null && !itemTag.equals("")) {
-            name = tier.getTierColor() + itemTag + " " + companion.getName();
+            name = tier.getTierColor() + itemTag + " " + name;
         }
-        int companionHealth = PetManager.getCompanionHealth(1, petBaseHealth);
+        int health = PetManager.getHealth(petKey, petLevel);
+        int damage = PetManager.getDamage(petKey, petLevel);
 
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: Egg");
         lore.add("");
-        lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Companion");
+
+        if (damage > 0) {
+            lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Companion");
+        } else {
+            lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Mount");
+        }
+
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
         lore.add("");
         lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + 1);
         lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(1));
         lore.add("");
-        lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + companionHealth);
-        lore.add(ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + PetManager.getCompanionDamage(1, petBaseDamage));
+        lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + health);
+
+        if (damage > 0) {
+            lore.add(ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + damage);
+        } else {
+            lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + "petBaseSpeed");
+            lore.add(ChatColor.YELLOW + "⇪ Jump: " + ChatColor.GRAY + "petBaseJump");
+        }
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);
-        PersistentDataContainerUtil.putString("petCode", companion.toString(), this.itemStack);
+        PersistentDataContainerUtil.putString("petCode", petKey, this.itemStack);
         PersistentDataContainerUtil.putInteger("petExp", 0, this.itemStack);
-        PersistentDataContainerUtil.putInteger("petCurrentHealth", companionHealth, this.itemStack);
-        PersistentDataContainerUtil.putInteger("petBaseDamage", petBaseDamage, this.itemStack);
-        PersistentDataContainerUtil.putInteger("petBaseHealth", petBaseHealth, this.itemStack);
+        PersistentDataContainerUtil.putInteger("petCurrentHealth", health, this.itemStack);
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);

@@ -7,13 +7,12 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
+import io.github.lix3nn53.guardiansofadelia.Items.list.Eggs;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
-import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
@@ -42,14 +41,11 @@ public class ItemReferenceLoader {
 
             return ArmorManager.get(armorSlot, gearType, gearLevel, itemIndex, itemTier, itemTag, false);
         } else if (itemType.equals("Egg")) {
-            String petType = configurationSection.getString("petType");
+            String petType = configurationSection.getString("petCode");
+            int gearLevel = configurationSection.getInt("gearLevel");
+            int petLevel = configurationSection.getInt("petLevel");
 
-            if (petType.equals("Companion")) {
-                Companion companion = Companion.valueOf(configurationSection.getString("companion"));
-                int gearLevel = configurationSection.getInt("gearLevel");
-
-                return Companions.get(companion, gearLevel);
-            }
+            return Eggs.get(petType, gearLevel, petLevel);
         } else if (itemType.equals("Passive")) {
             int gearLevel = configurationSection.getInt("gearLevel");
             int itemIndex = configurationSection.getInt("itemIndex");

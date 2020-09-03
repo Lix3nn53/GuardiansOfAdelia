@@ -2,19 +2,23 @@ package io.github.lix3nn53.guardiansofadelia.creatures.pets;
 
 import com.comphenix.protocol.utility.MinecraftReflection;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
-import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
+import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
+import io.lumine.xikage.mythicmobs.mobs.MobManager;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -67,84 +71,37 @@ public class PetManager {
         return respawnDelay;
     }
 
-    private static LivingEntity getCompanionPet(Player owner, String petCode, int currentHP, int petLevel, double baseDamage, double baseHealth) {
-        Companion companion = Companion.valueOf(petCode);
-        String petName = companion.getName();
-        int damage = getCompanionDamage(petLevel, baseDamage);
-        int maxHP = getCompanionHealth(petLevel, baseHealth);
+    private static LivingEntity getPet(Player owner, String petCode, int petLevel, int currentHP) {
+        Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
 
+        MobManager mobManager = MythicMobs.inst().getMobManager();
+        ActiveMob activeMob = mobManager.spawnMob(petCode, spawnLoc, petLevel);
+        AbstractEntity entity = activeMob.getEntity();
+        Tameable pet = (Tameable) entity.getBukkitEntity();
+        pet.setSilent(true);
+        pet.setTamed(true);
+        pet.setOwner(owner);
+
+        // health
+        int maxHP = (int) (pet.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + 0.5);
         if (currentHP <= 0) {
             currentHP = (int) ((maxHP * 0.4) + 0.5);
         } else if (currentHP > maxHP) {
             currentHP = maxHP;
         }
+        pet.setHealth(currentHP);
 
-        Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
+        // name
+        String petName = pet.getCustomName();
         petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
-        Wolf wolf = (Wolf) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.WOLF);
-        wolf.setAdult();
-        wolf.setTamed(true);
-        wolf.setOwner(owner);
-        wolf.setSilent(true);
-        wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_FOLLOW_MOVEMENT_SPEED);
-        PersistentDataContainerUtil.putInteger("customDamage", damage, wolf);
-        wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
-        wolf.setHealth(currentHP);
-        companion.disguise(wolf);
-        return wolf;
-    }
+        pet.setCustomName(petName);
 
-    private static LivingEntity getMountPet(Player owner, String petCode, int currentHP, int petLevel, double baseHealth, double mountSpeed, double jumpStrength) {
-        Mount mount = Mount.valueOf(petCode);
-        String petName = mount.getName();
-        Horse.Color color = mount.getColor();
-        ItemStack armor = new ItemStack(Material.AIR);
+        // save current movement speed and set follow speed
+        AttributeInstance movementSpeed = pet.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
+        PersistentDataContainerUtil.putDouble("mountSpeed", movementSpeed.getBaseValue(), pet);
+        movementSpeed.setBaseValue(PET_FOLLOW_MOVEMENT_SPEED);
 
-        int maxHP = getMountHealth(petLevel, baseHealth);
-
-        if (currentHP <= 0) {
-            currentHP = (int) ((maxHP * 0.4) + 0.5);
-        } else if (currentHP > maxHP) {
-            currentHP = maxHP;
-        }
-
-        Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
-        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
-        Horse horse = (Horse) EntityUtils.create(spawnLoc, petName, maxHP, EntityType.HORSE);
-        horse.setTamed(true);
-        horse.setAdult();
-        horse.setStyle(Horse.Style.NONE);
-        horse.getInventory().setSaddle(OtherItems.getSaddle());
-        horse.setColor(color);
-        horse.setOwner(owner);
-        horse.setHealth(currentHP);
-        horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_FOLLOW_MOVEMENT_SPEED);
-        horse.getAttribute(Attribute.HORSE_JUMP_STRENGTH).setBaseValue(jumpStrength);
-        if (!armor.getType().equals(Material.AIR)) {
-            horse.getInventory().setArmor(armor);
-        }
-        PersistentDataContainerUtil.putDouble("mountSpeed", mountSpeed, horse);
-        return horse;
-    }
-
-    private static boolean isCompanionCode(String id) {
-        try {
-            Companion result = Companion.valueOf(id);
-            return true;
-        } catch (IllegalArgumentException exception) {
-
-        }
-        return false;
-    }
-
-    private static boolean isMountCode(String id) {
-        try {
-            Mount result = Mount.valueOf(id);
-            return true;
-        } catch (IllegalArgumentException exception) {
-
-        }
-        return false;
+        return pet;
     }
 
     public static void onMount(LivingEntity mount) {
@@ -251,20 +208,10 @@ public class PetManager {
         }
     }
 
-    private static void spawnCompanionPet(Player player, String petCode, int petCurrentHealth, int petLevel, double baseDamage, double baseHealth) {
-        LivingEntity pet = getCompanionPet(player, petCode, petCurrentHealth, petLevel, baseDamage, baseHealth);
-        if (pet != null) {
-            petToPlayer.put(pet, player);
-            playerToPet.put(player, pet);
-        }
-    }
-
-    private static void spawnMountPet(Player player, String petCode, int petCurrentHealth, int petLevel, double baseHealth, double baseSpeed, double baseJump) {
-        LivingEntity pet = getMountPet(player, petCode, petCurrentHealth, petLevel, baseHealth, baseSpeed, baseJump);
-        if (pet != null) {
-            petToPlayer.put(pet, player);
-            playerToPet.put(player, pet);
-        }
+    private static void spawnPet(Player player, String petCode, int petCurrentHealth, int petLevel) {
+        LivingEntity pet = getPet(player, petCode, petLevel, petCurrentHealth);
+        petToPlayer.put(pet, player);
+        playerToPet.put(player, pet);
     }
 
     public static void onEggEquip(Player player) {
@@ -283,16 +230,7 @@ public class PetManager {
                             int petExp = PersistentDataContainerUtil.getInteger(egg, "petExp");
                             int levelFromExp = PetExperienceManager.getLevelFromExp(petExp);
 
-                            //new values
-                            double petBaseHealth = PersistentDataContainerUtil.getInteger(egg, "petBaseHealth");
-                            if (isCompanionCode(petCode)) {
-                                double petBaseDamage = PersistentDataContainerUtil.getInteger(egg, "petBaseDamage");
-                                spawnCompanionPet(player, petCode, petCurrentHealth, levelFromExp, petBaseDamage, petBaseHealth);
-                            } else if (isMountCode(petCode)) {
-                                double petBaseSpeed = PersistentDataContainerUtil.getDouble(egg, "petBaseSpeed");
-                                double petBaseJump = PersistentDataContainerUtil.getDouble(egg, "petBaseJump");
-                                spawnMountPet(player, petCode, petCurrentHealth, levelFromExp, petBaseHealth, petBaseSpeed, petBaseJump);
-                            }
+                            spawnPet(player, petCode, levelFromExp, petCurrentHealth);
                         }
                     }
                 } else {
@@ -370,129 +308,27 @@ public class PetManager {
         pet.teleport(newPetLoc);
     }
 
-    public static int getCompanionHealth(int petLevel, double baseHealth) {
-        double multiplier = 1;
+    public static int getDamage(String key, int petLevel) {
+        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
 
-        switch (petLevel) {
-            case 2:
-                multiplier = 1.1;
-                break;
-            case 3:
-                multiplier = 1.2;
-                break;
-            case 4:
-                multiplier = 1.3;
-                break;
-            case 5:
-                multiplier = 1.4;
-                break;
-            case 6:
-                multiplier = 1.5;
-                break;
-            case 7:
-                multiplier = 1.6;
-                break;
-            case 8:
-                multiplier = 1.7;
-                break;
-            case 9:
-                multiplier = 1.8;
-                break;
-            case 10:
-                multiplier = 1.9;
-                break;
-            case 11:
-                multiplier = 2.0;
-                break;
-            case 12:
-                multiplier = 2.1;
-                break;
-        }
+        double base = mythicMob.getDamage().get();
+        double perLevel = mythicMob.getPerLevelDamage();
 
-        return (int) (baseHealth * multiplier + 0.5);
+        return (int) (base + (perLevel * petLevel) + 0.5);
     }
 
-    public static int getCompanionDamage(int petLevel, double baseDamage) {
-        double multiplier = 1;
+    public static int getHealth(String key, int petLevel) {
+        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
 
-        switch (petLevel) {
-            case 2:
-                multiplier = 1.1;
-                break;
-            case 3:
-                multiplier = 1.2;
-                break;
-            case 4:
-                multiplier = 1.3;
-                break;
-            case 5:
-                multiplier = 1.4;
-                break;
-            case 6:
-                multiplier = 1.5;
-                break;
-            case 7:
-                multiplier = 1.6;
-                break;
-            case 8:
-                multiplier = 1.7;
-                break;
-            case 9:
-                multiplier = 1.8;
-                break;
-            case 10:
-                multiplier = 1.9;
-                break;
-            case 11:
-                multiplier = 2.0;
-                break;
-            case 12:
-                multiplier = 2.1;
-                break;
-        }
+        double base = mythicMob.getHealth().get();
+        double perLevel = mythicMob.getPerLevelHealth();
 
-        return (int) (baseDamage * multiplier + 0.5);
+        return (int) (base + (perLevel * petLevel) + 0.5);
     }
 
-    public static int getMountHealth(int petLevel, double baseHealth) {
-        double multiplier = 1;
+    public static String getName(String key) {
+        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
 
-        switch (petLevel) {
-            case 2:
-                multiplier = 1.1;
-                break;
-            case 3:
-                multiplier = 1.2;
-                break;
-            case 4:
-                multiplier = 1.3;
-                break;
-            case 5:
-                multiplier = 1.4;
-                break;
-            case 6:
-                multiplier = 1.5;
-                break;
-            case 7:
-                multiplier = 1.6;
-                break;
-            case 8:
-                multiplier = 1.7;
-                break;
-            case 9:
-                multiplier = 1.8;
-                break;
-            case 10:
-                multiplier = 1.9;
-                break;
-            case 11:
-                multiplier = 2.0;
-                break;
-            case 12:
-                multiplier = 2.1;
-                break;
-        }
-
-        return (int) (baseHealth * multiplier + 0.5);
+        return mythicMob.getDisplayName().get();
     }
 }

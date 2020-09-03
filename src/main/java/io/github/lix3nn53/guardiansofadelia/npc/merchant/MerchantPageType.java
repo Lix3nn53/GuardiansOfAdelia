@@ -9,12 +9,8 @@ import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
-import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
-import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Mounts;
 import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Mount;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
@@ -77,10 +73,8 @@ public enum MerchantPageType {
                 return getShieldShop(shopLevel, resourceNpc);
             case ENCHANT:
                 return getEnchantGui(player, resourceNpc);
-            /*case COMPANION:
-                return getCompanionShop(shopLevel, resourceNpc);
-            case MOUNT:
-                return getMountShop(shopLevel, resourceNpc);*/
+            /*case EGG:
+                return getEggShop(shopLevel, resourceNpc);*/
             case TOOL:
                 return getToolShop(shopLevel, resourceNpc);
             case UTILITY:
@@ -167,72 +161,72 @@ public enum MerchantPageType {
         return new EnchantGui(player);
     }
 
-    private GuiBookGeneric getCompanionShop(int shopLevel, int shopNpc) {
+    private GuiBookGeneric getEggShop(int shopLevel, int shopNpc) {
         List<MerchantGuiLine> lines = new ArrayList<>();
         lines.add(new MerchantGuiLine());
         int lineIndex = 0;
-
+/* TODO pet shop
         if (shopLevel == 1) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.WOLF, 20), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.WOLF, 20), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.PIG, 20), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.PIG, 20), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.SHEEP, 20), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.SHEEP, 20), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.COW, 20), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.COW, 20), 1);
         } else if (shopLevel == 3) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_ALL_BLACK, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_BLACK, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_BRITISH_SHORTHAIR, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_CALICO, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_JELLIE, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_PERSIAN, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_ALL_BLACK, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_BLACK, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_BRITISH_SHORTHAIR, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_CALICO, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_JELLIE, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_PERSIAN, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_RAGDOLL, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_RED, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_SIAMESE, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_TABBY, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.CAT_WHITE, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_RAGDOLL, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_RED, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_SIAMESE, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_TABBY, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_WHITE, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BLACK, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BLACK_AND_WHITE, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_BROWN, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_GOLD, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_SALT_AND_PEPPER, 30), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.RABBIT_WHITE, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_BLACK, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_BLACK_AND_WHITE, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_BROWN, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_GOLD, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_SALT_AND_PEPPER, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_WHITE, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.CHICKEN, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CHICKEN, 30), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.CHOCOLATE, 30), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.CHOCOLATE, 30), 1);
         } else if (shopLevel == 4) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.POLAR_BEAR, 50), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.POLAR_BEAR, 50), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.PANDA, 50), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.PANDA, 50), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.TURTLE, 50), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.TURTLE, 50), 1);
         } else if (shopLevel == 5) {
-            lines.get(lineIndex).addWord(Companions.get(Companion.FOX_RED, 70), 1);
-            lines.get(lineIndex).addWord(Companions.get(Companion.FOX_SNOW, 70), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.FOX_RED, 70), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.FOX_SNOW, 70), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.ICE_CREAM, 70), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.ICE_CREAM, 70), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.MINI_DRAGON, 70), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.MINI_DRAGON, 70), 1);
             lines.add(new MerchantGuiLine());
             lineIndex++;
-            lines.get(lineIndex).addWord(Companions.get(Companion.VEX, 70), 1);
+            lines.get(lineIndex).addWord(Eggs.get(Companion.VEX, 70), 1);
         }
-
+*/
         List<GuiPage> guiPages = new ArrayList<>();
         guiPages.add(new GuiPage());
         int guiPageIndex = 0;
@@ -247,39 +241,6 @@ public enum MerchantPageType {
         }
 
         GuiBookGeneric merchantShop = new GuiBookGeneric("Companion Shop", shopNpc);
-        for (GuiPage page : guiPages) {
-            merchantShop.addPage(page);
-        }
-        return merchantShop;
-    }
-
-    private GuiBookGeneric getMountShop(int shopLevel, int shopNpc) {
-        List<MerchantGuiLine> lines = new ArrayList<>();
-        lines.add(new MerchantGuiLine());
-        int lineIndex = 0;
-
-        lines.get(lineIndex).addWord(Mounts.get(Mount.BLACK, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.BROWN, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.CHESTNUT, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.CREAMY, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.DARK_BROWN, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.GRAY, 40), 1);
-        lines.get(lineIndex).addWord(Mounts.get(Mount.WHITE, 40), 1);
-
-        List<GuiPage> guiPages = new ArrayList<>();
-        guiPages.add(new GuiPage());
-        int guiPageIndex = 0;
-
-        for (MerchantGuiLine line : lines) {
-            if (guiPages.get(guiPageIndex).isEmpty()) {
-                guiPages.get(guiPageIndex).addLine(line);
-            } else {
-                guiPages.add(new GuiPage());
-                guiPageIndex++;
-            }
-        }
-
-        GuiBookGeneric merchantShop = new GuiBookGeneric("Mount Shop", shopNpc);
         for (GuiPage page : guiPages) {
             merchantShop.addPage(page);
         }

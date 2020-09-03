@@ -110,8 +110,8 @@ public class PetExperienceManager {
         }
     }
 
-    private static void levelUp(Player player, int nextLevel) {
-        UUID uuid = player.getUniqueId();
+    private static void levelUp(Player owner, int nextLevel) {
+        UUID uuid = owner.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uuid)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
@@ -119,24 +119,22 @@ public class PetExperienceManager {
                 EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
                 if (!eggSlot.isEmpty()) {
                     ItemStack egg = eggSlot.getItemOnSlot();
+                    String petCode = PersistentDataContainerUtil.getString(egg, "petCode");
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
                     lore.set(5, ChatColor.GOLD + "Level: " + ChatColor.GRAY + nextLevel);
 
                     if (lore.get(2).contains("Companion")) {
-                        double petBaseDamage = PersistentDataContainerUtil.getInteger(egg, "petBaseDamage");
-                        double petBaseHealth = PersistentDataContainerUtil.getInteger(egg, "petBaseHealth");
-                        int damage = PetManager.getCompanionDamage(nextLevel, petBaseDamage);
-                        int maxHP = PetManager.getCompanionHealth(nextLevel, petBaseHealth);
+                        int damage = PetManager.getDamage(petCode, nextLevel);
+                        int maxHP = PetManager.getHealth(petCode, nextLevel);
                         lore.set(8, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
                         lore.set(9, ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + damage);
-                        player.sendMessage(ChatColor.GOLD + "DEBUG pet COMPANION level up");
+                        owner.sendMessage(ChatColor.GOLD + "DEBUG pet COMPANION level up");
                     } else {
-                        double petBaseHealth = PersistentDataContainerUtil.getInteger(egg, "petBaseHealth");
-                        int maxHP = PetManager.getMountHealth(nextLevel, petBaseHealth);
+                        int maxHP = PetManager.getHealth(petCode, nextLevel);
                         lore.set(8, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
-                        player.sendMessage(ChatColor.GOLD + "DEBUG pet MOUNT level up");
+                        owner.sendMessage(ChatColor.GOLD + "DEBUG pet MOUNT level up");
                     }
 
                     itemMeta.setLore(lore);
@@ -144,8 +142,8 @@ public class PetExperienceManager {
                     egg.setItemMeta(itemMeta);
                     eggSlot.setItemOnSlot(egg);
 
-                    PetManager.respawnPet(player);
-                    MessageUtils.sendCenteredMessage(player, ChatColor.GOLD + "Your pet has leveled up!");
+                    PetManager.respawnPet(owner);
+                    MessageUtils.sendCenteredMessage(owner, ChatColor.GOLD + "Your pet has leveled up!");
                 }
             }
         }

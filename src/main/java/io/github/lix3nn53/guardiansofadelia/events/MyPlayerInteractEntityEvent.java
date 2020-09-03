@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -123,7 +122,8 @@ public class MyPlayerInteractEntityEvent implements Listener {
 
                                 //change values of itemOnSlot
                                 ItemMeta onSlotItemMeta = itemOnSlot.getItemMeta();
-                                onSlotItemMeta.setDisplayName(Companion.valueOf(petSkinCode).getName());
+                                String name = PetManager.getName(petSkinCode);
+                                onSlotItemMeta.setDisplayName(name);
                                 if (itemMeta.hasCustomModelData())
                                     onSlotItemMeta.setCustomModelData(itemMeta.getCustomModelData());
                                 itemOnSlot.setItemMeta(onSlotItemMeta);

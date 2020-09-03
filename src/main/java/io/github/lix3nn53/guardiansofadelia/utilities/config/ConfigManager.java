@@ -53,6 +53,7 @@ public class ConfigManager {
         ItemWeaponSetConfigurations.createConfigs();
         JobCraftingConfigurations.createConfigs();
         QuestConfigurations.createConfigs();
+        EggConfigurations.createConfigs();
     }
 
     public static void loadConfigALL() {
@@ -72,6 +73,7 @@ public class ConfigManager {
         ItemWeaponSetConfigurations.loadConfigs();
         JobCraftingConfigurations.loadConfigs();
         QuestConfigurations.loadConfigs();
+        EggConfigurations.loadConfigs();
     }
 
     public static void writeConfigALL() {

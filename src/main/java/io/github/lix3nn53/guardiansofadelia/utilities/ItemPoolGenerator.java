@@ -4,14 +4,17 @@ import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.list.eggs.Companions;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.Companion;
+import io.github.lix3nn53.guardiansofadelia.Items.list.Eggs;
+import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.PetSkin;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemPoolGenerator {
+
+    // TODO fix ItemPoolGenerator
+
 
     public static List<ItemStack> generateWeapons(ItemTier tier, String itemTag, int gearLevel, int itemIndex) {
         int minNumberofStats = tier.getMinNumberOfStatsNormal();
@@ -201,16 +204,15 @@ public class ItemPoolGenerator {
     public static List<ItemStack> generateEggs(int gearLevel) {
         List<ItemStack> temp = new ArrayList<>();
 
-        for (Companion companion : Companion.values()) {
-            if (companion.equals(Companion.BEE) || companion.equals(Companion.FOX_RED) || companion.equals(Companion.FOX_SNOW) || companion.equals(Companion.MINI_DRAGON)
-                    || companion.equals(Companion.VEX) || companion.equals(Companion.ICE_CREAM)) continue;
-            temp.add(Companions.get(companion, gearLevel));
+        for (String key : Eggs.getKeys()) {
+            // Check if skin
+            for (PetSkin c : PetSkin.values()) {
+                if (c.name().equals(key)) {
+                    continue;
+                }
+            }
+            temp.add(Eggs.get(key, gearLevel, 1));
         }
-
-        /*TODO mount eggs are disabled, stay this way?
-        for (Mount mount : Mount.values()) {
-            temp.add(Mounts.get(mount, gearLevel));
-        }*/
 
         return temp;
     }
