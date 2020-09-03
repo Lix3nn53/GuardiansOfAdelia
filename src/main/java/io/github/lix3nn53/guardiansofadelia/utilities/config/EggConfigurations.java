@@ -54,6 +54,13 @@ public class EggConfigurations {
             String itemTierStr = section.getString("itemTier");
             ItemTier itemTier = ItemTier.valueOf(itemTierStr);
 
+            if (section.contains("mountSpeed")) {
+                double mountSpeed = section.getDouble("mountSpeed");
+                Eggs.add(key, customModelData, itemTier, mountSpeed);
+
+                continue;
+            }
+
             Eggs.add(key, customModelData, itemTier);
         }
     }

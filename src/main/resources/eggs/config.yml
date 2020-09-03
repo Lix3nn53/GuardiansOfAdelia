@@ -1,14 +1,19 @@
 # ---------------------------------------------- #
-#            Quest list Configuration            #
+#             Egg list Configuration             #
 # ---------------------------------------------- #
-#                     Quests                     #
+#                     Eggs                       #
 # ---------------------------------------------- #
 
 egg1:
-  mythicMobCode: ""
+  mythicMobCode: "dsfdsfdsf"
   customModelData: 1
   itemTier: "COMMON"
 egg2:
-  mythicMobCode: ""
+  mythicMobCode: "sdfsdfdsf"
   customModelData: 2
   itemTier: "RARE"
+egg3:
+  mythicMobCode: "sdfdsfsdf"
+  customModelData: 2
+  itemTier: "RARE"
+  mountSpeed: 0.24
