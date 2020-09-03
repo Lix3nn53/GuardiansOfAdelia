@@ -9,6 +9,7 @@ My personal spigot(https://www.spigotmc.org/) plugin project to create a MMORPG 
 * Citizens (https://github.com/CitizensDev/Citizens2)
 * LibsDisguises (https://github.com/libraryaddict/LibsDisguises)
 * LuckPerms (https://github.com/lucko/LuckPerms)
+* MythicMobs (https://git.mythiccraft.io/mythiccraft/MythicMobs)
 * WorldEdit (https://github.com/EngineHub/WorldEdit)
 * WorldGuard (https://github.com/EngineHub/WorldGuard)
 
@@ -20,51 +21,47 @@ Please note that these features are for my personal server. It probably will not
   * Create new character or select an existing one to play when you join server.
 * Classes
   * You can create new classes via configs.
-  * You can setup elements, gears class can use and skill set in configuration.
+  * You can setup attributes, elements, gears class can use and skill set in configuration.
 * Attributes
   * A character's attributes define his/her power in different areas. Some of the main attributes are: Max health and mana, physical damage and defense, magical damage and defense and critical chance.
-  * Your base attributes increases as you level up. Equipments adds their attributes to your character when you equip them.
-  * There are elements which increases your attributes as you gain more point in them;
-  * Fire: increases physical damage
-  * Water: increases max mana
-  * Earth: increases max health
-  * Lightning: increases magical damage
-  * Wind: increases critical chance
-  * You can gain more points on elements by investing element points you gain by leveling up or equiping items which has element bonuses on them.
+  * Your base attributes increases as you level up. You can equip equipments to increase your attibutes.
+* Elements
+  * Elements increases attributes of your character.
+  * You will gain element points on level up and you can spend them to increase your points in one of the elements.
+  * Equipments, especially passives, can increase your points in elements.
+  * There are 5 types of elements: <br/>
+    Fire, increases physical damage. <br/>
+    Water, increases max mana. <br/>
+    Earth, increases max health. <br/>
+    Lightning, increases magical damage. <br/>
+    Wind, increases critical chance. <br/>
 * Skills
-  * You can create skills in class and mob skill set configs.
-  * Invest skill points to learn or upgrade your skills
+  * You can create skills in class configs.
+  * Spend skill points to learn or upgrade your skills
   * Use 1-2-3-4 hot bar keys to cast skills via SkillBar
   * Combine SkillComponents to create skill mechanics. Component types are trigger, target, mechanic, condition.
 * Quests
   * You can create quests via configs.
-  * Icons: 
-    Quest icons appear on NPCs and disguises themselfs to each player differently. 
+  * Icons: Quest icons appear on NPCs and disguises themselfs to each player differently. 
     If player has a completed quest from this NPC, he/she will see a 3D Q icon.
     Else if player can accept a new quest from this NPC,  he/she will see a 3D ? icon.
     Else if player has a quest in progress from this NPC,  he/she will see a 3D ! icon.
     Else he/she will see nothing.
-  * Gui: 
-    Players can open a gui including quests of a NPC and accept/complete them.
-  * Actions: 
-    Perform specific actions when player accepts, completes and turns in a quest.
-  * Tasks: 
-    Add specific tasks for your players to complete. You perform can actions on task complete too.
-  * Rewards: 
-    Give experience, money and/or items to your players when they turn in a quest.
+  * Gui: Players can open a gui including quests of a NPC and accept/complete them.
+  * Actions: Perform specific actions when player accepts, completes and turns in a quest.
+  * Tasks: Add specific tasks for your players to complete. You perform can actions on task complete too.
+  * Rewards: Give experience, money and/or items to your players when they turn in a quest.
 * GuiBook
   * Create gui with unlimited pages.
     Think of items as words. Make a line from items. Make a page from lines. Make a book from pages.
 * Merchants
   * Open a gui on right click to NPC.
-    Select specific actions from this gui like buying/selling items, managing your storages, enchanting items..
-* Entities
-  * You can create entities with skill sets via configs.
-* Spawners
-  * You can create spawners via configs.
-  * Spawns X of a customized entity on a location every Y seconds. Can't have more than Z spawned entities at once.
+    Select specific actions from this gui like buying/selling items, managing your storages, enchanting items etc.
+* Entities & Spawners
+  * Use MythicMobs to create entities & spawners. Quests, pets and other systems supports MythicMobs.
 * RPG-Inventory
-  * Equip jewelries to gain bonus stats
+  * Equip passive items(jewelries) to gain bonus element points.
+  * See detailed info of your character's stats.
 * Bazaar
   * Set up a bazaar to sell your items to other players.
   * Each bazaar has a model, players can left click this model to buy items from it.
@@ -99,13 +96,14 @@ Please note that these features are for my personal server. It probably will not
   * On crafting gui, select the level of items you want to create, then craft by clicking on items at cost of ingredients
   * You can gain job experience by crafting and unlock higher level crafts
 * Pets
-  * Equip an egg to spawn pet. When spawned your pet will follow you
-  * There are 2 types of pets. Companions and mounts
-  * Companions have health and meleeDamage attributes. They attack your enemies to protect you
-  * Mounts have health, speed and jump attributes. You can mount and ride them to travel faster
-  * Your active pet gains experience when you kill monsters. Their attributes increases on level up
-  * If your pet dies, you can't spawn another pet for 5 minutes. Your pet repsawns with half hp after 5 minutes
-  * You can feed pets to restore their healths
+  * Create pet entities using Mythic Mobs.
+  * Equip an egg to spawn pet. When spawned your pet will follow you.
+  * There are 2 types of pets: <br/>
+    Companions, have health and meleeDamage attributes. They attack your enemies to protect you. <br/>
+    Mounts, have health, speed and jump attributes. You can mount and ride them to travel faster.
+  * If spawned, your pet gains experience when you kill monsters. Their attributes increases on level up.
+  * If your pet dies, you can't spawn another pet for 5 minutes. Your pet repsawns with half hp after 5 minutes.
+  * You can feed pets to restore their healths.
 * Revive
   * Revive at closest town
   * Then you can choose to revive here or become a soul and search for your tomb. If you can find your tomb in 2 minutes, left click to revive there
