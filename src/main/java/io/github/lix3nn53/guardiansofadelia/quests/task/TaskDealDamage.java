@@ -1,8 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.mobs.MobManager;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -12,17 +14,22 @@ public final class TaskDealDamage implements Task {
 
     private final int damageNeeded;
     private final String mobName;
+    private final String internalName;
     private List<Action> onCompleteActions = new ArrayList<>();
     private int progress = 0;
 
 
-    public TaskDealDamage(final String mobName, final int damageNeeded) {
-        this.mobName = mobName;
+    public TaskDealDamage(final String internalName, final int damageNeeded) {
+        MobManager mobManager = MythicMobs.inst().getMobManager();
+        MythicMob mythicMob = mobManager.getMythicMob(internalName);
+
+        this.mobName = mythicMob.getDisplayName().get();
+        this.internalName = internalName;
         this.damageNeeded = damageNeeded;
     }
 
     public TaskDealDamage freshCopy() {
-        TaskDealDamage taskCopy = new TaskDealDamage(this.mobName, this.damageNeeded);
+        TaskDealDamage taskCopy = new TaskDealDamage(this.internalName, this.damageNeeded);
         taskCopy.setOnCompleteActions(this.onCompleteActions);
         return taskCopy;
     }
@@ -40,8 +47,8 @@ public final class TaskDealDamage implements Task {
         } else {
             color = ChatColor.YELLOW;
         }
-        String lore = color + "Deal " + damageNeeded + " damage to " + mobName;
-        return lore;
+
+        return color + "Deal " + damageNeeded + " damage to " + mobName;
     }
 
     @Override
@@ -91,11 +98,8 @@ public final class TaskDealDamage implements Task {
         return damageNeeded;
     }
 
-    public boolean progress(LivingEntity livingEntity, int damageDeal, Player player) {
-        String customName = livingEntity.getCustomName();
-        if (customName == null) return false;
-
-        if (customName.equals(this.mobName)) {
+    public boolean progress(String internalName, int damageDeal, Player player) {
+        if (internalName.equals(this.internalName)) {
             return progress(player, damageDeal);
         }
 

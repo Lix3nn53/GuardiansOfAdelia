@@ -27,17 +27,17 @@ public class TaskLoader {
             List<String> keyOfMobsItemDropsFrom = configurationSection.getStringList("keyOfMobsItemDropsFrom");
 
             List<String> nameOfMobsItemDropsFrom = new ArrayList<>();
-            for (String key : keyOfMobsItemDropsFrom) {
-                MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+            for (String internalName : keyOfMobsItemDropsFrom) {
+                MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
                 if (mythicMob == null) {
-                    GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskCollect mythicMob null: " + key);
+                    GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskCollect mythicMob null: " + internalName);
 
                     return null;
                 }
                 String displayName = mythicMob.getDisplayName().get();
-                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskCollect MM: " + key + "-" + displayName);
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskCollect MM: " + internalName + "-" + displayName);
 
-                nameOfMobsItemDropsFrom.add(displayName);
+                nameOfMobsItemDropsFrom.add(internalName);
             }
 
             double chance = configurationSection.getDouble("chance");
@@ -47,20 +47,20 @@ public class TaskLoader {
 
             return new TaskCollect(nameOfMobsItemDropsFrom, chance, questItem, amountNeeded);
         } else if (componentType.equals(TaskDealDamage.class.getSimpleName())) {
-            String key = configurationSection.getString("mobKey");
+            String internalName = configurationSection.getString("mobKey");
 
-            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
             if (mythicMob == null) {
-                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskDealDamage mythicMob null: " + key);
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskDealDamage mythicMob null: " + internalName);
 
                 return null;
             }
             String displayName = mythicMob.getDisplayName().get();
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskDealDamage MM: " + key + "-" + displayName);
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskDealDamage MM: " + internalName + "-" + displayName);
 
             int damageNeeded = configurationSection.getInt("damageNeeded");
 
-            return new TaskDealDamage(displayName, damageNeeded);
+            return new TaskDealDamage(internalName, damageNeeded);
         } else if (componentType.equals(TaskGathering.class.getSimpleName())) {
             int ingredientIndex = configurationSection.getInt("ingredientIndex");
             Ingredient ingredient = GatheringManager.getIngredient(ingredientIndex);
@@ -69,41 +69,41 @@ public class TaskLoader {
 
             return new TaskGathering(ingredient, amountNeeded);
         } else if (componentType.equals(TaskGift.class.getSimpleName())) {
-            String key = configurationSection.getString("mobKey");
+            String internalName = configurationSection.getString("mobKey");
 
-            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
             if (mythicMob == null) {
-                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskGift mythicMob null: " + key);
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskGift mythicMob null: " + internalName);
 
                 return null;
             }
             String displayName = mythicMob.getDisplayName().get();
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskGift MM: " + key + "-" + displayName);
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskGift MM: " + internalName + "-" + displayName);
 
             ItemStack itemStack = ItemReferenceLoader.loadItemReference(configurationSection.getConfigurationSection("item"));
 
             int amountNeeded = configurationSection.getInt("amountNeeded");
 
-            return new TaskGift(amountNeeded, itemStack, displayName);
+            return new TaskGift(amountNeeded, itemStack, internalName);
         } else if (componentType.equals(TaskInteract.class.getSimpleName())) {
             int npcId = configurationSection.getInt("npcId");
 
             return new TaskInteract(npcId);
         } else if (componentType.equals(TaskKill.class.getSimpleName())) {
-            String key = configurationSection.getString("mobKey");
+            String internalName = configurationSection.getString("mobKey");
 
-            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
             if (mythicMob == null) {
-                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskKill mythicMob null: " + key);
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskKill mythicMob null: " + internalName);
 
                 return null;
             }
             String displayName = mythicMob.getDisplayName().get();
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskKill MM: " + key + "-" + displayName);
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskKill MM: " + internalName + "-" + displayName);
 
             int amountNeeded = configurationSection.getInt("amountNeeded");
 
-            return new TaskKill(displayName, amountNeeded);
+            return new TaskKill(internalName, amountNeeded);
         } else if (componentType.equals(TaskReach.class.getSimpleName())) {
             World world = Bukkit.getWorld(configurationSection.getString("world"));
 

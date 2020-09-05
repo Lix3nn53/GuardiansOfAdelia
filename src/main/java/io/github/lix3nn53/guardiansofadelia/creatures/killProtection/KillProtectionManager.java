@@ -91,9 +91,10 @@ public class KillProtectionManager {
 
                         //quest, progress kill tasks
                         List<Quest> questList = activeCharacter.getQuestList();
+                        String internalName = mythicEvent.getMobType().getInternalName();
                         for (Quest quest : questList) {
-                            quest.progressKillTasks(player, livingTarget);
-                            quest.triggerQuestItemDrop(player, livingTarget);
+                            quest.progressKillTasks(player, internalName);
+                            quest.triggerQuestItemDrop(internalName, livingTarget.getLocation());
                         }
 
                         //hunting

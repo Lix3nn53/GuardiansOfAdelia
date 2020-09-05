@@ -17,7 +17,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -401,12 +400,12 @@ public final class Quest {
         return replaceTaskValues;
     }
 
-    public boolean progressKillTasks(Player questOwner, LivingEntity livingTarget) {
+    public boolean progressKillTasks(Player questOwner, String internalName) {
         for (Task task : this.tasks) {
             if (task.isCompleted()) continue;
             if (task instanceof TaskKill) {
                 TaskKill taskKill = (TaskKill) task;
-                boolean didProgress = taskKill.progress(livingTarget, questOwner);
+                boolean didProgress = taskKill.progress(questOwner, internalName);
                 if (didProgress) {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
@@ -419,12 +418,12 @@ public final class Quest {
         return false;
     }
 
-    public boolean progressDealDamageTasks(Player questOwner, LivingEntity livingTarget, int damage) {
+    public boolean progressDealDamageTasks(Player questOwner, String internalName, int damage) {
         for (Task task : this.tasks) {
             if (task.isCompleted()) continue;
             if (task instanceof TaskDealDamage) {
                 TaskDealDamage taskDealDamage = (TaskDealDamage) task;
-                boolean didProgress = taskDealDamage.progress(livingTarget, damage, questOwner);
+                boolean didProgress = taskDealDamage.progress(internalName, damage, questOwner);
                 if (didProgress) {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
@@ -511,22 +510,18 @@ public final class Quest {
         return false;
     }
 
-    public boolean triggerQuestItemDrop(Player questOwner, LivingEntity livingTarget) {
-        if (!livingTarget.isCustomNameVisible()) return false;
-
-        String customName = livingTarget.getCustomName();
-
+    public boolean triggerQuestItemDrop(String internalName, Location location) {
         for (Task task : this.tasks) {
             if (task.isCompleted()) continue;
             if (task instanceof TaskCollect) {
                 TaskCollect taskCollect = (TaskCollect) task;
-                List<String> nameOfMobsItemDropsFrom = taskCollect.getNameOfMobsItemDropsFrom();
-                if (nameOfMobsItemDropsFrom.contains(customName)) {
+                List<String> keyOfMobsItemDropsFrom = taskCollect.getKeyOfMobsItemDropsFrom();
+                if (keyOfMobsItemDropsFrom.contains(internalName)) {
                     double random = Math.random();
                     if (random < taskCollect.getChance()) {
                         ItemStack itemStack = taskCollect.getItemStack();
-                        World world = livingTarget.getWorld();
-                        world.dropItemNaturally(livingTarget.getLocation(), itemStack);
+                        World world = location.getWorld();
+                        world.dropItemNaturally(location, itemStack);
                     }
                 }
             }

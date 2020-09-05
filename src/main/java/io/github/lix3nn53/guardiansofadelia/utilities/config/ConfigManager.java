@@ -43,7 +43,7 @@ public class ConfigManager {
         createResourcePackConfig();
         createCharacterSelectionConfig();
         createTowns();
-        TeleportPortalsConfiguration.createConfigs();
+        TeleportPortalsConfiguration.createConfig();
         createHologramsConfig();
         DatabaseConfiguration.createConfigs();
         DungeonConfiguration.createConfigs();
@@ -63,7 +63,7 @@ public class ConfigManager {
         loadResourcePackConfig();
         loadCharacterSelectionConfig();
         loadTowns();
-        TeleportPortalsConfiguration.loadConfigs();
+        TeleportPortalsConfiguration.loadConfig();
         loadHologramsConfig();
         DatabaseConfiguration.loadConfigs();
         DungeonConfiguration.loadConfigs();

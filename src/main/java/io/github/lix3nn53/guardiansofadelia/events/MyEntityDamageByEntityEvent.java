@@ -19,6 +19,9 @@ import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.DamageIndicator;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -376,10 +379,13 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 //progress deal damage tasks
                 List<Quest> questList = activeCharacter.getQuestList();
+                ActiveMob mythicMobInstance = MythicMobs.inst().getMobManager().getMythicMobInstance(livingTarget);
+                MythicMob type = mythicMobInstance.getType();
+                String internalName = type.getInternalName();
                 for (Quest quest : questList) {
-                    quest.progressDealDamageTasks(player, livingTarget, (int) (protectionDamage + 0.5));
+                    quest.progressDealDamageTasks(player, internalName, (int) (protectionDamage + 0.5));
                 }
-                PartyManager.progressDealDamageTasksOfOtherMembers(player, livingTarget, protectionDamage);
+                PartyManager.progressDealDamageTasksOfOtherMembers(player, internalName, protectionDamage);
 
                 //indicator
                 ChatColor indicatorColor = ChatColor.RED;

@@ -10,15 +10,15 @@ import java.util.List;
 
 public final class TaskCollect implements Task {
 
-    private final List<String> nameOfMobsItemDropsFrom;
+    private final List<String> keyOfMobsItemDropsFrom;
     private final double chance;
     private final int amountNeeded;
     private final ItemStack itemStack;
     private List<Action> onCompleteActions = new ArrayList<>();
     private int progress;
 
-    public TaskCollect(final List<String> nameOfMobsItemDropsFrom, final double chance, final ItemStack itemStack, final int amountNeeded) {
-        this.nameOfMobsItemDropsFrom = nameOfMobsItemDropsFrom;
+    public TaskCollect(final List<String> keyOfMobsItemDropsFrom, final double chance, final ItemStack itemStack, final int amountNeeded) {
+        this.keyOfMobsItemDropsFrom = keyOfMobsItemDropsFrom;
         this.chance = chance;
         this.itemStack = itemStack.clone();
         this.amountNeeded = amountNeeded;
@@ -26,7 +26,7 @@ public final class TaskCollect implements Task {
     }
 
     public TaskCollect freshCopy() {
-        TaskCollect taskCopy = new TaskCollect(this.nameOfMobsItemDropsFrom, this.chance, this.itemStack, this.amountNeeded);
+        TaskCollect taskCopy = new TaskCollect(this.keyOfMobsItemDropsFrom, this.chance, this.itemStack, this.amountNeeded);
         taskCopy.setOnCompleteActions(this.onCompleteActions);
         return taskCopy;
     }
@@ -104,8 +104,8 @@ public final class TaskCollect implements Task {
         return itemStack.clone();
     }
 
-    public List<String> getNameOfMobsItemDropsFrom() {
-        return nameOfMobsItemDropsFrom;
+    public List<String> getKeyOfMobsItemDropsFrom() {
+        return keyOfMobsItemDropsFrom;
     }
 
     public double getChance() {

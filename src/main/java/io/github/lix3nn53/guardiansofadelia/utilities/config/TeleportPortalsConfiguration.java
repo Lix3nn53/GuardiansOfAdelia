@@ -1,16 +1,20 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.database.ItemSerializer;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.InstantTeleportPortal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
+import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,15 +23,7 @@ public class TeleportPortalsConfiguration {
 
     private static FileConfiguration fileConfiguration;
 
-    static void createConfigs() {
-        createDatabaseConfig();
-    }
-
-    static void loadConfigs() {
-        loadDatabaseConfig();
-    }
-
-    private static void createDatabaseConfig() {
+    static void createConfig() {
         File customConfigFile = new File(ConfigManager.DATA_FOLDER, "teleportPortals.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
@@ -42,36 +38,61 @@ public class TeleportPortalsConfiguration {
         }
     }
 
-    private static void loadDatabaseConfig() {
-        int portalNumber = fileConfiguration.getInt("PortalNumber");
-        for (int i = 1; i <= portalNumber; i++) {
-            String worldString = fileConfiguration.getString("p" + i + ".world");
+    static void loadConfig() {
+        for (int i = 1; i <= 1000; i++) {
+            boolean contains = fileConfiguration.contains("p" + i);
+            if (!contains) break;
+            ConfigurationSection current = fileConfiguration.getConfigurationSection("p" + i);
+
+            String worldString = current.getString("world");
             World world = Bukkit.getWorld(worldString);
-            double x = fileConfiguration.getDouble("p" + i + ".x");
-            double y = fileConfiguration.getDouble("p" + i + ".y");
-            double z = fileConfiguration.getDouble("p" + i + ".z");
-            float yaw = (float) fileConfiguration.getDouble("p" + i + ".yaw");
-            float pitch = (float) fileConfiguration.getDouble("p" + i + ".pitch");
+            double x = current.getDouble("x");
+            double y = current.getDouble("y");
+            double z = current.getDouble("z");
+            float yaw = (float) current.getDouble("yaw");
+            float pitch = (float) current.getDouble("pitch");
             Location location = new Location(world, x, y, z, yaw, pitch);
-            PortalColor portalColor = PortalColor.valueOf(fileConfiguration.getString("p" + i + ".color"));
+            PortalColor portalColor = PortalColor.valueOf(current.getString("color"));
             Portal portal = new Portal(location, portalColor);
 
             PortalManager.addPortal(portal);
 
-            String tpWorldString = fileConfiguration.getString("p" + i + ".tpWorld");
+            String tpWorldString = current.getString("tpWorld");
             World tpWorld = Bukkit.getWorld(tpWorldString);
-            double tpX = fileConfiguration.getDouble("p" + i + ".tpX");
-            double tpY = fileConfiguration.getDouble("p" + i + ".tpY");
-            double tpZ = fileConfiguration.getDouble("p" + i + ".tpZ");
-            float tpYaw = (float) fileConfiguration.getDouble("p" + i + ".tpYaw");
-            float tpPitch = (float) fileConfiguration.getDouble("p" + i + ".tpPitch");
+            double tpX = current.getDouble("tpX");
+            double tpY = current.getDouble("tpY");
+            double tpZ = current.getDouble("tpZ");
+            float tpYaw = (float) current.getDouble("tpYaw");
+            float tpPitch = (float) current.getDouble("tpPitch");
             Location tpLocation = new Location(tpWorld, tpX, tpY, tpZ, tpYaw, tpPitch);
 
-            int requiredQuestNoAccepted = fileConfiguration.getInt("p" + i + ".requiredQuestNoAccepted");
-            int requiredQuestNoTurnedIn = fileConfiguration.getInt("p" + i + ".requiredQuestNoTurnedIn");
+            int requiredQuestNoAccepted = current.getInt("requiredQuestNoAccepted");
+            int requiredQuestNoTurnedIn = current.getInt("requiredQuestNoTurnedIn");
 
             InstantTeleportPortal instantTeleportPortal = new InstantTeleportPortal(tpLocation, requiredQuestNoAccepted, requiredQuestNoTurnedIn);
             PortalManager.addInstantTeleportPortal(portal, instantTeleportPortal);
+        }
+    }
+
+    private static void writeConfig() {
+        ItemStack[] rewards = DailyRewardHandler.getRewards();
+
+        int i = 1;
+        for (ItemStack itemStack : rewards) {
+            if (itemStack == null) continue;
+
+            String s = ItemSerializer.itemStackToBase64(itemStack);
+            fileConfiguration.set("i" + i, s);
+
+            i++;
+        }
+
+        fileConfiguration.set("count", i - 1);
+
+        try {
+            fileConfiguration.save("teleportPortals.yml");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

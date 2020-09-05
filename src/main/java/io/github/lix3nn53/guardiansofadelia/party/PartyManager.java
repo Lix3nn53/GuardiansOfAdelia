@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -13,7 +12,7 @@ import java.util.UUID;
 
 public class PartyManager {
 
-    private static HashMap<Player, Party> playerToParty = new HashMap<>();
+    private static final HashMap<Player, Party> playerToParty = new HashMap<>();
 
     public static void addParty(Player player1, Player player2, Party party) {
         playerToParty.put(player1, party);
@@ -50,7 +49,7 @@ public class PartyManager {
 
     //QUEST PROGRESSES
 
-    public static void progressDealDamageTasksOfOtherMembers(Player player, LivingEntity livingTarget, double finalDamage) {
+    public static void progressDealDamageTasksOfOtherMembers(Player player, String internalName, double finalDamage) {
         if (inParty(player)) {
             Party party = PartyManager.getParty(player);
             List<Player> members = party.getMembers();
@@ -66,7 +65,7 @@ public class PartyManager {
 
                             List<Quest> questList = activeCharacter.getQuestList();
                             for (Quest quest : questList) {
-                                quest.progressDealDamageTasks(member, livingTarget, (int) (finalDamage + 0.5));
+                                quest.progressDealDamageTasks(member, internalName, (int) (finalDamage + 0.5));
                             }
                         }
                     }

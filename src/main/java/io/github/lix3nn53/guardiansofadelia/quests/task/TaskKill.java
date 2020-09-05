@@ -1,8 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.mobs.MobManager;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -12,18 +14,23 @@ public final class TaskKill implements Task {
 
     private final int amountNeeded;
 
+    private final String internalName;
     private final String mobName;
     private List<Action> onCompleteActions = new ArrayList<>();
     private int progress;
 
-    public TaskKill(final String mobName, final int amountNeeded) {
-        this.mobName = mobName;
+    public TaskKill(final String internalName, final int amountNeeded) {
+        MobManager mobManager = MythicMobs.inst().getMobManager();
+        MythicMob mythicMob = mobManager.getMythicMob(internalName);
+
+        this.mobName = mythicMob.getDisplayName().get();
+        this.internalName = internalName;
         this.amountNeeded = amountNeeded;
         progress = 0;
     }
 
     public TaskKill freshCopy() {
-        TaskKill taskCopy = new TaskKill(this.mobName, this.amountNeeded);
+        TaskKill taskCopy = new TaskKill(this.internalName, this.amountNeeded);
         taskCopy.setOnCompleteActions(this.onCompleteActions);
         return taskCopy;
     }
@@ -78,11 +85,8 @@ public final class TaskKill implements Task {
         return amountNeeded;
     }
 
-    public boolean progress(LivingEntity livingEntity, Player player) {
-        String customName = livingEntity.getCustomName();
-        if (customName == null) return false;
-
-        if (customName.equals(this.mobName)) {
+    public boolean progress(Player player, String internalName) {
+        if (internalName.equals(this.internalName)) {
             return progress(player);
         }
 

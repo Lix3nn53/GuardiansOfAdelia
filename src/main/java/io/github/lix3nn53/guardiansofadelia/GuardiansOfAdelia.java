@@ -14,8 +14,6 @@ import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
-import io.github.lix3nn53.guardiansofadelia.quests.list.TutorialQuests;
-import io.github.lix3nn53.guardiansofadelia.quests.list.mainstory.MainStoryQuests;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigManager;
@@ -194,10 +192,6 @@ public class GuardiansOfAdelia extends JavaPlugin {
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 10 * 5L);
         */
-
-        //REGISTER QUESTS FROM LISTS
-        TutorialQuests.createQuests();
-        MainStoryQuests.createQuests();
 
         //Automatic Shutdown
         AutomaticShutdown.onEnable();
