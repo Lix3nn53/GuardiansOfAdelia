@@ -15,7 +15,6 @@ import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
-import io.github.lix3nn53.guardiansofadelia.utilities.PacketLimitter;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.shutdown.AutomaticShutdown;
 import org.bukkit.Bukkit;
@@ -103,7 +102,6 @@ public class GuardiansOfAdelia extends JavaPlugin {
         //DATABASE SETUP is initialized at config loading
 
         MyPacketListeners.addPacketListeners();
-        PacketLimitter.register();
         MerchantManager.init();
         MiniGameManager.initMinigames();
 
