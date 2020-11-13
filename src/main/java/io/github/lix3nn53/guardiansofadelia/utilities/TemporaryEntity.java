@@ -22,6 +22,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -113,6 +115,26 @@ public class TemporaryEntity implements LivingEntity {
 
     @Override
     public void setMaximumAir(int i) {
+
+    }
+
+    @Override
+    public int getArrowCooldown() {
+        return 0;
+    }
+
+    @Override
+    public void setArrowCooldown(int i) {
+
+    }
+
+    @Override
+    public int getArrowsInBody() {
+        return 0;
+    }
+
+    @Override
+    public void setArrowsInBody(int i) {
 
     }
 
@@ -311,6 +333,22 @@ public class TemporaryEntity implements LivingEntity {
 
     }
 
+    @NotNull
+    @Override
+    public EntityCategory getCategory() {
+        return null;
+    }
+
+    @Override
+    public boolean isInvisible() {
+        return false;
+    }
+
+    @Override
+    public void setInvisible(boolean b) {
+
+    }
+
     @Override
     public AttributeInstance getAttribute(Attribute attribute) {
         return null;
@@ -482,6 +520,16 @@ public class TemporaryEntity implements LivingEntity {
 
     @Override
     public void sendMessage(String[] strings) {
+
+    }
+
+    @Override
+    public void sendMessage(@Nullable UUID uuid, @NotNull String s) {
+
+    }
+
+    @Override
+    public void sendMessage(@Nullable UUID uuid, @NotNull String[] strings) {
 
     }
 

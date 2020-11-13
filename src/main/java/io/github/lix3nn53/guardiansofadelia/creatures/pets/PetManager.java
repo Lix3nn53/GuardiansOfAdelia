@@ -9,9 +9,8 @@ import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
-import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
-import io.lumine.xikage.mythicmobs.mobs.MobManager;
+import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
+import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -74,10 +73,24 @@ public class PetManager {
     private static LivingEntity getPet(Player owner, String petCode, int petLevel, int currentHP) {
         Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
 
-        MobManager mobManager = MythicMobs.inst().getMobManager();
-        ActiveMob activeMob = mobManager.spawnMob(petCode, spawnLoc, petLevel);
-        AbstractEntity entity = activeMob.getEntity();
-        Tameable pet = (Tameable) entity.getBukkitEntity();
+        GuardiansOfAdelia.getInstance().getLogger().info("petLevel: " + petLevel);
+        GuardiansOfAdelia.getInstance().getLogger().info("currentHP: " + currentHP);
+
+        BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+        Entity entity = null;
+        try {
+            entity = apiHelper.spawnMythicMob(petCode, spawnLoc, petLevel);
+        } catch (InvalidMobTypeException e) {
+            GuardiansOfAdelia.getInstance().getLogger().info("getPet mythicmob code error: " + petCode);
+            e.printStackTrace();
+        }
+        if (entity == null) return null;
+        if (entity instanceof Tameable) {
+            GuardiansOfAdelia.getInstance().getLogger().info("Pet not tameable");
+            return null;
+        }
+
+        Tameable pet = (Tameable) entity;
         pet.setSilent(true);
         pet.setTamed(true);
         pet.setOwner(owner);
@@ -212,6 +225,7 @@ public class PetManager {
 
     private static void spawnPet(Player player, String petCode, int petLevel, int petCurrentHealth) {
         LivingEntity pet = getPet(player, petCode, petLevel, petCurrentHealth);
+        if (pet == null) return;
         petToPlayer.put(pet, player);
         playerToPet.put(player, pet);
     }

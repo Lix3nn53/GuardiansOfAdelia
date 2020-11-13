@@ -4,11 +4,11 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
-import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
-import io.lumine.xikage.mythicmobs.mobs.MobManager;
+import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
+import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -66,12 +66,19 @@ public class SpawnEntityMechanic extends MechanicComponent {
         for (LivingEntity target : targets) {
             for (String key : adeliaEntityList) {
                 for (int i = 0; i < amountPerSpawn; i++) {
-                    MobManager mobManager = MythicMobs.inst().getMobManager();
                     Location location = target.getLocation();
 
-                    ActiveMob activeMob = mobManager.spawnMob(key, location);
-                    AbstractEntity entity = activeMob.getEntity();
-                    LivingEntity mob = (LivingEntity) entity.getBukkitEntity();
+                    BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+                    Entity entity = null;
+                    try {
+                        entity = apiHelper.spawnMythicMob(key, location);
+                    } catch (InvalidMobTypeException e) {
+                        GuardiansOfAdelia.getInstance().getLogger().info("SpawnEntityMechanic mythicmob code error: " + key);
+                        e.printStackTrace();
+                    }
+                    if (entity == null) return false;
+
+                    LivingEntity mob = (LivingEntity) entity;
 
                     if (SAVE) {
                         SkillDataManager.onSkillEntityCreateWithSaveOption(caster, mob, castCounter);

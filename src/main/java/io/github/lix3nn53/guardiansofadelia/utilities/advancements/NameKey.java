@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.advancements;
 
-import net.minecraft.server.v1_16_R2.MinecraftKey;
+import net.minecraft.server.v1_16_R3.MinecraftKey;
 
 public class NameKey {
 

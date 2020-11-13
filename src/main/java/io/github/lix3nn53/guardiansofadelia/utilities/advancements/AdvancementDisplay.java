@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.advancements;
 
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.server.v1_16_R2.AdvancementFrameType;
+import net.minecraft.server.v1_16_R3.AdvancementFrameType;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
