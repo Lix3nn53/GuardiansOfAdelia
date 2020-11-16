@@ -17,7 +17,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Tri
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.DamageIndicator;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
@@ -114,13 +116,15 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     isAttackerPlayer = true;
                 }
             } else if (damager instanceof LivingEntity) {
-                if (damager instanceof Wolf) {
-                    Wolf wolf = (Wolf) damager;
-                    if (PetManager.isPet(wolf)) { //pet is attacker
-                        Player owner = PetManager.getOwner(wolf);
-                        isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, wolf, damageType, isSkill);
-                        isAttackerPlayer = true;
+                if (PetManager.isPet((LivingEntity) damager)) { //damager is pet
+                    Player owner = PetManager.getOwner((LivingEntity) damager);
+                    boolean canAttack = EntityUtils.canAttack(owner, livingTarget);
+                    if (!canAttack) {
+                        event.setCancelled(true);
+                        return;
                     }
+                    isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, (LivingEntity) damager, damageType, isSkill);
+                    isAttackerPlayer = true;
                 }
             }
 
@@ -195,10 +199,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         LivingEntity livingDamager = (LivingEntity) damager;
                         if (PetManager.hasActivePet(playerTarget)) {
                             LivingEntity activePet = PetManager.getActivePet(playerTarget);
-                            if (activePet instanceof Wolf) {
-                                Wolf wolf = (Wolf) activePet;
-                                if (wolf.getTarget() == null) {
-                                    wolf.setTarget(livingDamager);
+                            if (activePet instanceof Mob) {
+                                Mob pet = (Mob) activePet;
+                                if (pet.getTarget() == null) {
+                                    pet.setTarget(livingDamager);
                                 }
                             }
                         }
@@ -215,7 +219,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
      * @param pet          = player's pet if attacker is the pet
      * @return isEventCanceled
      */
-    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, Wolf pet, DamageMechanic.DamageType damageType, boolean isSkill) {
+    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, LivingEntity pet, DamageMechanic.DamageType damageType, boolean isSkill) {
         UUID uniqueId = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uniqueId)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
@@ -226,38 +230,22 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 boolean isCritical = false;
                 Location targetLocation = livingTarget.getLocation();
 
-                if (pet == null) { //attacker is not player's pet
-                    if (livingTarget.getType().equals(EntityType.WOLF) || livingTarget.getType().equals(EntityType.HORSE)) { //on player attack to pet
-                        boolean pvp = livingTarget.getWorld().getPVP();
-                        if (pvp) {
-                            if (PetManager.isPet(livingTarget)) {
-                                Player owner = PetManager.getOwner(livingTarget);
-                                //attack own pet
-                                if (owner.equals(player)) {
-                                    event.setCancelled(true);
-                                    return true;
-                                } else {
-                                    //attack pet of party member
-                                    if (PartyManager.inParty(player)) {
-                                        if (PartyManager.getParty(player).getMembers().contains(owner)) {
-                                            event.setCancelled(true);
-                                            return true;
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
+                if (pet == null) { // attacker is not a pet
+                    if (PetManager.isPet(livingTarget)) { // on player attack to pet
+                        boolean canAttack = EntityUtils.canAttack(player, livingTarget);
+
+                        if (!canAttack) {
                             event.setCancelled(true);
                             return true;
                         }
                     }
 
-                    if (PetManager.hasActivePet(player)) { //if player has active pet manage pet's target
+                    if (PetManager.hasActivePet(player)) { // if player has active pet manage pet's target
                         LivingEntity activePet = PetManager.getActivePet(player);
-                        if (activePet instanceof Wolf) {
-                            Wolf wolf = (Wolf) activePet;
-                            if (wolf.getTarget() == null) {
-                                wolf.setTarget(livingTarget);
+                        if (activePet instanceof Mob) {
+                            Mob mob = (Mob) activePet;
+                            if (mob.getTarget() == null) {
+                                mob.setTarget(livingTarget);
                             }
                         }
                     }
@@ -285,8 +273,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         if (isSkill) { //Add full melee damage to skills
                             damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClassStr);
                             TriggerListener.onPlayerMagicAttack(player, livingTarget);
-                        } else if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
-                                || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
+                        } else if (RPGItemUtils.isWeapon(type)) {
                             //Normal melee attack. Check for requirements then add fire and offhand bonus
 
                             if (player.getInventory().getHeldItemSlot() != 4) {
@@ -380,12 +367,14 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 //progress deal damage tasks
                 List<Quest> questList = activeCharacter.getQuestList();
                 ActiveMob mythicMobInstance = MythicMobs.inst().getMobManager().getMythicMobInstance(livingTarget);
-                MythicMob type = mythicMobInstance.getType();
-                String internalName = type.getInternalName();
-                for (Quest quest : questList) {
-                    quest.progressDealDamageTasks(player, internalName, (int) (protectionDamage + 0.5));
+                if (mythicMobInstance != null) {
+                    MythicMob type = mythicMobInstance.getType();
+                    String internalName = type.getInternalName();
+                    for (Quest quest : questList) {
+                        quest.progressDealDamageTasks(player, internalName, (int) (protectionDamage + 0.5));
+                    }
+                    PartyManager.progressDealDamageTasksOfOtherMembers(player, internalName, protectionDamage);
                 }
-                PartyManager.progressDealDamageTasksOfOtherMembers(player, internalName, protectionDamage);
 
                 //indicator
                 ChatColor indicatorColor = ChatColor.RED;

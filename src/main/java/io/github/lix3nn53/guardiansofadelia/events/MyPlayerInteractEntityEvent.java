@@ -77,9 +77,8 @@ public class MyPlayerInteractEntityEvent implements Listener {
             if (itemMeta.hasDisplayName()) {
                 if (itemInMainHand.getType().equals(Material.LAPIS_LAZULI)) { //right click with pet-food
                     String displayName = itemMeta.getDisplayName();
-                    EntityType type = rightClicked.getType();
-                    if (type.equals(EntityType.HORSE) || type.equals(EntityType.WOLF)) {
-                        LivingEntity livingEntity = (LivingEntity) rightClicked;
+                    LivingEntity livingEntity = (LivingEntity) rightClicked;
+                    if (PetManager.isPet(livingEntity)) {
                         AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
                         double maxHealth = attribute.getValue();
                         double currentHealth = livingEntity.getHealth();
@@ -109,14 +108,13 @@ public class MyPlayerInteractEntityEvent implements Listener {
                         }
                     }
                 } else if (itemInMainHand.getType().equals(Material.BLACK_DYE)) { //right click with premium item
-                    EntityType type = rightClicked.getType();
-                    if (type.equals(EntityType.WOLF)) {
+                    LivingEntity pet = (LivingEntity) rightClicked;
+                    if (PetManager.isPet(pet)) {
                         if (!PersistentDataContainerUtil.hasString(itemInMainHand, "petSkinCode")) return;
 
-                        LivingEntity wolf = (LivingEntity) rightClicked;
-                        if (!PetManager.isPet(wolf)) return;
+                        if (!PetManager.isPet(pet)) return;
 
-                        Player owner = PetManager.getOwner(wolf);
+                        Player owner = PetManager.getOwner(pet);
                         if (!player.equals(owner)) return;
 
                         UUID uuid = player.getUniqueId();
@@ -149,7 +147,7 @@ public class MyPlayerInteractEntityEvent implements Listener {
                             }
                         }
                     } else if (PersistentDataContainerUtil.hasString(itemInMainHand, "boostCode")) {
-
+                        //TODO boostcode? whats this here
                     }
                 } else if (rightClicked.isCustomNameVisible()) {
                     UUID uniqueId = player.getUniqueId();

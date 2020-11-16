@@ -74,7 +74,7 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
                 player.sendMessage(ChatColor.BLUE + "/admin coin <num>");
                 player.sendMessage(ChatColor.BLUE + "/admin weapon [type] <num>");
-                player.sendMessage(ChatColor.BLUE + "/admin egg [type] <gearLevel> <petLevel>");
+                player.sendMessage(ChatColor.BLUE + "/admin egg [code] <gearLevel> <petLevel>");
                 player.sendMessage(ChatColor.BLUE + "/admin stone <grade> <amount>");
                 player.sendMessage(ChatColor.BLUE + "/admin passive [parrot|earring|necklace|glove|ring] <num>");
                 player.sendMessage(ChatColor.BLUE + "/admin premium item-id<1-24>");

@@ -84,6 +84,7 @@ public class KillProtectionManager {
 
                         //exp
                         int expToGive = getExperience(mobLevel, player.getLevel(), bestPlayers.size());
+                        once.sendMessage("expToGive: " + expToGive);
                         if (expToGive > 0) {
                             rpgCharacterStats.giveExp(expToGive);
                             PetExperienceManager.giveExperienceToActivePet(player, expToGive);
@@ -113,12 +114,16 @@ public class KillProtectionManager {
     }
 
     private static int getExperience(int mobLevel, int playerLevel, int shareCount) {
+        if (mobLevel == 0) mobLevel = 1;
+
         int exp = (int) (2 + Math.round(10 * Math.pow(mobLevel, 2) / 16) + 0.5);
 
-        if (playerLevel > mobLevel) {
-            exp = (int) (exp * (Math.pow(mobLevel, 3) / Math.pow(playerLevel, 3)) + 0.5);
-        } else {
-            exp = (int) (exp * (Math.pow(playerLevel, 3) / Math.pow(mobLevel, 3)) + 0.5);
+        if (playerLevel > 9) { //do not reduce exp according to player level before level 10
+            if (playerLevel > mobLevel) {
+                exp = (int) (exp * (Math.pow(mobLevel, 1.2) / Math.pow(playerLevel, 1.2)) + 0.5);
+            } else {
+                exp = (int) (exp * (Math.pow(playerLevel, 1.2) / Math.pow(mobLevel, 1.2)) + 0.5);
+            }
         }
 
         //Share
@@ -128,6 +133,7 @@ public class KillProtectionManager {
             exp = (int) (exp * expMultiplier + 0.5);
         }
 
+        if (exp == 0) exp = 1;
         return BoostPremiumManager.isBoostActive(BoostPremium.EXPERIENCE) ? exp * 2 : exp;
     }
 }

@@ -59,9 +59,9 @@ public enum WeaponGearType {
             case CROSSBOW:
                 return Material.CROSSBOW;
             case STAFF:
-                return Material.DIAMOND_SHOVEL;
-            case WAND:
                 return Material.NETHERITE_SHOVEL;
+            case WAND:
+                return Material.DIAMOND_SHOVEL;
         }
 
         return null;

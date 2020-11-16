@@ -83,34 +83,47 @@ public class StatUtils {
 
     public static StatType getStatType(Material mat) {
         StatType type = null;
-        if (mat.equals(Material.DIAMOND_AXE) || mat.equals(Material.DIAMOND_PICKAXE) || mat.equals(Material.DIAMOND_SWORD) || mat.equals(Material.DIAMOND_HOE)) {
+        if (mat.equals(Material.DIAMOND_AXE) || //great sword
+                mat.equals(Material.NETHERITE_AXE) || //battle axe
+                mat.equals(Material.NETHERITE_HOE) || //dagger
+                mat.equals(Material.NETHERITE_PICKAXE) || //war hammer
+                mat.equals(Material.NETHERITE_SWORD) //sword
+        ) {
             type = StatType.MELEE;
         } else if (mat.equals(Material.TRIDENT) || mat.equals(Material.BOW) || mat.equals(Material.CROSSBOW)) {
             type = StatType.HYBRID;
-        } else if (mat.equals(Material.DIAMOND_SHOVEL)) {
+        } else if (mat.equals(Material.DIAMOND_SHOVEL) //wand
+                || mat.equals(Material.NETHERITE_SHOVEL) //staff
+        ) {
             type = StatType.MAGICAL;
-        } else if (mat.equals(Material.DIAMOND_LEGGINGS) ||
+        } else if (mat.equals(Material.NETHERITE_LEGGINGS) ||
+                mat.equals(Material.DIAMOND_LEGGINGS) ||
                 mat.equals(Material.GOLDEN_LEGGINGS) ||
                 mat.equals(Material.IRON_LEGGINGS) ||
                 mat.equals(Material.CHAINMAIL_LEGGINGS) ||
                 mat.equals(Material.LEATHER_LEGGINGS) ||
+                mat.equals(Material.NETHERITE_BOOTS) ||
                 mat.equals(Material.DIAMOND_BOOTS) ||
                 mat.equals(Material.GOLDEN_BOOTS) ||
                 mat.equals(Material.IRON_BOOTS) ||
                 mat.equals(Material.CHAINMAIL_BOOTS) ||
                 mat.equals(Material.LEATHER_BOOTS) ||
+                mat.equals(Material.NETHERITE_HELMET) ||
                 mat.equals(Material.DIAMOND_HELMET) ||
                 mat.equals(Material.GOLDEN_HELMET) ||
                 mat.equals(Material.IRON_HELMET) ||
                 mat.equals(Material.CHAINMAIL_HELMET) ||
                 mat.equals(Material.LEATHER_HELMET) ||
+                mat.equals(Material.NETHERITE_CHESTPLATE) ||
                 mat.equals(Material.DIAMOND_CHESTPLATE) ||
                 mat.equals(Material.GOLDEN_CHESTPLATE) ||
                 mat.equals(Material.IRON_CHESTPLATE) ||
                 mat.equals(Material.CHAINMAIL_CHESTPLATE) ||
                 mat.equals(Material.LEATHER_CHESTPLATE) ||
                 mat.equals(HelmetSkin.getHelmetMaterial()) ||
-                mat.equals(Material.IRON_SWORD)) {
+                mat.equals(Material.SHIELD) ||
+                mat.equals(Material.DIAMOND_PICKAXE) //buckler
+        ) {
             type = StatType.HEALTH;
         } else if (mat.equals(Material.SHEARS)) {
             type = StatType.PASSIVE;
@@ -119,30 +132,42 @@ public class StatUtils {
     }
 
     public static boolean hasStatType(Material mat) {
-        return mat.equals(Material.DIAMOND_AXE) || mat.equals(Material.DIAMOND_PICKAXE) || mat.equals(Material.DIAMOND_SWORD) ||
-                mat.equals(Material.BOW) || mat.equals(Material.CROSSBOW) || mat.equals(Material.TRIDENT) || mat.equals(Material.DIAMOND_SHOVEL) ||
-                mat.equals(Material.DIAMOND_HOE) || mat.equals(Material.DIAMOND_LEGGINGS) ||
+        return mat.equals(Material.DIAMOND_AXE) || //great sword
+                mat.equals(Material.NETHERITE_AXE) || //battle axe
+                mat.equals(Material.NETHERITE_HOE) || //dagger
+                mat.equals(Material.NETHERITE_PICKAXE) || //war hammer
+                mat.equals(Material.NETHERITE_SWORD) || //sword
+                mat.equals(Material.BOW) || mat.equals(Material.CROSSBOW) || mat.equals(Material.TRIDENT) ||
+                mat.equals(Material.DIAMOND_SHOVEL) || //wand
+                mat.equals(Material.NETHERITE_SHOVEL) || //staff
+                mat.equals(Material.NETHERITE_LEGGINGS) ||
+                mat.equals(Material.DIAMOND_LEGGINGS) ||
                 mat.equals(Material.GOLDEN_LEGGINGS) ||
                 mat.equals(Material.IRON_LEGGINGS) ||
                 mat.equals(Material.CHAINMAIL_LEGGINGS) ||
                 mat.equals(Material.LEATHER_LEGGINGS) ||
+                mat.equals(Material.NETHERITE_BOOTS) ||
                 mat.equals(Material.DIAMOND_BOOTS) ||
                 mat.equals(Material.GOLDEN_BOOTS) ||
                 mat.equals(Material.IRON_BOOTS) ||
                 mat.equals(Material.CHAINMAIL_BOOTS) ||
                 mat.equals(Material.LEATHER_BOOTS) ||
+                mat.equals(Material.NETHERITE_HELMET) ||
                 mat.equals(Material.DIAMOND_HELMET) ||
                 mat.equals(Material.GOLDEN_HELMET) ||
                 mat.equals(Material.IRON_HELMET) ||
                 mat.equals(Material.CHAINMAIL_HELMET) ||
                 mat.equals(Material.LEATHER_HELMET) ||
+                mat.equals(Material.NETHERITE_CHESTPLATE) ||
                 mat.equals(Material.DIAMOND_CHESTPLATE) ||
                 mat.equals(Material.GOLDEN_CHESTPLATE) ||
                 mat.equals(Material.IRON_CHESTPLATE) ||
                 mat.equals(Material.CHAINMAIL_CHESTPLATE) ||
                 mat.equals(Material.LEATHER_CHESTPLATE) ||
                 mat.equals(HelmetSkin.getHelmetMaterial()) ||
-                mat.equals(Material.IRON_SWORD) || mat.equals(Material.SHEARS);
+                mat.equals(Material.SHIELD) ||
+                mat.equals(Material.DIAMOND_PICKAXE) || //buckler
+                mat.equals(Material.SHEARS);
     }
 
     public static void addRandomPassiveStats(ItemStack itemStack, int gearLevel, ItemTier itemTier) {

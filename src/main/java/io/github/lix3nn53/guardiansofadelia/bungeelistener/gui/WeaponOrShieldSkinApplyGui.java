@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.bungeelistener.gui;
 
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.WeaponOrShieldSkinScroll;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -57,9 +58,7 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
 
         Material type = itemStack.getType();
 
-        boolean isWeaponOrShield = type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL)
-                || type.equals(Material.DIAMOND_AXE) || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT)
-                || type.equals(Material.BOW) || type.equals(Material.CROSSBOW) || type.equals(Material.SHIELD);
+        boolean isWeaponOrShield = RPGItemUtils.isWeapon(type) || RPGItemUtils.isShield(type);
 
         if (!isWeaponOrShield) return false;
 

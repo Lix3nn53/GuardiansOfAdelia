@@ -21,7 +21,7 @@ public class MyPlayerMoveEvent implements Listener {
 
         PetManager.onPlayerMove(player);
 
-        if (player.isOnGround()) {
+        if (player.isOnGround()) { //depricated because info comes from client and may therefore not be accurate.
             TriggerListener.onPlayerLandGround(player);
         }
 

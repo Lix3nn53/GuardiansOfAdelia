@@ -13,15 +13,32 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException, SQLException {
 
-        for (int mobLevel = 1; mobLevel <= 50; mobLevel++) {
-            int baseExp = (int) (2 + Math.round(10 * Math.pow(mobLevel, 2) / 16) + 0.5);
-
-            for (int playerLevel = 1; playerLevel <= 50; playerLevel++) {
+        for (int mobLevel = 1; mobLevel <= 10; mobLevel++) {
+            for (int playerLevel = 1; playerLevel <= 20; playerLevel++) {
                 System.out.println("mobLevel: " + mobLevel);
-                System.out.println("baseExp: " + baseExp);
-                int exp = (int) (baseExp * (Math.pow(playerLevel, 2) / Math.pow(mobLevel, 2)) + 0.5);
                 System.out.println("playerLevel: " + playerLevel);
-                System.out.println("exp: " + exp);
+                if (mobLevel == 0) mobLevel = 1;
+
+                int exp = (int) (2 + Math.round(10 * Math.pow(mobLevel, 2) / 16) + 0.5);
+                System.out.println(exp);
+
+                if (playerLevel > 9) {
+                    if (playerLevel > mobLevel) {
+                        exp = (int) (exp * (Math.pow(mobLevel, 1.2) / Math.pow(playerLevel, 1.2)) + 0.5);
+                    } else {
+                        exp = (int) (exp * (Math.pow(playerLevel, 1.2) / Math.pow(mobLevel, 1.2)) + 0.5);
+                    }
+                }
+                //Share
+                int shareCount = 1;
+                if (shareCount > 1) {
+                    double expMultiplier = 1 - (0.1 * shareCount);
+
+                    exp = (int) (exp * expMultiplier + 0.5);
+                }
+
+                if (exp == 0) exp = 1;
+                System.out.println(exp);
             }
         }
         /*LocalDate localDate = LocalDate.now().with(ChronoField.DAY_OF_MONTH, 7);

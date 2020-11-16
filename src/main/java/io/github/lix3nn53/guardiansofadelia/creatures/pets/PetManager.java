@@ -18,7 +18,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -85,15 +88,13 @@ public class PetManager {
             e.printStackTrace();
         }
         if (entity == null) return null;
-        if (entity instanceof Tameable) {
-            GuardiansOfAdelia.getInstance().getLogger().info("Pet not tameable");
+        if (!(entity instanceof LivingEntity)) {
+            GuardiansOfAdelia.getInstance().getLogger().info("Pet is not LivingEntity, petCode: " + petCode);
             return null;
         }
 
-        Tameable pet = (Tameable) entity;
+        LivingEntity pet = (LivingEntity) entity;
         pet.setSilent(true);
-        pet.setTamed(true);
-        pet.setOwner(owner);
         pet.setCustomNameVisible(true);
 
         // health
@@ -282,9 +283,10 @@ public class PetManager {
 
             if (!target.getWorld().getName().equals(activePet.getLocation().getWorld().getName())) {
                 PetManager.teleportPet(player, activePet, null);
-                if (activePet.getType().equals(EntityType.WOLF)) { //clear wolf target
-                    Wolf wolf = (Wolf) activePet;
-                    wolf.setTarget(null);
+
+                if (activePet instanceof Mob) { //clear pet target
+                    Mob mob = (Mob) activePet;
+                    mob.setTarget(null);
                 }
                 return;
             }
@@ -292,16 +294,16 @@ public class PetManager {
             final double distance = target.distance(activePet.getLocation());
             if (distance > 20D) {
                 PetManager.teleportPet(player, activePet, null);
-                if (activePet.getType().equals(EntityType.WOLF)) { //clear wolf target
-                    Wolf wolf = (Wolf) activePet;
-                    wolf.setTarget(null);
+                if (activePet instanceof Mob) { //clear pet target
+                    Mob mob = (Mob) activePet;
+                    mob.setTarget(null);
                 }
             } else if (distance < 6D) {
                 return;
-            } else if (activePet.getType().equals(EntityType.WOLF)) { //if distance is between and pet is wolf which has a target, return
-                Wolf wolf = (Wolf) activePet;
-                LivingEntity wolfTarget = wolf.getTarget();
-                if (wolfTarget != null) {
+            } else if (activePet instanceof Mob) { //if distance is between and pet is mob which has a target, return
+                Mob mob = (Mob) activePet;
+                LivingEntity mobTarget = mob.getTarget();
+                if (mobTarget != null) {
                     return;
                 }
             }

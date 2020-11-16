@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities;
 
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlot;
@@ -43,4 +44,14 @@ public class RPGItemUtils {
         return itemStack;
     }
 
+    public static boolean isWeapon(Material type) {
+        return type.equals(Material.NETHERITE_AXE) || type.equals(Material.NETHERITE_HOE) || type.equals(Material.NETHERITE_PICKAXE)
+                || type.equals(Material.NETHERITE_SHOVEL) || type.equals(Material.NETHERITE_SWORD) || type.equals(Material.DIAMOND_SHOVEL)
+                || type.equals(Material.DIAMOND_AXE) || type.equals(Material.TRIDENT)
+                || type.equals(Material.BOW) || type.equals(Material.CROSSBOW);
+    }
+
+    public static boolean isShield(Material type) {
+        return type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.SHIELD);
+    }
 }

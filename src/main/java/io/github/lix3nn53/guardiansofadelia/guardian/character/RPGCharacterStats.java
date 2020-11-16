@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import me.libraryaddict.disguise.DisguiseAPI;
@@ -44,13 +45,13 @@ public class RPGCharacterStats {
     private final Attribute water = new Attribute(AttributeType.WATER);
     private final Attribute wind = new Attribute(AttributeType.WIND);
     private int totalExp;
-    private int maxHealth = 100;
-    private int maxMana = 100;
+    private final int maxHealth = 100;
+    private final int maxMana = 100;
     private int currentMana = 100;
     private int defense = 1;
-    private int magicDefense = 1;
-    private double baseCriticalChance = 0.05;
-    private double baseCriticalDamageBonus = 0.6;
+    private final int magicDefense = 1;
+    private final double baseCriticalChance = 0.05;
+    private final double baseCriticalDamageBonus = 0.6;
     //armor slots
     private ArmorStatHolder helmet;
     private ArmorStatHolder chestplate;
@@ -156,7 +157,7 @@ public class RPGCharacterStats {
             ArmorStand armorStand;
             ArmorStand rider;
             int ticksPass = 0;
-            int ticksLimit = 100;
+            final int ticksLimit = 100;
 
             @Override
             public void run() {
@@ -304,8 +305,7 @@ public class RPGCharacterStats {
 
         Material type = itemInMainHand.getType();
 
-        if (type.equals(Material.DIAMOND_SWORD) || type.equals(Material.DIAMOND_HOE) || type.equals(Material.DIAMOND_SHOVEL) || type.equals(Material.DIAMOND_AXE)
-                || type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
+        if (RPGItemUtils.isWeapon(type)) {
             if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return bonus;
 
             StatType statType = StatUtils.getStatType(type);

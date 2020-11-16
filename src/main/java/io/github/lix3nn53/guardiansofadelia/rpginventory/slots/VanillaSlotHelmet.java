@@ -16,7 +16,7 @@ public class VanillaSlotHelmet implements VanillaSlot {
     @Override
     public boolean doesFit(ItemStack itemStack) {
         Material mat = itemStack.getType();
-        if (!(mat.equals(Material.CHAINMAIL_HELMET) || mat.equals(Material.DIAMOND_HELMET) || mat.equals(Material.GOLDEN_HELMET)
+        if (!(mat.equals(Material.NETHERITE_HELMET) || mat.equals(Material.CHAINMAIL_HELMET) || mat.equals(Material.DIAMOND_HELMET) || mat.equals(Material.GOLDEN_HELMET)
                 || mat.equals(Material.IRON_HELMET) || mat.equals(Material.LEATHER_HELMET) || mat.equals(HelmetSkin.getHelmetMaterial()))) {
             return false;
         }

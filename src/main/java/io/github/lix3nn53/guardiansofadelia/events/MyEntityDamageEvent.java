@@ -59,7 +59,7 @@ public class MyEntityDamageEvent implements Listener {
                 Party party = PartyManager.getParty(player);
                 party.getBoard().updateHP(player.getName(), (int) (player.getHealth() - finalDamage + 0.5));
             }
-        } else if (entityType.equals(EntityType.WOLF) || entityType.equals(EntityType.HORSE)) {
+        } else {
             LivingEntity livingEntity = (LivingEntity) entity;
             if (PetManager.isPet(livingEntity)) {
                 PetManager.onPetTakeDamage(livingEntity, livingEntity.getHealth(), event.getFinalDamage());

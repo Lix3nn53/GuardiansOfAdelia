@@ -14,7 +14,7 @@ public class VanillaSlotBoots implements VanillaSlot {
     @Override
     public boolean doesFit(ItemStack itemStack) {
         Material mat = itemStack.getType();
-        if (!(mat.equals(Material.CHAINMAIL_BOOTS) || mat.equals(Material.DIAMOND_BOOTS) || mat.equals(Material.GOLDEN_BOOTS)
+        if (!(mat.equals(Material.NETHERITE_BOOTS) || mat.equals(Material.CHAINMAIL_BOOTS) || mat.equals(Material.DIAMOND_BOOTS) || mat.equals(Material.GOLDEN_BOOTS)
                 || mat.equals(Material.IRON_BOOTS) || mat.equals(Material.LEATHER_BOOTS))) {
             return false;
         }

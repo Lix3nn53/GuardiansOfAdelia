@@ -3,7 +3,6 @@ package io.github.lix3nn53.guardiansofadelia.events;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -24,15 +23,12 @@ public class MyEntityRegainHealthEvent implements Listener {
                 Party party = PartyManager.getParty(player);
                 party.getBoard().updateHP(player.getName(), (int) (player.getHealth() + event.getAmount() + 0.5));
             }
-        } else if (entityType.equals(EntityType.WOLF) || entityType.equals(EntityType.HORSE)) {
-            Entity entity = event.getEntity();
-            if (entity instanceof LivingEntity) {
-                LivingEntity livingEntity = (LivingEntity) entity;
-                if (PetManager.isPet(livingEntity)) {
-                    double health = livingEntity.getHealth();
-                    double amount = event.getAmount();
-                    PetManager.onPetHeal(livingEntity, health, amount);
-                }
+        } else if (event.getEntity() instanceof LivingEntity) {
+            LivingEntity livingEntity = (LivingEntity) event.getEntity();
+            if (PetManager.isPet(livingEntity)) {
+                double health = livingEntity.getHealth();
+                double amount = event.getAmount();
+                PetManager.onPetHeal(livingEntity, health, amount);
             }
         }
     }

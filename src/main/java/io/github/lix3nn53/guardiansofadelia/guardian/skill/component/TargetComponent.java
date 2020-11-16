@@ -1,13 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component;
 
-import io.github.lix3nn53.guardiansofadelia.party.Party;
-import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Tameable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +91,7 @@ public abstract class TargetComponent extends SkillComponent {
 
         if (allies == enemy) return allies;
 
-        boolean isEnemy = canAttack(caster, target);
+        boolean isEnemy = EntityUtils.canAttack(caster, target);
         if (allies) {
             return !isEnemy;
         } else { //enemy = true
@@ -102,51 +99,5 @@ public abstract class TargetComponent extends SkillComponent {
         }
     }
 
-    /**
-     * Checks whether or not something can be attacked
-     *
-     * @param attacker the attacking entity
-     * @param target   the target entity
-     * @return true if can be attacked, false otherwise
-     */
 
-    private boolean canAttack(LivingEntity attacker, LivingEntity target) {
-        if (attacker instanceof Player) {
-            if (target instanceof Player) {
-                if (attacker == target) return false;
-                if (attacker.getWorld().getName().equals("arena")) {
-
-                    Player attackerPlayer = (Player) attacker;
-
-                    if (PartyManager.inParty(attackerPlayer)) {
-                        Party party = PartyManager.getParty(attackerPlayer);
-                        List<Player> members = party.getMembers();
-                        return !members.contains(target);
-                    }
-
-                    return true;
-                }
-
-                return false;
-            } else if (target instanceof Tameable) {
-                Tameable tameable = (Tameable) target;
-                if (tameable.isTamed() && (tameable.getOwner() instanceof LivingEntity)) {
-                    if (tameable.getOwner().equals(attacker)) return false;
-
-                    return canAttack(attacker, (LivingEntity) tameable.getOwner());
-                }
-            }
-        } else if (attacker instanceof Tameable) {
-            if (target instanceof Player) {
-                Tameable tameable = (Tameable) attacker;
-                if (tameable.isTamed() && (tameable.getOwner() instanceof LivingEntity)) {
-                    if (tameable.getOwner().equals(target)) return false;
-
-                    return canAttack((LivingEntity) tameable.getOwner(), target);
-                }
-            }
-        } else return target instanceof Player || target instanceof Tameable;
-
-        return true;
-    }
 }

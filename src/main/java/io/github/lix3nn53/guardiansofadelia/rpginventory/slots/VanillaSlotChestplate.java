@@ -14,7 +14,7 @@ public class VanillaSlotChestplate implements VanillaSlot {
     @Override
     public boolean doesFit(ItemStack itemStack) {
         Material mat = itemStack.getType();
-        if (!(mat.equals(Material.CHAINMAIL_CHESTPLATE) || mat.equals(Material.DIAMOND_CHESTPLATE) || mat.equals(Material.GOLDEN_CHESTPLATE)
+        if (!(mat.equals(Material.NETHERITE_CHESTPLATE) || mat.equals(Material.CHAINMAIL_CHESTPLATE) || mat.equals(Material.DIAMOND_CHESTPLATE) || mat.equals(Material.GOLDEN_CHESTPLATE)
                 || mat.equals(Material.IRON_CHESTPLATE) || mat.equals(Material.LEATHER_CHESTPLATE))) {
             return false;
         }
