@@ -52,6 +52,6 @@ public class RPGItemUtils {
     }
 
     public static boolean isShield(Material type) {
-        return type.equals(Material.DIAMOND_PICKAXE) || type.equals(Material.SHIELD);
+        return type.equals(Material.SHIELD);
     }
 }

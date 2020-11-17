@@ -14,7 +14,7 @@ public class VanillaSlotOffhand implements VanillaSlot {
     @Override
     public boolean doesFit(ItemStack itemStack) {
         Material mat = itemStack.getType();
-        if (!(mat.equals(Material.SHIELD) || mat.equals(Material.NETHERITE_HOE) || mat.equals(Material.DIAMOND_PICKAXE))) {
+        if (!(mat.equals(Material.SHIELD) || mat.equals(Material.NETHERITE_HOE))) {
             return false;
         }
         return false;

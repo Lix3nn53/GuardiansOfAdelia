@@ -121,8 +121,7 @@ public class StatUtils {
                 mat.equals(Material.CHAINMAIL_CHESTPLATE) ||
                 mat.equals(Material.LEATHER_CHESTPLATE) ||
                 mat.equals(HelmetSkin.getHelmetMaterial()) ||
-                mat.equals(Material.SHIELD) ||
-                mat.equals(Material.DIAMOND_PICKAXE) //buckler
+                mat.equals(Material.SHIELD)
         ) {
             type = StatType.HEALTH;
         } else if (mat.equals(Material.SHEARS)) {
@@ -166,7 +165,6 @@ public class StatUtils {
                 mat.equals(Material.LEATHER_CHESTPLATE) ||
                 mat.equals(HelmetSkin.getHelmetMaterial()) ||
                 mat.equals(Material.SHIELD) ||
-                mat.equals(Material.DIAMOND_PICKAXE) || //buckler
                 mat.equals(Material.SHEARS);
     }
 

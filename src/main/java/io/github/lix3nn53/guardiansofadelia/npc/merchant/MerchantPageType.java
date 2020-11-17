@@ -383,7 +383,7 @@ public enum MerchantPageType {
         lines.add(new MerchantGuiLine());
 
         for (ShieldGearType shieldGearType : ShieldGearType.values()) {
-            int price = 2; //buckler
+            int price = 2; //If any other ShieldGearType exists which is weaker than SHIELD
             if (shieldGearType.equals(ShieldGearType.SHIELD)) {
                 price = 3;
             }
