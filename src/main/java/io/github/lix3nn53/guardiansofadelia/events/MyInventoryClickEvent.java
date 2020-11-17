@@ -32,6 +32,7 @@ import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
+import io.github.lix3nn53.guardiansofadelia.menu.CharacterSelectionMenuList;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
@@ -409,6 +410,21 @@ public class MyInventoryClickEvent implements Listener {
                 GuiGeneric serverBoostMenu = MenuList.serverBoostMenu();
                 serverBoostMenu.openInventory(player);
             }
+        } else if (title.contains("Play Tutorial?")) {
+            //Play Tutorial? ClassName CharNo
+            char c = title.charAt(title.length() - 1);
+            int charNo = Integer.parseInt(String.valueOf(c));
+
+            String rpgClassStr = title.replace(ChatColor.DARK_GRAY + "Play Tutorial? ", "");
+            rpgClassStr = rpgClassStr.replace(" " + charNo, "");
+
+            rpgClassStr = ChatColor.stripColor(rpgClassStr);
+
+            if (currentType.equals(Material.LIME_WOOL)) {
+                CharacterSelectionScreenManager.createCharacter(player, charNo, rpgClassStr);
+            } else if (currentType.equals(Material.RED_WOOL)) {
+                CharacterSelectionScreenManager.createCharacterWithoutTutorial(player, charNo, rpgClassStr);
+            }
         } else if (title.contains("Character")) {
             if (title.contains("Creation")) {
                 String charNoString = title.replace(ChatColor.DARK_GRAY + "Character ", "");
@@ -416,7 +432,8 @@ public class MyInventoryClickEvent implements Listener {
                 int charNo = Integer.parseInt(charNoString);
 
                 String rpgClassStr = ChatColor.stripColor(currentName);
-                CharacterSelectionScreenManager.createCharacter(player, charNo, rpgClassStr);
+                GuiGeneric guiGeneric = CharacterSelectionMenuList.tutorialSkipMenu(rpgClassStr, charNo);
+                guiGeneric.openInventory(player);
             } else if (title.contains("Selection")) {
                 String charNoString = title.replace(ChatColor.DARK_GRAY + "Character ", "");
                 charNoString = charNoString.replace(" Selection", "");

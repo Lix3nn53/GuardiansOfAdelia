@@ -79,6 +79,9 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.BLUE + "/admin passive [parrot|earring|necklace|glove|ring] <num>");
                 player.sendMessage(ChatColor.BLUE + "/admin premium item-id<1-24>");
                 player.sendMessage(ChatColor.BLUE + "/admin ingredient id amount");
+            } else if (args[0].equals("speed")) {
+                int val = Integer.parseInt(args[1]);
+                player.setFlySpeed(val);
             } else if (args[0].equals("setdaily")) {
                 GuiGeneric guiGeneric = new GuiGeneric(9, ChatColor.YELLOW + "Set Daily Rewards", 0);
 

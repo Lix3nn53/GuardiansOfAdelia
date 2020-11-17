@@ -231,4 +231,27 @@ public class CharacterSelectionMenuList {
 
         return guiGeneric;
     }
+
+    public static GuiGeneric tutorialSkipMenu(String rpgClass, int charNo) {
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Play Tutorial? " + rpgClass + " " + charNo, 0);
+
+        ItemStack yes = new ItemStack(Material.LIME_WOOL);
+        ItemMeta itemMeta = yes.getItemMeta();
+        itemMeta.setUnbreakable(true);
+        itemMeta.setDisplayName(ChatColor.GREEN + "Yes, play tutorial.");
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        yes.setItemMeta(itemMeta);
+        guiGeneric.setItem(11, yes);
+
+        ItemStack no = new ItemStack(Material.RED_WOOL);
+        itemMeta.setDisplayName(ChatColor.RED + "No, skip tutorial");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "Required level: 1");
+        itemMeta.setLore(lore);
+        no.setItemMeta(itemMeta);
+        guiGeneric.setItem(15, no);
+
+        return guiGeneric;
+    }
 }

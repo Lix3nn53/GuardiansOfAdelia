@@ -1,6 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
@@ -24,7 +30,7 @@ public class CharacterSelectionScreenManager {
     private static List<Location> armorStandLocationBases;
     private static Location tutorialStart;
     private static Location characterSelectionCenter;
-    private static HashMap<Integer, List<ArmorStand>> characterNoToArmorStands = new HashMap<>();
+    private static final HashMap<Integer, List<ArmorStand>> characterNoToArmorStands = new HashMap<>();
 
     public static void setArmorStandLocationBases(List<Location> armorStandLocationBases) {
         CharacterSelectionScreenManager.armorStandLocationBases = armorStandLocationBases;
@@ -116,6 +122,29 @@ public class CharacterSelectionScreenManager {
         //start tutorial
         TutorialManager.startTutorial(player, rpgClassStr, charNo, tutorialStart);
     }
+
+    public static void createCharacterWithoutTutorial(Player player, int charNo, String rpgClassStr) {
+        player.sendMessage("Creating character-" + charNo);
+        clear(player);
+        //start character at first world quest
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
+        RPGCharacter rpgCharacter = new RPGCharacter(rpgClassStr, player);
+        rpgCharacter.unlockClass(rpgClassStr);
+        guardianData.setActiveCharacter(rpgCharacter, charNo);
+
+        Quest questCopyById = QuestNPCManager.getQuestCopyById(4);
+
+        boolean accept = rpgCharacter.acceptQuest(questCopyById, player);
+        questCopyById.onComplete(player);
+
+        rpgCharacter.getRpgCharacterStats().recalculateEquipment(rpgCharacter.getRpgClassStr());
+        rpgCharacter.getRpgCharacterStats().recalculateRPGInventory(rpgCharacter.getRpgInventory());
+
+        RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
+        rpgCharacterStats.setCurrentHealth(rpgCharacterStats.getTotalMaxHealth());
+        rpgCharacterStats.setCurrentMana(rpgCharacterStats.getTotalMaxMana());
+    }
+
 
     public static void setCharLocation(UUID uuid, int charNo, Location location) {
         HashMap<Integer, Location> integerLocationHashMap = new HashMap<>();
