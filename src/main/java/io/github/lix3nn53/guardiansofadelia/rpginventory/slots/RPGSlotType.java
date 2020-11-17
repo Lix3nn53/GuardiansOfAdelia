@@ -76,13 +76,13 @@ public enum RPGSlotType {
 
     public int getCustomModelDataOffset() { //for passive sets
         if (this == RPGSlotType.PARROT) {
-            return 1;
+            return 40;
         } else if (this == RPGSlotType.EARRING) {
-            return 2;
+            return 30;
         } else if (this == RPGSlotType.NECKLACE) {
-            return 3;
+            return 20;
         } else if (this == RPGSlotType.GLOVE) {
-            return 4;
+            return 10;
         } else if (this == RPGSlotType.RING) {
             return 0;
         }
