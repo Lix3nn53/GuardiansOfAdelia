@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
-import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonRoom;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
 import org.bukkit.Bukkit;
@@ -22,19 +22,19 @@ import java.util.List;
 public class DungeonConfiguration {
 
     private static FileConfiguration dungeonThemesConfig;
-    private static FileConfiguration dungeonsConfig;
+    private static FileConfiguration dungeonRoomsConfig;
     private static FileConfiguration dungeonGatesConfig;
 
     static void createConfigs() {
         createDungeonThemes();
         createDungeonGates();
-        createDungeons();
+        createDungeonRooms();
     }
 
     static void loadConfigs() {
         loadDungeonThemes();
         loadDungeonGates();
-        loadDungeons();
+        loadDungeonRooms();
     }
 
     private static void createDungeonThemes() {
@@ -70,7 +70,11 @@ public class DungeonConfiguration {
             String portalColorStr = section.getString("portalColor");
             PortalColor portalColor = PortalColor.valueOf(portalColorStr);
 
-            DungeonTheme dungeonTheme = new DungeonTheme(code, name, gearTag, gearLevel, portalColor);
+            int levelReq = section.getInt("levelReq");
+            int timeLimitInMinutes = section.getInt("timeLimitInMinutes");
+            String bossInternalName = section.getString("bossInternalName");
+
+            DungeonTheme dungeonTheme = new DungeonTheme(code, name, gearTag, gearLevel, portalColor, levelReq, timeLimitInMinutes, bossInternalName);
 
             MiniGameManager.addDungeonTheme(code, dungeonTheme);
         }
@@ -126,9 +130,9 @@ public class DungeonConfiguration {
         }
     }
 
-    private static void createDungeons() {
+    private static void createDungeonRooms() {
         String filePath = ConfigManager.DATA_FOLDER + File.separator + "dungeons";
-        File customConfigFile = new File(filePath, "dungeons.yml");
+        File customConfigFile = new File(filePath, "dungeonRooms.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
 
@@ -139,76 +143,51 @@ public class DungeonConfiguration {
             }
         }
 
-        dungeonsConfig = new YamlConfiguration();
+        dungeonRoomsConfig = new YamlConfiguration();
         try {
-            dungeonsConfig.load(customConfigFile);
+            dungeonRoomsConfig.load(customConfigFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
     }
 
-    private static void loadDungeons() {
+    private static void loadDungeonRooms() {
         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
         for (String themeCode : dungeonThemes.keySet()) {
             for (int i = 1; i <= 2; i++) { //loading first 2 room of each dungeon
                 String code = themeCode + i;
-                String worldString = dungeonsConfig.getString(code + ".world");
+                String worldString = dungeonRoomsConfig.getString(code + ".world");
                 World world = Bukkit.getWorld(worldString);
-                double x = dungeonsConfig.getDouble(code + ".x");
-                double y = dungeonsConfig.getDouble(code + ".y");
-                double z = dungeonsConfig.getDouble(code + ".z");
-                float yaw = (float) dungeonsConfig.getDouble(code + ".yaw");
-                float pitch = (float) dungeonsConfig.getDouble(code + ".pitch");
+                double x = dungeonRoomsConfig.getDouble(code + ".x");
+                double y = dungeonRoomsConfig.getDouble(code + ".y");
+                double z = dungeonRoomsConfig.getDouble(code + ".z");
+                float yaw = (float) dungeonRoomsConfig.getDouble(code + ".yaw");
+                float pitch = (float) dungeonRoomsConfig.getDouble(code + ".pitch");
                 Location location = new Location(world, x, y, z, yaw, pitch);
 
-                int levelReq = dungeonsConfig.getInt(code + ".levelReq");
-                int timeLimitInMinutes = dungeonsConfig.getInt(code + ".timeLimitInMinutes");
-                String bossInternalName = dungeonsConfig.getString(code + ".bossInternalName");
                 List<Location> locations = new ArrayList<>();
                 locations.add(location);
 
                 List<Checkpoint> checkpoints = new ArrayList<>();
-                int checkpointCount = dungeonsConfig.getInt(code + ".checkpoints.count");
+                int checkpointCount = dungeonRoomsConfig.getInt(code + ".checkpoints.count");
 
                 for (int checkpointNumber = 1; checkpointNumber <= checkpointCount; checkpointNumber++) {
-                    String worldStringC = dungeonsConfig.getString(code + ".checkpoints.loc" + checkpointNumber + ".world");
+                    String worldStringC = dungeonRoomsConfig.getString(code + ".checkpoints.loc" + checkpointNumber + ".world");
                     World worldC = Bukkit.getWorld(worldStringC);
-                    double xC = dungeonsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".x");
-                    double yC = dungeonsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".y");
-                    double zC = dungeonsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".z");
-                    float yawC = (float) dungeonsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".yaw");
-                    float pitchC = (float) dungeonsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".pitch");
+                    double xC = dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".x");
+                    double yC = dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".y");
+                    double zC = dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".z");
+                    float yawC = (float) dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".yaw");
+                    float pitchC = (float) dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".pitch");
                     Location locationC = new Location(worldC, xC, yC, zC, yawC, pitchC);
 
                     checkpoints.add(new Checkpoint(locationC));
                 }
 
                 DungeonTheme dungeonTheme = dungeonThemes.get(themeCode);
-                Dungeon dungeon = new Dungeon(levelReq, timeLimitInMinutes, dungeonTheme, i, locations, bossInternalName, checkpoints);
-                MiniGameManager.addDungeon(themeCode, i, dungeon);
+                DungeonRoom dungeonRoom = new DungeonRoom(dungeonTheme, i, locations, checkpoints);
+                MiniGameManager.addDungeon(themeCode, i, dungeonRoom);
             }
-        }
-    }
-
-    private static void writeDungeons() {
-        for (String code : MiniGameManager.getDungeons()) {
-            Dungeon dungeon = MiniGameManager.getDungeon(code);
-            Location startLocation = dungeon.getStartLocation(1);
-            dungeonsConfig.set(code + ".world", startLocation.getWorld().getName());
-            dungeonsConfig.set(code + ".x", startLocation.getX());
-            dungeonsConfig.set(code + ".y", startLocation.getY());
-            dungeonsConfig.set(code + ".z", startLocation.getZ());
-            dungeonsConfig.set(code + ".yaw", startLocation.getYaw());
-            dungeonsConfig.set(code + ".pitch", startLocation.getPitch());
-
-            dungeonsConfig.set(code + ".levelReq", dungeon.getLevelReq());
-            dungeonsConfig.set(code + ".timeLimitInMinutes", dungeon.getTimeLimitInMinutes());
-            dungeonsConfig.set(code + ".bossInternalName", dungeon.getBossInternalName());
-        }
-        try {
-            dungeonsConfig.save(ConfigManager.DATA_FOLDER + "/dungeons.yml");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

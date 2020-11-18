@@ -8,6 +8,9 @@ import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.mobs.MobManager;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -25,12 +28,19 @@ public class DungeonTheme {
     private final int gearLevel;
     private final PortalColor portalColor;
 
-    public DungeonTheme(String code, String name, String gearTag, int gearLevel, PortalColor portalColor) {
+    private final int levelReq;
+    private final int timeLimitInMinutes;
+    private final String bossInternalName;
+
+    public DungeonTheme(String code, String name, String gearTag, int gearLevel, PortalColor portalColor, int levelReq, int timeLimitInMinutes, String bossInternalName) {
         this.code = code;
         this.name = name;
         this.gearTag = gearTag;
         this.gearLevel = gearLevel;
         this.portalColor = portalColor;
+        this.levelReq = levelReq;
+        this.timeLimitInMinutes = timeLimitInMinutes;
+        this.bossInternalName = bossInternalName;
     }
 
     public String getCode() {
@@ -39,6 +49,25 @@ public class DungeonTheme {
 
     public String getName() {
         return name;
+    }
+
+    public int getLevelReq() {
+        return levelReq;
+    }
+
+    public int getTimeLimitInMinutes() {
+        return timeLimitInMinutes;
+    }
+
+    public String getBossInternalName() {
+        return bossInternalName;
+    }
+
+    public String getBossName() {
+        MobManager mobManager = MythicMobs.inst().getMobManager();
+        MythicMob mythicMob = mobManager.getMythicMob(bossInternalName);
+
+        return mythicMob.getDisplayName().get();
     }
 
     public ItemStack getPrizeChest() {
@@ -78,18 +107,18 @@ public class DungeonTheme {
     public GuiGeneric getJoinQueueGui() {
         GuiGeneric guiGeneric = new GuiGeneric(27, "Join dungeon: " + name + " #" + code, 0);
 
-        Dungeon dungeon = MiniGameManager.getDungeon(code, 1);
+        DungeonRoom dungeonRoom = MiniGameManager.getDungeonRoom(code, 1);
         ItemStack room = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = room.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #1 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
+        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #1 (" + dungeonRoom.getPlayersInGameSize() + "/" + dungeonRoom.getMaxPlayerSize() + ")");
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + dungeon.getLevelReq());
-        lore.add(ChatColor.RED + "Boss: " + ChatColor.WHITE + dungeon.getBossName());
-        lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + dungeon.getTimeLimitInMinutes() + " minute(s)");
+        lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + dungeonRoom.getLevelReq());
+        lore.add(ChatColor.RED + "Boss: " + ChatColor.WHITE + getBossName());
+        lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + dungeonRoom.getTimeLimitInMinutes() + " minute(s)");
         lore.add("");
         lore.add(ChatColor.GOLD + "Players in dungeon");
-        for (Player player : dungeon.getPlayersInGame()) {
+        for (Player player : dungeonRoom.getPlayersInGame()) {
             lore.add(player.getDisplayName());
         }
         lore.add("");
@@ -97,18 +126,18 @@ public class DungeonTheme {
         itemMeta.setLore(lore);
         room.setItemMeta(itemMeta);
 
-        if (dungeon.isInGame()) {
+        if (dungeonRoom.isInGame()) {
             room.setType(Material.RED_WOOL);
         }
         room.setItemMeta(itemMeta);
         guiGeneric.setItem(9, room);
 
-        dungeon = MiniGameManager.getDungeon(code, 2);
-        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #2 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
+        dungeonRoom = MiniGameManager.getDungeonRoom(code, 2);
+        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #2 (" + dungeonRoom.getPlayersInGameSize() + "/" + dungeonRoom.getMaxPlayerSize() + ")");
         room.setItemMeta(itemMeta);
 
         room.setType(Material.LIME_WOOL);
-        if (dungeon.isInGame()) {
+        if (dungeonRoom.isInGame()) {
             room.setType(Material.RED_WOOL);
         }
         room.setItemMeta(itemMeta);

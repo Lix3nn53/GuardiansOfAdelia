@@ -826,7 +826,7 @@ public class MyInventoryClickEvent implements Listener {
                     String c = String.valueOf(currentName.charAt(i + 1));
                     int roomNo = Integer.parseInt(c);
 
-                    boolean joined = MiniGameManager.getDungeon(dungeonThemeCode, roomNo).joinQueue(player);
+                    boolean joined = MiniGameManager.getDungeonRoom(dungeonThemeCode, roomNo).joinQueue(player);
                     if (joined) {
                         player.closeInventory();
                     }
