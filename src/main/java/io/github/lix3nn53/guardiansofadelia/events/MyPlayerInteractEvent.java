@@ -17,6 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
@@ -35,6 +36,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -92,7 +94,8 @@ public class MyPlayerInteractEvent implements Listener {
                     int typeIndex = PersistentDataContainerUtil.getInteger(itemInMainHand, "prizeType");
                     PrizeChestType type = PrizeChestType.values()[typeIndex];
 
-                    DungeonTheme dungeonTheme = DungeonTheme.valueOf(dungeonThemeString);
+                    HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
+                    DungeonTheme dungeonTheme = dungeonThemes.get(dungeonThemeString);
 
                     List<ItemStack> itemStacks = dungeonTheme.generateChestItems(type);
 

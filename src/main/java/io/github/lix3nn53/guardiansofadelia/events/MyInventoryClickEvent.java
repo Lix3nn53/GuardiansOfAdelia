@@ -35,7 +35,6 @@ import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.menu.CharacterSelectionMenuList;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
-import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
@@ -583,10 +582,8 @@ public class MyInventoryClickEvent implements Listener {
             } else if (currentType.equals(Material.MAGENTA_WOOL)) {
                 String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
-                int i = Integer.parseInt(split[1]);
-                DungeonTheme value = DungeonTheme.values()[i - 1];
-                Location portalLocationOfDungeonTheme = MiniGameManager.getPortalLocationOfDungeonTheme(value);
-                CompassManager.setCompassItemLocation(player, value.getName(), portalLocationOfDungeonTheme);
+                Location portalLocationOfDungeonTheme = MiniGameManager.getPortalLocationOfDungeonTheme(split[1]);
+                CompassManager.setCompassItemLocation(player, split[0], portalLocationOfDungeonTheme);
             }
         } else if (title.contains(ChatColor.DARK_GRAY + "Elements (Points:")) {
             if (rpgCharacter != null) {
@@ -821,12 +818,15 @@ public class MyInventoryClickEvent implements Listener {
         } else if (title.contains("Join dungeon: ")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 if (currentType.equals(Material.LIME_WOOL)) {
-                    String s = title.replace("Join dungeon: ", "");
-                    DungeonTheme dungeonTheme = DungeonTheme.valueOf(s);
+                    //dungeon theme is after # of inv name
+                    String dungeonThemeCode = title.split("#")[1];
+
+                    //get char after # for dungeon room no from clicked
                     int i = currentName.indexOf("#");
                     String c = String.valueOf(currentName.charAt(i + 1));
                     int roomNo = Integer.parseInt(c);
-                    boolean joined = MiniGameManager.getDungeon(dungeonTheme, roomNo).joinQueue(player);
+
+                    boolean joined = MiniGameManager.getDungeon(dungeonThemeCode, roomNo).joinQueue(player);
                     if (joined) {
                         player.closeInventory();
                     }

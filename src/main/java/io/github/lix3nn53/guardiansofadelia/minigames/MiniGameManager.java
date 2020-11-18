@@ -14,7 +14,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -30,8 +29,9 @@ public class MiniGameManager {
     private static final List<WinByMostKills> winByMostKillsList = new ArrayList<>();
     private static final List<GuildWar> guildWarList = new ArrayList<>();
 
+    private static final HashMap<String, DungeonTheme> dungeonThemes = new HashMap<>();
     private static final HashMap<String, Dungeon> codeToDungeon = new HashMap<>();
-    private static final HashMap<Portal, DungeonTheme> portalToDungeonTheme = new HashMap<>();
+    private static final HashMap<Portal, String> portalToDungeonTheme = new HashMap<>();
 
     private static final HashMap<Player, Minigame> playerToMinigame = new HashMap<>();
 
@@ -108,20 +108,20 @@ public class MiniGameManager {
         return winByMostKillsList.get(roomNo - 1);
     }
 
-    public static void addDungeon(DungeonTheme dungeonTheme, int roomNo, Dungeon dungeon) {
-        codeToDungeon.put(dungeonTheme.toString() + roomNo, dungeon);
+    public static void addDungeon(String dungeonTheme, int roomNo, Dungeon dungeon) {
+        codeToDungeon.put(dungeonTheme + roomNo, dungeon);
     }
 
-    public static Dungeon getDungeon(DungeonTheme dungeonTheme, int roomNo) {
-        return codeToDungeon.get(dungeonTheme.toString() + roomNo);
+    public static Dungeon getDungeon(String dungeonTheme, int roomNo) {
+        return codeToDungeon.get(dungeonTheme + roomNo);
     }
 
     public static Dungeon getDungeon(String code) {
         return codeToDungeon.get(code);
     }
 
-    public static boolean dungeonExists(DungeonTheme dungeonTheme, int roomNo) {
-        return codeToDungeon.containsKey(dungeonTheme.toString() + roomNo);
+    public static boolean dungeonExists(String dungeonTheme, int roomNo) {
+        return codeToDungeon.containsKey(dungeonTheme + roomNo);
     }
 
     public static Set<String> getDungeons() {
@@ -130,20 +130,22 @@ public class MiniGameManager {
 
     public static DungeonTheme getDungeonFromPortal(Portal portal) {
         if (portalToDungeonTheme.containsKey(portal)) {
-            return portalToDungeonTheme.get(portal);
+            String dungeonThemeCode = portalToDungeonTheme.get(portal);
+            return dungeonThemes.get(dungeonThemeCode);
         }
         return null;
     }
 
-    public static void addMinigamePortal(Location location, DungeonTheme dungeonTheme) {
+    public static void addMinigamePortal(Location location, String dungeonThemeCode) {
+        DungeonTheme dungeonTheme = dungeonThemes.get(dungeonThemeCode);
         Portal portal = new Portal(location, dungeonTheme.getPortalColor());
-        portalToDungeonTheme.put(portal, dungeonTheme);
+        portalToDungeonTheme.put(portal, dungeonThemeCode);
         PortalManager.addPortal(portal);
     }
 
-    public static Location getPortalLocationOfDungeonTheme(DungeonTheme dungeonTheme) {
+    public static Location getPortalLocationOfDungeonTheme(String dungeonTheme) {
         for (Portal portal : portalToDungeonTheme.keySet()) {
-            DungeonTheme dungeonThemeLoop = portalToDungeonTheme.get(portal);
+            String dungeonThemeLoop = portalToDungeonTheme.get(portal);
             if (dungeonTheme.equals(dungeonThemeLoop)) {
                 return portal.getBaseLocation();
             }
@@ -200,12 +202,11 @@ public class MiniGameManager {
         return false;
     }
 
-    public static void onMobKill(Player player, LivingEntity livingEntity) {
+    public static void onMobKill(Player player, String internalName) {
         if (playerToMinigame.containsKey(player)) {
             if (playerToMinigame.get(player) instanceof Dungeon) {
                 Dungeon dungeon = (Dungeon) playerToMinigame.get(player);
-                String mobName = livingEntity.getCustomName();
-                dungeon.onBossKill(mobName);
+                dungeon.onBossKill(internalName);
             }
         }
     }
@@ -300,5 +301,13 @@ public class MiniGameManager {
             i += 2;
         }
         return guiGeneric;
+    }
+
+    public static HashMap<String, DungeonTheme> getDungeonThemes() {
+        return dungeonThemes;
+    }
+
+    public static void addDungeonTheme(String code, DungeonTheme dungeonTheme) {
+        dungeonThemes.put(code, dungeonTheme);
     }
 }

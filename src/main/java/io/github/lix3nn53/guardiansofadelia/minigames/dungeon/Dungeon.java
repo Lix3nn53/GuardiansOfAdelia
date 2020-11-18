@@ -6,6 +6,9 @@ import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.mobs.MobManager;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -17,13 +20,19 @@ import java.util.List;
 public class Dungeon extends Minigame {
 
     private final DungeonTheme theme;
-    private final String bossMobName;
+    private final String bossInternalName;
+    private final String bossName;
 
-    public Dungeon(int levelReq, int timeLimitInMinutes, DungeonTheme theme, int roomNo, List<Location> startLocation, String bossMobName, List<Checkpoint> checkpoints) {
+    public Dungeon(int levelReq, int timeLimitInMinutes, DungeonTheme theme, int roomNo, List<Location> startLocation, String bossInternalName, List<Checkpoint> checkpoints) {
         super("Dungeon " + theme.getName(), ChatColor.AQUA, theme.getName(), roomNo, levelReq, 4, 1, startLocation, timeLimitInMinutes,
-                5, MiniGameManager.getPortalLocationOfDungeonTheme(theme), 4, 0, 12, 1, checkpoints);
+                5, MiniGameManager.getPortalLocationOfDungeonTheme(theme.getCode()), 4, 0, 12, 1, checkpoints);
         this.theme = theme;
-        this.bossMobName = bossMobName;
+        this.bossInternalName = bossInternalName;
+        MobManager mobManager = MythicMobs.inst().getMobManager();
+        MythicMob mythicMob = mobManager.getMythicMob(bossInternalName);
+
+        this.bossName = mythicMob.getDisplayName().get();
+
         reformParties();
     }
 
@@ -45,8 +54,8 @@ public class Dungeon extends Minigame {
         }
     }
 
-    public void onBossKill(String mobName) {
-        if (isInGame() && this.bossMobName.equals(mobName)) {
+    public void onBossKill(String internalName) {
+        if (isInGame() && this.bossInternalName.equals(internalName)) {
             addScore(1, 1);
             endGame();
         }
@@ -57,12 +66,16 @@ public class Dungeon extends Minigame {
         List<String> topLines = new ArrayList<>();
         topLines.add("Time remaining: " + getTimeLimitInMinutes() * 60);
         topLines.add(getTeamTextColor(1) + "Team" + 1 + " lives: " + getMaxLives());
-        topLines.add("Boss: " + getBossMobName());
+        topLines.add("Boss: " + getBossName());
         return topLines;
     }
 
-    public String getBossMobName() {
-        return bossMobName;
+    public String getBossInternalName() {
+        return bossInternalName;
+    }
+
+    public String getBossName() {
+        return bossName;
     }
 
     @Override

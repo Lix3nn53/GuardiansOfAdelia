@@ -1,13 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,28 +16,91 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DungeonConfiguration {
 
+    private static FileConfiguration dungeonThemesConfig;
     private static FileConfiguration dungeonsConfig;
     private static FileConfiguration dungeonGatesConfig;
 
     static void createConfigs() {
+        createDungeonThemes();
         createDungeonGates();
         createDungeons();
     }
 
     static void loadConfigs() {
+        loadDungeonThemes();
         loadDungeonGates();
         loadDungeons();
     }
 
-    private static void createDungeonGates() {
-        File customConfigFile = new File(ConfigManager.DATA_FOLDER, "dungeonGates.yml");
+    private static void createDungeonThemes() {
+        String filePath = ConfigManager.DATA_FOLDER + File.separator + "dungeons";
+        File customConfigFile = new File(filePath, "dungeonThemes.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
-            GuardiansOfAdelia.getInstance().saveResource("dungeonGates.yml", false);
+
+            try {
+                customConfigFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        dungeonThemesConfig = new YamlConfiguration();
+        try {
+            dungeonThemesConfig.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadDungeonThemes() {
+        int themeCount = getChildComponentCount(dungeonThemesConfig, "theme");
+
+        for (int i = 1; i <= themeCount; i++) {
+            ConfigurationSection section = dungeonThemesConfig.getConfigurationSection("theme" + i);
+            String code = section.getString("code");
+            String name = section.getString("name");
+            String gearTag = section.getString("gearTag");
+            int gearLevel = section.getInt("gearLevel");
+            String portalColorStr = section.getString("portalColor");
+            PortalColor portalColor = PortalColor.valueOf(portalColorStr);
+
+            DungeonTheme dungeonTheme = new DungeonTheme(code, name, gearTag, gearLevel, portalColor);
+
+            MiniGameManager.addDungeonTheme(code, dungeonTheme);
+        }
+    }
+
+    private static int getChildComponentCount(ConfigurationSection configurationSection, String text) {
+        int count = 0;
+        while (true) {
+            boolean contains = configurationSection.contains(text + (count + 1));
+            if (contains) {
+                count++;
+            } else {
+                break;
+            }
+        }
+
+        return count;
+    }
+
+    private static void createDungeonGates() {
+        String filePath = ConfigManager.DATA_FOLDER + File.separator + "dungeons";
+        File customConfigFile = new File(filePath, "dungeonGates.yml");
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+
+            try {
+                customConfigFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         dungeonGatesConfig = new YamlConfiguration();
@@ -48,24 +112,31 @@ public class DungeonConfiguration {
     }
 
     private static void loadDungeonGates() {
-        for (DungeonTheme dungeonTheme : DungeonTheme.values()) {
-            String worldString = dungeonGatesConfig.getString(dungeonTheme.toString() + ".world");
+        HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
+        for (String code : dungeonThemes.keySet()) {
+            String worldString = dungeonGatesConfig.getString(code + ".world");
             World world = Bukkit.getWorld(worldString);
-            double x = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".x");
-            double y = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".y");
-            double z = dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".z");
-            float yaw = (float) dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".yaw");
-            float pitch = (float) dungeonGatesConfig.getDouble(dungeonTheme.toString() + ".pitch");
+            double x = dungeonGatesConfig.getDouble(code + ".x");
+            double y = dungeonGatesConfig.getDouble(code + ".y");
+            double z = dungeonGatesConfig.getDouble(code + ".z");
+            float yaw = (float) dungeonGatesConfig.getDouble(code + ".yaw");
+            float pitch = (float) dungeonGatesConfig.getDouble(code + ".pitch");
             Location location = new Location(world, x, y, z, yaw, pitch);
-            MiniGameManager.addMinigamePortal(location, dungeonTheme);
+            MiniGameManager.addMinigamePortal(location, code);
         }
     }
 
     private static void createDungeons() {
-        File customConfigFile = new File(ConfigManager.DATA_FOLDER, "dungeons.yml");
+        String filePath = ConfigManager.DATA_FOLDER + File.separator + "dungeons";
+        File customConfigFile = new File(filePath, "dungeons.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
-            GuardiansOfAdelia.getInstance().saveResource("dungeons.yml", false);
+
+            try {
+                customConfigFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         dungeonsConfig = new YamlConfiguration();
@@ -77,9 +148,10 @@ public class DungeonConfiguration {
     }
 
     private static void loadDungeons() {
-        for (DungeonTheme dungeonTheme : DungeonTheme.values()) {
+        HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
+        for (String themeCode : dungeonThemes.keySet()) {
             for (int i = 1; i <= 2; i++) { //loading first 2 room of each dungeon
-                String code = dungeonTheme.toString() + i;
+                String code = themeCode + i;
                 String worldString = dungeonsConfig.getString(code + ".world");
                 World world = Bukkit.getWorld(worldString);
                 double x = dungeonsConfig.getDouble(code + ".x");
@@ -91,7 +163,7 @@ public class DungeonConfiguration {
 
                 int levelReq = dungeonsConfig.getInt(code + ".levelReq");
                 int timeLimitInMinutes = dungeonsConfig.getInt(code + ".timeLimitInMinutes");
-                String bossMobName = dungeonsConfig.getString(code + ".bossMobName");
+                String bossInternalName = dungeonsConfig.getString(code + ".bossInternalName");
                 List<Location> locations = new ArrayList<>();
                 locations.add(location);
 
@@ -111,8 +183,9 @@ public class DungeonConfiguration {
                     checkpoints.add(new Checkpoint(locationC));
                 }
 
-                Dungeon dungeon = new Dungeon(levelReq, timeLimitInMinutes, dungeonTheme, i, locations, bossMobName, checkpoints);
-                MiniGameManager.addDungeon(dungeonTheme, i, dungeon);
+                DungeonTheme dungeonTheme = dungeonThemes.get(themeCode);
+                Dungeon dungeon = new Dungeon(levelReq, timeLimitInMinutes, dungeonTheme, i, locations, bossInternalName, checkpoints);
+                MiniGameManager.addDungeon(themeCode, i, dungeon);
             }
         }
     }
@@ -130,7 +203,7 @@ public class DungeonConfiguration {
 
             dungeonsConfig.set(code + ".levelReq", dungeon.getLevelReq());
             dungeonsConfig.set(code + ".timeLimitInMinutes", dungeon.getTimeLimitInMinutes());
-            dungeonsConfig.set(code + ".bossMobName", dungeon.getBossMobName());
+            dungeonsConfig.set(code + ".bossInternalName", dungeon.getBossInternalName());
         }
         try {
             dungeonsConfig.save(ConfigManager.DATA_FOLDER + "/dungeons.yml");

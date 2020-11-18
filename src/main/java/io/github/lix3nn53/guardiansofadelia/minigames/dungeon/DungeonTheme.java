@@ -5,8 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
-import io.github.lix3nn53.guardiansofadelia.towns.Town;
-import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -18,64 +16,29 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
-public enum DungeonTheme {
-    SLIME, ZOMBIE, MAGIC_FOREST, ICE_CREAM, PIRATE, ICE, DESERT, SWAMP, LAVA, DARKNESS;
+public class DungeonTheme {
+    private final String code;
+    private final String name;
+    private final String gearTag;
+    private final int gearLevel;
+    private final PortalColor portalColor;
+
+    public DungeonTheme(String code, String name, String gearTag, int gearLevel, PortalColor portalColor) {
+        this.code = code;
+        this.name = name;
+        this.gearTag = gearTag;
+        this.gearLevel = gearLevel;
+        this.portalColor = portalColor;
+    }
+
+    public String getCode() {
+        return code;
+    }
 
     public String getName() {
-        if (this.equals(DungeonTheme.DARKNESS)) {
-            return "Aleesia's Castle";
-        } else if (this.equals(DungeonTheme.DESERT)) {
-            return "Desert's Heart";
-        } else if (this.equals(DungeonTheme.SWAMP)) {
-            return "Caverns of Woz's Spirit";
-        } else if (this.equals(DungeonTheme.ICE_CREAM)) {
-            return "Whole Cake Town";
-        } else if (this.equals(DungeonTheme.ICE)) {
-            return "Frozen Cave";
-        } else if (this.equals(DungeonTheme.MAGIC_FOREST)) {
-            return "Forest of Mist";
-        } else if (this.equals(DungeonTheme.PIRATE)) {
-            return "Shipwreck Cove";
-        } else if (this.equals(DungeonTheme.LAVA)) {
-            return "Dwarven Kingdom Ruins";
-        } else if (this.equals(DungeonTheme.ZOMBIE)) {
-            return "Lair of the Zombie Subjects";
-        }
-        return "Sticky Sky Island";
-    }
-
-    public Town getDefaultTown() {
-        final int townNo = getTownNo();
-        Optional<Town> townOptional = TownManager.getTowns().stream()
-                .filter(item -> item.getNo() == townNo)
-                .findAny();
-        return townOptional.orElse(null);
-    }
-
-    private int getTownNo() {
-        if (this.equals(DungeonTheme.DARKNESS)) {
-            return 5;
-        } else if (this.equals(DungeonTheme.DESERT)) {
-            return 4;
-        } else if (this.equals(DungeonTheme.SWAMP)) {
-            return 4;
-        } else if (this.equals(DungeonTheme.ICE_CREAM)) {
-            return 2;
-        } else if (this.equals(DungeonTheme.ICE)) {
-            return 3;
-        } else if (this.equals(DungeonTheme.MAGIC_FOREST)) {
-            return 2;
-        } else if (this.equals(DungeonTheme.PIRATE)) {
-            return 3;
-        } else if (this.equals(DungeonTheme.LAVA)) {
-            return 5;
-        } else if (this.equals(DungeonTheme.ZOMBIE)) {
-            return 1;
-        }
-        return 1;
+        return name;
     }
 
     public ItemStack getPrizeChest() {
@@ -95,48 +58,16 @@ public enum DungeonTheme {
      * @param type 0 for Weapon, 1 for Jewelry, 2 for Armor
      */
     public List<ItemStack> generateChestItems(PrizeChestType type) {
-        String itemTag = "Sticky";
-        int gearLevel = 0;
-
-        if (this.equals(DungeonTheme.DARKNESS)) {
-            itemTag = "Aleesia's";
-            gearLevel = 9;
-        } else if (this.equals(DungeonTheme.DESERT)) {
-            itemTag = "Sand ";
-            gearLevel = 6;
-        } else if (this.equals(DungeonTheme.SWAMP)) {
-            itemTag = "Woz's";
-            gearLevel = 7;
-        } else if (this.equals(DungeonTheme.ICE_CREAM)) {
-            itemTag = "Sugar";
-            gearLevel = 3;
-        } else if (this.equals(DungeonTheme.ICE)) {
-            itemTag = "Frozen";
-            gearLevel = 5;
-        } else if (this.equals(DungeonTheme.MAGIC_FOREST)) {
-            itemTag = "Magical";
-            gearLevel = 2;
-        } else if (this.equals(DungeonTheme.PIRATE)) {
-            itemTag = "Haunted";
-            gearLevel = 4;
-        } else if (this.equals(DungeonTheme.LAVA)) {
-            itemTag = "Burning";
-            gearLevel = 8;
-        } else if (this.equals(DungeonTheme.ZOMBIE)) {
-            itemTag = "Rotten";
-            gearLevel = 1;
-        }
-
         ArrayList<ItemStack> chestItems = new ArrayList<>();
         if (type.equals(PrizeChestType.WEAPON)) {
-            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, itemTag, gearLevel, 0));
-            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, itemTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, gearTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, gearTag, gearLevel, 0));
         } else if (type.equals(PrizeChestType.ARMOR)) {
-            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, itemTag, gearLevel, 0));
-            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, itemTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, gearTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, gearTag, gearLevel, 0));
         } else if (type.equals(PrizeChestType.JEWELRY)) {
-            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.MYSTIC, itemTag, gearLevel, 0));
-            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, itemTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.MYSTIC, gearTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, gearTag, gearLevel, 0));
         } else if (type.equals(PrizeChestType.PET)) {
             chestItems.addAll(ItemPoolGenerator.generateEggs(gearLevel));
         }
@@ -145,16 +76,16 @@ public enum DungeonTheme {
     }
 
     public GuiGeneric getJoinQueueGui() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, "Join dungeon: " + toString(), 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, "Join dungeon: " + name + " #" + code, 0);
 
-        Dungeon dungeon = MiniGameManager.getDungeon(this, 1);
+        Dungeon dungeon = MiniGameManager.getDungeon(code, 1);
         ItemStack room = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = room.getItemMeta();
         itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #1 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + dungeon.getLevelReq());
-        lore.add(ChatColor.RED + "Boss: " + ChatColor.WHITE + dungeon.getBossMobName());
+        lore.add(ChatColor.RED + "Boss: " + ChatColor.WHITE + dungeon.getBossName());
         lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + dungeon.getTimeLimitInMinutes() + " minute(s)");
         lore.add("");
         lore.add(ChatColor.GOLD + "Players in dungeon");
@@ -172,7 +103,7 @@ public enum DungeonTheme {
         room.setItemMeta(itemMeta);
         guiGeneric.setItem(9, room);
 
-        dungeon = MiniGameManager.getDungeon(this, 2);
+        dungeon = MiniGameManager.getDungeon(code, 2);
         itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #2 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
         room.setItemMeta(itemMeta);
 
@@ -210,25 +141,6 @@ public enum DungeonTheme {
     }
 
     public PortalColor getPortalColor() {
-        if (this.equals(DungeonTheme.DARKNESS)) {
-            return PortalColor.PURPLE;
-        } else if (this.equals(DungeonTheme.DESERT)) {
-            return PortalColor.ORANGE;
-        } else if (this.equals(DungeonTheme.SWAMP)) {
-            return PortalColor.ORANGE;
-        } else if (this.equals(DungeonTheme.ICE_CREAM)) {
-            return PortalColor.PURPLE;
-        } else if (this.equals(DungeonTheme.ICE)) {
-            return PortalColor.BLUE;
-        } else if (this.equals(DungeonTheme.MAGIC_FOREST)) {
-            return PortalColor.GREEN;
-        } else if (this.equals(DungeonTheme.PIRATE)) {
-            return PortalColor.BLUE;
-        } else if (this.equals(DungeonTheme.LAVA)) {
-            return PortalColor.RED;
-        } else if (this.equals(DungeonTheme.ZOMBIE)) {
-            return PortalColor.GREEN;
-        }
-        return PortalColor.GREEN;
+        return portalColor;
     }
 }

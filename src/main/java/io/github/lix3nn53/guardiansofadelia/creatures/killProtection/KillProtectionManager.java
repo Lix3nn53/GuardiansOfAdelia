@@ -64,11 +64,13 @@ public class KillProtectionManager {
                 }
             }
 
+            String internalName = mythicEvent.getMobType().getInternalName();
+
             //run only once
             Player once = bestPlayers.get(0);
             if (MiniGameManager.isInMinigame(once)) {
                 if (!livingTarget.getType().equals(EntityType.PLAYER)) {
-                    MiniGameManager.onMobKill(once, livingTarget);
+                    MiniGameManager.onMobKill(once, internalName);
                 }
             }
             once.sendMessage("Killed mobLevel: " + mobLevel);
@@ -92,7 +94,6 @@ public class KillProtectionManager {
 
                         //quest, progress kill tasks
                         List<Quest> questList = activeCharacter.getQuestList();
-                        String internalName = mythicEvent.getMobType().getInternalName();
                         for (Quest quest : questList) {
                             quest.progressKillTasks(player, internalName);
                             quest.triggerQuestItemDrop(internalName, livingTarget.getLocation());

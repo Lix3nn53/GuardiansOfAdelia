@@ -17,6 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
 import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardInfo;
@@ -642,17 +643,17 @@ public class MenuList {
         GuiLineGeneric page1Line3 = new GuiLineGeneric();
         ItemStack dungeon;
 
-        int i = 1;
-        for (DungeonTheme dungeonTheme : DungeonTheme.values()) {
+        HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
+        for (String themeCode : dungeonThemes.keySet()) {
             dungeon = new ItemStack(Material.MAGENTA_WOOL);
-            itemMeta.setDisplayName(dungeonTheme.getName() + " #" + i);
+            DungeonTheme dungeonTheme = dungeonThemes.get(themeCode);
+            itemMeta.setDisplayName(dungeonTheme.getName() + " #" + themeCode);
             dungeon.setItemMeta(itemMeta);
             if (page1Line2.isEmpty()) {
                 page1Line2.addWord(dungeon);
             } else {
                 page1Line3.addWord(dungeon);
             }
-            i++;
         }
 
         GuiLineGeneric page1Line4 = new GuiLineGeneric();
