@@ -83,6 +83,18 @@ public class CharacterSelectionScreenManager {
         }
     }
 
+    private static void removeHolograms() {
+        for (int charNo = 1; charNo <= 8; charNo++) {
+            if (characterNoToArmorStands.containsKey(charNo)) {
+                List<ArmorStand> armorStands = characterNoToArmorStands.get(charNo);
+                for (ArmorStand armorStand : armorStands) {
+                    armorStand.remove();
+                }
+                characterNoToArmorStands.remove(charNo);
+            }
+        }
+    }
+
     public static HashMap<Integer, List<ArmorStand>> getCharacterNoToArmorStands() {
         return characterNoToArmorStands;
     }
@@ -98,6 +110,9 @@ public class CharacterSelectionScreenManager {
         players.remove(player);
         charLocationsForSelection.remove(player.getUniqueId());
         charLevelsForSelection.remove(player.getUniqueId());
+        if (players.isEmpty()) {
+            removeHolograms();
+        }
     }
 
     public static Location getCharacterSelectionCenter() {
