@@ -172,4 +172,23 @@ public enum WeaponGearType {
     public boolean getReduceMeleeDamage() {
         return this != WeaponGearType.SPEAR;
     }
+
+    public boolean isMelee() {
+        switch (this) {
+            case SWORD:
+            case GREAT_SWORD:
+            case WAR_HAMMER:
+            case BATTLE_AXE:
+            case DAGGER:
+                return true;
+            case SPEAR:
+            case WAND:
+            case STAFF:
+            case CROSSBOW:
+            case BOW:
+                return false;
+        }
+
+        return true;
+    }
 }

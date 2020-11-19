@@ -77,7 +77,7 @@ public class DungeonTheme {
 
         ItemStack chest = new PrizeChest(this, chestType).getChest();
 
-        PersistentDataContainerUtil.putString("prizeDungeon", this.toString(), chest);
+        PersistentDataContainerUtil.putString("prizeDungeon", code, chest);
         PersistentDataContainerUtil.putInteger("prizeType", random, chest);
 
         return chest;

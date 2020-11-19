@@ -122,4 +122,18 @@ public enum ArmorGearType {
 
         return null;
     }
+
+    public boolean isHeavy() {
+        switch (this) {
+            case EARTH_ARMOR:
+            case FIRE_ARMOR:
+                return true;
+            case LIGHTNING_ARMOR:
+            case WATER_ARMOR:
+            case WIND_ARMOR:
+                return false;
+        }
+
+        return true;
+    }
 }
