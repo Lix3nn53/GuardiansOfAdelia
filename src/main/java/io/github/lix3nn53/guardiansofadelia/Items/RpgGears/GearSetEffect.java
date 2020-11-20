@@ -18,31 +18,28 @@ public enum GearSetEffect {
     ATTACK_SPEED_DECREASE;
 
     public void applySetEffect(Player player, String setName) {
-        MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + "Gear Set Effect Activated: " + setName);
+        player.sendMessage(ChatColor.LIGHT_PURPLE + "Armor-set effect activated because you are wearing all pieces of "
+                + ChatColor.DARK_PURPLE + setName);
+        player.sendMessage(ChatColor.DARK_PURPLE + setName + ChatColor.LIGHT_PURPLE + " gives you bonus " + this.name());
         switch (this) {
             case KNOCKBACK_RESISTANCE:
                 player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0.7);
-                MessageUtils.sendCenteredMessage(player, "Knockback resistance");
                 break;
             case SLOW_FALLING:
                 PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOW_FALLING, Integer.MAX_VALUE, 1);
                 player.addPotionEffect(potionEffect);
-                MessageUtils.sendCenteredMessage(player, "Slow falling");
                 break;
             case SWIMMING_SPEED:
                 potionEffect = new PotionEffect(PotionEffectType.DOLPHINS_GRACE, Integer.MAX_VALUE, 1);
                 player.addPotionEffect(potionEffect);
-                MessageUtils.sendCenteredMessage(player, "Swimming speed increase");
                 break;
             case ATTACK_SPEED_INCREASE:
                 potionEffect = new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 1);
                 player.addPotionEffect(potionEffect);
-                MessageUtils.sendCenteredMessage(player, "Attack speed increase");
                 break;
             case ATTACK_SPEED_DECREASE:
                 potionEffect = new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 1);
                 player.addPotionEffect(potionEffect);
-                MessageUtils.sendCenteredMessage(player, "Attack speed decrease");
                 break;
         }
     }

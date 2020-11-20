@@ -73,7 +73,7 @@ public class ItemShieldSetConfigurations {
 
                 String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-                ShieldSet shieldSet = new ShieldSet(name, customModelData, level, health, defense, magicDefense);
+                ShieldSet shieldSet = new ShieldSet(name, level, health, defense, magicDefense, customModelData);
 
                 ShieldManager.add(shieldSet);
             }

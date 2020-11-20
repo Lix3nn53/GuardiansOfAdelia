@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
+import io.github.lix3nn53.guardiansofadelia.sounds.CustomSoundtrack;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.shutdown.AutomaticShutdown;
@@ -182,14 +183,13 @@ public class GuardiansOfAdelia extends JavaPlugin {
         startGlobalManaRegen(0.4);
 
         //DELAYED TASKS
-        /* TODO
         new BukkitRunnable() {
             @Override
             public void run() {
                 CustomSoundtrack.startPlayLoopForEveryone();
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 10 * 5L);
-        */
+
 
         //Automatic Shutdown
         AutomaticShutdown.onEnable();

@@ -81,7 +81,7 @@ public class DatabaseManager {
     }
 
     public static void loadPlayerDataAndCharacterSelection(Player player) {
-        player.sendMessage("Loading your player data..");
+        //player.sendMessage("Loading your player data..");
         UUID uuid = player.getUniqueId();
         Bukkit.getScheduler().runTaskAsynchronously(GuardiansOfAdelia.getInstance(), () -> {
             try {
@@ -110,7 +110,7 @@ public class DatabaseManager {
                     }
                 }
 
-                player.sendMessage("Loaded player data");
+                //player.sendMessage("Loaded player data");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -121,7 +121,7 @@ public class DatabaseManager {
 
     //Not async, must run async
     private static void loadCharacterSelectionAndFormHolograms(Player player) {
-        player.sendMessage("Preparing character selection..");
+        player.sendMessage(ChatColor.YELLOW + "Welcome " + ChatColor.GOLD + player.getName());
         for (int charNo = 1; charNo <= 8; charNo++) {
             boolean characterExists = DatabaseQueries.characterExists(player.getUniqueId(), charNo);
             if (characterExists) {
@@ -183,9 +183,9 @@ public class DatabaseManager {
                     e.printStackTrace();
                 }
             }
-            player.sendMessage("Loaded character-" + charNo);
+            //player.sendMessage("Loaded character-" + charNo);
         }
-        player.sendMessage("Prepared character selection");
+        player.sendMessage(ChatColor.YELLOW + "Select or create a character to start playing.");
     }
 
     public static void writeGuardianDataWithCurrentCharacter(Player player, GuardianData guardianData) {

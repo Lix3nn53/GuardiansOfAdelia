@@ -24,29 +24,29 @@ public class MerchantManager {
     }
 
     public static void init() {
-        setMerchant(12, new MerchantMenu(MerchantType.TOOL_SHOP, 1, 8));
-        setMerchant(13, new MerchantMenu(MerchantType.TOOL_SHOP, 2, 9));
-        setMerchant(14, new MerchantMenu(MerchantType.TOOL_SHOP, 3, 10));
-        setMerchant(15, new MerchantMenu(MerchantType.TOOL_SHOP, 4, 11));
-        setMerchant(16, new MerchantMenu(MerchantType.TOOL_SHOP, 5, 12));
+        setMerchant(20, new MerchantMenu(MerchantType.TOOL_SHOP, 1, 8));
+        setMerchant(21, new MerchantMenu(MerchantType.TOOL_SHOP, 2, 9));
+        setMerchant(22, new MerchantMenu(MerchantType.TOOL_SHOP, 3, 10));
+        setMerchant(23, new MerchantMenu(MerchantType.TOOL_SHOP, 4, 11));
+        setMerchant(24, new MerchantMenu(MerchantType.TOOL_SHOP, 5, 12));
 
-        setMerchant(17, new MerchantMenu(MerchantType.BLACKSMITH, 1, 13));
-        setMerchant(18, new MerchantMenu(MerchantType.BLACKSMITH, 3, 14));
-        setMerchant(19, new MerchantMenu(MerchantType.BLACKSMITH, 4, 15));
-        setMerchant(20, new MerchantMenu(MerchantType.BLACKSMITH, 5, 16));
+        setMerchant(40, new MerchantMenu(MerchantType.BLACKSMITH, 1, 13));
+        setMerchant(41, new MerchantMenu(MerchantType.BLACKSMITH, 3, 14));
+        setMerchant(42, new MerchantMenu(MerchantType.BLACKSMITH, 4, 15));
+        setMerchant(43, new MerchantMenu(MerchantType.BLACKSMITH, 5, 16));
 
 
-        setMerchant(21, new MerchantMenu(MerchantType.STORAGE_KEEPER, 1, 17));
-        setMerchant(22, new MerchantMenu(MerchantType.STORAGE_KEEPER, 2, 18));
-        setMerchant(23, new MerchantMenu(MerchantType.STORAGE_KEEPER, 3, 19));
-        setMerchant(24, new MerchantMenu(MerchantType.STORAGE_KEEPER, 4, 20));
-        setMerchant(25, new MerchantMenu(MerchantType.STORAGE_KEEPER, 5, 21));
+        setMerchant(60, new MerchantMenu(MerchantType.STORAGE_KEEPER, 1, 17));
+        setMerchant(61, new MerchantMenu(MerchantType.STORAGE_KEEPER, 2, 18));
+        setMerchant(62, new MerchantMenu(MerchantType.STORAGE_KEEPER, 3, 19));
+        setMerchant(63, new MerchantMenu(MerchantType.STORAGE_KEEPER, 4, 20));
+        setMerchant(64, new MerchantMenu(MerchantType.STORAGE_KEEPER, 5, 21));
 
-        setMerchant(26, new MerchantMenu(MerchantType.MAGIC_SHOP, 1, 22));
-        setMerchant(27, new MerchantMenu(MerchantType.MAGIC_SHOP, 2, 23));
-        setMerchant(28, new MerchantMenu(MerchantType.MAGIC_SHOP, 3, 24));
-        setMerchant(29, new MerchantMenu(MerchantType.MAGIC_SHOP, 4, 25));
-        setMerchant(30, new MerchantMenu(MerchantType.MAGIC_SHOP, 5, 26));
+        setMerchant(80, new MerchantMenu(MerchantType.MAGIC_SHOP, 1, 22));
+        setMerchant(81, new MerchantMenu(MerchantType.MAGIC_SHOP, 2, 23));
+        setMerchant(82, new MerchantMenu(MerchantType.MAGIC_SHOP, 3, 24));
+        setMerchant(83, new MerchantMenu(MerchantType.MAGIC_SHOP, 4, 25));
+        setMerchant(84, new MerchantMenu(MerchantType.MAGIC_SHOP, 5, 26));
     }
 
     public static boolean onSellItemClick(Player player, int slot) {

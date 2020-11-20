@@ -96,11 +96,11 @@ public enum ArmorGearType {
             case FIRE_ARMOR:
                 return ArmorMaterial.DIAMOND;
             case LIGHTNING_ARMOR:
-                return ArmorMaterial.IRON;
-            case WATER_ARMOR:
-                return ArmorMaterial.CHAINMAIL;
-            case WIND_ARMOR:
                 return ArmorMaterial.GOLDEN;
+            case WATER_ARMOR:
+                return ArmorMaterial.IRON;
+            case WIND_ARMOR:
+                return ArmorMaterial.CHAINMAIL;
         }
 
         return null;
@@ -111,13 +111,13 @@ public enum ArmorGearType {
             case EARTH_ARMOR:
                 return GearSetEffect.KNOCKBACK_RESISTANCE;
             case FIRE_ARMOR:
-                return GearSetEffect.KNOCKBACK_RESISTANCE;
+                return GearSetEffect.CRITICAL_DAMAGE;
             case LIGHTNING_ARMOR:
-                return GearSetEffect.KNOCKBACK_RESISTANCE;
+                return GearSetEffect.CRITICAL_CHANCE;
             case WATER_ARMOR:
                 return GearSetEffect.MANA_REGEN;
             case WIND_ARMOR:
-                return GearSetEffect.CRITICAL_DAMAGE;
+                return GearSetEffect.ATTACK_SPEED_INCREASE;
         }
 
         return null;

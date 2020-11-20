@@ -40,7 +40,8 @@ public class CustomSoundtrack {
         songNames.add("03 - Zelda - Link's Awakening - Mabe Village");
         songNames.add("04 - Zelda - Ocarina of Time - Ending Theme");
 
-        DATA_FOLDER = GuardiansOfAdelia.getInstance().getDataFolder();
+        String filePath = GuardiansOfAdelia.getInstance().getDataFolder() + File.separator + "soundtracks";
+        DATA_FOLDER = new File(filePath);
 
         for (String name : songNames) {
             File songTextFile = new File(DATA_FOLDER, name + ".txt");
