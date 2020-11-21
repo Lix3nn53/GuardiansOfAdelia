@@ -58,6 +58,53 @@ public class GuiBookGeneric implements GuiBook {
         pageList.add(page);
     }
 
+    public GuiPage getFirstAvailablePage() {
+        for (GuiPage guiPage : pageList) {
+            boolean empty = guiPage.isEmpty();
+            if (empty) {
+                return guiPage;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public void addToFirstAvailableWord(ItemStack itemStack) {
+        //check book full, add page if needed
+        GuiPage currentPage = getFirstAvailablePage();
+        if (currentPage == null) {
+            currentPage = new GuiPage();
+            addPage(currentPage);
+        }
+
+        //check page full, add line if needed
+        int firstAvailableLine = currentPage.getFirstAvailableLine();
+        boolean empty = currentPage.isEmpty();
+
+        if (firstAvailableLine == -1) { //there is no available line
+            if (!empty) { // we cant add more lines to the page so create new page
+                currentPage = new GuiPage();
+                currentPage.addLine(new GuiLineGeneric());
+                firstAvailableLine = 0;
+            } else { // but we can add new line to the page
+                currentPage.addLine(new GuiLineGeneric());
+                firstAvailableLine = currentPage.getFirstAvailableLine();
+            }
+        }
+
+        //check line full, add word(ItemStack) if needed
+        List<GuiLine> guiLines = currentPage.getGuiLines();
+        GuiLine currentLine = guiLines.get(firstAvailableLine);
+        boolean lineEmpty = currentLine.isEmpty();
+        if (!lineEmpty) {
+            currentLine = new GuiLineGeneric();
+            currentPage.addLine(currentLine);
+        }
+
+        currentLine.addWord(itemStack);
+    }
+
     public void setPages(List<GuiPage> guiPageList) {
         this.pageList = guiPageList;
     }

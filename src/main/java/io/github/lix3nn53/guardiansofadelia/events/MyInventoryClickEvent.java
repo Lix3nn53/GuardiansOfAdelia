@@ -374,7 +374,7 @@ public class MyInventoryClickEvent implements Listener {
                 GuiGeneric guide = MenuList.guide();
                 guide.openInventory(player);
             } else if (currentName.equals(ChatColor.BLUE + "Compass")) {
-                GuiBookGeneric compass = MenuList.compass();
+                GuiGeneric compass = MenuList.compass();
                 compass.openInventory(player);
             } else if (currentName.equals(ChatColor.DARK_GREEN + "Maps")) {
                 player.closeInventory();
@@ -567,23 +567,34 @@ public class MyInventoryClickEvent implements Listener {
                 }
             }
         } else if (title.contains(ChatColor.DARK_GRAY + "Compass")) {
-            if (currentType.equals(Material.LIGHT_BLUE_WOOL)) {
+            if (title.contains("Towns")) {
                 String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
 
                 Town town = TownManager.getTown(i);
-                CompassManager.setCompassItemLocation(player, town.getName(), town.getLocation());
-            } else if (currentType.equals(Material.LIME_WOOL)) {
-                String displayName = itemMeta.getDisplayName();
-                String[] split = displayName.split("#");
-                int i = Integer.parseInt(split[1]);
-                CompassManager.setCompassItemNPC(player, i);
-            } else if (currentType.equals(Material.MAGENTA_WOOL)) {
+                CompassManager.setCompassItemLocation(player, ChatColor.AQUA + town.getName(), town.getLocation());
+            } else if (title.contains("Dungeon Gates")) {
                 String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
                 Location portalLocationOfDungeonTheme = MiniGameManager.getPortalLocationOfDungeonTheme(split[1]);
                 CompassManager.setCompassItemLocation(player, split[0], portalLocationOfDungeonTheme);
+            } else if (title.contains("NPCs")) {
+                String displayName = itemMeta.getDisplayName();
+                String[] split = displayName.split("#");
+                int i = Integer.parseInt(split[1]);
+                CompassManager.setCompassItemNPC(player, i);
+            } else {
+                if (currentType.equals(Material.LIGHT_BLUE_WOOL)) { //towns
+                    GuiBookGeneric guiBookGeneric = MenuList.compassTowns();
+                    guiBookGeneric.openInventory(player);
+                } else if (currentType.equals(Material.PURPLE_WOOL)) { //dungeon gates
+                    GuiBookGeneric guiBookGeneric = MenuList.compassDungeonGates();
+                    guiBookGeneric.openInventory(player);
+                } else if (currentType.equals(Material.LIME_WOOL)) { //npcs
+                    GuiBookGeneric guiBookGeneric = MenuList.compassNPCs();
+                    guiBookGeneric.openInventory(player);
+                }
             }
         } else if (title.contains(ChatColor.DARK_GRAY + "Elements (Points:")) {
             if (rpgCharacter != null) {

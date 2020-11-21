@@ -21,4 +21,13 @@ public class GuiPage {
         return guiLines.size() < 5;
     }
 
+    public int getFirstAvailableLine() {
+        for (int i = 0; i < guiLines.size(); i++) {
+            if (guiLines.get(i).isEmpty()) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }

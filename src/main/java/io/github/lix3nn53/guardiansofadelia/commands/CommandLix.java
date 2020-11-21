@@ -57,31 +57,37 @@ public class CommandLix implements CommandExecutor {
             if (args.length < 1) {
                 player.sendMessage(ChatColor.DARK_PURPLE + "---- ADMIN ----");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin setstaff <player> [NONE|OWNER|ADMIN|DEVELOPER|BUILDER|SUPPORT|YOUTUBER|TRAINEE]");
+                player.sendMessage(ChatColor.DARK_PURPLE + "/admin setdaily");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "---- UTILS ----");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/admin fly");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "/admin speed <num>");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/admin tp town <num>");
-                player.sendMessage(ChatColor.BLUE + "---- RPG ----");
-                player.sendMessage(ChatColor.BLUE + "/admin exp <player> <amount>");
-                player.sendMessage(ChatColor.BLUE + "/admin class unlock <player> <newClass>");
+                player.sendMessage(ChatColor.DARK_BLUE + "---- RPG ----");
+                player.sendMessage(ChatColor.DARK_BLUE + "/admin exp <player> <amount>");
+                player.sendMessage(ChatColor.DARK_BLUE + "/admin class unlock <player> <newClass>");
                 player.sendMessage(ChatColor.BLUE + "---- OTHER ----");
-                player.sendMessage(ChatColor.BLUE + "/admin setdaily");
                 player.sendMessage(ChatColor.BLUE + "/admin model portal<1-5>");
-                player.sendMessage(ChatColor.BLUE + "/admin sound <sound>");
+                player.sendMessage(ChatColor.BLUE + "/admin sound <code> - play custom sounds");
                 player.sendMessage(ChatColor.DARK_PURPLE + "---- QUEST ----");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin quest t - turn ins current quests tasks");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin quest a <num> - accept quest tasks");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin quest gui <npcNo> - open quest gui of an npc");
-                player.sendMessage(ChatColor.BLUE + "---- ITEMS ----");
-                player.sendMessage(ChatColor.BLUE + "/admin coin <num>");
-                player.sendMessage(ChatColor.BLUE + "/admin weapon [type] <num>");
-                player.sendMessage(ChatColor.BLUE + "/admin egg [code] <gearLevel> <petLevel>");
-                player.sendMessage(ChatColor.BLUE + "/admin stone <grade> <amount>");
-                player.sendMessage(ChatColor.BLUE + "/admin passive [parrot|earring|necklace|glove|ring] <num>");
-                player.sendMessage(ChatColor.BLUE + "/admin premium item-id<1-24>");
-                player.sendMessage(ChatColor.BLUE + "/admin ingredient id amount");
+                player.sendMessage(ChatColor.AQUA + "---- ITEMS ----");
+                player.sendMessage(ChatColor.AQUA + "/admin coin <num>");
+                player.sendMessage(ChatColor.AQUA + "/admin weapon [type] <num>");
+                player.sendMessage(ChatColor.AQUA + "/admin egg [code] <gearLevel> <petLevel>");
+                player.sendMessage(ChatColor.AQUA + "/admin stone <grade> <amount>");
+                player.sendMessage(ChatColor.AQUA + "/admin passive [parrot|earring|necklace|glove|ring] <num>");
+                player.sendMessage(ChatColor.AQUA + "/admin premium item-id<1-24>");
+                player.sendMessage(ChatColor.AQUA + "/admin ingredient id amount");
             } else if (args[0].equals("speed")) {
                 int val = Integer.parseInt(args[1]);
-                player.setFlySpeed(val);
+                if (val > 10 || val < -1) {
+                    player.sendMessage("Speed must be between 1-10");
+                    return false;
+                }
+                float valf = val / 10f;
+                player.setFlySpeed(valf);
             } else if (args[0].equals("setdaily")) {
                 GuiGeneric guiGeneric = new GuiGeneric(9, ChatColor.YELLOW + "Set Daily Rewards", 0);
 

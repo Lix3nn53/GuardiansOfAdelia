@@ -22,10 +22,13 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
 import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.CharacterInfoSlot;
+import io.github.lix3nn53.guardiansofadelia.towns.Town;
+import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiLineGeneric;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiPage;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -601,197 +604,112 @@ public class MenuList {
         return new GuiGeneric(27, ChatColor.DARK_GRAY + "Guides", 0);
     }
 
-    public static GuiBookGeneric compass() {
-        GuiBookGeneric guiBookGeneric = new GuiBookGeneric(ChatColor.DARK_GRAY + "Compass", 0);
+    public static GuiGeneric compass() {
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Compass", 0);
 
-        GuiPage page1 = new GuiPage();
-        GuiLineGeneric page1Line1 = new GuiLineGeneric();
-
-        ItemStack city = new ItemStack(Material.LIGHT_BLUE_WOOL);
-        ItemMeta itemMeta = city.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.AQUA + "Roumen #1");
+        ItemStack itemStack = new ItemStack(Material.LIGHT_BLUE_WOOL);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.AQUA + "Towns");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "Click to select your compass target!");
-        lore.add("");
-        lore.add(ChatColor.GRAY + "If you dont have a compass this will give you one.");
+        lore.add("Click to select a town as your compass target.");
         itemMeta.setLore(lore);
-        city.setItemMeta(itemMeta);
-        page1Line1.addWord(city);
+        itemStack.setItemMeta(itemMeta);
+        guiGeneric.setItem(11, itemStack);
 
-        city = new ItemStack(Material.LIGHT_BLUE_WOOL);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Port Veloa #2");
-        city.setItemMeta(itemMeta);
-        page1Line1.addWord(city);
+        itemStack = new ItemStack(Material.PURPLE_WOOL);
+        itemStack.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Dungeon Gates");
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add("Click to select a dungeon gate as your compass target.");
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
+        guiGeneric.setItem(13, itemStack);
 
-        city = new ItemStack(Material.LIGHT_BLUE_WOOL);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Elderine #3");
-        city.setItemMeta(itemMeta);
-        page1Line1.addWord(city);
+        itemStack = new ItemStack(Material.LIME_WOOL);
+        itemStack.getItemMeta();
+        itemMeta.setDisplayName(ChatColor.GREEN + "NPCS");
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add("Click to select a NPC as your compass target.");
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
+        guiGeneric.setItem(15, itemStack);
 
-        city = new ItemStack(Material.LIGHT_BLUE_WOOL);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Uruga #4");
-        city.setItemMeta(itemMeta);
-        page1Line1.addWord(city);
+        return guiGeneric;
+    }
 
-        city = new ItemStack(Material.LIGHT_BLUE_WOOL);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Alberstol Ruins #5");
-        city.setItemMeta(itemMeta);
-        page1Line1.addWord(city);
+    public static GuiBookGeneric compassTowns() {
+        GuiBookGeneric guiBookGeneric = new GuiBookGeneric(ChatColor.DARK_GRAY + "Compass Towns", 0);
 
-        GuiLineGeneric page1Line2 = new GuiLineGeneric();
-        GuiLineGeneric page1Line3 = new GuiLineGeneric();
-        ItemStack dungeon;
+        List<Town> towns = TownManager.getTowns();
+        for (Town town : towns) {
+            ItemStack itemStack = new ItemStack(Material.LIGHT_BLUE_WOOL);
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Click to select your compass target!");
+            lore.add("");
+            lore.add(ChatColor.GRAY + "If you dont have a compass this will give you one.");
+            itemMeta.setLore(lore);
 
-        HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
-        for (String themeCode : dungeonThemes.keySet()) {
-            dungeon = new ItemStack(Material.MAGENTA_WOOL);
-            DungeonTheme dungeonTheme = dungeonThemes.get(themeCode);
-            itemMeta.setDisplayName(dungeonTheme.getName() + " #" + themeCode);
-            dungeon.setItemMeta(itemMeta);
-            if (page1Line2.isEmpty()) {
-                page1Line2.addWord(dungeon);
-            } else {
-                page1Line3.addWord(dungeon);
-            }
+            itemMeta.setDisplayName(ChatColor.AQUA + town.getName() + " #" + town.getNo());
+            itemStack.setItemMeta(itemMeta);
+
+            guiBookGeneric.addToFirstAvailableWord(itemStack);
         }
 
-        GuiLineGeneric page1Line4 = new GuiLineGeneric();
-        ItemStack npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GOLD + "King of Roumen #31");
-        npc.setItemMeta(itemMeta);
-        page1Line4.addWord(npc);
+        return guiBookGeneric;
+    }
 
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Sergeant Armin #32");
-        npc.setItemMeta(itemMeta);
-        page1Line4.addWord(npc);
+    public static GuiBookGeneric compassDungeonGates() {
+        GuiBookGeneric guiBookGeneric = new GuiBookGeneric(ChatColor.DARK_GRAY + "Compass Dungeon Gates", 0);
 
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GREEN + "Village Elder Odo #33");
-        npc.setItemMeta(itemMeta);
-        page1Line4.addWord(npc);
+        HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
+        for (String dungeonCode : dungeonThemes.keySet()) {
+            ItemStack itemStack = new ItemStack(Material.PURPLE_WOOL);
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Click to select your compass target!");
+            lore.add("");
+            lore.add(ChatColor.GRAY + "If you dont have a compass this will give you one.");
+            itemMeta.setLore(lore);
 
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GREEN + "Adventurer Milo #34");
-        npc.setItemMeta(itemMeta);
-        page1Line4.addWord(npc);
+            DungeonTheme dungeonTheme = dungeonThemes.get(dungeonCode);
+            itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + dungeonTheme.getName() + " #" + dungeonCode);
+            itemStack.setItemMeta(itemMeta);
 
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiLineGeneric page1Line5 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.AQUA + "Dr. Rintarou #35");
-        npc.setItemMeta(itemMeta);
-        page1Line5.addWord(npc);
+            guiBookGeneric.addToFirstAvailableWord(itemStack);
+        }
 
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiLineGeneric page2Line1 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Timberman Franky #36");
-        npc.setItemMeta(itemMeta);
-        page2Line1.addWord(npc);
+        return guiBookGeneric;
+    }
 
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GREEN + "Forest Fairy #37");
-        npc.setItemMeta(itemMeta);
-        page2Line1.addWord(npc);
+    public static GuiBookGeneric compassNPCs() {
+        GuiBookGeneric guiBookGeneric = new GuiBookGeneric(ChatColor.DARK_GRAY + "Compass NPCs", 0);
 
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiLineGeneric page2Line2 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Pastry Chef Jasper #38");
-        npc.setItemMeta(itemMeta);
-        page2Line2.addWord(npc);
+        NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
+        for (int i = 100; i < 1000; i++) {
+            NPC byId = npcRegistry.getById(i);
 
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiPage page2 = new GuiPage();
-        GuiLineGeneric page2Line3 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Captain Lenna #39");
-        npc.setItemMeta(itemMeta);
-        page2Line3.addWord(npc);
+            if (byId == null) break;
 
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Sailor Skamkel #40");
-        npc.setItemMeta(itemMeta);
-        page2Line3.addWord(npc);
+            ItemStack itemStack = new ItemStack(Material.LIME_WOOL);
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Click to select your compass target!");
+            lore.add("");
+            lore.add(ChatColor.GRAY + "If you dont have a compass this will give you one.");
+            itemMeta.setLore(lore);
 
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiLineGeneric page2Line4 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.AQUA + "Ashild #41");
-        npc.setItemMeta(itemMeta);
-        page2Line4.addWord(npc);
+            itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + byId.getName() + " #" + i);
+            itemStack.setItemMeta(itemMeta);
 
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiLineGeneric page2Line5 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.DARK_AQUA + "Commander Erwin #42");
-        npc.setItemMeta(itemMeta);
-        page2Line5.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiLineGeneric page3Line1 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Archaeologist Robin #43");
-        npc.setItemMeta(itemMeta);
-        page3Line1.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiLineGeneric page3Line2 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Raignald #44");
-        npc.setItemMeta(itemMeta);
-        page3Line2.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Iohne #45");
-        npc.setItemMeta(itemMeta);
-        page3Line2.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GOLD + "Guardian Afra #46");
-        npc.setItemMeta(itemMeta);
-        page3Line2.addWord(npc);
-
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiPage page3 = new GuiPage();
-        GuiLineGeneric page3Line3 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Gatekeeper #47");
-        npc.setItemMeta(itemMeta);
-        page3Line3.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiLineGeneric page3Line4 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Vruhag #48");
-        npc.setItemMeta(itemMeta);
-        page3Line4.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        GuiLineGeneric page3Line5 = new GuiLineGeneric();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Archangel #49");
-        npc.setItemMeta(itemMeta);
-        page3Line5.addWord(npc);
-
-        npc = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.BLUE + "Eohr #50");
-        npc.setItemMeta(itemMeta);
-        page3Line5.addWord(npc);
-
-        page1.addLine(page1Line1);
-        page1.addLine(page1Line2);
-        page1.addLine(page1Line3);
-        page1.addLine(page1Line4);
-        page1.addLine(page1Line5);
-
-        page2.addLine(page2Line1);
-        page2.addLine(page2Line2);
-        page2.addLine(page2Line3);
-        page2.addLine(page2Line4);
-        page2.addLine(page2Line5);
-
-        page3.addLine(page3Line1);
-        page3.addLine(page3Line2);
-        page3.addLine(page3Line3);
-        page3.addLine(page3Line4);
-        page3.addLine(page3Line5);
-
-        guiBookGeneric.addPage(page1);
-        guiBookGeneric.addPage(page2);
-        guiBookGeneric.addPage(page3);
+            guiBookGeneric.addToFirstAvailableWord(itemStack);
+        }
 
         return guiBookGeneric;
     }

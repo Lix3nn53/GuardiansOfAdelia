@@ -42,8 +42,10 @@ public class CompassManager {
         itemMeta.setDisplayName(ChatColor.BLUE + "Compass " + ChatColor.WHITE + "( " + locationName + ChatColor.WHITE + " )");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "Right click while holding to select compass target");
-        lore.add(ChatColor.DARK_GRAY + "Location: #" + locationName);
+        lore.add(ChatColor.GRAY + "Right click while holding this item");
+        lore.add(ChatColor.GRAY + "to change compass target.");
+        lore.add("");
+        lore.add(ChatColor.DARK_GRAY + "Target: " + locationName);
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
         InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.COMPASS, 1);
