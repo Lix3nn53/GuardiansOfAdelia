@@ -574,16 +574,19 @@ public class MyInventoryClickEvent implements Listener {
 
                 Town town = TownManager.getTown(i);
                 CompassManager.setCompassItemLocation(player, ChatColor.AQUA + town.getName(), town.getLocation());
+                player.closeInventory();
             } else if (title.contains("Dungeon Gates")) {
                 String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
                 Location portalLocationOfDungeonTheme = MiniGameManager.getPortalLocationOfDungeonTheme(split[1]);
                 CompassManager.setCompassItemLocation(player, split[0], portalLocationOfDungeonTheme);
+                player.closeInventory();
             } else if (title.contains("NPCs")) {
                 String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
                 CompassManager.setCompassItemNPC(player, i);
+                player.closeInventory();
             } else {
                 if (currentType.equals(Material.LIGHT_BLUE_WOOL)) { //towns
                     GuiBookGeneric guiBookGeneric = MenuList.compassTowns();

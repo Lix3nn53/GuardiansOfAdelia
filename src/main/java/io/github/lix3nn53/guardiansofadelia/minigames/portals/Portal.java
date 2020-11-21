@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.portals;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
@@ -12,11 +13,13 @@ import org.bukkit.util.EulerAngle;
 public class Portal {
     private final Location baseLocation;
     private final PortalColor portalColor;
+    private final String title;
     private ArmorStand armorStand;
 
-    public Portal(Location baseLocation, PortalColor portalColor) {
+    public Portal(Location baseLocation, PortalColor portalColor, String title) {
         this.baseLocation = baseLocation;
         this.portalColor = portalColor;
+        this.title = title;
     }
 
     public void createModel() {
@@ -40,6 +43,9 @@ public class Portal {
         armorStand.setVisible(false);
         armorStand.setInvulnerable(true);
         armorStand.setGravity(false);
+        armorStand.setCustomNameVisible(true);
+        String s = ChatColor.translateAlternateColorCodes('&', title);
+        armorStand.setCustomName(s);
     }
 
     public Location getBaseLocation() {

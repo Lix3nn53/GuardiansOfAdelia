@@ -34,7 +34,7 @@ public class DungeonTheme {
 
     public DungeonTheme(String code, String name, String gearTag, int gearLevel, PortalColor portalColor, int levelReq, int timeLimitInMinutes, String bossInternalName) {
         this.code = code;
-        this.name = name;
+        this.name = ChatColor.translateAlternateColorCodes('&', name);
         this.gearTag = gearTag;
         this.gearLevel = gearLevel;
         this.portalColor = portalColor;

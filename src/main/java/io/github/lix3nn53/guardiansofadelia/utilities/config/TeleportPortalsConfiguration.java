@@ -53,7 +53,8 @@ public class TeleportPortalsConfiguration {
             float pitch = (float) current.getDouble("pitch");
             Location location = new Location(world, x, y, z, yaw, pitch);
             PortalColor portalColor = PortalColor.valueOf(current.getString("color"));
-            Portal portal = new Portal(location, portalColor);
+            String title = current.getString("title");
+            Portal portal = new Portal(location, portalColor, title);
 
             PortalManager.addPortal(portal);
 

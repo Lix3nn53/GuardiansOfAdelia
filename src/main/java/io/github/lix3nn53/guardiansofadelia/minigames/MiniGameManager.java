@@ -138,7 +138,7 @@ public class MiniGameManager {
 
     public static void addMinigamePortal(Location location, String dungeonThemeCode) {
         DungeonTheme dungeonTheme = dungeonThemes.get(dungeonThemeCode);
-        Portal portal = new Portal(location, dungeonTheme.getPortalColor());
+        Portal portal = new Portal(location, dungeonTheme.getPortalColor(), dungeonTheme.getName());
         portalToDungeonTheme.put(portal, dungeonThemeCode);
         PortalManager.addPortal(portal);
     }
