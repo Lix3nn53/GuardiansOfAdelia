@@ -1,7 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.sounds;
 
 import com.xxmicloxx.NoteBlockAPI.model.Playlist;
+import com.xxmicloxx.NoteBlockAPI.model.RepeatMode;
 import com.xxmicloxx.NoteBlockAPI.model.Song;
+import com.xxmicloxx.NoteBlockAPI.model.SoundCategory;
 import com.xxmicloxx.NoteBlockAPI.songplayer.RadioSongPlayer;
 import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
@@ -59,7 +61,8 @@ public class CustomSoundtrack {
 
         Playlist playlist = new Playlist(songs);
 
-        radioSongPlayer = new RadioSongPlayer(playlist);
+        radioSongPlayer = new RadioSongPlayer(playlist, SoundCategory.BLOCKS);
+        radioSongPlayer.setRepeatMode(RepeatMode.ALL);
     }
 
     public static void startPlayLoopForEveryone() {

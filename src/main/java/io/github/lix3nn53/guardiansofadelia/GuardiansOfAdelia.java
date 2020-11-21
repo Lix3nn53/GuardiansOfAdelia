@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSoundtrack;
+import io.github.lix3nn53.guardiansofadelia.sounds.MySongLoopEvent;
 import io.github.lix3nn53.guardiansofadelia.sounds.MySongNextEvent;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigManager;
@@ -96,6 +97,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MyProjectileLaunchEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyVehicleDestroyEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MySongNextEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MySongLoopEvent(), this);
 
         //init managers
         ConfigManager.init();
