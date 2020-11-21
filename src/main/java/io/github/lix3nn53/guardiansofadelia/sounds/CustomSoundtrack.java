@@ -1,20 +1,19 @@
 package io.github.lix3nn53.guardiansofadelia.sounds;
 
+import com.xxmicloxx.NoteBlockAPI.model.Playlist;
+import com.xxmicloxx.NoteBlockAPI.model.Song;
+import com.xxmicloxx.NoteBlockAPI.songplayer.RadioSongPlayer;
+import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * How to create soundtrack files:
@@ -28,40 +27,72 @@ import java.util.regex.Pattern;
 public class CustomSoundtrack {
 
     private static final List<String> songNames = new ArrayList<>();
+    private static final RadioSongPlayer radioSongPlayer;
+    private static int CURRENT_SONG_INDEX = 0;
+
+    /*
     private static final HashMap<String, Set<Integer>> songToTick = new HashMap<>();
     private static final HashMap<String, HashMap<Integer, List<Float>>> songToPitch = new HashMap<>();
     private static final HashMap<String, HashMap<Integer, List<Sound>>> songToSound = new HashMap<>();
-    private static final File DATA_FOLDER;
-    private static int CURRENT_SONG_INDEX;
+    */
 
     static {
         songNames.add("01 - Zelda - Ocarina of Time - Song of Storms");
-        songNames.add("02 - Zelda - Link's Awakening - Overworld Theme");
-        songNames.add("03 - Zelda - Link's Awakening - Mabe Village");
-        songNames.add("04 - Zelda - Ocarina of Time - Ending Theme");
+        songNames.add("02 - Zelda - Ocarina of Time - Zelda Medley");
 
         String filePath = GuardiansOfAdelia.getInstance().getDataFolder() + File.separator + "soundtracks";
-        DATA_FOLDER = new File(filePath);
+        File folder = new File(filePath);
 
-        for (String name : songNames) {
-            File songTextFile = new File(DATA_FOLDER, name + ".txt");
-            if (!songTextFile.exists()) {
-                GuardiansOfAdelia.getInstance().saveResource(name + ".txt", false);
+        Song[] songs = new Song[songNames.size()];
+
+        for (int i = 0; i < songNames.size(); i++) {
+            String songName = songNames.get(i);
+            File songFile = new File(folder, songName + ".nbs");
+
+            if (!songFile.exists()) {
+                GuardiansOfAdelia.getInstance().saveResource(songName + ".nbs", false);
             }
+
+            Song song = NBSDecoder.parse(songFile);
+            songs[i] = song;
         }
 
-        loadSongs();
+        Playlist playlist = new Playlist(songs);
+
+        radioSongPlayer = new RadioSongPlayer(playlist);
     }
 
     public static void startPlayLoopForEveryone() {
-        CURRENT_SONG_INDEX = 0;
-        play(CURRENT_SONG_INDEX);
-        GuardiansOfAdelia.getInstance().getLogger().info("Start soundtrack loop");
+        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+        for (Player player : onlinePlayers) {
+            radioSongPlayer.addPlayer(player);
+        }
+
+        radioSongPlayer.playSong(CURRENT_SONG_INDEX);
+        radioSongPlayer.setPlaying(true);
     }
+
+    public static void addPlayer(Player player) {
+        radioSongPlayer.addPlayer(player);
+        sendCurrentSongMessage(player);
+    }
+
 
     public static void sendCurrentSongMessage(Player player) {
         String songName = songNames.get(CURRENT_SONG_INDEX);
         player.sendMessage(ChatColor.YELLOW + "Now playing: " + ChatColor.GOLD + songName);
+    }
+
+    protected static void onSongEnd() {
+        radioSongPlayer.setPlaying(false);
+
+        //DELAYED TASKS
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                playNextForEveryone();
+            }
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 25L);
     }
 
     private static void playNextForEveryone() {
@@ -73,6 +104,19 @@ public class CustomSoundtrack {
         play(CURRENT_SONG_INDEX);
     }
 
+    private static void play(int index) {
+        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+
+        String songName = songNames.get(index);
+        for (Player player : onlinePlayers) {
+            player.sendMessage(ChatColor.YELLOW + "Now playing: " + ChatColor.GOLD + songName);
+        }
+
+        radioSongPlayer.playSong(CURRENT_SONG_INDEX);
+        radioSongPlayer.setPlaying(true);
+    }
+
+    /*
     private static void play(int index) {
         Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
 
@@ -121,11 +165,13 @@ public class CustomSoundtrack {
             loadSongFromFile(songName);
         }
     }
+    */
 
     /**
      * convert playing.mcfunction file generated by NoteBlockStudio(https://github.com/HielkeMinecraft/OpenNoteBlockStudio)
      * to txt file then use it here
      */
+    /*
     private static void loadSongFromFile(String songName) {
         List<String> strings = readTxtLines(songName + ".txt");
 
@@ -252,4 +298,5 @@ public class CustomSoundtrack {
 
         return lines;
     }
+    */
 }

@@ -15,6 +15,7 @@ depend:
   - WorldEdit
   - WorldGuard
   - MythicMobs
+  - NoteBlockAPI
 commands:
   admin:
     description: Admin command

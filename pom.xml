@@ -158,5 +158,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/modules/MythicMobs-4.10.0-SNAPSHOT.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.xxmicloxx</groupId>
+            <artifactId>NoteblockAPI</artifactId>
+            <version>1.6.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/modules/NoteBlockAPI-1.6.1.1-SNAPSHOT.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
