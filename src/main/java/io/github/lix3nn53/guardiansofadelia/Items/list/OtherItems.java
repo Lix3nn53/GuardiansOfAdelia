@@ -64,6 +64,7 @@ public class OtherItems {
         } else if (tier == 5) {
             lore.add(ChatColor.GRAY + "Restores 1200 health");
         }
+        itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
