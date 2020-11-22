@@ -116,10 +116,6 @@ public class MiniGameManager {
         return codeToDungeon.get(dungeonTheme + roomNo);
     }
 
-    public static DungeonRoom getDungeonRoom(String code) {
-        return codeToDungeon.get(code);
-    }
-
     public static boolean dungeonExists(String dungeonTheme, int roomNo) {
         return codeToDungeon.containsKey(dungeonTheme + roomNo);
     }

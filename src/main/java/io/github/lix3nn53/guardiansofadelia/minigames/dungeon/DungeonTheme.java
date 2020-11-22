@@ -107,10 +107,27 @@ public class DungeonTheme {
     public GuiGeneric getJoinQueueGui() {
         GuiGeneric guiGeneric = new GuiGeneric(27, "Join dungeon: " + name + " #" + code, 0);
 
-        DungeonRoom dungeonRoom = MiniGameManager.getDungeonRoom(code, 1);
+        int slotNo = 9;
+        for (int i = 1; i < 100; i++) {
+            DungeonRoom dungeonRoom = MiniGameManager.getDungeonRoom(code, i);
+            if (dungeonRoom == null) {
+                break;
+            }
+            ItemStack itemStack = generateRoomItem(dungeonRoom);
+            guiGeneric.setItem(slotNo, itemStack);
+
+            slotNo = slotNo + 2;
+        }
+
+        return guiGeneric;
+    }
+
+
+    private ItemStack generateRoomItem(DungeonRoom dungeonRoom) {
+
         ItemStack room = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = room.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #1 (" + dungeonRoom.getPlayersInGameSize() + "/" + dungeonRoom.getMaxPlayerSize() + ")");
+        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #" + dungeonRoom.getRoomNo() + " (" + dungeonRoom.getPlayersInGameSize() + "/" + dungeonRoom.getMaxPlayerSize() + ")");
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + dungeonRoom.getLevelReq());
@@ -130,43 +147,8 @@ public class DungeonTheme {
             room.setType(Material.RED_WOOL);
         }
         room.setItemMeta(itemMeta);
-        guiGeneric.setItem(9, room);
 
-        dungeonRoom = MiniGameManager.getDungeonRoom(code, 2);
-        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #2 (" + dungeonRoom.getPlayersInGameSize() + "/" + dungeonRoom.getMaxPlayerSize() + ")");
-        room.setItemMeta(itemMeta);
-
-        room.setType(Material.LIME_WOOL);
-        if (dungeonRoom.isInGame()) {
-            room.setType(Material.RED_WOOL);
-        }
-        room.setItemMeta(itemMeta);
-        guiGeneric.setItem(11, room);
-
-        /*TODO disabled room 3 and 4 of dungeons for maintainability, stay this way?
-        dungeon = MiniGameManager.getDungeon(this, 3);
-        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #3 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
-        room.setItemMeta(itemMeta);
-
-        room.setType(Material.LIME_WOOL);
-        if (dungeon.isInGame()) {
-            room.setType(Material.RED_WOOL);
-        }
-        room.setItemMeta(itemMeta);
-        guiGeneric.setItem(13, room);
-
-        dungeon = MiniGameManager.getDungeon(this, 4);
-        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #4 (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
-        room.setItemMeta(itemMeta);
-
-        room.setType(Material.LIME_WOOL);
-        if (dungeon.isInGame()) {
-            room.setType(Material.RED_WOOL);
-        }
-        room.setItemMeta(itemMeta);
-        guiGeneric.setItem(15, room);*/
-
-        return guiGeneric;
+        return room;
     }
 
     public PortalColor getPortalColor() {

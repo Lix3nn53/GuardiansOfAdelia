@@ -154,7 +154,9 @@ public class DungeonConfiguration {
     private static void loadDungeonRooms() {
         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
         for (String themeCode : dungeonThemes.keySet()) {
-            for (int i = 1; i <= 2; i++) { //loading first 2 room of each dungeon
+            int roomCount = getChildComponentCount(dungeonRoomsConfig, themeCode);
+
+            for (int i = 1; i <= roomCount; i++) {
                 String code = themeCode + i;
                 String worldString = dungeonRoomsConfig.getString(code + ".world");
                 World world = Bukkit.getWorld(worldString);

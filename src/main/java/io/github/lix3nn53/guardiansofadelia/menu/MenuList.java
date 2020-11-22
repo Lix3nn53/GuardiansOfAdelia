@@ -691,7 +691,7 @@ public class MenuList {
         GuiBookGeneric guiBookGeneric = new GuiBookGeneric(ChatColor.DARK_GRAY + "Compass NPCs", 0);
 
         NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
-        for (int i = 100; i < 1000; i++) {
+        for (int i = 120; i < 1000; i++) {
             NPC byId = npcRegistry.getById(i);
 
             if (byId == null) break;
