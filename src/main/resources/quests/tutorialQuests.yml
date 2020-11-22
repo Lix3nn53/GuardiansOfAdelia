@@ -46,7 +46,7 @@ quest2:
   advancementMaterial: "RED_NETHER_BRICKS"
   task1:
     taskType: "TaskKill"
-    mobKey: "TUTORIAL_1"
+    mobKey: "TutorialSoldier"
     amountNeeded: 5
 quest3:
   questID: 3
@@ -69,7 +69,7 @@ quest3:
   advancementMaterial: "RED_NETHER_BRICKS"
   task1:
     taskType: "TaskKill"
-    mobKey: "TUTORIAL_2"
+    mobKey: "TutorialArcher"
     amountNeeded: 5
   itemPrize1:
     itemType: "Passive"
@@ -128,7 +128,7 @@ quest4:
   advancementMaterial: "RED_NETHER_BRICKS"
   task1:
     taskType: "TaskDealDamage"
-    mobKey: "TUTORIAL_BOSS"
+    mobKey: "TutorialBoss"
     damageNeeded: 200
   onCompleteAction1:
     actionType: "InvincibleGiveAction"
@@ -142,11 +142,11 @@ quest4:
     actionType: "TeleportAction"
     delay: 10
     world: "world"
-    x: -3018.5
-    y: 95.5
-    z: 4920
-    yaw: -175.6
-    pitch: -9.2
+    x: 2003.5
+    y: 150.5
+    z: 1312
+    yaw: -89.6
+    pitch: 13.2
   onCompleteAction4:
     actionType: "ClearPotionEffectAction"
     potionEffectType: "WITHER"
@@ -165,7 +165,7 @@ quest4:
 quest5:
   questID: 5
   npcToTakeFrom: 0
-  npcToComplete: 31
+  npcToComplete: 100
   name: "To the rescue"
   story:
     - "You woke up from a dream of the past. In that dream,"

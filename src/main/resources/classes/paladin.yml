@@ -23,6 +23,8 @@ weaponGearTypes:
 armorGearTypes:
   - "EARTH_ARMOR"
   - "FIRE_ARMOR"
+shieldGearTypes:
+  - "SHIELD"
 hasDefaultOffhand: true
 isDefaultOffhandWeapon: false
 skillOne:

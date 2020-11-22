@@ -7,40 +7,40 @@
 town1:
   name: Roumen
   world: world
-  x: -2998
-  y: 71.0
-  z: 4893.5
+  x: 2065.5
+  y: 130.5
+  z: 1311.5
   yaw: -157
   pitch: -1.5
 town2:
   name: Port Veloa
   world: world
-  x: -2596.5
-  y: 66.0
-  z: 4778.5
+  x: 2065.5
+  y: 130.5
+  z: 1311.5
   yaw: -0.5
   pitch: -3.5
 town3:
   name: Elderine
   world: world
-  x: -2041.5
-  y: 65.0
-  z: 4168.5
+  x: 2065.5
+  y: 130.5
+  z: 1311.5
   yaw: 53
   pitch: -4.5
 town4:
   name: Uruga
   world: world
-  x: -2402
-  y: 67.0
-  z: 2647.5
+  x: 2065.5
+  y: 130.5
+  z: 1311.5
   yaw: -25
   pitch: -4
 town5:
   name: Alberstol Ruins
   world: world
-  x: -4811.5
-  y: 106.0
-  z: 2245.5
+  x: 2065.5
+  y: 130.5
+  z: 1311.5
   yaw: -60
   pitch: -1

@@ -5,15 +5,10 @@
 # ---------------------------------------------- #
 
 egg1:
-  mythicMobCode: "dsfdsfdsf"
-  customModelData: 1
+  mythicMobCode: "CatAllBlack"
+  customModelData: 6
   itemTier: "COMMON"
 egg2:
-  mythicMobCode: "sdfsdfdsf"
+  mythicMobCode: "ZombiePet"
   customModelData: 2
   itemTier: "RARE"
-egg3:
-  mythicMobCode: "sdfdsfsdf"
-  customModelData: 2
-  itemTier: "RARE"
-  mountSpeed: 0.24
