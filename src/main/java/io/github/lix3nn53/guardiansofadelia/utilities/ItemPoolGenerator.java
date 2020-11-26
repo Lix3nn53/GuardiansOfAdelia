@@ -20,9 +20,6 @@ import java.util.List;
 
 public class ItemPoolGenerator {
 
-    // TODO fix ItemPoolGenerator
-
-
     public static List<ItemStack> generateWeapons(ItemTier tier, String itemTag, int gearLevel, int itemIndex) {
         List<ItemStack> temp = new ArrayList<>();
 

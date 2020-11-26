@@ -132,8 +132,6 @@ public class MyPlayerInteractEntityEvent implements Listener {
                                 itemInMainHand.setAmount(amount - 1);
                             }
                         }
-                    } else if (PersistentDataContainerUtil.hasString(itemInMainHand, "boostCode")) {
-                        //TODO boostcode? whats this here
                     }
                 } else if (rightClicked.isCustomNameVisible()) {
                     UUID uniqueId = player.getUniqueId();

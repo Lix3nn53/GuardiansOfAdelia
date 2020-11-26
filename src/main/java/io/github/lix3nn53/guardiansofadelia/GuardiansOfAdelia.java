@@ -127,31 +127,46 @@ public class GuardiansOfAdelia extends JavaPlugin {
 
         for (World w : Bukkit.getServer().getWorlds()) {
             w.setDifficulty(Difficulty.HARD);
+            w.setPVP(false);
             w.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
+            w.setGameRule(GameRule.COMMAND_BLOCK_OUTPUT, true); //DEFAULT
             w.setGameRule(GameRule.DISABLE_ELYTRA_MOVEMENT_CHECK, true);
+            w.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true); //DEFAULT
             w.setGameRule(GameRule.DO_ENTITY_DROPS, false);
             w.setGameRule(GameRule.DO_FIRE_TICK, false);
+            w.setGameRule(GameRule.DO_LIMITED_CRAFTING, false); //DEFAULT
             w.setGameRule(GameRule.DO_MOB_LOOT, false);
             w.setGameRule(GameRule.DO_MOB_SPAWNING, false);
             w.setGameRule(GameRule.DO_TILE_DROPS, false);
-            w.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
+            w.setGameRule(GameRule.DO_WEATHER_CYCLE, true); //DEFAULT
             w.setGameRule(GameRule.KEEP_INVENTORY, true);
+            w.setGameRule(GameRule.LOG_ADMIN_COMMANDS, true); //DEFAULT
             w.setGameRule(GameRule.MOB_GRIEFING, false);
             w.setGameRule(GameRule.NATURAL_REGENERATION, false);
-            w.setGameRule(GameRule.SHOW_DEATH_MESSAGES, false);
-            w.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
+            w.setGameRule(GameRule.REDUCED_DEBUG_INFO, false); //DEFAULT
+            w.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, true); //DEFAULT
+            w.setGameRule(GameRule.SHOW_DEATH_MESSAGES, true); //DEFAULT
+            w.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, false);
             w.setGameRule(GameRule.DISABLE_RAIDS, true);
+            w.setGameRule(GameRule.DO_INSOMNIA, false);
+            w.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
+            w.setGameRule(GameRule.DROWNING_DAMAGE, true); //DEFAULT
+            w.setGameRule(GameRule.FALL_DAMAGE, true); //DEFAULT
+            w.setGameRule(GameRule.FIRE_DAMAGE, true); //DEFAULT
             w.setGameRule(GameRule.DO_PATROL_SPAWNING, false);
             w.setGameRule(GameRule.DO_TRADER_SPAWNING, false);
+            w.setGameRule(GameRule.FORGIVE_DEAD_PLAYERS, false); //Makes angered neutral mobs stop being angry when the targeted player dies nearby
+            w.setGameRule(GameRule.UNIVERSAL_ANGER, true); //Makes angered neutral mobs attack any nearby player, not just the player that angered them. Works best if forgiveDeadPlayers is disabled.
+            w.setGameRule(GameRule.RANDOM_TICK_SPEED, 0); //DISABLED
+            w.setGameRule(GameRule.SPAWN_RADIUS, 10); //DEFAULT
+            w.setGameRule(GameRule.MAX_ENTITY_CRAMMING, 24); //DEFAULT
+            w.setGameRule(GameRule.MAX_COMMAND_CHAIN_LENGTH, 0); //DISABLED
             w.setTime(3000);
+
             if (w.getName().equals("arena")) {
                 w.setPVP(true);
                 w.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
-            } else if (w.getName().equals("world")) {
-                w.setPVP(false);
-                w.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
-            } else {
-                w.setPVP(false);
+            } else if (w.getName().equals("tutorial")) {
                 w.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
                 if (w.getName().equals("tutorial")) {
                     w.setTime(18000);
@@ -253,7 +268,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
     }
 
     private void startGlobalManaRegen(double maxManaPercent) {
-        double manaPercent = 0.05;
+        double manaPercent = 0.1;
 
         new BukkitRunnable() {
             @Override

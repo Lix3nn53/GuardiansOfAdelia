@@ -731,7 +731,7 @@ public class MenuList {
     }
 
     public static GuiGeneric bazaar(Player player) {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Bazaar", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.GOLD + "Bazaar", 0);
 
         ItemStack info = new ItemStack(Material.YELLOW_WOOL);
         ItemMeta itemMeta = info.getItemMeta();
