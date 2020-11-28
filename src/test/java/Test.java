@@ -13,7 +13,11 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException, SQLException {
 
-        for (int mobLevel = 1; mobLevel <= 10; mobLevel++) {
+        for (int level = 1; level <= 90; level++) {
+            int price = (int) Math.max(1, Math.pow(level, 1.12) / 4 + 0.5);
+            System.out.println("level " + level + ": " + price);
+        }
+        /*for (int mobLevel = 1; mobLevel <= 10; mobLevel++) {
             for (int playerLevel = 1; playerLevel <= 20; playerLevel++) {
                 System.out.println("mobLevel: " + mobLevel);
                 System.out.println("playerLevel: " + playerLevel);
@@ -40,7 +44,7 @@ public class Test {
                 if (exp == 0) exp = 1;
                 System.out.println(exp);
             }
-        }
+        }*/
         /*LocalDate localDate = LocalDate.now().with(ChronoField.DAY_OF_MONTH, 7);
         boolean dateInCurrentWeek = DateUtils.isDateInCurrentWeek(localDate);
 

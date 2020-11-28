@@ -14,11 +14,10 @@ import java.util.List;
 
 public class GearArmor implements RPGGear {
 
-    private final ItemTier tier;
     private final String itemTag;
     private final int level;
-    private ItemStack itemStack;
-    private ArmorGearType gearType;
+    private final ItemStack itemStack;
+    private final ArmorGearType gearType;
 
     public GearArmor(String name, ItemTier tier, String itemTag, Material material, int level, ArmorGearType gearType, int health,
                      int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats) {
@@ -64,9 +63,10 @@ public class GearArmor implements RPGGear {
         lore.add(tier.getTierString());
 
         this.itemStack = new ItemStack(material);
-        this.itemStack = RPGItemUtils.resetArmor(this.itemStack);
+        RPGItemUtils.resetArmor(this.itemStack);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
         PersistentDataContainerUtil.putString("gearType", gearType.toString(), this.itemStack);
+        PersistentDataContainerUtil.putString("itemTier", tier.toString(), this.itemStack);
         PersistentDataContainerUtil.putInteger("health", health, this.itemStack);
         PersistentDataContainerUtil.putInteger("defense", defense, this.itemStack);
         PersistentDataContainerUtil.putInteger("magicDefense", magicDefense, this.itemStack);
@@ -94,7 +94,6 @@ public class GearArmor implements RPGGear {
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         this.itemStack.setItemMeta(itemMeta);
 
-        this.tier = tier;
         this.itemTag = itemTag;
         this.level = level;
         this.gearType = gearType;
@@ -107,11 +106,6 @@ public class GearArmor implements RPGGear {
 
     public ArmorGearType getGearType() {
         return gearType;
-    }
-
-    @Override
-    public ItemTier getTier() {
-        return tier;
     }
 
     @Override

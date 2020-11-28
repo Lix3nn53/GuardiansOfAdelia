@@ -1,9 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantManager;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -97,10 +99,22 @@ public class SellGui extends GuiGeneric {
     }
 
     private int getSellValue(ItemStack itemStack) {
-        int gearLevelOfItem = GearLevel.getGearLevel(itemStack);
-        int multiplier = gearLevelOfItem;
+        int reqLevel = 1;
+        if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
+            reqLevel = PersistentDataContainerUtil.getInteger(itemStack, "reqLevel");
+        }
+        double price = Math.max(1, Math.pow(reqLevel, 1.12) / 4);
 
-        return (int) ((multiplier * multiplier) + 0.5) * itemStack.getAmount();
+        ItemTier itemTier = ItemTier.COMMON;
+        if (PersistentDataContainerUtil.hasString(itemStack, "itemTier")) {
+            itemTier = ItemTier.valueOf(PersistentDataContainerUtil.getString(itemStack, "itemTier"));
+        }
+        price = price * itemTier.getBonusMultiplier() + 0.5;
+
+        int enchantLevel = EnchantManager.getEnchantLevel(itemStack);
+        price = price * EnchantManager.getSellGuiMultiplier(enchantLevel);
+
+        return (int) (price * itemStack.getAmount() + 0.5);
     }
 
     public void finish(Player player) {

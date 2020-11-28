@@ -19,8 +19,8 @@ import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
-import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
-import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardInfo;
+import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
+import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.CharacterInfoSlot;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
@@ -44,11 +44,11 @@ public class MenuList {
     public static GuiGeneric mainMenu() {
         GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.DARK_GRAY + "Guardians of Adelia", 0);
 
-        ItemStack compass = new ItemStack(Material.STONE_PICKAXE);
+        ItemStack compass = new ItemStack(Material.WOODEN_PICKAXE);
         ItemMeta itemMeta = compass.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(23);
+        itemMeta.setCustomModelData(27);
         itemMeta.setDisplayName(ChatColor.BLUE + "Compass");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
@@ -58,8 +58,8 @@ public class MenuList {
         compass.setItemMeta(itemMeta);
         guiGeneric.setItem(12, compass);
 
-        ItemStack map = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(26);
+        ItemStack map = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(24);
         itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Maps");
         lore = new ArrayList<>();
         lore.add("");
@@ -68,8 +68,8 @@ public class MenuList {
         map.setItemMeta(itemMeta);
         guiGeneric.setItem(14, map);
 
-        ItemStack character = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(40);
+        ItemStack character = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(2);
         itemMeta.setDisplayName(ChatColor.GREEN + "Character");
         lore = new ArrayList<>();
         lore.add("");
@@ -78,8 +78,8 @@ public class MenuList {
         character.setItemMeta(itemMeta);
         guiGeneric.setItem(10, character);
 
-        ItemStack guild = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(25);
+        ItemStack guild = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(9);
         itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Guild");
         lore = new ArrayList<>();
         lore.add("");
@@ -88,8 +88,8 @@ public class MenuList {
         guild.setItemMeta(itemMeta);
         guiGeneric.setItem(16, guild);
 
-        ItemStack minigames = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(29);
+        ItemStack minigames = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(25);
         itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Minigames");
         lore = new ArrayList<>();
         lore.add("");
@@ -98,8 +98,8 @@ public class MenuList {
         minigames.setItemMeta(itemMeta);
         guiGeneric.setItem(32, minigames);
 
-        ItemStack bazaar = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(27);
+        ItemStack bazaar = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(3);
         itemMeta.setDisplayName(ChatColor.GOLD + "Bazaar");
         lore = new ArrayList<>();
         lore.add("");
@@ -108,8 +108,8 @@ public class MenuList {
         bazaar.setItemMeta(itemMeta);
         guiGeneric.setItem(30, bazaar);
 
-        ItemStack activeBoosts = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(38);
+        ItemStack activeBoosts = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(28);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Server Boosts");
         lore = new ArrayList<>();
         lore.add("");
@@ -118,8 +118,8 @@ public class MenuList {
         activeBoosts.setItemMeta(itemMeta);
         guiGeneric.setItem(48, activeBoosts);
 
-        ItemStack donation = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(28);
+        ItemStack donation = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(10);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "WebStore ♥");
         lore = new ArrayList<>();
         lore.add("");
@@ -135,7 +135,7 @@ public class MenuList {
     public static GuiGeneric character(GuardianData guardianData) {
         GuiGeneric guiGeneric = new GuiGeneric(27, "Character", 0);
 
-        ItemStack skills = new ItemStack(Material.STONE_PICKAXE);
+        ItemStack skills = new ItemStack(Material.WOODEN_PICKAXE);
         String rpgClassStr = guardianData.getActiveCharacter().getRpgClassStr();
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         int classIconCustomModelData = rpgClass.getClassIconCustomModelData();
@@ -153,7 +153,7 @@ public class MenuList {
         skills.setItemMeta(itemMeta);
         guiGeneric.setItem(9, skills);
 
-        itemMeta.setCustomModelData(31);
+        itemMeta.setCustomModelData(29);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Skills");
@@ -164,8 +164,8 @@ public class MenuList {
         skills.setItemMeta(itemMeta);
         guiGeneric.setItem(11, skills);
 
-        ItemStack elements = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(37);
+        ItemStack elements = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(6);
         itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Elements");
         lore = new ArrayList<>();
         lore.add("");
@@ -175,9 +175,9 @@ public class MenuList {
         elements.setItemMeta(itemMeta);
         guiGeneric.setItem(13, elements);
 
-        ItemStack job = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(30);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Job");
+        ItemStack job = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(21);
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Crafting");
         lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.GRAY + "Manage your character's job!");
@@ -185,8 +185,8 @@ public class MenuList {
         job.setItemMeta(itemMeta);
         guiGeneric.setItem(15, job);
 
-        ItemStack chat = new ItemStack(Material.STONE_PICKAXE);
-        itemMeta.setCustomModelData(33);
+        ItemStack chat = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(4);
         itemMeta.setDisplayName(ChatColor.AQUA + "Chat Tag");
         lore = new ArrayList<>();
         lore.add("");
@@ -227,7 +227,6 @@ public class MenuList {
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(1, itemStack);
 
-                itemMeta.setCustomModelData(32);
                 itemMeta.setDisplayName(ChatColor.GOLD + "Change Class");
                 lore.clear();
                 lore.add("");
@@ -479,8 +478,8 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric job(Player player) {
-        GuiGeneric guiGeneric = new GuiGeneric(45, ChatColor.DARK_GRAY + "Job", 0);
+    public static GuiGeneric crafting(Player player) {
+        GuiGeneric guiGeneric = new GuiGeneric(45, ChatColor.YELLOW + "Crafting", 0);
 
         UUID uuid = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uuid)) {
@@ -503,6 +502,7 @@ public class MenuList {
                     lore.add("Required Experience: " + craftingStats.getTotalRequiredExperience(currentLevel + 1));
 
                     lore.add("");
+                    lore.add(ChatColor.YELLOW + "How to craft?");
 
                     if (craftingType.equals(CraftingType.WEAPON_MELEE)) {
                         //slot = 10;

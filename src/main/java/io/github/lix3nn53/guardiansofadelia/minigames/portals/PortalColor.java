@@ -10,14 +10,14 @@ public enum PortalColor {
     public int getCustomModelData() {
         switch (this) {
             case GREEN:
-                return 7;
+                return 2;
             case ORANGE:
-                return 8;
+                return 3;
             case PURPLE:
-                return 9;
+                return 4;
             case RED:
-                return 10;
+                return 5;
         }
-        return 6;
+        return 1;
     }
 }

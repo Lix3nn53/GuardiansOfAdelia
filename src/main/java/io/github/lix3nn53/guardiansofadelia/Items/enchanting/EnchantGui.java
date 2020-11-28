@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -124,16 +125,7 @@ public class EnchantGui extends GuiGeneric {
             if (!enchantStone.getType().equals(Material.AIR) && !itemToEnchant.getType().equals(Material.AIR)) {
                 String name = enchantStone.getItemMeta().getDisplayName();
                 if (name.contains("Enchant Stone")) {
-                    int stoneLevel = 0;
-                    if (name.contains("1")) {
-                        stoneLevel = 1;
-                    } else if (name.contains("2")) {
-                        stoneLevel = 2;
-                    } else if (name.contains("3")) {
-                        stoneLevel = 3;
-                    } else if (name.contains("4")) {
-                        stoneLevel = 4;
-                    }
+                    int stoneLevel = PersistentDataContainerUtil.getInteger(enchantStone, "ench_stone");
                     int enchantLevel = EnchantManager.getEnchantLevel(itemToEnchant);
                     if (enchantLevel < 12) {
                         int requiredEnchantStoneLevel = EnchantManager.getRequiredEnchantStoneLevel(enchantLevel);

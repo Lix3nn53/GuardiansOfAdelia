@@ -6,7 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.portals.InstantTeleportPor
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
-import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
+import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;

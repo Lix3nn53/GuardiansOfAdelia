@@ -88,4 +88,34 @@ public class EnchantManager {
 
         return chance;
     }
+
+    public static double getSellGuiMultiplier(int enchantLevel) {
+        if (enchantLevel == 1) {
+            return 1;
+        } else if (enchantLevel == 2) {
+            return 1;
+        } else if (enchantLevel == 3) {
+            return 1;
+        } else if (enchantLevel == 4) {
+            return 1.1;
+        } else if (enchantLevel == 5) {
+            return 1.2;
+        } else if (enchantLevel == 6) {
+            return 1.3;
+        } else if (enchantLevel == 7) {
+            return 1.4;
+        } else if (enchantLevel == 8) {
+            return 1.6;
+        } else if (enchantLevel == 9) {
+            return 1.8;
+        } else if (enchantLevel == 10) {
+            return 2;
+        } else if (enchantLevel == 11) {
+            return 2.25;
+        } else if (enchantLevel == 12) {
+            return 2.5;
+        }
+
+        return 1;
+    }
 }

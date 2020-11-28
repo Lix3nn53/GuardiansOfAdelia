@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManag
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
+import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChestManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
 import net.citizensnpcs.api.CitizensAPI;
@@ -34,7 +35,7 @@ public class MyChunkEvents implements Listener {
             }
         }
 
-        createCustomEntitiesOnChunkLoad(chunk);
+        customEventsOnChunkLoad(chunk);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -58,6 +59,8 @@ public class MyChunkEvents implements Listener {
                 chunkEntity.remove();
             }
         }
+
+        customEventsOnChunkUnload(chunk);
     }
 
     private boolean shouldChunkEventRemove(Entity chunkEntity) {
@@ -76,13 +79,19 @@ public class MyChunkEvents implements Listener {
                 || type.equals(EntityType.PAINTING) || type.equals(EntityType.DROPPED_ITEM));
     }
 
-    private void createCustomEntitiesOnChunkLoad(Chunk chunk) {
+    private void customEventsOnChunkLoad(Chunk chunk) {
         String chunkKey = LocationUtils.getChunkKey(chunk.getBlock(0, 0, 0).getLocation());
-        //create bazaar models
+
         BazaarManager.onChunkLoad(chunkKey);
         TombManager.onChunkLoad(chunkKey);
         PortalManager.onChunkLoad(chunkKey);
         CheckpointManager.onChunkLoad(chunkKey);
         HologramManager.onChunkLoad(chunkKey);
+        LootChestManager.onChunkLoad(chunkKey);
+    }
+
+    private void customEventsOnChunkUnload(Chunk chunk) {
+        String chunkKey = LocationUtils.getChunkKey(chunk.getBlock(0, 0, 0).getLocation());
+        LootChestManager.onChunkUnload(chunkKey);
     }
 }

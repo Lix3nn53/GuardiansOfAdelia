@@ -14,7 +14,7 @@ public class Enchant {
 
     private final Player player;
     private final double MULTIPLIER = 1.05;
-    private ItemStack itemStack;
+    private final ItemStack itemStack;
     private int currentEnchantLevel;
 
     public Enchant(Player player, ItemStack itemStack) {
@@ -135,7 +135,7 @@ public class Enchant {
 
             if (type.equals(StatType.MELEE)) {
                 PersistentDataContainerUtil.putInteger("meleeDamage", nextValue, this.itemStack);
-                this.itemStack = RPGItemUtils.setDamage(itemStack, nextValue);
+                RPGItemUtils.setDamage(itemStack, nextValue);
             } else if (type.equals(StatType.HYBRID)) {
                 PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             } else if (type.equals(StatType.MAGICAL)) {
@@ -333,7 +333,7 @@ public class Enchant {
 
             if (type.equals(StatType.MELEE)) {
                 PersistentDataContainerUtil.putInteger("meleeDamage", nextValue, this.itemStack);
-                this.itemStack = RPGItemUtils.setDamage(itemStack, nextValue);
+                RPGItemUtils.setDamage(itemStack, nextValue);
             } else if (type.equals(StatType.HYBRID)) {
                 PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
             } else if (type.equals(StatType.MAGICAL)) {

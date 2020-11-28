@@ -15,9 +15,9 @@ import java.util.UUID;
 public class GuiGeneric implements Gui {
 
     private final int resourceNpcNo;
-    private Inventory inventory;
-    private List<Integer> fillableSlots = new ArrayList<>();
-    private List<Integer> itemSlots = new ArrayList<>();
+    private final Inventory inventory;
+    private final List<Integer> fillableSlots = new ArrayList<>();
+    private final List<Integer> itemSlots = new ArrayList<>();
     private boolean ownInventoryLocked = true;
     private boolean isLocked = true;
 

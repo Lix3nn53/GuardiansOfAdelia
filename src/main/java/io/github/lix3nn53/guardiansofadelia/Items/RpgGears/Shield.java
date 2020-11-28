@@ -15,10 +15,9 @@ import java.util.List;
 public class Shield implements RPGGear {
 
     private final ShieldGearType gearType;
-    private final ItemTier tier;
     private final String itemTag;
     private final int level;
-    private ItemStack itemStack;
+    private final ItemStack itemStack;
 
     public Shield(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, ShieldGearType gearType, int health,
                   int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats) {
@@ -64,9 +63,10 @@ public class Shield implements RPGGear {
         lore.add(tier.getTierString());
 
         this.itemStack = new ItemStack(material);
-        this.itemStack = RPGItemUtils.resetArmor(this.itemStack);
+        RPGItemUtils.resetArmor(this.itemStack);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
         PersistentDataContainerUtil.putString("gearType", gearType.toString(), this.itemStack);
+        PersistentDataContainerUtil.putString("itemTier", tier.toString(), this.itemStack);
         PersistentDataContainerUtil.putInteger("health", health, this.itemStack);
         PersistentDataContainerUtil.putInteger("defense", defense, this.itemStack);
         PersistentDataContainerUtil.putInteger("magicDefense", magicDefense, this.itemStack);
@@ -95,7 +95,6 @@ public class Shield implements RPGGear {
         itemMeta.setCustomModelData(customModelDataId);
         this.itemStack.setItemMeta(itemMeta);
 
-        this.tier = tier;
         this.itemTag = itemTag;
         this.level = level;
         this.gearType = gearType;
@@ -108,11 +107,6 @@ public class Shield implements RPGGear {
 
     public ShieldGearType getGearType() {
         return gearType;
-    }
-
-    @Override
-    public ItemTier getTier() {
-        return tier;
     }
 
     @Override

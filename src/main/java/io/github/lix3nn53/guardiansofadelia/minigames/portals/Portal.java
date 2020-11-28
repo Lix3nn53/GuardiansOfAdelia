@@ -33,7 +33,7 @@ public class Portal {
 
         this.armorStand = (ArmorStand) clone.getWorld().spawnEntity(clone, EntityType.ARMOR_STAND);
         armorStand.setHeadPose(eulerAngle);
-        ItemStack itemStack = new ItemStack(Material.IRON_PICKAXE);
+        ItemStack itemStack = new ItemStack(Material.WOODEN_SHOVEL);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setCustomModelData(this.portalColor.getCustomModelData());
         itemMeta.setUnbreakable(true);

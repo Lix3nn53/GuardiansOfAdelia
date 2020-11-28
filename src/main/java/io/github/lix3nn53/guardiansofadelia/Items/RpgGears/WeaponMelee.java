@@ -14,11 +14,10 @@ import java.util.List;
 
 public class WeaponMelee implements RPGGear {
 
-    private final ItemTier tier;
     private final String itemTag;
     private final int level;
     private final WeaponGearType gearType;
-    private ItemStack itemStack;
+    private final ItemStack itemStack;
 
     public WeaponMelee(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, WeaponGearType gearType, int damage,
                        AttackSpeed attackSpeed, int minStatValue, int maxStatValue, int minNumberOfStats) {
@@ -65,9 +64,10 @@ public class WeaponMelee implements RPGGear {
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
         PersistentDataContainerUtil.putString("gearType", gearType.toString(), this.itemStack);
+        PersistentDataContainerUtil.putString("itemTier", tier.toString(), this.itemStack);
 
-        this.itemStack = RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSpeedValue());
-        this.itemStack = RPGItemUtils.setDamage(this.itemStack, damage);
+        RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSpeedValue());
+        RPGItemUtils.setDamage(this.itemStack, damage);
 
         PersistentDataContainerUtil.putInteger("meleeDamage", damage, this.itemStack);
 
@@ -95,7 +95,6 @@ public class WeaponMelee implements RPGGear {
         itemMeta.setCustomModelData(customModelDataId);
         this.itemStack.setItemMeta(itemMeta);
 
-        this.tier = tier;
         this.itemTag = itemTag;
         this.level = level;
         this.gearType = gearType;
@@ -108,11 +107,6 @@ public class WeaponMelee implements RPGGear {
 
     public WeaponGearType getGearType() {
         return gearType;
-    }
-
-    @Override
-    public ItemTier getTier() {
-        return tier;
     }
 
     @Override

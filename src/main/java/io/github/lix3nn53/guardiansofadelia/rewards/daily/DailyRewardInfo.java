@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.rewards;
+package io.github.lix3nn53.guardiansofadelia.rewards.daily;
 
 import java.time.LocalDate;
 

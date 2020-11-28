@@ -11,7 +11,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
-import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
+import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -60,6 +61,12 @@ public class MyInventoryCloseEvent implements Listener {
                             ItemStack content = contents[i];
 
                             DailyRewardHandler.setReward(i, content);
+                        }
+                    } else if (title.contains(ChatColor.BLACK + "Loot Chest #")) {
+                        ItemStack[] contents = event.getInventory().getContents();
+                        for (ItemStack content : contents) {
+                            if (content == null) continue;
+                            InventoryUtils.giveItemToPlayer(player, content);
                         }
                     } else if (guardianData.hasBazaar()) {
                         if (title.equals(ChatColor.GOLD + "Edit your bazaar")) {

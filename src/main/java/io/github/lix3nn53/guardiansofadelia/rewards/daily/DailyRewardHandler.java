@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.rewards;
+package io.github.lix3nn53.guardiansofadelia.rewards.daily;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;

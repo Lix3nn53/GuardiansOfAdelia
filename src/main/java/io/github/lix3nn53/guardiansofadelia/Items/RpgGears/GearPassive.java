@@ -14,10 +14,9 @@ import java.util.List;
 
 public class GearPassive implements RPGGear {
 
-    private final ItemTier tier;
     private final String itemTag;
     private final int level;
-    private ItemStack itemStack;
+    private final ItemStack itemStack;
 
     public GearPassive(String name, ItemTier tier, String itemTag, int customModelData, RPGSlotType passiveType, int level,
                        int minStatValue, int maxStatValue, int minNumberOfStats) {
@@ -63,6 +62,7 @@ public class GearPassive implements RPGGear {
 
         this.itemStack = new ItemStack(Material.SHEARS);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
+        PersistentDataContainerUtil.putString("itemTier", tier.toString(), this.itemStack);
         PersistentDataContainerUtil.putString("passive", passiveType.name(), this.itemStack);
 
         if (finalFire != 0) {
@@ -89,7 +89,6 @@ public class GearPassive implements RPGGear {
         itemMeta.setCustomModelData(customModelData);
         this.itemStack.setItemMeta(itemMeta);
 
-        this.tier = tier;
         this.itemTag = itemTag;
         this.level = level;
     }
@@ -97,11 +96,6 @@ public class GearPassive implements RPGGear {
     @Override
     public ItemStack getItemStack() {
         return itemStack;
-    }
-
-    @Override
-    public ItemTier getTier() {
-        return tier;
     }
 
     @Override

@@ -19,9 +19,12 @@ import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChest;
+import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChestManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -216,8 +219,18 @@ public class MyPlayerInteractEvent implements Listener {
                             levelSelection.openInventory(player);
                         }
                     }
-                } else if (clickedBlockType.equals(Material.CHEST) || clickedBlockType.equals(Material.BARREL) || clickedBlockType.equals(Material.ENDER_CHEST)
-                        || clickedBlockType.equals(Material.TRAPPED_CHEST) || clickedBlockType.equals(Material.CHEST_MINECART) || clickedBlockType.equals(Material.CRAFTING_TABLE)) {
+                } else if (clickedBlockType.equals(Material.CHEST)) {
+                    //LOOT CHEST
+                    event.setCancelled(true);
+                    Location location = clickedBlock.getLocation();
+                    LootChest lootChest = LootChestManager.isLootChest(location);
+                    if (lootChest != null) {
+                        lootChest.openLootInventory(player);
+                    }
+                } else if (clickedBlockType.equals(Material.BARREL) || clickedBlockType.equals(Material.ENDER_CHEST)
+                        || clickedBlockType.equals(Material.TRAPPED_CHEST) || clickedBlockType.equals(Material.CHEST_MINECART)
+                        || clickedBlockType.equals(Material.CRAFTING_TABLE) || clickedBlockType.equals(Material.RESPAWN_ANCHOR)
+                        || clickedBlockType.equals(Material.LODESTONE)) {
                     event.setCancelled(true);
                 }
             }

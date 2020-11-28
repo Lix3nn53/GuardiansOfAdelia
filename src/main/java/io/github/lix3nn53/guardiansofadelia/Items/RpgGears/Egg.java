@@ -18,7 +18,6 @@ import java.util.List;
 
 public class Egg implements RPGGear {
 
-    private final ItemTier tier;
     private final String itemTag;
     private final int level;
     private final ItemStack itemStack;
@@ -60,6 +59,7 @@ public class Egg implements RPGGear {
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);
+        PersistentDataContainerUtil.putString("itemTier", tier.toString(), this.itemStack);
         PersistentDataContainerUtil.putString("petCode", petKey, this.itemStack);
         PersistentDataContainerUtil.putInteger("petExp", 0, this.itemStack);
         PersistentDataContainerUtil.putInteger("petCurrentHealth", health, this.itemStack);
@@ -72,7 +72,6 @@ public class Egg implements RPGGear {
         itemMeta.setCustomModelData(customModelData);
         this.itemStack.setItemMeta(itemMeta);
 
-        this.tier = tier;
         this.itemTag = itemTag;
         this.level = reqLevel;
     }
@@ -80,11 +79,6 @@ public class Egg implements RPGGear {
     @Override
     public ItemStack getItemStack() {
         return itemStack;
-    }
-
-    @Override
-    public ItemTier getTier() {
-        return tier;
     }
 
     @Override

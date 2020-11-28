@@ -61,36 +61,39 @@ public class MyPlayerInteractEntityEvent implements Listener {
         if (itemInMainHand.hasItemMeta()) {
             ItemMeta itemMeta = itemInMainHand.getItemMeta();
             if (itemMeta.hasDisplayName()) {
-                if (itemInMainHand.getType().equals(Material.LAPIS_LAZULI)) { //right click with pet-food
-                    String displayName = itemMeta.getDisplayName();
-                    LivingEntity livingEntity = (LivingEntity) rightClicked;
-                    if (PetManager.isPet(livingEntity)) {
-                        AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-                        double maxHealth = attribute.getValue();
-                        double currentHealth = livingEntity.getHealth();
-                        if (currentHealth < maxHealth) {
-                            int healAmount = 100;
-                            if (displayName.contains("2")) {
-                                healAmount = 200;
-                            } else if (displayName.contains("3")) {
-                                healAmount = 400;
-                            } else if (displayName.contains("4")) {
-                                healAmount = 800;
-                            } else if (displayName.contains("5")) {
-                                healAmount = 1200;
+                if (itemInMainHand.getType().equals(Material.BROWN_DYE)) { //right click with pet-food
+                    boolean pet_food = PersistentDataContainerUtil.hasInteger(itemInMainHand, "pet_food");
+                    if (pet_food) {
+                        int foodLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "pet_food");
+                        LivingEntity livingEntity = (LivingEntity) rightClicked;
+                        if (PetManager.isPet(livingEntity)) {
+                            AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+                            double maxHealth = attribute.getValue();
+                            double currentHealth = livingEntity.getHealth();
+                            if (currentHealth < maxHealth) {
+                                int healAmount = 100;
+                                if (foodLevel == 2) {
+                                    healAmount = 200;
+                                } else if (foodLevel == 3) {
+                                    healAmount = 400;
+                                } else if (foodLevel == 4) {
+                                    healAmount = 800;
+                                } else if (foodLevel == 5) {
+                                    healAmount = 1200;
+                                }
+                                double setHealthAmount = currentHealth + healAmount;
+                                if (setHealthAmount > maxHealth) {
+                                    setHealthAmount = maxHealth;
+                                }
+                                livingEntity.setHealth(setHealthAmount);
+                                int setHealthInt = (int) (setHealthAmount + 0.5);
+                                PetManager.onPetSetHealth(livingEntity, currentHealth, setHealthInt);
+                                int amount = itemInMainHand.getAmount();
+                                itemInMainHand.setAmount(amount - 1);
+                                ParticleUtil.play(livingEntity.getLocation().add(0, 1.2, 0), Particle.HEART, ParticleArrangement.CIRCLE, 1.2, 6, Direction.XZ, 0, 0, 0, 0, null);
+                            } else {
+                                player.sendMessage(ChatColor.RED + "Pet health is already full");
                             }
-                            double setHealthAmount = currentHealth + healAmount;
-                            if (setHealthAmount > maxHealth) {
-                                setHealthAmount = maxHealth;
-                            }
-                            livingEntity.setHealth(setHealthAmount);
-                            int setHealthInt = (int) (setHealthAmount + 0.5);
-                            PetManager.onPetSetHealth(livingEntity, currentHealth, setHealthInt);
-                            int amount = itemInMainHand.getAmount();
-                            itemInMainHand.setAmount(amount - 1);
-                            ParticleUtil.play(livingEntity.getLocation().add(0, 1.2, 0), Particle.HEART, ParticleArrangement.CIRCLE, 1.2, 6, Direction.XZ, 0, 0, 0, 0, null);
-                        } else {
-                            player.sendMessage(ChatColor.RED + "Pet health is already full");
                         }
                     }
                 } else if (itemInMainHand.getType().equals(Material.BLACK_DYE)) { //right click with premium item

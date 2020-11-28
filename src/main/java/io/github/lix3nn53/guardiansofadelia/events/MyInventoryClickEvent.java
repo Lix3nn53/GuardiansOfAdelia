@@ -3,7 +3,6 @@ package io.github.lix3nn53.guardiansofadelia.events;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
-import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.HelmetSkinApplyGui;
@@ -43,7 +42,7 @@ import io.github.lix3nn53.guardiansofadelia.npc.merchant.SellGui;
 import io.github.lix3nn53.guardiansofadelia.party.PartyInvite;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
-import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
+import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
@@ -284,11 +283,7 @@ public class MyInventoryClickEvent implements Listener {
                             enchantGui.startEnchanting(player);
                         }
                     } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
-                        List<Material> enchantStoneMaterials = new ArrayList<>();
-                        for (EnchantStone enchantStone : EnchantStone.values()) {
-                            enchantStoneMaterials.add(enchantStone.getType());
-                        }
-                        if (enchantStoneMaterials.contains(currentType)) {
+                        if (PersistentDataContainerUtil.hasInteger(current, "ench_stone")) {
                             enchantGui.setEnchantStone(current);
                         } else if (StatUtils.hasStatType(currentType)) {
                             if (currentType.equals(Material.SHEARS))
@@ -483,9 +478,9 @@ public class MyInventoryClickEvent implements Listener {
                 } else if (currentName.equals(ChatColor.DARK_GREEN + "Elements")) {
                     GuiGeneric element = MenuList.element(player);
                     element.openInventory(player);
-                } else if (currentName.equals(ChatColor.YELLOW + "Job")) {
-                    GuiGeneric job = MenuList.job(player);
-                    job.openInventory(player);
+                } else if (currentName.equals(ChatColor.YELLOW + "Crafting")) {
+                    GuiGeneric crafting = MenuList.crafting(player);
+                    crafting.openInventory(player);
                 } else if (currentName.equals(ChatColor.AQUA + "Chat Tag")) {
                     GuiGeneric chatTag = MenuList.chatTagQuests(player);
                     chatTag.openInventory(player);
@@ -682,9 +677,8 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        } else if (title.equals(ChatColor.DARK_GRAY + "Job")) {
-            //TODO click events on job menu?
-            //TODO change the name of job menu to crafting menu?
+        } else if (title.equals(ChatColor.YELLOW + "Crafting")) {
+            //TODO Do we need click listeners in crafting info menu?
         } else if (title.equals(ChatColor.DARK_GRAY + "Guild")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 if (currentName.equals(ChatColor.RED + "Join Guild War")) {

@@ -17,7 +17,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import io.github.lix3nn53.guardiansofadelia.rewards.DailyRewardHandler;
+import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChest;
+import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChestManager;
+import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChestTier;
+import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
@@ -32,6 +35,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -58,6 +62,7 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_PURPLE + "---- ADMIN ----");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin setstaff <player> [NONE|OWNER|ADMIN|DEVELOPER|BUILDER|SUPPORT|YOUTUBER|TRAINEE]");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin setdaily");
+                player.sendMessage(ChatColor.DARK_PURPLE + "/admin addlootchest [0-3 = tier]");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "---- UTILS ----");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/admin fly");
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "/admin speed <num>");
@@ -112,6 +117,23 @@ public class CommandLix implements CommandExecutor {
 
                 guiGeneric.setLocked(false);
                 guiGeneric.openInventory(player);
+            } else if (args[0].equals("addlootchest")) {
+                Block targetBlock = player.getTargetBlock(null, 12);
+
+                Material type = targetBlock.getType();
+
+                if (!type.equals(Material.CHEST)) {
+                    player.sendMessage(ChatColor.RED + "You must be looking to a chest");
+                    return false;
+                }
+
+                int tierIndex = Integer.parseInt(args[1]);
+
+                LootChestTier value = LootChestTier.values()[tierIndex];
+
+                LootChest lootChest = new LootChest(targetBlock.getLocation(), value);
+
+                LootChestManager.addLootChest(lootChest);
             } else if (args[0].equals("exp")) {
                 if (args.length == 3) {
                     int expToGive = Integer.parseInt(args[2]);
@@ -254,7 +276,7 @@ public class CommandLix implements CommandExecutor {
                     } else if (grade == 4) {
                         enchantStone = EnchantStone.TIER_FOUR;
                     }
-                    InventoryUtils.giveItemToPlayer(player, enchantStone.getItemSTack(amount));
+                    InventoryUtils.giveItemToPlayer(player, enchantStone.getItemStack(amount));
                 }
             } else if (args[0].equals("ingredient")) {
                 if (args.length == 3) {

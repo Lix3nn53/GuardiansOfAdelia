@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -46,8 +47,9 @@ public class OtherItems {
     }
 
     public static ItemStack getPetFood(int tier) {
-        ItemStack itemStack = new ItemStack(Material.LAPIS_LAZULI);
+        ItemStack itemStack = new ItemStack(Material.BROWN_DYE);
         ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setCustomModelData(6);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Pet Food Tier " + tier);
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
@@ -66,6 +68,7 @@ public class OtherItems {
         }
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
+        PersistentDataContainerUtil.putInteger("pet_food", tier, itemStack);
         return itemStack;
     }
 

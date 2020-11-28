@@ -21,8 +21,12 @@ import java.util.*;
 public class GatheringManager {
 
     private final static HashMap<Integer, Ingredient> ingredientHashMap = new HashMap<>();
+
+    //MINING
     private final static HashMap<GatheringTool, List<Material>> gatheringToolToBlocks = new HashMap<>();
     private final static HashMap<Material, List<Integer>> blockToIngredients = new HashMap<>();
+
+    //OTHER
     private final static HashMap<GatheringType, List<Integer>> gatheringTypeToIngredients = new HashMap<>();
 
     public static void startGathering(Player player, ItemStack itemInHand, Material targetBlock) {

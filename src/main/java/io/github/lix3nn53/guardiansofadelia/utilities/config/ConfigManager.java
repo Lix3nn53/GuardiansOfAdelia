@@ -54,6 +54,7 @@ public class ConfigManager {
         JobCraftingConfigurations.createConfigs();
         QuestConfigurations.createConfigs();
         EggConfigurations.createConfigs();
+        LootChestConfiguration.createConfigs();
     }
 
     public static void loadConfigALL() {
@@ -74,10 +75,12 @@ public class ConfigManager {
         JobCraftingConfigurations.loadConfigs();
         QuestConfigurations.loadConfigs();
         EggConfigurations.loadConfigs();
+        LootChestConfiguration.loadConfigs();
     }
 
     public static void writeConfigALL() {
         RewardDailyConfigurations.writeConfigs();
+        LootChestConfiguration.writeConfigs();
     }
 
     private static void createResourcePackConfig() {

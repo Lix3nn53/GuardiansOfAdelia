@@ -11,18 +11,16 @@ import java.util.UUID;
 
 public class RPGItemUtils {
 
-    public static ItemStack setDamage(ItemStack itemStack, int amount) {
+    public static void setDamage(ItemStack itemStack, int amount) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), "generic.attack_damage", amount, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, modifier);
         AttributeModifier modifierTwo = new AttributeModifier(UUID.randomUUID(), "generic.attack_damage", amount * 0.6, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.OFF_HAND);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, modifierTwo);
         itemStack.setItemMeta(itemMeta);
-
-        return itemStack;
     }
 
-    public static ItemStack resetArmor(ItemStack itemStack) {
+    public static void resetArmor(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
 
         AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), "generic.armor", 0, AttributeModifier.Operation.MULTIPLY_SCALAR_1);
@@ -31,17 +29,13 @@ public class RPGItemUtils {
         AttributeModifier modifierTwo = new AttributeModifier(UUID.randomUUID(), "generic.armor_toughness", 0, AttributeModifier.Operation.MULTIPLY_SCALAR_1);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, modifierTwo);
         itemStack.setItemMeta(itemMeta);
-
-        return itemStack;
     }
 
-    public static ItemStack setAttackSpeed(ItemStack itemStack, double amount) {
+    public static void setAttackSpeed(ItemStack itemStack, double amount) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), "generic.attack_speed", amount, AttributeModifier.Operation.ADD_NUMBER);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, modifier);
         itemStack.setItemMeta(itemMeta);
-
-        return itemStack;
     }
 
     public static boolean isWeapon(Material type) {
