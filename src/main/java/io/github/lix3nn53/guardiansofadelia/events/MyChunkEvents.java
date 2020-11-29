@@ -8,9 +8,11 @@ import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChestManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
+import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.NPCDespawnEvent;
 import net.citizensnpcs.api.event.NPCSpawnEvent;
 import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Chunk;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -61,21 +63,20 @@ public class MyChunkEvents implements Listener {
         customEventsOnChunkUnload(chunk);
     }
 
-    /**
-     * Since mythic mobs manages mobs, we only need to manage armor stands for custom models
-     *
-     * @param chunkEntity
-     * @return
-     */
     private boolean shouldChunkEventRemove(Entity chunkEntity) {
+        NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
+        if (npcRegistry.isNPC(chunkEntity)) {
+            return false;
+        }
         EntityType type = chunkEntity.getType();
 
         if (type.equals(EntityType.ARMOR_STAND)) {
             boolean questIcon = QuestNPCManager.isQuestIcon((ArmorStand) chunkEntity);
-            return !questIcon;
+            if (questIcon) return false;
         }
 
-        return false;
+        return !(type.equals(EntityType.PLAYER) || type.equals(EntityType.ITEM_FRAME)
+                || type.equals(EntityType.PAINTING) || type.equals(EntityType.DROPPED_ITEM));
     }
 
     private void customEventsOnChunkLoad(Chunk chunk) {

@@ -34,6 +34,11 @@ public class Egg implements RPGGear {
         int damage = PetManager.getDamage(petKey, petLevel);
         GuardiansOfAdelia.getInstance().getLogger().info("egg damage: " + damage);
 
+        int petExp = 0;
+        for (int i = 1; i < petLevel; i++) {
+            petExp += PetExperienceManager.getNextExperienceTarget(i);
+        }
+
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: Egg");
         lore.add("");
@@ -46,8 +51,8 @@ public class Egg implements RPGGear {
 
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
         lore.add("");
-        lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + 1);
-        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + "0 / " + PetExperienceManager.getNextExperienceTarget(1));
+        lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + petLevel);
+        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + petExp + " / " + PetExperienceManager.getNextExperienceTarget(petLevel));
         lore.add("");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + health);
 
@@ -61,7 +66,7 @@ public class Egg implements RPGGear {
         PersistentDataContainerUtil.putInteger("reqLevel", reqLevel, this.itemStack);
         PersistentDataContainerUtil.putString("itemTier", tier.toString(), this.itemStack);
         PersistentDataContainerUtil.putString("petCode", petKey, this.itemStack);
-        PersistentDataContainerUtil.putInteger("petExp", 0, this.itemStack);
+        PersistentDataContainerUtil.putInteger("petExp", petExp, this.itemStack);
         PersistentDataContainerUtil.putInteger("petCurrentHealth", health, this.itemStack);
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();

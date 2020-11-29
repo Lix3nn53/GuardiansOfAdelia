@@ -4,10 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
-import org.bukkit.Location;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -16,6 +13,7 @@ import java.util.List;
 
 public class EntityUtils {
 
+    /*
     public static LivingEntity create(Location loc, String name, double hp, EntityType type) {
         LivingEntity entity = (LivingEntity) loc.getWorld().spawnEntity(loc, type);
         entity.setCustomName(name);
@@ -27,6 +25,8 @@ public class EntityUtils {
 
         return entity;
     }
+
+     */
 
     public static void delayedRemove(Entity entity, long delayTicks) {
         new BukkitRunnable() {

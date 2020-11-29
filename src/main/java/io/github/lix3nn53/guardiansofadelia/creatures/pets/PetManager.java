@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.pets;
 
-import com.comphenix.protocol.utility.MinecraftReflection;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -17,16 +16,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Mob;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,21 +30,8 @@ public class PetManager {
     private final static List<Player> deathPetPlayerList = new ArrayList<>();
     private static final HashMap<LivingEntity, Player> petToPlayer = new HashMap<>();
     private static final HashMap<Player, LivingEntity> playerToPet = new HashMap<>();
-    private static final double PET_FOLLOW_MOVEMENT_SPEED = 0.7D;
-    private static final long respawnDelay = 20 * 300L;
-    private static Method craftEntity_getHandle, navigationAbstract_a, entityInsentient_getNavigation;
-    private static final Class<?> entityInsentientClass = MinecraftReflection.getMinecraftClass("EntityInsentient");
 
-    static {
-        try {
-            craftEntity_getHandle = MinecraftReflection.getCraftEntityClass().getDeclaredMethod("getHandle");
-            entityInsentient_getNavigation = entityInsentientClass.getDeclaredMethod("getNavigation");
-            navigationAbstract_a = MinecraftReflection.getMinecraftClass("NavigationAbstract")
-                    .getDeclaredMethod("a", double.class, double.class, double.class, double.class);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-    }
+    private static final long respawnDelay = 20 * 300L;
 
     public static Player getOwner(LivingEntity entity) {
         return petToPlayer.get(entity);
@@ -95,40 +75,35 @@ public class PetManager {
 
         LivingEntity pet = (LivingEntity) entity;
         pet.setSilent(true);
-        pet.setCustomNameVisible(true);
 
         // health
-        int maxHP = (int) (pet.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + 0.5);
-        GuardiansOfAdelia.getInstance().getLogger().info("Pet maxHP: " + maxHP);
+        double maxHP = pet.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        double attackDamage = pet.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue();
+        double movementSpeed = pet.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getValue();
+
+        if (pet instanceof Tameable) {
+            Tameable tameable = (Tameable) pet;
+            tameable.setOwner(owner);
+
+            // Taming the entity resets its values so set them again
+            pet.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
+            pet.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(attackDamage);
+            pet.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(movementSpeed);
+        }
+
         if (currentHP <= 0) {
             currentHP = (int) ((maxHP * 0.4) + 0.5);
         } else if (currentHP > maxHP) {
-            currentHP = maxHP;
+            currentHP = (int) (maxHP + 0.5);
         }
         pet.setHealth(currentHP);
 
         // name
         String petName = pet.getCustomName();
-        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + currentHP + "/" + maxHP + "❤";
+        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + currentHP + "/" + (int) (maxHP + 0.5) + "❤";
         pet.setCustomName(petName);
 
-        // save current movement speed and set follow speed
-        AttributeInstance movementSpeed = pet.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
-        PersistentDataContainerUtil.putDouble("mountSpeed", movementSpeed.getBaseValue(), pet);
-        movementSpeed.setBaseValue(PET_FOLLOW_MOVEMENT_SPEED);
-
         return pet;
-    }
-
-    public static void onMount(LivingEntity mount) {
-        if (PersistentDataContainerUtil.hasDouble(mount, "mountSpeed")) {
-            double mountSpeed = PersistentDataContainerUtil.getDouble(mount, "mountSpeed");
-            mount.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(mountSpeed);
-        }
-    }
-
-    public static void onDismount(LivingEntity mount) {
-        mount.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(PET_FOLLOW_MOVEMENT_SPEED);
     }
 
     public static void onPetDeath(LivingEntity livingEntity) {
@@ -245,6 +220,7 @@ public class PetManager {
                             String petCode = PersistentDataContainerUtil.getString(egg, "petCode");
                             int petCurrentHealth = PersistentDataContainerUtil.getInteger(egg, "petCurrentHealth");
                             int petExp = PersistentDataContainerUtil.getInteger(egg, "petExp");
+                            GuardiansOfAdelia.getInstance().getLogger().info("petExp: " + petExp);
                             int levelFromExp = PetExperienceManager.getLevelFromExp(petExp);
 
                             spawnPet(player, petCode, levelFromExp, petCurrentHealth);
@@ -288,34 +264,18 @@ public class PetManager {
                     Mob mob = (Mob) activePet;
                     mob.setTarget(null);
                 }
+
                 return;
             }
 
             final double distance = target.distance(activePet.getLocation());
             if (distance > 20D) {
                 PetManager.teleportPet(player, activePet, null);
+
                 if (activePet instanceof Mob) { //clear pet target
                     Mob mob = (Mob) activePet;
                     mob.setTarget(null);
                 }
-            } else if (distance < 6D) {
-                return;
-            } else if (activePet instanceof Mob) { //if distance is between and pet is mob which has a target, return
-                Mob mob = (Mob) activePet;
-                LivingEntity mobTarget = mob.getTarget();
-                if (mobTarget != null) {
-                    return;
-                }
-            }
-
-            double speedModifier = PET_FOLLOW_MOVEMENT_SPEED;
-
-            try {
-                Object insentient = entityInsentientClass.cast(craftEntity_getHandle.invoke(activePet));
-                Object navigation = entityInsentient_getNavigation.invoke(insentient);
-                navigationAbstract_a.invoke(navigation, target.getX(), target.getY(), target.getZ(), speedModifier);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -340,6 +300,9 @@ public class PetManager {
 
         double base = mythicMob.getHealth().get();
         double perLevel = mythicMob.getPerLevelHealth();
+
+        GuardiansOfAdelia.getInstance().getLogger().info("base: " + base);
+        GuardiansOfAdelia.getInstance().getLogger().info("perLevel: " + perLevel);
 
         return (int) (base + (perLevel * petLevel) + 0.5);
     }

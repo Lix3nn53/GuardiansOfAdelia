@@ -26,8 +26,6 @@ public class MyEntityMountEvent implements Listener {
                     Player player = (Player) rider;
                     if (!player.equals(owner)) {
                         e.setCancelled(true);
-                    } else {
-                        PetManager.onMount(livingMount);
                     }
                 }
             }

@@ -34,57 +34,41 @@ public class PetExperienceManager {
     }
 
     public static int getLevelFromExp(int eggExp) {
-        if (eggExp >= 1000000) {
-            return 12;
-        } else if (eggExp >= 800000) {
-            return 11;
-        } else if (eggExp >= 550000) {
-            return 10;
-        } else if (eggExp >= 350000) {
-            return 9;
-        } else if (eggExp >= 200000) {
-            return 8;
-        } else if (eggExp >= 120000) {
-            return 7;
-        } else if (eggExp >= 50000) {
-            return 6;
-        } else if (eggExp >= 20000) {
-            return 5;
-        } else if (eggExp >= 5000) {
-            return 4;
-        } else if (eggExp >= 2000) {
-            return 3;
-        } else if (eggExp >= 500) {
-            return 2;
+        int totalExp = 0;
+        for (int level = 1; level < 12; level++) {
+            totalExp += getNextExperienceTarget(level);
+
+            if (totalExp > eggExp) return level;
         }
+
         return 1;
     }
 
-    public static String getNextExperienceTarget(int eggLevel) {
+    public static int getNextExperienceTarget(int eggLevel) {
         if (eggLevel == 2) {
-            return "2000";
+            return 2000;
         } else if (eggLevel == 3) {
-            return "5000";
+            return 5000;
         } else if (eggLevel == 4) {
-            return "20000";
+            return 20000;
         } else if (eggLevel == 5) {
-            return "50000";
+            return 50000;
         } else if (eggLevel == 6) {
-            return "120000";
+            return 120000;
         } else if (eggLevel == 7) {
-            return "200000";
+            return 200000;
         } else if (eggLevel == 8) {
-            return "350000";
+            return 350000;
         } else if (eggLevel == 9) {
-            return "550000";
+            return 550000;
         } else if (eggLevel == 10) {
-            return "800000";
+            return 800000;
         } else if (eggLevel == 11) {
-            return "1000000";
+            return 1000000;
         } else if (eggLevel == 12) {
-            return "∞";
+            return 9000000;
         }
-        return "500";
+        return 500;
     }
 
     private static void updateEggExp(Player player, int nextExperience, int currentLevel) {

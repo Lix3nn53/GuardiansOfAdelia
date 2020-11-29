@@ -57,6 +57,20 @@ public class MyPlayerInteractEntityEvent implements Listener {
         Entity rightClicked = event.getRightClicked();
         Player player = event.getPlayer();
 
+        // TODO remove debug
+        if (true) {
+            LivingEntity livingEntity = (LivingEntity) rightClicked;
+            AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+            double value = attribute.getValue();
+            player.sendMessage("maxHealth: " + value);
+            attribute = livingEntity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+            value = attribute.getValue();
+            player.sendMessage("attackDamage: " + value);
+            attribute = livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
+            value = attribute.getValue();
+            player.sendMessage("moveSpeed: " + value);
+        }
+
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
         if (itemInMainHand.hasItemMeta()) {
             ItemMeta itemMeta = itemInMainHand.getItemMeta();

@@ -24,7 +24,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
 import org.bukkit.World;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -223,48 +222,6 @@ public class GuardiansOfAdelia extends JavaPlugin {
     public void onDisable() {
         DatabaseManager.onDisable();
         ConfigManager.writeConfigALL();
-    }
-
-    private void startGlobalRegen() {
-        double healPercent = 0.05;
-        double manaPercent = 0.05;
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
-                for (Player player : onlinePlayers) {
-                    UUID uuid = player.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-                        if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-
-                            double currentMana = rpgCharacterStats.getCurrentMana();
-                            double maxMana = rpgCharacterStats.getTotalMaxMana();
-                            if (currentMana < maxMana) {
-                                double nextMana = currentMana + (maxMana * manaPercent);
-                                if (nextMana > maxMana) {
-                                    nextMana = maxMana;
-                                }
-                                rpgCharacterStats.setCurrentMana((int) nextMana);
-                            }
-
-                            double currentHealth = player.getHealth();
-                            double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-                            if (currentHealth < maxHealth) {
-                                double nextHealth = currentHealth + (maxHealth * healPercent);
-                                if (nextHealth > maxHealth) {
-                                    nextHealth = maxHealth;
-                                }
-                                player.setHealth(nextHealth);
-                            }
-                        }
-                    }
-                }
-            }
-        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 100L, 160L);
     }
 
     private void startGlobalManaRegen(double maxManaPercent) {
