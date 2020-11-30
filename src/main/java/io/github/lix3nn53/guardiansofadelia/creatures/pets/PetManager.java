@@ -74,11 +74,10 @@ public class PetManager {
         }
 
         LivingEntity pet = (LivingEntity) entity;
-        pet.setSilent(true);
 
         // health
-        double maxHP = pet.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-        double attackDamage = pet.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue();
+        double maxHP = getHealth(petCode, petLevel);
+        double attackDamage = getDamage(petCode, petLevel);
         double movementSpeed = pet.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getValue();
 
         if (pet instanceof Tameable) {
@@ -94,13 +93,13 @@ public class PetManager {
         if (currentHP <= 0) {
             currentHP = (int) ((maxHP * 0.4) + 0.5);
         } else if (currentHP > maxHP) {
-            currentHP = (int) (maxHP + 0.5);
+            currentHP = (int) maxHP;
         }
         pet.setHealth(currentHP);
 
         // name
         String petName = pet.getCustomName();
-        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + currentHP + "/" + (int) (maxHP + 0.5) + "❤";
+        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + currentHP + "/" + (int) maxHP + "❤";
         pet.setCustomName(petName);
 
         return pet;
@@ -292,7 +291,10 @@ public class PetManager {
         double base = mythicMob.getDamage().get();
         double perLevel = mythicMob.getPerLevelDamage();
 
-        return (int) (base + (perLevel * petLevel) + 0.5);
+        //GuardiansOfAdelia.getInstance().getLogger().info("base damage: " + base);
+        //GuardiansOfAdelia.getInstance().getLogger().info("perLevel damage: " + perLevel);
+
+        return (int) (base + (perLevel * (petLevel - 1)) + 0.5);
     }
 
     public static int getHealth(String key, int petLevel) {
@@ -301,10 +303,10 @@ public class PetManager {
         double base = mythicMob.getHealth().get();
         double perLevel = mythicMob.getPerLevelHealth();
 
-        GuardiansOfAdelia.getInstance().getLogger().info("base: " + base);
-        GuardiansOfAdelia.getInstance().getLogger().info("perLevel: " + perLevel);
+        //GuardiansOfAdelia.getInstance().getLogger().info("base health: " + base);
+        //GuardiansOfAdelia.getInstance().getLogger().info("perLevel health: " + perLevel);
 
-        return (int) (base + (perLevel * petLevel) + 0.5);
+        return (int) (base + (perLevel * (petLevel - 1)) + 0.5);
     }
 
     public static String getName(String key) {
