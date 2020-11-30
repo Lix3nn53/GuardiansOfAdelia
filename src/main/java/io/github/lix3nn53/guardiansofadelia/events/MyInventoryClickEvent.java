@@ -613,14 +613,32 @@ public class MyInventoryClickEvent implements Listener {
                     if (event.isLeftClick()) {
                         int pointsLeftToSpend = rpgCharacterStats.getAttributePointsLeftToSpend();
                         if (pointsLeftToSpend > 0) {
-                            attr.investOnePoint(rpgCharacterStats, true);
+                            int amount = 1;
+                            if (event.isShiftClick()) {
+                                if (pointsLeftToSpend >= 5) {
+                                    amount = 5;
+                                } else {
+                                    amount = pointsLeftToSpend;
+                                }
+                            }
+
+                            attr.investPoint(rpgCharacterStats, amount, true);
                             GuiGeneric element = MenuList.element(player);
                             element.openInventory(player);
                         }
                     } else if (event.isRightClick()) {
                         int invested = attr.getInvested();
                         if (invested > 0) {
-                            attr.downgradeOnePoint(rpgCharacterStats, true);
+                            int amount = 1;
+                            if (event.isShiftClick()) {
+                                if (invested >= 5) {
+                                    amount = 5;
+                                } else {
+                                    amount = invested;
+                                }
+                            }
+
+                            attr.downgradePoint(rpgCharacterStats, amount, true);
                             GuiGeneric element = MenuList.element(player);
                             element.openInventory(player);
                         }

@@ -33,15 +33,15 @@ public class Attribute {
         }
     }
 
-    public void investOnePoint(RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
-        this.invested++;
+    public void investPoint(RPGCharacterStats rpgCharacterStats, int amount, boolean fixDisplay) {
+        this.invested += amount;
         if (fixDisplay) {
             onValueChange(rpgCharacterStats);
         }
     }
 
-    public void downgradeOnePoint(RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
-        this.invested--;
+    public void downgradePoint(RPGCharacterStats rpgCharacterStats, int amount, boolean fixDisplay) {
+        this.invested -= amount;
         if (fixDisplay) {
             onValueChange(rpgCharacterStats);
         }
