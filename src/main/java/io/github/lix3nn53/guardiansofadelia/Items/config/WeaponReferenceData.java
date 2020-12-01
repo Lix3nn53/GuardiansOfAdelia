@@ -42,4 +42,20 @@ public class WeaponReferenceData {
 
         return items;
     }
+
+    public int getGearLevel() {
+        return gearLevel;
+    }
+
+    public int getItemIndex() {
+        return itemIndex;
+    }
+
+    public ItemTier getItemTier() {
+        return itemTier;
+    }
+
+    public String getItemTag() {
+        return itemTag;
+    }
 }

@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.quests;
 
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
@@ -154,12 +155,30 @@ public final class Quest {
             lore.add(ChatColor.GOLD + "Prizes");
             lore.add(ChatColor.YELLOW + "Experience: " + expPrize);
             lore.add(ChatColor.YELLOW + "Money: " + Coin.getStringValue(moneyPrize));
-            for (ItemStack it : itemPrizes) {
-                lore.add(it.getItemMeta().getDisplayName());
+            if (!itemPrizes.isEmpty()) {
+                lore.add(ChatColor.YELLOW + "Items: ");
+                for (ItemStack it : itemPrizes) {
+                    lore.add(it.getItemMeta().getDisplayName());
+                }
             }
-            lore.add("");
+            if (!itemPrizesSelectOneOf.isEmpty()) {
+                lore.add(ChatColor.YELLOW + "Select One Item From: ");
+                for (ItemStack it : itemPrizesSelectOneOf) {
+                    lore.add(it.getItemMeta().getDisplayName());
+                }
+            }
+            if (weaponPrizesSelectOneOf != null) {
+                int gearLevel = weaponPrizesSelectOneOf.getGearLevel();
+                int itemIndex = weaponPrizesSelectOneOf.getItemIndex();
+                ItemTier itemTier = weaponPrizesSelectOneOf.getItemTier();
+                String itemTag = weaponPrizesSelectOneOf.getItemTag();
+                lore.add(ChatColor.YELLOW + "Select One Weapon: ");
+                lore.add("GearLevel: " + gearLevel + ", ItemIndex: " + itemIndex);
+                lore.add("ItemTier: " + itemTier.getTierString() + ChatColor.RESET + ", ItemTag: " + itemTag);
+            }
 
             if (requiredLevel != 0) {
+                lore.add("");
                 if (player.getLevel() >= requiredLevel) {
                     lore.add(ChatColor.GREEN + "Required Level: " + requiredLevel);
                 } else {
@@ -167,6 +186,7 @@ public final class Quest {
                 }
             }
             if (!requiredQuests.isEmpty()) {
+                lore.add("");
                 if (turnedInQuests.containsAll(requiredQuests)) {
                     lore.add(ChatColor.GREEN + "Required Quests: " + requiredQuests);
                 } else {

@@ -1,15 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
-import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
-import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
@@ -19,12 +13,9 @@ import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-
-import java.util.List;
 
 
 public class TutorialManager {
@@ -81,7 +72,7 @@ public class TutorialManager {
         playerInventory.setLeggings(leggings);
         playerInventory.setBoots(boots);
 
-        WeaponGearType mainhandGearType = rpgClass.getDefaultWeaponGearType();
+        /*WeaponGearType mainhandGearType = rpgClass.getDefaultWeaponGearType();
 
         ItemStack mainWeapon = WeaponManager.get(mainhandGearType, 1, 0, tier, itemTag, false);
         playerInventory.setItem(4, mainWeapon);
@@ -108,5 +99,7 @@ public class TutorialManager {
         InventoryUtils.giveItemToPlayer(player, hpPotion);
         ItemStack manaPotion = Consumable.POTION_INSTANT_MANA.getItemStack(10, 10);
         InventoryUtils.giveItemToPlayer(player, manaPotion);
+
+         */
     }
 }
