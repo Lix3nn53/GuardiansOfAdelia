@@ -521,7 +521,7 @@ public class MyInventoryClickEvent implements Listener {
                                     }
                                 } else {
                                     // GUISIZE
-                                    int guiSize = 27;
+                                    int guiSize = 18;
                                     if (weaponPrizesSelectOneOf != null) {
                                         guiSize += 9;
                                     }

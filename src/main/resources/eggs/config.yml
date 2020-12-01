@@ -5,10 +5,6 @@
 # ---------------------------------------------- #
 
 egg1:
-  mythicMobCode: "CatAllBlack"
+  mythicMobCode: "PetWolf"
   customModelData: 6
   itemTier: "COMMON"
-egg2:
-  mythicMobCode: "ZombiePet"
-  customModelData: 2
-  itemTier: "RARE"

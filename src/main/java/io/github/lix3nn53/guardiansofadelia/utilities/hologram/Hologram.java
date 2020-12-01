@@ -70,8 +70,8 @@ public class Hologram {
         as.setGravity(false);
         as.setMarker(true);
         as.setInvulnerable(true);
-        as.setCustomNameVisible(true);
         if (title != null) {
+            as.setCustomNameVisible(true);
             as.setCustomName(title);
         }
         if (rider != null) {

@@ -18,12 +18,27 @@ quest1:
     - "Can Adelia overcome this threat after such a long time?"
   startMsg: "&eHold &l&6TAB KEY &r&eto see your quest list!"
   objectiveTextList:
-    - "Talk to Arnas!"
+    - "Talk to Arnas to get your equipment!"
   turnInMsg: "Accept your new quest from Arnas"
   moneyPrize: 0
   expPrize: 0
   requiredLevel: 90
   advancementMaterial: "RED_NETHER_BRICKS"
+  itemPrizeSelectOneOfWeapon:
+    gearLevel: 1
+    itemIndex: 0
+    itemTier: "LEGENDARY"
+    itemTag: "Tutorial"
+  itemPrize1:
+    itemType: Consumable
+    consumable: POTION_INSTANT_HEALTH
+    skillLevel: 10
+    uses: 10
+  itemPrize2:
+    itemType: Consumable
+    consumable: POTION_INSTANT_MANA
+    skillLevel: 10
+    uses: 10
 quest2:
   questID: 2
   npcToTakeFrom: 9
@@ -34,8 +49,6 @@ quest2:
     - "with darkness' foes!"
   startMsg: "Learn your skills to get ready! Open menu by clicking Menu-Book from your inventory(E key), then learn your skills from character menu to get ready to fight!"
   objectiveTextList:
-    - "Open menu by clicking Menu-Book from your inventory(E key), then.."
-    - "..learn your skills from character menu to get ready to fight!"
     - "TASK_PROGRESS_1 then talk to Elysea"
   turnInMsg: "Accept your new quest from Elysea"
   moneyPrize: 0
@@ -58,7 +71,6 @@ quest3:
     - "with darkness' foes!"
   startMsg: "Spend your element points from character-menu to get stronger."
   objectiveTextList:
-    - "Spend your element points from character-menu to get stronger."
     - "TASK_PROGRESS_1 then talk to Syvia"
   turnInMsg: "Equip jewelries from RPG-Inventory to gain even more elemental power! To open RPG-Inventory click one of crafting slots from your inventory."
   moneyPrize: 0
@@ -115,10 +127,7 @@ quest4:
     - "We need to stop this before it harms Adelia!"
   startMsg: "Now you seem ready to face Aleesia.. or are you?"
   objectiveTextList:
-    - "Equip jewelries from RPG-Inventory to gain even more elemental power!"
-    - "To open RPG-Inventory click one of crafting slots from your inventory."
     - "Now you seem ready to face Aleesia.. or are you?"
-    - "Enter the portal(Left-Mouse-Click when nearby)"
   turnInMsg: ""
   moneyPrize: 0
   expPrize: 0
@@ -142,11 +151,11 @@ quest4:
     actionType: "TeleportAction"
     delay: 10
     world: "world"
-    x: 2003.5
-    y: 150.5
-    z: 1312
-    yaw: -89.6
-    pitch: 13.2
+    x: 2030.5
+    y: 107.5
+    z: 1524.5
+    yaw: -130.0
+    pitch: 7.0
   onCompleteAction4:
     actionType: "ClearPotionEffectAction"
     potionEffectType: "WITHER"
@@ -165,7 +174,7 @@ quest4:
 quest5:
   questID: 5
   npcToTakeFrom: 0
-  npcToComplete: 100
+  npcToComplete: 120
   name: "To the rescue"
   story:
     - "You woke up from a dream of the past. In that dream,"
