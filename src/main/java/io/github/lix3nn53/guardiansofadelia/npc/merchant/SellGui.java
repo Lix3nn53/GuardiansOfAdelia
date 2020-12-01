@@ -105,10 +105,7 @@ public class SellGui extends GuiGeneric {
         }
         double price = Math.max(1, Math.pow(reqLevel, 1.12) / 4);
 
-        ItemTier itemTier = ItemTier.COMMON;
-        if (PersistentDataContainerUtil.hasString(itemStack, "itemTier")) {
-            itemTier = ItemTier.valueOf(PersistentDataContainerUtil.getString(itemStack, "itemTier"));
-        }
+        ItemTier itemTier = ItemTier.getItemTierOfItemStack(itemStack);
         price = price * itemTier.getBonusMultiplier() + 0.5;
 
         int enchantLevel = EnchantManager.getEnchantLevel(itemStack);

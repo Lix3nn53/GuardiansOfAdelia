@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
+import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
@@ -128,31 +129,47 @@ public class QuestConfigurations {
                     itemPrizes.add(item);
                 }
 
-                Quest quest = new Quest(questID, name, story,
-                        startMsg, objectiveText.toString(),
-                        turnInMsg,
-                        tasks, itemPrizes, moneyPrize, expPrize, requiredLevel, requiredQuests, advancementMaterial);
-
+                List<Action> onAcceptActions = new ArrayList<>();
                 int onAcceptActionCount = getChildComponentCount(section, "onAcceptAction");
                 for (int c = 1; c <= onAcceptActionCount; c++) {
                     Action action = ActionLoader.load(section.getConfigurationSection("onAcceptAction" + c));
 
-                    quest.addOnAcceptAction(action);
+                    onAcceptActions.add(action);
                 }
 
+                List<Action> onCompleteActions = new ArrayList<>();
                 int onCompleteActionCount = getChildComponentCount(section, "onCompleteAction");
                 for (int c = 1; c <= onCompleteActionCount; c++) {
                     Action action = ActionLoader.load(section.getConfigurationSection("onCompleteAction" + c));
 
-                    quest.addOnCompleteAction(action);
+                    onCompleteActions.add(action);
                 }
 
+                List<Action> onTurnInActions = new ArrayList<>();
                 int onTurnInActionCount = getChildComponentCount(section, "onTurnInAction");
                 for (int c = 1; c <= onTurnInActionCount; c++) {
                     Action action = ActionLoader.load(section.getConfigurationSection("onTurnInAction" + c));
 
-                    quest.addOnTurnInAction(action);
+                    onTurnInActions.add(action);
                 }
+
+                int itemPrizesSelectOneOfCount = getChildComponentCount(section, "itemPrizeSelectOneOf");
+                List<ItemStack> itemPrizesSelectOneOf = new ArrayList<>();
+                for (int c = 1; c <= itemPrizesSelectOneOfCount; c++) {
+                    ItemStack item = ItemReferenceLoader.loadItemReference(section.getConfigurationSection("itemPrizeSelectOneOf" + c));
+                    itemPrizesSelectOneOf.add(item);
+                }
+
+                WeaponReferenceData weaponPrizesSelectOneOf = null;
+                if (section.contains("itemPrizeSelectOneOfWeapon")) {
+                    ConfigurationSection itemPrizeSelectOneOfWeapon = section.getConfigurationSection("itemPrizeSelectOneOfWeapon");
+                    weaponPrizesSelectOneOf = new WeaponReferenceData(itemPrizeSelectOneOfWeapon);
+                }
+
+                Quest quest = new Quest(questID, name, story,
+                        startMsg, objectiveText.toString(),
+                        turnInMsg,
+                        tasks, itemPrizes, moneyPrize, expPrize, requiredLevel, requiredQuests, advancementMaterial, onAcceptActions, onCompleteActions, onTurnInActions, itemPrizesSelectOneOf, weaponPrizesSelectOneOf);
 
                 QuestNPCManager.addQuest(quest, npcToTakeFrom, npcToComplete);
             }

@@ -18,10 +18,6 @@ import java.util.UUID;
 
 public class TutorialEndAction implements Action {
 
-    public TutorialEndAction() {
-
-    }
-
     @Override
     public void perform(Player player) {
         UUID uuid = player.getUniqueId();

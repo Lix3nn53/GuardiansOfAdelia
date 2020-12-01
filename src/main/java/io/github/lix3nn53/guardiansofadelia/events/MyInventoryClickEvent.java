@@ -1,9 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.HelmetSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
@@ -497,18 +500,89 @@ public class MyInventoryClickEvent implements Listener {
                             int questNo = Integer.parseInt(split[1]);
                             int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(questNo);
                             if (whoCanCompleteThisQuest == resourceNPC) {
-                                //complete quest
-                                boolean didComplete = rpgCharacter.turnInQuest(questNo, player);
-                                if (didComplete) {
-                                    GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
-                                    questGui.openInventory(player);
+                                List<Quest> questList = rpgCharacter.getQuestList();
+                                Quest quest = null;
+                                for (Quest q : questList) {
+                                    if (q.getQuestID() == questNo) {
+                                        quest = q;
+                                        break;
+                                    }
+                                }
+                                List<ItemStack> itemPrizesSelectOneOf = quest.getItemPrizesSelectOneOf();
+                                WeaponReferenceData weaponPrizesSelectOneOf = quest.getWeaponPrizesSelectOneOf();
+                                if (itemPrizesSelectOneOf.isEmpty() && weaponPrizesSelectOneOf == null) {
+                                    //turnin quest
+                                    boolean didTurnIn = rpgCharacter.turnInQuest(questNo, player);
+                                    if (didTurnIn) {
+                                        GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
+                                        questGui.openInventory(player);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Couldn't turn in the quest ERROR report pls");
+                                    }
                                 } else {
-                                    player.sendMessage(ChatColor.RED + "Couldn't complete the quest ERROR report pls");
+                                    // GUISIZE
+                                    int guiSize = 27;
+                                    if (weaponPrizesSelectOneOf != null) {
+                                        guiSize += 9;
+                                    }
+                                    int normalSelectOneOfSize = itemPrizesSelectOneOf.size();
+                                    if (normalSelectOneOfSize > 4) {
+                                        guiSize += 9;
+                                    } else if (normalSelectOneOfSize > 8) {
+                                        guiSize += 18;
+                                    } else if (normalSelectOneOfSize > 8) {
+                                        guiSize += 18;
+                                    }
+
+                                    // ITEM SLOTS
+                                    List<Integer> slotsToUse = new ArrayList<>();
+                                    slotsToUse.add(10);
+                                    slotsToUse.add(12);
+                                    slotsToUse.add(14);
+                                    slotsToUse.add(16);
+
+                                    slotsToUse.add(19);
+                                    slotsToUse.add(21);
+                                    slotsToUse.add(23);
+                                    slotsToUse.add(25);
+
+                                    slotsToUse.add(28);
+                                    slotsToUse.add(30);
+                                    slotsToUse.add(32);
+                                    slotsToUse.add(34);
+
+                                    slotsToUse.add(28);
+                                    slotsToUse.add(30);
+                                    slotsToUse.add(32);
+                                    slotsToUse.add(34);
+
+                                    // CREATE GUI
+                                    GuiGeneric guiGeneric = new GuiGeneric(guiSize, ChatColor.BLACK + "Quest Item Prize Selection #" + questNo, resourceNPC);
+
+                                    // PLACE ITEMS
+                                    int index = 0;
+                                    for (int i = index; i < normalSelectOneOfSize; i++) {
+                                        ItemStack itemStack = itemPrizesSelectOneOf.get(i);
+                                        Integer slotNo = slotsToUse.get(i);
+                                        guiGeneric.setItem(slotNo, itemStack);
+                                        index++;
+                                    }
+
+                                    if (weaponPrizesSelectOneOf != null) {
+                                        List<ItemStack> items = weaponPrizesSelectOneOf.getItems(rpgCharacter.getRpgClassStr());
+                                        for (ItemStack itemStack : items) {
+                                            Integer slotNo = slotsToUse.get(index);
+                                            guiGeneric.setItem(slotNo, itemStack);
+                                            index++;
+                                        }
+                                    }
+
+                                    guiGeneric.openInventory(player);
                                 }
                             } else {
                                 NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
                                 NPC byId = npcRegistry.getById(whoCanCompleteThisQuest);
-                                player.sendMessage(ChatColor.RED + "You can't complete this quest from this NPC. You need to talk with " + ChatColor.WHITE + byId.getName());
+                                player.sendMessage(ChatColor.RED + "You can't turn in this quest from this NPC. You need to talk with " + ChatColor.WHITE + byId.getName());
                             }
                         } else if (type.equals(Material.LIME_WOOL)) {
                             String[] split = currentName.split("#");
@@ -532,6 +606,31 @@ public class MyInventoryClickEvent implements Listener {
                             }
                         }
                     }
+                }
+            }
+        } else if (title.contains(ChatColor.BLACK + "Quest Item Prize Selection #")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST) && !currentType.equals(Material.AIR)) {
+                int resourceNPC = activeGui.getResourceNPC();
+
+                String[] split = title.split("#");
+                int questNo = Integer.parseInt(split[1]);
+
+                //give item
+                StatType statType = StatUtils.getStatType(currentType);
+                if (statType != null) {
+                    int gearLevel = GearLevel.getGearLevel(current);
+                    ItemTier itemTier = ItemTier.getItemTierOfItemStack(current);
+                    StatUtils.addRandomPassiveStats(current, gearLevel, itemTier);
+                }
+                InventoryUtils.giveItemToPlayer(player, current);
+
+                //turnin quest
+                boolean didTurnIn = rpgCharacter.turnInQuest(questNo, player);
+                if (didTurnIn) {
+                    GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
+                    questGui.openInventory(player);
+                } else {
+                    player.sendMessage(ChatColor.RED + "Couldn't turn in the quest ERROR report pls");
                 }
             }
         } else if (title.equals(ChatColor.GOLD + "Coin Converter")) {

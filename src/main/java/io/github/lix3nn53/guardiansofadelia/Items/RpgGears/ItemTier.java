@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
+import org.bukkit.inventory.ItemStack;
 
 public enum ItemTier {
     COMMON,
@@ -70,5 +72,13 @@ public enum ItemTier {
             number = 4;
         }
         return number;
+    }
+
+    public static ItemTier getItemTierOfItemStack(ItemStack itemStack) {
+        if (PersistentDataContainerUtil.hasString(itemStack, "itemTier")) {
+            return ItemTier.valueOf(PersistentDataContainerUtil.getString(itemStack, "itemTier"));
+        }
+
+        return COMMON;
     }
 }

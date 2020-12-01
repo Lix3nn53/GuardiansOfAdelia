@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.quests;
 
+import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -20,6 +21,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,69 +43,52 @@ public final class Quest {
     private final int requiredLevel;
     private final List<Integer> requiredQuests;
     private final Material advancementMaterial;
-    private final List<Action> onAcceptActions = new ArrayList<>();
-    private final List<Action> onCompleteActions = new ArrayList<>();
-    private final List<Action> onTurnInActions = new ArrayList<>();
-    private List<Task> tasks;
-    private List<ItemStack> itemPrizes;
+    private final List<Action> onAcceptActions;
+    private final List<Action> onCompleteActions;
+    private final List<Action> onTurnInActions;
+    private final List<Task> tasks;
+    private final List<ItemStack> itemPrizes;
+    private final List<ItemStack> itemPrizesSelectOneOf;
+    private final WeaponReferenceData weaponPrizesSelectOneOf;
 
     public Quest(
             final int questID, final String name, final List<String> story, final String startMsg, final String objectiveText, final String turnInMsg,
             final List<Task> tasks, final List<ItemStack> itemPrizes, final int moneyPrize, final int expPrize,
-            final int requiredLevel, final List<Integer> requiredQuests, Material advancementMaterial) {
+            final int requiredLevel, final List<Integer> requiredQuests, Material advancementMaterial, List<Action> onAcceptActions,
+            List<Action> onCompleteActions, List<Action> onTurnInActions, List<ItemStack> itemPrizesSelectOneOf, WeaponReferenceData weaponPrizesSelectOneOf) {
         this.questID = questID;
         this.name = name;
         this.story = story;
         this.startMsg = startMsg;
         this.objectiveText = objectiveText;
         this.turnInMsg = turnInMsg;
-        this.tasks = tasks;
         this.itemPrizes = itemPrizes;
         this.moneyPrize = moneyPrize;
         this.expPrize = expPrize;
         this.requiredLevel = requiredLevel;
         this.requiredQuests = requiredQuests;
         this.advancementMaterial = advancementMaterial;
+        this.onAcceptActions = onAcceptActions;
+        this.onCompleteActions = onCompleteActions;
+        this.onTurnInActions = onTurnInActions;
+        this.itemPrizesSelectOneOf = itemPrizesSelectOneOf;
+        this.weaponPrizesSelectOneOf = weaponPrizesSelectOneOf;
+
+        List<Task> copyTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            copyTasks.add(task.freshCopy());
+        }
+        this.tasks = copyTasks;
     }
 
     /**
      * Copy constructor.
      */
-    public Quest(Quest questToCopy) {
+    public Quest(@NotNull Quest questToCopy) {
         this(questToCopy.getQuestID(), questToCopy.getName(), questToCopy.getStory(), questToCopy.getStartMsg(), questToCopy.getObjectiveText(), questToCopy.getTurnInMsg(),
                 questToCopy.getTasks(), questToCopy.getItemPrizes(), questToCopy.getMoneyPrize(), questToCopy.getExpPrize(),
-                questToCopy.getRequiredLevel(), questToCopy.getRequiredQuests(), questToCopy.getAdvancementMaterial());
-        List<Action> copyOnAcceptActions = questToCopy.getOnAcceptActions();
-
-        this.onAcceptActions.addAll(copyOnAcceptActions);
-        List<Action> copyCompleteActions = questToCopy.getOnCompleteActions();
-        this.onCompleteActions.addAll(copyCompleteActions);
-        List<Action> copyOnTurnInActions = questToCopy.getOnTurnInActions();
-        this.onTurnInActions.addAll(copyOnTurnInActions);
-
-        List<Task> copyTasks = new ArrayList<>();
-        for (Task task : questToCopy.getTasks()) {
-            copyTasks.add(task.freshCopy());
-        }
-        this.setTasks(copyTasks);
-    }
-
-    public void addTask(Task task) {
-        if (tasks == null) {
-            tasks = new ArrayList<Task>();
-            tasks.add(task);
-        } else {
-            tasks.add(task);
-        }
-    }
-
-    public void addItemPrize(ItemStack item) {
-        if (itemPrizes == null) {
-            itemPrizes = new ArrayList<ItemStack>();
-            itemPrizes.add(item);
-        } else {
-            itemPrizes.add(item);
-        }
+                questToCopy.getRequiredLevel(), questToCopy.getRequiredQuests(), questToCopy.getAdvancementMaterial(), questToCopy.getOnAcceptActions(),
+                questToCopy.getOnCompleteActions(), questToCopy.getOnTurnInActions(), questToCopy.getItemPrizesSelectOneOf(), questToCopy.getWeaponPrizesSelectOneOf());
     }
 
     public boolean isAvailable(RPGCharacter rpgCharacter, int playerLevel) {
@@ -217,10 +202,6 @@ public final class Quest {
         return tasks;
     }
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
     public void addOnAcceptAction(Action action) {
         this.onAcceptActions.add(action);
     }
@@ -287,6 +268,14 @@ public final class Quest {
 
     public List<ItemStack> getItemPrizes() {
         return itemPrizes;
+    }
+
+    public List<ItemStack> getItemPrizesSelectOneOf() {
+        return itemPrizesSelectOneOf;
+    }
+
+    public WeaponReferenceData getWeaponPrizesSelectOneOf() {
+        return weaponPrizesSelectOneOf;
     }
 
     public boolean isCompleted() {

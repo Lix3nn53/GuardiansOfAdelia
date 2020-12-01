@@ -9,8 +9,9 @@ public class GearLevel {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
             int reqLevel = PersistentDataContainerUtil.getInteger(itemStack, "reqLevel");
 
-            return reqLevel / 10;
+            return (reqLevel / 10) + 1;
         }
+
         return 1;
     }
 
