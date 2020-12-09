@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.list.Eggs;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
@@ -40,7 +39,7 @@ public class Egg implements RPGGear {
         }
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: Egg");
+        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Egg");
         lore.add("");
 
         if (damage > 0) {
@@ -59,7 +58,8 @@ public class Egg implements RPGGear {
         if (damage > 0) {
             lore.add(ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + damage);
         } else {
-            lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + Eggs.getMountSpeed(petKey));
+            double movementSpeed = PetManager.getMovementSpeed(petKey, petLevel);
+            lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + movementSpeed);
         }
 
         this.itemStack = new ItemStack(material);

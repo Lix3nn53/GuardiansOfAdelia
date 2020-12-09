@@ -34,7 +34,7 @@ public class Shield implements RPGGear {
 
         StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
-        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Gear Type: " + gearType.getDisplayName());
+        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName());
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         lore.add("");

@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUti
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
 import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
+import io.lumine.xikage.mythicmobs.io.MythicConfig;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -86,8 +87,11 @@ public class PetManager {
 
             // Taming the entity resets its values so set them again
             pet.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHP);
-            pet.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(attackDamage);
             pet.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(movementSpeed);
+
+            if (pet.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE) != null) {
+                pet.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(attackDamage);
+            }
         }
 
         if (currentHP <= 0) {
@@ -307,6 +311,20 @@ public class PetManager {
         //GuardiansOfAdelia.getInstance().getLogger().info("perLevel health: " + perLevel);
 
         return (int) (base + (perLevel * (petLevel - 1)) + 0.5);
+    }
+
+    public static double getMovementSpeed(String key, int petLevel) {
+        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+
+        MythicConfig config = mythicMob.getConfig();
+
+        double base = config.getPlaceholderDouble("Options.MovementSpeed", "0").get();
+        double perLevel = config.getDouble("LevelModifiers.MovementSpeed", -1.0D);
+
+        GuardiansOfAdelia.getInstance().getLogger().info("base movement speed: " + base);
+        GuardiansOfAdelia.getInstance().getLogger().info("perLevel movement speed: " + perLevel);
+
+        return base + (perLevel * (petLevel - 1));
     }
 
     public static String getName(String key) {
