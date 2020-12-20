@@ -4,10 +4,9 @@
 #                 Ingredients                    #
 # ---------------------------------------------- #
 
-gatheringTypeCount: 5
-g1:
-  gatheringType: "FISHING"
-  gatheringToolTier: "WOODEN"
+count: 1
+m1:
+  mobKey: TutorialSoldier
   ingredients:
     - 4
     - 5

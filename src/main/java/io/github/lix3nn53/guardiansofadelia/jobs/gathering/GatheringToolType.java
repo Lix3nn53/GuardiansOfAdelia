@@ -9,13 +9,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public enum GatheringTool {
+public enum GatheringToolType {
     FISHING_ROD,
     HOE,
     PICKAXE,
     AXE;
 
-    public static GatheringTool materialToGatheringTool(Material material) {
+    public static GatheringToolType materialToGatheringTool(Material material) {
         if (material.equals(Material.WOODEN_PICKAXE) || material.equals(Material.STONE_PICKAXE) || material.equals(Material.IRON_PICKAXE)
                 || material.equals(Material.GOLDEN_PICKAXE) || material.equals(Material.DIAMOND_PICKAXE)) {
             return PICKAXE;
@@ -42,7 +42,7 @@ public enum GatheringTool {
             case FISHING_ROD:
                 itemStack = new ItemStack(Material.FISHING_ROD);
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.GREEN + "Fishing Rod" + " (" + durability + " Uses left)");
+                itemMeta.setDisplayName(ChatColor.GREEN + tierName + "Fishing Rod" + " (" + durability + " Uses left)");
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("");
                 lore.add(ChatColor.GREEN + "Fishing: " + ChatColor.YELLOW + "Raw Cod, Raw Salmon");
@@ -51,6 +51,7 @@ public enum GatheringTool {
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
+                PersistentDataContainerUtil.putString("toolTier", tierName, itemStack);
                 break;
             case HOE:
                 String materialStr = gatheringToolTier.name() + "_" + this.name();
@@ -67,6 +68,7 @@ public enum GatheringTool {
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
+                PersistentDataContainerUtil.putString("toolTier", tierName, itemStack);
                 break;
             case PICKAXE:
                 materialStr = gatheringToolTier.name() + "_" + this.name();
@@ -87,6 +89,7 @@ public enum GatheringTool {
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
+                PersistentDataContainerUtil.putString("toolTier", tierName, itemStack);
                 break;
             case AXE:
                 materialStr = gatheringToolTier.name() + "_" + this.name();
@@ -101,6 +104,7 @@ public enum GatheringTool {
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
+                PersistentDataContainerUtil.putString("toolTier", tierName, itemStack);
                 break;
         }
         return itemStack;

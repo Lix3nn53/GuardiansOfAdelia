@@ -5,7 +5,6 @@ public enum GatheringType {
     HARVESTING_FLOWER,
     FISHING,
     MINING_ORE,
-    MINING_JEWELRY,
-    HUNTING
+    MINING_JEWELRY
 }
 

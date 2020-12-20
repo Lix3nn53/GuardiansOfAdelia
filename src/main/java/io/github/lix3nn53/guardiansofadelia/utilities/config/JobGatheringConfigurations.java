@@ -20,6 +20,7 @@ public class JobGatheringConfigurations {
     private static FileConfiguration customModelDataToIngredients;
     private static FileConfiguration gatheringTypeToIngredients;
     private static FileConfiguration gatheringToolToCustomModelDatas;
+    private static FileConfiguration mobKeyToIngredients;
 
     static void createConfigs() {
         createIngredients();
@@ -27,6 +28,7 @@ public class JobGatheringConfigurations {
         createCustomModelDataToIngredients();
         createGatheringToolToCustomModelDatas();
         createGatheringTypeToIngredients();
+        createMobKeyToIngredients();
     }
 
     static void loadConfigs() {
@@ -35,6 +37,7 @@ public class JobGatheringConfigurations {
         loadBlockToIngredients();
         loadGatheringToolToCustomModelDatas();
         loadGatheringTypeToIngredients();
+        loadMobKeyToIngredients();
     }
 
     private static void createIngredients() {
@@ -150,13 +153,15 @@ public class JobGatheringConfigurations {
         int itemCount = gatheringToolToCustomModelDatas.getInt("toolCount");
 
         for (int i = 1; i <= itemCount; i++) {
-            String gatheringToolStr = gatheringToolToCustomModelDatas.getString("t" + i + ".gatheringTool");
+            String gatheringToolTypeStr = gatheringToolToCustomModelDatas.getString("t" + i + ".gatheringToolType");
+            String gatheringToolTierStr = gatheringToolToCustomModelDatas.getString("t" + i + ".gatheringToolTier");
             List<Integer> targetCustomModelDatas = gatheringToolToCustomModelDatas.getIntegerList("t" + i + ".targetCustomModelDatas");
 
-            GatheringTool gatheringTool = GatheringTool.valueOf(gatheringToolStr);
+            GatheringToolType gatheringToolType = GatheringToolType.valueOf(gatheringToolTypeStr);
+            GatheringToolTier gatheringToolTier = GatheringToolTier.valueOf(gatheringToolTierStr);
 
             for (int customModelData : targetCustomModelDatas) {
-                GatheringManager.putToolToCustomModelData(gatheringTool, customModelData);
+                GatheringManager.putToolToCustomModelData(gatheringToolType, gatheringToolTier, customModelData);
             }
         }
     }
@@ -221,16 +226,53 @@ public class JobGatheringConfigurations {
     }
 
     private static void loadGatheringTypeToIngredients() {
-        int itemCount = gatheringTypeToIngredients.getInt("ingredientCount");
+        int itemCount = gatheringTypeToIngredients.getInt("gatheringTypeCount");
 
         for (int i = 1; i <= itemCount; i++) {
+            String gatheringTypeStr = gatheringTypeToIngredients.getString("g" + i + ".gatheringType");
+            String gatheringToolTierStr = gatheringTypeToIngredients.getString("g" + i + ".gatheringToolTier");
             List<Integer> ingredients = gatheringTypeToIngredients.getIntegerList("g" + i + ".ingredients");
-            List<String> sourceGatheringTypes = gatheringTypeToIngredients.getStringList("i" + i + ".gatheringTypes");
 
-            for (String str : sourceGatheringTypes) {
-                for (Integer ingredient : ingredients) {
-                    GatheringManager.putGatheringTypeToIngredient(GatheringType.valueOf(str), ingredient);
-                }
+            GatheringType gatheringType = GatheringType.valueOf(gatheringTypeStr);
+            GatheringToolTier gatheringToolTier = GatheringToolTier.valueOf(gatheringToolTierStr);
+
+            for (Integer ingredient : ingredients) {
+                GatheringManager.putGatheringTypeToIngredient(gatheringType, gatheringToolTier, ingredient);
+            }
+        }
+    }
+
+    private static void createMobKeyToIngredients() {
+        String fileName = "MobKeyToIngredients.yml";
+        String filePath = ConfigManager.DATA_FOLDER + File.separator + "jobs" + File.separator + "gathering";
+        File customConfigFile = new File(filePath, fileName);
+        if (!customConfigFile.exists()) {
+            customConfigFile.getParentFile().mkdirs();
+
+            try {
+                customConfigFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        mobKeyToIngredients = new YamlConfiguration();
+        try {
+            mobKeyToIngredients.load(customConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadMobKeyToIngredients() {
+        int itemCount = mobKeyToIngredients.getInt("count");
+
+        for (int i = 1; i <= itemCount; i++) {
+            String mobKey = mobKeyToIngredients.getString("m" + i + ".mobKey");
+            List<Integer> ingredients = mobKeyToIngredients.getIntegerList("m" + i + ".ingredients");
+
+            for (Integer ingredient : ingredients) {
+                GatheringManager.putMobKeyToIngredient(mobKey, ingredient);
             }
         }
     }

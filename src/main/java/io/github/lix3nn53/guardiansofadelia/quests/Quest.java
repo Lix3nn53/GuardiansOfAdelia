@@ -18,7 +18,6 @@ import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -519,7 +518,7 @@ public final class Quest {
         return false;
     }
 
-    public boolean triggerQuestItemDrop(String internalName, Location location) {
+    public ItemStack triggerQuestItemDrop(String internalName) {
         for (Task task : this.tasks) {
             if (task.isCompleted()) continue;
             if (task instanceof TaskCollect) {
@@ -528,14 +527,12 @@ public final class Quest {
                 if (keyOfMobsItemDropsFrom.contains(internalName)) {
                     double random = Math.random();
                     if (random < taskCollect.getChance()) {
-                        ItemStack itemStack = taskCollect.getItemStack();
-                        World world = location.getWorld();
-                        world.dropItemNaturally(location, itemStack);
+                        return taskCollect.getItemStack();
                     }
                 }
             }
         }
-        return false;
+        return null;
     }
 
     public boolean progressInteractTasks(Player questOwner, int npcId) {

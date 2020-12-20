@@ -10,13 +10,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
-import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDeathEvent;
-import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -73,6 +70,12 @@ public class KillProtectionManager {
                     MiniGameManager.onMobKill(once, internalName);
                 }
             }
+            if (GatheringManager.dropsIngredient(internalName)) {
+                ItemStack ingredient = GatheringManager.triggerIngredientDrop(internalName);
+                if (ingredient != null) {
+                    mythicEvent.getDrops().add(ingredient);
+                }
+            }
             once.sendMessage("Killed mobLevel: " + mobLevel);
 
             //run for each player
@@ -96,16 +99,9 @@ public class KillProtectionManager {
                         List<Quest> questList = activeCharacter.getQuestList();
                         for (Quest quest : questList) {
                             quest.progressKillTasks(player, internalName);
-                            quest.triggerQuestItemDrop(internalName, livingTarget.getLocation());
-                        }
-
-                        //hunting
-                        if (livingTarget.getType().equals(EntityType.COW) || livingTarget.getType().equals(EntityType.SHEEP)) {
-                            ItemStack itemStack = GatheringManager.finishGathering(player, null, GatheringType.HUNTING);
-                            if (itemStack != null) {
-                                Location targetLocation = livingTarget.getLocation();
-                                Item item = livingTarget.getWorld().dropItemNaturally(targetLocation.add(0, 0.5, 0), itemStack);
-                                DropProtectionManager.setItem(item.getItemStack(), player);
+                            ItemStack questItemDrop = quest.triggerQuestItemDrop(internalName);
+                            if (questItemDrop != null) {
+                                mythicEvent.getDrops().add(questItemDrop);
                             }
                         }
                     }

@@ -6,14 +6,17 @@
 
 toolCount: 3
 t1:
-  gatheringTool: AXE
+  gatheringToolType: AXE
+  gatheringToolTier: WOODEN
   targetCustomModelDatas:
     - 1
 t2:
-  gatheringTool: PICKAXE
+  gatheringToolType: PICKAXE
+  gatheringToolTier: WOODEN
   targetCustomModelDatas:
     - 2
 t3:
-  gatheringTool: HOE
+  gatheringToolType: HOE
+  gatheringToolTier: WOODEN
   targetCustomModelDatas:
     - 3

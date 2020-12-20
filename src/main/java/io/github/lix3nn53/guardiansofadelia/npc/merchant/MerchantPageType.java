@@ -15,8 +15,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
-import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringTool;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolType;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -512,35 +512,35 @@ public enum MerchantPageType {
     private GuiBookGeneric getToolShop(int shopLevel, int shopNpc) {
         MerchantGuiLine line1 = new MerchantGuiLine();
 
-        ItemStack axe = GatheringTool.AXE.getItemStack(GatheringToolTier.WOODEN);
-        ItemStack hoe = GatheringTool.HOE.getItemStack(GatheringToolTier.WOODEN);
-        ItemStack pickaxe = GatheringTool.PICKAXE.getItemStack(GatheringToolTier.WOODEN);
-        ItemStack fishingRod = GatheringTool.FISHING_ROD.getItemStack(GatheringToolTier.WOODEN);
+        ItemStack axe = GatheringToolType.AXE.getItemStack(GatheringToolTier.WOODEN);
+        ItemStack hoe = GatheringToolType.HOE.getItemStack(GatheringToolTier.WOODEN);
+        ItemStack pickaxe = GatheringToolType.PICKAXE.getItemStack(GatheringToolTier.WOODEN);
+        ItemStack fishingRod = GatheringToolType.FISHING_ROD.getItemStack(GatheringToolTier.WOODEN);
         int price = 4;
 
         if (shopLevel == 2) {
-            axe = GatheringTool.AXE.getItemStack(GatheringToolTier.STONE);
-            hoe = GatheringTool.HOE.getItemStack(GatheringToolTier.STONE);
-            pickaxe = GatheringTool.PICKAXE.getItemStack(GatheringToolTier.STONE);
-            fishingRod = GatheringTool.FISHING_ROD.getItemStack(GatheringToolTier.STONE);
+            axe = GatheringToolType.AXE.getItemStack(GatheringToolTier.STONE);
+            hoe = GatheringToolType.HOE.getItemStack(GatheringToolTier.STONE);
+            pickaxe = GatheringToolType.PICKAXE.getItemStack(GatheringToolTier.STONE);
+            fishingRod = GatheringToolType.FISHING_ROD.getItemStack(GatheringToolTier.STONE);
             price = 6;
         } else if (shopLevel == 3) {
-            axe = GatheringTool.AXE.getItemStack(GatheringToolTier.IRON);
-            hoe = GatheringTool.HOE.getItemStack(GatheringToolTier.IRON);
-            pickaxe = GatheringTool.PICKAXE.getItemStack(GatheringToolTier.IRON);
-            fishingRod = GatheringTool.FISHING_ROD.getItemStack(GatheringToolTier.IRON);
+            axe = GatheringToolType.AXE.getItemStack(GatheringToolTier.IRON);
+            hoe = GatheringToolType.HOE.getItemStack(GatheringToolTier.IRON);
+            pickaxe = GatheringToolType.PICKAXE.getItemStack(GatheringToolTier.IRON);
+            fishingRod = GatheringToolType.FISHING_ROD.getItemStack(GatheringToolTier.IRON);
             price = 8;
         } else if (shopLevel == 4) {
-            axe = GatheringTool.AXE.getItemStack(GatheringToolTier.GOLDEN);
-            hoe = GatheringTool.HOE.getItemStack(GatheringToolTier.GOLDEN);
-            pickaxe = GatheringTool.PICKAXE.getItemStack(GatheringToolTier.GOLDEN);
-            fishingRod = GatheringTool.FISHING_ROD.getItemStack(GatheringToolTier.GOLDEN);
+            axe = GatheringToolType.AXE.getItemStack(GatheringToolTier.GOLDEN);
+            hoe = GatheringToolType.HOE.getItemStack(GatheringToolTier.GOLDEN);
+            pickaxe = GatheringToolType.PICKAXE.getItemStack(GatheringToolTier.GOLDEN);
+            fishingRod = GatheringToolType.FISHING_ROD.getItemStack(GatheringToolTier.GOLDEN);
             price = 10;
         } else if (shopLevel == 5) {
-            axe = GatheringTool.AXE.getItemStack(GatheringToolTier.DIAMOND);
-            hoe = GatheringTool.HOE.getItemStack(GatheringToolTier.DIAMOND);
-            pickaxe = GatheringTool.PICKAXE.getItemStack(GatheringToolTier.DIAMOND);
-            fishingRod = GatheringTool.FISHING_ROD.getItemStack(GatheringToolTier.DIAMOND);
+            axe = GatheringToolType.AXE.getItemStack(GatheringToolTier.DIAMOND);
+            hoe = GatheringToolType.HOE.getItemStack(GatheringToolTier.DIAMOND);
+            pickaxe = GatheringToolType.PICKAXE.getItemStack(GatheringToolTier.DIAMOND);
+            fishingRod = GatheringToolType.FISHING_ROD.getItemStack(GatheringToolTier.DIAMOND);
             price = 12;
         }
 
