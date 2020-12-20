@@ -7,6 +7,22 @@ public enum GatheringToolTier {
     GOLDEN,
     DIAMOND;
 
+    public GatheringToolTier getNext() {
+        switch (this) {
+            case WOODEN:
+                return STONE;
+            case STONE:
+                return IRON;
+            case IRON:
+                return GOLDEN;
+            case GOLDEN:
+                return DIAMOND;
+            case DIAMOND:
+                return null;
+        }
+        return null;
+    }
+
     public int getDurability() {
         switch (this) {
             case WOODEN:

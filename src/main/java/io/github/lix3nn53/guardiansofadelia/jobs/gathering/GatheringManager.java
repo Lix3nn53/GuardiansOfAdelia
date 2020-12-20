@@ -75,17 +75,14 @@ public class GatheringManager {
         }
 
         GatheringToolType gatheringToolType = GatheringToolType.materialToGatheringTool(itemInHand.getType());
-        String s = gatheringToolType.toString();
         String toolTierStr = PersistentDataContainerUtil.getString(itemInHand, "toolTier");
+        GatheringToolTier gatheringToolTier = GatheringToolTier.valueOf(toolTierStr);
 
-        if (gatheringToolType == null) return;
-
-        if (gatheringToolPlusTierToCustomModelDatas.containsKey(s + toolTierStr)) {
-            List<Integer> customModelDatas = gatheringToolPlusTierToCustomModelDatas.get(s + toolTierStr);
+        if (constainsToolToCustomModelData(gatheringToolType, gatheringToolTier)) {
+            List<Integer> customModelDatas = getToolToCustomModelData(gatheringToolType, gatheringToolTier);
 
             int customModelData = gatheringModel.getCustomModelData();
             if (customModelDatas.contains(customModelData)) {
-                GatheringToolTier gatheringToolTier = GatheringToolTier.valueOf(toolTierStr);
                 startGatheringAnimation(player, gatheringToolType, gatheringToolTier, itemInHand, gatheringModel);
             }
         }
@@ -112,10 +109,8 @@ public class GatheringManager {
     }
 
     private static List<Ingredient> getIngredients(GatheringToolType gatheringToolType, GatheringToolTier gatheringToolTier, int customModelData) {
-        String s = gatheringToolType.toString();
-        String s1 = gatheringToolTier.toString();
-        if (gatheringToolPlusTierToCustomModelDatas.containsKey(s + s1)) {
-            List<Integer> customModelDatas = gatheringToolPlusTierToCustomModelDatas.get(s + s1);
+        if (constainsToolToCustomModelData(gatheringToolType, gatheringToolTier)) {
+            List<Integer> customModelDatas = getToolToCustomModelData(gatheringToolType, gatheringToolTier);
 
             if (customModelDatas.contains(customModelData)) {
                 List<Integer> integers = customModelDataToIngredients.get(customModelData);
@@ -337,12 +332,28 @@ public class GatheringManager {
 
     public static void putToolToCustomModelData(GatheringToolType gatheringToolType, GatheringToolTier gatheringToolTier, int customModelData) {
         List<Integer> customModelDatas = new ArrayList<>();
-        String key = gatheringToolType.toString() + gatheringToolTier.toString();
+        String key = gatheringToolType.toString() + "+" + gatheringToolTier.toString();
         if (gatheringToolPlusTierToCustomModelDatas.containsKey(key)) {
             customModelDatas = gatheringToolPlusTierToCustomModelDatas.get(key);
         }
         customModelDatas.add(customModelData);
         gatheringToolPlusTierToCustomModelDatas.put(key, customModelDatas);
+
+        //Add same customModelData for NEXT tier so DIAMOND tier can gather what GOLDEN tier can gather
+        GatheringToolTier next = gatheringToolTier.getNext();
+        if (next != null) {
+            putToolToCustomModelData(gatheringToolType, next, customModelData);
+        }
+    }
+
+    public static boolean constainsToolToCustomModelData(GatheringToolType gatheringToolType, GatheringToolTier gatheringToolTier) {
+        String key = gatheringToolType.toString() + "+" + gatheringToolTier.toString();
+        return gatheringToolPlusTierToCustomModelDatas.containsKey(key);
+    }
+
+    public static List<Integer> getToolToCustomModelData(GatheringToolType gatheringToolType, GatheringToolTier gatheringToolTier) {
+        String key = gatheringToolType.toString() + "+" + gatheringToolTier.toString();
+        return gatheringToolPlusTierToCustomModelDatas.get(key);
     }
 
     public static void putCustomModelDataToIngredient(int customModelData, int ingredient) {
