@@ -47,6 +47,8 @@ import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
+import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
@@ -1032,6 +1034,9 @@ public class MyInventoryClickEvent implements Listener {
                                         CraftingType craftingType = CraftingType.valueOf(split[0]);
 
                                         rpgCharacter.getCraftingStats().addExperience(player, craftingType, jobExpToGive);
+
+                                        CustomSound customSound = GoaSound.ANVIL.getCustomSound();
+                                        customSound.play(player.getLocation());
                                     }
                                 }
                             }

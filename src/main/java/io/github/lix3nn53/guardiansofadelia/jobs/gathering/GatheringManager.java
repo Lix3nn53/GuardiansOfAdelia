@@ -7,11 +7,15 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import net.minecraft.server.v1_16_R3.PacketPlayOutAnimation;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -59,7 +63,6 @@ public class GatheringManager {
 
     public static void startGathering(Player player, ItemStack itemInHand, GatheringModel gatheringModel) {
         if (gatheringModel.isBeingGathered()) {
-            player.sendMessage(ChatColor.RED + "Another player is gathering this resource");
             return;
         }
 
@@ -72,7 +75,6 @@ public class GatheringManager {
 
             int customModelData = gatheringModel.getCustomModelData();
             if (customModelDatas.contains(customModelData)) {
-                gatheringModel.setBeingGathered(true);
                 startGatheringAnimation(player, gatheringTool, itemInHand, gatheringModel);
             }
         }
@@ -145,7 +147,8 @@ public class GatheringManager {
 
             ItemStack ingItemStack = ingredient.getItemStack(amount);
 
-            player.sendTitle("", ChatColor.YELLOW + "" + ingItemStack.getAmount() + "x " + ingItemStack.getItemMeta().getDisplayName(), 30, 80, 30);
+            player.sendTitle("", ChatColor.GREEN + "Obtained " +
+                    ChatColor.YELLOW + ingItemStack.getAmount() + "x " + ingItemStack.getItemMeta().getDisplayName(), 30, 80, 30);
 
             progressGatheringTasks(player, ingredient, amount);
 
@@ -187,6 +190,7 @@ public class GatheringManager {
             final GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
             if (guardianData.isFreeToAct()) {
                 guardianData.setGathering(true);
+                gatheringModel.setBeingGathered(true);
 
                 final double startPosX = player.getLocation().getX();
                 final double startPosY = player.getLocation().getY();
@@ -218,6 +222,8 @@ public class GatheringManager {
                                 gatheringModel.setBeingGathered(false);
                             } else {
                                 armorStand.setCustomName(ChatColor.YELLOW + "||||||||||||||||");
+                                CustomSound customSound = new CustomSound(Sound.BLOCK_STONE_HIT, 0.5f, 1f);
+                                customSound.play(player.getLocation());
                             }
                         } else if (secsRun == 1) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
@@ -228,6 +234,11 @@ public class GatheringManager {
                                 gatheringModel.setBeingGathered(false);
                             } else {
                                 armorStand.setCustomName(ChatColor.GREEN + "||||" + ChatColor.YELLOW + "||||||||||||");
+                                CustomSound customSound = new CustomSound(Sound.BLOCK_STONE_HIT, 0.5f, 1f);
+                                customSound.play(player.getLocation());
+
+                                PacketPlayOutAnimation animation = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 0);
+                                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(animation);
                             }
                         } else if (secsRun == 2) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
@@ -238,6 +249,11 @@ public class GatheringManager {
                                 gatheringModel.setBeingGathered(false);
                             } else {
                                 armorStand.setCustomName(ChatColor.GREEN + "||||||||" + ChatColor.YELLOW + "||||||||");
+                                CustomSound customSound = new CustomSound(Sound.BLOCK_STONE_HIT, 0.5f, 1f);
+                                customSound.play(player.getLocation());
+
+                                PacketPlayOutAnimation animation = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 0);
+                                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(animation);
                             }
                         } else if (secsRun == 3) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
@@ -248,6 +264,11 @@ public class GatheringManager {
                                 gatheringModel.setBeingGathered(false);
                             } else {
                                 armorStand.setCustomName(ChatColor.GREEN + "||||||||||||" + ChatColor.YELLOW + "||||");
+                                CustomSound customSound = new CustomSound(Sound.BLOCK_STONE_HIT, 0.5f, 1f);
+                                customSound.play(player.getLocation());
+
+                                PacketPlayOutAnimation animation = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 0);
+                                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(animation);
                             }
                         } else if (secsRun == 4) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
@@ -258,6 +279,11 @@ public class GatheringManager {
                                 gatheringModel.setBeingGathered(false);
                             } else {
                                 armorStand.setCustomName(ChatColor.GREEN + "||||||||||||||||");
+                                CustomSound customSound = new CustomSound(Sound.BLOCK_STONE_HIT, 0.5f, 1f);
+                                customSound.play(player.getLocation());
+
+                                PacketPlayOutAnimation animation = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 0);
+                                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(animation);
                             }
                         } else if (secsRun == 5) {
                             cancel();
