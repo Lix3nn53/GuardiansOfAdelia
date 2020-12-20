@@ -9,14 +9,14 @@ t1:
   gatheringToolType: AXE
   gatheringToolTier: WOODEN
   targetCustomModelDatas:
-    - 1
+    - 2
 t2:
   gatheringToolType: PICKAXE
   gatheringToolTier: WOODEN
   targetCustomModelDatas:
-    - 2
+    - 3
 t3:
-  gatheringToolType: HOE
+  gatheringToolType: FISHING_ROD
   gatheringToolTier: WOODEN
   targetCustomModelDatas:
-    - 3
+    - 4

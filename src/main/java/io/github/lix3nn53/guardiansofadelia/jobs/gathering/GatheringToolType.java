@@ -37,6 +37,7 @@ public enum GatheringToolType {
         int durability = gatheringToolTier.getDurability();
 
         String tierName = gatheringToolTier.toString();
+        String tierNameEnum = gatheringToolTier.name();
 
         switch (this) {
             case FISHING_ROD:
@@ -51,7 +52,7 @@ public enum GatheringToolType {
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
-                PersistentDataContainerUtil.putString("toolTier", tierName, itemStack);
+                PersistentDataContainerUtil.putString("toolTier", tierNameEnum, itemStack);
                 break;
             case HOE:
                 String materialStr = gatheringToolTier.name() + "_" + this.name();
@@ -68,7 +69,7 @@ public enum GatheringToolType {
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
-                PersistentDataContainerUtil.putString("toolTier", tierName, itemStack);
+                PersistentDataContainerUtil.putString("toolTier", tierNameEnum, itemStack);
                 break;
             case PICKAXE:
                 materialStr = gatheringToolTier.name() + "_" + this.name();
@@ -89,7 +90,7 @@ public enum GatheringToolType {
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
-                PersistentDataContainerUtil.putString("toolTier", tierName, itemStack);
+                PersistentDataContainerUtil.putString("toolTier", tierNameEnum, itemStack);
                 break;
             case AXE:
                 materialStr = gatheringToolTier.name() + "_" + this.name();
@@ -104,7 +105,7 @@ public enum GatheringToolType {
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
                 itemStack.setItemMeta(itemMeta);
                 PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
-                PersistentDataContainerUtil.putString("toolTier", tierName, itemStack);
+                PersistentDataContainerUtil.putString("toolTier", tierNameEnum, itemStack);
                 break;
         }
         return itemStack;

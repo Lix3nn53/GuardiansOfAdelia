@@ -15,3 +15,13 @@ i1:
   z: 1450.5
   yaw: 0
   pitch: 0
+i1:
+  name: "&6Fishing Area"
+  customModelData: 4
+  cooldownCustomModelData: 1
+  world: world
+  x: 2031.5
+  y: 101.0
+  z: 1419.5
+  yaw: 0
+  pitch: 0

@@ -36,10 +36,6 @@ public class GatheringManager {
     //GATHERING ENTITY MANAGER
     private static final HashMap<String, List<GatheringModel>> chunkKeyToGatheringCustomModelData = new HashMap<>();
 
-    //GATHERING ONLY ONE RESOURCE (For example fishing, sea is the only resource
-    // so ingredients change according to tool tier instead of resource)
-    private final static HashMap<String, List<Integer>> gatheringTypePlusGatheringToolTierToIngredients = new HashMap<>();
-
     //GATHERING FROM MOB KILL
     private final static HashMap<String, List<Integer>> mobKeyToIngredients = new HashMap<>();
 
@@ -85,23 +81,32 @@ public class GatheringManager {
             if (customModelDatas.contains(customModelData)) {
                 startGatheringAnimation(player, gatheringToolType, gatheringToolTier, itemInHand, gatheringModel);
             }
+        } else {
+            player.sendMessage(ChatColor.RED + "You are not holding the required tool to gather this resource");
         }
     }
 
-    private static ItemStack finishGathering(Player player, ItemStack itemInHand, GatheringToolType gatheringToolType, GatheringToolTier gatheringToolTier, int customModelData) {
+    public static boolean canStartFishing(Player player, ItemStack itemInHand, GatheringModel gatheringModel) {
+        GatheringToolType gatheringToolType = GatheringToolType.materialToGatheringTool(itemInHand.getType());
+        String toolTierStr = PersistentDataContainerUtil.getString(itemInHand, "toolTier");
+        GatheringToolTier gatheringToolTier = GatheringToolTier.valueOf(toolTierStr);
+
+        if (constainsToolToCustomModelData(gatheringToolType, gatheringToolTier)) {
+            List<Integer> customModelDatas = getToolToCustomModelData(gatheringToolType, gatheringToolTier);
+
+            int customModelData = gatheringModel.getCustomModelData();
+            return customModelDatas.contains(customModelData);
+        } else {
+            player.sendMessage(ChatColor.RED + "You are not holding the required tool to gather this resource");
+        }
+
+        return false;
+    }
+
+    public static ItemStack finishGathering(Player player, ItemStack itemInHand, GatheringToolType gatheringToolType, GatheringToolTier gatheringToolTier, int customModelData) {
         decreaseDurability(player, itemInHand);
 
         List<Ingredient> ingredients = getIngredients(gatheringToolType, gatheringToolTier, customModelData);
-
-        if (ingredients == null) return null;
-
-        return getGathered(player, ingredients);
-    }
-
-    public static ItemStack finishGathering(Player player, ItemStack itemInHand, GatheringType gatheringType, GatheringToolTier gatheringToolTier) {
-        decreaseDurability(player, itemInHand);
-
-        List<Ingredient> ingredients = getIngredients(gatheringType, gatheringToolTier);
 
         if (ingredients == null) return null;
 
@@ -123,23 +128,6 @@ public class GatheringManager {
 
                 return ingredients;
             }
-        }
-
-        return null;
-    }
-
-    private static List<Ingredient> getIngredients(GatheringType gatheringType, GatheringToolTier gatheringToolTier) {
-        String key = gatheringType.toString() + gatheringToolTier.toString();
-        if (gatheringTypePlusGatheringToolTierToIngredients.containsKey(key)) {
-            List<Integer> integers = gatheringTypePlusGatheringToolTierToIngredients.get(key);
-
-            List<Ingredient> ingredients = new ArrayList<>();
-
-            for (int i : integers) {
-                ingredients.add(ingredientHashMap.get(i));
-            }
-
-            return ingredients;
         }
 
         return null;
@@ -363,16 +351,6 @@ public class GatheringManager {
         }
         ingredients.add(ingredient);
         customModelDataToIngredients.put(customModelData, ingredients);
-    }
-
-    public static void putGatheringTypeToIngredient(GatheringType gatheringType, GatheringToolTier gatheringToolTier, int ingredient) {
-        String key = gatheringType.toString() + gatheringToolTier.toString();
-        List<Integer> ingredients = new ArrayList<>();
-        if (gatheringTypePlusGatheringToolTierToIngredients.containsKey(key)) {
-            ingredients = gatheringTypePlusGatheringToolTierToIngredients.get(key);
-        }
-        ingredients.add(ingredient);
-        gatheringTypePlusGatheringToolTierToIngredients.put(key, ingredients);
     }
 
     public static void putGatheringModel(GatheringModel gatheringModel) {
