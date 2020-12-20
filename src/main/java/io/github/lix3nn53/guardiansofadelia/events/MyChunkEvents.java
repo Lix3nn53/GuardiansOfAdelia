@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
@@ -88,6 +89,7 @@ public class MyChunkEvents implements Listener {
         CheckpointManager.onChunkLoad(chunkKey);
         HologramManager.onChunkLoad(chunkKey);
         LootChestManager.onChunkLoad(chunkKey);
+        GatheringManager.onChunkLoad(chunkKey);
     }
 
     private void customEventsOnChunkUnload(Chunk chunk) {

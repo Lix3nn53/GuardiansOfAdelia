@@ -4,11 +4,16 @@
 #                 Ingredients                    #
 # ---------------------------------------------- #
 
-blockCount: 10
-b1:
-  ingredients:
-    - 6
-    - 7
-    - 8
-  sourceBlocks:
-    - 'COBWEB'
+toolCount: 3
+t1:
+  gatheringTool: AXE
+  targetCustomModelDatas:
+    - 1
+t2:
+  gatheringTool: PICKAXE
+  targetCustomModelDatas:
+    - 2
+t3:
+  gatheringTool: HOE
+  targetCustomModelDatas:
+    - 3

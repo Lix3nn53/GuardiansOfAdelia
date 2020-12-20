@@ -8,9 +8,11 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -23,30 +25,63 @@ public class GatheringManager {
     private final static HashMap<Integer, Ingredient> ingredientHashMap = new HashMap<>();
 
     //MINING
-    private final static HashMap<GatheringTool, List<Material>> gatheringToolToBlocks = new HashMap<>();
-    private final static HashMap<Material, List<Integer>> blockToIngredients = new HashMap<>();
+    public final static Material gatheringMaterial = Material.STONE_AXE;
+    private final static HashMap<GatheringTool, List<Integer>> gatheringToolToCustomModelDatas = new HashMap<>();
+    private final static HashMap<Integer, List<Integer>> customModelDataToIngredients = new HashMap<>();
+    //MINING ENTITY MANAGER
+    private static final HashMap<String, List<GatheringModel>> chunkKeyToGatheringCustomModelData = new HashMap<>();
 
     //OTHER
     private final static HashMap<GatheringType, List<Integer>> gatheringTypeToIngredients = new HashMap<>();
 
-    public static void startGathering(Player player, ItemStack itemInHand, Material targetBlock) {
-        GatheringTool gatheringTool = GatheringTool.materialToGatheringTool(itemInHand.getType());
+    public static GatheringModel getGatheringModelFromArmorStand(ArmorStand armorStand) {
+        for (String key : chunkKeyToGatheringCustomModelData.keySet()) {
+            List<GatheringModel> gatheringModels = chunkKeyToGatheringCustomModelData.get(key);
+            for (GatheringModel gatheringModel : gatheringModels) {
+                if (gatheringModel.getArmorStand() != null) {
+                    if (gatheringModel.getArmorStand().equals(armorStand)) {
+                        return gatheringModel;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
-        if (gatheringTool == null) return;
-
-        if (gatheringToolToBlocks.containsKey(gatheringTool)) {
-            List<Material> materials = gatheringToolToBlocks.get(gatheringTool);
-
-            if (materials.contains(targetBlock)) {
-                startGatheringAnimation(player, gatheringTool, itemInHand, targetBlock);
+    public static void onChunkLoad(String chunkKey) {
+        if (chunkKeyToGatheringCustomModelData.containsKey(chunkKey)) {
+            List<GatheringModel> gatheringModels = chunkKeyToGatheringCustomModelData.get(chunkKey);
+            for (GatheringModel gatheringModel : gatheringModels) {
+                gatheringModel.createModel();
             }
         }
     }
 
-    private static ItemStack finishGathering(Player player, ItemStack itemInHand, GatheringTool gatheringTool, Material targetBlock) {
+    public static void startGathering(Player player, ItemStack itemInHand, GatheringModel gatheringModel) {
+        if (gatheringModel.isBeingGathered()) {
+            player.sendMessage(ChatColor.RED + "Another player is gathering this resource");
+            return;
+        }
+
+        GatheringTool gatheringTool = GatheringTool.materialToGatheringTool(itemInHand.getType());
+
+        if (gatheringTool == null) return;
+
+        if (gatheringToolToCustomModelDatas.containsKey(gatheringTool)) {
+            List<Integer> customModelDatas = gatheringToolToCustomModelDatas.get(gatheringTool);
+
+            int customModelData = gatheringModel.getCustomModelData();
+            if (customModelDatas.contains(customModelData)) {
+                gatheringModel.setBeingGathered(true);
+                startGatheringAnimation(player, gatheringTool, itemInHand, gatheringModel);
+            }
+        }
+    }
+
+    private static ItemStack finishGathering(Player player, ItemStack itemInHand, GatheringTool gatheringTool, int customModelData) {
         decreaseDurability(player, itemInHand);
 
-        List<Ingredient> ingredients = getIngredients(gatheringTool, targetBlock);
+        List<Ingredient> ingredients = getIngredients(gatheringTool, customModelData);
 
         if (ingredients == null) return null;
 
@@ -63,12 +98,12 @@ public class GatheringManager {
         return getGathered(player, ingredients);
     }
 
-    private static List<Ingredient> getIngredients(GatheringTool gatheringTool, Material targetBlock) {
-        if (gatheringToolToBlocks.containsKey(gatheringTool)) {
-            List<Material> materials = gatheringToolToBlocks.get(gatheringTool);
+    private static List<Ingredient> getIngredients(GatheringTool gatheringTool, int customModelData) {
+        if (gatheringToolToCustomModelDatas.containsKey(gatheringTool)) {
+            List<Integer> customModelDatas = gatheringToolToCustomModelDatas.get(gatheringTool);
 
-            if (materials.contains(targetBlock)) {
-                List<Integer> integers = blockToIngredients.get(targetBlock);
+            if (customModelDatas.contains(customModelData)) {
+                List<Integer> integers = customModelDataToIngredients.get(customModelData);
 
                 List<Ingredient> ingredients = new ArrayList<>();
 
@@ -110,13 +145,13 @@ public class GatheringManager {
 
             ItemStack ingItemStack = ingredient.getItemStack(amount);
 
-            player.sendTitle(ChatColor.GREEN + "Gathering Success", ChatColor.YELLOW + "" + ingItemStack.getAmount() + "x " + ingItemStack.getItemMeta().getDisplayName(), 30, 80, 30);
+            player.sendTitle("", ChatColor.YELLOW + "" + ingItemStack.getAmount() + "x " + ingItemStack.getItemMeta().getDisplayName(), 30, 80, 30);
 
             progressGatheringTasks(player, ingredient, amount);
 
             return ingItemStack;
         } else {
-            player.sendTitle(ChatColor.RED + "Gathering Failed", ChatColor.YELLOW + "Maybe next time..", 30, 80, 30);
+            player.sendTitle("", ChatColor.RED + "Gathering Failed", 30, 80, 30);
         }
 
         return null;
@@ -147,7 +182,7 @@ public class GatheringManager {
         return ingredientHashMap.get(i);
     }
 
-    private static void startGatheringAnimation(final Player player, GatheringTool gatheringTool, ItemStack itemStackTool, Material targetBlock) {
+    private static void startGatheringAnimation(final Player player, GatheringTool gatheringTool, ItemStack itemStackTool, GatheringModel gatheringModel) {
         if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
             final GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
             if (guardianData.isFreeToAct()) {
@@ -173,53 +208,66 @@ public class GatheringManager {
                         double differenceY = Math.abs(startPosY - player.getLocation().getY());
                         double differenceZ = Math.abs(startPosZ - player.getLocation().getZ());
 
+                        ArmorStand armorStand = gatheringModel.getArmorStand();
                         if (secsRun == 0) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
                                 player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
+                                gatheringModel.resetName();
+                                gatheringModel.setBeingGathered(false);
                             } else {
-                                player.sendTitle(ChatColor.YELLOW + "Gathering...", ChatColor.YELLOW + "||||||||||||||||", 0, 50, 0);
+                                armorStand.setCustomName(ChatColor.YELLOW + "||||||||||||||||");
                             }
                         } else if (secsRun == 1) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
                                 player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
+                                gatheringModel.resetName();
+                                gatheringModel.setBeingGathered(false);
                             } else {
-                                player.sendTitle(ChatColor.YELLOW + "Gathering...", ChatColor.GREEN + "||||" + ChatColor.YELLOW + "||||||||||||", 0, 50, 0);
+                                armorStand.setCustomName(ChatColor.GREEN + "||||" + ChatColor.YELLOW + "||||||||||||");
                             }
                         } else if (secsRun == 2) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
                                 player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
+                                gatheringModel.resetName();
+                                gatheringModel.setBeingGathered(false);
                             } else {
-                                player.sendTitle(ChatColor.YELLOW + "Gathering...", ChatColor.GREEN + "||||||||" + ChatColor.YELLOW + "||||||||", 0, 50, 0);
+                                armorStand.setCustomName(ChatColor.GREEN + "||||||||" + ChatColor.YELLOW + "||||||||");
                             }
                         } else if (secsRun == 3) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
                                 player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
+                                gatheringModel.resetName();
+                                gatheringModel.setBeingGathered(false);
                             } else {
-                                player.sendTitle(ChatColor.YELLOW + "Gathering...", ChatColor.GREEN + "||||||||||||" + ChatColor.YELLOW + "||||", 0, 50, 0);
+                                armorStand.setCustomName(ChatColor.GREEN + "||||||||||||" + ChatColor.YELLOW + "||||");
                             }
                         } else if (secsRun == 4) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
                                 player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
+                                gatheringModel.resetName();
+                                gatheringModel.setBeingGathered(false);
                             } else {
-                                player.sendTitle(ChatColor.YELLOW + "Gathering...", ChatColor.GREEN + "||||||||||||||||", 0, 50, 0);
+                                armorStand.setCustomName(ChatColor.GREEN + "||||||||||||||||");
                             }
                         } else if (secsRun == 5) {
                             cancel();
-                            ItemStack ingredient = finishGathering(player, itemStackTool, gatheringTool, targetBlock);
+                            int customModelData = gatheringModel.getCustomModelData();
+                            ItemStack ingredient = finishGathering(player, itemStackTool, gatheringTool, customModelData);
                             if (ingredient != null) {
                                 InventoryUtils.giveItemToPlayer(player, ingredient);
                             }
                             guardianData.setGathering(false);
+                            gatheringModel.onLoot();
                         }
                         secsRun++;
                     }
@@ -247,22 +295,22 @@ public class GatheringManager {
         ingredientHashMap.put(i, ingredient);
     }
 
-    public static void putToolToBlock(GatheringTool gatheringTool, Material block) {
-        List<Material> blocks = new ArrayList<>();
-        if (gatheringToolToBlocks.containsKey(gatheringTool)) {
-            blocks = gatheringToolToBlocks.get(gatheringTool);
+    public static void putToolToCustomModelData(GatheringTool gatheringTool, int customModelData) {
+        List<Integer> customModelDatas = new ArrayList<>();
+        if (gatheringToolToCustomModelDatas.containsKey(gatheringTool)) {
+            customModelDatas = gatheringToolToCustomModelDatas.get(gatheringTool);
         }
-        blocks.add(block);
-        gatheringToolToBlocks.put(gatheringTool, blocks);
+        customModelDatas.add(customModelData);
+        gatheringToolToCustomModelDatas.put(gatheringTool, customModelDatas);
     }
 
-    public static void putBlockToIngredient(Material block, int ingredient) {
+    public static void putCustomModelDataToIngredient(int customModelData, int ingredient) {
         List<Integer> ingredients = new ArrayList<>();
-        if (blockToIngredients.containsKey(block)) {
-            ingredients = blockToIngredients.get(block);
+        if (customModelDataToIngredients.containsKey(customModelData)) {
+            ingredients = customModelDataToIngredients.get(customModelData);
         }
         ingredients.add(ingredient);
-        blockToIngredients.put(block, ingredients);
+        customModelDataToIngredients.put(customModelData, ingredients);
     }
 
     public static void putGatheringTypeToIngredient(GatheringType gatheringType, int ingredient) {
@@ -272,5 +320,18 @@ public class GatheringManager {
         }
         ingredients.add(ingredient);
         gatheringTypeToIngredients.put(gatheringType, ingredients);
+    }
+
+    public static void putGatheringModel(GatheringModel gatheringModel) {
+        String chunkKey = LocationUtils.getChunkKey(gatheringModel.getBaseLocation());
+        if (chunkKeyToGatheringCustomModelData.containsKey(chunkKey)) {
+            List<GatheringModel> gatheringModels = chunkKeyToGatheringCustomModelData.get(chunkKey);
+            gatheringModels.add(gatheringModel);
+            chunkKeyToGatheringCustomModelData.put(chunkKey, gatheringModels);
+        } else {
+            List<GatheringModel> gatheringModels = new ArrayList<>();
+            gatheringModels.add(gatheringModel);
+            chunkKeyToGatheringCustomModelData.put(chunkKey, gatheringModels);
+        }
     }
 }

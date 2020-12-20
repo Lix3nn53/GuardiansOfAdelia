@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModel;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
@@ -29,7 +30,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerAnimationType;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashSet;
@@ -80,7 +80,7 @@ public class MyPlayerAnimationEvent implements Listener {
                         if (instantTeleport.canTeleport(player)) {
                             new BukkitRunnable() {
 
-                                int timeoutSecond = 3;
+                                final int timeoutSecond = 3;
                                 int seconds = 0;
 
                                 @Override
@@ -103,6 +103,14 @@ public class MyPlayerAnimationEvent implements Listener {
                         }
                     }
                     break;
+                } else if (armorStand.getEquipment().getHelmet().getType().equals(GatheringManager.gatheringMaterial)) {
+                    ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+                    if (!itemInMainHand.hasItemMeta()) return;
+
+                    GatheringModel gatheringModel = GatheringManager.getGatheringModelFromArmorStand(armorStand);
+                    if (gatheringModel == null) return;
+
+                    GatheringManager.startGathering(player, itemInMainHand, gatheringModel);
                 } else if (BazaarManager.isBazaar(armorStand)) {
                     Player owner = BazaarManager.getOwner(armorStand);
                     UUID uuid = owner.getUniqueId();
@@ -129,12 +137,5 @@ public class MyPlayerAnimationEvent implements Listener {
                 }
             }
         }
-
-        ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-        if (!itemInMainHand.hasItemMeta()) return;
-        ItemMeta itemMeta = itemInMainHand.getItemMeta();
-        if (itemMeta.hasCustomModelData()) return;
-
-        GatheringManager.startGathering(player, itemInMainHand, targetType);
     }
 }
