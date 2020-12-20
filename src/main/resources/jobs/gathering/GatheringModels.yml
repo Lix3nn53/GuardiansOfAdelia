@@ -7,7 +7,8 @@
 count: 1
 i1:
   name: "&6Gold Ore"
-  customModelData: 1
+  customModelData: 2
+  cooldownCustomModelData: 1
   world: world
   x: 2051.5
   y: 101.0

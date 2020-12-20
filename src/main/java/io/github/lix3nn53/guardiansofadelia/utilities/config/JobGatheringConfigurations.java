@@ -114,10 +114,11 @@ public class JobGatheringConfigurations {
 
             String nameStr = gatheringModelsConfig.getString("i" + i + ".name");
             int customModelData = gatheringModelsConfig.getInt("i" + i + ".customModelData");
+            int cooldownCustomModelData = gatheringModelsConfig.getInt("i" + i + ".cooldownCustomModelData");
 
             String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-            GatheringModel gatheringModel = new GatheringModel(location, customModelData, name);
+            GatheringModel gatheringModel = new GatheringModel(location, customModelData, cooldownCustomModelData, name);
 
             GatheringManager.putGatheringModel(gatheringModel);
         }

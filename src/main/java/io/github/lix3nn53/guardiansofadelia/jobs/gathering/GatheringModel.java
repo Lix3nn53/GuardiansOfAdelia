@@ -15,20 +15,20 @@ import org.bukkit.util.EulerAngle;
 public class GatheringModel {
     private final Location baseLocation;
     private final int customModelData;
+    private final int cooldownCustomModelData;
     private final String title;
     private ArmorStand armorStand;
     private boolean onCooldown = false;
     private boolean beingGathered = false;
 
-    public GatheringModel(Location baseLocation, int customModelData, String title) {
+    public GatheringModel(Location baseLocation, int customModelData, int cooldownCustomModelData, String title) {
         this.baseLocation = baseLocation;
         this.customModelData = customModelData;
-        this.title = title;
+        this.cooldownCustomModelData = cooldownCustomModelData;
+        this.title = ChatColor.translateAlternateColorCodes('&', title);
     }
 
     public void createModel() {
-        if (onCooldown) return;
-
         double x = Math.toRadians(baseLocation.getPitch());
         double y = Math.toRadians(baseLocation.getYaw());
         EulerAngle eulerAngle = new EulerAngle(x, y, 0);
@@ -41,7 +41,13 @@ public class GatheringModel {
         armorStand.setHeadPose(eulerAngle);
         ItemStack itemStack = new ItemStack(GatheringManager.gatheringMaterial);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setCustomModelData(this.customModelData);
+        if (onCooldown) {
+            itemMeta.setCustomModelData(this.cooldownCustomModelData);
+            armorStand.setCustomName(title + ChatColor.GRAY + " (On Cooldown)");
+        } else {
+            itemMeta.setCustomModelData(this.customModelData);
+            armorStand.setCustomName(title);
+        }
         itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
         EntityEquipment equipment = armorStand.getEquipment();
@@ -51,8 +57,6 @@ public class GatheringModel {
         armorStand.setGravity(false);
         armorStand.setCustomNameVisible(true);
         armorStand.setSmall(true);
-        String s = ChatColor.translateAlternateColorCodes('&', title);
-        armorStand.setCustomName(s);
     }
 
     public Location getBaseLocation() {
@@ -70,14 +74,26 @@ public class GatheringModel {
     public void onLoot() {
         onCooldown = true;
         setBeingGathered(false);
-        armorStand.remove();
+        armorStand.setCustomName(title + ChatColor.GRAY + " (On Cooldown)");
+        EntityEquipment equipment = armorStand.getEquipment();
+        ItemStack helmet = equipment.getHelmet();
+        ItemMeta itemMeta = helmet.getItemMeta();
+        itemMeta.setCustomModelData(this.cooldownCustomModelData);
+        helmet.setItemMeta(itemMeta);
+        equipment.setHelmet(helmet);
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 onCooldown = false;
                 if (baseLocation.getChunk().isLoaded()) {
-                    createModel();
+                    armorStand.setCustomName(title);
+                    EntityEquipment equipment = armorStand.getEquipment();
+                    ItemStack helmet = equipment.getHelmet();
+                    ItemMeta itemMeta = helmet.getItemMeta();
+                    itemMeta.setCustomModelData(customModelData);
+                    helmet.setItemMeta(itemMeta);
+                    equipment.setHelmet(helmet);
                 }
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 60L);
@@ -93,5 +109,9 @@ public class GatheringModel {
 
     public void setBeingGathered(boolean beingGathered) {
         this.beingGathered = beingGathered;
+    }
+
+    public boolean isOnCooldown() {
+        return onCooldown;
     }
 }

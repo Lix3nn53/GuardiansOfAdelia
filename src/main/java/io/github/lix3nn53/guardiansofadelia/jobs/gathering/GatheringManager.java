@@ -65,6 +65,9 @@ public class GatheringManager {
         if (gatheringModel.isBeingGathered()) {
             return;
         }
+        if (gatheringModel.isOnCooldown()) {
+            return;
+        }
 
         GatheringTool gatheringTool = GatheringTool.materialToGatheringTool(itemInHand.getType());
 
