@@ -155,8 +155,12 @@ public final class Quest {
 
             lore.add("");
             lore.add(ChatColor.GOLD + "Prizes");
-            lore.add(ChatColor.YELLOW + "Experience: " + expPrize);
-            lore.add(ChatColor.YELLOW + "Money: " + Coin.getStringValue(moneyPrize));
+            if (expPrize > 0) {
+                lore.add(ChatColor.YELLOW + "Experience: " + expPrize);
+            }
+            if (moneyPrize > 0) {
+                lore.add(ChatColor.YELLOW + "Money: " + Coin.getStringValue(moneyPrize));
+            }
             if (!itemPrizes.isEmpty()) {
                 lore.add(ChatColor.YELLOW + "Items: ");
                 for (ItemStack it : itemPrizes) {

@@ -171,7 +171,7 @@ public class RPGCharacterStats {
 
                     ItemStack holoItem = new ItemStack(Material.STONE_PICKAXE);
                     ItemMeta im = holoItem.getItemMeta();
-                    im.setCustomModelData(34);
+                    im.setCustomModelData(7);
                     holoItem.setItemMeta(im);
 
                     MiscDisguise disguise = new MiscDisguise(DisguiseType.DROPPED_ITEM);

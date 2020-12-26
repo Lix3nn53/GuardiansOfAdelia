@@ -446,24 +446,20 @@ public class Enchant {
     private void startGlowing(ItemMeta itemMeta) {
         if (itemMeta.hasCustomModelData()) {
             int customModelData = itemMeta.getCustomModelData();
-            if (customModelData >= 6) {
-                customModelData++;
-                itemMeta.setCustomModelData(customModelData);
-                itemStack.setItemMeta(itemMeta);
-                player.sendMessage("new customModelData: " + customModelData);
-            }
+            customModelData++;
+            itemMeta.setCustomModelData(customModelData);
+            itemStack.setItemMeta(itemMeta);
+            player.sendMessage("new customModelData: " + customModelData);
         }
     }
 
     private void extinguish(ItemMeta itemMeta) {
         if (itemMeta.hasCustomModelData()) {
             int customModelData = itemMeta.getCustomModelData();
-            if (customModelData >= 7) {
-                customModelData--;
-                itemMeta.setCustomModelData(customModelData);
-                itemStack.setItemMeta(itemMeta);
-                player.sendMessage("new customModelData: " + customModelData);
-            }
+            customModelData--;
+            itemMeta.setCustomModelData(customModelData);
+            itemStack.setItemMeta(itemMeta);
+            player.sendMessage("new customModelData: " + customModelData);
         }
     }
 }

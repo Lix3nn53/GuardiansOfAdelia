@@ -103,6 +103,7 @@ public class HologramMechanic extends MechanicComponent {
             model.setGravity(false);
             model.setVisible(false);
             model.setSmall(true);
+            model.setMarker(true);
 
             if (SAVE) {
                 SkillDataManager.onSkillEntityCreateWithSaveOption(caster, model, castCounter);
