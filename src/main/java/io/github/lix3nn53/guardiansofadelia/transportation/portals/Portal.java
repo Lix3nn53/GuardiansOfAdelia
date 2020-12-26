@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.minigames.portals;
+package io.github.lix3nn53.guardiansofadelia.transportation.portals;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

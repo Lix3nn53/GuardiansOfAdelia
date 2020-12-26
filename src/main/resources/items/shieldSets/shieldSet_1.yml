@@ -1,0 +1,14 @@
+# ---------------------------------------------- #
+#             Item list Configuration            #
+# ---------------------------------------------- #
+#                     Items                      #
+# ---------------------------------------------- #
+
+count: 1
+i1:
+  name: "Wooden"
+  customModelData: 1
+  level: 1
+  health: 12
+  defense: 12
+  magicDefense: 12

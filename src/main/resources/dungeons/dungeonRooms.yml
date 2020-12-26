@@ -1,0 +1,135 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#               Dungeon Information              #
+# ---------------------------------------------- #
+
+LIBRARY1:
+  x: -53
+  y: 20.5
+  z: -118
+  world: dungeons
+  yaw: 0
+  pitch: 0
+  checkpoints:
+    count: 1
+    loc1:
+      x: -37
+      y: 23.5
+      z: -12
+      world: dungeons
+      yaw: 0
+      pitch: 0
+LIBRARY2:
+  x: -53
+  y: 20.5
+  z: 4
+  world: dungeons
+  yaw: 0
+  pitch: 0
+  checkpoints:
+    count: 1
+    loc1:
+      x: -37
+      y: 23.5
+      z: 110
+      world: dungeons
+      yaw: 0
+      pitch: 0
+LIBRARY3:
+  x: -53
+  y: 20.5
+  z: 126
+  world: dungeons
+  yaw: 0
+  pitch: 0
+  checkpoints:
+    count: 1
+    loc1:
+      x: -37
+      y: 23.5
+      z: 232
+      world: dungeons
+      yaw: 0
+      pitch: 0
+LIBRARY4:
+  x: -53
+  y: 20.5
+  z: 248
+  world: dungeons
+  yaw: 0
+  pitch: 0
+  checkpoints:
+    count: 1
+    loc1:
+      x: -37
+      y: 23.5
+      z: 354
+      world: dungeons
+      yaw: 0
+      pitch: 0
+SEWER1:
+  x: 149
+  y: 56.5
+  z: -47
+  world: dungeons
+  yaw: 90
+  pitch:
+  checkpoints:
+    count: 1
+    loc1:
+      x: 14
+      y: 40.5
+      z: -47
+      world: dungeons
+      yaw: 0
+      pitch: 0
+SEWER2:
+  x: 149
+  y: 56.5
+  z: 56
+  world: dungeons
+  yaw: 90
+  pitch: 0
+  checkpoints:
+    count: 1
+    loc1:
+      x: 14
+      y: 40.5
+      z: 56
+      world: dungeons
+      yaw: 0
+      pitch: 0
+SEWER3:
+  x: 149
+  y: 56.5
+  z: 159
+  world: dungeons
+  yaw: 90
+  pitch: 0
+  checkpoints:
+    count: 1
+    loc1:
+      x: 14
+      y: 40.5
+      z: 159
+      world: dungeons
+      yaw: 0
+      pitch: 0
+SEWER4:
+  x: 149
+  y: 56.5
+  z: 262
+  world: dungeons
+  yaw: 90
+  pitch: 0
+  checkpoints:
+    count: 1
+    loc1:
+      x: 14
+      y: 40.5
+      z: 262
+      world: dungeons
+      yaw: 0
+      pitch: 0
+  

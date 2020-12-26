@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonRoom;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
-import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
+import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;

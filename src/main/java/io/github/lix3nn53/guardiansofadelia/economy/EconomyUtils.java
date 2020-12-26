@@ -196,4 +196,46 @@ public class EconomyUtils {
         }
         return false;
     }
+
+    public static boolean canPay(Player player, int price) {
+        int copper;
+        int silver = 0;
+        int gold = 0;
+        if (price > 63) {
+            copper = price % 64;
+            silver = price / 64;
+            if (silver > 63) {
+                silver = price % 64;
+                gold = price / 64;
+            }
+        } else {
+            copper = price;
+        }
+        boolean payed = false;
+        boolean payed1 = false;
+        boolean payed2 = false;
+        if (copper > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.IRON_INGOT, copper)) {
+                payed = true;
+            }
+        } else {
+            payed = true;
+        }
+        if (silver > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.GOLD_INGOT, silver)) {
+                payed1 = true;
+            }
+        } else {
+            payed1 = true;
+        }
+        if (gold > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.DIAMOND, gold)) {
+                payed2 = true;
+            }
+        } else {
+            payed2 = true;
+        }
+
+        return payed && payed1 && payed2;
+    }
 }

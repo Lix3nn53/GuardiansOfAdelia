@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
-import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
@@ -21,6 +20,8 @@ import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChest;
 import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChestManager;
+import io.github.lix3nn53.guardiansofadelia.transportation.TeleportScroll;
+import io.github.lix3nn53.guardiansofadelia.transportation.TeleportationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
@@ -85,10 +86,17 @@ public class MyPlayerInteractEvent implements Listener {
                 compass.openInventory(player);
             } else if (itemInMainHandType.equals(Material.PAPER)) {
                 if (PersistentDataContainerUtil.hasString(itemInMainHand, "teleportScroll")) {
-                    String teleportScroll = PersistentDataContainerUtil.getString(itemInMainHand, "teleportScroll");
+                    if (!player.getLocation().getWorld().getName().equals("world")) {
+                        player.sendMessage(net.md_5.bungee.api.ChatColor.RED + "You can't use teleport gui from this location.");
+                        return;
+                    }
 
-                    TeleportScroll teleportScrollLocation = new TeleportScroll(teleportScroll);
-                    teleportScrollLocation.teleport(player, itemInMainHand);
+                    String teleportScrollStr = PersistentDataContainerUtil.getString(itemInMainHand, "teleportScroll");
+
+                    TeleportScroll teleportScroll = new TeleportScroll(teleportScrollStr);
+                    Location location = teleportScroll.getLocation();
+                    String name = teleportScroll.getName();
+                    TeleportationUtils.teleport(player, location, name, 5, itemInMainHand, 0);
                 }
             } else if (itemInMainHandType.equals(Material.STONE_PICKAXE)) {
                 if (PersistentDataContainerUtil.hasString(itemInMainHand, "prizeDungeon")) { //dungeon chests

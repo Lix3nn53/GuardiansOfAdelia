@@ -6,7 +6,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.Items.list.Eggs;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
@@ -14,6 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManag
 import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
+import io.github.lix3nn53.guardiansofadelia.transportation.TeleportScroll;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;

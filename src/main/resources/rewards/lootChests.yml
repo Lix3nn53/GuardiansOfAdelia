@@ -1,0 +1,24 @@
+chest1:
+  world: world
+  x: 2060
+  y: 136
+  z: 1309
+  tier: TIER_ONE
+chest2:
+  world: world
+  x: 2058
+  y: 130
+  z: 1307
+  tier: TIER_ONE
+chest3:
+  world: world
+  x: 2054
+  y: 130
+  z: 1307
+  tier: TIER_ONE
+chest4:
+  world: world
+  x: 2056
+  y: 130
+  z: 1317
+  tier: TIER_ONE

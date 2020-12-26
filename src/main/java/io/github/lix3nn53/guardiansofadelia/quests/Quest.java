@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.quests;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
@@ -11,6 +12,8 @@ import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.quests.task.*;
+import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiItem;
+import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.advancements.Advancement;
@@ -168,12 +171,16 @@ public final class Quest {
             }
             if (weaponPrizesSelectOneOf != null) {
                 int gearLevel = weaponPrizesSelectOneOf.getGearLevel();
-                int itemIndex = weaponPrizesSelectOneOf.getItemIndex();
                 ItemTier itemTier = weaponPrizesSelectOneOf.getItemTier();
-                String itemTag = weaponPrizesSelectOneOf.getItemTag();
                 lore.add(ChatColor.YELLOW + "Select One Weapon: ");
-                lore.add("GearLevel: " + gearLevel + ", ItemIndex: " + itemIndex);
-                lore.add("ItemTier: " + itemTier.getTierString() + ChatColor.RESET + ", ItemTag: " + itemTag);
+                int minLevel = GearLevel.getMinLevel(gearLevel);
+                int maxLevel = GearLevel.getMaxLevel(gearLevel);
+                lore.add(ChatColor.GRAY + "Level: " + minLevel + "~" + maxLevel + ChatColor.GRAY + ", Tier: " + itemTier.getTierString());
+            }
+            if (InstantTeleportGuiManager.contains(questID)) {
+                InstantTeleportGuiItem teleport = InstantTeleportGuiManager.getTeleport(questID);
+                String name = teleport.getName();
+                lore.add(ChatColor.LIGHT_PURPLE + "Unlock instant teleportation: " + ChatColor.GRAY + name);
             }
 
             if (requiredLevel != 0) {

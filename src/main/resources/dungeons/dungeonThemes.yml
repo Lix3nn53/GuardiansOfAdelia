@@ -1,0 +1,24 @@
+# ---------------------------------------------- #
+#           Dungeon Themes Configuration         #
+# ---------------------------------------------- #
+#                Dungeon Themes                  #
+# ---------------------------------------------- #
+
+theme1:
+  code: "LIBRARY"
+  name: "&d???? Library"
+  levelReq: 5
+  timeLimitInMinutes: 10
+  bossInternalName: TutorialSoldier
+  gearTag: "Library tag??"
+  gearLevel: 1
+  portalColor: "PURPLE"
+theme2:
+  code: "SEWER"
+  name: "&a???? Sewers"
+  levelReq: 5
+  timeLimitInMinutes: 10
+  bossInternalName: TutorialSoldier
+  gearTag: "Rotten"
+  gearLevel: 2
+  portalColor: "GREEN"

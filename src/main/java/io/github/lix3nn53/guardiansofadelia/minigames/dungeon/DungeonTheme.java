@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
-import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalColor;
+import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;

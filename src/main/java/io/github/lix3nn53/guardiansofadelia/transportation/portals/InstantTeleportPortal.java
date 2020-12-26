@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.minigames.portals;
+package io.github.lix3nn53.guardiansofadelia.transportation.portals;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -34,6 +34,7 @@ public class InstantTeleportPortal {
         if (GuardianDataManager.hasGuardianData(uuid)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
+
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
                 if (requiredQuestNoAccepted > 0) {

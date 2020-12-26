@@ -68,6 +68,7 @@
                     <include>database.yml</include>
                     <include>resourcepack.yml</include>
                     <include>teleportPortals.yml</include>
+                    <include>teleportGui.yml</include>
                     <include>holograms.yml</include>
                 </includes>
             </resource>

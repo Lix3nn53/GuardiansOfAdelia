@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.minigames.portals;
+package io.github.lix3nn53.guardiansofadelia.transportation.portals;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import org.bukkit.entity.ArmorStand;

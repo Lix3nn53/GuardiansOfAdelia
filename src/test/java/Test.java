@@ -12,10 +12,25 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException, SQLException {
+        int stepCount = 5;
+        for (int ticksRun = 0; ticksRun <= 100; ticksRun++) {
+            boolean doesDivide = ticksRun % 4 == 0;
+            if (doesDivide) {
+                System.out.println("Tick: " + ticksRun);
 
-        for (int level = 1; level <= 90; level++) {
-            int price = (int) Math.max(1, Math.pow(level, 1.12) / 4 + 0.5);
-            System.out.println("level " + level + ": " + price);
+                int currentStep = ticksRun / 4;
+
+                System.out.println("Step: " + currentStep);
+
+                if (currentStep < stepCount) {
+                    System.out.println("NextStep");
+                } else {
+                    System.out.println("Finish");
+                    break;
+                }
+            } else {
+                System.out.println("Skip tick: " + ticksRun);
+            }
         }
         /*for (int mobLevel = 1; mobLevel <= 10; mobLevel++) {
             for (int playerLevel = 1; playerLevel <= 20; playerLevel++) {

@@ -44,6 +44,7 @@ public class ConfigManager {
         createCharacterSelectionConfig();
         createTowns();
         TeleportPortalsConfiguration.createConfig();
+        TeleportGuiConfiguration.createConfig();
         createHologramsConfig();
         DatabaseConfiguration.createConfigs();
         DungeonConfiguration.createConfigs();
@@ -65,6 +66,7 @@ public class ConfigManager {
         loadCharacterSelectionConfig();
         loadTowns();
         TeleportPortalsConfiguration.loadConfig();
+        TeleportGuiConfiguration.loadConfig();
         loadHologramsConfig();
         DatabaseConfiguration.loadConfigs();
         DungeonConfiguration.loadConfigs();

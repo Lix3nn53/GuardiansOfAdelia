@@ -3,10 +3,8 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.database.ItemSerializer;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
-import io.github.lix3nn53.guardiansofadelia.transportation.portals.InstantTeleportPortal;
-import io.github.lix3nn53.guardiansofadelia.transportation.portals.Portal;
-import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
-import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalManager;
+import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiItem;
+import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -19,15 +17,15 @@ import org.bukkit.inventory.ItemStack;
 import java.io.File;
 import java.io.IOException;
 
-public class TeleportPortalsConfiguration {
+public class TeleportGuiConfiguration {
 
     private static FileConfiguration fileConfiguration;
 
     static void createConfig() {
-        File customConfigFile = new File(ConfigManager.DATA_FOLDER, "teleportPortals.yml");
+        File customConfigFile = new File(ConfigManager.DATA_FOLDER, "teleportGui.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
-            GuardiansOfAdelia.getInstance().saveResource("teleportPortals.yml", false);
+            GuardiansOfAdelia.getInstance().saveResource("teleportGui.yml", false);
         }
 
         fileConfiguration = new YamlConfiguration();
@@ -52,26 +50,13 @@ public class TeleportPortalsConfiguration {
             float yaw = (float) current.getDouble("yaw");
             float pitch = (float) current.getDouble("pitch");
             Location location = new Location(world, x, y, z, yaw, pitch);
-            PortalColor portalColor = PortalColor.valueOf(current.getString("color"));
-            String title = current.getString("title");
-            Portal portal = new Portal(location, portalColor, title);
 
-            PortalManager.addPortal(portal);
-
-            String tpWorldString = current.getString("tpWorld");
-            World tpWorld = Bukkit.getWorld(tpWorldString);
-            double tpX = current.getDouble("tpX");
-            double tpY = current.getDouble("tpY");
-            double tpZ = current.getDouble("tpZ");
-            float tpYaw = (float) current.getDouble("tpYaw");
-            float tpPitch = (float) current.getDouble("tpPitch");
-            Location tpLocation = new Location(tpWorld, tpX, tpY, tpZ, tpYaw, tpPitch);
-
-            int requiredQuestNoAccepted = current.getInt("requiredQuestNoAccepted");
+            String name = current.getString("name");
+            int cost = current.getInt("cost");
             int requiredQuestNoTurnedIn = current.getInt("requiredQuestNoTurnedIn");
 
-            InstantTeleportPortal instantTeleportPortal = new InstantTeleportPortal(tpLocation, requiredQuestNoAccepted, requiredQuestNoTurnedIn);
-            PortalManager.addInstantTeleportPortal(portal, instantTeleportPortal);
+            InstantTeleportGuiItem instantTeleportGuiItem = new InstantTeleportGuiItem(name, location, cost);
+            InstantTeleportGuiManager.addTeleport(requiredQuestNoTurnedIn, instantTeleportGuiItem);
         }
     }
 
@@ -91,7 +76,7 @@ public class TeleportPortalsConfiguration {
         fileConfiguration.set("count", i - 1);
 
         try {
-            fileConfiguration.save("teleportPortals.yml");
+            fileConfiguration.save("teleportGui.yml");
         } catch (IOException e) {
             e.printStackTrace();
         }

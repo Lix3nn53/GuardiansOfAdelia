@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -12,12 +11,12 @@ import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
-import io.github.lix3nn53.guardiansofadelia.minigames.portals.InstantTeleportPortal;
-import io.github.lix3nn53.guardiansofadelia.minigames.portals.Portal;
-import io.github.lix3nn53.guardiansofadelia.minigames.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.transportation.TeleportationUtils;
+import io.github.lix3nn53.guardiansofadelia.transportation.portals.InstantTeleportPortal;
+import io.github.lix3nn53.guardiansofadelia.transportation.portals.Portal;
+import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalManager;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
@@ -30,7 +29,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerAnimationType;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashSet;
 import java.util.List;
@@ -78,23 +76,7 @@ public class MyPlayerAnimationEvent implements Listener {
                     if (PortalManager.isInstantTeleportPortal(portal)) {
                         InstantTeleportPortal instantTeleport = PortalManager.getInstantTeleportPortal(portal);
                         if (instantTeleport.canTeleport(player)) {
-                            new BukkitRunnable() {
-
-                                final int timeoutSecond = 3;
-                                int seconds = 0;
-
-                                @Override
-                                public void run() {
-                                    int i = timeoutSecond - seconds;
-                                    if (i <= 0) {
-                                        player.teleport(instantTeleport.getDestination());
-                                        cancel();
-                                        return;
-                                    }
-                                    player.sendTitle("", ChatColor.AQUA + "Teleporting in.. " + i, 5, 20, 5);
-                                    seconds++;
-                                }
-                            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 20L);
+                            TeleportationUtils.teleport(player, instantTeleport.getDestination(), "", 5, null, 0);
                         }
                     } else { //dungeon portal
                         DungeonTheme theme = MiniGameManager.getDungeonFromPortal(portal);

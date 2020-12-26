@@ -88,16 +88,6 @@ public class MenuList {
         guild.setItemMeta(itemMeta);
         guiGeneric.setItem(16, guild);
 
-        ItemStack minigames = new ItemStack(Material.WOODEN_PICKAXE);
-        itemMeta.setCustomModelData(25);
-        itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Minigames");
-        lore = new ArrayList<>();
-        lore.add("");
-        itemMeta.setLore(lore);
-        lore.add(ChatColor.GRAY + "Have fun in different game modes!");
-        minigames.setItemMeta(itemMeta);
-        guiGeneric.setItem(32, minigames);
-
         ItemStack bazaar = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(3);
         itemMeta.setDisplayName(ChatColor.GOLD + "Bazaar");
@@ -106,7 +96,27 @@ public class MenuList {
         lore.add(ChatColor.GRAY + "Manage your bazaar!");
         itemMeta.setLore(lore);
         bazaar.setItemMeta(itemMeta);
-        guiGeneric.setItem(30, bazaar);
+        guiGeneric.setItem(29, bazaar);
+
+        ItemStack minigames = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(25);
+        itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Minigames");
+        lore = new ArrayList<>();
+        lore.add("");
+        itemMeta.setLore(lore);
+        lore.add(ChatColor.GRAY + "Have fun in different game modes!");
+        minigames.setItemMeta(itemMeta);
+        guiGeneric.setItem(31, minigames);
+
+        ItemStack teleport = new ItemStack(Material.WOODEN_SHOVEL);
+        itemMeta.setCustomModelData(6);
+        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Instant Teleportation");
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Teleport to locations you have unlocked");
+        itemMeta.setLore(lore);
+        teleport.setItemMeta(itemMeta);
+        guiGeneric.setItem(33, teleport);
 
         ItemStack activeBoosts = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(28);

@@ -51,6 +51,9 @@ import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiItem;
+import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiManager;
+import io.github.lix3nn53.guardiansofadelia.transportation.TeleportationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
@@ -408,6 +411,9 @@ public class MyInventoryClickEvent implements Listener {
             } else if (currentName.equals(ChatColor.YELLOW + "Server Boosts")) {
                 GuiGeneric serverBoostMenu = MenuList.serverBoostMenu();
                 serverBoostMenu.openInventory(player);
+            } else if (currentName.equals(org.bukkit.ChatColor.LIGHT_PURPLE + "Instant Teleportation")) {
+                GuiBookGeneric guiBook = InstantTeleportGuiManager.getGuiBook(guardianData);
+                guiBook.openInventory(player);
             }
         } else if (title.contains("Play Tutorial?")) {
             //Play Tutorial? ClassName CharNo
@@ -1122,6 +1128,28 @@ public class MyInventoryClickEvent implements Listener {
 
                 GuiGeneric guiGeneric = MenuList.dailyRewardsMenu(player);
                 guiGeneric.openInventory(player);
+            }
+        } else if (title.contains(org.bukkit.ChatColor.LIGHT_PURPLE + "Instant Teleportation")) {
+            if (currentType.equals(Material.LIME_WOOL)) {
+                if (!player.getLocation().getWorld().getName().equals("world")) {
+                    player.sendMessage(ChatColor.RED + "You can't use teleport gui from this location.");
+                    return;
+                }
+
+                String[] split = currentName.split("#");
+                int i = Integer.parseInt(split[1]);
+                InstantTeleportGuiItem teleport = InstantTeleportGuiManager.getTeleport(i);
+
+                int cost = teleport.getCost();
+                boolean canPay = EconomyUtils.canPay(player, cost);
+
+                player.closeInventory();
+                if (canPay) {
+                    Location location = teleport.getLocation();
+                    TeleportationUtils.teleport(player, location, teleport.getName(), 5, null, cost);
+                } else {
+                    player.sendMessage(ChatColor.RED + "You don't have enough coins to teleport.");
+                }
             }
         }
     }
