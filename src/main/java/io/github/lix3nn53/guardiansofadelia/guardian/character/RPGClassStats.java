@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RPGClassStats {
-    private int totalExp = 0;
     private final List<Integer> investedSkillPoints = new ArrayList<>();
 
-    public RPGClassStats(int totalExp, int one, int two, int three, int passive, int ultimate) {
-        this.totalExp = totalExp;
+    public RPGClassStats(int one, int two, int three, int passive, int ultimate) {
         investedSkillPoints.add(one);
         investedSkillPoints.add(two);
         investedSkillPoints.add(three);
@@ -22,14 +20,6 @@ public class RPGClassStats {
         investedSkillPoints.add(0);
         investedSkillPoints.add(0);
         investedSkillPoints.add(0);
-    }
-
-    public int getTotalExp() {
-        return totalExp;
-    }
-
-    public void setTotalExp(int totalExp) {
-        this.totalExp = totalExp;
     }
 
     public int getOne() {

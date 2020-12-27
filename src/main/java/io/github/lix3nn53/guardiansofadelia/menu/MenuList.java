@@ -208,48 +208,6 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric classManage(Player player) {
-        GuiGeneric guiGeneric = null;
-
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
-
-            if (guardianData.hasActiveCharacter()) {
-                guiGeneric = new GuiGeneric(9, ChatColor.DARK_GRAY + "Class Manager", 0);
-
-                RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
-
-                String rpgClassStr = rpgCharacter.getRpgClassStr();
-                RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-                RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats(rpgClassStr);
-                int totalExp = rpgClassStats.getTotalExp();
-                int classLevel = RPGClassExperienceManager.getLevel(totalExp);
-
-                ItemStack itemStack = new ItemStack(Material.LIME_WOOL);
-                ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.YELLOW + "Class Info");
-                List<String> lore = new ArrayList<>();
-                lore.add("");
-                lore.add("Class: " + rpgClass.getClassString());
-                lore.add("Rank: " + classLevel);
-                itemMeta.setLore(lore);
-                itemStack.setItemMeta(itemMeta);
-                guiGeneric.setItem(1, itemStack);
-
-                itemMeta.setDisplayName(ChatColor.GOLD + "Change Class");
-                lore.clear();
-                lore.add("");
-                lore.add("Change to one of the classes you unlocked");
-                itemMeta.setLore(lore);
-                itemStack.setItemMeta(itemMeta);
-                guiGeneric.setItem(3, itemStack);
-            }
-        }
-
-        return guiGeneric;
-    }
-
     public static GuiGeneric classChange(Player player) {
         GuiGeneric guiGeneric = null;
 
@@ -311,9 +269,6 @@ public class MenuList {
                     lore.add("");
                     if (unlockedClasses.containsKey(valueStr)) {
                         String rpgClassStr = rpgCharacter.getRpgClassStr();
-                        int totalExp = unlockedClasses.get(valueStr).getTotalExp();
-                        lore.add("Rank: " + RPGClassExperienceManager.getLevel(totalExp));
-                        lore.add("");
                         if (valueStr.equalsIgnoreCase(rpgClassStr)) {
                             itemStack.setType(Material.PURPLE_WOOL);
                             lore.add(ChatColor.LIGHT_PURPLE + "This is your current class");

@@ -481,7 +481,7 @@ public class MyInventoryClickEvent implements Listener {
                 }
             } else {
                 if (currentName.equals(ChatColor.YELLOW + "Class")) {
-                    GuiGeneric classManage = MenuList.classManage(player);
+                    GuiGeneric classManage = MenuList.classChange(player);
                     classManage.openInventory(player);
                 } else if (currentName.equals(ChatColor.LIGHT_PURPLE + "Skills")) {
                     GuiGeneric skill = MenuList.skill(player);
