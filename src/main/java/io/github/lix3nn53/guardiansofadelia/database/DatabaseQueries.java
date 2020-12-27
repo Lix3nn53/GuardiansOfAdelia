@@ -305,13 +305,14 @@ public class DatabaseQueries {
                     String[] classDataArray = classWithData.split("-");
 
                     String unlockedClassStr = classDataArray[0];
-                    int one = Integer.parseInt(classDataArray[1]);
-                    int two = Integer.parseInt(classDataArray[2]);
-                    int three = Integer.parseInt(classDataArray[3]);
-                    int passive = Integer.parseInt(classDataArray[4]);
-                    int ultimate = Integer.parseInt(classDataArray[5]);
+                    int totalExp = Integer.parseInt(classDataArray[1]);
+                    int one = Integer.parseInt(classDataArray[2]);
+                    int two = Integer.parseInt(classDataArray[3]);
+                    int three = Integer.parseInt(classDataArray[4]);
+                    int passive = Integer.parseInt(classDataArray[5]);
+                    int ultimate = Integer.parseInt(classDataArray[6]);
 
-                    RPGClassStats rpgClassStats = new RPGClassStats(one, two, three, passive, ultimate);
+                    RPGClassStats rpgClassStats = new RPGClassStats(totalExp, one, two, three, passive, ultimate);
                     unlockedClasses.put(unlockedClassStr, rpgClassStats);
                 }
 
@@ -997,6 +998,8 @@ public class DatabaseQueries {
                 RPGClassStats rpgClassStats = unlockedClasses.get(unlockedClass);
 
                 unlockedClassesString.append(unlockedClass);
+                unlockedClassesString.append("-");
+                unlockedClassesString.append(rpgClassStats.getTotalExp());
                 unlockedClassesString.append("-");
                 unlockedClassesString.append(rpgClassStats.getOne());
                 unlockedClassesString.append("-");
