@@ -641,6 +641,35 @@ public class MyInventoryClickEvent implements Listener {
                     player.sendMessage(ChatColor.RED + "Couldn't turn in the quest ERROR report pls");
                 }
             }
+        } else if (title.contains(ChatColor.BLACK + "Task Item Prize Selection #")) {
+            if (clickedInventory.getType().equals(InventoryType.CHEST) && !currentType.equals(Material.AIR)) {
+                int resourceNPC = activeGui.getResourceNPC();
+
+                // Task Item Prize Selection #12&1
+                String[] split = title.split("&");
+                int taskNo = Integer.parseInt(split[1]);
+
+                String[] split2 = split[0].split("#");
+                int questNo = Integer.parseInt(split2[1]);
+
+                //give item
+                StatType statType = StatUtils.getStatType(currentType);
+                if (statType != null) {
+                    int gearLevel = GearLevel.getGearLevel(current);
+                    ItemTier itemTier = ItemTier.getItemTierOfItemStack(current);
+                    StatUtils.addRandomPassiveStats(current, gearLevel, itemTier);
+                }
+                InventoryUtils.giveItemToPlayer(player, current);
+
+                //complete task
+                boolean didComplete = rpgCharacter.progressTaskOfQuestWithIndex(player, questNo, taskNo);
+                if (didComplete) {
+                    player.closeInventory();
+                    MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Obtained " + currentName);
+                } else {
+                    player.sendMessage(ChatColor.RED + "Couldn't complete the task ERROR report pls");
+                }
+            }
         } else if (title.equals(ChatColor.GOLD + "Coin Converter")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 PlayerInventory playerInventory = player.getInventory();

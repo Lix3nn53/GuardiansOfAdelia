@@ -153,6 +153,20 @@ public final class RPGCharacter {
                 .anyMatch(playerQuest -> playerQuest.getQuestID() == questId);
     }
 
+    public boolean progressTaskOfQuestWithIndex(Player player, int questId, int taskIndex) {
+        Quest quest = null;
+        for (Quest i : this.questList) {
+            if (i.getQuestID() == questId) {
+                quest = i;
+                break;
+            }
+        }
+
+        if (quest == null) return false;
+
+        return quest.progressTaskWithIndex(player, taskIndex);
+    }
+
     public RPGCharacterStats getRpgCharacterStats() {
         return rpgCharacterStats;
     }

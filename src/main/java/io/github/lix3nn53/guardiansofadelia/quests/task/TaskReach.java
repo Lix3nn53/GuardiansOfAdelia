@@ -52,12 +52,29 @@ public final class TaskReach implements Task {
     }
 
     @Override
-    public boolean progress(Player player) {
-        if (completed == 0) {
-            completed++;
+    public boolean progress(Player player, int questID, int taskIndex, boolean ignorePrevent) {
+        if (this.completed == 0) {
+            this.completed = 1;
             if (isCompleted()) {
+                boolean prevent = false;
+                if (!ignorePrevent) {
+                    for (Action action : onCompleteActions) {
+                        boolean b = action.preventTaskCompilation();
+                        if (b) {
+                            prevent = true;
+                            action.perform(player, questID, taskIndex);
+                            break;
+                        }
+                    }
+                }
+
+                if (prevent) {
+                    this.completed = 0;
+                    return true;
+                }
+
                 for (Action action : onCompleteActions) {
-                    action.perform(player);
+                    action.perform(player, questID, taskIndex);
                 }
             }
             return true;
@@ -65,7 +82,7 @@ public final class TaskReach implements Task {
         return false;
     }
 
-    public boolean progress(Player player, Location targetBlockLoc) {
+    public boolean progress(Player player, Location targetBlockLoc, int questID, int taskIndex, boolean ignorePrevent) {
         double distanceSquared = targetBlockLoc.distanceSquared(this.blockLoc);
 
         int maxDistance = 81;
@@ -73,7 +90,7 @@ public final class TaskReach implements Task {
         player.sendMessage("distanceSquared: " + distanceSquared);
 
         if (distanceSquared <= maxDistance) {
-            if (progress(player)) {
+            if (progress(player, questID, taskIndex, ignorePrevent)) {
                 MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + "Quest reach " + this.blockLoc.toString());
                 return true;
             }

@@ -122,7 +122,7 @@ quest4:
   questID: 4
   npcToTakeFrom: 11
   npcToComplete: 0
-  name: "Hall of Darkness"
+  name: "Tower of Darkness"
   story:
     - "We need to stop this before it harms Adelia!"
   startMsg: "Now you seem ready to face Aleesia.. or are you?"
@@ -171,22 +171,3 @@ quest4:
     questId: 5
   onCompleteAction8:
     actionType: "TutorialEndAction"
-quest5:
-  questID: 5
-  npcToTakeFrom: 0
-  npcToComplete: 120
-  name: "To the rescue"
-  story:
-    - "You woke up from a dream of the past. In that dream,"
-    - "Guardians lost the battle against Aleesia. Darkness"
-    - "is slowly conquering the lands of Adelia..."
-  startMsg: "Get out of the ship and follow the path to meet King of Roumen"
-  objectiveTextList:
-    - "Talk with King of Roumen to learn what happened"
-  turnInMsg: ""
-  moneyPrize: 0
-  expPrize: 0
-  requiredLevel: 1
-  requiredQuests:
-    - 4
-  advancementMaterial: "GRASS_BLOCK"

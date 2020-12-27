@@ -16,8 +16,13 @@ public class PotionEffectAction implements Action {
     }
 
     @Override
-    public void perform(Player player) {
+    public void perform(Player player, int questID, int taskIndex) {
         org.bukkit.potion.PotionEffect potionEffect = new org.bukkit.potion.PotionEffect(potionEffectType, duration, amplifier);
         player.addPotionEffect(potionEffect);
+    }
+
+    @Override
+    public boolean preventTaskCompilation() {
+        return false;
     }
 }

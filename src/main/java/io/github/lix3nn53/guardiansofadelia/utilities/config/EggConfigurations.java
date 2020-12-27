@@ -45,7 +45,7 @@ public class EggConfigurations {
     }
 
     private static void loadQuestLineConfigs() {
-        int petCount = getChildComponentCount(fileConfiguration, "egg");
+        int petCount = ConfigurationUtils.getChildComponentCount(fileConfiguration, "egg");
 
         for (int i = 1; i <= petCount; i++) {
             ConfigurationSection section = fileConfiguration.getConfigurationSection("egg" + i);
@@ -56,19 +56,5 @@ public class EggConfigurations {
 
             Eggs.add(key, customModelData, itemTier);
         }
-    }
-
-    private static int getChildComponentCount(ConfigurationSection configurationSection, String text) {
-        int count = 0;
-        while (true) {
-            boolean contains = configurationSection.contains(text + (count + 1));
-            if (contains) {
-                count++;
-            } else {
-                break;
-            }
-        }
-
-        return count;
     }
 }

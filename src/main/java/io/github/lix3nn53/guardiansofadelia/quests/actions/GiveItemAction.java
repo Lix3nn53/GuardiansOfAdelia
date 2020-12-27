@@ -13,7 +13,12 @@ public class GiveItemAction implements Action {
     }
 
     @Override
-    public void perform(Player player) {
+    public void perform(Player player, int questID, int taskIndex) {
         InventoryUtils.giveItemToPlayer(player, itemStack);
+    }
+
+    @Override
+    public boolean preventTaskCompilation() {
+        return false;
     }
 }

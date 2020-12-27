@@ -365,7 +365,7 @@ public final class Quest {
         QuestNPCManager.setAllNpcHologramForPlayer(player);
 
         for (Action action : getOnTurnInActions()) {
-            action.perform(player);
+            action.perform(player, questID, -1);
         }
     }
 
@@ -381,7 +381,7 @@ public final class Quest {
         QuestNPCManager.setNpcHologramForPlayer(player, whoCanCompleteThisQuest);
 
         for (Action action : getOnCompleteActions()) {
-            action.perform(player);
+            action.perform(player, questID, -1);
         }
     }
 
@@ -404,7 +404,7 @@ public final class Quest {
         QuestNPCManager.setNpcHologramForPlayer(player, whoCanCompleteThisQuest);
 
         for (Action action : getOnAcceptActions()) {
-            action.perform(player);
+            action.perform(player, questID, -1);
         }
     }
 
@@ -420,11 +420,15 @@ public final class Quest {
     }
 
     public boolean progressKillTasks(Player questOwner, String internalName) {
+        int taskIndex = 0;
         for (Task task : this.tasks) {
-            if (task.isCompleted()) continue;
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
             if (task instanceof TaskKill) {
                 TaskKill taskKill = (TaskKill) task;
-                boolean didProgress = taskKill.progress(questOwner, internalName);
+                boolean didProgress = taskKill.progress(questOwner, internalName, questID, taskIndex, false);
                 if (didProgress) {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
@@ -433,16 +437,21 @@ public final class Quest {
                     return true;
                 }
             }
+            taskIndex++;
         }
         return false;
     }
 
     public boolean progressDealDamageTasks(Player questOwner, String internalName, int damage) {
+        int taskIndex = 0;
         for (Task task : this.tasks) {
-            if (task.isCompleted()) continue;
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
             if (task instanceof TaskDealDamage) {
                 TaskDealDamage taskDealDamage = (TaskDealDamage) task;
-                boolean didProgress = taskDealDamage.progress(internalName, damage, questOwner);
+                boolean didProgress = taskDealDamage.progress(internalName, damage, questOwner, questID, taskIndex, false);
                 if (didProgress) {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
@@ -451,6 +460,7 @@ public final class Quest {
                     return true;
                 }
             }
+            taskIndex++;
         }
         return false;
     }
@@ -476,12 +486,16 @@ public final class Quest {
     }
 
     public boolean progressGatheringTasks(Player questOwner, Ingredient ingredient, int amount) {
+        int taskIndex = 0;
         for (Task task : this.tasks) {
-            if (task.isCompleted()) continue;
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
             if (task instanceof TaskGathering) {
                 TaskGathering taskCollect = (TaskGathering) task;
                 if (taskCollect.getIngredient().equals(ingredient)) {
-                    taskCollect.progressBy(questOwner, amount);
+                    taskCollect.progressBy(questOwner, amount, questID, taskIndex, false);
 
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
@@ -490,13 +504,18 @@ public final class Quest {
                     return true;
                 }
             }
+            taskIndex++;
         }
         return false;
     }
 
     public boolean progressGiftTasks(Player questOwner, String itemName, int amountInHand, String clickedEntityName) {
+        int taskIndex = 0;
         for (Task task : this.tasks) {
-            if (task.isCompleted()) continue;
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
             if (task instanceof TaskGift) {
                 TaskGift taskGift = (TaskGift) task;
                 if (!taskGift.getEntityName().equals(clickedEntityName)) continue;
@@ -512,7 +531,7 @@ public final class Quest {
                         amountToRemoveFromHand = amountInHand;
                     }
 
-                    taskGift.progressBy(questOwner, amountToRemoveFromHand);
+                    taskGift.progressBy(questOwner, amountToRemoveFromHand, questID, taskIndex, false);
 
                     //remove from hand
                     ItemStack itemInMainHand = questOwner.getInventory().getItemInMainHand();
@@ -525,6 +544,7 @@ public final class Quest {
                     return true;
                 }
             }
+            taskIndex++;
         }
         return false;
     }
@@ -547,11 +567,15 @@ public final class Quest {
     }
 
     public boolean progressInteractTasks(Player questOwner, int npcId) {
+        int taskIndex = 0;
         for (Task task : this.tasks) {
-            if (task.isCompleted()) continue;
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
             if (task instanceof TaskInteract) {
                 TaskInteract taskInteract = (TaskInteract) task;
-                boolean didProgress = taskInteract.progress(npcId, questOwner);
+                boolean didProgress = taskInteract.progress(npcId, questOwner, questID, taskIndex, false);
                 if (didProgress) {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
@@ -560,16 +584,21 @@ public final class Quest {
                     return true;
                 }
             }
+            taskIndex++;
         }
         return false;
     }
 
     public boolean progressReachTasks(Player questOwner, Location targetBlockLoc) {
+        int taskIndex = 0;
         for (Task task : this.tasks) {
-            if (task.isCompleted()) continue;
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
             if (task instanceof TaskReach) {
                 TaskReach taskReach = (TaskReach) task;
-                boolean didProgress = taskReach.progress(questOwner, targetBlockLoc);
+                boolean didProgress = taskReach.progress(questOwner, targetBlockLoc, questID, taskIndex, false);
                 if (didProgress) {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
@@ -578,7 +607,25 @@ public final class Quest {
                     return true;
                 }
             }
+            taskIndex++;
         }
         return false;
+    }
+
+    public boolean progressTaskWithIndex(Player questOwner, int taskIndex) {
+        if (taskIndex >= this.tasks.size()) return false;
+
+        Task task = this.tasks.get(taskIndex);
+
+        if (task.isCompleted()) return false;
+
+        task.progress(questOwner, questID, taskIndex, true);
+
+        TablistUtils.updateTablist(questOwner);
+        if (this.isCompleted()) {
+            this.onComplete(questOwner);
+        }
+
+        return true;
     }
 }

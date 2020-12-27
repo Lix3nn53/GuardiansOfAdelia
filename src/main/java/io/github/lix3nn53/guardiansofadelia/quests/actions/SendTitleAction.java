@@ -13,7 +13,12 @@ public class SendTitleAction implements Action {
     }
 
     @Override
-    public void perform(Player player) {
+    public void perform(Player player, int questID, int taskIndex) {
         player.sendTitle(s, s1, 25, 35, 25);
+    }
+
+    @Override
+    public boolean preventTaskCompilation() {
+        return false;
     }
 }

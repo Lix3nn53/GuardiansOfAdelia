@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.quests.actions;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
+import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -81,9 +82,12 @@ public class ActionLoader {
             return new TeleportAction(location, delay);
         } else if (actionType.equals(TutorialEndAction.class.getSimpleName())) {
             return new TutorialEndAction();
+        } else if (actionType.equals(WeaponSelectOneOfAction.class.getSimpleName())) {
+            WeaponReferenceData weaponReferenceData = new WeaponReferenceData(configurationSection);
+            return new WeaponSelectOneOfAction(weaponReferenceData);
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH ACTION IN LOADER");
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH ACTION IN LOADER: " + configurationSection.getCurrentPath());
 
         return null;
     }

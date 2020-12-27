@@ -59,7 +59,7 @@ public class DungeonConfiguration {
     }
 
     private static void loadDungeonThemes() {
-        int themeCount = getChildComponentCount(dungeonThemesConfig, "theme");
+        int themeCount = ConfigurationUtils.getChildComponentCount(dungeonThemesConfig, "theme");
 
         for (int i = 1; i <= themeCount; i++) {
             ConfigurationSection section = dungeonThemesConfig.getConfigurationSection("theme" + i);
@@ -78,20 +78,6 @@ public class DungeonConfiguration {
 
             MiniGameManager.addDungeonTheme(code, dungeonTheme);
         }
-    }
-
-    private static int getChildComponentCount(ConfigurationSection configurationSection, String text) {
-        int count = 0;
-        while (true) {
-            boolean contains = configurationSection.contains(text + (count + 1));
-            if (contains) {
-                count++;
-            } else {
-                break;
-            }
-        }
-
-        return count;
     }
 
     private static void createDungeonGates() {
@@ -154,7 +140,7 @@ public class DungeonConfiguration {
     private static void loadDungeonRooms() {
         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
         for (String themeCode : dungeonThemes.keySet()) {
-            int roomCount = getChildComponentCount(dungeonRoomsConfig, themeCode);
+            int roomCount = ConfigurationUtils.getChildComponentCount(dungeonRoomsConfig, themeCode);
 
             for (int i = 1; i <= roomCount; i++) {
                 String code = themeCode + i;

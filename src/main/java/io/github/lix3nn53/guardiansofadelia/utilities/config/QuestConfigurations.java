@@ -71,7 +71,7 @@ public class QuestConfigurations {
     private static void loadQuestLineConfigs() {
         for (FileConfiguration questLineConfiguration : questLineConfigurations) {
 
-            int questCount = getChildComponentCount(questLineConfiguration, "quest");
+            int questCount = ConfigurationUtils.getChildComponentCount(questLineConfiguration, "quest");
 
             for (int i = 1; i <= questCount; i++) {
                 ConfigurationSection section = questLineConfiguration.getConfigurationSection("quest" + i);
@@ -114,7 +114,7 @@ public class QuestConfigurations {
 
                 Material advancementMaterial = Material.valueOf(section.getString("advancementMaterial"));
 
-                int taskCount = getChildComponentCount(section, "task");
+                int taskCount = ConfigurationUtils.getChildComponentCount(section, "task");
                 List<Task> tasks = new ArrayList<>();
                 for (int c = 1; c <= taskCount; c++) {
                     Task task = TaskLoader.load(section.getConfigurationSection("task" + c));
@@ -122,7 +122,7 @@ public class QuestConfigurations {
                     tasks.add(task);
                 }
 
-                int itemPrizeCount = getChildComponentCount(section, "itemPrize");
+                int itemPrizeCount = ConfigurationUtils.getChildComponentCount(section, "itemPrize");
                 List<ItemStack> itemPrizes = new ArrayList<>();
                 for (int c = 1; c <= itemPrizeCount; c++) {
                     ItemStack item = ItemReferenceLoader.loadItemReference(section.getConfigurationSection("itemPrize" + c));
@@ -130,7 +130,7 @@ public class QuestConfigurations {
                 }
 
                 List<Action> onAcceptActions = new ArrayList<>();
-                int onAcceptActionCount = getChildComponentCount(section, "onAcceptAction");
+                int onAcceptActionCount = ConfigurationUtils.getChildComponentCount(section, "onAcceptAction");
                 for (int c = 1; c <= onAcceptActionCount; c++) {
                     Action action = ActionLoader.load(section.getConfigurationSection("onAcceptAction" + c));
 
@@ -138,7 +138,7 @@ public class QuestConfigurations {
                 }
 
                 List<Action> onCompleteActions = new ArrayList<>();
-                int onCompleteActionCount = getChildComponentCount(section, "onCompleteAction");
+                int onCompleteActionCount = ConfigurationUtils.getChildComponentCount(section, "onCompleteAction");
                 for (int c = 1; c <= onCompleteActionCount; c++) {
                     Action action = ActionLoader.load(section.getConfigurationSection("onCompleteAction" + c));
 
@@ -146,14 +146,14 @@ public class QuestConfigurations {
                 }
 
                 List<Action> onTurnInActions = new ArrayList<>();
-                int onTurnInActionCount = getChildComponentCount(section, "onTurnInAction");
+                int onTurnInActionCount = ConfigurationUtils.getChildComponentCount(section, "onTurnInAction");
                 for (int c = 1; c <= onTurnInActionCount; c++) {
                     Action action = ActionLoader.load(section.getConfigurationSection("onTurnInAction" + c));
 
                     onTurnInActions.add(action);
                 }
 
-                int itemPrizesSelectOneOfCount = getChildComponentCount(section, "itemPrizeSelectOneOf");
+                int itemPrizesSelectOneOfCount = ConfigurationUtils.getChildComponentCount(section, "itemPrizeSelectOneOf");
                 List<ItemStack> itemPrizesSelectOneOf = new ArrayList<>();
                 for (int c = 1; c <= itemPrizesSelectOneOfCount; c++) {
                     ItemStack item = ItemReferenceLoader.loadItemReference(section.getConfigurationSection("itemPrizeSelectOneOf" + c));
@@ -174,19 +174,5 @@ public class QuestConfigurations {
                 QuestNPCManager.addQuest(quest, npcToTakeFrom, npcToComplete);
             }
         }
-    }
-
-    private static int getChildComponentCount(ConfigurationSection configurationSection, String text) {
-        int count = 0;
-        while (true) {
-            boolean contains = configurationSection.contains(text + (count + 1));
-            if (contains) {
-                count++;
-            } else {
-                break;
-            }
-        }
-
-        return count;
     }
 }

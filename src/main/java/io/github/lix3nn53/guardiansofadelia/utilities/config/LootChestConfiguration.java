@@ -54,7 +54,7 @@ public class LootChestConfiguration {
     }
 
     private static void loadLootChests() {
-        int themeCount = getChildComponentCount(lootChestsConfig, "chest");
+        int themeCount = ConfigurationUtils.getChildComponentCount(lootChestsConfig, "chest");
 
         for (int i = 1; i <= themeCount; i++) {
             ConfigurationSection section = lootChestsConfig.getConfigurationSection("chest" + i);
@@ -70,20 +70,6 @@ public class LootChestConfiguration {
 
             LootChestManager.addLootChest(lootChest);
         }
-    }
-
-    private static int getChildComponentCount(ConfigurationSection configurationSection, String text) {
-        int count = 0;
-        while (true) {
-            boolean contains = configurationSection.contains(text + (count + 1));
-            if (contains) {
-                count++;
-            } else {
-                break;
-            }
-        }
-
-        return count;
     }
 
     private static void writeLootChests(String fileName) {

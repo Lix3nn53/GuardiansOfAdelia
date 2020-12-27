@@ -57,12 +57,29 @@ public final class TaskDealDamage implements Task {
     }
 
     @Override
-    public boolean progress(Player player) {
-        if (progress < damageNeeded) {
-            progress++;
+    public boolean progress(Player player, int questID, int taskIndex, boolean ignorePrevent) {
+        if (this.progress < this.damageNeeded) {
+            this.progress++;
             if (isCompleted()) {
+                boolean prevent = false;
+                if (!ignorePrevent) {
+                    for (Action action : onCompleteActions) {
+                        boolean b = action.preventTaskCompilation();
+                        if (b) {
+                            prevent = true;
+                            action.perform(player, questID, taskIndex);
+                            break;
+                        }
+                    }
+                }
+
+                if (prevent) {
+                    this.progress--;
+                    return false;
+                }
+
                 for (Action action : onCompleteActions) {
-                    action.perform(player);
+                    action.perform(player, questID, taskIndex);
                 }
             }
             return true;
@@ -70,17 +87,30 @@ public final class TaskDealDamage implements Task {
         return false;
     }
 
-    public boolean progress(Player player, int damageDeal) {
-        if (progress < damageNeeded) {
-            progress += damageDeal;
-            if (isCompleted()) {
+    public void progressBy(Player player, int progress, int questID, int taskIndex, boolean ignorePrevent) {
+        this.progress += progress;
+        if (isCompleted()) {
+            boolean prevent = false;
+            if (!ignorePrevent) {
                 for (Action action : onCompleteActions) {
-                    action.perform(player);
+                    boolean b = action.preventTaskCompilation();
+                    if (b) {
+                        prevent = true;
+                        action.perform(player, questID, taskIndex);
+                        break;
+                    }
                 }
             }
-            return true;
+
+            if (prevent) {
+                this.progress--;
+                return;
+            }
+
+            for (Action action : onCompleteActions) {
+                action.perform(player, questID, taskIndex);
+            }
         }
-        return false;
     }
 
     @Override
@@ -98,9 +128,10 @@ public final class TaskDealDamage implements Task {
         return damageNeeded;
     }
 
-    public boolean progress(String internalName, int damageDeal, Player player) {
+    public boolean progress(String internalName, int damageDeal, Player player, int questID, int taskIndex, boolean ignorePrevent) {
         if (internalName.equals(this.internalName)) {
-            return progress(player, damageDeal);
+            progressBy(player, damageDeal, questID, taskIndex, ignorePrevent);
+            return true;
         }
 
         return false;

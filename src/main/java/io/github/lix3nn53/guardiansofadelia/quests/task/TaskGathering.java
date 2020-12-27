@@ -50,12 +50,29 @@ public final class TaskGathering implements Task {
     }
 
     @Override
-    public boolean progress(Player player) {
-        if (progress < amountNeeded) {
-            progress++;
+    public boolean progress(Player player, int questID, int taskIndex, boolean ignorePrevent) {
+        if (this.progress < this.amountNeeded) {
+            this.progress++;
             if (isCompleted()) {
+                boolean prevent = false;
+                if (!ignorePrevent) {
+                    for (Action action : onCompleteActions) {
+                        boolean b = action.preventTaskCompilation();
+                        if (b) {
+                            prevent = true;
+                            action.perform(player, questID, taskIndex);
+                            break;
+                        }
+                    }
+                }
+
+                if (prevent) {
+                    this.progress--;
+                    return false;
+                }
+
                 for (Action action : onCompleteActions) {
-                    action.perform(player);
+                    action.perform(player, questID, taskIndex);
                 }
             }
             return true;
@@ -63,17 +80,30 @@ public final class TaskGathering implements Task {
         return false;
     }
 
-    public boolean progressBy(Player player, int increment) {
-        if (progress < amountNeeded) {
-            progress += increment;
-            if (isCompleted()) {
+    public void progressBy(Player player, int progress, int questID, int taskIndex, boolean ignorePrevent) {
+        this.progress += progress;
+        if (isCompleted()) {
+            boolean prevent = false;
+            if (!ignorePrevent) {
                 for (Action action : onCompleteActions) {
-                    action.perform(player);
+                    boolean b = action.preventTaskCompilation();
+                    if (b) {
+                        prevent = true;
+                        action.perform(player, questID, taskIndex);
+                        break;
+                    }
                 }
             }
-            return true;
+
+            if (prevent) {
+                this.progress--;
+                return;
+            }
+
+            for (Action action : onCompleteActions) {
+                action.perform(player, questID, taskIndex);
+            }
         }
-        return false;
     }
 
     @Override
@@ -91,11 +121,11 @@ public final class TaskGathering implements Task {
         return amountNeeded;
     }
 
-    public void setProgress(Player player, int progress) {
+    public void setProgress(Player player, int progress, int questID, int taskIndex) {
         this.progress = progress;
         if (isCompleted()) {
             for (Action action : onCompleteActions) {
-                action.perform(player);
+                action.perform(player, questID, taskIndex);
             }
         }
     }

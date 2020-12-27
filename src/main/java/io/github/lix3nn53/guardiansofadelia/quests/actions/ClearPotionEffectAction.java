@@ -12,7 +12,12 @@ public class ClearPotionEffectAction implements Action {
     }
 
     @Override
-    public void perform(Player player) {
+    public void perform(Player player, int questID, int taskIndex) {
         player.removePotionEffect(potionEffectType);
+    }
+
+    @Override
+    public boolean preventTaskCompilation() {
+        return false;
     }
 }

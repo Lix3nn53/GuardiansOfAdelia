@@ -27,7 +27,7 @@ public class GiveWeaponAction implements Action {
     }
 
     @Override
-    public void perform(Player player) {
+    public void perform(Player player, int questID, int taskIndex) {
         UUID uuid = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uuid)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -41,5 +41,10 @@ public class GiveWeaponAction implements Action {
                 InventoryUtils.giveItemToPlayer(player, weapon);
             }
         }
+    }
+
+    @Override
+    public boolean preventTaskCompilation() {
+        return false;
     }
 }

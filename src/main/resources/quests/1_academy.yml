@@ -1,0 +1,74 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+
+quest1:
+  questID: 5
+  npcToTakeFrom: 0
+  npcToComplete: 120
+  name: "Waking up from the nightmare"
+  story:
+    - "You woke up from a dream of the past. In that dream,"
+    - "Guardians lost the battle against Aleesia. Darkness"
+    - "is slowly conquering the lands of Adelia..."
+  startMsg: "Welcome to the lands of Adelia!"
+  objectiveTextList:
+    - "Talk with Gatekeeper to learn what happened"
+  turnInMsg: ""
+  moneyPrize: 0
+  expPrize: 0
+  requiredLevel: 1
+  requiredQuests:
+    - 4
+  advancementMaterial: "GRASS_BLOCK"
+quest2:
+  questID: 6
+  npcToTakeFrom: 120
+  npcToComplete: 121
+  name: "Guardian Academy"
+  story:
+    - "What is this place? An Academy for Guardians?"
+  startMsg: "Follow the wooden path to get to the Guardian Academy"
+  objectiveTextList:
+    - "Go to Guardian Academy and get your starting equipment"
+    - "TASK_PROGRESS_1"
+    - "TASK_PROGRESS_2"
+    - "TASK_PROGRESS_3"
+    - "Talk with Wizard Odolf"
+  turnInMsg: ""
+  moneyPrize: 10
+  expPrize: 10
+  requiredLevel: 1
+  requiredQuests:
+    - 5
+  advancementMaterial: "GRASS_BLOCK"
+  task1:
+    taskType: "TaskInteract"
+    npcId: 20
+    onTaskCompleteAction1:
+      actionType: "WeaponSelectOneOfAction"
+      gearLevel: 1
+      itemIndex: 0
+      itemTier: "RARE"
+      itemTag: "Academy"
+  task2:
+    taskType: "TaskInteract"
+    npcId: 40
+    onTaskCompleteAction1:
+      actionType: "WeaponSelectOneOfAction"
+      gearLevel: 1
+      itemIndex: 0
+      itemTier: "RARE"
+      itemTag: "Academy"
+  task3:
+    taskType: "TaskInteract"
+    npcId: 60
+    onTaskCompleteAction1:
+      actionType: "WeaponSelectOneOfAction"
+      gearLevel: 1
+      itemIndex: 0
+      itemTier: "RARE"
+      itemTag: "Academy"

@@ -57,12 +57,29 @@ public final class TaskKill implements Task {
     }
 
     @Override
-    public boolean progress(Player player) {
-        if (progress < amountNeeded) {
-            progress++;
+    public boolean progress(Player player, int questID, int taskIndex, boolean ignorePrevent) {
+        if (this.progress < this.amountNeeded) {
+            this.progress++;
             if (isCompleted()) {
+                boolean prevent = false;
+                if (!ignorePrevent) {
+                    for (Action action : onCompleteActions) {
+                        boolean b = action.preventTaskCompilation();
+                        if (b) {
+                            prevent = true;
+                            action.perform(player, questID, taskIndex);
+                            break;
+                        }
+                    }
+                }
+
+                if (prevent) {
+                    this.progress--;
+                    return true;
+                }
+
                 for (Action action : onCompleteActions) {
-                    action.perform(player);
+                    action.perform(player, questID, taskIndex);
                 }
             }
             return true;
@@ -85,9 +102,9 @@ public final class TaskKill implements Task {
         return amountNeeded;
     }
 
-    public boolean progress(Player player, String internalName) {
+    public boolean progress(Player player, String internalName, int questID, int taskIndex, boolean ignorePrevent) {
         if (internalName.equals(this.internalName)) {
-            return progress(player);
+            return progress(player, questID, taskIndex, ignorePrevent);
         }
 
         return false;

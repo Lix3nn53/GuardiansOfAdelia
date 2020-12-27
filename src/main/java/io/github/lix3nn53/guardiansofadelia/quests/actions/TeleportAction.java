@@ -16,12 +16,17 @@ public class TeleportAction implements Action {
     }
 
     @Override
-    public void perform(Player player) {
+    public void perform(Player player, int questID, int taskIndex) {
         new BukkitRunnable() {
             @Override
             public void run() {
                 player.teleport(location);
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), delay);
+    }
+
+    @Override
+    public boolean preventTaskCompilation() {
+        return false;
     }
 }

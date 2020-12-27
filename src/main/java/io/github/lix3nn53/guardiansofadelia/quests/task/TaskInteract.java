@@ -54,12 +54,29 @@ public final class TaskInteract implements Task {
     }
 
     @Override
-    public boolean progress(Player player) {
-        if (completed == 0) {
-            completed++;
+    public boolean progress(Player player, int questID, int taskIndex, boolean ignorePrevent) {
+        if (this.completed == 0) {
+            this.completed = 1;
             if (isCompleted()) {
+                boolean prevent = false;
+                if (!ignorePrevent) {
+                    for (Action action : onCompleteActions) {
+                        boolean b = action.preventTaskCompilation();
+                        if (b) {
+                            prevent = true;
+                            action.perform(player, questID, taskIndex);
+                            break;
+                        }
+                    }
+                }
+
+                if (prevent) {
+                    this.completed = 0;
+                    return true;
+                }
+
                 for (Action action : onCompleteActions) {
-                    action.perform(player);
+                    action.perform(player, questID, taskIndex);
                 }
             }
             return true;
@@ -67,9 +84,9 @@ public final class TaskInteract implements Task {
         return false;
     }
 
-    public boolean progress(int npcId, Player player) {
+    public boolean progress(int npcId, Player player, int questID, int taskIndex, boolean ignorePrevent) {
         if (npcId == this.npcId) {
-            if (progress(player)) {
+            if (progress(player, questID, taskIndex, ignorePrevent)) {
                 NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
                 MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + "Quest Interact" + ChatColor.GRAY + " with " + npcRegistry.getById(npcId).getName());
                 return true;

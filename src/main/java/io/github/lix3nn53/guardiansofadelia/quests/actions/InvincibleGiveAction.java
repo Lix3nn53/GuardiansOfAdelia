@@ -14,7 +14,7 @@ public class InvincibleGiveAction implements Action {
     }
 
     @Override
-    public void perform(Player player) {
+    public void perform(Player player, int questID, int taskIndex) {
         ImmunityListener.addInvincible(player);
 
         new BukkitRunnable() {
@@ -23,5 +23,10 @@ public class InvincibleGiveAction implements Action {
                 ImmunityListener.removeInvincible(player);
             }
         }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), duration);
+    }
+
+    @Override
+    public boolean preventTaskCompilation() {
+        return false;
     }
 }

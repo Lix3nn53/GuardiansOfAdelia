@@ -15,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.st
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.*;
+import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigurationUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -27,7 +28,7 @@ public class SkillComponentLoader {
         GuardiansOfAdelia.getInstance().getLogger().info(configurationSection.getCurrentPath());
         SkillComponent skillComponent = loadComponent(configurationSection);
 
-        int childComponentCount = getChildComponentCount(configurationSection);
+        int childComponentCount = ConfigurationUtils.getChildComponentCount(configurationSection, "child");
 
         if (childComponentCount > 0) {
             List<SkillComponent> children = loadChildrenOfSection(configurationSection, childComponentCount);
@@ -173,20 +174,6 @@ public class SkillComponentLoader {
         return null;
     }
 
-    private static int getChildComponentCount(ConfigurationSection configurationSection) {
-        int count = 0;
-        while (true) {
-            boolean contains = configurationSection.contains("child" + (count + 1));
-            if (contains) {
-                count++;
-            } else {
-                break;
-            }
-        }
-
-        return count;
-    }
-
     private static List<SkillComponent> loadChildrenOfSection(ConfigurationSection configurationSection, int childComponentCount) {
         List<SkillComponent> children = new ArrayList<>();
 
@@ -197,7 +184,7 @@ public class SkillComponentLoader {
             SkillComponent child = loadComponent(childSection);
             children.add(child);
 
-            int childComponentCountOfChild = getChildComponentCount(childSection);
+            int childComponentCountOfChild = ConfigurationUtils.getChildComponentCount(childSection, "child");
 
             if (childComponentCountOfChild > 0) {
                 List<SkillComponent> childrenOfChild = loadChildrenOfSection(childSection, childComponentCountOfChild);

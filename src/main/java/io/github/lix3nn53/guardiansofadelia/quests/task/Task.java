@@ -12,7 +12,14 @@ public interface Task {
 
     boolean isCompleted();
 
-    boolean progress(Player player);
+    /**
+     * @param player
+     * @param questID
+     * @param taskIndex
+     * @param ignorePrevent For 2 step actions like WeaponSelectOneOfAction
+     * @return
+     */
+    boolean progress(Player player, int questID, int taskIndex, boolean ignorePrevent);
 
     int getProgress();
 

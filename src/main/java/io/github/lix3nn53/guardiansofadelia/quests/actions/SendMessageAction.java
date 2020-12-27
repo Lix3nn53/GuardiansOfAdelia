@@ -11,7 +11,12 @@ public class SendMessageAction implements Action {
     }
 
     @Override
-    public void perform(Player player) {
+    public void perform(Player player, int questID, int taskIndex) {
         player.sendMessage(s);
+    }
+
+    @Override
+    public boolean preventTaskCompilation() {
+        return false;
     }
 }

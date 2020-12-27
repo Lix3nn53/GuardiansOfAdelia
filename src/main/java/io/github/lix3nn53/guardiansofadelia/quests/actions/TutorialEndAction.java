@@ -19,7 +19,7 @@ import java.util.UUID;
 public class TutorialEndAction implements Action {
 
     @Override
-    public void perform(Player player) {
+    public void perform(Player player, int questID, int taskIndex) {
         UUID uuid = player.getUniqueId();
         if (GuardianDataManager.hasGuardianData(uuid)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
@@ -65,4 +65,8 @@ public class TutorialEndAction implements Action {
         }
     }
 
+    @Override
+    public boolean preventTaskCompilation() {
+        return false;
+    }
 }
