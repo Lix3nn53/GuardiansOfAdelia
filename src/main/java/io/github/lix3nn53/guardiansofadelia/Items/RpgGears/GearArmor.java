@@ -61,6 +61,12 @@ public class GearArmor implements RPGGear {
         }
         lore.add("");
         lore.add(tier.getTierString());
+        lore.add("");
+        lore.add(ChatColor.DARK_PURPLE + "Set Effects:");
+        GearSetEffect setEffect = gearType.getSetEffect();
+        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName() +
+                ChatColor.GRAY + "[4 piece]: " +
+                ChatColor.YELLOW + setEffect.name());
 
         this.itemStack = new ItemStack(material);
         RPGItemUtils.resetArmor(this.itemStack);

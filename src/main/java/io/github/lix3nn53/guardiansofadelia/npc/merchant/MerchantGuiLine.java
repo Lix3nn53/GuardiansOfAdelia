@@ -30,6 +30,6 @@ public class MerchantGuiLine implements GuiLine {
 
     @Override
     public boolean isEmpty() {
-        return words.size() < 10;
+        return words.size() < 9;
     }
 }

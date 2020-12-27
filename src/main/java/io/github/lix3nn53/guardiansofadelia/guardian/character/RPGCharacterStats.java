@@ -35,6 +35,9 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RPGCharacterStats {
 
     private final Player player;
@@ -69,7 +72,7 @@ public class RPGCharacterStats {
     private double criticalChanceBonusBuff = 0;
     private double criticalDamageBonusBuff = 0;
 
-    private GearSetEffect armorGearTypeSetEffect = null;
+    private final List<GearSetEffect> armorGearTypeSetEffect = new ArrayList<>();
 
     public RPGCharacterStats(Player player, String rpgClassStr) {
         this.player = player;
@@ -704,24 +707,20 @@ public class RPGCharacterStats {
 
         onMaxHealthChange();
         onCurrentManaChange();
-        boolean wearingSameArmorType = isWearingSameArmorType(helmetType, chestplateType, leggingsType, bootsType);
+        boolean wearingSameArmorType = GearSetEffect.isWearingSameArmorType(helmetType, chestplateType, leggingsType, bootsType);
         if (wearingSameArmorType) {
             GearSetEffect setEffect = helmetType.getSetEffect();
-            if (this.armorGearTypeSetEffect != null) {
-                if (this.armorGearTypeSetEffect.equals(setEffect)) return;
+            if (!this.armorGearTypeSetEffect.isEmpty()) {
+                if (this.armorGearTypeSetEffect.contains(setEffect)) return;
             }
             setEffect.applySetEffect(player, helmetType.getDisplayName());
-            this.armorGearTypeSetEffect = setEffect;
-        } else if (this.armorGearTypeSetEffect != null) {
-            this.armorGearTypeSetEffect.clearSetEffect(player);
-            this.armorGearTypeSetEffect = null;
+            this.armorGearTypeSetEffect.add(setEffect);
+        } else {
+            for (GearSetEffect gearSetEffect : this.armorGearTypeSetEffect) {
+                gearSetEffect.clearSetEffect(player);
+            }
+            this.armorGearTypeSetEffect.clear();
         }
-    }
-
-    private boolean isWearingSameArmorType(ArmorGearType helmet, ArmorGearType chestplate, ArmorGearType leggings, ArmorGearType boots) {
-        if (helmet == null || chestplate == null || leggings == null || boots == null) return false;
-
-        return helmet == chestplate && helmet == leggings && helmet == boots;
     }
 
     public int getTotalDamageBonusFromOffhand() {

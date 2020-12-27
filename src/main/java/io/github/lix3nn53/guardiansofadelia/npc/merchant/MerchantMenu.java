@@ -136,14 +136,14 @@ public class MerchantMenu extends GuiGeneric {
             weapons.setItemMeta(itemMeta);
             setItem(18, weapons, MerchantPageType.POTIONS);
 
-            ItemStack armors = new ItemStack(Material.PAPER);
+            /*ItemStack armors = new ItemStack(Material.PAPER);
             itemMeta = armors.getItemMeta();
             itemMeta.setDisplayName("Teleport Scrolls");
             List<String> lore2 = new ArrayList<>();
             lore2.add("");
             itemMeta.setLore(lore2);
             armors.setItemMeta(itemMeta);
-            setItem(20, armors, MerchantPageType.TP_SCROLL);
+            setItem(20, armors, MerchantPageType.TP_SCROLL);*/
         } else if (merchantType.equals(MerchantType.TOOL_SHOP)) {
             ItemStack weapons = new ItemStack(Material.NETHERITE_PICKAXE);
             ItemMeta itemMeta = weapons.getItemMeta();

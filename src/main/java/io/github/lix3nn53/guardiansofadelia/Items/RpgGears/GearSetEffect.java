@@ -17,8 +17,35 @@ public enum GearSetEffect {
     ATTACK_SPEED_INCREASE,
     ATTACK_SPEED_DECREASE;
 
+    public static boolean isWearingSameArmorType(ArmorGearType helmet, ArmorGearType chestplate, ArmorGearType leggings, ArmorGearType boots) {
+        if (helmet == null || chestplate == null || leggings == null || boots == null) return false;
+
+        return helmet == chestplate && helmet == leggings && helmet == boots;
+    }
+
+    public void clearSetEffect(Player player) {
+        MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "Gear Set Effect Deactivated");
+        switch (this) {
+            case KNOCKBACK_RESISTANCE:
+                player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0);
+                break;
+            case SLOW_FALLING:
+                player.removePotionEffect(PotionEffectType.SLOW_FALLING);
+                break;
+            case SWIMMING_SPEED:
+                player.removePotionEffect(PotionEffectType.DOLPHINS_GRACE);
+                break;
+            case ATTACK_SPEED_INCREASE:
+                player.removePotionEffect(PotionEffectType.FAST_DIGGING);
+                break;
+            case ATTACK_SPEED_DECREASE:
+                player.removePotionEffect(PotionEffectType.SLOW_DIGGING);
+                break;
+        }
+    }
+
     public void applySetEffect(Player player, String setName) {
-        player.sendMessage(ChatColor.LIGHT_PURPLE + "Armor-set effect activated because you are wearing all pieces of "
+        player.sendMessage(ChatColor.LIGHT_PURPLE + "Gear Set Effect activated because you are wearing all pieces of "
                 + ChatColor.DARK_PURPLE + setName);
         player.sendMessage(ChatColor.DARK_PURPLE + setName + ChatColor.LIGHT_PURPLE + " gives you bonus " + this.name());
         switch (this) {
@@ -40,27 +67,6 @@ public enum GearSetEffect {
             case ATTACK_SPEED_DECREASE:
                 potionEffect = new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 1);
                 player.addPotionEffect(potionEffect);
-                break;
-        }
-    }
-
-    public void clearSetEffect(Player player) {
-        MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "Gear Set Effect Deactivated");
-        switch (this) {
-            case KNOCKBACK_RESISTANCE:
-                player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0);
-                break;
-            case SLOW_FALLING:
-                player.removePotionEffect(PotionEffectType.SLOW_FALLING);
-                break;
-            case SWIMMING_SPEED:
-                player.removePotionEffect(PotionEffectType.DOLPHINS_GRACE);
-                break;
-            case ATTACK_SPEED_INCREASE:
-                player.removePotionEffect(PotionEffectType.FAST_DIGGING);
-                break;
-            case ATTACK_SPEED_DECREASE:
-                player.removePotionEffect(PotionEffectType.SLOW_DIGGING);
                 break;
         }
     }
