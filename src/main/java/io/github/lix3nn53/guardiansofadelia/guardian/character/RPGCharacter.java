@@ -104,13 +104,18 @@ public final class RPGCharacter {
         return false;
     }
 
-    public boolean turnInQuest(int questID, Player player) {
+    public boolean turnInQuest(int questID, Player player, boolean ignoreCompilation) {
         Optional<Quest> questOptional = this.questList.stream()
                 .filter(characterQuest -> characterQuest.getQuestID() == questID)
                 .findAny();
         if (questOptional.isPresent()) {
             Quest quest = questOptional.get();
-            if (quest.isCompleted()) {
+            if (ignoreCompilation) {
+                this.questList.remove(quest);
+                this.turnedInQuests.add(questID);
+                quest.onTurnIn(player);
+                return true;
+            } else if (quest.isCompleted()) {
                 this.questList.remove(quest);
                 this.turnedInQuests.add(questID);
                 quest.onTurnIn(player);

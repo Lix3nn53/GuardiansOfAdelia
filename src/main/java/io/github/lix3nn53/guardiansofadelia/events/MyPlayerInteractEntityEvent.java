@@ -55,6 +55,10 @@ public class MyPlayerInteractEntityEvent implements Listener {
         }
 
         Entity rightClicked = event.getRightClicked();
+        if (rightClicked.getType().equals(EntityType.ITEM_FRAME)) {
+            event.setCancelled(true);
+            return;
+        }
         Player player = event.getPlayer();
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();

@@ -633,8 +633,9 @@ public class MenuList {
     public static GuiBookGeneric compassTowns() {
         GuiBookGeneric guiBookGeneric = new GuiBookGeneric(ChatColor.DARK_GRAY + "Compass Towns", 0);
 
-        List<Town> towns = TownManager.getTowns();
-        for (Town town : towns) {
+        HashMap<Integer, Town> towns = TownManager.getTowns();
+        for (int key : towns.keySet()) {
+            Town town = towns.get(key);
             ItemStack itemStack = new ItemStack(Material.LIGHT_BLUE_WOOL);
             ItemMeta itemMeta = itemStack.getItemMeta();
             ArrayList<String> lore = new ArrayList<>();
@@ -644,7 +645,7 @@ public class MenuList {
             lore.add(ChatColor.GRAY + "If you dont have a compass this will give you one.");
             itemMeta.setLore(lore);
 
-            itemMeta.setDisplayName(ChatColor.AQUA + town.getName() + " #" + town.getNo());
+            itemMeta.setDisplayName(ChatColor.AQUA + town.getName() + " #" + key);
             itemStack.setItemMeta(itemMeta);
 
             guiBookGeneric.addToFirstAvailableWord(itemStack);

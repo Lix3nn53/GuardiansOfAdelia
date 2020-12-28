@@ -6,12 +6,12 @@ public class Town {
 
     private final Location location;
     private final String name;
-    private final int no;
+    private final int level;
 
-    public Town(String name, int no, Location location) {
+    public Town(String name, Location location, int level) {
         this.name = name;
-        this.no = no;
         this.location = location;
+        this.level = level;
     }
 
     public double getDistanceSquared(Location location) {
@@ -26,7 +26,7 @@ public class Town {
         return name;
     }
 
-    public int getNo() {
-        return no;
+    public int getLevel() {
+        return level;
     }
 }

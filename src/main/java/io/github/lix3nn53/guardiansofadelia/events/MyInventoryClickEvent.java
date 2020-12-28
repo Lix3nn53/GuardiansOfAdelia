@@ -444,40 +444,25 @@ public class MyInventoryClickEvent implements Listener {
                 charNoString = charNoString.replace(" Selection", "");
                 int charNo = Integer.parseInt(charNoString);
 
-                if (currentName.contains("Roumen")) {
-                    Location location = TownManager.getTown(1).getLocation();
-                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
-                } else if (currentName.contains("Port Veloa")) {
-                    int charLevel = CharacterSelectionScreenManager.getCharLevel(player, charNo);
-                    if (charLevel < 10) return;
-
-                    Location location = TownManager.getTown(2).getLocation();
-                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
-                } else if (currentName.contains("Elderine")) {
-                    int charLevel = CharacterSelectionScreenManager.getCharLevel(player, charNo);
-                    if (charLevel < 20) return;
-
-                    Location location = TownManager.getTown(3).getLocation();
-                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
-                } else if (currentName.contains("Uruga")) {
-                    int charLevel = CharacterSelectionScreenManager.getCharLevel(player, charNo);
-                    if (charLevel < 40) return;
-
-                    Location location = TownManager.getTown(4).getLocation();
-                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
-                } else if (currentName.contains("Alberstol Ruins")) {
-                    int charLevel = CharacterSelectionScreenManager.getCharLevel(player, charNo);
-                    if (charLevel < 70) return;
-
-                    Location location = TownManager.getTown(5).getLocation();
-                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
-                } else if (currentName.contains("last location")) {
+                if (currentName.contains("last location")) {
                     Location charLocation = CharacterSelectionScreenManager.getCharLocation(player, charNo);
                     if (charLocation != null) {
                         CharacterSelectionScreenManager.selectCharacter(player, charNo, charLocation);
                     } else {
-                        player.sendMessage(ChatColor.RED + "Your saved quit-location is not valid");
+                        player.sendMessage(ChatColor.RED + "Your saved last location is not valid");
                     }
+                } else if (currentName.contains("#")) {
+                    String[] split = currentName.split("#");
+                    int townNo = Integer.parseInt(split[1]);
+
+                    Town town = TownManager.getTown(townNo);
+
+                    int charLevel = CharacterSelectionScreenManager.getCharLevel(player, charNo);
+                    if (charLevel < town.getLevel()) return;
+
+                    Location location = town.getLocation();
+
+                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 }
             } else {
                 if (currentName.equals(ChatColor.YELLOW + "Class")) {
@@ -520,7 +505,7 @@ public class MyInventoryClickEvent implements Listener {
                                 WeaponReferenceData weaponPrizesSelectOneOf = quest.getWeaponPrizesSelectOneOf();
                                 if (itemPrizesSelectOneOf.isEmpty() && weaponPrizesSelectOneOf == null) {
                                     //turnin quest
-                                    boolean didTurnIn = rpgCharacter.turnInQuest(questNo, player);
+                                    boolean didTurnIn = rpgCharacter.turnInQuest(questNo, player, false);
                                     if (didTurnIn) {
                                         GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
                                         questGui.openInventory(player);
@@ -633,7 +618,7 @@ public class MyInventoryClickEvent implements Listener {
                 InventoryUtils.giveItemToPlayer(player, current);
 
                 //turnin quest
-                boolean didTurnIn = rpgCharacter.turnInQuest(questNo, player);
+                boolean didTurnIn = rpgCharacter.turnInQuest(questNo, player, false);
                 if (didTurnIn) {
                     GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
                     questGui.openInventory(player);

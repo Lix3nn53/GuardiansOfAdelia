@@ -244,8 +244,12 @@ public class ConfigManager {
     }
 
     private static void loadTowns() {
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < 1000; i++) {
+            boolean contains = townsConfig.contains("town" + i);
+            if (!contains) break;
+
             String townName = townsConfig.getString("town" + i + ".name");
+            int level = townsConfig.getInt("town" + i + ".level");
             String worldName = townsConfig.getString("town" + i + ".world");
             double x = townsConfig.getDouble("town" + i + ".x");
             double y = townsConfig.getDouble("town" + i + ".y");
@@ -253,27 +257,8 @@ public class ConfigManager {
             float yaw = (float) townsConfig.getDouble("town" + i + ".yaw");
             float pitch = (float) townsConfig.getDouble("town" + i + ".pitch");
             Location location = new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
-            Town town = new Town(townName, i, location);
-            TownManager.addTown(town);
-        }
-    }
-
-    private static void writeTowns() {
-        List<Town> towns = TownManager.getTowns();
-        for (Town town : towns) {
-            Location location = town.getLocation();
-            characterSelectionConfig.set("town" + town.getNo() + ".name", town.getName());
-            characterSelectionConfig.set("town" + town.getNo() + ".world", location.getWorld().getName());
-            characterSelectionConfig.set("town" + town.getNo() + ".x", location.getX());
-            characterSelectionConfig.set("town" + town.getNo() + ".y", location.add(0.0, -0.4, 0.0).getY());
-            characterSelectionConfig.set("town" + town.getNo() + ".z", location.getZ());
-            characterSelectionConfig.set("town" + town.getNo() + ".yaw", location.getYaw());
-            characterSelectionConfig.set("town" + town.getNo() + ".pitch", location.getPitch());
-        }
-        try {
-            characterSelectionConfig.save(ConfigManager.DATA_FOLDER + "/characterSelection.yml");
-        } catch (IOException e) {
-            e.printStackTrace();
+            Town town = new Town(townName, location, level);
+            TownManager.addTown(town, i);
         }
     }
 }

@@ -10,9 +10,11 @@ import java.util.UUID;
 public class FinishQuestAction implements Action {
 
     private final int questId;
+    private final boolean ignoreCompilation;
 
-    public FinishQuestAction(int questId) {
+    public FinishQuestAction(int questId, boolean ignoreCompilation) {
         this.questId = questId;
+        this.ignoreCompilation = ignoreCompilation;
     }
 
     @Override
@@ -22,7 +24,7 @@ public class FinishQuestAction implements Action {
             GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                boolean didComplete = activeCharacter.turnInQuest(this.questId, player);
+                boolean didComplete = activeCharacter.turnInQuest(this.questId, player, ignoreCompilation);
             }
         }
     }

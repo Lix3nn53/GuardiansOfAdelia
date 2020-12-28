@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
 import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
 import org.bukkit.Bukkit;
@@ -29,8 +30,12 @@ public class ActionLoader {
             return new ClearPotionEffectAction(potionEffectType);
         } else if (actionType.equals(FinishQuestAction.class.getSimpleName())) {
             int questId = configurationSection.getInt("questId");
+            boolean ignoreCompilation = configurationSection.contains("ignoreCompilation");
+            if (ignoreCompilation) {
+                ignoreCompilation = configurationSection.getBoolean("ignoreCompilation");
+            }
 
-            return new FinishQuestAction(questId);
+            return new FinishQuestAction(questId, ignoreCompilation);
         } else if (actionType.equals(GiveItemAction.class.getSimpleName())) {
             ItemStack itemStack = ItemReferenceLoader.loadItemReference(configurationSection.getConfigurationSection("item"));
 
@@ -85,6 +90,9 @@ public class ActionLoader {
         } else if (actionType.equals(WeaponSelectOneOfAction.class.getSimpleName())) {
             WeaponReferenceData weaponReferenceData = new WeaponReferenceData(configurationSection);
             return new WeaponSelectOneOfAction(weaponReferenceData);
+        } else if (actionType.equals(ArmorSelectOneOfAction.class.getSimpleName())) {
+            ArmorReferenceData armorReferenceData = new ArmorReferenceData(configurationSection);
+            return new ArmorSelectOneOfAction(armorReferenceData);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH ACTION IN LOADER: " + configurationSection.getCurrentPath());

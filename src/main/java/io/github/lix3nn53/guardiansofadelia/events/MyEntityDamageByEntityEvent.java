@@ -62,6 +62,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
         }
 
         Entity target = event.getEntity();
+        if (target.getType().equals(EntityType.ITEM_FRAME)) {
+            event.setCancelled(true);
+            return;
+        }
         boolean isSkill = false;
 
         DamageMechanic.DamageType damageType = DamageMechanic.DamageType.MELEE;
