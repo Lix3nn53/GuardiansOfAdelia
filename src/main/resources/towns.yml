@@ -5,42 +5,11 @@
 # ---------------------------------------------- #
 
 town1:
-  name: Roumen
+  name: Guardian Academy
+  level: 1
   world: world
   x: 2065.5
   y: 130.5
   z: 1311.5
   yaw: -157
   pitch: -1.5
-town2:
-  name: Port Veloa
-  world: world
-  x: 2065.5
-  y: 130.5
-  z: 1311.5
-  yaw: -0.5
-  pitch: -3.5
-town3:
-  name: Elderine
-  world: world
-  x: 2065.5
-  y: 130.5
-  z: 1311.5
-  yaw: 53
-  pitch: -4.5
-town4:
-  name: Uruga
-  world: world
-  x: 2065.5
-  y: 130.5
-  z: 1311.5
-  yaw: -25
-  pitch: -4
-town5:
-  name: Alberstol Ruins
-  world: world
-  x: 2065.5
-  y: 130.5
-  z: 1311.5
-  yaw: -60
-  pitch: -1

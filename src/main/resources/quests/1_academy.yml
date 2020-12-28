@@ -37,7 +37,7 @@ quest2:
     - "TASK_PROGRESS_1"
     - "TASK_PROGRESS_2"
     - "TASK_PROGRESS_3"
-    - "Talk with Wizard Odolf"
+    - "Finally talk with Wizard Odolf"
   turnInMsg: ""
   moneyPrize: 10
   expPrize: 10
@@ -47,7 +47,7 @@ quest2:
   advancementMaterial: "GRASS_BLOCK"
   task1:
     taskType: "TaskInteract"
-    npcId: 20
+    npcId: 40
     onTaskCompleteAction1:
       actionType: "WeaponSelectOneOfAction"
       gearLevel: 1
@@ -56,19 +56,28 @@ quest2:
       itemTag: "Academy"
   task2:
     taskType: "TaskInteract"
-    npcId: 40
+    npcId: 60
     onTaskCompleteAction1:
-      actionType: "WeaponSelectOneOfAction"
+      actionType: "ArmorSelectOneOfAction"
+      armorSlot: "BOOTS"
       gearLevel: 1
       itemIndex: 0
       itemTier: "RARE"
       itemTag: "Academy"
   task3:
     taskType: "TaskInteract"
-    npcId: 60
+    npcId: 100
     onTaskCompleteAction1:
-      actionType: "WeaponSelectOneOfAction"
-      gearLevel: 1
-      itemIndex: 0
-      itemTier: "RARE"
-      itemTag: "Academy"
+      actionType: "GiveItemAction"
+      item:
+        itemType: "Consumable"
+        consumable: "POTION_INSTANT_HEALTH"
+        skillLevel: 1
+        uses: 10
+    onTaskCompleteAction2:
+      actionType: "GiveItemAction"
+      item:
+        itemType: "Consumable"
+        consumable: "POTION_INSTANT_MANA"
+        skillLevel: 1
+        uses: 10

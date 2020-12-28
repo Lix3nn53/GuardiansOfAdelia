@@ -12,9 +12,9 @@ LIBRARY:
   yaw: 90
   pitch: 0
 SEWER:
-  x: 2118.5
-  y: 114.5
-  z: 1329.5
+  x: 2023.5
+  y: 103.5
+  z: 1392.5
   world: world
-  yaw: 90
+  yaw: 0
   pitch: 0

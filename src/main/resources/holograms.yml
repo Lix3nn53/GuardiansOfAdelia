@@ -4,7 +4,7 @@
 #                 Hologram List                  #
 # ---------------------------------------------- #
 
-HologramCount: 7
+HologramCount: 8
 Hologram1:
   x: 471.5
   y: 10.5
@@ -32,9 +32,9 @@ Hologram3:
   texts:
     - '&6Learn your skills to get ready!'
     - '1 - Open menu by clicking Menu-Book from your inventory(E key)'
-    - '2 - Tap Character then Skills'
+    - '2 - Tap Character and then Skills'
     - '3 - Give points to your skills to unlock'
-    - '4 - Once unlocked, press 1-2-3-4 keys to cast'
+    - '4 - Once unlocked, press 1-2-3-4 keys to cast skills'
 Hologram4:
   x: 302.5
   y: 34.5
@@ -43,7 +43,7 @@ Hologram4:
   texts:
     - '&6Use your Element Points to get stronger'
     - '1 - Open menu by clicking Menu-Book from your inventory(E key)'
-    - '2 - Tap Character then Elements'
+    - '2 - Tap Character and then Elements'
     - '3 - Give points to elements to gain stats'
     - '4 - You can Shift + Click to use 5 points at once'
 Hologram5:
@@ -72,3 +72,15 @@ Hologram7:
     - '&6Teleport to top of the tower to face Aleesia!'
     - '1 - Get close to the Teleport Portal'
     - '2 - Left Click to teleport'
+Hologram8:
+  x: 2052.5
+  y: 106.5
+  z: 1511.5
+  world: world
+  texts:
+    - '&aWelcome to the lands of Adelia!'
+    - '&eOne last tip:'
+    - '1 - Open menu by clicking Menu-Book from your inventory(E key)'
+    - '2 - Tap Compass and then select your destination'
+    - '3 - A compass showing your destination will be added to your inventory'
+    - '&dHave fun!'

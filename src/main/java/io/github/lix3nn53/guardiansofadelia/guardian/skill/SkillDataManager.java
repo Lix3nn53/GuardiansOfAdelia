@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -12,10 +14,10 @@ import java.util.List;
 
 public class SkillDataManager {
 
-    private static HashMap<LivingEntity, HashMap<String, Integer>> keyEntityPlusKeyToValue = new HashMap<>();
-    private static HashMap<LivingEntity, HashSet<String>> keyEntityToSkillFlags = new HashMap<>();
-    private static HashMap<LivingEntity, HashMap<Integer, BukkitTask>> keyEntityPlusCastCounterToRepeatTask = new HashMap<>();
-    private static HashMap<LivingEntity, HashMap<Integer, List<Entity>>> keyEntityPlusCastCounterToSavedEntities = new HashMap<>();
+    private static final HashMap<LivingEntity, HashMap<String, Integer>> keyEntityPlusKeyToValue = new HashMap<>();
+    private static final HashMap<LivingEntity, HashSet<String>> keyEntityToSkillFlags = new HashMap<>();
+    private static final HashMap<LivingEntity, HashMap<Integer, BukkitTask>> keyEntityPlusCastCounterToRepeatTask = new HashMap<>();
+    private static final HashMap<LivingEntity, HashMap<Integer, List<Entity>>> keyEntityPlusCastCounterToSavedEntities = new HashMap<>();
 
     public static void setValue(LivingEntity keyEntity, String key, int value) {
         if (keyEntityPlusKeyToValue.containsKey(keyEntity)) {
@@ -160,6 +162,16 @@ public class SkillDataManager {
         if (keyEntityPlusCastCounterToSavedEntities.containsKey(keyEntity)) {
             HashMap<Integer, List<Entity>> hashMap = keyEntityPlusCastCounterToSavedEntities.get(keyEntity);
             List<Entity> entities = hashMap.get(castCounter);
+
+            if (entities == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "removeSavedEntity entities null");
+                return;
+            }
+            if (toRemove == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "removeSavedEntity toRemove null");
+                return;
+            }
+
             if (entities.contains(toRemove)) {
                 entities.remove(toRemove);
                 toRemove.remove();

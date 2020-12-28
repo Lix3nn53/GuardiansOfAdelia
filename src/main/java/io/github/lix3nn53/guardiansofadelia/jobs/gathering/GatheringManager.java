@@ -70,9 +70,12 @@ public class GatheringManager {
             return;
         }
 
-        GatheringToolType gatheringToolType = GatheringToolType.materialToGatheringTool(itemInHand.getType());
+        if (!PersistentDataContainerUtil.hasString(itemInHand, "toolTier")) return;
+
         String toolTierStr = PersistentDataContainerUtil.getString(itemInHand, "toolTier");
         GatheringToolTier gatheringToolTier = GatheringToolTier.valueOf(toolTierStr);
+
+        GatheringToolType gatheringToolType = GatheringToolType.materialToGatheringTool(itemInHand.getType());
 
         if (constainsToolToCustomModelData(gatheringToolType, gatheringToolTier)) {
             List<Integer> customModelDatas = getToolToCustomModelData(gatheringToolType, gatheringToolTier);

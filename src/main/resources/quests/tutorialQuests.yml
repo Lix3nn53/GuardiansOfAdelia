@@ -166,6 +166,7 @@ quest4:
   onCompleteAction6:
     actionType: "FinishQuestAction"
     questId: 4
+    ignoreCompilation: true
   onCompleteAction7:
     actionType: "StartQuestAction"
     questId: 5

@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.menu;
 
+import io.github.lix3nn53.guardiansofadelia.towns.Town;
+import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -8,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CharacterSelectionMenuList {
 
@@ -184,50 +187,26 @@ public class CharacterSelectionMenuList {
         lastLocation.setItemMeta(itemMeta);
         guiGeneric.setItem(11, lastLocation);
 
-        ItemStack city1 = new ItemStack(Material.LIGHT_BLUE_WOOL);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Teleport to Roumen");
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatColor.YELLOW + "Required level: 1");
-        itemMeta.setLore(lore);
-        city1.setItemMeta(itemMeta);
-        guiGeneric.setItem(13, city1);
+        int index = 13;
+        HashMap<Integer, Town> towns = TownManager.getTowns();
+        for (int key : towns.keySet()) {
+            Town town = towns.get(key);
+            ItemStack itemStack = new ItemStack(Material.LIGHT_BLUE_WOOL);
+            itemMeta = itemStack.getItemMeta();
 
-        ItemStack city2 = new ItemStack(Material.LIGHT_BLUE_WOOL, 2);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Teleport to Port Veloa");
-        lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatColor.YELLOW + "Required level: 10");
-        itemMeta.setLore(lore);
-        city2.setItemMeta(itemMeta);
-        guiGeneric.setItem(15, city2);
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Click to start in this location!");
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Required Level: " + town.getLevel());
+            itemMeta.setLore(lore);
 
-        ItemStack city3 = new ItemStack(Material.LIGHT_BLUE_WOOL, 3);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Teleport to Elderine");
-        lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatColor.YELLOW + "Required level: 20");
-        itemMeta.setLore(lore);
-        city3.setItemMeta(itemMeta);
-        guiGeneric.setItem(20, city3);
+            itemMeta.setDisplayName(ChatColor.AQUA + town.getName() + " #" + key);
+            itemStack.setItemMeta(itemMeta);
 
-        ItemStack city4 = new ItemStack(Material.LIGHT_BLUE_WOOL, 4);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Teleport to Uruga");
-        lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatColor.YELLOW + "Required level: 40");
-        itemMeta.setLore(lore);
-        city4.setItemMeta(itemMeta);
-        guiGeneric.setItem(22, city4);
+            guiGeneric.setItem(index, itemStack);
+        }
 
-        ItemStack city5 = new ItemStack(Material.LIGHT_BLUE_WOOL, 5);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Teleport to Alberstol Ruins");
-        lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatColor.YELLOW + "Required level: 70");
-        itemMeta.setLore(lore);
-        city5.setItemMeta(itemMeta);
-        guiGeneric.setItem(24, city5);
 
         return guiGeneric;
     }
