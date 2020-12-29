@@ -1,3 +1,4 @@
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSet;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 
 import java.sql.SQLException;
@@ -12,7 +13,15 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException, SQLException {
-        int stepCount = 5;
+        GearSet gearSet = new GearSet("Tutorial", 2);
+        GearSet gearSet1 = new GearSet("Tutorial", 2);
+        GearSet gearSet2 = new GearSet("Tutorial", 2);
+
+        System.out.println("equals: " + gearSet.equals(gearSet1));
+        System.out.println("hash1: " + gearSet1.hashCode());
+        System.out.println("hash2: " + gearSet2.hashCode());
+
+        /*int stepCount = 5;
         for (int ticksRun = 0; ticksRun <= 100; ticksRun++) {
             boolean doesDivide = ticksRun % 4 == 0;
             if (doesDivide) {
@@ -31,7 +40,7 @@ public class Test {
             } else {
                 System.out.println("Skip tick: " + ticksRun);
             }
-        }
+        }*/
         /*for (int mobLevel = 1; mobLevel <= 10; mobLevel++) {
             for (int playerLevel = 1; playerLevel <= 20; playerLevel++) {
                 System.out.println("mobLevel: " + mobLevel);

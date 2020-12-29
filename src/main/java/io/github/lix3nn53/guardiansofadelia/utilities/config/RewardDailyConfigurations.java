@@ -2,9 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.database.ItemSerializer;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
@@ -13,9 +11,10 @@ import java.io.IOException;
 public class RewardDailyConfigurations {
 
     private static FileConfiguration fileConfiguration;
+    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "rewards";
 
     static void createConfigs() {
-        createConfig("daily.yml");
+        fileConfiguration = ConfigurationUtils.createConfig(filePath, "daily.yml");
     }
 
     static void loadConfigs() {
@@ -28,29 +27,6 @@ public class RewardDailyConfigurations {
 
     static void writeConfigs() {
         writeDailyRewardsConfig("daily.yml");
-    }
-
-    private static void createConfig(String fileName) {
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "rewards";
-        File customConfigFile = new File(filePath, fileName);
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        YamlConfiguration yamlConfiguration = new YamlConfiguration();
-        try {
-            yamlConfiguration.load(customConfigFile);
-
-            fileConfiguration = yamlConfiguration;
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
     }
 
     private static void loadDailyRewardsConfig() throws IOException {

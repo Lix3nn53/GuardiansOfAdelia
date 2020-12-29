@@ -1,10 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.list.Eggs;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
@@ -79,7 +82,8 @@ public class CommandLix implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin quest gui <npcNo> - open quest gui of an npc");
                 player.sendMessage(ChatColor.AQUA + "---- ITEMS ----");
                 player.sendMessage(ChatColor.AQUA + "/admin coin <num>");
-                player.sendMessage(ChatColor.AQUA + "/admin weapon [type] <num>");
+                player.sendMessage(ChatColor.AQUA + "/admin weapon [type] <num> [gearSet]");
+                player.sendMessage(ChatColor.AQUA + "/admin armor [slot] [type] <num> [gearSet]");
                 player.sendMessage(ChatColor.AQUA + "/admin egg [code] <gearLevel> <petLevel>");
                 player.sendMessage(ChatColor.AQUA + "/admin stone <grade> <amount>");
                 player.sendMessage(ChatColor.AQUA + "/admin passive [parrot|earring|necklace|glove|ring] <num>");
@@ -249,10 +253,26 @@ public class CommandLix implements CommandExecutor {
                 boolean allowFlight = player.getAllowFlight();
                 player.setFlying(!allowFlight);
             } else if (args[0].equals("weapon")) {
-                if (args.length == 3) {
+                if (args.length >= 3) {
                     WeaponGearType weaponGearType = WeaponGearType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
-                    ItemStack weapon = WeaponManager.get(weaponGearType, no, 0, ItemTier.LEGENDARY, "Command", false);
+                    String gearSet = null;
+                    if (args.length == 4) {
+                        gearSet = args[3];
+                    }
+                    ItemStack weapon = WeaponManager.get(weaponGearType, no, 0, ItemTier.LEGENDARY, "Command", false, gearSet);
+                    InventoryUtils.giveItemToPlayer(player, weapon);
+                }
+            } else if (args[0].equals("armor")) {
+                if (args.length >= 4) {
+                    ArmorSlot armorSlot = ArmorSlot.valueOf(args[1]);
+                    ArmorGearType armorGearType = ArmorGearType.valueOf(args[2]);
+                    int no = Integer.parseInt(args[3]);
+                    String gearSet = null;
+                    if (args.length == 5) {
+                        gearSet = args[4];
+                    }
+                    ItemStack weapon = ArmorManager.get(armorSlot, armorGearType, no, 0, ItemTier.LEGENDARY, "Command", false, gearSet);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("egg")) {

@@ -1,39 +1,19 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.database.ConnectionPool;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
-import java.io.File;
-import java.io.IOException;
 
 public class DatabaseConfiguration {
 
     private static FileConfiguration databaseConfig;
+    private static final String filePath = ConfigManager.DATA_FOLDER.toString();
 
     static void createConfigs() {
-        createDatabaseConfig();
+        databaseConfig = ConfigurationUtils.createConfig(filePath, "database.yml");
     }
 
     static void loadConfigs() {
         loadDatabaseConfig();
-    }
-
-    private static void createDatabaseConfig() {
-        File customConfigFile = new File(ConfigManager.DATA_FOLDER, "database.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-            GuardiansOfAdelia.getInstance().saveResource("database.yml", false);
-        }
-
-        databaseConfig = new YamlConfiguration();
-        try {
-            databaseConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
     }
 
     private static void loadDatabaseConfig() {

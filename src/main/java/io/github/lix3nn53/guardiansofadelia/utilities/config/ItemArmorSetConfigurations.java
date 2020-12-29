@@ -3,64 +3,38 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSet;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemArmorSetConfigurations {
-    private static final List<FileConfiguration> armorSetConfigurations = new ArrayList<>();
+    private static final List<FileConfiguration> configurationList = new ArrayList<>();
     private static FileConfiguration fileConfiguration;
+    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "items" + File.separator + "armorSets";
 
     static void createConfigs() {
-        createConfig("config.yml", true);
-        createArmorSetConfigs();
+        fileConfiguration = ConfigurationUtils.createConfig(filePath, "config.yml");
+        createSetConfigs();
     }
 
     static void loadConfigs() {
         loadArmorSetConfigs();
     }
 
-    private static void createConfig(String fileName, boolean isMain) {
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "items" + File.separator + "armorSets";
-        File customConfigFile = new File(filePath, fileName);
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        YamlConfiguration yamlConfiguration = new YamlConfiguration();
-        try {
-            yamlConfiguration.load(customConfigFile);
-            if (isMain) {
-                fileConfiguration = yamlConfiguration;
-            } else {
-                armorSetConfigurations.add(yamlConfiguration);
-            }
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void createArmorSetConfigs() {
+    private static void createSetConfigs() {
         List<String> itemSetList = fileConfiguration.getStringList("itemSetList");
 
         for (String fileName : itemSetList) {
-            createConfig(fileName + ".yml", false);
+            YamlConfiguration config = ConfigurationUtils.createConfig(filePath, fileName + ".yml");
+            configurationList.add(config);
         }
     }
 
     private static void loadArmorSetConfigs() {
-        for (FileConfiguration itemSetConfiguration : armorSetConfigurations) {
+        for (FileConfiguration itemSetConfiguration : configurationList) {
             int itemCount = itemSetConfiguration.getInt("count");
 
             for (int i = 1; i <= itemCount; i++) {

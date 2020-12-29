@@ -16,12 +16,14 @@ public class WeaponReferenceData {
     private final int itemIndex;
     private final ItemTier itemTier;
     private final String itemTag;
+    private final String gearSet;
 
-    public WeaponReferenceData(int gearLevel, int itemIndex, ItemTier itemTier, String itemTag) {
+    public WeaponReferenceData(int gearLevel, int itemIndex, ItemTier itemTier, String itemTag, String gearSet) {
         this.gearLevel = gearLevel;
         this.itemIndex = itemIndex;
         this.itemTier = itemTier;
         this.itemTag = itemTag;
+        this.gearSet = gearSet;
     }
 
     public WeaponReferenceData(ConfigurationSection configurationSection) {
@@ -29,6 +31,11 @@ public class WeaponReferenceData {
         this.itemIndex = configurationSection.getInt("itemIndex");
         this.itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
         this.itemTag = configurationSection.getString("itemTag");
+        if (configurationSection.contains("gearSet")) {
+            this.gearSet = configurationSection.getString("gearSet");
+        } else {
+            gearSet = null;
+        }
     }
 
     public List<ItemStack> getItems(String rpgClassStr) {
@@ -37,7 +44,7 @@ public class WeaponReferenceData {
 
         ArrayList<ItemStack> items = new ArrayList<>();
         for (WeaponGearType type : weaponGearTypes) {
-            items.add(WeaponManager.get(type, gearLevel, itemIndex, itemTier, itemTag, true));
+            items.add(WeaponManager.get(type, gearLevel, itemIndex, itemTier, itemTag, true, gearSet));
         }
 
         return items;

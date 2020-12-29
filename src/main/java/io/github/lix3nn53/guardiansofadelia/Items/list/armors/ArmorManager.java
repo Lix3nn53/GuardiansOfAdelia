@@ -16,7 +16,7 @@ public class ArmorManager {
 
     private final static HashMap<Integer, List<ArmorSet>> gearLevelToArmorSets = new HashMap<>();
 
-    public static ItemStack get(ArmorSlot armorSlot, ArmorGearType gearType, int gearLevel, int setIndex, ItemTier tier, String itemTag, boolean noStats) {
+    public static ItemStack get(ArmorSlot armorSlot, ArmorGearType gearType, int gearLevel, int setIndex, ItemTier tier, String itemTag, boolean noStats, String gearSet) {
         GuardiansOfAdelia.getInstance().getLogger().info(gearLevel + " " + setIndex + " " + armorSlot.toString() + " " + gearType.toString() + " " + tier.toString() + " " + itemTag);
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfStatsNormal();
         int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel);
@@ -35,7 +35,7 @@ public class ArmorManager {
 
         final GearArmor gearArmor = new GearArmor(name, tier, itemTag, material, level,
                 gearType, health,
-                defense, magicDefense, minStatValue, maxStatValue, minNumberOfStats);
+                defense, magicDefense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
 
         return gearArmor.getItemStack();
     }

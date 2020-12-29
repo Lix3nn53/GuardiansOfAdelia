@@ -13,12 +13,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.config.SkillComponent
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +25,10 @@ public class ClassConfigurations {
 
     private static final HashMap<String, FileConfiguration> classNameToConfiguration = new HashMap<>();
     private static FileConfiguration fileConfiguration;
+    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "classes";
 
     static void createConfigs() {
-        createConfig("config", true);
+        fileConfiguration = ConfigurationUtils.createConfig(filePath, "config.yml");
         createClassConfigs();
     }
 
@@ -37,37 +36,12 @@ public class ClassConfigurations {
         loadClassConfigs();
     }
 
-    private static void createConfig(String className, boolean isMain) {
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "classes";
-        File customConfigFile = new File(filePath, className + ".yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        YamlConfiguration yamlConfiguration = new YamlConfiguration();
-        try {
-            yamlConfiguration.load(customConfigFile);
-            if (isMain) {
-                fileConfiguration = yamlConfiguration;
-            } else {
-                classNameToConfiguration.put(className, yamlConfiguration);
-            }
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
     private static void createClassConfigs() {
         List<String> classList = fileConfiguration.getStringList("classList");
 
-        for (String fileName : classList) {
-            createConfig(fileName, false);
+        for (String className : classList) {
+            YamlConfiguration config = ConfigurationUtils.createConfig(filePath, className + ".yml");
+            classNameToConfiguration.put(className, config);
         }
     }
 

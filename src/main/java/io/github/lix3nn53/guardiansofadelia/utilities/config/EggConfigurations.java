@@ -3,45 +3,21 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.Eggs;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.io.IOException;
 
 public class EggConfigurations {
 
     private static FileConfiguration fileConfiguration;
+    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "eggs";
 
     static void createConfigs() {
-        createConfig("config.yml");
+        fileConfiguration = ConfigurationUtils.createConfig(filePath, "config.yml");
     }
 
     static void loadConfigs() {
         loadQuestLineConfigs();
-    }
-
-    private static void createConfig(String fileName) {
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "eggs";
-        File customConfigFile = new File(filePath, fileName);
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        YamlConfiguration yamlConfiguration = new YamlConfiguration();
-        try {
-            yamlConfiguration.load(customConfigFile);
-            fileConfiguration = yamlConfiguration;
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
     }
 
     private static void loadQuestLineConfigs() {

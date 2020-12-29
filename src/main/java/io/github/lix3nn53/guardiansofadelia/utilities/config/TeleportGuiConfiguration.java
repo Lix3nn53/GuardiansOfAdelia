@@ -1,39 +1,20 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.database.ItemSerializer;
-import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiItem;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
-
-import java.io.File;
-import java.io.IOException;
 
 public class TeleportGuiConfiguration {
 
     private static FileConfiguration fileConfiguration;
+    private static final String filePath = ConfigManager.DATA_FOLDER.toString();
 
     static void createConfig() {
-        File customConfigFile = new File(ConfigManager.DATA_FOLDER, "teleportGui.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-            GuardiansOfAdelia.getInstance().saveResource("teleportGui.yml", false);
-        }
-
-        fileConfiguration = new YamlConfiguration();
-        try {
-            fileConfiguration.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
+        fileConfiguration = ConfigurationUtils.createConfig(filePath, "teleportGui.yml");
     }
 
     static void loadConfig() {
@@ -57,28 +38,6 @@ public class TeleportGuiConfiguration {
 
             InstantTeleportGuiItem instantTeleportGuiItem = new InstantTeleportGuiItem(name, location, cost);
             InstantTeleportGuiManager.addTeleport(requiredQuestNoTurnedIn, instantTeleportGuiItem);
-        }
-    }
-
-    private static void writeConfig() {
-        ItemStack[] rewards = DailyRewardHandler.getRewards();
-
-        int i = 1;
-        for (ItemStack itemStack : rewards) {
-            if (itemStack == null) continue;
-
-            String s = ItemSerializer.itemStackToBase64(itemStack);
-            fileConfiguration.set("i" + i, s);
-
-            i++;
-        }
-
-        fileConfiguration.set("count", i - 1);
-
-        try {
-            fileConfiguration.save("teleportGui.yml");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

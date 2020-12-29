@@ -12,13 +12,11 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,9 +24,15 @@ import java.util.List;
 public class JobCraftingConfigurations {
 
     private final static HashMap<CraftingType, FileConfiguration> craftingConfigurations = new HashMap<>();
+    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "jobs" + File.separator + "crafting";
 
     static void createConfigs() {
-        createCraftingRecipes();
+        for (CraftingType craftingType : CraftingType.values()) {
+            String fileName = craftingType.toString() + ".yml";
+
+            YamlConfiguration config = ConfigurationUtils.createConfig(filePath, fileName);
+            craftingConfigurations.put(craftingType, config);
+        }
     }
 
     static void loadConfigs() {
@@ -37,31 +41,6 @@ public class JobCraftingConfigurations {
         loadCraftingRecipesJewel();
         loadCraftingRecipesPotion();
         loadCraftingRecipesFood();
-    }
-
-    private static void createCraftingRecipes() {
-        for (CraftingType craftingType : CraftingType.values()) {
-            String fileName = craftingType.toString() + ".yml";
-            String filePath = ConfigManager.DATA_FOLDER + File.separator + "jobs" + File.separator + "crafting";
-            File customConfigFile = new File(filePath, fileName);
-            if (!customConfigFile.exists()) {
-                customConfigFile.getParentFile().mkdirs();
-
-                try {
-                    customConfigFile.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            YamlConfiguration yamlConfiguration = new YamlConfiguration();
-            try {
-                yamlConfiguration.load(customConfigFile);
-                craftingConfigurations.put(craftingType, yamlConfiguration);
-            } catch (IOException | InvalidConfigurationException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     private static void loadCraftingRecipesWeapon() {
@@ -87,7 +66,7 @@ public class JobCraftingConfigurations {
                     for (String gearTypeStr : gearTypeStrList) {
                         WeaponGearType gearType = WeaponGearType.valueOf(gearTypeStr);
 
-                        ItemStack weapon = WeaponManager.get(gearType, gearLevel, index, itemTier, tag, false);
+                        ItemStack weapon = WeaponManager.get(gearType, gearLevel, index, itemTier, tag, false, null);
 
                         CraftingManager.putCraftingTypeAndLevelToCraftingLine(weapon, craftingType, level, ingredients, ingredientAmounts);
                     }
@@ -120,7 +99,7 @@ public class JobCraftingConfigurations {
                         ArmorGearType gearType = ArmorGearType.valueOf(gearTypeStr);
 
                         for (ArmorSlot armorSlot : ArmorSlot.values()) {
-                            ItemStack armor = ArmorManager.get(armorSlot, gearType, gearLevel, index, itemTier, tag, false);
+                            ItemStack armor = ArmorManager.get(armorSlot, gearType, gearLevel, index, itemTier, tag, false, null);
 
                             if (armor == null) {
                                 GuardiansOfAdelia.getInstance().getLogger().info("CRAFTING RECIPE NULL ARMOR");

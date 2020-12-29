@@ -5,28 +5,26 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 public class JobGatheringConfigurations {
 
-    private static FileConfiguration ingredientsConfig;
-    private static FileConfiguration gatheringModelsConfig;
     private static FileConfiguration customModelDataToIngredients;
+    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "jobs" + File.separator + "gathering";
     private static FileConfiguration gatheringToolToCustomModelDatas;
+    private static FileConfiguration gatheringModelsConfig;
     private static FileConfiguration mobKeyToIngredients;
+    private static FileConfiguration ingredientsConfig;
 
     static void createConfigs() {
-        createIngredients();
-        createGatheringModels();
-        createCustomModelDataToIngredients();
-        createGatheringToolToCustomModelDatas();
-        createMobKeyToIngredients();
+        customModelDataToIngredients = ConfigurationUtils.createConfig(filePath, "CustomModelDataToIngredients.yml");
+        gatheringModelsConfig = ConfigurationUtils.createConfig(filePath, "GatheringModels.yml");
+        gatheringToolToCustomModelDatas = ConfigurationUtils.createConfig(filePath, "GatheringToolToCustomModelDatas.yml");
+        ingredientsConfig = ConfigurationUtils.createConfig(filePath, "Ingredients.yml");
+        mobKeyToIngredients = ConfigurationUtils.createConfig(filePath, "MobKeyToIngredients.yml");
     }
 
     static void loadConfigs() {
@@ -35,28 +33,6 @@ public class JobGatheringConfigurations {
         loadBlockToIngredients();
         loadGatheringToolToCustomModelDatas();
         loadMobKeyToIngredients();
-    }
-
-    private static void createIngredients() {
-        String fileName = "Ingredients.yml";
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "jobs" + File.separator + "gathering";
-        File customConfigFile = new File(filePath, fileName);
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        ingredientsConfig = new YamlConfiguration();
-        try {
-            ingredientsConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
     }
 
     private static void loadIngredients() {
@@ -74,28 +50,6 @@ public class JobGatheringConfigurations {
             Ingredient ingredient = new Ingredient(i, name, ingredientLevel, jobsCanUse, extraText, customModelData);
 
             GatheringManager.putIngredient(i, ingredient);
-        }
-    }
-
-    private static void createGatheringModels() {
-        String fileName = "GatheringModels.yml";
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "jobs" + File.separator + "gathering";
-        File customConfigFile = new File(filePath, fileName);
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        gatheringModelsConfig = new YamlConfiguration();
-        try {
-            gatheringModelsConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
         }
     }
 
@@ -124,28 +78,6 @@ public class JobGatheringConfigurations {
         }
     }
 
-    private static void createGatheringToolToCustomModelDatas() {
-        String fileName = "GatheringToolToCustomModelDatas.yml";
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "jobs" + File.separator + "gathering";
-        File customConfigFile = new File(filePath, fileName);
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        gatheringToolToCustomModelDatas = new YamlConfiguration();
-        try {
-            gatheringToolToCustomModelDatas.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
     private static void loadGatheringToolToCustomModelDatas() {
         int itemCount = gatheringToolToCustomModelDatas.getInt("toolCount");
 
@@ -163,28 +95,6 @@ public class JobGatheringConfigurations {
         }
     }
 
-    private static void createCustomModelDataToIngredients() {
-        String fileName = "CustomModelDataToIngredients.yml";
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "jobs" + File.separator + "gathering";
-        File customConfigFile = new File(filePath, fileName);
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        customModelDataToIngredients = new YamlConfiguration();
-        try {
-            customModelDataToIngredients.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
     private static void loadBlockToIngredients() {
         int itemCount = customModelDataToIngredients.getInt("count");
 
@@ -195,28 +105,6 @@ public class JobGatheringConfigurations {
             for (int ingredient : ingredients) {
                 GatheringManager.putCustomModelDataToIngredient(customModelData, ingredient);
             }
-        }
-    }
-
-    private static void createMobKeyToIngredients() {
-        String fileName = "MobKeyToIngredients.yml";
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "jobs" + File.separator + "gathering";
-        File customConfigFile = new File(filePath, fileName);
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        mobKeyToIngredients = new YamlConfiguration();
-        try {
-            mobKeyToIngredients.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
         }
     }
 

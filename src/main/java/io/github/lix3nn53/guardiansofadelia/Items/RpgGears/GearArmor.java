@@ -1,5 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSet;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
@@ -20,7 +23,7 @@ public class GearArmor implements RPGGear {
     private final ArmorGearType gearType;
 
     public GearArmor(String name, ItemTier tier, String itemTag, Material material, int level, ArmorGearType gearType, int health,
-                     int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats) {
+                     int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats, String gearSetStr) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + name;
@@ -35,6 +38,9 @@ public class GearArmor implements RPGGear {
         StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName());
+        if (gearSetStr != null) {
+            lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearSetStr);
+        }
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         lore.add("");
@@ -62,11 +68,21 @@ public class GearArmor implements RPGGear {
         lore.add("");
         lore.add(tier.getTierString());
         lore.add("");
-        lore.add(ChatColor.DARK_PURPLE + "Set Effects:");
         GearSetEffect setEffect = gearType.getSetEffect();
-        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName() +
-                ChatColor.GRAY + "[4 piece]: " +
-                ChatColor.YELLOW + setEffect.name());
+        lore.add(ChatColor.GRAY + "-- " + ChatColor.YELLOW + gearType.getDisplayName() + ChatColor.GRAY + " [4 pieces] --");
+        lore.add(setEffect.toString());
+        if (gearSetStr != null) {
+            for (int i = 1; i < 6; i++) {
+                GearSet gearSet = new GearSet(gearSetStr, i);
+                if (GearSetManager.hasEffect(gearSet)) {
+                    lore.add(ChatColor.GRAY + "-- " + ChatColor.YELLOW + gearSetStr + ChatColor.GRAY + " [" + i + " pieces] --");
+                    List<GearSetEffect> effects = GearSetManager.getEffectsWithoutLower(gearSet);
+                    for (GearSetEffect gearSetEffect : effects) {
+                        lore.add(gearSetEffect.toString());
+                    }
+                }
+            }
+        }
 
         this.itemStack = new ItemStack(material);
         RPGItemUtils.resetArmor(this.itemStack);
@@ -91,6 +107,9 @@ public class GearArmor implements RPGGear {
         }
         if (statPassive.getWind() != 0) {
             PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), this.itemStack);
+        }
+        if (gearSetStr != null) {
+            PersistentDataContainerUtil.putString("gearSet", gearSetStr, this.itemStack);
         }
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();

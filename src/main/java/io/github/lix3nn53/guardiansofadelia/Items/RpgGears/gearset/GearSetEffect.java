@@ -1,13 +1,17 @@
-package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
+package io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Objects;
+
 public enum GearSetEffect {
+    EMPTY,
     KNOCKBACK_RESISTANCE,
     CRITICAL_DAMAGE,
     CRITICAL_CHANCE,
@@ -24,7 +28,6 @@ public enum GearSetEffect {
     }
 
     public void clearSetEffect(Player player) {
-        MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "Gear Set Effect Deactivated");
         switch (this) {
             case KNOCKBACK_RESISTANCE:
                 player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0);
@@ -44,13 +47,21 @@ public enum GearSetEffect {
         }
     }
 
-    public void applySetEffect(Player player, String setName) {
-        player.sendMessage(ChatColor.LIGHT_PURPLE + "Gear Set Effect activated because you are wearing all pieces of "
-                + ChatColor.DARK_PURPLE + setName);
-        player.sendMessage(ChatColor.DARK_PURPLE + setName + ChatColor.LIGHT_PURPLE + " gives you bonus " + this.name());
+    public static String getCustomSet(ItemStack itemStack) {
+        if (itemStack == null) return "NULL";
+
+        if (PersistentDataContainerUtil.hasString(itemStack, "gearSet")) {
+            return PersistentDataContainerUtil.getString(itemStack, "gearSet");
+        }
+
+        return "NULL";
+    }
+
+    public void applySetEffect(Player player) {
+        player.sendMessage(this.toString());
         switch (this) {
             case KNOCKBACK_RESISTANCE:
-                player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0.7);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE)).setBaseValue(0.7);
                 break;
             case SLOW_FALLING:
                 PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOW_FALLING, Integer.MAX_VALUE, 1);

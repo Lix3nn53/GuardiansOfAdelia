@@ -2,9 +2,11 @@ package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.GearSetEffect;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSet;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
@@ -36,6 +38,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class RPGCharacterStats {
@@ -72,7 +76,8 @@ public class RPGCharacterStats {
     private double criticalChanceBonusBuff = 0;
     private double criticalDamageBonusBuff = 0;
 
-    private final List<GearSetEffect> armorGearTypeSetEffect = new ArrayList<>();
+    private ArmorGearType sameTypeArmorSet = null;
+    private List<GearSet> gearSets = new ArrayList<>();
 
     public RPGCharacterStats(Player player, String rpgClassStr) {
         this.player = player;
@@ -442,6 +447,31 @@ public class RPGCharacterStats {
 
             if (fixDisplay) {
                 onMaxHealthChange();
+
+                if (PersistentDataContainerUtil.hasString(itemStack, "gearSet")) {
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            PlayerInventory inventory = player.getInventory();
+
+                            ItemStack inventoryHelmet = inventory.getHelmet();
+                            ItemStack inventoryChestplate = inventory.getChestplate();
+                            ItemStack inventoryLeggings = inventory.getLeggings();
+                            ItemStack inventoryBoots = inventory.getBoots();
+                            ItemStack itemInMainHand = inventory.getItemInMainHand();
+                            ItemStack itemInOffHand = inventory.getItemInOffHand();
+
+                            ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
+                            ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
+                            ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
+                            ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
+
+                            recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
+                                    helmetType, chestplateType, leggingsType, bootsType);
+                        }
+                    }.runTaskLater(GuardiansOfAdelia.getInstance(), 1L);
+
+                }
             }
         }
     }
@@ -494,6 +524,25 @@ public class RPGCharacterStats {
                     }
                 }
             }
+
+            if (fixDisplay) {
+                PlayerInventory inventory = player.getInventory();
+
+                ItemStack inventoryHelmet = inventory.getHelmet();
+                ItemStack inventoryChestplate = inventory.getChestplate();
+                ItemStack inventoryLeggings = inventory.getLeggings();
+                ItemStack inventoryBoots = inventory.getBoots();
+                ItemStack itemInMainHand = inventory.getItemInMainHand();
+                ItemStack itemInOffHand = inventory.getItemInOffHand();
+
+                ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
+                ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
+                ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
+                ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
+
+                recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
+                        helmetType, chestplateType, leggingsType, bootsType);
+            }
         }
     }
 
@@ -528,6 +577,23 @@ public class RPGCharacterStats {
                     }
                 }
             }
+
+            PlayerInventory inventory = player.getInventory();
+
+            ItemStack inventoryHelmet = inventory.getHelmet();
+            ItemStack inventoryChestplate = inventory.getChestplate();
+            ItemStack inventoryLeggings = inventory.getLeggings();
+            ItemStack inventoryBoots = inventory.getBoots();
+            ItemStack itemInMainHand = inventory.getItemInMainHand();
+            ItemStack itemInOffHand = inventory.getItemInOffHand();
+
+            ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
+            ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
+            ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
+            ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
+
+            recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
+                    helmetType, chestplateType, leggingsType, bootsType);
         }
     }
 
@@ -707,20 +773,10 @@ public class RPGCharacterStats {
 
         onMaxHealthChange();
         onCurrentManaChange();
-        boolean wearingSameArmorType = GearSetEffect.isWearingSameArmorType(helmetType, chestplateType, leggingsType, bootsType);
-        if (wearingSameArmorType) {
-            GearSetEffect setEffect = helmetType.getSetEffect();
-            if (!this.armorGearTypeSetEffect.isEmpty()) {
-                if (this.armorGearTypeSetEffect.contains(setEffect)) return;
-            }
-            setEffect.applySetEffect(player, helmetType.getDisplayName());
-            this.armorGearTypeSetEffect.add(setEffect);
-        } else {
-            for (GearSetEffect gearSetEffect : this.armorGearTypeSetEffect) {
-                gearSetEffect.clearSetEffect(player);
-            }
-            this.armorGearTypeSetEffect.clear();
-        }
+
+        // GEAR SET EFFECTS
+        recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
+                helmetType, chestplateType, leggingsType, bootsType);
     }
 
     public int getTotalDamageBonusFromOffhand() {
@@ -751,6 +807,26 @@ public class RPGCharacterStats {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
                 getWind().setBonus(player, EquipmentSlot.HAND, this, bonus, false);
             }
+
+            if (fixDisplay) {
+                PlayerInventory inventory = player.getInventory();
+
+                ItemStack inventoryHelmet = inventory.getHelmet();
+                ItemStack inventoryChestplate = inventory.getChestplate();
+                ItemStack inventoryLeggings = inventory.getLeggings();
+                ItemStack inventoryBoots = inventory.getBoots();
+                ItemStack itemInMainHand = inventory.getItemInMainHand();
+                ItemStack itemInOffHand = inventory.getItemInOffHand();
+
+                ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
+                ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
+                ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
+                ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
+
+                recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
+                        helmetType, chestplateType, leggingsType, bootsType);
+            }
+
             return true;
         }
         return false;
@@ -775,6 +851,26 @@ public class RPGCharacterStats {
             if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
                 getWind().removeBonus(EquipmentSlot.HAND, this, false);
             }
+
+            if (fixDisplay) {
+                PlayerInventory inventory = player.getInventory();
+
+                ItemStack inventoryHelmet = inventory.getHelmet();
+                ItemStack inventoryChestplate = inventory.getChestplate();
+                ItemStack inventoryLeggings = inventory.getLeggings();
+                ItemStack inventoryBoots = inventory.getBoots();
+                ItemStack itemInMainHand = inventory.getItemInMainHand();
+                ItemStack itemInOffHand = inventory.getItemInOffHand();
+
+                ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
+                ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
+                ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
+                ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
+
+                recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
+                        helmetType, chestplateType, leggingsType, bootsType);
+            }
+
             return true;
         }
         return false;
@@ -789,6 +885,23 @@ public class RPGCharacterStats {
 
         onMaxHealthChange();
         onCurrentManaChange();
+
+        PlayerInventory inventory = player.getInventory();
+
+        ItemStack inventoryHelmet = inventory.getHelmet();
+        ItemStack inventoryChestplate = inventory.getChestplate();
+        ItemStack inventoryLeggings = inventory.getLeggings();
+        ItemStack inventoryBoots = inventory.getBoots();
+        ItemStack itemInMainHand = inventory.getItemInMainHand();
+        ItemStack itemInOffHand = inventory.getItemInOffHand();
+
+        ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
+        ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
+        ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
+        ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
+
+        recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
+                helmetType, chestplateType, leggingsType, bootsType);
     }
 
     public void addToBuffMultiplier(BuffType buffType, double addToMultiplier) {
@@ -873,5 +986,94 @@ public class RPGCharacterStats {
         }
 
         MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+    }
+
+    private void recalculateGearSetEffects(ItemStack inventoryHelmet, ItemStack inventoryChestplate, ItemStack inventoryLeggings,
+                                           ItemStack inventoryBoots, ItemStack itemInMainHand, ItemStack itemInOffHand,
+                                           ArmorGearType helmetType, ArmorGearType chestplateType, ArmorGearType leggingsType,
+                                           ArmorGearType bootsType) {
+        // ARMOR TYPE SET EFFECT
+        boolean wearingSameArmorType = GearSetEffect.isWearingSameArmorType(helmetType, chestplateType, leggingsType, bootsType);
+        if (wearingSameArmorType) {
+            if (sameTypeArmorSet == null || !sameTypeArmorSet.equals(helmetType)) { // Only make change if different armor type
+                // Clear old set effect
+                if (sameTypeArmorSet != null) {
+                    GearSetEffect oldEffect = sameTypeArmorSet.getSetEffect();
+                    oldEffect.clearSetEffect(player); // different same armor type
+                }
+
+                player.sendMessage(ChatColor.DARK_PURPLE + "Same Type Armor Effect Activation: "
+                        + ChatColor.LIGHT_PURPLE + helmetType.getDisplayName() + " [" + 4 + "pieces]");
+
+                GearSetEffect setEffect = helmetType.getSetEffect();
+                setEffect.applySetEffect(player);
+
+                sameTypeArmorSet = helmetType;
+            }
+        } else if (sameTypeArmorSet != null) {
+            GearSetEffect setEffect = helmetType.getSetEffect();
+            setEffect.clearSetEffect(player); // no more same armor type
+            sameTypeArmorSet = null;
+        }
+
+        // CUSTOM GEAR SET EFFECT
+        ArrayList<String> equipmentSets = new ArrayList<>(Arrays.asList(
+                GearSetEffect.getCustomSet(inventoryHelmet),
+                GearSetEffect.getCustomSet(inventoryChestplate),
+                GearSetEffect.getCustomSet(inventoryLeggings),
+                GearSetEffect.getCustomSet(inventoryBoots),
+                GearSetEffect.getCustomSet(itemInMainHand),
+                GearSetEffect.getCustomSet(itemInOffHand)
+        ));
+
+        List<String> alreadyActivated = new ArrayList<>();
+
+        List<GearSet> currentGearSets = new ArrayList<>();
+        List<GearSet> newGearSets = new ArrayList<>(); // Current without old
+
+        for (String gearSetName : equipmentSets) {
+            if (alreadyActivated.contains(gearSetName)) continue;
+
+            int count = Collections.frequency(equipmentSets, gearSetName);
+            if (count < 2) continue;
+            alreadyActivated.add(gearSetName);
+
+            GearSet key = new GearSet(gearSetName, count);
+
+            if (GearSetManager.hasEffect(key)) {
+                currentGearSets.add(key);
+
+                if (this.gearSets.contains(key)) continue; // Same GearSet
+                newGearSets.add(key); // New GearSet
+            }
+        }
+
+        // Clear old effects
+        for (GearSet gearSet : this.gearSets) {
+            if (currentGearSets.contains(gearSet)) continue;
+
+            if (GearSetManager.hasEffect(gearSet)) {
+                List<GearSetEffect> gearSetEffects = GearSetManager.getEffects(gearSet);
+                for (GearSetEffect gearSetEffect : gearSetEffects) {
+                    gearSetEffect.clearSetEffect(player); // custom effect clear
+                }
+            }
+        }
+
+        // Apply new effects
+        for (GearSet gearSet : newGearSets) {
+            if (GearSetManager.hasEffect(gearSet)) {
+                player.sendMessage(ChatColor.DARK_PURPLE + "Gear Set Effect Activation: "
+                        + ChatColor.LIGHT_PURPLE + gearSet.getName() + " [" + gearSet.getPieceCount() + "pieces]");
+
+                List<GearSetEffect> gearSetEffects = GearSetManager.getEffects(gearSet);
+                for (GearSetEffect gearSetEffect : gearSetEffects) {
+                    gearSetEffect.applySetEffect(player);
+                }
+            }
+        }
+
+        // Apply changes to data
+        this.gearSets = currentGearSets;
     }
 }

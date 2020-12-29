@@ -7,9 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,9 +17,10 @@ import java.util.List;
 public class LootChestConfiguration {
 
     private static FileConfiguration lootChestsConfig;
+    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "rewards";
 
     static void createConfigs() {
-        createLootChests();
+        lootChestsConfig = ConfigurationUtils.createConfig(filePath, "lootChests.yml");
     }
 
     static void loadConfigs() {
@@ -30,27 +29,6 @@ public class LootChestConfiguration {
 
     static void writeConfigs() {
         writeLootChests("lootChests.yml");
-    }
-
-    private static void createLootChests() {
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "rewards";
-        File customConfigFile = new File(filePath, "lootChests.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        lootChestsConfig = new YamlConfiguration();
-        try {
-            lootChestsConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
     }
 
     private static void loadLootChests() {

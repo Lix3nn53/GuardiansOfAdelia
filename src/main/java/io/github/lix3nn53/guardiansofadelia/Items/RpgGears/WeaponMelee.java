@@ -1,5 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSet;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
@@ -20,7 +23,7 @@ public class WeaponMelee implements RPGGear {
     private final ItemStack itemStack;
 
     public WeaponMelee(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, WeaponGearType gearType, int damage,
-                       AttackSpeed attackSpeed, int minStatValue, int maxStatValue, int minNumberOfStats) {
+                       AttackSpeed attackSpeed, int minStatValue, int maxStatValue, int minNumberOfStats, String gearSetStr) {
         name = tier.getTierColor() + name;
         if (itemTag != null && !itemTag.equals("")) {
             name = tier.getTierColor() + itemTag + " " + name;
@@ -35,6 +38,9 @@ public class WeaponMelee implements RPGGear {
         StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName());
+        if (gearSetStr != null) {
+            lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearSetStr);
+        }
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         lore.add("");
@@ -60,6 +66,19 @@ public class WeaponMelee implements RPGGear {
         }
         lore.add("");
         lore.add(tier.getTierString());
+        if (gearSetStr != null) {
+            lore.add("");
+            for (int i = 2; i < 6; i++) {
+                GearSet gearSet = new GearSet(gearSetStr, i);
+                if (GearSetManager.hasEffect(gearSet)) {
+                    lore.add(ChatColor.GRAY + "-- " + ChatColor.YELLOW + gearSetStr + ChatColor.GRAY + " [" + i + " pieces] --");
+                    List<GearSetEffect> effects = GearSetManager.getEffectsWithoutLower(gearSet);
+                    for (GearSetEffect gearSetEffect : effects) {
+                        lore.add(gearSetEffect.toString());
+                    }
+                }
+            }
+        }
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
@@ -85,6 +104,9 @@ public class WeaponMelee implements RPGGear {
         }
         if (statPassive.getWind() != 0) {
             PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), this.itemStack);
+        }
+        if (gearSetStr != null) {
+            PersistentDataContainerUtil.putString("gearSet", gearSetStr, this.itemStack);
         }
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();

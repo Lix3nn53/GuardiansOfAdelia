@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorMaterial;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.inventory.ItemStack;
@@ -12,6 +13,8 @@ public enum ArmorGearType {
     WIND_ARMOR;
 
     public static ArmorGearType typeOf(ItemStack itemStack) {
+        if (itemStack == null) return null;
+
         if (PersistentDataContainerUtil.hasString(itemStack, "gearType")) {
             String gearTypeStr = PersistentDataContainerUtil.getString(itemStack, "gearType");
             try {

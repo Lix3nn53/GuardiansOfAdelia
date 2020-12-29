@@ -10,9 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.ArmorStand;
 
 import java.io.File;
@@ -37,15 +35,16 @@ public class ConfigManager {
     }
 
     public static void createConfigALL() {
+        characterSelectionConfig = ConfigurationUtils.createConfig(DATA_FOLDER.toString(), "characterSelection.yml");
+        townsConfig = ConfigurationUtils.createConfig(DATA_FOLDER.toString(), "towns.yml");
+        resourcePackConfig = ConfigurationUtils.createConfig(DATA_FOLDER.toString(), "resourcepack.yml");
+        hologramsConfig = ConfigurationUtils.createConfig(DATA_FOLDER.toString(), "holograms.yml");
+
         ClassConfigurations.createConfigs();
         RewardDailyConfigurations.createConfigs();
         JobGatheringConfigurations.createConfigs();
-        createResourcePackConfig();
-        createCharacterSelectionConfig();
-        createTowns();
         TeleportPortalsConfiguration.createConfig();
         TeleportGuiConfiguration.createConfig();
-        createHologramsConfig();
         DatabaseConfiguration.createConfigs();
         DungeonConfiguration.createConfigs();
         ItemArmorSetConfigurations.createConfigs();
@@ -56,6 +55,7 @@ public class ConfigManager {
         QuestConfigurations.createConfigs();
         EggConfigurations.createConfigs();
         LootChestConfiguration.createConfigs();
+        GearSetConfiguration.createConfigs();
     }
 
     public static void loadConfigALL() {
@@ -78,41 +78,12 @@ public class ConfigManager {
         QuestConfigurations.loadConfigs();
         EggConfigurations.loadConfigs();
         LootChestConfiguration.loadConfigs();
+        GearSetConfiguration.loadConfig();
     }
 
     public static void writeConfigALL() {
         RewardDailyConfigurations.writeConfigs();
         LootChestConfiguration.writeConfigs();
-    }
-
-    private static void createResourcePackConfig() {
-        File customConfigFile = new File(ConfigManager.DATA_FOLDER, "resourcepack.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-            GuardiansOfAdelia.getInstance().saveResource("resourcepack.yml", false);
-        }
-
-        resourcePackConfig = new YamlConfiguration();
-        try {
-            resourcePackConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void createHologramsConfig() {
-        File customConfigFile = new File(ConfigManager.DATA_FOLDER, "holograms.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-            GuardiansOfAdelia.getInstance().saveResource("holograms.yml", false);
-        }
-
-        hologramsConfig = new YamlConfiguration();
-        try {
-            hologramsConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
     }
 
     public static void loadResourcePackConfig() {
@@ -142,21 +113,6 @@ public class ConfigManager {
 
                 HologramManager.addHologram(hologram);
             }
-        }
-    }
-
-    private static void createCharacterSelectionConfig() {
-        File customConfigFile = new File(ConfigManager.DATA_FOLDER, "characterSelection.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-            GuardiansOfAdelia.getInstance().saveResource("characterSelection.yml", false);
-        }
-
-        characterSelectionConfig = new YamlConfiguration();
-        try {
-            characterSelectionConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
         }
     }
 
@@ -224,21 +180,6 @@ public class ConfigManager {
         try {
             characterSelectionConfig.save(ConfigManager.DATA_FOLDER + "/characterSelection.yml");
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void createTowns() {
-        File customConfigFile = new File(ConfigManager.DATA_FOLDER, "towns.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-            GuardiansOfAdelia.getInstance().saveResource("towns.yml", false);
-        }
-
-        townsConfig = new YamlConfiguration();
-        try {
-            townsConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
     }

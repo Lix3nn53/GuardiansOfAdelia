@@ -60,10 +60,10 @@ public class TutorialManager {
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         ArmorGearType armorGearType = rpgClass.getDefaultArmorGearType();
 
-        ItemStack helmet = ArmorManager.get(ArmorSlot.HELMET, armorGearType, 1, 0, tier, itemTag, false);
-        ItemStack chest = ArmorManager.get(ArmorSlot.CHESTPLATE, armorGearType, 1, 0, tier, itemTag, false);
-        ItemStack leggings = ArmorManager.get(ArmorSlot.LEGGINGS, armorGearType, 1, 0, tier, itemTag, false);
-        ItemStack boots = ArmorManager.get(ArmorSlot.BOOTS, armorGearType, 1, 0, tier, itemTag, false);
+        ItemStack helmet = ArmorManager.get(ArmorSlot.HELMET, armorGearType, 1, 0, tier, itemTag, false, "Tutorial");
+        ItemStack chest = ArmorManager.get(ArmorSlot.CHESTPLATE, armorGearType, 1, 0, tier, itemTag, false, "Tutorial");
+        ItemStack leggings = ArmorManager.get(ArmorSlot.LEGGINGS, armorGearType, 1, 0, tier, itemTag, false, "Tutorial");
+        ItemStack boots = ArmorManager.get(ArmorSlot.BOOTS, armorGearType, 1, 0, tier, itemTag, false, "Tutorial");
 
         PlayerInventory playerInventory = player.getInventory();
 

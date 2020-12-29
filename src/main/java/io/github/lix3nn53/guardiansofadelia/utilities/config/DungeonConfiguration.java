@@ -9,12 +9,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,38 +21,18 @@ public class DungeonConfiguration {
     private static FileConfiguration dungeonThemesConfig;
     private static FileConfiguration dungeonRoomsConfig;
     private static FileConfiguration dungeonGatesConfig;
+    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "dungeons";
 
     static void createConfigs() {
-        createDungeonThemes();
-        createDungeonGates();
-        createDungeonRooms();
+        dungeonThemesConfig = ConfigurationUtils.createConfig(filePath, "dungeonThemes.yml");
+        dungeonRoomsConfig = ConfigurationUtils.createConfig(filePath, "dungeonRooms.yml");
+        dungeonGatesConfig = ConfigurationUtils.createConfig(filePath, "dungeonGates.yml");
     }
 
     static void loadConfigs() {
         loadDungeonThemes();
         loadDungeonGates();
         loadDungeonRooms();
-    }
-
-    private static void createDungeonThemes() {
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "dungeons";
-        File customConfigFile = new File(filePath, "dungeonThemes.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        dungeonThemesConfig = new YamlConfiguration();
-        try {
-            dungeonThemesConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
     }
 
     private static void loadDungeonThemes() {
@@ -80,27 +57,6 @@ public class DungeonConfiguration {
         }
     }
 
-    private static void createDungeonGates() {
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "dungeons";
-        File customConfigFile = new File(filePath, "dungeonGates.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        dungeonGatesConfig = new YamlConfiguration();
-        try {
-            dungeonGatesConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
     private static void loadDungeonGates() {
         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
         for (String code : dungeonThemes.keySet()) {
@@ -113,27 +69,6 @@ public class DungeonConfiguration {
             float pitch = (float) dungeonGatesConfig.getDouble(code + ".pitch");
             Location location = new Location(world, x, y, z, yaw, pitch);
             MiniGameManager.addMinigamePortal(location, code);
-        }
-    }
-
-    private static void createDungeonRooms() {
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "dungeons";
-        File customConfigFile = new File(filePath, "dungeonRooms.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        dungeonRoomsConfig = new YamlConfiguration();
-        try {
-            dungeonRoomsConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
         }
     }
 

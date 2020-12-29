@@ -14,7 +14,7 @@ public class WeaponManager {
 
     private final static HashMap<Integer, List<WeaponSet>> gearLevelToWeapons = new HashMap<>();
 
-    public static ItemStack get(WeaponGearType gearType, int gearLevel, int itemIndex, ItemTier tier, String itemTag, boolean noStats) {
+    public static ItemStack get(WeaponGearType gearType, int gearLevel, int itemIndex, ItemTier tier, String itemTag, boolean noStats, String gearSet) {
         GuardiansOfAdelia.getInstance().getLogger().info(gearLevel + " " + itemIndex + " " + gearType.toString() + " " + tier.toString() + " " + itemTag);
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfStatsNormal();
         int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel);
@@ -36,15 +36,15 @@ public class WeaponManager {
 
         if (weaponDamageType.equals(WeaponDamageType.MELEE)) {
             return new WeaponMelee(name, tier, itemTag, material, customModelData, level, gearType, mainDamage,
-                    attackSpeed, minStatValue, maxStatValue, minNumberOfStats).getItemStack();
+                    attackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearSet).getItemStack();
         } else if (weaponDamageType.equals(WeaponDamageType.RANGED)) {
             return new WeaponRanged(name, tier, itemTag, material, customModelData, level, gearType, mainDamage,
-                    attackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearType.getReduceMeleeDamage()).getItemStack();
+                    attackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearType.getReduceMeleeDamage(), gearSet).getItemStack();
         } else if (weaponDamageType.equals(WeaponDamageType.MAGICAL)) {
             int meleeDamage = mainDamage / 4;
 
             return new WeaponMagical(name, tier, itemTag, material, customModelData, level, gearType, meleeDamage, mainDamage,
-                    attackSpeed, minStatValue, maxStatValue, minNumberOfStats).getItemStack();
+                    attackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearSet).getItemStack();
         }
 
         return null;

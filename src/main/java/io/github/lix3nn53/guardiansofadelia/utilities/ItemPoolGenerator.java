@@ -24,7 +24,7 @@ public class ItemPoolGenerator {
         List<ItemStack> temp = new ArrayList<>();
 
         for (WeaponGearType weaponGearType : WeaponGearType.values()) {
-            ItemStack itemStack = WeaponManager.get(weaponGearType, gearLevel, itemIndex, tier, itemTag, false);
+            ItemStack itemStack = WeaponManager.get(weaponGearType, gearLevel, itemIndex, tier, itemTag, false, null);
             temp.add(itemStack);
         }
 
@@ -53,14 +53,14 @@ public class ItemPoolGenerator {
 
         for (ArmorGearType armorGearType : ArmorGearType.values()) {
             for (ArmorSlot armorSlot : ArmorSlot.values()) {
-                ItemStack itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, itemIndex, tier, itemTag, false);
+                ItemStack itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, itemIndex, tier, itemTag, false, null);
 
                 temp.add(itemStack);
             }
         }
 
         for (ShieldGearType shieldGearType : ShieldGearType.values()) {
-            ItemStack itemStack = ShieldManager.get(shieldGearType, gearLevel, itemIndex, tier, itemTag, false);
+            ItemStack itemStack = ShieldManager.get(shieldGearType, gearLevel, itemIndex, tier, itemTag, false, null);
 
             temp.add(itemStack);
         }
@@ -95,7 +95,7 @@ public class ItemPoolGenerator {
 
         for (WeaponGearType weaponGearType : WeaponGearType.values()) {
             if (!weaponGearType.isMelee()) continue;
-            ItemStack itemStack = WeaponManager.get(weaponGearType, gearLevel, itemIndex, tier, itemTag, true);
+            ItemStack itemStack = WeaponManager.get(weaponGearType, gearLevel, itemIndex, tier, itemTag, true, null);
             temp.add(itemStack);
         }
 
@@ -107,7 +107,7 @@ public class ItemPoolGenerator {
 
         for (WeaponGearType weaponGearType : WeaponGearType.values()) {
             if (weaponGearType.isMelee()) continue;
-            ItemStack itemStack = WeaponManager.get(weaponGearType, gearLevel, itemIndex, tier, itemTag, true);
+            ItemStack itemStack = WeaponManager.get(weaponGearType, gearLevel, itemIndex, tier, itemTag, true, null);
             temp.add(itemStack);
         }
 
@@ -120,14 +120,14 @@ public class ItemPoolGenerator {
         for (ArmorGearType armorGearType : ArmorGearType.values()) {
             for (ArmorSlot armorSlot : ArmorSlot.values()) {
                 if (!armorGearType.isHeavy()) continue;
-                ItemStack itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, itemIndex, tier, itemTag, true);
+                ItemStack itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, itemIndex, tier, itemTag, true, null);
 
                 temp.add(itemStack);
             }
         }
 
         for (ShieldGearType shieldGearType : ShieldGearType.values()) {
-            ItemStack itemStack = ShieldManager.get(shieldGearType, gearLevel, itemIndex, tier, itemTag, true);
+            ItemStack itemStack = ShieldManager.get(shieldGearType, gearLevel, itemIndex, tier, itemTag, true, null);
 
             temp.add(itemStack);
         }
@@ -141,7 +141,7 @@ public class ItemPoolGenerator {
         for (ArmorGearType armorGearType : ArmorGearType.values()) {
             for (ArmorSlot armorSlot : ArmorSlot.values()) {
                 if (armorGearType.isHeavy()) continue;
-                ItemStack itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, itemIndex, tier, itemTag, true);
+                ItemStack itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, itemIndex, tier, itemTag, true, null);
 
                 temp.add(itemStack);
             }
@@ -174,7 +174,6 @@ public class ItemPoolGenerator {
             // Check if skin
             for (PetSkin c : PetSkin.values()) {
                 if (c.name().equals(key)) {
-                    continue;
                 }
             }
             temp.add(Eggs.get(key, gearLevel, 1));

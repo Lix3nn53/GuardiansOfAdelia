@@ -10,13 +10,10 @@ import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskLoader;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +21,10 @@ public class QuestConfigurations {
 
     private static final List<FileConfiguration> questLineConfigurations = new ArrayList<>();
     private static FileConfiguration fileConfiguration;
+    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "quests";
 
     static void createConfigs() {
-        createConfig("config.yml", true);
+        fileConfiguration = ConfigurationUtils.createConfig(filePath, "config.yml");
         createQuestLineConfigs();
     }
 
@@ -34,37 +32,11 @@ public class QuestConfigurations {
         loadQuestLineConfigs();
     }
 
-    private static void createConfig(String fileName, boolean isMain) {
-        String filePath = ConfigManager.DATA_FOLDER + File.separator + "quests";
-        File customConfigFile = new File(filePath, fileName);
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-
-            try {
-                customConfigFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        YamlConfiguration yamlConfiguration = new YamlConfiguration();
-        try {
-            yamlConfiguration.load(customConfigFile);
-            if (isMain) {
-                fileConfiguration = yamlConfiguration;
-            } else {
-                questLineConfigurations.add(yamlConfiguration);
-            }
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
     private static void createQuestLineConfigs() {
         List<String> questLineList = fileConfiguration.getStringList("questLineList");
 
         for (String fileName : questLineList) {
-            createConfig(fileName + ".yml", false);
+            questLineConfigurations.add(ConfigurationUtils.createConfig(filePath, fileName + ".yml"));
         }
     }
 
