@@ -125,7 +125,7 @@ public final class Quest {
 
             boolean questActive = playerQuests.stream().anyMatch(item -> item.getQuestID() == this.questID);
             if (questActive) {
-                questItem = new ItemStack(Material.PINK_WOOL, 1);
+                questItem = new ItemStack(Material.BLUE_WOOL, 1);
                 lore.set(0, ChatColor.YELLOW + "You accepted this quest");
                 Optional<Quest> playerQuestOptional = playerQuests.stream()
                         .filter(item -> item.getQuestID() == this.questID)

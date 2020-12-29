@@ -57,7 +57,7 @@ public class MobDropGenerator {
 
                 WeaponGearType gearType = values[gearRandom];
 
-                ItemStack droppedItem = WeaponManager.get(gearType, gearLevel, 0, tier, "", false, null);
+                ItemStack droppedItem = WeaponManager.get(gearType, gearLevel, 0, tier, false, null);
                 drops.add(droppedItem);
             } else if (dropType == 1) {
                 double shieldChange = 0.2;
@@ -69,7 +69,7 @@ public class MobDropGenerator {
 
                     ShieldGearType gearType = values[gearRandom];
 
-                    ItemStack droppedItem = ShieldManager.get(gearType, gearLevel, 0, tier, "", false, null);
+                    ItemStack droppedItem = ShieldManager.get(gearType, gearLevel, 0, tier, false, null);
                     drops.add(droppedItem);
                 } else {
                     ArmorSlot[] armorSlots = ArmorSlot.values();
@@ -80,14 +80,14 @@ public class MobDropGenerator {
                     int armorGearTypeRandom = rand.nextInt(armorGearTypes.length);
                     ArmorGearType armorGearType = armorGearTypes[armorGearTypeRandom];
 
-                    ItemStack droppedItem = ArmorManager.get(armorSlot, armorGearType, gearLevel, 0, tier, "", false, null);
+                    ItemStack droppedItem = ArmorManager.get(armorSlot, armorGearType, gearLevel, 0, tier, false, null);
                     drops.add(droppedItem);
                 }
             } else { // dropType == 2
                 int passiveType = rand.nextInt(4);
                 RPGSlotType rpgSlotType = RPGSlotType.values()[passiveType + 1]; // +1 to ignore parrot
 
-                ItemStack droppedItem = PassiveManager.get(gearLevel, 0, rpgSlotType, tier, "", false);
+                ItemStack droppedItem = PassiveManager.get(gearLevel, 0, rpgSlotType, tier, false, null);
                 drops.add(droppedItem);
             }
         }

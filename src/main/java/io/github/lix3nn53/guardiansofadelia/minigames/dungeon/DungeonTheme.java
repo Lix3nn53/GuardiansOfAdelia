@@ -89,14 +89,14 @@ public class DungeonTheme {
     public List<ItemStack> generateChestItems(PrizeChestType type) {
         ArrayList<ItemStack> chestItems = new ArrayList<>();
         if (type.equals(PrizeChestType.WEAPON)) {
-            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, gearTag, gearLevel, 0));
-            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, gearTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, gearLevel, 0, gearTag));
+            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, gearLevel, 0, gearTag));
         } else if (type.equals(PrizeChestType.ARMOR)) {
-            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, gearTag, gearLevel, 0));
-            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, gearTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, gearLevel, 0, gearTag));
+            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, gearLevel, 0, gearTag));
         } else if (type.equals(PrizeChestType.JEWELRY)) {
-            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.MYSTIC, gearTag, gearLevel, 0));
-            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, gearTag, gearLevel, 0));
+            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.MYSTIC, gearLevel, 0, gearTag));
+            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, gearLevel, 0, gearTag));
         } else if (type.equals(PrizeChestType.PET)) {
             chestItems.addAll(ItemPoolGenerator.generateEggs(gearLevel));
         }

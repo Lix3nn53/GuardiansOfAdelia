@@ -6,7 +6,4 @@ public interface RPGGear {
 
     ItemStack getItemStack();
 
-    String getItemTag();
-
-    int getLevel();
 }

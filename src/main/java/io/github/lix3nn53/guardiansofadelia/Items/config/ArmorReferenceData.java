@@ -17,15 +17,13 @@ public class ArmorReferenceData {
     private final int gearLevel;
     private final int itemIndex;
     private final ItemTier itemTier;
-    private final String itemTag;
     private final String gearSet;
 
-    public ArmorReferenceData(ArmorSlot armorSlot, int gearLevel, int itemIndex, ItemTier itemTier, String itemTag, String gearSet) {
+    public ArmorReferenceData(ArmorSlot armorSlot, int gearLevel, int itemIndex, ItemTier itemTier, String gearSet) {
         this.armorSlot = armorSlot;
         this.gearLevel = gearLevel;
         this.itemIndex = itemIndex;
         this.itemTier = itemTier;
-        this.itemTag = itemTag;
         this.gearSet = gearSet;
     }
 
@@ -34,7 +32,6 @@ public class ArmorReferenceData {
         this.gearLevel = configurationSection.getInt("gearLevel");
         this.itemIndex = configurationSection.getInt("itemIndex");
         this.itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
-        this.itemTag = configurationSection.getString("itemTag");
         if (configurationSection.contains("gearSet")) {
             this.gearSet = configurationSection.getString("gearSet");
         } else {
@@ -48,7 +45,7 @@ public class ArmorReferenceData {
 
         ArrayList<ItemStack> items = new ArrayList<>();
         for (ArmorGearType type : weaponGearTypes) {
-            items.add(ArmorManager.get(armorSlot, type, gearLevel, itemIndex, itemTier, itemTag, true, gearSet));
+            items.add(ArmorManager.get(armorSlot, type, gearLevel, itemIndex, itemTier, true, gearSet));
         }
 
         return items;
@@ -64,9 +61,5 @@ public class ArmorReferenceData {
 
     public ItemTier getItemTier() {
         return itemTier;
-    }
-
-    public String getItemTag() {
-        return itemTag;
     }
 }

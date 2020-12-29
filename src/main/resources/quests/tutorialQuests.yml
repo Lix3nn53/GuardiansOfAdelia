@@ -28,7 +28,7 @@ quest1:
     gearLevel: 1
     itemIndex: 0
     itemTier: "LEGENDARY"
-    itemTag: "Tutorial"
+    gearSet: "Tutorial"
   itemPrize1:
     itemType: Consumable
     consumable: POTION_INSTANT_HEALTH
@@ -89,35 +89,35 @@ quest3:
     itemIndex: 0
     rpgSlotType: "PARROT"
     itemTier: "LEGENDARY"
-    itemTag: "Tutorial"
+    gearSet: "Tutorial"
   itemPrize2:
     itemType: "Passive"
     gearLevel: 1
     itemIndex: 0
     rpgSlotType: "EARRING"
     itemTier: "LEGENDARY"
-    itemTag: "Tutorial"
+    gearSet: "Tutorial"
   itemPrize3:
     itemType: "Passive"
     gearLevel: 1
     itemIndex: 0
     rpgSlotType: "GLOVE"
     itemTier: "LEGENDARY"
-    itemTag: "Tutorial"
+    gearSet: "Tutorial"
   itemPrize4:
     itemType: "Passive"
     gearLevel: 1
     itemIndex: 0
     rpgSlotType: "RING"
     itemTier: "LEGENDARY"
-    itemTag: "Tutorial"
+    gearSet: "Tutorial"
   itemPrize5:
     itemType: "Passive"
     gearLevel: 1
     itemIndex: 0
     rpgSlotType: "NECKLACE"
     itemTier: "LEGENDARY"
-    itemTag: "Tutorial"
+    gearSet: "Tutorial"
 quest4:
   questID: 4
   npcToTakeFrom: 11

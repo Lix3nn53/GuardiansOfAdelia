@@ -256,11 +256,11 @@ public class CommandLix implements CommandExecutor {
                 if (args.length >= 3) {
                     WeaponGearType weaponGearType = WeaponGearType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
-                    String gearSet = null;
+                    String gearSet = "Command";
                     if (args.length == 4) {
                         gearSet = args[3];
                     }
-                    ItemStack weapon = WeaponManager.get(weaponGearType, no, 0, ItemTier.LEGENDARY, "Command", false, gearSet);
+                    ItemStack weapon = WeaponManager.get(weaponGearType, no, 0, ItemTier.LEGENDARY, false, gearSet);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("armor")) {
@@ -268,11 +268,11 @@ public class CommandLix implements CommandExecutor {
                     ArmorSlot armorSlot = ArmorSlot.valueOf(args[1]);
                     ArmorGearType armorGearType = ArmorGearType.valueOf(args[2]);
                     int no = Integer.parseInt(args[3]);
-                    String gearSet = null;
+                    String gearSet = "Command";
                     if (args.length == 5) {
                         gearSet = args[4];
                     }
-                    ItemStack weapon = ArmorManager.get(armorSlot, armorGearType, no, 0, ItemTier.LEGENDARY, "Command", false, gearSet);
+                    ItemStack weapon = ArmorManager.get(armorSlot, armorGearType, no, 0, ItemTier.LEGENDARY, false, gearSet);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("egg")) {
@@ -324,7 +324,7 @@ public class CommandLix implements CommandExecutor {
                 if (args.length == 3) {
                     RPGSlotType rpgSlotType = RPGSlotType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
-                    ItemStack passive = PassiveManager.get(no, 0, rpgSlotType, ItemTier.LEGENDARY, "Command", false);
+                    ItemStack passive = PassiveManager.get(no, 0, rpgSlotType, ItemTier.LEGENDARY, false, "Command");
                     InventoryUtils.giveItemToPlayer(player, passive);
                 }
             } else if (args[0].equals("model")) {

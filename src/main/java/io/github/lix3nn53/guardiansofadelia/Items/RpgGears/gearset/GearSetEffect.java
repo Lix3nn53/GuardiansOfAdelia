@@ -89,21 +89,21 @@ public enum GearSetEffect {
             case EMPTY:
                 return "Empty";
             case KNOCKBACK_RESISTANCE:
-                return ChatColor.GRAY + "Knockback resistance";
+                return ChatColor.GRAY + "Knockback Resist";
             case CRITICAL_DAMAGE:
-                return ChatColor.GRAY + "Critical damage";
+                return ChatColor.GRAY + "Critical Damage";
             case CRITICAL_CHANCE:
-                return ChatColor.GRAY + "Critical chance";
+                return ChatColor.GRAY + "Critical Chance";
             case MANA_REGEN:
-                return ChatColor.GRAY + "Mana regeneration";
+                return ChatColor.GRAY + "Mana Regen";
             case SLOW_FALLING:
-                return ChatColor.GRAY + "Slow fallling";
+                return ChatColor.GRAY + "Slow Fallling";
             case SWIMMING_SPEED:
-                return ChatColor.GRAY + "Swimming speed";
+                return ChatColor.GRAY + "Swimming Speed";
             case ATTACK_SPEED_INCREASE:
-                return ChatColor.GRAY + "Attack speed";
+                return ChatColor.GRAY + "Attack Speed++";
             case ATTACK_SPEED_DECREASE:
-                return ChatColor.GRAY + "Attack speed" + ChatColor.RED + " decrease";
+                return ChatColor.GRAY + "Attack Speed" + ChatColor.RED + "--";
         }
 
         final StringBuilder sb = new StringBuilder("GearSetEffect{");

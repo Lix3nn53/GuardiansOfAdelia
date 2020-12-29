@@ -17,16 +17,14 @@ import java.util.List;
 
 public class Egg implements RPGGear {
 
-    private final String itemTag;
-    private final int level;
     private final ItemStack itemStack;
 
-    public Egg(String petKey, ItemTier tier, String itemTag, Material material, int customModelData, int reqLevel, int petLevel) {
+    public Egg(String petKey, ItemTier tier, Material material, int customModelData, int reqLevel, int petLevel, String gearSetStr) {
         MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(petKey);
 
         String name = mythicMob.getDisplayName().get();
-        if (itemTag != null && !itemTag.equals("")) {
-            name = tier.getTierColor() + itemTag + " " + name;
+        if (gearSetStr != null && !gearSetStr.equals("")) {
+            name = tier.getTierColor() + gearSetStr + " " + name;
         }
         int health = PetManager.getHealth(petKey, petLevel);
         GuardiansOfAdelia.getInstance().getLogger().info("egg health: " + health);
@@ -75,25 +73,13 @@ public class Egg implements RPGGear {
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(customModelData);
-        this.itemStack.setItemMeta(itemMeta);
 
-        this.itemTag = itemTag;
-        this.level = reqLevel;
+        this.itemStack.setItemMeta(itemMeta);
     }
 
     @Override
     public ItemStack getItemStack() {
         return itemStack;
-    }
-
-    @Override
-    public String getItemTag() {
-        return itemTag;
-    }
-
-    @Override
-    public int getLevel() {
-        return level;
     }
 
 }

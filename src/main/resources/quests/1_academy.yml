@@ -53,7 +53,7 @@ quest2:
       gearLevel: 1
       itemIndex: 0
       itemTier: "RARE"
-      itemTag: "Academy"
+      gearSet: "Academy"
   task2:
     taskType: "TaskInteract"
     npcId: 60
@@ -63,7 +63,7 @@ quest2:
       gearLevel: 1
       itemIndex: 0
       itemTier: "RARE"
-      itemTag: "Academy"
+      gearSet: "Academy"
   task3:
     taskType: "TaskInteract"
     npcId: 100

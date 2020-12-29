@@ -43,13 +43,12 @@ public class ActionLoader {
         } else if (actionType.equals(GiveWeaponAction.class.getSimpleName())) {
             int gearLevel = configurationSection.getInt("gearLevel");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
-            String itemTag = configurationSection.getString("itemTag");
             String gearSet = null;
             if (configurationSection.contains("gearSet")) {
                 gearSet = configurationSection.getString("gearSet");
             }
 
-            return new GiveWeaponAction(gearLevel, itemTier, itemTag, gearSet);
+            return new GiveWeaponAction(gearLevel, itemTier, gearSet);
         } else if (actionType.equals(InvincibleGiveAction.class.getSimpleName())) {
             long duration = configurationSection.getLong("duration");
 

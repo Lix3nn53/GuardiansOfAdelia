@@ -17,17 +17,16 @@ import java.util.List;
 
 public class WeaponMagical implements RPGGear {
 
-    private final String itemTag;
-    private final int level;
-    private final WeaponGearType gearType;
     private final ItemStack itemStack;
 
-    public WeaponMagical(String name, ItemTier tier, String itemTag, Material material, int customModelDataId, int level, WeaponGearType gearType,
+    public WeaponMagical(String name, ItemTier tier, Material material, int customModelDataId, int level, WeaponGearType gearType,
                          int damage, int magicDamage, AttackSpeed attackSpeed, int minStatValue, int maxStatValue,
                          int minNumberOfStats, String gearSetStr) {
         name = tier.getTierColor() + name;
-        if (itemTag != null && !itemTag.equals("")) {
-            name = tier.getTierColor() + itemTag + " " + name;
+        boolean gearSetExist = false;
+        if (gearSetStr != null && !gearSetStr.equals("")) {
+            name = tier.getTierColor() + gearSetStr + " " + name;
+            gearSetExist = true;
         }
 
         double bonusPercent = tier.getBonusMultiplier();
@@ -39,7 +38,7 @@ public class WeaponMagical implements RPGGear {
         StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName());
-        if (gearSetStr != null) {
+        if (gearSetExist) {
             lore.add(ChatColor.RED + gearSetStr);
         }
         lore.add("");
@@ -68,7 +67,7 @@ public class WeaponMagical implements RPGGear {
         }
         lore.add("");
         lore.add(tier.getTierString());
-        if (gearSetStr != null) {
+        if (gearSetExist) {
             lore.add("");
             for (int i = 2; i < 6; i++) {
                 GearSet gearSet = new GearSet(gearSetStr, i);
@@ -108,7 +107,7 @@ public class WeaponMagical implements RPGGear {
         if (statPassive.getWind() != 0) {
             PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), this.itemStack);
         }
-        if (gearSetStr != null) {
+        if (gearSetExist) {
             PersistentDataContainerUtil.putString("gearSet", gearSetStr, this.itemStack);
         }
 
@@ -118,11 +117,8 @@ public class WeaponMagical implements RPGGear {
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(customModelDataId);
-        this.itemStack.setItemMeta(itemMeta);
 
-        this.itemTag = itemTag;
-        this.level = level;
-        this.gearType = gearType;
+        this.itemStack.setItemMeta(itemMeta);
     }
 
     @Override
@@ -130,17 +126,4 @@ public class WeaponMagical implements RPGGear {
         return itemStack;
     }
 
-    public WeaponGearType getGearType() {
-        return gearType;
-    }
-
-    @Override
-    public String getItemTag() {
-        return itemTag;
-    }
-
-    @Override
-    public int getLevel() {
-        return level;
-    }
 }

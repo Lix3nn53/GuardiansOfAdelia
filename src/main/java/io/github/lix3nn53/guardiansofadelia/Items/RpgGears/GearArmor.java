@@ -17,16 +17,15 @@ import java.util.List;
 
 public class GearArmor implements RPGGear {
 
-    private final String itemTag;
-    private final int level;
     private final ItemStack itemStack;
-    private final ArmorGearType gearType;
 
-    public GearArmor(String name, ItemTier tier, String itemTag, Material material, int level, ArmorGearType gearType, int health,
+    public GearArmor(String name, ItemTier tier, Material material, int level, ArmorGearType gearType, int health,
                      int defense, int magicDefense, int minStatValue, int maxStatValue, int minNumberOfStats, String gearSetStr) {
         name = tier.getTierColor() + name;
-        if (itemTag != null && !itemTag.equals("")) {
-            name = tier.getTierColor() + itemTag + " " + name;
+        boolean gearSetExist = false;
+        if (gearSetStr != null && !gearSetStr.equals("")) {
+            name = tier.getTierColor() + gearSetStr + " " + name;
+            gearSetExist = true;
         }
 
         double bonusPercent = tier.getBonusMultiplier();
@@ -38,7 +37,7 @@ public class GearArmor implements RPGGear {
         StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName());
-        if (gearSetStr != null) {
+        if (gearSetExist) {
             lore.add(ChatColor.RED + gearSetStr);
         }
         lore.add("");
@@ -71,7 +70,7 @@ public class GearArmor implements RPGGear {
         GearSetEffect setEffect = gearType.getSetEffect();
         lore.add(ChatColor.GRAY + "-- " + ChatColor.YELLOW + gearType.getDisplayName() + ChatColor.GRAY + " [4 pieces] --");
         lore.add("      " + setEffect.toString());
-        if (gearSetStr != null) {
+        if (gearSetExist) {
             for (int i = 1; i < 6; i++) {
                 GearSet gearSet = new GearSet(gearSetStr, i);
                 if (GearSetManager.hasEffect(gearSet)) {
@@ -108,7 +107,7 @@ public class GearArmor implements RPGGear {
         if (statPassive.getWind() != 0) {
             PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), this.itemStack);
         }
-        if (gearSetStr != null) {
+        if (gearSetExist) {
             PersistentDataContainerUtil.putString("gearSet", gearSetStr, this.itemStack);
         }
 
@@ -117,29 +116,12 @@ public class GearArmor implements RPGGear {
         itemMeta.setDisplayName(name);
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        this.itemStack.setItemMeta(itemMeta);
 
-        this.itemTag = itemTag;
-        this.level = level;
-        this.gearType = gearType;
+        this.itemStack.setItemMeta(itemMeta);
     }
 
     @Override
     public ItemStack getItemStack() {
         return itemStack;
-    }
-
-    public ArmorGearType getGearType() {
-        return gearType;
-    }
-
-    @Override
-    public String getItemTag() {
-        return itemTag;
-    }
-
-    @Override
-    public int getLevel() {
-        return level;
     }
 }

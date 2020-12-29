@@ -37,13 +37,12 @@ public class ItemReferenceLoader {
             int gearLevel = configurationSection.getInt("gearLevel");
             int itemIndex = configurationSection.getInt("itemIndex");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
-            String itemTag = configurationSection.getString("itemTag");
             String gearSet = null;
             if (configurationSection.contains("gearSet")) {
                 gearSet = configurationSection.getString("gearSet");
             }
 
-            return ArmorManager.get(armorSlot, gearType, gearLevel, itemIndex, itemTier, itemTag, false, gearSet);
+            return ArmorManager.get(armorSlot, gearType, gearLevel, itemIndex, itemTier, false, gearSet);
         } else if (itemType.equals("Egg")) {
             String petType = configurationSection.getString("petCode");
             int gearLevel = configurationSection.getInt("gearLevel");
@@ -60,33 +59,34 @@ public class ItemReferenceLoader {
                 return null;
             }
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
-            String itemTag = configurationSection.getString("itemTag");
+            String gearSet = null;
+            if (configurationSection.contains("gearSet")) {
+                gearSet = configurationSection.getString("gearSet");
+            }
 
-            return PassiveManager.get(gearLevel, itemIndex, rpgSlotType, itemTier, itemTag, false);
+            return PassiveManager.get(gearLevel, itemIndex, rpgSlotType, itemTier, false, gearSet);
         } else if (itemType.equals("Weapon")) {
             WeaponGearType gearType = WeaponGearType.valueOf(configurationSection.getString("weaponGearType"));
             int gearLevel = configurationSection.getInt("gearLevel");
             int itemIndex = configurationSection.getInt("itemIndex");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
-            String itemTag = configurationSection.getString("itemTag");
             String gearSet = null;
             if (configurationSection.contains("gearSet")) {
                 gearSet = configurationSection.getString("gearSet");
             }
 
-            return WeaponManager.get(gearType, gearLevel, itemIndex, itemTier, itemTag, false, gearSet);
+            return WeaponManager.get(gearType, gearLevel, itemIndex, itemTier, false, gearSet);
         } else if (itemType.equals("Shield")) {
             ShieldGearType gearType = ShieldGearType.valueOf(configurationSection.getString("shieldGearType"));
             int gearLevel = configurationSection.getInt("gearLevel");
             int itemIndex = configurationSection.getInt("itemIndex");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
-            String itemTag = configurationSection.getString("itemTag");
             String gearSet = null;
             if (configurationSection.contains("gearSet")) {
                 gearSet = configurationSection.getString("gearSet");
             }
 
-            return ShieldManager.get(gearType, gearLevel, itemIndex, itemTier, itemTag, false, gearSet);
+            return ShieldManager.get(gearType, gearLevel, itemIndex, itemTier, false, gearSet);
         } else if (itemType.equals("Consumable")) {
             Consumable consumable = Consumable.valueOf(configurationSection.getString("consumable"));
 

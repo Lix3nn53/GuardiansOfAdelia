@@ -14,15 +14,13 @@ import java.util.List;
 
 public class GearPassive implements RPGGear {
 
-    private final String itemTag;
-    private final int level;
     private final ItemStack itemStack;
 
-    public GearPassive(String name, ItemTier tier, String itemTag, int customModelData, RPGSlotType passiveType, int level,
-                       int minStatValue, int maxStatValue, int minNumberOfStats) {
+    public GearPassive(String name, ItemTier tier, int customModelData, RPGSlotType passiveType, int level,
+                       int minStatValue, int maxStatValue, int minNumberOfStats, String GearSetStr) {
         name = tier.getTierColor() + name;
-        if (itemTag != null && !itemTag.equals("")) {
-            name = tier.getTierColor() + itemTag + " " + name;
+        if (GearSetStr != null && !GearSetStr.equals("")) {
+            name = tier.getTierColor() + GearSetStr + " " + name;
         }
 
         double bonusPercent = tier.getBonusMultiplier();
@@ -87,25 +85,13 @@ public class GearPassive implements RPGGear {
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.setCustomModelData(customModelData);
-        this.itemStack.setItemMeta(itemMeta);
 
-        this.itemTag = itemTag;
-        this.level = level;
+        this.itemStack.setItemMeta(itemMeta);
     }
 
     @Override
     public ItemStack getItemStack() {
         return itemStack;
-    }
-
-    @Override
-    public String getItemTag() {
-        return itemTag;
-    }
-
-    @Override
-    public int getLevel() {
-        return level;
     }
 
 }

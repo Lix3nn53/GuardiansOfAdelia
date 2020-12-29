@@ -22,8 +22,8 @@ public class Eggs {
         ItemTier itemTier = keyToItemTier.get(key);
         int customModelData = keyToCustomModelData.get(key);
 
-        Egg egg = new Egg(key, itemTier, "", Material.STONE_HOE, customModelData,
-                GearLevel.getMinLevel(gearLevel), petLevel);
+        Egg egg = new Egg(key, itemTier, Material.STONE_HOE, customModelData,
+                GearLevel.getMinLevel(gearLevel), petLevel, "");
 
         return egg.getItemStack();
     }

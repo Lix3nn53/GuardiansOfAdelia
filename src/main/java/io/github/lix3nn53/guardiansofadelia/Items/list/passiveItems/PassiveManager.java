@@ -15,8 +15,8 @@ public class PassiveManager {
 
     private final static HashMap<Integer, List<PassiveSet>> gearLevelToPassives = new HashMap<>();
 
-    public static ItemStack get(int gearLevel, int setIndex, RPGSlotType rpgSlotType, ItemTier tier, String itemTag, boolean noStats) {
-        GuardiansOfAdelia.getInstance().getLogger().info(gearLevel + " " + setIndex + " " + rpgSlotType.toString() + " " + tier.toString() + " " + itemTag);
+    public static ItemStack get(int gearLevel, int setIndex, RPGSlotType rpgSlotType, ItemTier tier, boolean noStats, String gearSetStr) {
+        GuardiansOfAdelia.getInstance().getLogger().info(gearLevel + " " + setIndex + " " + rpgSlotType.toString() + " " + tier.toString() + " " + gearSetStr);
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfStatsPassive();
         int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel);
         int maxStatValue = noStats ? 0 : GearLevel.getMaxStatValue(gearLevel);
@@ -29,8 +29,8 @@ public class PassiveManager {
         int level = template.getLevel(rpgSlotType);
         int customModelData = template.getCustomModelData(rpgSlotType);
 
-        final GearPassive passive = new GearPassive(name, tier, itemTag, customModelData, rpgSlotType, level, minStatValue,
-                maxStatValue, minNumberOfStats);
+        final GearPassive passive = new GearPassive(name, tier, customModelData, rpgSlotType, level, minStatValue,
+                maxStatValue, minNumberOfStats, gearSetStr);
 
         return passive.getItemStack();
     }

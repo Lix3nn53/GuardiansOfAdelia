@@ -292,7 +292,7 @@ public enum MerchantPageType {
                     break;
             }
 
-            ItemStack itemStack = WeaponManager.get(weaponGearType, shopLevel, 0, tier, "", true, null);
+            ItemStack itemStack = WeaponManager.get(weaponGearType, shopLevel, 0, tier, true, null);
 
             if (lines.get(lineIndex).isEmpty()) {
                 lines.get(lineIndex).addWord(itemStack, price);
@@ -340,7 +340,7 @@ public enum MerchantPageType {
                     price = 4;
                 }
 
-                ItemStack itemStack = ArmorManager.get(armorSlot, armorGearType, shopLevel, 0, tier, "", true, null);
+                ItemStack itemStack = ArmorManager.get(armorSlot, armorGearType, shopLevel, 0, tier, true, null);
 
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(itemStack, price);
@@ -388,7 +388,7 @@ public enum MerchantPageType {
                 price = 3;
             }
 
-            ItemStack itemStack = ShieldManager.get(shieldGearType, shopLevel, 0, tier, "", true, null);
+            ItemStack itemStack = ShieldManager.get(shieldGearType, shopLevel, 0, tier, true, null);
 
                 if (lines.get(lineIndex).isEmpty()) {
                     lines.get(lineIndex).addWord(itemStack, price);

@@ -39,23 +39,21 @@ public enum CraftingType {
 
     public List<ItemStack> getItemsToCraft(int gearLevel) {
         ItemTier tier = ItemTier.MYSTIC;
-        String itemTag = "Weaponsmith's";
+        String gearSet = "Craftsman's";
         List<ItemStack> itemStackList = new ArrayList<>();
 
         switch (this) {
             case WEAPON_MELEE:
-                itemStackList = ItemPoolGenerator.generateMeleeWeaponsNoStats(tier, itemTag, gearLevel, 0);
+                itemStackList = ItemPoolGenerator.generateMeleeWeaponsNoStats(tier, gearLevel, 0, gearSet);
                 break;
             case WEAPON_RANGED:
-                itemStackList = ItemPoolGenerator.generateRangedWeaponsNoStats(tier, itemTag, gearLevel, 0);
+                itemStackList = ItemPoolGenerator.generateRangedWeaponsNoStats(tier, gearLevel, 0, gearSet);
                 break;
             case ARMOR_HEAVY:
-                itemTag = "Armorsmith's";
-                itemStackList = ItemPoolGenerator.generateHeavyArmorsNoStats(tier, itemTag, gearLevel, 0);
+                itemStackList = ItemPoolGenerator.generateHeavyArmorsNoStats(tier, gearLevel, 0, gearSet);
                 break;
             case ARMOR_LIGHT:
-                itemTag = "Armorsmith's";
-                itemStackList = ItemPoolGenerator.generateLightArmorsNoStats(tier, itemTag, gearLevel, 0);
+                itemStackList = ItemPoolGenerator.generateLightArmorsNoStats(tier, gearLevel, 0, gearSet);
                 break;
             case POTION:
                 itemStackList = ItemPoolGenerator.generatePotions(gearLevel);
@@ -64,8 +62,7 @@ public enum CraftingType {
                 itemStackList = ItemPoolGenerator.generateFoods(gearLevel);
                 break;
             case JEWEL:
-                itemTag = "Jeweller's";
-                itemStackList = ItemPoolGenerator.generatePassivesNoStats(tier, itemTag, gearLevel, 0);
+                itemStackList = ItemPoolGenerator.generatePassivesNoStats(tier, gearLevel, 0, gearSet);
                 break;
         }
         return itemStackList;

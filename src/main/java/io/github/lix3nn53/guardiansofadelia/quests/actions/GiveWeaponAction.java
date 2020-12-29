@@ -18,13 +18,11 @@ public class GiveWeaponAction implements Action {
 
     private final int gearLevel;
     private final ItemTier tier;
-    private final String itemTag;
     private final String gearSet;
 
-    public GiveWeaponAction(int gearLevel, ItemTier tier, String itemTag, String gearSet) {
+    public GiveWeaponAction(int gearLevel, ItemTier tier, String gearSet) {
         this.gearLevel = gearLevel;
         this.tier = tier;
-        this.itemTag = itemTag;
         this.gearSet = gearSet;
     }
 
@@ -39,7 +37,7 @@ public class GiveWeaponAction implements Action {
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
                 WeaponGearType defaultWeaponGearType = rpgClass.getDefaultWeaponGearType();
 
-                ItemStack weapon = WeaponManager.get(defaultWeaponGearType, gearLevel, 0, tier, itemTag, false, gearSet);
+                ItemStack weapon = WeaponManager.get(defaultWeaponGearType, gearLevel, 0, tier, false, gearSet);
                 InventoryUtils.giveItemToPlayer(player, weapon);
             }
         }
