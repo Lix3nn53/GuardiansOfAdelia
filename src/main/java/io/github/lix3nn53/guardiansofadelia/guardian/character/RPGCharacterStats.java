@@ -470,7 +470,6 @@ public class RPGCharacterStats {
                                     helmetType, chestplateType, leggingsType, bootsType);
                         }
                     }.runTaskLater(GuardiansOfAdelia.getInstance(), 1L);
-
                 }
             }
         }
@@ -526,22 +525,29 @@ public class RPGCharacterStats {
             }
 
             if (fixDisplay) {
-                PlayerInventory inventory = player.getInventory();
+                if (PersistentDataContainerUtil.hasString(itemStack, "gearSet")) {
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            PlayerInventory inventory = player.getInventory();
 
-                ItemStack inventoryHelmet = inventory.getHelmet();
-                ItemStack inventoryChestplate = inventory.getChestplate();
-                ItemStack inventoryLeggings = inventory.getLeggings();
-                ItemStack inventoryBoots = inventory.getBoots();
-                ItemStack itemInMainHand = inventory.getItemInMainHand();
-                ItemStack itemInOffHand = inventory.getItemInOffHand();
+                            ItemStack inventoryHelmet = inventory.getHelmet();
+                            ItemStack inventoryChestplate = inventory.getChestplate();
+                            ItemStack inventoryLeggings = inventory.getLeggings();
+                            ItemStack inventoryBoots = inventory.getBoots();
+                            ItemStack itemInMainHand = inventory.getItemInMainHand();
+                            ItemStack itemInOffHand = inventory.getItemInOffHand();
 
-                ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
-                ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
-                ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
-                ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
+                            ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
+                            ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
+                            ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
+                            ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
 
-                recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
-                        helmetType, chestplateType, leggingsType, bootsType);
+                            recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
+                                    helmetType, chestplateType, leggingsType, bootsType);
+                        }
+                    }.runTaskLater(GuardiansOfAdelia.getInstance(), 1L);
+                }
             }
         }
     }
@@ -578,22 +584,29 @@ public class RPGCharacterStats {
                 }
             }
 
-            PlayerInventory inventory = player.getInventory();
+            if (PersistentDataContainerUtil.hasString(itemStack, "gearSet")) {
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        PlayerInventory inventory = player.getInventory();
 
-            ItemStack inventoryHelmet = inventory.getHelmet();
-            ItemStack inventoryChestplate = inventory.getChestplate();
-            ItemStack inventoryLeggings = inventory.getLeggings();
-            ItemStack inventoryBoots = inventory.getBoots();
-            ItemStack itemInMainHand = inventory.getItemInMainHand();
-            ItemStack itemInOffHand = inventory.getItemInOffHand();
+                        ItemStack inventoryHelmet = inventory.getHelmet();
+                        ItemStack inventoryChestplate = inventory.getChestplate();
+                        ItemStack inventoryLeggings = inventory.getLeggings();
+                        ItemStack inventoryBoots = inventory.getBoots();
+                        ItemStack itemInMainHand = inventory.getItemInMainHand();
+                        ItemStack itemInOffHand = inventory.getItemInOffHand();
 
-            ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
-            ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
-            ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
-            ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
+                        ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
+                        ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
+                        ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
+                        ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
 
-            recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
-                    helmetType, chestplateType, leggingsType, bootsType);
+                        recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
+                                helmetType, chestplateType, leggingsType, bootsType);
+                    }
+                }.runTaskLater(GuardiansOfAdelia.getInstance(), 1L);
+            }
         }
     }
 
@@ -809,22 +822,29 @@ public class RPGCharacterStats {
             }
 
             if (fixDisplay) {
-                PlayerInventory inventory = player.getInventory();
+                if (PersistentDataContainerUtil.hasString(itemStack, "gearSet")) {
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            PlayerInventory inventory = player.getInventory();
 
-                ItemStack inventoryHelmet = inventory.getHelmet();
-                ItemStack inventoryChestplate = inventory.getChestplate();
-                ItemStack inventoryLeggings = inventory.getLeggings();
-                ItemStack inventoryBoots = inventory.getBoots();
-                ItemStack itemInMainHand = inventory.getItemInMainHand();
-                ItemStack itemInOffHand = inventory.getItemInOffHand();
+                            ItemStack inventoryHelmet = inventory.getHelmet();
+                            ItemStack inventoryChestplate = inventory.getChestplate();
+                            ItemStack inventoryLeggings = inventory.getLeggings();
+                            ItemStack inventoryBoots = inventory.getBoots();
+                            ItemStack itemInMainHand = inventory.getItemInMainHand();
+                            ItemStack itemInOffHand = inventory.getItemInOffHand();
 
-                ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
-                ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
-                ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
-                ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
+                            ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
+                            ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
+                            ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
+                            ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
 
-                recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
-                        helmetType, chestplateType, leggingsType, bootsType);
+                            recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
+                                    helmetType, chestplateType, leggingsType, bootsType);
+                        }
+                    }.runTaskLater(GuardiansOfAdelia.getInstance(), 1L);
+                }
             }
 
             return true;
@@ -853,22 +873,29 @@ public class RPGCharacterStats {
             }
 
             if (fixDisplay) {
-                PlayerInventory inventory = player.getInventory();
+                if (PersistentDataContainerUtil.hasString(itemStack, "gearSet")) {
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            PlayerInventory inventory = player.getInventory();
 
-                ItemStack inventoryHelmet = inventory.getHelmet();
-                ItemStack inventoryChestplate = inventory.getChestplate();
-                ItemStack inventoryLeggings = inventory.getLeggings();
-                ItemStack inventoryBoots = inventory.getBoots();
-                ItemStack itemInMainHand = inventory.getItemInMainHand();
-                ItemStack itemInOffHand = inventory.getItemInOffHand();
+                            ItemStack inventoryHelmet = inventory.getHelmet();
+                            ItemStack inventoryChestplate = inventory.getChestplate();
+                            ItemStack inventoryLeggings = inventory.getLeggings();
+                            ItemStack inventoryBoots = inventory.getBoots();
+                            ItemStack itemInMainHand = inventory.getItemInMainHand();
+                            ItemStack itemInOffHand = inventory.getItemInOffHand();
 
-                ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
-                ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
-                ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
-                ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
+                            ArmorGearType helmetType = ArmorGearType.typeOf(inventoryHelmet);
+                            ArmorGearType chestplateType = ArmorGearType.typeOf(inventoryChestplate);
+                            ArmorGearType leggingsType = ArmorGearType.typeOf(inventoryLeggings);
+                            ArmorGearType bootsType = ArmorGearType.typeOf(inventoryBoots);
 
-                recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
-                        helmetType, chestplateType, leggingsType, bootsType);
+                            recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
+                                    helmetType, chestplateType, leggingsType, bootsType);
+                        }
+                    }.runTaskLater(GuardiansOfAdelia.getInstance(), 1L);
+                }
             }
 
             return true;
