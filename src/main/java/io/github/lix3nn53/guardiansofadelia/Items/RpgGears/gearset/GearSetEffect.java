@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -80,5 +81,33 @@ public enum GearSetEffect {
                 player.addPotionEffect(potionEffect);
                 break;
         }
+    }
+
+    @Override
+    public String toString() {
+        switch (this) {
+            case EMPTY:
+                return "Empty";
+            case KNOCKBACK_RESISTANCE:
+                return ChatColor.GRAY + "Knockback resistance";
+            case CRITICAL_DAMAGE:
+                return ChatColor.GRAY + "Critical damage";
+            case CRITICAL_CHANCE:
+                return ChatColor.GRAY + "Critical chance";
+            case MANA_REGEN:
+                return ChatColor.GRAY + "Mana regeneration";
+            case SLOW_FALLING:
+                return ChatColor.GRAY + "Slow fallling";
+            case SWIMMING_SPEED:
+                return ChatColor.GRAY + "Swimming speed";
+            case ATTACK_SPEED_INCREASE:
+                return ChatColor.GRAY + "Attack speed";
+            case ATTACK_SPEED_DECREASE:
+                return ChatColor.GRAY + "Attack speed" + ChatColor.RED + " decrease";
+        }
+
+        final StringBuilder sb = new StringBuilder("GearSetEffect{");
+        sb.append('}');
+        return sb.toString();
     }
 }

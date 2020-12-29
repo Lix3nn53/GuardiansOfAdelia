@@ -198,10 +198,7 @@ public class StatUtils {
             ItemMeta itemMeta = itemStack.getItemMeta();
             List<String> lore = itemMeta.getLore();
 
-            int i = lore.indexOf(itemTier.getTierString()) + 1;
-
-            lore.add(i, "");
-            i++;
+            int i = lore.indexOf(itemTier.getTierString());
 
             if (statPassive.getFire() != 0) {
                 lore.add(i, ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
@@ -221,7 +218,9 @@ public class StatUtils {
             }
             if (statPassive.getWind() != 0) {
                 lore.add(i, ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
+                i++;
             }
+            lore.add(i, "");
 
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);

@@ -37,7 +37,7 @@ public class TablistUtils {
                     header.append("\n");
 
                     for (Quest quest : questList) {
-                        header.append(ChatColor.LIGHT_PURPLE);
+                        header.append(ChatColor.DARK_PURPLE);
                         header.append(quest.getName() + ": ");
                         header.append(ChatColor.WHITE + quest.getObjectiveTextForTablist());
                         header.append("\n");

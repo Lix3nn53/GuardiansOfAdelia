@@ -413,7 +413,7 @@ public final class Quest {
         int i = 1;
         for (Task task : this.getTasks()) {
             String tablistInfoString = task.getTablistInfoString();
-            replaceTaskValues = replaceTaskValues.replace("TASK_PROGRESS_" + i, tablistInfoString + ChatColor.RESET);
+            replaceTaskValues = replaceTaskValues.replace("TASK_PROGRESS_" + i, tablistInfoString + ChatColor.WHITE);
             i++;
         }
         return replaceTaskValues;

@@ -39,7 +39,7 @@ public class GearArmor implements RPGGear {
 
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName());
         if (gearSetStr != null) {
-            lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearSetStr);
+            lore.add(ChatColor.RED + gearSetStr);
         }
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
@@ -70,15 +70,15 @@ public class GearArmor implements RPGGear {
         lore.add("");
         GearSetEffect setEffect = gearType.getSetEffect();
         lore.add(ChatColor.GRAY + "-- " + ChatColor.YELLOW + gearType.getDisplayName() + ChatColor.GRAY + " [4 pieces] --");
-        lore.add(setEffect.toString());
+        lore.add("      " + setEffect.toString());
         if (gearSetStr != null) {
             for (int i = 1; i < 6; i++) {
                 GearSet gearSet = new GearSet(gearSetStr, i);
                 if (GearSetManager.hasEffect(gearSet)) {
-                    lore.add(ChatColor.GRAY + "-- " + ChatColor.YELLOW + gearSetStr + ChatColor.GRAY + " [" + i + " pieces] --");
+                    lore.add(ChatColor.GRAY + "-- " + ChatColor.RED + gearSetStr + ChatColor.GRAY + " [" + i + " pieces] --");
                     List<GearSetEffect> effects = GearSetManager.getEffectsWithoutLower(gearSet);
                     for (GearSetEffect gearSetEffect : effects) {
-                        lore.add(gearSetEffect.toString());
+                        lore.add("      " + gearSetEffect.toString());
                     }
                 }
             }

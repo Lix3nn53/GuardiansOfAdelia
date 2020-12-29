@@ -39,7 +39,7 @@ public class WeaponMelee implements RPGGear {
 
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName());
         if (gearSetStr != null) {
-            lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearSetStr);
+            lore.add(ChatColor.RED + gearSetStr);
         }
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
@@ -71,10 +71,10 @@ public class WeaponMelee implements RPGGear {
             for (int i = 2; i < 6; i++) {
                 GearSet gearSet = new GearSet(gearSetStr, i);
                 if (GearSetManager.hasEffect(gearSet)) {
-                    lore.add(ChatColor.GRAY + "-- " + ChatColor.YELLOW + gearSetStr + ChatColor.GRAY + " [" + i + " pieces] --");
+                    lore.add(ChatColor.GRAY + "-- " + ChatColor.RED + gearSetStr + ChatColor.GRAY + " [" + i + " pieces] --");
                     List<GearSetEffect> effects = GearSetManager.getEffectsWithoutLower(gearSet);
                     for (GearSetEffect gearSetEffect : effects) {
-                        lore.add(gearSetEffect.toString());
+                        lore.add("      " + gearSetEffect.toString());
                     }
                 }
             }
