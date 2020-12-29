@@ -198,20 +198,29 @@ public class StatUtils {
             ItemMeta itemMeta = itemStack.getItemMeta();
             List<String> lore = itemMeta.getLore();
 
+            int i = lore.indexOf(itemTier.getTierString()) + 1;
+
+            lore.add(i, "");
+            i++;
+
             if (statPassive.getFire() != 0) {
-                lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
+                lore.add(i, ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
+                i++;
             }
             if (statPassive.getWater() != 0) {
-                lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
+                lore.add(i, ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
+                i++;
             }
             if (statPassive.getEarth() != 0) {
-                lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
+                lore.add(i, ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
+                i++;
             }
             if (statPassive.getLightning() != 0) {
-                lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
+                lore.add(i, ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
+                i++;
             }
             if (statPassive.getWind() != 0) {
-                lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
+                lore.add(i, ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
             }
 
             itemMeta.setLore(lore);
