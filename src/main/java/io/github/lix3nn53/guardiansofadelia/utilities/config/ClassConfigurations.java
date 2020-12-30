@@ -54,6 +54,8 @@ public class ClassConfigurations {
             GuardiansOfAdelia.getInstance().getLogger().info("colorStr: " + colorStr);
             ChatColor color = ChatColor.valueOf(colorStr);
 
+            int rank = fileConfiguration.getInt("rank");
+
             List<String> description = fileConfiguration.getStringList("description");
 
             int classIconCustomModelData = fileConfiguration.getInt("classIconCustomModelData");
@@ -129,7 +131,7 @@ public class ClassConfigurations {
                 isDefaultOffhandWeapon = fileConfiguration.getBoolean("isDefaultOffhandWeapon");
             }
 
-            RPGClass rpgClass = new RPGClass(color, className, classIconCustomModelData, attributeTiers, skillSet,
+            RPGClass rpgClass = new RPGClass(color, className, rank, classIconCustomModelData, attributeTiers, skillSet,
                     shieldGearTypes, weaponGearTypes, armorGearTypes, hasDefaultOffhand, isDefaultOffhandWeapon, description);
 
             RPGClassManager.addClass(className, rpgClass);

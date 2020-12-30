@@ -13,6 +13,7 @@ import java.util.List;
 public class RPGClass {
     private final ChatColor color;
     private final String name;
+    private final int rank;
     private final int customModelData;
     private final HashMap<AttributeType, Integer> attributeTiers;
     private final HashMap<Integer, Skill> skillSet;
@@ -26,11 +27,12 @@ public class RPGClass {
 
     private final List<String> description;
 
-    public RPGClass(ChatColor color, String name, int customModelData, HashMap<AttributeType, Integer> attributeTiers,
+    public RPGClass(ChatColor color, String name, int rank, int customModelData, HashMap<AttributeType, Integer> attributeTiers,
                     HashMap<Integer, Skill> skillSet, List<ShieldGearType> shieldGearTypes, List<WeaponGearType> weaponGearTypes,
                     List<ArmorGearType> armorGearTypes, boolean hasDefaultOffhand, boolean isDefaultOffhandWeapon, List<String> description) {
         this.color = color;
-        this.name = name;
+        this.name = name.toUpperCase();
+        this.rank = rank;
         this.customModelData = customModelData;
         this.attributeTiers = attributeTiers;
         this.skillSet = skillSet;
@@ -52,6 +54,10 @@ public class RPGClass {
 
     public String getClassStringNoColor() {
         return name;
+    }
+
+    public int getRank() {
+        return rank;
     }
 
     public int getClassIconCustomModelData() {

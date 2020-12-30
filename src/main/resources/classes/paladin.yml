@@ -4,12 +4,13 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
+rank: 1
 color: "GOLD"
 description:
   - "Paladins aids fellow adventurers with"
   - "the holy power of light and beats foes"
   - "by channeling holy wrath."
-classIconCustomModelData: 8
+classIconCustomModelData: 13
 attributeTierFire: 3
 attributeTierWater: 4
 attributeTierEarth: 7

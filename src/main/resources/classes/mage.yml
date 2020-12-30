@@ -4,12 +4,13 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
+rank: 1
 color: "LIGHT_PURPLE"
 description:
   - "The Mage may be frail and weak in body,"
   - "but that is a worthy sacrifice for"
   - "the strength of the mind."
-classIconCustomModelData: 10
+classIconCustomModelData: 16
 attributeTierFire: 1
 attributeTierWater: 4
 attributeTierEarth: 5

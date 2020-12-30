@@ -4,12 +4,13 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
+rank: 1
 color: "BLUE"
 description:
   - "Due to their incredible speed and agility,"
   - "Rogues are an expert at dealing"
   - "damage in a short amount of time!"
-classIconCustomModelData: 11
+classIconCustomModelData: 19
 attributeTierFire: 5
 attributeTierWater: 3
 attributeTierEarth: 6

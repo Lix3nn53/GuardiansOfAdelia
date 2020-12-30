@@ -4,13 +4,14 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
+rank: 1
 color: "YELLOW"
 description:
   - "Monks have such a strong will that never"
   - "falls into despair in any situation."
   - "Due to their unique weapon Monks are"
   - "feared opponents at any distance."
-classIconCustomModelData: 15
+classIconCustomModelData: 17
 attributeTierFire: 4
 attributeTierWater: 4
 attributeTierEarth: 6

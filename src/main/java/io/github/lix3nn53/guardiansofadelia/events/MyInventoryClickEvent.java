@@ -400,10 +400,10 @@ public class MyInventoryClickEvent implements Listener {
             } else if (currentName.equals(ChatColor.GOLD + "Bazaar")) {
                 GuiGeneric bazaar = MenuList.bazaar(player);
                 bazaar.openInventory(player);
-            } else if (currentName.equals(ChatColor.LIGHT_PURPLE + "Donation ♥")) {
+            } else if (currentName.equals(org.bukkit.ChatColor.LIGHT_PURPLE + "WebStore ♥")) {
                 player.closeInventory();
                 TextComponent message = new TextComponent(" Donation ♥ ! (Click Me)");
-                message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://guardiansofadelia.com/#t6"));
+                message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://guardiansofadelia.com/store"));
                 message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.LIGHT_PURPLE + "Click to donate ♥")));
                 message.setColor(ChatColor.LIGHT_PURPLE);
                 message.setBold(true);
@@ -414,6 +414,9 @@ public class MyInventoryClickEvent implements Listener {
             } else if (currentName.equals(org.bukkit.ChatColor.LIGHT_PURPLE + "Instant Teleportation")) {
                 GuiBookGeneric guiBook = InstantTeleportGuiManager.getGuiBook(guardianData);
                 guiBook.openInventory(player);
+            } else if (currentName.equals(org.bukkit.ChatColor.GOLD + "Daily Rewards")) {
+                GuiGeneric dailyRewardsMenu = MenuList.dailyRewardsMenu(player);
+                dailyRewardsMenu.openInventory(player);
             }
         } else if (title.contains("Play Tutorial?")) {
             //Play Tutorial? ClassName CharNo
@@ -466,7 +469,7 @@ public class MyInventoryClickEvent implements Listener {
                 }
             } else {
                 if (currentName.equals(ChatColor.YELLOW + "Class")) {
-                    GuiGeneric classManage = MenuList.classChange(player);
+                    GuiGeneric classManage = MenuList.classManager(player);
                     classManage.openInventory(player);
                 } else if (currentName.equals(ChatColor.LIGHT_PURPLE + "Skills")) {
                     GuiGeneric skill = MenuList.skill(player);
@@ -768,10 +771,10 @@ public class MyInventoryClickEvent implements Listener {
             }
         } else if (title.contains(ChatColor.DARK_GRAY + "Class Manager")) {
             if (rpgCharacter != null) {
-                if (slot == 3) {
-                    GuiGeneric guiGeneric = MenuList.classChange(player);
-                    guiGeneric.openInventory(player);
-                }
+                String[] split = currentName.split("#");
+                int rank = Integer.parseInt(split[1]);
+                GuiGeneric guiGeneric = MenuList.classChange(player, rank);
+                guiGeneric.openInventory(player);
             }
         } else if (title.contains(ChatColor.DARK_GRAY + "Class Change")) {
             if (rpgCharacter != null) {

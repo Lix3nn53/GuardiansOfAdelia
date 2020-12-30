@@ -37,7 +37,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class MenuList {
 
@@ -126,7 +129,7 @@ public class MenuList {
         lore.add(ChatColor.GRAY + "See if the server boost are active or not");
         itemMeta.setLore(lore);
         activeBoosts.setItemMeta(itemMeta);
-        guiGeneric.setItem(48, activeBoosts);
+        guiGeneric.setItem(47, activeBoosts);
 
         ItemStack donation = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(10);
@@ -137,7 +140,17 @@ public class MenuList {
         lore.add(ChatColor.GRAY + "I can keep working on this project. Thanks <3");
         itemMeta.setLore(lore);
         donation.setItemMeta(itemMeta);
-        guiGeneric.setItem(50, donation);
+        guiGeneric.setItem(49, donation);
+
+        ItemStack daily = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(10);
+        itemMeta.setDisplayName(ChatColor.GOLD + "Daily Rewards");
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Gain rewards for being a regular player");
+        itemMeta.setLore(lore);
+        daily.setItemMeta(itemMeta);
+        guiGeneric.setItem(51, daily);
 
         return guiGeneric;
     }
@@ -208,7 +221,69 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric classChange(Player player) {
+    public static GuiGeneric classManager(Player player) {
+        GuiGeneric guiGeneric = null;
+
+        UUID uuid = player.getUniqueId();
+        if (GuardianDataManager.hasGuardianData(uuid)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+            if (guardianData.hasActiveCharacter()) {
+                guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Class Manager", 0);
+
+                RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+
+                String rpgClassStr = rpgCharacter.getRpgClassStr();
+                RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
+                int rank = rpgClass.getRank();
+                int classIconCustomModelData = rpgClass.getClassIconCustomModelData();
+
+                ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                itemMeta.setDisplayName(ChatColor.YELLOW + "Class Info");
+                List<String> lore = new ArrayList<>();
+                lore.add("");
+                lore.add("Class: " + rpgClass.getClassString());
+                lore.add("Rank: " + rank);
+                itemMeta.setLore(lore);
+                itemMeta.setCustomModelData(classIconCustomModelData);
+                itemStack.setItemMeta(itemMeta);
+                guiGeneric.setItem(4, itemStack);
+
+                itemStack = new ItemStack(Material.IRON_BLOCK);
+                itemMeta = itemStack.getItemMeta();
+                itemMeta.setDisplayName(ChatColor.GOLD + "Change Class Rank #1");
+                lore.clear();
+                lore.add("");
+                lore.add("Change to a rank 1 class you have unlocked");
+                itemMeta.setLore(lore);
+                itemStack.setItemMeta(itemMeta);
+                guiGeneric.setItem(20, itemStack);
+
+                itemStack = new ItemStack(Material.GOLD_BLOCK);
+                itemMeta.setDisplayName(ChatColor.GOLD + "Change Class Rank #2");
+                lore.clear();
+                lore.add("");
+                lore.add("Change to a rank 2 class you have unlocked");
+                itemMeta.setLore(lore);
+                itemStack.setItemMeta(itemMeta);
+                guiGeneric.setItem(22, itemStack);
+
+                itemStack = new ItemStack(Material.DIAMOND_BLOCK);
+                itemMeta.setDisplayName(ChatColor.GOLD + "Change Class Rank #3");
+                lore.clear();
+                lore.add("");
+                lore.add("Change to a rank 3 class you have unlocked");
+                itemMeta.setLore(lore);
+                itemStack.setItemMeta(itemMeta);
+                guiGeneric.setItem(24, itemStack);
+            }
+        }
+
+        return guiGeneric;
+    }
+
+    public static GuiGeneric classChange(Player player, int classRank) {
         GuiGeneric guiGeneric = null;
 
         UUID uuid = player.getUniqueId();
@@ -222,13 +297,11 @@ public class MenuList {
 
                 HashMap<String, RPGClassStats> unlockedClasses = rpgCharacter.getUnlockedClasses();
 
-                Set<String> valuesSet = RPGClassManager.getClassNames();
-                List<String> values = new ArrayList<>(valuesSet);
+                List<RPGClass> values = RPGClassManager.getClassesAtRank(classRank);
 
                 int modCounter = 0;
                 for (int i = 0; i < values.size(); i++) {
-                    String valueStr = values.get(i);
-                    RPGClass value = RPGClassManager.getClass(valueStr);
+                    RPGClass value = values.get(i);
                     ItemStack itemStack = new ItemStack(Material.RED_WOOL);
                     ItemMeta itemMeta = itemStack.getItemMeta();
                     String classString = value.getClassString();
@@ -246,6 +319,7 @@ public class MenuList {
                     String wind = ChatColor.WHITE.toString() + attributeTiers.get(AttributeType.WIND);
 
                     List<String> lore = new ArrayList<>(description);
+                    lore.add(ChatColor.RED + "Rank: " + ChatColor.GRAY + classRank);
                     lore.add("");
 
                     lore.add(ChatColor.GREEN + "Attributes");
@@ -267,6 +341,9 @@ public class MenuList {
                     }
 
                     lore.add("");
+
+                    String valueStr = value.getClassStringNoColor();
+
                     if (unlockedClasses.containsKey(valueStr)) {
                         String rpgClassStr = rpgCharacter.getRpgClassStr();
                         if (valueStr.equalsIgnoreCase(rpgClassStr)) {

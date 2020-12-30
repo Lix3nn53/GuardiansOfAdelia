@@ -4,12 +4,13 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
+rank: 1
 color: "AQUA"
 description:
   - "The powerhouse and mainstay of any party."
   - "Knights battle foes at close range while"
   - "allies support them from all sides."
-classIconCustomModelData: 9
+classIconCustomModelData: 15
 attributeTierFire: 3
 attributeTierWater: 3
 attributeTierEarth: 9
