@@ -13,6 +13,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,25 +21,16 @@ import java.util.List;
 public class HologramMechanic extends MechanicComponent {
 
     private final Material HELMET;
-    private final int CUSTOMMODELDATA;
+    private final int CUSTOM_MODEL_DATA;
     private final List<Integer> DURATION;
-    private String DISPLAYTEXT = "displayText";
-    private boolean SAVE = false;
-
-    public HologramMechanic(Material helmet, int custommodeldata, List<Integer> seconds, boolean save) {
-        HELMET = helmet;
-        CUSTOMMODELDATA = custommodeldata;
-        DURATION = seconds;
-        SAVE = save;
-    }
-
-    public HologramMechanic(Material helmet, int custommodeldata, List<Integer> seconds, String displayText, boolean save) {
-        HELMET = helmet;
-        CUSTOMMODELDATA = custommodeldata;
-        DURATION = seconds;
-        DISPLAYTEXT = displayText;
-        SAVE = save;
-    }
+    private final String DISPLAY_TEXT;
+    private final boolean GRAVITY;
+    private final boolean MARKER;
+    private final boolean SAVE;
+    private final double speed;
+    private final double right;
+    private final double upward;
+    private final double forward;
 
     public HologramMechanic(ConfigurationSection configurationSection) {
         if (!configurationSection.contains("helmetType")) {
@@ -54,15 +46,52 @@ public class HologramMechanic extends MechanicComponent {
         }
 
         this.HELMET = Material.valueOf(configurationSection.getString("helmetType"));
-        this.CUSTOMMODELDATA = configurationSection.getInt("customModelData");
+        this.CUSTOM_MODEL_DATA = configurationSection.getInt("customModelData");
         this.DURATION = configurationSection.getIntegerList("durations");
 
         if (configurationSection.contains("displayText")) {
-            this.DISPLAYTEXT = configurationSection.getString("displayText");
+            this.DISPLAY_TEXT = configurationSection.getString("displayText");
+        } else {
+            this.DISPLAY_TEXT = null;
+        }
+
+        if (configurationSection.contains("gravity")) {
+            this.GRAVITY = configurationSection.getBoolean("gravity");
+        } else {
+            this.GRAVITY = false;
+        }
+
+        if (configurationSection.contains("marker")) {
+            this.MARKER = configurationSection.getBoolean("marker");
+        } else {
+            this.MARKER = true;
+        }
+
+        if (configurationSection.contains("speed")) {
+            this.speed = configurationSection.getDouble("speed");
+        } else {
+            this.speed = 0;
+        }
+        if (configurationSection.contains("right")) {
+            this.right = configurationSection.getDouble("right");
+        } else {
+            this.right = 0;
+        }
+        if (configurationSection.contains("upward")) {
+            this.upward = configurationSection.getDouble("upward");
+        } else {
+            this.upward = 0;
+        }
+        if (configurationSection.contains("forward")) {
+            this.forward = configurationSection.getDouble("forward");
+        } else {
+            this.forward = 0;
         }
 
         if (configurationSection.contains("save")) {
             this.SAVE = configurationSection.getBoolean("save");
+        } else {
+            this.SAVE = false;
         }
     }
 
@@ -80,30 +109,44 @@ public class HologramMechanic extends MechanicComponent {
         List<LivingEntity> armorStandList = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            Location baseLocation = target.getLocation();
+            Location baseLocation = target.getLocation().clone();
+            GuardiansOfAdelia.getInstance().getLogger().info("baseLocation: " + baseLocation.toString());
 
+            Vector looking = baseLocation.getDirection().setY(0).normalize();
+            Vector normal = looking.clone().crossProduct(UP);
+
+            looking.multiply(forward).add(normal.multiply(right));
+            baseLocation.add(looking).add(0, upward + 0.5, 0);
+
+            GuardiansOfAdelia.getInstance().getLogger().info("next baseLocation: " + baseLocation.toString());
             ArmorStand model = (ArmorStand) baseLocation.getWorld().spawnEntity(baseLocation, EntityType.ARMOR_STAND);
+            model.setVisible(false);
+            model.setInvulnerable(true);
+            model.setSmall(true);
+            model.setGravity(GRAVITY);
+            model.setMarker(MARKER);
+
             if (HELMET != null) {
                 ItemStack itemStack = new ItemStack(HELMET);
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(CUSTOMMODELDATA);
-                itemMeta.setUnbreakable(true);
+
+                itemMeta.setCustomModelData(CUSTOM_MODEL_DATA);
                 itemStack.setItemMeta(itemMeta);
+
                 EntityEquipment equipment = model.getEquipment();
                 equipment.setHelmet(itemStack);
             }
 
-            if (!DISPLAYTEXT.equals("displayText")) {
-                final String text = DISPLAYTEXT.replaceAll("%caster%", caster.getName());
+            if (DISPLAY_TEXT != null) {
+                final String text = DISPLAY_TEXT.replaceAll("%caster%", caster.getName());
                 model.setCustomName(text);
                 model.setCustomNameVisible(true);
             }
 
-            model.setInvulnerable(true);
-            model.setGravity(false);
-            model.setVisible(false);
-            model.setSmall(true);
-            model.setMarker(true);
+            if (speed != 0) {
+                Vector dir = target.getLocation().getDirection();
+                model.setVelocity(dir.multiply(speed));
+            }
 
             if (SAVE) {
                 SkillDataManager.onSkillEntityCreateWithSaveOption(caster, model, castCounter);
@@ -120,7 +163,7 @@ public class HologramMechanic extends MechanicComponent {
                 }
             }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * DURATION.get(skillLevel - 1));
 
-            //pass ArmorStand to children
+            //pass ArmorStand to children as target
             armorStandList.add(model);
         }
 

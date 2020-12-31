@@ -272,7 +272,7 @@ public class ProjectileMechanic extends MechanicComponent {
                 for (Vector d : dirs) {
                     Projectile p = caster.launchProjectile(projectileType);
 
-                    PersistentDataContainerUtil.putString("skillCastKey", skillKey.toString(), p); //put skill key
+                    PersistentDataContainerUtil.putString("skillCastKey", skillKey.toString(), p); //put skillCastKey to projectile entity
                     changeToParticleProjectile(p);
 
                     if (projectileType != Arrow.class) {

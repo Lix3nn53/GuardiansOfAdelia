@@ -1091,7 +1091,7 @@ public class RPGCharacterStats {
         for (GearSet gearSet : newGearSets) {
             if (GearSetManager.hasEffect(gearSet)) {
                 player.sendMessage(ChatColor.DARK_PURPLE + "Gear Set Effect Activation: "
-                        + ChatColor.LIGHT_PURPLE + gearSet.getName() + " [" + gearSet.getPieceCount() + "pieces]");
+                        + ChatColor.LIGHT_PURPLE + gearSet.getName() + " [" + gearSet.getPieceCount() + " pieces]");
 
                 List<GearSetEffect> gearSetEffects = GearSetManager.getEffects(gearSet);
                 for (GearSetEffect gearSetEffect : gearSetEffects) {
