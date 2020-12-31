@@ -29,7 +29,7 @@ public enum Consumable {
     POTION_INSTANT_HYBRID,
     POTION_REGENERATION_HEALTH;
 
-    private final double HYBIRD_NERF = 0.6;
+    private final double HYBRID_NERF = 0.6;
     private final double REGEN_NERF = 0.1;
 
     public void consume(Player player, int skillLevel, ItemStack itemStack) {
@@ -119,7 +119,7 @@ public enum Consumable {
                 healAmounts.add(getInstantHealAmount(8));
                 healAmounts.add(getInstantHealAmount(9));
                 healAmounts.add(getInstantHealAmount(10));
-                list.add(new HealMechanic(healAmounts, new ArrayList<>()));
+                list.add(new HealMechanic(healAmounts, new ArrayList<>(), null));
                 break;
             case POTION_INSTANT_MANA:
                 List<Integer> manaAmounts = new ArrayList<>();
@@ -133,33 +133,33 @@ public enum Consumable {
                 manaAmounts.add(getInstantManaAmount(8));
                 manaAmounts.add(getInstantManaAmount(9));
                 manaAmounts.add(getInstantManaAmount(10));
-                list.add(new ManaMechanic(manaAmounts, new ArrayList<>()));
+                list.add(new ManaMechanic(manaAmounts, new ArrayList<>(), null));
                 break;
             case POTION_INSTANT_HYBRID:
                 healAmounts = new ArrayList<>();
-                healAmounts.add((int) (getInstantHealAmount(1) * HYBIRD_NERF));
-                healAmounts.add((int) (getInstantHealAmount(2) * HYBIRD_NERF));
-                healAmounts.add((int) (getInstantHealAmount(3) * HYBIRD_NERF));
-                healAmounts.add((int) (getInstantHealAmount(4) * HYBIRD_NERF));
-                healAmounts.add((int) (getInstantHealAmount(5) * HYBIRD_NERF));
-                healAmounts.add((int) (getInstantHealAmount(6) * HYBIRD_NERF));
-                healAmounts.add((int) (getInstantHealAmount(7) * HYBIRD_NERF));
-                healAmounts.add((int) (getInstantHealAmount(8) * HYBIRD_NERF));
-                healAmounts.add((int) (getInstantHealAmount(9) * HYBIRD_NERF));
-                healAmounts.add((int) (getInstantHealAmount(10) * HYBIRD_NERF));
-                list.add(new HealMechanic(healAmounts, new ArrayList<>()));
+                healAmounts.add((int) (getInstantHealAmount(1) * HYBRID_NERF));
+                healAmounts.add((int) (getInstantHealAmount(2) * HYBRID_NERF));
+                healAmounts.add((int) (getInstantHealAmount(3) * HYBRID_NERF));
+                healAmounts.add((int) (getInstantHealAmount(4) * HYBRID_NERF));
+                healAmounts.add((int) (getInstantHealAmount(5) * HYBRID_NERF));
+                healAmounts.add((int) (getInstantHealAmount(6) * HYBRID_NERF));
+                healAmounts.add((int) (getInstantHealAmount(7) * HYBRID_NERF));
+                healAmounts.add((int) (getInstantHealAmount(8) * HYBRID_NERF));
+                healAmounts.add((int) (getInstantHealAmount(9) * HYBRID_NERF));
+                healAmounts.add((int) (getInstantHealAmount(10) * HYBRID_NERF));
+                list.add(new HealMechanic(healAmounts, new ArrayList<>(), null));
                 manaAmounts = new ArrayList<>();
-                manaAmounts.add((int) (getInstantManaAmount(1) * HYBIRD_NERF));
-                manaAmounts.add((int) (getInstantManaAmount(2) * HYBIRD_NERF));
-                manaAmounts.add((int) (getInstantManaAmount(3) * HYBIRD_NERF));
-                manaAmounts.add((int) (getInstantManaAmount(4) * HYBIRD_NERF));
-                manaAmounts.add((int) (getInstantManaAmount(5) * HYBIRD_NERF));
-                manaAmounts.add((int) (getInstantManaAmount(6) * HYBIRD_NERF));
-                manaAmounts.add((int) (getInstantManaAmount(7) * HYBIRD_NERF));
-                manaAmounts.add((int) (getInstantManaAmount(8) * HYBIRD_NERF));
-                manaAmounts.add((int) (getInstantManaAmount(9) * HYBIRD_NERF));
-                manaAmounts.add((int) (getInstantManaAmount(10) * HYBIRD_NERF));
-                list.add(new ManaMechanic(manaAmounts, new ArrayList<>()));
+                manaAmounts.add((int) (getInstantManaAmount(1) * HYBRID_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(2) * HYBRID_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(3) * HYBRID_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(4) * HYBRID_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(5) * HYBRID_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(6) * HYBRID_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(7) * HYBRID_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(8) * HYBRID_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(9) * HYBRID_NERF));
+                manaAmounts.add((int) (getInstantManaAmount(10) * HYBRID_NERF));
+                list.add(new ManaMechanic(manaAmounts, new ArrayList<>(), null));
                 break;
             case POTION_REGENERATION_HEALTH:
                 List<Integer> repetitions = new ArrayList<>();
@@ -185,7 +185,7 @@ public enum Consumable {
                 healAmounts.add((int) (getInstantHealAmount(8) * REGEN_NERF));
                 healAmounts.add((int) (getInstantHealAmount(9) * REGEN_NERF));
                 healAmounts.add((int) (getInstantHealAmount(10) * REGEN_NERF));
-                repeatMechanic.addChildren(new HealMechanic(healAmounts, new ArrayList<>()));
+                repeatMechanic.addChildren(new HealMechanic(healAmounts, new ArrayList<>(), null));
                 list.add(repeatMechanic);
                 break;
         }
@@ -332,8 +332,8 @@ public enum Consumable {
                 lore.add(ChatColor.AQUA + "Restores: " + getInstantManaAmount(level));
                 break;
             case POTION_INSTANT_HYBRID:
-                lore.add(ChatColor.RED + "Restores: " + (int) (getInstantHealAmount(level) * HYBIRD_NERF));
-                lore.add(ChatColor.AQUA + "Restores: " + (int) (getInstantManaAmount(level) * HYBIRD_NERF));
+                lore.add(ChatColor.RED + "Restores: " + (int) (getInstantHealAmount(level) * HYBRID_NERF));
+                lore.add(ChatColor.AQUA + "Restores: " + (int) (getInstantManaAmount(level) * HYBRID_NERF));
                 break;
             case POTION_REGENERATION_HEALTH:
                 lore.add(ChatColor.RED + "Restores: " + (int) (getInstantHealAmount(level) * REGEN_NERF));

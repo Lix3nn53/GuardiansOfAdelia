@@ -4,12 +4,14 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,10 +19,12 @@ public class ManaMechanic extends MechanicComponent {
 
     private final List<Integer> manaAmount;
     private final List<Double> manaPercent;
+    private final String multiplyWithValue;
 
-    public ManaMechanic(List<Integer> manaAmount, List<Double> manaPercent) {
+    public ManaMechanic(List<Integer> manaAmount, List<Double> manaPercent, @Nullable String multiplyWithValue) {
         this.manaAmount = manaAmount;
         this.manaPercent = manaPercent;
+        this.multiplyWithValue = multiplyWithValue;
     }
 
     public ManaMechanic(ConfigurationSection configurationSection) {
@@ -30,6 +34,12 @@ public class ManaMechanic extends MechanicComponent {
 
         if (!configurationSection.contains("healPercentList")) {
             configLoadError("healPercentList");
+        }
+
+        if (configurationSection.contains("multiplyWithValue")) {
+            this.multiplyWithValue = configurationSection.getString("multiplyWithValue");
+        } else {
+            this.multiplyWithValue = null;
         }
 
         this.manaAmount = configurationSection.getIntegerList("healAmountList");
@@ -57,17 +67,25 @@ public class ManaMechanic extends MechanicComponent {
 
                         if (currentMana == maxMana) continue;
 
-                        double nextMana = currentMana + manaAmount.get(skillLevel - 1);
-
+                        int fillAmount = 0;
                         if (!manaPercent.isEmpty()) {
-                            nextMana = nextMana + (maxMana * manaPercent.get(skillLevel - 1));
+                            fillAmount = manaAmount.get(skillLevel - 1);
                         }
+                        if (!manaPercent.isEmpty()) {
+                            fillAmount = (int) (maxMana * manaPercent.get(skillLevel - 1) + 0.5);
+                        }
+                        if (multiplyWithValue != null) {
+                            int multiply = SkillDataManager.getValue(caster, multiplyWithValue);
+                            fillAmount *= multiply;
+                        }
+
+                        int nextMana = currentMana + fillAmount;
 
                         if (nextMana > maxMana) {
-                            nextMana = maxMana;
+                            nextMana = (int) maxMana;
                         }
 
-                        rpgCharacterStats.setCurrentMana((int) nextMana);
+                        rpgCharacterStats.setCurrentMana(nextMana);
                         manaFilled = true;
                     }
                 }

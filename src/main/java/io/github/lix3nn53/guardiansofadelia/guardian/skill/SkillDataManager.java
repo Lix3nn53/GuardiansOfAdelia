@@ -16,8 +16,8 @@ public class SkillDataManager {
 
     private static final HashMap<LivingEntity, HashMap<String, Integer>> keyEntityPlusKeyToValue = new HashMap<>();
     private static final HashMap<LivingEntity, HashSet<String>> keyEntityToSkillFlags = new HashMap<>();
-    private static final HashMap<LivingEntity, HashMap<Integer, BukkitTask>> keyEntityPlusCastCounterToRepeatTask = new HashMap<>();
-    private static final HashMap<LivingEntity, HashMap<Integer, List<Entity>>> keyEntityPlusCastCounterToSavedEntities = new HashMap<>();
+    private static final HashMap<LivingEntity, HashMap<Integer, BukkitTask>> keyEntityToCastCounterToRepeatTask = new HashMap<>();
+    private static final HashMap<LivingEntity, HashMap<Integer, List<Entity>>> keyEntityToCastCounterToSavedEntities = new HashMap<>();
 
     public static void setValue(LivingEntity keyEntity, String key, int value) {
         if (keyEntityPlusKeyToValue.containsKey(keyEntity)) {
@@ -86,29 +86,29 @@ public class SkillDataManager {
     }
 
     public static void onRepeatTaskCreate(LivingEntity keyEntity, BukkitTask bukkitTask, int castCounter) {
-        if (keyEntityPlusCastCounterToRepeatTask.containsKey(keyEntity)) {
-            HashMap<Integer, BukkitTask> hashMap = keyEntityPlusCastCounterToRepeatTask.get(keyEntity);
+        if (keyEntityToCastCounterToRepeatTask.containsKey(keyEntity)) {
+            HashMap<Integer, BukkitTask> hashMap = keyEntityToCastCounterToRepeatTask.get(keyEntity);
             hashMap.put(castCounter, bukkitTask);
         } else {
             HashMap<Integer, BukkitTask> hashMap = new HashMap<>();
             hashMap.put(castCounter, bukkitTask);
-            keyEntityPlusCastCounterToRepeatTask.put(keyEntity, hashMap);
+            keyEntityToCastCounterToRepeatTask.put(keyEntity, hashMap);
         }
     }
 
     public static void removeRepeatTask(LivingEntity keyEntity, int castCounter) {
-        if (keyEntityPlusCastCounterToRepeatTask.containsKey(keyEntity)) {
-            HashMap<Integer, BukkitTask> hashMap = keyEntityPlusCastCounterToRepeatTask.get(keyEntity);
+        if (keyEntityToCastCounterToRepeatTask.containsKey(keyEntity)) {
+            HashMap<Integer, BukkitTask> hashMap = keyEntityToCastCounterToRepeatTask.get(keyEntity);
             hashMap.remove(castCounter);
             if (hashMap.isEmpty()) {
-                keyEntityPlusCastCounterToRepeatTask.remove(keyEntity);
+                keyEntityToCastCounterToRepeatTask.remove(keyEntity);
             }
         }
     }
 
     public static void stopRepeatTasksOfCast(LivingEntity keyEntity, int castCounter) {
-        if (keyEntityPlusCastCounterToRepeatTask.containsKey(keyEntity)) {
-            HashMap<Integer, BukkitTask> hashMap = keyEntityPlusCastCounterToRepeatTask.get(keyEntity);
+        if (keyEntityToCastCounterToRepeatTask.containsKey(keyEntity)) {
+            HashMap<Integer, BukkitTask> hashMap = keyEntityToCastCounterToRepeatTask.get(keyEntity);
 
             if (hashMap.containsKey(castCounter)) {
                 BukkitTask bukkitTask = hashMap.get(castCounter);
@@ -117,15 +117,15 @@ public class SkillDataManager {
                 hashMap.remove(castCounter);
 
                 if (hashMap.isEmpty()) {
-                    keyEntityPlusCastCounterToRepeatTask.remove(keyEntity);
+                    keyEntityToCastCounterToRepeatTask.remove(keyEntity);
                 }
             }
         }
     }
 
     public static void onSkillEntityCreateWithSaveOption(LivingEntity keyEntity, Entity created, int castCounter) {
-        if (keyEntityPlusCastCounterToSavedEntities.containsKey(keyEntity)) {
-            HashMap<Integer, List<Entity>> hashMap = keyEntityPlusCastCounterToSavedEntities.get(keyEntity);
+        if (keyEntityToCastCounterToSavedEntities.containsKey(keyEntity)) {
+            HashMap<Integer, List<Entity>> hashMap = keyEntityToCastCounterToSavedEntities.get(keyEntity);
 
             List<Entity> entities;
             if (hashMap.containsKey(castCounter)) {
@@ -141,26 +141,26 @@ public class SkillDataManager {
             List<Entity> entities = new ArrayList<>();
             entities.add(created);
             hashMap.put(castCounter, entities);
-            keyEntityPlusCastCounterToSavedEntities.put(keyEntity, hashMap);
+            keyEntityToCastCounterToSavedEntities.put(keyEntity, hashMap);
         }
     }
 
     public static void removeSavedEntities(LivingEntity keyEntity, int castCounter) {
-        if (keyEntityPlusCastCounterToSavedEntities.containsKey(keyEntity)) {
-            HashMap<Integer, List<Entity>> hashMap = keyEntityPlusCastCounterToSavedEntities.get(keyEntity);
-            List<Entity> removedEntities = hashMap.remove(castCounter);
+        if (keyEntityToCastCounterToSavedEntities.containsKey(keyEntity)) {
+            HashMap<Integer, List<Entity>> castCounterToSavedEntities = keyEntityToCastCounterToSavedEntities.get(keyEntity);
+            List<Entity> removedEntities = castCounterToSavedEntities.remove(castCounter);
             for (Entity removed : removedEntities) {
                 removed.remove();
             }
-            if (hashMap.isEmpty()) {
-                keyEntityPlusCastCounterToSavedEntities.remove(keyEntity);
+            if (castCounterToSavedEntities.isEmpty()) {
+                keyEntityToCastCounterToSavedEntities.remove(keyEntity);
             }
         }
     }
 
     public static void removeSavedEntity(LivingEntity keyEntity, int castCounter, Entity toRemove) {
-        if (keyEntityPlusCastCounterToSavedEntities.containsKey(keyEntity)) {
-            HashMap<Integer, List<Entity>> hashMap = keyEntityPlusCastCounterToSavedEntities.get(keyEntity);
+        if (keyEntityToCastCounterToSavedEntities.containsKey(keyEntity)) {
+            HashMap<Integer, List<Entity>> hashMap = keyEntityToCastCounterToSavedEntities.get(keyEntity);
             List<Entity> entities = hashMap.get(castCounter);
 
             if (entities == null) {
@@ -186,7 +186,7 @@ public class SkillDataManager {
      */
     public static void onPlayerQuit(Player player) {
         keyEntityToSkillFlags.remove(player);
-        keyEntityPlusCastCounterToRepeatTask.remove(player);
+        keyEntityToCastCounterToRepeatTask.remove(player);
         keyEntityPlusKeyToValue.remove(player);
     }
 
@@ -197,7 +197,7 @@ public class SkillDataManager {
      */
     public static void onEntityDeath(LivingEntity livingEntity) {
         keyEntityToSkillFlags.remove(livingEntity);
-        keyEntityPlusCastCounterToRepeatTask.remove(livingEntity);
+        keyEntityToCastCounterToRepeatTask.remove(livingEntity);
         keyEntityPlusKeyToValue.remove(livingEntity);
     }
 }
