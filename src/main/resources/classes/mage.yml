@@ -4,7 +4,7 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
-rank: 1
+tier: 3
 color: "LIGHT_PURPLE"
 description:
   - "The Mage may be frail and weak in body,"
@@ -26,7 +26,7 @@ armorGearTypes:
 hasDefaultOffhand: false
 skillOne:
   name: "Fireball"
-  customModelData: 12
+  customModelData: 27
   description:
     - "Shoot a fireball that deals damage to"
     - "targets in area if it hits a target."
@@ -92,7 +92,7 @@ skillOne:
       goaSound: "SKILL_FIRE_SLASH"
 skillTwo:
   name: "Lightning Bolt"
-  customModelData: 6
+  customModelData: 55
   description:
     - "Shoot a lightning bolt that deals damage, silences"
     - "and confuses targets in area if it hits a target."
@@ -161,11 +161,17 @@ skillTwo:
         child2:
           componentType: "ParticleMechanic"
           type: "REDSTONE"
-          radius: 3.4
           amount: 11
           upward: 1
           dustColor: 32896
           dustSize: 4
+          radius:
+            - 3
+            - 3.5
+            - 3
+            - 3.25
+            - 3.5
+            - 4
         child3:
           componentType: "SilenceMechanic"
           durations:
@@ -198,15 +204,21 @@ skillTwo:
       child3:
         componentType: "ParticleMechanic"
         type: "VILLAGER_HAPPY"
-        radius: 3.4
         amount: 11
         upward: 0.5
+        radius:
+          - 3
+          - 3.5
+          - 3
+          - 3.25
+          - 3.5
+          - 4
     child2:
       componentType: "SoundMechanic"
       goaSound: "SKILL_LIGHTNING_NORMAL"
 skillThree:
   name: "Shockwave"
-  customModelData: 11
+  customModelData: 44
   description:
     - "Push nearby enemies away."
   manaCosts:
@@ -252,9 +264,15 @@ skillThree:
       child2:
         componentType: "ParticleMechanic"
         type: "EXPLOSION_LARGE"
-        radius: 1.2
         amount: 1
         upward: 0.5
+        radius:
+          - 3
+          - 3.5
+          - 3
+          - 3.25
+          - 3.5
+          - 4
       child3:
         componentType: "SelfTarget"
         child1:
@@ -262,7 +280,7 @@ skillThree:
           goaSound: "SKILL_SONIC_BOOM"
 skillPassive:
   name: "Mental Fortitude"
-  customModelData: 10
+  customModelData: 61
   description:
     - "When you took melee damage when"
     - "your health is low root nearby targets."
@@ -326,11 +344,17 @@ skillPassive:
           child2:
             componentType: "ParticleMechanic"
             type: "REDSTONE"
-            radius: 3.4
             amount: 11
             upward: 1
             dustColor: 65535
             dustSize: 2
+            radius:
+              - 3
+              - 3.5
+              - 3
+              - 3.25
+              - 3.5
+              - 4
 skillUltimate:
   name: "Chaos Meteor"
   customModelData: 30
@@ -453,9 +477,15 @@ skillUltimate:
         child2:
           componentType: "ParticleMechanic"
           type: "EXPLOSION_HUGE"
-          radius: 4
           amount: 4
           upward: 1
+          radius:
+            - 3
+            - 3.5
+            - 3
+            - 3.25
+            - 3.5
+            - 4
         child3:
           componentType: "SoundMechanic"
           goaSound: "SKILL_FIRE_AURA"

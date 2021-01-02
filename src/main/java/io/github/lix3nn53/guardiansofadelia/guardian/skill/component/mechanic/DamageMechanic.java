@@ -48,14 +48,18 @@ public class DamageMechanic extends MechanicComponent {
         double calcDamage = damageList.get(skillLevel - 1);
 
         if (multiplyWithValue != null) {
-            int multiply = SkillDataManager.getValue(caster, multiplyWithValue);
-            calcDamage *= multiply;
+            int value = SkillDataManager.getValue(caster, multiplyWithValue);
+            calcDamage *= value;
         }
 
-        for (LivingEntity ent : targets) {
-            SkillUtils.setDamageType(damageType);
-            ent.setNoDamageTicks(0);
-            ent.damage(calcDamage, caster);
+        if (calcDamage > 0) {
+            for (LivingEntity ent : targets) {
+                SkillUtils.setDamageType(damageType);
+                ent.setNoDamageTicks(0);
+                ent.damage(calcDamage, caster);
+            }
+        } else {
+            return false;
         }
 
         return true;

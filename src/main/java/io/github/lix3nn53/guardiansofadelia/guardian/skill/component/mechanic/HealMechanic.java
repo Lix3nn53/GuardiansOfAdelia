@@ -12,6 +12,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HealMechanic extends MechanicComponent {
@@ -27,12 +28,20 @@ public class HealMechanic extends MechanicComponent {
     }
 
     public HealMechanic(ConfigurationSection configurationSection) {
-        if (!configurationSection.contains("healAmountList")) {
-            configLoadError("healAmountList");
+        if (!configurationSection.contains("healAmountList") && !configurationSection.contains("healPercentList")) {
+            configLoadError("healAmountList and healPercentList");
         }
 
-        if (!configurationSection.contains("healPercentList")) {
-            configLoadError("healPercentList");
+        if (configurationSection.contains("healAmountList")) {
+            this.healAmountList = configurationSection.getIntegerList("healAmountList");
+        } else {
+            this.healAmountList = new ArrayList<>();
+        }
+
+        if (configurationSection.contains("healPercentList")) {
+            this.healPercentList = configurationSection.getDoubleList("healPercentList");
+        } else {
+            this.healPercentList = new ArrayList<>();
         }
 
         if (configurationSection.contains("multiplyWithValue")) {
@@ -41,8 +50,6 @@ public class HealMechanic extends MechanicComponent {
             this.multiplyWithValue = null;
         }
 
-        this.healAmountList = configurationSection.getIntegerList("healAmountList");
-        this.healPercentList = configurationSection.getDoubleList("healPercentList");
     }
 
     @Override
@@ -68,8 +75,12 @@ public class HealMechanic extends MechanicComponent {
                 healAmount = (int) (maxHealth * healPercentList.get(skillLevel - 1) + 0.5);
             }
             if (multiplyWithValue != null) {
-                int multiply = SkillDataManager.getValue(caster, multiplyWithValue);
-                healAmount *= multiply;
+                int value = SkillDataManager.getValue(caster, multiplyWithValue);
+                healAmount *= value;
+            }
+
+            if (healAmount <= 0) {
+                return false;
             }
 
             double nextHealth = currentHealth + healAmount;
@@ -81,7 +92,7 @@ public class HealMechanic extends MechanicComponent {
             ent.setHealth(nextHealth);
             healed = true;
 
-            //update partyboard
+            // Update party scoreboard
             if (ent instanceof Player) {
                 Player player = (Player) ent;
 

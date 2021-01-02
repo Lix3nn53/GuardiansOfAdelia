@@ -4,7 +4,7 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
-rank: 1
+tier: 1
 color: "GOLD"
 description:
   - "Paladins aids fellow adventurers with"

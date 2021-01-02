@@ -4,7 +4,7 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
-rank: 1
+tier: 3
 color: "DARK_GREEN"
 description:
   - "Their hunting techniques"
@@ -25,7 +25,7 @@ armorGearTypes:
 hasDefaultOffhand: false
 skillOne:
   name: "Explosive Arrow"
-  customModelData: 20
+  customModelData: 18
   description:
     - "Shoot an arrow that deals area"
     - "damage and pushes targets"
@@ -107,9 +107,15 @@ skillOne:
       child2:
         componentType: "ParticleMechanic"
         type: "EXPLOSION_HUGE"
-        radius: 3.4
         amount: 2
         upward: 0.5
+        radius:
+          - 3
+          - 3.5
+          - 3
+          - 3.25
+          - 3.5
+          - 4
       child3:
         componentType: "SoundMechanic"
         goaSound: "SKILL_WIND_PUSH"
@@ -118,7 +124,7 @@ skillOne:
       goaSound: "SKILL_PROJECTILE_ICE"
 skillTwo:
   name: "Volley"
-  customModelData: 22
+  customModelData: 15
   description:
     - "Fire multiple arrows in a cone"
   manaCosts:
@@ -176,7 +182,7 @@ skillTwo:
       goaSound: "SKILL_MULTI_ARROW"
 skillThree:
   name: "Hookshot"
-  customModelData: 32
+  customModelData: 46
   description:
     - "Fire a grapple particle projectile."
     - "If it collides with terrain dash towards it,"
@@ -249,7 +255,7 @@ skillThree:
         delay: 5
 skillPassive:
   name: "Piercing Arrow"
-  customModelData: 21
+  customModelData: 17
   description:
     - "Your arrows shot from crossbows pierces through targets"
   manaCosts:
@@ -279,7 +285,7 @@ skillPassive:
         - 6
 skillUltimate:
   name: "Bear Trap"
-  customModelData: 55
+  customModelData: 35
   description:
     - "Place a trap that triggers when"
     - "an enemy steps on it."
@@ -345,9 +351,15 @@ skillUltimate:
             child1:
               componentType: "ParticleMechanic"
               type: "EXPLOSION_LARGE"
-              radius: 1.4
               amount: 2
               upward: 0.8
+              radius:
+                - 3
+                - 3.5
+                - 3
+                - 3.25
+                - 3.5
+                - 4
             child2:
               componentType: "DisarmMechanic"
               durations:

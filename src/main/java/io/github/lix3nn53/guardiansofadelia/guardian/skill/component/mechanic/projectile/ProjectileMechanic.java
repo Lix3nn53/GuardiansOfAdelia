@@ -56,7 +56,7 @@ public class ProjectileMechanic extends MechanicComponent {
 
     //very custom things
     private boolean addCasterAsFirstTargetIfHitSuccess;
-    private boolean addCasterAsSecondTargetIfHitFail;
+    private boolean addCasterAsSecondTargetIfHitFail; // First target is empty entity at hit location
 
     /**
      * For spread types Cone and Horizontal_Cone, normal projectile

@@ -79,6 +79,10 @@ public class ManaMechanic extends MechanicComponent {
                             fillAmount *= multiply;
                         }
 
+                        if (fillAmount <= 0) {
+                            return false;
+                        }
+
                         int nextMana = currentMana + fillAmount;
 
                         if (nextMana > maxMana) {

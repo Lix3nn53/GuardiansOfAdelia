@@ -19,15 +19,15 @@ public class RPGClassManager {
         return rpgClassMap.get(className.toUpperCase());
     }
 
-    public static List<RPGClass> getClassesAtRank(int rank) {
+    public static List<RPGClass> getClassesAtTier(int tier) {
         List<RPGClass> classes = new ArrayList<>();
 
         for (String classStr : rpgClassMap.keySet()) {
             RPGClass rpgClass = rpgClassMap.get(classStr);
 
-            int rankOfCurrent = rpgClass.getRank();
+            int tierOfCurrent = rpgClass.getTier();
 
-            if (rankOfCurrent == rank) {
+            if (tierOfCurrent == tier) {
                 classes.add(rpgClass);
             }
         }

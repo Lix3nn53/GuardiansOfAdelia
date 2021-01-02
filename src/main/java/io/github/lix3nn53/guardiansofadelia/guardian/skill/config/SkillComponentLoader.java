@@ -64,7 +64,9 @@ public class SkillComponentLoader {
         } else if (componentType.equals(SpawnEntityMechanic.class.getSimpleName())) {
             return new SpawnEntityMechanic(configurationSection);
         } else if (componentType.equals(SelfTarget.class.getSimpleName())) {
-            return new SelfTarget();
+            return new SelfTarget(configurationSection);
+        } else if (componentType.equals(SavedEntitiesTarget.class.getSimpleName())) {
+            return new SavedEntitiesTarget(configurationSection);
         } else if (componentType.equals(PushMechanic.class.getSimpleName())) {
             return new PushMechanic(configurationSection);
         } else if (componentType.equals(PotionEffectMechanic.class.getSimpleName())) {

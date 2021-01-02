@@ -4,7 +4,7 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
-rank: 1
+tier: 3
 color: "RED"
 description:
   - "Thanks to their strength, fearlessness and"
@@ -27,7 +27,7 @@ armorGearTypes:
 hasDefaultOffhand: false
 skillOne:
   name: "Power Slash"
-  customModelData: 15
+  customModelData: 8
   description:
     - "Deal damage to nearby enemies"
   manaCosts:
@@ -77,11 +77,17 @@ skillOne:
         child2:
           componentType: "ParticleMechanic"
           type: "VILLAGER_ANGRY"
-          radius: 3
           amount: 20
+          radius:
+            - 3
+            - 3.5
+            - 3
+            - 3.25
+            - 3.5
+            - 4
 skillTwo:
   name: "Flame Burst"
-  customModelData: 57
+  customModelData: 28
   description:
     - "Shoot a flame-burst that launches"
     - "a target into the sky"
@@ -172,7 +178,7 @@ skillTwo:
       goaSound: "SKILL_FIRE_SLASH"
 skillThree:
   name: "Victory Flag"
-  customModelData: 9
+  customModelData: 22
   description:
     - "Place a flag at your location that"
     - "gives damage buff to nearby allies"
@@ -264,15 +270,21 @@ skillThree:
         child2:
           componentType: "ParticleMechanic"
           type: "CRIT"
-          radius: 2.4
           amount: 7
           upward: 1.8
+          radius:
+            - 3
+            - 3.5
+            - 3
+            - 3.25
+            - 3.5
+            - 4
     child2:
       componentType: "SoundMechanic"
       goaSound: "SKILL_BUFF"
 skillPassive:
   name: "Death Rattle"
-  customModelData: 47
+  customModelData: 32
   description:
     - "If you take physical damage that leaves you with less than 15% health,"
     - "unleash your rage and gain movement speed and jump boost."
@@ -344,7 +356,7 @@ skillPassive:
             dustSize: 8
 skillUltimate:
   name: "Grand Skyfall"
-  customModelData: 44
+  customModelData: 23
   description:
     - "Jump forward into the air. When you land deal"
     - "damage and launch nearby enemies into the sky."
@@ -414,8 +426,14 @@ skillUltimate:
       child1:
         componentType: "ParticleMechanic"
         type: "VILLAGER_ANGRY"
-        radius: 11
         amount: 33
+        radius:
+          - 3
+          - 3.5
+          - 3
+          - 3.25
+          - 3.5
+          - 4
       child2:
         componentType: "SoundMechanic"
         goaSound: "SKILL_POWERFUL_LANDING"

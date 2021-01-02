@@ -4,7 +4,7 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
-rank: 1
+tier: 3
 color: "GREEN"
 description:
   - "The Archer has lots of movement and"
@@ -26,7 +26,7 @@ armorGearTypes:
 hasDefaultOffhand: false
 skillOne:
   name: "Poison Arrow"
-  customModelData: 27
+  customModelData: 13
   description:
     - "Shoot an arrow that poisons target"
   manaCosts:
@@ -108,7 +108,7 @@ skillOne:
       goaSound: "SKILL_POISON_ARROW"
 skillTwo:
   name: "Zephyr"
-  customModelData: 33
+  customModelData: 57
   description:
     - "Gain movement speed"
   manaCosts:
@@ -147,9 +147,15 @@ skillTwo:
     child2:
       componentType: "ParticleMechanic"
       type: "EXPLOSION_HUGE"
-      radius: 3.4
       amount: 2
       upward: 0.5
+      radius:
+        - 3
+        - 3.5
+        - 3
+        - 3.25
+        - 3.5
+        - 4
     child3:
       componentType: "ParticleAnimationMechanic"
       type: "REDSTONE"
@@ -170,7 +176,7 @@ skillTwo:
       goaSound: "SKILL_SONIC_BOOM"
 skillThree:
   name: "Purple Wings"
-  customModelData: 41
+  customModelData: 44
   description:
     - "Jump backwards into the sky and"
     - "gain resistance to fall damage"
@@ -241,7 +247,7 @@ skillThree:
         delay: 5
 skillPassive:
   name: "Sharpshooter"
-  customModelData: 21
+  customModelData: 17
   description:
     - "Your every 2nd successful projectile hit"
     - "gives you bonus critical chance"
@@ -315,7 +321,7 @@ skillPassive:
             valueToAdd: 1
 skillUltimate:
   name: "Make It Rain"
-  customModelData: 48
+  customModelData: 16
   description:
     - "Reveal an area with a flurry of arrows,"
     - "dealing waves of damage to opponents"
@@ -399,11 +405,17 @@ skillUltimate:
           child1:
             componentType: "ParticleMechanic"
             type: "REDSTONE"
-            radius: 9
             amount: 21
             upward: 1
             dustColor: 16753920
             dustSize: 2
+            radius:
+              - 3
+              - 3.5
+              - 3
+              - 3.25
+              - 3.5
+              - 4
           child2:
             componentType: "AreaTarget"
             allies: false

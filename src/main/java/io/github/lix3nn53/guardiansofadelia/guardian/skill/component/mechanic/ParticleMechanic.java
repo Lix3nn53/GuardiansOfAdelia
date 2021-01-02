@@ -17,7 +17,7 @@ public class ParticleMechanic extends MechanicComponent {
 
     private final Particle particleType;
     private final ParticleArrangement arrangement;
-    private final double radiusParticle;
+    private final List<Double> radiusParticle;
     private final int amountParticle;
 
     private final double dx;
@@ -32,7 +32,7 @@ public class ParticleMechanic extends MechanicComponent {
 
     private final Particle.DustOptions dustOptions;
 
-    public ParticleMechanic(Particle particleType, ParticleArrangement arrangement, double radiusParticle,
+    public ParticleMechanic(Particle particleType, ParticleArrangement arrangement, List<Double> radiusParticle,
                             int amountParticle, double dx, double dy, double dz, double forward, double upward,
                             double right, double speed, Particle.DustOptions dustOptions) {
         this.particleType = particleType;
@@ -62,9 +62,6 @@ public class ParticleMechanic extends MechanicComponent {
             configLoadError("amount");
         }
 
-        double radiusParticle = configurationSection.getDouble("radius");
-        int amountParticle = configurationSection.getInt("amount");
-
         Particle.DustOptions dustOptions = null;
 
         if (configurationSection.contains("dustColor")) {
@@ -76,8 +73,8 @@ public class ParticleMechanic extends MechanicComponent {
 
         this.particleType = Particle.valueOf(configurationSection.getString("type"));
         this.arrangement = configurationSection.contains("arrangement") ? ParticleArrangement.valueOf(configurationSection.getString("arrangement")) : ParticleArrangement.CIRCLE;
-        this.radiusParticle = radiusParticle;
-        this.amountParticle = amountParticle;
+        this.radiusParticle = configurationSection.getDoubleList("radius");
+        this.amountParticle = configurationSection.getInt("amount");
         this.forward = 0;
         this.upward = configurationSection.contains("upward") ? configurationSection.getDouble("upward") : 0.5;
         this.right = 0;
@@ -92,6 +89,7 @@ public class ParticleMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
+        double radius = radiusParticle.get(skillLevel - 1);
         for (LivingEntity ent : targets) {
             Location location = ent.getLocation();
 
@@ -99,7 +97,7 @@ public class ParticleMechanic extends MechanicComponent {
             Vector side = dir.clone().crossProduct(UP);
             location.add(dir.multiply(forward)).add(0, upward, 0).add(side.multiply(right));
 
-            ParticleUtil.play(location, particleType, arrangement, radiusParticle, amountParticle, Direction.XZ, dx, dy, dz, speed, dustOptions);
+            ParticleUtil.play(location, particleType, arrangement, radius, amountParticle, Direction.XZ, dx, dy, dz, speed, dustOptions);
         }
 
         return true;

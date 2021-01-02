@@ -14,16 +14,19 @@ public class PushMechanic extends MechanicComponent {
     private final PushType pushType;
     private final List<Double> speedList;
     private final boolean centerSelf;
+    private final double offsetY;
 
     /**
      * @param pushType
      * @param speedList
      * @param centerSelf center = caster, if false: center = first target
+     * @param offsetY
      */
-    public PushMechanic(PushType pushType, List<Double> speedList, boolean centerSelf) {
+    public PushMechanic(PushType pushType, List<Double> speedList, boolean centerSelf, double offsetY) {
         this.pushType = pushType;
         this.speedList = speedList;
         this.centerSelf = centerSelf;
+        this.offsetY = offsetY;
     }
 
     public PushMechanic(ConfigurationSection configurationSection) {
@@ -37,6 +40,12 @@ public class PushMechanic extends MechanicComponent {
 
         if (!configurationSection.contains("centerSelf")) {
             configLoadError("centerSelf");
+        }
+
+        if (configurationSection.contains("offsetY")) {
+            this.offsetY = configurationSection.getDouble("offsetY");
+        } else {
+            offsetY = 0;
         }
 
         this.pushType = PushType.valueOf(configurationSection.getString("pushType"));
@@ -54,6 +63,10 @@ public class PushMechanic extends MechanicComponent {
         } else {
             center = targets.get(0).getLocation();
             targets.remove(0);
+        }
+
+        if (offsetY != 0) {
+            center = center.add(0, offsetY, 0);
         }
 
         for (LivingEntity target : targets) {

@@ -235,7 +235,7 @@ public class MenuList {
 
                 String rpgClassStr = rpgCharacter.getRpgClassStr();
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-                int rank = rpgClass.getRank();
+                int tier = rpgClass.getTier();
                 int classIconCustomModelData = rpgClass.getClassIconCustomModelData();
 
                 ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
@@ -244,7 +244,7 @@ public class MenuList {
                 List<String> lore = new ArrayList<>();
                 lore.add("");
                 lore.add("Class: " + rpgClass.getClassString());
-                lore.add("Rank: " + rank);
+                lore.add("Tier: " + tier);
                 itemMeta.setLore(lore);
                 itemMeta.setCustomModelData(classIconCustomModelData);
                 itemStack.setItemMeta(itemMeta);
@@ -283,7 +283,7 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric classChange(Player player, int classRank) {
+    public static GuiGeneric classChange(Player player, int classTier) {
         GuiGeneric guiGeneric = null;
 
         UUID uuid = player.getUniqueId();
@@ -297,7 +297,7 @@ public class MenuList {
 
                 HashMap<String, RPGClassStats> unlockedClasses = rpgCharacter.getUnlockedClasses();
 
-                List<RPGClass> values = RPGClassManager.getClassesAtRank(classRank);
+                List<RPGClass> values = RPGClassManager.getClassesAtTier(classTier);
 
                 int modCounter = 0;
                 for (int i = 0; i < values.size(); i++) {
@@ -319,7 +319,7 @@ public class MenuList {
                     String wind = ChatColor.WHITE.toString() + attributeTiers.get(AttributeType.WIND);
 
                     List<String> lore = new ArrayList<>(description);
-                    lore.add(ChatColor.RED + "Rank: " + ChatColor.GRAY + classRank);
+                    lore.add(ChatColor.RED + "Rank: " + ChatColor.GRAY + classTier);
                     lore.add("");
 
                     lore.add(ChatColor.GREEN + "Attributes");

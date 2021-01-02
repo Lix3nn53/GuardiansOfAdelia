@@ -7,6 +7,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,11 +17,6 @@ import java.util.List;
 public class AreaTarget extends TargetComponent {
 
     private final List<Double> radiusList;
-
-    public AreaTarget(boolean allies, boolean enemy, boolean self, int max, List<Double> radiusList) {
-        super(allies, enemy, self, max);
-        this.radiusList = radiusList;
-    }
 
     public AreaTarget(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -49,7 +45,20 @@ public class AreaTarget extends TargetComponent {
 
         if (nearby.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, nearby, castCounter);
+        if (super.isKeepCurrent()) {
+            if (super.isaddToBeginning()) {
+                Collections.reverse(nearby);
+                for (LivingEntity single : nearby) {
+                    targets.add(0, single);
+                }
+            } else {
+                targets.addAll(nearby);
+            }
+        } else {
+            targets = nearby;
+        }
+
+        return executeChildren(caster, skillLevel, targets, castCounter);
     }
 
     @Override

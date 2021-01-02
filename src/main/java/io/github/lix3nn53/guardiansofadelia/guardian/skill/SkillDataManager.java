@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -17,7 +16,7 @@ public class SkillDataManager {
     private static final HashMap<LivingEntity, HashMap<String, Integer>> keyEntityPlusKeyToValue = new HashMap<>();
     private static final HashMap<LivingEntity, HashSet<String>> keyEntityToSkillFlags = new HashMap<>();
     private static final HashMap<LivingEntity, HashMap<Integer, BukkitTask>> keyEntityToCastCounterToRepeatTask = new HashMap<>();
-    private static final HashMap<LivingEntity, HashMap<Integer, List<Entity>>> keyEntityToCastCounterToSavedEntities = new HashMap<>();
+    private static final HashMap<LivingEntity, HashMap<Integer, List<LivingEntity>>> keyEntityToCastCounterToSavedEntities = new HashMap<>();
 
     public static void setValue(LivingEntity keyEntity, String key, int value) {
         if (keyEntityPlusKeyToValue.containsKey(keyEntity)) {
@@ -123,11 +122,11 @@ public class SkillDataManager {
         }
     }
 
-    public static void onSkillEntityCreateWithSaveOption(LivingEntity keyEntity, Entity created, int castCounter) {
+    public static void onSkillEntityCreateWithSaveOption(LivingEntity keyEntity, LivingEntity created, int castCounter) {
         if (keyEntityToCastCounterToSavedEntities.containsKey(keyEntity)) {
-            HashMap<Integer, List<Entity>> hashMap = keyEntityToCastCounterToSavedEntities.get(keyEntity);
+            HashMap<Integer, List<LivingEntity>> hashMap = keyEntityToCastCounterToSavedEntities.get(keyEntity);
 
-            List<Entity> entities;
+            List<LivingEntity> entities;
             if (hashMap.containsKey(castCounter)) {
                 entities = hashMap.get(castCounter);
             } else {
@@ -137,8 +136,8 @@ public class SkillDataManager {
             entities.add(created);
             hashMap.put(castCounter, entities);
         } else {
-            HashMap<Integer, List<Entity>> hashMap = new HashMap<>();
-            List<Entity> entities = new ArrayList<>();
+            HashMap<Integer, List<LivingEntity>> hashMap = new HashMap<>();
+            List<LivingEntity> entities = new ArrayList<>();
             entities.add(created);
             hashMap.put(castCounter, entities);
             keyEntityToCastCounterToSavedEntities.put(keyEntity, hashMap);
@@ -147,9 +146,9 @@ public class SkillDataManager {
 
     public static void removeSavedEntities(LivingEntity keyEntity, int castCounter) {
         if (keyEntityToCastCounterToSavedEntities.containsKey(keyEntity)) {
-            HashMap<Integer, List<Entity>> castCounterToSavedEntities = keyEntityToCastCounterToSavedEntities.get(keyEntity);
-            List<Entity> removedEntities = castCounterToSavedEntities.remove(castCounter);
-            for (Entity removed : removedEntities) {
+            HashMap<Integer, List<LivingEntity>> castCounterToSavedEntities = keyEntityToCastCounterToSavedEntities.get(keyEntity);
+            List<LivingEntity> removedEntities = castCounterToSavedEntities.remove(castCounter);
+            for (LivingEntity removed : removedEntities) {
                 removed.remove();
             }
             if (castCounterToSavedEntities.isEmpty()) {
@@ -158,10 +157,10 @@ public class SkillDataManager {
         }
     }
 
-    public static void removeSavedEntity(LivingEntity keyEntity, int castCounter, Entity toRemove) {
+    public static void removeSavedEntity(LivingEntity keyEntity, int castCounter, LivingEntity toRemove) {
         if (keyEntityToCastCounterToSavedEntities.containsKey(keyEntity)) {
-            HashMap<Integer, List<Entity>> hashMap = keyEntityToCastCounterToSavedEntities.get(keyEntity);
-            List<Entity> entities = hashMap.get(castCounter);
+            HashMap<Integer, List<LivingEntity>> hashMap = keyEntityToCastCounterToSavedEntities.get(keyEntity);
+            List<LivingEntity> entities = hashMap.get(castCounter);
 
             if (entities == null) {
                 GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "removeSavedEntity entities null");
@@ -177,6 +176,22 @@ public class SkillDataManager {
                 toRemove.remove();
             }
         }
+    }
+
+    public static List<LivingEntity> getSavedEntitiesOfCaster(LivingEntity keyEntity) {
+        List<LivingEntity> allEntities = new ArrayList<>();
+
+        if (keyEntityToCastCounterToSavedEntities.containsKey(keyEntity)) {
+            HashMap<Integer, List<LivingEntity>> hashMap = keyEntityToCastCounterToSavedEntities.get(keyEntity);
+
+            for (int castCount : hashMap.keySet()) {
+                List<LivingEntity> entities = hashMap.get(castCount);
+
+                allEntities.addAll(entities);
+            }
+        }
+
+        return allEntities;
     }
 
     /**

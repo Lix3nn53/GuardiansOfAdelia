@@ -12,10 +12,6 @@ import java.util.List;
  */
 public class FilterCurrentTargets extends TargetComponent {
 
-    public FilterCurrentTargets(boolean allies, boolean enemy, boolean self, int max) {
-        super(allies, enemy, self, max);
-    }
-
     public FilterCurrentTargets(ConfigurationSection configurationSection) {
         super(configurationSection);
     }

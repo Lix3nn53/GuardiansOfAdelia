@@ -6,6 +6,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,12 +17,6 @@ public class SingleTarget extends TargetComponent {
 
     private final List<Double> range;
     private final double tolerance;
-
-    public SingleTarget(boolean allies, boolean enemy, boolean self, int max, List<Double> range, double tolerance) {
-        super(allies, enemy, self, max);
-        this.range = range;
-        this.tolerance = tolerance;
-    }
 
     public SingleTarget(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -42,20 +37,33 @@ public class SingleTarget extends TargetComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
-        List<LivingEntity> single = new ArrayList<>();
+        List<LivingEntity> singles = new ArrayList<>();
 
         for (LivingEntity target : targets) {
             LivingEntity singleTargets = TargetHelper.getLivingTarget(target, range.get(skillLevel - 1), tolerance);
-            single.add(singleTargets);
+            singles.add(singleTargets);
         }
 
-        if (single.isEmpty()) return false;
+        if (singles.isEmpty()) return false;
 
-        single = determineTargets(caster, single);
+        singles = determineTargets(caster, singles);
 
-        if (single.isEmpty()) return false;
+        if (singles.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, single, castCounter);
+        if (super.isKeepCurrent()) {
+            if (super.isaddToBeginning()) {
+                Collections.reverse(singles);
+                for (LivingEntity single : singles) {
+                    targets.add(0, single);
+                }
+            } else {
+                targets.addAll(singles);
+            }
+        } else {
+            targets = singles;
+        }
+
+        return executeChildren(caster, skillLevel, targets, castCounter);
     }
 
     @Override

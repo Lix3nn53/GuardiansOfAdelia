@@ -9,6 +9,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -19,11 +20,6 @@ import java.util.List;
 public class LocationTarget extends TargetComponent {
 
     private final List<Integer> range;
-
-    public LocationTarget(boolean allies, boolean enemy, boolean self, int max, List<Integer> range) {
-        super(allies, enemy, self, max);
-        this.range = range;
-    }
 
     public LocationTarget(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -59,7 +55,20 @@ public class LocationTarget extends TargetComponent {
 
         if (temporaryEntities.isEmpty()) return false;
 
-        return executeChildren(caster, skillLevel, temporaryEntities, castCounter);
+        if (super.isKeepCurrent()) {
+            if (super.isaddToBeginning()) {
+                Collections.reverse(temporaryEntities);
+                for (LivingEntity single : temporaryEntities) {
+                    targets.add(0, single);
+                }
+            } else {
+                targets.addAll(temporaryEntities);
+            }
+        } else {
+            targets = temporaryEntities;
+        }
+
+        return executeChildren(caster, skillLevel, targets, castCounter);
     }
 
     @Override

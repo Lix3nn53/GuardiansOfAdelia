@@ -4,7 +4,7 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
-rank: 1
+tier: 1
 color: "BLUE"
 description:
   - "Due to their incredible speed and agility,"

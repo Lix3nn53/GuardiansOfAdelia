@@ -20,10 +20,10 @@ public class CharacterSelectionMenuList {
     public static GuiGeneric getCharacterCreationMenu(int charNo) {
         GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.DARK_GRAY + "Character " + charNo + " Creation", 0);
 
-        List<RPGClass> classesAtRank = RPGClassManager.getClassesAtRank(3);
+        List<RPGClass> classesAtTier = RPGClassManager.getClassesAtTier(3);
 
         int index = 20;
-        for (RPGClass rpgClass : classesAtRank) {
+        for (RPGClass rpgClass : classesAtTier) {
             ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
