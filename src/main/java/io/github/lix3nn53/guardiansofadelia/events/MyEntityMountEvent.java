@@ -21,7 +21,7 @@ public class MyEntityMountEvent implements Listener {
             Entity mount = e.getMount();
             if (mount instanceof LivingEntity) {
                 LivingEntity livingMount = (LivingEntity) mount;
-                if (PetManager.isPet(livingMount)) {
+                if (PetManager.isCompanion(livingMount)) {
                     Player owner = PetManager.getOwner(livingMount);
                     Player player = (Player) rider;
                     if (!player.equals(owner)) {

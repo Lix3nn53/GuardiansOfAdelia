@@ -18,13 +18,13 @@ public class MyEntityTargetLivingEntityEvent implements Listener {
         LivingEntity target = e.getTarget();
         if (target != null) {
             EntityType type = target.getType();
-            if (!(type.equals(EntityType.PLAYER) || PetManager.isPet(target))) { //Monsters only target player or pet
+            if (!(type.equals(EntityType.PLAYER) || PetManager.isCompanion(target))) { //Monsters only target player or pet
                 e.setCancelled(true);
             } else if (type.equals(EntityType.PLAYER)) { //if target is player
                 Entity entity = e.getEntity();
                 if (entity instanceof LivingEntity) {
                     LivingEntity livingEntity = (LivingEntity) entity;
-                    if (PetManager.isPet(livingEntity)) { //pet attack player
+                    if (PetManager.isCompanion(livingEntity)) { //pet attack player
                         Player owner = PetManager.getOwner(livingEntity);
 
                         boolean b = EntityUtils.canAttack(owner, target);

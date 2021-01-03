@@ -61,6 +61,8 @@ public class SkillComponentLoader {
             return new HoloMessageMechanic(configurationSection);
         } else if (componentType.equals(DelayMechanic.class.getSimpleName())) {
             return new DelayMechanic(configurationSection);
+        } else if (componentType.equals(SpawnCompanionMechanic.class.getSimpleName())) {
+            return new SpawnCompanionMechanic(configurationSection);
         } else if (componentType.equals(SpawnEntityMechanic.class.getSimpleName())) {
             return new SpawnEntityMechanic(configurationSection);
         } else if (componentType.equals(SelfTarget.class.getSimpleName())) {

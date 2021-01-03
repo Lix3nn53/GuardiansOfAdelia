@@ -1,15 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
-import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
-import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -17,14 +12,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpawnEntityMechanic extends MechanicComponent {
+public class SpawnCompanionMechanic extends MechanicComponent {
 
     private final String mobCode;
     private final List<Integer> amounts;
     private final List<Integer> DURATION;
     private boolean SAVE = false;
 
-    public SpawnEntityMechanic(ConfigurationSection configurationSection) {
+    public SpawnCompanionMechanic(ConfigurationSection configurationSection) {
         if (!configurationSection.contains("mobCode")) {
             configLoadError("mobCode");
         }
@@ -62,23 +57,12 @@ public class SpawnEntityMechanic extends MechanicComponent {
             Player owner = (Player) target;
             for (int i = 0; i < amount; i++) {
 
-                Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
+                LivingEntity livingEntity = PetManager.spawnCompanion(owner, mobCode, skillLevel, 9999999);
 
-                BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
-                Entity entity = null;
-                try {
-                    entity = apiHelper.spawnMythicMob(mobCode, spawnLoc, skillLevel);
-                } catch (InvalidMobTypeException e) {
-                    GuardiansOfAdelia.getInstance().getLogger().info("SpawnEntityMechanic mythicMob code error: " + mobCode);
-                    e.printStackTrace();
-                }
-                if (entity == null) continue;
-                if (!(entity instanceof LivingEntity)) {
-                    GuardiansOfAdelia.getInstance().getLogger().info("SpawnEntityMechanic is not LivingEntity, petCode: " + mobCode);
+                if (livingEntity == null) {
+                    GuardiansOfAdelia.getInstance().getLogger().info("SpawnPetMechanic error: " + mobCode);
                     continue;
                 }
-
-                LivingEntity livingEntity = (LivingEntity) entity;
 
                 if (SAVE) {
                     SkillDataManager.onSkillEntityCreateWithSaveOption(caster, livingEntity, castCounter);

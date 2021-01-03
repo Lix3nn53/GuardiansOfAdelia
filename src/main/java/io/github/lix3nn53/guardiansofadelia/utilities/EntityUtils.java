@@ -79,7 +79,7 @@ public class EntityUtils {
                 }
 
                 return false; //pvp is off
-            } else if (PetManager.isPet(target)) { //player attack pet
+            } else if (PetManager.isCompanion(target)) { //player attack pet
                 if (pvp) {
                     Player owner = PetManager.getOwner(target);
 
@@ -92,9 +92,9 @@ public class EntityUtils {
             }
 
             return true; //player attack monster
-        } else if (PetManager.isPet(attacker)) {  //attacker is a pet
+        } else if (PetManager.isCompanion(attacker)) {  //attacker is a pet
             Player attackerOwner = PetManager.getOwner(attacker);
-            if (PetManager.isPet(target)) { //target is also a pet
+            if (PetManager.isCompanion(target)) { //target is also a pet
                 Player targetOwner = PetManager.getOwner(target);
                 return canAttack(attackerOwner, targetOwner);
             } else if (target instanceof Player) { //pet attack player
@@ -105,6 +105,6 @@ public class EntityUtils {
         }
 
         //attacker is monster
-        return target instanceof Player || PetManager.isPet(target); //monster can only attack players or pets
+        return target instanceof Player || PetManager.isCompanion(target); //monster can only attack players or pets
     }
 }

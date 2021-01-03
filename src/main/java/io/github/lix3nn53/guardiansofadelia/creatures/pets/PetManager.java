@@ -28,33 +28,54 @@ import java.util.UUID;
 
 public class PetManager {
 
+    public static final long RESPAWN_DELAY = 20 * 300L;
+    // Pets Only
     private final static List<Player> deathPetPlayerList = new ArrayList<>();
-    private static final HashMap<LivingEntity, Player> petToPlayer = new HashMap<>();
-    private static final HashMap<Player, LivingEntity> playerToPet = new HashMap<>();
-
-    private static final long respawnDelay = 20 * 300L;
+    private static final HashMap<Player, LivingEntity> ownerToPet = new HashMap<>();
+    // Pets and Companions
+    private static final HashMap<LivingEntity, Player> companionToOwner = new HashMap<>();
+    // Companions Only
+    private static final HashMap<Player, List<LivingEntity>> ownerToCompanions = new HashMap<>();
 
     public static Player getOwner(LivingEntity entity) {
-        return petToPlayer.get(entity);
+        return companionToOwner.get(entity);
     }
 
-    public static LivingEntity getActivePet(Player owner) {
-        return playerToPet.get(owner);
+    public static boolean hasPet(Player owner) {
+        return ownerToPet.containsKey(owner);
     }
 
-    public static boolean hasActivePet(Player player) {
-        return playerToPet.containsKey(player);
+    public static LivingEntity getPet(Player owner) {
+        return ownerToPet.get(owner);
     }
 
-    public static boolean isPet(LivingEntity entity) {
-        return petToPlayer.containsKey(entity);
+    public static boolean hasCompanion(Player owner) {
+        return ownerToCompanions.containsKey(owner);
     }
 
-    public static long getRespawnDelay() {
-        return respawnDelay;
+    public static boolean isCompanion(LivingEntity entity) {
+        return companionToOwner.containsKey(entity);
     }
 
-    private static LivingEntity getPet(Player owner, String petCode, int petLevel, int currentHP) {
+    public static boolean isCompanionAlsoPet(LivingEntity entity) {
+        if (companionToOwner.containsKey(entity)) {
+            Player player = companionToOwner.get(entity);
+
+            if (ownerToPet.containsKey(player)) {
+                LivingEntity pet = ownerToPet.get(player);
+
+                return entity.equals(pet);
+            }
+        }
+
+        return false;
+    }
+
+    public static List<LivingEntity> getCompanions(Player owner) {
+        return ownerToCompanions.get(owner);
+    }
+
+    private static LivingEntity spawnMythicMobTameable(Player owner, String petCode, int petLevel, int currentHP) {
         Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
 
         GuardiansOfAdelia.getInstance().getLogger().info("petLevel: " + petLevel);
@@ -109,22 +130,40 @@ public class PetManager {
         return pet;
     }
 
-    public static void onPetDeath(LivingEntity livingEntity) {
-        if (isPet(livingEntity)) {
+    public static void onEntityDeath(LivingEntity livingEntity) {
+        if (isCompanion(livingEntity)) {
             Player owner = getOwner(livingEntity);
-            owner.sendMessage(ChatColor.RED + "Your pet is dead. Respawning in 2 minutes");
-            deathPetPlayerList.add(owner);
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    deathPetPlayerList.remove(owner);
-                    if (owner.isOnline()) {
-                        updateCurrentHealthSavedInEgg(livingEntity, (int) (livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2));
-                        respawnPet(owner);
-                        owner.sendMessage(ChatColor.GREEN + "Your pet is respawned");
+            companionToOwner.remove(livingEntity);
+            // On pet death
+            if (isCompanionAlsoPet(livingEntity)) {
+                owner.sendMessage(ChatColor.RED + "Your pet is dead. Respawning in 2 minutes");
+
+                ownerToPet.remove(owner);
+                deathPetPlayerList.add(owner);
+
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        deathPetPlayerList.remove(owner);
+
+                        if (owner.isOnline()) {
+                            updateCurrentHealthSavedInEgg(livingEntity, (int) (livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2));
+
+                            respawnPet(owner);
+                            owner.sendMessage(ChatColor.GREEN + "Your pet is respawned");
+                        }
+                    }
+                }.runTaskLater(GuardiansOfAdelia.getInstance(), RESPAWN_DELAY);
+            } else {
+                // On companion death
+                if (ownerToCompanions.containsKey(owner)) {
+                    List<LivingEntity> livingEntities = ownerToCompanions.get(owner);
+                    boolean remove = livingEntities.remove(livingEntity);
+                    if (remove && livingEntities.isEmpty()) {
+                        ownerToCompanions.remove(owner);
                     }
                 }
-            }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 60 * 2L);
+            }
         }
     }
 
@@ -132,50 +171,57 @@ public class PetManager {
         return deathPetPlayerList.contains(player);
     }
 
-    public static void onPetTakeDamage(LivingEntity livingEntity, double currentHealth, double finalDamage) {
+    public static void onTakeDamage(LivingEntity livingEntity, double currentHealth, double finalDamage) {
         if (!livingEntity.isDead()) {
-            if (PetManager.isPet(livingEntity)) {
+            if (isCompanion(livingEntity)) {
                 int currentHealthInteger = (int) (currentHealth + 0.5);
                 int nextHealth = (int) ((currentHealth - finalDamage) + 0.5);
                 String customName = livingEntity.getCustomName();
                 String replace = customName.replace(currentHealthInteger + "/", nextHealth + "/");
                 livingEntity.setCustomName(replace);
 
-                updateCurrentHealthSavedInEgg(livingEntity, nextHealth);
+                if (isCompanionAlsoPet(livingEntity)) {
+                    updateCurrentHealthSavedInEgg(livingEntity, nextHealth);
+                }
             }
         }
     }
 
     public static void onPetSetHealth(LivingEntity livingEntity, double currentHealth, int setHealth) {
         if (!livingEntity.isDead()) {
-            if (PetManager.isPet(livingEntity)) {
+            if (isCompanion(livingEntity)) {
                 int currentHealthInteger = (int) (currentHealth + 0.5);
                 String customName = livingEntity.getCustomName();
                 String replace = customName.replace(currentHealthInteger + "/", setHealth + "/");
                 livingEntity.setCustomName(replace);
 
-                updateCurrentHealthSavedInEgg(livingEntity, setHealth);
+
+                if (isCompanionAlsoPet(livingEntity)) {
+                    updateCurrentHealthSavedInEgg(livingEntity, setHealth);
+                }
             }
         }
     }
 
-    public static void onPetHeal(LivingEntity livingEntity, double currentHealth, double healAmount) {
+    public static void onHeal(LivingEntity livingEntity, double currentHealth, double healAmount) {
         if (!livingEntity.isDead()) {
-            if (PetManager.isPet(livingEntity)) {
+            if (isCompanion(livingEntity)) {
                 int currentHealthInteger = (int) (currentHealth + 0.5);
                 int nextHealth = (int) ((currentHealth + healAmount) + 0.5);
                 String customName = livingEntity.getCustomName();
                 String replace = customName.replace(currentHealthInteger + "/", nextHealth + "/");
                 livingEntity.setCustomName(replace);
 
-                updateCurrentHealthSavedInEgg(livingEntity, nextHealth);
+                if (isCompanionAlsoPet(livingEntity)) {
+                    updateCurrentHealthSavedInEgg(livingEntity, nextHealth);
+                }
             }
         }
     }
 
     private static void updateCurrentHealthSavedInEgg(LivingEntity livingEntity, int nextHealth) {
-        if (isPet(livingEntity)) {
-            UUID uuid = PetManager.getOwner(livingEntity).getUniqueId();
+        if (isCompanionAlsoPet(livingEntity)) {
+            UUID uuid = getOwner(livingEntity).getUniqueId();
             if (GuardianDataManager.hasGuardianData(uuid)) {
                 GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
                 if (guardianData.hasActiveCharacter()) {
@@ -194,19 +240,63 @@ public class PetManager {
     }
 
     private static void removePet(Player player) {
-        if (hasActivePet(player)) {
-            LivingEntity activePet = getActivePet(player);
-            petToPlayer.remove(activePet);
-            playerToPet.remove(player);
+        if (hasPet(player)) {
+            LivingEntity activePet = getPet(player);
+            companionToOwner.remove(activePet);
+            ownerToPet.remove(player);
             activePet.remove();
         }
     }
 
+    public static void removeCompanions(Player player) {
+        if (ownerToCompanions.containsKey(player)) {
+            List<LivingEntity> companions = ownerToCompanions.get(player);
+
+            for (LivingEntity companion : companions) {
+                companionToOwner.remove(companion);
+                companion.remove();
+            }
+        }
+
+        ownerToCompanions.remove(player);
+    }
+
+    public static void removeCompanion(Player player, LivingEntity livingEntity) {
+        if (ownerToCompanions.containsKey(player)) {
+            List<LivingEntity> companions = ownerToCompanions.get(player);
+
+            boolean remove = companions.remove(livingEntity);
+            if (remove && companions.isEmpty()) {
+                ownerToCompanions.remove(player);
+            }
+
+            livingEntity.remove();
+        }
+    }
+
     private static void spawnPet(Player player, String petCode, int petLevel, int petCurrentHealth) {
-        LivingEntity pet = getPet(player, petCode, petLevel, petCurrentHealth);
+        LivingEntity pet = spawnMythicMobTameable(player, petCode, petLevel, petCurrentHealth);
         if (pet == null) return;
-        petToPlayer.put(pet, player);
-        playerToPet.put(player, pet);
+        companionToOwner.put(pet, player);
+        ownerToPet.put(player, pet);
+    }
+
+    public static LivingEntity spawnCompanion(Player player, String petCode, int petLevel, int petCurrentHealth) {
+        LivingEntity pet = spawnMythicMobTameable(player, petCode, petLevel, petCurrentHealth);
+        if (pet == null) return null;
+        companionToOwner.put(pet, player);
+
+        if (ownerToCompanions.containsKey(player)) {
+            List<LivingEntity> companions = ownerToCompanions.get(player);
+            companions.add(pet);
+        } else {
+            List<LivingEntity> companions = new ArrayList<>();
+            companions.add(pet);
+
+            ownerToCompanions.put(player, companions);
+        }
+
+        return pet;
     }
 
     public static void onEggEquip(Player player) {
@@ -245,39 +335,79 @@ public class PetManager {
     }
 
     public static void respawnPet(Player player) {
-        if (hasActivePet(player)) {
+        if (hasPet(player)) {
             removePet(player);
             Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> onEggEquip(player), 20L);
         }
     }
 
     public static void onPlayerMove(Player player) {
-        if (hasActivePet(player)) {
-            LivingEntity activePet = getActivePet(player);
-            if (!player.isOnline() || activePet.isDead()) {
-                return;
-            }
+        List<LivingEntity> companions;
 
+        if (hasCompanion(player)) {
+            companions = getCompanions(player);
+        } else {
+            companions = new ArrayList<>();
+        }
+        GuardiansOfAdelia.getInstance().getLogger().info("companions before pet add: " + companions.toString());
+
+        if (hasPet(player)) {
+            LivingEntity pet = getPet(player);
+            companions.add(pet);
+        }
+        GuardiansOfAdelia.getInstance().getLogger().info("companions after pet add: " + companions.toString());
+
+        if (!companions.isEmpty()) {
             Location target = player.getLocation();
 
-            if (!target.getWorld().getName().equals(activePet.getLocation().getWorld().getName())) {
-                PetManager.teleportPet(player, activePet, null);
+            for (LivingEntity companion : companions) {
+                if (!target.getWorld().getName().equals(companion.getLocation().getWorld().getName())) {
+                    PetManager.teleportPet(player, companion, null);
 
-                if (activePet instanceof Mob) { //clear pet target
-                    Mob mob = (Mob) activePet;
-                    mob.setTarget(null);
+                    if (companion instanceof Mob) { //clear pet target
+                        Mob mob = (Mob) companion;
+                        mob.setTarget(null);
+                    }
+
+                    return;
                 }
 
-                return;
+                final double distance = target.distance(companion.getLocation());
+                if (distance > 20D) {
+                    PetManager.teleportPet(player, companion, null);
+
+                    if (companion instanceof Mob) { //clear pet target
+                        Mob mob = (Mob) companion;
+                        mob.setTarget(null);
+                    }
+                }
             }
+        }
+    }
 
-            final double distance = target.distance(activePet.getLocation());
-            if (distance > 20D) {
-                PetManager.teleportPet(player, activePet, null);
+    public static void setPetAndCompanionsTarget(Player player, LivingEntity target) {
+        List<LivingEntity> companions;
 
-                if (activePet instanceof Mob) { //clear pet target
-                    Mob mob = (Mob) activePet;
-                    mob.setTarget(null);
+        if (hasCompanion(player)) {
+            companions = getCompanions(player);
+        } else {
+            companions = new ArrayList<>();
+        }
+        GuardiansOfAdelia.getInstance().getLogger().info("companions before pet add: " + companions.toString());
+
+        if (hasPet(player)) {
+            LivingEntity pet = getPet(player);
+            companions.add(pet);
+        }
+        GuardiansOfAdelia.getInstance().getLogger().info("companions after pet add: " + companions.toString());
+
+        if (!companions.isEmpty()) {
+            for (LivingEntity companion : companions) {
+                if (companion instanceof Mob) {
+                    Mob pet = (Mob) companion;
+                    if (pet.getTarget() == null) {
+                        pet.setTarget(target);
+                    }
                 }
             }
         }

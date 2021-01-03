@@ -70,7 +70,7 @@ public class MyPlayerInteractEntityEvent implements Listener {
                     if (pet_food) {
                         int foodLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "pet_food");
                         LivingEntity livingEntity = (LivingEntity) rightClicked;
-                        if (PetManager.isPet(livingEntity)) {
+                        if (PetManager.isCompanionAlsoPet(livingEntity)) {
                             AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
                             double maxHealth = attribute.getValue();
                             double currentHealth = livingEntity.getHealth();
@@ -102,10 +102,8 @@ public class MyPlayerInteractEntityEvent implements Listener {
                     }
                 } else if (itemInMainHand.getType().equals(Material.BLACK_DYE)) { //right click with premium item
                     LivingEntity pet = (LivingEntity) rightClicked;
-                    if (PetManager.isPet(pet)) {
+                    if (PetManager.isCompanionAlsoPet(pet)) {
                         if (!PersistentDataContainerUtil.hasString(itemInMainHand, "petSkinCode")) return;
-
-                        if (!PetManager.isPet(pet)) return;
 
                         Player owner = PetManager.getOwner(pet);
                         if (!player.equals(owner)) return;

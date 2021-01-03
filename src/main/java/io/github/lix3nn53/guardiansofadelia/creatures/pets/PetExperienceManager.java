@@ -17,7 +17,7 @@ import java.util.UUID;
 public class PetExperienceManager {
 
     public static void giveExperienceToActivePet(Player owner, int expToGive) {
-        if (PetManager.hasActivePet(owner)) {
+        if (PetManager.hasPet(owner)) {
             int eggExperience = getEggExperience(owner);
             if (eggExperience > -1) {
                 int currentLevel = getLevelFromExp(eggExperience);

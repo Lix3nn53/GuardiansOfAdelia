@@ -25,11 +25,10 @@ public class MyEntityRegainHealthEvent implements Listener {
             }
         } else if (event.getEntity() instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) event.getEntity();
-            if (PetManager.isPet(livingEntity)) {
-                double health = livingEntity.getHealth();
-                double amount = event.getAmount();
-                PetManager.onPetHeal(livingEntity, health, amount);
-            }
+            double health = livingEntity.getHealth();
+            double amount = event.getAmount();
+
+            PetManager.onHeal(livingEntity, health, amount);
         }
     }
 }

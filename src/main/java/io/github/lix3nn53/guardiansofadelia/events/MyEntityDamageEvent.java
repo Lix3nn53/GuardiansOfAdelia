@@ -61,9 +61,7 @@ public class MyEntityDamageEvent implements Listener {
             }
         } else {
             LivingEntity livingEntity = (LivingEntity) entity;
-            if (PetManager.isPet(livingEntity)) {
-                PetManager.onPetTakeDamage(livingEntity, livingEntity.getHealth(), event.getFinalDamage());
-            }
+            PetManager.onTakeDamage(livingEntity, livingEntity.getHealth(), event.getFinalDamage());
         }
     }
 

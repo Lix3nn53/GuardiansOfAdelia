@@ -120,7 +120,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     isAttackerPlayer = true;
                 }
             } else if (damager instanceof LivingEntity) {
-                if (PetManager.isPet((LivingEntity) damager)) { //damager is pet
+                if (PetManager.isCompanion((LivingEntity) damager)) { //damager is pet
                     Player owner = PetManager.getOwner((LivingEntity) damager);
                     boolean canAttack = EntityUtils.canAttack(owner, livingTarget);
                     if (!canAttack) {
@@ -201,14 +201,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     //manage target player's pet's target
                     if (damager instanceof LivingEntity) {
                         LivingEntity livingDamager = (LivingEntity) damager;
-                        if (PetManager.hasActivePet(playerTarget)) {
-                            LivingEntity activePet = PetManager.getActivePet(playerTarget);
-                            if (activePet instanceof Mob) {
-                                Mob pet = (Mob) activePet;
-                                if (pet.getTarget() == null) {
-                                    pet.setTarget(livingDamager);
-                                }
-                            }
+                        if (PetManager.hasPet(playerTarget) || PetManager.hasCompanion(playerTarget)) {
+                            PetManager.setPetAndCompanionsTarget(playerTarget, livingDamager);
                         }
                     }
                 }
@@ -235,7 +229,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 Location targetLocation = livingTarget.getLocation();
 
                 if (pet == null) { // attacker is not a pet
-                    if (PetManager.isPet(livingTarget)) { // on player attack to pet
+                    if (PetManager.isCompanion(livingTarget)) { // on player attack to pet
                         boolean canAttack = EntityUtils.canAttack(player, livingTarget);
 
                         if (!canAttack) {
@@ -244,14 +238,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         }
                     }
 
-                    if (PetManager.hasActivePet(player)) { // if player has active pet manage pet's target
-                        LivingEntity activePet = PetManager.getActivePet(player);
-                        if (activePet instanceof Mob) {
-                            Mob mob = (Mob) activePet;
-                            if (mob.getTarget() == null) {
-                                mob.setTarget(livingTarget);
-                            }
-                        }
+                    if (PetManager.hasPet(player) || PetManager.hasCompanion(player)) { // If player has active pet manage pet's target
+                        PetManager.setPetAndCompanionsTarget(player, livingTarget);
                     }
 
                     //custom damage modifiers

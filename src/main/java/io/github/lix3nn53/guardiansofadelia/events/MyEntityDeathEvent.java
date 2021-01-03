@@ -17,7 +17,7 @@ public class MyEntityDeathEvent implements Listener {
         event.setDroppedExp(0);
 
         SkillDataManager.onEntityDeath(entity);
-        PetManager.onPetDeath(entity);
+        PetManager.onEntityDeath(entity);
     }
 
 }
