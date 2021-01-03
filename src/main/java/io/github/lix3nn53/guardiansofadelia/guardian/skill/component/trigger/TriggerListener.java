@@ -11,19 +11,21 @@ import java.util.List;
 public class TriggerListener {
     //Every player can have only one trigger of a type
 
-    private static HashMap<Player, InitializeTrigger> playerToInitializeTrigger = new HashMap<>();
+    private static final HashMap<Player, InitializeTrigger> playerToInitializeTrigger = new HashMap<>();
 
-    private static HashMap<Player, LandTrigger> playerToLandTrigger = new HashMap<>();
+    private static final HashMap<Player, LandTrigger> playerToLandTrigger = new HashMap<>();
 
-    private static HashMap<Player, TookPhysicalDamageTrigger> playerToTookPhysicalDamageTrigger = new HashMap<>();
-    private static HashMap<Player, TookMagicalDamageTrigger> playerToTookMagicalDamageTrigger = new HashMap<>();
-    private static HashMap<Player, TookMeleeDamageTrigger> playerToTookMeleeDamageTrigger = new HashMap<>();
+    private static final HashMap<Player, TookPhysicalDamageTrigger> playerToTookPhysicalDamageTrigger = new HashMap<>();
+    private static final HashMap<Player, TookMagicalDamageTrigger> playerToTookMagicalDamageTrigger = new HashMap<>();
+    private static final HashMap<Player, TookMeleeDamageTrigger> playerToTookMeleeDamageTrigger = new HashMap<>();
 
-    private static HashMap<Player, MeleeAttackTrigger> playerToMeleeAttackTrigger = new HashMap<>();
-    private static HashMap<Player, RangedAttackTrigger> playerToRangedAttackTrigger = new HashMap<>();
-    private static HashMap<Player, MagicAttackTrigger> playerToMagicAttackTrigger = new HashMap<>();
+    private static final HashMap<Player, MeleeAttackTrigger> playerToMeleeAttackTrigger = new HashMap<>();
+    private static final HashMap<Player, RangedAttackTrigger> playerToRangedAttackTrigger = new HashMap<>();
+    private static final HashMap<Player, MagicAttackTrigger> playerToMagicAttackTrigger = new HashMap<>();
 
-    private static HashMap<Player, AddPiercingToArrowShootFromCrossbowTrigger> playerToAddPiercingToArrowShootFromCrossbowTrigger = new HashMap<>();
+    private static final HashMap<Player, AddPiercingToArrowShootFromCrossbowTrigger> playerToAddPiercingToArrowShootFromCrossbowTrigger = new HashMap<>();
+
+    private static final HashMap<Player, SpawnSaveEntityTrigger> playerToSpawnSavedEntityTrigger = new HashMap<>();
 
     public static void onPlayerQuit(Player player) {
         playerToInitializeTrigger.remove(player);
@@ -38,6 +40,8 @@ public class TriggerListener {
         playerToMagicAttackTrigger.remove(player);
 
         playerToAddPiercingToArrowShootFromCrossbowTrigger.remove(player);
+
+        playerToSpawnSavedEntityTrigger.remove(player);
     }
 
     public static void startListeningLandTrigger(Player player, LandTrigger landTrigger) {
@@ -139,6 +143,23 @@ public class TriggerListener {
         if (playerToAddPiercingToArrowShootFromCrossbowTrigger.containsKey(player)) {
             playerToAddPiercingToArrowShootFromCrossbowTrigger.get(player).callback(arrow);
             //playerToAddPiercingToArrowShootFromCrossbowTrigger.remove(player); DO NOT REMOVE SINCE THIS MECHANIC HAS NO COOLDOWN AND DOES NOT ADD ITSELF BACK
+        }
+    }
+
+    public static void startListeningSpawnSavedEntity(Player player, SpawnSaveEntityTrigger trigger) {
+        player.sendMessage("SpawnSaveEntityTrigger start listening");
+        playerToSpawnSavedEntityTrigger.put(player, trigger);
+    }
+
+    public static void onPlayerSpawnSavedEntity(Player player, LivingEntity created) {
+        player.sendMessage("SpawnSaveEntityTrigger activation 0");
+        if (playerToSpawnSavedEntityTrigger.containsKey(player)) {
+            player.sendMessage("SpawnSaveEntityTrigger activation 1");
+            boolean callback = playerToSpawnSavedEntityTrigger.get(player).callback(player, created);
+            if (callback) {
+                player.sendMessage("SpawnSaveEntityTrigger activation 2");
+                playerToSpawnSavedEntityTrigger.remove(player);
+            }
         }
     }
 

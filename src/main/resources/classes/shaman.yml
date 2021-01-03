@@ -1,0 +1,437 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+tier: 3
+color: "GREEN"
+description:
+  - "Totemsssssssssss"
+classIconCustomModelData: 4
+attributeTierFire: 1
+attributeTierWater: 4
+attributeTierEarth: 5
+attributeTierLightning: 6
+attributeTierWind: 0
+weaponGearTypes:
+  - "WAND"
+  - "DAGGER"
+  - "STAFF"
+armorGearTypes:
+  - "LIGHTNING_ARMOR"
+  - "WIND_ARMOR"
+hasDefaultOffhand: false
+skillOne:
+  name: "Totem"
+  customModelData: 22
+  description:
+    - "Spawn a totem"
+  manaCosts:
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+  cooldowns:
+    - 41
+    - 46
+    - 51
+    - 56
+    - 61
+    - 71
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "HologramMechanic"
+      helmetType: "IRON_PICKAXE"
+      customModelData: 6
+      durations:
+        - 40
+        - 44
+        - 50
+        - 55
+        - 60
+        - 70
+      displayText: "< Totem %caster% >"
+      gravity: true
+      marker: false
+      speed: 1.9
+      right: 0
+      forward: 1
+      upward: 0.5
+      save: true
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_SPLASH"
+skillTwo:
+  name: "Thunderstorm"
+  customModelData: 56
+  description:
+    - "Deal damage to enemies nearby your totem over time."
+  manaCosts:
+    - 10
+    - 12
+    - 14
+    - 16
+    - 18
+    - 20
+  cooldowns:
+    - 14
+    - 14
+    - 14
+    - 14
+    - 14
+    - 14
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "RepeatMechanic"
+      period: 40
+      repetitions:
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 14
+      child1:
+        componentType: "SavedEntitiesTarget"
+        allies: false
+        enemy: false
+        self: false
+        max: 5
+        armorStand: true
+        child1:
+          componentType: "AreaTarget"
+          allies: true
+          enemy: false
+          self: true
+          max: 15
+          radiusList:
+            - 5
+            - 5.5
+            - 6
+            - 6.5
+            - 7
+            - 8
+          child1:
+            componentType: "DamageMechanic"
+            damageType: "MAGIC"
+            damageList:
+              - 20
+              - 50
+              - 200
+              - 325
+              - 450
+              - 720
+        child2:
+          componentType: "ParticleMechanic"
+          type: "VILLAGER_ANGRY"
+          amount: 12
+          upward: 1
+          radius:
+            - 5
+            - 5.5
+            - 6
+            - 6.5
+            - 7
+            - 8
+        child3:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_SONIC_BOOM"
+skillThree:
+  name: "Totem Slam"
+  customModelData: 20
+  description:
+    - "Stun enemies nearby your totem."
+  manaCosts:
+    - 10
+    - 12
+    - 14
+    - 16
+    - 18
+    - 20
+  cooldowns:
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "SavedEntitiesTarget"
+      allies: false
+      enemy: false
+      self: false
+      max: 5
+      armorStand: true
+      child1:
+        componentType: "AreaTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 15
+        radiusList:
+          - 5
+          - 5.5
+          - 6
+          - 6.5
+          - 7
+          - 8
+        child1:
+          componentType: "RootMechanic"
+          lockY: true
+          durations:
+            - 40
+            - 50
+            - 60
+            - 70
+            - 80
+            - 90
+        child2:
+          componentType: "SilenceMechanic"
+          durations:
+            - 40
+            - 50
+            - 60
+            - 70
+            - 80
+            - 90
+        child3:
+          componentType: "DisarmMechanic"
+          durations:
+            - 40
+            - 50
+            - 60
+            - 70
+            - 80
+            - 90
+        child4:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "ParticleMechanic"
+            type: "REDSTONE"
+            amount: 12
+            upward: 1
+            dustColor: 13408512
+            dustSize: 8
+            radius:
+              - 5
+              - 5.5
+              - 6
+              - 6.5
+              - 7
+              - 8
+          child2:
+            componentType: "SoundMechanic"
+            goaSound: "SKILL_STUN_HIT"
+skillPassive:
+  name: "Purifying Waters"
+  customModelData: 52
+  description:
+    - "Your totem heals neaby allies over time."
+  manaCosts:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  cooldowns:
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+  trigger:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "SpawnSaveEntityTrigger"
+      cooldowns:
+        - 10
+        - 10
+        - 10
+        - 10
+        - 10
+        - 10
+      child1:
+        componentType: "RepeatCancelMechanic"
+      child2:
+        componentType: "RepeatMechanic"
+        period: 40
+        repetitions:
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 12
+        child1:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "SavedEntityCondition"
+            minValue: 1
+            maxValue: 1
+            child1:
+              componentType: "SavedEntitiesTarget"
+              allies: false
+              enemy: false
+              self: false
+              max: 5
+              armorStand: true
+              child1:
+                componentType: "AreaTarget"
+                allies: true
+                enemy: false
+                self: true
+                max: 15
+                radiusList:
+                  - 5
+                  - 5.5
+                  - 6
+                  - 6.5
+                  - 7
+                  - 8
+                child1:
+                  componentType: "HealMechanic"
+                  healAmountList:
+                    - 20
+                    - 50
+                    - 200
+                    - 325
+                    - 450
+                    - 720
+              child2:
+                componentType: "ParticleMechanic"
+                type: "HEART"
+                amount: 12
+                upward: 1
+                radius:
+                  - 5
+                  - 5.5
+                  - 6
+                  - 6.5
+                  - 7
+                  - 8
+              child3:
+                componentType: "SoundMechanic"
+                goaSound: "SKILL_HEAL"
+skillUltimate:
+  name: "Surf"
+  customModelData: 54
+  description:
+    - "Push nearby enemies away."
+  manaCosts:
+    - 10
+    - 12
+    - 14
+    - 16
+    - 18
+    - 20
+  cooldowns:
+    - 14
+    - 14
+    - 14
+    - 14
+    - 14
+    - 14
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "SavedEntityCondition"
+      minValue: 1
+      maxValue: 1
+      child1:
+        componentType: "AreaTarget"
+        allies: false
+        enemy: false
+        self: false
+        armorStand: true
+        max: 10
+        radiusList:
+          - 4.5
+          - 4.75
+          - 5
+          - 5.25
+          - 5.5
+          - 6
+        child1:
+          componentType: "PushMechanic"
+          pushType: "FIXED"
+          speedList:
+            - 2.6
+            - 2.8
+            - 3
+            - 3.2
+            - 3.5
+            - 4
+          centerSelf: true
+          offsetY: -0.8
+      child2:
+        componentType: "ParticleMechanic"
+        type: "EXPLOSION_LARGE"
+        amount: 1
+        upward: 0.5
+        radius:
+          - 4.5
+          - 4.75
+          - 5
+          - 5.25
+          - 5.5
+          - 6
+      child3:
+        componentType: "DelayMechanic"
+        ticks: 10
+        child1:
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: true
+          max: 20
+          radiusList:
+            - 4.5
+            - 4.75
+            - 5
+            - 5.25
+            - 5.5
+            - 6
+          child1:
+            componentType: "SavedEntitiesTarget"
+            allies: false
+            enemy: false
+            self: false
+            max: 20
+            keepCurrent: true
+            addToBeginning: true
+            child1:
+              componentType: "PushMechanic"
+              pushType: "FIXED"
+              speedList:
+                - -2.6
+                - -2.8
+                - -3
+                - -3.2
+                - -3.5
+                - -4
+              centerSelf: false
+              offsetY: 4
+      child4:
+        componentType: "DelayMechanic"
+        ticks: 15
+        child1:
+          componentType: "ImmunityMechanic"
+          damageCause: "FALL"
+        child2:
+          componentType: "LandTrigger"
+          child1:
+            componentType: "ImmunityRemoveMechanic"
+            damageCause: FALL
+            delay: 5
+      child5:
+        componentType: "SoundMechanic"
+        goaSound: "SKILL_JUMP"

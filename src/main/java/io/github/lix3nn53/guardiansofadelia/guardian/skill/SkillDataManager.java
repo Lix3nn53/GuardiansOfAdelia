@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -141,6 +142,9 @@ public class SkillDataManager {
             entities.add(created);
             hashMap.put(castCounter, entities);
             keyEntityToCastCounterToSavedEntities.put(keyEntity, hashMap);
+        }
+        if (keyEntity instanceof Player) {
+            TriggerListener.onPlayerSpawnSavedEntity((Player) keyEntity, created);
         }
     }
 

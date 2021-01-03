@@ -97,14 +97,14 @@ public class SkillComponentLoader {
             return new TookPhysicalDamageTrigger(configurationSection);
         } else if (componentType.equals(HealthCondition.class.getSimpleName())) {
             return new HealthCondition(configurationSection);
+        } else if (componentType.equals(SavedEntityCondition.class.getSimpleName())) {
+            return new SavedEntityCondition(configurationSection);
         } else if (componentType.equals(ParticleAnimationMechanic.class.getSimpleName())) {
             return new ParticleAnimationMechanic(configurationSection);
         } else if (componentType.equals(ImmunityMechanic.class.getSimpleName())) {
             return new ImmunityMechanic(configurationSection);
         } else if (componentType.equals(LandTrigger.class.getSimpleName())) {
             return new LandTrigger();
-        } else if (componentType.equals(ImmunityRemoveMechanic.class.getSimpleName())) {
-            return new ImmunityRemoveMechanic(configurationSection);
         } else if (componentType.equals(ImmunityRemoveMechanic.class.getSimpleName())) {
             return new ImmunityRemoveMechanic(configurationSection);
         } else if (componentType.equals(SilenceMechanic.class.getSimpleName())) {
@@ -119,6 +119,8 @@ public class SkillComponentLoader {
             return new FireMechanic(configurationSection);
         } else if (componentType.equals(RangedAttackTrigger.class.getSimpleName())) {
             return new RangedAttackTrigger(configurationSection);
+        } else if (componentType.equals(SpawnSaveEntityTrigger.class.getSimpleName())) {
+            return new SpawnSaveEntityTrigger(configurationSection);
         } else if (componentType.equals(ValueCondition.class.getSimpleName())) {
             return new ValueCondition(configurationSection);
         } else if (componentType.equals(ValueAddMechanic.class.getSimpleName())) {
@@ -169,9 +171,9 @@ public class SkillComponentLoader {
             return new DisguiseMechanic(configurationSection);
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info("NO SUCH COMPONENT IN LOADER: " + componentType);
-        GuardiansOfAdelia.getInstance().getLogger().info("NO SUCH COMPONENT IN LOADER: " + componentType);
-        GuardiansOfAdelia.getInstance().getLogger().info("NO SUCH COMPONENT IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);
 
         return null;
     }
