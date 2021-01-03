@@ -772,6 +772,7 @@ public class MyInventoryClickEvent implements Listener {
         } else if (title.contains(ChatColor.DARK_GRAY + "Class Manager")) {
             if (rpgCharacter != null) {
                 String[] split = currentName.split("#");
+                if (split.length != 2) return;
                 int rank = Integer.parseInt(split[1]);
                 GuiGeneric guiGeneric = MenuList.classChange(player, rank);
                 guiGeneric.openInventory(player);

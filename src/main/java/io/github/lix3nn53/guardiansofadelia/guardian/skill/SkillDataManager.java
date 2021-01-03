@@ -207,6 +207,7 @@ public class SkillDataManager {
         keyEntityToSkillFlags.remove(player);
         keyEntityToCastCounterToRepeatTask.remove(player);
         keyEntityPlusKeyToValue.remove(player);
+        keyEntityToCastCounterToSavedEntities.remove(player);
     }
 
     /**
@@ -218,5 +219,27 @@ public class SkillDataManager {
         keyEntityToSkillFlags.remove(livingEntity);
         keyEntityToCastCounterToRepeatTask.remove(livingEntity);
         keyEntityPlusKeyToValue.remove(livingEntity);
+
+        for (LivingEntity keyEntity : keyEntityToCastCounterToSavedEntities.keySet()) {
+            HashMap<Integer, List<LivingEntity>> castCounterToSavedEntities = keyEntityToCastCounterToSavedEntities.get(keyEntity);
+
+            for (int castCounter : castCounterToSavedEntities.keySet()) {
+                List<LivingEntity> livingEntities = castCounterToSavedEntities.get(castCounter);
+
+                boolean remove = livingEntities.remove(livingEntity);
+
+                if (remove) {
+
+                    // SavedEntityDeathTrigger
+                    if (livingEntities.isEmpty()) {
+                        castCounterToSavedEntities.remove(castCounter);
+                        if (castCounterToSavedEntities.isEmpty()) {
+                            keyEntityToCastCounterToSavedEntities.remove(keyEntity);
+                        }
+                    }
+                    break;
+                }
+            }
+        }
     }
 }

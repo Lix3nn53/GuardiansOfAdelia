@@ -28,10 +28,6 @@ public class SpawnCompanionMechanic extends MechanicComponent {
             configLoadError("amounts");
         }
 
-        if (!configurationSection.contains("durations")) {
-            configLoadError("durations");
-        }
-
         this.mobCode = configurationSection.getString("mobCode");
         this.amounts = configurationSection.getIntegerList("amounts");
 

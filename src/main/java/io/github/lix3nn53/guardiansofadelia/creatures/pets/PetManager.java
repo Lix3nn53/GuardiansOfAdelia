@@ -12,6 +12,9 @@ import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
 import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
 import io.lumine.xikage.mythicmobs.io.MythicConfig;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.Disguise;
+import me.libraryaddict.disguise.disguisetypes.FlagWatcher;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -127,6 +130,14 @@ public class PetManager {
         petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + currentHP + "/" + (int) maxHP + "❤";
         pet.setCustomName(petName);
 
+        // name if disguised
+        boolean disguised = DisguiseAPI.isDisguised(pet);
+        if (disguised) {
+            Disguise disguise = DisguiseAPI.getDisguise(pet);
+            FlagWatcher watcher = disguise.getWatcher();
+            watcher.setCustomName(petName);
+        }
+
         return pet;
     }
 
@@ -176,9 +187,8 @@ public class PetManager {
             if (isCompanion(livingEntity)) {
                 int currentHealthInteger = (int) (currentHealth + 0.5);
                 int nextHealth = (int) ((currentHealth - finalDamage) + 0.5);
-                String customName = livingEntity.getCustomName();
-                String replace = customName.replace(currentHealthInteger + "/", nextHealth + "/");
-                livingEntity.setCustomName(replace);
+
+                updateName(currentHealthInteger, nextHealth, livingEntity);
 
                 if (isCompanionAlsoPet(livingEntity)) {
                     updateCurrentHealthSavedInEgg(livingEntity, nextHealth);
@@ -191,10 +201,8 @@ public class PetManager {
         if (!livingEntity.isDead()) {
             if (isCompanion(livingEntity)) {
                 int currentHealthInteger = (int) (currentHealth + 0.5);
-                String customName = livingEntity.getCustomName();
-                String replace = customName.replace(currentHealthInteger + "/", setHealth + "/");
-                livingEntity.setCustomName(replace);
 
+                updateName(currentHealthInteger, setHealth, livingEntity);
 
                 if (isCompanionAlsoPet(livingEntity)) {
                     updateCurrentHealthSavedInEgg(livingEntity, setHealth);
@@ -208,14 +216,27 @@ public class PetManager {
             if (isCompanion(livingEntity)) {
                 int currentHealthInteger = (int) (currentHealth + 0.5);
                 int nextHealth = (int) ((currentHealth + healAmount) + 0.5);
-                String customName = livingEntity.getCustomName();
-                String replace = customName.replace(currentHealthInteger + "/", nextHealth + "/");
-                livingEntity.setCustomName(replace);
+
+                updateName(currentHealthInteger, nextHealth, livingEntity);
 
                 if (isCompanionAlsoPet(livingEntity)) {
                     updateCurrentHealthSavedInEgg(livingEntity, nextHealth);
                 }
             }
+        }
+    }
+
+    private static void updateName(int currentHealth, int nextHealth, LivingEntity companion) {
+        String customName = companion.getCustomName();
+        String replace = customName.replace(currentHealth + "/", nextHealth + "/");
+
+        companion.setCustomName(replace);
+
+        boolean disguised = DisguiseAPI.isDisguised(companion);
+        if (disguised) {
+            Disguise disguise = DisguiseAPI.getDisguise(companion);
+            FlagWatcher watcher = disguise.getWatcher();
+            watcher.setCustomName(replace);
         }
     }
 
@@ -349,13 +370,11 @@ public class PetManager {
         } else {
             companions = new ArrayList<>();
         }
-        GuardiansOfAdelia.getInstance().getLogger().info("companions before pet add: " + companions.toString());
 
         if (hasPet(player)) {
             LivingEntity pet = getPet(player);
             companions.add(pet);
         }
-        GuardiansOfAdelia.getInstance().getLogger().info("companions after pet add: " + companions.toString());
 
         if (!companions.isEmpty()) {
             Location target = player.getLocation();
