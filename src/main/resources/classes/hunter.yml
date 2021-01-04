@@ -317,12 +317,12 @@ skillUltimate:
         helmetType: "IRON_PICKAXE"
         customModelData: 5
         durations:
-          - 50
-          - 55
-          - 60
-          - 65
-          - 70
-          - 80
+          - 1000
+          - 1100
+          - 1200
+          - 1300
+          - 1400
+          - 1600
         displayText: "< Trap %caster% >"
         save: true
         child1:

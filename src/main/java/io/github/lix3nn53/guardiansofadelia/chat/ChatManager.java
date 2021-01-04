@@ -30,7 +30,7 @@ public class ChatManager {
 
             ArmorStand armorStand;
             int ticksPass = 0;
-            int ticksLimit = 30;
+            final int ticksLimit = 30;
 
             @Override
             public void run() {
@@ -50,9 +50,9 @@ public class ChatManager {
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 2L);
     }
 
-    public static void chatHologramEntity(Entity entity, String message, int durationTicks) {
+    public static void chatHologramEntity(Entity entity, String message, int durationTicks, double offsetY) {
         double height = entity.getHeight();
-        Location location = entity.getLocation().clone().add(0, height + 0.4, 0);
+        Location location = entity.getLocation().clone().add(0, height + 0.4 + offsetY, 0);
 
         new BukkitRunnable() {
 
@@ -68,7 +68,7 @@ public class ChatManager {
                     if (ticksPass == 0) {
                         armorStand = new Hologram(location, ChatColor.YELLOW + "< " + ChatColor.GRAY + message + ChatColor.YELLOW + " >").getArmorStand();
                     }
-                    Location location = entity.getLocation().clone().add(0, height + 0.4, 0);
+                    Location location = entity.getLocation().clone().add(0, height + 0.4 + offsetY, 0);
                     armorStand.teleport(location);
                     ticksPass += 2;
                 }

@@ -1,30 +1,21 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.Optional;
 
-public class ValueCondition extends ConditionComponent {
+public class CompanionCondition extends ConditionComponent {
 
-    private final String key;
+    private final Optional<String> mobCode;
     private final int minValue;
     private final int maxValue;
 
-    public ValueCondition(String key, int minValue, int maxValue) {
-        this.key = key;
-        this.minValue = minValue;
-        this.maxValue = maxValue;
-    }
-
-    public ValueCondition(ConfigurationSection configurationSection) {
-        if (!configurationSection.contains("key")) {
-            configLoadError("key");
-        }
-
+    public CompanionCondition(ConfigurationSection configurationSection) {
         if (!configurationSection.contains("minValue")) {
             configLoadError("minValue");
         }
@@ -33,7 +24,12 @@ public class ValueCondition extends ConditionComponent {
             configLoadError("maxValue");
         }
 
-        this.key = configurationSection.getString("key");
+        if (configurationSection.contains("mobCode")) {
+            this.mobCode = Optional.of(configurationSection.getString("mobCode"));
+        } else {
+            this.mobCode = Optional.empty();
+        }
+
         this.minValue = configurationSection.getInt("minValue");
         this.maxValue = configurationSection.getInt("maxValue");
     }
@@ -44,9 +40,13 @@ public class ValueCondition extends ConditionComponent {
 
         boolean success = false;
         for (LivingEntity target : targets) {
-            int value = SkillDataManager.getValue(target, key);
+            if (!(target instanceof Player)) continue;
+            Player owner = (Player) target;
 
-            GuardiansOfAdelia.getInstance().getLogger().info("value: " + value);
+            List<LivingEntity> companions = mobCode.map(s -> PetManager.getCompanions(owner, s)).orElseGet(() -> PetManager.getCompanions(owner));
+
+            int value = companions.size();
+
             if (value >= minValue && value <= maxValue) {
                 success = executeChildren(caster, skillLevel, targets, castCounter) || success;
             }

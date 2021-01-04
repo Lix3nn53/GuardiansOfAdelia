@@ -10,12 +10,13 @@ import java.util.UUID;
 
 public class GuardianDataManager {
 
-    private static HashMap<UUID, GuardianData> onlineGuardians = new HashMap<>();
+    private static final HashMap<UUID, GuardianData> onlineGuardians = new HashMap<>();
 
     public static GuardianData getGuardianData(UUID uuid) {
         if (onlineGuardians.containsKey(uuid)) {
             return onlineGuardians.get(uuid);
         }
+
         return null;
     }
 

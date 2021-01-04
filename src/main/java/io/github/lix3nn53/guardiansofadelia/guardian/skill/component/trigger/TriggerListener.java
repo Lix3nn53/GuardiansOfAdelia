@@ -27,7 +27,7 @@ public class TriggerListener {
 
     private static final HashMap<Player, SavedEntitySpawnTrigger> playerToSavedEntitySpawnTrigger = new HashMap<>();
     private static final HashMap<Player, SavedEntityDeathTrigger> playerToSavedEntityDeathTrigger = new HashMap<>();
-
+    private static final HashMap<Player, CompanionSpawnTrigger> playerToCompanionSpawnTrigger = new HashMap<>();
     private static final HashMap<Player, CompanionDeathTrigger> playerToCompanionDeathTrigger = new HashMap<>();
 
     public static void onPlayerQuit(Player player) {
@@ -46,6 +46,7 @@ public class TriggerListener {
 
         playerToSavedEntitySpawnTrigger.remove(player);
         playerToSavedEntityDeathTrigger.remove(player);
+        playerToCompanionSpawnTrigger.remove(player);
         playerToCompanionDeathTrigger.remove(player);
     }
 
@@ -185,8 +186,25 @@ public class TriggerListener {
         }
     }
 
+    public static void startListeningCompanionSpawn(Player player, CompanionSpawnTrigger trigger) {
+        player.sendMessage("CompanionSpawnTrigger start listening");
+        playerToCompanionSpawnTrigger.put(player, trigger);
+    }
+
+    public static void onPlayerCompanionSpawn(Player player, LivingEntity spawned) {
+        player.sendMessage("CompanionSpawnTrigger activation 0");
+        if (playerToCompanionSpawnTrigger.containsKey(player)) {
+            player.sendMessage("CompanionSpawnTrigger activation 1");
+            boolean callback = playerToCompanionSpawnTrigger.get(player).callback(player, spawned);
+            if (callback) {
+                player.sendMessage("CompanionSpawnTrigger activation 2");
+                playerToCompanionSpawnTrigger.remove(player);
+            }
+        }
+    }
+
     public static void startListeningCompanionDeath(Player player, CompanionDeathTrigger trigger) {
-        player.sendMessage("SaveEntityDeathTrigger start listening");
+        player.sendMessage("CompanionDeathTrigger start listening");
         playerToCompanionDeathTrigger.put(player, trigger);
     }
 

@@ -12,7 +12,7 @@ public class RemoveMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
-            target.remove();
+            target.damage(9999999);
         }
 
         return true;

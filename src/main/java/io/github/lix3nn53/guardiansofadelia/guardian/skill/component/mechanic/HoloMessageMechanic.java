@@ -39,7 +39,7 @@ public class HoloMessageMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
-            ChatManager.chatHologramEntity(target, message, durationTicks);
+            ChatManager.chatHologramEntity(target, message, durationTicks, 0);
         }
 
         return true;

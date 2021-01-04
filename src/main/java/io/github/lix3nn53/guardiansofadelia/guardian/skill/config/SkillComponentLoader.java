@@ -59,6 +59,8 @@ public class SkillComponentLoader {
             return new SoundMechanic(configurationSection);
         } else if (componentType.equals(HoloMessageMechanic.class.getSimpleName())) {
             return new HoloMessageMechanic(configurationSection);
+        } else if (componentType.equals(DelayWithHoloMessageMechanic.class.getSimpleName())) {
+            return new DelayWithHoloMessageMechanic(configurationSection);
         } else if (componentType.equals(DelayMechanic.class.getSimpleName())) {
             return new DelayMechanic(configurationSection);
         } else if (componentType.equals(SpawnCompanionMechanic.class.getSimpleName())) {
@@ -87,6 +89,8 @@ public class SkillComponentLoader {
             }
         } else if (componentType.equals(FilterCurrentTargets.class.getSimpleName())) {
             return new FilterCurrentTargets(configurationSection);
+        } else if (componentType.equals(SavedCompanionsTarget.class.getSimpleName())) {
+            return new SavedCompanionsTarget(configurationSection);
         } else if (componentType.equals(HologramMechanic.class.getSimpleName())) {
             return new HologramMechanic(configurationSection);
         } else if (componentType.equals(RepeatMechanic.class.getSimpleName())) {
@@ -95,6 +99,10 @@ public class SkillComponentLoader {
             return new BuffMechanic(configurationSection);
         } else if (componentType.equals(InitializeTrigger.class.getSimpleName())) {
             return new InitializeTrigger();
+        } else if (componentType.equals(CompanionDeathTrigger.class.getSimpleName())) {
+            return new CompanionDeathTrigger(configurationSection);
+        } else if (componentType.equals(CompanionSpawnTrigger.class.getSimpleName())) {
+            return new CompanionSpawnTrigger(configurationSection);
         } else if (componentType.equals(TookPhysicalDamageTrigger.class.getSimpleName())) {
             return new TookPhysicalDamageTrigger(configurationSection);
         } else if (componentType.equals(HealthCondition.class.getSimpleName())) {
@@ -171,6 +179,10 @@ public class SkillComponentLoader {
             return new InvincibleRemoveMechanic(configurationSection);
         } else if (componentType.equals(DisguiseMechanic.class.getSimpleName())) {
             return new DisguiseMechanic(configurationSection);
+        } else if (componentType.equals(RemoveMechanic.class.getSimpleName())) {
+            return new RemoveMechanic();
+        } else if (componentType.equals(CompanionCondition.class.getSimpleName())) {
+            return new CompanionCondition(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

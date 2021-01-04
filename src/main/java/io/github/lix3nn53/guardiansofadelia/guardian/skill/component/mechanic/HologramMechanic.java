@@ -161,7 +161,7 @@ public class HologramMechanic extends MechanicComponent {
                         model.remove();
                     }
                 }
-            }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * DURATION.get(skillLevel - 1));
+            }.runTaskLater(GuardiansOfAdelia.getInstance(), DURATION.get(skillLevel - 1));
 
             //pass ArmorStand to children as target
             armorStandList.add(model);

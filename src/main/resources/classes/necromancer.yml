@@ -62,27 +62,6 @@ skillOne:
         - 5
         - 6
 skillTwo:
-  name: "Summon"
-  customModelData: 42
-  description:
-    - "Summon skeletons"
-  manaCosts:
-    - 5
-    - 7
-    - 9
-    - 11
-    - 13
-    - 15
-  cooldowns:
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
-  trigger:
-    componentType: "SelfTarget"
-skillThree:
   name: "Skullshot"
   customModelData: 39
   description:
@@ -103,9 +82,9 @@ skillThree:
     - 16
   trigger:
     componentType: "SelfTarget"
-skillPassive:
-  name: "Summon"
-  customModelData: 42
+skillThree:
+  name: "Gain Health kill summons"
+  customModelData: 38
   description:
     - "Summon skeletons"
   manaCosts:
@@ -124,11 +103,20 @@ skillPassive:
     - 16
   trigger:
     componentType: "SelfTarget"
-skillUltimate:
-  name: "Summon"
-  customModelData: 42
+    child1:
+      componentType: "SavedCompanionsTarget"
+      mobCode: "CompanionFrozenColossus"
+      allies: true
+      enemy: false
+      self: false
+      max: 15
+      child1:
+        componentType: "RemoveMechanic"
+skillPassive:
+  name: "Summons give you def"
+  customModelData: 47
   description:
-    - "Frozen Colossus"
+    - "Summon skeletons"
   manaCosts:
     - 5
     - 7
@@ -146,22 +134,33 @@ skillUltimate:
   trigger:
     componentType: "InitializeTrigger"
     child1:
-      componentType: "CompanionDeathTrigger"
-      mobCode: "CompanionFrozenColossus"
+      componentType: "CompanionSpawnTrigger"
       child1:
-        componentType: "ValueAddMechanic"
-        key: "NecroUltiSpawnCount"
-        valueToAdd:
-          - -1
-          - -1
-          - -1
-          - -1
-          - -1
-          - -1
+        componentType: "SelfTarget"
+skillUltimate:
+  name: "Frozen Colossus"
+  customModelData: 45
+  description:
+    - "Frozen Colossus"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+  trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "ValueCondition"
-      key: "NecroUltiSpawnCount"
+      componentType: "CompanionCondition"
+      mobCode: "CompanionFrozenColossus"
       minValue: 0
       maxValue: 0
       child1:
@@ -181,10 +180,10 @@ skillUltimate:
         amounts:
           - 1
           - 1
-          - 1
-          - 1
-          - 1
-          - 1
+          - 2
+          - 2
+          - 3
+          - 4
         levels:
           - 1
           - 2
@@ -193,14 +192,104 @@ skillUltimate:
           - 5
           - 6
     child2:
-      componentType: "ValueCondition"
-      key: "NecroUltiSpawnCount"
+      componentType: "CompanionCondition"
+      mobCode: "CompanionFrozenColossus"
       minValue: 1
       maxValue: 6
       child1:
         componentType: "SavedCompanionsTarget"
         mobCode: "CompanionFrozenColossus"
+        allies: true
+        enemy: false
+        self: false
+        max: 15
         child1:
-          componentType: "AreaTarget"
-          
-      
+          componentType: "DelayWithHoloMessageMechanic"
+          message: "&bCasting Freeze!"
+          ticks: 40
+          offsetY: 2
+          child1:
+            componentType: "AreaTarget"
+            allies: false
+            enemy: true
+            self: false
+            max: 15
+            radiusList:
+              - 5
+              - 5.5
+              - 6
+              - 6.5
+              - 7
+              - 8
+            child1:
+              componentType: "RootMechanic"
+              lockY: true
+              durations:
+                - 40
+                - 50
+                - 60
+                - 70
+                - 80
+                - 90
+            child2:
+              componentType: "SilenceMechanic"
+              durations:
+                - 40
+                - 50
+                - 60
+                - 70
+                - 80
+                - 90
+            child3:
+              componentType: "DisarmMechanic"
+              durations:
+                - 40
+                - 50
+                - 60
+                - 70
+                - 80
+                - 90
+            child4:
+              componentType: "HologramMechanic"
+              helmetType: "IRON_PICKAXE"
+              customModelData: 10
+              durations:
+                - 40
+                - 50
+                - 60
+                - 70
+                - 80
+                - 90
+              upward: -0.5
+          child2:
+            componentType: "ParticleMechanic"
+            type: "REDSTONE"
+            amount: 12
+            upward: 1
+            dustColor: 65535
+            dustSize: 8
+            radius:
+              - 5
+              - 5.5
+              - 6
+              - 6.5
+              - 7
+              - 8
+          child3:
+            componentType: "SoundMechanic"
+            goaSound: "SKILL_STUN_HIT"
+  trigger1:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "CompanionDeathTrigger"
+      mobCode: "CompanionFrozenColossus"
+      child1:
+        componentType: "ValueAddMechanic"
+        key: "NecroUltiSpawnCount"
+        valueToAdd:
+          - -1
+          - -1
+          - -1
+          - -1
+          - -1
+          - -1

@@ -151,6 +151,12 @@ public class ClassConfigurations {
         SkillComponent triggerComponent = SkillComponentLoader.loadSection(skillSection.getConfigurationSection("trigger"));
         skill.addTrigger(triggerComponent);
 
+        int triggerCount = ConfigurationUtils.getChildComponentCount(skillSection, "trigger");
+        for (int i = 1; i <= triggerCount; i++) {
+            SkillComponent triggerComponentExtra = SkillComponentLoader.loadSection(skillSection.getConfigurationSection("trigger" + i));
+            skill.addTrigger(triggerComponentExtra);
+        }
+
         return skill;
     }
 

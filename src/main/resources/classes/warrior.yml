@@ -203,12 +203,12 @@ skillThree:
       helmetType: "IRON_PICKAXE"
       customModelData: 4
       durations:
-        - 40
-        - 40
-        - 40
-        - 40
-        - 40
-        - 40
+        - 800
+        - 800
+        - 800
+        - 800
+        - 800
+        - 800
       displayText: "< Victory-Flag %caster% >"
       child1:
         componentType: "RepeatMechanic"

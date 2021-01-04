@@ -83,7 +83,11 @@ public class PetManager {
     public static List<LivingEntity> getCompanions(Player owner, String mobCode) {
         List<LivingEntity> companions = new ArrayList<>();
 
+        if (!ownerToCompanions.containsKey(owner)) return companions;
+
         List<LivingEntity> livingEntities = ownerToCompanions.get(owner);
+
+        if (livingEntities.isEmpty()) return companions;
 
         BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
         for (LivingEntity entity : livingEntities) {
@@ -91,6 +95,8 @@ public class PetManager {
             if (mythicMob) {
                 ActiveMob mythicMobInstance = apiHelper.getMythicMobInstance(entity);
                 String internalName = mythicMobInstance.getType().getInternalName();
+                GuardiansOfAdelia.getInstance().getLogger().info("mobCode: " + mobCode);
+                GuardiansOfAdelia.getInstance().getLogger().info("internalName: " + internalName);
                 if (mobCode.equals(internalName)) {
                     companions.add(entity);
                 }
@@ -330,15 +336,17 @@ public class PetManager {
         if (pet == null) return null;
         companionToOwner.put(pet, player);
 
+        List<LivingEntity> companions;
         if (ownerToCompanions.containsKey(player)) {
-            List<LivingEntity> companions = ownerToCompanions.get(player);
-            companions.add(pet);
+            companions = ownerToCompanions.get(player);
         } else {
-            List<LivingEntity> companions = new ArrayList<>();
-            companions.add(pet);
+            companions = new ArrayList<>();
 
-            ownerToCompanions.put(player, companions);
         }
+        companions.add(pet);
+        ownerToCompanions.put(player, companions);
+
+        TriggerListener.onPlayerCompanionSpawn(player, pet);
 
         return pet;
     }
