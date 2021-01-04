@@ -28,7 +28,7 @@ public class SavedEntitiesTarget extends TargetComponent {
         if (savedEntities.isEmpty()) return false;
 
         if (super.isKeepCurrent()) {
-            if (super.isaddToBeginning()) {
+            if (super.isAddToBeginning()) {
                 Collections.reverse(savedEntities);
                 for (LivingEntity single : savedEntities) {
                     targets.add(0, single);

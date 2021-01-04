@@ -10,23 +10,19 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpawnSaveEntityTrigger extends TriggerComponent {
+public class SavedEntityDeathTrigger extends TriggerComponent {
 
-    private final List<Integer> cooldown;
+    private final List<Integer> cooldowns;
     LivingEntity caster;
     int skillLevel;
     int castCounter;
 
-    public SpawnSaveEntityTrigger(List<Integer> cooldown) {
-        this.cooldown = cooldown;
-    }
-
-    public SpawnSaveEntityTrigger(ConfigurationSection configurationSection) {
-        if (!configurationSection.contains("cooldowns")) {
-            configLoadError("cooldowns");
+    public SavedEntityDeathTrigger(ConfigurationSection configurationSection) {
+        if (configurationSection.contains("cooldowns")) {
+            this.cooldowns = configurationSection.getIntegerList("cooldowns");
+        } else {
+            this.cooldowns = new ArrayList<>();
         }
-
-        this.cooldown = configurationSection.getIntegerList("cooldowns");
     }
 
     @Override
@@ -37,14 +33,14 @@ public class SpawnSaveEntityTrigger extends TriggerComponent {
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
-        SpawnSaveEntityTrigger rangedAttackTrigger = this;
+        SavedEntityDeathTrigger rangedAttackTrigger = this;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningSpawnSavedEntity((Player) target, rangedAttackTrigger);
+                        TriggerListener.startListeningSavedEntityDeath((Player) target, rangedAttackTrigger);
                     }
                 }
             }
@@ -61,21 +57,25 @@ public class SpawnSaveEntityTrigger extends TriggerComponent {
     /**
      * The callback when player lands that applies child components
      */
-    public boolean callback(Player player, LivingEntity created) {
+    public boolean callback(Player player, LivingEntity death) {
         List<LivingEntity> targets = new ArrayList<>();
-        targets.add(created);
+        targets.add(death);
         boolean cast = executeChildren(caster, skillLevel, targets, castCounter);
 
         if (!cast) return false;
 
-        SpawnSaveEntityTrigger trigger = this;
+        SavedEntityDeathTrigger trigger = this;
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                TriggerListener.startListeningSpawnSavedEntity(player, trigger);
-            }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown.get(skillLevel - 1) * 20);
+        if (cooldowns.isEmpty()) {
+            TriggerListener.startListeningSavedEntityDeath(player, trigger);
+        } else {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    TriggerListener.startListeningSavedEntityDeath(player, trigger);
+                }
+            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1) * 20);
+        }
 
         return true;
     }

@@ -22,6 +22,7 @@ public class SpawnEntityMechanic extends MechanicComponent {
     private final String mobCode;
     private final List<Integer> amounts;
     private final List<Integer> DURATION;
+    private final List<Integer> levels;
     private boolean SAVE = false;
 
     public SpawnEntityMechanic(ConfigurationSection configurationSection) {
@@ -37,8 +38,13 @@ public class SpawnEntityMechanic extends MechanicComponent {
             configLoadError("durations");
         }
 
+        if (!configurationSection.contains("levels")) {
+            configLoadError("levels");
+        }
+
         this.mobCode = configurationSection.getString("mobCode");
         this.amounts = configurationSection.getIntegerList("amounts");
+        this.levels = configurationSection.getIntegerList("levels");
 
         if (configurationSection.contains("durations")) {
             this.DURATION = configurationSection.getIntegerList("durations");
@@ -56,6 +62,7 @@ public class SpawnEntityMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         int amount = amounts.get(skillLevel - 1);
+        int level = levels.get(skillLevel - 1);
 
         for (LivingEntity target : targets) {
             if (!(target instanceof Player)) continue;
@@ -67,7 +74,7 @@ public class SpawnEntityMechanic extends MechanicComponent {
                 BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
                 Entity entity = null;
                 try {
-                    entity = apiHelper.spawnMythicMob(mobCode, spawnLoc, skillLevel);
+                    entity = apiHelper.spawnMythicMob(mobCode, spawnLoc, level);
                 } catch (InvalidMobTypeException e) {
                     GuardiansOfAdelia.getInstance().getLogger().info("SpawnEntityMechanic mythicMob code error: " + mobCode);
                     e.printStackTrace();

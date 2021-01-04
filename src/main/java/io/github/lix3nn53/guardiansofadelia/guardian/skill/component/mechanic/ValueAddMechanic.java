@@ -10,9 +10,9 @@ import java.util.List;
 public class ValueAddMechanic extends MechanicComponent {
 
     private final String key;
-    private final int valueToAdd;
+    private final List<Integer> valueToAdd;
 
-    public ValueAddMechanic(String key, int valueToAdd) {
+    public ValueAddMechanic(String key, List<Integer> valueToAdd) {
         this.key = key;
         this.valueToAdd = valueToAdd;
     }
@@ -27,15 +27,16 @@ public class ValueAddMechanic extends MechanicComponent {
         }
 
         this.key = configurationSection.getString("key");
-        this.valueToAdd = configurationSection.getInt("valueToAdd");
+        this.valueToAdd = configurationSection.getIntegerList("valueToAdd");
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
+        int value = valueToAdd.get(skillLevel - 1);
         for (LivingEntity ent : targets) {
-            SkillDataManager.addValue(ent, key, valueToAdd);
+            SkillDataManager.addValue(ent, key, value);
         }
 
         return true;

@@ -1,0 +1,206 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+tier: 3
+color: "DARK_PURPLE"
+description:
+  - "The Necromancer bla bla"
+classIconCustomModelData: 18
+attributeTierFire: 4
+attributeTierWater: 3
+attributeTierEarth: 5
+attributeTierLightning: 1
+attributeTierWind: 0
+weaponGearTypes:
+  - "WAND"
+  - "DAGGER"
+  - "STAFF"
+armorGearTypes:
+  - "LIGHTNING_ARMOR"
+  - "WIND_ARMOR"
+hasDefaultOffhand: false
+skillOne:
+  name: "Summon"
+  customModelData: 42
+  description:
+    - "Summon skeletons"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "SpawnCompanionMechanic"
+      mobCode: "CompanionSkeleton"
+      save: false
+      amounts:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      levels:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+skillTwo:
+  name: "Summon"
+  customModelData: 42
+  description:
+    - "Summon skeletons"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+skillThree:
+  name: "Skullshot"
+  customModelData: 39
+  description:
+    - "Summon skeletons"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+skillPassive:
+  name: "Summon"
+  customModelData: 42
+  description:
+    - "Summon skeletons"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+skillUltimate:
+  name: "Summon"
+  customModelData: 42
+  description:
+    - "Frozen Colossus"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "CompanionDeathTrigger"
+      mobCode: "CompanionFrozenColossus"
+      child1:
+        componentType: "ValueAddMechanic"
+        key: "NecroUltiSpawnCount"
+        valueToAdd:
+          - -1
+          - -1
+          - -1
+          - -1
+          - -1
+          - -1
+    componentType: "SelfTarget"
+    child1:
+      componentType: "ValueCondition"
+      key: "NecroUltiSpawnCount"
+      minValue: 0
+      maxValue: 0
+      child1:
+        componentType: "ValueAddMechanic"
+        key: "NecroUltiSpawnCount"
+        valueToAdd:
+          - 1
+          - 1
+          - 2
+          - 2
+          - 3
+          - 4
+      child2:
+        componentType: "SpawnCompanionMechanic"
+        mobCode: "CompanionFrozenColossus"
+        save: false
+        amounts:
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+        levels:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+    child2:
+      componentType: "ValueCondition"
+      key: "NecroUltiSpawnCount"
+      minValue: 1
+      maxValue: 6
+      child1:
+        componentType: "SavedCompanionsTarget"
+        mobCode: "CompanionFrozenColossus"
+        child1:
+          componentType: "AreaTarget"
+          
+      

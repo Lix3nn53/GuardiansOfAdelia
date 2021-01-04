@@ -20,7 +20,7 @@ public class SelfTarget extends TargetComponent {
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (super.isKeepCurrent()) {
-            if (super.isaddToBeginning()) {
+            if (super.isAddToBeginning()) {
                 targets.add(0, caster);
             } else {
                 targets.add(caster);

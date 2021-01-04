@@ -318,7 +318,13 @@ skillPassive:
           child1:
             componentType: "ValueAddMechanic"
             key: "sharpshooter"
-            valueToAdd: 1
+            valueToAdd:
+              - 1
+              - 1
+              - 1
+              - 1
+              - 1
+              - 1
 skillUltimate:
   name: "Make It Rain"
   customModelData: 16

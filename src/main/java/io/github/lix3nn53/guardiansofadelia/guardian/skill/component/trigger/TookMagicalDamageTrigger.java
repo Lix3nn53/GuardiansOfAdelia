@@ -12,21 +12,17 @@ import java.util.List;
 
 public class TookMagicalDamageTrigger extends TriggerComponent {
 
-    private final List<Integer> cooldown;
+    private final List<Integer> cooldowns;
     LivingEntity caster;
     int skillLevel;
     int castCounter;
 
-    public TookMagicalDamageTrigger(List<Integer> cooldown) {
-        this.cooldown = cooldown;
-    }
-
     public TookMagicalDamageTrigger(ConfigurationSection configurationSection) {
-        if (!configurationSection.contains("cooldowns")) {
-            configLoadError("cooldowns");
+        if (configurationSection.contains("cooldowns")) {
+            this.cooldowns = configurationSection.getIntegerList("cooldowns");
+        } else {
+            this.cooldowns = new ArrayList<>();
         }
-
-        this.cooldown = configurationSection.getIntegerList("cooldowns");
     }
 
     @Override
@@ -70,12 +66,16 @@ public class TookMagicalDamageTrigger extends TriggerComponent {
 
         TookMagicalDamageTrigger trigger = this;
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                TriggerListener.startListeningTookMagicalDamage(player, trigger);
-            }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown.get(skillLevel - 1) * 20);
+        if (cooldowns.isEmpty()) {
+            TriggerListener.startListeningTookMagicalDamage(player, trigger);
+        } else {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    TriggerListener.startListeningTookMagicalDamage(player, trigger);
+                }
+            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1) * 20);
+        }
 
         return true;
     }

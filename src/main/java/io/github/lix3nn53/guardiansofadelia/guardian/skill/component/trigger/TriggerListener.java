@@ -25,7 +25,10 @@ public class TriggerListener {
 
     private static final HashMap<Player, AddPiercingToArrowShootFromCrossbowTrigger> playerToAddPiercingToArrowShootFromCrossbowTrigger = new HashMap<>();
 
-    private static final HashMap<Player, SpawnSaveEntityTrigger> playerToSpawnSavedEntityTrigger = new HashMap<>();
+    private static final HashMap<Player, SavedEntitySpawnTrigger> playerToSavedEntitySpawnTrigger = new HashMap<>();
+    private static final HashMap<Player, SavedEntityDeathTrigger> playerToSavedEntityDeathTrigger = new HashMap<>();
+
+    private static final HashMap<Player, CompanionDeathTrigger> playerToCompanionDeathTrigger = new HashMap<>();
 
     public static void onPlayerQuit(Player player) {
         playerToInitializeTrigger.remove(player);
@@ -41,7 +44,9 @@ public class TriggerListener {
 
         playerToAddPiercingToArrowShootFromCrossbowTrigger.remove(player);
 
-        playerToSpawnSavedEntityTrigger.remove(player);
+        playerToSavedEntitySpawnTrigger.remove(player);
+        playerToSavedEntityDeathTrigger.remove(player);
+        playerToCompanionDeathTrigger.remove(player);
     }
 
     public static void startListeningLandTrigger(Player player, LandTrigger landTrigger) {
@@ -146,19 +151,53 @@ public class TriggerListener {
         }
     }
 
-    public static void startListeningSpawnSavedEntity(Player player, SpawnSaveEntityTrigger trigger) {
-        player.sendMessage("SpawnSaveEntityTrigger start listening");
-        playerToSpawnSavedEntityTrigger.put(player, trigger);
+    public static void startListeningSavedEntitySpawn(Player player, SavedEntitySpawnTrigger trigger) {
+        player.sendMessage("SaveEntitySpawnTrigger start listening");
+        playerToSavedEntitySpawnTrigger.put(player, trigger);
     }
 
-    public static void onPlayerSpawnSavedEntity(Player player, LivingEntity created) {
-        player.sendMessage("SpawnSaveEntityTrigger activation 0");
-        if (playerToSpawnSavedEntityTrigger.containsKey(player)) {
-            player.sendMessage("SpawnSaveEntityTrigger activation 1");
-            boolean callback = playerToSpawnSavedEntityTrigger.get(player).callback(player, created);
+    public static void onPlayerSavedEntitySpawn(Player player, LivingEntity created) {
+        player.sendMessage("SaveEntitySpawnTrigger activation 0");
+        if (playerToSavedEntitySpawnTrigger.containsKey(player)) {
+            player.sendMessage("SaveEntitySpawnTrigger activation 1");
+            boolean callback = playerToSavedEntitySpawnTrigger.get(player).callback(player, created);
             if (callback) {
-                player.sendMessage("SpawnSaveEntityTrigger activation 2");
-                playerToSpawnSavedEntityTrigger.remove(player);
+                player.sendMessage("SaveEntitySpawnTrigger activation 2");
+                playerToSavedEntitySpawnTrigger.remove(player);
+            }
+        }
+    }
+
+    public static void startListeningSavedEntityDeath(Player player, SavedEntityDeathTrigger trigger) {
+        player.sendMessage("SaveEntityDeathTrigger start listening");
+        playerToSavedEntityDeathTrigger.put(player, trigger);
+    }
+
+    public static void onPlayerSavedEntityDeath(Player player, LivingEntity death) {
+        player.sendMessage("SaveEntityDeathTrigger activation 0");
+        if (playerToSavedEntityDeathTrigger.containsKey(player)) {
+            player.sendMessage("SaveEntityDeathTrigger activation 1");
+            boolean callback = playerToSavedEntityDeathTrigger.get(player).callback(player, death);
+            if (callback) {
+                player.sendMessage("SaveEntityDeathTrigger activation 2");
+                playerToSavedEntityDeathTrigger.remove(player);
+            }
+        }
+    }
+
+    public static void startListeningCompanionDeath(Player player, CompanionDeathTrigger trigger) {
+        player.sendMessage("SaveEntityDeathTrigger start listening");
+        playerToCompanionDeathTrigger.put(player, trigger);
+    }
+
+    public static void onPlayerCompanionDeath(Player player, LivingEntity death) {
+        player.sendMessage("CompanionDeathTrigger activation 0");
+        if (playerToCompanionDeathTrigger.containsKey(player)) {
+            player.sendMessage("CompanionDeathTrigger activation 1");
+            boolean callback = playerToCompanionDeathTrigger.get(player).callback(player, death);
+            if (callback) {
+                player.sendMessage("CompanionDeathTrigger activation 2");
+                playerToCompanionDeathTrigger.remove(player);
             }
         }
     }

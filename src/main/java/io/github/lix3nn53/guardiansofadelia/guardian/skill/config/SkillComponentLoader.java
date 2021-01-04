@@ -121,8 +121,8 @@ public class SkillComponentLoader {
             return new FireMechanic(configurationSection);
         } else if (componentType.equals(RangedAttackTrigger.class.getSimpleName())) {
             return new RangedAttackTrigger(configurationSection);
-        } else if (componentType.equals(SpawnSaveEntityTrigger.class.getSimpleName())) {
-            return new SpawnSaveEntityTrigger(configurationSection);
+        } else if (componentType.equals(SavedEntitySpawnTrigger.class.getSimpleName())) {
+            return new SavedEntitySpawnTrigger(configurationSection);
         } else if (componentType.equals(ValueCondition.class.getSimpleName())) {
             return new ValueCondition(configurationSection);
         } else if (componentType.equals(ValueAddMechanic.class.getSimpleName())) {

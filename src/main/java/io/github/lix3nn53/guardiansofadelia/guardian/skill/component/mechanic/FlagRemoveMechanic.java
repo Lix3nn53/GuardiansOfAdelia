@@ -10,11 +10,11 @@ import java.util.List;
 public class FlagRemoveMechanic extends MechanicComponent {
 
     private final String key;
-    private final boolean isUniqueCast;
+    private final boolean isUnique;
 
-    public FlagRemoveMechanic(String key, boolean isUniqueCast) {
+    public FlagRemoveMechanic(String key, boolean isUnique) {
         this.key = key;
-        this.isUniqueCast = isUniqueCast;
+        this.isUnique = isUnique;
     }
 
     public FlagRemoveMechanic(ConfigurationSection configurationSection) {
@@ -22,12 +22,12 @@ public class FlagRemoveMechanic extends MechanicComponent {
             configLoadError("key");
         }
 
-        if (!configurationSection.contains("isUniqueCast")) {
-            configLoadError("isUniqueCast");
+        if (!configurationSection.contains("isUnique")) {
+            configLoadError("isUnique");
         }
 
         this.key = configurationSection.getString("key");
-        this.isUniqueCast = configurationSection.getBoolean("isUniqueCast");
+        this.isUnique = configurationSection.getBoolean("isUnique");
     }
 
     @Override
@@ -35,7 +35,7 @@ public class FlagRemoveMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
-            if (isUniqueCast) {
+            if (isUnique) {
                 SkillDataManager.removeFlag(target, key + castCounter);
             } else {
                 SkillDataManager.removeFlag(target, key);

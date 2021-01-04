@@ -56,7 +56,7 @@ public class LocationTarget extends TargetComponent {
         if (temporaryEntities.isEmpty()) return false;
 
         if (super.isKeepCurrent()) {
-            if (super.isaddToBeginning()) {
+            if (super.isAddToBeginning()) {
                 Collections.reverse(temporaryEntities);
                 for (LivingEntity single : temporaryEntities) {
                     targets.add(0, single);

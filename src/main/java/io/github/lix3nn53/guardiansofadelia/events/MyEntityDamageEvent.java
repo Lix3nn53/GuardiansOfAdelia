@@ -70,7 +70,7 @@ public class MyEntityDamageEvent implements Listener {
         if (cause.equals(EntityDamageEvent.DamageCause.FALL)) {
             float fallDistance = entity.getFallDistance();
 
-            return (fallDistance - 3) * (maxHealth / 80);
+            return (fallDistance - 3) * (maxHealth / 40); // Vanilla fall damage is 1 damage each block after the third
         } else if (cause.equals(EntityDamageEvent.DamageCause.POISON)) {
             return maxHealth / 100;
         } else if (cause.equals(EntityDamageEvent.DamageCause.WITHER)) {

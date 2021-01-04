@@ -14,12 +14,12 @@ public class FlagSetMechanic extends MechanicComponent {
 
     private final String key;
     private final List<Integer> ticks;
-    private final boolean isUniqueCast;
+    private final boolean isUnique;
 
-    public FlagSetMechanic(String key, List<Integer> ticks, boolean isUniqueCast) {
+    public FlagSetMechanic(String key, List<Integer> ticks, boolean isUnique) {
         this.key = key;
         this.ticks = ticks;
-        this.isUniqueCast = isUniqueCast;
+        this.isUnique = isUnique;
     }
 
     public FlagSetMechanic(ConfigurationSection configurationSection) {
@@ -27,12 +27,12 @@ public class FlagSetMechanic extends MechanicComponent {
             configLoadError("key");
         }
 
-        if (!configurationSection.contains("isUniqueCast")) {
-            configLoadError("isUniqueCast");
+        if (!configurationSection.contains("isUnique")) {
+            configLoadError("isUnique");
         }
 
         this.key = configurationSection.getString("key");
-        this.isUniqueCast = configurationSection.getBoolean("isUniqueCast");
+        this.isUnique = configurationSection.getBoolean("isUnique");
 
         if (!configurationSection.contains("ticks")) {
             this.ticks = configurationSection.getIntegerList("ticks");
@@ -46,7 +46,7 @@ public class FlagSetMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
-            if (isUniqueCast) {
+            if (isUnique) {
                 SkillDataManager.addFlag(target, key + castCounter);
             } else {
                 SkillDataManager.addFlag(target, key);
@@ -59,7 +59,7 @@ public class FlagSetMechanic extends MechanicComponent {
                 @Override
                 public void run() {
                     for (LivingEntity target : targets) {
-                        if (isUniqueCast) {
+                        if (isUnique) {
                             SkillDataManager.removeFlag(target, key + castCounter);
                         } else {
                             SkillDataManager.removeFlag(target, key);

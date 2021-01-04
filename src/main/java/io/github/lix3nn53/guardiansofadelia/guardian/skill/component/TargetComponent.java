@@ -150,7 +150,7 @@ public abstract class TargetComponent extends SkillComponent {
         return keepCurrent;
     }
 
-    public boolean isaddToBeginning() {
+    public boolean isAddToBeginning() {
         return addToBeginning;
     }
 }

@@ -51,7 +51,7 @@ public class SingleTarget extends TargetComponent {
         if (singles.isEmpty()) return false;
 
         if (super.isKeepCurrent()) {
-            if (super.isaddToBeginning()) {
+            if (super.isAddToBeginning()) {
                 Collections.reverse(singles);
                 for (LivingEntity single : singles) {
                     targets.add(0, single);

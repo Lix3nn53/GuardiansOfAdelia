@@ -10,14 +10,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TookMeleeDamageTrigger extends TriggerComponent {
+public class SavedEntitySpawnTrigger extends TriggerComponent {
 
     private final List<Integer> cooldowns;
     LivingEntity caster;
     int skillLevel;
     int castCounter;
 
-    public TookMeleeDamageTrigger(ConfigurationSection configurationSection) {
+    public SavedEntitySpawnTrigger(ConfigurationSection configurationSection) {
         if (configurationSection.contains("cooldowns")) {
             this.cooldowns = configurationSection.getIntegerList("cooldowns");
         } else {
@@ -33,14 +33,14 @@ public class TookMeleeDamageTrigger extends TriggerComponent {
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
-        TookMeleeDamageTrigger tookPhysicalDamageTrigger = this;
+        SavedEntitySpawnTrigger rangedAttackTrigger = this;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningTookMeleeDamage((Player) target, tookPhysicalDamageTrigger);
+                        TriggerListener.startListeningSavedEntitySpawn((Player) target, rangedAttackTrigger);
                     }
                 }
             }
@@ -57,22 +57,22 @@ public class TookMeleeDamageTrigger extends TriggerComponent {
     /**
      * The callback when player lands that applies child components
      */
-    public boolean callback(Player player, LivingEntity attacker) {
-        ArrayList<LivingEntity> targets = new ArrayList<>();
-        targets.add(attacker);
+    public boolean callback(Player player, LivingEntity created) {
+        List<LivingEntity> targets = new ArrayList<>();
+        targets.add(created);
         boolean cast = executeChildren(caster, skillLevel, targets, castCounter);
 
         if (!cast) return false;
 
-        TookMeleeDamageTrigger trigger = this;
+        SavedEntitySpawnTrigger trigger = this;
 
         if (cooldowns.isEmpty()) {
-            TriggerListener.startListeningTookMeleeDamage(player, trigger);
+            TriggerListener.startListeningSavedEntitySpawn(player, trigger);
         } else {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    TriggerListener.startListeningTookMeleeDamage(player, trigger);
+                    TriggerListener.startListeningSavedEntitySpawn(player, trigger);
                 }
             }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1) * 20);
         }

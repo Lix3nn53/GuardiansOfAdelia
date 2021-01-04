@@ -17,6 +17,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
     private final String mobCode;
     private final List<Integer> amounts;
     private final List<Integer> DURATION;
+    private final List<Integer> levels;
     private boolean SAVE = false;
 
     public SpawnCompanionMechanic(ConfigurationSection configurationSection) {
@@ -28,8 +29,13 @@ public class SpawnCompanionMechanic extends MechanicComponent {
             configLoadError("amounts");
         }
 
+        if (!configurationSection.contains("levels")) {
+            configLoadError("levels");
+        }
+
         this.mobCode = configurationSection.getString("mobCode");
         this.amounts = configurationSection.getIntegerList("amounts");
+        this.levels = configurationSection.getIntegerList("levels");
 
         if (configurationSection.contains("durations")) {
             this.DURATION = configurationSection.getIntegerList("durations");
@@ -47,13 +53,14 @@ public class SpawnCompanionMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         int amount = amounts.get(skillLevel - 1);
+        int level = levels.get(skillLevel - 1);
 
         for (LivingEntity target : targets) {
             if (!(target instanceof Player)) continue;
             Player owner = (Player) target;
             for (int i = 0; i < amount; i++) {
 
-                LivingEntity livingEntity = PetManager.spawnCompanion(owner, mobCode, skillLevel, 9999999);
+                LivingEntity livingEntity = PetManager.spawnCompanion(owner, mobCode, level, 9999999);
 
                 if (livingEntity == null) {
                     GuardiansOfAdelia.getInstance().getLogger().info("SpawnPetMechanic error: " + mobCode);

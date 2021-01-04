@@ -398,7 +398,7 @@ skillUltimate:
               child1:
                 componentType: "FlagSetMechanic"
                 key: "shouldStopSkill"
-                isUniqueCast: true
+                isUnique: true
           child2:
             componentType: "SelfTarget"
             child1:
@@ -411,5 +411,5 @@ skillUltimate:
               child2:
                 componentType: "FlagRemoveMechanic"
                 key: "shouldStopSkill"
-                isUniqueCast: true
+                isUnique: true
 

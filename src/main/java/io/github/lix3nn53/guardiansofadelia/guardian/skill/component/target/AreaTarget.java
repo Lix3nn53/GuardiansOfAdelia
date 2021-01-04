@@ -46,7 +46,7 @@ public class AreaTarget extends TargetComponent {
         if (nearby.isEmpty()) return false;
 
         if (super.isKeepCurrent()) {
-            if (super.isaddToBeginning()) {
+            if (super.isAddToBeginning()) {
                 Collections.reverse(nearby);
                 for (LivingEntity single : nearby) {
                     targets.add(0, single);

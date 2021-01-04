@@ -2,6 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
+import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -144,7 +147,7 @@ public class SkillDataManager {
             keyEntityToCastCounterToSavedEntities.put(keyEntity, hashMap);
         }
         if (keyEntity instanceof Player) {
-            TriggerListener.onPlayerSpawnSavedEntity((Player) keyEntity, created);
+            TriggerListener.onPlayerSavedEntitySpawn((Player) keyEntity, created);
         }
     }
 
@@ -182,6 +185,33 @@ public class SkillDataManager {
         }
     }
 
+    public static void removeSavedEntity(LivingEntity keyEntity, int castCounter, String mobCode, int amount) {
+        int removed = 0;
+        if (keyEntityToCastCounterToSavedEntities.containsKey(keyEntity)) {
+            HashMap<Integer, List<LivingEntity>> hashMap = keyEntityToCastCounterToSavedEntities.get(keyEntity);
+            List<LivingEntity> entities = hashMap.get(castCounter);
+
+            if (entities == null) {
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "removeSavedEntity entities null");
+                return;
+            }
+
+            BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+            for (LivingEntity entity : entities) {
+                if (removed == amount) break;
+                boolean mythicMob = apiHelper.isMythicMob(entity);
+                if (mythicMob) {
+                    ActiveMob mythicMobInstance = apiHelper.getMythicMobInstance(entity);
+                    String internalName = mythicMobInstance.getType().getInternalName();
+                    if (mobCode.equals(internalName)) {
+                        entity.remove();
+                        removed++;
+                    }
+                }
+            }
+        }
+    }
+
     public static List<LivingEntity> getSavedEntitiesOfCaster(LivingEntity keyEntity) {
         List<LivingEntity> allEntities = new ArrayList<>();
 
@@ -213,12 +243,12 @@ public class SkillDataManager {
     /**
      * clear mob cast number. Do not use for players.
      *
-     * @param livingEntity
+     * @param deathEntity
      */
-    public static void onEntityDeath(LivingEntity livingEntity) {
-        keyEntityToSkillFlags.remove(livingEntity);
-        keyEntityToCastCounterToRepeatTask.remove(livingEntity);
-        keyEntityPlusKeyToValue.remove(livingEntity);
+    public static void onEntityDeath(LivingEntity deathEntity) {
+        keyEntityToSkillFlags.remove(deathEntity);
+        keyEntityToCastCounterToRepeatTask.remove(deathEntity);
+        keyEntityPlusKeyToValue.remove(deathEntity);
 
         for (LivingEntity keyEntity : keyEntityToCastCounterToSavedEntities.keySet()) {
             HashMap<Integer, List<LivingEntity>> castCounterToSavedEntities = keyEntityToCastCounterToSavedEntities.get(keyEntity);
@@ -226,11 +256,13 @@ public class SkillDataManager {
             for (int castCounter : castCounterToSavedEntities.keySet()) {
                 List<LivingEntity> livingEntities = castCounterToSavedEntities.get(castCounter);
 
-                boolean remove = livingEntities.remove(livingEntity);
+                boolean remove = livingEntities.remove(deathEntity);
 
                 if (remove) {
+                    if (keyEntity instanceof Player) {
+                        TriggerListener.onPlayerSavedEntityDeath((Player) keyEntity, deathEntity);
+                    }
 
-                    // SavedEntityDeathTrigger
                     if (livingEntities.isEmpty()) {
                         castCounterToSavedEntities.remove(castCounter);
                         if (castCounterToSavedEntities.isEmpty()) {

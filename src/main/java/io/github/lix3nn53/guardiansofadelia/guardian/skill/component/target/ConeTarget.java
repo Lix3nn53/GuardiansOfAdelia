@@ -51,7 +51,7 @@ public class ConeTarget extends TargetComponent {
         if (cone.isEmpty()) return false;
 
         if (super.isKeepCurrent()) {
-            if (super.isaddToBeginning()) {
+            if (super.isAddToBeginning()) {
                 Collections.reverse(cone);
                 for (LivingEntity single : cone) {
                     targets.add(0, single);

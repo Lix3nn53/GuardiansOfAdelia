@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
@@ -11,6 +12,7 @@ import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
 import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
 import io.lumine.xikage.mythicmobs.io.MythicConfig;
+import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
@@ -76,6 +78,26 @@ public class PetManager {
 
     public static List<LivingEntity> getCompanions(Player owner) {
         return ownerToCompanions.get(owner);
+    }
+
+    public static List<LivingEntity> getCompanions(Player owner, String mobCode) {
+        List<LivingEntity> companions = new ArrayList<>();
+
+        List<LivingEntity> livingEntities = ownerToCompanions.get(owner);
+
+        BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+        for (LivingEntity entity : livingEntities) {
+            boolean mythicMob = apiHelper.isMythicMob(entity);
+            if (mythicMob) {
+                ActiveMob mythicMobInstance = apiHelper.getMythicMobInstance(entity);
+                String internalName = mythicMobInstance.getType().getInternalName();
+                if (mobCode.equals(internalName)) {
+                    companions.add(entity);
+                }
+            }
+        }
+
+        return companions;
     }
 
     private static LivingEntity spawnMythicMobTameable(Player owner, String petCode, int petLevel, int currentHP) {
@@ -167,6 +189,7 @@ public class PetManager {
                 }.runTaskLater(GuardiansOfAdelia.getInstance(), RESPAWN_DELAY);
             } else {
                 // On companion death
+                TriggerListener.onPlayerCompanionDeath(owner, livingEntity);
                 if (ownerToCompanions.containsKey(owner)) {
                     List<LivingEntity> livingEntities = ownerToCompanions.get(owner);
                     boolean remove = livingEntities.remove(livingEntity);
