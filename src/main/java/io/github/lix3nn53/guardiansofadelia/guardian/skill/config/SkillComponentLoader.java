@@ -187,6 +187,10 @@ public class SkillComponentLoader {
             return new GodDamageMechanic(configurationSection);
         } else if (componentType.equals(CompanionsOfCasterWarpMechanic.class.getSimpleName())) {
             return new CompanionsOfCasterWarpMechanic(configurationSection);
+        } else if (componentType.equals(TargetsEmptyCondition.class.getSimpleName())) {
+            return new TargetsEmptyCondition(configurationSection);
+        } else if (componentType.equals(ClearDeadTargets.class.getSimpleName())) {
+            return new ClearDeadTargets();
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

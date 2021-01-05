@@ -1,10 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -190,13 +188,8 @@ public class TriggerListener {
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                initializeTrigger.startEffects(player, nextSkillLevel, targets, castCounter);
-                playerToInitializeTrigger.put(player, initializeTrigger);
-            }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 1L);
+        initializeTrigger.startEffects(player, nextSkillLevel, targets, castCounter);
+        playerToInitializeTrigger.put(player, initializeTrigger);
     }
 
     public static void onSkillDowngrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel, int castCounter) {
@@ -211,10 +204,12 @@ public class TriggerListener {
     }
 
     private static void stopInit(Player player) {
+        player.sendMessage("test1");
         if (playerToInitializeTrigger.containsKey(player)) {
             //debug player.sendMessage("StopEffects");
             playerToInitializeTrigger.get(player).stopEffects(player);
             playerToInitializeTrigger.remove(player);
         }
+        player.sendMessage("test2");
     }
 }

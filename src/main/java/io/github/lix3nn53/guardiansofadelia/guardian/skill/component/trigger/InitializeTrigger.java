@@ -29,6 +29,7 @@ public class InitializeTrigger extends TriggerComponent {
 
 
     public void stopEffects(Player caster) {
+        caster.sendMessage("stopEffects");
         SkillDataManager.onPlayerQuit(caster);
         TriggerListener.onPlayerQuit(caster);
     }

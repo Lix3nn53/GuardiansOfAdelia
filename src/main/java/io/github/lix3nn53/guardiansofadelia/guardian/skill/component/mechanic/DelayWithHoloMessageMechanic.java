@@ -8,6 +8,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DelayWithHoloMessageMechanic extends MechanicComponent {
@@ -48,8 +49,12 @@ public class DelayWithHoloMessageMechanic extends MechanicComponent {
 
             @Override
             public void run() {
-                if (!caster.isDead()) {
-                    executeChildren(caster, skillLevel, targets, castCounter);
+                for (LivingEntity target : targets) {
+                    if (target.isDead()) continue;
+                    List<LivingEntity> one = new ArrayList<>();
+
+                    one.add(target);
+                    executeChildren(caster, skillLevel, one, castCounter);
                 }
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), ticks);

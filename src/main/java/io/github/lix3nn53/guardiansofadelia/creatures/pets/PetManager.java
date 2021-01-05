@@ -95,8 +95,6 @@ public class PetManager {
             if (mythicMob) {
                 ActiveMob mythicMobInstance = apiHelper.getMythicMobInstance(entity);
                 String internalName = mythicMobInstance.getType().getInternalName();
-                GuardiansOfAdelia.getInstance().getLogger().info("mobCode: " + mobCode);
-                GuardiansOfAdelia.getInstance().getLogger().info("internalName: " + internalName);
                 if (mobCode.equals(internalName)) {
                     companions.add(entity);
                 }

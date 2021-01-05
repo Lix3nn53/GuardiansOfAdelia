@@ -63,6 +63,28 @@ skillOne:
         - 4
         - 5
         - 6
+      child1:
+        componentType: "RepeatMechanic"
+        period: 100
+        child1:
+          componentType: "TargetsEmptyCondition"
+          empty: true
+          child1:
+            componentType: "RepeatCancelMechanic"
+        child2:
+          componentType: "TargetsEmptyCondition"
+          empty: false
+          child1:
+            componentType: "GodDamageMechanic"
+            damagePercentList:
+              - 0.1
+              - 0.1
+              - 0.1
+              - 0.1
+              - 0.1
+              - 0.1
+          child2:
+            componentType: "ClearDeadTargets"
 skillTwo:
   name: "Skullshot"
   customModelData: 39
@@ -102,6 +124,13 @@ skillTwo:
       forward: 0
       range: 200
       mustHitToWork: true
+      particleType: "REDSTONE"
+      particleArrangement: "CIRCLE"
+      particleRadius: 0.5
+      particleAmount: 4
+      isProjectileInvisible: false
+      dustColor: 10040319
+      dustSize: 2
       child1:
         componentType: "AreaTarget"
         allies: false
@@ -213,7 +242,14 @@ skillThree:
               - 500
               - 600
       child2:
-        componentType: "KillMechanic"
+        componentType: "GodDamageMechanic"
+        damageList:
+          - 200
+          - 300
+          - 400
+          - 500
+          - 600
+          - 700
 skillPassive:
   name: "Bone Armor"
   customModelData: 47
@@ -359,6 +395,28 @@ skillUltimate:
           - 4
           - 5
           - 6
+        child1:
+          componentType: "RepeatMechanic"
+          period: 100
+          child1:
+            componentType: "TargetsEmptyCondition"
+            empty: true
+            child1:
+              componentType: "RepeatCancelMechanic"
+          child2:
+            componentType: "TargetsEmptyCondition"
+            empty: false
+            child1:
+              componentType: "GodDamageMechanic"
+              damagePercentList:
+                - 0.1
+                - 0.1
+                - 0.1
+                - 0.1
+                - 0.1
+                - 0.1
+            child2:
+              componentType: "ClearDeadTargets"
     child2:
       componentType: "CompanionCondition"
       mobCode: "CompanionFrozenColossus"
