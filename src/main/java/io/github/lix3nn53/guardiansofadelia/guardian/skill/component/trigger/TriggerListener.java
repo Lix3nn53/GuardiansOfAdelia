@@ -1,8 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,9 +28,7 @@ public class TriggerListener {
     private static final HashMap<Player, AddPiercingToArrowShootFromCrossbowTrigger> playerToAddPiercingToArrowShootFromCrossbowTrigger = new HashMap<>();
 
     private static final HashMap<Player, SavedEntitySpawnTrigger> playerToSavedEntitySpawnTrigger = new HashMap<>();
-    private static final HashMap<Player, SavedEntityDeathTrigger> playerToSavedEntityDeathTrigger = new HashMap<>();
     private static final HashMap<Player, CompanionSpawnTrigger> playerToCompanionSpawnTrigger = new HashMap<>();
-    private static final HashMap<Player, CompanionDeathTrigger> playerToCompanionDeathTrigger = new HashMap<>();
 
     public static void onPlayerQuit(Player player) {
         playerToInitializeTrigger.remove(player);
@@ -45,9 +45,7 @@ public class TriggerListener {
         playerToAddPiercingToArrowShootFromCrossbowTrigger.remove(player);
 
         playerToSavedEntitySpawnTrigger.remove(player);
-        playerToSavedEntityDeathTrigger.remove(player);
         playerToCompanionSpawnTrigger.remove(player);
-        playerToCompanionDeathTrigger.remove(player);
     }
 
     public static void startListeningLandTrigger(Player player, LandTrigger landTrigger) {
@@ -169,23 +167,6 @@ public class TriggerListener {
         }
     }
 
-    public static void startListeningSavedEntityDeath(Player player, SavedEntityDeathTrigger trigger) {
-        player.sendMessage("SaveEntityDeathTrigger start listening");
-        playerToSavedEntityDeathTrigger.put(player, trigger);
-    }
-
-    public static void onPlayerSavedEntityDeath(Player player, LivingEntity death) {
-        player.sendMessage("SaveEntityDeathTrigger activation 0");
-        if (playerToSavedEntityDeathTrigger.containsKey(player)) {
-            player.sendMessage("SaveEntityDeathTrigger activation 1");
-            boolean callback = playerToSavedEntityDeathTrigger.get(player).callback(player, death);
-            if (callback) {
-                player.sendMessage("SaveEntityDeathTrigger activation 2");
-                playerToSavedEntityDeathTrigger.remove(player);
-            }
-        }
-    }
-
     public static void startListeningCompanionSpawn(Player player, CompanionSpawnTrigger trigger) {
         player.sendMessage("CompanionSpawnTrigger start listening");
         playerToCompanionSpawnTrigger.put(player, trigger);
@@ -203,31 +184,19 @@ public class TriggerListener {
         }
     }
 
-    public static void startListeningCompanionDeath(Player player, CompanionDeathTrigger trigger) {
-        player.sendMessage("CompanionDeathTrigger start listening");
-        playerToCompanionDeathTrigger.put(player, trigger);
-    }
-
-    public static void onPlayerCompanionDeath(Player player, LivingEntity death) {
-        player.sendMessage("CompanionDeathTrigger activation 0");
-        if (playerToCompanionDeathTrigger.containsKey(player)) {
-            player.sendMessage("CompanionDeathTrigger activation 1");
-            boolean callback = playerToCompanionDeathTrigger.get(player).callback(player, death);
-            if (callback) {
-                player.sendMessage("CompanionDeathTrigger activation 2");
-                playerToCompanionDeathTrigger.remove(player);
-            }
-        }
-    }
-
     public static void onSkillUpgrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel, int castCounter) {
         stopInit(player); //stop old init
 
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
 
-        initializeTrigger.startEffects(player, nextSkillLevel, targets, castCounter);
-        playerToInitializeTrigger.put(player, initializeTrigger);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                initializeTrigger.startEffects(player, nextSkillLevel, targets, castCounter);
+                playerToInitializeTrigger.put(player, initializeTrigger);
+            }
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 1L);
     }
 
     public static void onSkillDowngrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel, int castCounter) {

@@ -195,7 +195,7 @@ public class PetManager {
                 }.runTaskLater(GuardiansOfAdelia.getInstance(), RESPAWN_DELAY);
             } else {
                 // On companion death
-                TriggerListener.onPlayerCompanionDeath(owner, livingEntity);
+                //TriggerListener.onPlayerCompanionDeath(owner, livingEntity); // REMOVED CUZ DEATH EVENT NOT RELIABLE
                 if (ownerToCompanions.containsKey(owner)) {
                     List<LivingEntity> livingEntities = ownerToCompanions.get(owner);
                     boolean remove = livingEntities.remove(livingEntity);

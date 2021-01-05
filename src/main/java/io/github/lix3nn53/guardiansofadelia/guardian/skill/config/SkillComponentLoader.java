@@ -101,8 +101,6 @@ public class SkillComponentLoader {
             return new BuffMechanic(configurationSection);
         } else if (componentType.equals(InitializeTrigger.class.getSimpleName())) {
             return new InitializeTrigger();
-        } else if (componentType.equals(CompanionDeathTrigger.class.getSimpleName())) {
-            return new CompanionDeathTrigger(configurationSection);
         } else if (componentType.equals(CompanionSpawnTrigger.class.getSimpleName())) {
             return new CompanionSpawnTrigger(configurationSection);
         } else if (componentType.equals(TookPhysicalDamageTrigger.class.getSimpleName())) {

@@ -11,6 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SpawnCompanionMechanic extends MechanicComponent {
 
@@ -19,6 +20,8 @@ public class SpawnCompanionMechanic extends MechanicComponent {
     private final List<Integer> DURATION;
     private final List<Integer> levels;
     private boolean SAVE = false;
+    private final Optional<String> maxAmountVar;
+    private final int maxAmountIfVarEmpty;
 
     public SpawnCompanionMechanic(ConfigurationSection configurationSection) {
         if (!configurationSection.contains("mobCode")) {
@@ -46,6 +49,14 @@ public class SpawnCompanionMechanic extends MechanicComponent {
         if (configurationSection.contains("save")) {
             this.SAVE = configurationSection.getBoolean("save");
         }
+
+        if (configurationSection.contains("maxAmountVar")) {
+            this.maxAmountVar = Optional.of(configurationSection.getString("maxAmountVar"));
+            this.maxAmountIfVarEmpty = configurationSection.getInt("maxAmountIfVarEmpty");
+        } else {
+            this.maxAmountVar = Optional.empty();
+            this.maxAmountIfVarEmpty = 0;
+        }
     }
 
     @Override
@@ -55,9 +66,33 @@ public class SpawnCompanionMechanic extends MechanicComponent {
         int amount = amounts.get(skillLevel - 1);
         int level = levels.get(skillLevel - 1);
 
+        boolean spawned = false;
         for (LivingEntity target : targets) {
             if (!(target instanceof Player)) continue;
             Player owner = (Player) target;
+
+            if (this.maxAmountVar.isPresent()) {
+                int max = SkillDataManager.getValue(owner, this.maxAmountVar.get());
+                if (max == 0) {
+                    max = this.maxAmountIfVarEmpty;
+                }
+                List<LivingEntity> companions = PetManager.getCompanions(owner);
+                int current = 0;
+                if (companions != null) {
+                    current = companions.size();
+                }
+
+                int available = max - current;
+
+                if (available <= 0) continue;
+
+                if (amount > available) {
+                    amount = available;
+                }
+            } else {
+                owner.sendMessage("No value");
+            }
+
             for (int i = 0; i < amount; i++) {
 
                 LivingEntity livingEntity = PetManager.spawnCompanion(owner, mobCode, level, 9999999);
@@ -66,6 +101,8 @@ public class SpawnCompanionMechanic extends MechanicComponent {
                     GuardiansOfAdelia.getInstance().getLogger().info("SpawnPetMechanic error: " + mobCode);
                     continue;
                 }
+
+                spawned = true;
 
                 if (SAVE) {
                     SkillDataManager.onSkillEntityCreateWithSaveOption(caster, livingEntity, castCounter);
@@ -86,7 +123,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
             }
         }
 
-        return true;
+        return spawned;
     }
 
     @Override

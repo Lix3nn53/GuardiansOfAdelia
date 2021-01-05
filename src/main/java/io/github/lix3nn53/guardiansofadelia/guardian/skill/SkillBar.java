@@ -48,17 +48,22 @@ public class SkillBar {
         remakeSkillBar();
 
         //activate init triggers
-        for (int i = 0; i <= 4; i++) {
-            if (investedSkillPoints.get(i) <= 0) continue;
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i <= 4; i++) {
+                    if (investedSkillPoints.get(i) <= 0) continue;
 
-            Skill skill = this.skillSet.get(i);
-            InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
-            if (initializeTrigger != null) {
-                int nextSkillLevel = skill.getCurrentSkillLevel(getInvestedSkillPoints(i));
-                TriggerListener.onSkillUpgrade(player, initializeTrigger, nextSkillLevel, castCounter);
-                castCounter++;
+                    Skill skill = skillSet.get(i);
+                    InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
+                    if (initializeTrigger != null) {
+                        int nextSkillLevel = skill.getCurrentSkillLevel(getInvestedSkillPoints(i));
+                        TriggerListener.onSkillUpgrade(player, initializeTrigger, nextSkillLevel, castCounter);
+                        castCounter++;
+                    }
+                }
             }
-        }
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 40L);
     }
 
     /**

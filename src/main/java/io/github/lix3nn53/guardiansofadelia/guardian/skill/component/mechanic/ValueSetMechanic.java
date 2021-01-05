@@ -4,30 +4,26 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 
 public class ValueSetMechanic extends MechanicComponent {
 
     private final String key;
-    private final int value;
-
-    public ValueSetMechanic(String key, int value) {
-        this.key = key;
-        this.value = value;
-    }
+    private final List<Integer> values;
 
     public ValueSetMechanic(ConfigurationSection configurationSection) {
         if (!configurationSection.contains("key")) {
             configLoadError("key");
         }
 
-        if (!configurationSection.contains("value")) {
-            configLoadError("value");
+        if (!configurationSection.contains("values")) {
+            configLoadError("values");
         }
 
         this.key = configurationSection.getString("key");
-        this.value = configurationSection.getInt("value");
+        this.values = configurationSection.getIntegerList("values");
     }
 
     @Override
@@ -35,7 +31,10 @@ public class ValueSetMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity ent : targets) {
-            SkillDataManager.setValue(ent, key, value);
+            if (ent instanceof Player) {
+                ent.sendMessage("SetValue: " + values.get(skillLevel - 1));
+            }
+            SkillDataManager.setValue(ent, key, values.get(skillLevel - 1));
         }
 
         return true;

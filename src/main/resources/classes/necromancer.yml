@@ -44,28 +44,25 @@ skillOne:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "CompanionCondition"
-      minValue: 0
-      maxValue: 12
-      child1:
-        componentType: "SpawnCompanionMechanic"
-        mobCode: "CompanionSkeleton"
-        save: false
-        maxAmountVar: "NecroMaxSpawnsAtATime"
-        amounts:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-        levels:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
+      componentType: "SpawnCompanionMechanic"
+      mobCode: "CompanionSkeleton"
+      save: false
+      maxAmountVar: "NecroMaxSpawnsAtATime"
+      maxAmountIfVarEmpty: 3
+      amounts:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      levels:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
 skillTwo:
   name: "Skullshot"
   customModelData: 39
@@ -221,7 +218,16 @@ skillPassive:
   name: "Bone Armor"
   customModelData: 47
   description:
-    - "Summon skeletons"
+    - "For each active summon gain an"
+    - "amount of physical and magic defense."
+    - ""
+    - "Skill level 0: 3 summons at a time"
+    - "Skill level 1: 4 summons at a time"
+    - "Skill level 2: 5 summons at a time"
+    - "Skill level 3: 6 summons at a time"
+    - "Skill level 4: 7 summons at a time"
+    - "Skill level 5: 8 summons at a time"
+    - "Skill level 6: 10 summons at a time"
   manaCosts:
     - 5
     - 7
@@ -239,6 +245,18 @@ skillPassive:
   trigger:
     componentType: "InitializeTrigger"
     child1:
+      componentType: "SelfTarget"
+      child1:
+        componentType: "ValueSetMechanic"
+        key: "NecroMaxSpawnsAtATime"
+        values:
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 10
+    child2:
       componentType: "RepeatMechanic"
       period: 40
       child1:
@@ -325,6 +343,8 @@ skillUltimate:
         componentType: "SpawnCompanionMechanic"
         mobCode: "CompanionFrozenColossus"
         save: false
+        maxAmountVar: "NecroMaxSpawnsAtATime"
+        maxAmountIfVarEmpty: 3
         amounts:
           - 1
           - 1
@@ -426,18 +446,3 @@ skillUltimate:
           child3:
             componentType: "SoundMechanic"
             goaSound: "SKILL_STUN_HIT"
-  trigger1:
-    componentType: "InitializeTrigger"
-    child1:
-      componentType: "CompanionDeathTrigger"
-      mobCode: "CompanionFrozenColossus"
-      child1:
-        componentType: "ValueAddMechanic"
-        key: "NecroUltiSpawnCount"
-        valueToAdd:
-          - -1
-          - -1
-          - -1
-          - -1
-          - -1
-          - -1

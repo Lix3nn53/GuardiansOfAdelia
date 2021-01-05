@@ -17,42 +17,42 @@ import java.util.List;
 
 public class SkillDataManager {
 
-    private static final HashMap<LivingEntity, HashMap<String, Integer>> keyEntityPlusKeyToValue = new HashMap<>();
+    private static final HashMap<LivingEntity, HashMap<String, Integer>> keyEntityToKeyToValue = new HashMap<>();
     private static final HashMap<LivingEntity, HashSet<String>> keyEntityToSkillFlags = new HashMap<>();
     private static final HashMap<LivingEntity, HashMap<Integer, BukkitTask>> keyEntityToCastCounterToRepeatTask = new HashMap<>();
     private static final HashMap<LivingEntity, HashMap<Integer, List<LivingEntity>>> keyEntityToCastCounterToSavedEntities = new HashMap<>();
 
     public static void setValue(LivingEntity keyEntity, String key, int value) {
-        if (keyEntityPlusKeyToValue.containsKey(keyEntity)) {
-            HashMap<String, Integer> hashMap = keyEntityPlusKeyToValue.get(keyEntity);
+        if (keyEntityToKeyToValue.containsKey(keyEntity)) {
+            HashMap<String, Integer> hashMap = keyEntityToKeyToValue.get(keyEntity);
             hashMap.put(key, value);
-            keyEntityPlusKeyToValue.put(keyEntity, hashMap);
+            keyEntityToKeyToValue.put(keyEntity, hashMap);
         } else {
             HashMap<String, Integer> hashMap = new HashMap<>();
             hashMap.put(key, value);
-            keyEntityPlusKeyToValue.put(keyEntity, hashMap);
+            keyEntityToKeyToValue.put(keyEntity, hashMap);
         }
     }
 
     public static void addValue(LivingEntity keyEntity, String key, int value) {
-        if (keyEntityPlusKeyToValue.containsKey(keyEntity)) {
-            HashMap<String, Integer> hashMap = keyEntityPlusKeyToValue.get(keyEntity);
+        if (keyEntityToKeyToValue.containsKey(keyEntity)) {
+            HashMap<String, Integer> hashMap = keyEntityToKeyToValue.get(keyEntity);
             int oldValue = 0;
             if (hashMap.containsKey(key)) {
                 oldValue = hashMap.get(key);
             }
             hashMap.put(key, oldValue + value);
-            keyEntityPlusKeyToValue.put(keyEntity, hashMap);
+            keyEntityToKeyToValue.put(keyEntity, hashMap);
         } else {
             HashMap<String, Integer> hashMap = new HashMap<>();
             hashMap.put(key, value);
-            keyEntityPlusKeyToValue.put(keyEntity, hashMap);
+            keyEntityToKeyToValue.put(keyEntity, hashMap);
         }
     }
 
     public static int getValue(LivingEntity keyEntity, String key) {
-        if (keyEntityPlusKeyToValue.containsKey(keyEntity)) {
-            return keyEntityPlusKeyToValue.get(keyEntity).get(key);
+        if (keyEntityToKeyToValue.containsKey(keyEntity)) {
+            return keyEntityToKeyToValue.get(keyEntity).get(key);
         }
         return 0;
     }
@@ -240,8 +240,9 @@ public class SkillDataManager {
     public static void onPlayerQuit(Player player) {
         keyEntityToSkillFlags.remove(player);
         keyEntityToCastCounterToRepeatTask.remove(player);
-        keyEntityPlusKeyToValue.remove(player);
+        keyEntityToKeyToValue.remove(player);
         keyEntityToCastCounterToSavedEntities.remove(player);
+        player.sendMessage("OnPlayerQuit");
     }
 
     /**
@@ -252,7 +253,7 @@ public class SkillDataManager {
     public static void onEntityDeath(LivingEntity deathEntity) {
         keyEntityToSkillFlags.remove(deathEntity);
         keyEntityToCastCounterToRepeatTask.remove(deathEntity);
-        keyEntityPlusKeyToValue.remove(deathEntity);
+        keyEntityToKeyToValue.remove(deathEntity);
 
         for (LivingEntity keyEntity : keyEntityToCastCounterToSavedEntities.keySet()) {
             HashMap<Integer, List<LivingEntity>> castCounterToSavedEntities = keyEntityToCastCounterToSavedEntities.get(keyEntity);
@@ -263,9 +264,9 @@ public class SkillDataManager {
                 boolean remove = livingEntities.remove(deathEntity);
 
                 if (remove) {
-                    if (keyEntity instanceof Player) {
-                        TriggerListener.onPlayerSavedEntityDeath((Player) keyEntity, deathEntity);
-                    }
+                    /*if (keyEntity instanceof Player) {
+                        TriggerListener.onPlayerSavedEntityDeath((Player) keyEntity, deathEntity); // REMOVED CUZ DEATH EVENT NOT RELIABLE
+                    }*/
 
                     if (livingEntities.isEmpty()) {
                         castCounterToSavedEntities.remove(castCounter);

@@ -304,7 +304,13 @@ skillPassive:
           child2:
             componentType: "ValueSetMechanic"
             key: "sharpshooter"
-            value: 0
+            values:
+              - 0
+              - 0
+              - 0
+              - 0
+              - 0
+              - 0
           child3:
             componentType: "SoundMechanic"
             goaSound: "SKILL_BUFF"
