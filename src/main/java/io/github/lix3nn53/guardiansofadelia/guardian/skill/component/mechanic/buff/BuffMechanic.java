@@ -79,7 +79,7 @@ public class BuffMechanic extends MechanicComponent {
 
         if (!buffedAPlayer) return false;
 
-        new BukkitRunnable() { //remove buffs from buffed players
+        new BukkitRunnable() { //remove buffs from buffed players after timeout
 
             @Override
             public void run() {

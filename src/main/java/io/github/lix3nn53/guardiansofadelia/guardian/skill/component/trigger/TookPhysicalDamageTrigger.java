@@ -74,7 +74,7 @@ public class TookPhysicalDamageTrigger extends TriggerComponent {
                 public void run() {
                     TriggerListener.startListeningTookPhysicalDamage(player, trigger);
                 }
-            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1) * 20);
+            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
         }
 
         return true;

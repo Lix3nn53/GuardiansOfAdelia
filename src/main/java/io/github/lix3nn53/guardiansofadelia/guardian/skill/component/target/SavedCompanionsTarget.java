@@ -40,6 +40,7 @@ public class SavedCompanionsTarget extends TargetComponent {
             } else {
                 companionsOfTarget = PetManager.getCompanions(owner);
             }
+            if (companionsOfTarget == null) continue;
             companions.addAll(companionsOfTarget);
         }
 

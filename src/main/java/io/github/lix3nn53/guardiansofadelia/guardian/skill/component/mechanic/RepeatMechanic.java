@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RepeatMechanic extends MechanicComponent {
@@ -30,44 +31,54 @@ public class RepeatMechanic extends MechanicComponent {
             configLoadError("period");
         }
 
-        if (!configurationSection.contains("repetitions")) {
-            configLoadError("repetitions");
+        if (configurationSection.contains("repetitions")) {
+            this.repetitions = configurationSection.getIntegerList("repetitions");
+        } else {
+            this.repetitions = new ArrayList<>();
         }
 
         this.period = configurationSection.getInt("period");
-        this.repetitions = configurationSection.getIntegerList("repetitions");
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
-        BukkitTask bukkitTask = new BukkitRunnable() {
+        BukkitTask bukkitTask;
+        if (!repetitions.isEmpty()) {
+            bukkitTask = new BukkitRunnable() {
 
-            int counter;
+                int counter;
 
-            @Override
-            public void run() {
-                executeChildren(caster, skillLevel, targets, castCounter);
+                @Override
+                public void run() {
+                    executeChildren(caster, skillLevel, targets, castCounter);
 
-                if (!repetitions.isEmpty()) {
                     counter++;
                     if (counter >= repetitions.get(skillLevel - 1)) {
                         cancel();
                     }
                 }
-            }
-        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, period);
+            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, period);
+
+            new BukkitRunnable() { //remove task from cast data holder after it stops
+
+                @Override
+                public void run() {
+                    SkillDataManager.removeRepeatTask(caster, castCounter);
+                }
+            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), period * repetitions.get(skillLevel - 1));
+        } else {
+            bukkitTask = new BukkitRunnable() {
+
+                @Override
+                public void run() {
+                    executeChildren(caster, skillLevel, targets, castCounter);
+                }
+            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, period);
+        }
 
         SkillDataManager.onRepeatTaskCreate(caster, bukkitTask, castCounter);
-
-        new BukkitRunnable() { //remove task from cast data holder after it stops
-
-            @Override
-            public void run() {
-                SkillDataManager.removeRepeatTask(caster, castCounter);
-            }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), period * repetitions.get(skillLevel - 1));
 
         return true;
     }
@@ -75,11 +86,23 @@ public class RepeatMechanic extends MechanicComponent {
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (skillLevel == 0) {
-            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel) + " times");
+            String repeat = "";
+            if (!repetitions.isEmpty()) {
+                repeat = " for " + repetitions.get(skillLevel) + " times";
+            }
+
+            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds" + repeat);
         } else if (skillLevel == repetitions.size()) {
-            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel - 1) + " times");
+            String repeat = " for " + repetitions.get(skillLevel - 1) + " times";
+
+            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds " + repeat);
         } else {
-            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds for " + repetitions.get(skillLevel - 1) + " times -> " + repetitions.get(skillLevel) + " times");
+            String repeat = "";
+            if (!repetitions.isEmpty()) {
+                repeat = " for " + repetitions.get(skillLevel - 1) + " times -> " + repetitions.get(skillLevel) + " times";
+            }
+
+            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds " + repeat);
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

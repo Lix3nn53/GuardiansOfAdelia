@@ -81,7 +81,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
                                 livingEntity.remove();
                             }
                         }
-                    }.runTaskLater(GuardiansOfAdelia.getInstance(), 20L * DURATION.get(skillLevel - 1));
+                    }.runTaskLater(GuardiansOfAdelia.getInstance(), DURATION.get(skillLevel - 1));
                 }
             }
         }
@@ -91,6 +91,34 @@ public class SpawnCompanionMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (skillLevel == 0) {
+            String lore = "Spawn " + amounts.get(skillLevel) + "x" + mobCode + " at level " + levels.get(skillLevel);
+
+            if (!DURATION.isEmpty()) {
+                lore = lore + " for " + DURATION.get(skillLevel) / 20;
+            }
+
+            additions.add(lore);
+        } else if (skillLevel == amounts.size()) {
+            String lore = "Spawn " + amounts.get(skillLevel - 1) + "x" + mobCode + " at level " + levels.get(skillLevel - 1);
+
+            if (!DURATION.isEmpty()) {
+                lore = lore + " for " + DURATION.get(skillLevel - 1) / 20;
+            }
+
+            additions.add(lore);
+        } else {
+            String lore1 = "Spawn " + amounts.get(skillLevel - 1) + "x" + mobCode + " at level " + levels.get(skillLevel - 1);
+            String lore2 = amounts.get(skillLevel) + "x at level " + levels.get(skillLevel);
+
+            if (!DURATION.isEmpty()) {
+                lore1 = lore1 + " for " + DURATION.get(skillLevel - 1) / 20;
+                lore2 = lore2 + " for " + DURATION.get(skillLevel) / 20;
+            }
+
+            additions.add(lore1 + " -> " + lore2);
+        }
+
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

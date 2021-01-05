@@ -422,8 +422,9 @@ public class PetManager {
                     return;
                 }
 
-                final double distance = target.distance(companion.getLocation());
-                if (distance > 20D) {
+                final double distance = target.distanceSquared(companion.getLocation());
+                if (distance > 400) {
+                    player.sendMessage("teleportPet distance: " + distance);
                     PetManager.teleportPet(player, companion, null);
 
                     if (companion instanceof Mob) { //clear pet target

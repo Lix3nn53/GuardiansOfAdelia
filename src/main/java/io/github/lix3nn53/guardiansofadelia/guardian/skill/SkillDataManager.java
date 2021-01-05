@@ -151,7 +151,7 @@ public class SkillDataManager {
         }
     }
 
-    public static void removeSavedEntities(LivingEntity keyEntity, int castCounter) {
+    public static boolean removeSavedEntities(LivingEntity keyEntity, int castCounter) {
         if (keyEntityToCastCounterToSavedEntities.containsKey(keyEntity)) {
             HashMap<Integer, List<LivingEntity>> castCounterToSavedEntities = keyEntityToCastCounterToSavedEntities.get(keyEntity);
             List<LivingEntity> removedEntities = castCounterToSavedEntities.remove(castCounter);
@@ -161,7 +161,11 @@ public class SkillDataManager {
             if (castCounterToSavedEntities.isEmpty()) {
                 keyEntityToCastCounterToSavedEntities.remove(keyEntity);
             }
+
+            return true;
         }
+
+        return false;
     }
 
     public static void removeSavedEntity(LivingEntity keyEntity, int castCounter, LivingEntity toRemove) {

@@ -35,32 +35,37 @@ skillOne:
     - 13
     - 15
   cooldowns:
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "SpawnCompanionMechanic"
-      mobCode: "CompanionSkeleton"
-      save: false
-      amounts:
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-        - 6
-      levels:
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-        - 6
+      componentType: "CompanionCondition"
+      minValue: 0
+      maxValue: 12
+      child1:
+        componentType: "SpawnCompanionMechanic"
+        mobCode: "CompanionSkeleton"
+        save: false
+        maxAmountVar: "NecroMaxSpawnsAtATime"
+        amounts:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+        levels:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
 skillTwo:
   name: "Skullshot"
   customModelData: 39
@@ -74,14 +79,102 @@ skillTwo:
     - 13
     - 15
   cooldowns:
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
   trigger:
     componentType: "SelfTarget"
+    child1:
+      componentType: "ProjectileMechanic"
+      projectileClass: "WitherSkull"
+      spreadType: "CONE"
+      speed: 1.9
+      amountList:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      angle: 30
+      right: 0
+      upward: 1
+      forward: 0
+      range: 200
+      mustHitToWork: true
+      child1:
+        componentType: "AreaTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 10
+        radiusList:
+          - 2.5
+          - 2.75
+          - 3
+          - 3.25
+          - 3.5
+          - 4
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "MAGIC"
+          damageList:
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+        child2:
+          componentType: "CompanionsOfCasterTargetMechanic"
+        child3:
+          componentType: "PotionEffectMechanic"
+          potionEffectType: "SLOW"
+          tickList:
+            - 60
+            - 65
+            - 70
+            - 75
+            - 80
+            - 90
+          amplifierList:
+            - 2
+            - 1
+            - 1
+            - 2
+            - 2
+            - 2
+        child4:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "SavedCompanionsTarget"
+            allies: true
+            enemy: false
+            self: false
+            max: 15
+            child1:
+              componentType: "PotionEffectMechanic"
+              potionEffectType: "SPEED"
+              tickList:
+                - 60
+                - 70
+                - 80
+                - 90
+                - 100
+                - 120
+              amplifierList:
+                - 1
+                - 2
+                - 2
+                - 3
+                - 3
+                - 4
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_FIRE_SLASH"
 skillThree:
   name: "Gain Health kill summons"
   customModelData: 38
@@ -95,25 +188,37 @@ skillThree:
     - 13
     - 15
   cooldowns:
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
   trigger:
     componentType: "SelfTarget"
     child1:
       componentType: "SavedCompanionsTarget"
-      mobCode: "CompanionFrozenColossus"
       allies: true
       enemy: false
       self: false
       max: 15
       child1:
-        componentType: "RemoveMechanic"
+        componentType: "ForEachTargetMechanic"
+        child1:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "HealMechanic"
+            healAmountList:
+              - 100
+              - 200
+              - 300
+              - 400
+              - 500
+              - 600
+      child2:
+        componentType: "KillMechanic"
 skillPassive:
-  name: "Summons give you def"
+  name: "Bone Armor"
   customModelData: 47
   description:
     - "Summon skeletons"
@@ -125,18 +230,61 @@ skillPassive:
     - 13
     - 15
   cooldowns:
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
   trigger:
     componentType: "InitializeTrigger"
     child1:
-      componentType: "CompanionSpawnTrigger"
+      componentType: "RepeatMechanic"
+      period: 40
       child1:
-        componentType: "SelfTarget"
+        componentType: "SavedCompanionsTarget"
+        allies: true
+        enemy: false
+        self: false
+        max: 15
+        child1:
+          componentType: "ForEachTargetMechanic"
+          child1:
+            componentType: "SelfTarget"
+            child1:
+              componentType: "BuffMechanic"
+              buffType: "PHYSICAL_DEFENSE"
+              multipliers:
+                - 0.03
+                - 0.04
+                - 0.05
+                - 0.06
+                - 0.07
+                - 0.09
+              ticks:
+                - 41
+                - 41
+                - 41
+                - 41
+                - 41
+                - 41
+            child2:
+              componentType: "BuffMechanic"
+              buffType: "MAGIC_DEFENSE"
+              multipliers:
+                - 0.03
+                - 0.04
+                - 0.05
+                - 0.06
+                - 0.07
+                - 0.09
+              ticks:
+                - 41
+                - 41
+                - 41
+                - 41
+                - 41
+                - 41
 skillUltimate:
   name: "Frozen Colossus"
   customModelData: 45

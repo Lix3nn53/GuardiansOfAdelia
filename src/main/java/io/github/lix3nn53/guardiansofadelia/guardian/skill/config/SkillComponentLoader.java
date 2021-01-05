@@ -93,6 +93,8 @@ public class SkillComponentLoader {
             return new SavedCompanionsTarget(configurationSection);
         } else if (componentType.equals(HologramMechanic.class.getSimpleName())) {
             return new HologramMechanic(configurationSection);
+        } else if (componentType.equals(CompanionsOfCasterTargetMechanic.class.getSimpleName())) {
+            return new CompanionsOfCasterTargetMechanic(configurationSection);
         } else if (componentType.equals(RepeatMechanic.class.getSimpleName())) {
             return new RepeatMechanic(configurationSection);
         } else if (componentType.equals(BuffMechanic.class.getSimpleName())) {
@@ -179,10 +181,14 @@ public class SkillComponentLoader {
             return new InvincibleRemoveMechanic(configurationSection);
         } else if (componentType.equals(DisguiseMechanic.class.getSimpleName())) {
             return new DisguiseMechanic(configurationSection);
-        } else if (componentType.equals(RemoveMechanic.class.getSimpleName())) {
-            return new RemoveMechanic();
+        } else if (componentType.equals(ForEachTargetMechanic.class.getSimpleName())) {
+            return new ForEachTargetMechanic();
         } else if (componentType.equals(CompanionCondition.class.getSimpleName())) {
             return new CompanionCondition(configurationSection);
+        } else if (componentType.equals(KillMechanic.class.getSimpleName())) {
+            return new KillMechanic();
+        } else if (componentType.equals(CompanionsOfCasterWarpMechanic.class.getSimpleName())) {
+            return new CompanionsOfCasterWarpMechanic(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

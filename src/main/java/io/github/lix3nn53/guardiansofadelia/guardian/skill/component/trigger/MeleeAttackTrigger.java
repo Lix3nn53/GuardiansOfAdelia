@@ -78,7 +78,7 @@ public class MeleeAttackTrigger extends TriggerComponent {
                 public void run() {
                     TriggerListener.startListeningMeleeAttack(attacker, trigger);
                 }
-            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1) * 20);
+            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
         }
 
         return true;

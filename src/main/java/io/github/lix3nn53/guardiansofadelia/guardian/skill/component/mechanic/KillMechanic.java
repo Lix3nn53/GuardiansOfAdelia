@@ -5,14 +5,15 @@ import org.bukkit.entity.LivingEntity;
 
 import java.util.List;
 
-public class RemoveMechanic extends MechanicComponent {
+public class KillMechanic extends MechanicComponent {
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
-        for (LivingEntity target : targets) {
-            target.damage(9999999);
+        for (LivingEntity ent : targets) {
+            ent.setNoDamageTicks(0);
+            ent.damage(999999);
         }
 
         return true;

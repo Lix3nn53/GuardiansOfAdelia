@@ -74,7 +74,7 @@ public class RangedAttackTrigger extends TriggerComponent {
                 public void run() {
                     TriggerListener.startListeningRangedAttack(attacker, trigger);
                 }
-            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1) * 20);
+            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
         }
 
         return true;
