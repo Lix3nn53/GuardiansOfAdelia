@@ -66,7 +66,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
         int amount = amounts.get(skillLevel - 1);
         int level = levels.get(skillLevel - 1);
 
-        boolean spawned = false;
+        List<LivingEntity> spawned = new ArrayList<>();
         for (LivingEntity target : targets) {
             if (!(target instanceof Player)) continue;
             Player owner = (Player) target;
@@ -102,7 +102,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
                     continue;
                 }
 
-                spawned = true;
+                spawned.add(livingEntity);
 
                 if (SAVE) {
                     SkillDataManager.onSkillEntityCreateWithSaveOption(caster, livingEntity, castCounter);
@@ -123,7 +123,13 @@ public class SpawnCompanionMechanic extends MechanicComponent {
             }
         }
 
-        return spawned;
+        if (!spawned.isEmpty()) {
+            executeChildren(caster, skillLevel, spawned, castCounter);
+
+            return true;
+        }
+
+        return false;
     }
 
     @Override

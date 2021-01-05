@@ -183,8 +183,8 @@ public class SkillComponentLoader {
             return new ForEachTargetMechanic();
         } else if (componentType.equals(CompanionCondition.class.getSimpleName())) {
             return new CompanionCondition(configurationSection);
-        } else if (componentType.equals(KillMechanic.class.getSimpleName())) {
-            return new KillMechanic();
+        } else if (componentType.equals(GodDamageMechanic.class.getSimpleName())) {
+            return new GodDamageMechanic(configurationSection);
         } else if (componentType.equals(CompanionsOfCasterWarpMechanic.class.getSimpleName())) {
             return new CompanionsOfCasterWarpMechanic(configurationSection);
         }
