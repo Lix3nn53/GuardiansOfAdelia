@@ -189,11 +189,11 @@ public class MenuList {
 
         ItemStack elements = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(6);
-        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Elements");
+        itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Stat Points");
         lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "Choose where you want to go and");
-        lore.add(ChatColor.GRAY + "let the compass lead you!");
+        lore.add(ChatColor.GRAY + "Spend stat points earned by leveling");
+        lore.add(ChatColor.GRAY + "your character.");
         itemMeta.setLore(lore);
         elements.setItemMeta(itemMeta);
         guiGeneric.setItem(13, elements);
@@ -461,7 +461,7 @@ public class MenuList {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
 
                 int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
-                guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Elements (Points: " + pointsLeft + ")", 0);
+                guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Stat Points (Points: " + pointsLeft + ")", 0);
 
                 Attribute strength = rpgCharacterStats.getStrength();
                 ItemStack itemStack = new ItemStack(Material.PAPER);

@@ -224,7 +224,7 @@ public class ProjectileMechanic extends MechanicComponent {
                 ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amountList.get(skillLevel - 1));
 
                 for (Location loc : locs) {
-                    Projectile p = target.launchProjectile(Arrow.class);
+                    Projectile p = caster.launchProjectile(Arrow.class);
 
                     PersistentDataContainerUtil.putString("skillCastKey", skillKey.toString(), p); //put skill key
 
@@ -356,6 +356,8 @@ public class ProjectileMechanic extends MechanicComponent {
                 LivingEntity owner = SkillDataManager.getOwner(shooterLiving);
 
                 executeChildren(owner, skillLevel, targets, castCounter);
+            } else {
+                executeChildren(shooterLiving, skillLevel, targets, castCounter);
             }
         }
 

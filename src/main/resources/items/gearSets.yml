@@ -1,0 +1,26 @@
+# ---------------------------------------------- #
+#             Database Configuration             #
+# ---------------------------------------------- #
+#                   GearSets                     #
+# ---------------------------------------------- #
+
+set1:
+  name: "Tutorial"
+  effectsAt2:
+    - "KNOCKBACK_RESISTANCE"
+  effectsAt3:
+    - "CRITICAL_DAMAGE"
+  effectsAt4:
+    - "CRITICAL_CHANCE"
+  effectsAt5:
+    - "MANA_REGEN"
+set2:
+  name: "Craftsman's"
+  effectsAt2:
+    - "KNOCKBACK_RESISTANCE"
+  effectsAt3:
+    - "CRITICAL_DAMAGE"
+  effectsAt4:
+    - "CRITICAL_CHANCE"
+  effectsAt5:
+    - "MANA_REGEN"

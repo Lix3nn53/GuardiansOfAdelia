@@ -474,7 +474,7 @@ public class MyInventoryClickEvent implements Listener {
                 } else if (currentName.equals(ChatColor.LIGHT_PURPLE + "Skills")) {
                     GuiGeneric skill = MenuList.skill(player);
                     skill.openInventory(player);
-                } else if (currentName.equals(ChatColor.DARK_GREEN + "Elements")) {
+                } else if (currentName.equals(ChatColor.DARK_GREEN + "Stat Points")) {
                     GuiGeneric element = MenuList.element(player);
                     element.openInventory(player);
                 } else if (currentName.equals(ChatColor.YELLOW + "Crafting")) {
@@ -718,7 +718,7 @@ public class MyInventoryClickEvent implements Listener {
                     guiBookGeneric.openInventory(player);
                 }
             }
-        } else if (title.contains(ChatColor.DARK_GRAY + "Elements (Points:")) {
+        } else if (title.contains(ChatColor.DARK_GRAY + "Stat Points (Points:")) {
             if (rpgCharacter != null) {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
                 Attribute attr = null;
