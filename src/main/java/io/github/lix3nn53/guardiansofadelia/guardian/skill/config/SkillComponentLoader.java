@@ -193,6 +193,8 @@ public class SkillComponentLoader {
             return new ClearDeadTargets();
         } else if (componentType.equals(HologramEntityMechanic.class.getSimpleName())) {
             return new HologramEntityMechanic(configurationSection);
+        } else if (componentType.equals(HeadRotationMechanic.class.getSimpleName())) {
+            return new HeadRotationMechanic();
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

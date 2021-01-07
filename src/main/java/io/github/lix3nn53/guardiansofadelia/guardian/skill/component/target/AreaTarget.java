@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.Nearby;
 import org.bukkit.ChatColor;
@@ -58,6 +59,11 @@ public class AreaTarget extends TargetComponent {
             targets = nearby;
         }
 
+        String abc = "";
+        for (LivingEntity target : targets) {
+            abc += target.getType().name() + ", ";
+        }
+        GuardiansOfAdelia.getInstance().getLogger().info("Targets: " + abc);
         return executeChildren(caster, skillLevel, targets, castCounter);
     }
 
