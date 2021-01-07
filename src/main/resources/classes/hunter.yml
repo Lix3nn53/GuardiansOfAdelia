@@ -10,18 +10,18 @@ description:
   - "Their hunting techniques"
   - "makes anyone a prey for the deadly arrows."
 classIconCustomModelData: 14
-attributeTierFire: 6
-attributeTierWater: 1
-attributeTierEarth: 6
-attributeTierLightning: 1
-attributeTierWind: 1
+attributeTierStrength: 6
+attributeTierSpirit: 1
+attributeTierEndurance: 6
+attributeTierIntelligence: 1
+attributeTierDexterity: 1
 weaponGearTypes:
   - "CROSSBOW"
   - "BOW"
   - "DAGGER"
 armorGearTypes:
-  - "WIND_ARMOR"
-  - "FIRE_ARMOR"
+  - "FEATHER_ARMOR"
+  - "PLATE_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Explosive Arrow"
@@ -58,9 +58,6 @@ skillOne:
         - 1
         - 1
       angle: 30
-      right: 0
-      upward: 1
-      forward: 0
       range: 200
       mustHitToWork: true
       particleType: "REDSTONE"
@@ -156,9 +153,6 @@ skillTwo:
         - 8
         - 9
       angle: 30
-      right: 0
-      upward: 1
-      forward: 0
       range: 200
       mustHitToWork: true
       child1:
@@ -216,9 +210,6 @@ skillThree:
         - 1
         - 1
       angle: 30
-      right: 0
-      upward: 1
-      forward: 0
       range: 90
       mustHitToWork: false
       particleType: "REDSTONE"

@@ -252,8 +252,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         if (isSkill) { //add full ranged damage to skills
                             damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClassStr);
                             TriggerListener.onPlayerMagicAttack(player, livingTarget);
-                        } else { //add fire element and physical damage buff to projectiles fired without skills involved
-                            damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClassStr);
+                        } else { //add strength stat and physical damage buff to projectiles fired without skills involved
+                            damage += rpgCharacterStats.getStrength().getIncrement(player.getLevel(), rpgClassStr);
                             damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
                             TriggerListener.onPlayerRangedAttack(player, livingTarget);
                             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.6F, 0.4F);
@@ -266,7 +266,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClassStr);
                             TriggerListener.onPlayerMagicAttack(player, livingTarget);
                         } else if (RPGItemUtils.isWeapon(type)) {
-                            //Normal melee attack. Check for requirements then add fire and offhand bonus
+                            //Normal melee attack. Check for requirements then add strength stat and offhand bonus
 
                             if (player.getInventory().getHeldItemSlot() != 4) {
                                 event.setCancelled(true);
@@ -277,7 +277,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr))
                                 return false;
 
-                            damage += rpgCharacterStats.getFire().getIncrement(player.getLevel(), rpgClassStr); //add to weapon damage
+                            damage += rpgCharacterStats.getStrength().getIncrement(player.getLevel(), rpgClassStr); //add to weapon damage
 
                             /*
                             DO NOT add damage bonus from offhand manually, it is added via vanilla attributes

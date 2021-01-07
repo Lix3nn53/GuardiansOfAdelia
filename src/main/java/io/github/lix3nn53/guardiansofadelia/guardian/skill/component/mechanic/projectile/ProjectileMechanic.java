@@ -3,6 +3,8 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.p
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.TemporaryEntity;
@@ -20,6 +22,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.*;
+import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -37,9 +40,7 @@ public class ProjectileMechanic extends MechanicComponent {
     private final double speed;
     private final List<Integer> amountList;
     private final double angle;
-    private final double right;
     private final double upward;
-    private final double forward;
     private final double range;
     private final boolean mustHitToWork;
     private LivingEntity caster;
@@ -68,9 +69,7 @@ public class ProjectileMechanic extends MechanicComponent {
         this.speed = speed;
         this.amountList = amountList;
         this.angle = angle;
-        this.right = right;
         this.upward = upward;
-        this.forward = forward;
         this.range = range;
         this.mustHitToWork = mustHitToWork;
         this.projectileType = projectileType;
@@ -91,9 +90,7 @@ public class ProjectileMechanic extends MechanicComponent {
         this.speed = speed;
         this.amountList = amountList;
         this.angle = angle;
-        this.right = right;
         this.upward = upward;
-        this.forward = forward;
         this.range = range;
         this.mustHitToWork = mustHitToWork;
         this.projectileType = projectileType;
@@ -122,9 +119,7 @@ public class ProjectileMechanic extends MechanicComponent {
 
         this.angle = 0;
 
-        this.right = right;
         this.upward = upward;
-        this.forward = forward;
         this.range = range;
         this.projectileType = projectileType;
     }
@@ -148,9 +143,7 @@ public class ProjectileMechanic extends MechanicComponent {
 
         this.angle = 0;
 
-        this.right = right;
         this.upward = upward;
-        this.forward = forward;
         this.range = range;
         this.projectileType = projectileType;
         this.isProjectileInvisible = isProjectileInvisible;
@@ -166,9 +159,6 @@ public class ProjectileMechanic extends MechanicComponent {
         speed = configurationSection.getDouble("speed");
         amountList = configurationSection.getIntegerList("amountList");
         angle = configurationSection.getDouble("angle");
-        right = configurationSection.getDouble("right");
-        upward = configurationSection.getDouble("upward");
-        forward = configurationSection.getDouble("forward");
         range = configurationSection.getDouble("range");
         mustHitToWork = configurationSection.getBoolean("mustHitToWork");
 
@@ -199,6 +189,12 @@ public class ProjectileMechanic extends MechanicComponent {
             }
         }
 
+        if (configurationSection.contains("upward")) {
+            this.upward = configurationSection.getDouble("upward");
+        } else {
+            this.upward = 0;
+        }
+
         //custom options
         if (configurationSection.contains("addCasterAsFirstTargetIfHitSuccess")) {
             this.addCasterAsFirstTargetIfHitSuccess = configurationSection.getBoolean("addCasterAsFirstTargetIfHitSuccess");
@@ -210,8 +206,6 @@ public class ProjectileMechanic extends MechanicComponent {
         if (configurationSection.contains("isProjectileInvisible")) {
             isProjectileInvisible = configurationSection.getBoolean("isProjectileInvisible");
         }
-
-        //Piercing
     }
 
     @Override
@@ -223,14 +217,14 @@ public class ProjectileMechanic extends MechanicComponent {
         UUID skillKey = UUID.randomUUID(); //skill key to put into projectile
 
         // Fire from each target
-        ArrayList<Entity> projectiles = new ArrayList<Entity>();
+        ArrayList<Entity> projectiles = new ArrayList<>();
         for (LivingEntity target : targets) {
             // Apply the spread type
             if (spreadType.equals(SpreadType.RAIN)) {
                 ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amountList.get(skillLevel - 1));
 
                 for (Location loc : locs) {
-                    Projectile p = caster.launchProjectile(Arrow.class);
+                    Projectile p = target.launchProjectile(Arrow.class);
 
                     PersistentDataContainerUtil.putString("skillCastKey", skillKey.toString(), p); //put skill key
 
@@ -264,20 +258,30 @@ public class ProjectileMechanic extends MechanicComponent {
                     dir.normalize();
                 }
 
-                Vector looking = target.getLocation().getDirection().setY(0).normalize();
-                Vector normal = looking.clone().crossProduct(UP);
-                looking.multiply(forward).add(normal.multiply(right));
+                /*Vector looking = null;
+                if (right != 0 || upward != 0 || forward != 0) {
+                    looking = target.getLocation().getDirection().setY(0).normalize();
+                    Vector normal = looking.clone().crossProduct(UP);
+                    looking.multiply(forward).add(normal.multiply(right));
+                }*/
 
                 ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amountList.get(skillLevel - 1));
                 for (Vector d : dirs) {
-                    Projectile p = caster.launchProjectile(projectileType);
+                    Projectile projectile = target.launchProjectile(projectileType);
 
-                    PersistentDataContainerUtil.putString("skillCastKey", skillKey.toString(), p); //put skillCastKey to projectile entity
-                    changeToParticleProjectile(p);
+                    PersistentDataContainerUtil.putString("skillCastKey", skillKey.toString(), projectile); //put skillCastKey to projectile entity
+                    changeToParticleProjectile(projectile);
 
-                    if (projectileType != Arrow.class) {
-                        p.teleport(target.getLocation().add(looking).add(0, upward + 0.5, 0).add(p.getVelocity()).setDirection(d));
-                    }/* else if (piercing > 0) {
+                    if (upward != 0) {
+                        /*projectile.teleport(target.getLocation()
+                                .add(looking)
+                                .add(0, upward, 0)
+                                .add(projectile.getVelocity())
+                                .setDirection(d));*/
+                        projectile.teleport(projectile.getLocation().add(0, upward, 0));
+                    }
+
+                    /* else if (piercing > 0) {
                         //TODO arrow does not pierce
 
                         NBTEntity ent = new NBTEntity(p);
@@ -289,8 +293,8 @@ public class ProjectileMechanic extends MechanicComponent {
                         ((Arrow) p).setPierceLevel(piercing);
                     }*/
 
-                    p.setVelocity(d.multiply(speed));
-                    projectiles.add(p);
+                    projectile.setVelocity(d.multiply(speed));
+                    projectiles.add(projectile);
                 }
             }
         }
@@ -314,10 +318,6 @@ public class ProjectileMechanic extends MechanicComponent {
             if (mustHitToWork) return;
 
             hit = new TemporaryEntity(projectile.getLocation(), caster);
-
-            if (projectile instanceof Player) {
-                ((Player) projectile.getShooter()).sendMessage("3");
-            }
         } else if (addCasterAsFirstTargetIfHitSuccess) {
             if (CitizensAPI.getNPCRegistry().isNPC(hit)) return;
 
@@ -327,10 +327,6 @@ public class ProjectileMechanic extends MechanicComponent {
 
         //add hit to target list
         if (hit instanceof LivingEntity) {
-
-            if (projectile instanceof Player) {
-                ((Player) projectile.getShooter()).sendMessage("4");
-            }
             boolean b = ProjectileRepeatProtector.shouldSkillWorkOnProjectileHitToEntity(hit, projectile);
 
             if (b) {
@@ -344,13 +340,24 @@ public class ProjectileMechanic extends MechanicComponent {
 
         int skillLevel = 1;
         if (PersistentDataContainerUtil.hasInteger(projectile, "skillLevel")) {
-            if (projectile instanceof Player) {
-                ((Player) projectile.getShooter()).sendMessage("5");
-            }
             skillLevel = PersistentDataContainerUtil.getInteger(projectile, "skillLevel");
         }
 
-        executeChildren((LivingEntity) projectile.getShooter(), skillLevel, targets, castCounter);
+        ProjectileSource shooter = projectile.getShooter();
+
+        if (shooter instanceof LivingEntity) {
+            LivingEntity shooterLiving = (LivingEntity) shooter;
+
+            if (PetManager.isCompanion(shooterLiving)) {
+                Player owner = PetManager.getOwner(shooterLiving);
+
+                executeChildren(owner, skillLevel, targets, castCounter);
+            } else if (SkillDataManager.isSavedEntity(shooterLiving)) {
+                LivingEntity owner = SkillDataManager.getOwner(shooterLiving);
+
+                executeChildren(owner, skillLevel, targets, castCounter);
+            }
+        }
 
         if (projectile instanceof Arrow) {
             if (((Arrow) projectile).getPierceLevel() > 0) return;

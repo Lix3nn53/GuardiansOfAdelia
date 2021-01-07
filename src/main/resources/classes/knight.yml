@@ -11,19 +11,19 @@ description:
   - "Knights battle foes at close range while"
   - "allies support them from all sides."
 classIconCustomModelData: 15
-attributeTierFire: 3
-attributeTierWater: 3
-attributeTierEarth: 9
-attributeTierLightning: 1
-attributeTierWind: 0
+attributeTierStrength: 3
+attributeTierSpirit: 3
+attributeTierEndurance: 9
+attributeTierIntelligence: 1
+attributeTierDexterity: 0
 weaponGearTypes:
   - "SWORD"
   - "BATTLE_AXE"
   - "WAR_HAMMER"
   - "GREAT_SWORD"
 armorGearTypes:
-  - "EARTH_ARMOR"
-  - "FIRE_ARMOR"
+  - "HEAVY_ARMOR"
+  - "PLATE_ARMOR"
 shieldGearTypes:
   - "SHIELD"
 hasDefaultOffhand: true

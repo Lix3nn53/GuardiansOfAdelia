@@ -42,7 +42,7 @@ public class DelayWithHoloMessageMechanic extends MechanicComponent {
 
         for (LivingEntity target : targets) {
             String a = ChatColor.translateAlternateColorCodes('&', message);
-            ChatManager.chatHologramEntity(target, a, (int) ticks, offsetY);
+            ChatManager.chatHologramEntityWithCountDown(target, a, (int) ticks, offsetY);
         }
 
         new BukkitRunnable() {

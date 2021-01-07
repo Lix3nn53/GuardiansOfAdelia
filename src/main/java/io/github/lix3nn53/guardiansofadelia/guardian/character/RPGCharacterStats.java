@@ -46,11 +46,11 @@ public class RPGCharacterStats {
 
     private final Player player;
     private String rpgClassStr;
-    private final Attribute fire = new Attribute(AttributeType.FIRE);
-    private final Attribute lightning = new Attribute(AttributeType.LIGHTNING);
-    private final Attribute earth = new Attribute(AttributeType.EARTH);
-    private final Attribute water = new Attribute(AttributeType.WATER);
-    private final Attribute wind = new Attribute(AttributeType.WIND);
+    private final Attribute strength = new Attribute(AttributeType.STRENGTH);
+    private final Attribute intelligence = new Attribute(AttributeType.INTELLIGENCE);
+    private final Attribute endurance = new Attribute(AttributeType.ENDURANCE);
+    private final Attribute spirit = new Attribute(AttributeType.SPIRIT);
+    private final Attribute dexterity = new Attribute(AttributeType.DEXTERITY);
     private int totalExp;
     private final int maxHealth = 100;
     private final int maxMana = 100;
@@ -220,24 +220,24 @@ public class RPGCharacterStats {
         this.defense = defense;
     }
 
-    public Attribute getFire() {
-        return fire;
+    public Attribute getStrength() {
+        return strength;
     }
 
-    public Attribute getLightning() {
-        return lightning;
+    public Attribute getIntelligence() {
+        return intelligence;
     }
 
-    public Attribute getEarth() {
-        return earth;
+    public Attribute getEndurance() {
+        return endurance;
     }
 
-    public Attribute getWater() {
-        return water;
+    public Attribute getSpirit() {
+        return spirit;
     }
 
-    public Attribute getWind() {
-        return wind;
+    public Attribute getDexterity() {
+        return dexterity;
     }
 
     public int getTotalMaxHealth() {
@@ -259,11 +259,11 @@ public class RPGCharacterStats {
             totalMaxHealth += shield.getMaxHealth();
         }
 
-        return (int) (totalMaxHealth + earth.getIncrement(player.getLevel(), rpgClassStr) + 0.5);
+        return (int) (totalMaxHealth + endurance.getIncrement(player.getLevel(), rpgClassStr) + 0.5);
     }
 
     public int getTotalMaxMana() {
-        return (int) (maxMana + water.getIncrement(player.getLevel(), rpgClassStr) + 0.5);
+        return (int) (maxMana + spirit.getIncrement(player.getLevel(), rpgClassStr) + 0.5);
     }
 
     public int getTotalDefense() {
@@ -275,7 +275,7 @@ public class RPGCharacterStats {
     }
 
     public double getTotalCriticalChance() {
-        double chance = baseCriticalChance + wind.getIncrement(player.getLevel(), rpgClassStr);
+        double chance = baseCriticalChance + dexterity.getIncrement(player.getLevel(), rpgClassStr);
         if (chance > 0.4) {
             chance = 0.4;
         }
@@ -290,24 +290,24 @@ public class RPGCharacterStats {
     }
 
     public int getTotalMagicDamage(Player player, String rpgClass) {
-        int lightningBonus = (int) (lightning.getIncrement(player.getLevel(), rpgClass) + 0.5);
+        int intBonus = (int) (intelligence.getIncrement(player.getLevel(), rpgClass) + 0.5);
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
 
         Material type = itemInMainHand.getType();
 
         if (type.equals(Material.DIAMOND_SHOVEL)) {
-            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return lightningBonus;
+            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return intBonus;
 
             if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "magicDamage")) {
-                return lightningBonus + PersistentDataContainerUtil.getInteger(itemInMainHand, "magicDamage");
+                return intBonus + PersistentDataContainerUtil.getInteger(itemInMainHand, "magicDamage");
             }
         }
-        return (int) (lightningBonus * magicalDamageBuff + 0.5);
+        return (int) (intBonus * magicalDamageBuff + 0.5);
     }
 
     public int getTotalMeleeDamage(Player player, String rpgClass) {
-        int bonus = (int) (fire.getIncrement(player.getLevel(), rpgClass) + 0.5) + damageBonusFromOffhand;
+        int bonus = (int) (strength.getIncrement(player.getLevel(), rpgClass) + 0.5) + damageBonusFromOffhand;
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
 
@@ -334,38 +334,38 @@ public class RPGCharacterStats {
     }
 
     public int getTotalRangedDamage(Player player, String rpgClass) {
-        int fireBonus = (int) (fire.getIncrement(player.getLevel(), rpgClass) + 0.5);
+        int strBonus = (int) (strength.getIncrement(player.getLevel(), rpgClass) + 0.5);
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
 
         Material type = itemInMainHand.getType();
 
         if (type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
-            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return fireBonus;
+            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return strBonus;
 
             StatType statType = StatUtils.getStatType(type);
 
             if (statType == StatType.HYBRID) {
                 StatHybrid statHybrid = (StatHybrid) StatUtils.getStat(itemInMainHand);
-                return statHybrid.getRangedDamage() + fireBonus;
+                return statHybrid.getRangedDamage() + strBonus;
             }
         }
-        return (int) (fireBonus * physicalDamageBuff + 0.5);
+        return (int) (strBonus * physicalDamageBuff + 0.5);
     }
 
     public void resetAttributes() {
-        fire.setInvested(0, this, false);
-        lightning.setInvested(0, this, false);
-        earth.setInvested(0, this, false);
-        water.setInvested(0, this, false);
-        wind.setInvested(0, this, false);
+        strength.setInvested(0, this, false);
+        intelligence.setInvested(0, this, false);
+        endurance.setInvested(0, this, false);
+        spirit.setInvested(0, this, false);
+        dexterity.setInvested(0, this, false);
 
         onMaxHealthChange();
         onCurrentManaChange();
     }
 
     public int getInvestedAttributePoints() {
-        return this.fire.getInvested() + water.getInvested() + earth.getInvested() + lightning.getInvested() + wind.getInvested();
+        return this.strength.getInvested() + spirit.getInvested() + endurance.getInvested() + intelligence.getInvested() + dexterity.getInvested();
     }
 
     public int getAttributePointsLeftToSpend() {
@@ -611,73 +611,73 @@ public class RPGCharacterStats {
     }
 
     private void setPassiveStatBonuses(EquipmentSlot equipmentSlot, ItemStack itemStack, boolean fixDisplay) {
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "fire");
-            getFire().setBonus(player, equipmentSlot, this, bonus, false);
+        if (PersistentDataContainerUtil.hasInteger(itemStack, "strength")) {
+            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "strength");
+            getStrength().setBonus(equipmentSlot, this, bonus, false);
         } else {
-            getFire().setBonus(player, equipmentSlot, this, 0, false);
+            getStrength().setBonus(equipmentSlot, this, 0, false);
         }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "water");
-            getWater().setBonus(player, equipmentSlot, this, bonus, fixDisplay);
+        if (PersistentDataContainerUtil.hasInteger(itemStack, "spirit")) {
+            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "spirit");
+            getSpirit().setBonus(equipmentSlot, this, bonus, fixDisplay);
         } else {
-            getWater().setBonus(player, equipmentSlot, this, 0, false);
+            getSpirit().setBonus(equipmentSlot, this, 0, false);
         }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
-            getEarth().setBonus(player, equipmentSlot, this, bonus, fixDisplay);
+        if (PersistentDataContainerUtil.hasInteger(itemStack, "endurance")) {
+            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "endurance");
+            getEndurance().setBonus(equipmentSlot, this, bonus, fixDisplay);
         } else {
-            getEarth().setBonus(player, equipmentSlot, this, 0, false);
+            getEndurance().setBonus(equipmentSlot, this, 0, false);
         }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
-            getLightning().setBonus(player, equipmentSlot, this, bonus, false);
+        if (PersistentDataContainerUtil.hasInteger(itemStack, "intelligence")) {
+            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "intelligence");
+            getIntelligence().setBonus(equipmentSlot, this, bonus, false);
         } else {
-            getLightning().setBonus(player, equipmentSlot, this, 0, false);
+            getIntelligence().setBonus(equipmentSlot, this, 0, false);
         }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
-            getWind().setBonus(player, equipmentSlot, this, bonus, false);
+        if (PersistentDataContainerUtil.hasInteger(itemStack, "dexterity")) {
+            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "dexterity");
+            getDexterity().setBonus(equipmentSlot, this, bonus, false);
         } else {
-            getWind().setBonus(player, equipmentSlot, this, 0, false);
+            getDexterity().setBonus(equipmentSlot, this, 0, false);
         }
     }
 
     private void removePassiveStatBonuses(EquipmentSlot equipmentSlot) {
-        getFire().removeBonus(equipmentSlot, this, false);
-        getWater().removeBonus(equipmentSlot, this, false);
-        getEarth().removeBonus(equipmentSlot, this, false);
-        getLightning().removeBonus(equipmentSlot, this, false);
-        getWind().removeBonus(equipmentSlot, this, false);
+        getStrength().removeBonus(equipmentSlot, this, false);
+        getSpirit().removeBonus(equipmentSlot, this, false);
+        getEndurance().removeBonus(equipmentSlot, this, false);
+        getIntelligence().removeBonus(equipmentSlot, this, false);
+        getDexterity().removeBonus(equipmentSlot, this, false);
 
         onMaxHealthChange();
         onCurrentManaChange();
     }
 
     public void recalculateRPGInventory(RPGInventory rpgInventory) {
-        getFire().clearPassive(this, false);
-        getWater().clearPassive(this, false);
-        getEarth().clearPassive(this, false);
-        getLightning().clearPassive(this, false);
-        getWind().clearPassive(this, false);
+        getStrength().clearPassive(this, false);
+        getSpirit().clearPassive(this, false);
+        getEndurance().clearPassive(this, false);
+        getIntelligence().clearPassive(this, false);
+        getDexterity().clearPassive(this, false);
 
         StatPassive totalPassiveStat = rpgInventory.getTotalPassiveStat();
-        getFire().addBonusToPassive(totalPassiveStat.getFire(), this, false);
-        getWater().addBonusToPassive(totalPassiveStat.getWater(), this, false);
-        getEarth().addBonusToPassive(totalPassiveStat.getEarth(), this, false);
-        getLightning().addBonusToPassive(totalPassiveStat.getLightning(), this, false);
-        getWind().addBonusToPassive(totalPassiveStat.getWind(), this, false);
+        getStrength().addBonusToPassive(totalPassiveStat.getStrength(), this, false);
+        getSpirit().addBonusToPassive(totalPassiveStat.getSpirit(), this, false);
+        getEndurance().addBonusToPassive(totalPassiveStat.getEndurance(), this, false);
+        getIntelligence().addBonusToPassive(totalPassiveStat.getIntelligence(), this, false);
+        getDexterity().addBonusToPassive(totalPassiveStat.getDexterity(), this, false);
 
         onMaxHealthChange();
         onCurrentManaChange();
     }
 
     public void recalculateEquipment(String rpgClass) {
-        getFire().clearEquipment(this, false);
-        getWater().clearEquipment(this, false);
-        getEarth().clearEquipment(this, false);
-        getLightning().clearEquipment(this, false);
-        getWind().clearEquipment(this, false);
+        getStrength().clearEquipment(this, false);
+        getSpirit().clearEquipment(this, false);
+        getEndurance().clearEquipment(this, false);
+        getIntelligence().clearEquipment(this, false);
+        getDexterity().clearEquipment(this, false);
 
         helmet = new ArmorStatHolder(0, 0, 0);
         chestplate = new ArmorStatHolder(0, 0, 0);
@@ -800,25 +800,25 @@ public class RPGCharacterStats {
         if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
 
             //manage stats on item drop
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "fire");
-                getFire().setBonus(player, EquipmentSlot.HAND, this, bonus, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "strength")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "strength");
+                getStrength().setBonus(EquipmentSlot.HAND, this, bonus, false);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "water");
-                getWater().setBonus(player, EquipmentSlot.HAND, this, bonus, fixDisplay);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "spirit")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "spirit");
+                getSpirit().setBonus(EquipmentSlot.HAND, this, bonus, fixDisplay);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "earth");
-                getEarth().setBonus(player, EquipmentSlot.HAND, this, bonus, fixDisplay);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "endurance")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "endurance");
+                getEndurance().setBonus(EquipmentSlot.HAND, this, bonus, fixDisplay);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "lightning");
-                getLightning().setBonus(player, EquipmentSlot.HAND, this, bonus, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "intelligence")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "intelligence");
+                getIntelligence().setBonus(EquipmentSlot.HAND, this, bonus, false);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "wind");
-                getWind().setBonus(player, EquipmentSlot.HAND, this, bonus, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "dexterity")) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "dexterity");
+                getDexterity().setBonus(EquipmentSlot.HAND, this, bonus, false);
             }
 
             if (fixDisplay) {
@@ -856,20 +856,20 @@ public class RPGCharacterStats {
         if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
 
             //manage stats on item drop
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "fire")) {
-                getFire().removeBonus(EquipmentSlot.HAND, this, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "strength")) {
+                getStrength().removeBonus(EquipmentSlot.HAND, this, false);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "water")) {
-                getWater().removeBonus(EquipmentSlot.HAND, this, fixDisplay);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "spirit")) {
+                getSpirit().removeBonus(EquipmentSlot.HAND, this, fixDisplay);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "earth")) {
-                getEarth().removeBonus(EquipmentSlot.HAND, this, fixDisplay);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "endurance")) {
+                getEndurance().removeBonus(EquipmentSlot.HAND, this, fixDisplay);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "lightning")) {
-                getLightning().removeBonus(EquipmentSlot.HAND, this, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "intelligence")) {
+                getIntelligence().removeBonus(EquipmentSlot.HAND, this, false);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "wind")) {
-                getWind().removeBonus(EquipmentSlot.HAND, this, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, "dexterity")) {
+                getDexterity().removeBonus(EquipmentSlot.HAND, this, false);
             }
 
             if (fixDisplay) {
@@ -904,11 +904,11 @@ public class RPGCharacterStats {
     }
 
     public void clearMainHandBonuses() {
-        getFire().removeBonus(EquipmentSlot.HAND, this, false);
-        getWater().removeBonus(EquipmentSlot.HAND, this, false);
-        getEarth().removeBonus(EquipmentSlot.HAND, this, false);
-        getLightning().removeBonus(EquipmentSlot.HAND, this, false);
-        getWind().removeBonus(EquipmentSlot.HAND, this, false);
+        getStrength().removeBonus(EquipmentSlot.HAND, this, false);
+        getSpirit().removeBonus(EquipmentSlot.HAND, this, false);
+        getEndurance().removeBonus(EquipmentSlot.HAND, this, false);
+        getIntelligence().removeBonus(EquipmentSlot.HAND, this, false);
+        getDexterity().removeBonus(EquipmentSlot.HAND, this, false);
 
         onMaxHealthChange();
         onCurrentManaChange();
@@ -994,21 +994,21 @@ public class RPGCharacterStats {
         }
 
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-        int fireBonus = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, newLevel - 1);
-        int waterBonus = rpgClass.getAttributeBonusForLevel(AttributeType.WATER, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.WATER, newLevel - 1);
-        int earthBonus = rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, newLevel - 1);
-        int lightningBonus = rpgClass.getAttributeBonusForLevel(AttributeType.LIGHTNING, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.LIGHTNING, newLevel - 1);
-        int windBonus = rpgClass.getAttributeBonusForLevel(AttributeType.WIND, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.WIND, newLevel - 1);
+        int strBonus = rpgClass.getAttributeBonusForLevel(AttributeType.STRENGTH, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.STRENGTH, newLevel - 1);
+        int sprBonus = rpgClass.getAttributeBonusForLevel(AttributeType.SPIRIT, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.SPIRIT, newLevel - 1);
+        int endBonus = rpgClass.getAttributeBonusForLevel(AttributeType.ENDURANCE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.ENDURANCE, newLevel - 1);
+        int intBonus = rpgClass.getAttributeBonusForLevel(AttributeType.INTELLIGENCE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.INTELLIGENCE, newLevel - 1);
+        int dexBonus = rpgClass.getAttributeBonusForLevel(AttributeType.DEXTERITY, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.DEXTERITY, newLevel - 1);
 
-        if (fireBonus + waterBonus + earthBonus + lightningBonus + windBonus > 0) {
+        if (strBonus + sprBonus + endBonus + intBonus + dexBonus > 0) {
             player.sendMessage("");
             MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Stats Gained");
             final StringBuilder sb = new StringBuilder();
-            if (fireBonus > 0) sb.append(ChatColor.RED + "+" + fireBonus + " Fire ");
-            if (waterBonus > 0) sb.append(ChatColor.BLUE + "+" + waterBonus + " Water ");
-            if (earthBonus > 0) sb.append(ChatColor.DARK_GREEN + "+" + earthBonus + " Earth ");
-            if (lightningBonus > 0) sb.append(ChatColor.AQUA + "+" + lightningBonus + " Lightning ");
-            if (windBonus > 0) sb.append(ChatColor.WHITE + "+" + windBonus + " Wind");
+            if (strBonus > 0) sb.append(ChatColor.RED + "+" + strBonus + " Strength ");
+            if (sprBonus > 0) sb.append(ChatColor.BLUE + "+" + sprBonus + " Spirit ");
+            if (endBonus > 0) sb.append(ChatColor.DARK_GREEN + "+" + endBonus + " Endurance ");
+            if (intBonus > 0) sb.append(ChatColor.AQUA + "+" + intBonus + " Intelligence ");
+            if (dexBonus > 0) sb.append(ChatColor.WHITE + "+" + dexBonus + " Dexterity");
             MessageUtils.sendCenteredMessage(player, sb.toString());
         }
 
@@ -1038,7 +1038,7 @@ public class RPGCharacterStats {
                 sameTypeArmorSet = helmetType;
             }
         } else if (sameTypeArmorSet != null) {
-            GearSetEffect setEffect = helmetType.getSetEffect();
+            GearSetEffect setEffect = sameTypeArmorSet.getSetEffect();
             setEffect.clearSetEffect(player); // no more same armor type
             sameTypeArmorSet = null;
         }

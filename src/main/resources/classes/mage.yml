@@ -11,18 +11,18 @@ description:
   - "but that is a worthy sacrifice for"
   - "the strength of the mind."
 classIconCustomModelData: 16
-attributeTierFire: 1
-attributeTierWater: 4
-attributeTierEarth: 5
-attributeTierLightning: 6
-attributeTierWind: 0
+attributeTierStrength: 1
+attributeTierSpirit: 4
+attributeTierEndurance: 5
+attributeTierIntelligence: 6
+attributeTierDexterity: 0
 weaponGearTypes:
   - "WAND"
   - "DAGGER"
   - "STAFF"
 armorGearTypes:
-  - "LIGHTNING_ARMOR"
-  - "WIND_ARMOR"
+  - "CLOTH_ARMOR"
+  - "FEATHER_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Fireball"
@@ -59,9 +59,6 @@ skillOne:
         - 1
         - 1
       angle: 30
-      right: 0
-      upward: 1
-      forward: 0
       range: 200
       mustHitToWork: true
       child1:
@@ -125,9 +122,6 @@ skillTwo:
         - 1
         - 1
       angle: 30
-      right: 0
-      upward: 1
-      forward: 0
       range: 200
       mustHitToWork: true
       particleType: "VILLAGER_HAPPY"
@@ -408,9 +402,6 @@ skillUltimate:
           - 1
           - 1
           - 1
-        right: 0
-        upward: 0
-        forward: 0
         range: 200
         mustHitToWork: false
         particleType: "FLAME"

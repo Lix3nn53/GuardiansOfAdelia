@@ -7,20 +7,20 @@
 tier: 3
 color: "GREEN"
 description:
-  - "Totemsssssssssss"
+  - "Shamans summons a totem and plays around it."
 classIconCustomModelData: 4
-attributeTierFire: 1
-attributeTierWater: 4
-attributeTierEarth: 5
-attributeTierLightning: 6
-attributeTierWind: 0
+attributeTierStrength: 1
+attributeTierSpirit: 4
+attributeTierEndurance: 5
+attributeTierIntelligence: 6
+attributeTierDexterity: 0
 weaponGearTypes:
   - "WAND"
   - "DAGGER"
   - "STAFF"
 armorGearTypes:
-  - "LIGHTNING_ARMOR"
-  - "WIND_ARMOR"
+  - "CLOTH_ARMOR"
+  - "FEATHER_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Totem"
@@ -240,7 +240,7 @@ skillPassive:
   name: "Purifying Waters"
   customModelData: 52
   description:
-    - "Your totem heals neaby allies over time."
+    - "Your totem heals nearby allies over time."
   manaCosts:
     - 0
     - 0
@@ -332,7 +332,8 @@ skillUltimate:
   name: "Surf"
   customModelData: 54
   description:
-    - "Push nearby enemies away."
+    - "Push your totem if it is nearby. After a small delay"
+    - "push yourself and enemies around you to your totem."
   manaCosts:
     - 10
     - 12

@@ -54,29 +54,29 @@ public class StatUtils {
                 return new StatOneType(damage);
             }
         } else if (type.equals(StatType.PASSIVE)) {
-            int fire = 0;
-            int water = 0;
-            int earth = 0;
-            int lightning = 0;
-            int wind = 0;
+            int strength = 0;
+            int spirit = 0;
+            int endurance = 0;
+            int intelligence = 0;
+            int dexterity = 0;
 
-            if (PersistentDataContainerUtil.hasInteger(item, "fire")) {
-                fire = PersistentDataContainerUtil.getInteger(item, "fire");
+            if (PersistentDataContainerUtil.hasInteger(item, "strength")) {
+                strength = PersistentDataContainerUtil.getInteger(item, "strength");
             }
-            if (PersistentDataContainerUtil.hasInteger(item, "water")) {
-                water = PersistentDataContainerUtil.getInteger(item, "water");
+            if (PersistentDataContainerUtil.hasInteger(item, "spirit")) {
+                spirit = PersistentDataContainerUtil.getInteger(item, "spirit");
             }
-            if (PersistentDataContainerUtil.hasInteger(item, "earth")) {
-                earth = PersistentDataContainerUtil.getInteger(item, "earth");
+            if (PersistentDataContainerUtil.hasInteger(item, "endurance")) {
+                endurance = PersistentDataContainerUtil.getInteger(item, "endurance");
             }
-            if (PersistentDataContainerUtil.hasInteger(item, "lightning")) {
-                lightning = PersistentDataContainerUtil.getInteger(item, "lightning");
+            if (PersistentDataContainerUtil.hasInteger(item, "intelligence")) {
+                intelligence = PersistentDataContainerUtil.getInteger(item, "intelligence");
             }
-            if (PersistentDataContainerUtil.hasInteger(item, "wind")) {
-                wind = PersistentDataContainerUtil.getInteger(item, "wind");
+            if (PersistentDataContainerUtil.hasInteger(item, "dexterity")) {
+                dexterity = PersistentDataContainerUtil.getInteger(item, "dexterity");
             }
 
-            return new StatPassive(fire, water, earth, lightning, wind);
+            return new StatPassive(strength, spirit, endurance, intelligence, dexterity);
         }
         return new StatOneType(0);
     }
@@ -179,20 +179,20 @@ public class StatUtils {
             StatPassive statPassive = new StatPassive(GearLevel.getMinStatValue(gearLevel), GearLevel.getMaxStatValue(gearLevel), minNumberOfStats);
 
             //add persistent data before getting itemMeta so we don't lost them
-            if (statPassive.getFire() != 0) {
-                PersistentDataContainerUtil.putInteger("fire", statPassive.getFire(), itemStack);
+            if (statPassive.getStrength() != 0) {
+                PersistentDataContainerUtil.putInteger("strength", statPassive.getStrength(), itemStack);
             }
-            if (statPassive.getWater() != 0) {
-                PersistentDataContainerUtil.putInteger("water", statPassive.getWater(), itemStack);
+            if (statPassive.getSpirit() != 0) {
+                PersistentDataContainerUtil.putInteger("spirit", statPassive.getSpirit(), itemStack);
             }
-            if (statPassive.getEarth() != 0) {
-                PersistentDataContainerUtil.putInteger("earth", statPassive.getEarth(), itemStack);
+            if (statPassive.getEndurance() != 0) {
+                PersistentDataContainerUtil.putInteger("endurance", statPassive.getEndurance(), itemStack);
             }
-            if (statPassive.getLightning() != 0) {
-                PersistentDataContainerUtil.putInteger("lightning", statPassive.getLightning(), itemStack);
+            if (statPassive.getIntelligence() != 0) {
+                PersistentDataContainerUtil.putInteger("intelligence", statPassive.getIntelligence(), itemStack);
             }
-            if (statPassive.getWind() != 0) {
-                PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), itemStack);
+            if (statPassive.getDexterity() != 0) {
+                PersistentDataContainerUtil.putInteger("dexterity", statPassive.getDexterity(), itemStack);
             }
 
             ItemMeta itemMeta = itemStack.getItemMeta();
@@ -200,24 +200,24 @@ public class StatUtils {
 
             int i = lore.indexOf(itemTier.getTierString());
 
-            if (statPassive.getFire() != 0) {
-                lore.add(i, ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
+            if (statPassive.getStrength() != 0) {
+                lore.add(i, ChatColor.RED + "☄ " + ChatColor.RED + "Strength: " + ChatColor.GRAY + "+" + statPassive.getStrength());
                 i++;
             }
-            if (statPassive.getWater() != 0) {
-                lore.add(i, ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
+            if (statPassive.getSpirit() != 0) {
+                lore.add(i, ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Spirit: " + ChatColor.GRAY + "+" + statPassive.getSpirit());
                 i++;
             }
-            if (statPassive.getEarth() != 0) {
-                lore.add(i, ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
+            if (statPassive.getEndurance() != 0) {
+                lore.add(i, ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Endurance: " + ChatColor.GRAY + "+" + statPassive.getEndurance());
                 i++;
             }
-            if (statPassive.getLightning() != 0) {
-                lore.add(i, ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
+            if (statPassive.getIntelligence() != 0) {
+                lore.add(i, ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Intelligence: " + ChatColor.GRAY + "+" + statPassive.getIntelligence());
                 i++;
             }
-            if (statPassive.getWind() != 0) {
-                lore.add(i, ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
+            if (statPassive.getDexterity() != 0) {
+                lore.add(i, ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Dexterity: " + ChatColor.GRAY + "+" + statPassive.getDexterity());
                 i++;
             }
             lore.add(i, "");

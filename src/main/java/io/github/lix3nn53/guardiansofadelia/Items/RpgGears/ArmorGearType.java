@@ -6,11 +6,11 @@ import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUti
 import org.bukkit.inventory.ItemStack;
 
 public enum ArmorGearType {
-    EARTH_ARMOR,
-    FIRE_ARMOR,
-    LIGHTNING_ARMOR,
-    WATER_ARMOR,
-    WIND_ARMOR;
+    HEAVY_ARMOR, // NETHERITE
+    PLATE_ARMOR, // DIAMOND
+    CLOTH_ARMOR, // GOLD
+    LIGHT_ARMOR, // IRON
+    FEATHER_ARMOR;  // CHAINMAIL
 
     public static ArmorGearType typeOf(ItemStack itemStack) {
         if (itemStack == null) return null;
@@ -29,16 +29,16 @@ public enum ArmorGearType {
 
     public String getDisplayName() {
         switch (this) {
-            case EARTH_ARMOR:
-                return "Earth Armor";
-            case FIRE_ARMOR:
-                return "Fire Armor";
-            case LIGHTNING_ARMOR:
-                return "Lightning Armor";
-            case WATER_ARMOR:
-                return "Water Armor";
-            case WIND_ARMOR:
-                return "Wind Armor";
+            case HEAVY_ARMOR:
+                return "Heavy ArmorType";
+            case PLATE_ARMOR:
+                return "Plate ArmorType";
+            case CLOTH_ARMOR:
+                return "Cloth ArmorType";
+            case LIGHT_ARMOR:
+                return "Light ArmorType";
+            case FEATHER_ARMOR:
+                return "Feather ArmorType";
         }
 
         return "";
@@ -46,14 +46,14 @@ public enum ArmorGearType {
 
     public double getHealthReduction() {
         switch (this) {
-            case EARTH_ARMOR:
+            case HEAVY_ARMOR:
                 return 1;
-            case FIRE_ARMOR:
+            case PLATE_ARMOR:
                 return 0.7;
-            case WATER_ARMOR:
-            case WIND_ARMOR:
+            case LIGHT_ARMOR:
+            case FEATHER_ARMOR:
                 return 0.5;
-            case LIGHTNING_ARMOR:
+            case CLOTH_ARMOR:
                 return 0.4;
         }
 
@@ -62,14 +62,14 @@ public enum ArmorGearType {
 
     public double getPhysicalDefenseReduction() {
         switch (this) {
-            case EARTH_ARMOR:
+            case HEAVY_ARMOR:
                 return 1;
-            case FIRE_ARMOR:
+            case PLATE_ARMOR:
                 return 0.7;
-            case WATER_ARMOR:
-            case WIND_ARMOR:
+            case LIGHT_ARMOR:
+            case FEATHER_ARMOR:
                 return 0.5;
-            case LIGHTNING_ARMOR:
+            case CLOTH_ARMOR:
                 return 0.4;
         }
 
@@ -78,14 +78,14 @@ public enum ArmorGearType {
 
     public double getMagicDefenseReduction() {
         switch (this) {
-            case LIGHTNING_ARMOR:
+            case CLOTH_ARMOR:
                 return 1;
-            case WATER_ARMOR:
-            case WIND_ARMOR:
+            case LIGHT_ARMOR:
+            case FEATHER_ARMOR:
                 return 0.7;
-            case FIRE_ARMOR:
+            case PLATE_ARMOR:
                 return 0.5;
-            case EARTH_ARMOR:
+            case HEAVY_ARMOR:
                 return 0.4;
         }
 
@@ -94,15 +94,15 @@ public enum ArmorGearType {
 
     public ArmorMaterial getArmorMaterial() {
         switch (this) {
-            case EARTH_ARMOR:
+            case HEAVY_ARMOR:
                 return ArmorMaterial.NETHERITE;
-            case FIRE_ARMOR:
+            case PLATE_ARMOR:
                 return ArmorMaterial.DIAMOND;
-            case LIGHTNING_ARMOR:
+            case CLOTH_ARMOR:
                 return ArmorMaterial.GOLDEN;
-            case WATER_ARMOR:
+            case LIGHT_ARMOR:
                 return ArmorMaterial.IRON;
-            case WIND_ARMOR:
+            case FEATHER_ARMOR:
                 return ArmorMaterial.CHAINMAIL;
         }
 
@@ -111,15 +111,15 @@ public enum ArmorGearType {
 
     public GearSetEffect getSetEffect() {
         switch (this) {
-            case EARTH_ARMOR:
+            case HEAVY_ARMOR:
                 return GearSetEffect.KNOCKBACK_RESISTANCE;
-            case FIRE_ARMOR:
+            case PLATE_ARMOR:
                 return GearSetEffect.CRITICAL_DAMAGE;
-            case LIGHTNING_ARMOR:
+            case CLOTH_ARMOR:
                 return GearSetEffect.CRITICAL_CHANCE;
-            case WATER_ARMOR:
+            case LIGHT_ARMOR:
                 return GearSetEffect.MANA_REGEN;
-            case WIND_ARMOR:
+            case FEATHER_ARMOR:
                 return GearSetEffect.ATTACK_SPEED_INCREASE;
         }
 
@@ -128,12 +128,12 @@ public enum ArmorGearType {
 
     public boolean isHeavy() {
         switch (this) {
-            case EARTH_ARMOR:
-            case FIRE_ARMOR:
+            case HEAVY_ARMOR:
+            case PLATE_ARMOR:
                 return true;
-            case LIGHTNING_ARMOR:
-            case WATER_ARMOR:
-            case WIND_ARMOR:
+            case CLOTH_ARMOR:
+            case LIGHT_ARMOR:
+            case FEATHER_ARMOR:
                 return false;
         }
 

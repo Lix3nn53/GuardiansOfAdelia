@@ -723,15 +723,15 @@ public class MyInventoryClickEvent implements Listener {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
                 Attribute attr = null;
                 if (slot == 1) {
-                    attr = rpgCharacterStats.getFire();
+                    attr = rpgCharacterStats.getStrength();
                 } else if (slot == 4) {
-                    attr = rpgCharacterStats.getWater();
+                    attr = rpgCharacterStats.getSpirit();
                 } else if (slot == 7) {
-                    attr = rpgCharacterStats.getEarth();
+                    attr = rpgCharacterStats.getEndurance();
                 } else if (slot == 20) {
-                    attr = rpgCharacterStats.getLightning();
+                    attr = rpgCharacterStats.getIntelligence();
                 } else if (slot == 24) {
-                    attr = rpgCharacterStats.getWind();
+                    attr = rpgCharacterStats.getDexterity();
                 }
                 if (attr != null) {
                     if (event.isLeftClick()) {

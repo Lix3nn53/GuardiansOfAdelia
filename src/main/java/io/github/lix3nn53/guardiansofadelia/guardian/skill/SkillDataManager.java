@@ -20,7 +20,10 @@ public class SkillDataManager {
     private static final HashMap<LivingEntity, HashMap<String, Integer>> keyEntityToKeyToValue = new HashMap<>();
     private static final HashMap<LivingEntity, HashSet<String>> keyEntityToSkillFlags = new HashMap<>();
     private static final HashMap<LivingEntity, HashMap<Integer, BukkitTask>> keyEntityToCastCounterToRepeatTask = new HashMap<>();
+
     private static final HashMap<LivingEntity, HashMap<Integer, List<LivingEntity>>> keyEntityToCastCounterToSavedEntities = new HashMap<>();
+    private static final HashMap<LivingEntity, LivingEntity> savedEntityToKeyEntity = new HashMap<>();
+
 
     public static void setValue(LivingEntity keyEntity, String key, int value) {
         if (keyEntityToKeyToValue.containsKey(keyEntity)) {
@@ -148,6 +151,7 @@ public class SkillDataManager {
         }
         if (keyEntity instanceof Player) {
             TriggerListener.onPlayerSavedEntitySpawn((Player) keyEntity, created);
+            savedEntityToKeyEntity.put(created, keyEntity);
         }
     }
 
@@ -157,6 +161,7 @@ public class SkillDataManager {
             List<LivingEntity> removedEntities = castCounterToSavedEntities.remove(castCounter);
             for (LivingEntity removed : removedEntities) {
                 removed.remove();
+                savedEntityToKeyEntity.remove(removed);
             }
             if (castCounterToSavedEntities.isEmpty()) {
                 keyEntityToCastCounterToSavedEntities.remove(keyEntity);
@@ -186,6 +191,7 @@ public class SkillDataManager {
                 entities.remove(toRemove);
                 toRemove.remove();
             }
+            savedEntityToKeyEntity.remove(toRemove);
         }
     }
 
@@ -210,6 +216,7 @@ public class SkillDataManager {
                     if (mobCode.equals(internalName)) {
                         entity.remove();
                         removed++;
+                        savedEntityToKeyEntity.remove(entity);
                     }
                 }
             }
@@ -230,6 +237,14 @@ public class SkillDataManager {
         }
 
         return allEntities;
+    }
+
+    public static boolean isSavedEntity(LivingEntity entity) {
+        return savedEntityToKeyEntity.containsKey(entity);
+    }
+
+    public static LivingEntity getOwner(LivingEntity entity) {
+        return savedEntityToKeyEntity.get(entity);
     }
 
     /**

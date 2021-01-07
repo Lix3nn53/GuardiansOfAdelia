@@ -11,19 +11,19 @@ description:
   - "superior combat skills, warriors are"
   - "always ready to take on any enemy."
 classIconCustomModelData: 20
-attributeTierFire: 6
-attributeTierWater: 1
-attributeTierEarth: 7
-attributeTierLightning: 1
-attributeTierWind: 0
+attributeTierStrength: 6
+attributeTierSpirit: 1
+attributeTierEndurance: 7
+attributeTierIntelligence: 1
+attributeTierDexterity: 0
 weaponGearTypes:
   - "BATTLE_AXE"
   - "SWORD"
   - "WAR_HAMMER"
   - "GREAT_SWORD"
 armorGearTypes:
-  - "FIRE_ARMOR"
-  - "EARTH_ARMOR"
+  - "PLATE_ARMOR"
+  - "HEAVY_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Power Slash"
@@ -120,9 +120,6 @@ skillTwo:
         - 1
         - 1
       angle: 30
-      right: 0
-      upward: 1
-      forward: 0
       range: 200
       mustHitToWork: true
       particleType: "FLAME"

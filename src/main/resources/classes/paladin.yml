@@ -11,19 +11,19 @@ description:
   - "the holy power of light and beats foes"
   - "by channeling holy wrath."
 classIconCustomModelData: 13
-attributeTierFire: 3
-attributeTierWater: 4
-attributeTierEarth: 7
-attributeTierLightning: 2
-attributeTierWind: 0
+attributeTierStrength: 3
+attributeTierSpirit: 4
+attributeTierEndurance: 7
+attributeTierIntelligence: 2
+attributeTierDexterity: 0
 weaponGearTypes:
   - "WAR_HAMMER"
   - "SWORD"
   - "BATTLE_AXE"
   - "GREAT_SWORD"
 armorGearTypes:
-  - "EARTH_ARMOR"
-  - "FIRE_ARMOR"
+  - "HEAVY_ARMOR"
+  - "PLATE_ARMOR"
 shieldGearTypes:
   - "SHIELD"
 hasDefaultOffhand: true

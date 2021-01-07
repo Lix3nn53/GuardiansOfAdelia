@@ -48,11 +48,11 @@ public class CharacterInfoSlot {
                 int health = (int) (player.getHealth() + 0.5);
                 double criticalChance = rpgCharacterStats.getTotalCriticalChance() * 100;
 
-                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute fire = rpgCharacterStats.getFire();
-                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute water = rpgCharacterStats.getWater();
-                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute earth = rpgCharacterStats.getEarth();
-                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute lightning = rpgCharacterStats.getLightning();
-                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute wind = rpgCharacterStats.getWind();
+                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute strength = rpgCharacterStats.getStrength();
+                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute spirit = rpgCharacterStats.getSpirit();
+                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute endurance = rpgCharacterStats.getEndurance();
+                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute intelligence = rpgCharacterStats.getIntelligence();
+                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute dexterity = rpgCharacterStats.getDexterity();
 
                 final int totalDefense = rpgCharacterStats.getTotalDefense();
                 double phyReduction = StatUtils.getDefenseReduction(totalDefense);
@@ -76,11 +76,11 @@ public class CharacterInfoSlot {
                 lore.add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + criticalChance + "%");
                 lore.add("");
                 lore.add(ChatColor.GRAY + "(equipment + level + invested points)");
-                lore.add(ChatColor.RED + "☄" + ChatColor.RED + " Fire: " + ChatColor.GRAY + fire.getBonusFromEquipment() + " + " + fire.getBonusFromLevel(level, rpgClassStr) + " + " + fire.getInvested());
-                lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + water.getBonusFromEquipment() + " + " + water.getBonusFromLevel(level, rpgClassStr) + " + " + water.getInvested());
-                lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + earth.getBonusFromEquipment() + " + " + earth.getBonusFromLevel(level, rpgClassStr) + " + " + earth.getInvested());
-                lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + lightning.getBonusFromEquipment() + " + " + lightning.getBonusFromLevel(level, rpgClassStr) + " + " + lightning.getInvested());
-                lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + wind.getBonusFromEquipment() + " + " + wind.getBonusFromLevel(level, rpgClassStr) + " + " + wind.getInvested());
+                lore.add(ChatColor.RED + "☄" + ChatColor.RED + " Strength: " + ChatColor.GRAY + strength.getBonusFromEquipment() + " + " + strength.getBonusFromLevel(level, rpgClassStr) + " + " + strength.getInvested());
+                lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Spirit: " + ChatColor.GRAY + spirit.getBonusFromEquipment() + " + " + spirit.getBonusFromLevel(level, rpgClassStr) + " + " + spirit.getInvested());
+                lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Endurance: " + ChatColor.GRAY + endurance.getBonusFromEquipment() + " + " + endurance.getBonusFromLevel(level, rpgClassStr) + " + " + endurance.getInvested());
+                lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Intelligence: " + ChatColor.GRAY + intelligence.getBonusFromEquipment() + " + " + intelligence.getBonusFromLevel(level, rpgClassStr) + " + " + intelligence.getInvested());
+                lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Dexterity: " + ChatColor.GRAY + dexterity.getBonusFromEquipment() + " + " + dexterity.getBonusFromLevel(level, rpgClassStr) + " + " + dexterity.getInvested());
                 skullMeta.setLore(lore);
                 itemStack.setItemMeta(skullMeta);
                 return itemStack;

@@ -32,18 +32,18 @@ public class RPGInventory {
 
     private final List<Player> petSpawnCooldownList = new ArrayList<>();
 
-    private RPGSlotParrot parrotSlot = new RPGSlotParrot();
-    private RPGSlotEarring earringSlot = new RPGSlotEarring();
-    private RPGSlotNecklace necklaceSlot = new RPGSlotNecklace();
-    private RPGSlotGlove gloveSlot = new RPGSlotGlove();
-    private RPGSlotRing ringSlot = new RPGSlotRing();
-    private EggSlot eggSlot = new EggSlot();
-    private VanillaSlotHelmet helmetSlot = new VanillaSlotHelmet();
-    private VanillaSlotChestplate chestplateSlot = new VanillaSlotChestplate();
-    private VanillaSlotLeggings leggingsSlot = new VanillaSlotLeggings();
-    private VanillaSlotBoots bootsSlot = new VanillaSlotBoots();
-    private VanillaSlotOffhand offhandSlot = new VanillaSlotOffhand();
-    private HotBarSlotWeapon hotBarSlotWeapon = new HotBarSlotWeapon();
+    private final RPGSlotParrot parrotSlot = new RPGSlotParrot();
+    private final RPGSlotEarring earringSlot = new RPGSlotEarring();
+    private final RPGSlotNecklace necklaceSlot = new RPGSlotNecklace();
+    private final RPGSlotGlove gloveSlot = new RPGSlotGlove();
+    private final RPGSlotRing ringSlot = new RPGSlotRing();
+    private final EggSlot eggSlot = new EggSlot();
+    private final VanillaSlotHelmet helmetSlot = new VanillaSlotHelmet();
+    private final VanillaSlotChestplate chestplateSlot = new VanillaSlotChestplate();
+    private final VanillaSlotLeggings leggingsSlot = new VanillaSlotLeggings();
+    private final VanillaSlotBoots bootsSlot = new VanillaSlotBoots();
+    private final VanillaSlotOffhand offhandSlot = new VanillaSlotOffhand();
+    private final HotBarSlotWeapon hotBarSlotWeapon = new HotBarSlotWeapon();
 
     public GuiGeneric formRPGInventory(Player player) {
         if (parrotSlot.isEmpty()) {
@@ -127,18 +127,18 @@ public class RPGInventory {
     }
 
     public StatPassive getTotalPassiveStat() {
-        int fire = parrotSlot.getBonusStats().getFire() + earringSlot.getBonusStats().getFire() + necklaceSlot.getBonusStats().getFire()
-                + gloveSlot.getBonusStats().getFire() + ringSlot.getBonusStats().getFire();
-        int water = parrotSlot.getBonusStats().getWater() + earringSlot.getBonusStats().getWater() + necklaceSlot.getBonusStats().getWater()
-                + gloveSlot.getBonusStats().getWater() + ringSlot.getBonusStats().getWater();
-        int earth = parrotSlot.getBonusStats().getEarth() + earringSlot.getBonusStats().getEarth() + necklaceSlot.getBonusStats().getEarth()
-                + gloveSlot.getBonusStats().getEarth() + ringSlot.getBonusStats().getEarth();
-        int lightning = parrotSlot.getBonusStats().getLightning() + earringSlot.getBonusStats().getLightning() + necklaceSlot.getBonusStats().getLightning()
-                + gloveSlot.getBonusStats().getLightning() + ringSlot.getBonusStats().getLightning();
-        int wind = parrotSlot.getBonusStats().getWind() + earringSlot.getBonusStats().getWind() + necklaceSlot.getBonusStats().getWind()
-                + gloveSlot.getBonusStats().getWind() + ringSlot.getBonusStats().getWind();
+        int strength = parrotSlot.getBonusStats().getStrength() + earringSlot.getBonusStats().getStrength() + necklaceSlot.getBonusStats().getStrength()
+                + gloveSlot.getBonusStats().getStrength() + ringSlot.getBonusStats().getStrength();
+        int spirit = parrotSlot.getBonusStats().getSpirit() + earringSlot.getBonusStats().getSpirit() + necklaceSlot.getBonusStats().getSpirit()
+                + gloveSlot.getBonusStats().getSpirit() + ringSlot.getBonusStats().getSpirit();
+        int endurance = parrotSlot.getBonusStats().getEndurance() + earringSlot.getBonusStats().getEndurance() + necklaceSlot.getBonusStats().getEndurance()
+                + gloveSlot.getBonusStats().getEndurance() + ringSlot.getBonusStats().getEndurance();
+        int intelligence = parrotSlot.getBonusStats().getIntelligence() + earringSlot.getBonusStats().getIntelligence() + necklaceSlot.getBonusStats().getIntelligence()
+                + gloveSlot.getBonusStats().getIntelligence() + ringSlot.getBonusStats().getIntelligence();
+        int dexterity = parrotSlot.getBonusStats().getDexterity() + earringSlot.getBonusStats().getDexterity() + necklaceSlot.getBonusStats().getDexterity()
+                + gloveSlot.getBonusStats().getDexterity() + ringSlot.getBonusStats().getDexterity();
 
-        return new StatPassive(fire, water, earth, lightning, wind);
+        return new StatPassive(strength, spirit, endurance, intelligence, dexterity);
     }
 
     private int getSlotNo(RPGSlotType slotType) {
@@ -369,11 +369,11 @@ public class RPGInventory {
 
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                    rpgCharacterStats.getFire().removeBonusFromPassive(statPassive.getFire(), rpgCharacterStats, false);
-                    rpgCharacterStats.getEarth().removeBonusFromPassive(statPassive.getEarth(), rpgCharacterStats, true);
-                    rpgCharacterStats.getWater().removeBonusFromPassive(statPassive.getWater(), rpgCharacterStats, true);
-                    rpgCharacterStats.getLightning().removeBonusFromPassive(statPassive.getLightning(), rpgCharacterStats, false);
-                    rpgCharacterStats.getWind().removeBonusFromPassive(statPassive.getWind(), rpgCharacterStats, false);
+                    rpgCharacterStats.getStrength().removeBonusFromPassive(statPassive.getStrength(), rpgCharacterStats, false);
+                    rpgCharacterStats.getEndurance().removeBonusFromPassive(statPassive.getEndurance(), rpgCharacterStats, true);
+                    rpgCharacterStats.getSpirit().removeBonusFromPassive(statPassive.getSpirit(), rpgCharacterStats, true);
+                    rpgCharacterStats.getIntelligence().removeBonusFromPassive(statPassive.getIntelligence(), rpgCharacterStats, false);
+                    rpgCharacterStats.getDexterity().removeBonusFromPassive(statPassive.getDexterity(), rpgCharacterStats, false);
                 }
             }
         }
@@ -392,11 +392,11 @@ public class RPGInventory {
 
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                    rpgCharacterStats.getFire().addBonusToPassive(statPassive.getFire(), rpgCharacterStats, false);
-                    rpgCharacterStats.getEarth().addBonusToPassive(statPassive.getEarth(), rpgCharacterStats, true);
-                    rpgCharacterStats.getWater().addBonusToPassive(statPassive.getWater(), rpgCharacterStats, true);
-                    rpgCharacterStats.getLightning().addBonusToPassive(statPassive.getLightning(), rpgCharacterStats, false);
-                    rpgCharacterStats.getWind().addBonusToPassive(statPassive.getWind(), rpgCharacterStats, false);
+                    rpgCharacterStats.getStrength().addBonusToPassive(statPassive.getStrength(), rpgCharacterStats, false);
+                    rpgCharacterStats.getEndurance().addBonusToPassive(statPassive.getEndurance(), rpgCharacterStats, true);
+                    rpgCharacterStats.getSpirit().addBonusToPassive(statPassive.getSpirit(), rpgCharacterStats, true);
+                    rpgCharacterStats.getIntelligence().addBonusToPassive(statPassive.getIntelligence(), rpgCharacterStats, false);
+                    rpgCharacterStats.getDexterity().addBonusToPassive(statPassive.getDexterity(), rpgCharacterStats, false);
                 }
             }
         }

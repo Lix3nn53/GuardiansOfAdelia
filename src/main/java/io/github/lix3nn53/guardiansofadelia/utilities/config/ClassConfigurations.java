@@ -60,17 +60,17 @@ public class ClassConfigurations {
 
             int classIconCustomModelData = fileConfiguration.getInt("classIconCustomModelData");
 
-            int attributeTierFire = fileConfiguration.getInt("attributeTierFire");
-            int attributeTierWater = fileConfiguration.getInt("attributeTierWater");
-            int attributeTierEarth = fileConfiguration.getInt("attributeTierEarth");
-            int attributeTierLightning = fileConfiguration.getInt("attributeTierLightning");
-            int attributeTierWind = fileConfiguration.getInt("attributeTierWind");
+            int attributeTierStrength = fileConfiguration.getInt("attributeTierStrength");
+            int attributeTierSpirit = fileConfiguration.getInt("attributeTierSpirit");
+            int attributeTierEndurance = fileConfiguration.getInt("attributeTierEndurance");
+            int attributeTierIntelligence = fileConfiguration.getInt("attributeTierIntelligence");
+            int attributeTierDexterity = fileConfiguration.getInt("attributeTierDexterity");
             HashMap<AttributeType, Integer> attributeTiers = new HashMap<>();
-            attributeTiers.put(AttributeType.FIRE, attributeTierFire);
-            attributeTiers.put(AttributeType.WATER, attributeTierWater);
-            attributeTiers.put(AttributeType.EARTH, attributeTierEarth);
-            attributeTiers.put(AttributeType.LIGHTNING, attributeTierLightning);
-            attributeTiers.put(AttributeType.WIND, attributeTierWind);
+            attributeTiers.put(AttributeType.STRENGTH, attributeTierStrength);
+            attributeTiers.put(AttributeType.SPIRIT, attributeTierSpirit);
+            attributeTiers.put(AttributeType.ENDURANCE, attributeTierEndurance);
+            attributeTiers.put(AttributeType.INTELLIGENCE, attributeTierIntelligence);
+            attributeTiers.put(AttributeType.DEXTERITY, attributeTierDexterity);
 
             HashMap<Integer, Skill> skillSet = new HashMap<>();
 

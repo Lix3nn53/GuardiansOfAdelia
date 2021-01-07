@@ -7,26 +7,28 @@
 tier: 3
 color: "DARK_PURPLE"
 description:
-  - "The Necromancer bla bla"
+  - "Necromancers are masters of Living Death magic."
+  - "They control bone and flesh to protect themself and crush their enemies."
 classIconCustomModelData: 18
-attributeTierFire: 4
-attributeTierWater: 3
-attributeTierEarth: 5
-attributeTierLightning: 1
-attributeTierWind: 0
+attributeTierStrength: 4
+attributeTierSpirit: 3
+attributeTierEndurance: 5
+attributeTierIntelligence: 1
+attributeTierDexterity: 0
 weaponGearTypes:
   - "WAND"
   - "DAGGER"
   - "STAFF"
 armorGearTypes:
-  - "LIGHTNING_ARMOR"
-  - "WIND_ARMOR"
+  - "CLOTH_ARMOR"
+  - "FEATHER_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Summon"
   customModelData: 42
   description:
-    - "Summon skeletons"
+    - "Summon skeletons."
+    - "Skeletons lose %10 of their health per 5 seconds."
   manaCosts:
     - 5
     - 7
@@ -89,7 +91,10 @@ skillTwo:
   name: "Skullshot"
   customModelData: 39
   description:
-    - "Summon skeletons"
+    - "Launch a projectile that deals damage and slows enemies"
+    - "in a small area."
+    - "Also your summons targets the enemy which got hit and"
+    - "gains bonus movement speed."
   manaCosts:
     - 5
     - 7
@@ -119,9 +124,6 @@ skillTwo:
         - 1
         - 1
       angle: 30
-      right: 0
-      upward: 1
-      forward: 0
       range: 200
       mustHitToWork: true
       particleType: "REDSTONE"
@@ -202,10 +204,11 @@ skillTwo:
       componentType: "SoundMechanic"
       goaSound: "SKILL_FIRE_SLASH"
 skillThree:
-  name: "Gain Health kill summons"
+  name: "Life Drain"
   customModelData: 38
   description:
-    - "Summon skeletons"
+    - "Deal damage to all of your summons, heal yourself"
+    - "by an amount for each damaged summon."
   manaCosts:
     - 5
     - 7
@@ -257,6 +260,7 @@ skillPassive:
     - "For each active summon gain an"
     - "amount of physical and magic defense."
     - ""
+    - "Also increases the max amount of summons you can have at a time."
     - "Skill level 0: 3 summons at a time"
     - "Skill level 1: 4 summons at a time"
     - "Skill level 2: 5 summons at a time"
@@ -343,7 +347,12 @@ skillUltimate:
   name: "Frozen Colossus"
   customModelData: 45
   description:
-    - "Frozen Colossus"
+    - "First cast: "
+    - "Summon Frozen Colossuses which cast Freeze on summon."
+    - "Second cast: "
+    - "If at least one Frozen Colossus is active, make them cast Freeze."
+    - ""
+    - "Freeze: Stuns nearby enemies"
   manaCosts:
     - 5
     - 7

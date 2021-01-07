@@ -149,41 +149,41 @@ public class Enchant {
             player.sendMessage("SUCC");
             player.sendMessage("PASSIVE");
 
-            int lineToChangeFire = -1;
-            int lineToChangeWater = -1;
-            int lineToChangeEarth = -1;
-            int lineToChangeLightning = -1;
-            int lineToChangeWind = -1;
+            int lineToChangeStr = -1;
+            int lineToChangeSpr = -1;
+            int lineToChangeEnd = -1;
+            int lineToChangeInt = -1;
+            int lineToChangeDex = -1;
             int changeCounter = 0;
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
-                if (stat.getFire() != 0) {
-                    if (line.contains(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+")) {
-                        lineToChangeFire = i;
+                if (stat.getStrength() != 0) {
+                    if (line.contains(ChatColor.RED + "☄ " + ChatColor.RED + "Strength: " + ChatColor.GRAY + "+")) {
+                        lineToChangeStr = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getWater() != 0) {
-                    if (line.contains(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+")) {
-                        lineToChangeWater = i;
+                if (stat.getSpirit() != 0) {
+                    if (line.contains(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Spirit: " + ChatColor.GRAY + "+")) {
+                        lineToChangeSpr = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getEarth() != 0) {
-                    if (line.contains(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+")) {
-                        lineToChangeEarth = i;
+                if (stat.getEndurance() != 0) {
+                    if (line.contains(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Endurance: " + ChatColor.GRAY + "+")) {
+                        lineToChangeEnd = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getLightning() != 0) {
-                    if (line.contains(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+")) {
-                        lineToChangeLightning = i;
+                if (stat.getIntelligence() != 0) {
+                    if (line.contains(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Intelligence: " + ChatColor.GRAY + "+")) {
+                        lineToChangeInt = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getWind() != 0) {
-                    if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+")) {
-                        lineToChangeWind = i;
+                if (stat.getDexterity() != 0) {
+                    if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Dexterity: " + ChatColor.GRAY + "+")) {
+                        lineToChangeDex = i;
                         changeCounter++;
                     }
                 }
@@ -192,53 +192,53 @@ public class Enchant {
                 }
             }
 
-            int nextFireValue = getNextValue(stat.getFire());
-            if (lineToChangeFire != -1) {
-                String line = lore.get(lineToChangeFire);
-                String newLine = line.replace(stat.getFire() + "", nextFireValue + "");
-                lore.set(lineToChangeFire, newLine);
+            int nextStrValue = getNextValue(stat.getStrength());
+            if (lineToChangeStr != -1) {
+                String line = lore.get(lineToChangeStr);
+                String newLine = line.replace(stat.getStrength() + "", nextStrValue + "");
+                lore.set(lineToChangeStr, newLine);
             }
-            int nextWaterValue = getNextValue(stat.getWater());
-            if (lineToChangeWater != -1) {
-                String line = lore.get(lineToChangeWater);
-                String newLine = line.replace(stat.getWater() + "", nextWaterValue + "");
-                lore.set(lineToChangeWater, newLine);
+            int nextSprValue = getNextValue(stat.getSpirit());
+            if (lineToChangeSpr != -1) {
+                String line = lore.get(lineToChangeSpr);
+                String newLine = line.replace(stat.getSpirit() + "", nextSprValue + "");
+                lore.set(lineToChangeSpr, newLine);
             }
-            int nextEarthValue = getNextValue(stat.getEarth());
-            if (lineToChangeEarth != -1) {
-                String line = lore.get(lineToChangeEarth);
-                String newLine = line.replace(stat.getEarth() + "", nextEarthValue + "");
-                lore.set(lineToChangeEarth, newLine);
+            int nextEndValue = getNextValue(stat.getEndurance());
+            if (lineToChangeEnd != -1) {
+                String line = lore.get(lineToChangeEnd);
+                String newLine = line.replace(stat.getEndurance() + "", nextEndValue + "");
+                lore.set(lineToChangeEnd, newLine);
             }
-            int nextLightningValue = getNextValue(stat.getLightning());
-            if (lineToChangeLightning != -1) {
-                String line = lore.get(lineToChangeLightning);
-                String newLine = line.replace(stat.getLightning() + "", nextLightningValue + "");
-                lore.set(lineToChangeLightning, newLine);
+            int nextIntValue = getNextValue(stat.getIntelligence());
+            if (lineToChangeInt != -1) {
+                String line = lore.get(lineToChangeInt);
+                String newLine = line.replace(stat.getIntelligence() + "", nextIntValue + "");
+                lore.set(lineToChangeInt, newLine);
             }
-            int nextWindValue = getNextValue(stat.getWind());
-            if (lineToChangeWind != -1) {
-                String line = lore.get(lineToChangeWind);
-                String newLine = line.replace(stat.getWind() + "", nextWindValue + "");
-                lore.set(lineToChangeWind, newLine);
+            int nextDexValue = getNextValue(stat.getDexterity());
+            if (lineToChangeDex != -1) {
+                String line = lore.get(lineToChangeDex);
+                String newLine = line.replace(stat.getDexterity() + "", nextDexValue + "");
+                lore.set(lineToChangeDex, newLine);
             }
             itemMeta.setLore(lore);
             this.itemStack.setItemMeta(itemMeta);
 
-            if (lineToChangeFire != -1) {
-                PersistentDataContainerUtil.putInteger("fire", nextFireValue, this.itemStack);
+            if (lineToChangeStr != -1) {
+                PersistentDataContainerUtil.putInteger("strength", nextStrValue, this.itemStack);
             }
-            if (lineToChangeWater != -1) {
-                PersistentDataContainerUtil.putInteger("water", nextWaterValue, this.itemStack);
+            if (lineToChangeSpr != -1) {
+                PersistentDataContainerUtil.putInteger("spirit", nextSprValue, this.itemStack);
             }
-            if (lineToChangeEarth != -1) {
-                PersistentDataContainerUtil.putInteger("earth", nextEarthValue, this.itemStack);
+            if (lineToChangeEnd != -1) {
+                PersistentDataContainerUtil.putInteger("endurance", nextEndValue, this.itemStack);
             }
-            if (lineToChangeLightning != -1) {
-                PersistentDataContainerUtil.putInteger("lightning", nextLightningValue, this.itemStack);
+            if (lineToChangeInt != -1) {
+                PersistentDataContainerUtil.putInteger("intelligence", nextIntValue, this.itemStack);
             }
-            if (lineToChangeWind != -1) {
-                PersistentDataContainerUtil.putInteger("wind", nextWindValue, this.itemStack);
+            if (lineToChangeDex != -1) {
+                PersistentDataContainerUtil.putInteger("dexterity", nextDexValue, this.itemStack);
             }
         }
 
@@ -347,41 +347,41 @@ public class Enchant {
             player.sendMessage("SUCC");
             player.sendMessage("PASSIVE");
 
-            int lineToChangeFire = -1;
-            int lineToChangeWater = -1;
-            int lineToChangeEarth = -1;
-            int lineToChangeLightning = -1;
-            int lineToChangeWind = -1;
+            int lineToChangeStr = -1;
+            int lineToChangeSpr = -1;
+            int lineToChangeEnd = -1;
+            int lineToChangeInt = -1;
+            int lineToChangeDex = -1;
             int changeCounter = 0;
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
-                if (stat.getFire() != 0) {
-                    if (line.contains(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+")) {
-                        lineToChangeFire = i;
+                if (stat.getStrength() != 0) {
+                    if (line.contains(ChatColor.RED + "☄ " + ChatColor.RED + "Strength: " + ChatColor.GRAY + "+")) {
+                        lineToChangeStr = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getWater() != 0) {
-                    if (line.contains(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+")) {
-                        lineToChangeWater = i;
+                if (stat.getSpirit() != 0) {
+                    if (line.contains(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Spirit: " + ChatColor.GRAY + "+")) {
+                        lineToChangeSpr = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getEarth() != 0) {
-                    if (line.contains(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+")) {
-                        lineToChangeEarth = i;
+                if (stat.getEndurance() != 0) {
+                    if (line.contains(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Endurance: " + ChatColor.GRAY + "+")) {
+                        lineToChangeEnd = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getLightning() != 0) {
-                    if (line.contains(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+")) {
-                        lineToChangeLightning = i;
+                if (stat.getIntelligence() != 0) {
+                    if (line.contains(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Intelligence: " + ChatColor.GRAY + "+")) {
+                        lineToChangeInt = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getWind() != 0) {
-                    if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+")) {
-                        lineToChangeWind = i;
+                if (stat.getDexterity() != 0) {
+                    if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Dexterity: " + ChatColor.GRAY + "+")) {
+                        lineToChangeDex = i;
                         changeCounter++;
                     }
                 }
@@ -390,53 +390,53 @@ public class Enchant {
                 }
             }
 
-            int nextFireValue = getPreviousValue(stat.getFire());
-            if (lineToChangeFire != -1) {
-                String line = lore.get(lineToChangeFire);
-                String newLine = line.replace(stat.getFire() + "", nextFireValue + "");
-                lore.set(lineToChangeFire, newLine);
+            int nextStrValue = getPreviousValue(stat.getStrength());
+            if (lineToChangeStr != -1) {
+                String line = lore.get(lineToChangeStr);
+                String newLine = line.replace(stat.getStrength() + "", nextStrValue + "");
+                lore.set(lineToChangeStr, newLine);
             }
-            int nextWaterValue = getPreviousValue(stat.getWater());
-            if (lineToChangeWater != -1) {
-                String line = lore.get(lineToChangeWater);
-                String newLine = line.replace(stat.getWater() + "", nextWaterValue + "");
-                lore.set(lineToChangeWater, newLine);
+            int nextSprValue = getPreviousValue(stat.getSpirit());
+            if (lineToChangeSpr != -1) {
+                String line = lore.get(lineToChangeSpr);
+                String newLine = line.replace(stat.getSpirit() + "", nextSprValue + "");
+                lore.set(lineToChangeSpr, newLine);
             }
-            int nextEarthValue = getPreviousValue(stat.getEarth());
-            if (lineToChangeEarth != -1) {
-                String line = lore.get(lineToChangeEarth);
-                String newLine = line.replace(stat.getEarth() + "", nextEarthValue + "");
-                lore.set(lineToChangeEarth, newLine);
+            int nextEndValue = getPreviousValue(stat.getEndurance());
+            if (lineToChangeEnd != -1) {
+                String line = lore.get(lineToChangeEnd);
+                String newLine = line.replace(stat.getEndurance() + "", nextEndValue + "");
+                lore.set(lineToChangeEnd, newLine);
             }
-            int nextLightningValue = getPreviousValue(stat.getLightning());
-            if (lineToChangeLightning != -1) {
-                String line = lore.get(lineToChangeLightning);
-                String newLine = line.replace(stat.getLightning() + "", nextLightningValue + "");
-                lore.set(lineToChangeLightning, newLine);
+            int nextIntValue = getPreviousValue(stat.getIntelligence());
+            if (lineToChangeInt != -1) {
+                String line = lore.get(lineToChangeInt);
+                String newLine = line.replace(stat.getIntelligence() + "", nextIntValue + "");
+                lore.set(lineToChangeInt, newLine);
             }
-            int nextWindValue = getPreviousValue(stat.getWind());
-            if (lineToChangeWind != -1) {
-                String line = lore.get(lineToChangeWind);
-                String newLine = line.replace(stat.getWind() + "", nextWindValue + "");
-                lore.set(lineToChangeWind, newLine);
+            int nextDexValue = getPreviousValue(stat.getDexterity());
+            if (lineToChangeDex != -1) {
+                String line = lore.get(lineToChangeDex);
+                String newLine = line.replace(stat.getDexterity() + "", nextDexValue + "");
+                lore.set(lineToChangeDex, newLine);
             }
             itemMeta.setLore(lore);
             this.itemStack.setItemMeta(itemMeta);
 
-            if (lineToChangeFire != -1) {
-                PersistentDataContainerUtil.putInteger("fire", nextFireValue, this.itemStack);
+            if (lineToChangeStr != -1) {
+                PersistentDataContainerUtil.putInteger("strength", nextStrValue, this.itemStack);
             }
-            if (lineToChangeWater != -1) {
-                PersistentDataContainerUtil.putInteger("water", nextWaterValue, this.itemStack);
+            if (lineToChangeSpr != -1) {
+                PersistentDataContainerUtil.putInteger("spirit", nextSprValue, this.itemStack);
             }
-            if (lineToChangeEarth != -1) {
-                PersistentDataContainerUtil.putInteger("earth", nextEarthValue, this.itemStack);
+            if (lineToChangeEnd != -1) {
+                PersistentDataContainerUtil.putInteger("endurance", nextEndValue, this.itemStack);
             }
-            if (lineToChangeLightning != -1) {
-                PersistentDataContainerUtil.putInteger("lightning", nextLightningValue, this.itemStack);
+            if (lineToChangeInt != -1) {
+                PersistentDataContainerUtil.putInteger("intelligence", nextIntValue, this.itemStack);
             }
-            if (lineToChangeWind != -1) {
-                PersistentDataContainerUtil.putInteger("wind", nextWindValue, this.itemStack);
+            if (lineToChangeDex != -1) {
+                PersistentDataContainerUtil.putInteger("dexterity", nextDexValue, this.itemStack);
             }
         }
 

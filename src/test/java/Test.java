@@ -127,28 +127,6 @@ public class Test {
         for (double rate : downRatesForLevel) {
             System.out.println(value * rate);
         }*/
-        /*for (RPGClass rpgClass : RPGClass.values()) {
-            if (rpgClass.equals(RPGClass.NO_CLASS)) continue;
-            for (int level = 90; level < 91; level++) {
-                int fire = rpgClass.getAttributeBonusForLevel(AttributeType.FIRE, level);
-                int water = rpgClass.getAttributeBonusForLevel(AttributeType.WATER, level);
-                int earth = rpgClass.getAttributeBonusForLevel(AttributeType.EARTH, level);
-                int lightning = rpgClass.getAttributeBonusForLevel(AttributeType.LIGHTNING, level);
-                int wind = rpgClass.getAttributeBonusForLevel(AttributeType.WIND, level);
-
-                System.out.println("Level " + level + " Class " + rpgClass.toString());
-                System.out.println("Fire" + fire + " Water" + water + " Earth" + earth + " Lightning" + lightning + " Wind" + wind);
-            }
-        }*/
-
-        /*int totalDefense = 2400;
-        double damage = 1000;
-
-        double reduction = StatUtils.getDefenseReduction(totalDefense);
-
-        damage = damage * reduction;
-        System.out.println("damage: " + damage);
-        System.out.println("defense: " + totalDefense + " (" + (int) (((1.0 - reduction) * 100) + 0.5) + "% reduction)");*/
     }
 
     private static int getBonusValue(int value) {

@@ -1,23 +1,23 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.attribute;
 
 public enum AttributeType {
-    FIRE,
-    LIGHTNING,
-    EARTH,
-    WATER,
-    WIND;
+    STRENGTH,
+    INTELLIGENCE,
+    ENDURANCE,
+    SPIRIT,
+    DEXTERITY;
 
     public String getDescription() {
         switch (this) {
-            case FIRE:
+            case STRENGTH:
                 return getIncrementPerPoint() + " bonus physical damage per point";
-            case LIGHTNING:
+            case INTELLIGENCE:
                 return getIncrementPerPoint() + " bonus magic damage per point";
-            case EARTH:
+            case ENDURANCE:
                 return getIncrementPerPoint() + " bonus max health per point";
-            case WATER:
+            case SPIRIT:
                 return getIncrementPerPoint() + " bonus max mana per point";
-            case WIND:
+            case DEXTERITY:
                 return getIncrementPerPoint() * 100 + "% bonus critical chance per point(max 40%)";
         }
         return "description";
@@ -25,15 +25,15 @@ public enum AttributeType {
 
     public double getIncrementPerPoint() {
         switch (this) {
-            case FIRE:
+            case STRENGTH:
                 return 1;
-            case LIGHTNING:
+            case INTELLIGENCE:
                 return 1;
-            case EARTH:
+            case ENDURANCE:
                 return 10;
-            case WATER:
+            case SPIRIT:
                 return 1;
-            case WIND:
+            case DEXTERITY:
                 return 0.001;
         }
         return 1;

@@ -6,18 +6,18 @@ import java.util.Random;
 
 public class StatPassive implements Stat {
 
-    private int fire = 0;
-    private int water = 0;
-    private int earth = 0;
-    private int lightning = 0;
-    private int wind = 0;
+    private int strength = 0;
+    private int spirit = 0;
+    private int endurance = 0;
+    private int intelligence = 0;
+    private int dexterity = 0;
 
-    public StatPassive(int fire, int water, int earth, int lightning, int wind) {
-        this.fire = fire;
-        this.water = water;
-        this.earth = earth;
-        this.lightning = lightning;
-        this.wind = wind;
+    public StatPassive(int strength, int spirit, int endurance, int intelligence, int dexterity) {
+        this.strength = strength;
+        this.spirit = spirit;
+        this.endurance = endurance;
+        this.intelligence = intelligence;
+        this.dexterity = dexterity;
     }
 
     public StatPassive(int minStatValue, int maxStatValue, int minNumberOfStats) {
@@ -47,60 +47,60 @@ public class StatPassive implements Stat {
         }
     }
 
-    public int getFire() {
-        return fire;
+    public int getStrength() {
+        return strength;
     }
 
-    public int getWater() {
-        return water;
+    public int getSpirit() {
+        return spirit;
     }
 
-    public int getEarth() {
-        return earth;
+    public int getEndurance() {
+        return endurance;
     }
 
-    public int getLightning() {
-        return lightning;
+    public int getIntelligence() {
+        return intelligence;
     }
 
-    public int getWind() {
-        return wind;
+    public int getDexterity() {
+        return dexterity;
     }
 
     public boolean isEmpty() {
-        return (fire + water + earth + lightning + wind) < 1;
+        return (strength + spirit + endurance + intelligence + dexterity) < 1;
     }
 
     private void satisfyOneRandomly(int minStatValue, int maxStatValue) {
         List<String> unUsedElements = new ArrayList<>();
-        if (this.fire == 0) {
-            unUsedElements.add("fire");
+        if (this.strength == 0) {
+            unUsedElements.add("strength");
         }
-        if (this.water == 0) {
-            unUsedElements.add("water");
+        if (this.spirit == 0) {
+            unUsedElements.add("spirit");
         }
-        if (this.earth == 0) {
-            unUsedElements.add("earth");
+        if (this.endurance == 0) {
+            unUsedElements.add("endurance");
         }
-        if (this.lightning == 0) {
-            unUsedElements.add("lightning");
+        if (this.intelligence == 0) {
+            unUsedElements.add("intelligence");
         }
-        if (this.wind == 0) {
-            unUsedElements.add("wind");
+        if (this.dexterity == 0) {
+            unUsedElements.add("dexterity");
         }
         int random = new Random().nextInt(unUsedElements.size());
         String elementString = unUsedElements.get(random);
 
-        if (elementString.equals("fire")) {
-            this.fire = getRandomValue(minStatValue, maxStatValue);
-        } else if (elementString.equals("water")) {
-            this.water = getRandomValue(minStatValue, maxStatValue);
-        } else if (elementString.equals("earth")) {
-            this.earth = getRandomValue(minStatValue, maxStatValue);
-        } else if (elementString.equals("lightning")) {
-            this.lightning = getRandomValue(minStatValue, maxStatValue);
-        } else if (elementString.equals("wind")) {
-            this.wind = getRandomValue(minStatValue, maxStatValue);
+        if (elementString.equals("strength")) {
+            this.strength = getRandomValue(minStatValue, maxStatValue);
+        } else if (elementString.equals("spirit")) {
+            this.spirit = getRandomValue(minStatValue, maxStatValue);
+        } else if (elementString.equals("endurance")) {
+            this.endurance = getRandomValue(minStatValue, maxStatValue);
+        } else if (elementString.equals("intelligence")) {
+            this.intelligence = getRandomValue(minStatValue, maxStatValue);
+        } else if (elementString.equals("dexterity")) {
+            this.dexterity = getRandomValue(minStatValue, maxStatValue);
         }
     }
 

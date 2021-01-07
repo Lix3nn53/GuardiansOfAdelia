@@ -3,7 +3,6 @@ package io.github.lix3nn53.guardiansofadelia.guardian.attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 
 public class Attribute {
@@ -107,32 +106,24 @@ public class Attribute {
         }
     }
 
-    public void setBonus(Player player, EquipmentSlot equipmentSlot, RPGCharacterStats rpgCharacterStats, int bonus, boolean fixDisplay) {
-        int bonusPointDifference = 0;
-
+    public void setBonus(EquipmentSlot equipmentSlot, RPGCharacterStats rpgCharacterStats, int bonus, boolean fixDisplay) {
         switch (equipmentSlot) {
             case HAND:
-                bonusPointDifference = bonus - this.bonusFromMainhand;
                 this.bonusFromMainhand = bonus;
                 break;
             case OFF_HAND:
-                bonusPointDifference = bonus - this.bonusFromOffhand;
                 this.bonusFromOffhand = bonus;
                 break;
             case FEET:
-                bonusPointDifference = bonus - this.bonusFromBoots;
                 this.bonusFromBoots = bonus;
                 break;
             case LEGS:
-                bonusPointDifference = bonus - this.bonusFromLeggings;
                 this.bonusFromLeggings = bonus;
                 break;
             case CHEST:
-                bonusPointDifference = bonus - this.bonusFromChestplate;
                 this.bonusFromChestplate = bonus;
                 break;
             case HEAD:
-                bonusPointDifference = bonus - this.bonusFromHelmet;
                 this.bonusFromHelmet = bonus;
                 break;
         }
@@ -163,17 +154,17 @@ public class Attribute {
 
     private void onValueChange(RPGCharacterStats rpgCharacterStats) {
         switch (attributeType) {
-            case FIRE:
+            case STRENGTH:
                 break;
-            case LIGHTNING:
+            case INTELLIGENCE:
                 break;
-            case EARTH:
+            case ENDURANCE:
                 rpgCharacterStats.onMaxHealthChange();
                 break;
-            case WATER:
+            case SPIRIT:
                 rpgCharacterStats.onCurrentManaChange();
                 break;
-            case WIND:
+            case DEXTERITY:
                 break;
         }
     }
@@ -204,7 +195,7 @@ public class Attribute {
                     player.setHealth(nextHealth);
                     break;
                 case WATER:
-                    player.sendMessage("Bonus water fix mana");
+                    player.sendMessage("Bonus spirit fix mana");
                     increment = attributeType.getIncrement();
                     v = increment * bonusPointDifference;
 

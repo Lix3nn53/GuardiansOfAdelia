@@ -11,18 +11,18 @@ description:
   - "dexterity, allowing you to kite your target"
   - "and deal damage from long distances."
 classIconCustomModelData: 11
-attributeTierFire: 4
-attributeTierWater: 3
-attributeTierEarth: 5
-attributeTierLightning: 1
-attributeTierWind: 0
+attributeTierStrength: 4
+attributeTierSpirit: 3
+attributeTierEndurance: 5
+attributeTierIntelligence: 1
+attributeTierDexterity: 0
 weaponGearTypes:
   - "BOW"
   - "DAGGER"
   - "CROSSBOW"
 armorGearTypes:
-  - "WIND_ARMOR"
-  - "FIRE_ARMOR"
+  - "FEATHER_ARMOR"
+  - "PLATE_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Poison Arrow"
@@ -58,9 +58,6 @@ skillOne:
         - 1
         - 1
       angle: 30
-      right: 0
-      upward: 1
-      forward: 0
       range: 200
       mustHitToWork: true
       particleType: "REDSTONE"
@@ -390,9 +387,6 @@ skillUltimate:
             - 12
             - 12
             - 12
-          right: 0
-          upward: 0
-          forward: 0
           range: 200
           mustHitToWork: true
         child2:
@@ -409,9 +403,6 @@ skillUltimate:
             - 1
             - 1
             - 1
-          right: 0
-          upward: 0
-          forward: 0
           range: 200
           mustHitToWork: false
           child1:

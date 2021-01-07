@@ -1,0 +1,397 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+tier: 3
+color: "YELLOW"
+description:
+  - "Engineer"
+classIconCustomModelData: 18
+attributeTierStrength: 4
+attributeTierSpirit: 3
+attributeTierEndurance: 5
+attributeTierIntelligence: 1
+attributeTierDexterity: 0
+weaponGearTypes:
+  - "WAND"
+  - "DAGGER"
+  - "STAFF"
+armorGearTypes:
+  - "CLOTH_ARMOR"
+  - "FEATHER_ARMOR"
+hasDefaultOffhand: false
+skillOne:
+  name: "Turret"
+  customModelData: 17
+  description:
+    - "Summon skeletons."
+    - "Skeletons lose %10 of their health per 5 seconds."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "HologramMechanic"
+      helmetType: "IRON_PICKAXE"
+      customModelData: 9
+      durations:
+        - 800
+        - 900
+        - 1000
+        - 1100
+        - 1200
+        - 1400
+      displayText: "< Turret %caster% >"
+      gravity: true
+      marker: false
+      speed: 1.9
+      upward: 0.5
+      save: true
+      child1:
+        componentType: "RepeatMechanic"
+        period: 20
+        repetitions:
+          - 40
+          - 45
+          - 50
+          - 55
+          - 60
+          - 70
+        child1:
+          componentType: "ProjectileMechanic"
+          projectileClass: "Arrow"
+          spreadType: "CONE"
+          speed: 1.7
+          amountList:
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+          angle: 30
+          range: 200
+          mustHitToWork: true
+          particleType: "REDSTONE"
+          particleArrangement: "CIRCLE"
+          particleRadius: 0.5
+          particleAmount: 4
+          isProjectileInvisible: false
+          dustColor: 16753920
+          dustSize: 2
+          upward: 1
+          child1:
+            componentType: "AreaTarget"
+            allies: false
+            enemy: true
+            self: false
+            max: 30
+            radiusList:
+              - 2
+              - 2.5
+              - 3
+              - 3.5
+              - 4
+              - 4.5
+            child1:
+              componentType: "DamageMechanic"
+              damageType: "RANGED"
+              damageList:
+                - 24
+                - 60
+                - 180
+                - 300
+                - 420
+                - 720
+            child2:
+              componentType: "PushMechanic"
+              pushType: "FIXED"
+              speedList:
+                - 2
+                - 2.4
+                - 2.8
+                - 3.2
+                - 3.6
+                - 4.2
+              centerSelf: true
+          child2:
+            componentType: "ParticleMechanic"
+            type: "EXPLOSION_HUGE"
+            amount: 2
+            upward: 0.5
+            radius:
+              - 3
+              - 3.5
+              - 3
+              - 3.25
+              - 3.5
+              - 4
+          child3:
+            componentType: "SoundMechanic"
+            goaSound: "SKILL_WIND_PUSH"
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_SPLASH"
+skillTwo:
+  name: "Bomb"
+  customModelData: 19
+  description:
+    - "Launch a projectile that deals damage and slows enemies"
+    - "in a small area."
+    - "Also your summons targets the enemy which got hit and"
+    - "gains bonus movement speed."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "HologramMechanic"
+      helmetType: "IRON_PICKAXE"
+      customModelData: 8
+      durations:
+        - 50
+        - 50
+        - 50
+        - 50
+        - 50
+        - 50
+      displayText: "< Bomb %caster% >"
+      gravity: true
+      marker: false
+      speed: 1.9
+      upward: 0.5
+      save: true
+      child1:
+        componentType: "DelayWithHoloMessageMechanic"
+        message: "&cBOOM"
+        ticks: 40
+        offsetY: 0
+        child1:
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 30
+          radiusList:
+            - 2
+            - 2.5
+            - 3
+            - 3.5
+            - 4
+            - 4.5
+          child1:
+            componentType: "DamageMechanic"
+            damageType: "RANGED"
+            damageList:
+              - 24
+              - 60
+              - 180
+              - 300
+              - 420
+              - 720
+          child2:
+            componentType: "PushMechanic"
+            pushType: "FIXED"
+            speedList:
+              - 2
+              - 2.4
+              - 2.8
+              - 3.2
+              - 3.6
+              - 4.2
+            centerSelf: true
+        child2:
+          componentType: "ParticleMechanic"
+          type: "EXPLOSION_HUGE"
+          amount: 2
+          upward: 0.5
+          radius:
+            - 3
+            - 3.5
+            - 3
+            - 3.25
+            - 3.5
+            - 4
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_SPLASH"
+skillThree:
+  name: "Life Drain"
+  customModelData: 18
+  description:
+    - "Deal damage to all of your summons, heal yourself"
+    - "by an amount for each damaged summon."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "ProjectileMechanic"
+      projectileClass: "Arrow"
+      spreadType: "CONE"
+      speed: 2.7
+      amountList:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      angle: 30
+      range: 200
+      mustHitToWork: true
+      particleArrangement: "CIRCLE"
+      particleRadius: 0.5
+      particleAmount: 4
+      isProjectileInvisible: false
+      dustColor: 16753920
+      dustSize: 2
+      child1:
+        componentType: "AreaTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 30
+        radiusList:
+          - 2
+          - 2.5
+          - 3
+          - 3.5
+          - 4
+          - 4.5
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "RANGED"
+          damageList:
+            - 24
+            - 60
+            - 180
+            - 300
+            - 420
+            - 720
+        child2:
+          componentType: "PushMechanic"
+          pushType: "FIXED"
+          speedList:
+            - 2
+            - 2.4
+            - 2.8
+            - 3.2
+            - 3.6
+            - 4.2
+          centerSelf: true
+      child2:
+        componentType: "ParticleMechanic"
+        type: "EXPLOSION_HUGE"
+        amount: 2
+        upward: 0.5
+        radius:
+          - 3
+          - 3.5
+          - 3
+          - 3.25
+          - 3.5
+          - 4
+      child3:
+        componentType: "SoundMechanic"
+        goaSound: "SKILL_WIND_PUSH"
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_PROJECTILE_ICE"
+skillPassive:
+  name: "Bone Armor"
+  customModelData: 47
+  description:
+    - "For each active summon gain an"
+    - "amount of physical and magic defense."
+    - ""
+    - "Also increases the max amount of summons you can have at a time."
+    - "Skill level 0: 3 summons at a time"
+    - "Skill level 1: 4 summons at a time"
+    - "Skill level 2: 5 summons at a time"
+    - "Skill level 3: 6 summons at a time"
+    - "Skill level 4: 7 summons at a time"
+    - "Skill level 5: 8 summons at a time"
+    - "Skill level 6: 10 summons at a time"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+  trigger:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "SelfTarget"
+skillUltimate:
+  name: "Frozen Colossus"
+  customModelData: 45
+  description:
+    - "First cast: "
+    - "Summon Frozen Colossuses which cast Freeze on summon."
+    - "Second cast: "
+    - "If at least one Frozen Colossus is active, make them cast Freeze."
+    - ""
+    - "Freeze: Stuns nearby enemies"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+  trigger:
+    componentType: "SelfTarget"

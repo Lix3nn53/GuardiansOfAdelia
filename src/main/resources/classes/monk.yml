@@ -12,16 +12,16 @@ description:
   - "Due to their unique weapon Monks are"
   - "feared opponents at any distance."
 classIconCustomModelData: 17
-attributeTierFire: 4
-attributeTierWater: 4
-attributeTierEarth: 6
-attributeTierLightning: 1
-attributeTierWind: 0
+attributeTierStrength: 4
+attributeTierSpirit: 4
+attributeTierEndurance: 6
+attributeTierIntelligence: 1
+attributeTierDexterity: 0
 weaponGearTypes:
   - "SPEAR"
 armorGearTypes:
-  - "FIRE_ARMOR"
-  - "EARTH_ARMOR"
+  - "PLATE_ARMOR"
+  - "HEAVY_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Power Slash"

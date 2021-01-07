@@ -333,15 +333,15 @@ public class DatabaseQueries {
                 rpgCharacterStats.setTotalExp(totalexp);
 
                 int attr_fire = resultSet.getInt("attr_fire");
-                rpgCharacterStats.getFire().setInvested(attr_fire, rpgCharacterStats, false);
+                rpgCharacterStats.getStrength().setInvested(attr_fire, rpgCharacterStats, false);
                 int attr_water = resultSet.getInt("attr_water");
-                rpgCharacterStats.getWater().setInvested(attr_water, rpgCharacterStats, true);
+                rpgCharacterStats.getSpirit().setInvested(attr_water, rpgCharacterStats, true);
                 int attr_earth = resultSet.getInt("attr_earth");
-                rpgCharacterStats.getEarth().setInvested(attr_earth, rpgCharacterStats, true);
+                rpgCharacterStats.getEndurance().setInvested(attr_earth, rpgCharacterStats, true);
                 int attr_lightning = resultSet.getInt("attr_lightning");
-                rpgCharacterStats.getLightning().setInvested(attr_lightning, rpgCharacterStats, false);
+                rpgCharacterStats.getIntelligence().setInvested(attr_lightning, rpgCharacterStats, false);
                 int attr_wind = resultSet.getInt("attr_wind");
-                rpgCharacterStats.getWind().setInvested(attr_wind, rpgCharacterStats, false);
+                rpgCharacterStats.getDexterity().setInvested(attr_wind, rpgCharacterStats, false);
 
                 String offHand = resultSet.getString("off_hand");
                 if (!resultSet.wasNull()) {
@@ -1017,16 +1017,16 @@ public class DatabaseQueries {
             int totalExp = rpgCharacterStats.getTotalExp();
             pst.setInt(19, totalExp);
 
-            int fire = rpgCharacterStats.getFire().getInvested();
-            pst.setInt(20, fire);
-            int water = rpgCharacterStats.getWater().getInvested();
-            pst.setInt(21, water);
-            int earth = rpgCharacterStats.getEarth().getInvested();
-            pst.setInt(22, earth);
-            int lightning = rpgCharacterStats.getLightning().getInvested();
-            pst.setInt(23, lightning);
-            int wind = rpgCharacterStats.getWind().getInvested();
-            pst.setInt(24, wind);
+            int strength = rpgCharacterStats.getStrength().getInvested();
+            pst.setInt(20, strength);
+            int spirit = rpgCharacterStats.getSpirit().getInvested();
+            pst.setInt(21, spirit);
+            int endurance = rpgCharacterStats.getEndurance().getInvested();
+            pst.setInt(22, endurance);
+            int intelligence = rpgCharacterStats.getIntelligence().getInvested();
+            pst.setInt(23, intelligence);
+            int dexterity = rpgCharacterStats.getDexterity().getInvested();
+            pst.setInt(24, dexterity);
 
             SkillBar skillBar = rpgCharacter.getSkillBar();
             int skill_one = skillBar.getInvestedSkillPoints(0);

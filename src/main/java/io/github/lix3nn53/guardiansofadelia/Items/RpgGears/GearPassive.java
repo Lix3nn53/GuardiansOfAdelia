@@ -28,31 +28,31 @@ public class GearPassive implements RPGGear {
         List<String> lore = new ArrayList<>();
 
         StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
-        int finalFire = (int) (statPassive.getFire() * bonusPercent);
-        int finalWater = (int) (statPassive.getWater() * bonusPercent);
-        int finalEarth = (int) (statPassive.getEarth() * bonusPercent);
-        int finalLightning = (int) (statPassive.getLightning() * bonusPercent);
-        int finalWind = (int) (statPassive.getWind() * bonusPercent);
+        int finalStr = (int) (statPassive.getStrength() * bonusPercent);
+        int finalSpr = (int) (statPassive.getSpirit() * bonusPercent);
+        int finalEnd = (int) (statPassive.getEndurance() * bonusPercent);
+        int finalInt = (int) (statPassive.getIntelligence() * bonusPercent);
+        int finalDex = (int) (statPassive.getDexterity() * bonusPercent);
 
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Passive Gear");
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         if (!statPassive.isEmpty()) {
             lore.add("");
-            if (finalFire != 0) {
-                lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + finalFire);
+            if (finalStr != 0) {
+                lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Strength: " + ChatColor.GRAY + "+" + finalStr);
             }
-            if (finalWater != 0) {
-                lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + finalWater);
+            if (finalSpr != 0) {
+                lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Spirit: " + ChatColor.GRAY + "+" + finalSpr);
             }
-            if (finalEarth != 0) {
-                lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + finalEarth);
+            if (finalEnd != 0) {
+                lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Endurance: " + ChatColor.GRAY + "+" + finalEnd);
             }
-            if (finalLightning != 0) {
-                lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + finalLightning);
+            if (finalInt != 0) {
+                lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Intelligence: " + ChatColor.GRAY + "+" + finalInt);
             }
-            if (finalWind != 0) {
-                lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + finalWind);
+            if (finalDex != 0) {
+                lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Dexterity: " + ChatColor.GRAY + "+" + finalDex);
             }
         }
         lore.add("");
@@ -63,20 +63,20 @@ public class GearPassive implements RPGGear {
         PersistentDataContainerUtil.putString("itemTier", tier.toString(), this.itemStack);
         PersistentDataContainerUtil.putString("passive", passiveType.name(), this.itemStack);
 
-        if (finalFire != 0) {
-            PersistentDataContainerUtil.putInteger("fire", finalFire, this.itemStack);
+        if (finalStr != 0) {
+            PersistentDataContainerUtil.putInteger("strength", finalStr, this.itemStack);
         }
-        if (finalWater != 0) {
-            PersistentDataContainerUtil.putInteger("water", finalWater, this.itemStack);
+        if (finalSpr != 0) {
+            PersistentDataContainerUtil.putInteger("spirit", finalSpr, this.itemStack);
         }
-        if (finalEarth != 0) {
-            PersistentDataContainerUtil.putInteger("earth", finalEarth, this.itemStack);
+        if (finalEnd != 0) {
+            PersistentDataContainerUtil.putInteger("endurance", finalEnd, this.itemStack);
         }
-        if (finalLightning != 0) {
-            PersistentDataContainerUtil.putInteger("lightning", finalLightning, this.itemStack);
+        if (finalInt != 0) {
+            PersistentDataContainerUtil.putInteger("intelligence", finalInt, this.itemStack);
         }
-        if (finalWind != 0) {
-            PersistentDataContainerUtil.putInteger("wind", finalWind, this.itemStack);
+        if (finalDex != 0) {
+            PersistentDataContainerUtil.putInteger("dexterity", finalDex, this.itemStack);
         }
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();

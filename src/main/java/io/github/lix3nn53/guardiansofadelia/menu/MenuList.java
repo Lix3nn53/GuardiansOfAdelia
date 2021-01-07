@@ -312,18 +312,18 @@ public class MenuList {
                     List<ArmorGearType> armorGearTypes = value.getArmorGearTypes();
                     List<ShieldGearType> shieldGearTypes = value.getShieldGearTypes();
                     HashMap<AttributeType, Integer> attributeTiers = value.getAttributeTiers();
-                    String fire = ChatColor.RED.toString() + attributeTiers.get(AttributeType.FIRE);
-                    String water = ChatColor.BLUE.toString() + attributeTiers.get(AttributeType.WATER);
-                    String earth = ChatColor.DARK_GREEN.toString() + attributeTiers.get(AttributeType.EARTH);
-                    String lightning = ChatColor.AQUA.toString() + attributeTiers.get(AttributeType.LIGHTNING);
-                    String wind = ChatColor.WHITE.toString() + attributeTiers.get(AttributeType.WIND);
+                    String strength = ChatColor.RED.toString() + attributeTiers.get(AttributeType.STRENGTH);
+                    String spirit = ChatColor.BLUE.toString() + attributeTiers.get(AttributeType.SPIRIT);
+                    String endurance = ChatColor.DARK_GREEN.toString() + attributeTiers.get(AttributeType.ENDURANCE);
+                    String intelligence = ChatColor.AQUA.toString() + attributeTiers.get(AttributeType.INTELLIGENCE);
+                    String dexterity = ChatColor.WHITE.toString() + attributeTiers.get(AttributeType.DEXTERITY);
 
                     List<String> lore = new ArrayList<>(description);
                     lore.add(ChatColor.RED + "Rank: " + ChatColor.GRAY + classTier);
                     lore.add("");
 
                     lore.add(ChatColor.GREEN + "Attributes");
-                    lore.add("  " + fire + " " + water + " " + earth + " " + lightning + " " + wind + " ");
+                    lore.add("  " + strength + " " + spirit + " " + endurance + " " + intelligence + " " + dexterity + " ");
 
                     lore.add(ChatColor.RED + "Weapons");
                     for (WeaponGearType type : weaponGearTypes) {
@@ -463,81 +463,77 @@ public class MenuList {
                 int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
                 guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Elements (Points: " + pointsLeft + ")", 0);
 
-                Attribute fireStat = rpgCharacterStats.getFire();
-                ItemStack fire = new ItemStack(Material.PAPER);
-                ItemMeta itemMeta = fire.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.RED + "Fire (Invested: " + fireStat.getInvested() + ")");
+                Attribute strength = rpgCharacterStats.getStrength();
+                ItemStack itemStack = new ItemStack(Material.PAPER);
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                itemMeta.setDisplayName(ChatColor.RED + "Strength (Invested: " + strength.getInvested() + ")");
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.YELLOW + fireStat.getAttributeType().getDescription());
+                lore.add(ChatColor.YELLOW + strength.getAttributeType().getDescription());
                 lore.add("");
                 lore.add(ChatColor.GRAY + "Left Click: +1");
                 lore.add(ChatColor.GRAY + "Right Click: -1");
                 lore.add(ChatColor.GRAY + "Shift + Left Click: +5");
                 lore.add(ChatColor.GRAY + "Shift + Right Click: -5");
                 itemMeta.setLore(lore);
-                fire.setItemMeta(itemMeta);
-                guiGeneric.setItem(1, fire);
+                itemStack.setItemMeta(itemMeta);
+                guiGeneric.setItem(1, itemStack);
 
-                Attribute waterStat = rpgCharacterStats.getWater();
-                ItemStack water = new ItemStack(Material.PAPER);
-                itemMeta.setDisplayName(ChatColor.BLUE + "Water (Invested: " + waterStat.getInvested() + ")");
+                Attribute spirit = rpgCharacterStats.getSpirit();
+                itemMeta.setDisplayName(ChatColor.BLUE + "Spirit (Invested: " + spirit.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.YELLOW + waterStat.getAttributeType().getDescription());
+                lore.add(ChatColor.YELLOW + spirit.getAttributeType().getDescription());
                 lore.add("");
                 lore.add(ChatColor.GRAY + "Left Click: +1");
                 lore.add(ChatColor.GRAY + "Right Click: -1");
                 lore.add(ChatColor.GRAY + "Shift + Left Click: +5");
                 lore.add(ChatColor.GRAY + "Shift + Right Click: -5");
                 itemMeta.setLore(lore);
-                water.setItemMeta(itemMeta);
-                guiGeneric.setItem(4, water);
+                itemStack.setItemMeta(itemMeta);
+                guiGeneric.setItem(4, itemStack);
 
-                Attribute earthStat = rpgCharacterStats.getEarth();
-                ItemStack earth = new ItemStack(Material.PAPER);
-                itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Earth (Invested: " + earthStat.getInvested() + ")");
+                Attribute endurance = rpgCharacterStats.getEndurance();
+                itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Endurance (Invested: " + endurance.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.YELLOW + earthStat.getAttributeType().getDescription());
+                lore.add(ChatColor.YELLOW + endurance.getAttributeType().getDescription());
                 lore.add("");
                 lore.add(ChatColor.GRAY + "Left Click: +1");
                 lore.add(ChatColor.GRAY + "Right Click: -1");
                 lore.add(ChatColor.GRAY + "Shift + Left Click: +5");
                 lore.add(ChatColor.GRAY + "Shift + Right Click: -5");
                 itemMeta.setLore(lore);
-                earth.setItemMeta(itemMeta);
-                guiGeneric.setItem(7, earth);
+                itemStack.setItemMeta(itemMeta);
+                guiGeneric.setItem(7, itemStack);
 
-                Attribute lightningStat = rpgCharacterStats.getLightning();
-                ItemStack lightning = new ItemStack(Material.PAPER);
-                itemMeta.setDisplayName(ChatColor.AQUA + "Lightning (Invested: " + lightningStat.getInvested() + ")");
+                Attribute intelligence = rpgCharacterStats.getIntelligence();
+                itemMeta.setDisplayName(ChatColor.AQUA + "Intelligence (Invested: " + intelligence.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.YELLOW + lightningStat.getAttributeType().getDescription());
+                lore.add(ChatColor.YELLOW + intelligence.getAttributeType().getDescription());
                 lore.add("");
                 lore.add(ChatColor.GRAY + "Left Click: +1");
                 lore.add(ChatColor.GRAY + "Right Click: -1");
                 lore.add(ChatColor.GRAY + "Shift + Left Click: +5");
                 lore.add(ChatColor.GRAY + "Shift + Right Click: -5");
                 itemMeta.setLore(lore);
-                lightning.setItemMeta(itemMeta);
-                guiGeneric.setItem(20, lightning);
+                itemStack.setItemMeta(itemMeta);
+                guiGeneric.setItem(20, itemStack);
 
-                Attribute windStat = rpgCharacterStats.getWind();
-                ItemStack wind = new ItemStack(Material.PAPER);
-                itemMeta.setDisplayName(ChatColor.WHITE + "Wind (Invested: " + windStat.getInvested() + ")");
+                Attribute dexterity = rpgCharacterStats.getDexterity();
+                itemMeta.setDisplayName(ChatColor.WHITE + "Dexterity (Invested: " + dexterity.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.YELLOW + windStat.getAttributeType().getDescription());
+                lore.add(ChatColor.YELLOW + dexterity.getAttributeType().getDescription());
                 lore.add("");
                 lore.add(ChatColor.GRAY + "Left Click: +1");
                 lore.add(ChatColor.GRAY + "Right Click: -1");
                 lore.add(ChatColor.GRAY + "Shift + Left Click: +5");
                 lore.add(ChatColor.GRAY + "Shift + Right Click: -5");
                 itemMeta.setLore(lore);
-                wind.setItemMeta(itemMeta);
-                guiGeneric.setItem(24, wind);
+                itemStack.setItemMeta(itemMeta);
+                guiGeneric.setItem(24, itemStack);
             }
         }
 

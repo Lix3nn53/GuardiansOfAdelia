@@ -76,6 +76,34 @@ public class ChatManager {
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 2L);
     }
 
+    public static void chatHologramEntityWithCountDown(Entity entity, String message, int durationTicks, double offsetY) {
+        double height = entity.getHeight();
+        Location location = entity.getLocation().clone().add(0, height + 0.4 + offsetY, 0);
+
+        new BukkitRunnable() {
+
+            ArmorStand armorStand;
+            int ticksPass = 0;
+
+            @Override
+            public void run() {
+                if (ticksPass == durationTicks) {
+                    cancel();
+                    armorStand.remove();
+                } else {
+                    if (ticksPass == 0) {
+                        armorStand = new Hologram(location, message + ChatColor.YELLOW + " in " + durationTicks).getArmorStand();
+                    } else {
+                        armorStand.setCustomName(message + ChatColor.YELLOW + " in " + (durationTicks - ticksPass));
+                    }
+                    Location location = entity.getLocation().clone().add(0, height + 0.4 + offsetY, 0);
+                    armorStand.teleport(location);
+                    ticksPass += 2;
+                }
+            }
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 2L);
+    }
+
     /**
      * Create chat hologram and return boolean to allow on normal chat
      *

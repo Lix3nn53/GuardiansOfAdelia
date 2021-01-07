@@ -48,20 +48,20 @@ public class Shield implements RPGGear {
         lore.add(ChatColor.BLUE + "✦ Magic Defense: " + ChatColor.GRAY + "+" + magicDefense);
         if (!statPassive.isEmpty()) {
             lore.add("");
-            if (statPassive.getFire() != 0) {
-                lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Fire: " + ChatColor.GRAY + "+" + statPassive.getFire());
+            if (statPassive.getStrength() != 0) {
+                lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Strength: " + ChatColor.GRAY + "+" + statPassive.getStrength());
             }
-            if (statPassive.getWater() != 0) {
-                lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Water: " + ChatColor.GRAY + "+" + statPassive.getWater());
+            if (statPassive.getSpirit() != 0) {
+                lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Spirit: " + ChatColor.GRAY + "+" + statPassive.getSpirit());
             }
-            if (statPassive.getEarth() != 0) {
-                lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Earth: " + ChatColor.GRAY + "+" + statPassive.getEarth());
+            if (statPassive.getEndurance() != 0) {
+                lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Endurance: " + ChatColor.GRAY + "+" + statPassive.getEndurance());
             }
-            if (statPassive.getLightning() != 0) {
-                lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Lightning: " + ChatColor.GRAY + "+" + statPassive.getLightning());
+            if (statPassive.getIntelligence() != 0) {
+                lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Intelligence: " + ChatColor.GRAY + "+" + statPassive.getIntelligence());
             }
-            if (statPassive.getWind() != 0) {
-                lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Wind: " + ChatColor.GRAY + "+" + statPassive.getWind());
+            if (statPassive.getDexterity() != 0) {
+                lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Dexterity: " + ChatColor.GRAY + "+" + statPassive.getDexterity());
             }
         }
         lore.add("");
@@ -89,20 +89,20 @@ public class Shield implements RPGGear {
         PersistentDataContainerUtil.putInteger("defense", defense, this.itemStack);
         PersistentDataContainerUtil.putInteger("magicDefense", magicDefense, this.itemStack);
 
-        if (statPassive.getFire() != 0) {
-            PersistentDataContainerUtil.putInteger("fire", statPassive.getFire(), this.itemStack);
+        if (statPassive.getStrength() != 0) {
+            PersistentDataContainerUtil.putInteger("strength", statPassive.getStrength(), this.itemStack);
         }
-        if (statPassive.getWater() != 0) {
-            PersistentDataContainerUtil.putInteger("water", statPassive.getWater(), this.itemStack);
+        if (statPassive.getSpirit() != 0) {
+            PersistentDataContainerUtil.putInteger("spirit", statPassive.getSpirit(), this.itemStack);
         }
-        if (statPassive.getEarth() != 0) {
-            PersistentDataContainerUtil.putInteger("earth", statPassive.getEarth(), this.itemStack);
+        if (statPassive.getEndurance() != 0) {
+            PersistentDataContainerUtil.putInteger("endurance", statPassive.getEndurance(), this.itemStack);
         }
-        if (statPassive.getLightning() != 0) {
-            PersistentDataContainerUtil.putInteger("lightning", statPassive.getLightning(), this.itemStack);
+        if (statPassive.getIntelligence() != 0) {
+            PersistentDataContainerUtil.putInteger("intelligence", statPassive.getIntelligence(), this.itemStack);
         }
-        if (statPassive.getWind() != 0) {
-            PersistentDataContainerUtil.putInteger("wind", statPassive.getWind(), this.itemStack);
+        if (statPassive.getDexterity() != 0) {
+            PersistentDataContainerUtil.putInteger("dexterity", statPassive.getDexterity(), this.itemStack);
         }
         if (gearSetExist) {
             PersistentDataContainerUtil.putString("gearSet", gearSetStr, this.itemStack);

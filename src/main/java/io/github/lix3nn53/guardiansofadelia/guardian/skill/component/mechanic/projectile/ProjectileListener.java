@@ -3,7 +3,6 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.p
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -12,7 +11,7 @@ import java.util.HashMap;
 
 public class ProjectileListener {
 
-    private static HashMap<Entity, ProjectileMechanic> projectileToCallback = new HashMap<>();
+    private static final HashMap<Entity, ProjectileMechanic> projectileToCallback = new HashMap<>();
 
     public static void onSkillProjectileShoot(ArrayList<Entity> projectiles, ProjectileMechanic projectileMechanic, int skillLevel, long delayTicks) {
         for (Entity projectile : projectiles) {
@@ -36,13 +35,7 @@ public class ProjectileListener {
 
     public static void onSkillProjectileLand(Entity projectile, Entity hit) {
         if (projectile instanceof Projectile) {
-            if (projectile instanceof Player) {
-                ((Player) ((Projectile) projectile).getShooter()).sendMessage("1");
-            }
             if (projectileToCallback.containsKey(projectile)) {
-                if (projectile instanceof Player) {
-                    ((Player) ((Projectile) projectile).getShooter()).sendMessage("2");
-                }
                 ProjectileMechanic projectileMechanic = projectileToCallback.get(projectile);
                 projectileMechanic.callback((Projectile) projectile, hit);
 
