@@ -201,7 +201,7 @@ skillThree:
       componentType: "ProjectileMechanic"
       projectileClass: "Arrow"
       spreadType: "CONE"
-      speed: 1.9
+      speed: 2.7
       amountList:
         - 1
         - 1
@@ -380,7 +380,9 @@ skillUltimate:
                 - 100
                 - 120
             child5:
-              componentType: "RemoveSavedEntities"
+              componentType: "SelfTarget"
+              child1:
+                componentType: "RemoveSavedEntities"
             child6:
               componentType: "SoundMechanic"
               goaSound: "SKILL_STUN_HIT"

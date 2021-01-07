@@ -475,8 +475,8 @@ public class MyInventoryClickEvent implements Listener {
                     GuiGeneric skill = MenuList.skill(player);
                     skill.openInventory(player);
                 } else if (currentName.equals(ChatColor.DARK_GREEN + "Stat Points")) {
-                    GuiGeneric element = MenuList.element(player);
-                    element.openInventory(player);
+                    GuiGeneric statPoints = MenuList.statPoints(player);
+                    statPoints.openInventory(player);
                 } else if (currentName.equals(ChatColor.YELLOW + "Crafting")) {
                     GuiGeneric crafting = MenuList.crafting(player);
                     crafting.openInventory(player);
@@ -747,8 +747,8 @@ public class MyInventoryClickEvent implements Listener {
                             }
 
                             attr.investPoint(rpgCharacterStats, amount, true);
-                            GuiGeneric element = MenuList.element(player);
-                            element.openInventory(player);
+                            GuiGeneric statPoints = MenuList.statPoints(player);
+                            statPoints.openInventory(player);
                         }
                     } else if (event.isRightClick()) {
                         int invested = attr.getInvested();
@@ -763,8 +763,8 @@ public class MyInventoryClickEvent implements Listener {
                             }
 
                             attr.downgradePoint(rpgCharacterStats, amount, true);
-                            GuiGeneric element = MenuList.element(player);
-                            element.openInventory(player);
+                            GuiGeneric statPoints = MenuList.statPoints(player);
+                            statPoints.openInventory(player);
                         }
                     }
                 }

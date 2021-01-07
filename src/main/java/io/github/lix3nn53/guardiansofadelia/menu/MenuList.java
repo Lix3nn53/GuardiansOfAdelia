@@ -187,7 +187,7 @@ public class MenuList {
         skills.setItemMeta(itemMeta);
         guiGeneric.setItem(11, skills);
 
-        ItemStack elements = new ItemStack(Material.WOODEN_PICKAXE);
+        ItemStack statpoints = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(6);
         itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Stat Points");
         lore = new ArrayList<>();
@@ -195,8 +195,8 @@ public class MenuList {
         lore.add(ChatColor.GRAY + "Spend stat points earned by leveling");
         lore.add(ChatColor.GRAY + "your character.");
         itemMeta.setLore(lore);
-        elements.setItemMeta(itemMeta);
-        guiGeneric.setItem(13, elements);
+        statpoints.setItemMeta(itemMeta);
+        guiGeneric.setItem(13, statpoints);
 
         ItemStack job = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(21);
@@ -449,7 +449,7 @@ public class MenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric element(Player player) {
+    public static GuiGeneric statPoints(Player player) {
         GuiGeneric guiGeneric = null;
 
         UUID uuid = player.getUniqueId();

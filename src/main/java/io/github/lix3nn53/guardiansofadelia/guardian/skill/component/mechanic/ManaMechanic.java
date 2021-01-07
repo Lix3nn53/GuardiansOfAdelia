@@ -28,12 +28,12 @@ public class ManaMechanic extends MechanicComponent {
     }
 
     public ManaMechanic(ConfigurationSection configurationSection) {
-        if (!configurationSection.contains("healAmountList")) {
-            configLoadError("healAmountList");
+        if (!configurationSection.contains("manaAmountList")) {
+            configLoadError("manaAmountList");
         }
 
-        if (!configurationSection.contains("healPercentList")) {
-            configLoadError("healPercentList");
+        if (!configurationSection.contains("manaPercentList")) {
+            configLoadError("manaPercentList");
         }
 
         if (configurationSection.contains("multiplyWithValue")) {
@@ -42,8 +42,8 @@ public class ManaMechanic extends MechanicComponent {
             this.multiplyWithValue = null;
         }
 
-        this.manaAmount = configurationSection.getIntegerList("healAmountList");
-        this.manaPercent = configurationSection.getDoubleList("healPercentList");
+        this.manaAmount = configurationSection.getIntegerList("manaAmountList");
+        this.manaPercent = configurationSection.getDoubleList("manaPercentList");
     }
 
     @Override
@@ -68,7 +68,7 @@ public class ManaMechanic extends MechanicComponent {
                         if (currentMana == maxMana) continue;
 
                         int fillAmount = 0;
-                        if (!manaPercent.isEmpty()) {
+                        if (!manaAmount.isEmpty()) {
                             fillAmount = manaAmount.get(skillLevel - 1);
                         }
                         if (!manaPercent.isEmpty()) {

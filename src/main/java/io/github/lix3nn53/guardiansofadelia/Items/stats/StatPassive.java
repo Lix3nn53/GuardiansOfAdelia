@@ -72,34 +72,34 @@ public class StatPassive implements Stat {
     }
 
     private void satisfyOneRandomly(int minStatValue, int maxStatValue) {
-        List<String> unUsedElements = new ArrayList<>();
+        List<String> unUsedStats = new ArrayList<>();
         if (this.strength == 0) {
-            unUsedElements.add("strength");
+            unUsedStats.add("strength");
         }
         if (this.spirit == 0) {
-            unUsedElements.add("spirit");
+            unUsedStats.add("spirit");
         }
         if (this.endurance == 0) {
-            unUsedElements.add("endurance");
+            unUsedStats.add("endurance");
         }
         if (this.intelligence == 0) {
-            unUsedElements.add("intelligence");
+            unUsedStats.add("intelligence");
         }
         if (this.dexterity == 0) {
-            unUsedElements.add("dexterity");
+            unUsedStats.add("dexterity");
         }
-        int random = new Random().nextInt(unUsedElements.size());
-        String elementString = unUsedElements.get(random);
+        int random = new Random().nextInt(unUsedStats.size());
+        String statString = unUsedStats.get(random);
 
-        if (elementString.equals("strength")) {
+        if (statString.equals("strength")) {
             this.strength = getRandomValue(minStatValue, maxStatValue);
-        } else if (elementString.equals("spirit")) {
+        } else if (statString.equals("spirit")) {
             this.spirit = getRandomValue(minStatValue, maxStatValue);
-        } else if (elementString.equals("endurance")) {
+        } else if (statString.equals("endurance")) {
             this.endurance = getRandomValue(minStatValue, maxStatValue);
-        } else if (elementString.equals("intelligence")) {
+        } else if (statString.equals("intelligence")) {
             this.intelligence = getRandomValue(minStatValue, maxStatValue);
-        } else if (elementString.equals("dexterity")) {
+        } else if (statString.equals("dexterity")) {
             this.dexterity = getRandomValue(minStatValue, maxStatValue);
         }
     }

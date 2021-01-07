@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.Ma
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.RepeatMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -43,10 +44,8 @@ public enum Consumable {
 
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
-        List<SkillComponent> componentList = getSkillComponents();
-        for (SkillComponent component : componentList) {
-            component.execute(player, skillLevel, targets, 0);
-        }
+        SkillComponent trigger = getTrigger();
+        trigger.execute(player, skillLevel, targets, 0);
         int amount = itemStack.getAmount();
         if (PersistentDataContainerUtil.hasInteger(itemStack, "consumableUsesLeft")) {
             int usesLeft = PersistentDataContainerUtil.getInteger(itemStack, "consumableUsesLeft");
@@ -67,7 +66,7 @@ public enum Consumable {
         }
     }
 
-    public List<SkillComponent> getSkillComponents() {
+    public SkillComponent getTrigger() {
         List<Double> multipliers = new ArrayList<>(); //buff multipliers
         multipliers.add(getBuffMultiplier(1));
         multipliers.add(getBuffMultiplier(2));
@@ -93,19 +92,19 @@ public enum Consumable {
         ticks.add(duration);
         ticks.add(duration);
 
-        List<SkillComponent> list = new ArrayList<>();
+        SkillComponent trigger = new SelfTarget();
         switch (this) {
             case BUFF_PHYSICAL_DAMAGE:
-                list.add(new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks));
+                trigger.addChildren(new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks));
                 break;
             case BUFF_PHYSICAL_DEFENSE:
-                list.add(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
+                trigger.addChildren(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
                 break;
             case BUFF_MAGICAL_DAMAGE:
-                list.add(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
+                trigger.addChildren(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
                 break;
             case BUFF_MAGICAL_DEFENSE:
-                list.add(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
+                trigger.addChildren(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
                 break;
             case POTION_INSTANT_HEALTH:
                 List<Integer> healAmounts = new ArrayList<>();
@@ -119,7 +118,7 @@ public enum Consumable {
                 healAmounts.add(getInstantHealAmount(8));
                 healAmounts.add(getInstantHealAmount(9));
                 healAmounts.add(getInstantHealAmount(10));
-                list.add(new HealMechanic(healAmounts, new ArrayList<>(), null));
+                trigger.addChildren(new HealMechanic(healAmounts, new ArrayList<>(), null));
                 break;
             case POTION_INSTANT_MANA:
                 List<Integer> manaAmounts = new ArrayList<>();
@@ -133,7 +132,7 @@ public enum Consumable {
                 manaAmounts.add(getInstantManaAmount(8));
                 manaAmounts.add(getInstantManaAmount(9));
                 manaAmounts.add(getInstantManaAmount(10));
-                list.add(new ManaMechanic(manaAmounts, new ArrayList<>(), null));
+                trigger.addChildren(new ManaMechanic(manaAmounts, new ArrayList<>(), null));
                 break;
             case POTION_INSTANT_HYBRID:
                 healAmounts = new ArrayList<>();
@@ -147,7 +146,7 @@ public enum Consumable {
                 healAmounts.add((int) (getInstantHealAmount(8) * HYBRID_NERF));
                 healAmounts.add((int) (getInstantHealAmount(9) * HYBRID_NERF));
                 healAmounts.add((int) (getInstantHealAmount(10) * HYBRID_NERF));
-                list.add(new HealMechanic(healAmounts, new ArrayList<>(), null));
+                trigger.addChildren(new HealMechanic(healAmounts, new ArrayList<>(), null));
                 manaAmounts = new ArrayList<>();
                 manaAmounts.add((int) (getInstantManaAmount(1) * HYBRID_NERF));
                 manaAmounts.add((int) (getInstantManaAmount(2) * HYBRID_NERF));
@@ -159,7 +158,7 @@ public enum Consumable {
                 manaAmounts.add((int) (getInstantManaAmount(8) * HYBRID_NERF));
                 manaAmounts.add((int) (getInstantManaAmount(9) * HYBRID_NERF));
                 manaAmounts.add((int) (getInstantManaAmount(10) * HYBRID_NERF));
-                list.add(new ManaMechanic(manaAmounts, new ArrayList<>(), null));
+                trigger.addChildren(new ManaMechanic(manaAmounts, new ArrayList<>(), null));
                 break;
             case POTION_REGENERATION_HEALTH:
                 List<Integer> repetitions = new ArrayList<>();
@@ -186,10 +185,10 @@ public enum Consumable {
                 healAmounts.add((int) (getInstantHealAmount(9) * REGEN_NERF));
                 healAmounts.add((int) (getInstantHealAmount(10) * REGEN_NERF));
                 repeatMechanic.addChildren(new HealMechanic(healAmounts, new ArrayList<>(), null));
-                list.add(repeatMechanic);
+                trigger.addChildren(repeatMechanic);
                 break;
         }
-        return list;
+        return trigger;
     }
 
     public Material getMaterial() {

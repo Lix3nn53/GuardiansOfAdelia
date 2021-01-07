@@ -69,10 +69,10 @@ quest3:
   story:
     - "We need more guardians to deal"
     - "with darkness' foes!"
-  startMsg: "Spend your element points from character-menu to get stronger."
+  startMsg: "Spend your stat points from character-menu to get stronger."
   objectiveTextList:
     - "TASK_PROGRESS_1 then talk to Syvia"
-  turnInMsg: "Equip jewelries from RPG-Inventory to gain even more elemental power! To open RPG-Inventory click one of crafting slots from your inventory."
+  turnInMsg: "Equip jewelries from RPG-Inventory to gain bonus stats! To open RPG-Inventory click one of crafting slots from your inventory."
   moneyPrize: 0
   expPrize: 0
   requiredLevel: 90
