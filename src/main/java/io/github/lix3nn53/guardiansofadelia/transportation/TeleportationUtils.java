@@ -16,8 +16,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class TeleportationUtils {
 
     public static void teleport(Player player, Location location, String destination, int stepCount, ItemStack itemCost, int cost) {
-        if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.isFreeToAct()) {
                 guardianData.setTeleporting(true);
                 final double startPosX = player.getLocation().getX();

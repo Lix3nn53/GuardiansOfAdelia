@@ -16,7 +16,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class ChatManager {
 
@@ -134,9 +133,8 @@ public class ChatManager {
 
     private static String getChatPrefix(Player player) {
         String prefix = "";
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             StaffRank staffRank = guardianData.getStaffRank();
             if (!staffRank.equals(StaffRank.NONE)) {
                 String s = staffRank.toString();

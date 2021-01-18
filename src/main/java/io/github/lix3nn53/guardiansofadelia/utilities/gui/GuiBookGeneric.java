@@ -10,7 +10,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class GuiBookGeneric implements GuiBook {
 
@@ -127,18 +126,16 @@ public class GuiBookGeneric implements GuiBook {
 
     @Override
     public void openInventory(Player player) {
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             getPageInventory(0).openInventory(player);
             guardianData.setActiveGui(this);
         }
     }
 
     public void openInventoryPage(Player player, int pageIndex) {
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             getPageInventory(pageIndex).openInventory(player);
             guardianData.setActiveGui(this);
         }

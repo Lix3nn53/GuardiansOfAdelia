@@ -19,14 +19,12 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import java.util.List;
-import java.util.UUID;
 
 public class MyNPCRightClickEvent implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onEvent(NPCRightClickEvent event) {
         Player player = event.getClicker();
-        UUID uuid = player.getUniqueId();
 
         NPC npc = event.getNPC();
         int id = npc.getId();
@@ -41,7 +39,7 @@ public class MyNPCRightClickEvent implements Listener {
             if (!requiredRank.equals(PremiumRank.NONE)) {
                 int requiredOrdinal = requiredRank.ordinal();
 
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                 PremiumRank premiumRank = guardianData.getPremiumRank();
 
                 int playerOrdinal = premiumRank.ordinal();
@@ -52,7 +50,7 @@ public class MyNPCRightClickEvent implements Listener {
                 }
             }
 
-            if (DatabaseQueries.characterExists(uuid, id)) {
+            if (DatabaseQueries.characterExists(player.getUniqueId(), id)) {
                 GuiGeneric characterTeleportationMenu = CharacterSelectionMenuList.characterSelectionMenu(id);
                 characterTeleportationMenu.openInventory(player);
             } else {
@@ -60,9 +58,8 @@ public class MyNPCRightClickEvent implements Listener {
                 characterCreationMenu.openInventory(player);
             }
         } else {
-            UUID uniqueId = player.getUniqueId();
-            if (GuardianDataManager.hasGuardianData(uniqueId)) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                 if (guardianData.hasActiveCharacter()) {
                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 

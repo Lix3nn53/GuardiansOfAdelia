@@ -37,9 +37,8 @@ public class DatabaseManager {
     public static void onDisable() {
         Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
         for (Player player : onlinePlayers) {
-            UUID uuid = player.getUniqueId();
-            if (GuardianDataManager.hasGuardianData(uuid)) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                 writeGuardianDataWithCurrentCharacter(player, guardianData);
                 GuardiansOfAdelia.getInstance().getLogger().info("Player save on disable: " + player.getName());
             }
@@ -58,15 +57,12 @@ public class DatabaseManager {
 
     public static void loadCharacter(Player player, int charNo, Location location) {
         Bukkit.getScheduler().runTaskAsynchronously(GuardiansOfAdelia.getInstance(), () -> {
-            UUID uuid = player.getUniqueId();
             try {
                 RPGCharacter rpgCharacter = DatabaseQueries.getCharacterAndSetPlayerInventory(player, charNo);
                 if (rpgCharacter != null) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                     guardianData.setActiveCharacter(rpgCharacter, charNo);
-                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                        player.teleport(location);
-                    });
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> player.teleport(location));
                     TablistUtils.updateTablist(player);
                     InventoryUtils.setMenuItemPlayer(player);
                     rpgCharacter.getSkillBar().remakeSkillBar();
@@ -90,7 +86,7 @@ public class DatabaseManager {
                 List<Player> friendsOfPlayer = DatabaseQueries.getFriendsOfPlayer(uuid);
                 guardianData.setFriends(friendsOfPlayer);
 
-                GuardianDataManager.addGuardianData(uuid, guardianData);
+                GuardianDataManager.addGuardianData(player, guardianData);
 
                 String guildNameOfPlayer = DatabaseQueries.getGuildNameOfPlayer(uuid);
                 if (guildNameOfPlayer != null) {
@@ -251,9 +247,9 @@ public class DatabaseManager {
         }
     }
 
-    public static void clearCharacter(UUID uuid, int charNo) {
+    public static void clearCharacter(Player player, int charNo) {
         try {
-            DatabaseQueries.clearCharacter(uuid, charNo);
+            DatabaseQueries.clearCharacter(player.getUniqueId(), charNo);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -16,8 +16,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.UUID;
-
 public class CommandChat implements CommandExecutor {
 
     @Override
@@ -30,11 +28,9 @@ public class CommandChat implements CommandExecutor {
             if (args.length < 1) {
                 player.sendMessage(ChatColor.YELLOW + "/chat item - show item in chat");
             } else if (args[0].equals("item")) {
+                if (!GuardianDataManager.hasGuardianData(player)) return false;
 
-                UUID uuid = player.getUniqueId();
-                if (!GuardianDataManager.hasGuardianData(uuid)) return false;
-
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
                 PremiumRank premiumRank = guardianData.getPremiumRank();
 

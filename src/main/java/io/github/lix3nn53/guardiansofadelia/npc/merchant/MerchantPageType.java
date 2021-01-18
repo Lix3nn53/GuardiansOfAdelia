@@ -29,7 +29,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public enum MerchantPageType {
     SELL,
@@ -125,9 +124,9 @@ public enum MerchantPageType {
 
     private GuiGeneric getPersonalStorageGui(Player player, int shopNpc) {
         GuiGeneric guiGeneric = new GuiGeneric(54, "Personal Storage", shopNpc);
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             return guardianData.getPersonalStorageGui();
         }
         return guiGeneric;
@@ -139,9 +138,9 @@ public enum MerchantPageType {
 
     private GuiGeneric getBazaarStorageGui(Player player, int shopNpc) {
         GuiGeneric guiGeneric = new GuiGeneric(54, "Bazaar Storage", shopNpc);
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             return guardianData.getBazaarStorageGui();
         }
         return guiGeneric;
@@ -149,9 +148,9 @@ public enum MerchantPageType {
 
     private GuiGeneric getPremiumStorageGui(Player player, int shopNpc) {
         GuiGeneric guiGeneric = new GuiGeneric(54, "Premium Storage", shopNpc);
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             return guardianData.getPremiumStorageGui();
         }
         return guiGeneric;

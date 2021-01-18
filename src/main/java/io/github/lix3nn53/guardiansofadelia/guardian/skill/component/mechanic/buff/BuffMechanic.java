@@ -14,7 +14,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class BuffMechanic extends MechanicComponent {
 
@@ -58,9 +57,8 @@ public class BuffMechanic extends MechanicComponent {
         for (LivingEntity ent : targets) {
             if (ent instanceof Player) {
                 Player player = (Player) ent;
-                UUID uuid = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
@@ -84,9 +82,8 @@ public class BuffMechanic extends MechanicComponent {
             @Override
             public void run() {
                 for (Player player : buffedPlayers) {
-                    UUID uuid = player.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                             RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();

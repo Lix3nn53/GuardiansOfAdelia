@@ -142,7 +142,7 @@ public class CharacterSelectionScreenManager {
         player.sendMessage("Creating character-" + charNo);
         clear(player);
         //start character at first world quest
-        GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
         RPGCharacter rpgCharacter = new RPGCharacter(rpgClassStr, player);
         rpgCharacter.unlockClass(rpgClassStr);
         guardianData.setActiveCharacter(rpgCharacter, charNo);

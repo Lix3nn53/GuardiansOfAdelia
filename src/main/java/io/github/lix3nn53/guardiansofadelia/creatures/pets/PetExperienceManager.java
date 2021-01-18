@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
-import java.util.UUID;
 
 public class PetExperienceManager {
 
@@ -72,9 +71,8 @@ public class PetExperienceManager {
     }
 
     private static void updateEggExp(Player player, int nextExperience, int currentLevel) {
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
@@ -95,9 +93,8 @@ public class PetExperienceManager {
     }
 
     private static void levelUp(Player owner, int nextLevel) {
-        UUID uuid = owner.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(owner)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(owner);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
@@ -134,9 +131,8 @@ public class PetExperienceManager {
     }
 
     private static int getEggExperience(Player player) {
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();

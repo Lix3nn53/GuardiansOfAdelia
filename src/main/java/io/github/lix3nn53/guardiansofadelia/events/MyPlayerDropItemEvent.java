@@ -22,8 +22,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import java.util.UUID;
-
 public class MyPlayerDropItemEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -56,9 +54,8 @@ public class MyPlayerDropItemEvent implements Listener {
         ItemStack itemInMainHand = playerInventory.getItemInMainHand();
 
         if (itemInMainHand.getType().equals(Material.AIR)) {
-            UUID uuid = player.getUniqueId();
-            if (GuardianDataManager.hasGuardianData(uuid)) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                 if (guardianData.hasActiveCharacter()) {
                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();

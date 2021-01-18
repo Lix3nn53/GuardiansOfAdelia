@@ -6,53 +6,47 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Set;
-import java.util.UUID;
 
 public class GuardianDataManager {
 
-    private static final HashMap<UUID, GuardianData> onlineGuardians = new HashMap<>();
+    private static final HashMap<Player, GuardianData> onlineGuardians = new HashMap<>();
 
-    public static GuardianData getGuardianData(UUID uuid) {
-        if (onlineGuardians.containsKey(uuid)) {
-            return onlineGuardians.get(uuid);
-        }
-
-        return null;
+    public static GuardianData getGuardianData(Player player) {
+        return onlineGuardians.get(player);
     }
 
-    public static boolean hasGuardianData(UUID uuid) {
-        return onlineGuardians.containsKey(uuid);
+    public static boolean hasGuardianData(Player player) {
+        return onlineGuardians.containsKey(player);
     }
 
-    public static void addGuardianData(UUID uuid, GuardianData guardianData) {
-        onlineGuardians.put(uuid, guardianData);
+    public static void addGuardianData(Player player, GuardianData guardianData) {
+        onlineGuardians.put(player, guardianData);
     }
 
     public static void onPlayerQuit(Player player) {
-        UUID uuid = player.getUniqueId();
-        if (hasGuardianData(uuid)) {
-            GuardianData guardianData = getGuardianData(uuid);
+        if (hasGuardianData(player)) {
+            GuardianData guardianData = getGuardianData(player);
             DatabaseManager.writeGuardianDataWithCurrentCharacter(player, guardianData);
             if (guardianData.hasBazaar()) {
                 Bazaar bazaar = guardianData.getBazaar();
                 bazaar.remove();
             }
         }
-        onlineGuardians.remove(uuid);
+        onlineGuardians.remove(player);
     }
 
-    public static Set<UUID> getOnlineUUIDs() {
+    public static Set<Player> getOnlineUUIDs() {
         return onlineGuardians.keySet();
     }
 
-    public static void clearCurrentCharacterDataWithoutSaving(UUID uuid) {
-        if (hasGuardianData(uuid)) {
-            GuardianData guardianData = getGuardianData(uuid);
+    public static void clearCurrentCharacterDataWithoutSaving(Player player) {
+        if (hasGuardianData(player)) {
+            GuardianData guardianData = getGuardianData(player);
             if (guardianData.hasBazaar()) {
                 Bazaar bazaar = guardianData.getBazaar();
                 bazaar.remove();
             }
         }
-        onlineGuardians.remove(uuid);
+        onlineGuardians.remove(player);
     }
 }

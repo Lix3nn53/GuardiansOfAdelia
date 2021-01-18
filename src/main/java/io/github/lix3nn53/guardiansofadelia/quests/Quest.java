@@ -29,7 +29,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public final class Quest {
 
@@ -110,14 +109,13 @@ public final class Quest {
     }
 
     public ItemStack getGuiItem(Player player) {
-        UUID uuid = player.getUniqueId();
         ItemStack questItem = new ItemStack(Material.GRAY_WOOL, 1);
         ArrayList<String> lore = new ArrayList<String>();
         lore.add(ChatColor.RED + "You can't accept this quest");
         ItemMeta itemMeta = questItem.getItemMeta();
         itemMeta.setDisplayName(ChatColor.DARK_PURPLE + this.name + ChatColor.GRAY + " Q#" + this.questID);
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
             List<Quest> playerQuests = rpgCharacter.getQuestList();
@@ -343,9 +341,8 @@ public final class Quest {
             }
         }
         if (getExpPrize() > 0) {
-            UUID uuid = player.getUniqueId();
-            if (GuardianDataManager.hasGuardianData(uuid)) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                 if (guardianData.hasActiveCharacter()) {
                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 

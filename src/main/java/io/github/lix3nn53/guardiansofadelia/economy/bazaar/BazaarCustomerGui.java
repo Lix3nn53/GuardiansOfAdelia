@@ -9,8 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.UUID;
-
 public class BazaarCustomerGui extends GuiGeneric {
 
     private final Player owner;
@@ -36,9 +34,8 @@ public class BazaarCustomerGui extends GuiGeneric {
     }
 
     public Bazaar getBazaar() {
-        UUID uuid = owner.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(owner)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(owner);
             if (guardianData.hasBazaar()) {
                 return guardianData.getBazaar();
             }

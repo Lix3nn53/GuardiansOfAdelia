@@ -17,17 +17,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.UUID;
-
 public class MyPlayerSwapHandItemsEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(PlayerSwapHandItemsEvent event) {
         Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
 
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();

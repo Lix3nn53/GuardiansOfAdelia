@@ -29,7 +29,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class PetManager {
 
@@ -269,9 +268,9 @@ public class PetManager {
 
     private static void updateCurrentHealthSavedInEgg(LivingEntity livingEntity, int nextHealth) {
         if (isCompanionAlsoPet(livingEntity)) {
-            UUID uuid = getOwner(livingEntity).getUniqueId();
-            if (GuardianDataManager.hasGuardianData(uuid)) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            Player owner = getOwner(livingEntity);
+            if (GuardianDataManager.hasGuardianData(owner)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(owner);
                 if (guardianData.hasActiveCharacter()) {
                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                     EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
@@ -350,9 +349,8 @@ public class PetManager {
     }
 
     public static void onEggEquip(Player player) {
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();

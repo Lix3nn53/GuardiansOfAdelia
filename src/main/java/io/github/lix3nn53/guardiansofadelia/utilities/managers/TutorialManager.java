@@ -21,8 +21,8 @@ import org.bukkit.inventory.PlayerInventory;
 public class TutorialManager {
 
     public static void startTutorial(Player player, String rpgClassStr, int charNo, Location startLocation) {
-        if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             RPGCharacter rpgCharacter = new RPGCharacter(rpgClassStr, player);
             rpgCharacter.unlockClass(rpgClassStr);
             guardianData.setActiveCharacter(rpgCharacter, charNo);

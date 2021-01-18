@@ -18,7 +18,6 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
-import java.util.UUID;
 
 public class MyEntityPickupItemEvent implements Listener {
 
@@ -36,9 +35,8 @@ public class MyEntityPickupItemEvent implements Listener {
             //progress collect tasks for quests
             ItemMeta itemMeta = itemStack.getItemMeta();
             if (itemMeta.hasDisplayName()) {
-                UUID uniqueId = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uniqueId)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                         List<Quest> questList = activeCharacter.getQuestList();
@@ -56,10 +54,8 @@ public class MyEntityPickupItemEvent implements Listener {
 
             if (firstEmpty == 4) { //pickup and hold
                 if (RPGItemUtils.isWeapon(type)) {
-
-                    UUID uuid = player.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                             String rpgClassStr = activeCharacter.getRpgClassStr();

@@ -10,7 +10,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.List;
-import java.util.UUID;
 
 public class SkillLevelCondition extends ConditionComponent {
 
@@ -45,10 +44,8 @@ public class SkillLevelCondition extends ConditionComponent {
             if (!(target instanceof Player)) continue;
             Player player = (Player) target;
 
-            UUID uuid = player.getUniqueId();
-
-            if (GuardianDataManager.hasGuardianData(uuid)) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
                 if (guardianData.hasActiveCharacter()) {
                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();

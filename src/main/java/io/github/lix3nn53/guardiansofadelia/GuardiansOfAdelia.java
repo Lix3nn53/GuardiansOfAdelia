@@ -30,7 +30,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 public class GuardiansOfAdelia extends JavaPlugin {
 
@@ -183,9 +182,8 @@ public class GuardiansOfAdelia extends JavaPlugin {
             public void run() {
                 Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
                 for (Player player : onlinePlayers) {
-                    UUID uuid = player.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         DatabaseManager.writeGuardianDataWithCurrentCharacter(player, guardianData);
                     }
                 }
@@ -198,7 +196,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 60 * 5L, 20 * 60 * 5L);
 
         //startGlobalRegen(); //health & mana regen loop
-        startGlobalManaRegen(0.4);
+        startGlobalManaRegen(0.6);
 
         //DELAYED TASKS
         new BukkitRunnable() {
@@ -232,9 +230,8 @@ public class GuardiansOfAdelia extends JavaPlugin {
             public void run() {
                 Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
                 for (Player player : onlinePlayers) {
-                    UUID uuid = player.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                             RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();

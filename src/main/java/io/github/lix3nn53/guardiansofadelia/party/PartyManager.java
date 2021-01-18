@@ -57,9 +57,8 @@ public class PartyManager {
             for (Player member : members) {
                 UUID uuid = member.getUniqueId();
                 if (!uuid.equals(player.getUniqueId())) {
-
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 

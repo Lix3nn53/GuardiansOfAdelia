@@ -20,7 +20,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class KillProtectionManager {
 
@@ -80,9 +79,8 @@ public class KillProtectionManager {
 
             //run for each player
             for (Player player : bestPlayers) {
-                UUID uuid = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();

@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class WeaponSelectOneOfAction implements Action {
 
@@ -28,9 +27,8 @@ public class WeaponSelectOneOfAction implements Action {
             player.sendMessage(ChatColor.DARK_RED + "You can't use WeaponSelectOneOfAction as quest action, only task action");
         }
 
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
                 // GUISIZE

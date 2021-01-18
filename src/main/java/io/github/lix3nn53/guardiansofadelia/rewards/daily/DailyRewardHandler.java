@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
-import java.util.UUID;
 
 public class DailyRewardHandler {
 
@@ -46,12 +45,11 @@ public class DailyRewardHandler {
     }
 
     public static void giveReward(Player player) {
-        UUID uniqueId = player.getUniqueId();
-        boolean hasGuardianData = GuardianDataManager.hasGuardianData(uniqueId);
+        boolean hasGuardianData = GuardianDataManager.hasGuardianData(player);
 
         if (!hasGuardianData) return;
 
-        GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
         DailyRewardInfo dailyRewardInfo = guardianData.getDailyRewardInfo();
 

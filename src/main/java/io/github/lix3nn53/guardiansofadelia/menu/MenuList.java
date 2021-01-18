@@ -40,7 +40,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class MenuList {
 
@@ -224,9 +223,8 @@ public class MenuList {
     public static GuiGeneric classManager(Player player) {
         GuiGeneric guiGeneric = null;
 
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
             if (guardianData.hasActiveCharacter()) {
                 guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Class Manager", 0);
@@ -237,14 +235,23 @@ public class MenuList {
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
                 int tier = rpgClass.getTier();
                 int classIconCustomModelData = rpgClass.getClassIconCustomModelData();
+                RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats();
+                int totalExp = rpgClassStats.getTotalExp();
+                int classLevel = RPGClassExperienceManager.getLevel(totalExp);
+                int currentExperience = RPGClassExperienceManager.getCurrentExperience(totalExp, classLevel);
+                int requiredExperience = RPGClassExperienceManager.getRequiredExperience(classLevel);
 
                 ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.YELLOW + "Class Info");
+                itemMeta.setDisplayName(ChatColor.YELLOW + "Your Class Info");
                 List<String> lore = new ArrayList<>();
                 lore.add("");
                 lore.add("Class: " + rpgClass.getClassString());
-                lore.add("Tier: " + tier);
+                lore.add("Class Tier: " + tier);
+                lore.add("");
+                lore.add(ChatColor.GREEN + "Total Experience: " + totalExp);
+                lore.add(ChatColor.GREEN + "Class Level: " + classLevel);
+                lore.add(ChatColor.GREEN + "Experience: " + currentExperience + "/" + requiredExperience);
                 itemMeta.setLore(lore);
                 itemMeta.setCustomModelData(classIconCustomModelData);
                 itemStack.setItemMeta(itemMeta);
@@ -252,28 +259,28 @@ public class MenuList {
 
                 itemStack = new ItemStack(Material.IRON_BLOCK);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.GOLD + "Change Class Rank #1");
+                itemMeta.setDisplayName(ChatColor.GOLD + "Change Class Tier #1");
                 lore.clear();
                 lore.add("");
-                lore.add("Change to a rank 1 class you have unlocked");
+                lore.add("Change to a tier 1 class you have unlocked");
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(20, itemStack);
 
                 itemStack = new ItemStack(Material.GOLD_BLOCK);
-                itemMeta.setDisplayName(ChatColor.GOLD + "Change Class Rank #2");
+                itemMeta.setDisplayName(ChatColor.GOLD + "Change Class Tier #2");
                 lore.clear();
                 lore.add("");
-                lore.add("Change to a rank 2 class you have unlocked");
+                lore.add("Change to a tier 2 class you have unlocked");
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(22, itemStack);
 
                 itemStack = new ItemStack(Material.DIAMOND_BLOCK);
-                itemMeta.setDisplayName(ChatColor.GOLD + "Change Class Rank #3");
+                itemMeta.setDisplayName(ChatColor.GOLD + "Change Class Tier #3");
                 lore.clear();
                 lore.add("");
-                lore.add("Change to a rank 3 class you have unlocked");
+                lore.add("Change to a tier 3 class you have unlocked");
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(24, itemStack);
@@ -286,9 +293,8 @@ public class MenuList {
     public static GuiGeneric classChange(Player player, int classTier) {
         GuiGeneric guiGeneric = null;
 
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
             if (guardianData.hasActiveCharacter()) {
                 guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Class Change", 0);
@@ -319,7 +325,7 @@ public class MenuList {
                     String dexterity = ChatColor.WHITE.toString() + attributeTiers.get(AttributeType.DEXTERITY);
 
                     List<String> lore = new ArrayList<>(description);
-                    lore.add(ChatColor.RED + "Rank: " + ChatColor.GRAY + classTier);
+                    lore.add(ChatColor.RED + "Tier: " + ChatColor.GRAY + classTier);
                     lore.add("");
 
                     lore.add(ChatColor.GREEN + "Attributes");
@@ -353,6 +359,14 @@ public class MenuList {
                             itemStack.setType(Material.LIME_WOOL);
                             lore.add(ChatColor.GREEN + "Click to change to this class!");
                         }
+                        RPGClassStats rpgClassStats = unlockedClasses.get(valueStr);
+                        int totalExp = rpgClassStats.getTotalExp();
+                        int classLevel = RPGClassExperienceManager.getLevel(totalExp);
+                        lore.add(ChatColor.GREEN + "Total Experience: " + totalExp);
+                        lore.add(ChatColor.GREEN + "Class Level: " + classLevel);
+                        int currentExperience = RPGClassExperienceManager.getCurrentExperience(totalExp, classLevel);
+                        int requiredExperience = RPGClassExperienceManager.getRequiredExperience(classLevel);
+                        lore.add(ChatColor.GREEN + "Experience: " + currentExperience + "/" + requiredExperience);
                     } else {
                         lore.add(ChatColor.RED + "You haven't unlock this class");
                     }
@@ -375,9 +389,8 @@ public class MenuList {
     public static GuiGeneric skill(Player player) {
         GuiGeneric guiGeneric = null;
 
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
@@ -452,9 +465,8 @@ public class MenuList {
     public static GuiGeneric statPoints(Player player) {
         GuiGeneric guiGeneric = null;
 
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
@@ -544,9 +556,8 @@ public class MenuList {
     public static GuiGeneric crafting(Player player) {
         GuiGeneric guiGeneric = new GuiGeneric(45, ChatColor.YELLOW + "Crafting", 0);
 
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
@@ -624,9 +635,8 @@ public class MenuList {
     public static GuiGeneric chatTagQuests(Player player) {
         GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Chat Tag", 0);
 
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 List<Integer> turnedInQuests = activeCharacter.getTurnedInQuests();
@@ -802,9 +812,8 @@ public class MenuList {
         itemMeta.setDisplayName(ChatColor.GOLD + "Your Bazaar");
 
         boolean hasBazaar = false;
-        UUID uniqueId = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uniqueId)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasBazaar()) {
                 Bazaar bazaar = guardianData.getBazaar();
                 if (bazaar.isOpen()) {
@@ -970,10 +979,9 @@ public class MenuList {
     public static GuiGeneric dailyRewardsMenu(Player player) {
         GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Daily Reward Claim", 0);
 
-        UUID uuid = player.getUniqueId();
-        if (!GuardianDataManager.hasGuardianData(uuid)) return guiGeneric;
+        if (!GuardianDataManager.hasGuardianData(player)) return guiGeneric;
 
-        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
         ItemStack pastFail = new ItemStack(Material.RED_WOOL);
         ItemMeta itemMeta = pastFail.getItemMeta();

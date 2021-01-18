@@ -14,8 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.UUID;
-
 public class MyAsyncPlayerChatEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -23,9 +21,8 @@ public class MyAsyncPlayerChatEvent implements Listener {
         Player player = event.getPlayer();
 
         if (BazaarManager.isSettingMoney(player)) {
-            UUID uuid = player.getUniqueId();
-            if (GuardianDataManager.hasGuardianData(uuid)) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                 if (guardianData.hasBazaar()) {
                     Bazaar bazaar = guardianData.getBazaar();
                     event.setCancelled(true);

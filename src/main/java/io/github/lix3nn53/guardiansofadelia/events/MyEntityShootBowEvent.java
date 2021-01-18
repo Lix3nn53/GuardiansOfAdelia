@@ -16,8 +16,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.UUID;
-
 public class MyEntityShootBowEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -30,9 +28,8 @@ public class MyEntityShootBowEvent implements Listener {
                 if (event.getEntity() instanceof Player) {
                     Player player = (Player) event.getEntity();
 
-                    UUID uniqueId = player.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(uniqueId)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 

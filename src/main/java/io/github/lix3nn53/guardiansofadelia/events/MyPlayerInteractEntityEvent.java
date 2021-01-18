@@ -33,7 +33,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
-import java.util.UUID;
 
 public class MyPlayerInteractEntityEvent implements Listener {
 
@@ -108,9 +107,8 @@ public class MyPlayerInteractEntityEvent implements Listener {
                         Player owner = PetManager.getOwner(pet);
                         if (!player.equals(owner)) return;
 
-                        UUID uuid = player.getUniqueId();
-                        if (GuardianDataManager.hasGuardianData(uuid)) {
-                            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                        if (GuardianDataManager.hasGuardianData(player)) {
+                            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                             if (guardianData.hasActiveCharacter()) {
                                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
@@ -139,9 +137,8 @@ public class MyPlayerInteractEntityEvent implements Listener {
                         }
                     }
                 } else if (rightClicked.isCustomNameVisible()) {
-                    UUID uniqueId = player.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(uniqueId)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                             List<Quest> questList = activeCharacter.getQuestList();

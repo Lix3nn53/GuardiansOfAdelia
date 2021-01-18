@@ -20,12 +20,11 @@ import java.util.UUID;
 public class TablistUtils {
 
     public static void updateTablist(Player player) {
-        UUID uuid = player.getUniqueId();
         StringBuilder header = new StringBuilder(ChatColor.GOLD + "Guardians of Adelia");
         header.append("\n");
         StringBuilder footer = new StringBuilder();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();

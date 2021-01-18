@@ -41,7 +41,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class MyPlayerInteractEvent implements Listener {
 
@@ -61,9 +60,8 @@ public class MyPlayerInteractEvent implements Listener {
             ArmorSlot armorSlot = ArmorSlot.getArmorSlot(itemInMainHandType);
 
             if (armorSlot != null) {
-                UUID uuid = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
@@ -153,12 +151,10 @@ public class MyPlayerInteractEvent implements Listener {
 
                 Material clickedBlockType = clickedBlock.getType();
 
-                UUID uuid = player.getUniqueId();
-
                 if (clickedBlockType.equals(Material.CAMPFIRE)) {
                     event.setCancelled(true);
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.FOOD);
                             levelSelection.openInventory(player);
@@ -166,8 +162,8 @@ public class MyPlayerInteractEvent implements Listener {
                     }
                 } else if (clickedBlockType.equals(Material.BREWING_STAND)) {
                     event.setCancelled(true);
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.POTION);
                             levelSelection.openInventory(player);
@@ -175,8 +171,8 @@ public class MyPlayerInteractEvent implements Listener {
                     }
                 } else if (clickedBlockType.equals(Material.GRINDSTONE)) {
                     event.setCancelled(true);
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.WEAPON_MELEE);
                             levelSelection.openInventory(player);
@@ -184,8 +180,8 @@ public class MyPlayerInteractEvent implements Listener {
                     }
                 } else if (clickedBlockType.equals(Material.FLETCHING_TABLE)) {
                     event.setCancelled(true);
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.WEAPON_RANGED);
                             levelSelection.openInventory(player);
@@ -193,8 +189,8 @@ public class MyPlayerInteractEvent implements Listener {
                     }
                 } else if (clickedBlockType.equals(Material.ANVIL)) {
                     event.setCancelled(true);
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.ARMOR_HEAVY);
                             levelSelection.openInventory(player);
@@ -202,8 +198,8 @@ public class MyPlayerInteractEvent implements Listener {
                     }
                 } else if (clickedBlockType.equals(Material.LOOM)) {
                     event.setCancelled(true);
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.ARMOR_LIGHT);
                             levelSelection.openInventory(player);
@@ -211,8 +207,8 @@ public class MyPlayerInteractEvent implements Listener {
                     }
                 } else if (clickedBlockType.equals(Material.SMITHING_TABLE)) {
                     event.setCancelled(true);
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.JEWEL);
                             levelSelection.openInventory(player);
@@ -220,8 +216,8 @@ public class MyPlayerInteractEvent implements Listener {
                     }
                 } else if (clickedBlockType.equals(Material.ENCHANTING_TABLE)) {
                     event.setCancelled(true);
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             GuiGeneric levelSelection = CraftingGuiManager.getLevelSelection(CraftingType.ENCHANT_STONE);
                             levelSelection.openInventory(player);

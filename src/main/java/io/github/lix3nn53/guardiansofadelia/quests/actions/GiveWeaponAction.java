@@ -12,8 +12,6 @@ import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.UUID;
-
 public class GiveWeaponAction implements Action {
 
     private final int gearLevel;
@@ -28,9 +26,8 @@ public class GiveWeaponAction implements Action {
 
     @Override
     public void perform(Player player, int questID, int taskIndex) {
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 String rpgClassStr = activeCharacter.getRpgClassStr();

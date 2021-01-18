@@ -22,17 +22,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.UUID;
-
 public class MyInventoryCloseEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(InventoryCloseEvent event) {
         Player player = (Player) event.getPlayer();
-        UUID uuid = player.getUniqueId();
 
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveGui()) {
                 Gui activeGui = guardianData.getActiveGui();
 

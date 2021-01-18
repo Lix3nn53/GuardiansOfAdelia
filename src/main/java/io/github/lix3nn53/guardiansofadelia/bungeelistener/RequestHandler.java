@@ -134,9 +134,8 @@ public class RequestHandler {
                     }.runTask(GuardiansOfAdelia.getInstance());
                 }
 
-                UUID uuid = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                     boolean success = guardianData.addToPremiumStorage(itemStack);
                     if (!success) {
                         return new WebResponse(false, "Your premium-storage is full!", minecraftUuidString, minecraftUsername, productId);
@@ -178,11 +177,10 @@ public class RequestHandler {
             Player player = Bukkit.getPlayer(minecraftUuid);
             if (player != null) {
                 minecraftUsername = player.getName();
-                UUID uuid = player.getUniqueId();
                 PremiumRank currentRank = null;
                 GuardianData guardianData;
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    guardianData = GuardianDataManager.getGuardianData(player);
                     currentRank = guardianData.getPremiumRank();
                     if (currentRank.equals(PremiumRank.NONE)) {
                         if (currentRank.ordinal() >= premiumRank.ordinal()) {
@@ -193,12 +191,13 @@ public class RequestHandler {
                 }
 
                 try {
+                    UUID uuid = player.getUniqueId();
                     DatabaseQueries.setPremiumRankWithDate(uuid, premiumRank);
                 } catch (Exception e) {
                     e.printStackTrace();
                     //Revert online player rank if we get a database error
                     if (currentRank != null) {
-                        guardianData = GuardianDataManager.getGuardianData(uuid);
+                        guardianData = GuardianDataManager.getGuardianData(player);
                         guardianData.setPremiumRank(currentRank);
                     }
                     return new WebResponse(false, "A database error occurred.", minecraftUuidString, minecraftUsername, productId);
@@ -254,18 +253,16 @@ public class RequestHandler {
                 }.runTask(GuardiansOfAdelia.getInstance());
             }
 
-            UUID uuid = player.getUniqueId();
-            if (GuardianDataManager.hasGuardianData(uuid)) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                 boolean success = guardianData.addToPremiumStorage(itemStack);
             }
 
         } else if (type.equals(WebProductType.RANK)) {
             PremiumRank premiumRank = webProduct.getPremiumRank();
 
-            UUID uuid = player.getUniqueId();
-            if (GuardianDataManager.hasGuardianData(uuid)) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                 guardianData.setPremiumRank(premiumRank);
             }
         }

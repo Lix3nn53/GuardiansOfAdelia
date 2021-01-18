@@ -22,7 +22,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 public class GatheringManager {
 
@@ -186,8 +189,8 @@ public class GatheringManager {
     }
 
     private static void startGatheringAnimation(final Player player, GatheringToolType gatheringToolType, GatheringToolTier gatheringToolTier, ItemStack itemStackTool, GatheringModel gatheringModel) {
-        if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
-            final GuardianData guardianData = GuardianDataManager.getGuardianData(player.getUniqueId());
+        if (GuardianDataManager.hasGuardianData(player)) {
+            final GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.isFreeToAct()) {
                 guardianData.setGathering(true);
                 gatheringModel.setBeingGathered(true);
@@ -303,9 +306,8 @@ public class GatheringManager {
     }
 
     private static void progressGatheringTasks(Player player, Ingredient ingredient, int amount) {
-        UUID uniqueId = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uniqueId)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 

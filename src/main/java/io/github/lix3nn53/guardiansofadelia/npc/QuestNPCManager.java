@@ -31,7 +31,7 @@ public class QuestNPCManager {
         if (npc != null) {
             GuiGeneric questMenu = new GuiGeneric(27, ChatColor.DARK_GRAY + "Quest List of " + npc.getName(), npcId);
 
-            if (GuardianDataManager.hasGuardianData(player.getUniqueId())) {
+            if (GuardianDataManager.hasGuardianData(player)) {
                 List<Quest> npcQuestList = new ArrayList<>();
 
                 if (npcNoToCanGiveQuests.containsKey(npcId)) {
@@ -94,9 +94,9 @@ public class QuestNPCManager {
         Bukkit.getScheduler().runTaskAsynchronously(GuardiansOfAdelia.getInstance(), () -> {
             if (npcNoToHologram.containsKey(npcId)) {
                 QuestHologram questHologram = npcNoToHologram.get(npcId);
-                UUID uuid = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();

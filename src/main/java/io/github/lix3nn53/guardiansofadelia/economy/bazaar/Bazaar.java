@@ -41,8 +41,8 @@ public class Bazaar {
     }
 
     public boolean addItem(ItemStack itemStack, int price) {
-        if (GuardianDataManager.hasGuardianData(owner.getUniqueId())) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(owner.getUniqueId());
+        if (GuardianDataManager.hasGuardianData(owner)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(owner);
             if (guardianData.bazaarStorageIsEmpty()) {
                 if (customerGui.anyEmpty()) {
                     itemStack = EconomyUtils.setShopPrice(itemStack, price);
@@ -56,8 +56,8 @@ public class Bazaar {
     }
 
     public boolean removeItem(ItemStack itemStack) {
-        if (GuardianDataManager.hasGuardianData(owner.getUniqueId())) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(owner.getUniqueId());
+        if (GuardianDataManager.hasGuardianData(owner)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(owner);
             if (getItemsOnSale().contains(itemStack)) {
                 guardianData.removeFromBazaarStorage(itemStack);
                 customerGui.removeItem(itemStack, itemStack.getAmount());
@@ -81,8 +81,8 @@ public class Bazaar {
     }
 
     public boolean buyItem(Player buyer, ItemStack itemToBuy) {
-        if (GuardianDataManager.hasGuardianData(owner.getUniqueId())) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(owner.getUniqueId());
+        if (GuardianDataManager.hasGuardianData(owner)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(owner);
 
             if (getItemsOnSale().contains(itemToBuy) && !buyer.equals(owner)) {
 

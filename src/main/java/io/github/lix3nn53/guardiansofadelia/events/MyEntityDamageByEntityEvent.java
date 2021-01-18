@@ -35,7 +35,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.List;
-import java.util.UUID;
 
 public class MyEntityDamageByEntityEvent implements Listener {
 
@@ -175,9 +174,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                     if (!isAttackerPlayer) { //we are managing this on onPlayerAttackEntity() method if attacker is player
                         //custom defense formula if target is another player attacked by mob
-                        UUID uniqueId = playerTarget.getUniqueId();
-                        if (GuardianDataManager.hasGuardianData(uniqueId)) {
-                            GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+                        if (GuardianDataManager.hasGuardianData(playerTarget)) {
+                            GuardianData guardianData = GuardianDataManager.getGuardianData(playerTarget);
                             if (guardianData.hasActiveCharacter()) {
 
                                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
@@ -218,9 +216,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
      * @return isEventCanceled
      */
     private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, LivingEntity pet, DamageMechanic.DamageType damageType, boolean isSkill) {
-        UUID uniqueId = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uniqueId)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
@@ -323,9 +320,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         }
                     }
 
-                    UUID targetUniqueId = playerTarget.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(targetUniqueId)) {
-                        GuardianData targetGuardianData = GuardianDataManager.getGuardianData(targetUniqueId);
+                    if (GuardianDataManager.hasGuardianData(playerTarget)) {
+                        GuardianData targetGuardianData = GuardianDataManager.getGuardianData(playerTarget);
                         if (targetGuardianData.hasActiveCharacter()) {
                             RPGCharacter targetActiveCharacter = targetGuardianData.getActiveCharacter();
 

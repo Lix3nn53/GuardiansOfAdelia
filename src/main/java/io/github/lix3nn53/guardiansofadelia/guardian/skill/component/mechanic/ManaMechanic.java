@@ -13,7 +13,6 @@ import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class ManaMechanic extends MechanicComponent {
 
@@ -55,9 +54,9 @@ public class ManaMechanic extends MechanicComponent {
         for (LivingEntity ent : targets) {
             if (ent instanceof Player) {
                 Player player = (Player) ent;
-                UUID uuid = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();

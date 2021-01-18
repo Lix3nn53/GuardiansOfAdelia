@@ -5,8 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import org.bukkit.entity.Player;
 
-import java.util.UUID;
-
 public class FinishQuestAction implements Action {
 
     private final int questId;
@@ -19,9 +17,8 @@ public class FinishQuestAction implements Action {
 
     @Override
     public void perform(Player player, int questID, int taskIndex) {
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 boolean didComplete = activeCharacter.turnInQuest(this.questId, player, ignoreCompilation);

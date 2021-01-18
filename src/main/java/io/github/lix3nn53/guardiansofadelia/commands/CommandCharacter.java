@@ -10,8 +10,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.UUID;
-
 public class CommandCharacter implements CommandExecutor {
 
     @Override
@@ -31,8 +29,6 @@ public class CommandCharacter implements CommandExecutor {
                             player.sendMessage(ChatColor.RED + "Character no can't be smaller than 1");
                             return false;
                         }
-
-                        UUID uuid = player.getUniqueId();
 
                         new BukkitRunnable() {
 
@@ -54,13 +50,13 @@ public class CommandCharacter implements CommandExecutor {
                                 } else if (secsRun == 5) {
                                     player.sendMessage(ChatColor.RED + "Removing your character in 1 seconds..");
                                 } else if (secsRun == 6) { // 100 ticks = 5 seconds
-                                    GuardianDataManager.clearCurrentCharacterDataWithoutSaving(uuid);
+                                    GuardianDataManager.clearCurrentCharacterDataWithoutSaving(player);
 
                                     new BukkitRunnable() {
 
                                         @Override
                                         public void run() {
-                                            DatabaseManager.clearCharacter(uuid, charNo);
+                                            DatabaseManager.clearCharacter(player, charNo);
                                         }
                                     }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
 

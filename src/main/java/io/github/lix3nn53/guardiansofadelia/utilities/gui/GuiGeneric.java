@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class GuiGeneric implements Gui {
 
@@ -71,9 +70,8 @@ public class GuiGeneric implements Gui {
 
     @Override
     public void openInventory(Player player) {
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             player.openInventory(inventory);
             guardianData.setActiveGui(this);
         }

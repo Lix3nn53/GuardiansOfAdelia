@@ -90,7 +90,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class MyInventoryClickEvent implements Listener {
 
@@ -164,12 +163,10 @@ public class MyInventoryClickEvent implements Listener {
             }
         }
 
-        UUID uuid = player.getUniqueId();
-
         GuardianData guardianData = null;
         RPGCharacter rpgCharacter = null;
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            guardianData = GuardianDataManager.getGuardianData(player);
 
             if (guardianData.hasActiveCharacter()) {
                 rpgCharacter = guardianData.getActiveCharacter();

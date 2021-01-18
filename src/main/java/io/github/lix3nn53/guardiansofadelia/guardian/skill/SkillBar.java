@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassExperienceManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
@@ -19,7 +20,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
 
 /**
  * Each player character has unique skill-bar
@@ -155,13 +155,22 @@ public class SkillBar {
     }
 
     public int getSkillPointsLeftToSpend() {
-        int result = player.getLevel();
+        boolean hasGuardianData = GuardianDataManager.hasGuardianData(player);
+
+        if (!hasGuardianData) return 0;
+
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+        RPGClassStats rpgClassStats = activeCharacter.getRPGClassStats();
+
+        int totalExp = rpgClassStats.getTotalExp();
+        int points = RPGClassExperienceManager.getLevel(totalExp);
 
         for (int invested : investedSkillPoints.values()) {
-            result -= invested;
+            points -= invested;
         }
 
-        return result;
+        return points;
     }
 
     public void remakeSkillBar() {
@@ -230,9 +239,8 @@ public class SkillBar {
 
         RPGCharacterStats rpgCharacterStats = null;
         int manaCost = skill.getManaCost(skillLevel);
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 rpgCharacterStats = activeCharacter.getRpgCharacterStats();

@@ -34,7 +34,7 @@ public class Invite {
     }
 
     public void send() {
-        GuardianData receiverData = GuardianDataManager.getGuardianData(receiver.getUniqueId());
+        GuardianData receiverData = GuardianDataManager.getGuardianData(receiver);
         if (!receiverData.hasPendingInvite()) {
             sender.sendTitle("", senderTitle, 20, 40, 20);
             receiver.sendMessage(receiverMessage);
@@ -63,12 +63,12 @@ public class Invite {
     }
 
     public void accept() {
-        GuardianData receiverData = GuardianDataManager.getGuardianData(receiver.getUniqueId());
+        GuardianData receiverData = GuardianDataManager.getGuardianData(receiver);
         receiverData.clearPendingInvite();
     }
 
     public void reject() {
-        GuardianData receiverData = GuardianDataManager.getGuardianData(receiver.getUniqueId());
+        GuardianData receiverData = GuardianDataManager.getGuardianData(receiver);
         receiverData.clearPendingInvite();
     }
 }

@@ -21,8 +21,6 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
-import java.util.UUID;
-
 public class MyProjectileLaunchEvent implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -59,9 +57,8 @@ public class MyProjectileLaunchEvent implements Listener {
                     return;
                 }
 
-                UUID uniqueId = player.getUniqueId();
-                if (GuardianDataManager.hasGuardianData(uniqueId)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 

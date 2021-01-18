@@ -9,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.List;
-import java.util.UUID;
 
 public class InstantTeleportPortal {
 
@@ -30,9 +29,8 @@ public class InstantTeleportPortal {
     public boolean canTeleport(Player player) {
         if (requiredQuestNoAccepted == 0 && requiredQuestNoTurnedIn == 0) return true;
 
-        UUID uuid = player.getUniqueId();
-        if (GuardianDataManager.hasGuardianData(uuid)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
 
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();

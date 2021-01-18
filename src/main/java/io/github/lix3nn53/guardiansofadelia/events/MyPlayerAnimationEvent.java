@@ -32,7 +32,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.UUID;
 
 public class MyPlayerAnimationEvent implements Listener {
 
@@ -53,9 +52,8 @@ public class MyPlayerAnimationEvent implements Listener {
 
         //quest TaskReach
         if (targetType.equals(Material.EMERALD_BLOCK) || targetType.equals(Material.GOLD_BLOCK) || targetType.equals(Material.REDSTONE_BLOCK) || targetType.equals(Material.DIAMOND_BLOCK)) {
-            UUID uniqueId = player.getUniqueId();
-            if (GuardianDataManager.hasGuardianData(uniqueId)) {
-                GuardianData guardianData = GuardianDataManager.getGuardianData(uniqueId);
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                 if (guardianData.hasActiveCharacter()) {
                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                     List<Quest> questList = activeCharacter.getQuestList();
@@ -97,9 +95,8 @@ public class MyPlayerAnimationEvent implements Listener {
                     GatheringManager.startGathering(player, itemInMainHand, gatheringModel);
                 } else if (BazaarManager.isBazaar(armorStand)) {
                     Player owner = BazaarManager.getOwner(armorStand);
-                    UUID uuid = owner.getUniqueId();
-                    if (GuardianDataManager.hasGuardianData(uuid)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                    if (GuardianDataManager.hasGuardianData(owner)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(owner);
                         if (guardianData.hasBazaar()) {
                             Bazaar bazaar = guardianData.getBazaar();
                             bazaar.showToCustomer(player);

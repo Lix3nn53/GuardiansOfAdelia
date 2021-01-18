@@ -15,12 +15,12 @@ public class TradeInvite extends Invite {
     @Override
     public void accept() {
         getSender().sendMessage(ChatColor.AQUA + getReceiver().getName() + " accepted your trade invite");
-        GuardianData receiverData = GuardianDataManager.getGuardianData(getReceiver().getUniqueId());
+        GuardianData receiverData = GuardianDataManager.getGuardianData(getReceiver());
         if (receiverData.hasActiveGui()) {
             getSender().sendMessage(ChatColor.RED + "This player is busy.");
             return;
         }
-        GuardianData senderData = GuardianDataManager.getGuardianData(getSender().getUniqueId());
+        GuardianData senderData = GuardianDataManager.getGuardianData(getSender());
         if (senderData.hasActiveGui()) {
             getReceiver().sendMessage(ChatColor.RED + "This player is busy.");
             return;

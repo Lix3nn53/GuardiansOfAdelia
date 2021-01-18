@@ -19,7 +19,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPortalEvent;
 
 import java.util.List;
-import java.util.UUID;
 
 public class MyPlayerPortalEvent implements Listener {
 
@@ -38,8 +37,7 @@ public class MyPlayerPortalEvent implements Listener {
             player.teleport(toAlberstolRuins);
             player.sendTitle(ChatColor.DARK_PURPLE + "Uruga", ChatColor.LIGHT_PURPLE + "", 25, 35, 25);
         } else {
-            UUID uuid = player.getUniqueId();
-            GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
             List<Integer> turnedInQuests = activeCharacter.getTurnedInQuests();

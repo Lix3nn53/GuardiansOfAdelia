@@ -9,8 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.UUID;
-
 public class CommandInvite implements CommandExecutor {
 
     @Override
@@ -20,21 +18,20 @@ public class CommandInvite implements CommandExecutor {
         }
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            UUID uuid = player.getUniqueId();
             if (args.length < 1) {
                 player.sendMessage(ChatColor.YELLOW + "/invite accept");
                 player.sendMessage(ChatColor.YELLOW + "/invite reject");
             } else if (args[0].equals("accept")) {
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                     if (guardianData.hasPendingInvite()) {
                         Invite pendingInvite = guardianData.getPendingInvite();
                         pendingInvite.accept();
                     }
                 }
             } else if (args[0].equals("reject")) {
-                if (GuardianDataManager.hasGuardianData(uuid)) {
-                    GuardianData guardianData = GuardianDataManager.getGuardianData(uuid);
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                     if (guardianData.hasPendingInvite()) {
                         Invite pendingInvite = guardianData.getPendingInvite();
                         pendingInvite.reject();
