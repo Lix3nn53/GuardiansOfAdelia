@@ -243,6 +243,7 @@ public class MenuList {
 
                 ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
                 ItemMeta itemMeta = itemStack.getItemMeta();
+                itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS);
                 itemMeta.setDisplayName(ChatColor.YELLOW + "Your Class Info");
                 List<String> lore = new ArrayList<>();
                 lore.add("");

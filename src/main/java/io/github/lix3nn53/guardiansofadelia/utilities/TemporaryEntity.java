@@ -440,6 +440,11 @@ public class TemporaryEntity implements LivingEntity {
     }
 
     @Override
+    public boolean isInWater() {
+        return false;
+    }
+
+    @Override
     public World getWorld() {
         return location.getWorld();
     }
