@@ -55,7 +55,10 @@ public class SkillDataManager {
 
     public static int getValue(LivingEntity keyEntity, String key) {
         if (keyEntityToKeyToValue.containsKey(keyEntity)) {
-            return keyEntityToKeyToValue.get(keyEntity).get(key);
+            HashMap<String, Integer> keyToValue = keyEntityToKeyToValue.get(keyEntity);
+            if (keyToValue.containsKey(key)) {
+                return keyToValue.get(key);
+            }
         }
         return 0;
     }
