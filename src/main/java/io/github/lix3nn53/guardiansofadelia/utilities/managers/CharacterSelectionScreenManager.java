@@ -144,7 +144,6 @@ public class CharacterSelectionScreenManager {
         //start character at first world quest
         GuardianData guardianData = GuardianDataManager.getGuardianData(player);
         RPGCharacter rpgCharacter = new RPGCharacter(rpgClassStr, player);
-        rpgCharacter.unlockClass(rpgClassStr);
         guardianData.setActiveCharacter(rpgCharacter, charNo);
 
         Quest questCopyById = QuestNPCManager.getQuestCopyById(4);

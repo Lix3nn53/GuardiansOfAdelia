@@ -24,8 +24,8 @@ public class TutorialManager {
         if (GuardianDataManager.hasGuardianData(player)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             RPGCharacter rpgCharacter = new RPGCharacter(rpgClassStr, player);
-            rpgCharacter.unlockClass(rpgClassStr);
             guardianData.setActiveCharacter(rpgCharacter, charNo);
+            rpgCharacter.getSkillBar().remakeSkillBar();
 
             // Character level
             int totalExpForLevel = RPGCharacterExperienceManager.getTotalRequiredExperience(90);

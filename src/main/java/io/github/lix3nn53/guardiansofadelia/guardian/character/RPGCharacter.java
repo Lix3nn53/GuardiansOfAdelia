@@ -16,7 +16,7 @@ public final class RPGCharacter {
 
     private final RPGInventory rpgInventory = new RPGInventory();
 
-    private final HashMap<String, RPGClassStats> unlockedClasses = new HashMap<>();
+    private final HashMap<String, RPGClassStats> unlockedClasses;
     private String rpgClassStr;
     private SkillBar skillBar;
 
@@ -29,18 +29,24 @@ public final class RPGCharacter {
 
     private ChatTag chatTag = ChatTag.NOVICE;
 
-    public RPGCharacter(String rpgClassStr, Player player, int one, int two, int three, int passive, int ultimate) {
+    public RPGCharacter(String rpgClassStr, Player player, int one, int two, int three, int passive, int ultimate, HashMap<String, RPGClassStats> unlockedClasses) {
         rpgCharacterStats = new RPGCharacterStats(player, rpgClassStr);
         this.rpgClassStr = rpgClassStr.toUpperCase();
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-        this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet());
+        this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet(), false);
+
+        this.unlockedClasses = unlockedClasses;
     }
 
     public RPGCharacter(String rpgClassStr, Player player) {
         rpgCharacterStats = new RPGCharacterStats(player, rpgClassStr);
         this.rpgClassStr = rpgClassStr.toUpperCase();
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-        this.skillBar = new SkillBar(player, 0, 0, 0, 0, 0, rpgClass.getSkillSet());
+        this.skillBar = new SkillBar(player, 0, 0, 0, 0, 0, rpgClass.getSkillSet(), false);
+
+        this.unlockedClasses = new HashMap<>();
+        RPGClassStats rpgClassStats = new RPGClassStats(0, 0, 0, 0, 0, 0);
+        this.unlockedClasses.put(rpgClassStr, rpgClassStats);
     }
 
     public String getRpgClassStr() {
@@ -84,7 +90,7 @@ public final class RPGCharacter {
         int ultimate = rpgClassStats.getUltimate();
 
         RPGClass rpgClass = RPGClassManager.getClass(s);
-        this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet());
+        this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet(), true);
         skillBar.remakeSkillBar();
 
         rpgCharacterStats.setRpgClassStr(s);

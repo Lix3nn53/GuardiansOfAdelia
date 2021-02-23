@@ -322,10 +322,7 @@ public class DatabaseQueries {
                 int skill_passive = resultSet.getInt("skill_passive");
                 int skill_ultimate = resultSet.getInt("skill_ultimate");
 
-                rpgCharacter = new RPGCharacter(rpgClassString, player, skill_one, skill_two, skill_three, skill_passive, skill_ultimate);
-                for (String rpgClassStr : unlockedClasses.keySet()) {
-                    rpgCharacter.unlockClass(rpgClassStr);
-                }
+                rpgCharacter = new RPGCharacter(rpgClassString, player, skill_one, skill_two, skill_three, skill_passive, skill_ultimate, unlockedClasses);
                 RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
 
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();

@@ -33,7 +33,7 @@ public class SkillBar {
 
     private int castCounter = 0;
 
-    public SkillBar(Player player, int one, int two, int three, int passive, int ultimate, HashMap<Integer, Skill> skillSet) {
+    public SkillBar(Player player, int one, int two, int three, int passive, int ultimate, HashMap<Integer, Skill> skillSet, boolean remake) {
         this.player = player;
         this.skillSet = skillSet;
 
@@ -45,7 +45,9 @@ public class SkillBar {
         investedSkillPoints.put(3, passive);
         investedSkillPoints.put(4, ultimate);
 
-        remakeSkillBar();
+        if (remake) {
+            remakeSkillBar();
+        }
 
         //activate init triggers
         new BukkitRunnable() {
