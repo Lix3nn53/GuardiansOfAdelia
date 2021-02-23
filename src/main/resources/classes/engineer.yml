@@ -157,17 +157,17 @@ skillOne:
             componentType: "AreaTarget"
             allies: false
             enemy: true
-            self: true
+            self: false
             max: 30
             keepCurrent: true
             addToBeginning: false
             radiusList:
-              - 4
-              - 4.5
-              - 5
-              - 5.5
-              - 6
-              - 6.5
+              - 7
+              - 7.5
+              - 8
+              - 8.5
+              - 9
+              - 9.5
             child1:
               componentType: "HeadRotationMechanic"
     child3:
@@ -422,3 +422,70 @@ skillUltimate:
     - 2
   trigger:
     componentType: "SelfTarget"
+    child1:
+      componentType: "SingleTarget"
+      allies: false
+      enemy: true
+      self: false
+      max: 1
+      tolerance: 4
+      ranges:
+        - 24
+        - 24
+        - 24
+        - 24
+        - 24
+        - 24
+      keepCurrent: true
+      child1:
+        componentType: "ProjectileMechanic"
+        projectileClass: "ShulkerBullet"
+        spreadType: "CONE"
+        speed: 1.9
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+        angle: 30
+        range: 200
+        mustHitToWork: true
+        particleType: "REDSTONE"
+        particleArrangement: "CIRCLE"
+        particleRadius: 0.5
+        particleAmount: 4
+        isProjectileInvisible: false
+        dustColor: 16728064
+        dustSize: 2.5
+        disguiseMaterial: "IRON_PICKAXE"
+        disguiseCustomModelData: 12
+        child1:
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 10
+          radiusList:
+            - 2.5
+            - 2.75
+            - 3
+            - 3.25
+            - 3.5
+            - 4
+          child1:
+            componentType: "DamageMechanic"
+            damageType: "MAGIC"
+            damageList:
+              - 1
+              - 1
+              - 1
+              - 1
+              - 1
+              - 1
+      child2:
+        componentType: "SelfTarget"
+        child1:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_FIRE_SLASH"

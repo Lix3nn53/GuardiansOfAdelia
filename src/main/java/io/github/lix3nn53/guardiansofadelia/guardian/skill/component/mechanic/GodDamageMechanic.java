@@ -1,10 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +57,13 @@ public class GodDamageMechanic extends MechanicComponent {
 
             ent.setNoDamageTicks(0);
             ent.damage(damage);
-            ent.setNoDamageTicks(0);
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    ent.setNoDamageTicks(0);
+                }
+            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 1L);
         }
 
         return true;
@@ -63,6 +71,33 @@ public class GodDamageMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (skillLevel == 0) {
+            if (!damagePercentList.isEmpty()) {
+                additions.add("God Damage: " + (damagePercentList.get(skillLevel) + 0.5) + "%");
+            }
+            if (!damageList.isEmpty()) {
+                additions.add("God Damage: " + (int) (damageList.get(skillLevel) + 0.5));
+            }
+        } else if (skillLevel == damageList.size()) {
+            if (!damagePercentList.isEmpty()) {
+                additions.add("God Damage: " + (damagePercentList.get(skillLevel - 1) + 0.5) + "%");
+            }
+            if (!damageList.isEmpty()) {
+                additions.add("God Damage: " + (int) (damageList.get(skillLevel - 1) + 0.5));
+            }
+        } else {
+            if (!damagePercentList.isEmpty()) {
+                String lore1 = "God Damage: " + (damagePercentList.get(skillLevel - 1) + 0.5) + "%";
+                String lore2 = "God Damage: " + (damagePercentList.get(skillLevel) + 0.5) + "%";
+                additions.add(lore1 + " -> " + lore2);
+            }
+            if (!damageList.isEmpty()) {
+                String lore1 = "God Damage: " + (int) (damageList.get(skillLevel - 1) + 0.5);
+                String lore2 = "God Damage: " + (int) (damageList.get(skillLevel) + 0.5);
+                additions.add(lore1 + " -> " + lore2);
+            }
+        }
+
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

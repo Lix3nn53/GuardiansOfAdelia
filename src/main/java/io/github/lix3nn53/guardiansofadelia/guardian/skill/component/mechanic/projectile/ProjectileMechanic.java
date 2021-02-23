@@ -15,13 +15,15 @@ import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
+import me.libraryaddict.disguise.disguisetypes.MobDisguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.ArmorStandWatcher;
+import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 import net.citizensnpcs.api.CitizensAPI;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Particle;
+import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.*;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -29,6 +31,7 @@ import org.bukkit.util.Vector;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class ProjectileMechanic extends MechanicComponent {
@@ -52,6 +55,10 @@ public class ProjectileMechanic extends MechanicComponent {
     private int particleAmount;
     private Particle.DustOptions dustOptions;
     private boolean isProjectileInvisible = true;
+
+    // Disguise
+    private Optional<Material> disguiseMaterial = Optional.empty();
+    private int disguiseCustomModelData = -1;
 
     //Piercing
 
@@ -179,9 +186,9 @@ public class ProjectileMechanic extends MechanicComponent {
 
             if (configurationSection.contains("dustColor")) {
                 int dustColor = configurationSection.getInt("dustColor");
-                int dustSize = configurationSection.getInt("dustSize");
+                double dustSize = configurationSection.getDouble("dustSize");
 
-                Particle.DustOptions dustOptions = new Particle.DustOptions(Color.fromRGB(dustColor), dustSize);
+                Particle.DustOptions dustOptions = new Particle.DustOptions(Color.fromRGB(dustColor), (float) dustSize);
 
                 setParticle(particleType, particleArrangement, particleRadius, particleAmount, dustOptions);
             } else {
@@ -206,6 +213,14 @@ public class ProjectileMechanic extends MechanicComponent {
         if (configurationSection.contains("isProjectileInvisible")) {
             isProjectileInvisible = configurationSection.getBoolean("isProjectileInvisible");
         }
+
+        // Disguise
+        if (configurationSection.contains("disguiseMaterial")) {
+            disguiseMaterial = Optional.of(Material.valueOf(configurationSection.getString("disguiseMaterial")));
+        }
+        if (configurationSection.contains("disguiseCustomModelData")) {
+            disguiseCustomModelData = configurationSection.getInt("disguiseCustomModelData");
+        }
     }
 
     @Override
@@ -218,6 +233,7 @@ public class ProjectileMechanic extends MechanicComponent {
 
         // Fire from each target
         ArrayList<Entity> projectiles = new ArrayList<>();
+        int i = 0;
         for (LivingEntity target : targets) {
             // Apply the spread type
             if (spreadType.equals(SpreadType.RAIN)) {
@@ -281,6 +297,20 @@ public class ProjectileMechanic extends MechanicComponent {
                         projectile.teleport(projectile.getLocation().add(0, upward, 0));
                     }
 
+                    if (i < targets.size() - 1) { // size 2, index 0 works, index 1 does not work
+                        if (projectileType.equals(ShulkerBullet.class)) {
+                            ShulkerBullet shulkerBullet = (ShulkerBullet) projectile;
+
+                            LivingEntity livingEntity = targets.get(targets.size() - 1);
+
+                            shulkerBullet.setTarget(livingEntity); // all projectiles target last entity
+                            if (target instanceof Player) {
+                                Player player = (Player) target;
+                                player.sendMessage("ShulkerBullet target: " + livingEntity.getCustomName());
+                            }
+                        }
+                    }
+
                     /* else if (piercing > 0) {
                         //TODO arrow does not pierce
 
@@ -295,10 +325,38 @@ public class ProjectileMechanic extends MechanicComponent {
 
                     projectile.setVelocity(d.multiply(speed));
                     projectiles.add(projectile);
+
+                    if (disguiseMaterial.isPresent()) {
+                        ItemStack itemStack = new ItemStack(disguiseMaterial.get());
+                        if (disguiseCustomModelData != -1) {
+                            ItemMeta itemMeta = itemStack.getItemMeta();
+                            itemMeta.setCustomModelData(disguiseCustomModelData);
+                            itemStack.setItemMeta(itemMeta);
+                        }
+
+                        MobDisguise mobDisguiseBase = new MobDisguise(DisguiseType.ARMOR_STAND, false);
+                        MobDisguise mobDisguise = mobDisguiseBase.setModifyBoundingBox(false);
+                        LivingWatcher livingWatcher = mobDisguise.getWatcher();
+                        livingWatcher.setInvisible(true);
+                        livingWatcher.setNoGravity(true);
+                        livingWatcher.setHelmet(itemStack);
+
+                        ArmorStandWatcher armorStandWatcher = (ArmorStandWatcher) livingWatcher;
+                        armorStandWatcher.setSmall(true);
+                        armorStandWatcher.setMarker(true);
+
+                        DisguiseAPI.disguiseToAll(projectile, mobDisguise);
+                    }
                 }
             }
+            i++;
         }
-        ProjectileListener.onSkillProjectileShoot(projectiles, this, skillLevel, (int) Math.ceil(range / Math.abs(speed)));
+        int delayTicks = (int) Math.ceil(range / Math.abs(speed));
+        if (projectileType.equals(ShulkerBullet.class)) {
+            delayTicks = delayTicks * 10;
+        }
+
+        ProjectileListener.onSkillProjectileShoot(projectiles, this, skillLevel, delayTicks);
 
         return true;
     }

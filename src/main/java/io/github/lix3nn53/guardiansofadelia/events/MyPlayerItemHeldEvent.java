@@ -44,7 +44,7 @@ public class MyPlayerItemHeldEvent implements Listener {
                     boolean success = activeCharacter.getSkillBar().castSkill(newSlot);
                     if (!success) {
                         //play sound special to player on cast fail
-                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.4f, 0.4f);
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.1f, 0.1f);
                     }
                     event.setCancelled(true);
                     return;
