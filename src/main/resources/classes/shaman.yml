@@ -251,7 +251,7 @@ skillPassive:
               allies: false
               enemy: false
               self: false
-              max: 5
+              max: 1
               armorStand: true
               child1:
                 componentType: "AreaTarget"

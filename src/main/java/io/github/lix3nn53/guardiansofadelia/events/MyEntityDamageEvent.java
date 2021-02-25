@@ -4,7 +4,9 @@ import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityListener;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
+import net.minecraft.server.v1_16_R3.EntityPlayer;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -22,6 +24,24 @@ public class MyEntityDamageEvent implements Listener {
         if (!(entity instanceof LivingEntity)) return;
 
         EntityDamageEvent.DamageCause cause = event.getCause();
+        if (entity instanceof Player) {
+            Player player = (Player) entity;
+
+            CraftPlayer craftPlayer = (CraftPlayer) player;
+            EntityPlayer entityPlayer = craftPlayer.getHandle();
+
+            float absorptionHearts = entityPlayer.getAbsorptionHearts();
+
+            if (absorptionHearts > 0) {
+                event.setCancelled(true);
+                absorptionHearts -= 2;
+                if (absorptionHearts < 0) {
+                    absorptionHearts = 0;
+                }
+                entityPlayer.setAbsorptionHearts(absorptionHearts);
+                return;
+            }
+        }
 
         if (cause.equals(EntityDamageEvent.DamageCause.VOID)) {
             event.setDamage(10000D);

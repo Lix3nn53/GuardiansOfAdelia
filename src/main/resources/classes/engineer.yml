@@ -348,59 +348,43 @@ skillPassive:
         - 10
         - 10
       child1:
-        componentType: "RepeatCancelMechanic"
-      child2:
-        componentType: "RepeatMechanic"
-        period: 40
-        repetitions:
-          - 6
-          - 7
-          - 8
-          - 9
+        componentType: "SelfTarget"
         child1:
-          componentType: "SelfTarget"
+          componentType: "AreaTarget"
+          allies: true
+          enemy: false
+          self: true
+          max: 15
+          radiusList:
+            - 5
+            - 5.5
+            - 6
+            - 7
           child1:
-            componentType: "SavedEntityCondition"
-            minValue: 1
-            maxValue: 1
-            child1:
-              componentType: "SavedEntitiesTarget"
-              allies: false
-              enemy: false
-              self: false
-              max: 5
-              armorStand: true
-              child1:
-                componentType: "AreaTarget"
-                allies: true
-                enemy: false
-                self: true
-                max: 15
-                radiusList:
-                  - 5
-                  - 5.5
-                  - 6
-                  - 7
-                child1:
-                  componentType: "HealMechanic"
-                  healAmountList:
-                    - 20
-                    - 50
-                    - 200
-                    - 325
-              child2:
-                componentType: "ParticleMechanic"
-                type: "HEART"
-                amount: 12
-                upward: 1
-                radius:
-                  - 5
-                  - 5.5
-                  - 6
-                  - 7
-              child3:
-                componentType: "SoundMechanic"
-                goaSound: "SKILL_HEAL"
+            componentType: "AbsorptionHeartMechanic"
+            heartAmountList:
+              - 1
+              - 2
+              - 3
+              - 4
+            maxHeartList:
+              - 1
+              - 2
+              - 3
+              - 4
+        child2:
+          componentType: "ParticleMechanic"
+          type: "VILLAGER_ANGRY"
+          amount: 12
+          upward: 1
+          radius:
+            - 5
+            - 5.5
+            - 6
+            - 6.5
+        child3:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_HEAL"
 skillUltimate:
   name: "Missile"
   customModelData: 62

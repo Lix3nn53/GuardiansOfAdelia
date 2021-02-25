@@ -1,26 +1,24 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import net.minecraft.server.v1_16_R3.EntityPlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AbsorptionHeartMechanic extends MechanicComponent {
 
     private final List<Integer> heartAmountList;
-    private final int maxHearts;
-    private final String multiplyWithValue;
+    private final List<Integer> maxHeartList;
 
-    public AbsorptionHeartMechanic(List<Integer> heartAmountList, int maxHearts, @Nullable String multiplyWithValue) {
+    public AbsorptionHeartMechanic(List<Integer> heartAmountList, List<Integer> maxHeartList) {
         this.heartAmountList = heartAmountList;
-        this.maxHearts = maxHearts;
-        this.multiplyWithValue = multiplyWithValue;
+        this.maxHeartList = maxHeartList;
     }
 
     public AbsorptionHeartMechanic(ConfigurationSection configurationSection) {
@@ -28,8 +26,8 @@ public class AbsorptionHeartMechanic extends MechanicComponent {
             configLoadError("heartAmountList");
         }
 
-        if (!configurationSection.contains("maxHearts")) {
-            configLoadError("maxHearts");
+        if (!configurationSection.contains("maxHeartList")) {
+            configLoadError("maxHeartList");
         }
 
         if (configurationSection.contains("heartAmountList")) {
@@ -38,18 +36,11 @@ public class AbsorptionHeartMechanic extends MechanicComponent {
             this.heartAmountList = new ArrayList<>();
         }
 
-        if (configurationSection.contains("maxHearts")) {
-            this.maxHearts = configurationSection.getInt("maxHearts");
+        if (configurationSection.contains("maxHeartList")) {
+            this.maxHeartList = configurationSection.getIntegerList("maxHeartList");
         } else {
-            this.maxHearts = 100;
+            this.maxHeartList = new ArrayList<>();
         }
-
-        if (configurationSection.contains("multiplyWithValue")) {
-            this.multiplyWithValue = configurationSection.getString("multiplyWithValue");
-        } else {
-            this.multiplyWithValue = null;
-        }
-
     }
 
     @Override
@@ -58,22 +49,24 @@ public class AbsorptionHeartMechanic extends MechanicComponent {
 
         boolean healed = false;
         for (LivingEntity ent : targets) {
-            if (!(ent instanceof EntityPlayer)) continue;
+            if (!(ent instanceof Player)) continue;
+            Player player = (Player) ent;
 
-            EntityPlayer entityPlayer = (EntityPlayer) ent;
+            CraftPlayer craftPlayer = (CraftPlayer) player;
+            EntityPlayer entityPlayer = craftPlayer.getHandle();
 
             float currentHearts = entityPlayer.getAbsorptionHearts();
+
+            int maxHearts = 0;
+            if (!maxHeartList.isEmpty()) {
+                maxHearts = maxHeartList.get(skillLevel - 1);
+            }
 
             if (currentHearts >= maxHearts) continue;
 
             int heartAmount = 0;
             if (!heartAmountList.isEmpty()) {
                 heartAmount = heartAmountList.get(skillLevel - 1);
-            }
-
-            if (multiplyWithValue != null) {
-                int value = SkillDataManager.getValue(caster, multiplyWithValue);
-                heartAmount *= value;
             }
 
             if (heartAmount <= 0) {
@@ -97,29 +90,16 @@ public class AbsorptionHeartMechanic extends MechanicComponent {
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (!heartAmountList.isEmpty()) {
             if (skillLevel == 0) {
-                String lore = ChatColor.GREEN + "Absorption Heart: " + heartAmountList.get(skillLevel) + "(Max " + maxHearts + ")";
-
-                if (multiplyWithValue != null) {
-                    lore = lore + "x[" + multiplyWithValue + "]";
-                }
+                String lore = ChatColor.GREEN + "Golden Heart: +" + heartAmountList.get(skillLevel) + "[Max " + maxHeartList.get(skillLevel) + "]";
 
                 additions.add(lore);
             } else if (skillLevel == heartAmountList.size()) {
-                String lore = ChatColor.GREEN + "Absorption Heart: " + heartAmountList.get(skillLevel - 1);
-
-                if (multiplyWithValue != null) {
-                    lore = lore + "x[" + multiplyWithValue + "]";
-                }
+                String lore = ChatColor.GREEN + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
 
                 additions.add(lore);
             } else {
-                String lore1 = "Absorption Heart: " + heartAmountList.get(skillLevel - 1);
-                String lore2 = heartAmountList.get(skillLevel) + "";
-
-                if (multiplyWithValue != null) {
-                    lore1 = lore1 + "x[" + multiplyWithValue + "]";
-                    lore2 = lore2 + "x[" + multiplyWithValue + "]";
-                }
+                String lore1 = ChatColor.GREEN + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
+                String lore2 = heartAmountList.get(skillLevel) + "[Max " + maxHeartList.get(skillLevel) + "]";
 
                 additions.add(ChatColor.GREEN + lore1 + " -> " + lore2);
             }
