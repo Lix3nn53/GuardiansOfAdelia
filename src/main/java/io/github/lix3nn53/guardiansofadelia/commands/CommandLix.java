@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
@@ -31,9 +30,7 @@ import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
-import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
+import net.minecraft.server.v1_16_R3.EntityPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -42,7 +39,10 @@ import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.*;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -352,21 +352,16 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-                String code = args[1];
-                int level = Integer.parseInt(args[2]);
+                int amount = Integer.parseInt(args[1]);
 
-                Location location = player.getLocation();
+                CraftPlayer craftPlayer = (CraftPlayer) player;
+                EntityPlayer entityPlayer = craftPlayer.getHandle();
 
-                BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
-                Entity entity = null;
-                try {
-                    entity = apiHelper.spawnMythicMob(code, location, level);
-                } catch (InvalidMobTypeException e) {
-                    GuardiansOfAdelia.getInstance().getLogger().info("Command mythicmob code error: " + code);
-                    e.printStackTrace();
-                }
-                LivingEntity mob = (LivingEntity) entity;
-                player.sendMessage(mob.getCustomName());
+                float absorptionHearts = entityPlayer.getAbsorptionHearts();
+
+                player.sendMessage("absorptionHearts: " + absorptionHearts);
+
+                entityPlayer.setAbsorptionHearts(amount);
             }
 
             // If the player (or console) uses our command correct, we can return true

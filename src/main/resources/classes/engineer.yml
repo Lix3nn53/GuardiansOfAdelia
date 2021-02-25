@@ -24,24 +24,20 @@ armorGearTypes:
 hasDefaultOffhand: false
 skillOne:
   name: "Turret"
-  customModelData: 17
+  customModelData: 18
   description:
-    - "Summon skeletons."
-    - "Skeletons lose %10 of their health per 5 seconds."
+    - "Summon a turret that fires arrows."
+    - "Turret changes it's head rotation to nearest target."
   manaCosts:
     - 5
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
-    - 2
-    - 2
+    - 41
+    - 46
+    - 51
+    - 56
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -53,8 +49,6 @@ skillOne:
         - 900
         - 1000
         - 1100
-        - 1200
-        - 1400
       displayText: "< Turret %caster% >"
       gravity: true
       marker: false
@@ -72,8 +66,6 @@ skillOne:
           - 45
           - 50
           - 55
-          - 60
-          - 70
         child1:
           componentType: "SavedEntitiesTarget"
           allies: false
@@ -85,10 +77,8 @@ skillOne:
             componentType: "ProjectileMechanic"
             projectileClass: "Arrow"
             spreadType: "CONE"
-            speed: 1.7
+            speed: 2.7
             amountList:
-              - 1
-              - 1
               - 1
               - 1
               - 1
@@ -114,9 +104,7 @@ skillOne:
                 - 2
                 - 2.5
                 - 3
-                - 3.5
                 - 4
-                - 4.5
               child1:
                 componentType: "DamageMechanic"
                 damageType: "RANGED"
@@ -125,31 +113,6 @@ skillOne:
                   - 60
                   - 180
                   - 300
-                  - 420
-                  - 720
-              child2:
-                componentType: "PushMechanic"
-                pushType: "FIXED"
-                speedList:
-                  - 2
-                  - 2.4
-                  - 2.8
-                  - 3.2
-                  - 3.6
-                  - 4.2
-                centerSelf: true
-            child2:
-              componentType: "ParticleMechanic"
-              type: "EXPLOSION_HUGE"
-              amount: 2
-              upward: 0.5
-              radius:
-                - 3
-                - 3.5
-                - 3
-                - 3.25
-                - 3.5
-                - 4
             child3:
               componentType: "SoundMechanic"
               goaSound: "SKILL_WIND_PUSH"
@@ -158,16 +121,14 @@ skillOne:
             allies: false
             enemy: true
             self: false
-            max: 30
+            max: 1
             keepCurrent: true
             addToBeginning: false
             radiusList:
-              - 7
-              - 7.5
-              - 8
-              - 8.5
               - 9
-              - 9.5
+              - 10
+              - 12
+              - 14
             child1:
               componentType: "HeadRotationMechanic"
     child3:
@@ -177,20 +138,14 @@ skillTwo:
   name: "Bomb"
   customModelData: 19
   description:
-    - "Launch a projectile that deals damage and slows enemies"
-    - "in a small area."
-    - "Also your summons targets the enemy which got hit and"
-    - "gains bonus movement speed."
+    - "Launch a bomb that deals damage and pushes enemies."
+    - "Bonus effect: it also pushes you but you don't take damage."
   manaCosts:
     - 5
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 2
-    - 2
     - 2
     - 2
     - 2
@@ -206,14 +161,11 @@ skillTwo:
         - 50
         - 50
         - 50
-        - 50
-        - 50
       displayText: "< Bomb %caster% >"
       gravity: true
       marker: false
       speed: 1.9
       upward: 0.5
-      save: true
       child1:
         componentType: "DelayWithHoloMessageMechanic"
         message: "&cBOOM"
@@ -223,67 +175,81 @@ skillTwo:
           componentType: "AreaTarget"
           allies: false
           enemy: true
-          self: false
+          self: true
           max: 30
           radiusList:
-            - 2
             - 2.5
             - 3
             - 3.5
             - 4
-            - 4.5
+          keepCurrent: true
           child1:
-            componentType: "DamageMechanic"
-            damageType: "RANGED"
-            damageList:
-              - 24
-              - 60
-              - 180
-              - 300
-              - 420
-              - 720
+            componentType: "FilterCurrentTargets"
+            allies: false
+            enemy: true
+            self: false
+            max: 29
+            child1:
+              componentType: "DamageMechanic"
+              damageType: "RANGED"
+              damageList:
+                - 60
+                - 180
+                - 420
+                - 720
           child2:
             componentType: "PushMechanic"
             pushType: "FIXED"
             speedList:
-              - 2
-              - 2.4
-              - 2.8
-              - 3.2
-              - 3.6
-              - 4.2
-            centerSelf: true
+              - 1.2
+              - 1.4
+              - 1.6
+              - 1.8
+            centerSelf: false
+            offsetY: -2
+          child3:
+            componentType: "FilterCurrentTargets"
+            allies: false
+            enemy: false
+            self: true
+            max: 1
+            child1:
+              componentType: "DelayMechanic"
+              ticks: 15
+              child1:
+                componentType: "ImmunityMechanic"
+                damageCause: "FALL"
+              child2:
+                componentType: "LandTrigger"
+                child1:
+                  componentType: "ImmunityRemoveMechanic"
+                  damageCause: FALL
+                  delay: 5
         child2:
           componentType: "ParticleMechanic"
           type: "EXPLOSION_HUGE"
           amount: 2
           upward: 0.5
           radius:
+            - 2.5
             - 3
-            - 3.5
-            - 3
-            - 3.25
             - 3.5
             - 4
     child2:
       componentType: "SoundMechanic"
       goaSound: "SKILL_SPLASH"
 skillThree:
-  name: "Life Drain"
-  customModelData: 18
+  name: "Oil"
+  customModelData: 22
   description:
-    - "Deal damage to all of your summons, heal yourself"
-    - "by an amount for each damaged summon."
+    - "Throw oil in to the ground."
+    - "Enemies in the oil are slowed and silenced."
   manaCosts:
     - 5
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 2
-    - 2
     - 2
     - 2
     - 2
@@ -291,131 +257,162 @@ skillThree:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "ProjectileMechanic"
-      projectileClass: "Arrow"
-      spreadType: "CONE"
-      speed: 2.7
-      amountList:
-        - 1
-        - 1
-        - 1
-        - 1
-        - 1
-        - 1
-      angle: 30
-      range: 200
-      mustHitToWork: true
-      particleArrangement: "CIRCLE"
-      particleRadius: 0.5
-      particleAmount: 4
-      isProjectileInvisible: false
-      dustColor: 16753920
-      dustSize: 2
+      componentType: "HologramMechanic"
+      helmetType: "IRON_PICKAXE"
+      customModelData: 11
+      durations:
+        - 1000
+        - 1100
+        - 1200
+        - 1300
+      displayText: "< Oil %caster% >"
+      gravity: true
+      marker: false
+      speed: 1.9
+      right: 0
+      forward: 1
+      upward: 0.5
       child1:
-        componentType: "AreaTarget"
-        allies: false
-        enemy: true
-        self: false
-        max: 30
-        radiusList:
-          - 2
-          - 2.5
-          - 3
-          - 3.5
-          - 4
-          - 4.5
+        componentType: "RepeatMechanic"
+        period: 10
+        repetitions:
+          - 100
+          - 110
+          - 120
+          - 130
         child1:
-          componentType: "DamageMechanic"
-          damageType: "RANGED"
-          damageList:
-            - 24
-            - 60
-            - 180
-            - 300
-            - 420
-            - 720
-        child2:
-          componentType: "PushMechanic"
-          pushType: "FIXED"
-          speedList:
-            - 2
-            - 2.4
-            - 2.8
-            - 3.2
-            - 3.6
-            - 4.2
-          centerSelf: true
-      child2:
-        componentType: "ParticleMechanic"
-        type: "EXPLOSION_HUGE"
-        amount: 2
-        upward: 0.5
-        radius:
-          - 3
-          - 3.5
-          - 3
-          - 3.25
-          - 3.5
-          - 4
-      child3:
-        componentType: "SoundMechanic"
-        goaSound: "SKILL_WIND_PUSH"
-    child2:
-      componentType: "SoundMechanic"
-      goaSound: "SKILL_PROJECTILE_ICE"
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 30
+          radiusList:
+            - 3
+            - 3
+            - 3
+            - 3
+          child1:
+            componentType: "ParticleMechanic"
+            type: "REDSTONE"
+            amount: 5
+            upward: 0.5
+            dustColor: 3355443
+            dustSize: 2
+            radius:
+              - 1
+              - 1
+              - 1
+              - 1
+          child2:
+            componentType: "PotionEffectMechanic"
+            potionEffectType: "SLOW"
+            tickList:
+              - 40
+              - 40
+              - 40
+              - 40
+            amplifierList:
+              - 2
+              - 2
+              - 2
+              - 2
+          child3:
+            componentType: "SilenceMechanic"
+            durations:
+              - 40
+              - 40
+              - 40
+              - 40
 skillPassive:
-  name: "Bone Armor"
-  customModelData: 47
+  name: "Mecha Armor"
+  customModelData: 52
   description:
-    - "For each active summon gain an"
-    - "amount of physical and magic defense."
-    - ""
-    - "Also increases the max amount of summons you can have at a time."
-    - "Skill level 0: 3 summons at a time"
-    - "Skill level 1: 4 summons at a time"
-    - "Skill level 2: 5 summons at a time"
-    - "Skill level 3: 6 summons at a time"
-    - "Skill level 4: 7 summons at a time"
-    - "Skill level 5: 8 summons at a time"
-    - "Skill level 6: 10 summons at a time"
+    - "Your totem heals nearby allies over time."
   manaCosts:
-    - 5
-    - 7
-    - 9
-    - 11
-    - 13
-    - 15
+    - 0
+    - 0
+    - 0
+    - 0
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
-    - 2
-    - 2
+    - 10
+    - 10
+    - 10
+    - 10
   trigger:
     componentType: "InitializeTrigger"
     child1:
-      componentType: "SelfTarget"
+      componentType: "SavedEntitySpawnTrigger"
+      cooldowns:
+        - 10
+        - 10
+        - 10
+        - 10
+      child1:
+        componentType: "RepeatCancelMechanic"
+      child2:
+        componentType: "RepeatMechanic"
+        period: 40
+        repetitions:
+          - 6
+          - 7
+          - 8
+          - 9
+        child1:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "SavedEntityCondition"
+            minValue: 1
+            maxValue: 1
+            child1:
+              componentType: "SavedEntitiesTarget"
+              allies: false
+              enemy: false
+              self: false
+              max: 5
+              armorStand: true
+              child1:
+                componentType: "AreaTarget"
+                allies: true
+                enemy: false
+                self: true
+                max: 15
+                radiusList:
+                  - 5
+                  - 5.5
+                  - 6
+                  - 7
+                child1:
+                  componentType: "HealMechanic"
+                  healAmountList:
+                    - 20
+                    - 50
+                    - 200
+                    - 325
+              child2:
+                componentType: "ParticleMechanic"
+                type: "HEART"
+                amount: 12
+                upward: 1
+                radius:
+                  - 5
+                  - 5.5
+                  - 6
+                  - 7
+              child3:
+                componentType: "SoundMechanic"
+                goaSound: "SKILL_HEAL"
 skillUltimate:
-  name: "Frozen Colossus"
-  customModelData: 45
+  name: "Missile"
+  customModelData: 62
   description:
-    - "First cast: "
-    - "Summon Frozen Colossuses which cast Freeze on summon."
-    - "Second cast: "
-    - "If at least one Frozen Colossus is active, make them cast Freeze."
-    - ""
-    - "Freeze: Stuns nearby enemies"
+    - "Launch a missile that follows the target."
+    - "Deals area damage and stuns the enemies."
   manaCosts:
     - 5
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 2
-    - 2
     - 2
     - 2
     - 2
@@ -434,17 +431,13 @@ skillUltimate:
         - 24
         - 24
         - 24
-        - 24
-        - 24
       keepCurrent: true
       child1:
         componentType: "ProjectileMechanic"
         projectileClass: "ShulkerBullet"
         spreadType: "CONE"
-        speed: 1.9
+        speed: 2.9
         amountList:
-          - 1
-          - 1
           - 1
           - 1
           - 1
@@ -471,9 +464,7 @@ skillUltimate:
             - 2.5
             - 2.75
             - 3
-            - 3.25
             - 3.5
-            - 4
           child1:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
@@ -482,8 +473,38 @@ skillUltimate:
               - 1
               - 1
               - 1
-              - 1
-              - 1
+          child2:
+            componentType: "RootMechanic"
+            lockY: true
+            durations:
+              - 40
+              - 50
+              - 60
+              - 70
+          child3:
+            componentType: "SilenceMechanic"
+            durations:
+              - 40
+              - 50
+              - 60
+              - 70
+          child4:
+            componentType: "DisarmMechanic"
+            durations:
+              - 40
+              - 50
+              - 60
+              - 70
+          child5:
+            componentType: "ParticleMechanic"
+            type: "EXPLOSION_LARGE"
+            amount: 1
+            upward: 0.5
+            radius:
+              - 2.5
+              - 2.75
+              - 3
+              - 3.5
       child2:
         componentType: "SelfTarget"
         child1:

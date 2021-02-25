@@ -2,10 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
 public class RPGClassExperienceManager {
 
-    public static int RPG_CLASS_MAX_LEVEL = 10;
+    public static int RPG_CLASS_MAX_LEVEL = 20;
 
     public static int getRequiredExperience(int level) {
-        return RPGCharacterExperienceManager.getRequiredExperience(level * (90 / RPG_CLASS_MAX_LEVEL));
+        return RPGCharacterExperienceManager.getRequiredExperience(level * (80 / RPG_CLASS_MAX_LEVEL));
     }
 
     public static int getLevel(int totalExp) {

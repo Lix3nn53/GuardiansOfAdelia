@@ -32,15 +32,11 @@ skillOne:
     - 6
     - 7
     - 8
-    - 9
-    - 10
   cooldowns:
     - 41
     - 46
     - 51
     - 56
-    - 61
-    - 71
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -52,8 +48,6 @@ skillOne:
         - 900
         - 1000
         - 1100
-        - 1200
-        - 1400
       displayText: "< Totem %caster% >"
       gravity: true
       marker: false
@@ -75,11 +69,7 @@ skillTwo:
     - 12
     - 14
     - 16
-    - 18
-    - 20
   cooldowns:
-    - 14
-    - 14
     - 14
     - 14
     - 14
@@ -94,8 +84,6 @@ skillTwo:
         - 9
         - 10
         - 11
-        - 12
-        - 14
       child1:
         componentType: "SavedEntitiesTarget"
         allies: false
@@ -105,17 +93,15 @@ skillTwo:
         armorStand: true
         child1:
           componentType: "AreaTarget"
-          allies: true
-          enemy: false
-          self: true
+          allies: false
+          enemy: true
+          self: false
           max: 15
           radiusList:
             - 5
             - 5.5
             - 6
             - 6.5
-            - 7
-            - 8
           child1:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
@@ -124,8 +110,6 @@ skillTwo:
               - 50
               - 200
               - 325
-              - 450
-              - 720
         child2:
           componentType: "ParticleMechanic"
           type: "VILLAGER_ANGRY"
@@ -136,8 +120,6 @@ skillTwo:
             - 5.5
             - 6
             - 6.5
-            - 7
-            - 8
         child3:
           componentType: "SoundMechanic"
           goaSound: "SKILL_SONIC_BOOM"
@@ -151,11 +133,7 @@ skillThree:
     - 12
     - 14
     - 16
-    - 18
-    - 20
   cooldowns:
-    - 12
-    - 12
     - 12
     - 12
     - 12
@@ -180,8 +158,6 @@ skillThree:
           - 5.5
           - 6
           - 6.5
-          - 7
-          - 8
         child1:
           componentType: "RootMechanic"
           lockY: true
@@ -199,8 +175,6 @@ skillThree:
             - 50
             - 60
             - 70
-            - 80
-            - 90
         child3:
           componentType: "DisarmMechanic"
           durations:
@@ -208,8 +182,6 @@ skillThree:
             - 50
             - 60
             - 70
-            - 80
-            - 90
         child4:
           componentType: "SelfTarget"
           child1:
@@ -231,8 +203,6 @@ skillThree:
                 - 5.5
                 - 6
                 - 6.5
-                - 7
-                - 8
             child2:
               componentType: "SoundMechanic"
               goaSound: "SKILL_STUN_HIT"
@@ -246,11 +216,7 @@ skillPassive:
     - 0
     - 0
     - 0
-    - 0
-    - 0
   cooldowns:
-    - 10
-    - 10
     - 10
     - 10
     - 10
@@ -260,8 +226,6 @@ skillPassive:
     child1:
       componentType: "SavedEntitySpawnTrigger"
       cooldowns:
-        - 10
-        - 10
         - 10
         - 10
         - 10
@@ -276,8 +240,6 @@ skillPassive:
           - 7
           - 8
           - 9
-          - 10
-          - 12
         child1:
           componentType: "SelfTarget"
           child1:
@@ -301,9 +263,7 @@ skillPassive:
                   - 5
                   - 5.5
                   - 6
-                  - 6.5
                   - 7
-                  - 8
                 child1:
                   componentType: "HealMechanic"
                   healAmountList:
@@ -311,8 +271,6 @@ skillPassive:
                     - 50
                     - 200
                     - 325
-                    - 450
-                    - 720
               child2:
                 componentType: "ParticleMechanic"
                 type: "HEART"
@@ -323,8 +281,6 @@ skillPassive:
                   - 5.5
                   - 6
                   - 6.5
-                  - 7
-                  - 8
               child3:
                 componentType: "SoundMechanic"
                 goaSound: "SKILL_HEAL"
@@ -339,11 +295,7 @@ skillUltimate:
     - 12
     - 14
     - 16
-    - 18
-    - 20
   cooldowns:
-    - 14
-    - 14
     - 14
     - 14
     - 14
@@ -366,8 +318,6 @@ skillUltimate:
           - 4.75
           - 5
           - 5.25
-          - 5.5
-          - 6
         child1:
           componentType: "PushMechanic"
           pushType: "FIXED"
@@ -376,8 +326,6 @@ skillUltimate:
             - 2.8
             - 3
             - 3.2
-            - 3.5
-            - 4
           centerSelf: true
           offsetY: -0.8
       child2:
@@ -390,8 +338,6 @@ skillUltimate:
           - 4.75
           - 5
           - 5.25
-          - 5.5
-          - 6
       child3:
         componentType: "DelayMechanic"
         ticks: 10
@@ -406,8 +352,6 @@ skillUltimate:
             - 4.75
             - 5
             - 5.25
-            - 5.5
-            - 6
           child1:
             componentType: "SavedEntitiesTarget"
             allies: false
@@ -424,8 +368,6 @@ skillUltimate:
                 - -2.8
                 - -3
                 - -3.2
-                - -3.5
-                - -4
               centerSelf: false
               offsetY: 4
       child4:

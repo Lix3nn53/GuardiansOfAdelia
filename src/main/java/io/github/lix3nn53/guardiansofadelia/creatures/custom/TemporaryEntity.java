@@ -1,5 +1,6 @@
-package io.github.lix3nn53.guardiansofadelia.utilities;
+package io.github.lix3nn53.guardiansofadelia.creatures.custom;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.Nearby;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;

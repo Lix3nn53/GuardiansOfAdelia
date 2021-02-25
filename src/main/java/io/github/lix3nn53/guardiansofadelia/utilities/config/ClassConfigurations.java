@@ -164,39 +164,29 @@ public class ClassConfigurations {
         List<Integer> reqLevels = new ArrayList<>();
         if (skillIndex == 0) {
             reqLevels.add(1);
-            reqLevels.add(13);
-            reqLevels.add(25);
-            reqLevels.add(37);
-            reqLevels.add(49);
-            reqLevels.add(61);
-        } else if (skillIndex == 1) {
-            reqLevels.add(8);
+            reqLevels.add(10);
             reqLevels.add(20);
-            reqLevels.add(32);
-            reqLevels.add(44);
-            reqLevels.add(56);
-            reqLevels.add(68);
+            reqLevels.add(30);
+        } else if (skillIndex == 1) {
+            reqLevels.add(5);
+            reqLevels.add(15);
+            reqLevels.add(25);
+            reqLevels.add(35);
         } else if (skillIndex == 2) {
-            reqLevels.add(12);
-            reqLevels.add(24);
-            reqLevels.add(36);
-            reqLevels.add(48);
-            reqLevels.add(60);
-            reqLevels.add(72);
+            reqLevels.add(10);
+            reqLevels.add(20);
+            reqLevels.add(30);
+            reqLevels.add(40);
         } else if (skillIndex == 3) {
             reqLevels.add(20);
-            reqLevels.add(35);
+            reqLevels.add(30);
+            reqLevels.add(40);
             reqLevels.add(50);
-            reqLevels.add(60);
-            reqLevels.add(70);
-            reqLevels.add(80);
         } else if (skillIndex == 4) {
             reqLevels.add(40);
             reqLevels.add(50);
             reqLevels.add(60);
             reqLevels.add(70);
-            reqLevels.add(80);
-            reqLevels.add(90);
         }
 
         return reqLevels;
@@ -207,38 +197,28 @@ public class ClassConfigurations {
         if (skillIndex == 0) {
             reqPoints.add(1);
             reqPoints.add(1);
-            reqPoints.add(2);
-            reqPoints.add(2);
-            reqPoints.add(3);
-            reqPoints.add(3);
+            reqPoints.add(1);
+            reqPoints.add(1);
         } else if (skillIndex == 1) {
-            reqPoints.add(2);
-            reqPoints.add(2);
-            reqPoints.add(3);
-            reqPoints.add(3);
-            reqPoints.add(4);
-            reqPoints.add(4);
+            reqPoints.add(1);
+            reqPoints.add(1);
+            reqPoints.add(1);
+            reqPoints.add(1);
         } else if (skillIndex == 2) {
-            reqPoints.add(2);
-            reqPoints.add(2);
-            reqPoints.add(3);
-            reqPoints.add(3);
-            reqPoints.add(4);
-            reqPoints.add(4);
+            reqPoints.add(1);
+            reqPoints.add(1);
+            reqPoints.add(1);
+            reqPoints.add(1);
         } else if (skillIndex == 3) {
             reqPoints.add(2);
-            reqPoints.add(3);
-            reqPoints.add(3);
-            reqPoints.add(4);
-            reqPoints.add(4);
-            reqPoints.add(5);
+            reqPoints.add(2);
+            reqPoints.add(2);
+            reqPoints.add(2);
         } else if (skillIndex == 4) {
-            reqPoints.add(5);
-            reqPoints.add(6);
-            reqPoints.add(7);
-            reqPoints.add(8);
-            reqPoints.add(9);
-            reqPoints.add(10);
+            reqPoints.add(3);
+            reqPoints.add(3);
+            reqPoints.add(3);
+            reqPoints.add(3);
         }
 
         return reqPoints;
