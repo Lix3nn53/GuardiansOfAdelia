@@ -54,13 +54,13 @@ public class LocationTarget extends TargetComponent {
 
         if (temporaryEntities.isEmpty()) return false;
 
-        List<LivingEntity> targetsNew;
+        List<LivingEntity> targetsNew = new ArrayList<>();
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
                 temporaryEntities.addAll(targets);
                 targetsNew = temporaryEntities;
             } else {
-                targetsNew = targets;
+                targetsNew.addAll(targets);
                 targetsNew.addAll(temporaryEntities);
             }
         } else {

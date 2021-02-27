@@ -46,10 +46,18 @@ public class SkillDataManager {
             }
             hashMap.put(key, oldValue + value);
             keyEntityToKeyToValue.put(keyEntity, hashMap);
+            if (keyEntity instanceof Player) {
+                Player player = (Player) keyEntity;
+                player.sendMessage("ValueAdd: " + key + " + " + value + " = " + (oldValue + value));
+            }
         } else {
             HashMap<String, Integer> hashMap = new HashMap<>();
             hashMap.put(key, value);
             keyEntityToKeyToValue.put(keyEntity, hashMap);
+            if (keyEntity instanceof Player) {
+                Player player = (Player) keyEntity;
+                player.sendMessage("ValueAdd: " + key + " + " + value + " = " + value);
+            }
         }
     }
 

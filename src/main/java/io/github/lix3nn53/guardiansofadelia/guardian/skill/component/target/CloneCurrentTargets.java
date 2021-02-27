@@ -1,7 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
+import io.github.lix3nn53.guardiansofadelia.creatures.custom.TemporaryEntity;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
-import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
@@ -12,54 +13,40 @@ import java.util.List;
  * Applies child components to the closest all nearby entities around
  * each of the current targets.
  */
-public class ConeTarget extends TargetComponent {
+public class CloneCurrentTargets extends TargetComponent {
 
-    private final List<Double> angleList;
-    private final List<Double> rangeList;
-
-    public ConeTarget(ConfigurationSection configurationSection) {
+    public CloneCurrentTargets(ConfigurationSection configurationSection) {
         super(configurationSection);
 
-        if (!configurationSection.contains("angleList")) {
-            configLoadError("angleList");
-        }
-
-        if (!configurationSection.contains("rangeList")) {
-            configLoadError("rangeList");
-        }
-
-        this.angleList = configurationSection.getDoubleList("angleList");
-        this.rangeList = configurationSection.getDoubleList("rangeList");
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
-        List<LivingEntity> cone = new ArrayList<>();
+        List<LivingEntity> temporaryEntities = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            List<LivingEntity> coneTargets = TargetHelper.getConeTargets(target, angleList.get(skillLevel - 1), rangeList.get(skillLevel - 1));
-            cone.addAll(coneTargets);
+            Location location = target.getLocation();
+
+            TemporaryEntity temporaryEntity = new TemporaryEntity(location.clone().add(0, 0.5, 0), caster);
+
+            temporaryEntities.add(temporaryEntity);
         }
 
-        if (cone.isEmpty()) return false;
-
-        cone = determineTargets(caster, cone);
-
-        if (cone.isEmpty()) return false;
+        if (temporaryEntities.isEmpty()) return false;
 
         List<LivingEntity> targetsNew = new ArrayList<>();
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
-                cone.addAll(targets);
-                targetsNew = cone;
+                temporaryEntities.addAll(targets);
+                targetsNew = temporaryEntities;
             } else {
                 targetsNew.addAll(targets);
-                targetsNew.addAll(cone);
+                targetsNew.addAll(temporaryEntities);
             }
         } else {
-            targetsNew = cone;
+            targetsNew = temporaryEntities;
         }
 
         return executeChildren(caster, skillLevel, targetsNew, castCounter);
@@ -67,7 +54,6 @@ public class ConeTarget extends TargetComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        additions.add(ChatColor.YELLOW + "Cone range: " + rangeList);
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

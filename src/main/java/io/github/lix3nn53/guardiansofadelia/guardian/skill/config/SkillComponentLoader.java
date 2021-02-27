@@ -197,6 +197,10 @@ public class SkillComponentLoader {
             return new HeadRotationMechanic();
         } else if (componentType.equals(AbsorptionHeartMechanic.class.getSimpleName())) {
             return new AbsorptionHeartMechanic(configurationSection);
+        } else if (componentType.equals(CloneCurrentTargets.class.getSimpleName())) {
+            return new CloneCurrentTargets(configurationSection);
+        } else if (componentType.equals(ChangeSkillLevelMechanic.class.getSimpleName())) {
+            return new ChangeSkillLevelMechanic(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

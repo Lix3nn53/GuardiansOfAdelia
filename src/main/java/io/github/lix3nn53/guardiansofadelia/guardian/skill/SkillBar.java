@@ -306,4 +306,15 @@ public class SkillBar {
     public HashMap<Integer, Skill> getSkillSet() {
         return this.skillSet;
     }
+
+    public HashMap<Integer, Integer> getInvestedSkillPoints() {
+        return investedSkillPoints;
+    }
+
+    public int getCurrentSkillLevel(int skillIndex) {
+        Skill skill = this.skillSet.get(skillIndex);
+
+        Integer invested = investedSkillPoints.get(skillIndex);
+        return skill.getCurrentSkillLevel(invested);
+    }
 }

@@ -147,7 +147,7 @@ public class ClassConfigurations {
         List<Integer> manaCosts = skillSection.getIntegerList("manaCosts");
         List<Integer> cooldowns = skillSection.getIntegerList("cooldowns");
 
-        Skill skill = new Skill(name, 6, Material.IRON_HOE, customModelData, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill(name, 4, Material.IRON_HOE, customModelData, description, reqLevels, reqPoints, manaCosts, cooldowns);
         SkillComponent triggerComponent = SkillComponentLoader.loadSection(skillSection.getConfigurationSection("trigger"));
         skill.addTrigger(triggerComponent);
 

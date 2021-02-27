@@ -45,13 +45,13 @@ public class SavedCompanionsTarget extends TargetComponent {
 
         if (companions.isEmpty()) return false;
 
-        List<LivingEntity> targetsNew;
+        List<LivingEntity> targetsNew = new ArrayList<>();
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
                 companions.addAll(targets);
                 targetsNew = companions;
             } else {
-                targetsNew = targets;
+                targetsNew.addAll(targets);
                 targetsNew.addAll(companions);
             }
         } else {

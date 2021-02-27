@@ -44,13 +44,13 @@ public class AreaTarget extends TargetComponent {
 
         if (nearby.isEmpty()) return false;
 
-        List<LivingEntity> targetsNew;
+        List<LivingEntity> targetsNew = new ArrayList<>();
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
                 nearby.addAll(targets);
                 targetsNew = nearby;
             } else {
-                targetsNew = targets;
+                targetsNew.addAll(targets);
                 targetsNew.addAll(nearby);
             }
         } else {

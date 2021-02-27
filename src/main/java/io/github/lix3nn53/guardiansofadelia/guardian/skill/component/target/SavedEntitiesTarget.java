@@ -26,13 +26,13 @@ public class SavedEntitiesTarget extends TargetComponent {
 
         if (savedEntities.isEmpty()) return false;
 
-        List<LivingEntity> targetsNew;
+        List<LivingEntity> targetsNew = new ArrayList<>();
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
                 savedEntities.addAll(targets);
                 targetsNew = savedEntities;
             } else {
-                targetsNew = targets;
+                targetsNew.addAll(targets);
                 targetsNew.addAll(savedEntities);
             }
         } else {

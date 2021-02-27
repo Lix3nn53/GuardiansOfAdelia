@@ -1,0 +1,505 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+tier: 3
+color: "LIGHT_PURPLE"
+description:
+  - "The Mage may be frail and weak in body,"
+  - "but that is a worthy sacrifice for"
+  - "the strength of the mind."
+classIconCustomModelData: 16
+attributeTierStrength: 1
+attributeTierSpirit: 4
+attributeTierEndurance: 5
+attributeTierIntelligence: 6
+attributeTierDexterity: 0
+weaponGearTypes:
+  - "WAND"
+  - "DAGGER"
+  - "STAFF"
+armorGearTypes:
+  - "CLOTH_ARMOR"
+  - "FEATHER_ARMOR"
+hasDefaultOffhand: false
+skillOne:
+  name: "Fireball"
+  customModelData: 27
+  description:
+    - "Shoot a fireball that deals damage to"
+    - "targets in area if it hits a target."
+  manaCosts:
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+  cooldowns:
+    - 4
+    - 4
+    - 4
+    - 4
+    - 4
+    - 4
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "ProjectileMechanic"
+      projectileClass: "Fireball"
+      spreadType: "CONE"
+      speed: 1.9
+      amountList:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      angle: 30
+      range: 200
+      mustHitToWork: true
+      child1:
+        componentType: "AreaTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 10
+        radiusList:
+          - 2.5
+          - 2.75
+          - 3
+          - 3.25
+          - 3.5
+          - 4
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "MAGIC"
+          damageList:
+            - 20
+            - 50
+            - 200
+            - 325
+            - 450
+            - 720
+        child2:
+          componentType: "ValueCondition"
+          key: "firespirit"
+          minValue: 4
+          maxValue: 50
+          checkCasterOnly: true
+          child1:
+            componentType: "ChangeSkillLevelMechanic"
+            index: 3
+            child1:
+              componentType: "FireMechanic"
+              ticks:
+                - 80
+                - 90
+                - 100
+                - 120
+          child2:
+            componentType: "SelfTarget"
+            child1:
+              componentType: "ValueSetMechanic"
+              key: "firespirit"
+              values:
+                - 0
+                - 0
+                - 0
+                - 0
+                - 0
+                - 0
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_FIRE_SLASH"
+skillTwo:
+  name: "Lightning Bolt"
+  customModelData: 55
+  description:
+    - "Shoot a lightning bolt that deals damage, silences"
+    - "and confuses targets in area if it hits a target."
+  manaCosts:
+    - 10
+    - 12
+    - 14
+    - 16
+    - 18
+    - 20
+  cooldowns:
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "ConeTarget"
+      allies: false
+      enemy: true
+      self: false
+      max: 15
+      angleList:
+        - 45
+        - 50
+        - 55
+        - 60
+      rangeList:
+        - 3.5
+        - 4
+        - 4.5
+        - 5
+      child1:
+        componentType: "DamageMechanic"
+        damageType: "MAGIC"
+        damageList:
+          - 20
+          - 50
+          - 200
+          - 325
+          - 450
+          - 720
+      child2:
+        componentType: "SelfTarget"
+        child1:
+          componentType: "ParticleMechanic"
+          type: "FLAME"
+          amount: 12
+          upward: 0.5
+          forward: 2
+          radius:
+            - 5
+            - 5.5
+            - 6
+            - 6.5
+      child3:
+        componentType: "SoundMechanic"
+        goaSound: "SKILL_LIGHTNING_NORMAL"
+      child4:
+        componentType: "ValueCondition"
+        key: "firespirit"
+        minValue: 4
+        maxValue: 50
+        checkCasterOnly: true
+        child1:
+          componentType: "ChangeSkillLevelMechanic"
+          index: 3
+          child1:
+            componentType: "FireMechanic"
+            ticks:
+              - 80
+              - 90
+              - 100
+              - 120
+        child2:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "ValueSetMechanic"
+            key: "firespirit"
+            values:
+              - 0
+              - 0
+              - 0
+              - 0
+              - 0
+              - 0
+skillThree:
+  name: "Blasting Warp"
+  customModelData: 44
+  description:
+    - "Push nearby enemies away."
+  manaCosts:
+    - 10
+    - 12
+    - 14
+    - 16
+    - 18
+    - 20
+  cooldowns:
+    - 14
+    - 14
+    - 14
+    - 14
+    - 14
+    - 14
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "CloneCurrentTargets"
+      allies: false
+      enemy: false
+      self: false
+      max: 1
+      child1:
+        componentType: "DelayMechanic"
+        ticks: 20
+        child1:
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 20
+          radiusList:
+            - 8
+            - 9
+            - 10
+            - 11
+            - 12
+            - 14
+          child1:
+            componentType: "DamageMechanic"
+            damageType: "MAGIC"
+            damageList:
+              - 480
+              - 780
+              - 1080
+              - 1440
+          child2:
+            componentType: "ValueCondition"
+            key: "firespirit"
+            minValue: 4
+            maxValue: 50
+            checkCasterOnly: true
+            child1:
+              componentType: "ChangeSkillLevelMechanic"
+              index: 3
+              child1:
+                componentType: "FireMechanic"
+                ticks:
+                  - 80
+                  - 90
+                  - 100
+                  - 120
+            child2:
+              componentType: "SelfTarget"
+              child1:
+                componentType: "ValueSetMechanic"
+                key: "firespirit"
+                values:
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+        child2:
+          componentType: "ParticleMechanic"
+          type: "EXPLOSION_LARGE"
+          amount: 1
+          upward: 0.5
+          radius:
+            - 3
+            - 3.5
+            - 3
+            - 3.25
+            - 3.5
+            - 4
+    child2:
+      componentType: "WarpMechanic"
+      throughWalls: true
+      forwardList:
+        - 7
+        - 8
+        - 9
+        - 10
+      upwardList:
+        - 1
+        - 1
+        - 1
+        - 1
+      rightList:
+        - 0
+        - 0
+        - 0
+        - 0
+skillPassive:
+  name: "Fire Spirit"
+  customModelData: 61
+  description:
+    - "When you took melee damage when"
+    - "your health is low root nearby targets."
+  manaCosts:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  cooldowns:
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+  trigger:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "MagicAttackTrigger"
+      cooldowns:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      child1:
+        componentType: "SelfTarget"
+        child1:
+          componentType: "ValueAddMechanic"
+          key: "firespirit"
+          valueToAdd:
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+skillUltimate:
+  name: "Chaos Meteor"
+  customModelData: 30
+  description:
+    - "Summon a meteor from sky that hits"
+    - "nearby targets when it reaches ground."
+    - ""
+    - "The hit effect deals damage, ignites"
+    - "and launches enemies to the sky."
+  manaCosts:
+    - 50
+    - 55
+    - 60
+    - 65
+    - 70
+    - 75
+  cooldowns:
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "SingleTarget"
+      allies: false
+      enemy: true
+      self: false
+      max: 1
+      ranges:
+        - 24
+        - 24
+        - 24
+        - 24
+        - 24
+        - 24
+      tolerance: 4
+      child1:
+        componentType: "ProjectileMechanic"
+        projectileClass: "Fireball"
+        spreadType: "RAIN"
+        height: 12
+        radius: 8
+        speed: 0.4
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+        range: 200
+        mustHitToWork: false
+        particleType: "FLAME"
+        particleArrangement: "CIRCLE"
+        particleRadius: 2
+        particleAmount: 32
+        isProjectileInvisible: false
+        child1:
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 20
+          radiusList:
+            - 6
+            - 7
+            - 8
+            - 9
+            - 10
+            - 12
+          child1:
+            componentType: "DamageMechanic"
+            damageType: "MAGIC"
+            damageList:
+              - 480
+              - 780
+              - 1080
+              - 1440
+              - 1800
+              - 2400
+          child2:
+            componentType: "LaunchMechanic"
+            relative: "TARGET"
+            forwardSpeedList:
+              - 0
+              - 0
+              - 0
+              - 0
+            upwardSpeedList:
+              - 1.2
+              - 1.4
+              - 1.6
+              - 1.8
+            rightSpeedList:
+              - 0
+              - 0
+              - 0
+              - 0
+          child3:
+            componentType: "ValueCondition"
+            key: "firespirit"
+            minValue: 4
+            maxValue: 50
+            checkCasterOnly: true
+            child1:
+              componentType: "ChangeSkillLevelMechanic"
+              index: 3
+              child1:
+                componentType: "FireMechanic"
+                ticks:
+                  - 80
+                  - 90
+                  - 100
+                  - 120
+            child2:
+              componentType: "SelfTarget"
+              child1:
+                componentType: "ValueSetMechanic"
+                key: "firespirit"
+                values:
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+        child2:
+          componentType: "ParticleMechanic"
+          type: "EXPLOSION_HUGE"
+          amount: 4
+          upward: 1
+          radius:
+            - 3
+            - 3.5
+            - 3
+            - 3.25
+            - 3.5
+            - 4
+        child3:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_FIRE_AURA"

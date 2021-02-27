@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicCom
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class FireMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
+        if (caster instanceof Player) {
+            Player player = (Player) caster;
+            player.sendMessage("FireMechanic skill level: " + skillLevel);
+        }
         for (LivingEntity target : targets) {
             int newTicks = ticks.get(skillLevel - 1) <= 0 ? 0 : Math.max(ticks.get(skillLevel - 1), target.getFireTicks());
 

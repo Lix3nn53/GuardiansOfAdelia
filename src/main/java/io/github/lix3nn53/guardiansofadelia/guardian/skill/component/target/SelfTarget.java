@@ -29,7 +29,7 @@ public class SelfTarget extends TargetComponent {
                 targetsNew.add(caster);
                 targetsNew.addAll(targets);
             } else {
-                targetsNew = targets;
+                targetsNew.addAll(targets);
                 targetsNew.add(caster);
             }
         } else {

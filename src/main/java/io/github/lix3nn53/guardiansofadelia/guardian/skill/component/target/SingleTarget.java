@@ -49,13 +49,13 @@ public class SingleTarget extends TargetComponent {
 
         if (singles.isEmpty()) return false;
 
-        List<LivingEntity> targetsNew;
+        List<LivingEntity> targetsNew = new ArrayList<>();
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
                 singles.addAll(targets);
                 targetsNew = singles;
             } else {
-                targetsNew = targets;
+                targetsNew.addAll(targets);
                 targetsNew.addAll(singles);
             }
         } else {
