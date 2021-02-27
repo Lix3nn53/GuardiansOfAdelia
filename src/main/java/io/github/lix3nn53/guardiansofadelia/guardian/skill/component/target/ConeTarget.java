@@ -6,7 +6,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,20 +49,20 @@ public class ConeTarget extends TargetComponent {
 
         if (cone.isEmpty()) return false;
 
+        List<LivingEntity> targetsNew;
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
-                Collections.reverse(cone);
-                for (LivingEntity single : cone) {
-                    targets.add(0, single);
-                }
+                cone.addAll(targets);
+                targetsNew = cone;
             } else {
-                targets.addAll(cone);
+                targetsNew = targets;
+                targetsNew.addAll(cone);
             }
         } else {
-            targets = cone;
+            targetsNew = cone;
         }
 
-        return executeChildren(caster, skillLevel, targets, castCounter);
+        return executeChildren(caster, skillLevel, targetsNew, castCounter);
     }
 
     @Override

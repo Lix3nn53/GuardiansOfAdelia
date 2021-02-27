@@ -20,16 +20,14 @@ public class ClearDeadTargets extends TargetComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
-        List<LivingEntity> deadTargets = new ArrayList<>();
+        List<LivingEntity> aliveTargets = new ArrayList<>();
         for (LivingEntity target : targets) {
-            if (target.isDead()) {
-                deadTargets.add(target);
+            if (!target.isDead()) {
+                aliveTargets.add(target);
             }
         }
 
-        targets.removeAll(deadTargets);
-
-        return executeChildren(caster, skillLevel, targets, castCounter);
+        return executeChildren(caster, skillLevel, aliveTargets, castCounter);
     }
 
     @Override

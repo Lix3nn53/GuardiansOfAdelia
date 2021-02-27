@@ -44,19 +44,20 @@ public class AreaTarget extends TargetComponent {
 
         if (nearby.isEmpty()) return false;
 
+        List<LivingEntity> targetsNew;
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
-                for (LivingEntity single : nearby) {
-                    targets.add(0, single);
-                }
+                nearby.addAll(targets);
+                targetsNew = nearby;
             } else {
-                targets.addAll(nearby);
+                targetsNew = targets;
+                targetsNew.addAll(nearby);
             }
         } else {
-            targets = nearby;
+            targetsNew = nearby;
         }
 
-        return executeChildren(caster, skillLevel, targets, castCounter);
+        return executeChildren(caster, skillLevel, targetsNew, castCounter);
     }
 
     @Override

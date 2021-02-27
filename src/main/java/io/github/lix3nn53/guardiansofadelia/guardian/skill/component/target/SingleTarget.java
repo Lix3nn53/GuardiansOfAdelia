@@ -6,7 +6,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,20 +49,20 @@ public class SingleTarget extends TargetComponent {
 
         if (singles.isEmpty()) return false;
 
+        List<LivingEntity> targetsNew;
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
-                Collections.reverse(singles);
-                for (LivingEntity single : singles) {
-                    targets.add(0, single);
-                }
+                singles.addAll(targets);
+                targetsNew = singles;
             } else {
-                targets.addAll(singles);
+                targetsNew = targets;
+                targetsNew.addAll(singles);
             }
         } else {
-            targets = singles;
+            targetsNew = singles;
         }
 
-        return executeChildren(caster, skillLevel, targets, castCounter);
+        return executeChildren(caster, skillLevel, targetsNew, castCounter);
     }
 
     @Override

@@ -7,7 +7,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,20 +45,20 @@ public class SavedCompanionsTarget extends TargetComponent {
 
         if (companions.isEmpty()) return false;
 
+        List<LivingEntity> targetsNew;
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
-                Collections.reverse(companions);
-                for (LivingEntity single : companions) {
-                    targets.add(0, single);
-                }
+                companions.addAll(targets);
+                targetsNew = companions;
             } else {
-                targets.addAll(companions);
+                targetsNew = targets;
+                targetsNew.addAll(companions);
             }
         } else {
-            targets = companions;
+            targetsNew = companions;
         }
 
-        return executeChildren(caster, skillLevel, targets, castCounter);
+        return executeChildren(caster, skillLevel, targetsNew, castCounter);
     }
 
     @Override

@@ -9,7 +9,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -55,20 +54,20 @@ public class LocationTarget extends TargetComponent {
 
         if (temporaryEntities.isEmpty()) return false;
 
+        List<LivingEntity> targetsNew;
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
-                Collections.reverse(temporaryEntities);
-                for (LivingEntity single : temporaryEntities) {
-                    targets.add(0, single);
-                }
+                temporaryEntities.addAll(targets);
+                targetsNew = temporaryEntities;
             } else {
-                targets.addAll(temporaryEntities);
+                targetsNew = targets;
+                targetsNew.addAll(temporaryEntities);
             }
         } else {
-            targets = temporaryEntities;
+            targetsNew = temporaryEntities;
         }
 
-        return executeChildren(caster, skillLevel, targets, castCounter);
+        return executeChildren(caster, skillLevel, targetsNew, castCounter);
     }
 
     @Override
