@@ -8,7 +8,7 @@ tier: 3
 color: "YELLOW"
 description:
   - "Engineer"
-classIconCustomModelData: 18
+classIconCustomModelData: 12
 attributeTierStrength: 4
 attributeTierSpirit: 3
 attributeTierEndurance: 5
@@ -55,73 +55,23 @@ skillOne:
       speed: 1.9
       upward: 0.5
       save: true
-    child2:
-      componentType: "DelayMechanic"
-      ticks: 40
       child1:
-        componentType: "RepeatMechanic"
-        period: 20
-        repetitions:
-          - 40
-          - 45
-          - 50
-          - 55
+        componentType: "DelayMechanic"
+        ticks: 40
         child1:
-          componentType: "SavedEntitiesTarget"
-          allies: false
-          enemy: false
-          self: false
-          max: 5
-          armorStand: true
+          componentType: "RepeatMechanic"
+          period: 20
+          repetitions:
+            - 40
+            - 45
+            - 50
+            - 55
           child1:
-            componentType: "ProjectileMechanic"
-            projectileClass: "Arrow"
-            spreadType: "CONE"
-            speed: 2.7
-            amountList:
-              - 1
-              - 1
-              - 1
-              - 1
-            angle: 30
-            range: 200
-            mustHitToWork: true
-            particleType: "REDSTONE"
-            particleArrangement: "CIRCLE"
-            particleRadius: 0.5
-            particleAmount: 4
-            isProjectileInvisible: false
-            dustColor: 16753920
-            dustSize: 2
-            upward: 1
-            child1:
-              componentType: "AreaTarget"
-              allies: false
-              enemy: true
-              self: false
-              max: 30
-              radiusList:
-                - 2
-                - 2.5
-                - 3
-                - 4
-              child1:
-                componentType: "DamageMechanic"
-                damageType: "RANGED"
-                damageList:
-                  - 24
-                  - 60
-                  - 180
-                  - 300
-            child3:
-              componentType: "SoundMechanic"
-              goaSound: "SKILL_WIND_PUSH"
-          child2:
             componentType: "AreaTarget"
             allies: false
             enemy: true
             self: false
-            max: 1
+            max: 2
             keepCurrent: true
             addToBeginning: false
             radiusList:
@@ -131,6 +81,38 @@ skillOne:
               - 14
             child1:
               componentType: "HeadRotationMechanic"
+          child2:
+            componentType: "DelayMechanic"
+            ticks: 5
+            child1:
+              componentType: "ProjectileMechanic"
+              projectileClass: "Arrow"
+              spreadType: "CONE"
+              speed: 2.7
+              amountList:
+                - 1
+                - 1
+                - 1
+                - 1
+              angle: 30
+              range: 200
+              mustHitToWork: true
+              particleType: "REDSTONE"
+              particleArrangement: "CIRCLE"
+              particleRadius: 0.5
+              particleAmount: 4
+              isProjectileInvisible: false
+              dustColor: 16753920
+              dustSize: 2
+              upward: 1
+              child1:
+                componentType: "DamageMechanic"
+                damageType: "RANGED"
+                damageList:
+                  - 24
+                  - 60
+                  - 180
+                  - 300
     child3:
       componentType: "SoundMechanic"
       goaSound: "SKILL_SPLASH"

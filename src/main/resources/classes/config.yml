@@ -6,13 +6,14 @@
 
 classList:
   - "archer"
+  - "engineer"
+  - "fire mage"
+  - "frost mage"
   - "hunter"
   - "knight"
-  - "mage"
   - "monk"
+  - "necromancer"
   - "paladin"
   - "rogue"
-  - "warrior"
   - "shaman"
-  - "necromancer"
-  - "engineer"
+  - "warrior"

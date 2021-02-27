@@ -124,10 +124,10 @@ skillTwo:
           componentType: "SoundMechanic"
           goaSound: "SKILL_SONIC_BOOM"
 skillThree:
-  name: "Totem Slam"
-  customModelData: 20
+  name: "Totem Polymorph"
+  customModelData: 45
   description:
-    - "Stun enemies nearby your totem."
+    - "Transform enemies nearby your totem to sheeps."
   manaCosts:
     - 10
     - 12
@@ -159,11 +159,10 @@ skillThree:
           - 6
           - 6.5
         child1:
-          componentType: "RootMechanic"
-          lockY: true
-          durations:
-            - 40
-            - 50
+          componentType: "DisguiseMechanic"
+          disguiseType: "SHEEP"
+          isAdult: true
+          ticks:
             - 60
             - 70
             - 80
@@ -171,17 +170,17 @@ skillThree:
         child2:
           componentType: "SilenceMechanic"
           durations:
-            - 40
-            - 50
             - 60
             - 70
+            - 80
+            - 90
         child3:
           componentType: "DisarmMechanic"
           durations:
-            - 40
-            - 50
             - 60
             - 70
+            - 80
+            - 90
         child4:
           componentType: "SelfTarget"
           child1:
@@ -196,7 +195,7 @@ skillThree:
               type: "REDSTONE"
               amount: 12
               upward: 1
-              dustColor: 13408512
+              dustColor: 16724991
               dustSize: 8
               radius:
                 - 5
