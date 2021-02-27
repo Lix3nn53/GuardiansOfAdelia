@@ -75,7 +75,7 @@ public class ParticleMechanic extends MechanicComponent {
         this.arrangement = configurationSection.contains("arrangement") ? ParticleArrangement.valueOf(configurationSection.getString("arrangement")) : ParticleArrangement.CIRCLE;
         this.radiusParticle = configurationSection.getDoubleList("radius");
         this.amountParticle = configurationSection.getInt("amount");
-        this.forward = 0;
+        this.forward = configurationSection.contains("forward") ? configurationSection.getDouble("forward") : 0;
         this.upward = configurationSection.contains("upward") ? configurationSection.getDouble("upward") : 0.5;
         this.right = 0;
         this.speed = 0;

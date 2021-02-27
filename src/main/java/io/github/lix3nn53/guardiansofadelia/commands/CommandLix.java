@@ -30,7 +30,6 @@ import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import net.minecraft.server.v1_16_R3.EntityPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -39,7 +38,6 @@ import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -352,16 +350,7 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-                int amount = Integer.parseInt(args[1]);
 
-                CraftPlayer craftPlayer = (CraftPlayer) player;
-                EntityPlayer entityPlayer = craftPlayer.getHandle();
-
-                float absorptionHearts = entityPlayer.getAbsorptionHearts();
-
-                player.sendMessage("absorptionHearts: " + absorptionHearts);
-
-                entityPlayer.setAbsorptionHearts(amount);
             }
 
             // If the player (or console) uses our command correct, we can return true

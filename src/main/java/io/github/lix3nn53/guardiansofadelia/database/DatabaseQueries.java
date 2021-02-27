@@ -483,14 +483,21 @@ public class DatabaseQueries {
                     player.getInventory().setArmorContents(itemStacks);
                 }
 
-                rpgCharacter.getRpgCharacterStats().recalculateEquipment(rpgCharacter.getRpgClassStr());
-                rpgCharacter.getRpgCharacterStats().recalculateRPGInventory(rpgCharacter.getRpgInventory());
+                String rpgClassStr = rpgCharacter.getRpgClassStr();
+
+                // Escape IllegalStateException: Asynchronous effect add!
+                Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                    rpgCharacterStats.recalculateEquipment(rpgClassStr);
+                });
+
+                rpgCharacterStats.recalculateRPGInventory(rpgCharacter.getRpgInventory());
             }
             resultSet.close();
             pst.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return rpgCharacter;
     }
 

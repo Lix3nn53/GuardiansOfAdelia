@@ -322,6 +322,14 @@ public class ProjectileMechanic extends MechanicComponent {
                         GuardiansOfAdelia.getInstance().getLogger().info("piercing");
                         ((Arrow) p).setPierceLevel(piercing);
                     }*/
+                    /*if (projectile instanceof Arrow) {
+                        ((Arrow) projectile).setPierceLevel(5);
+                        ((Arrow) projectile).setShotFromCrossbow(true);
+                        if (caster instanceof Player) {
+                            Player player = (Player) caster;
+                            player.sendMessage("TEST setPierceLevel");
+                        }
+                    }*/
 
                     projectile.setVelocity(d.multiply(speed));
                     projectiles.add(projectile);
