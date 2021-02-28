@@ -4,8 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangement;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementFillCircle;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -92,11 +91,12 @@ public class LootChest {
 
         Location add = location.clone().add(0.5, 1.2, 0.5);
 
+        ArrangementFillCircle arrangementFillCircle = new ArrangementFillCircle(Particle.CRIT, 0.5, 4, null, Direction.XZ);
+
         particleTask = new BukkitRunnable() {
             @Override
             public void run() {
-                ParticleUtil.play(add, Particle.CRIT, ParticleArrangement.CIRCLE, 0.5, 4,
-                        Direction.XZ, 0, 0, 0, 0, null);
+                arrangementFillCircle.play(add);
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 20, 20L);
     }

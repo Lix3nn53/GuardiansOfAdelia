@@ -30,10 +30,8 @@ import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -44,6 +42,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -351,6 +350,88 @@ public class CommandLix implements CommandExecutor {
                 }
             } else if (args[0].equals("test")) {
 
+                // Sphere
+                /*for (int i = 0; i < density; i++) {
+                    double u = Math.random();
+                    double v = Math.random();
+                    double theta = 2 * Math.PI * u;
+                    double phi = Math.acos(2 * v - 1);
+                    double dx = radius * Math.sin(phi) * Math.cos(theta);
+                    double dy = radius * Math.sin(phi) * Math.sin(theta);
+                    double dz = radius * Math.cos(phi);
+                    Location add = location.clone().add(dx, dy, dz);
+                    ParticleUtil.playSingleParticle(add, Particle.FLAME, 0,0, 0, 0, null);
+                }*/
+
+                // Cylinder
+                /*for (int i = 0; i < density; i++) {
+                    double u = Math.random();
+                    double theta = 2 * Math.PI * u;
+                    double dx = radius * Math.cos(theta);
+                    double dy = 0;
+                    double dz = radius * Math.sin(theta);
+                    //double dy = radius * Math.sin(theta);
+                    Location add = location.clone().add(dx, dy, dz);
+                    ParticleUtil.playSingleParticle(add, Particle.FLAME, 0,0, 0, 0, null);
+                }*/
+
+                // cylinder with rotation
+
+                double radius = Double.parseDouble(args[1]);
+                int density = Integer.parseInt(args[2]); // particle count
+
+                Location location = player.getEyeLocation();
+                Vector dir = location.getDirection().normalize();
+                Vector UP = new Vector(0, 1, 0);
+                float angle = dir.angle(UP);
+                player.sendMessage("angle: " + angle);
+
+                for (int i = 0; i < density; i++) {
+                    double u = Math.random();
+                    double theta = 2 * Math.PI * u;
+                    double dx = radius * Math.cos(theta);
+                    double dy = 0;
+                    double dz = radius * Math.sin(theta);
+                    //double dy = radius * Math.sin(theta);
+                    Location add = location.clone().add(dx, dy, dz);
+                    ParticleUtil.playSingleParticle(add, Particle.FLAME, null);
+                }
+
+                // Draw lines between targets
+                /*
+                List<Entity> nearbyEntities = player.getNearbyEntities(9, 9, 9);
+                for (int i = 0; i < nearbyEntities.size() - 1; i++) {
+                    Entity entity = nearbyEntities.get(i);
+                    Location start = entity.getLocation();
+
+                    Entity entityEnd = nearbyEntities.get(i + 1);
+                    Location end = entityEnd.getLocation();
+
+                    Vector vector = end.clone().subtract(start.add(0, 0.5, 0)).add(0, 0.5, 0).toVector();
+
+                    double length = vector.length();
+                    Vector dir = vector.normalize();
+                    double gap = 0.5;
+
+                    for (double y = 0; y < length; y += gap) {
+                        Vector multiply = dir.clone().multiply(y);// multiply
+                        Location add = start.clone().add(multiply);// add
+                        // display particle at 'start' (display)
+                        ParticleUtil.playSingleParticle(add, Particle.FLAME, 0,0, 0, 0, null);
+                    }
+                }*/
+
+                // Draw a line of vector
+                /*Location start = player.getEyeLocation();
+                Vector dir = start.getDirection().normalize();
+                double length = 20;
+                double gap = 0.5;
+                for (double i = 0; i < length; i += gap) {
+                    Vector multiply = dir.clone().multiply(i);// multiply
+                    Location add = start.clone().add(multiply);// add
+                    // display particle at 'start' (display)
+                    ParticleUtil.playSingleParticle(add, Particle.FLAME, 0,0, 0, 0, null);
+                }*/
             }
 
             // If the player (or console) uses our command correct, we can return true
