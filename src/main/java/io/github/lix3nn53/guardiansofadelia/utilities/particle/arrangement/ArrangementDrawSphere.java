@@ -9,11 +9,13 @@ public class ArrangementDrawSphere extends ArrangementSingle {
 
     private final double radius;
     private final int amount;
+    private final int amounty;
 
-    public ArrangementDrawSphere(Particle particle, double radius, int amount, Particle.DustOptions dustOptions) {
+    public ArrangementDrawSphere(Particle particle, double radius, int amount, int amounty, Particle.DustOptions dustOptions) {
         super(particle, dustOptions);
         this.radius = radius;
         this.amount = amount;
+        this.amounty = amounty;
     }
 
     public ArrangementDrawSphere(ConfigurationSection configurationSection) {
@@ -27,17 +29,22 @@ public class ArrangementDrawSphere extends ArrangementSingle {
             configLoadError("amount");
         }
 
+        if (!configurationSection.contains("amounty")) {
+            configLoadError("amounty");
+        }
+
         this.radius = configurationSection.getDouble("radius");
         this.amount = configurationSection.getInt("amount");
+        this.amounty = configurationSection.getInt("amounty");
     }
 
     @Override
     public void play(Location location) {
-        ParticleUtil.drawSphere(location, particle, radius, amount, dustOptions);
+        ParticleUtil.drawSphere(location, particle, radius, amount, amounty, dustOptions);
     }
 
     @Override
     public void play(Location location, double radius) {
-        ParticleUtil.drawSphere(location, particle, radius, amount, dustOptions);
+        ParticleUtil.drawSphere(location, particle, radius, amount, amounty, dustOptions);
     }
 }

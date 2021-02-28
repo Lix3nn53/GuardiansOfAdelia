@@ -78,7 +78,7 @@ skillOne:
             arrangementType: "DrawCylinder"
             particleType: "VILLAGER_ANGRY"
             radius: 2.5
-            amount: 30
+            amount: 24
           radius:
             - 2.5
             - 3

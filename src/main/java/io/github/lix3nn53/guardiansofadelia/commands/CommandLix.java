@@ -16,9 +16,6 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
@@ -32,7 +29,6 @@ import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.config.ClassConfigurations;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
 import org.bukkit.*;
@@ -46,11 +42,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class CommandLix implements CommandExecutor {
 
@@ -354,91 +348,50 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-
-                // Sphere
-                /*for (int i = 0; i < density; i++) {
-                    double u = Math.random();
-                    double v = Math.random();
-                    double theta = 2 * Math.PI * u;
-                    double phi = Math.acos(2 * v - 1);
-                    double dx = radius * Math.sin(phi) * Math.cos(theta);
-                    double dy = radius * Math.sin(phi) * Math.sin(theta);
-                    double dz = radius * Math.cos(phi);
-                    Location add = location.clone().add(dx, dy, dz);
-                    ParticleUtil.playSingleParticle(add, Particle.FLAME, 0,0, 0, 0, null);
-                }*/
-
-                // Cylinder
-                /*for (int i = 0; i < density; i++) {
-                    double u = Math.random();
-                    double theta = 2 * Math.PI * u;
-                    double dx = radius * Math.cos(theta);
-                    double dy = 0;
-                    double dz = radius * Math.sin(theta);
-                    //double dy = radius * Math.sin(theta);
-                    Location add = location.clone().add(dx, dy, dz);
-                    ParticleUtil.playSingleParticle(add, Particle.FLAME, 0,0, 0, 0, null);
-                }*/
-
-                // cylinder with rotation
+                Location center = player.getLocation().clone().add(0, player.getHeight() / 2, 0);
 
                 double radius = Double.parseDouble(args[1]);
-                int density = Integer.parseInt(args[2]); // particle count
+                int amount = Integer.parseInt(args[2]);
+                int amounty = Integer.parseInt(args[3]);
 
-                Location location = player.getEyeLocation();
-                Vector dir = location.getDirection().normalize();
-                Vector UP = new Vector(0, 1, 0);
-                float angle = dir.angle(UP);
-                player.sendMessage("angle: " + angle);
+                double fullRadian = 2 * Math.PI;
 
-                for (int i = 0; i < density; i++) {
-                    double u = Math.random();
-                    double theta = 2 * Math.PI * u;
+                /*for (double i = 0; i < amount; i++) {
+                    double percent = i / amount;
+                    double theta = fullRadian * percent;
+                    player.sendMessage("Math.PI: " + Math.PI);
+                    player.sendMessage("theta: " + theta);
                     double dx = radius * Math.cos(theta);
+                    player.sendMessage("dx: " + dx);
                     double dy = 0;
+                    *//*if (height > 0) {
+                        double v = Math.random();
+                        dy = height * v;
+                    }*//*
                     double dz = radius * Math.sin(theta);
+                    player.sendMessage("dz: " + dz);
                     //double dy = radius * Math.sin(theta);
-                    Location add = location.clone().add(dx, dy, dz);
+                    Location add = center.clone().add(dx, dy, dz);
                     ParticleUtil.playSingleParticle(add, Particle.FLAME, null);
-                }
+                }*/
 
-                // Draw lines between targets
-                /*
-                List<Entity> nearbyEntities = player.getNearbyEntities(9, 9, 9);
-                for (int i = 0; i < nearbyEntities.size() - 1; i++) {
-                    Entity entity = nearbyEntities.get(i);
-                    Location start = entity.getLocation();
+                for (double i = 0; i < amount; i++) {
+                    for (double y = 0; y < amounty; y++) {
+                        double percent = i / amount;
+                        double percenty = y / amounty;
 
-                    Entity entityEnd = nearbyEntities.get(i + 1);
-                    Location end = entityEnd.getLocation();
-
-                    Vector vector = end.clone().subtract(start.add(0, 0.5, 0)).add(0, 0.5, 0).toVector();
-
-                    double length = vector.length();
-                    Vector dir = vector.normalize();
-                    double gap = 0.5;
-
-                    for (double y = 0; y < length; y += gap) {
-                        Vector multiply = dir.clone().multiply(y);// multiply
-                        Location add = start.clone().add(multiply);// add
-                        // display particle at 'start' (display)
-                        ParticleUtil.playSingleParticle(add, Particle.FLAME, 0,0, 0, 0, null);
+                        double v = 1 * percenty;
+                        double theta = fullRadian * percent;
+                        double phi = Math.acos(2 * v - 1);
+                        double dx = radius * Math.sin(phi) * Math.cos(theta);
+                        double dy = radius * Math.cos(phi);
+                        double dz = radius * Math.sin(phi) * Math.sin(theta);
+                        Location add = center.clone().add(dx, dy, dz);
+                        ParticleUtil.playSingleParticle(add, Particle.FLAME, null);
                     }
-                }*/
-
-                // Draw a line of vector
-                /*Location start = player.getEyeLocation();
-                Vector dir = start.getDirection().normalize();
-                double length = 20;
-                double gap = 0.5;
-                for (double i = 0; i < length; i += gap) {
-                    Vector multiply = dir.clone().multiply(i);// multiply
-                    Location add = start.clone().add(multiply);// add
-                    // display particle at 'start' (display)
-                    ParticleUtil.playSingleParticle(add, Particle.FLAME, 0,0, 0, 0, null);
-                }*/
+                }
             } else if (args[0].equals("reload")) {
-                ClassConfigurations.loadConfigs();
+                /*ClassConfigurations.loadConfigs();
                 player.sendMessage("Reloaded class configs!");
                 Set<Player> onlinePlayers = GuardianDataManager.getOnlinePlayers();
                 for (Player onlinePlayer : onlinePlayers) {
@@ -452,7 +405,7 @@ public class CommandLix implements CommandExecutor {
                     SkillBar skillBar = activeCharacter.getSkillBar();
                     skillBar.reloadSkillSet(rpgClass.getSkillSet());
                 }
-                player.sendMessage("Reloaded player skills!");
+                player.sendMessage("Reloaded player skills!");*/
             }
 
             // If the player (or console) uses our command correct, we can return true

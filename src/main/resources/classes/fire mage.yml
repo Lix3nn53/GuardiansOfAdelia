@@ -292,7 +292,8 @@ skillThree:
             arrangementType: "DrawSphere"
             particleType: "FLAME"
             radius: 2.5
-            amount: 70
+            amount: 24
+            amounty: 12
           radius:
             - 2.5
             - 2.75
