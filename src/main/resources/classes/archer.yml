@@ -60,13 +60,12 @@ skillOne:
       angle: 30
       range: 200
       mustHitToWork: true
-      particleType: "REDSTONE"
-      particleArrangement: "CIRCLE"
-      particleRadius: 0.5
-      particleAmount: 4
       isProjectileInvisible: false
-      dustColor: 65280
-      dustSize: 2
+      particle:
+        arrangementType: "Single"
+        particleType: "REDSTONE"
+        dustColor: 65280
+        dustSize: 2
       child1:
         componentType: "FilterCurrentTargets"
         allies: false
@@ -143,9 +142,28 @@ skillTwo:
         - 4
     child2:
       componentType: "ParticleMechanic"
-      type: "EXPLOSION_HUGE"
-      amount: 2
-      upward: 0.5
+      particle:
+        arrangementType: "FillCircle"
+        particleType: "EXPLOSION_HUGE"
+        radius: 3
+        amount: 2
+        direction: "XZ"
+      radius:
+        - 3
+        - 3.5
+        - 3
+        - 3.25
+    child3:
+      componentType: "ParticleAnimationMechanic"
+      particle:
+        arrangementType: "FillCircle"
+        particleType: "REDSTONE"
+        radius: 1
+        amount: 4
+        direction: "XZ"
+        dustColor: 65535
+        dustSize: 8
+      frequency: 5
       radius:
         - 3
         - 3.5
@@ -153,12 +171,6 @@ skillTwo:
         - 3.25
         - 3.5
         - 4
-    child3:
-      componentType: "ParticleAnimationMechanic"
-      type: "REDSTONE"
-      radius: 1
-      amount: 4
-      frequency: 5
       repeatAmount:
         - 12
         - 14
@@ -166,8 +178,6 @@ skillTwo:
         - 18
         - 20
         - 24
-      dustColor: 65535
-      dustSize: 8
     child4:
       componentType: "SoundMechanic"
       goaSound: "SKILL_SONIC_BOOM"
@@ -219,17 +229,23 @@ skillThree:
         - 0
     child2:
       componentType: "ParticleAnimationMechanic"
-      type: "SPELL_WITCH"
-      radius: 1.2
-      amount: 12
+      particle:
+        arrangementType: "FillCircle"
+        particleType: "SPELL_WITCH"
+        radius: 1.2
+        amount: 12
+        direction: "XZ"
       frequency: 5
+      radius:
+        - 1.2
+        - 1.2
+        - 1.2
+        - 1.2
       repeatAmount:
         - 20
         - 25
         - 30
         - 35
-        - 40
-        - 50
     child3:
       componentType: "ImmunityMechanic"
       damageCause: "FALL"
@@ -407,18 +423,20 @@ skillUltimate:
           mustHitToWork: false
           child1:
             componentType: "ParticleMechanic"
-            type: "REDSTONE"
-            amount: 21
-            upward: 1
-            dustColor: 16753920
-            dustSize: 2
+            particle:
+              arrangementType: "FillCircle"
+              particleType: "REDSTONE"
+              radius: 8
+              amount: 21
+              direction: "XZ"
+              dustColor: 16753920
+              dustSize: 2
             radius:
-              - 3
-              - 3.5
-              - 3
-              - 3.25
-              - 3.5
-              - 4
+              - 8
+              - 8
+              - 8
+              - 8
+            upward: 0.8
           child2:
             componentType: "AreaTarget"
             allies: false

@@ -167,15 +167,17 @@ skillTwo:
         componentType: "SelfTarget"
         child1:
           componentType: "ParticleMechanic"
-          type: "FLAME"
-          amount: 12
-          upward: 0.5
-          forward: 2
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "FLAME"
+            radius: 2.5
+            amount: 2
+            direction: "XZ"
           radius:
-            - 5
-            - 5.5
-            - 6
-            - 6.5
+            - 2.5
+            - 2.75
+            - 3
+            - 3.5
       child3:
         componentType: "SoundMechanic"
         goaSound: "SKILL_LIGHTNING_NORMAL"
@@ -244,12 +246,10 @@ skillThree:
           self: false
           max: 20
           radiusList:
-            - 8
-            - 9
-            - 10
-            - 11
-            - 12
-            - 14
+            - 2.5
+            - 2.75
+            - 3
+            - 3.5
           child1:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
@@ -288,16 +288,16 @@ skillThree:
                   - 0
         child2:
           componentType: "ParticleMechanic"
-          type: "EXPLOSION_LARGE"
-          amount: 1
-          upward: 0.5
+          particle:
+            arrangementType: "DrawSphere"
+            particleType: "FLAME"
+            radius: 2.5
+            amount: 70
           radius:
+            - 2.5
+            - 2.75
             - 3
             - 3.5
-            - 3
-            - 3.25
-            - 3.5
-            - 4
     child2:
       componentType: "WarpMechanic"
       throughWalls: true
@@ -414,10 +414,12 @@ skillUltimate:
           - 1
         range: 200
         mustHitToWork: false
-        particleType: "FLAME"
-        particleArrangement: "CIRCLE"
-        particleRadius: 2
-        particleAmount: 32
+        particle:
+          arrangementType: "FillCircle"
+          particleType: "FLAME"
+          radius: 2
+          amount: 9
+          direction: "XZ"
         isProjectileInvisible: false
         child1:
           componentType: "AreaTarget"
@@ -490,16 +492,17 @@ skillUltimate:
                   - 0
         child2:
           componentType: "ParticleMechanic"
-          type: "EXPLOSION_HUGE"
-          amount: 4
-          upward: 1
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "EXPLOSION_HUGE"
+            radius: 3
+            amount: 4
+            direction: "XZ"
           radius:
             - 3
             - 3.5
             - 3
             - 3.25
-            - 3.5
-            - 4
         child3:
           componentType: "SoundMechanic"
           goaSound: "SKILL_FIRE_AURA"

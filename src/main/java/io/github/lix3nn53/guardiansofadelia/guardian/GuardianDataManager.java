@@ -35,7 +35,7 @@ public class GuardianDataManager {
         onlineGuardians.remove(player);
     }
 
-    public static Set<Player> getOnlineUUIDs() {
+    public static Set<Player> getOnlinePlayers() {
         return onlineGuardians.keySet();
     }
 

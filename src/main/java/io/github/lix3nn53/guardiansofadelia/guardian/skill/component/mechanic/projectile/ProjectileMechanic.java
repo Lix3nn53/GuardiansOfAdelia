@@ -444,7 +444,7 @@ public class ProjectileMechanic extends MechanicComponent {
                     cancel();
                 }
             }
-        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 1L, 3L);
+        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 1L, 2L);
     }
 
     public void setAddCasterAsFirstTargetIfHitSuccess(boolean addCasterAsFirstTargetIfHitSuccess) {

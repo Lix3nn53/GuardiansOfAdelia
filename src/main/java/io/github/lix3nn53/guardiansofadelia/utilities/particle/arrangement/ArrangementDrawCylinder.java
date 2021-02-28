@@ -29,13 +29,10 @@ public class ArrangementDrawCylinder extends ArrangementSingle {
             configLoadError("amount");
         }
 
-        if (!configurationSection.contains("height")) {
-            configLoadError("height");
-        }
-
         this.radius = configurationSection.getDouble("radius");
         this.amount = configurationSection.getInt("amount");
-        this.height = configurationSection.getDouble("height");
+        this.height = configurationSection.contains("height") ? configurationSection.getDouble("height") : 0;
+
     }
 
     @Override

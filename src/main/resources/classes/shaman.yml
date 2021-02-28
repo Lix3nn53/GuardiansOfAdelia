@@ -112,9 +112,12 @@ skillTwo:
               - 325
         child2:
           componentType: "ParticleMechanic"
-          type: "VILLAGER_ANGRY"
-          amount: 12
-          upward: 1
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "VILLAGER_ANGRY"
+            radius: 5
+            amount: 12
+            direction: "XZ"
           radius:
             - 5
             - 5.5
@@ -192,11 +195,14 @@ skillThree:
             armorStand: true
             child1:
               componentType: "ParticleMechanic"
-              type: "REDSTONE"
-              amount: 12
-              upward: 1
-              dustColor: 16724991
-              dustSize: 8
+              particle:
+                arrangementType: "FillCircle"
+                particleType: "REDSTONE"
+                radius: 5
+                amount: 12
+                direction: "XZ"
+                dustColor: 16724991
+                dustSize: 8
               radius:
                 - 5
                 - 5.5
@@ -272,9 +278,12 @@ skillPassive:
                     - 325
               child2:
                 componentType: "ParticleMechanic"
-                type: "HEART"
-                amount: 12
-                upward: 1
+                particle:
+                  arrangementType: "FillCircle"
+                  particleType: "HEART"
+                  radius: 5
+                  amount: 12
+                  direction: "XZ"
                 radius:
                   - 5
                   - 5.5
@@ -329,9 +338,12 @@ skillUltimate:
           offsetY: -0.8
       child2:
         componentType: "ParticleMechanic"
-        type: "EXPLOSION_LARGE"
-        amount: 1
-        upward: 0.5
+        particle:
+          arrangementType: "FillCircle"
+          particleType: "EXPLOSION_LARGE"
+          radius: 4.5
+          amount: 1
+          direction: "XZ"
         radius:
           - 4.5
           - 4.75

@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.util.Vector;
@@ -21,7 +22,7 @@ public class ParticleUtil {
     }
 
     public static void playSingleParticle(Location loc, Particle particle, Particle.DustOptions dustOptions) {
-        loc.getWorld().spawnParticle(particle, loc, 1, dustOptions);
+        loc.getWorld().spawnParticle(particle, loc, 1, 0, 0, 0, 0, dustOptions);
     }
 
     /**
@@ -141,6 +142,7 @@ public class ParticleUtil {
     }
 
     public static void drawCylinder(Location center, Particle particle, double radius, int amount, Particle.DustOptions dustOptions, double height) {
+        GuardiansOfAdelia.getInstance().getLogger().info("drawCylinder radius: " + radius);
         for (int i = 0; i < amount; i++) {
             double u = Math.random();
             double theta = 2 * Math.PI * u;

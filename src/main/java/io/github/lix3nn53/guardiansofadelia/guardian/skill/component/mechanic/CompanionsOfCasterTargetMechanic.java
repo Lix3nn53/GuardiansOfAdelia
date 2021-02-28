@@ -30,6 +30,8 @@ public class CompanionsOfCasterTargetMechanic extends ConditionComponent {
 
         List<LivingEntity> companions = mobCode.map(s -> PetManager.getCompanions(owner, s)).orElseGet(() -> PetManager.getCompanions(owner));
 
+        if (companions == null) return false;
+
         LivingEntity target = targets.get(0);
         for (LivingEntity companion : companions) {
             if (!(companion instanceof Mob)) continue;

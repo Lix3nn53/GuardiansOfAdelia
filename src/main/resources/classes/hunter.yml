@@ -60,13 +60,12 @@ skillOne:
       angle: 30
       range: 200
       mustHitToWork: true
-      particleType: "REDSTONE"
-      particleArrangement: "CIRCLE"
-      particleRadius: 0.5
-      particleAmount: 4
+      particle:
+        arrangementType: "Single"
+        particleType: "REDSTONE"
+        dustColor: 16753920
+        dustSize: 2
       isProjectileInvisible: false
-      dustColor: 16753920
-      dustSize: 2
       child1:
         componentType: "AreaTarget"
         allies: false
@@ -103,16 +102,17 @@ skillOne:
           centerSelf: true
       child2:
         componentType: "ParticleMechanic"
-        type: "EXPLOSION_HUGE"
-        amount: 2
-        upward: 0.5
+        particle:
+          arrangementType: "FillCircle"
+          particleType: "EXPLOSION_HUGE"
+          radius: 3
+          amount: 2
+          direction: "XZ"
         radius:
           - 3
           - 3.5
           - 3
           - 3.25
-          - 3.5
-          - 4
       child3:
         componentType: "SoundMechanic"
         goaSound: "SKILL_WIND_PUSH"
@@ -212,13 +212,12 @@ skillThree:
       angle: 30
       range: 90
       mustHitToWork: false
-      particleType: "REDSTONE"
-      particleArrangement: "CIRCLE"
-      particleRadius: 0.5
-      particleAmount: 4
+      particle:
+        arrangementType: "Single"
+        particleType: "REDSTONE"
+        dustColor: 8421504
+        dustSize: 2
       isProjectileInvisible: true
-      dustColor: 8421504
-      dustSize: 2
       addCasterAsFirstTargetIfHitSuccess: true
       addCasterAsSecondTargetIfHitFail: true
       child1:
@@ -341,16 +340,18 @@ skillUltimate:
               - 4.5
             child1:
               componentType: "ParticleMechanic"
-              type: "EXPLOSION_LARGE"
-              amount: 2
-              upward: 0.8
+              particle:
+                arrangementType: "FillCircle"
+                particleType: "EXPLOSION_HUGE"
+                radius: 3
+                amount: 1
+                direction: "XZ"
               radius:
                 - 3
                 - 3.5
                 - 3
                 - 3.25
-                - 3.5
-                - 4
+              upward: 0.8
             child2:
               componentType: "DisarmMechanic"
               durations:

@@ -34,4 +34,8 @@ public class RPGClassManager {
 
         return classes;
     }
+
+    public static void reset() {
+        rpgClassMap.clear();
+    }
 }

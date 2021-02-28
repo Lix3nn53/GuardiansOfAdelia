@@ -15,23 +15,23 @@ public class ParticleArrangementLoader {
             return null;
         }
 
-        componentType += "Arrangement" + componentType;
+        componentType = "Arrangement" + componentType;
 
-        if (componentType.equals(ArrangementDrawCylinder.class.getSimpleName())) {
+        if (componentType.equalsIgnoreCase(ArrangementDrawCylinder.class.getSimpleName())) {
             return new ArrangementDrawCylinder(configurationSection);
-        } else if (componentType.equals(ArrangementDrawLine.class.getSimpleName())) {
+        } else if (componentType.equalsIgnoreCase(ArrangementDrawLine.class.getSimpleName())) {
             return new ArrangementDrawLine(configurationSection);
-        } else if (componentType.equals(ArrangementDrawLineBetween.class.getSimpleName())) {
+        } else if (componentType.equalsIgnoreCase(ArrangementDrawLineBetween.class.getSimpleName())) {
             return new ArrangementDrawLineBetween(configurationSection);
-        } else if (componentType.equals(ArrangementDrawSphere.class.getSimpleName())) {
+        } else if (componentType.equalsIgnoreCase(ArrangementDrawSphere.class.getSimpleName())) {
             return new ArrangementDrawSphere(configurationSection);
-        } else if (componentType.equals(ArrangementFillCircle.class.getSimpleName())) {
+        } else if (componentType.equalsIgnoreCase(ArrangementFillCircle.class.getSimpleName())) {
             return new ArrangementFillCircle(configurationSection);
-        } else if (componentType.equals(ArrangementFillHemisphere.class.getSimpleName())) {
+        } else if (componentType.equalsIgnoreCase(ArrangementFillHemisphere.class.getSimpleName())) {
             return new ArrangementFillHemisphere(configurationSection);
-        } else if (componentType.equals(ArrangementFillSphere.class.getSimpleName())) {
+        } else if (componentType.equalsIgnoreCase(ArrangementFillSphere.class.getSimpleName())) {
             return new ArrangementFillSphere(configurationSection);
-        } else if (componentType.equals(ArrangementSingle.class.getSimpleName())) {
+        } else if (componentType.equalsIgnoreCase(ArrangementSingle.class.getSimpleName())) {
             return new ArrangementSingle(configurationSection);
         }
 

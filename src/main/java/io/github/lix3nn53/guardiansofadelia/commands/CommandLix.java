@@ -16,6 +16,9 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
@@ -29,6 +32,7 @@ import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.config.ClassConfigurations;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
 import org.bukkit.*;
@@ -46,6 +50,7 @@ import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class CommandLix implements CommandExecutor {
 
@@ -432,6 +437,22 @@ public class CommandLix implements CommandExecutor {
                     // display particle at 'start' (display)
                     ParticleUtil.playSingleParticle(add, Particle.FLAME, 0,0, 0, 0, null);
                 }*/
+            } else if (args[0].equals("reload")) {
+                ClassConfigurations.loadConfigs();
+                player.sendMessage("Reloaded class configs!");
+                Set<Player> onlinePlayers = GuardianDataManager.getOnlinePlayers();
+                for (Player onlinePlayer : onlinePlayers) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(onlinePlayer);
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                    if (activeCharacter == null) continue;
+
+                    String rpgClassStr = activeCharacter.getRpgClassStr();
+                    RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
+
+                    SkillBar skillBar = activeCharacter.getSkillBar();
+                    skillBar.reloadSkillSet(rpgClass.getSkillSet());
+                }
+                player.sendMessage("Reloaded player skills!");
             }
 
             // If the player (or console) uses our command correct, we can return true

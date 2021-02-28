@@ -126,13 +126,12 @@ skillTwo:
       angle: 30
       range: 200
       mustHitToWork: true
-      particleType: "REDSTONE"
-      particleArrangement: "CIRCLE"
-      particleRadius: 0.5
-      particleAmount: 4
+      particle:
+        arrangementType: "Single"
+        particleType: "REDSTONE"
+        dustColor: 10040319
+        dustSize: 2
       isProjectileInvisible: false
-      dustColor: 10040319
-      dustSize: 2
       child1:
         componentType: "AreaTarget"
         allies: false
@@ -498,18 +497,19 @@ skillUltimate:
               upward: -0.5
           child2:
             componentType: "ParticleMechanic"
-            type: "REDSTONE"
-            amount: 12
-            upward: 1
-            dustColor: 65535
-            dustSize: 8
+            particle:
+              arrangementType: "DrawCylinder"
+              particleType: "REDSTONE"
+              radius: 5
+              amount: 40
+              dustColor: 65535
+              dustSize: 8
             radius:
               - 5
               - 5.5
               - 6
               - 6.5
-              - 7
-              - 8
+            upward: 1
           child3:
             componentType: "SoundMechanic"
             goaSound: "SKILL_STUN_HIT"

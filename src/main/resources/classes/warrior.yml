@@ -57,8 +57,6 @@ skillOne:
         - 3
         - 3.5
         - 4
-        - 4.5
-        - 5
       child1:
         componentType: "DamageMechanic"
         damageType: "MELEE"
@@ -76,13 +74,14 @@ skillOne:
           goaSound: "SKILL_LIGHTNING_NORMAL"
         child2:
           componentType: "ParticleMechanic"
-          type: "VILLAGER_ANGRY"
-          amount: 20
+          particle:
+            arrangementType: "DrawCylinder"
+            particleType: "VILLAGER_ANGRY"
+            radius: 2.5
+            amount: 30
           radius:
+            - 2.5
             - 3
-            - 3.5
-            - 3
-            - 3.25
             - 3.5
             - 4
 skillTwo:
@@ -122,10 +121,11 @@ skillTwo:
       angle: 30
       range: 200
       mustHitToWork: true
-      particleType: "FLAME"
-      particleArrangement: "CIRCLE"
-      particleRadius: 0.5
-      particleAmount: 4
+      particle:
+        arrangementType: "FillHemisphere"
+        particleType: "FLAME"
+        radius: 0.5
+        amount: 2
       isProjectileInvisible: true
       child1:
         componentType: "FilterCurrentTargets"
@@ -266,16 +266,18 @@ skillThree:
               - 41
         child2:
           componentType: "ParticleMechanic"
-          type: "CRIT"
-          amount: 7
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "CRIT"
+            radius: 5
+            amount: 7
+            direction: "XZ"
           upward: 1.8
           radius:
             - 3
             - 3.5
             - 3
             - 3.25
-            - 3.5
-            - 4
     child2:
       componentType: "SoundMechanic"
       goaSound: "SKILL_BUFF"
@@ -338,19 +340,25 @@ skillPassive:
               - 5
           child3:
             componentType: "ParticleAnimationMechanic"
-            type: "REDSTONE"
-            radius: 1
-            amount: 4
+            particle:
+              arrangementType: "FillCircle"
+              particleType: "REDSTONE"
+              radius: 1
+              amount: 4
+              direction: "XZ"
+              dustColor: 16711680
+              dustSize: 8
             frequency: 5
+            radius:
+              - 1
+              - 1
+              - 1
+              - 1
             repeatAmount:
               - 24
               - 28
               - 32
               - 36
-              - 40
-              - 48
-            dustColor: 16711680
-            dustSize: 8
 skillUltimate:
   name: "Grand Skyfall"
   customModelData: 23
@@ -405,32 +413,41 @@ skillUltimate:
       damageCause: "FALL"
     child4:
       componentType: "ParticleAnimationMechanic"
-      type: "REDSTONE"
-      radius: 1
-      amount: 3
+      particle:
+        arrangementType: "FillCircle"
+        particleType: "REDSTONE"
+        radius: 1
+        amount: 4
+        direction: "XZ"
+        dustColor: 16753920
+        dustSize: 2
       frequency: 4
+      radius:
+        - 1
+        - 1
+        - 1
+        - 1
       repeatAmount:
         - 10
         - 12
         - 14
         - 16
-        - 18
-        - 20
-      dustColor: 16753920
-      dustSize: 2
     child5:
       componentType: "LandTrigger"
       child1:
         componentType: "ParticleMechanic"
-        type: "VILLAGER_ANGRY"
-        amount: 33
+        particle:
+          arrangementType: "DrawCylinder"
+          particleType: "REDSTONE"
+          radius: 8
+          amount: 40
+          dustColor: 16728064
+          dustSize: 4
         radius:
-          - 3
-          - 3.5
-          - 3
-          - 3.25
-          - 3.5
-          - 4
+          - 8
+          - 9
+          - 10
+          - 11
       child2:
         componentType: "SoundMechanic"
         goaSound: "SKILL_POWERFUL_LANDING"

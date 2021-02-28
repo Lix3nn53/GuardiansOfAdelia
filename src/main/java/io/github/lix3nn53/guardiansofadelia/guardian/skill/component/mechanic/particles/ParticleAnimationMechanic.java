@@ -15,6 +15,7 @@ import java.util.List;
 public class ParticleAnimationMechanic extends MechanicComponent {
 
     private final ParticleArrangement particleArrangement;
+    private final List<Double> radiusParticle;
 
     private final double forward;
     private final double upward;
@@ -36,6 +37,7 @@ public class ParticleAnimationMechanic extends MechanicComponent {
         ConfigurationSection particle = configurationSection.getConfigurationSection("particle");
         this.particleArrangement = ParticleArrangementLoader.load(particle);
 
+        this.radiusParticle = configurationSection.getDoubleList("radius");
         this.forward = configurationSection.contains("forward") ? configurationSection.getDouble("forward") : 0.5;
         this.upward = configurationSection.contains("upward") ? configurationSection.getDouble("upward") : 0.5;
         this.right = configurationSection.contains("right") ? configurationSection.getDouble("right") : 0.5;
@@ -48,6 +50,7 @@ public class ParticleAnimationMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
+        double radius = radiusParticle.get(skillLevel - 1);
         for (LivingEntity ent : targets) {
             new BukkitRunnable() {
 
@@ -61,7 +64,7 @@ public class ParticleAnimationMechanic extends MechanicComponent {
                     Vector side = dir.clone().crossProduct(UP);
                     location.add(dir.multiply(forward)).add(0, upward, 0).add(side.multiply(right));
 
-                    particleArrangement.play(location);
+                    particleArrangement.play(location, radius);
 
                     counter++;
                     if (counter >= repeatAmount.get(skillLevel - 1)) {

@@ -32,7 +32,7 @@ public class ClassConfigurations {
         createClassConfigs();
     }
 
-    static void loadConfigs() {
+    public static void loadConfigs() {
         loadClassConfigs();
     }
 
@@ -46,6 +46,7 @@ public class ClassConfigurations {
     }
 
     private static void loadClassConfigs() {
+        RPGClassManager.reset();
         for (String className : classNameToConfiguration.keySet()) {
             GuardiansOfAdelia.getInstance().getLogger().info("className: " + className);
             FileConfiguration fileConfiguration = classNameToConfiguration.get(className);

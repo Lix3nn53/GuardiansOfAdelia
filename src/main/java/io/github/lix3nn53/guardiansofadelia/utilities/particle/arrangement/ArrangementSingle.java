@@ -18,13 +18,18 @@ public class ArrangementSingle implements ParticleArrangement {
     }
 
     public ArrangementSingle(ConfigurationSection configurationSection) {
-        if (!configurationSection.contains("particle")) {
-            configLoadError("particle");
+        if (!configurationSection.contains("particleType")) {
+            configLoadError("particleType");
         }
 
-        this.particle = Particle.valueOf(configurationSection.getString("ranges"));
+        this.particle = Particle.valueOf(configurationSection.getString("particleType"));
+
 
         if (configurationSection.contains("dustColor")) {
+            if (!this.particle.getDataType().equals(Particle.DustOptions.class)) {
+                configLoadError("WRONG DUST OPTIONS");
+            }
+
             int dustColor = configurationSection.getInt("dustColor");
             int dustSize = configurationSection.getInt("dustSize");
 

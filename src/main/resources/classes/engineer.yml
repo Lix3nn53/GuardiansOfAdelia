@@ -97,13 +97,12 @@ skillOne:
               angle: 30
               range: 200
               mustHitToWork: true
-              particleType: "REDSTONE"
-              particleArrangement: "CIRCLE"
-              particleRadius: 0.5
-              particleAmount: 4
+              particle:
+                arrangementType: "Single"
+                particleType: "REDSTONE"
+                dustColor: 16753920
+                dustSize: 2
               isProjectileInvisible: false
-              dustColor: 16753920
-              dustSize: 2
               upward: 1
               child1:
                 componentType: "DamageMechanic"
@@ -209,9 +208,12 @@ skillTwo:
                   delay: 5
         child2:
           componentType: "ParticleMechanic"
-          type: "EXPLOSION_HUGE"
-          amount: 2
-          upward: 0.5
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "EXPLOSION_HUGE"
+            radius: 2.5
+            amount: 2
+            direction: "XZ"
           radius:
             - 2.5
             - 3
@@ -275,11 +277,14 @@ skillThree:
             - 3
           child1:
             componentType: "ParticleMechanic"
-            type: "REDSTONE"
-            amount: 5
-            upward: 0.5
-            dustColor: 3355443
-            dustSize: 2
+            particle:
+              arrangementType: "FillCircle"
+              particleType: "REDSTONE"
+              radius: 1
+              amount: 5
+              direction: "XZ"
+              dustColor: 3355443
+              dustSize: 2
             radius:
               - 1
               - 1
@@ -356,9 +361,12 @@ skillPassive:
               - 4
         child2:
           componentType: "ParticleMechanic"
-          type: "VILLAGER_ANGRY"
-          amount: 12
-          upward: 1
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "VILLAGER_ANGRY"
+            radius: 5
+            amount: 12
+            direction: "XZ"
           radius:
             - 5
             - 5.5
@@ -412,13 +420,12 @@ skillUltimate:
         angle: 30
         range: 200
         mustHitToWork: false
-        particleType: "REDSTONE"
-        particleArrangement: "CIRCLE"
-        particleRadius: 0.5
-        particleAmount: 4
+        particle:
+          arrangementType: "Single"
+          particleType: "REDSTONE"
+          dustColor: 16728064
+          dustSize: 2
         isProjectileInvisible: false
-        dustColor: 16728064
-        dustSize: 2
         disguiseMaterial: "IRON_PICKAXE"
         disguiseCustomModelData: 12
         upward: 1.5
@@ -465,9 +472,12 @@ skillUltimate:
               - 70
           child5:
             componentType: "ParticleMechanic"
-            type: "EXPLOSION_LARGE"
-            amount: 1
-            upward: 0.5
+            particle:
+              arrangementType: "FillCircle"
+              particleType: "EXPLOSION_HUGE"
+              radius: 2.5
+              amount: 2
+              direction: "XZ"
             radius:
               - 2.5
               - 2.75

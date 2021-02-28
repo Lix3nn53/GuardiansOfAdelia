@@ -317,4 +317,9 @@ public class SkillBar {
         Integer invested = investedSkillPoints.get(skillIndex);
         return skill.getCurrentSkillLevel(invested);
     }
+
+    public void reloadSkillSet(HashMap<Integer, Skill> skillSet) {
+        this.skillSet.clear();
+        this.skillSet.putAll(skillSet);
+    }
 }
