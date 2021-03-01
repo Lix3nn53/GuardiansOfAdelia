@@ -1,5 +1,6 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 import io.github.lix3nn53.guardiansofadelia.utilities.math.MatrixHelper;
+import org.bukkit.util.Vector;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,6 +31,11 @@ public class Test {
         System.out.println("result x: " + result[0][0]);
         System.out.println("result y: " + result[1][0]);
         System.out.println("result z: " + result[2][0]);
+
+        double[][] translation = MatrixHelper.translate(result[0][0], result[1][0], result[2][0], new Vector(0, 10, 0));
+
+
+        System.out.println("translation: " + Arrays.deepToString(translation));
 
 
 

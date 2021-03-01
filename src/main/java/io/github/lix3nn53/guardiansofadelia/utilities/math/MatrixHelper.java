@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.math;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.util.Vector;
 
 public class MatrixHelper {
 
@@ -63,5 +64,50 @@ public class MatrixHelper {
         double z = locationMatrix[2][0];
 
         return new Location(world, x, y, z);
+    }
+
+    public static double[][] translationMatrix(double x, double y, double z) {
+        return new double[][]{
+                new double[]{1d, 0d, 0d, x},
+                new double[]{0d, 1d, 0d, y},
+                new double[]{0d, 0d, 1d, z},
+                new double[]{0d, 0d, 0d, 1},
+        };
+    }
+
+    /**
+     * @param x
+     * @param y
+     * @param z
+     * @param vector translate by vector
+     * @return
+     */
+    public static double[][] translate(double x, double y, double z, Vector vector) {
+        double vx = vector.getX();
+        double vy = vector.getY();
+        double vz = vector.getZ();
+
+        double[][] translationMatrix = translationMatrix(vx, vy, vz);
+
+        double[][] doubles = {new double[]{x}, new double[]{y}, new double[]{z}, new double[]{1}};
+
+        double[][] multiply = multiplyMatrices(translationMatrix, doubles);
+
+        return new double[][]{new double[]{multiply[0][0]}, new double[]{multiply[1][0]}, new double[]{multiply[2][0]}};
+    }
+
+    /**
+     * @param location location to translate
+     * @param vector   translate by vector
+     * @return result of translate
+     */
+    public static Location translate(Location location, Vector vector) {
+        double x = location.getX();
+        double y = location.getY();
+        double z = location.getZ();
+
+        double[][] translate = translate(x, y, z, vector);
+
+        return new Location(location.getWorld(), translate[0][0], translate[1][0], translate[2][0]);
     }
 }

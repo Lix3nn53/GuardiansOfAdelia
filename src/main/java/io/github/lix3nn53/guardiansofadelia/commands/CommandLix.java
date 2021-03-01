@@ -43,6 +43,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -382,6 +383,15 @@ public class CommandLix implements CommandExecutor {
                     rotated[i] = MatrixHelper.matrixToLocation(point.getWorld(), result);
                 }
 
+                Location location = player.getLocation();
+                Vector vector = location.toVector();
+
+                Location[] translated = new Location[8];
+                for (int i = 0; i < 8; i++) {
+                    Location point = rotated[i];
+                    translated[i] = MatrixHelper.translate(point, vector);
+                }
+
                 // Corners
                 for (int i = 0; i < 8; i++) {
                     Location point = rotated[i];
@@ -393,6 +403,22 @@ public class CommandLix implements CommandExecutor {
                     ParticleShapes.drawLineBetween(rotated[i], Particle.SOUL_FIRE_FLAME, null, rotated[(i + 1) % 4], 0.1);
                     ParticleShapes.drawLineBetween(rotated[i + 4], Particle.SOUL_FIRE_FLAME, null, rotated[((i + 1) % 4) + 4], 0.1);
                     ParticleShapes.drawLineBetween(rotated[i], Particle.SOUL_FIRE_FLAME, null, rotated[i + 4], 0.1);
+                    /*connect(i, (i + 1) % 4, projected);
+                    connect(i + 4, ((i + 1) % 4) + 4, projected);
+                    connect(i, i + 4, projected);*/
+                }
+
+                // Corners
+                for (int i = 0; i < 8; i++) {
+                    Location point = translated[i];
+                    ParticleShapes.playSingleParticle(point, Particle.FLAME, null);
+                }
+
+                // Edges
+                for (int i = 0; i < 4; i++) {
+                    ParticleShapes.drawLineBetween(translated[i], Particle.SOUL_FIRE_FLAME, null, translated[(i + 1) % 4], 0.1);
+                    ParticleShapes.drawLineBetween(translated[i + 4], Particle.SOUL_FIRE_FLAME, null, translated[((i + 1) % 4) + 4], 0.1);
+                    ParticleShapes.drawLineBetween(translated[i], Particle.SOUL_FIRE_FLAME, null, translated[i + 4], 0.1);
                     /*connect(i, (i + 1) % 4, projected);
                     connect(i + 4, ((i + 1) % 4) + 4, projected);
                     connect(i, i + 4, projected);*/
