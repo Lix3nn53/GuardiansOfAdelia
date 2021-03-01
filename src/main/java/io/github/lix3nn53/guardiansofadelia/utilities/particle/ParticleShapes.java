@@ -178,4 +178,24 @@ public class ParticleShapes {
             }
         }
     }
+
+    public static void drawCube(Location center, Particle particle, Particle.DustOptions dustOptions, double length, int gap) {
+        Location[] points = new Location[8];
+
+        points[0] = center.clone().add(-length, -length, -length);
+        points[1] = center.clone().add(length, -length, -length);
+        points[2] = center.clone().add(length, length, -length);
+        points[3] = center.clone().add(-length, length, -length);
+        points[4] = center.clone().add(-length, -length, length);
+        points[5] = center.clone().add(length, -length, length);
+        points[6] = center.clone().add(length, length, length);
+        points[7] = center.clone().add(-length, length, length);
+
+        // Edges
+        for (int i = 0; i < 4; i++) {
+            ParticleShapes.drawLineBetween(points[i], particle, dustOptions, points[(i + 1) % 4], gap);
+            ParticleShapes.drawLineBetween(points[i + 4], particle, dustOptions, points[((i + 1) % 4) + 4], gap);
+            ParticleShapes.drawLineBetween(points[i], particle, dustOptions, points[i + 4], gap);
+        }
+    }
 }

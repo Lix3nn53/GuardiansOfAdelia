@@ -31,6 +31,7 @@ import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.math.MatrixHelper;
+import io.github.lix3nn53.guardiansofadelia.utilities.math.RotationHelper;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -46,7 +47,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CommandLix implements CommandExecutor {
@@ -356,9 +356,21 @@ public class CommandLix implements CommandExecutor {
                 Location[] points = new Location[8];
 
                 double length = 1;
-                double degrees = Double.parseDouble(args[1]);
+                /*double degrees = Double.parseDouble(args[1]);
                 double radian = degrees * Math.PI / 180;
-                player.sendMessage("radian: " + radian);
+                player.sendMessage("radian: " + radian);*/
+
+                Location eyeLocation = player.getEyeLocation();
+                float yaw = eyeLocation.getYaw();
+                float pitch = eyeLocation.getPitch();
+
+                /*Vector dir = eyeLocation.getDirection().normalize();
+                Vector FRONT = new Vector(1, 0, 0);
+                Vector UP = new Vector(0, 1, 0);
+                Vector RIGHT = new Vector(0, 0, 1);
+                float radianY = dir.angle(FRONT);
+                float radian = dir.angle(RIGHT);
+                player.sendMessage("radian: " + radian);*/
 
                 points[0] = center.clone().add(-length, -length, -length);
                 points[1] = center.clone().add(length, -length, -length);
@@ -371,16 +383,40 @@ public class CommandLix implements CommandExecutor {
 
                 Location[] rotated = new Location[8];
 
-                double[][] rotationY = MatrixHelper.rotationY(radian);
+                /*double[][] rotationX = MatrixHelper.rotationX(radianPitch);
+                double[][] rotationY = MatrixHelper.rotationY(-radianYaw);
+                double[][] rotationZ = MatrixHelper.rotationZ(radianPitch);*/
+
+                // the numbers are the angles on which you want to rotate your animation.
+                double xangle = Math.toRadians(pitch); // note that here we do have to convert to radians.
+                double xAxisCos = Math.cos(xangle); // getting the cos value for the pitch.
+                double xAxisSin = Math.sin(xangle); // getting the sin value for the pitch.
+
+                // DON'T FORGET THE ' - ' IN FRONT OF 'yangle' HERE.
+                //double yangle = Math.toRadians(60); // note that here we do have to convert to radians.
+                double yangle = Math.toRadians(yaw);
+                double yAxisCos = Math.cos(-yangle); // getting the cos value for the yaw.
+                double yAxisSin = Math.sin(-yangle); // getting the sin value for the yaw.
+
+                double zangle = Math.toRadians(30); // note that here we do have to convert to radians.
+                double zAxisCos = Math.cos(zangle); // getting the cos value for the roll.
+                double zAxisSin = Math.sin(zangle); // getting the sin value for the roll.
+
                 for (int i = 0; i < 8; i++) {
                     Location point = points[i];
 
-                    double[][] locationMatrix = MatrixHelper.locationToMatrix(point);
+                    /*double[][] locationMatrix = MatrixHelper.locationToMatrix(point);
 
-                    double[][] result = MatrixHelper.multiplyMatrices(rotationY, locationMatrix);
-                    player.sendMessage(Arrays.deepToString(result));
+                    double[][] result = MatrixHelper.multiplyMatrices(rotationZ, locationMatrix);
 
-                    rotated[i] = MatrixHelper.matrixToLocation(point.getWorld(), result);
+                    rotated[i] = MatrixHelper.matrixToLocation(point.getWorld(), result);*/
+
+                    Vector vector = point.toVector();
+                    RotationHelper.rotateAroundAxisX(vector, xAxisCos, xAxisSin);
+                    RotationHelper.rotateAroundAxisY(vector, yAxisCos, yAxisSin);
+
+                    rotated[i] = vector.toLocation(point.getWorld());
+
                 }
 
                 Location location = player.getLocation();
