@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -41,12 +41,12 @@ public class ArrangementSingle implements ParticleArrangement {
 
     @Override
     public void play(Location location) {
-        ParticleUtil.playSingleParticle(location, particle, dustOptions);
+        ParticleShapes.playSingleParticle(location, particle, dustOptions);
     }
 
     @Override
     public void play(Location location, double extra) {
-        ParticleUtil.playSingleParticle(location, particle, dustOptions);
+        ParticleShapes.playSingleParticle(location, particle, dustOptions);
     }
 
     public void configLoadError(String section) {

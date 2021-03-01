@@ -6,7 +6,7 @@ import org.bukkit.util.Vector;
 
 import java.util.Random;
 
-public class ParticleUtil {
+public class ParticleShapes {
 
     private static final Random random = new Random();
 
@@ -122,12 +122,12 @@ public class ParticleUtil {
             Vector multiply = dir.clone().multiply(i);// multiply
             Location add = start.clone().add(multiply);// add
             // display particle at 'start' (display)
-            ParticleUtil.playSingleParticle(add, particle, dustOptions);
+            ParticleShapes.playSingleParticle(add, particle, dustOptions);
         }
     }
 
     public static void drawLineBetween(Location start, Particle particle, Particle.DustOptions dustOptions, Location end, double gap) {
-        Vector vector = end.clone().subtract(start.add(0, 0.5, 0)).add(0, 0.5, 0).toVector();
+        Vector vector = end.clone().subtract(start).toVector();
 
         double length = vector.length();
         Vector dir = vector.normalize();
@@ -136,7 +136,7 @@ public class ParticleUtil {
             Vector multiply = dir.clone().multiply(y);// multiply
             Location add = start.clone().add(multiply);// add
             // display particle at 'start' (display)
-            ParticleUtil.playSingleParticle(add, particle, dustOptions);
+            ParticleShapes.playSingleParticle(add, particle, dustOptions);
         }
     }
 
@@ -155,7 +155,7 @@ public class ParticleUtil {
             double dz = radius * Math.sin(theta);
             //double dy = radius * Math.sin(theta);
             Location add = center.clone().add(dx, dy, dz);
-            ParticleUtil.playSingleParticle(add, particle, dustOptions);
+            ParticleShapes.playSingleParticle(add, particle, dustOptions);
         }
     }
 
@@ -174,7 +174,7 @@ public class ParticleUtil {
                 double dy = radius * Math.cos(phi);
                 double dz = radius * Math.sin(phi) * Math.sin(theta);
                 Location add = center.clone().add(dx, dy, dz);
-                ParticleUtil.playSingleParticle(add, particle, dustOptions);
+                ParticleShapes.playSingleParticle(add, particle, dustOptions);
             }
         }
     }

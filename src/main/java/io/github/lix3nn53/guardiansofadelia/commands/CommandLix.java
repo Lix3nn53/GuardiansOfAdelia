@@ -30,7 +30,8 @@ import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.math.MatrixHelper;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -44,6 +45,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CommandLix implements CommandExecutor {
@@ -350,45 +352,48 @@ public class CommandLix implements CommandExecutor {
             } else if (args[0].equals("test")) {
                 Location center = player.getLocation().clone().add(0, player.getHeight() / 2, 0);
 
-                double radius = Double.parseDouble(args[1]);
-                int amount = Integer.parseInt(args[2]);
-                int amounty = Integer.parseInt(args[3]);
+                Location[] points = new Location[8];
 
-                double fullRadian = 2 * Math.PI;
+                double length = 1;
+                double angle = Double.parseDouble(args[1]);
 
-                /*for (double i = 0; i < amount; i++) {
-                    double percent = i / amount;
-                    double theta = fullRadian * percent;
-                    player.sendMessage("Math.PI: " + Math.PI);
-                    player.sendMessage("theta: " + theta);
-                    double dx = radius * Math.cos(theta);
-                    player.sendMessage("dx: " + dx);
-                    double dy = 0;
-                    *//*if (height > 0) {
-                        double v = Math.random();
-                        dy = height * v;
-                    }*//*
-                    double dz = radius * Math.sin(theta);
-                    player.sendMessage("dz: " + dz);
-                    //double dy = radius * Math.sin(theta);
-                    Location add = center.clone().add(dx, dy, dz);
-                    ParticleUtil.playSingleParticle(add, Particle.FLAME, null);
-                }*/
+                points[0] = center.clone().add(-length, -length, -length);
+                points[1] = center.clone().add(length, -length, -length);
+                points[2] = center.clone().add(length, length, -length);
+                points[3] = center.clone().add(-length, length, -length);
+                points[4] = center.clone().add(-length, -length, length);
+                points[5] = center.clone().add(length, -length, length);
+                points[6] = center.clone().add(length, length, length);
+                points[7] = center.clone().add(-length, length, length);
 
-                for (double i = 0; i < amount; i++) {
-                    for (double y = 0; y < amounty; y++) {
-                        double percent = i / amount;
-                        double percenty = y / amounty;
+                Location[] rotated = new Location[8];
 
-                        double v = 1 * percenty;
-                        double theta = fullRadian * percent;
-                        double phi = Math.acos(2 * v - 1);
-                        double dx = radius * Math.sin(phi) * Math.cos(theta);
-                        double dy = radius * Math.cos(phi);
-                        double dz = radius * Math.sin(phi) * Math.sin(theta);
-                        Location add = center.clone().add(dx, dy, dz);
-                        ParticleUtil.playSingleParticle(add, Particle.FLAME, null);
-                    }
+                double[][] rotationY = MatrixHelper.rotationY(angle);
+                for (int i = 0; i < 8; i++) {
+                    Location point = points[i];
+
+                    double[][] locationMatrix = MatrixHelper.locationToMatrix(point);
+
+                    double[][] result = MatrixHelper.multiplyMatrices(rotationY, locationMatrix);
+                    player.sendMessage(Arrays.deepToString(result));
+
+                    rotated[i] = MatrixHelper.matrixToLocation(point.getWorld(), result);
+                }
+
+                // Corners
+                for (int i = 0; i < 8; i++) {
+                    Location point = rotated[i];
+                    ParticleShapes.playSingleParticle(point, Particle.FLAME, null);
+                }
+
+                // Edges
+                for (int i = 0; i < 4; i++) {
+                    ParticleShapes.drawLineBetween(rotated[i], Particle.SOUL_FIRE_FLAME, null, rotated[(i + 1) % 4], 0.1);
+                    ParticleShapes.drawLineBetween(rotated[i + 4], Particle.SOUL_FIRE_FLAME, null, rotated[((i + 1) % 4) + 4], 0.1);
+                    ParticleShapes.drawLineBetween(rotated[i], Particle.SOUL_FIRE_FLAME, null, rotated[i + 4], 0.1);
+                    /*connect(i, (i + 1) % 4, projected);
+                    connect(i + 4, ((i + 1) % 4) + 4, projected);
+                    connect(i, i + 4, projected);*/
                 }
             } else if (args[0].equals("reload")) {
                 /*ClassConfigurations.loadConfigs();

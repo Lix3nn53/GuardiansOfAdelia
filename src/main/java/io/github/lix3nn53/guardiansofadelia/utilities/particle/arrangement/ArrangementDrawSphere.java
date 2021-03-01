@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
@@ -40,11 +40,11 @@ public class ArrangementDrawSphere extends ArrangementSingle {
 
     @Override
     public void play(Location location) {
-        ParticleUtil.drawSphere(location, particle, radius, amount, amounty, dustOptions);
+        ParticleShapes.drawSphere(location, particle, radius, amount, amounty, dustOptions);
     }
 
     @Override
     public void play(Location location, double radius) {
-        ParticleUtil.drawSphere(location, particle, radius, amount, amounty, dustOptions);
+        ParticleShapes.drawSphere(location, particle, radius, amount, amounty, dustOptions);
     }
 }

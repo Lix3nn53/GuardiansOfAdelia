@@ -1,8 +1,9 @@
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSet;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import io.github.lix3nn53.guardiansofadelia.utilities.math.MatrixHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,13 +14,33 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException, SQLException {
-        GearSet gearSet = new GearSet("Tutorial", 2);
+        double angle = 30;
+
+        double[][] rotationY = MatrixHelper.rotationY(angle);
+
+        System.out.println("rotationY: " + Arrays.deepToString(rotationY));
+
+        double[][] location = new double[][]{new double[]{5}, new double[]{5}, new double[]{5}};
+
+        System.out.println("location: " + Arrays.deepToString(location));
+
+        double[][] result = MatrixHelper.multiplyMatrices(rotationY, location);
+
+        System.out.println("result: " + Arrays.deepToString(result));
+        System.out.println("result x: " + result[0][0]);
+        System.out.println("result y: " + result[1][0]);
+        System.out.println("result z: " + result[2][0]);
+
+
+
+
+        /*GearSet gearSet = new GearSet("Tutorial", 2);
         GearSet gearSet1 = new GearSet("Tutorial", 2);
         GearSet gearSet2 = new GearSet("Tutorial", 2);
 
         System.out.println("equals: " + gearSet.equals(gearSet1));
         System.out.println("hash1: " + gearSet1.hashCode());
-        System.out.println("hash2: " + gearSet2.hashCode());
+        System.out.println("hash2: " + gearSet2.hashCode());*/
 
         /*int stepCount = 5;
         for (int ticksRun = 0; ticksRun <= 100; ticksRun++) {

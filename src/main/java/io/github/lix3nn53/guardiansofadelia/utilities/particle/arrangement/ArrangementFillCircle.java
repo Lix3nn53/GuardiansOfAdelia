@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
@@ -41,11 +41,11 @@ public class ArrangementFillCircle extends ArrangementSingle {
 
     @Override
     public void play(Location location) {
-        ParticleUtil.fillCircle(location, particle, radius, amount, dustOptions, direction);
+        ParticleShapes.fillCircle(location, particle, radius, amount, dustOptions, direction);
     }
 
     @Override
     public void play(Location location, double radius) {
-        ParticleUtil.fillCircle(location, particle, radius, amount, dustOptions, direction);
+        ParticleShapes.fillCircle(location, particle, radius, amount, dustOptions, direction);
     }
 }

@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleUtil;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
@@ -33,11 +33,11 @@ public class ArrangementFillHemisphere extends ArrangementSingle {
 
     @Override
     public void play(Location location) {
-        ParticleUtil.fillHemisphere(location, particle, radius, amount, dustOptions);
+        ParticleShapes.fillHemisphere(location, particle, radius, amount, dustOptions);
     }
 
     @Override
     public void play(Location location, double radius) {
-        ParticleUtil.fillHemisphere(location, particle, radius, amount, dustOptions);
+        ParticleShapes.fillHemisphere(location, particle, radius, amount, dustOptions);
     }
 }
