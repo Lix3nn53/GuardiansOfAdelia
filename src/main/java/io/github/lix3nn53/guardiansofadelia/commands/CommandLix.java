@@ -350,12 +350,14 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-                Location center = player.getLocation().clone().add(0, player.getHeight() / 2, 0);
+                Location center = new Location(player.getWorld(), 0, 0, 0);
 
                 Location[] points = new Location[8];
 
                 double length = 1;
-                double angle = Double.parseDouble(args[1]);
+                double degrees = Double.parseDouble(args[1]);
+                double radian = degrees * Math.PI / 180;
+                player.sendMessage("radian: " + radian);
 
                 points[0] = center.clone().add(-length, -length, -length);
                 points[1] = center.clone().add(length, -length, -length);
@@ -368,7 +370,7 @@ public class CommandLix implements CommandExecutor {
 
                 Location[] rotated = new Location[8];
 
-                double[][] rotationY = MatrixHelper.rotationY(angle);
+                double[][] rotationY = MatrixHelper.rotationY(radian);
                 for (int i = 0; i < 8; i++) {
                     Location point = points[i];
 
