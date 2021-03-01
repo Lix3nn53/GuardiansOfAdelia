@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.util.Vector;
@@ -142,10 +141,11 @@ public class ParticleUtil {
     }
 
     public static void drawCylinder(Location center, Particle particle, double radius, int amount, Particle.DustOptions dustOptions, double height) {
-        GuardiansOfAdelia.getInstance().getLogger().info("drawCylinder radius: " + radius);
-        for (int i = 0; i < amount; i++) {
-            double u = Math.random();
-            double theta = 2 * Math.PI * u;
+        double fullRadian = 2 * Math.PI;
+
+        for (double i = 0; i < amount; i++) {
+            double percent = i / amount;
+            double theta = fullRadian * percent;
             double dx = radius * Math.cos(theta);
             double dy = 0;
             if (height > 0) {
@@ -159,17 +159,23 @@ public class ParticleUtil {
         }
     }
 
-    public static void drawSphere(Location center, Particle particle, double radius, int amount, Particle.DustOptions dustOptions) {
-        for (int i = 0; i < amount; i++) {
-            double u = Math.random();
-            double v = Math.random();
-            double theta = 2 * Math.PI * u;
-            double phi = Math.acos(2 * v - 1);
-            double dx = radius * Math.sin(phi) * Math.cos(theta);
-            double dy = radius * Math.sin(phi) * Math.sin(theta);
-            double dz = radius * Math.cos(phi);
-            Location add = center.clone().add(dx, dy, dz);
-            ParticleUtil.playSingleParticle(add, particle, dustOptions);
+    public static void drawSphere(Location center, Particle particle, double radius, int amount, int amounty, Particle.DustOptions dustOptions) {
+        double fullRadian = 2 * Math.PI;
+
+        for (double i = 0; i < amount; i++) {
+            for (double y = 0; y < amounty; y++) {
+                double percent = i / amount;
+                double percenty = y / amounty;
+
+                double v = 1 * percenty;
+                double theta = fullRadian * percent;
+                double phi = Math.acos(2 * v - 1);
+                double dx = radius * Math.sin(phi) * Math.cos(theta);
+                double dy = radius * Math.cos(phi);
+                double dz = radius * Math.sin(phi) * Math.sin(theta);
+                Location add = center.clone().add(dx, dy, dz);
+                ParticleUtil.playSingleParticle(add, particle, dustOptions);
+            }
         }
     }
 }
