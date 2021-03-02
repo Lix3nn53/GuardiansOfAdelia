@@ -1,7 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.math.MatrixHelper;
+import io.github.lix3nn53.guardiansofadelia.utilities.math.RotationHelper;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.util.Vector;
 
 import java.util.Random;
@@ -22,6 +25,10 @@ public class ParticleShapes {
 
     public static void playSingleParticle(Location loc, Particle particle, Particle.DustOptions dustOptions) {
         loc.getWorld().spawnParticle(particle, loc, 1, 0, 0, 0, 0, dustOptions);
+    }
+
+    public static void playSingleParticle(World world, Vector vector, Particle particle, Particle.DustOptions dustOptions) {
+        world.spawnParticle(particle, vector.getX(), vector.getY(), vector.getZ(), 1, 0, 0, 0, 0, dustOptions);
     }
 
     /**
@@ -126,23 +133,30 @@ public class ParticleShapes {
         }
     }
 
-    public static void drawLineBetween(Location start, Particle particle, Particle.DustOptions dustOptions, Location end, double gap) {
-        Vector vector = end.clone().subtract(start).toVector();
+    public static void drawLineBetween(World world, Vector start, Particle particle, Particle.DustOptions dustOptions, Vector end, double gap) {
+        Vector vector = end.clone().subtract(start);
 
         double length = vector.length();
         Vector dir = vector.normalize();
 
         for (double y = 0; y < length; y += gap) {
             Vector multiply = dir.clone().multiply(y);// multiply
-            Location add = start.clone().add(multiply);// add
+            Vector add = start.clone().add(multiply);// add
             // display particle at 'start' (display)
-            ParticleShapes.playSingleParticle(add, particle, dustOptions);
+            ParticleShapes.playSingleParticle(world, add, particle, dustOptions);
         }
     }
 
-    public static void drawCylinder(Location center, Particle particle, double radius, int amount, Particle.DustOptions dustOptions, double height) {
+    public static void drawCylinder(Location location, Particle particle, double radius, int amount, Particle.DustOptions dustOptions, double height,
+                                    boolean rotate, float yaw, float pitch) {
         double fullRadian = 2 * Math.PI;
 
+        Location center = rotate ? new Location(location.getWorld(), 0, 0, 0) : location;
+
+        Vector centerVector = center.toVector();
+
+        Vector[] points = new Vector[amount];
+        int index = 0;
         for (double i = 0; i < amount; i++) {
             double percent = i / amount;
             double theta = fullRadian * percent;
@@ -154,8 +168,66 @@ public class ParticleShapes {
             }
             double dz = radius * Math.sin(theta);
             //double dy = radius * Math.sin(theta);
-            Location add = center.clone().add(dx, dy, dz);
-            ParticleShapes.playSingleParticle(add, particle, dustOptions);
+            points[index] = centerVector.clone().add(new Vector(dx, dy, dz));
+            index++;
+        }
+
+        if (rotate) {
+            RotationHelper.rotateYawPitch(points, yaw, pitch);
+
+            Vector translateVector = location.toVector();
+
+            for (Vector point : points) {
+                MatrixHelper.translate(point, translateVector);
+            }
+        }
+
+        World world = center.getWorld();
+
+        for (Vector point : points) {
+            ParticleShapes.playSingleParticle(world, point, particle, dustOptions);
+        }
+    }
+
+    public static void drawCone(Location location, Particle particle, double radius, int amount, int amounty, double phi, Particle.DustOptions dustOptions, double height,
+                                boolean rotate, float yaw, float pitch) {
+        double fullRadian = 2 * Math.PI;
+
+        Location center = rotate ? new Location(location.getWorld(), 0, 0, 0) : location;
+
+        Vector centerVector = center.toVector();
+
+        Vector[] points = new Vector[amount * amounty];
+        int index = 0;
+        for (double i = 0; i < amount; i++) {
+            for (double y = 0; y < amounty; y++) {
+                double percent = i / amount;
+                double percenty = y / amounty;
+
+                double radiusCurrent = radius * percenty;
+                double theta = fullRadian * percent;
+                double dx = radiusCurrent * Math.sin(phi) * Math.cos(theta);
+                double dy = radiusCurrent * Math.cos(phi);
+                double dz = radiusCurrent * Math.sin(phi) * Math.sin(theta);
+                points[index] = centerVector.clone().add(new Vector(dx, dy, dz));
+                index++;
+            }
+        }
+
+        if (rotate) {
+            RotationHelper.rotateYawPitch(points, yaw, pitch);
+
+            Vector translateVector = location.toVector();
+
+            for (Vector point : points) {
+                MatrixHelper.translate(point, translateVector);
+            }
+        }
+
+        World world = center.getWorld();
+
+        for (Vector point : points) {
+            ParticleShapes.playSingleParticle(world, point, particle, dustOptions);
         }
     }
 
@@ -179,23 +251,61 @@ public class ParticleShapes {
         }
     }
 
-    public static void drawCube(Location center, Particle particle, Particle.DustOptions dustOptions, double length, int gap) {
-        Location[] points = new Location[8];
+    public static void drawHemiSphere(Location center, Particle particle, double radius, int amount, int amounty, Particle.DustOptions dustOptions) {
+        double fullRadian = 2 * Math.PI;
 
-        points[0] = center.clone().add(-length, -length, -length);
-        points[1] = center.clone().add(length, -length, -length);
-        points[2] = center.clone().add(length, length, -length);
-        points[3] = center.clone().add(-length, length, -length);
-        points[4] = center.clone().add(-length, -length, length);
-        points[5] = center.clone().add(length, -length, length);
-        points[6] = center.clone().add(length, length, length);
-        points[7] = center.clone().add(-length, length, length);
+        for (double i = 0; i < amount; i++) {
+            for (double y = 0; y < amounty; y++) {
+                double percent = i / amount;
+                double percenty = y / amounty;
+
+                double v = 1 * percenty;
+                double theta = fullRadian * percent;
+                double phi = Math.acos(2 * v - 1);
+                double dx = radius * Math.sin(phi) * Math.cos(theta);
+                double dy = radius / 2 * Math.cos(phi);
+                double dz = radius * Math.sin(phi) * Math.sin(theta);
+                Location add = center.clone().add(dx, dy, dz);
+                ParticleShapes.playSingleParticle(add, particle, dustOptions);
+            }
+        }
+    }
+
+    public static void drawCube(Location location, Particle particle, Particle.DustOptions dustOptions, double length, double gap,
+                                boolean rotate, float yaw, float pitch) {
+        Vector[] points = new Vector[8];
+
+        Location center = rotate ? new Location(location.getWorld(), 0, 0, 0) : location;
+
+        Vector centerVector = center.toVector();
+
+        points[0] = centerVector.clone().add(new Vector(-length, -length, -length));
+        points[1] = centerVector.clone().add(new Vector(length, -length, -length));
+        points[2] = centerVector.clone().add(new Vector(length, length, -length));
+        points[3] = centerVector.clone().add(new Vector(-length, length, -length));
+        points[4] = centerVector.clone().add(new Vector(-length, -length, length));
+        points[5] = centerVector.clone().add(new Vector(length, -length, length));
+        points[6] = centerVector.clone().add(new Vector(length, length, length));
+        points[7] = centerVector.clone().add(new Vector(-length, length, length));
+
+        if (rotate) {
+            RotationHelper.rotateYawPitch(points, yaw, pitch);
+
+            Vector translateVector = location.toVector();
+
+            for (int i = 0; i < 8; i++) {
+                Vector point = points[i];
+                MatrixHelper.translate(point, translateVector);
+            }
+        }
+
+        World world = center.getWorld();
 
         // Edges
         for (int i = 0; i < 4; i++) {
-            ParticleShapes.drawLineBetween(points[i], particle, dustOptions, points[(i + 1) % 4], gap);
-            ParticleShapes.drawLineBetween(points[i + 4], particle, dustOptions, points[((i + 1) % 4) + 4], gap);
-            ParticleShapes.drawLineBetween(points[i], particle, dustOptions, points[i + 4], gap);
+            ParticleShapes.drawLineBetween(world, points[i], particle, dustOptions, points[(i + 1) % 4], gap);
+            ParticleShapes.drawLineBetween(world, points[i + 4], particle, dustOptions, points[((i + 1) % 4) + 4], gap);
+            ParticleShapes.drawLineBetween(world, points[i], particle, dustOptions, points[i + 4], gap);
         }
     }
 }

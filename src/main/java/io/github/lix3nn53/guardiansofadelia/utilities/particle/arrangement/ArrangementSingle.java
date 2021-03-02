@@ -1,12 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.utilities.math.RotationHelper;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.util.Vector;
 
 public class ArrangementSingle implements ParticleArrangement {
     protected final Particle particle;
@@ -45,8 +47,12 @@ public class ArrangementSingle implements ParticleArrangement {
     }
 
     @Override
-    public void play(Location location, double extra) {
-        ParticleShapes.playSingleParticle(location, particle, dustOptions);
+    public void play(Location location, Location rotationCenter, float yaw, float pitch) {
+        Vector vector = location.clone().subtract(rotationCenter).toVector();
+
+        RotationHelper.rotateYawPitch(vector, yaw, pitch);
+
+        ParticleShapes.playSingleParticle(location.getWorld(), vector, particle, dustOptions);
     }
 
     public void configLoadError(String section) {

@@ -5,5 +5,5 @@ import org.bukkit.Location;
 public interface ParticleArrangement {
     void play(Location location);
 
-    void play(Location location, double extra);
+    void play(Location location, Location rotationCenter, float yaw, float pitch);
 }

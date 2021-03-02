@@ -5,14 +5,12 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 
-public class ArrangementFillHemisphere extends ArrangementSingle {
+public class ArrangementFillHemisphere extends ArrangementWithRadius {
 
-    private final double radius;
     private final int amount;
 
     public ArrangementFillHemisphere(Particle particle, double radius, int amount, Particle.DustOptions dustOptions) {
-        super(particle, dustOptions);
-        this.radius = radius;
+        super(particle, dustOptions, radius);
         this.amount = amount;
     }
 
@@ -33,11 +31,6 @@ public class ArrangementFillHemisphere extends ArrangementSingle {
 
     @Override
     public void play(Location location) {
-        ParticleShapes.fillHemisphere(location, particle, radius, amount, dustOptions);
-    }
-
-    @Override
-    public void play(Location location, double radius) {
         ParticleShapes.fillHemisphere(location, particle, radius, amount, dustOptions);
     }
 }

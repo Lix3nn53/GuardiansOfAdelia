@@ -30,8 +30,6 @@ import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import io.github.lix3nn53.guardiansofadelia.utilities.math.MatrixHelper;
-import io.github.lix3nn53.guardiansofadelia.utilities.math.RotationHelper;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -44,7 +42,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -351,10 +348,6 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-                Location center = new Location(player.getWorld(), 0, 0, 0);
-
-                Location[] points = new Location[8];
-
                 double length = 1;
                 /*double degrees = Double.parseDouble(args[1]);
                 double radian = degrees * Math.PI / 180;
@@ -364,101 +357,13 @@ public class CommandLix implements CommandExecutor {
                 float yaw = eyeLocation.getYaw();
                 float pitch = eyeLocation.getPitch();
 
-                /*Vector dir = eyeLocation.getDirection().normalize();
-                Vector FRONT = new Vector(1, 0, 0);
-                Vector UP = new Vector(0, 1, 0);
-                Vector RIGHT = new Vector(0, 0, 1);
-                float radianY = dir.angle(FRONT);
-                float radian = dir.angle(RIGHT);
-                player.sendMessage("radian: " + radian);*/
-
-                points[0] = center.clone().add(-length, -length, -length);
-                points[1] = center.clone().add(length, -length, -length);
-                points[2] = center.clone().add(length, length, -length);
-                points[3] = center.clone().add(-length, length, -length);
-                points[4] = center.clone().add(-length, -length, length);
-                points[5] = center.clone().add(length, -length, length);
-                points[6] = center.clone().add(length, length, length);
-                points[7] = center.clone().add(-length, length, length);
-
-                Location[] rotated = new Location[8];
-
-                /*double[][] rotationX = MatrixHelper.rotationX(radianPitch);
-                double[][] rotationY = MatrixHelper.rotationY(-radianYaw);
-                double[][] rotationZ = MatrixHelper.rotationZ(radianPitch);*/
-
-                // the numbers are the angles on which you want to rotate your animation.
-                double xangle = Math.toRadians(pitch); // note that here we do have to convert to radians.
-                double xAxisCos = Math.cos(xangle); // getting the cos value for the pitch.
-                double xAxisSin = Math.sin(xangle); // getting the sin value for the pitch.
-
-                // DON'T FORGET THE ' - ' IN FRONT OF 'yangle' HERE.
-                //double yangle = Math.toRadians(60); // note that here we do have to convert to radians.
-                double yangle = Math.toRadians(yaw);
-                double yAxisCos = Math.cos(-yangle); // getting the cos value for the yaw.
-                double yAxisSin = Math.sin(-yangle); // getting the sin value for the yaw.
-
-                double zangle = Math.toRadians(30); // note that here we do have to convert to radians.
-                double zAxisCos = Math.cos(zangle); // getting the cos value for the roll.
-                double zAxisSin = Math.sin(zangle); // getting the sin value for the roll.
-
-                for (int i = 0; i < 8; i++) {
-                    Location point = points[i];
-
-                    /*double[][] locationMatrix = MatrixHelper.locationToMatrix(point);
-
-                    double[][] result = MatrixHelper.multiplyMatrices(rotationZ, locationMatrix);
-
-                    rotated[i] = MatrixHelper.matrixToLocation(point.getWorld(), result);*/
-
-                    Vector vector = point.toVector();
-                    RotationHelper.rotateAroundAxisX(vector, xAxisCos, xAxisSin);
-                    RotationHelper.rotateAroundAxisY(vector, yAxisCos, yAxisSin);
-
-                    rotated[i] = vector.toLocation(point.getWorld());
-
-                }
-
-                Location location = player.getLocation();
-                Vector vector = location.toVector();
-
-                Location[] translated = new Location[8];
-                for (int i = 0; i < 8; i++) {
-                    Location point = rotated[i];
-                    translated[i] = MatrixHelper.translate(point, vector);
-                }
-
-                // Corners
-                for (int i = 0; i < 8; i++) {
-                    Location point = rotated[i];
-                    ParticleShapes.playSingleParticle(point, Particle.FLAME, null);
-                }
-
-                // Edges
-                for (int i = 0; i < 4; i++) {
-                    ParticleShapes.drawLineBetween(rotated[i], Particle.SOUL_FIRE_FLAME, null, rotated[(i + 1) % 4], 0.1);
-                    ParticleShapes.drawLineBetween(rotated[i + 4], Particle.SOUL_FIRE_FLAME, null, rotated[((i + 1) % 4) + 4], 0.1);
-                    ParticleShapes.drawLineBetween(rotated[i], Particle.SOUL_FIRE_FLAME, null, rotated[i + 4], 0.1);
-                    /*connect(i, (i + 1) % 4, projected);
-                    connect(i + 4, ((i + 1) % 4) + 4, projected);
-                    connect(i, i + 4, projected);*/
-                }
-
-                // Corners
-                for (int i = 0; i < 8; i++) {
-                    Location point = translated[i];
-                    ParticleShapes.playSingleParticle(point, Particle.FLAME, null);
-                }
-
-                // Edges
-                for (int i = 0; i < 4; i++) {
-                    ParticleShapes.drawLineBetween(translated[i], Particle.SOUL_FIRE_FLAME, null, translated[(i + 1) % 4], 0.1);
-                    ParticleShapes.drawLineBetween(translated[i + 4], Particle.SOUL_FIRE_FLAME, null, translated[((i + 1) % 4) + 4], 0.1);
-                    ParticleShapes.drawLineBetween(translated[i], Particle.SOUL_FIRE_FLAME, null, translated[i + 4], 0.1);
-                    /*connect(i, (i + 1) % 4, projected);
-                    connect(i + 4, ((i + 1) % 4) + 4, projected);
-                    connect(i, i + 4, projected);*/
-                }
+                //ParticleShapes.drawCube(eyeLocation, Particle.SOUL_FIRE_FLAME, null, length, 0.1, true, yaw, pitch);
+                double phi = Double.parseDouble(args[1]);
+                double radius = Double.parseDouble(args[2]);
+                int amount = (int) Double.parseDouble(args[3]);
+                int amounty = (int) Double.parseDouble(args[4]);
+                ParticleShapes.drawCone(eyeLocation, Particle.SOUL_FIRE_FLAME, radius, amount, amounty, phi, null,
+                        0, true, yaw, pitch + 90);
             } else if (args[0].equals("reload")) {
                 /*ClassConfigurations.loadConfigs();
                 player.sendMessage("Reloaded class configs!");

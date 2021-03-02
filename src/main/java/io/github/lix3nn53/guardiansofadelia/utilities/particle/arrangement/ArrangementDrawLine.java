@@ -35,9 +35,4 @@ public class ArrangementDrawLine extends ArrangementSingle {
     public void play(Location location) {
         ParticleShapes.drawLine(location, particle, dustOptions, length, gap);
     }
-
-    @Override
-    public void play(Location location, double radius) {
-        ParticleShapes.drawLine(location, particle, dustOptions, length, gap);
-    }
 }

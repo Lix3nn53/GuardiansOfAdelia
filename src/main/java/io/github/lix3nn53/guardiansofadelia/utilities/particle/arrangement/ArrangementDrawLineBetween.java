@@ -25,6 +25,6 @@ public class ArrangementDrawLineBetween extends ArrangementSingle implements Par
 
     @Override
     public void play(Location start, Location end) {
-        ParticleShapes.drawLineBetween(start, particle, dustOptions, end, gap);
+        ParticleShapes.drawLineBetween(start.getWorld(), start.toVector(), particle, dustOptions, end.toVector(), gap);
     }
 }

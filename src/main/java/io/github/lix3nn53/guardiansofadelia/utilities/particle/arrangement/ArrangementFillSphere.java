@@ -5,39 +5,27 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 
-public class ArrangementFillSphere extends ArrangementSingle {
+public class ArrangementFillSphere extends ArrangementWithRadius {
 
-    private final double radius;
     private final int amount;
 
     public ArrangementFillSphere(Particle particle, double radius, int amount, Particle.DustOptions dustOptions) {
-        super(particle, dustOptions);
-        this.radius = radius;
+        super(particle, dustOptions, radius);
         this.amount = amount;
     }
 
     public ArrangementFillSphere(ConfigurationSection configurationSection) {
         super(configurationSection);
 
-        if (!configurationSection.contains("radius")) {
-            configLoadError("radius");
-        }
-
         if (!configurationSection.contains("amount")) {
             configLoadError("amount");
         }
 
-        this.radius = configurationSection.getDouble("radius");
         this.amount = configurationSection.getInt("amount");
     }
 
     @Override
     public void play(Location location) {
-        ParticleShapes.fillSphere(location, particle, radius, amount, dustOptions);
-    }
-
-    @Override
-    public void play(Location location, double radius) {
         ParticleShapes.fillSphere(location, particle, radius, amount, dustOptions);
     }
 }

@@ -30,4 +30,56 @@ public class RotationHelper {
         double y = v.getX() * sin + v.getY() * cos;
         v.setX(x).setY(y);
     }
+
+    /**
+     * @param vectors
+     * @param yaw
+     * @param pitch
+     */
+    public static void rotateYawPitch(Vector[] vectors, float yaw, float pitch) {
+        // the numbers are the angles on which you want to rotate your animation.
+        double xangle = Math.toRadians(pitch); // note that here we do have to convert to radians.
+        double xAxisCos = Math.cos(xangle); // getting the cos value for the pitch.
+        double xAxisSin = Math.sin(xangle); // getting the sin value for the pitch.
+
+        // DON'T FORGET THE ' - ' IN FRONT OF 'yangle' HERE.
+        //double yangle = Math.toRadians(60); // note that here we do have to convert to radians.
+        double yangle = Math.toRadians(yaw);
+        double yAxisCos = Math.cos(-yangle); // getting the cos value for the yaw.
+        double yAxisSin = Math.sin(-yangle); // getting the sin value for the yaw.
+
+        /*double zangle = Math.toRadians(30); // note that here we do have to convert to radians.
+        double zAxisCos = Math.cos(zangle); // getting the cos value for the roll.
+        double zAxisSin = Math.sin(zangle); // getting the sin value for the roll.*/
+
+        for (Vector vector : vectors) {
+            RotationHelper.rotateAroundAxisX(vector, xAxisCos, xAxisSin);
+            RotationHelper.rotateAroundAxisY(vector, yAxisCos, yAxisSin);
+        }
+    }
+
+    /**
+     * @param vector
+     * @param yaw
+     * @param pitch
+     */
+    public static void rotateYawPitch(Vector vector, float yaw, float pitch) {
+        // the numbers are the angles on which you want to rotate your animation.
+        double xangle = Math.toRadians(pitch); // note that here we do have to convert to radians.
+        double xAxisCos = Math.cos(xangle); // getting the cos value for the pitch.
+        double xAxisSin = Math.sin(xangle); // getting the sin value for the pitch.
+
+        // DON'T FORGET THE ' - ' IN FRONT OF 'yangle' HERE.
+        //double yangle = Math.toRadians(60); // note that here we do have to convert to radians.
+        double yangle = Math.toRadians(yaw);
+        double yAxisCos = Math.cos(-yangle); // getting the cos value for the yaw.
+        double yAxisSin = Math.sin(-yangle); // getting the sin value for the yaw.
+
+        /*double zangle = Math.toRadians(30); // note that here we do have to convert to radians.
+        double zAxisCos = Math.cos(zangle); // getting the cos value for the roll.
+        double zAxisSin = Math.sin(zangle); // getting the sin value for the roll.*/
+
+        RotationHelper.rotateAroundAxisX(vector, xAxisCos, xAxisSin);
+        RotationHelper.rotateAroundAxisY(vector, yAxisCos, yAxisSin);
+    }
 }

@@ -110,4 +110,20 @@ public class MatrixHelper {
 
         return new Location(location.getWorld(), translate[0][0], translate[1][0], translate[2][0]);
     }
+
+    /**
+     * @param toTranslate     vector to translate
+     * @param translateVector translate toTranslate by this vector
+     */
+    public static void translate(Vector toTranslate, Vector translateVector) {
+        double x = toTranslate.getX();
+        double y = toTranslate.getY();
+        double z = toTranslate.getZ();
+
+        double[][] translate = translate(x, y, z, translateVector);
+
+        toTranslate.setX(translate[0][0]);
+        toTranslate.setY(translate[1][0]);
+        toTranslate.setZ(translate[2][0]);
+    }
 }
