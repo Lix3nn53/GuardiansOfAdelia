@@ -20,8 +20,16 @@ public class ParticleMechanic extends MechanicComponent {
     private final double upward;
     private final double right;
 
+    private final boolean centerEye;
     private final boolean rotation;
-    private final boolean rotationCenterEye;
+    private final boolean rotationMatchEye;
+
+    private final float yaw;
+    private final float pitch;
+
+    private final double offsetx;
+    private final double offsety;
+    private final double offsetz;
 
     public ParticleMechanic(ConfigurationSection configurationSection) {
         ConfigurationSection particle = configurationSection.getConfigurationSection("particle");
@@ -33,10 +41,19 @@ public class ParticleMechanic extends MechanicComponent {
             this.radiusParticle = null;
         }
         this.forward = configurationSection.contains("forward") ? configurationSection.getDouble("forward") : 0;
-        this.upward = configurationSection.contains("upward") ? configurationSection.getDouble("upward") : 0.5;
+        this.upward = configurationSection.contains("upward") ? configurationSection.getDouble("upward") : 0;
         this.right = configurationSection.contains("right") ? configurationSection.getDouble("right") : 0;
+
+        this.centerEye = configurationSection.contains("centerEye") && configurationSection.getBoolean("centerEye");
         this.rotation = configurationSection.contains("rotation") && configurationSection.getBoolean("rotation");
-        this.rotationCenterEye = configurationSection.contains("rotationCenterEye") && configurationSection.getBoolean("rotationCenterEye");
+        this.rotationMatchEye = configurationSection.contains("rotationMatchEye") && configurationSection.getBoolean("rotationMatchEye");
+
+        this.yaw = configurationSection.contains("yaw") ? (float) configurationSection.getDouble("yaw") : 0;
+        this.pitch = configurationSection.contains("pitch") ? (float) configurationSection.getDouble("pitch") : 0;
+
+        this.offsetx = configurationSection.contains("offsetx") ? configurationSection.getDouble("offsetx") : 0;
+        this.offsety = configurationSection.contains("offsety") ? configurationSection.getDouble("offsety") : 0;
+        this.offsetz = configurationSection.contains("offsetz") ? configurationSection.getDouble("offsetz") : 0;
     }
 
     @Override
@@ -45,28 +62,26 @@ public class ParticleMechanic extends MechanicComponent {
 
         double radius = radiusParticle != null ? radiusParticle.get(skillLevel - 1) : 0;
         for (LivingEntity ent : targets) {
-            Location location = ent.getLocation();
+            Location location = centerEye ? ent.getEyeLocation() : ent.getLocation();
 
-            Vector dir = location.getDirection().setY(0).normalize();
-            Vector side = dir.clone().crossProduct(UP);
-            location.add(dir.multiply(forward)).add(0, upward, 0).add(side.multiply(right));
+            Vector dir = location.getDirection().normalize();
+            Vector side = dir.clone().crossProduct(new Vector(0, 1, 0));
+            Vector upwardly = dir.clone().crossProduct(side);
+            location.add(dir.multiply(forward)).subtract(upwardly.multiply(upward)).add(side.multiply(right));
 
             if (radius > 0) {
                 ArrangementWithRadius arrangementWithRadius = (ArrangementWithRadius) particleArrangement;
                 arrangementWithRadius.setRadius(radius);
             }
+
             if (rotation) {
                 Location eyeLocation = ent.getEyeLocation();
-                float yaw = eyeLocation.getYaw();
-                float pitch = eyeLocation.getPitch();
+                float yaw = rotationMatchEye ? eyeLocation.getYaw() : this.yaw;
+                float pitch = rotationMatchEye ? eyeLocation.getPitch() : this.pitch;
 
-                if (rotationCenterEye) {
-                    particleArrangement.play(eyeLocation, eyeLocation, yaw, pitch);
-                } else {
-                    particleArrangement.play(location, eyeLocation, yaw, pitch);
-                }
+                particleArrangement.play(location, new Vector(offsetx, offsety, offsetz), yaw, pitch);
             } else {
-                particleArrangement.play(location);
+                particleArrangement.play(location, new Vector(offsetx, offsety, offsetz));
             }
         }
 

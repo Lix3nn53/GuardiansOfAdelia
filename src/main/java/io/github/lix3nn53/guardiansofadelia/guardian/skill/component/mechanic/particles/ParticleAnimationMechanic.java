@@ -64,7 +64,8 @@ public class ParticleAnimationMechanic extends MechanicComponent {
                     Vector side = dir.clone().crossProduct(UP);
                     location.add(dir.multiply(forward)).add(0, upward, 0).add(side.multiply(right));
 
-                    particleArrangement.play(location, radius);
+                    // TODO RADIUS SET
+                    particleArrangement.play(location);
 
                     counter++;
                     if (counter >= repeatAmount.get(skillLevel - 1)) {

@@ -4,6 +4,9 @@ import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.util.Vector;
+
+import javax.annotation.Nullable;
 
 public class ArrangementDrawLine extends ArrangementSingle {
 
@@ -32,7 +35,20 @@ public class ArrangementDrawLine extends ArrangementSingle {
     }
 
     @Override
-    public void play(Location location) {
-        ParticleShapes.drawLine(location, particle, dustOptions, length, gap);
+    public void play(Location location, @Nullable Vector offset) {
+        Location location1 = location.clone();
+        if (offset != null) {
+            location1.add(offset);
+        }
+        ParticleShapes.drawLine(location1, particle, dustOptions, length, gap);
+    }
+
+    @Override
+    public void play(Location location, @Nullable Vector offset, float yaw, float pitch) {
+        Location location1 = location.clone();
+        if (offset != null) {
+            location1.add(offset);
+        }
+        ParticleShapes.drawLine(location1, particle, dustOptions, length, gap);
     }
 }

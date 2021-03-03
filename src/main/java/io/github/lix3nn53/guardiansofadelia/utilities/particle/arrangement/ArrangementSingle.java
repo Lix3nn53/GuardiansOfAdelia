@@ -42,13 +42,15 @@ public class ArrangementSingle implements ParticleArrangement {
     }
 
     @Override
-    public void play(Location location) {
-        ParticleShapes.playSingleParticle(location, particle, dustOptions);
+    public void play(Location location, Vector offset) {
+        Location location1 = location.clone().add(offset);
+
+        ParticleShapes.playSingleParticle(location1, particle, dustOptions);
     }
 
     @Override
-    public void play(Location location, Location rotationCenter, float yaw, float pitch) {
-        Vector vector = location.clone().subtract(rotationCenter).toVector();
+    public void play(Location location, Vector offset, float yaw, float pitch) {
+        Vector vector = location.clone().add(offset).toVector();
 
         RotationHelper.rotateYawPitch(vector, yaw, pitch);
 
