@@ -96,7 +96,7 @@ public class LootChest {
         particleTask = new BukkitRunnable() {
             @Override
             public void run() {
-                arrangementFillCircle.play(add);
+                arrangementFillCircle.play(add, null);
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 20, 20L);
     }

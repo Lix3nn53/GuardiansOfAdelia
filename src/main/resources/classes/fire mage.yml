@@ -144,10 +144,10 @@ skillTwo:
       self: false
       max: 15
       angleList:
-        - 45
         - 50
-        - 55
-        - 60
+        - 50
+        - 50
+        - 50
       rangeList:
         - 3.5
         - 4
@@ -168,16 +168,21 @@ skillTwo:
         child1:
           componentType: "ParticleMechanic"
           particle:
-            arrangementType: "FillCircle"
+            arrangementType: "FillCone"
             particleType: "FLAME"
-            radius: 2.5
-            amount: 2
-            direction: "XZ"
-          radius:
-            - 2.5
-            - 2.75
-            - 3
+            length: 3
+            angle: 50
+            amount: 15
+            amounty: 10
+          length:
             - 3.5
+            - 4
+            - 4.5
+            - 5
+          rotation: true
+          centerEye: true
+          rotationMatchEye: true
+          pitch: 90
       child3:
         componentType: "SoundMechanic"
         goaSound: "SKILL_LIGHTNING_NORMAL"
@@ -340,7 +345,7 @@ skillPassive:
   trigger:
     componentType: "InitializeTrigger"
     child1:
-      componentType: "MagicAttackTrigger"
+      componentType: "SkillCastTrigger"
       cooldowns:
         - 1
         - 1
@@ -349,17 +354,59 @@ skillPassive:
         - 1
         - 1
       child1:
-        componentType: "SelfTarget"
+        componentType: "ValueCondition"
+        key: "firespirit"
+        minValue: 0
+        maxValue: 3
+        checkCasterOnly: true
         child1:
-          componentType: "ValueAddMechanic"
-          key: "firespirit"
-          valueToAdd:
-            - 1
-            - 1
-            - 1
-            - 1
-            - 1
-            - 1
+          componentType: "RepeatCancelMechanic"
+        child2:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "ValueAddMechanic"
+            key: "firespirit"
+            valueToAdd:
+              - 1
+              - 1
+              - 1
+              - 1
+              - 1
+              - 1
+      child2:
+        componentType: "ValueCondition"
+        key: "firespirit"
+        minValue: 4
+        maxValue: 4
+        checkCasterOnly: true
+        child1:
+          componentType: "RepeatMechanic"
+          period: 180
+          child1:
+            componentType: "ParticleAnimationMechanic"
+            particle:
+              arrangementType: "DrawCylinder"
+              particleType: "FLAME"
+              radius: 0.1
+              amount: 2
+            frequency: 5
+            radius:
+              - 0.1
+              - 0.1
+              - 0.1
+              - 0.1
+            repeatAmount:
+              - 36
+              - 36
+              - 36
+              - 36
+            upward: 1
+            offsety: 1.2
+            offsetx: 0.1
+            resetY: true
+            rotation: true
+            yawIncrease: 30
+            pitchIncrease: 10
 skillUltimate:
   name: "Chaos Meteor"
   customModelData: 30

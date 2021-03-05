@@ -28,6 +28,8 @@ public class TriggerListener {
     private static final HashMap<Player, SavedEntitySpawnTrigger> playerToSavedEntitySpawnTrigger = new HashMap<>();
     private static final HashMap<Player, CompanionSpawnTrigger> playerToCompanionSpawnTrigger = new HashMap<>();
 
+    private static final HashMap<Player, SkillCastTrigger> playerToSkillCastTrigger = new HashMap<>();
+
     public static void onPlayerQuit(Player player) {
         playerToInitializeTrigger.remove(player);
 
@@ -44,6 +46,8 @@ public class TriggerListener {
 
         playerToSavedEntitySpawnTrigger.remove(player);
         playerToCompanionSpawnTrigger.remove(player);
+
+        playerToSkillCastTrigger.remove(player);
     }
 
     public static void startListeningLandTrigger(Player player, LandTrigger landTrigger) {
@@ -133,6 +137,20 @@ public class TriggerListener {
             boolean callback = playerToMagicAttackTrigger.get(player).callback(player, target);
             if (callback) {
                 playerToMagicAttackTrigger.remove(player);
+            }
+        }
+    }
+
+    public static void startListeningSkillCast(Player player, SkillCastTrigger skillCastTrigger) {
+        playerToSkillCastTrigger.put(player, skillCastTrigger);
+    }
+
+    public static void onPlayerSkillCast(Player player) {
+        if (playerToSkillCastTrigger.containsKey(player)) {
+            player.sendMessage("onPlayerSkillCast");
+            boolean callback = playerToSkillCastTrigger.get(player).callback(player);
+            if (callback) {
+                playerToSkillCastTrigger.remove(player);
             }
         }
     }

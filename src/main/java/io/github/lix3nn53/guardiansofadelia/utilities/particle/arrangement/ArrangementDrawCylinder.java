@@ -33,19 +33,11 @@ public class ArrangementDrawCylinder extends ArrangementWithRadius {
 
     @Override
     public void play(Location location, @Nullable Vector offset) {
-        Location location1 = location.clone();
-        if (offset != null) {
-            location1.add(offset);
-        }
-        ParticleShapes.drawCylinder(location1, particle, radius, amount, dustOptions, height, false, 0, 0);
+        ParticleShapes.drawCylinder(location, particle, radius, amount, dustOptions, height, false, 0, 0, offset);
     }
 
     @Override
     public void play(Location location, @Nullable Vector offset, float yaw, float pitch) {
-        Location location1 = location.clone();
-        if (offset != null) {
-            location1.add(offset);
-        }
-        ParticleShapes.drawCylinder(location1, particle, radius, amount, dustOptions, height, false, yaw, pitch);
+        ParticleShapes.drawCylinder(location, particle, radius, amount, dustOptions, height, true, yaw, pitch, offset);
     }
 }

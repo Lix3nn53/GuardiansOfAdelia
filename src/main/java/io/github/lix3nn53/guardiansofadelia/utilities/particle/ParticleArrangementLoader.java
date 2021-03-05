@@ -17,7 +17,11 @@ public class ParticleArrangementLoader {
 
         componentType = "Arrangement" + componentType;
 
-        if (componentType.equalsIgnoreCase(ArrangementDrawCylinder.class.getSimpleName())) {
+        if (componentType.equalsIgnoreCase(ArrangementDrawCone.class.getSimpleName())) {
+            return new ArrangementDrawCone(configurationSection);
+        } else if (componentType.equalsIgnoreCase(ArrangementDrawCube.class.getSimpleName())) {
+            return new ArrangementDrawCube(configurationSection);
+        } else if (componentType.equalsIgnoreCase(ArrangementDrawCylinder.class.getSimpleName())) {
             return new ArrangementDrawCylinder(configurationSection);
         } else if (componentType.equalsIgnoreCase(ArrangementDrawLine.class.getSimpleName())) {
             return new ArrangementDrawLine(configurationSection);
@@ -27,6 +31,8 @@ public class ParticleArrangementLoader {
             return new ArrangementDrawSphere(configurationSection);
         } else if (componentType.equalsIgnoreCase(ArrangementFillCircle.class.getSimpleName())) {
             return new ArrangementFillCircle(configurationSection);
+        } else if (componentType.equalsIgnoreCase(ArrangementFillCone.class.getSimpleName())) {
+            return new ArrangementFillCone(configurationSection);
         } else if (componentType.equalsIgnoreCase(ArrangementFillHemisphere.class.getSimpleName())) {
             return new ArrangementFillHemisphere(configurationSection);
         } else if (componentType.equalsIgnoreCase(ArrangementFillSphere.class.getSimpleName())) {

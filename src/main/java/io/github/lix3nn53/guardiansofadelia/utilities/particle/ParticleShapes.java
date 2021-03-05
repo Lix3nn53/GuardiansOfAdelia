@@ -100,6 +100,52 @@ public class ParticleShapes {
         }
     }
 
+    public static void fillCone(Location location, Particle particle, double length, int amount, int amounty, double angle, Particle.DustOptions dustOptions,
+                                boolean rotate, float yaw, float pitch, Vector offset) {
+        double fullRadian = Math.toRadians(360);
+        double phi = Math.toRadians(angle);
+
+        Location center = rotate ? new Location(location.getWorld(), 0, 0, 0) : location;
+
+        Vector centerVector = center.toVector().add(offset);
+
+        Vector[] points = new Vector[amount * amounty];
+        int index = 0;
+        for (double i = 0; i < amount; i++) {
+            for (double y = 0; y < amounty; y++) {
+                double percent = i / amount;
+                double percenty = y / amounty;
+
+                double v = random.nextDouble();
+                double randPhi = phi * v;
+
+                double lengthCurrent = length * percenty;
+                double theta = fullRadian * percent;
+                double dx = lengthCurrent * Math.sin(randPhi) * Math.cos(theta);
+                double dy = lengthCurrent * Math.cos(randPhi);
+                double dz = lengthCurrent * Math.sin(randPhi) * Math.sin(theta);
+                points[index] = centerVector.clone().add(new Vector(dx, dy, dz));
+                index++;
+            }
+        }
+
+        if (rotate) {
+            RotationHelper.rotateYawPitch(points, yaw, pitch);
+
+            Vector translateVector = location.toVector();
+
+            for (Vector point : points) {
+                MatrixHelper.translate(point, translateVector);
+            }
+        }
+
+        World world = center.getWorld();
+
+        for (Vector point : points) {
+            ParticleShapes.playSingleParticle(world, point, particle, dustOptions);
+        }
+    }
+
     /**
      * Randomly plays particle effects within the hemisphere
      *
@@ -148,12 +194,12 @@ public class ParticleShapes {
     }
 
     public static void drawCylinder(Location location, Particle particle, double radius, int amount, Particle.DustOptions dustOptions, double height,
-                                    boolean rotate, float yaw, float pitch) {
-        double fullRadian = 2 * Math.PI;
+                                    boolean rotate, float yaw, float pitch, Vector offset) {
+        double fullRadian = Math.toRadians(360);
 
         Location center = rotate ? new Location(location.getWorld(), 0, 0, 0) : location;
 
-        Vector centerVector = center.toVector();
+        Vector centerVector = center.toVector().add(offset);
 
         Vector[] points = new Vector[amount];
         int index = 0;
@@ -189,13 +235,16 @@ public class ParticleShapes {
         }
     }
 
-    public static void drawCone(Location location, Particle particle, double radius, int amount, int amounty, double phi, Particle.DustOptions dustOptions, double height,
-                                boolean rotate, float yaw, float pitch) {
-        double fullRadian = 2 * Math.PI;
+    public static void drawCone(Location location, Particle particle, double length, int amount, int amounty, double angle, Particle.DustOptions dustOptions,
+                                boolean rotate, float yaw, float pitch, Vector offset) {
+        double fullRadian = Math.toRadians(360);
+        double phi = Math.toRadians(angle);
+        double sinPhi = Math.sin(phi);
+        double cosPhi = Math.cos(phi);
 
         Location center = rotate ? new Location(location.getWorld(), 0, 0, 0) : location;
 
-        Vector centerVector = center.toVector();
+        Vector centerVector = center.toVector().add(offset);
 
         Vector[] points = new Vector[amount * amounty];
         int index = 0;
@@ -204,11 +253,11 @@ public class ParticleShapes {
                 double percent = i / amount;
                 double percenty = y / amounty;
 
-                double radiusCurrent = radius * percenty;
+                double lengthCurrent = length * percenty;
                 double theta = fullRadian * percent;
-                double dx = radiusCurrent * Math.sin(phi) * Math.cos(theta);
-                double dy = radiusCurrent * Math.cos(phi);
-                double dz = radiusCurrent * Math.sin(phi) * Math.sin(theta);
+                double dx = lengthCurrent * sinPhi * Math.cos(theta);
+                double dy = lengthCurrent * cosPhi;
+                double dz = lengthCurrent * sinPhi * Math.sin(theta);
                 points[index] = centerVector.clone().add(new Vector(dx, dy, dz));
                 index++;
             }
@@ -231,9 +280,16 @@ public class ParticleShapes {
         }
     }
 
-    public static void drawSphere(Location center, Particle particle, double radius, int amount, int amounty, Particle.DustOptions dustOptions) {
-        double fullRadian = 2 * Math.PI;
+    public static void drawSphere(Location location, Particle particle, double radius, int amount, int amounty, Particle.DustOptions dustOptions,
+                                  boolean rotate, float yaw, float pitch, Vector offset) {
+        Location center = rotate ? new Location(location.getWorld(), 0, 0, 0) : location;
 
+        Vector centerVector = center.toVector().add(offset);
+
+        double fullRadian = Math.toRadians(360);
+
+        Vector[] points = new Vector[amount * amounty];
+        int index = 0;
         for (double i = 0; i < amount; i++) {
             for (double y = 0; y < amounty; y++) {
                 double percent = i / amount;
@@ -245,14 +301,30 @@ public class ParticleShapes {
                 double dx = radius * Math.sin(phi) * Math.cos(theta);
                 double dy = radius * Math.cos(phi);
                 double dz = radius * Math.sin(phi) * Math.sin(theta);
-                Location add = center.clone().add(dx, dy, dz);
-                ParticleShapes.playSingleParticle(add, particle, dustOptions);
+                points[index] = centerVector.clone().add(new Vector(dx, dy, dz));
+                index++;
             }
+        }
+
+        if (rotate) {
+            RotationHelper.rotateYawPitch(points, yaw, pitch);
+
+            Vector translateVector = location.toVector();
+
+            for (Vector point : points) {
+                MatrixHelper.translate(point, translateVector);
+            }
+        }
+
+        World world = center.getWorld();
+
+        for (Vector point : points) {
+            ParticleShapes.playSingleParticle(world, point, particle, dustOptions);
         }
     }
 
     public static void drawHemiSphere(Location center, Particle particle, double radius, int amount, int amounty, Particle.DustOptions dustOptions) {
-        double fullRadian = 2 * Math.PI;
+        double fullRadian = Math.toRadians(360);
 
         for (double i = 0; i < amount; i++) {
             for (double y = 0; y < amounty; y++) {

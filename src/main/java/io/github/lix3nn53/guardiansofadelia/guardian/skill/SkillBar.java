@@ -262,6 +262,7 @@ public class SkillBar {
         }
 
         castCounter++;
+        TriggerListener.onPlayerSkillCast(player);
 
         if (rpgCharacterStats != null) {
             rpgCharacterStats.consumeMana(manaCost);

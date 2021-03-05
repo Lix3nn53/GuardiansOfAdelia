@@ -359,28 +359,26 @@ public class CommandLix implements CommandExecutor {
                 float pitch = eyeLocation.getPitch();
 
                 //ParticleShapes.drawCube(eyeLocation, Particle.SOUL_FIRE_FLAME, null, length, 0.1, true, yaw, pitch);
-                double forward = Double.parseDouble(args[1]);
-                double upward = Double.parseDouble(args[2]);
-                double right = Double.parseDouble(args[3]);
-                double offsetx = Double.parseDouble(args[4]);
-                double offsety = Double.parseDouble(args[5]);
-                double offsetz = Double.parseDouble(args[6]);
-                Vector offset = new Vector(offsetx, offsety, offsetz);
+                double height = Double.parseDouble(args[1]);
+                int amount = (int) Double.parseDouble(args[2]);
+                int amounty = (int) Double.parseDouble(args[3]);
+                double phi = Double.parseDouble(args[4]);
+                yaw += Double.parseDouble(args[5]);
+                pitch += Double.parseDouble(args[6]);
 
                 // if offsety is set, pitch rotates in y circle
 
-                //ParticleShapes.drawCone(eyeLocation, Particle.SOUL_FIRE_FLAME, radius, amount, amounty, phi, null,
-                //        0, true, yaw, pitch + 90);
+                ParticleShapes.drawCone(eyeLocation, Particle.SOUL_FIRE_FLAME, height, amount, amounty, phi, null, true, yaw, pitch, new Vector());
                 //ParticleShapes.drawCylinder(eyeLocation, Particle.SOUL_FIRE_FLAME, radius, amount, null, 0, true, yaw, pitchh, add);
 
-                Vector dir = eyeLocation.getDirection().normalize();
+                /*Vector dir = eyeLocation.getDirection().normalize();
                 Vector side = dir.clone().crossProduct(new Vector(0, 1, 0));
                 Vector upyard = dir.clone().crossProduct(side);
                 eyeLocation.add(dir.multiply(forward)).subtract(upyard.multiply(upward)).add(side.multiply(right));
 
                 eyeLocation.add(offset);
 
-                ParticleShapes.drawCube(eyeLocation, Particle.SOUL_FIRE_FLAME, null, length, 0.1, true, yaw, pitch);
+                ParticleShapes.drawCube(eyeLocation, Particle.SOUL_FIRE_FLAME, null, length, 0.1, true, yaw, pitch);*/
                 /*new BukkitRunnable() {
 
                     int yaww = 0;

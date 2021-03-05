@@ -43,8 +43,10 @@ public class ArrangementSingle implements ParticleArrangement {
 
     @Override
     public void play(Location location, Vector offset) {
-        Location location1 = location.clone().add(offset);
-
+        Location location1 = location.clone();
+        if (offset != null) {
+            location1.add(offset);
+        }
         ParticleShapes.playSingleParticle(location1, particle, dustOptions);
     }
 

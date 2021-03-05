@@ -163,6 +163,8 @@ public class SkillComponentLoader {
             return new DirectionCondition(configurationSection);
         } else if (componentType.equals(MagicAttackTrigger.class.getSimpleName())) {
             return new MagicAttackTrigger(configurationSection);
+        } else if (componentType.equals(SkillCastTrigger.class.getSimpleName())) {
+            return new SkillCastTrigger(configurationSection);
         } else if (componentType.equals(MeleeAttackTrigger.class.getSimpleName())) {
             return new MeleeAttackTrigger(configurationSection);
         } else if (componentType.equals(TookMagicalDamageTrigger.class.getSimpleName())) {

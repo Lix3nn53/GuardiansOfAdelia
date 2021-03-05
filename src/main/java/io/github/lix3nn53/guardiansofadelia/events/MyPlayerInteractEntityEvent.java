@@ -94,7 +94,7 @@ public class MyPlayerInteractEntityEvent implements Listener {
                                 itemInMainHand.setAmount(amount - 1);
 
                                 ArrangementFillCircle particle = new ArrangementFillCircle(Particle.HEART, 1.2, 6, null, Direction.XZ);
-                                particle.play(livingEntity.getLocation().clone().add(0, 1.2, 0));
+                                particle.play(livingEntity.getLocation().clone().add(0, 1.2, 0), null);
                             } else {
                                 player.sendMessage(ChatColor.RED + "Pet health is already full");
                             }
