@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.particles;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangementLoader;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementWithLength;
@@ -45,6 +46,12 @@ public class ParticleAnimationMechanic extends MechanicComponent {
     private final double radiusIncrease;
     private final double lengthIncrease;
 
+    //conditions
+    private final String valueConditionKey;
+    private final int valueConditionMinValue;
+    private final int valueConditionMaxValue;
+
+
     public ParticleAnimationMechanic(ConfigurationSection configurationSection) {
         ConfigurationSection particle = configurationSection.getConfigurationSection("particle");
         this.particleArrangement = ParticleArrangementLoader.load(particle);
@@ -74,6 +81,10 @@ public class ParticleAnimationMechanic extends MechanicComponent {
 
         this.frequency = configurationSection.getInt("frequency");
         this.repeatAmount = configurationSection.getIntegerList("repeatAmount");
+
+        this.valueConditionKey = configurationSection.getString("valueConditionKey");
+        this.valueConditionMinValue = configurationSection.getInt("valueConditionMinValue");
+        this.valueConditionMaxValue = configurationSection.getInt("valueConditionMaxValue");
     }
 
     @Override
@@ -123,6 +134,14 @@ public class ParticleAnimationMechanic extends MechanicComponent {
                     counter++;
                     if (counter >= repeatAmountCurrent) {
                         cancel();
+                    }
+
+                    if (valueConditionKey != null) {
+                        int value = SkillDataManager.getValue(ent, valueConditionKey);
+
+                        if (value < valueConditionMinValue || value > valueConditionMaxValue) {
+                            cancel();
+                        }
                     }
                 }
             }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, frequency);

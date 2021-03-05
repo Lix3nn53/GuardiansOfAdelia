@@ -361,19 +361,19 @@ skillPassive:
         checkCasterOnly: true
         child1:
           componentType: "RepeatCancelMechanic"
-        child2:
-          componentType: "SelfTarget"
-          child1:
-            componentType: "ValueAddMechanic"
-            key: "firespirit"
-            valueToAdd:
-              - 1
-              - 1
-              - 1
-              - 1
-              - 1
-              - 1
       child2:
+        componentType: "SelfTarget"
+        child1:
+          componentType: "ValueAddMechanic"
+          key: "firespirit"
+          valueToAdd:
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+      child3:
         componentType: "ValueCondition"
         key: "firespirit"
         minValue: 4
@@ -407,6 +407,9 @@ skillPassive:
             rotation: true
             yawIncrease: 30
             pitchIncrease: 10
+            valueConditionKey: "firespirit"
+            valueConditionMinValue: 4
+            valueConditionMaxValue: 50
 skillUltimate:
   name: "Chaos Meteor"
   customModelData: 30
