@@ -74,29 +74,55 @@ public class ParticleShapes {
     /**
      * Randomly plays particle effects within the sphere
      *
-     * @param loc      location to center the effect around
+     * @param location location to center the effect around
      * @param particle the string value for the particle
      * @param radius   radius of the sphere
      * @param amount   amount of particles to use
      */
-    public static void fillSphere(Location loc, Particle particle, double radius, int amount, Particle.DustOptions dustOptions) {
-        Location temp = loc.clone();
-        double rSquared = radius * radius;
-        double twoRadius = radius * 2;
+    public static void fillSphere(Location location, Particle particle, double radius, int amount, int amounty, Particle.DustOptions dustOptions,
+                                  boolean rotate, float yaw, float pitch, Vector offset) {
+        Location center = rotate ? new Location(location.getWorld(), 0, 0, 0) : location;
+
+        Vector centerVector = center.toVector().add(offset);
+
+        double fullRadian = Math.toRadians(360);
+
+        Vector[] points = new Vector[amount * amounty];
         int index = 0;
+        for (double i = 0; i < amount; i++) {
+            for (double y = 0; y < amounty; y++) {
+                double percent = i / amount;
+                double percenty = y / amounty;
 
-        // Play the particles
-        while (index < amount) {
-            temp.setX(loc.getX() + random.nextDouble() * twoRadius - radius);
-            temp.setY(loc.getY() + random.nextDouble() * twoRadius - radius);
-            temp.setZ(loc.getZ() + random.nextDouble() * twoRadius - radius);
+                double v = 1 * percenty;
+                double theta = fullRadian * percent;
+                double phi = Math.acos(2 * v - 1);
 
-            if (temp.distanceSquared(loc) > rSquared) {
-                continue;
+                double v1 = random.nextDouble();
+                phi = phi * v1;
+
+                double dx = radius * Math.sin(phi) * Math.cos(theta);
+                double dy = radius * Math.cos(phi);
+                double dz = radius * Math.sin(phi) * Math.sin(theta);
+                points[index] = centerVector.clone().add(new Vector(dx, dy, dz));
+                index++;
             }
+        }
 
-            playSingleParticle(temp, particle, dustOptions);
-            index++;
+        if (rotate) {
+            RotationHelper.rotateYawPitch(points, yaw, pitch);
+
+            Vector translateVector = location.toVector();
+
+            for (Vector point : points) {
+                MatrixHelper.translate(point, translateVector);
+            }
+        }
+
+        World world = center.getWorld();
+
+        for (Vector point : points) {
+            ParticleShapes.playSingleParticle(world, point, particle, dustOptions);
         }
     }
 
