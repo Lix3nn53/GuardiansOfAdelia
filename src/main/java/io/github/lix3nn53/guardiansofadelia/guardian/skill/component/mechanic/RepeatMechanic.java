@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicCom
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -17,6 +18,11 @@ public class RepeatMechanic extends MechanicComponent {
     private final long period;
     private final List<Integer> repetitions;
 
+    //conditions
+    private final String valueConditionKey;
+    private final int valueConditionMinValue;
+    private final int valueConditionMaxValue;
+
     /**
      * @param period
      * @param repetitions 0 for infinite
@@ -24,6 +30,9 @@ public class RepeatMechanic extends MechanicComponent {
     public RepeatMechanic(long period, List<Integer> repetitions) {
         this.period = period;
         this.repetitions = repetitions;
+        this.valueConditionKey = null;
+        this.valueConditionMaxValue = 0;
+        this.valueConditionMinValue = 0;
     }
 
     public RepeatMechanic(ConfigurationSection configurationSection) {
@@ -38,6 +47,10 @@ public class RepeatMechanic extends MechanicComponent {
         }
 
         this.period = configurationSection.getInt("period");
+
+        this.valueConditionKey = configurationSection.contains("valueConditionKey") ? configurationSection.getString("valueConditionKey") : null;
+        this.valueConditionMinValue = configurationSection.contains("valueConditionMinValue") ? configurationSection.getInt("valueConditionMinValue") : 0;
+        this.valueConditionMaxValue = configurationSection.contains("valueConditionMaxValue") ? configurationSection.getInt("valueConditionMaxValue") : 0;
     }
 
     @Override
@@ -52,27 +65,45 @@ public class RepeatMechanic extends MechanicComponent {
 
                 @Override
                 public void run() {
-                    executeChildren(caster, skillLevel, targets, castCounter);
+                    if (valueConditionKey != null) {
+                        int value = SkillDataManager.getValue(caster, valueConditionKey);
 
+                        if (value < valueConditionMinValue || value > valueConditionMaxValue) {
+                            cancel();
+                            SkillDataManager.removeRepeatTask(caster, castCounter);
+                            return;
+                        }
+                    }
+
+                    executeChildren(caster, skillLevel, targets, castCounter);
                     counter++;
+
                     if (counter >= repetitions.get(skillLevel - 1)) {
                         cancel();
+                        SkillDataManager.removeRepeatTask(caster, castCounter);
                     }
                 }
             }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, period);
-
-            new BukkitRunnable() { //remove task from cast data holder after it stops
-
-                @Override
-                public void run() {
-                    SkillDataManager.removeRepeatTask(caster, castCounter);
-                }
-            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), period * repetitions.get(skillLevel - 1));
-        } else {
+        } else { // Without counter limit
             bukkitTask = new BukkitRunnable() {
 
                 @Override
                 public void run() {
+                    if (valueConditionKey != null) {
+                        int value = SkillDataManager.getValue(caster, valueConditionKey);
+
+                        if (value < valueConditionMinValue || value > valueConditionMaxValue) {
+                            if (caster instanceof Player) {
+                                Player player = (Player) caster;
+                                player.sendMessage("cancel repeat cuz value condition");
+                            }
+
+                            cancel();
+                            SkillDataManager.removeRepeatTask(caster, castCounter);
+                            return;
+                        }
+                    }
+
                     executeChildren(caster, skillLevel, targets, castCounter);
                 }
             }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, period);

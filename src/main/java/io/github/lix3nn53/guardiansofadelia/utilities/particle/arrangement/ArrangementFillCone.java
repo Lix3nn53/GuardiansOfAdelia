@@ -24,8 +24,8 @@ public class ArrangementFillCone extends ArrangementWithLength {
             configLoadError("amounty");
         }
 
-        if (!configurationSection.contains("phi")) {
-            configLoadError("phi");
+        if (!configurationSection.contains("angle")) {
+            configLoadError("angle");
         }
 
         this.amount = configurationSection.getInt("amount");

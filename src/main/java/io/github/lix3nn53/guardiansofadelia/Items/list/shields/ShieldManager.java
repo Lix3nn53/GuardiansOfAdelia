@@ -17,8 +17,8 @@ public class ShieldManager {
 
     public static ItemStack get(ShieldGearType gearType, int gearLevel, int setIndex, ItemTier tier, boolean noStats, String gearSet) {
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfStatsNormal();
-        int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel);
-        int maxStatValue = noStats ? 0 : GearLevel.getMaxStatValue(gearLevel);
+        int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel, false);
+        int maxStatValue = noStats ? 0 : GearLevel.getMaxStatValue(gearLevel, false);
 
         Material material = gearType.getMaterial();
 

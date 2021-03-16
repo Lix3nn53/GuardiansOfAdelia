@@ -31,7 +31,7 @@ public enum Consumable {
     POTION_REGENERATION_HEALTH;
 
     private final double HYBRID_NERF = 0.6;
-    private final double REGEN_NERF = 0.1;
+    private final double REGEN_NERF = 0.05;
 
     public void consume(Player player, int skillLevel, ItemStack itemStack) {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
@@ -370,27 +370,27 @@ public enum Consumable {
     public int getInstantManaAmount(int level) {
         switch (level) {
             case 1:
-                return 40;
-            case 2:
-                return 60;
-            case 3:
                 return 80;
-            case 4:
-                return 100;
-            case 5:
-                return 120;
-            case 6:
-                return 140;
-            case 7:
-                return 160;
-            case 8:
-                return 180;
-            case 9:
+            case 2:
                 return 200;
+            case 3:
+                return 500;
+            case 4:
+                return 800;
+            case 5:
+                return 1200;
+            case 6:
+                return 1700;
+            case 7:
+                return 2400;
+            case 8:
+                return 3000;
+            case 9:
+                return 3400;
             case 10:
-                return 240;
+                return 4000;
         }
-        return 60;
+        return 80;
     }
 
     public double getBuffMultiplier(int level) {

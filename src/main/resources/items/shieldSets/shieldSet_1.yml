@@ -6,9 +6,9 @@
 
 count: 1
 i1:
-  name: "Wooden"
+  name: "TODO_1"
   customModelData: 1
   level: 1
-  health: 12
+  health: 24
   defense: 12
-  magicDefense: 12
+  magicDefense: 6

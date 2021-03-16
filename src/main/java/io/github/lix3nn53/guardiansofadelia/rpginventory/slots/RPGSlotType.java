@@ -92,15 +92,15 @@ public enum RPGSlotType {
 
     public int getReqLevelOffset() { //for passive sets
         if (this == RPGSlotType.PARROT) {
-            return 8;
-        } else if (this == RPGSlotType.EARRING) {
-            return 2;
+            return 9;
         } else if (this == RPGSlotType.NECKLACE) {
-            return 4;
+            return 5;
         } else if (this == RPGSlotType.GLOVE) {
-            return 6;
+            return 7;
+        } else if (this == RPGSlotType.EARRING) {
+            return 3;
         } else if (this == RPGSlotType.RING) {
-            return 0;
+            return 1;
         }
 
         return 9999;

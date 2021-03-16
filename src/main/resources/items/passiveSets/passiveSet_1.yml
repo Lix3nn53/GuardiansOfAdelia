@@ -6,6 +6,6 @@
 
 count: 1
 i1:
-  name: "Wooden"
+  name: "TODO_1"
   baseCustomModelData: 1
-  baseLevel: 1
+  baseLevel: 0

@@ -7,9 +7,7 @@
 tier: 3
 color: "LIGHT_PURPLE"
 description:
-  - "The Mage may be frail and weak in body,"
-  - "but that is a worthy sacrifice for"
-  - "the strength of the mind."
+  - "Todo"
 classIconCustomModelData: 16
 attributeTierStrength: 1
 attributeTierSpirit: 4
@@ -294,7 +292,7 @@ skillThree:
         child2:
           componentType: "ParticleMechanic"
           particle:
-            arrangementType: "DrawSphere"
+            arrangementType: "FillSphere"
             particleType: "FLAME"
             radius: 2.5
             amount: 24
@@ -354,14 +352,6 @@ skillPassive:
         - 1
         - 1
       child1:
-        componentType: "ValueCondition"
-        key: "firespirit"
-        minValue: 0
-        maxValue: 3
-        checkCasterOnly: true
-        child1:
-          componentType: "RepeatCancelMechanic"
-      child2:
         componentType: "SelfTarget"
         child1:
           componentType: "ValueAddMechanic"
@@ -373,6 +363,14 @@ skillPassive:
             - 1
             - 1
             - 1
+      child2:
+        componentType: "ValueCondition"
+        key: "firespirit"
+        minValue: 0
+        maxValue: 3
+        checkCasterOnly: true
+        child1:
+          componentType: "RepeatCancelMechanic"
       child3:
         componentType: "ValueCondition"
         key: "firespirit"
@@ -382,6 +380,10 @@ skillPassive:
         child1:
           componentType: "RepeatMechanic"
           period: 180
+          # stop self if condition is not met
+          valueConditionKey: "firespirit"
+          valueConditionMinValue: 4
+          valueConditionMaxValue: 50
           child1:
             componentType: "ParticleAnimationMechanic"
             particle:
@@ -407,6 +409,7 @@ skillPassive:
             rotation: true
             yawIncrease: 30
             pitchIncrease: 10
+            # stop self if condition is not met
             valueConditionKey: "firespirit"
             valueConditionMinValue: 4
             valueConditionMaxValue: 50

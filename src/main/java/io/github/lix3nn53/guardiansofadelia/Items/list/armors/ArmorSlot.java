@@ -92,10 +92,12 @@ public enum ArmorSlot {
                 return 8;
             case LEGGINGS:
                 return 6;
+            case HELMET:
+                return 4;
             case BOOTS:
                 return 2;
         }
 
-        return 4;
+        return 9999;
     }
 }

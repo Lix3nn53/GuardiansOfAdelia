@@ -176,7 +176,10 @@ public class StatUtils {
                 minNumberOfStats = itemTier.getMinNumberOfStatsPassive();
             }
 
-            StatPassive statPassive = new StatPassive(GearLevel.getMinStatValue(gearLevel), GearLevel.getMaxStatValue(gearLevel), minNumberOfStats);
+            int minStatValue = GearLevel.getMinStatValue(gearLevel, true);
+            int maxStatValue = GearLevel.getMaxStatValue(gearLevel, true);
+
+            StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
             //add persistent data before getting itemMeta so we don't lost them
             if (statPassive.getStrength() != 0) {

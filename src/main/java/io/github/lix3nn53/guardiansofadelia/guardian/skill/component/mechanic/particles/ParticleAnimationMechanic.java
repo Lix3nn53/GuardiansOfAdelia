@@ -82,9 +82,9 @@ public class ParticleAnimationMechanic extends MechanicComponent {
         this.frequency = configurationSection.getInt("frequency");
         this.repeatAmount = configurationSection.getIntegerList("repeatAmount");
 
-        this.valueConditionKey = configurationSection.getString("valueConditionKey");
-        this.valueConditionMinValue = configurationSection.getInt("valueConditionMinValue");
-        this.valueConditionMaxValue = configurationSection.getInt("valueConditionMaxValue");
+        this.valueConditionKey = configurationSection.contains("valueConditionKey") ? configurationSection.getString("valueConditionKey") : null;
+        this.valueConditionMinValue = configurationSection.contains("valueConditionMinValue") ? configurationSection.getInt("valueConditionMinValue") : 0;
+        this.valueConditionMaxValue = configurationSection.contains("valueConditionMaxValue") ? configurationSection.getInt("valueConditionMaxValue") : 0;
     }
 
     @Override

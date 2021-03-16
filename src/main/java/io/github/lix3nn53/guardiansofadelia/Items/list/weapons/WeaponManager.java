@@ -17,8 +17,8 @@ public class WeaponManager {
     public static ItemStack get(WeaponGearType gearType, int gearLevel, int itemIndex, ItemTier tier, boolean noStats, String gearSet) {
         GuardiansOfAdelia.getInstance().getLogger().info(gearLevel + " " + itemIndex + " " + gearType.toString() + " " + tier.toString() + " " + gearSet);
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfStatsNormal();
-        int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel);
-        int maxStatValue = noStats ? 0 : GearLevel.getMaxStatValue(gearLevel);
+        int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel, false);
+        int maxStatValue = noStats ? 0 : GearLevel.getMaxStatValue(gearLevel, false);
 
         List<WeaponSet> weaponSetList = gearLevelToWeapons.get(gearLevel);
 

@@ -6,8 +6,8 @@
 
 count: 1
 i1:
-  name: "Novice"
-  baseLevelReq: 1
+  name: "TODO_1"
+  baseLevelReq: 0
   health: 24
-  defense: 10
-  magicDefense: 5
+  defense: 12
+  magicDefense: 6

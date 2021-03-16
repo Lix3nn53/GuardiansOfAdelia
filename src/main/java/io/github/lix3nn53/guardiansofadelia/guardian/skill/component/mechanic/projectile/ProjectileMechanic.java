@@ -237,7 +237,10 @@ public class ProjectileMechanic extends MechanicComponent {
                             disguise = new MiscDisguise(DisguiseType.EGG);
                         } else if (projectileType == DragonFireball.class) {
                             disguise = new MiscDisguise(DisguiseType.DRAGON_FIREBALL);
+                        } else if (projectileType == Snowball.class) {
+                            disguise = new MiscDisguise(DisguiseType.SNOWBALL);
                         }
+
                         if (disguise != null) {
                             DisguiseAPI.disguiseToAll(p, disguise);
                         }

@@ -21,7 +21,8 @@ public class MyPlayerMoveEvent implements Listener {
 
         PetManager.onPlayerMove(player);
 
-        if (player.isOnGround()) { //depricated because info comes from client and may therefore not be accurate.
+        boolean onGround = player.isOnGround();
+        if (onGround) { //depricated because info comes from client and may therefore not be accurate.
             TriggerListener.onPlayerLandGround(player);
         }
 
@@ -46,7 +47,7 @@ public class MyPlayerMoveEvent implements Listener {
             }
 
             boolean rootedY = StatusEffectManager.isRootedY(player);
-            if (rootedY) {
+            if (onGround && rootedY) {
                 double y = from.getY();
                 double toY = to.getY();
 

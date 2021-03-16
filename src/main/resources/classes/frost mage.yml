@@ -7,9 +7,7 @@
 tier: 3
 color: "LIGHT_PURPLE"
 description:
-  - "The Mage may be frail and weak in body,"
-  - "but that is a worthy sacrifice for"
-  - "the strength of the mind."
+  - "Todo"
 classIconCustomModelData: 16
 attributeTierStrength: 1
 attributeTierSpirit: 4
@@ -25,8 +23,8 @@ armorGearTypes:
   - "FEATHER_ARMOR"
 hasDefaultOffhand: false
 skillOne:
-  name: "Fireball"
-  customModelData: 27
+  name: "Frostball"
+  customModelData: 48
   description:
     - "Shoot a fireball that deals damage to"
     - "targets in area if it hits a target."
@@ -48,7 +46,7 @@ skillOne:
     componentType: "SelfTarget"
     child1:
       componentType: "ProjectileMechanic"
-      projectileClass: "Fireball"
+      projectileClass: "Snowball"
       spreadType: "CONE"
       speed: 1.9
       amountList:
@@ -61,6 +59,11 @@ skillOne:
       angle: 30
       range: 200
       mustHitToWork: true
+      particle:
+        arrangementType: "Single"
+        particleType: "REDSTONE"
+        dustColor: 6750207
+        dustSize: 2
       child1:
         componentType: "AreaTarget"
         allies: false
@@ -85,8 +88,21 @@ skillOne:
             - 450
             - 720
         child2:
+          componentType: "PotionEffectMechanic"
+          potionEffectType: "SLOW"
+          tickList:
+            - 40
+            - 50
+            - 60
+            - 70
+          amplifierList:
+            - 2
+            - 2.5
+            - 3
+            - 4
+        child3:
           componentType: "ValueCondition"
-          key: "firespirit"
+          key: "icespirit"
           minValue: 4
           maxValue: 50
           checkCasterOnly: true
@@ -94,17 +110,50 @@ skillOne:
             componentType: "ChangeSkillLevelMechanic"
             index: 3
             child1:
-              componentType: "FireMechanic"
-              ticks:
+              componentType: "RootMechanic"
+              lockY: true
+              durations:
+                - 40
+                - 50
+                - 60
+                - 70
                 - 80
                 - 90
-                - 100
-                - 120
+            child2:
+              componentType: "SilenceMechanic"
+              durations:
+                - 40
+                - 50
+                - 60
+                - 70
+                - 80
+                - 90
+            child3:
+              componentType: "DisarmMechanic"
+              durations:
+                - 40
+                - 50
+                - 60
+                - 70
+                - 80
+                - 90
+            child4:
+              componentType: "HologramMechanic"
+              helmetType: "IRON_PICKAXE"
+              customModelData: 10
+              durations:
+                - 40
+                - 50
+                - 60
+                - 70
+                - 80
+                - 90
+              upward: -0.5
           child2:
             componentType: "SelfTarget"
             child1:
               componentType: "ValueSetMechanic"
-              key: "firespirit"
+              key: "icespirit"
               values:
                 - 0
                 - 0
@@ -116,8 +165,8 @@ skillOne:
       componentType: "SoundMechanic"
       goaSound: "SKILL_FIRE_SLASH"
 skillTwo:
-  name: "Lightning Bolt"
-  customModelData: 55
+  name: "Ice Meteor"
+  customModelData: 50
   description:
     - "Shoot a lightning bolt that deals damage, silences"
     - "and confuses targets in area if it hits a target."
@@ -138,80 +187,158 @@ skillTwo:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "ConeTarget"
+      componentType: "SingleTarget"
       allies: false
       enemy: true
       self: false
-      max: 15
-      angleList:
-        - 45
-        - 50
-        - 55
-        - 60
-      rangeList:
-        - 3.5
-        - 4
-        - 4.5
-        - 5
+      max: 1
+      ranges:
+        - 24
+        - 24
+        - 24
+        - 24
+        - 24
+        - 24
+      tolerance: 4
       child1:
-        componentType: "DamageMechanic"
-        damageType: "MAGIC"
-        damageList:
-          - 20
-          - 50
-          - 200
-          - 325
-          - 450
-          - 720
-      child2:
-        componentType: "SelfTarget"
+        componentType: "ProjectileMechanic"
+        projectileClass: "Snowball"
+        spreadType: "RAIN"
+        height: 12
+        radius: 8
+        speed: 0.4
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+        range: 200
+        mustHitToWork: false
+        particle:
+          arrangementType: "FillCircle"
+          particleType: "REDSTONE"
+          dustColor: 6750207
+          dustSize: 2
+          radius: 1
+          amount: 4
+          direction: "XZ"
+        isProjectileInvisible: false
         child1:
-          componentType: "ParticleMechanic"
-          particle:
-            arrangementType: "FillCircle"
-            particleType: "FLAME"
-            radius: 2.5
-            amount: 2
-            direction: "XZ"
-          radius:
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 20
+          radiusList:
             - 2.5
-            - 2.75
             - 3
             - 3.5
-      child3:
-        componentType: "SoundMechanic"
-        goaSound: "SKILL_LIGHTNING_NORMAL"
-      child4:
-        componentType: "ValueCondition"
-        key: "firespirit"
-        minValue: 4
-        maxValue: 50
-        checkCasterOnly: true
-        child1:
-          componentType: "ChangeSkillLevelMechanic"
-          index: 3
+            - 4
           child1:
-            componentType: "FireMechanic"
-            ticks:
-              - 80
-              - 90
-              - 100
-              - 120
+            componentType: "DamageMechanic"
+            damageType: "MAGIC"
+            damageList:
+              - 480
+              - 780
+              - 1080
+              - 1440
+          child2:
+            componentType: "PotionEffectMechanic"
+            potionEffectType: "SLOW"
+            tickList:
+              - 40
+              - 40
+              - 40
+              - 40
+            amplifierList:
+              - 2
+              - 2
+              - 2
+              - 2
+          child3:
+            componentType: "ValueCondition"
+            key: "icespirit"
+            minValue: 4
+            maxValue: 50
+            checkCasterOnly: true
+            child1:
+              componentType: "ChangeSkillLevelMechanic"
+              index: 3
+              child1:
+                componentType: "RootMechanic"
+                lockY: true
+                durations:
+                  - 40
+                  - 50
+                  - 60
+                  - 70
+                  - 80
+                  - 90
+              child2:
+                componentType: "SilenceMechanic"
+                durations:
+                  - 40
+                  - 50
+                  - 60
+                  - 70
+                  - 80
+                  - 90
+              child3:
+                componentType: "DisarmMechanic"
+                durations:
+                  - 40
+                  - 50
+                  - 60
+                  - 70
+                  - 80
+                  - 90
+              child4:
+                componentType: "HologramMechanic"
+                helmetType: "IRON_PICKAXE"
+                customModelData: 10
+                durations:
+                  - 40
+                  - 50
+                  - 60
+                  - 70
+                  - 80
+                  - 90
+                upward: -0.5
+            child2:
+              componentType: "SelfTarget"
+              child1:
+                componentType: "ValueSetMechanic"
+                key: "icespirit"
+                values:
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 0
         child2:
-          componentType: "SelfTarget"
-          child1:
-            componentType: "ValueSetMechanic"
-            key: "firespirit"
-            values:
-              - 0
-              - 0
-              - 0
-              - 0
-              - 0
-              - 0
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "DrawCylinder"
+            particleType: "REDSTONE"
+            radius: 2.5
+            amount: 25
+            dustColor: 65535
+            dustSize: 4
+          radius:
+            - 2.5
+            - 3
+            - 3.5
+            - 4
+          upward: 1
+        child3:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_FIRE_AURA"
 skillThree:
-  name: "Blasting Warp"
-  customModelData: 44
+  name: "Frozen Meditation"
+  customModelData: 24
   description:
     - "Push nearby enemies away."
   manaCosts:
@@ -231,97 +358,70 @@ skillThree:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "CloneCurrentTargets"
-      allies: false
-      enemy: false
-      self: false
-      max: 1
-      child1:
-        componentType: "DelayMechanic"
-        ticks: 20
-        child1:
-          componentType: "AreaTarget"
-          allies: false
-          enemy: true
-          self: false
-          max: 20
-          radiusList:
-            - 8
-            - 9
-            - 10
-            - 11
-            - 12
-            - 14
-          child1:
-            componentType: "DamageMechanic"
-            damageType: "MAGIC"
-            damageList:
-              - 480
-              - 780
-              - 1080
-              - 1440
-          child2:
-            componentType: "ValueCondition"
-            key: "firespirit"
-            minValue: 4
-            maxValue: 50
-            checkCasterOnly: true
-            child1:
-              componentType: "ChangeSkillLevelMechanic"
-              index: 3
-              child1:
-                componentType: "FireMechanic"
-                ticks:
-                  - 80
-                  - 90
-                  - 100
-                  - 120
-            child2:
-              componentType: "SelfTarget"
-              child1:
-                componentType: "ValueSetMechanic"
-                key: "firespirit"
-                values:
-                  - 0
-                  - 0
-                  - 0
-                  - 0
-                  - 0
-                  - 0
-        child2:
-          componentType: "ParticleMechanic"
-          particle:
-            arrangementType: "FillCircle"
-            particleType: "EXPLOSION_LARGE"
-            radius: 2.5
-            amount: 2
-            direction: "XZ"
-          radius:
-            - 2.5
-            - 2.75
-            - 3
-            - 3.5
+      componentType: "RootMechanic"
+      lockY: true
+      durations:
+        - 120
+        - 160
+        - 200
+        - 240
     child2:
-      componentType: "WarpMechanic"
-      throughWalls: true
-      forwardList:
-        - 7
-        - 8
-        - 9
-        - 10
-      upwardList:
-        - 1
-        - 1
-        - 1
-        - 1
-      rightList:
-        - 0
-        - 0
-        - 0
-        - 0
+      componentType: "SilenceMechanic"
+      durations:
+        - 120
+        - 160
+        - 200
+        - 240
+    child3:
+      componentType: "DisarmMechanic"
+      durations:
+        - 120
+        - 160
+        - 200
+        - 240
+    child4:
+      componentType: "HologramMechanic"
+      helmetType: "IRON_PICKAXE"
+      customModelData: 10
+      durations:
+        - 120
+        - 160
+        - 200
+        - 240
+      upward: -0.5
+    child5:
+      componentType: "RepeatMechanic"
+      period: 40
+      repetitions:
+        - 3
+        - 4
+        - 5
+        - 6
+      child1:
+        componentType: "HealMechanic"
+        healPercentList:
+          - 0.1
+          - 0.1
+          - 0.1
+          - 0.1
+      child2:
+        componentType: "ParticleMechanic"
+        particle:
+          arrangementType: "DrawCylinder"
+          particleType: "REDSTONE"
+          radius: 1.2
+          amount: 8
+          dustColor: 6750207
+          dustSize: 2
+        radius:
+          - 1.2
+          - 1.2
+          - 1.2
+          - 1.2
+        upward: 0.5
 skillPassive:
-  name: "Fire Spirit"
-  customModelData: 61
+  name: "Ice Spirit"
+  customModelData: 51
   description:
     - "When you took melee damage when"
     - "your health is low root nearby targets."
@@ -342,7 +442,7 @@ skillPassive:
   trigger:
     componentType: "InitializeTrigger"
     child1:
-      componentType: "MagicAttackTrigger"
+      componentType: "SkillCastTrigger"
       cooldowns:
         - 1
         - 1
@@ -354,7 +454,7 @@ skillPassive:
         componentType: "SelfTarget"
         child1:
           componentType: "ValueAddMechanic"
-          key: "firespirit"
+          key: "icespirit"
           valueToAdd:
             - 1
             - 1
@@ -362,9 +462,61 @@ skillPassive:
             - 1
             - 1
             - 1
+      child2:
+        componentType: "ValueCondition"
+        key: "icespirit"
+        minValue: 0
+        maxValue: 3
+        checkCasterOnly: true
+        child1:
+          componentType: "RepeatCancelMechanic"
+      child3:
+        componentType: "ValueCondition"
+        key: "icespirit"
+        minValue: 4
+        maxValue: 4
+        checkCasterOnly: true
+        child1:
+          componentType: "RepeatMechanic"
+          period: 180
+          # stop self if condition is not met
+          valueConditionKey: "icespirit"
+          valueConditionMinValue: 4
+          valueConditionMaxValue: 50
+          child1:
+            componentType: "ParticleAnimationMechanic"
+            particle:
+              arrangementType: "DrawCylinder"
+              particleType: "REDSTONE"
+              dustColor: 6750207
+              dustSize: 2
+              radius: 0.1
+              amount: 2
+            frequency: 5
+            radius:
+              - 0.1
+              - 0.1
+              - 0.1
+              - 0.1
+            repeatAmount:
+              - 36
+              - 36
+              - 36
+              - 36
+            upward: 1
+            offsety: 1.2
+            offsetx: 0.1
+            resetY: true
+            rotation: true
+            yawIncrease: 30
+            pitchIncrease: 10
+            # stop self if condition is not met
+            valueConditionKey: "icespirit"
+            valueConditionMinValue: 4
+            valueConditionMaxValue: 50
 skillUltimate:
-  name: "Chaos Meteor"
-  customModelData: 30
+  name: "Blizzard"
+  customModelData: 49
   description:
     - "Summon a meteor from sky that hits"
     - "nearby targets when it reaches ground."
@@ -388,121 +540,75 @@ skillUltimate:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "SingleTarget"
-      allies: false
-      enemy: true
-      self: false
-      max: 1
-      ranges:
-        - 24
-        - 24
-        - 24
-        - 24
-        - 24
-        - 24
-      tolerance: 4
+      componentType: "HologramMechanic"
+      helmetType: "IRON_PICKAXE"
+      customModelData: 11
+      durations:
+        - 1000
+        - 1100
+        - 1200
+        - 1300
+      displayText: "< Oil %caster% >"
+      gravity: true
+      marker: false
+      speed: 1.9
+      right: 0
+      forward: 1
+      upward: 0.5
       child1:
-        componentType: "ProjectileMechanic"
-        projectileClass: "Fireball"
-        spreadType: "RAIN"
-        height: 12
-        radius: 8
-        speed: 0.4
-        amountList:
-          - 1
-          - 1
-          - 1
-          - 1
-          - 1
-          - 1
-        range: 200
-        mustHitToWork: false
-        particle:
-          arrangementType: "Single"
-          particleType: "FLAME"
-        isProjectileInvisible: false
+        componentType: "RepeatMechanic"
+        period: 10
+        repetitions:
+          - 100
+          - 110
+          - 120
+          - 130
         child1:
           componentType: "AreaTarget"
           allies: false
           enemy: true
           self: false
-          max: 20
+          max: 30
           radiusList:
-            - 6
-            - 7
-            - 8
-            - 9
-            - 10
-            - 12
+            - 3
+            - 3
+            - 3
+            - 3
           child1:
+            componentType: "ParticleMechanic"
+            particle:
+              arrangementType: "FillCircle"
+              particleType: "REDSTONE"
+              radius: 1
+              amount: 5
+              direction: "XZ"
+              dustColor: 3355443
+              dustSize: 2
+            radius:
+              - 1
+              - 1
+              - 1
+              - 1
+          child2:
+            componentType: "PotionEffectMechanic"
+            potionEffectType: "SLOW"
+            tickList:
+              - 40
+              - 40
+              - 40
+              - 40
+            amplifierList:
+              - 2
+              - 2
+              - 2
+              - 2
+          child3:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
             damageList:
-              - 480
-              - 780
-              - 1080
-              - 1440
-              - 1800
-              - 2400
-          child2:
-            componentType: "LaunchMechanic"
-            relative: "TARGET"
-            forwardSpeedList:
-              - 0
-              - 0
-              - 0
-              - 0
-            upwardSpeedList:
-              - 1.2
-              - 1.4
-              - 1.6
-              - 1.8
-            rightSpeedList:
-              - 0
-              - 0
-              - 0
-              - 0
-          child3:
-            componentType: "ValueCondition"
-            key: "firespirit"
-            minValue: 4
-            maxValue: 50
-            checkCasterOnly: true
-            child1:
-              componentType: "ChangeSkillLevelMechanic"
-              index: 3
-              child1:
-                componentType: "FireMechanic"
-                ticks:
-                  - 80
-                  - 90
-                  - 100
-                  - 120
-            child2:
-              componentType: "SelfTarget"
-              child1:
-                componentType: "ValueSetMechanic"
-                key: "firespirit"
-                values:
-                  - 0
-                  - 0
-                  - 0
-                  - 0
-                  - 0
-                  - 0
-        child2:
-          componentType: "ParticleMechanic"
-          particle:
-            arrangementType: "FillCircle"
-            particleType: "EXPLOSION_HUGE"
-            radius: 3
-            amount: 4
-            direction: "XZ"
-          radius:
-            - 3
-            - 3.5
-            - 3
-            - 3.25
-        child3:
-          componentType: "SoundMechanic"
-          goaSound: "SKILL_FIRE_AURA"
+              - 20
+              - 50
+              - 200
+              - 325
+              - 450
+              - 720

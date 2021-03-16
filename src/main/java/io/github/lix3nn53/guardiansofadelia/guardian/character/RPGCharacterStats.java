@@ -990,30 +990,6 @@ public class RPGCharacterStats {
         MessageUtils.sendCenteredMessage(player, ChatColor.GOLD + "Level up!");
         MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Congratulations, your new level is " + ChatColor.GOLD + newLevel + "");
 
-        int lastNum = newLevel % 10;
-        switch (lastNum) {
-            case 0:
-                player.sendMessage("");
-                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You can equip stronger " + ChatColor.GOLD + "weapons");
-                break;
-            case 2:
-                player.sendMessage("");
-                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You can equip stronger " + ChatColor.GOLD + "boots!");
-                break;
-            case 4:
-                player.sendMessage("");
-                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You can equip stronger " + ChatColor.GOLD + "helmets");
-                break;
-            case 6:
-                player.sendMessage("");
-                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You can equip stronger " + ChatColor.GOLD + "leggings");
-                break;
-            case 8:
-                player.sendMessage("");
-                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You can equip stronger " + ChatColor.GOLD + "chestplates");
-                break;
-        }
-
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         int strBonus = rpgClass.getAttributeBonusForLevel(AttributeType.STRENGTH, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.STRENGTH, newLevel - 1);
         int sprBonus = rpgClass.getAttributeBonusForLevel(AttributeType.SPIRIT, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.SPIRIT, newLevel - 1);
