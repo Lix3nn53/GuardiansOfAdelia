@@ -26,8 +26,8 @@ skillOne:
   name: "Frostball"
   customModelData: 48
   description:
-    - "Shoot a fireball that deals damage to"
-    - "targets in area if it hits a target."
+    - "Shoot a frostball that deals damage and"
+    - "slows enemies in area if it hits a target."
   manaCosts:
     - 5
     - 6
@@ -157,8 +157,8 @@ skillTwo:
   name: "Ice Meteor"
   customModelData: 50
   description:
-    - "Shoot a lightning bolt that deals damage, silences"
-    - "and confuses targets in area if it hits a target."
+    - "Summon a small ice mass from the sky that"
+    - "deals damage and slows enemies in area."
   manaCosts:
     - 10
     - 12
@@ -220,6 +220,11 @@ skillTwo:
           child1:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
+            damageList:
+              - 10
+              - 20
+              - 30
+              - 40
             damageMultiplyList:
               - 1.4
               - 1.6
@@ -314,7 +319,7 @@ skillThree:
   name: "Frozen Meditation"
   customModelData: 24
   description:
-    - "Push nearby enemies away."
+    - "Freeze yourself but restore health as you stay frozen."
   manaCosts:
     - 10
     - 12
@@ -393,8 +398,9 @@ skillPassive:
   name: "Ice Spirit"
   customModelData: 51
   description:
-    - "When you took melee damage when"
-    - "your health is low root nearby targets."
+    - "Every time you cast a spell gain a stack."
+    - "If you have 4 stacks particles will start playing"
+    - "around you. The enemies your next skill hit will freeze."
   manaCosts:
     - 0
     - 0
@@ -480,9 +486,8 @@ skillUltimate:
   name: "Blizzard"
   customModelData: 49
   description:
-    - "Summon a blizzard that deals"
-    - "magic damage to nearby targets and"
-    - "slows them."
+    - "Summon a blizzard that deals magic damage to"
+    - "nearby enemies and slows them."
   manaCosts:
     - 50
     - 55
@@ -546,6 +551,11 @@ skillUltimate:
           child2:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
+            damageList:
+              - 10
+              - 20
+              - 30
+              - 40
             damageMultiplyList:
               - 1.4
               - 1.6

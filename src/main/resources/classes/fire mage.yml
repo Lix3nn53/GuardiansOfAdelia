@@ -67,6 +67,11 @@ skillOne:
         child1:
           componentType: "DamageMechanic"
           damageType: "MAGIC"
+          damageList:
+            - 10
+            - 20
+            - 30
+            - 40
           damageMultiplyList:
             - 1.4
             - 1.6
@@ -103,11 +108,10 @@ skillOne:
       componentType: "SoundMechanic"
       goaSound: "SKILL_FIRE_SLASH"
 skillTwo:
-  name: "Lightning Bolt"
+  name: "Dragon Breath"
   customModelData: 55
   description:
-    - "Shoot a lightning bolt that deals damage, silences"
-    - "and confuses targets in area if it hits a target."
+    - "Deal damage to enemies in front of you."
   manaCosts:
     - 10
     - 12
@@ -139,6 +143,11 @@ skillTwo:
       child1:
         componentType: "DamageMechanic"
         damageType: "MAGIC"
+        damageList:
+          - 10
+          - 20
+          - 30
+          - 40
         damageMultiplyList:
           - 1.4
           - 1.6
@@ -198,7 +207,8 @@ skillThree:
   name: "Blasting Warp"
   customModelData: 44
   description:
-    - "Push nearby enemies away."
+    - "Warp to where you are looking at. After a small delay"
+    - "cause a explosion in your old location, dealing damage to enemies."
   manaCosts:
     - 10
     - 12
@@ -234,6 +244,11 @@ skillThree:
           child1:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
+            damageList:
+              - 10
+              - 20
+              - 30
+              - 40
             damageMultiplyList:
               - 1.4
               - 1.6
@@ -301,8 +316,9 @@ skillPassive:
   name: "Fire Spirit"
   customModelData: 61
   description:
-    - "When you took melee damage when"
-    - "your health is low root nearby targets."
+    - "Every time you cast a spell gain a stack."
+    - "If you have 4 stacks particles will start playing"
+    - "around you. The enemies your next skill hit will burn."
   manaCosts:
     - 0
     - 0
@@ -386,11 +402,9 @@ skillUltimate:
   name: "Chaos Meteor"
   customModelData: 30
   description:
-    - "Summon a meteor from sky that hits"
-    - "nearby targets when it reaches ground."
-    - ""
-    - "The hit effect deals damage, ignites"
-    - "and launches enemies to the sky."
+    - "Summon a meteor from sky that"
+    - "damages and launches them upwards"
+    - "nearby enemies when it reaches ground."
   manaCosts:
     - 50
     - 55
@@ -436,6 +450,7 @@ skillUltimate:
           amount: 9
           direction: "XZ"
         isProjectileInvisible: false
+        addLore: false
         child1:
           componentType: "AreaTarget"
           allies: false
@@ -450,6 +465,11 @@ skillUltimate:
           child1:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
+            damageList:
+              - 10
+              - 20
+              - 30
+              - 40
             damageMultiplyList:
               - 1.4
               - 1.6

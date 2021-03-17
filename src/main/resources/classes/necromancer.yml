@@ -148,6 +148,11 @@ skillTwo:
         child1:
           componentType: "DamageMechanic"
           damageType: "MAGIC"
+          damageList:
+            - 10
+            - 20
+            - 30
+            - 40
           damageMultiplyList:
             - 1.4
             - 1.6

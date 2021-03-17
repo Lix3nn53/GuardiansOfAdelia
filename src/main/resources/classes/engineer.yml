@@ -107,6 +107,11 @@ skillOne:
               child1:
                 componentType: "DamageMechanic"
                 damageType: "RANGED"
+                damageList:
+                  - 10
+                  - 20
+                  - 30
+                  - 40
                 damageMultiplyList:
                   - 1.4
                   - 1.6
@@ -173,6 +178,11 @@ skillTwo:
             child1:
               componentType: "DamageMechanic"
               damageType: "RANGED"
+              damageList:
+                - 10
+                - 20
+                - 30
+                - 40
               damageMultiplyList:
                 - 1.4
                 - 1.6
@@ -443,6 +453,11 @@ skillUltimate:
           child1:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
+            damageList:
+              - 10
+              - 20
+              - 30
+              - 40
             damageMultiplyList:
               - 1.4
               - 1.6
