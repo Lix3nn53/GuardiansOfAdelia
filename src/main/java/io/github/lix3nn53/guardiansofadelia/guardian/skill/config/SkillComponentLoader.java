@@ -102,7 +102,7 @@ public class SkillComponentLoader {
         } else if (componentType.equals(BuffMechanic.class.getSimpleName())) {
             return new BuffMechanic(configurationSection);
         } else if (componentType.equals(InitializeTrigger.class.getSimpleName())) {
-            return new InitializeTrigger();
+            return new InitializeTrigger(configurationSection);
         } else if (componentType.equals(CompanionSpawnTrigger.class.getSimpleName())) {
             return new CompanionSpawnTrigger(configurationSection);
         } else if (componentType.equals(TookPhysicalDamageTrigger.class.getSimpleName())) {
@@ -116,7 +116,7 @@ public class SkillComponentLoader {
         } else if (componentType.equals(ImmunityMechanic.class.getSimpleName())) {
             return new ImmunityMechanic(configurationSection);
         } else if (componentType.equals(LandTrigger.class.getSimpleName())) {
-            return new LandTrigger();
+            return new LandTrigger(configurationSection);
         } else if (componentType.equals(ImmunityRemoveMechanic.class.getSimpleName())) {
             return new ImmunityRemoveMechanic(configurationSection);
         } else if (componentType.equals(SilenceMechanic.class.getSimpleName())) {
@@ -146,11 +146,11 @@ public class SkillComponentLoader {
         } else if (componentType.equals(FlagCondition.class.getSimpleName())) {
             return new FlagCondition(configurationSection);
         } else if (componentType.equals(RepeatCancelMechanic.class.getSimpleName())) {
-            return new RepeatCancelMechanic();
+            return new RepeatCancelMechanic(configurationSection);
         } else if (componentType.equals(FlagRemoveMechanic.class.getSimpleName())) {
             return new FlagRemoveMechanic(configurationSection);
         } else if (componentType.equals(RemoveSavedEntities.class.getSimpleName())) {
-            return new RemoveSavedEntities();
+            return new RemoveSavedEntities(configurationSection);
         } else if (componentType.equals(FlagSetMechanic.class.getSimpleName())) {
             return new FlagSetMechanic(configurationSection);
         } else if (componentType.equals(DisarmMechanic.class.getSimpleName())) {
@@ -172,7 +172,7 @@ public class SkillComponentLoader {
         } else if (componentType.equals(ManaMechanic.class.getSimpleName())) {
             return new ManaMechanic(configurationSection);
         } else if (componentType.equals(TauntMechanic.class.getSimpleName())) {
-            return new TauntMechanic();
+            return new TauntMechanic(configurationSection);
         } else if (componentType.equals(WarpMechanic.class.getSimpleName())) {
             return new WarpMechanic(configurationSection);
         } else if (componentType.equals(WarpTargetMechanic.class.getSimpleName())) {
@@ -184,7 +184,7 @@ public class SkillComponentLoader {
         } else if (componentType.equals(DisguiseMechanic.class.getSimpleName())) {
             return new DisguiseMechanic(configurationSection);
         } else if (componentType.equals(ForEachTargetMechanic.class.getSimpleName())) {
-            return new ForEachTargetMechanic();
+            return new ForEachTargetMechanic(configurationSection);
         } else if (componentType.equals(CompanionCondition.class.getSimpleName())) {
             return new CompanionCondition(configurationSection);
         } else if (componentType.equals(GodDamageMechanic.class.getSimpleName())) {
@@ -198,7 +198,7 @@ public class SkillComponentLoader {
         } else if (componentType.equals(HologramEntityMechanic.class.getSimpleName())) {
             return new HologramEntityMechanic(configurationSection);
         } else if (componentType.equals(HeadRotationMechanic.class.getSimpleName())) {
-            return new HeadRotationMechanic();
+            return new HeadRotationMechanic(configurationSection);
         } else if (componentType.equals(AbsorptionHeartMechanic.class.getSimpleName())) {
             return new AbsorptionHeartMechanic(configurationSection);
         } else if (componentType.equals(CloneCurrentTargets.class.getSimpleName())) {

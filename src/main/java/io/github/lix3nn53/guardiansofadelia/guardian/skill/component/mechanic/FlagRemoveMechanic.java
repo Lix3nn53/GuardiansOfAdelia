@@ -12,12 +12,9 @@ public class FlagRemoveMechanic extends MechanicComponent {
     private final String key;
     private final boolean isUnique;
 
-    public FlagRemoveMechanic(String key, boolean isUnique) {
-        this.key = key;
-        this.isUnique = isUnique;
-    }
-
     public FlagRemoveMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("key")) {
             configLoadError("key");
         }

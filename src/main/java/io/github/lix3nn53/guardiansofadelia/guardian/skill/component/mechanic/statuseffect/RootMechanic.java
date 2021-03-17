@@ -17,12 +17,9 @@ public class RootMechanic extends MechanicComponent {
     private final List<Integer> duration;
     private final boolean lockY;
 
-    public RootMechanic(List<Integer> duration, boolean lockY) {
-        this.duration = duration;
-        this.lockY = lockY;
-    }
-
     public RootMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("durations")) {
             configLoadError("durations");
         }
@@ -65,6 +62,8 @@ public class RootMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             additions.add(ChatColor.AQUA + "Root duration: " + ((duration.get(skillLevel) / 20)) + " seconds");
         } else if (skillLevel == duration.size()) {

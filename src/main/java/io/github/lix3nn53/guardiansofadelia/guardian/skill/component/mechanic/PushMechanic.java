@@ -16,20 +16,9 @@ public class PushMechanic extends MechanicComponent {
     private final boolean centerSelf;
     private final double offsetY;
 
-    /**
-     * @param pushType
-     * @param speedList
-     * @param centerSelf center = caster, if false: center = first target
-     * @param offsetY
-     */
-    public PushMechanic(PushType pushType, List<Double> speedList, boolean centerSelf, double offsetY) {
-        this.pushType = pushType;
-        this.speedList = speedList;
-        this.centerSelf = centerSelf;
-        this.offsetY = offsetY;
-    }
-
     public PushMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("pushType")) {
             configLoadError("pushType");
         }
@@ -88,6 +77,8 @@ public class PushMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             additions.add(ChatColor.AQUA + "Push speed: " + speedList.get(skillLevel));
         } else if (skillLevel == speedList.size()) {

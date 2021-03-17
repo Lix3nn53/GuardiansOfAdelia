@@ -67,6 +67,8 @@ public class SingleTarget extends TargetComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             additions.add(ChatColor.YELLOW + "Range: " + range.get(skillLevel));
         } else if (skillLevel == range.size()) {

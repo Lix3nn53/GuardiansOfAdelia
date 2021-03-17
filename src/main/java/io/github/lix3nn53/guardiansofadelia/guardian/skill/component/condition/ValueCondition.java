@@ -15,14 +15,9 @@ public class ValueCondition extends ConditionComponent {
     private final int maxValue;
     private final boolean checkCasterOnly;
 
-    public ValueCondition(String key, int minValue, int maxValue, boolean checkCasterOnly) {
-        this.key = key;
-        this.minValue = minValue;
-        this.maxValue = maxValue;
-        this.checkCasterOnly = checkCasterOnly;
-    }
-
     public ValueCondition(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("key")) {
             configLoadError("key");
         }

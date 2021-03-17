@@ -16,13 +16,9 @@ public class FlagSetMechanic extends MechanicComponent {
     private final List<Integer> ticks;
     private final boolean isUnique;
 
-    public FlagSetMechanic(String key, List<Integer> ticks, boolean isUnique) {
-        this.key = key;
-        this.ticks = ticks;
-        this.isUnique = isUnique;
-    }
-
     public FlagSetMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("key")) {
             configLoadError("key");
         }

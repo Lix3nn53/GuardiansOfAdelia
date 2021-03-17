@@ -4,4 +4,8 @@ import org.bukkit.util.Vector;
 
 public abstract class MechanicComponent extends SkillComponent {
     public static final Vector UP = new Vector(0, 1, 0);
+
+    public MechanicComponent(boolean addLore) {
+        super(addLore);
+    }
 }

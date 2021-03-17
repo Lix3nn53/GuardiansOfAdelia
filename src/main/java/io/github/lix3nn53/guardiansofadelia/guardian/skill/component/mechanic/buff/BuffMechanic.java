@@ -22,12 +22,16 @@ public class BuffMechanic extends MechanicComponent {
     private final List<Integer> ticks;
 
     public BuffMechanic(BuffType buffType, List<Double> multiplier, List<Integer> ticks) {
+        super(false);
+
         this.buffType = buffType;
         this.multiplier = multiplier;
         this.ticks = ticks;
     }
 
     public BuffMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("buffType")) {
             configLoadError("buffType");
         }
@@ -99,6 +103,8 @@ public class BuffMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             additions.add(buffType.toString() + " bonus: " + multiplier.get(skillLevel));
             additions.add(buffType.toString() + " duration: " + (ticks.get(skillLevel) / 20));

@@ -33,11 +33,7 @@ skillOne:
     - 6
     - 7
     - 8
-    - 9
-    - 10
   cooldowns:
-    - 4
-    - 4
     - 4
     - 4
     - 4
@@ -54,8 +50,6 @@ skillOne:
         - 1
         - 1
         - 1
-        - 1
-        - 1
       angle: 30
       range: 200
       mustHitToWork: true
@@ -64,6 +58,7 @@ skillOne:
         particleType: "REDSTONE"
         dustColor: 6750207
         dustSize: 2
+      addLore: false
       child1:
         componentType: "AreaTarget"
         allies: false
@@ -75,11 +70,14 @@ skillOne:
           - 2.75
           - 3
           - 3.25
-          - 3.5
-          - 4
         child1:
           componentType: "DamageMechanic"
           damageType: "MAGIC"
+          damageList:
+            - 10
+            - 20
+            - 30
+            - 40
           damageMultiplyList:
             - 1.4
             - 1.6
@@ -115,8 +113,7 @@ skillOne:
                 - 50
                 - 60
                 - 70
-                - 80
-                - 90
+              addLore: false
             child2:
               componentType: "SilenceMechanic"
               durations:
@@ -124,8 +121,7 @@ skillOne:
                 - 50
                 - 60
                 - 70
-                - 80
-                - 90
+              addLore: false
             child3:
               componentType: "DisarmMechanic"
               durations:
@@ -133,8 +129,7 @@ skillOne:
                 - 50
                 - 60
                 - 70
-                - 80
-                - 90
+              addLore: false
             child4:
               componentType: "HologramMechanic"
               helmetType: "IRON_PICKAXE"
@@ -144,8 +139,6 @@ skillOne:
                 - 50
                 - 60
                 - 70
-                - 80
-                - 90
               upward: -0.5
           child2:
             componentType: "SelfTarget"
@@ -153,8 +146,6 @@ skillOne:
               componentType: "ValueSetMechanic"
               key: "icespirit"
               values:
-                - 0
-                - 0
                 - 0
                 - 0
                 - 0
@@ -173,11 +164,7 @@ skillTwo:
     - 12
     - 14
     - 16
-    - 18
-    - 20
   cooldowns:
-    - 12
-    - 12
     - 12
     - 12
     - 12
@@ -195,8 +182,6 @@ skillTwo:
         - 24
         - 24
         - 24
-        - 24
-        - 24
       tolerance: 4
       child1:
         componentType: "ProjectileMechanic"
@@ -206,8 +191,6 @@ skillTwo:
         radius: 8
         speed: 0.4
         amountList:
-          - 1
-          - 1
           - 1
           - 1
           - 1
@@ -272,8 +255,7 @@ skillTwo:
                   - 50
                   - 60
                   - 70
-                  - 80
-                  - 90
+                addLore: false
               child2:
                 componentType: "SilenceMechanic"
                 durations:
@@ -281,8 +263,7 @@ skillTwo:
                   - 50
                   - 60
                   - 70
-                  - 80
-                  - 90
+                addLore: false
               child3:
                 componentType: "DisarmMechanic"
                 durations:
@@ -290,8 +271,7 @@ skillTwo:
                   - 50
                   - 60
                   - 70
-                  - 80
-                  - 90
+                addLore: false
               child4:
                 componentType: "HologramMechanic"
                 helmetType: "IRON_PICKAXE"
@@ -301,8 +281,6 @@ skillTwo:
                   - 50
                   - 60
                   - 70
-                  - 80
-                  - 90
                 upward: -0.5
             child2:
               componentType: "SelfTarget"
@@ -310,8 +288,6 @@ skillTwo:
                 componentType: "ValueSetMechanic"
                 key: "icespirit"
                 values:
-                  - 0
-                  - 0
                   - 0
                   - 0
                   - 0
@@ -344,11 +320,7 @@ skillThree:
     - 12
     - 14
     - 16
-    - 18
-    - 20
   cooldowns:
-    - 14
-    - 14
     - 14
     - 14
     - 14
@@ -428,11 +400,7 @@ skillPassive:
     - 0
     - 0
     - 0
-    - 0
-    - 0
   cooldowns:
-    - 40
-    - 40
     - 40
     - 40
     - 40
@@ -446,16 +414,12 @@ skillPassive:
         - 1
         - 1
         - 1
-        - 1
-        - 1
       child1:
         componentType: "SelfTarget"
         child1:
           componentType: "ValueAddMechanic"
           key: "icespirit"
           valueToAdd:
-            - 1
-            - 1
             - 1
             - 1
             - 1
@@ -604,8 +568,7 @@ skillUltimate:
                   - 50
                   - 60
                   - 70
-                  - 80
-                  - 90
+                addLore: false
               child2:
                 componentType: "SilenceMechanic"
                 durations:
@@ -613,8 +576,7 @@ skillUltimate:
                   - 50
                   - 60
                   - 70
-                  - 80
-                  - 90
+                addLore: false
               child3:
                 componentType: "DisarmMechanic"
                 durations:
@@ -622,8 +584,7 @@ skillUltimate:
                   - 50
                   - 60
                   - 70
-                  - 80
-                  - 90
+                addLore: false
               child4:
                 componentType: "HologramMechanic"
                 helmetType: "IRON_PICKAXE"
@@ -633,8 +594,6 @@ skillUltimate:
                   - 50
                   - 60
                   - 70
-                  - 80
-                  - 90
                 upward: -0.5
             child2:
               componentType: "SelfTarget"
@@ -642,8 +601,6 @@ skillUltimate:
                 componentType: "ValueSetMechanic"
                 key: "icespirit"
                 values:
-                  - 0
-                  - 0
                   - 0
                   - 0
                   - 0

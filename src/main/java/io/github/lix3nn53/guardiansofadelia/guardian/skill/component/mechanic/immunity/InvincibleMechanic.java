@@ -14,14 +14,9 @@ public class InvincibleMechanic extends MechanicComponent {
 
     private final List<Integer> ticks;
 
-    /**
-     * @param ticks empty list for infinite
-     */
-    public InvincibleMechanic(List<Integer> ticks) {
-        this.ticks = ticks;
-    }
-
     public InvincibleMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (configurationSection.contains("ticks")) {
             this.ticks = configurationSection.getIntegerList("ticks");
         } else {
@@ -54,6 +49,8 @@ public class InvincibleMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (ticks.isEmpty()) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {

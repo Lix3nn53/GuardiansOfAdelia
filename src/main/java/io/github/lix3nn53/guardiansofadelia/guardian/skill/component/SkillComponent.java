@@ -10,6 +10,11 @@ import java.util.List;
 public abstract class SkillComponent {
 
     private final List<SkillComponent> children = new ArrayList<>();
+    public final boolean addLore;
+
+    protected SkillComponent(boolean addLore) {
+        this.addLore = addLore;
+    }
 
     public abstract boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter);
 

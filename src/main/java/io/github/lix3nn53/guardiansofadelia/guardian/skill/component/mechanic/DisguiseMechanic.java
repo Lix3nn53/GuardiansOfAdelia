@@ -18,18 +18,9 @@ public class DisguiseMechanic extends MechanicComponent {
     private final boolean isAdult;
     private final List<Integer> ticks;
 
-    /**
-     * @param disguiseType Must be mob type
-     * @param isAdult
-     * @param ticks
-     */
-    public DisguiseMechanic(DisguiseType disguiseType, boolean isAdult, List<Integer> ticks) {
-        this.disguiseType = disguiseType;
-        this.isAdult = isAdult;
-        this.ticks = ticks;
-    }
-
     public DisguiseMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("disguiseType")) {
             configLoadError("disguiseType");
         }
@@ -72,6 +63,8 @@ public class DisguiseMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             additions.add(ChatColor.LIGHT_PURPLE + "Disguise duration: " + (ticks.get(skillLevel) / 20));
         } else if (skillLevel == ticks.size()) {

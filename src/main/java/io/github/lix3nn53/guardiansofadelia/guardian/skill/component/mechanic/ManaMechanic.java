@@ -21,12 +21,15 @@ public class ManaMechanic extends MechanicComponent {
     private final String multiplyWithValue;
 
     public ManaMechanic(List<Integer> manaAmount, List<Double> manaPercent, @Nullable String multiplyWithValue) {
+        super(false);
         this.manaAmount = manaAmount;
         this.manaPercent = manaPercent;
         this.multiplyWithValue = multiplyWithValue;
     }
 
     public ManaMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("manaAmountList")) {
             configLoadError("manaAmountList");
         }
@@ -100,6 +103,8 @@ public class ManaMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (!manaAmount.isEmpty()) {
             if (skillLevel == 0) {
                 additions.add(ChatColor.AQUA + "Mana regen: " + manaAmount.get(skillLevel));

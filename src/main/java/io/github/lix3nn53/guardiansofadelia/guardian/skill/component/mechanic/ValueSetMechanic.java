@@ -14,6 +14,8 @@ public class ValueSetMechanic extends MechanicComponent {
     private final List<Integer> values;
 
     public ValueSetMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("key")) {
             configLoadError("key");
         }

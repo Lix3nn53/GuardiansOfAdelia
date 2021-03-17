@@ -18,14 +18,9 @@ public class WarpMechanic extends MechanicComponent {
     private final List<Double> upward;
     private final List<Double> right;
 
-    public WarpMechanic(boolean throughWalls, List<Double> forward, List<Double> upward, List<Double> right) {
-        this.throughWalls = throughWalls;
-        this.forward = forward;
-        this.upward = upward;
-        this.right = right;
-    }
-
     public WarpMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("throughWalls")) {
             configLoadError("throughWalls");
         }
@@ -67,6 +62,8 @@ public class WarpMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             additions.add(ChatColor.YELLOW + "Warp forward: " + forward.get(skillLevel));
         } else if (skillLevel == forward.size()) {

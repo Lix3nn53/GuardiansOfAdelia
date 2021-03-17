@@ -11,11 +11,9 @@ public class MessageMechanic extends MechanicComponent {
 
     private final String message;
 
-    public MessageMechanic(String message) {
-        this.message = message;
-    }
-
     public MessageMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("message")) {
             configLoadError("message");
         }

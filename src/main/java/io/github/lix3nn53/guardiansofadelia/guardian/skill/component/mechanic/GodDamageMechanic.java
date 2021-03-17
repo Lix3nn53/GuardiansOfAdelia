@@ -17,6 +17,8 @@ public class GodDamageMechanic extends MechanicComponent {
     private final List<Double> damagePercentList;
 
     public GodDamageMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("damageList") && !configurationSection.contains("damagePercentList")) {
             configLoadError("damageList");
             configLoadError("damagePercentList");
@@ -71,6 +73,8 @@ public class GodDamageMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             if (!damagePercentList.isEmpty()) {
                 additions.add("God Damage: " + (damagePercentList.get(skillLevel) + 0.5) + "%");

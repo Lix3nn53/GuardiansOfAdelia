@@ -18,6 +18,8 @@ public class SkillCastTrigger extends TriggerComponent {
     int castCounter;
 
     public SkillCastTrigger(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (configurationSection.contains("cooldowns")) {
             this.cooldowns = configurationSection.getIntegerList("cooldowns");
         } else {

@@ -32,6 +32,8 @@ public class HologramEntityMechanic extends MechanicComponent {
     private final double forward;
 
     public HologramEntityMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("entityType")) {
             configLoadError("entityType");
         }

@@ -23,6 +23,8 @@ public class DamageMechanic extends MechanicComponent {
     private final String multiplyWithValue;
 
     public DamageMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("damageType")) {
             configLoadError("damageType");
         }
@@ -100,32 +102,98 @@ public class DamageMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (skillLevel == 0) {
-            String lore = damageType.toString() + ": " + (int) (damageList.get(skillLevel) + 0.5);
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
-            if (multiplyWithValue != null) {
-                lore = lore + "x[" + multiplyWithValue + "]";
+        if (!damageList.isEmpty()) {
+            if (!damageMultiplyList.isEmpty()) {
+                if (skillLevel == 0) {
+                    String lore = damageType.toString() + ": " + (int) (damageList.get(skillLevel) + 0.5) + " + " +
+                            (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "% of your damage";
+
+                    if (multiplyWithValue != null) {
+                        lore = lore + "x[" + multiplyWithValue + "]";
+                    }
+
+                    additions.add(lore);
+                } else if (skillLevel == damageMultiplyList.size()) {
+                    String lore = damageType.toString() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5) + " + " +
+                            (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "% of your damage";
+
+                    if (multiplyWithValue != null) {
+                        lore = lore + "x[" + multiplyWithValue + "]";
+                    }
+
+                    additions.add(lore);
+                } else {
+                    String lore1 = damageType.toString() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5) + " + " +
+                            (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "% of your damage";
+                    String lore2 = (int) (damageList.get(skillLevel) + 0.5) + " + " +
+                            (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "% of your damage";
+
+                    if (multiplyWithValue != null) {
+                        lore1 = lore1 + "x[" + multiplyWithValue + "]";
+                        lore2 = lore2 + "x[" + multiplyWithValue + "]";
+                    }
+
+                    additions.add(lore1 + " -> " + lore2);
+                }
+            } else {
+                if (skillLevel == 0) {
+                    String lore = damageType.toString() + ": " + (int) (damageList.get(skillLevel) + 0.5);
+
+                    if (multiplyWithValue != null) {
+                        lore = lore + "x[" + multiplyWithValue + "]";
+                    }
+
+                    additions.add(lore);
+                } else if (skillLevel == damageList.size()) {
+                    String lore = damageType.toString() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5);
+
+                    if (multiplyWithValue != null) {
+                        lore = lore + "x[" + multiplyWithValue + "]";
+                    }
+
+                    additions.add(lore);
+                } else {
+                    String lore1 = damageType.toString() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5);
+                    String lore2 = (int) (damageList.get(skillLevel) + 0.5) + "";
+
+                    if (multiplyWithValue != null) {
+                        lore1 = lore1 + "x[" + multiplyWithValue + "]";
+                        lore2 = lore2 + "x[" + multiplyWithValue + "]";
+                    }
+
+                    additions.add(lore1 + " -> " + lore2);
+                }
             }
+        } else if (!damageMultiplyList.isEmpty()) {
+            if (skillLevel == 0) {
+                String lore = damageType.toString() + ": " + (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "% of your damage";
 
-            additions.add(lore);
-        } else if (skillLevel == damageList.size()) {
-            String lore = damageType.toString() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5);
+                if (multiplyWithValue != null) {
+                    lore = lore + "x[" + multiplyWithValue + "]";
+                }
 
-            if (multiplyWithValue != null) {
-                lore = lore + "x[" + multiplyWithValue + "]";
+                additions.add(lore);
+            } else if (skillLevel == damageMultiplyList.size()) {
+                String lore = damageType.toString() + ": " + (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "% of your damage";
+
+                if (multiplyWithValue != null) {
+                    lore = lore + "x[" + multiplyWithValue + "]";
+                }
+
+                additions.add(lore);
+            } else {
+                String lore1 = damageType.toString() + ": " + (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "% of your damage";
+                String lore2 = (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "% of your damage";
+
+                if (multiplyWithValue != null) {
+                    lore1 = lore1 + "x[" + multiplyWithValue + "]";
+                    lore2 = lore2 + "x[" + multiplyWithValue + "]";
+                }
+
+                additions.add(lore1 + " -> " + lore2);
             }
-
-            additions.add(lore);
-        } else {
-            String lore1 = damageType.toString() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5);
-            String lore2 = (int) (damageList.get(skillLevel) + 0.5) + "";
-
-            if (multiplyWithValue != null) {
-                lore1 = lore1 + "x[" + multiplyWithValue + "]";
-                lore2 = lore2 + "x[" + multiplyWithValue + "]";
-            }
-
-            additions.add(lore1 + " -> " + lore2);
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

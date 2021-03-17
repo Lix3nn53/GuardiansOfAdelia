@@ -16,16 +16,9 @@ public class ImmunityMechanic extends MechanicComponent {
     private final EntityDamageEvent.DamageCause damageCause;
     private final List<Integer> ticks;
 
-    /**
-     * @param damageCause
-     * @param ticks       empty list for infinite
-     */
-    public ImmunityMechanic(EntityDamageEvent.DamageCause damageCause, List<Integer> ticks) {
-        this.damageCause = damageCause;
-        this.ticks = ticks;
-    }
-
     public ImmunityMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("damageCause")) {
             configLoadError("damageCause");
         }
@@ -63,6 +56,8 @@ public class ImmunityMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (ticks.isEmpty()) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {

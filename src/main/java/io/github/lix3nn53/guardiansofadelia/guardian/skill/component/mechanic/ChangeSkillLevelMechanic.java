@@ -17,6 +17,8 @@ public class ChangeSkillLevelMechanic extends MechanicComponent {
     private final int value; // value to use if index == - 1
 
     public ChangeSkillLevelMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("index") && !configurationSection.contains("value")) {
             configLoadError("index or value");
         }

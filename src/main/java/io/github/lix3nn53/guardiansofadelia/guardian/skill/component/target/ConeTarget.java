@@ -67,6 +67,8 @@ public class ConeTarget extends TargetComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         additions.add(ChatColor.YELLOW + "Cone range: " + rangeList);
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }

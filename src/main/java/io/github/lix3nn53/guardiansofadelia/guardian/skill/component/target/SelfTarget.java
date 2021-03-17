@@ -10,11 +10,11 @@ import java.util.List;
 public class SelfTarget extends TargetComponent {
 
     public SelfTarget() {
-        super(false, false, true, 1, false, false, false);
+        super(false, false, false, true, 1, false, false, false);
     }
 
     public SelfTarget(ConfigurationSection configurationSection) {
-        super(false, false, true,
+        super(false, false, false, true,
                 configurationSection.contains("max") ? configurationSection.getInt("max") : 1,
                 false,
                 configurationSection.contains("keepCurrent") && configurationSection.getBoolean("keepCurrent"),

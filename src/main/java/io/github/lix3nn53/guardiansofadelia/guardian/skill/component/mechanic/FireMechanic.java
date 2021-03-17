@@ -12,11 +12,9 @@ public class FireMechanic extends MechanicComponent {
 
     private final List<Integer> ticks;
 
-    public FireMechanic(List<Integer> ticks) {
-        this.ticks = ticks;
-    }
-
     public FireMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("ticks")) {
             configLoadError("ticks");
         }
@@ -43,6 +41,8 @@ public class FireMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             additions.add(ChatColor.RED + "Burn duration: " + (ticks.get(skillLevel) / 20));
         } else if (skillLevel == ticks.size()) {

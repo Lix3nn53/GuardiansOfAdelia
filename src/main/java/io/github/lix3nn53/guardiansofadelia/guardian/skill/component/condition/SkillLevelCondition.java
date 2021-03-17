@@ -18,6 +18,8 @@ public class SkillLevelCondition extends ConditionComponent {
     private final int maxValue;
 
     public SkillLevelCondition(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("skillIndex")) {
             configLoadError("skillIndex");
         }

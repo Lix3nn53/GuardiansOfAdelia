@@ -18,11 +18,9 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
     LivingEntity caster;
     int skillLevel;
 
-    public AddPiercingToArrowShootFromCrossbowTrigger(List<Integer> piercingLevel) {
-        this.piercingLevel = piercingLevel;
-    }
-
     public AddPiercingToArrowShootFromCrossbowTrigger(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("piercingLevels")) {
             configLoadError("piercingLevels");
         }
@@ -55,6 +53,8 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             additions.add(ChatColor.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel));
         } else if (skillLevel == piercingLevel.size()) {

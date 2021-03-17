@@ -26,6 +26,8 @@ public class SpawnEntityMechanic extends MechanicComponent {
     private boolean SAVE = false;
 
     public SpawnEntityMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("mobCode")) {
             configLoadError("mobCode");
         }

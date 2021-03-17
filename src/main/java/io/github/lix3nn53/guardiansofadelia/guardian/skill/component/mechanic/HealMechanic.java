@@ -22,12 +22,15 @@ public class HealMechanic extends MechanicComponent {
     private final String multiplyWithValue;
 
     public HealMechanic(List<Integer> healAmountList, List<Double> healPercentList, @Nullable String multiplyWithValue) {
+        super(false);
         this.healAmountList = healAmountList;
         this.healPercentList = healPercentList;
         this.multiplyWithValue = multiplyWithValue;
     }
 
     public HealMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("healAmountList") && !configurationSection.contains("healPercentList")) {
             configLoadError("healAmountList and healPercentList");
         }
@@ -108,6 +111,8 @@ public class HealMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (!healAmountList.isEmpty()) {
             if (skillLevel == 0) {
                 String lore = ChatColor.GREEN + "Heal: " + healAmountList.get(skillLevel);

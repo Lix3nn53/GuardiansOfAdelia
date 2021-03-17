@@ -16,14 +16,9 @@ public class NearbyEntityCondition extends ConditionComponent {
     private final double radius;
     private final boolean mustExist;
 
-    public NearbyEntityCondition(EntityType entityType, String displayNameContains, double radius, boolean mustExist) {
-        this.entityType = entityType;
-        this.displayNameContains = displayNameContains;
-        this.radius = radius;
-        this.mustExist = mustExist;
-    }
-
     public NearbyEntityCondition(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("entityType")) {
             configLoadError("entityType");
         }

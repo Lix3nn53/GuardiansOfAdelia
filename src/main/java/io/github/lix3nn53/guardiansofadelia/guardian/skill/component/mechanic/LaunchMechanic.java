@@ -15,14 +15,9 @@ public class LaunchMechanic extends MechanicComponent {
     private final List<Double> upwardSpeedList;
     private final List<Double> rightSpeedList;
 
-    public LaunchMechanic(Relative relative, List<Double> forwardSpeedList, List<Double> upwardSpeedList, List<Double> rightSpeedList) {
-        this.relative = relative;
-        this.forwardSpeedList = forwardSpeedList;
-        this.upwardSpeedList = upwardSpeedList;
-        this.rightSpeedList = rightSpeedList;
-    }
-
     public LaunchMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("relative")) {
             configLoadError("relative");
         }
@@ -72,6 +67,8 @@ public class LaunchMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeedList.get(skillLevel));
             additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeedList.get(skillLevel));

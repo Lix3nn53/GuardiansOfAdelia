@@ -28,6 +28,8 @@ public class RepeatMechanic extends MechanicComponent {
      * @param repetitions 0 for infinite
      */
     public RepeatMechanic(long period, List<Integer> repetitions) {
+        super(false);
+
         this.period = period;
         this.repetitions = repetitions;
         this.valueConditionKey = null;
@@ -36,6 +38,8 @@ public class RepeatMechanic extends MechanicComponent {
     }
 
     public RepeatMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("period")) {
             configLoadError("period");
         }
@@ -116,6 +120,8 @@ public class RepeatMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             String repeat = "";
             if (!repetitions.isEmpty()) {
@@ -126,14 +132,14 @@ public class RepeatMechanic extends MechanicComponent {
         } else if (skillLevel == repetitions.size()) {
             String repeat = " for " + repetitions.get(skillLevel - 1) + " times";
 
-            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds " + repeat);
+            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds" + repeat);
         } else {
             String repeat = "";
             if (!repetitions.isEmpty()) {
                 repeat = " for " + repetitions.get(skillLevel - 1) + " times -> " + repetitions.get(skillLevel) + " times";
             }
 
-            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds " + repeat);
+            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds" + repeat);
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

@@ -12,12 +12,9 @@ public class WarpTargetMechanic extends MechanicComponent {
     private final boolean toTarget;
     private final boolean toCaster;
 
-    public WarpTargetMechanic(boolean toTarget, boolean toCaster) {
-        this.toTarget = toTarget;
-        this.toCaster = toCaster;
-    }
-
     public WarpTargetMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("toTarget")) {
             configLoadError("toTarget");
         }

@@ -150,6 +150,8 @@ public class ProjectileMechanic extends MechanicComponent {
     */
 
     public ProjectileMechanic(ConfigurationSection configurationSection) throws ClassNotFoundException {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         String projectileClass = configurationSection.getString("projectileClass");
         this.projectileType = (Class<? extends Projectile>) Class.forName("org.bukkit.entity." + projectileClass);
 
@@ -421,6 +423,8 @@ public class ProjectileMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             additions.add(ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel));
         } else if (skillLevel == amountList.size()) {

@@ -12,12 +12,9 @@ public class HealthCondition extends ConditionComponent {
     private final double minPercent;
     private final double maxPercent;
 
-    public HealthCondition(double minPercent, double maxPercent) {
-        this.minPercent = minPercent;
-        this.maxPercent = maxPercent;
-    }
-
     public HealthCondition(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("minPercent")) {
             configLoadError("minPercent");
         }

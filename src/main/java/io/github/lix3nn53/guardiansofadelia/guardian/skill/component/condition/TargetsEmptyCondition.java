@@ -11,6 +11,8 @@ public class TargetsEmptyCondition extends ConditionComponent {
     private final boolean empty;
 
     public TargetsEmptyCondition(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("empty")) {
             configLoadError("empty");
         }

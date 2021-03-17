@@ -15,6 +15,8 @@ public class CompanionsOfCasterTargetMechanic extends ConditionComponent {
     private final Optional<String> mobCode;
 
     public CompanionsOfCasterTargetMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (configurationSection.contains("mobCode")) {
             this.mobCode = Optional.of(configurationSection.getString("mobCode"));
         } else {
@@ -45,6 +47,8 @@ public class CompanionsOfCasterTargetMechanic extends ConditionComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         additions.add("Caster's companions changes their target");
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

@@ -16,6 +16,8 @@ public class CompanionCondition extends ConditionComponent {
     private final int maxValue;
 
     public CompanionCondition(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("minValue")) {
             configLoadError("minValue");
         }

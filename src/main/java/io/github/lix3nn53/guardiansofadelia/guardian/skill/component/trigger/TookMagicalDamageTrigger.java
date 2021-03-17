@@ -18,6 +18,8 @@ public class TookMagicalDamageTrigger extends TriggerComponent {
     int castCounter;
 
     public TookMagicalDamageTrigger(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (configurationSection.contains("cooldowns")) {
             this.cooldowns = configurationSection.getIntegerList("cooldowns");
         } else {

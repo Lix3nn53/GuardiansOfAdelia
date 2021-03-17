@@ -98,10 +98,10 @@ public enum Consumable {
                 trigger.addChildren(new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks));
                 break;
             case BUFF_PHYSICAL_DEFENSE:
-                trigger.addChildren(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
+                trigger.addChildren(new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks));
                 break;
             case BUFF_MAGICAL_DAMAGE:
-                trigger.addChildren(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
+                trigger.addChildren(new BuffMechanic(BuffType.MAGIC_DAMAGE, multipliers, ticks));
                 break;
             case BUFF_MAGICAL_DEFENSE:
                 trigger.addChildren(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));

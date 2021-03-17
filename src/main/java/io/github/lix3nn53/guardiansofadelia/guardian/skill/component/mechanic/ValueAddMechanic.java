@@ -13,12 +13,9 @@ public class ValueAddMechanic extends MechanicComponent {
     private final String key;
     private final List<Integer> valueToAdd;
 
-    public ValueAddMechanic(String key, List<Integer> valueToAdd) {
-        this.key = key;
-        this.valueToAdd = valueToAdd;
-    }
-
     public ValueAddMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("key")) {
             configLoadError("key");
         }

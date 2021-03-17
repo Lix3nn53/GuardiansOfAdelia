@@ -12,12 +12,9 @@ public class HoloMessageMechanic extends MechanicComponent {
     private final String message;
     private final int durationTicks;
 
-    public HoloMessageMechanic(String message, int durationTicks) {
-        this.message = message;
-        this.durationTicks = durationTicks;
-    }
-
     public HoloMessageMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("message")) {
             configLoadError("message");
         }

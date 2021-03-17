@@ -23,6 +23,8 @@ public class CompanionSpawnTrigger extends TriggerComponent {
     int castCounter;
 
     public CompanionSpawnTrigger(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (configurationSection.contains("cooldowns")) {
             this.cooldowns = configurationSection.getIntegerList("cooldowns");
         } else {

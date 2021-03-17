@@ -19,8 +19,9 @@ public abstract class TargetComponent extends SkillComponent {
     private final boolean keepCurrent;
     private final boolean addToBeginning;
 
-    protected TargetComponent(boolean allies, boolean enemy, boolean self, int max, boolean armorStand,
+    protected TargetComponent(boolean addLore, boolean allies, boolean enemy, boolean self, int max, boolean armorStand,
                               boolean keepCurrent, boolean addToBeginning) {
+        super(addLore);
         this.allies = allies;
         this.enemy = enemy;
         this.max = max;
@@ -31,6 +32,8 @@ public abstract class TargetComponent extends SkillComponent {
     }
 
     protected TargetComponent(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("allies")) {
             configLoadError("allies");
         }

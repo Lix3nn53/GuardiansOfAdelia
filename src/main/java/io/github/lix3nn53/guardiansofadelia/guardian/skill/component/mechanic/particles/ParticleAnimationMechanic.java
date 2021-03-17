@@ -53,6 +53,8 @@ public class ParticleAnimationMechanic extends MechanicComponent {
 
 
     public ParticleAnimationMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         ConfigurationSection particle = configurationSection.getConfigurationSection("particle");
         this.particleArrangement = ParticleArrangementLoader.load(particle);
 

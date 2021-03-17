@@ -12,11 +12,9 @@ public class DelayMechanic extends MechanicComponent {
 
     private final long ticks;
 
-    public DelayMechanic(long ticks) {
-        this.ticks = ticks;
-    }
-
     public DelayMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("ticks")) {
             configLoadError("ticks");
         }

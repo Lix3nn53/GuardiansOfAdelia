@@ -31,6 +31,8 @@ public class HologramMechanic extends MechanicComponent {
     private final double speed;
 
     public HologramMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("helmetType")) {
             configLoadError("helmetType");
         }

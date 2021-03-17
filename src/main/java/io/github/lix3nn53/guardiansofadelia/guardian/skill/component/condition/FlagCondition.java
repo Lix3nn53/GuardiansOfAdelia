@@ -13,17 +13,9 @@ public class FlagCondition extends ConditionComponent {
     private final boolean isSet;
     private final boolean isUnique;
 
-    /**
-     * @param key
-     * @param isSet check to true or false
-     */
-    public FlagCondition(String key, boolean isSet, boolean isUnique) {
-        this.key = key;
-        this.isSet = isSet;
-        this.isUnique = isUnique;
-    }
-
     public FlagCondition(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("key")) {
             configLoadError("key");
         }

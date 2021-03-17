@@ -15,13 +15,9 @@ public class PotionEffectMechanic extends MechanicComponent {
     private final List<Integer> tickList;
     private final List<Integer> amplifierList;
 
-    public PotionEffectMechanic(PotionEffectType potionEffectType, List<Integer> tickList, List<Integer> amplifierList) {
-        this.potionEffectType = potionEffectType;
-        this.tickList = tickList;
-        this.amplifierList = amplifierList;
-    }
-
     public PotionEffectMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("potionEffectType")) {
             configLoadError("potionEffectType");
         }
@@ -54,6 +50,8 @@ public class PotionEffectMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         String effectString = getEffectString();
         if (effectString != null) {
             if (skillLevel == 0) {

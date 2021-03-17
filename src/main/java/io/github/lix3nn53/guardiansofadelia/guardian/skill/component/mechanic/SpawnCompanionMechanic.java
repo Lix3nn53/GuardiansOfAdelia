@@ -24,6 +24,8 @@ public class SpawnCompanionMechanic extends MechanicComponent {
     private final int maxAmountIfVarEmpty;
 
     public SpawnCompanionMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("mobCode")) {
             configLoadError("mobCode");
         }
@@ -134,6 +136,8 @@ public class SpawnCompanionMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             String lore = "Spawn " + amounts.get(skillLevel) + "x" + mobCode + " at level " + levels.get(skillLevel);
 

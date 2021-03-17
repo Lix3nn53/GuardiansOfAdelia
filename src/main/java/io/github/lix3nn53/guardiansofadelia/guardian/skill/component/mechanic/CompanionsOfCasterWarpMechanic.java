@@ -15,6 +15,8 @@ public class CompanionsOfCasterWarpMechanic extends ConditionComponent {
     private final Optional<String> mobCode;
 
     public CompanionsOfCasterWarpMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (configurationSection.contains("mobCode")) {
             this.mobCode = Optional.of(configurationSection.getString("mobCode"));
         } else {

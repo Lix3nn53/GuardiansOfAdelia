@@ -14,12 +14,9 @@ public class ImmunityRemoveMechanic extends MechanicComponent {
     private final EntityDamageEvent.DamageCause damageCause;
     private final int delay;
 
-    public ImmunityRemoveMechanic(EntityDamageEvent.DamageCause damageCause, int delay) {
-        this.damageCause = damageCause;
-        this.delay = delay;
-    }
-
     public ImmunityRemoveMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("damageCause")) {
             configLoadError("damageCause");
         }

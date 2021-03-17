@@ -13,7 +13,7 @@ import java.util.List;
 public class ClearDeadTargets extends TargetComponent {
 
     public ClearDeadTargets() {
-        super(true, true, true, 10, true, true, false);
+        super(false, true, true, true, 10, true, true, false);
     }
 
     @Override

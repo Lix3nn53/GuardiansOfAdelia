@@ -13,11 +13,9 @@ public class SilenceMechanic extends MechanicComponent {
 
     private final List<Integer> duration;
 
-    public SilenceMechanic(List<Integer> duration) {
-        this.duration = duration;
-    }
-
     public SilenceMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("durations")) {
             configLoadError("durations");
         }
@@ -47,6 +45,8 @@ public class SilenceMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (skillLevel == 0) {
             additions.add(ChatColor.AQUA + "Silence duration: " + ((duration.get(skillLevel) / 20)) + " seconds");
         } else if (skillLevel == duration.size()) {

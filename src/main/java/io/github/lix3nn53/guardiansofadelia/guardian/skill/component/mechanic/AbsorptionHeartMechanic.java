@@ -16,12 +16,9 @@ public class AbsorptionHeartMechanic extends MechanicComponent {
     private final List<Integer> heartAmountList;
     private final List<Integer> maxHeartList;
 
-    public AbsorptionHeartMechanic(List<Integer> heartAmountList, List<Integer> maxHeartList) {
-        this.heartAmountList = heartAmountList;
-        this.maxHeartList = maxHeartList;
-    }
-
     public AbsorptionHeartMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("heartAmountList")) {
             configLoadError("heartAmountList");
         }
@@ -88,6 +85,8 @@ public class AbsorptionHeartMechanic extends MechanicComponent {
 
     @Override
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+
         if (!heartAmountList.isEmpty()) {
             if (skillLevel == 0) {
                 String lore = ChatColor.GREEN + "Golden Heart: +" + heartAmountList.get(skillLevel) + "[Max " + maxHeartList.get(skillLevel) + "]";

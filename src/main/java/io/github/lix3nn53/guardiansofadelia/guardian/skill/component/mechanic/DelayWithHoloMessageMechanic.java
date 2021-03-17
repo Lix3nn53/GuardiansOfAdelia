@@ -18,6 +18,8 @@ public class DelayWithHoloMessageMechanic extends MechanicComponent {
     private final double offsetY;
 
     public DelayWithHoloMessageMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("ticks")) {
             configLoadError("ticks");
         }

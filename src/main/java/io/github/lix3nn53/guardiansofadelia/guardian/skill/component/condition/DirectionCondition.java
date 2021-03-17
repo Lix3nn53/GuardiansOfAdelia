@@ -12,11 +12,9 @@ public class DirectionCondition extends ConditionComponent {
 
     private final boolean workWhenInFront;
 
-    public DirectionCondition(boolean workWhenInFront) {
-        this.workWhenInFront = workWhenInFront;
-    }
-
     public DirectionCondition(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("workWhenInFront")) {
             configLoadError("workWhenInFront");
         }

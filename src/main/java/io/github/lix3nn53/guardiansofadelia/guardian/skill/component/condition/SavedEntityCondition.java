@@ -12,12 +12,9 @@ public class SavedEntityCondition extends ConditionComponent {
     private final int minValue;
     private final int maxValue;
 
-    public SavedEntityCondition(int minValue, int maxValue) {
-        this.minValue = minValue;
-        this.maxValue = maxValue;
-    }
-
     public SavedEntityCondition(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("minValue")) {
             configLoadError("minValue");
         }

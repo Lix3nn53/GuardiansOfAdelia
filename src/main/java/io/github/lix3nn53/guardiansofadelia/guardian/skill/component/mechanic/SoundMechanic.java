@@ -11,11 +11,9 @@ public class SoundMechanic extends MechanicComponent {
 
     private final GoaSound goaSound;
 
-    public SoundMechanic(GoaSound goaSound) {
-        this.goaSound = goaSound;
-    }
-
     public SoundMechanic(ConfigurationSection configurationSection) {
+        super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
+
         if (!configurationSection.contains("goaSound")) {
             configLoadError("goaSound");
         }
