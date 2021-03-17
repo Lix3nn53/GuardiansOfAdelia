@@ -243,11 +243,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                     String rpgClassStr = activeCharacter.getRpgClassStr();
                     if (damageType.equals(DamageMechanic.DamageType.MAGIC)) { //Ranged overrides Magic so check magic first. You can not deal Magic damage without skills.
-                        damage += rpgCharacterStats.getTotalMagicDamage(player, rpgClassStr); //add to spell damage
+                        // damage += rpgCharacterStats.getTotalMagicDamage(player, rpgClassStr); //add to spell damage
                         TriggerListener.onPlayerMagicAttack(player, livingTarget);
                     } else if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
-                        if (isSkill) { //add full ranged damage to skills
-                            damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClassStr);
+                        if (isSkill) {
+                            // damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClassStr);
                             TriggerListener.onPlayerMagicAttack(player, livingTarget);
                         } else { //add strength stat and physical damage buff to projectiles fired without skills involved
                             damage += rpgCharacterStats.getStrength().getIncrement(player.getLevel(), rpgClassStr);
@@ -259,8 +259,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                         Material type = itemInMainHand.getType();
 
-                        if (isSkill) { //Add full melee damage to skills
-                            damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClassStr);
+                        if (isSkill) {
+                            // damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClassStr);
                             TriggerListener.onPlayerMagicAttack(player, livingTarget);
                         } else if (RPGItemUtils.isWeapon(type)) {
                             //Normal melee attack. Check for requirements then add strength stat and offhand bonus

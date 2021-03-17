@@ -82,13 +82,11 @@ skillOne:
         child1:
           componentType: "DamageMechanic"
           damageType: "RANGED"
-          damageList:
-            - 24
-            - 60
-            - 180
-            - 300
-            - 420
-            - 720
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
         child2:
           componentType: "PushMechanic"
           pushType: "FIXED"
@@ -164,13 +162,11 @@ skillTwo:
         child1:
           componentType: "DamageMechanic"
           damageType: "RANGED"
-          damageList:
-            - 24
-            - 60
-            - 180
-            - 300
-            - 420
-            - 720
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
     child2:
       componentType: "SoundMechanic"
       goaSound: "SKILL_MULTI_ARROW"

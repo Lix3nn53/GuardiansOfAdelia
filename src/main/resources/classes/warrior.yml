@@ -60,13 +60,11 @@ skillOne:
       child1:
         componentType: "DamageMechanic"
         damageType: "MELEE"
-        damageList:
-          - 24
-          - 60
-          - 180
-          - 300
-          - 420
-          - 720
+        damageMultiplyList:
+          - 1.4
+          - 1.6
+          - 1.8
+          - 2.2
       child2:
         componentType: "SelfTarget"
         child1:
@@ -136,13 +134,11 @@ skillTwo:
         child1:
           componentType: "DamageMechanic"
           damageType: "MELEE"
-          damageList:
-            - 24
-            - 60
-            - 180
-            - 300
-            - 420
-            - 720
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
         child2:
           componentType: "LaunchMechanic"
           relative: "TARGET"
@@ -471,10 +467,8 @@ skillUltimate:
         child1:
           componentType: "DamageMechanic"
           damageType: "MELEE"
-          damageList:
-            - 200
-            - 480
-            - 760
-            - 1200
-            - 1800
-            - 2600
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2

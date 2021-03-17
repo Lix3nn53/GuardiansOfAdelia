@@ -148,13 +148,11 @@ skillTwo:
         child1:
           componentType: "DamageMechanic"
           damageType: "MAGIC"
-          damageList:
-            - 1
-            - 1
-            - 1
-            - 1
-            - 1
-            - 1
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
         child2:
           componentType: "CompanionsOfCasterTargetMechanic"
         child3:

@@ -75,13 +75,11 @@ skillOne:
         child1:
           componentType: "DamageMechanic"
           damageType: "MAGIC"
-          damageList:
-            - 20
-            - 50
-            - 200
-            - 325
-            - 450
-            - 720
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
         child2:
           componentType: "ValueCondition"
           key: "firespirit"
@@ -154,13 +152,11 @@ skillTwo:
       child1:
         componentType: "DamageMechanic"
         damageType: "MAGIC"
-        damageList:
-          - 20
-          - 50
-          - 200
-          - 325
-          - 450
-          - 720
+        damageMultiplyList:
+          - 1.4
+          - 1.6
+          - 1.8
+          - 2.2
       child2:
         componentType: "SelfTarget"
         child1:
@@ -256,11 +252,11 @@ skillThree:
           child1:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
-            damageList:
-              - 480
-              - 780
-              - 1080
-              - 1440
+            damageMultiplyList:
+              - 1.4
+              - 1.6
+              - 1.8
+              - 2.2
           child2:
             componentType: "ValueCondition"
             key: "firespirit"
@@ -491,13 +487,11 @@ skillUltimate:
           child1:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
-            damageList:
-              - 480
-              - 780
-              - 1080
-              - 1440
-              - 1800
-              - 2400
+            damageMultiplyList:
+              - 1.4
+              - 1.6
+              - 1.8
+              - 2.2
           child2:
             componentType: "LaunchMechanic"
             relative: "TARGET"

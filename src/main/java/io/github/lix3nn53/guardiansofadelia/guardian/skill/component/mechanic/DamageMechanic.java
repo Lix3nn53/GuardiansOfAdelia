@@ -1,34 +1,34 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DamageMechanic extends MechanicComponent {
 
     private final List<Double> damageList;
+    private final List<Double> damageMultiplyList; // Multiply this value with according attribute of attacker to determine damage value
     private final DamageType damageType;
     private final String multiplyWithValue;
-
-    public DamageMechanic(List<Double> damageList, DamageType damageType, @Nullable String multiplyWithValue) {
-        this.damageList = damageList;
-        this.damageType = damageType;
-        this.multiplyWithValue = multiplyWithValue;
-    }
 
     public DamageMechanic(ConfigurationSection configurationSection) {
         if (!configurationSection.contains("damageType")) {
             configLoadError("damageType");
         }
 
-        if (!configurationSection.contains("damageList")) {
-            configLoadError("damageList");
+        if (!configurationSection.contains("damageList") && !configurationSection.contains("damageMultiplyList")) {
+            configLoadError("damageList OR damageMultiplyList");
         }
 
         if (configurationSection.contains("multiplyWithValue")) {
@@ -38,14 +38,47 @@ public class DamageMechanic extends MechanicComponent {
         }
 
         this.damageType = DamageType.valueOf(configurationSection.getString("damageType"));
-        this.damageList = configurationSection.getDoubleList("damageList");
+        this.damageList = configurationSection.contains("damageList") ? configurationSection.getDoubleList("damageList") : new ArrayList<>();
+        this.damageMultiplyList = configurationSection.contains("damageMultiplyList") ? configurationSection.getDoubleList("damageMultiplyList") : new ArrayList<>();
+
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
-        double calcDamage = damageList.get(skillLevel - 1);
+        double calcDamage = 0;
+
+        if (!damageMultiplyList.isEmpty()) {
+            if (caster instanceof Player) {
+                Player player = (Player) caster;
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+                    if (guardianData.hasActiveCharacter()) {
+                        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                        RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+                        String rpgClassStr = activeCharacter.getRpgClassStr();
+
+                        double statValue = 0;
+                        if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
+                            statValue = rpgCharacterStats.getTotalMagicDamage(player, rpgClassStr);
+                        } else if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
+                            statValue = rpgCharacterStats.getTotalRangedDamage(player, rpgClassStr);
+                        } else { //melee
+                            statValue = rpgCharacterStats.getTotalMeleeDamage(player, rpgClassStr);
+                        }
+
+                        double multiply = damageMultiplyList.get(skillLevel - 1);
+
+                        calcDamage += statValue * multiply;
+                    }
+                }
+            }
+        }
+
+        if (!damageList.isEmpty()) {
+            calcDamage += damageList.get(skillLevel - 1);
+        }
 
         if (multiplyWithValue != null) {
             int value = SkillDataManager.getValue(caster, multiplyWithValue);

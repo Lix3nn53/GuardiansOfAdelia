@@ -75,13 +75,11 @@ skillOne:
         child1:
           componentType: "DamageMechanic"
           damageType: "RANGED"
-          damageList:
-            - 16
-            - 40
-            - 120
-            - 200
-            - 290
-            - 480
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
         child2:
           componentType: "PotionEffectMechanic"
           potionEffectType: "CONFUSION"
@@ -453,13 +451,11 @@ skillUltimate:
             child1:
               componentType: "DamageMechanic"
               damageType: "RANGED"
-              damageList:
-                - 64
-                - 160
-                - 250
-                - 410
-                - 570
-                - 900
+              damageMultiplyList:
+                - 1.4
+                - 1.6
+                - 1.8
+                - 2.2
         child3:
           componentType: "SoundMechanic"
           goaSound: "SKILL_ARROW_RAIN"

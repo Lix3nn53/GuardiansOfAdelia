@@ -107,11 +107,11 @@ skillOne:
               child1:
                 componentType: "DamageMechanic"
                 damageType: "RANGED"
-                damageList:
-                  - 24
-                  - 60
-                  - 180
-                  - 300
+                damageMultiplyList:
+                  - 1.4
+                  - 1.6
+                  - 1.8
+                  - 2.2
     child3:
       componentType: "SoundMechanic"
       goaSound: "SKILL_SPLASH"
@@ -173,11 +173,11 @@ skillTwo:
             child1:
               componentType: "DamageMechanic"
               damageType: "RANGED"
-              damageList:
-                - 60
-                - 180
-                - 420
-                - 720
+              damageMultiplyList:
+                - 1.4
+                - 1.6
+                - 1.8
+                - 2.2
           child2:
             componentType: "PushMechanic"
             pushType: "FIXED"
@@ -443,11 +443,11 @@ skillUltimate:
           child1:
             componentType: "DamageMechanic"
             damageType: "MAGIC"
-            damageList:
-              - 1
-              - 1
-              - 1
-              - 1
+            damageMultiplyList:
+              - 1.4
+              - 1.6
+              - 1.8
+              - 2.2
           child2:
             componentType: "RootMechanic"
             lockY: true
