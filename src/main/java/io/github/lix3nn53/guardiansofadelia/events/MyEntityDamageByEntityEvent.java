@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
@@ -25,6 +26,8 @@ import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -33,6 +36,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
@@ -76,6 +80,25 @@ public class MyEntityDamageByEntityEvent implements Listener {
         } else if (damageCause.equals(EntityDamageEvent.DamageCause.CUSTOM)) { //For mythic mobs
             isSkill = true; // TODO hope this does not broke own skill system
             damageType = DamageMechanic.DamageType.MAGIC;
+        }
+
+        // Disable vanilla knockback if isSkill
+        if (isSkill) {
+            if (target instanceof LivingEntity) {
+                LivingEntity livingEntity = (LivingEntity) target;
+
+                AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE);
+                if (attribute != null) {
+                    attribute.setBaseValue(1);
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            attribute.setBaseValue(0);
+                        }
+                    }.runTaskLater(GuardiansOfAdelia.getInstance(), 1L);
+                }
+            }
         }
 
         if (target instanceof LivingEntity) {
