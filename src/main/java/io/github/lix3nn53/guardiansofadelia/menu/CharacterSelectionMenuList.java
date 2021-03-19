@@ -22,7 +22,7 @@ public class CharacterSelectionMenuList {
 
         List<RPGClass> classesAtTier = RPGClassManager.getClassesAtTier(3);
 
-        int index = 20;
+        int index = 10;
         for (RPGClass rpgClass : classesAtTier) {
             ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
             ItemMeta itemMeta = itemStack.getItemMeta();
@@ -43,7 +43,13 @@ public class CharacterSelectionMenuList {
             itemStack.setItemMeta(itemMeta);
             guiGeneric.setItem(index, itemStack);
 
-            index += 2;
+            if (index == 16) {
+                index += 12;
+            } else if (index == 34) {
+                index += 12;
+            } else {
+                index += 2;
+            }
         }
 
         return guiGeneric;

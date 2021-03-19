@@ -404,24 +404,19 @@ public class PetManager {
         }
 
         if (!companions.isEmpty()) {
-            Location target = player.getLocation();
+            Location playerLocation = player.getLocation();
 
+            String name = playerLocation.getWorld().getName();
             for (LivingEntity companion : companions) {
-                if (!target.getWorld().getName().equals(companion.getLocation().getWorld().getName())) {
-                    PetManager.teleportPet(player, companion, null);
-
-                    if (companion instanceof Mob) { //clear pet target
-                        Mob mob = (Mob) companion;
-                        mob.setTarget(null);
-                    }
-
+                String name1 = companion.getLocation().getWorld().getName();
+                if (!name.equals(name1)) {
                     return;
                 }
 
-                final double distance = target.distanceSquared(companion.getLocation());
+                final double distance = playerLocation.distanceSquared(companion.getLocation());
                 if (distance > 400) {
                     player.sendMessage("teleportPet distance: " + distance);
-                    PetManager.teleportPet(player, companion, null);
+                    PetManager.teleportPet(player, companion, playerLocation);
 
                     if (companion instanceof Mob) { //clear pet target
                         Mob mob = (Mob) companion;
@@ -461,8 +456,7 @@ public class PetManager {
     }
 
     private static void teleportPet(final Player player, final LivingEntity pet, final Location to) {
-        Location baseLocation = to != null ? to : player.getLocation();
-        Location newPetLoc = LocationUtils.getRandomSafeLocationNearPoint(baseLocation, 4);
+        Location newPetLoc = LocationUtils.getRandomSafeLocationNearPoint(to, 4);
         pet.teleport(newPetLoc);
     }
 

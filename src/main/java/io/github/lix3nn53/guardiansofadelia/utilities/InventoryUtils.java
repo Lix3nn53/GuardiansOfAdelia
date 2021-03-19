@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
+import io.github.lix3nn53.guardiansofadelia.quests.task.TaskCollect;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -323,12 +324,12 @@ public class InventoryUtils {
 
     public static boolean canSellMaterial(Material material) {
         return !(material.equals(Material.IRON_INGOT) || material.equals(Material.GOLD_INGOT) || material.equals(Material.DIAMOND) //coins
-                || material.equals(Material.ROTTEN_FLESH) || material.equals(Material.PINK_DYE) || material.equals(Material.BLUE_DYE) //quest items
+                || material.equals(TaskCollect.DROP_MATERIAL) //quest items
                 || material.equals(Material.COMPASS));
     }
 
     public static boolean canTradeMaterial(Material material) {
-        return !(material.equals(Material.ROTTEN_FLESH) || material.equals(Material.PINK_DYE) || material.equals(Material.BLUE_DYE) //quest items
+        return !(material.equals(TaskCollect.DROP_MATERIAL) //quest items
                 || material.equals(Material.COMPASS));
     }
 }

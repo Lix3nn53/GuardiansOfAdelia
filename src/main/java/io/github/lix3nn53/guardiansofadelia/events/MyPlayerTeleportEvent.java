@@ -1,8 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -16,15 +19,29 @@ public class MyPlayerTeleportEvent implements Listener {
 
         if (cause.equals(PlayerTeleportEvent.TeleportCause.SPECTATE)) {
             event.setCancelled(true);
-        } else {
-            Location from = event.getFrom();
-            Location to = event.getTo();
+            return;
+        }
 
-            String fromName = from.getWorld().getName();
-            String toName = to.getWorld().getName();
+        Location from = event.getFrom();
+        Location to = event.getTo();
 
-            if (!fromName.equals(toName)) {
-                InventoryUtils.removeAllFromInventoryByMaterial(event.getPlayer().getInventory(), Material.COMPASS);
+        String fromName = from.getWorld().getName();
+        String toName = to.getWorld().getName();
+
+        if (!fromName.equals(toName)) {
+            Player player = event.getPlayer();
+
+            InventoryUtils.removeAllFromInventoryByMaterial(player.getInventory(), Material.COMPASS);
+
+            if (PetManager.hasPet(player)) {
+                LivingEntity pet = PetManager.getPet(player);
+                pet.remove();
+                PetManager.respawnPet(player);
+            }
+
+            if (PetManager.hasCompanion(player)) {
+                player.sendMessage("PLAYER TELEPORT COMPANION");
+                PetManager.removeCompanions(player);
             }
         }
     }

@@ -39,7 +39,7 @@ public class LocationUtils {
     }
 
     public static Location getBlockCenter(Location loc) {
-        return loc.add(0.5, 0, 0.5);
+        return loc.add(0.5, 0.5, 0.5);
     }
 
     /*

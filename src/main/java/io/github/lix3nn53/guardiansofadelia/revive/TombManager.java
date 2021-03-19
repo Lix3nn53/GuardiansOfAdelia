@@ -66,8 +66,8 @@ public class TombManager {
                 if (playerToTomb.containsKey(player)) {
                     if (count == timeLimitIn10Seconds) {
                         tomb.remove();
-                        player.teleport(town.getLocation());
                         player.setGameMode(GameMode.ADVENTURE);
+                        player.teleport(town.getLocation());
                         player.sendMessage(ChatColor.RED + "Tomb search timeout");
                         cancel();
                     } else {

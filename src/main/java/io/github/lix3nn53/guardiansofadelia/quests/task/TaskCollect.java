@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class TaskCollect implements Task {
+
+    public final static Material DROP_MATERIAL = Material.PINK_DYE;
 
     private final List<String> keyOfMobsItemDropsFrom;
     private final double chance;
@@ -21,6 +24,7 @@ public final class TaskCollect implements Task {
         this.keyOfMobsItemDropsFrom = keyOfMobsItemDropsFrom;
         this.chance = chance;
         this.itemStack = itemStack.clone();
+        this.itemStack.setType(TaskCollect.DROP_MATERIAL);
         this.amountNeeded = amountNeeded;
         progress = 0;
     }

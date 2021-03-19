@@ -108,7 +108,7 @@ public class DamageMechanic extends MechanicComponent {
             if (!damageMultiplyList.isEmpty()) {
                 if (skillLevel == 0) {
                     String lore = damageType.toString() + ": " + (int) (damageList.get(skillLevel) + 0.5) + " + " +
-                            (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "% of your damage";
+                            (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
 
                     if (multiplyWithValue != null) {
                         lore = lore + "x[" + multiplyWithValue + "]";
@@ -117,7 +117,7 @@ public class DamageMechanic extends MechanicComponent {
                     additions.add(lore);
                 } else if (skillLevel == damageMultiplyList.size()) {
                     String lore = damageType.toString() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5) + " + " +
-                            (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "% of your damage";
+                            (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
 
                     if (multiplyWithValue != null) {
                         lore = lore + "x[" + multiplyWithValue + "]";
@@ -126,9 +126,9 @@ public class DamageMechanic extends MechanicComponent {
                     additions.add(lore);
                 } else {
                     String lore1 = damageType.toString() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5) + " + " +
-                            (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "% of your damage";
+                            (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
                     String lore2 = (int) (damageList.get(skillLevel) + 0.5) + " + " +
-                            (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "% of your damage";
+                            (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
 
                     if (multiplyWithValue != null) {
                         lore1 = lore1 + "x[" + multiplyWithValue + "]";
@@ -168,7 +168,7 @@ public class DamageMechanic extends MechanicComponent {
             }
         } else if (!damageMultiplyList.isEmpty()) {
             if (skillLevel == 0) {
-                String lore = damageType.toString() + ": " + (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "% of your damage";
+                String lore = damageType.toString() + ": " + (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
 
                 if (multiplyWithValue != null) {
                     lore = lore + "x[" + multiplyWithValue + "]";
@@ -176,7 +176,7 @@ public class DamageMechanic extends MechanicComponent {
 
                 additions.add(lore);
             } else if (skillLevel == damageMultiplyList.size()) {
-                String lore = damageType.toString() + ": " + (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "% of your damage";
+                String lore = damageType.toString() + ": " + (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
 
                 if (multiplyWithValue != null) {
                     lore = lore + "x[" + multiplyWithValue + "]";
@@ -184,8 +184,8 @@ public class DamageMechanic extends MechanicComponent {
 
                 additions.add(lore);
             } else {
-                String lore1 = damageType.toString() + ": " + (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "% of your damage";
-                String lore2 = (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "% of your damage";
+                String lore1 = damageType.toString() + ": " + (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
+                String lore2 = (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
 
                 if (multiplyWithValue != null) {
                     lore1 = lore1 + "x[" + multiplyWithValue + "]";

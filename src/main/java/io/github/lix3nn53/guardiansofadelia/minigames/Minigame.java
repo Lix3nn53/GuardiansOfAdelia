@@ -183,7 +183,7 @@ public abstract class Minigame {
         new BukkitRunnable() {
 
             int count = 0;
-            List<Player> playersInGame = getPlayersInGame();
+            final List<Player> playersInGame = getPlayersInGame();
 
             @Override
             public void run() {
@@ -198,8 +198,8 @@ public abstract class Minigame {
 
                         for (Player member : playersInGame) {
                             MiniGameManager.removePlayer(member);
-                            member.teleport(backLocation);
                             member.setGameMode(GameMode.ADVENTURE);
+                            member.teleport(backLocation);
                             if (PartyManager.inParty(member)) {
                                 Party party = PartyManager.getParty(member);
                                 party.leave(member);
@@ -691,8 +691,8 @@ public abstract class Minigame {
                                 if (teamToCheckpoint.containsKey(teamNo)) {
                                     respawnLocation = teamToCheckpoint.get(teamNo).getLocation();
                                 }
-                                player.teleport(respawnLocation);
                                 player.setGameMode(GameMode.ADVENTURE);
+                                player.teleport(respawnLocation);
                                 break;
                             }
                         }

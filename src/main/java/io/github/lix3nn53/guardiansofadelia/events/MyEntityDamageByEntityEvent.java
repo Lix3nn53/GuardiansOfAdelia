@@ -52,6 +52,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
+        if (damager instanceof Player) {
+            Player player = (Player) damager;
+            player.sendMessage("TEST!3");
+        }
 
         if (damager instanceof LivingEntity) {
             if (StatusEffectManager.isDisarmed((LivingEntity) damager)) {
@@ -126,7 +130,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     }
                 }
 
-                if (PersistentDataContainerUtil.hasInteger(projectile, "rangedDamage")) { //projectile is fired by player without skills involved
+                if (PersistentDataContainerUtil.hasInteger(projectile, "rangedDamage")) {
                     int rangedDamage = PersistentDataContainerUtil.getInteger(projectile, "rangedDamage");
                     event.setDamage(rangedDamage);
                     damageType = DamageMechanic.DamageType.RANGED;
@@ -193,6 +197,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 TriggerListener.onPlayerTookMeleeDamage(playerTarget, damageSource); //TookMeleeDamageTrigger
                             }
                         }
+
+                        // Manage target player's pet's target
+                        if (PetManager.hasPet(playerTarget) || PetManager.hasCompanion(playerTarget)) {
+                            PetManager.setPetAndCompanionsTarget(playerTarget, damageSource);
+                        }
                     }
 
                     if (!isAttackerPlayer) { //we are managing this on onPlayerAttackEntity() method if attacker is player
@@ -218,14 +227,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             }
                         }
                     }
-
-                    //manage target player's pet's target
-                    if (damager instanceof LivingEntity) {
-                        LivingEntity livingDamager = (LivingEntity) damager;
-                        if (PetManager.hasPet(playerTarget) || PetManager.hasCompanion(playerTarget)) {
-                            PetManager.setPetAndCompanionsTarget(playerTarget, livingDamager);
-                        }
-                    }
                 }
             }
         }
@@ -249,7 +250,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 Location targetLocation = livingTarget.getLocation();
 
                 if (pet == null) { // attacker is not a pet
+                    player.sendMessage("TEST!1");
                     if (PetManager.isCompanion(livingTarget)) { // on player attack to pet
+                        player.sendMessage("TEST!2");
                         boolean canAttack = EntityUtils.canAttack(player, livingTarget);
 
                         if (!canAttack) {
