@@ -23,7 +23,7 @@ public class WeaponSet {
         return customModelData;
     }
 
-    public int getDamage(WeaponGearType gearType) {
+    public int getElementDamage(WeaponGearType gearType) {
         return (int) (damage * gearType.getDamageReduction() + 0.5);
     }
 

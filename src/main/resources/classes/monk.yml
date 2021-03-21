@@ -12,11 +12,11 @@ description:
   - "Due to their unique weapon Monks are"
   - "feared opponents at any distance."
 classIconCustomModelData: 17
-attributeTierStrength: 4
-attributeTierSpirit: 4
-attributeTierEndurance: 6
-attributeTierIntelligence: 1
-attributeTierDexterity: 0
+attributeTierBonusElementDamage: 4
+attributeTierBonusElementDefense: 4
+attributeTierBonusMaxHealth: 6
+attributeTierBonusMaxMana: 1
+attributeTierBonusCriticalChance: 0
 weaponGearTypes:
   - "SPEAR"
 armorGearTypes:

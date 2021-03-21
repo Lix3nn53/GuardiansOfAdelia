@@ -2,7 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.Items.list.weapons;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.*;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.AttackSpeed;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponMelee;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,24 +33,10 @@ public class WeaponManager {
         String name = template.getName(gearType);
         int customModelData = template.getCustomModelData();
         int level = template.getRequiredLevel();
-        int mainDamage = template.getDamage(gearType);
+        int elementDamage = template.getElementDamage(gearType);
 
-        WeaponDamageType weaponDamageType = gearType.getWeaponType();
-
-        if (weaponDamageType.equals(WeaponDamageType.MELEE)) {
-            return new WeaponMelee(name, tier, material, customModelData, level, gearType, mainDamage,
-                    attackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearSet).getItemStack();
-        } else if (weaponDamageType.equals(WeaponDamageType.RANGED)) {
-            return new WeaponRanged(name, tier, material, customModelData, level, gearType, mainDamage,
-                    attackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearType.getReduceMeleeDamage(), gearSet).getItemStack();
-        } else if (weaponDamageType.equals(WeaponDamageType.MAGICAL)) {
-            int meleeDamage = mainDamage / 4;
-
-            return new WeaponMagical(name, tier, material, customModelData, level, gearType, meleeDamage, mainDamage,
-                    attackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearSet).getItemStack();
-        }
-
-        return null;
+        return new WeaponMelee(name, tier, material, customModelData, level, gearType, elementDamage,
+                attackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearSet).getItemStack();
     }
 
     public static void add(WeaponSet weaponSet) {

@@ -1,23 +1,25 @@
 package io.github.lix3nn53.guardiansofadelia.Items.stats;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class StatPassive implements Stat {
 
-    private int strength = 0;
-    private int spirit = 0;
-    private int endurance = 0;
-    private int intelligence = 0;
-    private int dexterity = 0;
+    private int bonusDamage = 0;
+    private int bonusDefense = 0;
+    private int bonusMaxMana = 0;
+    private int bonusMaxHealth = 0;
+    private int bonusCriticalChance = 0;
 
-    public StatPassive(int strength, int spirit, int endurance, int intelligence, int dexterity) {
-        this.strength = strength;
-        this.spirit = spirit;
-        this.endurance = endurance;
-        this.intelligence = intelligence;
-        this.dexterity = dexterity;
+    public StatPassive(int bonusDamage, int bonusDefense, int bonusMaxHealth, int bonusMaxMana, int bonusCriticalChance) {
+        this.bonusDamage = bonusDamage;
+        this.bonusMaxMana = bonusMaxMana;
+        this.bonusMaxHealth = bonusMaxHealth;
+        this.bonusDefense = bonusDefense;
+        this.bonusCriticalChance = bonusCriticalChance;
     }
 
     public StatPassive(int minStatValue, int maxStatValue, int minNumberOfStats) {
@@ -47,60 +49,60 @@ public class StatPassive implements Stat {
         }
     }
 
-    public int getStrength() {
-        return strength;
+    public int getBonusDamage() {
+        return bonusDamage;
     }
 
-    public int getSpirit() {
-        return spirit;
+    public int getBonusMaxMana() {
+        return bonusMaxMana;
     }
 
-    public int getEndurance() {
-        return endurance;
+    public int getBonusMaxHealth() {
+        return bonusMaxHealth;
     }
 
-    public int getIntelligence() {
-        return intelligence;
+    public int getBonusDefense() {
+        return bonusDefense;
     }
 
-    public int getDexterity() {
-        return dexterity;
+    public int getBonusCriticalChance() {
+        return bonusCriticalChance;
     }
 
     public boolean isEmpty() {
-        return (strength + spirit + endurance + intelligence + dexterity) < 1;
+        return (bonusDamage + bonusMaxMana + bonusMaxHealth + bonusDefense + bonusCriticalChance) < 1;
     }
 
     private void satisfyOneRandomly(int minStatValue, int maxStatValue) {
         List<String> unUsedStats = new ArrayList<>();
-        if (this.strength == 0) {
-            unUsedStats.add("strength");
+        if (this.bonusDamage == 0) {
+            unUsedStats.add(AttributeType.BONUS_ELEMENT_DAMAGE.name());
         }
-        if (this.spirit == 0) {
-            unUsedStats.add("spirit");
+        if (this.bonusDefense == 0) {
+            unUsedStats.add(AttributeType.BONUS_ELEMENT_DEFENSE.name());
         }
-        if (this.endurance == 0) {
-            unUsedStats.add("endurance");
+        if (this.bonusMaxHealth == 0) {
+            unUsedStats.add(AttributeType.BONUS_MAX_HEALTH.name());
         }
-        if (this.intelligence == 0) {
-            unUsedStats.add("intelligence");
+        if (this.bonusMaxMana == 0) {
+            unUsedStats.add(AttributeType.BONUS_MAX_MANA.name());
         }
-        if (this.dexterity == 0) {
-            unUsedStats.add("dexterity");
+        if (this.bonusCriticalChance == 0) {
+            unUsedStats.add(AttributeType.BONUS_CRITICAL_CHANCE.name());
         }
         int random = new Random().nextInt(unUsedStats.size());
         String statString = unUsedStats.get(random);
 
-        if (statString.equals("strength")) {
-            this.strength = getRandomValue(minStatValue, maxStatValue);
-        } else if (statString.equals("spirit")) {
-            this.spirit = getRandomValue(minStatValue, maxStatValue);
-        } else if (statString.equals("endurance")) {
-            this.endurance = getRandomValue(minStatValue, maxStatValue);
-        } else if (statString.equals("intelligence")) {
-            this.intelligence = getRandomValue(minStatValue, maxStatValue);
-        } else if (statString.equals("dexterity")) {
-            this.dexterity = getRandomValue(minStatValue, maxStatValue);
+        if (statString.equals(AttributeType.BONUS_ELEMENT_DAMAGE.name())) {
+            this.bonusDamage = getRandomValue(minStatValue, maxStatValue);
+        } else if (statString.equals(AttributeType.BONUS_ELEMENT_DEFENSE.name())) {
+            this.bonusDefense = getRandomValue(minStatValue, maxStatValue);
+        } else if (statString.equals(AttributeType.BONUS_MAX_HEALTH.name())) {
+            this.bonusMaxHealth = getRandomValue(minStatValue, maxStatValue);
+        } else if (statString.equals(AttributeType.BONUS_MAX_MANA.name())) {
+            this.bonusMaxMana = getRandomValue(minStatValue, maxStatValue);
+        } else if (statString.equals(AttributeType.BONUS_CRITICAL_CHANCE.name())) {
+            this.bonusCriticalChance = getRandomValue(minStatValue, maxStatValue);
         }
     }
 

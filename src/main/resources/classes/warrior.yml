@@ -11,11 +11,11 @@ description:
   - "superior combat skills, warriors are"
   - "always ready to take on any enemy."
 classIconCustomModelData: 20
-attributeTierStrength: 6
-attributeTierSpirit: 1
-attributeTierEndurance: 7
-attributeTierIntelligence: 1
-attributeTierDexterity: 0
+attributeTierBonusElementDamage: 6
+attributeTierBonusElementDefense: 1
+attributeTierBonusMaxHealth: 7
+attributeTierBonusMaxMana: 1
+attributeTierBonusCriticalChance: 0
 weaponGearTypes:
   - "BATTLE_AXE"
   - "SWORD"

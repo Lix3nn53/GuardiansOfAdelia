@@ -82,10 +82,10 @@ public class ItemPoolGenerator {
     public static List<ItemStack> generateFoods(int potionLevel) {
         List<ItemStack> temp = new ArrayList<>();
 
-        temp.add(Consumable.BUFF_PHYSICAL_DAMAGE.getItemStack(potionLevel, 10));
-        temp.add(Consumable.BUFF_PHYSICAL_DEFENSE.getItemStack(potionLevel, 10));
-        temp.add(Consumable.BUFF_MAGICAL_DAMAGE.getItemStack(potionLevel, 10));
-        temp.add(Consumable.BUFF_MAGICAL_DEFENSE.getItemStack(potionLevel, 10));
+        temp.add(Consumable.BUFF_ELEMENT_DAMAGE.getItemStack(potionLevel, 10));
+        temp.add(Consumable.BUFF_ELEMENT_DEFENSE.getItemStack(potionLevel, 10));
+        /*temp.add(Consumable.BUFF_MAGICAL_DAMAGE.getItemStack(potionLevel, 10));
+        temp.add(Consumable.BUFF_MAGICAL_DEFENSE.getItemStack(potionLevel, 10));*/
 
         return temp;
     }

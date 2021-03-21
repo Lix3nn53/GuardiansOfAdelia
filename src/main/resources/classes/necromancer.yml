@@ -10,11 +10,11 @@ description:
   - "Necromancers are masters of Living Death magic."
   - "They control bone and flesh to protect themself and crush their enemies."
 classIconCustomModelData: 18
-attributeTierStrength: 4
-attributeTierSpirit: 3
-attributeTierEndurance: 5
-attributeTierIntelligence: 1
-attributeTierDexterity: 0
+attributeTierBonusElementDamage: 4
+attributeTierBonusElementDefense: 3
+attributeTierBonusMaxHealth: 5
+attributeTierBonusMaxMana: 1
+attributeTierBonusCriticalChance: 0
 weaponGearTypes:
   - "WAND"
   - "DAGGER"

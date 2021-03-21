@@ -11,11 +11,11 @@ description:
   - "the holy power of light and beats foes"
   - "by channeling holy wrath."
 classIconCustomModelData: 13
-attributeTierStrength: 3
-attributeTierSpirit: 4
-attributeTierEndurance: 7
-attributeTierIntelligence: 2
-attributeTierDexterity: 0
+attributeTierBonusElementDamage: 3
+attributeTierBonusElementDefense: 4
+attributeTierBonusMaxHealth: 7
+attributeTierBonusMaxMana: 2
+attributeTierBonusCriticalChance: 0
 weaponGearTypes:
   - "WAR_HAMMER"
   - "SWORD"

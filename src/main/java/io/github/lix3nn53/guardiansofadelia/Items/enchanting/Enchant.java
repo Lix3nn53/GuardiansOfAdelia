@@ -1,6 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.Items.enchanting;
 
-import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.GearStatType;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatOneType;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import org.bukkit.ChatColor;
@@ -85,25 +89,16 @@ public class Enchant {
         }
         itemMeta.setDisplayName(name);
 
-        StatType type = StatUtils.getStatType(itemStack.getType());
+        GearStatType type = StatUtils.getStatType(itemStack.getType());
 
-        if (type.equals(StatType.HEALTH) || type.equals(StatType.MAGICAL) ||
-                type.equals(StatType.MELEE) || type.equals(StatType.HYBRID)) {
+        if (type.equals(GearStatType.ARMOR_GEAR) || type.equals(GearStatType.WEAPON_GEAR)) {
             int baseValue;
             String statString;
 
-            if (type.equals(StatType.MAGICAL)) {
-                statString = ChatColor.DARK_AQUA + "✦ Magic Damage: " + ChatColor.GRAY + "+";
-                StatMagical stat = (StatMagical) StatUtils.getStat(itemStack);
-                baseValue = stat.getMagicDamage();
-            } else if (type.equals(StatType.MELEE)) {
+            if (type.equals(GearStatType.WEAPON_GEAR)) {
                 statString = ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
-            } else if (type.equals(StatType.HYBRID)) {
-                statString = ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+";
-                StatHybrid stat = (StatHybrid) StatUtils.getStat(itemStack);
-                baseValue = stat.getRangedDamage();
             } else {
                 statString = ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
@@ -133,57 +128,53 @@ public class Enchant {
 
             this.itemStack.setItemMeta(itemMeta);
 
-            if (type.equals(StatType.MELEE)) {
-                PersistentDataContainerUtil.putInteger("meleeDamage", nextValue, this.itemStack);
+            if (type.equals(GearStatType.WEAPON_GEAR)) {
+                PersistentDataContainerUtil.putInteger("elementDamage", nextValue, this.itemStack);
                 RPGItemUtils.setDamage(itemStack, nextValue);
-            } else if (type.equals(StatType.HYBRID)) {
-                PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
-            } else if (type.equals(StatType.MAGICAL)) {
-                PersistentDataContainerUtil.putInteger("magicDamage", nextValue, this.itemStack);
             } else {
                 PersistentDataContainerUtil.putInteger("health", nextValue, this.itemStack);
             }
-        } else if (type.equals(StatType.PASSIVE)) {
+        } else if (type.equals(GearStatType.PASSIVE_GEAR)) {
             StatPassive stat = (StatPassive) StatUtils.getStat(itemStack);
 
             player.sendMessage("SUCC");
             player.sendMessage("PASSIVE");
 
-            int lineToChangeStr = -1;
-            int lineToChangeSpr = -1;
-            int lineToChangeEnd = -1;
-            int lineToChangeInt = -1;
-            int lineToChangeDex = -1;
+            int lineToChangeBonusDamage = -1;
+            int lineToChangeBonusDefense = -1;
+            int lineToChangeBonusHealth = -1;
+            int lineToChangeBonusMana = -1;
+            int lineToChangeBonusCriticalChance = -1;
             int changeCounter = 0;
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
-                if (stat.getStrength() != 0) {
-                    if (line.contains(ChatColor.RED + "☄ " + ChatColor.RED + "Strength: " + ChatColor.GRAY + "+")) {
-                        lineToChangeStr = i;
+                if (stat.getBonusDamage() != 0) {
+                    if (line.contains(AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        lineToChangeBonusDamage = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getSpirit() != 0) {
-                    if (line.contains(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Spirit: " + ChatColor.GRAY + "+")) {
-                        lineToChangeSpr = i;
+                if (stat.getBonusDefense() != 0) {
+                    if (line.contains(AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        lineToChangeBonusDefense = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getEndurance() != 0) {
-                    if (line.contains(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Endurance: " + ChatColor.GRAY + "+")) {
-                        lineToChangeEnd = i;
+                if (stat.getBonusMaxHealth() != 0) {
+                    if (line.contains(AttributeType.BONUS_MAX_HEALTH.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        lineToChangeBonusHealth = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getIntelligence() != 0) {
-                    if (line.contains(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Intelligence: " + ChatColor.GRAY + "+")) {
-                        lineToChangeInt = i;
+                if (stat.getBonusMaxMana() != 0) {
+                    if (line.contains(AttributeType.BONUS_MAX_MANA.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        lineToChangeBonusMana = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getDexterity() != 0) {
-                    if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Dexterity: " + ChatColor.GRAY + "+")) {
-                        lineToChangeDex = i;
+                if (stat.getBonusCriticalChance() != 0) {
+                    if (line.contains(AttributeType.BONUS_CRITICAL_CHANCE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        lineToChangeBonusCriticalChance = i;
                         changeCounter++;
                     }
                 }
@@ -192,53 +183,53 @@ public class Enchant {
                 }
             }
 
-            int nextStrValue = getNextValue(stat.getStrength());
-            if (lineToChangeStr != -1) {
-                String line = lore.get(lineToChangeStr);
-                String newLine = line.replace(stat.getStrength() + "", nextStrValue + "");
-                lore.set(lineToChangeStr, newLine);
+            int nextDamageValue = getNextValue(stat.getBonusDamage());
+            if (lineToChangeBonusDamage != -1) {
+                String line = lore.get(lineToChangeBonusDamage);
+                String newLine = line.replace(stat.getBonusDamage() + "", nextDamageValue + "");
+                lore.set(lineToChangeBonusDamage, newLine);
             }
-            int nextSprValue = getNextValue(stat.getSpirit());
-            if (lineToChangeSpr != -1) {
-                String line = lore.get(lineToChangeSpr);
-                String newLine = line.replace(stat.getSpirit() + "", nextSprValue + "");
-                lore.set(lineToChangeSpr, newLine);
+            int nextDefenseValue = getNextValue(stat.getBonusDefense());
+            if (lineToChangeBonusDefense != -1) {
+                String line = lore.get(lineToChangeBonusDefense);
+                String newLine = line.replace(stat.getBonusDefense() + "", nextDefenseValue + "");
+                lore.set(lineToChangeBonusDefense, newLine);
             }
-            int nextEndValue = getNextValue(stat.getEndurance());
-            if (lineToChangeEnd != -1) {
-                String line = lore.get(lineToChangeEnd);
-                String newLine = line.replace(stat.getEndurance() + "", nextEndValue + "");
-                lore.set(lineToChangeEnd, newLine);
+            int nextHealthValue = getNextValue(stat.getBonusMaxHealth());
+            if (lineToChangeBonusHealth != -1) {
+                String line = lore.get(lineToChangeBonusHealth);
+                String newLine = line.replace(stat.getBonusMaxHealth() + "", nextHealthValue + "");
+                lore.set(lineToChangeBonusHealth, newLine);
             }
-            int nextIntValue = getNextValue(stat.getIntelligence());
-            if (lineToChangeInt != -1) {
-                String line = lore.get(lineToChangeInt);
-                String newLine = line.replace(stat.getIntelligence() + "", nextIntValue + "");
-                lore.set(lineToChangeInt, newLine);
+            int nextManaValue = getNextValue(stat.getBonusMaxMana());
+            if (lineToChangeBonusMana != -1) {
+                String line = lore.get(lineToChangeBonusMana);
+                String newLine = line.replace(stat.getBonusMaxMana() + "", nextManaValue + "");
+                lore.set(lineToChangeBonusMana, newLine);
             }
-            int nextDexValue = getNextValue(stat.getDexterity());
-            if (lineToChangeDex != -1) {
-                String line = lore.get(lineToChangeDex);
-                String newLine = line.replace(stat.getDexterity() + "", nextDexValue + "");
-                lore.set(lineToChangeDex, newLine);
+            int nextCriticalValue = getNextValue(stat.getBonusCriticalChance());
+            if (lineToChangeBonusCriticalChance != -1) {
+                String line = lore.get(lineToChangeBonusCriticalChance);
+                String newLine = line.replace(stat.getBonusCriticalChance() + "", nextCriticalValue + "");
+                lore.set(lineToChangeBonusCriticalChance, newLine);
             }
             itemMeta.setLore(lore);
             this.itemStack.setItemMeta(itemMeta);
 
-            if (lineToChangeStr != -1) {
-                PersistentDataContainerUtil.putInteger("strength", nextStrValue, this.itemStack);
+            if (lineToChangeBonusDamage != -1) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DAMAGE.name(), nextDamageValue, this.itemStack);
             }
-            if (lineToChangeSpr != -1) {
-                PersistentDataContainerUtil.putInteger("spirit", nextSprValue, this.itemStack);
+            if (lineToChangeBonusDefense != -1) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DEFENSE.name(), nextDefenseValue, this.itemStack);
             }
-            if (lineToChangeEnd != -1) {
-                PersistentDataContainerUtil.putInteger("endurance", nextEndValue, this.itemStack);
+            if (lineToChangeBonusHealth != -1) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_HEALTH.name(), nextHealthValue, this.itemStack);
             }
-            if (lineToChangeInt != -1) {
-                PersistentDataContainerUtil.putInteger("intelligence", nextIntValue, this.itemStack);
+            if (lineToChangeBonusMana != -1) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_MANA.name(), nextManaValue, this.itemStack);
             }
-            if (lineToChangeDex != -1) {
-                PersistentDataContainerUtil.putInteger("dexterity", nextDexValue, this.itemStack);
+            if (lineToChangeBonusCriticalChance != -1) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_CRITICAL_CHANCE.name(), nextCriticalValue, this.itemStack);
             }
         }
 
@@ -283,25 +274,16 @@ public class Enchant {
         }
         itemMeta.setDisplayName(name);
 
-        StatType type = StatUtils.getStatType(itemStack.getType());
+        GearStatType type = StatUtils.getStatType(itemStack.getType());
 
-        if (type.equals(StatType.HEALTH) || type.equals(StatType.MAGICAL) ||
-                type.equals(StatType.MELEE) || type.equals(StatType.HYBRID)) {
+        if (type.equals(GearStatType.ARMOR_GEAR) || type.equals(GearStatType.WEAPON_GEAR)) {
             int baseValue;
             String statString;
 
-            if (type.equals(StatType.MAGICAL)) {
-                statString = ChatColor.DARK_AQUA + "✦ Magic Damage: " + ChatColor.GRAY + "+";
-                StatMagical stat = (StatMagical) StatUtils.getStat(itemStack);
-                baseValue = stat.getMagicDamage();
-            } else if (type.equals(StatType.MELEE)) {
+            if (type.equals(GearStatType.WEAPON_GEAR)) {
                 statString = ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
-            } else if (type.equals(StatType.HYBRID)) {
-                statString = ChatColor.RED + "➹ Ranged Damage: " + ChatColor.GRAY + "+";
-                StatHybrid stat = (StatHybrid) StatUtils.getStat(itemStack);
-                baseValue = stat.getRangedDamage();
             } else {
                 statString = ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
@@ -331,57 +313,53 @@ public class Enchant {
 
             this.itemStack.setItemMeta(itemMeta);
 
-            if (type.equals(StatType.MELEE)) {
-                PersistentDataContainerUtil.putInteger("meleeDamage", nextValue, this.itemStack);
+            if (type.equals(GearStatType.WEAPON_GEAR)) {
+                PersistentDataContainerUtil.putInteger("elementDamage", nextValue, this.itemStack);
                 RPGItemUtils.setDamage(itemStack, nextValue);
-            } else if (type.equals(StatType.HYBRID)) {
-                PersistentDataContainerUtil.putInteger("rangedDamage", nextValue, this.itemStack);
-            } else if (type.equals(StatType.MAGICAL)) {
-                PersistentDataContainerUtil.putInteger("magicDamage", nextValue, this.itemStack);
             } else {
                 PersistentDataContainerUtil.putInteger("health", nextValue, this.itemStack);
             }
-        } else if (type.equals(StatType.PASSIVE)) {
+        } else if (type.equals(GearStatType.PASSIVE_GEAR)) {
             StatPassive stat = (StatPassive) StatUtils.getStat(itemStack);
 
             player.sendMessage("SUCC");
             player.sendMessage("PASSIVE");
 
-            int lineToChangeStr = -1;
-            int lineToChangeSpr = -1;
-            int lineToChangeEnd = -1;
-            int lineToChangeInt = -1;
-            int lineToChangeDex = -1;
+            int lineToChangeDamage = -1;
+            int lineToChangeMana = -1;
+            int lineToChangeHealth = -1;
+            int lineToChangeDefense = -1;
+            int lineToChangeCriticalChance = -1;
             int changeCounter = 0;
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
-                if (stat.getStrength() != 0) {
-                    if (line.contains(ChatColor.RED + "☄ " + ChatColor.RED + "Strength: " + ChatColor.GRAY + "+")) {
-                        lineToChangeStr = i;
+                if (stat.getBonusDamage() != 0) {
+                    if (line.contains(AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        lineToChangeDamage = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getSpirit() != 0) {
-                    if (line.contains(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Spirit: " + ChatColor.GRAY + "+")) {
-                        lineToChangeSpr = i;
+                if (stat.getBonusDefense() != 0) {
+                    if (line.contains(AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        lineToChangeDefense = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getEndurance() != 0) {
-                    if (line.contains(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Endurance: " + ChatColor.GRAY + "+")) {
-                        lineToChangeEnd = i;
+                if (stat.getBonusMaxHealth() != 0) {
+                    if (line.contains(AttributeType.BONUS_MAX_HEALTH.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        lineToChangeHealth = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getIntelligence() != 0) {
-                    if (line.contains(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Intelligence: " + ChatColor.GRAY + "+")) {
-                        lineToChangeInt = i;
+                if (stat.getBonusMaxMana() != 0) {
+                    if (line.contains(AttributeType.BONUS_MAX_MANA.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        lineToChangeMana = i;
                         changeCounter++;
                     }
                 }
-                if (stat.getDexterity() != 0) {
-                    if (line.contains(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Dexterity: " + ChatColor.GRAY + "+")) {
-                        lineToChangeDex = i;
+                if (stat.getBonusCriticalChance() != 0) {
+                    if (line.contains(AttributeType.BONUS_CRITICAL_CHANCE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        lineToChangeCriticalChance = i;
                         changeCounter++;
                     }
                 }
@@ -390,53 +368,53 @@ public class Enchant {
                 }
             }
 
-            int nextStrValue = getPreviousValue(stat.getStrength());
-            if (lineToChangeStr != -1) {
-                String line = lore.get(lineToChangeStr);
-                String newLine = line.replace(stat.getStrength() + "", nextStrValue + "");
-                lore.set(lineToChangeStr, newLine);
+            int nextDamageValue = getPreviousValue(stat.getBonusDamage());
+            if (lineToChangeDamage != -1) {
+                String line = lore.get(lineToChangeDamage);
+                String newLine = line.replace(stat.getBonusDamage() + "", nextDamageValue + "");
+                lore.set(lineToChangeDamage, newLine);
             }
-            int nextSprValue = getPreviousValue(stat.getSpirit());
-            if (lineToChangeSpr != -1) {
-                String line = lore.get(lineToChangeSpr);
-                String newLine = line.replace(stat.getSpirit() + "", nextSprValue + "");
-                lore.set(lineToChangeSpr, newLine);
+            int nextDefenseValue = getPreviousValue(stat.getBonusDefense());
+            if (lineToChangeDefense != -1) {
+                String line = lore.get(lineToChangeDefense);
+                String newLine = line.replace(stat.getBonusDefense() + "", nextDefenseValue + "");
+                lore.set(lineToChangeDefense, newLine);
             }
-            int nextEndValue = getPreviousValue(stat.getEndurance());
-            if (lineToChangeEnd != -1) {
-                String line = lore.get(lineToChangeEnd);
-                String newLine = line.replace(stat.getEndurance() + "", nextEndValue + "");
-                lore.set(lineToChangeEnd, newLine);
+            int nextHealthValue = getPreviousValue(stat.getBonusMaxHealth());
+            if (lineToChangeHealth != -1) {
+                String line = lore.get(lineToChangeHealth);
+                String newLine = line.replace(stat.getBonusMaxHealth() + "", nextHealthValue + "");
+                lore.set(lineToChangeHealth, newLine);
             }
-            int nextIntValue = getPreviousValue(stat.getIntelligence());
-            if (lineToChangeInt != -1) {
-                String line = lore.get(lineToChangeInt);
-                String newLine = line.replace(stat.getIntelligence() + "", nextIntValue + "");
-                lore.set(lineToChangeInt, newLine);
+            int nextManaValue = getPreviousValue(stat.getBonusMaxMana());
+            if (lineToChangeMana != -1) {
+                String line = lore.get(lineToChangeMana);
+                String newLine = line.replace(stat.getBonusMaxMana() + "", nextManaValue + "");
+                lore.set(lineToChangeMana, newLine);
             }
-            int nextDexValue = getPreviousValue(stat.getDexterity());
-            if (lineToChangeDex != -1) {
-                String line = lore.get(lineToChangeDex);
-                String newLine = line.replace(stat.getDexterity() + "", nextDexValue + "");
-                lore.set(lineToChangeDex, newLine);
+            int nextCriticalChanceValue = getPreviousValue(stat.getBonusCriticalChance());
+            if (lineToChangeCriticalChance != -1) {
+                String line = lore.get(lineToChangeCriticalChance);
+                String newLine = line.replace(stat.getBonusCriticalChance() + "", nextCriticalChanceValue + "");
+                lore.set(lineToChangeCriticalChance, newLine);
             }
             itemMeta.setLore(lore);
             this.itemStack.setItemMeta(itemMeta);
 
-            if (lineToChangeStr != -1) {
-                PersistentDataContainerUtil.putInteger("strength", nextStrValue, this.itemStack);
+            if (lineToChangeDamage != -1) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DAMAGE.name(), nextDamageValue, this.itemStack);
             }
-            if (lineToChangeSpr != -1) {
-                PersistentDataContainerUtil.putInteger("spirit", nextSprValue, this.itemStack);
+            if (lineToChangeDefense != -1) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DEFENSE.name(), nextDefenseValue, this.itemStack);
             }
-            if (lineToChangeEnd != -1) {
-                PersistentDataContainerUtil.putInteger("endurance", nextEndValue, this.itemStack);
+            if (lineToChangeHealth != -1) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_HEALTH.name(), nextHealthValue, this.itemStack);
             }
-            if (lineToChangeInt != -1) {
-                PersistentDataContainerUtil.putInteger("intelligence", nextIntValue, this.itemStack);
+            if (lineToChangeMana != -1) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_MANA.name(), nextManaValue, this.itemStack);
             }
-            if (lineToChangeDex != -1) {
-                PersistentDataContainerUtil.putInteger("dexterity", nextDexValue, this.itemStack);
+            if (lineToChangeCriticalChance != -1) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_CRITICAL_CHANCE.name(), nextCriticalChanceValue, this.itemStack);
             }
         }
 

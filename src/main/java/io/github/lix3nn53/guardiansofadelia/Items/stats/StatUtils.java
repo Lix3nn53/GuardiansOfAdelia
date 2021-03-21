@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
@@ -21,81 +22,60 @@ public class StatUtils {
 
     public static Stat getStat(ItemStack item) {
         Material mat = item.getType();
-        StatType type = getStatType(mat);
+        GearStatType type = getStatType(mat);
 
-        if (type.equals(StatType.HEALTH)) {
+        if (type.equals(GearStatType.ARMOR_GEAR)) {
             if (PersistentDataContainerUtil.hasInteger(item, "health")) {
                 int health = PersistentDataContainerUtil.getInteger(item, "health");
                 return new StatOneType(health);
             }
-        } else if (type.equals(StatType.HYBRID)) {
-            int melee = 0;
-            int ranged = 0;
-            if (PersistentDataContainerUtil.hasInteger(item, "meleeDamage")) {
-                melee = PersistentDataContainerUtil.getInteger(item, "meleeDamage");
-            }
-            if (PersistentDataContainerUtil.hasInteger(item, "rangedDamage")) {
-                ranged = PersistentDataContainerUtil.getInteger(item, "rangedDamage");
-            }
-            return new StatHybrid(melee, ranged);
-        } else if (type.equals(StatType.MAGICAL)) {
-            int melee = 0;
-            int magical = 0;
-            if (PersistentDataContainerUtil.hasInteger(item, "meleeDamage")) {
-                melee = PersistentDataContainerUtil.getInteger(item, "meleeDamage");
-            }
-            if (PersistentDataContainerUtil.hasInteger(item, "magicDamage")) {
-                magical = PersistentDataContainerUtil.getInteger(item, "magicDamage");
-            }
-            return new StatMagical(melee, magical);
-        } else if (type.equals(StatType.MELEE)) {
-            if (PersistentDataContainerUtil.hasInteger(item, "meleeDamage")) {
-                int damage = PersistentDataContainerUtil.getInteger(item, "meleeDamage");
+        } else if (type.equals(GearStatType.WEAPON_GEAR)) {
+            if (PersistentDataContainerUtil.hasInteger(item, "elementDamage")) {
+                int damage = PersistentDataContainerUtil.getInteger(item, "elementDamage");
                 return new StatOneType(damage);
             }
-        } else if (type.equals(StatType.PASSIVE)) {
-            int strength = 0;
-            int spirit = 0;
-            int endurance = 0;
-            int intelligence = 0;
-            int dexterity = 0;
+        } else if (type.equals(GearStatType.PASSIVE_GEAR)) {
+            int bonusDamage = 0;
+            int bonusDefense = 0;
+            int bonusHealth = 0;
+            int bonusMana = 0;
+            int bonusCriticalChance = 0;
 
-            if (PersistentDataContainerUtil.hasInteger(item, "strength")) {
-                strength = PersistentDataContainerUtil.getInteger(item, "strength");
+            if (PersistentDataContainerUtil.hasInteger(item, AttributeType.BONUS_ELEMENT_DAMAGE.name())) {
+                bonusDamage = PersistentDataContainerUtil.getInteger(item, AttributeType.BONUS_ELEMENT_DAMAGE.name());
             }
-            if (PersistentDataContainerUtil.hasInteger(item, "spirit")) {
-                spirit = PersistentDataContainerUtil.getInteger(item, "spirit");
+            if (PersistentDataContainerUtil.hasInteger(item, AttributeType.BONUS_ELEMENT_DEFENSE.name())) {
+                bonusDefense = PersistentDataContainerUtil.getInteger(item, AttributeType.BONUS_ELEMENT_DEFENSE.name());
             }
-            if (PersistentDataContainerUtil.hasInteger(item, "endurance")) {
-                endurance = PersistentDataContainerUtil.getInteger(item, "endurance");
+            if (PersistentDataContainerUtil.hasInteger(item, AttributeType.BONUS_MAX_HEALTH.name())) {
+                bonusHealth = PersistentDataContainerUtil.getInteger(item, AttributeType.BONUS_MAX_HEALTH.name());
             }
-            if (PersistentDataContainerUtil.hasInteger(item, "intelligence")) {
-                intelligence = PersistentDataContainerUtil.getInteger(item, "intelligence");
+            if (PersistentDataContainerUtil.hasInteger(item, AttributeType.BONUS_MAX_MANA.name())) {
+                bonusMana = PersistentDataContainerUtil.getInteger(item, AttributeType.BONUS_MAX_MANA.name());
             }
-            if (PersistentDataContainerUtil.hasInteger(item, "dexterity")) {
-                dexterity = PersistentDataContainerUtil.getInteger(item, "dexterity");
+            if (PersistentDataContainerUtil.hasInteger(item, AttributeType.BONUS_CRITICAL_CHANCE.name())) {
+                bonusCriticalChance = PersistentDataContainerUtil.getInteger(item, AttributeType.BONUS_CRITICAL_CHANCE.name());
             }
 
-            return new StatPassive(strength, spirit, endurance, intelligence, dexterity);
+            return new StatPassive(bonusDamage, bonusDefense, bonusHealth, bonusMana, bonusCriticalChance);
         }
         return new StatOneType(0);
     }
 
-    public static StatType getStatType(Material mat) {
-        StatType type = null;
+    public static GearStatType getStatType(Material mat) {
+        GearStatType type = null;
         if (mat.equals(Material.DIAMOND_AXE) || //great sword
                 mat.equals(Material.NETHERITE_AXE) || //battle axe
                 mat.equals(Material.NETHERITE_HOE) || //dagger
                 mat.equals(Material.NETHERITE_PICKAXE) || //war hammer
-                mat.equals(Material.NETHERITE_SWORD) //sword
-        ) {
-            type = StatType.MELEE;
-        } else if (mat.equals(Material.TRIDENT) || mat.equals(Material.BOW) || mat.equals(Material.CROSSBOW)) {
-            type = StatType.HYBRID;
-        } else if (mat.equals(Material.DIAMOND_SHOVEL) //wand
+                mat.equals(Material.NETHERITE_SWORD) || //sword
+                mat.equals(Material.TRIDENT) || //spear
+                mat.equals(Material.BOW) || //bow
+                mat.equals(Material.CROSSBOW) || //crossbow
+                mat.equals(Material.DIAMOND_SHOVEL) //wand
                 || mat.equals(Material.NETHERITE_SHOVEL) //staff
         ) {
-            type = StatType.MAGICAL;
+            type = GearStatType.WEAPON_GEAR;
         } else if (mat.equals(Material.NETHERITE_LEGGINGS) ||
                 mat.equals(Material.DIAMOND_LEGGINGS) ||
                 mat.equals(Material.GOLDEN_LEGGINGS) ||
@@ -123,9 +103,9 @@ public class StatUtils {
                 mat.equals(HelmetSkin.getHelmetMaterial()) ||
                 mat.equals(Material.SHIELD)
         ) {
-            type = StatType.HEALTH;
+            type = GearStatType.ARMOR_GEAR;
         } else if (mat.equals(Material.SHEARS)) {
-            type = StatType.PASSIVE;
+            type = GearStatType.PASSIVE_GEAR;
         }
         return type;
     }
@@ -182,20 +162,20 @@ public class StatUtils {
             StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
             //add persistent data before getting itemMeta so we don't lost them
-            if (statPassive.getStrength() != 0) {
-                PersistentDataContainerUtil.putInteger("strength", statPassive.getStrength(), itemStack);
+            if (statPassive.getBonusDamage() != 0) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DAMAGE.name(), statPassive.getBonusDamage(), itemStack);
             }
-            if (statPassive.getSpirit() != 0) {
-                PersistentDataContainerUtil.putInteger("spirit", statPassive.getSpirit(), itemStack);
+            if (statPassive.getBonusDefense() != 0) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DEFENSE.name(), statPassive.getBonusDefense(), itemStack);
             }
-            if (statPassive.getEndurance() != 0) {
-                PersistentDataContainerUtil.putInteger("endurance", statPassive.getEndurance(), itemStack);
+            if (statPassive.getBonusMaxHealth() != 0) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_HEALTH.name(), statPassive.getBonusMaxHealth(), itemStack);
             }
-            if (statPassive.getIntelligence() != 0) {
-                PersistentDataContainerUtil.putInteger("intelligence", statPassive.getIntelligence(), itemStack);
+            if (statPassive.getBonusMaxMana() != 0) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_MANA.name(), statPassive.getBonusMaxMana(), itemStack);
             }
-            if (statPassive.getDexterity() != 0) {
-                PersistentDataContainerUtil.putInteger("dexterity", statPassive.getDexterity(), itemStack);
+            if (statPassive.getBonusCriticalChance() != 0) {
+                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_CRITICAL_CHANCE.name(), statPassive.getBonusCriticalChance(), itemStack);
             }
 
             ItemMeta itemMeta = itemStack.getItemMeta();
@@ -203,24 +183,24 @@ public class StatUtils {
 
             int i = lore.indexOf(itemTier.getTierString());
 
-            if (statPassive.getStrength() != 0) {
-                lore.add(i, ChatColor.RED + "☄ " + ChatColor.RED + "Strength: " + ChatColor.GRAY + "+" + statPassive.getStrength());
+            if (statPassive.getBonusDamage() != 0) {
+                lore.add(i, AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusDamage());
                 i++;
             }
-            if (statPassive.getSpirit() != 0) {
-                lore.add(i, ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Spirit: " + ChatColor.GRAY + "+" + statPassive.getSpirit());
+            if (statPassive.getBonusDefense() != 0) {
+                lore.add(i, AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusDefense());
                 i++;
             }
-            if (statPassive.getEndurance() != 0) {
-                lore.add(i, ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Endurance: " + ChatColor.GRAY + "+" + statPassive.getEndurance());
+            if (statPassive.getBonusMaxHealth() != 0) {
+                lore.add(i, AttributeType.BONUS_MAX_HEALTH.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusMaxHealth());
                 i++;
             }
-            if (statPassive.getIntelligence() != 0) {
-                lore.add(i, ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Intelligence: " + ChatColor.GRAY + "+" + statPassive.getIntelligence());
+            if (statPassive.getBonusMaxMana() != 0) {
+                lore.add(i, AttributeType.BONUS_MAX_MANA.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusMaxMana());
                 i++;
             }
-            if (statPassive.getDexterity() != 0) {
-                lore.add(i, ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Dexterity: " + ChatColor.GRAY + "+" + statPassive.getDexterity());
+            if (statPassive.getBonusCriticalChance() != 0) {
+                lore.add(i, AttributeType.BONUS_CRITICAL_CHANCE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusCriticalChance());
                 i++;
             }
             lore.add(i, "");

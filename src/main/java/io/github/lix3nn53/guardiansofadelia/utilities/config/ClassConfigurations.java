@@ -61,17 +61,17 @@ public class ClassConfigurations {
 
             int classIconCustomModelData = fileConfiguration.getInt("classIconCustomModelData");
 
-            int attributeTierStrength = fileConfiguration.getInt("attributeTierStrength");
-            int attributeTierSpirit = fileConfiguration.getInt("attributeTierSpirit");
-            int attributeTierEndurance = fileConfiguration.getInt("attributeTierEndurance");
-            int attributeTierIntelligence = fileConfiguration.getInt("attributeTierIntelligence");
-            int attributeTierDexterity = fileConfiguration.getInt("attributeTierDexterity");
+            int attributeTierBonusElementDamage = fileConfiguration.getInt("attributeTierBonusElementDamage");
+            int attributeTierBonusElementDefense = fileConfiguration.getInt("attributeTierBonusElementDefense");
+            int attributeTierBonusMaxHealth = fileConfiguration.getInt("attributeTierBonusMaxHealth");
+            int attributeTierBonusMaxMana = fileConfiguration.getInt("attributeTierBonusMaxMana");
+            int attributeTierBonusCriticalChance = fileConfiguration.getInt("attributeTierBonusCriticalChance");
             HashMap<AttributeType, Integer> attributeTiers = new HashMap<>();
-            attributeTiers.put(AttributeType.STRENGTH, attributeTierStrength);
-            attributeTiers.put(AttributeType.SPIRIT, attributeTierSpirit);
-            attributeTiers.put(AttributeType.ENDURANCE, attributeTierEndurance);
-            attributeTiers.put(AttributeType.INTELLIGENCE, attributeTierIntelligence);
-            attributeTiers.put(AttributeType.DEXTERITY, attributeTierDexterity);
+            attributeTiers.put(AttributeType.BONUS_ELEMENT_DAMAGE, attributeTierBonusElementDamage);
+            attributeTiers.put(AttributeType.BONUS_ELEMENT_DEFENSE, attributeTierBonusElementDefense);
+            attributeTiers.put(AttributeType.BONUS_MAX_HEALTH, attributeTierBonusMaxHealth);
+            attributeTiers.put(AttributeType.BONUS_MAX_MANA, attributeTierBonusMaxMana);
+            attributeTiers.put(AttributeType.BONUS_CRITICAL_CHANCE, attributeTierBonusCriticalChance);
 
             HashMap<Integer, Skill> skillSet = new HashMap<>();
 

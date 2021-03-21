@@ -9,11 +9,11 @@ color: "GREEN"
 description:
   - "Shamans summons a totem and plays around it."
 classIconCustomModelData: 4
-attributeTierStrength: 1
-attributeTierSpirit: 4
-attributeTierEndurance: 5
-attributeTierIntelligence: 6
-attributeTierDexterity: 0
+attributeTierBonusElementDamage: 1
+attributeTierBonusElementDefense: 4
+attributeTierBonusMaxHealth: 5
+attributeTierBonusMaxMana: 6
+attributeTierBonusCriticalChance: 0
 weaponGearTypes:
   - "WAND"
   - "DAGGER"

@@ -213,11 +213,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
                                 RPGCharacterStats targetRpgCharacterStats = activeCharacter.getRpgCharacterStats();
-                                int totalDefense = targetRpgCharacterStats.getTotalDefense();
-
-                                if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
-                                    totalDefense = targetRpgCharacterStats.getTotalMagicDefense();
-                                }
+                                int totalDefense = targetRpgCharacterStats.getTotalElementDefense();
 
                                 double reduction = StatUtils.getDefenseReduction(totalDefense);
 
@@ -275,9 +271,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         if (isSkill) {
                             // damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClassStr);
                             TriggerListener.onPlayerMagicAttack(player, livingTarget);
-                        } else { //add strength stat and physical damage buff to projectiles fired without skills involved
-                            damage += rpgCharacterStats.getStrength().getIncrement(player.getLevel(), rpgClassStr);
-                            damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
+                        } else { //add bonusElementDamage stat and elementDamageBuff to projectiles fired without skills involved
+                            damage += rpgCharacterStats.getBonusElementDamage().getIncrement(player.getLevel(), rpgClassStr);
+                            damage *= rpgCharacterStats.getBuffMultiplier(BuffType.ELEMENT_DAMAGE);
                             TriggerListener.onPlayerRangedAttack(player, livingTarget);
                             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.6F, 0.4F);
                         }
@@ -289,7 +285,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             // damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClassStr);
                             TriggerListener.onPlayerMagicAttack(player, livingTarget);
                         } else if (RPGItemUtils.isWeapon(type)) {
-                            //Normal melee attack. Check for requirements then add strength stat and offhand bonus
+                            //Normal melee attack. Check for requirements then add bonusElementDamage stat and offhand bonus
 
                             if (player.getInventory().getHeldItemSlot() != 4) {
                                 event.setCancelled(true);
@@ -300,7 +296,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr))
                                 return false;
 
-                            damage += rpgCharacterStats.getStrength().getIncrement(player.getLevel(), rpgClassStr); //add to weapon damage
+                            damage += rpgCharacterStats.getBonusElementDamage().getIncrement(player.getLevel(), rpgClassStr); //add to weapon damage
 
                             /*
                             DO NOT add damage bonus from offhand manually, it is added via vanilla attributes
@@ -313,7 +309,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             }
                             */
 
-                            damage *= rpgCharacterStats.getBuffMultiplier(BuffType.PHYSICAL_DAMAGE);
+                            damage *= rpgCharacterStats.getBuffMultiplier(BuffType.ELEMENT_DAMAGE);
                             TriggerListener.onPlayerMeleeAttack(player, livingTarget);
                         }
                     }
@@ -352,11 +348,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             RPGCharacter targetActiveCharacter = targetGuardianData.getActiveCharacter();
 
                             RPGCharacterStats targetRpgCharacterStats = targetActiveCharacter.getRpgCharacterStats();
-                            int totalDefense = targetRpgCharacterStats.getTotalDefense();
-
-                            if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
-                                totalDefense = targetRpgCharacterStats.getTotalMagicDefense();
-                            }
+                            int totalDefense = targetRpgCharacterStats.getTotalElementDefense();
 
                             double reduction = StatUtils.getDefenseReduction(totalDefense);
 

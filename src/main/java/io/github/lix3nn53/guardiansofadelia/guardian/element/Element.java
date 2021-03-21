@@ -1,13 +1,11 @@
-package io.github.lix3nn53.guardiansofadelia.guardian.attribute;
+package io.github.lix3nn53.guardiansofadelia.guardian.element;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import org.bukkit.inventory.EquipmentSlot;
 
-public class Attribute {
-    private final AttributeType attributeType;
-    private int invested;
+public class Element {
+    private final ElementType elementType;
+
     private int bonusFromHelmet;
     private int bonusFromChestplate;
     private int bonusFromLeggings;
@@ -17,45 +15,12 @@ public class Attribute {
 
     private int bonusFromPassive;
 
-    public Attribute(AttributeType attributeType) {
-        this.attributeType = attributeType;
-    }
-
-    public int getInvested() {
-        return invested;
-    }
-
-    public void setInvested(int invested, RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
-        this.invested = invested;
-        if (fixDisplay) {
-            onValueChange(rpgCharacterStats);
-        }
-    }
-
-    public void investPoint(RPGCharacterStats rpgCharacterStats, int amount, boolean fixDisplay) {
-        this.invested += amount;
-        if (fixDisplay) {
-            onValueChange(rpgCharacterStats);
-        }
-    }
-
-    public void downgradePoint(RPGCharacterStats rpgCharacterStats, int amount, boolean fixDisplay) {
-        this.invested -= amount;
-        if (fixDisplay) {
-            onValueChange(rpgCharacterStats);
-        }
+    public Element(ElementType elementType) {
+        this.elementType = elementType;
     }
 
     public int getBonusFromEquipment() {
         return bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand + bonusFromOffhand + bonusFromPassive;
-    }
-
-    public int getBonusFromLevel(int playerLevel, String playerClassStr) {
-        if (RPGClassManager.hasClass(playerClassStr)) {
-            RPGClass playerClass = RPGClassManager.getClass(playerClassStr);
-            return playerClass.getAttributeBonusForLevel(this.attributeType, playerLevel);
-        }
-        return 0;
     }
 
     public void clearEquipment(RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
@@ -148,12 +113,8 @@ public class Attribute {
         }
     }
 
-    public double getIncrement(int playerLevel, String playerClass) {
-        return (invested + getBonusFromEquipment() + getBonusFromLevel(playerLevel, playerClass)) * attributeType.getIncrementPerPoint();
-    }
-
     private void onValueChange(RPGCharacterStats rpgCharacterStats) {
-        switch (attributeType) {
+        switch (elementType) {
             case BONUS_ELEMENT_DAMAGE:
                 break;
             case BONUS_ELEMENT_DEFENSE:
@@ -169,51 +130,7 @@ public class Attribute {
         }
     }
 
-    public AttributeType getAttributeType() {
-        return attributeType;
+    public ElementType getElementType() {
+        return elementType;
     }
-
-    /*public void onBonusChangeFillEmpty(Player player, RPGCharacterStats rpgCharacterStats, int bonusPointDifference) {
-        if (bonusPointDifference > 0) {
-            switch (attributeType) {
-                case EARTH:
-                    player.sendMessage("Bonus earth fix health");
-                    double increment = attributeType.getIncrement();
-                    double v = increment * bonusPointDifference;
-
-                    double currentHealth = player.getHealth();
-                    double maxHealth = player.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue();
-
-                    if (currentHealth == maxHealth) break;
-
-                    double nextHealth = currentHealth + v;
-
-                    if (nextHealth > maxHealth) {
-                        nextHealth = maxHealth;
-                    }
-
-                    player.setHealth(nextHealth);
-                    break;
-                case WATER:
-                    player.sendMessage("Bonus spirit fix mana");
-                    increment = attributeType.getIncrement();
-                    v = increment * bonusPointDifference;
-
-                    int currentMana = rpgCharacterStats.getCurrentMana();
-
-                    double maxMana = rpgCharacterStats.getTotalMaxMana();
-
-                    if (currentMana == maxMana) break;
-
-                    double nextMana = currentMana + v;
-
-                    if (nextMana > maxMana) {
-                        nextMana = maxMana;
-                    }
-
-                    rpgCharacterStats.setCurrentMana((int) nextMana);
-                    break;
-            }
-        }
-    }*/
 }

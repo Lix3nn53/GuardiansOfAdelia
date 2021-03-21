@@ -1,29 +1,11 @@
-package io.github.lix3nn53.guardiansofadelia.guardian.attribute;
+package io.github.lix3nn53.guardiansofadelia.guardian.element;
 
-import org.bukkit.ChatColor;
-
-public enum AttributeType {
+public enum ElementType {
     BONUS_ELEMENT_DAMAGE,
     BONUS_ELEMENT_DEFENSE,
     BONUS_MAX_HEALTH,
     BONUS_MAX_MANA,
     BONUS_CRITICAL_CHANCE;
-
-    public String getCustomName() {
-        switch (this) {
-            case BONUS_ELEMENT_DAMAGE:
-                return ChatColor.RED + "Bonus Element Damage";
-            case BONUS_ELEMENT_DEFENSE:
-                return ChatColor.AQUA + "Bonus Element Defense";
-            case BONUS_MAX_HEALTH:
-                return ChatColor.DARK_GREEN + "Bonus Max Health";
-            case BONUS_MAX_MANA:
-                return ChatColor.BLUE + "Bonus Max Mana";
-            case BONUS_CRITICAL_CHANCE:
-                return ChatColor.GOLD + "Bonus Critical Chance";
-        }
-        return "description";
-    }
 
     public String getDescription() {
         switch (this) {

@@ -8,7 +8,10 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSet;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.*;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.GearStatType;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatOneType;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
@@ -48,17 +51,18 @@ public class RPGCharacterStats {
 
     private final Player player;
     private String rpgClassStr;
-    private final Attribute strength = new Attribute(AttributeType.STRENGTH);
-    private final Attribute intelligence = new Attribute(AttributeType.INTELLIGENCE);
-    private final Attribute endurance = new Attribute(AttributeType.ENDURANCE);
-    private final Attribute spirit = new Attribute(AttributeType.SPIRIT);
-    private final Attribute dexterity = new Attribute(AttributeType.DEXTERITY);
+    private final Attribute bonusElementDamage = new Attribute(AttributeType.BONUS_ELEMENT_DAMAGE);
+    private final Attribute bonusElementDefense = new Attribute(AttributeType.BONUS_ELEMENT_DEFENSE);
+    private final Attribute bonusMaxHealth = new Attribute(AttributeType.BONUS_MAX_HEALTH);
+    private final Attribute bonusMaxMana = new Attribute(AttributeType.BONUS_MAX_MANA);
+    private final Attribute bonusCriticalChance = new Attribute(AttributeType.BONUS_CRITICAL_CHANCE);
+
     private int totalExp;
     private final int maxHealth = 100;
     private final int maxMana = 100;
     private int currentMana = 100;
-    private int defense = 1;
-    private final int magicDefense = 1;
+    private final int elementDefense = 1;
+
     private final double baseCriticalChance = 0.05;
     private final double baseCriticalDamageBonus = 0.6;
     //armor slots
@@ -71,12 +75,10 @@ public class RPGCharacterStats {
     private int damageBonusFromOffhand = 0;
 
     //buff multipliers from skills
-    private double physicalDamageBuff = 1;
-    private double magicalDamageBuff = 1;
-    private double physicalDefenseBuff = 1;
-    private double magicalDefenseBuff = 1;
-    private double criticalChanceBonusBuff = 0;
-    private double criticalDamageBonusBuff = 0;
+    private double buffElementDamage = 1;
+    private double buffElementDefense = 1;
+    private double buffCriticalChance = 0;
+    private double buffCriticalDamage = 0;
 
     private ArmorGearType sameTypeArmorSet = null;
     private List<GearSet> gearSets = new ArrayList<>();
@@ -237,28 +239,24 @@ public class RPGCharacterStats {
         onCurrentManaChange();
     }
 
-    public void setDefense(int defense) {
-        this.defense = defense;
+    public Attribute getBonusElementDamage() {
+        return bonusElementDamage;
     }
 
-    public Attribute getStrength() {
-        return strength;
+    public Attribute getBonusElementDefense() {
+        return bonusElementDefense;
     }
 
-    public Attribute getIntelligence() {
-        return intelligence;
+    public Attribute getBonusMaxHealth() {
+        return bonusMaxHealth;
     }
 
-    public Attribute getEndurance() {
-        return endurance;
+    public Attribute getBonusMaxMana() {
+        return bonusMaxMana;
     }
 
-    public Attribute getSpirit() {
-        return spirit;
-    }
-
-    public Attribute getDexterity() {
-        return dexterity;
+    public Attribute getBonusCriticalChance() {
+        return bonusCriticalChance;
     }
 
     public int getTotalMaxHealth() {
@@ -280,55 +278,35 @@ public class RPGCharacterStats {
             totalMaxHealth += shield.getMaxHealth();
         }
 
-        return (int) (totalMaxHealth + endurance.getIncrement(player.getLevel(), rpgClassStr) + 0.5);
+        return (int) (totalMaxHealth + bonusMaxHealth.getIncrement(player.getLevel(), rpgClassStr) + 0.5);
     }
 
     public int getTotalMaxMana() {
-        return (int) (maxMana + spirit.getIncrement(player.getLevel(), rpgClassStr) + 0.5);
+        return (int) (maxMana + bonusMaxMana.getIncrement(player.getLevel(), rpgClassStr) + 0.5);
     }
 
-    public int getTotalDefense() {
-        return (int) ((defense + helmet.getDefense() + chestplate.getDefense() + leggings.getDefense() + boots.getDefense() + shield.getDefense()) * physicalDefenseBuff + 0.5);
-    }
-
-    public int getTotalMagicDefense() {
-        return (int) ((magicDefense + helmet.getMagicDefense() + chestplate.getMagicDefense() + leggings.getMagicDefense() + boots.getMagicDefense() + shield.getMagicDefense()) * magicalDefenseBuff + 0.5);
+    public int getTotalElementDefense() {
+        return (int) ((elementDefense + helmet.getDefense() + chestplate.getDefense() + leggings.getDefense() + boots.getDefense() + shield.getDefense() +
+                bonusElementDefense.getIncrement(player.getLevel(), rpgClassStr)) * buffElementDefense + 0.5);
     }
 
     public double getTotalCriticalChance() {
-        double chance = baseCriticalChance + dexterity.getIncrement(player.getLevel(), rpgClassStr);
+        double chance = baseCriticalChance + bonusCriticalChance.getIncrement(player.getLevel(), rpgClassStr);
         if (chance > 0.4) {
             chance = 0.4;
         }
 
-        chance += criticalChanceBonusBuff;
+        chance += buffCriticalChance;
 
         return chance;
     }
 
     public double getTotalCriticalDamageBonus() {
-        return baseCriticalDamageBonus + criticalDamageBonusBuff;
+        return baseCriticalDamageBonus + buffCriticalDamage;
     }
 
-    public int getTotalMagicDamage(Player player, String rpgClass) {
-        int intBonus = (int) (intelligence.getIncrement(player.getLevel(), rpgClass) + 0.5);
-
-        ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-
-        Material type = itemInMainHand.getType();
-
-        if (type.equals(Material.DIAMOND_SHOVEL)) {
-            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return intBonus;
-
-            if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "magicDamage")) {
-                return intBonus + PersistentDataContainerUtil.getInteger(itemInMainHand, "magicDamage");
-            }
-        }
-        return (int) (intBonus * magicalDamageBuff + 0.5);
-    }
-
-    public int getTotalMeleeDamage(Player player, String rpgClass) {
-        int bonus = (int) (strength.getIncrement(player.getLevel(), rpgClass) + 0.5) + damageBonusFromOffhand;
+    public int getTotalElementDamage(Player player, String rpgClass) {
+        int bonus = (int) (bonusElementDamage.getIncrement(player.getLevel(), rpgClass) + 0.5) + damageBonusFromOffhand;
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
 
@@ -337,56 +315,29 @@ public class RPGCharacterStats {
         if (RPGItemUtils.isWeapon(type)) {
             if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return bonus;
 
-            StatType statType = StatUtils.getStatType(type);
+            GearStatType gearStatType = StatUtils.getStatType(type);
 
-            switch (statType) {
-                case MELEE:
-                    StatOneType stat = (StatOneType) StatUtils.getStat(itemInMainHand);
-                    return stat.getValue() + bonus;
-                case HYBRID:
-                    StatHybrid statHybrid = (StatHybrid) StatUtils.getStat(itemInMainHand);
-                    return statHybrid.getMeleeDamage() + bonus;
-                case MAGICAL:
-                    StatMagical statMagical = (StatMagical) StatUtils.getStat(itemInMainHand);
-                    return statMagical.getMeleeDamage() + bonus;
+            if (gearStatType == GearStatType.WEAPON_GEAR) {
+                StatOneType stat = (StatOneType) StatUtils.getStat(itemInMainHand);
+                return stat.getValue() + bonus;
             }
         }
-        return (int) (bonus * physicalDamageBuff + 0.5);
-    }
-
-    public int getTotalRangedDamage(Player player, String rpgClass) {
-        int strBonus = (int) (strength.getIncrement(player.getLevel(), rpgClass) + 0.5);
-
-        ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-
-        Material type = itemInMainHand.getType();
-
-        if (type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
-            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return strBonus;
-
-            StatType statType = StatUtils.getStatType(type);
-
-            if (statType == StatType.HYBRID) {
-                StatHybrid statHybrid = (StatHybrid) StatUtils.getStat(itemInMainHand);
-                return statHybrid.getRangedDamage() + strBonus;
-            }
-        }
-        return (int) (strBonus * physicalDamageBuff + 0.5);
+        return (int) (bonus * buffElementDamage + 0.5);
     }
 
     public void resetAttributes() {
-        strength.setInvested(0, this, false);
-        intelligence.setInvested(0, this, false);
-        endurance.setInvested(0, this, false);
-        spirit.setInvested(0, this, false);
-        dexterity.setInvested(0, this, false);
+        bonusElementDamage.setInvested(0, this, false);
+        bonusElementDefense.setInvested(0, this, false);
+        bonusMaxHealth.setInvested(0, this, false);
+        bonusMaxMana.setInvested(0, this, false);
+        bonusCriticalChance.setInvested(0, this, false);
 
         onMaxHealthChange();
         onCurrentManaChange();
     }
 
     public int getInvestedAttributePoints() {
-        return this.strength.getInvested() + spirit.getInvested() + endurance.getInvested() + intelligence.getInvested() + dexterity.getInvested();
+        return this.bonusElementDamage.getInvested() + bonusMaxMana.getInvested() + bonusMaxHealth.getInvested() + bonusElementDefense.getInvested() + bonusCriticalChance.getInvested();
     }
 
     public int getAttributePointsLeftToSpend() {
@@ -632,73 +583,73 @@ public class RPGCharacterStats {
     }
 
     private void setPassiveStatBonuses(EquipmentSlot equipmentSlot, ItemStack itemStack, boolean fixDisplay) {
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "strength")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "strength");
-            getStrength().setBonus(equipmentSlot, this, bonus, false);
+        if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_ELEMENT_DAMAGE.name())) {
+            int bonus = PersistentDataContainerUtil.getInteger(itemStack, AttributeType.BONUS_ELEMENT_DEFENSE.name());
+            getBonusElementDamage().setBonus(equipmentSlot, this, bonus, false);
         } else {
-            getStrength().setBonus(equipmentSlot, this, 0, false);
+            getBonusElementDamage().setBonus(equipmentSlot, this, 0, false);
         }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "spirit")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "spirit");
-            getSpirit().setBonus(equipmentSlot, this, bonus, fixDisplay);
+        if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_ELEMENT_DEFENSE.name())) {
+            int bonus = PersistentDataContainerUtil.getInteger(itemStack, AttributeType.BONUS_ELEMENT_DEFENSE.name());
+            getBonusElementDefense().setBonus(equipmentSlot, this, bonus, false);
         } else {
-            getSpirit().setBonus(equipmentSlot, this, 0, false);
+            getBonusElementDefense().setBonus(equipmentSlot, this, 0, false);
         }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "endurance")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "endurance");
-            getEndurance().setBonus(equipmentSlot, this, bonus, fixDisplay);
+        if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_MAX_HEALTH.name())) {
+            int bonus = PersistentDataContainerUtil.getInteger(itemStack, AttributeType.BONUS_MAX_HEALTH.name());
+            getBonusMaxHealth().setBonus(equipmentSlot, this, bonus, fixDisplay);
         } else {
-            getEndurance().setBonus(equipmentSlot, this, 0, false);
+            getBonusMaxHealth().setBonus(equipmentSlot, this, 0, false);
         }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "intelligence")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "intelligence");
-            getIntelligence().setBonus(equipmentSlot, this, bonus, false);
+        if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_MAX_MANA.name())) {
+            int bonus = PersistentDataContainerUtil.getInteger(itemStack, AttributeType.BONUS_MAX_MANA.name());
+            getBonusMaxMana().setBonus(equipmentSlot, this, bonus, fixDisplay);
         } else {
-            getIntelligence().setBonus(equipmentSlot, this, 0, false);
+            getBonusMaxMana().setBonus(equipmentSlot, this, 0, false);
         }
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "dexterity")) {
-            int bonus = PersistentDataContainerUtil.getInteger(itemStack, "dexterity");
-            getDexterity().setBonus(equipmentSlot, this, bonus, false);
+        if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_CRITICAL_CHANCE.name())) {
+            int bonus = PersistentDataContainerUtil.getInteger(itemStack, AttributeType.BONUS_CRITICAL_CHANCE.name());
+            getBonusCriticalChance().setBonus(equipmentSlot, this, bonus, false);
         } else {
-            getDexterity().setBonus(equipmentSlot, this, 0, false);
+            getBonusCriticalChance().setBonus(equipmentSlot, this, 0, false);
         }
     }
 
     private void removePassiveStatBonuses(EquipmentSlot equipmentSlot) {
-        getStrength().removeBonus(equipmentSlot, this, false);
-        getSpirit().removeBonus(equipmentSlot, this, false);
-        getEndurance().removeBonus(equipmentSlot, this, false);
-        getIntelligence().removeBonus(equipmentSlot, this, false);
-        getDexterity().removeBonus(equipmentSlot, this, false);
+        getBonusElementDamage().removeBonus(equipmentSlot, this, false);
+        getBonusMaxMana().removeBonus(equipmentSlot, this, false);
+        getBonusMaxHealth().removeBonus(equipmentSlot, this, false);
+        getBonusElementDefense().removeBonus(equipmentSlot, this, false);
+        getBonusCriticalChance().removeBonus(equipmentSlot, this, false);
 
         onMaxHealthChange();
         onCurrentManaChange();
     }
 
     public void recalculateRPGInventory(RPGInventory rpgInventory) {
-        getStrength().clearPassive(this, false);
-        getSpirit().clearPassive(this, false);
-        getEndurance().clearPassive(this, false);
-        getIntelligence().clearPassive(this, false);
-        getDexterity().clearPassive(this, false);
+        getBonusElementDamage().clearPassive(this, false);
+        getBonusMaxMana().clearPassive(this, false);
+        getBonusMaxHealth().clearPassive(this, false);
+        getBonusElementDefense().clearPassive(this, false);
+        getBonusCriticalChance().clearPassive(this, false);
 
         StatPassive totalPassiveStat = rpgInventory.getTotalPassiveStat();
-        getStrength().addBonusToPassive(totalPassiveStat.getStrength(), this, false);
-        getSpirit().addBonusToPassive(totalPassiveStat.getSpirit(), this, false);
-        getEndurance().addBonusToPassive(totalPassiveStat.getEndurance(), this, false);
-        getIntelligence().addBonusToPassive(totalPassiveStat.getIntelligence(), this, false);
-        getDexterity().addBonusToPassive(totalPassiveStat.getDexterity(), this, false);
+        getBonusElementDamage().addBonusToPassive(totalPassiveStat.getBonusDamage(), this, false);
+        getBonusMaxMana().addBonusToPassive(totalPassiveStat.getBonusMaxMana(), this, false);
+        getBonusMaxHealth().addBonusToPassive(totalPassiveStat.getBonusMaxHealth(), this, false);
+        getBonusElementDefense().addBonusToPassive(totalPassiveStat.getBonusDefense(), this, false);
+        getBonusCriticalChance().addBonusToPassive(totalPassiveStat.getBonusCriticalChance(), this, false);
 
         onMaxHealthChange();
         onCurrentManaChange();
     }
 
     public void recalculateEquipment(String rpgClass) {
-        getStrength().clearEquipment(this, false);
-        getSpirit().clearEquipment(this, false);
-        getEndurance().clearEquipment(this, false);
-        getIntelligence().clearEquipment(this, false);
-        getDexterity().clearEquipment(this, false);
+        getBonusElementDamage().clearEquipment(this, false);
+        getBonusMaxMana().clearEquipment(this, false);
+        getBonusMaxHealth().clearEquipment(this, false);
+        getBonusElementDefense().clearEquipment(this, false);
+        getBonusCriticalChance().clearEquipment(this, false);
 
         helmet = new ArmorStatHolder(0, 0, 0);
         chestplate = new ArmorStatHolder(0, 0, 0);
@@ -814,32 +765,32 @@ public class RPGCharacterStats {
     }
 
     public int getTotalDamageBonusFromOffhand() {
-        return (int) (damageBonusFromOffhand * physicalDamageBuff + 0.5);
+        return (int) (damageBonusFromOffhand * buffElementDamage + 0.5);
     }
 
     public boolean setMainHandBonuses(ItemStack itemStack, String rpgClass, boolean fixDisplay) {
         if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
 
             //manage stats on item drop
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "strength")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "strength");
-                getStrength().setBonus(EquipmentSlot.HAND, this, bonus, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_ELEMENT_DAMAGE.name())) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, AttributeType.BONUS_ELEMENT_DAMAGE.name());
+                getBonusElementDamage().setBonus(EquipmentSlot.HAND, this, bonus, false);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "spirit")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "spirit");
-                getSpirit().setBonus(EquipmentSlot.HAND, this, bonus, fixDisplay);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_ELEMENT_DEFENSE.name())) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, AttributeType.BONUS_ELEMENT_DEFENSE.name());
+                getBonusElementDefense().setBonus(EquipmentSlot.HAND, this, bonus, false);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "endurance")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "endurance");
-                getEndurance().setBonus(EquipmentSlot.HAND, this, bonus, fixDisplay);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_MAX_HEALTH.name())) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, AttributeType.BONUS_MAX_HEALTH.name());
+                getBonusMaxHealth().setBonus(EquipmentSlot.HAND, this, bonus, fixDisplay);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "intelligence")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "intelligence");
-                getIntelligence().setBonus(EquipmentSlot.HAND, this, bonus, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_MAX_MANA.name())) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, AttributeType.BONUS_MAX_MANA.name());
+                getBonusMaxMana().setBonus(EquipmentSlot.HAND, this, bonus, fixDisplay);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "dexterity")) {
-                int bonus = PersistentDataContainerUtil.getInteger(itemStack, "dexterity");
-                getDexterity().setBonus(EquipmentSlot.HAND, this, bonus, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_CRITICAL_CHANCE.name())) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, AttributeType.BONUS_CRITICAL_CHANCE.name());
+                getBonusCriticalChance().setBonus(EquipmentSlot.HAND, this, bonus, false);
             }
 
             if (fixDisplay) {
@@ -877,20 +828,20 @@ public class RPGCharacterStats {
         if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
 
             //manage stats on item drop
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "strength")) {
-                getStrength().removeBonus(EquipmentSlot.HAND, this, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_ELEMENT_DAMAGE.name())) {
+                getBonusElementDamage().removeBonus(EquipmentSlot.HAND, this, false);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "spirit")) {
-                getSpirit().removeBonus(EquipmentSlot.HAND, this, fixDisplay);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_ELEMENT_DEFENSE.name())) {
+                getBonusElementDefense().removeBonus(EquipmentSlot.HAND, this, false);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "endurance")) {
-                getEndurance().removeBonus(EquipmentSlot.HAND, this, fixDisplay);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_MAX_HEALTH.name())) {
+                getBonusMaxHealth().removeBonus(EquipmentSlot.HAND, this, fixDisplay);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "intelligence")) {
-                getIntelligence().removeBonus(EquipmentSlot.HAND, this, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_MAX_MANA.name())) {
+                getBonusMaxMana().removeBonus(EquipmentSlot.HAND, this, fixDisplay);
             }
-            if (PersistentDataContainerUtil.hasInteger(itemStack, "dexterity")) {
-                getDexterity().removeBonus(EquipmentSlot.HAND, this, false);
+            if (PersistentDataContainerUtil.hasInteger(itemStack, AttributeType.BONUS_CRITICAL_CHANCE.name())) {
+                getBonusCriticalChance().removeBonus(EquipmentSlot.HAND, this, false);
             }
 
             if (fixDisplay) {
@@ -925,11 +876,11 @@ public class RPGCharacterStats {
     }
 
     public void clearMainHandBonuses() {
-        getStrength().removeBonus(EquipmentSlot.HAND, this, false);
-        getSpirit().removeBonus(EquipmentSlot.HAND, this, false);
-        getEndurance().removeBonus(EquipmentSlot.HAND, this, false);
-        getIntelligence().removeBonus(EquipmentSlot.HAND, this, false);
-        getDexterity().removeBonus(EquipmentSlot.HAND, this, false);
+        getBonusElementDamage().removeBonus(EquipmentSlot.HAND, this, false);
+        getBonusMaxMana().removeBonus(EquipmentSlot.HAND, this, false);
+        getBonusMaxHealth().removeBonus(EquipmentSlot.HAND, this, false);
+        getBonusElementDefense().removeBonus(EquipmentSlot.HAND, this, false);
+        getBonusCriticalChance().removeBonus(EquipmentSlot.HAND, this, false);
 
         onMaxHealthChange();
         onCurrentManaChange();
@@ -953,34 +904,26 @@ public class RPGCharacterStats {
     }
 
     public void addToBuffMultiplier(BuffType buffType, double addToMultiplier) {
-        if (buffType.equals(BuffType.PHYSICAL_DAMAGE)) {
-            this.physicalDamageBuff += addToMultiplier;
-        } else if (buffType.equals(BuffType.MAGIC_DAMAGE)) {
-            this.magicalDamageBuff += addToMultiplier;
-        } else if (buffType.equals(BuffType.PHYSICAL_DEFENSE)) {
-            this.physicalDefenseBuff += addToMultiplier;
-        } else if (buffType.equals(BuffType.MAGIC_DEFENSE)) {
-            this.magicalDefenseBuff += addToMultiplier;
+        if (buffType.equals(BuffType.ELEMENT_DAMAGE)) {
+            this.buffElementDamage += addToMultiplier;
+        } else if (buffType.equals(BuffType.ELEMENT_DEFENSE)) {
+            this.buffElementDefense += addToMultiplier;
         } else if (buffType.equals(BuffType.CRIT_DAMAGE)) {
-            this.criticalDamageBonusBuff += addToMultiplier;
+            this.buffCriticalDamage += addToMultiplier;
         } else if (buffType.equals(BuffType.CRIT_CHANCE)) {
-            this.criticalChanceBonusBuff += addToMultiplier;
+            this.buffCriticalChance += addToMultiplier;
         }
     }
 
     public double getBuffMultiplier(BuffType buffType) {
-        if (buffType.equals(BuffType.PHYSICAL_DAMAGE)) {
-            return this.physicalDamageBuff;
-        } else if (buffType.equals(BuffType.MAGIC_DAMAGE)) {
-            return this.magicalDamageBuff;
-        } else if (buffType.equals(BuffType.PHYSICAL_DEFENSE)) {
-            return this.physicalDefenseBuff;
-        } else if (buffType.equals(BuffType.MAGIC_DEFENSE)) {
-            return this.magicalDefenseBuff;
+        if (buffType.equals(BuffType.ELEMENT_DAMAGE)) {
+            return this.buffElementDamage;
+        } else if (buffType.equals(BuffType.ELEMENT_DEFENSE)) {
+            return this.buffElementDefense;
         } else if (buffType.equals(BuffType.CRIT_DAMAGE)) {
-            return this.criticalDamageBonusBuff;
+            return this.buffCriticalDamage;
         } else if (buffType.equals(BuffType.CRIT_CHANCE)) {
-            return this.criticalChanceBonusBuff;
+            return this.buffCriticalChance;
         }
         return 1;
     }
@@ -991,21 +934,26 @@ public class RPGCharacterStats {
         MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Congratulations, your new level is " + ChatColor.GOLD + newLevel + "");
 
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-        int strBonus = rpgClass.getAttributeBonusForLevel(AttributeType.STRENGTH, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.STRENGTH, newLevel - 1);
-        int sprBonus = rpgClass.getAttributeBonusForLevel(AttributeType.SPIRIT, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.SPIRIT, newLevel - 1);
-        int endBonus = rpgClass.getAttributeBonusForLevel(AttributeType.ENDURANCE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.ENDURANCE, newLevel - 1);
-        int intBonus = rpgClass.getAttributeBonusForLevel(AttributeType.INTELLIGENCE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.INTELLIGENCE, newLevel - 1);
-        int dexBonus = rpgClass.getAttributeBonusForLevel(AttributeType.DEXTERITY, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.DEXTERITY, newLevel - 1);
+        int bonusDamage = rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_ELEMENT_DAMAGE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_ELEMENT_DAMAGE, newLevel - 1);
+        int bonusMana = rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_MAX_MANA, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_MAX_MANA, newLevel - 1);
+        int bonusHealth = rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_MAX_HEALTH, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_MAX_HEALTH, newLevel - 1);
+        int bonusDefense = rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_ELEMENT_DEFENSE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_ELEMENT_DEFENSE, newLevel - 1);
+        int bonusCriticalChance = rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_CRITICAL_CHANCE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_CRITICAL_CHANCE, newLevel - 1);
 
-        if (strBonus + sprBonus + endBonus + intBonus + dexBonus > 0) {
+        if (bonusDamage + bonusMana + bonusHealth + bonusDefense + bonusCriticalChance > 0) {
             player.sendMessage("");
             MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Stats Gained");
             final StringBuilder sb = new StringBuilder();
-            if (strBonus > 0) sb.append(ChatColor.RED + "+" + strBonus + " Strength ");
-            if (sprBonus > 0) sb.append(ChatColor.BLUE + "+" + sprBonus + " Spirit ");
-            if (endBonus > 0) sb.append(ChatColor.DARK_GREEN + "+" + endBonus + " Endurance ");
-            if (intBonus > 0) sb.append(ChatColor.AQUA + "+" + intBonus + " Intelligence ");
-            if (dexBonus > 0) sb.append(ChatColor.WHITE + "+" + dexBonus + " Dexterity");
+            if (bonusDamage > 0)
+                sb.append(ChatColor.RED + "+" + bonusDamage + AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName());
+            if (bonusDefense > 0)
+                sb.append(ChatColor.AQUA + "+" + bonusDefense + AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName());
+            if (bonusHealth > 0)
+                sb.append(ChatColor.DARK_GREEN + "+" + bonusHealth + AttributeType.BONUS_MAX_HEALTH.getCustomName());
+            if (bonusMana > 0)
+                sb.append(ChatColor.BLUE + "+" + bonusMana + AttributeType.BONUS_MAX_MANA.getCustomName());
+            if (bonusCriticalChance > 0)
+                sb.append(ChatColor.GOLD + "+" + bonusCriticalChance + AttributeType.BONUS_CRITICAL_CHANCE.getCustomName());
             MessageUtils.sendCenteredMessage(player, sb.toString());
         }
 

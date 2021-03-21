@@ -4,24 +4,18 @@ import org.bukkit.ChatColor;
 import org.bukkit.potion.PotionEffectType;
 
 public enum BuffType {
-    PHYSICAL_DAMAGE,
-    PHYSICAL_DEFENSE,
-    MAGIC_DAMAGE,
-    MAGIC_DEFENSE,
+    ELEMENT_DAMAGE,
+    ELEMENT_DEFENSE,
     CRIT_DAMAGE,
     CRIT_CHANCE;
 
     @Override
     public String toString() {
         switch (this) {
-            case PHYSICAL_DAMAGE:
-                return ChatColor.RED + "Physical Damage Buff";
-            case PHYSICAL_DEFENSE:
-                return ChatColor.AQUA + "Physical Defense Buff";
-            case MAGIC_DAMAGE:
-                return ChatColor.DARK_AQUA + "Magical Damage Buff";
-            case MAGIC_DEFENSE:
-                return ChatColor.BLUE + "Magical Defense Buff";
+            case ELEMENT_DAMAGE:
+                return ChatColor.RED + "Element Damage Buff";
+            case ELEMENT_DEFENSE:
+                return ChatColor.AQUA + "Element Defense Buff";
             case CRIT_DAMAGE:
                 return ChatColor.GOLD + "Critical Damage Buff";
             case CRIT_CHANCE:
@@ -35,14 +29,14 @@ public enum BuffType {
      */
     public PotionEffectType getPotionEffectType() {
         switch (this) {
-            case PHYSICAL_DAMAGE:
+            case ELEMENT_DAMAGE:
                 return PotionEffectType.INCREASE_DAMAGE;
-            case PHYSICAL_DEFENSE:
+            case ELEMENT_DEFENSE:
                 return PotionEffectType.DAMAGE_RESISTANCE;
-            case MAGIC_DAMAGE:
+            /*case MAGIC_DAMAGE:
                 return PotionEffectType.DOLPHINS_GRACE;
             case MAGIC_DEFENSE:
-                return PotionEffectType.WEAKNESS;
+                return PotionEffectType.WEAKNESS;*/
             case CRIT_DAMAGE:
                 return PotionEffectType.UNLUCK;
             case CRIT_CHANCE:

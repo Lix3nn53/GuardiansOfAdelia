@@ -319,18 +319,18 @@ public class MenuList {
                     List<ArmorGearType> armorGearTypes = value.getArmorGearTypes();
                     List<ShieldGearType> shieldGearTypes = value.getShieldGearTypes();
                     HashMap<AttributeType, Integer> attributeTiers = value.getAttributeTiers();
-                    String strength = ChatColor.RED.toString() + attributeTiers.get(AttributeType.STRENGTH);
-                    String spirit = ChatColor.BLUE.toString() + attributeTiers.get(AttributeType.SPIRIT);
-                    String endurance = ChatColor.DARK_GREEN.toString() + attributeTiers.get(AttributeType.ENDURANCE);
-                    String intelligence = ChatColor.AQUA.toString() + attributeTiers.get(AttributeType.INTELLIGENCE);
-                    String dexterity = ChatColor.WHITE.toString() + attributeTiers.get(AttributeType.DEXTERITY);
+                    String bonusDamage = ChatColor.RED.toString() + attributeTiers.get(AttributeType.BONUS_ELEMENT_DAMAGE);
+                    String bonusDefense = ChatColor.AQUA.toString() + attributeTiers.get(AttributeType.BONUS_ELEMENT_DEFENSE);
+                    String bonusHealth = ChatColor.DARK_GREEN.toString() + attributeTiers.get(AttributeType.BONUS_MAX_HEALTH);
+                    String bonusMana = ChatColor.BLUE.toString() + attributeTiers.get(AttributeType.BONUS_MAX_MANA);
+                    String bonusCriticalChance = ChatColor.WHITE.toString() + attributeTiers.get(AttributeType.BONUS_CRITICAL_CHANCE);
 
                     List<String> lore = new ArrayList<>(description);
                     lore.add(ChatColor.RED + "Tier: " + ChatColor.GRAY + classTier);
                     lore.add("");
 
                     lore.add(ChatColor.GREEN + "Attributes");
-                    lore.add("  " + strength + " " + spirit + " " + endurance + " " + intelligence + " " + dexterity + " ");
+                    lore.add("  " + bonusDamage + " " + bonusDefense + " " + bonusHealth + " " + bonusMana + " " + bonusCriticalChance + " ");
 
                     lore.add(ChatColor.RED + "Weapons");
                     for (WeaponGearType type : weaponGearTypes) {
@@ -476,13 +476,13 @@ public class MenuList {
                 int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
                 guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Stat Points (Points: " + pointsLeft + ")", 0);
 
-                Attribute strength = rpgCharacterStats.getStrength();
+                Attribute bonusElementDamage = rpgCharacterStats.getBonusElementDamage();
                 ItemStack itemStack = new ItemStack(Material.PAPER);
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.RED + "Strength (Invested: " + strength.getInvested() + ")");
+                itemMeta.setDisplayName(AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName() + " (Invested: " + bonusElementDamage.getInvested() + ")");
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.YELLOW + strength.getAttributeType().getDescription());
+                lore.add(ChatColor.YELLOW + bonusElementDamage.getAttributeType().getDescription());
                 lore.add("");
                 lore.add(ChatColor.GRAY + "Left Click: +1");
                 lore.add(ChatColor.GRAY + "Right Click: -1");
@@ -492,11 +492,11 @@ public class MenuList {
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(1, itemStack);
 
-                Attribute spirit = rpgCharacterStats.getSpirit();
-                itemMeta.setDisplayName(ChatColor.BLUE + "Spirit (Invested: " + spirit.getInvested() + ")");
+                Attribute bonusElementDefense = rpgCharacterStats.getBonusElementDefense();
+                itemMeta.setDisplayName(AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + " (Invested: " + bonusElementDefense.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.YELLOW + spirit.getAttributeType().getDescription());
+                lore.add(ChatColor.YELLOW + bonusElementDefense.getAttributeType().getDescription());
                 lore.add("");
                 lore.add(ChatColor.GRAY + "Left Click: +1");
                 lore.add(ChatColor.GRAY + "Right Click: -1");
@@ -506,11 +506,11 @@ public class MenuList {
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(4, itemStack);
 
-                Attribute endurance = rpgCharacterStats.getEndurance();
-                itemMeta.setDisplayName(ChatColor.DARK_GREEN + "Endurance (Invested: " + endurance.getInvested() + ")");
+                Attribute bonusMaxHealth = rpgCharacterStats.getBonusMaxHealth();
+                itemMeta.setDisplayName(AttributeType.BONUS_MAX_HEALTH.getCustomName() + " (Invested: " + bonusMaxHealth.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.YELLOW + endurance.getAttributeType().getDescription());
+                lore.add(ChatColor.YELLOW + bonusMaxHealth.getAttributeType().getDescription());
                 lore.add("");
                 lore.add(ChatColor.GRAY + "Left Click: +1");
                 lore.add(ChatColor.GRAY + "Right Click: -1");
@@ -520,11 +520,11 @@ public class MenuList {
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(7, itemStack);
 
-                Attribute intelligence = rpgCharacterStats.getIntelligence();
-                itemMeta.setDisplayName(ChatColor.AQUA + "Intelligence (Invested: " + intelligence.getInvested() + ")");
+                Attribute bonusMaxMana = rpgCharacterStats.getBonusMaxMana();
+                itemMeta.setDisplayName(AttributeType.BONUS_MAX_MANA.getCustomName() + " (Invested: " + bonusMaxMana.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.YELLOW + intelligence.getAttributeType().getDescription());
+                lore.add(ChatColor.YELLOW + bonusMaxMana.getAttributeType().getDescription());
                 lore.add("");
                 lore.add(ChatColor.GRAY + "Left Click: +1");
                 lore.add(ChatColor.GRAY + "Right Click: -1");
@@ -534,11 +534,11 @@ public class MenuList {
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(20, itemStack);
 
-                Attribute dexterity = rpgCharacterStats.getDexterity();
-                itemMeta.setDisplayName(ChatColor.WHITE + "Dexterity (Invested: " + dexterity.getInvested() + ")");
+                Attribute bonusCriticalChance = rpgCharacterStats.getBonusCriticalChance();
+                itemMeta.setDisplayName(AttributeType.BONUS_CRITICAL_CHANCE.getCustomName() + " (Invested: " + bonusCriticalChance.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.YELLOW + dexterity.getAttributeType().getDescription());
+                lore.add(ChatColor.YELLOW + bonusCriticalChance.getAttributeType().getDescription());
                 lore.add("");
                 lore.add(ChatColor.GRAY + "Left Click: +1");
                 lore.add(ChatColor.GRAY + "Right Click: -1");

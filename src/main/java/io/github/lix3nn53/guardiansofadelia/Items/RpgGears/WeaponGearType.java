@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponDamageType;
 import org.bukkit.Material;
 
 public enum WeaponGearType {
@@ -19,26 +18,6 @@ public enum WeaponGearType {
     //Magic Weapons
     STAFF,
     WAND;
-
-    public WeaponDamageType getWeaponType() {
-        switch (this) {
-            case SWORD:
-            case GREAT_SWORD:
-            case BATTLE_AXE:
-            case WAR_HAMMER:
-            case DAGGER:
-                return WeaponDamageType.MELEE;
-            case SPEAR:
-            case CROSSBOW:
-            case BOW:
-                return WeaponDamageType.RANGED;
-            case STAFF:
-            case WAND:
-                return WeaponDamageType.MAGICAL;
-        }
-
-        return null;
-    }
 
     public Material getMaterial() {
         switch (this) {
@@ -145,32 +124,20 @@ public enum WeaponGearType {
     public boolean canEquipToOffHand() {
         switch (this) {
             case SWORD:
+            case CROSSBOW:
+            case BOW:
+            case SPEAR:
+            case GREAT_SWORD:
+            case WAR_HAMMER:
+            case BATTLE_AXE:
+            case STAFF:
+            case WAND:
                 return false;
             case DAGGER:
                 return true;
-            case BATTLE_AXE:
-                return false;
-            case WAR_HAMMER:
-                return false;
-            case GREAT_SWORD:
-                return false;
-            case SPEAR:
-                return false;
-            case BOW:
-                return false;
-            case CROSSBOW:
-                return false;
-            case STAFF:
-                return false;
-            case WAND:
-                return false;
         }
 
         return false;
-    }
-
-    public boolean getReduceMeleeDamage() {
-        return this != WeaponGearType.SPEAR;
     }
 
     public boolean isMelee() {
@@ -190,5 +157,24 @@ public enum WeaponGearType {
         }
 
         return true;
+    }
+
+    public double getMeleeDamageReduction() {
+        switch (this) {
+            case SWORD:
+            case BATTLE_AXE:
+            case DAGGER:
+            case GREAT_SWORD:
+            case WAR_HAMMER:
+            case SPEAR:
+                return 1;
+            case BOW:
+            case CROSSBOW:
+            case STAFF:
+            case WAND:
+                return 0.2;
+        }
+
+        return 0;
     }
 }

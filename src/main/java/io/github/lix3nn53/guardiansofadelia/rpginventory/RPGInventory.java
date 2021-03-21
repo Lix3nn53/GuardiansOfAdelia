@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -126,18 +126,18 @@ public class RPGInventory {
     }
 
     public StatPassive getTotalPassiveStat() {
-        int strength = parrotSlot.getBonusStats().getStrength() + earringSlot.getBonusStats().getStrength() + necklaceSlot.getBonusStats().getStrength()
-                + gloveSlot.getBonusStats().getStrength() + ringSlot.getBonusStats().getStrength();
-        int spirit = parrotSlot.getBonusStats().getSpirit() + earringSlot.getBonusStats().getSpirit() + necklaceSlot.getBonusStats().getSpirit()
-                + gloveSlot.getBonusStats().getSpirit() + ringSlot.getBonusStats().getSpirit();
-        int endurance = parrotSlot.getBonusStats().getEndurance() + earringSlot.getBonusStats().getEndurance() + necklaceSlot.getBonusStats().getEndurance()
-                + gloveSlot.getBonusStats().getEndurance() + ringSlot.getBonusStats().getEndurance();
-        int intelligence = parrotSlot.getBonusStats().getIntelligence() + earringSlot.getBonusStats().getIntelligence() + necklaceSlot.getBonusStats().getIntelligence()
-                + gloveSlot.getBonusStats().getIntelligence() + ringSlot.getBonusStats().getIntelligence();
-        int dexterity = parrotSlot.getBonusStats().getDexterity() + earringSlot.getBonusStats().getDexterity() + necklaceSlot.getBonusStats().getDexterity()
-                + gloveSlot.getBonusStats().getDexterity() + ringSlot.getBonusStats().getDexterity();
+        int bonusDamage = parrotSlot.getBonusStats().getBonusDamage() + earringSlot.getBonusStats().getBonusDamage() + necklaceSlot.getBonusStats().getBonusDamage()
+                + gloveSlot.getBonusStats().getBonusDamage() + ringSlot.getBonusStats().getBonusDamage();
+        int bonusDefense = parrotSlot.getBonusStats().getBonusDefense() + earringSlot.getBonusStats().getBonusDefense() + necklaceSlot.getBonusStats().getBonusDefense()
+                + gloveSlot.getBonusStats().getBonusDefense() + ringSlot.getBonusStats().getBonusDefense();
+        int bonusMaxHealth = parrotSlot.getBonusStats().getBonusMaxHealth() + earringSlot.getBonusStats().getBonusMaxHealth() + necklaceSlot.getBonusStats().getBonusMaxHealth()
+                + gloveSlot.getBonusStats().getBonusMaxHealth() + ringSlot.getBonusStats().getBonusMaxHealth();
+        int bonusMaxMana = parrotSlot.getBonusStats().getBonusMaxMana() + earringSlot.getBonusStats().getBonusMaxMana() + necklaceSlot.getBonusStats().getBonusMaxMana()
+                + gloveSlot.getBonusStats().getBonusMaxMana() + ringSlot.getBonusStats().getBonusMaxMana();
+        int bonusCriticalChance = parrotSlot.getBonusStats().getBonusCriticalChance() + earringSlot.getBonusStats().getBonusCriticalChance() + necklaceSlot.getBonusStats().getBonusCriticalChance()
+                + gloveSlot.getBonusStats().getBonusCriticalChance() + ringSlot.getBonusStats().getBonusCriticalChance();
 
-        return new StatPassive(strength, spirit, endurance, intelligence, dexterity);
+        return new StatPassive(bonusDamage, bonusDefense, bonusMaxHealth, bonusMaxMana, bonusCriticalChance);
     }
 
     private int getSlotNo(RPGSlotType slotType) {
@@ -356,8 +356,8 @@ public class RPGInventory {
     }
 
     public void removeBonusStats(Player player, ItemStack itemStack) {
-        StatType statType = StatUtils.getStatType(itemStack.getType());
-        if (statType.equals(StatType.PASSIVE)) {
+        GearStatType gearStatType = StatUtils.getStatType(itemStack.getType());
+        if (gearStatType.equals(GearStatType.PASSIVE_GEAR)) {
             StatPassive statPassive = (StatPassive) StatUtils.getStat(itemStack);
 
             if (GuardianDataManager.hasGuardianData(player)) {
@@ -367,19 +367,19 @@ public class RPGInventory {
 
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                    rpgCharacterStats.getStrength().removeBonusFromPassive(statPassive.getStrength(), rpgCharacterStats, false);
-                    rpgCharacterStats.getEndurance().removeBonusFromPassive(statPassive.getEndurance(), rpgCharacterStats, true);
-                    rpgCharacterStats.getSpirit().removeBonusFromPassive(statPassive.getSpirit(), rpgCharacterStats, true);
-                    rpgCharacterStats.getIntelligence().removeBonusFromPassive(statPassive.getIntelligence(), rpgCharacterStats, false);
-                    rpgCharacterStats.getDexterity().removeBonusFromPassive(statPassive.getDexterity(), rpgCharacterStats, false);
+                    rpgCharacterStats.getBonusElementDamage().removeBonusFromPassive(statPassive.getBonusDamage(), rpgCharacterStats, false);
+                    rpgCharacterStats.getBonusMaxHealth().removeBonusFromPassive(statPassive.getBonusMaxHealth(), rpgCharacterStats, true);
+                    rpgCharacterStats.getBonusMaxMana().removeBonusFromPassive(statPassive.getBonusMaxMana(), rpgCharacterStats, true);
+                    rpgCharacterStats.getBonusElementDefense().removeBonusFromPassive(statPassive.getBonusDefense(), rpgCharacterStats, false);
+                    rpgCharacterStats.getBonusCriticalChance().removeBonusFromPassive(statPassive.getBonusCriticalChance(), rpgCharacterStats, false);
                 }
             }
         }
     }
 
     public void addBonusStats(Player player, ItemStack itemStack) {
-        StatType statType = StatUtils.getStatType(itemStack.getType());
-        if (statType.equals(StatType.PASSIVE)) {
+        GearStatType gearStatType = StatUtils.getStatType(itemStack.getType());
+        if (gearStatType.equals(GearStatType.PASSIVE_GEAR)) {
             StatPassive statPassive = (StatPassive) StatUtils.getStat(itemStack);
 
             if (GuardianDataManager.hasGuardianData(player)) {
@@ -389,11 +389,11 @@ public class RPGInventory {
 
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                    rpgCharacterStats.getStrength().addBonusToPassive(statPassive.getStrength(), rpgCharacterStats, false);
-                    rpgCharacterStats.getEndurance().addBonusToPassive(statPassive.getEndurance(), rpgCharacterStats, true);
-                    rpgCharacterStats.getSpirit().addBonusToPassive(statPassive.getSpirit(), rpgCharacterStats, true);
-                    rpgCharacterStats.getIntelligence().addBonusToPassive(statPassive.getIntelligence(), rpgCharacterStats, false);
-                    rpgCharacterStats.getDexterity().addBonusToPassive(statPassive.getDexterity(), rpgCharacterStats, false);
+                    rpgCharacterStats.getBonusElementDamage().addBonusToPassive(statPassive.getBonusDamage(), rpgCharacterStats, false);
+                    rpgCharacterStats.getBonusMaxHealth().addBonusToPassive(statPassive.getBonusMaxHealth(), rpgCharacterStats, true);
+                    rpgCharacterStats.getBonusMaxMana().addBonusToPassive(statPassive.getBonusMaxMana(), rpgCharacterStats, true);
+                    rpgCharacterStats.getBonusElementDefense().addBonusToPassive(statPassive.getBonusDefense(), rpgCharacterStats, false);
+                    rpgCharacterStats.getBonusCriticalChance().addBonusToPassive(statPassive.getBonusCriticalChance(), rpgCharacterStats, false);
                 }
             }
         }

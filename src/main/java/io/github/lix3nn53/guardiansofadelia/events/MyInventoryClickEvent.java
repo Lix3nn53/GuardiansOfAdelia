@@ -6,7 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatType;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.HelmetSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
@@ -609,8 +609,8 @@ public class MyInventoryClickEvent implements Listener {
                 int questNo = Integer.parseInt(split[1]);
 
                 //give item
-                StatType statType = StatUtils.getStatType(currentType);
-                if (statType != null) {
+                GearStatType gearStatType = StatUtils.getStatType(currentType);
+                if (gearStatType != null) {
                     int gearLevel = GearLevel.getGearLevel(current);
                     ItemTier itemTier = ItemTier.getItemTierOfItemStack(current);
                     StatUtils.addRandomPassiveStats(current, gearLevel, itemTier);
@@ -638,8 +638,8 @@ public class MyInventoryClickEvent implements Listener {
                 int questNo = Integer.parseInt(split2[1]);
 
                 //give item
-                StatType statType = StatUtils.getStatType(currentType);
-                if (statType != null) {
+                GearStatType gearStatType = StatUtils.getStatType(currentType);
+                if (gearStatType != null) {
                     int gearLevel = GearLevel.getGearLevel(current);
                     ItemTier itemTier = ItemTier.getItemTierOfItemStack(current);
                     StatUtils.addRandomPassiveStats(current, gearLevel, itemTier);
@@ -720,15 +720,15 @@ public class MyInventoryClickEvent implements Listener {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
                 Attribute attr = null;
                 if (slot == 1) {
-                    attr = rpgCharacterStats.getStrength();
+                    attr = rpgCharacterStats.getBonusElementDamage();
                 } else if (slot == 4) {
-                    attr = rpgCharacterStats.getSpirit();
+                    attr = rpgCharacterStats.getBonusMaxMana();
                 } else if (slot == 7) {
-                    attr = rpgCharacterStats.getEndurance();
+                    attr = rpgCharacterStats.getBonusMaxHealth();
                 } else if (slot == 20) {
-                    attr = rpgCharacterStats.getIntelligence();
+                    attr = rpgCharacterStats.getBonusElementDefense();
                 } else if (slot == 24) {
-                    attr = rpgCharacterStats.getDexterity();
+                    attr = rpgCharacterStats.getBonusCriticalChance();
                 }
                 if (attr != null) {
                     if (event.isLeftClick()) {

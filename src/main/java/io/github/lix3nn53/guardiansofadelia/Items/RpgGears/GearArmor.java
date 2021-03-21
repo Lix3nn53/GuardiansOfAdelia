@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSet;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import org.bukkit.ChatColor;
@@ -48,20 +49,20 @@ public class GearArmor implements RPGGear {
         lore.add(ChatColor.BLUE + "✦ Magic Defense: " + ChatColor.GRAY + "+" + magicDefense);
         if (!statPassive.isEmpty()) {
             lore.add("");
-            if (statPassive.getStrength() != 0) {
-                lore.add(ChatColor.RED + "☄ " + ChatColor.RED + "Strength: " + ChatColor.GRAY + "+" + statPassive.getStrength());
+            if (statPassive.getBonusDamage() != 0) {
+                lore.add(AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusDamage());
             }
-            if (statPassive.getSpirit() != 0) {
-                lore.add(ChatColor.BLUE + "◎ " + ChatColor.BLUE + "Spirit: " + ChatColor.GRAY + "+" + statPassive.getSpirit());
+            if (statPassive.getBonusDefense() != 0) {
+                lore.add(AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusDefense());
             }
-            if (statPassive.getEndurance() != 0) {
-                lore.add(ChatColor.DARK_GREEN + "₪ " + ChatColor.DARK_GREEN + "Endurance: " + ChatColor.GRAY + "+" + statPassive.getEndurance());
+            if (statPassive.getBonusMaxHealth() != 0) {
+                lore.add(AttributeType.BONUS_MAX_HEALTH.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusMaxHealth());
             }
-            if (statPassive.getIntelligence() != 0) {
-                lore.add(ChatColor.AQUA + "ϟ " + ChatColor.AQUA + "Intelligence: " + ChatColor.GRAY + "+" + statPassive.getIntelligence());
+            if (statPassive.getBonusMaxMana() != 0) {
+                lore.add(AttributeType.BONUS_MAX_MANA.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusMaxMana());
             }
-            if (statPassive.getDexterity() != 0) {
-                lore.add(ChatColor.WHITE + "๑ " + ChatColor.WHITE + "Dexterity: " + ChatColor.GRAY + "+" + statPassive.getDexterity());
+            if (statPassive.getBonusCriticalChance() != 0) {
+                lore.add(AttributeType.BONUS_CRITICAL_CHANCE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusCriticalChance());
             }
         }
         lore.add("");
@@ -92,20 +93,20 @@ public class GearArmor implements RPGGear {
         PersistentDataContainerUtil.putInteger("defense", defense, this.itemStack);
         PersistentDataContainerUtil.putInteger("magicDefense", magicDefense, this.itemStack);
 
-        if (statPassive.getStrength() != 0) {
-            PersistentDataContainerUtil.putInteger("strength", statPassive.getStrength(), this.itemStack);
+        if (statPassive.getBonusDamage() != 0) {
+            PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DAMAGE.name(), statPassive.getBonusDamage(), this.itemStack);
         }
-        if (statPassive.getSpirit() != 0) {
-            PersistentDataContainerUtil.putInteger("spirit", statPassive.getSpirit(), this.itemStack);
+        if (statPassive.getBonusDefense() != 0) {
+            PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DEFENSE.name(), statPassive.getBonusDefense(), this.itemStack);
         }
-        if (statPassive.getEndurance() != 0) {
-            PersistentDataContainerUtil.putInteger("endurance", statPassive.getEndurance(), this.itemStack);
+        if (statPassive.getBonusMaxHealth() != 0) {
+            PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_HEALTH.name(), statPassive.getBonusMaxHealth(), this.itemStack);
         }
-        if (statPassive.getIntelligence() != 0) {
-            PersistentDataContainerUtil.putInteger("intelligence", statPassive.getIntelligence(), this.itemStack);
+        if (statPassive.getBonusMaxMana() != 0) {
+            PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_MANA.name(), statPassive.getBonusMaxMana(), this.itemStack);
         }
-        if (statPassive.getDexterity() != 0) {
-            PersistentDataContainerUtil.putInteger("dexterity", statPassive.getDexterity(), this.itemStack);
+        if (statPassive.getBonusCriticalChance() != 0) {
+            PersistentDataContainerUtil.putInteger(AttributeType.BONUS_CRITICAL_CHANCE.name(), statPassive.getBonusCriticalChance(), this.itemStack);
         }
         if (gearSetExist) {
             PersistentDataContainerUtil.putString("gearSet", gearSetStr, this.itemStack);

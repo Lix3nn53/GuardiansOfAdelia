@@ -21,10 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Consumable {
-    BUFF_PHYSICAL_DAMAGE,
-    BUFF_PHYSICAL_DEFENSE,
-    BUFF_MAGICAL_DAMAGE,
-    BUFF_MAGICAL_DEFENSE,
+    BUFF_ELEMENT_DAMAGE,
+    BUFF_ELEMENT_DEFENSE,
     POTION_INSTANT_HEALTH,
     POTION_INSTANT_MANA,
     POTION_INSTANT_HYBRID,
@@ -94,17 +92,11 @@ public enum Consumable {
 
         SkillComponent trigger = new SelfTarget();
         switch (this) {
-            case BUFF_PHYSICAL_DAMAGE:
-                trigger.addChildren(new BuffMechanic(BuffType.PHYSICAL_DAMAGE, multipliers, ticks));
+            case BUFF_ELEMENT_DAMAGE:
+                trigger.addChildren(new BuffMechanic(BuffType.ELEMENT_DAMAGE, multipliers, ticks));
                 break;
-            case BUFF_PHYSICAL_DEFENSE:
-                trigger.addChildren(new BuffMechanic(BuffType.PHYSICAL_DEFENSE, multipliers, ticks));
-                break;
-            case BUFF_MAGICAL_DAMAGE:
-                trigger.addChildren(new BuffMechanic(BuffType.MAGIC_DAMAGE, multipliers, ticks));
-                break;
-            case BUFF_MAGICAL_DEFENSE:
-                trigger.addChildren(new BuffMechanic(BuffType.MAGIC_DEFENSE, multipliers, ticks));
+            case BUFF_ELEMENT_DEFENSE:
+                trigger.addChildren(new BuffMechanic(BuffType.ELEMENT_DEFENSE, multipliers, ticks));
                 break;
             case POTION_INSTANT_HEALTH:
                 List<Integer> healAmounts = new ArrayList<>();
@@ -193,14 +185,14 @@ public enum Consumable {
 
     public Material getMaterial() {
         switch (this) {
-            case BUFF_PHYSICAL_DAMAGE:
+            case BUFF_ELEMENT_DAMAGE:
                 return Material.COOKED_BEEF;
-            case BUFF_PHYSICAL_DEFENSE:
+            case BUFF_ELEMENT_DEFENSE:
                 return Material.RABBIT_STEW;
-            case BUFF_MAGICAL_DAMAGE:
+            /*case BUFF_MAGICAL_DAMAGE:
                 return Material.COOKED_SALMON;
             case BUFF_MAGICAL_DEFENSE:
-                return Material.SUSPICIOUS_STEW;
+                return Material.SUSPICIOUS_STEW;*/
         }
         return Material.POTION;
     }
@@ -258,14 +250,14 @@ public enum Consumable {
 
     public String getName() {
         switch (this) {
-            case BUFF_PHYSICAL_DAMAGE:
+            case BUFF_ELEMENT_DAMAGE:
                 return ChatColor.RED + "Steak (Physical-Damage Buff)";
-            case BUFF_PHYSICAL_DEFENSE:
+            case BUFF_ELEMENT_DEFENSE:
                 return ChatColor.AQUA + "Beef Stew (Physical-Defense Buff)";
-            case BUFF_MAGICAL_DAMAGE:
+            /*case BUFF_MAGICAL_DAMAGE:
                 return ChatColor.LIGHT_PURPLE + "Cooked Fish (Magical-Damage Buff)";
             case BUFF_MAGICAL_DEFENSE:
-                return ChatColor.GREEN + "Highland Soup (Magical-Defense Buff)";
+                return ChatColor.GREEN + "Highland Soup (Magical-Defense Buff)";*/
             case POTION_INSTANT_HEALTH:
                 return ChatColor.RED + "Health Potion";
             case POTION_INSTANT_MANA:
@@ -281,18 +273,18 @@ public enum Consumable {
     public List<String> getDescription() {
         List<String> lore = new ArrayList<>();
         switch (this) {
-            case BUFF_PHYSICAL_DAMAGE:
-                lore.add(ChatColor.GRAY + "Increases physical damage for 10 minutes");
+            case BUFF_ELEMENT_DAMAGE:
+                lore.add(ChatColor.GRAY + "Increases element damage for 10 minutes");
                 break;
-            case BUFF_PHYSICAL_DEFENSE:
-                lore.add(ChatColor.GRAY + "Increases physical defense for 10 minutes");
+            case BUFF_ELEMENT_DEFENSE:
+                lore.add(ChatColor.GRAY + "Increases element defense for 10 minutes");
                 break;
-            case BUFF_MAGICAL_DAMAGE:
+            /*case BUFF_MAGICAL_DAMAGE:
                 lore.add(ChatColor.GRAY + "Increases magical damage for 10 minutes");
                 break;
             case BUFF_MAGICAL_DEFENSE:
                 lore.add(ChatColor.GRAY + "Increases magical defense for 10 minutes");
-                break;
+                break;*/
             case POTION_INSTANT_HEALTH:
                 lore.add(ChatColor.GRAY + "Restores health");
                 break;
@@ -312,18 +304,18 @@ public enum Consumable {
     public List<String> getLoreTechnicalInfo(int level) {
         List<String> lore = new ArrayList<>();
         switch (this) {
-            case BUFF_PHYSICAL_DAMAGE:
+            case BUFF_ELEMENT_DAMAGE:
                 lore.add(ChatColor.RED + "Multiplier: " + getBuffMultiplier(level));
                 break;
-            case BUFF_PHYSICAL_DEFENSE:
+            case BUFF_ELEMENT_DEFENSE:
                 lore.add(ChatColor.AQUA + "Multiplier: " + getBuffMultiplier(level));
                 break;
-            case BUFF_MAGICAL_DAMAGE:
+            /*case BUFF_MAGICAL_DAMAGE:
                 lore.add(ChatColor.LIGHT_PURPLE + "Multiplier: " + getBuffMultiplier(level));
                 break;
             case BUFF_MAGICAL_DEFENSE:
                 lore.add(ChatColor.GREEN + "Multiplier: " + getBuffMultiplier(level));
-                break;
+                break;*/
             case POTION_INSTANT_HEALTH:
                 lore.add(ChatColor.RED + "Restores: " + getInstantHealAmount(level));
                 break;
