@@ -6,9 +6,10 @@
 
 tier: 3
 color: "GREEN"
+mainElement: "EARTH"
 description:
   - "Shamans summons a totem and plays around it."
-classIconCustomModelData: 4
+classIconCustomModelData: 32
 attributeElementDamage: 1
 attributeElementDefense: 4
 attributeMaxHealth: 5
@@ -104,7 +105,7 @@ skillTwo:
             - 6.5
           child1:
             componentType: "DamageMechanic"
-            damageType: "MAGIC"
+            damageType: "EARTH"
             damageList:
               - 10
               - 20

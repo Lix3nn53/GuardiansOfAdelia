@@ -45,15 +45,15 @@ public enum ElementType {
     public Character getIcon() {
         switch (this) {
             case FIRE:
-                return 'f';
+                return '☄';
             case WATER:
-                return 'w';
+                return '◎';
             case EARTH:
-                return 'e';
+                return '₪';
             case AIR:
-                return 'a';
+                return '๑';
             case LIGHTNING:
-                return 'l';
+                return 'ϟ';
         }
 
         return null;

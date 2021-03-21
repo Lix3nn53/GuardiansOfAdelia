@@ -35,14 +35,14 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
         this.caster = caster;
         this.skillLevel = skillLevel;
 
-        AddPiercingToArrowShootFromCrossbowTrigger rangedAttackTrigger = this;
+        AddPiercingToArrowShootFromCrossbowTrigger crossbowTrigger = this;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningAddPiercingToArrowShootFromCrossbowTrigger((Player) target, rangedAttackTrigger);
+                        TriggerListener.startListeningAddPiercingToArrowShootFromCrossbowTrigger((Player) target, crossbowTrigger);
                     }
                 }
             }

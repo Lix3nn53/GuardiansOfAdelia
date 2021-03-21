@@ -78,7 +78,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
         }
         boolean isSkill = false;
 
-        ElementType damageType = ElementType.FIRE;
+        ElementType damageType = null;
         EntityDamageEvent.DamageCause damageCause = event.getCause();
         if (SkillUtils.isSkillDamage()) { //For own skill system
             isSkill = true;
@@ -205,11 +205,16 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         if (GuardianDataManager.hasGuardianData(playerTarget)) {
                             GuardianData guardianData = GuardianDataManager.getGuardianData(playerTarget);
                             if (guardianData.hasActiveCharacter()) {
+                                ActiveMob activeMob = MythicMobs.inst().getMobManager().getMythicMobInstance(damageSource);
+                                String faction = activeMob.getFaction();
+
+                                damageType = ElementType.valueOf(faction.toUpperCase());
 
                                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
                                 RPGCharacterStats targetRpgCharacterStats = activeCharacter.getRpgCharacterStats();
                                 int totalDefense = targetRpgCharacterStats.getTotalElementDefense();
+                                totalDefense += targetRpgCharacterStats.getElement(damageType).getBonusFromEquipment(); // Element is added to defense
 
                                 double reduction = StatUtils.getDefenseReduction(totalDefense);
 
@@ -315,6 +320,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         targetLocation.getWorld().spawnParticle(particle, targetLocation.clone().add(0, 0.25, 0), 6);
                     }
                 } else {
+                    ActiveMob activeMob = MythicMobs.inst().getMobManager().getMythicMobInstance(pet);
+                    String faction = activeMob.getFaction();
+
+                    damageType = ElementType.valueOf(faction.toUpperCase());
+
                     int customDamage = getCustomDamage(pet);
                     if (customDamage > 0) {
                         event.setDamage(customDamage);
@@ -340,6 +350,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                             RPGCharacterStats targetRpgCharacterStats = targetActiveCharacter.getRpgCharacterStats();
                             int totalDefense = targetRpgCharacterStats.getTotalElementDefense();
+                            totalDefense += targetRpgCharacterStats.getElement(damageType).getBonusFromEquipment();
 
                             double reduction = StatUtils.getDefenseReduction(totalDefense);
 
@@ -374,16 +385,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 }
 
                 //indicator
-                ChatColor indicatorColor = ChatColor.RED;
-                String indicatorIcon = "⸸";
-
-                if (pet != null) {
-                    indicatorColor = ChatColor.LIGHT_PURPLE;
-                    indicatorIcon = ">.<";
-                } else {
-                    indicatorColor = damageType.getChatColor();
-                    indicatorIcon = damageType.getIcon() + "";
-                }
+                ChatColor indicatorColor = damageType.getChatColor();
+                String indicatorIcon = damageType.getIcon() + "";
 
                 if (isCritical) {
                     indicatorColor = ChatColor.GOLD;

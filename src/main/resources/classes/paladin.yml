@@ -6,6 +6,7 @@
 
 tier: 1
 color: "GOLD"
+mainElement: "LIGHTNING"
 description:
   - "Paladins aids fellow adventurers with"
   - "the holy power of light and beats foes"

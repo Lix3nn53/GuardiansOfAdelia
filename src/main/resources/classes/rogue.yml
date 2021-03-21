@@ -6,6 +6,7 @@
 
 tier: 1
 color: "BLUE"
+mainElement: "LIGHTNING"
 description:
   - "Due to their incredible speed and agility,"
   - "Rogues are an expert at dealing"

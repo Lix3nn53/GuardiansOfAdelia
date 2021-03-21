@@ -6,9 +6,11 @@
 
 tier: 3
 color: "DARK_PURPLE"
+mainElement: "LIGHTNING"
 description:
-  - "Necromancers are masters of Living Death magic."
-  - "They control bone and flesh to protect themself and crush their enemies."
+  - "Necromancers are masters of"
+  - "Living Death magic. They control bone and flesh"
+  - "to protect themself and crush their enemies."
 classIconCustomModelData: 18
 attributeElementDamage: 4
 attributeElementDefense: 3
@@ -147,7 +149,7 @@ skillTwo:
           - 4
         child1:
           componentType: "DamageMechanic"
-          damageType: "MAGIC"
+          damageType: "LIGHTNING"
           damageList:
             - 10
             - 20
@@ -260,7 +262,7 @@ skillPassive:
   customModelData: 47
   description:
     - "For each active summon gain an"
-    - "amount of physical and magic defense."
+    - "amount of element defense."
     - ""
     - "Also increases the max amount of summons you can have at a time."
     - "Skill level 0: 3 summons at a time"
@@ -313,7 +315,7 @@ skillPassive:
             componentType: "SelfTarget"
             child1:
               componentType: "BuffMechanic"
-              buffType: "PHYSICAL_DEFENSE"
+              buffType: "ELEMENT_DEFENSE"
               multipliers:
                 - 0.03
                 - 0.04
@@ -330,7 +332,7 @@ skillPassive:
                 - 41
             child2:
               componentType: "BuffMechanic"
-              buffType: "MAGIC_DEFENSE"
+              buffType: "ELEMENT_DEFENSE"
               multipliers:
                 - 0.03
                 - 0.04

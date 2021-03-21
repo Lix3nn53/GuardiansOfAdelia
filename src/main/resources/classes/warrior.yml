@@ -6,6 +6,7 @@
 
 tier: 3
 color: "RED"
+mainElement: "FIRE"
 description:
   - "Thanks to their strength, fearlessness and"
   - "superior combat skills, warriors are"
@@ -59,7 +60,7 @@ skillOne:
         - 4
       child1:
         componentType: "DamageMechanic"
-        damageType: "MELEE"
+        damageType: "FIRE"
         damageList:
           - 10
           - 20
@@ -138,7 +139,7 @@ skillTwo:
         max: 10
         child1:
           componentType: "DamageMechanic"
-          damageType: "MELEE"
+          damageType: "FIRE"
           damageList:
             - 10
             - 20
@@ -238,7 +239,7 @@ skillThree:
             - 14
           child1:
             componentType: "BuffMechanic"
-            buffType: "PHYSICAL_DAMAGE"
+            buffType: "ELEMENT_DAMAGE"
             multipliers:
               - 0.08
               - 0.1
@@ -255,7 +256,7 @@ skillThree:
               - 41
           child2:
             componentType: "BuffMechanic"
-            buffType: "MAGIC_DAMAGE"
+            buffType: "ELEMENT_DAMAGE"
             multipliers:
               - 0.08
               - 0.1
@@ -291,7 +292,7 @@ skillPassive:
   name: "Death Rattle"
   customModelData: 32
   description:
-    - "If you take physical damage that leaves you with less than 15% health,"
+    - "If you take damage that leaves you with less than 15% health,"
     - "unleash your rage and gain movement speed and jump boost."
   manaCosts:
     - 0
@@ -310,7 +311,7 @@ skillPassive:
   trigger:
     componentType: "InitializeTrigger"
     child1:
-      componentType: "TookPhysicalDamageTrigger"
+      componentType: "TookDamageTrigger"
       cooldowns:
         - 40
         - 40
@@ -476,7 +477,7 @@ skillUltimate:
           - 14
         child1:
           componentType: "DamageMechanic"
-          damageType: "MELEE"
+          damageType: "FIRE"
           damageList:
             - 10
             - 20

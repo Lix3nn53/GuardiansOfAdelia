@@ -6,6 +6,7 @@
 
 tier: 3
 color: "YELLOW"
+mainElement: "FIRE"
 description:
   - "Engineer"
 classIconCustomModelData: 12
@@ -106,7 +107,7 @@ skillOne:
               upward: 1
               child1:
                 componentType: "DamageMechanic"
-                damageType: "RANGED"
+                damageType: "FIRE"
                 damageList:
                   - 10
                   - 20
@@ -177,7 +178,7 @@ skillTwo:
             max: 29
             child1:
               componentType: "DamageMechanic"
-              damageType: "RANGED"
+              damageType: "FIRE"
               damageList:
                 - 10
                 - 20
@@ -452,7 +453,7 @@ skillUltimate:
             - 3.5
           child1:
             componentType: "DamageMechanic"
-            damageType: "MAGIC"
+            damageType: "FIRE"
             damageList:
               - 10
               - 20

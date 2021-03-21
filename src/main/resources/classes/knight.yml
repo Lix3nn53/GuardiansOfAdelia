@@ -4,8 +4,9 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
-tier: 1
+tier: 3
 color: "AQUA"
+mainElement: "EARTH"
 description:
   - "The powerhouse and mainstay of any party."
   - "Knights battle foes at close range while"
@@ -50,3 +51,70 @@ skillOne:
   trigger:
     componentType: "SelfTarget"
     child1:
+      componentType: "SingleTarget"
+      allies: false
+      enemy: true
+      self: false
+      max: 1
+      ranges:
+        - 3
+        - 3.5
+        - 4
+        - 5
+      tolerance: 4
+      child1:
+        componentType: "DamageMechanic"
+        damageType: "EARTH"
+        damageList:
+          - 10
+          - 20
+          - 30
+          - 40
+        damageMultiplyList:
+          - 1.4
+          - 1.6
+          - 1.8
+          - 2.2
+      child2:
+        componentType: "BuffMechanic"
+        buffType: "ELEMENT_DEFENSE"
+        multipliers:
+          - -0.1
+          - -0.2
+          - -0.3
+          - -0.4
+        ticks:
+          - 200
+          - 240
+          - 280
+          - 320
+      child3:
+        componentType: "SoundMechanic"
+        goaSound: "SKILL_WIND_PUSH"
+      child4:
+        componentType: "ParticleAnimationMechanic"
+        particle:
+          arrangementType: "DrawCylinder"
+          particleType: "REDSTONE"
+          dustColor: 3355596
+          dustSize: 2
+          radius: 1
+          amount: 2
+        frequency: 5
+        radius:
+          - 0.7
+          - 0.7
+          - 0.7
+          - 0.7
+        repeatAmount:
+          - 40
+          - 48
+          - 56
+          - 72
+        upward: 1
+        offsety: 1.2
+        offsetx: 0.1
+        resetY: true
+        rotation: true
+        yawIncrease: 30
+        pitchIncrease: 10

@@ -61,17 +61,8 @@ public class DamageMechanic extends MechanicComponent {
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                         String rpgClassStr = activeCharacter.getRpgClassStr();
 
-                        double statValue = 0;
-                        // TODO element type damage
-                        /*if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
-                            statValue = rpgCharacterStats.getTotalMagicDamage(player, rpgClassStr);
-                        } else if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
-                            statValue = rpgCharacterStats.getTotalRangedDamage(player, rpgClassStr);
-                        } else { //melee
-                            statValue = rpgCharacterStats.getTotalMeleeDamage(player, rpgClassStr);
-                        }*/
-
-                        statValue = rpgCharacterStats.getTotalElementDamage(player, rpgClassStr);
+                        double statValue = rpgCharacterStats.getTotalElementDamage(player, rpgClassStr);
+                        statValue += rpgCharacterStats.getElement(damageType).getBonusFromEquipment();
 
                         double multiply = damageMultiplyList.get(skillLevel - 1);
 

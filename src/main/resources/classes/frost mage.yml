@@ -5,10 +5,11 @@
 # ---------------------------------------------- #
 
 tier: 3
-color: "LIGHT_PURPLE"
+color: "BLUE"
+mainElement: "WATER"
 description:
   - "Todo"
-classIconCustomModelData: 16
+classIconCustomModelData: 31
 attributeElementDamage: 1
 attributeElementDefense: 4
 attributeMaxHealth: 5
@@ -72,7 +73,7 @@ skillOne:
           - 3.25
         child1:
           componentType: "DamageMechanic"
-          damageType: "MAGIC"
+          damageType: "WATER"
           damageList:
             - 10
             - 20
@@ -219,7 +220,7 @@ skillTwo:
             - 4
           child1:
             componentType: "DamageMechanic"
-            damageType: "MAGIC"
+            damageType: "WATER"
             damageList:
               - 10
               - 20
@@ -365,6 +366,13 @@ skillThree:
         - 240
       upward: -0.5
     child5:
+      componentType: "InvincibleMechanic"
+      ticks:
+        - 120
+        - 160
+        - 200
+        - 240
+    child6:
       componentType: "RepeatMechanic"
       period: 40
       repetitions:
@@ -550,7 +558,7 @@ skillUltimate:
               - 2
           child2:
             componentType: "DamageMechanic"
-            damageType: "MAGIC"
+            damageType: "WATER"
             damageList:
               - 10
               - 20

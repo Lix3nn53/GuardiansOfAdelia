@@ -6,6 +6,7 @@
 
 tier: 1
 color: "YELLOW"
+mainElement: "WATER"
 description:
   - "Monks have such a strong will that never"
   - "falls into despair in any situation."

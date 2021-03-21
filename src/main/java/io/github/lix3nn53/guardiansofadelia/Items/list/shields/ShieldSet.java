@@ -27,7 +27,7 @@ public class ShieldSet {
     }
 
     public int getDefense(ShieldGearType shieldType) {
-        return (int) (defense * shieldType.getPhysicalDefenseReduction() + 0.5);
+        return (int) (defense * shieldType.getElementDefenseReduction() + 0.5);
     }
 
     public Material getMaterial(ShieldGearType shieldType) {

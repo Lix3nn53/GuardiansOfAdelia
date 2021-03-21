@@ -35,14 +35,14 @@ public class SavedEntitySpawnTrigger extends TriggerComponent {
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
-        SavedEntitySpawnTrigger rangedAttackTrigger = this;
+        SavedEntitySpawnTrigger savedEntitySpawnTrigger = this;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningSavedEntitySpawn((Player) target, rangedAttackTrigger);
+                        TriggerListener.startListeningSavedEntitySpawn((Player) target, savedEntitySpawnTrigger);
                     }
                 }
             }

@@ -46,14 +46,14 @@ public class CompanionSpawnTrigger extends TriggerComponent {
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
-        CompanionSpawnTrigger rangedAttackTrigger = this;
+        CompanionSpawnTrigger companionSpawnTrigger = this;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningCompanionSpawn((Player) target, rangedAttackTrigger);
+                        TriggerListener.startListeningCompanionSpawn((Player) target, companionSpawnTrigger);
                     }
                 }
             }

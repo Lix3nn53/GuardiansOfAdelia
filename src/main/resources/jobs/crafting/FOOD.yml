@@ -9,10 +9,8 @@ level1:
   itemSetCount: 1
   itemSet1:
     consumableTypes:
-      - BUFF_PHYSICAL_DAMAGE
-      - BUFF_PHYSICAL_DEFENSE
-      - BUFF_MAGICAL_DAMAGE
-      - BUFF_MAGICAL_DEFENSE
+      - BUFF_ELEMENT_DAMAGE
+      - BUFF_ELEMENT_DEFENSE
     skillLevel: 1
     uses: 1
     ingredients:

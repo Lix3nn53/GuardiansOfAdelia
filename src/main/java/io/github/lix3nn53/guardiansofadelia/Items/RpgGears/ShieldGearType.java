@@ -32,7 +32,7 @@ public enum ShieldGearType {
         return 0;
     }
 
-    public double getPhysicalDefenseReduction() {
+    public double getElementDefenseReduction() {
         switch (this) {
             case SHIELD:
                 return 1;

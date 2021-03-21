@@ -5,10 +5,11 @@
 # ---------------------------------------------- #
 
 tier: 3
-color: "LIGHT_PURPLE"
+color: "RED"
+mainElement: "FIRE"
 description:
   - "Todo"
-classIconCustomModelData: 16
+classIconCustomModelData: 30
 attributeElementDamage: 1
 attributeElementDefense: 4
 attributeMaxHealth: 5
@@ -66,7 +67,7 @@ skillOne:
           - 3.25
         child1:
           componentType: "DamageMechanic"
-          damageType: "MAGIC"
+          damageType: "FIRE"
           damageList:
             - 10
             - 20
@@ -142,7 +143,7 @@ skillTwo:
         - 5
       child1:
         componentType: "DamageMechanic"
-        damageType: "MAGIC"
+        damageType: "FIRE"
         damageList:
           - 10
           - 20
@@ -243,7 +244,7 @@ skillThree:
             - 3.5
           child1:
             componentType: "DamageMechanic"
-            damageType: "MAGIC"
+            damageType: "FIRE"
             damageList:
               - 10
               - 20
@@ -464,7 +465,7 @@ skillUltimate:
             - 9
           child1:
             componentType: "DamageMechanic"
-            damageType: "MAGIC"
+            damageType: "FIRE"
             damageList:
               - 10
               - 20

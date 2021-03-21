@@ -35,14 +35,14 @@ public class TookDamageTrigger extends TriggerComponent {
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
-        TookDamageTrigger tookPhysicalDamageTrigger = this;
+        TookDamageTrigger tookDamageTrigger = this;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningTookDamage((Player) target, tookPhysicalDamageTrigger);
+                        TriggerListener.startListeningTookDamage((Player) target, tookDamageTrigger);
                     }
                 }
             }
