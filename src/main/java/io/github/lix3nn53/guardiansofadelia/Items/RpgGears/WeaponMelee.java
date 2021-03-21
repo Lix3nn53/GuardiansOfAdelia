@@ -44,7 +44,7 @@ public class WeaponMelee implements RPGGear {
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         lore.add("");
-        lore.add(ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + "+" + elementDamage);
+        lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + "+" + elementDamage);
         lore.add(ChatColor.AQUA + "ø Attack Speed: " + attackSpeed.getLoreString());
         if (!statPassive.isEmpty()) {
             lore.add("");

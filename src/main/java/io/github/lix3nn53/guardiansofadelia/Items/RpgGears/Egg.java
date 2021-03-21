@@ -54,7 +54,7 @@ public class Egg implements RPGGear {
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + health);
 
         if (damage > 0) {
-            lore.add(ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + damage);
+            lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + damage);
         } else {
             double movementSpeed = PetManager.getMovementSpeed(petKey, petLevel);
             lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + movementSpeed);

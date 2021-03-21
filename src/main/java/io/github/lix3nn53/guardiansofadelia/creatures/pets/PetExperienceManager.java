@@ -110,7 +110,7 @@ public class PetExperienceManager {
                         int damage = PetManager.getDamage(petCode, nextLevel);
                         int maxHP = PetManager.getHealth(petCode, nextLevel);
                         lore.set(8, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
-                        lore.set(9, ChatColor.RED + "⸸ Damage: " + ChatColor.GRAY + damage);
+                        lore.set(9, ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + damage);
                         owner.sendMessage(ChatColor.GOLD + "DEBUG pet COMPANION level up");
                     } else {
                         int maxHP = PetManager.getHealth(petCode, nextLevel);

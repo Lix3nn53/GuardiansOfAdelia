@@ -58,4 +58,8 @@ public enum ElementType {
 
         return null;
     }
+
+    public String getFullName() {
+        return String.valueOf(getChatColor()) + getIcon() + " " + getCustomName();
+    }
 }
