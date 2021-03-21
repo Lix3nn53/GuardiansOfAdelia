@@ -28,13 +28,12 @@ public class ShieldManager {
         String name = template.getName(gearType);
         int customModelData = template.getCustomModelData();
         int defense = template.getDefense(gearType);
-        int magicDefense = template.getMagicDefense(gearType);
         int health = template.getHealth(gearType);
         int level = template.getReqLevel();
 
         final Shield shield = new Shield(name, tier, material, customModelData, level,
                 gearType, health,
-                defense, magicDefense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
+                defense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
         return shield.getItemStack();
     }
 

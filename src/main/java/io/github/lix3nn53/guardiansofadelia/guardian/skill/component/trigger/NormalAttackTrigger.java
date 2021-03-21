@@ -10,14 +10,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RangedAttackTrigger extends TriggerComponent {
+public class NormalAttackTrigger extends TriggerComponent {
 
     private final List<Integer> cooldowns;
     LivingEntity caster;
     int skillLevel;
     int castCounter;
 
-    public RangedAttackTrigger(ConfigurationSection configurationSection) {
+    public NormalAttackTrigger(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 
         if (configurationSection.contains("cooldowns")) {
@@ -25,6 +25,10 @@ public class RangedAttackTrigger extends TriggerComponent {
         } else {
             this.cooldowns = new ArrayList<>();
         }
+    }
+
+    public LivingEntity getCaster() {
+        return caster;
     }
 
     @Override
@@ -35,14 +39,14 @@ public class RangedAttackTrigger extends TriggerComponent {
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
-        RangedAttackTrigger rangedAttackTrigger = this;
+        NormalAttackTrigger normalAttackTrigger = this;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningRangedAttack((Player) target, rangedAttackTrigger);
+                        TriggerListener.startListeningNormalAttack((Player) target, normalAttackTrigger);
                     }
                 }
             }
@@ -66,15 +70,15 @@ public class RangedAttackTrigger extends TriggerComponent {
 
         if (!cast) return false;
 
-        RangedAttackTrigger trigger = this;
+        NormalAttackTrigger trigger = this;
 
         if (cooldowns.isEmpty()) {
-            TriggerListener.startListeningRangedAttack(attacker, trigger);
+            TriggerListener.startListeningNormalAttack(attacker, trigger);
         } else {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    TriggerListener.startListeningRangedAttack(attacker, trigger);
+                    TriggerListener.startListeningNormalAttack(attacker, trigger);
                 }
             }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
         }

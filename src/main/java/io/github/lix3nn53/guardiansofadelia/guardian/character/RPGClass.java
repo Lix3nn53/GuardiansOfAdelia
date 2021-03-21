@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import org.bukkit.ChatColor;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class RPGClass {
     private final ChatColor color;
+    private final ElementType mainElement;
     private final String name;
     private final int tier;
     private final int customModelData;
@@ -27,10 +29,11 @@ public class RPGClass {
 
     private final List<String> description;
 
-    public RPGClass(ChatColor color, String name, int tier, int customModelData, HashMap<AttributeType, Integer> attributeTiers,
+    public RPGClass(ChatColor color, ElementType mainElement, String name, int tier, int customModelData, HashMap<AttributeType, Integer> attributeTiers,
                     HashMap<Integer, Skill> skillSet, List<ShieldGearType> shieldGearTypes, List<WeaponGearType> weaponGearTypes,
                     List<ArmorGearType> armorGearTypes, boolean hasDefaultOffhand, boolean isDefaultOffhandWeapon, List<String> description) {
         this.color = color;
+        this.mainElement = mainElement;
         this.name = name.toUpperCase();
         this.tier = tier;
         this.customModelData = customModelData;
@@ -110,5 +113,9 @@ public class RPGClass {
 
     public List<String> getDescription() {
         return description;
+    }
+
+    public ElementType getMainElement() {
+        return mainElement;
     }
 }

@@ -22,7 +22,7 @@ public enum AttributeType {
             case BONUS_CRITICAL_CHANCE:
                 return ChatColor.GOLD + "Bonus Critical Chance";
         }
-        return "description";
+        return "attributeCustomName";
     }
 
     public String getDescription() {
@@ -38,7 +38,7 @@ public enum AttributeType {
             case BONUS_CRITICAL_CHANCE:
                 return getIncrementPerPoint() * 100 + "% bonus critical chance per point(max 40%)";
         }
-        return "description";
+        return "attributeDescription";
     }
 
     public double getIncrementPerPoint() {
@@ -55,5 +55,9 @@ public enum AttributeType {
                 return 0.001;
         }
         return 1;
+    }
+
+    public boolean getFixDisplayOnChange() {
+        return this == AttributeType.BONUS_MAX_HEALTH || this == AttributeType.BONUS_MAX_MANA;
     }
 }

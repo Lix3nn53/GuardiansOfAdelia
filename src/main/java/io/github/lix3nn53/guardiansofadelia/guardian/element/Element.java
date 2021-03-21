@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.element;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import org.bukkit.inventory.EquipmentSlot;
 
 public class Element {
@@ -23,28 +22,20 @@ public class Element {
         return bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand + bonusFromOffhand + bonusFromPassive;
     }
 
-    public void clearEquipment(RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+    public void clearEquipment() {
         this.bonusFromHelmet = 0;
         this.bonusFromChestplate = 0;
         this.bonusFromLeggings = 0;
         this.bonusFromBoots = 0;
         this.bonusFromMainhand = 0;
         this.bonusFromOffhand = 0;
-
-        if (fixDisplay) {
-            onValueChange(rpgCharacterStats);
-        }
     }
 
-    public void clearPassive(RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+    public void clearPassive() {
         this.bonusFromPassive = 0;
-
-        if (fixDisplay) {
-            onValueChange(rpgCharacterStats);
-        }
     }
 
-    public void removeBonus(EquipmentSlot equipmentSlot, RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+    public void removeBonus(EquipmentSlot equipmentSlot) {
         switch (equipmentSlot) {
             case HAND:
                 this.bonusFromMainhand = 0;
@@ -65,13 +56,9 @@ public class Element {
                 this.bonusFromHelmet = 0;
                 break;
         }
-
-        if (fixDisplay) {
-            onValueChange(rpgCharacterStats);
-        }
     }
 
-    public void setBonus(EquipmentSlot equipmentSlot, RPGCharacterStats rpgCharacterStats, int bonus, boolean fixDisplay) {
+    public void setBonus(EquipmentSlot equipmentSlot, int bonus) {
         switch (equipmentSlot) {
             case HAND:
                 this.bonusFromMainhand = bonus;
@@ -93,41 +80,14 @@ public class Element {
                 break;
         }
 
-        if (fixDisplay) {
-            onValueChange(rpgCharacterStats);
-        }
-        //onBonusChangeFillEmpty(player, rpgCharacterStats, bonusPointDifference);
     }
 
-    public void addBonusToPassive(int bonus, RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+    public void addBonusToPassive(int bonus) {
         bonusFromPassive += bonus;
-        if (fixDisplay) {
-            onValueChange(rpgCharacterStats);
-        }
     }
 
-    public void removeBonusFromPassive(int remove, RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+    public void removeBonusFromPassive(int remove) {
         bonusFromPassive -= remove;
-        if (fixDisplay) {
-            onValueChange(rpgCharacterStats);
-        }
-    }
-
-    private void onValueChange(RPGCharacterStats rpgCharacterStats) {
-        switch (elementType) {
-            case BONUS_ELEMENT_DAMAGE:
-                break;
-            case BONUS_ELEMENT_DEFENSE:
-                break;
-            case BONUS_MAX_HEALTH:
-                rpgCharacterStats.onMaxHealthChange();
-                break;
-            case BONUS_MAX_MANA:
-                rpgCharacterStats.onCurrentManaChange();
-                break;
-            case BONUS_CRITICAL_CHANCE:
-                break;
-        }
     }
 
     public ElementType getElementType() {

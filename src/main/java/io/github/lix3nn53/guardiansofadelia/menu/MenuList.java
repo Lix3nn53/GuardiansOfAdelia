@@ -319,18 +319,18 @@ public class MenuList {
                     List<ArmorGearType> armorGearTypes = value.getArmorGearTypes();
                     List<ShieldGearType> shieldGearTypes = value.getShieldGearTypes();
                     HashMap<AttributeType, Integer> attributeTiers = value.getAttributeTiers();
-                    String bonusDamage = ChatColor.RED.toString() + attributeTiers.get(AttributeType.BONUS_ELEMENT_DAMAGE);
-                    String bonusDefense = ChatColor.AQUA.toString() + attributeTiers.get(AttributeType.BONUS_ELEMENT_DEFENSE);
-                    String bonusHealth = ChatColor.DARK_GREEN.toString() + attributeTiers.get(AttributeType.BONUS_MAX_HEALTH);
-                    String bonusMana = ChatColor.BLUE.toString() + attributeTiers.get(AttributeType.BONUS_MAX_MANA);
-                    String bonusCriticalChance = ChatColor.WHITE.toString() + attributeTiers.get(AttributeType.BONUS_CRITICAL_CHANCE);
 
                     List<String> lore = new ArrayList<>(description);
                     lore.add(ChatColor.RED + "Tier: " + ChatColor.GRAY + classTier);
                     lore.add("");
 
                     lore.add(ChatColor.GREEN + "Attributes");
-                    lore.add("  " + bonusDamage + " " + bonusDefense + " " + bonusHealth + " " + bonusMana + " " + bonusCriticalChance + " ");
+                    StringBuilder bonusAttributes = new StringBuilder(" ");
+                    for (AttributeType attributeType : AttributeType.values()) {
+                        int bonus = attributeTiers.get(attributeType);
+                        bonusAttributes.append(bonus).append(" ");
+                    }
+                    lore.add(bonusAttributes.toString());
 
                     lore.add(ChatColor.RED + "Weapons");
                     for (WeaponGearType type : weaponGearTypes) {
@@ -476,7 +476,7 @@ public class MenuList {
                 int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
                 guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Stat Points (Points: " + pointsLeft + ")", 0);
 
-                Attribute bonusElementDamage = rpgCharacterStats.getBonusElementDamage();
+                Attribute bonusElementDamage = rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE);
                 ItemStack itemStack = new ItemStack(Material.PAPER);
                 ItemMeta itemMeta = itemStack.getItemMeta();
                 itemMeta.setDisplayName(AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName() + " (Invested: " + bonusElementDamage.getInvested() + ")");
@@ -492,7 +492,7 @@ public class MenuList {
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(1, itemStack);
 
-                Attribute bonusElementDefense = rpgCharacterStats.getBonusElementDefense();
+                Attribute bonusElementDefense = rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DEFENSE);
                 itemMeta.setDisplayName(AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + " (Invested: " + bonusElementDefense.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");
@@ -506,7 +506,7 @@ public class MenuList {
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(4, itemStack);
 
-                Attribute bonusMaxHealth = rpgCharacterStats.getBonusMaxHealth();
+                Attribute bonusMaxHealth = rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_HEALTH);
                 itemMeta.setDisplayName(AttributeType.BONUS_MAX_HEALTH.getCustomName() + " (Invested: " + bonusMaxHealth.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");
@@ -520,7 +520,7 @@ public class MenuList {
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(7, itemStack);
 
-                Attribute bonusMaxMana = rpgCharacterStats.getBonusMaxMana();
+                Attribute bonusMaxMana = rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_MANA);
                 itemMeta.setDisplayName(AttributeType.BONUS_MAX_MANA.getCustomName() + " (Invested: " + bonusMaxMana.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");
@@ -534,7 +534,7 @@ public class MenuList {
                 itemStack.setItemMeta(itemMeta);
                 guiGeneric.setItem(20, itemStack);
 
-                Attribute bonusCriticalChance = rpgCharacterStats.getBonusCriticalChance();
+                Attribute bonusCriticalChance = rpgCharacterStats.getAttribute(AttributeType.BONUS_CRITICAL_CHANCE);
                 itemMeta.setDisplayName(AttributeType.BONUS_CRITICAL_CHANCE.getCustomName() + " (Invested: " + bonusCriticalChance.getInvested() + ")");
                 lore = new ArrayList<>();
                 lore.add("");

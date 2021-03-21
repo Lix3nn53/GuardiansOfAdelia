@@ -4,6 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+
 public class RPGSlotPassive implements RPGSlot {
 
     private ItemStack itemOnSlot = null;
@@ -21,7 +23,7 @@ public class RPGSlotPassive implements RPGSlot {
             StatPassive stat = (StatPassive) StatUtils.getStat(this.itemOnSlot);
             return stat;
         }
-        return new StatPassive(0, 0, 0, 0, 0);
+        return new StatPassive(new HashMap<>());
     }
 
     public ItemStack getItemOnSlot() {

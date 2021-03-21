@@ -1,10 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 
 public class SkillUtils {
 
-    private static DamageMechanic.DamageType damageType = null;
+    private static ElementType damageType = null;
 
     /**
      * Method to use in EntityDamageByEntityEvent to check if damage is caused by skill
@@ -20,11 +20,11 @@ public class SkillUtils {
      *
      * @return
      */
-    public static DamageMechanic.DamageType getDamageType() {
+    public static ElementType getDamageType() {
         return damageType;
     }
 
-    public static void setDamageType(DamageMechanic.DamageType current) {
+    public static void setDamageType(ElementType current) {
         damageType = current;
     }
 

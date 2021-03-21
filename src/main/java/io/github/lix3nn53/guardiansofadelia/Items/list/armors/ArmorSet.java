@@ -8,14 +8,12 @@ public class ArmorSet {
     private final int baseReqLevel;
     private final int health;
     private final int defense;
-    private final int magicDefense;
 
-    public ArmorSet(String name, int baseReqLevel, int health, int defense, int magicDefense) {
+    public ArmorSet(String name, int baseReqLevel, int health, int defense) {
         this.name = name;
         this.baseReqLevel = baseReqLevel;
         this.health = health;
         this.defense = defense;
-        this.magicDefense = magicDefense;
     }
 
     public String getName(ArmorSlot armorSlot) {
@@ -31,11 +29,7 @@ public class ArmorSet {
     }
 
     public int getDefense(ArmorSlot armorSlot, ArmorGearType gearType) {
-        return (int) (defense * armorSlot.getAttributeReduction() * gearType.getPhysicalDefenseReduction() + 0.5);
-    }
-
-    public int getMagicDefense(ArmorSlot armorSlot, ArmorGearType gearType) {
-        return (int) (magicDefense * armorSlot.getAttributeReduction() * gearType.getMagicDefenseReduction() + 0.5);
+        return (int) (defense * armorSlot.getAttributeReduction() * gearType.getElementDefenseReduction() + 0.5);
     }
 
     public Material getMaterial(ArmorSlot armorSlot, ArmorGearType gearType) {

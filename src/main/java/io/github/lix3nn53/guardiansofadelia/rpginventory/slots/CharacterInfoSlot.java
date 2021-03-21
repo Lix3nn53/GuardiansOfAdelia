@@ -5,6 +5,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.Element;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -47,12 +49,6 @@ public class CharacterInfoSlot {
                 int health = (int) (player.getHealth() + 0.5);
                 double criticalChance = rpgCharacterStats.getTotalCriticalChance() * 100;
 
-                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute bonusDamage = rpgCharacterStats.getBonusElementDamage();
-                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute bonusHealth = rpgCharacterStats.getBonusMaxHealth();
-                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute bonusDefense = rpgCharacterStats.getBonusElementDefense();
-                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute bonusMana = rpgCharacterStats.getBonusMaxMana();
-                final io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute bonusCriticalChance = rpgCharacterStats.getBonusCriticalChance();
-
                 final int totalDefense = rpgCharacterStats.getTotalElementDefense();
                 double phyReduction = StatUtils.getDefenseReduction(totalDefense);
 
@@ -69,11 +65,16 @@ public class CharacterInfoSlot {
                 lore.add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + criticalChance + "%");
                 lore.add("");
                 lore.add(ChatColor.GRAY + "(equipment + level + invested points)");
-                lore.add(AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName() + " : " + ChatColor.GRAY + bonusDamage.getBonusFromEquipment() + " + " + bonusDamage.getBonusFromLevel(level, rpgClassStr) + " + " + bonusDamage.getInvested());
-                lore.add(AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + ": " + ChatColor.GRAY + bonusDefense.getBonusFromEquipment() + " + " + bonusDefense.getBonusFromLevel(level, rpgClassStr) + " + " + bonusDefense.getInvested());
-                lore.add(AttributeType.BONUS_MAX_HEALTH.getCustomName() + ": " + ChatColor.GRAY + bonusHealth.getBonusFromEquipment() + " + " + bonusHealth.getBonusFromLevel(level, rpgClassStr) + " + " + bonusHealth.getInvested());
-                lore.add(AttributeType.BONUS_MAX_MANA.getCustomName() + ": " + ChatColor.GRAY + bonusMana.getBonusFromEquipment() + " + " + bonusMana.getBonusFromLevel(level, rpgClassStr) + " + " + bonusMana.getInvested());
-                lore.add(AttributeType.BONUS_CRITICAL_CHANCE.getCustomName() + ": " + ChatColor.GRAY + bonusCriticalChance.getBonusFromEquipment() + " + " + bonusCriticalChance.getBonusFromLevel(level, rpgClassStr) + " + " + bonusCriticalChance.getInvested());
+                // Add attributes to lore (equipment + level + invested points)
+                for (AttributeType attributeType : AttributeType.values()) {
+                    io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute attribute = rpgCharacterStats.getAttribute(attributeType);
+                    lore.add(attributeType.getCustomName() + ": " + ChatColor.GRAY + attribute.getBonusFromEquipment() + " + " + attribute.getBonusFromLevel(level, rpgClassStr) + " + " + attribute.getInvested());
+                }
+                lore.add("");
+                for (ElementType elementType : ElementType.values()) {
+                    Element element = rpgCharacterStats.getElement(elementType);
+                    lore.add(elementType.getCustomName() + ": " + ChatColor.GRAY + element.getBonusFromEquipment());
+                }
                 skullMeta.setLore(lore);
                 itemStack.setItemMeta(skullMeta);
                 return itemStack;

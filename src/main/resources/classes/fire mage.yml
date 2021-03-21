@@ -9,11 +9,11 @@ color: "LIGHT_PURPLE"
 description:
   - "Todo"
 classIconCustomModelData: 16
-attributeTierBonusElementDamage: 1
-attributeTierBonusElementDefense: 4
-attributeTierBonusMaxHealth: 5
-attributeTierBonusMaxMana: 6
-attributeTierBonusCriticalChance: 0
+attributeElementDamage: 1
+attributeElementDefense: 4
+attributeMaxHealth: 5
+attributeMaxMana: 6
+attributeCriticalChance: 0
 weaponGearTypes:
   - "WAND"
   - "DAGGER"

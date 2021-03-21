@@ -43,11 +43,10 @@ public class ItemShieldSetConfigurations {
                 int level = itemSetConfiguration.getInt("i" + i + ".level");
                 int health = itemSetConfiguration.getInt("i" + i + ".health");
                 int defense = itemSetConfiguration.getInt("i" + i + ".defense");
-                int magicDefense = itemSetConfiguration.getInt("i" + i + ".magicDefense");
 
                 String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-                ShieldSet shieldSet = new ShieldSet(name, level, health, defense, magicDefense, customModelData);
+                ShieldSet shieldSet = new ShieldSet(name, level, health, defense, customModelData);
 
                 ShieldManager.add(shieldSet);
             }

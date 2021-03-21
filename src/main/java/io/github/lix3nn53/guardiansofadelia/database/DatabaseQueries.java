@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassStats;
@@ -86,11 +87,11 @@ public class DatabaseQueries {
                     " `rpg_class`      varchar(45) NOT NULL ,\n" +
                     " `unlocked_classes`      mediumtext NULL ,\n" +
                     " `totalexp`       int NOT NULL ,\n" +
-                    " `attr_fire`      smallint NOT NULL ,\n" +
-                    " `attr_water`     smallint NOT NULL ,\n" +
-                    " `attr_earth`     smallint NOT NULL ,\n" +
-                    " `attr_lightning` smallint NOT NULL ,\n" +
-                    " `attr_wind`      smallint NOT NULL ,\n" +
+                    " `attr_one`      smallint NOT NULL ,\n" +
+                    " `attr_two`     smallint NOT NULL ,\n" +
+                    " `attr_three`     smallint NOT NULL ,\n" +
+                    " `attr_four` smallint NOT NULL ,\n" +
+                    " `attr_five`      smallint NOT NULL ,\n" +
                     " `skill_one`      smallint NOT NULL ,\n" +
                     " `skill_two`      smallint NOT NULL ,\n" +
                     " `skill_three`    smallint NOT NULL ,\n" +
@@ -330,16 +331,16 @@ public class DatabaseQueries {
                 int totalexp = resultSet.getInt("totalexp");
                 rpgCharacterStats.setTotalExp(totalexp);
 
-                int attr_fire = resultSet.getInt("attr_fire");
-                rpgCharacterStats.getBonusElementDamage().setInvested(attr_fire, rpgCharacterStats, false);
-                int attr_water = resultSet.getInt("attr_water");
-                rpgCharacterStats.getBonusMaxMana().setInvested(attr_water, rpgCharacterStats, true);
-                int attr_earth = resultSet.getInt("attr_earth");
-                rpgCharacterStats.getBonusMaxHealth().setInvested(attr_earth, rpgCharacterStats, true);
-                int attr_lightning = resultSet.getInt("attr_lightning");
-                rpgCharacterStats.getBonusElementDefense().setInvested(attr_lightning, rpgCharacterStats, false);
-                int attr_wind = resultSet.getInt("attr_wind");
-                rpgCharacterStats.getBonusCriticalChance().setInvested(attr_wind, rpgCharacterStats, false);
+                int attr_one = resultSet.getInt("attr_one");
+                rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE).setInvested(attr_one, rpgCharacterStats);
+                int attr_two = resultSet.getInt("attr_two");
+                rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DEFENSE).setInvested(attr_two, rpgCharacterStats);
+                int attr_three = resultSet.getInt("attr_three");
+                rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_HEALTH).setInvested(attr_three, rpgCharacterStats);
+                int attr_four = resultSet.getInt("attr_four");
+                rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_MANA).setInvested(attr_four, rpgCharacterStats);
+                int attr_five = resultSet.getInt("attr_five");
+                rpgCharacterStats.getAttribute(AttributeType.BONUS_CRITICAL_CHANCE).setInvested(attr_five, rpgCharacterStats);
 
                 String offHand = resultSet.getString("off_hand");
                 if (!resultSet.wasNull()) {
@@ -841,7 +842,7 @@ public class DatabaseQueries {
         String SQL_QUERY = "INSERT INTO goa_player_character \n" +
                 "\t(uuid, character_no, off_hand, slot_parrot, slot_necklace, slot_ring, slot_earring, slot_glove, " +
                 "slot_pet, chat_tag, crafting_experiences, inventory, activequests, turnedinquests, location, armor_content, " +
-                "rpg_class, unlocked_classes, totalexp, attr_fire, attr_water, attr_earth, attr_lightning, attr_wind, skill_one, skill_two, skill_three, skill_passive, skill_ultimate) \n" +
+                "rpg_class, unlocked_classes, totalexp, attr_one, attr_two, attr_three, attr_four, attr_five, skill_one, skill_two, skill_three, skill_passive, skill_ultimate) \n" +
                 "VALUES \n" +
                 "\t(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
@@ -864,11 +865,11 @@ public class DatabaseQueries {
                 "\trpg_class = VALUES(rpg_class),\n" +
                 "\tunlocked_classes = VALUES(unlocked_classes),\n" +
                 "\ttotalexp = VALUES(totalexp),\n" +
-                "\tattr_fire = VALUES(attr_fire),\n" +
-                "\tattr_water = VALUES(attr_water),\n" +
-                "\tattr_earth = VALUES(attr_earth),\n" +
-                "\tattr_lightning = VALUES(attr_lightning),\n" +
-                "\tattr_wind = VALUES(attr_wind),\n" +
+                "\tattr_one = VALUES(attr_one),\n" +
+                "\tattr_two = VALUES(attr_two),\n" +
+                "\tattr_three = VALUES(attr_three),\n" +
+                "\tattr_four = VALUES(attr_four),\n" +
+                "\tattr_five = VALUES(attr_five),\n" +
                 "\tskill_one = VALUES(skill_one),\n" +
                 "\tskill_two = VALUES(skill_two),\n" +
                 "\tskill_three = VALUES(skill_three),\n" +
@@ -1024,15 +1025,15 @@ public class DatabaseQueries {
             int totalExp = rpgCharacterStats.getTotalExp();
             pst.setInt(19, totalExp);
 
-            int strength = rpgCharacterStats.getBonusElementDamage().getInvested();
+            int strength = rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE).getInvested();
             pst.setInt(20, strength);
-            int spirit = rpgCharacterStats.getBonusMaxMana().getInvested();
+            int spirit = rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DEFENSE).getInvested();
             pst.setInt(21, spirit);
-            int endurance = rpgCharacterStats.getBonusMaxHealth().getInvested();
+            int endurance = rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_HEALTH).getInvested();
             pst.setInt(22, endurance);
-            int intelligence = rpgCharacterStats.getBonusElementDefense().getInvested();
+            int intelligence = rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_MANA).getInvested();
             pst.setInt(23, intelligence);
-            int dexterity = rpgCharacterStats.getBonusCriticalChance().getInvested();
+            int dexterity = rpgCharacterStats.getAttribute(AttributeType.BONUS_CRITICAL_CHANCE).getInvested();
             pst.setInt(24, dexterity);
 
             SkillBar skillBar = rpgCharacter.getSkillBar();

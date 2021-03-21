@@ -8,10 +8,13 @@ import io.github.lix3nn53.guardiansofadelia.creatures.killProtection.KillProtect
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
@@ -75,16 +78,18 @@ public class MyEntityDamageByEntityEvent implements Listener {
         }
         boolean isSkill = false;
 
-        DamageMechanic.DamageType damageType = DamageMechanic.DamageType.MELEE;
+        ElementType damageType = ElementType.FIRE;
         EntityDamageEvent.DamageCause damageCause = event.getCause();
         if (SkillUtils.isSkillDamage()) { //For own skill system
             isSkill = true;
             damageType = SkillUtils.getDamageType();
             SkillUtils.clearSkillDamage();
-        } else if (damageCause.equals(EntityDamageEvent.DamageCause.CUSTOM)) { //For mythic mobs
-            isSkill = true; // TODO hope this does not broke own skill system
-            damageType = DamageMechanic.DamageType.MAGIC;
         }
+        // TODO Mob skill damage
+        /*else if (damageCause.equals(EntityDamageEvent.DamageCause.CUSTOM)) { //For mythic mobs
+            isSkill = true;
+            damageType = DamageMechanic.DamageType.MAGIC;
+        }*/
 
         // Disable vanilla knockback if isSkill
         if (isSkill) {
@@ -113,7 +118,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
             //DAMAGER
             if (damager.getType().equals(EntityType.PLAYER)) { //player is attacker
                 Player player = (Player) damager;
-                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, null, damageType, isSkill);
+                isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, null, damageType, isSkill, false);
                 isAttackerPlayer = true;
             } else if (damager instanceof Projectile) { //projectile is attacker
                 Projectile projectile = (Projectile) damager;
@@ -133,7 +138,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 if (PersistentDataContainerUtil.hasInteger(projectile, "rangedDamage")) {
                     int rangedDamage = PersistentDataContainerUtil.getInteger(projectile, "rangedDamage");
                     event.setDamage(rangedDamage);
-                    damageType = DamageMechanic.DamageType.RANGED;
                 } else if (PersistentDataContainerUtil.hasInteger(projectile, "skillLevel")) {
                     //projectile is a skill so cancel event and let children mechanics of this projectile do their things
                     event.setCancelled(true);
@@ -142,7 +146,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 if (shooter instanceof Player) {
                     Player player = (Player) shooter;
-                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, null, damageType, isSkill);
+                    isEventCanceled = onPlayerAttackEntity(event, player, livingTarget, null, damageType, isSkill, true);
                     isAttackerPlayer = true;
                 }
             } else if (damager instanceof LivingEntity) {
@@ -153,7 +157,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         event.setCancelled(true);
                         return;
                     }
-                    isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, (LivingEntity) damager, damageType, isSkill);
+                    isEventCanceled = onPlayerAttackEntity(event, owner, livingTarget, (LivingEntity) damager, damageType, isSkill, false);
                     isAttackerPlayer = true;
                 }
             }
@@ -188,15 +192,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     }
 
                     if (damageSource != null) {
-                        if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
-                            TriggerListener.onPlayerTookMagicalDamage(playerTarget, damageSource); //TookMagicalDamageTrigger
-                        } else {
-                            TriggerListener.onPlayerTookPhysicalDamage(playerTarget, damageSource); //TookPhysicalDamageTrigger
-
-                            if (damageType.equals(DamageMechanic.DamageType.MELEE)) {
-                                TriggerListener.onPlayerTookMeleeDamage(playerTarget, damageSource); //TookMeleeDamageTrigger
-                            }
-                        }
+                        TriggerListener.onPlayerTookDamage(playerTarget, damageSource); // TookDamageTrigger
 
                         // Manage target player's pet's target
                         if (PetManager.hasPet(playerTarget) || PetManager.hasCompanion(playerTarget)) {
@@ -235,7 +231,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
      * @param pet          = player's pet if attacker is the pet
      * @return isEventCanceled
      */
-    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, LivingEntity pet, DamageMechanic.DamageType damageType, boolean isSkill) {
+    private boolean onPlayerAttackEntity(EntityDamageByEntityEvent event, Player player, LivingEntity livingTarget, LivingEntity pet, ElementType damageType, boolean isSkill, boolean isProjectile) {
         if (GuardianDataManager.hasGuardianData(player)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
@@ -264,55 +260,50 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     //custom damage modifiers
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                     String rpgClassStr = activeCharacter.getRpgClassStr();
-                    if (damageType.equals(DamageMechanic.DamageType.MAGIC)) { //Ranged overrides Magic so check magic first. You can not deal Magic damage without skills.
-                        // damage += rpgCharacterStats.getTotalMagicDamage(player, rpgClassStr); //add to spell damage
-                        TriggerListener.onPlayerMagicAttack(player, livingTarget);
-                    } else if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
-                        if (isSkill) {
-                            // damage += rpgCharacterStats.getTotalRangedDamage(player, rpgClassStr);
-                            TriggerListener.onPlayerMagicAttack(player, livingTarget);
-                        } else { //add bonusElementDamage stat and elementDamageBuff to projectiles fired without skills involved
-                            damage += rpgCharacterStats.getBonusElementDamage().getIncrement(player.getLevel(), rpgClassStr);
-                            damage *= rpgCharacterStats.getBuffMultiplier(BuffType.ELEMENT_DAMAGE);
-                            TriggerListener.onPlayerRangedAttack(player, livingTarget);
+
+                    if (isSkill) {
+                        TriggerListener.onPlayerSkillAttack(player, livingTarget);
+                    } else {
+                        // If attack is not a skill, element type of attack is element of rpgClass of player
+                        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
+                        damageType = rpgClass.getMainElement();
+
+                        if (isProjectile) { // NonSkill projectile like arrow from bow
                             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.6F, 0.4F);
                         }
-                    } else { //melee
+
                         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                         Material type = itemInMainHand.getType();
-
-                        if (isSkill) {
-                            // damage += rpgCharacterStats.getTotalMeleeDamage(player, rpgClassStr);
-                            TriggerListener.onPlayerMagicAttack(player, livingTarget);
-                        } else if (RPGItemUtils.isWeapon(type)) {
-                            //Normal melee attack. Check for requirements then add bonusElementDamage stat and offhand bonus
-
+                        if (RPGItemUtils.isWeapon(type)) { // Melee
                             if (player.getInventory().getHeldItemSlot() != 4) {
                                 event.setCancelled(true);
                                 player.sendMessage(ChatColor.RED + "You can only attack with weapon slot(5)");
                                 return false;
                             }
 
-                            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr))
+                            if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr)) {
                                 return false;
+                            }
 
-                            damage += rpgCharacterStats.getBonusElementDamage().getIncrement(player.getLevel(), rpgClassStr); //add to weapon damage
-
-                            /*
-                            DO NOT add damage bonus from offhand manually, it is added via vanilla attributes
+                            /* O NOT add damage bonus from offhand manually, it is added via vanilla attributes
                             //add damage bonus from offhand
                             ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
                             if (!InventoryUtils.isAirOrNull(itemInMainHand)) {
                                 if (itemInOffHand.getType().equals(Material.DIAMOND_HOE)) {
                                     damage += rpgCharacterStats.getTotalDamageBonusFromOffhand();
                                 }
-                            }
-                            */
-
-                            damage *= rpgCharacterStats.getBuffMultiplier(BuffType.ELEMENT_DAMAGE);
-                            TriggerListener.onPlayerMeleeAttack(player, livingTarget);
+                            }*/
                         }
+
+                        // Add bonus damage to normal attack
+                        damage += rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE).getIncrement(player.getLevel(), rpgClassStr); // bonus from attribute
+                        damage += rpgCharacterStats.getElement(damageType).getBonusFromEquipment(); // bonus from element
+
+                        TriggerListener.onPlayerNormalAttack(player, livingTarget);
                     }
+
+                    // BuffMechanic
+                    damage *= rpgCharacterStats.getBuffMultiplier(BuffType.ELEMENT_DAMAGE);
 
                     //add critical damage right before defense
                     double totalCriticalChance = rpgCharacterStats.getTotalCriticalChance();
@@ -385,14 +376,13 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 //indicator
                 ChatColor indicatorColor = ChatColor.RED;
                 String indicatorIcon = "⸸";
-                if (damageType.equals(DamageMechanic.DamageType.RANGED)) {
-                    indicatorIcon = "➹";
-                } else if (damageType.equals(DamageMechanic.DamageType.MAGIC)) {
-                    indicatorColor = ChatColor.AQUA;
-                    indicatorIcon = "✧";
-                } else if (pet != null) {
+
+                if (pet != null) {
                     indicatorColor = ChatColor.LIGHT_PURPLE;
                     indicatorIcon = ">.<";
+                } else {
+                    indicatorColor = damageType.getChatColor();
+                    indicatorIcon = damageType.getIcon() + "";
                 }
 
                 if (isCritical) {

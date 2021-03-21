@@ -9,11 +9,11 @@ color: "YELLOW"
 description:
   - "Engineer"
 classIconCustomModelData: 12
-attributeTierBonusElementDamage: 4
-attributeTierBonusElementDefense: 3
-attributeTierBonusMaxHealth: 5
-attributeTierBonusMaxMana: 1
-attributeTierBonusCriticalChance: 0
+attributeElementDamage: 4
+attributeElementDefense: 3
+attributeMaxHealth: 5
+attributeMaxMana: 1
+attributeCriticalChance: 0
 weaponGearTypes:
   - "WAND"
   - "DAGGER"

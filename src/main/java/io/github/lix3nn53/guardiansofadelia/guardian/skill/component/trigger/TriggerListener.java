@@ -15,13 +15,9 @@ public class TriggerListener {
 
     private static final HashMap<Player, LandTrigger> playerToLandTrigger = new HashMap<>();
 
-    private static final HashMap<Player, TookPhysicalDamageTrigger> playerToTookPhysicalDamageTrigger = new HashMap<>();
-    private static final HashMap<Player, TookMagicalDamageTrigger> playerToTookMagicalDamageTrigger = new HashMap<>();
-    private static final HashMap<Player, TookMeleeDamageTrigger> playerToTookMeleeDamageTrigger = new HashMap<>();
-
-    private static final HashMap<Player, MeleeAttackTrigger> playerToMeleeAttackTrigger = new HashMap<>();
-    private static final HashMap<Player, RangedAttackTrigger> playerToRangedAttackTrigger = new HashMap<>();
-    private static final HashMap<Player, MagicAttackTrigger> playerToMagicAttackTrigger = new HashMap<>();
+    private static final HashMap<Player, TookDamageTrigger> playerToTookDamageTrigger = new HashMap<>();
+    private static final HashMap<Player, NormalAttackTrigger> playerToNormalAttackTrigger = new HashMap<>();
+    private static final HashMap<Player, SkillAttackTrigger> playerToSkillAttackTrigger = new HashMap<>();
 
     private static final HashMap<Player, AddPiercingToArrowShootFromCrossbowTrigger> playerToAddPiercingToArrowShootFromCrossbowTrigger = new HashMap<>();
 
@@ -34,13 +30,8 @@ public class TriggerListener {
         playerToInitializeTrigger.remove(player);
 
         playerToLandTrigger.remove(player);
-
-        playerToTookPhysicalDamageTrigger.remove(player);
-        playerToTookMagicalDamageTrigger.remove(player);
-
-        playerToMeleeAttackTrigger.remove(player);
-        playerToRangedAttackTrigger.remove(player);
-        playerToMagicAttackTrigger.remove(player);
+        playerToNormalAttackTrigger.remove(player);
+        playerToSkillAttackTrigger.remove(player);
 
         playerToAddPiercingToArrowShootFromCrossbowTrigger.remove(player);
 
@@ -63,80 +54,41 @@ public class TriggerListener {
         }
     }
 
-    public static void startListeningTookPhysicalDamage(Player player, TookPhysicalDamageTrigger tookPhysicalDamageTrigger) {
-        playerToTookPhysicalDamageTrigger.put(player, tookPhysicalDamageTrigger);
+    public static void startListeningTookDamage(Player player, TookDamageTrigger tookDamageTrigger) {
+        playerToTookDamageTrigger.put(player, tookDamageTrigger);
     }
 
-    public static void onPlayerTookPhysicalDamage(Player player, LivingEntity attacker) {
-        if (playerToTookPhysicalDamageTrigger.containsKey(player)) {
-            boolean callback = playerToTookPhysicalDamageTrigger.get(player).callback(player, attacker);
+    public static void onPlayerTookDamage(Player player, LivingEntity attacker) {
+        if (playerToTookDamageTrigger.containsKey(player)) {
+            boolean callback = playerToTookDamageTrigger.get(player).callback(player, attacker);
             if (callback) {
-                playerToTookPhysicalDamageTrigger.remove(player);
+                playerToTookDamageTrigger.remove(player);
             }
         }
     }
 
-    public static void startListeningTookMeleeDamage(Player player, TookMeleeDamageTrigger tookMeleeDamageTrigger) {
-        playerToTookMeleeDamageTrigger.put(player, tookMeleeDamageTrigger);
+    public static void startListeningNormalAttack(Player player, NormalAttackTrigger normalAttackTrigger) {
+        playerToNormalAttackTrigger.put(player, normalAttackTrigger);
     }
 
-    public static void onPlayerTookMeleeDamage(Player player, LivingEntity attacker) {
-        if (playerToTookMeleeDamageTrigger.containsKey(player)) {
-            boolean callback = playerToTookMeleeDamageTrigger.get(player).callback(player, attacker);
+    public static void onPlayerNormalAttack(Player player, LivingEntity target) {
+        if (playerToNormalAttackTrigger.containsKey(player)) {
+            boolean callback = playerToNormalAttackTrigger.get(player).callback(player, target);
             if (callback) {
-                playerToTookMeleeDamageTrigger.remove(player);
+                playerToNormalAttackTrigger.remove(player);
             }
         }
     }
 
-    public static void startListeningTookMagicalDamage(Player player, TookMagicalDamageTrigger tookPhysicalDamageTrigger) {
-        playerToTookMagicalDamageTrigger.put(player, tookPhysicalDamageTrigger);
+    public static void startListeningSkillAttack(Player player, SkillAttackTrigger skillAttackTrigger) {
+        playerToSkillAttackTrigger.put(player, skillAttackTrigger);
     }
 
-    public static void onPlayerTookMagicalDamage(Player player, LivingEntity attacker) {
-        if (playerToTookMagicalDamageTrigger.containsKey(player)) {
-            boolean callback = playerToTookMagicalDamageTrigger.get(player).callback(player, attacker);
+    public static void onPlayerSkillAttack(Player player, LivingEntity target) {
+        if (playerToSkillAttackTrigger.containsKey(player)) {
+            boolean callback = playerToSkillAttackTrigger.get(player).callback(player, target);
             if (callback) {
-                playerToTookMagicalDamageTrigger.remove(player);
-            }
-        }
-    }
-
-    public static void startListeningMeleeAttack(Player player, MeleeAttackTrigger meleeAttackTrigger) {
-        playerToMeleeAttackTrigger.put(player, meleeAttackTrigger);
-    }
-
-    public static void onPlayerMeleeAttack(Player player, LivingEntity target) {
-        if (playerToMeleeAttackTrigger.containsKey(player)) {
-            boolean callback = playerToMeleeAttackTrigger.get(player).callback(player, target);
-            if (callback) {
-                playerToMeleeAttackTrigger.remove(player);
-            }
-        }
-    }
-
-    public static void startListeningRangedAttack(Player player, RangedAttackTrigger rangedAttackTrigger) {
-        playerToRangedAttackTrigger.put(player, rangedAttackTrigger);
-    }
-
-    public static void onPlayerRangedAttack(Player player, LivingEntity target) {
-        if (playerToRangedAttackTrigger.containsKey(player)) {
-            boolean callback = playerToRangedAttackTrigger.get(player).callback(player, target);
-            if (callback) {
-                playerToRangedAttackTrigger.remove(player);
-            }
-        }
-    }
-
-    public static void startListeningMagicAttack(Player player, MagicAttackTrigger magicAttackTrigger) {
-        playerToMagicAttackTrigger.put(player, magicAttackTrigger);
-    }
-
-    public static void onPlayerMagicAttack(Player player, LivingEntity target) {
-        if (playerToMagicAttackTrigger.containsKey(player)) {
-            boolean callback = playerToMagicAttackTrigger.get(player).callback(player, target);
-            if (callback) {
-                playerToMagicAttackTrigger.remove(player);
+                playerToSkillAttackTrigger.remove(player);
             }
         }
     }

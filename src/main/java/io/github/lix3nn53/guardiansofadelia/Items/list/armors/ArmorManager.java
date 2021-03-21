@@ -31,11 +31,10 @@ public class ArmorManager {
         int level = armorSet.getReqLevel(armorSlot);
         int health = armorSet.getHealth(armorSlot, gearType);
         int defense = armorSet.getDefense(armorSlot, gearType);
-        int magicDefense = armorSet.getMagicDefense(armorSlot, gearType);
 
         final GearArmor gearArmor = new GearArmor(name, tier, material, level,
                 gearType, health,
-                defense, magicDefense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
+                defense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
 
         return gearArmor.getItemStack();
     }

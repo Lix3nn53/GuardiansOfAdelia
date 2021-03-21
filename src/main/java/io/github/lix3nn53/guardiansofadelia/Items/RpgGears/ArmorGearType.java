@@ -60,7 +60,7 @@ public enum ArmorGearType {
         return 0;
     }
 
-    public double getPhysicalDefenseReduction() {
+    public double getElementDefenseReduction() {
         switch (this) {
             case HEAVY_ARMOR:
                 return 1;
@@ -70,22 +70,6 @@ public enum ArmorGearType {
             case FEATHER_ARMOR:
                 return 0.5;
             case CLOTH_ARMOR:
-                return 0.4;
-        }
-
-        return 0;
-    }
-
-    public double getMagicDefenseReduction() {
-        switch (this) {
-            case CLOTH_ARMOR:
-                return 1;
-            case LIGHT_ARMOR:
-            case FEATHER_ARMOR:
-                return 0.7;
-            case PLATE_ARMOR:
-                return 0.5;
-            case HEAVY_ARMOR:
                 return 0.4;
         }
 

@@ -25,6 +25,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
@@ -720,15 +721,15 @@ public class MyInventoryClickEvent implements Listener {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
                 Attribute attr = null;
                 if (slot == 1) {
-                    attr = rpgCharacterStats.getBonusElementDamage();
+                    attr = rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE);
                 } else if (slot == 4) {
-                    attr = rpgCharacterStats.getBonusMaxMana();
+                    attr = rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DEFENSE);
                 } else if (slot == 7) {
-                    attr = rpgCharacterStats.getBonusMaxHealth();
+                    attr = rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_HEALTH);
                 } else if (slot == 20) {
-                    attr = rpgCharacterStats.getBonusElementDefense();
+                    attr = rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_MANA);
                 } else if (slot == 24) {
-                    attr = rpgCharacterStats.getBonusCriticalChance();
+                    attr = rpgCharacterStats.getAttribute(AttributeType.BONUS_CRITICAL_CHANCE);
                 }
                 if (attr != null) {
                     if (event.isLeftClick()) {
@@ -743,7 +744,7 @@ public class MyInventoryClickEvent implements Listener {
                                 }
                             }
 
-                            attr.investPoint(rpgCharacterStats, amount, true);
+                            attr.investPoint(rpgCharacterStats, amount);
                             GuiGeneric statPoints = MenuList.statPoints(player);
                             statPoints.openInventory(player);
                         }
@@ -759,7 +760,7 @@ public class MyInventoryClickEvent implements Listener {
                                 }
                             }
 
-                            attr.downgradePoint(rpgCharacterStats, amount, true);
+                            attr.downgradePoint(rpgCharacterStats, amount);
                             GuiGeneric statPoints = MenuList.statPoints(player);
                             statPoints.openInventory(player);
                         }

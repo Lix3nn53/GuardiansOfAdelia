@@ -10,11 +10,11 @@ description:
   - "Their hunting techniques"
   - "makes anyone a prey for the deadly arrows."
 classIconCustomModelData: 14
-attributeTierBonusElementDamage: 6
-attributeTierBonusElementDefense: 1
-attributeTierBonusMaxHealth: 6
-attributeTierBonusMaxMana: 1
-attributeTierBonusCriticalChance: 1
+attributeElementDamage: 6
+attributeElementDefense: 1
+attributeMaxHealth: 6
+attributeMaxMana: 1
+attributeCriticalChance: 1
 weaponGearTypes:
   - "CROSSBOW"
   - "BOW"

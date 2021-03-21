@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Enchant {
@@ -140,42 +141,17 @@ public class Enchant {
             player.sendMessage("SUCC");
             player.sendMessage("PASSIVE");
 
-            int lineToChangeBonusDamage = -1;
-            int lineToChangeBonusDefense = -1;
-            int lineToChangeBonusHealth = -1;
-            int lineToChangeBonusMana = -1;
-            int lineToChangeBonusCriticalChance = -1;
+            HashMap<AttributeType, Integer> attributeTypeToLineToChange = new HashMap<>();
+
             int changeCounter = 0;
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
-                if (stat.getBonusDamage() != 0) {
-                    if (line.contains(AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
-                        lineToChangeBonusDamage = i;
-                        changeCounter++;
-                    }
-                }
-                if (stat.getBonusDefense() != 0) {
-                    if (line.contains(AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
-                        lineToChangeBonusDefense = i;
-                        changeCounter++;
-                    }
-                }
-                if (stat.getBonusMaxHealth() != 0) {
-                    if (line.contains(AttributeType.BONUS_MAX_HEALTH.getCustomName() + ": " + ChatColor.GRAY + "+")) {
-                        lineToChangeBonusHealth = i;
-                        changeCounter++;
-                    }
-                }
-                if (stat.getBonusMaxMana() != 0) {
-                    if (line.contains(AttributeType.BONUS_MAX_MANA.getCustomName() + ": " + ChatColor.GRAY + "+")) {
-                        lineToChangeBonusMana = i;
-                        changeCounter++;
-                    }
-                }
-                if (stat.getBonusCriticalChance() != 0) {
-                    if (line.contains(AttributeType.BONUS_CRITICAL_CHANCE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
-                        lineToChangeBonusCriticalChance = i;
-                        changeCounter++;
+                for (AttributeType attributeType : AttributeType.values()) {
+                    if (stat.getAttributeValue(attributeType) != 0) {
+                        if (line.contains(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                            attributeTypeToLineToChange.put(attributeType, i);
+                            changeCounter++;
+                        }
                     }
                 }
                 if (changeCounter == 5) {
@@ -183,53 +159,26 @@ public class Enchant {
                 }
             }
 
-            int nextDamageValue = getNextValue(stat.getBonusDamage());
-            if (lineToChangeBonusDamage != -1) {
-                String line = lore.get(lineToChangeBonusDamage);
-                String newLine = line.replace(stat.getBonusDamage() + "", nextDamageValue + "");
-                lore.set(lineToChangeBonusDamage, newLine);
-            }
-            int nextDefenseValue = getNextValue(stat.getBonusDefense());
-            if (lineToChangeBonusDefense != -1) {
-                String line = lore.get(lineToChangeBonusDefense);
-                String newLine = line.replace(stat.getBonusDefense() + "", nextDefenseValue + "");
-                lore.set(lineToChangeBonusDefense, newLine);
-            }
-            int nextHealthValue = getNextValue(stat.getBonusMaxHealth());
-            if (lineToChangeBonusHealth != -1) {
-                String line = lore.get(lineToChangeBonusHealth);
-                String newLine = line.replace(stat.getBonusMaxHealth() + "", nextHealthValue + "");
-                lore.set(lineToChangeBonusHealth, newLine);
-            }
-            int nextManaValue = getNextValue(stat.getBonusMaxMana());
-            if (lineToChangeBonusMana != -1) {
-                String line = lore.get(lineToChangeBonusMana);
-                String newLine = line.replace(stat.getBonusMaxMana() + "", nextManaValue + "");
-                lore.set(lineToChangeBonusMana, newLine);
-            }
-            int nextCriticalValue = getNextValue(stat.getBonusCriticalChance());
-            if (lineToChangeBonusCriticalChance != -1) {
-                String line = lore.get(lineToChangeBonusCriticalChance);
-                String newLine = line.replace(stat.getBonusCriticalChance() + "", nextCriticalValue + "");
-                lore.set(lineToChangeBonusCriticalChance, newLine);
+            HashMap<AttributeType, Integer> attributeTypeToNextValues = new HashMap<>();
+
+            for (AttributeType attributeType : AttributeType.values()) {
+                int nextValue = getNextValue(stat.getAttributeValue(attributeType));
+                if (attributeTypeToLineToChange.containsKey(attributeType)) {
+                    Integer lineToChange = attributeTypeToLineToChange.get(attributeType);
+                    String line = lore.get(lineToChange);
+                    String newLine = line.replace(stat.getAttributeValue(attributeType) + "", nextValue + "");
+                    lore.set(lineToChange, newLine);
+                    attributeTypeToNextValues.put(attributeType, nextValue);
+                }
             }
             itemMeta.setLore(lore);
             this.itemStack.setItemMeta(itemMeta);
 
-            if (lineToChangeBonusDamage != -1) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DAMAGE.name(), nextDamageValue, this.itemStack);
-            }
-            if (lineToChangeBonusDefense != -1) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DEFENSE.name(), nextDefenseValue, this.itemStack);
-            }
-            if (lineToChangeBonusHealth != -1) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_HEALTH.name(), nextHealthValue, this.itemStack);
-            }
-            if (lineToChangeBonusMana != -1) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_MANA.name(), nextManaValue, this.itemStack);
-            }
-            if (lineToChangeBonusCriticalChance != -1) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_CRITICAL_CHANCE.name(), nextCriticalValue, this.itemStack);
+            for (AttributeType attributeType : AttributeType.values()) {
+                if (attributeTypeToNextValues.containsKey(attributeType)) {
+                    Integer nextValue = attributeTypeToNextValues.get(attributeType);
+                    PersistentDataContainerUtil.putInteger(attributeType.name(), nextValue, this.itemStack);
+                }
             }
         }
 
@@ -325,42 +274,17 @@ public class Enchant {
             player.sendMessage("SUCC");
             player.sendMessage("PASSIVE");
 
-            int lineToChangeDamage = -1;
-            int lineToChangeMana = -1;
-            int lineToChangeHealth = -1;
-            int lineToChangeDefense = -1;
-            int lineToChangeCriticalChance = -1;
+            HashMap<AttributeType, Integer> attributeTypeToLineToChange = new HashMap<>();
+
             int changeCounter = 0;
             for (int i = 0; i < lore.size(); i++) {
                 String line = lore.get(i);
-                if (stat.getBonusDamage() != 0) {
-                    if (line.contains(AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
-                        lineToChangeDamage = i;
-                        changeCounter++;
-                    }
-                }
-                if (stat.getBonusDefense() != 0) {
-                    if (line.contains(AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
-                        lineToChangeDefense = i;
-                        changeCounter++;
-                    }
-                }
-                if (stat.getBonusMaxHealth() != 0) {
-                    if (line.contains(AttributeType.BONUS_MAX_HEALTH.getCustomName() + ": " + ChatColor.GRAY + "+")) {
-                        lineToChangeHealth = i;
-                        changeCounter++;
-                    }
-                }
-                if (stat.getBonusMaxMana() != 0) {
-                    if (line.contains(AttributeType.BONUS_MAX_MANA.getCustomName() + ": " + ChatColor.GRAY + "+")) {
-                        lineToChangeMana = i;
-                        changeCounter++;
-                    }
-                }
-                if (stat.getBonusCriticalChance() != 0) {
-                    if (line.contains(AttributeType.BONUS_CRITICAL_CHANCE.getCustomName() + ": " + ChatColor.GRAY + "+")) {
-                        lineToChangeCriticalChance = i;
-                        changeCounter++;
+                for (AttributeType attributeType : AttributeType.values()) {
+                    if (stat.getAttributeValue(attributeType) != 0) {
+                        if (line.contains(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                            attributeTypeToLineToChange.put(attributeType, i);
+                            changeCounter++;
+                        }
                     }
                 }
                 if (changeCounter == 5) {
@@ -368,53 +292,26 @@ public class Enchant {
                 }
             }
 
-            int nextDamageValue = getPreviousValue(stat.getBonusDamage());
-            if (lineToChangeDamage != -1) {
-                String line = lore.get(lineToChangeDamage);
-                String newLine = line.replace(stat.getBonusDamage() + "", nextDamageValue + "");
-                lore.set(lineToChangeDamage, newLine);
-            }
-            int nextDefenseValue = getPreviousValue(stat.getBonusDefense());
-            if (lineToChangeDefense != -1) {
-                String line = lore.get(lineToChangeDefense);
-                String newLine = line.replace(stat.getBonusDefense() + "", nextDefenseValue + "");
-                lore.set(lineToChangeDefense, newLine);
-            }
-            int nextHealthValue = getPreviousValue(stat.getBonusMaxHealth());
-            if (lineToChangeHealth != -1) {
-                String line = lore.get(lineToChangeHealth);
-                String newLine = line.replace(stat.getBonusMaxHealth() + "", nextHealthValue + "");
-                lore.set(lineToChangeHealth, newLine);
-            }
-            int nextManaValue = getPreviousValue(stat.getBonusMaxMana());
-            if (lineToChangeMana != -1) {
-                String line = lore.get(lineToChangeMana);
-                String newLine = line.replace(stat.getBonusMaxMana() + "", nextManaValue + "");
-                lore.set(lineToChangeMana, newLine);
-            }
-            int nextCriticalChanceValue = getPreviousValue(stat.getBonusCriticalChance());
-            if (lineToChangeCriticalChance != -1) {
-                String line = lore.get(lineToChangeCriticalChance);
-                String newLine = line.replace(stat.getBonusCriticalChance() + "", nextCriticalChanceValue + "");
-                lore.set(lineToChangeCriticalChance, newLine);
+            HashMap<AttributeType, Integer> attributeTypeToNextValues = new HashMap<>();
+
+            for (AttributeType attributeType : AttributeType.values()) {
+                int nextValue = getPreviousValue(stat.getAttributeValue(attributeType));
+                if (attributeTypeToLineToChange.containsKey(attributeType)) {
+                    Integer lineToChange = attributeTypeToLineToChange.get(attributeType);
+                    String line = lore.get(lineToChange);
+                    String newLine = line.replace(stat.getAttributeValue(attributeType) + "", nextValue + "");
+                    lore.set(lineToChange, newLine);
+                    attributeTypeToNextValues.put(attributeType, nextValue);
+                }
             }
             itemMeta.setLore(lore);
             this.itemStack.setItemMeta(itemMeta);
 
-            if (lineToChangeDamage != -1) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DAMAGE.name(), nextDamageValue, this.itemStack);
-            }
-            if (lineToChangeDefense != -1) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DEFENSE.name(), nextDefenseValue, this.itemStack);
-            }
-            if (lineToChangeHealth != -1) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_HEALTH.name(), nextHealthValue, this.itemStack);
-            }
-            if (lineToChangeMana != -1) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_MANA.name(), nextManaValue, this.itemStack);
-            }
-            if (lineToChangeCriticalChance != -1) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_CRITICAL_CHANCE.name(), nextCriticalChanceValue, this.itemStack);
+            for (AttributeType attributeType : AttributeType.values()) {
+                if (attributeTypeToNextValues.containsKey(attributeType)) {
+                    Integer nextValue = attributeTypeToNextValues.get(attributeType);
+                    PersistentDataContainerUtil.putInteger(attributeType.name(), nextValue, this.itemStack);
+                }
             }
         }
 

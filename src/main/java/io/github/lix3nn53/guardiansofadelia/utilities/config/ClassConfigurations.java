@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.config.SkillComponentLoader;
@@ -55,23 +56,26 @@ public class ClassConfigurations {
             GuardiansOfAdelia.getInstance().getLogger().info("colorStr: " + colorStr);
             ChatColor color = ChatColor.valueOf(colorStr);
 
+            String mainElementStr = fileConfiguration.getString("mainElement");
+            ElementType mainElement = ElementType.valueOf(mainElementStr);
+
             int tier = fileConfiguration.getInt("tier");
 
             List<String> description = fileConfiguration.getStringList("description");
 
             int classIconCustomModelData = fileConfiguration.getInt("classIconCustomModelData");
 
-            int attributeTierBonusElementDamage = fileConfiguration.getInt("attributeTierBonusElementDamage");
-            int attributeTierBonusElementDefense = fileConfiguration.getInt("attributeTierBonusElementDefense");
-            int attributeTierBonusMaxHealth = fileConfiguration.getInt("attributeTierBonusMaxHealth");
-            int attributeTierBonusMaxMana = fileConfiguration.getInt("attributeTierBonusMaxMana");
-            int attributeTierBonusCriticalChance = fileConfiguration.getInt("attributeTierBonusCriticalChance");
+            int attributeElementDamage = fileConfiguration.getInt("attributeElementDamage");
+            int attributeElementDefense = fileConfiguration.getInt("attributeElementDefense");
+            int attributeMaxHealth = fileConfiguration.getInt("attributeMaxHealth");
+            int attributeMaxMana = fileConfiguration.getInt("attributeMaxMana");
+            int attributeCriticalChance = fileConfiguration.getInt("attributeCriticalChance");
             HashMap<AttributeType, Integer> attributeTiers = new HashMap<>();
-            attributeTiers.put(AttributeType.BONUS_ELEMENT_DAMAGE, attributeTierBonusElementDamage);
-            attributeTiers.put(AttributeType.BONUS_ELEMENT_DEFENSE, attributeTierBonusElementDefense);
-            attributeTiers.put(AttributeType.BONUS_MAX_HEALTH, attributeTierBonusMaxHealth);
-            attributeTiers.put(AttributeType.BONUS_MAX_MANA, attributeTierBonusMaxMana);
-            attributeTiers.put(AttributeType.BONUS_CRITICAL_CHANCE, attributeTierBonusCriticalChance);
+            attributeTiers.put(AttributeType.BONUS_ELEMENT_DAMAGE, attributeElementDamage);
+            attributeTiers.put(AttributeType.BONUS_ELEMENT_DEFENSE, attributeElementDefense);
+            attributeTiers.put(AttributeType.BONUS_MAX_HEALTH, attributeMaxHealth);
+            attributeTiers.put(AttributeType.BONUS_MAX_MANA, attributeMaxMana);
+            attributeTiers.put(AttributeType.BONUS_CRITICAL_CHANCE, attributeCriticalChance);
 
             HashMap<Integer, Skill> skillSet = new HashMap<>();
 
@@ -132,7 +136,7 @@ public class ClassConfigurations {
                 isDefaultOffhandWeapon = fileConfiguration.getBoolean("isDefaultOffhandWeapon");
             }
 
-            RPGClass rpgClass = new RPGClass(color, className, tier, classIconCustomModelData, attributeTiers, skillSet,
+            RPGClass rpgClass = new RPGClass(color, mainElement, className, tier, classIconCustomModelData, attributeTiers, skillSet,
                     shieldGearTypes, weaponGearTypes, armorGearTypes, hasDefaultOffhand, isDefaultOffhandWeapon, description);
 
             RPGClassManager.addClass(className, rpgClass);

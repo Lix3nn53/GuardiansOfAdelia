@@ -11,11 +11,11 @@ description:
   - "Rogues are an expert at dealing"
   - "damage in a short amount of time!"
 classIconCustomModelData: 19
-attributeTierBonusElementDamage: 5
-attributeTierBonusElementDefense: 3
-attributeTierBonusMaxHealth: 6
-attributeTierBonusMaxMana: 1
-attributeTierBonusCriticalChance: 1
+attributeElementDamage: 5
+attributeElementDefense: 3
+attributeMaxHealth: 6
+attributeMaxMana: 1
+attributeCriticalChance: 1
 weaponGearTypes:
   - "DAGGER"
   - "SWORD"

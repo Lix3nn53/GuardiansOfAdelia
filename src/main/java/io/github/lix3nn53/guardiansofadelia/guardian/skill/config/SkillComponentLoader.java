@@ -105,8 +105,8 @@ public class SkillComponentLoader {
             return new InitializeTrigger(configurationSection);
         } else if (componentType.equals(CompanionSpawnTrigger.class.getSimpleName())) {
             return new CompanionSpawnTrigger(configurationSection);
-        } else if (componentType.equals(TookPhysicalDamageTrigger.class.getSimpleName())) {
-            return new TookPhysicalDamageTrigger(configurationSection);
+        } else if (componentType.equals(TookDamageTrigger.class.getSimpleName())) {
+            return new TookDamageTrigger(configurationSection);
         } else if (componentType.equals(HealthCondition.class.getSimpleName())) {
             return new HealthCondition(configurationSection);
         } else if (componentType.equals(SavedEntityCondition.class.getSimpleName())) {
@@ -121,16 +121,16 @@ public class SkillComponentLoader {
             return new ImmunityRemoveMechanic(configurationSection);
         } else if (componentType.equals(SilenceMechanic.class.getSimpleName())) {
             return new SilenceMechanic(configurationSection);
-        } else if (componentType.equals(TookMeleeDamageTrigger.class.getSimpleName())) {
-            return new TookMeleeDamageTrigger(configurationSection);
+        } else if (componentType.equals(NormalAttackTrigger.class.getSimpleName())) {
+            return new NormalAttackTrigger(configurationSection);
         } else if (componentType.equals(RootMechanic.class.getSimpleName())) {
             return new RootMechanic(configurationSection);
         } else if (componentType.equals(MessageMechanic.class.getSimpleName())) {
             return new MessageMechanic(configurationSection);
         } else if (componentType.equals(FireMechanic.class.getSimpleName())) {
             return new FireMechanic(configurationSection);
-        } else if (componentType.equals(RangedAttackTrigger.class.getSimpleName())) {
-            return new RangedAttackTrigger(configurationSection);
+        } else if (componentType.equals(SkillAttackTrigger.class.getSimpleName())) {
+            return new SkillAttackTrigger(configurationSection);
         } else if (componentType.equals(SavedEntitySpawnTrigger.class.getSimpleName())) {
             return new SavedEntitySpawnTrigger(configurationSection);
         } else if (componentType.equals(ValueCondition.class.getSimpleName())) {
@@ -161,14 +161,8 @@ public class SkillComponentLoader {
             return new SingleTarget(configurationSection);
         } else if (componentType.equals(DirectionCondition.class.getSimpleName())) {
             return new DirectionCondition(configurationSection);
-        } else if (componentType.equals(MagicAttackTrigger.class.getSimpleName())) {
-            return new MagicAttackTrigger(configurationSection);
         } else if (componentType.equals(SkillCastTrigger.class.getSimpleName())) {
             return new SkillCastTrigger(configurationSection);
-        } else if (componentType.equals(MeleeAttackTrigger.class.getSimpleName())) {
-            return new MeleeAttackTrigger(configurationSection);
-        } else if (componentType.equals(TookMagicalDamageTrigger.class.getSimpleName())) {
-            return new TookMagicalDamageTrigger(configurationSection);
         } else if (componentType.equals(ManaMechanic.class.getSimpleName())) {
             return new ManaMechanic(configurationSection);
         } else if (componentType.equals(TauntMechanic.class.getSimpleName())) {

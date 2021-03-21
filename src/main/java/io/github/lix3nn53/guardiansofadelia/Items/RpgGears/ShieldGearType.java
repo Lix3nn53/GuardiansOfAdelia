@@ -40,13 +40,4 @@ public enum ShieldGearType {
 
         return 0;
     }
-
-    public double getMagicDefenseReduction() {
-        switch (this) {
-            case SHIELD:
-                return 1;
-        }
-
-        return 0;
-    }
 }

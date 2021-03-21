@@ -4,10 +4,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -19,7 +19,7 @@ public class DamageMechanic extends MechanicComponent {
 
     private final List<Double> damageList;
     private final List<Double> damageMultiplyList; // Multiply this value with according attribute of attacker to determine damage value
-    private final DamageType damageType;
+    private final ElementType damageType;
     private final String multiplyWithValue;
 
     public DamageMechanic(ConfigurationSection configurationSection) {
@@ -39,7 +39,7 @@ public class DamageMechanic extends MechanicComponent {
             this.multiplyWithValue = null;
         }
 
-        this.damageType = DamageType.valueOf(configurationSection.getString("damageType"));
+        this.damageType = ElementType.valueOf(configurationSection.getString("damageType"));
         this.damageList = configurationSection.contains("damageList") ? configurationSection.getDoubleList("damageList") : new ArrayList<>();
         this.damageMultiplyList = configurationSection.contains("damageMultiplyList") ? configurationSection.getDoubleList("damageMultiplyList") : new ArrayList<>();
 
@@ -200,23 +200,5 @@ public class DamageMechanic extends MechanicComponent {
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
-    }
-
-
-    public enum DamageType {
-        MAGIC, MELEE, RANGED;
-
-        @Override
-        public String toString() {
-            switch (this) {
-                case MAGIC:
-                    return ChatColor.BLUE + "Magic Damage";
-                case MELEE:
-                    return ChatColor.RED + "Melee Damage";
-                case RANGED:
-                    return ChatColor.GOLD + "Ranged Damage";
-            }
-            return "NULL";
-        }
     }
 }

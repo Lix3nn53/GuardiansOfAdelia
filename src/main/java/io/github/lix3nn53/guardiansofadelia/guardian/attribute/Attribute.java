@@ -25,23 +25,23 @@ public class Attribute {
         return invested;
     }
 
-    public void setInvested(int invested, RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+    public void setInvested(int invested, RPGCharacterStats rpgCharacterStats) {
         this.invested = invested;
-        if (fixDisplay) {
+        if (attributeType.getFixDisplayOnChange()) {
             onValueChange(rpgCharacterStats);
         }
     }
 
-    public void investPoint(RPGCharacterStats rpgCharacterStats, int amount, boolean fixDisplay) {
+    public void investPoint(RPGCharacterStats rpgCharacterStats, int amount) {
         this.invested += amount;
-        if (fixDisplay) {
+        if (attributeType.getFixDisplayOnChange()) {
             onValueChange(rpgCharacterStats);
         }
     }
 
-    public void downgradePoint(RPGCharacterStats rpgCharacterStats, int amount, boolean fixDisplay) {
+    public void downgradePoint(RPGCharacterStats rpgCharacterStats, int amount) {
         this.invested -= amount;
-        if (fixDisplay) {
+        if (attributeType.getFixDisplayOnChange()) {
             onValueChange(rpgCharacterStats);
         }
     }
@@ -58,7 +58,7 @@ public class Attribute {
         return 0;
     }
 
-    public void clearEquipment(RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+    public void clearEquipment(RPGCharacterStats rpgCharacterStats) {
         this.bonusFromHelmet = 0;
         this.bonusFromChestplate = 0;
         this.bonusFromLeggings = 0;
@@ -66,20 +66,20 @@ public class Attribute {
         this.bonusFromMainhand = 0;
         this.bonusFromOffhand = 0;
 
-        if (fixDisplay) {
+        if (attributeType.getFixDisplayOnChange()) {
             onValueChange(rpgCharacterStats);
         }
     }
 
-    public void clearPassive(RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+    public void clearPassive(RPGCharacterStats rpgCharacterStats) {
         this.bonusFromPassive = 0;
 
-        if (fixDisplay) {
+        if (attributeType.getFixDisplayOnChange()) {
             onValueChange(rpgCharacterStats);
         }
     }
 
-    public void removeBonus(EquipmentSlot equipmentSlot, RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+    public void removeBonus(EquipmentSlot equipmentSlot, RPGCharacterStats rpgCharacterStats) {
         switch (equipmentSlot) {
             case HAND:
                 this.bonusFromMainhand = 0;
@@ -101,12 +101,12 @@ public class Attribute {
                 break;
         }
 
-        if (fixDisplay) {
+        if (attributeType.getFixDisplayOnChange()) {
             onValueChange(rpgCharacterStats);
         }
     }
 
-    public void setBonus(EquipmentSlot equipmentSlot, RPGCharacterStats rpgCharacterStats, int bonus, boolean fixDisplay) {
+    public void setBonus(EquipmentSlot equipmentSlot, RPGCharacterStats rpgCharacterStats, int bonus) {
         switch (equipmentSlot) {
             case HAND:
                 this.bonusFromMainhand = bonus;
@@ -128,22 +128,22 @@ public class Attribute {
                 break;
         }
 
-        if (fixDisplay) {
+        if (attributeType.getFixDisplayOnChange()) {
             onValueChange(rpgCharacterStats);
         }
         //onBonusChangeFillEmpty(player, rpgCharacterStats, bonusPointDifference);
     }
 
-    public void addBonusToPassive(int bonus, RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+    public void addBonusToPassive(int bonus, RPGCharacterStats rpgCharacterStats) {
         bonusFromPassive += bonus;
-        if (fixDisplay) {
+        if (attributeType.getFixDisplayOnChange()) {
             onValueChange(rpgCharacterStats);
         }
     }
 
-    public void removeBonusFromPassive(int remove, RPGCharacterStats rpgCharacterStats, boolean fixDisplay) {
+    public void removeBonusFromPassive(int remove, RPGCharacterStats rpgCharacterStats) {
         bonusFromPassive -= remove;
-        if (fixDisplay) {
+        if (attributeType.getFixDisplayOnChange()) {
             onValueChange(rpgCharacterStats);
         }
     }
@@ -154,17 +154,11 @@ public class Attribute {
 
     private void onValueChange(RPGCharacterStats rpgCharacterStats) {
         switch (attributeType) {
-            case BONUS_ELEMENT_DAMAGE:
-                break;
-            case BONUS_ELEMENT_DEFENSE:
-                break;
             case BONUS_MAX_HEALTH:
                 rpgCharacterStats.onMaxHealthChange();
                 break;
             case BONUS_MAX_MANA:
                 rpgCharacterStats.onCurrentManaChange();
-                break;
-            case BONUS_CRITICAL_CHANCE:
                 break;
         }
     }

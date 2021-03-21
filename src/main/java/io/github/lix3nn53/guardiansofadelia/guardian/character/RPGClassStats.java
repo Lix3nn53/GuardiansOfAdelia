@@ -82,28 +82,16 @@ public class RPGClassStats {
         MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Congratulations, your new level is " + ChatColor.GOLD + newLevel + "");
 
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-        int bonusDamage = rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_ELEMENT_DAMAGE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_ELEMENT_DAMAGE, newLevel - 1);
-        int bonusDef = rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_ELEMENT_DEFENSE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_ELEMENT_DEFENSE, newLevel - 1);
-        int bonusHealth = rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_MAX_HEALTH, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_MAX_HEALTH, newLevel - 1);
-        int bonusMana = rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_MAX_MANA, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_MAX_MANA, newLevel - 1);
-        int bonusCriticalChance = rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_CRITICAL_CHANCE, newLevel) - rpgClass.getAttributeBonusForLevel(AttributeType.BONUS_CRITICAL_CHANCE, newLevel - 1);
-
-        if (bonusDamage + bonusMana + bonusHealth + bonusDef + bonusCriticalChance > 0) {
-            player.sendMessage("");
-            MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Stats Gained");
-            final StringBuilder sb = new StringBuilder();
-            if (bonusDamage > 0)
-                sb.append(ChatColor.RED + "+" + bonusDamage + AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName());
-            if (bonusDef > 0)
-                sb.append(ChatColor.AQUA + "+" + bonusDef + AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName());
-            if (bonusHealth > 0)
-                sb.append(ChatColor.DARK_GREEN + "+" + bonusHealth + AttributeType.BONUS_MAX_HEALTH.getCustomName());
-            if (bonusMana > 0)
-                sb.append(ChatColor.BLUE + "+" + bonusMana + AttributeType.BONUS_MAX_MANA.getCustomName());
-            if (bonusCriticalChance > 0)
-                sb.append(ChatColor.GOLD + "+" + bonusCriticalChance + AttributeType.BONUS_CRITICAL_CHANCE.getCustomName());
-            MessageUtils.sendCenteredMessage(player, sb.toString());
+        player.sendMessage("");
+        MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Stats Gained");
+        final StringBuilder sb = new StringBuilder();
+        for (AttributeType attributeType : AttributeType.values()) {
+            int bonus = rpgClass.getAttributeBonusForLevel(attributeType, newLevel) - rpgClass.getAttributeBonusForLevel(attributeType, newLevel - 1);
+            if (bonus > 0) {
+                sb.append(ChatColor.RED + "+" + bonus + attributeType.getCustomName());
+            }
         }
+        MessageUtils.sendCenteredMessage(player, sb.toString());
 
         MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
     }

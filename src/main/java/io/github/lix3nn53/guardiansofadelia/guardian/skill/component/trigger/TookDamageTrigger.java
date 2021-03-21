@@ -10,14 +10,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TookMeleeDamageTrigger extends TriggerComponent {
+public class TookDamageTrigger extends TriggerComponent {
 
     private final List<Integer> cooldowns;
     LivingEntity caster;
     int skillLevel;
     int castCounter;
 
-    public TookMeleeDamageTrigger(ConfigurationSection configurationSection) {
+    public TookDamageTrigger(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 
         if (configurationSection.contains("cooldowns")) {
@@ -35,14 +35,14 @@ public class TookMeleeDamageTrigger extends TriggerComponent {
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
-        TookMeleeDamageTrigger tookPhysicalDamageTrigger = this;
+        TookDamageTrigger tookPhysicalDamageTrigger = this;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningTookMeleeDamage((Player) target, tookPhysicalDamageTrigger);
+                        TriggerListener.startListeningTookDamage((Player) target, tookPhysicalDamageTrigger);
                     }
                 }
             }
@@ -66,15 +66,15 @@ public class TookMeleeDamageTrigger extends TriggerComponent {
 
         if (!cast) return false;
 
-        TookMeleeDamageTrigger trigger = this;
+        TookDamageTrigger trigger = this;
 
         if (cooldowns.isEmpty()) {
-            TriggerListener.startListeningTookMeleeDamage(player, trigger);
+            TriggerListener.startListeningTookDamage(player, trigger);
         } else {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    TriggerListener.startListeningTookMeleeDamage(player, trigger);
+                    TriggerListener.startListeningTookDamage(player, trigger);
                 }
             }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
         }

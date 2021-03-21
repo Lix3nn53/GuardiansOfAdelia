@@ -11,11 +11,11 @@ description:
   - "Knights battle foes at close range while"
   - "allies support them from all sides."
 classIconCustomModelData: 15
-attributeTierBonusElementDamage: 3
-attributeTierBonusElementDefense: 3
-attributeTierBonusMaxHealth: 9
-attributeTierBonusMaxMana: 1
-attributeTierBonusCriticalChance: 0
+attributeElementDamage: 3
+attributeElementDefense: 3
+attributeMaxHealth: 9
+attributeMaxMana: 1
+attributeCriticalChance: 0
 weaponGearTypes:
   - "SWORD"
   - "BATTLE_AXE"

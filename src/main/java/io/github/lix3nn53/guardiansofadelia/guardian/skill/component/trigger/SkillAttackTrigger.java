@@ -10,14 +10,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MeleeAttackTrigger extends TriggerComponent {
+public class SkillAttackTrigger extends TriggerComponent {
 
     private final List<Integer> cooldowns;
     LivingEntity caster;
     int skillLevel;
     int castCounter;
 
-    public MeleeAttackTrigger(ConfigurationSection configurationSection) {
+    public SkillAttackTrigger(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 
         if (configurationSection.contains("cooldowns")) {
@@ -39,14 +39,14 @@ public class MeleeAttackTrigger extends TriggerComponent {
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
-        MeleeAttackTrigger meleeAttackTrigger = this;
+        SkillAttackTrigger normalAttackTrigger = this;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningMeleeAttack((Player) target, meleeAttackTrigger);
+                        TriggerListener.startListeningSkillAttack((Player) target, normalAttackTrigger);
                     }
                 }
             }
@@ -70,15 +70,15 @@ public class MeleeAttackTrigger extends TriggerComponent {
 
         if (!cast) return false;
 
-        MeleeAttackTrigger trigger = this;
+        SkillAttackTrigger trigger = this;
 
         if (cooldowns.isEmpty()) {
-            TriggerListener.startListeningMeleeAttack(attacker, trigger);
+            TriggerListener.startListeningSkillAttack(attacker, trigger);
         } else {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    TriggerListener.startListeningMeleeAttack(attacker, trigger);
+                    TriggerListener.startListeningSkillAttack(attacker, trigger);
                 }
             }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
         }

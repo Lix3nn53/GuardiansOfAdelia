@@ -48,20 +48,10 @@ public class WeaponMelee implements RPGGear {
         lore.add(ChatColor.AQUA + "ø Attack Speed: " + attackSpeed.getLoreString());
         if (!statPassive.isEmpty()) {
             lore.add("");
-            if (statPassive.getBonusDamage() != 0) {
-                lore.add(AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusDamage());
-            }
-            if (statPassive.getBonusDefense() != 0) {
-                lore.add(AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusDefense());
-            }
-            if (statPassive.getBonusMaxHealth() != 0) {
-                lore.add(AttributeType.BONUS_MAX_HEALTH.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusMaxHealth());
-            }
-            if (statPassive.getBonusMaxMana() != 0) {
-                lore.add(AttributeType.BONUS_MAX_MANA.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusMaxMana());
-            }
-            if (statPassive.getBonusCriticalChance() != 0) {
-                lore.add(AttributeType.BONUS_CRITICAL_CHANCE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusCriticalChance());
+            for (AttributeType attributeType : AttributeType.values()) {
+                if (statPassive.getAttributeValue(attributeType) != 0) {
+                    lore.add(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getAttributeValue(attributeType));
+                }
             }
         }
         lore.add("");
@@ -90,20 +80,10 @@ public class WeaponMelee implements RPGGear {
 
         PersistentDataContainerUtil.putInteger("elementDamage", elementDamage, this.itemStack);
 
-        if (statPassive.getBonusDamage() != 0) {
-            PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DAMAGE.name(), statPassive.getBonusDamage(), this.itemStack);
-        }
-        if (statPassive.getBonusDefense() != 0) {
-            PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DEFENSE.name(), statPassive.getBonusDefense(), this.itemStack);
-        }
-        if (statPassive.getBonusMaxHealth() != 0) {
-            PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_HEALTH.name(), statPassive.getBonusMaxHealth(), this.itemStack);
-        }
-        if (statPassive.getBonusMaxMana() != 0) {
-            PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_MANA.name(), statPassive.getBonusMaxMana(), this.itemStack);
-        }
-        if (statPassive.getBonusCriticalChance() != 0) {
-            PersistentDataContainerUtil.putInteger(AttributeType.BONUS_CRITICAL_CHANCE.name(), statPassive.getBonusCriticalChance(), this.itemStack);
+        for (AttributeType attributeType : AttributeType.values()) {
+            if (statPassive.getAttributeValue(attributeType) != 0) {
+                PersistentDataContainerUtil.putInteger(attributeType.name(), statPassive.getAttributeValue(attributeType), this.itemStack);
+            }
         }
         if (gearSetExist) {
             PersistentDataContainerUtil.putString("gearSet", gearSetStr, this.itemStack);

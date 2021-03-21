@@ -3,23 +3,16 @@ package io.github.lix3nn53.guardiansofadelia.Items.stats;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 public class StatPassive implements Stat {
 
-    private int bonusDamage = 0;
-    private int bonusDefense = 0;
-    private int bonusMaxMana = 0;
-    private int bonusMaxHealth = 0;
-    private int bonusCriticalChance = 0;
+    HashMap<AttributeType, Integer> attributeTypeToValue = new HashMap<>();
 
-    public StatPassive(int bonusDamage, int bonusDefense, int bonusMaxHealth, int bonusMaxMana, int bonusCriticalChance) {
-        this.bonusDamage = bonusDamage;
-        this.bonusMaxMana = bonusMaxMana;
-        this.bonusMaxHealth = bonusMaxHealth;
-        this.bonusDefense = bonusDefense;
-        this.bonusCriticalChance = bonusCriticalChance;
+    public StatPassive(HashMap<AttributeType, Integer> attributeTypeToValue) {
+        this.attributeTypeToValue = attributeTypeToValue;
     }
 
     public StatPassive(int minStatValue, int maxStatValue, int minNumberOfStats) {
@@ -49,61 +42,42 @@ public class StatPassive implements Stat {
         }
     }
 
-    public int getBonusDamage() {
-        return bonusDamage;
-    }
+    public int getAttributeValue(AttributeType attributeType) {
+        if (attributeTypeToValue.containsKey(attributeType)) {
+            return attributeTypeToValue.get(attributeType);
+        }
 
-    public int getBonusMaxMana() {
-        return bonusMaxMana;
-    }
-
-    public int getBonusMaxHealth() {
-        return bonusMaxHealth;
-    }
-
-    public int getBonusDefense() {
-        return bonusDefense;
-    }
-
-    public int getBonusCriticalChance() {
-        return bonusCriticalChance;
+        return 0;
     }
 
     public boolean isEmpty() {
-        return (bonusDamage + bonusMaxMana + bonusMaxHealth + bonusDefense + bonusCriticalChance) < 1;
+        int total = 0;
+        for (int i : attributeTypeToValue.values()) {
+            total += i;
+        }
+
+        return total < 1;
     }
 
     private void satisfyOneRandomly(int minStatValue, int maxStatValue) {
-        List<String> unUsedStats = new ArrayList<>();
-        if (this.bonusDamage == 0) {
-            unUsedStats.add(AttributeType.BONUS_ELEMENT_DAMAGE.name());
+        List<AttributeType> unUsedStats = new ArrayList<>();
+        for (AttributeType attributeType : AttributeType.values()) {
+            if (attributeTypeToValue.containsKey(attributeType)) {
+                int value = attributeTypeToValue.get(attributeType);
+                if (value == 0) {
+                    unUsedStats.add(attributeType);
+                }
+            } else {
+                unUsedStats.add(attributeType);
+            }
         }
-        if (this.bonusDefense == 0) {
-            unUsedStats.add(AttributeType.BONUS_ELEMENT_DEFENSE.name());
-        }
-        if (this.bonusMaxHealth == 0) {
-            unUsedStats.add(AttributeType.BONUS_MAX_HEALTH.name());
-        }
-        if (this.bonusMaxMana == 0) {
-            unUsedStats.add(AttributeType.BONUS_MAX_MANA.name());
-        }
-        if (this.bonusCriticalChance == 0) {
-            unUsedStats.add(AttributeType.BONUS_CRITICAL_CHANCE.name());
-        }
-        int random = new Random().nextInt(unUsedStats.size());
-        String statString = unUsedStats.get(random);
 
-        if (statString.equals(AttributeType.BONUS_ELEMENT_DAMAGE.name())) {
-            this.bonusDamage = getRandomValue(minStatValue, maxStatValue);
-        } else if (statString.equals(AttributeType.BONUS_ELEMENT_DEFENSE.name())) {
-            this.bonusDefense = getRandomValue(minStatValue, maxStatValue);
-        } else if (statString.equals(AttributeType.BONUS_MAX_HEALTH.name())) {
-            this.bonusMaxHealth = getRandomValue(minStatValue, maxStatValue);
-        } else if (statString.equals(AttributeType.BONUS_MAX_MANA.name())) {
-            this.bonusMaxMana = getRandomValue(minStatValue, maxStatValue);
-        } else if (statString.equals(AttributeType.BONUS_CRITICAL_CHANCE.name())) {
-            this.bonusCriticalChance = getRandomValue(minStatValue, maxStatValue);
-        }
+        int random = new Random().nextInt(unUsedStats.size());
+        AttributeType statToSatisfy = unUsedStats.get(random);
+
+        int randomValue = getRandomValue(minStatValue, maxStatValue);
+
+        attributeTypeToValue.put(statToSatisfy, randomValue);
     }
 
     private int getRandomValue(int minStatValue, int maxStatValue) {

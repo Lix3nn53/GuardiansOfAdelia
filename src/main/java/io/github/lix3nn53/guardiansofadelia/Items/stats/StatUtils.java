@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class StatUtils {
@@ -35,30 +36,18 @@ public class StatUtils {
                 return new StatOneType(damage);
             }
         } else if (type.equals(GearStatType.PASSIVE_GEAR)) {
-            int bonusDamage = 0;
-            int bonusDefense = 0;
-            int bonusHealth = 0;
-            int bonusMana = 0;
-            int bonusCriticalChance = 0;
+            HashMap<AttributeType, Integer> attributeTypeToValue = new HashMap<>();
 
-            if (PersistentDataContainerUtil.hasInteger(item, AttributeType.BONUS_ELEMENT_DAMAGE.name())) {
-                bonusDamage = PersistentDataContainerUtil.getInteger(item, AttributeType.BONUS_ELEMENT_DAMAGE.name());
-            }
-            if (PersistentDataContainerUtil.hasInteger(item, AttributeType.BONUS_ELEMENT_DEFENSE.name())) {
-                bonusDefense = PersistentDataContainerUtil.getInteger(item, AttributeType.BONUS_ELEMENT_DEFENSE.name());
-            }
-            if (PersistentDataContainerUtil.hasInteger(item, AttributeType.BONUS_MAX_HEALTH.name())) {
-                bonusHealth = PersistentDataContainerUtil.getInteger(item, AttributeType.BONUS_MAX_HEALTH.name());
-            }
-            if (PersistentDataContainerUtil.hasInteger(item, AttributeType.BONUS_MAX_MANA.name())) {
-                bonusMana = PersistentDataContainerUtil.getInteger(item, AttributeType.BONUS_MAX_MANA.name());
-            }
-            if (PersistentDataContainerUtil.hasInteger(item, AttributeType.BONUS_CRITICAL_CHANCE.name())) {
-                bonusCriticalChance = PersistentDataContainerUtil.getInteger(item, AttributeType.BONUS_CRITICAL_CHANCE.name());
+            for (AttributeType attributeType : AttributeType.values()) {
+                if (PersistentDataContainerUtil.hasInteger(item, attributeType.name())) {
+                    int value = PersistentDataContainerUtil.getInteger(item, attributeType.name());
+                    attributeTypeToValue.put(attributeType, value);
+                }
             }
 
-            return new StatPassive(bonusDamage, bonusDefense, bonusHealth, bonusMana, bonusCriticalChance);
+            return new StatPassive(attributeTypeToValue);
         }
+
         return new StatOneType(0);
     }
 
@@ -162,20 +151,10 @@ public class StatUtils {
             StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
 
             //add persistent data before getting itemMeta so we don't lost them
-            if (statPassive.getBonusDamage() != 0) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DAMAGE.name(), statPassive.getBonusDamage(), itemStack);
-            }
-            if (statPassive.getBonusDefense() != 0) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_ELEMENT_DEFENSE.name(), statPassive.getBonusDefense(), itemStack);
-            }
-            if (statPassive.getBonusMaxHealth() != 0) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_HEALTH.name(), statPassive.getBonusMaxHealth(), itemStack);
-            }
-            if (statPassive.getBonusMaxMana() != 0) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_MAX_MANA.name(), statPassive.getBonusMaxMana(), itemStack);
-            }
-            if (statPassive.getBonusCriticalChance() != 0) {
-                PersistentDataContainerUtil.putInteger(AttributeType.BONUS_CRITICAL_CHANCE.name(), statPassive.getBonusCriticalChance(), itemStack);
+            for (AttributeType attributeType : AttributeType.values()) {
+                if (statPassive.getAttributeValue(attributeType) != 0) {
+                    PersistentDataContainerUtil.putInteger(attributeType.name(), statPassive.getAttributeValue(attributeType), itemStack);
+                }
             }
 
             ItemMeta itemMeta = itemStack.getItemMeta();
@@ -183,25 +162,11 @@ public class StatUtils {
 
             int i = lore.indexOf(itemTier.getTierString());
 
-            if (statPassive.getBonusDamage() != 0) {
-                lore.add(i, AttributeType.BONUS_ELEMENT_DAMAGE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusDamage());
-                i++;
-            }
-            if (statPassive.getBonusDefense() != 0) {
-                lore.add(i, AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusDefense());
-                i++;
-            }
-            if (statPassive.getBonusMaxHealth() != 0) {
-                lore.add(i, AttributeType.BONUS_MAX_HEALTH.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusMaxHealth());
-                i++;
-            }
-            if (statPassive.getBonusMaxMana() != 0) {
-                lore.add(i, AttributeType.BONUS_MAX_MANA.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusMaxMana());
-                i++;
-            }
-            if (statPassive.getBonusCriticalChance() != 0) {
-                lore.add(i, AttributeType.BONUS_CRITICAL_CHANCE.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getBonusCriticalChance());
-                i++;
+            for (AttributeType attributeType : AttributeType.values()) {
+                if (statPassive.getAttributeValue(attributeType) != 0) {
+                    lore.add(i, attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getAttributeValue(attributeType));
+                    i++;
+                }
             }
             lore.add(i, "");
 
