@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CharacterInfoSlot {
@@ -64,7 +65,7 @@ public class CharacterInfoSlot {
                 lore.add("");
                 lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + rpgCharacterStats.getTotalElementDamage(player, rpgClassStr));
                 lore.add(ChatColor.AQUA + "■ Element Defense: " + ChatColor.GRAY + totalDefense + " (" + (int) (((1.0 - phyReduction) * 100) + 0.5) + "% reduction)");
-                lore.add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + criticalChance + "%");
+                lore.add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
 
                 /*lore.add("");
                 lore.add(ChatColor.GRAY + "(equipment + level + invested points)");

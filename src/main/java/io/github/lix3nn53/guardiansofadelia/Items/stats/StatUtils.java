@@ -186,7 +186,7 @@ public class StatUtils {
             if (!statPassive.isEmpty(true, false)) {
                 for (AttributeType attributeType : AttributeType.values()) {
                     if (statPassive.getAttributeValue(attributeType) != 0) {
-                        lore.add(i, attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getAttributeValue(attributeType));
+                        lore.add(i, attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + (statPassive.getAttributeValue(attributeType) * attributeType.getIncrementPerPoint()));
                         i++;
                     }
                 }
