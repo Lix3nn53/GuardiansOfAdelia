@@ -150,17 +150,21 @@ public class StatUtils {
         if (hasStatType(type)) {
             int minNumberOfElements = itemTier.getMinNumberOfElements(false);
             int minNumberOfAttributes = itemTier.getMinNumberOfAttributes(false);
-            int minStatValue = GearLevel.getMinStatValue(gearLevel, false);
-            int maxStatValue = GearLevel.getMaxStatValue(gearLevel, false);
+            int minAttrValue = GearLevel.getMinStatValue(gearLevel, false, false);
+            int maxAttrValue = GearLevel.getMaxStatValue(gearLevel, false, false);
+            int minElemValue = GearLevel.getMinStatValue(gearLevel, false, true);
+            int maxElemValue = GearLevel.getMaxStatValue(gearLevel, false, true);
             if (type.equals(Material.SHEARS)) { //passive item
                 minNumberOfElements = itemTier.getMinNumberOfElements(true);
                 minNumberOfAttributes = itemTier.getMinNumberOfAttributes(true);
-                minStatValue = GearLevel.getMinStatValue(gearLevel, true);
-                maxStatValue = GearLevel.getMaxStatValue(gearLevel, true);
+                minAttrValue = GearLevel.getMinStatValue(gearLevel, true, false);
+                maxAttrValue = GearLevel.getMaxStatValue(gearLevel, true, false);
+                minElemValue = GearLevel.getMinStatValue(gearLevel, true, true);
+                maxElemValue = GearLevel.getMaxStatValue(gearLevel, true, true);
             }
 
 
-            StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfAttributes, minStatValue, maxStatValue, minNumberOfElements);
+            StatPassive statPassive = new StatPassive(minAttrValue, maxAttrValue, minNumberOfAttributes, minElemValue, maxElemValue, minNumberOfElements);
 
             //add persistent data before getting itemMeta so we don't lost them
             for (AttributeType attributeType : AttributeType.values()) {
@@ -179,20 +183,25 @@ public class StatUtils {
 
             int i = lore.indexOf(itemTier.getTierString());
 
-            for (AttributeType attributeType : AttributeType.values()) {
-                if (statPassive.getAttributeValue(attributeType) != 0) {
-                    lore.add(i, attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getAttributeValue(attributeType));
-                    i++;
+            if (!statPassive.isEmpty(true, false)) {
+                for (AttributeType attributeType : AttributeType.values()) {
+                    if (statPassive.getAttributeValue(attributeType) != 0) {
+                        lore.add(i, attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getAttributeValue(attributeType));
+                        i++;
+                    }
                 }
+                lore.add(i, "");
             }
-            lore.add(i, "");
-            for (ElementType elementType : ElementType.values()) {
-                if (statPassive.getElementValue(elementType) != 0) {
-                    lore.add(i, elementType.getFullName() + ": " + ChatColor.GRAY + "+" + statPassive.getElementValue(elementType));
-                    i++;
+
+            if (!statPassive.isEmpty(false, true)) {
+                for (ElementType elementType : ElementType.values()) {
+                    if (statPassive.getElementValue(elementType) != 0) {
+                        lore.add(i, elementType.getFullName() + ": " + ChatColor.GRAY + "+" + statPassive.getElementValue(elementType));
+                        i++;
+                    }
                 }
+                lore.add(i, "");
             }
-            lore.add(i, "");
 
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);

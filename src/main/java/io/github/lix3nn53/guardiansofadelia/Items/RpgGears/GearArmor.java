@@ -46,7 +46,7 @@ public class GearArmor implements RPGGear {
         lore.add("");
         lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+" + health);
         lore.add(ChatColor.AQUA + "■ Element Defense: " + ChatColor.GRAY + "+" + defense);
-        if (!statPassive.isEmpty()) {
+        if (!statPassive.isEmpty(false, true)) {
             lore.add("");
             /*for (AttributeType attributeType : AttributeType.values()) {
                 if (statPassive.getAttributeValue(attributeType) != 0) {

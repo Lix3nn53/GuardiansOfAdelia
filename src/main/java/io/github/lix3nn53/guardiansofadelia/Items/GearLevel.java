@@ -38,7 +38,11 @@ public class GearLevel {
         return (gearLevel * 10) + 9;
     }
 
-    public static int getMinStatValue(int gearLevel, boolean isPassive) {
+    public static int getMinStatValue(int gearLevel, boolean isPassive, boolean isElement) {
+        if (!isPassive && !isElement) { // Normal items does not have attribute bonus
+            return 0;
+        }
+
         double v = gearLevel * MIN_STAT_MULTIPLIER;
 
         if (!isPassive) {
@@ -48,7 +52,11 @@ public class GearLevel {
         return (int) (v + 0.5);
     }
 
-    public static int getMaxStatValue(int gearLevel, boolean isPassive) {
+    public static int getMaxStatValue(int gearLevel, boolean isPassive, boolean isElement) {
+        if (!isPassive && !isElement) { // Normal items does not have attribute bonus
+            return 0;
+        }
+
         double v = gearLevel * MAX_STAT_MULTIPLIER;
 
         if (!isPassive) {

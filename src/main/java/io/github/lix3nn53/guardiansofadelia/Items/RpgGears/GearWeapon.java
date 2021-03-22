@@ -16,12 +16,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Weapon implements RPGGear {
+public class GearWeapon implements RPGGear {
 
     private final ItemStack itemStack;
 
-    public Weapon(String name, ItemTier tier, Material material, int customModelDataId, int level, WeaponGearType gearType, int elementDamage,
-                  AttackSpeed attackSpeed, int minElemValue, int maxElemValue, int minNumberOfElements, String gearSetStr) {
+    public GearWeapon(String name, ItemTier tier, Material material, int customModelDataId, int level, WeaponGearType gearType, int elementDamage,
+                      AttackSpeed attackSpeed, int minElemValue, int maxElemValue, int minNumberOfElements, String gearSetStr) {
         name = tier.getTierColor() + name;
         boolean gearSetExist = false;
         if (gearSetStr != null && !gearSetStr.equals("")) {
@@ -46,7 +46,7 @@ public class Weapon implements RPGGear {
         lore.add("");
         lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + "+" + elementDamage);
         lore.add(ChatColor.AQUA + "ø Attack Speed: " + attackSpeed.getLoreString());
-        if (!statPassive.isEmpty()) {
+        if (!statPassive.isEmpty(false, true)) {
             lore.add("");
             /*for (AttributeType attributeType : AttributeType.values()) {
                 if (statPassive.getAttributeValue(attributeType) != 0) {

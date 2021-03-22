@@ -48,18 +48,18 @@ public class GearPassive implements RPGGear {
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Passive Gear");
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
-        if (!statPassive.isEmpty()) {
+        if (!statPassive.isEmpty(true, false)) {
             lore.add("");
-
             for (AttributeType attributeType : AttributeType.values()) {
                 int finalValue = finalValuesAttr.get(attributeType);
                 if (finalValue != 0) {
                     lore.add(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + finalValue);
                 }
             }
+        }
 
-            if (maxAttrValue > 0) lore.add("");
-
+        if (!statPassive.isEmpty(false, true)) {
+            lore.add("");
             for (ElementType elementType : ElementType.values()) {
                 int finalValue = finalValuesElem.get(elementType);
                 if (finalValue != 0) {
@@ -67,6 +67,7 @@ public class GearPassive implements RPGGear {
                 }
             }
         }
+
         lore.add("");
         lore.add(tier.getTierString());
 

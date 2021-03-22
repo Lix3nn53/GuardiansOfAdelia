@@ -42,10 +42,17 @@ public class StatPassive implements Stat {
         return 0;
     }
 
-    public boolean isEmpty() {
+    public boolean isEmpty(boolean attr, boolean element) {
         int total = 0;
-        for (int i : attributeTypeToValue.values()) {
-            total += i;
+        if (attr) {
+            for (int i : attributeTypeToValue.values()) {
+                total += i;
+            }
+        }
+        if (element) {
+            for (int i : elementTypeToValue.values()) {
+                total += i;
+            }
         }
 
         return total < 1;
