@@ -9,7 +9,7 @@ public enum ElementType {
     AIR,
     LIGHTNING;
 
-    public String getCustomName() {
+    private String getCustomName() {
         switch (this) {
             case FIRE:
                 return getChatColor() + "Fire";

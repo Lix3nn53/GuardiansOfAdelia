@@ -20,10 +20,9 @@ public class RPGSlotPassive implements RPGSlot {
 
     public StatPassive getBonusStats() {
         if (itemOnSlot != null) {
-            StatPassive stat = (StatPassive) StatUtils.getStat(this.itemOnSlot);
-            return stat;
+            return (StatPassive) StatUtils.getStat(this.itemOnSlot);
         }
-        return new StatPassive(new HashMap<>());
+        return new StatPassive(new HashMap<>(), new HashMap<>());
     }
 
     public ItemStack getItemOnSlot() {

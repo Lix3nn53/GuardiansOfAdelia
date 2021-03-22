@@ -9,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -37,7 +38,6 @@ public class StatUtils {
             }
         } else if (type.equals(GearStatType.PASSIVE_GEAR)) {
             HashMap<AttributeType, Integer> attributeTypeToValue = new HashMap<>();
-
             for (AttributeType attributeType : AttributeType.values()) {
                 if (PersistentDataContainerUtil.hasInteger(item, attributeType.name())) {
                     int value = PersistentDataContainerUtil.getInteger(item, attributeType.name());
@@ -45,7 +45,15 @@ public class StatUtils {
                 }
             }
 
-            return new StatPassive(attributeTypeToValue);
+            HashMap<ElementType, Integer> elementTypeToValue = new HashMap<>();
+            for (ElementType elementType : ElementType.values()) {
+                if (PersistentDataContainerUtil.hasInteger(item, elementType.name())) {
+                    int value = PersistentDataContainerUtil.getInteger(item, elementType.name());
+                    elementTypeToValue.put(elementType, value);
+                }
+            }
+
+            return new StatPassive(attributeTypeToValue, elementTypeToValue);
         }
 
         return new StatOneType(0);
@@ -140,20 +148,29 @@ public class StatUtils {
     public static void addRandomPassiveStats(ItemStack itemStack, int gearLevel, ItemTier itemTier) {
         Material type = itemStack.getType();
         if (hasStatType(type)) {
-            int minNumberOfStats = itemTier.getMinNumberOfStatsNormal();
+            int minNumberOfElements = itemTier.getMinNumberOfElements(false);
+            int minNumberOfAttributes = itemTier.getMinNumberOfAttributes(false);
+            int minStatValue = GearLevel.getMinStatValue(gearLevel, false);
+            int maxStatValue = GearLevel.getMaxStatValue(gearLevel, false);
             if (type.equals(Material.SHEARS)) { //passive item
-                minNumberOfStats = itemTier.getMinNumberOfStatsPassive();
+                minNumberOfElements = itemTier.getMinNumberOfElements(true);
+                minNumberOfAttributes = itemTier.getMinNumberOfAttributes(true);
+                minStatValue = GearLevel.getMinStatValue(gearLevel, true);
+                maxStatValue = GearLevel.getMaxStatValue(gearLevel, true);
             }
 
-            int minStatValue = GearLevel.getMinStatValue(gearLevel, true);
-            int maxStatValue = GearLevel.getMaxStatValue(gearLevel, true);
 
-            StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
+            StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfAttributes, minStatValue, maxStatValue, minNumberOfElements);
 
             //add persistent data before getting itemMeta so we don't lost them
             for (AttributeType attributeType : AttributeType.values()) {
                 if (statPassive.getAttributeValue(attributeType) != 0) {
                     PersistentDataContainerUtil.putInteger(attributeType.name(), statPassive.getAttributeValue(attributeType), itemStack);
+                }
+            }
+            for (ElementType elementType : ElementType.values()) {
+                if (statPassive.getElementValue(elementType) != 0) {
+                    PersistentDataContainerUtil.putInteger(elementType.name(), statPassive.getElementValue(elementType), itemStack);
                 }
             }
 
@@ -165,6 +182,13 @@ public class StatUtils {
             for (AttributeType attributeType : AttributeType.values()) {
                 if (statPassive.getAttributeValue(attributeType) != 0) {
                     lore.add(i, attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getAttributeValue(attributeType));
+                    i++;
+                }
+            }
+            lore.add(i, "");
+            for (ElementType elementType : ElementType.values()) {
+                if (statPassive.getElementValue(elementType) != 0) {
+                    lore.add(i, elementType.getFullName() + ": " + ChatColor.GRAY + "+" + statPassive.getElementValue(elementType));
                     i++;
                 }
             }

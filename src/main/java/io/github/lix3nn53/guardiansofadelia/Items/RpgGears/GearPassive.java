@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
@@ -19,7 +20,8 @@ public class GearPassive implements RPGGear {
     private final ItemStack itemStack;
 
     public GearPassive(String name, ItemTier tier, int customModelData, RPGSlotType passiveType, int level,
-                       int minStatValue, int maxStatValue, int minNumberOfStats, String GearSetStr) {
+                       int minAttrValue, int maxAttrValue, int minNumberOfAttr, int minElemValue, int maxElemValue,
+                       int minNumberOfElement, String GearSetStr) {
         name = tier.getTierColor() + name;
         if (GearSetStr != null && !GearSetStr.equals("")) {
             name = tier.getTierColor() + GearSetStr + " " + name;
@@ -29,11 +31,18 @@ public class GearPassive implements RPGGear {
 
         List<String> lore = new ArrayList<>();
 
-        StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
-        HashMap<AttributeType, Integer> finalValues = new HashMap<>();
+        StatPassive statPassive = new StatPassive(minAttrValue, maxAttrValue, minNumberOfAttr, minElemValue, maxElemValue, minNumberOfElement);
+        HashMap<AttributeType, Integer> finalValuesAttr = new HashMap<>();
+        HashMap<ElementType, Integer> finalValuesElem = new HashMap<>();
+
+
         for (AttributeType attributeType : AttributeType.values()) {
             int finalValue = (int) (statPassive.getAttributeValue(attributeType) * bonusPercent);
-            finalValues.put(attributeType, finalValue);
+            finalValuesAttr.put(attributeType, finalValue);
+        }
+        for (ElementType elementType : ElementType.values()) {
+            int finalValue = (int) (statPassive.getElementValue(elementType) * bonusPercent);
+            finalValuesElem.put(elementType, finalValue);
         }
 
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Passive Gear");
@@ -41,10 +50,20 @@ public class GearPassive implements RPGGear {
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         if (!statPassive.isEmpty()) {
             lore.add("");
+
             for (AttributeType attributeType : AttributeType.values()) {
-                int finalValue = finalValues.get(attributeType);
+                int finalValue = finalValuesAttr.get(attributeType);
                 if (finalValue != 0) {
                     lore.add(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + finalValue);
+                }
+            }
+
+            if (maxAttrValue > 0) lore.add("");
+
+            for (ElementType elementType : ElementType.values()) {
+                int finalValue = finalValuesElem.get(elementType);
+                if (finalValue != 0) {
+                    lore.add(elementType.getFullName() + ": " + ChatColor.GRAY + "+" + finalValue);
                 }
             }
         }
@@ -57,9 +76,15 @@ public class GearPassive implements RPGGear {
         PersistentDataContainerUtil.putString("passive", passiveType.name(), this.itemStack);
 
         for (AttributeType attributeType : AttributeType.values()) {
-            int finalValue = finalValues.get(attributeType);
+            int finalValue = finalValuesAttr.get(attributeType);
             if (finalValue != 0) {
                 PersistentDataContainerUtil.putInteger(attributeType.name(), finalValue, this.itemStack);
+            }
+        }
+        for (ElementType elementType : ElementType.values()) {
+            int finalValue = finalValuesElem.get(elementType);
+            if (finalValue != 0) {
+                PersistentDataContainerUtil.putInteger(elementType.name(), finalValue, this.itemStack);
             }
         }
 

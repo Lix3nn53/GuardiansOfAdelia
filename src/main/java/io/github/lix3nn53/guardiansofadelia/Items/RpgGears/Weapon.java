@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSet;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
-import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import org.bukkit.ChatColor;
@@ -16,12 +16,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeaponMelee implements RPGGear {
+public class Weapon implements RPGGear {
 
     private final ItemStack itemStack;
 
-    public WeaponMelee(String name, ItemTier tier, Material material, int customModelDataId, int level, WeaponGearType gearType, int elementDamage,
-                       AttackSpeed attackSpeed, int minStatValue, int maxStatValue, int minNumberOfStats, String gearSetStr) {
+    public Weapon(String name, ItemTier tier, Material material, int customModelDataId, int level, WeaponGearType gearType, int elementDamage,
+                  AttackSpeed attackSpeed, int minElemValue, int maxElemValue, int minNumberOfElements, String gearSetStr) {
         name = tier.getTierColor() + name;
         boolean gearSetExist = false;
         if (gearSetStr != null && !gearSetStr.equals("")) {
@@ -35,7 +35,7 @@ public class WeaponMelee implements RPGGear {
 
         List<String> lore = new ArrayList<>();
 
-        StatPassive statPassive = new StatPassive(minStatValue, maxStatValue, minNumberOfStats);
+        StatPassive statPassive = new StatPassive(0, 0, 0, minElemValue, maxElemValue, minNumberOfElements);
 
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName());
         if (gearSetExist) {
@@ -48,9 +48,14 @@ public class WeaponMelee implements RPGGear {
         lore.add(ChatColor.AQUA + "ø Attack Speed: " + attackSpeed.getLoreString());
         if (!statPassive.isEmpty()) {
             lore.add("");
-            for (AttributeType attributeType : AttributeType.values()) {
+            /*for (AttributeType attributeType : AttributeType.values()) {
                 if (statPassive.getAttributeValue(attributeType) != 0) {
                     lore.add(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getAttributeValue(attributeType));
+                }
+            }*/
+            for (ElementType elementType : ElementType.values()) {
+                if (statPassive.getElementValue(elementType) != 0) {
+                    lore.add(elementType.getFullName() + ": " + ChatColor.GRAY + "+" + statPassive.getElementValue(elementType));
                 }
             }
         }
@@ -80,9 +85,14 @@ public class WeaponMelee implements RPGGear {
 
         PersistentDataContainerUtil.putInteger("elementDamage", elementDamage, this.itemStack);
 
-        for (AttributeType attributeType : AttributeType.values()) {
+        /*for (AttributeType attributeType : AttributeType.values()) {
             if (statPassive.getAttributeValue(attributeType) != 0) {
                 PersistentDataContainerUtil.putInteger(attributeType.name(), statPassive.getAttributeValue(attributeType), this.itemStack);
+            }
+        }*/
+        for (ElementType elementType : ElementType.values()) {
+            if (statPassive.getElementValue(elementType) != 0) {
+                PersistentDataContainerUtil.putInteger(elementType.name(), statPassive.getElementValue(elementType), this.itemStack);
             }
         }
         if (gearSetExist) {

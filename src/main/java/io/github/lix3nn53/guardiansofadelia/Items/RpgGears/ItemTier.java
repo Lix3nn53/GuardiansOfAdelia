@@ -50,7 +50,7 @@ public enum ItemTier {
         return percent;
     }
 
-    public int getMinNumberOfStatsNormal() {
+    public int getMinNumberOfElements(boolean isPassive) {
         int number = 0;
         if (this == ItemTier.RARE) {
             number = 1;
@@ -59,18 +59,28 @@ public enum ItemTier {
         } else if (this == ItemTier.LEGENDARY) {
             number = 3;
         }
+
+        if (isPassive) {
+            number++;
+        }
+
         return number;
     }
 
-    public int getMinNumberOfStatsPassive() {
-        int number = 1;
-        if (this == ItemTier.RARE) {
-            number = 2;
-        } else if (this == ItemTier.MYSTIC) {
-            number = 3;
-        } else if (this == ItemTier.LEGENDARY) {
-            number = 4;
+    public int getMinNumberOfAttributes(boolean isPassive) {
+        if (!isPassive) { // Only passive items give attribute bonus
+            return 0;
         }
+
+        int number = 0;
+        if (this == ItemTier.RARE) {
+            number = 1;
+        } else if (this == ItemTier.MYSTIC) {
+            number = 2;
+        } else if (this == ItemTier.LEGENDARY) {
+            number = 3;
+        }
+
         return number;
     }
 

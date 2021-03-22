@@ -14,7 +14,7 @@ public class GearLevel {
     private static final double MIN_STAT_MULTIPLIER = 0.2;
     private static final double MAX_STAT_MULTIPLIER = 0.8;
 
-    private static final double NORMAL_ITEM_MULTIPLIER = 0.5;
+    private static final double NORMAL_ITEM_MULTIPLIER = 0.8;
 
     public static int getGearLevel(ItemStack itemStack) {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {

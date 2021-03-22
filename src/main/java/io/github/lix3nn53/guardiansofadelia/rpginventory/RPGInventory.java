@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.*;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -134,15 +135,23 @@ public class RPGInventory {
         StatPassive glove = gloveSlot.getBonusStats();
         StatPassive ring = ringSlot.getBonusStats();
 
+        // Add all attributes
         HashMap<AttributeType, Integer> attributeTypeToValue = new HashMap<>();
-
         for (AttributeType attributeType : AttributeType.values()) {
             int bonus = parrot.getAttributeValue(attributeType) + earring.getAttributeValue(attributeType) + necklace.getAttributeValue(attributeType)
                     + glove.getAttributeValue(attributeType) + ring.getAttributeValue(attributeType);
             attributeTypeToValue.put(attributeType, bonus);
         }
 
-        return new StatPassive(attributeTypeToValue);
+        // Add all elements
+        HashMap<ElementType, Integer> elementTypeToValue = new HashMap<>();
+        for (ElementType elementType : ElementType.values()) {
+            int bonus = parrot.getElementValue(elementType) + earring.getElementValue(elementType) + necklace.getElementValue(elementType)
+                    + glove.getElementValue(elementType) + ring.getElementValue(elementType);
+            elementTypeToValue.put(elementType, bonus);
+        }
+
+        return new StatPassive(attributeTypeToValue, elementTypeToValue);
     }
 
     private int getSlotNo(RPGSlotType slotType) {
