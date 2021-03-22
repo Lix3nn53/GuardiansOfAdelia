@@ -325,7 +325,7 @@ public class RPGCharacterStats {
 
     public void resetAttributes() {
         for (AttributeType attributeType : AttributeType.values()) {
-            getAttribute(attributeType).setInvested(0, this);
+            attributeHashMap.get(attributeType).setInvested(0, this, false); // we fix display on bottom of this method
         }
 
         onMaxHealthChange();
@@ -530,7 +530,7 @@ public class RPGCharacterStats {
 
             if (isShield) {
                 shield = new ArmorStatHolder(0, 0);
-                removePassiveStatBonuses(EquipmentSlot.OFF_HAND);
+                removePassiveStatBonusesOfEquipment(EquipmentSlot.OFF_HAND);
             } else {
                 WeaponGearType weaponGearType = null;
                 for (WeaponGearType c : WeaponGearType.values()) {
@@ -543,7 +543,7 @@ public class RPGCharacterStats {
                 if (weaponGearType != null) {
                     if (weaponGearType.canEquipToOffHand()) {
                         damageBonusFromOffhand = 0;
-                        removePassiveStatBonuses(EquipmentSlot.OFF_HAND);
+                        removePassiveStatBonusesOfEquipment(EquipmentSlot.OFF_HAND);
                     }
                 }
             }
@@ -575,19 +575,34 @@ public class RPGCharacterStats {
     }
 
     private void setPassiveStatBonuses(EquipmentSlot equipmentSlot, ItemStack itemStack) {
+        // Attributes
         for (AttributeType attributeType : AttributeType.values()) {
             if (PersistentDataContainerUtil.hasInteger(itemStack, attributeType.name())) {
                 int bonus = PersistentDataContainerUtil.getInteger(itemStack, attributeType.name());
-                getAttribute(attributeType).setBonus(equipmentSlot, this, bonus);
+                attributeHashMap.get(attributeType).setEquipmentBonus(equipmentSlot, bonus, this, false);
             } else {
-                getAttribute(attributeType).setBonus(equipmentSlot, this, 0);
+                attributeHashMap.get(attributeType).setEquipmentBonus(equipmentSlot, 0, this, false);
+            }
+        }
+        // Elements
+        for (ElementType elementType : ElementType.values()) {
+            if (PersistentDataContainerUtil.hasInteger(itemStack, elementType.name())) {
+                int bonus = PersistentDataContainerUtil.getInteger(itemStack, elementType.name());
+                elementHashMap.get(elementType).setEquipmentBonus(equipmentSlot, bonus);
+            } else {
+                elementHashMap.get(elementType).setEquipmentBonus(equipmentSlot, 0);
             }
         }
     }
 
-    private void removePassiveStatBonuses(EquipmentSlot equipmentSlot) {
+    private void removePassiveStatBonusesOfEquipment(EquipmentSlot equipmentSlot) {
+        // Attributes
         for (AttributeType attributeType : AttributeType.values()) {
-            getAttribute(attributeType).removeBonus(equipmentSlot, this);
+            attributeHashMap.get(attributeType).clearEquipmentBonus(equipmentSlot, this, false);
+        }
+        // Elements
+        for (ElementType elementType : ElementType.values()) {
+            elementHashMap.get(elementType).clearEquipmentBonus(equipmentSlot);
         }
 
         onMaxHealthChange();
@@ -595,13 +610,25 @@ public class RPGCharacterStats {
     }
 
     public void recalculateRPGInventory(RPGInventory rpgInventory) {
+        // Clear Attribute
         for (AttributeType attributeType : AttributeType.values()) {
-            getAttribute(attributeType).clearPassive(this);
+            attributeHashMap.get(attributeType).clearTotalPassive(this, false);
+        }
+        // Clear Elements
+        for (ElementType elementType : ElementType.values()) {
+            elementHashMap.get(elementType).clearTotalPassive();
         }
 
         StatPassive totalPassiveStat = rpgInventory.getTotalPassiveStat();
+
+        // Read Attributes
         for (AttributeType attributeType : AttributeType.values()) {
-            getAttribute(attributeType).addBonusToPassive(totalPassiveStat.getAttributeValue(attributeType), this);
+            attributeHashMap.get(attributeType).addToTotalPassive(totalPassiveStat.getAttributeValue(attributeType), this, false);
+        }
+
+        // Read Elements
+        for (ElementType elementType : ElementType.values()) {
+            elementHashMap.get(elementType).addToTotalPassive(totalPassiveStat.getElementValue(elementType));
         }
 
         onMaxHealthChange();
@@ -609,8 +636,13 @@ public class RPGCharacterStats {
     }
 
     public void recalculateEquipment(String rpgClass) {
+        // Clear attributes
         for (AttributeType attributeType : AttributeType.values()) {
-            getAttribute(attributeType).clearEquipment(this);
+            attributeHashMap.get(attributeType).clearAllEquipment(this, false);
+        }
+        // Clear elements
+        for (ElementType elementType : ElementType.values()) {
+            elementHashMap.get(elementType).clearAllEquipment();
         }
 
         helmet = new ArmorStatHolder(0, 0);
@@ -733,11 +765,18 @@ public class RPGCharacterStats {
     public boolean setMainHandBonuses(ItemStack itemStack, String rpgClass, boolean fixDisplay) {
         if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
 
-            //manage stats on item drop
+            // Add attribute bonuses
             for (AttributeType attributeType : AttributeType.values()) {
                 if (PersistentDataContainerUtil.hasInteger(itemStack, attributeType.name())) {
                     int bonus = PersistentDataContainerUtil.getInteger(itemStack, attributeType.name());
-                    getAttribute(attributeType).setBonus(EquipmentSlot.HAND, this, bonus);
+                    attributeHashMap.get(attributeType).setEquipmentBonus(EquipmentSlot.HAND, bonus, this, false);
+                }
+            }
+            // Add element bonuses
+            for (ElementType elementType : ElementType.values()) {
+                if (PersistentDataContainerUtil.hasInteger(itemStack, elementType.name())) {
+                    int bonus = PersistentDataContainerUtil.getInteger(itemStack, elementType.name());
+                    elementHashMap.get(elementType).setEquipmentBonus(EquipmentSlot.HAND, bonus);
                 }
             }
 
@@ -774,9 +813,16 @@ public class RPGCharacterStats {
 
     public boolean removeMainHandBonuses(ItemStack itemStack, String rpgClass, boolean fixDisplay) {
         if (StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass)) {
+            // Remove attributes
             for (AttributeType attributeType : AttributeType.values()) {
                 if (PersistentDataContainerUtil.hasInteger(itemStack, attributeType.name())) {
-                    getAttribute(attributeType).removeBonus(EquipmentSlot.HAND, this);
+                    attributeHashMap.get(attributeType).clearEquipmentBonus(EquipmentSlot.HAND, this, false);
+                }
+            }
+            // Remove elements
+            for (ElementType elementType : ElementType.values()) {
+                if (PersistentDataContainerUtil.hasInteger(itemStack, elementType.name())) {
+                    elementHashMap.get(elementType).clearEquipmentBonus(EquipmentSlot.HAND);
                 }
             }
 
@@ -812,8 +858,13 @@ public class RPGCharacterStats {
     }
 
     public void clearMainHandBonuses() {
+        // Clear attributes
         for (AttributeType attributeType : AttributeType.values()) {
-            getAttribute(attributeType).removeBonus(EquipmentSlot.HAND, this);
+            attributeHashMap.get(attributeType).clearEquipmentBonus(EquipmentSlot.HAND, this, false);
+        }
+        // Clear elements
+        for (ElementType elementType : ElementType.values()) {
+            elementHashMap.get(elementType).clearEquipmentBonus(EquipmentSlot.HAND);
         }
 
         onMaxHealthChange();

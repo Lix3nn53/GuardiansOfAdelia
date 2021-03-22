@@ -12,17 +12,17 @@ public class Element {
     private int bonusFromMainhand;
     private int bonusFromOffhand;
 
-    private int bonusFromPassive;
+    private int bonusTotalPassive;
 
     public Element(ElementType elementType) {
         this.elementType = elementType;
     }
 
     public int getBonusFromEquipment() {
-        return bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand + bonusFromOffhand + bonusFromPassive;
+        return bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand + bonusFromOffhand + bonusTotalPassive;
     }
 
-    public void clearEquipment() {
+    public void clearAllEquipment() {
         this.bonusFromHelmet = 0;
         this.bonusFromChestplate = 0;
         this.bonusFromLeggings = 0;
@@ -31,11 +31,7 @@ public class Element {
         this.bonusFromOffhand = 0;
     }
 
-    public void clearPassive() {
-        this.bonusFromPassive = 0;
-    }
-
-    public void removeBonus(EquipmentSlot equipmentSlot) {
+    public void clearEquipmentBonus(EquipmentSlot equipmentSlot) {
         switch (equipmentSlot) {
             case HAND:
                 this.bonusFromMainhand = 0;
@@ -58,7 +54,7 @@ public class Element {
         }
     }
 
-    public void setBonus(EquipmentSlot equipmentSlot, int bonus) {
+    public void setEquipmentBonus(EquipmentSlot equipmentSlot, int bonus) {
         switch (equipmentSlot) {
             case HAND:
                 this.bonusFromMainhand = bonus;
@@ -79,15 +75,18 @@ public class Element {
                 this.bonusFromHelmet = bonus;
                 break;
         }
-
     }
 
-    public void addBonusToPassive(int bonus) {
-        bonusFromPassive += bonus;
+    public void addToTotalPassive(int value) {
+        this.bonusTotalPassive += value;
     }
 
-    public void removeBonusFromPassive(int remove) {
-        bonusFromPassive -= remove;
+    public void removeFromTotalPassive(int value) {
+        this.bonusTotalPassive -= value;
+    }
+
+    public void clearTotalPassive() {
+        this.bonusTotalPassive = 0;
     }
 
     public ElementType getElementType() {

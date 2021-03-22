@@ -744,7 +744,7 @@ public class MyInventoryClickEvent implements Listener {
                                 }
                             }
 
-                            attr.investPoint(rpgCharacterStats, amount);
+                            attr.investPoint(amount, rpgCharacterStats, true);
                             GuiGeneric statPoints = MenuList.statPoints(player);
                             statPoints.openInventory(player);
                         }
@@ -760,7 +760,7 @@ public class MyInventoryClickEvent implements Listener {
                                 }
                             }
 
-                            attr.downgradePoint(rpgCharacterStats, amount);
+                            attr.downgradePoint(amount, rpgCharacterStats, true);
                             GuiGeneric statPoints = MenuList.statPoints(player);
                             statPoints.openInventory(player);
                         }

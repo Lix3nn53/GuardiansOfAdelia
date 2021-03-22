@@ -382,7 +382,10 @@ public class RPGInventory {
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
                     for (AttributeType attributeType : AttributeType.values()) {
-                        rpgCharacterStats.getAttribute(attributeType).removeBonusFromPassive(statPassive.getAttributeValue(attributeType), rpgCharacterStats);
+                        rpgCharacterStats.getAttribute(attributeType).removeFromTotalPassive(statPassive.getAttributeValue(attributeType), rpgCharacterStats, true);
+                    }
+                    for (ElementType elementType : ElementType.values()) {
+                        rpgCharacterStats.getElement(elementType).removeFromTotalPassive(statPassive.getElementValue(elementType));
                     }
                 }
             }
@@ -402,7 +405,10 @@ public class RPGInventory {
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
                     for (AttributeType attributeType : AttributeType.values()) {
-                        rpgCharacterStats.getAttribute(attributeType).addBonusToPassive(statPassive.getAttributeValue(attributeType), rpgCharacterStats);
+                        rpgCharacterStats.getAttribute(attributeType).addToTotalPassive(statPassive.getAttributeValue(attributeType), rpgCharacterStats, true);
+                    }
+                    for (ElementType elementType : ElementType.values()) {
+                        rpgCharacterStats.getElement(elementType).addToTotalPassive(statPassive.getElementValue(elementType));
                     }
                 }
             }

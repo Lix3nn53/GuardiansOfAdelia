@@ -332,15 +332,15 @@ public class DatabaseQueries {
                 rpgCharacterStats.setTotalExp(totalexp);
 
                 int attr_one = resultSet.getInt("attr_one");
-                rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE).setInvested(attr_one, rpgCharacterStats);
+                rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE).setInvested(attr_one, rpgCharacterStats, false);
                 int attr_two = resultSet.getInt("attr_two");
-                rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DEFENSE).setInvested(attr_two, rpgCharacterStats);
+                rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DEFENSE).setInvested(attr_two, rpgCharacterStats, false);
                 int attr_three = resultSet.getInt("attr_three");
-                rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_HEALTH).setInvested(attr_three, rpgCharacterStats);
+                rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_HEALTH).setInvested(attr_three, rpgCharacterStats, false);
                 int attr_four = resultSet.getInt("attr_four");
-                rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_MANA).setInvested(attr_four, rpgCharacterStats);
+                rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_MANA).setInvested(attr_four, rpgCharacterStats, false);
                 int attr_five = resultSet.getInt("attr_five");
-                rpgCharacterStats.getAttribute(AttributeType.BONUS_CRITICAL_CHANCE).setInvested(attr_five, rpgCharacterStats);
+                rpgCharacterStats.getAttribute(AttributeType.BONUS_CRITICAL_CHANCE).setInvested(attr_five, rpgCharacterStats, false);
 
                 String offHand = resultSet.getString("off_hand");
                 if (!resultSet.wasNull()) {
