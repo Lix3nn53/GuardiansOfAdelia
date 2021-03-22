@@ -53,7 +53,7 @@ public class GearPassive implements RPGGear {
             for (AttributeType attributeType : AttributeType.values()) {
                 int finalValue = finalValuesAttr.get(attributeType);
                 if (finalValue != 0) {
-                    lore.add(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + (finalValue * attributeType.getIncrementPerPoint()));
+                    lore.add(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + attributeType.getIncrementLore(finalValue));
                 }
             }
         }

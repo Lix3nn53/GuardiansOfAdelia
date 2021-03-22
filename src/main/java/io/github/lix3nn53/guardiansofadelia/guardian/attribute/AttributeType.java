@@ -2,6 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.guardian.attribute;
 
 import org.bukkit.ChatColor;
 
+import java.text.DecimalFormat;
+
 public enum AttributeType {
     BONUS_ELEMENT_DAMAGE,
     BONUS_ELEMENT_DEFENSE,
@@ -55,6 +57,20 @@ public enum AttributeType {
                 return 0.001;
         }
         return 1;
+    }
+
+    public String getIncrementLore(int value) {
+        switch (this) {
+            case BONUS_ELEMENT_DAMAGE:
+            case BONUS_MAX_MANA:
+            case BONUS_MAX_HEALTH:
+            case BONUS_ELEMENT_DEFENSE:
+                return (int) (value * getIncrementPerPoint() + 0.5) + "";
+            case BONUS_CRITICAL_CHANCE:
+                return new DecimalFormat("##.##").format(value * getIncrementPerPoint() * 100) + "%";
+        }
+
+        return "getIncrementLore";
     }
 
     public boolean getFixDisplayOnChange() {
