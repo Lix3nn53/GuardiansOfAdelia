@@ -2,9 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.Items.list.weapons;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.AttackSpeed;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.GearWeapon;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponAttackSpeed;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -25,7 +25,7 @@ public class WeaponManager {
 
         List<WeaponSet> weaponSetList = gearLevelToWeapons.get(gearLevel);
 
-        AttackSpeed attackSpeed = gearType.getAttackSpeed();
+        WeaponAttackSpeed weaponAttackSpeed = gearType.getAttackSpeed();
 
         WeaponSet template = weaponSetList.get(itemIndex);
 
@@ -36,7 +36,7 @@ public class WeaponManager {
         int elementDamage = template.getElementDamage(gearType);
 
         return new GearWeapon(name, tier, material, customModelData, level, gearType, elementDamage,
-                attackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearSet).getItemStack();
+                weaponAttackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearSet).getItemStack();
     }
 
     public static void add(WeaponSet weaponSet) {

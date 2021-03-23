@@ -8,7 +8,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,63 +34,42 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
                 Material offHandItemType = offHandItem.getType();
                 boolean offHandUnequip = false;
                 if (!InventoryUtils.isAirOrNull(offHandItem)) {
-
-                    if (PersistentDataContainerUtil.hasString(offHandItem, "gearType")) {
-                        String gearTypeString = PersistentDataContainerUtil.getString(offHandItem, "gearType");
-                        for (ShieldGearType c : ShieldGearType.values()) {
-                            if (c.name().equals(gearTypeString)) {
-                                offHandUnequip = true;
-                            }
-                        }
-
-                        if (!offHandUnequip) {
-                            for (WeaponGearType c : WeaponGearType.values()) {
-                                if (c.name().equals(gearTypeString)) {
-                                    if (c.canEquipToOffHand()) {
-                                        offHandUnequip = true;
-                                    }
-                                }
-                            }
-                        }
+                    Material offType = offHandItem.getType();
+                    WeaponGearType weaponGearType = WeaponGearType.fromMaterial(offType);
+                    ShieldGearType shieldGearType = ShieldGearType.fromMaterial(offType);
+                    if (weaponGearType != null) {
+                        offHandUnequip = true;
+                    } else if (shieldGearType != null) {
+                        offHandUnequip = true;
                     }
                 }
 
                 ItemStack mainHandItem = event.getOffHandItem(); //returns the item switched to offhand, so it is in mainhand before event
-                if (!InventoryUtils.isAirOrNull(mainHandItem) && PersistentDataContainerUtil.hasString(mainHandItem, "gearType")) {
-                    String gearTypeString = PersistentDataContainerUtil.getString(offHandItem, "gearType");
-
+                if (!InventoryUtils.isAirOrNull(mainHandItem)) {
                     boolean mainHandEquip = false;
-                    boolean isMainhandShield = false;
-                    for (ShieldGearType c : ShieldGearType.values()) {
-                        if (c.name().equals(gearTypeString)) {
-                            mainHandEquip = true;
-                            isMainhandShield = true;
-                        }
-                    }
 
-                    if (!mainHandEquip) {
-                        for (WeaponGearType c : WeaponGearType.values()) {
-                            if (c.name().equals(gearTypeString)) {
-                                if (c.canEquipToOffHand()) {
-                                    mainHandEquip = true;
-                                }
-                            }
-                        }
+                    Material mainType = mainHandItem.getType();
+                    WeaponGearType weaponGearType = WeaponGearType.fromMaterial(mainType);
+                    ShieldGearType shieldGearType = ShieldGearType.fromMaterial(mainType);
+                    if (weaponGearType != null) {
+                        mainHandEquip = true;
+                    } else if (shieldGearType != null) {
+                        mainHandEquip = true;
                     }
 
                     if (mainHandEquip && StatUtils.doesCharacterMeetRequirements(mainHandItem, player, rpgClassStr)) {
-                        rpgCharacterStats.removeMainHandBonuses(mainHandItem, rpgClassStr, true);
-                        if (offHandUnequip) rpgCharacterStats.setMainHandBonuses(offHandItem, rpgClassStr, true);
+                        rpgCharacterStats.onMainHandUnequip(true);
+                        if (offHandUnequip) rpgCharacterStats.onMainHandEquip(offHandItem, true);
 
                         rpgCharacterStats.onOffhandEquip(mainHandItem, true);
-                        if (isMainhandShield) rpgCharacterStats.onMaxHealthChange();
+                        // if (isMainhandShield) rpgCharacterStats.onMaxHealthChange();
                     } else {
                         event.setCancelled(true);
                     }
                 } else if (offHandUnequip) {
-                    rpgCharacterStats.setMainHandBonuses(offHandItem, rpgClassStr, true);
+                    rpgCharacterStats.onMainHandEquip(offHandItem, true);
                     rpgCharacterStats.onOffhandUnequip(offHandItem);
-                    if (offHandItemType.equals(Material.SHIELD)) rpgCharacterStats.onMaxHealthChange();
+                    // if (offHandItemType is shield) rpgCharacterStats.onMaxHealthChange();
                 }
             }
         }

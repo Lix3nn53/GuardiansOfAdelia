@@ -21,7 +21,7 @@ public class GearWeapon implements RPGGear {
     private final ItemStack itemStack;
 
     public GearWeapon(String name, ItemTier tier, Material material, int customModelDataId, int level, WeaponGearType gearType, int elementDamage,
-                      AttackSpeed attackSpeed, int minElemValue, int maxElemValue, int minNumberOfElements, String gearSetStr) {
+                      WeaponAttackSpeed weaponAttackSpeed, int minElemValue, int maxElemValue, int minNumberOfElements, String gearSetStr) {
         name = tier.getTierColor() + name;
         boolean gearSetExist = false;
         if (gearSetStr != null && !gearSetStr.equals("")) {
@@ -45,7 +45,12 @@ public class GearWeapon implements RPGGear {
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
         lore.add("");
         lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + "+" + elementDamage);
-        lore.add(ChatColor.AQUA + "ø Attack Speed: " + attackSpeed.getLoreString());
+        lore.add(ChatColor.AQUA + "ø Attack Speed: " + weaponAttackSpeed.getLoreString());
+        String itemLoreAddition = gearType.getItemLoreAddition();
+        if (itemLoreAddition != null) {
+            lore.add(itemLoreAddition);
+        }
+
         if (!statPassive.isEmpty(false, true)) {
             lore.add("");
             /*for (AttributeType attributeType : AttributeType.values()) {
@@ -77,10 +82,9 @@ public class GearWeapon implements RPGGear {
 
         this.itemStack = new ItemStack(material);
         PersistentDataContainerUtil.putInteger("reqLevel", level, this.itemStack);
-        PersistentDataContainerUtil.putString("gearType", gearType.toString(), this.itemStack);
         PersistentDataContainerUtil.putString("itemTier", tier.toString(), this.itemStack);
 
-        RPGItemUtils.setAttackSpeed(this.itemStack, attackSpeed.getSpeedValue());
+        RPGItemUtils.setAttackSpeed(this.itemStack, weaponAttackSpeed.getSpeedValue());
         RPGItemUtils.setDamage(this.itemStack, elementDamage);
 
         PersistentDataContainerUtil.putInteger("elementDamage", elementDamage, this.itemStack);

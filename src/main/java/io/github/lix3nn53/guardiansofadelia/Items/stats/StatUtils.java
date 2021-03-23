@@ -61,44 +61,11 @@ public class StatUtils {
 
     public static GearStatType getStatType(Material mat) {
         GearStatType type = null;
-        if (mat.equals(Material.DIAMOND_AXE) || //great sword
-                mat.equals(Material.NETHERITE_AXE) || //battle axe
-                mat.equals(Material.NETHERITE_HOE) || //dagger
-                mat.equals(Material.NETHERITE_PICKAXE) || //war hammer
-                mat.equals(Material.NETHERITE_SWORD) || //sword
-                mat.equals(Material.TRIDENT) || //spear
-                mat.equals(Material.BOW) || //bow
-                mat.equals(Material.CROSSBOW) || //crossbow
-                mat.equals(Material.DIAMOND_SHOVEL) //wand
-                || mat.equals(Material.NETHERITE_SHOVEL) //staff
-        ) {
+        if (WeaponGearType.fromMaterial(mat) != null) {
             type = GearStatType.WEAPON_GEAR;
-        } else if (mat.equals(Material.NETHERITE_LEGGINGS) ||
-                mat.equals(Material.DIAMOND_LEGGINGS) ||
-                mat.equals(Material.GOLDEN_LEGGINGS) ||
-                mat.equals(Material.IRON_LEGGINGS) ||
-                mat.equals(Material.CHAINMAIL_LEGGINGS) ||
-                mat.equals(Material.LEATHER_LEGGINGS) ||
-                mat.equals(Material.NETHERITE_BOOTS) ||
-                mat.equals(Material.DIAMOND_BOOTS) ||
-                mat.equals(Material.GOLDEN_BOOTS) ||
-                mat.equals(Material.IRON_BOOTS) ||
-                mat.equals(Material.CHAINMAIL_BOOTS) ||
-                mat.equals(Material.LEATHER_BOOTS) ||
-                mat.equals(Material.NETHERITE_HELMET) ||
-                mat.equals(Material.DIAMOND_HELMET) ||
-                mat.equals(Material.GOLDEN_HELMET) ||
-                mat.equals(Material.IRON_HELMET) ||
-                mat.equals(Material.CHAINMAIL_HELMET) ||
-                mat.equals(Material.LEATHER_HELMET) ||
-                mat.equals(Material.NETHERITE_CHESTPLATE) ||
-                mat.equals(Material.DIAMOND_CHESTPLATE) ||
-                mat.equals(Material.GOLDEN_CHESTPLATE) ||
-                mat.equals(Material.IRON_CHESTPLATE) ||
-                mat.equals(Material.CHAINMAIL_CHESTPLATE) ||
-                mat.equals(Material.LEATHER_CHESTPLATE) ||
-                mat.equals(HelmetSkin.getHelmetMaterial()) ||
-                mat.equals(Material.SHIELD)
+        } else if (ArmorGearType.fromMaterial(mat) != null ||
+                mat.equals(HelmetSkin.getHelmetMaterial()) || // Helmet skin premium
+                ShieldGearType.fromMaterial(mat) != null
         ) {
             type = GearStatType.ARMOR_GEAR;
         } else if (mat.equals(Material.SHEARS)) {
@@ -108,40 +75,10 @@ public class StatUtils {
     }
 
     public static boolean hasStatType(Material mat) {
-        return mat.equals(Material.DIAMOND_AXE) || //great sword
-                mat.equals(Material.NETHERITE_AXE) || //battle axe
-                mat.equals(Material.NETHERITE_HOE) || //dagger
-                mat.equals(Material.NETHERITE_PICKAXE) || //war hammer
-                mat.equals(Material.NETHERITE_SWORD) || //sword
-                mat.equals(Material.BOW) || mat.equals(Material.CROSSBOW) || mat.equals(Material.TRIDENT) ||
-                mat.equals(Material.DIAMOND_SHOVEL) || //wand
-                mat.equals(Material.NETHERITE_SHOVEL) || //staff
-                mat.equals(Material.NETHERITE_LEGGINGS) ||
-                mat.equals(Material.DIAMOND_LEGGINGS) ||
-                mat.equals(Material.GOLDEN_LEGGINGS) ||
-                mat.equals(Material.IRON_LEGGINGS) ||
-                mat.equals(Material.CHAINMAIL_LEGGINGS) ||
-                mat.equals(Material.LEATHER_LEGGINGS) ||
-                mat.equals(Material.NETHERITE_BOOTS) ||
-                mat.equals(Material.DIAMOND_BOOTS) ||
-                mat.equals(Material.GOLDEN_BOOTS) ||
-                mat.equals(Material.IRON_BOOTS) ||
-                mat.equals(Material.CHAINMAIL_BOOTS) ||
-                mat.equals(Material.LEATHER_BOOTS) ||
-                mat.equals(Material.NETHERITE_HELMET) ||
-                mat.equals(Material.DIAMOND_HELMET) ||
-                mat.equals(Material.GOLDEN_HELMET) ||
-                mat.equals(Material.IRON_HELMET) ||
-                mat.equals(Material.CHAINMAIL_HELMET) ||
-                mat.equals(Material.LEATHER_HELMET) ||
-                mat.equals(Material.NETHERITE_CHESTPLATE) ||
-                mat.equals(Material.DIAMOND_CHESTPLATE) ||
-                mat.equals(Material.GOLDEN_CHESTPLATE) ||
-                mat.equals(Material.IRON_CHESTPLATE) ||
-                mat.equals(Material.CHAINMAIL_CHESTPLATE) ||
-                mat.equals(Material.LEATHER_CHESTPLATE) ||
+        return WeaponGearType.fromMaterial(mat) != null ||
+                ArmorGearType.fromMaterial(mat) != null ||
+                ShieldGearType.fromMaterial(mat) != null ||
                 mat.equals(HelmetSkin.getHelmetMaterial()) ||
-                mat.equals(Material.SHIELD) ||
                 mat.equals(Material.SHEARS);
     }
 
@@ -217,42 +154,36 @@ public class StatUtils {
             }
         }
 
-        if (PersistentDataContainerUtil.hasString(itemStack, "gearType")) {
-            String gearTypeString = PersistentDataContainerUtil.getString(itemStack, "gearType");
+        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
 
-            for (WeaponGearType c : WeaponGearType.values()) {
-                if (c.name().equals(gearTypeString)) {
-                    RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-                    List<WeaponGearType> weaponGearTypes = rpgClass.getWeaponGearTypes();
-                    if (!weaponGearTypes.contains(c)) {
-                        player.sendMessage(ChatColor.RED + "Your class can't use " + c.getDisplayName());
-                        return false;
-                    }
-                }
-            }
-
-            for (ArmorGearType c : ArmorGearType.values()) {
-                if (c.name().equals(gearTypeString)) {
-                    RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-                    List<ArmorGearType> armorGearTypes = rpgClass.getArmorGearTypes();
-                    if (!armorGearTypes.contains(c)) {
-                        player.sendMessage(ChatColor.RED + "Your class can't use " + c.getDisplayName());
-                        return false;
-                    }
-                }
-            }
-
-            for (ShieldGearType c : ShieldGearType.values()) {
-                if (c.name().equals(gearTypeString)) {
-                    RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-                    List<ShieldGearType> shieldGearTypes = rpgClass.getShieldGearTypes();
-                    if (!shieldGearTypes.contains(c)) {
-                        player.sendMessage(ChatColor.RED + "Your class can't use " + c.getDisplayName());
-                        return false;
-                    }
-                }
+        Material type = itemStack.getType();
+        WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
+        if (weaponGearType != null) {
+            List<WeaponGearType> weaponGearTypes = rpgClass.getWeaponGearTypes();
+            if (!weaponGearTypes.contains(weaponGearType)) {
+                player.sendMessage(ChatColor.RED + "Your class can't use " + weaponGearType.getDisplayName());
+                return false;
             }
         }
+
+        ArmorGearType armorGearType = ArmorGearType.fromMaterial(type);
+        if (armorGearType != null) {
+            List<ArmorGearType> armorGearTypes = rpgClass.getArmorGearTypes();
+            if (!armorGearTypes.contains(armorGearType)) {
+                player.sendMessage(ChatColor.RED + "Your class can't use " + armorGearType.getDisplayName());
+                return false;
+            }
+        }
+
+        ShieldGearType shieldGearType = ShieldGearType.fromMaterial(type);
+        if (shieldGearType != null) {
+            List<ShieldGearType> shieldGearTypes = rpgClass.getShieldGearTypes();
+            if (!shieldGearTypes.contains(shieldGearType)) {
+                player.sendMessage(ChatColor.RED + "Your class can't use " + shieldGearType.getDisplayName());
+                return false;
+            }
+        }
+
         return true;
     }
 

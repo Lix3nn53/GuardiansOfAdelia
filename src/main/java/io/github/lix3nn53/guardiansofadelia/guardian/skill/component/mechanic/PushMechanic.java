@@ -16,6 +16,15 @@ public class PushMechanic extends MechanicComponent {
     private final boolean centerSelf;
     private final double offsetY;
 
+    public PushMechanic(PushType pushType, List<Double> speedList, boolean centerSelf, double offsetY) {
+        super(false);
+
+        this.pushType = pushType;
+        this.speedList = speedList;
+        this.centerSelf = centerSelf;
+        this.offsetY = offsetY;
+    }
+
     public PushMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 

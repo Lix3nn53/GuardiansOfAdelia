@@ -1,23 +1,28 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.PushMechanic;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
+
+import java.util.ArrayList;
 
 public enum WeaponGearType {
     //One handed Melee Weapons
-    SWORD,
-    DAGGER,
+    SWORD, // Normal attack speed, more damage than dagger
+    DAGGER, // Fast attack speed, can dual wield
     //Two handed Melee Weapons
-    BATTLE_AXE,
-    WAR_HAMMER,
-    GREAT_SWORD,
+    BATTLE_AXE, // Slow attack speed, more damage than great sword
+    WAR_HAMMER, // Slow attack speed, same damage with great sword, normal attacks knockback target
+    GREAT_SWORD, // Normal attack speed, more damage than sword
     //Ranged + Melee weapons
-    SPEAR,
+    SPEAR, // Normal attack speed, ranged + melee
     //Ranged Weapons
-    BOW,
-    CROSSBOW,
+    BOW, // Normal attack speed
+    CROSSBOW, // slow attack speed, more damage than bow
     //Magic Weapons
-    STAFF,
-    WAND;
+    STAFF, // Skill cooldown reduction
+    WAND; // More damage than staff
 
     public Material getMaterial() {
         switch (this) {
@@ -46,52 +51,34 @@ public enum WeaponGearType {
         return null;
     }
 
-    public AttackSpeed getAttackSpeed() {
-        switch (this) {
-            case SWORD:
-            case STAFF:
-                return AttackSpeed.FAST;
-            case DAGGER:
-                return AttackSpeed.RAPID;
-            case BATTLE_AXE:
-            case WAR_HAMMER:
-            case CROSSBOW:
-                return AttackSpeed.SLOW;
-            case GREAT_SWORD:
-            case SPEAR:
-            case BOW:
-            case WAND:
-                return AttackSpeed.NORMAL;
+    public static WeaponGearType fromMaterial(Material material) {
+        for (WeaponGearType weaponGearType : WeaponGearType.values()) {
+            if (weaponGearType.getMaterial().equals(material)) {
+                return weaponGearType;
+            }
         }
 
-        return AttackSpeed.SLOW;
+        return null;
     }
 
-    public double getDamageReduction() {
+    public WeaponAttackSpeed getAttackSpeed() {
         switch (this) {
             case SWORD:
-                return 0.6;
-            case DAGGER:
-                return 0.4;
-            case BATTLE_AXE:
-                return 1;
-            case WAR_HAMMER:
-                return 0.8;
             case GREAT_SWORD:
-                return 0.8;
             case SPEAR:
-                return 0.5;
             case BOW:
-                return 0.6;
-            case CROSSBOW:
-                return 0.8;
-            case STAFF:
-                return 0.4;
             case WAND:
-                return 0.6;
+                return WeaponAttackSpeed.NORMAL;
+            case STAFF:
+            case DAGGER:
+                return WeaponAttackSpeed.FAST;
+            case BATTLE_AXE:
+            case WAR_HAMMER:
+            case CROSSBOW:
+                return WeaponAttackSpeed.SLOW;
         }
 
-        return 0;
+        return WeaponAttackSpeed.SLOW;
     }
 
     public String getDisplayName() {
@@ -121,23 +108,25 @@ public enum WeaponGearType {
         return "WEAPON GEAR NAME BUG";
     }
 
-    public boolean canEquipToOffHand() {
+    public WeaponAttackDamage getWeaponAttackDamage() {
         switch (this) {
-            case SWORD:
-            case CROSSBOW:
-            case BOW:
-            case SPEAR:
-            case GREAT_SWORD:
-            case WAR_HAMMER:
-            case BATTLE_AXE:
-            case STAFF:
-            case WAND:
-                return false;
             case DAGGER:
-                return true;
+                return WeaponAttackDamage.LOW;
+            case SWORD:
+            case SPEAR:
+            case BOW: // Reduced melee damage
+                return WeaponAttackDamage.NORMAL;
+            case WAR_HAMMER:
+            case GREAT_SWORD:
+            case CROSSBOW: // Reduced melee damage
+            case STAFF: // Reduced melee damage
+                return WeaponAttackDamage.HIGH;
+            case BATTLE_AXE:
+            case WAND: // Reduced melee damage
+                return WeaponAttackDamage.MAXIMUM;
         }
 
-        return false;
+        return WeaponAttackDamage.LOW;
     }
 
     public boolean isMelee() {
@@ -176,5 +165,43 @@ public enum WeaponGearType {
         }
 
         return 0;
+    }
+
+    public boolean canEquipToOffHand() {
+        return this == WeaponGearType.DAGGER;
+    }
+
+    public int getBonusAbilityHaste() {
+        if (this.equals(WeaponGearType.STAFF)) {
+            return 20;
+        }
+
+        return 0;
+    }
+
+    public void onHitEffect(LivingEntity caster, LivingEntity target) {
+        if (this.equals(WeaponGearType.WAR_HAMMER)) {
+            ArrayList<Double> speedList = new ArrayList<>();
+            speedList.add(1.2);
+            speedList.add(1.2);
+            speedList.add(1.2);
+            speedList.add(1.2);
+            PushMechanic pushMechanic = new PushMechanic(PushMechanic.PushType.FIXED, speedList, true, 0);
+
+            ArrayList<LivingEntity> targets = new ArrayList<>();
+            targets.add(target);
+            pushMechanic.execute(caster, 1, targets, 0);
+        }
+    }
+
+    public String getItemLoreAddition() {
+        switch (this) {
+            case WAR_HAMMER:
+                return ChatColor.LIGHT_PURPLE + "Knockback bonus: " + ChatColor.GRAY + "1.2";
+            case STAFF:
+                return ChatColor.LIGHT_PURPLE + "Ability Haste: " + ChatColor.GRAY + "+20";
+        }
+
+        return null;
     }
 }

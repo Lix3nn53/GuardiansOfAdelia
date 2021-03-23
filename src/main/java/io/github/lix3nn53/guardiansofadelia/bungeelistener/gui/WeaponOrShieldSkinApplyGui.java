@@ -1,8 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.gui;
 
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.WeaponOrShieldSkinScroll;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -58,7 +59,9 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
 
         Material type = itemStack.getType();
 
-        boolean isWeaponOrShield = RPGItemUtils.isWeapon(type) || RPGItemUtils.isShield(type);
+        WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
+        ShieldGearType shieldGearType = ShieldGearType.fromMaterial(type);
+        boolean isWeaponOrShield = weaponGearType != null || shieldGearType != null;
 
         if (!isWeaponOrShield) return false;
 

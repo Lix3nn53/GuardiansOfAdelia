@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
@@ -23,7 +24,6 @@ import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.DamageIndicator;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
@@ -279,7 +279,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                         Material type = itemInMainHand.getType();
-                        if (RPGItemUtils.isWeapon(type)) { // Melee
+                        WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
+                        if (weaponGearType != null) { // Melee
                             if (player.getInventory().getHeldItemSlot() != 4) {
                                 event.setCancelled(true);
                                 player.sendMessage(ChatColor.RED + "You can only attack with weapon slot(5)");
@@ -290,7 +291,12 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 return false;
                             }
 
-                            /* O NOT add damage bonus from offhand manually, it is added via vanilla attributes
+                            double meleeDamageReduction = weaponGearType.getMeleeDamageReduction();
+                            damage *= meleeDamageReduction;
+
+                            weaponGearType.onHitEffect(player, livingTarget);
+
+                            /* DO NOT add damage bonus from offhand manually, it is added via vanilla attributes
                             //add damage bonus from offhand
                             ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
                             if (!InventoryUtils.isAirOrNull(itemInMainHand)) {
@@ -314,7 +320,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     double totalCriticalChance = rpgCharacterStats.getTotalCriticalChance();
                     double random = Math.random();
                     if (random <= totalCriticalChance) {
-                        damage += damage * rpgCharacterStats.getTotalCriticalDamageBonus();
+                        damage += damage * rpgCharacterStats.getTotalCriticalDamage();
                         isCritical = true;
                         Particle particle = Particle.CRIT;
                         targetLocation.getWorld().spawnParticle(particle, targetLocation.clone().add(0, 0.25, 0), 6);
@@ -388,10 +394,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 ChatColor indicatorColor = damageType.getChatColor();
                 String indicatorIcon = damageType.getIcon() + "";
 
-                if (isCritical) {
-                    indicatorColor = ChatColor.GOLD;
-                }
                 String text = indicatorColor.toString() + (int) (finalDamage + 0.5) + " " + indicatorIcon;
+                if (isCritical) {
+                    text = ChatColor.GOLD + "⚝" + text;
+                }
                 double targetHeight = livingTarget.getHeight();
                 DamageIndicator.spawnNonPacket(text, targetLocation.clone().add(0, targetHeight + 0.5, 0));
                 //TODO make indicator via packets

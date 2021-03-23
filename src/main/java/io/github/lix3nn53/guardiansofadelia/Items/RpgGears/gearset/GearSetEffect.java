@@ -49,13 +49,13 @@ public enum GearSetEffect {
     }
 
     public static String getCustomSet(ItemStack itemStack) {
-        if (itemStack == null) return "NULL";
+        if (itemStack == null) return null;
 
         if (PersistentDataContainerUtil.hasString(itemStack, "gearSet")) {
             return PersistentDataContainerUtil.getString(itemStack, "gearSet");
         }
 
-        return "NULL";
+        return null;
     }
 
     public void applySetEffect(Player player) {

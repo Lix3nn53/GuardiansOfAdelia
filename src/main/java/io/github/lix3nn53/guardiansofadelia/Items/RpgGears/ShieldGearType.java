@@ -5,39 +5,25 @@ import org.bukkit.Material;
 public enum ShieldGearType {
     SHIELD;
 
-    public Material getMaterial() {
-        switch (this) {
-            case SHIELD:
-                return Material.SHIELD;
-        }
+    public static ShieldGearType fromMaterial(Material material) {
+        if (material.equals(Material.SHIELD)) return SHIELD;
 
         return null;
     }
 
-    public String getDisplayName() {
-        switch (this) {
-            case SHIELD:
-                return "Shield";
-        }
+    public Material getMaterial() {
+        return Material.SHIELD;
+    }
 
-        return "";
+    public String getDisplayName() {
+        return "Shield";
     }
 
     public double getHealthReduction() {
-        switch (this) {
-            case SHIELD:
-                return 1;
-        }
-
-        return 0;
+        return 1;
     }
 
     public double getElementDefenseReduction() {
-        switch (this) {
-            case SHIELD:
-                return 1;
-        }
-
-        return 0;
+        return 1;
     }
 }

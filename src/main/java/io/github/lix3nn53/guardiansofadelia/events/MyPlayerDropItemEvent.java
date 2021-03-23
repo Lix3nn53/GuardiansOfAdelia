@@ -60,7 +60,8 @@ public class MyPlayerDropItemEvent implements Listener {
                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                     RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                    rpgCharacterStats.clearMainHandBonuses();
+                    // rpgCharacterStats.clearMainHandBonuses();
+                    rpgCharacterStats.onMainHandUnequip(true);
                 }
             }
         }

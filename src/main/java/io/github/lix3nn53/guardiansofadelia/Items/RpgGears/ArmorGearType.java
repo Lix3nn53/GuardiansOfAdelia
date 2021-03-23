@@ -2,8 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorMaterial;
-import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.inventory.ItemStack;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
+import org.bukkit.Material;
 
 public enum ArmorGearType {
     HEAVY_ARMOR, // NETHERITE
@@ -12,15 +12,14 @@ public enum ArmorGearType {
     LIGHT_ARMOR, // IRON
     FEATHER_ARMOR;  // CHAINMAIL
 
-    public static ArmorGearType typeOf(ItemStack itemStack) {
-        if (itemStack == null) return null;
-
-        if (PersistentDataContainerUtil.hasString(itemStack, "gearType")) {
-            String gearTypeStr = PersistentDataContainerUtil.getString(itemStack, "gearType");
-            try {
-                return ArmorGearType.valueOf(gearTypeStr);
-            } catch (Exception e) {
-                return null;
+    public static ArmorGearType fromMaterial(Material material) {
+        for (ArmorGearType armorGearType : ArmorGearType.values()) {
+            ArmorMaterial armorMaterial = armorGearType.getArmorMaterial();
+            for (ArmorSlot armorSlot : ArmorSlot.values()) {
+                Material materialCompare = armorMaterial.getMaterial(armorSlot);
+                if (materialCompare.equals(material)) {
+                    return armorGearType;
+                }
             }
         }
 

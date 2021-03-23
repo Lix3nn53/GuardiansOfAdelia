@@ -7,7 +7,8 @@ public enum BuffType {
     ELEMENT_DAMAGE,
     ELEMENT_DEFENSE,
     CRIT_DAMAGE,
-    CRIT_CHANCE;
+    CRIT_CHANCE,
+    COOLDOWN_REDUCTION;
 
     @Override
     public String toString() {
@@ -19,7 +20,9 @@ public enum BuffType {
             case CRIT_DAMAGE:
                 return ChatColor.GOLD + "Critical Damage Buff";
             case CRIT_CHANCE:
-                return ChatColor.LIGHT_PURPLE + "Critical Chance Buff";
+                return ChatColor.DARK_PURPLE + "Critical Chance Buff";
+            case COOLDOWN_REDUCTION:
+                return ChatColor.LIGHT_PURPLE + "Cooldown Reduction Buff";
         }
         return "";
     }
@@ -41,6 +44,8 @@ public enum BuffType {
                 return PotionEffectType.UNLUCK;
             case CRIT_CHANCE:
                 return PotionEffectType.LUCK;
+            case COOLDOWN_REDUCTION:
+                return PotionEffectType.DOLPHINS_GRACE;
         }
         return null;
     }

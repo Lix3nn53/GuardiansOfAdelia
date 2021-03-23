@@ -46,7 +46,7 @@ public class BuffMechanic extends MechanicComponent {
 
         this.buffType = BuffType.valueOf(configurationSection.getString("buffType"));
         this.multiplier = configurationSection.getDoubleList("multipliers");
-        this.ticks = configurationSection.getIntegerList("ticks");
+        this.ticks = configurationSection.contains("ticks") ? configurationSection.getIntegerList("ticks") : new ArrayList<>();
     }
 
     @Override
@@ -56,8 +56,10 @@ public class BuffMechanic extends MechanicComponent {
         List<Player> buffedPlayers = new ArrayList<>();
 
         double multiplierToUse = multiplier.get(skillLevel - 1);
+        //add +2 ticks to duration because of repeating buffs icons disappear otherwise. Amplifier 0 anyways
+        int duration = ticks.isEmpty() ? Integer.MAX_VALUE : ticks.get(skillLevel - 1) + 2;
+        PotionEffect potionEffect = new PotionEffect(buffType.getPotionEffectType(), duration, 0);
 
-        boolean buffedAPlayer = false;
         for (LivingEntity ent : targets) {
             if (ent instanceof Player) {
                 Player player = (Player) ent;
@@ -66,21 +68,19 @@ public class BuffMechanic extends MechanicComponent {
                     if (guardianData.hasActiveCharacter()) {
                         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-                        rpgCharacterStats.addToBuffMultiplier(buffType, multiplierToUse);
 
-                        //add +2 ticks to duration because of repeating buffs icons disappear otherwise. Amplifier 0 anyways
-                        PotionEffect potionEffect = new PotionEffect(buffType.getPotionEffectType(), ticks.get(skillLevel - 1) + 2, 0);
-                        player.addPotionEffect(potionEffect);
+                        rpgCharacterStats.addToBuffMultiplier(buffType, multiplierToUse, potionEffect);
+
 
                         buffedPlayers.add(player);
-                        buffedAPlayer = true;
                     }
                 }
             }
         }
 
-        if (!buffedAPlayer) return false;
+        if (buffedPlayers.isEmpty()) return false;
 
+        if (this.ticks.isEmpty()) return true;
         new BukkitRunnable() { //remove buffs from buffed players after timeout
 
             @Override
@@ -91,7 +91,8 @@ public class BuffMechanic extends MechanicComponent {
                         if (guardianData.hasActiveCharacter()) {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                             RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-                            rpgCharacterStats.addToBuffMultiplier(buffType, -multiplierToUse);
+
+                            rpgCharacterStats.addToBuffMultiplier(buffType, -multiplierToUse, potionEffect);
                         }
                     }
                 }

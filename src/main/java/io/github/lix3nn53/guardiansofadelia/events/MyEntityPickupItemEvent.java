@@ -1,11 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropProtectionManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -53,14 +53,14 @@ public class MyEntityPickupItemEvent implements Listener {
             int firstEmpty = inventory.firstEmpty();
 
             if (firstEmpty == 4) { //pickup and hold
-                if (RPGItemUtils.isWeapon(type)) {
+                WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
+                if (weaponGearType != null) { // isWeapon?
                     if (GuardianDataManager.hasGuardianData(player)) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                         if (guardianData.hasActiveCharacter()) {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            String rpgClassStr = activeCharacter.getRpgClassStr();
 
-                            activeCharacter.getRpgCharacterStats().setMainHandBonuses(itemStack, rpgClassStr, true);
+                            activeCharacter.getRpgCharacterStats().onMainHandEquip(itemStack, true);
                         }
                     }
                 }

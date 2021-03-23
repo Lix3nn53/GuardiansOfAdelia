@@ -24,7 +24,7 @@ public class WeaponSet {
     }
 
     public int getElementDamage(WeaponGearType gearType) {
-        return (int) (damage * gearType.getDamageReduction() + 0.5);
+        return (int) (damage * gearType.getWeaponAttackDamage().getDamageReduction() + 0.5);
     }
 
     public int getRequiredLevel() {

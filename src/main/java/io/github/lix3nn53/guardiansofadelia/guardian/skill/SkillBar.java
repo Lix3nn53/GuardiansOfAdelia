@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -13,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Ini
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -254,6 +256,11 @@ public class SkillBar {
             }
         }
 
+        if (rpgCharacterStats == null) {
+            player.sendMessage("rpgCharacterStats null");
+            return false;
+        }
+
         boolean cast = skill.cast(player, skillLevel, new ArrayList<>(), castCounter);//cast ends when this returns
 
         if (!cast) {
@@ -264,42 +271,55 @@ public class SkillBar {
         castCounter++;
         TriggerListener.onPlayerSkillCast(player);
 
-        if (rpgCharacterStats != null) {
-            rpgCharacterStats.consumeMana(manaCost);
+        // mana cost
+        rpgCharacterStats.consumeMana(manaCost);
+
+        double abilityHaste = rpgCharacterStats.getTotalAbilityHaste();
+
+        Material type = player.getInventory().getItemInMainHand().getType();
+        WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
+        if (weaponGearType != null) {
+            abilityHaste += weaponGearType.getBonusAbilityHaste();
         }
 
-        int cooldown = skill.getCooldown(skillLevel);
+        int cooldownInTicks = (int) (((skill.getCooldown(skillLevel) * 20) * (100 / (100 + abilityHaste))) + 0.5); // Ability haste formula from League of Legends
         PlayerInventory inventory = player.getInventory();
+        player.sendMessage("cooldownInTicks: " + cooldownInTicks);
 
         skillsOnCooldown.put("" + skillIndex, true);
 
         final int finalSkillIndex = skillIndex;
         new BukkitRunnable() {
 
-            int seconds = 0;
+            int ticksPassed = 0;
 
             @Override
             public void run() {
-                if (!player.isOnline()) {
-                    skillsOnCooldown.remove("" + finalSkillIndex);
-                    cancel();
-                    return;
-                }
-
-                if (seconds >= cooldown) {
+                if (ticksPassed >= cooldownInTicks) {
                     cancel();
                     skillsOnCooldown.remove("" + finalSkillIndex);
                 } else {
-                    ItemStack item = inventory.getItem(slot);
-                    if (InventoryUtils.isAirOrNull(item)) {
-                        remakeSkillBarIcon(finalSkillIndex);
-                        item = inventory.getItem(slot);
+                    int cooldownLeft = cooldownInTicks - ticksPassed;
+                    int secondsLeft = cooldownLeft / 20;
+                    double modulus = cooldownLeft % 20;
+
+                    if (modulus > 0) {
+                        secondsLeft++;
                     }
-                    item.setAmount(cooldown - seconds);
+
+                    ItemStack item = inventory.getItem(slot);
+                    int currentAmount = item.getAmount();
+                    if (currentAmount != secondsLeft) {
+                        if (InventoryUtils.isAirOrNull(item)) {
+                            remakeSkillBarIcon(finalSkillIndex);
+                            item = inventory.getItem(slot);
+                        }
+                        item.setAmount(secondsLeft);
+                    }
                 }
-                seconds++;
+                ticksPassed++;
             }
-        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 20L);
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 1L);
 
         return true;
     }
