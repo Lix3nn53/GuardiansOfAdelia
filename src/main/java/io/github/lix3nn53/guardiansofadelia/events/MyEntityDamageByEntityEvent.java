@@ -275,26 +275,26 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                         if (isProjectile) { // NonSkill projectile like arrow from bow
                             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.6F, 0.4F);
-                        }
-
-                        ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-                        Material type = itemInMainHand.getType();
-                        WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
-                        if (weaponGearType != null) { // Melee
+                        } else { // melee
                             if (player.getInventory().getHeldItemSlot() != 4) {
                                 event.setCancelled(true);
                                 player.sendMessage(ChatColor.RED + "You can only attack with weapon slot(5)");
                                 return false;
                             }
-
+                            ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                             if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr)) {
                                 return false;
                             }
 
-                            double meleeDamageReduction = weaponGearType.getMeleeDamageReduction();
-                            damage *= meleeDamageReduction;
+                            Material type = itemInMainHand.getType();
+                            WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
 
-                            weaponGearType.onHitEffect(player, livingTarget);
+                            if (weaponGearType != null) {
+                                double meleeDamageReduction = weaponGearType.getMeleeDamageReduction();
+                                damage *= meleeDamageReduction;
+
+                                weaponGearType.onHitEffect(player, livingTarget);
+                            }
 
                             /* DO NOT add damage bonus from offhand manually, it is added via vanilla attributes
                             //add damage bonus from offhand
@@ -306,7 +306,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             }*/
                         }
 
-                        // Add bonus damage to normal attack
+                        // Add bonus damage to normal attack, both melee and ranged
                         damage += rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE).getIncrement(player.getLevel(), rpgClassStr); // bonus from attribute
                         damage += rpgCharacterStats.getElement(damageType).getBonusFromEquipment(); // bonus from element
 

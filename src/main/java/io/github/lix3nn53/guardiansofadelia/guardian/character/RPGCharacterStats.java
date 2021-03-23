@@ -62,7 +62,7 @@ public class RPGCharacterStats {
     private final int elementDefense = 1;
 
     private final double baseAbilityHaste = 0;
-    private final double baseCriticalChance = 0.05;
+    private final double baseCriticalChance = 0.01;
     private final double baseCriticalDamageDamage = 0.6;
     //armor slots
     private ArmorStatHolder helmet;
@@ -297,6 +297,14 @@ public class RPGCharacterStats {
         }
 
         chance += buffCriticalChance;
+
+        ItemStack item = player.getInventory().getItem(4);
+        if (item != null) {
+            WeaponGearType weaponGearType = WeaponGearType.fromMaterial(item.getType());
+            if (weaponGearType != null) {
+                chance += weaponGearType.getCriticalChance();
+            }
+        }
 
         return chance;
     }

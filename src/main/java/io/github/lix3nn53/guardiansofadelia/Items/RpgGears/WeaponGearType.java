@@ -61,6 +61,27 @@ public enum WeaponGearType {
         return null;
     }
 
+    public WeaponAttackDamage getWeaponAttackDamage() {
+        switch (this) {
+            case DAGGER:
+                return WeaponAttackDamage.LOW;
+            case SWORD:
+            case SPEAR:
+            case BOW: // Reduced melee damage
+                return WeaponAttackDamage.NORMAL;
+            case WAR_HAMMER:
+            case GREAT_SWORD:
+            case CROSSBOW: // Reduced melee damage
+            case STAFF: // Reduced melee damage
+                return WeaponAttackDamage.HIGH;
+            case BATTLE_AXE:
+            case WAND: // Reduced melee damage
+                return WeaponAttackDamage.MAXIMUM;
+        }
+
+        return WeaponAttackDamage.LOW;
+    }
+
     public WeaponAttackSpeed getAttackSpeed() {
         switch (this) {
             case SWORD:
@@ -79,6 +100,26 @@ public enum WeaponGearType {
         }
 
         return WeaponAttackSpeed.SLOW;
+    }
+
+    public double getCriticalChance() {
+        switch (this) {
+            case SWORD:
+            case GREAT_SWORD:
+            case SPEAR:
+            case BOW:
+            case WAND:
+                return 0.06;
+            case STAFF:
+            case DAGGER:
+                return 0.04;
+            case BATTLE_AXE:
+            case WAR_HAMMER:
+            case CROSSBOW:
+                return 0.09;
+        }
+
+        return 0.05;
     }
 
     public String getDisplayName() {
@@ -106,27 +147,6 @@ public enum WeaponGearType {
         }
 
         return "WEAPON GEAR NAME BUG";
-    }
-
-    public WeaponAttackDamage getWeaponAttackDamage() {
-        switch (this) {
-            case DAGGER:
-                return WeaponAttackDamage.LOW;
-            case SWORD:
-            case SPEAR:
-            case BOW: // Reduced melee damage
-                return WeaponAttackDamage.NORMAL;
-            case WAR_HAMMER:
-            case GREAT_SWORD:
-            case CROSSBOW: // Reduced melee damage
-            case STAFF: // Reduced melee damage
-                return WeaponAttackDamage.HIGH;
-            case BATTLE_AXE:
-            case WAND: // Reduced melee damage
-                return WeaponAttackDamage.MAXIMUM;
-        }
-
-        return WeaponAttackDamage.LOW;
     }
 
     public boolean isMelee() {
