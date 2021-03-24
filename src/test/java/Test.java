@@ -1,14 +1,7 @@
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSet;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponSet;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +14,16 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException, SQLException {
 
-        for (int requiredLevel = 0; requiredLevel <= 99; requiredLevel += 10) {
+        int maxStatValue = GearLevel.NINE.getMaxStatValue(true, true);
+        int maxStatValuee = GearLevel.NINE.getMaxStatValue(true, false);
+        System.out.println("max element: " + maxStatValue);
+        System.out.println("max attr: " + maxStatValuee);
+        int minStatValue = GearLevel.NINE.getMinStatValue(true, true);
+        int minStatValue1 = GearLevel.NINE.getMinStatValue(true, false);
+        System.out.println("min element: " + minStatValue);
+        System.out.println("min attr: " + minStatValue1);
+
+        /*for (int requiredLevel = 0; requiredLevel <= 99; requiredLevel += 10) {
             GearLevel gearLevel = GearLevel.getGearLevel(requiredLevel);
             System.out.println("requiredLevel: " + requiredLevel + "GearLevel: " + gearLevel);
         }
@@ -29,7 +31,14 @@ public class Test {
         for (int requiredLevel = 0; requiredLevel <= 90; requiredLevel += 10) {
             System.out.println("REQUIRED LEVEL " + requiredLevel);
             WeaponSet weaponSet = new WeaponSet("requiredLevel" + requiredLevel, requiredLevel, 0);
-            System.out.println("weaponSet damage: " + weaponSet.getElementDamage(WeaponGearType.DAGGER));
+            System.out.println("weaponSet damage: " + weaponSet.getElementDamage(WeaponGearType.WAND) * 1 * 0.4);
+            System.out.println("weaponSet damage: " + weaponSet.getElementDamage(WeaponGearType.WAND) * 1 * 0.6);
+            System.out.println("weaponSet damage: " + weaponSet.getElementDamage(WeaponGearType.WAND) * 1 * 0.8);
+            System.out.println("weaponSet damage: " + weaponSet.getElementDamage(WeaponGearType.WAND) * 1 * 1);
+            System.out.println("weaponSet damage: " + weaponSet.getElementDamage(WeaponGearType.WAND) * 1.4 * 0.4);
+            System.out.println("weaponSet damage: " + weaponSet.getElementDamage(WeaponGearType.WAND) * 1.4 * 0.6);
+            System.out.println("weaponSet damage: " + weaponSet.getElementDamage(WeaponGearType.WAND) * 1.4 * 0.8);
+            System.out.println("weaponSet damage: " + weaponSet.getElementDamage(WeaponGearType.WAND) * 1.4 * 1);
             ArmorSet armorSet = new ArmorSet("requiredLevel" + requiredLevel, requiredLevel);
             int totalHp = 0;
             int totalArmor = 0;
@@ -40,9 +49,9 @@ public class Test {
             System.out.println("armorSet health: " + totalHp);
             double defenseReduction = StatUtils.getDefenseReduction(totalArmor);
             System.out.println("armorSet defense: " + totalArmor + " - " + "(" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% reduction)");
-            /*ShieldSet shieldSet = new ShieldSet("requiredLevel" + requiredLevel, requiredLevel, 0);
-            System.out.println("shieldSet health: " + shieldSet.getHealth(ShieldGearType.SHIELD));*/
-        }
+            *//*ShieldSet shieldSet = new ShieldSet("requiredLevel" + requiredLevel, requiredLevel, 0);
+            System.out.println("shieldSet health: " + shieldSet.getHealth(ShieldGearType.SHIELD));*//*
+        }*/
 
         /*double angle = 30;
 

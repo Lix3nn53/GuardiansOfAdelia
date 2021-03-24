@@ -25,7 +25,7 @@ public class StatUtils {
     // Values to use while generating items
     private static final double ITEM_HEALTH = 9;
     private static final double ITEM_DEFENSE = 5;
-    private static final double ITEM_DAMAGE = 5;
+    private static final double ITEM_DAMAGE = 4;
 
     // Formula
     private static final double HALF_REDUCTION_DEFENSE = 2000.0;

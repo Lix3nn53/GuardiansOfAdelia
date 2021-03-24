@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.Element;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -47,11 +48,15 @@ public class CharacterInfoSlot {
                 int maxHealth = (int) (player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + 0.5);
                 int health = (int) (player.getHealth() + 0.5);
                 double criticalChance = rpgCharacterStats.getTotalCriticalChance() * 100;
+                double criticalDamage = rpgCharacterStats.getTotalCriticalDamage() * 100;
 
                 final int totalDefense = rpgCharacterStats.getTotalElementDefense();
                 double defenseReduction = StatUtils.getDefenseReduction(totalDefense);
 
                 ElementType mainElement = rpgClass.getMainElement();
+
+                double abilityHaste = rpgCharacterStats.getTotalAbilityHaste();
+                double cooldownReduction = SkillBar.abilityHasteToMultiplier(abilityHaste);
 
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("");
@@ -64,7 +69,10 @@ public class CharacterInfoSlot {
                 lore.add("");
                 lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + rpgCharacterStats.getTotalElementDamage(player, rpgClassStr));
                 lore.add(ChatColor.AQUA + "■ Element Defense: " + ChatColor.GRAY + totalDefense + " (" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% reduction)");
-                lore.add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
+                lore.add(ChatColor.GOLD + "⚝ Critical Chance: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
+                lore.add("");
+                lore.add(ChatColor.GOLD + "? Critical Damage: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalDamage) + "%");
+                lore.add(ChatColor.AQUA + "? Ability Haste: " + ChatColor.GRAY + abilityHaste + " (" + new DecimalFormat("##.##").format((1.0 - cooldownReduction) * 100) + "% reduction)");
 
                 /*lore.add("");
                 lore.add(ChatColor.GRAY + "(equipment + level + invested points)");

@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -14,7 +13,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Ini
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -217,6 +215,30 @@ public class SkillBar {
         }
     }
 
+    public static double abilityHasteToMultiplier(double abilityHaste) {
+        return 100 / (100 + abilityHaste);
+    }
+
+    public HashMap<Integer, Skill> getSkillSet() {
+        return this.skillSet;
+    }
+
+    public HashMap<Integer, Integer> getInvestedSkillPoints() {
+        return investedSkillPoints;
+    }
+
+    public int getCurrentSkillLevel(int skillIndex) {
+        Skill skill = this.skillSet.get(skillIndex);
+
+        Integer invested = investedSkillPoints.get(skillIndex);
+        return skill.getCurrentSkillLevel(invested);
+    }
+
+    public void reloadSkillSet(HashMap<Integer, Skill> skillSet) {
+        this.skillSet.clear();
+        this.skillSet.putAll(skillSet);
+    }
+
     public boolean castSkill(int slot) {
         if (StatusEffectManager.isSilenced(player)) {
             player.sendTitle(ChatColor.LIGHT_PURPLE + "", ChatColor.LIGHT_PURPLE + "Silenced..", 0, 20, 0);
@@ -276,13 +298,7 @@ public class SkillBar {
 
         double abilityHaste = rpgCharacterStats.getTotalAbilityHaste();
 
-        Material type = player.getInventory().getItemInMainHand().getType();
-        WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
-        if (weaponGearType != null) {
-            abilityHaste += weaponGearType.getBonusAbilityHaste();
-        }
-
-        int cooldownInTicks = (int) (((skill.getCooldown(skillLevel) * 20) * (100 / (100 + abilityHaste))) + 0.5); // Ability haste formula from League of Legends
+        int cooldownInTicks = (int) (((skill.getCooldown(skillLevel) * 20) * abilityHasteToMultiplier(abilityHaste)) + 0.5); // Ability haste formula from League of Legends
         PlayerInventory inventory = player.getInventory();
         player.sendMessage("cooldownInTicks: " + cooldownInTicks);
 
@@ -322,25 +338,5 @@ public class SkillBar {
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 1L);
 
         return true;
-    }
-
-    public HashMap<Integer, Skill> getSkillSet() {
-        return this.skillSet;
-    }
-
-    public HashMap<Integer, Integer> getInvestedSkillPoints() {
-        return investedSkillPoints;
-    }
-
-    public int getCurrentSkillLevel(int skillIndex) {
-        Skill skill = this.skillSet.get(skillIndex);
-
-        Integer invested = investedSkillPoints.get(skillIndex);
-        return skill.getCurrentSkillLevel(invested);
-    }
-
-    public void reloadSkillSet(HashMap<Integer, Skill> skillSet) {
-        this.skillSet.clear();
-        this.skillSet.putAll(skillSet);
     }
 }

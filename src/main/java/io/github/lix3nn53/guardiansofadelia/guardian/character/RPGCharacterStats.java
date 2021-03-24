@@ -63,7 +63,7 @@ public class RPGCharacterStats {
 
     private final double baseAbilityHaste = 0;
     private final double baseCriticalChance = 0.01;
-    private final double baseCriticalDamageDamage = 0.6;
+    private final double baseCriticalDamageDamage = 1.5;
     //armor slots
     private ArmorStatHolder helmet;
     private ArmorStatHolder chestplate;
@@ -314,7 +314,15 @@ public class RPGCharacterStats {
     }
 
     public double getTotalAbilityHaste() {
-        return baseAbilityHaste + buffAbilityHaste;
+        double v = baseAbilityHaste + buffAbilityHaste;
+
+        Material type = player.getInventory().getItemInMainHand().getType();
+        WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
+        if (weaponGearType != null) {
+            v += weaponGearType.getBonusAbilityHaste();
+        }
+
+        return v;
     }
 
     public int getTotalElementDamage(Player player, String rpgClass) {
@@ -862,10 +870,12 @@ public class RPGCharacterStats {
         } else if (buffType.equals(BuffType.CRIT_CHANCE)) {
             this.buffCriticalChance += addToMultiplier;
             newValue = this.buffCriticalChance;
-        } else if (buffType.equals(BuffType.COOLDOWN_REDUCTION)) {
+        } else if (buffType.equals(BuffType.ABILITY_HASTE)) {
             this.buffAbilityHaste += addToMultiplier;
             newValue = this.buffAbilityHaste;
         }
+
+        if (potionEffect == null) return;
 
         if (newValue != 1.0) {
             player.addPotionEffect(potionEffect);
@@ -883,7 +893,7 @@ public class RPGCharacterStats {
             return this.buffCriticalDamage;
         } else if (buffType.equals(BuffType.CRIT_CHANCE)) {
             return this.buffCriticalChance;
-        } else if (buffType.equals(BuffType.COOLDOWN_REDUCTION)) {
+        } else if (buffType.equals(BuffType.ABILITY_HASTE)) {
             return this.buffAbilityHaste;
         }
         return 1;
@@ -921,20 +931,20 @@ public class RPGCharacterStats {
                 // Clear old set effect
                 if (sameTypeArmorSet != null) {
                     GearSetEffect oldEffect = sameTypeArmorSet.getSetEffect();
-                    oldEffect.clearSetEffect(player); // different same armor type
+                    oldEffect.clearSetEffect(player, this); // different same armor type
                 }
 
                 player.sendMessage(ChatColor.DARK_PURPLE + "Same Type Armor Effect Activation: "
                         + ChatColor.LIGHT_PURPLE + helmetType.getDisplayName() + " [" + 4 + "pieces]");
 
                 GearSetEffect setEffect = helmetType.getSetEffect();
-                setEffect.applySetEffect(player);
+                setEffect.applySetEffect(player, this);
 
                 sameTypeArmorSet = helmetType;
             }
         } else if (sameTypeArmorSet != null) {
             GearSetEffect setEffect = sameTypeArmorSet.getSetEffect();
-            setEffect.clearSetEffect(player); // no more same armor type
+            setEffect.clearSetEffect(player, this); // no more same armor type
             sameTypeArmorSet = null;
         }
 
@@ -978,7 +988,7 @@ public class RPGCharacterStats {
             if (GearSetManager.hasEffect(gearSet)) {
                 List<GearSetEffect> gearSetEffects = GearSetManager.getEffects(gearSet);
                 for (GearSetEffect gearSetEffect : gearSetEffects) {
-                    gearSetEffect.clearSetEffect(player); // custom effect clear
+                    gearSetEffect.clearSetEffect(player, this); // custom effect clear
                 }
             }
         }
@@ -991,7 +1001,7 @@ public class RPGCharacterStats {
 
                 List<GearSetEffect> gearSetEffects = GearSetManager.getEffects(gearSet);
                 for (GearSetEffect gearSetEffect : gearSetEffects) {
-                    gearSetEffect.applySetEffect(player);
+                    gearSetEffect.applySetEffect(player, this);
                 }
             }
         }
