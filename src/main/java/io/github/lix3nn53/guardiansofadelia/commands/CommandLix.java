@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
@@ -246,11 +247,12 @@ public class CommandLix implements CommandExecutor {
                 if (args.length >= 3) {
                     WeaponGearType weaponGearType = WeaponGearType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
+                    GearLevel gearLevel = GearLevel.values()[no];
                     String gearSet = "Command";
                     if (args.length == 4) {
                         gearSet = args[3];
                     }
-                    ItemStack weapon = WeaponManager.get(weaponGearType, no, 0, ItemTier.LEGENDARY, false, gearSet);
+                    ItemStack weapon = WeaponManager.get(weaponGearType, gearLevel, ItemTier.LEGENDARY, false, gearSet).get(0);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("armor")) {
@@ -258,17 +260,19 @@ public class CommandLix implements CommandExecutor {
                     ArmorSlot armorSlot = ArmorSlot.valueOf(args[1]);
                     ArmorGearType armorGearType = ArmorGearType.valueOf(args[2]);
                     int no = Integer.parseInt(args[3]);
+                    GearLevel gearLevel = GearLevel.values()[no];
                     String gearSet = "Command";
                     if (args.length == 5) {
                         gearSet = args[4];
                     }
-                    ItemStack weapon = ArmorManager.get(armorSlot, armorGearType, no, 0, ItemTier.LEGENDARY, false, gearSet);
+                    ItemStack weapon = ArmorManager.get(armorSlot, armorGearType, gearLevel, ItemTier.LEGENDARY, false, gearSet).get(0);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("egg")) {
                 if (args.length == 4) {
                     String petCode = args[1];
-                    int gearLevel = Integer.parseInt(args[2]);
+                    int no = Integer.parseInt(args[2]);
+                    GearLevel gearLevel = GearLevel.values()[no];
                     int petLevel = Integer.parseInt(args[3]);
 
                     ItemStack egg = Eggs.get(petCode, gearLevel, petLevel);
@@ -314,7 +318,8 @@ public class CommandLix implements CommandExecutor {
                 if (args.length == 3) {
                     RPGSlotType rpgSlotType = RPGSlotType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
-                    ItemStack passive = PassiveManager.get(no, 0, rpgSlotType, ItemTier.LEGENDARY, false, "Command");
+                    GearLevel gearLevel = GearLevel.values()[no];
+                    ItemStack passive = PassiveManager.get(gearLevel, rpgSlotType, ItemTier.LEGENDARY, false, "Command").get(0);
                     InventoryUtils.giveItemToPlayer(player, passive);
                 }
             } else if (args[0].equals("model")) {

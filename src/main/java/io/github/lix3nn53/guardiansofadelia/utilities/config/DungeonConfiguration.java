@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonRoom;
@@ -43,7 +44,8 @@ public class DungeonConfiguration {
             String code = section.getString("code");
             String name = section.getString("name");
             String gearTag = section.getString("gearTag");
-            int gearLevel = section.getInt("gearLevel");
+            int gearLevelIndex = section.getInt("gearLevel");
+            GearLevel gearLevel = GearLevel.values()[gearLevelIndex];
             String portalColorStr = section.getString("portalColor");
             PortalColor portalColor = PortalColor.valueOf(portalColorStr);
 

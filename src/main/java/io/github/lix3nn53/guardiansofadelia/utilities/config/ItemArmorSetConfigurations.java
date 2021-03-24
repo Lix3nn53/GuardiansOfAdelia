@@ -40,12 +40,10 @@ public class ItemArmorSetConfigurations {
             for (int i = 1; i <= itemCount; i++) {
                 String nameStr = itemSetConfiguration.getString("i" + i + ".name");
                 int baseLevelReq = itemSetConfiguration.getInt("i" + i + ".baseLevelReq");
-                int health = itemSetConfiguration.getInt("i" + i + ".health");
-                int defense = itemSetConfiguration.getInt("i" + i + ".defense");
 
                 String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-                ArmorSet armorSet = new ArmorSet(name, baseLevelReq, health, defense);
+                ArmorSet armorSet = new ArmorSet(name, baseLevelReq);
 
                 ArmorManager.add(armorSet);
             }

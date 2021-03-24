@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.config;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
@@ -12,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeaponReferenceData {
-    private final int gearLevel;
+    private final GearLevel gearLevel;
     private final int itemIndex;
     private final ItemTier itemTier;
     private final String gearSet;
 
-    public WeaponReferenceData(int gearLevel, int itemIndex, ItemTier itemTier, String gearSet) {
+    public WeaponReferenceData(GearLevel gearLevel, int itemIndex, ItemTier itemTier, String gearSet) {
         this.gearLevel = gearLevel;
         this.itemIndex = itemIndex;
         this.itemTier = itemTier;
@@ -25,7 +26,7 @@ public class WeaponReferenceData {
     }
 
     public WeaponReferenceData(ConfigurationSection configurationSection) {
-        this.gearLevel = configurationSection.getInt("gearLevel");
+        this.gearLevel = GearLevel.values()[configurationSection.getInt("gearLevel")];
         this.itemIndex = configurationSection.getInt("itemIndex");
         this.itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
         if (configurationSection.contains("gearSet")) {
@@ -41,13 +42,13 @@ public class WeaponReferenceData {
 
         ArrayList<ItemStack> items = new ArrayList<>();
         for (WeaponGearType type : weaponGearTypes) {
-            items.add(WeaponManager.get(type, gearLevel, itemIndex, itemTier, true, gearSet));
+            items.add(WeaponManager.get(type, gearLevel, itemTier, true, gearSet).get(itemIndex));
         }
 
         return items;
     }
 
-    public int getGearLevel() {
+    public GearLevel getGearLevel() {
         return gearLevel;
     }
 

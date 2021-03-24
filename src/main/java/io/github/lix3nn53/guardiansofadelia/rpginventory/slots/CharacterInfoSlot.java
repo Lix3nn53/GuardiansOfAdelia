@@ -35,7 +35,6 @@ public class CharacterInfoSlot {
                 SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
                 skullMeta.setDisplayName(ChatColor.YELLOW + "Character Info");
 
-                int charNo = guardianData.getActiveCharacterNo();
                 String rpgClassStr = activeCharacter.getRpgClassStr();
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
                 String className = rpgClass.getClassString();
@@ -50,7 +49,7 @@ public class CharacterInfoSlot {
                 double criticalChance = rpgCharacterStats.getTotalCriticalChance() * 100;
 
                 final int totalDefense = rpgCharacterStats.getTotalElementDefense();
-                double phyReduction = StatUtils.getDefenseReduction(totalDefense);
+                double defenseReduction = StatUtils.getDefenseReduction(totalDefense);
 
                 ElementType mainElement = rpgClass.getMainElement();
 
@@ -64,7 +63,7 @@ public class CharacterInfoSlot {
                 lore.add(ChatColor.AQUA + "✧ Max Mana: " + ChatColor.GRAY + "" + mana + "/" + maxMana);
                 lore.add("");
                 lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + rpgCharacterStats.getTotalElementDamage(player, rpgClassStr));
-                lore.add(ChatColor.AQUA + "■ Element Defense: " + ChatColor.GRAY + totalDefense + " (" + (int) (((1.0 - phyReduction) * 100) + 0.5) + "% reduction)");
+                lore.add(ChatColor.AQUA + "■ Element Defense: " + ChatColor.GRAY + totalDefense + " (" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% reduction)");
                 lore.add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
 
                 /*lore.add("");

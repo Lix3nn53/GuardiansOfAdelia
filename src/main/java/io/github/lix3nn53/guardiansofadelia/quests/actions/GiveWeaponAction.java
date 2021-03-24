@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
@@ -14,14 +15,16 @@ import org.bukkit.inventory.ItemStack;
 
 public class GiveWeaponAction implements Action {
 
-    private final int gearLevel;
+    private final GearLevel gearLevel;
     private final ItemTier tier;
     private final String gearSet;
+    private final int itemIndex;
 
-    public GiveWeaponAction(int gearLevel, ItemTier tier, String gearSet) {
+    public GiveWeaponAction(GearLevel gearLevel, ItemTier tier, String gearSet, int itemIndex) {
         this.gearLevel = gearLevel;
         this.tier = tier;
         this.gearSet = gearSet;
+        this.itemIndex = itemIndex;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class GiveWeaponAction implements Action {
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
                 WeaponGearType defaultWeaponGearType = rpgClass.getDefaultWeaponGearType();
 
-                ItemStack weapon = WeaponManager.get(defaultWeaponGearType, gearLevel, 0, tier, false, gearSet);
+                ItemStack weapon = WeaponManager.get(defaultWeaponGearType, gearLevel, tier, false, gearSet).get(itemIndex);
                 InventoryUtils.giveItemToPlayer(player, weapon);
             }
         }

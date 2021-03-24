@@ -11,7 +11,7 @@ theme1:
   timeLimitInMinutes: 10
   bossInternalName: TutorialSoldier
   gearTag: "Library tag??"
-  gearLevel: 1
+  gearLevel: 0
   portalColor: "PURPLE"
 theme2:
   code: "SEWER"
@@ -20,5 +20,5 @@ theme2:
   timeLimitInMinutes: 10
   bossInternalName: TutorialSoldier
   gearTag: "Rotten"
-  gearLevel: 2
+  gearLevel: 1
   portalColor: "GREEN"

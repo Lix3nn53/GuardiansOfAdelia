@@ -22,6 +22,14 @@ import java.util.List;
 
 public class StatUtils {
 
+    // Values to use while generating items
+    private static final double ITEM_HEALTH = 9;
+    private static final double ITEM_DEFENSE = 5;
+    private static final double ITEM_DAMAGE = 5;
+
+    // Formula
+    private static final double HALF_REDUCTION_DEFENSE = 2000.0;
+
     public static Stat getStat(ItemStack item) {
         Material mat = item.getType();
         GearStatType type = getStatType(mat);
@@ -82,22 +90,22 @@ public class StatUtils {
                 mat.equals(Material.SHEARS);
     }
 
-    public static void addRandomPassiveStats(ItemStack itemStack, int gearLevel, ItemTier itemTier) {
+    public static void addRandomPassiveStats(ItemStack itemStack, GearLevel gearLevel, ItemTier itemTier) {
         Material type = itemStack.getType();
         if (hasStatType(type)) {
             int minNumberOfElements = itemTier.getMinNumberOfElements(false);
             int minNumberOfAttributes = itemTier.getMinNumberOfAttributes(false);
-            int minAttrValue = GearLevel.getMinStatValue(gearLevel, false, false);
-            int maxAttrValue = GearLevel.getMaxStatValue(gearLevel, false, false);
-            int minElemValue = GearLevel.getMinStatValue(gearLevel, false, true);
-            int maxElemValue = GearLevel.getMaxStatValue(gearLevel, false, true);
+            int minAttrValue = gearLevel.getMinStatValue(false, false);
+            int maxAttrValue = gearLevel.getMaxStatValue(false, false);
+            int minElemValue = gearLevel.getMinStatValue(false, true);
+            int maxElemValue = gearLevel.getMaxStatValue(false, true);
             if (type.equals(Material.SHEARS)) { //passive item
                 minNumberOfElements = itemTier.getMinNumberOfElements(true);
                 minNumberOfAttributes = itemTier.getMinNumberOfAttributes(true);
-                minAttrValue = GearLevel.getMinStatValue(gearLevel, true, false);
-                maxAttrValue = GearLevel.getMaxStatValue(gearLevel, true, false);
-                minElemValue = GearLevel.getMinStatValue(gearLevel, true, true);
-                maxElemValue = GearLevel.getMaxStatValue(gearLevel, true, true);
+                minAttrValue = gearLevel.getMinStatValue(true, false);
+                maxAttrValue = gearLevel.getMaxStatValue(true, false);
+                minElemValue = gearLevel.getMinStatValue(true, true);
+                maxElemValue = gearLevel.getMaxStatValue(true, true);
             }
 
 
@@ -187,7 +195,19 @@ public class StatUtils {
         return true;
     }
 
-    public static double getDefenseReduction(int totalDefense) {
-        return (1 - (totalDefense / (totalDefense + 2000.0))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
+    public static double getDefenseReduction(double totalDefense) {
+        return (1 - (totalDefense / (totalDefense + HALF_REDUCTION_DEFENSE))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
+    }
+
+    public static int getDamageItem(int requiredLevel) {
+        return (int) (10 + Math.round(ITEM_DAMAGE * Math.pow(requiredLevel, 2) / 20) + 0.5);
+    }
+
+    public static int getHealthItem(int requiredLevel) {
+        return (int) (10 + Math.round(ITEM_HEALTH * Math.pow(requiredLevel, 2) / 20) + 0.5);
+    }
+
+    public static int getDefenseItem(int requiredLevel) {
+        return (int) (10 + Math.round(ITEM_DEFENSE * Math.pow(requiredLevel, 2) / 20) + 0.5);
     }
 }

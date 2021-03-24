@@ -38,7 +38,7 @@ public enum AttributeType {
             case BONUS_MAX_MANA:
                 return getIncrementPerPoint() + " bonus max mana per point";
             case BONUS_CRITICAL_CHANCE:
-                return getIncrementPerPoint() * 100 + "% bonus critical chance per point(max 40%)";
+                return getIncrementPerPoint() * 100 + "% bonus critical chance per point";
         }
         return "attributeDescription";
     }

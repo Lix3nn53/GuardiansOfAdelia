@@ -16,9 +16,9 @@ attributeMaxHealth: 5
 attributeMaxMana: 1
 attributeCriticalChance: 0
 weaponGearTypes:
-  - "WAND"
-  - "DAGGER"
-  - "STAFF"
+  - "WAR_HAMMER"
+  - "GREAT_SWORD"
+  - "SWORD"
 armorGearTypes:
   - "CLOTH_ARMOR"
   - "FEATHER_ARMOR"

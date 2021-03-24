@@ -22,9 +22,12 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.Tri
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.DamageIndicator;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
@@ -274,7 +277,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         damageType = rpgClass.getMainElement();
 
                         if (isProjectile) { // NonSkill projectile like arrow from bow
-                            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.6F, 0.4F);
+                            player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 0.6F, 0.4F);
                         } else { // melee
                             if (player.getInventory().getHeldItemSlot() != 4) {
                                 event.setCancelled(true);
@@ -323,7 +326,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         damage += damage * rpgCharacterStats.getTotalCriticalDamage();
                         isCritical = true;
                         Particle particle = Particle.CRIT;
-                        targetLocation.getWorld().spawnParticle(particle, targetLocation.clone().add(0, 0.25, 0), 6);
+                        // ParticleShapes.playSingleParticle(targetLocation, particle, null);
+                        ParticleShapes.fillHemisphere(targetLocation.clone().add(0, 0.25, 0), particle, 0.2, 8, null);
+                        player.playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CURE, 0.6F, 2.0F);
                     }
                 } else {
                     ActiveMob activeMob = MythicMobs.inst().getMobManager().getMythicMobInstance(pet);
@@ -336,6 +341,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         event.setDamage(customDamage);
                         damage = customDamage; //so vanilla def is not included if target is player
                     }
+
+                    CustomSound customSound = GoaSound.PET_ATTACK.getCustomSound();
+                    customSound.play(pet.getEyeLocation());
                 }
 
                 //custom defense formula if target is another player
@@ -393,11 +401,14 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 //indicator
                 ChatColor indicatorColor = damageType.getChatColor();
                 String indicatorIcon = damageType.getIcon() + "";
+                if (isCritical) {
+                    indicatorColor = ChatColor.GOLD;
+                }
 
                 String text = indicatorColor.toString() + (int) (finalDamage + 0.5) + " " + indicatorIcon;
-                if (isCritical) {
-                    text = ChatColor.GOLD + "⚝" + text;
-                }
+                /*if (isCritical) {
+                    text = "⚝" + text;
+                }*/
                 double targetHeight = livingTarget.getHeight();
                 DamageIndicator.spawnNonPacket(text, targetLocation.clone().add(0, targetHeight + 0.5, 0));
                 //TODO make indicator via packets

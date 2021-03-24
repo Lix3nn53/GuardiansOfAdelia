@@ -14,33 +14,37 @@ import java.util.List;
 
 public class ArmorManager {
 
-    private final static HashMap<Integer, List<ArmorSet>> gearLevelToArmorSets = new HashMap<>();
+    private final static HashMap<GearLevel, List<ArmorSet>> gearLevelToArmorSets = new HashMap<>();
 
-    public static ItemStack get(ArmorSlot armorSlot, ArmorGearType gearType, int gearLevel, int setIndex, ItemTier tier, boolean noStats, String gearSet) {
-        GuardiansOfAdelia.getInstance().getLogger().info(gearLevel + " " + setIndex + " " + armorSlot.toString() + " " + gearType.toString() + " " + tier.toString() + " " + gearSet);
-        int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfElements(false);
-        int minStatValue = noStats ? 0 : GearLevel.getMinStatValue(gearLevel, false, true);
-        int maxStatValue = noStats ? 0 : GearLevel.getMaxStatValue(gearLevel, false, true);
-
+    public static List<ItemStack> get(ArmorSlot armorSlot, ArmorGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, String gearSet) {
         List<ArmorSet> sets = gearLevelToArmorSets.get(gearLevel);
 
-        ArmorSet armorSet = sets.get(setIndex);
+        GuardiansOfAdelia.getInstance().getLogger().info(gearLevel + " " + armorSlot.toString() + " " + gearType.toString() + " " + tier.toString() + " " + gearSet);
+        int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfElements(false);
+        int minStatValue = noStats ? 0 : gearLevel.getMinStatValue(false, true);
+        int maxStatValue = noStats ? 0 : gearLevel.getMaxStatValue(false, true);
 
-        String name = armorSet.getName(armorSlot);
-        Material material = armorSet.getMaterial(armorSlot, gearType);
-        int level = armorSet.getReqLevel(armorSlot);
-        int health = armorSet.getHealth(armorSlot, gearType);
-        int defense = armorSet.getDefense(armorSlot, gearType);
+        ArrayList<ItemStack> itemStacks = new ArrayList<>();
 
-        final GearArmor gearArmor = new GearArmor(name, tier, material, level,
-                gearType, health,
-                defense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
+        for (ArmorSet armorSet : sets) {
+            String name = armorSet.getName(armorSlot);
+            Material material = armorSet.getMaterial(armorSlot, gearType);
+            int level = armorSet.getReqLevel(armorSlot);
+            int health = armorSet.getHealth(armorSlot, gearType);
+            int defense = armorSet.getDefense(armorSlot, gearType);
 
-        return gearArmor.getItemStack();
+            final GearArmor gearArmor = new GearArmor(name, tier, material, level,
+                    gearType, health,
+                    defense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
+
+            itemStacks.add(gearArmor.getItemStack());
+        }
+
+        return itemStacks;
     }
 
     public static void add(ArmorSet armorSet) {
-        int gearLevel = GearLevel.getGearLevel(armorSet.getBaseReqLevel());
+        GearLevel gearLevel = GearLevel.getGearLevel(armorSet.getBaseRequiredLevel());
 
         List<ArmorSet> list = new ArrayList<>();
         if (gearLevelToArmorSets.containsKey(gearLevel)) {

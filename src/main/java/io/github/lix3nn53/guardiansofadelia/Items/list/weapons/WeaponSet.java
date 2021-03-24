@@ -1,18 +1,17 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.weapons;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 
 public class WeaponSet {
     private final String name;
-    private final int customModelData;
     private final int requiredLevel;
-    private final int damage;
+    private final int customModelData;
 
-    public WeaponSet(String name, int customModelData, int requiredLevel, int damage) {
+    public WeaponSet(String name, int requiredLevel, int customModelData) {
         this.name = name;
-        this.customModelData = customModelData;
         this.requiredLevel = requiredLevel;
-        this.damage = damage;
+        this.customModelData = customModelData;
     }
 
     public String getName(WeaponGearType gearType) {
@@ -24,6 +23,7 @@ public class WeaponSet {
     }
 
     public int getElementDamage(WeaponGearType gearType) {
+        int damage = StatUtils.getDamageItem(requiredLevel);
         return (int) (damage * gearType.getWeaponAttackDamage().getDamageReduction() + 0.5);
     }
 

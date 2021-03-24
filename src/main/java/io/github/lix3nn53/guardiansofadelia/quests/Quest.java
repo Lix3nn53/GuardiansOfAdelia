@@ -172,11 +172,11 @@ public final class Quest {
                 }
             }
             if (weaponPrizesSelectOneOf != null) {
-                int gearLevel = weaponPrizesSelectOneOf.getGearLevel();
+                GearLevel gearLevel = weaponPrizesSelectOneOf.getGearLevel();
                 ItemTier itemTier = weaponPrizesSelectOneOf.getItemTier();
                 lore.add(ChatColor.YELLOW + "Select One Weapon: ");
-                int minLevel = GearLevel.getMinLevel(gearLevel);
-                int maxLevel = GearLevel.getMaxLevel(gearLevel);
+                int minLevel = gearLevel.getMinLevel();
+                int maxLevel = gearLevel.getMaxLevel();
                 lore.add(ChatColor.GRAY + "Level: " + minLevel + "~" + maxLevel + ChatColor.GRAY + ", Tier: " + itemTier.getTierString());
             }
             if (InstantTeleportGuiManager.contains(questID)) {

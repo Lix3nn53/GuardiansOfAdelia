@@ -1,19 +1,16 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.armors;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import org.bukkit.Material;
 
 public class ArmorSet {
     private final String name;
-    private final int baseReqLevel;
-    private final int health;
-    private final int defense;
+    private final int baseRequiredLevel;
 
-    public ArmorSet(String name, int baseReqLevel, int health, int defense) {
+    public ArmorSet(String name, int baseRequiredLevel) {
         this.name = name;
-        this.baseReqLevel = baseReqLevel;
-        this.health = health;
-        this.defense = defense;
+        this.baseRequiredLevel = baseRequiredLevel;
     }
 
     public String getName(ArmorSlot armorSlot) {
@@ -21,14 +18,16 @@ public class ArmorSet {
     }
 
     public int getReqLevel(ArmorSlot armorSlot) {
-        return baseReqLevel + armorSlot.getReqLevelAddition();
+        return baseRequiredLevel + armorSlot.getReqLevelAddition();
     }
 
     public int getHealth(ArmorSlot armorSlot, ArmorGearType gearType) {
+        int health = StatUtils.getHealthItem(baseRequiredLevel);
         return (int) (health * armorSlot.getAttributeReduction() * gearType.getHealthReduction() + 0.5);
     }
 
     public int getDefense(ArmorSlot armorSlot, ArmorGearType gearType) {
+        int defense = StatUtils.getDefenseItem(baseRequiredLevel);
         return (int) (defense * armorSlot.getAttributeReduction() * gearType.getElementDefenseReduction() + 0.5);
     }
 
@@ -36,7 +35,7 @@ public class ArmorSet {
         return gearType.getArmorMaterial().getMaterial(armorSlot);
     }
 
-    public int getBaseReqLevel() {
-        return baseReqLevel;
+    public int getBaseRequiredLevel() {
+        return baseRequiredLevel;
     }
 }

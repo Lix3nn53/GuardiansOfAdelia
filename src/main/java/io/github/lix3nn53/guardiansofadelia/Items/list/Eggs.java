@@ -18,12 +18,12 @@ public class Eggs {
     private static final HashMap<String, Integer> keyToCustomModelData = new HashMap<>();
     private static final HashMap<String, ItemTier> keyToItemTier = new HashMap<>();
 
-    public static ItemStack get(String key, int gearLevel, int petLevel) {
+    public static ItemStack get(String key, GearLevel gearLevel, int petLevel) {
         ItemTier itemTier = keyToItemTier.get(key);
         int customModelData = keyToCustomModelData.get(key);
 
         Egg egg = new Egg(key, itemTier, Material.STONE_HOE, customModelData,
-                GearLevel.getMinLevel(gearLevel), petLevel, "");
+                gearLevel.getMinLevel(), petLevel, "");
 
         return egg.getItemStack();
     }

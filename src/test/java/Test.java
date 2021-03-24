@@ -1,10 +1,15 @@
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSet;
+import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
+import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponSet;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.utilities.math.MatrixHelper;
-import org.bukkit.util.Vector;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,7 +20,31 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException, SQLException {
-        double angle = 30;
+
+        for (int requiredLevel = 0; requiredLevel <= 99; requiredLevel += 10) {
+            GearLevel gearLevel = GearLevel.getGearLevel(requiredLevel);
+            System.out.println("requiredLevel: " + requiredLevel + "GearLevel: " + gearLevel);
+        }
+
+        for (int requiredLevel = 0; requiredLevel <= 90; requiredLevel += 10) {
+            System.out.println("REQUIRED LEVEL " + requiredLevel);
+            WeaponSet weaponSet = new WeaponSet("requiredLevel" + requiredLevel, requiredLevel, 0);
+            System.out.println("weaponSet damage: " + weaponSet.getElementDamage(WeaponGearType.DAGGER));
+            ArmorSet armorSet = new ArmorSet("requiredLevel" + requiredLevel, requiredLevel);
+            int totalHp = 0;
+            int totalArmor = 0;
+            for (ArmorSlot armorSlot : ArmorSlot.values()) {
+                totalHp += armorSet.getHealth(armorSlot, ArmorGearType.FEATHER_ARMOR);
+                totalArmor += armorSet.getDefense(armorSlot, ArmorGearType.FEATHER_ARMOR);
+            }
+            System.out.println("armorSet health: " + totalHp);
+            double defenseReduction = StatUtils.getDefenseReduction(totalArmor);
+            System.out.println("armorSet defense: " + totalArmor + " - " + "(" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% reduction)");
+            /*ShieldSet shieldSet = new ShieldSet("requiredLevel" + requiredLevel, requiredLevel, 0);
+            System.out.println("shieldSet health: " + shieldSet.getHealth(ShieldGearType.SHIELD));*/
+        }
+
+        /*double angle = 30;
 
         double[][] rotationY = MatrixHelper.rotationY(angle);
 
@@ -35,7 +64,7 @@ public class Test {
         double[][] translation = MatrixHelper.translate(result[0][0], result[1][0], result[2][0], new Vector(0, 10, 0));
 
 
-        System.out.println("translation: " + Arrays.deepToString(translation));
+        System.out.println("translation: " + Arrays.deepToString(translation));*/
 
 
 

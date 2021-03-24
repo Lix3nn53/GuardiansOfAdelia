@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items.config;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
@@ -14,12 +15,12 @@ import java.util.List;
 
 public class ArmorReferenceData {
     private final ArmorSlot armorSlot;
-    private final int gearLevel;
+    private final GearLevel gearLevel;
     private final int itemIndex;
     private final ItemTier itemTier;
     private final String gearSet;
 
-    public ArmorReferenceData(ArmorSlot armorSlot, int gearLevel, int itemIndex, ItemTier itemTier, String gearSet) {
+    public ArmorReferenceData(ArmorSlot armorSlot, GearLevel gearLevel, int itemIndex, ItemTier itemTier, String gearSet) {
         this.armorSlot = armorSlot;
         this.gearLevel = gearLevel;
         this.itemIndex = itemIndex;
@@ -29,7 +30,8 @@ public class ArmorReferenceData {
 
     public ArmorReferenceData(ConfigurationSection configurationSection) {
         this.armorSlot = ArmorSlot.valueOf(configurationSection.getString("armorSlot"));
-        this.gearLevel = configurationSection.getInt("gearLevel");
+
+        this.gearLevel = GearLevel.values()[configurationSection.getInt("gearLevel")];
         this.itemIndex = configurationSection.getInt("itemIndex");
         this.itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
         if (configurationSection.contains("gearSet")) {
@@ -45,13 +47,13 @@ public class ArmorReferenceData {
 
         ArrayList<ItemStack> items = new ArrayList<>();
         for (ArmorGearType type : weaponGearTypes) {
-            items.add(ArmorManager.get(armorSlot, type, gearLevel, itemIndex, itemTier, true, gearSet));
+            items.add(ArmorManager.get(armorSlot, type, gearLevel, itemTier, true, gearSet).get(itemIndex));
         }
 
         return items;
     }
 
-    public int getGearLevel() {
+    public GearLevel getGearLevel() {
         return gearLevel;
     }
 

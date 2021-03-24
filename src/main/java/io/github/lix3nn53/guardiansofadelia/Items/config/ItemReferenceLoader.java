@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.config;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
@@ -34,7 +35,7 @@ public class ItemReferenceLoader {
         if (itemType.equals("Armor")) {
             ArmorSlot armorSlot = ArmorSlot.valueOf(configurationSection.getString("armorSlot"));
             ArmorGearType gearType = ArmorGearType.valueOf(configurationSection.getString("armorGearType"));
-            int gearLevel = configurationSection.getInt("gearLevel");
+            GearLevel gearLevel = GearLevel.values()[configurationSection.getInt("gearLevel")];
             int itemIndex = configurationSection.getInt("itemIndex");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
             String gearSet = null;
@@ -42,15 +43,15 @@ public class ItemReferenceLoader {
                 gearSet = configurationSection.getString("gearSet");
             }
 
-            return ArmorManager.get(armorSlot, gearType, gearLevel, itemIndex, itemTier, false, gearSet);
+            return ArmorManager.get(armorSlot, gearType, gearLevel, itemTier, false, gearSet).get(itemIndex);
         } else if (itemType.equals("Egg")) {
             String petType = configurationSection.getString("petCode");
-            int gearLevel = configurationSection.getInt("gearLevel");
+            GearLevel gearLevel = GearLevel.values()[configurationSection.getInt("gearLevel")];
             int petLevel = configurationSection.getInt("petLevel");
 
             return Eggs.get(petType, gearLevel, petLevel);
         } else if (itemType.equals("Passive")) {
-            int gearLevel = configurationSection.getInt("gearLevel");
+            GearLevel gearLevel = GearLevel.values()[configurationSection.getInt("gearLevel")];
             int itemIndex = configurationSection.getInt("itemIndex");
             RPGSlotType rpgSlotType = RPGSlotType.valueOf(configurationSection.getString("rpgSlotType"));
             int reqLevelOffset = rpgSlotType.getReqLevelOffset();
@@ -64,10 +65,10 @@ public class ItemReferenceLoader {
                 gearSet = configurationSection.getString("gearSet");
             }
 
-            return PassiveManager.get(gearLevel, itemIndex, rpgSlotType, itemTier, false, gearSet);
+            return PassiveManager.get(gearLevel, rpgSlotType, itemTier, false, gearSet).get(itemIndex);
         } else if (itemType.equals("Weapon")) {
             WeaponGearType gearType = WeaponGearType.valueOf(configurationSection.getString("weaponGearType"));
-            int gearLevel = configurationSection.getInt("gearLevel");
+            GearLevel gearLevel = GearLevel.values()[configurationSection.getInt("gearLevel")];
             int itemIndex = configurationSection.getInt("itemIndex");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
             String gearSet = null;
@@ -75,10 +76,10 @@ public class ItemReferenceLoader {
                 gearSet = configurationSection.getString("gearSet");
             }
 
-            return WeaponManager.get(gearType, gearLevel, itemIndex, itemTier, false, gearSet);
+            return WeaponManager.get(gearType, gearLevel, itemTier, false, gearSet).get(itemIndex);
         } else if (itemType.equals("Shield")) {
             ShieldGearType gearType = ShieldGearType.valueOf(configurationSection.getString("shieldGearType"));
-            int gearLevel = configurationSection.getInt("gearLevel");
+            GearLevel gearLevel = GearLevel.values()[configurationSection.getInt("gearLevel")];
             int itemIndex = configurationSection.getInt("itemIndex");
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
             String gearSet = null;
@@ -86,7 +87,7 @@ public class ItemReferenceLoader {
                 gearSet = configurationSection.getString("gearSet");
             }
 
-            return ShieldManager.get(gearType, gearLevel, itemIndex, itemTier, false, gearSet);
+            return ShieldManager.get(gearType, gearLevel, itemTier, false, gearSet).get(itemIndex);
         } else if (itemType.equals("Consumable")) {
             Consumable consumable = Consumable.valueOf(configurationSection.getString("consumable"));
 

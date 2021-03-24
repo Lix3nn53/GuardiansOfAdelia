@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
@@ -61,16 +62,16 @@ public class TutorialManager {
 
     private static void giveTutorialItems(Player player, String rpgClassStr) {
         InventoryUtils.setMenuItemPlayer(player);
-        ItemTier tier = ItemTier.COMMON;
+        ItemTier tier = ItemTier.LEGENDARY;
         String gearSet = "Tutorial";
 
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         ArmorGearType armorGearType = rpgClass.getDefaultArmorGearType();
 
-        ItemStack helmet = ArmorManager.get(ArmorSlot.HELMET, armorGearType, 1, 0, tier, false, gearSet);
-        ItemStack chest = ArmorManager.get(ArmorSlot.CHESTPLATE, armorGearType, 1, 0, tier, false, gearSet);
-        ItemStack leggings = ArmorManager.get(ArmorSlot.LEGGINGS, armorGearType, 1, 0, tier, false, gearSet);
-        ItemStack boots = ArmorManager.get(ArmorSlot.BOOTS, armorGearType, 1, 0, tier, false, gearSet);
+        ItemStack helmet = ArmorManager.get(ArmorSlot.HELMET, armorGearType, GearLevel.EIGHT, tier, false, gearSet).get(0);
+        ItemStack chest = ArmorManager.get(ArmorSlot.CHESTPLATE, armorGearType, GearLevel.EIGHT, tier, false, gearSet).get(0);
+        ItemStack leggings = ArmorManager.get(ArmorSlot.LEGGINGS, armorGearType, GearLevel.EIGHT, tier, false, gearSet).get(0);
+        ItemStack boots = ArmorManager.get(ArmorSlot.BOOTS, armorGearType, GearLevel.EIGHT, tier, false, gearSet).get(0);
 
         PlayerInventory playerInventory = player.getInventory();
 

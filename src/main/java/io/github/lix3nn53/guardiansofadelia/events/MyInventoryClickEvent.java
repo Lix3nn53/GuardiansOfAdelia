@@ -612,7 +612,7 @@ public class MyInventoryClickEvent implements Listener {
                 //give item
                 GearStatType gearStatType = StatUtils.getStatType(currentType);
                 if (gearStatType != null) {
-                    int gearLevel = GearLevel.getGearLevel(current);
+                    GearLevel gearLevel = GearLevel.getGearLevel(current);
                     ItemTier itemTier = ItemTier.getItemTierOfItemStack(current);
                     StatUtils.addRandomPassiveStats(current, gearLevel, itemTier);
                 }
@@ -641,7 +641,7 @@ public class MyInventoryClickEvent implements Listener {
                 //give item
                 GearStatType gearStatType = StatUtils.getStatType(currentType);
                 if (gearStatType != null) {
-                    int gearLevel = GearLevel.getGearLevel(current);
+                    GearLevel gearLevel = GearLevel.getGearLevel(current);
                     ItemTier itemTier = ItemTier.getItemTierOfItemStack(current);
                     StatUtils.addRandomPassiveStats(current, gearLevel, itemTier);
                 }
@@ -1045,8 +1045,9 @@ public class MyInventoryClickEvent implements Listener {
 
                                         String levelStr = split2[0];
                                         int craftingLevel = Integer.parseInt(levelStr);
+                                        GearLevel gearLevel = GearLevel.values()[craftingLevel];
 
-                                        StatUtils.addRandomPassiveStats(clone, craftingLevel, ItemTier.MYSTIC);
+                                        StatUtils.addRandomPassiveStats(clone, gearLevel, ItemTier.MYSTIC);
 
                                         for (ItemStack ingredient : ingredients) {
                                             InventoryUtils.removeItemFromInventory(player.getInventory(), ingredient, ingredient.getAmount());

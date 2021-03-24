@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
 
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
 import org.bukkit.inventory.ItemStack;
@@ -37,23 +38,23 @@ public enum CraftingType {
         return "Melee Weapon";
     }
 
-    public List<ItemStack> getItemsToCraft(int gearLevel) {
+    public List<ItemStack> getItemsToCraft(GearLevel gearLevel) {
         ItemTier tier = ItemTier.MYSTIC;
         String gearSet = "Craftsman's";
         List<ItemStack> itemStackList = new ArrayList<>();
 
         switch (this) {
             case WEAPON_MELEE:
-                itemStackList = ItemPoolGenerator.generateMeleeWeaponsNoStats(tier, gearLevel, 0, gearSet);
+                itemStackList = ItemPoolGenerator.generateMeleeWeaponsNoStats(tier, gearLevel, gearSet);
                 break;
             case WEAPON_RANGED:
-                itemStackList = ItemPoolGenerator.generateRangedWeaponsNoStats(tier, gearLevel, 0, gearSet);
+                itemStackList = ItemPoolGenerator.generateRangedWeaponsNoStats(tier, gearLevel, gearSet);
                 break;
             case ARMOR_HEAVY:
-                itemStackList = ItemPoolGenerator.generateHeavyArmorsNoStats(tier, gearLevel, 0, gearSet);
+                itemStackList = ItemPoolGenerator.generateHeavyArmorsNoStats(tier, gearLevel, gearSet);
                 break;
             case ARMOR_LIGHT:
-                itemStackList = ItemPoolGenerator.generateLightArmorsNoStats(tier, gearLevel, 0, gearSet);
+                itemStackList = ItemPoolGenerator.generateLightArmorsNoStats(tier, gearLevel, gearSet);
                 break;
             case POTION:
                 itemStackList = ItemPoolGenerator.generatePotions(gearLevel);
@@ -62,7 +63,7 @@ public enum CraftingType {
                 itemStackList = ItemPoolGenerator.generateFoods(gearLevel);
                 break;
             case JEWEL:
-                itemStackList = ItemPoolGenerator.generatePassivesNoStats(tier, gearLevel, 0, gearSet);
+                itemStackList = ItemPoolGenerator.generatePassivesNoStats(tier, gearLevel, gearSet);
                 break;
         }
         return itemStackList;

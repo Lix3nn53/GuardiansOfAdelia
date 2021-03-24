@@ -9,7 +9,7 @@ public class RPGCharacterExperienceManager {
 
     static {
         for (int level = 1; level <= 90; level++) {
-            int experience = (int) (10 + Math.round(5 * Math.pow(level, 3) / 4) + 0.5);
+            int experience = (int) (10 + Math.round(5 * Math.pow(level, 3) / 4) + 0.5); // exp formula
             levelToRequiredExperience.add(experience);
         }
     }

@@ -1,20 +1,17 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.shields;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import org.bukkit.Material;
 
 public class ShieldSet {
     private final String name;
-    private final int reqLevel;
-    private final int health;
-    private final int defense;
+    private final int requiredLevel;
     private final int customModelData;
 
-    public ShieldSet(String name, int reqLevel, int health, int defense, int customModelData) {
+    public ShieldSet(String name, int requiredLevel, int customModelData) {
         this.name = name;
-        this.reqLevel = reqLevel;
-        this.health = health;
-        this.defense = defense;
+        this.requiredLevel = requiredLevel;
         this.customModelData = customModelData;
     }
 
@@ -23,10 +20,12 @@ public class ShieldSet {
     }
 
     public int getHealth(ShieldGearType shieldType) {
+        int health = StatUtils.getHealthItem(requiredLevel);
         return (int) (health * shieldType.getHealthReduction() + 0.5);
     }
 
     public int getDefense(ShieldGearType shieldType) {
+        int defense = StatUtils.getDefenseItem(requiredLevel);
         return (int) (defense * shieldType.getElementDefenseReduction() + 0.5);
     }
 
@@ -34,8 +33,8 @@ public class ShieldSet {
         return shieldType.getMaterial();
     }
 
-    public int getReqLevel() {
-        return reqLevel;
+    public int getRequiredLevel() {
+        return requiredLevel;
     }
 
     public int getCustomModelData() {

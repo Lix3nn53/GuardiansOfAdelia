@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
@@ -41,14 +42,15 @@ public class ActionLoader {
 
             return new GiveItemAction(itemStack);
         } else if (actionType.equals(GiveWeaponAction.class.getSimpleName())) {
-            int gearLevel = configurationSection.getInt("gearLevel");
+            GearLevel gearLevel = GearLevel.values()[configurationSection.getInt("gearLevel")];
             ItemTier itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
+            int itemIndex = configurationSection.getInt("itemIndex");
             String gearSet = null;
             if (configurationSection.contains("gearSet")) {
                 gearSet = configurationSection.getString("gearSet");
             }
 
-            return new GiveWeaponAction(gearLevel, itemTier, gearSet);
+            return new GiveWeaponAction(gearLevel, itemTier, gearSet, itemIndex);
         } else if (actionType.equals(InvincibleGiveAction.class.getSimpleName())) {
             long duration = configurationSection.getLong("duration");
 

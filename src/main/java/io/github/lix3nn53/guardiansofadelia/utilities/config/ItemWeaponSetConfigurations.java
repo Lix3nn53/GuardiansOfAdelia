@@ -41,11 +41,10 @@ public class ItemWeaponSetConfigurations {
                 String nameStr = itemSetConfiguration.getString("i" + i + ".name");
                 int customModelData = itemSetConfiguration.getInt("i" + i + ".customModelData");
                 int level = itemSetConfiguration.getInt("i" + i + ".level");
-                int damage = itemSetConfiguration.getInt("i" + i + ".damage");
 
                 String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-                WeaponSet weaponSet = new WeaponSet(name, customModelData, level, damage);
+                WeaponSet weaponSet = new WeaponSet(name, level, customModelData);
 
                 WeaponManager.add(weaponSet);
             }

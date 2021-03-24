@@ -5,7 +5,13 @@
 # ---------------------------------------------- #
 
 itemSetList:
-  - "passiveSet_1"
-  - "passiveSet_2"
-  - "passiveSet_3"
+  - "passiveSet_0"
+  - "passiveSet_10"
+  - "passiveSet_20"
+  - "passiveSet_30"
+  - "passiveSet_40"
+  - "passiveSet_50"
+  - "passiveSet_60"
+  - "passiveSet_70"
+  - "passiveSet_80"
 

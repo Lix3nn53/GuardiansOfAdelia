@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
@@ -55,7 +56,8 @@ public class JobCraftingConfigurations {
 
                 for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
                     List<String> gearTypeStrList = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".weaponGearType");
-                    int gearLevel = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
+                    int gearLevelIndex = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
+                    GearLevel gearLevel = GearLevel.values()[gearLevelIndex];
                     int index = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".index");
                     String tierStr = fileConfiguration.getString("level" + level + ".itemSet" + itemSet + ".tier");
                     ItemTier itemTier = ItemTier.valueOf(tierStr);
@@ -65,7 +67,7 @@ public class JobCraftingConfigurations {
                     for (String gearTypeStr : gearTypeStrList) {
                         WeaponGearType gearType = WeaponGearType.valueOf(gearTypeStr);
 
-                        ItemStack weapon = WeaponManager.get(gearType, gearLevel, index, itemTier, false, null);
+                        ItemStack weapon = WeaponManager.get(gearType, gearLevel, itemTier, false, null).get(index);
 
                         CraftingManager.putCraftingTypeAndLevelToCraftingLine(weapon, craftingType, level, ingredients, ingredientAmounts);
                     }
@@ -86,7 +88,8 @@ public class JobCraftingConfigurations {
 
                 for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
                     List<String> gearTypeStrList = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".armorGearType");
-                    int gearLevel = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
+                    int gearLevelIndex = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
+                    GearLevel gearLevel = GearLevel.values()[gearLevelIndex];
                     int index = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".index");
                     String tierStr = fileConfiguration.getString("level" + level + ".itemSet" + itemSet + ".tier");
                     ItemTier itemTier = ItemTier.valueOf(tierStr);
@@ -97,7 +100,7 @@ public class JobCraftingConfigurations {
                         ArmorGearType gearType = ArmorGearType.valueOf(gearTypeStr);
 
                         for (ArmorSlot armorSlot : ArmorSlot.values()) {
-                            ItemStack armor = ArmorManager.get(armorSlot, gearType, gearLevel, index, itemTier, false, null);
+                            ItemStack armor = ArmorManager.get(armorSlot, gearType, gearLevel, itemTier, false, null).get(index);
 
                             if (armor == null) {
                                 GuardiansOfAdelia.getInstance().getLogger().info("CRAFTING RECIPE NULL ARMOR");
@@ -143,7 +146,8 @@ public class JobCraftingConfigurations {
 
             for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
                 List<String> slotTypesStr = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".slotTypes");
-                int gearLevel = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
+                int gearLevelIndex = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
+                GearLevel gearLevel = GearLevel.values()[gearLevelIndex];
                 int index = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".index");
                 String tierStr = fileConfiguration.getString("level" + level + ".itemSet" + itemSet + ".tier");
                 ItemTier itemTier = ItemTier.valueOf(tierStr);
@@ -153,7 +157,7 @@ public class JobCraftingConfigurations {
                 for (String rpgSlotTypeStr : slotTypesStr) {
                     RPGSlotType rpgSlotType = RPGSlotType.valueOf(rpgSlotTypeStr);
 
-                    ItemStack passive = PassiveManager.get(gearLevel, index, rpgSlotType, itemTier, false, null);
+                    ItemStack passive = PassiveManager.get(gearLevel, rpgSlotType, itemTier, false, null).get(index);
 
                     CraftingManager.putCraftingTypeAndLevelToCraftingLine(passive, craftingType, level, ingredients, ingredientAmounts);
                 }

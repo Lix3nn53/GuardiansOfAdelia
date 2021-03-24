@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
+import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
@@ -247,6 +248,8 @@ public enum MerchantPageType {
     }
 
     private GuiBookGeneric getWeaponShop(int shopLevel, int shopNpc) {
+        GearLevel gearLevel = GearLevel.values()[shopLevel];
+
         List<MerchantGuiLine> lines = new ArrayList<>();
         lines.add(new MerchantGuiLine());
 
@@ -291,13 +294,13 @@ public enum MerchantPageType {
                     break;
             }
 
-            ItemStack itemStack = WeaponManager.get(weaponGearType, shopLevel, 0, tier, true, null);
+            List<ItemStack> itemStacks = WeaponManager.get(weaponGearType, gearLevel, tier, true, null);
 
-            if (lines.get(lineIndex).isEmpty()) {
-                lines.get(lineIndex).addWord(itemStack, price);
-            } else {
-                lines.add(new MerchantGuiLine());
-                lineIndex++;
+            for (ItemStack itemStack : itemStacks) {
+                if (!lines.get(lineIndex).isEmpty()) {
+                    lines.add(new MerchantGuiLine());
+                    lineIndex++;
+                }
                 lines.get(lineIndex).addWord(itemStack, price);
             }
         }
@@ -323,6 +326,8 @@ public enum MerchantPageType {
     }
 
     private GuiBookGeneric getArmorShop(int shopLevel, int shopNpc) {
+        GearLevel gearLevel = GearLevel.values()[shopLevel];
+
         List<MerchantGuiLine> lines = new ArrayList<>();
 
         ItemTier tier = ItemTier.COMMON;
@@ -339,13 +344,13 @@ public enum MerchantPageType {
                     price = 4;
                 }
 
-                ItemStack itemStack = ArmorManager.get(armorSlot, armorGearType, shopLevel, 0, tier, true, null);
+                List<ItemStack> itemStacks = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, true, null);
 
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(itemStack, price);
-                } else {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
+                for (ItemStack itemStack : itemStacks) {
+                    if (!lines.get(lineIndex).isEmpty()) {
+                        lines.add(new MerchantGuiLine());
+                        lineIndex++;
+                    }
                     lines.get(lineIndex).addWord(itemStack, price);
                 }
             }
@@ -373,6 +378,8 @@ public enum MerchantPageType {
     }
 
     private GuiBookGeneric getShieldShop(int shopLevel, int shopNpc) {
+        GearLevel gearLevel = GearLevel.values()[shopLevel];
+
         List<MerchantGuiLine> lines = new ArrayList<>();
         lines.add(new MerchantGuiLine());
 
@@ -387,15 +394,15 @@ public enum MerchantPageType {
                 price = 3;
             }
 
-            ItemStack itemStack = ShieldManager.get(shieldGearType, shopLevel, 0, tier, true, null);
+            List<ItemStack> itemStacks = ShieldManager.get(shieldGearType, gearLevel, tier, true, null);
 
-                if (lines.get(lineIndex).isEmpty()) {
-                    lines.get(lineIndex).addWord(itemStack, price);
-                } else {
+            for (ItemStack itemStack : itemStacks) {
+                if (!lines.get(lineIndex).isEmpty()) {
                     lines.add(new MerchantGuiLine());
                     lineIndex++;
-                    lines.get(lineIndex).addWord(itemStack, price);
                 }
+                lines.get(lineIndex).addWord(itemStack, price);
+            }
         }
 
         List<GuiPage> guiPages = new ArrayList<>();

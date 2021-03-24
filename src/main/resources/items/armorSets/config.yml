@@ -5,7 +5,13 @@
 # ---------------------------------------------- #
 
 itemSetList:
-  - "armorSet_1"
-  - "armorSet_2"
-  - "armorSet_3"
+  - "armorSet_0"
+  - "armorSet_10"
+  - "armorSet_20"
+  - "armorSet_30"
+  - "armorSet_40"
+  - "armorSet_50"
+  - "armorSet_60"
+  - "armorSet_70"
+  - "armorSet_80"
 

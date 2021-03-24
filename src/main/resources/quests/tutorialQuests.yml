@@ -25,7 +25,7 @@ quest1:
   requiredLevel: 90
   advancementMaterial: "RED_NETHER_BRICKS"
   itemPrizeSelectOneOfWeapon:
-    gearLevel: 1
+    gearLevel: 9
     itemIndex: 0
     itemTier: "LEGENDARY"
     gearSet: "Tutorial"
@@ -85,35 +85,35 @@ quest3:
     amountNeeded: 5
   itemPrize1:
     itemType: "Passive"
-    gearLevel: 1
+    gearLevel: 8
     itemIndex: 0
     rpgSlotType: "PARROT"
     itemTier: "LEGENDARY"
     gearSet: "Tutorial"
   itemPrize2:
     itemType: "Passive"
-    gearLevel: 1
+    gearLevel: 8
     itemIndex: 0
     rpgSlotType: "EARRING"
     itemTier: "LEGENDARY"
     gearSet: "Tutorial"
   itemPrize3:
     itemType: "Passive"
-    gearLevel: 1
+    gearLevel: 8
     itemIndex: 0
     rpgSlotType: "GLOVE"
     itemTier: "LEGENDARY"
     gearSet: "Tutorial"
   itemPrize4:
     itemType: "Passive"
-    gearLevel: 1
+    gearLevel: 8
     itemIndex: 0
     rpgSlotType: "RING"
     itemTier: "LEGENDARY"
     gearSet: "Tutorial"
   itemPrize5:
     itemType: "Passive"
-    gearLevel: 1
+    gearLevel: 8
     itemIndex: 0
     rpgSlotType: "NECKLACE"
     itemTier: "LEGENDARY"
