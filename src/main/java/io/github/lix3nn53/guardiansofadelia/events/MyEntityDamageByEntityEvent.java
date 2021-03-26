@@ -323,11 +323,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     double totalCriticalChance = rpgCharacterStats.getTotalCriticalChance();
                     double random = Math.random();
                     if (random <= totalCriticalChance) {
-                        damage += damage * rpgCharacterStats.getTotalCriticalDamage();
+                        damage *= rpgCharacterStats.getTotalCriticalDamage();
                         isCritical = true;
                         Particle particle = Particle.CRIT;
                         // ParticleShapes.playSingleParticle(targetLocation, particle, null);
-                        ParticleShapes.fillHemisphere(targetLocation.clone().add(0, 0.25, 0), particle, 0.2, 8, null);
+                        ParticleShapes.fillHemisphere(targetLocation.clone().add(0, 0.25, 0), particle, 0.2, 48, null);
                         player.playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CURE, 0.6F, 2.0F);
                     }
                 } else {

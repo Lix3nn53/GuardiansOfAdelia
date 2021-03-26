@@ -21,10 +21,10 @@ public enum GearLevel {
     EIGHT,
     NINE;
 
-    private static final double MIN_STAT_MULTIPLIER = 4;
+    private static final double MIN_STAT_MULTIPLIER = 5;
     private static final double MAX_STAT_MULTIPLIER = 20;
 
-    private static final double NORMAL_ITEM_NERF = 0.8;
+    private static final double NORMAL_ITEM_NERF = 0.8; // passive or normal?
     private static final double ATTRIBUTE_NERF = 0.2;
 
     public static GearLevel getGearLevel(ItemStack itemStack) {

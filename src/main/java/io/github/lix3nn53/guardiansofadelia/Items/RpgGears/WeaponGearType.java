@@ -109,10 +109,10 @@ public enum WeaponGearType {
             case SPEAR:
             case BOW:
             case WAND:
-                return 0.06;
+                return 0.07;
             case STAFF:
             case DAGGER:
-                return 0.04;
+                return 0.05;
             case BATTLE_AXE:
             case WAR_HAMMER:
             case CROSSBOW:

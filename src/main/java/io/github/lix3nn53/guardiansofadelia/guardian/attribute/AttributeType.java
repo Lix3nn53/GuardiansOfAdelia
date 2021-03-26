@@ -54,7 +54,7 @@ public enum AttributeType {
             case BONUS_MAX_MANA:
                 return 1;
             case BONUS_CRITICAL_CHANCE:
-                return 0.001;
+                return 0.0005;
         }
         return 1;
     }
