@@ -374,8 +374,8 @@ public class ParticleShapes {
         }
     }
 
-    public static void drawCube(Location location, Particle particle, Particle.DustOptions dustOptions, Vector vector, double gap,
-                                boolean rotate, float yaw, float pitch) {
+    public static Vector[] drawCube(Location location, Particle particle, Particle.DustOptions dustOptions, Vector vector, double gap,
+                                    boolean rotate, float yaw, float pitch) {
         Vector[] points = new Vector[8];
 
         Location center = rotate ? new Location(location.getWorld(), 0, 0, 0) : location;
@@ -414,5 +414,7 @@ public class ParticleShapes {
             ParticleShapes.drawLineBetween(world, points[i + 4], particle, dustOptions, points[((i + 1) % 4) + 4], gap);
             ParticleShapes.drawLineBetween(world, points[i], particle, dustOptions, points[i + 4], gap);
         }
+
+        return points;
     }
 }

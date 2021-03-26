@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.custom;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.Nearby;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.TargetHelper;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -481,7 +481,7 @@ public class TemporaryEntity implements LivingEntity {
 
     @Override
     public List<Entity> getNearbyEntities(double v, double v1, double v2) {
-        return Nearby.getNearbySphere(this.location, v);
+        return TargetHelper.getNearbySphereNonLiving(this.location, v);
     }
 
     @Override

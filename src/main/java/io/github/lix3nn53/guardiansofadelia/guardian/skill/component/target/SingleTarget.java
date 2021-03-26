@@ -39,7 +39,7 @@ public class SingleTarget extends TargetComponent {
         List<LivingEntity> singles = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            LivingEntity singleTargets = TargetHelper.getLivingTarget(target, range.get(skillLevel - 1), tolerance);
+            LivingEntity singleTargets = TargetHelper.getLookingTarget(target, range.get(skillLevel - 1), tolerance);
             singles.add(singleTargets);
         }
 

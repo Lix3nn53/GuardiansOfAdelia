@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
-import io.github.lix3nn53.guardiansofadelia.utilities.Nearby;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
@@ -34,7 +33,7 @@ public class AreaTarget extends TargetComponent {
         List<LivingEntity> nearby = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            List<LivingEntity> nearbyTarget = Nearby.getLivingNearby(target, radiusList.get(skillLevel - 1));
+            List<LivingEntity> nearbyTarget = TargetHelper.getNearbySphere(target.getLocation(), radiusList.get(skillLevel - 1));
             nearby.addAll(nearbyTarget);
         }
 

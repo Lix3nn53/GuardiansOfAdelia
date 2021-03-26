@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
-import io.github.lix3nn53.guardiansofadelia.utilities.Nearby;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.TargetHelper;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -47,7 +47,7 @@ public class NearbyEntityCondition extends ConditionComponent {
 
         boolean success = false;
         for (LivingEntity target : targets) {
-            List<Entity> nearby = Nearby.getNearbySphere(target, radius);
+            List<LivingEntity> nearby = TargetHelper.getNearbySphere(target.getLocation(), radius);
 
             boolean existsNearbyOfCurrent = false;
             for (Entity entity : nearby) {

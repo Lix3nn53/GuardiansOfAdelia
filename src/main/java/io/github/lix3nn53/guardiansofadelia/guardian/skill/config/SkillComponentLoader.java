@@ -57,6 +57,8 @@ public class SkillComponentLoader {
             return new AreaTarget(configurationSection);
         } else if (componentType.equals(ConeTarget.class.getSimpleName())) {
             return new ConeTarget(configurationSection);
+        } else if (componentType.equals(CubeTarget.class.getSimpleName())) {
+            return new CubeTarget(configurationSection);
         } else if (componentType.equals(SoundMechanic.class.getSimpleName())) {
             return new SoundMechanic(configurationSection);
         } else if (componentType.equals(HoloMessageMechanic.class.getSimpleName())) {
