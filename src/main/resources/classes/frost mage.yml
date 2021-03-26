@@ -17,11 +17,12 @@ attributeMaxMana: 6
 attributeCriticalChance: 0
 weaponGearTypes:
   - "WAND"
-  - "DAGGER"
   - "STAFF"
+  - "DAGGER"
 armorGearTypes:
   - "CLOTH_ARMOR"
   - "FEATHER_ARMOR"
+  - "LIGHT_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Frostball"
@@ -76,9 +77,9 @@ skillOne:
           damageType: "WATER"
           damageList:
             - 10
-            - 20
-            - 30
             - 40
+            - 90
+            - 180
           damageMultiplyList:
             - 1.4
             - 1.6
@@ -223,9 +224,9 @@ skillTwo:
             damageType: "WATER"
             damageList:
               - 10
-              - 20
-              - 30
               - 40
+              - 90
+              - 180
             damageMultiplyList:
               - 1.4
               - 1.6
@@ -307,7 +308,7 @@ skillTwo:
             amount: 25
             dustColor: 65535
             dustSize: 4
-          radius:
+          data1:
             - 2.5
             - 3
             - 3.5
@@ -396,7 +397,7 @@ skillThree:
           amount: 8
           dustColor: 6750207
           dustSize: 2
-        radius:
+        data1:
           - 1.2
           - 1.2
           - 1.2
@@ -469,7 +470,7 @@ skillPassive:
               radius: 0.1
               amount: 2
             frequency: 5
-            radius:
+            data1:
               - 0.1
               - 0.1
               - 0.1
@@ -561,9 +562,9 @@ skillUltimate:
             damageType: "WATER"
             damageList:
               - 10
-              - 20
-              - 30
               - 40
+              - 90
+              - 180
             damageMultiplyList:
               - 1.4
               - 1.6
@@ -632,7 +633,7 @@ skillUltimate:
             amount: 40
             dustColor: 65535
             dustSize: 8
-          radius:
+          data1:
             - 4
             - 5
             - 6

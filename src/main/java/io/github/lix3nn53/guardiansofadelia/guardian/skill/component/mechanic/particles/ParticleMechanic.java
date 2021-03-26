@@ -2,37 +2,36 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.p
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangementLoader;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementWithLength;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementWithRadius;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementWithData;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ParticleArrangement;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParticleMechanic extends MechanicComponent {
 
-    private final ParticleArrangement particleArrangement;
-    private final List<Double> radiusList;
-    private final List<Double> lengthList;
+    protected final ParticleArrangement particleArrangement;
+    protected final List<List<Double>> dataIndexToDataList; // Data index is index of data while data list contains values according to skill level
 
-    private final double forward;
-    private final double upward;
-    private final double right;
+    protected final List<Double> forwardList;
+    protected final double upward;
+    protected final double right;
 
-    private final boolean resetY;
-    private final boolean centerEye;
-    private final boolean rotation;
-    private final boolean rotationMatchEye;
+    protected final boolean resetY;
+    protected final boolean centerEye;
+    protected final boolean rotation;
+    protected final boolean rotationMatchEye;
 
-    private final float yaw;
-    private final float pitch;
+    protected final float yaw;
+    protected final float pitch;
 
-    private final double offsetx;
-    private final double offsety;
-    private final double offsetz;
+    protected final double offsetx;
+    protected final double offsety;
+    protected final double offsetz;
 
     public ParticleMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -40,10 +39,13 @@ public class ParticleMechanic extends MechanicComponent {
         ConfigurationSection particle = configurationSection.getConfigurationSection("particle");
         this.particleArrangement = ParticleArrangementLoader.load(particle);
 
-        this.radiusList = configurationSection.contains("radius") ? configurationSection.getDoubleList("radius") : null;
-        this.lengthList = configurationSection.contains("length") ? configurationSection.getDoubleList("length") : null;
+        this.dataIndexToDataList = new ArrayList<>();
+        for (int i = 1; i < 10; i++) {
+            if (!configurationSection.contains("data" + i)) break;
+            this.dataIndexToDataList.add(configurationSection.getDoubleList("data" + i));
+        }
 
-        this.forward = configurationSection.contains("forward") ? configurationSection.getDouble("forward") : 0;
+        this.forwardList = configurationSection.contains("forwardList") ? configurationSection.getDoubleList("forwardList") : null;
         this.upward = configurationSection.contains("upward") ? configurationSection.getDouble("upward") : 0;
         this.right = configurationSection.contains("right") ? configurationSection.getDouble("right") : 0;
 
@@ -60,42 +62,56 @@ public class ParticleMechanic extends MechanicComponent {
         this.offsetz = configurationSection.contains("offsetz") ? configurationSection.getDouble("offsetz") : 0;
     }
 
+    public static void playParticle(LivingEntity ent, int skillLevel, boolean centerEye, boolean resetY, List<Double> forwardList, double upward,
+                                    double right, List<List<Double>> dataIndexToDataList, ParticleArrangement particleArrangement, boolean rotation,
+                                    boolean rotationMatchEye, float yaw, float pitch, double offsetx, double offsety, double offsetz,
+                                    List<Double> dataIncrements, int counter) {
+        Location location = centerEye ? ent.getEyeLocation() : ent.getLocation();
+
+        Vector dir = location.getDirection();
+        if (resetY) dir.setY(0);
+        dir.normalize();
+        Vector side = dir.clone().crossProduct(new Vector(0, 1, 0));
+        Vector upwardly = dir.clone().crossProduct(side);
+        double forward = 0;
+        if (forwardList != null) forward = forwardList.get(skillLevel - 1);
+        location.add(dir.multiply(forward)).subtract(upwardly.multiply(upward)).add(side.multiply(right));
+
+        if (!dataIndexToDataList.isEmpty()) {
+            ArrangementWithData arrangementWithRadius = (ArrangementWithData) particleArrangement;
+
+            List<Double> currentDataList = new ArrayList<>(); // get current
+            for (int i = 0; i < dataIndexToDataList.size(); i++) {
+                List<Double> list = dataIndexToDataList.get(i);
+                double current = list.get(skillLevel - 1);
+                if (i < dataIncrements.size()) {
+                    current = dataIncrements.get(i) * counter;
+                }
+                currentDataList.add(current);
+            }
+
+            arrangementWithRadius.setDataList(currentDataList);
+        }
+
+        if (rotation) {
+            Location eyeLocation = ent.getEyeLocation();
+            float yaw2 = rotationMatchEye ? eyeLocation.getYaw() + yaw : yaw;
+            float pitch2 = rotationMatchEye ? eyeLocation.getPitch() + pitch : pitch;
+
+            particleArrangement.play(location, new Vector(offsetx, offsety, offsetz),
+                    yaw2, pitch2);
+        } else {
+            particleArrangement.play(location, new Vector(offsetx, offsety, offsetz));
+        }
+    }
+
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
-        double radius = radiusList != null ? radiusList.get(skillLevel - 1) : 0;
-        double length = lengthList != null ? lengthList.get(skillLevel - 1) : 0;
         for (LivingEntity ent : targets) {
-            Location location = centerEye ? ent.getEyeLocation() : ent.getLocation();
-
-            Vector dir = location.getDirection();
-            if (resetY) dir.setY(0);
-            dir.normalize();
-            Vector side = dir.clone().crossProduct(new Vector(0, 1, 0));
-            Vector upwardly = dir.clone().crossProduct(side);
-            location.add(dir.multiply(forward)).subtract(upwardly.multiply(upward)).add(side.multiply(right));
-
-            if (radius > 0) {
-                ArrangementWithRadius arrangementWithRadius = (ArrangementWithRadius) particleArrangement;
-                arrangementWithRadius.setRadius(radius);
-            }
-
-            if (length > 0) {
-                ArrangementWithLength arrangementWithLength = (ArrangementWithLength) particleArrangement;
-                arrangementWithLength.setlength(length);
-            }
-
-            if (rotation) {
-                Location eyeLocation = ent.getEyeLocation();
-                float yaw2 = rotationMatchEye ? eyeLocation.getYaw() + yaw : yaw;
-                float pitch2 = rotationMatchEye ? eyeLocation.getPitch() + pitch : pitch;
-
-                particleArrangement.play(location, new Vector(offsetx, offsety, offsetz),
-                        yaw2, pitch2);
-            } else {
-                particleArrangement.play(location, new Vector(offsetx, offsety, offsetz));
-            }
+            playParticle(ent, skillLevel, centerEye, resetY, forwardList, upward, right, dataIndexToDataList, particleArrangement, rotation,
+                    rotationMatchEye, yaw, pitch, offsetx, offsety, offsetz, new ArrayList<>(), 0);
         }
 
         return true;

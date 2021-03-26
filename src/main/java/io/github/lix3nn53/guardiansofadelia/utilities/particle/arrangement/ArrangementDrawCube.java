@@ -2,20 +2,14 @@ package io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
 
-public class ArrangementDrawCube extends ArrangementWithLength {
+public class ArrangementDrawCube extends ArrangementWithData {
 
-    private final int gap;
-
-    public ArrangementDrawCube(Particle particle, double radius, int gap, Particle.DustOptions dustOptions, double height) {
-        super(particle, dustOptions, radius);
-        this.gap = gap;
-    }
+    private final double gap;
 
     public ArrangementDrawCube(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -24,7 +18,12 @@ public class ArrangementDrawCube extends ArrangementWithLength {
             configLoadError("gap");
         }
 
-        this.gap = configurationSection.getInt("gap");
+        this.gap = configurationSection.getDouble("gap");
+
+        // Data that animations can modify
+        addData(configurationSection.getDouble("length_x"));
+        addData(configurationSection.getDouble("length_y"));
+        addData(configurationSection.getDouble("length_z"));
     }
 
     @Override
@@ -33,7 +32,8 @@ public class ArrangementDrawCube extends ArrangementWithLength {
         if (offset != null) {
             location1.add(offset);
         }
-        ParticleShapes.drawCube(location1, particle, dustOptions, length, gap, false, 0, 0);
+        Vector vector = new Vector(getData(0), getData(1), getData(2));
+        ParticleShapes.drawCube(location1, particle, dustOptions, vector, gap, false, 0, 0);
     }
 
     @Override
@@ -42,6 +42,7 @@ public class ArrangementDrawCube extends ArrangementWithLength {
         if (offset != null) {
             location1.add(offset);
         }
-        ParticleShapes.drawCube(location1, particle, dustOptions, length, gap, true, yaw, pitch);
+        Vector vector = new Vector(getData(0), getData(1), getData(2));
+        ParticleShapes.drawCube(location1, particle, dustOptions, vector, gap, true, yaw, pitch);
     }
 }

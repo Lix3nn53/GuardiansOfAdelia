@@ -1,9 +1,5 @@
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
-import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
+import org.bukkit.util.Vector;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +14,11 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException, SQLException {
 
-        int maxStatValue = GearLevel.NINE.getMaxStatValue(true, true);
+        Vector loc1 = new Vector(0, 0, 0);
+        Vector loc2 = new Vector(1, 1, 2);
+        double a = Math.max(Math.max(Math.abs(loc1.getX() - loc2.getX()), Math.abs(loc1.getY() - loc2.getY())), Math.abs(loc1.getZ() - loc2.getZ()));
+        System.out.println("min attr: " + a);
+        /*int maxStatValue = GearLevel.NINE.getMaxStatValue(true, true);
         int maxStatValuee = GearLevel.NINE.getMaxStatValue(true, false);
         System.out.println("max element: " + maxStatValue);
         System.out.println("max attr: " + maxStatValuee);
@@ -51,7 +51,7 @@ public class Test {
                 if (attributeValue == 0) continue;
                 System.out.println(elementType.name() + ": " + attributeValue);
             }
-        }
+        }*/
         /*for (int requiredLevel = 0; requiredLevel <= 99; requiredLevel += 10) {
             GearLevel gearLevel = GearLevel.getGearLevel(requiredLevel);
             System.out.println("requiredLevel: " + requiredLevel + "GearLevel: " + gearLevel);

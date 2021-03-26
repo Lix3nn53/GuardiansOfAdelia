@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.utilities.math.MatrixHelper;
 import io.github.lix3nn53.guardiansofadelia.utilities.math.RotationHelper;
 import org.bukkit.Location;
@@ -206,6 +207,10 @@ public class ParticleShapes {
     }
 
     public static void drawLineBetween(World world, Vector start, Particle particle, Particle.DustOptions dustOptions, Vector end, double gap) {
+        if (gap < 0.1) {
+            GuardiansOfAdelia.getInstance().getLogger().info("ERROR: drawLineBetween gap is 0!!!!!");
+            return;
+        }
         Vector vector = end.clone().subtract(start);
 
         double length = vector.length();
@@ -369,7 +374,7 @@ public class ParticleShapes {
         }
     }
 
-    public static void drawCube(Location location, Particle particle, Particle.DustOptions dustOptions, double length, double gap,
+    public static void drawCube(Location location, Particle particle, Particle.DustOptions dustOptions, Vector vector, double gap,
                                 boolean rotate, float yaw, float pitch) {
         Vector[] points = new Vector[8];
 
@@ -377,14 +382,18 @@ public class ParticleShapes {
 
         Vector centerVector = center.toVector();
 
-        points[0] = centerVector.clone().add(new Vector(-length, -length, -length));
-        points[1] = centerVector.clone().add(new Vector(length, -length, -length));
-        points[2] = centerVector.clone().add(new Vector(length, length, -length));
-        points[3] = centerVector.clone().add(new Vector(-length, length, -length));
-        points[4] = centerVector.clone().add(new Vector(-length, -length, length));
-        points[5] = centerVector.clone().add(new Vector(length, -length, length));
-        points[6] = centerVector.clone().add(new Vector(length, length, length));
-        points[7] = centerVector.clone().add(new Vector(-length, length, length));
+        double length_x = vector.getX();
+        double length_y = vector.getY();
+        double length_z = vector.getZ();
+        GuardiansOfAdelia.getInstance().getLogger().info("CUBE DRAW: " + length_x + ", " + length_y + ", " + length_z);
+        points[0] = centerVector.clone().add(new Vector(-length_x, -length_y, -length_z));
+        points[1] = centerVector.clone().add(new Vector(length_x, -length_y, -length_z));
+        points[2] = centerVector.clone().add(new Vector(length_x, length_y, -length_z));
+        points[3] = centerVector.clone().add(new Vector(-length_x, length_y, -length_z));
+        points[4] = centerVector.clone().add(new Vector(-length_x, -length_y, length_z));
+        points[5] = centerVector.clone().add(new Vector(length_x, -length_y, length_z));
+        points[6] = centerVector.clone().add(new Vector(length_x, length_y, length_z));
+        points[7] = centerVector.clone().add(new Vector(-length_x, length_y, length_z));
 
         if (rotate) {
             RotationHelper.rotateYawPitch(points, yaw, pitch);

@@ -20,9 +20,12 @@ attributeMaxMana: 1
 attributeCriticalChance: 0
 weaponGearTypes:
   - "SPEAR"
+  - "GREAT_SWORD"
+  - "SWORD"
 armorGearTypes:
   - "PLATE_ARMOR"
-  - "HEAVY_ARMOR"
+  - "FEATHER_ARMOR"
+  - "LIGHT_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Power Slash"

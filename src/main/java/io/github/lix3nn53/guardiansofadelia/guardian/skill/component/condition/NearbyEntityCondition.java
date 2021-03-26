@@ -47,7 +47,7 @@ public class NearbyEntityCondition extends ConditionComponent {
 
         boolean success = false;
         for (LivingEntity target : targets) {
-            List<Entity> nearby = Nearby.getNearby(target, radius);
+            List<Entity> nearby = Nearby.getNearbySphere(target, radius);
 
             boolean existsNearbyOfCurrent = false;
             for (Entity entity : nearby) {

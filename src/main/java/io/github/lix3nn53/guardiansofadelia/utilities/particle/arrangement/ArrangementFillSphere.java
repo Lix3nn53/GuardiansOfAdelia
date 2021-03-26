@@ -2,22 +2,15 @@ package io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
 
-public class ArrangementFillSphere extends ArrangementWithRadius {
+public class ArrangementFillSphere extends ArrangementWithData {
 
     private final int amount;
     private final int amounty;
-
-    public ArrangementFillSphere(Particle particle, double radius, int amount, int amounty, Particle.DustOptions dustOptions) {
-        super(particle, dustOptions, radius);
-        this.amount = amount;
-        this.amounty = amounty;
-    }
 
     public ArrangementFillSphere(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -32,15 +25,20 @@ public class ArrangementFillSphere extends ArrangementWithRadius {
 
         this.amount = configurationSection.getInt("amount");
         this.amounty = configurationSection.getInt("amounty");
+
+        // Data that animations can modify
+        addData(configurationSection.getDouble("radius"));
     }
 
     @Override
     public void play(Location location, @Nullable Vector offset) {
+        double radius = getData(0);
         ParticleShapes.fillSphere(location, particle, radius, amount, amounty, dustOptions, false, 0, 0, offset);
     }
 
     @Override
     public void play(Location location, @Nullable Vector offset, float yaw, float pitch) {
+        double radius = getData(0);
         ParticleShapes.fillSphere(location, particle, radius, amount, amounty, dustOptions, true, yaw, pitch, offset);
     }
 }

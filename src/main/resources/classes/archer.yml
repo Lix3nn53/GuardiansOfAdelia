@@ -19,11 +19,12 @@ attributeMaxMana: 1
 attributeCriticalChance: 0
 weaponGearTypes:
   - "BOW"
-  - "DAGGER"
   - "CROSSBOW"
+  - "DAGGER"
 armorGearTypes:
+  - "LIGHT_ARMOR"
   - "FEATHER_ARMOR"
-  - "PLATE_ARMOR"
+  - "CLOTH_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Poison Arrow"
@@ -78,9 +79,9 @@ skillOne:
           damageType: "AIR"
           damageList:
             - 10
-            - 20
-            - 30
             - 40
+            - 90
+            - 180
           damageMultiplyList:
             - 1.4
             - 1.6
@@ -152,7 +153,7 @@ skillTwo:
         radius: 3
         amount: 2
         direction: "XZ"
-      radius:
+      data1:
         - 3
         - 3.5
         - 3
@@ -168,13 +169,6 @@ skillTwo:
         dustColor: 65535
         dustSize: 8
       frequency: 5
-      radius:
-        - 3
-        - 3.5
-        - 3
-        - 3.25
-        - 3.5
-        - 4
       repeatAmount:
         - 12
         - 14
@@ -182,6 +176,13 @@ skillTwo:
         - 18
         - 20
         - 24
+      data1:
+        - 3
+        - 3.5
+        - 3
+        - 3.25
+        - 3.5
+        - 4
     child4:
       componentType: "SoundMechanic"
       goaSound: "SKILL_SONIC_BOOM"
@@ -240,16 +241,16 @@ skillThree:
         amount: 12
         direction: "XZ"
       frequency: 5
-      radius:
-        - 1.2
-        - 1.2
-        - 1.2
-        - 1.2
       repeatAmount:
         - 20
         - 25
         - 30
         - 35
+      data1:
+        - 1.2
+        - 1.2
+        - 1.2
+        - 1.2
     child3:
       componentType: "ImmunityMechanic"
       damageCause: "FALL"
@@ -435,7 +436,7 @@ skillUltimate:
               direction: "XZ"
               dustColor: 16753920
               dustSize: 2
-            radius:
+            data1:
               - 8
               - 8
               - 8
@@ -459,14 +460,14 @@ skillUltimate:
               damageType: "AIR"
               damageList:
                 - 10
-                - 20
-                - 30
                 - 40
+                - 90
+                - 180
               damageMultiplyList:
+                - 1
+                - 1.15
                 - 1.4
                 - 1.6
-                - 1.8
-                - 2.2
         child3:
           componentType: "SoundMechanic"
           goaSound: "SKILL_ARROW_RAIN"

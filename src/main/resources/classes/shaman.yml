@@ -17,11 +17,12 @@ attributeMaxMana: 6
 attributeCriticalChance: 0
 weaponGearTypes:
   - "WAND"
-  - "DAGGER"
   - "STAFF"
+  - "DAGGER"
 armorGearTypes:
   - "CLOTH_ARMOR"
   - "FEATHER_ARMOR"
+  - "LIGHT_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Totem"
@@ -108,14 +109,14 @@ skillTwo:
             damageType: "EARTH"
             damageList:
               - 10
-              - 20
-              - 30
               - 40
+              - 90
+              - 180
             damageMultiplyList:
-              - 1.4
-              - 1.6
-              - 1.8
-              - 2.2
+              - 0.4
+              - 0.5
+              - 0.6
+              - 0.8
         child2:
           componentType: "ParticleMechanic"
           particle:
@@ -124,7 +125,7 @@ skillTwo:
             radius: 5
             amount: 12
             direction: "XZ"
-          radius:
+          data1:
             - 5
             - 5.5
             - 6
@@ -209,7 +210,7 @@ skillThree:
                 direction: "XZ"
                 dustColor: 16724991
                 dustSize: 8
-              radius:
+              data1:
                 - 5
                 - 5.5
                 - 6
@@ -290,7 +291,7 @@ skillPassive:
                   radius: 5
                   amount: 12
                   direction: "XZ"
-                radius:
+                data1:
                   - 5
                   - 5.5
                   - 6
@@ -350,7 +351,7 @@ skillUltimate:
           radius: 4.5
           amount: 1
           direction: "XZ"
-        radius:
+        data1:
           - 4.5
           - 4.75
           - 5

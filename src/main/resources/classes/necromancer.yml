@@ -19,11 +19,12 @@ attributeMaxMana: 1
 attributeCriticalChance: 0
 weaponGearTypes:
   - "WAND"
-  - "DAGGER"
   - "STAFF"
+  - "DAGGER"
 armorGearTypes:
   - "CLOTH_ARMOR"
   - "FEATHER_ARMOR"
+  - "LIGHT_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Summon"
@@ -152,9 +153,9 @@ skillTwo:
           damageType: "LIGHTNING"
           damageList:
             - 10
-            - 20
-            - 30
             - 40
+            - 90
+            - 180
           damageMultiplyList:
             - 1.4
             - 1.6
@@ -509,7 +510,7 @@ skillUltimate:
               amount: 40
               dustColor: 65535
               dustSize: 8
-            radius:
+            data1:
               - 5
               - 5.5
               - 6

@@ -20,8 +20,9 @@ weaponGearTypes:
   - "GREAT_SWORD"
   - "SWORD"
 armorGearTypes:
-  - "CLOTH_ARMOR"
+  - "PLATE_ARMOR"
   - "FEATHER_ARMOR"
+  - "LIGHT_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Turret"
@@ -110,14 +111,14 @@ skillOne:
                 damageType: "FIRE"
                 damageList:
                   - 10
-                  - 20
-                  - 30
                   - 40
+                  - 90
+                  - 180
                 damageMultiplyList:
-                  - 1.4
-                  - 1.6
-                  - 1.8
-                  - 2.2
+                  - 0.4
+                  - 0.5
+                  - 0.6
+                  - 0.8
     child3:
       componentType: "SoundMechanic"
       goaSound: "SKILL_SPLASH"
@@ -181,9 +182,9 @@ skillTwo:
               damageType: "FIRE"
               damageList:
                 - 10
-                - 20
-                - 30
                 - 40
+                - 90
+                - 180
               damageMultiplyList:
                 - 1.4
                 - 1.6
@@ -225,7 +226,7 @@ skillTwo:
             radius: 2.5
             amount: 2
             direction: "XZ"
-          radius:
+          data1:
             - 2.5
             - 3
             - 3.5
@@ -296,7 +297,7 @@ skillThree:
               direction: "XZ"
               dustColor: 3355443
               dustSize: 2
-            radius:
+            data1:
               - 1
               - 1
               - 1
@@ -378,7 +379,7 @@ skillPassive:
             radius: 5
             amount: 12
             direction: "XZ"
-          radius:
+          data1:
             - 5
             - 5.5
             - 6
@@ -456,9 +457,9 @@ skillUltimate:
             damageType: "FIRE"
             damageList:
               - 10
-              - 20
-              - 30
               - 40
+              - 90
+              - 180
             damageMultiplyList:
               - 1.4
               - 1.6
@@ -494,7 +495,7 @@ skillUltimate:
               radius: 2.5
               amount: 2
               direction: "XZ"
-            radius:
+            data1:
               - 2.5
               - 2.75
               - 3

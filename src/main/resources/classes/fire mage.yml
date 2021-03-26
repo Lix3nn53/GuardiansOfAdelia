@@ -17,11 +17,12 @@ attributeMaxMana: 6
 attributeCriticalChance: 0
 weaponGearTypes:
   - "WAND"
-  - "DAGGER"
   - "STAFF"
+  - "DAGGER"
 armorGearTypes:
   - "CLOTH_ARMOR"
   - "FEATHER_ARMOR"
+  - "LIGHT_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Fireball"
@@ -70,9 +71,9 @@ skillOne:
           damageType: "FIRE"
           damageList:
             - 10
-            - 20
-            - 30
             - 40
+            - 90
+            - 180
           damageMultiplyList:
             - 1.4
             - 1.6
@@ -146,9 +147,9 @@ skillTwo:
         damageType: "FIRE"
         damageList:
           - 10
-          - 20
-          - 30
           - 40
+          - 90
+          - 180
         damageMultiplyList:
           - 1.4
           - 1.6
@@ -165,7 +166,7 @@ skillTwo:
             angle: 50
             amount: 15
             amounty: 10
-          length:
+          data1:
             - 3.5
             - 4
             - 4.5
@@ -247,9 +248,9 @@ skillThree:
             damageType: "FIRE"
             damageList:
               - 10
-              - 20
-              - 30
               - 40
+              - 90
+              - 180
             damageMultiplyList:
               - 1.4
               - 1.6
@@ -290,7 +291,7 @@ skillThree:
             radius: 2.5
             amount: 24
             amounty: 12
-          radius:
+          data1:
             - 2.5
             - 2.75
             - 3
@@ -378,7 +379,7 @@ skillPassive:
               radius: 0.1
               amount: 2
             frequency: 5
-            radius:
+            data1:
               - 0.1
               - 0.1
               - 0.1
@@ -468,9 +469,9 @@ skillUltimate:
             damageType: "FIRE"
             damageList:
               - 10
-              - 20
-              - 30
               - 40
+              - 90
+              - 180
             damageMultiplyList:
               - 1.4
               - 1.6
@@ -529,7 +530,7 @@ skillUltimate:
             radius: 3
             amount: 4
             direction: "XZ"
-          radius:
+          data1:
             - 3
             - 3.5
             - 3

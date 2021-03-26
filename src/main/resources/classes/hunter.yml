@@ -21,8 +21,9 @@ weaponGearTypes:
   - "BOW"
   - "DAGGER"
 armorGearTypes:
+  - "LIGHT_ARMOR"
   - "FEATHER_ARMOR"
-  - "PLATE_ARMOR"
+  - "CLOTH_ARMOR"
 hasDefaultOffhand: false
 skillOne:
   name: "Explosive Arrow"
@@ -85,9 +86,9 @@ skillOne:
           damageType: "EARTH"
           damageList:
             - 10
-            - 20
-            - 30
             - 40
+            - 90
+            - 180
           damageMultiplyList:
             - 1.4
             - 1.6
@@ -112,7 +113,7 @@ skillOne:
           radius: 3
           amount: 2
           direction: "XZ"
-        radius:
+        data1:
           - 3
           - 3.5
           - 3
@@ -170,14 +171,14 @@ skillTwo:
           damageType: "EARTH"
           damageList:
             - 10
-            - 20
-            - 30
             - 40
+            - 90
+            - 180
           damageMultiplyList:
-            - 1.4
-            - 1.6
-            - 1.8
-            - 2.2
+            - 0.6
+            - 0.8
+            - 1.0
+            - 1.2
     child2:
       componentType: "SoundMechanic"
       goaSound: "SKILL_MULTI_ARROW"
@@ -353,7 +354,7 @@ skillUltimate:
                 radius: 3
                 amount: 1
                 direction: "XZ"
-              radius:
+              data1:
                 - 3
                 - 3.5
                 - 3

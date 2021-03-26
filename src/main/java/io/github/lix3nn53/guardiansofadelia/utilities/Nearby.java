@@ -12,6 +12,7 @@ import java.util.List;
  * instead of all entities in a world
  */
 public class Nearby {
+
     /**
      * Gets entities nearby a location using a given radius
      *
@@ -19,7 +20,7 @@ public class Nearby {
      * @param radius radius to get within
      * @return nearby entities
      */
-    public static List<Entity> getNearby(Location loc, double radius) {
+    public static List<Entity> getNearbySphere(Location loc, double radius) {
         List<Entity> result = new ArrayList<Entity>();
 
         int minX = (int) (loc.getX() - radius) >> 4;
@@ -27,12 +28,12 @@ public class Nearby {
         int minZ = (int) (loc.getZ() - radius) >> 4;
         int maxZ = (int) (loc.getZ() + radius) >> 4;
 
-        radius *= radius;
+        double radiusSquare = radius * radius;
 
         for (int i = minX; i <= maxX; i++)
             for (int j = minZ; j <= maxZ; j++)
                 for (Entity entity : loc.getWorld().getChunkAt(i, j).getEntities())
-                    if (entity.getLocation().distanceSquared(loc) < radius)
+                    if (entity.getLocation().distanceSquared(loc) < radiusSquare)
                         result.add(entity);
 
         return result;
@@ -71,8 +72,8 @@ public class Nearby {
      * @param radius radius to get within
      * @return nearby entities
      */
-    public static List<Entity> getNearby(Entity entity, double radius) {
-        return getNearby(entity.getLocation(), radius);
+    public static List<Entity> getNearbySphere(Entity entity, double radius) {
+        return getNearbySphere(entity.getLocation(), radius);
     }
 
     /**
@@ -120,7 +121,7 @@ public class Nearby {
         return result;
     }
 
-    private static double boxDistance(Location loc1, Location loc2) {
+    public static double boxDistance(Location loc1, Location loc2) {
         return Math.max(Math.max(Math.abs(loc1.getX() - loc2.getX()), Math.abs(loc1.getY() - loc2.getY())), Math.abs(loc1.getZ() - loc2.getZ()));
     }
 }

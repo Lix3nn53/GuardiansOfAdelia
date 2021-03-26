@@ -1,0 +1,516 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+tier: 3
+color: "RED"
+mainElement: "FIRE"
+description:
+  - "Thanks to their strength, fearlessness and"
+  - "superior combat skills, warriors are"
+  - "always ready to take on any enemy."
+classIconCustomModelData: 20
+attributeElementDamage: 6
+attributeElementDefense: 1
+attributeMaxHealth: 7
+attributeMaxMana: 1
+attributeCriticalChance: 0
+weaponGearTypes:
+  - "BATTLE_AXE"
+  - "GREAT_SWORD"
+  - "SWORD"
+armorGearTypes:
+  - "PLATE_ARMOR"
+  - "FEATHER_ARMOR"
+  - "LIGHT_ARMOR"
+hasDefaultOffhand: false
+skillOne:
+  name: "Power Slash"
+  customModelData: 8
+  description:
+    - "Deal damage to nearby enemies"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "ConeTarget"
+      allies: false
+      enemy: true
+      self: false
+      max: 10
+      angleList:
+        - 150
+        - 150
+        - 150
+        - 150
+      rangeList:
+        - 3
+        - 3.5
+        - 4
+        - 5
+      child1:
+        componentType: "DamageMechanic"
+        damageType: "FIRE"
+        damageList:
+          - 10
+          - 40
+          - 90
+          - 180
+        damageMultiplyList:
+          - 1.4
+          - 1.6
+          - 1.8
+          - 2.2
+      child2:
+        componentType: "SelfTarget"
+        child1:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_LIGHTNING_NORMAL"
+        child2:
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "DrawCube"
+            particleType: "FLAME"
+            length_x: 1
+            length_y: 1
+            length_z: 1
+            gap: 0.2
+          rotation: true
+          centerEye: true
+          rotationMatchEye: true
+          pitch: 90
+          data1:
+            - 0.5
+            - 0.5
+            - 0.5
+            - 0.5
+          data2:
+            - 2
+            - 2
+            - 2
+            - 2
+          data3:
+            - 3
+            - 3.5
+            - 4
+            - 5
+          forwardList:
+            - 1.5
+            - 1.75
+            - 2
+            - 2.5
+skillTwo:
+  name: "Flame Burst"
+  customModelData: 28
+  description:
+    - "Shoot a flame-burst that launches"
+    - "a target into the sky"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+  cooldowns:
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+    - 12
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "ProjectileMechanic"
+      projectileClass: "SmallFireball"
+      spreadType: "CONE"
+      speed: 1.9
+      amountList:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      angle: 30
+      range: 200
+      mustHitToWork: true
+      particle:
+        arrangementType: "FillHemisphere"
+        particleType: "FLAME"
+        radius: 0.5
+        amount: 2
+      isProjectileInvisible: true
+      child1:
+        componentType: "FilterCurrentTargets"
+        allies: false
+        enemy: true
+        self: false
+        max: 10
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "FIRE"
+          damageList:
+            - 10
+            - 40
+            - 90
+            - 180
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
+        child2:
+          componentType: "LaunchMechanic"
+          relative: "TARGET"
+          forwardSpeedList:
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+          upwardSpeedList:
+            - 1.2
+            - 1.3
+            - 1.4
+            - 1.5
+            - 1.6
+            - 1.8
+          rightSpeedList:
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+        child3:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_STUN_HIT"
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_FIRE_SLASH"
+skillThree:
+  name: "Victory Flag"
+  customModelData: 22
+  description:
+    - "Place a flag at your location that"
+    - "gives damage buff to nearby allies"
+  manaCosts:
+    - 20
+    - 24
+    - 28
+    - 32
+    - 36
+    - 40
+  cooldowns:
+    - 90
+    - 90
+    - 90
+    - 90
+    - 90
+    - 90
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "HologramMechanic"
+      helmetType: "IRON_PICKAXE"
+      customModelData: 4
+      durations:
+        - 800
+        - 800
+        - 800
+        - 800
+        - 800
+        - 800
+      displayText: "< Victory-Flag %caster% >"
+      child1:
+        componentType: "RepeatMechanic"
+        period: 40
+        repetitions:
+          - 20
+          - 20
+          - 20
+          - 20
+          - 20
+          - 20
+        child1:
+          componentType: "AreaTarget"
+          allies: true
+          enemy: false
+          self: true
+          max: 10
+          radiusList:
+            - 8
+            - 9
+            - 10
+            - 11
+            - 12
+            - 14
+          child1:
+            componentType: "BuffMechanic"
+            buffType: "ELEMENT_DAMAGE"
+            multipliers:
+              - 0.08
+              - 0.1
+              - 0.12
+              - 0.14
+              - 0.16
+              - 0.2
+            ticks:
+              - 41
+              - 41
+              - 41
+              - 41
+              - 41
+              - 41
+          child2:
+            componentType: "BuffMechanic"
+            buffType: "ELEMENT_DAMAGE"
+            multipliers:
+              - 0.08
+              - 0.1
+              - 0.12
+              - 0.14
+              - 0.16
+              - 0.2
+            ticks:
+              - 41
+              - 41
+              - 41
+              - 41
+              - 41
+              - 41
+        child2:
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "CRIT"
+            radius: 5
+            amount: 7
+            direction: "XZ"
+          upward: 1.8
+          data1:
+            - 3
+            - 3.5
+            - 3
+            - 3.25
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_BUFF"
+skillPassive:
+  name: "Death Rattle"
+  customModelData: 32
+  description:
+    - "If you take damage that leaves you with less than 15% health,"
+    - "unleash your rage and gain movement speed and jump boost."
+  manaCosts:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  cooldowns:
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+  trigger:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "TookDamageTrigger"
+      cooldowns:
+        - 40
+        - 40
+        - 40
+        - 40
+        - 40
+        - 40
+      child1:
+        componentType: "SelfTarget"
+        child1:
+          componentType: "HealthCondition"
+          minPercent: 0.0
+          maxPercent: 0.15
+          child1:
+            componentType: "SoundMechanic"
+            goaSound: "SKILL_SCREAM"
+          child2:
+            componentType: "PotionEffectMechanic"
+            potionEffectType: "SPEED"
+            tickList:
+              - 120
+              - 140
+              - 160
+              - 180
+              - 200
+              - 240
+            amplifierList:
+              - 2
+              - 3
+              - 3
+              - 4
+              - 4
+              - 5
+          child3:
+            componentType: "ParticleAnimationMechanic"
+            particle:
+              arrangementType: "FillCircle"
+              particleType: "REDSTONE"
+              radius: 1
+              amount: 4
+              direction: "XZ"
+              dustColor: 16711680
+              dustSize: 8
+            frequency: 5
+            data1:
+              - 1
+              - 1
+              - 1
+              - 1
+            repeatAmount:
+              - 24
+              - 28
+              - 32
+              - 36
+skillUltimate:
+  name: "Grand Skyfall"
+  customModelData: 23
+  description:
+    - "Jump forward into the air. When you land deal"
+    - "damage and launch nearby enemies into the sky."
+  manaCosts:
+    - 50
+    - 50
+    - 50
+    - 50
+    - 50
+    - 50
+  cooldowns:
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "LaunchMechanic"
+      relative: "TARGET"
+      forwardSpeedList:
+        - 1.4
+        - 1.5
+        - 1.6
+        - 1.7
+        - 1.8
+        - 2
+      upwardSpeedList:
+        - 1.7
+        - 1.75
+        - 1.8
+        - 1.85
+        - 1.9
+        - 2
+      rightSpeedList:
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_JUMP"
+    child3:
+      componentType: "ImmunityMechanic"
+      damageCause: "FALL"
+    child4:
+      componentType: "ParticleAnimationMechanic"
+      particle:
+        arrangementType: "FillCircle"
+        particleType: "REDSTONE"
+        radius: 1
+        amount: 4
+        direction: "XZ"
+        dustColor: 16753920
+        dustSize: 2
+      frequency: 4
+      data1:
+        - 1
+        - 1
+        - 1
+        - 1
+      repeatAmount:
+        - 10
+        - 12
+        - 14
+        - 16
+    child5:
+      componentType: "LandTrigger"
+      child1:
+        componentType: "ParticleMechanic"
+        particle:
+          arrangementType: "DrawCylinder"
+          particleType: "REDSTONE"
+          radius: 8
+          amount: 40
+          dustColor: 16728064
+          dustSize: 4
+        data1:
+          - 8
+          - 9
+          - 10
+          - 11
+      child2:
+        componentType: "SoundMechanic"
+        goaSound: "SKILL_POWERFUL_LANDING"
+      child3:
+        componentType: "ImmunityRemoveMechanic"
+        damageCause: FALL
+        delay: 5
+      child4:
+        componentType: "AreaTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 20
+        radiusList:
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 14
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "FIRE"
+          damageList:
+            - 10
+            - 40
+            - 90
+            - 180
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2

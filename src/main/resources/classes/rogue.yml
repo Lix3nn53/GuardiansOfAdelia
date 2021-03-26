@@ -20,11 +20,10 @@ attributeCriticalChance: 1
 weaponGearTypes:
   - "DAGGER"
   - "SWORD"
-  - "BOW"
-  - "CROSSBOW"
 armorGearTypes:
   - "FEATHER_ARMOR"
-  - "PLATE_ARMOR"
+  - "LIGHT_ARMOR"
+  - "CLOTH_ARMOR"
 hasDefaultOffhand: true
 isDefaultOffhandWeapon: true
 skillOne:

@@ -2,20 +2,14 @@ package io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
 
-public class ArrangementFillHemisphere extends ArrangementWithRadius {
+public class ArrangementFillHemisphere extends ArrangementWithData {
 
     private final int amount;
-
-    public ArrangementFillHemisphere(Particle particle, double radius, int amount, Particle.DustOptions dustOptions) {
-        super(particle, dustOptions, radius);
-        this.amount = amount;
-    }
 
     public ArrangementFillHemisphere(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -28,8 +22,10 @@ public class ArrangementFillHemisphere extends ArrangementWithRadius {
             configLoadError("amount");
         }
 
-        this.radius = configurationSection.getDouble("radius");
         this.amount = configurationSection.getInt("amount");
+
+        // Data that animations can modify
+        addData(configurationSection.getDouble("radius"));
     }
 
     @Override
@@ -38,6 +34,7 @@ public class ArrangementFillHemisphere extends ArrangementWithRadius {
         if (offset != null) {
             location1.add(offset);
         }
+        double radius = getData(0);
         ParticleShapes.fillHemisphere(location1, particle, radius, amount, dustOptions);
     }
 
@@ -47,6 +44,7 @@ public class ArrangementFillHemisphere extends ArrangementWithRadius {
         if (offset != null) {
             location1.add(offset);
         }
+        double radius = getData(0);
         ParticleShapes.fillHemisphere(location1, particle, radius, amount, dustOptions);
     }
 }

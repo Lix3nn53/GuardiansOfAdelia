@@ -19,12 +19,12 @@ attributeMaxMana: 2
 attributeCriticalChance: 0
 weaponGearTypes:
   - "WAR_HAMMER"
-  - "SWORD"
-  - "BATTLE_AXE"
   - "GREAT_SWORD"
+  - "SWORD"
 armorGearTypes:
   - "HEAVY_ARMOR"
   - "PLATE_ARMOR"
+  - "LIGHT_ARMOR"
 shieldGearTypes:
   - "SHIELD"
 hasDefaultOffhand: true

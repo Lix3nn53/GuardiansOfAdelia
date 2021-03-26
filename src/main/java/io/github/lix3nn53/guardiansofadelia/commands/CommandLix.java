@@ -354,7 +354,6 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-                double length = 1;
                 /*double degrees = Double.parseDouble(args[1]);
                 double radian = degrees * Math.PI / 180;
                 player.sendMessage("radian: " + radian);*/
@@ -364,16 +363,22 @@ public class CommandLix implements CommandExecutor {
                 float pitch = eyeLocation.getPitch();
 
                 //ParticleShapes.drawCube(eyeLocation, Particle.SOUL_FIRE_FLAME, null, length, 0.1, true, yaw, pitch);
-                double height = Double.parseDouble(args[1]);
-                int amount = (int) Double.parseDouble(args[2]);
+                double gap = Double.parseDouble(args[1]);
+                double lengthx = Double.parseDouble(args[2]);
+                /*
                 int amounty = (int) Double.parseDouble(args[3]);
-                double phi = Double.parseDouble(args[4]);
-                yaw += Double.parseDouble(args[5]);
-                pitch += Double.parseDouble(args[6]);
+                double phi = Double.parseDouble(args[4]);*/
+                double lengthy = Double.parseDouble(args[3]);
+                double lengthz = Double.parseDouble(args[4]);
+                /*yaw += Double.parseDouble(args[3]);
+                pitch += Double.parseDouble(args[4]);*/
 
                 // if offsety is set, pitch rotates in y circle
 
-                ParticleShapes.drawCone(eyeLocation, Particle.SOUL_FIRE_FLAME, height, amount, amounty, phi, null, true, yaw, pitch, new Vector());
+                //ParticleShapes.drawCone(eyeLocation, Particle.SOUL_FIRE_FLAME, height, amount, amounty, phi, null, true, yaw, pitch, new Vector());
+
+                Vector vector = new Vector(lengthx, lengthy, lengthz);
+                ParticleShapes.drawCube(eyeLocation, Particle.FLAME, null, vector, gap, true, yaw, pitch);
                 //ParticleShapes.drawCylinder(eyeLocation, Particle.SOUL_FIRE_FLAME, radius, amount, null, 0, true, yaw, pitchh, add);
 
                 /*Vector dir = eyeLocation.getDirection().normalize();
