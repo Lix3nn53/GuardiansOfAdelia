@@ -97,7 +97,7 @@ public class BuffMechanic extends MechanicComponent {
                     }
                 }
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), ticks.get(skillLevel - 1));
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), ticks.get(skillLevel - 1));
 
         return true;
     }

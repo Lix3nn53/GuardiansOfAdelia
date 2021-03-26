@@ -75,68 +75,96 @@ public class StatPassive implements Stat {
             maxValue = minValue;
         }
 
-        int amountOfStats = new Random().nextInt(50);
-        amountOfStats = (int) (amountOfStats / 10 + 0.5);
+        int amountOfStats;
 
-        if (minAmount <= 5) {
-            if (amountOfStats < minAmount) {
-                amountOfStats = minAmount;
-            }
+        if (minAmount < 5) {
+            // int amountOfStats = new Random().nextInt(max - minAmount + 1) + minAmount;
+            int bound = 50;
+            int multiplier = bound / 5;
+            int bonus = 5;
+            amountOfStats = new Random().nextInt(bound - (minAmount * multiplier) + bonus) + (minAmount * multiplier);
+            amountOfStats = (int) ((amountOfStats / (multiplier)) + 0.5);
         } else {
             amountOfStats = 5;
         }
 
         if (isAttribute) {
             for (int i = 0; i < amountOfStats; i++) {
-                satisfyOneAttributeRandomly(minValue, maxValue);
+                satisfyOneRandomly(minValue, maxValue, amountOfStats, false);
             }
         } else {
             for (int i = 0; i < amountOfStats; i++) {
-                satisfyOneElementRandomly(minValue, maxValue);
+                satisfyOneRandomly(minValue, maxValue, amountOfStats, true);
             }
         }
     }
 
-    private void satisfyOneAttributeRandomly(int minValue, int maxValue) {
-        List<AttributeType> unused = new ArrayList<>();
-        for (AttributeType attributeType : AttributeType.values()) {
-            if (attributeTypeToValue.containsKey(attributeType)) {
-                int value = attributeTypeToValue.get(attributeType);
-                if (value == 0) {
-                    unused.add(attributeType);
+    private void satisfyOneRandomly(int minValue, int maxValue, int amountOfStats, boolean isElement) {
+        List<ElementType> unusedElements = new ArrayList<>();
+        List<AttributeType> unusedAttributes = new ArrayList<>();
+        if (isElement) {
+            for (ElementType elementType : ElementType.values()) {
+                if (elementTypeToValue.containsKey(elementType)) {
+                    int value = elementTypeToValue.get(elementType);
+                    if (value == 0) {
+                        unusedElements.add(elementType);
+                    }
+                } else {
+                    unusedElements.add(elementType);
                 }
-            } else {
-                unused.add(attributeType);
+            }
+        } else {
+            for (AttributeType attributeType : AttributeType.values()) {
+                if (attributeTypeToValue.containsKey(attributeType)) {
+                    int value = attributeTypeToValue.get(attributeType);
+                    if (value == 0) {
+                        unusedAttributes.add(attributeType);
+                    }
+                } else {
+                    unusedAttributes.add(attributeType);
+                }
             }
         }
 
-        int random = new Random().nextInt(unused.size());
-        AttributeType statToSatisfy = unused.get(random);
-
-        int randomValue = getRandomValue(minValue, maxValue);
-
-        attributeTypeToValue.put(statToSatisfy, randomValue);
-    }
-
-    private void satisfyOneElementRandomly(int minValue, int maxValue) {
-        List<ElementType> unused = new ArrayList<>();
-        for (ElementType elementType : ElementType.values()) {
-            if (elementTypeToValue.containsKey(elementType)) {
-                int value = elementTypeToValue.get(elementType);
-                if (value == 0) {
-                    unused.add(elementType);
-                }
-            } else {
-                unused.add(elementType);
-            }
+        int random;
+        ElementType statToSatisfyElement = null;
+        AttributeType statToSatisfyAttribute = null;
+        if (isElement) {
+            random = new Random().nextInt(unusedElements.size());
+            statToSatisfyElement = unusedElements.get(random);
+        } else {
+            random = new Random().nextInt(unusedAttributes.size());
+            statToSatisfyAttribute = unusedAttributes.get(random);
         }
 
-        int random = new Random().nextInt(unused.size());
-        ElementType statToSatisfy = unused.get(random);
+        int gap = maxValue - minValue;
+        int unusedSize = isElement ? unusedElements.size() : unusedAttributes.size();
+        double currentIndex = amountOfStats - (5 - unusedSize) - 1; // index of element we are satisfying // range is 0 to amount - 1
+        double percent = currentIndex / amountOfStats;
 
-        int randomValue = getRandomValue(minValue, maxValue);
+        double unit = 1.0 / amountOfStats;
 
-        elementTypeToValue.put(statToSatisfy, randomValue);
+        int lowerLimit = (int) (gap * percent + 0.5);
+        int upperLimit = (int) ((gap * (percent + unit)) + 0.5); // next unit is upper limit
+        /*System.out.println("amountOfStats: " + amountOfStats);
+        System.out.println("currentIndex: " + currentIndex);
+        System.out.println("min: " + minValue);
+        System.out.println("max: " + maxValue);
+
+        System.out.println("percent: " + percent);
+
+        System.out.println("v: " + lowerLimit);
+        System.out.println("v2: " + upperLimit);
+        System.out.println("minValue: " + (minValue + lowerLimit));
+        System.out.println("maxValue: " + (minValue + upperLimit));*/
+
+        int randomValue = getRandomValue(minValue + lowerLimit, minValue + upperLimit);
+
+        if (statToSatisfyElement != null) {
+            elementTypeToValue.put(statToSatisfyElement, randomValue);
+        } else if (statToSatisfyAttribute != null) {
+            attributeTypeToValue.put(statToSatisfyAttribute, randomValue);
+        }
     }
 
     private int getRandomValue(int minStatValue, int maxStatValue) {

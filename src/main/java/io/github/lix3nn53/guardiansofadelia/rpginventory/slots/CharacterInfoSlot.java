@@ -72,7 +72,7 @@ public class CharacterInfoSlot {
                 lore.add(ChatColor.GOLD + "⚝ Critical Chance: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
                 lore.add("");
                 lore.add(ChatColor.GOLD + "? Critical Damage: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalDamage) + "%");
-                lore.add(ChatColor.AQUA + "? Ability Haste: " + ChatColor.GRAY + abilityHaste + " (" + new DecimalFormat("##.##").format((1.0 - cooldownReduction) * 100) + "% reduction)");
+                lore.add(ChatColor.AQUA + "? Ability Haste: " + ChatColor.GRAY + abilityHaste + " (" + new DecimalFormat("##.##").format((1.0 - cooldownReduction) * 100) + "% cooldown reduction)");
 
                 /*lore.add("");
                 lore.add(ChatColor.GRAY + "(equipment + level + invested points)");

@@ -23,9 +23,9 @@ import java.util.List;
 public class StatUtils {
 
     // Values to use while generating items
-    private static final double ITEM_HEALTH = 9;
+    private static final double ITEM_HEALTH = 7;
     private static final double ITEM_DEFENSE = 5;
-    private static final double ITEM_DAMAGE = 4;
+    private static final double ITEM_DAMAGE = 3;
 
     // Formula
     private static final double HALF_REDUCTION_DEFENSE = 2000.0;
@@ -200,14 +200,14 @@ public class StatUtils {
     }
 
     public static int getDamageItem(int requiredLevel) {
-        return (int) (10 + Math.round(ITEM_DAMAGE * Math.pow(requiredLevel, 2) / 20) + 0.5);
+        return (int) (10 + ITEM_DAMAGE * Math.pow(requiredLevel, 2) / 20 + 0.5);
     }
 
     public static int getHealthItem(int requiredLevel) {
-        return (int) (10 + Math.round(ITEM_HEALTH * Math.pow(requiredLevel, 2) / 20) + 0.5);
+        return (int) (10 + ITEM_HEALTH * Math.pow(requiredLevel, 2) / 20 + 0.5);
     }
 
     public static int getDefenseItem(int requiredLevel) {
-        return (int) (10 + Math.round(ITEM_DEFENSE * Math.pow(requiredLevel, 2) / 20) + 0.5);
+        return (int) (10 + ITEM_DEFENSE * Math.pow(requiredLevel, 2) / 20 + 0.5);
     }
 }

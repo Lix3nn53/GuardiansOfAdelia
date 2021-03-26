@@ -6,11 +6,11 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import org.bukkit.Material;
 
 public enum ArmorGearType {
-    HEAVY_ARMOR, // NETHERITE // Tank // knockback resistance
-    PLATE_ARMOR, // DIAMOND // Warrior // critical damage
-    CLOTH_ARMOR, // GOLD // Mage // ability haste
-    LIGHT_ARMOR, // IRON // Archer // jump boost
-    FEATHER_ARMOR;  // CHAINMAIL // Assassin // attack speed
+    HEAVY_ARMOR, // NETHERITE // Tank // knockback resistance // 1
+    PLATE_ARMOR, // DIAMOND // Warrior // critical damage // 0.7
+    LIGHT_ARMOR, // IRON // Archer // jump boost // 0.5
+    FEATHER_ARMOR,  // CHAINMAIL // Assassin // movement speed // 0.5
+    CLOTH_ARMOR; // GOLD // Mage // ability haste // 0.4
 
     public static ArmorGearType fromMaterial(Material material) {
         for (ArmorGearType armorGearType : ArmorGearType.values()) {
@@ -103,7 +103,7 @@ public enum ArmorGearType {
             case LIGHT_ARMOR:
                 return GearSetEffect.JUMP_BOOST;
             case FEATHER_ARMOR:
-                return GearSetEffect.ATTACK_SPEED_INCREASE;
+                return GearSetEffect.MOVEMENT_SPEED;
         }
 
         return null;

@@ -1,5 +1,9 @@
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,6 +27,31 @@ public class Test {
         System.out.println("min element: " + minStatValue);
         System.out.println("min attr: " + minStatValue1);
 
+        ItemTier tier = ItemTier.LEGENDARY;
+        GearLevel gearLevel = GearLevel.EIGHT;
+        for (int requiredLevel = 0; requiredLevel <= 99; requiredLevel += 10) {
+            System.out.println("NEWWWW");
+            int minNumberOfAttr = 4;
+            int minNumberOfElements = 4;
+            int minAttrValue = gearLevel.getMinStatValue(true, false);
+            int maxAttrValue = gearLevel.getMaxStatValue(true, false);
+            int minElemValue = gearLevel.getMinStatValue(true, true);
+            int maxElemValue = gearLevel.getMaxStatValue(true, true);
+
+            StatPassive statPassive = new StatPassive(minAttrValue, maxAttrValue, minNumberOfAttr, minElemValue, maxElemValue, minNumberOfElements);
+            // StatPassive statPassive = new StatPassive(15, 100, 2, 50, 250, 3);
+
+            for (AttributeType attributeType : AttributeType.values()) {
+                int attributeValue = statPassive.getAttributeValue(attributeType);
+                if (attributeValue == 0) continue;
+                System.out.println(attributeType.name() + ": " + attributeValue);
+            }
+            for (ElementType elementType : ElementType.values()) {
+                int attributeValue = statPassive.getElementValue(elementType);
+                if (attributeValue == 0) continue;
+                System.out.println(elementType.name() + ": " + attributeValue);
+            }
+        }
         /*for (int requiredLevel = 0; requiredLevel <= 99; requiredLevel += 10) {
             GearLevel gearLevel = GearLevel.getGearLevel(requiredLevel);
             System.out.println("requiredLevel: " + requiredLevel + "GearLevel: " + gearLevel);
@@ -49,8 +78,8 @@ public class Test {
             System.out.println("armorSet health: " + totalHp);
             double defenseReduction = StatUtils.getDefenseReduction(totalArmor);
             System.out.println("armorSet defense: " + totalArmor + " - " + "(" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% reduction)");
-            *//*ShieldSet shieldSet = new ShieldSet("requiredLevel" + requiredLevel, requiredLevel, 0);
-            System.out.println("shieldSet health: " + shieldSet.getHealth(ShieldGearType.SHIELD));*//*
+            ShieldSet shieldSet = new ShieldSet("requiredLevel" + requiredLevel, requiredLevel, 0);
+            System.out.println("shieldSet health: " + shieldSet.getHealth(ShieldGearType.SHIELD));
         }*/
 
         /*double angle = 30;

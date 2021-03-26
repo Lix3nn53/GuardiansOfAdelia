@@ -9,20 +9,20 @@ import java.util.ArrayList;
 
 public enum WeaponGearType {
     //One handed Melee Weapons
-    SWORD, // Normal attack speed, more damage than dagger
-    DAGGER, // Fast attack speed, can dual wield
+    SWORD, // Normal attack speed, normal damage
+    DAGGER, // Fast attack speed, low damage, can dual wield
     //Two handed Melee Weapons
-    BATTLE_AXE, // Slow attack speed, more damage than great sword
-    WAR_HAMMER, // Slow attack speed, same damage with great sword, normal attacks knockback target
-    GREAT_SWORD, // Normal attack speed, more damage than sword
+    BATTLE_AXE, // Slow attack speed, max damage
+    WAR_HAMMER, // Slow attack speed, high damage, normal attacks knockback target
+    GREAT_SWORD, // Normal attack speed, high damage
     //Ranged + Melee weapons
-    SPEAR, // Normal attack speed, ranged + melee
+    SPEAR, // Normal attack speed, normal damage, ranged + melee
     //Ranged Weapons
-    BOW, // Normal attack speed
-    CROSSBOW, // slow attack speed, more damage than bow
+    BOW, // Normal attack speed, normal damage
+    CROSSBOW, // slow attack speed, high damage
     //Magic Weapons
-    STAFF, // Skill cooldown reduction
-    WAND; // More damage than staff
+    STAFF, // high damage, Skill cooldown reduction
+    WAND; // max damage
 
     public Material getMaterial() {
         switch (this) {

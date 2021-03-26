@@ -24,7 +24,8 @@ public enum GearSetEffect {
     ATTACK_SPEED_INCREASE,
     ATTACK_SPEED_DECREASE,
     ABILITY_HASTE,
-    JUMP_BOOST;
+    JUMP_BOOST,
+    MOVEMENT_SPEED;
 
     public static boolean isWearingSameArmorType(ArmorGearType helmet, ArmorGearType chestplate, ArmorGearType leggings, ArmorGearType boots) {
         if (helmet == null || chestplate == null || leggings == null || boots == null) return false;
@@ -63,18 +64,22 @@ public enum GearSetEffect {
                 player.addPotionEffect(potionEffect);
                 break;
             case ATTACK_SPEED_INCREASE:
-                potionEffect = new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 1);
+                potionEffect = new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 2);
                 player.addPotionEffect(potionEffect);
                 break;
             case ATTACK_SPEED_DECREASE:
-                potionEffect = new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 1);
+                potionEffect = new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 2);
                 player.addPotionEffect(potionEffect);
                 break;
             case ABILITY_HASTE:
                 rpgCharacterStats.addToBuffMultiplier(BuffType.ABILITY_HASTE, 20, null);
                 break;
             case JUMP_BOOST:
-                potionEffect = new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 1);
+                potionEffect = new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 2);
+                player.addPotionEffect(potionEffect);
+                break;
+            case MOVEMENT_SPEED:
+                potionEffect = new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1);
                 player.addPotionEffect(potionEffect);
                 break;
         }
@@ -109,6 +114,9 @@ public enum GearSetEffect {
             case JUMP_BOOST:
                 player.removePotionEffect(PotionEffectType.JUMP);
                 break;
+            case MOVEMENT_SPEED:
+                player.removePotionEffect(PotionEffectType.SPEED);
+                break;
         }
     }
 
@@ -128,15 +136,17 @@ public enum GearSetEffect {
             case SLOW_FALLING:
                 return ChatColor.GRAY + "Slow Fallling";
             case SWIMMING_SPEED:
-                return ChatColor.GRAY + "Swimming Speed +?%";
+                return ChatColor.GRAY + "Swimming Speed 2x";
             case ATTACK_SPEED_INCREASE:
-                return ChatColor.GRAY + "Attack Speed +?%";
+                return ChatColor.GRAY + "Attack Speed +20%";
             case ATTACK_SPEED_DECREASE:
-                return ChatColor.GRAY + "Attack Speed -?%";
+                return ChatColor.GRAY + "Attack Speed -20%";
             case ABILITY_HASTE:
                 return ChatColor.GRAY + "Ability Haste +20";
             case JUMP_BOOST:
-                return ChatColor.GRAY + "Jump Height +?";
+                return ChatColor.GRAY + "Jump +1";
+            case MOVEMENT_SPEED:
+                return ChatColor.GRAY + "Movement Speed 20%";
         }
 
         final StringBuilder sb = new StringBuilder("GearSetEffect{");
