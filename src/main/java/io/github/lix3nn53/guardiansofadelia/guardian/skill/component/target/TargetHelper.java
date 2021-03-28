@@ -1,12 +1,15 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TargetHelper {
@@ -145,27 +148,78 @@ public class TargetHelper {
         return result;
     }
 
-    public static List<LivingEntity> getBoxTargets(Location cubeCenter, Vector corner, Vector corner2, float yaw, float pitch) {
-        List<LivingEntity> result = new ArrayList<>();
+    public static List<LivingEntity> getBoxTargets(World world, Vector b1, Vector b2, Vector b4, Vector t1, Vector t3) {
+        Vector yLocal = t1.clone().subtract(b1);
+        double yLength = yLocal.length(); // size1 = np.linalg.norm(dir1)
+        yLocal = yLocal.normalize(); // dir1 = dir1.divide(new Vector(size1, size1, size1));
 
-        World world = cubeCenter.getWorld();
-        Vector center = cubeCenter.toVector();
+        Vector xLocal = b2.clone().subtract(b1);
+        double xLength = xLocal.length();
+        xLocal = xLocal.normalize();
 
-        for (Entity entity : corner.toLocation(world).getChunk().getEntities()) {
-            if (entity instanceof LivingEntity) {
-                Location location = entity.getLocation();
-                Vector vector = location.toVector();
+        Vector zLocal = b4.clone().subtract(b1);
+        double zLength = zLocal.length();
+        zLocal = zLocal.normalize();
 
-                Vector subtract = vector.subtract(center);
+        // cube3d_center = (b1 + t3)/2.0
+        Vector center = b1.clone().add(t3).divide(new Vector(2, 2, 2));
 
+        ArrayList<LivingEntity> result = new ArrayList<>();
+        // dir_vec = points - cube3d_center
+        // res1 = np.where( (np.absolute(np.dot(dir_vec, dir1)) * 2) > size1 )[0]
+        // res2 = np.where( (np.absolute(np.dot(dir_vec, dir2)) * 2) > size2 )[0]
+        // res3 = np.where( (np.absolute(np.dot(dir_vec, dir3)) * 2) > size3 )[0]
+
+        // return list( set().union(res1, res2, res3) )
+
+        // TODO how to select chunks?
+        Location location = b1.toLocation(world);
+        Location location1 = t3.toLocation(world);
+        Chunk chunk = location.getChunk();
+
+        Entity[] entities = chunk.getEntities();
+        ArrayList<Entity> entityList = new ArrayList<>(Arrays.asList(entities));
+
+        Chunk chunk1 = location1.getChunk();
+        if (!chunk.equals(chunk1)) {
+            Entity[] entities1 = chunk1.getEntities();
+            entityList.addAll(Arrays.asList(entities1));
+        }
+
+        for (Entity entity : entityList) {
+            if (!(entity instanceof LivingEntity)) continue;
+            BoundingBox boundingBox = entity.getBoundingBox();
+
+            ArrayList<Vector> targets = new ArrayList<>();
+            targets.add(boundingBox.getCenter());
+            Vector max = boundingBox.getMax();
+            targets.add(max);
+            Vector min = boundingBox.getMin();
+            targets.add(min);
+            double height = boundingBox.getHeight();
+            targets.add(min.clone().add(new Vector(0, height, 0)));
+            targets.add(max.clone().subtract(new Vector(0, height, 0)));
+
+            for (Vector target : targets) {
+                boolean pointInsideBox = isPointInsideBox(target, center, xLocal, yLocal, zLocal, xLength, yLength, zLength);
+                if (pointInsideBox) {
+                    result.add((LivingEntity) entity);
+                    break;
+                }
             }
         }
 
-        /*for (Entity entity : corner.toLocation().getWorld().getChunkAt(i, j).getEntities())
-            if (entity instanceof LivingEntity && boxDistance(entity.getLocation(), loc) < radius)
-                result.add((LivingEntity) entity);*/
-
         return result;
+    }
+
+    public static boolean isPointInsideBox(Vector point, Vector center, Vector xLocal, Vector yLocal, Vector zLocal, double xLength, double yLength, double zLength) {
+        Vector v = point.clone().subtract(center); // direction vector from cube center to the target point
+
+        double py = Math.abs(v.dot(yLocal)) * 2;
+        double px = Math.abs(v.dot(xLocal)) * 2;
+        double pz = Math.abs(v.dot(zLocal)) * 2;
+
+        return px <= xLength && py <= yLength && pz <= zLength;
     }
 
     public static List<LivingEntity> getNearbyBox(Location loc, double radius) {

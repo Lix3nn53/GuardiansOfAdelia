@@ -376,16 +376,27 @@ public class ParticleShapes {
 
     public static Vector[] drawCube(Location location, Particle particle, Particle.DustOptions dustOptions, Vector vector, double gap,
                                     boolean rotate, float yaw, float pitch) {
+        Vector[] points = calculateCubeCorners(location, vector, rotate, yaw, pitch);
+
+        World world = location.getWorld();
+
+        // Edges
+        drawCubeEdges(world, points, particle, dustOptions, gap);
+
+        return points;
+    }
+
+    public static Vector[] calculateCubeCorners(Location location, Vector vector, boolean rotate, float yaw, float pitch) {
         Vector[] points = new Vector[8];
 
         Location center = rotate ? new Location(location.getWorld(), 0, 0, 0) : location;
 
         Vector centerVector = center.toVector();
 
-        double length_x = vector.getX();
-        double length_y = vector.getY();
-        double length_z = vector.getZ();
-        GuardiansOfAdelia.getInstance().getLogger().info("CUBE DRAW: " + length_x + ", " + length_y + ", " + length_z);
+        double length_x = vector.getX() / 2;
+        double length_y = vector.getY() / 2;
+        double length_z = vector.getZ() / 2;
+        GuardiansOfAdelia.getInstance().getLogger().info("CUBE DRAW: " + vector.getX() + ", " + vector.getY() + ", " + vector.getZ());
         points[0] = centerVector.clone().add(new Vector(-length_x, -length_y, -length_z));
         points[1] = centerVector.clone().add(new Vector(length_x, -length_y, -length_z));
         points[2] = centerVector.clone().add(new Vector(length_x, length_y, -length_z));
@@ -406,15 +417,14 @@ public class ParticleShapes {
             }
         }
 
-        World world = center.getWorld();
+        return points;
+    }
 
-        // Edges
+    public static void drawCubeEdges(World world, Vector[] points, Particle particle, Particle.DustOptions dustOptions, double gap) {
         for (int i = 0; i < 4; i++) {
             ParticleShapes.drawLineBetween(world, points[i], particle, dustOptions, points[(i + 1) % 4], gap);
             ParticleShapes.drawLineBetween(world, points[i + 4], particle, dustOptions, points[((i + 1) % 4) + 4], gap);
             ParticleShapes.drawLineBetween(world, points[i], particle, dustOptions, points[i + 4], gap);
         }
-
-        return points;
     }
 }

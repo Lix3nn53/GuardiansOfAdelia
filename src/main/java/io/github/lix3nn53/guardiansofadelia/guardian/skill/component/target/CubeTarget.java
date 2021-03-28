@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
-import io.github.lix3nn53.guardiansofadelia.utilities.math.RotationHelper;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -116,6 +115,7 @@ public class CubeTarget extends TargetComponent {
             double offset_z = offset_zList.get(skillLevel - 1);
             offset.setZ(offset_z);
         }
+        List<Vector[]> cubesToDraw = new ArrayList<>();
         for (LivingEntity ent : targets) {
             Location location = centerEye ? ent.getEyeLocation() : ent.getLocation();
             // Offset
@@ -144,16 +144,23 @@ public class CubeTarget extends TargetComponent {
                 Location eyeLocation = ent.getEyeLocation();
                 float yaw2 = rotationMatchEye ? eyeLocation.getYaw() + yaw : yaw;
                 float pitch2 = rotationMatchEye ? eyeLocation.getPitch() + pitch : pitch;
-                vectors = ParticleShapes.drawCube(location, particle, dustOptions, lengthV, gap, true, yaw2, pitch2);
+                vectors = ParticleShapes.calculateCubeCorners(location, lengthV, true, yaw2, pitch2);
             } else {
-                vectors = ParticleShapes.drawCube(location, particle, dustOptions, lengthV, gap, false, 0, 0);
+                vectors = ParticleShapes.calculateCubeCorners(location, lengthV, false, 0, 0);
             }
 
-            Vector vector = location.toVector();
-            RotationHelper.rotateYawPitch(vector, yaw, pitch);
-            /* TODO List<LivingEntity> cubeTargets = TargetHelper.getConeTargets(target, angleList.get(skillLevel - 1), rangeList.get(skillLevel - 1));
+            Vector b1 = vectors[0];
+            Vector b2 = vectors[1];
+            Vector b4 = vectors[4];
+            Vector t1 = vectors[3];
+            Vector t3 = vectors[6];
 
-            cube.addAll(cubeTargets);*/
+            List<LivingEntity> boxTargets = TargetHelper.getBoxTargets(location.getWorld(), b1, b2, b4, t1, t3);
+
+            if (!boxTargets.isEmpty()) {
+                cubesToDraw.add(vectors);
+                cube.addAll(boxTargets);
+            }
         }
 
         if (cube.isEmpty()) return false;
@@ -161,6 +168,11 @@ public class CubeTarget extends TargetComponent {
         cube = determineTargets(caster, cube);
 
         if (cube.isEmpty()) return false;
+
+        // Draw shape finally since cube has valid targets
+        for (Vector[] cubeCorners : cubesToDraw) {
+            ParticleShapes.drawCubeEdges(targets.get(0).getWorld(), cubeCorners, particle, dustOptions, gap);
+        }
 
         List<LivingEntity> targetsNew = new ArrayList<>();
         if (super.isKeepCurrent()) {

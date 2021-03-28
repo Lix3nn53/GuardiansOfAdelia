@@ -1,4 +1,6 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import io.github.lix3nn53.guardiansofadelia.utilities.math.MatrixHelper;
+import io.github.lix3nn53.guardiansofadelia.utilities.math.RotationHelper;
 import org.bukkit.util.Vector;
 
 import java.sql.SQLException;
@@ -13,11 +15,100 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException, SQLException {
+        Vector vector = new Vector(8, 8, 8);
 
-        Vector loc1 = new Vector(0, 0, 0);
-        Vector loc2 = new Vector(1, 1, 2);
-        double a = Math.max(Math.max(Math.abs(loc1.getX() - loc2.getX()), Math.abs(loc1.getY() - loc2.getY())), Math.abs(loc1.getZ() - loc2.getZ()));
-        System.out.println("min attr: " + a);
+        Vector[] cubeCorners = new Vector[8];
+
+        double length_x = vector.getX() / 2.0;
+        double length_y = vector.getY() / 2.0;
+        double length_z = vector.getZ() / 2.0;
+
+        Vector centerVector = new Vector(0, 0, 0);
+        System.out.println("CUBE DRAW: " + vector.getX() + ", " + vector.getY() + ", " + vector.getZ());
+        System.out.println("centerVector (before translation): " + centerVector);
+
+        cubeCorners[0] = centerVector.clone().add(new Vector(-length_x, -length_y, -length_z));
+        cubeCorners[1] = centerVector.clone().add(new Vector(length_x, -length_y, -length_z));
+        cubeCorners[2] = centerVector.clone().add(new Vector(length_x, length_y, -length_z));
+        cubeCorners[3] = centerVector.clone().add(new Vector(-length_x, length_y, -length_z));
+        cubeCorners[4] = centerVector.clone().add(new Vector(-length_x, -length_y, length_z));
+        cubeCorners[5] = centerVector.clone().add(new Vector(length_x, -length_y, length_z));
+        cubeCorners[6] = centerVector.clone().add(new Vector(length_x, length_y, length_z));
+        cubeCorners[7] = centerVector.clone().add(new Vector(-length_x, length_y, length_z));
+
+        // Rotate
+        RotationHelper.rotateYawPitch(cubeCorners, 45, 0);
+
+        Vector translateVector = new Vector(length_x, length_y, length_z);
+
+        for (int i = 0; i < 8; i++) {
+            Vector point = cubeCorners[i];
+            MatrixHelper.translate(point, translateVector);
+        }
+
+        Vector b1 = cubeCorners[0].clone();
+        System.out.println("b1: " + b1);
+        Vector b2 = cubeCorners[1].clone();
+        System.out.println("b2: " + b2);
+        Vector b4 = cubeCorners[4].clone();
+        System.out.println("b4: " + b4);
+        Vector t1 = cubeCorners[3].clone();
+        System.out.println("t1: " + t1);
+        Vector t3 = cubeCorners[6].clone();
+        System.out.println("t3: " + t3);
+
+        Vector yLocal = t1.clone().subtract(b1);
+        double yLength = yLocal.length(); // size1 = np.linalg.norm(dir1)
+        yLocal = yLocal.normalize(); // dir1 = dir1.divide(new Vector(size1, size1, size1));
+
+        Vector xLocal = b2.clone().subtract(b1);
+        double xLength = xLocal.length();
+        xLocal = xLocal.normalize();
+
+        Vector zLocal = b4.clone().subtract(b1);
+        double zLength = zLocal.length();
+        zLocal = zLocal.normalize();
+
+        // cube3d_center = (b1 + t3)/2.0
+        Vector center = b1.clone().add(t3).divide(new Vector(2, 2, 2));
+        System.out.println("center calculated (after translation): " + center);
+
+        ArrayList<Vector> result = new ArrayList<>();
+        // dir_vec = points - cube3d_center
+        // res1 = np.where( (np.absolute(np.dot(dir_vec, dir1)) * 2) > size1 )[0]
+        // res2 = np.where( (np.absolute(np.dot(dir_vec, dir2)) * 2) > size2 )[0]
+        // res3 = np.where( (np.absolute(np.dot(dir_vec, dir3)) * 2) > size3 )[0]
+
+        // return list( set().union(res1, res2, res3) )
+
+        for (Vector corner : cubeCorners) {
+            System.out.println("cubeCorners: " + corner);
+        }
+
+        Vector[] points = new Vector[8];
+        points[0] = new Vector(0.1, 0.1, 0.1);
+        points[1] = new Vector(0.0, 0.0, 0.0);
+        points[2] = new Vector(8, 8, 8);
+        points[3] = new Vector(4, 4, 4);
+        points[4] = new Vector(-5, -4, -6);
+        points[5] = new Vector(-5, -4, -6);
+        points[6] = new Vector(-5, -4, -6);
+        points[7] = new Vector(-5, -4, -6);
+
+        for (Vector target : points) {
+            Vector v = target.clone().subtract(center); // direction vector from cube center to the target point
+
+            double py = Math.abs(v.dot(yLocal)) * 2;
+            double px = Math.abs(v.dot(xLocal)) * 2;
+            double pz = Math.abs(v.dot(zLocal)) * 2;
+
+            if (px <= xLength && py <= yLength && pz <= zLength) {
+                result.add(target);
+            }
+        }
+
+        System.out.println("result: " + result);
+
         /*int maxStatValue = GearLevel.NINE.getMaxStatValue(true, true);
         int maxStatValuee = GearLevel.NINE.getMaxStatValue(true, false);
         System.out.println("max element: " + maxStatValue);
