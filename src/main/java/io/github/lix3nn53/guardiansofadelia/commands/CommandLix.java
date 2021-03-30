@@ -42,6 +42,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
@@ -322,6 +323,14 @@ public class CommandLix implements CommandExecutor {
                     ItemStack passive = PassiveManager.get(gearLevel, rpgSlotType, ItemTier.LEGENDARY, false, "Command").get(0);
                     InventoryUtils.giveItemToPlayer(player, passive);
                 }
+            } else if (args[0].equals("helmet")) {
+                PlayerInventory inventory = player.getInventory();
+                ItemStack itemInMainHand = inventory.getItemInMainHand();
+                ItemStack helmet = inventory.getHelmet();
+                if (helmet != null && !helmet.getType().equals(Material.AIR)) {
+                    InventoryUtils.giveItemToPlayer(player, helmet);
+                }
+                inventory.setHelmet(itemInMainHand);
             } else if (args[0].equals("model")) {
                 if (args.length == 2) {
                     Location location = player.getLocation();
