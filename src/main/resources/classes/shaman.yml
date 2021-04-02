@@ -42,25 +42,29 @@ skillOne:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "HologramMechanic"
-      helmetType: "IRON_PICKAXE"
-      customModelData: 6
-      durations:
-        - 800
-        - 900
-        - 1000
-        - 1100
-      displayText: "< Totem %caster% >"
-      gravity: true
-      marker: false
-      speed: 1.9
-      right: 0
-      forward: 1
-      upward: 0.5
-      save: true
-    child2:
-      componentType: "SoundMechanic"
-      goaSound: "SKILL_SPLASH"
+      componentType: "SavedEntityCondition"
+      minValue: 0
+      maxValue: 0
+      child1:
+        componentType: "HologramMechanic"
+        helmetType: "IRON_PICKAXE"
+        customModelData: 6
+        durations:
+          - 800
+          - 900
+          - 1000
+          - 1100
+        displayText: "< Totem %caster% >"
+        gravity: true
+        marker: false
+        speed: 1.9
+        right: 0
+        forward: 1
+        upward: 0.5
+        save: true
+      child2:
+        componentType: "SoundMechanic"
+        goaSound: "SKILL_SPLASH"
 skillTwo:
   name: "Thunderstorm"
   customModelData: 56
@@ -104,6 +108,13 @@ skillTwo:
             - 5.5
             - 6
             - 6.5
+          amountList:
+            - 12
+            - 14
+            - 16
+            - 18
+          particle:
+            particleType: "VILLAGER_ANGRY"
           child1:
             componentType: "DamageMechanic"
             damageType: "EARTH"
@@ -118,19 +129,6 @@ skillTwo:
               - 0.6
               - 0.8
         child2:
-          componentType: "ParticleMechanic"
-          particle:
-            arrangementType: "FillCircle"
-            particleType: "VILLAGER_ANGRY"
-            radius: 5
-            amount: 12
-            direction: "XZ"
-          data1:
-            - 5
-            - 5.5
-            - 6
-            - 6.5
-        child3:
           componentType: "SoundMechanic"
           goaSound: "SKILL_SONIC_BOOM"
 skillThree:
@@ -168,6 +166,15 @@ skillThree:
           - 5.5
           - 6
           - 6.5
+        amountList:
+          - 24
+          - 24
+          - 24
+          - 24
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 16724991
+          dustSize: 8
         child1:
           componentType: "DisguiseMechanic"
           disguiseType: "SHEEP"
@@ -200,21 +207,6 @@ skillThree:
             self: false
             max: 5
             armorStand: true
-            child1:
-              componentType: "ParticleMechanic"
-              particle:
-                arrangementType: "FillCircle"
-                particleType: "REDSTONE"
-                radius: 5
-                amount: 12
-                direction: "XZ"
-                dustColor: 16724991
-                dustSize: 8
-              data1:
-                - 5
-                - 5.5
-                - 6
-                - 6.5
             child2:
               componentType: "SoundMechanic"
               goaSound: "SKILL_STUN_HIT"
@@ -276,6 +268,13 @@ skillPassive:
                   - 5.5
                   - 6
                   - 7
+                amountList:
+                  - 24
+                  - 24
+                  - 24
+                  - 24
+                particle:
+                  particleType: "HEART"
                 child1:
                   componentType: "HealMechanic"
                   healAmountList:
@@ -284,19 +283,6 @@ skillPassive:
                     - 200
                     - 325
               child2:
-                componentType: "ParticleMechanic"
-                particle:
-                  arrangementType: "FillCircle"
-                  particleType: "HEART"
-                  radius: 5
-                  amount: 12
-                  direction: "XZ"
-                data1:
-                  - 5
-                  - 5.5
-                  - 6
-                  - 6.5
-              child3:
                 componentType: "SoundMechanic"
                 goaSound: "SKILL_HEAL"
 skillUltimate:
@@ -333,6 +319,13 @@ skillUltimate:
           - 4.75
           - 5
           - 5.25
+        amountList:
+          - 24
+          - 24
+          - 24
+          - 24
+        particle:
+          particleType: "EXPLOSION_LARGE"
         child1:
           componentType: "PushMechanic"
           pushType: "FIXED"
@@ -344,19 +337,6 @@ skillUltimate:
           centerSelf: true
           offsetY: -0.8
       child2:
-        componentType: "ParticleMechanic"
-        particle:
-          arrangementType: "FillCircle"
-          particleType: "EXPLOSION_LARGE"
-          radius: 4.5
-          amount: 1
-          direction: "XZ"
-        data1:
-          - 4.5
-          - 4.75
-          - 5
-          - 5.25
-      child3:
         componentType: "DelayMechanic"
         ticks: 10
         child1:
@@ -370,6 +350,15 @@ skillUltimate:
             - 4.75
             - 5
             - 5.25
+          amountList:
+            - 24
+            - 24
+            - 24
+            - 24
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 65280
+            dustSize: 2
           child1:
             componentType: "SavedEntitiesTarget"
             allies: false
@@ -388,7 +377,7 @@ skillUltimate:
                 - -3.2
               centerSelf: false
               offsetY: 4
-      child4:
+      child3:
         componentType: "DelayMechanic"
         ticks: 15
         child1:
@@ -400,6 +389,6 @@ skillUltimate:
             componentType: "ImmunityRemoveMechanic"
             damageCause: FALL
             delay: 5
-      child5:
+      child4:
         componentType: "SoundMechanic"
         goaSound: "SKILL_JUMP"

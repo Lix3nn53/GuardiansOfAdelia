@@ -372,13 +372,13 @@ public class CommandLix implements CommandExecutor {
                 float pitch = eyeLocation.getPitch();
 
                 //ParticleShapes.drawCube(eyeLocation, Particle.SOUL_FIRE_FLAME, null, length, 0.1, true, yaw, pitch);
-                double gap = Double.parseDouble(args[1]);
-                double lengthx = Double.parseDouble(args[2]);
+                double radius = Double.parseDouble(args[1]);
+                double angle = Double.parseDouble(args[2]);
                 /*
                 int amounty = (int) Double.parseDouble(args[3]);
                 double phi = Double.parseDouble(args[4]);*/
-                double lengthy = Double.parseDouble(args[3]);
-                double lengthz = Double.parseDouble(args[4]);
+                //double lengthy = Double.parseDouble(args[3]);
+                //double lengthz = Double.parseDouble(args[4]);
                 /*yaw += Double.parseDouble(args[3]);
                 pitch += Double.parseDouble(args[4]);*/
 
@@ -386,8 +386,9 @@ public class CommandLix implements CommandExecutor {
 
                 //ParticleShapes.drawCone(eyeLocation, Particle.SOUL_FIRE_FLAME, height, amount, amounty, phi, null, true, yaw, pitch, new Vector());
 
-                Vector vector = new Vector(lengthx, lengthy, lengthz);
-                ParticleShapes.drawCube(eyeLocation, Particle.FLAME, null, vector, gap, true, yaw, pitch);
+                //Vector vector = new Vector(lengthx, lengthy, lengthz);
+                ParticleShapes.drawTriangle(eyeLocation, Particle.FLAME, radius, 30, null, 0, true, yaw, pitch, new Vector(), angle);
+                //ParticleShapes.drawCube(eyeLocation, Particle.FLAME, null, vector, gap, true, yaw, pitch);
                 //ParticleShapes.drawCylinder(eyeLocation, Particle.SOUL_FIRE_FLAME, radius, amount, null, 0, true, yaw, pitchh, add);
 
                 /*Vector dir = eyeLocation.getDirection().normalize();

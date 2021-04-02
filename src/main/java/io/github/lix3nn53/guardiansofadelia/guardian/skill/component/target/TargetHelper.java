@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -9,7 +8,7 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class TargetHelper {
@@ -171,22 +170,9 @@ public class TargetHelper {
         // res3 = np.where( (np.absolute(np.dot(dir_vec, dir3)) * 2) > size3 )[0]
 
         // return list( set().union(res1, res2, res3) )
+        Collection<Entity> nearbyEntities = world.getNearbyEntities(center.toLocation(world), xLength, yLength, zLength);
 
-        // TODO how to select chunks?
-        Location location = b1.toLocation(world);
-        Location location1 = t3.toLocation(world);
-        Chunk chunk = location.getChunk();
-
-        Entity[] entities = chunk.getEntities();
-        ArrayList<Entity> entityList = new ArrayList<>(Arrays.asList(entities));
-
-        Chunk chunk1 = location1.getChunk();
-        if (!chunk.equals(chunk1)) {
-            Entity[] entities1 = chunk1.getEntities();
-            entityList.addAll(Arrays.asList(entities1));
-        }
-
-        for (Entity entity : entityList) {
+        for (Entity entity : nearbyEntities) {
             if (!(entity instanceof LivingEntity)) continue;
             BoundingBox boundingBox = entity.getBoundingBox();
 
@@ -244,12 +230,12 @@ public class TargetHelper {
     }
 
     public static List<LivingEntity> getConeTargets(LivingEntity source, double arc, double range) {
-        List<LivingEntity> targets = new ArrayList<LivingEntity>();
+        List<LivingEntity> targets = new ArrayList<>();
         List<Entity> list = source.getNearbyEntities(range, range, range);
         if (arc <= 0.0D) return targets;
 
 
-        Vector dir = source.getLocation().getDirection();
+        Vector dir = source.getEyeLocation().getDirection();
         dir.setY(0);
         double cos = Math.cos(arc * Math.PI / 180.0D);
         double cosSq = cos * cos;
@@ -268,7 +254,7 @@ public class TargetHelper {
                     continue;
                 }
 
-                Vector relative = entity.getLocation().subtract(source.getLocation()).toVector();
+                Vector relative = entity.getLocation().subtract(source.getEyeLocation()).toVector();
                 relative.setY(0);
                 double dot = relative.dot(dir);
                 double value = dot * dot / relative.lengthSquared();

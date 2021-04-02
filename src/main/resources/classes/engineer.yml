@@ -81,6 +81,15 @@ skillOne:
               - 10
               - 12
               - 14
+            amountList:
+              - 24
+              - 24
+              - 24
+              - 24
+            particle:
+              particleType: "REDSTONE"
+              dustColor: 65280
+              dustSize: 2
             child1:
               componentType: "HeadRotationMechanic"
           child2:
@@ -171,6 +180,15 @@ skillTwo:
             - 3.5
             - 4
           keepCurrent: true
+          amountList:
+            - 24
+            - 24
+            - 24
+            - 24
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 65280
+            dustSize: 2
           child1:
             componentType: "FilterCurrentTargets"
             allies: false
@@ -287,6 +305,15 @@ skillThree:
             - 3
             - 3
             - 3
+          amountList:
+            - 24
+            - 24
+            - 24
+            - 24
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 65280
+            dustSize: 2
           child1:
             componentType: "ParticleMechanic"
             particle:
@@ -359,6 +386,15 @@ skillPassive:
             - 5.5
             - 6
             - 7
+          amountList:
+            - 24
+            - 24
+            - 24
+            - 24
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 65280
+            dustSize: 2
           child1:
             componentType: "AbsorptionHeartMechanic"
             heartAmountList:
@@ -419,6 +455,11 @@ skillUltimate:
         - 24
       keepCurrent: true
       addToBeginning: false
+      particle:
+        particleType: "REDSTONE"
+        dustColor: 16728064
+        dustSize: 2
+        gap: 0.2
       child1:
         componentType: "ProjectileMechanic"
         projectileClass: "ShulkerBullet"
@@ -452,6 +493,15 @@ skillUltimate:
             - 2.75
             - 3
             - 3.5
+          amountList:
+            - 24
+            - 24
+            - 24
+            - 24
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 65280
+            dustSize: 2
           child1:
             componentType: "DamageMechanic"
             damageType: "FIRE"

@@ -115,7 +115,6 @@ public class CubeTarget extends TargetComponent {
             double offset_z = offset_zList.get(skillLevel - 1);
             offset.setZ(offset_z);
         }
-        List<Vector[]> cubesToDraw = new ArrayList<>();
         for (LivingEntity ent : targets) {
             Location location = centerEye ? ent.getEyeLocation() : ent.getLocation();
             // Offset
@@ -157,22 +156,16 @@ public class CubeTarget extends TargetComponent {
 
             List<LivingEntity> boxTargets = TargetHelper.getBoxTargets(location.getWorld(), b1, b2, b4, t1, t3);
 
-            if (!boxTargets.isEmpty()) {
-                cubesToDraw.add(vectors);
-                cube.addAll(boxTargets);
-            }
+            ParticleShapes.drawCubeEdges(targets.get(0).getWorld(), vectors, particle, dustOptions, gap);
+
+            cube.addAll(boxTargets);
         }
 
-        if (cube.isEmpty()) return false;
+        if (cube.isEmpty()) return true;
 
         cube = determineTargets(caster, cube);
 
-        if (cube.isEmpty()) return false;
-
-        // Draw shape finally since cube has valid targets
-        for (Vector[] cubeCorners : cubesToDraw) {
-            ParticleShapes.drawCubeEdges(targets.get(0).getWorld(), cubeCorners, particle, dustOptions, gap);
-        }
+        if (cube.isEmpty()) return true;
 
         List<LivingEntity> targetsNew = new ArrayList<>();
         if (super.isKeepCurrent()) {

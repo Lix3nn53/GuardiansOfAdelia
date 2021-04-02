@@ -48,21 +48,38 @@ skillOne:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "ConeTarget"
+      componentType: "CubeTarget"
       allies: false
       enemy: true
       self: false
       max: 10
-      angleList:
-        - 150
-        - 150
-        - 150
-        - 150
-      rangeList:
-        - 3
-        - 3.5
+      rotation: true
+      centerEye: true
+      rotationMatchEye: true
+      gap: 0.2
+      particle:
+        arrangementType: "DrawCube"
+        particleType: "FLAME"
+      length_xList:
+        - 1
+        - 1
+        - 1
+        - 1
+      length_yList:
+        - 2
+        - 2
+        - 2
+        - 2
+      length_zList:
         - 4
+        - 4.5
         - 5
+        - 6
+      forwardList:
+        - 2
+        - 2.25
+        - 2.5
+        - 3
       child1:
         componentType: "DamageMechanic"
         damageType: "FIRE"
@@ -81,39 +98,6 @@ skillOne:
         child1:
           componentType: "SoundMechanic"
           goaSound: "SKILL_LIGHTNING_NORMAL"
-        child2:
-          componentType: "ParticleMechanic"
-          particle:
-            arrangementType: "DrawCube"
-            particleType: "FLAME"
-            length_x: 1
-            length_y: 1
-            length_z: 1
-            gap: 0.2
-          rotation: true
-          centerEye: true
-          rotationMatchEye: true
-          pitch: 90
-          data1:
-            - 0.5
-            - 0.5
-            - 0.5
-            - 0.5
-          data2:
-            - 2
-            - 2
-            - 2
-            - 2
-          data3:
-            - 3
-            - 3.5
-            - 4
-            - 5
-          forwardList:
-            - 1.5
-            - 1.75
-            - 2
-            - 2.5
 skillTwo:
   name: "Flame Burst"
   customModelData: 28
@@ -263,6 +247,15 @@ skillThree:
             - 11
             - 12
             - 14
+          amountList:
+            - 24
+            - 24
+            - 24
+            - 24
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 65280
+            dustSize: 2
           child1:
             componentType: "BuffMechanic"
             buffType: "ELEMENT_DAMAGE"
@@ -501,6 +494,15 @@ skillUltimate:
           - 11
           - 12
           - 14
+        amountList:
+          - 24
+          - 24
+          - 24
+          - 24
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 65280
+          dustSize: 2
         child1:
           componentType: "DamageMechanic"
           damageType: "FIRE"

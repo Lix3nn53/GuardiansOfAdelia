@@ -43,12 +43,12 @@ public class ArrangementDrawCone extends ArrangementWithData {
     @Override
     public void play(Location location, @Nullable Vector offset) {
         double length = getData(0);
-        ParticleShapes.drawCone(location, particle, length, amount, amounty, angle, dustOptions, false, 0, 0, offset);
+        ParticleShapes.drawCone(location, particle, dustOptions, length, amount, amounty, angle, false, 0, 0, offset);
     }
 
     @Override
     public void play(Location location, @Nullable Vector offset, float yaw, float pitch) {
         double length = getData(0);
-        ParticleShapes.drawCone(location, particle, length, amount, amounty, angle, dustOptions, true, yaw, pitch, offset);
+        ParticleShapes.drawCone(location, particle, dustOptions, length, amount, amounty, angle, true, yaw, pitch, offset);
     }
 }

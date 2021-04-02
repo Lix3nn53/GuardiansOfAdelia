@@ -266,7 +266,49 @@ public class ParticleShapes {
         }
     }
 
-    public static void drawCone(Location location, Particle particle, double length, int amount, int amounty, double angle, Particle.DustOptions dustOptions,
+    public static void drawTriangle(Location location, Particle particle, double radius, int amount, Particle.DustOptions dustOptions, double height,
+                                    boolean rotate, float yaw, float pitch, Vector offset, double angle) {
+        double fullRadian = Math.toRadians(angle);
+
+        Location center = rotate ? new Location(location.getWorld(), 0, 0, 0) : location;
+
+        Vector centerVector = center.toVector().add(offset);
+
+        Vector[] points = new Vector[amount];
+        int index = 0;
+        for (double i = 0; i < amount; i++) {
+            double percent = i / amount;
+            double theta = fullRadian * percent;
+            double dx = radius * Math.cos(theta);
+            double dy = 0;
+            if (height > 0) {
+                double v = Math.random();
+                dy = height * v;
+            }
+            double dz = radius * Math.sin(theta);
+            //double dy = radius * Math.sin(theta);
+            points[index] = centerVector.clone().add(new Vector(dx, dy, dz));
+            index++;
+        }
+
+        if (rotate) {
+            RotationHelper.rotateYawPitch(points, yaw, pitch);
+
+            Vector translateVector = location.toVector();
+
+            for (Vector point : points) {
+                MatrixHelper.translate(point, translateVector);
+            }
+        }
+
+        World world = center.getWorld();
+
+        for (Vector point : points) {
+            ParticleShapes.playSingleParticle(world, point, particle, dustOptions);
+        }
+    }
+
+    public static void drawCone(Location location, Particle particle, Particle.DustOptions dustOptions, double length, int amount, int amounty, double angle,
                                 boolean rotate, float yaw, float pitch, Vector offset) {
         double fullRadian = Math.toRadians(360);
         double phi = Math.toRadians(angle);

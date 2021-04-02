@@ -21,8 +21,11 @@ public class AreaTarget extends TargetComponent {
 
     private final List<Double> radiusList;
     private final List<Integer> amountList;
-    private final double particleHeight;
+    private final List<Double> offset_xList;
+    private final List<Double> offset_yList;
+    private final List<Double> offset_zList;
     // PARTICLE
+    private final double particleHeight;
     private final Particle particle;
     private final Particle.DustOptions dustOptions;
 
@@ -35,11 +38,20 @@ public class AreaTarget extends TargetComponent {
 
         this.radiusList = configurationSection.getDoubleList("radiusList");
         this.amountList = configurationSection.contains("amountList") ? configurationSection.getIntegerList("amountList") : null;
-        this.particleHeight = configurationSection.contains("particleHeight") ? configurationSection.getDouble("particleHeight") : 0;
+
+        this.offset_xList = configurationSection.contains("offset_xList") ? configurationSection.getDoubleList("offset_xList") : null;
+        this.offset_yList = configurationSection.contains("offset_yList") ? configurationSection.getDoubleList("offset_yList") : null;
+        this.offset_zList = configurationSection.contains("offset_zList") ? configurationSection.getDoubleList("offset_zList") : null;
+
+        // PARTICLE
+        if (!configurationSection.contains("particle")) {
+            configLoadError("particle");
+        }
 
         ConfigurationSection particleSection = configurationSection.getConfigurationSection("particle");
 
         this.particle = Particle.valueOf(particleSection.getString("particleType"));
+        this.particleHeight = particleSection.contains("height") ? particleSection.getDouble("height") : 0;
 
         if (particleSection.contains("dustColor")) {
             if (!this.particle.getDataType().equals(Particle.DustOptions.class)) {
@@ -61,28 +73,38 @@ public class AreaTarget extends TargetComponent {
 
         List<LivingEntity> nearby = new ArrayList<>();
 
-        ArrayList<Location> sphereCentersToDraw = new ArrayList<>();
-        double radius = radiusList.get(skillLevel - 1);
-        for (LivingEntity target : targets) {
-            Location location = target.getLocation();
-            List<LivingEntity> nearbyTarget = TargetHelper.getNearbySphere(location, radius);
-
-            if (nearbyTarget.isEmpty()) continue;
-
-            nearby.addAll(nearbyTarget);
-            sphereCentersToDraw.add(location);
+        Vector offset = new Vector(0, 0.5, 0); // Default offset is 0.5 since it is most used value
+        if (offset_xList != null) {
+            double offset_x = offset_xList.get(skillLevel - 1);
+            offset.setX(offset_x);
+        }
+        if (offset_xList != null) {
+            double offset_y = offset_yList.get(skillLevel - 1);
+            offset.setY(offset_y);
+        }
+        if (offset_xList != null) {
+            double offset_z = offset_zList.get(skillLevel - 1);
+            offset.setZ(offset_z);
         }
 
-        if (nearby.isEmpty()) return false;
+        double radius = radiusList.get(skillLevel - 1);
+        int amount = amountList.get(skillLevel - 1);
+
+        for (LivingEntity target : targets) {
+            Location location = target.getLocation();
+            location.add(offset);
+            List<LivingEntity> nearbyTarget = TargetHelper.getNearbySphere(location, radius);
+
+            ParticleShapes.drawCylinder(location, particle, radius, amount, dustOptions, particleHeight, false, 0, 0, new Vector());
+
+            nearby.addAll(nearbyTarget);
+        }
+
+        if (nearby.isEmpty()) return true;
 
         nearby = determineTargets(caster, nearby);
 
-        if (nearby.isEmpty()) return false;
-
-        for (Location center : sphereCentersToDraw) {
-            int amount = amountList.get(skillLevel - 1);
-            ParticleShapes.drawCylinder(center, particle, radius, amount, dustOptions, particleHeight, false, 0, 0, new Vector());
-        }
+        if (nearby.isEmpty()) return true;
 
         List<LivingEntity> targetsNew = new ArrayList<>();
         if (super.isKeepCurrent()) {
