@@ -87,9 +87,7 @@ skillOne:
               - 24
               - 24
             particle:
-              particleType: "REDSTONE"
-              dustColor: 65280
-              dustSize: 2
+              particleType: "FLAME"
             child1:
               componentType: "HeadRotationMechanic"
           child2:
@@ -186,9 +184,7 @@ skillTwo:
             - 24
             - 24
           particle:
-            particleType: "REDSTONE"
-            dustColor: 65280
-            dustSize: 2
+            particleType: "FLAME"
           child1:
             componentType: "FilterCurrentTargets"
             allies: false
@@ -311,9 +307,7 @@ skillThree:
             - 24
             - 24
           particle:
-            particleType: "REDSTONE"
-            dustColor: 65280
-            dustSize: 2
+            particleType: "FLAME"
           child1:
             componentType: "ParticleMechanic"
             particle:
@@ -392,9 +386,7 @@ skillPassive:
             - 24
             - 24
           particle:
-            particleType: "REDSTONE"
-            dustColor: 65280
-            dustSize: 2
+            particleType: "FLAME"
           child1:
             componentType: "AbsorptionHeartMechanic"
             heartAmountList:
@@ -499,9 +491,7 @@ skillUltimate:
             - 24
             - 24
           particle:
-            particleType: "REDSTONE"
-            dustColor: 65280
-            dustSize: 2
+            particleType: "FLAME"
           child1:
             componentType: "DamageMechanic"
             damageType: "FIRE"

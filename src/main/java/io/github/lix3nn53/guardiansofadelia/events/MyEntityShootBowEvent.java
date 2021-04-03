@@ -37,8 +37,8 @@ public class MyEntityShootBowEvent implements Listener {
 
                             if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr)) return;
 
-                            if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "rangedDamage")) {
-                                int rangedDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "rangedDamage");
+                            if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "elementDamage")) {
+                                int elementDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "elementDamage");
                                 Entity projectile = event.getProjectile();
                                 float force = event.getForce();
                                 if (force < 0.7) {
@@ -46,8 +46,8 @@ public class MyEntityShootBowEvent implements Listener {
                                     event.setCancelled(true);
                                     return;
                                 }
-                                rangedDamage = (int) ((rangedDamage * force) + 0.5);
-                                PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, projectile);
+                                elementDamage = (int) ((elementDamage * force) + 0.5);
+                                PersistentDataContainerUtil.putInteger("rangedDamage", elementDamage, projectile);
                             }
 
                             //add arrow
@@ -58,10 +58,10 @@ public class MyEntityShootBowEvent implements Listener {
                         }
                     }
                 } else {
-                    if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "rangedDamage")) {
-                        int rangedDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "rangedDamage");
+                    if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "elementDamage")) {
+                        int elementDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "elementDamage");
                         Entity projectile = event.getProjectile();
-                        PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, projectile);
+                        PersistentDataContainerUtil.putInteger("rangedDamage", elementDamage, projectile);
                     }
                 }
             }

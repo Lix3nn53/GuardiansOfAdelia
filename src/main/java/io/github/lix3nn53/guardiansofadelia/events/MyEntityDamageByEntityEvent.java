@@ -58,10 +58,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
-        if (damager instanceof Player) {
-            Player player = (Player) damager;
-            player.sendMessage("TEST!3");
-        }
 
         if (damager instanceof LivingEntity) {
             if (StatusEffectManager.isDisarmed((LivingEntity) damager)) {
@@ -250,9 +246,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 Location targetLocation = livingTarget.getLocation();
 
                 if (pet == null) { // attacker is not a pet
-                    player.sendMessage("TEST!1");
                     if (PetManager.isCompanion(livingTarget)) { // on player attack to pet
-                        player.sendMessage("TEST!2");
                         boolean canAttack = EntityUtils.canAttack(player, livingTarget);
 
                         if (!canAttack) {
