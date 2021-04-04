@@ -300,7 +300,6 @@ public class SkillBar {
 
         int cooldownInTicks = (int) (((skill.getCooldown(skillLevel) * 20) * abilityHasteToMultiplier(abilityHaste)) + 0.5); // Ability haste formula from League of Legends
         PlayerInventory inventory = player.getInventory();
-        player.sendMessage("cooldownInTicks: " + cooldownInTicks);
 
         skillsOnCooldown.put("" + skillIndex, true);
 

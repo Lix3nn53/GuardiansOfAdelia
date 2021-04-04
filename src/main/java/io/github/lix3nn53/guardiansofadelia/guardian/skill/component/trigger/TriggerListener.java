@@ -174,12 +174,10 @@ public class TriggerListener {
     }
 
     private static void stopInit(Player player) {
-        player.sendMessage("test1");
         if (playerToInitializeTrigger.containsKey(player)) {
             //debug player.sendMessage("StopEffects");
             playerToInitializeTrigger.get(player).stopEffects(player);
             playerToInitializeTrigger.remove(player);
         }
-        player.sendMessage("test2");
     }
 }

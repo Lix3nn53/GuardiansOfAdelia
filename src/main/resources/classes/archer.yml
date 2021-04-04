@@ -356,19 +356,15 @@ skillUltimate:
     - "Reveal an area with a flurry of arrows,"
     - "dealing waves of damage to opponents"
   manaCosts:
-    - 40
-    - 45
-    - 50
-    - 55
-    - 60
-    - 60
+    - 4
+    - 4
+    - 5
+    - 5
   cooldowns:
-    - 40
-    - 40
-    - 40
-    - 40
-    - 40
-    - 40
+    - 4
+    - 4
+    - 4
+    - 4
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -384,6 +380,11 @@ skillUltimate:
         - 24
         - 24
         - 24
+      particle:
+        particleType: "REDSTONE"
+        dustColor: 65280
+        dustSize: 2
+        gap: 0.4
       child1:
         componentType: "RepeatMechanic"
         period: 28
@@ -427,22 +428,6 @@ skillUltimate:
           range: 200
           mustHitToWork: false
           child1:
-            componentType: "ParticleMechanic"
-            particle:
-              arrangementType: "FillCircle"
-              particleType: "REDSTONE"
-              radius: 8
-              amount: 21
-              direction: "XZ"
-              dustColor: 16753920
-              dustSize: 2
-            data1:
-              - 8
-              - 8
-              - 8
-              - 8
-            upward: 0.8
-          child2:
             componentType: "AreaTarget"
             allies: false
             enemy: true

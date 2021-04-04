@@ -30,7 +30,7 @@ public class FlagSetMechanic extends MechanicComponent {
         this.key = configurationSection.getString("key");
         this.isUnique = configurationSection.getBoolean("isUnique");
 
-        if (!configurationSection.contains("ticks")) {
+        if (configurationSection.contains("ticks")) {
             this.ticks = configurationSection.getIntegerList("ticks");
         } else {
             this.ticks = new ArrayList<>();

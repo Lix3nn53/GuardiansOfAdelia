@@ -28,8 +28,8 @@ shieldGearTypes:
 hasDefaultOffhand: true
 isDefaultOffhandWeapon: false
 skillOne:
-  name: "Power Slash"
-  customModelData: 8
+  name: "Slice and dice"
+  customModelData: 3
   description:
     - "Deal damage to nearby enemies"
   manaCosts:
@@ -53,24 +53,26 @@ skillOne:
       allies: false
       enemy: true
       self: false
-      max: 10
+      max: 15
       angleList:
-        - 150
-        - 150
-        - 150
-        - 150
+        - 50
+        - 50
+        - 50
+        - 50
       rangeList:
-        - 3
         - 3.5
         - 4
+        - 4.5
         - 5
       particle:
-        particleType: "FLAME"
-        amount: 5
-        amounty: 5
+        particleType: "REDSTONE"
+        dustColor: 10040319
+        dustSize: 2
+        amount: 15
+        amounty: 10
       child1:
         componentType: "DamageMechanic"
-        damageType: "FIRE"
+        damageType: "LIGHTNING"
         damageList:
           - 10
           - 40
@@ -82,46 +84,11 @@ skillOne:
           - 1.8
           - 2.2
       child2:
-        componentType: "SelfTarget"
-        child1:
-          componentType: "SoundMechanic"
-          goaSound: "SKILL_LIGHTNING_NORMAL"
-        child2:
-          componentType: "ParticleMechanic"
-          particle:
-            arrangementType: "DrawCube"
-            particleType: "FLAME"
-            length_x: 1
-            length_y: 1
-            length_z: 1
-            gap: 0.2
-          rotation: true
-          centerEye: true
-          rotationMatchEye: true
-          pitch: 90
-          data1:
-            - 0.5
-            - 0.5
-            - 0.5
-            - 0.5
-          data2:
-            - 2
-            - 2
-            - 2
-            - 2
-          data3:
-            - 3
-            - 3.5
-            - 4
-            - 5
-          forwardList:
-            - 1.5
-            - 1.75
-            - 2
-            - 2.5
+        componentType: "SoundMechanic"
+        goaSound: "SKILL_LIGHTNING_NORMAL"
 skillTwo:
   name: "Flame Burst"
-  customModelData: 28
+  customModelData: 46
   description:
     - "Shoot a flame-burst that launches"
     - "a target into the sky"
@@ -212,8 +179,8 @@ skillTwo:
       componentType: "SoundMechanic"
       goaSound: "SKILL_FIRE_SLASH"
 skillThree:
-  name: "Victory Flag"
-  customModelData: 22
+  name: "asdasdas"
+  customModelData: 40
   description:
     - "Place a flag at your location that"
     - "gives damage buff to nearby allies"
@@ -329,8 +296,8 @@ skillThree:
       componentType: "SoundMechanic"
       goaSound: "SKILL_BUFF"
 skillPassive:
-  name: "Death Rattle"
-  customModelData: 32
+  name: "Shield of doom"
+  customModelData: 7
   description:
     - "If you take damage that leaves you with less than 15% health,"
     - "unleash your rage and gain movement speed and jump boost."
@@ -407,8 +374,8 @@ skillPassive:
               - 32
               - 36
 skillUltimate:
-  name: "Grand Skyfall"
-  customModelData: 23
+  name: "Blackhole"
+  customModelData: 44
   description:
     - "Jump forward into the air. When you land deal"
     - "damage and launch nearby enemies into the sky."

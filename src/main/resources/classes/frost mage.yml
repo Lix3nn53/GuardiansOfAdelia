@@ -183,22 +183,23 @@ skillTwo:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "SingleTarget"
+      componentType: "LocationTarget"
       allies: false
-      enemy: true
       self: false
-      max: 1
+      enemy: true
+      max: 30
       ranges:
         - 24
         - 24
         - 24
         - 24
-      tolerance: 4
+        - 24
+        - 24
       particle:
         particleType: "REDSTONE"
         dustColor: 6750207
         dustSize: 2
-        gap: 0.2
+        gap: 0.4
       child1:
         componentType: "ProjectileMechanic"
         projectileClass: "Snowball"

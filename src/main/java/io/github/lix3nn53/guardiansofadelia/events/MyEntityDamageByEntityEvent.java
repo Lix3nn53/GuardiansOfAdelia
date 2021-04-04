@@ -205,9 +205,12 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             GuardianData guardianData = GuardianDataManager.getGuardianData(playerTarget);
                             if (guardianData.hasActiveCharacter()) {
                                 ActiveMob activeMob = MythicMobs.inst().getMobManager().getMythicMobInstance(damageSource);
-                                String faction = activeMob.getFaction();
 
-                                damageType = ElementType.valueOf(faction.toUpperCase());
+                                if (activeMob != null) {
+                                    String faction = activeMob.getFaction();
+
+                                    damageType = ElementType.valueOf(faction.toUpperCase());
+                                }
 
                                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 

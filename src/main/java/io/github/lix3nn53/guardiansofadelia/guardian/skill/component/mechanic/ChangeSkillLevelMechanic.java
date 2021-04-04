@@ -57,11 +57,7 @@ public class ChangeSkillLevelMechanic extends MechanicComponent {
             }
         }
 
-        for (LivingEntity target : targets) {
-            executeChildren(caster, newSkillLevel, targets, castCounter);
-        }
-
-        return true;
+        return executeChildren(caster, newSkillLevel, targets, castCounter);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
                 String rpgClassStr = rpgCharacter.getRpgClassStr();
 
-                ItemStack offHandItem = event.getMainHandItem(); //returns the item switched to mainhand, so it is in offhand before event
+                ItemStack offHandItem = event.getMainHandItem(); // returns the item switched to mainhand, so it is in offhand before event
                 Material offHandItemType = offHandItem.getType();
                 boolean offHandUnequip = false;
                 if (!InventoryUtils.isAirOrNull(offHandItem)) {
@@ -44,7 +44,7 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
                     }
                 }
 
-                ItemStack mainHandItem = event.getOffHandItem(); //returns the item switched to offhand, so it is in mainhand before event
+                ItemStack mainHandItem = event.getOffHandItem(); // returns the item switched to offhand, so it is in mainhand before event
                 if (!InventoryUtils.isAirOrNull(mainHandItem)) {
                     boolean mainHandEquip = false;
 
@@ -53,6 +53,11 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
                     ShieldGearType shieldGearType = ShieldGearType.fromMaterial(mainType);
                     if (weaponGearType != null) {
                         mainHandEquip = true;
+                        if (!weaponGearType.canEquipToOffHand()) {
+                            player.sendMessage("You can't equip " + weaponGearType.getDisplayName() + " to offhand.");
+                            event.setCancelled(true);
+                            return;
+                        }
                     } else if (shieldGearType != null) {
                         mainHandEquip = true;
                     }

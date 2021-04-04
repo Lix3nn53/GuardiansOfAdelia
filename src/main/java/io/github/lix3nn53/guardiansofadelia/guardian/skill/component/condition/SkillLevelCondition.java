@@ -53,7 +53,7 @@ public class SkillLevelCondition extends ConditionComponent {
                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();
 
                     SkillBar skillBar = activeCharacter.getSkillBar();
-                    int value = skillBar.getInvestedSkillPoints(this.skillIndex);
+                    int value = skillBar.getCurrentSkillLevel(this.skillIndex);
 
                     if (value >= minValue && value <= maxValue) {
                         success = executeChildren(caster, skillLevel, targets, castCounter) || success;

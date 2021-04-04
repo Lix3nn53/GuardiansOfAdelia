@@ -443,6 +443,10 @@ public class CommandLix implements CommandExecutor {
                     skillBar.reloadSkillSet(rpgClass.getSkillSet());
                 }
                 player.sendMessage("Reloaded player skills!");*/
+            } else if (args[0].equals("damage")) {
+                double damage = Double.parseDouble(args[1]);
+
+                player.damage(damage);
             }
 
             // If the player (or console) uses our command correct, we can return true

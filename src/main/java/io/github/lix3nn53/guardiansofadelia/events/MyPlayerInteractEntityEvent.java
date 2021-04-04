@@ -38,11 +38,17 @@ public class MyPlayerInteractEntityEvent implements Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEventNormal(PlayerInteractEntityEvent event) {
         Entity rightClicked = event.getRightClicked();
-        if (rightClicked.getType().equals(EntityType.VILLAGER)) {
+        EntityType type = rightClicked.getType();
+
+        if (type.equals(EntityType.VILLAGER)) {
             NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
             if (!npcRegistry.isNPC(rightClicked)) {
                 event.setCancelled(true);
             }
+        } else if (type.equals(EntityType.ARMOR_STAND)) {
+            event.setCancelled(true);
+        } else if (type.equals(EntityType.ITEM_FRAME)) {
+            event.setCancelled(true);
         }
     }
 
@@ -53,10 +59,6 @@ public class MyPlayerInteractEntityEvent implements Listener {
         }
 
         Entity rightClicked = event.getRightClicked();
-        if (rightClicked.getType().equals(EntityType.ITEM_FRAME)) {
-            event.setCancelled(true);
-            return;
-        }
         Player player = event.getPlayer();
 
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();

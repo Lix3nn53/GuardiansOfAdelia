@@ -51,7 +51,7 @@ public class LaunchMechanic extends MechanicComponent {
                 dir = caster.getLocation().getDirection().setY(0).normalize();
             } else if (relative.equals(Relative.BETWEEN)) {
                 dir = ent.getLocation().toVector().subtract(caster.getLocation().toVector()).setY(0).normalize();
-            } else {
+            } else { // Relative.TARGET
                 dir = ent.getLocation().getDirection().setY(0).normalize();
             }
 

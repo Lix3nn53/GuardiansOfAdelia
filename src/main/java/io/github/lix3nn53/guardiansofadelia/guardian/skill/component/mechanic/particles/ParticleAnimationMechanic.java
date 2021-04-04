@@ -11,8 +11,11 @@ import java.util.List;
 
 public class ParticleAnimationMechanic extends ParticleMechanic {
 
+    private final boolean playback;
+
     private final float yawIncrease;
     private final float pitchIncrease;
+    private final double upwardIncrease;
 
     private final long frequency;
     private final List<Integer> repeatAmount;
@@ -24,6 +27,10 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
     private final int valueConditionMinValue;
     private final int valueConditionMaxValue;
 
+    private final String flagConditionKey;
+    private final boolean flagIsSet;
+
+    private final boolean dontStop; // Run animation until a condition fails
 
     public ParticleAnimationMechanic(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -33,8 +40,11 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
             this.dataIncreaseList.add(configurationSection.getDouble("dataIncrease" + i));
         }
 
+        this.playback = configurationSection.contains("playback") && configurationSection.getBoolean("playback");
+
         this.yawIncrease = configurationSection.contains("yawIncrease") ? (float) configurationSection.getDouble("yawIncrease") : 0;
         this.pitchIncrease = configurationSection.contains("pitchIncrease") ? (float) configurationSection.getDouble("pitchIncrease") : 0;
+        this.upwardIncrease = configurationSection.contains("upwardIncrease") ? configurationSection.getDouble("upwardIncrease") : 0;
 
         this.frequency = configurationSection.getInt("frequency");
         this.repeatAmount = configurationSection.getIntegerList("repeatAmount");
@@ -42,6 +52,11 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
         this.valueConditionKey = configurationSection.contains("valueConditionKey") ? configurationSection.getString("valueConditionKey") : null;
         this.valueConditionMinValue = configurationSection.contains("valueConditionMinValue") ? configurationSection.getInt("valueConditionMinValue") : 0;
         this.valueConditionMaxValue = configurationSection.contains("valueConditionMaxValue") ? configurationSection.getInt("valueConditionMaxValue") : 0;
+
+        this.flagConditionKey = configurationSection.contains("flagConditionKey") ? configurationSection.getString("flagConditionKey") : null;
+        this.flagIsSet = configurationSection.contains("flagIsSet") && configurationSection.getBoolean("flagIsSet");
+
+        this.dontStop = configurationSection.contains("dontStop") && configurationSection.getBoolean("dontStop");
     }
 
     @Override
@@ -53,6 +68,7 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
             new BukkitRunnable() {
 
                 int counter = 0;
+                boolean playingBack = false;
 
                 @Override
                 public void run() {
@@ -60,19 +76,48 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
                     float currentYaw = yaw + (yawIncrease * counter);
                     float currentPitch = pitch + (pitchIncrease * counter);
 
+                    double currentUpward = upward + (upwardIncrease * counter);
+
                     // Play particle
-                    playParticle(ent, skillLevel, centerEye, resetY, forwardList, upward, right, dataIndexToDataList, particleArrangement, rotation,
+                    playParticle(ent, skillLevel, centerEye, resetY, forwardList, currentUpward, right, dataIndexToDataList, particleArrangement, rotation,
                             rotationMatchEye, currentYaw, currentPitch, offsetx, offsety, offsetz, dataIncreaseList, counter);
 
-                    counter++;
-                    if (counter >= repeatAmountCurrent) {
-                        cancel();
+                    if (this.playingBack) {
+                        counter--;
+                    } else {
+                        counter++;
+                    }
+
+                    if (!this.playingBack && counter >= repeatAmountCurrent) {
+                        if (playback) {
+                            this.playingBack = true;
+                        } else {
+                            if (dontStop) {
+                                counter = 0; // no playback so start from zero
+                            } else {
+                                cancel();
+                            }
+                        }
+                    } else if (this.playingBack && counter <= 0) {
+                        if (dontStop) {
+                            counter = 0;
+                            this.playingBack = false;
+                        } else {
+                            cancel();
+                        }
                     }
 
                     if (valueConditionKey != null) {
                         int value = SkillDataManager.getValue(ent, valueConditionKey);
 
                         if (value < valueConditionMinValue || value > valueConditionMaxValue) {
+                            cancel();
+                        }
+                    }
+
+                    if (flagConditionKey != null) {
+                        boolean b = SkillDataManager.hasFlag(ent, flagConditionKey);
+                        if (b != flagIsSet) {
                             cancel();
                         }
                     }

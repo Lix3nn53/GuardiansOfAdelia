@@ -118,7 +118,7 @@ skillOne:
       goaSound: "SKILL_FIRE_SLASH"
 skillTwo:
   name: "Dragon Breath"
-  customModelData: 55
+  customModelData: 28
   description:
     - "Deal damage to enemies in front of you."
   manaCosts:
@@ -198,7 +198,7 @@ skillTwo:
               - 0
 skillThree:
   name: "Blasting Warp"
-  customModelData: 44
+  customModelData: 62
   description:
     - "Warp to where you are looking at. After a small delay"
     - "cause a explosion in your old location, dealing damage to enemies."
@@ -240,7 +240,7 @@ skillThree:
             - 24
             - 24
           particle:
-            particleType: "FLAME"
+            particleType: "SOUL_FIRE_FLAME"
           child1:
             componentType: "DamageMechanic"
             damageType: "FIRE"
@@ -314,7 +314,7 @@ skillThree:
         - 0
 skillPassive:
   name: "Fire Spirit"
-  customModelData: 61
+  customModelData: 31
   description:
     - "Every time you cast a spell gain a stack."
     - "If you have 4 stacks particles will start playing"
@@ -418,17 +418,18 @@ skillUltimate:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "SingleTarget"
+      componentType: "LocationTarget"
       allies: false
-      enemy: true
       self: false
-      max: 1
+      enemy: true
+      max: 30
       ranges:
         - 24
         - 24
         - 24
         - 24
-      tolerance: 4
+        - 24
+        - 24
       particle:
         particleType: "FLAME"
         gap: 0.2

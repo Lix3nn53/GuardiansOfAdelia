@@ -201,6 +201,10 @@ public class SkillComponentLoader {
             return new CloneCurrentTargets(configurationSection);
         } else if (componentType.equals(ChangeSkillLevelMechanic.class.getSimpleName())) {
             return new ChangeSkillLevelMechanic(configurationSection);
+        } else if (componentType.equals(TargetCountCondition.class.getSimpleName())) {
+            return new TargetCountCondition(configurationSection);
+        } else if (componentType.equals(SkillLevelCondition.class.getSimpleName())) {
+            return new SkillLevelCondition(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

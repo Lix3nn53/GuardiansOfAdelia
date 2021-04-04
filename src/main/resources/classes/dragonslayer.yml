@@ -30,7 +30,7 @@ skillOne:
   name: "Power Slash"
   customModelData: 8
   description:
-    - "Deal damage to nearby enemies"
+    - "Deal damage to targets in cube area."
   manaCosts:
     - 5
     - 7
@@ -61,25 +61,25 @@ skillOne:
         arrangementType: "DrawCube"
         particleType: "FLAME"
       length_xList:
-        - 1
-        - 1
-        - 1
-        - 1
+        - 0.5
+        - 0.5
+        - 0.5
+        - 0.5
       length_yList:
         - 2
         - 2
         - 2
         - 2
       length_zList:
-        - 4
-        - 4.5
         - 5
         - 6
+        - 7
+        - 9
       forwardList:
-        - 2
-        - 2.25
         - 2.5
         - 3
+        - 3.5
+        - 4.5
       child1:
         componentType: "DamageMechanic"
         damageType: "FIRE"
@@ -94,13 +94,32 @@ skillOne:
           - 1.8
           - 2.2
       child2:
-        componentType: "SelfTarget"
+        componentType: "TargetCountCondition"
+        count: 3
         child1:
-          componentType: "SoundMechanic"
-          goaSound: "SKILL_LIGHTNING_NORMAL"
+          componentType: "SelfTarget"
+          child1:
+            componentType: "SkillLevelCondition"
+            skillIndex: 3
+            minValue: 1
+            maxValue: 4
+            child1:
+              componentType: "ChangeSkillLevelMechanic"
+              index: 3
+              child1:
+                componentType: "HealMechanic"
+                healPercentList:
+                  - 0.05
+                  - 0.1
+                  - 0.15
+                  - 0.2
+                addLore: false
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_LIGHTNING_NORMAL"
 skillTwo:
   name: "Flame Burst"
-  customModelData: 28
+  customModelData: 27
   description:
     - "Shoot a flame-burst that launches"
     - "a target into the sky"
@@ -139,7 +158,7 @@ skillTwo:
         arrangementType: "FillHemisphere"
         particleType: "FLAME"
         radius: 0.5
-        amount: 2
+        amount: 5
       isProjectileInvisible: true
       child1:
         componentType: "FilterCurrentTargets"
@@ -191,126 +210,151 @@ skillTwo:
       componentType: "SoundMechanic"
       goaSound: "SKILL_FIRE_SLASH"
 skillThree:
-  name: "Victory Flag"
-  customModelData: 22
+  name: "Dragon's Charge"
+  customModelData: 31
   description:
-    - "Place a flag at your location that"
-    - "gives damage buff to nearby allies"
+    - "Cover yourself with flames and start charging."
+    - "Deal damage and push enemies got close to you."
   manaCosts:
-    - 20
-    - 24
-    - 28
-    - 32
-    - 36
-    - 40
+    - 2
+    - 2
+    - 2
+    - 2
   cooldowns:
-    - 90
-    - 90
-    - 90
-    - 90
-    - 90
-    - 90
+    - 2
+    - 2
+    - 2
+    - 2
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "HologramMechanic"
-      helmetType: "IRON_PICKAXE"
-      customModelData: 4
-      durations:
-        - 800
-        - 800
-        - 800
-        - 800
-        - 800
-        - 800
-      displayText: "< Victory-Flag %caster% >"
+      componentType: "RepeatMechanic"
+      period: 5
+      repetitions:
+        - 10
+        - 15
+        - 20
+        - 25
       child1:
-        componentType: "RepeatMechanic"
-        period: 40
-        repetitions:
-          - 20
-          - 20
-          - 20
-          - 20
-          - 20
-          - 20
+        componentType: "LaunchMechanic"
+        relative: "CASTER"
+        forwardSpeedList:
+          - 1.1
+          - 1.1
+          - 1.1
+          - 1.1
+        upwardSpeedList:
+          - 0
+          - 0
+          - 0
+          - 0
+        rightSpeedList:
+          - 0
+          - 0
+          - 0
+          - 0
+      child2:
+        componentType: "AreaTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 10
+        radiusList:
+          - 1.8
+          - 1.8
+          - 1.8
+          - 1.8
+        amountList:
+          - 12
+          - 12
+          - 12
+          - 12
+        particle:
+          particleType: "FLAME"
         child1:
-          componentType: "AreaTarget"
-          allies: true
-          enemy: false
-          self: true
-          max: 10
-          radiusList:
-            - 8
-            - 9
+          componentType: "DamageMechanic"
+          damageType: "FIRE"
+          damageList:
             - 10
-            - 11
-            - 12
-            - 14
-          amountList:
-            - 24
-            - 24
-            - 24
-            - 24
-          particle:
-            particleType: "CRIT"
-          child1:
-            componentType: "BuffMechanic"
-            buffType: "ELEMENT_DAMAGE"
-            multipliers:
-              - 0.08
-              - 0.1
-              - 0.12
-              - 0.14
-              - 0.16
-              - 0.2
-            ticks:
-              - 41
-              - 41
-              - 41
-              - 41
-              - 41
-              - 41
-          child2:
-            componentType: "BuffMechanic"
-            buffType: "ELEMENT_DAMAGE"
-            multipliers:
-              - 0.08
-              - 0.1
-              - 0.12
-              - 0.14
-              - 0.16
-              - 0.2
-            ticks:
-              - 41
-              - 41
-              - 41
-              - 41
-              - 41
-              - 41
+            - 40
+            - 90
+            - 180
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
         child2:
-          componentType: "ParticleMechanic"
-          particle:
-            arrangementType: "FillCircle"
-            particleType: "CRIT"
-            radius: 5
-            amount: 7
-            direction: "XZ"
-          upward: 1.8
-          data1:
-            - 3
-            - 3.5
-            - 3
-            - 3.25
+          componentType: "PushMechanic"
+          pushType: "FIXED"
+          speedList:
+            - 1
+            - 1.4
+            - 1.8
+            - 2.2
+          centerSelf: true
     child2:
-      componentType: "SoundMechanic"
-      goaSound: "SKILL_BUFF"
+      componentType: "FlagSetMechanic"
+      key: "dragonslayerskill3"
+      isUnique: "false"
+      ticks:
+        - 50
+        - 75
+        - 100
+        - 125
+    child3:
+      componentType: "ParticleAnimationMechanic"
+      particle:
+        arrangementType: "DrawCylinder"
+        particleType: "FLAME"
+        radius: 1.6
+        amount: 12
+      frequency: 4
+      data1:
+        - 1
+        - 1
+        - 1
+        - 1
+      repeatAmount:
+        - 21
+        - 21
+        - 21
+        - 21
+      upwardIncrease: 0.1
+      resetY: true
+      rotation: true
+      yawIncrease: 30
+      pitchIncrease: 10
+      playback: true
+      # no timeout
+      dontStop: true
+      # stop self if condition is not met
+      flagConditionKey: "dragonslayerskill3"
+      flagIsSet: true
+    child4:
+      componentType: "SilenceMechanic"
+      durations:
+        - 50
+        - 75
+        - 100
+        - 125
+    child5:
+      componentType: "DisarmMechanic"
+      durations:
+        - 50
+        - 75
+        - 100
+        - 125
 skillPassive:
-  name: "Death Rattle"
-  customModelData: 32
+  name: "Warmth"
+  customModelData: 29
   description:
-    - "If you take damage that leaves you with less than 15% health,"
-    - "unleash your rage and gain movement speed and jump boost."
+    - "If your area of target skills hit 3 or more"
+    - "targets at a time heal yourself."
+    - "Level 1: 5%"
+    - "Level 2: 10%"
+    - "Level 3: 15%"
+    - "Level 4: 20%"
   manaCosts:
     - 0
     - 0
@@ -326,79 +370,19 @@ skillPassive:
     - 40
     - 40
   trigger:
-    componentType: "InitializeTrigger"
-    child1:
-      componentType: "TookDamageTrigger"
-      cooldowns:
-        - 40
-        - 40
-        - 40
-        - 40
-        - 40
-        - 40
-      child1:
-        componentType: "SelfTarget"
-        child1:
-          componentType: "HealthCondition"
-          minPercent: 0.0
-          maxPercent: 0.15
-          child1:
-            componentType: "SoundMechanic"
-            goaSound: "SKILL_SCREAM"
-          child2:
-            componentType: "PotionEffectMechanic"
-            potionEffectType: "SPEED"
-            tickList:
-              - 120
-              - 140
-              - 160
-              - 180
-              - 200
-              - 240
-            amplifierList:
-              - 2
-              - 3
-              - 3
-              - 4
-              - 4
-              - 5
-          child3:
-            componentType: "ParticleAnimationMechanic"
-            particle:
-              arrangementType: "FillCircle"
-              particleType: "REDSTONE"
-              radius: 1
-              amount: 4
-              direction: "XZ"
-              dustColor: 16711680
-              dustSize: 8
-            frequency: 5
-            data1:
-              - 1
-              - 1
-              - 1
-              - 1
-            repeatAmount:
-              - 24
-              - 28
-              - 32
-              - 36
+    componentType: "SelfTarget"
 skillUltimate:
   name: "Grand Skyfall"
   customModelData: 23
   description:
-    - "Jump forward into the air. When you land deal"
+    - "Launch youreself into the air. When you land deal"
     - "damage and launch nearby enemies into the sky."
   manaCosts:
     - 50
     - 50
     - 50
     - 50
-    - 50
-    - 50
   cooldowns:
-    - 40
-    - 40
     - 40
     - 40
     - 40
@@ -407,7 +391,7 @@ skillUltimate:
     componentType: "SelfTarget"
     child1:
       componentType: "LaunchMechanic"
-      relative: "TARGET"
+      relative: "CASTER"
       forwardSpeedList:
         - 1.4
         - 1.5
@@ -514,3 +498,24 @@ skillUltimate:
             - 1.6
             - 1.8
             - 2.2
+        child2:
+          componentType: "TargetCountCondition"
+          count: 3
+          child1:
+            componentType: "SelfTarget"
+            child1:
+              componentType: "SkillLevelCondition"
+              skillIndex: 3
+              minValue: 1
+              maxValue: 4
+              child1:
+                componentType: "ChangeSkillLevelMechanic"
+                index: 3
+                child1:
+                  componentType: "HealMechanic"
+                  healPercentList:
+                    - 0.05
+                    - 0.1
+                    - 0.15
+                    - 0.2
+                  addLore: false

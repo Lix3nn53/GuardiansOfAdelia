@@ -176,18 +176,30 @@ public class TargetHelper {
             if (!(entity instanceof LivingEntity)) continue;
             BoundingBox boundingBox = entity.getBoundingBox();
 
-            ArrayList<Vector> targets = new ArrayList<>();
-            targets.add(boundingBox.getCenter());
-            Vector max = boundingBox.getMax();
-            targets.add(max);
-            Vector min = boundingBox.getMin();
-            targets.add(min);
-            double height = boundingBox.getHeight();
-            targets.add(min.clone().add(new Vector(0, height, 0)));
-            targets.add(max.clone().subtract(new Vector(0, height, 0)));
+            ArrayList<Vector> points = new ArrayList<>(); // points of bounding box of target entity
 
-            for (Vector target : targets) {
-                boolean pointInsideBox = isPointInsideBox(target, center, xLocal, yLocal, zLocal, xLength, yLength, zLength);
+            points.add(boundingBox.getCenter());
+
+            Vector max = boundingBox.getMax();
+            points.add(max);
+
+            Vector min = boundingBox.getMin();
+            points.add(min);
+
+            double height = boundingBox.getHeight();
+            points.add(min.clone().add(new Vector(0, height, 0)));
+            points.add(max.clone().subtract(new Vector(0, height, 0)));
+
+            double widthX = boundingBox.getWidthX();
+            double widthZ = boundingBox.getWidthZ();
+            points.add(min.clone().add(new Vector(widthX, 0, 0)));
+            points.add(min.clone().add(new Vector(0, 0, widthZ)));
+
+            points.add(max.clone().add(new Vector(widthX, 0, 0)));
+            points.add(max.clone().add(new Vector(0, 0, widthZ)));
+
+            for (Vector point : points) {
+                boolean pointInsideBox = isPointInsideBox(point, center, xLocal, yLocal, zLocal, xLength, yLength, zLength);
                 if (pointInsideBox) {
                     result.add((LivingEntity) entity);
                     break;
