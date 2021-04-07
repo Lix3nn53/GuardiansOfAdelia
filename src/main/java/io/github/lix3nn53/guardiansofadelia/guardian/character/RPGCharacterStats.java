@@ -122,7 +122,7 @@ public class RPGCharacterStats {
             public void run() {
                 String between = actionBarInfo.getActionBarBetween(player);
 
-                String message = ChatColor.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + between + ChatColor.AQUA + "✧" + currentMana + "/" + getTotalMaxMana();
+                String message = ChatColor.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + between + ChatColor.AQUA + "✦" + currentMana + "/" + getTotalMaxMana();
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 10L);

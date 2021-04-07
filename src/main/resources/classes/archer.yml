@@ -26,6 +26,9 @@ armorGearTypes:
   - "FEATHER_ARMOR"
   - "CLOTH_ARMOR"
 hasDefaultOffhand: false
+actionBarInfoType: "VARIABLE"
+actionBarIcon: "&6🏹"
+actionBarKey: "sharpshooter"
 skillOne:
   name: "Poison Arrow"
   customModelData: 13

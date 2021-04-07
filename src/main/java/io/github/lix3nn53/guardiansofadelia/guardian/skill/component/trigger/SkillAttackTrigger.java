@@ -39,14 +39,14 @@ public class SkillAttackTrigger extends TriggerComponent {
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
-        SkillAttackTrigger normalAttackTrigger = this;
+        SkillAttackTrigger skillAttackTrigger = this;
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (LivingEntity target : targets) {
                     if (target instanceof Player) {
-                        TriggerListener.startListeningSkillAttack((Player) target, normalAttackTrigger);
+                        TriggerListener.startListeningSkillAttack((Player) target, skillAttackTrigger);
                     }
                 }
             }

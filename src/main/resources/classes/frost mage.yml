@@ -25,7 +25,7 @@ armorGearTypes:
   - "LIGHT_ARMOR"
 hasDefaultOffhand: false
 actionBarInfoType: "VARIABLE"
-actionBarIcon: "&d🌊"
+actionBarIcon: "&b❄"
 actionBarKey: "icespirit"
 skillOne:
   name: "Frostball"

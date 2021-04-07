@@ -65,11 +65,11 @@ public class CharacterInfoSlot {
                 lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + "" + level);
                 lore.add(ChatColor.YELLOW + "Experience: " + ChatColor.GRAY + exp + "/" + expReq);
                 lore.add(ChatColor.GREEN + "❤ Max Health: " + ChatColor.GRAY + "" + health + "/" + maxHealth);
-                lore.add(ChatColor.AQUA + "✧ Max Mana: " + ChatColor.GRAY + "" + mana + "/" + maxMana);
+                lore.add(ChatColor.AQUA + "✦ Max Mana: " + ChatColor.GRAY + "" + mana + "/" + maxMana);
                 lore.add("");
                 lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + rpgCharacterStats.getTotalElementDamage(player, rpgClassStr));
                 lore.add(ChatColor.AQUA + "■ Element Defense: " + ChatColor.GRAY + totalDefense + " (" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% reduction)");
-                lore.add(ChatColor.GOLD + "⚝ Critical Chance: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
+                lore.add(ChatColor.GOLD + "☆ Critical Chance: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
                 lore.add("");
                 lore.add(ChatColor.GOLD + "? Critical Damage: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalDamage) + "%");
                 lore.add(ChatColor.AQUA + "? Ability Haste: " + ChatColor.GRAY + abilityHaste + " (" + new DecimalFormat("##.##").format((1.0 - cooldownReduction) * 100) + "% cooldown reduction)");

@@ -1,10 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ActionBarInfo {
 
@@ -24,6 +27,13 @@ public class ActionBarInfo {
 
         if (actionBarInfoType.equals(ActionBarInfoType.VARIABLE)) {
             int value = SkillDataManager.getValue(player, key);
+
+            return "        " + actionBarIcon + " " + value + "        ";
+        } else if (actionBarInfoType.equals(ActionBarInfoType.PASSIVE_COOLDOWN)) {
+
+        } else if (actionBarInfoType.equals(ActionBarInfoType.COMPANION_COUNT)) {
+            List<LivingEntity> companions = PetManager.getCompanions(player);
+            int value = companions != null ? companions.size() : 0;
 
             return "        " + actionBarIcon + " " + value + "        ";
         }

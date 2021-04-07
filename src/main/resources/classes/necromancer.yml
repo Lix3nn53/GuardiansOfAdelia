@@ -26,6 +26,8 @@ armorGearTypes:
   - "FEATHER_ARMOR"
   - "LIGHT_ARMOR"
 hasDefaultOffhand: false
+actionBarInfoType: "COMPANION_COUNT"
+actionBarIcon: "&5☠"
 skillOne:
   name: "Summon"
   customModelData: 42
@@ -37,11 +39,7 @@ skillOne:
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 2
-    - 2
     - 2
     - 2
     - 2
@@ -53,21 +51,17 @@ skillOne:
       mobCode: "CompanionSkeleton"
       save: false
       maxAmountVar: "NecroMaxSpawnsAtATime"
-      maxAmountIfVarEmpty: 3
+      maxAmountIfVarEmpty: 2
       amounts:
         - 1
         - 2
         - 3
         - 4
-        - 5
-        - 6
       levels:
         - 1
         - 2
         - 3
         - 4
-        - 5
-        - 6
       child1:
         componentType: "RepeatMechanic"
         period: 100
@@ -82,8 +76,6 @@ skillOne:
           child1:
             componentType: "GodDamageMechanic"
             damagePercentList:
-              - 0.1
-              - 0.1
               - 0.1
               - 0.1
               - 0.1
@@ -103,11 +95,7 @@ skillTwo:
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 2
-    - 2
     - 2
     - 2
     - 2
@@ -120,8 +108,6 @@ skillTwo:
       spreadType: "CONE"
       speed: 1.9
       amountList:
-        - 1
-        - 1
         - 1
         - 1
         - 1
@@ -146,8 +132,6 @@ skillTwo:
           - 2.75
           - 3
           - 3.25
-          - 3.5
-          - 4
         amountList:
           - 24
           - 24
@@ -180,14 +164,10 @@ skillTwo:
             - 65
             - 70
             - 75
-            - 80
-            - 90
           amplifierList:
             - 2
             - 1
             - 1
-            - 2
-            - 2
             - 2
         child4:
           componentType: "SelfTarget"
@@ -205,15 +185,11 @@ skillTwo:
                 - 70
                 - 80
                 - 90
-                - 100
-                - 120
               amplifierList:
                 - 1
                 - 2
                 - 2
                 - 3
-                - 3
-                - 4
     child2:
       componentType: "SoundMechanic"
       goaSound: "SKILL_FIRE_SLASH"
@@ -228,11 +204,7 @@ skillThree:
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 2
-    - 2
     - 2
     - 2
     - 2
@@ -256,8 +228,6 @@ skillThree:
               - 200
               - 300
               - 400
-              - 500
-              - 600
       child2:
         componentType: "GodDamageMechanic"
         damageList:
@@ -265,8 +235,6 @@ skillThree:
           - 300
           - 400
           - 500
-          - 600
-          - 700
 skillPassive:
   name: "Bone Armor"
   customModelData: 47
@@ -275,23 +243,17 @@ skillPassive:
     - "amount of element defense."
     - ""
     - "Also increases the max amount of summons you can have at a time."
-    - "Skill level 0: 3 summons at a time"
-    - "Skill level 1: 4 summons at a time"
-    - "Skill level 2: 5 summons at a time"
-    - "Skill level 3: 6 summons at a time"
+    - "Skill level 0: 2 summons at a time"
+    - "Skill level 1: 3 summons at a time"
+    - "Skill level 2: 4 summons at a time"
+    - "Skill level 3: 5 summons at a time"
     - "Skill level 4: 7 summons at a time"
-    - "Skill level 5: 8 summons at a time"
-    - "Skill level 6: 10 summons at a time"
   manaCosts:
     - 5
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 2
-    - 2
     - 2
     - 2
     - 2
@@ -304,15 +266,13 @@ skillPassive:
         componentType: "ValueSetMechanic"
         key: "NecroMaxSpawnsAtATime"
         values:
+          - 3
           - 4
           - 5
-          - 6
           - 7
-          - 8
-          - 10
     child2:
       componentType: "RepeatMechanic"
-      period: 40
+      period: 100
       child1:
         componentType: "SavedCompanionsTarget"
         allies: true
@@ -327,36 +287,15 @@ skillPassive:
               componentType: "BuffMechanic"
               buffType: "ELEMENT_DEFENSE"
               multipliers:
+                - 0.02
                 - 0.03
                 - 0.04
-                - 0.05
                 - 0.06
-                - 0.07
-                - 0.09
               ticks:
-                - 41
-                - 41
-                - 41
-                - 41
-                - 41
-                - 41
-            child2:
-              componentType: "BuffMechanic"
-              buffType: "ELEMENT_DEFENSE"
-              multipliers:
-                - 0.03
-                - 0.04
-                - 0.05
-                - 0.06
-                - 0.07
-                - 0.09
-              ticks:
-                - 41
-                - 41
-                - 41
-                - 41
-                - 41
-                - 41
+                - 101
+                - 101
+                - 101
+                - 101
 skillUltimate:
   name: "Frozen Colossus"
   customModelData: 45
@@ -372,11 +311,7 @@ skillUltimate:
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 2
-    - 2
     - 2
     - 2
     - 2
@@ -395,29 +330,23 @@ skillUltimate:
           - 1
           - 1
           - 2
-          - 2
           - 3
-          - 4
       child2:
         componentType: "SpawnCompanionMechanic"
         mobCode: "CompanionFrozenColossus"
         save: false
         maxAmountVar: "NecroMaxSpawnsAtATime"
-        maxAmountIfVarEmpty: 3
+        maxAmountIfVarEmpty: 2
         amounts:
           - 1
           - 1
           - 2
-          - 2
           - 3
-          - 4
         levels:
           - 1
           - 2
           - 3
           - 4
-          - 5
-          - 6
         child1:
           componentType: "RepeatMechanic"
           period: 100
@@ -432,8 +361,6 @@ skillUltimate:
             child1:
               componentType: "GodDamageMechanic"
               damagePercentList:
-                - 0.1
-                - 0.1
                 - 0.1
                 - 0.1
                 - 0.1
@@ -467,9 +394,7 @@ skillUltimate:
               - 5
               - 5.5
               - 6
-              - 6.5
               - 7
-              - 8
             amountList:
               - 24
               - 24
@@ -483,40 +408,32 @@ skillUltimate:
               componentType: "RootMechanic"
               lockY: true
               durations:
-                - 40
                 - 50
                 - 60
                 - 70
-                - 80
                 - 90
             child2:
               componentType: "SilenceMechanic"
               durations:
-                - 40
                 - 50
                 - 60
                 - 70
-                - 80
                 - 90
             child3:
               componentType: "DisarmMechanic"
               durations:
-                - 40
                 - 50
                 - 60
                 - 70
-                - 80
                 - 90
             child4:
               componentType: "HologramMechanic"
               helmetType: "IRON_PICKAXE"
               customModelData: 10
               durations:
-                - 40
                 - 50
                 - 60
                 - 70
-                - 80
                 - 90
               upward: -0.5
           child2:

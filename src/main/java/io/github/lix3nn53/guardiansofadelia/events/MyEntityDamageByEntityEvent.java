@@ -407,7 +407,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 String text = indicatorColor.toString() + (int) (finalDamage + 0.5) + " " + indicatorIcon;
                 /*if (isCritical) {
-                    text = "⚝" + text;
+                    text = "☆" + text;
                 }*/
                 double targetHeight = livingTarget.getHeight();
                 DamageIndicator.spawnNonPacket(text, targetLocation.clone().add(0, targetHeight + 0.5, 0));

@@ -26,6 +26,9 @@ armorGearTypes:
   - "CLOTH_ARMOR"
 hasDefaultOffhand: true
 isDefaultOffhandWeapon: true
+actionBarInfoType: "VARIABLE"
+actionBarIcon: "&b⏺"
+actionBarKey: "sharpshooter"
 skillOne:
   name: "Power Slash"
   customModelData: 15

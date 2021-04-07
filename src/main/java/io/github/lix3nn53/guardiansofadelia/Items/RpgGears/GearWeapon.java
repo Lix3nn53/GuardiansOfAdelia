@@ -47,7 +47,7 @@ public class GearWeapon implements RPGGear {
         lore.add("");
         lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + "+" + elementDamage);
         lore.add(ChatColor.AQUA + "ø Attack Speed: " + weaponAttackSpeed.getLoreString());
-        lore.add(ChatColor.GOLD + "⚝ Critical chance: " + ChatColor.GRAY + new DecimalFormat("##.##").format(gearType.getCriticalChance() * 100) + "%");
+        lore.add(ChatColor.GOLD + "☆ Critical chance: " + ChatColor.GRAY + new DecimalFormat("##.##").format(gearType.getCriticalChance() * 100) + "%");
         double meleeDamageReduction = gearType.getMeleeDamageReduction();
         if (meleeDamageReduction < 1) {
             lore.add(ChatColor.RED + "Melee Damage Reduction: " + ChatColor.GRAY + ((1 - meleeDamageReduction) * 100) + "%");

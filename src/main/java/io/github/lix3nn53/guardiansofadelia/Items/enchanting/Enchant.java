@@ -97,7 +97,7 @@ public class Enchant {
             String statString;
 
             if (type.equals(GearStatType.WEAPON_GEAR)) {
-                statString = ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + "+";
+                statString = ChatColor.RED + "🗡 Element Damage: " + ChatColor.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             } else {
@@ -230,7 +230,7 @@ public class Enchant {
             String statString;
 
             if (type.equals(GearStatType.WEAPON_GEAR)) {
-                statString = ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + "+";
+                statString = ChatColor.RED + "🗡 Element Damage: " + ChatColor.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             } else {
