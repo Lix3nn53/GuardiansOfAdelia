@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class DirectionCondition extends ConditionComponent {
@@ -37,7 +38,7 @@ public class DirectionCondition extends ConditionComponent {
             boolean inFront = TargetHelper.isInFront(target, caster);
 
             if (inFront == workWhenInFront) {
-                success = executeChildren(caster, skillLevel, targets, castCounter) || success;
+                success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter) || success;
             }
         }
 

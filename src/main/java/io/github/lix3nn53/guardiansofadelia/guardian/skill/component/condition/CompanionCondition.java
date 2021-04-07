@@ -6,6 +6,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +51,7 @@ public class CompanionCondition extends ConditionComponent {
             int value = companions.size();
 
             if (value >= minValue && value <= maxValue) {
-                success = executeChildren(caster, skillLevel, targets, castCounter) || success;
+                success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter) || success;
             }
         }
 

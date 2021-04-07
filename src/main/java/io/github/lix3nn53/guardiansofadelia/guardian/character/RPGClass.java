@@ -20,6 +20,8 @@ public class RPGClass {
     private final HashMap<AttributeType, Integer> attributeTiers;
     private final HashMap<Integer, Skill> skillSet;
 
+    private final ActionBarInfo actionBarInfo;
+
     private final List<ShieldGearType> shieldGearTypes;
     private final List<WeaponGearType> weaponGearTypes;
     private final List<ArmorGearType> armorGearTypes;
@@ -30,7 +32,7 @@ public class RPGClass {
     private final List<String> description;
 
     public RPGClass(ChatColor color, ElementType mainElement, String name, int tier, int customModelData, HashMap<AttributeType, Integer> attributeTiers,
-                    HashMap<Integer, Skill> skillSet, List<ShieldGearType> shieldGearTypes, List<WeaponGearType> weaponGearTypes,
+                    HashMap<Integer, Skill> skillSet, ActionBarInfo actionBarInfo, List<ShieldGearType> shieldGearTypes, List<WeaponGearType> weaponGearTypes,
                     List<ArmorGearType> armorGearTypes, boolean hasDefaultOffhand, boolean isDefaultOffhandWeapon, List<String> description) {
         this.color = color;
         this.mainElement = mainElement;
@@ -39,6 +41,7 @@ public class RPGClass {
         this.customModelData = customModelData;
         this.attributeTiers = attributeTiers;
         this.skillSet = skillSet;
+        this.actionBarInfo = actionBarInfo;
         this.shieldGearTypes = shieldGearTypes;
         this.weaponGearTypes = weaponGearTypes;
         this.armorGearTypes = armorGearTypes;
@@ -81,6 +84,10 @@ public class RPGClass {
 
     public HashMap<Integer, Skill> getSkillSet() {
         return skillSet;
+    }
+
+    public ActionBarInfo getActionBarInfo() {
+        return actionBarInfo;
     }
 
     public WeaponGearType getDefaultWeaponGearType() {

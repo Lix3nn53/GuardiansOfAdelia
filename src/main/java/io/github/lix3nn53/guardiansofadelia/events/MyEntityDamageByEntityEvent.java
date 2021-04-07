@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.killProtection.KillProtectionManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.MMManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -207,9 +208,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 ActiveMob activeMob = MythicMobs.inst().getMobManager().getMythicMobInstance(damageSource);
 
                                 if (activeMob != null) {
-                                    String faction = activeMob.getFaction();
+                                    String internalName = activeMob.getType().getInternalName();
 
-                                    damageType = ElementType.valueOf(faction.toUpperCase());
+                                    if (MMManager.hasElementType(internalName)) {
+                                        damageType = MMManager.getElementType(internalName);
+                                    }
                                 }
 
                                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();

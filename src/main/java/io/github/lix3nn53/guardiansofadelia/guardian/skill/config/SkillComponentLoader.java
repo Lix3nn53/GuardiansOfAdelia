@@ -205,6 +205,8 @@ public class SkillComponentLoader {
             return new TargetCountCondition(configurationSection);
         } else if (componentType.equals(SkillLevelCondition.class.getSimpleName())) {
             return new SkillLevelCondition(configurationSection);
+        } else if (componentType.equals(DistanceCondition.class.getSimpleName())) {
+            return new DistanceCondition(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

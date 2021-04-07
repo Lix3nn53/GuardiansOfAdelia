@@ -9,6 +9,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import java.util.Collections;
 import java.util.List;
 
 public class SkillLevelCondition extends ConditionComponent {
@@ -56,7 +57,7 @@ public class SkillLevelCondition extends ConditionComponent {
                     int value = skillBar.getCurrentSkillLevel(this.skillIndex);
 
                     if (value >= minValue && value <= maxValue) {
-                        success = executeChildren(caster, skillLevel, targets, castCounter) || success;
+                        success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter) || success;
                     }
                 }
             }

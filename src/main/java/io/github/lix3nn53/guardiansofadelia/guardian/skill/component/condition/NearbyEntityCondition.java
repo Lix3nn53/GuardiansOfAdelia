@@ -7,6 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class NearbyEntityCondition extends ConditionComponent {
@@ -64,7 +65,7 @@ public class NearbyEntityCondition extends ConditionComponent {
             }
 
             if (existsNearbyOfCurrent == mustExist) {
-                success = executeChildren(caster, skillLevel, targets, castCounter) || success;
+                success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter) || success;
             }
         }
 

@@ -5,6 +5,8 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.ActionBarInfo;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.ActionBarInfoType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
@@ -136,8 +138,14 @@ public class ClassConfigurations {
                 isDefaultOffhandWeapon = fileConfiguration.getBoolean("isDefaultOffhandWeapon");
             }
 
+            ActionBarInfoType actionBarInfoType = fileConfiguration.contains("actionBarInfoType") ? ActionBarInfoType.valueOf(fileConfiguration.getString("actionBarInfoType")) : null;
+            String actionBarIcon = fileConfiguration.getString("actionBarIcon");
+            String actionBarKey = fileConfiguration.getString("actionBarKey");
+
+            ActionBarInfo actionBarInfo = new ActionBarInfo(actionBarInfoType, actionBarIcon, actionBarKey);
+
             RPGClass rpgClass = new RPGClass(color, mainElement, className, tier, classIconCustomModelData, attributeTiers, skillSet,
-                    shieldGearTypes, weaponGearTypes, armorGearTypes, hasDefaultOffhand, isDefaultOffhandWeapon, description);
+                    actionBarInfo, shieldGearTypes, weaponGearTypes, armorGearTypes, hasDefaultOffhand, isDefaultOffhandWeapon, description);
 
             RPGClassManager.addClass(className, rpgClass);
         }

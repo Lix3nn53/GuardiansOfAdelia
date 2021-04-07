@@ -56,6 +56,7 @@ public class ConfigManager {
         EggConfigurations.createConfigs();
         LootChestConfiguration.createConfigs();
         GearSetConfiguration.createConfigs();
+        MobConfigurations.createConfigs();
     }
 
     public static void loadConfigALL() {
@@ -79,6 +80,7 @@ public class ConfigManager {
         EggConfigurations.loadConfigs();
         LootChestConfiguration.loadConfigs();
         GearSetConfiguration.loadConfig();
+        MobConfigurations.loadConfigs();
     }
 
     public static void writeConfigALL() {

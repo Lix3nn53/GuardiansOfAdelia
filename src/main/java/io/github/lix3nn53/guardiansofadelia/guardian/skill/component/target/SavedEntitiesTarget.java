@@ -10,18 +10,28 @@ import java.util.List;
 
 public class SavedEntitiesTarget extends TargetComponent {
 
+    private final boolean casterOnly;
+
     public SavedEntitiesTarget(ConfigurationSection configurationSection) {
         super(configurationSection);
+
+        this.casterOnly = configurationSection.contains("casterOnly") && configurationSection.getBoolean("casterOnly");
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         List<LivingEntity> savedEntities = new ArrayList<>();
 
-        for (LivingEntity target : targets) {
-            List<LivingEntity> savedEntitiesOfTarget = SkillDataManager.getSavedEntitiesOfCaster(target);
+        if (casterOnly) {
+            List<LivingEntity> savedEntitiesOfTarget = SkillDataManager.getSavedEntitiesOfCaster(caster);
 
             savedEntities.addAll(savedEntitiesOfTarget);
+        } else {
+            for (LivingEntity target : targets) {
+                List<LivingEntity> savedEntitiesOfTarget = SkillDataManager.getSavedEntitiesOfCaster(target);
+
+                savedEntities.addAll(savedEntitiesOfTarget);
+            }
         }
 
         if (savedEntities.isEmpty()) return false;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public enum WeaponGearType {
     //One handed Melee Weapons
-    SWORD, // Normal attack speed, normal damage
+    SWORD, // Normal attack speed, normal damage, can equip with shield
     DAGGER, // Fast attack speed, low damage, can dual wield
     //Two handed Melee Weapons
     BATTLE_AXE, // Slow attack speed, max damage

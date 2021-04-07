@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionCo
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class SavedEntityCondition extends ConditionComponent {
@@ -38,7 +39,7 @@ public class SavedEntityCondition extends ConditionComponent {
             int value = savedEntities.size();
 
             if (value >= minValue && value <= maxValue) {
-                success = executeChildren(caster, skillLevel, targets, castCounter) || success;
+                success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter) || success;
             }
         }
 

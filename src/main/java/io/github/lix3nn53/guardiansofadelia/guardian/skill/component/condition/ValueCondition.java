@@ -1,11 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ValueCondition extends ConditionComponent {
@@ -49,7 +49,6 @@ public class ValueCondition extends ConditionComponent {
         if (checkCasterOnly) {
             int value = SkillDataManager.getValue(caster, key);
 
-            GuardiansOfAdelia.getInstance().getLogger().info("value: " + value);
             if (value >= minValue && value <= maxValue) {
                 success = executeChildren(caster, skillLevel, targets, castCounter) || success;
             }
@@ -57,9 +56,8 @@ public class ValueCondition extends ConditionComponent {
             for (LivingEntity target : targets) {
                 int value = SkillDataManager.getValue(target, key);
 
-                GuardiansOfAdelia.getInstance().getLogger().info("value: " + value);
                 if (value >= minValue && value <= maxValue) {
-                    success = executeChildren(caster, skillLevel, targets, castCounter) || success;
+                    success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter) || success;
                 }
             }
         }

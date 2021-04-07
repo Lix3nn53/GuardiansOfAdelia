@@ -110,7 +110,7 @@ public class ConeTarget extends TargetComponent {
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
-        additions.add(ChatColor.YELLOW + "Cone range: " + rangeList);
+        additions.add(ChatColor.YELLOW + "Cone Area: " + rangeList);
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

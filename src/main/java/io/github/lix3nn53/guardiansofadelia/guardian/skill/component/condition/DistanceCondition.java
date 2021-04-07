@@ -1,31 +1,30 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.Collections;
 import java.util.List;
 
-public class HealthCondition extends ConditionComponent {
+public class DistanceCondition extends ConditionComponent {
 
-    private final double minPercent;
-    private final double maxPercent;
+    private final double distance;
+    private final boolean inside;
 
-    public HealthCondition(ConfigurationSection configurationSection) {
+    public DistanceCondition(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 
-        if (!configurationSection.contains("minPercent")) {
-            configLoadError("minPercent");
+        if (!configurationSection.contains("distance")) {
+            configLoadError("distance");
         }
 
-        if (!configurationSection.contains("maxPercent")) {
-            configLoadError("maxPercent");
+        if (!configurationSection.contains("inside")) {
+            configLoadError("inside");
         }
 
-        this.minPercent = configurationSection.getDouble("minPercent");
-        this.maxPercent = configurationSection.getDouble("maxPercent");
+        this.distance = configurationSection.getInt("distance");
+        this.inside = configurationSection.getBoolean("inside");
     }
 
     @Override
@@ -34,11 +33,11 @@ public class HealthCondition extends ConditionComponent {
 
         boolean success = false;
         for (LivingEntity target : targets) {
-            double currentHealth = target.getHealth();
-            double maxHealth = target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-            double value = currentHealth / maxHealth;
+            double currentDistance = caster.getLocation().distanceSquared(target.getLocation());
 
-            if (value > minPercent && value <= maxPercent) {
+            double v = distance * distance;
+
+            if (inside == currentDistance <= v) {
                 success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter) || success;
             }
         }

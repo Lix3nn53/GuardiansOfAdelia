@@ -42,24 +42,24 @@ public enum ElementType {
         return null;
     }
 
-    public Character getIcon() {
+    public String getIcon() {
         switch (this) {
             case FIRE:
-                return '☄';
+                return "\uD83D\uDD25";
             case WATER:
-                return '◎';
+                return "\uD83C\uDF0A";
             case EARTH:
-                return '₪';
+                return "◎";
             case AIR:
-                return '๑';
+                return "๑";
             case LIGHTNING:
-                return 'ϟ';
+                return "⚡";
         }
 
         return null;
     }
 
     public String getFullName() {
-        return String.valueOf(getChatColor()) + getIcon() + " " + getCustomName();
+        return getChatColor() + getIcon() + " " + getCustomName();
     }
 }

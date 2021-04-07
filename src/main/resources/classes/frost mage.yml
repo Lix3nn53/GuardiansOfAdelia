@@ -24,6 +24,9 @@ armorGearTypes:
   - "FEATHER_ARMOR"
   - "LIGHT_ARMOR"
 hasDefaultOffhand: false
+actionBarInfoType: "VARIABLE"
+actionBarIcon: "&d🌊"
+actionBarKey: "icespirit"
 skillOne:
   name: "Frostball"
   customModelData: 48
@@ -454,15 +457,45 @@ skillPassive:
         - 1
         - 1
       child1:
-        componentType: "SelfTarget"
+        componentType: "ValueCondition"
+        key: "icespirit"
+        minValue: 3
+        maxValue: 3
+        checkCasterOnly: true
         child1:
-          componentType: "ValueAddMechanic"
-          key: "icespirit"
-          valueToAdd:
-            - 1
-            - 1
-            - 1
-            - 1
+          componentType: "ParticleAnimationMechanic"
+          particle:
+            arrangementType: "DrawCylinder"
+            particleType: "REDSTONE"
+            dustColor: 6750207
+            dustSize: 2
+            radius: 0.1
+            amount: 2
+          frequency: 5
+          data1:
+            - 0.1
+            - 0.1
+            - 0.1
+            - 0.1
+          repeatAmount:
+            - 18
+            - 18
+            - 18
+            - 18
+          upward: 1
+          offsety: 1.2
+          offsetx: 0.1
+          resetY: true
+          rotation: true
+          yawIncrease: 30
+          pitchIncrease: 10
+          playback: true
+          # no timeout
+          dontStop: true
+          # stop self if condition is not met
+          valueConditionKey: "icespirit"
+          valueConditionMinValue: 4
+          valueConditionMaxValue: 50
       child2:
         componentType: "ValueCondition"
         key: "icespirit"
@@ -470,51 +503,15 @@ skillPassive:
         maxValue: 3
         checkCasterOnly: true
         child1:
-          componentType: "RepeatCancelMechanic"
-      child3:
-        componentType: "ValueCondition"
-        key: "icespirit"
-        minValue: 4
-        maxValue: 4
-        checkCasterOnly: true
-        child1:
-          componentType: "RepeatMechanic"
-          period: 180
-          # stop self if condition is not met
-          valueConditionKey: "icespirit"
-          valueConditionMinValue: 4
-          valueConditionMaxValue: 50
+          componentType: "SelfTarget"
           child1:
-            componentType: "ParticleAnimationMechanic"
-            particle:
-              arrangementType: "DrawCylinder"
-              particleType: "REDSTONE"
-              dustColor: 6750207
-              dustSize: 2
-              radius: 0.1
-              amount: 2
-            frequency: 5
-            data1:
-              - 0.1
-              - 0.1
-              - 0.1
-              - 0.1
-            repeatAmount:
-              - 36
-              - 36
-              - 36
-              - 36
-            upward: 1
-            offsety: 1.2
-            offsetx: 0.1
-            resetY: true
-            rotation: true
-            yawIncrease: 30
-            pitchIncrease: 10
-            # stop self if condition is not met
-            valueConditionKey: "icespirit"
-            valueConditionMinValue: 4
-            valueConditionMaxValue: 50
+            componentType: "ValueAddMechanic"
+            key: "icespirit"
+            valueToAdd:
+              - 1
+              - 1
+              - 1
+              - 1
 skillUltimate:
   name: "Blizzard"
   customModelData: 49
@@ -564,10 +561,10 @@ skillUltimate:
           self: false
           max: 30
           radiusList:
-            - 4
             - 5
             - 6
-            - 8
+            - 7
+            - 9
           amountList:
             - 24
             - 24
@@ -657,18 +654,3 @@ skillUltimate:
                   - 0
                   - 0
                   - 0
-        child2:
-          componentType: "ParticleMechanic"
-          particle:
-            arrangementType: "DrawCylinder"
-            particleType: "REDSTONE"
-            radius: 2.5
-            amount: 40
-            dustColor: 65535
-            dustSize: 8
-          data1:
-            - 4
-            - 5
-            - 6
-            - 8
-          upward: 0.5

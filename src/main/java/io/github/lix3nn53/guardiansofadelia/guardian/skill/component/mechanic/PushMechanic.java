@@ -69,14 +69,15 @@ public class PushMechanic extends MechanicComponent {
 
         for (LivingEntity target : targets) {
             final Vector vel = target.getLocation().subtract(center).toVector();
-            if (vel.lengthSquared() == 0) {
+            double v = vel.lengthSquared();
+            if (v == 0) {
                 continue;
             } else if (pushType.equals(PushType.INVERSE)) {
                 vel.multiply(speedList.get(skillLevel - 1));
             } else if (pushType.equals(PushType.FIXED)) {
-                vel.multiply(speedList.get(skillLevel - 1) / vel.length());
+                vel.multiply(speedList.get(skillLevel - 1) * vel.length());
             } else { // SCALED
-                vel.multiply(speedList.get(skillLevel - 1) / vel.lengthSquared());
+                vel.multiply(speedList.get(skillLevel - 1) * v);
             }
             target.setVelocity(vel);
         }

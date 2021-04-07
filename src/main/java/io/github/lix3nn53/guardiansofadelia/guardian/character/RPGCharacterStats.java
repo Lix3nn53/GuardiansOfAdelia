@@ -112,11 +112,17 @@ public class RPGCharacterStats {
 
         onMaxHealthChange();
 
+        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
+
+        ActionBarInfo actionBarInfo = rpgClass.getActionBarInfo();
+
         //start action bar scheduler
         new BukkitRunnable() {
             @Override
             public void run() {
-                String message = ChatColor.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + "                    " + ChatColor.AQUA + "✧" + currentMana + "/" + getTotalMaxMana();
+                String between = actionBarInfo.getActionBarBetween(player);
+
+                String message = ChatColor.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + between + ChatColor.AQUA + "✧" + currentMana + "/" + getTotalMaxMana();
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 10L);
