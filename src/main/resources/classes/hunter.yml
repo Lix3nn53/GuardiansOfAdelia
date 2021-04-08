@@ -379,41 +379,22 @@ skillUltimate:
                 - 3.25
               upward: 0.8
             child2:
-              componentType: "DisarmMechanic"
+              componentType: "StatusEffectMechanic"
+              statusEffectTypes:
+                - "STUN"
               durations:
                 - 60
                 - 70
                 - 80
                 - 90
-                - 100
-                - 120
             child3:
-              componentType: "RootMechanic"
-              durations:
-                - 60
-                - 70
-                - 80
-                - 90
-                - 100
-                - 120
-              lockY: true
-            child4:
-              componentType: "SilenceMechanic"
-              durations:
-                - 60
-                - 70
-                - 80
-                - 90
-                - 100
-                - 120
-            child5:
               componentType: "SelfTarget"
               child1:
                 componentType: "RemoveSavedEntities"
-            child6:
+            child4:
               componentType: "SoundMechanic"
               goaSound: "SKILL_STUN_HIT"
-            child7:
+            child5:
               componentType: "SelfTarget"
               child1:
                 componentType: "FlagSetMechanic"

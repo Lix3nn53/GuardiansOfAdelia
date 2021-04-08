@@ -241,7 +241,6 @@ public class SkillBar {
 
     public boolean castSkill(int slot) {
         if (StatusEffectManager.isSilenced(player)) {
-            player.sendTitle(ChatColor.LIGHT_PURPLE + "", ChatColor.LIGHT_PURPLE + "Silenced..", 0, 20, 0);
             return false;
         }
 

@@ -121,31 +121,15 @@ skillOne:
             componentType: "ChangeSkillLevelMechanic"
             index: 3
             child1:
-              componentType: "RootMechanic"
-              lockY: true
+              componentType: "StatusEffectMechanic"
+              statusEffectTypes:
+                - "STUN"
               durations:
                 - 40
                 - 50
                 - 60
                 - 70
-              addLore: false
             child2:
-              componentType: "SilenceMechanic"
-              durations:
-                - 40
-                - 50
-                - 60
-                - 70
-              addLore: false
-            child3:
-              componentType: "DisarmMechanic"
-              durations:
-                - 40
-                - 50
-                - 60
-                - 70
-              addLore: false
-            child4:
               componentType: "HologramMechanic"
               helmetType: "IRON_PICKAXE"
               customModelData: 10
@@ -284,31 +268,15 @@ skillTwo:
               componentType: "ChangeSkillLevelMechanic"
               index: 3
               child1:
-                componentType: "RootMechanic"
-                lockY: true
+                componentType: "StatusEffectMechanic"
+                statusEffectTypes:
+                  - "STUN"
                 durations:
                   - 40
                   - 50
                   - 60
                   - 70
-                addLore: false
               child2:
-                componentType: "SilenceMechanic"
-                durations:
-                  - 40
-                  - 50
-                  - 60
-                  - 70
-                addLore: false
-              child3:
-                componentType: "DisarmMechanic"
-                durations:
-                  - 40
-                  - 50
-                  - 60
-                  - 70
-                addLore: false
-              child4:
                 componentType: "HologramMechanic"
                 helmetType: "IRON_PICKAXE"
                 customModelData: 10
@@ -364,28 +332,15 @@ skillThree:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "RootMechanic"
-      lockY: true
+      componentType: "StatusEffectMechanic"
+      statusEffectTypes:
+        - "STUN"
       durations:
         - 120
         - 160
         - 200
         - 240
     child2:
-      componentType: "SilenceMechanic"
-      durations:
-        - 120
-        - 160
-        - 200
-        - 240
-    child3:
-      componentType: "DisarmMechanic"
-      durations:
-        - 120
-        - 160
-        - 200
-        - 240
-    child4:
       componentType: "HologramMechanic"
       helmetType: "IRON_PICKAXE"
       customModelData: 10
@@ -395,14 +350,14 @@ skillThree:
         - 200
         - 240
       upward: -0.5
-    child5:
+    child3:
       componentType: "InvincibleMechanic"
       ticks:
         - 120
         - 160
         - 200
         - 240
-    child6:
+    child4:
       componentType: "RepeatMechanic"
       period: 40
       repetitions:
@@ -613,31 +568,15 @@ skillUltimate:
               componentType: "ChangeSkillLevelMechanic"
               index: 3
               child1:
-                componentType: "RootMechanic"
-                lockY: true
+                componentType: "StatusEffectMechanic"
+                statusEffectTypes:
+                  - "STUN"
                 durations:
                   - 40
                   - 50
                   - 60
                   - 70
-                addLore: false
               child2:
-                componentType: "SilenceMechanic"
-                durations:
-                  - 40
-                  - 50
-                  - 60
-                  - 70
-                addLore: false
-              child3:
-                componentType: "DisarmMechanic"
-                durations:
-                  - 40
-                  - 50
-                  - 60
-                  - 70
-                addLore: false
-              child4:
                 componentType: "HologramMechanic"
                 helmetType: "IRON_PICKAXE"
                 customModelData: 10

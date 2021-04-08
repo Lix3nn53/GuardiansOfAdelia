@@ -79,7 +79,7 @@ public enum GearSetEffect {
                 player.addPotionEffect(potionEffect);
                 break;
             case MOVEMENT_SPEED:
-                potionEffect = new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1);
+                potionEffect = new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, false, false);
                 player.addPotionEffect(potionEffect);
                 break;
         }

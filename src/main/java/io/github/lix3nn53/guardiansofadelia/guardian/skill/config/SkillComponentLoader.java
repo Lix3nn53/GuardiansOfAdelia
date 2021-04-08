@@ -12,9 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.im
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.particles.ParticleAnimationMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.particles.ParticleMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.DisarmMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.RootMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.SilenceMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.*;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigurationUtils;
@@ -121,12 +119,10 @@ public class SkillComponentLoader {
             return new LandTrigger(configurationSection);
         } else if (componentType.equals(ImmunityRemoveMechanic.class.getSimpleName())) {
             return new ImmunityRemoveMechanic(configurationSection);
-        } else if (componentType.equals(SilenceMechanic.class.getSimpleName())) {
-            return new SilenceMechanic(configurationSection);
+        } else if (componentType.equals(StatusEffectMechanic.class.getSimpleName())) {
+            return new StatusEffectMechanic(configurationSection);
         } else if (componentType.equals(NormalAttackTrigger.class.getSimpleName())) {
             return new NormalAttackTrigger(configurationSection);
-        } else if (componentType.equals(RootMechanic.class.getSimpleName())) {
-            return new RootMechanic(configurationSection);
         } else if (componentType.equals(MessageMechanic.class.getSimpleName())) {
             return new MessageMechanic(configurationSection);
         } else if (componentType.equals(FireMechanic.class.getSimpleName())) {
@@ -155,8 +151,6 @@ public class SkillComponentLoader {
             return new RemoveSavedEntities(configurationSection);
         } else if (componentType.equals(FlagSetMechanic.class.getSimpleName())) {
             return new FlagSetMechanic(configurationSection);
-        } else if (componentType.equals(DisarmMechanic.class.getSimpleName())) {
-            return new DisarmMechanic(configurationSection);
         } else if (componentType.equals(ValueSetMechanic.class.getSimpleName())) {
             return new ValueSetMechanic(configurationSection);
         } else if (componentType.equals(SingleTarget.class.getSimpleName())) {

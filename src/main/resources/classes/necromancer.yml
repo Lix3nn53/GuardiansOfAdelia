@@ -407,28 +407,15 @@ skillUltimate:
               dustColor: 10040319
               dustSize: 2
             child1:
-              componentType: "RootMechanic"
-              lockY: true
+              componentType: "StatusEffectMechanic"
+              statusEffectTypes:
+                - "STUN"
               durations:
                 - 50
                 - 60
                 - 70
                 - 90
             child2:
-              componentType: "SilenceMechanic"
-              durations:
-                - 50
-                - 60
-                - 70
-                - 90
-            child3:
-              componentType: "DisarmMechanic"
-              durations:
-                - 50
-                - 60
-                - 70
-                - 90
-            child4:
               componentType: "HologramMechanic"
               helmetType: "IRON_PICKAXE"
               customModelData: 10

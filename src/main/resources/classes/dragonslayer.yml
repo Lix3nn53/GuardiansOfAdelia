@@ -332,14 +332,10 @@ skillThree:
       flagConditionKey: "dragonslayerskill3"
       flagIsSet: true
     child4:
-      componentType: "SilenceMechanic"
-      durations:
-        - 50
-        - 75
-        - 100
-        - 125
-    child5:
-      componentType: "DisarmMechanic"
+      componentType: "StatusEffectMechanic"
+      statusEffectTypes:
+        - "SILENCE"
+        - "DISARM"
       durations:
         - 50
         - 75

@@ -62,10 +62,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
         if (damager instanceof LivingEntity) {
             if (StatusEffectManager.isDisarmed((LivingEntity) damager)) {
-                if (damager instanceof Player) {
-                    Player player = (Player) damager;
-                    player.sendTitle("", ChatColor.RED + "Disarmed..", 0, 20, 0);
-                }
                 event.setCancelled(true);
                 return;
             }
@@ -126,10 +122,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 if (shooter instanceof LivingEntity) {
                     if (StatusEffectManager.isDisarmed((LivingEntity) shooter)) {
-                        if (shooter instanceof Player) {
-                            Player player = (Player) shooter;
-                            player.sendTitle("", ChatColor.RED + "Disarmed..", 0, 20, 0);
-                        }
                         event.setCancelled(true);
                         return;
                     }

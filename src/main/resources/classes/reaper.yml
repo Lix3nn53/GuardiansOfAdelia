@@ -51,8 +51,6 @@ skillOne:
   trigger:
     componentType: "SelfTarget"
     child1:
-    componentType: "SelfTarget"
-    child1:
       componentType: "SingleTarget"
       allies: false
       enemy: true
@@ -93,6 +91,14 @@ skillOne:
             - 0.2
           multiplyWithValue: "soulscollected"
       child3:
+        componentType: "ValueSetMechanic"
+        key: "soulscollected"
+        values:
+          - 0
+          - 0
+          - 0
+          - 0
+      child4:
         componentType: "SoundMechanic"
         goaSound: "SKILL_LIGHTNING_NORMAL"
 skillTwo:
@@ -115,9 +121,9 @@ skillTwo:
     componentType: "SelfTarget"
     child1:
       componentType: "ProjectileMechanic"
-      projectileClass: "SmallFireball"
+      projectileClass: "Snowball"
       spreadType: "CONE"
-      speed: 1.9
+      speed: 2.4
       amountList:
         - 1
         - 1
@@ -155,8 +161,9 @@ skillTwo:
             - 1.8
             - 2.2
         child2:
-          componentType: "RootMechanic"
-          lockY: false
+          componentType: "StatusEffectMechanic"
+          statusEffectTypes:
+            - "ROOT"
           durations:
             - 40
             - 50
@@ -179,6 +186,14 @@ skillTwo:
                 - 1
                 - 1
     child2:
+      componentType: "ValueSetMechanic"
+      key: "soulscollected"
+      values:
+        - 0
+        - 0
+        - 0
+        - 0
+    child3:
       componentType: "SoundMechanic"
       goaSound: "SKILL_FIRE_SLASH"
 skillThree:
@@ -275,8 +290,6 @@ skillPassive:
     - 0
     - 0
     - 0
-    - 0
-    - 0
   cooldowns:
     - 4
     - 4
@@ -308,7 +321,7 @@ skillPassive:
               - 1
               - 1
 skillUltimate:
-  name: "Blackhole"
+  name: "asdasdsa"
   customModelData: 44
   description:
     - "Jump forward into the air. When you land deal"
@@ -326,81 +339,53 @@ skillUltimate:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "HologramMechanic"
-      helmetType: "IRON_PICKAXE"
-      customModelData: 14
-      durations:
-        - 400
-        - 500
-        - 600
-        - 800
-      displayText: "< Darkhole %caster% >"
-      gravity: true
-      marker: false
-      speed: 1.9
-      right: 0
-      forward: 1
-      upward: 0.5
-      save: true
+      componentType: "SingleTarget"
+      allies: false
+      enemy: true
+      self: false
+      max: 1
+      tolerance: 4
+      ranges:
+        - 24
+        - 24
+        - 24
+        - 24
+      keepCurrent: true
+      addToBeginning: false
+      particle:
+        particleType: "SOUL_FIRE_FLAME"
+        gap: 0.2
       child1:
-        componentType: "RepeatMechanic"
-        period: 20
-        repetitions:
-          - 20
-          - 25
-          - 30
+        componentType: "DamageMechanic"
+        damageType: "LIGHTNING"
+        damageList:
+          - 10
           - 40
+          - 90
+          - 180
+        damageMultiplyList:
+          - 1.4
+          - 1.6
+          - 1.8
+          - 2.2
+      child2:
+        componentType: "SelfTarget"
         child1:
-          componentType: "AreaTarget"
-          allies: false
-          enemy: true
-          self: false
-          max: 30
-          radiusList:
-            - 5
-            - 6
-            - 7
-            - 9
-          amountList:
-            - 24
-            - 24
-            - 24
-            - 24
-          particle:
-            particleType: "REDSTONE"
-            dustColor: 10040319
-            dustSize: 2
-          child1:
-            componentType: "SavedEntitiesTarget"
-            allies: false
-            enemy: true
-            self: false
-            max: 10
-            armorStand: true
-            keepCurrent: true
-            addToBeginning: true
-            casterOnly: true
-            child1:
-              componentType: "PushMechanic"
-              pushType: "FIXED"
-              speedList:
-                - -0.03
-                - -0.03
-                - -0.03
-                - -0.03
-              centerSelf: false
-              offsetY: 1
-          child2:
-            componentType: "PotionEffectMechanic"
-            potionEffectType:
-              - "SLOW"
-            tickList:
-              - 40
-              - 40
-              - 40
-              - 40
-            amplifierList:
-              - 2
-              - 2
-              - 2
-              - 2
+          componentType: "HealMechanic"
+          healPercentList:
+            - 0.05
+            - 0.1
+            - 0.15
+            - 0.2
+          multiplyWithValue: "soulscollected"
+      child3:
+        componentType: "ValueSetMechanic"
+        key: "soulscollected"
+        values:
+          - 0
+          - 0
+          - 0
+          - 0
+      child4:
+        componentType: "SoundMechanic"
+        goaSound: "SKILL_LIGHTNING_NORMAL"

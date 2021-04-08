@@ -275,12 +275,6 @@ public class ProjectileMechanic extends MechanicComponent {
                 }*/
 
                 ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount);
-                if (caster instanceof Player) {
-                    Player player = (Player) caster;
-                    for (Vector d : dirs) {
-                        player.sendMessage(d.toString());
-                    }
-                }
                 for (Vector d : dirs) {
                     Projectile projectile = target.launchProjectile(projectileType);
 

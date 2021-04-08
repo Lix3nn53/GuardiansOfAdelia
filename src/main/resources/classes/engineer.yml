@@ -338,7 +338,9 @@ skillThree:
               - 2
               - 2
           child3:
-            componentType: "SilenceMechanic"
+            componentType: "StatusEffectMechanic"
+            statusEffectTypes:
+              - "SILENCE"
             durations:
               - 40
               - 40
@@ -507,28 +509,15 @@ skillUltimate:
               - 1.8
               - 2.2
           child2:
-            componentType: "RootMechanic"
-            lockY: true
+            componentType: "StatusEffectMechanic"
+            statusEffectTypes:
+              - "STUN"
             durations:
               - 40
               - 50
               - 60
               - 70
           child3:
-            componentType: "SilenceMechanic"
-            durations:
-              - 40
-              - 50
-              - 60
-              - 70
-          child4:
-            componentType: "DisarmMechanic"
-            durations:
-              - 40
-              - 50
-              - 60
-              - 70
-          child5:
             componentType: "ParticleMechanic"
             particle:
               arrangementType: "FillCircle"

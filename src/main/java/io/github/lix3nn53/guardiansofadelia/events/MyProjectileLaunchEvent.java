@@ -31,11 +31,6 @@ public class MyProjectileLaunchEvent implements Listener {
         if (shooter instanceof LivingEntity) {
             if (StatusEffectManager.isDisarmed((LivingEntity) shooter)) {
                 event.setCancelled(true);
-                if (shooter instanceof Player) {
-                    Player player = (Player) shooter;
-
-                    player.sendTitle("", ChatColor.RED + "Disarmed..", 0, 20, 0);
-                }
                 return;
             }
         }

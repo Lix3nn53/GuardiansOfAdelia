@@ -1,65 +1,112 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class StatusEffectManager {
 
-    public static List<LivingEntity> silenced = new ArrayList<>();
-    public static List<LivingEntity> disarmed = new ArrayList<>();
-    public static List<Player> rootedXZ = new ArrayList<>();
-    public static List<Player> rootedY = new ArrayList<>();
+    private static final HashMap<LivingEntity, List<StatusEffectType>> entityToEffects = new HashMap<>();
+
+    public static void addStatus(LivingEntity livingEntity, StatusEffectType statusEffectType) {
+        List<StatusEffectType> statusEffectTypes;
+
+        if (entityToEffects.containsKey(livingEntity)) {
+            statusEffectTypes = entityToEffects.get(livingEntity);
+        } else {
+            statusEffectTypes = new ArrayList<>();
+        }
+
+        statusEffectTypes.add(statusEffectType);
+
+        entityToEffects.put(livingEntity, statusEffectTypes);
+    }
+
+    public static void removeStatus(LivingEntity livingEntity, StatusEffectType statusEffectType) {
+        if (!entityToEffects.containsKey(livingEntity)) return;
+
+        List<StatusEffectType> statusEffectTypes = entityToEffects.get(livingEntity);
+
+        statusEffectTypes.remove(statusEffectType);
+
+        if (statusEffectTypes.isEmpty()) {
+            entityToEffects.remove(livingEntity);
+        }
+    }
 
     public static boolean isSilenced(LivingEntity livingEntity) {
-        return silenced.contains(livingEntity);
-    }
+        if (!entityToEffects.containsKey(livingEntity)) return false;
 
-    public static boolean setSilenced(LivingEntity livingEntity) {
-        return silenced.add(livingEntity);
-    }
+        List<StatusEffectType> statusEffectTypes = entityToEffects.get(livingEntity);
 
-    public static boolean removeSilenced(LivingEntity livingEntity) {
-        return silenced.remove(livingEntity);
+        if (statusEffectTypes.contains(StatusEffectType.STUN)) {
+            if (livingEntity instanceof Player) {
+                Player player = (Player) livingEntity;
+                player.sendTitle("", ChatColor.RED + "Stunned..", 0, 20, 0);
+            }
+
+            return true;
+        } else if (statusEffectTypes.contains(StatusEffectType.SILENCE)) {
+            if (livingEntity instanceof Player) {
+                Player player = (Player) livingEntity;
+                player.sendTitle("", ChatColor.RED + "Silenced..", 0, 20, 0);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     public static boolean isDisarmed(LivingEntity livingEntity) {
-        return disarmed.contains(livingEntity);
+        if (!entityToEffects.containsKey(livingEntity)) return false;
+
+        List<StatusEffectType> statusEffectTypes = entityToEffects.get(livingEntity);
+
+        if (statusEffectTypes.contains(StatusEffectType.STUN)) {
+            if (livingEntity instanceof Player) {
+                Player player = (Player) livingEntity;
+                player.sendTitle("", ChatColor.RED + "Stunned..", 0, 20, 0);
+            }
+
+            return true;
+        } else if (statusEffectTypes.contains(StatusEffectType.DISARM)) {
+            if (livingEntity instanceof Player) {
+                Player player = (Player) livingEntity;
+                player.sendTitle("", ChatColor.RED + "Disarmed..", 0, 20, 0);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
-    public static boolean setDisarmed(LivingEntity livingEntity) {
-        return disarmed.add(livingEntity);
-    }
+    public static boolean isRooted(LivingEntity livingEntity) {
+        if (!entityToEffects.containsKey(livingEntity)) return false;
 
-    public static boolean removeDisarmed(LivingEntity livingEntity) {
-        return disarmed.remove(livingEntity);
-    }
+        List<StatusEffectType> statusEffectTypes = entityToEffects.get(livingEntity);
 
-    public static boolean isRootedY(LivingEntity livingEntity) {
-        if (!(livingEntity instanceof Player)) return false;
+        if (statusEffectTypes.contains(StatusEffectType.STUN)) {
+            if (livingEntity instanceof Player) {
+                Player player = (Player) livingEntity;
+                player.sendTitle("", ChatColor.RED + "Stunned..", 0, 20, 0);
+            }
 
-        return rootedY.contains(livingEntity);
-    }
+            return true;
+        } else if (statusEffectTypes.contains(StatusEffectType.ROOT)) {
+            if (livingEntity instanceof Player) {
+                Player player = (Player) livingEntity;
+                player.sendTitle("", ChatColor.RED + "Rooted..", 0, 20, 0);
+            }
 
-    public static boolean isRootedXZ(LivingEntity livingEntity) {
-        if (!(livingEntity instanceof Player)) return false;
+            return true;
+        }
 
-        return rootedXZ.contains(livingEntity);
-    }
-
-    public static boolean setRooted(LivingEntity livingEntity, boolean lockY) {
-        if (!(livingEntity instanceof Player)) return false;
-
-        if (lockY) rootedY.add((Player) livingEntity);
-        return rootedXZ.add((Player) livingEntity);
-    }
-
-    public static boolean removeRooted(LivingEntity livingEntity) {
-        if (!(livingEntity instanceof Player)) return false;
-
-        rootedY.remove(livingEntity);
-        return rootedXZ.remove(livingEntity);
+        return false;
     }
 }

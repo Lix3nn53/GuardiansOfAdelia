@@ -3,7 +3,6 @@ package io.github.lix3nn53.guardiansofadelia.events;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,7 +25,7 @@ public class MyPlayerMoveEvent implements Listener {
             TriggerListener.onPlayerLandGround(player);
         }
 
-        boolean rootedXZ = StatusEffectManager.isRootedXZ(player);
+        boolean rootedXZ = StatusEffectManager.isRooted(player);
 
         if (rootedXZ) {
             Location from = event.getFrom();
@@ -42,18 +41,16 @@ public class MyPlayerMoveEvent implements Listener {
 
             if (x != toX || z != toZ) {
                 event.setCancelled(true);
-                player.sendTitle("", ChatColor.RED + "Rooted..", 0, 20, 0);
                 return;
             }
 
-            boolean rootedY = StatusEffectManager.isRootedY(player);
-            if (onGround && rootedY) {
+            // boolean rootedY = StatusEffectManager.isRootedY(player);
+            if (onGround) {
                 double y = from.getY();
                 double toY = to.getY();
 
                 if (y != toY) {
                     event.setCancelled(true);
-                    player.sendTitle("", ChatColor.RED + "Rooted..", 0, 20, 0);
                 }
             }
         }
