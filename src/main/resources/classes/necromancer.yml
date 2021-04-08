@@ -158,7 +158,8 @@ skillTwo:
           componentType: "CompanionsOfCasterTargetMechanic"
         child3:
           componentType: "PotionEffectMechanic"
-          potionEffectType: "SLOW"
+          potionEffectType:
+            - "SLOW"
           tickList:
             - 60
             - 65
@@ -179,7 +180,8 @@ skillTwo:
             max: 15
             child1:
               componentType: "PotionEffectMechanic"
-              potionEffectType: "SPEED"
+              potionEffectType:
+                - "SPEED"
               tickList:
                 - 60
                 - 70

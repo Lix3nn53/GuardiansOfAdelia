@@ -1,6 +1,5 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.utilities.math.MatrixHelper;
-import io.github.lix3nn53.guardiansofadelia.utilities.math.RotationHelper;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileUtil;
 import org.bukkit.util.Vector;
 
 import java.sql.SQLException;
@@ -15,6 +14,19 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException, SQLException {
+        Vector dir = new Vector(8, 8, 8);
+
+        int angle = 360;
+
+        int amount = 3;
+
+        ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount);
+
+        for (Vector d : dirs) {
+            System.out.println("result: " + d);
+        }
+
+        /*
         Vector vector = new Vector(8, 8, 8);
 
         Vector[] cubeCorners = new Vector[8];
@@ -107,7 +119,7 @@ public class Test {
             }
         }
 
-        System.out.println("result: " + result);
+        System.out.println("result: " + result);*/
 
         /*int maxStatValue = GearLevel.NINE.getMaxStatValue(true, true);
         int maxStatValuee = GearLevel.NINE.getMaxStatValue(true, false);

@@ -243,7 +243,8 @@ skillThree:
     componentType: "SelfTarget"
     child1:
       componentType: "PotionEffectMechanic"
-      potionEffectType: "LEVITATION"
+      potionEffectType:
+        - "LEVITATION"
       tickList:
         - 80
         - 80
@@ -460,7 +461,7 @@ skillPassive:
           componentType: "ValueCondition"
           key: "darkaura"
           minValue: 0
-          maxValue: 10
+          maxValue: 9
           checkCasterOnly: true
           child1:
             componentType: "SelfTarget"
@@ -576,7 +577,8 @@ skillUltimate:
               offsetY: 1
           child2:
             componentType: "PotionEffectMechanic"
-            potionEffectType: "SLOW"
+            potionEffectType:
+              - "SLOW"
             tickList:
               - 40
               - 40

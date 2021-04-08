@@ -43,6 +43,7 @@ public class ProjectileMechanic extends MechanicComponent {
     private final double height;
     private final double speed;
     private final List<Integer> amountList;
+    private final String amountValueKey;
     private final double angle;
     private final double upward;
     private final double range;
@@ -158,6 +159,7 @@ public class ProjectileMechanic extends MechanicComponent {
         spreadType = SpreadType.valueOf(configurationSection.getString("spreadType"));
         speed = configurationSection.getDouble("speed");
         amountList = configurationSection.getIntegerList("amountList");
+        amountValueKey = configurationSection.getString("amountValueKey");
         angle = configurationSection.getDouble("angle");
         range = configurationSection.getDouble("range");
         mustHitToWork = configurationSection.getBoolean("mustHitToWork");
@@ -220,8 +222,12 @@ public class ProjectileMechanic extends MechanicComponent {
         int i = 0;
         for (LivingEntity target : targets) {
             // Apply the spread type
+            int amount = amountList.get(skillLevel - 1);
+            if (amountValueKey != null) {
+                amount += SkillDataManager.getValue(caster, amountValueKey);
+            }
             if (spreadType.equals(SpreadType.RAIN)) {
-                ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amountList.get(skillLevel - 1));
+                ArrayList<Location> locs = ProjectileUtil.calcRain(target.getLocation(), radius, height, amount);
 
                 for (Location loc : locs) {
                     Projectile p = caster.launchProjectile(Arrow.class);
@@ -268,7 +274,13 @@ public class ProjectileMechanic extends MechanicComponent {
                     looking.multiply(forward).add(normal.multiply(right));
                 }*/
 
-                ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amountList.get(skillLevel - 1));
+                ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount);
+                if (caster instanceof Player) {
+                    Player player = (Player) caster;
+                    for (Vector d : dirs) {
+                        player.sendMessage(d.toString());
+                    }
+                }
                 for (Vector d : dirs) {
                     Projectile projectile = target.launchProjectile(projectileType);
 
@@ -318,7 +330,7 @@ public class ProjectileMechanic extends MechanicComponent {
                         }
                     }*/
 
-                    projectile.setVelocity(d.multiply(speed));
+                    projectile.setVelocity(d.clone().multiply(speed));
                     projectiles.add(projectile);
 
                     if (disguiseMaterial.isPresent()) {
@@ -349,6 +361,11 @@ public class ProjectileMechanic extends MechanicComponent {
         int delayTicks = (int) Math.ceil(range / Math.abs(speed));
         if (projectileType.equals(ShulkerBullet.class)) {
             delayTicks = delayTicks * 10;
+        }
+
+        if (caster instanceof Player) {
+            Player player = (Player) caster;
+            player.sendMessage("projectiles s: " + projectiles.size());
         }
 
         ProjectileListener.onSkillProjectileShoot(projectiles, this, skillLevel, delayTicks);

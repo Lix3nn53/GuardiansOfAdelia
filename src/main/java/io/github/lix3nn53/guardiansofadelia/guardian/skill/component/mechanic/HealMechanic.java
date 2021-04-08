@@ -79,7 +79,9 @@ public class HealMechanic extends MechanicComponent {
             }
             if (multiplyWithValue != null) {
                 int value = SkillDataManager.getValue(caster, multiplyWithValue);
-                healAmount *= value;
+                if (value > 0) {
+                    healAmount *= value;
+                }
             }
 
             if (healAmount <= 0) {

@@ -78,7 +78,9 @@ public class DamageMechanic extends MechanicComponent {
 
         if (multiplyWithValue != null) {
             int value = SkillDataManager.getValue(caster, multiplyWithValue);
-            calcDamage *= value;
+            if (value > 0) {
+                calcDamage *= value;
+            }
         }
 
         if (calcDamage > 0) {

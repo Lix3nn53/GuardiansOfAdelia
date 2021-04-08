@@ -325,7 +325,8 @@ skillThree:
               - 1
           child2:
             componentType: "PotionEffectMechanic"
-            potionEffectType: "SLOW"
+            potionEffectType:
+              - "SLOW"
             tickList:
               - 40
               - 40

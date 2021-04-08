@@ -8,8 +8,6 @@ import java.util.ArrayList;
 public class ProjectileUtil {
 
     private static final Vector X_VEC = new Vector(1, 0, 0);
-    private static final double DEGREE_TO_RAD = Math.PI / 180;
-    private static final Vector vel = new Vector();
 
 
     /**
@@ -31,7 +29,7 @@ public class ProjectileUtil {
         ArrayList<Vector> list = new ArrayList<>();
 
         // One goes straight if odd amount
-        if (amount % 2 == 1) {
+        if (amount == 1) {
             list.add(dir);
             amount--;
         }
@@ -44,39 +42,40 @@ public class ProjectileUtil {
         Vector base = dir.clone();
         base.setY(0);
         base.normalize();
-        final Vector baseVelocity = vel.clone();
-        baseVelocity.setX(1);
-        baseVelocity.setY(0);
-        baseVelocity.setZ(0);
 
         // Get the vertical angle
         double vBaseAngle = Math.acos(Math.max(-1, Math.min(base.dot(dir), 1)));
         if (dir.getY() < 0) {
             vBaseAngle = -vBaseAngle;
         }
-        double hAngle = Math.acos(Math.max(-1, Math.min(1, base.dot(X_VEC)))) / DEGREE_TO_RAD;
+        double hAngle = Math.toDegrees(Math.acos(Math.max(-1, Math.min(1, base.dot(X_VEC)))));
+        System.out.println("hAngle: " + hAngle);
         if (dir.getZ() < 0) {
             hAngle = -hAngle;
         }
 
         // Calculate directions
-        double angleIncrement = angle / (amount - 1);
-        for (int i = 0; i < amount / 2; i++) {
-            for (int direction = -1; direction <= 1; direction += 2) {
-                // Initial calculations
-                double bonusAngle = angle / 2 * direction - angleIncrement * i * direction;
-                double totalAngle = hAngle + bonusAngle;
-                double vAngle = vBaseAngle * Math.cos(bonusAngle * DEGREE_TO_RAD);
-                double x = Math.cos(vAngle);
+        double angleIncrement = angle / amount;
+        System.out.println("angleIncrement: " + angleIncrement);
+        if (amount % 2 == 1) {
+            angle += angleIncrement;
+        }
+        for (int i = 0; i < amount; i++) {
+            // Initial calculations
+            double bonusAngle = angle / 2 - angleIncrement * i;
+            System.out.println("bonusAngle: " + bonusAngle);
+            double totalAngle = hAngle + bonusAngle;
+            System.out.println("totalAngle" + totalAngle);
+            double vAngle = vBaseAngle * Math.cos(Math.toRadians(bonusAngle));
+            double x = Math.cos(vAngle);
 
-                // Get the velocity
-                baseVelocity.setX(x * Math.cos(totalAngle * DEGREE_TO_RAD));
-                baseVelocity.setY(Math.sin(vAngle));
-                baseVelocity.setZ(x * Math.sin(totalAngle * DEGREE_TO_RAD));
+            // Get the velocity
+            double vx = x * Math.cos(Math.toRadians(totalAngle));
+            double vy = Math.sin(vAngle);
+            double vz = x * Math.sin(Math.toRadians(totalAngle));
 
-                // Launch the projectile
-                list.add(baseVelocity.clone());
-            }
+            // Launch the projectile
+            list.add(new Vector(vx, vy, vz));
         }
 
         return list;

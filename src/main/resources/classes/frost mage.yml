@@ -99,7 +99,8 @@ skillOne:
             - 2.2
         child2:
           componentType: "PotionEffectMechanic"
-          potionEffectType: "SLOW"
+          potionEffectType:
+            - "SLOW"
           tickList:
             - 40
             - 50
@@ -261,7 +262,8 @@ skillTwo:
               - 2.2
           child2:
             componentType: "PotionEffectMechanic"
-            potionEffectType: "SLOW"
+            potionEffectType:
+              - "SLOW"
             tickList:
               - 40
               - 40
@@ -576,7 +578,8 @@ skillUltimate:
             dustSize: 2
           child1:
             componentType: "PotionEffectMechanic"
-            potionEffectType: "SLOW"
+            potionEffectType:
+              - "SLOW"
             tickList:
               - 40
               - 40
