@@ -149,7 +149,7 @@ public class HealMechanic extends MechanicComponent {
                 String lore = ChatColor.GREEN + "Heal: " + healPercentList.get(skillLevel) + "%";
 
                 if (multiplyWithValue != null) {
-                    lore = lore + "x[" + multiplyWithValue + "]";
+                    lore = lore + " x[" + multiplyWithValue + "]";
                 }
 
                 additions.add(lore);
@@ -157,7 +157,7 @@ public class HealMechanic extends MechanicComponent {
                 String lore = ChatColor.GREEN + "Heal: " + healPercentList.get(skillLevel - 1) + "%";
 
                 if (multiplyWithValue != null) {
-                    lore = lore + "x[" + multiplyWithValue + "]";
+                    lore = lore + " x[" + multiplyWithValue + "]";
                 }
 
                 additions.add(lore);
@@ -166,8 +166,7 @@ public class HealMechanic extends MechanicComponent {
                 String lore2 = healPercentList.get(skillLevel) + "%";
 
                 if (multiplyWithValue != null) {
-                    lore1 = lore1 + "x[" + multiplyWithValue + "]";
-                    lore2 = lore2 + "x[" + multiplyWithValue + "]";
+                    lore2 = lore2 + " x[" + multiplyWithValue + "]";
                 }
 
                 additions.add(ChatColor.GREEN + lore1 + " -> " + lore2);

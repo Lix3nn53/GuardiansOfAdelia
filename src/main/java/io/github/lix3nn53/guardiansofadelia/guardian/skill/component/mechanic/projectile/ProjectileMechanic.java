@@ -437,11 +437,29 @@ public class ProjectileMechanic extends MechanicComponent {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {
-            additions.add(ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel));
+            String s = ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel);
+
+            if (amountValueKey != null) {
+                s += " x[" + amountValueKey + "]";
+            }
+
+            additions.add(s);
         } else if (skillLevel == amountList.size()) {
-            additions.add(ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel - 1));
+            String s = ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel - 1);
+
+            if (amountValueKey != null) {
+                s += " x[" + amountValueKey + "]";
+            }
+
+            additions.add(s);
         } else {
-            additions.add(ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel - 1) + " -> " + amountList.get(skillLevel));
+            String s = ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel - 1) + " -> " + amountList.get(skillLevel);
+
+            if (amountValueKey != null) {
+                s += " x[" + amountValueKey + "]";
+            }
+
+            additions.add(s);
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }

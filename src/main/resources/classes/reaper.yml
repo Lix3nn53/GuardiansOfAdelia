@@ -28,12 +28,13 @@ hasDefaultOffhand: true
 isDefaultOffhandWeapon: true
 actionBarInfoType: "VARIABLE"
 actionBarIcon: "&b⏺"
-actionBarKey: "soulscollected"
+actionBarKey: "souls"
 skillOne:
-  name: "asdasdsda"
-  customModelData: 3
+  name: "Consuming Strike"
+  customModelData: 12
   description:
-    - "Deal damage to enemies in front of you."
+    - "Deal damage to a single enemy and heal yourself."
+    - "Consumes souls to increase heal amount."
   manaCosts:
     - 5
     - 7
@@ -85,14 +86,14 @@ skillOne:
         child1:
           componentType: "HealMechanic"
           healPercentList:
-            - 0.05
-            - 0.1
-            - 0.15
-            - 0.2
-          multiplyWithValue: "soulscollected"
+            - 0.06
+            - 0.08
+            - 0.10
+            - 0.12
+          multiplyWithValue: "souls"
       child3:
         componentType: "ValueSetMechanic"
-        key: "soulscollected"
+        key: "souls"
         values:
           - 0
           - 0
@@ -102,11 +103,12 @@ skillOne:
         componentType: "SoundMechanic"
         goaSound: "SKILL_LIGHTNING_NORMAL"
 skillTwo:
-  name: "asdasdasd"
-  customModelData: 46
+  name: "Soul Spike"
+  customModelData: 55
   description:
-    - "Shoot a flame-burst that launches"
-    - "a target into the sky"
+    - "Shoot a projectile that damages and roots target on hit."
+    - "Gain 2 soul stacks per hit."
+    - "Consumes souls to increase amount of projectiles."
   manaCosts:
     - 1
     - 1
@@ -134,13 +136,11 @@ skillTwo:
       mustHitToWork: true
       particle:
         arrangementType: "FillHemisphere"
-        particleType: "REDSTONE"
-        dustColor: 10040319
-        dustSize: 2
+        particleType: "SOUL_FIRE_FLAME"
         radius: 0.5
         amount: 5
       isProjectileInvisible: false
-      amountValueKey: "soulscollected"
+      amountValueKey: "souls"
       child1:
         componentType: "FilterCurrentTargets"
         allies: false
@@ -149,7 +149,7 @@ skillTwo:
         max: 10
         child1:
           componentType: "DamageMechanic"
-          damageType: "FIRE"
+          damageType: "LIGHTNING"
           damageList:
             - 10
             - 40
@@ -165,29 +165,36 @@ skillTwo:
           statusEffectTypes:
             - "ROOT"
           durations:
+            - 30
             - 40
             - 50
-            - 60
             - 70
         child3:
           componentType: "SelfTarget"
           child1:
-            componentType: "ValueCondition"
-            key: "soulscollected"
-            minValue: 0
-            maxValue: 6
-            checkCasterOnly: true
+            componentType: "ChangeSkillLevelMechanic"
+            index: 3
             child1:
-              componentType: "ValueAddMechanic"
-              key: "soulscollected"
-              valueToAdd:
-                - 1
-                - 1
-                - 1
-                - 1
+              componentType: "ValueCondition"
+              key: "souls"
+              minValue: 0
+              maxValueList:
+                - 3
+                - 4
+                - 5
+                - 6
+              checkCasterOnly: true
+              child1:
+                componentType: "ValueAddMechanic"
+                key: "souls"
+                valueToAdd:
+                  - 2
+                  - 2
+                  - 2
+                  - 2
     child2:
       componentType: "ValueSetMechanic"
-      key: "soulscollected"
+      key: "souls"
       values:
         - 0
         - 0
@@ -197,11 +204,12 @@ skillTwo:
       componentType: "SoundMechanic"
       goaSound: "SKILL_FIRE_SLASH"
 skillThree:
-  name: "sadsadasdas"
+  name: "Realm of Darkness"
   customModelData: 40
   description:
-    - "Place a flag at your location that"
-    - "gives damage buff to nearby allies"
+    - "Become invincible and gain movement speed bonus."
+    - "Effect is canceled if you cast spell or attack an enemy."
+    - "Consumes souls to increase effect duration."
   manaCosts:
     - 20
     - 24
@@ -221,36 +229,39 @@ skillThree:
         - "INVISIBILITY"
         - "JUMP"
       tickList:
-        - 80
-        - 80
-        - 80
-        - 80
+        - 20
+        - 25
+        - 30
+        - 40
       amplifierList:
         - 1
         - 1
         - 1
         - 1
+      multiplyDurationValue: "souls"
     child2:
       componentType: "PotionEffectMechanic"
       potionEffectType:
         - "SPEED"
       tickList:
-        - 80
-        - 80
-        - 80
-        - 80
+        - 20
+        - 25
+        - 30
+        - 40
       amplifierList:
         - 1
         - 1
         - 1
         - 1
+      multiplyDurationValue: "souls"
     child3:
       componentType: "InvincibleMechanic"
       ticks:
-        - 80
-        - 80
-        - 80
-        - 80
+        - 20
+        - 25
+        - 30
+        - 40
+      multiplyDurationValue: "souls"
     child4:
       componentType: "ParticleAnimationMechanic"
       particle:
@@ -260,31 +271,46 @@ skillThree:
         dustSize: 2
         radius: 1.6
         amount: 12
-      frequency: 4
+      frequency: 2
       data1:
         - 1
         - 1
         - 1
         - 1
       repeatAmount:
-        - 21
-        - 21
-        - 21
-        - 21
+        - 5
+        - 6
+        - 7
+        - 10
       upwardIncrease: 0.1
       resetY: true
       rotation: true
       yawIncrease: 30
       pitchIncrease: 10
+      playback: true
+      multiplyDurationValue: "souls"
     child5:
       componentType: "SoundMechanic"
       goaSound: "SKILL_BUFF"
+    child6:
+      componentType: "ValueSetMechanic"
+      key: "souls"
+      values:
+        - 0
+        - 0
+        - 0
+        - 0
 skillPassive:
-  name: "asdasdasd"
-  customModelData: 7
+  name: "Soul Collector"
+  customModelData: 38
   description:
-    - "If you take damage that leaves you with less than 15% health,"
-    - "unleash your rage and gain movement speed and jump boost."
+    - "Gain soul stack on normal attack to enemies."
+    - "Your active skills consumes souls for bonus effects."
+    - ""
+    - "Level 1: Max 4 souls"
+    - "Level 2: Max 5 souls"
+    - "Level 3: Max 6 souls"
+    - "Level 4: Max 7 souls"
   manaCosts:
     - 0
     - 0
@@ -306,26 +332,31 @@ skillPassive:
         - 1
       child1:
         componentType: "ValueCondition"
-        key: "soulscollected"
+        key: "souls"
         minValue: 0
-        maxValue: 6
+        maxValueList:
+          - 3
+          - 4
+          - 5
+          - 6
         checkCasterOnly: true
         child1:
           componentType: "SelfTarget"
           child1:
             componentType: "ValueAddMechanic"
-            key: "soulscollected"
+            key: "souls"
             valueToAdd:
               - 1
               - 1
               - 1
               - 1
 skillUltimate:
-  name: "asdasdsa"
-  customModelData: 44
+  name: "Assassin's Execution"
+  customModelData: 58
   description:
-    - "Jump forward into the air. When you land deal"
-    - "damage and launch nearby enemies into the sky."
+    - "Stun yourself and a single enemy."
+    - "After the duration of stun end, deal damage to enemy."
+    - "Consumes souls to increase damage."
   manaCosts:
     - 5
     - 5
@@ -339,38 +370,6 @@ skillUltimate:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "StatusEffectMechanic"
-      statusEffectTypes:
-        - "STUN"
-      durations:
-        - 60
-        - 60
-        - 60
-        - 60
-    child2:
-      componentType: "ParticleAnimationMechanic"
-      particle:
-        arrangementType: "DrawCylinder"
-        particleType: "SOUL_FIRE_FLAME"
-        radius: 1.6
-        amount: 12
-      frequency: 4
-      data1:
-        - 1
-        - 1
-        - 1
-        - 1
-      repeatAmount:
-        - 15
-        - 15
-        - 15
-        - 15
-      upwardIncrease: 0.1
-      resetY: true
-      rotation: true
-      yawIncrease: 30
-      pitchIncrease: 10
-    child3:
       componentType: "SingleTarget"
       allies: false
       enemy: true
@@ -386,6 +385,40 @@ skillUltimate:
         particleType: "SOUL_FIRE_FLAME"
         gap: 0.2
       child1:
+        componentType: "SelfTarget"
+        child1:
+          componentType: "StatusEffectMechanic"
+          statusEffectTypes:
+            - "STUN"
+          durations:
+            - 60
+            - 60
+            - 60
+            - 60
+        child2:
+          componentType: "ParticleAnimationMechanic"
+          particle:
+            arrangementType: "DrawCylinder"
+            particleType: "SOUL_FIRE_FLAME"
+            radius: 1.6
+            amount: 12
+          frequency: 4
+          data1:
+            - 1
+            - 1
+            - 1
+            - 1
+          repeatAmount:
+            - 15
+            - 15
+            - 15
+            - 15
+          upwardIncrease: 0.1
+          resetY: true
+          rotation: true
+          yawIncrease: 30
+          pitchIncrease: 10
+      child2:
         componentType: "HologramMechanic"
         helmetType: "NETHERITE_SWORD"
         customModelData: 3
@@ -398,7 +431,7 @@ skillUltimate:
         forward: 1.5
         anglex: 0.53
         anglez: 0.78
-      child2:
+      child3:
         componentType: "HologramMechanic"
         helmetType: "NETHERITE_SWORD"
         customModelData: 3
@@ -411,7 +444,7 @@ skillUltimate:
         forward: -1.5
         anglex: -0.53
         anglez: -0.78
-      child3:
+      child4:
         componentType: "StatusEffectMechanic"
         statusEffectTypes:
           - "STUN"
@@ -420,7 +453,7 @@ skillUltimate:
           - 60
           - 60
           - 60
-      child4:
+      child5:
         componentType: "ParticleAnimationMechanic"
         particle:
           arrangementType: "DrawCylinder"
@@ -443,7 +476,7 @@ skillUltimate:
         rotation: true
         yawIncrease: 30
         pitchIncrease: 10
-      child5:
+      child6:
         componentType: "DelayMechanic"
         ticks: 60
         child1:
@@ -459,7 +492,7 @@ skillUltimate:
             - 1.6
             - 1.8
             - 2.2
-          multiplyWithValue: "soulscollected"
+          multiplyWithValue: "souls"
         child2:
           componentType: "HologramMechanic"
           helmetType: "NETHERITE_SWORD"
@@ -484,7 +517,7 @@ skillUltimate:
           anglez: -0.78
         child4:
           componentType: "ValueSetMechanic"
-          key: "soulscollected"
+          key: "souls"
           values:
             - 0
             - 0

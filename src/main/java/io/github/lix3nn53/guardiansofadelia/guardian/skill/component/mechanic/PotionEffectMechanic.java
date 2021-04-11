@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -15,6 +16,8 @@ public class PotionEffectMechanic extends MechanicComponent {
     private final List<PotionEffectType> potionEffectTypes = new ArrayList<>();
     private final List<Integer> tickList;
     private final List<Integer> amplifierList;
+
+    private final String multiplyDurationValue;
 
     public PotionEffectMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -38,16 +41,27 @@ public class PotionEffectMechanic extends MechanicComponent {
         }
         this.tickList = configurationSection.getIntegerList("tickList");
         this.amplifierList = configurationSection.getIntegerList("amplifierList");
+
+        this.multiplyDurationValue = configurationSection.contains("multiplyDurationValue") ? configurationSection.getString("multiplyDurationValue") : null;
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
+        int ticks = tickList.get(skillLevel - 1);
         for (PotionEffectType potionEffectType : potionEffectTypes) {
-            PotionEffect potionEffect = new PotionEffect(potionEffectType, tickList.get(skillLevel - 1), amplifierList.get(skillLevel - 1));
-
             for (LivingEntity target : targets) {
+                int ticksCurrent = ticks;
+                if (multiplyDurationValue != null) {
+                    int value = SkillDataManager.getValue(target, multiplyDurationValue);
+                    if (value > 0) {
+                        ticksCurrent *= value;
+                    }
+                }
+
+                PotionEffect potionEffect = new PotionEffect(potionEffectType, ticksCurrent, amplifierList.get(skillLevel - 1));
+
                 target.addPotionEffect(potionEffect);
             }
         }
@@ -63,13 +77,31 @@ public class PotionEffectMechanic extends MechanicComponent {
             String effectString = getEffectString(potionEffectType);
             if (effectString != null) {
                 if (skillLevel == 0) {
-                    additions.add(effectString + " duration: " + (tickList.get(skillLevel) / 20));
+                    String s = effectString + " duration: " + (tickList.get(skillLevel) / 20);
+
+                    if (multiplyDurationValue != null) {
+                        s += " x[" + multiplyDurationValue + "]";
+                    }
+
+                    additions.add(s);
                     additions.add(effectString + " tier: " + amplifierList.get(skillLevel));
                 } else if (skillLevel == tickList.size()) {
-                    additions.add(effectString + " duration: " + (tickList.get(skillLevel - 1) / 20));
+                    String s = effectString + " duration: " + (tickList.get(skillLevel - 1) / 20);
+
+                    if (multiplyDurationValue != null) {
+                        s += " x[" + multiplyDurationValue + "]";
+                    }
+
+                    additions.add(s);
                     additions.add(effectString + " tier: " + amplifierList.get(skillLevel - 1));
                 } else {
-                    additions.add(effectString + " duration: " + (tickList.get(skillLevel - 1) / 20) + " -> " + (tickList.get(skillLevel) / 20));
+                    String s = effectString + " duration: " + (tickList.get(skillLevel - 1) / 20) + " -> " + (tickList.get(skillLevel) / 20);
+
+                    if (multiplyDurationValue != null) {
+                        s += " x[" + multiplyDurationValue + "]";
+                    }
+
+                    additions.add(s);
                     additions.add(effectString + " tier: " + amplifierList.get(skillLevel - 1) + " -> " + amplifierList.get(skillLevel));
                 }
             }

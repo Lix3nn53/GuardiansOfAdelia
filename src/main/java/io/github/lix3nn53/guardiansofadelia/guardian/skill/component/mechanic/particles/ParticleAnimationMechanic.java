@@ -32,6 +32,8 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
 
     private final boolean dontStop; // Run animation until a condition fails
 
+    private final String multiplyDurationValue;
+
     public ParticleAnimationMechanic(ConfigurationSection configurationSection) {
         super(configurationSection);
 
@@ -57,14 +59,19 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
         this.flagIsSet = configurationSection.contains("flagIsSet") && configurationSection.getBoolean("flagIsSet");
 
         this.dontStop = configurationSection.contains("dontStop") && configurationSection.getBoolean("dontStop");
+
+        this.multiplyDurationValue = configurationSection.contains("multiplyDurationValue") ? configurationSection.getString("multiplyDurationValue") : null;
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
-        int repeatAmountCurrent = repeatAmount != null ? repeatAmount.get(skillLevel - 1) : 0;
-        for (LivingEntity ent : targets) {
+        int repeat = repeatAmount != null ? repeatAmount.get(skillLevel - 1) : 0;
+        for (LivingEntity target : targets) {
+            int value = SkillDataManager.getValue(target, multiplyDurationValue);
+            int repeatAmountCurrent = value > 0 ? repeat * value : repeat;
+
             new BukkitRunnable() {
 
                 int counter = 0;
@@ -79,7 +86,7 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
                     double currentUpward = upward + (upwardIncrease * counter);
 
                     // Play particle
-                    playParticle(ent, skillLevel, centerEye, resetY, forwardList, currentUpward, right, dataIndexToDataList, particleArrangement, rotation,
+                    playParticle(target, skillLevel, centerEye, resetY, forwardList, currentUpward, right, dataIndexToDataList, particleArrangement, rotation,
                             rotationMatchEye, currentYaw, currentPitch, offsetx, offsety, offsetz, dataIncreaseList, counter);
 
                     if (this.playingBack) {
@@ -108,7 +115,7 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
                     }
 
                     if (valueConditionKey != null) {
-                        int value = SkillDataManager.getValue(ent, valueConditionKey);
+                        int value = SkillDataManager.getValue(target, valueConditionKey);
 
                         if (value < valueConditionMinValue || value > valueConditionMaxValue) {
                             cancel();
@@ -116,7 +123,7 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
                     }
 
                     if (flagConditionKey != null) {
-                        boolean b = SkillDataManager.hasFlag(ent, flagConditionKey);
+                        boolean b = SkillDataManager.hasFlag(target, flagConditionKey);
                         if (b != flagIsSet) {
                             cancel();
                         }

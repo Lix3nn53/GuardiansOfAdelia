@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionCo
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,7 +13,10 @@ public class ValueCondition extends ConditionComponent {
 
     private final String key;
     private final int minValue;
+
     private final int maxValue;
+    private final List<Integer> maxValueList;
+
     private final boolean checkCasterOnly;
 
     public ValueCondition(ConfigurationSection configurationSection) {
@@ -26,8 +30,8 @@ public class ValueCondition extends ConditionComponent {
             configLoadError("minValue");
         }
 
-        if (!configurationSection.contains("maxValue")) {
-            configLoadError("maxValue");
+        if (!configurationSection.contains("maxValue") && !configurationSection.contains("maxValueList")) {
+            configLoadError("maxValue OR maxValueList");
         }
 
         if (configurationSection.contains("checkCasterOnly")) {
@@ -38,7 +42,9 @@ public class ValueCondition extends ConditionComponent {
 
         this.key = configurationSection.getString("key");
         this.minValue = configurationSection.getInt("minValue");
-        this.maxValue = configurationSection.getInt("maxValue");
+
+        this.maxValue = configurationSection.contains("maxValue") ? configurationSection.getInt("maxValue") : 0;
+        this.maxValueList = configurationSection.contains("maxValueList") ? configurationSection.getIntegerList("maxValueList") : new ArrayList<>();
     }
 
     @Override
@@ -46,17 +52,23 @@ public class ValueCondition extends ConditionComponent {
         if (targets.isEmpty()) return false;
 
         boolean success = false;
+
+        int currentMax = maxValue;
+        if (!maxValueList.isEmpty()) {
+            currentMax = maxValueList.get(skillLevel - 1);
+        }
+
         if (checkCasterOnly) {
             int value = SkillDataManager.getValue(caster, key);
 
-            if (value >= minValue && value <= maxValue) {
+            if (value >= minValue && value <= currentMax) {
                 success = executeChildren(caster, skillLevel, targets, castCounter) || success;
             }
         } else {
             for (LivingEntity target : targets) {
                 int value = SkillDataManager.getValue(target, key);
 
-                if (value >= minValue && value <= maxValue) {
+                if (value >= minValue && value <= currentMax) {
                     success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter) || success;
                 }
             }

@@ -41,8 +41,8 @@ public class DamageMechanic extends MechanicComponent {
 
         this.damageType = ElementType.valueOf(configurationSection.getString("damageType"));
         this.damageList = configurationSection.contains("damageList") ? configurationSection.getDoubleList("damageList") : new ArrayList<>();
-        this.damageMultiplyList = configurationSection.contains("damageMultiplyList") ? configurationSection.getDoubleList("damageMultiplyList") : new ArrayList<>();
 
+        this.damageMultiplyList = configurationSection.contains("damageMultiplyList") ? configurationSection.getDoubleList("damageMultiplyList") : new ArrayList<>();
     }
 
     @Override
@@ -107,7 +107,7 @@ public class DamageMechanic extends MechanicComponent {
                             (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
 
                     if (multiplyWithValue != null) {
-                        lore = lore + "x[" + multiplyWithValue + "]";
+                        lore = lore + " x[" + multiplyWithValue + "]";
                     }
 
                     additions.add(lore);
@@ -116,7 +116,7 @@ public class DamageMechanic extends MechanicComponent {
                             (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
 
                     if (multiplyWithValue != null) {
-                        lore = lore + "x[" + multiplyWithValue + "]";
+                        lore = lore + " x[" + multiplyWithValue + "]";
                     }
 
                     additions.add(lore);
@@ -127,8 +127,7 @@ public class DamageMechanic extends MechanicComponent {
                             (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
 
                     if (multiplyWithValue != null) {
-                        lore1 = lore1 + "x[" + multiplyWithValue + "]";
-                        lore2 = lore2 + "x[" + multiplyWithValue + "]";
+                        lore2 = lore2 + " x[" + multiplyWithValue + "]";
                     }
 
                     additions.add(lore1 + " -> " + lore2);
@@ -138,7 +137,7 @@ public class DamageMechanic extends MechanicComponent {
                     String lore = damageType.getFullName() + ": " + (int) (damageList.get(skillLevel) + 0.5);
 
                     if (multiplyWithValue != null) {
-                        lore = lore + "x[" + multiplyWithValue + "]";
+                        lore = lore + " x[" + multiplyWithValue + "]";
                     }
 
                     additions.add(lore);
@@ -146,7 +145,7 @@ public class DamageMechanic extends MechanicComponent {
                     String lore = damageType.getFullName() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5);
 
                     if (multiplyWithValue != null) {
-                        lore = lore + "x[" + multiplyWithValue + "]";
+                        lore = lore + " x[" + multiplyWithValue + "]";
                     }
 
                     additions.add(lore);
@@ -155,8 +154,7 @@ public class DamageMechanic extends MechanicComponent {
                     String lore2 = (int) (damageList.get(skillLevel) + 0.5) + "";
 
                     if (multiplyWithValue != null) {
-                        lore1 = lore1 + "x[" + multiplyWithValue + "]";
-                        lore2 = lore2 + "x[" + multiplyWithValue + "]";
+                        lore2 = lore2 + " x[" + multiplyWithValue + "]";
                     }
 
                     additions.add(lore1 + " -> " + lore2);
@@ -167,7 +165,7 @@ public class DamageMechanic extends MechanicComponent {
                 String lore = damageType.getFullName() + ": " + (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
 
                 if (multiplyWithValue != null) {
-                    lore = lore + "x[" + multiplyWithValue + "]";
+                    lore = lore + " x[" + multiplyWithValue + "]";
                 }
 
                 additions.add(lore);
@@ -175,7 +173,7 @@ public class DamageMechanic extends MechanicComponent {
                 String lore = damageType.getFullName() + ": " + (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
 
                 if (multiplyWithValue != null) {
-                    lore = lore + "x[" + multiplyWithValue + "]";
+                    lore = lore + " x[" + multiplyWithValue + "]";
                 }
 
                 additions.add(lore);
@@ -184,8 +182,7 @@ public class DamageMechanic extends MechanicComponent {
                 String lore2 = (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
 
                 if (multiplyWithValue != null) {
-                    lore1 = lore1 + "x[" + multiplyWithValue + "]";
-                    lore2 = lore2 + "x[" + multiplyWithValue + "]";
+                    lore2 = lore2 + " x[" + multiplyWithValue + "]";
                 }
 
                 additions.add(lore1 + " -> " + lore2);
