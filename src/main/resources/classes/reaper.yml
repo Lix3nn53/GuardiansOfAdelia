@@ -339,6 +339,38 @@ skillUltimate:
   trigger:
     componentType: "SelfTarget"
     child1:
+      componentType: "StatusEffectMechanic"
+      statusEffectTypes:
+        - "STUN"
+      durations:
+        - 60
+        - 60
+        - 60
+        - 60
+    child2:
+      componentType: "ParticleAnimationMechanic"
+      particle:
+        arrangementType: "DrawCylinder"
+        particleType: "SOUL_FIRE_FLAME"
+        radius: 1.6
+        amount: 12
+      frequency: 4
+      data1:
+        - 1
+        - 1
+        - 1
+        - 1
+      repeatAmount:
+        - 15
+        - 15
+        - 15
+        - 15
+      upwardIncrease: 0.1
+      resetY: true
+      rotation: true
+      yawIncrease: 30
+      pitchIncrease: 10
+    child3:
       componentType: "SingleTarget"
       allies: false
       enemy: true
@@ -350,42 +382,114 @@ skillUltimate:
         - 24
         - 24
         - 24
-      keepCurrent: true
-      addToBeginning: false
       particle:
         particleType: "SOUL_FIRE_FLAME"
         gap: 0.2
       child1:
-        componentType: "DamageMechanic"
-        damageType: "LIGHTNING"
-        damageList:
-          - 10
-          - 40
-          - 90
-          - 180
-        damageMultiplyList:
-          - 1.4
-          - 1.6
-          - 1.8
-          - 2.2
+        componentType: "HologramMechanic"
+        helmetType: "NETHERITE_SWORD"
+        customModelData: 3
+        durations:
+          - 55
+          - 55
+          - 55
+          - 55
+        upward: 2.5
+        forward: 1.5
+        anglex: 0.53
+        anglez: 0.78
       child2:
-        componentType: "SelfTarget"
-        child1:
-          componentType: "HealMechanic"
-          healPercentList:
-            - 0.05
-            - 0.1
-            - 0.15
-            - 0.2
-          multiplyWithValue: "soulscollected"
+        componentType: "HologramMechanic"
+        helmetType: "NETHERITE_SWORD"
+        customModelData: 3
+        durations:
+          - 55
+          - 55
+          - 55
+          - 55
+        upward: 2.5
+        forward: -1.5
+        anglex: -0.53
+        anglez: -0.78
       child3:
-        componentType: "ValueSetMechanic"
-        key: "soulscollected"
-        values:
-          - 0
-          - 0
-          - 0
-          - 0
+        componentType: "StatusEffectMechanic"
+        statusEffectTypes:
+          - "STUN"
+        durations:
+          - 60
+          - 60
+          - 60
+          - 60
       child4:
-        componentType: "SoundMechanic"
-        goaSound: "SKILL_LIGHTNING_NORMAL"
+        componentType: "ParticleAnimationMechanic"
+        particle:
+          arrangementType: "DrawCylinder"
+          particleType: "SOUL_FIRE_FLAME"
+          radius: 1.6
+          amount: 12
+        frequency: 4
+        data1:
+          - 1
+          - 1
+          - 1
+          - 1
+        repeatAmount:
+          - 15
+          - 15
+          - 15
+          - 15
+        upwardIncrease: 0.1
+        resetY: true
+        rotation: true
+        yawIncrease: 30
+        pitchIncrease: 10
+      child5:
+        componentType: "DelayMechanic"
+        ticks: 60
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "LIGHTNING"
+          damageList:
+            - 10
+            - 40
+            - 90
+            - 180
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
+          multiplyWithValue: "soulscollected"
+        child2:
+          componentType: "HologramMechanic"
+          helmetType: "NETHERITE_SWORD"
+          customModelData: 3
+          durations:
+            - 20
+            - 20
+            - 20
+            - 20
+          anglex: 0.53
+          anglez: 0.78
+        child3:
+          componentType: "HologramMechanic"
+          helmetType: "NETHERITE_SWORD"
+          customModelData: 3
+          durations:
+            - 20
+            - 20
+            - 20
+            - 20
+          anglex: -0.53
+          anglez: -0.78
+        child4:
+          componentType: "ValueSetMechanic"
+          key: "soulscollected"
+          values:
+            - 0
+            - 0
+            - 0
+            - 0
+        child5:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_LIGHTNING_NORMAL"

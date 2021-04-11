@@ -13,6 +13,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class HologramMechanic extends MechanicComponent {
     private final boolean MARKER;
     private final boolean SAVE;
     private final double speed;
+
+    private final Vector offset;
+    private final EulerAngle angle;
 
     public HologramMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -78,12 +82,19 @@ public class HologramMechanic extends MechanicComponent {
         } else {
             this.speed = 0;
         }
+        this.SAVE = configurationSection.contains("save") && configurationSection.getBoolean("save");
 
-        if (configurationSection.contains("save")) {
-            this.SAVE = configurationSection.getBoolean("save");
-        } else {
-            this.SAVE = false;
-        }
+        double upward = configurationSection.contains("upward") ? configurationSection.getDouble("upward") : 0;
+        double forward = configurationSection.contains("forward") ? configurationSection.getDouble("forward") : 0;
+        double right = configurationSection.contains("right") ? configurationSection.getDouble("right") : 0;
+
+        this.offset = new Vector(forward, upward, right);
+
+        double anglex = configurationSection.contains("anglex") ? configurationSection.getDouble("anglex") : 0;
+        double angley = configurationSection.contains("angley") ? configurationSection.getDouble("angley") : 0;
+        double anglez = configurationSection.contains("anglez") ? configurationSection.getDouble("anglez") : 0;
+
+        this.angle = new EulerAngle(anglex, angley, anglez);
     }
 
     /**
@@ -100,13 +111,14 @@ public class HologramMechanic extends MechanicComponent {
         List<LivingEntity> armorStandList = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            Location location = target.getLocation();
+            Location location = target.getLocation().add(this.offset);
             ArmorStand model = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
             model.setVisible(false);
             model.setInvulnerable(true);
             model.setSmall(SMALL);
             model.setGravity(GRAVITY);
             model.setMarker(MARKER);
+            model.setHeadPose(this.angle);
 
             if (HELMET != null) {
                 ItemStack itemStack = new ItemStack(HELMET);
