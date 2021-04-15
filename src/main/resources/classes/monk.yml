@@ -65,6 +65,11 @@ skillOne:
           - 24
           - 24
           - 24
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 16728064
+          dustSize: 2
+          gap: 0.2
         child1:
           componentType: "SoundMechanic"
           goaSound: "SKILL_FIRE_SLASH"
@@ -83,6 +88,11 @@ skillOne:
           - 24
           - 24
           - 24
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 16728064
+          dustSize: 2
+          gap: 0.2
         child1:
           componentType: "SoundMechanic"
           goaSound: "SKILL_FIRE_SLASH"
@@ -265,28 +275,5 @@ skillUltimate:
     - 40
     - 40
     - 40
-  trigger:
-    componentType: "SelfTarget"
-skillUltimate:
-  name: "Bear Trap"
-  customModelData: 35
-  description:
-    - "Place a trap that triggers when"
-    - "an enemy steps on it."
-    - "Stuns and marks the target when triggered."
-  manaCosts:
-    - 30
-    - 30
-    - 30
-    - 30
-    - 30
-    - 30
-  cooldowns:
-    - 35
-    - 33
-    - 31
-    - 29
-    - 27
-    - 25
   trigger:
     componentType: "SelfTarget"

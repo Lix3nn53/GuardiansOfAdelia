@@ -567,7 +567,7 @@ skillUltimate:
             casterOnly: true
             child1:
               componentType: "PushMechanic"
-              pushType: "FIXED"
+              pushType: "SCALED"
               speedList:
                 - -0.03
                 - -0.03

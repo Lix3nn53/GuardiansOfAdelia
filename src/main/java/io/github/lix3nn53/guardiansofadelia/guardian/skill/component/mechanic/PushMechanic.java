@@ -75,10 +75,12 @@ public class PushMechanic extends MechanicComponent {
             } else if (pushType.equals(PushType.INVERSE)) {
                 vel.multiply(speedList.get(skillLevel - 1));
             } else if (pushType.equals(PushType.FIXED)) {
-                vel.multiply(speedList.get(skillLevel - 1) * vel.length());
+                vel.multiply(speedList.get(skillLevel - 1) / vel.length());
             } else { // SCALED
-                vel.multiply(speedList.get(skillLevel - 1) * v);
+                vel.multiply(speedList.get(skillLevel - 1) * vel.length());
+                //vel.multiply(speedList.get(skillLevel - 1) * v);
             }
+
             target.setVelocity(vel);
         }
 
