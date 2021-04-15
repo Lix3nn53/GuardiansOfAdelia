@@ -112,6 +112,7 @@ public class LocationTarget extends TargetComponent {
         } else {
             additions.add(ChatColor.YELLOW + "Range: " + range.get(skillLevel - 1) + " -> " + range.get(skillLevel));
         }
+
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 }

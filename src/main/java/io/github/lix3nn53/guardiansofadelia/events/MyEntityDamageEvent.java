@@ -87,7 +87,7 @@ public class MyEntityDamageEvent implements Listener {
 
     private double getCustomNaturalDamage(EntityDamageEvent.DamageCause cause, LivingEntity entity) {
         double maxHealth = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-        if (cause.equals(EntityDamageEvent.DamageCause.FALL)) {
+        if (cause.equals(EntityDamageEvent.DamageCause.FALL) && entity instanceof Player) {
             float fallDistance = entity.getFallDistance();
 
             return (fallDistance - 3) * (maxHealth / 40); // Vanilla fall damage is 1 damage each block after the third
@@ -108,7 +108,7 @@ public class MyEntityDamageEvent implements Listener {
         } else if (cause.equals(EntityDamageEvent.DamageCause.CONTACT)) {
             return maxHealth / 50;
         }
-        return -1;
+        return 0;
     }
 
 }

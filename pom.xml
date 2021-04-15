@@ -166,5 +166,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/modules/NoteBlockAPI-1.6.1.1-SNAPSHOT.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>org.inventivetalent</groupId>
+            <artifactId>glowapi</artifactId>
+            <version>1.4.14-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/modules/GlowAPI_v1.4.14-SNAPSHOT1.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>

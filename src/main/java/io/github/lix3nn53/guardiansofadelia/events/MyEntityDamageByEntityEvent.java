@@ -40,7 +40,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -60,13 +59,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
     public void onEvent(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
 
-        if (damager instanceof LivingEntity) {
-            if (StatusEffectManager.isDisarmed((LivingEntity) damager)) {
-                event.setCancelled(true);
-                return;
-            }
-        }
-
         Entity target = event.getEntity();
         if (target.getType().equals(EntityType.ITEM_FRAME)) {
             event.setCancelled(true);
@@ -75,17 +67,16 @@ public class MyEntityDamageByEntityEvent implements Listener {
         boolean isSkill = false;
 
         ElementType damageType = null;
-        EntityDamageEvent.DamageCause damageCause = event.getCause();
         if (SkillUtils.isSkillDamage()) { //For own skill system
             isSkill = true;
             damageType = SkillUtils.getDamageType();
             SkillUtils.clearSkillDamage();
+        } else if (damager instanceof LivingEntity) { // check disarm status only if is not skill damage
+            if (StatusEffectManager.isDisarmed((LivingEntity) damager)) {
+                event.setCancelled(true);
+                return;
+            }
         }
-        // TODO Mob skill damage
-        /*else if (damageCause.equals(EntityDamageEvent.DamageCause.CUSTOM)) { //For mythic mobs
-            isSkill = true;
-            damageType = DamageMechanic.DamageType.MAGIC;
-        }*/
 
         // Disable vanilla knockback if isSkill
         if (isSkill) {
@@ -160,6 +151,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                     Player playerTarget = (Player) target;
                     LivingEntity damageSource = null;
+                    playerTarget.sendMessage("damager: " + damager.getType());
                     if (damager instanceof Projectile) { //projectile is attacker
                         Projectile projectile = (Projectile) damager;
                         ProjectileSource shooter = projectile.getShooter();
@@ -204,6 +196,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                                     if (MMManager.hasElementType(internalName)) {
                                         damageType = MMManager.getElementType(internalName);
+                                    } else {
+                                        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "damageType of mob NULL, internalName: " + internalName);
+                                        damageType = ElementType.FIRE;
                                     }
                                 }
 

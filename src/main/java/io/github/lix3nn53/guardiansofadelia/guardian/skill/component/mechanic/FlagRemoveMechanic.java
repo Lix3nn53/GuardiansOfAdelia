@@ -19,12 +19,8 @@ public class FlagRemoveMechanic extends MechanicComponent {
             configLoadError("key");
         }
 
-        if (!configurationSection.contains("isUnique")) {
-            configLoadError("isUnique");
-        }
-
         this.key = configurationSection.getString("key");
-        this.isUnique = configurationSection.getBoolean("isUnique");
+        this.isUnique = configurationSection.contains("isUnique") && configurationSection.getBoolean("isUnique");
     }
 
     @Override

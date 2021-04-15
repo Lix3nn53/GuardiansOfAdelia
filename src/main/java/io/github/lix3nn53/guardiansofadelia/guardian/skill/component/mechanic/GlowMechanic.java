@@ -1,30 +1,31 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.inventivetalent.glow.GlowAPI;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class FlagSetMechanic extends MechanicComponent {
+public class GlowMechanic extends MechanicComponent {
 
-    private final String key;
+    private final GlowAPI.Color color;
     private final List<Integer> ticks;
-    private final boolean isUnique;
 
-    public FlagSetMechanic(ConfigurationSection configurationSection) {
+    public GlowMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 
-        if (!configurationSection.contains("key")) {
-            configLoadError("key");
+        if (!configurationSection.contains("color")) {
+            configLoadError("color");
         }
 
-        this.key = configurationSection.getString("key");
-        this.isUnique = configurationSection.contains("isUnique") && configurationSection.getBoolean("isUnique");
+        this.color = GlowAPI.Color.valueOf(configurationSection.getString("color"));
 
         if (configurationSection.contains("ticks")) {
             this.ticks = configurationSection.getIntegerList("ticks");
@@ -37,25 +38,18 @@ public class FlagSetMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
 
+        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
         for (LivingEntity target : targets) {
-            if (isUnique) {
-                SkillDataManager.addFlag(target, key + castCounter);
-            } else {
-                SkillDataManager.addFlag(target, key);
-            }
+            GlowAPI.setGlowing(target, color, onlinePlayers);
         }
 
         if (!ticks.isEmpty()) {
-            new BukkitRunnable() { //remove buffs from buffed players
+            new BukkitRunnable() { //remove glow
 
                 @Override
                 public void run() {
                     for (LivingEntity target : targets) {
-                        if (isUnique) {
-                            SkillDataManager.removeFlag(target, key + castCounter);
-                        } else {
-                            SkillDataManager.removeFlag(target, key);
-                        }
+                        GlowAPI.setGlowing(target, false, onlinePlayers);
                     }
                 }
             }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), ticks.get(skillLevel - 1));
