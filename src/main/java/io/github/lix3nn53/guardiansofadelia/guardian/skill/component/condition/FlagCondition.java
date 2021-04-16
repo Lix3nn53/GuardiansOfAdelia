@@ -25,13 +25,9 @@ public class FlagCondition extends ConditionComponent {
             configLoadError("isSet");
         }
 
-        if (!configurationSection.contains("isUnique")) {
-            configLoadError("isUnique");
-        }
-
         this.key = configurationSection.getString("key");
         this.isSet = configurationSection.getBoolean("isSet");
-        this.isUnique = configurationSection.getBoolean("isUnique");
+        this.isUnique = configurationSection.contains("isUnique") && configurationSection.getBoolean("isUnique");
     }
 
     @Override

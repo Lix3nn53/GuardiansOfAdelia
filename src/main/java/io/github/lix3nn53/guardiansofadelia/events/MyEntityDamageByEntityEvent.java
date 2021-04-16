@@ -265,6 +265,8 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                         if (isProjectile) { // NonSkill projectile like arrow from bow
                             player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 0.6F, 0.4F);
+
+                            TriggerListener.onPlayerNormalAttack(player, livingTarget, true);
                         } else { // melee
                             if (player.getInventory().getHeldItemSlot() != 4) {
                                 event.setCancelled(true);
@@ -294,13 +296,13 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                     damage += rpgCharacterStats.getTotalDamageBonusFromOffhand();
                                 }
                             }*/
+
+                            TriggerListener.onPlayerNormalAttack(player, livingTarget, false);
                         }
 
                         // Add bonus damage to normal attack, both melee and ranged
                         damage += rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE).getIncrement(player.getLevel(), rpgClassStr); // bonus from attribute
                         damage += rpgCharacterStats.getElement(damageType).getBonusFromEquipment(); // bonus from element
-
-                        TriggerListener.onPlayerNormalAttack(player, livingTarget);
                     }
 
                     // BuffMechanic

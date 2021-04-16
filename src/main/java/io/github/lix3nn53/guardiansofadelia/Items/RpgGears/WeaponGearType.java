@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.PushMechanic;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -223,5 +224,15 @@ public enum WeaponGearType {
         }
 
         return null;
+    }
+
+    public ArrayList<Enchantment> getEnchantments() {
+        ArrayList<Enchantment> list = new ArrayList<>();
+
+        if (this == WeaponGearType.SPEAR) {
+            list.add(Enchantment.LOYALTY);
+        }
+
+        return list;
     }
 }

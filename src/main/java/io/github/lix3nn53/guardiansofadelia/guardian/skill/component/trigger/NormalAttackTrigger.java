@@ -13,6 +13,8 @@ import java.util.List;
 public class NormalAttackTrigger extends TriggerComponent {
 
     private final List<Integer> cooldowns;
+    private final boolean melee;
+    private final boolean projectile;
     LivingEntity caster;
     int skillLevel;
     int castCounter;
@@ -25,6 +27,9 @@ public class NormalAttackTrigger extends TriggerComponent {
         } else {
             this.cooldowns = new ArrayList<>();
         }
+
+        this.melee = configurationSection.contains("melee") && configurationSection.getBoolean("melee");
+        this.projectile = configurationSection.contains("projectile") && configurationSection.getBoolean("projectile");
     }
 
     public LivingEntity getCaster() {
@@ -63,7 +68,13 @@ public class NormalAttackTrigger extends TriggerComponent {
     /**
      * The callback when player lands that applies child components
      */
-    public boolean callback(Player attacker, LivingEntity target) {
+    public boolean callback(Player attacker, LivingEntity target, boolean isProjectile) {
+        if (this.melee && isProjectile) {
+            return false;
+        } else if (this.projectile && !isProjectile) {
+            return false;
+        }
+
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(target);
         boolean cast = executeChildren(caster, skillLevel, targets, castCounter);

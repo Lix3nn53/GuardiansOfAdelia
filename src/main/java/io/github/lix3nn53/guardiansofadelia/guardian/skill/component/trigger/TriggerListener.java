@@ -16,7 +16,7 @@ public class TriggerListener {
     private static final HashMap<Player, LandTrigger> playerToLandTrigger = new HashMap<>();
 
     private static final HashMap<Player, TookDamageTrigger> playerToTookDamageTrigger = new HashMap<>();
-    private static final HashMap<Player, NormalAttackTrigger> playerToNormalAttackTrigger = new HashMap<>();
+    private static final HashMap<Player, List<NormalAttackTrigger>> playerToNormalAttackTrigger = new HashMap<>();
     private static final HashMap<Player, SkillAttackTrigger> playerToSkillAttackTrigger = new HashMap<>();
 
     private static final HashMap<Player, AddPiercingToArrowShootFromCrossbowTrigger> playerToAddPiercingToArrowShootFromCrossbowTrigger = new HashMap<>();
@@ -68,14 +68,33 @@ public class TriggerListener {
     }
 
     public static void startListeningNormalAttack(Player player, NormalAttackTrigger normalAttackTrigger) {
-        playerToNormalAttackTrigger.put(player, normalAttackTrigger);
+        List<NormalAttackTrigger> list = new ArrayList<>();
+        if (playerToNormalAttackTrigger.containsKey(player)) {
+            list = playerToNormalAttackTrigger.get(player);
+        }
+        list.add(normalAttackTrigger);
+        playerToNormalAttackTrigger.put(player, list);
     }
 
-    public static void onPlayerNormalAttack(Player player, LivingEntity target) {
+    public static void onPlayerNormalAttack(Player player, LivingEntity target, boolean isProjectile) {
         if (playerToNormalAttackTrigger.containsKey(player)) {
-            boolean callback = playerToNormalAttackTrigger.get(player).callback(player, target);
-            if (callback) {
+            List<NormalAttackTrigger> list = playerToNormalAttackTrigger.get(player);
+
+            List<NormalAttackTrigger> toRemove = new ArrayList<>();
+
+            for (NormalAttackTrigger normalAttackTrigger : list) {
+                boolean callback = normalAttackTrigger.callback(player, target, isProjectile);
+                if (callback) {
+                    toRemove.add(normalAttackTrigger);
+                }
+            }
+
+            list.removeAll(toRemove);
+
+            if (list.isEmpty()) {
                 playerToNormalAttackTrigger.remove(player);
+            } else {
+                playerToNormalAttackTrigger.put(player, list);
             }
         }
     }
