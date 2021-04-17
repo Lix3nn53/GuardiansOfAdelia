@@ -30,7 +30,7 @@ public class ClassConfigurations {
     private static FileConfiguration fileConfiguration;
     private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "classes";
 
-    static void createConfigs() {
+    public static void createConfigs() {
         fileConfiguration = ConfigurationUtils.createConfig(filePath, "config.yml");
         createClassConfigs();
     }

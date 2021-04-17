@@ -237,6 +237,7 @@ public class SkillBar {
     public void reloadSkillSet(HashMap<Integer, Skill> skillSet) {
         this.skillSet.clear();
         this.skillSet.putAll(skillSet);
+        remakeSkillBar();
     }
 
     public boolean castSkill(int slot) {

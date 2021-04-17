@@ -31,7 +31,7 @@ actionBarInfoType: "VARIABLE"
 actionBarIcon: "&6🔱"
 actionBarKey: "monkpassive"
 skillOne:
-  name: "sadasdasd"
+  name: "test1"
   customModelData: 36
   description:
     - "Shoot a frostball that deals damage and"
@@ -451,10 +451,10 @@ skillUltimate:
           - 80
           - 80
         amplifierList:
-          - 1
-          - 1
-          - 1
-          - 1
+          - 2
+          - 2
+          - 2
+          - 2
       child2:
         componentType: "StatusEffectMechanic"
         statusEffectTypes:
@@ -481,14 +481,14 @@ skillUltimate:
           dustColor: 3394815
           dustSize: 2
           radius: 2.5
-          amount: 12
-          amounty: 6
+          amount: 9
+          amounty: 5
         frequency: 5
         data1:
-          - 1.2
-          - 1.2
-          - 1.2
-          - 1.2
+          - 1.4
+          - 1.4
+          - 1.4
+          - 1.4
         repeatAmount:
           - 8
           - 8
