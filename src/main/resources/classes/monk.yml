@@ -28,7 +28,7 @@ armorGearTypes:
   - "LIGHT_ARMOR"
 hasDefaultOffhand: false
 actionBarInfoType: "VARIABLE"
-actionBarIcon: "&6🔱"
+actionBarIcon: "&3🔱"
 actionBarKey: "monkpassive"
 skillOne:
   name: "test1"
@@ -50,7 +50,7 @@ skillOne:
     componentType: "SelfTarget"
     child1:
       componentType: "RepeatMechanic"
-      period: 10
+      period: 4
       repetitions:
         - 4
         - 4
@@ -82,16 +82,16 @@ skillOne:
             - 90
             - 180
           damageMultiplyList:
-            - 1.4
-            - 1.6
-            - 1.8
-            - 2.2
+            - 0.5
+            - 0.6
+            - 0.7
+            - 0.8
       child2:
         componentType: "SoundMechanic"
         goaSound: "SKILL_FIRE_SLASH"
     child2:
       componentType: "DelayMechanic"
-      ticks: 50
+      ticks: 20
       child1:
         componentType: "SingleTarget"
         allies: false
@@ -118,10 +118,10 @@ skillOne:
             - 90
             - 180
           damageMultiplyList:
-            - 1.4
-            - 1.6
-            - 1.8
-            - 2.2
+            - 0.7
+            - 0.8
+            - 0.9
+            - 1.0
         child2:
           componentType: "PushMechanic"
           pushType: "FIXED"
@@ -221,6 +221,16 @@ skillTwo:
     child3:
       componentType: "FlagRemoveMechanic"
       key: "goneLeft"
+    child4:
+      componentType: "ParticleMechanic"
+      particle:
+        arrangementType: "Single"
+        particleType: "EXPLOSION_LARGE"
+        singleMinHeight: 0
+        singleMaxHeight: 0.5
+        singleGap: 0.2
+        direction: "XZ"
+      upward: 0.1
 skillThree:
   name: "asdasdasd"
   customModelData: 24
@@ -232,10 +242,10 @@ skillThree:
     - 14
     - 16
   cooldowns:
-    - 14
-    - 14
-    - 14
-    - 14
+    - 4
+    - 4
+    - 4
+    - 4
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -255,6 +265,14 @@ skillThree:
         - 200
         - 240
     child3:
+      componentType: "GlowMechanic"
+      color: "YELLOW"
+      ticks:
+        - 120
+        - 160
+        - 200
+        - 240
+    child4:
       componentType: "RepeatMechanic"
       period: 40
       repetitions:
@@ -287,32 +305,32 @@ skillThree:
             - 0.1
             - 0.1
             - 0.1
-    child4:
+    child5:
       componentType: "ParticleAnimationMechanic"
       particle:
         arrangementType: "DrawCylinder"
-        particleType: "REDSTONE"
-        dustColor: 16763904
-        dustSize: 2
-        radius: 1.6
+        particleType: "ENCHANTMENT_TABLE"
+        radius: 1.4
         amount: 6
+        singleMinHeight: 0
+        singleMaxHeight: 2.5
+        singleGap: 0.2
       frequency: 4
       data1:
-        - 1
-        - 1
-        - 1
-        - 1
+        - 0.8
+        - 0.8
+        - 0.8
+        - 0.8
       repeatAmount:
-        - 15
-        - 20
-        - 25
         - 30
-      upwardIncrease: 0.1
+        - 40
+        - 50
+        - 60
+      upward: 0.5
       resetY: true
       rotation: true
-      yawIncrease: 30
-      pitchIncrease: 10
-      playback: true
+      yawIncrease: 15
+      pitchIncrease: 0
 skillPassive:
   name: "asdasdasdasd"
   customModelData: 10
@@ -396,13 +414,15 @@ skillPassive:
             - 2
             - 2
         child3:
-          componentType: "ValueSetMechanic"
-          key: "monkpassive"
-          values:
-            - 0
-            - 0
-            - 0
-            - 0
+          componentType: "SelfTarget"
+          child1:
+            componentType: "ValueSetMechanic"
+            key: "monkpassive"
+            values:
+              - 0
+              - 0
+              - 0
+              - 0
 skillUltimate:
   name: "asdasdasdas"
   customModelData: 54
@@ -410,10 +430,10 @@ skillUltimate:
     - "Summon a blizzard that deals magic damage to"
     - "nearby enemies and slows them."
   manaCosts:
-    - 50
-    - 55
-    - 60
-    - 65
+    - 5
+    - 5
+    - 6
+    - 6
   cooldowns:
     - 10
     - 10
@@ -479,20 +499,20 @@ skillUltimate:
           arrangementType: "FillSphere"
           particleType: "REDSTONE"
           dustColor: 3394815
-          dustSize: 2
+          dustSize: 1
           radius: 2.5
-          amount: 9
-          amounty: 5
-        frequency: 5
+          amount: 24
+          amounty: 12
+        frequency: 4
         data1:
           - 1.4
           - 1.4
           - 1.4
           - 1.4
         repeatAmount:
-          - 8
-          - 8
-          - 8
-          - 8
+          - 10
+          - 10
+          - 10
+          - 10
         upward: 0.5
         playback: true

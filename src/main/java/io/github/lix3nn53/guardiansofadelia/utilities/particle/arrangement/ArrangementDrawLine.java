@@ -13,8 +13,8 @@ public class ArrangementDrawLine extends ArrangementSingle {
     private final double length;
     private final double gap;
 
-    public ArrangementDrawLine(Particle particle, Particle.DustOptions dustOptions, double length, double gap) {
-        super(particle, dustOptions);
+    public ArrangementDrawLine(Particle particle, Particle.DustOptions dustOptions, double length, double gap, double singleMinHeight, double singleMaxHeight, double singleGap) {
+        super(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
         this.length = length;
         this.gap = gap;
     }

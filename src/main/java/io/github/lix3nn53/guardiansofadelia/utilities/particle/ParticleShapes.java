@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.particle;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.utilities.math.MatrixHelper;
 import io.github.lix3nn53.guardiansofadelia.utilities.math.RotationHelper;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
@@ -28,8 +29,30 @@ public class ParticleShapes {
         loc.getWorld().spawnParticle(particle, loc, 1, 0, 0, 0, 0, dustOptions);
     }
 
+    public static void playSingleParticleWithHeight(Location loc, Particle particle, Particle.DustOptions dustOptions, double height, double gap) {
+        double heightTemp = 0;
+        World world = loc.getWorld();
+        Location clone = loc.clone();
+        for (int i = 0; i < 20; i++) {
+            world.spawnParticle(particle, clone, 1, 0, 0, 0, 0, dustOptions);
+            heightTemp += gap;
+            if (heightTemp > height) break;
+            clone.setY(clone.getY() + gap);
+        }
+    }
+
     public static void playSingleParticle(World world, Vector vector, Particle particle, Particle.DustOptions dustOptions) {
         world.spawnParticle(particle, vector.getX(), vector.getY(), vector.getZ(), 1, 0, 0, 0, 0, dustOptions);
+    }
+
+    public static void playSingleParticleWithHeight(World world, Vector vector, Particle particle, Particle.DustOptions dustOptions, double height, double gap) {
+        double heightTemp = 0;
+        for (int i = 0; i < 20; i++) {
+            world.spawnParticle(particle, vector.getX(), vector.getY(), vector.getZ(), 1, 0, 0, 0, 0, dustOptions);
+            heightTemp += gap;
+            if (heightTemp > height) break;
+            vector.setY(vector.getY() + gap);
+        }
     }
 
     /**
@@ -224,7 +247,7 @@ public class ParticleShapes {
         }
     }
 
-    public static void drawCylinder(Location location, Particle particle, double radius, int amount, Particle.DustOptions dustOptions, double height,
+    public static void drawCylinder(Location location, ArrangementSingle arrangementSingle, double radius, int amount, double height,
                                     boolean rotate, float yaw, float pitch, Vector offset) {
         double fullRadian = Math.toRadians(360);
 
@@ -262,7 +285,8 @@ public class ParticleShapes {
         World world = center.getWorld();
 
         for (Vector point : points) {
-            ParticleShapes.playSingleParticle(world, point, particle, dustOptions);
+            Location loc = new Location(world, point.getX(), point.getY(), point.getZ());
+            arrangementSingle.play(loc, null);
         }
     }
 

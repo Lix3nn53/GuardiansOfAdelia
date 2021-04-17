@@ -64,6 +64,7 @@ public class RotationHelper {
      * @param pitch
      */
     public static void rotateYawPitch(Vector vector, float yaw, float pitch) {
+        if (yaw <= 0 && pitch <= 0) return;
         // the numbers are the angles on which you want to rotate your animation.
         double xangle = Math.toRadians(pitch); // note that here we do have to convert to radians.
         double xAxisCos = Math.cos(xangle); // getting the cos value for the pitch.

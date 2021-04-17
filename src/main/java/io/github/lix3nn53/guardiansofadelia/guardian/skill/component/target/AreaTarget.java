@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -90,12 +91,14 @@ public class AreaTarget extends TargetComponent {
         double radius = radiusList.get(skillLevel - 1);
         int amount = amountList.get(skillLevel - 1);
 
+        ArrangementSingle arrangementSingle = new ArrangementSingle(particle, dustOptions, 0, 0, 0);
+
         for (LivingEntity target : targets) {
             Location location = target.getLocation();
             location.add(offset);
             List<LivingEntity> nearbyTarget = TargetHelper.getNearbySphere(location, radius);
 
-            ParticleShapes.drawCylinder(location, particle, radius, amount, dustOptions, particleHeight, false, 0, 0, new Vector());
+            ParticleShapes.drawCylinder(location, arrangementSingle, radius, amount, particleHeight, false, 0, 0, new Vector());
 
             nearby.addAll(nearbyTarget);
         }

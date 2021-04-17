@@ -10,13 +10,21 @@ import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.Vector;
 
+import java.util.Random;
+
 public class ArrangementSingle implements ParticleArrangement {
     protected final Particle particle;
     protected final Particle.DustOptions dustOptions;
+    protected final double singleMinHeight;
+    protected final double singleMaxHeight;
+    protected final double singleGap;
 
-    protected ArrangementSingle(Particle particle, Particle.DustOptions dustOptions) {
+    public ArrangementSingle(Particle particle, Particle.DustOptions dustOptions, double singleMinHeight, double singleMaxHeight, double singleGap) {
         this.particle = particle;
         this.dustOptions = dustOptions;
+        this.singleMinHeight = singleMinHeight;
+        this.singleMaxHeight = singleMaxHeight;
+        this.singleGap = singleGap;
     }
 
     public ArrangementSingle(ConfigurationSection configurationSection) {
@@ -25,7 +33,6 @@ public class ArrangementSingle implements ParticleArrangement {
         }
 
         this.particle = Particle.valueOf(configurationSection.getString("particleType"));
-
 
         if (configurationSection.contains("dustColor")) {
             if (!this.particle.getDataType().equals(Particle.DustOptions.class)) {
@@ -39,6 +46,10 @@ public class ArrangementSingle implements ParticleArrangement {
         } else {
             dustOptions = null;
         }
+
+        this.singleMinHeight = configurationSection.contains("singleMinHeight") ? configurationSection.getDouble("singleMinHeight") : 0;
+        this.singleMaxHeight = configurationSection.contains("singleMaxHeight") ? configurationSection.getDouble("singleMaxHeight") : 0;
+        this.singleGap = configurationSection.contains("singleGap") ? configurationSection.getDouble("singleGap") : 0;
     }
 
     @Override
@@ -47,7 +58,15 @@ public class ArrangementSingle implements ParticleArrangement {
         if (offset != null) {
             location1.add(offset);
         }
-        ParticleShapes.playSingleParticle(location1, particle, dustOptions);
+
+        if (singleMaxHeight > 0) {
+            Random r = new Random();
+            double height = singleMinHeight + (singleMaxHeight - singleMinHeight) * r.nextDouble();
+
+            ParticleShapes.playSingleParticleWithHeight(location1, particle, dustOptions, height, singleGap);
+        } else {
+            ParticleShapes.playSingleParticle(location1, particle, dustOptions);
+        }
     }
 
     @Override
@@ -56,7 +75,14 @@ public class ArrangementSingle implements ParticleArrangement {
 
         RotationHelper.rotateYawPitch(vector, yaw, pitch);
 
-        ParticleShapes.playSingleParticle(location.getWorld(), vector, particle, dustOptions);
+        if (singleMaxHeight > 0) {
+            Random r = new Random();
+            double height = singleMinHeight + (singleMaxHeight - singleMinHeight) * r.nextDouble();
+
+            ParticleShapes.playSingleParticleWithHeight(location.getWorld(), vector, particle, dustOptions, height, singleGap);
+        } else {
+            ParticleShapes.playSingleParticle(location.getWorld(), vector, particle, dustOptions);
+        }
     }
 
     public void configLoadError(String section) {

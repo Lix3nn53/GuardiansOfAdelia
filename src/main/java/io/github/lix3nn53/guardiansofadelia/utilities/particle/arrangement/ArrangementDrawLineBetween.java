@@ -8,8 +8,8 @@ import org.bukkit.configuration.ConfigurationSection;
 public class ArrangementDrawLineBetween extends ArrangementSingle implements ParticleArrangementMultipleLocation {
     protected final double gap;
 
-    protected ArrangementDrawLineBetween(Particle particle, Particle.DustOptions dustOptions, double gap) {
-        super(particle, dustOptions);
+    protected ArrangementDrawLineBetween(Particle particle, Particle.DustOptions dustOptions, double gap, double singleMinHeight, double singleMaxHeight, double singleGap) {
+        super(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
         this.gap = gap;
     }
 

@@ -29,12 +29,18 @@ public class ArrangementDrawCylinder extends ArrangementWithData {
     @Override
     public void play(Location location, @Nullable Vector offset) {
         double radius = getData(0);
-        ParticleShapes.drawCylinder(location, particle, radius, amount, dustOptions, height, false, 0, 0, offset);
+
+        ArrangementSingle arrangementSingle = new ArrangementSingle(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
+
+        ParticleShapes.drawCylinder(location, arrangementSingle, radius, amount, height, false, 0, 0, offset);
     }
 
     @Override
     public void play(Location location, @Nullable Vector offset, float yaw, float pitch) {
         double radius = getData(0);
-        ParticleShapes.drawCylinder(location, particle, radius, amount, dustOptions, height, true, yaw, pitch, offset);
+
+        ArrangementSingle arrangementSingle = new ArrangementSingle(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
+
+        ParticleShapes.drawCylinder(location, arrangementSingle, radius, amount, height, true, yaw, pitch, offset);
     }
 }

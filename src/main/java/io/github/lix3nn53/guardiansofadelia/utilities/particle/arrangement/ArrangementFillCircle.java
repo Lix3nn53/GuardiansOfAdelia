@@ -14,8 +14,8 @@ public class ArrangementFillCircle extends ArrangementWithData {
     private final int amount;
     private final Direction direction;
 
-    public ArrangementFillCircle(Particle particle, double radius, int amount, Particle.DustOptions dustOptions, Direction direction) {
-        super(particle, dustOptions);
+    public ArrangementFillCircle(Particle particle, double radius, int amount, Particle.DustOptions dustOptions, Direction direction, double minHeight, double maxHeight, double gap) {
+        super(particle, dustOptions, minHeight, maxHeight, gap);
         this.amount = amount;
         this.direction = direction;
 

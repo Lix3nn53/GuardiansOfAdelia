@@ -91,7 +91,7 @@ public class LootChest {
 
         Location add = location.clone().add(0.5, 1.2, 0.5);
 
-        ArrangementFillCircle arrangementFillCircle = new ArrangementFillCircle(Particle.CRIT, 0.5, 4, null, Direction.XZ);
+        ArrangementFillCircle arrangementFillCircle = new ArrangementFillCircle(Particle.CRIT, 0.5, 4, null, Direction.XZ, 0, 1.2, 0.2);
 
         particleTask = new BukkitRunnable() {
             @Override
