@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PlayerTridentThrowManager {
 
-    private static List<Player> waitingForReturn = new ArrayList<>();
+    private static final List<Player> waitingForReturn = new ArrayList<>();
 
     public static boolean canThrow(Player player) {
         return !waitingForReturn.contains(player);
@@ -17,6 +17,7 @@ public class PlayerTridentThrowManager {
 
     public static void onPlayerTridentThrow(Player player) {
         waitingForReturn.add(player);
+
         new BukkitRunnable() {
             @Override
             public void run() {

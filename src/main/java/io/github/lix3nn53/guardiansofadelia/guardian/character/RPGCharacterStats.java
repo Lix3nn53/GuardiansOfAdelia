@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSet;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetManager;
+import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatOneType;
@@ -660,6 +661,11 @@ public class RPGCharacterStats {
         if (!InventoryUtils.isAirOrNull(itemInMainHand)) {
             if (StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) {
                 setPassiveStatBonuses(EquipmentSlot.HAND, itemInMainHand);
+                Material mainHandType = itemInMainHand.getType();
+                if (mainHandType.equals(Material.BOW) || mainHandType.equals(Material.CROSSBOW)) {
+                    ItemStack arrow = OtherItems.getArrow(2);
+                    player.getInventory().setItemInOffHand(arrow);
+                }
             }
         }
 

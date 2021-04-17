@@ -5,9 +5,11 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,7 +26,7 @@ public class MyEntityShootBowEvent implements Listener {
         if (itemInMainHand != null) {
             Material type = itemInMainHand.getType();
 
-            if (type.equals(Material.TRIDENT) || type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
+            if (type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
                 if (event.getEntity() instanceof Player) {
                     Player player = (Player) event.getEntity();
 
@@ -41,6 +43,7 @@ public class MyEntityShootBowEvent implements Listener {
                                 int elementDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "elementDamage");
                                 Entity projectile = event.getProjectile();
                                 float force = event.getForce();
+                                player.sendMessage("force: " + force);
                                 if (force < 0.7) {
                                     player.sendMessage(ChatColor.RED + "Shooting force must be higher than 0.7 to shoot an arrow");
                                     event.setCancelled(true);
@@ -51,19 +54,24 @@ public class MyEntityShootBowEvent implements Listener {
                             }
 
                             //add arrow
-                            if (type.equals(Material.BOW) || type.equals(Material.CROSSBOW)) {
-                                ItemStack arrow = OtherItems.getArrow(2);
-                                player.getInventory().setItemInOffHand(arrow);
+                            ItemStack arrow = OtherItems.getArrow(2);
+                            player.getInventory().setItemInOffHand(arrow);
+
+                            Entity projectile = event.getProjectile();
+                            if (type.equals(Material.CROSSBOW)) {
+                                if (projectile instanceof Arrow) {
+                                    TriggerListener.onPlayerShootCrossbow(player, (Arrow) projectile);
+                                }
                             }
                         }
                     }
-                } else {
+                }/* else {
                     if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "elementDamage")) {
                         int elementDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "elementDamage");
                         Entity projectile = event.getProjectile();
                         PersistentDataContainerUtil.putInteger("rangedDamage", elementDamage, projectile);
                     }
-                }
+                }*/
             }
         }
     }

@@ -5,12 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.PlayerTridentThrowManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -38,15 +36,18 @@ public class MyProjectileLaunchEvent implements Listener {
         if (shooter instanceof Player) {
             Player player = (Player) shooter;
 
+            if (player.getInventory().getHeldItemSlot() != 4) {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.RED + "You can only attack with weapon slot(5)");
+                return;
+            }
+
             ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
             Material type = itemInMainHand.getType();
 
             if (type.equals(Material.TRIDENT)) {
                 //trident return cooldown
-                if (PlayerTridentThrowManager.canThrow(player)) {
-                    PlayerTridentThrowManager.onPlayerTridentThrow(player);
-                    player.getInventory().setItemInMainHand(itemInMainHand);
-                } else {
+                if (!PlayerTridentThrowManager.canThrow(player)) {
                     event.setCancelled(true);
                     player.sendMessage(ChatColor.RED + "You can't throw your spear again before it returns back");
                     return;
@@ -59,20 +60,22 @@ public class MyProjectileLaunchEvent implements Listener {
 
                         String rpgClassStr = activeCharacter.getRpgClassStr();
 
-                        if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr)) return;
+                        if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr)) {
+                            event.setCancelled(true);
+                            return;
+                        }
 
-                        if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "rangedDamage")) {
-                            int rangedDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "rangedDamage");
+                        if (PersistentDataContainerUtil.hasInteger(itemInMainHand, "elementDamage")) {
+                            int rangedDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "elementDamage");
                             PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, projectile);
                         }
+
+                        PlayerTridentThrowManager.onPlayerTridentThrow(player);
+                        player.getInventory().setItemInMainHand(itemInMainHand);
                     }
                 }
-            } else if (type.equals(Material.CROSSBOW)) {
-                if (projectile instanceof Arrow) {
-                    TriggerListener.onPlayerShootCrossbow(player, (Arrow) projectile);
-                }
             }
-        } else if (shooter instanceof LivingEntity) {
+        }/* else if (shooter instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) shooter;
 
             ItemStack itemInMainHand = livingEntity.getEquipment().getItemInMainHand();
@@ -84,7 +87,7 @@ public class MyProjectileLaunchEvent implements Listener {
                     PersistentDataContainerUtil.putInteger("rangedDamage", rangedDamage, projectile);
                 }
             }
-        }
+        }*/
     }
 
 }

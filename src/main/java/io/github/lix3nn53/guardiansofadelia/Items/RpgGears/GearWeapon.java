@@ -116,7 +116,7 @@ public class GearWeapon implements RPGGear {
         itemMeta.setLore(lore);
         ArrayList<Enchantment> enchantments = gearType.getEnchantments();
         for (Enchantment enchantment : enchantments) {
-            itemMeta.addEnchant(enchantment, 1, false);
+            itemMeta.addEnchant(enchantment, 4, true);
         }
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS);
         itemMeta.setCustomModelData(customModelDataId);

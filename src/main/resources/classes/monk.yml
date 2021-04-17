@@ -32,7 +32,7 @@ actionBarIcon: "&6🔱"
 actionBarKey: "monkpassive"
 skillOne:
   name: "sadasdasd"
-  customModelData: 48
+  customModelData: 36
   description:
     - "Shoot a frostball that deals damage and"
     - "slows enemies in area if it hits a target."
@@ -122,6 +122,15 @@ skillOne:
             - 1.6
             - 1.8
             - 2.2
+        child2:
+          componentType: "PushMechanic"
+          pushType: "FIXED"
+          speedList:
+            - 1.2
+            - 1.6
+            - 2.0
+            - 2.4
+          centerSelf: true
       child2:
         componentType: "SoundMechanic"
         goaSound: "SKILL_FIRE_SLASH"
@@ -136,7 +145,7 @@ skillOne:
         - 50
 skillTwo:
   name: "Tumble"
-  customModelData: 50
+  customModelData: 57
   description:
     - "Summon a small ice mass from the sky that"
     - "deals damage and slows enemies in area."
@@ -160,10 +169,10 @@ skillTwo:
         componentType: "LaunchMechanic"
         relative: "CASTER"
         forwardSpeedList:
-          - 0
-          - 0
-          - 0
-          - 0
+          - -0.4
+          - -0.6
+          - -0.8
+          - -1
         upwardSpeedList:
           - 0.1
           - 0.1
@@ -192,10 +201,10 @@ skillTwo:
           componentType: "LaunchMechanic"
           relative: "CASTER"
           forwardSpeedList:
-            - 0
-            - 0
-            - 0
-            - 0
+            - -0.4
+            - -0.6
+            - -0.8
+            - -1
           upwardSpeedList:
             - 0.1
             - 0.1
@@ -306,7 +315,7 @@ skillThree:
       playback: true
 skillPassive:
   name: "asdasdasdasd"
-  customModelData: 51
+  customModelData: 10
   description:
     - "Every time you cast a spell gain a stack."
     - "If you have 4 stacks particles will start playing"
@@ -372,6 +381,21 @@ skillPassive:
             - 60
             - 70
         child2:
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "REDSTONE"
+            dustColor: 16763904
+            dustSize: 2
+            radius: 2
+            amount: 8
+            direction: "XZ"
+          data1:
+            - 2
+            - 2
+            - 2
+            - 2
+        child3:
           componentType: "ValueSetMechanic"
           key: "monkpassive"
           values:
@@ -381,7 +405,7 @@ skillPassive:
             - 0
 skillUltimate:
   name: "asdasdasdas"
-  customModelData: 49
+  customModelData: 54
   description:
     - "Summon a blizzard that deals magic damage to"
     - "nearby enemies and slows them."
