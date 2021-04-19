@@ -2,10 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
@@ -22,8 +21,7 @@ public class SingleTarget extends TargetComponent {
     private final double tolerance;
     // PARTICLE
     private final double gap;
-    private final Particle particle;
-    private final Particle.DustOptions dustOptions;
+    private final ArrangementSingle arrangementSingle;
 
     public SingleTarget(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -46,21 +44,8 @@ public class SingleTarget extends TargetComponent {
 
         ConfigurationSection particleSection = configurationSection.getConfigurationSection("particle");
 
-        this.particle = Particle.valueOf(particleSection.getString("particleType"));
+        this.arrangementSingle = new ArrangementSingle(particleSection);
         this.gap = particleSection.contains("gap") ? particleSection.getDouble("gap") : 0;
-
-        if (particleSection.contains("dustColor")) {
-            if (!this.particle.getDataType().equals(Particle.DustOptions.class)) {
-                configLoadError("WRONG DUST OPTIONS");
-            }
-
-            int dustColor = particleSection.getInt("dustColor");
-            int dustSize = particleSection.getInt("dustSize");
-
-            dustOptions = new Particle.DustOptions(Color.fromRGB(dustColor), dustSize);
-        } else {
-            dustOptions = null;
-        }
     }
 
     @Override
@@ -80,7 +65,7 @@ public class SingleTarget extends TargetComponent {
                 double v = singleTarget.getHeight() / 2;
                 Location targetLocation = singleTarget.getLocation().add(0, v, 0);
 
-                ParticleShapes.drawLineBetween(eyeLocation.getWorld(), eyeLocation.toVector(), particle, dustOptions, targetLocation.toVector(), gap);
+                ParticleShapes.drawLineBetween(eyeLocation.getWorld(), eyeLocation.toVector(), arrangementSingle, targetLocation.toVector(), gap);
             }
         }
 

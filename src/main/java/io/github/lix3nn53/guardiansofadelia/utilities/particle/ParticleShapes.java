@@ -247,6 +247,25 @@ public class ParticleShapes {
         }
     }
 
+    public static void drawLineBetween(World world, Vector start, ArrangementSingle arrangementSingle, Vector end, double gap) {
+        if (gap < 0.1) {
+            GuardiansOfAdelia.getInstance().getLogger().info("ERROR: drawLineBetween gap is 0!!!!!");
+            return;
+        }
+        Vector vector = end.clone().subtract(start);
+
+        double length = vector.length();
+        Vector dir = vector.normalize();
+
+        for (double y = 0; y < length; y += gap) {
+            Vector multiply = dir.clone().multiply(y);// multiply
+            Vector add = start.clone().add(multiply);// add
+            // display particle at 'start' (display)
+            Location loc = new Location(world, add.getX(), add.getY(), add.getZ());
+            arrangementSingle.play(loc, new Vector());
+        }
+    }
+
     public static void drawCylinder(Location location, ArrangementSingle arrangementSingle, double radius, int amount, double height,
                                     boolean rotate, float yaw, float pitch, Vector offset) {
         double fullRadian = Math.toRadians(360);
@@ -286,7 +305,7 @@ public class ParticleShapes {
 
         for (Vector point : points) {
             Location loc = new Location(world, point.getX(), point.getY(), point.getZ());
-            arrangementSingle.play(loc, null);
+            arrangementSingle.play(loc, new Vector());
         }
     }
 
@@ -332,7 +351,7 @@ public class ParticleShapes {
         }
     }
 
-    public static void drawCone(Location location, Particle particle, Particle.DustOptions dustOptions, double length, int amount, int amounty, double angle,
+    public static void drawCone(Location location, ArrangementSingle arrangementSingle, double length, int amount, int amounty, double angle,
                                 boolean rotate, float yaw, float pitch, Vector offset) {
         double fullRadian = Math.toRadians(360);
         double phi = Math.toRadians(angle);
@@ -373,7 +392,8 @@ public class ParticleShapes {
         World world = center.getWorld();
 
         for (Vector point : points) {
-            ParticleShapes.playSingleParticle(world, point, particle, dustOptions);
+            Location loc = new Location(world, point.getX(), point.getY(), point.getZ());
+            arrangementSingle.play(loc, new Vector());
         }
     }
 
@@ -440,14 +460,14 @@ public class ParticleShapes {
         }
     }
 
-    public static Vector[] drawCube(Location location, Particle particle, Particle.DustOptions dustOptions, Vector vector, double gap,
+    public static Vector[] drawCube(Location location, ArrangementSingle arrangementSingle, Vector vector, double gap,
                                     boolean rotate, float yaw, float pitch) {
         Vector[] points = calculateCubeCorners(location, vector, rotate, yaw, pitch);
 
         World world = location.getWorld();
 
         // Edges
-        drawCubeEdges(world, points, particle, dustOptions, gap);
+        drawCubeEdges(world, points, arrangementSingle, gap);
 
         return points;
     }
@@ -486,11 +506,11 @@ public class ParticleShapes {
         return points;
     }
 
-    public static void drawCubeEdges(World world, Vector[] points, Particle particle, Particle.DustOptions dustOptions, double gap) {
+    public static void drawCubeEdges(World world, Vector[] points, ArrangementSingle arrangementSingle, double gap) {
         for (int i = 0; i < 4; i++) {
-            ParticleShapes.drawLineBetween(world, points[i], particle, dustOptions, points[(i + 1) % 4], gap);
-            ParticleShapes.drawLineBetween(world, points[i + 4], particle, dustOptions, points[((i + 1) % 4) + 4], gap);
-            ParticleShapes.drawLineBetween(world, points[i], particle, dustOptions, points[i + 4], gap);
+            ParticleShapes.drawLineBetween(world, points[i], arrangementSingle, points[(i + 1) % 4], gap);
+            ParticleShapes.drawLineBetween(world, points[i + 4], arrangementSingle, points[((i + 1) % 4) + 4], gap);
+            ParticleShapes.drawLineBetween(world, points[i], arrangementSingle, points[i + 4], gap);
         }
     }
 }

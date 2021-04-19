@@ -52,9 +52,8 @@ skillOne:
       rotation: true
       centerEye: true
       rotationMatchEye: true
-      gap: 0.2
+      gap: 0.25
       particle:
-        arrangementType: "DrawCube"
         particleType: "FLAME"
       length_xList:
         - 0.5
@@ -125,10 +124,10 @@ skillTwo:
     - 9
     - 11
   cooldowns:
-    - 12
-    - 12
-    - 12
-    - 12
+    - 2
+    - 2
+    - 2
+    - 2
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -147,10 +146,13 @@ skillTwo:
       range: 200
       mustHitToWork: true
       particle:
-        arrangementType: "FillHemisphere"
+        arrangementType: "DrawCylinder"
         particleType: "FLAME"
-        radius: 0.5
-        amount: 5
+        radius: 0.2
+        amount: 3
+        singleMinHeight: 0
+        singleMaxHeight: 1.2
+        singleGap: 0.2
       isProjectileInvisible: true
       child1:
         componentType: "FilterCurrentTargets"
@@ -357,10 +359,10 @@ skillPassive:
     - 0
     - 0
   cooldowns:
-    - 40
-    - 40
-    - 40
-    - 40
+    - 4
+    - 4
+    - 4
+    - 4
   trigger:
     componentType: "SelfTarget"
 skillUltimate:
@@ -375,10 +377,10 @@ skillUltimate:
     - 50
     - 50
   cooldowns:
-    - 40
-    - 40
-    - 40
-    - 40
+    - 4
+    - 4
+    - 4
+    - 4
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -419,7 +421,7 @@ skillUltimate:
         radius: 1
         amount: 4
         direction: "XZ"
-        dustColor: 16753920
+        dustColor: 16737792
         dustSize: 2
       frequency: 4
       data1:
@@ -435,27 +437,13 @@ skillUltimate:
     child5:
       componentType: "LandTrigger"
       child1:
-        componentType: "ParticleMechanic"
-        particle:
-          arrangementType: "DrawCylinder"
-          particleType: "REDSTONE"
-          radius: 8
-          amount: 40
-          dustColor: 16728064
-          dustSize: 4
-        data1:
-          - 8
-          - 9
-          - 10
-          - 11
-      child2:
         componentType: "SoundMechanic"
         goaSound: "SKILL_POWERFUL_LANDING"
-      child3:
+      child2:
         componentType: "ImmunityRemoveMechanic"
         damageCause: FALL
         delay: 5
-      child4:
+      child3:
         componentType: "AreaTarget"
         allies: false
         enemy: true
@@ -465,18 +453,19 @@ skillUltimate:
           - 8
           - 9
           - 10
-          - 11
           - 12
-          - 14
         amountList:
           - 24
-          - 24
-          - 24
-          - 24
+          - 28
+          - 32
+          - 40
         particle:
           particleType: "REDSTONE"
-          dustColor: 16728064
-          dustSize: 4
+          dustColor: 16737792
+          dustSize: 2
+          singleMinHeight: 0
+          singleMaxHeight: 5.3
+          singleGap: 0.5
         child1:
           componentType: "DamageMechanic"
           damageType: "FIRE"
@@ -491,6 +480,14 @@ skillUltimate:
             - 1.8
             - 2.2
         child2:
+          componentType: "LaunchMechanic"
+          relative: "TARGET"
+          upwardSpeedList:
+            - 0.4
+            - 0.4
+            - 0.4
+            - 0.4
+        child3:
           componentType: "TargetCountCondition"
           count: 3
           child1:

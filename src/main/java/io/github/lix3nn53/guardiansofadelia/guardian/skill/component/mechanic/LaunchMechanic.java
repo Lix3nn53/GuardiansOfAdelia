@@ -6,6 +6,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LaunchMechanic extends MechanicComponent {
@@ -22,27 +23,19 @@ public class LaunchMechanic extends MechanicComponent {
             configLoadError("relative");
         }
 
-        if (!configurationSection.contains("forwardSpeedList")) {
-            configLoadError("forwardSpeedList");
-        }
-
-        if (!configurationSection.contains("upwardSpeedList")) {
-            configLoadError("upwardSpeedList");
-        }
-
-        if (!configurationSection.contains("rightSpeedList")) {
-            configLoadError("rightSpeedList");
-        }
-
         this.relative = Relative.valueOf(configurationSection.getString("relative"));
-        this.forwardSpeedList = configurationSection.getDoubleList("forwardSpeedList");
-        this.upwardSpeedList = configurationSection.getDoubleList("upwardSpeedList");
-        this.rightSpeedList = configurationSection.getDoubleList("rightSpeedList");
+        this.forwardSpeedList = configurationSection.contains("forwardSpeedList") ? configurationSection.getDoubleList("forwardSpeedList") : new ArrayList<>();
+        this.upwardSpeedList = configurationSection.contains("upwardSpeedList") ? configurationSection.getDoubleList("upwardSpeedList") : new ArrayList<>();
+        this.rightSpeedList = configurationSection.contains("rightSpeedList") ? configurationSection.getDoubleList("rightSpeedList") : new ArrayList<>();
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
         if (targets.isEmpty()) return false;
+
+        double forward = skillLevel - 1 < forwardSpeedList.size() ? forwardSpeedList.get(skillLevel - 1) : 0;
+        double right = skillLevel - 1 < rightSpeedList.size() ? rightSpeedList.get(skillLevel - 1) : 0;
+        double upward = skillLevel - 1 < upwardSpeedList.size() ? upwardSpeedList.get(skillLevel - 1) : 0;
 
         for (LivingEntity ent : targets) {
             final Vector dir;
@@ -56,8 +49,8 @@ public class LaunchMechanic extends MechanicComponent {
             }
 
             final Vector nor = dir.clone().crossProduct(UP);
-            dir.multiply(forwardSpeedList.get(skillLevel - 1));
-            dir.add(nor.multiply(rightSpeedList.get(skillLevel - 1))).setY(upwardSpeedList.get(skillLevel - 1));
+            dir.multiply(forward);
+            dir.add(nor.multiply(right)).setY(upward);
 
             ent.setVelocity(dir);
         }
@@ -69,18 +62,30 @@ public class LaunchMechanic extends MechanicComponent {
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
+
         if (skillLevel == 0) {
-            additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeedList.get(skillLevel));
-            additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeedList.get(skillLevel));
-            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeedList.get(skillLevel));
+            double forward = skillLevel < forwardSpeedList.size() ? forwardSpeedList.get(skillLevel) : 0;
+            double right = skillLevel < rightSpeedList.size() ? rightSpeedList.get(skillLevel) : 0;
+            double upward = skillLevel < upwardSpeedList.size() ? upwardSpeedList.get(skillLevel) : 0;
+
+            additions.add(ChatColor.AQUA + "Launch[forward, upward, right]: " + forward + ", " + upward + ", " + right);
         } else if (skillLevel == upwardSpeedList.size()) {
-            additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeedList.get(skillLevel - 1));
-            additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeedList.get(skillLevel - 1));
-            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeedList.get(skillLevel - 1));
+            double forward = skillLevel - 1 < forwardSpeedList.size() ? forwardSpeedList.get(skillLevel - 1) : 0;
+            double right = skillLevel - 1 < rightSpeedList.size() ? rightSpeedList.get(skillLevel - 1) : 0;
+            double upward = skillLevel - 1 < upwardSpeedList.size() ? upwardSpeedList.get(skillLevel - 1) : 0;
+
+            additions.add(ChatColor.AQUA + "Launch[forward, upward, right]: " + forward + ", " + upward + ", " + right);
         } else {
-            additions.add(ChatColor.AQUA + "Launch forward: " + forwardSpeedList.get(skillLevel - 1) + " -> " + forwardSpeedList.get(skillLevel));
-            additions.add(ChatColor.AQUA + "Launch upward: " + upwardSpeedList.get(skillLevel - 1) + " -> " + upwardSpeedList.get(skillLevel));
-            additions.add(ChatColor.AQUA + "Launch right: " + rightSpeedList.get(skillLevel - 1) + " -> " + rightSpeedList.get(skillLevel));
+            double forward = skillLevel - 1 < forwardSpeedList.size() ? forwardSpeedList.get(skillLevel - 1) : 0;
+            double right = skillLevel - 1 < rightSpeedList.size() ? rightSpeedList.get(skillLevel - 1) : 0;
+            double upward = skillLevel - 1 < upwardSpeedList.size() ? upwardSpeedList.get(skillLevel - 1) : 0;
+
+            double forward2 = skillLevel < forwardSpeedList.size() ? forwardSpeedList.get(skillLevel) : 0;
+            double right2 = skillLevel < rightSpeedList.size() ? rightSpeedList.get(skillLevel) : 0;
+            double upward2 = skillLevel < upwardSpeedList.size() ? upwardSpeedList.get(skillLevel) : 0;
+
+            additions.add(ChatColor.AQUA + "Launch[forward, upward, right]: " + forward + ", " + upward + ", " + right +
+                    " -> " + forward2 + ", " + upward2 + ", " + right2);
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }

@@ -1,12 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import org.bukkit.Axis;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
@@ -239,23 +237,8 @@ public class TargetHelper {
                     length_z * 2, length_z * 2, length_z * 2);
         }
 
-        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
-
-        for (Player player : onlinePlayers) {
-            player.sendMessage("highest_x" + highest_x);
-            player.sendMessage("highest_y" + highest_y);
-            player.sendMessage("highest_z" + highest_z);
-            player.sendMessage("lowest_x" + lowest_x);
-            player.sendMessage("lowest_y" + lowest_y);
-            player.sendMessage("lowest_z" + lowest_z);
-        }
-
         if (nearbyEntities != null) {
             for (Entity entity : nearbyEntities) {
-                for (Player player : onlinePlayers) {
-                    player.sendMessage("" + entity.getCustomName());
-                }
-
                 if (!(entity instanceof LivingEntity)) continue;
                 BoundingBox boundingBox = entity.getBoundingBox();
 
@@ -265,15 +248,6 @@ public class TargetHelper {
                 double minX = boundingBox.getMinX();
                 double minY = boundingBox.getMinY();
                 double minZ = boundingBox.getMinZ();
-
-                for (Player player : onlinePlayers) {
-                    player.sendMessage("maxX" + maxX);
-                    player.sendMessage("maxY" + maxY);
-                    player.sendMessage("maxZ" + maxZ);
-                    player.sendMessage("minX" + minX);
-                    player.sendMessage("minY" + minY);
-                    player.sendMessage("minZ" + minZ);
-                }
 
                 if (!overlaps(lowest_x, highest_x, minX, maxX)) {
                     continue; // NO INTERSECTION

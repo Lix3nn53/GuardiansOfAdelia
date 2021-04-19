@@ -2,10 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
@@ -39,8 +38,7 @@ public class CubeTarget extends TargetComponent {
     // Particle custom
     private final double gap;
     // PARTICLE
-    private final Particle particle;
-    private final Particle.DustOptions dustOptions;
+    private final ArrangementSingle arrangementSingle;
 
     public CubeTarget(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -80,20 +78,7 @@ public class CubeTarget extends TargetComponent {
 
         ConfigurationSection particleSection = configurationSection.getConfigurationSection("particle");
 
-        this.particle = Particle.valueOf(particleSection.getString("particleType"));
-
-        if (particleSection.contains("dustColor")) {
-            if (!this.particle.getDataType().equals(Particle.DustOptions.class)) {
-                configLoadError("WRONG DUST OPTIONS");
-            }
-
-            int dustColor = particleSection.getInt("dustColor");
-            int dustSize = particleSection.getInt("dustSize");
-
-            dustOptions = new Particle.DustOptions(Color.fromRGB(dustColor), dustSize);
-        } else {
-            dustOptions = null;
-        }
+        this.arrangementSingle = new ArrangementSingle(particleSection);
     }
 
     @Override
@@ -157,7 +142,7 @@ public class CubeTarget extends TargetComponent {
             // List<LivingEntity> boxTargets = TargetHelper.getBoxTargets(location.getWorld(), b1, b2, b4, t1, t3);
             List<LivingEntity> boxTargets = TargetHelper.getBoxTargets(location.getWorld(), vectors, length_x, length_y, length_z);
 
-            ParticleShapes.drawCubeEdges(targets.get(0).getWorld(), vectors, particle, dustOptions, gap);
+            ParticleShapes.drawCubeEdges(targets.get(0).getWorld(), vectors, arrangementSingle, gap);
 
             cube.addAll(boxTargets);
         }

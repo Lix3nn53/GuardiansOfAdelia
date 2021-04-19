@@ -475,7 +475,7 @@ public class ProjectileMechanic extends MechanicComponent {
                 if (projectile.isValid()) {
                     Location location = projectile.getLocation();
 
-                    particleArrangement.play(location, null);
+                    particleArrangement.play(location, new Vector());
                 } else {
                     cancel();
                 }

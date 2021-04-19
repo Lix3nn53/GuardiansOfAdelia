@@ -932,10 +932,10 @@ public class RPGCharacterStats {
         MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
     }
 
-    private void recalculateGearSetEffects(ItemStack inventoryHelmet, ItemStack inventoryChestplate, ItemStack inventoryLeggings,
-                                           ItemStack inventoryBoots, ItemStack itemInMainHand, ItemStack itemInOffHand,
-                                           ArmorGearType helmetType, ArmorGearType chestplateType, ArmorGearType leggingsType,
-                                           ArmorGearType bootsType) {
+    public void recalculateGearSetEffects(ItemStack inventoryHelmet, ItemStack inventoryChestplate, ItemStack inventoryLeggings,
+                                          ItemStack inventoryBoots, ItemStack itemInMainHand, ItemStack itemInOffHand,
+                                          ArmorGearType helmetType, ArmorGearType chestplateType, ArmorGearType leggingsType,
+                                          ArmorGearType bootsType) {
         // ARMOR TYPE SET EFFECT
         boolean wearingSameArmorType = GearSetEffect.isWearingSameArmorType(helmetType, chestplateType, leggingsType, bootsType);
         if (wearingSameArmorType) {

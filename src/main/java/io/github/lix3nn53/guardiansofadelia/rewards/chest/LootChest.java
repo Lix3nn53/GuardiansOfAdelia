@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.Vector;
 
 import java.util.Collections;
 import java.util.List;
@@ -96,7 +97,7 @@ public class LootChest {
         particleTask = new BukkitRunnable() {
             @Override
             public void run() {
-                arrangementFillCircle.play(add, null);
+                arrangementFillCircle.play(add, new Vector());
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 20, 20L);
     }

@@ -4,9 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetCompo
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
@@ -27,8 +25,7 @@ public class AreaTarget extends TargetComponent {
     private final List<Double> offset_zList;
     // PARTICLE
     private final double particleHeight;
-    private final Particle particle;
-    private final Particle.DustOptions dustOptions;
+    private final ArrangementSingle arrangementSingle;
 
     public AreaTarget(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -51,21 +48,9 @@ public class AreaTarget extends TargetComponent {
 
         ConfigurationSection particleSection = configurationSection.getConfigurationSection("particle");
 
-        this.particle = Particle.valueOf(particleSection.getString("particleType"));
+        this.arrangementSingle = new ArrangementSingle(particleSection);
+
         this.particleHeight = particleSection.contains("height") ? particleSection.getDouble("height") : 0;
-
-        if (particleSection.contains("dustColor")) {
-            if (!this.particle.getDataType().equals(Particle.DustOptions.class)) {
-                configLoadError("WRONG DUST OPTIONS");
-            }
-
-            int dustColor = particleSection.getInt("dustColor");
-            int dustSize = particleSection.getInt("dustSize");
-
-            dustOptions = new Particle.DustOptions(Color.fromRGB(dustColor), dustSize);
-        } else {
-            dustOptions = null;
-        }
     }
 
     @Override
@@ -90,8 +75,6 @@ public class AreaTarget extends TargetComponent {
 
         double radius = radiusList.get(skillLevel - 1);
         int amount = amountList.get(skillLevel - 1);
-
-        ArrangementSingle arrangementSingle = new ArrangementSingle(particle, dustOptions, 0, 0, 0);
 
         for (LivingEntity target : targets) {
             Location location = target.getLocation();

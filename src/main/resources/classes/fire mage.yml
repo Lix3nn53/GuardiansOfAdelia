@@ -486,21 +486,11 @@ skillUltimate:
           child2:
             componentType: "LaunchMechanic"
             relative: "TARGET"
-            forwardSpeedList:
-              - 0
-              - 0
-              - 0
-              - 0
             upwardSpeedList:
               - 1.2
               - 1.4
               - 1.6
               - 1.8
-            rightSpeedList:
-              - 0
-              - 0
-              - 0
-              - 0
           child3:
             componentType: "ValueCondition"
             key: "firespirit"

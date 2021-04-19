@@ -33,7 +33,10 @@ public class ArrangementDrawCube extends ArrangementWithData {
             location1.add(offset);
         }
         Vector vector = new Vector(getData(0), getData(1), getData(2));
-        ParticleShapes.drawCube(location1, particle, dustOptions, vector, gap, false, 0, 0);
+
+        ArrangementSingle arrangementSingle = new ArrangementSingle(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
+
+        ParticleShapes.drawCube(location1, arrangementSingle, vector, gap, false, 0, 0);
     }
 
     @Override
@@ -43,6 +46,9 @@ public class ArrangementDrawCube extends ArrangementWithData {
             location1.add(offset);
         }
         Vector vector = new Vector(getData(0), getData(1), getData(2));
-        ParticleShapes.drawCube(location1, particle, dustOptions, vector, gap, true, yaw, pitch);
+
+        ArrangementSingle arrangementSingle = new ArrangementSingle(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
+
+        ParticleShapes.drawCube(location1, arrangementSingle, vector, gap, true, yaw, pitch);
     }
 }

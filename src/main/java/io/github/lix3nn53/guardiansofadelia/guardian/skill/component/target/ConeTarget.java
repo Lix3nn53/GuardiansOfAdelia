@@ -2,10 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
@@ -24,8 +23,7 @@ public class ConeTarget extends TargetComponent {
     // PARTICLE
     private final int amount;
     private final int amounty;
-    private final Particle particle;
-    private final Particle.DustOptions dustOptions;
+    private final ArrangementSingle arrangementSingle;
 
     public ConeTarget(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -48,22 +46,9 @@ public class ConeTarget extends TargetComponent {
 
         ConfigurationSection particleSection = configurationSection.getConfigurationSection("particle");
 
-        this.particle = Particle.valueOf(particleSection.getString("particleType"));
+        this.arrangementSingle = new ArrangementSingle(particleSection);
         this.amount = particleSection.getInt("amount");
         this.amounty = particleSection.getInt("amounty");
-
-        if (particleSection.contains("dustColor")) {
-            if (!this.particle.getDataType().equals(Particle.DustOptions.class)) {
-                configLoadError("WRONG DUST OPTIONS");
-            }
-
-            int dustColor = particleSection.getInt("dustColor");
-            int dustSize = particleSection.getInt("dustSize");
-
-            dustOptions = new Particle.DustOptions(Color.fromRGB(dustColor), dustSize);
-        } else {
-            dustOptions = null;
-        }
     }
 
     @Override
@@ -79,7 +64,7 @@ public class ConeTarget extends TargetComponent {
             Location location = target.getEyeLocation();
             float yaw = location.getYaw();
             float pitch = location.getPitch() + 90;
-            ParticleShapes.drawCone(location, particle, dustOptions, range, amount, amounty, angle, true, yaw, pitch, new Vector());
+            ParticleShapes.drawCone(location, arrangementSingle, range, amount, amounty, angle, true, yaw, pitch, new Vector());
 
             cone.addAll(coneTargets);
         }

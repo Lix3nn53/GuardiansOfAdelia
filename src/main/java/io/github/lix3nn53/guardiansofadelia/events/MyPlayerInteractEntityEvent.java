@@ -30,6 +30,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.Vector;
 
 import java.util.List;
 
@@ -96,7 +97,7 @@ public class MyPlayerInteractEntityEvent implements Listener {
                                 itemInMainHand.setAmount(amount - 1);
 
                                 ArrangementFillCircle particle = new ArrangementFillCircle(Particle.HEART, 1.2, 6, null, Direction.XZ, 0, 1.2, 0.2);
-                                particle.play(livingEntity.getLocation().clone().add(0, 1.2, 0), null);
+                                particle.play(livingEntity.getLocation().clone().add(0, 1.2, 0), new Vector());
                             } else {
                                 player.sendMessage(ChatColor.RED + "Pet health is already full");
                             }
