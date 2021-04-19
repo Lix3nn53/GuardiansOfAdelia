@@ -70,7 +70,7 @@ skillOne:
       particle:
         particleType: "REDSTONE"
         dustColor: 10040319
-        dustSize: 2
+        dustSize: 1
         amount: 15
         amounty: 10
       child1:
@@ -283,6 +283,11 @@ skillThree:
     child3:
       componentType: "ImmunityMechanic"
       damageCause: "FALL"
+      ticks:
+        - 120
+        - 120
+        - 120
+        - 120
     child4:
       componentType: "DelayMechanic"
       ticks: 20
@@ -387,40 +392,6 @@ skillPassive:
           maxValue: 3
           checkCasterOnly: true
           child1:
-            componentType: "ParticleAnimationMechanic"
-            particle:
-              arrangementType: "DrawCylinder"
-              particleType: "REDSTONE"
-              dustColor: 6750207
-              dustSize: 2
-              radius: 0.1
-              amount: 2
-            frequency: 5
-            data1:
-              - 0.1
-              - 0.1
-              - 0.1
-              - 0.1
-            repeatAmount:
-              - 18
-              - 18
-              - 18
-              - 18
-            upward: 1
-            offsety: 1.2
-            offsetx: 0.1
-            resetY: true
-            rotation: true
-            yawIncrease: 30
-            pitchIncrease: 10
-            playback: true
-            # no timeout
-            dontStop: true
-            # stop self if condition is not met
-            valueConditionKey: "darkaura"
-            valueConditionMinValue: 4
-            valueConditionMaxValue: 50
-          child2:
             componentType: "RepeatMechanic"
             period: 20
             valueConditionKey: "darkaura"
@@ -433,10 +404,10 @@ skillPassive:
               self: false
               max: 30
               radiusList:
-                - 5
-                - 6
-                - 7
-                - 9
+                - 2.5
+                - 3
+                - 3.5
+                - 4
               amountList:
                 - 24
                 - 24
@@ -513,81 +484,85 @@ skillUltimate:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "HologramMechanic"
-      helmetType: "IRON_PICKAXE"
-      customModelData: 14
-      durations:
-        - 400
-        - 500
-        - 600
-        - 800
-      displayText: "< Darkhole %caster% >"
-      gravity: true
-      marker: false
-      speed: 1.9
-      right: 0
-      forward: 1
-      upward: 0.5
-      save: true
+      componentType: "SavedEntityCondition"
+      minValue: 0
+      maxValue: 0
       child1:
-        componentType: "RepeatMechanic"
-        period: 20
-        repetitions:
-          - 20
-          - 25
-          - 30
-          - 40
+        componentType: "HologramMechanic"
+        helmetType: "IRON_PICKAXE"
+        customModelData: 14
+        durations:
+          - 400
+          - 500
+          - 600
+          - 800
+        displayText: "< Darkhole %caster% >"
+        gravity: true
+        marker: false
+        speed: 1.9
+        right: 0
+        forward: 1
+        upward: 0.5
+        save: true
         child1:
-          componentType: "AreaTarget"
-          allies: false
-          enemy: true
-          self: false
-          max: 30
-          radiusList:
-            - 5
-            - 6
-            - 7
-            - 9
-          amountList:
-            - 24
-            - 24
-            - 24
-            - 24
-          particle:
-            particleType: "REDSTONE"
-            dustColor: 10040319
-            dustSize: 2
+          componentType: "RepeatMechanic"
+          period: 20
+          repetitions:
+            - 20
+            - 25
+            - 30
+            - 40
           child1:
-            componentType: "SavedEntitiesTarget"
+            componentType: "AreaTarget"
             allies: false
             enemy: true
             self: false
-            max: 10
-            armorStand: true
-            keepCurrent: true
-            addToBeginning: true
-            casterOnly: true
+            max: 30
+            radiusList:
+              - 5
+              - 6
+              - 7
+              - 9
+            amountList:
+              - 24
+              - 24
+              - 24
+              - 24
+            particle:
+              particleType: "REDSTONE"
+              dustColor: 10040319
+              dustSize: 2
             child1:
-              componentType: "PushMechanic"
-              pushType: "SCALED"
-              speedList:
-                - -0.03
-                - -0.03
-                - -0.03
-                - -0.03
-              centerSelf: false
-              offsetY: 1
-          child2:
-            componentType: "PotionEffectMechanic"
-            potionEffectType:
-              - "SLOW"
-            tickList:
-              - 40
-              - 40
-              - 40
-              - 40
-            amplifierList:
-              - 2
-              - 2
-              - 2
-              - 2
+              componentType: "SavedEntitiesTarget"
+              allies: false
+              enemy: true
+              self: false
+              max: 10
+              armorStand: true
+              keepCurrent: true
+              addToBeginning: true
+              casterOnly: true
+              child1:
+                componentType: "PushMechanic"
+                pushType: "SCALED"
+                speedList:
+                  - -0.03
+                  - -0.03
+                  - -0.03
+                  - -0.03
+                centerSelf: false
+                offsetY: 1
+            child2:
+              componentType: "PotionEffectMechanic"
+              potionEffectType:
+                - "SLOW"
+              tickList:
+                - 40
+                - 40
+                - 40
+                - 40
+              amplifierList:
+                - 2
+                - 2
+                - 2
+                - 2

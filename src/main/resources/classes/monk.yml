@@ -31,7 +31,7 @@ actionBarInfoType: "VARIABLE"
 actionBarIcon: "&3🔱"
 actionBarKey: "monkpassive"
 skillOne:
-  name: "test1"
+  name: "Fists of Thunder"
   customModelData: 36
   description:
     - "Shoot a frostball that deals damage and"
@@ -64,31 +64,31 @@ skillOne:
         max: 1
         tolerance: 4
         ranges:
-          - 24
-          - 24
-          - 24
-          - 24
+          - 4
+          - 4
+          - 4
+          - 4
         particle:
           particleType: "REDSTONE"
           dustColor: 16763904
-          dustSize: 2
+          dustSize: 1
           gap: 0.2
         child1:
           componentType: "DamageMechanic"
           damageType: "WATER"
           damageList:
-            - 10
-            - 40
-            - 90
-            - 180
+            - 1
+            - 4
+            - 9
+            - 18
           damageMultiplyList:
-            - 0.5
-            - 0.6
-            - 0.7
-            - 0.8
+            - 0.05
+            - 0.06
+            - 0.07
+            - 0.08
       child2:
         componentType: "SoundMechanic"
-        goaSound: "SKILL_FIRE_SLASH"
+        goaSound: "SKILL_PROJECTILE_FIRE"
     child2:
       componentType: "DelayMechanic"
       ticks: 20
@@ -133,7 +133,7 @@ skillOne:
           centerSelf: true
       child2:
         componentType: "SoundMechanic"
-        goaSound: "SKILL_FIRE_SLASH"
+        goaSound: "SKILL_SMASH"
     child3:
       componentType: "StatusEffectMechanic"
       statusEffectTypes:
@@ -231,8 +231,11 @@ skillTwo:
         singleGap: 0.2
         direction: "XZ"
       upward: 0.1
+    child5:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_THROW_SMALL_OBJECT"
 skillThree:
-  name: "asdasdasd"
+  name: "Serenity"
   customModelData: 24
   description:
     - "Freeze yourself but restore health as you stay frozen."
@@ -331,8 +334,11 @@ skillThree:
       rotation: true
       yawIncrease: 15
       pitchIncrease: 0
+    child6:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_BARD_MUSIC"
 skillPassive:
-  name: "asdasdasdasd"
+  name: "Crippling Wave"
   customModelData: 10
   description:
     - "Every time you cast a spell gain a stack."
@@ -424,7 +430,7 @@ skillPassive:
               - 0
               - 0
 skillUltimate:
-  name: "asdasdasdas"
+  name: "Aqua Prison"
   customModelData: 54
   description:
     - "Summon a blizzard that deals magic damage to"

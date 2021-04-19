@@ -243,7 +243,7 @@ skillThree:
             - 24
             - 24
           particle:
-            particleType: "SOUL_FIRE_FLAME"
+            particleType: "FLAME"
           child1:
             componentType: "DamageMechanic"
             damageType: "FIRE"

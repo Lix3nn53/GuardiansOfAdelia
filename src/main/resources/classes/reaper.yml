@@ -59,10 +59,10 @@ skillOne:
       max: 1
       tolerance: 4
       ranges:
-        - 24
-        - 24
-        - 24
-        - 24
+        - 4
+        - 4
+        - 4
+        - 4
       keepCurrent: true
       addToBeginning: false
       particle:
@@ -379,10 +379,10 @@ skillUltimate:
       max: 1
       tolerance: 4
       ranges:
-        - 24
-        - 24
-        - 24
-        - 24
+        - 4
+        - 4
+        - 4
+        - 4
       particle:
         particleType: "SOUL_FIRE_FLAME"
         gap: 0.2

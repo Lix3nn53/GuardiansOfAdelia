@@ -69,10 +69,12 @@ public class NormalAttackTrigger extends TriggerComponent {
      * The callback when player lands that applies child components
      */
     public boolean callback(Player attacker, LivingEntity target, boolean isProjectile) {
-        if (this.melee && isProjectile) {
-            return false;
-        } else if (this.projectile && !isProjectile) {
-            return false;
+        if (!this.melee || !this.projectile) {
+            if (this.melee && isProjectile) {
+                return false;
+            } else if (this.projectile && !isProjectile) {
+                return false;
+            }
         }
 
         ArrayList<LivingEntity> targets = new ArrayList<>();

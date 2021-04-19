@@ -321,9 +321,17 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     }
                 } else {
                     ActiveMob activeMob = MythicMobs.inst().getMobManager().getMythicMobInstance(pet);
-                    String faction = activeMob.getFaction();
 
-                    damageType = ElementType.valueOf(faction.toUpperCase());
+                    if (activeMob != null) {
+                        String internalName = activeMob.getType().getInternalName();
+
+                        if (MMManager.hasElementType(internalName)) {
+                            damageType = MMManager.getElementType(internalName);
+                        } else {
+                            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "damageType of mob NULL, internalName: " + internalName);
+                            damageType = ElementType.FIRE;
+                        }
+                    }
 
                     int customDamage = getCustomDamage(pet);
                     if (customDamage > 0) {

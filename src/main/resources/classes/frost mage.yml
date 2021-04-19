@@ -297,21 +297,6 @@ skillTwo:
                   - 0
                   - 0
         child2:
-          componentType: "ParticleMechanic"
-          particle:
-            arrangementType: "DrawCylinder"
-            particleType: "REDSTONE"
-            radius: 2.5
-            amount: 25
-            dustColor: 65535
-            dustSize: 4
-          data1:
-            - 2.5
-            - 3
-            - 3.5
-            - 4
-          upward: 1
-        child3:
           componentType: "SoundMechanic"
           goaSound: "SKILL_FIRE_AURA"
 skillThree:
@@ -358,6 +343,14 @@ skillThree:
         - 200
         - 240
     child4:
+      componentType: "GlowMechanic"
+      color: "AQUA"
+      ticks:
+        - 120
+        - 160
+        - 200
+        - 240
+    child5:
       componentType: "RepeatMechanic"
       period: 40
       repetitions:

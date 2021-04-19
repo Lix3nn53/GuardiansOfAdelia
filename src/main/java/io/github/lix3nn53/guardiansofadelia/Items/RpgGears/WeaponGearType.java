@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.PushMechanic;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -14,7 +13,7 @@ public enum WeaponGearType {
     DAGGER, // Fast attack speed, low damage, can dual wield
     //Two handed Melee Weapons
     BATTLE_AXE, // Slow attack speed, max damage
-    WAR_HAMMER, // Slow attack speed, high damage, normal attacks knockback target
+    WAR_HAMMER, // Slow attack speed, normal damage, sweep attack
     GREAT_SWORD, // Normal attack speed, high damage
     //Ranged + Melee weapons
     SPEAR, // Normal attack speed, normal damage, ranged + melee
@@ -28,13 +27,13 @@ public enum WeaponGearType {
     public Material getMaterial() {
         switch (this) {
             case SWORD:
-                return Material.NETHERITE_SWORD;
+                return Material.NETHERITE_PICKAXE; // return Material.NETHERITE_SWORD;
             case DAGGER:
                 return Material.NETHERITE_HOE;
             case BATTLE_AXE:
                 return Material.NETHERITE_AXE;
             case WAR_HAMMER:
-                return Material.NETHERITE_PICKAXE;
+                return Material.NETHERITE_SWORD; // return Material.NETHERITE_PICKAXE;
             case GREAT_SWORD:
                 return Material.DIAMOND_AXE;
             case SPEAR:
@@ -69,8 +68,8 @@ public enum WeaponGearType {
             case SWORD:
             case SPEAR:
             case BOW: // Reduced melee damage
-                return WeaponAttackDamage.NORMAL;
             case WAR_HAMMER:
+                return WeaponAttackDamage.NORMAL;
             case GREAT_SWORD:
             case CROSSBOW: // Reduced melee damage
             case STAFF: // Reduced melee damage
@@ -201,7 +200,7 @@ public enum WeaponGearType {
     }
 
     public void onHitEffect(LivingEntity caster, LivingEntity target) {
-        if (this.equals(WeaponGearType.WAR_HAMMER)) {
+        /*if (this.equals(WeaponGearType.WAR_HAMMER)) {
             ArrayList<Double> speedList = new ArrayList<>();
             speedList.add(1.2);
             speedList.add(1.2);
@@ -212,7 +211,7 @@ public enum WeaponGearType {
             ArrayList<LivingEntity> targets = new ArrayList<>();
             targets.add(target);
             pushMechanic.execute(caster, 1, targets, 0);
-        }
+        }*/
     }
 
     public String getItemLoreAddition() {

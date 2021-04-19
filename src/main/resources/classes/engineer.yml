@@ -108,9 +108,7 @@ skillOne:
               mustHitToWork: true
               particle:
                 arrangementType: "Single"
-                particleType: "REDSTONE"
-                dustColor: 16753920
-                dustSize: 2
+                particleType: "FLAME"
               isProjectileInvisible: false
               upward: 1
               child1:
@@ -278,7 +276,7 @@ skillThree:
       displayText: "< Oil %caster% >"
       gravity: true
       marker: false
-      speed: 1.9
+      speed: 1.2
       right: 0
       forward: 1
       upward: 0.5
@@ -307,23 +305,10 @@ skillThree:
             - 24
             - 24
           particle:
-            particleType: "FLAME"
+            particleType: "REDSTONE"
+            dustColor: 3355443
+            dustSize: 2
           child1:
-            componentType: "ParticleMechanic"
-            particle:
-              arrangementType: "FillCircle"
-              particleType: "REDSTONE"
-              radius: 1
-              amount: 5
-              direction: "XZ"
-              dustColor: 3355443
-              dustSize: 2
-            data1:
-              - 1
-              - 1
-              - 1
-              - 1
-          child2:
             componentType: "PotionEffectMechanic"
             potionEffectType:
               - "SLOW"
@@ -337,7 +322,7 @@ skillThree:
               - 2
               - 2
               - 2
-          child3:
+          child2:
             componentType: "StatusEffectMechanic"
             statusEffectTypes:
               - "SILENCE"
@@ -350,7 +335,7 @@ skillPassive:
   name: "Mecha Armor"
   customModelData: 52
   description:
-    - "Your totem heals nearby allies over time."
+    - "After using a skill, gain barrier."
   manaCosts:
     - 0
     - 0
@@ -364,12 +349,12 @@ skillPassive:
   trigger:
     componentType: "InitializeTrigger"
     child1:
-      componentType: "SavedEntitySpawnTrigger"
+      componentType: "SkillCastTrigger"
       cooldowns:
-        - 10
-        - 10
-        - 10
-        - 10
+        - 1
+        - 1
+        - 1
+        - 1
       child1:
         componentType: "SelfTarget"
         child1:

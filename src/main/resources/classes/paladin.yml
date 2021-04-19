@@ -4,7 +4,7 @@
 #                     Quests                     #
 # ---------------------------------------------- #
 
-tier: 1
+tier: 3
 color: "GOLD"
 mainElement: "LIGHTNING"
 description:
@@ -30,10 +30,76 @@ shieldGearTypes:
 hasDefaultOffhand: true
 isDefaultOffhandWeapon: false
 skillOne:
-  name: "Power Slash"
+  name: "sadasdas"
   customModelData: 15
   description:
     - "Deal damage to nearby enemies"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 1
+    - 1
+    - 1
+    - 1
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "ConeTarget"
+      allies: false
+      enemy: true
+      self: false
+      max: 15
+      angleList:
+        - 50
+        - 50
+        - 50
+        - 50
+      rangeList:
+        - 3.5
+        - 4
+        - 4.5
+        - 5
+      particle:
+        particleType: "REDSTONE"
+        dustColor: 16763904
+        dustSize: 1
+        amount: 15
+        amounty: 10
+      child1:
+        componentType: "DamageMechanic"
+        damageType: "LIGHTNING"
+        damageList:
+          - 10
+          - 40
+          - 90
+          - 180
+        damageMultiplyList:
+          - 1.4
+          - 1.6
+          - 1.8
+          - 2.2
+      child2:
+        componentType: "PushMechanic"
+        pushType: "FIXED"
+        speedList:
+          - -0.03
+          - -0.03
+          - -0.03
+          - -0.03
+        centerSelf: false
+        offsetY: 1
+      child3:
+        componentType: "SoundMechanic"
+        goaSound: "SKILL_LIGHTNING_NORMAL"
+skillTwo:
+  name: "asdasdsa"
+  customModelData: 46
+  description:
+    - "Shoot a flame-burst that launches"
+    - "a target into the sky"
   manaCosts:
     - 5
     - 7
@@ -51,3 +117,299 @@ skillOne:
   trigger:
     componentType: "SelfTarget"
     child1:
+      componentType: "LocationTarget"
+      allies: false
+      self: false
+      enemy: true
+      max: 30
+      ranges:
+        - 24
+        - 24
+        - 24
+        - 24
+      particle:
+        particleType: "REDSTONE"
+        dustColor: 16763904
+        dustSize: 2
+        gap: 0.4
+      child1:
+        componentType: "ProjectileMechanic"
+        projectileClass: "Snowball"
+        spreadType: "RAIN"
+        height: 12
+        radius: 8
+        speed: 0.4
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+        range: 200
+        mustHitToWork: false
+        particle:
+          arrangementType: "FillCircle"
+          particleType: "REDSTONE"
+          dustColor: 16763904
+          dustSize: 2
+          radius: 1
+          amount: 4
+          direction: "XZ"
+        isProjectileInvisible: true
+        child1:
+          componentType: "AreaTarget"
+          allies: true
+          enemy: false
+          self: true
+          max: 20
+          radiusList:
+            - 6
+            - 7
+            - 8
+            - 9
+          amountList:
+            - 24
+            - 24
+            - 24
+            - 24
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 16763904
+            dustSize: 2
+          child1:
+            componentType: "PotionEffectMechanic"
+            potionEffectType:
+              - "ABSORPTION"
+            tickList:
+              - 40
+              - 40
+              - 40
+              - 40
+            amplifierList:
+              - 2
+              - 2
+              - 2
+              - 2
+        child2:
+          componentType: "SoundMechanic"
+          goaSound: "SKILL_FIRE_AURA"
+skillThree:
+  name: "asdasdasd"
+  customModelData: 40
+  description:
+    - "Place a flag at your location that"
+    - "gives damage buff to nearby allies"
+  manaCosts:
+    - 20
+    - 24
+    - 28
+    - 32
+  cooldowns:
+    - 5
+    - 5
+    - 5
+    - 5
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "AreaTarget"
+      allies: true
+      enemy: false
+      self: true
+      max: 20
+      radiusList:
+        - 2.5
+        - 3
+        - 3.5
+        - 4
+      amountList:
+        - 24
+        - 24
+        - 24
+        - 24
+      particle:
+        particleType: "REDSTONE"
+        dustColor: 16763904
+        dustSize: 2
+      child1:
+        componentType: "PotionEffectMechanic"
+        potionEffectType:
+          - "SPEED"
+        tickList:
+          - 80
+          - 90
+          - 100
+          - 120
+        amplifierList:
+          - 1
+          - 1.5
+          - 2
+          - 2.5
+    child2:
+      componentType: "SoundMechanic"
+      goaSound: "SKILL_BUFF"
+skillPassive:
+  name: "Aura of Darkness"
+  customModelData: 7
+  description:
+    - "If you take damage that leaves you with less than 15% health,"
+    - "unleash your rage and gain movement speed and jump boost."
+  manaCosts:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  cooldowns:
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+    - 40
+  trigger:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "TookDamageTrigger"
+      cooldowns:
+        - 1
+        - 1
+        - 1
+        - 1
+      child1:
+        componentType: "SelfTarget"
+        child1:
+          componentType: "HealthCondition"
+          minPercent: 0
+          maxPercent: 20
+          child1:
+            componentType: "PotionEffectMechanic"
+            potionEffectType:
+              - "LEVITATION"
+            tickList:
+              - 80
+              - 80
+              - 80
+              - 80
+            amplifierList:
+              - 1
+              - 1
+              - 1
+              - 1
+          child2:
+            componentType: "ParticleAnimationMechanic"
+            particle:
+              arrangementType: "DrawCylinder"
+              particleType: "REDSTONE"
+              dustColor: 10040319
+              dustSize: 2
+              radius: 1.6
+              amount: 12
+            frequency: 4
+            data1:
+              - 1
+              - 1
+              - 1
+              - 1
+            repeatAmount:
+              - 21
+              - 21
+              - 21
+              - 21
+            upwardIncrease: 0.1
+            resetY: true
+            rotation: true
+            yawIncrease: 30
+            pitchIncrease: 10
+          child3:
+            componentType: "ImmunityMechanic"
+            damageCause: "FALL"
+            ticks:
+              - 120
+              - 120
+              - 120
+              - 120
+          child4:
+            componentType: "GlowMechanic"
+            color: "YELLOW"
+            ticks:
+              - 80
+              - 80
+              - 80
+              - 80
+skillUltimate:
+  name: "Blackhole"
+  customModelData: 44
+  description:
+    - "Jump forward into the air. When you land deal"
+    - "damage and launch nearby enemies into the sky."
+  manaCosts:
+    - 5
+    - 5
+    - 5
+    - 5
+  cooldowns:
+    - 4
+    - 4
+    - 4
+    - 4
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "HologramMechanic"
+      helmetType: "IRON_PICKAXE"
+      customModelData: 14
+      durations:
+        - 400
+        - 500
+        - 600
+        - 800
+      displayText: "< Victory-Flag %caster% >"
+      gravity: true
+      marker: false
+      speed: 1.9
+      right: 0
+      forward: 1
+      upward: 0.5
+      save: true
+      child1:
+        componentType: "RepeatMechanic"
+        period: 20
+        repetitions:
+          - 20
+          - 25
+          - 30
+          - 40
+        child1:
+          componentType: "AreaTarget"
+          allies: true
+          enemy: false
+          self: true
+          max: 30
+          radiusList:
+            - 5
+            - 6
+            - 7
+            - 9
+          amountList:
+            - 24
+            - 24
+            - 24
+            - 24
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 10040319
+            dustSize: 2
+          child1:
+            componentType: "BuffMechanic"
+            buffType: "ELEMENT_DAMAGE"
+            multipliers:
+              - 0.1
+              - 0.13
+              - 0.6
+              - 0.2
+            ticks:
+              - 25
+              - 25
+              - 25
+              - 25
