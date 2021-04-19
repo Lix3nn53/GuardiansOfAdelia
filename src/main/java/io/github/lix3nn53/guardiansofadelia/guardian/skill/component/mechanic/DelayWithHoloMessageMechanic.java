@@ -39,7 +39,7 @@ public class DelayWithHoloMessageMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity target : targets) {
@@ -56,7 +56,7 @@ public class DelayWithHoloMessageMechanic extends MechanicComponent {
                     List<LivingEntity> one = new ArrayList<>();
 
                     one.add(target);
-                    executeChildren(caster, skillLevel, one, castCounter);
+                    executeChildren(caster, skillLevel, one, castCounter, skillIndex);
                 }
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), ticks);

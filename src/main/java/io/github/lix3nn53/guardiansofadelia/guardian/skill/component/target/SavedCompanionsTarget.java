@@ -25,7 +25,7 @@ public class SavedCompanionsTarget extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         List<LivingEntity> companions = new ArrayList<>();
 
         boolean present = mobCode.isPresent();
@@ -58,7 +58,7 @@ public class SavedCompanionsTarget extends TargetComponent {
             targetsNew = companions;
         }
 
-        return executeChildren(caster, skillLevel, targetsNew, castCounter);
+        return executeChildren(caster, skillLevel, targetsNew, castCounter, skillIndex);
     }
 
     @Override

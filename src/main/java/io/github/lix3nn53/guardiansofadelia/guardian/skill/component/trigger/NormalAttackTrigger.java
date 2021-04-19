@@ -1,11 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,25 +35,21 @@ public class NormalAttackTrigger extends TriggerComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
+        this.skillIndex = skillIndex;
         this.caster = caster;
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
         NormalAttackTrigger normalAttackTrigger = this;
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (LivingEntity target : targets) {
-                    if (target instanceof Player) {
-                        TriggerListener.startListeningNormalAttack((Player) target, normalAttackTrigger);
-                    }
-                }
+        for (LivingEntity target : targets) {
+            if (target instanceof Player) {
+                TriggerListener.add((Player) target, normalAttackTrigger);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 10L);
+        }
 
         return true;
     }
@@ -69,7 +63,7 @@ public class NormalAttackTrigger extends TriggerComponent {
      * The callback when player lands that applies child components
      */
     public boolean callback(Player attacker, LivingEntity target, boolean isProjectile) {
-        attacker.sendMessage("NormalAttackTrigger callback");
+        attacker.sendMessage("NormalAttackTrigger callback, skillIndex: " + skillIndex);
         if (!(this.melee && this.projectile)) {
             attacker.sendMessage("1");
             if (this.melee && isProjectile) {
@@ -83,26 +77,15 @@ public class NormalAttackTrigger extends TriggerComponent {
 
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(target);
-        boolean cast = executeChildren(caster, skillLevel, targets, castCounter);
 
-        if (!cast) return false;
-        attacker.sendMessage("4");
+        return executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
+    }
 
-        NormalAttackTrigger trigger = this;
+    public int getSkillLevel() {
+        return skillLevel;
+    }
 
-        if (cooldowns.isEmpty()) {
-            // TriggerListener.startListeningNormalAttack(attacker, trigger);
-        } else {
-            TriggerListener.removePlayerNormalAttack(attacker, this);
-
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    TriggerListener.startListeningNormalAttack(attacker, trigger);
-                }
-            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
-        }
-
-        return true;
+    public List<Integer> getCooldowns() {
+        return cooldowns;
     }
 }

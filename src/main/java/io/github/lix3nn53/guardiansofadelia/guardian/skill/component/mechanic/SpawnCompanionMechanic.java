@@ -62,7 +62,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
         int amount = amounts.get(skillLevel - 1);
@@ -126,7 +126,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
         }
 
         if (!spawned.isEmpty()) {
-            executeChildren(caster, skillLevel, spawned, castCounter);
+            executeChildren(caster, skillLevel, spawned, castCounter, skillIndex);
 
             return true;
         }

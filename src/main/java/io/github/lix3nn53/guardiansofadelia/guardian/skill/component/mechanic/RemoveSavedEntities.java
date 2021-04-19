@@ -15,7 +15,7 @@ public class RemoveSavedEntities extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         boolean cast = false;
         for (LivingEntity target : targets) {
             boolean b = SkillDataManager.removeSavedEntities(target, castCounter);

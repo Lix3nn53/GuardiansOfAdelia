@@ -64,7 +64,7 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
         int repeat = repeatAmount != null ? repeatAmount.get(skillLevel - 1) : 0;

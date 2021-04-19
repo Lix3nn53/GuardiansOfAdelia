@@ -19,7 +19,7 @@ public class SavedEntitiesTarget extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         List<LivingEntity> savedEntities = new ArrayList<>();
 
         if (casterOnly) {
@@ -49,7 +49,7 @@ public class SavedEntitiesTarget extends TargetComponent {
             targetsNew = savedEntities;
         }
 
-        return executeChildren(caster, skillLevel, targetsNew, castCounter);
+        return executeChildren(caster, skillLevel, targetsNew, castCounter, skillIndex);
     }
 
     @Override

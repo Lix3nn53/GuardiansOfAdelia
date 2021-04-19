@@ -1,8 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,196 +14,315 @@ import java.util.List;
 public class TriggerListener {
     //Every player can have only one trigger of a type
 
-    private static final HashMap<Player, InitializeTrigger> playerToInitializeTrigger = new HashMap<>();
-
-    private static final HashMap<Player, LandTrigger> playerToLandTrigger = new HashMap<>();
-
-    private static final HashMap<Player, TookDamageTrigger> playerToTookDamageTrigger = new HashMap<>();
-    private static final HashMap<Player, List<NormalAttackTrigger>> playerToNormalAttackTrigger = new HashMap<>();
-    private static final HashMap<Player, SkillAttackTrigger> playerToSkillAttackTrigger = new HashMap<>();
-
-    private static final HashMap<Player, AddPiercingToArrowShootFromCrossbowTrigger> playerToAddPiercingToArrowShootFromCrossbowTrigger = new HashMap<>();
-
-    private static final HashMap<Player, SavedEntitySpawnTrigger> playerToSavedEntitySpawnTrigger = new HashMap<>();
-    private static final HashMap<Player, CompanionSpawnTrigger> playerToCompanionSpawnTrigger = new HashMap<>();
-
-    private static final HashMap<Player, SkillCastTrigger> playerToSkillCastTrigger = new HashMap<>();
+    private static final HashMap<Player, List<TriggerComponent>> playerToTriggerList = new HashMap<>();
 
     public static void onPlayerQuit(Player player) {
-        playerToInitializeTrigger.remove(player);
-
-        playerToLandTrigger.remove(player);
-        playerToNormalAttackTrigger.remove(player);
-        playerToSkillAttackTrigger.remove(player);
-
-        playerToAddPiercingToArrowShootFromCrossbowTrigger.remove(player);
-
-        playerToSavedEntitySpawnTrigger.remove(player);
-        playerToCompanionSpawnTrigger.remove(player);
-
-        playerToSkillCastTrigger.remove(player);
+        playerToTriggerList.remove(player);
     }
 
-    public static void startListeningLandTrigger(Player player, LandTrigger landTrigger) {
-        playerToLandTrigger.put(player, landTrigger);
+    public static void add(Player player, TriggerComponent triggerComponent) {
+        List<TriggerComponent> list = new ArrayList<>();
+        if (playerToTriggerList.containsKey(player)) {
+            list = playerToTriggerList.get(player);
+        }
+        list.add(triggerComponent);
+        playerToTriggerList.put(player, list);
+        player.sendMessage("ADD, new size: " + list.size());
+    }
+
+    public static void remove(Player player, TriggerComponent toRemove) {
+        if (playerToTriggerList.containsKey(player)) {
+            List<TriggerComponent> list = playerToTriggerList.get(player);
+
+            list.remove(toRemove);
+            if (list.isEmpty()) {
+                playerToTriggerList.remove(player);
+            } else {
+                playerToTriggerList.put(player, list);
+            }
+            player.sendMessage("REMOVE trigger, new size: " + list.size());
+        }
     }
 
     public static void onPlayerLandGround(Player player) {
-        if (playerToLandTrigger.containsKey(player)) {
-            boolean callback = playerToLandTrigger.get(player).callback(player);
-            if (callback) {
-                playerToLandTrigger.remove(player);
+        if (playerToTriggerList.containsKey(player)) {
+            List<TriggerComponent> list = playerToTriggerList.get(player);
+
+            List<LandTrigger> toRemove = new ArrayList<>();
+
+            for (TriggerComponent triggerComponent : list) {
+                if (!(triggerComponent instanceof LandTrigger)) continue;
+                LandTrigger trigger = (LandTrigger) triggerComponent;
+                trigger.callback(player);
+
+                toRemove.add(trigger); // always remove this trigger even if child fails somehow
+            }
+
+            for (LandTrigger trigger : toRemove) {
+                TriggerListener.remove(player, trigger);
             }
         }
-    }
-
-    public static void startListeningTookDamage(Player player, TookDamageTrigger tookDamageTrigger) {
-        playerToTookDamageTrigger.put(player, tookDamageTrigger);
     }
 
     public static void onPlayerTookDamage(Player player, LivingEntity attacker) {
-        if (playerToTookDamageTrigger.containsKey(player)) {
-            boolean callback = playerToTookDamageTrigger.get(player).callback(player, attacker);
-            if (callback) {
-                playerToTookDamageTrigger.remove(player);
+        if (playerToTriggerList.containsKey(player)) {
+            List<TriggerComponent> list = playerToTriggerList.get(player);
+
+            List<TookDamageTrigger> toRemove = new ArrayList<>();
+
+            for (TriggerComponent triggerComponent : list) {
+                if (!(triggerComponent instanceof TookDamageTrigger)) continue;
+                TookDamageTrigger trigger = (TookDamageTrigger) triggerComponent;
+                boolean callback = trigger.callback(player, attacker);
+
+                if (callback) {
+                    toRemove.add(trigger);
+                }
+            }
+
+            for (TookDamageTrigger trigger : toRemove) {
+                int skillLevel = trigger.getSkillLevel();
+                List<Integer> cooldowns = trigger.getCooldowns();
+
+                if (!cooldowns.isEmpty()) {
+                    TriggerListener.remove(player, trigger);
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            TriggerListener.add(player, trigger);
+                        }
+                    }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
+                }
             }
         }
-    }
-
-    public static void startListeningNormalAttack(Player player, NormalAttackTrigger normalAttackTrigger) {
-        List<NormalAttackTrigger> list = new ArrayList<>();
-        if (playerToNormalAttackTrigger.containsKey(player)) {
-            list = playerToNormalAttackTrigger.get(player);
-        }
-        list.add(normalAttackTrigger);
-        playerToNormalAttackTrigger.put(player, list);
     }
 
     public static void onPlayerNormalAttack(Player player, LivingEntity target, boolean isProjectile) {
-        if (playerToNormalAttackTrigger.containsKey(player)) {
-            List<NormalAttackTrigger> list = playerToNormalAttackTrigger.get(player);
+        if (playerToTriggerList.containsKey(player)) {
+            List<TriggerComponent> list = playerToTriggerList.get(player);
 
-            for (NormalAttackTrigger normalAttackTrigger : list) {
-                boolean callback = normalAttackTrigger.callback(player, target, isProjectile);
-                /*if (callback) {
-                    toRemove.add(normalAttackTrigger);
-                }*/
+            List<NormalAttackTrigger> toRemove = new ArrayList<>();
+
+            for (TriggerComponent triggerComponent : list) {
+                if (!(triggerComponent instanceof NormalAttackTrigger)) continue;
+                NormalAttackTrigger trigger = (NormalAttackTrigger) triggerComponent;
+                boolean callback = trigger.callback(player, target, isProjectile);
+
+                if (callback) {
+                    toRemove.add(trigger);
+                }
+            }
+
+            for (NormalAttackTrigger trigger : toRemove) {
+                int skillLevel = trigger.getSkillLevel();
+                List<Integer> cooldowns = trigger.getCooldowns();
+
+                if (!cooldowns.isEmpty()) {
+                    TriggerListener.remove(player, trigger);
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            TriggerListener.add(player, trigger);
+                        }
+                    }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
+                }
             }
         }
-    }
-
-    public static void removePlayerNormalAttack(Player player, NormalAttackTrigger toRemove) {
-        if (playerToNormalAttackTrigger.containsKey(player)) {
-            List<NormalAttackTrigger> list = playerToNormalAttackTrigger.get(player);
-
-            list.remove(toRemove);
-
-            if (list.isEmpty()) {
-                playerToNormalAttackTrigger.remove(player);
-            } else {
-                playerToNormalAttackTrigger.put(player, list);
-            }
-        }
-    }
-
-    public static void startListeningSkillAttack(Player player, SkillAttackTrigger skillAttackTrigger) {
-        playerToSkillAttackTrigger.put(player, skillAttackTrigger);
     }
 
     public static void onPlayerSkillAttack(Player player, LivingEntity target) {
-        if (playerToSkillAttackTrigger.containsKey(player)) {
-            boolean callback = playerToSkillAttackTrigger.get(player).callback(player, target);
-            if (callback) {
-                playerToSkillAttackTrigger.remove(player);
+        if (playerToTriggerList.containsKey(player)) {
+            List<TriggerComponent> list = playerToTriggerList.get(player);
+
+            List<SkillAttackTrigger> toRemove = new ArrayList<>();
+
+            for (TriggerComponent triggerComponent : list) {
+                if (!(triggerComponent instanceof SkillAttackTrigger)) continue;
+                SkillAttackTrigger trigger = (SkillAttackTrigger) triggerComponent;
+                boolean callback = trigger.callback(player, target);
+
+                if (callback) {
+                    toRemove.add(trigger);
+                }
+            }
+
+            for (SkillAttackTrigger trigger : toRemove) {
+                int skillLevel = trigger.getSkillLevel();
+                List<Integer> cooldowns = trigger.getCooldowns();
+
+                if (!cooldowns.isEmpty()) {
+                    TriggerListener.remove(player, trigger);
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            TriggerListener.add(player, trigger);
+                        }
+                    }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
+                }
             }
         }
-    }
-
-    public static void startListeningSkillCast(Player player, SkillCastTrigger skillCastTrigger) {
-        playerToSkillCastTrigger.put(player, skillCastTrigger);
     }
 
     public static void onPlayerSkillCast(Player player) {
-        if (playerToSkillCastTrigger.containsKey(player)) {
-            player.sendMessage("onPlayerSkillCast");
-            boolean callback = playerToSkillCastTrigger.get(player).callback(player);
-            if (callback) {
-                playerToSkillCastTrigger.remove(player);
+        if (playerToTriggerList.containsKey(player)) {
+            List<TriggerComponent> list = playerToTriggerList.get(player);
+
+            List<SkillCastTrigger> toRemove = new ArrayList<>();
+
+            for (TriggerComponent triggerComponent : list) {
+                if (!(triggerComponent instanceof SkillCastTrigger)) continue;
+                SkillCastTrigger trigger = (SkillCastTrigger) triggerComponent;
+                boolean callback = trigger.callback(player);
+
+                if (callback) {
+                    toRemove.add(trigger);
+                }
+            }
+
+            for (SkillCastTrigger trigger : toRemove) {
+                int skillLevel = trigger.getSkillLevel();
+                List<Integer> cooldowns = trigger.getCooldowns();
+
+                if (!cooldowns.isEmpty()) {
+                    TriggerListener.remove(player, trigger);
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            TriggerListener.add(player, trigger);
+                        }
+                    }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
+                }
             }
         }
-    }
-
-    public static void startListeningAddPiercingToArrowShootFromCrossbowTrigger(Player player, AddPiercingToArrowShootFromCrossbowTrigger addPiercingToArrowShootFromCrossbowTrigger) {
-        playerToAddPiercingToArrowShootFromCrossbowTrigger.put(player, addPiercingToArrowShootFromCrossbowTrigger);
     }
 
     public static void onPlayerShootCrossbow(Player player, Arrow arrow) {
-        if (playerToAddPiercingToArrowShootFromCrossbowTrigger.containsKey(player)) {
-            playerToAddPiercingToArrowShootFromCrossbowTrigger.get(player).callback(arrow);
-            //playerToAddPiercingToArrowShootFromCrossbowTrigger.remove(player); DO NOT REMOVE SINCE THIS MECHANIC HAS NO COOLDOWN AND DOES NOT ADD ITSELF BACK
-        }
-    }
+        if (playerToTriggerList.containsKey(player)) {
+            List<TriggerComponent> list = playerToTriggerList.get(player);
 
-    public static void startListeningSavedEntitySpawn(Player player, SavedEntitySpawnTrigger trigger) {
-        player.sendMessage("SaveEntitySpawnTrigger start listening");
-        playerToSavedEntitySpawnTrigger.put(player, trigger);
+            for (TriggerComponent triggerComponent : list) {
+                if (!(triggerComponent instanceof AddPiercingToArrowShootFromCrossbowTrigger)) continue;
+                AddPiercingToArrowShootFromCrossbowTrigger trigger = (AddPiercingToArrowShootFromCrossbowTrigger) triggerComponent;
+                trigger.callback(arrow);
+            }
+        }
     }
 
     public static void onPlayerSavedEntitySpawn(Player player, LivingEntity created) {
-        player.sendMessage("SaveEntitySpawnTrigger activation 0");
-        if (playerToSavedEntitySpawnTrigger.containsKey(player)) {
-            player.sendMessage("SaveEntitySpawnTrigger activation 1");
-            boolean callback = playerToSavedEntitySpawnTrigger.get(player).callback(player, created);
-            if (callback) {
-                player.sendMessage("SaveEntitySpawnTrigger activation 2");
-                playerToSavedEntitySpawnTrigger.remove(player);
+        if (playerToTriggerList.containsKey(player)) {
+            List<TriggerComponent> list = playerToTriggerList.get(player);
+
+            List<SavedEntitySpawnTrigger> toRemove = new ArrayList<>();
+
+            for (TriggerComponent triggerComponent : list) {
+                if (!(triggerComponent instanceof SavedEntitySpawnTrigger)) continue;
+                SavedEntitySpawnTrigger trigger = (SavedEntitySpawnTrigger) triggerComponent;
+                boolean callback = trigger.callback(player, created);
+
+                if (callback) {
+                    toRemove.add(trigger);
+                }
+            }
+
+            for (SavedEntitySpawnTrigger trigger : toRemove) {
+                int skillLevel = trigger.getSkillLevel();
+                List<Integer> cooldowns = trigger.getCooldowns();
+
+                if (!cooldowns.isEmpty()) {
+                    TriggerListener.remove(player, trigger);
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            TriggerListener.add(player, trigger);
+                        }
+                    }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
+                }
             }
         }
-    }
-
-    public static void startListeningCompanionSpawn(Player player, CompanionSpawnTrigger trigger) {
-        player.sendMessage("CompanionSpawnTrigger start listening");
-        playerToCompanionSpawnTrigger.put(player, trigger);
     }
 
     public static void onPlayerCompanionSpawn(Player player, LivingEntity spawned) {
-        player.sendMessage("CompanionSpawnTrigger activation 0");
-        if (playerToCompanionSpawnTrigger.containsKey(player)) {
-            player.sendMessage("CompanionSpawnTrigger activation 1");
-            boolean callback = playerToCompanionSpawnTrigger.get(player).callback(player, spawned);
-            if (callback) {
-                player.sendMessage("CompanionSpawnTrigger activation 2");
-                playerToCompanionSpawnTrigger.remove(player);
+        if (playerToTriggerList.containsKey(player)) {
+            List<TriggerComponent> list = playerToTriggerList.get(player);
+
+            List<CompanionSpawnTrigger> toRemove = new ArrayList<>();
+
+            for (TriggerComponent triggerComponent : list) {
+                if (!(triggerComponent instanceof CompanionSpawnTrigger)) continue;
+                CompanionSpawnTrigger trigger = (CompanionSpawnTrigger) triggerComponent;
+                boolean callback = trigger.callback(player, spawned);
+
+                if (callback) {
+                    toRemove.add(trigger);
+                }
+            }
+
+            for (CompanionSpawnTrigger trigger : toRemove) {
+                int skillLevel = trigger.getSkillLevel();
+                List<Integer> cooldowns = trigger.getCooldowns();
+
+                if (!cooldowns.isEmpty()) {
+                    TriggerListener.remove(player, trigger);
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            TriggerListener.add(player, trigger);
+                        }
+                    }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
+                }
             }
         }
     }
 
-    public static void onSkillUpgrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel, int castCounter) {
-        stopInit(player); //stop old init
+    public static void onSkillUpgrade(Player player, InitializeTrigger initializeTrigger, int skillIndex, int nextSkillLevel, int castCounter) {
+        stopInit(player, skillIndex); //stop old init
 
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
 
-        initializeTrigger.startEffects(player, nextSkillLevel, targets, castCounter);
-        playerToInitializeTrigger.put(player, initializeTrigger);
+        initializeTrigger.startEffects(player, nextSkillLevel, targets, castCounter, skillIndex);
     }
 
-    public static void onSkillDowngrade(Player player, InitializeTrigger initializeTrigger, int nextSkillLevel, int castCounter) {
-        stopInit(player);
+    public static void onSkillDowngrade(Player player, InitializeTrigger initializeTrigger, int skillIndex, int nextSkillLevel, int castCounter) {
+        stopInit(player, skillIndex);
         if (nextSkillLevel == 0) return;
 
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
 
-        initializeTrigger.startEffects(player, nextSkillLevel, targets, castCounter);
-        playerToInitializeTrigger.put(player, initializeTrigger);
+        initializeTrigger.startEffects(player, nextSkillLevel, targets, castCounter, skillIndex);
     }
 
-    private static void stopInit(Player player) {
-        if (playerToInitializeTrigger.containsKey(player)) {
-            //debug player.sendMessage("StopEffects");
-            playerToInitializeTrigger.get(player).stopEffects(player);
-            playerToInitializeTrigger.remove(player);
+    private static void stopInit(Player player, int skillIndex) {
+        if (playerToTriggerList.containsKey(player)) {
+            List<TriggerComponent> list = playerToTriggerList.get(player);
+
+            List<TriggerComponent> toRemove = new ArrayList<>();
+
+            for (TriggerComponent trigger : list) {
+                int triggerSkillIndex = trigger.getSkillIndex();
+
+                if (skillIndex != triggerSkillIndex) continue;
+
+                toRemove.add(trigger);
+            }
+
+            // TODO trigger clear
+            // trigger.stopEffects(player);
+            // SkillDataManager.onPlayerQuit(player); // stop effects
+
+            list.removeAll(toRemove);
+            if (list.isEmpty()) {
+                playerToTriggerList.remove(player);
+            } else {
+                playerToTriggerList.put(player, list);
+            }
         }
     }
 }

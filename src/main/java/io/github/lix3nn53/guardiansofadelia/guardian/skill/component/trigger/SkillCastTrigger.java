@@ -1,11 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,25 +26,21 @@ public class SkillCastTrigger extends TriggerComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
+        this.skillIndex = skillIndex;
         this.caster = caster;
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
         SkillCastTrigger skillCastTrigger = this;
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (LivingEntity target : targets) {
-                    if (target instanceof Player) {
-                        TriggerListener.startListeningSkillCast((Player) target, skillCastTrigger);
-                    }
-                }
+        for (LivingEntity target : targets) {
+            if (target instanceof Player) {
+                TriggerListener.add((Player) target, skillCastTrigger);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 10L);
+        }
 
         return true;
     }
@@ -63,23 +57,15 @@ public class SkillCastTrigger extends TriggerComponent {
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(attacker);
         attacker.sendMessage("scast callback");
-        boolean cast = executeChildren(caster, skillLevel, targets, castCounter);
 
-        if (!cast) return false;
+        return executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
+    }
 
-        SkillCastTrigger trigger = this;
+    public int getSkillLevel() {
+        return skillLevel;
+    }
 
-        if (cooldowns.isEmpty()) {
-            TriggerListener.startListeningSkillCast(attacker, trigger);
-        } else {
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    TriggerListener.startListeningSkillCast(attacker, trigger);
-                }
-            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
-        }
-
-        return true;
+    public List<Integer> getCooldowns() {
+        return cooldowns;
     }
 }

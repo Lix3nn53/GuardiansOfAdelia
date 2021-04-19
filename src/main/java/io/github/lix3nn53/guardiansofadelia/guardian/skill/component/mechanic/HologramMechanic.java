@@ -103,9 +103,10 @@ public class HologramMechanic extends MechanicComponent {
      * @param caster
      * @param skillLevel
      * @param targets
+     * @param skillIndex
      * @return
      */
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
         List<LivingEntity> armorStandList = new ArrayList<>();
@@ -161,7 +162,7 @@ public class HologramMechanic extends MechanicComponent {
             armorStandList.add(model);
         }
 
-        return executeChildren(caster, skillLevel, armorStandList, castCounter);
+        return executeChildren(caster, skillLevel, armorStandList, castCounter, skillIndex);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
@@ -8,7 +7,6 @@ import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,25 +37,21 @@ public class CompanionSpawnTrigger extends TriggerComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
+        this.skillIndex = skillIndex;
         this.caster = caster;
         this.skillLevel = skillLevel;
         this.castCounter = castCounter;
 
         CompanionSpawnTrigger companionSpawnTrigger = this;
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (LivingEntity target : targets) {
-                    if (target instanceof Player) {
-                        TriggerListener.startListeningCompanionSpawn((Player) target, companionSpawnTrigger);
-                    }
-                }
+        for (LivingEntity target : targets) {
+            if (target instanceof Player) {
+                TriggerListener.add((Player) target, companionSpawnTrigger);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 10L);
+        }
 
         return true;
     }
@@ -82,30 +76,23 @@ public class CompanionSpawnTrigger extends TriggerComponent {
                 if (internalName.equals(mobCodeGet)) {
                     List<LivingEntity> targets = new ArrayList<>();
                     targets.add(spawned);
-                    cast = executeChildren(caster, skillLevel, targets, castCounter);
+                    cast = executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
                 }
             }
         } else { // executeChildren without comparison if mobCode is not present
             List<LivingEntity> targets = new ArrayList<>();
             targets.add(spawned);
-            cast = executeChildren(caster, skillLevel, targets, castCounter);
+            cast = executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
         }
 
-        if (!cast) return false;
+        return cast;
+    }
 
-        CompanionSpawnTrigger trigger = this;
+    public int getSkillLevel() {
+        return skillLevel;
+    }
 
-        if (cooldowns.isEmpty()) { // Start listening again immediately if cooldowns is empty
-            TriggerListener.startListeningCompanionSpawn(player, trigger);
-        } else { // Start listening again after the delay stored in cooldowns
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    TriggerListener.startListeningCompanionSpawn(player, trigger);
-                }
-            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldowns.get(skillLevel - 1));
-        }
-
-        return true;
+    public List<Integer> getCooldowns() {
+        return cooldowns;
     }
 }

@@ -48,7 +48,7 @@ public class ValueCondition extends ConditionComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
         boolean success = false;
@@ -62,14 +62,14 @@ public class ValueCondition extends ConditionComponent {
             int value = SkillDataManager.getValue(caster, key);
 
             if (value >= minValue && value <= currentMax) {
-                success = executeChildren(caster, skillLevel, targets, castCounter);
+                success = executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
             }
         } else {
             for (LivingEntity target : targets) {
                 int value = SkillDataManager.getValue(target, key);
 
                 if (value >= minValue && value <= currentMax) {
-                    success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter) || success;
+                    success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter, skillIndex) || success;
                 }
             }
         }

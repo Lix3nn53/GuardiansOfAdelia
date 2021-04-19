@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
@@ -19,7 +18,8 @@ public class InitializeTrigger extends TriggerComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
+        this.skillIndex = skillIndex;
 
         return false;
     }
@@ -29,14 +29,9 @@ public class InitializeTrigger extends TriggerComponent {
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
 
-    public void startEffects(Player caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
-        executeChildren(caster, skillLevel, targets, castCounter);
-    }
+    public void startEffects(Player caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
+        this.skillIndex = skillIndex;
 
-
-    public void stopEffects(Player caster) {
-        caster.sendMessage("stopEffects");
-        SkillDataManager.onPlayerQuit(caster);
-        TriggerListener.onPlayerQuit(caster);
+        executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
     }
 }

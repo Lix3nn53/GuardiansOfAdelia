@@ -38,7 +38,7 @@ public class CompanionCondition extends ConditionComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
         boolean success = false;
@@ -51,7 +51,7 @@ public class CompanionCondition extends ConditionComponent {
             int value = companions.size();
 
             if (value >= minValue && value <= maxValue) {
-                success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter) || success;
+                success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter, skillIndex) || success;
             }
         }
 

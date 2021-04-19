@@ -37,7 +37,7 @@ public class ChangeSkillLevelMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
         int newSkillLevel = value;
@@ -57,7 +57,7 @@ public class ChangeSkillLevelMechanic extends MechanicComponent {
             }
         }
 
-        return executeChildren(caster, newSkillLevel, targets, castCounter);
+        return executeChildren(caster, newSkillLevel, targets, castCounter, skillIndex);
     }
 
     @Override

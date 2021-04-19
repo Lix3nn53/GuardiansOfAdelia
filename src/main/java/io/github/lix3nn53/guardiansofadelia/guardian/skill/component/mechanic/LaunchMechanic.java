@@ -30,7 +30,7 @@ public class LaunchMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
         double forward = skillLevel - 1 < forwardSpeedList.size() ? forwardSpeedList.get(skillLevel - 1) : 0;

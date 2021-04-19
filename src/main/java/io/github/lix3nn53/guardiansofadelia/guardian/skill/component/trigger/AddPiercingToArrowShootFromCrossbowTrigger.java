@@ -1,13 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
@@ -29,24 +27,20 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
+        this.skillIndex = skillIndex;
         this.caster = caster;
         this.skillLevel = skillLevel;
 
         AddPiercingToArrowShootFromCrossbowTrigger crossbowTrigger = this;
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (LivingEntity target : targets) {
-                    if (target instanceof Player) {
-                        TriggerListener.startListeningAddPiercingToArrowShootFromCrossbowTrigger((Player) target, crossbowTrigger);
-                    }
-                }
+        for (LivingEntity target : targets) {
+            if (target instanceof Player) {
+                TriggerListener.add((Player) target, crossbowTrigger);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 10L);
+        }
 
         return true;
     }

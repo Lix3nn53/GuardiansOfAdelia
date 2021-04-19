@@ -21,12 +21,12 @@ public class TargetsEmptyCondition extends ConditionComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         boolean empty = targets.isEmpty();
 
         boolean success = false;
         if (this.empty == empty) {
-            success = executeChildren(caster, skillLevel, targets, castCounter);
+            success = executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
         }
 
         return success;

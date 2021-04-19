@@ -21,7 +21,7 @@ public class CloneCurrentTargets extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
         List<LivingEntity> temporaryEntities = new ArrayList<>();
@@ -49,7 +49,7 @@ public class CloneCurrentTargets extends TargetComponent {
             targetsNew = temporaryEntities;
         }
 
-        return executeChildren(caster, skillLevel, targetsNew, castCounter);
+        return executeChildren(caster, skillLevel, targetsNew, castCounter, skillIndex);
     }
 
     @Override

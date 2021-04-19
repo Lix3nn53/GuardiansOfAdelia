@@ -11,8 +11,8 @@ public class EmptyComponent extends SkillComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
-        return executeChildren(caster, skillLevel, targets, castCounter);
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
+        return executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class SelfTarget extends TargetComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         List<LivingEntity> targetsNew = new ArrayList<>();
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {
@@ -36,7 +36,7 @@ public class SelfTarget extends TargetComponent {
             targetsNew.add(caster);
         }
 
-        return executeChildren(caster, skillLevel, targetsNew, castCounter);
+        return executeChildren(caster, skillLevel, targetsNew, castCounter, skillIndex);
     }
 
     @Override

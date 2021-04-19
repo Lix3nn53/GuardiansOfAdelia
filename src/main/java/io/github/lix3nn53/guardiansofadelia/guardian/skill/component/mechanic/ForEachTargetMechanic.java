@@ -14,12 +14,12 @@ public class ForEachTargetMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
         boolean cast = false;
         for (LivingEntity target : targets) {
-            boolean b = executeChildren(caster, skillLevel, targets, castCounter);
+            boolean b = executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
 
             if (b) {
                 cast = true;

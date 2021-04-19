@@ -34,7 +34,7 @@ public class StatusEffectMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
         int duration = durations.get(skillLevel - 1);
@@ -44,8 +44,10 @@ public class StatusEffectMechanic extends MechanicComponent {
                 StatusEffectManager.addStatus(target, effectType);
 
                 // Custom code for mobs
-                if (effectType.equals(StatusEffectType.ROOT) && !(target instanceof Player)) {
-                    target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, 5));
+                if (effectType.equals(StatusEffectType.ROOT) || effectType.equals(StatusEffectType.STUN)) {
+                    if (!(target instanceof Player)) {
+                        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, 5));
+                    }
                 }
             }
         }

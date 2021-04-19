@@ -22,14 +22,14 @@ public class TargetCountCondition extends ConditionComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         int size = targets.size();
 
         boolean success = false;
         GuardiansOfAdelia.getInstance().getLogger().info("this.count " + this.count);
         GuardiansOfAdelia.getInstance().getLogger().info("size " + size);
         if (size >= this.count) {
-            success = executeChildren(caster, skillLevel, targets, castCounter);
+            success = executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
         }
 
         return success;

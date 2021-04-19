@@ -15,7 +15,7 @@ public class RepeatCancelMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         SkillDataManager.stopRepeatTasksOfCast(caster, castCounter);
         return true;
     }

@@ -63,6 +63,7 @@ public class ProjectileMechanic extends MechanicComponent {
     //very custom things
     private boolean addCasterAsFirstTargetIfHitSuccess;
     private boolean addCasterAsSecondTargetIfHitFail; // First target is empty entity at hit location
+    private int skillIndex;
 
     /*
     // For spread types Cone and Horizontal_Cone, normal projectile
@@ -210,9 +211,10 @@ public class ProjectileMechanic extends MechanicComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
+        this.skillIndex = skillIndex;
         this.caster = caster;
         this.castCounter = castCounter;
         UUID skillKey = UUID.randomUUID(); //skill key to put into projectile
@@ -415,13 +417,13 @@ public class ProjectileMechanic extends MechanicComponent {
             if (PetManager.isCompanion(shooterLiving)) {
                 Player owner = PetManager.getOwner(shooterLiving);
 
-                executeChildren(owner, skillLevel, targets, castCounter);
+                executeChildren(owner, skillLevel, targets, castCounter, skillIndex);
             } else if (SkillDataManager.isSavedEntity(shooterLiving)) {
                 LivingEntity owner = SkillDataManager.getOwner(shooterLiving);
 
-                executeChildren(owner, skillLevel, targets, castCounter);
+                executeChildren(owner, skillLevel, targets, castCounter, skillIndex);
             } else {
-                executeChildren(shooterLiving, skillLevel, targets, castCounter);
+                executeChildren(shooterLiving, skillLevel, targets, castCounter, skillIndex);
             }
         }
 

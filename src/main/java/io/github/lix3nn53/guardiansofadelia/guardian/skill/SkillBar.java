@@ -60,7 +60,7 @@ public class SkillBar {
                     InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
                     if (initializeTrigger != null) {
                         int nextSkillLevel = skill.getCurrentSkillLevel(getInvestedSkillPoints(i));
-                        TriggerListener.onSkillUpgrade(player, initializeTrigger, nextSkillLevel, castCounter);
+                        TriggerListener.onSkillUpgrade(player, initializeTrigger, i, nextSkillLevel, castCounter);
                         castCounter++;
                     }
                 }
@@ -90,7 +90,7 @@ public class SkillBar {
             if (player.getLevel() >= reqPlayerLevel) {
                 InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
                 if (initializeTrigger != null) {
-                    TriggerListener.onSkillUpgrade(player, initializeTrigger, currentSkillLevel + 1, castCounter);
+                    TriggerListener.onSkillUpgrade(player, initializeTrigger, skillIndex, currentSkillLevel + 1, castCounter);
                     castCounter++;
                 }
                 int newInvested = invested + reqSkillPoints;
@@ -120,7 +120,7 @@ public class SkillBar {
 
         InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
         if (initializeTrigger != null) {
-            TriggerListener.onSkillDowngrade(player, initializeTrigger, currentSkillLevel - 1, castCounter);
+            TriggerListener.onSkillDowngrade(player, initializeTrigger, skillIndex, currentSkillLevel - 1, castCounter);
         }
 
         int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel - 1);
@@ -143,7 +143,7 @@ public class SkillBar {
 
             InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
             if (initializeTrigger != null) {
-                TriggerListener.onSkillDowngrade(player, initializeTrigger, 0, castCounter);
+                TriggerListener.onSkillDowngrade(player, initializeTrigger, skillIndex, 0, castCounter);
                 castCounter++;
             }
 
@@ -283,7 +283,7 @@ public class SkillBar {
             return false;
         }
 
-        boolean cast = skill.cast(player, skillLevel, new ArrayList<>(), castCounter);//cast ends when this returns
+        boolean cast = skill.cast(player, skillLevel, new ArrayList<>(), castCounter, skillIndex);//cast ends when this returns
 
         if (!cast) {
             player.sendMessage(ChatColor.RED + "Failed to cast skill");

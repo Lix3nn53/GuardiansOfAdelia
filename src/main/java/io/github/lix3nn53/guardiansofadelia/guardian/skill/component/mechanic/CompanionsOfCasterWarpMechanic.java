@@ -25,7 +25,7 @@ public class CompanionsOfCasterWarpMechanic extends ConditionComponent {
     }
 
     @Override
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
         if (!(caster instanceof Player)) return false;
         Player owner = (Player) caster;
