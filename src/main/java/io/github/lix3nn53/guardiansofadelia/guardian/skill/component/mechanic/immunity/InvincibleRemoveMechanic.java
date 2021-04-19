@@ -15,11 +15,7 @@ public class InvincibleRemoveMechanic extends MechanicComponent {
     public InvincibleRemoveMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 
-        if (!configurationSection.contains("delay")) {
-            configLoadError("delay");
-        }
-
-        this.delay = configurationSection.getInt("delay");
+        this.delay = configurationSection.contains("delay") ? configurationSection.getInt("delay") : 0;
     }
 
     @Override

@@ -16,6 +16,8 @@ public class FlagSetMechanic extends MechanicComponent {
     private final List<Integer> ticks;
     private final boolean isUnique;
 
+    private final String multiplyDurationValue;
+
     public FlagSetMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 
@@ -31,6 +33,8 @@ public class FlagSetMechanic extends MechanicComponent {
         } else {
             this.ticks = new ArrayList<>();
         }
+
+        this.multiplyDurationValue = configurationSection.contains("multiplyDurationValue") ? configurationSection.getString("multiplyDurationValue") : null;
     }
 
     @Override
@@ -43,22 +47,30 @@ public class FlagSetMechanic extends MechanicComponent {
             } else {
                 SkillDataManager.addFlag(target, key);
             }
-        }
 
-        if (!ticks.isEmpty()) {
-            new BukkitRunnable() { //remove buffs from buffed players
 
-                @Override
-                public void run() {
-                    for (LivingEntity target : targets) {
+            if (!ticks.isEmpty()) {
+                int ticksCurrent = ticks.get(skillLevel - 1);
+
+                if (multiplyDurationValue != null) {
+                    int value = SkillDataManager.getValue(target, multiplyDurationValue);
+                    if (value > 0) {
+                        ticksCurrent *= value;
+                    }
+                }
+
+                new BukkitRunnable() {
+
+                    @Override
+                    public void run() {
                         if (isUnique) {
                             SkillDataManager.removeFlag(target, key + castCounter);
                         } else {
                             SkillDataManager.removeFlag(target, key);
                         }
                     }
-                }
-            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), ticks.get(skillLevel - 1));
+                }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), ticksCurrent);
+            }
         }
 
         return true;

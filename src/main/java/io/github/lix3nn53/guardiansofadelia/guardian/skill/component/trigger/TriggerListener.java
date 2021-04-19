@@ -80,16 +80,20 @@ public class TriggerListener {
         if (playerToNormalAttackTrigger.containsKey(player)) {
             List<NormalAttackTrigger> list = playerToNormalAttackTrigger.get(player);
 
-            List<NormalAttackTrigger> toRemove = new ArrayList<>();
-
             for (NormalAttackTrigger normalAttackTrigger : list) {
                 boolean callback = normalAttackTrigger.callback(player, target, isProjectile);
-                if (callback) {
+                /*if (callback) {
                     toRemove.add(normalAttackTrigger);
-                }
+                }*/
             }
+        }
+    }
 
-            list.removeAll(toRemove);
+    public static void removePlayerNormalAttack(Player player, NormalAttackTrigger toRemove) {
+        if (playerToNormalAttackTrigger.containsKey(player)) {
+            List<NormalAttackTrigger> list = playerToNormalAttackTrigger.get(player);
+
+            list.remove(toRemove);
 
             if (list.isEmpty()) {
                 playerToNormalAttackTrigger.remove(player);

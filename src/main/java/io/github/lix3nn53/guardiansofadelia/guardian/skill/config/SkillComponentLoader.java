@@ -203,6 +203,8 @@ public class SkillComponentLoader {
             return new DistanceCondition(configurationSection);
         } else if (componentType.equals(GlowMechanic.class.getSimpleName())) {
             return new GlowMechanic(configurationSection);
+        } else if (componentType.equals(PotionEffectRemoveMechanic.class.getSimpleName())) {
+            return new PotionEffectRemoveMechanic(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

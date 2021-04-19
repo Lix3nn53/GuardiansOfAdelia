@@ -1,9 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
+import org.bukkit.Axis;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
@@ -208,6 +211,139 @@ public class TargetHelper {
         }
 
         return result;
+    }
+
+    public static List<LivingEntity> getBoxTargets(World world, Vector[] cube, double length_x, double length_y, double length_z) {
+        List<LivingEntity> result = new ArrayList<>();
+
+        double highest_x = getHighest(cube, Axis.X);
+        double highest_y = getHighest(cube, Axis.Y);
+        double highest_z = getHighest(cube, Axis.Z);
+        double lowest_x = getLowest(cube, Axis.X);
+        double lowest_y = getLowest(cube, Axis.Y);
+        double lowest_z = getLowest(cube, Axis.Z);
+
+        Vector center = new Vector(lowest_x, lowest_y, lowest_z).add(new Vector(highest_x, highest_y, highest_z)).
+                divide(new Vector(2, 2, 2));
+
+        Collection<Entity> nearbyEntities = null;
+
+        if (length_x > length_y && length_x > length_z) {
+            nearbyEntities = world.getNearbyEntities(new Location(world, center.getX(), center.getY(), center.getZ()),
+                    length_x * 2, length_x * 2, length_x * 2);
+        } else if (length_y > length_x && length_y > length_z) {
+            nearbyEntities = world.getNearbyEntities(new Location(world, center.getX(), center.getY(), center.getZ()),
+                    length_y * 2, length_y * 2, length_y * 2);
+        } else if (length_z > length_x && length_z > length_y) {
+            nearbyEntities = world.getNearbyEntities(new Location(world, center.getX(), center.getY(), center.getZ()),
+                    length_z * 2, length_z * 2, length_z * 2);
+        }
+
+        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+
+        for (Player player : onlinePlayers) {
+            player.sendMessage("highest_x" + highest_x);
+            player.sendMessage("highest_y" + highest_y);
+            player.sendMessage("highest_z" + highest_z);
+            player.sendMessage("lowest_x" + lowest_x);
+            player.sendMessage("lowest_y" + lowest_y);
+            player.sendMessage("lowest_z" + lowest_z);
+        }
+
+        if (nearbyEntities != null) {
+            for (Entity entity : nearbyEntities) {
+                for (Player player : onlinePlayers) {
+                    player.sendMessage("" + entity.getCustomName());
+                }
+
+                if (!(entity instanceof LivingEntity)) continue;
+                BoundingBox boundingBox = entity.getBoundingBox();
+
+                double maxX = boundingBox.getMaxX();
+                double maxY = boundingBox.getMaxY();
+                double maxZ = boundingBox.getMaxZ();
+                double minX = boundingBox.getMinX();
+                double minY = boundingBox.getMinY();
+                double minZ = boundingBox.getMinZ();
+
+                for (Player player : onlinePlayers) {
+                    player.sendMessage("maxX" + maxX);
+                    player.sendMessage("maxY" + maxY);
+                    player.sendMessage("maxZ" + maxZ);
+                    player.sendMessage("minX" + minX);
+                    player.sendMessage("minY" + minY);
+                    player.sendMessage("minZ" + minZ);
+                }
+
+                if (!overlaps(lowest_x, highest_x, minX, maxX)) {
+                    continue; // NO INTERSECTION
+                } else if (!overlaps(lowest_y, highest_y, minY, maxY)) {
+                    continue; // NO INTERSECTION
+                } else if (!overlaps(lowest_z, highest_z, minZ, maxZ)) {
+                    continue; // NO INTERSECTION
+                }
+
+                result.add((LivingEntity) entity);
+            }
+        }
+
+        return result;
+    }
+
+    public static double getHighest(Vector[] vectors, Axis axis) {
+        double result = 0;
+
+        if (axis.equals(Axis.X)) {
+            result = vectors[0].getX();
+        } else if (axis.equals(Axis.Y)) {
+            result = vectors[0].getY();
+        } else if (axis.equals(Axis.Z)) {
+            result = vectors[0].getZ();
+        }
+
+        for (Vector vector : vectors) {
+            if (axis.equals(Axis.X)) {
+                if (vector.getX() > result) result = vector.getX();
+            } else if (axis.equals(Axis.Y)) {
+                if (vector.getY() > result) result = vector.getY();
+            } else if (axis.equals(Axis.Z)) {
+                if (vector.getZ() > result) result = vector.getZ();
+            }
+        }
+
+        return result;
+    }
+
+    public static double getLowest(Vector[] vectors, Axis axis) {
+        double result = 0;
+
+        if (axis.equals(Axis.X)) {
+            result = vectors[0].getX();
+        } else if (axis.equals(Axis.Y)) {
+            result = vectors[0].getY();
+        } else if (axis.equals(Axis.Z)) {
+            result = vectors[0].getZ();
+        }
+
+        for (Vector vector : vectors) {
+            if (axis.equals(Axis.X)) {
+                if (vector.getX() < result) result = vector.getX();
+            } else if (axis.equals(Axis.Y)) {
+                if (vector.getY() < result) result = vector.getY();
+            } else if (axis.equals(Axis.Z)) {
+                if (vector.getZ() < result) result = vector.getZ();
+            }
+        }
+
+        return result;
+    }
+
+    public static boolean overlaps(double min1, double max1, double min2, double max2) {
+        return isBetweenOrdered(min2, min1, max1) || isBetweenOrdered(min1, min2, max2);
+    }
+
+    public static boolean isBetweenOrdered(double val, double lowerBound, double upperBound) {
+        return lowerBound <= val && val <= upperBound;
     }
 
     public static boolean isPointInsideBox(Vector point, Vector center, Vector xLocal, Vector yLocal, Vector zLocal, double xLength, double yLength, double zLength) {

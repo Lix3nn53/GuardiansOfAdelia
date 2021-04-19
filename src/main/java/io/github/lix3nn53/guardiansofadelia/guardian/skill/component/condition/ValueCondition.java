@@ -62,7 +62,7 @@ public class ValueCondition extends ConditionComponent {
             int value = SkillDataManager.getValue(caster, key);
 
             if (value >= minValue && value <= currentMax) {
-                success = executeChildren(caster, skillLevel, targets, castCounter) || success;
+                success = executeChildren(caster, skillLevel, targets, castCounter);
             }
         } else {
             for (LivingEntity target : targets) {

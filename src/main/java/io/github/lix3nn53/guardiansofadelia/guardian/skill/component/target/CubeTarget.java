@@ -148,13 +148,14 @@ public class CubeTarget extends TargetComponent {
                 vectors = ParticleShapes.calculateCubeCorners(location, lengthV, false, 0, 0);
             }
 
-            Vector b1 = vectors[0];
+            /*Vector b1 = vectors[0];
             Vector b2 = vectors[1];
             Vector b4 = vectors[4];
             Vector t1 = vectors[3];
-            Vector t3 = vectors[6];
+            Vector t3 = vectors[6];*/
 
-            List<LivingEntity> boxTargets = TargetHelper.getBoxTargets(location.getWorld(), b1, b2, b4, t1, t3);
+            // List<LivingEntity> boxTargets = TargetHelper.getBoxTargets(location.getWorld(), b1, b2, b4, t1, t3);
+            List<LivingEntity> boxTargets = TargetHelper.getBoxTargets(location.getWorld(), vectors, length_x, length_y, length_z);
 
             ParticleShapes.drawCubeEdges(targets.get(0).getWorld(), vectors, particle, dustOptions, gap);
 

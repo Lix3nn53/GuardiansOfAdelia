@@ -223,6 +223,16 @@ skillThree:
   trigger:
     componentType: "SelfTarget"
     child1:
+      componentType: "FlagSetMechanic"
+      key: "reaper3active"
+      isUnique: false
+      ticks:
+        - 20
+        - 25
+        - 30
+        - 40
+      multiplyDurationValue: "souls"
+    child2:
       componentType: "PotionEffectMechanic"
       potionEffectType:
         - "GLOWING"
@@ -239,7 +249,7 @@ skillThree:
         - 1
         - 1
       multiplyDurationValue: "souls"
-    child2:
+    child3:
       componentType: "PotionEffectMechanic"
       potionEffectType:
         - "SPEED"
@@ -249,12 +259,12 @@ skillThree:
         - 30
         - 40
       amplifierList:
-        - 1
-        - 1
-        - 1
-        - 1
+        - 2
+        - 2.5
+        - 3
+        - 4
       multiplyDurationValue: "souls"
-    child3:
+    child4:
       componentType: "InvincibleMechanic"
       ticks:
         - 20
@@ -262,7 +272,7 @@ skillThree:
         - 30
         - 40
       multiplyDurationValue: "souls"
-    child4:
+    child5:
       componentType: "ParticleAnimationMechanic"
       particle:
         arrangementType: "DrawCylinder"
@@ -289,10 +299,12 @@ skillThree:
       pitchIncrease: 10
       playback: true
       multiplyDurationValue: "souls"
-    child5:
+      flagConditionKey: "reaper3active"
+      flagIsSet: true
+    child6:
       componentType: "SoundMechanic"
       goaSound: "SKILL_BUFF"
-    child6:
+    child7:
       componentType: "ValueSetMechanic"
       key: "souls"
       values:
@@ -300,6 +312,72 @@ skillThree:
         - 0
         - 0
         - 0
+    child8:
+      componentType: "FlagSetMechanic"
+      key: "flagForSkillCast"
+      isUnique: false
+      ticks:
+        - 1
+        - 1
+        - 1
+        - 1
+  trigger1:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "NormalAttackTrigger"
+      melee: true
+      projectile: true
+      cooldowns:
+        - 1
+        - 1
+        - 1
+        - 1
+      child1:
+        componentType: "FlagCondition"
+        key: "reaper3active"
+        isSet: true
+        isUnique: false
+        child1:
+          componentType: "FlagRemoveMechanic"
+          key: "reaper3active"
+        child2:
+          componentType: "PotionEffectRemoveMechanic"
+          potionEffectType:
+            - "GLOWING"
+            - "INVISIBILITY"
+            - "JUMP"
+            - "SPEED"
+        child3:
+          componentType: "InvincibleRemoveMechanic"
+    child2:
+      componentType: "SkillCastTrigger"
+      cooldowns:
+        - 1
+        - 1
+        - 1
+        - 1
+      child1:
+        componentType: "FlagCondition"
+        key: "flagForSkillCast"
+        isSet: false
+        isUnique: false
+        child1:
+          componentType: "FlagCondition"
+          key: "reaper3active"
+          isSet: true
+          isUnique: false
+          child1:
+            componentType: "FlagRemoveMechanic"
+            key: "reaper3active"
+          child2:
+            componentType: "PotionEffectRemoveMechanic"
+            potionEffectType:
+              - "GLOWING"
+              - "INVISIBILITY"
+              - "JUMP"
+              - "SPEED"
+          child3:
+            componentType: "InvincibleRemoveMechanic"
 skillPassive:
   name: "Soul Collector"
   customModelData: 38

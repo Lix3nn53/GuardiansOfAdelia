@@ -69,10 +69,14 @@ public class NormalAttackTrigger extends TriggerComponent {
      * The callback when player lands that applies child components
      */
     public boolean callback(Player attacker, LivingEntity target, boolean isProjectile) {
-        if (!this.melee || !this.projectile) {
+        attacker.sendMessage("NormalAttackTrigger callback");
+        if (!(this.melee && this.projectile)) {
+            attacker.sendMessage("1");
             if (this.melee && isProjectile) {
+                attacker.sendMessage("2");
                 return false;
             } else if (this.projectile && !isProjectile) {
+                attacker.sendMessage("3");
                 return false;
             }
         }
@@ -82,12 +86,15 @@ public class NormalAttackTrigger extends TriggerComponent {
         boolean cast = executeChildren(caster, skillLevel, targets, castCounter);
 
         if (!cast) return false;
+        attacker.sendMessage("4");
 
         NormalAttackTrigger trigger = this;
 
         if (cooldowns.isEmpty()) {
-            TriggerListener.startListeningNormalAttack(attacker, trigger);
+            // TriggerListener.startListeningNormalAttack(attacker, trigger);
         } else {
+            TriggerListener.removePlayerNormalAttack(attacker, this);
+
             new BukkitRunnable() {
                 @Override
                 public void run() {
