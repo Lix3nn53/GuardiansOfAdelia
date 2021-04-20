@@ -333,34 +333,7 @@ skillThree:
         - 1
         - 1
       child1:
-        componentType: "FlagCondition"
-        key: "reaper3active"
-        isSet: true
-        isUnique: false
-        child1:
-          componentType: "FlagRemoveMechanic"
-          key: "reaper3active"
-        child2:
-          componentType: "PotionEffectRemoveMechanic"
-          potionEffectType:
-            - "GLOWING"
-            - "INVISIBILITY"
-            - "JUMP"
-            - "SPEED"
-        child3:
-          componentType: "InvincibleRemoveMechanic"
-    child2:
-      componentType: "SkillCastTrigger"
-      cooldowns:
-        - 1
-        - 1
-        - 1
-        - 1
-      child1:
-        componentType: "FlagCondition"
-        key: "flagForSkillCast"
-        isSet: false
-        isUnique: false
+        componentType: "SelfTarget"
         child1:
           componentType: "FlagCondition"
           key: "reaper3active"
@@ -378,6 +351,50 @@ skillThree:
               - "SPEED"
           child3:
             componentType: "InvincibleRemoveMechanic"
+          child4:
+            componentType: "ParticleMechanic"
+            particle:
+              arrangementType: "FillCircle"
+              particleType: "EXPLOSION_HUGE"
+              radius: 3
+              amount: 2
+              direction: "XZ"
+            data1:
+              - 3
+              - 3.5
+              - 3
+              - 3.25
+    child2:
+      componentType: "SkillCastTrigger"
+      cooldowns:
+        - 1
+        - 1
+        - 1
+        - 1
+      child1:
+        componentType: "SelfTarget"
+        child1:
+          componentType: "FlagCondition"
+          key: "flagForSkillCast"
+          isSet: false
+          isUnique: false
+          child1:
+            componentType: "FlagCondition"
+            key: "reaper3active"
+            isSet: true
+            isUnique: false
+            child1:
+              componentType: "FlagRemoveMechanic"
+              key: "reaper3active"
+            child2:
+              componentType: "PotionEffectRemoveMechanic"
+              potionEffectType:
+                - "GLOWING"
+                - "INVISIBILITY"
+                - "JUMP"
+                - "SPEED"
+            child3:
+              componentType: "InvincibleRemoveMechanic"
 skillPassive:
   name: "Soul Collector"
   customModelData: 38
@@ -500,7 +517,7 @@ skillUltimate:
           pitchIncrease: 10
       child2:
         componentType: "HologramMechanic"
-        helmetType: "NETHERITE_SWORD"
+        helmetType: "NETHERITE_PICKAXE"
         customModelData: 3
         durations:
           - 55
@@ -513,7 +530,7 @@ skillUltimate:
         anglez: 0.78
       child3:
         componentType: "HologramMechanic"
-        helmetType: "NETHERITE_SWORD"
+        helmetType: "NETHERITE_PICKAXE"
         customModelData: 3
         durations:
           - 55
@@ -575,7 +592,7 @@ skillUltimate:
           multiplyWithValue: "souls"
         child2:
           componentType: "HologramMechanic"
-          helmetType: "NETHERITE_SWORD"
+          helmetType: "NETHERITE_PICKAXE"
           customModelData: 3
           durations:
             - 20
@@ -586,7 +603,7 @@ skillUltimate:
           anglez: 0.78
         child3:
           componentType: "HologramMechanic"
-          helmetType: "NETHERITE_SWORD"
+          helmetType: "NETHERITE_PICKAXE"
           customModelData: 3
           durations:
             - 20

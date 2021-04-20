@@ -932,6 +932,22 @@ public class RPGCharacterStats {
         MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
     }
 
+    public void reapplyGearSetEffects() {
+        GearSetEffect setEffect = sameTypeArmorSet.getSetEffect();
+        setEffect.clearSetEffect(player, this);
+        setEffect.applySetEffect(player, this);
+
+        for (GearSet gearSet : gearSets) {
+            if (GearSetManager.hasEffect(gearSet)) {
+                List<GearSetEffect> gearSetEffects = GearSetManager.getEffects(gearSet);
+                for (GearSetEffect gearSetEffect : gearSetEffects) {
+                    gearSetEffect.clearSetEffect(player, this);
+                    gearSetEffect.applySetEffect(player, this);
+                }
+            }
+        }
+    }
+
     public void recalculateGearSetEffects(ItemStack inventoryHelmet, ItemStack inventoryChestplate, ItemStack inventoryLeggings,
                                           ItemStack inventoryBoots, ItemStack itemInMainHand, ItemStack itemInOffHand,
                                           ArmorGearType helmetType, ArmorGearType chestplateType, ArmorGearType leggingsType,
