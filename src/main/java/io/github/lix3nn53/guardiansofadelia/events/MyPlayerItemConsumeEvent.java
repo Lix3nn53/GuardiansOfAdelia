@@ -63,7 +63,7 @@ public class MyPlayerItemConsumeEvent implements Listener {
                             }
                         }
                     }
-                }.runTaskLater(GuardiansOfAdelia.getInstance(), 160L);
+                }.runTaskLater(GuardiansOfAdelia.getInstance(), 80L);
             }
         }
     }

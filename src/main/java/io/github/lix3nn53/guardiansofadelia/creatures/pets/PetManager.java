@@ -25,6 +25,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -152,7 +153,10 @@ public class PetManager {
 
         // name
         String petName = pet.getCustomName();
-        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + currentHP + "/" + (int) maxHP + "❤";
+        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">";
+        if (!pet.getType().equals(EntityType.ARMOR_STAND)) { // invincible pets
+            petName += ChatColor.GREEN + " " + currentHP + "/" + (int) maxHP + "❤";
+        }
         pet.setCustomName(petName);
 
         // name if disguised
@@ -183,7 +187,7 @@ public class PetManager {
                         deathPetPlayerList.remove(owner);
 
                         if (owner.isOnline()) {
-                            updateCurrentHealthSavedInEgg(livingEntity, (int) (livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2));
+                            // updateCurrentHealthSavedInEgg(livingEntity, (int) (livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2));
 
                             respawnPet(owner);
                             owner.sendMessage(ChatColor.GREEN + "Your pet is respawned");
@@ -216,9 +220,9 @@ public class PetManager {
 
                 updateName(currentHealthInteger, nextHealth, livingEntity);
 
-                if (isCompanionAlsoPet(livingEntity)) {
+                /*if (isCompanionAlsoPet(livingEntity)) {
                     updateCurrentHealthSavedInEgg(livingEntity, nextHealth);
-                }
+                }*/
             }
         }
     }
@@ -230,9 +234,9 @@ public class PetManager {
 
                 updateName(currentHealthInteger, setHealth, livingEntity);
 
-                if (isCompanionAlsoPet(livingEntity)) {
+                /*if (isCompanionAlsoPet(livingEntity)) {
                     updateCurrentHealthSavedInEgg(livingEntity, setHealth);
-                }
+                }*/
             }
         }
     }
@@ -245,9 +249,9 @@ public class PetManager {
 
                 updateName(currentHealthInteger, nextHealth, livingEntity);
 
-                if (isCompanionAlsoPet(livingEntity)) {
+                /*if (isCompanionAlsoPet(livingEntity)) {
                     updateCurrentHealthSavedInEgg(livingEntity, nextHealth);
-                }
+                }*/
             }
         }
     }
@@ -266,7 +270,7 @@ public class PetManager {
         }
     }
 
-    private static void updateCurrentHealthSavedInEgg(LivingEntity livingEntity, int nextHealth) {
+    /*private static void updateCurrentHealthSavedInEgg(LivingEntity livingEntity, int nextHealth) {
         if (isCompanionAlsoPet(livingEntity)) {
             Player owner = getOwner(livingEntity);
             if (GuardianDataManager.hasGuardianData(owner)) {
@@ -284,7 +288,7 @@ public class PetManager {
                 }
             }
         }
-    }
+    }*/
 
     private static void removePet(Player player) {
         if (hasPet(player)) {
@@ -321,11 +325,13 @@ public class PetManager {
         }
     }
 
-    private static void spawnPet(Player player, String petCode, int petLevel, int petCurrentHealth) {
+    private static LivingEntity spawnPet(Player player, String petCode, int petLevel, int petCurrentHealth) {
         LivingEntity pet = spawnMythicMobTameable(player, petCode, petLevel, petCurrentHealth);
-        if (pet == null) return;
+        if (pet == null) return null;
         companionToOwner.put(pet, player);
         ownerToPet.put(player, pet);
+
+        return pet;
     }
 
     public static LivingEntity spawnCompanion(Player player, String petCode, int petLevel, int petCurrentHealth) {
@@ -364,7 +370,52 @@ public class PetManager {
                             GuardiansOfAdelia.getInstance().getLogger().info("petExp: " + petExp);
                             int levelFromExp = PetExperienceManager.getLevelFromExp(petExp);
 
-                            spawnPet(player, petCode, levelFromExp, petCurrentHealth);
+                            LivingEntity pet = spawnPet(player, petCode, levelFromExp, petCurrentHealth);
+
+                            if (pet == null) return;
+
+                            new BukkitRunnable() {
+
+                                Vector previousDirection = new Vector();
+
+                                @Override
+                                public void run() {
+                                    if (!pet.isValid()) {
+                                        cancel();
+                                        return;
+                                    }
+
+                                    Location target = player.getLocation(); // Target location to follow
+                                    Location start = pet.getLocation(); // Current location
+
+                                    // We don't want pets get too close to players so lets add offset
+                                    // Start - Calculate offset
+                                    Vector dirOfTarget = target.getDirection();
+                                    dirOfTarget.setY(0);
+                                    Vector side = dirOfTarget.clone().crossProduct(new Vector(0, 1, 0));
+                                    Vector upward = dirOfTarget.clone().crossProduct(side);
+                                    target.add(dirOfTarget.multiply(-1)).subtract(upward).add(side);
+                                    // End - Calculate offset
+
+                                    Vector vectorBetweenPoints = target.toVector().subtract(start.toVector());
+                                    double distance = vectorBetweenPoints.length();
+
+                                    if (distance < 0.1) return; // Pet is close enough to target location
+                                    Vector direction = vectorBetweenPoints.normalize();
+
+                                    Vector nextDirection = previousDirection.add(direction); // Add previousDirection to direction so pet makes a smooth turn
+                                    nextDirection.normalize();
+
+                                    double travel = distance / 20D; // Use distances to calculate how fast a pet will travel. Longer the distance, faster the pet.
+                                    start.add(nextDirection.multiply(travel));
+
+                                    start.setDirection(target.getDirection()); // Make pet look at the same direction as player
+
+                                    pet.teleport(start); // Finally, teleport the pet
+
+                                    previousDirection = nextDirection; // Update previousDirection
+                                }
+                            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 1L);
                         }
                     }
                 } else {
@@ -398,10 +449,10 @@ public class PetManager {
             companions = new ArrayList<>();
         }
 
-        if (hasPet(player)) {
+        /*if (hasPet(player)) {
             LivingEntity pet = getPet(player);
             companions.add(pet);
-        }
+        }*/
 
         if (!companions.isEmpty()) {
             Location playerLocation = player.getLocation();

@@ -40,11 +40,11 @@ public class Egg implements RPGGear {
         lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Egg");
         lore.add("");
 
-        if (damage > 0) {
+        /*if (damage > 0) {
             lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Companion");
         } else {
             lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Mount");
-        }
+        }*/
 
         lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
         lore.add("");
