@@ -65,7 +65,7 @@ public class Egg implements RPGGear {
         PersistentDataContainerUtil.putString("itemTier", tier.toString(), this.itemStack);
         PersistentDataContainerUtil.putString("petCode", petKey, this.itemStack);
         PersistentDataContainerUtil.putInteger("petExp", petExp, this.itemStack);
-        PersistentDataContainerUtil.putInteger("petCurrentHealth", health, this.itemStack);
+        // PersistentDataContainerUtil.putInteger("petCurrentHealth", health, this.itemStack);
 
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);

@@ -1,0 +1,58 @@
+# ---------------------------------------------- #
+#               Pet Configuration                #
+# ---------------------------------------------- #
+#              Info of a single pet              #
+# ---------------------------------------------- #
+
+mythicMobCode: "PetMinidragon"
+customModelData: 6
+itemTier: "COMMON"
+speed: 4
+range: 12
+skill1:
+  cooldown: 100
+  trigger:
+    componentType: "ProjectileMechanic"
+    projectileClass: "Fireball"
+    spreadType: "CONE"
+    speed: 1.9
+    amountList:
+      - 1
+      - 1
+      - 1
+      - 1
+    angle: 30
+    range: 200
+    mustHitToWork: true
+    child1:
+      componentType: "AreaTarget"
+      allies: false
+      enemy: true
+      self: false
+      max: 10
+      radiusList:
+        - 2.5
+        - 2.75
+        - 3
+        - 3.25
+      amountList:
+        - 24
+        - 24
+        - 24
+        - 24
+      particle:
+        particleType: "FLAME"
+      child1:
+        componentType: "DamageMechanic"
+        damageType: "FIRE"
+        damageList:
+          - 10
+          - 40
+          - 90
+          - 180
+        damageMultiplyList:
+          - 1.4
+          - 1.6
+          - 1.8
+          - 2.2
+  

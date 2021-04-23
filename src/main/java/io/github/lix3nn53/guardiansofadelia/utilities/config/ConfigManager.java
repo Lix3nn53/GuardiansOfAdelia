@@ -53,7 +53,7 @@ public class ConfigManager {
         ItemWeaponSetConfigurations.createConfigs();
         JobCraftingConfigurations.createConfigs();
         QuestConfigurations.createConfigs();
-        EggConfigurations.createConfigs();
+        PetConfigurations.createConfigs();
         LootChestConfiguration.createConfigs();
         GearSetConfiguration.createConfigs();
         MobConfigurations.createConfigs();
@@ -77,7 +77,7 @@ public class ConfigManager {
         ItemWeaponSetConfigurations.loadConfigs();
         JobCraftingConfigurations.loadConfigs();
         QuestConfigurations.loadConfigs();
-        EggConfigurations.loadConfigs();
+        PetConfigurations.loadConfigs();
         LootChestConfiguration.loadConfigs();
         GearSetConfiguration.loadConfig();
         MobConfigurations.loadConfigs();

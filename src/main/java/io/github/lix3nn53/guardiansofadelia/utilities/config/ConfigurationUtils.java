@@ -7,6 +7,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConfigurationUtils {
 
@@ -41,5 +43,29 @@ public class ConfigurationUtils {
         }
 
         return null;
+    }
+
+    public static List<YamlConfiguration> getAllConfigsInFile(String filePath) {
+        ArrayList<YamlConfiguration> result = new ArrayList<>();
+
+        File customConfigFile = new File(filePath);
+        File[] files = customConfigFile.listFiles();
+
+        if (files == null) return result;
+
+        for (File file : files) {
+            if (file.isFile()) {
+                YamlConfiguration fileConfiguration = new YamlConfiguration();
+                try {
+                    fileConfiguration.load(file);
+
+                    result.add(fileConfiguration);
+                } catch (IOException | InvalidConfigurationException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return result;
     }
 }

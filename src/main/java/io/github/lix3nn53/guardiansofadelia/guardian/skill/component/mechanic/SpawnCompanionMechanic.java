@@ -97,7 +97,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
 
             for (int i = 0; i < amount; i++) {
 
-                LivingEntity livingEntity = PetManager.spawnCompanion(owner, mobCode, level, 9999999);
+                LivingEntity livingEntity = PetManager.spawnCompanion(owner, mobCode, level);
 
                 if (livingEntity == null) {
                     GuardiansOfAdelia.getInstance().getLogger().info("SpawnPetMechanic error: " + mobCode);
