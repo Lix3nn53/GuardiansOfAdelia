@@ -1,8 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetData;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetSkillManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
@@ -13,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Egg implements RPGGear {
@@ -26,10 +28,8 @@ public class Egg implements RPGGear {
         if (gearSetStr != null && !gearSetStr.equals("")) {
             name = tier.getTierColor() + gearSetStr + " " + name;
         }
-        int health = PetManager.getHealth(petKey, petLevel);
-        GuardiansOfAdelia.getInstance().getLogger().info("egg health: " + health);
-        int damage = PetManager.getDamage(petKey, petLevel);
-        GuardiansOfAdelia.getInstance().getLogger().info("egg damage: " + damage);
+        PetData petData = PetSkillManager.getPetData(petKey);
+        int speed = petData.getSpeed();
 
         int petExp = 0;
         for (int i = 1; i < petLevel; i++) {
@@ -51,13 +51,14 @@ public class Egg implements RPGGear {
         lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + petLevel);
         lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + petExp + " / " + PetExperienceManager.getNextExperienceTarget(petLevel));
         lore.add("");
-        lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + health);
-
-        if (damage > 0) {
-            lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + damage);
-        } else {
-            double movementSpeed = PetManager.getMovementSpeed(petKey, petLevel);
-            lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + movementSpeed);
+        lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + speed);
+        lore.add("");
+        HashMap<Integer, Skill> skills = petData.getSkills();
+        for (int i : skills.keySet()) {
+            Skill skill = skills.get(i);
+            lore.add(ChatColor.GRAY + "---- " + ChatColor.YELLOW + "Skill at level " + ChatColor.GOLD + i + ChatColor.GRAY + " ----");
+            List<String> description = skill.getDescription();
+            lore.addAll(description);
         }
 
         this.itemStack = new ItemStack(material);

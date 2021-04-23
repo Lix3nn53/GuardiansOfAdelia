@@ -45,29 +45,30 @@ public class PetExperienceManager {
 
     public static int getNextExperienceTarget(int eggLevel) {
         if (eggLevel == 2) {
-            return 2000;
+            return 200;
         } else if (eggLevel == 3) {
-            return 5000;
+            return 300;
         } else if (eggLevel == 4) {
-            return 20000;
+            return 400;
         } else if (eggLevel == 5) {
-            return 50000;
+            return 500;
         } else if (eggLevel == 6) {
-            return 120000;
+            return 600;
         } else if (eggLevel == 7) {
-            return 200000;
+            return 700;
         } else if (eggLevel == 8) {
-            return 350000;
+            return 800;
         } else if (eggLevel == 9) {
-            return 550000;
+            return 900;
         } else if (eggLevel == 10) {
-            return 800000;
+            return 1000;
         } else if (eggLevel == 11) {
-            return 1000000;
+            return 1100;
         } else if (eggLevel == 12) {
-            return 9000000;
+            return 1200;
         }
-        return 500;
+
+        return 100;
     }
 
     private static void updateEggExp(Player player, int nextExperience, int currentLevel) {
@@ -82,7 +83,7 @@ public class PetExperienceManager {
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
-                    lore.set(6, ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + nextExperience + " / " + getNextExperienceTarget(currentLevel));
+                    lore.set(5, ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + nextExperience + " / " + getNextExperienceTarget(currentLevel));
                     itemMeta.setLore(lore);
                     egg.setItemMeta(itemMeta);
 
@@ -100,23 +101,10 @@ public class PetExperienceManager {
                 EggSlot eggSlot = activeCharacter.getRpgInventory().getEggSlot();
                 if (!eggSlot.isEmpty()) {
                     ItemStack egg = eggSlot.getItemOnSlot();
-                    String petCode = PersistentDataContainerUtil.getString(egg, "petCode");
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
-                    lore.set(5, ChatColor.GOLD + "Level: " + ChatColor.GRAY + nextLevel);
-
-                    if (lore.get(2).contains("Companion")) {
-                        int damage = PetManager.getDamage(petCode, nextLevel);
-                        int maxHP = PetManager.getHealth(petCode, nextLevel);
-                        lore.set(8, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
-                        lore.set(9, ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + damage);
-                        owner.sendMessage(ChatColor.GOLD + "DEBUG pet COMPANION level up");
-                    } else {
-                        int maxHP = PetManager.getHealth(petCode, nextLevel);
-                        lore.set(8, ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + maxHP);
-                        owner.sendMessage(ChatColor.GOLD + "DEBUG pet MOUNT level up");
-                    }
+                    lore.set(4, ChatColor.GOLD + "Level: " + ChatColor.GRAY + nextLevel);
 
                     itemMeta.setLore(lore);
 

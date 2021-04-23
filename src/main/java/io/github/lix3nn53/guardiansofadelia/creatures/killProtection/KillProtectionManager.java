@@ -4,7 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropProtectionManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.MobDropGenerator;
-import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -90,7 +89,6 @@ public class KillProtectionManager {
                         once.sendMessage("expToGive: " + expToGive);
                         if (expToGive > 0) {
                             rpgCharacterStats.giveExp(expToGive);
-                            PetExperienceManager.giveExperienceToActivePet(player, expToGive);
                         }
 
                         //quest, progress kill tasks

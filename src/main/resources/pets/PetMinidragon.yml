@@ -5,12 +5,65 @@
 # ---------------------------------------------- #
 
 mythicMobCode: "PetMinidragon"
-customModelData: 6
+customModelData: 5
 itemTier: "COMMON"
 speed: 4
 range: 12
 skill1:
   cooldown: 100
+  level: 1
+  description:
+    - "Shoot a projectile that deals damage"
+    - "to a single target."
+  trigger:
+    componentType: "ProjectileMechanic"
+    projectileClass: "SmallFireball"
+    spreadType: "CONE"
+    speed: 1.9
+    amountList:
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+    angle: 30
+    range: 200
+    mustHitToWork: true
+    particle:
+      arrangementType: "DrawCylinder"
+      particleType: "FLAME"
+      radius: 0.2
+      amount: 3
+      singleMinHeight: 0
+      singleMaxHeight: 0.5
+      singleGap: 0.2
+    isProjectileInvisible: true
+    child1:
+      componentType: "FilterCurrentTargets"
+      allies: false
+      enemy: true
+      self: false
+      max: 1
+      child1:
+        componentType: "DamageMechanic"
+        damageType: "FIRE"
+        damageList:
+          - 10
+          - 40
+          - 90
+          - 180
+        damageMultiplyList:
+          - 1.4
+          - 1.6
+          - 1.8
+          - 2.2
+skill2:
+  cooldown: 100
+  level: 4
+  description:
+    - "Shoot a projectile that deals damage"
+    - "to targets in small area."
   trigger:
     componentType: "ProjectileMechanic"
     projectileClass: "Fireball"

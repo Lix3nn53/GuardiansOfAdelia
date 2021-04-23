@@ -10,12 +10,14 @@ import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PetData {
 
     private final int speed; // speed potion level modifier
-    private final List<Skill> skills;
+    HashMap<Integer, Skill> skills = new HashMap<>();
+
     private final int range;
 
     public PetData(ConfigurationSection configurationSection) {
@@ -25,7 +27,6 @@ public class PetData {
 
         this.speed = configurationSection.getInt("speed");
         this.range = configurationSection.getInt("range");
-        this.skills = new ArrayList<>();
 
         int skillCount = ConfigurationUtils.getChildComponentCount(configurationSection, "skill");
         if (skillCount > 0) {
@@ -35,7 +36,9 @@ public class PetData {
                 ArrayList<Integer> cooldowns = new ArrayList<>();
                 cooldowns.add(cooldown);
 
-                Skill skill = new Skill("petskill", 1, Material.IRON_HOE, 1, new ArrayList<>(),
+                List<String> description = skillSection.getStringList("description");
+
+                Skill skill = new Skill("petskill", 1, Material.IRON_HOE, 1, description,
                         new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), cooldowns);
 
                 SkillComponent triggerComponent = SkillComponentLoader.loadSection(skillSection.getConfigurationSection("trigger"));
@@ -47,13 +50,20 @@ public class PetData {
                     skill.addTrigger(triggerComponentExtra);
                 }
 
-                this.skills.add(skill);
+                int level = skillSection.getInt("level");
+                this.skills.put(level, skill);
             }
         }
     }
 
     public Skill getSkill(int index) {
-        return skills.get(index);
+        for (int i = index; i > 0; i--) {
+            if (skills.containsKey(i)) {
+                return skills.get(i);
+            }
+        }
+
+        return skills.get(1);
     }
 
     public int getSpeed() {
@@ -62,6 +72,10 @@ public class PetData {
 
     public int getRange() {
         return range;
+    }
+
+    public HashMap<Integer, Skill> getSkills() {
+        return skills;
     }
 
     public void configLoadError(String section) {

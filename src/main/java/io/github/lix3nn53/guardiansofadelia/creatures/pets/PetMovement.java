@@ -49,7 +49,7 @@ public class PetMovement {
                         start.setDirection(vectorBetweenPoints);
                         pet.teleport(start);
 
-                        Skill skill = petData.getSkill(level - 1);
+                        Skill skill = petData.getSkill(level);
                         ArrayList<LivingEntity> targets = new ArrayList<>();
                         targets.add(pet);
                         boolean cast = skill.cast(player, 1, targets, 1, 999);
@@ -57,7 +57,7 @@ public class PetMovement {
                         if (cast) {
                             PetManager.petSkillOnCooldown.add(player);
 
-                            int cooldown = skill.getCooldown(level);
+                            int cooldown = skill.getCooldown(0);
                             new BukkitRunnable() {
 
                                 @Override
@@ -65,6 +65,8 @@ public class PetMovement {
                                     PetManager.petSkillOnCooldown.remove(player);
                                 }
                             }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
+
+                            PetExperienceManager.giveExperienceToActivePet(player, 1);
                         }
 
                         return;
