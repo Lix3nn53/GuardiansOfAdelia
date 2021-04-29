@@ -37,7 +37,8 @@ public class ItemPoolGenerator {
         List<ItemStack> temp = new ArrayList<>();
 
         for (RPGSlotType rpgSlotType : RPGSlotType.values()) {
-            if (!(rpgSlotType.equals(RPGSlotType.PARROT) || rpgSlotType.equals(RPGSlotType.EARRING)
+            // TODO rpgSlotType.equals(RPGSlotType.PARROT) || REMOVED PARROT KEEP THIS WAY?
+            if (!(rpgSlotType.equals(RPGSlotType.EARRING)
                     || rpgSlotType.equals(RPGSlotType.NECKLACE) || rpgSlotType.equals(RPGSlotType.GLOVE)
                     || rpgSlotType.equals(RPGSlotType.RING))) {
                 continue;

@@ -41,7 +41,6 @@ public class TablistUtils {
                         header.append(ChatColor.WHITE + quest.getObjectiveTextForTablist());
                         header.append("\n");
                     }
-                    header.append("\n");
                 }
             }
 
