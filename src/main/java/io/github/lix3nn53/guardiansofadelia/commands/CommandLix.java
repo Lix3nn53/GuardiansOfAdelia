@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
+import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
@@ -21,6 +23,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChest;
@@ -32,11 +35,14 @@ import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ClassConfigurations;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -48,7 +54,6 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -368,70 +373,15 @@ public class CommandLix implements CommandExecutor {
                     RequestHandler.test(itemID, player);
                 }
             } else if (args[0].equals("test")) {
-                /*double degrees = Double.parseDouble(args[1]);
-                double radian = degrees * Math.PI / 180;
-                player.sendMessage("radian: " + radian);*/
+                DungeonTheme dungeonTheme = new DungeonTheme("test", "Test", "Test", GearLevel.ZERO, PortalColor.ORANGE, 1, 5, "Test1");
 
-                Location eyeLocation = player.getEyeLocation();
-                float yaw = eyeLocation.getYaw();
-                float pitch = eyeLocation.getPitch();
+                String typeStr = args[1];
+                PrizeChestType prizeChestType = PrizeChestType.valueOf(typeStr);
 
-                //ParticleShapes.drawCube(eyeLocation, Particle.SOUL_FIRE_FLAME, null, length, 0.1, true, yaw, pitch);
-                double radius = Double.parseDouble(args[1]);
-                double angle = Double.parseDouble(args[2]);
-                /*
-                int amounty = (int) Double.parseDouble(args[3]);
-                double phi = Double.parseDouble(args[4]);*/
-                //double lengthy = Double.parseDouble(args[3]);
-                //double lengthz = Double.parseDouble(args[4]);
-                /*yaw += Double.parseDouble(args[3]);
-                pitch += Double.parseDouble(args[4]);*/
+                PrizeChest prizeChest = new PrizeChest(dungeonTheme, prizeChestType);
 
-                // if offsety is set, pitch rotates in y circle
-
-                //ParticleShapes.drawCone(eyeLocation, Particle.SOUL_FIRE_FLAME, height, amount, amounty, phi, null, true, yaw, pitch, new Vector());
-
-                //Vector vector = new Vector(lengthx, lengthy, lengthz);
-                ParticleShapes.drawTriangle(eyeLocation, Particle.FLAME, radius, 30, null, 0, true, yaw, pitch, new Vector(), angle);
-                //ParticleShapes.drawCube(eyeLocation, Particle.FLAME, null, vector, gap, true, yaw, pitch);
-                //ParticleShapes.drawCylinder(eyeLocation, Particle.SOUL_FIRE_FLAME, radius, amount, null, 0, true, yaw, pitchh, add);
-
-                /*Vector dir = eyeLocation.getDirection().normalize();
-                Vector side = dir.clone().crossProduct(new Vector(0, 1, 0));
-                Vector upyard = dir.clone().crossProduct(side);
-                eyeLocation.add(dir.multiply(forward)).subtract(upyard.multiply(upward)).add(side.multiply(right));
-
-                eyeLocation.add(offset);
-
-                ParticleShapes.drawCube(eyeLocation, Particle.SOUL_FIRE_FLAME, null, length, 0.1, true, yaw, pitch);*/
-                /*new BukkitRunnable() {
-
-                    int yaww = 0;
-
-                    @Override
-                    public void run() {
-                        //ParticleShapes.playSingleParticle(center, Particle.FLAME, null);
-                        ParticleShapes.drawCube(eyeLocation, Particle.SOUL_FIRE_FLAME, null, length, 0.1, true, yaww, 0, center);
-                        yaww += 3;
-                        if (yaww >= 360) {
-                            cancel();
-                        }
-                    }
-                }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 1L);
-                new BukkitRunnable() {
-
-                    float pitchh = 0;
-
-                    @Override
-                    public void run() {
-                        //ParticleShapes.playSingleParticle(center, Particle.FLAME, null);
-                        ParticleShapes.drawCube(eyeLocation, Particle.FLAME, null, length, 0.1, true, 0, pitchh, center);
-                        pitchh += 3;
-                        if (pitchh >= 360) {
-                            cancel();
-                        }
-                    }
-                }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 1L);*/
+                Location location = player.getLocation();
+                prizeChest.spawnChestModel(location);
             } else if (args[0].equals("reload")) {
                 ClassConfigurations.createConfigs();
                 ClassConfigurations.loadConfigs();

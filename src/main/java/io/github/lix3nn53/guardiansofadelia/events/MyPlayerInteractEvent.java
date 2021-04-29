@@ -99,8 +99,8 @@ public class MyPlayerInteractEvent implements Listener {
             } else if (itemInMainHandType.equals(Material.STONE_PICKAXE)) {
                 if (PersistentDataContainerUtil.hasString(itemInMainHand, "prizeDungeon")) { //dungeon chests
                     String dungeonThemeString = PersistentDataContainerUtil.getString(itemInMainHand, "prizeDungeon");
-                    int typeIndex = PersistentDataContainerUtil.getInteger(itemInMainHand, "prizeType");
-                    PrizeChestType type = PrizeChestType.values()[typeIndex];
+                    String typeStr = PersistentDataContainerUtil.getString(itemInMainHand, "prizeType");
+                    PrizeChestType type = PrizeChestType.valueOf(typeStr);
 
                     HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                     DungeonTheme dungeonTheme = dungeonThemes.get(dungeonThemeString);

@@ -20,10 +20,12 @@ import java.util.List;
 
 public class ItemPoolGenerator {
 
-    public static List<ItemStack> generateWeapons(ItemTier tier, GearLevel gearLevel, String gearSet) {
+    public static List<ItemStack> generateWeapons(ItemTier tier, GearLevel gearLevel, String gearSet, boolean melee) {
         List<ItemStack> temp = new ArrayList<>();
 
         for (WeaponGearType weaponGearType : WeaponGearType.values()) {
+            boolean isMelee = weaponGearType.isMelee();
+            if (melee != isMelee) continue;
             List<ItemStack> itemStack = WeaponManager.get(weaponGearType, gearLevel, tier, false, gearSet);
             temp.addAll(itemStack);
         }
@@ -48,10 +50,12 @@ public class ItemPoolGenerator {
         return temp;
     }
 
-    public static List<ItemStack> generateArmors(ItemTier tier, GearLevel gearLevel, String gearSet) {
+    public static List<ItemStack> generateArmors(ItemTier tier, GearLevel gearLevel, String gearSet, boolean heavy) {
         List<ItemStack> temp = new ArrayList<>();
 
         for (ArmorGearType armorGearType : ArmorGearType.values()) {
+            boolean isHeavy = armorGearType.isHeavy();
+            if (heavy != isHeavy) continue;
             for (ArmorSlot armorSlot : ArmorSlot.values()) {
                 List<ItemStack> itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, false, gearSet);
 
@@ -59,10 +63,12 @@ public class ItemPoolGenerator {
             }
         }
 
-        for (ShieldGearType shieldGearType : ShieldGearType.values()) {
-            List<ItemStack> itemStack = ShieldManager.get(shieldGearType, gearLevel, tier, false, gearSet);
+        if (heavy) {
+            for (ShieldGearType shieldGearType : ShieldGearType.values()) {
+                List<ItemStack> itemStack = ShieldManager.get(shieldGearType, gearLevel, tier, false, gearSet);
 
-            temp.addAll(itemStack);
+                temp.addAll(itemStack);
+            }
         }
 
         return temp;

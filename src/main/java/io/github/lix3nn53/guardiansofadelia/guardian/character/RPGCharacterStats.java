@@ -933,9 +933,11 @@ public class RPGCharacterStats {
     }
 
     public void reapplyGearSetEffects() {
-        GearSetEffect setEffect = sameTypeArmorSet.getSetEffect();
-        setEffect.clearSetEffect(player, this);
-        setEffect.applySetEffect(player, this);
+        if (sameTypeArmorSet != null) {
+            GearSetEffect setEffect = sameTypeArmorSet.getSetEffect();
+            setEffect.clearSetEffect(player, this);
+            setEffect.applySetEffect(player, this);
+        }
 
         for (GearSet gearSet : gearSets) {
             if (GearSetManager.hasEffect(gearSet)) {

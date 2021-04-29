@@ -34,7 +34,7 @@ public class DungeonRoom extends Minigame {
         super.endGame();
         List<Integer> winnerTeam = getWinnerTeams();
         if (!winnerTeam.isEmpty()) {
-            ItemStack prizeItem = theme.getPrizeChest();
+            ItemStack prizeItem = theme.getPrizeChest().getChest();
 
             Party party = getTeams().get(winnerTeam.get(0));
             for (Player member : party.getMembers()) {

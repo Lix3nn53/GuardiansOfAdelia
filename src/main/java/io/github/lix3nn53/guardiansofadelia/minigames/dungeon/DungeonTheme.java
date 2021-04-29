@@ -7,7 +7,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
-import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.MobManager;
@@ -71,17 +70,13 @@ public class DungeonTheme {
         return mythicMob.getDisplayName().get();
     }
 
-    public ItemStack getPrizeChest() {
-        int random = new Random().nextInt(4);
+    public PrizeChest getPrizeChest() {
+        PrizeChestType[] values = PrizeChestType.values();
+        int random = new Random().nextInt(values.length);
 
-        PrizeChestType chestType = PrizeChestType.values()[random];
+        PrizeChestType chestType = values[random];
 
-        ItemStack chest = new PrizeChest(this, chestType).getChest();
-
-        PersistentDataContainerUtil.putString("prizeDungeon", code, chest);
-        PersistentDataContainerUtil.putInteger("prizeType", random, chest);
-
-        return chest;
+        return new PrizeChest(this, chestType);
     }
 
     /**
@@ -89,17 +84,30 @@ public class DungeonTheme {
      */
     public List<ItemStack> generateChestItems(PrizeChestType type) {
         ArrayList<ItemStack> chestItems = new ArrayList<>();
-        if (type.equals(PrizeChestType.WEAPON)) {
-            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, gearLevel, gearTag));
-            chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, gearLevel, gearTag));
-        } else if (type.equals(PrizeChestType.ARMOR)) {
-            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, gearLevel, gearTag));
-            chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, gearLevel, gearTag));
-        } else if (type.equals(PrizeChestType.JEWELRY)) {
-            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.MYSTIC, gearLevel, gearTag));
-            chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, gearLevel, gearTag));
-        } else if (type.equals(PrizeChestType.PET)) {
-            chestItems.addAll(ItemPoolGenerator.generateEggs(gearLevel));
+        switch (type) {
+            case WEAPON_MELEE:
+                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, gearLevel, gearTag, true));
+                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, gearLevel, gearTag, true));
+                break;
+            case WEAPON_RANGED:
+                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, gearLevel, gearTag, false));
+                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, gearLevel, gearTag, false));
+                break;
+            case ARMOR_HEAVY:
+                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, gearLevel, gearTag, true));
+                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, gearLevel, gearTag, true));
+                break;
+            case ARMOR_LIGHT:
+                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, gearLevel, gearTag, false));
+                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, gearLevel, gearTag, false));
+                break;
+            case JEWELRY:
+                chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.MYSTIC, gearLevel, gearTag));
+                chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, gearLevel, gearTag));
+                break;
+            case PET:
+                chestItems.addAll(ItemPoolGenerator.generateEggs(gearLevel));
+                break;
         }
 
         return chestItems;

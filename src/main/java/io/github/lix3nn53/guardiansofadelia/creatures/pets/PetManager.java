@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
@@ -24,6 +25,7 @@ import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -186,6 +188,14 @@ public class PetManager {
         String petName = pet.getCustomName();
         petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">";
         pet.setCustomName(petName);
+
+        // name if disguised
+        boolean disguised = DisguiseAPI.isDisguised(pet);
+        if (disguised) {
+            Disguise disguise = DisguiseAPI.getDisguise(pet);
+            FlagWatcher watcher = disguise.getWatcher();
+            watcher.setCustomName(petName);
+        }
 
         return pet;
     }
@@ -405,6 +415,18 @@ public class PetManager {
 
     public static void onEggUnequip(Player player) {
         removePet(player);
+
+        player.removePotionEffect(PotionEffectType.SPEED);
+
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+
+                rpgCharacterStats.reapplyGearSetEffects();
+            }
+        }
     }
 
     public static void onPlayerQuit(Player player) {
