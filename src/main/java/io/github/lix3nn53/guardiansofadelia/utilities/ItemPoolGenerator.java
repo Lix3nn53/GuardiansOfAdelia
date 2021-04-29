@@ -20,20 +20,20 @@ import java.util.List;
 
 public class ItemPoolGenerator {
 
-    public static List<ItemStack> generateWeapons(ItemTier tier, GearLevel gearLevel, String gearSet, boolean melee) {
+    public static List<ItemStack> generateWeapons(ItemTier tier, GearLevel gearLevel, String gearSet, boolean melee, boolean noStats) {
         List<ItemStack> temp = new ArrayList<>();
 
         for (WeaponGearType weaponGearType : WeaponGearType.values()) {
             boolean isMelee = weaponGearType.isMelee();
             if (melee != isMelee) continue;
-            List<ItemStack> itemStack = WeaponManager.get(weaponGearType, gearLevel, tier, false, gearSet);
+            List<ItemStack> itemStack = WeaponManager.get(weaponGearType, gearLevel, tier, noStats, gearSet);
             temp.addAll(itemStack);
         }
 
         return temp;
     }
 
-    public static List<ItemStack> generatePassives(ItemTier tier, GearLevel gearLevel, String gearSet) {
+    public static List<ItemStack> generatePassives(ItemTier tier, GearLevel gearLevel, String gearSet, boolean noStats) {
         List<ItemStack> temp = new ArrayList<>();
 
         for (RPGSlotType rpgSlotType : RPGSlotType.values()) {
@@ -42,7 +42,7 @@ public class ItemPoolGenerator {
                     || rpgSlotType.equals(RPGSlotType.RING))) {
                 continue;
             }
-            List<ItemStack> itemStack = PassiveManager.get(gearLevel, rpgSlotType, tier, false, gearSet);
+            List<ItemStack> itemStack = PassiveManager.get(gearLevel, rpgSlotType, tier, noStats, gearSet);
 
             temp.addAll(itemStack);
         }
@@ -50,14 +50,14 @@ public class ItemPoolGenerator {
         return temp;
     }
 
-    public static List<ItemStack> generateArmors(ItemTier tier, GearLevel gearLevel, String gearSet, boolean heavy) {
+    public static List<ItemStack> generateArmors(ItemTier tier, GearLevel gearLevel, String gearSet, boolean heavy, boolean noStats) {
         List<ItemStack> temp = new ArrayList<>();
 
         for (ArmorGearType armorGearType : ArmorGearType.values()) {
             boolean isHeavy = armorGearType.isHeavy();
             if (heavy != isHeavy) continue;
             for (ArmorSlot armorSlot : ArmorSlot.values()) {
-                List<ItemStack> itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, false, gearSet);
+                List<ItemStack> itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, noStats, gearSet);
 
                 temp.addAll(itemStack);
             }
@@ -94,85 +94,6 @@ public class ItemPoolGenerator {
 
         temp.add(Consumable.BUFF_ELEMENT_DAMAGE.getItemStack(potionLevel, 10));
         temp.add(Consumable.BUFF_ELEMENT_DEFENSE.getItemStack(potionLevel, 10));
-        /*temp.add(Consumable.BUFF_MAGICAL_DAMAGE.getItemStack(potionLevel, 10));
-        temp.add(Consumable.BUFF_MAGICAL_DEFENSE.getItemStack(potionLevel, 10));*/
-
-        return temp;
-    }
-
-    public static List<ItemStack> generateMeleeWeaponsNoStats(ItemTier tier, GearLevel gearLevel, String gearSet) {
-        List<ItemStack> temp = new ArrayList<>();
-
-        for (WeaponGearType weaponGearType : WeaponGearType.values()) {
-            if (!weaponGearType.isMelee()) continue;
-            List<ItemStack> itemStack = WeaponManager.get(weaponGearType, gearLevel, tier, true, gearSet);
-            temp.addAll(itemStack);
-        }
-
-        return temp;
-    }
-
-    public static List<ItemStack> generateRangedWeaponsNoStats(ItemTier tier, GearLevel gearLevel, String gearSet) {
-        List<ItemStack> temp = new ArrayList<>();
-
-        for (WeaponGearType weaponGearType : WeaponGearType.values()) {
-            if (weaponGearType.isMelee()) continue;
-            List<ItemStack> itemStack = WeaponManager.get(weaponGearType, gearLevel, tier, true, gearSet);
-            temp.addAll(itemStack);
-        }
-
-        return temp;
-    }
-
-    public static List<ItemStack> generateHeavyArmorsNoStats(ItemTier tier, GearLevel gearLevel, String gearSet) {
-        List<ItemStack> temp = new ArrayList<>();
-
-        for (ArmorGearType armorGearType : ArmorGearType.values()) {
-            for (ArmorSlot armorSlot : ArmorSlot.values()) {
-                if (!armorGearType.isHeavy()) continue;
-                List<ItemStack> itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, true, gearSet);
-
-                temp.addAll(itemStack);
-            }
-        }
-
-        for (ShieldGearType shieldGearType : ShieldGearType.values()) {
-            List<ItemStack> itemStack = ShieldManager.get(shieldGearType, gearLevel, tier, true, gearSet);
-
-            temp.addAll(itemStack);
-        }
-
-        return temp;
-    }
-
-    public static List<ItemStack> generateLightArmorsNoStats(ItemTier tier, GearLevel gearLevel, String gearSet) {
-        List<ItemStack> temp = new ArrayList<>();
-
-        for (ArmorGearType armorGearType : ArmorGearType.values()) {
-            for (ArmorSlot armorSlot : ArmorSlot.values()) {
-                if (armorGearType.isHeavy()) continue;
-                List<ItemStack> itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, true, gearSet);
-
-                temp.addAll(itemStack);
-            }
-        }
-
-        return temp;
-    }
-
-    public static List<ItemStack> generatePassivesNoStats(ItemTier tier, GearLevel gearLevel, String gearSet) {
-        List<ItemStack> temp = new ArrayList<>();
-
-        for (RPGSlotType rpgSlotType : RPGSlotType.values()) {
-            if (!(rpgSlotType.equals(RPGSlotType.PARROT) || rpgSlotType.equals(RPGSlotType.EARRING)
-                    || rpgSlotType.equals(RPGSlotType.NECKLACE) || rpgSlotType.equals(RPGSlotType.GLOVE)
-                    || rpgSlotType.equals(RPGSlotType.RING))) {
-                continue;
-            }
-            List<ItemStack> itemStack = PassiveManager.get(gearLevel, rpgSlotType, tier, true, gearSet);
-
-            temp.addAll(itemStack);
-        }
 
         return temp;
     }
