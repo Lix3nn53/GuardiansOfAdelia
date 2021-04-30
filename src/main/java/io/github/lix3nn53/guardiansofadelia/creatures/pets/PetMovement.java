@@ -44,32 +44,35 @@ public class PetMovement {
                     List<Entity> nearbyEntities = pet.getNearbyEntities(range, range, range);
                     LivingEntity targetEnemy = determineTarget(player, nearbyEntities);
                     if (targetEnemy != null) {
-                        Location enemyLocation = targetEnemy.getLocation();
+                        double height = targetEnemy.getHeight() / 2;
+                        Location enemyLocation = targetEnemy.getLocation().add(0, height, 0);
                         Vector vectorBetweenPoints = enemyLocation.toVector().subtract(start.toVector());
                         start.setDirection(vectorBetweenPoints);
                         pet.teleport(start);
 
                         Skill skill = petData.getSkill(level);
-                        ArrayList<LivingEntity> targets = new ArrayList<>();
-                        targets.add(pet);
-                        boolean cast = skill.cast(player, 1, targets, 1, 999);
+                        if (skill != null) {
+                            ArrayList<LivingEntity> targets = new ArrayList<>();
+                            targets.add(pet);
+                            boolean cast = skill.cast(player, 1, targets, 1, 999);
 
-                        if (cast) {
-                            PetManager.petSkillOnCooldown.add(player);
+                            if (cast) {
+                                PetManager.petSkillOnCooldown.add(player);
 
-                            int cooldown = skill.getCooldown(0);
-                            new BukkitRunnable() {
+                                int cooldown = skill.getCooldown(0);
+                                new BukkitRunnable() {
 
-                                @Override
-                                public void run() {
-                                    PetManager.petSkillOnCooldown.remove(player);
-                                }
-                            }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
+                                    @Override
+                                    public void run() {
+                                        PetManager.petSkillOnCooldown.remove(player);
+                                    }
+                                }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), cooldown);
 
-                            PetExperienceManager.giveExperienceToActivePet(player, 1);
+                                PetExperienceManager.giveExperienceToActivePet(player, 1);
+                            }
+
+                            return;
                         }
-
-                        return;
                     }
                 }
 
@@ -79,7 +82,7 @@ public class PetMovement {
                 dirOfTarget.setY(0);
                 Vector side = dirOfTarget.clone().crossProduct(new Vector(0, 1, 0));
                 Vector upward = dirOfTarget.clone().crossProduct(side);
-                target.add(dirOfTarget.multiply(-1)).subtract(upward).add(side);
+                target.add(dirOfTarget.multiply(-0.8)).subtract(upward.multiply(1.6)).add(side.multiply(1.2));
                 // End - Calculate offset
 
                 Vector vectorBetweenPoints = target.toVector().subtract(start.toVector());

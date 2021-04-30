@@ -128,7 +128,7 @@ public class PetManager {
         LivingEntity pet = (LivingEntity) entity;
 
         // health
-        double maxHP = getHealth(petCode, petLevel);
+        int maxHP = getHealth(petCode, petLevel);
         double attackDamage = getDamage(petCode, petLevel);
         double movementSpeed = pet.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getValue();
 
@@ -149,7 +149,7 @@ public class PetManager {
 
         // name
         String petName = pet.getCustomName();
-        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + maxHP + "/" + (int) maxHP + "❤";
+        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + maxHP + "/" + maxHP + "❤";
         pet.setCustomName(petName);
 
         // name if disguised
