@@ -13,8 +13,6 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatOneType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.Element;
@@ -145,30 +143,13 @@ public class RPGCharacterStats {
     }
 
     public void giveExp(int expToGive) {
-        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-        RPGClassStats rpgClassStats = activeCharacter.getRPGClassStats();
-
-        int classExp = expToGive;
         if (player.getLevel() >= 90) { //last level is 90
-            // if player is last level give all exp to class instead of dividing
-            rpgClassStats.giveExp(classExp, player, rpgClassStr);
             return;
-        }
-
-        int totalExp = rpgClassStats.getTotalExp();
-        int level = RPGClassExperienceManager.getLevel(totalExp);
-        int charExp = expToGive;
-        if (level < RPGClassExperienceManager.RPG_CLASS_MAX_LEVEL) { // if both player and his/her class is not at max level, give %80 to player and rest to class
-            charExp = (int) (expToGive * 0.8 + 0.5);
-
-            classExp = (int) (expToGive * 0.2 + 0.5);
-            rpgClassStats.giveExp(classExp, player, rpgClassStr);
         }
 
         int currentLevel = RPGCharacterExperienceManager.getLevel(this.totalExp);
 
-        this.totalExp += charExp;
+        this.totalExp += expToGive;
 
         int newLevel = RPGCharacterExperienceManager.getLevel(this.totalExp);
 

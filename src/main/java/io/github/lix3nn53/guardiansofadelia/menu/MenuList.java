@@ -236,10 +236,6 @@ public class MenuList {
                 int tier = rpgClass.getTier();
                 int classIconCustomModelData = rpgClass.getClassIconCustomModelData();
                 RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats();
-                int totalExp = rpgClassStats.getTotalExp();
-                int classLevel = RPGClassExperienceManager.getLevel(totalExp);
-                int currentExperience = RPGClassExperienceManager.getCurrentExperience(totalExp, classLevel);
-                int requiredExperience = RPGClassExperienceManager.getRequiredExperience(classLevel);
 
                 ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
                 ItemMeta itemMeta = itemStack.getItemMeta();
@@ -249,10 +245,6 @@ public class MenuList {
                 lore.add("");
                 lore.add("Class: " + rpgClass.getClassString());
                 lore.add("Class Tier: " + tier);
-                lore.add("");
-                lore.add(ChatColor.GREEN + "Total Experience: " + totalExp);
-                lore.add(ChatColor.GREEN + "Class Level: " + classLevel);
-                lore.add(ChatColor.GREEN + "Experience: " + currentExperience + "/" + requiredExperience);
                 itemMeta.setLore(lore);
                 itemMeta.setCustomModelData(classIconCustomModelData);
                 itemStack.setItemMeta(itemMeta);
@@ -360,14 +352,6 @@ public class MenuList {
                             itemStack.setType(Material.LIME_WOOL);
                             lore.add(ChatColor.GREEN + "Click to change to this class!");
                         }
-                        RPGClassStats rpgClassStats = unlockedClasses.get(valueStr);
-                        int totalExp = rpgClassStats.getTotalExp();
-                        int classLevel = RPGClassExperienceManager.getLevel(totalExp);
-                        lore.add(ChatColor.GREEN + "Total Experience: " + totalExp);
-                        lore.add(ChatColor.GREEN + "Class Level: " + classLevel);
-                        int currentExperience = RPGClassExperienceManager.getCurrentExperience(totalExp, classLevel);
-                        int requiredExperience = RPGClassExperienceManager.getRequiredExperience(classLevel);
-                        lore.add(ChatColor.GREEN + "Experience: " + currentExperience + "/" + requiredExperience);
                     } else {
                         lore.add(ChatColor.RED + "You haven't unlock this class");
                     }

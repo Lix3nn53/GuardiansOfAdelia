@@ -6,7 +6,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassExperienceManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
@@ -157,16 +156,7 @@ public class SkillBar {
     }
 
     public int getSkillPointsLeftToSpend() {
-        boolean hasGuardianData = GuardianDataManager.hasGuardianData(player);
-
-        if (!hasGuardianData) return 0;
-
-        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-        RPGClassStats rpgClassStats = activeCharacter.getRPGClassStats();
-
-        int totalExp = rpgClassStats.getTotalExp();
-        int points = RPGClassExperienceManager.getLevel(totalExp);
+        int points = player.getLevel();
 
         for (int invested : investedSkillPoints.values()) {
             points -= invested;

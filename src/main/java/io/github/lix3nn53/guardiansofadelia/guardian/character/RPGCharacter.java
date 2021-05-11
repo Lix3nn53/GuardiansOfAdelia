@@ -45,7 +45,7 @@ public final class RPGCharacter {
         this.skillBar = new SkillBar(player, 0, 0, 0, 0, 0, rpgClass.getSkillSet(), false);
 
         this.unlockedClasses = new HashMap<>();
-        RPGClassStats rpgClassStats = new RPGClassStats(0, 0, 0, 0, 0, 0);
+        RPGClassStats rpgClassStats = new RPGClassStats(0, 0, 0, 0, 0);
         this.unlockedClasses.put(rpgClassStr, rpgClassStats);
     }
 
