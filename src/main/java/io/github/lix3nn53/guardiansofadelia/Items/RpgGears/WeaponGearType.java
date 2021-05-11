@@ -217,7 +217,7 @@ public enum WeaponGearType {
     public String getItemLoreAddition() {
         switch (this) {
             case WAR_HAMMER:
-                return ChatColor.LIGHT_PURPLE + "Knockback bonus: " + ChatColor.GRAY + "1.2";
+                return ChatColor.LIGHT_PURPLE + "Sweep Attack";
             case STAFF:
                 return ChatColor.LIGHT_PURPLE + "Ability Haste: " + ChatColor.GRAY + "+20";
         }

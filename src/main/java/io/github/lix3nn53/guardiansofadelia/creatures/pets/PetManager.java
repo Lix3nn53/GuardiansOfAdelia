@@ -5,8 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.TargetHelper;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
+import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.lumine.xikage.mythicmobs.MythicMobs;
@@ -43,6 +45,7 @@ public class PetManager {
     private static final HashMap<LivingEntity, Player> companionToOwner = new HashMap<>();
     // Companions Only
     private static final HashMap<Player, List<LivingEntity>> ownerToCompanions = new HashMap<>();
+    protected final static List<Player> companionLogicRunnerActive = new ArrayList<>();
 
     public static Player getOwner(LivingEntity entity) {
         return companionToOwner.get(entity);
@@ -380,6 +383,60 @@ public class PetManager {
         ownerToCompanions.put(player, companions);
 
         TriggerListener.onPlayerCompanionSpawn(player, pet);
+
+        if (!companionLogicRunnerActive.contains(player)) {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendMessage("AA-1");
+                    if (!ownerToCompanions.containsKey(player)) {
+                        cancel();
+                        companionLogicRunnerActive.remove(player);
+                        return;
+                    }
+                    player.sendMessage("AA-2");
+
+                    List<LivingEntity> livingEntities = ownerToCompanions.get(player);
+                    if (livingEntities.isEmpty()) {
+                        cancel();
+                        ownerToCompanions.remove(player);
+                        companionLogicRunnerActive.remove(player);
+                        return;
+                    }
+                    player.sendMessage("AA-3");
+
+                    ArrayList<Mob> mobsWithoutTarget = new ArrayList<>();
+                    for (LivingEntity livingEntity : livingEntities) {
+                        if (!(livingEntity instanceof Mob)) continue;
+                        Mob mob = (Mob) livingEntity;
+                        LivingEntity target = mob.getTarget();
+                        if (target == null) {
+                            mobsWithoutTarget.add(mob);
+                        }
+                    }
+                    player.sendMessage("AA-4");
+
+                    if (mobsWithoutTarget.isEmpty()) return;
+                    player.sendMessage("AA-5");
+
+                    List<LivingEntity> nearbySphere = TargetHelper.getNearbySphere(player.getLocation(), 8);
+
+                    for (LivingEntity nearby : nearbySphere) {
+                        if (nearby.getType().equals(EntityType.ARMOR_STAND)) continue;
+                        boolean isEnemy = EntityUtils.canAttack(player, nearby);
+                        if (isEnemy) {
+                            for (Mob mob : mobsWithoutTarget) {
+                                mob.setTarget(nearby);
+                            }
+                            break;
+                        }
+                    }
+                    player.sendMessage("AA-6");
+                }
+            }.runTaskTimer(GuardiansOfAdelia.getInstance(), 40L, 40L);
+
+            companionLogicRunnerActive.add(player);
+        }
 
         return pet;
     }
