@@ -18,7 +18,7 @@ public class Element {
         this.elementType = elementType;
     }
 
-    public int getBonusFromEquipment() {
+    public int getTotal() {
         return bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand + bonusFromOffhand + bonusTotalPassive;
     }
 

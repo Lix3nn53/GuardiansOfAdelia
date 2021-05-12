@@ -2,6 +2,12 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.Element;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.configuration.ConfigurationSection;
@@ -18,7 +24,10 @@ public class SpawnCompanionMechanic extends MechanicComponent {
     private final String mobCode;
     private final List<Integer> amounts;
     private final List<Integer> DURATION;
-    private final List<Integer> levels;
+
+    private final ElementType element;
+    private final List<Double> elementPercents;
+
     private boolean SAVE = false;
     private final Optional<String> maxAmountVar;
     private final int maxAmountIfVarEmpty;
@@ -34,13 +43,18 @@ public class SpawnCompanionMechanic extends MechanicComponent {
             configLoadError("amounts");
         }
 
-        if (!configurationSection.contains("levels")) {
-            configLoadError("levels");
+        if (!configurationSection.contains("elementType")) {
+            configLoadError("elementType");
+        }
+
+        if (!configurationSection.contains("elementPercents")) {
+            configLoadError("elementPercents");
         }
 
         this.mobCode = configurationSection.getString("mobCode");
         this.amounts = configurationSection.getIntegerList("amounts");
-        this.levels = configurationSection.getIntegerList("levels");
+        this.element = ElementType.valueOf(configurationSection.getString("element"));
+        this.elementPercents = configurationSection.getDoubleList("elementPercents");
 
         if (configurationSection.contains("durations")) {
             this.DURATION = configurationSection.getIntegerList("durations");
@@ -66,7 +80,28 @@ public class SpawnCompanionMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         int amount = amounts.get(skillLevel - 1);
-        int level = levels.get(skillLevel - 1);
+        double elementPercent = elementPercents.get(skillLevel - 1);
+
+        int level = 0;
+        if (caster instanceof Player) {
+            Player player = (Player) caster;
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                    RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+                    Element element = rpgCharacterStats.getElement(this.element);
+                    int elementPoints = element.getTotal();
+
+                    String rpgClassStr = activeCharacter.getRpgClassStr();
+                    double playerDamage = rpgCharacterStats.getTotalElementDamage(player, rpgClassStr);
+
+                    double total = playerDamage + elementPoints;
+
+                    level = (int) (total * elementPercent + 0.5);
+                }
+            }
+        }
 
         List<LivingEntity> spawned = new ArrayList<>();
         for (LivingEntity target : targets) {
@@ -138,8 +173,10 @@ public class SpawnCompanionMechanic extends MechanicComponent {
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
+        String codeStr = mobCode.replaceAll("Companion", "");
         if (skillLevel == 0) {
-            String lore = "Spawn " + amounts.get(skillLevel) + "x" + mobCode + " at level " + levels.get(skillLevel);
+            String lore = "Spawn " + amounts.get(skillLevel) + "x" + codeStr + " " + ((int) (elementPercents.get(skillLevel) * 100))
+                    + "% " + element.getFullName();
 
             if (!DURATION.isEmpty()) {
                 lore = lore + " for " + DURATION.get(skillLevel) / 20;
@@ -147,7 +184,8 @@ public class SpawnCompanionMechanic extends MechanicComponent {
 
             additions.add(lore);
         } else if (skillLevel == amounts.size()) {
-            String lore = "Spawn " + amounts.get(skillLevel - 1) + "x" + mobCode + " at level " + levels.get(skillLevel - 1);
+            String lore = "Spawn " + amounts.get(skillLevel - 1) + "x" + codeStr + " " + ((int) (elementPercents.get(skillLevel - 1) * 100))
+                    + "% " + element.getFullName();
 
             if (!DURATION.isEmpty()) {
                 lore = lore + " for " + DURATION.get(skillLevel - 1) / 20;
@@ -155,8 +193,9 @@ public class SpawnCompanionMechanic extends MechanicComponent {
 
             additions.add(lore);
         } else {
-            String lore1 = "Spawn " + amounts.get(skillLevel - 1) + "x" + mobCode + " at level " + levels.get(skillLevel - 1);
-            String lore2 = amounts.get(skillLevel) + "x at level " + levels.get(skillLevel);
+            String lore1 = "Spawn " + amounts.get(skillLevel - 1) + "x" + codeStr + " " + ((int) (elementPercents.get(skillLevel - 1) * 100))
+                    + "% of " + element.getFullName();
+            String lore2 = amounts.get(skillLevel) + "x " + ((int) (elementPercents.get(skillLevel) * 100)) + "% " + element.getFullName();
 
             if (!DURATION.isEmpty()) {
                 lore1 = lore1 + " for " + DURATION.get(skillLevel - 1) / 20;

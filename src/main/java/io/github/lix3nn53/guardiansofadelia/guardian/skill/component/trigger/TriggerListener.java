@@ -282,6 +282,7 @@ public class TriggerListener {
 
     public static void onSkillUpgrade(Player player, InitializeTrigger initializeTrigger, int skillIndex, int nextSkillLevel, int castCounter) {
         stopInit(player, skillIndex); //stop old init
+        initializeTrigger.stopPreviousEffects(player);
 
         List<LivingEntity> targets = new ArrayList<>();
         targets.add(player);
@@ -291,6 +292,7 @@ public class TriggerListener {
 
     public static void onSkillDowngrade(Player player, InitializeTrigger initializeTrigger, int skillIndex, int nextSkillLevel, int castCounter) {
         stopInit(player, skillIndex);
+        initializeTrigger.stopPreviousEffects(player);
         if (nextSkillLevel == 0) return;
 
         List<LivingEntity> targets = new ArrayList<>();

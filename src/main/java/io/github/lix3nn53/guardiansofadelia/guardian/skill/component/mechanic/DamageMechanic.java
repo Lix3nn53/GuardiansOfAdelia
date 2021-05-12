@@ -62,7 +62,7 @@ public class DamageMechanic extends MechanicComponent {
                         String rpgClassStr = activeCharacter.getRpgClassStr();
 
                         double statValue = rpgCharacterStats.getTotalElementDamage(player, rpgClassStr);
-                        statValue += rpgCharacterStats.getElement(damageType).getBonusFromEquipment();
+                        statValue += rpgCharacterStats.getElement(damageType).getTotal();
 
                         double multiply = damageMultiplyList.get(skillLevel - 1);
 

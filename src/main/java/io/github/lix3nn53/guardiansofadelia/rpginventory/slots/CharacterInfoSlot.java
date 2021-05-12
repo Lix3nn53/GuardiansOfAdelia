@@ -85,7 +85,7 @@ public class CharacterInfoSlot {
                 lore.add("");
                 for (ElementType elementType : ElementType.values()) {
                     Element element = rpgCharacterStats.getElement(elementType);
-                    lore.add(elementType.getFullName() + ": " + ChatColor.GRAY + element.getBonusFromEquipment());
+                    lore.add(elementType.getFullName() + ": " + ChatColor.GRAY + element.getTotal());
                 }
                 skullMeta.setLore(lore);
                 itemStack.setItemMeta(skullMeta);

@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
@@ -11,6 +12,8 @@ import java.util.List;
  * Must be in first skill component list
  */
 public class InitializeTrigger extends TriggerComponent {
+
+    private int lastCastCounter;
 
     public InitializeTrigger(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -33,5 +36,11 @@ public class InitializeTrigger extends TriggerComponent {
         this.skillIndex = skillIndex;
 
         executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
+        lastCastCounter = castCounter;
+    }
+
+    public void stopPreviousEffects(Player caster) {
+        SkillDataManager.stopRepeatTasksOfCast(caster, lastCastCounter);
+        SkillDataManager.removeSavedEntities(caster, lastCastCounter);
     }
 }

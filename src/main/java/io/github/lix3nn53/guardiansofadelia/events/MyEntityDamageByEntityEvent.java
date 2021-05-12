@@ -206,7 +206,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                                 RPGCharacterStats targetRpgCharacterStats = activeCharacter.getRpgCharacterStats();
                                 int totalDefense = targetRpgCharacterStats.getTotalElementDefense();
-                                totalDefense += targetRpgCharacterStats.getElement(damageType).getBonusFromEquipment(); // Element is added to defense
+                                totalDefense += targetRpgCharacterStats.getElement(damageType).getTotal(); // Element is added to defense
 
                                 double reduction = StatUtils.getDefenseReduction(totalDefense);
 
@@ -302,7 +302,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                         // Add bonus damage to normal attack, both melee and ranged
                         damage += rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE).getIncrement(player.getLevel(), rpgClassStr); // bonus from attribute
-                        damage += rpgCharacterStats.getElement(damageType).getBonusFromEquipment(); // bonus from element
+                        damage += rpgCharacterStats.getElement(damageType).getTotal(); // bonus from element
                     }
 
                     // BuffMechanic
@@ -361,7 +361,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                             RPGCharacterStats targetRpgCharacterStats = targetActiveCharacter.getRpgCharacterStats();
                             int totalDefense = targetRpgCharacterStats.getTotalElementDefense();
-                            totalDefense += targetRpgCharacterStats.getElement(damageType).getBonusFromEquipment();
+                            totalDefense += targetRpgCharacterStats.getElement(damageType).getTotal();
 
                             double reduction = StatUtils.getDefenseReduction(totalDefense);
 

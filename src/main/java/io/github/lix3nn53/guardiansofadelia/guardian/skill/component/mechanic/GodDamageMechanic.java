@@ -82,7 +82,7 @@ public class GodDamageMechanic extends MechanicComponent {
             if (!damageList.isEmpty()) {
                 additions.add("God Damage: " + (int) (damageList.get(skillLevel) + 0.5));
             }
-        } else if (skillLevel == damageList.size()) {
+        } else if (skillLevel == damageList.size() || skillLevel == damagePercentList.size()) {
             if (!damagePercentList.isEmpty()) {
                 additions.add("God Damage: " + (damagePercentList.get(skillLevel - 1) + 0.5) + "%");
             }
