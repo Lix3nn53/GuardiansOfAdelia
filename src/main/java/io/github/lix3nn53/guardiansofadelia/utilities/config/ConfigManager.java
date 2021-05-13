@@ -76,8 +76,8 @@ public class ConfigManager {
         ItemShieldSetConfigurations.loadConfigs();
         ItemWeaponSetConfigurations.loadConfigs();
         JobCraftingConfigurations.loadConfigs();
-        QuestConfigurations.loadConfigs();
         PetConfigurations.loadConfigs();
+        QuestConfigurations.loadConfigs();
         LootChestConfiguration.loadConfigs();
         GearSetConfiguration.loadConfig();
         MobConfigurations.loadConfigs();
@@ -93,8 +93,11 @@ public class ConfigManager {
     }
 
     public static void loadHologramsConfig() {
-        int hologramCount = hologramsConfig.getInt("HologramCount");
-        for (int i = 1; i <= hologramCount; i++) {
+        for (int i = 1; i <= 999; i++) {
+            boolean contains = hologramsConfig.contains("Hologram" + i + ".world");
+
+            if (!contains) break;
+
             String worldString = hologramsConfig.getString("Hologram" + i + ".world");
             if (worldString == null) continue;
 

@@ -54,11 +54,15 @@ public class Egg implements RPGGear {
         lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + speed);
         lore.add("");
         HashMap<Integer, Skill> skills = petData.getSkills();
-        for (int i : skills.keySet()) {
-            Skill skill = skills.get(i);
-            lore.add(ChatColor.GRAY + "---- " + ChatColor.YELLOW + "Skill at level " + ChatColor.GOLD + i + ChatColor.GRAY + " ----");
-            List<String> description = skill.getDescription();
-            lore.addAll(description);
+        if (skills.isEmpty()) {
+            lore.add(ChatColor.GRAY + "This pet has no skills");
+        } else {
+            for (int i : skills.keySet()) {
+                Skill skill = skills.get(i);
+                lore.add(ChatColor.GRAY + "---- " + ChatColor.YELLOW + "Skill at level " + ChatColor.GOLD + i + ChatColor.GRAY + " ----");
+                List<String> description = skill.getDescription();
+                lore.addAll(description);
+            }
         }
 
         this.itemStack = new ItemStack(material);

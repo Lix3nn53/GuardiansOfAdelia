@@ -43,8 +43,8 @@ public class SpawnCompanionMechanic extends MechanicComponent {
             configLoadError("amounts");
         }
 
-        if (!configurationSection.contains("elementType")) {
-            configLoadError("elementType");
+        if (!configurationSection.contains("element")) {
+            configLoadError("element");
         }
 
         if (!configurationSection.contains("elementPercents")) {

@@ -33,7 +33,6 @@ public class PetConfigurations {
 
             PetData petData = new PetData(fileConfiguration);
             PetSkillManager.put(key, petData);
-
         }
     }
 }

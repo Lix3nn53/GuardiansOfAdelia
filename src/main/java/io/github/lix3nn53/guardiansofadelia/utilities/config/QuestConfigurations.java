@@ -141,7 +141,8 @@ public class QuestConfigurations {
                 Quest quest = new Quest(questID, name, story,
                         startMsg, objectiveText.toString(),
                         turnInMsg,
-                        tasks, itemPrizes, moneyPrize, expPrize, requiredLevel, requiredQuests, advancementMaterial, onAcceptActions, onCompleteActions, onTurnInActions, itemPrizesSelectOneOf, weaponPrizesSelectOneOf);
+                        tasks, itemPrizes, moneyPrize, expPrize, requiredLevel, requiredQuests, advancementMaterial, onAcceptActions,
+                        onCompleteActions, onTurnInActions, itemPrizesSelectOneOf, weaponPrizesSelectOneOf);
 
                 QuestNPCManager.addQuest(quest, npcToTakeFrom, npcToComplete);
             }
