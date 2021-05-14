@@ -15,9 +15,9 @@ public class CraftingGuiManager {
 
     public static GuiGeneric getLevelSelection(CraftingType craftingType) {
         GuiGeneric guiGeneric = new GuiGeneric(27, craftingType.toString() + " Crafting Level Selection", 0);
-        ItemStack itemStack = new ItemStack(Material.STONE_PICKAXE, 10);
+        ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setCustomModelData(36);
+        itemMeta.setCustomModelData(22);
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.GRAY + "Click to craft items of this crafting-level.");

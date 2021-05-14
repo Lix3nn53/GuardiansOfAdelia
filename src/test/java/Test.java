@@ -1,6 +1,4 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.ProjectileUtil;
-import org.bukkit.util.Vector;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,17 +12,50 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException, SQLException {
-        Vector dir = new Vector(8, 8, 8);
+        int playerLevel = 2;
+        int shareCount = 1;
+        for (int mobLevel = 1; mobLevel < 91; mobLevel++) {
+            if (mobLevel == 0) mobLevel = 1;
 
-        int angle = 360;
+            int exp = (int) (2 + Math.round(10 * Math.pow(mobLevel, 2) / 16) + 0.5);
 
-        int amount = 3;
+            if (playerLevel > 9) { //do not reduce exp according to player level before level 10
+                if (playerLevel > mobLevel) {
+                    exp = (int) (exp * (Math.pow(mobLevel, 1.2) / Math.pow(playerLevel, 1.2)) + 0.5);
+                } else {
+                    exp = (int) (exp * (Math.pow(playerLevel, 1.2) / Math.pow(mobLevel, 1.2)) + 0.5);
+                }
+            }
 
-        ArrayList<Vector> dirs = ProjectileUtil.calcSpread(dir, angle, amount);
+            //Share
+            if (shareCount > 1) {
+                double expMultiplier = 1 - (0.1 * shareCount);
 
-        for (Vector d : dirs) {
-            System.out.println("result: " + d);
+                exp = (int) (exp * expMultiplier + 0.5);
+            }
+
+            if (exp == 0) exp = 1;
+            System.out.println("mobLevel: " + mobLevel + "exp: " + exp);
         }
+
+        int totalMaxMana = 100;
+        int currentMana = 100;
+        if (currentMana > totalMaxMana) {
+            currentMana = totalMaxMana;
+        }
+
+        double ratio = (double) currentMana / totalMaxMana;
+        int foodLevel = (int) (19 * ratio + 0.5);
+
+        if (currentMana > 0) {
+            if (foodLevel <= 0) {
+                foodLevel = 1;
+            }
+        } else {
+            foodLevel = 0;
+        }
+
+        System.out.println("foodLevel: " + foodLevel);
 
         /*
         Vector vector = new Vector(8, 8, 8);

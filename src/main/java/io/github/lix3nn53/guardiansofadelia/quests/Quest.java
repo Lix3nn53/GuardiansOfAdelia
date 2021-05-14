@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
@@ -596,6 +597,31 @@ public final class Quest {
             if (task instanceof TaskReach) {
                 TaskReach taskReach = (TaskReach) task;
                 boolean didProgress = taskReach.progress(questOwner, targetBlockLoc, questID, taskIndex, false);
+                if (didProgress) {
+                    TablistUtils.updateTablist(questOwner);
+                    if (this.isCompleted()) {
+                        this.onComplete(questOwner);
+                    }
+                    return true;
+                }
+            }
+            taskIndex++;
+        }
+        return false;
+    }
+
+    public boolean progressCraftingTasks(Player questOwner, CraftingType craftingType, ItemStack crafted) {
+        int taskIndex = 0;
+        ItemMeta itemMeta = crafted.getItemMeta();
+        String displayName = itemMeta.getDisplayName();
+        for (Task task : this.tasks) {
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
+            if (task instanceof TaskCrafting) {
+                TaskCrafting taskCrafting = (TaskCrafting) task;
+                boolean didProgress = taskCrafting.progress(craftingType, displayName, questOwner, questID, taskIndex, false);
                 if (didProgress) {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {

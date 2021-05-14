@@ -96,7 +96,7 @@ public class MyPlayerInteractEvent implements Listener {
                     String name = teleportScroll.getName();
                     TeleportationUtils.teleport(player, location, name, 5, itemInMainHand, 0);
                 }
-            } else if (itemInMainHandType.equals(Material.STONE_PICKAXE)) {
+            } else if (itemInMainHandType.equals(Material.BROWN_DYE)) {
                 if (PersistentDataContainerUtil.hasString(itemInMainHand, "prizeDungeon")) { //dungeon chests
                     String dungeonThemeString = PersistentDataContainerUtil.getString(itemInMainHand, "prizeDungeon");
                     String typeStr = PersistentDataContainerUtil.getString(itemInMainHand, "prizeType");

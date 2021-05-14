@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
+import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
@@ -50,6 +51,13 @@ public class TaskLoader {
             int amountNeeded = configurationSection.getInt("amountNeeded");
 
             task = new TaskCollect(nameOfMobsItemDropsFrom, chance, questItem, amountNeeded);
+        } else if (componentType.equals(TaskCrafting.class.getSimpleName())) {
+            int amountNeeded = configurationSection.getInt("amountNeeded");
+            CraftingType craftingType = CraftingType.valueOf(configurationSection.getString("craftingType"));
+            int minCraftingLevel = configurationSection.getInt("minCraftingLevel");
+            String itemNameContains = configurationSection.contains("itemNameContains") ? configurationSection.getString("itemNameContains") : null;
+
+            task = new TaskCrafting(craftingType, minCraftingLevel, itemNameContains, amountNeeded);
         } else if (componentType.equals(TaskDealDamage.class.getSimpleName())) {
             String internalName = configurationSection.getString("mobKey");
 

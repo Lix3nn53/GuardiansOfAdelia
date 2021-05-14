@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -42,9 +41,9 @@ public class PrizeChest {
     }
 
     public ItemStack getChest() {
-        ItemStack itemStack = new ItemStack(Material.STONE_PICKAXE);
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setCustomModelData(35);
+        ItemStack chestItem = this.type.getChestItem();
+        ItemMeta itemMeta = chestItem.getItemMeta();
+
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.GRAY + "Right click while holding to open!");
@@ -53,12 +52,12 @@ public class PrizeChest {
         itemMeta.setLore(lore);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemStack.setItemMeta(itemMeta);
+        chestItem.setItemMeta(itemMeta);
 
-        PersistentDataContainerUtil.putString("prizeDungeon", code, itemStack);
-        PersistentDataContainerUtil.putString("prizeType", type.name(), itemStack);
+        PersistentDataContainerUtil.putString("prizeDungeon", code, chestItem);
+        PersistentDataContainerUtil.putString("prizeType", type.name(), chestItem);
 
-        return itemStack;
+        return chestItem;
     }
 
     public void spawnChestModel(Location location) {

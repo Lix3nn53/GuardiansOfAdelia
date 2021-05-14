@@ -29,7 +29,7 @@ public class Checkpoint {
 
         ItemStack holoItem = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = holoItem.getItemMeta();
-        itemMeta.setCustomModelData(39);
+        itemMeta.setCustomModelData(5);
         itemMeta.setUnbreakable(true);
         holoItem.setItemMeta(itemMeta);
 

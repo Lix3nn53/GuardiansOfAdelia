@@ -37,7 +37,8 @@ public class CraftingLine implements GuiLine {
         lore.add(ChatColor.YELLOW + "You need ingredients on left side of this line");
         lore.add(ChatColor.YELLOW + "to create the item on right side of this line.");
         lore.add("");
-        lore.add(ChatColor.GREEN + "If you have enough ingredients, click on the item you want to craft.");
+        lore.add(ChatColor.GREEN + "If you have enough ingredients,");
+        lore.add(ChatColor.GREEN + "click on the item you want to craft.");
         itemMeta.setLore(lore);
         infoGlass.setItemMeta(itemMeta);
         line.add(infoGlass);

@@ -49,7 +49,7 @@ public class OtherItems {
     public static ItemStack getPetFood(int tier) {
         ItemStack itemStack = new ItemStack(Material.BROWN_DYE);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setCustomModelData(6);
+        itemMeta.setCustomModelData(5);
         itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Pet Food Tier " + tier);
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");

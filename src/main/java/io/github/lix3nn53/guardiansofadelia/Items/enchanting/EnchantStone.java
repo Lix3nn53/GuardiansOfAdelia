@@ -32,7 +32,7 @@ public enum EnchantStone {
         if (this.equals(EnchantStone.TIER_TWO)) {
             ItemStack item = new ItemStack(material, amount);
             ItemMeta itemMeta = item.getItemMeta();
-            itemMeta.setCustomModelData(3);
+            itemMeta.setCustomModelData(2);
             itemMeta.setDisplayName(ChatColor.BLUE + "Enchant Stone Tier 2");
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
@@ -45,7 +45,7 @@ public enum EnchantStone {
         } else if (this.equals(EnchantStone.TIER_THREE)) {
             ItemStack item = new ItemStack(material, amount);
             ItemMeta itemMeta = item.getItemMeta();
-            itemMeta.setCustomModelData(4);
+            itemMeta.setCustomModelData(3);
             itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Enchant Stone Tier 3");
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
@@ -58,7 +58,7 @@ public enum EnchantStone {
         } else if (this.equals(EnchantStone.TIER_FOUR)) {
             ItemStack item = new ItemStack(material, amount);
             ItemMeta itemMeta = item.getItemMeta();
-            itemMeta.setCustomModelData(5);
+            itemMeta.setCustomModelData(4);
             itemMeta.setDisplayName(ChatColor.RED + "Enchant Stone Tier 4");
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
@@ -71,7 +71,7 @@ public enum EnchantStone {
         }
         ItemStack item = new ItemStack(material, amount);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setCustomModelData(2);
+        itemMeta.setCustomModelData(1);
         itemMeta.setDisplayName(ChatColor.GREEN + "Enchant Stone Tier 1");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");

@@ -984,7 +984,7 @@ public class MyInventoryClickEvent implements Listener {
         } else if (title.contains(" Crafting")) {
             if (title.contains(" Level Selection")) {
                 if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                    if (currentType.equals(Material.STONE_PICKAXE)) {
+                    if (currentType.equals(Material.WOODEN_PICKAXE)) {
                         if (rpgCharacter != null) {
                             String replace = title.replace(" Crafting Level Selection", "");
                             CraftingType craftingType = CraftingType.valueOf(replace);
@@ -1045,6 +1045,7 @@ public class MyInventoryClickEvent implements Listener {
 
                                         String levelStr = split2[0];
                                         int craftingLevel = Integer.parseInt(levelStr);
+                                        jobExpToGive = jobExpToGive * craftingLevel;
                                         GearLevel gearLevel = GearLevel.values()[craftingLevel];
 
                                         StatUtils.addRandomPassiveStats(clone, gearLevel, ItemTier.MYSTIC);
@@ -1060,6 +1061,12 @@ public class MyInventoryClickEvent implements Listener {
 
                                         CustomSound customSound = GoaSound.ANVIL.getCustomSound();
                                         customSound.play(player.getLocation());
+
+                                        // Quest TaskCrafting
+                                        List<Quest> questList = rpgCharacter.getQuestList();
+                                        for (Quest quest : questList) {
+                                            quest.progressCraftingTasks(player, craftingType, clone);
+                                        }
                                     }
                                 }
                             }

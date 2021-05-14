@@ -389,6 +389,8 @@ public class RPGCharacterStats {
             foodLevel = 0;
         }
 
+        if (foodLevel == 20) foodLevel = 19;
+
         player.setFoodLevel(foodLevel);
     }
 
