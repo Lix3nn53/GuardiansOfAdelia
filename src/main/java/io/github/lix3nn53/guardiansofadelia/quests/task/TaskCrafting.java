@@ -54,7 +54,7 @@ public final class TaskCrafting implements Task {
             text1 = itemNameContains;
         }
 
-        return color + "Craft " + getProgress() + " " + text1 + " from " + craftingType.getName();
+        return color + "Craft " + getRequiredProgress() + " " + text1 + " from " + craftingType.getName();
     }
 
     @Override
