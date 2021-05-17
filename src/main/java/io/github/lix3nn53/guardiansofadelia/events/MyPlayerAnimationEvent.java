@@ -83,16 +83,6 @@ public class MyPlayerAnimationEvent implements Listener {
                         }
                     }
                     break;
-                } else if (armorStand.getEquipment().getHelmet().getType().equals(GatheringManager.gatheringMaterial)) {
-                    ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-                    if (!itemInMainHand.hasItemMeta()) return;
-                    // FISHING IS HANDLED BY IT'S OWN EVENT
-                    if (itemInMainHand.getType().equals(Material.FISHING_ROD)) return;
-
-                    GatheringModel gatheringModel = GatheringManager.getGatheringModelFromArmorStand(armorStand);
-                    if (gatheringModel == null) continue;
-
-                    GatheringManager.startGathering(player, itemInMainHand, gatheringModel);
                 } else if (BazaarManager.isBazaar(armorStand)) {
                     Player owner = BazaarManager.getOwner(armorStand);
                     if (GuardianDataManager.hasGuardianData(owner)) {
@@ -107,13 +97,23 @@ public class MyPlayerAnimationEvent implements Listener {
                     TombManager.onReachToTomb(player);
                     break;
                 } else {
-                    Checkpoint checkpoint = CheckpointManager.getCheckpointFromArmorStand(armorStand);
-                    if (checkpoint != null) { //portal model
-                        if (MiniGameManager.isInMinigame(player)) {
-                            boolean b = MiniGameManager.onCheckpointSet(player, checkpoint);
+                    GatheringModel gatheringModel = GatheringManager.getGatheringModelFromArmorStand(armorStand);
+                    if (gatheringModel != null) {
+                        ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+                        if (!itemInMainHand.hasItemMeta()) return;
+                        // FISHING IS HANDLED BY IT'S OWN EVENT
+                        if (itemInMainHand.getType().equals(Material.FISHING_ROD)) return;
 
+                        GatheringManager.startGathering(player, itemInMainHand, gatheringModel);
+                    } else {
+                        Checkpoint checkpoint = CheckpointManager.getCheckpointFromArmorStand(armorStand);
+                        if (checkpoint != null) { //portal model
+                            if (MiniGameManager.isInMinigame(player)) {
+                                boolean b = MiniGameManager.onCheckpointSet(player, checkpoint);
+
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             }

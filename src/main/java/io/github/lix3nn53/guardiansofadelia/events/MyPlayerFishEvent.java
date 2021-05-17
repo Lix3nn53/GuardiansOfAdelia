@@ -2,9 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModel;
-import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
-import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolType;
-import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -32,15 +30,13 @@ public class MyPlayerFishEvent implements Listener {
                 if (entity.getType().equals(EntityType.ARMOR_STAND)) {
                     ArmorStand armorStand = (ArmorStand) entity;
 
-                    if (armorStand.getEquipment().getHelmet().getType().equals(GatheringManager.gatheringMaterial)) {
-                        GatheringModel gatheringModel = GatheringManager.getGatheringModelFromArmorStand(armorStand);
-                        if (gatheringModel == null) continue;
+                    GatheringModel gatheringModel = GatheringManager.getGatheringModelFromArmorStand(armorStand);
+                    if (gatheringModel == null) continue;
 
-                        b = GatheringManager.canStartFishing(player, itemInMainHand, gatheringModel);
+                    b = GatheringManager.canStartGathering(player, itemInMainHand, gatheringModel);
 
-                        if (b) {
-                            break;
-                        }
+                    if (b) {
+                        break;
                     }
                 }
             }
@@ -62,27 +58,24 @@ public class MyPlayerFishEvent implements Listener {
                 if (entity.getType().equals(EntityType.ARMOR_STAND)) {
                     ArmorStand armorStand = (ArmorStand) entity;
 
-                    if (armorStand.getEquipment().getHelmet().getType().equals(GatheringManager.gatheringMaterial)) {
-                        gatheringModel = GatheringManager.getGatheringModelFromArmorStand(armorStand);
-                        if (gatheringModel == null) continue;
+                    gatheringModel = GatheringManager.getGatheringModelFromArmorStand(armorStand);
+                    if (gatheringModel == null) continue;
 
-                        b = GatheringManager.canStartFishing(player, itemInMainHand, gatheringModel);
+                    b = GatheringManager.canStartGathering(player, itemInMainHand, gatheringModel);
 
-                        if (b) {
-                            break;
-                        }
+                    if (b) {
+                        break;
                     }
                 }
             }
             if (!b) {
                 event.setCancelled(true);
                 player.sendMessage(ChatColor.RED + "You are not in a fishing area");
+                return;
             }
 
-            String toolTier = PersistentDataContainerUtil.getString(itemInMainHand, "toolTier");
-            GatheringToolTier gatheringToolTier = GatheringToolTier.valueOf(toolTier);
-            int customModelData = gatheringModel.getCustomModelData();
-            ItemStack gatheredIngredient = GatheringManager.finishGathering(player, itemInMainHand, GatheringToolType.FISHING_ROD, gatheringToolTier, customModelData);
+            List<Ingredient> ingredients = GatheringManager.getIngredients(gatheringModel);
+            ItemStack gatheredIngredient = GatheringManager.finishGathering(player, itemInMainHand, ingredients);
             if (gatheredIngredient != null) {
                 caught.setItemStack(gatheredIngredient);
             } else {

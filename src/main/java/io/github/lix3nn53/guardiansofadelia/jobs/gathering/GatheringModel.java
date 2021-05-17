@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EntityEquipment;
@@ -13,22 +14,27 @@ import org.bukkit.util.EulerAngle;
 
 
 public class GatheringModel {
+
+    // Id to get model data with
+    private final int id;
+
+    // State
     private final Location baseLocation;
-    private final int customModelData;
-    private final int cooldownCustomModelData;
-    private final String title;
     private ArmorStand armorStand;
     private boolean onCooldown = false;
     private boolean beingGathered = false;
 
-    public GatheringModel(Location baseLocation, int customModelData, int cooldownCustomModelData, String title) {
+    public GatheringModel(int id, Location baseLocation) {
+        this.id = id;
         this.baseLocation = baseLocation;
-        this.customModelData = customModelData;
-        this.cooldownCustomModelData = cooldownCustomModelData;
-        this.title = ChatColor.translateAlternateColorCodes('&', title);
     }
 
-    public void createModel() {
+    public void createModel(GatheringModelData gatheringModelData) {
+        int customModelData = gatheringModelData.getCustomModelData();
+        int cooldownCustomModelData = gatheringModelData.getCooldownCustomModelData();
+        Material material = gatheringModelData.getMaterial();
+        String title = gatheringModelData.getTitle();
+
         double x = Math.toRadians(baseLocation.getPitch());
         double y = Math.toRadians(baseLocation.getYaw());
         EulerAngle eulerAngle = new EulerAngle(x, y, 0);
@@ -39,13 +45,13 @@ public class GatheringModel {
 
         this.armorStand = (ArmorStand) clone.getWorld().spawnEntity(clone, EntityType.ARMOR_STAND);
         armorStand.setHeadPose(eulerAngle);
-        ItemStack itemStack = new ItemStack(GatheringManager.gatheringMaterial);
+        ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (onCooldown) {
-            itemMeta.setCustomModelData(this.cooldownCustomModelData);
+            itemMeta.setCustomModelData(cooldownCustomModelData);
             armorStand.setCustomName(title + ChatColor.GRAY + " (On Cooldown)");
         } else {
-            itemMeta.setCustomModelData(this.customModelData);
+            itemMeta.setCustomModelData(customModelData);
             armorStand.setCustomName(title);
         }
         itemMeta.setUnbreakable(true);
@@ -59,26 +65,22 @@ public class GatheringModel {
         armorStand.setSmall(true);
     }
 
-    public Location getBaseLocation() {
-        return baseLocation;
-    }
-
     public ArmorStand getArmorStand() {
         return armorStand;
     }
 
-    public int getCustomModelData() {
-        return customModelData;
-    }
+    public void onLoot(GatheringModelData gatheringModelData) {
+        int customModelData = gatheringModelData.getCustomModelData();
+        int cooldownCustomModelData = gatheringModelData.getCooldownCustomModelData();
+        String title = gatheringModelData.getTitle();
 
-    public void onLoot() {
         onCooldown = true;
         setBeingGathered(false);
         armorStand.setCustomName(title + ChatColor.GRAY + " (On Cooldown)");
         EntityEquipment equipment = armorStand.getEquipment();
         ItemStack helmet = equipment.getHelmet();
         ItemMeta itemMeta = helmet.getItemMeta();
-        itemMeta.setCustomModelData(this.cooldownCustomModelData);
+        itemMeta.setCustomModelData(cooldownCustomModelData);
         helmet.setItemMeta(itemMeta);
         equipment.setHelmet(helmet);
 
@@ -99,8 +101,8 @@ public class GatheringModel {
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 60L);
     }
 
-    public void resetName() {
-        armorStand.setCustomName(title);
+    public void resetName(GatheringModelData gatheringModelData) {
+        armorStand.setCustomName(gatheringModelData.getTitle());
     }
 
     public boolean isBeingGathered() {
@@ -113,5 +115,13 @@ public class GatheringModel {
 
     public boolean isOnCooldown() {
         return onCooldown;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Location getBaseLocation() {
+        return baseLocation;
     }
 }
