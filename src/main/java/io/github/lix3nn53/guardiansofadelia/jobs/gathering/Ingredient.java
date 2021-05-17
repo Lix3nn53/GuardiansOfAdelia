@@ -11,14 +11,16 @@ import java.util.List;
 
 public class Ingredient {
     private final int key;
+    private final Material material;
     private final String name;
     private final int ingredientLevel;
     private final List<String> jobsCanUse;
     private final List<String> text;
     private final int customModelData;
 
-    public Ingredient(int key, String name, int ingredientLevel, List<String> jobsCanUse, List<String> text, int customModelData) {
+    public Ingredient(int key, Material material, String name, int ingredientLevel, List<String> jobsCanUse, List<String> text, int customModelData) {
         this.key = key;
+        this.material = material;
         this.name = name;
         this.ingredientLevel = ingredientLevel;
         this.jobsCanUse = jobsCanUse;
@@ -27,7 +29,7 @@ public class Ingredient {
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack itemStack = new ItemStack(Material.LEATHER, amount);
+        ItemStack itemStack = new ItemStack(material, amount);
 
         PersistentDataContainerUtil.putInteger("ingredient", key, itemStack);
 

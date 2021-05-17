@@ -1,10 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.*;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
@@ -36,27 +33,28 @@ public class JobGatheringConfigurations {
     }
 
     private static void loadIngredients() {
-        int itemCount = ingredientsConfig.getInt("ingredientCount");
+        for (int i = 1; i <= 9999; i++) {
+            if (!ingredientsConfig.contains("i" + i)) break;
 
-        for (int i = 1; i <= itemCount; i++) {
             String nameStr = ingredientsConfig.getString("i" + i + ".name");
-            int customModelData = ingredientsConfig.getInt("i" + i + ".customModelData");
+            Material material = Material.valueOf(ingredientsConfig.getString("i" + i + ".material"));
+            int customModelData = ingredientsConfig.contains("i" + i + ".customModelData") ? ingredientsConfig.getInt("i" + i + ".customModelData") : 0;
             int ingredientLevel = ingredientsConfig.getInt("i" + i + ".ingredientLevel");
             List<String> jobsCanUse = ingredientsConfig.getStringList("i" + i + ".jobsCanUse");
             List<String> extraText = ingredientsConfig.getStringList("i" + i + ".extraText");
 
             String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-            Ingredient ingredient = new Ingredient(i, name, ingredientLevel, jobsCanUse, extraText, customModelData);
+            Ingredient ingredient = new Ingredient(i, material, name, ingredientLevel, jobsCanUse, extraText, customModelData);
 
             GatheringManager.putIngredient(i, ingredient);
         }
     }
 
     private static void loadGatheringModels() {
-        int itemCount = gatheringModelsConfig.getInt("count");
+        for (int i = 1; i <= 999; i++) {
+            if (!gatheringModelsConfig.contains("i" + i)) break;
 
-        for (int i = 1; i <= itemCount; i++) {
             String worldString = gatheringModelsConfig.getString("i" + i + ".world");
             World world = Bukkit.getWorld(worldString);
             double x = gatheringModelsConfig.getDouble("i" + i + ".x");
@@ -79,9 +77,9 @@ public class JobGatheringConfigurations {
     }
 
     private static void loadGatheringToolToCustomModelDatas() {
-        int itemCount = gatheringToolToCustomModelDatas.getInt("toolCount");
+        for (int i = 1; i <= 999; i++) {
+            if (!gatheringToolToCustomModelDatas.contains("t" + i)) break;
 
-        for (int i = 1; i <= itemCount; i++) {
             String gatheringToolTypeStr = gatheringToolToCustomModelDatas.getString("t" + i + ".gatheringToolType");
             String gatheringToolTierStr = gatheringToolToCustomModelDatas.getString("t" + i + ".gatheringToolTier");
             List<Integer> targetCustomModelDatas = gatheringToolToCustomModelDatas.getIntegerList("t" + i + ".targetCustomModelDatas");
@@ -96,9 +94,9 @@ public class JobGatheringConfigurations {
     }
 
     private static void loadBlockToIngredients() {
-        int itemCount = customModelDataToIngredients.getInt("count");
+        for (int i = 1; i <= 999; i++) {
+            if (!customModelDataToIngredients.contains("i" + i)) break;
 
-        for (int i = 1; i <= itemCount; i++) {
             List<Integer> ingredients = customModelDataToIngredients.getIntegerList("i" + i + ".ingredients");
             int customModelData = customModelDataToIngredients.getInt("i" + i + ".customModelData");
 
@@ -109,9 +107,9 @@ public class JobGatheringConfigurations {
     }
 
     private static void loadMobKeyToIngredients() {
-        int itemCount = mobKeyToIngredients.getInt("count");
+        for (int i = 1; i <= 999; i++) {
+            if (!mobKeyToIngredients.contains("m" + i)) break;
 
-        for (int i = 1; i <= itemCount; i++) {
             String mobKey = mobKeyToIngredients.getString("m" + i + ".mobKey");
             List<Integer> ingredients = mobKeyToIngredients.getIntegerList("m" + i + ".ingredients");
 

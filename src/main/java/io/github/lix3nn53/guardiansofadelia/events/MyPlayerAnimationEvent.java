@@ -86,7 +86,7 @@ public class MyPlayerAnimationEvent implements Listener {
                 } else if (armorStand.getEquipment().getHelmet().getType().equals(GatheringManager.gatheringMaterial)) {
                     ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                     if (!itemInMainHand.hasItemMeta()) return;
-                    //HARD CODED FISHING
+                    // FISHING IS HANDLED BY IT'S OWN EVENT
                     if (itemInMainHand.getType().equals(Material.FISHING_ROD)) return;
 
                     GatheringModel gatheringModel = GatheringManager.getGatheringModelFromArmorStand(armorStand);

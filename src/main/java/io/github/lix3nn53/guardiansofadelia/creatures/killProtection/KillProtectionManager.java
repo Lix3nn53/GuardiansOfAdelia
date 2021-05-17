@@ -17,6 +17,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,15 +48,13 @@ public class KillProtectionManager {
             if (bestPlayers.isEmpty()) return;
 
             //drops
+            ArrayList<ItemStack> drops = new ArrayList<>();
             int mobLevel = 0;
             if (mythicEvent != null) {
                 mobLevel = (int) (mythicEvent.getMobLevel() + 0.5);
-                List<ItemStack> drops = MobDropGenerator.getDrops(mobLevel);
-                if (!drops.isEmpty()) {
-                    for (ItemStack itemStack : drops) {
-                        DropProtectionManager.setItem(itemStack, bestPlayers);
-                    }
-                    mythicEvent.getDrops().addAll(drops);
+                List<ItemStack> mobDrops = MobDropGenerator.getDrops(mobLevel);
+                if (!mobDrops.isEmpty()) {
+                    drops.addAll(mobDrops);
                 }
             }
 
@@ -71,7 +70,7 @@ public class KillProtectionManager {
             if (GatheringManager.dropsIngredient(internalName)) {
                 ItemStack ingredient = GatheringManager.triggerIngredientDrop(internalName);
                 if (ingredient != null) {
-                    mythicEvent.getDrops().add(ingredient);
+                    drops.add(ingredient);
                 }
             }
             once.sendMessage("Killed mobLevel: " + mobLevel);
@@ -97,12 +96,24 @@ public class KillProtectionManager {
                             quest.progressKillTasks(player, internalName);
                             ItemStack questItemDrop = quest.triggerQuestItemDrop(internalName);
                             if (questItemDrop != null) {
-                                mythicEvent.getDrops().add(questItemDrop);
+                                drops.add(questItemDrop);
                             }
                         }
                     }
                 }
             }
+
+            // Drops
+            // TODO mythic mobs drops does not work
+            List<ItemStack> mythicDrops = mythicEvent.getDrops();
+            mythicDrops.addAll(drops);
+
+            for (ItemStack itemStack : mythicDrops) {
+                DropProtectionManager.setItem(itemStack, bestPlayers);
+                livingTarget.getWorld().dropItemNaturally(livingTarget.getLocation(), itemStack);
+            }
+
+            mythicEvent.setDrops(mythicDrops);
         }
     }
 

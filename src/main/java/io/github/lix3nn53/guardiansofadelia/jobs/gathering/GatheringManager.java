@@ -388,8 +388,8 @@ public class GatheringManager {
         if (mobKeyToIngredients.containsKey(internalName)) {
             double dropRandom = Math.random();
 
-            double chance = 0.2;
-            if (dropRandom < chance) {
+            double chance = 0.24;
+            if (dropRandom <= chance) {
                 List<Integer> ingredients = mobKeyToIngredients.get(internalName);
 
                 Random random = new Random();
@@ -398,7 +398,7 @@ public class GatheringManager {
 
                 Ingredient ingredient = ingredientHashMap.get(ingredientNo);
 
-                int amount = random.nextInt(10) + 1;
+                int amount = random.nextInt(3) + 1;
 
                 return ingredient.getItemStack(amount);
             }

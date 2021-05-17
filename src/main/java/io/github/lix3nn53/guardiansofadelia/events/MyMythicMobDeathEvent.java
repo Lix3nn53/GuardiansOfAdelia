@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 
 public class MyMythicMobDeathEvent implements Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(MythicMobDeathEvent e) {
         Entity entity = e.getEntity();
         if (!(entity instanceof LivingEntity)) return;
