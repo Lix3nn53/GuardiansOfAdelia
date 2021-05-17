@@ -1,4 +1,6 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
+import org.bukkit.ChatColor;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,7 +14,16 @@ public class Test {
     private static final double MULTIPLIER = 1.05;
 
     public static void main(String[] args) throws InterruptedException, SQLException {
-        int playerLevel = 2;
+
+        GatheringToolTier gatheringToolTier = GatheringToolTier.DIAMOND;
+        GatheringToolTier modelToolTier = GatheringToolTier.IRON;
+
+        System.out.println("gatheringToolTier.compareTo(modelToolTier): " + gatheringToolTier.compareTo(modelToolTier));
+        if (gatheringToolTier.compareTo(modelToolTier) < 0) {
+            System.out.println(ChatColor.RED + "Required gathering tool tier: " + gatheringToolTier.toString());
+        }
+
+        /*int playerLevel = 2;
         int shareCount = 1;
         for (int mobLevel = 1; mobLevel < 91; mobLevel++) {
             if (mobLevel == 0) mobLevel = 1;
@@ -55,7 +66,7 @@ public class Test {
             foodLevel = 0;
         }
 
-        System.out.println("foodLevel: " + foodLevel);
+        System.out.println("foodLevel: " + foodLevel);*/
 
         /*
         Vector vector = new Vector(8, 8, 8);

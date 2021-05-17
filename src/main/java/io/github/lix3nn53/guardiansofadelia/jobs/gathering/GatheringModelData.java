@@ -3,6 +3,8 @@ package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
+import java.util.List;
+
 
 public class GatheringModelData {
 
@@ -13,15 +15,17 @@ public class GatheringModelData {
     private final Material material;
 
     // Gathering data
+    private final List<Integer> ingredients;
     private final GatheringToolType gatheringToolType;
     private final GatheringToolTier minGatheringToolTier;
 
-    public GatheringModelData(int customModelData, int cooldownCustomModelData, String title,
-                              Material material, GatheringToolType gatheringToolType, GatheringToolTier minGatheringToolTier) {
+    public GatheringModelData(int customModelData, int cooldownCustomModelData, String title, Material material,
+                              List<Integer> ingredients, GatheringToolType gatheringToolType, GatheringToolTier minGatheringToolTier) {
         this.customModelData = customModelData;
         this.cooldownCustomModelData = cooldownCustomModelData;
         this.title = ChatColor.translateAlternateColorCodes('&', title);
         this.material = material;
+        this.ingredients = ingredients;
         this.gatheringToolType = gatheringToolType;
         this.minGatheringToolTier = minGatheringToolTier;
     }
@@ -40,6 +44,10 @@ public class GatheringModelData {
 
     public Material getMaterial() {
         return material;
+    }
+
+    public List<Integer> getIngredients() {
+        return ingredients;
     }
 
     public GatheringToolType getGatheringToolType() {

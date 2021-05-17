@@ -31,7 +31,6 @@ public class GatheringManager {
     private final static HashMap<Integer, Ingredient> ingredientHashMap = new HashMap<>();
 
     //GATHERING MULTIPLE RESOURCES
-    private final static HashMap<Integer, List<Integer>> modelIdToIngredients = new HashMap<>();
     private final static HashMap<Integer, GatheringModelData> modelIdToModelData = new HashMap<>();
 
     //GATHERING ENTITY MANAGER
@@ -78,7 +77,8 @@ public class GatheringManager {
 
     public static List<Ingredient> getIngredients(GatheringModel gatheringModel) {
         int id = gatheringModel.getId();
-        List<Integer> ingredientIds = modelIdToIngredients.get(id);
+        GatheringModelData gatheringModelData = modelIdToModelData.get(id);
+        List<Integer> ingredientIds = gatheringModelData.getIngredients();
         List<Ingredient> ingredients = new ArrayList<>();
         for (int i : ingredientIds) {
             Ingredient ingredient = ingredientHashMap.get(i);
@@ -90,7 +90,7 @@ public class GatheringManager {
 
     public static boolean canStartGathering(Player player, ItemStack itemInHand, GatheringModel gatheringModel) {
         if (gatheringModel.isBeingGathered()) {
-            player.sendMessage(ChatColor.RED + "Resource is being gathered by another player");
+            // player.sendMessage(ChatColor.RED + "Resource is being gathered by another player");
             return false;
         }
         if (gatheringModel.isOnCooldown()) {
@@ -122,7 +122,7 @@ public class GatheringManager {
 
         GatheringToolTier modelToolTier = gatheringModelData.getMinGatheringToolTier();
 
-        if (gatheringToolTier.compareTo(modelToolTier) <= 0) {
+        if (gatheringToolTier.compareTo(modelToolTier) < 0) {
             player.sendMessage(ChatColor.RED + "Required gathering tool tier: " + gatheringToolTier.toString());
             return false;
         }
@@ -319,10 +319,6 @@ public class GatheringManager {
 
     public static void putIngredient(int i, Ingredient ingredient) {
         ingredientHashMap.put(i, ingredient);
-    }
-
-    public static void putModelIdToIngredients(int modelId, List<Integer> ingredients) {
-        modelIdToIngredients.put(modelId, ingredients);
     }
 
     public static void putGatheringModelData(int id, GatheringModelData gatheringModelData) {

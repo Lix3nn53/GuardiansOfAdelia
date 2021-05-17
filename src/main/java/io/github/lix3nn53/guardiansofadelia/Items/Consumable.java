@@ -251,9 +251,9 @@ public enum Consumable {
     public String getName() {
         switch (this) {
             case BUFF_ELEMENT_DAMAGE:
-                return ChatColor.RED + "Steak (Element-Damage Buff)";
+                return ChatColor.RED + "Steak (Damage Buff)";
             case BUFF_ELEMENT_DEFENSE:
-                return ChatColor.AQUA + "Beef Stew (Element-Defense Buff)";
+                return ChatColor.AQUA + "Beef Stew (Defense Buff)";
             /*case BUFF_MAGICAL_DAMAGE:
                 return ChatColor.LIGHT_PURPLE + "Cooked Fish (Magical-Damage Buff)";
             case BUFF_MAGICAL_DEFENSE:

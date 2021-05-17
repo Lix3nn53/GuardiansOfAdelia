@@ -57,8 +57,9 @@ public class JobGatheringConfigurations {
             int cooldownCustomModelData = gatheringModelsConfig.getInt("i" + i + ".cooldownCustomModelData");
             GatheringToolType gatheringToolType = GatheringToolType.valueOf(gatheringModelsConfig.getString("i" + i + ".gatheringToolType"));
             GatheringToolTier minGatheringToolTier = GatheringToolTier.valueOf(gatheringModelsConfig.getString("i" + i + ".minGatheringToolTier"));
+            List<Integer> ingredients = gatheringModelsConfig.getIntegerList("i" + i + ".ingredients");
 
-            GatheringModelData gatheringModelData = new GatheringModelData(customModelData, cooldownCustomModelData, name, material, gatheringToolType, minGatheringToolTier);
+            GatheringModelData gatheringModelData = new GatheringModelData(customModelData, cooldownCustomModelData, name, material, ingredients, gatheringToolType, minGatheringToolTier);
             GatheringManager.putGatheringModelData(i, gatheringModelData);
 
             for (int l = 1; l < 999; l++) {
