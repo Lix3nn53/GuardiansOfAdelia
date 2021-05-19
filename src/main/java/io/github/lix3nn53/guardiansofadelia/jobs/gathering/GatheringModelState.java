@@ -45,24 +45,77 @@ public class GatheringModelState {
 
         this.armorStand = (ArmorStand) clone.getWorld().spawnEntity(clone, EntityType.ARMOR_STAND);
         armorStand.setHeadPose(eulerAngle);
-        ItemStack itemStack = new ItemStack(material);
-        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        if (material != null) {
+            ItemStack itemStack = new ItemStack(material);
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            if (onCooldown) {
+                itemMeta.setCustomModelData(cooldownCustomModelData);
+            } else {
+                itemMeta.setCustomModelData(customModelData);
+            }
+            itemMeta.setUnbreakable(true);
+            itemStack.setItemMeta(itemMeta);
+            EntityEquipment equipment = armorStand.getEquipment();
+            equipment.setHelmet(itemStack);
+        }
+
         if (onCooldown) {
-            itemMeta.setCustomModelData(cooldownCustomModelData);
             armorStand.setCustomName(title + ChatColor.GRAY + " (On Cooldown)");
         } else {
-            itemMeta.setCustomModelData(customModelData);
             armorStand.setCustomName(title);
         }
-        itemMeta.setUnbreakable(true);
-        itemStack.setItemMeta(itemMeta);
-        EntityEquipment equipment = armorStand.getEquipment();
-        equipment.setHelmet(itemStack);
+
         armorStand.setVisible(false);
         armorStand.setInvulnerable(true);
         armorStand.setGravity(false);
         armorStand.setCustomNameVisible(true);
         armorStand.setSmall(true);
+
+        boolean playAnimation = gatheringModelData.isPlayAnimation();
+
+        if (playAnimation) {
+            new BukkitRunnable() {
+
+                final double maxDistance = 1.2;
+                final double speed = 0.1;
+                final double startHeight = baseLocation.getY();
+                boolean playingBack = false;
+
+                @Override
+                public void run() {
+                    if (!armorStand.isValid()) {
+                        cancel();
+                        return;
+                    }
+                    if (onCooldown) {
+                        return;
+                    }
+
+                    Location location = armorStand.getLocation();
+                    double currentHeight = location.getY();
+
+                    double distance = currentHeight - startHeight;
+
+                    if (!playingBack) {
+                        armorStand.teleport(location.add(0, speed, 0));
+
+                        if (distance + speed >= maxDistance) {
+                            playingBack = true;
+                        }
+                    } else {
+                        armorStand.teleport(location.add(0, -speed, 0));
+
+                        if (distance - speed <= 0) {
+                            playingBack = false;
+                        }
+                    }
+
+                    EulerAngle headPose = armorStand.getHeadPose();
+                    armorStand.setHeadPose(headPose.add(0.1, 0, 0.1));
+                }
+            }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 5L);
+        }
     }
 
     public ArmorStand getArmorStand() {
@@ -70,19 +123,22 @@ public class GatheringModelState {
     }
 
     public void onLoot(GatheringModelData gatheringModelData) {
-        int customModelData = gatheringModelData.getCustomModelData();
-        int cooldownCustomModelData = gatheringModelData.getCooldownCustomModelData();
         String title = gatheringModelData.getTitle();
 
         onCooldown = true;
         setBeingGathered(false);
         armorStand.setCustomName(title + ChatColor.GRAY + " (On Cooldown)");
+
         EntityEquipment equipment = armorStand.getEquipment();
         ItemStack helmet = equipment.getHelmet();
-        ItemMeta itemMeta = helmet.getItemMeta();
-        itemMeta.setCustomModelData(cooldownCustomModelData);
-        helmet.setItemMeta(itemMeta);
-        equipment.setHelmet(helmet);
+        if (helmet != null) {
+            int cooldownCustomModelData = gatheringModelData.getCooldownCustomModelData();
+
+            ItemMeta itemMeta = helmet.getItemMeta();
+            itemMeta.setCustomModelData(cooldownCustomModelData);
+            helmet.setItemMeta(itemMeta);
+            equipment.setHelmet(helmet);
+        }
 
         new BukkitRunnable() {
             @Override
@@ -90,12 +146,16 @@ public class GatheringModelState {
                 onCooldown = false;
                 if (baseLocation.getChunk().isLoaded()) {
                     armorStand.setCustomName(title);
-                    EntityEquipment equipment = armorStand.getEquipment();
-                    ItemStack helmet = equipment.getHelmet();
-                    ItemMeta itemMeta = helmet.getItemMeta();
-                    itemMeta.setCustomModelData(customModelData);
-                    helmet.setItemMeta(itemMeta);
-                    equipment.setHelmet(helmet);
+
+                    if (helmet != null) {
+                        int customModelData = gatheringModelData.getCustomModelData();
+
+                        EntityEquipment equipment = armorStand.getEquipment();
+                        ItemMeta itemMeta = helmet.getItemMeta();
+                        itemMeta.setCustomModelData(customModelData);
+                        helmet.setItemMeta(itemMeta);
+                        equipment.setHelmet(helmet);
+                    }
                 }
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 60L);

@@ -58,14 +58,15 @@ public class JobGatheringConfigurations {
             String nameStr = gatheringModelsConfig.getString("i" + i + ".name");
             String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-            Material material = Material.valueOf(gatheringModelsConfig.getString("i" + i + ".material"));
+            Material material = gatheringModelsConfig.contains("i" + i + ".material") ? Material.valueOf(gatheringModelsConfig.getString("i" + i + ".material")) : null;
             int customModelData = gatheringModelsConfig.getInt("i" + i + ".customModelData");
             int cooldownCustomModelData = gatheringModelsConfig.getInt("i" + i + ".cooldownCustomModelData");
             GatheringToolType gatheringToolType = GatheringToolType.valueOf(gatheringModelsConfig.getString("i" + i + ".gatheringToolType"));
             GatheringToolTier minGatheringToolTier = GatheringToolTier.valueOf(gatheringModelsConfig.getString("i" + i + ".minGatheringToolTier"));
             List<Integer> ingredients = gatheringModelsConfig.getIntegerList("i" + i + ".ingredients");
+            boolean playAnimation = gatheringModelsConfig.contains("i" + i + ".playAnimation") && gatheringModelsConfig.getBoolean("i" + i + ".playAnimation");
 
-            GatheringModelData gatheringModelData = new GatheringModelData(customModelData, cooldownCustomModelData, name, material, ingredients, gatheringToolType, minGatheringToolTier);
+            GatheringModelData gatheringModelData = new GatheringModelData(customModelData, cooldownCustomModelData, name, material, playAnimation, ingredients, gatheringToolType, minGatheringToolTier);
             GatheringManager.putGatheringModelData(i, gatheringModelData);
 
             for (int l = 1; l < 999; l++) {
@@ -92,17 +93,18 @@ public class JobGatheringConfigurations {
         for (int id : modelIdToModelData.keySet()) {
             GatheringModelData gatheringModelData = modelIdToModelData.get(id);
 
-            int customModelData = gatheringModelData.getCustomModelData();
-            gatheringModelsConfig.set("i" + id + ".customModelData", customModelData);
-            int cooldownCustomModelData = gatheringModelData.getCooldownCustomModelData();
-            gatheringModelsConfig.set("i" + id + ".cooldownCustomModelData", cooldownCustomModelData);
-
             String title = gatheringModelData.getTitle();
             String titleColor = title.replaceAll(ChatColor.COLOR_CHAR + "", "&");
             gatheringModelsConfig.set("i" + id + ".name", titleColor);
 
             Material material = gatheringModelData.getMaterial();
-            gatheringModelsConfig.set("i" + id + ".material", material.name());
+            if (material != null) {
+                gatheringModelsConfig.set("i" + id + ".material", material.name());
+                int customModelData = gatheringModelData.getCustomModelData();
+                gatheringModelsConfig.set("i" + id + ".customModelData", customModelData);
+                int cooldownCustomModelData = gatheringModelData.getCooldownCustomModelData();
+                gatheringModelsConfig.set("i" + id + ".cooldownCustomModelData", cooldownCustomModelData);
+            }
 
             List<Integer> ingredients = gatheringModelData.getIngredients();
             gatheringModelsConfig.set("i" + id + ".ingredients", ingredients);

@@ -46,7 +46,7 @@ public enum GatheringToolType {
                 itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Fishing Rod" + " (" + durability + " Uses left)");
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.GREEN + "Fishing: " + ChatColor.YELLOW + "Raw Cod, Raw Salmon");
+                lore.add(ChatColor.GRAY + "Used for fishing");
                 itemMeta.setLore(lore);
                 itemMeta.setUnbreakable(true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
@@ -61,9 +61,7 @@ public enum GatheringToolType {
                 itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Hoe" + " (" + durability + " Uses left)");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.GREEN + "Flowers: " + ChatColor.YELLOW + "Rose");
-                lore.add(ChatColor.GREEN + "Leaves: " + ChatColor.YELLOW + "Cherry");
-                lore.add(ChatColor.GREEN + "Cob Webs: " + ChatColor.YELLOW + "String, Silk, Soft Silk");
+                lore.add(ChatColor.GRAY + "Used for gathering flowers");
                 itemMeta.setLore(lore);
                 itemMeta.setUnbreakable(true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
@@ -78,13 +76,7 @@ public enum GatheringToolType {
                 itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Pickaxe" + " (" + durability + " Uses left)");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.GREEN + "Coal Ore: " + ChatColor.YELLOW + "Copper Mine");
-                lore.add(ChatColor.GREEN + "Iron Ore: " + ChatColor.YELLOW + "Iron Mine, Steel Mine");
-                lore.add(ChatColor.GREEN + "Gold Ore: " + ChatColor.YELLOW + "Gold Dust");
-                lore.add(ChatColor.GREEN + "Redstone Ore: " + ChatColor.YELLOW + "Ruby Stone");
-                lore.add(ChatColor.GREEN + "Lapis Ore: " + ChatColor.YELLOW + "Amethyst Stone, Sapphire Stone");
-                lore.add(ChatColor.GREEN + "Emerald Ore: " + ChatColor.YELLOW + "Jade Stone");
-                lore.add(ChatColor.GREEN + "Diamond Ore: " + ChatColor.YELLOW + "Diamond Mine, Titanium Mine");
+                lore.add(ChatColor.GRAY + "Used for mining ores");
                 itemMeta.setLore(lore);
                 itemMeta.setUnbreakable(true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
@@ -99,7 +91,7 @@ public enum GatheringToolType {
                 itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Axe" + " (" + durability + " Uses left)");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.GREEN + "Logs: " + ChatColor.YELLOW + "Wooden Plank, Wood Log");
+                lore.add(ChatColor.GRAY + "Used for wood cutting");
                 itemMeta.setLore(lore);
                 itemMeta.setUnbreakable(true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
