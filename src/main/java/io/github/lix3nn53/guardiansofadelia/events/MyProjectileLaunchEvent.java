@@ -9,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUti
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.PlayerTridentThrowManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -35,6 +36,10 @@ public class MyProjectileLaunchEvent implements Listener {
 
         if (shooter instanceof Player) {
             Player player = (Player) shooter;
+
+            if (projectile.getType().equals(EntityType.FISHING_HOOK)) {
+                return;
+            }
 
             if (player.getInventory().getHeldItemSlot() != 4) {
                 event.setCancelled(true);
