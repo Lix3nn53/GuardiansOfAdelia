@@ -5,6 +5,8 @@ import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 public class JobGatheringConfigurations {
@@ -26,6 +28,10 @@ public class JobGatheringConfigurations {
         loadMobKeyToIngredients();
     }
 
+    static void writeConfigs() {
+        writeGatheringModels();
+    }
+
     private static void loadIngredients() {
         for (int i = 1; i <= 9999; i++) {
             if (!ingredientsConfig.contains("i" + i)) break;
@@ -35,7 +41,7 @@ public class JobGatheringConfigurations {
             int customModelData = ingredientsConfig.contains("i" + i + ".customModelData") ? ingredientsConfig.getInt("i" + i + ".customModelData") : 0;
             int ingredientLevel = ingredientsConfig.getInt("i" + i + ".ingredientLevel");
             List<String> jobsCanUse = ingredientsConfig.getStringList("i" + i + ".jobsCanUse");
-            List<String> extraText = ingredientsConfig.getStringList("i" + i + ".extraText");
+            List<String> extraText = ingredientsConfig.contains("i" + i + ".extraText") ? ingredientsConfig.getStringList("i" + i + ".extraText") : null;
 
             String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
@@ -74,9 +80,78 @@ public class JobGatheringConfigurations {
                 float pitch = (float) gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".pitch");
                 Location location = new Location(world, x, y, z, yaw, pitch);
 
-                GatheringModel gatheringModel = new GatheringModel(i, location);
-                GatheringManager.putGatheringModel(gatheringModel);
+                GatheringModelState gatheringModelState = new GatheringModelState(i, location);
+                GatheringManager.putGatheringModelState(gatheringModelState);
             }
+        }
+    }
+
+    private static void writeGatheringModels() {
+        HashMap<Integer, GatheringModelData> modelIdToModelData = GatheringManager.getModelIdToModelData();
+
+        for (int id : modelIdToModelData.keySet()) {
+            GatheringModelData gatheringModelData = modelIdToModelData.get(id);
+
+            int customModelData = gatheringModelData.getCustomModelData();
+            gatheringModelsConfig.set("i" + id + ".customModelData", customModelData);
+            int cooldownCustomModelData = gatheringModelData.getCooldownCustomModelData();
+            gatheringModelsConfig.set("i" + id + ".cooldownCustomModelData", cooldownCustomModelData);
+
+            String title = gatheringModelData.getTitle();
+            String titleColor = title.replaceAll(ChatColor.COLOR_CHAR + "", "&");
+            gatheringModelsConfig.set("i" + id + ".name", titleColor);
+
+            Material material = gatheringModelData.getMaterial();
+            gatheringModelsConfig.set("i" + id + ".material", material.name());
+
+            List<Integer> ingredients = gatheringModelData.getIngredients();
+            gatheringModelsConfig.set("i" + id + ".ingredients", ingredients);
+            GatheringToolType gatheringToolType = gatheringModelData.getGatheringToolType();
+            gatheringModelsConfig.set("i" + id + ".gatheringToolType", gatheringToolType.name());
+            GatheringToolTier minGatheringToolTier = gatheringModelData.getMinGatheringToolTier();
+            gatheringModelsConfig.set("i" + id + ".minGatheringToolTier", minGatheringToolTier.name());
+        }
+
+        HashMap<String, List<GatheringModelState>> chunkKeyToGatheringModels = GatheringManager.getChunkKeyToGatheringModels();
+
+        HashMap<Integer, Integer> modelIdToLocationCount = new HashMap<>();
+
+        for (String chunkKey : chunkKeyToGatheringModels.keySet()) {
+            List<GatheringModelState> gatheringModelStates = chunkKeyToGatheringModels.get(chunkKey);
+            for (GatheringModelState gatheringModelState : gatheringModelStates) {
+                int id = gatheringModelState.getId();
+
+                int count = 1;
+                if (modelIdToLocationCount.containsKey(id)) {
+                    int lastCount = modelIdToLocationCount.get(id);
+                    count = lastCount + 1;
+                }
+                modelIdToLocationCount.put(id, count);
+
+                Location baseLocation = gatheringModelState.getBaseLocation();
+
+                World world = baseLocation.getWorld();
+                String worldName = world.getName();
+
+                double x = baseLocation.getX();
+                double y = baseLocation.getY();
+                double z = baseLocation.getZ();
+                float yaw = baseLocation.getYaw();
+                float pitch = baseLocation.getPitch();
+
+                gatheringModelsConfig.set("i" + id + ".loc" + count + ".world", worldName);
+                gatheringModelsConfig.set("i" + id + ".loc" + count + ".x", x);
+                gatheringModelsConfig.set("i" + id + ".loc" + count + ".y", y);
+                gatheringModelsConfig.set("i" + id + ".loc" + count + ".z", z);
+                gatheringModelsConfig.set("i" + id + ".loc" + count + ".yaw", yaw);
+                gatheringModelsConfig.set("i" + id + ".loc" + count + ".pitch", pitch);
+            }
+        }
+
+        try {
+            gatheringModelsConfig.save(JobGatheringConfigurations.filePath + File.separator + "GatheringModels.yml");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

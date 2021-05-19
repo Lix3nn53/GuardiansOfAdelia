@@ -1,6 +1,6 @@
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantManager;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
-import org.bukkit.ChatColor;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,13 +15,17 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException, SQLException {
 
-        GatheringToolTier gatheringToolTier = GatheringToolTier.DIAMOND;
-        GatheringToolTier modelToolTier = GatheringToolTier.IRON;
+        int reqLevel = 4;
+        double price = Math.max(1, Math.pow(reqLevel, 1.2) / 4);
 
-        System.out.println("gatheringToolTier.compareTo(modelToolTier): " + gatheringToolTier.compareTo(modelToolTier));
-        if (gatheringToolTier.compareTo(modelToolTier) < 0) {
-            System.out.println(ChatColor.RED + "Required gathering tool tier: " + gatheringToolTier.toString());
-        }
+        ItemTier itemTier = ItemTier.COMMON;
+        price = price * itemTier.getBonusMultiplier();
+
+        int enchantLevel = 0;
+        price = price * EnchantManager.getSellGuiMultiplier(enchantLevel);
+
+        System.out.println("price: " + price);
+        System.out.println("price: " + (int) (price + 0.5) * 1);
 
         /*int playerLevel = 2;
         int shareCount = 1;

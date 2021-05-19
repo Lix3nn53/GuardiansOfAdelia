@@ -103,15 +103,15 @@ public class SellGui extends GuiGeneric {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
             reqLevel = PersistentDataContainerUtil.getInteger(itemStack, "reqLevel");
         }
-        double price = Math.max(1, Math.pow(reqLevel, 1.12) / 4);
+        double price = Math.max(1, Math.pow(reqLevel, 1.2) / 4);
 
         ItemTier itemTier = ItemTier.getItemTierOfItemStack(itemStack);
-        price = price * itemTier.getBonusMultiplier() + 0.5;
+        price = price * itemTier.getBonusMultiplier();
 
         int enchantLevel = EnchantManager.getEnchantLevel(itemStack);
         price = price * EnchantManager.getSellGuiMultiplier(enchantLevel);
 
-        return (int) (price * itemStack.getAmount() + 0.5);
+        return (int) (price + 0.5) * itemStack.getAmount();
     }
 
     public void finish(Player player) {

@@ -13,7 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.EulerAngle;
 
 
-public class GatheringModel {
+public class GatheringModelState {
 
     // Id to get model data with
     private final int id;
@@ -24,7 +24,7 @@ public class GatheringModel {
     private boolean onCooldown = false;
     private boolean beingGathered = false;
 
-    public GatheringModel(int id, Location baseLocation) {
+    public GatheringModelState(int id, Location baseLocation) {
         this.id = id;
         this.baseLocation = baseLocation;
     }

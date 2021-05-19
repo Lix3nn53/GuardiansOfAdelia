@@ -14,35 +14,39 @@ public class Ingredient {
     private final Material material;
     private final String name;
     private final int ingredientLevel;
-    private final List<String> jobsCanUse;
-    private final List<String> text;
     private final int customModelData;
 
-    public Ingredient(int key, Material material, String name, int ingredientLevel, List<String> jobsCanUse, List<String> text, int customModelData) {
+    private final List<String> lore;
+
+    public Ingredient(int key, Material material, String name, int ingredientLevel, List<String> jobsCanUse, List<String> extraText, int customModelData) {
         this.key = key;
         this.material = material;
         this.name = name;
         this.ingredientLevel = ingredientLevel;
-        this.jobsCanUse = jobsCanUse;
-        this.text = text;
         this.customModelData = customModelData;
+
+        this.lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Ingredient Level: " + ingredientLevel);
+        lore.add("");
+        for (String jobType : jobsCanUse) {
+            lore.add(ChatColor.GREEN + "✔ " + ChatColor.translateAlternateColorCodes('&', jobType));
+        }
+        if (extraText != null) {
+            lore.add("");
+            lore.addAll(extraText);
+        }
     }
 
     public ItemStack getItemStack(int amount) {
         ItemStack itemStack = new ItemStack(material, amount);
 
         PersistentDataContainerUtil.putInteger("ingredient", key, itemStack);
+        PersistentDataContainerUtil.putInteger("reqLevel", ingredientLevel * 4, itemStack);
 
         ItemMeta im = itemStack.getItemMeta();
         im.setDisplayName(name);
-        List<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatColor.GRAY + "Ingredient Level: " + ingredientLevel);
-        lore.add("");
-        for (String jobType : jobsCanUse) {
-            lore.add(ChatColor.GREEN + "✔ " + jobType);
-        }
-        lore.addAll(this.text);
+        im.setLore(lore);
 
         if (customModelData > 0) {
             im.setCustomModelData(customModelData);

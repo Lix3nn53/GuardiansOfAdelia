@@ -86,6 +86,7 @@ public class ConfigManager {
     public static void writeConfigALL() {
         RewardDailyConfigurations.writeConfigs();
         LootChestConfiguration.writeConfigs();
+        JobGatheringConfigurations.writeConfigs();
     }
 
     public static void loadResourcePackConfig() {

@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
@@ -51,12 +52,12 @@ public class JobCraftingConfigurations {
             if (!(craftingType.equals(CraftingType.WEAPON_RANGED) || craftingType.equals(CraftingType.WEAPON_MELEE)))
                 continue;
             FileConfiguration fileConfiguration = craftingConfigurations.get(craftingType);
-            int levelCount = fileConfiguration.getInt("levelCount");
+            for (int level = 1; level <= 999; level++) {
+                if (!fileConfiguration.contains("level" + level)) break;
 
-            for (int level = 1; level <= levelCount; level++) {
-                int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
+                for (int itemSet = 1; itemSet <= 999; itemSet++) {
+                    if (!fileConfiguration.contains("level" + level + ".itemSet" + itemSet)) break;
 
-                for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
                     List<String> gearTypeStrList = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".weaponGearType");
                     int gearLevelIndex = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
                     GearLevel gearLevel = GearLevel.values()[gearLevelIndex];
@@ -83,12 +84,13 @@ public class JobCraftingConfigurations {
             if (!(craftingType.equals(CraftingType.ARMOR_HEAVY) || craftingType.equals(CraftingType.ARMOR_LIGHT)))
                 continue;
             FileConfiguration fileConfiguration = craftingConfigurations.get(craftingType);
-            int levelCount = fileConfiguration.getInt("levelCount");
 
-            for (int level = 1; level <= levelCount; level++) {
-                int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
+            for (int level = 1; level <= 999; level++) {
+                if (!fileConfiguration.contains("level" + level)) break;
 
-                for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
+                for (int itemSet = 1; itemSet <= 999; itemSet++) {
+                    if (!fileConfiguration.contains("level" + level + ".itemSet" + itemSet)) break;
+
                     List<String> gearTypeStrList = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".armorGearType");
                     int gearLevelIndex = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
                     GearLevel gearLevel = GearLevel.values()[gearLevelIndex];
@@ -121,6 +123,13 @@ public class JobCraftingConfigurations {
                             CraftingManager.putCraftingTypeAndLevelToCraftingLine(armor, craftingType, level, ingredients, newList);
                         }
                     }
+
+                    // Add shield
+                    if (craftingType.equals(CraftingType.ARMOR_HEAVY)) {
+                        ShieldGearType shield = ShieldGearType.SHIELD;
+
+
+                    }
                 }
             }
         }
@@ -141,12 +150,13 @@ public class JobCraftingConfigurations {
     private static void loadCraftingRecipesJewel() {
         CraftingType craftingType = CraftingType.JEWEL;
         FileConfiguration fileConfiguration = craftingConfigurations.get(craftingType);
-        int levelCount = fileConfiguration.getInt("levelCount");
 
-        for (int level = 1; level <= levelCount; level++) {
-            int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
+        for (int level = 1; level <= 999; level++) {
+            if (!fileConfiguration.contains("level" + level)) break;
 
-            for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
+            for (int itemSet = 1; itemSet <= 999; itemSet++) {
+                if (!fileConfiguration.contains("level" + level + ".itemSet" + itemSet)) break;
+
                 List<String> slotTypesStr = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".slotTypes");
                 int gearLevelIndex = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".gearLevel");
                 GearLevel gearLevel = GearLevel.values()[gearLevelIndex];
@@ -170,12 +180,13 @@ public class JobCraftingConfigurations {
     private static void loadCraftingRecipesPotion() {
         CraftingType craftingType = CraftingType.POTION;
         FileConfiguration fileConfiguration = craftingConfigurations.get(craftingType);
-        int levelCount = fileConfiguration.getInt("levelCount");
 
-        for (int level = 1; level <= levelCount; level++) {
-            int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
+        for (int level = 1; level <= 999; level++) {
+            if (!fileConfiguration.contains("level" + level)) break;
 
-            for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
+            for (int itemSet = 1; itemSet <= 999; itemSet++) {
+                if (!fileConfiguration.contains("level" + level + ".itemSet" + itemSet)) break;
+
                 List<String> consumableTypesStr = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".consumableTypes");
                 int skillLevel = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".skillLevel");
                 int uses = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".uses");
@@ -196,12 +207,13 @@ public class JobCraftingConfigurations {
     private static void loadCraftingRecipesFood() {
         CraftingType craftingType = CraftingType.FOOD;
         FileConfiguration fileConfiguration = craftingConfigurations.get(craftingType);
-        int levelCount = fileConfiguration.getInt("levelCount");
 
-        for (int level = 1; level <= levelCount; level++) {
-            int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
+        for (int level = 1; level <= 999; level++) {
+            if (!fileConfiguration.contains("level" + level)) break;
 
-            for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
+            for (int itemSet = 1; itemSet <= 999; itemSet++) {
+                if (!fileConfiguration.contains("level" + level + ".itemSet" + itemSet)) break;
+
                 List<String> consumableTypesStr = fileConfiguration.getStringList("level" + level + ".itemSet" + itemSet + ".consumableTypes");
                 int skillLevel = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".skillLevel");
                 int uses = fileConfiguration.getInt("level" + level + ".itemSet" + itemSet + ".uses");
@@ -222,12 +234,13 @@ public class JobCraftingConfigurations {
     private static void loadCraftingRecipesEnchantStone() {
         CraftingType craftingType = CraftingType.ENCHANT_STONE;
         FileConfiguration fileConfiguration = craftingConfigurations.get(craftingType);
-        int levelCount = fileConfiguration.getInt("levelCount");
 
-        for (int level = 1; level <= levelCount; level++) {
-            int itemSetCount = fileConfiguration.getInt("level" + level + ".itemSetCount");
+        for (int level = 1; level <= 999; level++) {
+            if (!fileConfiguration.contains("level" + level)) break;
 
-            for (int itemSet = 1; itemSet <= itemSetCount; itemSet++) {
+            for (int itemSet = 1; itemSet <= 999; itemSet++) {
+                if (!fileConfiguration.contains("level" + level + ".itemSet" + itemSet)) break;
+
                 String tier = fileConfiguration.getString("level" + level + ".itemSet" + itemSet + ".tier");
                 EnchantStone enchantStone = EnchantStone.valueOf(tier);
 

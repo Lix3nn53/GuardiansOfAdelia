@@ -6,7 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
-import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModel;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModelState;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
@@ -70,7 +70,18 @@ public class MyPlayerAnimationEvent implements Listener {
             if (entity.getType().equals(EntityType.ARMOR_STAND)) {
                 ArmorStand armorStand = (ArmorStand) entity;
                 Portal portal = PortalManager.getPortalFromArmorStand(armorStand);
-                if (portal != null) { //portal model
+
+                GatheringModelState gatheringModelState = GatheringManager.getGatheringModelFromArmorStand(armorStand);
+
+                if (gatheringModelState != null) {
+                    ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+                    if (!itemInMainHand.hasItemMeta()) return;
+                    // FISHING IS HANDLED BY IT'S OWN EVENT
+                    if (itemInMainHand.getType().equals(Material.FISHING_ROD)) return;
+
+                    GatheringManager.startGathering(player, itemInMainHand, gatheringModelState);
+                    break;
+                } else if (portal != null) { //portal model
                     if (PortalManager.isInstantTeleportPortal(portal)) {
                         InstantTeleportPortal instantTeleport = PortalManager.getInstantTeleportPortal(portal);
                         if (instantTeleport.canTeleport(player)) {
@@ -97,22 +108,13 @@ public class MyPlayerAnimationEvent implements Listener {
                     TombManager.onReachToTomb(player);
                     break;
                 } else {
-                    GatheringModel gatheringModel = GatheringManager.getGatheringModelFromArmorStand(armorStand);
-                    if (gatheringModel != null) {
-                        ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-                        if (!itemInMainHand.hasItemMeta()) return;
-                        // FISHING IS HANDLED BY IT'S OWN EVENT
-                        if (itemInMainHand.getType().equals(Material.FISHING_ROD)) return;
-
-                        GatheringManager.startGathering(player, itemInMainHand, gatheringModel);
-                    } else {
-                        Checkpoint checkpoint = CheckpointManager.getCheckpointFromArmorStand(armorStand);
-                        if (checkpoint != null) { //portal model
-                            if (MiniGameManager.isInMinigame(player)) {
-                                boolean b = MiniGameManager.onCheckpointSet(player, checkpoint);
-
+                    Checkpoint checkpoint = CheckpointManager.getCheckpointFromArmorStand(armorStand);
+                    if (checkpoint != null) { //portal model
+                        if (MiniGameManager.isInMinigame(player)) {
+                            boolean b = MiniGameManager.onCheckpointSet(player, checkpoint);
+                            if (b) {
+                                break;
                             }
-                            break;
                         }
                     }
                 }

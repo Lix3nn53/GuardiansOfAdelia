@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
-import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModel;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModelState;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
@@ -30,10 +30,10 @@ public class MyPlayerFishEvent implements Listener {
                 if (entity.getType().equals(EntityType.ARMOR_STAND)) {
                     ArmorStand armorStand = (ArmorStand) entity;
 
-                    GatheringModel gatheringModel = GatheringManager.getGatheringModelFromArmorStand(armorStand);
-                    if (gatheringModel == null) continue;
+                    GatheringModelState gatheringModelState = GatheringManager.getGatheringModelFromArmorStand(armorStand);
+                    if (gatheringModelState == null) continue;
 
-                    b = GatheringManager.canStartGathering(player, itemInMainHand, gatheringModel);
+                    b = GatheringManager.canStartGathering(player, itemInMainHand, gatheringModelState);
 
                     if (b) {
                         break;
@@ -53,15 +53,15 @@ public class MyPlayerFishEvent implements Listener {
 
             List<Entity> nearbyEntities = player.getNearbyEntities(range, range, range);
             boolean b = false;
-            GatheringModel gatheringModel = null;
+            GatheringModelState gatheringModelState = null;
             for (Entity entity : nearbyEntities) {
                 if (entity.getType().equals(EntityType.ARMOR_STAND)) {
                     ArmorStand armorStand = (ArmorStand) entity;
 
-                    gatheringModel = GatheringManager.getGatheringModelFromArmorStand(armorStand);
-                    if (gatheringModel == null) continue;
+                    gatheringModelState = GatheringManager.getGatheringModelFromArmorStand(armorStand);
+                    if (gatheringModelState == null) continue;
 
-                    b = GatheringManager.canStartGathering(player, itemInMainHand, gatheringModel);
+                    b = GatheringManager.canStartGathering(player, itemInMainHand, gatheringModelState);
 
                     if (b) {
                         break;
@@ -74,7 +74,7 @@ public class MyPlayerFishEvent implements Listener {
                 return;
             }
 
-            List<Ingredient> ingredients = GatheringManager.getIngredients(gatheringModel);
+            List<Ingredient> ingredients = GatheringManager.getIngredients(gatheringModelState);
             ItemStack gatheredIngredient = GatheringManager.finishGathering(player, itemInMainHand, ingredients);
             if (gatheredIngredient != null) {
                 caught.setItemStack(gatheredIngredient);

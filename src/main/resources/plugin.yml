@@ -22,6 +22,10 @@ commands:
     description: Admin command
     permission: guardian.admin
     permission-message: You do not have permission!
+  job:
+    description: Job command
+    permission: guardian.admin
+    permission-message: You do not have permission!
   guild:
     description: Guild command
     aliases:
@@ -58,10 +62,6 @@ commands:
     description: Minigame command
     aliases:
       - mg
-    permission: guardian.player
-    permission-message: You do not have permission!
-  job:
-    description: Job command
     permission: guardian.player
     permission-message: You do not have permission!
   reward:

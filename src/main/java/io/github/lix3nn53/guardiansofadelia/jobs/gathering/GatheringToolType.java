@@ -43,7 +43,7 @@ public enum GatheringToolType {
             case FISHING_ROD:
                 itemStack = new ItemStack(Material.FISHING_ROD);
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.GREEN + tierName + "Fishing Rod" + " (" + durability + " Uses left)");
+                itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Fishing Rod" + " (" + durability + " Uses left)");
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("");
                 lore.add(ChatColor.GREEN + "Fishing: " + ChatColor.YELLOW + "Raw Cod, Raw Salmon");
