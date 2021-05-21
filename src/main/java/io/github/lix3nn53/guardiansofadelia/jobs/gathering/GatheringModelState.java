@@ -19,7 +19,7 @@ public class GatheringModelState {
     private final int id;
 
     // State
-    private final Location baseLocation;
+    private Location baseLocation;
     private EulerAngle rotation;
     private ArmorStand armorStand;
     private boolean onCooldown = false;
@@ -194,5 +194,9 @@ public class GatheringModelState {
 
     public void setRotation(EulerAngle eulerAngle) {
         this.rotation = eulerAngle;
+    }
+
+    public void setBaseLocation(Location location) {
+        this.baseLocation = location;
     }
 }

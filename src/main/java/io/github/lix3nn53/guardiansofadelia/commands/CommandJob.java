@@ -31,6 +31,7 @@ public class CommandJob implements CommandExecutor {
             if (args.length < 1) {
                 player.sendMessage(ChatColor.YELLOW + "/job addmodel <model-id>");
                 player.sendMessage(ChatColor.YELLOW + "/job rotate <x> <y> <z>");
+                player.sendMessage(ChatColor.YELLOW + "/job move <x> <y> <z>");
             } else if (args[0].equals("addmodel")) {
                 String idStr = args[1];
                 int id = Integer.parseInt(idStr);
@@ -64,6 +65,27 @@ public class CommandJob implements CommandExecutor {
                         EulerAngle eulerAngle = new EulerAngle(x, y, z);
                         gatheringModelState.setRotation(eulerAngle);
                         armorStand.setHeadPose(eulerAngle);
+                        break;
+                    }
+                }
+            } else if (args[0].equals("move")) {
+                double x = Double.parseDouble(args[1]);
+                double y = Double.parseDouble(args[2]);
+                double z = Double.parseDouble(args[3]);
+
+                List<Entity> nearbyEntities = player.getNearbyEntities(4, 4, 4);
+                for (Entity entity : nearbyEntities) {
+                    if (entity.getType().equals(EntityType.ARMOR_STAND)) {
+                        ArmorStand armorStand = (ArmorStand) entity;
+
+                        GatheringModelState gatheringModelState = GatheringManager.getGatheringModelFromArmorStand(armorStand);
+
+                        if (gatheringModelState == null) continue;
+
+                        Location baseLocation = gatheringModelState.getBaseLocation();
+                        Location add = baseLocation.add(x, y, z);
+                        gatheringModelState.setBaseLocation(add);
+                        armorStand.teleport(add);
                         break;
                     }
                 }

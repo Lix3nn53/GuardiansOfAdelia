@@ -147,6 +147,8 @@ public class CommandLix implements CommandExecutor {
                 LootChest lootChest = new LootChest(targetBlock.getLocation(), value);
 
                 LootChestManager.addLootChest(lootChest);
+
+                player.sendMessage(ChatColor.GREEN + "Added loot chest tier: " + value.toString());
             } else if (args[0].equals("exp")) {
                 if (args.length == 3) {
                     int expToGive = Integer.parseInt(args[2]);
