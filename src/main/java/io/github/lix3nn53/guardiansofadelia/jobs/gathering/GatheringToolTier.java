@@ -44,4 +44,41 @@ public enum GatheringToolTier {
         String s = this.name();
         return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
     }
+
+    public String toString(GatheringToolType gatheringToolType) {
+        switch (gatheringToolType) {
+            case AXE:
+            case HOE:
+            case PICKAXE:
+                return this.toString();
+            case FISHING_ROD:
+                switch (this) {
+                    case WOODEN:
+                        return "Damaged";
+                    case STONE:
+                        return "Weak";
+                    case IRON:
+                        return "Normal";
+                    case GOLDEN:
+                        return "Good";
+                    case DIAMOND:
+                        return "Super";
+                }
+            case BOTTLE:
+                switch (this) {
+                    case WOODEN:
+                        return "Little";
+                    case STONE:
+                        return "Small";
+                    case IRON:
+                        return "Normal";
+                    case GOLDEN:
+                        return "Big";
+                    case DIAMOND:
+                        return "Huge";
+                }
+        }
+
+        return "ERROR GatheringToolType toString";
+    }
 }

@@ -13,7 +13,8 @@ public enum GatheringToolType {
     FISHING_ROD,
     HOE,
     PICKAXE,
-    AXE;
+    AXE,
+    BOTTLE;
 
     public static GatheringToolType materialToGatheringTool(Material material) {
         if (material.equals(Material.WOODEN_PICKAXE) || material.equals(Material.STONE_PICKAXE) || material.equals(Material.IRON_PICKAXE)
@@ -27,6 +28,8 @@ public enum GatheringToolType {
             return AXE;
         } else if (material.equals(Material.FISHING_ROD)) {
             return FISHING_ROD;
+        } else if (material.equals(Material.GLASS_BOTTLE)) {
+            return BOTTLE;
         }
 
         return null;
@@ -36,7 +39,7 @@ public enum GatheringToolType {
         ItemStack itemStack = null;
         int durability = gatheringToolTier.getDurability();
 
-        String tierName = gatheringToolTier.toString();
+        String tierName = gatheringToolTier.toString(this);
         String tierNameEnum = gatheringToolTier.name();
 
         switch (this) {
@@ -92,6 +95,20 @@ public enum GatheringToolType {
                 lore = new ArrayList<>();
                 lore.add("");
                 lore.add(ChatColor.GRAY + "Used for wood cutting");
+                itemMeta.setLore(lore);
+                itemMeta.setUnbreakable(true);
+                itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+                itemStack.setItemMeta(itemMeta);
+                PersistentDataContainerUtil.putInteger("toolDurability", durability, itemStack);
+                PersistentDataContainerUtil.putString("toolTier", tierNameEnum, itemStack);
+                break;
+            case BOTTLE:
+                itemStack = new ItemStack(Material.GLASS_BOTTLE);
+                itemMeta = itemStack.getItemMeta();
+                itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Bottle" + " (" + durability + " Uses left)");
+                lore = new ArrayList<>();
+                lore.add("");
+                lore.add(ChatColor.GRAY + "Used for gathering magic source");
                 itemMeta.setLore(lore);
                 itemMeta.setUnbreakable(true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);

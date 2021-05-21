@@ -43,9 +43,11 @@ public class JobGatheringConfigurations {
             List<String> jobsCanUse = ingredientsConfig.getStringList("i" + i + ".jobsCanUse");
             List<String> extraText = ingredientsConfig.contains("i" + i + ".extraText") ? ingredientsConfig.getStringList("i" + i + ".extraText") : null;
 
+            Color potionColor = Color.fromRGB(ingredientsConfig.getInt("i" + i + ".potionColor"));
+
             String name = ChatColor.translateAlternateColorCodes('&', nameStr);
 
-            Ingredient ingredient = new Ingredient(i, material, name, ingredientLevel, jobsCanUse, extraText, customModelData);
+            Ingredient ingredient = new Ingredient(i, material, name, ingredientLevel, jobsCanUse, extraText, customModelData, potionColor);
 
             GatheringManager.putIngredient(i, ingredient);
         }
