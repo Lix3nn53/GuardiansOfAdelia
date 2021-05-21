@@ -16,6 +16,7 @@ import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
+import io.github.lix3nn53.guardiansofadelia.events.MyBlockEvents;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -403,6 +404,14 @@ public class CommandLix implements CommandExecutor {
                 double damage = Double.parseDouble(args[1]);
 
                 player.damage(damage);
+            } else if (args[0].equals("build")) {
+                if (MyBlockEvents.allow.contains(player)) {
+                    MyBlockEvents.allow.remove(player);
+                    player.sendMessage(ChatColor.RED + "You can not build anymore");
+                } else {
+                    MyBlockEvents.allow.add(player);
+                    player.sendMessage(ChatColor.GREEN + "You are allowed to build");
+                }
             }
 
             // If the player (or console) uses our command correct, we can return true

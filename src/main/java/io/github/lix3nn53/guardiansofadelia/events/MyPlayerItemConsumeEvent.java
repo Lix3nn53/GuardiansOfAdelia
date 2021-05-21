@@ -25,9 +25,10 @@ public class MyPlayerItemConsumeEvent implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
 
+        event.setCancelled(true);
+
         if (item.hasItemMeta()) {
             if (PersistentDataContainerUtil.hasString(item, "customConsumable")) {
-                event.setCancelled(true);
                 String customConsumable = PersistentDataContainerUtil.getString(item, "customConsumable");
 
                 if (playerToConsumableOnCooldowns.containsKey(player)) {

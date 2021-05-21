@@ -20,13 +20,15 @@ public class GatheringModelState {
 
     // State
     private final Location baseLocation;
+    private EulerAngle rotation;
     private ArmorStand armorStand;
     private boolean onCooldown = false;
     private boolean beingGathered = false;
 
-    public GatheringModelState(int id, Location baseLocation) {
+    public GatheringModelState(int id, Location baseLocation, EulerAngle rotation) {
         this.id = id;
         this.baseLocation = baseLocation;
+        this.rotation = rotation;
     }
 
     public void createModel(GatheringModelData gatheringModelData) {
@@ -71,6 +73,7 @@ public class GatheringModelState {
         armorStand.setGravity(false);
         armorStand.setCustomNameVisible(true);
         armorStand.setSmall(true);
+        armorStand.setHeadPose(this.rotation);
 
         boolean playAnimation = gatheringModelData.isPlayAnimation();
 
@@ -183,5 +186,13 @@ public class GatheringModelState {
 
     public Location getBaseLocation() {
         return baseLocation;
+    }
+
+    public EulerAngle getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(EulerAngle eulerAngle) {
+        this.rotation = eulerAngle;
     }
 }
