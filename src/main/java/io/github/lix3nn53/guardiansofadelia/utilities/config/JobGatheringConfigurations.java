@@ -47,8 +47,9 @@ public class JobGatheringConfigurations {
             Color potionColor = Color.fromRGB(ingredientsConfig.getInt("i" + i + ".potionColor"));
 
             String name = ChatColor.translateAlternateColorCodes('&', nameStr);
+            int maxAmountPerGather = ingredientsConfig.getInt("i" + i + ".maxAmountPerGather");
 
-            Ingredient ingredient = new Ingredient(i, material, name, ingredientLevel, jobsCanUse, extraText, customModelData, potionColor);
+            Ingredient ingredient = new Ingredient(i, material, name, ingredientLevel, jobsCanUse, extraText, customModelData, potionColor, maxAmountPerGather);
 
             GatheringManager.putIngredient(i, ingredient);
         }

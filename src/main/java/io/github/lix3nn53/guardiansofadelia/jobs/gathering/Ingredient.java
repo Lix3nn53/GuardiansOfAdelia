@@ -20,16 +20,18 @@ public class Ingredient {
     private final int ingredientLevel;
     private final int customModelData;
     private final Color potionColor;
+    private final int maxAmountPerGather;
 
     private final List<String> lore;
 
-    public Ingredient(int key, Material material, String name, int ingredientLevel, List<String> jobsCanUse, List<String> extraText, int customModelData, Color potionColor) {
+    public Ingredient(int key, Material material, String name, int ingredientLevel, List<String> jobsCanUse, List<String> extraText, int customModelData, Color potionColor, int maxAmountPerGather) {
         this.key = key;
         this.material = material;
         this.name = name;
         this.ingredientLevel = ingredientLevel;
         this.customModelData = customModelData;
         this.potionColor = potionColor;
+        this.maxAmountPerGather = maxAmountPerGather;
 
         this.lore = new ArrayList<>();
         lore.add("");
@@ -68,5 +70,9 @@ public class Ingredient {
         itemStack.setItemMeta(im);
 
         return itemStack;
+    }
+
+    public int getMaxAmountPerGather() {
+        return maxAmountPerGather;
     }
 }

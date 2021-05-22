@@ -138,25 +138,19 @@ public class GatheringManager {
     private static ItemStack getGathered(Player player, List<Ingredient> ingredients) {
         Random random = new Random();
 
-        int amount = random.nextInt(5);
+        int i = random.nextInt(ingredients.size());
+        Ingredient ingredient = ingredients.get(i);
 
-        if (amount > 0) {
-            int i = random.nextInt(ingredients.size());
-            Ingredient ingredient = ingredients.get(i);
+        int maxAmountPerGather = ingredient.getMaxAmountPerGather();
+        int amount = random.nextInt(maxAmountPerGather) + 1;
+        ItemStack ingredientItem = ingredient.getItemStack(amount);
 
-            ItemStack ingredientItem = ingredient.getItemStack(amount);
+        player.sendTitle("", ChatColor.GREEN + "Obtained " +
+                ChatColor.GOLD + ingredientItem.getAmount() + "x " + ChatColor.YELLOW + ingredientItem.getItemMeta().getDisplayName(), 30, 80, 30);
 
-            player.sendTitle("", ChatColor.GREEN + "Obtained " +
-                    ChatColor.YELLOW + ingredientItem.getAmount() + "x " + ingredientItem.getItemMeta().getDisplayName(), 30, 80, 30);
+        progressGatheringTasks(player, ingredient, amount);
 
-            progressGatheringTasks(player, ingredient, amount);
-
-            return ingredientItem;
-        } else {
-            player.sendTitle("", ChatColor.RED + "Gathering Failed", 30, 80, 30);
-        }
-
-        return null;
+        return ingredientItem;
     }
 
     private static void decreaseDurability(Player player, ItemStack toolToDecrease) {

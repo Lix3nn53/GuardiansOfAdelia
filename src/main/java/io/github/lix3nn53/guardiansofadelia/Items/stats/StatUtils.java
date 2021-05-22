@@ -108,7 +108,6 @@ public class StatUtils {
                 maxElemValue = gearLevel.getMaxStatValue(true, true);
             }
 
-
             StatPassive statPassive = new StatPassive(minAttrValue, maxAttrValue, minNumberOfAttributes, minElemValue, maxElemValue, minNumberOfElements);
 
             //add persistent data before getting itemMeta so we don't lost them
@@ -128,6 +127,8 @@ public class StatUtils {
 
             int i = lore.indexOf(itemTier.getTierString());
 
+            boolean hasElements = statPassive.isEmpty(false, true);
+
             if (!statPassive.isEmpty(true, false)) {
                 for (AttributeType attributeType : AttributeType.values()) {
                     if (statPassive.getAttributeValue(attributeType) != 0) {
@@ -135,10 +136,14 @@ public class StatUtils {
                         i++;
                     }
                 }
-                lore.add(i, "");
+
+                if (!hasElements) {
+                    lore.add(i, "");
+                    i++;
+                }
             }
 
-            if (!statPassive.isEmpty(false, true)) {
+            if (!hasElements) {
                 for (ElementType elementType : ElementType.values()) {
                     if (statPassive.getElementValue(elementType) != 0) {
                         lore.add(i, elementType.getFullName() + ": " + ChatColor.GRAY + "+" + statPassive.getElementValue(elementType));
