@@ -21,10 +21,11 @@ public class Ingredient {
     private final int customModelData;
     private final Color potionColor;
     private final int maxAmountPerGather;
+    private final boolean enchant;
 
     private final List<String> lore;
 
-    public Ingredient(int key, Material material, String name, int ingredientLevel, List<String> jobsCanUse, List<String> extraText, int customModelData, Color potionColor, int maxAmountPerGather) {
+    public Ingredient(int key, Material material, String name, int ingredientLevel, List<String> jobsCanUse, List<String> extraText, int customModelData, Color potionColor, int maxAmountPerGather, boolean enchant) {
         this.key = key;
         this.material = material;
         this.name = name;
@@ -32,6 +33,7 @@ public class Ingredient {
         this.customModelData = customModelData;
         this.potionColor = potionColor;
         this.maxAmountPerGather = maxAmountPerGather;
+        this.enchant = enchant;
 
         this.lore = new ArrayList<>();
         lore.add("");
@@ -63,8 +65,11 @@ public class Ingredient {
         if (material.equals(Material.POTION)) {
             PotionMeta potionMeta = (PotionMeta) im;
             potionMeta.setColor(potionColor);
-            potionMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
-            potionMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+
+        if (enchant) {
+            im.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
+            im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
 
         itemStack.setItemMeta(im);

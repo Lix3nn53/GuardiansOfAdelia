@@ -558,7 +558,7 @@ public class MenuList {
                     int currentLevel = craftingStats.getCurrentLevel(craftingType);
                     lore.add("Level: " + currentLevel);
                     lore.add("Experience: " + craftingStats.getTotalExperience(craftingType));
-                    lore.add("Required Experience: " + craftingStats.getTotalRequiredExperience(currentLevel + 1));
+                    lore.add("Required Experience: " + craftingStats.getTotalRequiredExperience(currentLevel));
 
                     lore.add("");
                     lore.add(ChatColor.YELLOW + "How to craft?");
