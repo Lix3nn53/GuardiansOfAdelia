@@ -22,8 +22,24 @@ commands:
     description: Admin command
     permission: guardian.admin
     permission-message: You do not have permission!
-  job:
-    description: Job command
+  adminitem:
+    description: AdminItem command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+  adminjob:
+    description: AdminJob command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+  adminquest:
+    description: AdminQuest command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+  adminreward:
+    description: AdminReward command
+    permission: guardian.admin
+    permission-message: You do not have permission!
+  test:
+    description: Test command
     permission: guardian.admin
     permission-message: You do not have permission!
   guild:

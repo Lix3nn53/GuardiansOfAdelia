@@ -1,4 +1,4 @@
-package io.github.lix3nn53.guardiansofadelia.commands;
+package io.github.lix3nn53.guardiansofadelia.commands.admin;
 
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModelData;
@@ -18,21 +18,21 @@ import org.bukkit.util.EulerAngle;
 import java.util.HashMap;
 import java.util.List;
 
-public class CommandJob implements CommandExecutor {
+public class CommandAdminJob implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (!command.getName().equals("job")) {
+        if (!command.getName().equals("adminjob")) {
             return false;
         }
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/job addmodel <model-id>");
-                player.sendMessage(ChatColor.YELLOW + "/job rotate <x> <y> <z>");
-                player.sendMessage(ChatColor.YELLOW + "/job move <x> <y> <z>");
-            } else if (args[0].equals("addmodel")) {
+                player.sendMessage(ChatColor.YELLOW + "/adminjob add <model-id>");
+                player.sendMessage(ChatColor.YELLOW + "/adminjob rotate <x> <y> <z>");
+                player.sendMessage(ChatColor.YELLOW + "/adminjob move <x> <y> <z>");
+            } else if (args[0].equals("add")) {
                 String idStr = args[1];
                 int id = Integer.parseInt(idStr);
 

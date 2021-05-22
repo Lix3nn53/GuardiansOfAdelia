@@ -4,6 +4,7 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.PluginChannelListener;
 import io.github.lix3nn53.guardiansofadelia.commands.*;
+import io.github.lix3nn53.guardiansofadelia.commands.admin.*;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.events.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -107,12 +108,11 @@ public class GuardiansOfAdelia extends JavaPlugin {
         MerchantManager.init();
         MiniGameManager.initMinigames();
 
-        //set command executors
+        // Set command executors
         this.getCommand("character").setExecutor(new CommandCharacter());
         this.getCommand("chat").setExecutor(new CommandChat());
         this.getCommand("destroyitem").setExecutor(new CommandDestroyItem());
         this.getCommand("guild").setExecutor(new CommandGuild());
-        this.getCommand("admin").setExecutor(new CommandLix());
         this.getCommand("invite").setExecutor(new CommandInvite());
         this.getCommand("trade").setExecutor(new CommandTrade());
         this.getCommand("party").setExecutor(new CommandParty());
@@ -120,7 +120,13 @@ public class GuardiansOfAdelia extends JavaPlugin {
         this.getCommand("reward").setExecutor(new CommandReward());
         this.getCommand("safe-stop").setExecutor(new CommandSafeStop());
         this.getCommand("minigame").setExecutor(new CommandMinigame());
-        this.getCommand("job").setExecutor(new CommandJob());
+        // Admin commands
+        this.getCommand("admin").setExecutor(new CommandAdmin());
+        this.getCommand("adminitem").setExecutor(new CommandAdminItem());
+        this.getCommand("adminjob").setExecutor(new CommandAdminJob());
+        this.getCommand("adminquest").setExecutor(new CommandAdminQuest());
+        this.getCommand("adminreward").setExecutor(new CommandAdminReward());
+        this.getCommand("test").setExecutor(new CommandTest());
 
         for (World w : Bukkit.getServer().getWorlds()) {
             w.setDifficulty(Difficulty.HARD);
