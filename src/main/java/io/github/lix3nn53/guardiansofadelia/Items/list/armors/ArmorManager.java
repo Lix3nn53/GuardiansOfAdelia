@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.armors;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.GearArmor;
@@ -19,7 +18,6 @@ public class ArmorManager {
     public static List<ItemStack> get(ArmorSlot armorSlot, ArmorGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, String gearSet) {
         List<ArmorSet> sets = gearLevelToArmorSets.get(gearLevel);
 
-        GuardiansOfAdelia.getInstance().getLogger().info(gearLevel + " " + armorSlot.toString() + " " + gearType.toString() + " " + tier.toString() + " " + gearSet);
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfElements(false);
         int minStatValue = noStats ? 0 : gearLevel.getMinStatValue(false, true);
         int maxStatValue = noStats ? 0 : gearLevel.getMaxStatValue(false, true);

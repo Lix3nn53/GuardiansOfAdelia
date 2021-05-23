@@ -28,7 +28,7 @@ public enum Consumable {
     POTION_INSTANT_HYBRID,
     POTION_REGENERATION_HEALTH;
 
-    private final double HYBRID_NERF = 0.6;
+    private final double HYBRID_NERF = 0.8;
     private final double REGEN_NERF = 0.05;
 
     public void consume(Player player, int skillLevel, ItemStack itemStack) {
@@ -328,6 +328,7 @@ public enum Consumable {
                 break;
             case POTION_REGENERATION_HEALTH:
                 lore.add(ChatColor.RED + "Restores: " + (int) (getInstantHealAmount(level) * REGEN_NERF));
+                lore.add(ChatColor.RED + "...per second, repeat 18 times");
                 break;
         }
         return lore;

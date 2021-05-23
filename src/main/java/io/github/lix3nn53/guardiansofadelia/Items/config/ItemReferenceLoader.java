@@ -13,6 +13,8 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolType;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.transportation.TeleportScroll;
 import org.bukkit.*;
@@ -112,6 +114,11 @@ public class ItemReferenceLoader {
             int amount = configurationSection.getInt("amount");
 
             return teleportScroll.getScroll(amount, reqLevel);
+        } else if (itemType.equals("Tool")) {
+            GatheringToolType gatheringToolType = GatheringToolType.valueOf(configurationSection.getString("gatheringToolType"));
+            GatheringToolTier gatheringToolTier = GatheringToolTier.valueOf(configurationSection.getString("gatheringToolTier"));
+
+            return gatheringToolType.getItemStack(gatheringToolTier);
         } else if (itemType.equals("Basic")) {
             String materialStr = configurationSection.getString("material");
             Material material = Material.valueOf(materialStr);

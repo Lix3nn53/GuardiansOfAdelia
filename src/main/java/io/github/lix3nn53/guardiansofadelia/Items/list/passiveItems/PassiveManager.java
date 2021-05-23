@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.GearPassive;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
@@ -18,7 +17,6 @@ public class PassiveManager {
     public static List<ItemStack> get(GearLevel gearLevel, RPGSlotType rpgSlotType, ItemTier tier, boolean noStats, String gearSetStr) {
         List<PassiveSet> sets = gearLevelToPassives.get(gearLevel);
 
-        GuardiansOfAdelia.getInstance().getLogger().info(gearLevel + " " + rpgSlotType.toString() + " " + tier.toString() + " " + gearSetStr);
         int minNumberOfAttr = noStats ? 0 : tier.getMinNumberOfAttributes(true);
         int minNumberOfElements = noStats ? 0 : tier.getMinNumberOfElements(true);
         int minAttrValue = noStats ? 0 : gearLevel.getMinStatValue(true, false);

@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.sounds.CustomSoundtrack;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -25,7 +24,7 @@ public class MyPlayerJoinEvent implements Listener {
             @Override
             public void run() {
                 CharacterSelectionScreenManager.startCharacterSelection(player);
-                CustomSoundtrack.addPlayer(player);
+                // CustomSoundtrack.addPlayer(player);
                 player.setResourcePack(GuardiansOfAdelia.ResourcePackURL);
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 40L);
