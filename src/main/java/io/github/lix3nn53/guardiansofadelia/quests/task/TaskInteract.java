@@ -33,7 +33,7 @@ public final class TaskInteract implements Task {
         NPCRegistry registry = CitizensAPI.getNPCRegistry();
         NPC npc = registry.getById(npcId);
 
-        return chatColor + "Talk to " + npc.getName();
+        return chatColor + "Talk to " + ChatColor.stripColor(npc.getName());
     }
 
     public String getItemLoreString() {
@@ -45,7 +45,7 @@ public final class TaskInteract implements Task {
         } else {
             color = ChatColor.YELLOW;
         }
-        return color + "Talk to " + npc.getName();
+        return color + "Talk to " + ChatColor.stripColor(npc.getName());
     }
 
     @Override

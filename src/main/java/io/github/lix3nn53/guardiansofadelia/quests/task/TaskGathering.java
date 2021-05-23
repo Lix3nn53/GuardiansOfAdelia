@@ -30,7 +30,7 @@ public final class TaskGathering implements Task {
     public String getTablistInfoString() {
         ChatColor chatColor = getChatColor();
 
-        return chatColor + "Gather " + getProgress() + "/" + getRequiredProgress() + " " + ingredient.getItemStack(1).getItemMeta().getDisplayName();
+        return chatColor + "Gather " + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(ingredient.getItemStack(1).getItemMeta().getDisplayName());
     }
 
     public String getItemLoreString() {
@@ -40,8 +40,7 @@ public final class TaskGathering implements Task {
         } else {
             color = ChatColor.YELLOW;
         }
-        String lore = color + "Gather " + amountNeeded + " " + ingredient.getItemStack(1).getItemMeta().getDisplayName();
-        return lore;
+        return color + "Gather " + amountNeeded + " " + ChatColor.stripColor(ingredient.getItemStack(1).getItemMeta().getDisplayName());
     }
 
     @Override

@@ -29,15 +29,15 @@ public enum ArmorGearType {
     public String getDisplayName() {
         switch (this) {
             case HEAVY_ARMOR:
-                return "Heavy ArmorType";
+                return "Heavy Armor";
             case PLATE_ARMOR:
-                return "Plate ArmorType";
+                return "Plate Armor";
             case CLOTH_ARMOR:
-                return "Cloth ArmorType";
+                return "Cloth Armor";
             case LIGHT_ARMOR:
-                return "Light ArmorType";
+                return "Light Armor";
             case FEATHER_ARMOR:
-                return "Feather ArmorType";
+                return "Feather Armor";
         }
 
         return "";

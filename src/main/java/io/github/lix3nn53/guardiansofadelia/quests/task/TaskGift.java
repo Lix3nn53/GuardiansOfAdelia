@@ -31,7 +31,7 @@ public final class TaskGift implements Task {
     public String getTablistInfoString() {
         ChatColor chatColor = getChatColor();
 
-        return chatColor + "Give " + getProgress() + "/" + getRequiredProgress() + " " + item.getItemMeta().getDisplayName() + " to " + entityName;
+        return chatColor + "Give " + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(item.getItemMeta().getDisplayName()) + " to " + ChatColor.stripColor(entityName);
     }
 
     public String getItemLoreString() {
@@ -41,7 +41,7 @@ public final class TaskGift implements Task {
         } else {
             color = ChatColor.YELLOW;
         }
-        return color + "Give " + amountNeeded + " " + item.getItemMeta().getDisplayName() + " to " + entityName;
+        return color + "Give " + amountNeeded + " " + ChatColor.stripColor(item.getItemMeta().getDisplayName()) + " to " + ChatColor.stripColor(entityName);
     }
 
     @Override

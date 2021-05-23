@@ -48,9 +48,10 @@ public class JobGatheringConfigurations {
 
             String name = ChatColor.translateAlternateColorCodes('&', nameStr);
             int maxAmountPerGather = ingredientsConfig.getInt("i" + i + ".maxAmountPerGather");
+            double dropRate = ingredientsConfig.contains("i" + i + ".dropRate") ? ingredientsConfig.getDouble("i" + i + ".dropRate") : 1;
             boolean enchant = ingredientsConfig.getBoolean("i" + i + ".enchant");
 
-            Ingredient ingredient = new Ingredient(i, material, name, ingredientLevel, jobsCanUse, extraText, customModelData, potionColor, maxAmountPerGather, enchant);
+            Ingredient ingredient = new Ingredient(i, material, name, ingredientLevel, jobsCanUse, extraText, customModelData, potionColor, maxAmountPerGather, dropRate, enchant);
 
             GatheringManager.putIngredient(i, ingredient);
         }

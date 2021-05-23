@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.PotionMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Ingredient {
     private final int key;
@@ -21,11 +22,13 @@ public class Ingredient {
     private final int customModelData;
     private final Color potionColor;
     private final int maxAmountPerGather;
+    private final double dropRate;
     private final boolean enchant;
 
     private final List<String> lore;
 
-    public Ingredient(int key, Material material, String name, int ingredientLevel, List<String> jobsCanUse, List<String> extraText, int customModelData, Color potionColor, int maxAmountPerGather, boolean enchant) {
+    public Ingredient(int key, Material material, String name, int ingredientLevel, List<String> jobsCanUse, List<String> extraText,
+                      int customModelData, Color potionColor, int maxAmountPerGather, double dropRate, boolean enchant) {
         this.key = key;
         this.material = material;
         this.name = name;
@@ -33,6 +36,7 @@ public class Ingredient {
         this.customModelData = customModelData;
         this.potionColor = potionColor;
         this.maxAmountPerGather = maxAmountPerGather;
+        this.dropRate = dropRate;
         this.enchant = enchant;
 
         this.lore = new ArrayList<>();
@@ -77,7 +81,21 @@ public class Ingredient {
         return itemStack;
     }
 
-    public int getMaxAmountPerGather() {
-        return maxAmountPerGather;
+    public int gather() {
+        if (dropRate < 1) {
+            double dropRandom = Math.random();
+
+            if (dropRandom <= dropRate) {
+                Random random = new Random();
+
+                return random.nextInt(maxAmountPerGather) + 1;
+            }
+        } else {
+            Random random = new Random();
+
+            return random.nextInt(maxAmountPerGather) + 1;
+        }
+
+        return 0;
     }
 }

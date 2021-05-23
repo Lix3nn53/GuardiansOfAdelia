@@ -13,8 +13,10 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolType;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.transportation.TeleportScroll;
 import org.bukkit.*;
@@ -119,6 +121,12 @@ public class ItemReferenceLoader {
             GatheringToolTier gatheringToolTier = GatheringToolTier.valueOf(configurationSection.getString("gatheringToolTier"));
 
             return gatheringToolType.getItemStack(gatheringToolTier);
+        } else if (itemType.equals("Ingredient")) {
+            int ingredientNo = configurationSection.getInt("ingredientNo");
+            Ingredient ingredient = GatheringManager.getIngredient(ingredientNo);
+            ItemStack itemStack = ingredient.getItemStack(1);
+
+            return itemStack;
         } else if (itemType.equals("Basic")) {
             String materialStr = configurationSection.getString("material");
             Material material = Material.valueOf(materialStr);

@@ -45,12 +45,16 @@ public class TaskLoader {
                 nameOfMobsItemDropsFrom.add(internalName);
             }
 
-            double chance = configurationSection.getDouble("chance");
+            double chance = 0;
+            if (!nameOfMobsItemDropsFrom.isEmpty()) {
+                chance = configurationSection.getDouble("chance");
+            }
             ConfigurationSection itemDrop = configurationSection.getConfigurationSection("itemDrop");
             ItemStack questItem = ItemReferenceLoader.loadItemReference(itemDrop);
             int amountNeeded = configurationSection.getInt("amountNeeded");
+            boolean removeOnTurnIn = configurationSection.getBoolean("removeOnTurnIn");
 
-            task = new TaskCollect(nameOfMobsItemDropsFrom, chance, questItem, amountNeeded);
+            task = new TaskCollect(nameOfMobsItemDropsFrom, chance, questItem, amountNeeded, removeOnTurnIn);
         } else if (componentType.equals(TaskCrafting.class.getSimpleName())) {
             int amountNeeded = configurationSection.getInt("amountNeeded");
             CraftingType craftingType = CraftingType.valueOf(configurationSection.getString("craftingType"));

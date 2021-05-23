@@ -37,7 +37,7 @@ public final class TaskDealDamage implements Task {
     public String getTablistInfoString() {
         ChatColor chatColor = getChatColor();
 
-        return chatColor + "Deal " + getProgress() + "/" + getRequiredProgress() + " damage to " + mobName;
+        return chatColor + "Deal " + getProgress() + "/" + getRequiredProgress() + " damage to " + ChatColor.stripColor(mobName);
     }
 
     public String getItemLoreString() {
@@ -48,7 +48,7 @@ public final class TaskDealDamage implements Task {
             color = ChatColor.YELLOW;
         }
 
-        return color + "Deal " + damageNeeded + " damage to " + mobName;
+        return color + "Deal " + damageNeeded + " damage to " + ChatColor.stripColor(mobName);
     }
 
     @Override

@@ -38,7 +38,7 @@ public final class TaskKill implements Task {
     public String getTablistInfoString() {
         ChatColor chatColor = getChatColor();
 
-        return chatColor + "Kill " + getProgress() + "/" + getRequiredProgress() + " " + mobName;
+        return chatColor + "Kill " + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(mobName);
     }
 
     public String getItemLoreString() {
@@ -48,7 +48,7 @@ public final class TaskKill implements Task {
         } else {
             color = ChatColor.YELLOW;
         }
-        return color + "Kill " + amountNeeded + " " + mobName;
+        return color + "Kill " + amountNeeded + " " + ChatColor.stripColor(mobName);
     }
 
     @Override

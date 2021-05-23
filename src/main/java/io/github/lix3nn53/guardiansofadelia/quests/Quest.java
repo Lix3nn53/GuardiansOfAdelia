@@ -161,13 +161,13 @@ public final class Quest {
                 lore.add(ChatColor.YELLOW + "Money: " + Coin.getStringValue(moneyPrize));
             }
             if (!itemPrizes.isEmpty()) {
-                lore.add(ChatColor.YELLOW + "Items: ");
+                lore.add(ChatColor.YELLOW + "Item Prizes: ");
                 for (ItemStack it : itemPrizes) {
                     lore.add(it.getItemMeta().getDisplayName());
                 }
             }
             if (!itemPrizesSelectOneOf.isEmpty()) {
-                lore.add(ChatColor.YELLOW + "Select One Item From: ");
+                lore.add(ChatColor.YELLOW + "Select One Prize Item: ");
                 for (ItemStack it : itemPrizesSelectOneOf) {
                     lore.add(it.getItemMeta().getDisplayName());
                 }
@@ -175,7 +175,7 @@ public final class Quest {
             if (weaponPrizesSelectOneOf != null) {
                 GearLevel gearLevel = weaponPrizesSelectOneOf.getGearLevel();
                 ItemTier itemTier = weaponPrizesSelectOneOf.getItemTier();
-                lore.add(ChatColor.YELLOW + "Select One Weapon: ");
+                lore.add(ChatColor.YELLOW + "Select One Prize Weapon: ");
                 int minLevel = gearLevel.getMinLevel();
                 int maxLevel = gearLevel.getMaxLevel();
                 lore.add(ChatColor.GRAY + "Level: " + minLevel + "~" + maxLevel + ChatColor.GRAY + ", Tier: " + itemTier.getTierString());
@@ -331,8 +331,10 @@ public final class Quest {
         for (Task task : this.tasks) {
             if (task instanceof TaskCollect) {
                 TaskCollect taskCollect = (TaskCollect) task;
-                String displayName = taskCollect.getItemStack().getItemMeta().getDisplayName();
-                InventoryUtils.removeAllFromInventoryByName(player.getInventory(), displayName);
+                if (taskCollect.isRemoveOnTurnIn()) {
+                    String displayName = taskCollect.getItemStack().getItemMeta().getDisplayName();
+                    InventoryUtils.removeAllFromInventoryByName(player.getInventory(), displayName);
+                }
             }
         }
 
@@ -554,9 +556,12 @@ public final class Quest {
                 TaskCollect taskCollect = (TaskCollect) task;
                 List<String> keyOfMobsItemDropsFrom = taskCollect.getKeyOfMobsItemDropsFrom();
                 if (keyOfMobsItemDropsFrom.contains(internalName)) {
-                    double random = Math.random();
-                    if (random < taskCollect.getChance()) {
-                        return taskCollect.getItemStack();
+                    double chance = taskCollect.getChance();
+                    if (chance > 0) {
+                        double random = Math.random();
+                        if (random < chance) {
+                            return taskCollect.getItemStack();
+                        }
                     }
                 }
             }

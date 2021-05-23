@@ -141,14 +141,18 @@ public class GatheringManager {
         int i = random.nextInt(ingredients.size());
         Ingredient ingredient = ingredients.get(i);
 
-        int maxAmountPerGather = ingredient.getMaxAmountPerGather();
-        int amount = random.nextInt(maxAmountPerGather) + 1;
-        ItemStack ingredientItem = ingredient.getItemStack(amount);
+        int gather = ingredient.gather();
+        if (gather == 0) {
+            player.sendTitle("", ChatColor.RED + "Failed...", 30, 80, 30);
+            return null;
+        }
+
+        ItemStack ingredientItem = ingredient.getItemStack(gather);
 
         player.sendTitle("", ChatColor.GREEN + "Obtained " +
                 ChatColor.GOLD + ingredientItem.getAmount() + "x " + ChatColor.YELLOW + ingredientItem.getItemMeta().getDisplayName(), 30, 80, 30);
 
-        progressGatheringTasks(player, ingredient, amount);
+        progressGatheringTasks(player, ingredient, gather);
 
         return ingredientItem;
     }
@@ -345,22 +349,25 @@ public class GatheringManager {
 
     public static ItemStack triggerIngredientDrop(String internalName) {
         if (mobKeyToIngredients.containsKey(internalName)) {
-            double dropRandom = Math.random();
+            List<Integer> ingredients = mobKeyToIngredients.get(internalName);
 
-            double chance = 0.24;
-            if (dropRandom <= chance) {
-                List<Integer> ingredients = mobKeyToIngredients.get(internalName);
+            int ingredientNo = ingredients.get(0);
 
+            if (ingredients.size() > 1) {
                 Random random = new Random();
                 int i = random.nextInt(ingredients.size());
-                int ingredientNo = ingredients.get(i);
-
-                Ingredient ingredient = ingredientHashMap.get(ingredientNo);
-
-                int amount = random.nextInt(3) + 1;
-
-                return ingredient.getItemStack(amount);
+                ingredientNo = ingredients.get(i);
             }
+
+            Ingredient ingredient = ingredientHashMap.get(ingredientNo);
+
+            int gather = ingredient.gather();
+
+            if (gather == 0) {
+                return null;
+            }
+
+            return ingredient.getItemStack(gather);
         }
 
         return null;

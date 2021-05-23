@@ -16,21 +16,23 @@ public final class TaskCollect implements Task {
     private final List<String> keyOfMobsItemDropsFrom;
     private final double chance;
     private final int amountNeeded;
+    private final boolean removeOnTurnIn;
     private final ItemStack itemStack;
     private List<Action> onCompleteActions = new ArrayList<>();
     private int progress;
 
-    public TaskCollect(final List<String> keyOfMobsItemDropsFrom, final double chance, final ItemStack itemStack, final int amountNeeded) {
+    public TaskCollect(final List<String> keyOfMobsItemDropsFrom, final double chance, final ItemStack itemStack, final int amountNeeded, boolean removeOnTurnIn) {
         this.keyOfMobsItemDropsFrom = keyOfMobsItemDropsFrom;
         this.chance = chance;
         this.itemStack = itemStack.clone();
+        this.removeOnTurnIn = removeOnTurnIn;
         this.itemStack.setType(TaskCollect.DROP_MATERIAL);
         this.amountNeeded = amountNeeded;
         progress = 0;
     }
 
     public TaskCollect freshCopy() {
-        TaskCollect taskCopy = new TaskCollect(this.keyOfMobsItemDropsFrom, this.chance, this.itemStack, this.amountNeeded);
+        TaskCollect taskCopy = new TaskCollect(this.keyOfMobsItemDropsFrom, this.chance, this.itemStack, this.amountNeeded, removeOnTurnIn);
         taskCopy.setOnCompleteActions(this.onCompleteActions);
         return taskCopy;
     }
@@ -38,7 +40,7 @@ public final class TaskCollect implements Task {
     public String getTablistInfoString() {
         ChatColor chatColor = getChatColor();
 
-        return chatColor + "Collect " + getProgress() + "/" + getRequiredProgress() + " " + itemStack.getItemMeta().getDisplayName();
+        return chatColor + "Collect " + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
     }
 
     public String getItemLoreString() {
@@ -48,7 +50,7 @@ public final class TaskCollect implements Task {
         } else {
             color = ChatColor.YELLOW;
         }
-        String lore = color + "Collect " + amountNeeded + " " + itemStack.getItemMeta().getDisplayName();
+        String lore = color + "Collect " + amountNeeded + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
         return lore;
     }
 
@@ -155,5 +157,9 @@ public final class TaskCollect implements Task {
         if (isCompleted()) return ChatColor.GREEN;
 
         return ChatColor.RED;
+    }
+
+    public boolean isRemoveOnTurnIn() {
+        return removeOnTurnIn;
     }
 }
