@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.minigames;
 import io.github.lix3nn53.guardiansofadelia.minigames.arenas.LastOneStanding;
 import io.github.lix3nn53.guardiansofadelia.minigames.arenas.WinByMostKills;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
-import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonRoom;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.guildwar.GuildWar;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
@@ -30,7 +30,7 @@ public class MiniGameManager {
     private static final List<GuildWar> guildWarList = new ArrayList<>();
 
     private static final HashMap<String, DungeonTheme> dungeonThemes = new HashMap<>();
-    private static final HashMap<String, DungeonRoom> codeToDungeon = new HashMap<>();
+    private static final HashMap<String, Dungeon> codeToDungeon = new HashMap<>();
     private static final HashMap<Portal, String> portalToDungeonTheme = new HashMap<>();
 
     private static final HashMap<Player, Minigame> playerToMinigame = new HashMap<>();
@@ -108,11 +108,11 @@ public class MiniGameManager {
         return winByMostKillsList.get(roomNo - 1);
     }
 
-    public static void addDungeon(String dungeonTheme, int roomNo, DungeonRoom dungeonRoom) {
-        codeToDungeon.put(dungeonTheme + roomNo, dungeonRoom);
+    public static void addDungeon(String dungeonTheme, int roomNo, Dungeon dungeon) {
+        codeToDungeon.put(dungeonTheme + roomNo, dungeon);
     }
 
-    public static DungeonRoom getDungeonRoom(String dungeonTheme, int roomNo) {
+    public static Dungeon getDungeonRoom(String dungeonTheme, int roomNo) {
         return codeToDungeon.get(dungeonTheme + roomNo);
     }
 
@@ -200,9 +200,9 @@ public class MiniGameManager {
 
     public static void onMobKill(Player player, String internalName) {
         if (playerToMinigame.containsKey(player)) {
-            if (playerToMinigame.get(player) instanceof DungeonRoom) {
-                DungeonRoom dungeonRoom = (DungeonRoom) playerToMinigame.get(player);
-                dungeonRoom.onBossKill(internalName);
+            if (playerToMinigame.get(player) instanceof Dungeon) {
+                Dungeon dungeon = (Dungeon) playerToMinigame.get(player);
+                dungeon.onBossKill(internalName);
             }
         }
     }

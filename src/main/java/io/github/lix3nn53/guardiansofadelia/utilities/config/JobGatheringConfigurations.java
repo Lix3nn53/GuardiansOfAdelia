@@ -70,9 +70,9 @@ public class JobGatheringConfigurations {
             GatheringToolType gatheringToolType = GatheringToolType.valueOf(gatheringModelsConfig.getString("i" + i + ".gatheringToolType"));
             GatheringToolTier minGatheringToolTier = GatheringToolTier.valueOf(gatheringModelsConfig.getString("i" + i + ".minGatheringToolTier"));
             List<Integer> ingredients = gatheringModelsConfig.getIntegerList("i" + i + ".ingredients");
-            boolean playAnimation = gatheringModelsConfig.contains("i" + i + ".playAnimation") && gatheringModelsConfig.getBoolean("i" + i + ".playAnimation");
+            boolean disguise = gatheringModelsConfig.contains("i" + i + ".disguise") && gatheringModelsConfig.getBoolean("i" + i + ".disguise");
 
-            GatheringModelData gatheringModelData = new GatheringModelData(customModelData, cooldownCustomModelData, name, material, playAnimation, ingredients, gatheringToolType, minGatheringToolTier);
+            GatheringModelData gatheringModelData = new GatheringModelData(customModelData, cooldownCustomModelData, name, material, disguise, ingredients, gatheringToolType, minGatheringToolTier);
             GatheringManager.putGatheringModelData(i, gatheringModelData);
 
             for (int l = 1; l < 999; l++) {

@@ -1,6 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.DroppedItemWatcher;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -48,6 +52,7 @@ public class GatheringModelState {
         this.armorStand = (ArmorStand) clone.getWorld().spawnEntity(clone, EntityType.ARMOR_STAND);
         armorStand.setHeadPose(eulerAngle);
 
+
         if (material != null) {
             ItemStack itemStack = new ItemStack(material);
             ItemMeta itemMeta = itemStack.getItemMeta();
@@ -60,6 +65,15 @@ public class GatheringModelState {
             itemStack.setItemMeta(itemMeta);
             EntityEquipment equipment = armorStand.getEquipment();
             equipment.setHelmet(itemStack);
+
+            boolean isDisguise = gatheringModelData.isDisguise();
+            if (isDisguise) {
+                MiscDisguise disguise = new MiscDisguise(DisguiseType.DROPPED_ITEM);
+                DroppedItemWatcher watcher = (DroppedItemWatcher) disguise.getWatcher();
+                watcher.setItemStack(itemStack);
+
+                DisguiseAPI.disguiseToAll(armorStand, disguise);
+            }
         }
 
         if (onCooldown) {
@@ -74,51 +88,6 @@ public class GatheringModelState {
         armorStand.setCustomNameVisible(true);
         armorStand.setSmall(true);
         armorStand.setHeadPose(this.rotation);
-
-        boolean playAnimation = gatheringModelData.isPlayAnimation();
-
-        if (playAnimation) {
-            new BukkitRunnable() {
-
-                final double maxDistance = 1.2;
-                final double speed = 0.1;
-                final double startHeight = baseLocation.getY();
-                boolean playingBack = false;
-
-                @Override
-                public void run() {
-                    if (!armorStand.isValid()) {
-                        cancel();
-                        return;
-                    }
-                    if (onCooldown) {
-                        return;
-                    }
-
-                    Location location = armorStand.getLocation();
-                    double currentHeight = location.getY();
-
-                    double distance = currentHeight - startHeight;
-
-                    if (!playingBack) {
-                        armorStand.teleport(location.add(0, speed, 0));
-
-                        if (distance + speed >= maxDistance) {
-                            playingBack = true;
-                        }
-                    } else {
-                        armorStand.teleport(location.add(0, -speed, 0));
-
-                        if (distance - speed <= 0) {
-                            playingBack = false;
-                        }
-                    }
-
-                    EulerAngle headPose = armorStand.getHeadPose();
-                    armorStand.setHeadPose(headPose.add(0.1, 0, 0.1));
-                }
-            }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 5L);
-        }
     }
 
     public ArmorStand getArmorStand() {
@@ -141,6 +110,15 @@ public class GatheringModelState {
             itemMeta.setCustomModelData(cooldownCustomModelData);
             helmet.setItemMeta(itemMeta);
             equipment.setHelmet(helmet);
+
+            boolean isDisguise = gatheringModelData.isDisguise();
+            if (isDisguise) {
+                MiscDisguise disguise = new MiscDisguise(DisguiseType.DROPPED_ITEM);
+                DroppedItemWatcher watcher = (DroppedItemWatcher) disguise.getWatcher();
+                watcher.setItemStack(helmet);
+
+                DisguiseAPI.disguiseToAll(armorStand, disguise);
+            }
         }
 
         new BukkitRunnable() {
@@ -158,6 +136,15 @@ public class GatheringModelState {
                         itemMeta.setCustomModelData(customModelData);
                         helmet.setItemMeta(itemMeta);
                         equipment.setHelmet(helmet);
+
+                        boolean isDisguise = gatheringModelData.isDisguise();
+                        if (isDisguise) {
+                            MiscDisguise disguise = new MiscDisguise(DisguiseType.DROPPED_ITEM);
+                            DroppedItemWatcher watcher = (DroppedItemWatcher) disguise.getWatcher();
+                            watcher.setItemStack(helmet);
+
+                            DisguiseAPI.disguiseToAll(armorStand, disguise);
+                        }
                     }
                 }
             }

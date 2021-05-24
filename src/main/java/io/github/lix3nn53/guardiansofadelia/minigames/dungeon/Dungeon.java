@@ -14,12 +14,12 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DungeonRoom extends Minigame {
+public class Dungeon extends Minigame {
 
     private final DungeonTheme theme;
     private final String bossName;
 
-    public DungeonRoom(DungeonTheme theme, int roomNo, List<Location> startLocation, List<Checkpoint> checkpoints) {
+    public Dungeon(DungeonTheme theme, int roomNo, List<Location> startLocation, List<Checkpoint> checkpoints) {
         super("Dungeon " + theme.getName(), ChatColor.AQUA, theme.getName(), roomNo, theme.getLevelReq()
                 , 4, 1, startLocation, theme.getTimeLimitInMinutes(),
                 5, MiniGameManager.getPortalLocationOfDungeonTheme(theme.getCode()), 4,

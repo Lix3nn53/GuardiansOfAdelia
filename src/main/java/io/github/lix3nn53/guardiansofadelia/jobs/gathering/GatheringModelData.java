@@ -13,7 +13,7 @@ public class GatheringModelData {
     private final int cooldownCustomModelData;
     private final String title;
     private final Material material;
-    private final boolean playAnimation;
+    private final boolean disguise;
 
     // Gathering data
     private final List<Integer> ingredients;
@@ -21,12 +21,12 @@ public class GatheringModelData {
     private final GatheringToolTier minGatheringToolTier;
 
     public GatheringModelData(int customModelData, int cooldownCustomModelData, String title, Material material,
-                              boolean playAnimation, List<Integer> ingredients, GatheringToolType gatheringToolType, GatheringToolTier minGatheringToolTier) {
+                              boolean disguise, List<Integer> ingredients, GatheringToolType gatheringToolType, GatheringToolTier minGatheringToolTier) {
         this.customModelData = customModelData;
         this.cooldownCustomModelData = cooldownCustomModelData;
         this.title = ChatColor.translateAlternateColorCodes('&', title);
         this.material = material;
-        this.playAnimation = playAnimation;
+        this.disguise = disguise;
         this.ingredients = ingredients;
         this.gatheringToolType = gatheringToolType;
         this.minGatheringToolTier = minGatheringToolTier;
@@ -60,7 +60,7 @@ public class GatheringModelData {
         return minGatheringToolTier;
     }
 
-    public boolean isPlayAnimation() {
-        return playAnimation;
+    public boolean isDisguise() {
+        return disguise;
     }
 }

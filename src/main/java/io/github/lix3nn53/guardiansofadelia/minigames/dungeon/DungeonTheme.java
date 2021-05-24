@@ -118,11 +118,11 @@ public class DungeonTheme {
 
         int slotNo = 9;
         for (int i = 1; i < 100; i++) {
-            DungeonRoom dungeonRoom = MiniGameManager.getDungeonRoom(code, i);
-            if (dungeonRoom == null) {
+            Dungeon dungeon = MiniGameManager.getDungeonRoom(code, i);
+            if (dungeon == null) {
                 break;
             }
-            ItemStack itemStack = generateRoomItem(dungeonRoom);
+            ItemStack itemStack = generateRoomItem(dungeon);
             guiGeneric.setItem(slotNo, itemStack);
 
             slotNo = slotNo + 2;
@@ -132,19 +132,19 @@ public class DungeonTheme {
     }
 
 
-    private ItemStack generateRoomItem(DungeonRoom dungeonRoom) {
+    private ItemStack generateRoomItem(Dungeon dungeon) {
 
         ItemStack room = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = room.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #" + dungeonRoom.getRoomNo() + " (" + dungeonRoom.getPlayersInGameSize() + "/" + dungeonRoom.getMaxPlayerSize() + ")");
+        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #" + dungeon.getRoomNo() + " (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + dungeonRoom.getLevelReq());
+        lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + dungeon.getLevelReq());
         lore.add(ChatColor.RED + "Boss: " + ChatColor.WHITE + getBossName());
-        lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + dungeonRoom.getTimeLimitInMinutes() + " minute(s)");
+        lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + dungeon.getTimeLimitInMinutes() + " minute(s)");
         lore.add("");
         lore.add(ChatColor.GOLD + "Players in dungeon");
-        for (Player player : dungeonRoom.getPlayersInGame()) {
+        for (Player player : dungeon.getPlayersInGame()) {
             lore.add(player.getDisplayName());
         }
         lore.add("");
@@ -152,7 +152,7 @@ public class DungeonTheme {
         itemMeta.setLore(lore);
         room.setItemMeta(itemMeta);
 
-        if (dungeonRoom.isInGame()) {
+        if (dungeon.isInGame()) {
             room.setType(Material.RED_WOOL);
         }
         room.setItemMeta(itemMeta);

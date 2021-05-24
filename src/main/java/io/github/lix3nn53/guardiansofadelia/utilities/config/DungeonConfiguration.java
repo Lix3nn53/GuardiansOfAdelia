@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
-import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonRoom;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
 import org.bukkit.Bukkit;
@@ -26,14 +26,14 @@ public class DungeonConfiguration {
 
     static void createConfigs() {
         dungeonThemesConfig = ConfigurationUtils.createConfig(filePath, "dungeonThemes.yml");
-        dungeonRoomsConfig = ConfigurationUtils.createConfig(filePath, "dungeonRooms.yml");
+        dungeonRoomsConfig = ConfigurationUtils.createConfig(filePath, "dungeons.yml");
         dungeonGatesConfig = ConfigurationUtils.createConfig(filePath, "dungeonGates.yml");
     }
 
     static void loadConfigs() {
+        loadDungeons();
         loadDungeonThemes();
         loadDungeonGates();
-        loadDungeonRooms();
     }
 
     private static void loadDungeonThemes() {
@@ -74,24 +74,24 @@ public class DungeonConfiguration {
         }
     }
 
-    private static void loadDungeonRooms() {
+    private static void loadDungeons() {
         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
         for (String themeCode : dungeonThemes.keySet()) {
             int roomCount = ConfigurationUtils.getChildComponentCount(dungeonRoomsConfig, themeCode);
 
             for (int i = 1; i <= roomCount; i++) {
                 String code = themeCode + i;
-                String worldString = dungeonRoomsConfig.getString(code + ".world");
+                String worldString = dungeonRoomsConfig.getString(code + ".start.world");
                 World world = Bukkit.getWorld(worldString);
-                double x = dungeonRoomsConfig.getDouble(code + ".x");
-                double y = dungeonRoomsConfig.getDouble(code + ".y");
-                double z = dungeonRoomsConfig.getDouble(code + ".z");
-                float yaw = (float) dungeonRoomsConfig.getDouble(code + ".yaw");
-                float pitch = (float) dungeonRoomsConfig.getDouble(code + ".pitch");
-                Location location = new Location(world, x, y, z, yaw, pitch);
+                double x = dungeonRoomsConfig.getDouble(code + ".start.x");
+                double y = dungeonRoomsConfig.getDouble(code + ".start.y");
+                double z = dungeonRoomsConfig.getDouble(code + ".start.z");
+                float yaw = (float) dungeonRoomsConfig.getDouble(code + ".start.yaw");
+                float pitch = (float) dungeonRoomsConfig.getDouble(code + ".start.pitch");
+                Location start = new Location(world, x, y, z, yaw, pitch);
 
                 List<Location> locations = new ArrayList<>();
-                locations.add(location);
+                locations.add(start);
 
                 List<Checkpoint> checkpoints = new ArrayList<>();
                 int checkpointCount = dungeonRoomsConfig.getInt(code + ".checkpoints.count");
@@ -110,8 +110,8 @@ public class DungeonConfiguration {
                 }
 
                 DungeonTheme dungeonTheme = dungeonThemes.get(themeCode);
-                DungeonRoom dungeonRoom = new DungeonRoom(dungeonTheme, i, locations, checkpoints);
-                MiniGameManager.addDungeon(themeCode, i, dungeonRoom);
+                Dungeon dungeon = new Dungeon(dungeonTheme, i, locations, checkpoints);
+                MiniGameManager.addDungeon(themeCode, i, dungeon);
             }
         }
     }
