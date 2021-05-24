@@ -78,25 +78,29 @@ public class PrizeChest {
         // model.setCustomName(getName());
         // model.setCustomNameVisible(true);
 
-        model = (ArmorStand) location.add(0, 1.5, 0).getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
-        model.setVisible(false);
-        model.setInvulnerable(true);
-        model.setSmall(true);
-        model.setGravity(false);
+        ArmorStand icon = (ArmorStand) location.add(0, 1.5, 0).getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
+        icon.setVisible(false);
+        icon.setInvulnerable(true);
+        icon.setSmall(true);
+        icon.setGravity(false);
 
         // if (HELMET != null) {
         ItemStack chestIconItem = type.getChestIconItem();
-        equipment = model.getEquipment();
+        equipment = icon.getEquipment();
         equipment.setHelmet(chestIconItem);
 
         // if (DISPLAY_TEXT != null) {
-        model.setCustomName(getName());
-        model.setCustomNameVisible(true);
+        icon.setCustomName(getName());
+        icon.setCustomNameVisible(true);
 
-        DungeonPrizeChestManager.onSpawn(model, this);
+        DungeonPrizeChestManager.onSpawn(model, this, icon);
     }
 
     public boolean canLoot(Player player) {
         return !looted.contains(player);
+    }
+
+    public void onLoot(Player player) {
+        looted.add(player);
     }
 }

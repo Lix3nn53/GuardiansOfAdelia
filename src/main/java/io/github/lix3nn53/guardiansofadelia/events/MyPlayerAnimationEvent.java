@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModelState;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonPrizeChestManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
@@ -73,6 +74,7 @@ public class MyPlayerAnimationEvent implements Listener {
 
                 GatheringModelState gatheringModelState = GatheringManager.getGatheringModelFromArmorStand(armorStand);
 
+                DungeonPrizeChestManager.loot(armorStand, player);
                 if (gatheringModelState != null) {
                     ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                     if (!itemInMainHand.hasItemMeta()) return;

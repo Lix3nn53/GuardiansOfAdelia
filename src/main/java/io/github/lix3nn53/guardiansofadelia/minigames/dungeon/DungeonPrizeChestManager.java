@@ -3,7 +3,12 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
+import io.github.lix3nn53.guardiansofadelia.quests.QuestIconType;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.DroppedItemWatcher;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
@@ -17,21 +22,28 @@ import java.util.Random;
 
 public class DungeonPrizeChestManager {
 
-    private static final double RADIUS = 2;
+    private static final double RADIUS = 4;
+    private static final double HEIGHT = 1.5;
 
     private static final HashMap<ArmorStand, PrizeChest> entityToPrizeChest = new HashMap<>();
+    private static final HashMap<ArmorStand, ArmorStand> entityToIcon = new HashMap<>();
 
-    public static void onSpawn(ArmorStand armorStand, PrizeChest prizeChest) {
+    public static void onSpawn(ArmorStand armorStand, PrizeChest prizeChest, ArmorStand icon) {
         entityToPrizeChest.put(armorStand, prizeChest);
+        entityToIcon.put(armorStand, icon);
 
         new BukkitRunnable() {
 
             @Override
             public void run() {
                 entityToPrizeChest.remove(armorStand);
+                entityToIcon.remove(armorStand);
 
                 if (armorStand.isValid()) {
                     armorStand.remove();
+                }
+                if (icon.isValid()) {
+                    icon.remove();
                 }
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 60L);
@@ -46,15 +58,22 @@ public class DungeonPrizeChestManager {
             player.sendMessage(ChatColor.RED + "You already got this prize chest");
             return;
         }
+        prizeChest.onLoot(player);
 
         ItemStack chest = prizeChest.getChest();
 
         InventoryUtils.giveItemToPlayer(player, chest);
         player.sendMessage(ChatColor.GOLD + "Prize chest added to your inventory");
-    }
 
-    public static boolean isPrizeChest(ArmorStand armorStand) {
-        return entityToPrizeChest.containsKey(armorStand);
+        MiscDisguise disguise = new MiscDisguise(DisguiseType.DROPPED_ITEM);
+        DroppedItemWatcher watcher = (DroppedItemWatcher) disguise.getWatcher();
+        watcher.setItemStack(QuestIconType.EMPTY.getHoloItem());
+
+        DisguiseAPI.disguiseToPlayers(armorStand, disguise, player);
+        if (entityToIcon.containsKey(armorStand)) {
+            ArmorStand icon = entityToIcon.get(armorStand);
+            DisguiseAPI.disguiseToPlayers(icon, disguise, player);
+        }
     }
 
     public static void spawnPrizeChests(DungeonTheme theme, Location center, int amount) {
@@ -70,6 +89,13 @@ public class DungeonPrizeChestManager {
             PrizeChest prizeChest = new PrizeChest(theme, prizeChestType);
 
             Location location = vector.toLocation(center.getWorld());
+
+            Vector centerVector = location.toVector();
+            Vector target = center.toVector();
+
+            Vector subtract = target.subtract(centerVector);
+            location = location.setDirection(subtract);
+
             prizeChest.spawnChestModel(location);
         }
     }
@@ -77,7 +103,7 @@ public class DungeonPrizeChestManager {
     private static Vector[] calculateLocations(Location center, int amount) {
         double fullRadian = Math.toRadians(360);
 
-        Vector centerVector = center.toVector();
+        Vector centerVector = center.toVector().add(new Vector(0, HEIGHT, 0));
 
         Vector[] points = new Vector[amount];
         int index = 0;
