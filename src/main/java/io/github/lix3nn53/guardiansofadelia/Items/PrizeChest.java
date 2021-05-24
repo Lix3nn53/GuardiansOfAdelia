@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.Items;
 
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonPrizeChestManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
@@ -21,6 +22,7 @@ public class PrizeChest {
     private final String code;
     private final String name;
     private final PrizeChestType type;
+    private final List<Player> looted = new ArrayList<>();
 
     /**
      * @param dungeonTheme
@@ -90,6 +92,11 @@ public class PrizeChest {
         // if (DISPLAY_TEXT != null) {
         model.setCustomName(getName());
         model.setCustomNameVisible(true);
+
+        DungeonPrizeChestManager.onSpawn(model, this);
     }
 
+    public boolean canLoot(Player player) {
+        return !looted.contains(player);
+    }
 }
