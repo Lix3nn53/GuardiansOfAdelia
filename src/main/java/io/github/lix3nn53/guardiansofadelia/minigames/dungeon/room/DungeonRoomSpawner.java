@@ -6,21 +6,29 @@ import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
 import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DungeonRoomSpawner {
-    private final List<Location> locationList;
+    private final List<Location> locationList = new ArrayList<>();
     private final String petCode;
     private final int petLevel;
     private final int amount;
 
-    public DungeonRoomSpawner(List<Location> locationList, String petCode, int petLevel, int amount) {
-        this.locationList = locationList;
+    public DungeonRoomSpawner(String petCode, int petLevel, int amount, Location dungeonStart, List<Vector> offsets) {
         this.petCode = petCode;
         this.petLevel = petLevel;
         this.amount = amount;
+
+        for (int i = 0; i < offsets.size(); i++) {
+            Vector offset = offsets.get(i);
+
+            Location add = dungeonStart.clone().add(offset);
+
+            locationList.add(add);
+        }
     }
 
     public List<Entity> spawn() {

@@ -15,7 +15,7 @@ public class BoardWithPlayers extends ScoreboardGeneral {
         this.teamColor = teamColor;
 
         this.topLines = topLines;
-        this.setLine("", 1);
+        this.setLine("TODO TEST", 1);
 
         int lineCounter = 2;
         for (String s : topLines) {
@@ -24,7 +24,7 @@ public class BoardWithPlayers extends ScoreboardGeneral {
 
         }
 
-        this.setLine(ChatColor.GREEN + "» Leader", lineCounter);
+        this.setLine(ChatColor.GREEN + "» Party", lineCounter);
         lineCounter++;
         if (!players.isEmpty()) {
             this.setLine(players.get(0).getName() + ChatColor.RED + " ❤" + (int) (players.get(0).getHealth() + 0.5), lineCounter);
@@ -32,9 +32,6 @@ public class BoardWithPlayers extends ScoreboardGeneral {
         }
 
         if (players.size() > 1) {
-            this.setLine(ChatColor.GREEN + "» Members", lineCounter);
-            lineCounter++;
-
             for (int i = 1; i < players.size(); i++) {
                 Player member = players.get(i);
                 this.setLine(member.getName() + ChatColor.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
@@ -65,7 +62,7 @@ public class BoardWithPlayers extends ScoreboardGeneral {
     }
 
     public void remake(List<Player> players) {
-        this.setLine("", 1);
+        this.setLine("TODO TEST REMAKE", 1);
 
         int lineCounter = 2;
         for (String s : topLines) {
@@ -74,7 +71,7 @@ public class BoardWithPlayers extends ScoreboardGeneral {
 
         }
 
-        this.setLine(ChatColor.GREEN + "» Leader", lineCounter);
+        this.setLine(ChatColor.GREEN + "» Party", lineCounter);
         lineCounter++;
         if (!players.isEmpty()) {
             this.setLine(players.get(0).getName() + ChatColor.RED + " ❤" + (int) (players.get(0).getHealth() + 0.5), lineCounter);
@@ -82,9 +79,6 @@ public class BoardWithPlayers extends ScoreboardGeneral {
         }
 
         if (players.size() > 1) {
-            this.setLine(ChatColor.GREEN + "» Members", lineCounter);
-            lineCounter++;
-
             for (int i = 1; i < players.size(); i++) {
                 Player member = players.get(i);
                 this.setLine(member.getName() + ChatColor.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
