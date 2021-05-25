@@ -35,7 +35,7 @@ public class CommandTest implements CommandExecutor {
                 player.sendMessage(ChatColor.BLUE + "/test sound <code> - play custom sounds");
                 player.sendMessage(ChatColor.BLUE + "/test damage <amount> - damage self");
             } else if (args[0].equals("test")) {
-                DungeonTheme dungeonTheme = new DungeonTheme("test", "Test", "Test", GearLevel.ZERO, PortalColor.ORANGE, 1, 5, "Test1");
+                DungeonTheme dungeonTheme = new DungeonTheme("SEWER", "SEWER", "SEWER", GearLevel.ZERO, PortalColor.ORANGE, 1, 5, "SlimeBoss");
 
                 DungeonPrizeChestManager.spawnPrizeChests(dungeonTheme, player.getLocation(), Integer.parseInt(args[1]));
             } else if (args[0].equals("sound")) {

@@ -74,10 +74,16 @@ public class GearWeapon implements RPGGear {
         lore.add("");
         lore.add(tier.getTierString());
         if (gearSetExist) {
-            lore.add("");
+            boolean addedSpace = false;
+
             for (int i = 2; i < 6; i++) {
                 GearSet gearSet = new GearSet(gearSetStr, i);
                 if (GearSetManager.hasEffect(gearSet)) {
+                    if (!addedSpace) {
+                        lore.add("");
+                        addedSpace = true;
+                    }
+
                     lore.add(ChatColor.GRAY + "-- " + ChatColor.RED + gearSetStr + ChatColor.GRAY + " [" + i + " pieces] --");
                     List<GearSetEffect> effects = GearSetManager.getEffectsWithoutLower(gearSet);
                     for (GearSetEffect gearSetEffect : effects) {
