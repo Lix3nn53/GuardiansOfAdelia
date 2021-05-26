@@ -1,36 +1,42 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class DungeonRoom {
 
-    private final List<DungeonRoomDoor> doors = new ArrayList<>();
-    private final HashMap<Integer, List<DungeonRoomSpawner>> waveToSpawners = new HashMap<>();
+    private final List<DungeonRoomDoor> doors;
+    private final HashMap<Integer, List<DungeonRoomSpawner>> waveToSpawners;
     /**
      * Rooms to start after this room ends
      */
-    private final List<Integer> nextRooms = new ArrayList<>();
+    private final List<Integer> nextRooms;
 
-    public void onDungeonStart() {
+    public DungeonRoom(List<DungeonRoomDoor> doors, HashMap<Integer, List<DungeonRoomSpawner>> waveToSpawners, List<Integer> nextRooms) {
+        this.doors = doors;
+        this.waveToSpawners = waveToSpawners;
+        this.nextRooms = nextRooms;
+    }
+
+    public void onDungeonStart(Location dungeonStart) {
         for (DungeonRoomDoor door : doors) {
-            door.close();
+            door.close(dungeonStart);
         }
     }
 
-    public void onRoomStart(DungeonRoomState state) {
+    public void onRoomStart(DungeonRoomState state, Location dungeonStart) {
         for (DungeonRoomDoor door : doors) {
-            door.close();
+            door.close(dungeonStart);
         }
 
         List<DungeonRoomSpawner> spawners = waveToSpawners.get(1);
         for (DungeonRoomSpawner spawner : spawners) {
-            List<Entity> spawned = spawner.spawn();
+            List<Entity> spawned = spawner.spawn(dungeonStart);
             state.onMobSpawn(spawned.size());
         }
     }
@@ -40,7 +46,7 @@ public class DungeonRoom {
      * @param roomNo
      * @return true if room completed, false otherwise
      */
-    public boolean onMobKill(DungeonRoomState state, List<Player> players, int roomNo, String mobCode) {
+    public boolean onMobKill(DungeonRoomState state, List<Player> players, int roomNo, String mobCode, Location dungeonStart) {
         boolean thisRoomsMob = false;
 
         int currentWave = state.getCurrentWave();
@@ -69,7 +75,7 @@ public class DungeonRoom {
                 }
 
                 for (DungeonRoomSpawner spawner : spawners) {
-                    List<Entity> spawned = spawner.spawn();
+                    List<Entity> spawned = spawner.spawn(dungeonStart);
                     state.onMobSpawn(spawned.size());
                 }
             } else {
@@ -80,9 +86,9 @@ public class DungeonRoom {
         return false;
     }
 
-    public List<Integer> onRoomEnd() {
+    public List<Integer> onRoomEnd(Location dungeonStart) {
         for (DungeonRoomDoor door : doors) {
-            door.open();
+            door.open(dungeonStart);
         }
 
         return nextRooms;

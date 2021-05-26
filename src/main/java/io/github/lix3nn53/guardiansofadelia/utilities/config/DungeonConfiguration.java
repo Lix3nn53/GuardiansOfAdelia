@@ -3,14 +3,20 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
-import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.Dungeon;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonInstance;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoom;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomDoor;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomSpawner;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.util.BoundingBox;
+import org.bukkit.util.Vector;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,7 +32,7 @@ public class DungeonConfiguration {
 
     static void createConfigs() {
         dungeonThemesConfig = ConfigurationUtils.createConfig(filePath, "dungeonThemes.yml");
-        dungeonRoomsConfig = ConfigurationUtils.createConfig(filePath, "dungeons.yml");
+        dungeonRoomsConfig = ConfigurationUtils.createConfig(filePath, "dungeonInstances.yml");
         dungeonGatesConfig = ConfigurationUtils.createConfig(filePath, "dungeonGates.yml");
     }
 
@@ -53,7 +59,83 @@ public class DungeonConfiguration {
             int timeLimitInMinutes = section.getInt("timeLimitInMinutes");
             String bossInternalName = section.getString("bossInternalName");
 
-            DungeonTheme dungeonTheme = new DungeonTheme(code, name, gearTag, gearLevel, portalColor, levelReq, timeLimitInMinutes, bossInternalName);
+            HashMap<Integer, DungeonRoom> dungeonRooms = new HashMap<>();
+            for (int roomIndex = 1; roomIndex <= 999; roomIndex++) {
+                if (!section.contains("room" + roomIndex)) break;
+
+                List<DungeonRoomDoor> dungeonRoomDoors = new ArrayList<>();
+                for (int doorIndex = 1; doorIndex <= 999; doorIndex++) {
+                    if (!section.contains("room" + roomIndex + ".door" + doorIndex)) break;
+
+                    String materialStr = section.getString("room" + roomIndex + ".door" + doorIndex + ".material");
+                    Material doorMaterial = Material.valueOf(materialStr);
+
+                    List<BoundingBox> boundingBoxes = new ArrayList<>();
+                    for (int boxIndex = 1; boxIndex <= 999; boxIndex++) {
+                        if (!section.contains("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex)) break;
+
+                        double x1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".x1");
+                        double y1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".y1");
+                        double z1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".z1");
+                        double x2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".x2");
+                        double y2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".y2");
+                        double z2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".z2");
+
+                        BoundingBox boundingBox = new BoundingBox(x1, y1, z1, x2, y2, z2);
+
+                        boundingBoxes.add(boundingBox);
+                    }
+
+
+                    DungeonRoomDoor dungeonRoomDoor = new DungeonRoomDoor(doorMaterial, boundingBoxes);
+                    dungeonRoomDoors.add(dungeonRoomDoor);
+                }
+
+                HashMap<Integer, List<DungeonRoomSpawner>> waveToSpawners = new HashMap<>();
+                for (int waveIndex = 1; waveIndex <= 999; waveIndex++) {
+                    if (!section.contains("room" + roomIndex + ".wave" + waveIndex)) break;
+
+                    List<DungeonRoomSpawner> spawners = new ArrayList<>();
+                    for (int spawnerIndex = 1; spawnerIndex <= 999; spawnerIndex++) {
+                        if (!section.contains("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex))
+                            break;
+
+                        String mobCode = section.getString("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".mobCode");
+                        int mobLevel = section.getInt("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".mobLevel");
+                        int amount = section.getInt("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".amount");
+
+                        List<Vector> offsets = new ArrayList<>();
+                        for (int offsetIndex = 1; offsetIndex <= 999; offsetIndex++) {
+                            if (!section.contains("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + offsetIndex))
+                                break;
+
+                            double x = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + offsetIndex + ".x");
+                            double y = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + offsetIndex + ".y");
+                            double z = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + offsetIndex + ".z");
+
+                            Vector offset = new Vector(x, y, z);
+
+                            offsets.add(offset);
+                        }
+
+                        DungeonRoomSpawner spawner = new DungeonRoomSpawner(mobCode, mobLevel, amount, offsets);
+                        spawners.add(spawner);
+                    }
+
+                    waveToSpawners.put(waveIndex, spawners);
+                }
+
+                List<Integer> nextRooms = section.getIntegerList("room" + roomIndex + ".nextRooms");
+
+                DungeonRoom dungeonRoom = new DungeonRoom(dungeonRoomDoors, waveToSpawners, nextRooms);
+                dungeonRooms.put(roomIndex, dungeonRoom);
+            }
+
+            List<Integer> startingRooms = section.getIntegerList("startingRooms");
+
+
+            DungeonTheme dungeonTheme = new DungeonTheme(code, name, gearTag, gearLevel, portalColor, levelReq, timeLimitInMinutes,
+                    bossInternalName, dungeonRooms, startingRooms);
 
             MiniGameManager.addDungeonTheme(code, dungeonTheme);
         }
@@ -110,8 +192,8 @@ public class DungeonConfiguration {
                 }
 
                 DungeonTheme dungeonTheme = dungeonThemes.get(themeCode);
-                Dungeon dungeon = new Dungeon(dungeonTheme, i, locations, checkpoints);
-                MiniGameManager.addDungeon(themeCode, i, dungeon);
+                DungeonInstance dungeonInstance = new DungeonInstance(dungeonTheme, i, locations, checkpoints);
+                MiniGameManager.addDungeon(themeCode, i, dungeonInstance);
             }
         }
     }

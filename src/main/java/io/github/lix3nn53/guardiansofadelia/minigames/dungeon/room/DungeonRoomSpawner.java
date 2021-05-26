@@ -12,32 +12,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DungeonRoomSpawner {
-    private final List<Location> locationList = new ArrayList<>();
     private final String mobCode;
     private final int mobLevel;
     private final int amount;
+    private final List<Vector> offsets;
 
-    public DungeonRoomSpawner(String mobCode, int mobLevel, int amount, Location dungeonStart, List<Vector> offsets) {
+    public DungeonRoomSpawner(String mobCode, int mobLevel, int amount, List<Vector> offsets) {
         this.mobCode = mobCode;
         this.mobLevel = mobLevel;
         this.amount = amount;
-
-        for (int i = 0; i < offsets.size(); i++) {
-            Vector offset = offsets.get(i);
-
-            Location add = dungeonStart.clone().add(offset);
-
-            locationList.add(add);
-        }
+        this.offsets = offsets;
     }
 
-    public List<Entity> spawn() {
+    public List<Entity> spawn(Location dungeonStart) {
         List<Entity> entity = new ArrayList<>();
         BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
         try {
-            for (Location location : locationList) {
+            for (Vector offset : offsets) {
+                Location add = dungeonStart.clone().add(offset);
                 for (int i = 0; i < amount; i++) {
-                    entity.add(apiHelper.spawnMythicMob(mobCode, location, mobLevel));
+                    entity.add(apiHelper.spawnMythicMob(mobCode, add, mobLevel));
                 }
             }
         } catch (InvalidMobTypeException e) {

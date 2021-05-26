@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class Dungeon extends Minigame {
+public class DungeonInstance extends Minigame {
 
     private final DungeonTheme theme;
 
@@ -26,7 +26,7 @@ public class Dungeon extends Minigame {
     // State
     private List<Integer> activeRooms = new ArrayList<>();
 
-    public Dungeon(DungeonTheme theme, int instanceNo, List<Location> startLocation, List<Checkpoint> checkpoints) {
+    public DungeonInstance(DungeonTheme theme, int instanceNo, List<Location> startLocation, List<Checkpoint> checkpoints) {
         super("Dungeon " + theme.getName(), ChatColor.AQUA, theme.getName(), instanceNo, theme.getLevelReq()
                 , 4, 1, startLocation, theme.getTimeLimitInMinutes(),
                 5, MiniGameManager.getPortalLocationOfDungeonTheme(theme.getCode()), 4,
@@ -51,7 +51,7 @@ public class Dungeon extends Minigame {
         for (int roomNo : startingRooms) {
             DungeonRoom dungeonRoom = this.theme.getDungeonRoom(roomNo);
             DungeonRoomState state = dungeonRoomStates.get(roomNo);
-            dungeonRoom.onRoomStart(state);
+            dungeonRoom.onRoomStart(state, this.getStartLocation(1));
         }
 
         activeRooms = startingRooms;
@@ -84,15 +84,15 @@ public class Dungeon extends Minigame {
                 for (int roomNo : activeRooms) {
                     DungeonRoom room = theme.getDungeonRoom(roomNo);
                     DungeonRoomState state = dungeonRoomStates.get(roomNo);
-                    boolean roomDone = room.onMobKill(state, getPlayersInGame(), roomNo, internalName);
+                    boolean roomDone = room.onMobKill(state, getPlayersInGame(), roomNo, internalName, getStartLocation(1));
 
                     if (roomDone) {
-                        List<Integer> nextRooms = room.onRoomEnd();
+                        List<Integer> nextRooms = room.onRoomEnd(this.getStartLocation(1));
 
                         for (int nextRoomNo : nextRooms) {
                             DungeonRoom nextRoom = theme.getDungeonRoom(nextRoomNo);
                             DungeonRoomState nextRoomState = dungeonRoomStates.get(nextRoomNo);
-                            nextRoom.onRoomStart(nextRoomState);
+                            nextRoom.onRoomStart(nextRoomState, this.getStartLocation(1));
                         }
 
                         this.activeRooms = nextRooms;
