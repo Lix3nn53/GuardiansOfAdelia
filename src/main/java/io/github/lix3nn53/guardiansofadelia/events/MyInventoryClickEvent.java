@@ -830,8 +830,8 @@ public class MyInventoryClickEvent implements Listener {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 int i = currentName.indexOf("#");
                 String c = String.valueOf(currentName.charAt(i + 1));
-                int roomNo = Integer.parseInt(c);
-                boolean joined = MiniGameManager.getGuildWar(roomNo).joinQueue(player);
+                int instanceNo = Integer.parseInt(c);
+                boolean joined = MiniGameManager.getGuildWar(instanceNo).joinQueue(player);
                 if (joined) {
                     player.closeInventory();
                 }
@@ -848,8 +848,8 @@ public class MyInventoryClickEvent implements Listener {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 int i = currentName.indexOf("#");
                 String c = String.valueOf(currentName.charAt(i + 1));
-                int roomNo = Integer.parseInt(c);
-                boolean joined = MiniGameManager.getLastOneStanding(roomNo).joinQueue(player);
+                int instanceNo = Integer.parseInt(c);
+                boolean joined = MiniGameManager.getLastOneStanding(instanceNo).joinQueue(player);
                 if (joined) {
                     player.closeInventory();
                 }
@@ -858,8 +858,8 @@ public class MyInventoryClickEvent implements Listener {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 int i = currentName.indexOf("#");
                 String c = String.valueOf(currentName.charAt(i + 1));
-                int roomNo = Integer.parseInt(c);
-                boolean joined = MiniGameManager.getWinByMostKills(roomNo).joinQueue(player);
+                int instanceNo = Integer.parseInt(c);
+                boolean joined = MiniGameManager.getWinByMostKills(instanceNo).joinQueue(player);
                 if (joined) {
                     player.closeInventory();
                 }
@@ -973,9 +973,9 @@ public class MyInventoryClickEvent implements Listener {
                     //get char after # for dungeon room no from clicked
                     int i = currentName.indexOf("#");
                     String c = String.valueOf(currentName.charAt(i + 1));
-                    int roomNo = Integer.parseInt(c);
+                    int instanceNo = Integer.parseInt(c);
 
-                    boolean joined = MiniGameManager.getDungeonRoom(dungeonThemeCode, roomNo).joinQueue(player);
+                    boolean joined = MiniGameManager.getDungeonRoom(dungeonThemeCode, instanceNo).joinQueue(player);
                     if (joined) {
                         player.closeInventory();
                     }

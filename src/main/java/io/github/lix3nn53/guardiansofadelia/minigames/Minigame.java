@@ -27,7 +27,7 @@ public abstract class Minigame {
     private final List<Location> startLocations;
     private final Location backLocation;
     private final int levelReq;
-    private final int roomNo;
+    private final int instanceNo;
     private final int queueTimeLimitInTenSeconds;
     private final int timeLimitInMinutes;
     private final HashMap<Integer, Party> teams = new HashMap<>();
@@ -48,7 +48,7 @@ public abstract class Minigame {
     private final HashMap<Integer, Checkpoint> teamToCheckpoint = new HashMap<>();
 
 
-    public Minigame(String gameTypeName, ChatColor gameColor, String mapName, int roomNo, int levelReq, int teamSize, int teamAmount, List<Location> startLocations, int timeLimitInMinutes,
+    public Minigame(String gameTypeName, ChatColor gameColor, String mapName, int instanceNo, int levelReq, int teamSize, int teamAmount, List<Location> startLocations, int timeLimitInMinutes,
                     int queueTimeLimitInTenSeconds, Location backLocation, int maxLives, int minTeamsAlive, int respawnDelayInSeconds, int requiredPlayerAmountToStart, List<Checkpoint> checkpoints) {
         this.gameTypeName = gameTypeName;
         this.gameColor = gameColor;
@@ -57,7 +57,7 @@ public abstract class Minigame {
         this.levelReq = levelReq;
         this.timeLimitInMinutes = timeLimitInMinutes;
         this.startLocations = startLocations;
-        this.roomNo = roomNo;
+        this.instanceNo = instanceNo;
         this.queueTimeLimitInTenSeconds = queueTimeLimitInTenSeconds;
         this.teamSize = teamSize;
         this.teamAmount = teamAmount;
@@ -412,7 +412,7 @@ public abstract class Minigame {
     }
 
     public String getMinigameName() {
-        return this.gameColor + this.gameTypeName + " #" + getRoomNo();
+        return this.gameColor + this.gameTypeName + " #" + getInstanceNo();
     }
 
     public Location getStartLocation(int teamNo) {
@@ -495,8 +495,8 @@ public abstract class Minigame {
         return startLocations;
     }
 
-    public int getRoomNo() {
-        return roomNo;
+    public int getInstanceNo() {
+        return instanceNo;
     }
 
     public List<Player> getPlayersInGame() {

@@ -96,28 +96,28 @@ public class MiniGameManager {
         guildWarList.add(GuildWarRoom2);
     }
 
-    public static LastOneStanding getLastOneStanding(int roomNo) {
-        return lastOneStandingList.get(roomNo - 1);
+    public static LastOneStanding getLastOneStanding(int instanceNo) {
+        return lastOneStandingList.get(instanceNo - 1);
     }
 
-    public static GuildWar getGuildWar(int roomNo) {
-        return guildWarList.get(roomNo - 1);
+    public static GuildWar getGuildWar(int instanceNo) {
+        return guildWarList.get(instanceNo - 1);
     }
 
-    public static WinByMostKills getWinByMostKills(int roomNo) {
-        return winByMostKillsList.get(roomNo - 1);
+    public static WinByMostKills getWinByMostKills(int instanceNo) {
+        return winByMostKillsList.get(instanceNo - 1);
     }
 
-    public static void addDungeon(String dungeonTheme, int roomNo, Dungeon dungeon) {
-        codeToDungeon.put(dungeonTheme + roomNo, dungeon);
+    public static void addDungeon(String dungeonTheme, int instanceNo, Dungeon dungeon) {
+        codeToDungeon.put(dungeonTheme + instanceNo, dungeon);
     }
 
-    public static Dungeon getDungeonRoom(String dungeonTheme, int roomNo) {
-        return codeToDungeon.get(dungeonTheme + roomNo);
+    public static Dungeon getDungeonRoom(String dungeonTheme, int instanceNo) {
+        return codeToDungeon.get(dungeonTheme + instanceNo);
     }
 
-    public static boolean dungeonExists(String dungeonTheme, int roomNo) {
-        return codeToDungeon.containsKey(dungeonTheme + roomNo);
+    public static boolean dungeonExists(String dungeonTheme, int instanceNo) {
+        return codeToDungeon.containsKey(dungeonTheme + instanceNo);
     }
 
     public static Set<String> getDungeons() {
@@ -202,7 +202,7 @@ public class MiniGameManager {
         if (playerToMinigame.containsKey(player)) {
             if (playerToMinigame.get(player) instanceof Dungeon) {
                 Dungeon dungeon = (Dungeon) playerToMinigame.get(player);
-                dungeon.onBossKill(internalName);
+                dungeon.onMobKill(internalName);
             }
         }
     }

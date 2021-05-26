@@ -13,13 +13,13 @@ import java.util.List;
 
 public class DungeonRoomSpawner {
     private final List<Location> locationList = new ArrayList<>();
-    private final String petCode;
-    private final int petLevel;
+    private final String mobCode;
+    private final int mobLevel;
     private final int amount;
 
-    public DungeonRoomSpawner(String petCode, int petLevel, int amount, Location dungeonStart, List<Vector> offsets) {
-        this.petCode = petCode;
-        this.petLevel = petLevel;
+    public DungeonRoomSpawner(String mobCode, int mobLevel, int amount, Location dungeonStart, List<Vector> offsets) {
+        this.mobCode = mobCode;
+        this.mobLevel = mobLevel;
         this.amount = amount;
 
         for (int i = 0; i < offsets.size(); i++) {
@@ -37,14 +37,18 @@ public class DungeonRoomSpawner {
         try {
             for (Location location : locationList) {
                 for (int i = 0; i < amount; i++) {
-                    entity.add(apiHelper.spawnMythicMob(petCode, location, petLevel));
+                    entity.add(apiHelper.spawnMythicMob(mobCode, location, mobLevel));
                 }
             }
         } catch (InvalidMobTypeException e) {
-            GuardiansOfAdelia.getInstance().getLogger().info("DungeonRoomSpawner mythicmob code error: " + petCode);
+            GuardiansOfAdelia.getInstance().getLogger().info("DungeonRoomSpawner mythicmob code error: " + mobCode);
             e.printStackTrace();
         }
 
         return entity;
+    }
+
+    public String getMobCode() {
+        return mobCode;
     }
 }

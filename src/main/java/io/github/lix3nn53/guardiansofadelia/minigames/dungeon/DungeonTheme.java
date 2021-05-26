@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoom;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -17,9 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class DungeonTheme {
     private final String code;
@@ -32,7 +31,12 @@ public class DungeonTheme {
     private final int timeLimitInMinutes;
     private final String bossInternalName;
 
-    public DungeonTheme(String code, String name, String gearTag, GearLevel gearLevel, PortalColor portalColor, int levelReq, int timeLimitInMinutes, String bossInternalName) {
+    // Rooms
+    private final HashMap<Integer, DungeonRoom> dungeonRooms;
+    private final List<Integer> startingRooms;
+
+    public DungeonTheme(String code, String name, String gearTag, GearLevel gearLevel, PortalColor portalColor, int levelReq,
+                        int timeLimitInMinutes, String bossInternalName, HashMap<Integer, DungeonRoom> dungeonRooms, List<Integer> startingRooms) {
         this.code = code;
         this.name = ChatColor.translateAlternateColorCodes('&', name);
         this.gearTag = gearTag;
@@ -41,6 +45,8 @@ public class DungeonTheme {
         this.levelReq = levelReq;
         this.timeLimitInMinutes = timeLimitInMinutes;
         this.bossInternalName = bossInternalName;
+        this.dungeonRooms = dungeonRooms;
+        this.startingRooms = startingRooms;
     }
 
     public String getCode() {
@@ -122,7 +128,7 @@ public class DungeonTheme {
             if (dungeon == null) {
                 break;
             }
-            ItemStack itemStack = generateRoomItem(dungeon);
+            ItemStack itemStack = generateInstanceItem(dungeon);
             guiGeneric.setItem(slotNo, itemStack);
 
             slotNo = slotNo + 2;
@@ -132,11 +138,11 @@ public class DungeonTheme {
     }
 
 
-    private ItemStack generateRoomItem(Dungeon dungeon) {
+    private ItemStack generateInstanceItem(Dungeon dungeon) {
 
         ItemStack room = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = room.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #" + dungeon.getRoomNo() + " (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
+        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #" + dungeon.getInstanceNo() + " (" + dungeon.getPlayersInGameSize() + "/" + dungeon.getMaxPlayerSize() + ")");
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + dungeon.getLevelReq());
@@ -162,5 +168,17 @@ public class DungeonTheme {
 
     public PortalColor getPortalColor() {
         return portalColor;
+    }
+
+    public Set<Integer> getDungeonRoomKeys() {
+        return dungeonRooms.keySet();
+    }
+
+    public DungeonRoom getDungeonRoom(int key) {
+        return dungeonRooms.get(key);
+    }
+
+    public List<Integer> getStartingRooms() {
+        return startingRooms;
     }
 }

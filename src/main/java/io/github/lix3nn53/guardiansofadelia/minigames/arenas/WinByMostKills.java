@@ -12,8 +12,8 @@ import java.util.List;
 
 public class WinByMostKills extends Minigame {
 
-    public WinByMostKills(String mapName, int levelReq, int timeLimitInMinutes, int roomNo, List<Location> startLocations, int teamSize, int teamAmount, int requiredPlayerAmountToStart) {
-        super("WinByMostKills", ChatColor.GOLD, mapName, roomNo, levelReq, teamSize, teamAmount, startLocations,
+    public WinByMostKills(String mapName, int levelReq, int timeLimitInMinutes, int instanceNo, List<Location> startLocations, int teamSize, int teamAmount, int requiredPlayerAmountToStart) {
+        super("WinByMostKills", ChatColor.GOLD, mapName, instanceNo, levelReq, teamSize, teamAmount, startLocations,
                 timeLimitInMinutes, 1, TownManager.getTown(1).getLocation(), 99, 0, 20, requiredPlayerAmountToStart, new ArrayList<>());
     }
 

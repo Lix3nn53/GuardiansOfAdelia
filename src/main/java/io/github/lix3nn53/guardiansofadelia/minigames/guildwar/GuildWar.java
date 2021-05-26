@@ -29,8 +29,8 @@ public class GuildWar extends Minigame {
     private final List<Guild> guilds = new ArrayList<>();
     private final int maxPoint;
 
-    public GuildWar(int maxPoint, String mapName, int roomNo, List<Location> startLocations, List<Location> flagGroundLocations) {
-        super("GuildWar", ChatColor.DARK_PURPLE, mapName, roomNo, 1, 10, 2, startLocations,
+    public GuildWar(int maxPoint, String mapName, int instanceNo, List<Location> startLocations, List<Location> flagGroundLocations) {
+        super("GuildWar", ChatColor.DARK_PURPLE, mapName, instanceNo, 1, 10, 2, startLocations,
                 15, 10, TownManager.getTown(1).getLocation(), 99, 0, 20, 0, new ArrayList<>());
         this.maxPoint = maxPoint;
         for (Location flagGround : flagGroundLocations) {
@@ -160,7 +160,7 @@ public class GuildWar extends Minigame {
                                                 Player member = Bukkit.getPlayer(uuid);
                                                 if (member != null) {
                                                     if (member.isOnline()) {
-                                                        MessageUtils.sendCenteredMessage(member, getGameColor() + "Guild '" + guild.getName() + "' joined GuildWar #" + getRoomNo());
+                                                        MessageUtils.sendCenteredMessage(member, getGameColor() + "Guild '" + guild.getName() + "' joined GuildWar #" + getInstanceNo());
                                                     }
                                                 }
                                             }
