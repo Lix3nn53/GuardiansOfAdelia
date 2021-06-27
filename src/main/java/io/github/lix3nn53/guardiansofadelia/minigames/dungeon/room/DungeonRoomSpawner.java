@@ -15,24 +15,22 @@ public class DungeonRoomSpawner {
     private final String mobCode;
     private final int mobLevel;
     private final int amount;
-    private final List<Vector> offsets;
+    private final Vector offset;
 
-    public DungeonRoomSpawner(String mobCode, int mobLevel, int amount, List<Vector> offsets) {
+    public DungeonRoomSpawner(String mobCode, int mobLevel, int amount, Vector offset) {
         this.mobCode = mobCode;
         this.mobLevel = mobLevel;
         this.amount = amount;
-        this.offsets = offsets;
+        this.offset = offset;
     }
 
     public List<Entity> spawn(Location dungeonStart) {
         List<Entity> entity = new ArrayList<>();
         BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
         try {
-            for (Vector offset : offsets) {
-                Location add = dungeonStart.clone().add(offset);
-                for (int i = 0; i < amount; i++) {
-                    entity.add(apiHelper.spawnMythicMob(mobCode, add, mobLevel));
-                }
+            Location add = dungeonStart.clone().add(offset);
+            for (int i = 0; i < amount; i++) {
+                entity.add(apiHelper.spawnMythicMob(mobCode, add, mobLevel));
             }
         } catch (InvalidMobTypeException e) {
             GuardiansOfAdelia.getInstance().getLogger().info("DungeonRoomSpawner mythicmob code error: " + mobCode);

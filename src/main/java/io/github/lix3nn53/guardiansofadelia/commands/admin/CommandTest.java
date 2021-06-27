@@ -1,11 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.commands.admin;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonPrizeChestManager;
-import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -35,9 +31,7 @@ public class CommandTest implements CommandExecutor {
                 player.sendMessage(ChatColor.BLUE + "/test sound <code> - play custom sounds");
                 player.sendMessage(ChatColor.BLUE + "/test damage <amount> - damage self");
             } else if (args[0].equals("test")) {
-                DungeonTheme dungeonTheme = new DungeonTheme("SEWER", "SEWER", "SEWER", GearLevel.ZERO, PortalColor.ORANGE, 1, 5, "SlimeBoss");
 
-                DungeonPrizeChestManager.spawnPrizeChests(dungeonTheme, player.getLocation(), Integer.parseInt(args[1]));
             } else if (args[0].equals("sound")) {
                 if (args.length == 2) {
                     GoaSound goaSound = GoaSound.valueOf(args[1]);

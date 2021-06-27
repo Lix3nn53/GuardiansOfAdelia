@@ -70,24 +70,16 @@ public class DungeonConfiguration {
                     String materialStr = section.getString("room" + roomIndex + ".door" + doorIndex + ".material");
                     Material doorMaterial = Material.valueOf(materialStr);
 
-                    List<BoundingBox> boundingBoxes = new ArrayList<>();
-                    for (int boxIndex = 1; boxIndex <= 999; boxIndex++) {
-                        if (!section.contains("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex)) break;
+                    double x1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".x1");
+                    double y1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".y1");
+                    double z1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".z1");
+                    double x2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".x2");
+                    double y2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".y2");
+                    double z2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".z2");
 
-                        double x1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".x1");
-                        double y1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".y1");
-                        double z1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".z1");
-                        double x2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".x2");
-                        double y2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".y2");
-                        double z2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + boxIndex + ".z2");
+                    BoundingBox boundingBox = new BoundingBox(x1, y1, z1, x2, y2, z2);
 
-                        BoundingBox boundingBox = new BoundingBox(x1, y1, z1, x2, y2, z2);
-
-                        boundingBoxes.add(boundingBox);
-                    }
-
-
-                    DungeonRoomDoor dungeonRoomDoor = new DungeonRoomDoor(doorMaterial, boundingBoxes);
+                    DungeonRoomDoor dungeonRoomDoor = new DungeonRoomDoor(doorMaterial, boundingBox);
                     dungeonRoomDoors.add(dungeonRoomDoor);
                 }
 
@@ -104,21 +96,13 @@ public class DungeonConfiguration {
                         int mobLevel = section.getInt("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".mobLevel");
                         int amount = section.getInt("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".amount");
 
-                        List<Vector> offsets = new ArrayList<>();
-                        for (int offsetIndex = 1; offsetIndex <= 999; offsetIndex++) {
-                            if (!section.contains("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + offsetIndex))
-                                break;
+                        double x = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".x");
+                        double y = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".y");
+                        double z = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".z");
 
-                            double x = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + offsetIndex + ".x");
-                            double y = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + offsetIndex + ".y");
-                            double z = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + offsetIndex + ".z");
+                        Vector offset = new Vector(x, y, z);
 
-                            Vector offset = new Vector(x, y, z);
-
-                            offsets.add(offset);
-                        }
-
-                        DungeonRoomSpawner spawner = new DungeonRoomSpawner(mobCode, mobLevel, amount, offsets);
+                        DungeonRoomSpawner spawner = new DungeonRoomSpawner(mobCode, mobLevel, amount, offset);
                         spawners.add(spawner);
                     }
 

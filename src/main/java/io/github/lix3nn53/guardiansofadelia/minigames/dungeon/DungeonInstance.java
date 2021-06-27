@@ -48,6 +48,13 @@ public class DungeonInstance extends Minigame {
 
         List<Integer> startingRooms = this.theme.getStartingRooms();
 
+        Set<Integer> dungeonRoomKeys = this.theme.getDungeonRoomKeys();
+        for (int roomNo : dungeonRoomKeys) {
+            DungeonRoom dungeonRoom = this.theme.getDungeonRoom(roomNo);
+
+            dungeonRoom.onDungeonStart(this.getStartLocation(1));
+        }
+
         for (int roomNo : startingRooms) {
             DungeonRoom dungeonRoom = this.theme.getDungeonRoom(roomNo);
             DungeonRoomState state = dungeonRoomStates.get(roomNo);

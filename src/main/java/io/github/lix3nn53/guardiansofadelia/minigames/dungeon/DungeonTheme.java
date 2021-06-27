@@ -124,7 +124,7 @@ public class DungeonTheme {
 
         int slotNo = 9;
         for (int i = 1; i < 100; i++) {
-            DungeonInstance dungeonInstance = MiniGameManager.getDungeonRoom(code, i);
+            DungeonInstance dungeonInstance = MiniGameManager.getDungeonInstance(code, i);
             if (dungeonInstance == null) {
                 break;
             }
@@ -176,6 +176,10 @@ public class DungeonTheme {
 
     public DungeonRoom getDungeonRoom(int key) {
         return dungeonRooms.get(key);
+    }
+
+    public void addDungeonRoom(int key, DungeonRoom room) {
+        dungeonRooms.put(key, room);
     }
 
     public List<Integer> getStartingRooms() {

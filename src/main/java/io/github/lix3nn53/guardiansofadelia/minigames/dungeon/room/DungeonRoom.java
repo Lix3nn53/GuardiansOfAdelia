@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -92,5 +93,19 @@ public class DungeonRoom {
         }
 
         return nextRooms;
+    }
+
+    public void addSpawner(int wave, DungeonRoomSpawner spawner) {
+        List<DungeonRoomSpawner> spawners = new ArrayList<>();
+        if (waveToSpawners.containsKey(wave)) {
+            spawners = waveToSpawners.get(wave);
+        }
+
+        spawners.add(spawner);
+        waveToSpawners.put(wave, spawners);
+    }
+
+    public void addDoor(DungeonRoomDoor door) {
+        doors.add(door);
     }
 }

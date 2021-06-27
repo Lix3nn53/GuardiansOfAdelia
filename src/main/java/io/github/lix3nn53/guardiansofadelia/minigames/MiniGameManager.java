@@ -112,7 +112,7 @@ public class MiniGameManager {
         codeToDungeon.put(dungeonTheme + instanceNo, dungeonInstance);
     }
 
-    public static DungeonInstance getDungeonRoom(String dungeonTheme, int instanceNo) {
+    public static DungeonInstance getDungeonInstance(String dungeonTheme, int instanceNo) {
         return codeToDungeon.get(dungeonTheme + instanceNo);
     }
 
