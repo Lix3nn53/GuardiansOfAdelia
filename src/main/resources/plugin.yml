@@ -38,6 +38,10 @@ commands:
     description: AdminReward command
     permission: guardian.admin
     permission-message: You do not have permission!
+  admindungeon:
+    description: AdminDungeon command
+    permission: guardian.admin
+    permission-message: You do not have permission!
   test:
     description: Test command
     permission: guardian.admin

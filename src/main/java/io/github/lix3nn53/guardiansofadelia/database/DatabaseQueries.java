@@ -46,57 +46,59 @@ public class DatabaseQueries {
                     "(\n" +
                     " `name`         varchar(20) NOT NULL ,\n" +
                     " `tag`          varchar(5) NOT NULL ,\n" +
-                    " `war_point`    smallint ,\n" +
-                    " `announcement` tinytext ,\n" +
+                    " `war_point`    smallint NULL ,\n" +
+                    " `announcement` tinytext NULL ,\n" +
                     " `hall_level`   smallint NOT NULL ,\n" +
                     " `bank_level`   smallint NOT NULL ,\n" +
                     " `lab_level`    smallint NOT NULL ,\n" +
-                    " `storage`      text ,\n" +
+                    " `storage`      text NULL ,\n" +
+                    "\n" +
                     "PRIMARY KEY (`name`)\n" +
                     ");");
             statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player`\n" +
                     "(\n" +
-                    " `uuid`             varchar(40) NOT NULL ,\n" +
-                    " `daily_last_date`       date ,\n" +
-                    " `staff_rank`       varchar(20) ,\n" +
-                    " `premium_rank`       varchar(20) ,\n" +
-                    " `premium_rank_date`       date ,\n" +
-                    " `storage_personal` mediumtext ,\n" +
-                    " `storage_bazaar`   mediumtext ,\n" +
-                    " `storage_premium`   mediumtext ,\n" +
+                    " `uuid`              varchar(40) NOT NULL ,\n" +
+                    " `daily_last_date`   date NULL ,\n" +
+                    " `staff_rank`        varchar(20) NULL ,\n" +
+                    " `premium_rank`      varchar(20) NULL ,\n" +
+                    " `premium_rank_date` date NULL ,\n" +
+                    " `storage_personal`  mediumtext NULL ,\n" +
+                    " `storage_bazaar`    mediumtext NULL ,\n" +
+                    " `storage_premium`   mediumtext NULL ,\n" +
+                    "\n" +
                     "PRIMARY KEY (`uuid`)\n" +
                     ");");
             statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player_character`\n" +
                     "(\n" +
-                    " `character_no`   smallint NOT NULL ,\n" +
-                    " `uuid`           varchar(40) NOT NULL ,\n" +
-                    " `off_hand`       text NULL ,\n" +
-                    " `slot_parrot`    text NULL ,\n" +
-                    " `slot_necklace`  text NULL ,\n" +
-                    " `slot_ring`      text NULL ,\n" +
-                    " `slot_earring`   text NULL ,\n" +
-                    " `slot_glove`     text NULL ,\n" +
-                    " `slot_pet`       text NULL ,\n" +
-                    " `chat_tag`       varchar(45) NULL ,\n" +
+                    " `character_no`         smallint NOT NULL ,\n" +
+                    " `uuid`                 varchar(40) NOT NULL ,\n" +
+                    " `off_hand`             text NULL ,\n" +
+                    " `slot_parrot`          text NULL ,\n" +
+                    " `slot_necklace`        text NULL ,\n" +
+                    " `slot_ring`            text NULL ,\n" +
+                    " `slot_earring`         text NULL ,\n" +
+                    " `slot_glove`           text NULL ,\n" +
+                    " `slot_pet`             text NULL ,\n" +
+                    " `chat_tag`             varchar(45) NULL ,\n" +
                     " `crafting_experiences` text NOT NULL ,\n" +
-                    " `inventory`      mediumtext NOT NULL ,\n" +
-                    " `turnedinquests` text NULL ,\n" +
-                    " `activequests`   text NULL ,\n" +
-                    " `location`       text NOT NULL ,\n" +
-                    " `armor_content`  text NOT NULL ,\n" +
-                    " `rpg_class`      varchar(45) NOT NULL ,\n" +
-                    " `unlocked_classes`      mediumtext NULL ,\n" +
-                    " `totalexp`       int NOT NULL ,\n" +
-                    " `attr_one`      smallint NOT NULL ,\n" +
-                    " `attr_two`     smallint NOT NULL ,\n" +
-                    " `attr_three`     smallint NOT NULL ,\n" +
-                    " `attr_four` smallint NOT NULL ,\n" +
-                    " `attr_five`      smallint NOT NULL ,\n" +
-                    " `skill_one`      smallint NOT NULL ,\n" +
-                    " `skill_two`      smallint NOT NULL ,\n" +
-                    " `skill_three`    smallint NOT NULL ,\n" +
-                    " `skill_passive`  smallint NOT NULL ,\n" +
-                    " `skill_ultimate` smallint NOT NULL ,\n" +
+                    " `inventory`            mediumtext NOT NULL ,\n" +
+                    " `turnedinquests`       text NULL ,\n" +
+                    " `activequests`         text NULL ,\n" +
+                    " `location`             text NOT NULL ,\n" +
+                    " `armor_content`        text NOT NULL ,\n" +
+                    " `rpg_class`            varchar(45) NOT NULL ,\n" +
+                    " `unlocked_classes`     mediumtext NULL ,\n" +
+                    " `totalexp`             int NOT NULL ,\n" +
+                    " `attr_one`             smallint NOT NULL ,\n" +
+                    " `attr_two`             smallint NOT NULL ,\n" +
+                    " `attr_three`           smallint NOT NULL ,\n" +
+                    " `attr_four`            smallint NOT NULL ,\n" +
+                    " `attr_five`            smallint NOT NULL ,\n" +
+                    " `skill_one`            smallint NOT NULL ,\n" +
+                    " `skill_two`            smallint NOT NULL ,\n" +
+                    " `skill_three`          smallint NOT NULL ,\n" +
+                    " `skill_passive`        smallint NOT NULL ,\n" +
+                    " `skill_ultimate`       smallint NOT NULL ,\n" +
                     "\n" +
                     "UNIQUE KEY `Ind_88` (`uuid`, `character_no`),\n" +
                     "KEY `fkIdx_55` (`uuid`),\n" +
@@ -106,6 +108,7 @@ public class DatabaseQueries {
                     "(\n" +
                     " `uuid`        varchar(40) NOT NULL ,\n" +
                     " `friend_uuid` varchar(40) NOT NULL ,\n" +
+                    "\n" +
                     "UNIQUE KEY `Ind_89` (`friend_uuid`, `uuid`),\n" +
                     "KEY `fkIdx_22` (`uuid`),\n" +
                     "CONSTRAINT `FK_22` FOREIGN KEY `fkIdx_22` (`uuid`) REFERENCES `goa_player` (`uuid`),\n" +
@@ -117,6 +120,7 @@ public class DatabaseQueries {
                     " `uuid` varchar(40) NOT NULL ,\n" +
                     " `name` varchar(20) NOT NULL ,\n" +
                     " `rank` varchar(20) NOT NULL ,\n" +
+                    "\n" +
                     "PRIMARY KEY (`uuid`),\n" +
                     "KEY `fkIdx_38` (`uuid`),\n" +
                     "CONSTRAINT `FK_38` FOREIGN KEY `fkIdx_38` (`uuid`) REFERENCES `goa_player` (`uuid`),\n" +
