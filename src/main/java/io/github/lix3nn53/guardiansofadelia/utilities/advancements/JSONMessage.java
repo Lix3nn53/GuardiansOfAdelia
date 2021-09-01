@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.advancements;
 
-import net.minecraft.server.v1_16_R3.IChatBaseComponent;
-import net.minecraft.server.v1_16_R3.IChatBaseComponent.ChatSerializer;
+import net.minecraft.network.chat.IChatBaseComponent;
 
 public class JSONMessage {
 
@@ -25,7 +24,7 @@ public class JSONMessage {
      * @return An {@link IChatBaseComponent} representation of an ingame Message
      */
     public IChatBaseComponent getBaseComponent() {
-        return ChatSerializer.a(json);
+        return IChatBaseComponent.ChatSerializer.a(json);
     }
 
     @Override

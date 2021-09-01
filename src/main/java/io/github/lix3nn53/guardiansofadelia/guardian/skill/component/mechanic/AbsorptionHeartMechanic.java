@@ -1,10 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import net.minecraft.server.v1_16_R3.EntityPlayer;
+import net.minecraft.server.level.EntityPlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 

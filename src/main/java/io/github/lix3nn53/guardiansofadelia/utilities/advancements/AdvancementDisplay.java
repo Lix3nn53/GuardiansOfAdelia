@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.advancements;
 
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.server.v1_16_R3.AdvancementFrameType;
+import net.minecraft.advancements.AdvancementFrameType;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -480,9 +480,9 @@ public class AdvancementDisplay {
 
     public enum AdvancementFrame {
 
-        TASK(AdvancementFrameType.TASK),
-        GOAL(AdvancementFrameType.GOAL),
-        CHALLENGE(AdvancementFrameType.CHALLENGE);
+        TASK(AdvancementFrameType.a),
+        CHALLENGE(AdvancementFrameType.b),
+        GOAL(AdvancementFrameType.c);
 
         private final AdvancementFrameType nms;
 

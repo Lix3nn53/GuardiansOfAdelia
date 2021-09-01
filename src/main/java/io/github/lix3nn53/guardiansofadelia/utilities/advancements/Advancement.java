@@ -5,12 +5,23 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.server.v1_16_R3.*;
-import net.minecraft.server.v1_16_R3.IChatBaseComponent.ChatSerializer;
+import net.minecraft.EnumChatFormat;
+import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.CriterionInstance;
+import net.minecraft.advancements.critereon.LootSerializationContext;
+import net.minecraft.network.chat.ChatMessageType;
+import net.minecraft.network.chat.ChatModifier;
+import net.minecraft.network.chat.IChatBaseComponent;
+import net.minecraft.network.protocol.game.PacketPlayOutAdvancements;
+import net.minecraft.network.protocol.game.PacketPlayOutChat;
+import net.minecraft.resources.MinecraftKey;
+import net.minecraft.world.item.ItemStack;
 import org.bukkit.Bukkit;
 import org.bukkit.Warning;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;
@@ -41,7 +52,7 @@ public class Advancement {
     private Set<String> savedCriterionNames = null;
     @SerializedName("criteriaRequirements")
     private String[][] savedCriteriaRequirements = null;
-    private transient net.minecraft.server.v1_16_R3.Advancement savedAdvancement = null;
+    private transient net.minecraft.advancements.Advancement savedAdvancement = null;
     private transient HashMap<String, Boolean> savedHiddenStatus;
 
     /**
@@ -178,9 +189,9 @@ public class Advancement {
     public void displayMessageToEverybody(Player player) {
         IChatBaseComponent message = getMessage(player);
 
-        PacketPlayOutChat packet = new PacketPlayOutChat(message, ChatMessageType.GAME_INFO, player.getUniqueId());
+        PacketPlayOutChat packet = new PacketPlayOutChat(message, ChatMessageType.a, player.getUniqueId());
         for (Player online : Bukkit.getOnlinePlayers()) {
-            ((CraftPlayer) online).getHandle().playerConnection.sendPacket(packet);
+            ((CraftPlayer) online).getHandle().b.sendPacket(packet);
         }
     }
 
@@ -191,15 +202,15 @@ public class Advancement {
     public IChatBaseComponent getMessage(Player player) {
         String translation = "chat.type.advancement." + display.getFrame().name().toLowerCase();
 
-        IChatBaseComponent title = ChatSerializer.a(display.getTitle().getJson());
-        IChatBaseComponent description = ChatSerializer.a(display.getDescription().getJson());
+        IChatBaseComponent title = IChatBaseComponent.ChatSerializer.a(display.getTitle().getJson());
+        IChatBaseComponent description = IChatBaseComponent.ChatSerializer.a(display.getDescription().getJson());
 
         ChatModifier tm = title.getChatModifier();
         AdvancementDisplay.AdvancementFrame frame = getDisplay().getFrame();
-        EnumChatFormat typeColor = frame == AdvancementDisplay.AdvancementFrame.CHALLENGE ? EnumChatFormat.DARK_PURPLE : EnumChatFormat.GREEN;
+        EnumChatFormat typeColor = frame == AdvancementDisplay.AdvancementFrame.CHALLENGE ? EnumChatFormat.f : EnumChatFormat.k;
         EnumChatFormat color = tm.getColor() == null ? typeColor : tm.getColor().format;
 
-        return ChatSerializer.a("{"
+        return IChatBaseComponent.ChatSerializer.a("{"
                 + "\"translate\":\"" + translation + "\","
                 + "\"with\":"
                 + "["
@@ -258,8 +269,8 @@ public class Advancement {
 
         advRequirements = Arrays.stream(fixedRequirements.toArray()).toArray(String[][]::new);
 
-        net.minecraft.server.v1_16_R3.AdvancementDisplay saveDisplay = new net.minecraft.server.v1_16_R3.AdvancementDisplay(icon, display.getTitle().getBaseComponent(), display.getDescription().getBaseComponent(), backgroundTexture, display.getFrame().getNMS(), display.isToastShown(), display.isAnnouncedToChat(), true);
-        net.minecraft.server.v1_16_R3.Advancement saveAdv = new net.minecraft.server.v1_16_R3.Advancement(notName, getParent() == null ? null : getParent().getSavedAdvancement(), saveDisplay, advRewards, advCriteria, advRequirements);
+        net.minecraft.advancements.AdvancementDisplay saveDisplay = new net.minecraft.advancements.AdvancementDisplay(icon, display.getTitle().getBaseComponent(), display.getDescription().getBaseComponent(), backgroundTexture, display.getFrame().getNMS(), display.isToastShown(), display.isAnnouncedToChat(), true);
+        net.minecraft.advancements.Advancement saveAdv = new net.minecraft.advancements.Advancement(notName, getParent() == null ? null : getParent().getSavedAdvancement(), saveDisplay, advRewards, advCriteria, advRequirements);
 
 
         HashMap<MinecraftKey, AdvancementProgress> prg = new HashMap<>();
@@ -270,14 +281,14 @@ public class Advancement {
         prg.put(notName, advPrg);
 
         PacketPlayOutAdvancements packet = new PacketPlayOutAdvancements(false, Arrays.asList(saveAdv), new HashSet<>(), prg);
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+        ((CraftPlayer) player).getHandle().b.sendPacket(packet);
 
 
         HashSet<MinecraftKey> rm = new HashSet<>();
         rm.add(notName);
         prg.clear();
         packet = new PacketPlayOutAdvancements(false, new ArrayList<>(), rm, prg);
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+        ((CraftPlayer) player).getHandle().b.sendPacket(packet);
     }
 
     /**
@@ -426,11 +437,11 @@ public class Advancement {
     }
 
     @Warning(reason = "Unsafe")
-    public void saveAdvancement(net.minecraft.server.v1_16_R3.Advancement save) {
+    public void saveAdvancement(net.minecraft.advancements.Advancement save) {
         savedAdvancement = save;
     }
 
-    public net.minecraft.server.v1_16_R3.Advancement getSavedAdvancement() {
+    public net.minecraft.advancements.Advancement getSavedAdvancement() {
         return savedAdvancement;
     }
 

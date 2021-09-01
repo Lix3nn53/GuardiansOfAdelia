@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.custom;
 
-import net.minecraft.server.v1_16_R3.EntityShulkerBullet;
-import net.minecraft.server.v1_16_R3.EntityTypes;
-import net.minecraft.server.v1_16_R3.World;
+import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.projectile.EntityShulkerBullet;
+import net.minecraft.world.level.World;
 
 public class CustomShulkerBullet extends EntityShulkerBullet {
 

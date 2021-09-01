@@ -11,10 +11,10 @@ import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import net.minecraft.server.v1_16_R3.PacketPlayOutAnimation;
+import net.minecraft.network.protocol.game.PacketPlayOutAnimation;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -237,7 +237,7 @@ public class GatheringManager {
                                 customSound.play(player.getLocation());
 
                                 PacketPlayOutAnimation animation = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 0);
-                                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(animation);
+                                ((CraftPlayer) player).getHandle().b.sendPacket(animation);
                             }
                         } else if (secsRun == 2) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
@@ -252,7 +252,7 @@ public class GatheringManager {
                                 customSound.play(player.getLocation());
 
                                 PacketPlayOutAnimation animation = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 0);
-                                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(animation);
+                                ((CraftPlayer) player).getHandle().b.sendPacket(animation);
                             }
                         } else if (secsRun == 3) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
@@ -267,7 +267,7 @@ public class GatheringManager {
                                 customSound.play(player.getLocation());
 
                                 PacketPlayOutAnimation animation = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 0);
-                                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(animation);
+                                ((CraftPlayer) player).getHandle().b.sendPacket(animation);
                             }
                         } else if (secsRun == 4) {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
@@ -282,7 +282,7 @@ public class GatheringManager {
                                 customSound.play(player.getLocation());
 
                                 PacketPlayOutAnimation animation = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 0);
-                                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(animation);
+                                ((CraftPlayer) player).getHandle().b.sendPacket(animation);
                             }
                         } else if (secsRun == 5) {
                             cancel();

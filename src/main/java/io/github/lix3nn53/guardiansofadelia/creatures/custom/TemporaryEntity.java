@@ -285,6 +285,11 @@ public class TemporaryEntity implements LivingEntity {
     }
 
     @Override
+    public boolean isClimbing() {
+        return false;
+    }
+
+    @Override
     public void setAI(boolean b) {
 
     }
@@ -497,6 +502,36 @@ public class TemporaryEntity implements LivingEntity {
     @Override
     public void setFireTicks(int i) {
 
+    }
+
+    @Override
+    public boolean isVisualFire() {
+        return false;
+    }
+
+    @Override
+    public void setVisualFire(boolean b) {
+
+    }
+
+    @Override
+    public int getFreezeTicks() {
+        return 0;
+    }
+
+    @Override
+    public void setFreezeTicks(int i) {
+
+    }
+
+    @Override
+    public int getMaxFreezeTicks() {
+        return 0;
+    }
+
+    @Override
+    public boolean isFrozen() {
+        return false;
     }
 
     @Override
