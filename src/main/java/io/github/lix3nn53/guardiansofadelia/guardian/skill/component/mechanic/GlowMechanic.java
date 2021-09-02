@@ -12,7 +12,6 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class GlowMechanic extends MechanicComponent {
@@ -41,10 +40,12 @@ public class GlowMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
-        Team team = board.registerNewTeam(color.name() + "Team");
+
+        String teamName = color.name() + "GlowMechanic";
+
+        Team team = board.getTeam(teamName) != null ? board.getTeam(teamName) : board.registerNewTeam(teamName);
         team.setColor(color);
 
-        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
         for (LivingEntity target : targets) {
             target.setGlowing(true);
 
