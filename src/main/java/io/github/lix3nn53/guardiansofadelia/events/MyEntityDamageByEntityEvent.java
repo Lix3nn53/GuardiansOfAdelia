@@ -407,9 +407,9 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     text = "☆" + text;
                 }*/
                 double targetHeight = livingTarget.getHeight();
-                DamageIndicator.spawnNonPacket(text, targetLocation.clone().add(0, targetHeight + 0.5, 0));
-                //TODO make indicator via packets
-                //DamageIndicator.showPlayer(player, text, targetLocation.clone().add(0, targetHeight + 0.5, 0));
+
+                // DamageIndicator.spawnNonPacket(text, targetLocation.clone().add(0, targetHeight + 0.5, 0));
+                DamageIndicator.showPlayer(player, text, targetLocation.clone().add(0, targetHeight + 0.5, 0));
 
                 //show bossbar
                 HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5), indicatorColor, indicatorIcon);

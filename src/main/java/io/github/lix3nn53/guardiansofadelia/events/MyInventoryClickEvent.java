@@ -365,8 +365,7 @@ public class MyInventoryClickEvent implements Listener {
         if (currentName.equals(ChatColor.GREEN + "Menu")) {
             event.setCancelled(true);
             if (!cursorType.equals(Material.AIR)) {
-                InventoryUtils.giveItemToPlayer(player, cursor);
-                cursor.setAmount(0);
+                return;
             }
             GuiGeneric guiGeneric = MenuList.mainMenu();
             guiGeneric.openInventory(player);
@@ -1121,7 +1120,7 @@ public class MyInventoryClickEvent implements Listener {
 
                 rpgCharacter.setChatTag(chatTag);
 
-                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You selected a new chat tag: " + chatTag.getChatColor() + chatTag.toString());
+                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You selected a new chat tag: " + chatTag.getChatColor() + chatTag);
             }
         } else if (title.equals(org.bukkit.ChatColor.DARK_GRAY + "Select item to show in chat")) {
             if (currentType.equals(Material.BLACK_STAINED_GLASS_PANE)) return;

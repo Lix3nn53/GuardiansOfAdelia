@@ -1,57 +1,57 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.hologram;
 
-import com.comphenix.protocol.wrappers.WrappedChatComponent;
-import com.comphenix.protocol.wrappers.WrappedDataWatcher;
-import com.comphenix.protocol.wrappers.WrappedDataWatcher.WrappedDataWatcherObject;
-import io.github.lix3nn53.guardiansofadelia.utilities.packetwrapper.WrapperPlayServerEntityDestroy;
-import io.github.lix3nn53.guardiansofadelia.utilities.packetwrapper.WrapperPlayServerEntityMetadata;
-import io.github.lix3nn53.guardiansofadelia.utilities.packetwrapper.WrapperPlayServerSpawnEntity;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
+import com.comphenix.protocol.events.PacketContainer;
+import net.minecraft.network.chat.ChatComponentText;
+import net.minecraft.network.protocol.game.PacketPlayOutEntityDestroy;
+import net.minecraft.network.protocol.game.PacketPlayOutEntityMetadata;
+import net.minecraft.network.protocol.game.PacketPlayOutSpawnEntityLiving;
+import net.minecraft.world.entity.decoration.EntityArmorStand;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.entity.Player;
 
-import java.util.Optional;
+import java.lang.reflect.InvocationTargetException;
 
 public class FakeHologram {
 
-    private final int ENTITY_ID;
-    private final WrapperPlayServerSpawnEntity wrapperPlayServerSpawnEntity = new WrapperPlayServerSpawnEntity();
-    private final WrapperPlayServerEntityMetadata wrapperPlayServerEntityMetadata = new WrapperPlayServerEntityMetadata();
+    private final EntityArmorStand entityArmorStand;
 
     public FakeHologram(Location loc, String displayName) {
-        this.ENTITY_ID = FakeEntityManager.getNextEntityID();
-        FakeEntityManager.onFakeEntityCreate();
+        EntityArmorStand entity = new EntityArmorStand(((CraftWorld) loc.getWorld()).getHandle(), loc.getX(), loc.getY(), loc.getZ());
+        entity.setCustomName(new ChatComponentText(displayName));
+        entity.setCustomNameVisible(true);
+        entity.setInvisible(true);
+        entity.setNoGravity(true);
+        entity.setMarker(true);
 
-        this.wrapperPlayServerSpawnEntity.setEntityID(this.ENTITY_ID);
-        this.wrapperPlayServerSpawnEntity.setType(WrapperPlayServerSpawnEntity.ObjectTypes.ARMORSTAND);
-        this.wrapperPlayServerSpawnEntity.setX(loc.getX());
-        this.wrapperPlayServerSpawnEntity.setY(loc.getY());
-        this.wrapperPlayServerSpawnEntity.setZ(loc.getZ());
-
-        //Set the entity to associate the packet with
-        this.wrapperPlayServerEntityMetadata.setEntityID(this.ENTITY_ID);
-
-        Optional<?> opt = Optional
-                .of(WrappedChatComponent
-                        .fromChatMessage(displayName)[0].getHandle());
-
-        WrappedDataWatcher dataWatcher = new WrappedDataWatcher(this.wrapperPlayServerEntityMetadata.getMetadata());
-        dataWatcher.setObject(new WrappedDataWatcherObject(0, WrappedDataWatcher.Registry.get(Byte.class)), (byte) 0x20); //invis
-        dataWatcher.setObject(new WrappedDataWatcherObject(2, WrappedDataWatcher.Registry.getChatComponentSerializer(true)), opt);
-        dataWatcher.setObject(new WrappedDataWatcherObject(3, WrappedDataWatcher.Registry.get(Boolean.class)), true); //custom name visible
-        dataWatcher.setObject(new WrappedDataWatcherObject(5, WrappedDataWatcher.Registry.get(Boolean.class)), true); //no gravity
-        dataWatcher.setObject(new WrappedDataWatcherObject(11, WrappedDataWatcher.Registry.get(Byte.class)), (byte) (0x01 | 0x08 | 0x10)); //isSmall, noBasePlate, set Marker
-
-        this.wrapperPlayServerEntityMetadata.setMetadata(dataWatcher.getWatchableObjects());
+        this.entityArmorStand = entity;
     }
 
     public void showToPlayer(Player p) {
-        this.wrapperPlayServerSpawnEntity.sendPacket(p);
-        this.wrapperPlayServerEntityMetadata.sendPacket(p);
+        PacketPlayOutSpawnEntityLiving packet = new PacketPlayOutSpawnEntityLiving(this.entityArmorStand);
+
+        PacketPlayOutEntityMetadata entityMetaPacket = new PacketPlayOutEntityMetadata(this.entityArmorStand.getId(),
+                this.entityArmorStand.getDataWatcher(), true);
+
+        ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
+
+        try {
+            protocolManager.sendServerPacket(p, PacketContainer.fromPacket(packet));
+            protocolManager.sendServerPacket(p, PacketContainer.fromPacket(entityMetaPacket));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void destroy(Player p) {
-        WrapperPlayServerEntityDestroy destroy = new WrapperPlayServerEntityDestroy();
-        destroy.setEntityIds(new int[]{ENTITY_ID});
-        destroy.sendPacket(p);
+        PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(this.entityArmorStand.getId());
+
+        try {
+            ProtocolLibrary.getProtocolManager().sendServerPacket(p, PacketContainer.fromPacket(packet));
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }
