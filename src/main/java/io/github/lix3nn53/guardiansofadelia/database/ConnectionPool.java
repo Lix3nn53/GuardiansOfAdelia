@@ -21,7 +21,7 @@ public class ConnectionPool {
                         database +
                         "?useSSL=false"
         );
-        config.setDriverClassName("com.mysql.jdbc.Driver");
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         config.setUsername(username);
         config.setPassword(password);
         config.setMinimumIdle(minimumConnections);
