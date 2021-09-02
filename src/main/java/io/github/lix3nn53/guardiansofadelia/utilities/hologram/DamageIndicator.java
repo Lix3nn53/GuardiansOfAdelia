@@ -20,7 +20,7 @@ public class DamageIndicator {
                 hologram.getArmorStand().remove();
                 cancel();
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 18L);
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 18L);
     }
 
     public static void showPlayer(Player player, String text, Location baseLocation) {

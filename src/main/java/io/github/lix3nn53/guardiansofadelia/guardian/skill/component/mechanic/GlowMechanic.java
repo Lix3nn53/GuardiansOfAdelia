@@ -3,11 +3,13 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.inventivetalent.glow.GlowAPI;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +17,7 @@ import java.util.List;
 
 public class GlowMechanic extends MechanicComponent {
 
-    private final GlowAPI.Color color;
+    private final ChatColor color;
     private final List<Integer> ticks;
 
     public GlowMechanic(ConfigurationSection configurationSection) {
@@ -25,7 +27,7 @@ public class GlowMechanic extends MechanicComponent {
             configLoadError("color");
         }
 
-        this.color = GlowAPI.Color.valueOf(configurationSection.getString("color"));
+        this.color = ChatColor.valueOf(configurationSection.getString("color"));
 
         if (configurationSection.contains("ticks")) {
             this.ticks = configurationSection.getIntegerList("ticks");
@@ -38,9 +40,19 @@ public class GlowMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
+        Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
+        Team team = board.registerNewTeam(color.name() + "Team");
+        team.setColor(color);
+
         Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
         for (LivingEntity target : targets) {
-            GlowAPI.setGlowing(target, color, onlinePlayers);
+            target.setGlowing(true);
+
+            if (target instanceof Player) {
+                team.addEntry(target.getName());
+            } else {
+                team.addEntry(target.getUniqueId().toString());
+            }
         }
 
         if (!ticks.isEmpty()) {
@@ -49,7 +61,13 @@ public class GlowMechanic extends MechanicComponent {
                 @Override
                 public void run() {
                     for (LivingEntity target : targets) {
-                        GlowAPI.setGlowing(target, false, onlinePlayers);
+                        target.setGlowing(false);
+
+                        if (target instanceof Player) {
+                            team.removeEntry(target.getName());
+                        } else {
+                            team.removeEntry(target.getUniqueId().toString());
+                        }
                     }
                 }
             }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), ticks.get(skillLevel - 1));
