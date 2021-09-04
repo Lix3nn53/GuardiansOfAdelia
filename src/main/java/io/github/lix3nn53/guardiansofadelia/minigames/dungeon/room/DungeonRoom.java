@@ -108,4 +108,16 @@ public class DungeonRoom {
     public void addDoor(DungeonRoomDoor door) {
         doors.add(door);
     }
+
+    public List<DungeonRoomDoor> getDoors() {
+        return doors;
+    }
+
+    public HashMap<Integer, List<DungeonRoomSpawner>> getWaveToSpawners() {
+        return waveToSpawners;
+    }
+
+    public List<Integer> getNextRooms() {
+        return nextRooms;
+    }
 }

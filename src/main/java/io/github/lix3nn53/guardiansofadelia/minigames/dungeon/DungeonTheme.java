@@ -61,6 +61,14 @@ public class DungeonTheme {
         return name;
     }
 
+    public String getGearTag() {
+        return gearTag;
+    }
+
+    public GearLevel getGearLevel() {
+        return gearLevel;
+    }
+
     public int getLevelReq() {
         return levelReq;
     }

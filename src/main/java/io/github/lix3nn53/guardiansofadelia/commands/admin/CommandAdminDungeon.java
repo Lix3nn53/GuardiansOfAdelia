@@ -38,9 +38,9 @@ public class CommandAdminDungeon implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon addRoom [dungeon] <roomNo>");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon addRoomSpawner [dungeon] <instance> <room> <wave> [mobCode] <mobLevel> <amount>");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon addRoomDoor [dungeon] <instance> <room> [material] - select WorldEdit region first!");
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon addRoom [theme] <roomNo>");
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon addRoomSpawner [theme] <instance> <room> <wave> [mobCode] <mobLevel> <amount>");
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon addRoomDoor [theme] <instance> <room> [material] - select WorldEdit region first!");
 
             } else if (args[0].equals("addRoom")) {
                 String dungeonThemeStr = args[1];

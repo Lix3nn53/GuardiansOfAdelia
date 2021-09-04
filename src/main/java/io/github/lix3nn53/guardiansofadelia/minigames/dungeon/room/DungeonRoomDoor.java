@@ -15,6 +15,14 @@ public class DungeonRoomDoor {
         this.boundingBox = boundingBox;
     }
 
+    public Material getMaterial() {
+        return material;
+    }
+
+    public BoundingBox getBoundingBox() {
+        return boundingBox;
+    }
+
     public void close(Location dungeonStart) {
         BoundingBox shift = boundingBox.clone().shift(dungeonStart);
 

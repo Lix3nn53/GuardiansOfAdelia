@@ -43,4 +43,16 @@ public class DungeonRoomSpawner {
     public String getMobCode() {
         return mobCode;
     }
+
+    public int getMobLevel() {
+        return mobLevel;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public Vector getOffset() {
+        return offset;
+    }
 }
