@@ -117,9 +117,22 @@ public class DungeonConfiguration {
 
             List<Integer> startingRooms = section.getIntegerList("startingRooms");
 
+            // Checkpoints
+            List<Vector> checkpoints = new ArrayList<>();
+            int checkpointCount = dungeonRoomsConfig.getInt(code + ".checkpoints.count");
+            for (int checkpointNumber = 1; checkpointNumber <= checkpointCount; checkpointNumber++) {
+
+                double xC = dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".x");
+                double yC = dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".y");
+                double zC = dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".z");
+
+                Vector vector = new Vector(xC, yC, zC);
+
+                checkpoints.add(vector);
+            }
 
             DungeonTheme dungeonTheme = new DungeonTheme(code, name, gearTag, gearLevel, portalColor, levelReq, timeLimitInMinutes,
-                    bossInternalName, dungeonRooms, startingRooms);
+                    bossInternalName, dungeonRooms, startingRooms, checkpoints);
 
             MiniGameManager.addDungeonTheme(code, dungeonTheme);
         }
@@ -159,23 +172,17 @@ public class DungeonConfiguration {
                 List<Location> locations = new ArrayList<>();
                 locations.add(start);
 
+                DungeonTheme dungeonTheme = dungeonThemes.get(themeCode);
+
+                List<Vector> checkpointOffsets = dungeonTheme.getCheckpointOffsets();
+
                 List<Checkpoint> checkpoints = new ArrayList<>();
-                int checkpointCount = dungeonRoomsConfig.getInt(code + ".checkpoints.count");
-
-                for (int checkpointNumber = 1; checkpointNumber <= checkpointCount; checkpointNumber++) {
-                    String worldStringC = dungeonRoomsConfig.getString(code + ".checkpoints.loc" + checkpointNumber + ".world");
-                    World worldC = Bukkit.getWorld(worldStringC);
-                    double xC = dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".x");
-                    double yC = dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".y");
-                    double zC = dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".z");
-                    float yawC = (float) dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".yaw");
-                    float pitchC = (float) dungeonRoomsConfig.getDouble(code + ".checkpoints.loc" + checkpointNumber + ".pitch");
-                    Location locationC = new Location(worldC, xC, yC, zC, yawC, pitchC);
-
-                    checkpoints.add(new Checkpoint(locationC));
+                for (Vector offset : checkpointOffsets) {
+                    Location add = start.clone().add(offset);
+                    Checkpoint checkpoint = new Checkpoint(add);
+                    checkpoints.add(checkpoint);
                 }
 
-                DungeonTheme dungeonTheme = dungeonThemes.get(themeCode);
                 DungeonInstance dungeonInstance = new DungeonInstance(dungeonTheme, i, locations, checkpoints);
                 MiniGameManager.addDungeon(themeCode, i, dungeonInstance);
             }

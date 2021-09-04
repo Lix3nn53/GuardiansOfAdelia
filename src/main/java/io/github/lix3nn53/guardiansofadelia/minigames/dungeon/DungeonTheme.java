@@ -17,6 +17,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.Vector;
 
 import java.util.*;
 
@@ -35,8 +36,10 @@ public class DungeonTheme {
     private final HashMap<Integer, DungeonRoom> dungeonRooms;
     private final List<Integer> startingRooms;
 
+    private final List<Vector> checkpointOffsets;
+
     public DungeonTheme(String code, String name, String gearTag, GearLevel gearLevel, PortalColor portalColor, int levelReq,
-                        int timeLimitInMinutes, String bossInternalName, HashMap<Integer, DungeonRoom> dungeonRooms, List<Integer> startingRooms) {
+                        int timeLimitInMinutes, String bossInternalName, HashMap<Integer, DungeonRoom> dungeonRooms, List<Integer> startingRooms, List<Vector> checkpoints) {
         this.code = code;
         this.name = ChatColor.translateAlternateColorCodes('&', name);
         this.gearTag = gearTag;
@@ -47,6 +50,7 @@ public class DungeonTheme {
         this.bossInternalName = bossInternalName;
         this.dungeonRooms = dungeonRooms;
         this.startingRooms = startingRooms;
+        this.checkpointOffsets = checkpoints;
     }
 
     public String getCode() {
@@ -67,6 +71,10 @@ public class DungeonTheme {
 
     public String getBossInternalName() {
         return bossInternalName;
+    }
+
+    public List<Vector> getCheckpointOffsets() {
+        return checkpointOffsets;
     }
 
     public String getBossName() {
