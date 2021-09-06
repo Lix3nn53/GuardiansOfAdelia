@@ -79,6 +79,10 @@ public class Hologram {
         }
     }
 
+    public void remove() {
+        as.remove();
+    }
+
     public Location getLocation() {
         return loc;
     }

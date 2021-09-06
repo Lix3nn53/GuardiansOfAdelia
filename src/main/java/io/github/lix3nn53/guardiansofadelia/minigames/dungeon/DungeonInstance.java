@@ -4,14 +4,19 @@ import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoom;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomDoor;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomSpawner;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomState;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +30,8 @@ public class DungeonInstance extends Minigame {
     private final HashMap<Integer, DungeonRoomState> dungeonRoomStates = new HashMap<>();
     // State
     private List<Integer> activeRooms = new ArrayList<>();
+    // Debug
+    private final List<Hologram> debugHolograms = new ArrayList<>();
 
     public DungeonInstance(DungeonTheme theme, int instanceNo, List<Location> startLocation, List<Checkpoint> checkpoints) {
         super("Dungeon " + theme.getName(), ChatColor.AQUA, theme.getName(), instanceNo, theme.getLevelReq()
@@ -40,6 +47,7 @@ public class DungeonInstance extends Minigame {
         }
 
         reformParties();
+        remakeDebugHolograms();
     }
 
     @Override
@@ -130,5 +138,49 @@ public class DungeonInstance extends Minigame {
             }
         }
         return teamsAtBestScore;
+    }
+
+    public void remakeDebugHolograms() {
+        for (Hologram hologram : debugHolograms) {
+            HologramManager.removeHologram(hologram);
+        }
+        debugHolograms.clear();
+
+        Set<Integer> dungeonRoomKeys = theme.getDungeonRoomKeys();
+
+        Location startLocation = getStartLocation(1);
+
+        for (int roomKey : dungeonRoomKeys) {
+            DungeonRoom room = theme.getDungeonRoom(roomKey);
+
+            List<DungeonRoomDoor> doors = room.getDoors();
+            for (int i = 0; i < doors.size(); i++) {
+                DungeonRoomDoor door = doors.get(i);
+                Vector center = door.getBoundingBox().getCenter().clone();
+
+                Location add = startLocation.clone().add(center);
+
+                Hologram hologram = new Hologram(add, ChatColor.YELLOW + "Room-" + roomKey + " Door-" + i);
+                HologramManager.addHologram(hologram);
+                debugHolograms.add(hologram);
+            }
+
+            HashMap<Integer, List<DungeonRoomSpawner>> waveToSpawners = room.getWaveToSpawners();
+            for (int i : waveToSpawners.keySet()) {
+                List<DungeonRoomSpawner> spawners = waveToSpawners.get(i);
+
+                for (int y = 0; y < spawners.size(); y++) {
+                    DungeonRoomSpawner spawner = spawners.get(y);
+
+                    Vector offset = spawner.getOffset();
+
+                    Location add = startLocation.clone().add(offset);
+
+                    Hologram hologram = new Hologram(add, ChatColor.RED + "Room-" + roomKey + " Wave-" + i + " Spawner-" + y);
+                    HologramManager.addHologram(hologram);
+                    debugHolograms.add(hologram);
+                }
+            }
+        }
     }
 }

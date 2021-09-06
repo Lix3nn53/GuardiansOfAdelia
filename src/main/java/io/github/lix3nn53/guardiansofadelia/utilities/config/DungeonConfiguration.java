@@ -39,9 +39,9 @@ public class DungeonConfiguration {
     }
 
     static void loadConfigs() {
-        loadDungeons();
         loadDungeonThemes();
         loadDungeonGates();
+        loadInstances();
     }
 
     static void writeConfigs() {
@@ -249,7 +249,7 @@ public class DungeonConfiguration {
         }
     }
 
-    private static void loadDungeons() {
+    private static void loadInstances() {
         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
         for (String themeCode : dungeonThemes.keySet()) {
             int roomCount = ConfigurationUtils.getChildComponentCount(dungeonInstancesConfig, themeCode);
@@ -290,7 +290,7 @@ public class DungeonConfiguration {
 
         for (String themeCode : dungeonThemes.keySet()) {
             for (int i = 1; i < 999; i++) {
-                if (MiniGameManager.instanceExists(themeCode, i)) {
+                if (MiniGameManager.dungeonInstanceExists(themeCode, i)) {
                     DungeonInstance dungeonInstance = MiniGameManager.getDungeonInstance(themeCode, i);
 
                     String code = themeCode + i;

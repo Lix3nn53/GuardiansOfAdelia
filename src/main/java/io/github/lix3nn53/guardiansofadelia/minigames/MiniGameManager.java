@@ -116,7 +116,7 @@ public class MiniGameManager {
         return codeToDungeon.get(dungeonTheme + instanceNo);
     }
 
-    public static boolean instanceExists(String dungeonTheme, int instanceNo) {
+    public static boolean dungeonInstanceExists(String dungeonTheme, int instanceNo) {
         return codeToDungeon.containsKey(dungeonTheme + instanceNo);
     }
 

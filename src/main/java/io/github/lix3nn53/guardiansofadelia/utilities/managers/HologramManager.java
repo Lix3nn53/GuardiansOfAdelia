@@ -32,6 +32,7 @@ public class HologramManager {
                 chunkKeyToHologram.put(chunkKey, holograms);
             }
         }
+        hologram.remove();
     }
 
     public static void addHologram(Hologram hologram) {
