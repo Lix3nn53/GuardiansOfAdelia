@@ -85,6 +85,10 @@ public class DungeonTheme {
         return checkpointOffsets;
     }
 
+    public void addCheckpointOffset(Vector offset) {
+        checkpointOffsets.add(offset);
+    }
+
     public String getBossName() {
         MobManager mobManager = MythicMobs.inst().getMobManager();
         MythicMob mythicMob = mobManager.getMythicMob(bossInternalName);
@@ -200,5 +204,12 @@ public class DungeonTheme {
 
     public List<Integer> getStartingRooms() {
         return startingRooms;
+    }
+
+    public boolean addStartingRooms(int roomNo) {
+        if (!dungeonRooms.containsKey(roomNo)) return false;
+        startingRooms.add(roomNo);
+
+        return true;
     }
 }

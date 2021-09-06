@@ -416,7 +416,7 @@ public abstract class Minigame {
     }
 
     public Location getStartLocation(int teamNo) {
-        return startLocations.get(teamNo - 1);
+        return startLocations.get(teamNo - 1).clone();
     }
 
     public boolean isInGame() {
@@ -654,6 +654,11 @@ public abstract class Minigame {
         }
 
         return false;
+    }
+
+    public void addCheckpoint(Checkpoint checkpoint) {
+        checkpoints.add(checkpoint);
+        checkpoint.createModel();
     }
 
     public void onPlayerDeath(Player player) {
