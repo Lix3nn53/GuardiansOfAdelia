@@ -108,7 +108,7 @@ public class MiniGameManager {
         return winByMostKillsList.get(instanceNo - 1);
     }
 
-    public static void addDungeon(String dungeonTheme, int instanceNo, DungeonInstance dungeonInstance) {
+    public static void addDungeonInstance(String dungeonTheme, int instanceNo, DungeonInstance dungeonInstance) {
         codeToDungeon.put(dungeonTheme + instanceNo, dungeonInstance);
     }
 
@@ -116,12 +116,8 @@ public class MiniGameManager {
         return codeToDungeon.get(dungeonTheme + instanceNo);
     }
 
-    public static boolean dungeonExists(String dungeonTheme, int instanceNo) {
+    public static boolean instanceExists(String dungeonTheme, int instanceNo) {
         return codeToDungeon.containsKey(dungeonTheme + instanceNo);
-    }
-
-    public static Set<String> getDungeons() {
-        return codeToDungeon.keySet();
     }
 
     public static DungeonTheme getDungeonFromPortal(Portal portal) {
@@ -132,7 +128,7 @@ public class MiniGameManager {
         return null;
     }
 
-    public static void addMinigamePortal(Location location, String dungeonThemeCode) {
+    public static void addDungeonPortal(Location location, String dungeonThemeCode) {
         DungeonTheme dungeonTheme = dungeonThemes.get(dungeonThemeCode);
         Portal portal = new Portal(location, dungeonTheme.getPortalColor(), dungeonTheme.getName());
         portalToDungeonTheme.put(portal, dungeonThemeCode);

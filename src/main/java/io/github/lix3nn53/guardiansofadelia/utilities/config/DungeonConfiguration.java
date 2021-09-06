@@ -28,13 +28,13 @@ import java.util.Set;
 public class DungeonConfiguration {
 
     private static FileConfiguration dungeonThemesConfig;
-    private static FileConfiguration dungeonRoomsConfig;
+    private static FileConfiguration dungeonInstancesConfig;
     private static FileConfiguration dungeonGatesConfig;
     private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "dungeons";
 
     static void createConfigs() {
         dungeonThemesConfig = ConfigurationUtils.createConfig(filePath, "dungeonThemes.yml");
-        dungeonRoomsConfig = ConfigurationUtils.createConfig(filePath, "dungeonInstances.yml");
+        dungeonInstancesConfig = ConfigurationUtils.createConfig(filePath, "dungeonInstances.yml");
         dungeonGatesConfig = ConfigurationUtils.createConfig(filePath, "dungeonGates.yml");
     }
 
@@ -46,6 +46,7 @@ public class DungeonConfiguration {
 
     static void writeConfigs() {
         writeDungeonThemes("dungeonThemes.yml");
+        writeInstances("dungeonInstances.yml");
     }
 
     private static void loadDungeonThemes() {
@@ -244,24 +245,24 @@ public class DungeonConfiguration {
             float yaw = (float) dungeonGatesConfig.getDouble(code + ".yaw");
             float pitch = (float) dungeonGatesConfig.getDouble(code + ".pitch");
             Location location = new Location(world, x, y, z, yaw, pitch);
-            MiniGameManager.addMinigamePortal(location, code);
+            MiniGameManager.addDungeonPortal(location, code);
         }
     }
 
     private static void loadDungeons() {
         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
         for (String themeCode : dungeonThemes.keySet()) {
-            int roomCount = ConfigurationUtils.getChildComponentCount(dungeonRoomsConfig, themeCode);
+            int roomCount = ConfigurationUtils.getChildComponentCount(dungeonInstancesConfig, themeCode);
 
             for (int i = 1; i <= roomCount; i++) {
                 String code = themeCode + i;
-                String worldString = dungeonRoomsConfig.getString(code + ".start.world");
+                String worldString = dungeonInstancesConfig.getString(code + ".start.world");
                 World world = Bukkit.getWorld(worldString);
-                double x = dungeonRoomsConfig.getDouble(code + ".start.x");
-                double y = dungeonRoomsConfig.getDouble(code + ".start.y");
-                double z = dungeonRoomsConfig.getDouble(code + ".start.z");
-                float yaw = (float) dungeonRoomsConfig.getDouble(code + ".start.yaw");
-                float pitch = (float) dungeonRoomsConfig.getDouble(code + ".start.pitch");
+                double x = dungeonInstancesConfig.getDouble(code + ".start.x");
+                double y = dungeonInstancesConfig.getDouble(code + ".start.y");
+                double z = dungeonInstancesConfig.getDouble(code + ".start.z");
+                float yaw = (float) dungeonInstancesConfig.getDouble(code + ".start.yaw");
+                float pitch = (float) dungeonInstancesConfig.getDouble(code + ".start.pitch");
                 Location start = new Location(world, x, y, z, yaw, pitch);
 
                 List<Location> locations = new ArrayList<>();
@@ -279,8 +280,38 @@ public class DungeonConfiguration {
                 }
 
                 DungeonInstance dungeonInstance = new DungeonInstance(dungeonTheme, i, locations, checkpoints);
-                MiniGameManager.addDungeon(themeCode, i, dungeonInstance);
+                MiniGameManager.addDungeonInstance(themeCode, i, dungeonInstance);
             }
+        }
+    }
+
+    private static void writeInstances(String fileName) {
+        HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
+
+        for (String themeCode : dungeonThemes.keySet()) {
+            for (int i = 1; i < 999; i++) {
+                if (MiniGameManager.instanceExists(themeCode, i)) {
+                    DungeonInstance dungeonInstance = MiniGameManager.getDungeonInstance(themeCode, i);
+
+                    String code = themeCode + i;
+
+                    Location startLocation = dungeonInstance.getStartLocation(1);
+                    dungeonInstancesConfig.set(code + ".start.world", startLocation.getWorld().getName());
+                    dungeonInstancesConfig.set(code + ".start.x", startLocation.getX());
+                    dungeonInstancesConfig.set(code + ".start.y", startLocation.getY());
+                    dungeonInstancesConfig.set(code + ".start.z", startLocation.getZ());
+                    dungeonInstancesConfig.set(code + ".start.yaw", startLocation.getYaw());
+                    dungeonInstancesConfig.set(code + ".start.pitch", startLocation.getPitch());
+                } else {
+                    break;
+                }
+            }
+        }
+
+        try {
+            dungeonInstancesConfig.save(filePath + File.separator + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
