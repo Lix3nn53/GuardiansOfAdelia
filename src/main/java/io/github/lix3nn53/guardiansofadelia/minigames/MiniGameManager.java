@@ -302,4 +302,16 @@ public class MiniGameManager {
     public static void addDungeonTheme(String code, DungeonTheme dungeonTheme) {
         dungeonThemes.put(code, dungeonTheme);
     }
+
+    public static void clearDungeonData() {
+        for (String key : codeToDungeon.keySet()) {
+            DungeonInstance dungeonInstance = codeToDungeon.get(key);
+
+            dungeonInstance.clearDebugHolograms();
+        }
+
+        dungeonThemes.clear();
+        codeToDungeon.clear();
+        portalToDungeonTheme.clear();
+    }
 }

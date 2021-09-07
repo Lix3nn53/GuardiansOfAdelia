@@ -13,6 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoom;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomDoor;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomSpawner;
+import io.github.lix3nn53.guardiansofadelia.utilities.config.DungeonConfiguration;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,6 +28,7 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class CommandAdminDungeon implements CommandExecutor {
 
@@ -39,14 +41,62 @@ public class CommandAdminDungeon implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon tp [theme] <instanceNo>");
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon holo [theme] - remakes holograms");
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon door [theme] - close/open doors");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon add room [theme] <roomNo>");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon add door [theme] <roomNo> <material>" + ChatColor.GOLD + " !!select WorldEdit region first!!");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon add wave [theme] <roomNo> <waveNo> <mobCode> <mobLevel> <amount>" + ChatColor.GOLD + " !!look at spawner location block!!");
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon add spawner [theme] <roomNo> <waveNo> <mobCode> <mobLevel> <amount>" + ChatColor.GOLD + " !!look at spawner location block!!");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon add checkpoint" + ChatColor.GOLD + " !!look at spawner location block!!");
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon reload - DELETES NEW CHANGES");
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon save - SAVES NEW CHANGES");
+            } else if (args[0].equals("reload")) {
+                MiniGameManager.clearDungeonData();
+
+                DungeonConfiguration.createConfigs();
+                DungeonConfiguration.loadConfigs();
+            } else if (args[0].equals("save")) {
+                DungeonConfiguration.writeConfigs();
+            } else if (args[0].equals("tp")) {
+                String key = args[1].toUpperCase();
+                int instanceNo = Integer.parseInt(args[2]);
+
+                DungeonInstance dungeonInstance = MiniGameManager.getDungeonInstance(key, instanceNo);
+
+                Location startLocation = dungeonInstance.getStartLocation(1);
+
+                player.teleport(startLocation);
+            } else if (args[0].equals("holo")) {
+                String key = args[1].toUpperCase();
+
+                remakeHolograms(key);
+            } else if (args[0].equals("door")) {
+                String key = args[1].toUpperCase();
+
+                DungeonInstance dungeonInstance = MiniGameManager.getDungeonInstance(key, 1);
+
+                Location startLocation = dungeonInstance.getStartLocation(1);
+                DungeonTheme theme = dungeonInstance.getTheme();
+
+                Set<Integer> dungeonRoomKeys = theme.getDungeonRoomKeys();
+                for (int roomKey : dungeonRoomKeys) {
+                    DungeonRoom room = theme.getDungeonRoom(roomKey);
+
+                    List<DungeonRoomDoor> doors = room.getDoors();
+                    for (DungeonRoomDoor door : doors) {
+                        if (door.isOpen()) {
+                            door.close(startLocation);
+                        } else {
+                            door.open(startLocation);
+                        }
+                    }
+                }
+
+                dungeonInstance.remakeDebugHolograms();
             } else if (args[0].equals("add")) {
                 switch (args[1]) {
                     case "room": {
-                        String key = args[2];
+                        String key = args[2].toUpperCase();
                         int roomNo = Integer.parseInt(args[3]);
 
                         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
@@ -63,7 +113,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         break;
                     }
                     case "door": {
-                        String key = args[2];
+                        String key = args[2].toUpperCase();
                         int roomNo = Integer.parseInt(args[3]);
                         Material material = Material.valueOf(args[4]);
 
@@ -97,7 +147,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         break;
                     }
                     case "spawner": {
-                        String key = args[2];
+                        String key = args[2].toUpperCase();
                         int roomNo = Integer.parseInt(args[3]);
                         int waveNo = Integer.parseInt(args[4]);
                         String mobCode = args[5];
@@ -111,8 +161,8 @@ public class CommandAdminDungeon implements CommandExecutor {
                         Location add = targetBlock.getLocation().add(0.5, 1, 0.5);
 
                         Location start = MiniGameManager.getDungeonInstance(key, 1).getStartLocation(1);
-                        Vector subtract = start.toVector().subtract(add.toVector());
-                        DungeonRoomSpawner spawner = new DungeonRoomSpawner(mobCode, mobLevel, amount, subtract);
+                        Vector offset = start.toVector().subtract(add.toVector()).multiply(-1);
+                        DungeonRoomSpawner spawner = new DungeonRoomSpawner(mobCode, mobLevel, amount, offset);
 
                         DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);
                         dungeonRoom.addSpawner(waveNo, spawner);
@@ -121,7 +171,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         break;
                     }
                     case "checkpoint": {
-                        String key = args[2];
+                        String key = args[2].toUpperCase();
 
                         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                         DungeonTheme dungeonTheme = dungeonThemes.get(key);
@@ -130,7 +180,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         Location add = targetBlock.getLocation().add(0.5, 1, 0.5);
 
                         Location start = MiniGameManager.getDungeonInstance(key, 1).getStartLocation(1);
-                        Vector offset = start.toVector().subtract(add.toVector());
+                        Vector offset = start.toVector().subtract(add.toVector()).multiply(-1);
 
                         dungeonTheme.addCheckpointOffset(offset);
 
@@ -150,7 +200,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         break;
                     }
                     case "startroom": {
-                        String key = args[2];
+                        String key = args[2].toUpperCase();
                         int roomNo = Integer.parseInt(args[3]);
 
                         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
@@ -172,11 +222,12 @@ public class CommandAdminDungeon implements CommandExecutor {
             // If the player (or console) uses our command correct, we can return true
             return true;
         }
+
         return false;
     }
 
     private void remakeHolograms(String themeKey) {
-        for (int i = 0; i < 999; i++) {
+        for (int i = 1; i < 999; i++) {
             if (MiniGameManager.dungeonInstanceExists(themeKey, i)) {
                 DungeonInstance dungeonInstance = MiniGameManager.getDungeonInstance(themeKey, i);
 

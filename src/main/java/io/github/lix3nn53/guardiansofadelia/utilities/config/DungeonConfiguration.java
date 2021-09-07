@@ -32,19 +32,19 @@ public class DungeonConfiguration {
     private static FileConfiguration dungeonGatesConfig;
     private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "dungeons";
 
-    static void createConfigs() {
+    public static void createConfigs() {
         dungeonThemesConfig = ConfigurationUtils.createConfig(filePath, "dungeonThemes.yml");
         dungeonInstancesConfig = ConfigurationUtils.createConfig(filePath, "dungeonInstances.yml");
         dungeonGatesConfig = ConfigurationUtils.createConfig(filePath, "dungeonGates.yml");
     }
 
-    static void loadConfigs() {
+    public static void loadConfigs() {
         loadDungeonThemes();
         loadDungeonGates();
         loadInstances();
     }
 
-    static void writeConfigs() {
+    public static void writeConfigs() {
         writeDungeonThemes("dungeonThemes.yml");
         writeInstances("dungeonInstances.yml");
     }
@@ -171,7 +171,7 @@ public class DungeonConfiguration {
                 int doorIndex = 1;
                 for (DungeonRoomDoor door : doors) {
 
-                    dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".door" + doorIndex + ".material", door.getMaterial());
+                    dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".door" + doorIndex + ".material", door.getMaterial().name());
 
                     BoundingBox boundingBox = door.getBoundingBox();
 

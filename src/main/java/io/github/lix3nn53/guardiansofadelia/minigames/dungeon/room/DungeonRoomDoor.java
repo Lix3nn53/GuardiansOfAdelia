@@ -9,6 +9,8 @@ import org.bukkit.util.Vector;
 public class DungeonRoomDoor {
     private final Material material;
     private final BoundingBox boundingBox;
+    // State
+    private boolean isOpen = false;
 
     public DungeonRoomDoor(Material material, BoundingBox boundingBox) {
         this.material = material;
@@ -37,6 +39,8 @@ public class DungeonRoomDoor {
                 }
             }
         }
+
+        isOpen = false;
     }
 
     public void open(Location dungeonStart) {
@@ -53,5 +57,11 @@ public class DungeonRoomDoor {
                 }
             }
         }
+
+        isOpen = true;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
     }
 }

@@ -144,11 +144,15 @@ public class DungeonInstance extends Minigame {
         return teamsAtBestScore;
     }
 
-    public void remakeDebugHolograms() {
+    public void clearDebugHolograms() {
         for (Hologram hologram : debugHolograms) {
             HologramManager.removeHologram(hologram);
         }
         debugHolograms.clear();
+    }
+
+    public void remakeDebugHolograms() {
+        clearDebugHolograms();
 
         Set<Integer> dungeonRoomKeys = theme.getDungeonRoomKeys();
 
@@ -164,7 +168,12 @@ public class DungeonInstance extends Minigame {
 
                 Location add = startLocation.clone().add(center);
 
-                Hologram hologram = new Hologram(add, ChatColor.YELLOW + "Room-" + roomKey + " Door-" + i);
+                String state = "Closed";
+                if (door.isOpen()) {
+                    state = "Open";
+                }
+
+                Hologram hologram = new Hologram(add, ChatColor.YELLOW + "Room-" + roomKey + " Door-" + i + "(" + state + ")");
                 HologramManager.addHologram(hologram);
                 debugHolograms.add(hologram);
             }
@@ -183,8 +192,19 @@ public class DungeonInstance extends Minigame {
                     Hologram hologram = new Hologram(add, ChatColor.RED + "Room-" + roomKey + " Wave-" + i + " Spawner-" + y);
                     HologramManager.addHologram(hologram);
                     debugHolograms.add(hologram);
+
+                    String mobCode = spawner.getMobCode();
+                    int mobLevel = spawner.getMobLevel();
+                    int amount = spawner.getAmount();
+                    hologram = new Hologram(add.clone().add(0, 0.5, 0), ChatColor.RED + mobCode + " lv" + mobLevel + " x" + amount);
+                    HologramManager.addHologram(hologram);
+                    debugHolograms.add(hologram);
                 }
             }
         }
+    }
+
+    public DungeonTheme getTheme() {
+        return theme;
     }
 }

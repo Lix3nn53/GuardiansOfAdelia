@@ -99,7 +99,7 @@ public class LootChest {
             public void run() {
                 arrangementFillCircle.play(add, new Vector());
             }
-        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 20, 20L);
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20, 20L);
     }
 
     public void stopPlayingParticles() {

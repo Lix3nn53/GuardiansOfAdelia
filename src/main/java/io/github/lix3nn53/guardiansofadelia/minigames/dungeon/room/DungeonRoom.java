@@ -68,18 +68,26 @@ public class DungeonRoom {
         state.onMobKill(1);
 
         if (state.isClear()) {
-            if (waveToSpawners.containsKey(currentWave + 1)) {
+            currentWave++;
+
+            if (waveToSpawners.containsKey(currentWave)) {
                 state.onNextWaveStart();
 
                 for (Player player : players) {
                     player.sendMessage(ChatColor.LIGHT_PURPLE + "Room-" + roomNo + " wave-" + currentWave + " incoming!");
                 }
 
+                spawners = waveToSpawners.get(currentWave);
+
                 for (DungeonRoomSpawner spawner : spawners) {
                     List<Entity> spawned = spawner.spawn(dungeonStart);
                     state.onMobSpawn(spawned.size());
                 }
             } else {
+                for (Player player : players) {
+                    player.sendMessage(ChatColor.LIGHT_PURPLE + "Room-" + roomNo + " completed!");
+                }
+
                 return true;
             }
         }
