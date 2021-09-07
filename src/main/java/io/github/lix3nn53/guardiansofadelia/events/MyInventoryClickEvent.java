@@ -376,6 +376,8 @@ public class MyInventoryClickEvent implements Listener {
                     guiGeneric.openInventory(player);
                 }
             }.runTaskLater(GuardiansOfAdelia.getInstance(), 1);
+        } else if (currentType.equals(Material.ARROW)) {
+            event.setCancelled(true);
         } else if (title.equals(ChatColor.DARK_GRAY + "Guardians of Adelia")) {
             if (currentName.equals(ChatColor.GREEN + "Guides")) {
                 GuiGeneric guide = MenuList.guide();

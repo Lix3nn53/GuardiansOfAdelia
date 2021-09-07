@@ -245,6 +245,8 @@ public class InventoryUtils {
 
     /**
      * A utility method to support versions that use null or air ItemStacks.
+     *
+     * @return true if is air or null
      */
     public static boolean isAirOrNull(ItemStack item) {
         return item == null || item.getType().equals(Material.AIR);

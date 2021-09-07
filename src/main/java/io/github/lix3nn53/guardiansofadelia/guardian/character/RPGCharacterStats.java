@@ -502,10 +502,10 @@ public class RPGCharacterStats {
                         ItemStack itemInMainHand = inventory.getItemInMainHand();
                         ItemStack itemInOffHand = inventory.getItemInOffHand();
 
-                        ArmorGearType helmetType = ArmorGearType.fromMaterial(inventoryHelmet.getType());
-                        ArmorGearType chestplateType = ArmorGearType.fromMaterial(inventoryChestplate.getType());
-                        ArmorGearType leggingsType = ArmorGearType.fromMaterial(inventoryLeggings.getType());
-                        ArmorGearType bootsType = ArmorGearType.fromMaterial(inventoryBoots.getType());
+                        ArmorGearType helmetType = InventoryUtils.isAirOrNull(inventoryHelmet) ? null : ArmorGearType.fromMaterial(inventoryHelmet.getType());
+                        ArmorGearType chestplateType = InventoryUtils.isAirOrNull(inventoryChestplate) ? null : ArmorGearType.fromMaterial(inventoryChestplate.getType());
+                        ArmorGearType leggingsType = InventoryUtils.isAirOrNull(inventoryLeggings) ? null : ArmorGearType.fromMaterial(inventoryLeggings.getType());
+                        ArmorGearType bootsType = InventoryUtils.isAirOrNull(inventoryBoots) ? null : ArmorGearType.fromMaterial(inventoryBoots.getType());
 
                         recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
                                 helmetType, chestplateType, leggingsType, bootsType);
@@ -546,10 +546,10 @@ public class RPGCharacterStats {
                     ItemStack itemInMainHand = inventory.getItemInMainHand();
                     ItemStack itemInOffHand = inventory.getItemInOffHand();
 
-                    ArmorGearType helmetType = ArmorGearType.fromMaterial(inventoryHelmet.getType());
-                    ArmorGearType chestplateType = ArmorGearType.fromMaterial(inventoryChestplate.getType());
-                    ArmorGearType leggingsType = ArmorGearType.fromMaterial(inventoryLeggings.getType());
-                    ArmorGearType bootsType = ArmorGearType.fromMaterial(inventoryBoots.getType());
+                    ArmorGearType helmetType = InventoryUtils.isAirOrNull(inventoryHelmet) ? null : ArmorGearType.fromMaterial(inventoryHelmet.getType());
+                    ArmorGearType chestplateType = InventoryUtils.isAirOrNull(inventoryChestplate) ? null : ArmorGearType.fromMaterial(inventoryChestplate.getType());
+                    ArmorGearType leggingsType = InventoryUtils.isAirOrNull(inventoryLeggings) ? null : ArmorGearType.fromMaterial(inventoryLeggings.getType());
+                    ArmorGearType bootsType = InventoryUtils.isAirOrNull(inventoryBoots) ? null : ArmorGearType.fromMaterial(inventoryBoots.getType());
 
                     recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
                             helmetType, chestplateType, leggingsType, bootsType);
@@ -765,10 +765,10 @@ public class RPGCharacterStats {
                             ItemStack itemInMainHand = inventory.getItemInMainHand();
                             ItemStack itemInOffHand = inventory.getItemInOffHand();
 
-                            ArmorGearType helmetType = ArmorGearType.fromMaterial(inventoryHelmet.getType());
-                            ArmorGearType chestplateType = ArmorGearType.fromMaterial(inventoryChestplate.getType());
-                            ArmorGearType leggingsType = ArmorGearType.fromMaterial(inventoryLeggings.getType());
-                            ArmorGearType bootsType = ArmorGearType.fromMaterial(inventoryBoots.getType());
+                            ArmorGearType helmetType = InventoryUtils.isAirOrNull(inventoryHelmet) ? null : ArmorGearType.fromMaterial(inventoryHelmet.getType());
+                            ArmorGearType chestplateType = InventoryUtils.isAirOrNull(inventoryChestplate) ? null : ArmorGearType.fromMaterial(inventoryChestplate.getType());
+                            ArmorGearType leggingsType = InventoryUtils.isAirOrNull(inventoryLeggings) ? null : ArmorGearType.fromMaterial(inventoryLeggings.getType());
+                            ArmorGearType bootsType = InventoryUtils.isAirOrNull(inventoryBoots) ? null : ArmorGearType.fromMaterial(inventoryBoots.getType());
 
                             recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
                                     helmetType, chestplateType, leggingsType, bootsType);
@@ -804,10 +804,10 @@ public class RPGCharacterStats {
                 ItemStack itemInMainHand = inventory.getItemInMainHand();
                 ItemStack itemInOffHand = inventory.getItemInOffHand();
 
-                ArmorGearType helmetType = inventoryHelmet != null ? ArmorGearType.fromMaterial(inventoryHelmet.getType()) : null;
-                ArmorGearType chestplateType = inventoryChestplate != null ? ArmorGearType.fromMaterial(inventoryChestplate.getType()) : null;
-                ArmorGearType leggingsType = inventoryLeggings != null ? ArmorGearType.fromMaterial(inventoryLeggings.getType()) : null;
-                ArmorGearType bootsType = inventoryBoots != null ? ArmorGearType.fromMaterial(inventoryBoots.getType()) : null;
+                ArmorGearType helmetType = InventoryUtils.isAirOrNull(inventoryHelmet) ? null : ArmorGearType.fromMaterial(inventoryHelmet.getType());
+                ArmorGearType chestplateType = InventoryUtils.isAirOrNull(inventoryChestplate) ? null : ArmorGearType.fromMaterial(inventoryChestplate.getType());
+                ArmorGearType leggingsType = InventoryUtils.isAirOrNull(inventoryLeggings) ? null : ArmorGearType.fromMaterial(inventoryLeggings.getType());
+                ArmorGearType bootsType = InventoryUtils.isAirOrNull(inventoryBoots) ? null : ArmorGearType.fromMaterial(inventoryBoots.getType());
 
                 recalculateGearSetEffects(inventoryHelmet, inventoryChestplate, inventoryLeggings, inventoryBoots, itemInMainHand, itemInOffHand,
                         helmetType, chestplateType, leggingsType, bootsType);

@@ -84,7 +84,9 @@ public class MyPlayerItemHeldEvent implements Listener {
                     if (meetRequirements) {
                         ItemStack itemInOffHand = player.getInventory().getItem(EquipmentSlot.OFF_HAND);
                         if (!InventoryUtils.isAirOrNull(itemInOffHand)) {
-                            InventoryUtils.giveItemToPlayer(player, itemInOffHand);
+                            if (!itemInOffHand.getType().equals(Material.ARROW)) {
+                                InventoryUtils.giveItemToPlayer(player, itemInOffHand);
+                            }
                         }
                         ItemStack arrow = OtherItems.getArrow(2);
                         inventory.setItemInOffHand(arrow);

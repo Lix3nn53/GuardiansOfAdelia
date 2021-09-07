@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
@@ -34,7 +35,7 @@ public enum GearSetEffect {
     }
 
     public static String getCustomSet(ItemStack itemStack) {
-        if (itemStack == null) return null;
+        if (InventoryUtils.isAirOrNull(itemStack)) return null;
 
         if (PersistentDataContainerUtil.hasString(itemStack, "gearSet")) {
             return PersistentDataContainerUtil.getString(itemStack, "gearSet");
