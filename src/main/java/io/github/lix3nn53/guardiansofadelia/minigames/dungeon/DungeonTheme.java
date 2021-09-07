@@ -212,4 +212,21 @@ public class DungeonTheme {
 
         return true;
     }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", DungeonTheme.class.getSimpleName() + "[", "]")
+                .add("code='" + code + "'")
+                .add("name='" + name + "'")
+                .add("gearTag='" + gearTag + "'")
+                .add("gearLevel=" + gearLevel)
+                .add("portalColor=" + portalColor)
+                .add("levelReq=" + levelReq)
+                .add("timeLimitInMinutes=" + timeLimitInMinutes)
+                .add("bossInternalName='" + bossInternalName + "'")
+                .add("dungeonRooms=" + dungeonRooms)
+                .add("startingRooms=" + startingRooms)
+                .add("checkpointOffsets=" + checkpointOffsets)
+                .toString();
+    }
 }

@@ -122,7 +122,11 @@ public class DungeonInstance extends Minigame {
         List<String> topLines = new ArrayList<>();
         topLines.add("Time remaining: " + getTimeLimitInMinutes() * 60);
         topLines.add(getTeamTextColor(1) + "Team" + 1 + " lives: " + getMaxLives());
-        topLines.add("Boss: " + theme.getBossName());
+        String bossName = "NULL";
+        if (theme != null) {
+            bossName = theme.getBossName();
+        }
+        topLines.add("Boss: " + bossName);
         return topLines;
     }
 

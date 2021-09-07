@@ -175,12 +175,12 @@ public class DungeonConfiguration {
 
                     BoundingBox boundingBox = door.getBoundingBox();
 
-                    dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".door" + doorIndex + ".box" + ".x1", boundingBox.getMinX());
-                    dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".door" + doorIndex + ".box" + ".y1", boundingBox.getMinY());
-                    dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".door" + doorIndex + ".box" + ".z1", boundingBox.getMinZ());
-                    dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".door" + doorIndex + ".box" + ".x2", boundingBox.getMaxX());
-                    dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".door" + doorIndex + ".box" + ".y2", boundingBox.getMaxY());
-                    dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".door" + doorIndex + ".box" + ".z2", boundingBox.getMaxZ());
+                    dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".door" + doorIndex + ".box" + ".x1", boundingBox.getMinX());
+                    dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".door" + doorIndex + ".box" + ".y1", boundingBox.getMinY());
+                    dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".door" + doorIndex + ".box" + ".z1", boundingBox.getMinZ());
+                    dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".door" + doorIndex + ".box" + ".x2", boundingBox.getMaxX());
+                    dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".door" + doorIndex + ".box" + ".y2", boundingBox.getMaxY());
+                    dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".door" + doorIndex + ".box" + ".z2", boundingBox.getMaxZ());
 
                     doorIndex++;
                 }
@@ -191,35 +191,35 @@ public class DungeonConfiguration {
 
                     int spawnerIndex = 1;
                     for (DungeonRoomSpawner spawner : dungeonRoomSpawners) {
-                        dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".mobCode", spawner.getMobCode());
-                        dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".mobLevel", spawner.getMobLevel());
-                        dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".amount", spawner.getAmount());
+                        dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".mobCode", spawner.getMobCode());
+                        dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".mobLevel", spawner.getMobLevel());
+                        dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".amount", spawner.getAmount());
 
                         Vector offset = spawner.getOffset();
 
-                        dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".x", offset.getX());
-                        dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".y", offset.getY());
-                        dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".z", offset.getZ());
+                        dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".x", offset.getX());
+                        dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".y", offset.getY());
+                        dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".z", offset.getZ());
 
                         spawnerIndex++;
                     }
                 }
 
-                dungeonThemesConfig.set("theme" + i + "room" + roomIndex + ".nextRooms", dungeonRoom.getNextRooms());
+                dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".nextRooms", dungeonRoom.getNextRooms());
 
                 roomIndex++;
             }
 
-            dungeonThemesConfig.set("theme" + i + "startingRooms", theme.getStartingRooms());
+            dungeonThemesConfig.set("theme" + i + ".startingRooms", theme.getStartingRooms());
 
             // Checkpoints
             List<Vector> checkpointOffsets = theme.getCheckpointOffsets();
-            dungeonThemesConfig.set("theme" + i + "checkpoints.count", checkpointOffsets.size());
+            dungeonThemesConfig.set("theme" + i + ".checkpoints.count", checkpointOffsets.size());
             int checkpointNumber = 1;
             for (Vector checkpointOffset : checkpointOffsets) {
-                dungeonThemesConfig.set("theme" + i + "checkpoints.loc" + checkpointNumber + ".x", checkpointOffset.getX());
-                dungeonThemesConfig.set("theme" + i + "checkpoints.loc" + checkpointNumber + ".y", checkpointOffset.getY());
-                dungeonThemesConfig.set("theme" + i + "checkpoints.loc" + checkpointNumber + ".z", checkpointOffset.getZ());
+                dungeonThemesConfig.set("theme" + i + ".checkpoints.loc" + checkpointNumber + ".x", checkpointOffset.getX());
+                dungeonThemesConfig.set("theme" + i + ".checkpoints.loc" + checkpointNumber + ".y", checkpointOffset.getY());
+                dungeonThemesConfig.set("theme" + i + ".checkpoints.loc" + checkpointNumber + ".z", checkpointOffset.getZ());
 
                 checkpointNumber++;
             }
