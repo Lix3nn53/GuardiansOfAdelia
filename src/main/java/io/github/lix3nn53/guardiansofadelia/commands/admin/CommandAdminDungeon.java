@@ -41,6 +41,7 @@ public class CommandAdminDungeon implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon start [theme] <instanceNo>");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon tp [theme] <instanceNo>");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon holo [theme] - remakes holograms");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon door [theme] - close/open doors");
@@ -48,8 +49,15 @@ public class CommandAdminDungeon implements CommandExecutor {
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon add door [theme] <roomNo> <material>" + ChatColor.GOLD + " !!select WorldEdit region first!!");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon add spawner [theme] <roomNo> <waveNo> <mobCode> <mobLevel> <amount>" + ChatColor.GOLD + " !!look at spawner location block!!");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon add checkpoint" + ChatColor.GOLD + " !!look at spawner location block!!");
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon set prizeloc [theme]" + ChatColor.GOLD + " !!look at block!!");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon reload - DELETES NEW CHANGES");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon save - SAVES NEW CHANGES");
+            } else if (args[0].equals("start")) {
+                String key = args[1].toUpperCase();
+                int instanceNo = Integer.parseInt(args[2]);
+
+                boolean joined = MiniGameManager.getDungeonInstance(key, instanceNo).joinQueue(player);
+
             } else if (args[0].equals("reload")) {
                 MiniGameManager.clearDungeonData();
 
@@ -162,6 +170,7 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                         Location start = MiniGameManager.getDungeonInstance(key, 1).getStartLocation(1);
                         Vector offset = start.toVector().subtract(add.toVector()).multiply(-1);
+
                         DungeonRoomSpawner spawner = new DungeonRoomSpawner(mobCode, mobLevel, amount, offset);
 
                         DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);
@@ -216,6 +225,23 @@ public class CommandAdminDungeon implements CommandExecutor {
                         player.sendMessage("Added new startroom");
                         break;
                     }
+                }
+            } else if (args[0].equals("set")) {
+                if (args[1].equals("prizeloc")) {
+                    String key = args[2].toUpperCase();
+
+                    HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
+                    DungeonTheme dungeonTheme = dungeonThemes.get(key);
+
+                    Block targetBlock = player.getTargetBlock(null, 12);
+                    Location add = targetBlock.getLocation().add(0.5, 1, 0.5);
+
+                    Location start = MiniGameManager.getDungeonInstance(key, 1).getStartLocation(1);
+                    Vector offset = start.toVector().subtract(add.toVector()).multiply(-1);
+
+                    dungeonTheme.setPrizeChestCenterOffset(offset);
+
+                    player.sendMessage("Set chest prize center location");
                 }
             }
 

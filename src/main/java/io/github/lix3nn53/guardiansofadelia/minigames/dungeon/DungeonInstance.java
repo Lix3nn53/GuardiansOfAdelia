@@ -1,5 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
@@ -9,6 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomSp
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomState;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
@@ -16,6 +23,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -27,16 +37,19 @@ public class DungeonInstance extends Minigame {
 
     private final DungeonTheme theme;
 
-    private final HashMap<Integer, DungeonRoomState> dungeonRoomStates = new HashMap<>();
     // State
+    private final HashMap<Integer, DungeonRoomState> dungeonRoomStates = new HashMap<>();
     private List<Integer> activeRooms = new ArrayList<>();
+    private int darkness = 0;
+    private BukkitTask darknessRunnable;
+
     // Debug
     private final List<Hologram> debugHolograms = new ArrayList<>();
 
     public DungeonInstance(DungeonTheme theme, int instanceNo, List<Location> startLocation, List<Checkpoint> checkpoints) {
         super("Dungeon " + theme.getName(), ChatColor.AQUA, theme.getName(), instanceNo, theme.getLevelReq()
                 , 4, 1, startLocation, theme.getTimeLimitInMinutes(),
-                5, MiniGameManager.getPortalLocationOfDungeonTheme(theme.getCode()), 4,
+                5, MiniGameManager.getPortalLocationOfDungeonTheme(theme.getCode()), 999,
                 0, 12, 1, checkpoints);
         this.theme = theme;
 
@@ -54,8 +67,17 @@ public class DungeonInstance extends Minigame {
     public void startGame() {
         super.startGame();
 
+        // Reset starting rooms
         List<Integer> startingRooms = this.theme.getStartingRooms();
+        activeRooms = startingRooms;
 
+        // Reset room states
+        for (int i : dungeonRoomStates.keySet()) {
+            DungeonRoomState dungeonRoomState = dungeonRoomStates.get(i);
+            dungeonRoomState.reset();
+        }
+
+        // All rooms #onDungeonStart
         Set<Integer> dungeonRoomKeys = this.theme.getDungeonRoomKeys();
         for (int roomNo : dungeonRoomKeys) {
             DungeonRoom dungeonRoom = this.theme.getDungeonRoom(roomNo);
@@ -63,13 +85,14 @@ public class DungeonInstance extends Minigame {
             dungeonRoom.onDungeonStart(this.getStartLocation(1));
         }
 
+        // Starting rooms #onRoomStart
         for (int roomNo : startingRooms) {
             DungeonRoom dungeonRoom = this.theme.getDungeonRoom(roomNo);
             DungeonRoomState state = dungeonRoomStates.get(roomNo);
             dungeonRoom.onRoomStart(state, this.getStartLocation(1));
         }
 
-        activeRooms = startingRooms;
+        startDarknessRunnable();
     }
 
     @Override
@@ -88,6 +111,15 @@ public class DungeonInstance extends Minigame {
                 InventoryUtils.giveItemToPlayer(member, prizeItem);
             }
         }
+        endDarknessRunnable();
+
+        // Prize Chests
+        Location startLocation = getStartLocation(1);
+        Vector prizeChestCenterOffset = theme.getPrizeChestCenterOffset();
+
+        Location center = startLocation.clone().add(prizeChestCenterOffset);
+
+        DungeonPrizeChestManager.spawnPrizeChests(theme, center, 4);
     }
 
     public void onMobKill(String internalName) {
@@ -121,7 +153,7 @@ public class DungeonInstance extends Minigame {
     public List<String> getScoreboardTopLines() {
         List<String> topLines = new ArrayList<>();
         topLines.add("Time remaining: " + getTimeLimitInMinutes() * 60);
-        topLines.add(getTeamTextColor(1) + "Team" + 1 + " lives: " + getMaxLives());
+        topLines.add("Darkness: " + darkness);
         String bossName = "NULL";
         if (theme != null) {
             bossName = theme.getBossName();
@@ -206,5 +238,92 @@ public class DungeonInstance extends Minigame {
 
     public DungeonTheme getTheme() {
         return theme;
+    }
+
+    private void startDarknessRunnable() {
+        this.darkness = 0;
+
+        int timeLimitInMinutes = this.getTimeLimitInMinutes();
+
+        float secondsToReach200Darkness = timeLimitInMinutes * 60f * 0.9f;
+
+        float periodInSeconds = secondsToReach200Darkness / 200;
+
+        long periodInTicks = (long) (periodInSeconds * 20);
+
+        this.darknessRunnable = new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (darkness < 200) {
+                    darkness++;
+                    updateDarknessBoards();
+                    applyDarknessEffects(periodInTicks);
+                }
+            }
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20, periodInTicks);
+    }
+
+    private void endDarknessRunnable() {
+        this.darknessRunnable.cancel();
+    }
+
+    private void updateDarknessBoards() {
+        HashMap<Integer, Party> teams = this.getTeams();
+
+        for (Integer teamNo : teams.keySet()) {
+            Party party = teams.get(teamNo);
+            if (!party.getMembers().isEmpty()) {
+                BoardWithPlayers board = party.getBoard();
+                for (int k : board.getRowLines().keySet()) {
+                    String s = board.getRowLines().get(k);
+                    if (s.contains("Darkness: ")) {
+                        board.setLine("Darkness: " + darkness, k);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private void applyDarknessEffects(long duration) {
+        for (Player player : this.getPlayersInGame()) {
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                    RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+
+                    if (darkness == 0) return;
+
+                    float multiplierNotFinal = darkness / 200f;
+                    if (darkness >= 100) {
+                        multiplierNotFinal = 0.5f;
+                    }
+                    float multiplier = multiplierNotFinal;
+
+                    this.getPlayersInGame().get(0).sendMessage("Darkness eff: " + multiplier);
+
+                    PotionEffect potionEffect = new PotionEffect(BuffType.ELEMENT_DAMAGE.getPotionEffectType(), (int) duration, 0);
+                    rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_DAMAGE, -multiplier, potionEffect);
+
+                    PotionEffect potionEffect2 = new PotionEffect(BuffType.ELEMENT_DEFENSE.getPotionEffectType(), (int) duration, 0);
+                    rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_DEFENSE, -multiplier, potionEffect2);
+
+                    new BukkitRunnable() { // remove buffs from buffed players after timeout
+
+                        @Override
+                        public void run() {
+                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                            RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+
+                            rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_DAMAGE, multiplier, potionEffect);
+                            rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_DEFENSE, multiplier, potionEffect2);
+
+                            cancel();
+                        }
+                    }.runTaskLater(GuardiansOfAdelia.getInstance(), duration);
+                }
+            }
+        }
     }
 }

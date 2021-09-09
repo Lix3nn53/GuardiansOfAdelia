@@ -138,8 +138,16 @@ public class DungeonConfiguration {
                 checkpoints.add(vector);
             }
 
+            Vector prizeChestCenterOffset = new Vector(0, 0, 0);
+            if (section.contains("prizeChestCenter.x")) {
+                double x = section.getDouble("prizeChestCenter.x");
+                double y = section.getDouble("prizeChestCenter.y");
+                double z = section.getDouble("prizeChestCenter.z");
+                prizeChestCenterOffset = new Vector(x, y, z);
+            }
+
             DungeonTheme dungeonTheme = new DungeonTheme(code, name, gearTag, gearLevel, portalColor, levelReq, timeLimitInMinutes,
-                    bossInternalName, dungeonRooms, startingRooms, checkpoints);
+                    bossInternalName, dungeonRooms, startingRooms, checkpoints, prizeChestCenterOffset);
 
             MiniGameManager.addDungeonTheme(code, dungeonTheme);
         }
@@ -223,6 +231,11 @@ public class DungeonConfiguration {
 
                 checkpointNumber++;
             }
+
+            Vector prizeChestCenterOffset = theme.getPrizeChestCenterOffset();
+            dungeonThemesConfig.set("theme" + i + ".prizeChestCenter.x", prizeChestCenterOffset.getX());
+            dungeonThemesConfig.set("theme" + i + ".prizeChestCenter.y", prizeChestCenterOffset.getY());
+            dungeonThemesConfig.set("theme" + i + ".prizeChestCenter.z", prizeChestCenterOffset.getZ());
 
             i++;
         }

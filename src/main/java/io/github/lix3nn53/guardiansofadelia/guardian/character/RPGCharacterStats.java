@@ -58,7 +58,6 @@ public class RPGCharacterStats {
     private final int maxHealth = 100;
     private final int maxMana = 100;
     private int currentMana = 100;
-    private final int elementDefense = 1;
 
     private final double baseAbilityHaste = 0;
     private final double baseCriticalChance = 0.01;
@@ -274,8 +273,14 @@ public class RPGCharacterStats {
     }
 
     public int getTotalElementDefense() {
-        return (int) ((elementDefense + helmet.getDefense() + chestplate.getDefense() + leggings.getDefense() + boots.getDefense() + shield.getDefense() +
-                attributeHashMap.get(AttributeType.BONUS_ELEMENT_DEFENSE).getIncrement(player.getLevel(), rpgClassStr)) * buffElementDefense + 0.5);
+        int equipment = helmet.getDefense() + chestplate.getDefense() + leggings.getDefense() + boots.getDefense() + shield.getDefense();
+        double attr = attributeHashMap.get(AttributeType.BONUS_ELEMENT_DEFENSE).getIncrement(player.getLevel(), rpgClassStr);
+
+        int def = (int) ((equipment + attr) * buffElementDefense + 0.5);
+
+        if (def < 1) return 1;
+
+        return def;
     }
 
     public double getTotalCriticalChance() {
@@ -320,6 +325,7 @@ public class RPGCharacterStats {
 
         Material type = itemInMainHand.getType();
 
+        int weapon = 0;
         WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
         if (weaponGearType != null) {
             if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClass)) return bonus;
@@ -328,10 +334,12 @@ public class RPGCharacterStats {
 
             if (gearStatType == GearStatType.WEAPON_GEAR) {
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemInMainHand);
-                return stat.getValue() + bonus;
+
+                weapon = stat.getValue();
             }
         }
-        return (int) (bonus * buffElementDamage + 0.5);
+
+        return (int) ((weapon + bonus) * buffElementDamage + 0.5);
     }
 
     public void resetAttributes() {

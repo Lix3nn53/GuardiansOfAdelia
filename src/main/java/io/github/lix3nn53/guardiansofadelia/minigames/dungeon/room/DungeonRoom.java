@@ -48,6 +48,10 @@ public class DungeonRoom {
      * @return true if room completed, false otherwise
      */
     public boolean onMobKill(DungeonRoomState state, List<Player> players, int roomNo, String mobCode, Location dungeonStart) {
+        for (Player player : players) {
+            player.sendMessage(ChatColor.LIGHT_PURPLE + "DEBUG-1");
+        }
+
         boolean thisRoomsMob = false;
 
         int currentWave = state.getCurrentWave();
@@ -63,6 +67,10 @@ public class DungeonRoom {
 
         if (!thisRoomsMob) {
             return false;
+        }
+
+        for (Player player : players) {
+            player.sendMessage(ChatColor.LIGHT_PURPLE + "DEBUG-2");
         }
 
         state.onMobKill(1);

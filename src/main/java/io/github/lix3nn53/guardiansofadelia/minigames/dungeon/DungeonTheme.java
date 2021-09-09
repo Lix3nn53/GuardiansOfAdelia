@@ -37,9 +37,11 @@ public class DungeonTheme {
     private final List<Integer> startingRooms;
 
     private final List<Vector> checkpointOffsets;
+    private Vector prizeChestCenterOffset;
 
     public DungeonTheme(String code, String name, String gearTag, GearLevel gearLevel, PortalColor portalColor, int levelReq,
-                        int timeLimitInMinutes, String bossInternalName, HashMap<Integer, DungeonRoom> dungeonRooms, List<Integer> startingRooms, List<Vector> checkpoints) {
+                        int timeLimitInMinutes, String bossInternalName, HashMap<Integer, DungeonRoom> dungeonRooms,
+                        List<Integer> startingRooms, List<Vector> checkpoints, Vector prizeChestCenterOffset) {
         this.code = code;
         this.name = ChatColor.translateAlternateColorCodes('&', name);
         this.gearTag = gearTag;
@@ -51,6 +53,7 @@ public class DungeonTheme {
         this.dungeonRooms = dungeonRooms;
         this.startingRooms = startingRooms;
         this.checkpointOffsets = checkpoints;
+        this.prizeChestCenterOffset = prizeChestCenterOffset;
     }
 
     public String getCode() {
@@ -159,7 +162,6 @@ public class DungeonTheme {
 
 
     private ItemStack generateInstanceItem(DungeonInstance dungeonInstance) {
-
         ItemStack room = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = room.getItemMeta();
         itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #" + dungeonInstance.getInstanceNo() + " (" + dungeonInstance.getPlayersInGameSize() + "/" + dungeonInstance.getMaxPlayerSize() + ")");
@@ -167,7 +169,7 @@ public class DungeonTheme {
         lore.add("");
         lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + dungeonInstance.getLevelReq());
         lore.add(ChatColor.RED + "Boss: " + ChatColor.WHITE + getBossName());
-        lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + dungeonInstance.getTimeLimitInMinutes() + " minute(s)");
+        lore.add(ChatColor.LIGHT_PURPLE + "Time limit: " + ChatColor.WHITE + dungeonInstance.getTimeLimitInMinutes() + " minute(s)");
         lore.add("");
         lore.add(ChatColor.GOLD + "Players in dungeon");
         for (Player player : dungeonInstance.getPlayersInGame()) {
@@ -228,5 +230,13 @@ public class DungeonTheme {
                 .add("startingRooms=" + startingRooms)
                 .add("checkpointOffsets=" + checkpointOffsets)
                 .toString();
+    }
+
+    public Vector getPrizeChestCenterOffset() {
+        return prizeChestCenterOffset;
+    }
+
+    public void setPrizeChestCenterOffset(Vector prizeChestCenterOffset) {
+        this.prizeChestCenterOffset = prizeChestCenterOffset;
     }
 }
