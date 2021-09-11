@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
@@ -63,14 +64,11 @@ public class NormalAttackTrigger extends TriggerComponent {
      * The callback when player lands that applies child components
      */
     public boolean callback(Player attacker, LivingEntity target, boolean isProjectile) {
-        attacker.sendMessage("NormalAttackTrigger callback, skillIndex: " + skillIndex);
+        if (CommandAdmin.DEBUG_MODE) attacker.sendMessage("NormalAttackTrigger callback, skillIndex: " + skillIndex);
         if (!(this.melee && this.projectile)) {
-            attacker.sendMessage("1");
             if (this.melee && isProjectile) {
-                attacker.sendMessage("2");
                 return false;
             } else if (this.projectile && !isProjectile) {
-                attacker.sendMessage("3");
                 return false;
             }
         }

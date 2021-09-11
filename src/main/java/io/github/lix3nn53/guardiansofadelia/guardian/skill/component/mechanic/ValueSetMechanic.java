@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.configuration.ConfigurationSection;
@@ -34,7 +35,7 @@ public class ValueSetMechanic extends MechanicComponent {
 
         for (LivingEntity ent : targets) {
             if (ent instanceof Player) {
-                ent.sendMessage("SetValue: " + values.get(skillLevel - 1));
+                if (CommandAdmin.DEBUG_MODE) ent.sendMessage("SetValue: " + values.get(skillLevel - 1));
             }
             SkillDataManager.setValue(ent, key, values.get(skillLevel - 1));
         }

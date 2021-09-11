@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.p
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.creatures.custom.TemporaryEntity;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
@@ -301,7 +302,8 @@ public class ProjectileMechanic extends MechanicComponent {
                             shulkerBullet.setTarget(livingEntity); // all projectiles target last entity
                             if (target instanceof Player) {
                                 Player player = (Player) target;
-                                player.sendMessage("ShulkerBullet target: " + livingEntity.getCustomName());
+                                if (CommandAdmin.DEBUG_MODE)
+                                    player.sendMessage("ShulkerBullet target: " + livingEntity.getCustomName());
                             }
                         }
                     }
@@ -357,11 +359,6 @@ public class ProjectileMechanic extends MechanicComponent {
         int delayTicks = (int) Math.ceil(range / Math.abs(speed));
         if (projectileType.equals(ShulkerBullet.class)) {
             delayTicks = delayTicks * 10;
-        }
-
-        if (caster instanceof Player) {
-            Player player = (Player) caster;
-            player.sendMessage("projectiles s: " + projectiles.size());
         }
 
         ProjectileListener.onSkillProjectileShoot(projectiles, this, skillLevel, delayTicks);

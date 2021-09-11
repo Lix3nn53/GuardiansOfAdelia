@@ -47,7 +47,7 @@ public class CommandAdminJob implements CommandExecutor {
                 GatheringModelData gatheringModelData = modelIdToModelData.get(id);
                 gatheringModelState.createModel(gatheringModelData);
 
-                player.sendMessage("Added new gathering model!");
+                player.sendMessage(ChatColor.GREEN + "Added new gathering model!");
             } else if (args[0].equals("rotate")) {
                 double x = Double.parseDouble(args[1]);
                 double y = Double.parseDouble(args[2]);

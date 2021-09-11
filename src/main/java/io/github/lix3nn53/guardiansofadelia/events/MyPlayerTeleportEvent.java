@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.Location;
@@ -40,7 +41,7 @@ public class MyPlayerTeleportEvent implements Listener {
             }
 
             if (PetManager.hasCompanion(player)) {
-                player.sendMessage("PLAYER TELEPORT COMPANION");
+                if (CommandAdmin.DEBUG_MODE) player.sendMessage("PLAYER TELEPORT COMPANION");
                 PetManager.removeCompanions(player);
             }
         }

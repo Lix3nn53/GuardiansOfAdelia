@@ -47,6 +47,8 @@ public abstract class Minigame {
     private final List<Checkpoint> checkpoints;
     private final HashMap<Integer, Checkpoint> teamToCheckpoint = new HashMap<>();
 
+    private GameMode gameModeOnWin = GameMode.SPECTATOR;
+    private int countDownIn5SecondsOnWin = 4;
 
     public Minigame(String gameTypeName, ChatColor gameColor, String mapName, int instanceNo, int levelReq, int teamSize, int teamAmount, List<Location> startLocations, int timeLimitInMinutes,
                     int queueTimeLimitInTenSeconds, Location backLocation, int maxLives, int minTeamsAlive, int respawnDelayInSeconds, int requiredPlayerAmountToStart, List<Checkpoint> checkpoints) {
@@ -175,7 +177,7 @@ public abstract class Minigame {
                         MessageUtils.sendCenteredMessage(member, "You lose the " + ChatColor.GREEN + getMinigameName());
                     }
                     MessageUtils.sendCenteredMessage(member, ChatColor.GRAY + "------------------------");
-                    member.setGameMode(GameMode.SPECTATOR);
+                    member.setGameMode(gameModeOnWin);
                 }
             }
         }
@@ -187,7 +189,7 @@ public abstract class Minigame {
 
             @Override
             public void run() {
-                if (count == 3) {
+                if (count == countDownIn5SecondsOnWin) {
                     cancel();
 
                     if (isInGame) {
@@ -222,7 +224,7 @@ public abstract class Minigame {
                 } else {
                     for (Player member : playersInGame) {
                         if (member.isOnline()) {
-                            MessageUtils.sendCenteredMessage(member, getGameColor() + "You will be teleported in " + (15 - (count * 5)) + " seconds");
+                            MessageUtils.sendCenteredMessage(member, getGameColor() + "You will be teleported in " + ((countDownIn5SecondsOnWin - count) * 5) + " seconds");
                         }
                     }
                     count++;
@@ -785,5 +787,13 @@ public abstract class Minigame {
             }
         }
         return i;
+    }
+
+    public void setGameModeOnWin(GameMode gameModeOnWin) {
+        this.gameModeOnWin = gameModeOnWin;
+    }
+
+    public void setCountDownIn5SecondsOnWin(int countDownIn5SecondsOnWin) {
+        this.countDownIn5SecondsOnWin = countDownIn5SecondsOnWin;
     }
 }

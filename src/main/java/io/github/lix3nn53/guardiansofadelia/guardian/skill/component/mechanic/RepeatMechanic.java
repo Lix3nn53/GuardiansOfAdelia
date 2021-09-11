@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.ChatColor;
@@ -99,7 +100,7 @@ public class RepeatMechanic extends MechanicComponent {
                         if (value < valueConditionMinValue || value > valueConditionMaxValue) {
                             if (caster instanceof Player) {
                                 Player player = (Player) caster;
-                                player.sendMessage("cancel repeat cuz value condition");
+                                if (CommandAdmin.DEBUG_MODE) player.sendMessage("cancel repeat cuz value condition");
                             }
 
                             cancel();

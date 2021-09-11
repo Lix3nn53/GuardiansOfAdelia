@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.creatures.killProtection.KillProtectionManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.MMManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
@@ -151,7 +152,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                     Player playerTarget = (Player) target;
                     LivingEntity damageSource = null;
-                    playerTarget.sendMessage("damager: " + damager.getType());
+                    if (CommandAdmin.DEBUG_MODE) playerTarget.sendMessage("damager: " + damager.getType());
                     if (damager instanceof Projectile) { //projectile is attacker
                         Projectile projectile = (Projectile) damager;
                         ProjectileSource shooter = projectile.getShooter();

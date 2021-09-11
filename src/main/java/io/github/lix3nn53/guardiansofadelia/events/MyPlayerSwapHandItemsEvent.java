@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -54,7 +55,7 @@ public class MyPlayerSwapHandItemsEvent implements Listener {
                     if (weaponGearType != null) {
                         mainHandEquip = true;
                         if (!weaponGearType.canEquipToOffHand()) {
-                            player.sendMessage("You can't equip " + weaponGearType.getDisplayName() + " to offhand.");
+                            player.sendMessage(ChatColor.RED + "You can't equip " + weaponGearType.getDisplayName() + " to offhand.");
                             event.setCancelled(true);
                             return;
                         }

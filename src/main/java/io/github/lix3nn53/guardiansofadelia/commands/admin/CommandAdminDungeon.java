@@ -117,7 +117,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         DungeonRoom dungeonRoom = new DungeonRoom(doors, waves, nextRooms);
 
                         dungeonTheme.addDungeonRoom(roomNo, dungeonRoom);
-                        player.sendMessage("Added new room");
+                        player.sendMessage(ChatColor.GREEN + "Added new room");
                         break;
                     }
                     case "door": {
@@ -146,7 +146,7 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                             DungeonRoomDoor dungeonRoomDoor = new DungeonRoomDoor(material, shift);
                             room.addDoor(dungeonRoomDoor);
-                            player.sendMessage("Added new door");
+                            player.sendMessage(ChatColor.GREEN + "Added new door");
 
                             remakeHolograms(key);
                         } catch (IncompleteRegionException e) {
@@ -175,7 +175,7 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                         DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);
                         dungeonRoom.addSpawner(waveNo, spawner);
-                        player.sendMessage("Added new spawner");
+                        player.sendMessage(ChatColor.GREEN + "Added new spawner");
                         remakeHolograms(key);
                         break;
                     }
@@ -205,7 +205,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                             }
                         }
 
-                        player.sendMessage("Added new checkpoint");
+                        player.sendMessage(ChatColor.GREEN + "Added new checkpoint");
                         break;
                     }
                     case "startroom": {
@@ -218,11 +218,11 @@ public class CommandAdminDungeon implements CommandExecutor {
                         boolean b = dungeonTheme.addStartingRooms(roomNo);
 
                         if (!b) {
-                            player.sendMessage("Room does not exist");
+                            player.sendMessage(ChatColor.RED + "Room does not exist");
                             return false;
                         }
 
-                        player.sendMessage("Added new startroom");
+                        player.sendMessage(ChatColor.GREEN + "Added new startroom");
                         break;
                     }
                 }
@@ -241,7 +241,7 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                     dungeonTheme.setPrizeChestCenterOffset(offset);
 
-                    player.sendMessage("Set chest prize center location");
+                    player.sendMessage(ChatColor.GREEN + "Set chest prize center location");
                 }
             }
 

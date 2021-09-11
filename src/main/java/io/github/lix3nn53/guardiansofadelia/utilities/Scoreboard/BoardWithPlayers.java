@@ -15,7 +15,7 @@ public class BoardWithPlayers extends ScoreboardGeneral {
         this.teamColor = teamColor;
 
         this.topLines = topLines;
-        this.setLine("TODO TEST", 1);
+        this.setLine("", 1);
 
         int lineCounter = 2;
         for (String s : topLines) {
@@ -62,7 +62,7 @@ public class BoardWithPlayers extends ScoreboardGeneral {
     }
 
     public void remake(List<Player> players) {
-        this.setLine("TODO TEST REMAKE", 1);
+        this.setLine("", 1);
 
         int lineCounter = 2;
         for (String s : topLines) {

@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatOneType;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
@@ -106,11 +107,13 @@ public class Enchant {
                 baseValue = stat.getValue();
             }
 
-            player.sendMessage("SUCC");
-            player.sendMessage("statString: " + statString);
-            player.sendMessage("baseValue: " + baseValue);
             int nextValue = getNextValue(baseValue);
-            player.sendMessage("nextValue: " + nextValue);
+            if (CommandAdmin.DEBUG_MODE) {
+                player.sendMessage("SUCC");
+                player.sendMessage("statString: " + statString);
+                player.sendMessage("baseValue: " + baseValue);
+                player.sendMessage("nextValue: " + nextValue);
+            }
 
             int lineToChange = -1;
             for (int i = 0; i < lore.size(); i++) {
@@ -138,8 +141,10 @@ public class Enchant {
         } else if (type.equals(GearStatType.PASSIVE_GEAR)) {
             StatPassive stat = (StatPassive) StatUtils.getStat(itemStack);
 
-            player.sendMessage("SUCC");
-            player.sendMessage("PASSIVE");
+            if (CommandAdmin.DEBUG_MODE) {
+                player.sendMessage("SUCC");
+                player.sendMessage("PASSIVE");
+            }
 
             HashMap<AttributeType, Integer> attributeTypeToLineToChange = new HashMap<>();
 
@@ -239,11 +244,13 @@ public class Enchant {
                 baseValue = stat.getValue();
             }
 
-            player.sendMessage("FAIL");
-            player.sendMessage("statString: " + statString);
-            player.sendMessage("baseValue: " + baseValue);
             int nextValue = getPreviousValue(baseValue);
-            player.sendMessage("nextValue: " + nextValue);
+            if (CommandAdmin.DEBUG_MODE) {
+                player.sendMessage("FAIL");
+                player.sendMessage("statString: " + statString);
+                player.sendMessage("baseValue: " + baseValue);
+                player.sendMessage("nextValue: " + nextValue);
+            }
 
             int lineToChange = -1;
             for (int i = 0; i < lore.size(); i++) {
@@ -271,8 +278,10 @@ public class Enchant {
         } else if (type.equals(GearStatType.PASSIVE_GEAR)) {
             StatPassive stat = (StatPassive) StatUtils.getStat(itemStack);
 
-            player.sendMessage("SUCC");
-            player.sendMessage("PASSIVE");
+            if (CommandAdmin.DEBUG_MODE) {
+                player.sendMessage("SUCC");
+                player.sendMessage("PASSIVE");
+            }
 
             HashMap<AttributeType, Integer> attributeTypeToLineToChange = new HashMap<>();
 
@@ -324,7 +333,9 @@ public class Enchant {
             customModelData++;
             itemMeta.setCustomModelData(customModelData);
             itemStack.setItemMeta(itemMeta);
-            player.sendMessage("new customModelData: " + customModelData);
+            if (CommandAdmin.DEBUG_MODE) {
+                player.sendMessage("new customModelData: " + customModelData);
+            }
         }
     }
 
@@ -334,7 +345,9 @@ public class Enchant {
             customModelData--;
             itemMeta.setCustomModelData(customModelData);
             itemStack.setItemMeta(itemMeta);
-            player.sendMessage("new customModelData: " + customModelData);
+            if (CommandAdmin.DEBUG_MODE) {
+                player.sendMessage("new customModelData: " + customModelData);
+            }
         }
     }
 }

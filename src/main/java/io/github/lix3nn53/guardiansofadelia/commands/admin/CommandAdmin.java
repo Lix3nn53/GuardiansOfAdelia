@@ -22,6 +22,7 @@ import java.util.Set;
 
 public class CommandAdmin implements CommandExecutor {
 
+    public static boolean DEBUG_MODE = false;
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
@@ -32,6 +33,7 @@ public class CommandAdmin implements CommandExecutor {
             Player player = (Player) sender;
             if (args.length < 1) {
                 player.sendMessage(ChatColor.DARK_PURPLE + "---- ADMIN ----");
+                player.sendMessage(ChatColor.DARK_PURPLE + "/admin debug");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin reload <skills|?>");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin setstaff <player> [NONE|OWNER|ADMIN|DEVELOPER|BUILDER|SUPPORT|YOUTUBER|TRAINEE]");
                 player.sendMessage(ChatColor.DARK_PURPLE + "/admin build");
@@ -42,10 +44,12 @@ public class CommandAdmin implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_BLUE + "---- RPG ----");
                 player.sendMessage(ChatColor.DARK_BLUE + "/admin exp <player> <amount>");
                 player.sendMessage(ChatColor.DARK_BLUE + "/admin class unlock <player> <newClass>");
+            } else if (args[0].equals("debug")) {
+                DEBUG_MODE = !DEBUG_MODE;
             } else if (args[0].equals("speed")) {
                 int val = Integer.parseInt(args[1]);
                 if (val > 10 || val < -1) {
-                    player.sendMessage("Speed must be between 1-10");
+                    player.sendMessage(ChatColor.RED + "Speed must be between 1-10");
                     return false;
                 }
                 float valf = val / 10f;
@@ -75,7 +79,7 @@ public class CommandAdmin implements CommandExecutor {
                                 if (guardianData.hasActiveCharacter()) {
                                     RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                                     activeCharacter.unlockClass(newClass);
-                                    player2.sendMessage("Unlocked class: " + newClass);
+                                    player2.sendMessage(ChatColor.GREEN + "Unlocked class: " + newClass);
                                 }
                             }
                         }
@@ -93,7 +97,7 @@ public class CommandAdmin implements CommandExecutor {
                             }
                         }
                     } catch (IllegalArgumentException illegalArgumentException) {
-                        player.sendMessage("Unknown staff-rank");
+                        player.sendMessage(ChatColor.RED + "Unknown staff-rank");
                     }
                 }
             } else if (args[0].equals("tp")) {
@@ -113,7 +117,7 @@ public class CommandAdmin implements CommandExecutor {
                 if (args[1].equals("skills")) {
                     ClassConfigurations.createConfigs();
                     ClassConfigurations.loadConfigs();
-                    player.sendMessage("Reloaded class configs!");
+                    player.sendMessage(ChatColor.GREEN + "Reloaded class configs!");
                     Set<Player> onlinePlayers = GuardianDataManager.getOnlinePlayers();
                     for (Player onlinePlayer : onlinePlayers) {
                         GuardianData guardianData = GuardianDataManager.getGuardianData(onlinePlayer);
@@ -126,7 +130,7 @@ public class CommandAdmin implements CommandExecutor {
                         SkillBar skillBar = activeCharacter.getSkillBar();
                         skillBar.reloadSkillSet(rpgClass.getSkillSet());
                     }
-                    player.sendMessage("Reloaded player skills!");
+                    player.sendMessage(ChatColor.GREEN + "Reloaded player skills!");
                 }
             } else if (args[0].equals("build")) {
                 if (MyBlockEvents.allow.contains(player)) {

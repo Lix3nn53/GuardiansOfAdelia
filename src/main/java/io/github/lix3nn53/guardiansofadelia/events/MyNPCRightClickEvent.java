@@ -13,6 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -45,7 +46,7 @@ public class MyNPCRightClickEvent implements Listener {
                 int playerOrdinal = premiumRank.ordinal();
 
                 if (requiredOrdinal > playerOrdinal) {
-                    player.sendMessage("Required rank for this character slot is " + requiredRank.toString());
+                    player.sendMessage(ChatColor.RED + "Required rank for this character slot is " + requiredRank);
                     return;
                 }
             }

@@ -43,9 +43,8 @@ public class MyEntityShootBowEvent implements Listener {
                                 int elementDamage = PersistentDataContainerUtil.getInteger(itemInMainHand, "elementDamage");
                                 Entity projectile = event.getProjectile();
                                 float force = event.getForce();
-                                player.sendMessage("force: " + force);
                                 if (force < 0.7) {
-                                    player.sendMessage(ChatColor.RED + "Shooting force must be higher than 0.7 to shoot an arrow");
+                                    player.sendMessage(ChatColor.RED + "Force: " + force + ". Shooting force must be higher than 0.7 to shoot an arrow");
                                     event.setCancelled(true);
                                     return;
                                 }

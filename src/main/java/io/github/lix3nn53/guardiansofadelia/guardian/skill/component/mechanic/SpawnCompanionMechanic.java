@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -127,7 +128,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
                     amount = available;
                 }
             } else {
-                owner.sendMessage("No value");
+                if (CommandAdmin.DEBUG_MODE) owner.sendMessage("No value");
             }
 
             for (int i = 0; i < amount; i++) {

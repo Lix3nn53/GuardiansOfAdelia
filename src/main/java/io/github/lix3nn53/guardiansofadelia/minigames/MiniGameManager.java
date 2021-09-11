@@ -153,6 +153,10 @@ public class MiniGameManager {
         return playerToMinigame.containsKey(player);
     }
 
+    public static Minigame playerToMinigame(Player player) {
+        return playerToMinigame.get(player);
+    }
+
     public static void addPlayer(Player player, Minigame minigame) {
         playerToMinigame.put(player, minigame);
     }

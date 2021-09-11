@@ -72,7 +72,7 @@ public class CommandAdminReward implements CommandExecutor {
 
                 LootChestManager.addLootChest(lootChest);
 
-                player.sendMessage(ChatColor.GREEN + "Added loot chest tier: " + value.toString());
+                player.sendMessage(ChatColor.GREEN + "Added loot chest, tier: " + value.toString());
                 lootChest.startPlayingParticles();
             }
 

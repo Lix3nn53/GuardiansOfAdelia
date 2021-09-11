@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -27,7 +28,7 @@ public class TriggerListener {
         }
         list.add(triggerComponent);
         playerToTriggerList.put(player, list);
-        player.sendMessage("ADD, new size: " + list.size());
+        if (CommandAdmin.DEBUG_MODE) player.sendMessage("ADD, new size: " + list.size());
     }
 
     public static void remove(Player player, TriggerComponent toRemove) {
@@ -40,7 +41,7 @@ public class TriggerListener {
             } else {
                 playerToTriggerList.put(player, list);
             }
-            player.sendMessage("REMOVE trigger, new size: " + list.size());
+            if (CommandAdmin.DEBUG_MODE) player.sendMessage("REMOVE trigger, new size: " + list.size());
         }
     }
 

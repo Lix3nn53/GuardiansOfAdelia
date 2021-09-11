@@ -41,8 +41,6 @@ public class TutorialManager {
             MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "-- " + ChatColor.DARK_PURPLE + "Aleesia's Castle" + ChatColor.GRAY + " --");
             MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "---- " + ChatColor.GRAY + "Fall of the Adelia" + ChatColor.DARK_PURPLE + " ----");
 
-            player.sendMessage("");
-
             Quest tutorialStartQuest = QuestNPCManager.getQuestCopyById(1);
             rpgCharacter.acceptQuest(tutorialStartQuest, player);
 

@@ -18,6 +18,7 @@ import io.github.lix3nn53.guardiansofadelia.transportation.TeleportationUtils;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.InstantTeleportPortal;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
@@ -77,9 +78,9 @@ public class MyPlayerAnimationEvent implements Listener {
                 DungeonPrizeChestManager.loot(armorStand, player);
                 if (gatheringModelState != null) {
                     ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-                    if (!itemInMainHand.hasItemMeta()) return;
                     // FISHING IS HANDLED BY IT'S OWN EVENT
-                    if (itemInMainHand.getType().equals(Material.FISHING_ROD)) return;
+                    if (!InventoryUtils.isAirOrNull(itemInMainHand) && itemInMainHand.getType().equals(Material.FISHING_ROD))
+                        return;
 
                     GatheringManager.startGathering(player, itemInMainHand, gatheringModelState);
                     break;

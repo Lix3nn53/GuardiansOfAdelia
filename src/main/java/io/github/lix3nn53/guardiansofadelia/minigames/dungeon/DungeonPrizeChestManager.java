@@ -3,6 +3,8 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.quests.QuestIconType;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import me.libraryaddict.disguise.DisguiseAPI;
@@ -58,6 +60,21 @@ public class DungeonPrizeChestManager {
             player.sendMessage(ChatColor.RED + "You already got this prize chest");
             return;
         }
+
+        if (MiniGameManager.isInMinigame(player)) {
+            Minigame minigame = MiniGameManager.playerToMinigame(player);
+            if (minigame instanceof DungeonInstance) {
+                DungeonInstance dungeonInstance = (DungeonInstance) minigame;
+
+                if (dungeonInstance.canLootPrizeChest(player)) {
+                    dungeonInstance.onLootPrizeChest(player);
+                } else {
+                    player.sendMessage(ChatColor.RED + "You don't have any key to unlock this prize chest.");
+                    return;
+                }
+            }
+        }
+        // Can loot
         prizeChest.onLoot(player);
 
         ItemStack chest = prizeChest.getChest();

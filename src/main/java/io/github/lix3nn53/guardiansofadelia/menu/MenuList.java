@@ -1012,9 +1012,7 @@ public class MenuList {
         LocalDate lastObtainDate = dailyRewardInfo.getLastObtainDate();
 
         int playerIndex = DailyRewardHandler.getIndexOfDate(lastObtainDate);
-        player.sendMessage("playerIndex: " + playerIndex);
         int currentIndex = DailyRewardHandler.getCurrentIndex();
-        player.sendMessage("currentIndex: " + currentIndex);
 
         //today
         if (currentIndex - 1 == playerIndex) {

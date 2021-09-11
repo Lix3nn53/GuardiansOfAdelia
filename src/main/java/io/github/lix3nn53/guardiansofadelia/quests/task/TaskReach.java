@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.ChatColor;
@@ -87,11 +88,11 @@ public final class TaskReach implements Task {
 
         int maxDistance = 81;
 
-        player.sendMessage("distanceSquared: " + distanceSquared);
+        if (CommandAdmin.DEBUG_MODE) player.sendMessage("distanceSquared: " + distanceSquared);
 
         if (distanceSquared <= maxDistance) {
             if (progress(player, questID, taskIndex, ignorePrevent)) {
-                MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + "Quest reach " + this.blockLoc.toString());
+                MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + "Quest reach " + this.blockLoc);
                 return true;
             }
         }

@@ -162,7 +162,7 @@ public class StatUtils {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
             int reqLevel = PersistentDataContainerUtil.getInteger(itemStack, "reqLevel");
             if (player.getLevel() < reqLevel) {
-                player.sendMessage("Required level for this item is " + reqLevel);
+                player.sendMessage(ChatColor.RED + "Required level for this item is " + reqLevel);
                 return false;
             }
         }

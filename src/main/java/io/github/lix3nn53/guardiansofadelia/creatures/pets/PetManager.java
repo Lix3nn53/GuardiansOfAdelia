@@ -388,13 +388,11 @@ public class PetManager {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    player.sendMessage("AA-1");
                     if (!ownerToCompanions.containsKey(player)) {
                         cancel();
                         companionLogicRunnerActive.remove(player);
                         return;
                     }
-                    player.sendMessage("AA-2");
 
                     List<LivingEntity> livingEntities = ownerToCompanions.get(player);
                     if (livingEntities.isEmpty()) {
@@ -403,7 +401,6 @@ public class PetManager {
                         companionLogicRunnerActive.remove(player);
                         return;
                     }
-                    player.sendMessage("AA-3");
 
                     ArrayList<Mob> mobsWithoutTarget = new ArrayList<>();
                     for (LivingEntity livingEntity : livingEntities) {
@@ -414,10 +411,8 @@ public class PetManager {
                             mobsWithoutTarget.add(mob);
                         }
                     }
-                    player.sendMessage("AA-4");
 
                     if (mobsWithoutTarget.isEmpty()) return;
-                    player.sendMessage("AA-5");
 
                     List<LivingEntity> nearbySphere = TargetHelper.getNearbySphere(player.getLocation(), 8);
 
@@ -431,7 +426,6 @@ public class PetManager {
                             break;
                         }
                     }
-                    player.sendMessage("AA-6");
                 }
             }.runTaskTimer(GuardiansOfAdelia.getInstance(), 40L, 40L);
 
@@ -523,7 +517,6 @@ public class PetManager {
 
                 final double distance = playerLocation.distanceSquared(companion.getLocation());
                 if (distance > 400) {
-                    player.sendMessage("teleportPet distance: " + distance);
                     PetManager.teleportPet(player, companion, playerLocation);
 
                     if (companion instanceof Mob) { //clear pet target

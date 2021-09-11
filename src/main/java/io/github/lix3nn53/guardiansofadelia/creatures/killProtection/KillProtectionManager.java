@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.creatures.killProtection;
 
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.DropProtectionManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.drops.MobDropGenerator;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -73,7 +74,8 @@ public class KillProtectionManager {
                     drops.add(ingredient);
                 }
             }
-            once.sendMessage("Killed mobLevel: " + mobLevel);
+
+            if (CommandAdmin.DEBUG_MODE) once.sendMessage("Killed mobLevel: " + mobLevel);
 
             //run for each player
             for (Player player : bestPlayers) {
@@ -85,7 +87,7 @@ public class KillProtectionManager {
 
                         //exp
                         int expToGive = getExperience(mobLevel, player.getLevel(), bestPlayers.size());
-                        once.sendMessage("expToGive: " + expToGive);
+                        if (CommandAdmin.DEBUG_MODE) once.sendMessage("expToGive: " + expToGive);
                         if (expToGive > 0) {
                             rpgCharacterStats.giveExp(expToGive);
                         }

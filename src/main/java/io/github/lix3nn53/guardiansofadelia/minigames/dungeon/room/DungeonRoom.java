@@ -48,10 +48,6 @@ public class DungeonRoom {
      * @return true if room completed, false otherwise
      */
     public boolean onMobKill(DungeonRoomState state, List<Player> players, int roomNo, String mobCode, Location dungeonStart) {
-        for (Player player : players) {
-            player.sendMessage(ChatColor.LIGHT_PURPLE + "DEBUG-1");
-        }
-
         boolean thisRoomsMob = false;
 
         int currentWave = state.getCurrentWave();
@@ -69,10 +65,6 @@ public class DungeonRoom {
             return false;
         }
 
-        for (Player player : players) {
-            player.sendMessage(ChatColor.LIGHT_PURPLE + "DEBUG-2");
-        }
-
         state.onMobKill(1);
 
         if (state.isClear()) {
@@ -82,7 +74,7 @@ public class DungeonRoom {
                 state.onNextWaveStart();
 
                 for (Player player : players) {
-                    player.sendMessage(ChatColor.LIGHT_PURPLE + "Room-" + roomNo + " wave-" + currentWave + " incoming!");
+                    player.sendMessage(ChatColor.LIGHT_PURPLE + "ROOM-" + roomNo + " WAVE-" + currentWave + " incoming!");
                 }
 
                 spawners = waveToSpawners.get(currentWave);
@@ -93,7 +85,7 @@ public class DungeonRoom {
                 }
             } else {
                 for (Player player : players) {
-                    player.sendMessage(ChatColor.LIGHT_PURPLE + "Room-" + roomNo + " completed!");
+                    player.sendMessage(ChatColor.LIGHT_PURPLE + "ROOM-" + roomNo + " completed!");
                 }
 
                 return true;

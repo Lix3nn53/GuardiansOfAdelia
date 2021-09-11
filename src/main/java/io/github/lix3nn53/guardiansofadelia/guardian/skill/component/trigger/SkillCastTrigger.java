@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
@@ -56,7 +57,7 @@ public class SkillCastTrigger extends TriggerComponent {
     public boolean callback(Player attacker) {
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(attacker);
-        attacker.sendMessage("scast callback");
+        if (CommandAdmin.DEBUG_MODE) attacker.sendMessage("skillCast callback");
 
         return executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
     }

@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import org.bukkit.configuration.ConfigurationSection;
@@ -36,7 +37,7 @@ public class ValueAddMechanic extends MechanicComponent {
         for (LivingEntity ent : targets) {
             if (ent instanceof Player) {
                 Player player = (Player) ent;
-                player.sendMessage("add +" + value);
+                if (CommandAdmin.DEBUG_MODE) player.sendMessage("Value add +" + value);
             }
             SkillDataManager.addValue(ent, key, value);
         }

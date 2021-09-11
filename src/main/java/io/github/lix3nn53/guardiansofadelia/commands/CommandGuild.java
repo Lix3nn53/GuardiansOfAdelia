@@ -96,7 +96,7 @@ public class CommandGuild implements CommandExecutor {
                 if (GuildManager.inGuild(player)) {
                     Guild guild = GuildManager.getGuild(player);
                     HashMap<UUID, PlayerRankInGuild> members = guild.getMembersWithRanks();
-                    player.sendMessage("GuildMember  -  Rank");
+                    player.sendMessage(ChatColor.DARK_PURPLE + "GuildMember  -  Rank");
                     for (UUID member : members.keySet()) {
                         OfflinePlayer memberPlayer = Bukkit.getOfflinePlayer(member);
                         PlayerRankInGuild playerRankInGuild = members.get(member);
@@ -143,7 +143,7 @@ public class CommandGuild implements CommandExecutor {
                                     PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
                                     if (rank.equals(PlayerRankInGuild.LEADER)) {
                                         guild.removeMember(player2.getUniqueId());
-                                        player.sendMessage("You kicked " + player2.getName() + " from guild " + guild.getName());
+                                        player.sendMessage(ChatColor.RED + "You kicked " + player2.getName() + " from guild " + guild.getName());
                                         if (player2.isOnline()) {
                                             player2.sendMessage(player.getName() + " kicked you from guild " + guild.getName());
                                             TablistUtils.updateTablist(player2);
@@ -158,7 +158,7 @@ public class CommandGuild implements CommandExecutor {
                                         PlayerRankInGuild rank2 = guild.getRankInGuild(player.getUniqueId());
                                         if (!(rank2.equals(PlayerRankInGuild.LEADER) || rank2.equals(PlayerRankInGuild.COMMANDER))) {
                                             guild.removeMember(player2.getUniqueId());
-                                            player.sendMessage("You kicked " + player2.getName() + " from guild " + guild.getName());
+                                            player.sendMessage(ChatColor.RED + "You kicked " + player2.getName() + " from guild " + guild.getName());
                                             if (player2.isOnline()) {
                                                 player2.sendMessage(player.getName() + " kicked you from guild " + guild.getName());
                                                 TablistUtils.updateTablist(player2);

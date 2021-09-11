@@ -100,7 +100,7 @@ public class CharacterSelectionScreenManager {
     }
 
     public static void selectCharacter(Player player, int charNo, Location location) {
-        player.sendMessage("Loading character-" + charNo);
+        player.sendMessage(ChatColor.YELLOW + "Loading character-" + charNo);
         DatabaseManager.loadCharacter(player, charNo, location);
         clear(player);
     }
@@ -132,14 +132,14 @@ public class CharacterSelectionScreenManager {
     }
 
     public static void createCharacter(Player player, int charNo, String rpgClassStr) {
-        player.sendMessage("Creating character-" + charNo);
+        player.sendMessage(ChatColor.YELLOW + "Creating character-" + charNo);
         clear(player);
         //start tutorial
         TutorialManager.startTutorial(player, rpgClassStr, charNo, tutorialStart);
     }
 
     public static void createCharacterWithoutTutorial(Player player, int charNo, String rpgClassStr) {
-        player.sendMessage("Creating character-" + charNo);
+        player.sendMessage(ChatColor.YELLOW + "Creating character-" + charNo);
         clear(player);
         //start character at first world quest
         GuardianData guardianData = GuardianDataManager.getGuardianData(player);

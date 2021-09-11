@@ -14,16 +14,17 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomDo
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomSpawner;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomState;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
-import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
@@ -42,6 +43,8 @@ public class DungeonInstance extends Minigame {
     private List<Integer> activeRooms = new ArrayList<>();
     private int darkness = 0;
     private BukkitTask darknessRunnable;
+    private final HashMap<Player, Integer> playerToLootedChestCount = new HashMap<>();
+    private int unlockedChests;
 
     // Debug
     private final List<Hologram> debugHolograms = new ArrayList<>();
@@ -61,6 +64,8 @@ public class DungeonInstance extends Minigame {
 
         reformParties();
         remakeDebugHolograms();
+        setGameModeOnWin(GameMode.ADVENTURE);
+        setCountDownIn5SecondsOnWin(12);
     }
 
     @Override
@@ -98,28 +103,58 @@ public class DungeonInstance extends Minigame {
     @Override
     public void endGame() {
         super.endGame();
-        List<Integer> winnerTeam = getWinnerTeams();
-        if (!winnerTeam.isEmpty()) {
-            ItemStack prizeItem = theme.getPrizeChest().getChest();
 
-            Party party = getTeams().get(winnerTeam.get(0));
-            for (Player member : party.getMembers()) {
-                MessageUtils.sendCenteredMessage(member, ChatColor.GRAY + "------------------------");
-                MessageUtils.sendCenteredMessage(member, getGameColor() + "Dungeon Prize");
-                MessageUtils.sendCenteredMessage(member, prizeItem.getItemMeta().getDisplayName());
-                MessageUtils.sendCenteredMessage(member, ChatColor.GRAY + "------------------------");
-                InventoryUtils.giveItemToPlayer(member, prizeItem);
+        HashMap<Integer, Party> teams = getTeams();
+
+        for (Integer teamNo : teams.keySet()) {
+            Party party = teams.get(teamNo);
+            for (Player player : party.getMembers()) {
+                player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+                player.removePotionEffect(PotionEffectType.WITHER);
+                player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 200, 4));
             }
         }
+
+        List<Integer> winnerTeam = getWinnerTeams();
+        if (!winnerTeam.isEmpty()) {
+            // Prize Chests
+            Location startLocation = getStartLocation(1);
+            Vector prizeChestCenterOffset = theme.getPrizeChestCenterOffset();
+
+            Location center = startLocation.clone().add(prizeChestCenterOffset);
+
+            DungeonPrizeChestManager.spawnPrizeChests(theme, center, 4);
+
+            Party party = teams.get(winnerTeam.get(0));
+
+            // Update unlockedChests
+            this.unlockedChests = 1;
+            this.playerToLootedChestCount.clear();
+
+            boolean darknessCondition = darkness <= 50;
+            String darknessConditionMessage = ChatColor.YELLOW + "Darkness is less than 50: " + ChatColor.RED + "FAIL";
+            if (darknessCondition) {
+                this.unlockedChests++;
+                darknessConditionMessage = ChatColor.YELLOW + "Darkness is less than 50: " + ChatColor.GREEN + "SUCCESS";
+            }
+
+            boolean roomCondition = isAllRoomsCleared();
+            String roomConditionMessage = ChatColor.YELLOW + "All rooms cleared: " + ChatColor.RED + "FAIL";
+            if (roomCondition) {
+                this.unlockedChests++;
+                roomConditionMessage = ChatColor.YELLOW + "All rooms cleared: " + ChatColor.GREEN + "SUCCESS";
+            }
+
+            for (Player member : party.getMembers()) {
+                MessageUtils.sendCenteredMessage(member, getGameColor() + "Dungeon Prize Chests Spawned!");
+                MessageUtils.sendCenteredMessage(member, ChatColor.YELLOW + "Dungeon Boss Defeated: " + ChatColor.GREEN + "SUCCESS");
+                MessageUtils.sendCenteredMessage(member, darknessConditionMessage);
+                MessageUtils.sendCenteredMessage(member, roomConditionMessage);
+                MessageUtils.sendCenteredMessage(member, ChatColor.GOLD + "You got " + this.unlockedChests + "/3 keys! Use them to loot prize chests!");
+            }
+        }
+
         endDarknessRunnable();
-
-        // Prize Chests
-        Location startLocation = getStartLocation(1);
-        Vector prizeChestCenterOffset = theme.getPrizeChestCenterOffset();
-
-        Location center = startLocation.clone().add(prizeChestCenterOffset);
-
-        DungeonPrizeChestManager.spawnPrizeChests(theme, center, 4);
     }
 
     public void onMobKill(String internalName) {
@@ -245,16 +280,16 @@ public class DungeonInstance extends Minigame {
 
         int timeLimitInMinutes = this.getTimeLimitInMinutes();
 
-        float secondsToReach200Darkness = timeLimitInMinutes * 60f * 0.9f;
+        float secondsToReachMaxDarkness = timeLimitInMinutes * 60f * 0.9f;
 
-        float periodInSeconds = secondsToReach200Darkness / 200;
+        float periodInSeconds = secondsToReachMaxDarkness / 100;
 
         long periodInTicks = (long) (periodInSeconds * 20);
 
         this.darknessRunnable = new BukkitRunnable() {
             @Override
             public void run() {
-                if (darkness < 200) {
+                if (darkness < 100) {
                     darkness++;
                     updateDarknessBoards();
                     applyDarknessEffects(periodInTicks);
@@ -295,13 +330,7 @@ public class DungeonInstance extends Minigame {
 
                     if (darkness == 0) return;
 
-                    float multiplierNotFinal = darkness / 200f;
-                    if (darkness >= 100) {
-                        multiplierNotFinal = 0.5f;
-                    }
-                    float multiplier = multiplierNotFinal;
-
-                    this.getPlayersInGame().get(0).sendMessage("Darkness eff: " + multiplier);
+                    float multiplier = darkness / 200f;
 
                     PotionEffect potionEffect = new PotionEffect(BuffType.ELEMENT_DAMAGE.getPotionEffectType(), (int) duration, 0);
                     rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_DAMAGE, -multiplier, potionEffect);
@@ -325,5 +354,41 @@ public class DungeonInstance extends Minigame {
                 }
             }
         }
+    }
+
+
+    private boolean isAllRoomsCleared() {
+        int notClear = 0;
+        for (int i : dungeonRoomStates.keySet()) {
+            DungeonRoomState dungeonRoomState = dungeonRoomStates.get(i);
+            if (!dungeonRoomState.isClear()) {
+                notClear++;
+                if (notClear > 1) { // Boss room is never cleared
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public boolean canLootPrizeChest(Player player) {
+        int alreadyGot = 0;
+        if (playerToLootedChestCount.containsKey(player)) {
+            alreadyGot = playerToLootedChestCount.get(player);
+        }
+
+        return alreadyGot < this.unlockedChests;
+    }
+
+    public void onLootPrizeChest(Player player) {
+        int alreadyGot = 0;
+        if (playerToLootedChestCount.containsKey(player)) {
+            alreadyGot = playerToLootedChestCount.get(player);
+        }
+        alreadyGot++;
+
+        playerToLootedChestCount.put(player, alreadyGot);
+        player.sendMessage(ChatColor.YELLOW + "Remaining keys: " + ChatColor.GOLD + (this.unlockedChests - alreadyGot));
     }
 }
