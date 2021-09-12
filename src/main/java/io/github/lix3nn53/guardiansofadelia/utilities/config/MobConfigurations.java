@@ -31,7 +31,19 @@ public class MobConfigurations {
 
             ElementType elementType = ElementType.valueOf(element);
 
-            MMManager.addMobElement(key, elementType);
+            MMManager.addElement(key, elementType);
+
+            ConfigurationSection resistances = configurationSection.getConfigurationSection("resistances");
+
+            if (resistances == null) continue;
+
+            for (ElementType type : ElementType.values()) {
+                if (resistances.contains(type.name())) {
+                    double resistance = resistances.getDouble(type.name());
+
+                    MMManager.addElementResistance(key, type, resistance);
+                }
+            }
         }
     }
 }

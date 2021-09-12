@@ -264,6 +264,11 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
                         damageType = rpgClass.getMainElement();
 
+                        // Do this before melee damage reduction of ranged weapons
+                        // Add bonus damage to normal attack, both melee and ranged
+                        damage += rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE).getIncrement(player.getLevel(), rpgClassStr); // bonus from attribute
+                        damage += rpgCharacterStats.getElement(damageType).getTotal(); // bonus from element
+
                         if (isProjectile) { // NonSkill projectile like arrow from bow
                             player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 0.6F, 0.4F);
 
@@ -300,10 +305,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                             TriggerListener.onPlayerNormalAttack(player, livingTarget, false);
                         }
-
-                        // Add bonus damage to normal attack, both melee and ranged
-                        damage += rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE).getIncrement(player.getLevel(), rpgClassStr); // bonus from attribute
-                        damage += rpgCharacterStats.getElement(damageType).getTotal(); // bonus from element
                     }
 
                     // BuffMechanic
@@ -367,6 +368,17 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             double reduction = StatUtils.getDefenseReduction(totalDefense);
 
                             damage = damage * reduction;
+                        }
+                    }
+                } else { // mob element resistance
+                    ActiveMob mythicMobInstance = MythicMobs.inst().getMobManager().getMythicMobInstance(livingTarget);
+
+                    if (mythicMobInstance != null) {
+                        String internalName = mythicMobInstance.getType().getInternalName();
+                        if (MMManager.hasElementResistance(internalName, damageType)) {
+                            double elementResistance = MMManager.getElementResistance(internalName, damageType);
+
+                            damage = damage * elementResistance;
                         }
                     }
                 }

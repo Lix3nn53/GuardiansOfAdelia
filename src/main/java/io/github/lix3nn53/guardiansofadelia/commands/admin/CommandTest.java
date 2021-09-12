@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -31,9 +32,10 @@ public class CommandTest implements CommandExecutor {
                 player.sendMessage(ChatColor.BLUE + "/test sound <code> - play custom sounds");
                 player.sendMessage(ChatColor.BLUE + "/test damage <amount> - damage self");
             } else if (args[0].equals("test")) {
-                int i = Integer.parseInt(args[1]);
+                Block block = player.getLocation().getBlock();
+                byte lightLevel = block.getLightLevel();
 
-                player.setFreezeTicks(player.getMaxFreezeTicks());
+                player.sendMessage("lightLevel: " + lightLevel);
             } else if (args[0].equals("sound")) {
                 if (args.length == 2) {
                     GoaSound goaSound = GoaSound.valueOf(args[1]);

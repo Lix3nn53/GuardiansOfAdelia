@@ -186,7 +186,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         DungeonTheme dungeonTheme = dungeonThemes.get(key);
 
                         Block targetBlock = player.getTargetBlock(null, 12);
-                        Location add = targetBlock.getLocation().add(0.5, 1, 0.5);
+                        Location add = targetBlock.getLocation().add(0.5, 1.5, 0.5);
 
                         Location start = MiniGameManager.getDungeonInstance(key, 1).getStartLocation(1);
                         Vector offset = start.toVector().subtract(add.toVector()).multiply(-1);

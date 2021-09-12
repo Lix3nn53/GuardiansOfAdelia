@@ -8,8 +8,9 @@ import java.util.HashMap;
 public class MMManager {
 
     private static final HashMap<String, ElementType> internalNameToElement = new HashMap<>();
+    private static final HashMap<String, HashMap<ElementType, Double>> internalNameToElementResistances = new HashMap<>();
 
-    public static void addMobElement(String internalName, ElementType elementType) {
+    public static void addElement(String internalName, ElementType elementType) {
         internalNameToElement.put(internalName, elementType);
         GuardiansOfAdelia.getInstance().getLogger().info(internalName + ": " + elementType.toString());
     }
@@ -22,4 +23,31 @@ public class MMManager {
         return internalNameToElement.get(internalName);
     }
 
+    public static void addElementResistance(String internalName, ElementType elementType, double resistance) {
+        HashMap<ElementType, Double> resistances = new HashMap<>();
+
+        if (internalNameToElementResistances.containsKey(internalName)) {
+            resistances = internalNameToElementResistances.get(internalName);
+        }
+
+        resistances.put(elementType, resistance);
+
+        internalNameToElementResistances.put(internalName, resistances);
+    }
+
+    public static boolean hasElementResistance(String internalName, ElementType elementType) {
+        if (internalNameToElementResistances.containsKey(internalName)) {
+            HashMap<ElementType, Double> resistances = internalNameToElementResistances.get(internalName);
+
+            return resistances.containsKey(elementType);
+        }
+
+        return false;
+    }
+
+    public static double getElementResistance(String internalName, ElementType elementType) {
+        HashMap<ElementType, Double> resistances = internalNameToElementResistances.get(internalName);
+
+        return resistances.get(elementType);
+    }
 }

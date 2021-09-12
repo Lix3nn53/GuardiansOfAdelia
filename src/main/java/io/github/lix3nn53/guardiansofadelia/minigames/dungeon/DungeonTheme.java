@@ -4,6 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.MMManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoom;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
@@ -168,15 +170,39 @@ public class DungeonTheme {
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + dungeonInstance.getLevelReq());
-        lore.add(ChatColor.RED + "Boss: " + ChatColor.WHITE + getBossName());
         lore.add(ChatColor.LIGHT_PURPLE + "Time limit: " + ChatColor.WHITE + dungeonInstance.getTimeLimitInMinutes() + " minute(s)");
         lore.add("");
-        lore.add(ChatColor.GOLD + "Players in dungeon");
-        for (Player player : dungeonInstance.getPlayersInGame()) {
-            lore.add(player.getDisplayName());
+        lore.add(ChatColor.RED + "BOSS: " + ChatColor.WHITE + getBossName());
+
+        // Resistance
+        List<String> weakness = new ArrayList<>();
+        for (ElementType type : ElementType.values()) {
+            if (MMManager.hasElementResistance(bossInternalName, type)) {
+                double resistance = MMManager.getElementResistance(bossInternalName, type);
+
+                if (resistance < 1) {
+                    int percent = (int) (100 * (-(1d - resistance)));
+
+                    lore.add(ChatColor.AQUA + "Resistance: " + type.getFullName() + " - " + -percent + "%");
+                } else {
+                    int percent = (int) (100 * (1d - resistance));
+
+                    weakness.add(ChatColor.RED + "Weakness: " + type.getFullName() + " - " + -percent + "%");
+                }
+            }
         }
-        lore.add("");
-        lore.add(ChatColor.GRAY + "Click to join this dungeon room!");
+        lore.addAll(weakness);
+
+        if (dungeonInstance.isInGame()) {
+            lore.add("");
+            lore.add(ChatColor.GOLD + "Players in dungeon: ");
+            for (Player player : dungeonInstance.getPlayersInGame()) {
+                lore.add(player.getDisplayName());
+            }
+        } else {
+            lore.add("");
+            lore.add(ChatColor.GRAY + "Click to join this dungeon room!");
+        }
         itemMeta.setLore(lore);
         room.setItemMeta(itemMeta);
 
