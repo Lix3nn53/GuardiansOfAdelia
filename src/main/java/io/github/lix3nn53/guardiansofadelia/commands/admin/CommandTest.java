@@ -31,7 +31,9 @@ public class CommandTest implements CommandExecutor {
                 player.sendMessage(ChatColor.BLUE + "/test sound <code> - play custom sounds");
                 player.sendMessage(ChatColor.BLUE + "/test damage <amount> - damage self");
             } else if (args[0].equals("test")) {
+                int i = Integer.parseInt(args[1]);
 
+                player.setFreezeTicks(player.getMaxFreezeTicks());
             } else if (args[0].equals("sound")) {
                 if (args.length == 2) {
                     GoaSound goaSound = GoaSound.valueOf(args[1]);

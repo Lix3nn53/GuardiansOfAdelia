@@ -127,6 +127,8 @@ public class SkillComponentLoader {
             return new MessageMechanic(configurationSection);
         } else if (componentType.equals(FireMechanic.class.getSimpleName())) {
             return new FireMechanic(configurationSection);
+        } else if (componentType.equals(FreezeMechanic.class.getSimpleName())) {
+            return new FreezeMechanic(configurationSection);
         } else if (componentType.equals(SkillAttackTrigger.class.getSimpleName())) {
             return new SkillAttackTrigger(configurationSection);
         } else if (componentType.equals(SavedEntitySpawnTrigger.class.getSimpleName())) {

@@ -43,8 +43,14 @@ public class StatusEffectMechanic extends MechanicComponent {
             for (StatusEffectType effectType : statusEffectTypes) {
                 StatusEffectManager.addStatus(target, effectType);
 
-                // Custom code for mobs
+                // Add freeze effect
                 if (effectType.equals(StatusEffectType.ROOT) || effectType.equals(StatusEffectType.STUN)) {
+                    int maxFreezeTicks = target.getMaxFreezeTicks();
+                    int freezeTicks = Math.min(duration, maxFreezeTicks);
+
+                    target.setFreezeTicks(freezeTicks);
+
+                    // Custom code for mobs
                     if (!(target instanceof Player)) {
                         target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, 5));
                     }
