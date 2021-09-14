@@ -16,6 +16,7 @@ public class MyMythicMobDeathEvent implements Listener {
         if (!(entity instanceof LivingEntity)) return;
 
         KillProtectionManager.onLivingEntityDeath((LivingEntity) entity, e);
+        MyChunkEvents.DO_NOT_DELETE.remove(entity);
     }
 
 }

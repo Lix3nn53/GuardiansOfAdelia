@@ -36,9 +36,9 @@ public class ConfigManager {
 
     public static void createConfigALL() {
         characterSelectionConfig = ConfigurationUtils.createConfig(DATA_FOLDER.toString(), "characterSelection.yml");
-        townsConfig = ConfigurationUtils.createConfig(DATA_FOLDER.toString(), "towns.yml");
         resourcePackConfig = ConfigurationUtils.createConfig(DATA_FOLDER.toString(), "resourcepack.yml");
-        hologramsConfig = ConfigurationUtils.createConfig(DATA_FOLDER.toString(), "holograms.yml");
+        townsConfig = ConfigurationUtils.createConfig(DATA_FOLDER + File.separator + "world", "towns.yml");
+        hologramsConfig = ConfigurationUtils.createConfig(DATA_FOLDER + File.separator + "world", "holograms.yml");
 
         ClassConfigurations.createConfigs();
         RewardDailyConfigurations.createConfigs();
@@ -57,6 +57,7 @@ public class ConfigManager {
         LootChestConfiguration.createConfigs();
         GearSetConfiguration.createConfigs();
         MobConfigurations.createConfigs();
+        SkillOnGroundConfigurations.createConfigs();
     }
 
     public static void loadConfigALL() {
@@ -81,6 +82,7 @@ public class ConfigManager {
         LootChestConfiguration.loadConfigs();
         GearSetConfiguration.loadConfig();
         MobConfigurations.loadConfigs();
+        SkillOnGroundConfigurations.loadConfigs();
     }
 
     public static void writeConfigALL() {

@@ -34,8 +34,8 @@ skillOne:
   name: "Fists of Thunder"
   customModelData: 36
   description:
-    - "Shoot a frostball that deals damage and"
-    - "slows enemies in area if it hits a target."
+    - "Throw 5 punches in a second."
+    - "The last punch also pushed the target away."
   manaCosts:
     - 5
     - 6
@@ -147,8 +147,8 @@ skillTwo:
   name: "Tumble"
   customModelData: 57
   description:
-    - "Summon a small ice mass from the sky that"
-    - "deals damage and slows enemies in area."
+    - "Jump back towards a side. Which side "
+    - "you will jump to changes each cast."
   manaCosts:
     - 2
     - 2
@@ -341,9 +341,8 @@ skillPassive:
   name: "Crippling Wave"
   customModelData: 10
   description:
-    - "Every time you cast a spell gain a stack."
-    - "If you have 4 stacks particles will start playing"
-    - "around you. The enemies your next skill hit will freeze."
+    - "Dealing damage with melee attack after dealing"
+    - "damage with ranged attack will stun the target."
   manaCosts:
     - 0
     - 0
@@ -433,8 +432,8 @@ skillUltimate:
   name: "Aqua Prison"
   customModelData: 54
   description:
-    - "Summon a blizzard that deals magic damage to"
-    - "nearby enemies and slows them."
+    - "Imprison nearby enemies in water bubble. Enemies"
+    - "in bubble are stunned and goes up into the sky slowly."
   manaCosts:
     - 5
     - 5

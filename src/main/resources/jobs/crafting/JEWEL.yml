@@ -4,9 +4,24 @@
 #                    Crafting                    #
 # ---------------------------------------------- #
 
-levelCount: 1
 level1:
-  itemSetCount: 1
+  itemSet1:
+    slotTypes:
+      - RING
+      - EARRING
+      - NECKLACE
+      - GLOVE
+    gearLevel: 0
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 9
+      - 10
+    ingredientAmounts:
+      - 8
+      - 3
+level2:
   itemSet1:
     slotTypes:
       - EARRING
@@ -16,10 +31,10 @@ level1:
     gearLevel: 1
     index: 0
     tier: MYSTIC
-    tag: "Jeweller's"
+    gearSet: "Smith's"
     ingredients:
-      - 1
-      - 2
+      - 9
+      - 10
     ingredientAmounts:
-      - 4
-      - 6
+      - 12
+      - 5

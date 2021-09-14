@@ -333,9 +333,9 @@ skillThree:
               - 40
 skillPassive:
   name: "Mecha Armor"
-  customModelData: 52
+  customModelData: 7
   description:
-    - "After using a skill, gain barrier."
+    - "After using a skill, gain barrier. A stack of barrier absorbs a damage completely."
   manaCosts:
     - 0
     - 0
@@ -358,49 +358,18 @@ skillPassive:
       child1:
         componentType: "SelfTarget"
         child1:
-          componentType: "AreaTarget"
-          allies: true
-          enemy: false
-          self: true
-          max: 15
-          radiusList:
-            - 5
-            - 5.5
-            - 6
-            - 7
-          amountList:
-            - 24
-            - 24
-            - 24
-            - 24
-          particle:
-            particleType: "FLAME"
-          child1:
-            componentType: "AbsorptionHeartMechanic"
-            heartAmountList:
-              - 1
-              - 2
-              - 3
-              - 4
-            maxHeartList:
-              - 1
-              - 2
-              - 3
-              - 4
+          componentType: "AbsorptionHeartMechanic"
+          heartAmountList:
+            - 1
+            - 2
+            - 3
+            - 4
+          maxHeartList:
+            - 1
+            - 2
+            - 3
+            - 4
         child2:
-          componentType: "ParticleMechanic"
-          particle:
-            arrangementType: "FillCircle"
-            particleType: "VILLAGER_ANGRY"
-            radius: 5
-            amount: 12
-            direction: "XZ"
-          data1:
-            - 5
-            - 5.5
-            - 6
-            - 6.5
-        child3:
           componentType: "SoundMechanic"
           goaSound: "SKILL_HEAL"
 skillUltimate:
@@ -408,7 +377,7 @@ skillUltimate:
   customModelData: 62
   description:
     - "Launch a missile that follows the target."
-    - "Deals area damage and stuns the enemies."
+    - "Deals area damage and stuns the enemies o hit."
   manaCosts:
     - 5
     - 7

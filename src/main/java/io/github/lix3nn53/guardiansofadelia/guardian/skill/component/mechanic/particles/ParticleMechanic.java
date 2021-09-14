@@ -33,6 +33,26 @@ public class ParticleMechanic extends MechanicComponent {
     protected final double offsety;
     protected final double offsetz;
 
+    public ParticleMechanic(boolean addLore, ParticleArrangement particleArrangement, List<List<Double>> dataIndexToDataList,
+                            List<Double> forwardList, double upward, double right, boolean resetY, boolean centerEye, boolean rotation,
+                            boolean rotationMatchEye, float yaw, float pitch, double offsetx, double offsety, double offsetz) {
+        super(addLore);
+        this.particleArrangement = particleArrangement;
+        this.dataIndexToDataList = dataIndexToDataList;
+        this.forwardList = forwardList;
+        this.upward = upward;
+        this.right = right;
+        this.resetY = resetY;
+        this.centerEye = centerEye;
+        this.rotation = rotation;
+        this.rotationMatchEye = rotationMatchEye;
+        this.yaw = yaw;
+        this.pitch = pitch;
+        this.offsetx = offsetx;
+        this.offsety = offsety;
+        this.offsetz = offsetz;
+    }
+
     public ParticleMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 

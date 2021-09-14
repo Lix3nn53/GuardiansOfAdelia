@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -13,14 +14,17 @@ public class DungeonRoom {
 
     private final List<DungeonRoomDoor> doors;
     private final HashMap<Integer, List<DungeonRoomSpawner>> waveToSpawners;
+    private final List<SkillOnGroundWithOffset> skillsOnGround;
     /**
      * Rooms to start after this room ends
      */
     private final List<Integer> nextRooms;
 
-    public DungeonRoom(List<DungeonRoomDoor> doors, HashMap<Integer, List<DungeonRoomSpawner>> waveToSpawners, List<Integer> nextRooms) {
+    public DungeonRoom(List<DungeonRoomDoor> doors, HashMap<Integer, List<DungeonRoomSpawner>> waveToSpawners,
+                       List<SkillOnGroundWithOffset> skillsOnGround, List<Integer> nextRooms) {
         this.doors = doors;
         this.waveToSpawners = waveToSpawners;
+        this.skillsOnGround = skillsOnGround;
         this.nextRooms = nextRooms;
     }
 
@@ -39,6 +43,10 @@ public class DungeonRoom {
         for (DungeonRoomSpawner spawner : spawners) {
             List<Entity> spawned = spawner.spawn(dungeonStart);
             state.onMobSpawn(spawned.size());
+        }
+
+        for (SkillOnGroundWithOffset skillOnGround : skillsOnGround) {
+            skillOnGround.activate(dungeonStart, 40L);
         }
     }
 
@@ -99,6 +107,9 @@ public class DungeonRoom {
         for (DungeonRoomDoor door : doors) {
             door.open(dungeonStart);
         }
+        for (SkillOnGroundWithOffset skillOnGround : skillsOnGround) {
+            skillOnGround.deactivate();
+        }
 
         return nextRooms;
     }
@@ -127,5 +138,13 @@ public class DungeonRoom {
 
     public List<Integer> getNextRooms() {
         return nextRooms;
+    }
+
+    public void addSkillOnGround(SkillOnGroundWithOffset skill) {
+        skillsOnGround.add(skill);
+    }
+
+    public List<SkillOnGroundWithOffset> getSkillsOnGround() {
+        return skillsOnGround;
     }
 }

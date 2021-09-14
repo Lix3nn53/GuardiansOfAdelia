@@ -6,7 +6,7 @@
 
 tier: 3
 color: "GREEN"
-mainElement: "EARTH"
+mainElement: "WATER"
 description:
   - "Shamans summons a totem and plays around it."
 classIconCustomModelData: 32
@@ -69,7 +69,7 @@ skillTwo:
   name: "Thunderstorm"
   customModelData: 56
   description:
-    - "Deal damage to enemies nearby your totem over time."
+    - "Create a storm around your totem that deals damage to nearby enemies every 2 seconds."
   manaCosts:
     - 10
     - 12
@@ -132,7 +132,7 @@ skillTwo:
           componentType: "SoundMechanic"
           goaSound: "SKILL_SONIC_BOOM"
 skillThree:
-  name: "Totem Polymorph"
+  name: "Polymorph"
   customModelData: 45
   description:
     - "Transform enemies nearby your totem to sheeps."
@@ -210,7 +210,7 @@ skillPassive:
   name: "Purifying Waters"
   customModelData: 52
   description:
-    - "Your totem heals nearby allies over time."
+    - "Each time you spawn a new totem, it will create an aura which heals nearby allies every 2 seconds."
   manaCosts:
     - 0
     - 0

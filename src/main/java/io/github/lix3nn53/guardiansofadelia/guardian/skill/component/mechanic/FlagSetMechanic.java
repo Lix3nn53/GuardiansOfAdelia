@@ -18,6 +18,14 @@ public class FlagSetMechanic extends MechanicComponent {
 
     private final String multiplyDurationValue;
 
+    public FlagSetMechanic(String key, List<Integer> ticks, boolean isUnique, String multiplyDurationValue) {
+        super(false);
+        this.key = key;
+        this.ticks = ticks;
+        this.isUnique = isUnique;
+        this.multiplyDurationValue = multiplyDurationValue;
+    }
+
     public FlagSetMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 

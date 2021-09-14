@@ -4,9 +4,21 @@
 #                 Ingredients                    #
 # ---------------------------------------------- #
 
-count: 1
 m1:
-  mobKey: TutorialSoldier
+  mobKey: "AcademyCow"
   ingredients:
+    - 1
+    - 3
+m2:
+  mobKey: "AcademySheep"
+  ingredients:
+    - 1
     - 4
-    - 5
+m3:
+  mobKey: "AcademySlime"
+  ingredients:
+    - 7
+m4:
+  mobKey: "AcademySlimeMedium"
+  ingredients:
+    - 7

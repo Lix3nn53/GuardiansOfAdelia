@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithLocationManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
@@ -21,22 +22,27 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
+import org.bukkit.event.world.EntitiesLoadEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyChunkEvents implements Listener {
 
+    public static final List<Entity> DO_NOT_DELETE = new ArrayList<>();
+
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onChunkLoadEvent(ChunkLoadEvent event) {
-        Chunk chunk = event.getChunk();
-        Entity[] chunkEntities = chunk.getEntities();
+    public void onEntitiesLoadEvent(EntitiesLoadEvent event) {
+
+        List<Entity> chunkEntities = event.getEntities();
         for (Entity chunkEntity : chunkEntities) {
             if (shouldChunkEventRemove(chunkEntity)) {
                 chunkEntity.remove();
             }
         }
 
-        customEventsOnChunkLoad(chunk);
+        customEventsOnChunkLoad(event.getChunk());
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -65,6 +71,8 @@ public class MyChunkEvents implements Listener {
     }
 
     private boolean shouldChunkEventRemove(Entity chunkEntity) {
+        if (DO_NOT_DELETE.contains(chunkEntity)) return false;
+
         NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
         if (npcRegistry.isNPC(chunkEntity)) {
             return false;
@@ -73,7 +81,8 @@ public class MyChunkEvents implements Listener {
 
         if (type.equals(EntityType.ARMOR_STAND)) {
             boolean questIcon = QuestNPCManager.isQuestIcon((ArmorStand) chunkEntity);
-            if (questIcon) return false;
+
+            return !questIcon;
         }
 
         return !(type.equals(EntityType.PLAYER) || type.equals(EntityType.ITEM_FRAME)
@@ -90,6 +99,7 @@ public class MyChunkEvents implements Listener {
         HologramManager.onChunkLoad(chunkKey);
         LootChestManager.onChunkLoad(chunkKey);
         GatheringManager.onChunkLoad(chunkKey);
+        SkillOnGroundWithLocationManager.onChunkLoad(chunkKey);
     }
 
     private void customEventsOnChunkUnload(Chunk chunk) {

@@ -16,7 +16,11 @@ theme1:
   startingRooms:
     - 1
   checkpoints:
-    count: 0
+    count: 1
+    loc1:
+      x: -128.5
+      y: -15.5
+      z: 0.5
   room1:
     wave1:
       spawner1:
@@ -47,6 +51,15 @@ theme1:
         z2: 8.0
     nextRooms:
       - 2
+    door2:
+      material: BARRIER
+      box:
+        x1: -74.0
+        y1: -6.5
+        z1: 4.0
+        x2: -74.0
+        y2: 0.5
+        z2: 8.0
   room2:
     door1:
       material: IRON_BARS
@@ -116,6 +129,10 @@ theme1:
           y: -31.5
           z: -55.5
     nextRooms: [ ]
+  prizeChestCenter:
+    x: -80.5
+    y: -31.5
+    z: -55.5
 theme2:
   code: LIBRARY
   name: '&d???? Library'
@@ -128,3 +145,7 @@ theme2:
   startingRooms: [ ]
   checkpoints:
     count: 0
+  prizeChestCenter:
+    x: 0.0
+    y: 0.0
+    z: 0.0

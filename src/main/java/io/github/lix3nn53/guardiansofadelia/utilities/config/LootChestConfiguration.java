@@ -17,7 +17,7 @@ import java.util.List;
 public class LootChestConfiguration {
 
     private static FileConfiguration lootChestsConfig;
-    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "rewards";
+    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "world";
 
     static void createConfigs() {
         lootChestsConfig = ConfigurationUtils.createConfig(filePath, "lootChests.yml");

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.Vector;
 
@@ -11,6 +12,12 @@ public class ArrangementDrawCylinder extends ArrangementWithData {
 
     private final int amount;
     private final double height;
+
+    public ArrangementDrawCylinder(Particle particle, Particle.DustOptions dustOptions, double minHeight, double maxHeight, double gap, int amount, double height) {
+        super(particle, dustOptions, minHeight, maxHeight, gap);
+        this.amount = amount;
+        this.height = height;
+    }
 
     public ArrangementDrawCylinder(ConfigurationSection configurationSection) {
         super(configurationSection);

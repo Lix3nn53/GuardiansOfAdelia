@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGround;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonInstance;
@@ -116,9 +118,26 @@ public class DungeonConfiguration {
                     waveToSpawners.put(waveIndex, spawners);
                 }
 
+                List<SkillOnGroundWithOffset> skillsOnGround = new ArrayList<>();
+                for (int skillIndex = 1; skillIndex <= 999; skillIndex++) {
+                    if (!section.contains("room" + roomIndex + ".skillOnGround" + skillIndex)) break;
+
+                    double x = section.getDouble("room" + roomIndex + ".skillOnGround" + skillIndex + ".loc" + ".x");
+                    double y = section.getDouble("room" + roomIndex + ".skillOnGround" + skillIndex + ".loc" + ".y");
+                    double z = section.getDouble("room" + roomIndex + ".skillOnGround" + skillIndex + ".loc" + ".z");
+
+                    Vector vector = new Vector(x, y, z);
+
+                    ConfigurationSection skillSection = section.getConfigurationSection("room" + roomIndex + ".skillOnGround" + skillIndex + ".skill");
+                    SkillOnGround skillOnGround = new SkillOnGround(skillSection);
+                    SkillOnGroundWithOffset skillOnGroundWithOffset = new SkillOnGroundWithOffset(skillOnGround, vector);
+
+                    skillsOnGround.add(skillOnGroundWithOffset);
+                }
+
                 List<Integer> nextRooms = section.getIntegerList("room" + roomIndex + ".nextRooms");
 
-                DungeonRoom dungeonRoom = new DungeonRoom(dungeonRoomDoors, waveToSpawners, nextRooms);
+                DungeonRoom dungeonRoom = new DungeonRoom(dungeonRoomDoors, waveToSpawners, skillsOnGround, nextRooms);
                 dungeonRooms.put(roomIndex, dungeonRoom);
             }
 
@@ -211,6 +230,19 @@ public class DungeonConfiguration {
 
                         spawnerIndex++;
                     }
+                }
+
+                List<SkillOnGroundWithOffset> skillsOnGround = dungeonRoom.getSkillsOnGround();
+                int skillIndex = 1;
+                for (SkillOnGroundWithOffset skillOnGround : skillsOnGround) {
+
+                    Vector offset = skillOnGround.getOffset();
+
+                    dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".skillOnGround" + skillIndex + ".loc" + ".x", offset.getX());
+                    dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".skillOnGround" + skillIndex + ".loc" + ".y", offset.getY());
+                    dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".skillOnGround" + skillIndex + ".loc" + ".z", offset.getZ());
+
+                    skillIndex++;
                 }
 
                 dungeonThemesConfig.set("theme" + i + ".room" + roomIndex + ".nextRooms", dungeonRoom.getNextRooms());

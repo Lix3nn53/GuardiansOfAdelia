@@ -3,35 +3,43 @@
 # ---------------------------------------------- #
 #                    Crafting                    #
 # ---------------------------------------------- #
-
-levelCount: 1
 level1:
-  itemSetCount: 2
   itemSet1:
     weaponGearType:
-      - DAGGER
       - SWORD
+      - DAGGER
+      - BATTLE_AXE
+      - WAR_HAMMER
+      - GREAT_SWORD
+    gearLevel: 0
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 9
+      - 8
+      - 3
+    ingredientAmounts:
+      - 10
+      - 8
+      - 6
+level2:
+  itemSet1:
+    weaponGearType:
+      - SWORD
+      - DAGGER
+      - BATTLE_AXE
+      - WAR_HAMMER
+      - GREAT_SWORD
     gearLevel: 1
     index: 0
     tier: MYSTIC
-    tag: "Weaponsmith's"
+    gearSet: "Smith's"
     ingredients:
-      - 1
-      - 2
+      - 9
+      - 8
+      - 3
     ingredientAmounts:
-      - 4
-      - 6
-  itemSet2:
-    classes:
-      - KNIGHT
-      - PALADIN
-    gearLevel: 1
-    index: 0
-    tier: MYSTIC
-    tag: "Weaponsmith's"
-    ingredients:
-      - 1
-      - 2
-    ingredientAmounts:
-      - 6
-      - 4
+      - 15
+      - 12
+      - 9

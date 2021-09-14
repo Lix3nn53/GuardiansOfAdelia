@@ -37,10 +37,10 @@ quest2:
     - "TASK_PROGRESS_1"
     - "TASK_PROGRESS_2"
     - "TASK_PROGRESS_3"
-    - "Finally talk with Wizard Odolf"
-  turnInMsg: ""
+    - "Finally talk with Professor Aldor"
+  turnInMsg: "You got a pet as your quest prize! Equip it from RPG Inventory"
   moneyPrize: 10
-  expPrize: 10
+  expPrize: 11
   requiredLevel: 1
   requiredQuests:
     - 5
@@ -50,7 +50,7 @@ quest2:
     npcId: 40
     onTaskCompleteAction1:
       actionType: "WeaponSelectOneOfAction"
-      gearLevel: 1
+      gearLevel: 0
       itemIndex: 0
       itemTier: "RARE"
       gearSet: "Academy"
@@ -60,7 +60,7 @@ quest2:
     onTaskCompleteAction1:
       actionType: "ArmorSelectOneOfAction"
       armorSlot: "BOOTS"
-      gearLevel: 1
+      gearLevel: 0
       itemIndex: 0
       itemTier: "RARE"
       gearSet: "Academy"
@@ -81,3 +81,172 @@ quest2:
         consumable: "POTION_INSTANT_MANA"
         skillLevel: 1
         uses: 10
+  itemPrizeSelectOneOf1:
+    itemType: "Egg"
+    petCode: "PetBat"
+    gearLevel: 0
+    petLevel: 1
+  itemPrizeSelectOneOf2:
+    itemType: "Egg"
+    petCode: "PetBee"
+    gearLevel: 0
+    petLevel: 1
+quest3:
+  questID: 7
+  npcToTakeFrom: 121
+  npcToComplete: 122
+  name: "Meet with alchemy professor"
+  story:
+    - "Professor Aldor wants you to go to alchemy classroom"
+  startMsg: ""
+  objectiveTextList:
+    - "Professor Aldor wants you to go to alchemy classroom"
+  turnInMsg: ""
+  moneyPrize: 10
+  expPrize: 20
+  requiredLevel: 1
+  requiredQuests:
+    - 6
+  advancementMaterial: "GRASS_BLOCK"
+quest4:
+  questID: 8
+  npcToTakeFrom: 122
+  npcToComplete: 123
+  name: "Gathering Equipment"
+  story:
+    - "Talk with Farmer Thomas to get"
+    - "required tools for gathering ingredients"
+  startMsg: ""
+  objectiveTextList:
+    - "Talk with Farmer TODO to get"
+    - "required tools for gathering ingredients"
+  turnInMsg: ""
+  moneyPrize: 10
+  expPrize: 20
+  requiredLevel: 1
+  requiredQuests:
+    - 7
+  advancementMaterial: "GRASS_BLOCK"
+  itemPrize1:
+    itemType: "Tool"
+    gatheringToolType: "HOE"
+    gatheringToolTier: "WOODEN"
+  itemPrize2:
+    itemType: "Tool"
+    gatheringToolType: "PICKAXE"
+    gatheringToolTier: "WOODEN"
+  itemPrize3:
+    itemType: "Tool"
+    gatheringToolType: "BOTTLE"
+    gatheringToolTier: "WOODEN"
+  itemPrize4:
+    itemType: "Tool"
+    gatheringToolType: "FISHING_ROD"
+    gatheringToolTier: "WOODEN"
+  itemPrize5:
+    itemType: "Tool"
+    gatheringToolType: "AXE"
+    gatheringToolTier: "WOODEN"
+quest5:
+  questID: 9
+  npcToTakeFrom: 123
+  npcToComplete: 124
+  name: "Classmate"
+  story:
+    - "Meet with your classmate. He will"
+    - "show you where you can gather ingredients"
+  startMsg: ""
+  objectiveTextList:
+    - "Meet with your classmate. He will"
+    - "show you where you can gather ingredients"
+  turnInMsg: ""
+  moneyPrize: 10
+  expPrize: 20
+  requiredLevel: 1
+  requiredQuests:
+    - 8
+  advancementMaterial: "GRASS_BLOCK"
+quest6:
+  questID: 10
+  npcToTakeFrom: 124
+  npcToComplete: 124
+  name: "Gathering Ingredients"
+  story:
+    - "Gather ingredients from flowers,"
+    - "slimes and magic sources."
+  startMsg: ""
+  objectiveTextList:
+    - "TASK_PROGRESS_1"
+    - "TASK_PROGRESS_2"
+    - "TASK_PROGRESS_3"
+    - "TASK_PROGRESS_4"
+    - "Gather ingredients from flowers,"
+    - "slimes and magic sources."
+  turnInMsg: ""
+  moneyPrize: 10
+  expPrize: 20
+  requiredLevel: 1
+  requiredQuests:
+    - 9
+  advancementMaterial: "GRASS_BLOCK"
+  task1:
+    taskType: "TaskGathering"
+    ingredientIndex: 5
+    amountNeeded: 8
+  task2:
+    taskType: "TaskGathering"
+    ingredientIndex: 6
+    amountNeeded: 8
+  task3:
+    taskType: "TaskGathering"
+    ingredientIndex: 10
+    amountNeeded: 2
+  task4:
+    taskType: "TaskCollect"
+    amountNeeded: 6
+    removeOnTurnIn: false
+    itemDrop:
+      itemType: "Ingredient"
+      ingredientNo: 7
+quest7:
+  questID: 11
+  npcToTakeFrom: 124
+  npcToComplete: 122
+  name: "Novice Alchemist"
+  story:
+    - "Craft a Hybrid Potion with the ingredients you"
+    - "gathered and talk to Professor Ivile"
+  startMsg: ""
+  objectiveTextList:
+    - "TASK_PROGRESS_1"
+    - "And talk to Professor Ivile"
+  turnInMsg: ""
+  moneyPrize: 10
+  expPrize: 20
+  requiredLevel: 1
+  requiredQuests:
+    - 10
+  advancementMaterial: "GRASS_BLOCK"
+  task1:
+    taskType: "TaskCrafting"
+    craftingType: "POTION"
+    amountNeeded: 1
+    minCraftingLevel: 1
+    itemNameContains: "Hybrid"
+quest8:
+  questID: 12
+  npcToTakeFrom: 122
+  npcToComplete: 121
+  name: "Successful Student"
+  story:
+    - "Tell Professor Aldor you passed the alchemy class"
+  startMsg: ""
+  objectiveTextList:
+    - "Tell Professor Aldor you passed the alchemy class"
+  turnInMsg: ""
+  moneyPrize: 10
+  expPrize: 20
+  requiredLevel: 1
+  requiredQuests:
+    - 11
+  advancementMaterial: "GRASS_BLOCK"

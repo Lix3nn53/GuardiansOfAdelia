@@ -14,6 +14,13 @@ public class FlagCondition extends ConditionComponent {
     private final boolean isSet;
     private final boolean isUnique;
 
+    public FlagCondition(String key, boolean isSet, boolean isUnique) {
+        super(false);
+        this.key = key;
+        this.isSet = isSet;
+        this.isUnique = isUnique;
+    }
+
     public FlagCondition(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 

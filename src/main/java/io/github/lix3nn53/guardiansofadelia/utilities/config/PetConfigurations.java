@@ -19,10 +19,10 @@ public class PetConfigurations {
     }
 
     static void loadConfigs() {
-        loadQuestLineConfigs();
+        load();
     }
 
-    private static void loadQuestLineConfigs() {
+    private static void load() {
         for (YamlConfiguration fileConfiguration : fileConfigurations) {
             String key = fileConfiguration.getString("mythicMobCode");
             int customModelData = fileConfiguration.getInt("customModelData");

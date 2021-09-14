@@ -4,84 +4,103 @@
 #                 Ingredients                    #
 # ---------------------------------------------- #
 
-ingredientCount: 8
+# 1_Academy
 i1:
   name: "&eRaw Beef"
-  customModelData: 0
-  ingredientLevel: 3
+  material: "BEEF"
+  ingredientLevel: 1
+  maxAmountPerGather: 1
+  dropRate: 0.8
   jobsCanUse:
-    - '&dAlchemist'
+    - '&aCooking'
   extraText:
     - '--'
 i2:
-  name: "&eWorn Leather"
-  customModelData: 0
-  ingredientLevel: 1
-  jobsCanUse:
-    - '&dArmorsmith'
-  extraText:
-    - '--'
-i3:
-  name: "&eHeavy Leather"
-  customModelData: 0
-  ingredientLevel: 4
-  jobsCanUse:
-    - '&dArmorsmith'
-  extraText:
-    - '--'
-i4:
   name: "&eRaw Cod"
-  customModelData: 0
-  ingredientLevel: 3
-  jobsCanUse:
-    - '&dAlchemist'
-  extraText:
-    - '--'
-i5:
-  name: "&eRaw Salmon"
-  customModelData: 0
-  ingredientLevel: 5
-  jobsCanUse:
-    - '&dAlchemist'
-  extraText:
-    - '--'
-i6:
-  name: "&eString"
-  customModelData: 0
+  material: "COD"
   ingredientLevel: 1
+  maxAmountPerGather: 1
+  dropRate: 0.8
   jobsCanUse:
-    - '&dWEAPONSMITH'
-    - '&dARMORSMITH'
-  extraText:
-    - '--'
+    - '&aCooking'
+i3:
+  name: "&eWorn Leather"
+  material: "LEATHER"
+  ingredientLevel: 1
+  maxAmountPerGather: 2
+  dropRate: 0.8
+  jobsCanUse:
+    - '&cWeaponsmith'
+    - '&3Armorsmith'
+i4:
+  name: "&eString"
+  material: "STRING"
+  ingredientLevel: 1
+  maxAmountPerGather: 2
+  dropRate: 0.8
+  jobsCanUse:
+    - '&cWeaponsmith'
+    - '&3Armorsmith'
+i5:
+  name: "&ePoppy"
+  material: "POPPY"
+  ingredientLevel: 1
+  maxAmountPerGather: 4
+  jobsCanUse:
+    - '&dPotion Brewing'
+    - '&aCooking'
+i6:
+  name: "&eBlue Orchid"
+  material: "BLUE_ORCHID"
+  ingredientLevel: 1
+  maxAmountPerGather: 4
+  jobsCanUse:
+    - '&dPotion Brewing'
+    - '&aCooking'
 i7:
-  name: "&eSilk"
-  customModelData: 0
-  ingredientLevel: 3
+  name: "&eSlime Ball"
+  material: "SLIME_BALL"
+  ingredientLevel: 1
+  maxAmountPerGather: 2
+  dropRate: 0.4
   jobsCanUse:
-    - '&dWEAPONSMITH'
-    - '&dARMORSMITH'
-  extraText:
-    - '--'
+    - '&dPotion Brewing'
 i8:
-  name: "&eSoft Silk"
-  customModelData: 0
-  ingredientLevel: 5
+  name: "&eWooden Stick"
+  material: "STICK"
+  ingredientLevel: 1
+  maxAmountPerGather: 4
   jobsCanUse:
-    - '&dWEAPONSMITH'
-    - '&dARMORSMITH'
-  extraText:
-    - '--'
+    - '&cWeaponsmith'
 i9:
-  name: "&eRose"
-  customModelData: 0
-  ingredientLevel: 5
+  name: "&eCopper"
+  material: "GREEN_DYE"
+  customModelData: 1
+  ingredientLevel: 1
+  maxAmountPerGather: 4
   jobsCanUse:
-    - '&dAlchemist'
-  extraText:
-    - '--'
+    - '&cWeaponsmith'
+    - '&3Armorsmith'
+    - '&6Jewelsmith'
+    - '&bEnchant Stone Crafting'
 i10:
-  name: "&eCherry"
+  name: "&eBottled Weak Magic"
+  material: "GREEN_DYE"
+  customModelData: 2
+  ingredientLevel: 1
+  maxAmountPerGather: 2
+  enchant: true
+  jobsCanUse:
+    - '&dPotion Brewing'
+    - '&aCooking'
+    - '&6Jewelsmith'
+    - '&bEnchant Stone Crafting'
+
+# 2_NextLevel
+
+i20:
+  name: "&eIron Mine"
+  material: "LEATHER"
   customModelData: 0
   ingredientLevel: 5
   jobsCanUse:
@@ -89,7 +108,8 @@ i10:
   extraText:
     - '--'
 i12:
-  name: "&eCopper Mine"
+  name: "&eSteel Mine"
+  material: "LEATHER"
   customModelData: 0
   ingredientLevel: 5
   jobsCanUse:
@@ -97,18 +117,40 @@ i12:
   extraText:
     - '--'
 i13:
-  name: "&eIron Mine"
+  name: "&eHeavy Leather"
+  material: "LEATHER"
+  customModelData: 0
+  ingredientLevel: 4
+  jobsCanUse:
+    - '&3Armorsmith'
+  extraText:
+    - '--'
+i14:
+  name: "&eRaw Salmon"
+  material: "LEATHER"
   customModelData: 0
   ingredientLevel: 5
   jobsCanUse:
     - '&dAlchemist'
   extraText:
     - '--'
-i14:
-  name: "&eSteel Mine"
+i15:
+  name: "&eSilk"
+  material: "LEATHER"
+  customModelData: 0
+  ingredientLevel: 3
+  jobsCanUse:
+    - '&dWEAPONSMITH'
+    - '&dARMORSMITH'
+  extraText:
+    - '--'
+i16:
+  name: "&eSoft Silk"
+  material: "LEATHER"
   customModelData: 0
   ingredientLevel: 5
   jobsCanUse:
-    - '&dAlchemist'
+    - '&dWEAPONSMITH'
+    - '&dARMORSMITH'
   extraText:
     - '--'

@@ -156,7 +156,7 @@ skillTwo:
   name: "Ice Meteor"
   customModelData: 50
   description:
-    - "Summon a small ice mass from the sky that"
+    - "Summon a small ice meteor from the sky that"
     - "deals damage and slows enemies in area."
   manaCosts:
     - 10
@@ -303,7 +303,7 @@ skillThree:
   name: "Frozen Meditation"
   customModelData: 24
   description:
-    - "Freeze yourself but restore health as you stay frozen."
+    - "Freeze yourself but restore health overtime."
   manaCosts:
     - 10
     - 12
@@ -466,8 +466,8 @@ skillUltimate:
   name: "Blizzard"
   customModelData: 49
   description:
-    - "Summon a blizzard that deals magic damage to"
-    - "nearby enemies and slows them."
+    - "Summon a blizzard that deals damage to nearby"
+    - "enemies and slows them every second."
   manaCosts:
     - 50
     - 55

@@ -4,33 +4,33 @@
 #                    Crafting                    #
 # ---------------------------------------------- #
 
-levelCount: 1
 level1:
-  itemSetCount: 2
   itemSet1:
     armorGearType:
       - HEAVY_ARMOR
-    gearLevel: 1
+      - PLATE_ARMOR
+    gearLevel: 0
     index: 0
     tier: MYSTIC
-    tag: "Armorsmith's"
+    gearSet: "Smith's"
     ingredients:
       - 1
       - 2
     ingredientAmounts:
-      - 4
-      - 6
-  itemSet2:
-    classes:
-      - KNIGHT
-      - PALADIN
+      - 12
+      - 8
+level2:
+  itemSet1:
+    armorGearType:
+      - HEAVY_ARMOR
+      - PLATE_ARMOR
     gearLevel: 1
     index: 0
     tier: MYSTIC
-    tag: "Armorsmith's"
+    gearSet: "Smith's"
     ingredients:
       - 1
       - 2
     ingredientAmounts:
-      - 6
-      - 4
+      - 18
+      - 12

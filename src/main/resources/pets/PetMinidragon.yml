@@ -7,8 +7,7 @@
 mythicMobCode: "PetMinidragon"
 customModelData: 5
 itemTier: "COMMON"
-speed: 4
-range: 12
+speed: 2
 skill1:
   cooldown: 100
   level: 1

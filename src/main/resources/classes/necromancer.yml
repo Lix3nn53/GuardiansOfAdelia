@@ -57,11 +57,12 @@ skillOne:
         - 2
         - 3
         - 4
-      levels:
-        - 1
-        - 2
-        - 3
-        - 4
+      element: "LIGHTNING"
+      elementPercents:
+        - 0.6
+        - 0.8
+        - 1.0
+        - 1.2
       child1:
         componentType: "RepeatMechanic"
         period: 100
@@ -200,7 +201,7 @@ skillThree:
   customModelData: 38
   description:
     - "Deal damage to all of your summons, heal yourself"
-    - "by an amount for each damaged summon."
+    - "for each damaged summon."
   manaCosts:
     - 5
     - 7
@@ -225,18 +226,18 @@ skillThree:
           componentType: "SelfTarget"
           child1:
             componentType: "HealMechanic"
-            healAmountList:
-              - 100
-              - 200
-              - 300
-              - 400
+            healPercentList:
+              - 0.08
+              - 0.1
+              - 0.12
+              - 0.15
       child2:
         componentType: "GodDamageMechanic"
-        damageList:
-          - 200
-          - 300
-          - 400
-          - 500
+        damagePercentList:
+          - 0.8
+          - 0.8
+          - 0.8
+          - 0.8
 skillPassive:
   name: "Bone Armor"
   customModelData: 47
@@ -290,9 +291,9 @@ skillPassive:
               buffType: "ELEMENT_DEFENSE"
               multipliers:
                 - 0.02
-                - 0.03
                 - 0.04
                 - 0.06
+                - 0.08
               ticks:
                 - 101
                 - 101
@@ -326,14 +327,6 @@ skillUltimate:
       minValue: 0
       maxValue: 0
       child1:
-        componentType: "ValueAddMechanic"
-        key: "NecroUltiSpawnCount"
-        valueToAdd:
-          - 1
-          - 1
-          - 2
-          - 3
-      child2:
         componentType: "SpawnCompanionMechanic"
         mobCode: "CompanionFrozenColossus"
         save: false
@@ -344,11 +337,12 @@ skillUltimate:
           - 1
           - 2
           - 3
-        levels:
-          - 1
-          - 2
-          - 3
-          - 4
+        element: "LIGHTNING"
+        elementPercents:
+          - 0.8
+          - 1.0
+          - 1.2
+          - 1.4
         child1:
           componentType: "RepeatMechanic"
           period: 100

@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -90,14 +91,19 @@ public class DungeonInstance extends Minigame {
             dungeonRoom.onDungeonStart(this.getStartLocation(1));
         }
 
-        // Starting rooms #onRoomStart
-        for (int roomNo : startingRooms) {
-            DungeonRoom dungeonRoom = this.theme.getDungeonRoom(roomNo);
-            DungeonRoomState state = dungeonRoomStates.get(roomNo);
-            dungeonRoom.onRoomStart(state, this.getStartLocation(1));
-        }
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                // Starting rooms #onRoomStart
+                for (int roomNo : startingRooms) {
+                    DungeonRoom dungeonRoom = theme.getDungeonRoom(roomNo);
+                    DungeonRoomState state = dungeonRoomStates.get(roomNo);
+                    dungeonRoom.onRoomStart(state, getStartLocation(1));
+                }
 
-        startDarknessRunnable();
+                startDarknessRunnable();
+            }
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 4);
     }
 
     @Override
@@ -185,6 +191,13 @@ public class DungeonInstance extends Minigame {
     }
 
     @Override
+    public void onPlayerDeath(Player player) {
+        super.onPlayerDeath(player);
+
+        this.darkness += 5;
+    }
+
+    @Override
     public List<String> getScoreboardTopLines() {
         List<String> topLines = new ArrayList<>();
         topLines.add("Time remaining: " + getTimeLimitInMinutes() * 60);
@@ -219,6 +232,8 @@ public class DungeonInstance extends Minigame {
     }
 
     public void remakeDebugHolograms() {
+        if (!CommandAdmin.DEBUG_MODE) return;
+
         clearDebugHolograms();
 
         Set<Integer> dungeonRoomKeys = theme.getDungeonRoomKeys();
@@ -390,5 +405,9 @@ public class DungeonInstance extends Minigame {
 
         playerToLootedChestCount.put(player, alreadyGot);
         player.sendMessage(ChatColor.YELLOW + "Remaining keys: " + ChatColor.GOLD + (this.unlockedChests - alreadyGot));
+    }
+
+    public void addDarkness(int add) {
+        this.darkness += add;
     }
 }

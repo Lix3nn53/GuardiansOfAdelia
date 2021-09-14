@@ -30,7 +30,7 @@ skillOne:
   customModelData: 18
   description:
     - "Shoot an arrow that deals area"
-    - "damage and pushes targets"
+    - "damage and pushes targets away on hit."
   manaCosts:
     - 10
     - 12
@@ -296,21 +296,17 @@ skillUltimate:
   description:
     - "Place a trap that triggers when"
     - "an enemy steps on it."
-    - "Stuns and marks the target when triggered."
+    - "Stuns the target when triggered."
   manaCosts:
     - 30
     - 30
     - 30
     - 30
-    - 30
-    - 30
   cooldowns:
-    - 35
-    - 33
-    - 31
-    - 29
-    - 27
-    - 25
+    - 3
+    - 3
+    - 3
+    - 3
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -349,21 +345,19 @@ skillUltimate:
             self: false
             max: 30
             radiusList:
-              - 2
-              - 2.5
-              - 3
-              - 3.5
-              - 4
-              - 4.5
+              - 1.2
+              - 1.2
+              - 1.2
+              - 1.2
             amountList:
-              - 24
-              - 24
-              - 24
-              - 24
+              - 0
+              - 0
+              - 0
+              - 0
             particle:
               particleType: "REDSTONE"
               dustColor: 65280
-              dustSize: 2
+              dustSize: 1
             child1:
               componentType: "ParticleMechanic"
               particle:

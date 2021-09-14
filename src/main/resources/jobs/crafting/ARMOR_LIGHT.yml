@@ -4,33 +4,39 @@
 #                    Crafting                    #
 # ---------------------------------------------- #
 
-levelCount: 1
 level1:
-  itemSetCount: 2
   itemSet1:
     armorGearType:
+      - LIGHT_ARMOR
       - FEATHER_ARMOR
+      - CLOTH_ARMOR
+    gearLevel: 0
+    index: 0
+    tier: MYSTIC
+    gearSet: "Smith's"
+    ingredients:
+      - 3
+      - 4
+      - 9
+    ingredientAmounts:
+      - 8
+      - 6
+      - 6
+level2:
+  itemSet1:
+    armorGearType:
+      - LIGHT_ARMOR
+      - FEATHER_ARMOR
+      - CLOTH_ARMOR
     gearLevel: 1
     index: 0
     tier: MYSTIC
-    tag: "Armorsmith's"
+    gearSet: "Smith's"
     ingredients:
-      - 1
-      - 2
-    ingredientAmounts:
+      - 3
       - 4
-      - 6
-  itemSet2:
-    classes:
-      - KNIGHT
-      - PALADIN
-    gearLevel: 1
-    index: 0
-    tier: MYSTIC
-    tag: "Armorsmith's"
-    ingredients:
-      - 1
-      - 2
+      - 9
     ingredientAmounts:
-      - 6
-      - 4
+      - 12
+      - 9
+      - 9

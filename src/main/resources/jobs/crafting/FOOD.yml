@@ -4,18 +4,65 @@
 #                    Crafting                    #
 # ---------------------------------------------- #
 
-levelCount: 1
 level1:
-  itemSetCount: 1
   itemSet1:
     consumableTypes:
       - BUFF_ELEMENT_DAMAGE
-      - BUFF_ELEMENT_DEFENSE
     skillLevel: 1
-    uses: 1
+    uses: 10
     ingredients:
       - 1
-      - 2
+      - 5
+      - 7
+      - 10
     ingredientAmounts:
       - 4
       - 6
+      - 4
+      - 1
+  itemSet2:
+    consumableTypes:
+      - BUFF_ELEMENT_DEFENSE
+    skillLevel: 1
+    uses: 10
+    ingredients:
+      - 2
+      - 6
+      - 7
+      - 10
+    ingredientAmounts:
+      - 4
+      - 6
+      - 4
+      - 1
+level2:
+  itemSet1:
+    consumableTypes:
+      - BUFF_ELEMENT_DAMAGE
+    skillLevel: 2
+    uses: 10
+    ingredients:
+      - 1
+      - 5
+      - 7
+      - 10
+    ingredientAmounts:
+      - 6
+      - 9
+      - 6
+      - 1
+  itemSet2:
+    consumableTypes:
+      - BUFF_ELEMENT_DEFENSE
+    skillLevel: 2
+    uses: 10
+    ingredients:
+      - 2
+      - 6
+      - 7
+      - 10
+    ingredientAmounts:
+      - 6
+      - 9
+      - 6
+      - 1

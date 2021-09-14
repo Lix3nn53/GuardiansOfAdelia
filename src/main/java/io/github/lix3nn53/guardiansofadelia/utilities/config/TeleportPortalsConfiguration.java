@@ -10,10 +10,12 @@ import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.io.File;
+
 public class TeleportPortalsConfiguration {
 
     private static FileConfiguration fileConfiguration;
-    private static final String filePath = ConfigManager.DATA_FOLDER.toString();
+    private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "world";
 
     static void createConfig() {
         fileConfiguration = ConfigurationUtils.createConfig(filePath, "teleportPortals.yml");

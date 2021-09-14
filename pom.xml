@@ -58,18 +58,6 @@
                 <filtering>true</filtering>
                 <includes>
                     <include>plugin.yml</include>
-                    <include>characterSelection.yml</include>
-                    <include>config.yml</include>
-                    <include>spawners.yml</include>
-                    <include>dungeonSpawners.yml</include>
-                    <include>towns.yml</include>
-                    <include>dungeons.yml</include>
-                    <include>dungeonGates.yml</include>
-                    <include>database.yml</include>
-                    <include>resourcepack.yml</include>
-                    <include>teleportPortals.yml</include>
-                    <include>teleportGui.yml</include>
-                    <include>holograms.yml</include>
                 </includes>
             </resource>
             <resource>

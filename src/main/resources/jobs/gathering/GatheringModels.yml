@@ -4,24 +4,181 @@
 #                GatheringModels                 #
 # ---------------------------------------------- #
 
-count: 1
 i1:
-  name: "&6Gold Ore"
-  customModelData: 2
+  name: '&6Copper Ore'
+  material: STONE_AXE
+  customModelData: 10
+  cooldownCustomModelData: 2
+  gatheringToolType: PICKAXE
+  minGatheringToolTier: WOODEN
+  ingredients:
+    - 9
+  loc1:
+    world: world
+    x: 1985.5
+    y: 94.0
+    z: 1394.5
+  loc2:
+    world: world
+    x: 2086.5
+    y: 100.0
+    z: 1476.5
+  loc3:
+    world: world
+    x: 2131.5
+    y: 96.0
+    z: 1450.5
+  loc4:
+    world: world
+    x: 2159.5
+    y: 100.0
+    z: 1451.5
+  loc5:
+    world: world
+    x: 2017.5
+    y: 101.0
+    z: 1489.5
+i2:
+  name: '&cPoppy'
+  material: STONE_AXE
+  customModelData: 41
   cooldownCustomModelData: 1
-  world: world
-  x: 2051.5
-  y: 101.0
-  z: 1450.5
-  yaw: 0
-  pitch: 0
-i1:
-  name: "&6Fishing Area"
-  customModelData: 1
+  gatheringToolType: HOE
+  minGatheringToolTier: WOODEN
+  ingredients:
+    - 5
+  loc1:
+    world: world
+    x: 2058.5
+    y: 104.0
+    z: 1435.5
+  loc2:
+    world: world
+    x: 2145.5
+    y: 94.0
+    z: 1412.5
+  loc3:
+    world: world
+    x: 2123.5
+    y: 107.0
+    z: 1299.5
+  loc4:
+    world: world
+    x: 2188.5
+    y: 94.0
+    z: 1413.5
+  loc5:
+    world: world
+    x: 2103.5
+    y: 97.0
+    z: 1466.5
+  loc6:
+    world: world
+    x: 2001.5
+    y: 97.0
+    z: 1478.5
+i3:
+  name: '&bBlue Orchid'
+  material: STONE_AXE
+  customModelData: 40
   cooldownCustomModelData: 1
-  world: world
-  x: 2164.5
-  y: 94.0
-  z: 1423.5
-  yaw: 0
-  pitch: 0
+  gatheringToolType: HOE
+  minGatheringToolTier: WOODEN
+  ingredients:
+    - 6
+  loc1:
+    world: world
+    x: 2156.5
+    y: 97.0
+    z: 1439.5
+  loc2:
+    world: world
+    x: 2151.5
+    y: 107.0
+    z: 1261.5
+  loc3:
+    world: world
+    x: 2179.5
+    y: 93.0
+    z: 1406.5
+  loc4:
+    world: world
+    x: 2075.5
+    y: 99.0
+    z: 1459.5
+  loc5:
+    world: world
+    x: 2008.5
+    y: 104.0
+    z: 1505.5
+i4:
+  name: '&eWooden Stick'
+  material: STONE_AXE
+  customModelData: 20
+  cooldownCustomModelData: 1
+  gatheringToolType: AXE
+  minGatheringToolTier: WOODEN
+  ingredients:
+    - 8
+  loc1:
+    world: world
+    x: 2134.5
+    y: 94.0
+    z: 1430.5
+    rotation:
+      x: 0.0
+      y: 1.5
+      z: 5.0
+  loc2:
+    world: world
+    x: 2230.5
+    y: 99.0
+    z: 1217.5
+    rotation:
+      x: 0.0
+      y: 1.0
+      z: 5.0
+  loc3:
+    world: world
+    x: 2141.5
+    y: 97.0
+    z: 1447.5
+    rotation:
+      x: 5.0
+      y: 0.0
+      z: 0.0
+  loc4:
+    world: world
+    x: 2061.5
+    y: 101.0
+    z: 1470.5
+    rotation:
+      x: 0.0
+      y: 4.0
+      z: 1.5
+i5:
+  name: '&dWeak Magic Source'
+  material: STONE_AXE
+  customModelData: 30
+  cooldownCustomModelData: 1
+  gatheringToolType: BOTTLE
+  minGatheringToolTier: WOODEN
+  disguise: true
+  ingredients:
+    - 10
+  loc1:
+    world: world
+    x: 2031.5
+    y: 108.0
+    z: 1522.5
+i6:
+  name: '&9Small Fishing Area'
+  gatheringToolType: FISHING_ROD
+  minGatheringToolTier: WOODEN
+  ingredients:
+    - 2
+  loc1:
+    world: world
+    x: 2164.5
+    y: 94.0
+    z: 1423.5

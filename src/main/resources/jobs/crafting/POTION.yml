@@ -4,20 +4,113 @@
 #                    Crafting                    #
 # ---------------------------------------------- #
 
-levelCount: 1
 level1:
-  itemSetCount: 1
   itemSet1:
     consumableTypes:
       - POTION_INSTANT_HEALTH
+    skillLevel: 1
+    uses: 10
+    ingredients:
+      - 5
+      - 7
+      - 10
+    ingredientAmounts:
+      - 8
+      - 4
+      - 1
+  itemSet2:
+    consumableTypes:
       - POTION_INSTANT_MANA
+    skillLevel: 1
+    uses: 10
+    ingredients:
+      - 6
+      - 7
+      - 10
+    ingredientAmounts:
+      - 8
+      - 4
+      - 1
+  itemSet3:
+    consumableTypes:
       - POTION_INSTANT_HYBRID
+    skillLevel: 1
+    uses: 10
+    ingredients:
+      - 5
+      - 6
+      - 7
+      - 10
+    ingredientAmounts:
+      - 8
+      - 8
+      - 6
+      - 2
+  itemSet4:
+    consumableTypes:
       - POTION_REGENERATION_HEALTH
     skillLevel: 1
-    uses: 1
+    uses: 10
     ingredients:
-      - 1
-      - 2
+      - 5
+      - 7
+      - 10
     ingredientAmounts:
-      - 4
+      - 10
       - 6
+      - 2
+level2:
+  itemSet1:
+    consumableTypes:
+      - POTION_INSTANT_HEALTH
+    skillLevel: 2
+    uses: 10
+    ingredients:
+      - 5
+      - 7
+      - 10
+    ingredientAmounts:
+      - 12
+      - 6
+      - 1
+  itemSet2:
+    consumableTypes:
+      - POTION_INSTANT_MANA
+    skillLevel: 2
+    uses: 10
+    ingredients:
+      - 6
+      - 7
+      - 10
+    ingredientAmounts:
+      - 12
+      - 6
+      - 1
+  itemSet3:
+    consumableTypes:
+      - POTION_INSTANT_HYBRID
+    skillLevel: 2
+    uses: 10
+    ingredients:
+      - 5
+      - 6
+      - 7
+      - 10
+    ingredientAmounts:
+      - 12
+      - 12
+      - 9
+      - 2
+  itemSet4:
+    consumableTypes:
+      - POTION_REGENERATION_HEALTH
+    skillLevel: 2
+    uses: 10
+    ingredients:
+      - 5
+      - 7
+      - 10
+    ingredientAmounts:
+      - 15
+      - 9
+      - 2

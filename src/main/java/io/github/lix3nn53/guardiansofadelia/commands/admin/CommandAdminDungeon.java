@@ -6,6 +6,9 @@ import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.BukkitPlayer;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.Region;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGround;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonInstance;
@@ -41,23 +44,17 @@ public class CommandAdminDungeon implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon start [theme] <instanceNo>");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon tp [theme] <instanceNo>");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon holo [theme] - remakes holograms");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon door [theme] - close/open doors");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon add room [theme] <roomNo>");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon add door [theme] <roomNo> <material>" + ChatColor.GOLD + " !!select WorldEdit region first!!");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon add spawner [theme] <roomNo> <waveNo> <mobCode> <mobLevel> <amount>" + ChatColor.GOLD + " !!look at spawner location block!!");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon add checkpoint" + ChatColor.GOLD + " !!look at spawner location block!!");
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon add skill [theme] <roomNo>" + ChatColor.GOLD + " !!look at location block!!");
+                player.sendMessage(ChatColor.YELLOW + "/admindungeon add checkpoint" + ChatColor.GOLD + " !!look at location block!!");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon set prizeloc [theme]" + ChatColor.GOLD + " !!look at block!!");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon reload - DELETES NEW CHANGES");
                 player.sendMessage(ChatColor.YELLOW + "/admindungeon save - SAVES NEW CHANGES");
-            } else if (args[0].equals("start")) {
-                String key = args[1].toUpperCase();
-                int instanceNo = Integer.parseInt(args[2]);
-
-                boolean joined = MiniGameManager.getDungeonInstance(key, instanceNo).joinQueue(player);
-
             } else if (args[0].equals("reload")) {
                 MiniGameManager.clearDungeonData();
 
@@ -113,8 +110,9 @@ public class CommandAdminDungeon implements CommandExecutor {
                         List<DungeonRoomDoor> doors = new ArrayList<>();
                         HashMap<Integer, List<DungeonRoomSpawner>> waves = new HashMap<>();
                         List<Integer> nextRooms = new ArrayList<>();
+                        List<SkillOnGroundWithOffset> skillsOnGround = new ArrayList<>();
 
-                        DungeonRoom dungeonRoom = new DungeonRoom(doors, waves, nextRooms);
+                        DungeonRoom dungeonRoom = new DungeonRoom(doors, waves, skillsOnGround, nextRooms);
 
                         dungeonTheme.addDungeonRoom(roomNo, dungeonRoom);
                         player.sendMessage(ChatColor.GREEN + "Added new room");
@@ -176,6 +174,30 @@ public class CommandAdminDungeon implements CommandExecutor {
                         DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);
                         dungeonRoom.addSpawner(waveNo, spawner);
                         player.sendMessage(ChatColor.GREEN + "Added new spawner");
+                        remakeHolograms(key);
+                        break;
+                    }
+                    case "skill": {
+                        String key = args[2].toUpperCase();
+                        int roomNo = Integer.parseInt(args[3]);
+
+                        HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
+                        DungeonTheme dungeonTheme = dungeonThemes.get(key);
+
+                        Block targetBlock = player.getTargetBlock(null, 12);
+                        Location add = targetBlock.getLocation().add(0.5, 1, 0.5);
+
+                        Location start = MiniGameManager.getDungeonInstance(key, 1).getStartLocation(1);
+                        Vector offset = start.toVector().subtract(add.toVector()).multiply(-1);
+
+                        SelfTarget selfTarget = new SelfTarget();
+                        SkillOnGround skillOnGround = new SkillOnGround(400, selfTarget);
+                        SkillOnGroundWithOffset skillOnGroundWithOffset = new SkillOnGroundWithOffset(skillOnGround, offset);
+
+                        DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);
+                        dungeonRoom.addSkillOnGround(skillOnGroundWithOffset);
+
+                        player.sendMessage(ChatColor.GREEN + "Added new skillOnGround");
                         remakeHolograms(key);
                         break;
                     }

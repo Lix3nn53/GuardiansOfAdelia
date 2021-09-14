@@ -6,7 +6,7 @@
 
 tier: 3
 color: "GOLD"
-mainElement: "LIGHTNING"
+mainElement: "EARTH"
 description:
   - "Paladins aids fellow adventurers with"
   - "the holy power of light and beats foes"
@@ -30,10 +30,10 @@ shieldGearTypes:
 hasDefaultOffhand: true
 isDefaultOffhandWeapon: false
 skillOne:
-  name: "sadasdas"
-  customModelData: 15
+  name: "Wide Swing"
+  customModelData: 4
   description:
-    - "Deal damage to nearby enemies"
+    - "Deal damage to targets in front of you and push them away."
   manaCosts:
     - 5
     - 7
@@ -95,8 +95,8 @@ skillOne:
         componentType: "SoundMechanic"
         goaSound: "SKILL_LIGHTNING_NORMAL"
 skillTwo:
-  name: "asdasdsa"
-  customModelData: 46
+  name: "Absorption"
+  customModelData: 25
   description:
     - "Shoot a flame-burst that launches"
     - "a target into the sky"
@@ -193,8 +193,8 @@ skillTwo:
           componentType: "SoundMechanic"
           goaSound: "SKILL_FIRE_AURA"
 skillThree:
-  name: "asdasdasd"
-  customModelData: 40
+  name: "Victory March"
+  customModelData: 26
   description:
     - "Place a flag at your location that"
     - "gives damage buff to nearby allies"
@@ -248,8 +248,8 @@ skillThree:
       componentType: "SoundMechanic"
       goaSound: "SKILL_BUFF"
 skillPassive:
-  name: "Aura of Darkness"
-  customModelData: 7
+  name: "Guardian Angel"
+  customModelData: 24
   description:
     - "If you take damage that leaves you with less than 15% health,"
     - "unleash your rage and gain movement speed and jump boost."
@@ -338,8 +338,8 @@ skillPassive:
               - 80
               - 80
 skillUltimate:
-  name: "Blackhole"
-  customModelData: 44
+  name: "Victory Flag"
+  customModelData: 22
   description:
     - "Jump forward into the air. When you land deal"
     - "damage and launch nearby enemies into the sky."

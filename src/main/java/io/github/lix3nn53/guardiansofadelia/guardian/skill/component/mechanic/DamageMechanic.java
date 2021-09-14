@@ -22,6 +22,14 @@ public class DamageMechanic extends MechanicComponent {
     private final ElementType damageType;
     private final String multiplyWithValue;
 
+    public DamageMechanic(boolean addLore, List<Double> damageList, List<Double> damageMultiplyList, ElementType damageType, String multiplyWithValue) {
+        super(addLore);
+        this.damageList = damageList;
+        this.damageMultiplyList = damageMultiplyList != null ? damageMultiplyList : new ArrayList<>();
+        this.damageType = damageType;
+        this.multiplyWithValue = multiplyWithValue;
+    }
+
     public DamageMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 

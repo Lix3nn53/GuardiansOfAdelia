@@ -203,7 +203,7 @@ skillThree:
   name: "Blasting Warp"
   customModelData: 62
   description:
-    - "Warp to where you are looking at. After a small delay"
+    - "Warp forward in location you are facing. After a small delay"
     - "cause a explosion in your old location, dealing damage to enemies."
   manaCosts:
     - 10
@@ -320,8 +320,8 @@ skillPassive:
   customModelData: 31
   description:
     - "Every time you cast a spell gain a stack."
-    - "If you have 4 stacks particles will start playing"
-    - "around you. The enemies your next skill hit will burn."
+    - "If you have 4 stacks your next skill that deals"
+    - "damage to targets will also burn them."
   manaCosts:
     - 0
     - 0
@@ -399,9 +399,8 @@ skillUltimate:
   name: "Chaos Meteor"
   customModelData: 30
   description:
-    - "Summon a meteor from sky that"
-    - "damages and launches them upwards"
-    - "nearby enemies when it reaches ground."
+    - "Summon a meteor from sky that damages"
+    - "and launches nearby enemies upwards."
   manaCosts:
     - 50
     - 55

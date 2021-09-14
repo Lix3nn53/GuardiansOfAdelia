@@ -289,6 +289,14 @@ skillThree:
         - 120
         - 120
     child4:
+      componentType: "GlowMechanic"
+      color: "DARK_PURPLE"
+      ticks:
+        - 120
+        - 120
+        - 120
+        - 120
+    child5:
       componentType: "DelayMechanic"
       ticks: 20
       child1:
@@ -349,12 +357,21 @@ skillThree:
               - 1.6
               - 1.8
               - 2.2
-    child5:
+          child2:
+            componentType: "StatusEffectMechanic"
+            statusEffectTypes:
+              - "STUN"
+            durations:
+              - 40
+              - 50
+              - 60
+              - 70
+    child6:
       componentType: "SoundMechanic"
       goaSound: "SKILL_BUFF"
 skillPassive:
   name: "Aura of Darkness"
-  customModelData: 7
+  customModelData: 45
   description:
     - "If you take damage that leaves you with less than 15% health,"
     - "unleash your rage and gain movement speed and jump boost."

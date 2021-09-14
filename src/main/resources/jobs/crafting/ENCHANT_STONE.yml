@@ -1,0 +1,42 @@
+# ---------------------------------------------- #
+#               Jobs Configuration               #
+# ---------------------------------------------- #
+#                    Crafting                    #
+# ---------------------------------------------- #
+
+level1:
+  itemSet1:
+    tier: "TIER_ONE"
+    ingredients:
+      - 9
+      - 10
+    ingredientAmounts:
+      - 4
+      - 1
+level2:
+  itemSet1:
+    tier: "TIER_TWO"
+    ingredients:
+      - 9
+      - 10
+    ingredientAmounts:
+      - 999
+      - 999
+level3:
+  itemSet1:
+    tier: "TIER_THREE"
+    ingredients:
+      - 9
+      - 10
+    ingredientAmounts:
+      - 999
+      - 999
+level4:
+  itemSet1:
+    tier: "TIER_FOUR"
+    ingredients:
+      - 9
+      - 10
+    ingredientAmounts:
+      - 999
+      - 999

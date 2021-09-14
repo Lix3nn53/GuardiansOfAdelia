@@ -27,6 +27,19 @@ public class AreaTarget extends TargetComponent {
     private final double particleHeight;
     private final ArrangementSingle arrangementSingle;
 
+    public AreaTarget(boolean addLore, boolean allies, boolean enemy, boolean self, int max, boolean armorStand, boolean keepCurrent,
+                      boolean addToBeginning, List<Double> radiusList, List<Integer> amountList, List<Double> offset_xList,
+                      List<Double> offset_yList, List<Double> offset_zList, double particleHeight, ArrangementSingle arrangementSingle) {
+        super(addLore, allies, enemy, self, max, armorStand, keepCurrent, addToBeginning);
+        this.radiusList = radiusList;
+        this.amountList = amountList;
+        this.offset_xList = offset_xList;
+        this.offset_yList = offset_yList;
+        this.offset_zList = offset_zList;
+        this.particleHeight = particleHeight;
+        this.arrangementSingle = arrangementSingle;
+    }
+
     public AreaTarget(ConfigurationSection configurationSection) {
         super(configurationSection);
 

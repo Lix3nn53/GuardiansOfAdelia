@@ -370,7 +370,7 @@ skillUltimate:
   customModelData: 23
   description:
     - "Launch youreself into the air. When you land deal"
-    - "damage and launch nearby enemies into the sky."
+    - "massive damage to nearby enemies."
   manaCosts:
     - 50
     - 50

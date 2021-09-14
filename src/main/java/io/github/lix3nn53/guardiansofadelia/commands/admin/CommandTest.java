@@ -1,11 +1,19 @@
 package io.github.lix3nn53.guardiansofadelia.commands.admin;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.FlagCondition;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.FlagSetMechanic;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGround;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
+import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
+import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,8 +24,13 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CommandTest implements CommandExecutor {
 
+    boolean test = false;
+    SkillOnGround skillOnGround;
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
@@ -32,10 +45,50 @@ public class CommandTest implements CommandExecutor {
                 player.sendMessage(ChatColor.BLUE + "/test sound <code> - play custom sounds");
                 player.sendMessage(ChatColor.BLUE + "/test damage <amount> - damage self");
             } else if (args[0].equals("test")) {
-                Block block = player.getLocation().getBlock();
-                byte lightLevel = block.getLightLevel();
+                if (this.test) {
+                    test = false;
+                    skillOnGround.deactivate();
+                    return true;
+                }
+                test = true;
 
-                player.sendMessage("lightLevel: " + lightLevel);
+                SelfTarget selfTarget = new SelfTarget();
+
+                ArrangementSingle arrangementSingle = new ArrangementSingle(Particle.FLAME, null, 0.1, 0.5, 0.1);
+                /* ParticleMechanic particleMechanic = new ParticleMechanic(false, arrangementSingle, new ArrayList<>(), null, 0, 0,
+                        false, true, true, true, 0, 0, 0, 0, 0);*/
+
+                ArrayList<Double> radiusList = new ArrayList<>();
+                radiusList.add(5d);
+                ArrayList<Integer> amountList = new ArrayList<>();
+                amountList.add(20);
+                AreaTarget areaTarget = new AreaTarget(false, true, true, false, 10, false, false,
+                        false, radiusList, amountList, null, null, null, 0.2, arrangementSingle);
+
+
+                ArrayList<Double> damages = new ArrayList<>();
+                damages.add(1d);
+                DamageMechanic damageMechanic = new DamageMechanic(false, damages, null, ElementType.FIRE, null);
+
+                FlagCondition flagCondition = new FlagCondition("trapKey", false, false);
+                SelfTarget selfTargetForFlag = new SelfTarget();
+                FlagCondition flagConditionForFlag = new FlagCondition("trapKey", false, false);
+
+                List<Integer> ticks = new ArrayList<>();
+                ticks.add(40);
+                ticks.add(40);
+                FlagSetMechanic FlagSetMechanic = new FlagSetMechanic("trapKey", ticks, false, null);
+
+                selfTarget.addChildren(flagCondition);
+                flagCondition.addChildren(areaTarget);
+                areaTarget.addChildren(damageMechanic);
+                areaTarget.addChildren(selfTargetForFlag);
+                selfTargetForFlag.addChildren(flagConditionForFlag);
+                flagConditionForFlag.addChildren(FlagSetMechanic);
+
+                skillOnGround = new SkillOnGround(20L, selfTarget);
+
+                skillOnGround.activate(player.getLocation(), 40L);
             } else if (args[0].equals("sound")) {
                 if (args.length == 2) {
                     GoaSound goaSound = GoaSound.valueOf(args[1]);
