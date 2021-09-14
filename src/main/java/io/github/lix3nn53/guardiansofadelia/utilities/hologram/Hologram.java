@@ -46,7 +46,6 @@ public class Hologram {
         as.setMarker(true);
         as.setInvulnerable(true);
         as.setCustomNameVisible(false);
-        as.setCustomName("");
         type = HologramType.INVISIBLE;
     }
 

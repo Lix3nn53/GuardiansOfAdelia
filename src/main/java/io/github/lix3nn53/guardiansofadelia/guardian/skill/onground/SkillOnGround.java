@@ -19,6 +19,7 @@ import java.util.List;
 
 public class SkillOnGround {
 
+    private final String name;
     private final long period;
     private final Skill skill;
 
@@ -27,7 +28,8 @@ public class SkillOnGround {
     BukkitTask bukkitTask;
     int castCounter = 1;
 
-    public SkillOnGround(long period, SkillComponent... triggerComponents) {
+    public SkillOnGround(String name, long period, SkillComponent... triggerComponents) {
+        this.name = name;
         this.period = period;
 
         ArrayList<Integer> cooldowns = new ArrayList<>();
@@ -45,6 +47,7 @@ public class SkillOnGround {
     }
 
     public SkillOnGround(ConfigurationSection configurationSection) {
+        this.name = configurationSection.contains("name") ? configurationSection.getString("name") : null;
         this.period = configurationSection.getLong("period");
 
         ArrayList<Integer> cooldowns = new ArrayList<>();
@@ -67,7 +70,13 @@ public class SkillOnGround {
     }
 
     public void activate(Location location, long delay) {
-        Hologram hologram = new Hologram(location, "Test SkillOnGround");
+        Hologram hologram;
+        if (name == null) {
+            hologram = new Hologram(location);
+        } else {
+            hologram = new Hologram(location, this.name);
+        }
+
         armorStand = hologram.getArmorStand();
 
         ArrayList<LivingEntity> targets = new ArrayList<>();

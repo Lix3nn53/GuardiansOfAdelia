@@ -36,6 +36,8 @@ public class Checkpoint {
         MiscDisguise disguise = new MiscDisguise(DisguiseType.DROPPED_ITEM);
         DroppedItemWatcher watcher = (DroppedItemWatcher) disguise.getWatcher();
         watcher.setItemStack(holoItem);
+        watcher.setCustomName("Checkpoint");
+        watcher.setCustomNameVisible(true);
 
         DisguiseAPI.disguiseToAll(hologram.getArmorStand().getPassengers().get(0), disguise);
     }
