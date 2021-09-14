@@ -8,54 +8,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EconomyUtils {
 
-    public static List<Coin> priceToCoins(int price) {
-        int copperAmount;
-        int silverAmount = 0;
-        int goldAmount = 0;
-        if (price > 63) {
-            copperAmount = price % 64;
-            silverAmount = price / 64;
-            if (silverAmount > 63) {
-                silverAmount = price % 64;
-                goldAmount = price / 64;
-            }
-        } else {
-            copperAmount = price;
-        }
-
-        List<Coin> coins = new ArrayList<>();
-
-        coins.add(new Coin(CoinType.COPPER, copperAmount));
-        coins.add(new Coin(CoinType.SILVER, silverAmount));
-        coins.add(new Coin(CoinType.GOLD, goldAmount));
-
-        return coins;
-    }
-
-    public static String priceToString(int price) {
-        int copperAmount = 0;
-        int silverAmount = 0;
-        int goldAmount = 0;
-        if (price > 63) {
-            copperAmount = price % 64;
-            silverAmount = price / 64;
-            if (silverAmount > 63) {
-                silverAmount = price % 64;
-                goldAmount = price / 64;
-            }
-        } else {
-            copperAmount = price;
-        }
-        return ChatColor.GREEN + Integer.toString(copperAmount) + " " + ChatColor.WHITE + silverAmount + " " +
-                ChatColor.YELLOW + goldAmount;
-    }
-
-    public static ItemStack setShopPrice(ItemStack itemStack, int price) {
+    public static int[] priceToCoins(int price) {
         int copper;
         int silver = 0;
         int gold = 0;
@@ -63,16 +20,31 @@ public class EconomyUtils {
             copper = price % 64;
             silver = price / 64;
             if (silver > 63) {
-                silver = price % 64;
-                gold = price / 64;
+                int excessSilver = silver;
+                silver = excessSilver % 64;
+                gold = excessSilver / 64;
             }
         } else {
             copper = price;
         }
+
+        return new int[]{copper, silver, gold};
+    }
+
+    public static String priceToString(int price) {
+        int[] coins = priceToCoins(price);
+
+        return ChatColor.GREEN + Integer.toString(coins[0]) + " " + ChatColor.WHITE + coins[1] + " " +
+                ChatColor.YELLOW + coins[2];
+    }
+
+    public static ItemStack setShopPrice(ItemStack itemStack, int price) {
+        int[] coins = priceToCoins(price);
+
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> lore = itemMeta.getLore();
-        String priceString = ChatColor.GREEN + Integer.toString(copper) + " " + ChatColor.WHITE + silver + " " +
-                ChatColor.YELLOW + gold;
+        String priceString = ChatColor.GREEN + Integer.toString(coins[0]) + " " + ChatColor.WHITE + coins[1] + " " +
+                ChatColor.YELLOW + coins[2];
         lore.add(ChatColor.GOLD + "Price: " + priceString);
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
@@ -103,133 +75,101 @@ public class EconomyUtils {
     }
 
     public static boolean pay(Player player, ItemStack itemStack) {
-        int copper;
-        int silver = 0;
-        int gold = 0;
         int price = getItemPrice(itemStack);
-        if (price > 63) {
-            copper = price % 64;
-            silver = price / 64;
-            if (silver > 63) {
-                silver = price % 64;
-                gold = price / 64;
-            }
-        } else {
-            copper = price;
-        }
+
+        int[] coins = priceToCoins(price);
+
         boolean payed = false;
         boolean payed1 = false;
         boolean payed2 = false;
-        if (copper > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.IRON_INGOT, copper)) {
+        if (coins[0] > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.IRON_INGOT, coins[0])) {
                 payed = true;
             }
         } else {
             payed = true;
         }
-        if (silver > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.GOLD_INGOT, silver)) {
+        if (coins[1] > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.GOLD_INGOT, coins[1])) {
                 payed1 = true;
             }
         } else {
             payed1 = true;
         }
-        if (gold > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.DIAMOND, gold)) {
+        if (coins[2] > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.DIAMOND, coins[2])) {
                 payed2 = true;
             }
         } else {
             payed2 = true;
         }
         if (payed && payed1 && payed2) {
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.IRON_INGOT, copper);
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.GOLD_INGOT, silver);
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.DIAMOND, gold);
+            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.IRON_INGOT, coins[1]);
+            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.GOLD_INGOT, coins[2]);
+            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.DIAMOND, coins[3]);
             return true;
         }
         return false;
     }
 
     public static boolean pay(Player player, int price) {
-        int copper;
-        int silver = 0;
-        int gold = 0;
-        if (price > 63) {
-            copper = price % 64;
-            silver = price / 64;
-            if (silver > 63) {
-                silver = price % 64;
-                gold = price / 64;
-            }
-        } else {
-            copper = price;
-        }
+        int[] coins = priceToCoins(price);
+
         boolean payed = false;
         boolean payed1 = false;
         boolean payed2 = false;
-        if (copper > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.IRON_INGOT, copper)) {
+        if (coins[0] > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.IRON_INGOT, coins[0])) {
                 payed = true;
             }
         } else {
             payed = true;
         }
-        if (silver > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.GOLD_INGOT, silver)) {
+        if (coins[1] > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.GOLD_INGOT, coins[1])) {
                 payed1 = true;
             }
         } else {
             payed1 = true;
         }
-        if (gold > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.DIAMOND, gold)) {
+        if (coins[2] > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.DIAMOND, coins[2])) {
                 payed2 = true;
             }
         } else {
             payed2 = true;
         }
         if (payed && payed1 && payed2) {
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.IRON_INGOT, copper);
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.GOLD_INGOT, silver);
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.DIAMOND, gold);
+            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.IRON_INGOT, coins[0]);
+            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.GOLD_INGOT, coins[1]);
+            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.DIAMOND, coins[2]);
             return true;
         }
         return false;
     }
 
     public static boolean canPay(Player player, int price) {
-        int copper;
-        int silver = 0;
-        int gold = 0;
-        if (price > 63) {
-            copper = price % 64;
-            silver = price / 64;
-            if (silver > 63) {
-                silver = price % 64;
-                gold = price / 64;
-            }
-        } else {
-            copper = price;
-        }
+        int[] coins = priceToCoins(price);
+
         boolean payed = false;
         boolean payed1 = false;
         boolean payed2 = false;
-        if (copper > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.IRON_INGOT, copper)) {
+        if (coins[0] > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.IRON_INGOT, coins[0])) {
                 payed = true;
             }
         } else {
             payed = true;
         }
-        if (silver > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.GOLD_INGOT, silver)) {
+        if (coins[1] > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.GOLD_INGOT, coins[1])) {
                 payed1 = true;
             }
         } else {
             payed1 = true;
         }
-        if (gold > 0) {
-            if (InventoryUtils.inventoryContains(player.getInventory(), Material.DIAMOND, gold)) {
+        if (coins[2] > 0) {
+            if (InventoryUtils.inventoryContains(player.getInventory(), Material.DIAMOND, coins[2])) {
                 payed2 = true;
             }
         } else {

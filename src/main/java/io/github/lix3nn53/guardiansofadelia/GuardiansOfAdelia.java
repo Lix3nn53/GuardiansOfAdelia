@@ -20,6 +20,7 @@ import io.github.lix3nn53.guardiansofadelia.sounds.MySongNextEvent;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.shutdown.AutomaticShutdown;
+import io.github.lix3nn53.guardiansofadelia.utilities.signmenu.SignMenuFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
@@ -40,6 +41,67 @@ public class GuardiansOfAdelia extends JavaPlugin {
 
     public static GuardiansOfAdelia getInstance() {
         return instance;
+    }
+
+    private static SignMenuFactory signMenuFactory;
+
+    public static SignMenuFactory getSignMenuFactory() {
+        return signMenuFactory;
+    }
+
+    @Override
+    public void onDisable() {
+        DatabaseManager.onDisable();
+        ConfigManager.writeConfigALL();
+    }
+
+    private void startGlobalManaRegen(double maxManaPercent) {
+        double manaPercent = 0.1;
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+                for (Player player : onlinePlayers) {
+                    if (GuardianDataManager.hasGuardianData(player)) {
+                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+                        if (guardianData.hasActiveCharacter()) {
+                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                            RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+
+                            double currentMana = rpgCharacterStats.getCurrentMana();
+                            double maxMana = rpgCharacterStats.getTotalMaxMana();
+                            if (currentMana < (maxMana * maxManaPercent)) {
+                                double nextMana = currentMana + (maxMana * manaPercent);
+                                if (nextMana > maxMana) {
+                                    nextMana = maxMana;
+                                }
+                                rpgCharacterStats.setCurrentMana((int) nextMana);
+                            }
+                        }
+                    }
+                }
+            }
+        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 100L, 160L);
+    }
+
+    public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+        if (!channel.equals("BungeeCord")) {
+            return;
+        }
+
+        Bukkit.getLogger().info("BUNGEE MESSAGE");
+
+        ByteArrayDataInput in = ByteStreams.newDataInput(message);
+        String subchannel = in.readUTF();
+        if (subchannel.equals("webPurchase")) {
+            // Use the code sample in the 'Response' sections below to read
+            // the data.
+            Bukkit.getLogger().info("webPurchase");
+            String argument = in.readUTF();
+            Bukkit.getLogger().info(argument);
+
+        }
     }
 
     @Override
@@ -215,60 +277,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         // allow to send to BungeeCord
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "BungeeCord", pluginChannelListener = new PluginChannelListener());
         // gets a Message from Bungee
-    }
 
-    @Override
-    public void onDisable() {
-        DatabaseManager.onDisable();
-        ConfigManager.writeConfigALL();
-    }
-
-    private void startGlobalManaRegen(double maxManaPercent) {
-        double manaPercent = 0.1;
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
-                for (Player player : onlinePlayers) {
-                    if (GuardianDataManager.hasGuardianData(player)) {
-                        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-                        if (guardianData.hasActiveCharacter()) {
-                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                            RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-
-                            double currentMana = rpgCharacterStats.getCurrentMana();
-                            double maxMana = rpgCharacterStats.getTotalMaxMana();
-                            if (currentMana < (maxMana * maxManaPercent)) {
-                                double nextMana = currentMana + (maxMana * manaPercent);
-                                if (nextMana > maxMana) {
-                                    nextMana = maxMana;
-                                }
-                                rpgCharacterStats.setCurrentMana((int) nextMana);
-                            }
-                        }
-                    }
-                }
-            }
-        }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 100L, 160L);
-    }
-
-    public void onPluginMessageReceived(String channel, Player player, byte[] message) {
-        if (!channel.equals("BungeeCord")) {
-            return;
-        }
-
-        Bukkit.getLogger().info("BUNGEE MESSAGE");
-
-        ByteArrayDataInput in = ByteStreams.newDataInput(message);
-        String subchannel = in.readUTF();
-        if (subchannel.equals("webPurchase")) {
-            // Use the code sample in the 'Response' sections below to read
-            // the data.
-            Bukkit.getLogger().info("webPurchase");
-            String argument = in.readUTF();
-            Bukkit.getLogger().info(argument);
-
-        }
+        signMenuFactory = new SignMenuFactory(this);
     }
 }

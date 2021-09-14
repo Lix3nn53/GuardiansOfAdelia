@@ -5,7 +5,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +14,6 @@ public class BazaarManager {
 
     private static final HashMap<ArmorStand, Player> bazaarToPlayer = new HashMap<>();
     private static final HashMap<String, List<Bazaar>> chunkKeyToBazaar = new HashMap<>();
-    private static final HashMap<Player, ItemStack> playerToCurrentlySettingMoneyOfItem = new HashMap<>();
 
     public static boolean isBazaar(ArmorStand entity) {
         return bazaarToPlayer.containsKey(entity);
@@ -69,20 +67,4 @@ public class BazaarManager {
         bazaarToPlayer.remove(armorStand);
     }
 
-    public static boolean isSettingMoney(Player player) {
-        return playerToCurrentlySettingMoneyOfItem.containsKey(player);
-    }
-
-    public static ItemStack getItemToSetMoney(Player player) {
-        return playerToCurrentlySettingMoneyOfItem.get(player);
-    }
-
-
-    public static void setPlayerSettingMoneyOfItem(Player player, ItemStack itemStack) {
-        playerToCurrentlySettingMoneyOfItem.put(player, itemStack);
-    }
-
-    public static void clearPlayerSettingMoneyOfItem(Player player) {
-        playerToCurrentlySettingMoneyOfItem.remove(player);
-    }
 }

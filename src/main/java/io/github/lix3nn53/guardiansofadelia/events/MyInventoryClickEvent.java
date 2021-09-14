@@ -17,7 +17,6 @@ import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarCustomerGui;
-import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarManager;
 import io.github.lix3nn53.guardiansofadelia.economy.trading.Trade;
 import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeGui;
 import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeInvite;
@@ -63,6 +62,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.signmenu.SignMenuFactory;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
@@ -90,6 +90,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MyInventoryClickEvent implements Listener {
@@ -944,10 +945,39 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
-                BazaarManager.setPlayerSettingMoneyOfItem(player, current);
-                player.closeInventory();
-                MessageUtils.sendCenteredMessage(player, ChatColor.GOLD + "Enter a price for item: " + currentName);
-                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "(Enter a number to chat without '/' or anything)");
+                SignMenuFactory signMenuFactory = GuardiansOfAdelia.getSignMenuFactory();
+
+                SignMenuFactory.Menu menu = signMenuFactory.newMenu(Arrays.asList("Set price of:", currentName, "▼ Enter below ▼"))
+                        .reopenIfFail(true)
+                        .response((signPlayer, strings) -> {
+                            if (GuardianDataManager.hasGuardianData(player)) {
+                                GuardianData guardianDataBazaar = GuardianDataManager.getGuardianData(player);
+                                if (guardianDataBazaar.hasBazaar()) {
+                                    Bazaar bazaar = guardianDataBazaar.getBazaar();
+
+                                    int price;
+                                    try {
+                                        price = Integer.parseInt(strings[3]);
+                                    } catch (NumberFormatException e) {
+                                        player.sendMessage(org.bukkit.ChatColor.RED + "Enter a number between 1-266239 to last line.");
+                                        return false;
+                                    }
+
+                                    if (price > 266304) {
+                                        player.sendMessage(org.bukkit.ChatColor.RED + "Max price is 266239.");
+                                        return false;
+                                    }
+
+                                    bazaar.addItem(current, price);
+                                    InventoryUtils.removeItemFromInventory(player.getInventory(), current, current.getAmount());
+                                    bazaar.edit();
+                                }
+                            }
+
+                            return true;
+                        });
+
+                menu.open(player);
             }
         } else if (title.equals("Bazaar Storage")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
@@ -1006,7 +1036,7 @@ public class MyInventoryClickEvent implements Listener {
                                 GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, craftingLevel);
                                 craftingBook.openInventory(player);
                             } else {
-                                player.sendMessage(ChatColor.RED + "Required job-level to craft " + currentName + ChatColor.RED + " items is " + craftingLevel);
+                                player.sendMessage(ChatColor.RED + "Required crafting level to craft " + currentName + ChatColor.RED + " items is " + ChatColor.GOLD + craftingLevel);
                             }
                         }
                     }

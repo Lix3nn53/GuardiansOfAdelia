@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
+import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -354,9 +355,16 @@ public final class Quest {
             }
         }
         if (getMoneyPrize() > 0) {
-            List<Coin> coins = EconomyUtils.priceToCoins(getMoneyPrize());
-            for (Coin coin : coins) {
-                InventoryUtils.giveItemToPlayer(player, coin.getCoin());
+            int[] coins = EconomyUtils.priceToCoins(getMoneyPrize());
+
+            if (coins[0] > 0) {
+                InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.COPPER, coins[0]).getCoin());
+            }
+            if (coins[1] > 0) {
+                InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.SILVER, coins[1]).getCoin());
+            }
+            if (coins[2] > 0) {
+                InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.GOLD, coins[2]).getCoin());
             }
         }
 

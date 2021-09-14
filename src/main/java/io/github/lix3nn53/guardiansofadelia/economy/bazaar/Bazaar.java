@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.economy.bazaar;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
+import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -97,23 +98,37 @@ public class Bazaar {
                     int price = EconomyUtils.getItemPrice(itemToBuy);
                     moneyEarned += price;
 
-                    List<Coin> coins = EconomyUtils.priceToCoins(price);
-                    for (Coin coin : coins) {
-                        if (coin.getAmount() > 0) {
-                            boolean addedToBazaarStorage = guardianData.addToBazaarStorage(coin.getCoin());
-                            if (!addedToBazaarStorage) {
-                                InventoryUtils.giveItemToPlayer(owner, coin.getCoin());
-                            }
+                    int[] coins = EconomyUtils.priceToCoins(price);
+
+                    if (coins[0] > 0) {
+                        ItemStack coin = new Coin(CoinType.COPPER, coins[0]).getCoin();
+                        boolean addedToBazaarStorage = guardianData.addToBazaarStorage(coin);
+                        if (!addedToBazaarStorage) {
+                            InventoryUtils.giveItemToPlayer(owner, coin);
+                        }
+                    }
+                    if (coins[1] > 0) {
+                        ItemStack coin = new Coin(CoinType.SILVER, coins[1]).getCoin();
+                        boolean addedToBazaarStorage = guardianData.addToBazaarStorage(coin);
+                        if (!addedToBazaarStorage) {
+                            InventoryUtils.giveItemToPlayer(owner, coin);
+                        }
+                    }
+                    if (coins[2] > 0) {
+                        ItemStack coin = new Coin(CoinType.GOLD, coins[2]).getCoin();
+                        boolean addedToBazaarStorage = guardianData.addToBazaarStorage(coin);
+                        if (!addedToBazaarStorage) {
+                            InventoryUtils.giveItemToPlayer(owner, coin);
                         }
                     }
 
                     owner.sendMessage(ChatColor.WHITE + buyer.getName() + ChatColor.GOLD + " purchased this item " + itemToBuy.getItemMeta().getDisplayName() +
                             ChatColor.GOLD + " from your bazaar. " +
-                            ChatColor.GREEN + coins.get(0).getAmount() + " " + ChatColor.WHITE + coins.get(1).getAmount() + " " + ChatColor.YELLOW + coins.get(2).getAmount()
+                            ChatColor.GREEN + coins[0] + " " + ChatColor.WHITE + coins[1] + " " + ChatColor.YELLOW + coins[2]
                             + ChatColor.GOLD + " coins added to your bazaar storage");
                     buyer.sendMessage(ChatColor.GOLD + "You purchased this item " + itemToBuy.getItemMeta().getDisplayName() + " from " + ChatColor.WHITE + owner.getName()
-                            + ChatColor.GOLD + " for " + ChatColor.GREEN + coins.get(0).getAmount() + " " + ChatColor.WHITE + coins.get(1).getAmount() + " " +
-                            ChatColor.YELLOW + coins.get(2).getAmount()
+                            + ChatColor.GOLD + " for " + ChatColor.GREEN + coins[0] + " " + ChatColor.WHITE + coins[1] + " " +
+                            ChatColor.YELLOW + coins[2]
                             + ChatColor.GOLD + " coins");
                 }
             }

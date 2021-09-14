@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantManager;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
+import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
@@ -63,33 +64,33 @@ public class SellGui extends GuiGeneric {
             addItem(itemStack);
             slotNoToRemoveFromPlayerInv.add(slotNoInPlayerInventory);
             totalValue += getSellValue(itemStack);
-            List<Coin> coins = EconomyUtils.priceToCoins(totalValue);
+            int[] coins = EconomyUtils.priceToCoins(totalValue);
 
             ItemStack gold = new ItemStack(Material.DIAMOND);
             ItemMeta itemMeta = gold.getItemMeta();
             itemMeta.setDisplayName(ChatColor.GOLD + "Gold value: " + ChatColor.WHITE + "0");
             setItem(50, gold);
-            if (coins.get(2).getAmount() > 0) {
-                gold.setAmount(coins.get(2).getAmount());
-                itemMeta.setDisplayName(ChatColor.GOLD + "Gold value: " + ChatColor.WHITE + coins.get(2).getAmount());
+            if (coins[2] > 0) {
+                gold.setAmount(coins[2]);
+                itemMeta.setDisplayName(ChatColor.GOLD + "Gold value: " + ChatColor.WHITE + coins[2]);
             }
             gold.setItemMeta(itemMeta);
             setItem(50, gold);
 
             ItemStack silver = new ItemStack(Material.GOLD_INGOT);
             itemMeta.setDisplayName(ChatColor.WHITE + "Silver value: " + ChatColor.WHITE + "0");
-            if (coins.get(1).getAmount() > 0) {
-                silver.setAmount(coins.get(1).getAmount());
-                itemMeta.setDisplayName(ChatColor.WHITE + "Silver value: " + ChatColor.WHITE + coins.get(1).getAmount());
+            if (coins[1] > 0) {
+                silver.setAmount(coins[1]);
+                itemMeta.setDisplayName(ChatColor.WHITE + "Silver value: " + ChatColor.WHITE + coins[1]);
             }
             silver.setItemMeta(itemMeta);
             setItem(49, silver);
 
             ItemStack bronze = new ItemStack(Material.IRON_INGOT);
             itemMeta.setDisplayName(org.bukkit.ChatColor.GREEN + "Bronze value:  " + ChatColor.WHITE + "0");
-            if (coins.get(0).getAmount() > 0) {
-                bronze.setAmount(coins.get(0).getAmount());
-                itemMeta.setDisplayName(ChatColor.GREEN + "Bronze value: " + ChatColor.WHITE + coins.get(0).getAmount());
+            if (coins[0] > 0) {
+                bronze.setAmount(coins[0]);
+                itemMeta.setDisplayName(ChatColor.GREEN + "Bronze value: " + ChatColor.WHITE + coins[0]);
             }
             bronze.setItemMeta(itemMeta);
             setItem(48, bronze);
@@ -118,15 +119,15 @@ public class SellGui extends GuiGeneric {
         for (int slotNo : this.slotNoToRemoveFromPlayerInv) {
             player.getInventory().setItem(slotNo, new ItemStack(Material.AIR));
         }
-        List<Coin> coins = EconomyUtils.priceToCoins(this.totalValue);
-        if (coins.get(0).getAmount() > 0) {
-            InventoryUtils.giveItemToPlayer(player, coins.get(0).getCoin());
+        int[] coins = EconomyUtils.priceToCoins(this.totalValue);
+        if (coins[0] > 0) {
+            InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.COPPER, coins[0]).getCoin());
         }
-        if (coins.get(1).getAmount() > 0) {
-            InventoryUtils.giveItemToPlayer(player, coins.get(1).getCoin());
+        if (coins[1] > 0) {
+            InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.SILVER, coins[1]).getCoin());
         }
-        if (coins.get(2).getAmount() > 0) {
-            InventoryUtils.giveItemToPlayer(player, coins.get(2).getCoin());
+        if (coins[2] > 0) {
+            InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.GOLD, coins[2]).getCoin());
         }
         player.closeInventory();
         player.sendMessage(ChatColor.GOLD + "Sold items to NPC for: " + EconomyUtils.priceToString(this.totalValue));

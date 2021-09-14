@@ -25,8 +25,9 @@ public class Coin {
             copper = total % 64;
             silver = total / 64;
             if (silver > 63) {
-                silver = total % 64;
-                gold = total / 64;
+                int excessSilver = silver;
+                silver = excessSilver % 64;
+                gold = excessSilver / 64;
             }
         } else {
             copper = total;

@@ -12,6 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManag
 import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
+import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
@@ -24,8 +25,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-
-import java.util.List;
 
 public class CommandAdminItem implements CommandExecutor {
 
@@ -110,10 +109,16 @@ public class CommandAdminItem implements CommandExecutor {
                 if (args.length == 2) {
                     try {
                         int price = Integer.parseInt(args[1]);
-                        List<Coin> coins = EconomyUtils.priceToCoins(price);
+                        int[] coins = EconomyUtils.priceToCoins(price);
 
-                        for (Coin coin : coins) {
-                            InventoryUtils.giveItemToPlayer(player, coin.getCoin());
+                        if (coins[0] > 0) {
+                            InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.COPPER, coins[0]).getCoin());
+                        }
+                        if (coins[1] > 0) {
+                            InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.SILVER, coins[1]).getCoin());
+                        }
+                        if (coins[2] > 0) {
+                            InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.GOLD, coins[2]).getCoin());
                         }
                     } catch (NumberFormatException e) {
                         player.sendMessage(ChatColor.YELLOW + "(Enter a number)");
