@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.list.Eggs;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetData;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetSkillManager;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.list.Eggs;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;

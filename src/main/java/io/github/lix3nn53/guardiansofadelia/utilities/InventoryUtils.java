@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
+import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskCollect;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;

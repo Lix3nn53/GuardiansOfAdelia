@@ -1,8 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.menu;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
@@ -15,6 +12,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;

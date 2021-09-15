@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;

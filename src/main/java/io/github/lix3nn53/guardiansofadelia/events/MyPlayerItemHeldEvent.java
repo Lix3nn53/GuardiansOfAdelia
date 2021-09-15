@@ -1,10 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.Material;
 import org.bukkit.Sound;

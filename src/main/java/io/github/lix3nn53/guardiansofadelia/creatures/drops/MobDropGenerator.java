@@ -1,17 +1,17 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.drops;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
-import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.shields.ShieldManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
+import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
+import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
+import io.github.lix3nn53.guardiansofadelia.items.list.passiveItems.PassiveManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.shields.ShieldManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import org.bukkit.inventory.ItemStack;
 

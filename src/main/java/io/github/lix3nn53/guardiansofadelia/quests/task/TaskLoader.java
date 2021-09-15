@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
+import io.github.lix3nn53.guardiansofadelia.items.config.ItemReferenceLoader;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;

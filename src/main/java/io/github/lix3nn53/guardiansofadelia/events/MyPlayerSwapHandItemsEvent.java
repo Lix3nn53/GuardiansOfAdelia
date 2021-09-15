@@ -1,12 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.Material;

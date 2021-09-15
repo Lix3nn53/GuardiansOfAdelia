@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.passiveItems.PassiveSet;
+import io.github.lix3nn53.guardiansofadelia.items.list.passiveItems.PassiveManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.passiveItems.PassiveSet;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

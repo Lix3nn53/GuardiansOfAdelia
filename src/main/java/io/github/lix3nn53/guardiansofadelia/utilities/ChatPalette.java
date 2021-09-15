@@ -8,6 +8,8 @@ import java.util.Map;
 
 public final class ChatPalette {
 
+    private static final Map<String, ChatPalette> BY_NAME = new HashMap<>();
+
     public static final ChatPalette BROWN_DARK = new ChatPalette("#714150", "BROWN_DARK");
     public static final ChatPalette BROWN = new ChatPalette("#93535a", "BROWN");
     public static final ChatPalette BROWN_LIGHT = new ChatPalette("#b16f68", "BROWN_LIGHT");
@@ -34,13 +36,14 @@ public final class ChatPalette {
     public static final ChatPalette GRAY_DARK = new ChatPalette("#5a5353", "GRAY_DARK");
     public static final ChatPalette GRAY = new ChatPalette("#cfc6b8", "GRAY");
     public static final ChatPalette WHITE = new ChatPalette("#dff6f5", "WHITE");
-    private static final Map<String, ChatPalette> BY_NAME = new HashMap<>();
+
     private final String toString;
     private final ChatColor chatColor;
 
     ChatPalette(String hex, String name) {
         this.chatColor = ChatColor.of(hex);
-        this.toString = this.chatColor.toString();
+        String s = this.chatColor.toString().toUpperCase();
+        this.toString = s.replaceFirst("X", "x");
         BY_NAME.put(name, this);
     }
 

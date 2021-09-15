@@ -1,14 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
+import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
+import io.github.lix3nn53.guardiansofadelia.items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

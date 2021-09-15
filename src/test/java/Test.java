@@ -1,6 +1,6 @@
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantManager;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.enchanting.EnchantManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

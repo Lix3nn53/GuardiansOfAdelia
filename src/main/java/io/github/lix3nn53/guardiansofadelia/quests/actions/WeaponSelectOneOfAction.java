@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
-import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.entity.Player;

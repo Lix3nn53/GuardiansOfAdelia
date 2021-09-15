@@ -1,10 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantManager;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.enchanting.EnchantManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;

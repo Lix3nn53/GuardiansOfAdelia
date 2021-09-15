@@ -1,13 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
-import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantGui;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.GearStatType;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.HelmetSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
@@ -32,6 +25,13 @@ import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildInvite;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
+import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
+import io.github.lix3nn53.guardiansofadelia.items.enchanting.EnchantGui;
+import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
+import io.github.lix3nn53.guardiansofadelia.items.stats.GearStatType;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.menu.CharacterSelectionMenuList;

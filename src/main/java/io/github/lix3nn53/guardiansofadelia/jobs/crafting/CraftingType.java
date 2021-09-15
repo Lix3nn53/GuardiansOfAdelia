@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
 import org.bukkit.inventory.ItemStack;
 

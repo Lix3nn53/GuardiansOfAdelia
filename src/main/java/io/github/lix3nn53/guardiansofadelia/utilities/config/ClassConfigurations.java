@@ -1,9 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.ActionBarInfo;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.ActionBarInfoType;
@@ -13,6 +10,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.config.SkillComponentLoader;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;

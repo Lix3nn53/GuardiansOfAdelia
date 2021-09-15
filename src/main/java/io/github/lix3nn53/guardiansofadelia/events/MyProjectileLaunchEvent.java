@@ -1,10 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.PlayerTridentThrowManager;

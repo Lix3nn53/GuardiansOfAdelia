@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.gui;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.WeaponOrShieldSkinScroll;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;

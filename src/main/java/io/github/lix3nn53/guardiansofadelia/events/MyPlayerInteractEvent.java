@@ -1,9 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
-import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.HelmetSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
@@ -13,6 +9,10 @@ import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.SkinChest;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.items.PrizeChest;
+import io.github.lix3nn53.guardiansofadelia.items.PrizeChestType;
+import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;

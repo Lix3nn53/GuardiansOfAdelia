@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSet;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetManager;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSet;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSetEffect;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSetManager;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 

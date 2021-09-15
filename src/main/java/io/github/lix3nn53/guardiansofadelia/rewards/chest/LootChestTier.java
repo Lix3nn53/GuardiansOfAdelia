@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.rewards.chest;
 
-import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
-import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantStone;
+import io.github.lix3nn53.guardiansofadelia.items.Consumable;
+import io.github.lix3nn53.guardiansofadelia.items.enchanting.EnchantStone;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;

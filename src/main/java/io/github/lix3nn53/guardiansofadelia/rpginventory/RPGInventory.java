@@ -1,9 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.GearStatType;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -11,6 +8,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
+import io.github.lix3nn53.guardiansofadelia.items.stats.GearStatType;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.*;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;

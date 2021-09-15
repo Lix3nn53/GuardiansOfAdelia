@@ -1,12 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory.slots;
 
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.Element;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;

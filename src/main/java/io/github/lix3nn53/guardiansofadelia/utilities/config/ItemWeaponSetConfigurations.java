@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.weapons.WeaponSet;
+import io.github.lix3nn53.guardiansofadelia.items.list.weapons.WeaponManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.weapons.WeaponSet;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

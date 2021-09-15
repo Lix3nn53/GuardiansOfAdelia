@@ -1,8 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
 import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
@@ -21,6 +19,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;

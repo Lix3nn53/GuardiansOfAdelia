@@ -1,11 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ShieldGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 
 import java.util.HashMap;

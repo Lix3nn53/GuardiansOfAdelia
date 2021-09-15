@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory.slots;
 
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
-import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;

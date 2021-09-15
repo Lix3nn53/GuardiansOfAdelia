@@ -1,11 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.quests.actions;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.config.ArmorReferenceData;
-import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
-import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
+import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
+import io.github.lix3nn53.guardiansofadelia.items.config.ItemReferenceLoader;
+import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
-import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
+import io.github.lix3nn53.guardiansofadelia.items.PrizeChest;
+import io.github.lix3nn53.guardiansofadelia.items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.quests.QuestIconType;

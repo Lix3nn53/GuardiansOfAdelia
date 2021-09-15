@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
-import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
+import io.github.lix3nn53.guardiansofadelia.items.config.ItemReferenceLoader;
+import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;

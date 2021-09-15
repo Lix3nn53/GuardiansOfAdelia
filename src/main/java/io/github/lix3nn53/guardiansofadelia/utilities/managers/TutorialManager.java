@@ -1,13 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorManager;
-import io.github.lix3nn53.guardiansofadelia.Items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
+import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;

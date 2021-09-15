@@ -1,14 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.quests;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;

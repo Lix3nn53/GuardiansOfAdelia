@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGround;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
+import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonInstance;

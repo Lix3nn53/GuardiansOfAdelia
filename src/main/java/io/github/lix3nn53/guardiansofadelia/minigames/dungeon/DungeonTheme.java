@@ -1,11 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
-import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.Items.PrizeChest;
-import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
-import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.MMManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
+import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.items.PrizeChest;
+import io.github.lix3nn53.guardiansofadelia.items.PrizeChestType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoom;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;

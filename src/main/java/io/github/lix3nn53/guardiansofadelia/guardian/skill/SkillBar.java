@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.Items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
@@ -10,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.entity.Player;
