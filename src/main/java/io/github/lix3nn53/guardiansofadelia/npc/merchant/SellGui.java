@@ -5,10 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.Items.enchanting.EnchantManager;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -23,11 +23,11 @@ public class SellGui extends GuiGeneric {
     private int totalValue = 0;
 
     public SellGui(int shopNpc) {
-        super(54, ChatColor.GOLD + "Sell Items", shopNpc);
+        super(54, ChatPalette.GOLD + "Sell Items", shopNpc);
 
         ItemStack fillItem = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta itemMeta = fillItem.getItemMeta();
-        itemMeta.setDisplayName(org.bukkit.ChatColor.DARK_GRAY + "-");
+        itemMeta.setDisplayName(ChatPalette.GRAY_DARK + "-");
         fillItem.setItemMeta(itemMeta);
 
         setItem(52, fillItem);
@@ -37,22 +37,22 @@ public class SellGui extends GuiGeneric {
         setItem(45, fillItem);
 
         ItemStack greenWool = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatColor.GREEN + "Click to CONFIRM");
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Click to CONFIRM");
         greenWool.setItemMeta(itemMeta);
         setItem(53, greenWool);
 
         ItemStack goldGlass = new ItemStack(Material.DIAMOND);
-        itemMeta.setDisplayName(org.bukkit.ChatColor.GOLD + "Gold value: " + ChatColor.WHITE + "0");
+        itemMeta.setDisplayName(ChatPalette.GOLD + "Gold value: " + ChatPalette.WHITE + "0");
         goldGlass.setItemMeta(itemMeta);
         setItem(50, goldGlass);
 
         ItemStack silverGlass = new ItemStack(Material.GOLD_INGOT);
-        itemMeta.setDisplayName(org.bukkit.ChatColor.WHITE + "Silver value: " + ChatColor.WHITE + "0");
+        itemMeta.setDisplayName(ChatPalette.WHITE + "Silver value: " + ChatPalette.WHITE + "0");
         silverGlass.setItemMeta(itemMeta);
         setItem(49, silverGlass);
 
         ItemStack bronzeGlass = new ItemStack(Material.IRON_INGOT);
-        itemMeta.setDisplayName(org.bukkit.ChatColor.GREEN + "Bronze value: " + ChatColor.WHITE + "0");
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Bronze value: " + ChatPalette.WHITE + "0");
         bronzeGlass.setItemMeta(itemMeta);
         setItem(48, bronzeGlass);
     }
@@ -68,29 +68,29 @@ public class SellGui extends GuiGeneric {
 
             ItemStack gold = new ItemStack(Material.DIAMOND);
             ItemMeta itemMeta = gold.getItemMeta();
-            itemMeta.setDisplayName(ChatColor.GOLD + "Gold value: " + ChatColor.WHITE + "0");
+            itemMeta.setDisplayName(ChatPalette.GOLD + "Gold value: " + ChatPalette.WHITE + "0");
             setItem(50, gold);
             if (coins[2] > 0) {
                 gold.setAmount(coins[2]);
-                itemMeta.setDisplayName(ChatColor.GOLD + "Gold value: " + ChatColor.WHITE + coins[2]);
+                itemMeta.setDisplayName(ChatPalette.GOLD + "Gold value: " + ChatPalette.WHITE + coins[2]);
             }
             gold.setItemMeta(itemMeta);
             setItem(50, gold);
 
             ItemStack silver = new ItemStack(Material.GOLD_INGOT);
-            itemMeta.setDisplayName(ChatColor.WHITE + "Silver value: " + ChatColor.WHITE + "0");
+            itemMeta.setDisplayName(ChatPalette.WHITE + "Silver value: " + ChatPalette.WHITE + "0");
             if (coins[1] > 0) {
                 silver.setAmount(coins[1]);
-                itemMeta.setDisplayName(ChatColor.WHITE + "Silver value: " + ChatColor.WHITE + coins[1]);
+                itemMeta.setDisplayName(ChatPalette.WHITE + "Silver value: " + ChatPalette.WHITE + coins[1]);
             }
             silver.setItemMeta(itemMeta);
             setItem(49, silver);
 
             ItemStack bronze = new ItemStack(Material.IRON_INGOT);
-            itemMeta.setDisplayName(org.bukkit.ChatColor.GREEN + "Bronze value:  " + ChatColor.WHITE + "0");
+            itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Bronze value:  " + ChatPalette.WHITE + "0");
             if (coins[0] > 0) {
                 bronze.setAmount(coins[0]);
-                itemMeta.setDisplayName(ChatColor.GREEN + "Bronze value: " + ChatColor.WHITE + coins[0]);
+                itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Bronze value: " + ChatPalette.WHITE + coins[0]);
             }
             bronze.setItemMeta(itemMeta);
             setItem(48, bronze);
@@ -130,13 +130,13 @@ public class SellGui extends GuiGeneric {
             InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.GOLD, coins[2]).getCoin());
         }
         player.closeInventory();
-        player.sendMessage(ChatColor.GOLD + "Sold items to NPC for: " + EconomyUtils.priceToString(this.totalValue));
+        player.sendMessage(ChatPalette.GOLD + "Sold items to NPC for: " + EconomyUtils.priceToString(this.totalValue));
     }
 
     public void confirm() {
         ItemStack yellowWool = new ItemStack(Material.YELLOW_WOOL);
         ItemMeta itemMeta = yellowWool.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GOLD + "Click to SELL");
+        itemMeta.setDisplayName(ChatPalette.GOLD + "Click to SELL");
         yellowWool.setItemMeta(itemMeta);
         setItem(53, yellowWool);
     }

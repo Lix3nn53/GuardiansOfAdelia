@@ -5,7 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.entity.Player;
 
 public class StartQuestAction implements Action {
@@ -27,7 +27,7 @@ public class StartQuestAction implements Action {
                 if (questListIsNotFull) {
 
                 } else {
-                    player.sendMessage(ChatColor.RED + "Your quest list is full");
+                    player.sendMessage(ChatPalette.RED + "Your quest list is full");
                 }
             }
         }

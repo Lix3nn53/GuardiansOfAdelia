@@ -7,11 +7,11 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.QuestHologram;
 import io.github.lix3nn53.guardiansofadelia.quests.QuestIconType;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -29,7 +29,7 @@ public class QuestNPCManager {
         NPC npc = CitizensAPI.getNPCRegistry().getById(npcId);
 
         if (npc != null) {
-            GuiGeneric questMenu = new GuiGeneric(27, ChatColor.DARK_GRAY + "Quest List of " + npc.getName(), npcId);
+            GuiGeneric questMenu = new GuiGeneric(27, ChatPalette.GRAY_DARK + "Quest List of " + npc.getName(), npcId);
 
             if (GuardianDataManager.hasGuardianData(player)) {
                 List<Quest> npcQuestList = new ArrayList<>();

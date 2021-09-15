@@ -7,8 +7,8 @@ import com.xxmicloxx.NoteBlockAPI.model.SoundCategory;
 import com.xxmicloxx.NoteBlockAPI.songplayer.RadioSongPlayer;
 import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -83,7 +83,7 @@ public class CustomSoundtrack {
 
     public static void sendCurrentSongMessage(Player player) {
         String songName = songNames.get(CURRENT_SONG_INDEX);
-        player.sendMessage(ChatColor.YELLOW + "Now playing: " + ChatColor.GOLD + songName);
+        player.sendMessage(ChatPalette.YELLOW + "Now playing: " + ChatPalette.GOLD + songName);
     }
 
     protected static void onSongEnd() {
@@ -112,7 +112,7 @@ public class CustomSoundtrack {
 
         String songName = songNames.get(index);
         for (Player player : onlinePlayers) {
-            player.sendMessage(ChatColor.YELLOW + "Now playing: " + ChatColor.GOLD + songName);
+            player.sendMessage(ChatPalette.YELLOW + "Now playing: " + ChatPalette.GOLD + songName);
         }
 
         radioSongPlayer.playSong(CURRENT_SONG_INDEX);
@@ -125,7 +125,7 @@ public class CustomSoundtrack {
 
         String songName = songNames.get(index);
         for (Player player : onlinePlayers) {
-            player.sendMessage(ChatColor.YELLOW + "Now playing: " + ChatColor.GOLD + songName);
+            player.sendMessage(ChatPalette.YELLOW + "Now playing: " + ChatPalette.GOLD + songName);
         }
 
         Set<Integer> ticks = songToTick.get(songName);

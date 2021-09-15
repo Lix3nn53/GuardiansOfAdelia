@@ -12,6 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.AdeliaRegionManager;
@@ -21,7 +22,6 @@ import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.ArmorStand;
@@ -117,7 +117,7 @@ public class DatabaseManager {
 
     //Not async, must run async
     private static void loadCharacterSelectionAndFormHolograms(Player player) {
-        player.sendMessage(ChatColor.YELLOW + "Welcome " + ChatColor.GOLD + player.getName());
+        player.sendMessage(ChatPalette.YELLOW + "Welcome " + ChatPalette.GOLD + player.getName());
         for (int charNo = 1; charNo <= 8; charNo++) {
             boolean characterExists = DatabaseQueries.characterExists(player.getUniqueId(), charNo);
             if (characterExists) {
@@ -159,20 +159,20 @@ public class DatabaseManager {
                 try {
                     String rpgClassOfCharStr = DatabaseQueries.getRPGClassCharacter(uuid, charNo);
                     RPGClass rpgClass = RPGClassManager.getClass(rpgClassOfCharStr);
-                    ChatColor classColor = rpgClass.getClassColor();
+                    ChatPalette classColor = rpgClass.getClassColor();
 
                     int totalExp = DatabaseQueries.getTotalExp(uuid, charNo);
                     int level = RPGCharacterExperienceManager.getLevel(totalExp);
                     CharacterSelectionScreenManager.setCharLevel(uuid, charNo, level);
 
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                        livingWatcher1.setCustomName(ChatColor.GOLD + "Level: " + ChatColor.WHITE + level);
+                        livingWatcher1.setCustomName(ChatPalette.GOLD + "Level: " + ChatPalette.WHITE + level);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(2), mobDisguise1, player);
 
-                        livingWatcher2.setCustomName(ChatColor.DARK_PURPLE + "Total Experience: " + ChatColor.WHITE + totalExp);
+                        livingWatcher2.setCustomName(ChatPalette.PURPLE + "Total Experience: " + ChatPalette.WHITE + totalExp);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(1), mobDisguise2, player);
 
-                        livingWatcher3.setCustomName(ChatColor.GRAY + "Class: " + classColor + rpgClassOfCharStr);
+                        livingWatcher3.setCustomName(ChatPalette.GRAY + "Class: " + classColor + rpgClassOfCharStr);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(0), mobDisguise3, player);
                     });
                 } catch (SQLException e) {
@@ -181,7 +181,7 @@ public class DatabaseManager {
             }
             //player.sendMessage("Loaded character-" + charNo);
         }
-        player.sendMessage(ChatColor.YELLOW + "Select or create a character to start playing.");
+        player.sendMessage(ChatPalette.YELLOW + "Select or create a character to start playing.");
     }
 
     public static void writeGuardianDataWithCurrentCharacter(Player player, GuardianData guardianData) {

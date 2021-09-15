@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.products;
 
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -16,13 +16,13 @@ import java.util.List;
 public class SkinChest {
 
     public ItemStack getItemStack(int amount) {
-        String itemName = ChatColor.GOLD + "Skin Chest";
+        String itemName = ChatPalette.GOLD + "Skin Chest";
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY + "Premium");
+        lore.add(ChatPalette.GRAY + "Premium");
         lore.add("");
-        lore.add(ChatColor.GOLD + "Usage: ");
-        lore.add(ChatColor.GRAY + "1 - Right click while holding to open!");
+        lore.add(ChatPalette.GOLD + "Usage: ");
+        lore.add(ChatPalette.GRAY + "1 - Right click while holding to open!");
 
         ItemStack itemStack = new ItemStack(Material.BLACK_DYE);
 

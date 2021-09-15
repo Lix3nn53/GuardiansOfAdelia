@@ -4,8 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.Items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,8 +23,8 @@ public class ArmorSelectOneOfAction implements Action {
     @Override
     public void perform(Player player, int questNo, int taskIndex) {
         if (taskIndex < 0) {
-            player.sendMessage(ChatColor.DARK_RED + "Configuration error, please report to a developer!");
-            player.sendMessage(ChatColor.DARK_RED + "You can't use WeaponSelectOneOfAction as quest action, only task action");
+            player.sendMessage(ChatPalette.RED_DARK + "Configuration error, please report to a developer!");
+            player.sendMessage(ChatPalette.RED_DARK + "You can't use WeaponSelectOneOfAction as quest action, only task action");
         }
 
         if (GuardianDataManager.hasGuardianData(player)) {
@@ -61,7 +61,7 @@ public class ArmorSelectOneOfAction implements Action {
 
                 // CREATE GUI
                 // Task Item Prize Selection #12&1
-                GuiGeneric guiGeneric = new GuiGeneric(guiSize, ChatColor.BLACK + "Task Item Prize Selection #" + questNo + "&" + taskIndex, 0);
+                GuiGeneric guiGeneric = new GuiGeneric(guiSize, ChatPalette.BLACK + "Task Item Prize Selection #" + questNo + "&" + taskIndex, 0);
 
                 // PLACE ITEMS
                 int index = 0;

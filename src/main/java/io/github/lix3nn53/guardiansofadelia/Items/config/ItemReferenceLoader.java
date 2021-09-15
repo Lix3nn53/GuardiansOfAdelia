@@ -19,7 +19,11 @@ import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolType;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.transportation.TeleportScroll;
-import org.bukkit.*;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -32,7 +36,7 @@ public class ItemReferenceLoader {
         String itemType = configurationSection.getString("itemType");
 
         if (itemType == null) {
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NULL ITEM TYPE");
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NULL ITEM TYPE");
             return null;
         }
 
@@ -148,7 +152,7 @@ public class ItemReferenceLoader {
             return item;
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH ITEM TYPE IN LOADER");
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH ITEM TYPE IN LOADER");
 
         return null;
     }

@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
 
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 
 public enum WeaponAttackSpeed {
     SLOW,
@@ -9,16 +9,16 @@ public enum WeaponAttackSpeed {
     FAST;
 
     public String getLoreString() {
-        ChatColor color = ChatColor.GRAY;
+        ChatPalette color = ChatPalette.GRAY;
         String name = "Slow";
         if (this == WeaponAttackSpeed.NORMAL) {
-            color = ChatColor.GRAY;
+            color = ChatPalette.GRAY;
             name = "Normal";
         } else if (this == WeaponAttackSpeed.FAST) {
-            color = ChatColor.GRAY;
+            color = ChatPalette.GRAY;
             name = "Fast";
         }/* else if (this == AttackSpeed.RAPID) {
-            color = ChatColor.GRAY;
+            color = ChatPalette.GRAY;
             name = "Rapid";
         }*/
         return color + name;

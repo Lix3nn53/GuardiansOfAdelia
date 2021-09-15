@@ -2,8 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.commands;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,8 +19,8 @@ public class CommandInvite implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/invite accept");
-                player.sendMessage(ChatColor.YELLOW + "/invite reject");
+                player.sendMessage(ChatPalette.YELLOW + "/invite accept");
+                player.sendMessage(ChatPalette.YELLOW + "/invite reject");
             } else if (args[0].equals("accept")) {
                 if (GuardianDataManager.hasGuardianData(player)) {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(player);

@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -82,7 +82,7 @@ public class DungeonRoom {
                 state.onNextWaveStart();
 
                 for (Player player : players) {
-                    player.sendMessage(ChatColor.LIGHT_PURPLE + "ROOM-" + roomNo + " WAVE-" + currentWave + " incoming!");
+                    player.sendMessage(ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " WAVE-" + currentWave + " incoming!");
                 }
 
                 spawners = waveToSpawners.get(currentWave);
@@ -93,7 +93,7 @@ public class DungeonRoom {
                 }
             } else {
                 for (Player player : players) {
-                    player.sendMessage(ChatColor.LIGHT_PURPLE + "ROOM-" + roomNo + " completed!");
+                    player.sendMessage(ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " completed!");
                 }
 
                 return true;

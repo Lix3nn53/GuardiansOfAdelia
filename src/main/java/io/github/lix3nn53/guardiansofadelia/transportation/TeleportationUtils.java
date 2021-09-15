@@ -4,9 +4,9 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -25,10 +25,10 @@ public class TeleportationUtils {
                 final double startPosZ = player.getLocation().getZ();
 
                 ArmorStand hologramTop = new Hologram(player.getLocation().add(0.0, 2.6, 0.0),
-                        ChatColor.BLUE + "< " + ChatColor.YELLOW + destination + ChatColor.BLUE + " >").getArmorStand();
+                        ChatPalette.BLUE + "< " + ChatPalette.YELLOW + destination + ChatPalette.BLUE + " >").getArmorStand();
                 ArmorStand hologramBottom = new Hologram(player.getLocation().add(0.0, 2.3, 0.0),
-                        ChatColor.AQUA + "Teleporting.. " + stepCount).getArmorStand();
-                player.sendTitle(ChatColor.BLUE + "Teleporting..", ChatColor.AQUA.toString() + stepCount, 5, 20, 5);
+                        ChatPalette.BLUE_LIGHT + "Teleporting.. " + stepCount).getArmorStand();
+                player.sendTitle(ChatPalette.BLUE + "Teleporting..", ChatPalette.BLUE_LIGHT.toString() + stepCount, 5, 20, 5);
 
                 new BukkitRunnable() {
 
@@ -78,13 +78,13 @@ public class TeleportationUtils {
         guardianData.setTeleporting(false);
         hologramTop.remove();
         hologramBottom.remove();
-        player.sendMessage(ChatColor.RED + "Teleportation has been canceled because you moved.");
+        player.sendMessage(ChatPalette.RED + "Teleportation has been canceled because you moved.");
     }
 
     private static void nextStep(Player player, ArmorStand hologramTop, ArmorStand hologramBottom, String destination, int countDown) {
-        player.sendTitle(ChatColor.BLUE + "Teleporting..", ChatColor.AQUA.toString() + countDown, 5, 20, 5);
-        hologramTop.setCustomName(ChatColor.BLUE + "< " + ChatColor.YELLOW + destination + ChatColor.BLUE + " >");
-        hologramBottom.setCustomName(ChatColor.AQUA + "Teleporting.. " + countDown);
+        player.sendTitle(ChatPalette.BLUE + "Teleporting..", ChatPalette.BLUE_LIGHT.toString() + countDown, 5, 20, 5);
+        hologramTop.setCustomName(ChatPalette.BLUE + "< " + ChatPalette.YELLOW + destination + ChatPalette.BLUE + " >");
+        hologramBottom.setCustomName(ChatPalette.BLUE_LIGHT + "Teleporting.. " + countDown);
     }
 
     private static void finishTeleportation(BukkitRunnable runnable, GuardianData guardianData,
@@ -94,7 +94,7 @@ public class TeleportationUtils {
             boolean b = InventoryUtils.removeItemFromInventory(player.getInventory(), itemCost, 1);
 
             if (!b) {
-                player.sendMessage(ChatColor.RED + "Teleportation has been canceled because you don't have required item.");
+                player.sendMessage(ChatPalette.RED + "Teleportation has been canceled because you don't have required item.");
                 return;
             }
         }
@@ -103,7 +103,7 @@ public class TeleportationUtils {
             boolean b = EconomyUtils.pay(player, cost);
 
             if (!b) {
-                player.sendMessage(ChatColor.RED + "Teleportation has been canceled because you don't have enough coins.");
+                player.sendMessage(ChatPalette.RED + "Teleportation has been canceled because you don't have enough coins.");
                 return;
             }
         }
@@ -113,6 +113,6 @@ public class TeleportationUtils {
         hologramTop.remove();
         hologramBottom.remove();
         player.teleport(location);
-        player.sendTitle(ChatColor.YELLOW + destination, ChatColor.BLUE + "Teleported!", 20, 40, 20);
+        player.sendTitle(ChatPalette.YELLOW + destination, ChatPalette.BLUE + "Teleported!", 20, 40, 20);
     }
 }

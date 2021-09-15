@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
@@ -92,11 +92,11 @@ public class PushMechanic extends MechanicComponent {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {
-            additions.add(ChatColor.AQUA + "Push speed: " + speedList.get(skillLevel));
+            additions.add(ChatPalette.BLUE_LIGHT + "Push speed: " + speedList.get(skillLevel));
         } else if (skillLevel == speedList.size()) {
-            additions.add(ChatColor.AQUA + "Push speed: " + speedList.get(skillLevel - 1));
+            additions.add(ChatPalette.BLUE_LIGHT + "Push speed: " + speedList.get(skillLevel - 1));
         } else {
-            additions.add(ChatColor.AQUA + "Push speed: " + speedList.get(skillLevel - 1) + " -> " + speedList.get(skillLevel));
+            additions.add(ChatPalette.BLUE_LIGHT + "Push speed: " + speedList.get(skillLevel - 1) + " -> " + speedList.get(skillLevel));
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

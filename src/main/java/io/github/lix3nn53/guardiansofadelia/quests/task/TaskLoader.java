@@ -7,10 +7,14 @@ import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.ActionLoader;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigurationUtils;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,7 +27,7 @@ public class TaskLoader {
         String componentType = configurationSection.getString("taskType");
 
         if (componentType == null) {
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NULL TASK TYPE");
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NULL TASK TYPE");
             return null;
         }
 
@@ -35,12 +39,12 @@ public class TaskLoader {
             for (String internalName : keyOfMobsItemDropsFrom) {
                 MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
                 if (mythicMob == null) {
-                    GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskCollect mythicMob null: " + internalName);
+                    GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "TaskCollect mythicMob null: " + internalName);
 
                     return null;
                 }
                 String displayName = mythicMob.getDisplayName().get();
-                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskCollect MM: " + internalName + "-" + displayName);
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.GREEN_DARK + "TaskCollect MM: " + internalName + "-" + displayName);
 
                 nameOfMobsItemDropsFrom.add(internalName);
             }
@@ -67,12 +71,12 @@ public class TaskLoader {
 
             MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
             if (mythicMob == null) {
-                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskDealDamage mythicMob null: " + internalName);
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "TaskDealDamage mythicMob null: " + internalName);
 
                 return null;
             }
             String displayName = mythicMob.getDisplayName().get();
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskDealDamage MM: " + internalName + "-" + displayName);
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.GREEN_DARK + "TaskDealDamage MM: " + internalName + "-" + displayName);
 
             int damageNeeded = configurationSection.getInt("damageNeeded");
 
@@ -89,12 +93,12 @@ public class TaskLoader {
 
             MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
             if (mythicMob == null) {
-                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskGift mythicMob null: " + internalName);
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "TaskGift mythicMob null: " + internalName);
 
                 return null;
             }
             String displayName = mythicMob.getDisplayName().get();
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskGift MM: " + internalName + "-" + displayName);
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.GREEN_DARK + "TaskGift MM: " + internalName + "-" + displayName);
 
             ItemStack itemStack = ItemReferenceLoader.loadItemReference(configurationSection.getConfigurationSection("item"));
 
@@ -110,12 +114,12 @@ public class TaskLoader {
 
             MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
             if (mythicMob == null) {
-                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "TaskKill mythicMob null: " + internalName);
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "TaskKill mythicMob null: " + internalName);
 
                 return null;
             }
             String displayName = mythicMob.getDisplayName().get();
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "TaskKill MM: " + internalName + "-" + displayName);
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.GREEN_DARK + "TaskKill MM: " + internalName + "-" + displayName);
 
             int amountNeeded = configurationSection.getInt("amountNeeded");
 
@@ -135,7 +139,7 @@ public class TaskLoader {
         }
 
         if (task == null) {
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH TASK IN LOADER");
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH TASK IN LOADER");
             return null;
         }
 
@@ -159,9 +163,9 @@ public class TaskLoader {
                 if (!hasOnePreventTaskCompilation) {
                     hasOnePreventTaskCompilation = true;
                 } else {
-                    GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "ERROR WHILE LOADING QUEST TASK: ");
-                    GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "Reason: A TASK can only have one action that prevents compilation");
-                    GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "Section: " + section);
+                    GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "ERROR WHILE LOADING QUEST TASK: ");
+                    GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "Reason: A TASK can only have one action that prevents compilation");
+                    GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "Section: " + section);
                 }
             }
             actions.add(action);

@@ -6,9 +6,9 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -64,7 +64,7 @@ public class Enchant {
 
         String name = itemMeta.getDisplayName();
         if (this.currentEnchantLevel == 0) {
-            name = name + ChatColor.AQUA + " [ +1 ]";
+            name = name + ChatPalette.BLUE_LIGHT + " [ +1 ]";
         } else if (this.currentEnchantLevel == 1) {
             name = name.replace("+1", "+2");
         } else if (this.currentEnchantLevel == 2) {
@@ -98,11 +98,11 @@ public class Enchant {
             String statString;
 
             if (type.equals(GearStatType.WEAPON_GEAR)) {
-                statString = ChatColor.RED + "🗡 Element Damage: " + ChatColor.GRAY + "+";
+                statString = ChatPalette.RED + "🗡 Element Damage: " + ChatPalette.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             } else {
-                statString = ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+";
+                statString = ChatPalette.GREEN_DARK + "❤ Health: " + ChatPalette.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             }
@@ -153,7 +153,7 @@ public class Enchant {
                 String line = lore.get(i);
                 for (AttributeType attributeType : AttributeType.values()) {
                     if (stat.getAttributeValue(attributeType) != 0) {
-                        if (line.contains(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        if (line.contains(attributeType.getCustomName() + ": " + ChatPalette.GRAY + "+")) {
                             attributeTypeToLineToChange.put(attributeType, i);
                             changeCounter++;
                         }
@@ -199,7 +199,7 @@ public class Enchant {
 
         String name = itemMeta.getDisplayName();
         if (this.currentEnchantLevel == 1) {
-            name = name.replace(ChatColor.AQUA + " [ ", "");
+            name = name.replace(ChatPalette.BLUE_LIGHT + " [ ", "");
             name = name.replace("]", "");
             name = name.replace("+1 ", "");
         } else if (this.currentEnchantLevel == 2) {
@@ -235,11 +235,11 @@ public class Enchant {
             String statString;
 
             if (type.equals(GearStatType.WEAPON_GEAR)) {
-                statString = ChatColor.RED + "🗡 Element Damage: " + ChatColor.GRAY + "+";
+                statString = ChatPalette.RED + "🗡 Element Damage: " + ChatPalette.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             } else {
-                statString = ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+";
+                statString = ChatPalette.GREEN_DARK + "❤ Health: " + ChatPalette.GRAY + "+";
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             }
@@ -290,7 +290,7 @@ public class Enchant {
                 String line = lore.get(i);
                 for (AttributeType attributeType : AttributeType.values()) {
                     if (stat.getAttributeValue(attributeType) != 0) {
-                        if (line.contains(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+")) {
+                        if (line.contains(attributeType.getCustomName() + ": " + ChatPalette.GRAY + "+")) {
                             attributeTypeToLineToChange.put(attributeType, i);
                             changeCounter++;
                         }

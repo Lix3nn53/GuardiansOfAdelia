@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.products;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -12,15 +13,15 @@ import java.util.List;
 public class WeaponOrShieldSkinScroll {
 
     public static ItemStack getItemStack(int amount) {
-        String itemName = ChatColor.GOLD + "Weapon/Shield Skin Scroll";
+        String itemName = ChatPalette.GOLD + "Weapon/Shield Skin Scroll";
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY + "Premium");
+        lore.add(ChatPalette.GRAY + "Premium");
         lore.add("");
-        lore.add(ChatColor.GOLD + "Usage: ");
-        lore.add(ChatColor.YELLOW + "1 - Right click while you are holding this item.");
-        lore.add(ChatColor.YELLOW + "2 - Place your weapon/shield to empty slot.");
-        lore.add(ChatColor.YELLOW + "3 - Click green wool to confirm and apply skin.");
+        lore.add(ChatPalette.GOLD + "Usage: ");
+        lore.add(ChatPalette.YELLOW + "1 - Right click while you are holding this item.");
+        lore.add(ChatPalette.YELLOW + "2 - Place your weapon/shield to empty slot.");
+        lore.add(ChatPalette.YELLOW + "3 - Click green wool to confirm and apply skin.");
 
         ItemStack itemStack = new ItemStack(Material.BLACK_DYE);
 

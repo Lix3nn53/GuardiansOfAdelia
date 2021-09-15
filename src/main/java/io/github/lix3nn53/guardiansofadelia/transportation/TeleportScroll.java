@@ -1,7 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.transportation;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -54,19 +58,19 @@ public class TeleportScroll {
     public ItemStack getScroll(int amount, int level) {
         ItemStack scroll = new ItemStack(Material.PAPER, amount);
         ItemMeta itemMeta = scroll.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Teleport Scroll " + ChatColor.DARK_PURPLE +
-                "(" + ChatColor.AQUA + getName() + ChatColor.DARK_PURPLE + ")");
+        itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + "Teleport Scroll " + ChatPalette.PURPLE +
+                "(" + ChatPalette.BLUE_LIGHT + getName() + ChatPalette.PURPLE + ")");
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.YELLOW + "Required Level: " + level);
+        lore.add(ChatPalette.YELLOW + "Required Level: " + level);
         lore.add("");
-        lore.add(ChatColor.BLUE + "Right click while holding this");
-        lore.add(ChatColor.BLUE + "to start teleporting.");
-        lore.add(ChatColor.BLUE + "You will be teleported to");
-        lore.add(ChatColor.AQUA + getName() + ChatColor.BLUE + " in 5 seconds.");
+        lore.add(ChatPalette.BLUE + "Right click while holding this");
+        lore.add(ChatPalette.BLUE + "to start teleporting.");
+        lore.add(ChatPalette.BLUE + "You will be teleported to");
+        lore.add(ChatPalette.BLUE_LIGHT + getName() + ChatPalette.BLUE + " in 5 seconds.");
         lore.add("");
-        lore.add(ChatColor.RED + "If you move, the teleportation will be canceled!");
+        lore.add(ChatPalette.RED + "If you move, the teleportation will be canceled!");
         itemMeta.setLore(lore);
 
         scroll.setItemMeta(itemMeta);

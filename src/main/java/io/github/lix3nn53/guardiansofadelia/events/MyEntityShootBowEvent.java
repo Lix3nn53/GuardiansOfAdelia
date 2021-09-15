@@ -6,8 +6,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -44,7 +44,7 @@ public class MyEntityShootBowEvent implements Listener {
                                 Entity projectile = event.getProjectile();
                                 float force = event.getForce();
                                 if (force < 0.7) {
-                                    player.sendMessage(ChatColor.RED + "Shooting force must be > 0.7 (" + force + ")");
+                                    player.sendMessage(ChatPalette.RED + "Shooting force must be > 0.7 (" + force + ")");
                                     event.setCancelled(true);
                                     return;
                                 }

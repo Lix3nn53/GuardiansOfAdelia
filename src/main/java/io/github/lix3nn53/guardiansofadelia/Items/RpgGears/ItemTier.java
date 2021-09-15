@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
 public enum ItemTier {
@@ -22,14 +22,14 @@ public enum ItemTier {
         return getTierColor() + name;
     }
 
-    public ChatColor getTierColor() {
-        ChatColor color = ChatColor.GREEN;
+    public ChatPalette getTierColor() {
+        ChatPalette color = ChatPalette.GREEN_DARK;
         if (this == ItemTier.RARE) {
-            color = ChatColor.BLUE;
+            color = ChatPalette.BLUE;
         } else if (this == ItemTier.MYSTIC) {
-            color = ChatColor.DARK_PURPLE;
+            color = ChatPalette.PURPLE;
         } else if (this == ItemTier.LEGENDARY) {
-            color = ChatColor.GOLD;
+            color = ChatPalette.GOLD;
         }
         return color;
     }

@@ -7,7 +7,6 @@ import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.UUID;
 public class TablistUtils {
 
     public static void updateTablist(Player player) {
-        StringBuilder header = new StringBuilder(ChatColor.GOLD + "Guardians of Adelia");
+        StringBuilder header = new StringBuilder(ChatPalette.GOLD + "Guardians of Adelia");
         header.append("\n");
         StringBuilder footer = new StringBuilder();
         if (GuardianDataManager.hasGuardianData(player)) {
@@ -29,13 +28,13 @@ public class TablistUtils {
                 //Add quests
                 List<Quest> questList = activeCharacter.getQuestList();
                 if (!questList.isEmpty()) {
-                    header.append("\n" + ChatColor.DARK_PURPLE + "QUESTS");
+                    header.append("\n" + ChatPalette.PURPLE + "QUESTS");
                     header.append("\n");
 
                     for (Quest quest : questList) {
-                        header.append(ChatColor.DARK_PURPLE);
+                        header.append(ChatPalette.PURPLE_LIGHT);
                         header.append(quest.getName() + ": ");
-                        header.append(ChatColor.WHITE + quest.getObjectiveTextForTablist());
+                        header.append(ChatPalette.WHITE + quest.getObjectiveTextForTablist());
                         header.append("\n");
                     }
                 }
@@ -45,7 +44,7 @@ public class TablistUtils {
             List<Player> friends = guardianData.getFriends();
             if (!friends.isEmpty()) {
                 footer.append("\n");
-                footer.append("\n" + ChatColor.GREEN + "FRIENDS");
+                footer.append("\n" + ChatPalette.GREEN + "FRIENDS");
                 footer.append("\n");
 
                 int i = 0;
@@ -64,14 +63,14 @@ public class TablistUtils {
 
             if (GuildManager.inGuild(player)) {
                 footer.append("\n");
-                footer.append("\n" + ChatColor.DARK_PURPLE + "GUILD");
+                footer.append("\n" + ChatPalette.PURPLE + "GUILD");
                 footer.append("\n");
 
                 Guild guild = GuildManager.getGuild(player);
 
                 footer.append(guild.getName());
                 footer.append("\n");
-                footer.append("\n" + ChatColor.LIGHT_PURPLE + "MEMBERS");
+                footer.append("\n" + ChatPalette.PURPLE_LIGHT + "MEMBERS");
                 footer.append("\n");
 
                 Set<UUID> members = guild.getMembers();

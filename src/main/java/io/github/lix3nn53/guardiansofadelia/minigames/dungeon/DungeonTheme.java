@@ -9,12 +9,13 @@ import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoom;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.ItemPoolGenerator;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.MobManager;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -166,13 +167,13 @@ public class DungeonTheme {
     private ItemStack generateInstanceItem(DungeonInstance dungeonInstance) {
         ItemStack room = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = room.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.AQUA + getName() + " #" + dungeonInstance.getInstanceNo() + " (" + dungeonInstance.getPlayersInGameSize() + "/" + dungeonInstance.getMaxPlayerSize() + ")");
+        itemMeta.setDisplayName(ChatPalette.BLUE_LIGHT + getName() + " #" + dungeonInstance.getInstanceNo() + " (" + dungeonInstance.getPlayersInGameSize() + "/" + dungeonInstance.getMaxPlayerSize() + ")");
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + dungeonInstance.getLevelReq());
-        lore.add(ChatColor.LIGHT_PURPLE + "Time limit: " + ChatColor.WHITE + dungeonInstance.getTimeLimitInMinutes() + " minute(s)");
+        lore.add(ChatPalette.YELLOW + "Level req: " + ChatPalette.WHITE + dungeonInstance.getLevelReq());
+        lore.add(ChatPalette.PURPLE_LIGHT + "Time limit: " + ChatPalette.WHITE + dungeonInstance.getTimeLimitInMinutes() + " minute(s)");
         lore.add("");
-        lore.add(ChatColor.RED + "BOSS: " + ChatColor.WHITE + getBossName());
+        lore.add(ChatPalette.RED + "BOSS: " + ChatPalette.WHITE + getBossName());
 
         // Resistance
         List<String> weakness = new ArrayList<>();
@@ -183,11 +184,11 @@ public class DungeonTheme {
                 if (resistance < 1) {
                     int percent = (int) (100 * (-(1d - resistance)));
 
-                    lore.add(ChatColor.AQUA + "Resistance: " + type.getFullName() + " - " + -percent + "%");
+                    lore.add(ChatPalette.BLUE_LIGHT + "Resistance: " + type.getFullName() + " - " + -percent + "%");
                 } else {
                     int percent = (int) (100 * (1d - resistance));
 
-                    weakness.add(ChatColor.RED + "Weakness: " + type.getFullName() + " - " + -percent + "%");
+                    weakness.add(ChatPalette.RED + "Weakness: " + type.getFullName() + " - " + -percent + "%");
                 }
             }
         }
@@ -195,13 +196,13 @@ public class DungeonTheme {
 
         if (dungeonInstance.isInGame()) {
             lore.add("");
-            lore.add(ChatColor.GOLD + "Players in dungeon: ");
+            lore.add(ChatPalette.GOLD + "Players in dungeon: ");
             for (Player player : dungeonInstance.getPlayersInGame()) {
                 lore.add(player.getDisplayName());
             }
         } else {
             lore.add("");
-            lore.add(ChatColor.GRAY + "Click to join this dungeon room!");
+            lore.add(ChatPalette.GRAY + "Click to join this dungeon room!");
         }
         itemMeta.setLore(lore);
         room.setItemMeta(itemMeta);

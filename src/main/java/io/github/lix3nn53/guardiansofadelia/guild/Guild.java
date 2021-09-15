@@ -1,10 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.guild;
 
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -95,7 +95,7 @@ public class Guild {
                     Player member = Bukkit.getPlayer(memberUUID);
                     if (member != null) {
                         if (member.isOnline()) {
-                            member.sendMessage(ChatColor.RED + player.getName() + " left your guild.");
+                            member.sendMessage(ChatPalette.RED + player.getName() + " left your guild.");
                             TablistUtils.updateTablist(member);
                         }
                     }

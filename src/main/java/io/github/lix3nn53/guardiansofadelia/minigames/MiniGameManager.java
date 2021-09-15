@@ -9,9 +9,9 @@ import io.github.lix3nn53.guardiansofadelia.minigames.guildwar.GuildWar;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -184,7 +184,7 @@ public class MiniGameManager {
             minigame.leave(player);
         } else {
             if (player.isOnline()) {
-                player.sendMessage(ChatColor.RED + "You are not in a minigame");
+                player.sendMessage(ChatPalette.RED + "You are not in a minigame");
             }
         }
     }
@@ -208,23 +208,23 @@ public class MiniGameManager {
     }
 
     public static GuiGeneric getLastOneStandingJoinGui() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.GOLD + "Join Last One Standing", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GOLD + "Join Last One Standing", 0);
 
         int i = 9;
         for (LastOneStanding lastOneStanding : lastOneStandingList) {
             ItemStack room = new ItemStack(Material.LIME_WOOL);
             ItemMeta itemMeta = room.getItemMeta();
-            itemMeta.setDisplayName(ChatColor.GREEN + lastOneStanding.getMinigameName() + " (" + lastOneStanding.getPlayersInGameSize() + "/" + lastOneStanding.getMaxPlayerSize() + ")");
+            itemMeta.setDisplayName(ChatPalette.GREEN_DARK + lastOneStanding.getMinigameName() + " (" + lastOneStanding.getPlayersInGameSize() + "/" + lastOneStanding.getMaxPlayerSize() + ")");
 
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatColor.GREEN + "Map: " + ChatColor.WHITE + lastOneStanding.getMapName());
-            lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + lastOneStanding.getLevelReq());
-            lore.add(ChatColor.GOLD + "Team amount: " + ChatColor.WHITE + lastOneStanding.getTeamAmount());
-            lore.add(ChatColor.GOLD + "Team size: " + ChatColor.WHITE + lastOneStanding.getTeamSize());
-            lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + lastOneStanding.getTimeLimitInMinutes() + " minute(s)");
+            lore.add(ChatPalette.GREEN_DARK + "Map: " + ChatPalette.WHITE + lastOneStanding.getMapName());
+            lore.add(ChatPalette.YELLOW + "Level req: " + ChatPalette.WHITE + lastOneStanding.getLevelReq());
+            lore.add(ChatPalette.GOLD + "Team amount: " + ChatPalette.WHITE + lastOneStanding.getTeamAmount());
+            lore.add(ChatPalette.GOLD + "Team size: " + ChatPalette.WHITE + lastOneStanding.getTeamSize());
+            lore.add(ChatPalette.PURPLE_LIGHT + "Game time: " + ChatPalette.WHITE + lastOneStanding.getTimeLimitInMinutes() + " minute(s)");
             lore.add("");
-            lore.add(ChatColor.GRAY + "Click to join this room!");
+            lore.add(ChatPalette.GRAY + "Click to join this room!");
             itemMeta.setLore(lore);
 
             room.setItemMeta(itemMeta);
@@ -239,23 +239,23 @@ public class MiniGameManager {
     }
 
     public static GuiGeneric getWinByMostKillsJoinGui() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.GOLD + "Join Win By Most Kills", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GOLD + "Join Win By Most Kills", 0);
 
         int i = 9;
         for (WinByMostKills winByMostKills : winByMostKillsList) {
             ItemStack room = new ItemStack(Material.LIME_WOOL);
             ItemMeta itemMeta = room.getItemMeta();
-            itemMeta.setDisplayName(ChatColor.GREEN + winByMostKills.getMinigameName() + " (" + winByMostKills.getPlayersInGameSize() + "/" + winByMostKills.getMaxPlayerSize() + ")");
+            itemMeta.setDisplayName(ChatPalette.GREEN_DARK + winByMostKills.getMinigameName() + " (" + winByMostKills.getPlayersInGameSize() + "/" + winByMostKills.getMaxPlayerSize() + ")");
 
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatColor.GREEN + "Map: " + ChatColor.WHITE + winByMostKills.getMapName());
-            lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + winByMostKills.getLevelReq());
-            lore.add(ChatColor.GOLD + "Team amount: " + ChatColor.WHITE + winByMostKills.getTeamAmount());
-            lore.add(ChatColor.GOLD + "Team size: " + ChatColor.WHITE + winByMostKills.getTeamSize());
-            lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + winByMostKills.getTimeLimitInMinutes() + " minute(s)");
+            lore.add(ChatPalette.GREEN_DARK + "Map: " + ChatPalette.WHITE + winByMostKills.getMapName());
+            lore.add(ChatPalette.YELLOW + "Level req: " + ChatPalette.WHITE + winByMostKills.getLevelReq());
+            lore.add(ChatPalette.GOLD + "Team amount: " + ChatPalette.WHITE + winByMostKills.getTeamAmount());
+            lore.add(ChatPalette.GOLD + "Team size: " + ChatPalette.WHITE + winByMostKills.getTeamSize());
+            lore.add(ChatPalette.PURPLE_LIGHT + "Game time: " + ChatPalette.WHITE + winByMostKills.getTimeLimitInMinutes() + " minute(s)");
             lore.add("");
-            lore.add(ChatColor.GRAY + "Click to join this room!");
+            lore.add(ChatPalette.GRAY + "Click to join this room!");
             itemMeta.setLore(lore);
 
             room.setItemMeta(itemMeta);
@@ -270,22 +270,22 @@ public class MiniGameManager {
     }
 
     public static GuiGeneric getGuildWarJoinGui() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Join Guild War", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GRAY_DARK + "Join Guild War", 0);
 
         int i = 9;
         for (GuildWar guildWar : guildWarList) {
             ItemStack room = new ItemStack(Material.LIME_WOOL);
             ItemMeta itemMeta = room.getItemMeta();
-            itemMeta.setDisplayName(ChatColor.GREEN + guildWar.getMinigameName() + " (" + guildWar.getPlayersInGameSize() + "/" + guildWar.getMaxPlayerSize() + ")");
+            itemMeta.setDisplayName(ChatPalette.GREEN_DARK + guildWar.getMinigameName() + " (" + guildWar.getPlayersInGameSize() + "/" + guildWar.getMaxPlayerSize() + ")");
 
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatColor.GREEN + "Map: " + ChatColor.WHITE + guildWar.getMapName());
-            lore.add(ChatColor.YELLOW + "Level req: " + ChatColor.WHITE + guildWar.getLevelReq());
-            lore.add(ChatColor.GOLD + "Team size: " + ChatColor.WHITE + guildWar.getTeamSize());
-            lore.add(ChatColor.LIGHT_PURPLE + "Game time: " + ChatColor.WHITE + guildWar.getTimeLimitInMinutes() + " minute(s)");
+            lore.add(ChatPalette.GREEN_DARK + "Map: " + ChatPalette.WHITE + guildWar.getMapName());
+            lore.add(ChatPalette.YELLOW + "Level req: " + ChatPalette.WHITE + guildWar.getLevelReq());
+            lore.add(ChatPalette.GOLD + "Team size: " + ChatPalette.WHITE + guildWar.getTeamSize());
+            lore.add(ChatPalette.PURPLE_LIGHT + "Game time: " + ChatPalette.WHITE + guildWar.getTimeLimitInMinutes() + " minute(s)");
             lore.add("");
-            lore.add(ChatColor.GRAY + "Click to join this room!");
+            lore.add(ChatPalette.GRAY + "Click to join this room!");
             itemMeta.setLore(lore);
 
             room.setItemMeta(itemMeta);

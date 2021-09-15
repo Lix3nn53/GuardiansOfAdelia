@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.party;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -62,10 +63,10 @@ public final class Party {
     public void leave(Player playerLeft) {
         members.remove(playerLeft);
 
-        playerLeft.sendMessage(ChatColor.RED + "You left the party");
+        playerLeft.sendMessage(ChatPalette.RED + "You left the party");
 
         for (Player member : members) {
-            member.sendMessage(playerLeft.getName() + ChatColor.RED + " left your party");
+            member.sendMessage(playerLeft.getName() + ChatPalette.RED + " left your party");
         }
 
         onMemberRemove(playerLeft);
@@ -76,10 +77,10 @@ public final class Party {
             if (members.contains(playerToKick)) {
                 members.remove(playerToKick);
 
-                playerToKick.sendMessage(kicker.getName() + ChatColor.RED + " kicked you from the party");
+                playerToKick.sendMessage(kicker.getName() + ChatPalette.RED + " kicked you from the party");
 
                 for (Player member : members) {
-                    member.sendMessage(kicker.getName() + ChatColor.RED + " kicked " + playerToKick.getName() + " from the party");
+                    member.sendMessage(kicker.getName() + ChatPalette.RED + " kicked " + playerToKick.getName() + " from the party");
                 }
 
                 onMemberRemove(playerToKick);
@@ -104,17 +105,17 @@ public final class Party {
         Player leader = getLeader();
 
         if (!setter.equals(leader)) {
-            setter.sendMessage(ChatColor.RED + "You must be party leader");
+            setter.sendMessage(ChatPalette.RED + "You must be party leader");
             return;
         }
 
         if (!members.contains(player)) {
-            setter.sendMessage(ChatColor.RED + player.getName() + " is not a member of your party");
+            setter.sendMessage(ChatPalette.RED + player.getName() + " is not a member of your party");
             return;
         }
 
         if (player.equals(leader)) {
-            setter.sendMessage(ChatColor.RED + "You can't select yourself");
+            setter.sendMessage(ChatPalette.RED + "You can't select yourself");
             return;
         }
 

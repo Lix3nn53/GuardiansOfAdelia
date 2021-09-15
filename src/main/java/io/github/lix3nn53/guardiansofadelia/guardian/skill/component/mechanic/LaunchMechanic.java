@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
@@ -68,13 +68,13 @@ public class LaunchMechanic extends MechanicComponent {
             double right = skillLevel < rightSpeedList.size() ? rightSpeedList.get(skillLevel) : 0;
             double upward = skillLevel < upwardSpeedList.size() ? upwardSpeedList.get(skillLevel) : 0;
 
-            additions.add(ChatColor.AQUA + "Launch[forward, upward, right]: " + forward + ", " + upward + ", " + right);
+            additions.add(ChatPalette.BLUE_LIGHT + "Launch[forward, upward, right]: " + forward + ", " + upward + ", " + right);
         } else if (skillLevel == upwardSpeedList.size()) {
             double forward = skillLevel - 1 < forwardSpeedList.size() ? forwardSpeedList.get(skillLevel - 1) : 0;
             double right = skillLevel - 1 < rightSpeedList.size() ? rightSpeedList.get(skillLevel - 1) : 0;
             double upward = skillLevel - 1 < upwardSpeedList.size() ? upwardSpeedList.get(skillLevel - 1) : 0;
 
-            additions.add(ChatColor.AQUA + "Launch[forward, upward, right]: " + forward + ", " + upward + ", " + right);
+            additions.add(ChatPalette.BLUE_LIGHT + "Launch[forward, upward, right]: " + forward + ", " + upward + ", " + right);
         } else {
             double forward = skillLevel - 1 < forwardSpeedList.size() ? forwardSpeedList.get(skillLevel - 1) : 0;
             double right = skillLevel - 1 < rightSpeedList.size() ? rightSpeedList.get(skillLevel - 1) : 0;
@@ -84,7 +84,7 @@ public class LaunchMechanic extends MechanicComponent {
             double right2 = skillLevel < rightSpeedList.size() ? rightSpeedList.get(skillLevel) : 0;
             double upward2 = skillLevel < upwardSpeedList.size() ? upwardSpeedList.get(skillLevel) : 0;
 
-            additions.add(ChatColor.AQUA + "Launch[forward, upward, right]: " + forward + ", " + upward + ", " + right +
+            additions.add(ChatPalette.BLUE_LIGHT + "Launch[forward, upward, right]: " + forward + ", " + upward + ", " + right +
                     " -> " + forward2 + ", " + upward2 + ", " + right2);
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

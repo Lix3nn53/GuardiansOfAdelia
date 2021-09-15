@@ -8,10 +8,10 @@ import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -30,7 +30,7 @@ public class GuildWar extends Minigame {
     private final int maxPoint;
 
     public GuildWar(int maxPoint, String mapName, int instanceNo, List<Location> startLocations, List<Location> flagGroundLocations) {
-        super("GuildWar", ChatColor.DARK_PURPLE, mapName, instanceNo, 1, 10, 2, startLocations,
+        super("GuildWar", ChatPalette.PURPLE, mapName, instanceNo, 1, 10, 2, startLocations,
                 15, 10, TownManager.getTown(1).getLocation(), 99, 0, 20, 0, new ArrayList<>());
         this.maxPoint = maxPoint;
         for (Location flagGround : flagGroundLocations) {
@@ -169,13 +169,13 @@ public class GuildWar extends Minigame {
                                     return true;
                                 }
                             } else {
-                                player.sendMessage(ChatColor.RED + "You must be Leader or Commander to join your guild to a GuildWar");
+                                player.sendMessage(ChatPalette.RED + "You must be Leader or Commander to join your guild to a GuildWar");
                             }
                         }
                     }
                 }
             } else {
-                player.sendMessage(ChatColor.RED + "You are already in a minigame");
+                player.sendMessage(ChatPalette.RED + "You are already in a minigame");
             }
         }
         return false;
@@ -252,9 +252,9 @@ public class GuildWar extends Minigame {
                 msg.append(")");
             }
             for (Player player : getPlayersInGame()) {
-                MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+                MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
                 MessageUtils.sendCenteredMessage(player, msg.toString());
-                MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+                MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
             }
         }
     }

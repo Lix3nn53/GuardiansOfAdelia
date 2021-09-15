@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.minigames.arenas;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class WinByMostKills extends Minigame {
 
     public WinByMostKills(String mapName, int levelReq, int timeLimitInMinutes, int instanceNo, List<Location> startLocations, int teamSize, int teamAmount, int requiredPlayerAmountToStart) {
-        super("WinByMostKills", ChatColor.GOLD, mapName, instanceNo, levelReq, teamSize, teamAmount, startLocations,
+        super("WinByMostKills", ChatPalette.GOLD, mapName, instanceNo, levelReq, teamSize, teamAmount, startLocations,
                 timeLimitInMinutes, 1, TownManager.getTown(1).getLocation(), 99, 0, 20, requiredPlayerAmountToStart, new ArrayList<>());
     }
 

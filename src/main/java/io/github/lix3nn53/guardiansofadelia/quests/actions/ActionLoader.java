@@ -6,8 +6,8 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.Items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.Items.config.ItemReferenceLoader;
 import io.github.lix3nn53.guardiansofadelia.Items.config.WeaponReferenceData;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
@@ -20,7 +20,7 @@ public class ActionLoader {
         String actionType = configurationSection.getString("actionType");
 
         if (actionType == null) {
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NULL ACTION TYPE");
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NULL ACTION TYPE");
             return null;
         }
 
@@ -100,7 +100,7 @@ public class ActionLoader {
             return new ArmorSelectOneOfAction(armorReferenceData);
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH ACTION IN LOADER: " + configurationSection.getCurrentPath());
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH ACTION IN LOADER: " + configurationSection.getCurrentPath());
 
         return null;
     }

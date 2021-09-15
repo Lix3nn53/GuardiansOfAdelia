@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +17,7 @@ public class CommandResourcePack implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/rp load");
+                player.sendMessage(ChatPalette.YELLOW + "/rp load");
             } else if (args[0].equals("load")) {
                 player.setResourcePack(GuardiansOfAdelia.ResourcePackURL);
             }

@@ -15,8 +15,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.pr
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.*;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigurationUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class SkillComponentLoader {
         String componentType = configurationSection.getString("componentType");
 
         if (componentType == null) {
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NULL COMPONENT TYPE");
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NULL COMPONENT TYPE");
             return null;
         }
 
@@ -209,9 +209,9 @@ public class SkillComponentLoader {
             return new PotionEffectRemoveMechanic(configurationSection);
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);
 
         return null;
     }

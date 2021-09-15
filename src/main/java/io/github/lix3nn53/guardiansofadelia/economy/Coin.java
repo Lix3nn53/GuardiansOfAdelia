@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.economy;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,25 +18,6 @@ public class Coin {
         this.amount = amount;
     }
 
-    public static String getStringValue(int total) {
-        int copper;
-        int silver = 0;
-        int gold = 0;
-        if (total > 63) {
-            copper = total % 64;
-            silver = total / 64;
-            if (silver > 63) {
-                int excessSilver = silver;
-                silver = excessSilver % 64;
-                gold = excessSilver / 64;
-            }
-        } else {
-            copper = total;
-        }
-        return ChatColor.GREEN + Integer.toString(copper) + " " + ChatColor.WHITE + silver + " " +
-                ChatColor.YELLOW + gold;
-    }
-
     public int getAmount() {
         return amount;
     }
@@ -44,18 +26,18 @@ public class Coin {
         if (amount > 0) {
             ItemStack money = new ItemStack(Material.IRON_INGOT, amount);
             ItemMeta itemMeta = money.getItemMeta();
-            itemMeta.setDisplayName(ChatColor.GREEN + "Bronze Coin");
+            itemMeta.setDisplayName(ChatPalette.BROWN + "Bronze Coin");
             if (type.equals(CoinType.SILVER)) {
                 money = new ItemStack(Material.GOLD_INGOT, amount);
-                itemMeta.setDisplayName(ChatColor.WHITE + "Silver Coin");
+                itemMeta.setDisplayName(ChatPalette.GRAY + "Silver Coin");
             } else if (type.equals(CoinType.GOLD)) {
                 money = new ItemStack(Material.DIAMOND, amount);
-                itemMeta.setDisplayName(ChatColor.GOLD + "Gold Coin");
+                itemMeta.setDisplayName(ChatPalette.GOLD + "Gold Coin");
             }
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
-            lore.add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
+            lore.add(ChatPalette.BROWN + "64 Bronze = " + ChatPalette.GRAY + "1 Silver");
+            lore.add(ChatPalette.GRAY + "64 Silver = " + ChatPalette.GOLD + "1 Gold");
             itemMeta.setLore(lore);
             money.setItemMeta(itemMeta);
 

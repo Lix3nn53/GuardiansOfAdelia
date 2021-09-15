@@ -4,8 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -18,7 +18,7 @@ import java.util.List;
 public class CharacterSelectionMenuList {
 
     public static GuiGeneric getCharacterCreationMenu(int charNo) {
-        GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.DARK_GRAY + "Character " + charNo + " Creation", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(54, ChatPalette.GRAY_DARK + "Character " + charNo + " Creation", 0);
 
         List<RPGClass> classesAtTier = RPGClassManager.getClassesAtTier(3);
 
@@ -56,12 +56,12 @@ public class CharacterSelectionMenuList {
     }
 
     public static GuiGeneric characterSelectionMenu(int charNo) {
-        GuiGeneric guiGeneric = new GuiGeneric(36, ChatColor.DARK_GRAY + "Character " + charNo + " Selection", 0);
+        GuiGeneric guiGeneric = new GuiGeneric(36, ChatPalette.GRAY_DARK + "Character " + charNo + " Selection", 0);
 
         ItemStack lastLocation = new ItemStack(Material.MAGENTA_WOOL);
         ItemMeta itemMeta = lastLocation.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Teleport to your last location");
+        itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + "Teleport to your last location");
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         lastLocation.setItemMeta(itemMeta);
         guiGeneric.setItem(11, lastLocation);
@@ -75,12 +75,12 @@ public class CharacterSelectionMenuList {
 
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatColor.GRAY + "Click to start in this location!");
+            lore.add(ChatPalette.GRAY + "Click to start in this location!");
             lore.add("");
-            lore.add(ChatColor.GRAY + "Required Level: " + town.getLevel());
+            lore.add(ChatPalette.GRAY + "Required Level: " + town.getLevel());
             itemMeta.setLore(lore);
 
-            itemMeta.setDisplayName(ChatColor.AQUA + town.getName() + " #" + key);
+            itemMeta.setDisplayName(ChatPalette.BLUE_LIGHT + town.getName() + " #" + key);
             itemStack.setItemMeta(itemMeta);
 
             guiGeneric.setItem(index, itemStack);
@@ -91,21 +91,21 @@ public class CharacterSelectionMenuList {
     }
 
     public static GuiGeneric tutorialSkipMenu(String rpgClass, int charNo) {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.DARK_GRAY + "Play Tutorial? " + rpgClass + " " + charNo, 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GRAY_DARK + "Play Tutorial? " + rpgClass + " " + charNo, 0);
 
         ItemStack yes = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = yes.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatColor.GREEN + "Yes, play tutorial.");
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Yes, play tutorial.");
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         yes.setItemMeta(itemMeta);
         guiGeneric.setItem(11, yes);
 
         ItemStack no = new ItemStack(Material.RED_WOOL);
-        itemMeta.setDisplayName(ChatColor.RED + "No, skip tutorial");
+        itemMeta.setDisplayName(ChatPalette.RED + "No, skip tutorial");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.YELLOW + "Required level: 1");
+        lore.add(ChatPalette.YELLOW + "Required level: 1");
         itemMeta.setLore(lore);
         no.setItemMeta(itemMeta);
         guiGeneric.setItem(15, no);

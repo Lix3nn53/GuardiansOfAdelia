@@ -5,9 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -39,19 +40,19 @@ public class GearWeapon implements RPGGear {
 
         StatPassive statPassive = new StatPassive(0, 0, 0, minElemValue, maxElemValue, minNumberOfElements);
 
-        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName());
+        lore.add(ChatColor.RESET.toString() + ChatPalette.GOLD + gearType.getDisplayName());
         if (gearSetExist) {
-            lore.add(ChatColor.RED + gearSetStr);
+            lore.add(ChatPalette.RED + gearSetStr);
         }
         lore.add("");
-        lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
+        lore.add(ChatColor.RESET.toString() + ChatPalette.PURPLE + "Required Level: " + ChatPalette.GRAY + level);
         lore.add("");
-        lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + "+" + elementDamage);
-        lore.add(ChatColor.AQUA + "ø Attack Speed: " + weaponAttackSpeed.getLoreString());
-        lore.add(ChatColor.GOLD + "☆ Critical chance: " + ChatColor.GRAY + new DecimalFormat("##.##").format(gearType.getCriticalChance() * 100) + "%");
+        lore.add(ChatPalette.RED + "✦ Element Damage: " + ChatPalette.GRAY + "+" + elementDamage);
+        lore.add(ChatPalette.BLUE_LIGHT + "ø Attack Speed: " + weaponAttackSpeed.getLoreString());
+        lore.add(ChatPalette.GOLD + "☆ Critical chance: " + ChatPalette.GRAY + new DecimalFormat("##.##").format(gearType.getCriticalChance() * 100) + "%");
         double meleeDamageReduction = gearType.getMeleeDamageReduction();
         if (meleeDamageReduction < 1) {
-            lore.add(ChatColor.RED + "Melee Damage Reduction: " + ChatColor.GRAY + ((1 - meleeDamageReduction) * 100) + "%");
+            lore.add(ChatPalette.RED + "Melee Damage Reduction: " + ChatPalette.GRAY + ((1 - meleeDamageReduction) * 100) + "%");
         }
         String itemLoreAddition = gearType.getItemLoreAddition();
         if (itemLoreAddition != null) {
@@ -62,12 +63,12 @@ public class GearWeapon implements RPGGear {
             lore.add("");
             /*for (AttributeType attributeType : AttributeType.values()) {
                 if (statPassive.getAttributeValue(attributeType) != 0) {
-                    lore.add(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getAttributeValue(attributeType));
+                    lore.add(attributeType.getCustomName() + ": " + ChatPalette.GRAY + "+" + statPassive.getAttributeValue(attributeType));
                 }
             }*/
             for (ElementType elementType : ElementType.values()) {
                 if (statPassive.getElementValue(elementType) != 0) {
-                    lore.add(elementType.getFullName() + ": " + ChatColor.GRAY + "+" + statPassive.getElementValue(elementType));
+                    lore.add(elementType.getFullName() + ": " + ChatPalette.GRAY + "+" + statPassive.getElementValue(elementType));
                 }
             }
         }
@@ -84,7 +85,7 @@ public class GearWeapon implements RPGGear {
                         addedSpace = true;
                     }
 
-                    lore.add(ChatColor.GRAY + "-- " + ChatColor.RED + gearSetStr + ChatColor.GRAY + " [" + i + " pieces] --");
+                    lore.add(ChatPalette.GRAY + "-- " + ChatPalette.RED + gearSetStr + ChatPalette.GRAY + " [" + i + " pieces] --");
                     List<GearSetEffect> effects = GearSetManager.getEffectsWithoutLower(gearSet);
                     for (GearSetEffect gearSetEffect : effects) {
                         lore.add("      " + gearSetEffect.toString());

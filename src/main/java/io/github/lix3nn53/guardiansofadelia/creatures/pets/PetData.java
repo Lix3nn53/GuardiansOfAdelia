@@ -4,8 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.config.SkillComponentLoader;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigurationUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -79,7 +79,7 @@ public class PetData {
     }
 
     public void configLoadError(String section) {
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "ERROR WHILE LOADING PET: ");
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "Section: " + section);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "ERROR WHILE LOADING PET: ");
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "Section: " + section);
     }
 }

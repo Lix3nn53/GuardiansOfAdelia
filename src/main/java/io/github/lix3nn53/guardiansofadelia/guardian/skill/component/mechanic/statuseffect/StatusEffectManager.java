@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -46,14 +47,14 @@ public class StatusEffectManager {
         if (statusEffectTypes.contains(StatusEffectType.STUN)) {
             if (livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatColor.RED + "Stunned..", 0, 20, 0);
+                player.sendTitle("", ChatPalette.RED + "Stunned..", 0, 20, 0);
             }
 
             return true;
         } else if (statusEffectTypes.contains(StatusEffectType.SILENCE)) {
             if (livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatColor.RED + "Silenced..", 0, 20, 0);
+                player.sendTitle("", ChatPalette.RED + "Silenced..", 0, 20, 0);
             }
 
             return true;
@@ -70,14 +71,14 @@ public class StatusEffectManager {
         if (statusEffectTypes.contains(StatusEffectType.STUN)) {
             if (livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatColor.RED + "Stunned..", 0, 20, 0);
+                player.sendTitle("", ChatPalette.RED + "Stunned..", 0, 20, 0);
             }
 
             return true;
         } else if (statusEffectTypes.contains(StatusEffectType.DISARM)) {
             if (livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatColor.RED + "Disarmed..", 0, 20, 0);
+                player.sendTitle("", ChatPalette.RED + "Disarmed..", 0, 20, 0);
             }
 
             return true;
@@ -94,14 +95,14 @@ public class StatusEffectManager {
         if (statusEffectTypes.contains(StatusEffectType.STUN)) {
             if (livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatColor.RED + "Stunned..", 0, 20, 0);
+                player.sendTitle("", ChatPalette.RED + "Stunned..", 0, 20, 0);
             }
 
             return true;
         } else if (statusEffectTypes.contains(StatusEffectType.ROOT)) {
             if (livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatColor.RED + "Rooted..", 0, 20, 0);
+                player.sendTitle("", ChatPalette.RED + "Rooted..", 0, 20, 0);
             }
 
             return true;

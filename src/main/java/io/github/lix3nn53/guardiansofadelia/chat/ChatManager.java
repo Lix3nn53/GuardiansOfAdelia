@@ -6,8 +6,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -39,7 +39,7 @@ public class ChatManager {
                     armorStand.remove();
                 } else {
                     if (ticksPass == 0) {
-                        armorStand = new Hologram(location, ChatColor.YELLOW + "< " + ChatColor.GRAY + message + ChatColor.YELLOW + " >").getArmorStand();
+                        armorStand = new Hologram(location, ChatPalette.YELLOW + "< " + ChatPalette.GRAY + message + ChatPalette.YELLOW + " >").getArmorStand();
                     }
                     Location location = player.getLocation().clone().add(0, height + 0.4, 0);
                     armorStand.teleport(location);
@@ -65,7 +65,7 @@ public class ChatManager {
                     armorStand.remove();
                 } else {
                     if (ticksPass == 0) {
-                        armorStand = new Hologram(location, ChatColor.YELLOW + "< " + ChatColor.GRAY + message + ChatColor.YELLOW + " >").getArmorStand();
+                        armorStand = new Hologram(location, ChatPalette.YELLOW + "< " + ChatPalette.GRAY + message + ChatPalette.YELLOW + " >").getArmorStand();
                     }
                     Location location = entity.getLocation().clone().add(0, height + 0.4 + offsetY, 0);
                     armorStand.teleport(location);
@@ -91,9 +91,9 @@ public class ChatManager {
                     armorStand.remove();
                 } else {
                     if (ticksPass == 0) {
-                        armorStand = new Hologram(location, message + ChatColor.YELLOW + " in " + durationTicks).getArmorStand();
+                        armorStand = new Hologram(location, message + ChatPalette.YELLOW + " in " + durationTicks).getArmorStand();
                     } else {
-                        armorStand.setCustomName(message + ChatColor.YELLOW + " in " + (durationTicks - ticksPass));
+                        armorStand.setCustomName(message + ChatPalette.YELLOW + " in " + (durationTicks - ticksPass));
                     }
                     Location location = entity.getLocation().clone().add(0, height + 0.4 + offsetY, 0);
                     armorStand.teleport(location);
@@ -112,7 +112,7 @@ public class ChatManager {
      */
     public static boolean onChat(Player player, String message) {
         if (chatCooldown.contains(player)) {
-            player.sendMessage(ChatColor.RED + "You can send a message per 3 seconds");
+            player.sendMessage(ChatPalette.RED + "You can send a message per 3 seconds");
             return false;
         }
         chatCooldown.add(player);
@@ -138,31 +138,31 @@ public class ChatManager {
             StaffRank staffRank = guardianData.getStaffRank();
             if (!staffRank.equals(StaffRank.NONE)) {
                 String s = staffRank.toString();
-                prefix += ChatColor.DARK_GRAY + "[" + staffRank.getChatColor() + s + ChatColor.DARK_GRAY + "]";
+                prefix += ChatPalette.GRAY_DARK + "[" + staffRank.getChatPalette() + s + ChatPalette.GRAY_DARK + "]";
             }
             PremiumRank premiumRank = guardianData.getPremiumRank();
             if (!premiumRank.equals(PremiumRank.NONE)) {
                 String s = premiumRank.toString();
-                prefix += ChatColor.DARK_GRAY + "[" + premiumRank.getChatColor() + s + ChatColor.DARK_GRAY + "]";
+                prefix += ChatPalette.GRAY_DARK + "[" + premiumRank.getChatPalette() + s + ChatPalette.GRAY_DARK + "]";
             }
             if (GuildManager.inGuild(player)) {
                 Guild guild = GuildManager.getGuild(player);
                 String s = guild.getTag();
                 s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
-                prefix += ChatColor.DARK_GRAY + "[" + ChatColor.DARK_PURPLE + s + ChatColor.DARK_GRAY + "]";
+                prefix += ChatPalette.GRAY_DARK + "[" + ChatPalette.PURPLE + s + ChatPalette.GRAY_DARK + "]";
             }
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 ChatTag chatTag = activeCharacter.getChatTag();
                 String s = chatTag.toString();
                 s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
-                prefix += ChatColor.DARK_GRAY + "[" + chatTag.getChatColor() + s + ChatColor.DARK_GRAY + "]";
+                prefix += ChatPalette.GRAY_DARK + "[" + chatTag.getChatPalette() + s + ChatPalette.GRAY_DARK + "]";
             }
         }
-        return prefix + ChatColor.GRAY + " ";
+        return prefix + ChatPalette.GRAY + " ";
     }
 
     private static String getChatSuffix(Player player) {
-        return ChatColor.GOLD + " > " + ChatColor.YELLOW;
+        return ChatPalette.GOLD + " > " + ChatPalette.YELLOW;
     }
 }

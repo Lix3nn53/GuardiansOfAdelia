@@ -4,8 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChest;
 import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChestManager;
 import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChestTier;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -28,10 +28,10 @@ public class CommandAdminReward implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/adminreward setdaily");
-                player.sendMessage(ChatColor.YELLOW + "/adminreward addlootchest [0-3 = tier]");
+                player.sendMessage(ChatPalette.YELLOW + "/adminreward setdaily");
+                player.sendMessage(ChatPalette.YELLOW + "/adminreward addlootchest [0-3 = tier]");
             } else if (args[0].equals("setdaily")) {
-                GuiGeneric guiGeneric = new GuiGeneric(9, ChatColor.YELLOW + "Set Daily Rewards", 0);
+                GuiGeneric guiGeneric = new GuiGeneric(9, ChatPalette.YELLOW + "Set Daily Rewards", 0);
 
                 ItemStack filler = new ItemStack(Material.BLACK_STAINED_GLASS);
                 ItemMeta itemMeta = filler.getItemMeta();
@@ -60,7 +60,7 @@ public class CommandAdminReward implements CommandExecutor {
                 Material type = targetBlock.getType();
 
                 if (!type.equals(Material.CHEST)) {
-                    player.sendMessage(ChatColor.RED + "You must be looking to a chest");
+                    player.sendMessage(ChatPalette.RED + "You must be looking to a chest");
                     return false;
                 }
 
@@ -72,7 +72,7 @@ public class CommandAdminReward implements CommandExecutor {
 
                 LootChestManager.addLootChest(lootChest);
 
-                player.sendMessage(ChatColor.GREEN + "Added loot chest, tier: " + value.toString());
+                player.sendMessage(ChatPalette.GREEN_DARK + "Added loot chest, tier: " + value.toString());
                 lootChest.startPlayingParticles();
             }
 

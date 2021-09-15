@@ -5,10 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class EnchantGui extends GuiGeneric {
 
     public EnchantGui(Player player) {
-        super(27, ChatColor.AQUA + "Item Enchanting", 0);
+        super(27, ChatPalette.BLUE_LIGHT + "Item Enchanting", 0);
 
         ItemStack itemGlass = new ItemStack(Material.RED_STAINED_GLASS_PANE, 1);
         ItemStack finalGlass = new ItemStack(Material.PURPLE_STAINED_GLASS_PANE, 1);
@@ -30,44 +30,44 @@ public class EnchantGui extends GuiGeneric {
 
         ItemStack wool = new ItemStack(Material.EMERALD_BLOCK, 1);
         ItemMeta im = itemGlass.getItemMeta();
-        im.setDisplayName(ChatColor.YELLOW + "§ePlace the item you");
+        im.setDisplayName(ChatPalette.YELLOW + "§ePlace the item you");
         ArrayList<String> lore = new ArrayList<>();
-        lore.add(ChatColor.YELLOW + "want to enchant here.");
+        lore.add(ChatPalette.YELLOW + "want to enchant here.");
         lore.add("");
-        lore.add(ChatColor.GOLD + "Enhanceable items: ");
-        lore.add(ChatColor.GRAY + "Armors and Shields");
-        lore.add(ChatColor.GRAY + "Weapons");
-        lore.add(ChatColor.GRAY + "Jewelry, Gloves, Parrots");
+        lore.add(ChatPalette.GOLD + "Enhanceable items: ");
+        lore.add(ChatPalette.GRAY + "Armors and Shields");
+        lore.add(ChatPalette.GRAY + "Weapons");
+        lore.add(ChatPalette.GRAY + "Jewelry, Gloves, Parrots");
         im.setLore(lore);
         itemGlass.setItemMeta(im);
         ItemMeta im2 = finalGlass.getItemMeta();
-        im2.setDisplayName(ChatColor.GREEN + "Enchant success rates:");
+        im2.setDisplayName(ChatPalette.GREEN_DARK + "Enchant success rates:");
         lore = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            lore.add(ChatColor.GRAY.toString() + i + " -> " + (i + 1) + " = " + (int) (EnchantManager.getChance(player, i) * 100) + "%");
+            lore.add(ChatPalette.GRAY.toString() + i + " -> " + (i + 1) + " = " + (int) (EnchantManager.getChance(player, i) * 100) + "%");
         }
         im2.setLore(lore);
         finalGlass.setItemMeta(im2);
         ItemMeta im3 = stoneGlass.getItemMeta();
-        im3.setDisplayName(ChatColor.AQUA + "Place the appropriate level of");
+        im3.setDisplayName(ChatPalette.BLUE_LIGHT + "Place the appropriate level of");
         lore = new ArrayList<>();
-        lore.add(ChatColor.AQUA + "enchant stone here.");
+        lore.add(ChatPalette.BLUE_LIGHT + "enchant stone here.");
         lore.add("");
-        lore.add(ChatColor.DARK_AQUA + "for +0~2 items > Level 1 enchant stone");
-        lore.add(ChatColor.DARK_AQUA + "for +3~5 items > Level 2 enchant stone");
-        lore.add(ChatColor.DARK_AQUA + "for +6~8 items > Level 3 enchant stone");
-        lore.add(ChatColor.DARK_AQUA + "for +9~11 items > Level 4 enchant stone");
+        lore.add(ChatPalette.BLUE_DARK + "for +0~2 items > Level 1 enchant stone");
+        lore.add(ChatPalette.BLUE_DARK + "for +3~5 items > Level 2 enchant stone");
+        lore.add(ChatPalette.BLUE_DARK + "for +6~8 items > Level 3 enchant stone");
+        lore.add(ChatPalette.BLUE_DARK + "for +9~11 items > Level 4 enchant stone");
         im3.setLore(lore);
         stoneGlass.setItemMeta(im3);
         ItemMeta im4 = wool.getItemMeta();
-        im4.setDisplayName(ChatColor.GREEN + "After you place the item");
+        im4.setDisplayName(ChatPalette.GREEN_DARK + "After you place the item");
         lore = new ArrayList<>();
-        lore.add(ChatColor.GREEN + "and the enchant stone");
-        lore.add(ChatColor.GREEN + "click emerald block to enchant!");
+        lore.add(ChatPalette.GREEN_DARK + "and the enchant stone");
+        lore.add(ChatPalette.GREEN_DARK + "click emerald block to enchant!");
         lore.add("");
-        lore.add(ChatColor.RED + "Warning:");
-        lore.add(ChatColor.GRAY + "If it fails the enchant level");
-        lore.add(ChatColor.GRAY + "of item decreases");
+        lore.add(ChatPalette.RED + "Warning:");
+        lore.add(ChatPalette.GRAY + "If it fails the enchant level");
+        lore.add(ChatPalette.GRAY + "of item decreases");
         im4.setLore(lore);
         wool.setItemMeta(im4);
 
@@ -185,10 +185,10 @@ public class EnchantGui extends GuiGeneric {
                             }.runTaskTimer(GuardiansOfAdelia.getInstance(), 1L, 1L);
 
                         } else {
-                            owner.sendMessage(ChatColor.RED + "You must place Enchant Stone Tier " + requiredEnchantStoneLevel + " to enchant this item");
+                            owner.sendMessage(ChatPalette.RED + "You must place Enchant Stone Tier " + requiredEnchantStoneLevel + " to enchant this item");
                         }
                     } else {
-                        owner.sendMessage(ChatColor.RED + "Your item is at max enchant level");
+                        owner.sendMessage(ChatPalette.RED + "Your item is at max enchant level");
                     }
                 }
             }
@@ -198,7 +198,7 @@ public class EnchantGui extends GuiGeneric {
     private void setSuccessGui() {
         ItemStack success = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = success.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Success");
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Success");
         itemMeta.setCustomModelData(5);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
@@ -210,7 +210,7 @@ public class EnchantGui extends GuiGeneric {
     private void setFailGui() {
         ItemStack fail = new ItemStack(Material.STONE_PICKAXE);
         ItemMeta itemMeta = fail.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.RED + "Fail");
+        itemMeta.setDisplayName(ChatPalette.RED + "Fail");
         itemMeta.setCustomModelData(6);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);

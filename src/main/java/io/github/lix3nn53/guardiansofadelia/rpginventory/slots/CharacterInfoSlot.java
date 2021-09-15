@@ -7,7 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.Element;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -34,7 +34,7 @@ public class CharacterInfoSlot {
 
                 ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD);
                 SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
-                skullMeta.setDisplayName(ChatColor.YELLOW + "Character Info");
+                skullMeta.setDisplayName(ChatPalette.YELLOW + "Character Info");
 
                 String rpgClassStr = activeCharacter.getRpgClassStr();
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
@@ -60,32 +60,32 @@ public class CharacterInfoSlot {
 
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.LIGHT_PURPLE + "Class: " + ChatColor.GRAY + "" + className);
-                lore.add(ChatColor.LIGHT_PURPLE + "Class Element: " + mainElement.getFullName());
-                lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + "" + level);
-                lore.add(ChatColor.YELLOW + "Experience: " + ChatColor.GRAY + exp + "/" + expReq);
-                lore.add(ChatColor.GREEN + "❤ Max Health: " + ChatColor.GRAY + "" + health + "/" + maxHealth);
-                lore.add(ChatColor.AQUA + "✦ Max Mana: " + ChatColor.GRAY + "" + mana + "/" + maxMana);
+                lore.add(ChatPalette.PURPLE_LIGHT + "Class: " + ChatPalette.GRAY + "" + className);
+                lore.add(ChatPalette.PINK + "Class Element: " + mainElement.getFullName());
+                lore.add(ChatPalette.GOLD + "Level: " + ChatPalette.GRAY + "" + level);
+                lore.add(ChatPalette.YELLOW + "Experience: " + ChatPalette.GRAY + exp + "/" + expReq);
+                lore.add(ChatPalette.GREEN_DARK + "❤ Max Health: " + ChatPalette.GRAY + "" + health + "/" + maxHealth);
+                lore.add(ChatPalette.BLUE_LIGHT + "✦ Max Mana: " + ChatPalette.GRAY + "" + mana + "/" + maxMana);
                 lore.add("");
-                lore.add(ChatColor.RED + "✦ Element Damage: " + ChatColor.GRAY + rpgCharacterStats.getTotalElementDamage(player, rpgClassStr));
-                lore.add(ChatColor.AQUA + "■ Element Defense: " + ChatColor.GRAY + totalDefense + " (" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% reduction)");
-                lore.add(ChatColor.GOLD + "☆ Critical Chance: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
+                lore.add(ChatPalette.RED + "✦ Element Damage: " + ChatPalette.GRAY + rpgCharacterStats.getTotalElementDamage(player, rpgClassStr));
+                lore.add(ChatPalette.BLUE_LIGHT + "■ Element Defense: " + ChatPalette.GRAY + totalDefense + " (" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% reduction)");
+                lore.add(ChatPalette.GOLD + "☆ Critical Chance: " + ChatPalette.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
                 lore.add("");
-                lore.add(ChatColor.GOLD + "? Critical Damage: " + ChatColor.GRAY + new DecimalFormat("##.##").format(criticalDamage) + "%");
-                lore.add(ChatColor.AQUA + "? Ability Haste: " + ChatColor.GRAY + abilityHaste + " (" + new DecimalFormat("##.##").format((1.0 - cooldownReduction) * 100) + "% cooldown reduction)");
+                lore.add(ChatPalette.GOLD + "? Critical Damage: " + ChatPalette.GRAY + new DecimalFormat("##.##").format(criticalDamage) + "%");
+                lore.add(ChatPalette.BLUE_LIGHT + "? Ability Haste: " + ChatPalette.GRAY + abilityHaste + " (" + new DecimalFormat("##.##").format((1.0 - cooldownReduction) * 100) + "% cooldown reduction)");
 
                 /*lore.add("");
-                lore.add(ChatColor.GRAY + "(equipment + level + invested points)");
+                lore.add(ChatPalette.GRAY + "(equipment + level + invested points)");
                 // Add attributes to lore (equipment + level + invested points)
                 for (AttributeType attributeType : AttributeType.values()) {
                     io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute attribute = rpgCharacterStats.getAttribute(attributeType);
-                    lore.add(attributeType.getCustomName() + ": " + ChatColor.GRAY + attribute.getBonusFromEquipment() + " + " + attribute.getBonusFromLevel(level, rpgClassStr) + " + " + attribute.getInvested());
+                    lore.add(attributeType.getCustomName() + ": " + ChatPalette.GRAY + attribute.getBonusFromEquipment() + " + " + attribute.getBonusFromLevel(level, rpgClassStr) + " + " + attribute.getInvested());
                 }*/
 
                 lore.add("");
                 for (ElementType elementType : ElementType.values()) {
                     Element element = rpgCharacterStats.getElement(elementType);
-                    lore.add(elementType.getFullName() + ": " + ChatColor.GRAY + element.getTotal());
+                    lore.add(elementType.getFullName() + ": " + ChatPalette.GRAY + element.getTotal());
                 }
                 skullMeta.setLore(lore);
                 itemStack.setItemMeta(skullMeta);

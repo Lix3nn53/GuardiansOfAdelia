@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicCom
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonInstance;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -56,11 +56,11 @@ public class DungeonDarknessMechanic extends MechanicComponent {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {
-            additions.add(ChatColor.DARK_PURPLE + "Dungeon darkness: " + amounts.get(skillLevel));
+            additions.add(ChatPalette.PURPLE + "Dungeon darkness: " + amounts.get(skillLevel));
         } else if (skillLevel == amounts.size()) {
-            additions.add(ChatColor.DARK_PURPLE + "Dungeon darkness: " + amounts.get(skillLevel - 1));
+            additions.add(ChatPalette.PURPLE + "Dungeon darkness: " + amounts.get(skillLevel - 1));
         } else {
-            additions.add(ChatColor.DARK_PURPLE + "Dungeon darkness: " + amounts.get(skillLevel - 1) + " -> " + amounts.get(skillLevel));
+            additions.add(ChatPalette.PURPLE + "Dungeon darkness: " + amounts.get(skillLevel - 1) + " -> " + amounts.get(skillLevel));
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

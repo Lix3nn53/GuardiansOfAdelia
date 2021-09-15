@@ -12,10 +12,11 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.*;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Parrot;
@@ -30,7 +31,7 @@ import java.util.List;
 
 public class RPGInventory {
 
-    private final GuiGeneric rpgGui = new GuiGeneric(54, ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + "RPG Inventory", 0);
+    private final GuiGeneric rpgGui = new GuiGeneric(54, ChatPalette.GRAY_DARK.toString() + ChatColor.BOLD + "RPG Inventory", 0);
 
     private final List<Player> petSpawnCooldownList = new ArrayList<>();
 

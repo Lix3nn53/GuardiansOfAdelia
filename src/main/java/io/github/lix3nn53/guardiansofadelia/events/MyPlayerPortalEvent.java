@@ -5,11 +5,11 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -35,7 +35,7 @@ public class MyPlayerPortalEvent implements Listener {
             World world = Bukkit.getWorld("world");
             Location toAlberstolRuins = new Location(world, -2558.5, 63.5, 2744.5, -90, -2);
             player.teleport(toAlberstolRuins);
-            player.sendTitle(ChatColor.DARK_PURPLE + "Uruga", ChatColor.LIGHT_PURPLE + "", 25, 35, 25);
+            player.sendTitle(ChatPalette.PURPLE + "Uruga", ChatPalette.PURPLE_LIGHT + "", 25, 35, 25);
         } else {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
 
@@ -53,10 +53,10 @@ public class MyPlayerPortalEvent implements Listener {
                     World world = Bukkit.getWorld("world");
                     Location toAlberstolRuins = new Location(world, -4835.5, 103.5, 2236.5, -80, -2);
                     player.teleport(toAlberstolRuins);
-                    player.sendTitle(ChatColor.DARK_PURPLE + "Alberstol Ruins", ChatColor.LIGHT_PURPLE + "", 25, 35, 25);
+                    player.sendTitle(ChatPalette.PURPLE + "Alberstol Ruins", ChatPalette.PURPLE_LIGHT + "", 25, 35, 25);
                 }
             } else {
-                player.sendMessage(ChatColor.RED + "You can't enter this portal without Gatekeeper's permission.");
+                player.sendMessage(ChatPalette.RED + "You can't enter this portal without Gatekeeper's permission.");
             }
         }
     }

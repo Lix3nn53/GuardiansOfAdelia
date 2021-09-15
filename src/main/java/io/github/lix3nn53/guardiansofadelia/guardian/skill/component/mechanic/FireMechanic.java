@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
@@ -39,11 +39,11 @@ public class FireMechanic extends MechanicComponent {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {
-            additions.add(ChatColor.RED + "Burn duration: " + (ticks.get(skillLevel) / 20));
+            additions.add(ChatPalette.RED + "Burn duration: " + (ticks.get(skillLevel) / 20));
         } else if (skillLevel == ticks.size()) {
-            additions.add(ChatColor.RED + "Burn duration: " + (ticks.get(skillLevel - 1) / 20));
+            additions.add(ChatPalette.RED + "Burn duration: " + (ticks.get(skillLevel - 1) / 20));
         } else {
-            additions.add(ChatColor.RED + "Burn duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
+            additions.add(ChatPalette.RED + "Burn duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }

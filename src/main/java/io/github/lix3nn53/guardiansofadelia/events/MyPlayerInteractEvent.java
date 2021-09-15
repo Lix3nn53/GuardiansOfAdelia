@@ -22,9 +22,9 @@ import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChest;
 import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChestManager;
 import io.github.lix3nn53.guardiansofadelia.transportation.TeleportScroll;
 import io.github.lix3nn53.guardiansofadelia.transportation.TeleportationUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -85,7 +85,7 @@ public class MyPlayerInteractEvent implements Listener {
             } else if (itemInMainHandType.equals(Material.PAPER)) {
                 if (PersistentDataContainerUtil.hasString(itemInMainHand, "teleportScroll")) {
                     if (!player.getLocation().getWorld().getName().equals("world")) {
-                        player.sendMessage(net.md_5.bungee.api.ChatColor.RED + "You can't use teleport gui from this location.");
+                        player.sendMessage(ChatPalette.RED + "You can't use teleport gui from this location.");
                         return;
                     }
 
@@ -119,7 +119,7 @@ public class MyPlayerInteractEvent implements Listener {
                 ItemMeta itemMeta = itemInMainHand.getItemMeta();
                 String displayName = itemMeta.getDisplayName();
 
-                if (displayName.equals(ChatColor.GOLD + "Weapon/Shield Skin Scroll")) {
+                if (displayName.equals(ChatPalette.GOLD + "Weapon/Shield Skin Scroll")) {
 
                     new WeaponOrShieldSkinApplyGui().openInventory(player);
                 } else if (PersistentDataContainerUtil.hasString(itemInMainHand, "helmetSkinCode")) {

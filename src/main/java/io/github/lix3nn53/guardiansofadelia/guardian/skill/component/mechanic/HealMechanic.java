@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.configuration.ConfigurationSection;
@@ -117,7 +117,7 @@ public class HealMechanic extends MechanicComponent {
 
         if (!healAmountList.isEmpty()) {
             if (skillLevel == 0) {
-                String lore = ChatColor.GREEN + "Heal: " + healAmountList.get(skillLevel);
+                String lore = ChatPalette.GREEN_DARK + "Heal: " + healAmountList.get(skillLevel);
 
                 if (multiplyWithValue != null) {
                     lore = lore + "x[" + multiplyWithValue + "]";
@@ -125,7 +125,7 @@ public class HealMechanic extends MechanicComponent {
 
                 additions.add(lore);
             } else if (skillLevel == healAmountList.size()) {
-                String lore = ChatColor.GREEN + "Heal: " + healAmountList.get(skillLevel - 1);
+                String lore = ChatPalette.GREEN_DARK + "Heal: " + healAmountList.get(skillLevel - 1);
 
                 if (multiplyWithValue != null) {
                     lore = lore + "x[" + multiplyWithValue + "]";
@@ -141,12 +141,12 @@ public class HealMechanic extends MechanicComponent {
                     lore2 = lore2 + "x[" + multiplyWithValue + "]";
                 }
 
-                additions.add(ChatColor.GREEN + lore1 + " -> " + lore2);
+                additions.add(ChatPalette.GREEN_DARK + lore1 + " -> " + lore2);
             }
         }
         if (!healPercentList.isEmpty()) {
             if (skillLevel == 0) {
-                String lore = ChatColor.GREEN + "Heal: " + healPercentList.get(skillLevel) + "%";
+                String lore = ChatPalette.GREEN_DARK + "Heal: " + healPercentList.get(skillLevel) + "%";
 
                 if (multiplyWithValue != null) {
                     lore = lore + " x[" + multiplyWithValue + "]";
@@ -154,7 +154,7 @@ public class HealMechanic extends MechanicComponent {
 
                 additions.add(lore);
             } else if (skillLevel == healPercentList.size()) {
-                String lore = ChatColor.GREEN + "Heal: " + healPercentList.get(skillLevel - 1) + "%";
+                String lore = ChatPalette.GREEN_DARK + "Heal: " + healPercentList.get(skillLevel - 1) + "%";
 
                 if (multiplyWithValue != null) {
                     lore = lore + " x[" + multiplyWithValue + "]";
@@ -169,7 +169,7 @@ public class HealMechanic extends MechanicComponent {
                     lore2 = lore2 + " x[" + multiplyWithValue + "]";
                 }
 
-                additions.add(ChatColor.GREEN + lore1 + " -> " + lore2);
+                additions.add(ChatPalette.GREEN_DARK + lore1 + " -> " + lore2);
             }
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

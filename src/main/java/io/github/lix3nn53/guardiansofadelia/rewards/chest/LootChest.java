@@ -2,10 +2,14 @@ package io.github.lix3nn53.guardiansofadelia.rewards.chest;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementFillCircle;
-import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -43,7 +47,7 @@ public class LootChest {
 
         List<ItemStack> loots = lootChestTier.getLoot();
 
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.BLACK + "Loot Chest #" + lootChestTier.ordinal(), 0);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.BLACK + "Loot Chest #" + lootChestTier.ordinal(), 0);
         for (int i = 0; i < 100; i++) {
             loots.add(new ItemStack(Material.AIR));
             if (loots.size() == 27) break;

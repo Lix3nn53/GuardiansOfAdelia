@@ -4,9 +4,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -83,7 +83,7 @@ public class PetExperienceManager {
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
-                    lore.set(5, ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + nextExperience + " / " + getNextExperienceTarget(currentLevel));
+                    lore.set(5, ChatPalette.PURPLE_LIGHT + "Experience: " + ChatPalette.GRAY + nextExperience + " / " + getNextExperienceTarget(currentLevel));
                     itemMeta.setLore(lore);
                     egg.setItemMeta(itemMeta);
 
@@ -104,7 +104,7 @@ public class PetExperienceManager {
 
                     ItemMeta itemMeta = egg.getItemMeta();
                     List<String> lore = itemMeta.getLore();
-                    lore.set(4, ChatColor.GOLD + "Level: " + ChatColor.GRAY + nextLevel);
+                    lore.set(4, ChatPalette.GOLD + "Level: " + ChatPalette.GRAY + nextLevel);
 
                     itemMeta.setLore(lore);
 
@@ -112,7 +112,7 @@ public class PetExperienceManager {
                     eggSlot.setItemOnSlot(egg);
 
                     PetManager.respawnPet(owner);
-                    MessageUtils.sendCenteredMessage(owner, ChatColor.GOLD + "Your pet has leveled up!");
+                    MessageUtils.sendCenteredMessage(owner, ChatPalette.GOLD + "Your pet has leveled up!");
                 }
             }
         }

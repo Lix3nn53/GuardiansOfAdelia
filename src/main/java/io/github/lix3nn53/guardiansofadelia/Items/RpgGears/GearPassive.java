@@ -4,8 +4,9 @@ import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -45,15 +46,15 @@ public class GearPassive implements RPGGear {
             finalValuesElem.put(elementType, finalValue);
         }
 
-        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Passive Gear");
+        lore.add(ChatColor.RESET.toString() + ChatPalette.GOLD + "Passive Gear");
         lore.add("");
-        lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
+        lore.add(ChatColor.RESET.toString() + ChatPalette.PURPLE + "Required Level: " + ChatPalette.GRAY + level);
         if (!statPassive.isEmpty(true, false)) {
             lore.add("");
             for (AttributeType attributeType : AttributeType.values()) {
                 int finalValue = finalValuesAttr.get(attributeType);
                 if (finalValue != 0) {
-                    lore.add(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + attributeType.getIncrementLore(finalValue));
+                    lore.add(attributeType.getCustomName() + ": " + ChatPalette.GRAY + "+" + attributeType.getIncrementLore(finalValue));
                 }
             }
         }
@@ -63,7 +64,7 @@ public class GearPassive implements RPGGear {
             for (ElementType elementType : ElementType.values()) {
                 int finalValue = finalValuesElem.get(elementType);
                 if (finalValue != 0) {
-                    lore.add(elementType.getFullName() + ": " + ChatColor.GRAY + "+" + finalValue);
+                    lore.add(elementType.getFullName() + ": " + ChatPalette.GRAY + "+" + finalValue);
                 }
             }
         }

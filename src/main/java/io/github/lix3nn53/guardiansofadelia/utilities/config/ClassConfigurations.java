@@ -13,7 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.config.SkillComponentLoader;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -56,7 +56,7 @@ public class ClassConfigurations {
 
             String colorStr = fileConfiguration.getString("color");
             GuardiansOfAdelia.getInstance().getLogger().info("colorStr: " + colorStr);
-            ChatColor color = ChatColor.valueOf(colorStr);
+            ChatPalette color = ChatPalette.valueOf(colorStr);
 
             String mainElementStr = fileConfiguration.getString("mainElement");
             ElementType mainElement = ElementType.valueOf(mainElementStr);

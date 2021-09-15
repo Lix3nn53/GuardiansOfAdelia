@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.chat;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 
 public enum StaffRank {
     NONE,
@@ -12,23 +13,23 @@ public enum StaffRank {
     YOUTUBER,
     TRAINEE;
 
-    public ChatColor getChatColor() {
+    public ChatPalette getChatPalette() {
         switch (this) {
             case OWNER:
-                return ChatColor.RED;
+                return ChatPalette.RED_DARK;
             case ADMIN:
-                return ChatColor.LIGHT_PURPLE;
+                return ChatPalette.PURPLE_LIGHT;
             case DEVELOPER:
-                return ChatColor.GOLD;
+                return ChatPalette.GOLD;
             case BUILDER:
-                return ChatColor.BLUE;
+                return ChatPalette.BLUE;
             case SUPPORT:
-                return ChatColor.AQUA;
+                return ChatPalette.BLUE_LIGHT;
             case YOUTUBER:
-                return ChatColor.RED;
+                return ChatPalette.RED;
             case TRAINEE:
-                return ChatColor.GREEN;
+                return ChatPalette.GREEN_DARK;
         }
-        return ChatColor.GRAY;
+        return ChatPalette.GRAY;
     }
 }

@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.gui;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -29,14 +29,14 @@ public class GuiBookGeneric implements GuiBook {
             if (pageIndex > 0) {
                 ItemStack previousPage = new ItemStack(Material.YELLOW_WOOL);
                 ItemMeta statusItemMeta = previousPage.getItemMeta();
-                statusItemMeta.setDisplayName(ChatColor.YELLOW + "Previous Page");
+                statusItemMeta.setDisplayName(ChatPalette.YELLOW + "Previous Page");
                 previousPage.setItemMeta(statusItemMeta);
                 pageGui.setItem(45, previousPage);
             }
             if (pageIndex < pageList.size() - 1) {
                 ItemStack nextPage = new ItemStack(Material.YELLOW_WOOL);
                 ItemMeta statusItemMeta = nextPage.getItemMeta();
-                statusItemMeta.setDisplayName(ChatColor.YELLOW + "Next Page");
+                statusItemMeta.setDisplayName(ChatPalette.YELLOW + "Next Page");
                 nextPage.setItemMeta(statusItemMeta);
                 pageGui.setItem(53, nextPage);
             }

@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import net.minecraft.server.level.EntityPlayer;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.LivingEntity;
@@ -89,18 +89,18 @@ public class AbsorptionHeartMechanic extends MechanicComponent {
 
         if (!heartAmountList.isEmpty()) {
             if (skillLevel == 0) {
-                String lore = ChatColor.GREEN + "Golden Heart: +" + heartAmountList.get(skillLevel) + "[Max " + maxHeartList.get(skillLevel) + "]";
+                String lore = ChatPalette.GREEN_DARK + "Golden Heart: +" + heartAmountList.get(skillLevel) + "[Max " + maxHeartList.get(skillLevel) + "]";
 
                 additions.add(lore);
             } else if (skillLevel == heartAmountList.size()) {
-                String lore = ChatColor.GREEN + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
+                String lore = ChatPalette.GREEN_DARK + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
 
                 additions.add(lore);
             } else {
-                String lore1 = ChatColor.GREEN + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
+                String lore1 = ChatPalette.GREEN_DARK + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
                 String lore2 = heartAmountList.get(skillLevel) + "[Max " + maxHeartList.get(skillLevel) + "]";
 
-                additions.add(ChatColor.GREEN + lore1 + " -> " + lore2);
+                additions.add(ChatPalette.GREEN_DARK + lore1 + " -> " + lore2);
             }
         }
 

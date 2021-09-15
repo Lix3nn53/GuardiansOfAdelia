@@ -15,11 +15,11 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomDo
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomSpawner;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomState;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
@@ -51,7 +51,7 @@ public class DungeonInstance extends Minigame {
     private final List<Hologram> debugHolograms = new ArrayList<>();
 
     public DungeonInstance(DungeonTheme theme, int instanceNo, List<Location> startLocation, List<Checkpoint> checkpoints) {
-        super("Dungeon " + theme.getName(), ChatColor.AQUA, theme.getName(), instanceNo, theme.getLevelReq()
+        super("Dungeon " + theme.getName(), ChatPalette.BLUE_LIGHT, theme.getName(), instanceNo, theme.getLevelReq()
                 , 4, 1, startLocation, theme.getTimeLimitInMinutes(),
                 5, MiniGameManager.getPortalLocationOfDungeonTheme(theme.getCode()), 999,
                 0, 12, 1, checkpoints);
@@ -138,25 +138,25 @@ public class DungeonInstance extends Minigame {
             this.playerToLootedChestCount.clear();
 
             boolean darknessCondition = darkness <= 50;
-            String darknessConditionMessage = ChatColor.YELLOW + "Darkness is less than 50: " + ChatColor.RED + "FAIL";
+            String darknessConditionMessage = ChatPalette.YELLOW + "Darkness is less than 50: " + ChatPalette.RED + "FAIL";
             if (darknessCondition) {
                 this.unlockedChests++;
-                darknessConditionMessage = ChatColor.YELLOW + "Darkness is less than 50: " + ChatColor.GREEN + "SUCCESS";
+                darknessConditionMessage = ChatPalette.YELLOW + "Darkness is less than 50: " + ChatPalette.GREEN_DARK + "SUCCESS";
             }
 
             boolean roomCondition = isAllRoomsCleared();
-            String roomConditionMessage = ChatColor.YELLOW + "All rooms cleared: " + ChatColor.RED + "FAIL";
+            String roomConditionMessage = ChatPalette.YELLOW + "All rooms cleared: " + ChatPalette.RED + "FAIL";
             if (roomCondition) {
                 this.unlockedChests++;
-                roomConditionMessage = ChatColor.YELLOW + "All rooms cleared: " + ChatColor.GREEN + "SUCCESS";
+                roomConditionMessage = ChatPalette.YELLOW + "All rooms cleared: " + ChatPalette.GREEN_DARK + "SUCCESS";
             }
 
             for (Player member : party.getMembers()) {
                 MessageUtils.sendCenteredMessage(member, getGameColor() + "Dungeon Prize Chests Spawned!");
-                MessageUtils.sendCenteredMessage(member, ChatColor.YELLOW + "Dungeon Boss Defeated: " + ChatColor.GREEN + "SUCCESS");
+                MessageUtils.sendCenteredMessage(member, ChatPalette.YELLOW + "Dungeon Boss Defeated: " + ChatPalette.GREEN_DARK + "SUCCESS");
                 MessageUtils.sendCenteredMessage(member, darknessConditionMessage);
                 MessageUtils.sendCenteredMessage(member, roomConditionMessage);
-                MessageUtils.sendCenteredMessage(member, ChatColor.GOLD + "You got " + this.unlockedChests + "/3 keys! Use them to loot prize chests!");
+                MessageUtils.sendCenteredMessage(member, ChatPalette.GOLD + "You got " + this.unlockedChests + "/3 keys! Use them to loot prize chests!");
             }
         }
 
@@ -255,7 +255,7 @@ public class DungeonInstance extends Minigame {
                     state = "Open";
                 }
 
-                Hologram hologram = new Hologram(add, ChatColor.YELLOW + "Room-" + roomKey + " Door-" + i + "(" + state + ")");
+                Hologram hologram = new Hologram(add, ChatPalette.YELLOW + "Room-" + roomKey + " Door-" + i + "(" + state + ")");
                 HologramManager.addHologram(hologram);
                 debugHolograms.add(hologram);
             }
@@ -271,14 +271,14 @@ public class DungeonInstance extends Minigame {
 
                     Location add = startLocation.clone().add(offset);
 
-                    Hologram hologram = new Hologram(add, ChatColor.RED + "Room-" + roomKey + " Wave-" + i + " Spawner-" + y);
+                    Hologram hologram = new Hologram(add, ChatPalette.RED + "Room-" + roomKey + " Wave-" + i + " Spawner-" + y);
                     HologramManager.addHologram(hologram);
                     debugHolograms.add(hologram);
 
                     String mobCode = spawner.getMobCode();
                     int mobLevel = spawner.getMobLevel();
                     int amount = spawner.getAmount();
-                    hologram = new Hologram(add.clone().add(0, 0.5, 0), ChatColor.RED + mobCode + " lv" + mobLevel + " x" + amount);
+                    hologram = new Hologram(add.clone().add(0, 0.5, 0), ChatPalette.RED + mobCode + " lv" + mobLevel + " x" + amount);
                     HologramManager.addHologram(hologram);
                     debugHolograms.add(hologram);
                 }
@@ -404,7 +404,7 @@ public class DungeonInstance extends Minigame {
         alreadyGot++;
 
         playerToLootedChestCount.put(player, alreadyGot);
-        player.sendMessage(ChatColor.YELLOW + "Remaining keys: " + ChatColor.GOLD + (this.unlockedChests - alreadyGot));
+        player.sendMessage(ChatPalette.YELLOW + "Remaining keys: " + ChatPalette.GOLD + (this.unlockedChests - alreadyGot));
     }
 
     public void addDarkness(int add) {

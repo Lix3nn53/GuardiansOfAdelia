@@ -2,10 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.guild;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class GuildManager {
 
-    private static HashMap<Player, Guild> playerToGuild = new HashMap<>();
+    private static final HashMap<Player, Guild> playerToGuild = new HashMap<>();
 
     public static void addPlayerGuild(Player player, Guild guild) {
         playerToGuild.put(player, guild);
@@ -40,7 +40,7 @@ public class GuildManager {
                 if (!uuid.equals(player.getUniqueId())) {
                     Player member = Bukkit.getPlayer(uuid);
                     if (member != null) {
-                        MessageUtils.sendCenteredMessage(member, ChatColor.DARK_PURPLE + "Guild member " + ChatColor.WHITE + player.getName() + ChatColor.DARK_PURPLE + " joined the server");
+                        MessageUtils.sendCenteredMessage(member, ChatPalette.PURPLE + "Guild member " + ChatPalette.WHITE + player.getName() + ChatPalette.PURPLE + " joined the server");
                     }
                 }
             }

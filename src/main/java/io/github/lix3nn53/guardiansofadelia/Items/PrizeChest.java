@@ -2,9 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.Items;
 
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonPrizeChestManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -29,7 +29,7 @@ public class PrizeChest {
      * @param type         0 for Weapon, 1 for Jewelry, 2 for Armor
      */
     public PrizeChest(DungeonTheme dungeonTheme, PrizeChestType type) {
-        this.name = ChatColor.GOLD + dungeonTheme.getName() + " Prize Chest (" + type.toString() + ")";
+        this.name = ChatPalette.GOLD + dungeonTheme.getName() + " Prize Chest (" + type.toString() + ")";
         this.code = dungeonTheme.getCode();
         this.type = type;
     }
@@ -48,7 +48,7 @@ public class PrizeChest {
 
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "Right click while holding to open!");
+        lore.add(ChatPalette.GRAY + "Right click while holding to open!");
 
         itemMeta.setDisplayName(getName());
         itemMeta.setLore(lore);

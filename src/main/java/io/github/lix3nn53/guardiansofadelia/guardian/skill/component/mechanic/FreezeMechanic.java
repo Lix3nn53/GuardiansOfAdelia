@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
@@ -28,7 +28,7 @@ public class FreezeMechanic extends MechanicComponent {
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
-        additions.add(ChatColor.AQUA + "Freeze effect");
+        additions.add(ChatPalette.BLUE_LIGHT + "Freeze effect");
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }

@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.*;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
 public class ParticleArrangementLoader {
@@ -11,7 +11,7 @@ public class ParticleArrangementLoader {
         String componentType = configurationSection.getString("arrangementType");
 
         if (componentType == null) {
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NULL ARRANGEMENT TYPE");
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NULL ARRANGEMENT TYPE");
             return null;
         }
 
@@ -41,9 +41,9 @@ public class ParticleArrangementLoader {
             return new ArrangementSingle(configurationSection);
         }
 
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH ARRANGEMENT TYPE IN LOADER: " + componentType);
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH ARRANGEMENT TYPE IN LOADER: " + componentType);
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "NO SUCH ARRANGEMENT TYPE IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH ARRANGEMENT TYPE IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH ARRANGEMENT TYPE IN LOADER: " + componentType);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH ARRANGEMENT TYPE IN LOADER: " + componentType);
 
         return null;
     }

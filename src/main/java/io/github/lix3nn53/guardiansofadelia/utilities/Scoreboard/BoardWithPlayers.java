@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard;
 
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -24,17 +26,17 @@ public class BoardWithPlayers extends ScoreboardGeneral {
 
         }
 
-        this.setLine(ChatColor.GREEN + "» Party", lineCounter);
+        this.setLine(ChatPalette.GREEN_DARK + "» Party", lineCounter);
         lineCounter++;
         if (!players.isEmpty()) {
-            this.setLine(players.get(0).getName() + ChatColor.RED + " ❤" + (int) (players.get(0).getHealth() + 0.5), lineCounter);
+            this.setLine(players.get(0).getName() + ChatPalette.RED + " ❤" + (int) (players.get(0).getHealth() + 0.5), lineCounter);
             lineCounter++;
         }
 
         if (players.size() > 1) {
             for (int i = 1; i < players.size(); i++) {
                 Player member = players.get(i);
-                this.setLine(member.getName() + ChatColor.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
+                this.setLine(member.getName() + ChatPalette.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
                 lineCounter++;
             }
         }
@@ -55,7 +57,7 @@ public class BoardWithPlayers extends ScoreboardGeneral {
         for (int k : getRowLines().keySet()) {
             String s = getRowLines().get(k);
             if (s.contains(playerName)) {
-                this.setLine(playerName + ChatColor.RED + " ❤" + hp, k);
+                this.setLine(playerName + ChatPalette.RED + " ❤" + hp, k);
                 break;
             }
         }
@@ -71,17 +73,17 @@ public class BoardWithPlayers extends ScoreboardGeneral {
 
         }
 
-        this.setLine(ChatColor.GREEN + "» Party", lineCounter);
+        this.setLine(ChatPalette.GREEN_DARK + "» Party", lineCounter);
         lineCounter++;
         if (!players.isEmpty()) {
-            this.setLine(players.get(0).getName() + ChatColor.RED + " ❤" + (int) (players.get(0).getHealth() + 0.5), lineCounter);
+            this.setLine(players.get(0).getName() + ChatPalette.RED + " ❤" + (int) (players.get(0).getHealth() + 0.5), lineCounter);
             lineCounter++;
         }
 
         if (players.size() > 1) {
             for (int i = 1; i < players.size(); i++) {
                 Player member = players.get(i);
-                this.setLine(member.getName() + ChatColor.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
+                this.setLine(member.getName() + ChatPalette.RED + " ❤" + (int) (member.getHealth() + 0.5), lineCounter);
                 lineCounter++;
             }
         }

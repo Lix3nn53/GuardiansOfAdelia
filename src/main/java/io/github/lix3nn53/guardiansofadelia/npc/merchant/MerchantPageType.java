@@ -18,11 +18,11 @@ import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolType;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiPage;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -92,31 +92,31 @@ public enum MerchantPageType {
     }
 
     private GuiGeneric getConvertGui(int shopNpc) {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatColor.GOLD + "Coin Converter", shopNpc);
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GOLD + "Coin Converter", shopNpc);
 
         ItemStack silverToBronze = new ItemStack(Material.IRON_INGOT, 64);
         ItemMeta itemMeta = silverToBronze.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Bronze Coin");
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Bronze Coin");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
-        lore.add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
+        lore.add(ChatPalette.GREEN_DARK + "64 Bronze = " + ChatPalette.WHITE + "1 Silver");
+        lore.add(ChatPalette.WHITE + "64 Silver = " + ChatPalette.YELLOW + "1 Gold");
         itemMeta.setLore(lore);
         silverToBronze.setItemMeta(itemMeta);
         guiGeneric.setItem(0, silverToBronze);
 
         ItemStack bronzeToSilver = new ItemStack(Material.GOLD_INGOT, 1);
-        itemMeta.setDisplayName(ChatColor.WHITE + "Silver Coin");
+        itemMeta.setDisplayName(ChatPalette.WHITE + "Silver Coin");
         bronzeToSilver.setItemMeta(itemMeta);
         guiGeneric.setItem(9, bronzeToSilver);
 
         ItemStack goldToSilver = new ItemStack(Material.GOLD_INGOT, 64);
-        itemMeta.setDisplayName(ChatColor.WHITE + "Silver Coin");
+        itemMeta.setDisplayName(ChatPalette.WHITE + "Silver Coin");
         goldToSilver.setItemMeta(itemMeta);
         guiGeneric.setItem(10, goldToSilver);
 
         ItemStack silverToGold = new ItemStack(Material.DIAMOND, 1);
-        itemMeta.setDisplayName(ChatColor.GOLD + "Gold Coin");
+        itemMeta.setDisplayName(ChatPalette.GOLD + "Gold Coin");
         silverToGold.setItemMeta(itemMeta);
         guiGeneric.setItem(18, silverToGold);
 

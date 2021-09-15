@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -23,10 +23,10 @@ public class MerchantMenu extends GuiGeneric {
         if (merchantType.canSell()) {
             ItemStack sellItem = new ItemStack(Material.GOLD_BLOCK);
             ItemMeta statusItemMeta = sellItem.getItemMeta();
-            statusItemMeta.setDisplayName(ChatColor.GOLD + "Sell Items");
+            statusItemMeta.setDisplayName(ChatPalette.GOLD + "Sell Items");
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatColor.YELLOW + "Sell your item for coins");
+            lore.add(ChatPalette.YELLOW + "Sell your item for coins");
             statusItemMeta.setLore(lore);
             sellItem.setItemMeta(statusItemMeta);
             setItem(nextSlotNo, sellItem, MerchantPageType.SELL);
@@ -35,11 +35,11 @@ public class MerchantMenu extends GuiGeneric {
         if (merchantType.canCoinConvert()) {
             ItemStack coinConvertItem = new ItemStack(Material.DIAMOND);
             ItemMeta statusItemMeta = coinConvertItem.getItemMeta();
-            statusItemMeta.setDisplayName(ChatColor.YELLOW + "Convert coins");
+            statusItemMeta.setDisplayName(ChatPalette.YELLOW + "Convert coins");
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatColor.GREEN + "64 Bronze = " + ChatColor.WHITE + "1 Silver");
-            lore.add(ChatColor.WHITE + "64 Silver = " + ChatColor.YELLOW + "1 Gold");
+            lore.add(ChatPalette.BROWN + "64 Bronze = " + ChatPalette.GRAY + "1 Silver");
+            lore.add(ChatPalette.GRAY + "64 Silver = " + ChatPalette.GOLD + "1 Gold");
             statusItemMeta.setLore(lore);
             coinConvertItem.setItemMeta(statusItemMeta);
             setItem(nextSlotNo, coinConvertItem, MerchantPageType.CONVERT);

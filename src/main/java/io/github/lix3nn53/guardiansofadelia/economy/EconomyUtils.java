@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.economy;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -34,18 +34,17 @@ public class EconomyUtils {
     public static String priceToString(int price) {
         int[] coins = priceToCoins(price);
 
-        return ChatColor.GREEN + Integer.toString(coins[0]) + " " + ChatColor.WHITE + coins[1] + " " +
-                ChatColor.YELLOW + coins[2];
+        return ChatPalette.BROWN + Integer.toString(coins[0]) + " " + ChatPalette.GRAY + coins[1] + " " +
+                ChatPalette.GOLD + coins[2];
     }
 
     public static ItemStack setShopPrice(ItemStack itemStack, int price) {
-        int[] coins = priceToCoins(price);
-
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> lore = itemMeta.getLore();
-        String priceString = ChatColor.GREEN + Integer.toString(coins[0]) + " " + ChatColor.WHITE + coins[1] + " " +
-                ChatColor.YELLOW + coins[2];
-        lore.add(ChatColor.GOLD + "Price: " + priceString);
+
+        String priceString = priceToString(price);
+
+        lore.add(ChatPalette.GOLD + "Price: " + priceString);
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
         PersistentDataContainerUtil.putInteger("shopPrice", price, itemStack);

@@ -2,10 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -182,11 +182,11 @@ public class SkillDataManager {
             List<LivingEntity> entities = hashMap.get(castCounter);
 
             if (entities == null) {
-                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "removeSavedEntity entities null");
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "removeSavedEntity entities null");
                 return;
             }
             if (toRemove == null) {
-                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "removeSavedEntity toRemove null");
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "removeSavedEntity toRemove null");
                 return;
             }
 
@@ -205,7 +205,7 @@ public class SkillDataManager {
             List<LivingEntity> entities = hashMap.get(castCounter);
 
             if (entities == null) {
-                GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "removeSavedEntity entities null");
+                GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "removeSavedEntity entities null");
                 return;
             }
 

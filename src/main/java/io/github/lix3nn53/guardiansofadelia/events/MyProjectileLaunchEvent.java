@@ -5,9 +5,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.PlayerTridentThrowManager;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -43,7 +43,7 @@ public class MyProjectileLaunchEvent implements Listener {
 
             if (player.getInventory().getHeldItemSlot() != 4) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.RED + "You can only attack with weapon slot(5)");
+                player.sendMessage(ChatPalette.RED + "You can only attack with weapon slot(5)");
                 return;
             }
 
@@ -54,7 +54,7 @@ public class MyProjectileLaunchEvent implements Listener {
                 //trident return cooldown
                 if (!PlayerTridentThrowManager.canThrow(player)) {
                     event.setCancelled(true);
-                    player.sendMessage(ChatColor.RED + "You can't throw your spear again before it returns back");
+                    player.sendMessage(ChatPalette.RED + "You can't throw your spear again before it returns back");
                     return;
                 }
 

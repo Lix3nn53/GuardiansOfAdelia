@@ -4,8 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyInvite;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,29 +21,29 @@ public class CommandParty implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (MiniGameManager.isInMinigame(player)) {
-                player.sendMessage(ChatColor.RED + "You can't use party commands in minigames");
+                player.sendMessage(ChatPalette.RED + "You can't use party commands in minigames");
                 return false;
             }
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/party invite <player>");
-                player.sendMessage(ChatColor.YELLOW + "/party leave");
-                player.sendMessage(ChatColor.YELLOW + "/party kick <player>");
-                //player.sendMessage(ChatColor.YELLOW + "/party leader <player>");
+                player.sendMessage(ChatPalette.YELLOW + "/party invite <player>");
+                player.sendMessage(ChatPalette.YELLOW + "/party leave");
+                player.sendMessage(ChatPalette.YELLOW + "/party kick <player>");
+                //player.sendMessage(ChatPalette.YELLOW + "/party leader <player>");
             } else if (args[0].equalsIgnoreCase("invite")) {
                 if (args.length == 2) {
                     if (MiniGameManager.isInMinigame(player)) {
-                        player.sendMessage(ChatColor.RED + "You can't invite players to a minigame party!");
+                        player.sendMessage(ChatPalette.RED + "You can't invite players to a minigame party!");
                         return false;
                     }
                     Player receiver = Bukkit.getPlayer(args[1]);
                     if (receiver != null && receiver != sender) {
-                        String senderTitle = ChatColor.AQUA + "Sent party invitation";
-                        String receiverMessage = ChatColor.AQUA + sender.getName() + " invites you to party";
-                        String receiverTitle = ChatColor.AQUA + "Received party invitation";
+                        String senderTitle = ChatPalette.BLUE_LIGHT + "Sent party invitation";
+                        String receiverMessage = ChatPalette.BLUE_LIGHT + sender.getName() + " invites you to party";
+                        String receiverTitle = ChatPalette.BLUE_LIGHT + "Received party invitation";
                         PartyInvite partyInvite = new PartyInvite(player, receiver, senderTitle, receiverMessage, receiverTitle);
                         partyInvite.send();
                     } else {
-                        player.sendMessage(ChatColor.RED + "You can't invite yourself!");
+                        player.sendMessage(ChatPalette.RED + "You can't invite yourself!");
                     }
                 }
             } else if (args[0].equalsIgnoreCase("leave")) {

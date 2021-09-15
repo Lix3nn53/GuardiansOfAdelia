@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -50,11 +50,11 @@ public class AddPiercingToArrowShootFromCrossbowTrigger extends TriggerComponent
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {
-            additions.add(ChatColor.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel));
+            additions.add(ChatPalette.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel));
         } else if (skillLevel == piercingLevel.size()) {
-            additions.add(ChatColor.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel - 1));
+            additions.add(ChatPalette.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel - 1));
         } else {
-            additions.add(ChatColor.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel - 1) + " -> " + piercingLevel.get(skillLevel));
+            additions.add(ChatPalette.GOLD + "Pierce amount: " + piercingLevel.get(skillLevel - 1) + " -> " + piercingLevel.get(skillLevel));
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

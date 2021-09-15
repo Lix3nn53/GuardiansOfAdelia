@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.chat;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 
 public enum ChatTag {
     NOVICE, //MAIN-QUEST-LINE TAGS
@@ -21,42 +22,42 @@ public enum ChatTag {
     TRICKSTER,
     SHADOW;
 
-    public ChatColor getChatColor() {
+    public ChatPalette getChatPalette() {
         switch (this) {
             case SENIOR:
-                return ChatColor.YELLOW;
+                return ChatPalette.YELLOW;
             case LORD:
-                return ChatColor.GREEN;
+                return ChatPalette.GREEN_DARK;
             case GUARDIAN:
-                return ChatColor.GOLD;
+                return ChatPalette.GOLD;
             case SUPREME:
-                return ChatColor.AQUA;
+                return ChatPalette.BLUE_LIGHT;
             case BRAVE:
-                return ChatColor.GRAY;
+                return ChatPalette.GRAY;
             case GLADIATOR:
-                return ChatColor.YELLOW;
+                return ChatPalette.YELLOW;
             case CHAMPION:
-                return ChatColor.GOLD;
+                return ChatPalette.GOLD;
             case DRAGON:
-                return ChatColor.RED;
+                return ChatPalette.RED;
             case MAGICIAN:
-                return ChatColor.GRAY;
+                return ChatPalette.GRAY;
             case SAGE:
-                return ChatColor.YELLOW;
+                return ChatPalette.YELLOW;
             case WIZARD:
-                return ChatColor.LIGHT_PURPLE;
+                return ChatPalette.PURPLE_LIGHT;
             case ETERNAL:
-                return ChatColor.GOLD;
+                return ChatPalette.GOLD;
             case THIEF:
-                return ChatColor.GRAY;
+                return ChatPalette.GRAY;
             case RINGLEADER:
-                return ChatColor.YELLOW;
+                return ChatPalette.YELLOW;
             case TRICKSTER:
-                return ChatColor.LIGHT_PURPLE;
+                return ChatPalette.PURPLE_LIGHT;
             case SHADOW:
-                return ChatColor.DARK_PURPLE;
+                return ChatPalette.PURPLE;
         }
-        return ChatColor.GRAY;
+        return ChatPalette.GRAY;
     }
 
     public int getRequiredQuest() {

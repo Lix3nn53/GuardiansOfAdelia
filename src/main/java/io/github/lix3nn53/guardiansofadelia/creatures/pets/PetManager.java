@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.TargetHelper;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
@@ -21,7 +22,6 @@ import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
 import me.libraryaddict.disguise.disguisetypes.FlagWatcher;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -152,7 +152,7 @@ public class PetManager {
 
         // name
         String petName = pet.getCustomName();
-        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatColor.GREEN + " " + maxHP + "/" + maxHP + "❤";
+        petName += " " + ChatPalette.GOLD + petLevel + ChatPalette.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatPalette.GREEN_DARK + " " + maxHP + "/" + maxHP + "❤";
         pet.setCustomName(petName);
 
         // name if disguised
@@ -189,7 +189,7 @@ public class PetManager {
 
         // name
         String petName = pet.getCustomName();
-        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " <" + owner.getName().substring(0, 3) + ">";
+        petName += " " + ChatPalette.GOLD + petLevel + ChatPalette.WHITE + " <" + owner.getName().substring(0, 3) + ">";
         pet.setCustomName(petName);
 
         // name if disguised
@@ -209,7 +209,7 @@ public class PetManager {
             companionToOwner.remove(livingEntity);
             // On pet death
             if (isCompanionAlsoPet(livingEntity)) {
-                owner.sendMessage(ChatColor.RED + "Your pet is dead. Respawning in 2 minutes");
+                owner.sendMessage(ChatPalette.RED + "Your pet is dead. Respawning in 2 minutes");
 
                 ownerToPet.remove(owner);
                 deathPetPlayerList.add(owner);
@@ -223,7 +223,7 @@ public class PetManager {
                             // updateCurrentHealthSavedInEgg(livingEntity, (int) (livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2));
 
                             respawnPet(owner);
-                            owner.sendMessage(ChatColor.GREEN + "Your pet is respawned");
+                            owner.sendMessage(ChatPalette.GREEN_DARK + "Your pet is respawned");
                         }
                     }
                 }.runTaskLater(GuardiansOfAdelia.getInstance(), RESPAWN_DELAY);

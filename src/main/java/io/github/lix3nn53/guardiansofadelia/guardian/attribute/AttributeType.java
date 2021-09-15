@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.attribute;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 
 import java.text.DecimalFormat;
 
@@ -14,15 +15,15 @@ public enum AttributeType {
     public String getCustomName() {
         switch (this) {
             case BONUS_ELEMENT_DAMAGE:
-                return ChatColor.RED + "Bonus Element Damage";
+                return ChatPalette.RED + "Bonus Element Damage";
             case BONUS_ELEMENT_DEFENSE:
-                return ChatColor.AQUA + "Bonus Element Defense";
+                return ChatPalette.BLUE_LIGHT + "Bonus Element Defense";
             case BONUS_MAX_HEALTH:
-                return ChatColor.DARK_GREEN + "Bonus Max Health";
+                return ChatPalette.GREEN_DARK + "Bonus Max Health";
             case BONUS_MAX_MANA:
-                return ChatColor.BLUE + "Bonus Max Mana";
+                return ChatPalette.BLUE + "Bonus Max Mana";
             case BONUS_CRITICAL_CHANCE:
-                return ChatColor.GOLD + "Bonus Critical Chance";
+                return ChatPalette.GOLD + "Bonus Critical Chance";
         }
         return "attributeCustomName";
     }

@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 
 public enum MerchantType {
     WEAPONSMITH,
@@ -12,15 +13,15 @@ public enum MerchantType {
     public String getName() {
         switch (this) {
             case WEAPONSMITH:
-                return ChatColor.RED + "Weaponsmith";
+                return ChatPalette.RED + "Weaponsmith";
             case ARMORSMITH:
-                return ChatColor.AQUA + "Armorsmith";
+                return ChatPalette.BLUE_LIGHT + "Armorsmith";
             case STORAGE_KEEPER:
-                return ChatColor.GOLD + "Storage Keeper";
+                return ChatPalette.GOLD + "Storage Keeper";
             case MAGIC_SHOP:
-                return ChatColor.LIGHT_PURPLE + "Magical Item Shop";
+                return ChatPalette.PURPLE_LIGHT + "Magical Item Shop";
             case TOOL_SHOP:
-                return ChatColor.YELLOW + "Item Shop";
+                return ChatPalette.YELLOW + "Item Shop";
         }
 
         return "???";

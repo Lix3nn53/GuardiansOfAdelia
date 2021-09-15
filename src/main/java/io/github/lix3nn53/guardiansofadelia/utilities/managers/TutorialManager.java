@@ -10,9 +10,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -36,10 +36,10 @@ public class TutorialManager {
             giveTutorialItems(player, rpgClassStr);
             player.teleport(startLocation);
 
-            player.sendTitle(ChatColor.DARK_PURPLE + "Aleesia's Castle", ChatColor.GRAY + "Fall of the Adelia", 25, 35, 25);
+            player.sendTitle(ChatPalette.PURPLE + "Aleesia's Castle", ChatPalette.GRAY + "Fall of the Adelia", 25, 35, 25);
 
-            MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "-- " + ChatColor.DARK_PURPLE + "Aleesia's Castle" + ChatColor.GRAY + " --");
-            MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "---- " + ChatColor.GRAY + "Fall of the Adelia" + ChatColor.DARK_PURPLE + " ----");
+            MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "-- " + ChatPalette.PURPLE + "Aleesia's Castle" + ChatPalette.GRAY + " --");
+            MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "---- " + ChatPalette.GRAY + "Fall of the Adelia" + ChatPalette.PURPLE + " ----");
 
             Quest tutorialStartQuest = QuestNPCManager.getQuestCopyById(1);
             rpgCharacter.acceptQuest(tutorialStartQuest, player);

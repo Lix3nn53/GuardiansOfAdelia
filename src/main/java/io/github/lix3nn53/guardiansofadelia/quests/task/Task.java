@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.entity.Player;
 
 public interface Task {
@@ -27,7 +27,7 @@ public interface Task {
 
     int getRequiredProgress();
 
-    ChatColor getChatColor();
+    ChatPalette getChatPalette();
 
     void addOnCompleteAction(Action action);
 

@@ -7,11 +7,11 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -51,9 +51,9 @@ public class CharacterSelectionScreenManager {
             List<ArmorStand> holoList = new ArrayList<>();
             Location clone = location.clone();
 
-            holoList.add(new Hologram(clone.add(0.0, 0.4, 0.0), ChatColor.GREEN + "create new character").getArmorStand());
-            holoList.add(new Hologram(clone.add(0.0, 0.3, 0.0), ChatColor.GREEN + "Right click NPC to").getArmorStand());
-            holoList.add(new Hologram(clone.add(0.0, 0.3, 0.0), ChatColor.GOLD + "Character-slot " + ChatColor.YELLOW + i).getArmorStand());
+            holoList.add(new Hologram(clone.add(0.0, 0.4, 0.0), ChatPalette.GREEN_DARK + "create new character").getArmorStand());
+            holoList.add(new Hologram(clone.add(0.0, 0.3, 0.0), ChatPalette.GREEN_DARK + "Right click NPC to").getArmorStand());
+            holoList.add(new Hologram(clone.add(0.0, 0.3, 0.0), ChatPalette.GOLD + "Character-slot " + ChatPalette.YELLOW + i).getArmorStand());
 
             characterNoToArmorStands.put(i, holoList);
             i++;
@@ -100,7 +100,7 @@ public class CharacterSelectionScreenManager {
     }
 
     public static void selectCharacter(Player player, int charNo, Location location) {
-        player.sendMessage(ChatColor.YELLOW + "Loading character-" + charNo);
+        player.sendMessage(ChatPalette.YELLOW + "Loading character-" + charNo);
         DatabaseManager.loadCharacter(player, charNo, location);
         clear(player);
     }
@@ -132,14 +132,14 @@ public class CharacterSelectionScreenManager {
     }
 
     public static void createCharacter(Player player, int charNo, String rpgClassStr) {
-        player.sendMessage(ChatColor.YELLOW + "Creating character-" + charNo);
+        player.sendMessage(ChatPalette.YELLOW + "Creating character-" + charNo);
         clear(player);
         //start tutorial
         TutorialManager.startTutorial(player, rpgClassStr, charNo, tutorialStart);
     }
 
     public static void createCharacterWithoutTutorial(Player player, int charNo, String rpgClassStr) {
-        player.sendMessage(ChatColor.YELLOW + "Creating character-" + charNo);
+        player.sendMessage(ChatPalette.YELLOW + "Creating character-" + charNo);
         clear(player);
         //start character at first world quest
         GuardianData guardianData = GuardianDataManager.getGuardianData(player);

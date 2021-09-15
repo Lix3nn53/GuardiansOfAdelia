@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
@@ -174,11 +174,11 @@ public class CubeTarget extends TargetComponent {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {
-            additions.add(ChatColor.YELLOW + "Cube Area: " + length_xList.get(skillLevel) + ", " + length_yList.get(skillLevel) + ", " + length_zList.get(skillLevel));
+            additions.add(ChatPalette.YELLOW + "Cube Area: " + length_xList.get(skillLevel) + ", " + length_yList.get(skillLevel) + ", " + length_zList.get(skillLevel));
         } else if (skillLevel == length_xList.size()) {
-            additions.add(ChatColor.YELLOW + "Cube Area: " + length_xList.get(skillLevel - 1) + ", " + length_yList.get(skillLevel - 1) + ", " + length_zList.get(skillLevel - 1));
+            additions.add(ChatPalette.YELLOW + "Cube Area: " + length_xList.get(skillLevel - 1) + ", " + length_yList.get(skillLevel - 1) + ", " + length_zList.get(skillLevel - 1));
         } else {
-            additions.add(ChatColor.YELLOW + "Cube Area: " + length_xList.get(skillLevel - 1) + ", " + length_yList.get(skillLevel - 1) + ", " + length_zList.get(skillLevel - 1)
+            additions.add(ChatPalette.YELLOW + "Cube Area: " + length_xList.get(skillLevel - 1) + ", " + length_yList.get(skillLevel - 1) + ", " + length_zList.get(skillLevel - 1)
                     + " -> " + length_xList.get(skillLevel - 1) + ", " + length_yList.get(skillLevel - 1) + ", " + length_zList.get(skillLevel - 1));
         }
 

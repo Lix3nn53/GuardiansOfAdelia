@@ -1,7 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -38,20 +39,20 @@ public final class TaskCollect implements Task {
     }
 
     public String getTablistInfoString() {
-        ChatColor chatColor = getChatColor();
+        ChatPalette chatPalette = getChatPalette();
 
-        return chatColor + "Collect " + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
+        return chatPalette + "Collect " + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
     }
 
     public String getItemLoreString() {
-        ChatColor color;
+        ChatPalette color;
         if (isCompleted()) {
-            color = ChatColor.GREEN;
+            color = ChatPalette.GREEN_DARK;
         } else {
-            color = ChatColor.YELLOW;
+            color = ChatPalette.GOLD;
         }
-        String lore = color + "Collect " + amountNeeded + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
-        return lore;
+
+        return color + "Collect " + amountNeeded + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
     }
 
     @Override
@@ -153,10 +154,10 @@ public final class TaskCollect implements Task {
     }
 
     @Override
-    public ChatColor getChatColor() {
-        if (isCompleted()) return ChatColor.GREEN;
+    public ChatPalette getChatPalette() {
+        if (isCompleted()) return ChatPalette.GREEN_DARK;
 
-        return ChatColor.RED;
+        return ChatPalette.RED;
     }
 
     public boolean isRemoveOnTurnIn() {

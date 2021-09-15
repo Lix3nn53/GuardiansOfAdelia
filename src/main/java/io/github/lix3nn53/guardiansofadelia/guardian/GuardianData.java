@@ -6,10 +6,10 @@ import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardInfo;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -96,7 +96,7 @@ public class GuardianData {
             public void run() {
                 if (hasPendingInvite()) {
                     clearPendingInvite();
-                    receiver.sendMessage(ChatColor.RED + "Invite timeout");
+                    receiver.sendMessage(ChatPalette.RED + "Invite timeout");
                 }
             }
         }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20L * 30);

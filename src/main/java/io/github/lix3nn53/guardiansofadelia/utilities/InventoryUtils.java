@@ -6,7 +6,6 @@ import io.github.lix3nn53.guardiansofadelia.quests.task.TaskCollect;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -54,7 +53,7 @@ public class InventoryUtils {
     public static void fillEmptySlotsWithGlass(GuiGeneric inventory) {
         ItemStack fillItem = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta statusItemMeta = fillItem.getItemMeta();
-        statusItemMeta.setDisplayName(org.bukkit.ChatColor.DARK_GRAY + "-");
+        statusItemMeta.setDisplayName(ChatPalette.GRAY_DARK + "-");
         fillItem.setItemMeta(statusItemMeta);
         for (int i = 0; i < inventory.getSize(); i++) {
             ItemStack item = inventory.getItem(i);
@@ -92,8 +91,8 @@ public class InventoryUtils {
                 }
             }.runTask(GuardiansOfAdelia.getInstance());
 
-            player.sendMessage(ChatColor.LIGHT_PURPLE + "Inventory Full !");
-            player.sendMessage(ChatColor.RED + "Your item have been dropped near you since your inventory is full");
+            player.sendMessage(ChatPalette.PURPLE_LIGHT + "Inventory Full !");
+            player.sendMessage(ChatPalette.RED + "Your item have been dropped near you since your inventory is full");
         }
 
     }
@@ -167,10 +166,10 @@ public class InventoryUtils {
     public static void setMenuItemPlayer(Player player) {
         ItemStack menu = new ItemStack(Material.BOOK);
         ItemMeta im = menu.getItemMeta();
-        im.setDisplayName(ChatColor.GREEN + "Menu");
+        im.setDisplayName(ChatPalette.GREEN_DARK + "Menu");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "Click to open the menu!");
+        lore.add(ChatPalette.GRAY + "Click to open the menu!");
         im.setLore(lore);
         menu.setItemMeta(im);
         player.getInventory().setItem(17, menu);
@@ -257,12 +256,12 @@ public class InventoryUtils {
 
         ItemStack fillGlass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta fillMeta = fillGlass.getItemMeta();
-        fillMeta.setDisplayName(ChatColor.DARK_GRAY + "-");
+        fillMeta.setDisplayName(ChatPalette.GRAY_DARK + "-");
         fillGlass.setItemMeta(fillMeta);
 
         ItemStack prizeGlass = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
         ItemMeta prizeMeta = prizeGlass.getItemMeta();
-        prizeMeta.setDisplayName(ChatColor.GOLD + "Prize Slot");
+        prizeMeta.setDisplayName(ChatPalette.GOLD + "Prize Slot");
         prizeGlass.setItemMeta(prizeMeta);
 
         for (int i = 0; i < 4; i++) {
@@ -312,7 +311,7 @@ public class InventoryUtils {
                     sound.play(player.getLocation());
 
                     ItemStack[] content = chestGui.getContents();
-                    GuiGeneric prizeGui = new GuiGeneric(27, ChatColor.YELLOW + "Result Prize-Chest " + name, 0);
+                    GuiGeneric prizeGui = new GuiGeneric(27, ChatPalette.GOLD + "Result Prize-Chest " + name, 0);
                     prizeGui.setContents(content);
                     prizeGui.openInventory(player);
 

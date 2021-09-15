@@ -12,9 +12,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.revive.TombManager;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -48,10 +48,10 @@ public class MyInventoryCloseEvent implements Listener {
                     }
                 } else {
                     String title = event.getView().getTitle();
-                    if (title.equals(ChatColor.AQUA + "Revive Gui")) {
+                    if (title.equals(ChatPalette.BLUE_LIGHT + "Revive Gui")) {
                         TombManager.cancelSearch(player);
                     }
-                    if (title.equals(ChatColor.YELLOW + "Set Daily Rewards")) {
+                    if (title.equals(ChatPalette.YELLOW + "Set Daily Rewards")) {
                         ItemStack[] contents = event.getInventory().getContents();
 
                         for (int i = 1; i < 8; i++) {
@@ -59,14 +59,14 @@ public class MyInventoryCloseEvent implements Listener {
 
                             DailyRewardHandler.setReward(i, content);
                         }
-                    } else if (title.contains(ChatColor.BLACK + "Loot Chest #")) {
+                    } else if (title.contains(ChatPalette.BLACK + "Loot Chest #")) {
                         ItemStack[] contents = event.getInventory().getContents();
                         for (ItemStack content : contents) {
                             if (content == null) continue;
                             InventoryUtils.giveItemToPlayer(player, content);
                         }
                     } else if (guardianData.hasBazaar()) {
-                        if (title.equals(ChatColor.GOLD + "Edit your bazaar")) {
+                        if (title.equals(ChatPalette.GOLD + "Edit your bazaar")) {
                             Bazaar bazaar = guardianData.getBazaar();
                             bazaar.setOpen(true);
                         }

@@ -4,10 +4,11 @@ import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetData;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetExperienceManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetSkillManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -37,29 +38,29 @@ public class Egg implements RPGGear {
         }
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + "Egg");
+        lore.add(ChatColor.RESET.toString() + ChatPalette.YELLOW + "Egg");
         lore.add("");
 
         /*if (damage > 0) {
-            lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Companion");
+            lore.add(ChatPalette.YELLOW + "Type: " + ChatPalette.GRAY + "Companion");
         } else {
-            lore.add(ChatColor.YELLOW + "Type: " + ChatColor.GRAY + "Mount");
+            lore.add(ChatPalette.YELLOW + "Type: " + ChatPalette.GRAY + "Mount");
         }*/
 
-        lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + reqLevel);
+        lore.add(ChatColor.RESET.toString() + ChatPalette.PURPLE + "Required Level: " + ChatPalette.GRAY + reqLevel);
         lore.add("");
-        lore.add(ChatColor.GOLD + "Level: " + ChatColor.GRAY + petLevel);
-        lore.add(ChatColor.LIGHT_PURPLE + "Experience: " + ChatColor.GRAY + petExp + " / " + PetExperienceManager.getNextExperienceTarget(petLevel));
+        lore.add(ChatPalette.GOLD + "Level: " + ChatPalette.GRAY + petLevel);
+        lore.add(ChatPalette.PURPLE_LIGHT + "Experience: " + ChatPalette.GRAY + petExp + " / " + PetExperienceManager.getNextExperienceTarget(petLevel));
         lore.add("");
-        lore.add(ChatColor.AQUA + "⇨ Speed: " + ChatColor.GRAY + speed);
+        lore.add(ChatPalette.BLUE_LIGHT + "⇨ Speed: " + ChatPalette.GRAY + speed);
         lore.add("");
         HashMap<Integer, Skill> skills = petData.getSkills();
         if (skills.isEmpty()) {
-            lore.add(ChatColor.GRAY + "This pet has no skills");
+            lore.add(ChatPalette.GRAY + "This pet has no skills");
         } else {
             for (int i : skills.keySet()) {
                 Skill skill = skills.get(i);
-                lore.add(ChatColor.GRAY + "---- " + ChatColor.YELLOW + "Skill at level " + ChatColor.GOLD + i + ChatColor.GRAY + " ----");
+                lore.add(ChatPalette.GRAY + "---- " + ChatPalette.YELLOW + "Skill at level " + ChatPalette.GOLD + i + ChatPalette.GRAY + " ----");
                 List<String> description = skill.getDescription();
                 lore.addAll(description);
             }

@@ -5,8 +5,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,9 +25,9 @@ public class CommandAdminQuest implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/adminquest t - turn ins current quests tasks");
-                player.sendMessage(ChatColor.YELLOW + "/adminquest a <num> - accept quest tasks");
-                player.sendMessage(ChatColor.YELLOW + "/adminquest gui <npcNo> - open quest gui of an npc");
+                player.sendMessage(ChatPalette.YELLOW + "/adminquest t - turn ins current quests tasks");
+                player.sendMessage(ChatPalette.YELLOW + "/adminquest a <num> - accept quest tasks");
+                player.sendMessage(ChatPalette.YELLOW + "/adminquest gui <npcNo> - open quest gui of an npc");
             } else if (args[0].equals("t")) {
                 if (args.length != 1) return false;
                 if (GuardianDataManager.hasGuardianData(player)) {
@@ -56,7 +56,7 @@ public class CommandAdminQuest implements CommandExecutor {
 
                         boolean questListIsNotFull = activeCharacter.acceptQuest(questCopyById, player);
                         if (!questListIsNotFull) {
-                            player.sendMessage(net.md_5.bungee.api.ChatColor.RED + "Your quest list is full");
+                            player.sendMessage(ChatPalette.RED + "Your quest list is full");
                         }
                     }
                 }

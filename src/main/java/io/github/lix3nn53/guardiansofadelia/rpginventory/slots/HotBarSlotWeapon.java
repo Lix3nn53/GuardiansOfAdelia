@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory.slots;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -23,7 +24,7 @@ public class HotBarSlotWeapon {
         ItemStack itemStack = new ItemStack(Material.IRON_AXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Weapon Slot");
+        itemMeta.setDisplayName(ChatPalette.YELLOW + "Weapon Slot");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);

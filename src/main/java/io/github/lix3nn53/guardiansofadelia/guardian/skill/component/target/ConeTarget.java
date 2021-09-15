@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
@@ -96,11 +96,11 @@ public class ConeTarget extends TargetComponent {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {
-            additions.add(ChatColor.YELLOW + "Cone Area: " + rangeList.get(skillLevel));
+            additions.add(ChatPalette.YELLOW + "Cone Area: " + rangeList.get(skillLevel));
         } else if (skillLevel == rangeList.size()) {
-            additions.add(ChatColor.YELLOW + "Cone Area: " + rangeList.get(skillLevel - 1));
+            additions.add(ChatPalette.YELLOW + "Cone Area: " + rangeList.get(skillLevel - 1));
         } else {
-            additions.add(ChatColor.YELLOW + "Cone Area: " + rangeList.get(skillLevel - 1)
+            additions.add(ChatPalette.YELLOW + "Cone Area: " + rangeList.get(skillLevel - 1)
                     + " -> " + rangeList.get(skillLevel));
         }
 

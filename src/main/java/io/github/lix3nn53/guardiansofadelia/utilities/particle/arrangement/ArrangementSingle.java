@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.math.RotationHelper;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
-import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -86,7 +86,7 @@ public class ArrangementSingle implements ParticleArrangement {
     }
 
     public void configLoadError(String section) {
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "ERROR WHILE LOADING PARTICLE: ");
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "Section: " + section);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "ERROR WHILE LOADING PARTICLE: ");
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "Section: " + section);
     }
 }

@@ -351,7 +351,7 @@ public class Test {
         int z = (int) ((value * MULTIPLIER) + 0.5);
         System.out.println(z);
         System.out.println((int) ((z / MULTIPLIER) + 0.5));
-        String currentName = ChatColor.GOLD + "Test";
+        String currentName = ChatPalette.GOLD + "Test";
         System.out.println(currentName);
         String stripColor = ChatColor.stripColor(currentName);
         System.out.println(stripColor);*/

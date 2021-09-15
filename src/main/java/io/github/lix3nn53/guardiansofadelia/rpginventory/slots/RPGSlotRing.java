@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory.slots;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -25,7 +25,7 @@ public class RPGSlotRing extends RPGSlotPassive implements RPGSlot {
         ItemStack itemStack = new ItemStack(Material.IRON_AXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Ring Slot");
+        itemMeta.setDisplayName(ChatPalette.YELLOW + "Ring Slot");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);

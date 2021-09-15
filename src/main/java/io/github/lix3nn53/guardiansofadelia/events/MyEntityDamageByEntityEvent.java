@@ -26,6 +26,7 @@ import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.DamageIndicator;
@@ -33,7 +34,10 @@ import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
-import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.*;
@@ -198,7 +202,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                     if (MMManager.hasElementType(internalName)) {
                                         damageType = MMManager.getElementType(internalName);
                                     } else {
-                                        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "damageType of mob NULL, internalName: " + internalName);
+                                        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "damageType of mob NULL, internalName: " + internalName);
                                         damageType = ElementType.FIRE;
                                     }
                                 }
@@ -276,7 +280,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         } else { // melee
                             if (player.getInventory().getHeldItemSlot() != 4) {
                                 event.setCancelled(true);
-                                player.sendMessage(ChatColor.RED + "You can only attack with weapon slot(5)");
+                                player.sendMessage(ChatPalette.RED + "You can only attack with weapon slot(5)");
                                 return false;
                             }
                             ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
@@ -330,7 +334,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         if (MMManager.hasElementType(internalName)) {
                             damageType = MMManager.getElementType(internalName);
                         } else {
-                            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "damageType of mob NULL, internalName: " + internalName);
+                            GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "damageType of mob NULL, internalName: " + internalName);
                             damageType = ElementType.FIRE;
                         }
                     }
@@ -409,10 +413,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 }
 
                 //indicator
-                ChatColor indicatorColor = damageType.getChatColor();
+                ChatPalette indicatorColor = damageType.getChatPalette();
                 String indicatorIcon = damageType.getIcon() + "";
                 if (isCritical) {
-                    indicatorColor = ChatColor.GOLD;
+                    indicatorColor = ChatPalette.GOLD;
                 }
 
                 String text = indicatorColor.toString() + (int) (finalDamage + 0.5) + " " + indicatorIcon;

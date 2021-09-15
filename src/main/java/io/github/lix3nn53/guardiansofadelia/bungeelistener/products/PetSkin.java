@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.products;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -25,14 +25,14 @@ public enum PetSkin {
         MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(skinName);
 
         String displayName = mythicMob.getDisplayName().get();
-        String itemName = displayName + ChatColor.LIGHT_PURPLE + " Pet Skin";
+        String itemName = displayName + ChatPalette.PURPLE_LIGHT + " Pet Skin";
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY + "Premium");
+        lore.add(ChatPalette.GRAY + "Premium");
         lore.add("");
-        lore.add(ChatColor.GOLD + "Usage: ");
-        lore.add(ChatColor.YELLOW + "1 - Equip the pet you want to apply this skin to.");
-        lore.add(ChatColor.YELLOW + "2 - Right click to your pet when you are holding this.");
+        lore.add(ChatPalette.GOLD + "Usage: ");
+        lore.add(ChatPalette.YELLOW + "1 - Equip the pet you want to apply this skin to.");
+        lore.add(ChatPalette.YELLOW + "2 - Right click to your pet when you are holding this.");
 
         ItemStack itemStack = new ItemStack(Material.BLACK_DYE);
         PersistentDataContainerUtil.putString("petSkinCode", skinName, itemStack);

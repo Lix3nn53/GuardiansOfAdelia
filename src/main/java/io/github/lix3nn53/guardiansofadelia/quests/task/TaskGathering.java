@@ -2,7 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -28,17 +29,17 @@ public final class TaskGathering implements Task {
     }
 
     public String getTablistInfoString() {
-        ChatColor chatColor = getChatColor();
+        ChatPalette chatPalette = getChatPalette();
 
-        return chatColor + "Gather " + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(ingredient.getItemStack(1).getItemMeta().getDisplayName());
+        return chatPalette + "Gather " + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(ingredient.getItemStack(1).getItemMeta().getDisplayName());
     }
 
     public String getItemLoreString() {
-        ChatColor color;
+        ChatPalette color;
         if (isCompleted()) {
-            color = ChatColor.GREEN;
+            color = ChatPalette.GREEN_DARK;
         } else {
-            color = ChatColor.YELLOW;
+            color = ChatPalette.YELLOW;
         }
         return color + "Gather " + amountNeeded + " " + ChatColor.stripColor(ingredient.getItemStack(1).getItemMeta().getDisplayName());
     }
@@ -143,9 +144,9 @@ public final class TaskGathering implements Task {
     }
 
     @Override
-    public ChatColor getChatColor() {
-        if (isCompleted()) return ChatColor.GREEN;
+    public ChatPalette getChatPalette() {
+        if (isCompleted()) return ChatPalette.GREEN_DARK;
 
-        return ChatColor.RED;
+        return ChatPalette.RED;
     }
 }

@@ -2,10 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -66,11 +66,11 @@ public class DisguiseMechanic extends MechanicComponent {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {
-            additions.add(ChatColor.LIGHT_PURPLE + "Disguise duration: " + (ticks.get(skillLevel) / 20));
+            additions.add(ChatPalette.PURPLE_LIGHT + "Disguise duration: " + (ticks.get(skillLevel) / 20));
         } else if (skillLevel == ticks.size()) {
-            additions.add(ChatColor.LIGHT_PURPLE + "Disguise duration: " + (ticks.get(skillLevel - 1) / 20));
+            additions.add(ChatPalette.PURPLE_LIGHT + "Disguise duration: " + (ticks.get(skillLevel - 1) / 20));
         } else {
-            additions.add(ChatColor.LIGHT_PURPLE + "Disguise duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
+            additions.add(ChatPalette.PURPLE_LIGHT + "Disguise duration: " + (ticks.get(skillLevel - 1) / 20) + " -> " + (ticks.get(skillLevel) / 20));
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }

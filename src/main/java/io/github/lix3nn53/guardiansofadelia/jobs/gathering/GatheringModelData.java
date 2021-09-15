@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 
-import org.bukkit.ChatColor;
+
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 
 import java.util.List;

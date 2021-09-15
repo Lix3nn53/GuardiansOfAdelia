@@ -4,9 +4,9 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.Egg;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -35,12 +35,12 @@ public class Eggs {
     public static boolean isMythicMob(String key) {
         MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
         if (mythicMob == null) {
-            GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "Eggs mythicMob null: " + key);
+            GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "Eggs mythicMob null: " + key);
 
             return false;
         }
         String displayName = mythicMob.getDisplayName().get();
-        GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.GREEN + "Eggs MM: " + key + "-" + displayName);
+        GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.GREEN_DARK + "Eggs MM: " + key + "-" + displayName);
 
         return true;
     }

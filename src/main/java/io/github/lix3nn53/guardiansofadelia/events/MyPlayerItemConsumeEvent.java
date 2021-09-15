@@ -2,8 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.Items.Consumable;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -35,7 +35,7 @@ public class MyPlayerItemConsumeEvent implements Listener {
                     List<String> strings = playerToConsumableOnCooldowns.get(player);
 
                     if (strings.contains(customConsumable)) {
-                        player.sendMessage(ChatColor.RED + "This consumable is on cooldown");
+                        player.sendMessage(ChatPalette.RED + "This consumable is on cooldown");
                         return;
                     }
 

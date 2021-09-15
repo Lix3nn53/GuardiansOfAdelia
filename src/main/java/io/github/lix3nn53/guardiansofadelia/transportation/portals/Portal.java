@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.transportation.portals;
 
-import org.bukkit.ChatColor;
+
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;

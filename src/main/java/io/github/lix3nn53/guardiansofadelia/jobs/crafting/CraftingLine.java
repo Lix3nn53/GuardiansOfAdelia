@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiLine;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -31,14 +31,14 @@ public class CraftingLine implements GuiLine {
         }
         ItemStack infoGlass = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
         ItemMeta itemMeta = infoGlass.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GOLD + "Crafting Guide");
+        itemMeta.setDisplayName(ChatPalette.GOLD + "Crafting Guide");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.YELLOW + "You need ingredients on left side of this line");
-        lore.add(ChatColor.YELLOW + "to create the item on right side of this line.");
+        lore.add(ChatPalette.YELLOW + "You need ingredients on left side of this line");
+        lore.add(ChatPalette.YELLOW + "to create the item on right side of this line.");
         lore.add("");
-        lore.add(ChatColor.GREEN + "If you have enough ingredients,");
-        lore.add(ChatColor.GREEN + "click on the item you want to craft.");
+        lore.add(ChatPalette.GREEN_DARK + "If you have enough ingredients,");
+        lore.add(ChatPalette.GREEN_DARK + "click on the item you want to craft.");
         itemMeta.setLore(lore);
         infoGlass.setItemMeta(itemMeta);
         line.add(infoGlass);

@@ -5,8 +5,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,7 +26,7 @@ public class CommandChat implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/chat item - show item in chat");
+                player.sendMessage(ChatPalette.YELLOW + "/chat item - show item in chat");
             } else if (args[0].equals("item")) {
                 if (!GuardianDataManager.hasGuardianData(player)) return false;
 
@@ -35,15 +35,15 @@ public class CommandChat implements CommandExecutor {
                 PremiumRank premiumRank = guardianData.getPremiumRank();
 
                 if (!(premiumRank.equals(PremiumRank.LEGEND) || premiumRank.equals(PremiumRank.TITAN))) {
-                    player.sendMessage(ChatColor.RED + "Required premium rank to display items in chat is " + ChatColor.GOLD + "LEGEND");
+                    player.sendMessage(ChatPalette.RED + "Required premium rank to display items in chat is " + ChatPalette.GOLD + "LEGEND");
                     return false;
                 }
 
-                GuiGeneric guiGeneric = new GuiGeneric(54, ChatColor.DARK_GRAY + "Select item to show in chat", 0);
+                GuiGeneric guiGeneric = new GuiGeneric(54, ChatPalette.GRAY_DARK + "Select item to show in chat", 0);
 
                 ItemStack filler = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
                 ItemMeta itemMeta = filler.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.GRAY + "Items in inventory");
+                itemMeta.setDisplayName(ChatPalette.GRAY + "Items in inventory");
                 filler.setItemMeta(itemMeta);
                 guiGeneric.addItem(filler);
 
@@ -58,7 +58,7 @@ public class CommandChat implements CommandExecutor {
 
                 filler = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
                 itemMeta = filler.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.GRAY + "Equipped armors");
+                itemMeta.setDisplayName(ChatPalette.GRAY + "Equipped armors");
                 filler.setItemMeta(itemMeta);
                 guiGeneric.addItem(filler);
 
@@ -72,7 +72,7 @@ public class CommandChat implements CommandExecutor {
                 if (guardianData.hasActiveCharacter()) {
                     filler = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
                     itemMeta = filler.getItemMeta();
-                    itemMeta.setDisplayName(ChatColor.GRAY + "Equipped passive items");
+                    itemMeta.setDisplayName(ChatPalette.GRAY + "Equipped passive items");
                     filler.setItemMeta(itemMeta);
                     guiGeneric.addItem(filler);
 

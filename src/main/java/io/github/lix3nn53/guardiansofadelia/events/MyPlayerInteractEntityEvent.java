@@ -7,13 +7,13 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementFillCircle;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPCRegistry;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -99,7 +99,7 @@ public class MyPlayerInteractEntityEvent implements Listener {
                                 ArrangementFillCircle particle = new ArrangementFillCircle(Particle.HEART, 1.2, 6, null, Direction.XZ, 0, 1.2, 0.2);
                                 particle.play(livingEntity.getLocation().clone().add(0, 1.2, 0), new Vector());
                             } else {
-                                player.sendMessage(ChatColor.RED + "Pet health is already full");
+                                player.sendMessage(ChatPalette.RED + "Pet health is already full");
                             }
                         }
                     }

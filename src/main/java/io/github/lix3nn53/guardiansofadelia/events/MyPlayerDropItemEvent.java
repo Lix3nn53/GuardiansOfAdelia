@@ -6,8 +6,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -41,11 +41,11 @@ public class MyPlayerDropItemEvent implements Listener {
             event.setCancelled(true);
             CommandDestroyItemManager.addItemToDestroy(player, itemStack);
 
-            player.sendMessage(ChatColor.RED + "You can't drop this item, are you sure you want to destroy it?");
+            player.sendMessage(ChatPalette.RED + "You can't drop this item, are you sure you want to destroy it?");
             TextComponent messageMain = new TextComponent("Destroy Item");
             messageMain.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/destroyitem"));
-            messageMain.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.RED + "Destroy the item you tried to drop")));
-            messageMain.setColor(ChatColor.RED);
+            messageMain.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatPalette.RED + "Destroy the item you tried to drop")));
+            messageMain.setColor(ChatPalette.RED.toChatColor());
             messageMain.setBold(true);
             player.spigot().sendMessage(messageMain);
 

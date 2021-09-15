@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -129,18 +129,18 @@ public class RepeatMechanic extends MechanicComponent {
                 repeat = " for " + repetitions.get(skillLevel) + " times";
             }
 
-            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds" + repeat);
+            additions.add(ChatPalette.PURPLE_LIGHT + "Repeat every " + (int) (period / 20 + 0.5) + " seconds" + repeat);
         } else if (skillLevel == repetitions.size()) {
             String repeat = " for " + repetitions.get(skillLevel - 1) + " times";
 
-            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds" + repeat);
+            additions.add(ChatPalette.PURPLE_LIGHT + "Repeat every " + (int) (period / 20 + 0.5) + " seconds" + repeat);
         } else {
             String repeat = "";
             if (!repetitions.isEmpty()) {
                 repeat = " for " + repetitions.get(skillLevel - 1) + " times -> " + repetitions.get(skillLevel) + " times";
             }
 
-            additions.add(ChatColor.LIGHT_PURPLE + "Repeat every " + (int) (period / 20 + 0.5) + " seconds" + repeat);
+            additions.add(ChatPalette.PURPLE_LIGHT + "Repeat every " + (int) (period / 20 + 0.5) + " seconds" + repeat);
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

@@ -6,7 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -107,20 +107,20 @@ public class ManaMechanic extends MechanicComponent {
 
         if (!manaAmount.isEmpty()) {
             if (skillLevel == 0) {
-                additions.add(ChatColor.AQUA + "Mana regen: " + manaAmount.get(skillLevel));
+                additions.add(ChatPalette.BLUE_LIGHT + "Mana regen: " + manaAmount.get(skillLevel));
             } else if (skillLevel == manaAmount.size()) {
-                additions.add(ChatColor.AQUA + "Mana regen: " + manaAmount.get(skillLevel - 1));
+                additions.add(ChatPalette.BLUE_LIGHT + "Mana regen: " + manaAmount.get(skillLevel - 1));
             } else {
-                additions.add(ChatColor.AQUA + "Mana regen: " + manaAmount.get(skillLevel - 1) + " -> " + manaAmount.get(skillLevel));
+                additions.add(ChatPalette.BLUE_LIGHT + "Mana regen: " + manaAmount.get(skillLevel - 1) + " -> " + manaAmount.get(skillLevel));
             }
         }
         if (!manaPercent.isEmpty()) {
             if (skillLevel == 0) {
-                additions.add(ChatColor.AQUA + "Mana regen: " + manaPercent.get(skillLevel) + "%");
+                additions.add(ChatPalette.BLUE_LIGHT + "Mana regen: " + manaPercent.get(skillLevel) + "%");
             } else if (skillLevel == manaPercent.size()) {
-                additions.add(ChatColor.AQUA + "Mana regen: " + manaPercent.get(skillLevel - 1) + "%");
+                additions.add(ChatPalette.BLUE_LIGHT + "Mana regen: " + manaPercent.get(skillLevel - 1) + "%");
             } else {
-                additions.add(ChatColor.AQUA + "Mana regen: " + manaPercent.get(skillLevel - 1) + "%" + " -> " + manaPercent.get(skillLevel) + "%");
+                additions.add(ChatPalette.BLUE_LIGHT + "Mana regen: " + manaPercent.get(skillLevel - 1) + "%" + " -> " + manaPercent.get(skillLevel) + "%");
             }
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

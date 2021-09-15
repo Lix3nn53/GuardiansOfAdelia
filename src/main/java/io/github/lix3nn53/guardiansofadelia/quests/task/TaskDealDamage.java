@@ -1,10 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.MobManager;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -35,17 +36,17 @@ public final class TaskDealDamage implements Task {
     }
 
     public String getTablistInfoString() {
-        ChatColor chatColor = getChatColor();
+        ChatPalette chatPalette = getChatPalette();
 
-        return chatColor + "Deal " + getProgress() + "/" + getRequiredProgress() + " damage to " + ChatColor.stripColor(mobName);
+        return chatPalette + "Deal " + getProgress() + "/" + getRequiredProgress() + " damage to " + ChatColor.stripColor(mobName);
     }
 
     public String getItemLoreString() {
-        ChatColor color;
+        ChatPalette color;
         if (isCompleted()) {
-            color = ChatColor.GREEN;
+            color = ChatPalette.GREEN_DARK;
         } else {
-            color = ChatColor.YELLOW;
+            color = ChatPalette.YELLOW;
         }
 
         return color + "Deal " + damageNeeded + " damage to " + ChatColor.stripColor(mobName);
@@ -147,9 +148,9 @@ public final class TaskDealDamage implements Task {
     }
 
     @Override
-    public ChatColor getChatColor() {
-        if (isCompleted()) return ChatColor.GREEN;
+    public ChatPalette getChatPalette() {
+        if (isCompleted()) return ChatPalette.GREEN_DARK;
 
-        return ChatColor.RED;
+        return ChatPalette.RED;
     }
 }

@@ -3,8 +3,8 @@ package io.github.lix3nn53.guardiansofadelia.minigames.arenas;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class LastOneStanding extends Minigame {
 
     public LastOneStanding(String mapName, int levelReq, int timeLimitInMinutes, int instanceNo, List<Location> startLocations, int teamSize, int teamAmount, int maxLives, int requiredPlayerAmountToStart) {
-        super("LastOneStanding", ChatColor.GOLD, mapName, instanceNo, levelReq, teamSize, teamAmount, startLocations,
+        super("LastOneStanding", ChatPalette.GOLD, mapName, instanceNo, levelReq, teamSize, teamAmount, startLocations,
                 timeLimitInMinutes, 2, TownManager.getTown(1).getLocation(), maxLives, 1, 20, requiredPlayerAmountToStart, new ArrayList<>());
     }
 

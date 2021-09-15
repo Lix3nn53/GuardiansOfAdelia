@@ -16,8 +16,8 @@ import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -37,16 +37,16 @@ public class CommandAdminItem implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.AQUA + "---- ITEMS ----");
-                player.sendMessage(ChatColor.AQUA + "/adminitem coin <num>");
-                player.sendMessage(ChatColor.AQUA + "/adminitem weapon [type] <num> [gearSet]");
-                player.sendMessage(ChatColor.AQUA + "/adminitem armor [slot] [type] <num> [gearSet]");
-                player.sendMessage(ChatColor.AQUA + "/adminitem egg [code] <gearLevel> <petLevel>");
-                player.sendMessage(ChatColor.AQUA + "/adminitem stone <grade> <amount>");
-                player.sendMessage(ChatColor.AQUA + "/adminitem passive [parrot|earring|necklace|glove|ring] <num>");
-                player.sendMessage(ChatColor.AQUA + "/adminitem premium item-id<1-24>");
-                player.sendMessage(ChatColor.AQUA + "/adminitem ingredient id amount");
-                player.sendMessage(ChatColor.AQUA + "/adminitem helmet");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "---- ITEMS ----");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem coin <num>");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem weapon [type] <num> [gearSet]");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem armor [slot] [type] <num> [gearSet]");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem egg [code] <gearLevel> <petLevel>");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem stone <grade> <amount>");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem passive [parrot|earring|necklace|glove|ring] <num>");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem premium item-id<1-24>");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem ingredient id amount");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem helmet");
             } else if (args[0].equals("weapon")) {
                 if (args.length >= 3) {
                     WeaponGearType weaponGearType = WeaponGearType.valueOf(args[1]);
@@ -121,7 +121,7 @@ public class CommandAdminItem implements CommandExecutor {
                             InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.GOLD, coins[2]).getCoin());
                         }
                     } catch (NumberFormatException e) {
-                        player.sendMessage(ChatColor.YELLOW + "(Enter a number)");
+                        player.sendMessage(ChatPalette.GOLD + "(Enter a number)");
                     }
                 }
             } else if (args[0].equals("passive")) {

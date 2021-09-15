@@ -5,9 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetEffect
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.Items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -37,25 +38,25 @@ public class Shield implements RPGGear {
 
         StatPassive statPassive = new StatPassive(0, 0, 0, minElemValue, maxElemValue, minNumberOfElements);
 
-        lore.add(ChatColor.RESET.toString() + ChatColor.YELLOW + gearType.getDisplayName());
+        lore.add(ChatColor.RESET.toString() + ChatPalette.GOLD + gearType.getDisplayName());
         if (gearSetExist) {
-            lore.add(ChatColor.RED + gearSetStr);
+            lore.add(ChatPalette.RED + gearSetStr);
         }
         lore.add("");
-        lore.add(ChatColor.RESET.toString() + ChatColor.DARK_PURPLE + "Required Level: " + ChatColor.GRAY + level);
+        lore.add(ChatColor.RESET.toString() + ChatPalette.PURPLE + "Required Level: " + ChatPalette.GRAY + level);
         lore.add("");
-        lore.add(ChatColor.DARK_GREEN + "❤ Health: " + ChatColor.GRAY + "+" + health);
-        lore.add(ChatColor.AQUA + "■ Element Defense: " + ChatColor.GRAY + "+" + defense);
+        lore.add(ChatPalette.GREEN_DARK + "❤ Health: " + ChatPalette.GRAY + "+" + health);
+        lore.add(ChatPalette.BLUE_LIGHT + "■ Element Defense: " + ChatPalette.GRAY + "+" + defense);
         if (!statPassive.isEmpty(false, true)) {
             lore.add("");
             /*for (AttributeType attributeType : AttributeType.values()) {
                 if (statPassive.getAttributeValue(attributeType) != 0) {
-                    lore.add(attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + statPassive.getAttributeValue(attributeType));
+                    lore.add(attributeType.getCustomName() + ": " + ChatPalette.GRAY + "+" + statPassive.getAttributeValue(attributeType));
                 }
             }*/
             for (ElementType elementType : ElementType.values()) {
                 if (statPassive.getElementValue(elementType) != 0) {
-                    lore.add(elementType.getFullName() + ": " + ChatColor.GRAY + "+" + statPassive.getElementValue(elementType));
+                    lore.add(elementType.getFullName() + ": " + ChatPalette.GRAY + "+" + statPassive.getElementValue(elementType));
                 }
             }
         }
@@ -66,7 +67,7 @@ public class Shield implements RPGGear {
             for (int i = 2; i < 6; i++) {
                 GearSet gearSet = new GearSet(gearSetStr, i);
                 if (GearSetManager.hasEffect(gearSet)) {
-                    lore.add(ChatColor.GRAY + "-- " + ChatColor.RED + gearSetStr + ChatColor.GRAY + " [" + i + " pieces] --");
+                    lore.add(ChatPalette.GRAY + "-- " + ChatPalette.RED + gearSetStr + ChatPalette.GRAY + " [" + i + " pieces] --");
                     List<GearSetEffect> effects = GearSetManager.getEffectsWithoutLower(gearSet);
                     for (GearSetEffect gearSetEffect : effects) {
                         lore.add("      " + gearSetEffect.toString());

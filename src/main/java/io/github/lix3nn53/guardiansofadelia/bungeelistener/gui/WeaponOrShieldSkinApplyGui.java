@@ -3,9 +3,9 @@ package io.github.lix3nn53.guardiansofadelia.bungeelistener.gui;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.WeaponOrShieldSkinScroll;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -20,17 +20,17 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
     private int slotOfItemInPlayerInventory;
 
     public WeaponOrShieldSkinApplyGui() {
-        super(27, ChatColor.GOLD + "Weapon/Shield Skin Apply", 0);
+        super(27, ChatPalette.GOLD + "Weapon/Shield Skin Apply", 0);
 
         ItemStack glass = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
         ItemMeta itemMeta = glass.getItemMeta();
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "1 - Right click while holding this item");
-        lore.add(ChatColor.GRAY + "2 - Click to the item you want to apply skin on");
-        lore.add(ChatColor.GRAY + "3 - Confirm by clicking the lime wool");
+        lore.add(ChatPalette.GRAY + "1 - Right click while holding this item");
+        lore.add(ChatPalette.GRAY + "2 - Click to the item you want to apply skin on");
+        lore.add(ChatPalette.GRAY + "3 - Confirm by clicking the lime wool");
         itemMeta.setLore(lore);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Weapon/Shield Skin Apply");
+        itemMeta.setDisplayName(ChatPalette.YELLOW + "Weapon/Shield Skin Apply");
         glass.setItemMeta(itemMeta);
         setItem(16, glass);
 
@@ -38,7 +38,7 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
             if (i == emptySlot) continue;
             if (i == confirmSlot) {
                 ItemStack confirm = new ItemStack(Material.LIME_WOOL);
-                itemMeta.setDisplayName(ChatColor.GREEN + "Click to apply skin!");
+                itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Click to apply skin!");
                 lore = new ArrayList<>();
                 lore.add("");
                 confirm.setItemMeta(itemMeta);
@@ -103,6 +103,6 @@ public class WeaponOrShieldSkinApplyGui extends GuiGeneric {
     }
 
     public String getNotFitErrorMessage() {
-        return ChatColor.RED + "Item must be a weapon or shield AND have a requirement level higher than or equals to level 50";
+        return ChatPalette.RED + "Item must be a weapon or shield AND have a requirement level higher than or equals to level 50";
     }
 }

@@ -9,8 +9,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.Self
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGround;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -40,10 +41,13 @@ public class CommandTest implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.BLUE + "/test test");
-                player.sendMessage(ChatColor.BLUE + "/test model portal<1-5>");
-                player.sendMessage(ChatColor.BLUE + "/test sound <code> - play custom sounds");
-                player.sendMessage(ChatColor.BLUE + "/test damage <amount> - damage self");
+                player.sendMessage(ChatPalette.BLUE + "/test test");
+                player.sendMessage(ChatPalette.BLUE + "/test color <code>");
+                player.sendMessage(ChatPalette.BLUE + "/test hex <code>");
+                player.sendMessage(ChatPalette.BLUE + "/test palette");
+                player.sendMessage(ChatPalette.BLUE + "/test model portal<1-5>");
+                player.sendMessage(ChatPalette.BLUE + "/test sound <code> - play custom sounds");
+                player.sendMessage(ChatPalette.BLUE + "/test damage <amount> - damage self");
             } else if (args[0].equals("test")) {
                 if (this.test) {
                     test = false;
@@ -89,6 +93,21 @@ public class CommandTest implements CommandExecutor {
                 skillOnGround = new SkillOnGround("command", 20L, selfTarget);
 
                 skillOnGround.activate(player.getLocation(), 40L);
+            } else if (args[0].equals("palette")) {
+                StringBuilder msg = new StringBuilder();
+                for (ChatPalette chatPalette : ChatPalette.values()) {
+                    msg.append(chatPalette).append("⬛");
+                }
+
+                player.sendMessage(msg.toString());
+            } else if (args[0].equals("color")) {
+                ChatPalette chatPalette = ChatPalette.valueOf(args[1].toUpperCase());
+
+                player.sendMessage(chatPalette + "TEST COLOR");
+            } else if (args[0].equals("hex")) {
+                ChatColor chatPalette = ChatColor.of(args[1].toUpperCase());
+
+                player.sendMessage(chatPalette + "TEST COLOR");
             } else if (args[0].equals("sound")) {
                 if (args.length == 2) {
                     GoaSound goaSound = GoaSound.valueOf(args[1]);

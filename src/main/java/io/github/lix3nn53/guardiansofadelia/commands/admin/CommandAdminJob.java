@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.commands.admin;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModelData;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModelState;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -29,9 +29,9 @@ public class CommandAdminJob implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/adminjob add <model-id>");
-                player.sendMessage(ChatColor.YELLOW + "/adminjob rotate <x> <y> <z>");
-                player.sendMessage(ChatColor.YELLOW + "/adminjob move <x> <y> <z>");
+                player.sendMessage(ChatPalette.YELLOW + "/adminjob add <model-id>");
+                player.sendMessage(ChatPalette.YELLOW + "/adminjob rotate <x> <y> <z>");
+                player.sendMessage(ChatPalette.YELLOW + "/adminjob move <x> <y> <z>");
             } else if (args[0].equals("add")) {
                 String idStr = args[1];
                 int id = Integer.parseInt(idStr);
@@ -47,7 +47,7 @@ public class CommandAdminJob implements CommandExecutor {
                 GatheringModelData gatheringModelData = modelIdToModelData.get(id);
                 gatheringModelState.createModel(gatheringModelData);
 
-                player.sendMessage(ChatColor.GREEN + "Added new gathering model!");
+                player.sendMessage(ChatPalette.GREEN_DARK + "Added new gathering model!");
             } else if (args[0].equals("rotate")) {
                 double x = Double.parseDouble(args[1]);
                 double y = Double.parseDouble(args[2]);

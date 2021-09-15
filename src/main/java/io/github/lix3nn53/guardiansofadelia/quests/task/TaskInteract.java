@@ -1,11 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -28,22 +29,22 @@ public final class TaskInteract implements Task {
     }
 
     public String getTablistInfoString() {
-        ChatColor chatColor = getChatColor();
+        ChatPalette chatPalette = getChatPalette();
 
         NPCRegistry registry = CitizensAPI.getNPCRegistry();
         NPC npc = registry.getById(npcId);
 
-        return chatColor + "Talk to " + ChatColor.stripColor(npc.getName());
+        return chatPalette + "Talk to " + ChatColor.stripColor(npc.getName());
     }
 
     public String getItemLoreString() {
         NPCRegistry registry = CitizensAPI.getNPCRegistry();
         NPC npc = registry.getById(npcId);
-        ChatColor color;
+        ChatPalette color;
         if (isCompleted()) {
-            color = ChatColor.GREEN;
+            color = ChatPalette.GREEN_DARK;
         } else {
-            color = ChatColor.YELLOW;
+            color = ChatPalette.YELLOW;
         }
         return color + "Talk to " + ChatColor.stripColor(npc.getName());
     }
@@ -88,7 +89,7 @@ public final class TaskInteract implements Task {
         if (npcId == this.npcId) {
             if (progress(player, questID, taskIndex, ignorePrevent)) {
                 NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
-                MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + "Quest Interact" + ChatColor.GRAY + " with " + npcRegistry.getById(npcId).getName());
+                MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + "Quest Interact" + ChatPalette.GRAY + " with " + npcRegistry.getById(npcId).getName());
                 return true;
             }
         }
@@ -120,9 +121,9 @@ public final class TaskInteract implements Task {
     }
 
     @Override
-    public ChatColor getChatColor() {
-        if (isCompleted()) return ChatColor.GREEN;
+    public ChatPalette getChatPalette() {
+        if (isCompleted()) return ChatPalette.GREEN_DARK;
 
-        return ChatColor.RED;
+        return ChatPalette.RED;
     }
 }

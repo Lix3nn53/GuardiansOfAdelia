@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.potion.PotionEffectType;
 
 public enum BuffType {
@@ -14,15 +15,15 @@ public enum BuffType {
     public String toString() {
         switch (this) {
             case ELEMENT_DAMAGE:
-                return ChatColor.RED + "Element Damage Buff";
+                return ChatPalette.RED + "Element Damage Buff";
             case ELEMENT_DEFENSE:
-                return ChatColor.AQUA + "Element Defense Buff";
+                return ChatPalette.BLUE_LIGHT + "Element Defense Buff";
             case CRIT_DAMAGE:
-                return ChatColor.GOLD + "Critical Damage Buff";
+                return ChatPalette.GOLD + "Critical Damage Buff";
             case CRIT_CHANCE:
-                return ChatColor.DARK_PURPLE + "Critical Chance Buff";
+                return ChatPalette.PURPLE + "Critical Chance Buff";
             case ABILITY_HASTE:
-                return ChatColor.LIGHT_PURPLE + "Ability Haste Buff";
+                return ChatPalette.PURPLE_LIGHT + "Ability Haste Buff";
         }
         return "";
     }

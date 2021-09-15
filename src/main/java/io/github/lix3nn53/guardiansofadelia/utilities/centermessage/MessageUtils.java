@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.centermessage;
 
-import org.bukkit.ChatColor;
+
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
 public class MessageUtils {
@@ -41,6 +42,6 @@ public class MessageUtils {
             sb.append(" ");
             compensated += spaceLength;
         }
-        player.sendMessage(sb.toString() + message);
+        player.sendMessage(sb + message);
     }
 }

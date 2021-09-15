@@ -2,8 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.economy.trading;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class TradeInvite extends Invite {
@@ -14,28 +14,28 @@ public class TradeInvite extends Invite {
 
     @Override
     public void accept() {
-        getSender().sendMessage(ChatColor.AQUA + getReceiver().getName() + " accepted your trade invite");
+        getSender().sendMessage(ChatPalette.BLUE_LIGHT + getReceiver().getName() + " accepted your trade invite");
         GuardianData receiverData = GuardianDataManager.getGuardianData(getReceiver());
         if (receiverData.hasActiveGui()) {
-            getSender().sendMessage(ChatColor.RED + "This player is busy.");
+            getSender().sendMessage(ChatPalette.RED + "This player is busy.");
             return;
         }
         GuardianData senderData = GuardianDataManager.getGuardianData(getSender());
         if (senderData.hasActiveGui()) {
-            getReceiver().sendMessage(ChatColor.RED + "This player is busy.");
+            getReceiver().sendMessage(ChatPalette.RED + "This player is busy.");
             return;
         } else {
             Trade trade = new Trade(getSender(), getReceiver());
             TradeManager.startTrade(getSender(), getReceiver(), trade);
-            getReceiver().sendMessage(ChatColor.GOLD + "Trade start");
-            getSender().sendMessage(ChatColor.GOLD + "Trade start");
+            getReceiver().sendMessage(ChatPalette.GOLD + "Trade start");
+            getSender().sendMessage(ChatPalette.GOLD + "Trade start");
         }
         super.accept();
     }
 
     @Override
     public void reject() {
-        getSender().sendMessage(ChatColor.RED + getReceiver().getName() + " rejected your trade invite");
+        getSender().sendMessage(ChatPalette.RED + getReceiver().getName() + " rejected your trade invite");
         super.reject();
     }
 }

@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.ChatColor;
@@ -21,7 +22,7 @@ import java.util.List;
 public abstract class Minigame {
 
     private final String gameTypeName;
-    private final ChatColor gameColor;
+    private final ChatPalette gameColor;
     private final String mapName;
     private final HashMap<Integer, Integer> teamToScore = new HashMap<>();
     private final List<Location> startLocations;
@@ -50,7 +51,7 @@ public abstract class Minigame {
     private GameMode gameModeOnWin = GameMode.SPECTATOR;
     private int countDownIn5SecondsOnWin = 4;
 
-    public Minigame(String gameTypeName, ChatColor gameColor, String mapName, int instanceNo, int levelReq, int teamSize, int teamAmount, List<Location> startLocations, int timeLimitInMinutes,
+    public Minigame(String gameTypeName, ChatPalette gameColor, String mapName, int instanceNo, int levelReq, int teamSize, int teamAmount, List<Location> startLocations, int timeLimitInMinutes,
                     int queueTimeLimitInTenSeconds, Location backLocation, int maxLives, int minTeamsAlive, int respawnDelayInSeconds, int requiredPlayerAmountToStart, List<Checkpoint> checkpoints) {
         this.gameTypeName = gameTypeName;
         this.gameColor = gameColor;
@@ -163,20 +164,20 @@ public abstract class Minigame {
             Party party = teams.get(teamNo);
             for (Player member : party.getMembers()) {
                 if (member.isOnline()) {
-                    MessageUtils.sendCenteredMessage(member, ChatColor.GRAY + "------------------------");
+                    MessageUtils.sendCenteredMessage(member, ChatPalette.GRAY + "------------------------");
                     if (winnerTeams.contains(teamNo)) {
                         if (winnerTeams.size() == 1) {
-                            member.sendTitle(ChatColor.GREEN + "Congratulations!", ChatColor.YELLOW + "", 30, 80, 30);
-                            MessageUtils.sendCenteredMessage(member, "You have have won the " + ChatColor.GREEN + getMinigameName() + " !");
+                            member.sendTitle(ChatPalette.GREEN_DARK + "Congratulations!", ChatPalette.YELLOW + "", 30, 80, 30);
+                            MessageUtils.sendCenteredMessage(member, "You have have won the " + ChatPalette.GREEN_DARK + getMinigameName() + " !");
                         } else {
-                            member.sendTitle(ChatColor.GREEN + "Tie!", ChatColor.YELLOW + "", 30, 80, 30);
-                            MessageUtils.sendCenteredMessage(member, "You are sharing first place with another team in " + ChatColor.GREEN + getMinigameName());
+                            member.sendTitle(ChatPalette.GREEN_DARK + "Tie!", ChatPalette.YELLOW + "", 30, 80, 30);
+                            MessageUtils.sendCenteredMessage(member, "You are sharing first place with another team in " + ChatPalette.GREEN_DARK + getMinigameName());
                         }
                     } else {
-                        member.sendTitle(ChatColor.RED + "Failed..", ChatColor.YELLOW + "", 30, 80, 30);
-                        MessageUtils.sendCenteredMessage(member, "You lose the " + ChatColor.GREEN + getMinigameName());
+                        member.sendTitle(ChatPalette.RED + "Failed..", ChatPalette.YELLOW + "", 30, 80, 30);
+                        MessageUtils.sendCenteredMessage(member, "You lose the " + ChatPalette.GREEN_DARK + getMinigameName());
                     }
-                    MessageUtils.sendCenteredMessage(member, ChatColor.GRAY + "------------------------");
+                    MessageUtils.sendCenteredMessage(member, ChatPalette.GRAY + "------------------------");
                     member.setGameMode(gameModeOnWin);
                 }
             }
@@ -243,7 +244,7 @@ public abstract class Minigame {
         }
     }
 
-    public ChatColor getGameColor() {
+    public ChatPalette getGameColor() {
         return gameColor;
     }
 
@@ -316,12 +317,12 @@ public abstract class Minigame {
         if (!this.isInGame) {
             int emptySize = getEmptySize();
             if (partyMembers.size() > emptySize) {
-                partyMembers.get(0).sendMessage(ChatColor.RED + "There is not enough space for your party");
+                partyMembers.get(0).sendMessage(ChatPalette.RED + "There is not enough space for your party");
                 return false;
             }
             for (Player player : partyMembers) {
                 if (!player.getWorld().getName().equals("world")) {
-                    player.sendMessage(ChatColor.RED + "You must be in normal world");
+                    player.sendMessage(ChatPalette.RED + "You must be in normal world");
                     return false;
                 }
                 if (!MiniGameManager.isInMinigame(player)) {
@@ -329,7 +330,7 @@ public abstract class Minigame {
                         return true;
                     }
                 } else {
-                    player.sendMessage(ChatColor.RED + "You are already in a minigame");
+                    player.sendMessage(ChatPalette.RED + "You are already in a minigame");
                     return false;
                 }
             }
@@ -340,7 +341,7 @@ public abstract class Minigame {
     private boolean addPlayerWithChecks(Player player) {
         if (!this.isInGame) {
             /*if (!player.getWorld().getName().equals("world")) {
-                player.sendMessage(ChatColor.RED + "You must be in normal world");
+                player.sendMessage(ChatPalette.RED + "You must be in normal world");
                 return false;
             }*/
             if (!MiniGameManager.isInMinigame(player)) {
@@ -354,7 +355,7 @@ public abstract class Minigame {
                     return true;
                 }
             } else {
-                player.sendMessage(ChatColor.RED + "You are already in a minigame");
+                player.sendMessage(ChatPalette.RED + "You are already in a minigame");
                 return false;
             }
         }
@@ -397,7 +398,7 @@ public abstract class Minigame {
             if (this.queueCountDown != null) {
                 if (!this.queueCountDown.isCancelled()) {
                     for (Player member : getPlayersInGame()) {
-                        MessageUtils.sendCenteredMessage(member, ChatColor.RED + "Countdown for " + getMinigameName() + " is canceled");
+                        MessageUtils.sendCenteredMessage(member, ChatPalette.RED + "Countdown for " + getMinigameName() + " is canceled");
                     }
                     this.queueCountDown.cancel();
                 }
@@ -448,7 +449,7 @@ public abstract class Minigame {
             if (!player.getLocation().getWorld().getName().equals("world")) {
                 player.teleport(this.backLocation);
             }
-            MessageUtils.sendCenteredMessage(player, ChatColor.RED + "You have left " + getMinigameName());
+            MessageUtils.sendCenteredMessage(player, ChatPalette.RED + "You have left " + getMinigameName());
         }
 
         int teamOfPlayer = getTeamOfPlayer(player);
@@ -630,7 +631,7 @@ public abstract class Minigame {
 
     public ChatColor getTeamTextColor(int teamNo) {
         if (teamNo == 1) {
-            return ChatColor.AQUA;
+            return ChatColor.BLUE;
         } else if (teamNo == 2) {
             return ChatColor.RED;
         } else if (teamNo == 3) {
@@ -638,6 +639,7 @@ public abstract class Minigame {
         } else if (teamNo == 4) {
             return ChatColor.GREEN;
         }
+
         return ChatColor.WHITE;
     }
 
@@ -648,7 +650,7 @@ public abstract class Minigame {
                 teamToCheckpoint.put(teamOfPlayer, checkpoint);
                 Party party = teams.get(teamOfPlayer);
                 for (Player member : party.getMembers()) {
-                    MessageUtils.sendCenteredMessage(member, ChatColor.DARK_GREEN + "-- " + ChatColor.GREEN + "New Checkpoint Set" + ChatColor.DARK_GREEN + " --");
+                    MessageUtils.sendCenteredMessage(member, ChatPalette.GREEN_DARK + "-- " + ChatPalette.GREEN_DARK + "New Checkpoint Set" + ChatPalette.GREEN_DARK + " --");
                 }
 
                 return true;
@@ -708,7 +710,7 @@ public abstract class Minigame {
                         if (count == 0) {
                             player.teleport(startWatchLocation);
                         }
-                        player.sendTitle(ChatColor.DARK_PURPLE + "Respawn in", ChatColor.LIGHT_PURPLE.toString() + (respawnDelayInSeconds - count) + " seconds", 0, 20, 0);
+                        player.sendTitle(ChatPalette.PURPLE + "Respawn in", ChatPalette.PURPLE_LIGHT.toString() + (respawnDelayInSeconds - count) + " seconds", 0, 20, 0);
                         count++;
                     }
                 }

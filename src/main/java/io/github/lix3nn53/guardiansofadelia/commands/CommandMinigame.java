@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +17,7 @@ public class CommandMinigame implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/minigame leave");
+                player.sendMessage(ChatPalette.YELLOW + "/minigame leave");
             } else if (args.length == 1) {
                 if (args[0].equals("leave")) {
                     MiniGameManager.onQuit(player);

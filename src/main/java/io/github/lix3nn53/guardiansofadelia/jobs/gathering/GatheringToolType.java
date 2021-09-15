@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -46,10 +46,10 @@ public enum GatheringToolType {
             case FISHING_ROD:
                 itemStack = new ItemStack(Material.FISHING_ROD);
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Fishing Rod" + " (" + durability + " Uses left)");
+                itemMeta.setDisplayName(ChatPalette.GREEN_DARK + tierName + " Fishing Rod" + " (" + durability + " Uses left)");
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.GRAY + "Used for fishing");
+                lore.add(ChatPalette.GRAY + "Used for fishing");
                 itemMeta.setLore(lore);
                 itemMeta.setUnbreakable(true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
@@ -61,10 +61,10 @@ public enum GatheringToolType {
                 String materialStr = gatheringToolTier.name() + "_" + this.name();
                 itemStack = new ItemStack(Material.valueOf(materialStr));
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Hoe" + " (" + durability + " Uses left)");
+                itemMeta.setDisplayName(ChatPalette.GREEN_DARK + tierName + " Hoe" + " (" + durability + " Uses left)");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.GRAY + "Used for gathering flowers");
+                lore.add(ChatPalette.GRAY + "Used for gathering flowers");
                 itemMeta.setLore(lore);
                 itemMeta.setUnbreakable(true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
@@ -76,10 +76,10 @@ public enum GatheringToolType {
                 materialStr = gatheringToolTier.name() + "_" + this.name();
                 itemStack = new ItemStack(Material.valueOf(materialStr));
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Pickaxe" + " (" + durability + " Uses left)");
+                itemMeta.setDisplayName(ChatPalette.GREEN_DARK + tierName + " Pickaxe" + " (" + durability + " Uses left)");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.GRAY + "Used for mining ores");
+                lore.add(ChatPalette.GRAY + "Used for mining ores");
                 itemMeta.setLore(lore);
                 itemMeta.setUnbreakable(true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
@@ -91,10 +91,10 @@ public enum GatheringToolType {
                 materialStr = gatheringToolTier.name() + "_" + this.name();
                 itemStack = new ItemStack(Material.valueOf(materialStr));
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Axe" + " (" + durability + " Uses left)");
+                itemMeta.setDisplayName(ChatPalette.GREEN_DARK + tierName + " Axe" + " (" + durability + " Uses left)");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.GRAY + "Used for wood cutting");
+                lore.add(ChatPalette.GRAY + "Used for wood cutting");
                 itemMeta.setLore(lore);
                 itemMeta.setUnbreakable(true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
@@ -105,10 +105,10 @@ public enum GatheringToolType {
             case BOTTLE:
                 itemStack = new ItemStack(Material.GLASS_BOTTLE);
                 itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.GREEN + tierName + " Bottle" + " (" + durability + " Uses left)");
+                itemMeta.setDisplayName(ChatPalette.GREEN_DARK + tierName + " Bottle" + " (" + durability + " Uses left)");
                 lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatColor.GRAY + "Used for gathering magic source");
+                lore.add(ChatPalette.GRAY + "Used for gathering magic source");
                 itemMeta.setLore(lore);
                 itemMeta.setUnbreakable(true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);

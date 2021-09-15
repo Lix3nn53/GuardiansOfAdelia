@@ -6,13 +6,13 @@ import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class RPGClass {
-    private final ChatColor color;
+    private final ChatPalette color;
     private final ElementType mainElement;
     private final String name;
     private final int tier;
@@ -31,7 +31,7 @@ public class RPGClass {
 
     private final List<String> description;
 
-    public RPGClass(ChatColor color, ElementType mainElement, String name, int tier, int customModelData, HashMap<AttributeType, Integer> attributeTiers,
+    public RPGClass(ChatPalette color, ElementType mainElement, String name, int tier, int customModelData, HashMap<AttributeType, Integer> attributeTiers,
                     HashMap<Integer, Skill> skillSet, ActionBarInfo actionBarInfo, List<ShieldGearType> shieldGearTypes, List<WeaponGearType> weaponGearTypes,
                     List<ArmorGearType> armorGearTypes, boolean hasDefaultOffhand, boolean isDefaultOffhandWeapon, List<String> description) {
         this.color = color;
@@ -54,7 +54,7 @@ public class RPGClass {
         return color + name;
     }
 
-    public ChatColor getClassColor() {
+    public ChatPalette getClassColor() {
         return color;
     }
 

@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemFlag;
@@ -105,15 +105,15 @@ public class Skill {
         List<String> lore = new ArrayList<>();
 
         int reqPlayerLevel = getReqPlayerLevel(skillLevel);
-        ChatColor reqPlayerLevelColor = ChatColor.RED;
+        ChatPalette reqPlayerLevelColor = ChatPalette.RED;
         if (playerLevel >= reqPlayerLevel) {
-            reqPlayerLevelColor = ChatColor.GREEN;
+            reqPlayerLevelColor = ChatPalette.GREEN_DARK;
         }
 
         int reqSkillPoints = getReqSkillPoints(skillLevel);
-        ChatColor reqSkillPointsColor = ChatColor.RED;
+        ChatPalette reqSkillPointsColor = ChatPalette.RED;
         if (playerPoints >= reqSkillPoints) {
-            reqSkillPointsColor = ChatColor.GREEN;
+            reqSkillPointsColor = ChatPalette.GREEN_DARK;
         }
 
         lore.add(reqPlayerLevelColor + "Required Level: " + reqPlayerLevel);
@@ -121,14 +121,14 @@ public class Skill {
 
         lore.add("");
         if (skillLevel == 0) {
-            lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel));
-            lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel));
+            lore.add(ChatPalette.BLUE_LIGHT + "Mana cost: " + getManaCost(skillLevel));
+            lore.add(ChatPalette.BLUE + "Cooldown: " + getCooldown(skillLevel));
         } else if (skillLevel == maxSkillLevel) {
-            lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel - 1));
-            lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel - 1));
+            lore.add(ChatPalette.BLUE_LIGHT + "Mana cost: " + getManaCost(skillLevel - 1));
+            lore.add(ChatPalette.BLUE + "Cooldown: " + getCooldown(skillLevel - 1));
         } else {
-            lore.add(ChatColor.AQUA + "Mana cost: " + getManaCost(skillLevel - 1) + " -> " + getManaCost(skillLevel));
-            lore.add(ChatColor.BLUE + "Cooldown: " + getCooldown(skillLevel - 1) + " -> " + getCooldown(skillLevel));
+            lore.add(ChatPalette.BLUE_LIGHT + "Mana cost: " + getManaCost(skillLevel - 1) + " -> " + getManaCost(skillLevel));
+            lore.add(ChatPalette.BLUE + "Cooldown: " + getCooldown(skillLevel - 1) + " -> " + getCooldown(skillLevel));
         }
 
         lore.add("");

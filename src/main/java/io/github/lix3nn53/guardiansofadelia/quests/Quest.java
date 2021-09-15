@@ -16,11 +16,12 @@ import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.quests.task.*;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiItem;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.advancements.Advancement;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -113,9 +114,9 @@ public final class Quest {
     public ItemStack getGuiItem(Player player) {
         ItemStack questItem = new ItemStack(Material.GRAY_WOOL, 1);
         ArrayList<String> lore = new ArrayList<String>();
-        lore.add(ChatColor.RED + "You can't accept this quest");
+        lore.add(ChatPalette.RED + "You can't accept this quest");
         ItemMeta itemMeta = questItem.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.DARK_PURPLE + this.name + ChatColor.GRAY + " Q#" + this.questID);
+        itemMeta.setDisplayName(ChatPalette.PURPLE + this.name + ChatPalette.GRAY + " Q#" + this.questID);
         if (GuardianDataManager.hasGuardianData(player)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
@@ -126,7 +127,7 @@ public final class Quest {
             boolean questActive = playerQuests.stream().anyMatch(item -> item.getQuestID() == this.questID);
             if (questActive) {
                 questItem = new ItemStack(Material.BLUE_WOOL, 1);
-                lore.set(0, ChatColor.YELLOW + "You accepted this quest");
+                lore.set(0, ChatPalette.YELLOW + "You accepted this quest");
                 Optional<Quest> playerQuestOptional = playerQuests.stream()
                         .filter(item -> item.getQuestID() == this.questID)
                         .findAny();
@@ -134,41 +135,41 @@ public final class Quest {
                     Quest playerQuest = playerQuestOptional.get();
                     if (playerQuest.isCompleted()) {
                         questItem = new ItemStack(Material.MAGENTA_WOOL, 1);
-                        lore.set(0, ChatColor.LIGHT_PURPLE + "Click to complete this quest");
+                        lore.set(0, ChatPalette.PURPLE_LIGHT + "Click to complete this quest");
                     }
                 }
             } else if (turnedInQuests.contains(this.questID)) {
                 questItem = new ItemStack(Material.WHITE_WOOL, 1);
-                lore.set(0, ChatColor.WHITE + "You completed this quest");
+                lore.set(0, ChatPalette.WHITE + "You completed this quest");
             } else if (isAvailable(rpgCharacter, player.getLevel())) {
                 questItem = new ItemStack(Material.LIME_WOOL, 1);
-                lore.set(0, ChatColor.GREEN + "Click to accept this quest");
+                lore.set(0, ChatPalette.GREEN_DARK + "Click to accept this quest");
             }
 
             if (!tasks.isEmpty()) {
                 lore.add("");
-                lore.add(ChatColor.LIGHT_PURPLE + "Objectives");
+                lore.add(ChatPalette.PURPLE_LIGHT + "Objectives");
                 for (Task t : tasks) {
                     lore.add(t.getItemLoreString());
                 }
             }
 
             lore.add("");
-            lore.add(ChatColor.GOLD + "Prizes");
+            lore.add(ChatPalette.GOLD + "Prizes");
             if (expPrize > 0) {
-                lore.add(ChatColor.YELLOW + "Experience: " + expPrize);
+                lore.add(ChatPalette.YELLOW + "Experience: " + expPrize);
             }
             if (moneyPrize > 0) {
-                lore.add(ChatColor.YELLOW + "Money: " + Coin.getStringValue(moneyPrize));
+                lore.add(ChatPalette.YELLOW + "Money: " + EconomyUtils.priceToString(moneyPrize));
             }
             if (!itemPrizes.isEmpty()) {
-                lore.add(ChatColor.YELLOW + "Item Prizes: ");
+                lore.add(ChatPalette.YELLOW + "Item Prizes: ");
                 for (ItemStack it : itemPrizes) {
                     lore.add(it.getItemMeta().getDisplayName());
                 }
             }
             if (!itemPrizesSelectOneOf.isEmpty()) {
-                lore.add(ChatColor.YELLOW + "Select One Prize Item: ");
+                lore.add(ChatPalette.YELLOW + "Select One Prize Item: ");
                 for (ItemStack it : itemPrizesSelectOneOf) {
                     lore.add(it.getItemMeta().getDisplayName());
                 }
@@ -176,31 +177,31 @@ public final class Quest {
             if (weaponPrizesSelectOneOf != null) {
                 GearLevel gearLevel = weaponPrizesSelectOneOf.getGearLevel();
                 ItemTier itemTier = weaponPrizesSelectOneOf.getItemTier();
-                lore.add(ChatColor.YELLOW + "Select One Prize Weapon: ");
+                lore.add(ChatPalette.YELLOW + "Select One Prize Weapon: ");
                 int minLevel = gearLevel.getMinLevel();
                 int maxLevel = gearLevel.getMaxLevel();
-                lore.add(ChatColor.GRAY + "Level: " + minLevel + "~" + maxLevel + ChatColor.GRAY + ", Tier: " + itemTier.getTierString());
+                lore.add(ChatPalette.GRAY + "Level: " + minLevel + "~" + maxLevel + ChatPalette.GRAY + ", Tier: " + itemTier.getTierString());
             }
             if (InstantTeleportGuiManager.contains(questID)) {
                 InstantTeleportGuiItem teleport = InstantTeleportGuiManager.getTeleport(questID);
                 String name = teleport.getName();
-                lore.add(ChatColor.LIGHT_PURPLE + "Unlock instant teleportation: " + ChatColor.GRAY + name);
+                lore.add(ChatPalette.PURPLE_LIGHT + "Unlock instant teleportation: " + ChatPalette.GRAY + name);
             }
 
             if (requiredLevel != 0) {
                 lore.add("");
                 if (player.getLevel() >= requiredLevel) {
-                    lore.add(ChatColor.GREEN + "Required Level: " + requiredLevel);
+                    lore.add(ChatPalette.GREEN_DARK + "Required Level: " + requiredLevel);
                 } else {
-                    lore.add(ChatColor.RED + "Required Level: " + requiredLevel);
+                    lore.add(ChatPalette.RED + "Required Level: " + requiredLevel);
                 }
             }
             if (!requiredQuests.isEmpty()) {
                 lore.add("");
                 if (turnedInQuests.containsAll(requiredQuests)) {
-                    lore.add(ChatColor.GREEN + "Required Quests: " + requiredQuests);
+                    lore.add(ChatPalette.GREEN_DARK + "Required Quests: " + requiredQuests);
                 } else {
-                    lore.add(ChatColor.RED + "Required Quests: " + requiredQuests);
+                    lore.add(ChatPalette.RED + "Required Quests: " + requiredQuests);
                 }
             }
 
@@ -209,12 +210,12 @@ public final class Quest {
             Material type = questItem.getType();
             if (type.equals(Material.GRAY_WOOL)) {
                 //sporiler protection
-                lore.add(ChatColor.ITALIC.toString() + ChatColor.RED + "SPOILER PROTECTION");
-                lore.add(ChatColor.ITALIC.toString() + ChatColor.RED + "You can't see the lore of this quest before");
-                lore.add(ChatColor.ITALIC.toString() + ChatColor.RED + "you meet the requirements.");
+                lore.add(ChatColor.ITALIC.toString() + ChatPalette.RED + "SPOILER PROTECTION");
+                lore.add(ChatColor.ITALIC.toString() + ChatPalette.RED + "You can't see the lore of this quest before");
+                lore.add(ChatColor.ITALIC.toString() + ChatPalette.RED + "you meet the requirements.");
             } else {
                 for (String st : story) {
-                    lore.add(ChatColor.ITALIC.toString() + ChatColor.YELLOW + st);
+                    lore.add(ChatColor.ITALIC.toString() + ChatPalette.YELLOW + st);
                 }
             }
 
@@ -318,13 +319,13 @@ public final class Quest {
     }
 
     public void onTurnIn(Player player) {
-        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
-        MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "Quest Turn In");
-        MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + getName());
+        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Turn In");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
         if (!getTurnInMsg().equals("")) {
             MessageUtils.sendCenteredMessage(player, getTurnInMsg());
         }
-        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
 
         Advancement onTurnInAdvancement = QuestAdvancements.getOnTurnInAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
         onTurnInAdvancement.displayToast(player);
@@ -378,10 +379,10 @@ public final class Quest {
     }
 
     public void onComplete(Player player) {
-        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
-        MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "Quest Complete");
-        MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + getName());
-        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Complete");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
+        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
         Advancement onCompleteAdvancement = QuestAdvancements.getOnCompleteAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
         onCompleteAdvancement.displayToast(player);
 
@@ -394,13 +395,13 @@ public final class Quest {
     }
 
     public void onAccept(Player player) {
-        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
-        MessageUtils.sendCenteredMessage(player, ChatColor.DARK_PURPLE + "Quest Accept");
-        MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + getName());
+        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Accept");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
         if (!getStartMsg().equals("")) {
             MessageUtils.sendCenteredMessage(player, getStartMsg());
         }
-        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
 
         Advancement onAcceptAdvancement = QuestAdvancements.getOnAcceptAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
         onAcceptAdvancement.displayToast(player);
@@ -421,7 +422,7 @@ public final class Quest {
         int i = 1;
         for (Task task : this.getTasks()) {
             String tablistInfoString = task.getTablistInfoString();
-            replaceTaskValues = replaceTaskValues.replace("TASK_PROGRESS_" + i, tablistInfoString + ChatColor.WHITE);
+            replaceTaskValues = replaceTaskValues.replace("TASK_PROGRESS_" + i, tablistInfoString + ChatPalette.WHITE);
             i++;
         }
         return replaceTaskValues;

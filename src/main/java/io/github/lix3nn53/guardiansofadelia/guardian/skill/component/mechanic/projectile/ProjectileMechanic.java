@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.creatures.custom.TemporaryEntity;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.packetwrapper.WrapperPlayServerEntityDestroy;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangementLoader;
@@ -19,7 +20,6 @@ import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.ArmorStandWatcher;
 import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 import net.citizensnpcs.api.CitizensAPI;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -436,7 +436,7 @@ public class ProjectileMechanic extends MechanicComponent {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {
-            String s = ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel);
+            String s = ChatPalette.YELLOW + "Projectile amount: " + amountList.get(skillLevel);
 
             if (amountValueKey != null) {
                 s += " x[" + amountValueKey + "]";
@@ -444,7 +444,7 @@ public class ProjectileMechanic extends MechanicComponent {
 
             additions.add(s);
         } else if (skillLevel == amountList.size()) {
-            String s = ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel - 1);
+            String s = ChatPalette.YELLOW + "Projectile amount: " + amountList.get(skillLevel - 1);
 
             if (amountValueKey != null) {
                 s += " x[" + amountValueKey + "]";
@@ -452,7 +452,7 @@ public class ProjectileMechanic extends MechanicComponent {
 
             additions.add(s);
         } else {
-            String s = ChatColor.YELLOW + "Projectile amount: " + amountList.get(skillLevel - 1) + " -> " + amountList.get(skillLevel);
+            String s = ChatPalette.YELLOW + "Projectile amount: " + amountList.get(skillLevel - 1) + " -> " + amountList.get(skillLevel);
 
             if (amountValueKey != null) {
                 s += " x[" + amountValueKey + "]";

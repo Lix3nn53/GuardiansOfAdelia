@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.jobs;
 
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -27,13 +27,13 @@ public class RPGCharacterCraftingStats {
         totalExp += experienceToAdd;
         craftingTypeToTotalExperience.put(craftingType, totalExp);
 
-        player.sendMessage(ChatColor.YELLOW + "Gained " + experienceToAdd + " " + craftingType.getName() + ChatColor.YELLOW + " experience");
+        player.sendMessage(ChatPalette.YELLOW + "Gained " + experienceToAdd + " " + craftingType.getName() + ChatPalette.YELLOW + " experience");
 
         int totalRequiredExperience = getTotalRequiredExperience(currentLevel);
 
         if (totalExp >= totalRequiredExperience) {
             currentLevel++;
-            player.sendMessage(ChatColor.GREEN + "Crafting level up! Your new " + craftingType.getName() + ChatColor.GREEN + " level is " + currentLevel);
+            player.sendMessage(ChatPalette.GREEN_DARK + "Crafting level up! Your new " + craftingType.getName() + ChatPalette.GREEN_DARK + " level is " + currentLevel);
         }
     }
 

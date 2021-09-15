@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.invite;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
-import net.md_5.bungee.api.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -42,15 +42,15 @@ public class Invite {
 
             TextComponent messageMain = new TextComponent("Accept");
             messageMain.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/invite accept"));
-            messageMain.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.GREEN + "Accept the invite")));
+            messageMain.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatPalette.GREEN_DARK + "Accept the invite")));
             messageMain.setBold(true);
-            messageMain.setColor(ChatColor.GREEN);
+            messageMain.setColor(ChatPalette.GREEN_DARK.toChatColor());
 
             TextComponent messageReject = new TextComponent("Reject");
             messageReject.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/invite reject"));
-            messageMain.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.RED + "Reject the invite")));
+            messageMain.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatPalette.RED + "Reject the invite")));
             messageReject.setBold(true);
-            messageReject.setColor(ChatColor.RED);
+            messageReject.setColor(ChatPalette.RED.toChatColor());
 
             messageMain.addExtra("            ");
             messageMain.addExtra(messageReject);
@@ -58,7 +58,7 @@ public class Invite {
 
             receiverData.setPendingInvite(this, receiver);
         } else {
-            sender.sendMessage(ChatColor.RED + receiver.getName() + " is answering another invite");
+            sender.sendMessage(ChatPalette.RED + receiver.getName() + " is answering another invite");
         }
     }
 

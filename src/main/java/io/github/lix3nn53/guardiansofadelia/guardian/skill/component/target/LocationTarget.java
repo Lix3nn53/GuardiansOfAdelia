@@ -2,9 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.custom.TemporaryEntity;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -95,11 +95,11 @@ public class LocationTarget extends TargetComponent {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {
-            additions.add(ChatColor.YELLOW + "Range: " + range.get(skillLevel));
+            additions.add(ChatPalette.YELLOW + "Range: " + range.get(skillLevel));
         } else if (skillLevel == range.size()) {
-            additions.add(ChatColor.YELLOW + "Range: " + range.get(skillLevel - 1));
+            additions.add(ChatPalette.YELLOW + "Range: " + range.get(skillLevel - 1));
         } else {
-            additions.add(ChatColor.YELLOW + "Range: " + range.get(skillLevel - 1) + " -> " + range.get(skillLevel));
+            additions.add(ChatPalette.YELLOW + "Range: " + range.get(skillLevel - 1) + " -> " + range.get(skillLevel));
         }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);

@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items.RpgGears;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
@@ -217,9 +218,9 @@ public enum WeaponGearType {
     public String getItemLoreAddition() {
         switch (this) {
             case WAR_HAMMER:
-                return ChatColor.LIGHT_PURPLE + "Sweep Attack";
+                return ChatPalette.PURPLE_LIGHT + "Sweep Attack";
             case STAFF:
-                return ChatColor.LIGHT_PURPLE + "Ability Haste: " + ChatColor.GRAY + "+20";
+                return ChatPalette.PURPLE_LIGHT + "Ability Haste: " + ChatPalette.GRAY + "+20";
         }
 
         return null;

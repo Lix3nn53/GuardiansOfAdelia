@@ -21,6 +21,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.bu
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
@@ -31,7 +32,6 @@ import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.DroppedItemWatcher;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
@@ -120,7 +120,7 @@ public class RPGCharacterStats {
             public void run() {
                 String between = actionBarInfo.getActionBarBetween(player);
 
-                String message = ChatColor.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + between + ChatColor.AQUA + "✦" + currentMana + "/" + getTotalMaxMana();
+                String message = ChatPalette.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + between + ChatPalette.BLUE_LIGHT + "✦" + currentMana + "/" + getTotalMaxMana();
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 10L);
@@ -159,7 +159,7 @@ public class RPGCharacterStats {
             playLevelUpAnimation();
             onMaxHealthChange();
             sendLevelUpMessage(newLevel);
-            player.sendTitle(ChatColor.GOLD + "Level Up!", ChatColor.YELLOW + "Your new level is " + ChatColor.GOLD + newLevel, 30, 80, 30);
+            player.sendTitle(ChatPalette.GOLD + "Level Up!", ChatPalette.YELLOW + "Your new level is " + ChatPalette.GOLD + newLevel, 30, 80, 30);
             player.setHealth(player.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue());
             setCurrentMana(getTotalMaxMana());
         }
@@ -903,10 +903,10 @@ public class RPGCharacterStats {
     }
 
     private void sendLevelUpMessage(int newLevel) {
-        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
-        MessageUtils.sendCenteredMessage(player, ChatColor.GOLD + "Level up!");
-        MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Congratulations, your new level is " + ChatColor.GOLD + newLevel + "");
-        MessageUtils.sendCenteredMessage(player, ChatColor.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.GOLD + "Level up!");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.YELLOW + "Congratulations, your new level is " + ChatPalette.GOLD + newLevel + "");
+        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
     }
 
     public void reapplyGearSetEffects() {
@@ -941,8 +941,8 @@ public class RPGCharacterStats {
                     oldEffect.clearSetEffect(player, this); // different same armor type
                 }
 
-                player.sendMessage(ChatColor.DARK_PURPLE + "Same Type Armor Effect Activation: "
-                        + ChatColor.LIGHT_PURPLE + helmetType.getDisplayName() + " [" + 4 + "pieces]");
+                player.sendMessage(ChatPalette.PURPLE + "Same Type Armor Effect Activation: "
+                        + ChatPalette.PURPLE_LIGHT + helmetType.getDisplayName() + " [" + 4 + "pieces]");
 
                 GearSetEffect setEffect = helmetType.getSetEffect();
                 setEffect.applySetEffect(player, this);
@@ -1003,8 +1003,8 @@ public class RPGCharacterStats {
         // Apply new effects
         for (GearSet gearSet : newGearSets) {
             if (GearSetManager.hasEffect(gearSet)) {
-                player.sendMessage(ChatColor.DARK_PURPLE + "Gear Set Effect Activation: "
-                        + ChatColor.LIGHT_PURPLE + gearSet.getName() + " [" + gearSet.getPieceCount() + " pieces]");
+                player.sendMessage(ChatPalette.PURPLE + "Gear Set Effect Activation: "
+                        + ChatPalette.PURPLE_LIGHT + gearSet.getName() + " [" + gearSet.getPieceCount() + " pieces]");
 
                 List<GearSetEffect> gearSetEffects = GearSetManager.getEffects(gearSet);
                 for (GearSetEffect gearSetEffect : gearSetEffects) {

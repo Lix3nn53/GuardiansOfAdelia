@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -41,7 +41,7 @@ public class InstantTeleportPortal {
                     boolean questIsInList = questList.stream().anyMatch(questInList -> questInList.getQuestID() == requiredQuestNoAccepted);
 
                     if (!questIsInList) {
-                        player.sendMessage(ChatColor.RED + "You need to accept quest#" + requiredQuestNoAccepted + " to enter this portal.");
+                        player.sendMessage(ChatPalette.RED + "You need to accept quest#" + requiredQuestNoAccepted + " to enter this portal.");
                         return false;
                     }
                 }
@@ -50,7 +50,7 @@ public class InstantTeleportPortal {
                     List<Integer> turnedInQuests = activeCharacter.getTurnedInQuests();
 
                     if (!turnedInQuests.contains(requiredQuestNoTurnedIn)) {
-                        player.sendMessage(ChatColor.RED + "You need to turn in quest#" + requiredQuestNoTurnedIn + " to enter this portal.");
+                        player.sendMessage(ChatPalette.RED + "You need to turn in quest#" + requiredQuestNoTurnedIn + " to enter this portal.");
                         return false;
                     }
                 }

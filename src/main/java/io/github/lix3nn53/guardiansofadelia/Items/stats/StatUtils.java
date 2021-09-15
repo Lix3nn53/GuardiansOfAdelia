@@ -10,8 +10,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -125,14 +126,22 @@ public class StatUtils {
             ItemMeta itemMeta = itemStack.getItemMeta();
             List<String> lore = itemMeta.getLore();
 
-            int i = lore.indexOf(itemTier.getTierString());
+            String tierString = itemTier.getTierString();
+            int i = lore.indexOf(tierString);
+            for (String str : lore) {
+                Bukkit.getPlayer("Lix3nn").sendMessage(str);
+                if (str.equals(tierString)) {
+                    Bukkit.getPlayer("Lix3nn").sendMessage("EQUAL");
+                }
+            }
+            Bukkit.getPlayer("Lix3nn").sendMessage(tierString);
 
             boolean hasElements = statPassive.isEmpty(false, true);
 
             if (!statPassive.isEmpty(true, false)) {
                 for (AttributeType attributeType : AttributeType.values()) {
                     if (statPassive.getAttributeValue(attributeType) != 0) {
-                        lore.add(i, attributeType.getCustomName() + ": " + ChatColor.GRAY + "+" + attributeType.getIncrementLore(statPassive.getAttributeValue(attributeType)));
+                        lore.add(i, attributeType.getCustomName() + ": " + ChatPalette.GRAY + "+" + attributeType.getIncrementLore(statPassive.getAttributeValue(attributeType)));
                         i++;
                     }
                 }
@@ -146,7 +155,7 @@ public class StatUtils {
             if (!hasElements) {
                 for (ElementType elementType : ElementType.values()) {
                     if (statPassive.getElementValue(elementType) != 0) {
-                        lore.add(i, elementType.getFullName() + ": " + ChatColor.GRAY + "+" + statPassive.getElementValue(elementType));
+                        lore.add(i, elementType.getFullName() + ": " + ChatPalette.GRAY + "+" + statPassive.getElementValue(elementType));
                         i++;
                     }
                 }
@@ -162,7 +171,7 @@ public class StatUtils {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
             int reqLevel = PersistentDataContainerUtil.getInteger(itemStack, "reqLevel");
             if (player.getLevel() < reqLevel) {
-                player.sendMessage(ChatColor.RED + "Required level for this item is " + reqLevel);
+                player.sendMessage(ChatPalette.RED + "Required level for this item is " + reqLevel);
                 return false;
             }
         }
@@ -174,7 +183,7 @@ public class StatUtils {
         if (weaponGearType != null) {
             List<WeaponGearType> weaponGearTypes = rpgClass.getWeaponGearTypes();
             if (!weaponGearTypes.contains(weaponGearType)) {
-                player.sendMessage(ChatColor.RED + "Your class can't use " + weaponGearType.getDisplayName());
+                player.sendMessage(ChatPalette.RED + "Your class can't use " + weaponGearType.getDisplayName());
                 return false;
             }
         }
@@ -183,7 +192,7 @@ public class StatUtils {
         if (armorGearType != null) {
             List<ArmorGearType> armorGearTypes = rpgClass.getArmorGearTypes();
             if (!armorGearTypes.contains(armorGearType)) {
-                player.sendMessage(ChatColor.RED + "Your class can't use " + armorGearType.getDisplayName());
+                player.sendMessage(ChatPalette.RED + "Your class can't use " + armorGearType.getDisplayName());
                 return false;
             }
         }
@@ -192,7 +201,7 @@ public class StatUtils {
         if (shieldGearType != null) {
             List<ShieldGearType> shieldGearTypes = rpgClass.getShieldGearTypes();
             if (!shieldGearTypes.contains(shieldGearType)) {
-                player.sendMessage(ChatColor.RED + "Your class can't use " + shieldGearType.getDisplayName());
+                player.sendMessage(ChatPalette.RED + "Your class can't use " + shieldGearType.getDisplayName());
                 return false;
             }
         }

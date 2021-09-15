@@ -16,8 +16,8 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoom;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomDoor;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomSpawner;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.DungeonConfiguration;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -44,17 +44,17 @@ public class CommandAdminDungeon implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon tp [theme] <instanceNo>");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon holo [theme] - remakes holograms");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon door [theme] - close/open doors");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon add room [theme] <roomNo>");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon add door [theme] <roomNo> <material>" + ChatColor.GOLD + " !!select WorldEdit region first!!");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon add spawner [theme] <roomNo> <waveNo> <mobCode> <mobLevel> <amount>" + ChatColor.GOLD + " !!look at spawner location block!!");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon add skill [theme] <roomNo>" + ChatColor.GOLD + " !!look at location block!!");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon add checkpoint" + ChatColor.GOLD + " !!look at location block!!");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon set prizeloc [theme]" + ChatColor.GOLD + " !!look at block!!");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon reload - DELETES NEW CHANGES");
-                player.sendMessage(ChatColor.YELLOW + "/admindungeon save - SAVES NEW CHANGES");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon tp [theme] <instanceNo>");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon holo [theme] - remakes holograms");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon door [theme] - close/open doors");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add room [theme] <roomNo>");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add door [theme] <roomNo> <material>" + ChatPalette.GOLD + " !!select WorldEdit region first!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add spawner [theme] <roomNo> <waveNo> <mobCode> <mobLevel> <amount>" + ChatPalette.GOLD + " !!look at spawner location block!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill [theme] <roomNo>" + ChatPalette.GOLD + " !!look at location block!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add checkpoint" + ChatPalette.GOLD + " !!look at location block!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon set prizeloc [theme]" + ChatPalette.GOLD + " !!look at block!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon reload - DELETES NEW CHANGES");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon save - SAVES NEW CHANGES");
             } else if (args[0].equals("reload")) {
                 MiniGameManager.clearDungeonData();
 
@@ -115,7 +115,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         DungeonRoom dungeonRoom = new DungeonRoom(doors, waves, skillsOnGround, nextRooms);
 
                         dungeonTheme.addDungeonRoom(roomNo, dungeonRoom);
-                        player.sendMessage(ChatColor.GREEN + "Added new room");
+                        player.sendMessage(ChatPalette.GREEN_DARK + "Added new room");
                         break;
                     }
                     case "door": {
@@ -144,7 +144,7 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                             DungeonRoomDoor dungeonRoomDoor = new DungeonRoomDoor(material, shift);
                             room.addDoor(dungeonRoomDoor);
-                            player.sendMessage(ChatColor.GREEN + "Added new door");
+                            player.sendMessage(ChatPalette.GREEN_DARK + "Added new door");
 
                             remakeHolograms(key);
                         } catch (IncompleteRegionException e) {
@@ -173,7 +173,7 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                         DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);
                         dungeonRoom.addSpawner(waveNo, spawner);
-                        player.sendMessage(ChatColor.GREEN + "Added new spawner");
+                        player.sendMessage(ChatPalette.GREEN_DARK + "Added new spawner");
                         remakeHolograms(key);
                         break;
                     }
@@ -197,7 +197,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);
                         dungeonRoom.addSkillOnGround(skillOnGroundWithOffset);
 
-                        player.sendMessage(ChatColor.GREEN + "Added new skillOnGround");
+                        player.sendMessage(ChatPalette.GREEN_DARK + "Added new skillOnGround");
                         remakeHolograms(key);
                         break;
                     }
@@ -227,7 +227,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                             }
                         }
 
-                        player.sendMessage(ChatColor.GREEN + "Added new checkpoint");
+                        player.sendMessage(ChatPalette.GREEN_DARK + "Added new checkpoint");
                         break;
                     }
                     case "startroom": {
@@ -240,11 +240,11 @@ public class CommandAdminDungeon implements CommandExecutor {
                         boolean b = dungeonTheme.addStartingRooms(roomNo);
 
                         if (!b) {
-                            player.sendMessage(ChatColor.RED + "Room does not exist");
+                            player.sendMessage(ChatPalette.RED + "Room does not exist");
                             return false;
                         }
 
-                        player.sendMessage(ChatColor.GREEN + "Added new startroom");
+                        player.sendMessage(ChatPalette.GREEN_DARK + "Added new startroom");
                         break;
                     }
                 }
@@ -263,7 +263,7 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                     dungeonTheme.setPrizeChestCenterOffset(offset);
 
-                    player.sendMessage(ChatColor.GREEN + "Set chest prize center location");
+                    player.sendMessage(ChatPalette.GREEN_DARK + "Set chest prize center location");
                 }
             }
 

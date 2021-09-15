@@ -3,9 +3,9 @@ package io.github.lix3nn53.guardiansofadelia.Items.RpgGears.gearset;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -127,27 +127,27 @@ public enum GearSetEffect {
             case EMPTY:
                 return "Empty";
             case KNOCKBACK_RESISTANCE:
-                return ChatColor.GRAY + "Knockback Resist 70%";
+                return ChatPalette.GRAY + "Knockback Resist 70%";
             case CRITICAL_DAMAGE:
-                return ChatColor.GRAY + "Critical Damage +20%";
+                return ChatPalette.GRAY + "Critical Damage +20%";
             case CRITICAL_CHANCE:
-                return ChatColor.GRAY + "Critical Chance +10%";
+                return ChatPalette.GRAY + "Critical Chance +10%";
             /*case MANA_REGEN:
-                return ChatColor.GRAY + "Mana Regen";*/
+                return ChatPalette.GRAY + "Mana Regen";*/
             case SLOW_FALLING:
-                return ChatColor.GRAY + "Slow Fallling";
+                return ChatPalette.GRAY + "Slow Fallling";
             case SWIMMING_SPEED:
-                return ChatColor.GRAY + "Swimming Speed 2x";
+                return ChatPalette.GRAY + "Swimming Speed 2x";
             case ATTACK_SPEED_INCREASE:
-                return ChatColor.GRAY + "Attack Speed +20%";
+                return ChatPalette.GRAY + "Attack Speed +20%";
             case ATTACK_SPEED_DECREASE:
-                return ChatColor.GRAY + "Attack Speed -20%";
+                return ChatPalette.GRAY + "Attack Speed -20%";
             case ABILITY_HASTE:
-                return ChatColor.GRAY + "Ability Haste +20";
+                return ChatPalette.GRAY + "Ability Haste +20";
             case JUMP_BOOST:
-                return ChatColor.GRAY + "Jump +1";
+                return ChatPalette.GRAY + "Jump +1";
             case MOVEMENT_SPEED:
-                return ChatColor.GRAY + "Movement Speed 20%";
+                return ChatPalette.GRAY + "Movement Speed 20%";
         }
 
         final StringBuilder sb = new StringBuilder("GearSetEffect{");

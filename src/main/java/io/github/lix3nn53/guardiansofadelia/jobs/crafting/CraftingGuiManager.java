@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiPage;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -20,13 +20,13 @@ public class CraftingGuiManager {
         itemMeta.setCustomModelData(22);
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "Click to craft items of this crafting-level.");
+        lore.add(ChatPalette.GRAY + "Click to craft items of this crafting-level.");
         itemMeta.setLore(lore);
 
         List<Integer> craftingTypeToLevels = CraftingManager.getCraftingTypeToLevels(craftingType);
 
         for (int level : craftingTypeToLevels) {
-            itemMeta.setDisplayName(ChatColor.GOLD + "Level " + level);
+            itemMeta.setDisplayName(ChatPalette.GOLD + "Level " + level);
             itemStack.setAmount(level);
             itemStack.setItemMeta(itemMeta);
             guiGeneric.setItem(8 + level, itemStack);

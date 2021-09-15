@@ -6,9 +6,9 @@ import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
@@ -122,14 +122,14 @@ public class Bazaar {
                         }
                     }
 
-                    owner.sendMessage(ChatColor.WHITE + buyer.getName() + ChatColor.GOLD + " purchased this item " + itemToBuy.getItemMeta().getDisplayName() +
-                            ChatColor.GOLD + " from your bazaar. " +
-                            ChatColor.GREEN + coins[0] + " " + ChatColor.WHITE + coins[1] + " " + ChatColor.YELLOW + coins[2]
-                            + ChatColor.GOLD + " coins added to your bazaar storage");
-                    buyer.sendMessage(ChatColor.GOLD + "You purchased this item " + itemToBuy.getItemMeta().getDisplayName() + " from " + ChatColor.WHITE + owner.getName()
-                            + ChatColor.GOLD + " for " + ChatColor.GREEN + coins[0] + " " + ChatColor.WHITE + coins[1] + " " +
-                            ChatColor.YELLOW + coins[2]
-                            + ChatColor.GOLD + " coins");
+                    owner.sendMessage(ChatPalette.WHITE + buyer.getName() + ChatPalette.GOLD + " purchased this item " + itemToBuy.getItemMeta().getDisplayName() +
+                            ChatPalette.GOLD + " from your bazaar. " +
+                            ChatPalette.BROWN + coins[0] + " " + ChatPalette.GRAY + coins[1] + " " + ChatPalette.GOLD + coins[2]
+                            + ChatPalette.GOLD + " coins added to your bazaar storage");
+                    buyer.sendMessage(ChatPalette.GOLD + "You purchased this item " + itemToBuy.getItemMeta().getDisplayName() + " from " + ChatPalette.WHITE + owner.getName()
+                            + ChatPalette.GOLD + " for " + ChatPalette.BROWN + coins[0] + " " + ChatPalette.GRAY + coins[1] + " " +
+                            ChatPalette.GOLD + coins[2]
+                            + ChatPalette.GOLD + " coins");
                 }
             }
         }
@@ -146,7 +146,7 @@ public class Bazaar {
         EntityEquipment equipment = this.bazaarModel.getEquipment();
         equipment.setHelmet(itemStack);
         this.bazaarModel.setVisible(false);
-        this.bazaarModel.setCustomName(ChatColor.GOLD + "< Bazaar " + ChatColor.YELLOW + owner.getName() + ChatColor.GOLD + " >");
+        this.bazaarModel.setCustomName(ChatPalette.GOLD + "< Bazaar " + ChatPalette.YELLOW + owner.getName() + ChatPalette.GOLD + " >");
         this.bazaarModel.setCustomNameVisible(true);
         this.bazaarModel.setInvulnerable(true);
         this.bazaarModel.setGravity(false);
@@ -169,18 +169,18 @@ public class Bazaar {
             customer.closeInventory();
         }
 
-        GuiGeneric customerGui = new GuiGeneric(27, ChatColor.GOLD + "Edit your bazaar", 0);
+        GuiGeneric customerGui = new GuiGeneric(27, ChatPalette.GOLD + "Edit your bazaar", 0);
 
         ItemStack glassInfo = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
         ItemMeta itemMeta = glassInfo.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GOLD + "Click an item in your inventory to add");
+        itemMeta.setDisplayName(ChatPalette.GOLD + "Click an item in your inventory to add");
         ArrayList<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GOLD + "to your bazaar. Click an item in your bazaar");
-        lore.add(ChatColor.GOLD + "to remove from your bazaar.");
+        lore.add(ChatPalette.GOLD + "to your bazaar. Click an item in your bazaar");
+        lore.add(ChatPalette.GOLD + "to remove from your bazaar.");
         lore.add("");
-        lore.add(ChatColor.GREEN + "Click green wool to set up your bazaar");
+        lore.add(ChatPalette.GREEN_DARK + "Click green wool to set up your bazaar");
         lore.add("");
-        lore.add(ChatColor.RED + "Click red wool to destroy your bazaar");
+        lore.add(ChatPalette.RED + "Click red wool to destroy your bazaar");
         itemMeta.setLore(lore);
         glassInfo.setItemMeta(itemMeta);
         for (int i = 18; i <= 26; i++) {
@@ -189,13 +189,13 @@ public class Bazaar {
 
         ItemStack redWool = new ItemStack(Material.RED_WOOL);
         ItemMeta redMeta = redWool.getItemMeta();
-        redMeta.setDisplayName(ChatColor.RED + "Click to destroy your bazaar");
+        redMeta.setDisplayName(ChatPalette.RED + "Click to destroy your bazaar");
         redWool.setItemMeta(redMeta);
         customerGui.setItem(18, redWool);
 
         ItemStack greenWool = new ItemStack(Material.LIME_WOOL);
         ItemMeta greenMeta = greenWool.getItemMeta();
-        greenMeta.setDisplayName(ChatColor.GREEN + "Click to set up your bazaar");
+        greenMeta.setDisplayName(ChatPalette.GREEN_DARK + "Click to set up your bazaar");
         greenWool.setItemMeta(greenMeta);
         customerGui.setItem(26, greenWool);
 

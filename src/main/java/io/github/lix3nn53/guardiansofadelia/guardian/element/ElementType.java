@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.element;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 
 public enum ElementType {
     FIRE,
@@ -12,31 +13,31 @@ public enum ElementType {
     private String getCustomName() {
         switch (this) {
             case FIRE:
-                return getChatColor() + "Fire";
+                return getChatPalette() + "Fire";
             case WATER:
-                return getChatColor() + "Water";
+                return getChatPalette() + "Water";
             case EARTH:
-                return getChatColor() + "Earth";
+                return getChatPalette() + "Earth";
             case AIR:
-                return getChatColor() + "Air";
+                return getChatPalette() + "Air";
             case LIGHTNING:
-                return getChatColor() + "Lightning";
+                return getChatPalette() + "Lightning";
         }
         return "elementCustomName";
     }
 
-    public ChatColor getChatColor() {
+    public ChatPalette getChatPalette() {
         switch (this) {
             case FIRE:
-                return ChatColor.RED;
+                return ChatPalette.RED;
             case WATER:
-                return ChatColor.BLUE;
+                return ChatPalette.BLUE;
             case EARTH:
-                return ChatColor.DARK_GREEN;
+                return ChatPalette.GREEN_DARK;
             case AIR:
-                return ChatColor.WHITE;
+                return ChatPalette.WHITE;
             case LIGHTNING:
-                return ChatColor.DARK_PURPLE;
+                return ChatPalette.PURPLE;
         }
 
         return null;
@@ -60,6 +61,6 @@ public enum ElementType {
     }
 
     public String getFullName() {
-        return getChatColor() + getIcon() + " " + getCustomName();
+        return getChatPalette() + getIcon() + " " + getCustomName();
     }
 }

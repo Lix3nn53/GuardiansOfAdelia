@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.chat;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 
 public enum PremiumRank {
     NONE,
@@ -8,15 +9,15 @@ public enum PremiumRank {
     LEGEND,
     TITAN;
 
-    public ChatColor getChatColor() {
+    public ChatPalette getChatPalette() {
         switch (this) {
             case HERO:
-                return ChatColor.GREEN;
+                return ChatPalette.GREEN_DARK;
             case LEGEND:
-                return ChatColor.GOLD;
+                return ChatPalette.GOLD;
             case TITAN:
-                return ChatColor.LIGHT_PURPLE;
+                return ChatPalette.PURPLE_LIGHT;
         }
-        return ChatColor.GRAY;
+        return ChatPalette.GRAY;
     }
 }

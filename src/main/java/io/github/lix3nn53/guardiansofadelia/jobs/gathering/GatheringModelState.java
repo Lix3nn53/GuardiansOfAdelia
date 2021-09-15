@@ -1,11 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.DroppedItemWatcher;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
@@ -77,7 +77,7 @@ public class GatheringModelState {
         }
 
         if (onCooldown) {
-            armorStand.setCustomName(title + ChatColor.GRAY + " (On Cooldown)");
+            armorStand.setCustomName(title + ChatPalette.GRAY + " (On Cooldown)");
         } else {
             armorStand.setCustomName(title);
         }
@@ -99,7 +99,7 @@ public class GatheringModelState {
 
         onCooldown = true;
         setBeingGathered(false);
-        armorStand.setCustomName(title + ChatColor.GRAY + " (On Cooldown)");
+        armorStand.setCustomName(title + ChatPalette.GRAY + " (On Cooldown)");
 
         EntityEquipment equipment = armorStand.getEquipment();
         ItemStack helmet = equipment.getHelmet();

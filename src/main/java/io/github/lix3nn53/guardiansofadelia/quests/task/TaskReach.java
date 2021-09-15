@@ -2,8 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -30,18 +30,18 @@ public final class TaskReach implements Task {
     }
 
     public String getTablistInfoString() {
-        ChatColor chatColor = getChatColor();
+        ChatPalette chatPalette = getChatPalette();
 
-        return chatColor + "Go to x: " + blockLoc.getBlockX() + " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + " in "
+        return chatPalette + "Go to x: " + blockLoc.getBlockX() + " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + " in "
                 + blockLoc.getWorld().getName() + " and click " + blockMat.toString();
     }
 
     public String getItemLoreString() {
-        ChatColor color;
+        ChatPalette color;
         if (isCompleted()) {
-            color = ChatColor.GREEN;
+            color = ChatPalette.GREEN_DARK;
         } else {
-            color = ChatColor.YELLOW;
+            color = ChatPalette.YELLOW;
         }
         return color + "Go to x: " + blockLoc.getBlockX() + " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + " in "
                 + blockLoc.getWorld().getName() + " and click " + blockMat.toString();
@@ -92,7 +92,7 @@ public final class TaskReach implements Task {
 
         if (distanceSquared <= maxDistance) {
             if (progress(player, questID, taskIndex, ignorePrevent)) {
-                MessageUtils.sendCenteredMessage(player, ChatColor.LIGHT_PURPLE + "Quest reach " + this.blockLoc);
+                MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + "Quest reach " + this.blockLoc);
                 return true;
             }
         }
@@ -124,9 +124,9 @@ public final class TaskReach implements Task {
     }
 
     @Override
-    public ChatColor getChatColor() {
-        if (isCompleted()) return ChatColor.GREEN;
+    public ChatPalette getChatPalette() {
+        if (isCompleted()) return ChatPalette.GREEN_DARK;
 
-        return ChatColor.RED;
+        return ChatPalette.RED;
     }
 }

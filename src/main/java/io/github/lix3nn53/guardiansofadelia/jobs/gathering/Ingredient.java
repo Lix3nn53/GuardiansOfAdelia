@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -41,10 +42,10 @@ public class Ingredient {
 
         this.lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "Ingredient Level: " + ingredientLevel);
+        lore.add(ChatPalette.GRAY + "Ingredient Level: " + ingredientLevel);
         lore.add("");
         for (String jobType : jobsCanUse) {
-            lore.add(ChatColor.GREEN + "✔ " + ChatColor.translateAlternateColorCodes('&', jobType));
+            lore.add(ChatPalette.GREEN_DARK + "✔ " + ChatColor.translateAlternateColorCodes('&', jobType));
         }
         if (extraText != null) {
             lore.add("");

@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.rpginventory.slots;
 
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.Items.RpgGears.WeaponGearType;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -53,7 +53,7 @@ public class VanillaSlotOffhand implements VanillaSlot {
         ItemStack itemStack = new ItemStack(Material.IRON_AXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Left Hand Slot");
+        itemMeta.setDisplayName(ChatPalette.YELLOW + "Left Hand Slot");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
         lore.add("Only shields and daggers can be placed here");

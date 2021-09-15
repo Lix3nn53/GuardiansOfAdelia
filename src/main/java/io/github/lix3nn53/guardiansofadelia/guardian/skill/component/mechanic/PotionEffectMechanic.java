@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
@@ -112,19 +112,19 @@ public class PotionEffectMechanic extends MechanicComponent {
 
     private String getEffectString(PotionEffectType potionEffectType) {
         if (potionEffectType.equals(PotionEffectType.SLOW)) {
-            return ChatColor.GRAY + "Slow";
+            return ChatPalette.GRAY + "Slow";
         } else if (potionEffectType.equals(PotionEffectType.JUMP)) {
-            return ChatColor.YELLOW + "Jump";
+            return ChatPalette.YELLOW + "Jump";
         } else if (potionEffectType.equals(PotionEffectType.SPEED)) {
-            return ChatColor.LIGHT_PURPLE + "Speed";
+            return ChatPalette.PURPLE_LIGHT + "Speed";
         } else if (potionEffectType.equals(PotionEffectType.LEVITATION)) {
-            return ChatColor.AQUA + "Levitation";
+            return ChatPalette.BLUE_LIGHT + "Levitation";
         } else if (potionEffectType.equals(PotionEffectType.WITHER)) {
-            return ChatColor.DARK_PURPLE + "Wither";
+            return ChatPalette.PURPLE + "Wither";
         } else if (potionEffectType.equals(PotionEffectType.POISON)) {
-            return ChatColor.DARK_GREEN + "Poison";
+            return ChatPalette.GREEN_DARK + "Poison";
         } else if (potionEffectType.equals(PotionEffectType.ABSORPTION)) {
-            return ChatColor.YELLOW + "Shield";
+            return ChatPalette.YELLOW + "Shield";
         }
         return null;
     }

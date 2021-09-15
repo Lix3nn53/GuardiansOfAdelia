@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.transportation;
 
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -26,17 +26,17 @@ public class InstantTeleportGuiItem {
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        ChatColor chatColor = isUnlocked ? ChatColor.GREEN : ChatColor.RED;
-        itemMeta.setDisplayName(chatColor + this.name + " #" + questNo);
+        ChatPalette chatPalette = isUnlocked ? ChatPalette.GREEN_DARK : ChatPalette.RED;
+        itemMeta.setDisplayName(chatPalette + this.name + " #" + questNo);
 
         String priceToString = EconomyUtils.priceToString(this.cost);
 
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GOLD + "Teleportation cost: " + priceToString);
-        lore.add(chatColor + "Required Quest: " + ChatColor.GRAY + questNo);
+        lore.add(ChatPalette.GOLD + "Teleportation cost: " + priceToString);
+        lore.add(chatPalette + "Required Quest: " + ChatPalette.GRAY + questNo);
         lore.add("");
-        lore.add(ChatColor.GRAY + "Click to start teleporting to this location.");
+        lore.add(ChatPalette.GRAY + "Click to start teleporting to this location.");
         itemMeta.setLore(lore);
 
         itemStack.setItemMeta(itemMeta);

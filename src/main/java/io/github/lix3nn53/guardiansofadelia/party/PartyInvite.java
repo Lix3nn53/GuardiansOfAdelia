@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.party;
 
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -19,17 +20,17 @@ public class PartyInvite extends Invite {
         if (PartyManager.inParty(getSender())) {
             Party party = PartyManager.getParty(getSender());
             if (!party.anyFreeSpace()) {
-                getSender().sendMessage(ChatColor.RED + "Your party is full");
+                getSender().sendMessage(ChatPalette.RED + "Your party is full");
                 return;
             } else {
                 if (party.getMembers().contains(getReceiver())) {
-                    getSender().sendMessage(getReceiver().getName() + ChatColor.RED + " is already in your party");
+                    getSender().sendMessage(getReceiver().getName() + ChatPalette.RED + " is already in your party");
                     return;
                 }
             }
         }
         if (PartyManager.inParty(getReceiver())) {
-            getSender().sendMessage(getReceiver().getName() + ChatColor.RED + " is already in a party");
+            getSender().sendMessage(getReceiver().getName() + ChatPalette.RED + " is already in a party");
             return;
         }
         super.send();
@@ -40,21 +41,21 @@ public class PartyInvite extends Invite {
         Player sender = getSender();
         Player receiver = getReceiver();
         if (MiniGameManager.isInMinigame(sender)) {
-            receiver.sendMessage(ChatColor.RED + "You can't join to a minigame party!");
+            receiver.sendMessage(ChatPalette.RED + "You can't join to a minigame party!");
             return;
         }
-        sender.sendMessage(ChatColor.AQUA + receiver.getName() + " accepted your party invite");
+        sender.sendMessage(ChatPalette.BLUE_LIGHT + receiver.getName() + " accepted your party invite");
         if (PartyManager.inParty(sender)) {
             Party party = PartyManager.getParty(sender);
             if (party.anyFreeSpace()) {
                 boolean isReceiverJoined = party.addMember(receiver);
                 if (isReceiverJoined) {
                     for (Player member : party.getMembers()) {
-                        member.sendMessage(receiver.getName() + ChatColor.AQUA + " joined party (invited by" + sender.getName() + ")");
+                        member.sendMessage(receiver.getName() + ChatPalette.BLUE_LIGHT + " joined party (invited by" + sender.getName() + ")");
                     }
                 }
             } else {
-                receiver.sendMessage(ChatColor.RED + sender.getName() + "'s party is full");
+                receiver.sendMessage(ChatPalette.RED + sender.getName() + "'s party is full");
             }
         } else {
             List<Player> members = new ArrayList<>();
@@ -65,15 +66,15 @@ public class PartyInvite extends Invite {
 
             PartyManager.addParty(sender, receiver, party);
 
-            sender.sendMessage(receiver.getName() + ChatColor.AQUA + " joined party (invited by" + sender.getName() + ")");
-            receiver.sendMessage(receiver.getName() + ChatColor.AQUA + " joined party (invited by" + sender.getName() + ")");
+            sender.sendMessage(receiver.getName() + ChatPalette.BLUE_LIGHT + " joined party (invited by" + sender.getName() + ")");
+            receiver.sendMessage(receiver.getName() + ChatPalette.BLUE_LIGHT + " joined party (invited by" + sender.getName() + ")");
         }
         super.accept();
     }
 
     @Override
     public void reject() {
-        getSender().sendMessage(ChatColor.RED + getReceiver().getName() + " rejected your party invite");
+        getSender().sendMessage(ChatPalette.RED + getReceiver().getName() + " rejected your party invite");
         super.reject();
     }
 }

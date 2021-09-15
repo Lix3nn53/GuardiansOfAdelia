@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.gui;
 
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -19,17 +19,17 @@ public class HelmetSkinApplyGui extends GuiGeneric {
     private int slotOfItemInPlayerInventory;
 
     public HelmetSkinApplyGui(HelmetSkin helmetSkin) {
-        super(27, ChatColor.GOLD + "Helmet Skin Apply", 0);
+        super(27, ChatPalette.GOLD + "Helmet Skin Apply", 0);
         this.helmetSkin = helmetSkin;
 
         ItemStack glass = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
         ItemMeta itemMeta = glass.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Helmet Skin Apply");
+        itemMeta.setDisplayName(ChatPalette.YELLOW + "Helmet Skin Apply");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "1 - Right click while holding this item");
-        lore.add(ChatColor.GRAY + "2 - Click to the item you want to apply skin on");
-        lore.add(ChatColor.GRAY + "3 - Confirm by clicking the lime wool");
+        lore.add(ChatPalette.GRAY + "1 - Right click while holding this item");
+        lore.add(ChatPalette.GRAY + "2 - Click to the item you want to apply skin on");
+        lore.add(ChatPalette.GRAY + "3 - Confirm by clicking the lime wool");
         itemMeta.setLore(lore);
         glass.setItemMeta(itemMeta);
         setItem(16, glass);
@@ -38,7 +38,7 @@ public class HelmetSkinApplyGui extends GuiGeneric {
             if (i == emptySlot) continue;
             if (i == confirmSlot) {
                 ItemStack confirm = new ItemStack(Material.LIME_WOOL);
-                itemMeta.setDisplayName(ChatColor.GREEN + "Click to apply skin!");
+                itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Click to apply skin!");
                 lore = new ArrayList<>();
                 lore.add("");
                 itemMeta.setLore(lore);
@@ -88,6 +88,6 @@ public class HelmetSkinApplyGui extends GuiGeneric {
     }
 
     public String getNotFitErrorMessage() {
-        return ChatColor.RED + "Item must be a helmet";
+        return ChatPalette.RED + "Item must be a helmet";
     }
 }

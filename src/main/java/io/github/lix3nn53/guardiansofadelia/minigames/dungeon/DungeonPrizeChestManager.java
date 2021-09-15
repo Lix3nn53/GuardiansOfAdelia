@@ -6,12 +6,12 @@ import io.github.lix3nn53.guardiansofadelia.Items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.quests.QuestIconType;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.DroppedItemWatcher;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -57,7 +57,7 @@ public class DungeonPrizeChestManager {
         PrizeChest prizeChest = entityToPrizeChest.get(armorStand);
 
         if (!prizeChest.canLoot(player)) {
-            player.sendMessage(ChatColor.RED + "You already got this prize chest");
+            player.sendMessage(ChatPalette.RED + "You already got this prize chest");
             return;
         }
 
@@ -69,7 +69,7 @@ public class DungeonPrizeChestManager {
                 if (dungeonInstance.canLootPrizeChest(player)) {
                     dungeonInstance.onLootPrizeChest(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "You don't have any key to unlock this prize chest.");
+                    player.sendMessage(ChatPalette.RED + "You don't have any key to unlock this prize chest.");
                     return;
                 }
             }
@@ -80,7 +80,7 @@ public class DungeonPrizeChestManager {
         ItemStack chest = prizeChest.getChest();
 
         InventoryUtils.giveItemToPlayer(player, chest);
-        player.sendMessage(ChatColor.GOLD + "Prize chest added to your inventory");
+        player.sendMessage(ChatPalette.GOLD + "Prize chest added to your inventory");
 
         MiscDisguise disguise = new MiscDisguise(DisguiseType.DROPPED_ITEM);
         DroppedItemWatcher watcher = (DroppedItemWatcher) disguise.getWatcher();

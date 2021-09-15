@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.events;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModelState;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -42,7 +42,7 @@ public class MyPlayerFishEvent implements Listener {
             }
             if (!b) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.RED + "You are not in a fishing area");
+                player.sendMessage(ChatPalette.RED + "You are not in a fishing area");
             }
         } else if (state.equals(PlayerFishEvent.State.CAUGHT_FISH)) {
             event.setExpToDrop(0);
@@ -70,7 +70,7 @@ public class MyPlayerFishEvent implements Listener {
             }
             if (!b) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.RED + "You are not in a fishing area");
+                player.sendMessage(ChatPalette.RED + "You are not in a fishing area");
                 return;
             }
 

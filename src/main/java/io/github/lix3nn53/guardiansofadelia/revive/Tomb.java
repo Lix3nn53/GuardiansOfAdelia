@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.revive;
 
-import org.bukkit.ChatColor;
+
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
@@ -34,7 +35,7 @@ public class Tomb {
         EntityEquipment equipment = tombModel.getEquipment();
         equipment.setHelmet(itemStack);
         this.tombModel.setVisible(false);
-        this.tombModel.setCustomName(ChatColor.DARK_PURPLE + "< Tomb " + ChatColor.LIGHT_PURPLE + owner.getName() + ChatColor.DARK_PURPLE + " >");
+        this.tombModel.setCustomName(ChatPalette.PURPLE + "< Tomb " + ChatPalette.PURPLE_LIGHT + owner.getName() + ChatPalette.PURPLE + " >");
         this.tombModel.setCustomNameVisible(true);
         this.tombModel.setInvulnerable(true);
         this.tombModel.setGravity(false);

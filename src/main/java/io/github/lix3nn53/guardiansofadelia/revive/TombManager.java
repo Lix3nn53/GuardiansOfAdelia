@@ -3,9 +3,9 @@ package io.github.lix3nn53.guardiansofadelia.revive;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -36,7 +36,7 @@ public class TombManager {
         player.teleport(town.getLocation());
 
         if (playersInTombCooldown.contains(player)) {
-            player.sendMessage(ChatColor.RED + "You can't search for your tomb again. Your soul needs 5 minutes between deaths.");
+            player.sendMessage(ChatPalette.RED + "You can't search for your tomb again. Your soul needs 5 minutes between deaths.");
             return;
         }
 
@@ -68,10 +68,10 @@ public class TombManager {
                         tomb.remove();
                         player.setGameMode(GameMode.ADVENTURE);
                         player.teleport(town.getLocation());
-                        player.sendMessage(ChatColor.RED + "Tomb search timeout");
+                        player.sendMessage(ChatPalette.RED + "Tomb search timeout");
                         cancel();
                     } else {
-                        player.sendMessage(ChatColor.AQUA.toString() + ((timeLimitIn10Seconds * 10) - (10 * count)) + " seconds left for your soul to give up");
+                        player.sendMessage(ChatPalette.BLUE_LIGHT.toString() + ((timeLimitIn10Seconds * 10) - (10 * count)) + " seconds left for your soul to give up");
                         count++;
                     }
                 } else {
@@ -114,17 +114,17 @@ public class TombManager {
     }
 
     private static void openDeathGui(Player player) {
-        GuiGeneric reviveGui = new GuiGeneric(9, ChatColor.AQUA + "Revive Gui", 0);
+        GuiGeneric reviveGui = new GuiGeneric(9, ChatPalette.BLUE_LIGHT + "Revive Gui", 0);
 
         ItemStack respawn = new ItemStack(Material.IRON_HOE);
         ItemMeta itemMeta = respawn.getItemMeta();
         itemMeta.setCustomModelData(18);
-        itemMeta.setDisplayName(ChatColor.GREEN + "Respawn");
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Respawn");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "You have respawn in nearest town");
-        lore.add(ChatColor.GRAY + "to your death location.");
-        lore.add(ChatColor.GRAY + "Close your inventory to continue.");
+        lore.add(ChatPalette.GRAY + "You have respawn in nearest town");
+        lore.add(ChatPalette.GRAY + "to your death location.");
+        lore.add(ChatPalette.GRAY + "Close your inventory to continue.");
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         respawn.setItemMeta(itemMeta);
@@ -134,14 +134,14 @@ public class TombManager {
         ItemStack soul = new ItemStack(Material.IRON_HOE);
         itemMeta = soul.getItemMeta();
         itemMeta.setCustomModelData(10);
-        itemMeta.setDisplayName(ChatColor.AQUA + "Search your tomb in soul mode");
+        itemMeta.setDisplayName(ChatPalette.BLUE_LIGHT + "Search your tomb in soul mode");
         lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "Find your tomb and left");
-        lore.add(ChatColor.GRAY + "click near it to respawn");
-        lore.add(ChatColor.RED + "Time limit is 2 minutes after your death");
-        lore.add(ChatColor.GRAY + "You will respawn here if you cant");
-        lore.add(ChatColor.GRAY + "find your tomb in time");
+        lore.add(ChatPalette.GRAY + "Find your tomb and left");
+        lore.add(ChatPalette.GRAY + "click near it to respawn");
+        lore.add(ChatPalette.RED + "Time limit is 2 minutes after your death");
+        lore.add(ChatPalette.GRAY + "You will respawn here if you cant");
+        lore.add(ChatPalette.GRAY + "find your tomb in time");
         itemMeta.setLore(lore);
         soul.setItemMeta(itemMeta);
 
@@ -156,7 +156,7 @@ public class TombManager {
             if (tomb.isNear()) {
                 tomb.remove();
                 player.setGameMode(GameMode.ADVENTURE);
-                player.sendMessage(ChatColor.GREEN + "You have reached your tomb in time!");
+                player.sendMessage(ChatPalette.GREEN_DARK + "You have reached your tomb in time!");
                 player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 240, 20));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 40, 1));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 60, 1));
@@ -170,7 +170,7 @@ public class TombManager {
             if (playerToTomb.containsKey(player)) {
                 Tomb tomb = playerToTomb.get(player);
                 tomb.remove();
-                player.sendMessage(ChatColor.GREEN + "Spawned in nearest town.");
+                player.sendMessage(ChatPalette.GREEN_DARK + "Spawned in nearest town.");
             }
         }
     }
@@ -179,7 +179,7 @@ public class TombManager {
         if (playerToTomb.containsKey(player)) {
             player.setGameMode(GameMode.SPECTATOR);
         } else {
-            player.sendMessage(ChatColor.RED + "You don't have a tomb");
+            player.sendMessage(ChatPalette.RED + "You don't have a tomb");
         }
     }
 }

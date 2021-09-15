@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.Items.enchanting;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -33,11 +33,11 @@ public enum EnchantStone {
             ItemStack item = new ItemStack(material, amount);
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setCustomModelData(2);
-            itemMeta.setDisplayName(ChatColor.BLUE + "Enchant Stone Tier 2");
+            itemMeta.setDisplayName(ChatPalette.BLUE + "Enchant Stone Tier 2");
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatColor.GRAY + "Magical stone to enchant items");
-            lore.add(ChatColor.GRAY + "For +3, +4 and +5 items");
+            lore.add(ChatPalette.GRAY + "Magical stone to enchant items");
+            lore.add(ChatPalette.GRAY + "For +3, +4 and +5 items");
             itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
             PersistentDataContainerUtil.putInteger("ench_stone", 2, item);
@@ -46,11 +46,11 @@ public enum EnchantStone {
             ItemStack item = new ItemStack(material, amount);
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setCustomModelData(3);
-            itemMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Enchant Stone Tier 3");
+            itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + "Enchant Stone Tier 3");
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatColor.GRAY + "Magical stone to enchant items");
-            lore.add(ChatColor.GRAY + "For +6, +7 and +8 items");
+            lore.add(ChatPalette.GRAY + "Magical stone to enchant items");
+            lore.add(ChatPalette.GRAY + "For +6, +7 and +8 items");
             itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
             PersistentDataContainerUtil.putInteger("ench_stone", 3, item);
@@ -59,11 +59,11 @@ public enum EnchantStone {
             ItemStack item = new ItemStack(material, amount);
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setCustomModelData(4);
-            itemMeta.setDisplayName(ChatColor.RED + "Enchant Stone Tier 4");
+            itemMeta.setDisplayName(ChatPalette.RED + "Enchant Stone Tier 4");
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatColor.GRAY + "Magical stone to enchant items");
-            lore.add(ChatColor.GRAY + "For +9, +10 and +11 items");
+            lore.add(ChatPalette.GRAY + "Magical stone to enchant items");
+            lore.add(ChatPalette.GRAY + "For +9, +10 and +11 items");
             itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
             PersistentDataContainerUtil.putInteger("ench_stone", 4, item);
@@ -72,11 +72,11 @@ public enum EnchantStone {
         ItemStack item = new ItemStack(material, amount);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(1);
-        itemMeta.setDisplayName(ChatColor.GREEN + "Enchant Stone Tier 1");
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Enchant Stone Tier 1");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "Magical stone to enchant items");
-        lore.add(ChatColor.GRAY + "For +0, +1 and +2 items");
+        lore.add(ChatPalette.GRAY + "Magical stone to enchant items");
+        lore.add(ChatPalette.GRAY + "For +0, +1 and +2 items");
         itemMeta.setLore(lore);
         item.setItemMeta(itemMeta);
         PersistentDataContainerUtil.putInteger("ench_stone", 1, item);

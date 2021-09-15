@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -31,7 +31,7 @@ public class CommandDestroyItemManager {
             InventoryUtils.removeItemFromInventory(player.getInventory(), itemStack, itemStack.getAmount());
             playerToDestroyItem.remove(player);
         } else {
-            player.sendMessage(ChatColor.RED + "Expired");
+            player.sendMessage(ChatPalette.RED + "Expired");
         }
     }
 }

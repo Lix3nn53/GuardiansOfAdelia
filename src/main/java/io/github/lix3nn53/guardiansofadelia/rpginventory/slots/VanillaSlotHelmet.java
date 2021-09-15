@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.rpginventory.slots;
 
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
-import org.bukkit.ChatColor;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -47,7 +47,7 @@ public class VanillaSlotHelmet implements VanillaSlot {
         ItemStack itemStack = new ItemStack(Material.IRON_AXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Helmet Slot");
+        itemMeta.setDisplayName(ChatPalette.YELLOW + "Helmet Slot");
         List<String> lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);

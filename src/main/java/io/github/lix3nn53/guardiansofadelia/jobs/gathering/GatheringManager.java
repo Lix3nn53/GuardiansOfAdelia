@@ -8,11 +8,11 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import net.minecraft.network.protocol.game.PacketPlayOutAnimation;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.ArmorStand;
@@ -88,11 +88,11 @@ public class GatheringManager {
 
     public static boolean canStartGathering(Player player, ItemStack itemInHand, GatheringModelState gatheringModelState) {
         if (gatheringModelState.isBeingGathered()) {
-            // player.sendMessage(ChatColor.RED + "Resource is being gathered by another player");
+            // player.sendMessage(ChatPalette.RED + "Resource is being gathered by another player");
             return false;
         }
         if (gatheringModelState.isOnCooldown()) {
-            player.sendMessage(ChatColor.RED + "Resource is on cooldown");
+            player.sendMessage(ChatPalette.RED + "Resource is on cooldown");
             return false;
         }
 
@@ -106,7 +106,7 @@ public class GatheringManager {
         GatheringToolTier modelToolTier = gatheringModelData.getMinGatheringToolTier();
         GatheringToolType modelToolType = gatheringModelData.getGatheringToolType();
 
-        final String wrongToolError = ChatColor.RED + "Required gathering tool: " + modelToolTier.toString() + " " + modelToolType.toString();
+        final String wrongToolError = ChatPalette.RED + "Required gathering tool: " + modelToolTier.toString() + " " + modelToolType.toString();
         if (gatheringToolType == null) {
             player.sendMessage(wrongToolError);
             return false;
@@ -118,7 +118,7 @@ public class GatheringManager {
         }
 
         if (!PersistentDataContainerUtil.hasString(itemInHand, "toolTier")) {
-            player.sendMessage(ChatColor.RED + "toolTier error report to admin");
+            player.sendMessage(ChatPalette.RED + "toolTier error report to admin");
             return false;
         }
 
@@ -147,14 +147,14 @@ public class GatheringManager {
 
         int gather = ingredient.gather();
         if (gather == 0) {
-            player.sendTitle("", ChatColor.RED + "Failed...", 30, 80, 30);
+            player.sendTitle("", ChatPalette.RED + "Failed...", 30, 80, 30);
             return null;
         }
 
         ItemStack ingredientItem = ingredient.getItemStack(gather);
 
-        player.sendTitle("", ChatColor.GREEN + "Obtained " +
-                ChatColor.GOLD + ingredientItem.getAmount() + "x " + ChatColor.YELLOW + ingredientItem.getItemMeta().getDisplayName(), 30, 80, 30);
+        player.sendTitle("", ChatPalette.GREEN_DARK + "Obtained " +
+                ChatPalette.GOLD + ingredientItem.getAmount() + "x " + ChatPalette.GOLD + ingredientItem.getItemMeta().getDisplayName(), 30, 80, 30);
 
         progressGatheringTasks(player, ingredient, gather);
 
@@ -177,7 +177,7 @@ public class GatheringManager {
                 }
             } else {
                 toolToDecrease.setAmount(0);
-                player.sendMessage(ChatColor.RED + "Your gathering tool is broken");
+                player.sendMessage(ChatPalette.RED + "Your gathering tool is broken");
             }
         }
     }
@@ -220,11 +220,11 @@ public class GatheringManager {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
-                                player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
+                                player.sendMessage(ChatPalette.RED + "Gathering has been canceled because you moved.");
                                 gatheringModelState.resetName(gatheringModelData);
                                 gatheringModelState.setBeingGathered(false);
                             } else {
-                                armorStand.setCustomName(ChatColor.YELLOW + "||||||||||||||||");
+                                armorStand.setCustomName(ChatPalette.GOLD + "||||||||||||||||");
                                 CustomSound customSound = new CustomSound(Sound.BLOCK_STONE_HIT, 0.5f, 1f);
                                 customSound.play(player.getLocation());
                             }
@@ -232,11 +232,11 @@ public class GatheringManager {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
-                                player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
+                                player.sendMessage(ChatPalette.RED + "Gathering has been canceled because you moved.");
                                 gatheringModelState.resetName(gatheringModelData);
                                 gatheringModelState.setBeingGathered(false);
                             } else {
-                                armorStand.setCustomName(ChatColor.GREEN + "||||" + ChatColor.YELLOW + "||||||||||||");
+                                armorStand.setCustomName(ChatPalette.GREEN_DARK + "||||" + ChatPalette.GOLD + "||||||||||||");
                                 CustomSound customSound = new CustomSound(Sound.BLOCK_STONE_HIT, 0.5f, 1f);
                                 customSound.play(player.getLocation());
 
@@ -247,11 +247,11 @@ public class GatheringManager {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
-                                player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
+                                player.sendMessage(ChatPalette.RED + "Gathering has been canceled because you moved.");
                                 gatheringModelState.resetName(gatheringModelData);
                                 gatheringModelState.setBeingGathered(false);
                             } else {
-                                armorStand.setCustomName(ChatColor.GREEN + "||||||||" + ChatColor.YELLOW + "||||||||");
+                                armorStand.setCustomName(ChatPalette.GREEN_DARK + "||||||||" + ChatPalette.GOLD + "||||||||");
                                 CustomSound customSound = new CustomSound(Sound.BLOCK_STONE_HIT, 0.5f, 1f);
                                 customSound.play(player.getLocation());
 
@@ -262,11 +262,11 @@ public class GatheringManager {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
-                                player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
+                                player.sendMessage(ChatPalette.RED + "Gathering has been canceled because you moved.");
                                 gatheringModelState.resetName(gatheringModelData);
                                 gatheringModelState.setBeingGathered(false);
                             } else {
-                                armorStand.setCustomName(ChatColor.GREEN + "||||||||||||" + ChatColor.YELLOW + "||||");
+                                armorStand.setCustomName(ChatPalette.GREEN_DARK + "||||||||||||" + ChatPalette.GOLD + "||||");
                                 CustomSound customSound = new CustomSound(Sound.BLOCK_STONE_HIT, 0.5f, 1f);
                                 customSound.play(player.getLocation());
 
@@ -277,11 +277,11 @@ public class GatheringManager {
                             if (differenceX > 1 || differenceY > 1 || differenceZ > 1) {
                                 guardianData.setGathering(false);
                                 cancel();
-                                player.sendMessage(ChatColor.RED + "Gathering has been canceled because you moved.");
+                                player.sendMessage(ChatPalette.RED + "Gathering has been canceled because you moved.");
                                 gatheringModelState.resetName(gatheringModelData);
                                 gatheringModelState.setBeingGathered(false);
                             } else {
-                                armorStand.setCustomName(ChatColor.GREEN + "||||||||||||||||");
+                                armorStand.setCustomName(ChatPalette.GREEN_DARK + "||||||||||||||||");
                                 CustomSound customSound = new CustomSound(Sound.BLOCK_STONE_HIT, 0.5f, 1f);
                                 customSound.play(player.getLocation());
 

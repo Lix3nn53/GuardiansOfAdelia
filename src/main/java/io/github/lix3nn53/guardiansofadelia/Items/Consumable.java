@@ -7,8 +7,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.Re
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -35,7 +35,7 @@ public enum Consumable {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
             int reqLevel = PersistentDataContainerUtil.getInteger(itemStack, "reqLevel");
             if (player.getLevel() < reqLevel) {
-                player.sendMessage(ChatColor.RED + "Required level to use this item is " + reqLevel);
+                player.sendMessage(ChatPalette.RED + "Required level to use this item is " + reqLevel);
                 return;
             }
         }
@@ -216,12 +216,12 @@ public enum Consumable {
 
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.YELLOW + "Required Level: " + reqLevel);
+        lore.add(ChatPalette.YELLOW + "Required Level: " + reqLevel);
         lore.add("");
         lore.addAll(getLoreTechnicalInfo(skillLevel));
         lore.add("");
-        lore.add(ChatColor.GRAY + "Hold right click while this item");
-        lore.add(ChatColor.GRAY + "is in your hand to use");
+        lore.add(ChatPalette.GRAY + "Hold right click while this item");
+        lore.add(ChatPalette.GRAY + "is in your hand to use");
         lore.add("");
         lore.addAll(getDescription());
         itemMeta.setLore(lore);
@@ -251,21 +251,21 @@ public enum Consumable {
     public String getName() {
         switch (this) {
             case BUFF_ELEMENT_DAMAGE:
-                return ChatColor.RED + "Steak (Damage Buff)";
+                return ChatPalette.RED + "Steak (Damage Buff)";
             case BUFF_ELEMENT_DEFENSE:
-                return ChatColor.AQUA + "Beef Stew (Defense Buff)";
+                return ChatPalette.BLUE_LIGHT + "Beef Stew (Defense Buff)";
             /*case BUFF_MAGICAL_DAMAGE:
-                return ChatColor.LIGHT_PURPLE + "Cooked Fish (Magical-Damage Buff)";
+                return ChatPalette.PURPLE_LIGHT + "Cooked Fish (Magical-Damage Buff)";
             case BUFF_MAGICAL_DEFENSE:
-                return ChatColor.GREEN + "Highland Soup (Magical-Defense Buff)";*/
+                return ChatPalette.GREEN + "Highland Soup (Magical-Defense Buff)";*/
             case POTION_INSTANT_HEALTH:
-                return ChatColor.RED + "Health Potion";
+                return ChatPalette.RED + "Health Potion";
             case POTION_INSTANT_MANA:
-                return ChatColor.AQUA + "Mana Potion";
+                return ChatPalette.BLUE_LIGHT + "Mana Potion";
             case POTION_INSTANT_HYBRID:
-                return ChatColor.LIGHT_PURPLE + "Hybrid Potion";
+                return ChatPalette.PURPLE_LIGHT + "Hybrid Potion";
             case POTION_REGENERATION_HEALTH:
-                return ChatColor.GOLD + "Health Regeneration Potion";
+                return ChatPalette.GOLD + "Health Regeneration Potion";
         }
         return "";
     }
@@ -274,28 +274,28 @@ public enum Consumable {
         List<String> lore = new ArrayList<>();
         switch (this) {
             case BUFF_ELEMENT_DAMAGE:
-                lore.add(ChatColor.GRAY + "Increases element damage for 10 minutes");
+                lore.add(ChatPalette.GRAY + "Increases element damage for 10 minutes");
                 break;
             case BUFF_ELEMENT_DEFENSE:
-                lore.add(ChatColor.GRAY + "Increases element defense for 10 minutes");
+                lore.add(ChatPalette.GRAY + "Increases element defense for 10 minutes");
                 break;
             /*case BUFF_MAGICAL_DAMAGE:
-                lore.add(ChatColor.GRAY + "Increases magical damage for 10 minutes");
+                lore.add(ChatPalette.GRAY + "Increases magical damage for 10 minutes");
                 break;
             case BUFF_MAGICAL_DEFENSE:
-                lore.add(ChatColor.GRAY + "Increases magical defense for 10 minutes");
+                lore.add(ChatPalette.GRAY + "Increases magical defense for 10 minutes");
                 break;*/
             case POTION_INSTANT_HEALTH:
-                lore.add(ChatColor.GRAY + "Restores health");
+                lore.add(ChatPalette.GRAY + "Restores health");
                 break;
             case POTION_INSTANT_MANA:
-                lore.add(ChatColor.GRAY + "Restores mana");
+                lore.add(ChatPalette.GRAY + "Restores mana");
                 break;
             case POTION_INSTANT_HYBRID:
-                lore.add(ChatColor.GRAY + "Restores health & mana");
+                lore.add(ChatPalette.GRAY + "Restores health & mana");
                 break;
             case POTION_REGENERATION_HEALTH:
-                lore.add(ChatColor.GRAY + "Restores health every seconds for 18 seconds");
+                lore.add(ChatPalette.GRAY + "Restores health every seconds for 18 seconds");
                 break;
         }
         return lore;
@@ -305,30 +305,30 @@ public enum Consumable {
         List<String> lore = new ArrayList<>();
         switch (this) {
             case BUFF_ELEMENT_DAMAGE:
-                lore.add(ChatColor.RED + "Multiplier: " + getBuffMultiplier(level));
+                lore.add(ChatPalette.RED + "Multiplier: " + getBuffMultiplier(level));
                 break;
             case BUFF_ELEMENT_DEFENSE:
-                lore.add(ChatColor.AQUA + "Multiplier: " + getBuffMultiplier(level));
+                lore.add(ChatPalette.BLUE_LIGHT + "Multiplier: " + getBuffMultiplier(level));
                 break;
             /*case BUFF_MAGICAL_DAMAGE:
-                lore.add(ChatColor.LIGHT_PURPLE + "Multiplier: " + getBuffMultiplier(level));
+                lore.add(ChatPalette.PURPLE_LIGHT + "Multiplier: " + getBuffMultiplier(level));
                 break;
             case BUFF_MAGICAL_DEFENSE:
-                lore.add(ChatColor.GREEN + "Multiplier: " + getBuffMultiplier(level));
+                lore.add(ChatPalette.GREEN + "Multiplier: " + getBuffMultiplier(level));
                 break;*/
             case POTION_INSTANT_HEALTH:
-                lore.add(ChatColor.RED + "Restores: " + getInstantHealAmount(level));
+                lore.add(ChatPalette.RED + "Restores: " + getInstantHealAmount(level));
                 break;
             case POTION_INSTANT_MANA:
-                lore.add(ChatColor.AQUA + "Restores: " + getInstantManaAmount(level));
+                lore.add(ChatPalette.BLUE_LIGHT + "Restores: " + getInstantManaAmount(level));
                 break;
             case POTION_INSTANT_HYBRID:
-                lore.add(ChatColor.RED + "Restores: " + (int) (getInstantHealAmount(level) * HYBRID_NERF));
-                lore.add(ChatColor.AQUA + "Restores: " + (int) (getInstantManaAmount(level) * HYBRID_NERF));
+                lore.add(ChatPalette.RED + "Restores: " + (int) (getInstantHealAmount(level) * HYBRID_NERF));
+                lore.add(ChatPalette.BLUE_LIGHT + "Restores: " + (int) (getInstantManaAmount(level) * HYBRID_NERF));
                 break;
             case POTION_REGENERATION_HEALTH:
-                lore.add(ChatColor.RED + "Restores: " + (int) (getInstantHealAmount(level) * REGEN_NERF));
-                lore.add(ChatColor.RED + "...per second, repeat 18 times");
+                lore.add(ChatPalette.RED + "Restores: " + (int) (getInstantHealAmount(level) * REGEN_NERF));
+                lore.add(ChatPalette.RED + "...per second, repeat 18 times");
                 break;
         }
         return lore;

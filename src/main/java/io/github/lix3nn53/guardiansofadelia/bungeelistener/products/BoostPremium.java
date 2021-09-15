@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.products;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -19,13 +19,13 @@ public enum BoostPremium {
     public ItemStack getItemStack(int amount) {
         String input = this.name();
         String s = input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
-        String itemName = getChatColor() + s + " Boost";
+        String itemName = getChatPalette() + s + " Boost";
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY + "Boost");
+        lore.add(ChatPalette.GRAY + "Boost");
         lore.add("");
-        lore.add(ChatColor.GOLD + "Usage: ");
-        lore.add(ChatColor.YELLOW + "1 - Right click while you are holding this item.");
+        lore.add(ChatPalette.GOLD + "Usage: ");
+        lore.add(ChatPalette.YELLOW + "1 - Right click while you are holding this item.");
 
         ItemStack itemStack = new ItemStack(Material.BLACK_DYE);
         PersistentDataContainerUtil.putString("boostCode", this.name(), itemStack);
@@ -42,19 +42,19 @@ public enum BoostPremium {
         return itemStack;
     }
 
-    public ChatColor getChatColor() {
+    public ChatPalette getChatPalette() {
         switch (this) {
             case EXPERIENCE:
-                return ChatColor.LIGHT_PURPLE;
+                return ChatPalette.PURPLE_LIGHT;
             case LOOT:
-                return ChatColor.YELLOW;
+                return ChatPalette.YELLOW;
             case ENCHANT:
-                return ChatColor.AQUA;
+                return ChatPalette.BLUE_LIGHT;
             case GATHER:
-                return ChatColor.GREEN;
+                return ChatPalette.GREEN_DARK;
         }
 
-        return ChatColor.GRAY;
+        return ChatPalette.GRAY;
     }
 
     public int getCustomModelData() {

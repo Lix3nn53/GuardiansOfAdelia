@@ -10,8 +10,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -239,7 +239,7 @@ public class SkillBar {
         if (slot == 3) skillIndex = 4; //ultimate is one off
 
         if (skillsOnCooldown.containsKey("" + skillIndex)) {
-            player.sendMessage(ChatColor.RED + "Skill is on cooldown");
+            player.sendMessage(ChatPalette.RED + "Skill is on cooldown");
             return false;
         }
 
@@ -249,7 +249,7 @@ public class SkillBar {
         int skillLevel = skill.getCurrentSkillLevel(invested);
 
         if (skillLevel <= 0) {
-            player.sendMessage(ChatColor.RED + "You haven't learned that skill");
+            player.sendMessage(ChatPalette.RED + "You haven't learned that skill");
             return false;
         }
 
@@ -262,7 +262,7 @@ public class SkillBar {
                 rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                 int currentMana = rpgCharacterStats.getCurrentMana();
                 if (currentMana < manaCost) {
-                    player.sendMessage(ChatColor.RED + "Not enough mana");
+                    player.sendMessage(ChatPalette.RED + "Not enough mana");
                     return false;
                 }
             }
@@ -276,7 +276,7 @@ public class SkillBar {
         boolean cast = skill.cast(player, skillLevel, new ArrayList<>(), castCounter, skillIndex);//cast ends when this returns
 
         if (!cast) {
-            player.sendMessage(ChatColor.RED + "Failed to cast skill");
+            player.sendMessage(ChatPalette.RED + "Failed to cast skill");
             return false; //dont go on cooldown and consume mana if cast failed
         }
 

@@ -54,6 +54,7 @@ import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiItem;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiManager;
 import io.github.lix3nn53.guardiansofadelia.transportation.TeleportationUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
@@ -264,7 +265,7 @@ public class MyInventoryClickEvent implements Listener {
                             }
                         } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
                             if (!InventoryUtils.canTradeMaterial(currentType)) {
-                                player.sendMessage(ChatColor.RED + "You can't trade this item");
+                                player.sendMessage(ChatPalette.RED + "You can't trade this item");
                             }
                             trade.addItem(player, slot);
                         }
@@ -280,7 +281,7 @@ public class MyInventoryClickEvent implements Listener {
                     } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
                         boolean b = sellGui.addItemToSell(current, slot);
                         if (!b) {
-                            player.sendMessage(ChatColor.RED + "You can't sell this item");
+                            player.sendMessage(ChatPalette.RED + "You can't sell this item");
                         }
                     }
                 } else if (activeGui instanceof EnchantGui) {
@@ -306,10 +307,10 @@ public class MyInventoryClickEvent implements Listener {
                             boolean b = weaponOrShieldSkinApplyGui.onConfirm(player);
                             if (b) {
                                 player.closeInventory();
-                                MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
+                                MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
                                 MessageUtils.sendCenteredMessage(player, "Applied Skin");
                                 MessageUtils.sendCenteredMessage(player, "to " + weaponOrShieldSkinApplyGui.getItemOnSlot().getItemMeta().getDisplayName());
-                                MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
+                                MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
                             }
                         }
                     } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
@@ -324,10 +325,10 @@ public class MyInventoryClickEvent implements Listener {
                             boolean b = helmetSkinApplyGui.onConfirm(player);
                             if (b) {
                                 player.closeInventory();
-                                MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
+                                MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
                                 MessageUtils.sendCenteredMessage(player, "Applied Skin");
                                 MessageUtils.sendCenteredMessage(player, "to " + helmetSkinApplyGui.getItemOnSlot().getItemMeta().getDisplayName());
-                                MessageUtils.sendCenteredMessage(player, org.bukkit.ChatColor.GRAY + "------------------------");
+                                MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
                             }
                         }
                     } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
@@ -363,7 +364,7 @@ public class MyInventoryClickEvent implements Listener {
         String currentName = itemMeta.getDisplayName();
         Inventory topInventory = event.getView().getTopInventory();
 
-        if (currentName.equals(ChatColor.GREEN + "Menu")) {
+        if (currentName.equals(ChatPalette.GREEN_DARK + "Menu")) {
             event.setCancelled(true);
             if (!cursorType.equals(Material.AIR)) {
                 return;
@@ -379,49 +380,49 @@ public class MyInventoryClickEvent implements Listener {
             }.runTaskLater(GuardiansOfAdelia.getInstance(), 1);
         } else if (currentType.equals(Material.ARROW)) {
             event.setCancelled(true);
-        } else if (title.equals(ChatColor.DARK_GRAY + "Guardians of Adelia")) {
-            if (currentName.equals(ChatColor.GREEN + "Guides")) {
+        } else if (title.equals(ChatPalette.GRAY_DARK + "Guardians of Adelia")) {
+            if (currentName.equals(ChatPalette.GREEN_DARK + "Guides")) {
                 GuiGeneric guide = MenuList.guide();
                 guide.openInventory(player);
-            } else if (currentName.equals(ChatColor.BLUE + "Compass")) {
+            } else if (currentName.equals(ChatPalette.BLUE + "Compass")) {
                 GuiGeneric compass = MenuList.compass();
                 compass.openInventory(player);
-            } else if (currentName.equals(ChatColor.DARK_GREEN + "Maps")) {
+            } else if (currentName.equals(ChatPalette.GREEN_DARK + "Maps")) {
                 player.closeInventory();
                 TextComponent message = new TextComponent(" Maps ! (Click Me)");
                 message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://guardiansofadelia.com/#t5"));
-                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.AQUA + "Click to see Maps from our website")));
-                message.setColor(ChatColor.GREEN);
+                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatPalette.BLUE_LIGHT + "Click to see Maps from our website")));
+                message.setColor(ChatPalette.GREEN_DARK.toChatColor());
                 message.setBold(true);
                 player.spigot().sendMessage(message);
-            } else if (currentName.equals(ChatColor.GREEN + "Character")) {
+            } else if (currentName.equals(ChatPalette.GREEN_DARK + "Character")) {
                 GuiGeneric character = MenuList.character(guardianData);
                 character.openInventory(player);
-            } else if (currentName.equals(ChatColor.DARK_PURPLE + "Guild")) {
+            } else if (currentName.equals(ChatPalette.PURPLE + "Guild")) {
                 if (GuildManager.inGuild(player)) {
                     MenuList.guild().openInventory(player);
                 }
-            } else if (currentName.equals(ChatColor.DARK_PURPLE + "Minigames")) {
+            } else if (currentName.equals(ChatPalette.PURPLE + "Minigames")) {
                 GuiGeneric minigames = MenuList.minigames();
                 minigames.openInventory(player);
-            } else if (currentName.equals(ChatColor.GOLD + "Bazaar")) {
+            } else if (currentName.equals(ChatPalette.GOLD + "Bazaar")) {
                 GuiGeneric bazaar = MenuList.bazaar(player);
                 bazaar.openInventory(player);
-            } else if (currentName.equals(org.bukkit.ChatColor.LIGHT_PURPLE + "WebStore ♥")) {
+            } else if (currentName.equals(ChatPalette.PURPLE_LIGHT + "WebStore ♥")) {
                 player.closeInventory();
                 TextComponent message = new TextComponent(" Donation ♥ ! (Click Me)");
                 message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://guardiansofadelia.com/store"));
-                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.LIGHT_PURPLE + "Click to donate ♥")));
-                message.setColor(ChatColor.LIGHT_PURPLE);
+                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatPalette.PURPLE_LIGHT + "Click to donate ♥")));
+                message.setColor(ChatPalette.PURPLE_LIGHT.toChatColor());
                 message.setBold(true);
                 player.spigot().sendMessage(message);
-            } else if (currentName.equals(ChatColor.YELLOW + "Server Boosts")) {
+            } else if (currentName.equals(ChatPalette.GOLD + "Server Boosts")) {
                 GuiGeneric serverBoostMenu = MenuList.serverBoostMenu();
                 serverBoostMenu.openInventory(player);
-            } else if (currentName.equals(org.bukkit.ChatColor.LIGHT_PURPLE + "Instant Teleportation")) {
+            } else if (currentName.equals(ChatPalette.PURPLE_LIGHT + "Instant Teleportation")) {
                 GuiBookGeneric guiBook = InstantTeleportGuiManager.getGuiBook(guardianData);
                 guiBook.openInventory(player);
-            } else if (currentName.equals(org.bukkit.ChatColor.GOLD + "Daily Rewards")) {
+            } else if (currentName.equals(ChatPalette.GOLD + "Daily Rewards")) {
                 GuiGeneric dailyRewardsMenu = MenuList.dailyRewardsMenu(player);
                 dailyRewardsMenu.openInventory(player);
             }
@@ -430,7 +431,7 @@ public class MyInventoryClickEvent implements Listener {
             char c = title.charAt(title.length() - 1);
             int charNo = Integer.parseInt(String.valueOf(c));
 
-            String rpgClassStr = title.replace(ChatColor.DARK_GRAY + "Play Tutorial? ", "");
+            String rpgClassStr = title.replace(ChatPalette.GRAY_DARK + "Play Tutorial? ", "");
             rpgClassStr = rpgClassStr.replace(" " + charNo, "");
 
             rpgClassStr = ChatColor.stripColor(rpgClassStr);
@@ -442,7 +443,7 @@ public class MyInventoryClickEvent implements Listener {
             }
         } else if (title.contains("Character")) {
             if (title.contains("Creation")) {
-                String charNoString = title.replace(ChatColor.DARK_GRAY + "Character ", "");
+                String charNoString = title.replace(ChatPalette.GRAY_DARK + "Character ", "");
                 charNoString = charNoString.replace(" Creation", "");
                 int charNo = Integer.parseInt(charNoString);
 
@@ -450,7 +451,7 @@ public class MyInventoryClickEvent implements Listener {
                 GuiGeneric guiGeneric = CharacterSelectionMenuList.tutorialSkipMenu(rpgClassStr, charNo);
                 guiGeneric.openInventory(player);
             } else if (title.contains("Selection")) {
-                String charNoString = title.replace(ChatColor.DARK_GRAY + "Character ", "");
+                String charNoString = title.replace(ChatPalette.GRAY_DARK + "Character ", "");
                 charNoString = charNoString.replace(" Selection", "");
                 int charNo = Integer.parseInt(charNoString);
 
@@ -459,7 +460,7 @@ public class MyInventoryClickEvent implements Listener {
                     if (charLocation != null) {
                         CharacterSelectionScreenManager.selectCharacter(player, charNo, charLocation);
                     } else {
-                        player.sendMessage(ChatColor.RED + "Your saved last location is not valid");
+                        player.sendMessage(ChatPalette.RED + "Your saved last location is not valid");
                     }
                 } else if (currentName.contains("#")) {
                     String[] split = currentName.split("#");
@@ -475,24 +476,24 @@ public class MyInventoryClickEvent implements Listener {
                     CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 }
             } else {
-                if (currentName.equals(ChatColor.YELLOW + "Class")) {
+                if (currentName.equals(ChatPalette.GOLD + "Class")) {
                     GuiGeneric classManage = MenuList.classManager(player);
                     classManage.openInventory(player);
-                } else if (currentName.equals(ChatColor.LIGHT_PURPLE + "Skills")) {
+                } else if (currentName.equals(ChatPalette.PURPLE_LIGHT + "Skills")) {
                     GuiGeneric skill = MenuList.skill(player);
                     skill.openInventory(player);
-                } else if (currentName.equals(ChatColor.DARK_GREEN + "Stat Points")) {
+                } else if (currentName.equals(ChatPalette.GREEN_DARK + "Stat Points")) {
                     GuiGeneric statPoints = MenuList.statPoints(player);
                     statPoints.openInventory(player);
-                } else if (currentName.equals(ChatColor.YELLOW + "Crafting")) {
+                } else if (currentName.equals(ChatPalette.GOLD + "Crafting")) {
                     GuiGeneric crafting = MenuList.crafting(player);
                     crafting.openInventory(player);
-                } else if (currentName.equals(ChatColor.AQUA + "Chat Tag")) {
+                } else if (currentName.equals(ChatPalette.BLUE_LIGHT + "Chat Tag")) {
                     GuiGeneric chatTag = MenuList.chatTagQuests(player);
                     chatTag.openInventory(player);
                 }
             }
-        } else if (title.contains(ChatColor.DARK_GRAY + "Quest List of ")) {
+        } else if (title.contains(ChatPalette.GRAY_DARK + "Quest List of ")) {
             if (rpgCharacter != null) {
                 if (activeGui != null) {
                     int resourceNPC = activeGui.getResourceNPC();
@@ -520,7 +521,7 @@ public class MyInventoryClickEvent implements Listener {
                                         GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
                                         questGui.openInventory(player);
                                     } else {
-                                        player.sendMessage(ChatColor.RED + "Couldn't turn in the quest ERROR report pls");
+                                        player.sendMessage(ChatPalette.RED + "Couldn't turn in the quest ERROR report pls");
                                     }
                                 } else {
                                     // GUISIZE
@@ -560,7 +561,7 @@ public class MyInventoryClickEvent implements Listener {
                                     slotsToUse.add(34);
 
                                     // CREATE GUI
-                                    GuiGeneric guiGeneric = new GuiGeneric(guiSize, ChatColor.BLACK + "Quest Item Prize Selection #" + questNo, resourceNPC);
+                                    GuiGeneric guiGeneric = new GuiGeneric(guiSize, ChatPalette.BLACK + "Quest Item Prize Selection #" + questNo, resourceNPC);
 
                                     // PLACE ITEMS
                                     int index = 0;
@@ -585,7 +586,7 @@ public class MyInventoryClickEvent implements Listener {
                             } else {
                                 NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
                                 NPC byId = npcRegistry.getById(whoCanCompleteThisQuest);
-                                player.sendMessage(ChatColor.RED + "You can't turn in this quest from this NPC. You need to talk with " + ChatColor.WHITE + byId.getName());
+                                player.sendMessage(ChatPalette.RED + "You can't turn in this quest from this NPC. You need to talk with " + ChatPalette.WHITE + byId.getName());
                             }
                         } else if (type.equals(Material.LIME_WOOL)) {
                             String[] split = currentName.split("#");
@@ -600,18 +601,18 @@ public class MyInventoryClickEvent implements Listener {
                                     GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
                                     questGui.openInventory(player);
                                 } else {
-                                    player.sendMessage(ChatColor.RED + "Your quest list is full");
+                                    player.sendMessage(ChatPalette.RED + "Your quest list is full");
                                 }
                             } else {
                                 NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
                                 NPC byId = npcRegistry.getById(whoCanGiveThisQuest);
-                                player.sendMessage(ChatColor.RED + "You can't take this quest from this NPC. You need to talk with " + ChatColor.WHITE + byId.getName());
+                                player.sendMessage(ChatPalette.RED + "You can't take this quest from this NPC. You need to talk with " + ChatPalette.WHITE + byId.getName());
                             }
                         }
                     }
                 }
             }
-        } else if (title.contains(ChatColor.BLACK + "Quest Item Prize Selection #")) {
+        } else if (title.contains(ChatPalette.BLACK + "Quest Item Prize Selection #")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST) && !currentType.equals(Material.AIR)) {
                 int resourceNPC = activeGui.getResourceNPC();
 
@@ -633,10 +634,10 @@ public class MyInventoryClickEvent implements Listener {
                     GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
                     questGui.openInventory(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "Couldn't turn in the quest ERROR report pls");
+                    player.sendMessage(ChatPalette.RED + "Couldn't turn in the quest ERROR report pls");
                 }
             }
-        } else if (title.contains(ChatColor.BLACK + "Task Item Prize Selection #")) {
+        } else if (title.contains(ChatPalette.BLACK + "Task Item Prize Selection #")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST) && !currentType.equals(Material.AIR)) {
                 int resourceNPC = activeGui.getResourceNPC();
 
@@ -660,12 +661,12 @@ public class MyInventoryClickEvent implements Listener {
                 boolean didComplete = rpgCharacter.progressTaskOfQuestWithIndex(player, questNo, taskNo);
                 if (didComplete) {
                     player.closeInventory();
-                    MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "Obtained " + currentName);
+                    MessageUtils.sendCenteredMessage(player, ChatPalette.GOLD + "Obtained " + currentName);
                 } else {
-                    player.sendMessage(ChatColor.RED + "Couldn't complete the task ERROR report pls");
+                    player.sendMessage(ChatPalette.RED + "Couldn't complete the task ERROR report pls");
                 }
             }
-        } else if (title.equals(ChatColor.GOLD + "Coin Converter")) {
+        } else if (title.equals(ChatPalette.GOLD + "Coin Converter")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 PlayerInventory playerInventory = player.getInventory();
                 if (currentType.equals(Material.IRON_INGOT)) {
@@ -692,14 +693,14 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        } else if (title.contains(ChatColor.DARK_GRAY + "Compass")) {
+        } else if (title.contains(ChatPalette.GRAY_DARK + "Compass")) {
             if (title.contains("Towns")) {
                 String displayName = itemMeta.getDisplayName();
                 String[] split = displayName.split("#");
                 int i = Integer.parseInt(split[1]);
 
                 Town town = TownManager.getTown(i);
-                CompassManager.setCompassItemLocation(player, ChatColor.AQUA + town.getName(), town.getLocation());
+                CompassManager.setCompassItemLocation(player, ChatPalette.BLUE_LIGHT + town.getName(), town.getLocation());
                 player.closeInventory();
             } else if (title.contains("Dungeon Gates")) {
                 String displayName = itemMeta.getDisplayName();
@@ -725,7 +726,7 @@ public class MyInventoryClickEvent implements Listener {
                     guiBookGeneric.openInventory(player);
                 }
             }
-        } else if (title.contains(ChatColor.DARK_GRAY + "Stat Points (Points:")) {
+        } else if (title.contains(ChatPalette.GRAY_DARK + "Stat Points (Points:")) {
             if (rpgCharacter != null) {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
                 Attribute attr = null;
@@ -776,7 +777,7 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        } else if (title.contains(ChatColor.DARK_GRAY + "Class Manager")) {
+        } else if (title.contains(ChatPalette.GRAY_DARK + "Class Manager")) {
             if (rpgCharacter != null) {
                 String[] split = currentName.split("#");
                 if (split.length != 2) return;
@@ -784,7 +785,7 @@ public class MyInventoryClickEvent implements Listener {
                 GuiGeneric guiGeneric = MenuList.classChange(player, rank);
                 guiGeneric.openInventory(player);
             }
-        } else if (title.contains(ChatColor.DARK_GRAY + "Class Change")) {
+        } else if (title.contains(ChatPalette.GRAY_DARK + "Class Change")) {
             if (rpgCharacter != null) {
                 if (currentType.equals(Material.LIME_WOOL)) {
                     String displayName = itemMeta.getDisplayName();
@@ -795,7 +796,7 @@ public class MyInventoryClickEvent implements Listener {
                     if (b) player.closeInventory();
                 }
             }
-        } else if (title.contains(ChatColor.DARK_GRAY + "Skills (Points: ")) {
+        } else if (title.contains(ChatPalette.GRAY_DARK + "Skills (Points: ")) {
             if (rpgCharacter != null) {
                 SkillBar skillBar = rpgCharacter.getSkillBar();
 
@@ -827,15 +828,15 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        } else if (title.equals(ChatColor.YELLOW + "Crafting")) {
+        } else if (title.equals(ChatPalette.GOLD + "Crafting")) {
             //TODO Do we need click listeners in crafting info menu?
-        } else if (title.equals(ChatColor.DARK_GRAY + "Guild")) {
+        } else if (title.equals(ChatPalette.GRAY_DARK + "Guild")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                if (currentName.equals(ChatColor.RED + "Join Guild War")) {
+                if (currentName.equals(ChatPalette.RED + "Join Guild War")) {
                     MiniGameManager.getGuildWarJoinGui().openInventory(player);
                 }
             }
-        } else if (title.equals(ChatColor.DARK_GRAY + "Join Guild War")) {
+        } else if (title.equals(ChatPalette.GRAY_DARK + "Join Guild War")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 int i = currentName.indexOf("#");
                 String c = String.valueOf(currentName.charAt(i + 1));
@@ -845,15 +846,15 @@ public class MyInventoryClickEvent implements Listener {
                     player.closeInventory();
                 }
             }
-        } else if (title.equals(ChatColor.DARK_GRAY + "MiniGames")) {
+        } else if (title.equals(ChatPalette.GRAY_DARK + "MiniGames")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                if (currentName.equals(ChatColor.RED + "Last One Standing")) {
+                if (currentName.equals(ChatPalette.RED + "Last One Standing")) {
                     MiniGameManager.getLastOneStandingJoinGui().openInventory(player);
-                } else if (currentName.equals(ChatColor.RED + "Win By Most Kills")) {
+                } else if (currentName.equals(ChatPalette.RED + "Win By Most Kills")) {
                     MiniGameManager.getWinByMostKillsJoinGui().openInventory(player);
                 }
             }
-        } else if (title.equals(ChatColor.GOLD + "Join Last One Standing")) {
+        } else if (title.equals(ChatPalette.GOLD + "Join Last One Standing")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 int i = currentName.indexOf("#");
                 String c = String.valueOf(currentName.charAt(i + 1));
@@ -863,7 +864,7 @@ public class MyInventoryClickEvent implements Listener {
                     player.closeInventory();
                 }
             }
-        } else if (title.equals(ChatColor.GOLD + "Join Win By Most Kills")) {
+        } else if (title.equals(ChatPalette.GOLD + "Join Win By Most Kills")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 int i = currentName.indexOf("#");
                 String c = String.valueOf(currentName.charAt(i + 1));
@@ -873,7 +874,7 @@ public class MyInventoryClickEvent implements Listener {
                     player.closeInventory();
                 }
             }
-        } else if (title.equals(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + "RPG Inventory")) {
+        } else if (title.equals(ChatPalette.GRAY_DARK.toString() + ChatColor.BOLD + "RPG Inventory")) {
             RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
             String rpgClassStr = rpgCharacter.getRpgClassStr();
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
@@ -891,7 +892,7 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        } else if (title.equals(ChatColor.AQUA + "Revive Gui")) {
+        } else if (title.equals(ChatPalette.BLUE_LIGHT + "Revive Gui")) {
             if (slot == 5) {
                 TombManager.startSearch(player);
                 player.closeInventory(); //calling inventory close event after startSearch doesn't cancel search
@@ -899,7 +900,7 @@ public class MyInventoryClickEvent implements Listener {
                 //inventory close event cancels tomb search so no need to call it twice
                 player.closeInventory();
             }
-        } else if (title.equals(ChatColor.GOLD + "Bazaar")) {
+        } else if (title.equals(ChatPalette.GOLD + "Bazaar")) {
             if (currentType.equals(Material.LIME_WOOL)) {
                 if (guardianData != null) {
                     if (guardianData.hasBazaar()) {
@@ -912,7 +913,7 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        } else if (title.equals(ChatColor.GOLD + "Edit your bazaar")) {
+        } else if (title.equals(ChatPalette.GOLD + "Edit your bazaar")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
                 if (currentType.equals(Material.LIME_WOOL)) {
                     if (guardianData != null) {
@@ -928,7 +929,7 @@ public class MyInventoryClickEvent implements Listener {
                             bazaar.remove();
                             guardianData.setBazaar(null);
                             player.closeInventory();
-                            player.sendMessage(ChatColor.RED + "Removed your bazaar");
+                            player.sendMessage(ChatPalette.RED + "Removed your bazaar");
                         }
                     }
                 } else {
@@ -959,12 +960,12 @@ public class MyInventoryClickEvent implements Listener {
                                     try {
                                         price = Integer.parseInt(strings[3]);
                                     } catch (NumberFormatException e) {
-                                        player.sendMessage(org.bukkit.ChatColor.RED + "Enter a number between 1-266239 to last line.");
+                                        player.sendMessage(ChatPalette.RED + "Enter a number between 1-266239 to last line.");
                                         return false;
                                     }
 
                                     if (price > 266304) {
-                                        player.sendMessage(org.bukkit.ChatColor.RED + "Max price is 266239.");
+                                        player.sendMessage(ChatPalette.RED + "Max price is 266239.");
                                         return false;
                                     }
 
@@ -987,7 +988,7 @@ public class MyInventoryClickEvent implements Listener {
                         List<ItemStack> itemsOnSale = bazaar.getItemsOnSale();
                         if (itemsOnSale.contains(current)) {
                             player.closeInventory();
-                            player.sendMessage(ChatColor.RED + "You can't get an item from bazaar storage which is on sale");
+                            player.sendMessage(ChatPalette.RED + "You can't get an item from bazaar storage which is on sale");
                             return;
                         }
                     }
@@ -1029,14 +1030,14 @@ public class MyInventoryClickEvent implements Listener {
 
                             int currentLevel = rpgCharacter.getCraftingStats().getCurrentLevel(craftingType);
 
-                            String s = currentName.replaceAll(ChatColor.GOLD + "Level ", "");
+                            String s = currentName.replaceAll(ChatPalette.GOLD + "Level ", "");
                             int craftingLevel = Integer.parseInt(s);
 
                             if (currentLevel >= craftingLevel) {
                                 GuiBookGeneric craftingBook = CraftingGuiManager.getCraftingBook(craftingType, craftingLevel);
                                 craftingBook.openInventory(player);
                             } else {
-                                player.sendMessage(ChatColor.RED + "Required crafting level to craft " + currentName + ChatColor.RED + " items is " + ChatColor.GOLD + craftingLevel);
+                                player.sendMessage(ChatPalette.RED + "Required crafting level to craft " + currentName + ChatPalette.RED + " items is " + ChatPalette.GOLD + craftingLevel);
                             }
                         }
                     }
@@ -1048,7 +1049,7 @@ public class MyInventoryClickEvent implements Listener {
                         ItemMeta craftingGuideGlass = item.getItemMeta();
                         if (craftingGuideGlass.hasDisplayName()) {
                             String displayName = craftingGuideGlass.getDisplayName();
-                            if (displayName.equals(ChatColor.GOLD + "Crafting Guide")) {
+                            if (displayName.equals(ChatPalette.GOLD + "Crafting Guide")) {
                                 if (slot == 8 || slot == 17 || slot == 26 || slot == 35 || slot == 44) {
                                     List<ItemStack> ingredients = new ArrayList<>();
 
@@ -1112,17 +1113,17 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        } else if (title.contains(ChatColor.DARK_GRAY + "Interact with ")) {
+        } else if (title.contains(ChatPalette.GRAY_DARK + "Interact with ")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                String rightClickedName = title.replace(ChatColor.DARK_GRAY + "Interact with ", "");
+                String rightClickedName = title.replace(ChatPalette.GRAY_DARK + "Interact with ", "");
                 Player rightClicked = Bukkit.getPlayer(rightClickedName);
                 if (rightClicked == null) return;
 
                 if (rightClicked.isOnline()) {
                     if (slot == 12) {
-                        String senderTitle = org.bukkit.ChatColor.AQUA + "Sent party invitation";
-                        String receiverMessage = org.bukkit.ChatColor.AQUA + player.getName() + " invites you to party"; //sender = player
-                        String receiverTitle = org.bukkit.ChatColor.AQUA + "Received party invitation";
+                        String senderTitle = ChatPalette.BLUE_LIGHT + "Sent party invitation";
+                        String receiverMessage = ChatPalette.BLUE_LIGHT + player.getName() + " invites you to party"; //sender = player
+                        String receiverTitle = ChatPalette.BLUE_LIGHT + "Received party invitation";
                         PartyInvite partyInvite = new PartyInvite(player, rightClicked, senderTitle, receiverMessage, receiverTitle); //receiver = rightClicked
                         partyInvite.send();
                         player.closeInventory();
@@ -1131,27 +1132,27 @@ public class MyInventoryClickEvent implements Listener {
                             Guild guild = GuildManager.getGuild(player);
                             PlayerRankInGuild rank = guild.getRankInGuild(player.getUniqueId());
                             if (rank.equals(PlayerRankInGuild.LEADER) || rank.equals(PlayerRankInGuild.COMMANDER)) {
-                                String receiverMessage = org.bukkit.ChatColor.DARK_PURPLE + player.getName() + " invites you to " + guild.getName() + " guild"; //sender = player
-                                String receiverTitle = org.bukkit.ChatColor.DARK_PURPLE + "Received guild invitation";
-                                String senderTitle = org.bukkit.ChatColor.DARK_PURPLE + "Sent guild invitation";
+                                String receiverMessage = ChatPalette.PURPLE + player.getName() + " invites you to " + guild.getName() + " guild"; //sender = player
+                                String receiverTitle = ChatPalette.PURPLE + "Received guild invitation";
+                                String senderTitle = ChatPalette.PURPLE + "Sent guild invitation";
                                 GuildInvite invite = new GuildInvite(player, rightClicked, senderTitle, receiverMessage, receiverTitle); //receiver = rightClicked
                                 invite.send();
                             } else {
-                                player.sendMessage(org.bukkit.ChatColor.RED + "You must be guild leader or commander to invite players to guild");
+                                player.sendMessage(ChatPalette.RED + "You must be guild leader or commander to invite players to guild");
                             }
                         }
                         player.closeInventory();
                     } else if (slot == 16) {
-                        String senderTitle = org.bukkit.ChatColor.GOLD + "Sent trade invitation";
-                        String receiverMessage = org.bukkit.ChatColor.GOLD + player.getName() + " invites you to trade"; //sender = player
-                        String receiverTitle = org.bukkit.ChatColor.GOLD + "Received trade invitation";
+                        String senderTitle = ChatPalette.GOLD + "Sent trade invitation";
+                        String receiverMessage = ChatPalette.GOLD + player.getName() + " invites you to trade"; //sender = player
+                        String receiverTitle = ChatPalette.GOLD + "Received trade invitation";
                         TradeInvite tradeInvite = new TradeInvite(player, rightClicked, senderTitle, receiverMessage, receiverTitle); //receiver = rightClicked
                         tradeInvite.send();
                         player.closeInventory();
                     }
                 }
             }
-        } else if (title.contains(ChatColor.DARK_GRAY + "Chat Tag")) {
+        } else if (title.contains(ChatPalette.GRAY_DARK + "Chat Tag")) {
             if (currentType.equals(Material.LIME_WOOL)) {
                 String stripColor = ChatColor.stripColor(currentName);
 
@@ -1159,12 +1160,12 @@ public class MyInventoryClickEvent implements Listener {
 
                 rpgCharacter.setChatTag(chatTag);
 
-                MessageUtils.sendCenteredMessage(player, ChatColor.YELLOW + "You selected a new chat tag: " + chatTag.getChatColor() + chatTag);
+                MessageUtils.sendCenteredMessage(player, ChatPalette.GOLD + "You selected a new chat tag: " + chatTag.getChatPalette() + chatTag);
             }
-        } else if (title.equals(org.bukkit.ChatColor.DARK_GRAY + "Select item to show in chat")) {
+        } else if (title.equals(ChatPalette.GRAY_DARK + "Select item to show in chat")) {
             if (currentType.equals(Material.BLACK_STAINED_GLASS_PANE)) return;
 
-            TextComponent message = new TextComponent(ChatColor.YELLOW + player.getName() + " shows an item to chat: ");
+            TextComponent message = new TextComponent(ChatPalette.GOLD + player.getName() + " shows an item to chat: ");
 
             TextComponent itemMessage = new TextComponent(currentName);
             StringBuilder stringBuilder = new StringBuilder(currentName);
@@ -1184,17 +1185,17 @@ public class MyInventoryClickEvent implements Listener {
             }
 
             player.closeInventory();
-        } else if (title.equals(ChatColor.DARK_GRAY + "Daily Reward Claim")) {
+        } else if (title.equals(ChatPalette.GRAY_DARK + "Daily Reward Claim")) {
             if (currentType.equals(Material.LIME_WOOL)) {
                 DailyRewardHandler.giveReward(player);
 
                 GuiGeneric guiGeneric = MenuList.dailyRewardsMenu(player);
                 guiGeneric.openInventory(player);
             }
-        } else if (title.contains(org.bukkit.ChatColor.LIGHT_PURPLE + "Instant Teleportation")) {
+        } else if (title.contains(ChatPalette.PURPLE_LIGHT + "Instant Teleportation")) {
             if (currentType.equals(Material.LIME_WOOL)) {
                 if (!player.getLocation().getWorld().getName().equals("world")) {
-                    player.sendMessage(ChatColor.RED + "You can't use teleport gui from this location.");
+                    player.sendMessage(ChatPalette.RED + "You can't use teleport gui from this location.");
                     return;
                 }
 
@@ -1210,7 +1211,7 @@ public class MyInventoryClickEvent implements Listener {
                     Location location = teleport.getLocation();
                     TeleportationUtils.teleport(player, location, teleport.getName(), 5, null, cost);
                 } else {
-                    player.sendMessage(ChatColor.RED + "You don't have enough coins to teleport.");
+                    player.sendMessage(ChatPalette.RED + "You don't have enough coins to teleport.");
                 }
             }
         }
