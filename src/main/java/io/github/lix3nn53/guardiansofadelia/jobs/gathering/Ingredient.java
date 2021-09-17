@@ -82,11 +82,16 @@ public class Ingredient {
         return itemStack;
     }
 
-    public int gather() {
-        if (dropRate < 1) {
+    /**
+     * @param isDungeon Dungeons has 20% more drop rate
+     * @return amount dropped
+     */
+    public int gather(boolean isDungeon) {
+        double dropRateFinal = isDungeon ? dropRate * 1.2 : dropRate;
+        if (dropRateFinal < 1) {
             double dropRandom = Math.random();
 
-            if (dropRandom <= dropRate) {
+            if (dropRandom <= dropRateFinal) {
                 Random random = new Random();
 
                 return random.nextInt(maxAmountPerGather) + 1;

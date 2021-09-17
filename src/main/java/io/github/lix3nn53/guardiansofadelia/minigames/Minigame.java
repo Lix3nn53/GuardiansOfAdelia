@@ -383,7 +383,8 @@ public abstract class Minigame {
                 } else {
                     for (Player member : getPlayersInGame()) {
                         if (member.isOnline()) {
-                            MessageUtils.sendCenteredMessage(member, getGameColor().toString() + (queueTimeLimitInTenSeconds * 10 - (10 * count)) + " seconds left until " + getMinigameName() + " starts");
+                            MessageUtils.sendCenteredMessage(member, getGameColor().toString() + (queueTimeLimitInTenSeconds * 10 - (10 * count)) +
+                                    " seconds left until " + getMinigameName() + getGameColor().toString() + " starts");
                         }
                     }
                     count++;
@@ -536,7 +537,7 @@ public abstract class Minigame {
 
     public List<String> getScoreboardTopLines() {
         List<String> topLines = new ArrayList<>();
-        topLines.add("Time remaining: " + this.timeLimitInMinutes * 60);
+        topLines.add(ChatColor.YELLOW + "Time remaining: " + ChatColor.RESET + this.timeLimitInMinutes * 60);
         for (int i = 0; i < teamAmount; i++) {
             topLines.add(getTeamTextColor(i + 1) + "Team" + (i + 1) + " score: " + getScoreOfTeam(i + 1));
         }
@@ -567,7 +568,7 @@ public abstract class Minigame {
                 for (int k : board.getRowLines().keySet()) {
                     String s = board.getRowLines().get(k);
                     if (s.contains("Time remaining: ")) {
-                        board.setLine("Time remaining: " + seconds, k);
+                        board.setLine(ChatColor.YELLOW + "Time remaining: " + ChatColor.RESET + seconds, k);
                         break;
                     }
                 }

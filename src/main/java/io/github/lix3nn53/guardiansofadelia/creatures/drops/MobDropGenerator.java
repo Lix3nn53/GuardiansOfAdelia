@@ -21,14 +21,20 @@ import java.util.Random;
 
 public class MobDropGenerator {
 
-    public static List<ItemStack> getDrops(int entityLevel) {
+    private static final float DROP_RATE = 0.05f;
+
+    public static List<ItemStack> getDrops(int entityLevel, boolean isDungeon) {
         List<ItemStack> drops = new ArrayList<>();
 
         double random = Math.random();
-        double dropRate = 0.06;
+        float dropRate = DROP_RATE;
 
         if (BoostPremiumManager.isBoostActive(BoostPremium.LOOT)) {
-            dropRate *= 2D;
+            dropRate = (float) BoostPremium.LOOT.applyTo(dropRate);
+        }
+
+        if (isDungeon) {
+            dropRate *= 1.2f;
         }
 
         if (random < dropRate) {

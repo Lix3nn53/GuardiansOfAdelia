@@ -3,15 +3,15 @@ package io.github.lix3nn53.guardiansofadelia.items.stats;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class StatPassive implements Stat {
 
     private final HashMap<AttributeType, Integer> attributeTypeToValue;
     private final HashMap<ElementType, Integer> elementTypeToValue;
+
+    private final List<Double> unsatisfiedRanksAttributes = new LinkedList<>(Arrays.asList(0.2, 0.4, 0.6, 0.8, 1.0));
+    private final List<Double> unsatisfiedRanksElements = new LinkedList<>(Arrays.asList(0.2, 0.4, 0.6, 0.8, 1.0));
 
     public StatPassive(HashMap<AttributeType, Integer> attributeTypeToValue, HashMap<ElementType, Integer> elementTypeToValue) {
         this.attributeTypeToValue = attributeTypeToValue;
@@ -90,16 +90,16 @@ public class StatPassive implements Stat {
 
         if (isAttribute) {
             for (int i = 0; i < amountOfStats; i++) {
-                satisfyOneRandomly(minValue, maxValue, amountOfStats, false);
+                satisfyOneRandomly(minValue, maxValue, false);
             }
         } else {
             for (int i = 0; i < amountOfStats; i++) {
-                satisfyOneRandomly(minValue, maxValue, amountOfStats, true);
+                satisfyOneRandomly(minValue, maxValue, true);
             }
         }
     }
 
-    private void satisfyOneRandomly(int minValue, int maxValue, int amountOfStats, boolean isElement) {
+    private void satisfyOneRandomly(int minValue, int maxValue, boolean isElement) {
         List<ElementType> unusedElements = new ArrayList<>();
         List<AttributeType> unusedAttributes = new ArrayList<>();
         if (isElement) {
@@ -127,25 +127,32 @@ public class StatPassive implements Stat {
         }
 
         int random;
+        double percent;
         ElementType statToSatisfyElement = null;
         AttributeType statToSatisfyAttribute = null;
         if (isElement) {
             random = new Random().nextInt(unusedElements.size());
             statToSatisfyElement = unusedElements.get(random);
+
+            int i = new Random().nextInt(unsatisfiedRanksElements.size());
+            percent = unsatisfiedRanksElements.get(i);
+            unsatisfiedRanksElements.remove(i);
         } else {
             random = new Random().nextInt(unusedAttributes.size());
             statToSatisfyAttribute = unusedAttributes.get(random);
+
+            int i = new Random().nextInt(unsatisfiedRanksAttributes.size());
+            percent = unsatisfiedRanksAttributes.get(i);
+            unsatisfiedRanksAttributes.remove(i);
         }
 
         int gap = maxValue - minValue;
-        int unusedSize = isElement ? unusedElements.size() : unusedAttributes.size();
-        double currentIndex = amountOfStats - (5 - unusedSize) - 1; // index of element we are satisfying // range is 0 to amount - 1
-        double percent = currentIndex / amountOfStats;
+        if (isElement) System.out.println("percent: " + percent);
 
-        double unit = 1.0 / amountOfStats;
+        double unitPercent = 0.2;
 
-        int lowerLimit = (int) (gap * percent + 0.5);
-        int upperLimit = (int) ((gap * (percent + unit)) + 0.5); // next unit is upper limit
+        int lowerLimit = (int) (gap * (percent - unitPercent) + 0.5);
+        int upperLimit = (int) ((gap * (percent)) + 0.5);
         /*System.out.println("amountOfStats: " + amountOfStats);
         System.out.println("currentIndex: " + currentIndex);
         System.out.println("min: " + minValue);

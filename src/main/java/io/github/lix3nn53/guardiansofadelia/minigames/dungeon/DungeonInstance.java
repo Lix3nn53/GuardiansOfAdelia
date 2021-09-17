@@ -20,6 +20,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayer
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
@@ -184,6 +185,8 @@ public class DungeonInstance extends Minigame {
                         }
 
                         this.activeRooms = nextRooms;
+
+                        updateRoomsLeftBoards();
                     }
                 }
             }
@@ -200,13 +203,18 @@ public class DungeonInstance extends Minigame {
     @Override
     public List<String> getScoreboardTopLines() {
         List<String> topLines = new ArrayList<>();
-        topLines.add("Time remaining: " + getTimeLimitInMinutes() * 60);
-        topLines.add("Darkness: " + darkness);
+
         String bossName = "NULL";
-        if (theme != null) {
-            bossName = theme.getBossName();
-        }
-        topLines.add("Boss: " + bossName);
+        if (theme != null) bossName = theme.getBossName();
+        topLines.add(ChatColor.RED + "Boss: " + bossName);
+
+        topLines.add(ChatColor.YELLOW + "Time remaining: " + ChatColor.RESET + getTimeLimitInMinutes() * 60);
+        topLines.add(ChatColor.DARK_PURPLE + "Darkness: " + ChatColor.RESET + darkness);
+
+        int rooms = 0;
+        if (dungeonRoomStates != null) rooms = dungeonRoomStates.size();
+        topLines.add(ChatColor.YELLOW + "Rooms left: " + ChatColor.RESET + rooms);
+
         return topLines;
     }
 
@@ -306,7 +314,7 @@ public class DungeonInstance extends Minigame {
             public void run() {
                 if (darkness < 100) {
                     darkness++;
-                    updateDarknessBoards();
+                    updateDarknessOnBoards();
                     applyDarknessEffects(periodInTicks);
                 }
             }
@@ -317,7 +325,7 @@ public class DungeonInstance extends Minigame {
         this.darknessRunnable.cancel();
     }
 
-    private void updateDarknessBoards() {
+    private void updateDarknessOnBoards() {
         HashMap<Integer, Party> teams = this.getTeams();
 
         for (Integer teamNo : teams.keySet()) {
@@ -327,7 +335,32 @@ public class DungeonInstance extends Minigame {
                 for (int k : board.getRowLines().keySet()) {
                     String s = board.getRowLines().get(k);
                     if (s.contains("Darkness: ")) {
-                        board.setLine("Darkness: " + darkness, k);
+                        board.setLine(ChatColor.DARK_PURPLE + "Darkness: " + ChatColor.RESET + darkness, k);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private void updateRoomsLeftBoards() {
+        int left = dungeonRoomStates.size();
+        for (DungeonRoomState state : dungeonRoomStates.values()) {
+            if (!state.isClear()) {
+                left--;
+            }
+        }
+
+        HashMap<Integer, Party> teams = this.getTeams();
+
+        for (Integer teamNo : teams.keySet()) {
+            Party party = teams.get(teamNo);
+            if (!party.getMembers().isEmpty()) {
+                BoardWithPlayers board = party.getBoard();
+                for (int k : board.getRowLines().keySet()) {
+                    String s = board.getRowLines().get(k);
+                    if (s.contains("Rooms left: ")) {
+                        board.setLine(ChatColor.YELLOW + "Rooms left: " + ChatColor.RESET + left, k);
                         break;
                     }
                 }

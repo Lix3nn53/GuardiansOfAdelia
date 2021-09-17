@@ -936,7 +936,7 @@ public class MyInventoryClickEvent implements Listener {
                     if (guardianData != null) {
                         if (guardianData.hasBazaar()) {
                             Bazaar bazaar = guardianData.getBazaar();
-                            boolean isRemoved = bazaar.removeItem(current);
+                            boolean isRemoved = bazaar.removeItem(current, current.getAmount());
                             if (isRemoved) {
                                 ItemStack itemStack = EconomyUtils.removeShopPrice(current);
                                 InventoryUtils.giveItemToPlayer(player, itemStack);

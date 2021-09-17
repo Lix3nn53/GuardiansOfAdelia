@@ -83,7 +83,7 @@ public class EnchantManager {
         }
 
         if (BoostPremiumManager.isBoostActive(BoostPremium.ENCHANT)) {
-            chance += 0.15;
+            chance = BoostPremium.ENCHANT.applyTo(chance);
         }
 
         return chance;

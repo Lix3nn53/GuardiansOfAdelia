@@ -160,8 +160,8 @@ public class GuardianData {
         return this.bazaarStorage.anyEmpty();
     }
 
-    public void removeFromBazaarStorage(ItemStack itemStack) {
-        this.bazaarStorage.removeItem(itemStack, itemStack.getAmount());
+    public void removeFromBazaarStorage(ItemStack itemStack, int amount) {
+        this.bazaarStorage.removeItem(itemStack, amount);
     }
 
     public void setTeleporting(boolean teleporting) {

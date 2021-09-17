@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -52,7 +53,7 @@ public class WinByMostKills extends Minigame {
     @Override
     public List<String> getScoreboardTopLines() {
         List<String> topLines = new ArrayList<>();
-        topLines.add("Time remaining: " + getTimeLimitInMinutes() * 60);
+        topLines.add(ChatColor.YELLOW + "Time remaining: " + ChatColor.RESET + getTimeLimitInMinutes() * 60);
         int teamAmount = getTeamAmount();
         for (int i = 0; i < teamAmount; i++) {
             topLines.add(getTeamTextColor(i + 1) + "Team" + (i + 1) + " score: " + 0);

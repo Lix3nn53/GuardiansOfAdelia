@@ -71,4 +71,18 @@ public enum BoostPremium {
 
         return 0;
     }
+
+    public double applyTo(double value) {
+        switch (this) {
+            case EXPERIENCE:
+            case LOOT:
+                return value * 1.2; // +20% bonus value
+            case ENCHANT:
+                return value + 0.15; // +15% bonus chance
+            case GATHER:
+                return value / 2; // +50 faster gathering
+        }
+
+        return value;
+    }
 }

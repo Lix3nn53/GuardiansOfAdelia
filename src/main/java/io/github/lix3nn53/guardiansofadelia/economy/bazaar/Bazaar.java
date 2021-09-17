@@ -56,11 +56,11 @@ public class Bazaar {
         return false;
     }
 
-    public boolean removeItem(ItemStack itemStack) {
+    public boolean removeItem(ItemStack itemStack, int amount) {
         if (GuardianDataManager.hasGuardianData(owner)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(owner);
             if (getItemsOnSale().contains(itemStack)) {
-                guardianData.removeFromBazaarStorage(itemStack);
+                guardianData.removeFromBazaarStorage(itemStack, amount);
                 customerGui.removeItem(itemStack, itemStack.getAmount());
                 return true;
             }
@@ -89,10 +89,11 @@ public class Bazaar {
 
                 boolean pay = EconomyUtils.pay(buyer, itemToBuy);
                 if (pay) {
-                    guardianData.removeFromBazaarStorage(itemToBuy);
-                    removeItem(itemToBuy);
+                    guardianData.removeFromBazaarStorage(itemToBuy, 1);
+                    removeItem(itemToBuy, 1);
 
                     ItemStack clone = EconomyUtils.removeShopPrice(itemToBuy);
+                    clone.setAmount(1);
                     InventoryUtils.giveItemToPlayer(buyer, clone);
 
                     int price = EconomyUtils.getItemPrice(itemToBuy);

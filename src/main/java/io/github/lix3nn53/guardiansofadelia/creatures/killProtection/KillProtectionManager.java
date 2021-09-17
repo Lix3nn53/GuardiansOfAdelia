@@ -48,12 +48,16 @@ public class KillProtectionManager {
             List<Player> bestPlayers = playerDamage.getBestPlayers();
             if (bestPlayers.isEmpty()) return;
 
+            //run only once
+            Player once = bestPlayers.get(0);
+            boolean isDungeon = once.getWorld().getName().equalsIgnoreCase("Dungeons");
+
             //drops
             ArrayList<ItemStack> drops = new ArrayList<>();
             int mobLevel = 0;
             if (mythicEvent != null) {
                 mobLevel = (int) (mythicEvent.getMobLevel() + 0.5);
-                List<ItemStack> mobDrops = MobDropGenerator.getDrops(mobLevel);
+                List<ItemStack> mobDrops = MobDropGenerator.getDrops(mobLevel, isDungeon);
                 if (!mobDrops.isEmpty()) {
                     drops.addAll(mobDrops);
                 }
@@ -61,15 +65,14 @@ public class KillProtectionManager {
 
             String internalName = mythicEvent.getMobType().getInternalName();
 
-            //run only once
-            Player once = bestPlayers.get(0);
+
             if (MiniGameManager.isInMinigame(once)) {
                 if (!livingTarget.getType().equals(EntityType.PLAYER)) {
                     MiniGameManager.onMobKill(once, internalName);
                 }
             }
             if (GatheringManager.dropsIngredient(internalName)) {
-                ItemStack ingredient = GatheringManager.triggerIngredientDrop(internalName);
+                ItemStack ingredient = GatheringManager.triggerIngredientDrop(internalName, isDungeon);
                 if (ingredient != null) {
                     drops.add(ingredient);
                 }
@@ -86,7 +89,7 @@ public class KillProtectionManager {
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
                         //exp
-                        int expToGive = getExperience(mobLevel, player.getLevel(), bestPlayers.size());
+                        int expToGive = getExperience(mobLevel, player.getLevel(), bestPlayers.size(), isDungeon);
                         if (CommandAdmin.DEBUG_MODE) once.sendMessage("expToGive: " + expToGive);
                         if (expToGive > 0) {
                             rpgCharacterStats.giveExp(expToGive);
@@ -119,7 +122,7 @@ public class KillProtectionManager {
         }
     }
 
-    private static int getExperience(int mobLevel, int playerLevel, int shareCount) {
+    private static int getExperience(int mobLevel, int playerLevel, int shareCount, boolean isDungeon) {
         if (mobLevel == 0) mobLevel = 1;
 
         int exp = (int) (2 + Math.round(10 * Math.pow(mobLevel, 2) / 16) + 0.5);
@@ -140,6 +143,15 @@ public class KillProtectionManager {
         }
 
         if (exp == 0) exp = 1;
-        return BoostPremiumManager.isBoostActive(BoostPremium.EXPERIENCE) ? exp * 2 : exp;
+
+        if (BoostPremiumManager.isBoostActive(BoostPremium.EXPERIENCE)) {
+            exp = (int) (BoostPremium.EXPERIENCE.applyTo(exp) + 0.5);
+        }
+
+        if (isDungeon) {
+            exp *= 1.2;
+        }
+
+        return exp;
     }
 }

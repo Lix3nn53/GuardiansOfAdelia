@@ -145,7 +145,7 @@ public class GatheringManager {
         int i = random.nextInt(ingredients.size());
         Ingredient ingredient = ingredients.get(i);
 
-        int gather = ingredient.gather();
+        int gather = ingredient.gather(false);
         if (gather == 0) {
             player.sendTitle("", ChatPalette.RED + "Failed...", 30, 80, 30);
             return null;
@@ -197,9 +197,9 @@ public class GatheringManager {
                 final double startPosY = player.getLocation().getY();
                 final double startPosZ = player.getLocation().getZ();
 
-                long period = 20;
+                int period = 16; // ticks to wait between each step
                 if (BoostPremiumManager.isBoostActive(BoostPremium.GATHER)) {
-                    period = period / 2;
+                    period = (int) (BoostPremium.GATHER.applyTo(period) + 0.5);
                 }
 
                 int id = gatheringModelState.getId();
@@ -351,7 +351,7 @@ public class GatheringManager {
         return mobKeyToIngredients.containsKey(mobKey);
     }
 
-    public static ItemStack triggerIngredientDrop(String internalName) {
+    public static ItemStack triggerIngredientDrop(String internalName, boolean isDungeon) {
         if (mobKeyToIngredients.containsKey(internalName)) {
             List<Integer> ingredients = mobKeyToIngredients.get(internalName);
 
@@ -365,7 +365,7 @@ public class GatheringManager {
 
             Ingredient ingredient = ingredientHashMap.get(ingredientNo);
 
-            int gather = ingredient.gather();
+            int gather = ingredient.gather(isDungeon);
 
             if (gather == 0) {
                 return null;

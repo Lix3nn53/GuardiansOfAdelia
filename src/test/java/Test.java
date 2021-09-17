@@ -1,6 +1,8 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.items.enchanting.EnchantManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
+import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException, SQLException {
 
-        int reqLevel = 4;
+        /*int reqLevel = 4;
         double price = Math.max(1, Math.pow(reqLevel, 1.2) / 4);
 
         ItemTier itemTier = ItemTier.COMMON;
@@ -25,7 +27,7 @@ public class Test {
         price = price * EnchantManager.getSellGuiMultiplier(enchantLevel);
 
         System.out.println("price: " + price);
-        System.out.println("price: " + (int) (price + 0.5) * 1);
+        System.out.println("price: " + (int) (price + 0.5) * 1);*/
 
         /*int playerLevel = 2;
         int shareCount = 1;
@@ -167,25 +169,18 @@ public class Test {
 
         System.out.println("result: " + result);*/
 
-        /*int maxStatValue = GearLevel.NINE.getMaxStatValue(true, true);
-        int maxStatValuee = GearLevel.NINE.getMaxStatValue(true, false);
-        System.out.println("max element: " + maxStatValue);
-        System.out.println("max attr: " + maxStatValuee);
-        int minStatValue = GearLevel.NINE.getMinStatValue(true, true);
-        int minStatValue1 = GearLevel.NINE.getMinStatValue(true, false);
-        System.out.println("min element: " + minStatValue);
-        System.out.println("min attr: " + minStatValue1);
-
-        ItemTier tier = ItemTier.LEGENDARY;
-        GearLevel gearLevel = GearLevel.EIGHT;
-        for (int requiredLevel = 0; requiredLevel <= 99; requiredLevel += 10) {
-            System.out.println("NEWWWW");
-            int minNumberOfAttr = 4;
-            int minNumberOfElements = 4;
+        for (GearLevel gearLevel : GearLevel.values()) {
+            System.out.println(gearLevel.toString());
+            int minNumberOfAttr = 0;
+            int minNumberOfElements = 1;
             int minAttrValue = gearLevel.getMinStatValue(true, false);
             int maxAttrValue = gearLevel.getMaxStatValue(true, false);
             int minElemValue = gearLevel.getMinStatValue(true, true);
             int maxElemValue = gearLevel.getMaxStatValue(true, true);
+            System.out.println("min attr: " + minAttrValue);
+            System.out.println("max attr: " + maxAttrValue);
+            System.out.println("min element: " + minElemValue);
+            System.out.println("max element: " + maxElemValue);
 
             StatPassive statPassive = new StatPassive(minAttrValue, maxAttrValue, minNumberOfAttr, minElemValue, maxElemValue, minNumberOfElements);
             // StatPassive statPassive = new StatPassive(15, 100, 2, 50, 250, 3);
@@ -200,7 +195,7 @@ public class Test {
                 if (attributeValue == 0) continue;
                 System.out.println(elementType.name() + ": " + attributeValue);
             }
-        }*/
+        }
         /*for (int requiredLevel = 0; requiredLevel <= 99; requiredLevel += 10) {
             GearLevel gearLevel = GearLevel.getGearLevel(requiredLevel);
             System.out.println("requiredLevel: " + requiredLevel + "GearLevel: " + gearLevel);
