@@ -20,7 +20,6 @@ import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,25 +35,10 @@ import java.util.List;
 
 public class MyPlayerInteractEntityEvent implements Listener {
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-    public void onEventNormal(PlayerInteractEntityEvent event) {
-        Entity rightClicked = event.getRightClicked();
-        EntityType type = rightClicked.getType();
-
-        if (type.equals(EntityType.VILLAGER)) {
-            NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
-            if (!npcRegistry.isNPC(rightClicked)) {
-                event.setCancelled(true);
-            }
-        } else if (type.equals(EntityType.ARMOR_STAND)) {
-            event.setCancelled(true);
-        } else if (type.equals(EntityType.ITEM_FRAME)) {
-            event.setCancelled(true);
-        }
-    }
-
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
     public void onEvent(PlayerInteractEntityEvent event) {
+        event.setCancelled(true);
+
         if (!event.getHand().equals(EquipmentSlot.HAND)) {
             return;
         }
