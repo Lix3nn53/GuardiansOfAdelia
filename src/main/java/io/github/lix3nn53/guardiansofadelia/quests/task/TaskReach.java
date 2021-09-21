@@ -129,4 +129,8 @@ public final class TaskReach implements Task {
 
         return ChatPalette.RED;
     }
+
+    public Location getBlockLoc() {
+        return blockLoc;
+    }
 }

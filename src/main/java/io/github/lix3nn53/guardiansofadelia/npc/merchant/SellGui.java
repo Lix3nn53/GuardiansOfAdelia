@@ -47,12 +47,12 @@ public class SellGui extends GuiGeneric {
         setItem(50, goldGlass);
 
         ItemStack silverGlass = new ItemStack(Material.GOLD_INGOT);
-        itemMeta.setDisplayName(ChatPalette.WHITE + "Silver value: " + ChatPalette.WHITE + "0");
+        itemMeta.setDisplayName(ChatPalette.GRAY + "Silver value: " + ChatPalette.WHITE + "0");
         silverGlass.setItemMeta(itemMeta);
         setItem(49, silverGlass);
 
         ItemStack bronzeGlass = new ItemStack(Material.IRON_INGOT);
-        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Bronze value: " + ChatPalette.WHITE + "0");
+        itemMeta.setDisplayName(ChatPalette.BROWN + "Bronze value: " + ChatPalette.WHITE + "0");
         bronzeGlass.setItemMeta(itemMeta);
         setItem(48, bronzeGlass);
     }
@@ -78,19 +78,19 @@ public class SellGui extends GuiGeneric {
             setItem(50, gold);
 
             ItemStack silver = new ItemStack(Material.GOLD_INGOT);
-            itemMeta.setDisplayName(ChatPalette.WHITE + "Silver value: " + ChatPalette.WHITE + "0");
+            itemMeta.setDisplayName(ChatPalette.GRAY + "Silver value: " + ChatPalette.WHITE + "0");
             if (coins[1] > 0) {
                 silver.setAmount(coins[1]);
-                itemMeta.setDisplayName(ChatPalette.WHITE + "Silver value: " + ChatPalette.WHITE + coins[1]);
+                itemMeta.setDisplayName(ChatPalette.GRAY + "Silver value: " + ChatPalette.WHITE + coins[1]);
             }
             silver.setItemMeta(itemMeta);
             setItem(49, silver);
 
             ItemStack bronze = new ItemStack(Material.IRON_INGOT);
-            itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Bronze value:  " + ChatPalette.WHITE + "0");
+            itemMeta.setDisplayName(ChatPalette.BROWN + "Bronze value:  " + ChatPalette.WHITE + "0");
             if (coins[0] > 0) {
                 bronze.setAmount(coins[0]);
-                itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Bronze value: " + ChatPalette.WHITE + coins[0]);
+                itemMeta.setDisplayName(ChatPalette.BROWN + "Bronze value: " + ChatPalette.WHITE + coins[0]);
             }
             bronze.setItemMeta(itemMeta);
             setItem(48, bronze);

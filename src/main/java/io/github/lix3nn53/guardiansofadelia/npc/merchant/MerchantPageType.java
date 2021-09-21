@@ -96,22 +96,22 @@ public enum MerchantPageType {
 
         ItemStack silverToBronze = new ItemStack(Material.IRON_INGOT, 64);
         ItemMeta itemMeta = silverToBronze.getItemMeta();
-        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Bronze Coin");
+        itemMeta.setDisplayName(ChatPalette.BROWN + "Bronze Coin");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatPalette.GREEN_DARK + "64 Bronze = " + ChatPalette.WHITE + "1 Silver");
-        lore.add(ChatPalette.WHITE + "64 Silver = " + ChatPalette.YELLOW + "1 Gold");
+        lore.add(ChatPalette.BROWN + "64 Bronze = " + ChatPalette.GRAY + "1 Silver");
+        lore.add(ChatPalette.GRAY + "64 Silver = " + ChatPalette.GOLD + "1 Gold");
         itemMeta.setLore(lore);
         silverToBronze.setItemMeta(itemMeta);
         guiGeneric.setItem(0, silverToBronze);
 
         ItemStack bronzeToSilver = new ItemStack(Material.GOLD_INGOT, 1);
-        itemMeta.setDisplayName(ChatPalette.WHITE + "Silver Coin");
+        itemMeta.setDisplayName(ChatPalette.GRAY + "Silver Coin");
         bronzeToSilver.setItemMeta(itemMeta);
         guiGeneric.setItem(9, bronzeToSilver);
 
         ItemStack goldToSilver = new ItemStack(Material.GOLD_INGOT, 64);
-        itemMeta.setDisplayName(ChatPalette.WHITE + "Silver Coin");
+        itemMeta.setDisplayName(ChatPalette.GRAY + "Silver Coin");
         goldToSilver.setItemMeta(itemMeta);
         guiGeneric.setItem(10, goldToSilver);
 

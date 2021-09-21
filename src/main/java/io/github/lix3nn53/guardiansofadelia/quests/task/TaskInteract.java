@@ -126,4 +126,8 @@ public final class TaskInteract implements Task {
 
         return ChatPalette.RED;
     }
+
+    public int getNpcId() {
+        return npcId;
+    }
 }

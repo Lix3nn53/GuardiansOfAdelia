@@ -19,6 +19,11 @@ import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
+import io.github.lix3nn53.guardiansofadelia.quests.task.TaskInteract;
+import io.github.lix3nn53.guardiansofadelia.quests.task.TaskReach;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.CharacterInfoSlot;
@@ -30,6 +35,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -122,7 +128,7 @@ public class MenuList {
 
         ItemStack activeBoosts = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(28);
-        itemMeta.setDisplayName(ChatPalette.YELLOW + "Server Boosts");
+        itemMeta.setDisplayName(ChatPalette.GOLD + "Server Boosts");
         lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatPalette.GRAY + "See if the server boost are active or not");
@@ -673,7 +679,7 @@ public class MenuList {
         lore.add("Click to select a town as your compass target.");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
-        guiGeneric.setItem(11, itemStack);
+        guiGeneric.setItem(12, itemStack);
 
         itemStack = new ItemStack(Material.PURPLE_WOOL);
         itemStack.getItemMeta();
@@ -683,7 +689,7 @@ public class MenuList {
         lore.add("Click to select a dungeon gate as your compass target.");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
-        guiGeneric.setItem(13, itemStack);
+        guiGeneric.setItem(14, itemStack);
 
         itemStack = new ItemStack(Material.LIME_WOOL);
         itemStack.getItemMeta();
@@ -693,7 +699,18 @@ public class MenuList {
         lore.add("Click to select a NPC as your compass target.");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
-        guiGeneric.setItem(15, itemStack);
+        guiGeneric.setItem(16, itemStack);
+
+        itemStack = new ItemStack(Material.MAGENTA_WOOL);
+        itemStack.getItemMeta();
+        itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + "Active Quests");
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add("Click to select a npc relevant to your...");
+        lore.add("...active quests your compass target.");
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
+        guiGeneric.setItem(10, itemStack);
 
         return guiGeneric;
     }
@@ -771,6 +788,76 @@ public class MenuList {
         }
 
         return guiBookGeneric;
+    }
+
+    public static GuiBookGeneric compassActiveQuests(GuardianData guardianData) {
+        GuiBookGeneric guiBookGeneric = new GuiBookGeneric(ChatPalette.GRAY_DARK + "Compass Active Quests", 0);
+
+        RPGCharacter character = guardianData.getActiveCharacter();
+        List<Quest> questList = character.getQuestList();
+
+
+        for (Quest quest : questList) {
+            int questID = quest.getQuestID();
+            int whoCanGiveThisQuest = QuestNPCManager.getWhoCanGiveThisQuest(questID);
+            ItemStack itemStack = compassNpcItem(whoCanGiveThisQuest);
+            guiBookGeneric.addToFirstAvailableWord(itemStack);
+            int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(questID);
+            itemStack = compassNpcItem(whoCanCompleteThisQuest);
+            guiBookGeneric.addToFirstAvailableWord(itemStack);
+
+            List<Task> tasks = quest.getTasks();
+            for (Task task : tasks) {
+                if (task instanceof TaskInteract) {
+                    TaskInteract taskInteract = (TaskInteract) task;
+                    int npcId = taskInteract.getNpcId();
+
+                    itemStack = compassNpcItem(npcId);
+                    guiBookGeneric.addToFirstAvailableWord(itemStack);
+                } else if (task instanceof TaskReach) {
+                    TaskReach taskReach = (TaskReach) task;
+                    Location loc = taskReach.getBlockLoc();
+
+                    itemStack = new ItemStack(Material.MAGENTA_WOOL);
+                    ItemMeta itemMeta = itemStack.getItemMeta();
+                    ArrayList<String> lore = new ArrayList<>();
+                    lore.add("");
+                    lore.add(ChatPalette.GRAY + "Click to select your compass target!");
+                    lore.add("");
+                    lore.add(ChatPalette.GRAY + "If you dont have a compass this will give you one.");
+                    itemMeta.setLore(lore);
+
+                    itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + "Quest-" + questID + "Reach Loc" + " #" + loc.getWorld().getName() + "-" + loc.getX() + "-" + loc.getY() + "-" + loc.getZ());
+                    itemStack.setItemMeta(itemMeta);
+
+                    guiBookGeneric.addToFirstAvailableWord(itemStack);
+                }
+            }
+        }
+
+        return guiBookGeneric;
+    }
+
+    private static ItemStack compassNpcItem(int npcId) {
+        NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
+
+        NPC byId = npcRegistry.getById(npcId);
+
+        if (byId == null) return null;
+
+        ItemStack itemStack = new ItemStack(Material.LIME_WOOL);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatPalette.GRAY + "Click to select your compass target!");
+        lore.add("");
+        lore.add(ChatPalette.GRAY + "If you dont have a compass this will give you one.");
+        itemMeta.setLore(lore);
+
+        itemMeta.setDisplayName(ChatPalette.GREEN + byId.getName() + " #" + npcId);
+        itemStack.setItemMeta(itemMeta);
+
+        return itemStack;
     }
 
     public static GuiGeneric guild() {

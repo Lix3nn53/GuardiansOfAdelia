@@ -103,9 +103,9 @@ public class EconomyUtils {
             payed2 = true;
         }
         if (payed && payed1 && payed2) {
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.IRON_INGOT, coins[1]);
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.GOLD_INGOT, coins[2]);
-            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.DIAMOND, coins[3]);
+            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.IRON_INGOT, coins[0]);
+            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.GOLD_INGOT, coins[1]);
+            InventoryUtils.removeMaterialFromInventory(player.getInventory(), Material.DIAMOND, coins[2]);
             return true;
         }
         return false;

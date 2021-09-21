@@ -485,7 +485,7 @@ public class MyInventoryClickEvent implements Listener {
                 } else if (currentName.equals(ChatPalette.GREEN_DARK + "Stat Points")) {
                     GuiGeneric statPoints = MenuList.statPoints(player);
                     statPoints.openInventory(player);
-                } else if (currentName.equals(ChatPalette.GOLD + "Crafting")) {
+                } else if (currentName.equals(ChatPalette.YELLOW + "Crafting")) {
                     GuiGeneric crafting = MenuList.crafting(player);
                     crafting.openInventory(player);
                 } else if (currentName.equals(ChatPalette.BLUE_LIGHT + "Chat Tag")) {
@@ -714,6 +714,25 @@ public class MyInventoryClickEvent implements Listener {
                 int i = Integer.parseInt(split[1]);
                 CompassManager.setCompassItemNPC(player, i);
                 player.closeInventory();
+            } else if (title.contains("Active Quests")) {
+                if (currentType.equals(Material.LIME_WOOL)) {
+                    String displayName = itemMeta.getDisplayName();
+                    String[] split = displayName.split("#");
+                    int i = Integer.parseInt(split[1]);
+                    CompassManager.setCompassItemNPC(player, i);
+                    player.closeInventory();
+                } else if (currentType.equals(Material.MAGENTA_WOOL)) {
+                    String displayName = itemMeta.getDisplayName();
+                    String[] split = displayName.split("#");
+
+                    String[] splitSecond = split[1].split("-");
+
+                    Location location = new Location(Bukkit.getWorld(splitSecond[0]), Double.parseDouble(splitSecond[1]),
+                            Double.parseDouble(splitSecond[2]), Double.parseDouble(splitSecond[3]));
+
+                    CompassManager.setCompassItemLocation(player, split[0], location);
+                    player.closeInventory();
+                }
             } else {
                 if (currentType.equals(Material.LIGHT_BLUE_WOOL)) { //towns
                     GuiBookGeneric guiBookGeneric = MenuList.compassTowns();
@@ -723,6 +742,9 @@ public class MyInventoryClickEvent implements Listener {
                     guiBookGeneric.openInventory(player);
                 } else if (currentType.equals(Material.LIME_WOOL)) { //npcs
                     GuiBookGeneric guiBookGeneric = MenuList.compassNPCs();
+                    guiBookGeneric.openInventory(player);
+                } else if (currentType.equals(Material.MAGENTA_WOOL)) { //quests
+                    GuiBookGeneric guiBookGeneric = MenuList.compassActiveQuests(guardianData);
                     guiBookGeneric.openInventory(player);
                 }
             }
@@ -828,7 +850,7 @@ public class MyInventoryClickEvent implements Listener {
                     }
                 }
             }
-        } else if (title.equals(ChatPalette.GOLD + "Crafting")) {
+        } else if (title.equals(ChatPalette.YELLOW + "Crafting")) {
             //TODO Do we need click listeners in crafting info menu?
         } else if (title.equals(ChatPalette.GRAY_DARK + "Guild")) {
             if (clickedInventory.getType().equals(InventoryType.CHEST)) {

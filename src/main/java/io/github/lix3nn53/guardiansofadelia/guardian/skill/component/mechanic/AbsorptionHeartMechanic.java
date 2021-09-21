@@ -89,18 +89,18 @@ public class AbsorptionHeartMechanic extends MechanicComponent {
 
         if (!heartAmountList.isEmpty()) {
             if (skillLevel == 0) {
-                String lore = ChatPalette.GREEN_DARK + "Golden Heart: +" + heartAmountList.get(skillLevel) + "[Max " + maxHeartList.get(skillLevel) + "]";
+                String lore = ChatPalette.GOLD + "Golden Heart: +" + heartAmountList.get(skillLevel) + "[Max " + maxHeartList.get(skillLevel) + "]";
 
                 additions.add(lore);
             } else if (skillLevel == heartAmountList.size()) {
-                String lore = ChatPalette.GREEN_DARK + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
+                String lore = ChatPalette.GOLD + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
 
                 additions.add(lore);
             } else {
-                String lore1 = ChatPalette.GREEN_DARK + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
+                String lore1 = ChatPalette.GOLD + "Golden Heart: +" + heartAmountList.get(skillLevel - 1) + "[Max " + maxHeartList.get(skillLevel - 1) + "]";
                 String lore2 = heartAmountList.get(skillLevel) + "[Max " + maxHeartList.get(skillLevel) + "]";
 
-                additions.add(ChatPalette.GREEN_DARK + lore1 + " -> " + lore2);
+                additions.add(ChatPalette.GOLD + lore1 + " -> " + lore2);
             }
         }
 
