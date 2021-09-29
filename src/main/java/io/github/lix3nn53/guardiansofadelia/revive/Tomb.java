@@ -22,7 +22,6 @@ public class Tomb {
         this.baseLocation = deathLocation.clone();
         this.baseLocation.setYaw(0f);
         this.baseLocation.setPitch(0f);
-        createModel();
     }
 
     public void createModel() {
@@ -43,7 +42,7 @@ public class Tomb {
     }
 
     public void remove() {
-        this.tombModel.remove();
+        if (this.tombModel != null) this.tombModel.remove();
         TombManager.onTombRemove(this);
     }
 

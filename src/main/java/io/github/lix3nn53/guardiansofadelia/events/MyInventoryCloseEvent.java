@@ -49,7 +49,7 @@ public class MyInventoryCloseEvent implements Listener {
                 } else {
                     String title = event.getView().getTitle();
                     if (title.equals(ChatPalette.BLUE_LIGHT + "Revive Gui")) {
-                        TombManager.cancelSearch(player);
+                        TombManager.closeTombGui(player);
                     }
                     if (title.equals(ChatPalette.YELLOW + "Set Daily Rewards")) {
                         ItemStack[] contents = event.getInventory().getContents();

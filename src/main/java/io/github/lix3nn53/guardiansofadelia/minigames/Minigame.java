@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.minigames;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
@@ -703,6 +704,7 @@ public abstract class Minigame {
                                 }
                                 player.setGameMode(GameMode.ADVENTURE);
                                 player.teleport(respawnLocation);
+                                PetManager.onEggEquip(player);
                                 break;
                             }
                         }
