@@ -1,0 +1,94 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#                 Town Information               #
+# ---------------------------------------------- #
+
+skill1:
+  key: "HealOne"
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "FlagCondition"
+      key: "activated"
+      isSet: false
+      child1:
+        componentType: "AreaTarget"
+        allies: true
+        enemy: true
+        self: false
+        max: 20
+        radiusList:
+          - 8
+        amountList:
+          - 24
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 10040319
+          dustSize: 4
+        child1:
+          componentType: "EntityTypeCondition"
+          entityType: "PLAYER"
+          child1:
+            componentType: "SelfTarget"
+            child1:
+              componentType: "FlagSetMechanic"
+              key: "activated"
+              isUnique: false
+              ticks:
+                - 200
+          child2:
+            componentType: "HealMechanic"
+            healPercentList:
+              - 0.05
+              - 0.1
+              - 0.15
+              - 0.2
+            addLore: false
+skill2:
+  key: "SlimeOne"
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "FlagCondition"
+      key: "activated"
+      isSet: false
+      child1:
+        componentType: "AreaTarget"
+        allies: true
+        enemy: true
+        self: false
+        max: 20
+        radiusList:
+          - 4
+        amountList:
+          - 24
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 3407667
+          dustSize: 4
+        child1:
+          componentType: "EntityTypeCondition"
+          entityType: "PLAYER"
+          child1:
+            componentType: "SelfTarget"
+            child1:
+              componentType: "FlagSetMechanic"
+              key: "activated"
+              isUnique: false
+              ticks:
+                - 200
+          child2:
+            componentType: "StatusEffectMechanic"
+            statusEffectTypes:
+              - "ROOT"
+            durations:
+              - 50
+          child3:
+            componentType: "PotionEffectMechanic"
+            potionEffectType:
+              - "POISON"
+            tickList:
+              - 120
+            amplifierList:
+              - 1
