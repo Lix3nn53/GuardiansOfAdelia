@@ -60,6 +60,30 @@ theme1:
         x2: -74.0
         y2: 0.5
         z2: 8.0
+    skillOnGround1:
+      loc:
+        x: -41.5
+        y: -8.5
+        z: -16.5
+      name: "Test"
+      period: 5
+      skillKey: "SlimeOne"
+    skillOnGround2:
+      loc:
+        x: -40.5
+        y: -8.5
+        z: 17.5
+      name: "Test"
+      period: 5
+      skillKey: "SlimeOne"
+    skillOnGround3:
+      loc:
+        x: -31.5
+        y: -8.5
+        z: -0.5
+      name: "Test"
+      period: 5
+      skillKey: "SlimeOne"
   room2:
     door1:
       material: IRON_BARS

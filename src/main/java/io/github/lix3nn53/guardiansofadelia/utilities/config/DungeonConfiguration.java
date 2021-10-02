@@ -128,7 +128,7 @@ public class DungeonConfiguration {
 
                     Vector vector = new Vector(x, y, z);
 
-                    ConfigurationSection skillSection = section.getConfigurationSection("room" + roomIndex + ".skillOnGround" + skillIndex + ".skill");
+                    ConfigurationSection skillSection = section.getConfigurationSection("room" + roomIndex + ".skillOnGround" + skillIndex);
                     SkillOnGround skillOnGround = new SkillOnGround(skillSection);
                     SkillOnGroundWithOffset skillOnGroundWithOffset = new SkillOnGroundWithOffset(skillOnGround, vector);
 

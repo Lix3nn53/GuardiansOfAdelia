@@ -1,10 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +22,9 @@ public class DungeonRoom {
      * Rooms to start after this room ends
      */
     private final List<Integer> nextRooms;
+
+    // State
+    BukkitTask secureSpawnRunner;
 
     public DungeonRoom(List<DungeonRoomDoor> doors, HashMap<Integer, List<DungeonRoomSpawner>> waveToSpawners,
                        List<SkillOnGroundWithOffset> skillsOnGround, List<Integer> nextRooms) {
@@ -40,14 +46,17 @@ public class DungeonRoom {
         }
 
         List<DungeonRoomSpawner> spawners = waveToSpawners.get(1);
-        for (DungeonRoomSpawner spawner : spawners) {
-            List<Entity> spawned = spawner.spawn(dungeonStart);
+        for (int i = 0; i < spawners.size(); i++) {
+            DungeonRoomSpawner spawner = spawners.get(i);
+            List<Entity> spawned = spawner.spawn(dungeonStart, i);
             state.onMobSpawn(spawned.size());
         }
 
         for (SkillOnGroundWithOffset skillOnGround : skillsOnGround) {
             skillOnGround.activate(dungeonStart, 40L);
         }
+
+        startSecureSpawnRunner(state, dungeonStart);
     }
 
     /**
@@ -87,14 +96,17 @@ public class DungeonRoom {
 
                 spawners = waveToSpawners.get(currentWave);
 
-                for (DungeonRoomSpawner spawner : spawners) {
-                    List<Entity> spawned = spawner.spawn(dungeonStart);
+                for (int i = 0; i < spawners.size(); i++) {
+                    DungeonRoomSpawner spawner = spawners.get(i);
+                    List<Entity> spawned = spawner.spawn(dungeonStart, i);
                     state.onMobSpawn(spawned.size());
                 }
             } else {
                 for (Player player : players) {
                     player.sendMessage(ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " completed!");
                 }
+
+                stopSecureSpawnRunner();
 
                 return true;
             }
@@ -146,5 +158,25 @@ public class DungeonRoom {
 
     public List<SkillOnGroundWithOffset> getSkillsOnGround() {
         return skillsOnGround;
+    }
+
+    private void startSecureSpawnRunner(DungeonRoomState state, Location dungeonStart) {
+        secureSpawnRunner = new BukkitRunnable() {
+            @Override
+            public void run() {
+                int currentWave = state.getCurrentWave();
+
+                List<DungeonRoomSpawner> spawners = waveToSpawners.get(currentWave);
+                for (int i = 0; i < spawners.size(); i++) {
+                    DungeonRoomSpawner spawner = spawners.get(i);
+
+                    spawner.secureSpawn(dungeonStart, i);
+                }
+            }
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20 * 15L, 20 * 15L);
+    }
+
+    private void stopSecureSpawnRunner() {
+        secureSpawnRunner.cancel();
     }
 }

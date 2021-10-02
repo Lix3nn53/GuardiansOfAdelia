@@ -5,7 +5,7 @@
 # ---------------------------------------------- #
 
 tier: 3
-color: "DARK_GREEN"
+color: "GREEN_DARK"
 mainElement: "EARTH"
 description:
   - "Their hunting techniques"

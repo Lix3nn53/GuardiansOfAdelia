@@ -46,6 +46,7 @@ public class ConfigManager {
         TeleportPortalsConfiguration.createConfig();
         TeleportGuiConfiguration.createConfig();
         DatabaseConfiguration.createConfigs();
+        SkillOnGroundConfigurations.createConfigs();
         DungeonConfiguration.createConfigs();
         ItemArmorSetConfigurations.createConfigs();
         ItemPassiveSetConfigurations.createConfigs();
@@ -57,7 +58,6 @@ public class ConfigManager {
         LootChestConfiguration.createConfigs();
         GearSetConfiguration.createConfigs();
         MobConfigurations.createConfigs();
-        SkillOnGroundConfigurations.createConfigs();
     }
 
     public static void loadConfigALL() {
@@ -71,6 +71,7 @@ public class ConfigManager {
         TeleportGuiConfiguration.loadConfig();
         loadHologramsConfig();
         DatabaseConfiguration.loadConfigs();
+        SkillOnGroundConfigurations.loadConfigs();
         DungeonConfiguration.loadConfigs();
         ItemArmorSetConfigurations.loadConfigs();
         ItemPassiveSetConfigurations.loadConfigs();
@@ -82,7 +83,6 @@ public class ConfigManager {
         LootChestConfiguration.loadConfigs();
         GearSetConfiguration.loadConfig();
         MobConfigurations.loadConfigs();
-        SkillOnGroundConfigurations.loadConfigs();
     }
 
     public static void writeConfigALL() {

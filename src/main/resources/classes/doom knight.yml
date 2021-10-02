@@ -5,7 +5,7 @@
 # ---------------------------------------------- #
 
 tier: 3
-color: "DARK_PURPLE"
+color: "PURPLE"
 mainElement: "LIGHTNING"
 description:
   - "Todo"

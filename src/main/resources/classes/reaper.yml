@@ -5,7 +5,7 @@
 # ---------------------------------------------- #
 
 tier: 3
-color: "BLUE"
+color: "BLUE_DARKER"
 mainElement: "LIGHTNING"
 description:
   - "Due to their incredible speed and agility,"

@@ -5,7 +5,7 @@
 # ---------------------------------------------- #
 
 tier: 3
-color: "BLUE"
+color: "BLUE_LIGHT"
 mainElement: "WATER"
 description:
   - "Todo"

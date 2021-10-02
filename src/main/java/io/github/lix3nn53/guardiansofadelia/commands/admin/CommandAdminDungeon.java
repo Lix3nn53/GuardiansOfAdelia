@@ -18,6 +18,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomDo
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomSpawner;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.DungeonConfiguration;
+import io.github.lix3nn53.guardiansofadelia.utilities.config.SkillOnGroundConfigurations;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -58,6 +59,8 @@ public class CommandAdminDungeon implements CommandExecutor {
             } else if (args[0].equals("reload")) {
                 MiniGameManager.clearDungeonData();
 
+                SkillOnGroundConfigurations.createConfigs();
+                SkillOnGroundConfigurations.loadConfigs();
                 DungeonConfiguration.createConfigs();
                 DungeonConfiguration.loadConfigs();
             } else if (args[0].equals("save")) {
@@ -191,7 +194,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         Vector offset = start.toVector().subtract(add.toVector()).multiply(-1);
 
                         SelfTarget selfTarget = new SelfTarget();
-                        SkillOnGround skillOnGround = new SkillOnGround("command", 400, selfTarget);
+                        SkillOnGround skillOnGround = new SkillOnGround("skillOnGroundDungeon", 400, selfTarget);
                         SkillOnGroundWithOffset skillOnGroundWithOffset = new SkillOnGroundWithOffset(skillOnGround, offset);
 
                         DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);

@@ -3,8 +3,6 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.onground;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.config.SkillComponentLoader;
-import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigurationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -36,7 +34,7 @@ public class SkillOnGround {
         cooldowns.add(0);
         List<String> description = new ArrayList<>();
 
-        Skill skill = new Skill("trapskill", 1, Material.IRON_HOE, 1, description,
+        Skill skill = new Skill("skillOnGround", 1, Material.IRON_HOE, 1, description,
                 new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), cooldowns);
 
         for (SkillComponent trigger : triggerComponents) {
@@ -50,23 +48,9 @@ public class SkillOnGround {
         this.name = configurationSection.contains("name") ? configurationSection.getString("name") : null;
         this.period = configurationSection.getLong("period");
 
-        ArrayList<Integer> cooldowns = new ArrayList<>();
-        cooldowns.add(0);
-        List<String> description = new ArrayList<>();
+        String skillKey = configurationSection.getString("skillKey");
 
-        Skill skill = new Skill("trapskill", 1, Material.IRON_HOE, 1, description,
-                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), cooldowns);
-
-        SkillComponent triggerComponent = SkillComponentLoader.loadSection(configurationSection.getConfigurationSection("trigger"));
-        skill.addTrigger(triggerComponent);
-
-        int triggerCount = ConfigurationUtils.getChildComponentCount(configurationSection, "trigger");
-        for (int t = 1; t <= triggerCount; t++) {
-            SkillComponent triggerComponentExtra = SkillComponentLoader.loadSection(configurationSection.getConfigurationSection("trigger" + t));
-            skill.addTrigger(triggerComponentExtra);
-        }
-
-        this.skill = skill;
+        this.skill = SkillListForGround.getSkill(skillKey);
     }
 
     public void activate(Location location, long delay) {
