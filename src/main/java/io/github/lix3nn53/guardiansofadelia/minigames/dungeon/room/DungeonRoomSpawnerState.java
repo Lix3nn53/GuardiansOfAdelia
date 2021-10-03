@@ -44,4 +44,8 @@ public class DungeonRoomSpawnerState {
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20 * 15L, 20 * 15L);
     }
+
+    public void stopSecureSpawnerRunner() {
+        secureSpawnRunner.cancel();
+    }
 }

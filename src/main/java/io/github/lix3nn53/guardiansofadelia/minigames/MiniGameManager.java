@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -198,11 +199,11 @@ public class MiniGameManager {
         return false;
     }
 
-    public static void onMobKill(Player player, String internalName) {
+    public static void onMobKill(Player player, String internalName, Entity mob) {
         if (playerToMinigame.containsKey(player)) {
             if (playerToMinigame.get(player) instanceof DungeonInstance) {
                 DungeonInstance dungeonInstance = (DungeonInstance) playerToMinigame.get(player);
-                dungeonInstance.onMobKill(internalName);
+                dungeonInstance.onMobKill(internalName, mob);
             }
         }
     }

@@ -65,10 +65,9 @@ public class KillProtectionManager {
 
             String internalName = mythicEvent.getMobType().getInternalName();
 
-
             if (MiniGameManager.isInMinigame(once)) {
                 if (!livingTarget.getType().equals(EntityType.PLAYER)) {
-                    MiniGameManager.onMobKill(once, internalName);
+                    MiniGameManager.onMobKill(once, internalName, mythicEvent.getEntity());
                 }
             }
             if (GatheringManager.dropsIngredient(internalName)) {

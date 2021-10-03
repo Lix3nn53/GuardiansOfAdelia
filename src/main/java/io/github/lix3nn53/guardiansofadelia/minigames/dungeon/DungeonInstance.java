@@ -21,6 +21,7 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -184,7 +185,7 @@ public class DungeonInstance extends Minigame {
         endDarknessRunnable();
     }
 
-    public void onMobKill(String internalName) {
+    public void onMobKill(String internalName, Entity mob) {
         if (isInGame()) {
             if (theme.getBossInternalName().equals(internalName)) {
                 addScore(1, 1);
@@ -193,7 +194,8 @@ public class DungeonInstance extends Minigame {
                 for (int roomNo : activeRooms) {
                     DungeonRoom room = theme.getDungeonRoom(roomNo);
 
-                    room.onRoomEnd(this.getStartLocation(1));
+                    HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomNo);
+                    room.onRoomEnd(this.getStartLocation(1), wavesToSpawnerStates);
                 }
 
                 this.activeRooms.clear();
@@ -204,10 +206,10 @@ public class DungeonInstance extends Minigame {
                     DungeonRoomState roomState = roomNoToRoomState.get(roomNo);
 
                     HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomNo);
-                    boolean roomDone = room.onMobKill(roomState, wavesToSpawnerStates, getPlayersInGame(), roomNo, internalName, getStartLocation(1));
+                    boolean roomDone = room.onMobKill(roomState, wavesToSpawnerStates, getPlayersInGame(), roomNo, mob, getStartLocation(1));
 
                     if (roomDone) {
-                        List<Integer> nextRooms = room.onRoomEnd(this.getStartLocation(1));
+                        List<Integer> nextRooms = room.onRoomEnd(this.getStartLocation(1), wavesToSpawnerStates);
 
                         for (int nextRoomNo : nextRooms) {
                             DungeonRoom nextRoom = theme.getDungeonRoom(nextRoomNo);

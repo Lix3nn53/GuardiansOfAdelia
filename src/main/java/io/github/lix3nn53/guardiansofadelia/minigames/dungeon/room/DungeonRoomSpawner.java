@@ -112,4 +112,10 @@ public class DungeonRoomSpawner {
     public Vector getOffset() {
         return offset;
     }
+
+    public boolean thisSpawnersMob(Entity entity, int spawnerIndex) {
+        if (!PersistentDataContainerUtil.hasInteger(entity, "spawnerIndex")) return false;
+
+        return PersistentDataContainerUtil.getInteger(entity, "spawnerIndex") == spawnerIndex;
+    }
 }

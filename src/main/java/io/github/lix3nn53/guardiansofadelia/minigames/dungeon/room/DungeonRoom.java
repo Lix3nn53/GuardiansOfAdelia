@@ -63,18 +63,18 @@ public class DungeonRoom {
      * @param roomNo
      * @return true if room completed, false otherwise
      */
-    public boolean onMobKill(DungeonRoomState roomState, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates, List<Player> players, int roomNo, String mobCode, Location dungeonStart) {
+    public boolean onMobKill(DungeonRoomState roomState, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates, List<Player> players, int roomNo, Entity mob, Location dungeonStart) {
         boolean thisRoomsMob = false;
 
         int currentWave = roomState.getCurrentWave();
 
         List<DungeonRoomSpawner> spawners = waveToSpawners.get(currentWave);
         List<DungeonRoomSpawnerState> spawnerStates = wavesToSpawnerStates.get(currentWave); // get spawner states of current wave
-        for (int i = 0; i < spawners.size(); i++) {
-            DungeonRoomSpawner spawner = spawners.get(i);
-            String spawnerMobCode = spawner.getMobCode();
-            if (spawnerMobCode.equals(mobCode)) {
-                DungeonRoomSpawnerState spawnerState = spawnerStates.get(i);
+        for (int spawnerIndex = 0; spawnerIndex < spawners.size(); spawnerIndex++) {
+            DungeonRoomSpawner spawner = spawners.get(spawnerIndex);
+
+            if (spawner.thisSpawnersMob(mob, spawnerIndex)) {
+                DungeonRoomSpawnerState spawnerState = spawnerStates.get(spawnerIndex);
                 spawnerState.onMobKill(1);
                 thisRoomsMob = true;
                 break;
@@ -95,7 +95,7 @@ public class DungeonRoom {
 
                 for (Player player : players) {
                     player.sendMessage(ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " WAVE-" + currentWave + " incoming!");
-                    player.sendTitle(ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " WAVE-" + currentWave, ChatPalette.RED + "...incoming!", 15, 40, 15);
+                    player.sendTitle("", ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " WAVE-" + currentWave + " incoming!", 15, 40, 15);
                 }
 
                 List<DungeonRoomSpawner> newSpawners = waveToSpawners.get(currentWave);
@@ -119,7 +119,7 @@ public class DungeonRoom {
             } else {
                 for (Player player : players) {
                     player.sendMessage(ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " completed!");
-                    player.sendTitle(ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo, ChatPalette.GREEN_LIGHT + "Completed!", 15, 40, 15);
+                    player.sendTitle("", ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " completed!", 15, 40, 15);
                 }
 
                 return true;
@@ -129,12 +129,18 @@ public class DungeonRoom {
         return false;
     }
 
-    public List<Integer> onRoomEnd(Location dungeonStart) {
+    public List<Integer> onRoomEnd(Location dungeonStart, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates) {
         for (DungeonRoomDoor door : doors) {
             door.open(dungeonStart);
         }
         for (SkillOnGroundWithOffset skillOnGround : skillsOnGround) {
             skillOnGround.deactivate();
+        }
+
+        for (List<DungeonRoomSpawnerState> spawnerStates : wavesToSpawnerStates.values()) {
+            for (DungeonRoomSpawnerState spawnerState : spawnerStates) {
+                spawnerState.stopSecureSpawnerRunner();
+            }
         }
 
         return nextRooms;
