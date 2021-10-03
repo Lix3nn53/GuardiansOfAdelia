@@ -377,12 +377,12 @@ public class DungeonInstance extends Minigame {
     }
 
     private void updateRoomsLeftBoards() {
-        int left = roomToWavesToSpawnerStates.size();
+        int left = roomNoToRoomState.size();
 
-        for (int roomKey : roomToWavesToSpawnerStates.keySet()) {
-            HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomKey);
+        for (int roomKey : roomNoToRoomState.keySet()) {
+            DungeonRoomState state = roomNoToRoomState.get(roomKey);
 
-            if (!DungeonRoomState.isClear(wavesToSpawnerStates)) {
+            if (state.isClear()) {
                 left--;
             }
         }
@@ -443,10 +443,10 @@ public class DungeonInstance extends Minigame {
 
     private boolean isAllRoomsCleared() {
         int notClear = 0;
-        for (int roomKey : roomToWavesToSpawnerStates.keySet()) {
-            HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomKey);
+        for (int roomKey : roomNoToRoomState.keySet()) {
+            DungeonRoomState state = roomNoToRoomState.get(roomKey);
 
-            if (!DungeonRoomState.isClear(wavesToSpawnerStates)) {
+            if (state.isClear()) {
                 notClear++;
                 if (notClear > 1) { // Boss room is never cleared
                     return false;

@@ -85,7 +85,7 @@ public class DungeonRoom {
             return false;
         }
 
-        if (DungeonRoomState.isNextWave(spawnerStates)) {
+        if (DungeonRoomState.isWaveCompleted(spawnerStates)) {
             currentWave++;
 
             if (waveToSpawners.containsKey(currentWave)) {
@@ -117,6 +117,8 @@ public class DungeonRoom {
                     player.sendMessage(ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " completed!");
                     player.sendTitle(ChatColor.WHITE + "", ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " completed!", 15, 40, 15);
                 }
+
+                roomState.onComplete();
 
                 return true;
             }
