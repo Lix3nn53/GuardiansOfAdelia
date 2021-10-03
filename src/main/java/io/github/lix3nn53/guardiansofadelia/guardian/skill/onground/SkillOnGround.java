@@ -20,15 +20,17 @@ public class SkillOnGround {
     private final String name;
     private final long period;
     private final Skill skill;
+    private final int skillLevel;
 
     // State
     ArmorStand armorStand;
     BukkitTask bukkitTask;
     int castCounter = 1;
 
-    public SkillOnGround(String name, long period, SkillComponent... triggerComponents) {
+    public SkillOnGround(String name, long period, int skillLevel, SkillComponent... triggerComponents) {
         this.name = name;
         this.period = period;
+        this.skillLevel = skillLevel;
 
         ArrayList<Integer> cooldowns = new ArrayList<>();
         cooldowns.add(0);
@@ -47,6 +49,7 @@ public class SkillOnGround {
     public SkillOnGround(ConfigurationSection configurationSection) {
         this.name = configurationSection.contains("name") ? configurationSection.getString("name") : null;
         this.period = configurationSection.getLong("period");
+        this.skillLevel = configurationSection.getInt("skillLevel");
 
         String skillKey = configurationSection.getString("skillKey");
 
@@ -73,7 +76,7 @@ public class SkillOnGround {
                     return;
                 }
 
-                boolean cast = skill.cast(armorStand, 1, targets, castCounter, 999);
+                boolean cast = skill.cast(armorStand, skillLevel, targets, castCounter, 999);
                 castCounter++;
 
                 for (LivingEntity target : targets) {

@@ -34,8 +34,6 @@ public class CloneCurrentTargets extends TargetComponent {
             temporaryEntities.add(temporaryEntity);
         }
 
-        if (temporaryEntities.isEmpty()) return false;
-
         List<LivingEntity> targetsNew = new ArrayList<>();
         if (super.isKeepCurrent()) {
             if (super.isAddToBeginning()) {

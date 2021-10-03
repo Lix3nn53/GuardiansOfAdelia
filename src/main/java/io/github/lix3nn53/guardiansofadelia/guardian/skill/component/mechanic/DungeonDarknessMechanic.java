@@ -18,11 +18,11 @@ public class DungeonDarknessMechanic extends MechanicComponent {
     public DungeonDarknessMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 
-        if (!configurationSection.contains("amount")) {
-            configLoadError("amount");
+        if (!configurationSection.contains("amounts")) {
+            configLoadError("amounts");
         }
 
-        this.amounts = configurationSection.getIntegerList("amount");
+        this.amounts = configurationSection.getIntegerList("amounts");
     }
 
     @Override

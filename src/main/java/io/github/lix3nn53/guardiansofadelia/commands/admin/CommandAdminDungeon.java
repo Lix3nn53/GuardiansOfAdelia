@@ -196,7 +196,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         Vector offset = start.toVector().subtract(add.toVector()).multiply(-1);
 
                         SelfTarget selfTarget = new SelfTarget();
-                        SkillOnGround skillOnGround = new SkillOnGround("skillOnGroundDungeon", 400, selfTarget);
+                        SkillOnGround skillOnGround = new SkillOnGround("skillOnGroundDungeon", 400, 1, selfTarget);
                         SkillOnGroundWithOffset skillOnGroundWithOffset = new SkillOnGroundWithOffset(skillOnGround, offset);
 
                         DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);

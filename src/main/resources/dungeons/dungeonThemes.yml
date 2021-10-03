@@ -43,10 +43,10 @@ theme1:
     door1:
       material: CHAIN
       box:
-        x1: -73.0
+        x1: -72.0
         y1: -6.5
         z1: 4.0
-        x2: -73.0
+        x2: -72.0
         y2: -2.5
         z2: 8.0
     nextRooms:
@@ -65,25 +65,28 @@ theme1:
         x: -41.5
         y: -8.5
         z: -16.5
-      name: "Test"
+      name: Test
       period: 5
-      skillKey: "SlimeOne"
+      skillKey: RootPoison
+      skillLevel: 1
     skillOnGround2:
       loc:
         x: -40.5
         y: -8.5
         z: 17.5
-      name: "Test"
+      name: Test
       period: 5
-      skillKey: "SlimeOne"
+      skillKey: RootPoison
+      skillLevel: 1
     skillOnGround3:
       loc:
         x: -31.5
         y: -8.5
         z: -0.5
-      name: "Test"
+      name: Test
       period: 5
-      skillKey: "SlimeOne"
+      skillKey: RootPoison
+      skillLevel: 1
   room2:
     door1:
       material: IRON_BARS
@@ -103,7 +106,8 @@ theme1:
           x: -84.5
           y: -3.5
           z: -4.5
-      spawner2:
+    wave2:
+      spawner1:
         mobCode: AcademySlimeMedium
         mobLevel: 2
         amount: 1
@@ -142,7 +146,70 @@ theme1:
           z: -32.5
     nextRooms:
       - 4
+      - 5
+    door2:
+      material: LIME_STAINED_GLASS
+      box:
+        x1: -128.0
+        y1: -22.5
+        z1: -36.0
+        x2: -128.0
+        y2: -20.5
+        z2: -33.0
+    wave2:
+      spawner1:
+        mobCode: AcademySlimeMedium
+        mobLevel: 1
+        amount: 2
+        offset:
+          x: -141.5
+          y: -21.5
+          z: -36.5
+      spawner2:
+        mobCode: AcademySlimeMedium
+        mobLevel: 1
+        amount: 2
+        offset:
+          x: -130.5
+          y: -25.5
+          z: -28.5
   room4:
+    nextRooms: [ ]
+    wave1:
+      spawner1:
+        mobCode: AcademySlime
+        mobLevel: 1
+        amount: 2
+        offset:
+          x: -105.5
+          y: -25.5
+          z: -25.5
+      spawner2:
+        mobCode: AcademySlimeMedium
+        mobLevel: 1
+        amount: 2
+        offset:
+          x: -95.5
+          y: -25.5
+          z: -31.5
+    wave2:
+      spawner1:
+        mobCode: AcademySlime
+        mobLevel: 1
+        amount: 2
+        offset:
+          x: -95.5
+          y: -25.5
+          z: -25.5
+      spawner2:
+        mobCode: AcademySlimeMedium
+        mobLevel: 1
+        amount: 2
+        offset:
+          x: -106.5
+          y: -25.5
+          z: -34.5
+  room5:
     wave1:
       spawner1:
         mobCode: AcademySlimeBoss
@@ -153,6 +220,15 @@ theme1:
           y: -31.5
           z: -55.5
     nextRooms: [ ]
+    skillOnGround1:
+      loc:
+        x: -100.5
+        y: -31.5
+        z: -58.5
+      name: Test
+      period: 5
+      skillKey: RootPoison
+      skillLevel: 1
   prizeChestCenter:
     x: -80.5
     y: -31.5

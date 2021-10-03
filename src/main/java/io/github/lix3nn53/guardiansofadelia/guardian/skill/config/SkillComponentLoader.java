@@ -209,6 +209,10 @@ public class SkillComponentLoader {
             return new PotionEffectRemoveMechanic(configurationSection);
         } else if (componentType.equals(EntityTypeCondition.class.getSimpleName())) {
             return new EntityTypeCondition(configurationSection);
+        } else if (componentType.equals(DungeonDarknessMechanic.class.getSimpleName())) {
+            return new DungeonDarknessMechanic(configurationSection);
+        } else if (componentType.equals(TargetCountMinigameCondition.class.getSimpleName())) {
+            return new TargetCountMinigameCondition(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

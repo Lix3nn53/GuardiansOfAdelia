@@ -90,7 +90,7 @@ public class CommandTest implements CommandExecutor {
                 selfTargetForFlag.addChildren(flagConditionForFlag);
                 flagConditionForFlag.addChildren(FlagSetMechanic);
 
-                skillOnGround = new SkillOnGround("command", 20L, selfTarget);
+                skillOnGround = new SkillOnGround("command", 20L, 1, selfTarget);
 
                 skillOnGround.activate(player.getLocation(), 40L);
             } else if (args[0].equals("palette")) {
