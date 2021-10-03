@@ -189,7 +189,6 @@ public class DungeonInstance extends Minigame {
         if (isInGame()) {
             if (theme.getBossInternalName().equals(internalName)) {
                 addScore(1, 1);
-                endGame();
 
                 for (int roomNo : activeRooms) {
                     DungeonRoom room = theme.getDungeonRoom(roomNo);
@@ -198,8 +197,9 @@ public class DungeonInstance extends Minigame {
                     room.onRoomEnd(this.getStartLocation(1), wavesToSpawnerStates);
                 }
 
-                this.activeRooms.clear();
                 updateRoomsLeftBoards();
+
+                endGame();
             } else {
                 for (int roomNo : activeRooms) {
                     DungeonRoom room = theme.getDungeonRoom(roomNo);

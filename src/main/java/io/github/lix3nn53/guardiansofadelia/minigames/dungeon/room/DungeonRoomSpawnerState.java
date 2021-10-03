@@ -18,7 +18,7 @@ public class DungeonRoomSpawnerState {
         mobsLeftToKill -= count;
 
         if (mobsLeftToKill <= 0) {
-            secureSpawnRunner.cancel();
+            if (secureSpawnRunner != null) secureSpawnRunner.cancel();
         }
     }
 
@@ -28,7 +28,8 @@ public class DungeonRoomSpawnerState {
 
     public void reset(int mobsLeftToKill) {
         this.mobsLeftToKill = mobsLeftToKill;
-        secureSpawnRunner.cancel();
+
+        if (secureSpawnRunner != null) secureSpawnRunner.cancel();
     }
 
     public void startSecureSpawnerRunner(Location dungeonStart, DungeonRoomSpawner spawner, int spawnerIndex) {
@@ -46,6 +47,6 @@ public class DungeonRoomSpawnerState {
     }
 
     public void stopSecureSpawnerRunner() {
-        secureSpawnRunner.cancel();
+        if (secureSpawnRunner != null) secureSpawnRunner.cancel();
     }
 }
