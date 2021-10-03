@@ -18,6 +18,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
@@ -187,9 +188,8 @@ public class DungeonInstance extends Minigame {
     public void onMobKill(String internalName, Entity mob) {
         if (isInGame()) {
             if (theme.getBossInternalName().equals(internalName)) {
-                addScore(1, 1);
-
                 for (int roomNo : activeRooms) {
+                    Bukkit.getPlayer("Lix3nn").sendMessage("roomNo: " + roomNo);
                     DungeonRoom room = theme.getDungeonRoom(roomNo);
 
                     HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomNo);
@@ -198,6 +198,7 @@ public class DungeonInstance extends Minigame {
 
                 updateRoomsLeftBoards();
 
+                addScore(1, 1);
                 endGame();
             } else {
                 for (int roomNo : activeRooms) {
@@ -217,7 +218,8 @@ public class DungeonInstance extends Minigame {
                             nextRoom.onRoomStart(nextRoomNo, nextRoomWavesToSpawnerStates, this.getStartLocation(1));
                         }
 
-                        this.activeRooms = nextRooms;
+                        this.activeRooms.remove(Integer.valueOf(roomNo));
+                        this.activeRooms.addAll(nextRooms);
 
                         updateRoomsLeftBoards();
                     }
@@ -446,7 +448,7 @@ public class DungeonInstance extends Minigame {
         for (int roomKey : roomNoToRoomState.keySet()) {
             DungeonRoomState state = roomNoToRoomState.get(roomKey);
 
-            if (state.isClear()) {
+            if (!state.isClear()) {
                 notClear++;
                 if (notClear > 1) { // Boss room is never cleared
                     return false;
