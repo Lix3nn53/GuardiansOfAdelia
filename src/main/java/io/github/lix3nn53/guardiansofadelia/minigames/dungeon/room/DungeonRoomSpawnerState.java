@@ -32,7 +32,7 @@ public class DungeonRoomSpawnerState {
         if (secureSpawnRunner != null) secureSpawnRunner.cancel();
     }
 
-    public void startSecureSpawnerRunner(Location dungeonStart, DungeonRoomSpawner spawner, int spawnerIndex) {
+    public void startSecureSpawnerRunner(Location dungeonStart, DungeonRoomSpawner spawner, int roomNo, int spawnerIndex) {
         secureSpawnRunner = new BukkitRunnable() {
             @Override
             public void run() {
@@ -41,7 +41,7 @@ public class DungeonRoomSpawnerState {
                     return;
                 }
 
-                spawner.secureSpawn(dungeonStart, spawnerIndex, mobsLeftToKill);
+                spawner.secureSpawn(dungeonStart, roomNo, spawnerIndex, mobsLeftToKill);
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20 * 15L, 20 * 15L);
     }

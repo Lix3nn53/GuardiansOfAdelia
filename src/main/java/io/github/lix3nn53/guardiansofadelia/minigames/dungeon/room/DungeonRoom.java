@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -37,7 +38,7 @@ public class DungeonRoom {
         }
     }
 
-    public void onRoomStart(DungeonRoomState state, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates, Location dungeonStart) {
+    public void onRoomStart(int roomNo, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates, Location dungeonStart) {
         for (DungeonRoomDoor door : doors) {
             door.close(dungeonStart);
         }
@@ -49,8 +50,7 @@ public class DungeonRoom {
 
             DungeonRoomSpawnerState spawnerState = spawnerStates.get(spawnerIndex);
 
-            List<Entity> spawned = spawner.firstSpawn(dungeonStart, spawnerIndex, spawnerState);
-            state.onMobSpawn(spawned.size());
+            spawner.firstSpawn(dungeonStart, roomNo, spawnerIndex, spawnerState);
         }
 
         for (SkillOnGroundWithOffset skillOnGround : skillsOnGround) {
@@ -73,7 +73,7 @@ public class DungeonRoom {
         for (int spawnerIndex = 0; spawnerIndex < spawners.size(); spawnerIndex++) {
             DungeonRoomSpawner spawner = spawners.get(spawnerIndex);
 
-            if (spawner.thisSpawnersMob(mob, spawnerIndex)) {
+            if (spawner.thisSpawnersMob(mob, roomNo, spawnerIndex)) {
                 DungeonRoomSpawnerState spawnerState = spawnerStates.get(spawnerIndex);
                 spawnerState.onMobKill(1);
                 thisRoomsMob = true;
@@ -85,9 +85,7 @@ public class DungeonRoom {
             return false;
         }
 
-        roomState.onMobKill(1);
-
-        if (roomState.isClear()) {
+        if (DungeonRoomState.isNextWave(spawnerStates)) {
             currentWave++;
 
             if (waveToSpawners.containsKey(currentWave)) {
@@ -95,7 +93,7 @@ public class DungeonRoom {
 
                 for (Player player : players) {
                     player.sendMessage(ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " WAVE-" + currentWave + " incoming!");
-                    player.sendTitle("", ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " WAVE-" + currentWave + " incoming!", 15, 40, 15);
+                    player.sendTitle(ChatColor.WHITE + "", ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " WAVE-" + currentWave + " incoming!", 15, 40, 15);
                 }
 
                 List<DungeonRoomSpawner> newSpawners = waveToSpawners.get(currentWave);
@@ -108,9 +106,7 @@ public class DungeonRoom {
                             DungeonRoomSpawner spawner = newSpawners.get(spawnerIndex);
 
                             DungeonRoomSpawnerState spawnerState = newSpawnerStates.get(spawnerIndex);
-                            List<Entity> spawned = spawner.firstSpawn(dungeonStart, spawnerIndex, spawnerState);
-
-                            roomState.onMobSpawn(spawned.size());
+                            spawner.firstSpawn(dungeonStart, roomNo, spawnerIndex, spawnerState);
                         }
                     }
                 }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 4L);
@@ -119,7 +115,7 @@ public class DungeonRoom {
             } else {
                 for (Player player : players) {
                     player.sendMessage(ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " completed!");
-                    player.sendTitle("", ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " completed!", 15, 40, 15);
+                    player.sendTitle(ChatColor.WHITE + "", ChatPalette.PURPLE_LIGHT + "ROOM-" + roomNo + " completed!", 15, 40, 15);
                 }
 
                 return true;

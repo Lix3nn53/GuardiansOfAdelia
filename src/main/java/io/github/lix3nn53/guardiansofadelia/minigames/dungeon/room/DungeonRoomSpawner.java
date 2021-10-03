@@ -28,7 +28,9 @@ public class DungeonRoomSpawner {
         this.offset = offset;
     }
 
-    public List<Entity> firstSpawn(Location dungeonStart, int spawnerIndex, DungeonRoomSpawnerState spawnerState) {
+    public List<Entity> firstSpawn(Location dungeonStart, int roomNo, int spawnerIndex, DungeonRoomSpawnerState spawnerState) {
+        String spawnerKey = roomNo + "-" + spawnerIndex;
+
         Location add = dungeonStart.clone().add(offset);
 
         List<Entity> spawned = new ArrayList<>();
@@ -36,7 +38,7 @@ public class DungeonRoomSpawner {
         try {
             for (int i = 0; i < amount; i++) {
                 Entity entity = apiHelper.spawnMythicMob(mobCode, add, mobLevel);
-                PersistentDataContainerUtil.putInteger("spawnerIndex", spawnerIndex, entity);
+                PersistentDataContainerUtil.putString("spawnerKey", spawnerKey, entity);
                 spawned.add(entity);
             }
         } catch (InvalidMobTypeException e) {
@@ -47,7 +49,7 @@ public class DungeonRoomSpawner {
         MyChunkEvents.DO_NOT_DELETE.addAll(spawned);
 
         // Start secure spawner runner
-        spawnerState.startSecureSpawnerRunner(dungeonStart, this, spawnerIndex);
+        spawnerState.startSecureSpawnerRunner(dungeonStart, this, roomNo, spawnerIndex);
 
         return spawned;
     }
@@ -58,7 +60,9 @@ public class DungeonRoomSpawner {
      * @param dungeonStart
      * @return
      */
-    public List<Entity> secureSpawn(Location dungeonStart, int spawnerIndex, int mobsLeftToKill) {
+    public List<Entity> secureSpawn(Location dungeonStart, int roomNo, int spawnerIndex, int mobsLeftToKill) {
+        String spawnerKey = roomNo + "-" + spawnerIndex;
+
         List<Entity> spawned = new ArrayList<>();
 
         World world = dungeonStart.getWorld();
@@ -69,9 +73,9 @@ public class DungeonRoomSpawner {
 
         int count = 0;
         for (Entity entity : nearbyEntities) {
-            if (PersistentDataContainerUtil.hasInteger(entity, "spawnerIndex")) {
-                int mobSpawnerNo = PersistentDataContainerUtil.getInteger(entity, "spawnerIndex");
-                if (mobSpawnerNo == spawnerIndex) {
+            if (PersistentDataContainerUtil.hasString(entity, "spawnerKey")) {
+                String mobSpawnerKey = PersistentDataContainerUtil.getString(entity, "spawnerKey");
+                if (spawnerKey.equals(mobSpawnerKey)) {
                     count++;
                 }
             }
@@ -86,7 +90,7 @@ public class DungeonRoomSpawner {
         try {
             for (int i = 0; i < amountToSpawn; i++) {
                 Entity entity = apiHelper.spawnMythicMob(mobCode, add, mobLevel);
-                PersistentDataContainerUtil.putInteger("spawnerIndex", spawnerIndex, entity);
+                PersistentDataContainerUtil.putString("spawnerKey", spawnerKey, entity);
                 spawned.add(entity);
             }
         } catch (InvalidMobTypeException e) {
@@ -113,9 +117,12 @@ public class DungeonRoomSpawner {
         return offset;
     }
 
-    public boolean thisSpawnersMob(Entity entity, int spawnerIndex) {
-        if (!PersistentDataContainerUtil.hasInteger(entity, "spawnerIndex")) return false;
+    public boolean thisSpawnersMob(Entity entity, int roomNo, int spawnerIndex) {
+        if (!PersistentDataContainerUtil.hasString(entity, "spawnerKey")) {
+            return false;
+        }
 
-        return PersistentDataContainerUtil.getInteger(entity, "spawnerIndex") == spawnerIndex;
+        String spawnerKey = roomNo + "-" + spawnerIndex;
+        return PersistentDataContainerUtil.getString(entity, "spawnerKey").equals(spawnerKey);
     }
 }

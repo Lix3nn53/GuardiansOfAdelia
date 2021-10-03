@@ -117,10 +117,9 @@ public class DungeonInstance extends Minigame {
                 // Starting rooms #onRoomStart
                 for (int roomNo : startingRooms) {
                     DungeonRoom dungeonRoom = theme.getDungeonRoom(roomNo);
-                    DungeonRoomState roomState = roomNoToRoomState.get(roomNo);
 
                     HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomNo);
-                    dungeonRoom.onRoomStart(roomState, wavesToSpawnerStates, getStartLocation(1));
+                    dungeonRoom.onRoomStart(roomNo, wavesToSpawnerStates, getStartLocation(1));
                 }
 
                 startDarknessRunnable();
@@ -213,10 +212,9 @@ public class DungeonInstance extends Minigame {
 
                         for (int nextRoomNo : nextRooms) {
                             DungeonRoom nextRoom = theme.getDungeonRoom(nextRoomNo);
-                            DungeonRoomState nextRoomState = roomNoToRoomState.get(nextRoomNo);
 
                             HashMap<Integer, List<DungeonRoomSpawnerState>> nextRoomWavesToSpawnerStates = roomToWavesToSpawnerStates.get(nextRoomNo);
-                            nextRoom.onRoomStart(nextRoomState, nextRoomWavesToSpawnerStates, this.getStartLocation(1));
+                            nextRoom.onRoomStart(nextRoomNo, nextRoomWavesToSpawnerStates, this.getStartLocation(1));
                         }
 
                         this.activeRooms = nextRooms;
@@ -379,9 +377,12 @@ public class DungeonInstance extends Minigame {
     }
 
     private void updateRoomsLeftBoards() {
-        int left = roomNoToRoomState.size();
-        for (DungeonRoomState state : roomNoToRoomState.values()) {
-            if (!state.isClear()) {
+        int left = roomToWavesToSpawnerStates.size();
+
+        for (int roomKey : roomToWavesToSpawnerStates.keySet()) {
+            HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomKey);
+
+            if (!DungeonRoomState.isClear(wavesToSpawnerStates)) {
                 left--;
             }
         }
@@ -442,9 +443,10 @@ public class DungeonInstance extends Minigame {
 
     private boolean isAllRoomsCleared() {
         int notClear = 0;
-        for (int i : roomNoToRoomState.keySet()) {
-            DungeonRoomState dungeonRoomState = roomNoToRoomState.get(i);
-            if (!dungeonRoomState.isClear()) {
+        for (int roomKey : roomToWavesToSpawnerStates.keySet()) {
+            HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomKey);
+
+            if (!DungeonRoomState.isClear(wavesToSpawnerStates)) {
                 notClear++;
                 if (notClear > 1) { // Boss room is never cleared
                     return false;
