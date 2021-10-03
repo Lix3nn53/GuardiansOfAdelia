@@ -28,7 +28,7 @@ public class DungeonRoomSpawner {
         this.offset = offset;
     }
 
-    public List<Entity> spawn(Location dungeonStart, int spawnerNo) {
+    public List<Entity> firstSpawn(Location dungeonStart, int spawnerIndex, DungeonRoomSpawnerState spawnerState) {
         Location add = dungeonStart.clone().add(offset);
 
         List<Entity> spawned = new ArrayList<>();
@@ -36,7 +36,7 @@ public class DungeonRoomSpawner {
         try {
             for (int i = 0; i < amount; i++) {
                 Entity entity = apiHelper.spawnMythicMob(mobCode, add, mobLevel);
-                PersistentDataContainerUtil.putInteger("spawnerNo", spawnerNo, entity);
+                PersistentDataContainerUtil.putInteger("spawnerIndex", spawnerIndex, entity);
                 spawned.add(entity);
             }
         } catch (InvalidMobTypeException e) {
@@ -45,6 +45,9 @@ public class DungeonRoomSpawner {
         }
 
         MyChunkEvents.DO_NOT_DELETE.addAll(spawned);
+
+        // Start secure spawner runner
+        spawnerState.startSecureSpawnerRunner(dungeonStart, this, spawnerIndex);
 
         return spawned;
     }
@@ -55,7 +58,7 @@ public class DungeonRoomSpawner {
      * @param dungeonStart
      * @return
      */
-    public List<Entity> secureSpawn(Location dungeonStart, int spawnerNo) {
+    public List<Entity> secureSpawn(Location dungeonStart, int spawnerIndex, int mobsLeftToKill) {
         List<Entity> spawned = new ArrayList<>();
 
         World world = dungeonStart.getWorld();
@@ -66,15 +69,15 @@ public class DungeonRoomSpawner {
 
         int count = 0;
         for (Entity entity : nearbyEntities) {
-            if (PersistentDataContainerUtil.hasInteger(entity, "spawnerNo")) {
-                int mobSpawnerNo = PersistentDataContainerUtil.getInteger(entity, "spawnerNo");
-                if (mobSpawnerNo == spawnerNo) {
+            if (PersistentDataContainerUtil.hasInteger(entity, "spawnerIndex")) {
+                int mobSpawnerNo = PersistentDataContainerUtil.getInteger(entity, "spawnerIndex");
+                if (mobSpawnerNo == spawnerIndex) {
                     count++;
                 }
             }
         }
 
-        int amountToSpawn = this.amount - count;
+        int amountToSpawn = mobsLeftToKill - count;
 
         if (amountToSpawn <= 0) return spawned;
 
@@ -83,7 +86,7 @@ public class DungeonRoomSpawner {
         try {
             for (int i = 0; i < amountToSpawn; i++) {
                 Entity entity = apiHelper.spawnMythicMob(mobCode, add, mobLevel);
-                PersistentDataContainerUtil.putInteger("spawnerNo", spawnerNo, entity);
+                PersistentDataContainerUtil.putInteger("spawnerIndex", spawnerIndex, entity);
                 spawned.add(entity);
             }
         } catch (InvalidMobTypeException e) {

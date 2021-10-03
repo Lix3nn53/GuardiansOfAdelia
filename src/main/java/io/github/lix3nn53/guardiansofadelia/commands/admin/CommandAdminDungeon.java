@@ -7,6 +7,7 @@ import com.sk89q.worldedit.bukkit.BukkitPlayer;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.Region;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillListForGround;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGround;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
@@ -57,6 +58,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon reload - DELETES NEW CHANGES");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon save - SAVES NEW CHANGES");
             } else if (args[0].equals("reload")) {
+                SkillListForGround.clear();
                 MiniGameManager.clearDungeonData();
 
                 SkillOnGroundConfigurations.createConfigs();

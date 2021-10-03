@@ -22,4 +22,8 @@ public class SkillListForGround {
 
         return skills.get(key);
     }
+
+    public static void clear() {
+        skills.clear();
+    }
 }
