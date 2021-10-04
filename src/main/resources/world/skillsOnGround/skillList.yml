@@ -67,16 +67,16 @@ skill1:
             child2:
               componentType: "HealMechanic"
               healPercentList:
-                - 0.1
-                - 0.2
+                - 0.25
                 - 0.3
+                - 0.35
                 - 0.4
+                - 0.45
                 - 0.5
+                - 0.55
                 - 0.6
-                - 0.7
+                - 0.75
                 - 0.8
-                - 0.9
-                - 1.0
               addLore: false
             child3:
               componentType: "DungeonDarknessMechanic"
@@ -108,26 +108,26 @@ skill2:
         max: 20
         radiusList:
           - 2
+          - 2.5
+          - 3
+          - 3.5
           - 4
-          - 4
-          - 4
-          - 4
-          - 4
-          - 4
-          - 4
-          - 4
-          - 4
+          - 3.5
+          - 5
+          - 5.5
+          - 6
+          - 6.5
         amountList:
+          - 6
+          - 9
           - 12
+          - 15
           - 18
-          - 18
-          - 18
-          - 18
-          - 18
-          - 18
-          - 18
-          - 18
-          - 18
+          - 21
+          - 24
+          - 24
+          - 24
+          - 24
         particle:
           particleType: "REDSTONE"
           dustColor: 3407667

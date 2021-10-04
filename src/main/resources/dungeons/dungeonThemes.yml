@@ -63,30 +63,30 @@ theme1:
     skillOnGround1:
       loc:
         x: -41.5
-        y: -8.5
+        y: -9.5
         z: -16.5
       name: Test
       period: 5
       skillKey: RootPoison
-      skillLevel: 1
+      skillLevel: 2
     skillOnGround2:
       loc:
         x: -40.5
-        y: -8.5
+        y: -9.5
         z: 17.5
       name: Test
       period: 5
       skillKey: RootPoison
-      skillLevel: 1
+      skillLevel: 2
     skillOnGround3:
       loc:
         x: -31.5
-        y: -8.5
+        y: -9.5
         z: -0.5
       name: Test
       period: 5
       skillKey: RootPoison
-      skillLevel: 1
+      skillLevel: 2
   room2:
     door1:
       material: IRON_BARS
@@ -225,7 +225,46 @@ theme1:
         x: -100.5
         y: -31.5
         z: -58.5
-      name: Test
+      period: 5
+      skillKey: RootPoison
+      skillLevel: 1
+    skillOnGround2:
+      loc:
+        x: -103.5
+        y: -31.5
+        z: -51.5
+      period: 5
+      skillKey: RootPoison
+      skillLevel: 1
+    skillOnGround3:
+      loc:
+        x: -87.5
+        y: -31.5
+        z: -52.5
+      period: 5
+      skillKey: RootPoison
+      skillLevel: 1
+    skillOnGround4:
+      loc:
+        x: -84.5
+        y: -31.5
+        z: -60.5
+      period: 5
+      skillKey: RootPoison
+      skillLevel: 1
+    skillOnGround5:
+      loc:
+        x: -73.5
+        y: -31.5
+        z: -52.5
+      period: 5
+      skillKey: RootPoison
+      skillLevel: 1
+    skillOnGround6:
+      loc:
+        x: -75.5
+        y: -31.5
+        z: -58.5
       period: 5
       skillKey: RootPoison
       skillLevel: 1
@@ -233,6 +272,15 @@ theme1:
     x: -80.5
     y: -31.5
     z: -55.5
+  skillOnGround1:
+    loc:
+      x: -95.5
+      y: -25.5
+      z: -31.5
+    name: Campfire
+    period: 20
+    skillKey: Campfire
+    skillLevel: 1
 theme2:
   code: LIBRARY
   name: '&d???? Library'
