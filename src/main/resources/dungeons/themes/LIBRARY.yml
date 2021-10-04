@@ -1,0 +1,21 @@
+# ---------------------------------------------- #
+#           Dungeon Themes Configuration         #
+# ---------------------------------------------- #
+#                Dungeon Themes                  #
+# ---------------------------------------------- #
+
+code: LIBRARY
+name: '&d???? Library'
+levelReq: 5
+timeLimitInMinutes: 10
+bossInternalName: TutorialSoldier
+gearTag: Library tag??
+gearLevel: 0
+portalColor: PURPLE
+startingRooms: [ ]
+checkpoints:
+  count: 0
+prizeChestCenter:
+  x: 0.0
+  y: 0.0
+  z: 0.0

@@ -2,6 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.minigames;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.CheckpointManager;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
@@ -125,11 +128,28 @@ public abstract class Minigame {
         if (!getPlayersInGame().isEmpty()) {
             isInGame = true;
 
+
             for (int teamNo : teams.keySet()) {
                 Party party = teams.get(teamNo);
                 for (Player member : party.getMembers()) {
                     if (member.isOnline()) {
+                        PetManager.onEggUnequip(member);
+
                         member.teleport(startLocations.get(teamNo - 1));
+
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                PetManager.onEggEquip(member);
+
+                                if (GuardianDataManager.hasGuardianData(member)) {
+                                    GuardianData guardianData = GuardianDataManager.getGuardianData(member);
+                                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                                    String rpgClassStr = activeCharacter.getRpgClassStr();
+                                    activeCharacter.getRpgCharacterStats().recalculateEquipment(rpgClassStr);
+                                }
+                            }
+                        }.runTaskLater(GuardiansOfAdelia.getInstance(), 40);
                     }
                 }
             }

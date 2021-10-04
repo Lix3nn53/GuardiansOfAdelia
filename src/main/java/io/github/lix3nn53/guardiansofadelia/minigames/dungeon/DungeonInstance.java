@@ -8,7 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.RandomSkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
@@ -118,8 +118,8 @@ public class DungeonInstance extends Minigame {
         }
 
         // Start dungeon skillsOnGround that does not belong to rooms
-        List<SkillOnGroundWithOffset> skillsOnGround = this.theme.getSkillsOnGround();
-        for (SkillOnGroundWithOffset skillOnGround : skillsOnGround) {
+        List<RandomSkillOnGroundWithOffset> skillsOnGround = this.theme.getSkillsOnGround();
+        for (RandomSkillOnGroundWithOffset skillOnGround : skillsOnGround) {
             ArmorStand activate = skillOnGround.activate(startLocation, 40L);
             skillsOnGroundArmorStands.add(activate);
             MyChunkEvents.DO_NOT_DELETE.add(activate);

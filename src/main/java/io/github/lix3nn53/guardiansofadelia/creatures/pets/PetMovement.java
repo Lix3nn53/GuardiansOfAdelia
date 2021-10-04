@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.creatures.pets;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.Location;
@@ -23,8 +24,11 @@ public class PetMovement {
         PetData petData = PetSkillManager.getPetData(petCode);
         int speed = petData.getSpeed();
         int range = petData.getRange();
-        PotionEffect potionEffect = new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, speed, false, false);
-        player.addPotionEffect(potionEffect);
+
+        if (!MiniGameManager.isInMinigame(player)) {
+            PotionEffect potionEffect = new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, speed, false, false);
+            player.addPotionEffect(potionEffect);
+        }
 
         new BukkitRunnable() {
 
@@ -82,13 +86,19 @@ public class PetMovement {
                 dirOfTarget.setY(0);
                 Vector side = dirOfTarget.clone().crossProduct(new Vector(0, 1, 0));
                 Vector upward = dirOfTarget.clone().crossProduct(side);
-                target.add(dirOfTarget.multiply(-0.8)).subtract(upward.multiply(1.6)).add(side.multiply(1.2));
-                // End - Calculate offset
+                target.subtract(upward.multiply(1.6));
 
                 Vector vectorBetweenPoints = target.toVector().subtract(start.toVector());
                 double distance = vectorBetweenPoints.length();
+                if (distance < 1.4) return; // Pet is close enough to player head
 
-                if (distance < 0.2) return; // Pet is close enough to target location
+                target.add(dirOfTarget.multiply(-0.8)).add(side.multiply(1.6));
+                // End - Calculate offset
+
+                vectorBetweenPoints = target.toVector().subtract(start.toVector());
+                distance = vectorBetweenPoints.length();
+
+                if (distance < 0.4) return; // Pet is close enough to target location
                 if (distance > 24) {
                     pet.teleport(target);
                     return;

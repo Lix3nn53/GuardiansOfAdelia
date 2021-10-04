@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.events.MyChunkEvents;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -48,7 +49,11 @@ public class SkillOnGround {
     }
 
     public SkillOnGround(ConfigurationSection configurationSection) {
-        this.name = configurationSection.contains("name") ? configurationSection.getString("name") : null;
+        if (configurationSection.contains("name")) {
+            this.name = ChatColor.translateAlternateColorCodes('&', configurationSection.getString("name"));
+        } else {
+            this.name = null;
+        }
         this.period = configurationSection.getLong("period");
         this.skillLevel = configurationSection.getInt("skillLevel");
 

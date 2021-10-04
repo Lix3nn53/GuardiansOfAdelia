@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.MMManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.RandomSkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.items.PrizeChestType;
@@ -37,7 +37,7 @@ public class DungeonTheme {
     private final String bossInternalName;
 
     // Global skillOnGrounds
-    private final List<SkillOnGroundWithOffset> skillsOnGround;
+    private final List<RandomSkillOnGroundWithOffset> skillsOnGround;
 
     // Rooms
     private final HashMap<Integer, DungeonRoom> dungeonRooms;
@@ -48,7 +48,7 @@ public class DungeonTheme {
 
     public DungeonTheme(String code, String name, String gearTag, GearLevel gearLevel, PortalColor portalColor, int levelReq,
                         int timeLimitInMinutes, String bossInternalName, HashMap<Integer, DungeonRoom> dungeonRooms,
-                        List<Integer> startingRooms, List<Vector> checkpoints, Vector prizeChestCenterOffset, List<SkillOnGroundWithOffset> skillsOnGround) {
+                        List<Integer> startingRooms, List<Vector> checkpoints, Vector prizeChestCenterOffset, List<RandomSkillOnGroundWithOffset> skillsOnGround) {
         this.code = code;
         this.name = ChatColor.translateAlternateColorCodes('&', name);
         this.gearTag = gearTag;
@@ -272,11 +272,11 @@ public class DungeonTheme {
         this.prizeChestCenterOffset = prizeChestCenterOffset;
     }
 
-    public List<SkillOnGroundWithOffset> getSkillsOnGround() {
+    public List<RandomSkillOnGroundWithOffset> getSkillsOnGround() {
         return skillsOnGround;
     }
 
-    public void addSkillOnGround(SkillOnGroundWithOffset skill) {
+    public void addSkillOnGround(RandomSkillOnGroundWithOffset skill) {
         skillsOnGround.add(skill);
     }
 }

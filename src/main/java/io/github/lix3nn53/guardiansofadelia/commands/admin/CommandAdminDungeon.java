@@ -7,9 +7,9 @@ import com.sk89q.worldedit.bukkit.BukkitPlayer;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.Region;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.RandomSkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillListForGround;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGround;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonInstance;
@@ -116,7 +116,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         List<DungeonRoomDoor> doors = new ArrayList<>();
                         HashMap<Integer, List<DungeonRoomSpawner>> waves = new HashMap<>();
                         List<Integer> nextRooms = new ArrayList<>();
-                        List<SkillOnGroundWithOffset> skillsOnGround = new ArrayList<>();
+                        List<RandomSkillOnGroundWithOffset> skillsOnGround = new ArrayList<>();
 
                         DungeonRoom dungeonRoom = new DungeonRoom(doors, waves, skillsOnGround, nextRooms);
 
@@ -197,7 +197,9 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                         SelfTarget selfTarget = new SelfTarget();
                         SkillOnGround skillOnGround = new SkillOnGround("skillOnGroundDungeon", 400, 1, selfTarget);
-                        SkillOnGroundWithOffset skillOnGroundWithOffset = new SkillOnGroundWithOffset(skillOnGround, offset);
+                        ArrayList<SkillOnGround> skillList = new ArrayList<>();
+                        skillList.add(skillOnGround);
+                        RandomSkillOnGroundWithOffset skillOnGroundWithOffset = new RandomSkillOnGroundWithOffset(skillList, offset);
 
                         if (args[3].equals("global")) {
                             dungeonTheme.addSkillOnGround(skillOnGroundWithOffset);
