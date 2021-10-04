@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroun
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -38,7 +39,7 @@ public class DungeonRoom {
         }
     }
 
-    public void onRoomStart(int roomNo, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates, Location dungeonStart) {
+    public void onRoomStart(DungeonRoomState state, int roomNo, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates, Location dungeonStart) {
         for (DungeonRoomDoor door : doors) {
             door.close(dungeonStart);
         }
@@ -54,7 +55,8 @@ public class DungeonRoom {
         }
 
         for (SkillOnGroundWithOffset skillOnGround : skillsOnGround) {
-            skillOnGround.activate(dungeonStart, 40L);
+            ArmorStand activate = skillOnGround.activate(dungeonStart, 40L);
+            state.addSkillsOnGroundArmorStand(activate);
         }
     }
 
@@ -127,13 +129,11 @@ public class DungeonRoom {
         return false;
     }
 
-    public List<Integer> onRoomEnd(Location dungeonStart, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates) {
+    public List<Integer> onRoomEnd(DungeonRoomState state, Location dungeonStart, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates) {
         for (DungeonRoomDoor door : doors) {
             door.open(dungeonStart);
         }
-        for (SkillOnGroundWithOffset skillOnGround : skillsOnGround) {
-            skillOnGround.deactivate();
-        }
+        state.clearSkillsOnGroundArmorStands();
 
         for (List<DungeonRoomSpawnerState> spawnerStates : wavesToSpawnerStates.values()) {
             for (DungeonRoomSpawnerState spawnerState : spawnerStates) {

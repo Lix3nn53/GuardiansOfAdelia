@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -25,6 +26,7 @@ public class TargetCountMinigameCondition extends ConditionComponent {
 
         boolean success = false;
 
+        boolean successLocal = false;
         boolean isInMinigame = false;
         for (LivingEntity ent : targets) {
             if (ent instanceof Player) {
@@ -38,12 +40,25 @@ public class TargetCountMinigameCondition extends ConditionComponent {
                     int playerCount = playersInGame.size();
 
                     if (size >= playerCount) {
+                        successLocal = true;
                         success = executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
                     }
 
                     break;
                 }
             }
+        }
+
+        if (isInMinigame && !successLocal) {
+            for (LivingEntity ent : targets) {
+                if (ent instanceof Player) {
+                    Player player = (Player) ent;
+
+                    player.sendMessage(ChatPalette.RED + "All players must be in the area");
+                }
+            }
+
+            return false;
         }
 
         if (!isInMinigame) {

@@ -147,7 +147,7 @@ public class StatPassive implements Stat {
         }
 
         int gap = maxValue - minValue;
-        if (isElement) System.out.println("percent: " + percent);
+        // if (isElement) System.out.println("percent: " + percent);
 
         double unitPercent = 0.2;
 

@@ -1,10 +1,15 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room;
 
+import org.bukkit.entity.ArmorStand;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class DungeonRoomState {
     private int currentWave = 1;
     private boolean isClear = false;
+
+    List<ArmorStand> skillsOnGroundArmorStands = new ArrayList<>();
 
     public int getCurrentWave() {
         return currentWave;
@@ -35,5 +40,17 @@ public class DungeonRoomState {
 
     public void onComplete() {
         isClear = true;
+    }
+
+    public void addSkillsOnGroundArmorStand(ArmorStand add) {
+        skillsOnGroundArmorStands.add(add);
+    }
+
+    public void clearSkillsOnGroundArmorStands() {
+        for (ArmorStand armorStand : skillsOnGroundArmorStands) {
+            armorStand.remove();
+        }
+
+        skillsOnGroundArmorStands.clear();
     }
 }

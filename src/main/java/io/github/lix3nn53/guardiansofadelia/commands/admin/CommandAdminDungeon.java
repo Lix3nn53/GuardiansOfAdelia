@@ -53,6 +53,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add door [theme] <roomNo> <material>" + ChatPalette.GOLD + " !!select WorldEdit region first!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add spawner [theme] <roomNo> <waveNo> <mobCode> <mobLevel> <amount>" + ChatPalette.GOLD + " !!look at spawner location block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill [theme] <roomNo>" + ChatPalette.GOLD + " !!look at location block!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill [theme] global" + ChatPalette.GOLD + " !!look at location block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add checkpoint" + ChatPalette.GOLD + " !!look at location block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon set prizeloc [theme]" + ChatPalette.GOLD + " !!look at block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon reload - DELETES NEW CHANGES");
@@ -184,7 +185,6 @@ public class CommandAdminDungeon implements CommandExecutor {
                     }
                     case "skill": {
                         String key = args[2].toUpperCase();
-                        int roomNo = Integer.parseInt(args[3]);
 
                         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                         DungeonTheme dungeonTheme = dungeonThemes.get(key);
@@ -199,10 +199,19 @@ public class CommandAdminDungeon implements CommandExecutor {
                         SkillOnGround skillOnGround = new SkillOnGround("skillOnGroundDungeon", 400, 1, selfTarget);
                         SkillOnGroundWithOffset skillOnGroundWithOffset = new SkillOnGroundWithOffset(skillOnGround, offset);
 
-                        DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);
-                        dungeonRoom.addSkillOnGround(skillOnGroundWithOffset);
+                        if (args[3].equals("global")) {
+                            dungeonTheme.addSkillOnGround(skillOnGroundWithOffset);
 
-                        player.sendMessage(ChatPalette.GREEN_DARK + "Added new skillOnGround");
+                            player.sendMessage(ChatPalette.GREEN_DARK + "Added new skillOnGround to GLOBAL");
+                        } else {
+                            int roomNo = Integer.parseInt(args[3]);
+
+                            DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);
+                            dungeonRoom.addSkillOnGround(skillOnGroundWithOffset);
+
+                            player.sendMessage(ChatPalette.GREEN_DARK + "Added new skillOnGround to ROOM-" + roomNo);
+                        }
+
                         remakeHolograms(key);
                         break;
                     }

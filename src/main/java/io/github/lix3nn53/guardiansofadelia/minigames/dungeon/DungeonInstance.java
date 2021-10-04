@@ -2,11 +2,13 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
+import io.github.lix3nn53.guardiansofadelia.events.MyChunkEvents;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
@@ -18,10 +20,10 @@ import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -47,6 +49,7 @@ public class DungeonInstance extends Minigame {
     private BukkitTask darknessRunnable;
     private final HashMap<Player, Integer> playerToLootedChestCount = new HashMap<>();
     private int unlockedChests;
+    private final List<ArmorStand> skillsOnGroundArmorStands = new ArrayList<>();
 
     // Debug
     private final List<Hologram> debugHolograms = new ArrayList<>();
@@ -94,6 +97,8 @@ public class DungeonInstance extends Minigame {
     public void startGame() {
         super.startGame();
 
+        Location startLocation = this.getStartLocation(1);
+
         // Reset starting rooms
         List<Integer> startingRooms = this.theme.getStartingRooms();
         activeRooms = startingRooms;
@@ -109,7 +114,15 @@ public class DungeonInstance extends Minigame {
         for (int roomNo : dungeonRoomKeys) {
             DungeonRoom dungeonRoom = this.theme.getDungeonRoom(roomNo);
 
-            dungeonRoom.onDungeonStart(this.getStartLocation(1));
+            dungeonRoom.onDungeonStart(startLocation);
+        }
+
+        // Start dungeon skillsOnGround that does not belong to rooms
+        List<SkillOnGroundWithOffset> skillsOnGround = this.theme.getSkillsOnGround();
+        for (SkillOnGroundWithOffset skillOnGround : skillsOnGround) {
+            ArmorStand activate = skillOnGround.activate(startLocation, 40L);
+            skillsOnGroundArmorStands.add(activate);
+            MyChunkEvents.DO_NOT_DELETE.add(activate);
         }
 
         new BukkitRunnable() {
@@ -118,9 +131,10 @@ public class DungeonInstance extends Minigame {
                 // Starting rooms #onRoomStart
                 for (int roomNo : startingRooms) {
                     DungeonRoom dungeonRoom = theme.getDungeonRoom(roomNo);
+                    DungeonRoomState dungeonRoomState = roomNoToRoomState.get(roomNo);
 
                     HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomNo);
-                    dungeonRoom.onRoomStart(roomNo, wavesToSpawnerStates, getStartLocation(1));
+                    dungeonRoom.onRoomStart(dungeonRoomState, roomNo, wavesToSpawnerStates, getStartLocation(1));
                 }
 
                 startDarknessRunnable();
@@ -183,17 +197,24 @@ public class DungeonInstance extends Minigame {
         }
 
         endDarknessRunnable();
+
+        // Clear global skillsOnGround
+        for (ArmorStand armorStand : skillsOnGroundArmorStands) {
+            MyChunkEvents.DO_NOT_DELETE.remove(armorStand);
+            armorStand.remove();
+        }
+        skillsOnGroundArmorStands.clear();
     }
 
     public void onMobKill(String internalName, Entity mob) {
         if (isInGame()) {
             if (theme.getBossInternalName().equals(internalName)) {
                 for (int roomNo : activeRooms) {
-                    Bukkit.getPlayer("Lix3nn").sendMessage("roomNo: " + roomNo);
                     DungeonRoom room = theme.getDungeonRoom(roomNo);
+                    DungeonRoomState dungeonRoomState = roomNoToRoomState.get(roomNo);
 
                     HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomNo);
-                    room.onRoomEnd(this.getStartLocation(1), wavesToSpawnerStates);
+                    room.onRoomEnd(dungeonRoomState, this.getStartLocation(1), wavesToSpawnerStates);
                 }
 
                 updateRoomsLeftBoards();
@@ -209,13 +230,14 @@ public class DungeonInstance extends Minigame {
                     boolean roomDone = room.onMobKill(roomState, wavesToSpawnerStates, getPlayersInGame(), roomNo, mob, getStartLocation(1));
 
                     if (roomDone) {
-                        List<Integer> nextRooms = room.onRoomEnd(this.getStartLocation(1), wavesToSpawnerStates);
+                        List<Integer> nextRooms = room.onRoomEnd(roomState, this.getStartLocation(1), wavesToSpawnerStates);
 
                         for (int nextRoomNo : nextRooms) {
                             DungeonRoom nextRoom = theme.getDungeonRoom(nextRoomNo);
+                            DungeonRoomState nextRoomState = roomNoToRoomState.get(nextRoomNo);
 
                             HashMap<Integer, List<DungeonRoomSpawnerState>> nextRoomWavesToSpawnerStates = roomToWavesToSpawnerStates.get(nextRoomNo);
-                            nextRoom.onRoomStart(nextRoomNo, nextRoomWavesToSpawnerStates, this.getStartLocation(1));
+                            nextRoom.onRoomStart(nextRoomState, nextRoomNo, nextRoomWavesToSpawnerStates, this.getStartLocation(1));
                         }
 
                         this.activeRooms.remove(Integer.valueOf(roomNo));

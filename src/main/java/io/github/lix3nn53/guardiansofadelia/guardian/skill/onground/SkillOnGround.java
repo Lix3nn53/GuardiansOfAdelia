@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.onground;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.events.MyChunkEvents;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.SkillComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
@@ -56,7 +57,7 @@ public class SkillOnGround {
         this.skill = SkillListForGround.getSkill(skillKey);
     }
 
-    public void activate(Location location, long delay) {
+    public ArmorStand activate(Location location, long delay) {
         Hologram hologram;
         if (name == null) {
             hologram = new Hologram(location);
@@ -85,9 +86,12 @@ public class SkillOnGround {
                 }
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), delay, period);
+
+        return armorStand;
     }
 
     public void deactivate() {
+        MyChunkEvents.DO_NOT_DELETE.remove(armorStand);
         armorStand.remove();
         this.bukkitTask.cancel();
     }

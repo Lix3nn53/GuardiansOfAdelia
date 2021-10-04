@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.ArmorStand;
 
 public class SkillOnGroundWithLocation {
 
@@ -27,8 +28,8 @@ public class SkillOnGroundWithLocation {
         location = new Location(world, x, y, z);
     }
 
-    public void activate(long delay) {
-        skillOnGround.activate(location, delay);
+    public ArmorStand activate(long delay) {
+        return skillOnGround.activate(location, delay);
     }
 
     public void deactivate() {

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.MMManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.items.PrizeChestType;
@@ -35,6 +36,9 @@ public class DungeonTheme {
     private final int timeLimitInMinutes;
     private final String bossInternalName;
 
+    // Global skillOnGrounds
+    private final List<SkillOnGroundWithOffset> skillsOnGround;
+
     // Rooms
     private final HashMap<Integer, DungeonRoom> dungeonRooms;
     private final List<Integer> startingRooms;
@@ -44,7 +48,7 @@ public class DungeonTheme {
 
     public DungeonTheme(String code, String name, String gearTag, GearLevel gearLevel, PortalColor portalColor, int levelReq,
                         int timeLimitInMinutes, String bossInternalName, HashMap<Integer, DungeonRoom> dungeonRooms,
-                        List<Integer> startingRooms, List<Vector> checkpoints, Vector prizeChestCenterOffset) {
+                        List<Integer> startingRooms, List<Vector> checkpoints, Vector prizeChestCenterOffset, List<SkillOnGroundWithOffset> skillsOnGround) {
         this.code = code;
         this.name = ChatColor.translateAlternateColorCodes('&', name);
         this.gearTag = gearTag;
@@ -57,6 +61,7 @@ public class DungeonTheme {
         this.startingRooms = startingRooms;
         this.checkpointOffsets = checkpoints;
         this.prizeChestCenterOffset = prizeChestCenterOffset;
+        this.skillsOnGround = skillsOnGround;
     }
 
     public String getCode() {
@@ -265,5 +270,13 @@ public class DungeonTheme {
 
     public void setPrizeChestCenterOffset(Vector prizeChestCenterOffset) {
         this.prizeChestCenterOffset = prizeChestCenterOffset;
+    }
+
+    public List<SkillOnGroundWithOffset> getSkillsOnGround() {
+        return skillsOnGround;
+    }
+
+    public void addSkillOnGround(SkillOnGroundWithOffset skill) {
+        skillsOnGround.add(skill);
     }
 }
