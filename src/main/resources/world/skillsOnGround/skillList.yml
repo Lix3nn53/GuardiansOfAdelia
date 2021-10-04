@@ -230,7 +230,9 @@ skill3:
           - 18
           - 18
         particle:
-          particleType: "HEART"
+          particleType: "REDSTONE"
+          dustColor: 5636095
+          dustSize: 4
         child1:
           componentType: "EntityTypeCondition"
           entityType: "PLAYER"
@@ -254,30 +256,116 @@ skill3:
                   - 2000
                   - 2000
             child2:
-              componentType: "HealMechanic"
-              healPercentList:
-                - 0.25
-                - 0.3
-                - 0.35
-                - 0.4
-                - 0.45
-                - 0.5
-                - 0.55
-                - 0.6
-                - 0.75
-                - 0.8
-              addLore: false
-            child3:
-              componentType: "DungeonDarknessMechanic"
-              amounts:
-                - -6
-                - -7
-                - -8
-                - -9
-                - -10
-                - -11
-                - -12
-                - -13
-                - -14
-                - -15
-              addLore: false
+              componentType: "PotionEffectMechanic"
+              potionEffectType:
+                - "SPEED"
+              tickList:
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+              amplifierList:
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
+skill4:
+  key: "BuffJump"
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "FlagCondition"
+      key: "activated"
+      isSet: false
+      child1:
+        componentType: "AreaTarget"
+        allies: true
+        enemy: true
+        self: false
+        max: 20
+        radiusList:
+          - 4
+          - 4
+          - 4
+          - 4
+          - 4
+          - 4
+          - 4
+          - 4
+          - 4
+          - 4
+        amountList:
+          - 18
+          - 18
+          - 18
+          - 18
+          - 18
+          - 18
+          - 18
+          - 18
+          - 18
+          - 18
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 5636095
+          dustSize: 4
+        child1:
+          componentType: "EntityTypeCondition"
+          entityType: "PLAYER"
+          child1:
+            componentType: "TargetCountMinigameCondition"
+            child1:
+              componentType: "SelfTarget"
+              child1:
+                componentType: "FlagSetMechanic"
+                key: "activated"
+                isUnique: false
+                ticks:
+                  - 2000
+                  - 2000
+                  - 2000
+                  - 2000
+                  - 2000
+                  - 2000
+                  - 2000
+                  - 2000
+                  - 2000
+                  - 2000
+            child2:
+              componentType: "PotionEffectMechanic"
+              potionEffectType:
+                - "JUMP"
+              tickList:
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+              amplifierList:
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
+                - 1
