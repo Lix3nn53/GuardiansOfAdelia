@@ -157,6 +157,17 @@ public class DungeonInstance extends Minigame {
             }
         }
 
+        for (int roomNo : roomToWavesToSpawnerStates.keySet()) {
+            HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomNo);
+
+            for (int waveNo : wavesToSpawnerStates.keySet()) {
+                List<DungeonRoomSpawnerState> spawnerStates = wavesToSpawnerStates.get(waveNo);
+                for (DungeonRoomSpawnerState state : spawnerStates) {
+                    state.stopSecureSpawnerRunner();
+                }
+            }
+        }
+
         List<Integer> winnerTeam = getWinnerTeams();
         if (!winnerTeam.isEmpty()) {
             // Prize Chests
