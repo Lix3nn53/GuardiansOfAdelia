@@ -246,23 +246,6 @@ public class CommandAdminDungeon implements CommandExecutor {
                         player.sendMessage(ChatPalette.GREEN_DARK + "Added new checkpoint");
                         break;
                     }
-                    case "startroom": {
-                        String key = args[2].toUpperCase();
-                        int roomNo = Integer.parseInt(args[3]);
-
-                        HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
-                        DungeonTheme dungeonTheme = dungeonThemes.get(key);
-
-                        boolean b = dungeonTheme.addStartingRooms(roomNo);
-
-                        if (!b) {
-                            player.sendMessage(ChatPalette.RED + "Room does not exist");
-                            return false;
-                        }
-
-                        player.sendMessage(ChatPalette.GREEN_DARK + "Added new startroom");
-                        break;
-                    }
                 }
             } else if (args[0].equals("set")) {
                 if (args[1].equals("prizeloc")) {

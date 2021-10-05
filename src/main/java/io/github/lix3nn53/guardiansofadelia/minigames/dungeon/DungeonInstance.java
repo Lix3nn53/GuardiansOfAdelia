@@ -61,32 +61,6 @@ public class DungeonInstance extends Minigame {
                 0, 12, 1, checkpoints);
         this.theme = theme;
 
-        Set<Integer> dungeonRoomKeys = theme.getDungeonRoomKeys();
-
-        for (int roomKey : dungeonRoomKeys) {
-            roomNoToRoomState.put(roomKey, new DungeonRoomState());
-
-            DungeonRoom dungeonRoom = theme.getDungeonRoom(roomKey);
-            HashMap<Integer, List<DungeonRoomSpawner>> waveToSpawners = dungeonRoom.getWaveToSpawners();
-
-            HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = new HashMap<>();
-            for (int waveNo : waveToSpawners.keySet()) {
-                List<DungeonRoomSpawner> roomSpawners = waveToSpawners.get(waveNo);
-
-                List<DungeonRoomSpawnerState> waveToSpawnerStates = new ArrayList<>();
-                for (int spawnerIndex = 0; spawnerIndex < roomSpawners.size(); spawnerIndex++) {
-                    DungeonRoomSpawner spawner = roomSpawners.get(spawnerIndex);
-
-                    int amount = spawner.getAmount();
-
-                    waveToSpawnerStates.add(new DungeonRoomSpawnerState(amount));
-                }
-
-                wavesToSpawnerStates.put(waveNo, waveToSpawnerStates);
-            }
-            roomToWavesToSpawnerStates.put(roomKey, wavesToSpawnerStates);
-        }
-
         reformParties();
         remakeDebugHolograms();
         setGameModeOnWin(GameMode.ADVENTURE);
@@ -97,17 +71,9 @@ public class DungeonInstance extends Minigame {
     public void startGame() {
         super.startGame();
 
+        resetAll();
+
         Location startLocation = this.getStartLocation(1);
-
-        // Reset starting rooms
-        List<Integer> startingRooms = this.theme.getStartingRooms();
-        activeRooms = startingRooms;
-
-        // Reset room states
-        for (int i : roomNoToRoomState.keySet()) {
-            DungeonRoomState dungeonRoomState = roomNoToRoomState.get(i);
-            dungeonRoomState.reset();
-        }
 
         // All rooms #onDungeonStart
         Set<Integer> dungeonRoomKeys = this.theme.getDungeonRoomKeys();
@@ -125,6 +91,7 @@ public class DungeonInstance extends Minigame {
             MyChunkEvents.DO_NOT_DELETE.add(activate);
         }
 
+        final List<Integer> startingRooms = this.theme.getStartingRooms();
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -281,7 +248,7 @@ public class DungeonInstance extends Minigame {
 
         int rooms = 0;
         if (roomNoToRoomState != null) rooms = roomNoToRoomState.size();
-        topLines.add(ChatColor.YELLOW + "Rooms left: " + ChatColor.RESET + rooms);
+        topLines.add(ChatColor.GOLD + "Rooms left: " + ChatColor.RESET + rooms);
 
         return topLines;
     }
@@ -431,7 +398,7 @@ public class DungeonInstance extends Minigame {
                 for (int k : board.getRowLines().keySet()) {
                     String s = board.getRowLines().get(k);
                     if (s.contains("Rooms left: ")) {
-                        board.setLine(ChatColor.YELLOW + "Rooms left: " + ChatColor.RESET + left, k);
+                        board.setLine(ChatColor.GOLD + "Rooms left: " + ChatColor.RESET + left, k);
                         break;
                     }
                 }
@@ -515,5 +482,49 @@ public class DungeonInstance extends Minigame {
     public void addDarkness(int add) {
         this.darkness += add;
         if (this.darkness < 0) this.darkness = 0;
+    }
+
+    private void resetAll() {
+        roomNoToRoomState.clear();
+        roomToWavesToSpawnerStates.clear();
+
+        Set<Integer> dungeonRoomKeys = theme.getDungeonRoomKeys();
+
+        for (int roomKey : dungeonRoomKeys) {
+            roomNoToRoomState.put(roomKey, new DungeonRoomState());
+
+            DungeonRoom dungeonRoom = theme.getDungeonRoom(roomKey);
+            HashMap<Integer, List<DungeonRoomSpawner>> waveToSpawners = dungeonRoom.getWaveToSpawners();
+
+            HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = new HashMap<>();
+            for (int waveNo : waveToSpawners.keySet()) {
+                List<DungeonRoomSpawner> roomSpawners = waveToSpawners.get(waveNo);
+
+                List<DungeonRoomSpawnerState> waveToSpawnerStates = new ArrayList<>();
+                for (int spawnerIndex = 0; spawnerIndex < roomSpawners.size(); spawnerIndex++) {
+                    DungeonRoomSpawner spawner = roomSpawners.get(spawnerIndex);
+
+                    int amount = spawner.getAmount();
+
+                    waveToSpawnerStates.add(new DungeonRoomSpawnerState(amount));
+                }
+
+                wavesToSpawnerStates.put(waveNo, waveToSpawnerStates);
+            }
+            roomToWavesToSpawnerStates.put(roomKey, wavesToSpawnerStates);
+        }
+
+        // Reset active rooms
+        activeRooms = this.theme.getStartingRooms();
+
+        // Clear chest loot count
+        playerToLootedChestCount.clear();
+
+        // Clear global skillsOnGround
+        for (ArmorStand armorStand : skillsOnGroundArmorStands) {
+            MyChunkEvents.DO_NOT_DELETE.remove(armorStand);
+            armorStand.remove();
+        }
+        skillsOnGroundArmorStands.clear();
     }
 }

@@ -29,11 +29,6 @@ public class DungeonRoomState {
         return true;
     }
 
-    public void reset() {
-        currentWave = 1;
-        isClear = false;
-    }
-
     public boolean isClear() {
         return isClear;
     }

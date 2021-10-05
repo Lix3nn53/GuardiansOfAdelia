@@ -26,12 +26,6 @@ public class DungeonRoomSpawnerState {
         return mobsLeftToKill == 0;
     }
 
-    public void reset(int mobsLeftToKill) {
-        this.mobsLeftToKill = mobsLeftToKill;
-
-        if (secureSpawnRunner != null) secureSpawnRunner.cancel();
-    }
-
     public void startSecureSpawnerRunner(Location dungeonStart, DungeonRoomSpawner spawner, int roomNo, int spawnerIndex) {
         secureSpawnRunner = new BukkitRunnable() {
             @Override
