@@ -7,8 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class ConfigurationUtils {
 
@@ -45,8 +44,8 @@ public class ConfigurationUtils {
         return null;
     }
 
-    public static List<YamlConfiguration> getAllConfigsInFile(String filePath) {
-        ArrayList<YamlConfiguration> result = new ArrayList<>();
+    public static HashMap<String, YamlConfiguration> getAllConfigsInFile(String filePath) {
+        HashMap<String, YamlConfiguration> result = new HashMap<>();
 
         File customConfigFile = new File(filePath);
         File[] files = customConfigFile.listFiles();
@@ -55,11 +54,17 @@ public class ConfigurationUtils {
 
         for (File file : files) {
             if (file.isFile()) {
+                String fileName = file.getName();
+                String[] split = fileName.split("\\.");
+                String name = split[0];
+
+                GuardiansOfAdelia.getInstance().getLogger().info("FILE NAME: " + name);
+
                 YamlConfiguration fileConfiguration = new YamlConfiguration();
                 try {
                     fileConfiguration.load(file);
 
-                    result.add(fileConfiguration);
+                    result.put(name, fileConfiguration);
                 } catch (IOException | InvalidConfigurationException e) {
                     e.printStackTrace();
                 }

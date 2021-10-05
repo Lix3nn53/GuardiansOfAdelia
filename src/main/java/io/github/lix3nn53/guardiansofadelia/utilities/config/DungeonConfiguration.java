@@ -34,7 +34,7 @@ public class DungeonConfiguration {
     private static FileConfiguration dungeonInstancesConfig;
     private static FileConfiguration dungeonGatesConfig;
     private static final String themePath = basePath + File.separator + "themes";
-    private static List<YamlConfiguration> dungeonThemesConfigs;
+    private static HashMap<String, YamlConfiguration> dungeonThemesConfigs;
 
     public static void createConfigs() {
         dungeonInstancesConfig = ConfigurationUtils.createConfig(basePath, "dungeonInstances.yml");
@@ -55,8 +55,9 @@ public class DungeonConfiguration {
     }
 
     private static void loadDungeonThemes() {
-        for (YamlConfiguration section : dungeonThemesConfigs) {
-            String code = section.getString("code");
+        for (String code : dungeonThemesConfigs.keySet()) {
+            YamlConfiguration section = dungeonThemesConfigs.get(code);
+
             String name = section.getString("name");
             String gearTag = section.getString("gearTag");
             int gearLevelIndex = section.getInt("gearLevel");
@@ -206,17 +207,12 @@ public class DungeonConfiguration {
         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
 
         for (String code : dungeonThemes.keySet()) {
-            YamlConfiguration currentThemeConfig = null;
-            for (YamlConfiguration config : dungeonThemesConfigs) {
-                if (config.getString("code").equals(code)) {
-                    currentThemeConfig = config;
-                }
-            }
+            YamlConfiguration currentThemeConfig = dungeonThemesConfigs.get(code);
+
             if (currentThemeConfig == null) continue;
 
             DungeonTheme theme = dungeonThemes.get(code);
 
-            currentThemeConfig.set("code", code);
             currentThemeConfig.set("name", theme.getName().replaceAll("§", "&"));
             currentThemeConfig.set("gearTag", theme.getGearTag());
             currentThemeConfig.set("gearLevel", theme.getGearLevel().ordinal());

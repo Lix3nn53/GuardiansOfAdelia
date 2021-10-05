@@ -4,7 +4,6 @@
 #                Dungeon Themes                  #
 # ---------------------------------------------- #
 
-code: LIBRARY
 name: '&d???? Library'
 levelReq: 5
 timeLimitInMinutes: 10

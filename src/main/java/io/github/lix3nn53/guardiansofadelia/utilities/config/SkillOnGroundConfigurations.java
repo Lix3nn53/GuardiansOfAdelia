@@ -12,16 +12,18 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SkillOnGroundConfigurations {
 
     private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "world" + File.separator + "skillsOnGround";
-    private static YamlConfiguration skillListConfig;
+    private static final String skillListPath = filePath + File.separator + "skillList";
+    private static HashMap<String, YamlConfiguration> skillListConfigs;
     private static YamlConfiguration config;
 
     public static void createConfigs() {
-        skillListConfig = ConfigurationUtils.createConfig(filePath, "skillList.yml");
+        skillListConfigs = ConfigurationUtils.getAllConfigsInFile(skillListPath);
         config = ConfigurationUtils.createConfig(filePath, "skillsOnGround.yml");
     }
 
@@ -31,12 +33,8 @@ public class SkillOnGroundConfigurations {
     }
 
     private static void loadSkillList() {
-        int count = ConfigurationUtils.getChildComponentCount(skillListConfig, "skill");
-
-        for (int i = 1; i <= count; i++) {
-            ConfigurationSection configurationSection = skillListConfig.getConfigurationSection("skill" + i);
-
-            String key = configurationSection.getString("key");
+        for (String key : skillListConfigs.keySet()) {
+            YamlConfiguration configurationSection = skillListConfigs.get(key);
 
             ArrayList<Integer> cooldowns = new ArrayList<>();
             cooldowns.add(0);

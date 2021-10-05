@@ -4,7 +4,6 @@
 #                Dungeon Themes                  #
 # ---------------------------------------------- #
 
-code: SEWER
 name: '&a???? Sewers'
 levelReq: 5
 timeLimitInMinutes: 10
@@ -278,12 +277,12 @@ skillOnGround2:
     y: -8.5
     z: -2.5
   skill1:
-    name: "&bBUFF SPEED"
+    name: '&bBUFF SPEED'
     period: 20
     skillKey: BuffSpeed
     skillLevel: 1
   skill2:
-    name: "&bBUFF JUMP"
+    name: '&bBUFF JUMP'
     period: 20
     skillKey: BuffJump
     skillLevel: 1
@@ -293,12 +292,12 @@ skillOnGround3:
     y: -8.5
     z: 13.5
   skill1:
-    name: "&bBUFF SPEED"
+    name: '&bBUFF SPEED'
     period: 20
     skillKey: BuffSpeed
     skillLevel: 1
   skill2:
-    name: "&bBUFF JUMP"
+    name: '&bBUFF JUMP'
     period: 20
     skillKey: BuffJump
     skillLevel: 1

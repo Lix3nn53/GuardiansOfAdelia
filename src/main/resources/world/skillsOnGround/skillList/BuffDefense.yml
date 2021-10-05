@@ -1,0 +1,91 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#                 Town Information               #
+# ---------------------------------------------- #
+
+trigger:
+  componentType: "SelfTarget"
+  child1:
+    componentType: "FlagCondition"
+    key: "activated"
+    isSet: false
+    child1:
+      componentType: "AreaTarget"
+      allies: true
+      enemy: true
+      self: false
+      max: 20
+      radiusList:
+        - 4
+        - 4
+        - 4
+        - 4
+        - 4
+        - 4
+        - 4
+        - 4
+        - 4
+        - 4
+      amountList:
+        - 18
+        - 18
+        - 18
+        - 18
+        - 18
+        - 18
+        - 18
+        - 18
+        - 18
+        - 18
+      particle:
+        particleType: "REDSTONE"
+        dustColor: 5636095
+        dustSize: 4
+      child1:
+        componentType: "EntityTypeCondition"
+        entityType: "PLAYER"
+        child1:
+          componentType: "TargetCountMinigameCondition"
+          child1:
+            componentType: "SelfTarget"
+            child1:
+              componentType: "FlagSetMechanic"
+              key: "activated"
+              isUnique: false
+              ticks:
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+                - 2000
+          child2:
+            componentType: "BuffMechanic"
+            buffType: "ELEMENT_DEFENSE"
+            multipliers:
+              - 0.1
+              - 0.12
+              - 0.14
+              - 0.16
+              - 0.18
+              - 0.2
+              - 0.22
+              - 0.24
+              - 0.26
+              - 0.3
+            ticks:
+              - 2000
+              - 2000
+              - 2000
+              - 2000
+              - 2000
+              - 2000
+              - 2000
+              - 2000
+              - 2000
+              - 2000

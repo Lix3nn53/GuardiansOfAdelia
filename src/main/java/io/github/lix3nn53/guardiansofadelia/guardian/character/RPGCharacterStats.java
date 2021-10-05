@@ -880,7 +880,7 @@ public class RPGCharacterStats {
 
         if (potionEffect == null) return;
 
-        if (newValue != 1.0) {
+        if (newValue > 1.0001 || newValue < 0.9999) {
             player.addPotionEffect(potionEffect);
         } else {
             player.removePotionEffect(potionEffect.getType());

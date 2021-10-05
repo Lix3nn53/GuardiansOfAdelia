@@ -7,12 +7,12 @@ import io.github.lix3nn53.guardiansofadelia.items.list.Eggs;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.util.List;
+import java.util.HashMap;
 
 public class PetConfigurations {
 
     private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "pets";
-    private static List<YamlConfiguration> fileConfigurations;
+    private static HashMap<String, YamlConfiguration> fileConfigurations;
 
     static void createConfigs() {
         fileConfigurations = ConfigurationUtils.getAllConfigsInFile(filePath);
@@ -23,8 +23,9 @@ public class PetConfigurations {
     }
 
     private static void load() {
-        for (YamlConfiguration fileConfiguration : fileConfigurations) {
-            String key = fileConfiguration.getString("mythicMobCode");
+        for (String key : fileConfigurations.keySet()) {
+            YamlConfiguration fileConfiguration = fileConfigurations.get(key);
+
             int customModelData = fileConfiguration.getInt("customModelData");
             String itemTierStr = fileConfiguration.getString("itemTier");
             ItemTier itemTier = ItemTier.valueOf(itemTierStr);
