@@ -58,7 +58,7 @@ public class DungeonTheme {
         this.timeLimitInMinutes = timeLimitInMinutes;
         this.bossInternalName = bossInternalName;
         this.dungeonRooms = dungeonRooms;
-        this.startingRooms = startingRooms;
+        this.startingRooms = Collections.unmodifiableList(startingRooms);
         this.checkpointOffsets = checkpoints;
         this.prizeChestCenterOffset = prizeChestCenterOffset;
         this.skillsOnGround = skillsOnGround;

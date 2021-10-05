@@ -44,7 +44,7 @@ public class DungeonInstance extends Minigame {
     // State
     private final HashMap<Integer, DungeonRoomState> roomNoToRoomState = new HashMap<>();
     private final HashMap<Integer, HashMap<Integer, List<DungeonRoomSpawnerState>>> roomToWavesToSpawnerStates = new HashMap<>();
-    private List<Integer> activeRooms = new ArrayList<>();
+    private final List<Integer> activeRooms = new ArrayList<>();
     private int darkness = 0;
     private BukkitTask darknessRunnable;
     private final HashMap<Player, Integer> playerToLootedChestCount = new HashMap<>();
@@ -515,7 +515,8 @@ public class DungeonInstance extends Minigame {
         }
 
         // Reset active rooms
-        activeRooms = this.theme.getStartingRooms();
+        activeRooms.clear();
+        activeRooms.addAll(this.theme.getStartingRooms());
 
         // Clear chest loot count
         playerToLootedChestCount.clear();
