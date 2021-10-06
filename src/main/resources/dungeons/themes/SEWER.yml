@@ -6,7 +6,13 @@
 
 name: '&a???? Sewers'
 levelReq: 5
-timeLimitInMinutes: 10
+timeLimitInMinutes: 5
+monsterPool:
+  - AcademySlime
+  - AcademySlimeMedium
+  - AcademySlimeMedium
+  - AcademySlimeMedium
+  - AcademySlimeMedium
 bossInternalName: AcademySlimeBoss
 gearTag: Rotten
 gearLevel: 0
@@ -22,8 +28,6 @@ checkpoints:
 room1:
   wave1:
     spawner1:
-      mobCode: AcademySlime
-      mobLevel: 1
       amount: 2
       offset:
         x: -42.5
@@ -31,8 +35,6 @@ room1:
         z: -7.5
   wave2:
     spawner1:
-      mobCode: AcademySlimeMedium
-      mobLevel: 1
       amount: 2
       offset:
         x: -55.5
@@ -100,8 +102,6 @@ room2:
       z2: 1.0
   wave1:
     spawner1:
-      mobCode: AcademySlime
-      mobLevel: 2
       amount: 2
       offset:
         x: -84.5
@@ -109,8 +109,6 @@ room2:
         z: -4.5
   wave2:
     spawner1:
-      mobCode: AcademySlimeMedium
-      mobLevel: 2
       amount: 1
       offset:
         x: -99.5
@@ -130,16 +128,12 @@ room3:
       z2: -41.0
   wave1:
     spawner1:
-      mobCode: AcademySlimeMedium
-      mobLevel: 2
       amount: 2
       offset:
         x: -139.5
         y: -21.5
         z: -29.5
     spawner2:
-      mobCode: AcademySlime
-      mobLevel: 2
       amount: 2
       offset:
         x: -130.5
@@ -159,16 +153,12 @@ room3:
       z2: -33.0
   wave2:
     spawner1:
-      mobCode: AcademySlimeMedium
-      mobLevel: 1
       amount: 2
       offset:
         x: -141.5
         y: -21.5
         z: -36.5
     spawner2:
-      mobCode: AcademySlimeMedium
-      mobLevel: 1
       amount: 2
       offset:
         x: -130.5
@@ -178,16 +168,12 @@ room4:
   nextRooms: [ ]
   wave1:
     spawner1:
-      mobCode: AcademySlime
-      mobLevel: 1
       amount: 2
       offset:
         x: -105.5
         y: -25.5
         z: -25.5
     spawner2:
-      mobCode: AcademySlimeMedium
-      mobLevel: 1
       amount: 2
       offset:
         x: -95.5
@@ -196,8 +182,7 @@ room4:
 room5:
   wave1:
     spawner1:
-      mobCode: AcademySlimeBoss
-      mobLevel: 1
+      isBoss: true
       amount: 1
       offset:
         x: -82.5
@@ -264,9 +249,9 @@ prizeChestCenter:
   z: -55.5
 skillOnGround1:
   loc:
-    x: -95.5
-    y: -25.5
-    z: -31.5
+    x: -94.5
+    y: -24.5
+    z: -32.5
   skill1:
     period: 20
     skillKey: Campfire
@@ -286,11 +271,36 @@ skillOnGround2:
     period: 20
     skillKey: BuffJump
     skillLevel: 1
+  skill3:
+    name: '&bBUFF DEFENSE'
+    period: 20
+    skillKey: BuffDefense
+    skillLevel: 1
+  skill4:
+    name: '&bBUFF DAMAGE'
+    period: 20
+    skillKey: BuffDamage
+    skillLevel: 1
+  skill5:
+    name: '&bBUFF CRIT DAMAGE'
+    period: 20
+    skillKey: BuffCritDamage
+    skillLevel: 1
+  skill6:
+    name: '&bBUFF CRIT CHANCE'
+    period: 20
+    skillKey: BuffCritChance
+    skillLevel: 1
+  skill7:
+    name: '&bBUFF ABILITY HASTE'
+    period: 20
+    skillKey: BuffAbilityHaste
+    skillLevel: 1
 skillOnGround3:
   loc:
-    x: -52.5
-    y: -8.5
-    z: 13.5
+    x: -95.5
+    y: -25.5
+    z: -24.5
   skill1:
     name: '&bBUFF SPEED'
     period: 20
@@ -300,4 +310,29 @@ skillOnGround3:
     name: '&bBUFF JUMP'
     period: 20
     skillKey: BuffJump
+    skillLevel: 1
+  skill3:
+    name: '&bBUFF DEFENSE'
+    period: 20
+    skillKey: BuffDefense
+    skillLevel: 1
+  skill4:
+    name: '&bBUFF DAMAGE'
+    period: 20
+    skillKey: BuffDamage
+    skillLevel: 1
+  skill5:
+    name: '&bBUFF CRIT DAMAGE'
+    period: 20
+    skillKey: BuffCritDamage
+    skillLevel: 1
+  skill6:
+    name: '&bBUFF CRIT CHANCE'
+    period: 20
+    skillKey: BuffCritChance
+    skillLevel: 1
+  skill7:
+    name: '&bBUFF ABILITY HASTE'
+    period: 20
+    skillKey: BuffAbilityHaste
     skillLevel: 1

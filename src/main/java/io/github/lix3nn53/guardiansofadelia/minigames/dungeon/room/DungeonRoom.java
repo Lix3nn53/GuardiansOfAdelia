@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.RandomSkillOnGroundWithOffset;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -39,7 +40,8 @@ public class DungeonRoom {
         }
     }
 
-    public void onRoomStart(DungeonRoomState state, int roomNo, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates, Location dungeonStart) {
+    public void onRoomStart(DungeonRoomState state, int roomNo, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates,
+                            Location dungeonStart, DungeonTheme theme, int darkness) {
         for (DungeonRoomDoor door : doors) {
             door.close(dungeonStart);
         }
@@ -51,7 +53,16 @@ public class DungeonRoom {
 
             DungeonRoomSpawnerState spawnerState = spawnerStates.get(spawnerIndex);
 
-            spawner.firstSpawn(dungeonStart, roomNo, spawnerIndex, spawnerState);
+            String mobCode;
+            if (spawner.isBoss()) {
+                mobCode = theme.getBossInternalName();
+            } else {
+                mobCode = theme.getRandomMonsterToSpawn(darkness);
+            }
+
+            int mobLevel = theme.getMonsterLevel(darkness);
+
+            spawner.firstSpawn(mobCode, mobLevel, dungeonStart, roomNo, spawnerIndex, spawnerState);
         }
 
         for (RandomSkillOnGroundWithOffset skillOnGround : skillsOnGround) {
@@ -65,7 +76,8 @@ public class DungeonRoom {
      * @param roomNo
      * @return true if room completed, false otherwise
      */
-    public boolean onMobKill(DungeonRoomState roomState, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates, List<Player> players, int roomNo, Entity mob, Location dungeonStart) {
+    public boolean onMobKill(DungeonRoomState roomState, HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates,
+                             List<Player> players, int roomNo, Entity mob, Location dungeonStart, DungeonTheme theme, int darkness) {
         boolean thisRoomsMob = false;
 
         int currentWave = roomState.getCurrentWave();
@@ -108,7 +120,16 @@ public class DungeonRoom {
                             DungeonRoomSpawner spawner = newSpawners.get(spawnerIndex);
 
                             DungeonRoomSpawnerState spawnerState = newSpawnerStates.get(spawnerIndex);
-                            spawner.firstSpawn(dungeonStart, roomNo, spawnerIndex, spawnerState);
+
+                            String mobCode;
+                            if (spawner.isBoss()) {
+                                mobCode = theme.getBossInternalName();
+                            } else {
+                                mobCode = theme.getRandomMonsterToSpawn(darkness);
+                            }
+                            int mobLevel = theme.getMonsterLevel(darkness);
+
+                            spawner.firstSpawn(mobCode, mobLevel, dungeonStart, roomNo, spawnerIndex, spawnerState);
                         }
                     }
                 }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 4L);

@@ -68,6 +68,7 @@ public class DungeonConfiguration {
             int levelReq = section.getInt("levelReq");
             int timeLimitInMinutes = section.getInt("timeLimitInMinutes");
             String bossInternalName = section.getString("bossInternalName");
+            List<String> monsterPool = section.getStringList("monsterPool");
 
             HashMap<Integer, DungeonRoom> dungeonRooms = new HashMap<>();
             for (int roomIndex = 1; roomIndex <= 999; roomIndex++) {
@@ -102,8 +103,9 @@ public class DungeonConfiguration {
                         if (!section.contains("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex))
                             break;
 
-                        String mobCode = section.getString("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".mobCode");
-                        int mobLevel = section.getInt("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".mobLevel");
+                        String bossPath = "room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".isBoss";
+                        boolean isBoss = section.contains(bossPath) && section.getBoolean(bossPath);
+
                         int amount = section.getInt("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".amount");
 
                         double x = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".x");
@@ -112,7 +114,7 @@ public class DungeonConfiguration {
 
                         Vector offset = new Vector(x, y, z);
 
-                        DungeonRoomSpawner spawner = new DungeonRoomSpawner(mobCode, mobLevel, amount, offset);
+                        DungeonRoomSpawner spawner = new DungeonRoomSpawner(amount, offset, isBoss);
                         spawners.add(spawner);
                     }
 
@@ -197,7 +199,7 @@ public class DungeonConfiguration {
             }
 
             DungeonTheme dungeonTheme = new DungeonTheme(code, name, gearTag, gearLevel, portalColor, levelReq, timeLimitInMinutes,
-                    bossInternalName, dungeonRooms, startingRooms, checkpoints, prizeChestCenterOffset, skillsOnGround);
+                    monsterPool, bossInternalName, dungeonRooms, startingRooms, checkpoints, prizeChestCenterOffset, skillsOnGround);
 
             MiniGameManager.addDungeonTheme(code, dungeonTheme);
         }
@@ -221,6 +223,7 @@ public class DungeonConfiguration {
             currentThemeConfig.set("levelReq", theme.getLevelReq());
             currentThemeConfig.set("timeLimitInMinutes", theme.getTimeLimitInMinutes());
             currentThemeConfig.set("bossInternalName", theme.getBossInternalName());
+            currentThemeConfig.set("monsterPool", theme.getMonsterPool());
 
             Set<Integer> roomKeys = theme.getDungeonRoomKeys();
             for (int roomKey : roomKeys) {
@@ -250,8 +253,6 @@ public class DungeonConfiguration {
 
                     int spawnerIndex = 1;
                     for (DungeonRoomSpawner spawner : dungeonRoomSpawners) {
-                        currentThemeConfig.set("room" + roomKey + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".mobCode", spawner.getMobCode());
-                        currentThemeConfig.set("room" + roomKey + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".mobLevel", spawner.getMobLevel());
                         currentThemeConfig.set("room" + roomKey + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".amount", spawner.getAmount());
 
                         Vector offset = spawner.getOffset();

@@ -101,7 +101,7 @@ public class DungeonInstance extends Minigame {
                     DungeonRoomState dungeonRoomState = roomNoToRoomState.get(roomNo);
 
                     HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomNo);
-                    dungeonRoom.onRoomStart(dungeonRoomState, roomNo, wavesToSpawnerStates, getStartLocation(1));
+                    dungeonRoom.onRoomStart(dungeonRoomState, roomNo, wavesToSpawnerStates, getStartLocation(1), theme, darkness);
                 }
 
                 startDarknessRunnable();
@@ -151,11 +151,11 @@ public class DungeonInstance extends Minigame {
             this.unlockedChests = 1;
             this.playerToLootedChestCount.clear();
 
-            boolean darknessCondition = darkness <= 50;
-            String darknessConditionMessage = ChatPalette.YELLOW + "Darkness is less than 50: " + ChatPalette.RED + "FAIL";
+            boolean darknessCondition = darkness < 70;
+            String darknessConditionMessage = ChatPalette.YELLOW + "Darkness is less than 70: " + ChatPalette.RED + "FAIL";
             if (darknessCondition) {
                 this.unlockedChests++;
-                darknessConditionMessage = ChatPalette.YELLOW + "Darkness is less than 50: " + ChatPalette.GREEN_DARK + "SUCCESS";
+                darknessConditionMessage = ChatPalette.YELLOW + "Darkness is less than 70: " + ChatPalette.GREEN_DARK + "SUCCESS";
             }
 
             boolean roomCondition = isAllRoomsCleared();
@@ -200,12 +200,14 @@ public class DungeonInstance extends Minigame {
                 addScore(1, 1);
                 endGame();
             } else {
+                List<Integer> newActiveRooms = new ArrayList<>(this.activeRooms);
+
                 for (int roomNo : activeRooms) {
                     DungeonRoom room = theme.getDungeonRoom(roomNo);
                     DungeonRoomState roomState = roomNoToRoomState.get(roomNo);
 
                     HashMap<Integer, List<DungeonRoomSpawnerState>> wavesToSpawnerStates = roomToWavesToSpawnerStates.get(roomNo);
-                    boolean roomDone = room.onMobKill(roomState, wavesToSpawnerStates, getPlayersInGame(), roomNo, mob, getStartLocation(1));
+                    boolean roomDone = room.onMobKill(roomState, wavesToSpawnerStates, getPlayersInGame(), roomNo, mob, getStartLocation(1), this.theme, this.darkness);
 
                     if (roomDone) {
                         List<Integer> nextRooms = room.onRoomEnd(roomState, this.getStartLocation(1), wavesToSpawnerStates);
@@ -215,15 +217,18 @@ public class DungeonInstance extends Minigame {
                             DungeonRoomState nextRoomState = roomNoToRoomState.get(nextRoomNo);
 
                             HashMap<Integer, List<DungeonRoomSpawnerState>> nextRoomWavesToSpawnerStates = roomToWavesToSpawnerStates.get(nextRoomNo);
-                            nextRoom.onRoomStart(nextRoomState, nextRoomNo, nextRoomWavesToSpawnerStates, this.getStartLocation(1));
+                            nextRoom.onRoomStart(nextRoomState, nextRoomNo, nextRoomWavesToSpawnerStates, this.getStartLocation(1), this.theme, this.darkness);
                         }
 
-                        this.activeRooms.remove(Integer.valueOf(roomNo));
-                        this.activeRooms.addAll(nextRooms);
+                        newActiveRooms.remove(Integer.valueOf(roomNo));
+                        newActiveRooms.addAll(nextRooms);
 
                         updateRoomsLeftBoards();
                     }
                 }
+
+                this.activeRooms.clear();
+                this.activeRooms.addAll(newActiveRooms);
             }
         }
     }
@@ -318,10 +323,8 @@ public class DungeonInstance extends Minigame {
                     HologramManager.addHologram(hologram);
                     debugHolograms.add(hologram);
 
-                    String mobCode = spawner.getMobCode();
-                    int mobLevel = spawner.getMobLevel();
                     int amount = spawner.getAmount();
-                    hologram = new Hologram(add.clone().add(0, 0.5, 0), ChatPalette.RED + mobCode + " lv" + mobLevel + " x" + amount);
+                    hologram = new Hologram(add.clone().add(0, 0.5, 0), ChatPalette.RED + "SPAWNER x" + amount);
                     HologramManager.addHologram(hologram);
                     debugHolograms.add(hologram);
                 }

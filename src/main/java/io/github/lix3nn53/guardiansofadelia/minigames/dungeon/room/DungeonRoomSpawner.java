@@ -16,19 +16,18 @@ import java.util.Collection;
 import java.util.List;
 
 public class DungeonRoomSpawner {
-    private final String mobCode;
-    private final int mobLevel;
+
     private final int amount;
     private final Vector offset;
+    private final boolean isBoss;
 
-    public DungeonRoomSpawner(String mobCode, int mobLevel, int amount, Vector offset) {
-        this.mobCode = mobCode;
-        this.mobLevel = mobLevel;
+    public DungeonRoomSpawner(int amount, Vector offset, boolean isBoss) {
         this.amount = amount;
         this.offset = offset;
+        this.isBoss = isBoss;
     }
 
-    public List<Entity> firstSpawn(Location dungeonStart, int roomNo, int spawnerIndex, DungeonRoomSpawnerState spawnerState) {
+    public List<Entity> firstSpawn(String mobCode, int mobLevel, Location dungeonStart, int roomNo, int spawnerIndex, DungeonRoomSpawnerState spawnerState) {
         String spawnerKey = roomNo + "-" + spawnerIndex;
 
         Location add = dungeonStart.clone().add(offset);
@@ -49,7 +48,7 @@ public class DungeonRoomSpawner {
         MyChunkEvents.DO_NOT_DELETE.addAll(spawned);
 
         // Start secure spawner runner
-        spawnerState.startSecureSpawnerRunner(dungeonStart, this, roomNo, spawnerIndex);
+        spawnerState.startSecureSpawnerRunner(mobCode, mobLevel, dungeonStart, this, roomNo, spawnerIndex);
 
         return spawned;
     }
@@ -60,7 +59,7 @@ public class DungeonRoomSpawner {
      * @param dungeonStart
      * @return
      */
-    public List<Entity> secureSpawn(Location dungeonStart, int roomNo, int spawnerIndex, int mobsLeftToKill) {
+    public List<Entity> secureSpawn(String mobCode, int mobLevel, Location dungeonStart, int roomNo, int spawnerIndex, int mobsLeftToKill) {
         String spawnerKey = roomNo + "-" + spawnerIndex;
 
         List<Entity> spawned = new ArrayList<>();
@@ -101,14 +100,6 @@ public class DungeonRoomSpawner {
         return spawned;
     }
 
-    public String getMobCode() {
-        return mobCode;
-    }
-
-    public int getMobLevel() {
-        return mobLevel;
-    }
-
     public int getAmount() {
         return amount;
     }
@@ -124,5 +115,9 @@ public class DungeonRoomSpawner {
 
         String spawnerKey = roomNo + "-" + spawnerIndex;
         return PersistentDataContainerUtil.getString(entity, "spawnerKey").equals(spawnerKey);
+    }
+
+    public boolean isBoss() {
+        return isBoss;
     }
 }

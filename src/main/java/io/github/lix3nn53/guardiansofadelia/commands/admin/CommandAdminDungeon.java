@@ -51,7 +51,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon door [theme] - close/open doors");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add room [theme] <roomNo>");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add door [theme] <roomNo> <material>" + ChatPalette.GOLD + " !!select WorldEdit region first!!");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon add spawner [theme] <roomNo> <waveNo> <mobCode> <mobLevel> <amount>" + ChatPalette.GOLD + " !!look at spawner location block!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add spawner [theme] <roomNo> <waveNo> <amount>" + ChatPalette.GOLD + " !!look at spawner location block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill [theme] <roomNo>" + ChatPalette.GOLD + " !!look at location block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill [theme] global" + ChatPalette.GOLD + " !!look at location block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add checkpoint" + ChatPalette.GOLD + " !!look at location block!!");
@@ -162,9 +162,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         String key = args[2].toUpperCase();
                         int roomNo = Integer.parseInt(args[3]);
                         int waveNo = Integer.parseInt(args[4]);
-                        String mobCode = args[5];
-                        int mobLevel = Integer.parseInt(args[6]);
-                        int amount = Integer.parseInt(args[7]);
+                        int amount = Integer.parseInt(args[5]);
 
                         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                         DungeonTheme dungeonTheme = dungeonThemes.get(key);
@@ -175,7 +173,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                         Location start = MiniGameManager.getDungeonInstance(key, 1).getStartLocation(1);
                         Vector offset = start.toVector().subtract(add.toVector()).multiply(-1);
 
-                        DungeonRoomSpawner spawner = new DungeonRoomSpawner(mobCode, mobLevel, amount, offset);
+                        DungeonRoomSpawner spawner = new DungeonRoomSpawner(amount, offset, false);
 
                         DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);
                         dungeonRoom.addSpawner(waveNo, spawner);

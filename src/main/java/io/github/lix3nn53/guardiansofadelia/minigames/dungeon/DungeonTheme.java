@@ -34,6 +34,8 @@ public class DungeonTheme {
 
     private final int levelReq;
     private final int timeLimitInMinutes;
+
+    private final List<String> monsterPool;
     private final String bossInternalName;
 
     // Global skillOnGrounds
@@ -47,7 +49,7 @@ public class DungeonTheme {
     private Vector prizeChestCenterOffset;
 
     public DungeonTheme(String code, String name, String gearTag, GearLevel gearLevel, PortalColor portalColor, int levelReq,
-                        int timeLimitInMinutes, String bossInternalName, HashMap<Integer, DungeonRoom> dungeonRooms,
+                        int timeLimitInMinutes, List<String> monsterPool, String bossInternalName, HashMap<Integer, DungeonRoom> dungeonRooms,
                         List<Integer> startingRooms, List<Vector> checkpoints, Vector prizeChestCenterOffset, List<RandomSkillOnGroundWithOffset> skillsOnGround) {
         this.code = code;
         this.name = ChatColor.translateAlternateColorCodes('&', name);
@@ -56,6 +58,7 @@ public class DungeonTheme {
         this.portalColor = portalColor;
         this.levelReq = levelReq;
         this.timeLimitInMinutes = timeLimitInMinutes;
+        this.monsterPool = monsterPool;
         this.bossInternalName = bossInternalName;
         this.dungeonRooms = dungeonRooms;
         this.startingRooms = Collections.unmodifiableList(startingRooms);
@@ -86,6 +89,10 @@ public class DungeonTheme {
 
     public int getTimeLimitInMinutes() {
         return timeLimitInMinutes;
+    }
+
+    public List<String> getMonsterPool() {
+        return monsterPool;
     }
 
     public String getBossInternalName() {
@@ -254,5 +261,36 @@ public class DungeonTheme {
 
     public void addSkillOnGround(RandomSkillOnGroundWithOffset skill) {
         skillsOnGround.add(skill);
+    }
+
+    public String getRandomMonsterToSpawn(int darkness) {
+        if (darkness < 0) {
+            darkness = 1;
+        } else if (darkness > 100) {
+            darkness = 99;
+        }
+
+        int size = monsterPool.size();
+
+        int bound = (int) ((darkness / 100d) * size);
+
+        /*int i = 0;
+        if (bound > 0) {
+            i = new Random().nextInt(bound);
+        }*/
+
+        return monsterPool.get(bound);
+    }
+
+    public int getMonsterLevel(int darkness) {
+        if (darkness < 0) {
+            darkness = 1;
+        } else if (darkness > 100) {
+            darkness = 99;
+        }
+
+        int maxLevel = 10;
+
+        return (int) ((darkness / 100d) * maxLevel) + 1;
     }
 }
