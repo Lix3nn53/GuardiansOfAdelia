@@ -21,10 +21,10 @@ public enum GearLevel {
     EIGHT,
     NINE;
 
-    private static final double MIN_STAT_MULTIPLIER = 2;
-    private static final double MAX_STAT_MULTIPLIER = 15;
+    private static final double MIN_STAT_MULTIPLIER = 0.25;
+    private static final double MAX_STAT_MULTIPLIER = 1.2;
 
-    private static final double NORMAL_ITEM_NERF = 0.8; // passive or normal?
+    private static final double NORMAL_ITEM_NERF = 0.6; // passive stats on normal item
     private static final double ATTRIBUTE_NERF = 0.2;
 
     public static GearLevel getGearLevel(ItemStack itemStack) {
@@ -57,7 +57,7 @@ public enum GearLevel {
             return 0;
         }
 
-        double v = (ordinal() + 1) * MIN_STAT_MULTIPLIER;
+        double v = Math.pow((ordinal() + 2), 2) * MIN_STAT_MULTIPLIER;
 
         if (!isPassive) {
             v = v * NORMAL_ITEM_NERF;
@@ -67,7 +67,7 @@ public enum GearLevel {
             v = v * ATTRIBUTE_NERF;
         }
 
-        return (int) (v + 0.5);
+        return Math.max((int) (v + 0.5), 1);
     }
 
     public int getMaxStatValue(boolean isPassive, boolean isElement) {
@@ -75,7 +75,7 @@ public enum GearLevel {
             return 0;
         }
 
-        double v = (ordinal() + 1) * MAX_STAT_MULTIPLIER;
+        double v = Math.pow((ordinal() + 2), 2) * MAX_STAT_MULTIPLIER;
 
         if (!isPassive) {
             v = v * NORMAL_ITEM_NERF;
@@ -85,6 +85,6 @@ public enum GearLevel {
             v = v * ATTRIBUTE_NERF;
         }
 
-        return (int) (v + 0.5);
+        return Math.max((int) (v + 0.5), 1);
     }
 }

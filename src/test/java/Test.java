@@ -11,10 +11,6 @@ import java.util.List;
 
 public class Test {
 
-    private static final HashMap<Character, Double> playerDamages = new HashMap<>();
-
-    private static final double MULTIPLIER = 1.05;
-
     public static void main(String[] args) throws InterruptedException, SQLException {
 
         /*int reqLevel = 4;
@@ -170,9 +166,9 @@ public class Test {
         System.out.println("result: " + result);*/
 
         for (GearLevel gearLevel : GearLevel.values()) {
-            System.out.println(gearLevel.toString());
-            int minNumberOfAttr = 0;
-            int minNumberOfElements = 1;
+            System.out.println("-----------" + gearLevel.toString());
+            int minNumberOfAttr = 5;
+            int minNumberOfElements = 5;
             int minAttrValue = gearLevel.getMinStatValue(true, false);
             int maxAttrValue = gearLevel.getMaxStatValue(true, false);
             int minElemValue = gearLevel.getMinStatValue(true, true);
@@ -365,26 +361,6 @@ public class Test {
         for (double rate : downRatesForLevel) {
             System.out.println(value * rate);
         }*/
-    }
-
-    private static int getBonusValue(int value) {
-        int bonus = (int) ((value * MULTIPLIER) + 0.5);
-        if (bonus <= 1) {
-            return 1;
-        }
-        return bonus;
-    }
-
-    private static int getDecreaseValue(int value) {
-        double v1 = 1D - MULTIPLIER;
-        double v2 = v1 * (MULTIPLIER * MULTIPLIER);
-        double totalV = v1 + v2;
-
-        int bonus = (int) ((value * totalV) + 0.5);
-        if (bonus <= 1) {
-            return 1;
-        }
-        return bonus;
     }
 
     private static double expFormula(int level) {
