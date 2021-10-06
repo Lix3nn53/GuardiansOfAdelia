@@ -272,14 +272,14 @@ public class DungeonTheme {
 
         int size = monsterPool.size();
 
-        int bound = (int) ((darkness / 100d) * size);
+        int bound = (int) ((darkness / 100d) * size) + 1;
 
-        /*int i = 0;
-        if (bound > 0) {
+        int i = 0;
+        if (bound > 1) {
             i = new Random().nextInt(bound);
-        }*/
+        }
 
-        return monsterPool.get(bound);
+        return monsterPool.get(i);
     }
 
     public int getMonsterLevel(int darkness) {

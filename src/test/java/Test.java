@@ -17,13 +17,13 @@ public class Test {
         int size = 5;
         int maxLevel = 10;
         for (int darkness = 1; darkness < 100; darkness += 5) {
-            int bound = (int) ((darkness / 100d) * size);
+            int bound = (int) ((darkness / 100d) * size) + 1;
 
-            System.out.println("darkness: " + darkness);
+            System.out.println("-------- darkness: " + darkness);
             System.out.println("bound: " + bound);
 
             int i = 0;
-            if (bound > 0) {
+            if (bound > 1) {
                 i = new Random().nextInt(bound);
             }
             System.out.println("i: " + i);
