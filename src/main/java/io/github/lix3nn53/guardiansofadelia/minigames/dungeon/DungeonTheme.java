@@ -17,10 +17,12 @@ import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.MobManager;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
 import java.util.*;
@@ -48,9 +50,13 @@ public class DungeonTheme {
     private final List<Vector> checkpointOffsets;
     private Vector prizeChestCenterOffset;
 
+    // Boss Room
+    private BoundingBox bossRoomBox;
+
     public DungeonTheme(String code, String name, String gearTag, GearLevel gearLevel, PortalColor portalColor, int levelReq,
                         int timeLimitInMinutes, List<String> monsterPool, String bossInternalName, HashMap<Integer, DungeonRoom> dungeonRooms,
-                        List<Integer> startingRooms, List<Vector> checkpoints, Vector prizeChestCenterOffset, List<RandomSkillOnGroundWithOffset> skillsOnGround) {
+                        List<Integer> startingRooms, List<Vector> checkpoints, Vector prizeChestCenterOffset,
+                        List<RandomSkillOnGroundWithOffset> skillsOnGround, BoundingBox bossRoomBox) {
         this.code = code;
         this.name = ChatColor.translateAlternateColorCodes('&', name);
         this.gearTag = gearTag;
@@ -65,6 +71,7 @@ public class DungeonTheme {
         this.checkpointOffsets = checkpoints;
         this.prizeChestCenterOffset = prizeChestCenterOffset;
         this.skillsOnGround = skillsOnGround;
+        this.bossRoomBox = bossRoomBox;
     }
 
     public String getCode() {
@@ -292,5 +299,21 @@ public class DungeonTheme {
         int maxLevel = 10;
 
         return (int) ((darkness / 100d) * maxLevel) + 1;
+    }
+
+
+    public boolean canAttackBoss(Location dungeonStart, Player player) {
+        BoundingBox shift = this.bossRoomBox.clone().shift(dungeonStart);
+
+        Vector vector = player.getLocation().toVector();
+        return shift.contains(vector);
+    }
+
+    public BoundingBox getBossRoomBox() {
+        return bossRoomBox;
+    }
+
+    public void setBossRoomBox(BoundingBox bossRoomBox) {
+        this.bossRoomBox = bossRoomBox;
     }
 }

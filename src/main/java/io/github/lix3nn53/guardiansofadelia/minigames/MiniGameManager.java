@@ -15,6 +15,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -177,6 +178,19 @@ public class MiniGameManager {
         if (playerToMinigame.containsKey(attacker)) {
             playerToMinigame.get(attacker).onPlayerDealDamageToPlayer(attacker, defender);
         }
+    }
+
+    /**
+     * @param attacker
+     * @param defender
+     * @return false to cancel event
+     */
+    public static boolean onPlayerDealDamageToEntity(Player attacker, LivingEntity defender) {
+        if (playerToMinigame.containsKey(attacker)) {
+            return playerToMinigame.get(attacker).onPlayerDealDamageToEntity(attacker, defender);
+        }
+
+        return true;
     }
 
     public static void onQuit(Player player) {

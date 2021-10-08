@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.invite;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -36,9 +37,9 @@ public class Invite {
     public void send() {
         GuardianData receiverData = GuardianDataManager.getGuardianData(receiver);
         if (!receiverData.hasPendingInvite()) {
-            sender.sendTitle("", senderTitle, 20, 40, 20);
+            sender.sendTitle(ChatColor.WHITE + "", senderTitle, 20, 40, 20);
             receiver.sendMessage(receiverMessage);
-            receiver.sendTitle("", receiverTitle, 20, 40, 20);
+            receiver.sendTitle(ChatColor.WHITE + "", receiverTitle, 20, 40, 20);
 
             TextComponent messageMain = new TextComponent("Accept");
             messageMain.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/invite accept"));

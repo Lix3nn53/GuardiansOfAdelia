@@ -5,6 +5,7 @@ import com.google.common.io.ByteStreams;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.PluginChannelListener;
 import io.github.lix3nn53.guardiansofadelia.commands.*;
 import io.github.lix3nn53.guardiansofadelia.commands.admin.*;
+import io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.mechanics.MMCustomMechanicsRegister;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.events.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -152,6 +153,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MyVehicleDestroyEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MySongNextEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MySongLoopEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MMCustomMechanicsRegister(), this);
 
         //init managers
         ConfigManager.init();

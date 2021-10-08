@@ -1,14 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,33 +36,9 @@ public class StatusEffectMechanic extends MechanicComponent {
 
         for (LivingEntity target : targets) {
             for (StatusEffectType effectType : statusEffectTypes) {
-                StatusEffectManager.addStatus(target, effectType);
-
-                // Add freeze effect
-                if (effectType.equals(StatusEffectType.ROOT) || effectType.equals(StatusEffectType.STUN)) {
-                    int maxFreezeTicks = target.getMaxFreezeTicks();
-                    int freezeTicks = Math.min(duration, maxFreezeTicks);
-
-                    target.setFreezeTicks(freezeTicks);
-
-                    // Custom code for mobs
-                    if (!(target instanceof Player)) {
-                        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, 5));
-                    }
-                }
+                StatusEffectManager.addStatus(target, effectType, duration);
             }
         }
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (LivingEntity target : targets) {
-                    for (StatusEffectType effectType : statusEffectTypes) {
-                        StatusEffectManager.removeStatus(target, effectType);
-                    }
-                }
-            }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), duration);
 
         return true;
     }

@@ -55,6 +55,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill [theme] <roomNo>" + ChatPalette.GOLD + " !!look at location block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill [theme] global" + ChatPalette.GOLD + " !!look at location block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add checkpoint" + ChatPalette.GOLD + " !!look at location block!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon set bossRoom" + ChatPalette.GOLD + " !!select WorldEdit region first!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon set prizeloc [theme]" + ChatPalette.GOLD + " !!look at block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon reload - DELETES NEW CHANGES");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon save - SAVES NEW CHANGES");
@@ -261,6 +262,34 @@ public class CommandAdminDungeon implements CommandExecutor {
                     dungeonTheme.setPrizeChestCenterOffset(offset);
 
                     player.sendMessage(ChatPalette.GREEN_DARK + "Set chest prize center location");
+                } else if (args[1].equals("bossRoom")) {
+                    String key = args[2].toUpperCase();
+
+                    HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
+                    DungeonTheme dungeonTheme = dungeonThemes.get(key);
+
+                    BukkitPlayer bPlayer = BukkitAdapter.adapt(player);
+                    try {
+                        Region region = WorldEdit.getInstance().getSessionManager().get(bPlayer).getSelection(bPlayer.getWorld());
+
+                        BlockVector3 min = region.getMinimumPoint();
+                        BlockVector3 max = region.getMaximumPoint();
+
+                        BoundingBox boundingBox = new BoundingBox(min.getX(), min.getY(), min.getZ(), max.getX(), max.getY(), max.getZ());
+
+                        Location start = MiniGameManager.getDungeonInstance(key, 1).getStartLocation(1);
+                        Location multiply = start.multiply(-1);
+
+                        BoundingBox shift = boundingBox.shift(multiply);
+
+                        dungeonTheme.setBossRoomBox(shift);
+
+                        player.sendMessage(ChatPalette.GREEN_DARK + "Set boss room bounds");
+
+                        remakeHolograms(key);
+                    } catch (IncompleteRegionException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 

@@ -12,6 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import net.md_5.bungee.api.ChatColor;
 import net.minecraft.network.protocol.game.PacketPlayOutAnimation;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
@@ -147,13 +148,13 @@ public class GatheringManager {
 
         int gather = ingredient.gather(false);
         if (gather == 0) {
-            player.sendTitle("", ChatPalette.RED + "Failed...", 30, 80, 30);
+            player.sendTitle(ChatColor.WHITE + "", ChatPalette.RED + "Failed...", 30, 80, 30);
             return null;
         }
 
         ItemStack ingredientItem = ingredient.getItemStack(gather);
 
-        player.sendTitle("", ChatPalette.GREEN_DARK + "Obtained " +
+        player.sendTitle(ChatColor.WHITE + "", ChatPalette.GREEN_DARK + "Obtained " +
                 ChatPalette.GOLD + ingredientItem.getAmount() + "x " + ChatPalette.GOLD + ingredientItem.getItemMeta().getDisplayName(), 30, 80, 30);
 
         progressGatheringTasks(player, ingredient, gather);

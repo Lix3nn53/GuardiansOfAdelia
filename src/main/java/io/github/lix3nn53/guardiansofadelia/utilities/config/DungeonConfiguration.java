@@ -198,8 +198,17 @@ public class DungeonConfiguration {
                 skillsOnGround.add(skillOnGroundWithOffset);
             }
 
+            double x1 = section.getDouble("bossRoom" + ".x1");
+            double y1 = section.getDouble("bossRoom" + ".y1");
+            double z1 = section.getDouble("bossRoom" + ".z1");
+            double x2 = section.getDouble("bossRoom" + ".x2");
+            double y2 = section.getDouble("bossRoom" + ".y2");
+            double z2 = section.getDouble("bossRoom" + ".z2");
+
+            BoundingBox bossRoomBox = new BoundingBox(x1, y1, z1, x2, y2, z2);
+
             DungeonTheme dungeonTheme = new DungeonTheme(code, name, gearTag, gearLevel, portalColor, levelReq, timeLimitInMinutes,
-                    monsterPool, bossInternalName, dungeonRooms, startingRooms, checkpoints, prizeChestCenterOffset, skillsOnGround);
+                    monsterPool, bossInternalName, dungeonRooms, startingRooms, checkpoints, prizeChestCenterOffset, skillsOnGround, bossRoomBox);
 
             MiniGameManager.addDungeonTheme(code, dungeonTheme);
         }
@@ -312,6 +321,14 @@ public class DungeonConfiguration {
 
                 skillIndex++;
             }
+
+            BoundingBox bossRoomBox = theme.getBossRoomBox();
+            currentThemeConfig.set("bossRoom" + ".x1", bossRoomBox.getMinX());
+            currentThemeConfig.set("bossRoom" + ".y1", bossRoomBox.getMinY());
+            currentThemeConfig.set("bossRoom" + ".z1", bossRoomBox.getMinZ());
+            currentThemeConfig.set("bossRoom" + ".x2", bossRoomBox.getMaxX());
+            currentThemeConfig.set("bossRoom" + ".y2", bossRoomBox.getMaxY());
+            currentThemeConfig.set("bossRoom" + ".z2", bossRoomBox.getMaxZ());
 
             try {
                 currentThemeConfig.save(themePath + File.separator + code + ".yml");

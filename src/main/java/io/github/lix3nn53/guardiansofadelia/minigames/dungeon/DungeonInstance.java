@@ -19,12 +19,15 @@ import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayer
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -530,5 +533,20 @@ public class DungeonInstance extends Minigame {
             armorStand.remove();
         }
         skillsOnGroundArmorStands.clear();
+    }
+
+    @Override
+    public boolean onPlayerDealDamageToEntity(Player attacker, LivingEntity defender) {
+        ActiveMob mythicMobInstance = MythicMobs.inst().getMobManager().getMythicMobInstance(defender);
+
+        if (mythicMobInstance != null) {
+            String internalName = mythicMobInstance.getType().getInternalName();
+
+            if (internalName.equals(this.theme.getBossInternalName())) { // BOSS
+                return this.theme.canAttackBoss(this.getStartLocation(1), attacker);
+            }
+        }
+
+        return true;
     }
 }

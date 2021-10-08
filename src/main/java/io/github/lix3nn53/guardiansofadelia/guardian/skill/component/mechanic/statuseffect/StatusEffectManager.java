@@ -2,59 +2,94 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.s
 
 
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class StatusEffectManager {
 
-    private static final HashMap<LivingEntity, List<StatusEffectType>> entityToEffects = new HashMap<>();
+    private static final HashMap<LivingEntity, HashMap<StatusEffectType, StatusEffectDuration>> entityToStatusToDuration = new HashMap<>();
 
-    public static void addStatus(LivingEntity livingEntity, StatusEffectType statusEffectType) {
-        List<StatusEffectType> statusEffectTypes;
-
-        if (entityToEffects.containsKey(livingEntity)) {
-            statusEffectTypes = entityToEffects.get(livingEntity);
+    public static void addStatus(LivingEntity target, StatusEffectType effectType, int duration) {
+        HashMap<StatusEffectType, StatusEffectDuration> activeStatuses;
+        if (entityToStatusToDuration.containsKey(target)) {
+            activeStatuses = entityToStatusToDuration.get(target);
         } else {
-            statusEffectTypes = new ArrayList<>();
+            activeStatuses = new HashMap<>();
         }
 
-        statusEffectTypes.add(statusEffectType);
+        if (activeStatuses.containsKey(effectType)) {
+            StatusEffectDuration statusEffectDuration = activeStatuses.get(effectType);
+            int durationLeft = statusEffectDuration.getDurationLeft();
+            if (durationLeft >= duration) {
+                return; // new effect is shorter so just return
+            }
 
-        entityToEffects.put(livingEntity, statusEffectTypes);
+            statusEffectDuration.cancel(); // cancel old timer if new effect duration is longer
+        }
+
+
+        StatusEffectDuration statusEffectDuration = new StatusEffectDuration(effectType, duration);
+        statusEffectDuration.startCooldown(target);
+
+        activeStatuses.put(effectType, statusEffectDuration);
+        entityToStatusToDuration.put(target, activeStatuses);
+
+        // Custom effects
+        // Add freeze effect
+        if (effectType.equals(StatusEffectType.ROOT) || effectType.equals(StatusEffectType.STUN)) {
+            int maxFreezeTicks = target.getMaxFreezeTicks();
+
+            target.setFreezeTicks(maxFreezeTicks);
+
+            // Custom code for mobs
+            if (!(target instanceof Player)) {
+                target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, 5));
+            }
+        }
     }
 
     public static void removeStatus(LivingEntity livingEntity, StatusEffectType statusEffectType) {
-        if (!entityToEffects.containsKey(livingEntity)) return;
+        if (!entityToStatusToDuration.containsKey(livingEntity)) return;
 
-        List<StatusEffectType> statusEffectTypes = entityToEffects.get(livingEntity);
+        HashMap<StatusEffectType, StatusEffectDuration> typeToDuration = entityToStatusToDuration.get(livingEntity);
 
-        statusEffectTypes.remove(statusEffectType);
+        StatusEffectDuration remove = typeToDuration.remove(statusEffectType);
+        if (remove != null) {
+            remove.cancel();
+        }
 
-        if (statusEffectTypes.isEmpty()) {
-            entityToEffects.remove(livingEntity);
+        if (typeToDuration.isEmpty()) {
+            entityToStatusToDuration.remove(livingEntity);
         }
     }
 
     public static boolean isSilenced(LivingEntity livingEntity) {
-        if (!entityToEffects.containsKey(livingEntity)) return false;
+        if (!entityToStatusToDuration.containsKey(livingEntity)) return false;
 
-        List<StatusEffectType> statusEffectTypes = entityToEffects.get(livingEntity);
+        HashMap<StatusEffectType, StatusEffectDuration> typeToDuration = entityToStatusToDuration.get(livingEntity);
 
-        if (statusEffectTypes.contains(StatusEffectType.STUN)) {
+        if (typeToDuration.containsKey(StatusEffectType.STUN)) {
             if (livingEntity instanceof Player) {
+                StatusEffectDuration duration = typeToDuration.get(StatusEffectType.STUN);
+                int durationLeft = duration.getDurationLeft();
+
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatPalette.RED + "Stunned..", 0, 20, 0);
+                player.sendTitle(ChatColor.WHITE + "", ChatPalette.RED + "Stunned for " + durationLeft, 0, 20, 0);
             }
 
             return true;
-        } else if (statusEffectTypes.contains(StatusEffectType.SILENCE)) {
+        } else if (typeToDuration.containsKey(StatusEffectType.SILENCE)) {
             if (livingEntity instanceof Player) {
+                StatusEffectDuration duration = typeToDuration.get(StatusEffectType.SILENCE);
+                int durationLeft = duration.getDurationLeft();
+
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatPalette.RED + "Silenced..", 0, 20, 0);
+                player.sendTitle(ChatColor.WHITE + "", ChatPalette.RED + "Silenced for " + durationLeft, 0, 20, 0);
             }
 
             return true;
@@ -64,21 +99,27 @@ public class StatusEffectManager {
     }
 
     public static boolean isDisarmed(LivingEntity livingEntity) {
-        if (!entityToEffects.containsKey(livingEntity)) return false;
+        if (!entityToStatusToDuration.containsKey(livingEntity)) return false;
 
-        List<StatusEffectType> statusEffectTypes = entityToEffects.get(livingEntity);
+        HashMap<StatusEffectType, StatusEffectDuration> typeToDuration = entityToStatusToDuration.get(livingEntity);
 
-        if (statusEffectTypes.contains(StatusEffectType.STUN)) {
+        if (typeToDuration.containsKey(StatusEffectType.STUN)) {
             if (livingEntity instanceof Player) {
+                StatusEffectDuration duration = typeToDuration.get(StatusEffectType.STUN);
+                int durationLeft = duration.getDurationLeft();
+
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatPalette.RED + "Stunned..", 0, 20, 0);
+                player.sendTitle(ChatColor.WHITE + "", ChatPalette.RED + "Stunned for " + durationLeft, 0, 20, 0);
             }
 
             return true;
-        } else if (statusEffectTypes.contains(StatusEffectType.DISARM)) {
+        } else if (typeToDuration.containsKey(StatusEffectType.DISARM)) {
             if (livingEntity instanceof Player) {
+                StatusEffectDuration duration = typeToDuration.get(StatusEffectType.DISARM);
+                int durationLeft = duration.getDurationLeft();
+
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatPalette.RED + "Disarmed..", 0, 20, 0);
+                player.sendTitle(ChatColor.WHITE + "", ChatPalette.RED + "Disarmed for " + durationLeft, 0, 20, 0);
             }
 
             return true;
@@ -88,21 +129,27 @@ public class StatusEffectManager {
     }
 
     public static boolean isRooted(LivingEntity livingEntity) {
-        if (!entityToEffects.containsKey(livingEntity)) return false;
+        if (!entityToStatusToDuration.containsKey(livingEntity)) return false;
 
-        List<StatusEffectType> statusEffectTypes = entityToEffects.get(livingEntity);
+        HashMap<StatusEffectType, StatusEffectDuration> typeToDuration = entityToStatusToDuration.get(livingEntity);
 
-        if (statusEffectTypes.contains(StatusEffectType.STUN)) {
+        if (typeToDuration.containsKey(StatusEffectType.STUN)) {
             if (livingEntity instanceof Player) {
+                StatusEffectDuration duration = typeToDuration.get(StatusEffectType.STUN);
+                int durationLeft = duration.getDurationLeft();
+
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatPalette.RED + "Stunned..", 0, 20, 0);
+                player.sendTitle(ChatColor.WHITE + "", ChatPalette.RED + "Stunned for " + durationLeft, 0, 20, 0);
             }
 
             return true;
-        } else if (statusEffectTypes.contains(StatusEffectType.ROOT)) {
+        } else if (typeToDuration.containsKey(StatusEffectType.ROOT)) {
             if (livingEntity instanceof Player) {
+                StatusEffectDuration duration = typeToDuration.get(StatusEffectType.ROOT);
+                int durationLeft = duration.getDurationLeft();
+
                 Player player = (Player) livingEntity;
-                player.sendTitle("", ChatPalette.RED + "Rooted..", 0, 20, 0);
+                player.sendTitle(ChatColor.WHITE + "", ChatPalette.RED + "Rooted for " + durationLeft, 0, 20, 0);
             }
 
             return true;

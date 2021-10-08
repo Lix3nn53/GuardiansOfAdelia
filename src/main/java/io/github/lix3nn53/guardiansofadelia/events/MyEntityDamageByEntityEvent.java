@@ -353,7 +353,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 if (livingTarget.getType().equals(EntityType.PLAYER)) {
                     Player playerTarget = (Player) livingTarget;
 
-                    //minigame deal damage listener
+                    // Minigame PVP deal damage listener
                     if (MiniGameManager.isInMinigame(player)) {
                         if (livingTarget.getType().equals(EntityType.PLAYER)) {
                             MiniGameManager.onPlayerDealDamageToPlayer(player, playerTarget);
@@ -383,6 +383,18 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             double elementResistance = MMManager.getElementResistance(internalName, damageType);
 
                             damage = damage * elementResistance;
+                        }
+                    }
+
+                    // Minigame PVE deal damage listener
+                    if (MiniGameManager.isInMinigame(player)) {
+                        if (!livingTarget.getType().equals(EntityType.PLAYER)) {
+                            boolean b = MiniGameManager.onPlayerDealDamageToEntity(player, livingTarget);
+                            if (!b) {
+                                player.sendMessage(ChatPalette.RED + "You can't attack boss from this location.");
+                                event.setCancelled(true);
+                                return true;
+                            }
                         }
                     }
                 }
