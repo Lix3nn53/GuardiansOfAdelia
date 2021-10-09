@@ -151,7 +151,9 @@ skillOne:
                 - 0
     child2:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_FIRE_SLASH"
+      sound: "SKILL.FIRE_SLASH"
+      volume: 1.0
+      pitch: 1.0
 skillTwo:
   name: "Ice Meteor"
   customModelData: 50
@@ -298,7 +300,9 @@ skillTwo:
                   - 0
         child2:
           componentType: "SoundMechanic"
-          goaSound: "SKILL_FIRE_AURA"
+          sound: "SKILL.FIRE_AURA"
+          volume: 1.0
+          pitch: 1.0
 skillThree:
   name: "Frozen Meditation"
   customModelData: 24

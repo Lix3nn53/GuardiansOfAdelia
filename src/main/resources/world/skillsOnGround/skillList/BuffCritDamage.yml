@@ -65,6 +65,11 @@ trigger:
                 - 2000
                 - 2000
           child2:
+            componentType: "SoundMechanic"
+            sound: block.beacon.power_select
+            volume: 1.0
+            pitch: 1.0
+          child3:
             componentType: "BuffMechanic"
             buffType: "CRIT_DAMAGE"
             multipliers:

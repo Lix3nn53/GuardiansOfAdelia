@@ -110,7 +110,9 @@ skillOne:
             - 2
     child2:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_POISON_ARROW"
+      sound: "SKILL.POISON_ARROW"
+      volume: 1.0
+      pitch: 1.0
 skillTwo:
   name: "Zephyr"
   customModelData: 57
@@ -190,7 +192,9 @@ skillTwo:
         - 4
     child4:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_SONIC_BOOM"
+      sound: "SKILL.SONIC_BOOM"
+      volume: 1.0
+      pitch: 1.0
 skillThree:
   name: "Purple Wings"
   customModelData: 44
@@ -261,7 +265,9 @@ skillThree:
       damageCause: "FALL"
     child4:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_VOID_SIGNAL"
+      sound: "SKILL.VOID_SIGNAL"
+      volume: 1.0
+      pitch: 1.0
     child5:
       componentType: "LandTrigger"
       child1:
@@ -330,7 +336,9 @@ skillPassive:
               - 0
           child3:
             componentType: "SoundMechanic"
-            goaSound: "SKILL_BUFF"
+            sound: "SKILL.BUFF"
+            volume: 1.0
+            pitch: 1.0
       child2:
         componentType: "SelfTarget"
         child1:
@@ -462,5 +470,7 @@ skillUltimate:
                 - 1.6
         child3:
           componentType: "SoundMechanic"
-          goaSound: "SKILL_ARROW_RAIN"
+          sound: "SKILL.ARROW_RAIN"
+          volume: 1.0
+          pitch: 1.0
 

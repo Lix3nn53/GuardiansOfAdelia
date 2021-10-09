@@ -64,7 +64,9 @@ skillOne:
         save: true
       child2:
         componentType: "SoundMechanic"
-        goaSound: "SKILL_SPLASH"
+        sound: "SKILL.SPLASH"
+        volume: 1.0
+        pitch: 1.0
 skillTwo:
   name: "Thunderstorm"
   customModelData: 56
@@ -130,7 +132,9 @@ skillTwo:
               - 0.8
         child2:
           componentType: "SoundMechanic"
-          goaSound: "SKILL_SONIC_BOOM"
+          sound: "SKILL.SONIC_BOOM"
+          volume: 1.0
+          pitch: 1.0
 skillThree:
   name: "Polymorph"
   customModelData: 45
@@ -205,7 +209,9 @@ skillThree:
             armorStand: true
             child2:
               componentType: "SoundMechanic"
-              goaSound: "SKILL_STUN_HIT"
+              sound: "SKILL.STUN_HIT"
+              volume: 1.0
+              pitch: 1.0
 skillPassive:
   name: "Purifying Waters"
   customModelData: 52
@@ -280,7 +286,9 @@ skillPassive:
                     - 325
               child2:
                 componentType: "SoundMechanic"
-                goaSound: "SKILL_HEAL"
+                sound: "SKILL.HEAL"
+                volume: 1.0
+                pitch: 1.0
 skillUltimate:
   name: "Surf"
   customModelData: 54
@@ -387,4 +395,6 @@ skillUltimate:
             delay: 5
       child4:
         componentType: "SoundMechanic"
-        goaSound: "SKILL_JUMP"
+        sound: "SKILL.JUMP"
+        volume: 1.0
+        pitch: 1.0

@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
+import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
@@ -9,18 +9,26 @@ import java.util.List;
 
 public class SoundMechanic extends MechanicComponent {
 
-    private final GoaSound goaSound;
+    private final CustomSound goaSound;
 
     public SoundMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 
-        if (!configurationSection.contains("goaSound")) {
-            configLoadError("goaSound");
+        if (!configurationSection.contains("sound")) {
+            configLoadError("sound");
+        }
+        if (!configurationSection.contains("volume")) {
+            configLoadError("volume");
+        }
+        if (!configurationSection.contains("pitch")) {
+            configLoadError("pitch");
         }
 
-        String goaSound = configurationSection.getString("goaSound");
+        String soundString = configurationSection.getString("sound").toLowerCase();
+        float volume = (float) configurationSection.getDouble("volume");
+        float pitch = (float) configurationSection.getDouble("pitch");
 
-        this.goaSound = GoaSound.valueOf(goaSound);
+        this.goaSound = new CustomSound(soundString, volume, pitch);
     }
 
     @Override
@@ -28,7 +36,7 @@ public class SoundMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         for (LivingEntity ent : targets) {
-            goaSound.getCustomSound().play(ent.getLocation());
+            goaSound.play(ent.getLocation());
         }
 
         return true;

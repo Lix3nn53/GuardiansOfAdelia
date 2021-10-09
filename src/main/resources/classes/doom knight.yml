@@ -88,7 +88,9 @@ skillOne:
           - 2.2
       child2:
         componentType: "SoundMechanic"
-        goaSound: "SKILL_LIGHTNING_NORMAL"
+        sound: "SKILL.LIGHTNING_NORMAL"
+        volume: 1.0
+        pitch: 1.0
 skillTwo:
   name: "Death's Grasp"
   customModelData: 46
@@ -210,7 +212,9 @@ skillTwo:
                   - 0
               child2:
                 componentType: "SoundMechanic"
-                goaSound: "SKILL_STUN_HIT"
+                sound: "SKILL.STUN_HIT"
+                volume: 1.0
+                pitch: 1.0
               child3:
                 componentType: "FlagSetMechanic"
                 key: "doomknight2success"
@@ -222,7 +226,9 @@ skillTwo:
                   - 200
     child2:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_FIRE_SLASH"
+      sound: "SKILL.FIRE_SLASH"
+      volume: 1.0
+      pitch: 1.0
 skillThree:
   name: "Leap of Doom"
   customModelData: 40
@@ -317,7 +323,9 @@ skillThree:
             - 11
         child2:
           componentType: "SoundMechanic"
-          goaSound: "SKILL_POWERFUL_LANDING"
+          sound: "SKILL.POWERFUL_LANDING"
+          volume: 1.0
+          pitch: 1.0
         child3:
           componentType: "ImmunityRemoveMechanic"
           damageCause: FALL
@@ -368,7 +376,9 @@ skillThree:
               - 70
     child6:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_BUFF"
+      sound: "SKILL.BUFF"
+      volume: 1.0
+      pitch: 1.0
 skillPassive:
   name: "Aura of Darkness"
   customModelData: 45

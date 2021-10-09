@@ -41,7 +41,7 @@ public class GlowMechanic extends MechanicComponent {
 
         Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
 
-        String teamName = color.name() + "GlowMechanic";
+        String teamName = color.name();
 
         Team team = board.getTeam(teamName) != null ? board.getTeam(teamName) : board.registerNewTeam(teamName);
         team.setColor(color);

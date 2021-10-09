@@ -126,7 +126,9 @@ skillOne:
                   - 0.8
     child3:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_SPLASH"
+      sound: "SKILL.SPLASH"
+      volume: 1.0
+      pitch: 1.0
 skillTwo:
   name: "Bomb"
   customModelData: 19
@@ -245,7 +247,9 @@ skillTwo:
             - 4
     child2:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_SPLASH"
+      sound: "SKILL.SPLASH"
+      volume: 1.0
+      pitch: 1.0
 skillThree:
   name: "Oil"
   customModelData: 22
@@ -371,7 +375,9 @@ skillPassive:
             - 4
         child2:
           componentType: "SoundMechanic"
-          goaSound: "SKILL_HEAL"
+          sound: "SKILL.HEAL"
+          volume: 1.0
+          pitch: 1.0
 skillUltimate:
   name: "Missile"
   customModelData: 62
@@ -488,4 +494,6 @@ skillUltimate:
         componentType: "SelfTarget"
         child1:
           componentType: "SoundMechanic"
-          goaSound: "SKILL_FIRE_SLASH"
+          sound: "SKILL.FIRE_SLASH"
+          volume: 1.0
+          pitch: 1.0

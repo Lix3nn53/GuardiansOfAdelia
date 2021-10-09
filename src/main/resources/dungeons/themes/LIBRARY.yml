@@ -8,6 +8,13 @@ name: '&d???? Library'
 levelReq: 5
 timeLimitInMinutes: 10
 bossInternalName: TutorialSoldier
+bossRoom:
+  x1: -72.0
+  y1: -6.5
+  z1: 4.0
+  x2: -72.0
+  y2: -2.5
+  z2: 8.0
 gearTag: Library tag??
 gearLevel: 0
 portalColor: PURPLE
@@ -18,3 +25,4 @@ prizeChestCenter:
   x: 0.0
   y: 0.0
   z: 0.0
+monsterPool: [ ]

@@ -101,7 +101,9 @@ skillOne:
           - 0
       child4:
         componentType: "SoundMechanic"
-        goaSound: "SKILL_LIGHTNING_NORMAL"
+        sound: "SKILL.LIGHTNING_NORMAL"
+        volume: 0.5
+        pitch: 1.0
 skillTwo:
   name: "Soul Spike"
   customModelData: 55
@@ -202,7 +204,9 @@ skillTwo:
         - 0
     child3:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_FIRE_SLASH"
+      sound: "SKILL.FIRE_SLASH"
+      volume: 0.5
+      pitch: 1.0
 skillThree:
   name: "Realm of Darkness"
   customModelData: 40
@@ -303,7 +307,9 @@ skillThree:
       flagIsSet: true
     child6:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_BUFF"
+      sound: "SKILL.BUFF"
+      volume: 0.5
+      pitch: 1.0
     child7:
       componentType: "ValueSetMechanic"
       key: "souls"
@@ -622,4 +628,6 @@ skillUltimate:
             - 0
         child5:
           componentType: "SoundMechanic"
-          goaSound: "SKILL_LIGHTNING_NORMAL"
+          sound: "SKILL.LIGHTNING_NORMAL"
+          volume: 0.5
+          pitch: 1.0

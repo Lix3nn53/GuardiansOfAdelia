@@ -129,10 +129,14 @@ skillOne:
           - 3.25
       child3:
         componentType: "SoundMechanic"
-        goaSound: "SKILL_WIND_PUSH"
+        sound: "SKILL.WIND_PUSH"
+        volume: 1.0
+        pitch: 1.0
     child2:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_PROJECTILE_ICE"
+      sound: "SKILL.PROJECTILE_ICE"
+      volume: 1.0
+      pitch: 1.0
 skillTwo:
   name: "Volley"
   customModelData: 15
@@ -190,7 +194,9 @@ skillTwo:
             - 1.2
     child2:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_MULTI_ARROW"
+      sound: "SKILL.MULTI_ARROW"
+      volume: 1.0
+      pitch: 1.0
 skillThree:
   name: "Hookshot"
   customModelData: 46
@@ -253,7 +259,9 @@ skillThree:
         damageCause: "FALL"
     child2:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_PROJECTILE_FIRE"
+      sound: "SKILL.PROJECTILE_FIRE"
+      volume: 1.0
+      pitch: 1.0
     child3:
       componentType: "LandTrigger"
       child1:
@@ -387,7 +395,9 @@ skillUltimate:
                 componentType: "RemoveSavedEntities"
             child4:
               componentType: "SoundMechanic"
-              goaSound: "SKILL_STUN_HIT"
+              sound: "SKILL.STUN_HIT"
+              volume: 1.0
+              pitch: 1.0
             child5:
               componentType: "SelfTarget"
               child1:

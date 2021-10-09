@@ -195,7 +195,9 @@ skillTwo:
                 - 3
     child2:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_FIRE_SLASH"
+      sound: "SKILL.FIRE_SLASH"
+      volume: 1.0
+      pitch: 1.0
 skillThree:
   name: "Life Drain"
   customModelData: 38
@@ -436,4 +438,6 @@ skillUltimate:
             upward: 1
           child3:
             componentType: "SoundMechanic"
-            goaSound: "SKILL_STUN_HIT"
+            sound: "SKILL.STUN_HIT"
+            volume: 1.0
+            pitch: 1.0

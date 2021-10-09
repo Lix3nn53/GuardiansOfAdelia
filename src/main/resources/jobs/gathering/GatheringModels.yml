@@ -20,24 +20,24 @@ i1:
     z: 1394.5
   loc2:
     world: world
-    x: 2086.5
-    y: 100.0
-    z: 1476.5
-  loc3:
-    world: world
-    x: 2131.5
-    y: 96.0
-    z: 1450.5
-  loc4:
-    world: world
     x: 2159.5
     y: 100.0
     z: 1451.5
-  loc5:
+  loc3:
     world: world
     x: 2017.5
     y: 101.0
     z: 1489.5
+  loc4:
+    world: world
+    x: 2086.5
+    y: 100.0
+    z: 1476.5
+  loc5:
+    world: world
+    x: 2131.5
+    y: 96.0
+    z: 1450.5
 i2:
   name: '&cPoppy'
   material: STONE_AXE
@@ -59,14 +59,14 @@ i2:
     z: 1412.5
   loc3:
     world: world
-    x: 2123.5
-    y: 107.0
-    z: 1299.5
-  loc4:
-    world: world
     x: 2188.5
     y: 94.0
     z: 1413.5
+  loc4:
+    world: world
+    x: 2123.5
+    y: 107.0
+    z: 1299.5
   loc5:
     world: world
     x: 2103.5
@@ -88,25 +88,35 @@ i3:
     - 6
   loc1:
     world: world
+    x: 2020.5
+    y: 100.0
+    z: 1429.5
+  loc2:
+    world: world
+    x: 2087.5
+    y: 92.0
+    z: 1418.5
+  loc3:
+    world: world
     x: 2156.5
     y: 97.0
     z: 1439.5
-  loc2:
-    world: world
-    x: 2151.5
-    y: 107.0
-    z: 1261.5
-  loc3:
+  loc4:
     world: world
     x: 2179.5
     y: 93.0
     z: 1406.5
-  loc4:
+  loc5:
+    world: world
+    x: 2151.5
+    y: 107.0
+    z: 1261.5
+  loc6:
     world: world
     x: 2075.5
     y: 99.0
     z: 1459.5
-  loc5:
+  loc7:
     world: world
     x: 2008.5
     y: 104.0
@@ -122,32 +132,14 @@ i4:
     - 8
   loc1:
     world: world
-    x: 2134.5
-    y: 94.0
-    z: 1430.5
+    x: 2085.5
+    y: 93.0
+    z: 1433.5
     rotation:
       x: 0.0
-      y: 1.5
-      z: 5.0
+      y: 0.5
+      z: 1.5
   loc2:
-    world: world
-    x: 2230.5
-    y: 99.0
-    z: 1217.5
-    rotation:
-      x: 0.0
-      y: 1.0
-      z: 5.0
-  loc3:
-    world: world
-    x: 2141.5
-    y: 97.0
-    z: 1447.5
-    rotation:
-      x: 5.0
-      y: 0.0
-      z: 0.0
-  loc4:
     world: world
     x: 2061.5
     y: 101.0
@@ -156,6 +148,33 @@ i4:
       x: 0.0
       y: 4.0
       z: 1.5
+  loc3:
+    world: world
+    x: 2134.5
+    y: 94.0
+    z: 1430.5
+    rotation:
+      x: 0.0
+      y: 1.5
+      z: 5.0
+  loc4:
+    world: world
+    x: 2230.5
+    y: 99.0
+    z: 1217.5
+    rotation:
+      x: 0.0
+      y: 1.0
+      z: 5.0
+  loc5:
+    world: world
+    x: 2141.5
+    y: 97.0
+    z: 1447.5
+    rotation:
+      x: 5.0
+      y: 0.0
+      z: 0.0
 i5:
   name: '&dWeak Magic Source'
   material: STONE_AXE
@@ -167,6 +186,11 @@ i5:
   ingredients:
     - 10
   loc1:
+    world: world
+    x: 1960.5
+    y: 96.0
+    z: 1424.5
+  loc2:
     world: world
     x: 2031.5
     y: 108.0

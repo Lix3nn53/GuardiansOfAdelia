@@ -111,7 +111,9 @@ skillOne:
                 addLore: false
     child2:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_LIGHTNING_NORMAL"
+      sound: "SKILL.LIGHTNING_NORMAL"
+      volume: 1.0
+      pitch: 1.0
 skillTwo:
   name: "Flame Burst"
   customModelData: 27
@@ -199,10 +201,14 @@ skillTwo:
             - 0
         child3:
           componentType: "SoundMechanic"
-          goaSound: "SKILL_STUN_HIT"
+          sound: "SKILL.STUN_HIT"
+          volume: 1.0
+          pitch: 1.0
     child2:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_FIRE_SLASH"
+      sound: "SKILL.FIRE_SLASH"
+      volume: 1.0
+      pitch: 1.0
 skillThree:
   name: "Dragon's Charge"
   customModelData: 31
@@ -409,7 +415,9 @@ skillUltimate:
         - 0
     child2:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_JUMP"
+      sound: "SKILL.JUMP"
+      volume: 1.0
+      pitch: 1.0
     child3:
       componentType: "ImmunityMechanic"
       damageCause: "FALL"
@@ -438,7 +446,9 @@ skillUltimate:
       componentType: "LandTrigger"
       child1:
         componentType: "SoundMechanic"
-        goaSound: "SKILL_POWERFUL_LANDING"
+        sound: "SKILL.POWERFUL_LANDING"
+        volume: 1.0
+        pitch: 1.0
       child2:
         componentType: "ImmunityRemoveMechanic"
         damageCause: FALL

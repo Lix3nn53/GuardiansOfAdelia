@@ -8,12 +8,19 @@ name: '&a???? Sewers'
 levelReq: 5
 timeLimitInMinutes: 5
 monsterPool:
-  - AcademySlime
-  - AcademySlimeMedium
-  - AcademySlimeMedium
-  - AcademySlimeMedium
-  - AcademySlimeMedium
-bossInternalName: AcademySlimeBoss
+  - SlimeSmall
+  - SlimeMedium
+  - SlimeMedium
+  - SlimeMedium
+  - SlimeMedium
+bossInternalName: SlimeBoss
+bossRoom:
+  x1: -113.0
+  y1: -33.5
+  z1: -70.0
+  x2: -64.0
+  y2: -19.5
+  z2: -41.0
 gearTag: Rotten
 gearLevel: 0
 portalColor: GREEN
@@ -28,14 +35,14 @@ checkpoints:
 room1:
   wave1:
     spawner1:
-      amount: 2
+      amount: 3
       offset:
         x: -42.5
         y: -9.5
         z: -7.5
   wave2:
     spawner1:
-      amount: 2
+      amount: 5
       offset:
         x: -55.5
         y: -9.5
@@ -102,14 +109,14 @@ room2:
       z2: 1.0
   wave1:
     spawner1:
-      amount: 2
+      amount: 3
       offset:
         x: -84.5
         y: -3.5
         z: -4.5
   wave2:
     spawner1:
-      amount: 1
+      amount: 4
       offset:
         x: -99.5
         y: -3.5
@@ -153,13 +160,13 @@ room3:
       z2: -33.0
   wave2:
     spawner1:
-      amount: 2
+      amount: 4
       offset:
         x: -141.5
         y: -21.5
         z: -36.5
     spawner2:
-      amount: 2
+      amount: 4
       offset:
         x: -130.5
         y: -25.5
@@ -168,13 +175,13 @@ room4:
   nextRooms: [ ]
   wave1:
     spawner1:
-      amount: 2
+      amount: 4
       offset:
         x: -105.5
         y: -25.5
         z: -25.5
     spawner2:
-      amount: 2
+      amount: 4
       offset:
         x: -95.5
         y: -25.5

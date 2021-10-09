@@ -151,7 +151,7 @@ quest4:
     actionType: "TeleportAction"
     delay: 10
     world: "world"
-    x: 2030.5
+    x: 2040.5
     y: 107.5
     z: 1524.5
     yaw: -130.0

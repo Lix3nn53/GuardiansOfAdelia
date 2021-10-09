@@ -88,7 +88,9 @@ skillOne:
             - 0.08
       child2:
         componentType: "SoundMechanic"
-        goaSound: "SKILL_PROJECTILE_FIRE"
+        sound: "SKILL.PROJECTILE_FIRE"
+        volume: 1.0
+        pitch: 1.0
     child2:
       componentType: "DelayMechanic"
       ticks: 20
@@ -133,7 +135,9 @@ skillOne:
           centerSelf: true
       child2:
         componentType: "SoundMechanic"
-        goaSound: "SKILL_SMASH"
+        sound: "SKILL.SMASH"
+        volume: 1.0
+        pitch: 1.0
     child3:
       componentType: "StatusEffectMechanic"
       statusEffectTypes:
@@ -233,7 +237,9 @@ skillTwo:
       upward: 0.1
     child5:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_THROW_SMALL_OBJECT"
+      sound: "SKILL.THROW_SMALL_OBJECT"
+      volume: 1.0
+      pitch: 1.0
 skillThree:
   name: "Serenity"
   customModelData: 24
@@ -336,7 +342,9 @@ skillThree:
       pitchIncrease: 0
     child6:
       componentType: "SoundMechanic"
-      goaSound: "SKILL_BARD_MUSIC"
+      sound: "SKILL.BARD_MUSIC"
+      volume: 1.0
+      pitch: 1.0
 skillPassive:
   name: "Crippling Wave"
   customModelData: 10

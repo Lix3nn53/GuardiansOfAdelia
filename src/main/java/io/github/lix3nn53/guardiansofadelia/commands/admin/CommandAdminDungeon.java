@@ -55,7 +55,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill [theme] <roomNo>" + ChatPalette.GOLD + " !!look at location block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill [theme] global" + ChatPalette.GOLD + " !!look at location block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add checkpoint" + ChatPalette.GOLD + " !!look at location block!!");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon set bossRoom" + ChatPalette.GOLD + " !!select WorldEdit region first!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon set bossRoom [theme]" + ChatPalette.GOLD + " !!select WorldEdit region first!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon set prizeloc [theme]" + ChatPalette.GOLD + " !!look at block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon reload - DELETES NEW CHANGES");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon save - SAVES NEW CHANGES");
