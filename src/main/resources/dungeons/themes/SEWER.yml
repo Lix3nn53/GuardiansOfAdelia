@@ -6,7 +6,7 @@
 
 name: '&a???? Sewers'
 levelReq: 5
-timeLimitInMinutes: 5
+timeLimitInMinutes: 7
 monsterPool:
   - SlimeSmall
   - SlimeMedium
@@ -21,7 +21,7 @@ bossRoom:
   x2: -64.0
   y2: -19.5
   z2: -41.0
-gearTag: Rotten
+gearTag: Sticky
 gearLevel: 0
 portalColor: GREEN
 startingRooms:
@@ -73,9 +73,9 @@ room1:
       y: -9.5
       z: -16.5
     skill1:
-      name: Test
+      name: SlimeOoze
       period: 5
-      skillKey: RootPoison
+      skillKey: SlimeOoze
       skillLevel: 2
   skillOnGround2:
     loc:
@@ -83,9 +83,9 @@ room1:
       y: -9.5
       z: 17.5
     skill1:
-      name: Test
+      name: SlimeOoze
       period: 5
-      skillKey: RootPoison
+      skillKey: SlimeOoze
       skillLevel: 2
   skillOnGround3:
     loc:
@@ -93,9 +93,9 @@ room1:
       y: -9.5
       z: -0.5
     skill1:
-      name: Test
+      name: SlimeOoze
       period: 5
-      skillKey: RootPoison
+      skillKey: SlimeOoze
       skillLevel: 2
 room2:
   door1:
@@ -202,8 +202,9 @@ room5:
       y: -31.5
       z: -58.5
     skill1:
+      name: SlimeOoze
       period: 5
-      skillKey: RootPoison
+      skillKey: SlimeOoze
       skillLevel: 1
   skillOnGround2:
     loc:
@@ -211,8 +212,9 @@ room5:
       y: -31.5
       z: -51.5
     skill1:
+      name: SlimeOoze
       period: 5
-      skillKey: RootPoison
+      skillKey: SlimeOoze
       skillLevel: 1
   skillOnGround3:
     loc:
@@ -220,8 +222,9 @@ room5:
       y: -31.5
       z: -52.5
     skill1:
+      name: SlimeOoze
       period: 5
-      skillKey: RootPoison
+      skillKey: SlimeOoze
       skillLevel: 1
   skillOnGround4:
     loc:
@@ -229,8 +232,9 @@ room5:
       y: -31.5
       z: -60.5
     skill1:
+      name: SlimeOoze
       period: 5
-      skillKey: RootPoison
+      skillKey: SlimeOoze
       skillLevel: 1
   skillOnGround5:
     loc:
@@ -238,8 +242,9 @@ room5:
       y: -31.5
       z: -52.5
     skill1:
+      name: SlimeOoze
       period: 5
-      skillKey: RootPoison
+      skillKey: SlimeOoze
       skillLevel: 1
   skillOnGround6:
     loc:
@@ -247,8 +252,9 @@ room5:
       y: -31.5
       z: -58.5
     skill1:
+      name: SlimeOoze
       period: 5
-      skillKey: RootPoison
+      skillKey: SlimeOoze
       skillLevel: 1
 prizeChestCenter:
   x: -80.5

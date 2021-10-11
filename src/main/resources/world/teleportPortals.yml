@@ -1,0 +1,23 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#                  Portal Data                   #
+# ---------------------------------------------- #
+
+p1:
+  title: "&dLeft click to climb to the tower!"
+  x: 237.5
+  y: 39.5
+  z: 270.5
+  world: tutorial
+  yaw: -135
+  pitch: 0
+  color: PURPLE
+  tpX: 278.5
+  tpY: 159.5
+  tpZ: 292.5
+  tpWorld: tutorial
+  tpYaw: 140
+  tpPitch: 0
+  requiredQuestNoAccepted: 4
+  requiredQuestNoTurnedIn: 0

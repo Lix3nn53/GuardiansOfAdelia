@@ -62,7 +62,7 @@ i7:
   material: "SLIME_BALL"
   ingredientLevel: 1
   maxAmountPerGather: 2
-  dropRate: 0.4
+  dropRate: 0.15
   jobsCanUse:
     - '&dPotion Brewing'
 i8:

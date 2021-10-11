@@ -161,95 +161,7 @@ public enum MerchantPageType {
         return new EnchantGui(player);
     }
 
-    private GuiBookGeneric getEggShop(int shopLevel, int shopNpc) {
-        List<MerchantGuiLine> lines = new ArrayList<>();
-        lines.add(new MerchantGuiLine());
-        int lineIndex = 0;
-/* TODO pet shop
-        if (shopLevel == 1) {
-            lines.get(lineIndex).addWord(Eggs.get(Companion.WOLF, 20), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.PIG, 20), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.SHEEP, 20), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.COW, 20), 1);
-        } else if (shopLevel == 3) {
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_ALL_BLACK, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_BLACK, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_BRITISH_SHORTHAIR, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_CALICO, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_JELLIE, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_PERSIAN, 30), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_RAGDOLL, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_RED, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_SIAMESE, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_TABBY, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CAT_WHITE, 30), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_BLACK, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_BLACK_AND_WHITE, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_BROWN, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_GOLD, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_SALT_AND_PEPPER, 30), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.RABBIT_WHITE, 30), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CHICKEN, 30), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.CHOCOLATE, 30), 1);
-        } else if (shopLevel == 4) {
-            lines.get(lineIndex).addWord(Eggs.get(Companion.POLAR_BEAR, 50), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.PANDA, 50), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.TURTLE, 50), 1);
-        } else if (shopLevel == 5) {
-            lines.get(lineIndex).addWord(Eggs.get(Companion.FOX_RED, 70), 1);
-            lines.get(lineIndex).addWord(Eggs.get(Companion.FOX_SNOW, 70), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.ICE_CREAM, 70), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.MINI_DRAGON, 70), 1);
-            lines.add(new MerchantGuiLine());
-            lineIndex++;
-            lines.get(lineIndex).addWord(Eggs.get(Companion.VEX, 70), 1);
-        }
-*/
-        List<GuiPage> guiPages = new ArrayList<>();
-        guiPages.add(new GuiPage());
-        int guiPageIndex = 0;
-
-        for (MerchantGuiLine line : lines) {
-            if (guiPages.get(guiPageIndex).isEmpty()) {
-                guiPages.get(guiPageIndex).addLine(line);
-            } else {
-                guiPages.add(new GuiPage());
-                guiPageIndex++;
-            }
-        }
-
-        GuiBookGeneric merchantShop = new GuiBookGeneric("Companion Shop", shopNpc);
-        for (GuiPage page : guiPages) {
-            merchantShop.addPage(page);
-        }
-        return merchantShop;
-    }
-
     private GuiBookGeneric getWeaponShop(int shopLevel, int shopNpc) {
-        GearLevel gearLevel = GearLevel.values()[shopLevel];
-
         List<MerchantGuiLine> lines = new ArrayList<>();
         lines.add(new MerchantGuiLine());
 
@@ -259,49 +171,21 @@ public enum MerchantPageType {
         lines.add(new MerchantGuiLine());
 
         for (WeaponGearType weaponGearType : WeaponGearType.values()) {
-            int price = 99999999;
+            for (int i = shopLevel; i < shopLevel + 2; i++) {
+                GearLevel gearLevel = GearLevel.values()[i];
 
-            switch (weaponGearType) {
-                case SWORD:
-                    price = 3;
-                    break;
-                case DAGGER:
-                    price = 3;
-                    break;
-                case BATTLE_AXE:
-                    price = 3;
-                    break;
-                case GREAT_SWORD:
-                    price = 3;
-                    break;
-                case WAR_HAMMER:
-                    price = 3;
-                    break;
-                case SPEAR:
-                    price = 3;
-                    break;
-                case BOW:
-                    price = 3;
-                    break;
-                case CROSSBOW:
-                    price = 3;
-                    break;
-                case STAFF:
-                    price = 3;
-                    break;
-                case WAND:
-                    price = 3;
-                    break;
-            }
+                List<ItemStack> itemStacks = WeaponManager.get(weaponGearType, gearLevel, tier, true, null);
 
-            List<ItemStack> itemStacks = WeaponManager.get(weaponGearType, gearLevel, tier, true, null);
+                for (ItemStack itemStack : itemStacks) {
+                    int sellValue = SellGui.getSellValue(itemStack);
+                    int price = getPrice(sellValue);
 
-            for (ItemStack itemStack : itemStacks) {
-                if (!lines.get(lineIndex).isEmpty()) {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
+                    if (!lines.get(lineIndex).isEmpty()) {
+                        lines.add(new MerchantGuiLine());
+                        lineIndex++;
+                    }
+                    lines.get(lineIndex).addWord(itemStack, price);
                 }
-                lines.get(lineIndex).addWord(itemStack, price);
             }
         }
 
@@ -326,8 +210,6 @@ public enum MerchantPageType {
     }
 
     private GuiBookGeneric getArmorShop(int shopLevel, int shopNpc) {
-        GearLevel gearLevel = GearLevel.values()[shopLevel];
-
         List<MerchantGuiLine> lines = new ArrayList<>();
 
         ItemTier tier = ItemTier.COMMON;
@@ -336,22 +218,22 @@ public enum MerchantPageType {
         lines.add(new MerchantGuiLine());
 
         for (ArmorGearType armorGearType : ArmorGearType.values()) {
-            for (ArmorSlot armorSlot : ArmorSlot.values()) {
-                int price = 2; //boots and helmet
-                if (armorSlot.equals(ArmorSlot.LEGGINGS)) {
-                    price = 3;
-                } else if (armorSlot.equals(ArmorSlot.CHESTPLATE)) {
-                    price = 4;
-                }
+            for (int i = shopLevel; i < shopLevel + 2; i++) {
+                GearLevel gearLevel = GearLevel.values()[i];
 
-                List<ItemStack> itemStacks = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, true, null);
+                for (ArmorSlot armorSlot : ArmorSlot.values()) {
+                    List<ItemStack> itemStacks = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, true, null);
 
-                for (ItemStack itemStack : itemStacks) {
-                    if (!lines.get(lineIndex).isEmpty()) {
-                        lines.add(new MerchantGuiLine());
-                        lineIndex++;
+                    for (ItemStack itemStack : itemStacks) {
+                        int sellValue = SellGui.getSellValue(itemStack);
+                        int price = getPrice(sellValue);
+
+                        if (!lines.get(lineIndex).isEmpty()) {
+                            lines.add(new MerchantGuiLine());
+                            lineIndex++;
+                        }
+                        lines.get(lineIndex).addWord(itemStack, price);
                     }
-                    lines.get(lineIndex).addWord(itemStack, price);
                 }
             }
         }
@@ -378,8 +260,6 @@ public enum MerchantPageType {
     }
 
     private GuiBookGeneric getShieldShop(int shopLevel, int shopNpc) {
-        GearLevel gearLevel = GearLevel.values()[shopLevel];
-
         List<MerchantGuiLine> lines = new ArrayList<>();
         lines.add(new MerchantGuiLine());
 
@@ -389,22 +269,23 @@ public enum MerchantPageType {
         lines.add(new MerchantGuiLine());
 
         for (ShieldGearType shieldGearType : ShieldGearType.values()) {
-            int price = 2; //If any other ShieldGearType exists which is weaker than SHIELD
-            if (shieldGearType.equals(ShieldGearType.SHIELD)) {
-                price = 3;
-            }
+            for (int i = shopLevel; i < shopLevel + 2; i++) {
+                GearLevel gearLevel = GearLevel.values()[i];
 
-            List<ItemStack> itemStacks = ShieldManager.get(shieldGearType, gearLevel, tier, true, null);
+                List<ItemStack> itemStacks = ShieldManager.get(shieldGearType, gearLevel, tier, true, null);
 
-            for (ItemStack itemStack : itemStacks) {
-                if (!lines.get(lineIndex).isEmpty()) {
-                    lines.add(new MerchantGuiLine());
-                    lineIndex++;
+                for (ItemStack itemStack : itemStacks) {
+                    int sellValue = SellGui.getSellValue(itemStack);
+                    int price = getPrice(sellValue);
+
+                    if (!lines.get(lineIndex).isEmpty()) {
+                        lines.add(new MerchantGuiLine());
+                        lineIndex++;
+                    }
+                    lines.get(lineIndex).addWord(itemStack, price);
                 }
-                lines.get(lineIndex).addWord(itemStack, price);
             }
         }
-
         List<GuiPage> guiPages = new ArrayList<>();
         guiPages.add(new GuiPage());
         int guiPageIndex = 0;
@@ -567,5 +448,9 @@ public enum MerchantPageType {
         GuiBookGeneric potion_shop = new GuiBookGeneric("Tool Shop", shopNpc);
         potion_shop.addPage(guiPage);
         return potion_shop;
+    }
+
+    private int getPrice(int sellPrice) {
+        return (int) (sellPrice * 1.6 + 0.5);
     }
 }

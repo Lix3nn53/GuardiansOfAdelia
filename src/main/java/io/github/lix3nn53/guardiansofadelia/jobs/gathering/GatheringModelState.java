@@ -148,7 +148,7 @@ public class GatheringModelState {
                     }
                 }
             }
-        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 60L);
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 20L); // TODO make a premium server buff for faster cooldown?
     }
 
     public void resetName(GatheringModelData gatheringModelData) {

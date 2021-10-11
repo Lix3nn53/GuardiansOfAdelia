@@ -1,0 +1,142 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#                 Hologram List                  #
+# ---------------------------------------------- #
+
+Hologram1:
+  x: 471.5
+  y: 10.5
+  z: 34.5
+  world: tutorial
+  texts:
+    - '&6Turn in your quest and select a weapon as reward!'
+    - '1 - Right click Arnas to open Quest Menu'
+    - '2 - Click Magenta Wool to turn in your current quest'
+    - '3 - Select your weapon'
+Hologram2:
+  x: 458.5
+  y: 12.5
+  z: 32.5
+  world: tutorial
+  texts:
+    - '&6Check TAB-LIST to see your new quest!'
+    - 'If you dont see your new quest on TAB-LIST:'
+    - '1 - Right click Arnas to open Quest Menu'
+    - '2 - Click Lime Wool to accept new quest'
+Hologram3:
+  x: 407.5
+  y: 34.5
+  z: 74.5
+  world: tutorial
+  texts:
+    - '&6Learn your skills to get ready!'
+    - '1 - Open menu by clicking Menu-Book from your inventory(E key)'
+    - '2 - Tap Character and then Skills'
+    - '3 - Give points to your skills to unlock'
+    - '4 - Once unlocked, press 1-2-3-4 keys to cast skills'
+Hologram4:
+  x: 302.5
+  y: 34.5
+  z: 115.5
+  world: tutorial
+  texts:
+    - '&6Use your Stat Points to get stronger'
+    - '1 - Open menu by clicking Menu-Book from your inventory(E key)'
+    - '2 - Tap Character and then Stat Points'
+    - '3 - Spend your stat points to earn attributes'
+    - '4 - You can Shift + Click to use 5 points at once'
+Hologram5:
+  x: 301.5
+  y: 34.5
+  z: 124.5
+  world: tutorial
+  texts:
+    - 'Dont forget to accept your new quest...'
+    - '...from Elysea and follow this road'
+Hologram6:
+  x: 278.5
+  y: 30.5
+  z: 260.5
+  world: tutorial
+  texts:
+    - '&6Equip jewelries via RPG-Inventory to gain bonus stats!'
+    - '1 - Open RPG-Inventory by clicking a crafting slot from your inventory(E key)'
+    - '2 - Equip jewelries you got from Syvia'
+Hologram7:
+  x: 244.5
+  y: 37.5
+  z: 263.5
+  world: tutorial
+  texts:
+    - '&6Teleport to top of the tower to face Aleesia!'
+    - '1 - Get close to the Teleport Portal'
+    - '2 - Left Click to teleport'
+Hologram8:
+  x: 2052.5
+  y: 106.5
+  z: 1511.5
+  world: world
+  texts:
+    - '&aWelcome to the lands of Adelia!'
+    - '&eOne last tip:'
+    - '1 - Open menu by clicking Menu-Book from your inventory(E key)'
+    - '2 - Tap Compass and then select your destination'
+    - '3 - A compass showing your destination will be added to your inventory'
+    - '&dHave fun!'
+Hologram9:
+  x: 2062.5
+  y: 117.5
+  z: 1366.5
+  world: world
+  texts:
+    - '&d-- Cooking --'
+Hologram10:
+  x: 2061.5
+  y: 131.5
+  z: 1269.5
+  world: world
+  texts:
+    - '&c-- Ranged Weaponsmith --'
+Hologram11:
+  x: 2067.5
+  y: 131.5
+  z: 1269.5
+  world: world
+  texts:
+    - '&c-- Melee Weaponsmith --'
+Hologram12:
+  x: 2055.5
+  y: 131.5
+  z: 1286.5
+  world: world
+  texts:
+    - '&b-- Heavy Armorsmith --'
+Hologram13:
+  x: 2050.5
+  y: 131.5
+  z: 1285.5
+  world: world
+  texts:
+    - '&b-- Light Armorsmith --'
+Hologram14:
+  x: 2053.5
+  y: 131.5
+  z: 1269.5
+  world: world
+  texts:
+    - '&6-- Jewelsmith --'
+Hologram15:
+  x: 2044.5
+  y: 131.5
+  z: 1283.5
+  world: world
+  texts:
+    - '&6-- EnchantStone Crafting --'
+Hologram16:
+  x: 2039.5
+  y: 131.5
+  z: 1285.5
+  world: world
+  texts:
+    - '&d-- Potion Brewing --'

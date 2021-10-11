@@ -5,20 +5,20 @@
 # ---------------------------------------------- #
 
 m1:
-  mobKey: "AcademyCow"
+  mobKey: "Cow1"
   ingredients:
     - 1
     - 3
 m2:
-  mobKey: "AcademySheep"
+  mobKey: "Sheep1"
   ingredients:
     - 1
     - 4
 m3:
-  mobKey: "AcademySlime"
+  mobKey: "SlimeSmall"
   ingredients:
     - 7
 m4:
-  mobKey: "AcademySlimeMedium"
+  mobKey: "SlimeMedium"
   ingredients:
     - 7

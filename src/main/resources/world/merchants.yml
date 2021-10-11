@@ -1,0 +1,46 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#                 Town Information               #
+# ---------------------------------------------- #
+
+merchant1:
+  npc: 20
+  type: TOOL_SHOP
+  level: 0
+merchant2:
+  npc: 21
+  type: TOOL_SHOP
+  level: 1
+merchant3:
+  npc: 40
+  type: WEAPONSMITH
+  level: 0
+merchant4:
+  npc: 41
+  type: WEAPONSMITH
+  level: 1
+merchant5:
+  npc: 60
+  type: ARMORSMITH
+  level: 0
+merchant6:
+  npc: 61
+  type: ARMORSMITH
+  level: 1
+merchant7:
+  npc: 80
+  type: STORAGE_KEEPER
+  level: 0
+merchant8:
+  npc: 81
+  type: STORAGE_KEEPER
+  level: 1
+merchant9:
+  npc: 100
+  type: MAGIC_SHOP
+  level: 0
+merchant10:
+  npc: 101
+  type: MAGIC_SHOP
+  level: 1

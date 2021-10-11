@@ -57,13 +57,37 @@ public class SellGui extends GuiGeneric {
         setItem(48, bronzeGlass);
     }
 
+    public static int getSellValue(ItemStack itemStack) {
+        int reqLevel = 1;
+        if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
+            reqLevel = PersistentDataContainerUtil.getInteger(itemStack, "reqLevel");
+        }
+
+        ItemTier itemTier = ItemTier.getItemTierOfItemStack(itemStack);
+        int enchantLevel = EnchantManager.getEnchantLevel(itemStack);
+
+        int sellValue = SellGui.getSellValue(reqLevel, itemTier, enchantLevel);
+
+        return sellValue * itemStack.getAmount();
+    }
+
+    public static int getSellValue(int reqLevel, ItemTier itemTier, int enchantLevel) {
+        double price = Math.max(1, Math.pow(reqLevel, 1.2) / 4);
+
+        price = price * itemTier.getBonusMultiplier();
+
+        price = price * EnchantManager.getSellGuiMultiplier(enchantLevel);
+
+        return (int) (price + 0.5);
+    }
+
     public boolean addItemToSell(ItemStack itemStack, int slotNoInPlayerInventory) {
         if (!InventoryUtils.canSellMaterial(itemStack.getType())) return false;
 
         if (!slotNoToRemoveFromPlayerInv.contains(slotNoInPlayerInventory)) {
             addItem(itemStack);
             slotNoToRemoveFromPlayerInv.add(slotNoInPlayerInventory);
-            totalValue += getSellValue(itemStack);
+            totalValue += SellGui.getSellValue(itemStack);
             int[] coins = EconomyUtils.priceToCoins(totalValue);
 
             ItemStack gold = new ItemStack(Material.DIAMOND);
@@ -97,22 +121,6 @@ public class SellGui extends GuiGeneric {
         }
 
         return true;
-    }
-
-    private int getSellValue(ItemStack itemStack) {
-        int reqLevel = 1;
-        if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
-            reqLevel = PersistentDataContainerUtil.getInteger(itemStack, "reqLevel");
-        }
-        double price = Math.max(1, Math.pow(reqLevel, 1.2) / 4);
-
-        ItemTier itemTier = ItemTier.getItemTierOfItemStack(itemStack);
-        price = price * itemTier.getBonusMultiplier();
-
-        int enchantLevel = EnchantManager.getEnchantLevel(itemStack);
-        price = price * EnchantManager.getSellGuiMultiplier(enchantLevel);
-
-        return (int) (price + 0.5) * itemStack.getAmount();
     }
 
     public void finish(Player player) {

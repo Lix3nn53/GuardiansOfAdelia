@@ -58,6 +58,7 @@ public class ConfigManager {
         LootChestConfiguration.createConfigs();
         GearSetConfiguration.createConfigs();
         MobConfigurations.createConfigs();
+        MerchantConfiguration.createConfigs();
     }
 
     public static void loadConfigALL() {
@@ -83,6 +84,7 @@ public class ConfigManager {
         LootChestConfiguration.loadConfigs();
         GearSetConfiguration.loadConfig();
         MobConfigurations.loadConfigs();
+        MerchantConfiguration.loadConfigs();
     }
 
     public static void writeConfigALL() {

@@ -1,0 +1,123 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#                 Town Information               #
+# ---------------------------------------------- #
+
+trigger:
+  componentType: "SelfTarget"
+  child1:
+    componentType: "FlagCondition"
+    key: "activated"
+    isSet: false
+    child1:
+      componentType: "AreaTarget"
+      allies: true
+      enemy: true
+      self: false
+      max: 20
+      radiusList:
+        - 2
+        - 2.5
+        - 3
+        - 3.5
+        - 4
+        - 3.5
+        - 5
+        - 5.5
+        - 6
+        - 6.5
+      amountList:
+        - 6
+        - 9
+        - 12
+        - 15
+        - 18
+        - 21
+        - 24
+        - 24
+        - 24
+        - 24
+      particle:
+        particleType: "REDSTONE"
+        dustColor: 3407667
+        dustSize: 4
+      child1:
+        componentType: "EntityTypeCondition"
+        entityType: "PLAYER"
+        child1:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "FlagSetMechanic"
+            key: "activated"
+            isUnique: false
+            ticks:
+              - 200
+              - 200
+              - 200
+              - 200
+              - 200
+              - 200
+              - 200
+              - 200
+              - 200
+              - 200
+        child2:
+          componentType: "StatusEffectMechanic"
+          statusEffectTypes:
+            - "ROOT"
+          durations:
+            - 30
+            - 40
+            - 50
+            - 60
+            - 70
+            - 80
+            - 90
+            - 100
+            - 120
+            - 140
+        child3:
+          componentType: "PotionEffectMechanic"
+          potionEffectType:
+            - "POISON"
+          tickList:
+            - 120
+            - 120
+            - 120
+            - 120
+            - 120
+            - 120
+            - 120
+            - 120
+            - 120
+            - 120
+          amplifierList:
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+      child2:
+        componentType: "EntityTypeCondition"
+        entityType: "SLIME"
+        child1:
+          componentType: "HealMechanic"
+          healPercentList:
+            - 0.05
+            - 0.05
+            - 0.05
+            - 0.05
+            - 0.05
+            - 0.05
+            - 0.05
+            - 0.05
+            - 0.05
+            - 0.05
+          addLore: false
+          
