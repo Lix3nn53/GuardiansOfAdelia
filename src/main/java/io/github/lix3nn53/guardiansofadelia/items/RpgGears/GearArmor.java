@@ -45,7 +45,7 @@ public class GearArmor implements RPGGear {
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatPalette.PURPLE + "Required Level: " + ChatPalette.GRAY + level);
         lore.add("");
-        lore.add(ChatPalette.GREEN_DARK + "❤ Health: " + ChatPalette.GRAY + "+" + health);
+        lore.add(GearArmor.getLoreHealthPrefix() + health);
         lore.add(ChatPalette.BLUE_LIGHT + "■ Element Defense: " + ChatPalette.GRAY + "+" + defense);
         if (!statPassive.isEmpty(false, true)) {
             lore.add("");
@@ -112,5 +112,9 @@ public class GearArmor implements RPGGear {
     @Override
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    public static String getLoreHealthPrefix() {
+        return ChatPalette.GREEN_DARK + "❤ Health: " + ChatPalette.GRAY + "+";
     }
 }

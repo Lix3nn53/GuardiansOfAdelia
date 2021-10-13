@@ -25,10 +25,7 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -123,7 +120,15 @@ public class DungeonInstance extends Minigame {
             for (Player player : party.getMembers()) {
                 player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                 player.removePotionEffect(PotionEffectType.WITHER);
+                player.removePotionEffect(PotionEffectType.POISON);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 200, 4));
+
+                List<Entity> nearbyEntities = player.getNearbyEntities(16, 16, 16);
+                for (Entity entity : nearbyEntities) {
+                    if (entity.getType().equals(EntityType.PLAYER)) continue;
+
+                    entity.remove();
+                }
             }
         }
 
@@ -134,6 +139,7 @@ public class DungeonInstance extends Minigame {
                 List<DungeonRoomSpawnerState> spawnerStates = wavesToSpawnerStates.get(waveNo);
                 for (DungeonRoomSpawnerState state : spawnerStates) {
                     state.stopSecureSpawnerRunner();
+                    state.clearSpawned();
                 }
             }
         }
@@ -508,11 +514,7 @@ public class DungeonInstance extends Minigame {
 
                 List<DungeonRoomSpawnerState> waveToSpawnerStates = new ArrayList<>();
                 for (int spawnerIndex = 0; spawnerIndex < roomSpawners.size(); spawnerIndex++) {
-                    DungeonRoomSpawner spawner = roomSpawners.get(spawnerIndex);
-
-                    int amount = spawner.getAmount();
-
-                    waveToSpawnerStates.add(new DungeonRoomSpawnerState(amount));
+                    waveToSpawnerStates.add(new DungeonRoomSpawnerState());
                 }
 
                 wavesToSpawnerStates.put(waveNo, waveToSpawnerStates);

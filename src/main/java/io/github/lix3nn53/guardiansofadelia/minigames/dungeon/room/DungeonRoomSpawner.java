@@ -7,12 +7,10 @@ import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
 import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class DungeonRoomSpawner {
@@ -50,6 +48,8 @@ public class DungeonRoomSpawner {
         // Start secure spawner runner
         spawnerState.startSecureSpawnerRunner(mobCode, mobLevel, dungeonStart, this, roomNo, spawnerIndex);
 
+        spawnerState.onSpawn(spawned);
+
         return spawned;
     }
 
@@ -59,34 +59,26 @@ public class DungeonRoomSpawner {
      * @param dungeonStart
      * @return
      */
-    public List<Entity> secureSpawn(String mobCode, int mobLevel, Location dungeonStart, int roomNo, int spawnerIndex, int mobsLeftToKill) {
+    public List<Entity> secureSpawn(String mobCode, int mobLevel, Location dungeonStart, int roomNo,
+                                    int spawnerIndex, List<Entity> currentMobs) {
         String spawnerKey = roomNo + "-" + spawnerIndex;
 
         List<Entity> spawned = new ArrayList<>();
 
-        World world = dungeonStart.getWorld();
-
-        Location add = dungeonStart.clone().add(offset);
-
-        Collection<Entity> nearbyEntities = world.getNearbyEntities(add, 32, 32, 32);
-
-        int count = 0;
-        for (Entity entity : nearbyEntities) {
-            if (PersistentDataContainerUtil.hasString(entity, "spawnerKey")) {
-                String mobSpawnerKey = PersistentDataContainerUtil.getString(entity, "spawnerKey");
-                if (spawnerKey.equals(mobSpawnerKey)) {
-                    count++;
-                }
+        int amountToSpawn = 0;
+        for (Entity entity : currentMobs) {
+            if (!entity.isValid()) {
+                amountToSpawn++;
             }
         }
-
-        int amountToSpawn = mobsLeftToKill - count;
 
         if (amountToSpawn <= 0) return spawned;
 
         BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
 
         try {
+            Location add = dungeonStart.clone().add(offset);
+
             for (int i = 0; i < amountToSpawn; i++) {
                 Entity entity = apiHelper.spawnMythicMob(mobCode, add, mobLevel);
                 PersistentDataContainerUtil.putString("spawnerKey", spawnerKey, entity);

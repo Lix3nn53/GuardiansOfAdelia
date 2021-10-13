@@ -312,7 +312,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     }
 
                     // BuffMechanic
-                    damage *= rpgCharacterStats.getBuffMultiplier(BuffType.ELEMENT_DAMAGE);
+                    damage *= rpgCharacterStats.getBuffValue(BuffType.ELEMENT_DAMAGE);
 
                     //add critical damage right before defense
                     double totalCriticalChance = rpgCharacterStats.getTotalCriticalChance();

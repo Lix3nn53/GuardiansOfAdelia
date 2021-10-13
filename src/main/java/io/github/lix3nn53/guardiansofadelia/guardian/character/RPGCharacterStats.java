@@ -118,10 +118,52 @@ public class RPGCharacterStats {
         new BukkitRunnable() {
             @Override
             public void run() {
+                if (!player.isOnline()) {
+                    cancel();
+                    return;
+                }
                 String between = actionBarInfo.getActionBarBetween(player);
 
-                String message = ChatPalette.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + between + ChatPalette.BLUE_LIGHT + "✦" + currentMana + "/" + getTotalMaxMana();
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
+                StringBuilder message = new StringBuilder(ChatPalette.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + between + ChatPalette.BLUE_LIGHT + "✦" + currentMana + "/" + getTotalMaxMana());
+
+                ArrayList<String> buffs = new ArrayList<>();
+                if (buffElementDamage != 1) {
+                    if (buffElementDamage > 1) {
+                        buffs.add(ChatPalette.RED + "[Dmg +" + (int) ((buffElementDamage - 1) * 100 + 0.5) + "%]");
+                    } else {
+                        buffs.add(ChatPalette.RED + "[Dmg -" + (int) ((1 - buffElementDamage) * 100 + 0.5) + "%]");
+                    }
+                }
+                if (buffElementDefense != 1) {
+                    if (buffElementDefense > 1) {
+                        buffs.add(ChatPalette.BLUE_LIGHT + "[Def +" + (int) ((buffElementDefense - 1) * 100 + 0.5) + "%]");
+                    } else {
+                        buffs.add(ChatPalette.BLUE_LIGHT + "[Def -" + (int) ((1 - buffElementDefense) * 100 + 0.5) + "%]");
+                    }
+                }
+                if (buffCriticalChance != 0) {
+                    buffs.add(ChatPalette.GOLD + "[Crit +" + (int) ((buffCriticalChance * 100) + 0.5) + "%]");
+                }
+                if (buffCriticalDamage != 0) {
+                    buffs.add(ChatPalette.ORANGE + "[CritDmg +" + (int) ((buffCriticalDamage * 100) + 0.5) + "%]");
+                }
+                if (buffAbilityHaste != 0) {
+                    buffs.add(ChatPalette.BLUE + "[Haste +" + buffAbilityHaste + "]");
+                }
+
+                for (int i = 0; i < buffs.size(); i++) {
+                    if (i % 2 == 0) {
+                        message.insert(0, buffs.get(i) + " ");
+                    } else {
+                        message.append(" ").append(buffs.get(i));
+                    }
+                }
+
+                if (buffs.size() % 2 == 1) {
+                    message.append("           ");
+                }
+
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message.toString()));
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 10L);
     }
@@ -887,7 +929,7 @@ public class RPGCharacterStats {
         }
     }
 
-    public double getBuffMultiplier(BuffType buffType) {
+    public double getBuffValue(BuffType buffType) {
         if (buffType.equals(BuffType.ELEMENT_DAMAGE)) {
             return this.buffElementDamage;
         } else if (buffType.equals(BuffType.ELEMENT_DEFENSE)) {

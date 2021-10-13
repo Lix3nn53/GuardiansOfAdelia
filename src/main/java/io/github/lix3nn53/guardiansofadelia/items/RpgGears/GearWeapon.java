@@ -47,7 +47,7 @@ public class GearWeapon implements RPGGear {
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatPalette.PURPLE + "Required Level: " + ChatPalette.GRAY + level);
         lore.add("");
-        lore.add(ChatPalette.RED + "✦ Element Damage: " + ChatPalette.GRAY + "+" + elementDamage);
+        lore.add(GearWeapon.getLoreDamagePrefix() + elementDamage);
         lore.add(ChatPalette.BLUE_LIGHT + "ø Attack Speed: " + weaponAttackSpeed.getLoreString());
         lore.add(ChatPalette.GOLD + "☆ Critical chance: " + ChatPalette.GRAY + new DecimalFormat("##.##").format(gearType.getCriticalChance() * 100) + "%");
         double meleeDamageReduction = gearType.getMeleeDamageReduction();
@@ -134,5 +134,9 @@ public class GearWeapon implements RPGGear {
     @Override
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    public static String getLoreDamagePrefix() {
+        return ChatPalette.RED + "✦ Element Damage: " + ChatPalette.GRAY + "+";
     }
 }

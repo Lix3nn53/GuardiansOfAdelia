@@ -12,6 +12,8 @@ public class RPGItemUtils {
 
     public static void setDamage(ItemStack itemStack, int amount) {
         ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.removeAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE);
+
         AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), "generic.attack_damage", amount, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, modifier);
         AttributeModifier modifierTwo = new AttributeModifier(UUID.randomUUID(), "generic.attack_damage", amount * 0.6, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.OFF_HAND);
@@ -32,6 +34,8 @@ public class RPGItemUtils {
 
     public static void setAttackSpeed(ItemStack itemStack, double amount) {
         ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED);
+
         AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), "generic.attack_speed", amount, AttributeModifier.Operation.ADD_NUMBER);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, modifier);
         itemStack.setItemMeta(itemMeta);

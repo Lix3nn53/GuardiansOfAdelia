@@ -213,6 +213,8 @@ public class SkillComponentLoader {
             return new DungeonDarknessMechanic(configurationSection);
         } else if (componentType.equals(TargetCountMinigameCondition.class.getSimpleName())) {
             return new TargetCountMinigameCondition(configurationSection);
+        } else if (componentType.equals(FilterEntityTypeTargets.class.getSimpleName())) {
+            return new FilterEntityTypeTargets(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

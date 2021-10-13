@@ -2,6 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.items.enchanting;
 
 import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.GearArmor;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.GearWeapon;
 import io.github.lix3nn53.guardiansofadelia.items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatOneType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
@@ -98,11 +100,11 @@ public class Enchant {
             String statString;
 
             if (type.equals(GearStatType.WEAPON_GEAR)) {
-                statString = ChatPalette.RED + "🗡 Element Damage: " + ChatPalette.GRAY + "+";
+                statString = GearWeapon.getLoreDamagePrefix();
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             } else {
-                statString = ChatPalette.GREEN_DARK + "❤ Health: " + ChatPalette.GRAY + "+";
+                statString = GearArmor.getLoreHealthPrefix();
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             }
@@ -235,11 +237,11 @@ public class Enchant {
             String statString;
 
             if (type.equals(GearStatType.WEAPON_GEAR)) {
-                statString = ChatPalette.RED + "🗡 Element Damage: " + ChatPalette.GRAY + "+";
+                statString = GearWeapon.getLoreDamagePrefix();
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             } else {
-                statString = ChatPalette.GREEN_DARK + "❤ Health: " + ChatPalette.GRAY + "+";
+                statString = GearArmor.getLoreHealthPrefix();
                 StatOneType stat = (StatOneType) StatUtils.getStat(itemStack);
                 baseValue = stat.getValue();
             }

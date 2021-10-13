@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
@@ -26,8 +25,7 @@ public class TargetCountCondition extends ConditionComponent {
         int size = targets.size();
 
         boolean success = false;
-        GuardiansOfAdelia.getInstance().getLogger().info("this.count " + this.count);
-        GuardiansOfAdelia.getInstance().getLogger().info("size " + size);
+
         if (size >= this.count) {
             success = executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
         }

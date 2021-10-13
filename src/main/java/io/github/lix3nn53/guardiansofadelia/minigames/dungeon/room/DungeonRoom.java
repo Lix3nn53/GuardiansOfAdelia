@@ -89,7 +89,7 @@ public class DungeonRoom {
 
             if (spawner.thisSpawnersMob(mob, roomNo, spawnerIndex)) {
                 DungeonRoomSpawnerState spawnerState = spawnerStates.get(spawnerIndex);
-                spawnerState.onMobKill(1);
+                spawnerState.onMobKill(mob);
                 thisRoomsMob = true;
                 break;
             }

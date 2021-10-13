@@ -24,10 +24,9 @@ public class TargetCountMinigameCondition extends ConditionComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         int size = targets.size();
 
-        boolean success = false;
-
-        boolean successLocal = false;
         boolean isInMinigame = false;
+        boolean successPlayerCount = false;
+
         for (LivingEntity ent : targets) {
             if (ent instanceof Player) {
                 Player player = (Player) ent;
@@ -40,8 +39,8 @@ public class TargetCountMinigameCondition extends ConditionComponent {
                     int playerCount = playersInGame.size();
 
                     if (size >= playerCount) {
-                        successLocal = true;
-                        success = executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
+                        successPlayerCount = true;
+                        break;
                     }
 
                     break;
@@ -49,7 +48,7 @@ public class TargetCountMinigameCondition extends ConditionComponent {
             }
         }
 
-        if (isInMinigame && !successLocal) {
+        if (isInMinigame && !successPlayerCount) {
             for (LivingEntity ent : targets) {
                 if (ent instanceof Player) {
                     Player player = (Player) ent;
@@ -61,11 +60,7 @@ public class TargetCountMinigameCondition extends ConditionComponent {
             return false;
         }
 
-        if (!isInMinigame) {
-            success = executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
-        }
-
-        return success;
+        return executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
     }
 
     @Override

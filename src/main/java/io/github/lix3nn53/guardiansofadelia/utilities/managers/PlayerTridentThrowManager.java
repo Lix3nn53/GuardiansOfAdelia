@@ -23,7 +23,7 @@ public class PlayerTridentThrowManager {
             public void run() {
                 waitingForReturn.remove(player);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 15L);
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 20 * 15L);
     }
 
     public static void onPlayerTridentPickUp(Player player) {
