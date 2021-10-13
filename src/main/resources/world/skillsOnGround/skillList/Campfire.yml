@@ -41,8 +41,9 @@ trigger:
       particle:
         particleType: "HEART"
       child1:
-        componentType: "EntityTypeCondition"
-        entityType: "PLAYER"
+        componentType: "FilterEntityTypeTargets"
+        entityTypes:
+          - "PLAYER"
         child1:
           componentType: "TargetCountMinigameCondition"
           child1:

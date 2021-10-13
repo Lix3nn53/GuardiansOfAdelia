@@ -35,9 +35,9 @@ skillOne:
     - "slows enemies in area if it hits a target."
   manaCosts:
     - 5
-    - 6
     - 7
-    - 8
+    - 9
+    - 11
   cooldowns:
     - 4
     - 4
@@ -161,15 +161,15 @@ skillTwo:
     - "Summon a small ice meteor from the sky that"
     - "deals damage and slows enemies in area."
   manaCosts:
-    - 10
-    - 12
-    - 14
-    - 16
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 12
-    - 12
-    - 12
-    - 12
+    - 9
+    - 9
+    - 9
+    - 9
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -309,15 +309,15 @@ skillThree:
   description:
     - "Freeze yourself but restore health overtime."
   manaCosts:
-    - 10
-    - 12
-    - 14
-    - 16
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 14
-    - 14
-    - 14
-    - 14
+    - 18
+    - 18
+    - 18
+    - 18
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -325,43 +325,43 @@ skillThree:
       statusEffectTypes:
         - "STUN"
       durations:
+        - 80
+        - 100
         - 120
-        - 160
-        - 200
-        - 240
+        - 140
     child2:
       componentType: "HologramMechanic"
       helmetType: "IRON_PICKAXE"
       customModelData: 10
       durations:
+        - 80
+        - 100
         - 120
-        - 160
-        - 200
-        - 240
+        - 140
       upward: -0.5
     child3:
       componentType: "InvincibleMechanic"
       ticks:
+        - 80
+        - 100
         - 120
-        - 160
-        - 200
-        - 240
+        - 140
     child4:
       componentType: "GlowMechanic"
       color: "AQUA"
       ticks:
+        - 80
+        - 100
         - 120
-        - 160
-        - 200
-        - 240
+        - 140
     child5:
       componentType: "RepeatMechanic"
-      period: 40
+      period: 20
       repetitions:
-        - 3
         - 4
         - 5
         - 6
+        - 7
       child1:
         componentType: "HealMechanic"
         healPercentList:
@@ -392,15 +392,15 @@ skillPassive:
     - "If you have 4 stacks particles will start playing"
     - "around you. The enemies your next skill hit will freeze."
   manaCosts:
-    - 0
-    - 0
-    - 0
-    - 0
+    - 10
+    - 10
+    - 10
+    - 10
   cooldowns:
-    - 40
-    - 40
-    - 40
-    - 40
+    - 0
+    - 0
+    - 0
+    - 0
   trigger:
     componentType: "InitializeTrigger"
     child1:
@@ -473,15 +473,15 @@ skillUltimate:
     - "Summon a blizzard that deals damage to nearby"
     - "enemies and slows them every second."
   manaCosts:
-    - 50
-    - 55
-    - 60
-    - 65
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 40
-    - 40
-    - 40
-    - 40
+    - 24
+    - 24
+    - 24
+    - 24
   trigger:
     componentType: "SelfTarget"
     child1:

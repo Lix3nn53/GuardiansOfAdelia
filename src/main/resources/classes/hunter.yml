@@ -32,15 +32,11 @@ skillOne:
     - "Shoot an arrow that deals area"
     - "damage and pushes targets away on hit."
   manaCosts:
-    - 10
-    - 12
-    - 14
-    - 16
-    - 18
-    - 20
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 12
-    - 12
     - 12
     - 12
     - 12
@@ -143,15 +139,11 @@ skillTwo:
   description:
     - "Fire multiple arrows in a cone"
   manaCosts:
-    - 10
-    - 12
-    - 14
-    - 16
-    - 18
-    - 20
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 16
-    - 16
     - 16
     - 16
     - 16
@@ -205,19 +197,15 @@ skillThree:
     - "If it collides with terrain dash towards it,"
     - "if it hits a target pull the target."
   manaCosts:
-    - 30
-    - 32
-    - 34
-    - 36
-    - 38
-    - 40
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 21
-    - 21
-    - 21
-    - 21
-    - 21
-    - 21
+    - 16
+    - 16
+    - 16
+    - 16
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -278,11 +266,7 @@ skillPassive:
     - 0
     - 0
     - 0
-    - 0
-    - 0
   cooldowns:
-    - 1
-    - 1
     - 1
     - 1
     - 1
@@ -306,15 +290,15 @@ skillUltimate:
     - "an enemy steps on it."
     - "Stuns the target when triggered."
   manaCosts:
-    - 30
-    - 30
-    - 30
-    - 30
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 3
-    - 3
-    - 3
-    - 3
+    - 16
+    - 16
+    - 16
+    - 16
   trigger:
     componentType: "SelfTarget"
     child1:

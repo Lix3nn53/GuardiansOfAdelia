@@ -40,15 +40,11 @@ skillOne:
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
-    - 2
-    - 2
+    - 8
+    - 8
+    - 8
+    - 8
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -112,15 +108,15 @@ skillTwo:
     - "Gain 2 soul stacks per hit."
     - "Consumes souls to increase amount of projectiles."
   manaCosts:
-    - 1
-    - 1
-    - 1
-    - 1
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
+    - 12
+    - 12
+    - 12
+    - 12
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -215,15 +211,15 @@ skillThree:
     - "Effect is canceled if you cast spell or attack an enemy."
     - "Consumes souls to increase effect duration."
   manaCosts:
-    - 20
-    - 24
-    - 28
-    - 32
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 5
-    - 5
-    - 5
-    - 5
+    - 16
+    - 16
+    - 16
+    - 16
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -466,10 +462,10 @@ skillUltimate:
     - 5
     - 5
   cooldowns:
-    - 4
-    - 4
-    - 4
-    - 4
+    - 24
+    - 24
+    - 24
+    - 24
   trigger:
     componentType: "SelfTarget"
     child1:

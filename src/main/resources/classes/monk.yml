@@ -35,17 +35,17 @@ skillOne:
   customModelData: 36
   description:
     - "Throw 5 punches in a second."
-    - "The last punch also pushed the target away."
+    - "The last punch pushes the target away."
   manaCosts:
     - 5
-    - 6
     - 7
-    - 8
+    - 9
+    - 11
   cooldowns:
-    - 4
-    - 4
-    - 4
-    - 4
+    - 8
+    - 8
+    - 8
+    - 8
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -155,14 +155,14 @@ skillTwo:
     - "you will jump to changes each cast."
   manaCosts:
     - 2
-    - 2
-    - 2
-    - 2
+    - 3
+    - 4
+    - 5
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
+    - 4
+    - 4
+    - 4
+    - 4
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -246,15 +246,15 @@ skillThree:
   description:
     - "Freeze yourself but restore health as you stay frozen."
   manaCosts:
-    - 10
-    - 12
-    - 14
-    - 16
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 4
-    - 4
-    - 4
-    - 4
+    - 18
+    - 18
+    - 18
+    - 18
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -262,33 +262,33 @@ skillThree:
       statusEffectTypes:
         - "STUN"
       durations:
+        - 80
+        - 100
         - 120
-        - 160
-        - 200
-        - 240
+        - 140
     child2:
       componentType: "InvincibleMechanic"
       ticks:
+        - 80
+        - 100
         - 120
-        - 160
-        - 200
-        - 240
+        - 140
     child3:
       componentType: "GlowMechanic"
       color: "YELLOW"
       ticks:
+        - 80
+        - 100
         - 120
-        - 160
-        - 200
-        - 240
+        - 140
     child4:
       componentType: "RepeatMechanic"
-      period: 40
+      period: 20
       repetitions:
-        - 3
         - 4
         - 5
         - 6
+        - 7
       child1:
         componentType: "AreaTarget"
         allies: true
@@ -352,15 +352,15 @@ skillPassive:
     - "Dealing damage with melee attack after dealing"
     - "damage with ranged attack will stun the target."
   manaCosts:
-    - 0
-    - 0
-    - 0
-    - 0
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 40
-    - 40
-    - 40
-    - 40
+    - 32
+    - 32
+    - 32
+    - 32
   trigger:
     componentType: "InitializeTrigger"
     child1:
@@ -444,14 +444,14 @@ skillUltimate:
     - "in bubble are stunned and goes up into the sky slowly."
   manaCosts:
     - 5
-    - 5
-    - 6
-    - 6
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 10
-    - 10
-    - 10
-    - 10
+    - 32
+    - 32
+    - 32
+    - 32
   trigger:
     componentType: "SelfTarget"
     child1:

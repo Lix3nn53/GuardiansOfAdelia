@@ -141,10 +141,10 @@ skillTwo:
     - 9
     - 11
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
+    - 12
+    - 12
+    - 12
+    - 12
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -262,10 +262,10 @@ skillThree:
     - 9
     - 11
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
+    - 60
+    - 60
+    - 60
+    - 60
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -390,10 +390,10 @@ skillUltimate:
     - 9
     - 11
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
+    - 24
+    - 24
+    - 24
+    - 24
   trigger:
     componentType: "SelfTarget"
     child1:

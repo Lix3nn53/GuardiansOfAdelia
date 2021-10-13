@@ -37,10 +37,10 @@ skillOne:
     - 9
     - 11
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
+    - 8
+    - 8
+    - 8
+    - 8
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -119,17 +119,17 @@ skillTwo:
   customModelData: 27
   description:
     - "Shoot a flame-burst that launches"
-    - "a target into the sky"
+    - "the target into the sky."
   manaCosts:
     - 5
     - 7
     - 9
     - 11
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
+    - 12
+    - 12
+    - 12
+    - 12
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -216,25 +216,25 @@ skillThree:
     - "Cover yourself with flames and start charging."
     - "Deal damage and push enemies got close to you."
   manaCosts:
-    - 2
-    - 2
-    - 2
-    - 2
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
+    - 24
+    - 24
+    - 24
+    - 24
   trigger:
     componentType: "SelfTarget"
     child1:
       componentType: "RepeatMechanic"
       period: 5
       repetitions:
-        - 10
-        - 15
+        - 8
+        - 12
+        - 16
         - 20
-        - 25
       child1:
         componentType: "LaunchMechanic"
         relative: "CASTER"
@@ -378,15 +378,15 @@ skillUltimate:
     - "Launch youreself into the air. When you land deal"
     - "massive damage to nearby enemies."
   manaCosts:
-    - 50
-    - 50
-    - 50
-    - 50
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 4
-    - 4
-    - 4
-    - 4
+    - 32
+    - 32
+    - 32
+    - 32
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -485,10 +485,10 @@ skillUltimate:
             - 90
             - 180
           damageMultiplyList:
-            - 1.4
-            - 1.6
-            - 1.8
+            - 2.0
             - 2.2
+            - 2.4
+            - 2.8
         child2:
           componentType: "LaunchMechanic"
           relative: "TARGET"

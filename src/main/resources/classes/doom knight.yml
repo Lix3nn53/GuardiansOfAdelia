@@ -34,21 +34,17 @@ skillOne:
   name: "Slice and dice"
   customModelData: 3
   description:
-    - "Deal damage to enemies in front of you."
+    - "Deal damage to enemies in front of you, cone area."
   manaCosts:
     - 5
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 2
-    - 2
-    - 2
-    - 2
-    - 2
-    - 2
+    - 8
+    - 8
+    - 8
+    - 8
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -95,18 +91,14 @@ skillTwo:
   name: "Death's Grasp"
   customModelData: 46
   description:
-    - "Shoot a flame-burst that launches"
-    - "a target into the sky"
+    - "Shoot a projectile that pulls the target to you."
+    - "If target gets close enough to you, also launch target upwards."
   manaCosts:
     - 5
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 12
-    - 12
     - 12
     - 12
     - 12
@@ -119,8 +111,6 @@ skillTwo:
       spreadType: "CONE"
       speed: 1.9
       amountList:
-        - 1
-        - 1
         - 1
         - 1
         - 1
@@ -233,18 +223,18 @@ skillThree:
   name: "Leap of Doom"
   customModelData: 40
   description:
-    - "Place a flag at your location that"
-    - "gives damage buff to nearby allies"
+    - "Start flying very slowly and gain fall damage resistance."
+    - "When you land to the ground, deal damage to nearby enemies and stun them."
   manaCosts:
-    - 20
-    - 24
-    - 28
-    - 32
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 5
-    - 5
-    - 5
-    - 5
+    - 15
+    - 15
+    - 15
+    - 15
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -383,18 +373,16 @@ skillPassive:
   name: "Aura of Darkness"
   customModelData: 45
   description:
-    - "If you take damage that leaves you with less than 15% health,"
-    - "unleash your rage and gain movement speed and jump boost."
+    - "When you deal damage with normal attack gain a darkness stack."
+    - "If you have more than 4 stacks, you will gain have area that deals damage to nearby enemies every second."
+    - "You can gain up to 10 darkness stacks."
+    - "You will lose darkness seconds overtime."
   manaCosts:
     - 0
     - 0
     - 0
     - 0
-    - 0
-    - 0
   cooldowns:
-    - 40
-    - 40
     - 40
     - 40
     - 40
@@ -496,18 +484,17 @@ skillUltimate:
   name: "Blackhole"
   customModelData: 44
   description:
-    - "Jump forward into the air. When you land deal"
-    - "damage and launch nearby enemies into the sky."
+    - "Spawn a darkhole that pulls the targets in area to the center."
   manaCosts:
     - 5
-    - 5
-    - 5
-    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 4
-    - 4
-    - 4
-    - 4
+    - 40
+    - 40
+    - 40
+    - 40
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -535,10 +522,10 @@ skillUltimate:
           componentType: "RepeatMechanic"
           period: 20
           repetitions:
+            - 12
+            - 16
             - 20
-            - 25
-            - 30
-            - 40
+            - 24
           child1:
             componentType: "AreaTarget"
             allies: false

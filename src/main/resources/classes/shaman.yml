@@ -31,9 +31,9 @@ skillOne:
     - "Spawn a totem"
   manaCosts:
     - 5
-    - 6
     - 7
-    - 8
+    - 9
+    - 11
   cooldowns:
     - 41
     - 46
@@ -73,15 +73,15 @@ skillTwo:
   description:
     - "Create a storm around your totem that deals damage to nearby enemies every 2 seconds."
   manaCosts:
-    - 10
-    - 12
-    - 14
-    - 16
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 14
-    - 14
-    - 14
-    - 14
+    - 20
+    - 22
+    - 24
+    - 26
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -141,10 +141,10 @@ skillThree:
   description:
     - "Transform enemies nearby your totem to sheeps."
   manaCosts:
-    - 10
-    - 12
-    - 14
-    - 16
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
     - 12
     - 12
@@ -296,15 +296,15 @@ skillUltimate:
     - "Push your totem if it is nearby. After a small delay"
     - "push yourself and enemies around you to your totem."
   manaCosts:
-    - 10
-    - 12
-    - 14
-    - 16
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 14
-    - 14
-    - 14
-    - 14
+    - 16
+    - 16
+    - 16
+    - 16
   trigger:
     componentType: "SelfTarget"
     child1:

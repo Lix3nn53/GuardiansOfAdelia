@@ -6,7 +6,7 @@
 
 name: '&a???? Sewers'
 levelReq: 5
-timeLimitInMinutes: 7
+timeLimitInMinutes: 10
 monsterPool:
   - SlimeSmall
   - SlimeMedium

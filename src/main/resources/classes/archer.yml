@@ -33,21 +33,17 @@ skillOne:
   name: "Poison Arrow"
   customModelData: 13
   description:
-    - "Shoot an arrow that poisons target"
+    - "Shoot an arrow that poisons the target."
   manaCosts:
     - 5
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
-    - 16
+    - 12
+    - 12
+    - 12
+    - 12
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -56,8 +52,6 @@ skillOne:
       spreadType: "CONE"
       speed: 2.7
       amountList:
-        - 1
-        - 1
         - 1
         - 1
         - 1
@@ -94,6 +88,7 @@ skillOne:
           componentType: "PotionEffectMechanic"
           potionEffectType:
             - "CONFUSION"
+            - "POISON"
           tickList:
             - 140
             - 150
@@ -117,21 +112,17 @@ skillTwo:
   name: "Zephyr"
   customModelData: 57
   description:
-    - "Gain movement speed"
+    - "Gain movement speed."
   manaCosts:
-    - 15
-    - 17
-    - 19
-    - 21
-    - 23
-    - 25
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 18
-    - 18
-    - 18
-    - 18
-    - 18
-    - 18
+    - 16
+    - 16
+    - 16
+    - 16
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -200,21 +191,17 @@ skillThree:
   customModelData: 44
   description:
     - "Jump backwards into the sky and"
-    - "gain resistance to fall damage"
+    - "gain resistance to fall damage."
   manaCosts:
-    - 20
-    - 22
-    - 24
-    - 26
-    - 28
-    - 30
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 18
-    - 18
-    - 18
-    - 18
-    - 18
-    - 18
+    - 16
+    - 16
+    - 16
+    - 16
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -278,19 +265,15 @@ skillPassive:
   name: "Sharpshooter"
   customModelData: 17
   description:
-    - "Your every 2nd successful projectile hit"
-    - "gives you bonus critical chance"
+    - "Your every 2nd successful normal attack"
+    - "gives you bonus critical chance."
     - "(This can exceed the critical chance cap)"
   manaCosts:
     - 0
     - 0
     - 0
     - 0
-    - 0
-    - 0
   cooldowns:
-    - 1
-    - 1
     - 1
     - 1
     - 1
@@ -359,17 +342,17 @@ skillUltimate:
   customModelData: 16
   description:
     - "Reveal an area with a flurry of arrows,"
-    - "dealing waves of damage to opponents"
+    - "dealing waves of damage to opponents."
   manaCosts:
-    - 4
-    - 4
     - 5
-    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 4
-    - 4
-    - 4
-    - 4
+    - 32
+    - 32
+    - 32
+    - 32
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -464,8 +447,8 @@ skillUltimate:
                 - 90
                 - 180
               damageMultiplyList:
-                - 1
-                - 1.15
+                - 1.0
+                - 1.2
                 - 1.4
                 - 1.6
         child3:

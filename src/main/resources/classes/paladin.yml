@@ -40,10 +40,10 @@ skillOne:
     - 9
     - 11
   cooldowns:
-    - 1
-    - 1
-    - 1
-    - 1
+    - 8
+    - 8
+    - 8
+    - 8
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -107,11 +107,7 @@ skillTwo:
     - 7
     - 9
     - 11
-    - 13
-    - 15
   cooldowns:
-    - 12
-    - 12
     - 12
     - 12
     - 12
@@ -200,18 +196,17 @@ skillThree:
   name: "Victory March"
   customModelData: 26
   description:
-    - "Place a flag at your location that"
-    - "gives damage buff to nearby allies"
+    - "I am speed."
   manaCosts:
-    - 20
-    - 24
-    - 28
-    - 32
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 5
-    - 5
-    - 5
-    - 5
+    - 18
+    - 18
+    - 18
+    - 18
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -264,11 +259,7 @@ skillPassive:
     - 0
     - 0
     - 0
-    - 0
-    - 0
   cooldowns:
-    - 40
-    - 40
     - 40
     - 40
     - 40
@@ -351,14 +342,14 @@ skillUltimate:
     - "damage and launch nearby enemies into the sky."
   manaCosts:
     - 5
-    - 5
-    - 5
-    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 4
-    - 4
-    - 4
-    - 4
+    - 62
+    - 62
+    - 62
+    - 62
   trigger:
     componentType: "SelfTarget"
     child1:

@@ -35,9 +35,9 @@ skillOne:
     - "targets in area if it hits a target."
   manaCosts:
     - 5
-    - 6
     - 7
-    - 8
+    - 9
+    - 11
   cooldowns:
     - 4
     - 4
@@ -127,15 +127,15 @@ skillTwo:
   description:
     - "Deal damage to enemies in front of you."
   manaCosts:
-    - 10
-    - 12
-    - 14
-    - 16
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 12
-    - 12
-    - 12
-    - 12
+    - 9
+    - 9
+    - 9
+    - 9
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -210,15 +210,15 @@ skillThree:
     - "Warp forward in location you are facing. After a small delay"
     - "cause a explosion in your old location, dealing damage to enemies."
   manaCosts:
-    - 10
-    - 12
-    - 14
-    - 16
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 14
-    - 14
-    - 14
-    - 14
+    - 12
+    - 12
+    - 12
+    - 12
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -332,10 +332,10 @@ skillPassive:
     - 0
     - 0
   cooldowns:
-    - 40
-    - 40
-    - 40
-    - 40
+    - 32
+    - 24
+    - 24
+    - 24
   trigger:
     componentType: "InitializeTrigger"
     child1:
@@ -406,15 +406,15 @@ skillUltimate:
     - "Summon a meteor from sky that damages"
     - "and launches nearby enemies upwards."
   manaCosts:
-    - 50
-    - 55
-    - 60
-    - 65
+    - 5
+    - 7
+    - 9
+    - 11
   cooldowns:
-    - 40
-    - 40
-    - 40
-    - 40
+    - 32
+    - 32
+    - 32
+    - 32
   trigger:
     componentType: "SelfTarget"
     child1:
@@ -491,9 +491,9 @@ skillUltimate:
             relative: "TARGET"
             upwardSpeedList:
               - 1.2
+              - 1.3
               - 1.4
-              - 1.6
-              - 1.8
+              - 1.5
           child3:
             componentType: "ValueCondition"
             key: "firespirit"
