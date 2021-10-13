@@ -36,9 +36,6 @@ public class HealthBarManager {
             healthBar = targetToHealthBar.get(livingTarget);
 
             healthBar.update(livingTarget, damage, indicatorColor, indicatorIcon);
-        } else {
-            healthBar = new HealthBar(livingTarget, damage, indicatorColor, indicatorIcon);
-            targetToHealthBar.put(livingTarget, healthBar);
         }
     }
 
