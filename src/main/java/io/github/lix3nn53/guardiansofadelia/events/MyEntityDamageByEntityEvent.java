@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBar;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
 import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
 import io.github.lix3nn53.guardiansofadelia.creatures.killProtection.KillProtectionManager;
@@ -441,8 +440,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 DamageIndicator.showPlayer(player, text, targetLocation.clone().add(0, targetHeight + 0.5, 0));
 
                 //show bossbar
-                HealthBar healthBar = new HealthBar(livingTarget, (int) (finalDamage + 0.5), indicatorColor, indicatorIcon);
-                HealthBarManager.showToPlayerFor10Seconds(player, healthBar);
+                HealthBarManager.onPlayerDamageEntity(player, livingTarget, (int) (finalDamage + 0.5), indicatorColor, indicatorIcon);
             }
         }
         return false;

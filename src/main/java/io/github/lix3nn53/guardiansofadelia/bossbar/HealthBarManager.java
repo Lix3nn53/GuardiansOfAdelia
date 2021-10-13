@@ -1,28 +1,48 @@
 package io.github.lix3nn53.guardiansofadelia.bossbar;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 
 public class HealthBarManager {
 
-    private static final HashMap<Player, HealthBar> playerToHealthBar = new HashMap<Player, HealthBar>();
+    private static final HashMap<LivingEntity, HealthBar> targetToHealthBar = new HashMap<>();
 
-    public static void showToPlayerFor10Seconds(Player player, HealthBar healthBar) {
-        if (playerToHealthBar.containsKey(player)) {
-            HealthBar currentHealthBar = playerToHealthBar.get(player);
-            currentHealthBar.destroy();
+    public static void onPlayerDamageEntity(Player player, LivingEntity livingTarget, int damage,
+                                            ChatPalette indicatorColor, String indicatorIcon) {
+        // remove current health bar
+        for (HealthBar healthBar : targetToHealthBar.values()) {
+            healthBar.removePlayer(player);
         }
-        playerToHealthBar.put(player, healthBar);
-        healthBar.addPlayer(player);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                healthBar.destroy();
-                playerToHealthBar.remove(player, healthBar);
-            }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 10);
+
+        // find or create health bar for target
+        HealthBar healthBar;
+        if (targetToHealthBar.containsKey(livingTarget)) {
+            healthBar = targetToHealthBar.get(livingTarget);
+        } else {
+            healthBar = new HealthBar(livingTarget, damage, indicatorColor, indicatorIcon);
+            targetToHealthBar.put(livingTarget, healthBar);
+        }
+
+        // show to player
+        healthBar.showToPlayerFor10Seconds(player);
+    }
+
+    public static void onLivingTargetDamage(LivingEntity livingTarget, int damage, ChatPalette indicatorColor, String indicatorIcon) {
+        HealthBar healthBar;
+        if (targetToHealthBar.containsKey(livingTarget)) {
+            healthBar = targetToHealthBar.get(livingTarget);
+
+            healthBar.update(livingTarget, damage, indicatorColor, indicatorIcon);
+        } else {
+            healthBar = new HealthBar(livingTarget, damage, indicatorColor, indicatorIcon);
+            targetToHealthBar.put(livingTarget, healthBar);
+        }
+    }
+
+    public static void onEntityDeath(LivingEntity entity) {
+        targetToHealthBar.remove(entity);
     }
 }

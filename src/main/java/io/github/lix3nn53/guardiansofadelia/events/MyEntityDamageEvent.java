@@ -1,9 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.immunity.ImmunityListener;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import net.minecraft.server.level.EntityPlayer;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
@@ -83,6 +85,9 @@ public class MyEntityDamageEvent implements Listener {
             LivingEntity livingEntity = (LivingEntity) entity;
             PetManager.onTakeDamage(livingEntity, livingEntity.getHealth(), event.getFinalDamage());
         }
+
+        LivingEntity livingEntity = (LivingEntity) entity;
+        HealthBarManager.onLivingTargetDamage(livingEntity, (int) (event.getFinalDamage() + 0.5), ChatPalette.PURPLE_LIGHT, "?");
     }
 
     private double getCustomNaturalDamage(EntityDamageEvent.DamageCause cause, LivingEntity entity) {

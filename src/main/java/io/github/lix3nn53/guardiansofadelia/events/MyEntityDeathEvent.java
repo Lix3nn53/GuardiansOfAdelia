@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.bossbar.HealthBarManager;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import org.bukkit.entity.LivingEntity;
@@ -18,6 +19,7 @@ public class MyEntityDeathEvent implements Listener {
 
         SkillDataManager.onEntityDeath(entity);
         PetManager.onEntityDeath(entity);
+        HealthBarManager.onEntityDeath(entity);
     }
 
 }

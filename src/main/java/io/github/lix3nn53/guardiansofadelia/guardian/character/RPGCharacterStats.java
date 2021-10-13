@@ -129,26 +129,26 @@ public class RPGCharacterStats {
                 ArrayList<String> buffs = new ArrayList<>();
                 if (buffElementDamage != 1) {
                     if (buffElementDamage > 1) {
-                        buffs.add(ChatPalette.RED + "[Dmg +" + (int) ((buffElementDamage - 1) * 100 + 0.5) + "%]");
+                        buffs.add(ChatPalette.RED + "Dmg +" + (int) ((buffElementDamage - 1) * 100 + 0.5) + "%");
                     } else {
-                        buffs.add(ChatPalette.RED + "[Dmg -" + (int) ((1 - buffElementDamage) * 100 + 0.5) + "%]");
+                        buffs.add(ChatPalette.RED + "Dmg -" + (int) ((1 - buffElementDamage) * 100 + 0.5) + "%");
                     }
                 }
                 if (buffElementDefense != 1) {
                     if (buffElementDefense > 1) {
-                        buffs.add(ChatPalette.BLUE_LIGHT + "[Def +" + (int) ((buffElementDefense - 1) * 100 + 0.5) + "%]");
+                        buffs.add(ChatPalette.BLUE_LIGHT + "Def +" + (int) ((buffElementDefense - 1) * 100 + 0.5) + "%");
                     } else {
-                        buffs.add(ChatPalette.BLUE_LIGHT + "[Def -" + (int) ((1 - buffElementDefense) * 100 + 0.5) + "%]");
+                        buffs.add(ChatPalette.BLUE_LIGHT + "Def -" + (int) ((1 - buffElementDefense) * 100 + 0.5) + "%");
                     }
                 }
                 if (buffCriticalChance != 0) {
-                    buffs.add(ChatPalette.GOLD + "[Crit +" + (int) ((buffCriticalChance * 100) + 0.5) + "%]");
+                    buffs.add(ChatPalette.GOLD + "Crit +" + (int) ((buffCriticalChance * 100) + 0.5) + "%");
                 }
                 if (buffCriticalDamage != 0) {
-                    buffs.add(ChatPalette.ORANGE + "[CritDmg +" + (int) ((buffCriticalDamage * 100) + 0.5) + "%]");
+                    buffs.add(ChatPalette.ORANGE + "CritDmg +" + (int) ((buffCriticalDamage * 100) + 0.5) + "%");
                 }
                 if (buffAbilityHaste != 0) {
-                    buffs.add(ChatPalette.BLUE + "[Haste +" + buffAbilityHaste + "]");
+                    buffs.add(ChatPalette.BLUE + "Haste +" + buffAbilityHaste + "");
                 }
 
                 for (int i = 0; i < buffs.size(); i++) {
@@ -160,7 +160,7 @@ public class RPGCharacterStats {
                 }
 
                 if (buffs.size() % 2 == 1) {
-                    message.append("           ");
+                    message.append("          ");
                 }
 
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message.toString()));
