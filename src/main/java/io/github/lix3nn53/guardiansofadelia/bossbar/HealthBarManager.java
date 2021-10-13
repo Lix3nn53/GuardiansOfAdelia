@@ -31,9 +31,8 @@ public class HealthBarManager {
     }
 
     public static void onLivingTargetDamage(LivingEntity livingTarget, int damage, ChatPalette indicatorColor, String indicatorIcon) {
-        HealthBar healthBar;
         if (targetToHealthBar.containsKey(livingTarget)) {
-            healthBar = targetToHealthBar.get(livingTarget);
+            HealthBar healthBar = targetToHealthBar.get(livingTarget);
 
             healthBar.update(livingTarget, damage, indicatorColor, indicatorIcon);
         }
