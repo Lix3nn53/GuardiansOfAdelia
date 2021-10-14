@@ -21,6 +21,7 @@ public class HealthBarManager {
         HealthBar healthBar;
         if (targetToHealthBar.containsKey(livingTarget)) {
             healthBar = targetToHealthBar.get(livingTarget);
+            healthBar.update(livingTarget, damage, indicatorColor, indicatorIcon);
         } else {
             healthBar = new HealthBar(livingTarget, damage, indicatorColor, indicatorIcon);
             targetToHealthBar.put(livingTarget, healthBar);
@@ -30,7 +31,7 @@ public class HealthBarManager {
         healthBar.showToPlayerFor10Seconds(player);
     }
 
-    public static void onLivingTargetDamage(LivingEntity livingTarget, int damage, ChatPalette indicatorColor, String indicatorIcon) {
+    public static void onLivingTargetHealthChange(LivingEntity livingTarget, int damage, ChatPalette indicatorColor, String indicatorIcon) {
         if (targetToHealthBar.containsKey(livingTarget)) {
             HealthBar healthBar = targetToHealthBar.get(livingTarget);
 
