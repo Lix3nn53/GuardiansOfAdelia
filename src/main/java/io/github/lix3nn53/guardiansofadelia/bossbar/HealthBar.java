@@ -10,10 +10,14 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
+
+import java.util.HashMap;
 
 public class HealthBar {
 
     private final BossBar bar;
+    private final HashMap<Player, BukkitTask> playerToCooldown = new HashMap<>();
 
     /*public HealthBar(String title, double progress) {
         BarColor color = BarColor.GREEN;
@@ -43,15 +47,23 @@ public class HealthBar {
         this.bar.setVisible(true);
     }
 
-    public void showToPlayerFor10Seconds(Player player) {
+    public void showToPlayer(Player player) {
         this.bar.addPlayer(player);
 
-        new BukkitRunnable() {
+        if (playerToCooldown.containsKey(player)) {
+            BukkitTask bukkitTask = playerToCooldown.get(player);
+            bukkitTask.cancel();
+        }
+
+        BukkitTask bukkitTask = new BukkitRunnable() {
             @Override
             public void run() {
                 bar.removePlayer(player);
+                playerToCooldown.remove(player);
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 10);
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 15L);
+
+        playerToCooldown.put(player, bukkitTask);
     }
 
     public void destroy() {
@@ -110,6 +122,9 @@ public class HealthBar {
     }
 
     public void removePlayer(Player player) {
-        this.bar.removePlayer(player);
+        bar.removePlayer(player);
+        BukkitTask remove = playerToCooldown.remove(player);
+
+        if (remove != null) remove.cancel();
     }
 }

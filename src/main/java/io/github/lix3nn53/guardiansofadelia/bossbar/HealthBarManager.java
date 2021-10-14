@@ -1,8 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.bossbar;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 
@@ -28,7 +30,7 @@ public class HealthBarManager {
         }
 
         // show to player
-        healthBar.showToPlayerFor10Seconds(player);
+        healthBar.showToPlayer(player);
     }
 
     public static void onLivingTargetHealthChange(LivingEntity livingTarget, int damage, ChatPalette indicatorColor, String indicatorIcon) {
@@ -40,6 +42,12 @@ public class HealthBarManager {
     }
 
     public static void onEntityDeath(LivingEntity entity) {
-        targetToHealthBar.remove(entity);
+        // Clear late because #onPlayerDamageEntity uses this to clear old bar of player
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                targetToHealthBar.remove(entity);
+            }
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 20L);
     }
 }
