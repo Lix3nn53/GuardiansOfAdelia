@@ -33,6 +33,10 @@ public class TutorialManager {
             RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
             rpgCharacterStats.setTotalExp(totalExpForLevel);
 
+            int totalExpClass = RPGClassExperienceManager.getTotalRequiredExperience(20);
+            RPGClassStats currentRPGClassStats = rpgCharacter.getCurrentRPGClassStats();
+            currentRPGClassStats.giveExp(player, totalExpClass);
+
             giveTutorialItems(player, rpgClassStr);
             player.teleport(startLocation);
 

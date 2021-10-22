@@ -57,11 +57,14 @@ public class CharacterInfoSlot {
 
                 double abilityHaste = rpgCharacterStats.getTotalAbilityHaste();
                 double cooldownReduction = SkillBar.abilityHasteToMultiplier(abilityHaste);
+                RPGClassStats rpgClassStats = activeCharacter.getCurrentRPGClassStats();
+                int classLevel = RPGClassExperienceManager.getLevel(rpgClassStats.getTotalExperience());
 
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("");
                 lore.add(ChatPalette.PURPLE_LIGHT + "Class: " + ChatPalette.GRAY + "" + className);
                 lore.add(ChatPalette.PINK + "Class Element: " + mainElement.getFullName());
+                lore.add(ChatPalette.PURPLE + "Class Level: " + ChatPalette.GRAY + "" + classLevel);
                 lore.add(ChatPalette.GOLD + "Level: " + ChatPalette.GRAY + "" + level);
                 lore.add(ChatPalette.YELLOW + "Experience: " + ChatPalette.GRAY + exp + "/" + expReq);
                 lore.add(ChatPalette.GREEN_DARK + "❤ Max Health: " + ChatPalette.GRAY + "" + health + "/" + maxHealth);

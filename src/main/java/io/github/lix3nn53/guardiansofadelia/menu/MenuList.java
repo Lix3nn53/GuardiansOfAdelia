@@ -241,7 +241,11 @@ public class MenuList {
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
                 int tier = rpgClass.getTier();
                 int classIconCustomModelData = rpgClass.getClassIconCustomModelData();
-                RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats();
+                RPGClassStats rpgClassStats = rpgCharacter.getCurrentRPGClassStats();
+                int totalExperience = rpgClassStats.getTotalExperience();
+                int rpgClassLevel = RPGClassExperienceManager.getLevel(totalExperience);
+                int exp = RPGClassExperienceManager.getCurrentExperience(totalExperience, rpgClassLevel);
+                int expReq = RPGClassExperienceManager.getRequiredExperience(rpgClassLevel);
 
                 ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
                 ItemMeta itemMeta = itemStack.getItemMeta();
@@ -251,6 +255,9 @@ public class MenuList {
                 lore.add("");
                 lore.add("Class: " + rpgClass.getClassString());
                 lore.add("Class Tier: " + tier);
+                lore.add("");
+                lore.add("Class Level: " + rpgClassLevel);
+                lore.add(ChatPalette.YELLOW + "Class Experience: " + ChatPalette.GRAY + exp + "/" + expReq);
                 itemMeta.setLore(lore);
                 itemMeta.setCustomModelData(classIconCustomModelData);
                 itemStack.setItemMeta(itemMeta);
@@ -300,7 +307,7 @@ public class MenuList {
 
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
-                HashMap<String, RPGClassStats> unlockedClasses = rpgCharacter.getUnlockedClasses();
+                int unlockedClassTier = rpgCharacter.getHighestUnlockedClassTier(player);
 
                 List<RPGClass> values = RPGClassManager.getClassesAtTier(classTier);
 
@@ -349,7 +356,7 @@ public class MenuList {
 
                     String valueStr = value.getClassStringNoColor();
 
-                    if (unlockedClasses.containsKey(valueStr)) {
+                    if (classTier <= unlockedClassTier) {
                         String rpgClassStr = rpgCharacter.getRpgClassStr();
                         if (valueStr.equalsIgnoreCase(rpgClassStr)) {
                             itemStack.setType(Material.PURPLE_WOOL);
@@ -358,8 +365,19 @@ public class MenuList {
                             itemStack.setType(Material.LIME_WOOL);
                             lore.add(ChatPalette.GREEN_DARK + "Click to change to this class!");
                         }
+
+                        RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats(rpgClassStr);
+                        int totalExperience = rpgClassStats.getTotalExperience();
+                        int level = RPGClassExperienceManager.getLevel(totalExperience);
+                        lore.add(ChatPalette.GOLD + "Class Level: " + ChatPalette.WHITE + level);
+                        int exp = RPGClassExperienceManager.getCurrentExperience(totalExperience, level);
+                        int expReq = RPGClassExperienceManager.getRequiredExperience(level);
+                        lore.add(ChatPalette.YELLOW + "Class Experience: " + ChatPalette.GRAY + exp + "/" + expReq);
                     } else {
-                        lore.add(ChatPalette.RED + "You haven't unlock this class");
+                        lore.add(ChatPalette.RED + "You haven't unlocked classes at this tier yet.");
+                        lore.add(ChatPalette.RED + "");
+                        int questForClassTier = RPGClassManager.getRequiredQuestForClassTier(classTier);
+                        lore.add(ChatPalette.RED + "Required quest no: " + ChatPalette.GRAY + "#" + questForClassTier);
                     }
 
                     itemMeta.setLore(lore);

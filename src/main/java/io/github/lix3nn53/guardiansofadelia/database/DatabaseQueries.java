@@ -87,7 +87,7 @@ public class DatabaseQueries {
                     " `location`             text NOT NULL ,\n" +
                     " `armor_content`        text NOT NULL ,\n" +
                     " `rpg_class`            varchar(45) NOT NULL ,\n" +
-                    " `unlocked_classes`     mediumtext NULL ,\n" +
+                    " `class_skills`     mediumtext NULL ,\n" +
                     " `totalexp`             int NOT NULL ,\n" +
                     " `attr_one`             smallint NOT NULL ,\n" +
                     " `attr_two`             smallint NOT NULL ,\n" +
@@ -303,7 +303,7 @@ public class DatabaseQueries {
             if (resultSet.next()) {
                 String rpgClassString = resultSet.getString("rpg_class");
 
-                String unlockedClassesString = resultSet.getString("unlocked_classes");
+                String unlockedClassesString = resultSet.getString("class_skills");
                 String[] classWithDataArray = unlockedClassesString.split(";");
                 HashMap<String, RPGClassStats> unlockedClasses = new HashMap<>();
                 for (String classWithData : classWithDataArray) {
@@ -315,8 +315,9 @@ public class DatabaseQueries {
                     int three = Integer.parseInt(classDataArray[3]);
                     int passive = Integer.parseInt(classDataArray[4]);
                     int ultimate = Integer.parseInt(classDataArray[5]);
+                    int experience = Integer.parseInt(classDataArray[6]);
 
-                    RPGClassStats rpgClassStats = new RPGClassStats(one, two, three, passive, ultimate);
+                    RPGClassStats rpgClassStats = new RPGClassStats(one, two, three, passive, ultimate, experience);
                     unlockedClasses.put(unlockedClassStr, rpgClassStats);
                 }
 
@@ -845,7 +846,7 @@ public class DatabaseQueries {
         String SQL_QUERY = "INSERT INTO goa_player_character \n" +
                 "\t(uuid, character_no, off_hand, slot_parrot, slot_necklace, slot_ring, slot_earring, slot_glove, " +
                 "slot_pet, chat_tag, crafting_experiences, inventory, activequests, turnedinquests, location, armor_content, " +
-                "rpg_class, unlocked_classes, totalexp, attr_one, attr_two, attr_three, attr_four, attr_five, skill_one, skill_two, skill_three, skill_passive, skill_ultimate) \n" +
+                "rpg_class, class_skills, totalexp, attr_one, attr_two, attr_three, attr_four, attr_five, skill_one, skill_two, skill_three, skill_passive, skill_ultimate) \n" +
                 "VALUES \n" +
                 "\t(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
@@ -866,7 +867,7 @@ public class DatabaseQueries {
                 "\tlocation = VALUES(location),\n" +
                 "\tarmor_content = VALUES(armor_content),\n" +
                 "\trpg_class = VALUES(rpg_class),\n" +
-                "\tunlocked_classes = VALUES(unlocked_classes),\n" +
+                "\tclass_skills = VALUES(class_skills),\n" +
                 "\ttotalexp = VALUES(totalexp),\n" +
                 "\tattr_one = VALUES(attr_one),\n" +
                 "\tattr_two = VALUES(attr_two),\n" +
@@ -996,7 +997,7 @@ public class DatabaseQueries {
             String rpgClassStr = rpgCharacter.getRpgClassStr();
             pst.setString(17, rpgClassStr);
 
-            HashMap<String, RPGClassStats> unlockedClasses = rpgCharacter.getUnlockedClasses();
+            HashMap<String, RPGClassStats> unlockedClasses = rpgCharacter.getClassToClassStats();
             StringBuilder unlockedClassesString = new StringBuilder();
             int i = 0;
             for (String unlockedClass : unlockedClasses.keySet()) {
@@ -1016,6 +1017,8 @@ public class DatabaseQueries {
                 unlockedClassesString.append(rpgClassStats.getPassive());
                 unlockedClassesString.append("-");
                 unlockedClassesString.append(rpgClassStats.getUltimate());
+                unlockedClassesString.append("-");
+                unlockedClassesString.append(rpgClassStats.getTotalExperience());
 
                 i++;
             }

@@ -9,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
@@ -93,6 +94,10 @@ public class KillProtectionManager {
                         if (expToGive > 0) {
                             rpgCharacterStats.giveExp(expToGive);
                         }
+
+                        // class exp
+                        RPGClassStats rpgClassStats = activeCharacter.getCurrentRPGClassStats();
+                        rpgClassStats.giveExp(player, expToGive);
 
                         //quest, progress kill tasks
                         List<Quest> questList = activeCharacter.getQuestList();

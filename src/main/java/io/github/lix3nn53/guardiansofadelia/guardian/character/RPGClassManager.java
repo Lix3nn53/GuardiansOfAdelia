@@ -5,7 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class RPGClassManager {
+
     private static final HashMap<String, RPGClass> rpgClassMap = new HashMap<>();
+
+    public static final int HIGHEST_CLASS_TIER = 3;
+    public static final String starterClass = "fighter";
+    private static final HashMap<Integer, Integer> classTierToRequiredQuestId = new HashMap<>();
 
     public static void addClass(String className, RPGClass rpgClass) {
         rpgClassMap.put(className.toUpperCase(), rpgClass);
@@ -35,7 +40,19 @@ public class RPGClassManager {
         return classes;
     }
 
-    public static void reset() {
+    public static void clearClasses() {
         rpgClassMap.clear();
+    }
+
+    public static int getRequiredQuestForClassTier(int classTier) {
+        if (classTierToRequiredQuestId.containsKey(classTier)) {
+            return classTierToRequiredQuestId.get(classTier);
+        }
+
+        return -1;
+    }
+
+    public static void setRequiredQuestForClassTier(int classTier, int questNo) {
+        classTierToRequiredQuestId.put(classTier, questNo);
     }
 }

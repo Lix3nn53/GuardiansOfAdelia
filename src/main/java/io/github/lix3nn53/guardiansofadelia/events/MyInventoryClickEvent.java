@@ -476,7 +476,7 @@ public class MyInventoryClickEvent implements Listener {
                     CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
                 }
             } else {
-                if (currentName.equals(ChatPalette.GOLD + "Class")) {
+                if (currentName.equals(ChatPalette.YELLOW + "Class")) {
                     GuiGeneric classManage = MenuList.classManager(player);
                     classManage.openInventory(player);
                 } else if (currentName.equals(ChatPalette.PURPLE_LIGHT + "Skills")) {
@@ -836,7 +836,7 @@ public class MyInventoryClickEvent implements Listener {
                 }
                 if (skillIndex != -1) {
                     if (event.isLeftClick()) {
-                        boolean upgradeSkill = skillBar.upgradeSkill(skillIndex, rpgCharacter.getRPGClassStats());
+                        boolean upgradeSkill = skillBar.upgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats());
                         if (upgradeSkill) {
                             GuiGeneric skill = MenuList.skill(player);
                             skill.openInventory(player);

@@ -36,6 +36,7 @@ public class ClassConfigurations {
     }
 
     public static void loadConfigs() {
+        loadMainConfig();
         loadClassConfigs();
     }
 
@@ -48,8 +49,19 @@ public class ClassConfigurations {
         }
     }
 
+    private static void loadMainConfig() {
+        int count = ConfigurationUtils.getChildComponentCount(fileConfiguration, "classTier");
+
+        for (int classTier = 1; classTier <= count; classTier++) {
+            ConfigurationSection configurationSection = fileConfiguration.getConfigurationSection("classTier" + classTier);
+            int requiredQuest = configurationSection.getInt("requiredQuest");
+
+            RPGClassManager.setRequiredQuestForClassTier(classTier, requiredQuest);
+        }
+    }
+
     private static void loadClassConfigs() {
-        RPGClassManager.reset();
+        RPGClassManager.clearClasses();
         for (String className : classNameToConfiguration.keySet()) {
             GuardiansOfAdelia.getInstance().getLogger().info("className: " + className);
             FileConfiguration fileConfiguration = classNameToConfiguration.get(className);
@@ -155,12 +167,11 @@ public class ClassConfigurations {
         String name = skillSection.getString("name");
         List<String> description = skillSection.getStringList("description");
         int customModelData = skillSection.getInt("customModelData");
-        List<Integer> reqLevels = getDefaultReqLevels(skillIndex);
         List<Integer> reqPoints = getDefaultReqPoints(skillIndex);
         List<Integer> manaCosts = skillSection.getIntegerList("manaCosts");
         List<Integer> cooldowns = skillSection.getIntegerList("cooldowns");
 
-        Skill skill = new Skill(name, 4, Material.IRON_HOE, customModelData, description, reqLevels, reqPoints, manaCosts, cooldowns);
+        Skill skill = new Skill(name, 4, Material.IRON_HOE, customModelData, description, reqPoints, manaCosts, cooldowns);
         SkillComponent triggerComponent = SkillComponentLoader.loadSection(skillSection.getConfigurationSection("trigger"));
         skill.addTrigger(triggerComponent);
 
@@ -171,38 +182,6 @@ public class ClassConfigurations {
         }
 
         return skill;
-    }
-
-    private static List<Integer> getDefaultReqLevels(int skillIndex) {
-        List<Integer> reqLevels = new ArrayList<>();
-        if (skillIndex == 0) {
-            reqLevels.add(1);
-            reqLevels.add(10);
-            reqLevels.add(20);
-            reqLevels.add(30);
-        } else if (skillIndex == 1) {
-            reqLevels.add(5);
-            reqLevels.add(15);
-            reqLevels.add(25);
-            reqLevels.add(35);
-        } else if (skillIndex == 2) {
-            reqLevels.add(10);
-            reqLevels.add(20);
-            reqLevels.add(30);
-            reqLevels.add(40);
-        } else if (skillIndex == 3) {
-            reqLevels.add(20);
-            reqLevels.add(30);
-            reqLevels.add(40);
-            reqLevels.add(50);
-        } else if (skillIndex == 4) {
-            reqLevels.add(40);
-            reqLevels.add(50);
-            reqLevels.add(60);
-            reqLevels.add(70);
-        }
-
-        return reqLevels;
     }
 
     private static List<Integer> getDefaultReqPoints(int skillIndex) {

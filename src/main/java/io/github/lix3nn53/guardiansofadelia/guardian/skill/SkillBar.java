@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassExperienceManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
@@ -85,20 +86,17 @@ public class SkillBar {
         int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel);
 
         if (getSkillPointsLeftToSpend() >= reqSkillPoints) {
-            int reqPlayerLevel = skill.getReqPlayerLevel(currentSkillLevel);
-            if (player.getLevel() >= reqPlayerLevel) {
-                InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
-                if (initializeTrigger != null) {
-                    TriggerListener.onSkillUpgrade(player, initializeTrigger, skillIndex, currentSkillLevel + 1, castCounter);
-                    castCounter++;
-                }
-                int newInvested = invested + reqSkillPoints;
-                investedSkillPoints.put(skillIndex, newInvested);
-                remakeSkillBarIcon(skillIndex);
-
-                rpgClassStats.setInvestedSkillPoint(skillIndex, newInvested);
-                return true;
+            InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
+            if (initializeTrigger != null) {
+                TriggerListener.onSkillUpgrade(player, initializeTrigger, skillIndex, currentSkillLevel + 1, castCounter);
+                castCounter++;
             }
+            int newInvested = invested + reqSkillPoints;
+            investedSkillPoints.put(skillIndex, newInvested);
+            remakeSkillBarIcon(skillIndex);
+
+            rpgClassStats.setInvestedSkillPoint(skillIndex, newInvested);
+            return true;
         }
 
         return false;
@@ -156,7 +154,18 @@ public class SkillBar {
     }
 
     public int getSkillPointsLeftToSpend() {
-        int points = player.getLevel();
+        int points = 1;
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                RPGClassStats currentRPGClassStats = activeCharacter.getCurrentRPGClassStats();
+
+                int totalExperience = currentRPGClassStats.getTotalExperience();
+
+                points = RPGClassExperienceManager.getLevel(totalExperience);
+            }
+        }
 
         for (int invested : investedSkillPoints.values()) {
             points -= invested;

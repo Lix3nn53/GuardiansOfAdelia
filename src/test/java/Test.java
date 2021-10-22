@@ -8,13 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 public class Test {
 
     public static void main(String[] args) throws InterruptedException, SQLException {
 
-        int size = 5;
+        for (int i = 3; i > 1; i--) {
+            // Use i as normal here
+            System.out.println("i: " + i);
+        }
+
+        /*int size = 5;
         int maxLevel = 10;
         for (int darkness = 1; darkness < 100; darkness += 5) {
             int bound = (int) ((darkness / 100d) * size) + 1;
@@ -30,7 +34,7 @@ public class Test {
 
             int level = (int) ((darkness / 100d) * maxLevel) + 1;
             System.out.println("level: " + level);
-        }
+        }*/
 
         /*int reqLevel = 4;
         double price = Math.max(1, Math.pow(reqLevel, 1.2) / 4);

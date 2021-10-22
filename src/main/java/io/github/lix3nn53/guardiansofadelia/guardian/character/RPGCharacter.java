@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
@@ -16,7 +18,7 @@ public final class RPGCharacter {
 
     private final RPGInventory rpgInventory = new RPGInventory();
 
-    private final HashMap<String, RPGClassStats> unlockedClasses;
+    private final HashMap<String, RPGClassStats> classToClassStats;
     private String rpgClassStr;
     private SkillBar skillBar;
 
@@ -29,13 +31,14 @@ public final class RPGCharacter {
 
     private ChatTag chatTag = ChatTag.NOVICE;
 
-    public RPGCharacter(String rpgClassStr, Player player, int one, int two, int three, int passive, int ultimate, HashMap<String, RPGClassStats> unlockedClasses) {
+    public RPGCharacter(String rpgClassStr, Player player, int one, int two, int three, int passive, int ultimate,
+                        HashMap<String, RPGClassStats> classToClassStats) {
         rpgCharacterStats = new RPGCharacterStats(player, rpgClassStr);
         this.rpgClassStr = rpgClassStr.toUpperCase();
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet(), false);
 
-        this.unlockedClasses = unlockedClasses;
+        this.classToClassStats = classToClassStats;
     }
 
     public RPGCharacter(String rpgClassStr, Player player) {
@@ -44,52 +47,74 @@ public final class RPGCharacter {
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         this.skillBar = new SkillBar(player, 0, 0, 0, 0, 0, rpgClass.getSkillSet(), false);
 
-        this.unlockedClasses = new HashMap<>();
-        RPGClassStats rpgClassStats = new RPGClassStats(0, 0, 0, 0, 0);
-        this.unlockedClasses.put(rpgClassStr, rpgClassStats);
+        this.classToClassStats = new HashMap<>();
+        RPGClassStats rpgClassStats = new RPGClassStats(0, 0, 0, 0, 0, 0);
+        this.classToClassStats.put(rpgClassStr, rpgClassStats);
     }
 
     public String getRpgClassStr() {
         return rpgClassStr;
     }
 
-    public HashMap<String, RPGClassStats> getUnlockedClasses() {
-        return unlockedClasses;
+    public HashMap<String, RPGClassStats> getClassToClassStats() {
+        return classToClassStats;
+    }
+
+    public RPGClassStats getCurrentRPGClassStats() {
+        return classToClassStats.get(this.rpgClassStr.toUpperCase());
     }
 
     public RPGClassStats getRPGClassStats(String rpgClassStr) {
-        return unlockedClasses.get(rpgClassStr.toUpperCase());
+        return classToClassStats.get(rpgClassStr.toUpperCase());
     }
 
-    public RPGClassStats getRPGClassStats() {
-        return unlockedClasses.get(this.rpgClassStr.toUpperCase());
+    public void clearRPGClassStats() {
+        classToClassStats.clear();
     }
 
-    public void unlockClass(String newClass) {
-        String s = newClass.toUpperCase();
-        if (!unlockedClasses.containsKey(s)) {
-            RPGClassStats rpgClassStats = new RPGClassStats();
-            unlockedClasses.put(s, rpgClassStats);
+    public int getHighestUnlockedClassTier(Player player) {
+        if (GuardianDataManager.hasGuardianData(player)) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+            if (guardianData.hasActiveCharacter()) {
+                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                List<Integer> turnedInQuests = activeCharacter.getTurnedInQuests();
+
+                for (int classTier = RPGClassManager.HIGHEST_CLASS_TIER; classTier > 0; classTier--) { // count down from the highest class tier
+                    int quest = RPGClassManager.getRequiredQuestForClassTier(classTier);
+                    if (quest == -1) continue;
+
+                    if (turnedInQuests.contains(quest)) {
+                        return classTier;
+                    }
+                }
+            }
         }
+
+        return 0;
     }
 
     public boolean changeClass(Player player, String newClassStr) {
         String s = newClassStr.toUpperCase();
-        if (!unlockedClasses.containsKey(s)) {
-            return false;
+        RPGClass rpgClass = RPGClassManager.getClass(s);
+
+        int tier = rpgClass.getTier();
+
+        if (tier > getHighestUnlockedClassTier(player)) return false;
+
+        if (!classToClassStats.containsKey(s)) { // Add class stats if it does not exist
+            RPGClassStats rpgClassStats = new RPGClassStats();
+            classToClassStats.put(s, rpgClassStats);
         }
 
-        if (this.rpgClassStr.equals(s)) return false;
-
         this.rpgClassStr = s;
-        RPGClassStats rpgClassStats = unlockedClasses.get(s);
+        RPGClassStats rpgClassStats = classToClassStats.get(s);
         int one = rpgClassStats.getOne();
         int two = rpgClassStats.getTwo();
         int three = rpgClassStats.getThree();
         int passive = rpgClassStats.getPassive();
         int ultimate = rpgClassStats.getUltimate();
 
-        RPGClass rpgClass = RPGClassManager.getClass(s);
         this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet(), true);
         skillBar.remakeSkillBar();
 

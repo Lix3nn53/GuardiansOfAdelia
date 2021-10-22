@@ -4,8 +4,14 @@
 #                    Classes                     #
 # ---------------------------------------------- #
 
+classTier1:
+  requiredQuest: 3
+classTier2:
+  requiredQuest: 99
+classTier3:
+  requiredQuest: 999
 classList:
-  - "archer"
+  - "ranger"
   - "engineer"
   - "fire mage"
   - "frost mage"
@@ -17,3 +23,7 @@ classList:
   - "reaper"
   - "shaman"
   - "dragonslayer"
+  - "fighter"
+  - "archer"
+  - "novice mage"
+  - "rogue"

@@ -39,7 +39,7 @@ public class SkillOnGround {
         List<String> description = new ArrayList<>();
 
         Skill skill = new Skill("skillOnGround", 1, Material.IRON_HOE, 1, description,
-                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), cooldowns);
+                new ArrayList<>(), new ArrayList<>(), cooldowns);
 
         for (SkillComponent trigger : triggerComponents) {
             skill.addTrigger(trigger);

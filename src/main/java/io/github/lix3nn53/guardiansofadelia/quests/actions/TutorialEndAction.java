@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
@@ -40,6 +41,9 @@ public class TutorialEndAction implements Action {
                 rpgCharacterStats.setCurrentMana(rpgCharacterStats.getTotalMaxMana());
 
                 activeCharacter.getSkillBar().resetSkillPoints();
+                activeCharacter.clearRPGClassStats();
+
+                activeCharacter.changeClass(player, RPGClassManager.starterClass);
 
                 new BukkitRunnable() {
                     @Override

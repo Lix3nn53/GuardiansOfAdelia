@@ -20,7 +20,6 @@ public class Skill {
     private final int customModelData;
     private final List<String> description;
 
-    private final List<Integer> reqPlayerLevels;
     private final List<Integer> reqSkillPoints;
 
     //skill attributes
@@ -29,13 +28,12 @@ public class Skill {
 
     private final List<SkillComponent> triggers = new ArrayList<>();
 
-    public Skill(String name, int maxSkillLevel, Material material, int customModelData, List<String> description, List<Integer> reqPlayerLevels, List<Integer> reqSkillPoints, List<Integer> manaCosts, List<Integer> cooldowns) {
+    public Skill(String name, int maxSkillLevel, Material material, int customModelData, List<String> description, List<Integer> reqSkillPoints, List<Integer> manaCosts, List<Integer> cooldowns) {
         this.name = name;
         this.maxSkillLevel = maxSkillLevel;
         this.material = material;
         this.customModelData = customModelData;
         this.description = description;
-        this.reqPlayerLevels = reqPlayerLevels;
         this.reqSkillPoints = reqSkillPoints;
         this.manaCosts = manaCosts;
         this.cooldowns = cooldowns;
@@ -50,12 +48,7 @@ public class Skill {
     }
 
     public int getMaxSkillLevel() {
-        return reqPlayerLevels.size();
-    }
-
-    public int getReqPlayerLevel(int skillLevel) {
-        if (skillLevel == maxSkillLevel) return 9000;
-        return reqPlayerLevels.get(skillLevel);
+        return reqSkillPoints.size();
     }
 
     public int getReqSkillPoints(int skillLevel) {
@@ -104,19 +97,12 @@ public class Skill {
         itemMeta.setDisplayName(getName() + " (" + skillLevel + "/" + getMaxSkillLevel() + ")");
         List<String> lore = new ArrayList<>();
 
-        int reqPlayerLevel = getReqPlayerLevel(skillLevel);
-        ChatPalette reqPlayerLevelColor = ChatPalette.RED;
-        if (playerLevel >= reqPlayerLevel) {
-            reqPlayerLevelColor = ChatPalette.GREEN_DARK;
-        }
-
         int reqSkillPoints = getReqSkillPoints(skillLevel);
         ChatPalette reqSkillPointsColor = ChatPalette.RED;
         if (playerPoints >= reqSkillPoints) {
             reqSkillPointsColor = ChatPalette.GREEN_DARK;
         }
 
-        lore.add(reqPlayerLevelColor + "Required Level: " + reqPlayerLevel);
         lore.add(reqSkillPointsColor + "Required Skill Points: " + reqSkillPoints);
 
         lore.add("");

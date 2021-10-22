@@ -43,7 +43,6 @@ public class CommandAdmin implements CommandExecutor {
                 player.sendMessage(ChatPalette.PURPLE_LIGHT + "/admin tp town <num>");
                 player.sendMessage(ChatPalette.BLUE_DARK + "---- RPG ----");
                 player.sendMessage(ChatPalette.BLUE_DARK + "/admin exp <player> <amount>");
-                player.sendMessage(ChatPalette.BLUE_DARK + "/admin class unlock <player> <newClass>");
             } else if (args[0].equals("debug")) {
                 DEBUG_MODE = !DEBUG_MODE;
             } else if (args[0].equals("speed")) {
@@ -64,23 +63,6 @@ public class CommandAdmin implements CommandExecutor {
                             if (guardianData.hasActiveCharacter()) {
                                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                                 activeCharacter.getRpgCharacterStats().giveExp(expToGive);
-                            }
-                        }
-                    }
-                }
-            } else if (args[0].equals("class")) {
-                if (args[1].equals("unlock")) {
-                    if (args.length == 4) {
-                        Player player2 = Bukkit.getPlayer(args[2]);
-                        String newClass = args[3];
-                        if (player2 != null) {
-                            if (GuardianDataManager.hasGuardianData(player)) {
-                                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-                                if (guardianData.hasActiveCharacter()) {
-                                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                                    activeCharacter.unlockClass(newClass);
-                                    player2.sendMessage(ChatPalette.GREEN_DARK + "Unlocked class: " + newClass);
-                                }
                             }
                         }
                     }
