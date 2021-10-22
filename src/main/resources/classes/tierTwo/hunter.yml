@@ -1,0 +1,403 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+color: "GREEN_DARK"
+mainElement: "EARTH"
+description:
+  - "Their hunting techniques"
+  - "makes anyone a prey for the deadly arrows."
+classIconCustomModelData: 14
+attributeElementDamage: 6
+attributeElementDefense: 1
+attributeMaxHealth: 6
+attributeMaxMana: 1
+attributeCriticalChance: 1
+weaponGearTypes:
+  - "CROSSBOW"
+  - "BOW"
+  - "DAGGER"
+armorGearTypes:
+  - "LIGHT_ARMOR"
+  - "FEATHER_ARMOR"
+  - "CLOTH_ARMOR"
+hasDefaultOffhand: false
+skillOne:
+  name: "Explosive Arrow"
+  customModelData: 18
+  description:
+    - "Shoot an arrow that deals area"
+    - "damage and pushes targets away on hit."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 12
+    - 12
+    - 12
+    - 12
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "ProjectileMechanic"
+      projectileClass: "Arrow"
+      spreadType: "CONE"
+      speed: 2.7
+      amountList:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      angle: 30
+      range: 200
+      mustHitToWork: true
+      particle:
+        arrangementType: "Single"
+        particleType: "REDSTONE"
+        dustColor: 16753920
+        dustSize: 2
+      isProjectileInvisible: false
+      child1:
+        componentType: "AreaTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 30
+        radiusList:
+          - 2
+          - 2.5
+          - 3
+          - 3.5
+          - 4
+          - 4.5
+        amountList:
+          - 24
+          - 24
+          - 24
+          - 24
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 65280
+          dustSize: 2
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "EARTH"
+          damageList:
+            - 10
+            - 40
+            - 90
+            - 180
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
+        child2:
+          componentType: "PushMechanic"
+          pushType: "FIXED"
+          speedList:
+            - 2
+            - 2.4
+            - 2.8
+            - 3.2
+            - 3.6
+            - 4.2
+          centerSelf: true
+      child2:
+        componentType: "ParticleMechanic"
+        particle:
+          arrangementType: "FillCircle"
+          particleType: "EXPLOSION_HUGE"
+          radius: 3
+          amount: 2
+          direction: "XZ"
+        data1:
+          - 3
+          - 3.5
+          - 3
+          - 3.25
+      child3:
+        componentType: "SoundMechanic"
+        sound: "SKILL.WIND_PUSH"
+        volume: 1.0
+        pitch: 1.0
+    child2:
+      componentType: "SoundMechanic"
+      sound: "SKILL.PROJECTILE_ICE"
+      volume: 1.0
+      pitch: 1.0
+skillTwo:
+  name: "Volley"
+  customModelData: 15
+  description:
+    - "Fire multiple arrows in a cone"
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "ProjectileMechanic"
+      projectileClass: "Arrow"
+      spreadType: "CONE"
+      speed: 2.7
+      amountList:
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+      angle: 30
+      range: 200
+      mustHitToWork: true
+      child1:
+        componentType: "FilterCurrentTargets"
+        allies: false
+        enemy: true
+        self: false
+        max: 10
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "EARTH"
+          damageList:
+            - 10
+            - 40
+            - 90
+            - 180
+          damageMultiplyList:
+            - 0.6
+            - 0.8
+            - 1.0
+            - 1.2
+    child2:
+      componentType: "SoundMechanic"
+      sound: "SKILL.MULTI_ARROW"
+      volume: 1.0
+      pitch: 1.0
+skillThree:
+  name: "Hookshot"
+  customModelData: 46
+  description:
+    - "Fire a grapple particle projectile."
+    - "If it collides with terrain dash towards it,"
+    - "if it hits a target pull the target."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "ProjectileMechanic"
+      projectileClass: "Arrow"
+      spreadType: "CONE"
+      speed: 2.7
+      amountList:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+      angle: 30
+      range: 90
+      mustHitToWork: false
+      particle:
+        arrangementType: "Single"
+        particleType: "REDSTONE"
+        dustColor: 8421504
+        dustSize: 2
+      isProjectileInvisible: true
+      addCasterAsFirstTargetIfHitSuccess: true
+      addCasterAsSecondTargetIfHitFail: true
+      child1:
+        componentType: "PushMechanic"
+        pushType: "FIXED"
+        speedList:
+          - -3
+          - -3.25
+          - -3.5
+          - -3.75
+          - -4
+          - -4.5
+        centerSelf: false
+      child2:
+        componentType: "ImmunityMechanic"
+        damageCause: "FALL"
+    child2:
+      componentType: "SoundMechanic"
+      sound: "SKILL.PROJECTILE_FIRE"
+      volume: 1.0
+      pitch: 1.0
+    child3:
+      componentType: "LandTrigger"
+      child1:
+        componentType: "ImmunityRemoveMechanic"
+        damageCause: FALL
+        delay: 5
+skillPassive:
+  name: "Piercing Arrow"
+  customModelData: 17
+  description:
+    - "Your arrows shot from crossbows pierces through targets"
+  manaCosts:
+    - 0
+    - 0
+    - 0
+    - 0
+  cooldowns:
+    - 1
+    - 1
+    - 1
+    - 1
+  trigger:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "AddPiercingToArrowShootFromCrossbowTrigger"
+      piercingLevels:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+skillUltimate:
+  name: "Bear Trap"
+  customModelData: 35
+  description:
+    - "Place a trap that triggers when"
+    - "an enemy steps on it."
+    - "Stuns the target when triggered."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "NearbyEntityCondition"
+      entityType: "ARMOR_STAND"
+      displayNameContains: "< Trap"
+      radius: 6
+      mustExist: false
+      child1:
+        componentType: "HologramMechanic"
+        helmetType: "IRON_PICKAXE"
+        customModelData: 5
+        durations:
+          - 1000
+          - 1100
+          - 1200
+          - 1300
+          - 1400
+          - 1600
+        displayText: "< Trap %caster% >"
+        save: true
+        child1:
+          componentType: "RepeatMechanic"
+          period: 10
+          repetitions:
+            - 120
+            - 140
+            - 160
+            - 180
+            - 200
+            - 240
+          child1:
+            componentType: "AreaTarget"
+            allies: false
+            enemy: true
+            self: false
+            max: 30
+            radiusList:
+              - 1.2
+              - 1.2
+              - 1.2
+              - 1.2
+            amountList:
+              - 0
+              - 0
+              - 0
+              - 0
+            particle:
+              particleType: "REDSTONE"
+              dustColor: 65280
+              dustSize: 1
+            child1:
+              componentType: "ParticleMechanic"
+              particle:
+                arrangementType: "FillCircle"
+                particleType: "EXPLOSION_HUGE"
+                radius: 3
+                amount: 1
+                direction: "XZ"
+              data1:
+                - 3
+                - 3.5
+                - 3
+                - 3.25
+              upward: 0.8
+            child2:
+              componentType: "StatusEffectMechanic"
+              statusEffectTypes:
+                - "STUN"
+              durations:
+                - 60
+                - 70
+                - 80
+                - 90
+            child3:
+              componentType: "SelfTarget"
+              child1:
+                componentType: "RemoveSavedEntities"
+            child4:
+              componentType: "SoundMechanic"
+              sound: "SKILL.STUN_HIT"
+              volume: 1.0
+              pitch: 1.0
+            child5:
+              componentType: "SelfTarget"
+              child1:
+                componentType: "FlagSetMechanic"
+                key: "shouldStopSkill"
+                isUnique: true
+          child2:
+            componentType: "SelfTarget"
+            child1:
+              componentType: "FlagCondition"
+              key: "shouldStopSkill"
+              isSet: true
+              isUnique: true
+              child1:
+                componentType: "RepeatCancelMechanic"
+              child2:
+                componentType: "FlagRemoveMechanic"
+                key: "shouldStopSkill"
+                isUnique: true
+

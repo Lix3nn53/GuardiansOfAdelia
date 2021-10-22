@@ -1,0 +1,32 @@
+# ---------------------------------------------- #
+#             Mythic Mobs Configuration          #
+# ---------------------------------------------- #
+#                   Mythic Mobs                  #
+# ---------------------------------------------- #
+
+CompanionWolf:
+  element: "FIRE"
+CompanionSkeleton:
+  element: "LIGHTNING"
+CompanionFrozenColossus:
+  element: "WATER"
+TutorialSoldier:
+  element: "LIGHTNING"
+TutorialArcher:
+  element: "LIGHTNING"
+TutorialBoss:
+  element: "LIGHTNING"
+EdelWeiss:
+  element: "WATER"
+CelestialFrostSword:
+  element: "WATER"
+Slime:
+  element: "WATER"
+SlimeMedium:
+  element: "WATER"
+SlimeBoss:
+  element: "WATER"
+  resistances:
+    WATER: 0.6
+    FIRE: 1.5
+    LIGHTNING: 1.3

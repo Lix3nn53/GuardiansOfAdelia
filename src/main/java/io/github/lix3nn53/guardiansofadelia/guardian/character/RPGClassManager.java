@@ -12,6 +12,8 @@ public class RPGClassManager {
     public static final String starterClass = "fighter";
     private static final HashMap<Integer, Integer> classTierToRequiredQuestId = new HashMap<>();
 
+    private static final List<String> tutorialClasses = new ArrayList<>();
+
     public static void addClass(String className, RPGClass rpgClass) {
         rpgClassMap.put(className.toUpperCase(), rpgClass);
     }
@@ -54,5 +56,13 @@ public class RPGClassManager {
 
     public static void setRequiredQuestForClassTier(int classTier, int questNo) {
         classTierToRequiredQuestId.put(classTier, questNo);
+    }
+
+    public static void addTutorialClass(List<String> tutorialClass) {
+        tutorialClasses.addAll(tutorialClass);
+    }
+
+    public static List<String> getTutorialClasses() {
+        return tutorialClasses;
     }
 }

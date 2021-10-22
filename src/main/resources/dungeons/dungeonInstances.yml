@@ -1,0 +1,70 @@
+# ---------------------------------------------- #
+#              General Configuration             #
+# ---------------------------------------------- #
+#               Dungeon Information              #
+# ---------------------------------------------- #
+
+LIBRARY1:
+  start:
+    x: -53.0
+    y: 20.5
+    z: -118.0
+    world: dungeons
+    yaw: 0.0
+    pitch: 0.0
+LIBRARY2:
+  start:
+    x: -53.0
+    y: 20.5
+    z: 4.0
+    world: dungeons
+    yaw: 0.0
+    pitch: 0.0
+LIBRARY3:
+  start:
+    x: -53.0
+    y: 20.5
+    z: 126.0
+    world: dungeons
+    yaw: 0.0
+    pitch: 0.0
+LIBRARY4:
+  start:
+    x: -53.0
+    y: 20.5
+    z: 248.0
+    world: dungeons
+    yaw: 0.0
+    pitch: 0.0
+SEWER1:
+  start:
+    x: 149.0
+    y: 56.5
+    z: -47.0
+    world: dungeons
+    yaw: 90.0
+    pitch: 0.0
+SEWER2:
+  start:
+    x: 149.0
+    y: 56.5
+    z: 56.0
+    world: dungeons
+    yaw: 90.0
+    pitch: 0.0
+SEWER3:
+  start:
+    x: 149.0
+    y: 56.5
+    z: 159.0
+    world: dungeons
+    yaw: 90.0
+    pitch: 0.0
+SEWER4:
+  start:
+    x: 149.0
+    y: 56.5
+    z: 262.0
+    world: dungeons
+    yaw: 90.0
+    pitch: 0.0

@@ -20,13 +20,15 @@ public class CharacterSelectionMenuList {
     public static GuiGeneric getCharacterCreationMenu(int charNo) {
         GuiGeneric guiGeneric = new GuiGeneric(54, ChatPalette.GRAY_DARK + "Character " + charNo + " Creation", 0);
 
-        List<RPGClass> classesAtTier = RPGClassManager.getClassesAtTier(3);
+        List<String> tutorialClasses = RPGClassManager.getTutorialClasses();
 
         int index = 10;
-        for (RPGClass rpgClass : classesAtTier) {
+        for (String rpgClassStr : tutorialClasses) {
             ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+
+            RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
 
             int classIconCustomModelData = rpgClass.getClassIconCustomModelData();
             itemMeta.setCustomModelData(classIconCustomModelData);

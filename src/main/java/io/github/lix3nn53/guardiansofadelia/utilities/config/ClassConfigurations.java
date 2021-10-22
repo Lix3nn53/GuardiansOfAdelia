@@ -26,13 +26,17 @@ import java.util.List;
 
 public class ClassConfigurations {
 
-    private static final HashMap<String, FileConfiguration> classNameToConfiguration = new HashMap<>();
-    private static FileConfiguration fileConfiguration;
     private static final String filePath = ConfigManager.DATA_FOLDER + File.separator + "classes";
+    private static FileConfiguration baseConfig;
+    private static HashMap<String, YamlConfiguration> tierOne;
+    private static HashMap<String, YamlConfiguration> tierTwo;
+    private static HashMap<String, YamlConfiguration> tierThree;
 
     public static void createConfigs() {
-        fileConfiguration = ConfigurationUtils.createConfig(filePath, "config.yml");
-        createClassConfigs();
+        baseConfig = ConfigurationUtils.createConfig(filePath, "config.yml");
+        tierOne = ConfigurationUtils.getAllConfigsInFile(filePath + File.separator + "tierOne");
+        tierTwo = ConfigurationUtils.getAllConfigsInFile(filePath + File.separator + "tierTwo");
+        tierThree = ConfigurationUtils.getAllConfigsInFile(filePath + File.separator + "tierThree");
     }
 
     public static void loadConfigs() {
@@ -40,31 +44,32 @@ public class ClassConfigurations {
         loadClassConfigs();
     }
 
-    private static void createClassConfigs() {
-        List<String> classList = fileConfiguration.getStringList("classList");
-
-        for (String className : classList) {
-            YamlConfiguration config = ConfigurationUtils.createConfig(filePath, className + ".yml");
-            classNameToConfiguration.put(className, config);
-        }
-    }
-
     private static void loadMainConfig() {
-        int count = ConfigurationUtils.getChildComponentCount(fileConfiguration, "classTier");
+        int count = ConfigurationUtils.getChildComponentCount(baseConfig, "classTier");
 
         for (int classTier = 1; classTier <= count; classTier++) {
-            ConfigurationSection configurationSection = fileConfiguration.getConfigurationSection("classTier" + classTier);
+            ConfigurationSection configurationSection = baseConfig.getConfigurationSection("classTier" + classTier);
             int requiredQuest = configurationSection.getInt("requiredQuest");
 
             RPGClassManager.setRequiredQuestForClassTier(classTier, requiredQuest);
         }
+
+        List<String> tutorialClasses = baseConfig.getStringList("tutorialClasses");
+        RPGClassManager.addTutorialClass(tutorialClasses);
     }
 
     private static void loadClassConfigs() {
         RPGClassManager.clearClasses();
-        for (String className : classNameToConfiguration.keySet()) {
+
+        loadATierOfClasses(tierOne, 1);
+        loadATierOfClasses(tierTwo, 2);
+        loadATierOfClasses(tierThree, 3);
+    }
+
+    private static void loadATierOfClasses(HashMap<String, YamlConfiguration> files, int tier) {
+        for (String className : files.keySet()) {
             GuardiansOfAdelia.getInstance().getLogger().info("className: " + className);
-            FileConfiguration fileConfiguration = classNameToConfiguration.get(className);
+            FileConfiguration fileConfiguration = files.get(className);
 
             String colorStr = fileConfiguration.getString("color");
             GuardiansOfAdelia.getInstance().getLogger().info("colorStr: " + colorStr);
@@ -72,8 +77,6 @@ public class ClassConfigurations {
 
             String mainElementStr = fileConfiguration.getString("mainElement");
             ElementType mainElement = ElementType.valueOf(mainElementStr);
-
-            int tier = fileConfiguration.getInt("tier");
 
             List<String> description = fileConfiguration.getStringList("description");
 

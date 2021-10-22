@@ -10,7 +10,7 @@ classTier2:
   requiredQuest: 99
 classTier3:
   requiredQuest: 999
-classList:
+tutorialClasses:
   - "ranger"
   - "engineer"
   - "fire mage"
@@ -23,7 +23,3 @@ classList:
   - "reaper"
   - "shaman"
   - "dragonslayer"
-  - "fighter"
-  - "archer"
-  - "novice mage"
-  - "rogue"

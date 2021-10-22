@@ -56,15 +56,13 @@ public class ConfigurationUtils {
             if (file.isFile()) {
                 String fileName = file.getName();
                 String[] split = fileName.split("\\.");
-                String name = split[0];
-
-                GuardiansOfAdelia.getInstance().getLogger().info("FILE NAME: " + name);
+                String nameWithoutType = split[0];
 
                 YamlConfiguration fileConfiguration = new YamlConfiguration();
                 try {
                     fileConfiguration.load(file);
 
-                    result.put(name, fileConfiguration);
+                    result.put(nameWithoutType, fileConfiguration);
                 } catch (IOException | InvalidConfigurationException e) {
                     e.printStackTrace();
                 }

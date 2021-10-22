@@ -65,7 +65,11 @@ public final class RPGCharacter {
     }
 
     public RPGClassStats getRPGClassStats(String rpgClassStr) {
-        return classToClassStats.get(rpgClassStr.toUpperCase());
+        if (classToClassStats.containsKey(rpgClassStr.toUpperCase())) {
+            return classToClassStats.get(rpgClassStr.toUpperCase());
+        }
+
+        return new RPGClassStats();
     }
 
     public void clearRPGClassStats() {
