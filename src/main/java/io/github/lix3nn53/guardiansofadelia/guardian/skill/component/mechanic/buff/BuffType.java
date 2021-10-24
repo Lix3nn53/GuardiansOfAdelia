@@ -9,7 +9,8 @@ public enum BuffType {
     ELEMENT_DEFENSE,
     CRIT_DAMAGE,
     CRIT_CHANCE,
-    ABILITY_HASTE;
+    ABILITY_HASTE,
+    LIFE_STEAL;
 
     @Override
     public String toString() {
@@ -24,6 +25,8 @@ public enum BuffType {
                 return ChatPalette.PURPLE + "Critical Chance Buff";
             case ABILITY_HASTE:
                 return ChatPalette.PURPLE_LIGHT + "Ability Haste Buff";
+            case LIFE_STEAL:
+                return ChatPalette.GOLD + "Life Steal Buff";
         }
         return "";
     }
@@ -47,6 +50,8 @@ public enum BuffType {
                 return PotionEffectType.LUCK;
             case ABILITY_HASTE:
                 return PotionEffectType.DOLPHINS_GRACE;
+            case LIFE_STEAL:
+                return PotionEffectType.WEAKNESS;
         }
         return null;
     }

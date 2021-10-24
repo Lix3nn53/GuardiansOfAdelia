@@ -93,10 +93,10 @@ public enum Consumable {
         SkillComponent trigger = new SelfTarget();
         switch (this) {
             case BUFF_ELEMENT_DAMAGE:
-                trigger.addChildren(new BuffMechanic(BuffType.ELEMENT_DAMAGE, multipliers, ticks));
+                trigger.addChildren(new BuffMechanic(BuffType.ELEMENT_DAMAGE, multipliers, ticks, null));
                 break;
             case BUFF_ELEMENT_DEFENSE:
-                trigger.addChildren(new BuffMechanic(BuffType.ELEMENT_DEFENSE, multipliers, ticks));
+                trigger.addChildren(new BuffMechanic(BuffType.ELEMENT_DEFENSE, multipliers, ticks, null));
                 break;
             case POTION_INSTANT_HEALTH:
                 List<Integer> healAmounts = new ArrayList<>();
@@ -164,7 +164,7 @@ public enum Consumable {
                 repetitions.add(18);
                 repetitions.add(18);
                 repetitions.add(18);
-                RepeatMechanic repeatMechanic = new RepeatMechanic(20L, repetitions);
+                RepeatMechanic repeatMechanic = new RepeatMechanic(20L, repetitions, null);
                 healAmounts = new ArrayList<>();
                 healAmounts.add((int) (getInstantHealAmount(1) * REGEN_NERF));
                 healAmounts.add((int) (getInstantHealAmount(2) * REGEN_NERF));

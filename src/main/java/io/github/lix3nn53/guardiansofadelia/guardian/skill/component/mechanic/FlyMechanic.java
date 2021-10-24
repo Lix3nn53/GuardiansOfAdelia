@@ -4,40 +4,26 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import me.libraryaddict.disguise.DisguiseAPI;
-import me.libraryaddict.disguise.disguisetypes.DisguiseType;
-import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-public class DisguiseMechanic extends MechanicComponent {
+public class FlyMechanic extends MechanicComponent {
 
-    private final DisguiseType disguiseType;
-    private final boolean isAdult;
     private final List<Integer> tickList;
 
     private final String multiplyDurationValue;
 
-    public DisguiseMechanic(ConfigurationSection configurationSection) {
+    public FlyMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
-
-        if (!configurationSection.contains("disguiseType")) {
-            configLoadError("disguiseType");
-        }
-
-        if (!configurationSection.contains("isAdult")) {
-            configLoadError("isAdult");
-        }
 
         if (!configurationSection.contains("ticks")) {
             configLoadError("ticks");
         }
 
-        this.disguiseType = DisguiseType.valueOf(configurationSection.getString("disguiseType"));
-        this.isAdult = configurationSection.getBoolean("isAdult");
         this.tickList = configurationSection.getIntegerList("ticks");
         this.multiplyDurationValue = configurationSection.contains("multiplyDurationValue") ? configurationSection.getString("multiplyDurationValue") : null;
     }
@@ -48,9 +34,10 @@ public class DisguiseMechanic extends MechanicComponent {
 
         int ticks = tickList.get(skillLevel - 1);
         for (LivingEntity target : targets) {
-            MobDisguise disguise = new MobDisguise(disguiseType, isAdult);
-            disguise = disguise.setReplaceSounds(true);
-            DisguiseAPI.disguiseToAll(target, disguise);
+            if (!(target instanceof Player)) continue;
+            Player player = (Player) target;
+            player.setAllowFlight(true);
+            player.setFlying(true);
 
             int ticksCurrent = ticks;
 
@@ -65,7 +52,8 @@ public class DisguiseMechanic extends MechanicComponent {
 
                 @Override
                 public void run() {
-                    DisguiseAPI.undisguiseToAll(target);
+                    player.setFlying(false);
+                    player.setAllowFlight(false);
                 }
             }.runTaskLater(GuardiansOfAdelia.getInstance(), ticksCurrent);
         }
@@ -78,11 +66,11 @@ public class DisguiseMechanic extends MechanicComponent {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
         if (skillLevel == 0) {
-            additions.add(ChatPalette.PURPLE_LIGHT + "Disguise duration: " + (tickList.get(skillLevel) / 20));
+            additions.add(ChatPalette.PURPLE_LIGHT + "Fly duration: " + (tickList.get(skillLevel) / 20));
         } else if (skillLevel == tickList.size()) {
-            additions.add(ChatPalette.PURPLE_LIGHT + "Disguise duration: " + (tickList.get(skillLevel - 1) / 20));
+            additions.add(ChatPalette.PURPLE_LIGHT + "Fly duration: " + (tickList.get(skillLevel - 1) / 20));
         } else {
-            additions.add(ChatPalette.PURPLE_LIGHT + "Disguise duration: " + (tickList.get(skillLevel - 1) / 20) + " -> " + (tickList.get(skillLevel) / 20));
+            additions.add(ChatPalette.PURPLE_LIGHT + "Fly duration: " + (tickList.get(skillLevel - 1) / 20) + " -> " + (tickList.get(skillLevel) / 20));
         }
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }

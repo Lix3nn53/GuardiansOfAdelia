@@ -145,12 +145,15 @@ public class Skill {
         triggers.add(skillComponent);
     }
 
-    public InitializeTrigger getInitializeTrigger() {
+    public List<InitializeTrigger> getInitializeTriggers() {
+        List<InitializeTrigger> initializeTriggers = new ArrayList<>();
+
         for (SkillComponent skillComponent : triggers) {
             if (skillComponent instanceof InitializeTrigger) {
-                return (InitializeTrigger) skillComponent;
+                initializeTriggers.add((InitializeTrigger) skillComponent);
             }
         }
-        return null;
+
+        return initializeTriggers;
     }
 }

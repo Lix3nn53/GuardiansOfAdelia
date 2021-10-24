@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
@@ -12,6 +13,8 @@ public class StatusEffectMechanic extends MechanicComponent {
 
     private final List<StatusEffectType> statusEffectTypes = new ArrayList<>();
     private final List<Integer> durations;
+
+    private final String multiplyDurationValue;
 
     public StatusEffectMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -26,6 +29,8 @@ public class StatusEffectMechanic extends MechanicComponent {
             StatusEffectType byName = StatusEffectType.valueOf(str);
             this.statusEffectTypes.add(byName);
         }
+
+        this.multiplyDurationValue = configurationSection.contains("multiplyDurationValue") ? configurationSection.getString("multiplyDurationValue") : null;
     }
 
     @Override
@@ -35,8 +40,17 @@ public class StatusEffectMechanic extends MechanicComponent {
         int duration = durations.get(skillLevel - 1);
 
         for (LivingEntity target : targets) {
+            int durationCurrent = duration;
+
+            if (multiplyDurationValue != null) {
+                int value = SkillDataManager.getValue(target, multiplyDurationValue);
+                if (value > 0) {
+                    durationCurrent *= value;
+                }
+            }
+
             for (StatusEffectType effectType : statusEffectTypes) {
-                StatusEffectManager.addStatus(target, effectType, duration);
+                StatusEffectManager.addStatus(target, effectType, durationCurrent);
             }
         }
 

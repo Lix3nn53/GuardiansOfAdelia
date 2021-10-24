@@ -257,10 +257,25 @@ public class SkillDataManager {
      */
     public static void onPlayerQuit(Player player) {
         keyEntityToSkillFlags.remove(player);
-        keyEntityToCastCounterToRepeatTask.remove(player);
         keyEntityToKeyToValue.remove(player);
-        keyEntityToCastCounterToSavedEntities.remove(player);
-        player.sendMessage("OnPlayerQuit");
+
+        if (keyEntityToCastCounterToRepeatTask.containsKey(player)) {
+            HashMap<Integer, BukkitTask> map = keyEntityToCastCounterToRepeatTask.get(player);
+            for (BukkitTask task : map.values()) {
+                task.cancel();
+            }
+            keyEntityToCastCounterToRepeatTask.remove(player);
+        }
+
+        if (keyEntityToCastCounterToSavedEntities.containsKey(player)) {
+            HashMap<Integer, List<LivingEntity>> map = keyEntityToCastCounterToSavedEntities.get(player);
+            for (List<LivingEntity> entityList : map.values()) {
+                for (LivingEntity entity : entityList) {
+                    entity.remove();
+                }
+            }
+            keyEntityToCastCounterToSavedEntities.remove(player);
+        }
     }
 
     /**

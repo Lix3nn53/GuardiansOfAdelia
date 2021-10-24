@@ -24,15 +24,19 @@ public class RepeatMechanic extends MechanicComponent {
     private final int valueConditionMinValue;
     private final int valueConditionMaxValue;
 
+    private final String multiplyWithValue;
+
     /**
      * @param period
-     * @param repetitions 0 for infinite
+     * @param repetitions       0 for infinite
+     * @param multiplyWithValue
      */
-    public RepeatMechanic(long period, List<Integer> repetitions) {
+    public RepeatMechanic(long period, List<Integer> repetitions, String multiplyWithValue) {
         super(false);
 
         this.period = period;
         this.repetitions = repetitions;
+        this.multiplyWithValue = multiplyWithValue;
         this.valueConditionKey = null;
         this.valueConditionMaxValue = 0;
         this.valueConditionMinValue = 0;
@@ -56,6 +60,12 @@ public class RepeatMechanic extends MechanicComponent {
         this.valueConditionKey = configurationSection.contains("valueConditionKey") ? configurationSection.getString("valueConditionKey") : null;
         this.valueConditionMinValue = configurationSection.contains("valueConditionMinValue") ? configurationSection.getInt("valueConditionMinValue") : 0;
         this.valueConditionMaxValue = configurationSection.contains("valueConditionMaxValue") ? configurationSection.getInt("valueConditionMaxValue") : 0;
+
+        if (configurationSection.contains("multiplyWithValue")) {
+            this.multiplyWithValue = configurationSection.getString("multiplyWithValue");
+        } else {
+            this.multiplyWithValue = null;
+        }
     }
 
     @Override
@@ -64,6 +74,17 @@ public class RepeatMechanic extends MechanicComponent {
 
         BukkitTask bukkitTask;
         if (!repetitions.isEmpty()) {
+            int repetition = repetitions.get(skillLevel - 1);
+
+            if (multiplyWithValue != null) {
+                int value = SkillDataManager.getValue(caster, multiplyWithValue);
+                if (value > 0) {
+                    repetition *= value;
+                }
+            }
+
+            int finalRepetition = repetition;
+
             bukkitTask = new BukkitRunnable() {
 
                 int counter;
@@ -83,7 +104,7 @@ public class RepeatMechanic extends MechanicComponent {
                     executeChildren(caster, skillLevel, targets, castCounter, skillIndex);
                     counter++;
 
-                    if (counter >= repetitions.get(skillLevel - 1)) {
+                    if (counter >= finalRepetition) {
                         cancel();
                         SkillDataManager.removeRepeatTask(caster, castCounter);
                     }

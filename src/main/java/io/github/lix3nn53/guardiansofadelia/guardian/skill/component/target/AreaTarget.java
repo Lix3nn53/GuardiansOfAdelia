@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TargetComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
@@ -27,9 +28,11 @@ public class AreaTarget extends TargetComponent {
     private final double particleHeight;
     private final ArrangementSingle arrangementSingle;
 
+    private final String multiplyWithValue;
+
     public AreaTarget(boolean addLore, boolean allies, boolean enemy, boolean self, int max, boolean armorStand, boolean keepCurrent,
                       boolean addToBeginning, List<Double> radiusList, List<Integer> amountList, List<Double> offset_xList,
-                      List<Double> offset_yList, List<Double> offset_zList, double particleHeight, ArrangementSingle arrangementSingle) {
+                      List<Double> offset_yList, List<Double> offset_zList, double particleHeight, ArrangementSingle arrangementSingle, String multiplyWithValue) {
         super(addLore, allies, enemy, self, max, armorStand, keepCurrent, addToBeginning);
         this.radiusList = radiusList;
         this.amountList = amountList;
@@ -38,6 +41,7 @@ public class AreaTarget extends TargetComponent {
         this.offset_zList = offset_zList;
         this.particleHeight = particleHeight;
         this.arrangementSingle = arrangementSingle;
+        this.multiplyWithValue = multiplyWithValue;
     }
 
     public AreaTarget(ConfigurationSection configurationSection) {
@@ -64,6 +68,12 @@ public class AreaTarget extends TargetComponent {
         this.arrangementSingle = new ArrangementSingle(particleSection);
 
         this.particleHeight = particleSection.contains("height") ? particleSection.getDouble("height") : 0;
+
+        if (configurationSection.contains("multiplyWithValue")) {
+            this.multiplyWithValue = configurationSection.getString("multiplyWithValue");
+        } else {
+            this.multiplyWithValue = null;
+        }
     }
 
     @Override
@@ -87,6 +97,13 @@ public class AreaTarget extends TargetComponent {
         }
 
         double radius = radiusList.get(skillLevel - 1);
+        if (multiplyWithValue != null) {
+            int value = SkillDataManager.getValue(caster, multiplyWithValue);
+            if (value > 0) {
+                radius *= value;
+            }
+        }
+
         int amount = amountList.get(skillLevel - 1);
 
         for (LivingEntity target : targets) {

@@ -215,6 +215,14 @@ public class SkillComponentLoader {
             return new TargetCountMinigameCondition(configurationSection);
         } else if (componentType.equals(FilterEntityTypeTargets.class.getSimpleName())) {
             return new FilterEntityTypeTargets(configurationSection);
+        } else if (componentType.equals(LightLevelCondition.class.getSimpleName())) {
+            return new LightLevelCondition(configurationSection);
+        } else if (componentType.equals(DisguiseRemoveMechanic.class.getSimpleName())) {
+            return new DisguiseRemoveMechanic(false);
+        } else if (componentType.equals(FlyMechanic.class.getSimpleName())) {
+            return new FlyMechanic(configurationSection);
+        } else if (componentType.equals(FlyRemoveMechanic.class.getSimpleName())) {
+            return new FlyRemoveMechanic(false);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

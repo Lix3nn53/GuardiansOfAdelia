@@ -67,7 +67,7 @@ public class CommandTest implements CommandExecutor {
                 ArrayList<Integer> amountList = new ArrayList<>();
                 amountList.add(20);
                 AreaTarget areaTarget = new AreaTarget(false, true, true, false, 10, false, false,
-                        false, radiusList, amountList, null, null, null, 0.2, arrangementSingle);
+                        false, radiusList, amountList, null, null, null, 0.2, arrangementSingle, null);
 
 
                 ArrayList<Double> damages = new ArrayList<>();

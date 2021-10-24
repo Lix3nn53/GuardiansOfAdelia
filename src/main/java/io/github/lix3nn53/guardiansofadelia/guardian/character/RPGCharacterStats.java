@@ -77,6 +77,7 @@ public class RPGCharacterStats {
     private double buffCriticalChance = 0;
     private double buffCriticalDamage = 0;
     private double buffAbilityHaste = 0;
+    private double buffLifeSteal = 0;
 
     private ArmorGearType sameTypeArmorSet = null;
     private List<GearSet> gearSets = new ArrayList<>();
@@ -146,6 +147,9 @@ public class RPGCharacterStats {
                 }
                 if (buffCriticalDamage != 0) {
                     buffs.add(ChatPalette.ORANGE + "CritDmg +" + (int) ((buffCriticalDamage * 100) + 0.5) + "%");
+                }
+                if (buffLifeSteal != 0) {
+                    buffs.add(ChatPalette.RED + "LifeSteal +" + (int) ((buffLifeSteal * 100) + 0.5) + "%");
                 }
                 if (buffAbilityHaste != 0) {
                     buffs.add(ChatPalette.BLUE + "Haste +" + buffAbilityHaste + "");
@@ -918,6 +922,9 @@ public class RPGCharacterStats {
         } else if (buffType.equals(BuffType.ABILITY_HASTE)) {
             this.buffAbilityHaste += addToMultiplier;
             newValue = this.buffAbilityHaste;
+        } else if (buffType.equals(BuffType.LIFE_STEAL)) {
+            this.buffLifeSteal += addToMultiplier;
+            newValue = this.buffLifeSteal;
         }
 
         if (potionEffect == null) return;
@@ -940,6 +947,8 @@ public class RPGCharacterStats {
             return this.buffCriticalChance;
         } else if (buffType.equals(BuffType.ABILITY_HASTE)) {
             return this.buffAbilityHaste;
+        } else if (buffType.equals(BuffType.LIFE_STEAL)) {
+            return this.buffLifeSteal;
         }
         return 1;
     }

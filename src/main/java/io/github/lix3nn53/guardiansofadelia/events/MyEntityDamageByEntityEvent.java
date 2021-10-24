@@ -237,6 +237,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
                 double damage = event.getDamage();
                 boolean isCritical = false;
@@ -257,7 +258,6 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     }
 
                     //custom damage modifiers
-                    RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                     String rpgClassStr = activeCharacter.getRpgClassStr();
 
                     if (isSkill) {
@@ -431,7 +431,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 }
 
                 String text = indicatorColor.toString() + (int) (finalDamage + 0.5) + " " + indicatorIcon;
-                /*if (isCritical) {
+                /* if (isCritical) {
                     text = "☆" + text;
                 }*/
                 double targetHeight = livingTarget.getHeight();
@@ -441,8 +441,34 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 //show bossbar
                 HealthBarManager.onPlayerDamageEntity(player, livingTarget, (int) (finalDamage + 0.5), indicatorColor, indicatorIcon);
+
+                lifeSteal(player, rpgCharacterStats, finalDamage);
             }
         }
         return false;
+    }
+
+    private void lifeSteal(Player player, RPGCharacterStats rpgCharacterStats, double finalDamage) {
+        double lfStealPercent = rpgCharacterStats.getBuffValue(BuffType.LIFE_STEAL);
+        if (lfStealPercent != 0) {
+            double currentHealth = player.getHealth();
+
+            AttributeInstance attribute = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+            if (attribute != null) {
+                double maxHealth = attribute.getValue();
+
+                if (currentHealth < maxHealth) {
+                    double healAmount = finalDamage * lfStealPercent;
+
+                    double nextHealth = currentHealth + healAmount;
+
+                    if (nextHealth > maxHealth) {
+                        nextHealth = maxHealth;
+                    }
+
+                    player.setHealth(nextHealth);
+                }
+            }
+        }
     }
 }

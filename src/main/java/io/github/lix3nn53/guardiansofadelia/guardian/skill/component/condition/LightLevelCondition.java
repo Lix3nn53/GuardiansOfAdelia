@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
@@ -36,6 +37,8 @@ public class LightLevelCondition extends ConditionComponent {
         for (LivingEntity target : targets) {
             Block block = target.getLocation().getBlock();
             byte lightLevel = block.getLightLevel();
+
+            Bukkit.getPlayer("Lix3nn").sendMessage("Light level: " + lightLevel);
 
             if (lightLevel > min && lightLevel <= max) {
                 success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter, skillIndex) || success;

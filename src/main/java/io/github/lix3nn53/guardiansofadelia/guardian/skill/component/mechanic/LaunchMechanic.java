@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.configuration.ConfigurationSection;
@@ -16,6 +17,8 @@ public class LaunchMechanic extends MechanicComponent {
     private final List<Double> upwardSpeedList;
     private final List<Double> rightSpeedList;
 
+    private final String multiplyWithValue;
+
     public LaunchMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
 
@@ -27,6 +30,8 @@ public class LaunchMechanic extends MechanicComponent {
         this.forwardSpeedList = configurationSection.contains("forwardSpeedList") ? configurationSection.getDoubleList("forwardSpeedList") : new ArrayList<>();
         this.upwardSpeedList = configurationSection.contains("upwardSpeedList") ? configurationSection.getDoubleList("upwardSpeedList") : new ArrayList<>();
         this.rightSpeedList = configurationSection.contains("rightSpeedList") ? configurationSection.getDoubleList("rightSpeedList") : new ArrayList<>();
+
+        this.multiplyWithValue = configurationSection.contains("multiplyWithValue") ? configurationSection.getString("multiplyWithValue") : null;
     }
 
     @Override
@@ -40,6 +45,19 @@ public class LaunchMechanic extends MechanicComponent {
         for (LivingEntity ent : targets) {
             final Vector dir;
 
+            double forward2use = forward;
+            double right2use = right;
+            double upward2use = upward;
+
+            if (multiplyWithValue != null) {
+                int value = SkillDataManager.getValue(ent, multiplyWithValue);
+                if (value > 0) {
+                    forward2use *= value;
+                    right2use *= value;
+                    upward2use *= value;
+                }
+            }
+
             if (relative.equals(Relative.CASTER)) {
                 dir = caster.getLocation().getDirection().setY(0).normalize();
             } else if (relative.equals(Relative.BETWEEN)) {
@@ -49,8 +67,8 @@ public class LaunchMechanic extends MechanicComponent {
             }
 
             final Vector nor = dir.clone().crossProduct(UP);
-            dir.multiply(forward);
-            dir.add(nor.multiply(right)).setY(upward);
+            dir.multiply(forward2use);
+            dir.add(nor.multiply(right2use)).setY(upward2use);
 
             ent.setVelocity(dir);
         }

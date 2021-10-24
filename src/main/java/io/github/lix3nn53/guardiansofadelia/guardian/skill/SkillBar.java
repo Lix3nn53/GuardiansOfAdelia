@@ -20,6 +20,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Each player character has unique skill-bar
@@ -57,8 +58,8 @@ public class SkillBar {
                     if (investedSkillPoints.get(i) <= 0) continue;
 
                     Skill skill = skillSet.get(i);
-                    InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
-                    if (initializeTrigger != null) {
+                    List<InitializeTrigger> initializeTriggers = skill.getInitializeTriggers();
+                    for (InitializeTrigger initializeTrigger : initializeTriggers) {
                         int nextSkillLevel = skill.getCurrentSkillLevel(getInvestedSkillPoints(i));
                         TriggerListener.onSkillUpgrade(player, initializeTrigger, i, nextSkillLevel, castCounter);
                         castCounter++;
@@ -86,8 +87,8 @@ public class SkillBar {
         int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel);
 
         if (getSkillPointsLeftToSpend() >= reqSkillPoints) {
-            InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
-            if (initializeTrigger != null) {
+            List<InitializeTrigger> initializeTriggers = skill.getInitializeTriggers();
+            for (InitializeTrigger initializeTrigger : initializeTriggers) {
                 TriggerListener.onSkillUpgrade(player, initializeTrigger, skillIndex, currentSkillLevel + 1, castCounter);
                 castCounter++;
             }
@@ -115,8 +116,8 @@ public class SkillBar {
 
         if (currentSkillLevel <= 0) return false;
 
-        InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
-        if (initializeTrigger != null) {
+        List<InitializeTrigger> initializeTriggers = skill.getInitializeTriggers();
+        for (InitializeTrigger initializeTrigger : initializeTriggers) {
             TriggerListener.onSkillDowngrade(player, initializeTrigger, skillIndex, currentSkillLevel - 1, castCounter);
         }
 
@@ -138,8 +139,8 @@ public class SkillBar {
         for (int skillIndex = 0; skillIndex < 5; skillIndex++) {
             Skill skill = this.skillSet.get(skillIndex);
 
-            InitializeTrigger initializeTrigger = skill.getInitializeTrigger();
-            if (initializeTrigger != null) {
+            List<InitializeTrigger> initializeTriggers = skill.getInitializeTriggers();
+            for (InitializeTrigger initializeTrigger : initializeTriggers) {
                 TriggerListener.onSkillDowngrade(player, initializeTrigger, skillIndex, 0, castCounter);
                 castCounter++;
             }

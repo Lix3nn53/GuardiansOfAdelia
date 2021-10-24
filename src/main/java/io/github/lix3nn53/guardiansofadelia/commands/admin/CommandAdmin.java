@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
@@ -43,6 +44,7 @@ public class CommandAdmin implements CommandExecutor {
                 player.sendMessage(ChatPalette.PURPLE_LIGHT + "/admin tp town <num>");
                 player.sendMessage(ChatPalette.BLUE_DARK + "---- RPG ----");
                 player.sendMessage(ChatPalette.BLUE_DARK + "/admin exp <player> <amount>");
+                player.sendMessage(ChatPalette.BLUE_DARK + "/admin cexp <player> <amount>");
             } else if (args[0].equals("debug")) {
                 DEBUG_MODE = !DEBUG_MODE;
             } else if (args[0].equals("speed")) {
@@ -56,13 +58,28 @@ public class CommandAdmin implements CommandExecutor {
             } else if (args[0].equals("exp")) {
                 if (args.length == 3) {
                     int expToGive = Integer.parseInt(args[2]);
-                    Player player2 = Bukkit.getPlayer(args[1]);
-                    if (player2 != null) {
-                        if (GuardianDataManager.hasGuardianData(player)) {
-                            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+                    Player target = Bukkit.getPlayer(args[1]);
+                    if (target != null) {
+                        if (GuardianDataManager.hasGuardianData(target)) {
+                            GuardianData guardianData = GuardianDataManager.getGuardianData(target);
                             if (guardianData.hasActiveCharacter()) {
                                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                                 activeCharacter.getRpgCharacterStats().giveExp(expToGive);
+                            }
+                        }
+                    }
+                }
+            } else if (args[0].equals("cexp")) {
+                if (args.length == 3) {
+                    int expToGive = Integer.parseInt(args[2]);
+                    Player target = Bukkit.getPlayer(args[1]);
+                    if (target != null) {
+                        if (GuardianDataManager.hasGuardianData(target)) {
+                            GuardianData guardianData = GuardianDataManager.getGuardianData(target);
+                            if (guardianData.hasActiveCharacter()) {
+                                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                                RPGClassStats currentRPGClassStats = activeCharacter.getCurrentRPGClassStats();
+                                currentRPGClassStats.giveExp(target, expToGive);
                             }
                         }
                     }
@@ -96,7 +113,9 @@ public class CommandAdmin implements CommandExecutor {
                 boolean allowFlight = player.getAllowFlight();
                 player.setFlying(!allowFlight);
             } else if (args[0].equals("reload")) {
-                if (args[1].equals("skills")) {
+                if (args.length == 1) {
+                    player.sendMessage("/admin reload skills");
+                } else if (args[1].equals("skills")) {
                     ClassConfigurations.createConfigs();
                     ClassConfigurations.loadConfigs();
                     player.sendMessage(ChatPalette.GREEN_DARK + "Reloaded class configs!");

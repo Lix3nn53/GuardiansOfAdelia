@@ -1,0 +1,769 @@
+# ---------------------------------------------- #
+#            Quest list Configuration            #
+# ---------------------------------------------- #
+#                     Quests                     #
+# ---------------------------------------------- #
+
+color: "RED_DARK"
+mainElement: "LIGHTNING"
+description:
+  - "Due to their incredible speed and agility,"
+  - "Rogues are an expert at dealing"
+  - "damage in a short amount of time!"
+classIconCustomModelData: 19
+attributeElementDamage: 5
+attributeElementDefense: 3
+attributeMaxHealth: 6
+attributeMaxMana: 1
+attributeCriticalChance: 1
+weaponGearTypes:
+  - "DAGGER"
+  - "CROSSBOW"
+armorGearTypes:
+  - "FEATHER_ARMOR"
+  - "LIGHT_ARMOR"
+  - "CLOTH_ARMOR"
+hasDefaultOffhand: true
+isDefaultOffhandWeapon: true
+actionBarInfoType: "VARIABLE"
+actionBarIcon: "&4♦"
+actionBarKey: "blood"
+skillOne:
+  name: "Bite"
+  customModelData: 60
+  description:
+    - "Leap forward and bite an enemy near your landing."
+    - "Consumes blood reserves to increase leap range."
+    - "Refreshes 2 blood reserves on successful hit."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 1
+    - 1
+    - 1
+    - 1
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "LaunchMechanic"
+      relative: "CASTER"
+      forwardSpeedList:
+        - 0.4
+        - 0.5
+        - 0.6
+        - 0.7
+      upwardSpeedList:
+        - 0.2
+        - 0.2
+        - 0.2
+        - 0.2
+      rightSpeedList:
+        - 0
+        - 0
+        - 0
+        - 0
+      multiplyWithValue: "blood"
+    child2:
+      componentType: "ValueSetMechanic"
+      key: "blood"
+      values:
+        - 0
+        - 0
+        - 0
+        - 0
+    child3:
+      componentType: "SoundMechanic"
+      sound: "SKILL.JUMP"
+      volume: 1.0
+      pitch: 1.0
+    child4:
+      componentType: "ImmunityMechanic"
+      damageCause: "FALL"
+    child5:
+      componentType: "ParticleAnimationMechanic"
+      particle:
+        arrangementType: "FillCircle"
+        particleType: "REDSTONE"
+        radius: 1
+        amount: 4
+        direction: "XZ"
+        dustColor: 16711680
+        dustSize: 2
+      frequency: 4
+      data1:
+        - 1
+        - 1
+        - 1
+        - 1
+      repeatAmount:
+        - 10
+        - 12
+        - 14
+        - 16
+    child6:
+      componentType: "LandTrigger"
+      child1:
+        componentType: "SoundMechanic"
+        sound: "SKILL.POWERFUL_LANDING"
+        volume: 1.0
+        pitch: 1.0
+      child2:
+        componentType: "ImmunityRemoveMechanic"
+        damageCause: FALL
+        delay: 5
+      child3:
+        componentType: "SingleTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 1
+        tolerance: 12
+        ranges:
+          - 4
+          - 4
+          - 4
+          - 4
+        keepCurrent: true
+        addToBeginning: false
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 16711680
+          dustSize: 2
+          gap: 0.2
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "LIGHTNING"
+          damageList:
+            - 10
+            - 40
+            - 90
+            - 180
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
+        child2:
+          componentType: "SoundMechanic"
+          sound: "SKILL.LIGHTNING_NORMAL"
+          volume: 0.5
+          pitch: 1.0
+        child3:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "ValueAddMechanic"
+            key: "blood"
+            valueToAdd:
+              - 2
+              - 2
+              - 2
+              - 2
+skillTwo:
+  name: "Blood Spray"
+  customModelData: 64
+  description:
+    - "Become invincible and stun yourself to create a"
+    - "blood bubble. After 2 seconds pop the bubble and"
+    - "deal damage to nearby targets."
+    - "Consumes blood to increase effect radius."
+    - "Refresh 1 blood reserves for each enemy hit."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 12
+    - 12
+    - 12
+    - 12
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "StatusEffectMechanic"
+      statusEffectTypes:
+        - "STUN"
+      durations:
+        - 50
+        - 50
+        - 50
+        - 50
+    child2:
+      componentType: "InvincibleMechanic"
+      ticks:
+        - 50
+        - 50
+        - 50
+        - 50
+    child3:
+      componentType: "ParticleAnimationMechanic"
+      particle:
+        arrangementType: "DrawCylinder"
+        particleType: "REDSTONE"
+        radius: 2.5
+        amount: 16
+        direction: "XZ"
+        dustColor: 16711680
+        dustSize: 1
+      frequency: 5
+      repeatAmount:
+        - 7
+        - 7
+        - 7
+        - 7
+      data1:
+        - 2.5
+        - 2.5
+        - 2.5
+        - 2.5
+      dataIncrease1: -0.3
+      upward: 1.2
+      upwardIncrease: 0.2
+      resetY: true
+      rotation: true
+      yawIncrease: 30
+      pitchIncrease: 5
+    child4:
+      componentType: "DelayMechanic"
+      ticks: 35
+      child1:
+        componentType: "RepeatMechanic"
+        period: 5
+        repetitions:
+          - 2
+          - 2
+          - 2
+          - 2
+        child1:
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "REDSTONE"
+            radius: 0.4
+            amount: 2
+            direction: "XZ"
+            dustColor: 16711680
+            dustSize: 6
+          data1:
+            - 0.4
+            - 0.4
+            - 0.4
+            - 0.4
+          upward: 3.0
+    child5:
+      componentType: "DelayMechanic"
+      ticks: 50
+      child1:
+        componentType: "AreaTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 50
+        radiusList:
+          - 1.25
+          - 1.5
+          - 1.75
+          - 2
+        amountList:
+          - 24
+          - 24
+          - 24
+          - 24
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 16711680
+          dustSize: 3
+        multiplyWithValue: "blood"
+        child1:
+          componentType: "DamageMechanic"
+          damageType: "LIGHTNING"
+          damageList:
+            - 10
+            - 40
+            - 90
+            - 180
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
+        child2:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "ValueAddMechanic"
+            key: "blood"
+            valueToAdd:
+              - 1
+              - 1
+              - 1
+              - 1
+      child2:
+        componentType: "ValueSetMechanic"
+        key: "blood"
+        values:
+          - 0
+          - 0
+          - 0
+          - 0
+    child6:
+      componentType: "SoundMechanic"
+      sound: "SKILL.FIRE_SLASH"
+      volume: 0.5
+      pitch: 1.0
+skillThree:
+  name: "Bat Form"
+  customModelData: 45
+  description:
+    - "Turn into a bat and become invincible."
+    - "Effect is canceled if you cast spell or attack an enemy."
+    - "Consumes blood reserves to increase effect duration."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "LaunchMechanic"
+      relative: "CASTER"
+      forwardSpeedList:
+        - 0
+        - 0
+        - 0
+        - 0
+      upwardSpeedList:
+        - 1.2
+        - 1.2
+        - 1.2
+        - 1.2
+      rightSpeedList:
+        - 0
+        - 0
+        - 0
+        - 0
+    child2:
+      componentType: "FlagSetMechanic"
+      key: "vampire3active"
+      isUnique: false
+      ticks:
+        - 20
+        - 25
+        - 30
+        - 40
+      multiplyDurationValue: "blood"
+    child3:
+      componentType: "PotionEffectMechanic"
+      potionEffectType:
+        - "GLOWING"
+      tickList:
+        - 20
+        - 25
+        - 30
+        - 40
+      amplifierList:
+        - 1
+        - 1
+        - 1
+        - 1
+      multiplyDurationValue: "blood"
+    child4:
+      componentType: "FlyMechanic"
+      ticks:
+        - 20
+        - 25
+        - 30
+        - 40
+      multiplyDurationValue: "blood"
+    child5:
+      componentType: "ParticleAnimationMechanic"
+      particle:
+        arrangementType: "DrawCylinder"
+        particleType: "REDSTONE"
+        dustColor: 16711680
+        dustSize: 2
+        radius: 1.6
+        amount: 4
+      frequency: 2
+      data1:
+        - 1
+        - 1
+        - 1
+        - 1
+      repeatAmount:
+        - 5
+        - 6
+        - 7
+        - 10
+      upwardIncrease: 0.1
+      resetY: true
+      rotation: true
+      yawIncrease: 30
+      pitchIncrease: 10
+      playback: true
+      multiplyDurationValue: "blood"
+      flagConditionKey: "vampire3active"
+      flagIsSet: true
+    child6:
+      componentType: "SoundMechanic"
+      sound: "SKILL.BUFF"
+      volume: 0.5
+      pitch: 1.0
+    child7:
+      componentType: "DisguiseMechanic"
+      disguiseType: "BAT"
+      isAdult: true
+      ticks:
+        - 20
+        - 25
+        - 30
+        - 40
+      multiplyDurationValue: "blood"
+    child8:
+      componentType: "ValueSetMechanic"
+      key: "blood"
+      values:
+        - 0
+        - 0
+        - 0
+        - 0
+    child9:
+      componentType: "FlagSetMechanic"
+      key: "flagForSkillCast"
+      isUnique: false
+      ticks:
+        - 1
+        - 1
+        - 1
+        - 1
+  trigger1:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "NormalAttackTrigger"
+      melee: true
+      projectile: true
+      cooldowns:
+        - 1
+        - 1
+        - 1
+        - 1
+      child1:
+        componentType: "SelfTarget"
+        child1:
+          componentType: "FlagCondition"
+          key: "vampire3active"
+          isSet: true
+          isUnique: false
+          child1:
+            componentType: "FlagRemoveMechanic"
+            key: "vampire3active"
+          child2:
+            componentType: "PotionEffectRemoveMechanic"
+            potionEffectType:
+              - "GLOWING"
+          child3:
+            componentType: "FlyRemoveMechanic"
+          child4:
+            componentType: "DisguiseRemoveMechanic"
+    child2:
+      componentType: "SkillCastTrigger"
+      cooldowns:
+        - 1
+        - 1
+        - 1
+        - 1
+      child1:
+        componentType: "SelfTarget"
+        child1:
+          componentType: "FlagCondition"
+          key: "flagForSkillCast"
+          isSet: false
+          isUnique: false
+          child1:
+            componentType: "FlagCondition"
+            key: "vampire3active"
+            isSet: true
+            isUnique: false
+            child1:
+              componentType: "FlagRemoveMechanic"
+              key: "vampire3active"
+            child2:
+              componentType: "PotionEffectRemoveMechanic"
+              potionEffectType:
+                - "GLOWING"
+            child3:
+              componentType: "FlyRemoveMechanic"
+            child4:
+              componentType: "DisguiseRemoveMechanic"
+skillPassive:
+  name: "Blood Reserves"
+  customModelData: 63
+  description:
+    - "Refresh your blood reserves while standing on"
+    - "blocks that has light level lower than 5."
+    - "Check occurs every 5 seconds."
+    - ""
+    - "Level 1: Max 4 blood reserves"
+    - "Level 2: Max 5 blood reserves"
+    - "Level 3: Max 6 blood reserves"
+    - "Level 4: Max 7 blood reserves"
+  manaCosts:
+    - 0
+    - 0
+    - 0
+    - 0
+  cooldowns:
+    - 4
+    - 4
+    - 4
+    - 4
+  trigger:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "SelfTarget"
+      child1:
+        componentType: "RepeatMechanic"
+        period: 100
+        addLore: false
+        child1:
+          componentType: "BuffMechanic"
+          buffType: "LIFE_STEAL"
+          multipliers:
+            - 0.1
+            - 0.15
+            - 0.2
+            - 0.25
+          ticks:
+            - 101
+            - 101
+            - 101
+            - 101
+  trigger1:
+    componentType: "InitializeTrigger"
+    child1:
+      componentType: "SelfTarget"
+      child1:
+        componentType: "RepeatMechanic"
+        period: 100
+        addLore: false
+        child1:
+          componentType: "ValueCondition"
+          key: "blood"
+          minValue: 0
+          maxValueList:
+            - 3
+            - 4
+            - 5
+            - 6
+          checkCasterOnly: true
+          child1:
+            componentType: "LightLevelCondition"
+            min: 0
+            max: 5
+            child1:
+              componentType: "SelfTarget"
+              child1:
+                componentType: "ValueAddMechanic"
+                key: "blood"
+                valueToAdd:
+                  - 1
+                  - 1
+                  - 1
+                  - 1
+skillUltimate:
+  name: "Blood Bolts"
+  customModelData: 59
+  description:
+    - "Stun yourself and a single enemy."
+    - "After the duration of stun end, deal damage to enemy."
+    - "Consumes blood to increase damage."
+  manaCosts:
+    - 5
+    - 5
+    - 5
+    - 5
+  cooldowns:
+    - 1
+    - 1
+    - 1
+    - 1
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "PotionEffectMechanic"
+      potionEffectType:
+        - "LEVITATION"
+      tickList:
+        - 35
+        - 35
+        - 35
+        - 35
+      amplifierList:
+        - 1
+        - 1
+        - 1
+        - 1
+      multiplyDurationValue: "blood"
+    child2:
+      componentType: "ImmunityMechanic"
+      damageCause: "FALL"
+    child3:
+      componentType: "RepeatMechanic"
+      period: 30
+      repetitions:
+        - 1
+        - 1
+        - 1
+        - 1
+      multiplyWithValue: "blood"
+      child1:
+        componentType: "ParticleAnimationMechanic"
+        particle:
+          arrangementType: "DrawCylinder"
+          particleType: "REDSTONE"
+          radius: 1.6
+          amount: 16
+          direction: "XZ"
+          dustColor: 16711680
+          dustSize: 1
+        frequency: 5
+        repeatAmount:
+          - 4
+          - 4
+          - 4
+          - 4
+        data1:
+          - 1.6
+          - 1.6
+          - 1.6
+          - 1.6
+        dataIncrease1: -0.3
+        upward: 1.2
+        upwardIncrease: 0.2
+        resetY: true
+        rotation: true
+        yawIncrease: 30
+        pitchIncrease: 5
+      child2:
+        componentType: "DelayMechanic"
+        ticks: 20
+        child1:
+          componentType: "RepeatMechanic"
+          period: 5
+          repetitions:
+            - 2
+            - 2
+            - 2
+            - 2
+          child1:
+            componentType: "ParticleMechanic"
+            particle:
+              arrangementType: "FillCircle"
+              particleType: "REDSTONE"
+              radius: 0.4
+              amount: 2
+              direction: "XZ"
+              dustColor: 16711680
+              dustSize: 6
+            data1:
+              - 0.4
+              - 0.4
+              - 0.4
+              - 0.4
+            upward: 3.0
+      child3:
+        componentType: "DelayMechanic"
+        ticks: 25
+        child1:
+          componentType: "ProjectileMechanic"
+          projectileClass: "SmallFireball"
+          spreadType: "CONE"
+          speed: 2.9
+          amountList:
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+            - 1
+          angle: 30
+          range: 200
+          mustHitToWork: true
+          particle:
+            arrangementType: "DrawCylinder"
+            particleType: "REDSTONE"
+            radius: 0.2
+            amount: 3
+            dustColor: 16711680
+            dustSize: 2
+            singleMinHeight: 0
+            singleMaxHeight: 1.2
+            singleGap: 0.2
+          isProjectileInvisible: true
+          upward: 1.2
+          child1:
+            componentType: "FilterCurrentTargets"
+            allies: false
+            enemy: true
+            self: false
+            max: 10
+            child1:
+              componentType: "DamageMechanic"
+              damageType: "LIGHTNING"
+              damageList:
+                - 10
+                - 40
+                - 90
+                - 180
+              damageMultiplyList:
+                - 1.4
+                - 1.6
+                - 1.8
+                - 2.2
+    child4:
+      componentType: "ValueSetMechanic"
+      key: "blood"
+      values:
+        - 0
+        - 0
+        - 0
+        - 0
+    child5:
+      componentType: "BuffMechanic"
+      buffType: "LIFE_STEAL"
+      multipliers:
+        - 0.1
+        - 0.15
+        - 0.2
+        - 0.25
+      ticks:
+        - 35
+        - 35
+        - 35
+        - 35
+      multiplyDurationValue: "blood"
+    child1:
+      componentType: "StatusEffectMechanic"
+      statusEffectTypes:
+        - "SILENCE"
+        - "DISARM"
+      durations:
+        - 35
+        - 35
+        - 35
+        - 35
+      multiplyDurationValue: "blood"
+    child6:
+      componentType: "LandTrigger"
+      child1:
+        componentType: "ImmunityRemoveMechanic"
+        damageCause: FALL
+        delay: 5

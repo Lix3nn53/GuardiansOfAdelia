@@ -105,7 +105,7 @@ public class ParticleMechanic extends MechanicComponent {
                 List<Double> list = dataIndexToDataList.get(i);
                 double current = list.get(skillLevel - 1);
                 if (i < dataIncrements.size()) {
-                    current = dataIncrements.get(i) * counter;
+                    current += dataIncrements.get(i) * counter;
                 }
                 currentDataList.add(current);
             }
