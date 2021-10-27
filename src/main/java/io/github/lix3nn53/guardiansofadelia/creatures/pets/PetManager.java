@@ -22,6 +22,7 @@ import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
 import me.libraryaddict.disguise.disguisetypes.FlagWatcher;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -152,7 +153,7 @@ public class PetManager {
 
         // name
         String petName = pet.getCustomName();
-        petName += " " + ChatPalette.GOLD + petLevel + ChatPalette.WHITE + " <" + owner.getName().substring(0, 3) + ">" + ChatPalette.GREEN_DARK + " " + maxHP + "/" + maxHP + "❤";
+        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " " + owner.getName().substring(0, 3) + ChatColor.GREEN + " " + maxHP + "❤";
         pet.setCustomName(petName);
 
         // name if disguised
@@ -189,7 +190,7 @@ public class PetManager {
 
         // name
         String petName = pet.getCustomName();
-        petName += " " + ChatPalette.GOLD + petLevel + ChatPalette.WHITE + " <" + owner.getName().substring(0, 3) + ">";
+        petName += " " + ChatColor.GOLD + petLevel + ChatColor.WHITE + " " + owner.getName().substring(0, 3);
         pet.setCustomName(petName);
 
         // name if disguised
@@ -291,7 +292,7 @@ public class PetManager {
 
     private static void updateName(int currentHealth, int nextHealth, LivingEntity companion) {
         String customName = companion.getCustomName();
-        String replace = customName.replace(currentHealth + "/", nextHealth + "/");
+        String replace = customName.replace(currentHealth + "❤", nextHealth + "❤");
 
         companion.setCustomName(replace);
 

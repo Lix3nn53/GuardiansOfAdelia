@@ -23,9 +23,8 @@ public class DamageIndicator {
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 18L);
     }
 
-    public static void showPlayer(Player player, String text, Location baseLocation) {
-        Location indicatorLocation = LocationUtils.randomPointNoY(baseLocation, 1.2);
-        FakeHologram fakeHologram = new FakeHologram(indicatorLocation, text);
+    public static void showPlayer(Player player, String text, Location location, long duration) {
+        FakeHologram fakeHologram = new FakeHologram(location, text);
 
         fakeHologram.showToPlayer(player);
         new BukkitRunnable() {
@@ -35,6 +34,12 @@ public class DamageIndicator {
                 fakeHologram.destroy(player);
                 cancel();
             }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 18L);
+        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), duration);
+    }
+
+    public static void showPlayerRandomLocation(Player player, String text, Location baseLocation, long duration) {
+        Location location = LocationUtils.randomPointNoY(baseLocation, 1.2);
+
+        showPlayer(player, text, location, duration);
     }
 }

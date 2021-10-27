@@ -126,7 +126,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     int rangedDamage = PersistentDataContainerUtil.getInteger(projectile, "rangedDamage");
                     event.setDamage(rangedDamage);
                 } else if (PersistentDataContainerUtil.hasInteger(projectile, "skillLevel")) {
-                    //projectile is a skill so cancel event and let children mechanics of this projectile do their things
+                    // projectile is a skill so cancel event and let children mechanics of this projectile do their things
                     event.setCancelled(true);
                     return;
                 }
@@ -242,6 +242,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 double damage = event.getDamage();
                 boolean isCritical = false;
                 Location targetLocation = livingTarget.getLocation();
+                double targetHeight = livingTarget.getHeight();
 
                 if (pet == null) { // attacker is not a pet
                     if (PetManager.isCompanion(livingTarget)) { // on player attack to pet
@@ -321,7 +322,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         isCritical = true;
                         Particle particle = Particle.CRIT;
                         // ParticleShapes.playSingleParticle(targetLocation, particle, null);
-                        ParticleShapes.fillHemisphere(targetLocation.clone().add(0, 0.25, 0), particle, 0.2, 48, null);
+                        ParticleShapes.fillHemisphere(targetLocation.clone().add(0, targetHeight + 0.25, 0), particle, 0.2, 48, null);
                         player.playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CURE, 0.6F, 2.0F);
                     }
                 } else {
@@ -430,14 +431,13 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     indicatorColor = ChatPalette.GOLD;
                 }
 
-                String text = indicatorColor.toString() + (int) (finalDamage + 0.5) + " " + indicatorIcon;
+                String text = indicatorColor.toOldColor().toString() + (int) (finalDamage + 0.5) + " " + indicatorIcon;
                 /* if (isCritical) {
                     text = "☆" + text;
                 }*/
-                double targetHeight = livingTarget.getHeight();
 
                 // DamageIndicator.spawnNonPacket(text, targetLocation.clone().add(0, targetHeight + 0.5, 0));
-                DamageIndicator.showPlayer(player, text, targetLocation.clone().add(0, targetHeight + 0.5, 0));
+                DamageIndicator.showPlayerRandomLocation(player, text, targetLocation.clone().add(0, targetHeight + 0.5, 0), 18);
 
                 //show bossbar
                 HealthBarManager.onPlayerDamageEntity(player, livingTarget, (int) (finalDamage + 0.5), indicatorColor, indicatorIcon);

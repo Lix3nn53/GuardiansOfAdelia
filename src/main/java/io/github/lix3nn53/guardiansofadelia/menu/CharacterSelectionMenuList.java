@@ -1,7 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.menu;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
@@ -13,49 +11,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class CharacterSelectionMenuList {
-
-    public static GuiGeneric getCharacterCreationMenu(int charNo) {
-        GuiGeneric guiGeneric = new GuiGeneric(54, ChatPalette.GRAY_DARK + "Character " + charNo + " Creation", 0);
-
-        List<String> tutorialClasses = RPGClassManager.getTutorialClasses();
-
-        int index = 10;
-        for (String rpgClassStr : tutorialClasses) {
-            ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-
-            RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-
-            int classIconCustomModelData = rpgClass.getClassIconCustomModelData();
-            itemMeta.setCustomModelData(classIconCustomModelData);
-
-            String classString = rpgClass.getClassString();
-            itemMeta.setDisplayName(classString);
-
-            List<String> description = rpgClass.getDescription();
-            ArrayList<String> lore = new ArrayList<>();
-            lore.add("");
-            lore.addAll(description);
-            itemMeta.setLore(lore);
-
-            itemStack.setItemMeta(itemMeta);
-            guiGeneric.setItem(index, itemStack);
-
-            if (index == 16) {
-                index += 12;
-            } else if (index == 34) {
-                index += 12;
-            } else {
-                index += 2;
-            }
-        }
-
-        return guiGeneric;
-    }
 
     public static GuiGeneric characterSelectionMenu(int charNo) {
         GuiGeneric guiGeneric = new GuiGeneric(36, ChatPalette.GRAY_DARK + "Character " + charNo + " Selection", 0);
@@ -92,8 +49,8 @@ public class CharacterSelectionMenuList {
         return guiGeneric;
     }
 
-    public static GuiGeneric tutorialSkipMenu(String rpgClass, int charNo) {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GRAY_DARK + "Play Tutorial? " + rpgClass + " " + charNo, 0);
+    public static GuiGeneric tutorialSkipMenu(int charNo) {
+        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GRAY_DARK + "Play Tutorial? #" + charNo, 0);
 
         ItemStack yes = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = yes.getItemMeta();

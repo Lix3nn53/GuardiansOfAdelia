@@ -49,13 +49,13 @@ public class ClassConfigurations {
 
         for (int classTier = 1; classTier <= count; classTier++) {
             ConfigurationSection configurationSection = baseConfig.getConfigurationSection("classTier" + classTier);
-            int requiredQuest = configurationSection.getInt("requiredQuest");
+            int requiredLevel = configurationSection.getInt("requiredLevel");
 
-            RPGClassManager.setRequiredQuestForClassTier(classTier, requiredQuest);
+            RPGClassManager.setRequiredLevelForClassTier(classTier, requiredLevel);
         }
 
-        List<String> tutorialClasses = baseConfig.getStringList("tutorialClasses");
-        RPGClassManager.addTutorialClass(tutorialClasses);
+        String startingClass = baseConfig.getString("startingClass");
+        RPGClassManager.setStartingClass(startingClass);
     }
 
     private static void loadClassConfigs() {

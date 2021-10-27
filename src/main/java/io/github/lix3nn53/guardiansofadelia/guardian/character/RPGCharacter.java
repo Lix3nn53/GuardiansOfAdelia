@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
+import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -80,15 +81,12 @@ public final class RPGCharacter {
         if (GuardianDataManager.hasGuardianData(player)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.hasActiveCharacter()) {
-                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-
-                List<Integer> turnedInQuests = activeCharacter.getTurnedInQuests();
+                int level = player.getLevel();
 
                 for (int classTier = RPGClassManager.HIGHEST_CLASS_TIER; classTier > 0; classTier--) { // count down from the highest class tier
-                    int quest = RPGClassManager.getRequiredQuestForClassTier(classTier);
-                    if (quest == -1) continue;
+                    int reqLevel = RPGClassManager.getRequiredLevelForClassTier(classTier);
 
-                    if (turnedInQuests.contains(quest)) {
+                    if (level >= reqLevel) {
                         return classTier;
                     }
                 }
@@ -98,21 +96,32 @@ public final class RPGCharacter {
         return 0;
     }
 
+    public RPGClassStats addClassStats(String newClassStr) {
+        RPGClassStats rpgClassStats = new RPGClassStats();
+        classToClassStats.put(newClassStr.toUpperCase(), rpgClassStats);
+
+        return rpgClassStats;
+    }
+
     public boolean changeClass(Player player, String newClassStr) {
         String s = newClassStr.toUpperCase();
         RPGClass rpgClass = RPGClassManager.getClass(s);
 
         int tier = rpgClass.getTier();
 
-        if (tier > getHighestUnlockedClassTier(player)) return false;
+        if (tier > getHighestUnlockedClassTier(player)) {
+            player.sendMessage(ChatPalette.RED + "You have not unlocked classes at this tier");
+            return false;
+        }
 
+        RPGClassStats rpgClassStats;
         if (!classToClassStats.containsKey(s)) { // Add class stats if it does not exist
-            RPGClassStats rpgClassStats = new RPGClassStats();
-            classToClassStats.put(s, rpgClassStats);
+            rpgClassStats = addClassStats(s);
+        } else {
+            rpgClassStats = classToClassStats.get(s);
         }
 
         this.rpgClassStr = s;
-        RPGClassStats rpgClassStats = classToClassStats.get(s);
         int one = rpgClassStats.getOne();
         int two = rpgClassStats.getTwo();
         int three = rpgClassStats.getThree();
@@ -124,6 +133,7 @@ public final class RPGCharacter {
 
         rpgCharacterStats.setRpgClassStr(s);
         rpgCharacterStats.recalculateEquipment(rpgClassStr);
+        player.sendMessage(ChatPalette.YELLOW + "Changed class to " + rpgClass.getClassString() + ChatPalette.YELLOW + "!");
 
         return true;
     }

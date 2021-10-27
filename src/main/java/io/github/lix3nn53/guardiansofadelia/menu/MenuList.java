@@ -311,11 +311,13 @@ public class MenuList {
 
                 List<RPGClass> values = RPGClassManager.getClassesAtTier(classTier);
 
-                int modCounter = 0;
+                int[] slots = {0, 2, 4, 6, 8, 18, 20, 22, 24, 26};
                 for (int i = 0; i < values.size(); i++) {
                     RPGClass value = values.get(i);
-                    ItemStack itemStack = new ItemStack(Material.RED_WOOL);
+                    ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
                     ItemMeta itemMeta = itemStack.getItemMeta();
+                    itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+                    itemMeta.setCustomModelData(value.getClassIconCustomModelData());
                     String classString = value.getClassString();
                     itemMeta.setDisplayName(classString.toUpperCase());
 
@@ -359,14 +361,12 @@ public class MenuList {
                     if (classTier <= unlockedClassTier) {
                         String rpgClassStr = rpgCharacter.getRpgClassStr();
                         if (valueStr.equalsIgnoreCase(rpgClassStr)) {
-                            itemStack.setType(Material.PURPLE_WOOL);
                             lore.add(ChatPalette.PURPLE_LIGHT + "This is your current class");
                         } else {
-                            itemStack.setType(Material.LIME_WOOL);
                             lore.add(ChatPalette.GREEN_DARK + "Click to change to this class!");
                         }
 
-                        RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats(rpgClassStr);
+                        RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats(valueStr);
                         int totalExperience = rpgClassStats.getTotalExperience();
                         int level = RPGClassExperienceManager.getLevel(totalExperience);
                         lore.add(ChatPalette.GOLD + "Class Level: " + ChatPalette.WHITE + level);
@@ -376,18 +376,14 @@ public class MenuList {
                     } else {
                         lore.add(ChatPalette.RED + "You haven't unlocked classes at this tier yet.");
                         lore.add(ChatPalette.RED + "");
-                        int questForClassTier = RPGClassManager.getRequiredQuestForClassTier(classTier);
-                        lore.add(ChatPalette.RED + "Required quest no: " + ChatPalette.GRAY + "#" + questForClassTier);
+                        int reqLevel = RPGClassManager.getRequiredLevelForClassTier(classTier);
+                        lore.add(ChatPalette.RED + "Required level: " + ChatPalette.GRAY + reqLevel);
                     }
 
                     itemMeta.setLore(lore);
                     itemStack.setItemMeta(itemMeta);
 
-                    guiGeneric.setItem(i * 2 - modCounter, itemStack);
-                    int mod = (i * 2 + 1 - modCounter) % 9;
-                    if (mod == 0) {
-                        modCounter++;
-                    }
+                    guiGeneric.setItem(slots[i], itemStack);
                 }
             }
         }

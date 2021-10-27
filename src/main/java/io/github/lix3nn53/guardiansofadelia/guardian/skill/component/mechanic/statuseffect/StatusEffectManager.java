@@ -40,12 +40,7 @@ public class StatusEffectManager {
         entityToStatusToDuration.put(target, activeStatuses);
 
         // Custom effects
-        // Add freeze effect
         if (effectType.equals(StatusEffectType.ROOT) || effectType.equals(StatusEffectType.STUN)) {
-            int maxFreezeTicks = target.getMaxFreezeTicks();
-
-            target.setFreezeTicks(maxFreezeTicks);
-
             // Custom code for mobs
             if (!(target instanceof Player)) {
                 target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, 5));

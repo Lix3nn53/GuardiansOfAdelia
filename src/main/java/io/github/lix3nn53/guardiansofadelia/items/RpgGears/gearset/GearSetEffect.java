@@ -26,7 +26,8 @@ public enum GearSetEffect {
     ATTACK_SPEED_DECREASE,
     ABILITY_HASTE,
     JUMP_BOOST,
-    MOVEMENT_SPEED;
+    MOVEMENT_SPEED,
+    LIFE_STEAL;
 
     public static boolean isWearingSameArmorType(ArmorGearType helmet, ArmorGearType chestplate, ArmorGearType leggings, ArmorGearType boots) {
         if (helmet == null || chestplate == null || leggings == null || boots == null) return false;
@@ -83,6 +84,9 @@ public enum GearSetEffect {
                 potionEffect = new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false);
                 player.addPotionEffect(potionEffect);
                 break;
+            case LIFE_STEAL:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.LIFE_STEAL, 0.1, null);
+                break;
         }
     }
 
@@ -118,6 +122,9 @@ public enum GearSetEffect {
             case MOVEMENT_SPEED:
                 player.removePotionEffect(PotionEffectType.SPEED);
                 break;
+            case LIFE_STEAL:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.LIFE_STEAL, -0.1, null);
+                break;
         }
     }
 
@@ -147,7 +154,9 @@ public enum GearSetEffect {
             case JUMP_BOOST:
                 return ChatPalette.GRAY + "Jump +1";
             case MOVEMENT_SPEED:
-                return ChatPalette.GRAY + "Movement Speed 20%";
+                return ChatPalette.GRAY + "Movement Speed +20%";
+            case LIFE_STEAL:
+                return ChatPalette.GRAY + "Lifesteal +10%";
         }
 
         final StringBuilder sb = new StringBuilder("GearSetEffect{");

@@ -55,7 +55,7 @@ public class MyNPCRightClickEvent implements Listener {
                 GuiGeneric characterTeleportationMenu = CharacterSelectionMenuList.characterSelectionMenu(id);
                 characterTeleportationMenu.openInventory(player);
             } else {
-                GuiGeneric characterCreationMenu = CharacterSelectionMenuList.getCharacterCreationMenu(id);
+                GuiGeneric characterCreationMenu = CharacterSelectionMenuList.tutorialSkipMenu(id);
                 characterCreationMenu.openInventory(player);
             }
         } else {

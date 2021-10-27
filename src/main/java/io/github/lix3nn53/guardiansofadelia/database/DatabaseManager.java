@@ -21,6 +21,7 @@ import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
@@ -159,20 +160,20 @@ public class DatabaseManager {
                 try {
                     String rpgClassOfCharStr = DatabaseQueries.getRPGClassCharacter(uuid, charNo);
                     RPGClass rpgClass = RPGClassManager.getClass(rpgClassOfCharStr);
-                    ChatPalette classColor = rpgClass.getClassColor();
+                    ChatColor classColor = rpgClass.getClassColor().toOldColor();
 
                     int totalExp = DatabaseQueries.getTotalExp(uuid, charNo);
                     int level = RPGCharacterExperienceManager.getLevel(totalExp);
                     CharacterSelectionScreenManager.setCharLevel(uuid, charNo, level);
 
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                        livingWatcher1.setCustomName(ChatPalette.GOLD + "Level: " + ChatPalette.WHITE + level);
+                        livingWatcher1.setCustomName(ChatColor.GOLD + "Level: " + ChatColor.WHITE + level);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(2), mobDisguise1, player);
 
-                        livingWatcher2.setCustomName(ChatPalette.PURPLE + "Total Experience: " + ChatPalette.WHITE + totalExp);
+                        livingWatcher2.setCustomName(ChatColor.LIGHT_PURPLE + "Total Experience: " + ChatColor.WHITE + totalExp);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(1), mobDisguise2, player);
 
-                        livingWatcher3.setCustomName(ChatPalette.GRAY + "Class: " + classColor + rpgClassOfCharStr);
+                        livingWatcher3.setCustomName(ChatColor.GRAY + "Class: " + classColor + rpgClassOfCharStr);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(0), mobDisguise3, player);
                     });
                 } catch (SQLException e) {

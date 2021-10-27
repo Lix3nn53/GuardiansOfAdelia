@@ -42,92 +42,96 @@ skillOne:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "HologramMechanic"
-      helmetType: "IRON_PICKAXE"
-      customModelData: 9
-      durations:
-        - 800
-        - 900
-        - 1000
-        - 1100
-      displayText: "< Turret %caster% >"
-      gravity: true
-      marker: false
-      speed: 1.9
-      upward: 0.5
-      save: true
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&eTurret!"
       child1:
-        componentType: "DelayMechanic"
-        ticks: 40
+        componentType: "HologramMechanic"
+        helmetType: "IRON_PICKAXE"
+        customModelData: 9
+        durations:
+          - 800
+          - 900
+          - 1000
+          - 1100
+        displayText: "< Turret %caster% >"
+        gravity: true
+        marker: false
+        speed: 1.9
+        upward: 0.5
+        save: true
         child1:
-          componentType: "RepeatMechanic"
-          period: 19
-          repetitions:
-            - 40
-            - 45
-            - 50
-            - 55
+          componentType: "DelayMechanic"
+          ticks: 40
           child1:
-            componentType: "AreaTarget"
-            allies: false
-            enemy: true
-            self: false
-            max: 2
-            keepCurrent: true
-            addToBeginning: false
-            radiusList:
-              - 9
-              - 10
-              - 12
-              - 14
-            amountList:
-              - 24
-              - 24
-              - 24
-              - 24
-            particle:
-              particleType: "FLAME"
+            componentType: "RepeatMechanic"
+            period: 19
+            repetitions:
+              - 40
+              - 45
+              - 50
+              - 55
             child1:
-              componentType: "HeadRotationMechanic"
-          child2:
-            componentType: "DelayMechanic"
-            ticks: 5
-            child1:
-              componentType: "ProjectileMechanic"
-              projectileClass: "Arrow"
-              spreadType: "CONE"
-              speed: 2.7
+              componentType: "AreaTarget"
+              allies: false
+              enemy: true
+              self: false
+              max: 2
+              keepCurrent: true
+              addToBeginning: false
+              radiusList:
+                - 9
+                - 10
+                - 12
+                - 14
               amountList:
-                - 1
-                - 1
-                - 1
-                - 1
-              angle: 30
-              range: 200
-              mustHitToWork: true
+                - 24
+                - 24
+                - 24
+                - 24
               particle:
-                arrangementType: "Single"
                 particleType: "FLAME"
-              isProjectileInvisible: false
-              upward: 1
               child1:
-                componentType: "DamageMechanic"
-                damageType: "FIRE"
-                damageList:
-                  - 10
-                  - 40
-                  - 90
-                  - 180
-                damageMultiplyList:
-                  - 0.4
-                  - 0.5
-                  - 0.6
-                  - 0.8
-    child3:
-      componentType: "SoundMechanic"
-      sound: "SKILL.SPLASH"
-      volume: 1.0
-      pitch: 1.0
+                componentType: "HeadRotationMechanic"
+            child2:
+              componentType: "DelayMechanic"
+              ticks: 5
+              child1:
+                componentType: "ProjectileMechanic"
+                projectileClass: "Arrow"
+                spreadType: "CONE"
+                speed: 2.7
+                amountList:
+                  - 1
+                  - 1
+                  - 1
+                  - 1
+                angle: 30
+                range: 200
+                mustHitToWork: true
+                particle:
+                  arrangementType: "Single"
+                  particleType: "FLAME"
+                isProjectileInvisible: false
+                upward: 1
+                child1:
+                  componentType: "DamageMechanic"
+                  damageType: "FIRE"
+                  damageList:
+                    - 10
+                    - 40
+                    - 90
+                    - 180
+                  damageMultiplyList:
+                    - 0.4
+                    - 0.5
+                    - 0.6
+                    - 0.8
+      child3:
+        componentType: "SoundMechanic"
+        sound: "SKILL.SPLASH"
+        volume: 1.0
+        pitch: 1.0
 skillTwo:
   name: "Bomb"
   customModelData: 19
@@ -147,108 +151,112 @@ skillTwo:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "HologramMechanic"
-      helmetType: "IRON_PICKAXE"
-      customModelData: 8
-      durations:
-        - 50
-        - 50
-        - 50
-        - 50
-      displayText: "< Bomb %caster% >"
-      gravity: true
-      marker: false
-      speed: 1.9
-      upward: 0.5
+      componentType: "CastTimeMechanic"
+      delay: 1
+      text: "&eBomb!"
       child1:
-        componentType: "DelayWithHoloMessageMechanic"
-        message: "&cBOOM"
-        ticks: 40
-        offsetY: 0
+        componentType: "HologramMechanic"
+        helmetType: "IRON_PICKAXE"
+        customModelData: 8
+        durations:
+          - 50
+          - 50
+          - 50
+          - 50
+        displayText: "< Bomb %caster% >"
+        gravity: true
+        marker: false
+        speed: 1.9
+        upward: 0.5
         child1:
-          componentType: "AreaTarget"
-          allies: false
-          enemy: true
-          self: true
-          max: 30
-          radiusList:
-            - 2.5
-            - 3
-            - 3.5
-            - 4
-          keepCurrent: true
-          amountList:
-            - 24
-            - 24
-            - 24
-            - 24
-          particle:
-            particleType: "FLAME"
+          componentType: "DelayWithHoloMessageMechanic"
+          message: "&cBOOM"
+          ticks: 40
+          offsetY: 0
           child1:
-            componentType: "FilterCurrentTargets"
+            componentType: "AreaTarget"
             allies: false
             enemy: true
-            self: false
-            max: 29
+            self: true
+            max: 30
+            radiusList:
+              - 2.5
+              - 3
+              - 3.5
+              - 4
+            keepCurrent: true
+            amountList:
+              - 24
+              - 24
+              - 24
+              - 24
+            particle:
+              particleType: "FLAME"
             child1:
-              componentType: "DamageMechanic"
-              damageType: "FIRE"
-              damageList:
-                - 10
-                - 40
-                - 90
-                - 180
-              damageMultiplyList:
+              componentType: "FilterCurrentTargets"
+              allies: false
+              enemy: true
+              self: false
+              max: 29
+              child1:
+                componentType: "DamageMechanic"
+                damageType: "FIRE"
+                damageList:
+                  - 10
+                  - 40
+                  - 90
+                  - 180
+                damageMultiplyList:
+                  - 1.4
+                  - 1.6
+                  - 1.8
+                  - 2.2
+            child2:
+              componentType: "PushMechanic"
+              pushType: "FIXED"
+              speedList:
+                - 1.2
                 - 1.4
                 - 1.6
                 - 1.8
-                - 2.2
-          child2:
-            componentType: "PushMechanic"
-            pushType: "FIXED"
-            speedList:
-              - 1.2
-              - 1.4
-              - 1.6
-              - 1.8
-            centerSelf: false
-            offsetY: -2
-          child3:
-            componentType: "FilterCurrentTargets"
-            allies: false
-            enemy: false
-            self: true
-            max: 1
-            child1:
-              componentType: "DelayMechanic"
-              ticks: 15
+              centerSelf: false
+              offsetY: -2
+            child3:
+              componentType: "FilterCurrentTargets"
+              allies: false
+              enemy: false
+              self: true
+              max: 1
               child1:
-                componentType: "ImmunityMechanic"
-                damageCause: "FALL"
-              child2:
-                componentType: "LandTrigger"
+                componentType: "DelayMechanic"
+                ticks: 15
                 child1:
-                  componentType: "ImmunityRemoveMechanic"
-                  damageCause: FALL
-                  delay: 5
-        child2:
-          componentType: "ParticleMechanic"
-          particle:
-            arrangementType: "FillCircle"
-            particleType: "EXPLOSION_HUGE"
-            radius: 2.5
-            amount: 2
-            direction: "XZ"
-          data1:
-            - 2.5
-            - 3
-            - 3.5
-            - 4
-    child2:
-      componentType: "SoundMechanic"
-      sound: "SKILL.SPLASH"
-      volume: 1.0
-      pitch: 1.0
+                  componentType: "ImmunityMechanic"
+                  damageCause: "FALL"
+                child2:
+                  componentType: "LandTrigger"
+                  child1:
+                    componentType: "ImmunityRemoveMechanic"
+                    damageCause: FALL
+                    delay: 5
+          child2:
+            componentType: "ParticleMechanic"
+            particle:
+              arrangementType: "FillCircle"
+              particleType: "EXPLOSION_HUGE"
+              radius: 2.5
+              amount: 2
+              direction: "XZ"
+            data1:
+              - 2.5
+              - 3
+              - 3.5
+              - 4
+      child2:
+        componentType: "SoundMechanic"
+        sound: "SKILL.SPLASH"
+        volume: 1.0
+        pitch: 1.0
 skillThree:
   name: "Oil"
   customModelData: 22
@@ -268,72 +276,76 @@ skillThree:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "HologramMechanic"
-      helmetType: "IRON_PICKAXE"
-      customModelData: 11
-      durations:
-        - 1000
-        - 1100
-        - 1200
-        - 1300
-      displayText: "< Oil %caster% >"
-      gravity: true
-      marker: false
-      speed: 1.2
-      right: 0
-      forward: 1
-      upward: 0.5
+      componentType: "CastTimeMechanic"
+      delay: 1
+      text: "&eOil!"
       child1:
-        componentType: "RepeatMechanic"
-        period: 10
-        repetitions:
-          - 100
-          - 110
-          - 120
-          - 130
+        componentType: "HologramMechanic"
+        helmetType: "IRON_PICKAXE"
+        customModelData: 11
+        durations:
+          - 1000
+          - 1100
+          - 1200
+          - 1300
+        displayText: "< Oil %caster% >"
+        gravity: true
+        marker: false
+        speed: 1.2
+        right: 0
+        forward: 1
+        upward: 0.5
         child1:
-          componentType: "AreaTarget"
-          allies: false
-          enemy: true
-          self: false
-          max: 30
-          radiusList:
-            - 3
-            - 3
-            - 3
-            - 3
-          amountList:
-            - 24
-            - 24
-            - 24
-            - 24
-          particle:
-            particleType: "REDSTONE"
-            dustColor: 3355443
-            dustSize: 2
+          componentType: "RepeatMechanic"
+          period: 10
+          repetitions:
+            - 100
+            - 110
+            - 120
+            - 130
           child1:
-            componentType: "PotionEffectMechanic"
-            potionEffectType:
-              - "SLOW"
-            tickList:
-              - 40
-              - 40
-              - 40
-              - 40
-            amplifierList:
-              - 2
-              - 2
-              - 2
-              - 2
-          child2:
-            componentType: "StatusEffectMechanic"
-            statusEffectTypes:
-              - "SILENCE"
-            durations:
-              - 40
-              - 40
-              - 40
-              - 40
+            componentType: "AreaTarget"
+            allies: false
+            enemy: true
+            self: false
+            max: 30
+            radiusList:
+              - 3
+              - 3
+              - 3
+              - 3
+            amountList:
+              - 24
+              - 24
+              - 24
+              - 24
+            particle:
+              particleType: "REDSTONE"
+              dustColor: 3355443
+              dustSize: 2
+            child1:
+              componentType: "PotionEffectMechanic"
+              potionEffectType:
+                - "SLOW"
+              tickList:
+                - 40
+                - 40
+                - 40
+                - 40
+              amplifierList:
+                - 2
+                - 2
+                - 2
+                - 2
+            child2:
+              componentType: "StatusEffectMechanic"
+              statusEffectTypes:
+                - "SILENCE"
+              durations:
+                - 40
+                - 40
+                - 40
+                - 40
 skillPassive:
   name: "Mecha Armor"
   customModelData: 7
@@ -396,103 +408,107 @@ skillUltimate:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "SingleTarget"
-      allies: false
-      enemy: true
-      self: false
-      max: 1
-      tolerance: 4
-      ranges:
-        - 24
-        - 24
-        - 24
-        - 24
-      keepCurrent: true
-      addToBeginning: false
-      particle:
-        particleType: "REDSTONE"
-        dustColor: 16728064
-        dustSize: 2
-        gap: 0.2
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&eMissile!"
       child1:
-        componentType: "ProjectileMechanic"
-        projectileClass: "ShulkerBullet"
-        spreadType: "CONE"
-        speed: 2.9
-        amountList:
-          - 1
-          - 1
-          - 1
-          - 1
-        angle: 30
-        range: 200
-        mustHitToWork: false
+        componentType: "SingleTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 1
+        tolerance: 4
+        ranges:
+          - 24
+          - 24
+          - 24
+          - 24
+        keepCurrent: true
+        addToBeginning: false
         particle:
-          arrangementType: "Single"
           particleType: "REDSTONE"
           dustColor: 16728064
           dustSize: 2
-        isProjectileInvisible: false
-        disguiseMaterial: "IRON_PICKAXE"
-        disguiseCustomModelData: 12
-        upward: 1.5
+          gap: 0.2
         child1:
-          componentType: "AreaTarget"
-          allies: false
-          enemy: true
-          self: false
-          max: 10
-          radiusList:
-            - 2.5
-            - 2.75
-            - 3
-            - 3.5
+          componentType: "ProjectileMechanic"
+          projectileClass: "ShulkerBullet"
+          spreadType: "CONE"
+          speed: 2.9
           amountList:
-            - 24
-            - 24
-            - 24
-            - 24
+            - 1
+            - 1
+            - 1
+            - 1
+          angle: 30
+          range: 200
+          mustHitToWork: false
           particle:
-            particleType: "FLAME"
+            arrangementType: "Single"
+            particleType: "REDSTONE"
+            dustColor: 16728064
+            dustSize: 2
+          isProjectileInvisible: false
+          disguiseMaterial: "IRON_PICKAXE"
+          disguiseCustomModelData: 12
+          upward: 1.5
           child1:
-            componentType: "DamageMechanic"
-            damageType: "FIRE"
-            damageList:
-              - 10
-              - 40
-              - 90
-              - 180
-            damageMultiplyList:
-              - 1.4
-              - 1.6
-              - 1.8
-              - 2.2
-          child2:
-            componentType: "StatusEffectMechanic"
-            statusEffectTypes:
-              - "STUN"
-            durations:
-              - 40
-              - 50
-              - 60
-              - 70
-          child3:
-            componentType: "ParticleMechanic"
-            particle:
-              arrangementType: "FillCircle"
-              particleType: "EXPLOSION_HUGE"
-              radius: 2.5
-              amount: 2
-              direction: "XZ"
-            data1:
+            componentType: "AreaTarget"
+            allies: false
+            enemy: true
+            self: false
+            max: 10
+            radiusList:
               - 2.5
               - 2.75
               - 3
               - 3.5
-      child2:
-        componentType: "SelfTarget"
-        child1:
-          componentType: "SoundMechanic"
-          sound: "SKILL.FIRE_SLASH"
-          volume: 1.0
-          pitch: 1.0
+            amountList:
+              - 24
+              - 24
+              - 24
+              - 24
+            particle:
+              particleType: "FLAME"
+            child1:
+              componentType: "DamageMechanic"
+              damageType: "FIRE"
+              damageList:
+                - 10
+                - 40
+                - 90
+                - 180
+              damageMultiplyList:
+                - 1.4
+                - 1.6
+                - 1.8
+                - 2.2
+            child2:
+              componentType: "StatusEffectMechanic"
+              statusEffectTypes:
+                - "STUN"
+              durations:
+                - 40
+                - 50
+                - 60
+                - 70
+            child3:
+              componentType: "ParticleMechanic"
+              particle:
+                arrangementType: "FillCircle"
+                particleType: "EXPLOSION_HUGE"
+                radius: 2.5
+                amount: 2
+                direction: "XZ"
+              data1:
+                - 2.5
+                - 2.75
+                - 3
+                - 3.5
+        child2:
+          componentType: "SelfTarget"
+          child1:
+            componentType: "SoundMechanic"
+            sound: "SKILL.FIRE_SLASH"
+            volume: 1.0
+            pitch: 1.0

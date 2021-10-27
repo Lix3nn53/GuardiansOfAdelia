@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
@@ -131,19 +132,20 @@ public class CharacterSelectionScreenManager {
         CharacterSelectionScreenManager.tutorialStart = tutorialStart;
     }
 
-    public static void createCharacter(Player player, int charNo, String rpgClassStr) {
+    public static void createCharacter(Player player, int charNo) {
         player.sendMessage(ChatPalette.YELLOW + "Creating character-" + charNo);
         clear(player);
         //start tutorial
-        TutorialManager.startTutorial(player, rpgClassStr, charNo, tutorialStart);
+        TutorialManager.startTutorial(player, charNo, tutorialStart);
     }
 
-    public static void createCharacterWithoutTutorial(Player player, int charNo, String rpgClassStr) {
+    public static void createCharacterWithoutTutorial(Player player, int charNo) {
         player.sendMessage(ChatPalette.YELLOW + "Creating character-" + charNo);
         clear(player);
         //start character at first world quest
         GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-        RPGCharacter rpgCharacter = new RPGCharacter(rpgClassStr, player);
+        String startingClass = RPGClassManager.getStartingClass();
+        RPGCharacter rpgCharacter = new RPGCharacter(startingClass, player);
         guardianData.setActiveCharacter(rpgCharacter, charNo);
 
         Quest questCopyById = QuestNPCManager.getQuestCopyById(4);

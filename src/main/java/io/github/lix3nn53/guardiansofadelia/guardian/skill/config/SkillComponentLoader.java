@@ -223,6 +223,8 @@ public class SkillComponentLoader {
             return new FlyMechanic(configurationSection);
         } else if (componentType.equals(FlyRemoveMechanic.class.getSimpleName())) {
             return new FlyRemoveMechanic(false);
+        } else if (componentType.equals(CastTimeMechanic.class.getSimpleName())) {
+            return new CastTimeMechanic(configurationSection);
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH COMPONENT IN LOADER: " + componentType);

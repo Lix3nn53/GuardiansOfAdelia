@@ -46,67 +46,71 @@ skillOne:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "ProjectileMechanic"
-      projectileClass: "Arrow"
-      spreadType: "CONE"
-      speed: 2.7
-      amountList:
-        - 1
-        - 1
-        - 1
-        - 1
-      angle: 30
-      range: 200
-      mustHitToWork: true
-      isProjectileInvisible: false
-      particle:
-        arrangementType: "Single"
-        particleType: "REDSTONE"
-        dustColor: 65280
-        dustSize: 2
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&aPoison Arrow!"
       child1:
-        componentType: "FilterCurrentTargets"
-        allies: false
-        enemy: true
-        self: false
-        max: 20
+        componentType: "ProjectileMechanic"
+        projectileClass: "Arrow"
+        spreadType: "CONE"
+        speed: 2.7
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+        angle: 30
+        range: 200
+        mustHitToWork: true
+        isProjectileInvisible: false
+        particle:
+          arrangementType: "Single"
+          particleType: "REDSTONE"
+          dustColor: 65280
+          dustSize: 2
         child1:
-          componentType: "DamageMechanic"
-          damageType: "AIR"
-          damageList:
-            - 10
-            - 40
-            - 90
-            - 180
-          damageMultiplyList:
-            - 1.4
-            - 1.6
-            - 1.8
-            - 2.2
-        child2:
-          componentType: "PotionEffectMechanic"
-          potionEffectType:
-            - "CONFUSION"
-            - "POISON"
-          tickList:
-            - 140
-            - 150
-            - 160
-            - 170
-            - 180
-            - 200
-          amplifierList:
-            - 1
-            - 1
-            - 1
-            - 2
-            - 2
-            - 2
-    child2:
-      componentType: "SoundMechanic"
-      sound: "SKILL.POISON_ARROW"
-      volume: 1.0
-      pitch: 1.0
+          componentType: "FilterCurrentTargets"
+          allies: false
+          enemy: true
+          self: false
+          max: 20
+          child1:
+            componentType: "DamageMechanic"
+            damageType: "AIR"
+            damageList:
+              - 10
+              - 40
+              - 90
+              - 180
+            damageMultiplyList:
+              - 1.4
+              - 1.6
+              - 1.8
+              - 2.2
+          child2:
+            componentType: "PotionEffectMechanic"
+            potionEffectType:
+              - "CONFUSION"
+              - "POISON"
+            tickList:
+              - 140
+              - 150
+              - 160
+              - 170
+              - 180
+              - 200
+            amplifierList:
+              - 1
+              - 1
+              - 1
+              - 2
+              - 2
+              - 2
+      child2:
+        componentType: "SoundMechanic"
+        sound: "SKILL.POISON_ARROW"
+        volume: 1.0
+        pitch: 1.0
 skillTwo:
   name: "Zephyr"
   customModelData: 57
@@ -125,68 +129,72 @@ skillTwo:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "PotionEffectMechanic"
-      potionEffectType:
-        - "SPEED"
-      tickList:
-        - 60
-        - 70
-        - 80
-        - 90
-        - 100
-        - 120
-      amplifierList:
-        - 1
-        - 2
-        - 2
-        - 3
-        - 3
-        - 4
-    child2:
-      componentType: "ParticleMechanic"
-      particle:
-        arrangementType: "FillCircle"
-        particleType: "EXPLOSION_HUGE"
-        radius: 3
-        amount: 2
-        direction: "XZ"
-      data1:
-        - 3
-        - 3.5
-        - 3
-        - 3.25
-    child3:
-      componentType: "ParticleAnimationMechanic"
-      particle:
-        arrangementType: "FillCircle"
-        particleType: "REDSTONE"
-        radius: 1
-        amount: 4
-        direction: "XZ"
-        dustColor: 65535
-        dustSize: 8
-      frequency: 5
-      repeatAmount:
-        - 12
-        - 14
-        - 16
-        - 18
-        - 20
-        - 24
-      data1:
-        - 3
-        - 3.5
-        - 3
-        - 3.25
-        - 3.5
-        - 4
-    child4:
-      componentType: "SoundMechanic"
-      sound: "SKILL.SONIC_BOOM"
-      volume: 1.0
-      pitch: 1.0
+      componentType: "CastTimeMechanic"
+      delay: 1
+      text: "&aZephyr!"
+      child1:
+        componentType: "PotionEffectMechanic"
+        potionEffectType:
+          - "SPEED"
+        tickList:
+          - 60
+          - 70
+          - 80
+          - 90
+          - 100
+          - 120
+        amplifierList:
+          - 1
+          - 2
+          - 2
+          - 3
+          - 3
+          - 4
+      child2:
+        componentType: "ParticleMechanic"
+        particle:
+          arrangementType: "FillCircle"
+          particleType: "EXPLOSION_HUGE"
+          radius: 3
+          amount: 2
+          direction: "XZ"
+        data1:
+          - 3
+          - 3.5
+          - 3
+          - 3.25
+      child3:
+        componentType: "ParticleAnimationMechanic"
+        particle:
+          arrangementType: "FillCircle"
+          particleType: "REDSTONE"
+          radius: 1
+          amount: 4
+          direction: "XZ"
+          dustColor: 65535
+          dustSize: 8
+        frequency: 5
+        repeatAmount:
+          - 12
+          - 14
+          - 16
+          - 18
+          - 20
+          - 24
+        data1:
+          - 3
+          - 3.5
+          - 3
+          - 3.25
+          - 3.5
+          - 4
+      child4:
+        componentType: "SoundMechanic"
+        sound: "SKILL.SONIC_BOOM"
+        volume: 1.0
+        pitch: 1.0
 skillThree:
-  name: "Purple Wings"
+  name: "Backflip"
   customModelData: 44
   description:
     - "Jump backwards into the sky and"
@@ -204,62 +212,66 @@ skillThree:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "LaunchMechanic"
-      relative: "CASTER"
-      forwardSpeedList:
-        - -1.25
-        - -1.3
-        - -1.35
-        - -1.4
-        - -1.45
-        - -1.5
-      upwardSpeedList:
-        - 1.2
-        - 1.35
-        - 1.5
-        - 1.65
-        - 1.8
-        - 2
-      rightSpeedList:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-    child2:
-      componentType: "ParticleAnimationMechanic"
-      particle:
-        arrangementType: "FillCircle"
-        particleType: "SPELL_WITCH"
-        radius: 1.2
-        amount: 12
-        direction: "XZ"
-      frequency: 5
-      repeatAmount:
-        - 20
-        - 25
-        - 30
-        - 35
-      data1:
-        - 1.2
-        - 1.2
-        - 1.2
-        - 1.2
-    child3:
-      componentType: "ImmunityMechanic"
-      damageCause: "FALL"
-    child4:
-      componentType: "SoundMechanic"
-      sound: "SKILL.VOID_SIGNAL"
-      volume: 1.0
-      pitch: 1.0
-    child5:
-      componentType: "LandTrigger"
+      componentType: "CastTimeMechanic"
+      delay: 1
+      text: "&aBackflip!"
       child1:
-        componentType: "ImmunityRemoveMechanic"
-        damageCause: FALL
-        delay: 5
+        componentType: "LaunchMechanic"
+        relative: "CASTER"
+        forwardSpeedList:
+          - -1.25
+          - -1.3
+          - -1.35
+          - -1.4
+          - -1.45
+          - -1.5
+        upwardSpeedList:
+          - 1.2
+          - 1.35
+          - 1.5
+          - 1.65
+          - 1.8
+          - 2
+        rightSpeedList:
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+      child2:
+        componentType: "ParticleAnimationMechanic"
+        particle:
+          arrangementType: "FillCircle"
+          particleType: "SPELL_WITCH"
+          radius: 1.2
+          amount: 9
+          direction: "XZ"
+        frequency: 5
+        repeatAmount:
+          - 20
+          - 25
+          - 30
+          - 35
+        data1:
+          - 1.2
+          - 1.2
+          - 1.2
+          - 1.2
+      child3:
+        componentType: "ImmunityMechanic"
+        damageCause: "FALL"
+      child4:
+        componentType: "SoundMechanic"
+        sound: "SKILL.VOID_SIGNAL"
+        volume: 1.0
+        pitch: 1.0
+      child5:
+        componentType: "LandTrigger"
+        child1:
+          componentType: "ImmunityRemoveMechanic"
+          damageCause: FALL
+          delay: 5
 skillPassive:
   name: "Sharpshooter"
   customModelData: 17
@@ -355,104 +367,108 @@ skillUltimate:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "LocationTarget"
-      allies: false
-      self: false
-      enemy: true
-      max: 30
-      ranges:
-        - 24
-        - 24
-        - 24
-        - 24
-        - 24
-        - 24
-      particle:
-        particleType: "REDSTONE"
-        dustColor: 65280
-        dustSize: 2
-        gap: 0.4
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&aMake It Rain!"
       child1:
-        componentType: "RepeatMechanic"
-        period: 28
-        repetitions:
-          - 1
-          - 2
-          - 2
-          - 3
-          - 3
-          - 4
+        componentType: "LocationTarget"
+        allies: false
+        self: false
+        enemy: true
+        max: 30
+        ranges:
+          - 24
+          - 24
+          - 24
+          - 24
+          - 24
+          - 24
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 65280
+          dustSize: 2
+          gap: 0.4
         child1:
-          componentType: "ProjectileMechanic"
-          projectileClass: "Arrow"
-          spreadType: "RAIN"
-          height: 12
-          radius: 8
-          speed: 1
-          amountList:
-            - 12
-            - 12
-            - 12
-            - 12
-            - 12
-            - 12
-          range: 200
-          mustHitToWork: true
-          particle:
-            arrangementType: "Single"
-            particleType: "REDSTONE"
-            dustColor: 65280
-            dustSize: 2
-        child2:
-          componentType: "ProjectileMechanic"
-          projectileClass: "Arrow"
-          spreadType: "RAIN"
-          height: 12
-          radius: 8
-          speed: 1
-          amountList:
+          componentType: "RepeatMechanic"
+          period: 28
+          repetitions:
             - 1
-            - 1
-            - 1
-            - 1
-          range: 200
-          mustHitToWork: false
+            - 2
+            - 2
+            - 3
+            - 3
+            - 4
           child1:
-            componentType: "AreaTarget"
-            allies: false
-            enemy: true
-            self: false
-            max: 30
-            radiusList:
-              - 8
-              - 8
-              - 8
-              - 8
+            componentType: "ProjectileMechanic"
+            projectileClass: "Arrow"
+            spreadType: "RAIN"
+            height: 12
+            radius: 8
+            speed: 1
             amountList:
-              - 24
-              - 24
-              - 24
-              - 24
+              - 12
+              - 12
+              - 12
+              - 12
+              - 12
+              - 12
+            range: 200
+            mustHitToWork: true
             particle:
+              arrangementType: "Single"
               particleType: "REDSTONE"
               dustColor: 65280
               dustSize: 2
+          child2:
+            componentType: "ProjectileMechanic"
+            projectileClass: "Arrow"
+            spreadType: "RAIN"
+            height: 12
+            radius: 8
+            speed: 1
+            amountList:
+              - 1
+              - 1
+              - 1
+              - 1
+            range: 200
+            mustHitToWork: false
             child1:
-              componentType: "DamageMechanic"
-              damageType: "AIR"
-              damageList:
-                - 10
-                - 40
-                - 90
-                - 180
-              damageMultiplyList:
-                - 1.0
-                - 1.2
-                - 1.4
-                - 1.6
-        child3:
-          componentType: "SoundMechanic"
-          sound: "SKILL.ARROW_RAIN"
-          volume: 1.0
-          pitch: 1.0
+              componentType: "AreaTarget"
+              allies: false
+              enemy: true
+              self: false
+              max: 30
+              radiusList:
+                - 8
+                - 8
+                - 8
+                - 8
+              amountList:
+                - 24
+                - 24
+                - 24
+                - 24
+              particle:
+                particleType: "REDSTONE"
+                dustColor: 65280
+                dustSize: 2
+              child1:
+                componentType: "DamageMechanic"
+                damageType: "AIR"
+                damageList:
+                  - 10
+                  - 40
+                  - 90
+                  - 180
+                damageMultiplyList:
+                  - 1.0
+                  - 1.2
+                  - 1.4
+                  - 1.6
+          child3:
+            componentType: "SoundMechanic"
+            sound: "SKILL.ARROW_RAIN"
+            volume: 1.0
+            pitch: 1.0
 

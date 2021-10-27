@@ -46,42 +46,46 @@ skillOne:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "SpawnCompanionMechanic"
-      mobCode: "CompanionSkeleton"
-      save: false
-      maxAmountVar: "NecroMaxSpawnsAtATime"
-      maxAmountIfVarEmpty: 2
-      amounts:
-        - 1
-        - 2
-        - 3
-        - 4
-      element: "LIGHTNING"
-      elementPercents:
-        - 0.6
-        - 0.8
-        - 1.0
-        - 1.2
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&5Summon!"
       child1:
-        componentType: "RepeatMechanic"
-        period: 100
+        componentType: "SpawnCompanionMechanic"
+        mobCode: "CompanionSkeleton"
+        save: false
+        maxAmountVar: "NecroMaxSpawnsAtATime"
+        maxAmountIfVarEmpty: 2
+        amounts:
+          - 1
+          - 2
+          - 3
+          - 4
+        element: "LIGHTNING"
+        elementPercents:
+          - 0.6
+          - 0.8
+          - 1.0
+          - 1.2
         child1:
-          componentType: "TargetsEmptyCondition"
-          empty: true
+          componentType: "RepeatMechanic"
+          period: 100
           child1:
-            componentType: "RepeatCancelMechanic"
-        child2:
-          componentType: "TargetsEmptyCondition"
-          empty: false
-          child1:
-            componentType: "GodDamageMechanic"
-            damagePercentList:
-              - 0.1
-              - 0.1
-              - 0.1
-              - 0.1
+            componentType: "TargetsEmptyCondition"
+            empty: true
+            child1:
+              componentType: "RepeatCancelMechanic"
           child2:
-            componentType: "ClearDeadTargets"
+            componentType: "TargetsEmptyCondition"
+            empty: false
+            child1:
+              componentType: "GodDamageMechanic"
+              damagePercentList:
+                - 0.1
+                - 0.1
+                - 0.1
+                - 0.1
+            child2:
+              componentType: "ClearDeadTargets"
 skillTwo:
   name: "Skullshot"
   customModelData: 39
@@ -103,100 +107,104 @@ skillTwo:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "ProjectileMechanic"
-      projectileClass: "WitherSkull"
-      spreadType: "CONE"
-      speed: 1.9
-      amountList:
-        - 1
-        - 1
-        - 1
-        - 1
-      angle: 30
-      range: 200
-      mustHitToWork: true
-      particle:
-        arrangementType: "Single"
-        particleType: "REDSTONE"
-        dustColor: 10040319
-        dustSize: 2
-      isProjectileInvisible: false
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&5Skullshot!"
       child1:
-        componentType: "AreaTarget"
-        allies: false
-        enemy: true
-        self: false
-        max: 10
-        radiusList:
-          - 2.5
-          - 2.75
-          - 3
-          - 3.25
+        componentType: "ProjectileMechanic"
+        projectileClass: "WitherSkull"
+        spreadType: "CONE"
+        speed: 1.9
         amountList:
-          - 24
-          - 24
-          - 24
-          - 24
+          - 1
+          - 1
+          - 1
+          - 1
+        angle: 30
+        range: 200
+        mustHitToWork: true
         particle:
+          arrangementType: "Single"
           particleType: "REDSTONE"
           dustColor: 10040319
           dustSize: 2
+        isProjectileInvisible: false
         child1:
-          componentType: "DamageMechanic"
-          damageType: "LIGHTNING"
-          damageList:
-            - 10
-            - 40
-            - 90
-            - 180
-          damageMultiplyList:
-            - 1.4
-            - 1.6
-            - 1.8
-            - 2.2
-        child2:
-          componentType: "CompanionsOfCasterTargetMechanic"
-        child3:
-          componentType: "PotionEffectMechanic"
-          potionEffectType:
-            - "SLOW"
-          tickList:
-            - 60
-            - 65
-            - 70
-            - 75
-          amplifierList:
-            - 2
-            - 1
-            - 1
-            - 2
-        child4:
-          componentType: "SelfTarget"
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 10
+          radiusList:
+            - 2.5
+            - 2.75
+            - 3
+            - 3.25
+          amountList:
+            - 24
+            - 24
+            - 24
+            - 24
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 10040319
+            dustSize: 2
           child1:
-            componentType: "SavedCompanionsTarget"
-            allies: true
-            enemy: false
-            self: false
-            max: 15
+            componentType: "DamageMechanic"
+            damageType: "LIGHTNING"
+            damageList:
+              - 10
+              - 40
+              - 90
+              - 180
+            damageMultiplyList:
+              - 1.4
+              - 1.6
+              - 1.8
+              - 2.2
+          child2:
+            componentType: "CompanionsOfCasterTargetMechanic"
+          child3:
+            componentType: "PotionEffectMechanic"
+            potionEffectType:
+              - "SLOW"
+            tickList:
+              - 60
+              - 65
+              - 70
+              - 75
+            amplifierList:
+              - 2
+              - 1
+              - 1
+              - 2
+          child4:
+            componentType: "SelfTarget"
             child1:
-              componentType: "PotionEffectMechanic"
-              potionEffectType:
-                - "SPEED"
-              tickList:
-                - 60
-                - 70
-                - 80
-                - 90
-              amplifierList:
-                - 1
-                - 2
-                - 2
-                - 3
-    child2:
-      componentType: "SoundMechanic"
-      sound: "SKILL.FIRE_SLASH"
-      volume: 1.0
-      pitch: 1.0
+              componentType: "SavedCompanionsTarget"
+              allies: true
+              enemy: false
+              self: false
+              max: 15
+              child1:
+                componentType: "PotionEffectMechanic"
+                potionEffectType:
+                  - "SPEED"
+                tickList:
+                  - 60
+                  - 70
+                  - 80
+                  - 90
+                amplifierList:
+                  - 1
+                  - 2
+                  - 2
+                  - 3
+      child2:
+        componentType: "SoundMechanic"
+        sound: "SKILL.FIRE_SLASH"
+        volume: 1.0
+        pitch: 1.0
 skillThree:
   name: "Life Drain"
   customModelData: 38
@@ -216,29 +224,33 @@ skillThree:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "SavedCompanionsTarget"
-      allies: true
-      enemy: false
-      self: false
-      max: 15
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&5Life Drain!"
       child1:
-        componentType: "ForEachTargetMechanic"
+        componentType: "SavedCompanionsTarget"
+        allies: true
+        enemy: false
+        self: false
+        max: 15
         child1:
-          componentType: "SelfTarget"
+          componentType: "ForEachTargetMechanic"
           child1:
-            componentType: "HealMechanic"
-            healPercentList:
-              - 0.08
-              - 0.1
-              - 0.12
-              - 0.15
-      child2:
-        componentType: "GodDamageMechanic"
-        damagePercentList:
-          - 0.8
-          - 0.8
-          - 0.8
-          - 0.8
+            componentType: "SelfTarget"
+            child1:
+              componentType: "HealMechanic"
+              healPercentList:
+                - 0.08
+                - 0.1
+                - 0.12
+                - 0.15
+        child2:
+          componentType: "GodDamageMechanic"
+          damagePercentList:
+            - 0.8
+            - 0.8
+            - 0.8
+            - 0.8
 skillPassive:
   name: "Bone Armor"
   customModelData: 47
@@ -323,120 +335,124 @@ skillUltimate:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "CompanionCondition"
-      mobCode: "CompanionFrozenColossus"
-      minValue: 0
-      maxValue: 0
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&5Frozen Colossus!"
       child1:
-        componentType: "SpawnCompanionMechanic"
+        componentType: "CompanionCondition"
         mobCode: "CompanionFrozenColossus"
-        save: false
-        maxAmountVar: "NecroMaxSpawnsAtATime"
-        maxAmountIfVarEmpty: 2
-        amounts:
-          - 1
-          - 1
-          - 2
-          - 3
-        element: "LIGHTNING"
-        elementPercents:
-          - 0.8
-          - 1.0
-          - 1.2
-          - 1.4
+        minValue: 0
+        maxValue: 0
         child1:
-          componentType: "RepeatMechanic"
-          period: 100
+          componentType: "SpawnCompanionMechanic"
+          mobCode: "CompanionFrozenColossus"
+          save: false
+          maxAmountVar: "NecroMaxSpawnsAtATime"
+          maxAmountIfVarEmpty: 2
+          amounts:
+            - 1
+            - 1
+            - 2
+            - 3
+          element: "LIGHTNING"
+          elementPercents:
+            - 0.8
+            - 1.0
+            - 1.2
+            - 1.4
           child1:
-            componentType: "TargetsEmptyCondition"
-            empty: true
+            componentType: "RepeatMechanic"
+            period: 100
             child1:
-              componentType: "RepeatCancelMechanic"
-          child2:
-            componentType: "TargetsEmptyCondition"
-            empty: false
-            child1:
-              componentType: "GodDamageMechanic"
-              damagePercentList:
-                - 0.1
-                - 0.1
-                - 0.1
-                - 0.1
+              componentType: "TargetsEmptyCondition"
+              empty: true
+              child1:
+                componentType: "RepeatCancelMechanic"
             child2:
-              componentType: "ClearDeadTargets"
-    child2:
-      componentType: "CompanionCondition"
-      mobCode: "CompanionFrozenColossus"
-      minValue: 1
-      maxValue: 6
-      child1:
-        componentType: "SavedCompanionsTarget"
+              componentType: "TargetsEmptyCondition"
+              empty: false
+              child1:
+                componentType: "GodDamageMechanic"
+                damagePercentList:
+                  - 0.1
+                  - 0.1
+                  - 0.1
+                  - 0.1
+              child2:
+                componentType: "ClearDeadTargets"
+      child2:
+        componentType: "CompanionCondition"
         mobCode: "CompanionFrozenColossus"
-        allies: true
-        enemy: false
-        self: false
-        max: 15
+        minValue: 1
+        maxValue: 6
         child1:
-          componentType: "DelayWithHoloMessageMechanic"
-          message: "&bCasting Freeze!"
-          ticks: 40
-          offsetY: 2
+          componentType: "SavedCompanionsTarget"
+          mobCode: "CompanionFrozenColossus"
+          allies: true
+          enemy: false
+          self: false
+          max: 15
           child1:
-            componentType: "AreaTarget"
-            allies: false
-            enemy: true
-            self: false
-            max: 15
-            radiusList:
-              - 5
-              - 5.5
-              - 6
-              - 7
-            amountList:
-              - 24
-              - 24
-              - 24
-              - 24
-            particle:
-              particleType: "REDSTONE"
-              dustColor: 10040319
-              dustSize: 2
+            componentType: "DelayWithHoloMessageMechanic"
+            message: "&bCasting Freeze!"
+            ticks: 40
+            offsetY: 2
             child1:
-              componentType: "StatusEffectMechanic"
-              statusEffectTypes:
-                - "STUN"
-              durations:
-                - 50
-                - 60
-                - 70
-                - 90
+              componentType: "AreaTarget"
+              allies: false
+              enemy: true
+              self: false
+              max: 15
+              radiusList:
+                - 5
+                - 5.5
+                - 6
+                - 7
+              amountList:
+                - 24
+                - 24
+                - 24
+                - 24
+              particle:
+                particleType: "REDSTONE"
+                dustColor: 10040319
+                dustSize: 2
+              child1:
+                componentType: "StatusEffectMechanic"
+                statusEffectTypes:
+                  - "STUN"
+                durations:
+                  - 50
+                  - 60
+                  - 70
+                  - 90
+              child2:
+                componentType: "HologramMechanic"
+                helmetType: "IRON_PICKAXE"
+                customModelData: 10
+                durations:
+                  - 50
+                  - 60
+                  - 70
+                  - 90
+                upward: -0.5
             child2:
-              componentType: "HologramMechanic"
-              helmetType: "IRON_PICKAXE"
-              customModelData: 10
-              durations:
-                - 50
-                - 60
-                - 70
-                - 90
-              upward: -0.5
-          child2:
-            componentType: "ParticleMechanic"
-            particle:
-              arrangementType: "DrawCylinder"
-              particleType: "REDSTONE"
-              radius: 5
-              amount: 40
-              dustColor: 65535
-              dustSize: 8
-            data1:
-              - 5
-              - 5.5
-              - 6
-              - 6.5
-            upward: 1
-          child3:
-            componentType: "SoundMechanic"
-            sound: "SKILL.STUN_HIT"
-            volume: 1.0
-            pitch: 1.0
+              componentType: "ParticleMechanic"
+              particle:
+                arrangementType: "DrawCylinder"
+                particleType: "REDSTONE"
+                radius: 5
+                amount: 40
+                dustColor: 65535
+                dustSize: 8
+              data1:
+                - 5
+                - 5.5
+                - 6
+                - 6.5
+              upward: 1
+            child3:
+              componentType: "SoundMechanic"
+              sound: "SKILL.STUN_HIT"
+              volume: 1.0
+              pitch: 1.0

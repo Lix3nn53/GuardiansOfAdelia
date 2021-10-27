@@ -87,9 +87,10 @@ public class MyEntityDamageEvent implements Listener {
         }
 
         LivingEntity livingEntity = (LivingEntity) entity;
-        if (!cause.equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)) { // This is handled in its own event
+        // These damage causes are handled in their own event
+        if (!(cause.equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK) || cause.equals(EntityDamageEvent.DamageCause.PROJECTILE))) {
             HealthBarManager.onLivingTargetHealthChange(livingEntity, (int) (event.getFinalDamage() + 0.5),
-                    ChatPalette.RED, "dmg");
+                    ChatPalette.RED, "");
         }
     }
 

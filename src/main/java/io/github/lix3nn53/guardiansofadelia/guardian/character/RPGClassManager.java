@@ -8,13 +8,14 @@ public class RPGClassManager {
 
     private static final HashMap<String, RPGClass> rpgClassMap = new HashMap<>();
 
-    public static final int HIGHEST_CLASS_TIER = 3;
-    public static final String starterClass = "fighter";
-    private static final HashMap<Integer, Integer> classTierToRequiredQuestId = new HashMap<>();
-
-    private static final List<String> tutorialClasses = new ArrayList<>();
+    private static final HashMap<Integer, Integer> classTierToRequiredLevel = new HashMap<>();
+    public static int HIGHEST_CLASS_TIER = 1;
+    private static String startingClass;
 
     public static void addClass(String className, RPGClass rpgClass) {
+        int tier = rpgClass.getTier();
+        if (tier > HIGHEST_CLASS_TIER) HIGHEST_CLASS_TIER = tier;
+
         rpgClassMap.put(className.toUpperCase(), rpgClass);
     }
 
@@ -46,23 +47,23 @@ public class RPGClassManager {
         rpgClassMap.clear();
     }
 
-    public static int getRequiredQuestForClassTier(int classTier) {
-        if (classTierToRequiredQuestId.containsKey(classTier)) {
-            return classTierToRequiredQuestId.get(classTier);
+    public static int getRequiredLevelForClassTier(int classTier) {
+        if (classTierToRequiredLevel.containsKey(classTier)) {
+            return classTierToRequiredLevel.get(classTier);
         }
 
-        return -1;
+        return 9999;
     }
 
-    public static void setRequiredQuestForClassTier(int classTier, int questNo) {
-        classTierToRequiredQuestId.put(classTier, questNo);
+    public static void setRequiredLevelForClassTier(int classTier, int level) {
+        classTierToRequiredLevel.put(classTier, level);
     }
 
-    public static void addTutorialClass(List<String> tutorialClass) {
-        tutorialClasses.addAll(tutorialClass);
+    public static String getStartingClass() {
+        return startingClass;
     }
 
-    public static List<String> getTutorialClasses() {
-        return tutorialClasses;
+    public static void setStartingClass(String startingClass) {
+        RPGClassManager.startingClass = startingClass;
     }
 }

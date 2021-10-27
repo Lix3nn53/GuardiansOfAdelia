@@ -54,6 +54,16 @@ public class RPGClassStats {
         investedSkillPoints.set(index, points);
     }
 
+    public void giveExpNoMessage(int expToGive) {
+        int currentLevel = RPGClassExperienceManager.getLevel(this.totalExp);
+
+        if (currentLevel >= 20) { //last level is 20
+            return;
+        }
+
+        this.totalExp += expToGive;
+    }
+
     public void giveExp(Player player, int expToGive) {
         int currentLevel = RPGClassExperienceManager.getLevel(this.totalExp);
 

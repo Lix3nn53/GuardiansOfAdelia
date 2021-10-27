@@ -10,7 +10,7 @@ description:
   - "Thanks to their strength, fearlessness and"
   - "superior combat skills, warriors are"
   - "always ready to take on any enemy."
-classIconCustomModelData: 20
+classIconCustomModelData: 35
 attributeElementDamage: 6
 attributeElementDefense: 1
 attributeMaxHealth: 7
@@ -43,76 +43,80 @@ skillOne:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "CubeTarget"
-      allies: false
-      enemy: true
-      self: false
-      max: 10
-      rotation: true
-      centerEye: true
-      rotationMatchEye: true
-      gap: 0.25
-      particle:
-        particleType: "FLAME"
-      length_xList:
-        - 0.5
-        - 0.5
-        - 0.5
-        - 0.5
-      length_yList:
-        - 2
-        - 2
-        - 2
-        - 2
-      length_zList:
-        - 5
-        - 6
-        - 7
-        - 9
-      forwardList:
-        - 2.5
-        - 3
-        - 3.5
-        - 4.5
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&cPower Slash!"
       child1:
-        componentType: "DamageMechanic"
-        damageType: "FIRE"
-        damageList:
-          - 10
-          - 40
-          - 90
-          - 180
-        damageMultiplyList:
-          - 1.4
-          - 1.6
-          - 1.8
-          - 2.2
-      child2:
-        componentType: "TargetCountCondition"
-        count: 3
+        componentType: "CubeTarget"
+        allies: false
+        enemy: true
+        self: false
+        max: 10
+        rotation: true
+        centerEye: true
+        rotationMatchEye: true
+        gap: 0.25
+        particle:
+          particleType: "FLAME"
+        length_xList:
+          - 0.5
+          - 0.5
+          - 0.5
+          - 0.5
+        length_yList:
+          - 2
+          - 2
+          - 2
+          - 2
+        length_zList:
+          - 5
+          - 6
+          - 7
+          - 9
+        forwardList:
+          - 2.5
+          - 3
+          - 3.5
+          - 4.5
         child1:
-          componentType: "SelfTarget"
+          componentType: "DamageMechanic"
+          damageType: "FIRE"
+          damageList:
+            - 10
+            - 40
+            - 90
+            - 180
+          damageMultiplyList:
+            - 1.4
+            - 1.6
+            - 1.8
+            - 2.2
+        child2:
+          componentType: "TargetCountCondition"
+          count: 3
           child1:
-            componentType: "SkillLevelCondition"
-            skillIndex: 3
-            minValue: 1
-            maxValue: 4
+            componentType: "SelfTarget"
             child1:
-              componentType: "ChangeSkillLevelMechanic"
-              index: 3
+              componentType: "SkillLevelCondition"
+              skillIndex: 3
+              minValue: 1
+              maxValue: 4
               child1:
-                componentType: "HealMechanic"
-                healPercentList:
-                  - 0.05
-                  - 0.1
-                  - 0.15
-                  - 0.2
-                addLore: false
-    child2:
-      componentType: "SoundMechanic"
-      sound: "SKILL.LIGHTNING_NORMAL"
-      volume: 1.0
-      pitch: 1.0
+                componentType: "ChangeSkillLevelMechanic"
+                index: 3
+                child1:
+                  componentType: "HealMechanic"
+                  healPercentList:
+                    - 0.05
+                    - 0.1
+                    - 0.15
+                    - 0.2
+                  addLore: false
+      child2:
+        componentType: "SoundMechanic"
+        sound: "SKILL.LIGHTNING_NORMAL"
+        volume: 1.0
+        pitch: 1.0
 skillTwo:
   name: "Flame Burst"
   customModelData: 27
@@ -132,82 +136,86 @@ skillTwo:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "ProjectileMechanic"
-      projectileClass: "SmallFireball"
-      spreadType: "CONE"
-      speed: 1.9
-      amountList:
-        - 1
-        - 1
-        - 1
-        - 1
-        - 1
-        - 1
-      angle: 30
-      range: 200
-      mustHitToWork: true
-      particle:
-        arrangementType: "DrawCylinder"
-        particleType: "FLAME"
-        radius: 0.2
-        amount: 3
-        singleMinHeight: 0
-        singleMaxHeight: 1.2
-        singleGap: 0.2
-      isProjectileInvisible: true
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&cFlame Burst!"
       child1:
-        componentType: "FilterCurrentTargets"
-        allies: false
-        enemy: true
-        self: false
-        max: 10
+        componentType: "ProjectileMechanic"
+        projectileClass: "SmallFireball"
+        spreadType: "CONE"
+        speed: 1.9
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+        angle: 30
+        range: 200
+        mustHitToWork: true
+        particle:
+          arrangementType: "DrawCylinder"
+          particleType: "FLAME"
+          radius: 0.2
+          amount: 3
+          singleMinHeight: 0
+          singleMaxHeight: 1.2
+          singleGap: 0.2
+        isProjectileInvisible: true
         child1:
-          componentType: "DamageMechanic"
-          damageType: "FIRE"
-          damageList:
-            - 10
-            - 40
-            - 90
-            - 180
-          damageMultiplyList:
-            - 1.4
-            - 1.6
-            - 1.8
-            - 2.2
-        child2:
-          componentType: "LaunchMechanic"
-          relative: "TARGET"
-          forwardSpeedList:
-            - 0
-            - 0
-            - 0
-            - 0
-            - 0
-            - 0
-          upwardSpeedList:
-            - 1.2
-            - 1.3
-            - 1.4
-            - 1.5
-            - 1.6
-            - 1.8
-          rightSpeedList:
-            - 0
-            - 0
-            - 0
-            - 0
-            - 0
-            - 0
-        child3:
-          componentType: "SoundMechanic"
-          sound: "SKILL.STUN_HIT"
-          volume: 1.0
-          pitch: 1.0
-    child2:
-      componentType: "SoundMechanic"
-      sound: "SKILL.FIRE_SLASH"
-      volume: 1.0
-      pitch: 1.0
+          componentType: "FilterCurrentTargets"
+          allies: false
+          enemy: true
+          self: false
+          max: 10
+          child1:
+            componentType: "DamageMechanic"
+            damageType: "FIRE"
+            damageList:
+              - 10
+              - 40
+              - 90
+              - 180
+            damageMultiplyList:
+              - 1.4
+              - 1.6
+              - 1.8
+              - 2.2
+          child2:
+            componentType: "LaunchMechanic"
+            relative: "TARGET"
+            forwardSpeedList:
+              - 0
+              - 0
+              - 0
+              - 0
+              - 0
+              - 0
+            upwardSpeedList:
+              - 1.2
+              - 1.3
+              - 1.4
+              - 1.5
+              - 1.6
+              - 1.8
+            rightSpeedList:
+              - 0
+              - 0
+              - 0
+              - 0
+              - 0
+              - 0
+          child3:
+            componentType: "SoundMechanic"
+            sound: "SKILL.STUN_HIT"
+            volume: 1.0
+            pitch: 1.0
+      child2:
+        componentType: "SoundMechanic"
+        sound: "SKILL.FIRE_SLASH"
+        volume: 1.0
+        pitch: 1.0
 skillThree:
   name: "Dragon's Charge"
   customModelData: 31
@@ -227,127 +235,131 @@ skillThree:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "RepeatMechanic"
-      period: 5
-      repetitions:
-        - 8
-        - 12
-        - 16
-        - 20
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&cDragon's Charge!"
       child1:
-        componentType: "LaunchMechanic"
-        relative: "CASTER"
-        forwardSpeedList:
-          - 1.1
-          - 1.1
-          - 1.1
-          - 1.1
-        upwardSpeedList:
-          - 0
-          - 0
-          - 0
-          - 0
-        rightSpeedList:
-          - 0
-          - 0
-          - 0
-          - 0
-      child2:
-        componentType: "AreaTarget"
-        allies: false
-        enemy: true
-        self: false
-        max: 10
-        radiusList:
-          - 1.8
-          - 1.8
-          - 1.8
-          - 1.8
-        amountList:
+        componentType: "RepeatMechanic"
+        period: 5
+        repetitions:
+          - 8
           - 12
-          - 12
-          - 12
-          - 12
-        particle:
-          particleType: "FLAME"
+          - 16
+          - 20
         child1:
-          componentType: "DamageMechanic"
-          damageType: "FIRE"
-          damageList:
-            - 10
-            - 40
-            - 90
-            - 180
-          damageMultiplyList:
-            - 1.4
-            - 1.6
-            - 1.8
-            - 2.2
+          componentType: "LaunchMechanic"
+          relative: "CASTER"
+          forwardSpeedList:
+            - 1.1
+            - 1.1
+            - 1.1
+            - 1.1
+          upwardSpeedList:
+            - 0
+            - 0
+            - 0
+            - 0
+          rightSpeedList:
+            - 0
+            - 0
+            - 0
+            - 0
         child2:
-          componentType: "PushMechanic"
-          pushType: "FIXED"
-          speedList:
-            - 1
-            - 1.4
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 10
+          radiusList:
             - 1.8
-            - 2.2
-          centerSelf: true
-    child2:
-      componentType: "FlagSetMechanic"
-      key: "dragonslayerskill3"
-      isUnique: "false"
-      ticks:
-        - 50
-        - 75
-        - 100
-        - 125
-    child3:
-      componentType: "ParticleAnimationMechanic"
-      particle:
-        arrangementType: "DrawCylinder"
-        particleType: "FLAME"
-        radius: 1.6
-        amount: 12
-      frequency: 4
-      data1:
-        - 1
-        - 1
-        - 1
-        - 1
-      repeatAmount:
-        - 21
-        - 21
-        - 21
-        - 21
-      upwardIncrease: 0.1
-      resetY: true
-      rotation: true
-      yawIncrease: 30
-      pitchIncrease: 10
-      playback: true
-      # no timeout
-      dontStop: true
-      # stop self if condition is not met
-      flagConditionKey: "dragonslayerskill3"
-      flagIsSet: true
-    child4:
-      componentType: "StatusEffectMechanic"
-      statusEffectTypes:
-        - "SILENCE"
-        - "DISARM"
-      durations:
-        - 50
-        - 75
-        - 100
-        - 125
-    child5:
-      componentType: "GlowMechanic"
-      color: "RED"
-      ticks:
-        - 50
-        - 75
-        - 100
-        - 125
+            - 1.8
+            - 1.8
+            - 1.8
+          amountList:
+            - 12
+            - 12
+            - 12
+            - 12
+          particle:
+            particleType: "FLAME"
+          child1:
+            componentType: "DamageMechanic"
+            damageType: "FIRE"
+            damageList:
+              - 10
+              - 40
+              - 90
+              - 180
+            damageMultiplyList:
+              - 1.4
+              - 1.6
+              - 1.8
+              - 2.2
+          child2:
+            componentType: "PushMechanic"
+            pushType: "FIXED"
+            speedList:
+              - 1
+              - 1.4
+              - 1.8
+              - 2.2
+            centerSelf: true
+      child2:
+        componentType: "FlagSetMechanic"
+        key: "dragonslayerskill3"
+        isUnique: "false"
+        ticks:
+          - 50
+          - 75
+          - 100
+          - 125
+      child3:
+        componentType: "ParticleAnimationMechanic"
+        particle:
+          arrangementType: "DrawCylinder"
+          particleType: "FLAME"
+          radius: 1.6
+          amount: 12
+        frequency: 4
+        data1:
+          - 1
+          - 1
+          - 1
+          - 1
+        repeatAmount:
+          - 21
+          - 21
+          - 21
+          - 21
+        upwardIncrease: 0.1
+        resetY: true
+        rotation: true
+        yawIncrease: 30
+        pitchIncrease: 10
+        playback: true
+        # no timeout
+        dontStop: true
+        # stop self if condition is not met
+        flagConditionKey: "dragonslayerskill3"
+        flagIsSet: true
+      child4:
+        componentType: "StatusEffectMechanic"
+        statusEffectTypes:
+          - "SILENCE"
+          - "DISARM"
+        durations:
+          - 50
+          - 75
+          - 100
+          - 125
+      child5:
+        componentType: "GlowMechanic"
+        color: "RED"
+        ticks:
+          - 50
+          - 75
+          - 100
+          - 125
 skillPassive:
   name: "Warmth"
   customModelData: 29
@@ -389,131 +401,135 @@ skillUltimate:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "LaunchMechanic"
-      relative: "CASTER"
-      forwardSpeedList:
-        - 1.4
-        - 1.5
-        - 1.6
-        - 1.7
-        - 1.8
-        - 2
-      upwardSpeedList:
-        - 1.7
-        - 1.75
-        - 1.8
-        - 1.85
-        - 1.9
-        - 2
-      rightSpeedList:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-    child2:
-      componentType: "SoundMechanic"
-      sound: "SKILL.JUMP"
-      volume: 1.0
-      pitch: 1.0
-    child3:
-      componentType: "ImmunityMechanic"
-      damageCause: "FALL"
-    child4:
-      componentType: "ParticleAnimationMechanic"
-      particle:
-        arrangementType: "FillCircle"
-        particleType: "REDSTONE"
-        radius: 1
-        amount: 4
-        direction: "XZ"
-        dustColor: 16737792
-        dustSize: 2
-      frequency: 4
-      data1:
-        - 1
-        - 1
-        - 1
-        - 1
-      repeatAmount:
-        - 10
-        - 12
-        - 14
-        - 16
-    child5:
-      componentType: "LandTrigger"
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&cGrand Skyfall!"
       child1:
+        componentType: "LaunchMechanic"
+        relative: "CASTER"
+        forwardSpeedList:
+          - 1.4
+          - 1.5
+          - 1.6
+          - 1.7
+          - 1.8
+          - 2
+        upwardSpeedList:
+          - 1.7
+          - 1.75
+          - 1.8
+          - 1.85
+          - 1.9
+          - 2
+        rightSpeedList:
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+      child2:
         componentType: "SoundMechanic"
-        sound: "SKILL.POWERFUL_LANDING"
+        sound: "SKILL.JUMP"
         volume: 1.0
         pitch: 1.0
-      child2:
-        componentType: "ImmunityRemoveMechanic"
-        damageCause: FALL
-        delay: 5
       child3:
-        componentType: "AreaTarget"
-        allies: false
-        enemy: true
-        self: false
-        max: 20
-        radiusList:
-          - 8
-          - 9
-          - 10
-          - 12
-        amountList:
-          - 24
-          - 28
-          - 32
-          - 40
+        componentType: "ImmunityMechanic"
+        damageCause: "FALL"
+      child4:
+        componentType: "ParticleAnimationMechanic"
         particle:
+          arrangementType: "FillCircle"
           particleType: "REDSTONE"
+          radius: 1
+          amount: 4
+          direction: "XZ"
           dustColor: 16737792
           dustSize: 2
-          singleMinHeight: 0
-          singleMaxHeight: 5.3
-          singleGap: 0.5
+        frequency: 4
+        data1:
+          - 1
+          - 1
+          - 1
+          - 1
+        repeatAmount:
+          - 10
+          - 12
+          - 14
+          - 16
+      child5:
+        componentType: "LandTrigger"
         child1:
-          componentType: "DamageMechanic"
-          damageType: "FIRE"
-          damageList:
-            - 10
-            - 40
-            - 90
-            - 180
-          damageMultiplyList:
-            - 2.0
-            - 2.2
-            - 2.4
-            - 2.8
+          componentType: "SoundMechanic"
+          sound: "SKILL.POWERFUL_LANDING"
+          volume: 1.0
+          pitch: 1.0
         child2:
-          componentType: "LaunchMechanic"
-          relative: "TARGET"
-          upwardSpeedList:
-            - 0.4
-            - 0.4
-            - 0.4
-            - 0.4
+          componentType: "ImmunityRemoveMechanic"
+          damageCause: FALL
+          delay: 5
         child3:
-          componentType: "TargetCountCondition"
-          count: 3
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 20
+          radiusList:
+            - 8
+            - 9
+            - 10
+            - 12
+          amountList:
+            - 24
+            - 28
+            - 32
+            - 40
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 16737792
+            dustSize: 2
+            singleMinHeight: 0
+            singleMaxHeight: 5.3
+            singleGap: 0.5
           child1:
-            componentType: "SelfTarget"
+            componentType: "DamageMechanic"
+            damageType: "FIRE"
+            damageList:
+              - 10
+              - 40
+              - 90
+              - 180
+            damageMultiplyList:
+              - 2.0
+              - 2.2
+              - 2.4
+              - 2.8
+          child2:
+            componentType: "LaunchMechanic"
+            relative: "TARGET"
+            upwardSpeedList:
+              - 0.4
+              - 0.4
+              - 0.4
+              - 0.4
+          child3:
+            componentType: "TargetCountCondition"
+            count: 3
             child1:
-              componentType: "SkillLevelCondition"
-              skillIndex: 3
-              minValue: 1
-              maxValue: 4
+              componentType: "SelfTarget"
               child1:
-                componentType: "ChangeSkillLevelMechanic"
-                index: 3
+                componentType: "SkillLevelCondition"
+                skillIndex: 3
+                minValue: 1
+                maxValue: 4
                 child1:
-                  componentType: "HealMechanic"
-                  healPercentList:
-                    - 0.05
-                    - 0.1
-                    - 0.15
-                    - 0.2
-                  addLore: false
+                  componentType: "ChangeSkillLevelMechanic"
+                  index: 3
+                  child1:
+                    componentType: "HealMechanic"
+                    healPercentList:
+                      - 0.05
+                      - 0.1
+                      - 0.15
+                      - 0.2
+                    addLore: false

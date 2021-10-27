@@ -34,7 +34,6 @@ import io.github.lix3nn53.guardiansofadelia.items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
-import io.github.lix3nn53.guardiansofadelia.menu.CharacterSelectionMenuList;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
@@ -428,29 +427,17 @@ public class MyInventoryClickEvent implements Listener {
             }
         } else if (title.contains("Play Tutorial?")) {
             //Play Tutorial? ClassName CharNo
-            char c = title.charAt(title.length() - 1);
-            int charNo = Integer.parseInt(String.valueOf(c));
+            String[] split = title.split("#");
 
-            String rpgClassStr = title.replace(ChatPalette.GRAY_DARK + "Play Tutorial? ", "");
-            rpgClassStr = rpgClassStr.replace(" " + charNo, "");
-
-            rpgClassStr = ChatColor.stripColor(rpgClassStr);
+            int charNo = Integer.parseInt(split[1]);
 
             if (currentType.equals(Material.LIME_WOOL)) {
-                CharacterSelectionScreenManager.createCharacter(player, charNo, rpgClassStr);
+                CharacterSelectionScreenManager.createCharacter(player, charNo);
             } else if (currentType.equals(Material.RED_WOOL)) {
-                CharacterSelectionScreenManager.createCharacterWithoutTutorial(player, charNo, rpgClassStr);
+                CharacterSelectionScreenManager.createCharacterWithoutTutorial(player, charNo);
             }
         } else if (title.contains("Character")) {
-            if (title.contains("Creation")) {
-                String charNoString = title.replace(ChatPalette.GRAY_DARK + "Character ", "");
-                charNoString = charNoString.replace(" Creation", "");
-                int charNo = Integer.parseInt(charNoString);
-
-                String rpgClassStr = ChatColor.stripColor(currentName);
-                GuiGeneric guiGeneric = CharacterSelectionMenuList.tutorialSkipMenu(rpgClassStr, charNo);
-                guiGeneric.openInventory(player);
-            } else if (title.contains("Selection")) {
+            if (title.contains("Selection")) {
                 String charNoString = title.replace(ChatPalette.GRAY_DARK + "Character ", "");
                 charNoString = charNoString.replace(" Selection", "");
                 int charNo = Integer.parseInt(charNoString);
@@ -809,14 +796,12 @@ public class MyInventoryClickEvent implements Listener {
             }
         } else if (title.contains(ChatPalette.GRAY_DARK + "Class Change")) {
             if (rpgCharacter != null) {
-                if (currentType.equals(Material.LIME_WOOL)) {
-                    String displayName = itemMeta.getDisplayName();
-                    String stripColor = ChatColor.stripColor(displayName);
-                    String rpgClassStr = stripColor.toUpperCase();
+                String displayName = itemMeta.getDisplayName();
+                String stripColor = ChatColor.stripColor(displayName);
+                String rpgClassStr = stripColor.toUpperCase();
 
-                    boolean b = rpgCharacter.changeClass(player, rpgClassStr);
-                    if (b) player.closeInventory();
-                }
+                boolean b = rpgCharacter.changeClass(player, rpgClassStr);
+                if (b) player.closeInventory();
             }
         } else if (title.contains(ChatPalette.GRAY_DARK + "Skills (Points: ")) {
             if (rpgCharacter != null) {

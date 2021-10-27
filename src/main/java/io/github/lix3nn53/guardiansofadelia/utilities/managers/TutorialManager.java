@@ -18,13 +18,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.List;
+
 
 public class TutorialManager {
 
-    public static void startTutorial(Player player, String rpgClassStr, int charNo, Location startLocation) {
+    public static void startTutorial(Player player, int charNo, Location startLocation) {
         if (GuardianDataManager.hasGuardianData(player)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-            RPGCharacter rpgCharacter = new RPGCharacter(rpgClassStr, player);
+            String startingClass = RPGClassManager.getStartingClass();
+            RPGCharacter rpgCharacter = new RPGCharacter(startingClass, player);
             guardianData.setActiveCharacter(rpgCharacter, charNo);
             rpgCharacter.getSkillBar().remakeSkillBar();
 
@@ -34,10 +37,18 @@ public class TutorialManager {
             rpgCharacterStats.setTotalExp(totalExpForLevel);
 
             int totalExpClass = RPGClassExperienceManager.getTotalRequiredExperience(20);
-            RPGClassStats currentRPGClassStats = rpgCharacter.getCurrentRPGClassStats();
-            currentRPGClassStats.giveExp(player, totalExpClass);
+            for (int i = 1; i <= RPGClassManager.HIGHEST_CLASS_TIER; i++) {
+                List<RPGClass> classesAtTier = RPGClassManager.getClassesAtTier(i);
 
-            giveTutorialItems(player, rpgClassStr);
+                for (RPGClass rpgClass : classesAtTier) {
+                    String classStringNoColor = rpgClass.getClassStringNoColor();
+                    RPGClassStats rpgClassStats = rpgCharacter.addClassStats(classStringNoColor);
+                    rpgClassStats.giveExpNoMessage(totalExpClass);
+                }
+            }
+
+            InventoryUtils.setMenuItemPlayer(player);
+            // giveTutorialItems(player, startingClass);
             player.teleport(startLocation);
 
             player.sendTitle(ChatPalette.PURPLE + "Aleesia's Castle", ChatPalette.GRAY + "Fall of the Adelia", 25, 35, 25);
@@ -57,7 +68,6 @@ public class TutorialManager {
     }
 
     private static void giveTutorialItems(Player player, String rpgClassStr) {
-        InventoryUtils.setMenuItemPlayer(player);
         ItemTier tier = ItemTier.LEGENDARY;
         String gearSet = "Tutorial";
 

@@ -45,27 +45,31 @@ skillOne:
       minValue: 0
       maxValue: 0
       child1:
-        componentType: "HologramMechanic"
-        helmetType: "IRON_PICKAXE"
-        customModelData: 6
-        durations:
-          - 800
-          - 900
-          - 1000
-          - 1100
-        displayText: "< Totem %caster% >"
-        gravity: true
-        marker: false
-        speed: 1.9
-        right: 0
-        forward: 1
-        upward: 0.5
-        save: true
-      child2:
-        componentType: "SoundMechanic"
-        sound: "SKILL.SPLASH"
-        volume: 1.0
-        pitch: 1.0
+        componentType: "CastTimeMechanic"
+        delay: 1
+        text: "&aTotem!"
+        child1:
+          componentType: "HologramMechanic"
+          helmetType: "IRON_PICKAXE"
+          customModelData: 6
+          durations:
+            - 800
+            - 900
+            - 1000
+            - 1100
+          displayText: "< Totem %caster% >"
+          gravity: true
+          marker: false
+          speed: 1.9
+          right: 0
+          forward: 1
+          upward: 0.5
+          save: true
+        child2:
+          componentType: "SoundMechanic"
+          sound: "SKILL.SPLASH"
+          volume: 1.0
+          pitch: 1.0
 skillTwo:
   name: "Thunderstorm"
   customModelData: 56
@@ -84,56 +88,64 @@ skillTwo:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "RepeatMechanic"
-      period: 40
-      repetitions:
-        - 8
-        - 9
-        - 10
-        - 11
+      componentType: "SavedEntityCondition"
+      minValue: 1
+      maxValue: 1
       child1:
-        componentType: "SavedEntitiesTarget"
-        allies: false
-        enemy: false
-        self: false
-        max: 5
-        armorStand: true
+        componentType: "CastTimeMechanic"
+        delay: 12
+        text: "&aThunderstorm!"
         child1:
-          componentType: "AreaTarget"
-          allies: false
-          enemy: true
-          self: false
-          max: 15
-          radiusList:
-            - 5
-            - 5.5
-            - 6
-            - 6.5
-          amountList:
-            - 12
-            - 14
-            - 16
-            - 18
-          particle:
-            particleType: "VILLAGER_ANGRY"
+          componentType: "RepeatMechanic"
+          period: 40
+          repetitions:
+            - 8
+            - 9
+            - 10
+            - 11
           child1:
-            componentType: "DamageMechanic"
-            damageType: "EARTH"
-            damageList:
-              - 10
-              - 40
-              - 90
-              - 180
-            damageMultiplyList:
-              - 0.4
-              - 0.5
-              - 0.6
-              - 0.8
-        child2:
-          componentType: "SoundMechanic"
-          sound: "SKILL.SONIC_BOOM"
-          volume: 1.0
-          pitch: 1.0
+            componentType: "SavedEntitiesTarget"
+            allies: false
+            enemy: false
+            self: false
+            max: 5
+            armorStand: true
+            child1:
+              componentType: "AreaTarget"
+              allies: false
+              enemy: true
+              self: false
+              max: 15
+              radiusList:
+                - 5
+                - 5.5
+                - 6
+                - 6.5
+              amountList:
+                - 12
+                - 14
+                - 16
+                - 18
+              particle:
+                particleType: "VILLAGER_ANGRY"
+              child1:
+                componentType: "DamageMechanic"
+                damageType: "EARTH"
+                damageList:
+                  - 10
+                  - 40
+                  - 90
+                  - 180
+                damageMultiplyList:
+                  - 0.4
+                  - 0.5
+                  - 0.6
+                  - 0.8
+            child2:
+              componentType: "SoundMechanic"
+              sound: "SKILL.SONIC_BOOM"
+              volume: 1.0
+              pitch: 1.0
 skillThree:
   name: "Polymorph"
   customModelData: 45
@@ -152,65 +164,73 @@ skillThree:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "SavedEntitiesTarget"
-      allies: false
-      enemy: false
-      self: false
-      max: 5
-      armorStand: true
+      componentType: "SavedEntityCondition"
+      minValue: 1
+      maxValue: 1
       child1:
-        componentType: "AreaTarget"
-        allies: false
-        enemy: true
-        self: false
-        max: 15
-        radiusList:
-          - 5
-          - 5.5
-          - 6
-          - 6.5
-        amountList:
-          - 24
-          - 24
-          - 24
-          - 24
-        particle:
-          particleType: "REDSTONE"
-          dustColor: 16724991
-          dustSize: 8
+        componentType: "CastTimeMechanic"
+        delay: 12
+        text: "&aPolymorph!"
         child1:
-          componentType: "DisguiseMechanic"
-          disguiseType: "SHEEP"
-          isAdult: true
-          ticks:
-            - 60
-            - 70
-            - 80
-            - 90
-        child2:
-          componentType: "StatusEffectMechanic"
-          statusEffectTypes:
-            - "SILENCE"
-            - "DISARM"
-          durations:
-            - 60
-            - 70
-            - 80
-            - 90
-        child3:
-          componentType: "SelfTarget"
+          componentType: "SavedEntitiesTarget"
+          allies: false
+          enemy: false
+          self: false
+          max: 5
+          armorStand: true
           child1:
-            componentType: "SavedEntitiesTarget"
+            componentType: "AreaTarget"
             allies: false
-            enemy: false
+            enemy: true
             self: false
-            max: 5
-            armorStand: true
+            max: 15
+            radiusList:
+              - 5
+              - 5.5
+              - 6
+              - 6.5
+            amountList:
+              - 24
+              - 24
+              - 24
+              - 24
+            particle:
+              particleType: "REDSTONE"
+              dustColor: 16724991
+              dustSize: 8
+            child1:
+              componentType: "DisguiseMechanic"
+              disguiseType: "SHEEP"
+              isAdult: true
+              ticks:
+                - 60
+                - 70
+                - 80
+                - 90
             child2:
-              componentType: "SoundMechanic"
-              sound: "SKILL.STUN_HIT"
-              volume: 1.0
-              pitch: 1.0
+              componentType: "StatusEffectMechanic"
+              statusEffectTypes:
+                - "SILENCE"
+                - "DISARM"
+              durations:
+                - 60
+                - 70
+                - 80
+                - 90
+            child3:
+              componentType: "SelfTarget"
+              child1:
+                componentType: "SavedEntitiesTarget"
+                allies: false
+                enemy: false
+                self: false
+                max: 5
+                armorStand: true
+                child2:
+                  componentType: "SoundMechanic"
+                  sound: "SKILL.STUN_HIT"
+                  volume: 1.0
+                  pitch: 1.0
 skillPassive:
   name: "Purifying Waters"
   customModelData: 52
@@ -311,43 +331,16 @@ skillUltimate:
       minValue: 1
       maxValue: 1
       child1:
-        componentType: "AreaTarget"
-        allies: false
-        enemy: false
-        self: false
-        armorStand: true
-        max: 10
-        radiusList:
-          - 4.5
-          - 4.75
-          - 5
-          - 5.25
-        amountList:
-          - 24
-          - 24
-          - 24
-          - 24
-        particle:
-          particleType: "EXPLOSION_LARGE"
-        child1:
-          componentType: "PushMechanic"
-          pushType: "FIXED"
-          speedList:
-            - 2.6
-            - 2.8
-            - 3
-            - 3.2
-          centerSelf: true
-          offsetY: -0.8
-      child2:
-        componentType: "DelayMechanic"
-        ticks: 10
+        componentType: "CastTimeMechanic"
+        delay: 12
+        text: "&aSurf!"
         child1:
           componentType: "AreaTarget"
           allies: false
-          enemy: true
-          self: true
-          max: 20
+          enemy: false
+          self: false
+          armorStand: true
+          max: 10
           radiusList:
             - 4.5
             - 4.75
@@ -359,41 +352,72 @@ skillUltimate:
             - 24
             - 24
           particle:
-            particleType: "REDSTONE"
-            dustColor: 16728064
-            dustSize: 2
+            particleType: "EXPLOSION_LARGE"
           child1:
-            componentType: "SavedEntitiesTarget"
-            allies: false
-            enemy: false
-            self: false
-            max: 20
-            keepCurrent: true
-            addToBeginning: true
-            child1:
-              componentType: "PushMechanic"
-              pushType: "FIXED"
-              speedList:
-                - -2.6
-                - -2.8
-                - -3
-                - -3.2
-              centerSelf: false
-              offsetY: 4
-      child3:
-        componentType: "DelayMechanic"
-        ticks: 15
-        child1:
-          componentType: "ImmunityMechanic"
-          damageCause: "FALL"
+            componentType: "PushMechanic"
+            pushType: "FIXED"
+            speedList:
+              - 2.6
+              - 2.8
+              - 3
+              - 3.2
+            centerSelf: true
+            offsetY: -0.8
         child2:
-          componentType: "LandTrigger"
+          componentType: "DelayMechanic"
+          ticks: 10
           child1:
-            componentType: "ImmunityRemoveMechanic"
-            damageCause: FALL
-            delay: 5
-      child4:
-        componentType: "SoundMechanic"
-        sound: "SKILL.JUMP"
-        volume: 1.0
-        pitch: 1.0
+            componentType: "AreaTarget"
+            allies: false
+            enemy: true
+            self: true
+            max: 20
+            radiusList:
+              - 4.5
+              - 4.75
+              - 5
+              - 5.25
+            amountList:
+              - 24
+              - 24
+              - 24
+              - 24
+            particle:
+              particleType: "REDSTONE"
+              dustColor: 16728064
+              dustSize: 2
+            child1:
+              componentType: "SavedEntitiesTarget"
+              allies: false
+              enemy: false
+              self: false
+              max: 20
+              keepCurrent: true
+              addToBeginning: true
+              child1:
+                componentType: "PushMechanic"
+                pushType: "FIXED"
+                speedList:
+                  - -2.6
+                  - -2.8
+                  - -3
+                  - -3.2
+                centerSelf: false
+                offsetY: 4
+        child3:
+          componentType: "DelayMechanic"
+          ticks: 15
+          child1:
+            componentType: "ImmunityMechanic"
+            damageCause: "FALL"
+          child2:
+            componentType: "LandTrigger"
+            child1:
+              componentType: "ImmunityRemoveMechanic"
+              damageCause: FALL
+              delay: 5
+        child4:
+          componentType: "SoundMechanic"
+          sound: "SKILL.JUMP"
+          volume: 1.0
+          pitch: 1.0

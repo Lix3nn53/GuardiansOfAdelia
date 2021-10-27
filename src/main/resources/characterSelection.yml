@@ -69,8 +69,8 @@ characterSelectionHologram8:
   pitch: 0
 tutorialStart:
   world: tutorial
-  x: 477.5
-  y: 8.5
-  z: 38.5
+  x: 515.5
+  y: 14.5
+  z: 39.5
   yaw: 112.5
-  pitch: -4.5
+  pitch: -1.5

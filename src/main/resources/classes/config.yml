@@ -5,21 +5,9 @@
 # ---------------------------------------------- #
 
 classTier1:
-  requiredQuest: 3
+  requiredLevel: 1
 classTier2:
-  requiredQuest: 99
+  requiredLevel: 40
 classTier3:
-  requiredQuest: 999
-tutorialClasses:
-  - "ranger"
-  - "engineer"
-  - "fire mage"
-  - "frost mage"
-  - "hunter"
-  - "doom knight"
-  - "monk"
-  - "necromancer"
-  - "paladin"
-  - "reaper"
-  - "shaman"
-  - "dragonslayer"
+  requiredLevel: 70
+startingClass: "archer"

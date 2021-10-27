@@ -45,184 +45,39 @@ skillOne:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "ProjectileMechanic"
-      projectileClass: "Snowball"
-      spreadType: "CONE"
-      speed: 1.9
-      amountList:
-        - 1
-        - 1
-        - 1
-        - 1
-      angle: 30
-      range: 200
-      mustHitToWork: true
-      particle:
-        arrangementType: "Single"
-        particleType: "REDSTONE"
-        dustColor: 6750207
-        dustSize: 2
-      addLore: false
-      child1:
-        componentType: "AreaTarget"
-        allies: false
-        enemy: true
-        self: false
-        max: 10
-        radiusList:
-          - 2.5
-          - 2.75
-          - 3
-          - 3.25
-        amountList:
-          - 24
-          - 24
-          - 24
-          - 24
-        particle:
-          particleType: "REDSTONE"
-          dustColor: 65535
-          dustSize: 2
-        child1:
-          componentType: "DamageMechanic"
-          damageType: "WATER"
-          damageList:
-            - 10
-            - 40
-            - 90
-            - 180
-          damageMultiplyList:
-            - 1.4
-            - 1.6
-            - 1.8
-            - 2.2
-        child2:
-          componentType: "PotionEffectMechanic"
-          potionEffectType:
-            - "SLOW"
-          tickList:
-            - 40
-            - 50
-            - 60
-            - 70
-          amplifierList:
-            - 2
-            - 2.5
-            - 3
-            - 4
-        child3:
-          componentType: "ValueCondition"
-          key: "icespirit"
-          minValue: 4
-          maxValue: 50
-          checkCasterOnly: true
-          child1:
-            componentType: "ChangeSkillLevelMechanic"
-            index: 3
-            child1:
-              componentType: "StatusEffectMechanic"
-              statusEffectTypes:
-                - "STUN"
-              durations:
-                - 40
-                - 50
-                - 60
-                - 70
-            child2:
-              componentType: "HologramMechanic"
-              helmetType: "IRON_PICKAXE"
-              customModelData: 10
-              durations:
-                - 40
-                - 50
-                - 60
-                - 70
-              upward: -0.5
-          child2:
-            componentType: "SelfTarget"
-            child1:
-              componentType: "ValueSetMechanic"
-              key: "icespirit"
-              values:
-                - 0
-                - 0
-                - 0
-                - 0
-    child2:
-      componentType: "SoundMechanic"
-      sound: "SKILL.FIRE_SLASH"
-      volume: 1.0
-      pitch: 1.0
-skillTwo:
-  name: "Ice Meteor"
-  customModelData: 50
-  description:
-    - "Summon a small ice meteor from the sky that"
-    - "deals damage and slows enemies in area."
-  manaCosts:
-    - 5
-    - 7
-    - 9
-    - 11
-  cooldowns:
-    - 9
-    - 9
-    - 9
-    - 9
-  trigger:
-    componentType: "SelfTarget"
-    child1:
-      componentType: "LocationTarget"
-      allies: false
-      self: false
-      enemy: true
-      max: 30
-      ranges:
-        - 24
-        - 24
-        - 24
-        - 24
-        - 24
-        - 24
-      particle:
-        particleType: "REDSTONE"
-        dustColor: 6750207
-        dustSize: 2
-        gap: 0.4
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&bFrostball!"
       child1:
         componentType: "ProjectileMechanic"
         projectileClass: "Snowball"
-        spreadType: "RAIN"
-        height: 12
-        radius: 8
-        speed: 0.4
+        spreadType: "CONE"
+        speed: 1.9
         amountList:
           - 1
           - 1
           - 1
           - 1
+        angle: 30
         range: 200
-        mustHitToWork: false
+        mustHitToWork: true
         particle:
-          arrangementType: "FillCircle"
+          arrangementType: "Single"
           particleType: "REDSTONE"
           dustColor: 6750207
           dustSize: 2
-          radius: 1
-          amount: 4
-          direction: "XZ"
-        isProjectileInvisible: false
+        addLore: false
         child1:
           componentType: "AreaTarget"
           allies: false
           enemy: true
           self: false
-          max: 20
+          max: 10
           radiusList:
             - 2.5
+            - 2.75
             - 3
-            - 3.5
-            - 4
+            - 3.25
           amountList:
             - 24
             - 24
@@ -251,14 +106,14 @@ skillTwo:
               - "SLOW"
             tickList:
               - 40
-              - 40
-              - 40
-              - 40
+              - 50
+              - 60
+              - 70
             amplifierList:
               - 2
-              - 2
-              - 2
-              - 2
+              - 2.5
+              - 3
+              - 4
           child3:
             componentType: "ValueCondition"
             key: "icespirit"
@@ -297,11 +152,164 @@ skillTwo:
                   - 0
                   - 0
                   - 0
-        child2:
-          componentType: "SoundMechanic"
-          sound: "SKILL.FIRE_AURA"
-          volume: 1.0
-          pitch: 1.0
+      child2:
+        componentType: "SoundMechanic"
+        sound: "SKILL.FIRE_SLASH"
+        volume: 1.0
+        pitch: 1.0
+skillTwo:
+  name: "Ice Meteor"
+  customModelData: 50
+  description:
+    - "Summon a small ice meteor from the sky that"
+    - "deals damage and slows enemies in area."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 9
+    - 9
+    - 9
+    - 9
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&bIce Meteor!"
+      child1:
+        componentType: "LocationTarget"
+        allies: false
+        self: false
+        enemy: true
+        max: 30
+        ranges:
+          - 24
+          - 24
+          - 24
+          - 24
+          - 24
+          - 24
+        particle:
+          particleType: "REDSTONE"
+          dustColor: 6750207
+          dustSize: 2
+          gap: 0.4
+        child1:
+          componentType: "ProjectileMechanic"
+          projectileClass: "Snowball"
+          spreadType: "RAIN"
+          height: 12
+          radius: 8
+          speed: 0.4
+          amountList:
+            - 1
+            - 1
+            - 1
+            - 1
+          range: 200
+          mustHitToWork: false
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "REDSTONE"
+            dustColor: 6750207
+            dustSize: 2
+            radius: 1
+            amount: 4
+            direction: "XZ"
+          isProjectileInvisible: false
+          child1:
+            componentType: "AreaTarget"
+            allies: false
+            enemy: true
+            self: false
+            max: 20
+            radiusList:
+              - 2.5
+              - 3
+              - 3.5
+              - 4
+            amountList:
+              - 24
+              - 24
+              - 24
+              - 24
+            particle:
+              particleType: "REDSTONE"
+              dustColor: 65535
+              dustSize: 2
+            child1:
+              componentType: "DamageMechanic"
+              damageType: "WATER"
+              damageList:
+                - 10
+                - 40
+                - 90
+                - 180
+              damageMultiplyList:
+                - 1.4
+                - 1.6
+                - 1.8
+                - 2.2
+            child2:
+              componentType: "PotionEffectMechanic"
+              potionEffectType:
+                - "SLOW"
+              tickList:
+                - 40
+                - 40
+                - 40
+                - 40
+              amplifierList:
+                - 2
+                - 2
+                - 2
+                - 2
+            child3:
+              componentType: "ValueCondition"
+              key: "icespirit"
+              minValue: 4
+              maxValue: 50
+              checkCasterOnly: true
+              child1:
+                componentType: "ChangeSkillLevelMechanic"
+                index: 3
+                child1:
+                  componentType: "StatusEffectMechanic"
+                  statusEffectTypes:
+                    - "STUN"
+                  durations:
+                    - 40
+                    - 50
+                    - 60
+                    - 70
+                child2:
+                  componentType: "HologramMechanic"
+                  helmetType: "IRON_PICKAXE"
+                  customModelData: 10
+                  durations:
+                    - 40
+                    - 50
+                    - 60
+                    - 70
+                  upward: -0.5
+              child2:
+                componentType: "SelfTarget"
+                child1:
+                  componentType: "ValueSetMechanic"
+                  key: "icespirit"
+                  values:
+                    - 0
+                    - 0
+                    - 0
+                    - 0
+          child2:
+            componentType: "SoundMechanic"
+            sound: "SKILL.FIRE_AURA"
+            volume: 1.0
+            pitch: 1.0
 skillThree:
   name: "Frozen Meditation"
   customModelData: 24
@@ -320,69 +328,73 @@ skillThree:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "StatusEffectMechanic"
-      statusEffectTypes:
-        - "STUN"
-      durations:
-        - 80
-        - 100
-        - 120
-        - 140
-    child2:
-      componentType: "HologramMechanic"
-      helmetType: "IRON_PICKAXE"
-      customModelData: 10
-      durations:
-        - 80
-        - 100
-        - 120
-        - 140
-      upward: -0.5
-    child3:
-      componentType: "InvincibleMechanic"
-      ticks:
-        - 80
-        - 100
-        - 120
-        - 140
-    child4:
-      componentType: "GlowMechanic"
-      color: "AQUA"
-      ticks:
-        - 80
-        - 100
-        - 120
-        - 140
-    child5:
-      componentType: "RepeatMechanic"
-      period: 20
-      repetitions:
-        - 4
-        - 5
-        - 6
-        - 7
+      componentType: "CastTimeMechanic"
+      delay: 1
+      text: "&bFrozen Meditation!"
       child1:
-        componentType: "HealMechanic"
-        healPercentList:
-          - 0.1
-          - 0.1
-          - 0.1
-          - 0.1
+        componentType: "StatusEffectMechanic"
+        statusEffectTypes:
+          - "STUN"
+        durations:
+          - 80
+          - 100
+          - 120
+          - 140
       child2:
-        componentType: "ParticleMechanic"
-        particle:
-          arrangementType: "DrawCylinder"
-          particleType: "REDSTONE"
-          radius: 1.2
-          amount: 8
-          dustColor: 6750207
-          dustSize: 2
-        data1:
-          - 1.2
-          - 1.2
-          - 1.2
-          - 1.2
-        upward: 0.5
+        componentType: "HologramMechanic"
+        helmetType: "IRON_PICKAXE"
+        customModelData: 10
+        durations:
+          - 80
+          - 100
+          - 120
+          - 140
+        upward: -0.5
+      child3:
+        componentType: "InvincibleMechanic"
+        ticks:
+          - 80
+          - 100
+          - 120
+          - 140
+      child4:
+        componentType: "GlowMechanic"
+        color: "AQUA"
+        ticks:
+          - 80
+          - 100
+          - 120
+          - 140
+      child5:
+        componentType: "RepeatMechanic"
+        period: 20
+        repetitions:
+          - 4
+          - 5
+          - 6
+          - 7
+        child1:
+          componentType: "HealMechanic"
+          healPercentList:
+            - 0.1
+            - 0.1
+            - 0.1
+            - 0.1
+        child2:
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "DrawCylinder"
+            particleType: "REDSTONE"
+            radius: 1.2
+            amount: 8
+            dustColor: 6750207
+            dustSize: 2
+          data1:
+            - 1.2
+            - 1.2
+            - 1.2
+            - 1.2
+          upward: 0.5
 skillPassive:
   name: "Ice Spirit"
   customModelData: 51
@@ -484,111 +496,115 @@ skillUltimate:
   trigger:
     componentType: "SelfTarget"
     child1:
-      componentType: "HologramMechanic"
-      helmetType: "IRON_PICKAXE"
-      customModelData: 13
-      durations:
-        - 400
-        - 500
-        - 600
-        - 800
-      displayText: "< Blizzard %caster% >"
-      gravity: true
-      marker: false
-      speed: 1.9
-      right: 0
-      forward: 1
-      upward: 0.5
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&bBlizzard!"
       child1:
-        componentType: "RepeatMechanic"
-        period: 20
-        repetitions:
-          - 20
-          - 25
-          - 30
-          - 40
+        componentType: "HologramMechanic"
+        helmetType: "IRON_PICKAXE"
+        customModelData: 13
+        durations:
+          - 400
+          - 500
+          - 600
+          - 800
+        displayText: "< Blizzard %caster% >"
+        gravity: true
+        marker: false
+        speed: 1.9
+        right: 0
+        forward: 1
+        upward: 0.5
         child1:
-          componentType: "AreaTarget"
-          allies: false
-          enemy: true
-          self: false
-          max: 30
-          radiusList:
-            - 5
-            - 6
-            - 7
-            - 9
-          amountList:
-            - 24
-            - 24
-            - 24
-            - 24
-          particle:
-            particleType: "REDSTONE"
-            dustColor: 65535
-            dustSize: 2
+          componentType: "RepeatMechanic"
+          period: 20
+          repetitions:
+            - 20
+            - 25
+            - 30
+            - 40
           child1:
-            componentType: "PotionEffectMechanic"
-            potionEffectType:
-              - "SLOW"
-            tickList:
-              - 40
-              - 40
-              - 40
-              - 40
-            amplifierList:
-              - 2
-              - 2
-              - 2
-              - 2
-          child2:
-            componentType: "DamageMechanic"
-            damageType: "WATER"
-            damageList:
-              - 10
-              - 40
-              - 90
-              - 180
-            damageMultiplyList:
-              - 1.4
-              - 1.6
-              - 1.8
-              - 2.2
-          child3:
-            componentType: "ValueCondition"
-            key: "icespirit"
-            minValue: 4
-            maxValue: 50
-            checkCasterOnly: true
+            componentType: "AreaTarget"
+            allies: false
+            enemy: true
+            self: false
+            max: 30
+            radiusList:
+              - 5
+              - 6
+              - 7
+              - 9
+            amountList:
+              - 24
+              - 24
+              - 24
+              - 24
+            particle:
+              particleType: "REDSTONE"
+              dustColor: 65535
+              dustSize: 2
             child1:
-              componentType: "ChangeSkillLevelMechanic"
-              index: 3
-              child1:
-                componentType: "StatusEffectMechanic"
-                statusEffectTypes:
-                  - "STUN"
-                durations:
-                  - 40
-                  - 50
-                  - 60
-                  - 70
-              child2:
-                componentType: "HologramMechanic"
-                helmetType: "IRON_PICKAXE"
-                customModelData: 10
-                durations:
-                  - 40
-                  - 50
-                  - 60
-                  - 70
-                upward: -0.5
+              componentType: "PotionEffectMechanic"
+              potionEffectType:
+                - "SLOW"
+              tickList:
+                - 40
+                - 40
+                - 40
+                - 40
+              amplifierList:
+                - 2
+                - 2
+                - 2
+                - 2
             child2:
-              componentType: "SelfTarget"
+              componentType: "DamageMechanic"
+              damageType: "WATER"
+              damageList:
+                - 10
+                - 40
+                - 90
+                - 180
+              damageMultiplyList:
+                - 1.4
+                - 1.6
+                - 1.8
+                - 2.2
+            child3:
+              componentType: "ValueCondition"
+              key: "icespirit"
+              minValue: 4
+              maxValue: 50
+              checkCasterOnly: true
               child1:
-                componentType: "ValueSetMechanic"
-                key: "icespirit"
-                values:
-                  - 0
-                  - 0
-                  - 0
-                  - 0
+                componentType: "ChangeSkillLevelMechanic"
+                index: 3
+                child1:
+                  componentType: "StatusEffectMechanic"
+                  statusEffectTypes:
+                    - "STUN"
+                  durations:
+                    - 40
+                    - 50
+                    - 60
+                    - 70
+                child2:
+                  componentType: "HologramMechanic"
+                  helmetType: "IRON_PICKAXE"
+                  customModelData: 10
+                  durations:
+                    - 40
+                    - 50
+                    - 60
+                    - 70
+                  upward: -0.5
+              child2:
+                componentType: "SelfTarget"
+                child1:
+                  componentType: "ValueSetMechanic"
+                  key: "icespirit"
+                  values:
+                    - 0
+                    - 0
+                    - 0
+                    - 0

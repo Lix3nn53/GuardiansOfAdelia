@@ -101,7 +101,7 @@ public enum ArmorGearType {
             case CLOTH_ARMOR:
                 return GearSetEffect.ABILITY_HASTE;
             case LIGHT_ARMOR:
-                return GearSetEffect.JUMP_BOOST;
+                return GearSetEffect.CRITICAL_CHANCE;
             case FEATHER_ARMOR:
                 return GearSetEffect.MOVEMENT_SPEED;
         }

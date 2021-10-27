@@ -43,7 +43,7 @@ public class TutorialEndAction implements Action {
                 activeCharacter.getSkillBar().resetSkillPoints();
                 activeCharacter.clearRPGClassStats();
 
-                activeCharacter.changeClass(player, RPGClassManager.starterClass);
+                activeCharacter.changeClass(player, RPGClassManager.getStartingClass());
 
                 new BukkitRunnable() {
                     @Override
