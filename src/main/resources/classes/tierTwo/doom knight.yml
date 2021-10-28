@@ -9,11 +9,11 @@ mainElement: "LIGHTNING"
 description:
   - "Todo"
 classIconCustomModelData: 34
-attributeElementDamage: 3
-attributeElementDefense: 3
+attributeElementDamage: 4
+attributeElementDefense: 9
 attributeMaxHealth: 9
-attributeMaxMana: 1
-attributeCriticalChance: 0
+attributeMaxMana: 2
+attributeCriticalChance: 1
 weaponGearTypes:
   - "SWORD"
   - "GREAT_SWORD"
@@ -24,8 +24,6 @@ armorGearTypes:
   - "LIGHT_ARMOR"
 shieldGearTypes:
   - "SHIELD"
-hasDefaultOffhand: true
-isDefaultOffhandWeapon: false
 actionBarInfoType: "VARIABLE"
 actionBarIcon: "&5⏺"
 actionBarKey: "darkaura"

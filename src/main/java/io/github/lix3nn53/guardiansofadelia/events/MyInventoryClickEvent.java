@@ -827,7 +827,7 @@ public class MyInventoryClickEvent implements Listener {
                             skill.openInventory(player);
                         }
                     } else if (event.isRightClick()) {
-                        boolean downgradeSkill = skillBar.downgradeSkill(skillIndex);
+                        boolean downgradeSkill = skillBar.downgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats());
                         if (downgradeSkill) {
                             GuiGeneric skill = MenuList.skill(player);
                             skill.openInventory(player);

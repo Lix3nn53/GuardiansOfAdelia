@@ -11,10 +11,10 @@ description:
   - "makes anyone a prey for the deadly arrows."
 classIconCustomModelData: 14
 attributeElementDamage: 6
-attributeElementDefense: 1
-attributeMaxHealth: 6
-attributeMaxMana: 1
-attributeCriticalChance: 1
+attributeElementDefense: 4
+attributeMaxHealth: 4
+attributeMaxMana: 4
+attributeCriticalChance: 7
 weaponGearTypes:
   - "CROSSBOW"
   - "BOW"
@@ -23,7 +23,6 @@ armorGearTypes:
   - "LIGHT_ARMOR"
   - "FEATHER_ARMOR"
   - "CLOTH_ARMOR"
-hasDefaultOffhand: false
 skillOne:
   name: "Explosive Arrow"
   customModelData: 18

@@ -9,11 +9,11 @@ mainElement: "WATER"
 description:
   - "Shamans summons a totem and plays around it."
 classIconCustomModelData: 32
-attributeElementDamage: 1
-attributeElementDefense: 4
+attributeElementDamage: 7
+attributeElementDefense: 5
 attributeMaxHealth: 5
 attributeMaxMana: 6
-attributeCriticalChance: 0
+attributeCriticalChance: 2
 weaponGearTypes:
   - "WAND"
   - "STAFF"
@@ -22,7 +22,6 @@ armorGearTypes:
   - "CLOTH_ARMOR"
   - "FEATHER_ARMOR"
   - "LIGHT_ARMOR"
-hasDefaultOffhand: false
 skillOne:
   name: "Totem"
   customModelData: 22

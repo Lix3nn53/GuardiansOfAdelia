@@ -10,4 +10,4 @@ classTier2:
   requiredLevel: 40
 classTier3:
   requiredLevel: 70
-startingClass: "archer"
+startingClass: "ranger"

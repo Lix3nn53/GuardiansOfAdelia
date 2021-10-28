@@ -1,6 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
+import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -76,7 +81,24 @@ public class RPGClassStats {
         int newLevel = RPGClassExperienceManager.getLevel(this.totalExp);
 
         if (currentLevel < newLevel) { //level up
-            player.sendTitle(ChatPalette.PURPLE + "Class Level Up!", ChatPalette.YELLOW + "Your new level is " + ChatPalette.GOLD + newLevel, 30, 80, 30);
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                    String rpgClassStr = activeCharacter.getRpgClassStr();
+
+                    RPGClass aClass = RPGClassManager.getClass(rpgClassStr);
+
+                    String classString = aClass.getClassString();
+
+                    MessageUtils.sendCenteredMessage(player, classString + ChatPalette.GOLD + " Level up!");
+                    MessageUtils.sendCenteredMessage(player, ChatPalette.YELLOW + "Congratulations, your new " + classString +
+                            ChatPalette.YELLOW + " level is " + ChatPalette.GOLD + newLevel);
+                    CustomSound customSound = GoaSound.LEVEL_UP.getCustomSound();
+                    customSound.play(player.getLocation());
+                }
+            }
         }
     }
 

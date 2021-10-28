@@ -9,20 +9,18 @@ mainElement: "FIRE"
 description:
   - "Engineer"
 classIconCustomModelData: 12
-attributeElementDamage: 4
-attributeElementDefense: 3
+attributeElementDamage: 7
+attributeElementDefense: 5
 attributeMaxHealth: 5
-attributeMaxMana: 1
-attributeCriticalChance: 0
+attributeMaxMana: 4
+attributeCriticalChance: 4
 weaponGearTypes:
   - "WAR_HAMMER"
   - "GREAT_SWORD"
-  - "SWORD"
 armorGearTypes:
   - "PLATE_ARMOR"
   - "FEATHER_ARMOR"
   - "LIGHT_ARMOR"
-hasDefaultOffhand: false
 skillOne:
   name: "Turret"
   customModelData: 18

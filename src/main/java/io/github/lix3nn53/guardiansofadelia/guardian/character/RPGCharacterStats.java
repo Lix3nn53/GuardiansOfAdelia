@@ -954,10 +954,8 @@ public class RPGCharacterStats {
     }
 
     private void sendLevelUpMessage(int newLevel) {
-        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
         MessageUtils.sendCenteredMessage(player, ChatPalette.GOLD + "Level up!");
         MessageUtils.sendCenteredMessage(player, ChatPalette.YELLOW + "Congratulations, your new level is " + ChatPalette.GOLD + newLevel + "");
-        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
     }
 
     public void reapplyGearSetEffects() {

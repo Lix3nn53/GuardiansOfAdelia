@@ -11,11 +11,11 @@ description:
   - "dexterity, allowing you to kite your target"
   - "and deal damage from long distances."
 classIconCustomModelData: 11
-attributeElementDamage: 4
-attributeElementDefense: 3
-attributeMaxHealth: 5
-attributeMaxMana: 1
-attributeCriticalChance: 0
+attributeElementDamage: 6
+attributeElementDefense: 4
+attributeMaxHealth: 4
+attributeMaxMana: 4
+attributeCriticalChance: 7
 weaponGearTypes:
   - "BOW"
   - "CROSSBOW"
@@ -24,7 +24,6 @@ armorGearTypes:
   - "LIGHT_ARMOR"
   - "FEATHER_ARMOR"
   - "CLOTH_ARMOR"
-hasDefaultOffhand: false
 actionBarInfoType: "VARIABLE"
 actionBarIcon: "&6🏹"
 actionBarKey: "sharpshooter"

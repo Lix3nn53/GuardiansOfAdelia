@@ -11,11 +11,11 @@ description:
   - "the holy power of light and beats foes"
   - "by channeling holy wrath."
 classIconCustomModelData: 13
-attributeElementDamage: 3
-attributeElementDefense: 4
-attributeMaxHealth: 7
+attributeElementDamage: 4
+attributeElementDefense: 9
+attributeMaxHealth: 9
 attributeMaxMana: 2
-attributeCriticalChance: 0
+attributeCriticalChance: 1
 weaponGearTypes:
   - "WAR_HAMMER"
   - "GREAT_SWORD"
@@ -26,8 +26,6 @@ armorGearTypes:
   - "LIGHT_ARMOR"
 shieldGearTypes:
   - "SHIELD"
-hasDefaultOffhand: true
-isDefaultOffhandWeapon: false
 skillOne:
   name: "Wide Swing"
   customModelData: 4

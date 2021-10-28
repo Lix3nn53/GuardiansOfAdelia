@@ -152,7 +152,9 @@ public class Attribute {
     }
 
     public double getIncrement(int playerLevel, String playerClass) {
-        return (invested + getBonusFromEquipment() + getBonusFromLevel(playerLevel, playerClass)) * attributeType.getIncrementPerPoint();
+        double bonusFromLevel = getBonusFromLevel(playerLevel, playerClass) * attributeType.getBonusFromLevelReduction();
+
+        return (invested + getBonusFromEquipment() + bonusFromLevel) * attributeType.getIncrementPerPoint();
     }
 
     private void onValueChange(RPGCharacterStats rpgCharacterStats) {

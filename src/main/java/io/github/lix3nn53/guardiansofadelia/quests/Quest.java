@@ -319,13 +319,11 @@ public final class Quest {
     }
 
     public void onTurnIn(Player player) {
-        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Turn In");
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
         if (!getTurnInMsg().equals("")) {
             MessageUtils.sendCenteredMessage(player, getTurnInMsg());
         }
-        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
 
         Advancement onTurnInAdvancement = QuestAdvancements.getOnTurnInAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
         onTurnInAdvancement.displayToast(player);
@@ -379,10 +377,8 @@ public final class Quest {
     }
 
     public void onComplete(Player player) {
-        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Complete");
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
-        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
         Advancement onCompleteAdvancement = QuestAdvancements.getOnCompleteAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
         onCompleteAdvancement.displayToast(player);
 
@@ -395,13 +391,11 @@ public final class Quest {
     }
 
     public void onAccept(Player player) {
-        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Accept");
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
         if (!getStartMsg().equals("")) {
             MessageUtils.sendCenteredMessage(player, getStartMsg());
         }
-        MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
 
         Advancement onAcceptAdvancement = QuestAdvancements.getOnAcceptAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
         onAcceptAdvancement.displayToast(player);

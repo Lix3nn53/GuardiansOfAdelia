@@ -186,7 +186,6 @@ public abstract class Minigame {
             Party party = teams.get(teamNo);
             for (Player member : party.getMembers()) {
                 if (member.isOnline()) {
-                    MessageUtils.sendCenteredMessage(member, ChatPalette.GRAY + "------------------------");
                     if (winnerTeams.contains(teamNo)) {
                         if (winnerTeams.size() == 1) {
                             member.sendTitle(ChatPalette.GREEN_DARK + "Congratulations!", ChatPalette.YELLOW + "", 30, 80, 30);
@@ -199,7 +198,6 @@ public abstract class Minigame {
                         member.sendTitle(ChatPalette.RED + "Failed..", ChatPalette.YELLOW + "", 30, 80, 30);
                         MessageUtils.sendCenteredMessage(member, "You lose the " + ChatPalette.GREEN_DARK + getMinigameName());
                     }
-                    MessageUtils.sendCenteredMessage(member, ChatPalette.GRAY + "------------------------");
                     member.setGameMode(gameModeOnWin);
                 }
             }

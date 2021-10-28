@@ -11,19 +11,19 @@ description:
   - "Rogues are an expert at dealing"
   - "damage in a short amount of time!"
 classIconCustomModelData: 37
-attributeElementDamage: 8
-attributeElementDefense: 4
-attributeMaxHealth: 4
-attributeMaxMana: 2
-attributeCriticalChance: 7
+attributeElementDamage: 7
+attributeElementDefense: 5
+attributeMaxHealth: 5
+attributeMaxMana: 6
+attributeCriticalChance: 2
 weaponGearTypes:
+  - "WAND"
+  - "STAFF"
   - "DAGGER"
-  - "BOW"
-  - "CROSSBOW"
 armorGearTypes:
+  - "CLOTH_ARMOR"
   - "FEATHER_ARMOR"
   - "LIGHT_ARMOR"
-  - "CLOTH_ARMOR"
 actionBarInfoType: "VARIABLE"
 actionBarIcon: "&b⏺"
 actionBarKey: "souls"

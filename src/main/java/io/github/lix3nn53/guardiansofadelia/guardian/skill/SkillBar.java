@@ -106,7 +106,7 @@ public class SkillBar {
     /**
      * @param skillIndex 0,1,2 normal skills, 3 passive, 4 ultimate
      */
-    public boolean downgradeSkill(int skillIndex) {
+    public boolean downgradeSkill(int skillIndex, RPGClassStats rpgClassStats) {
         if (!this.skillSet.containsKey(skillIndex)) return false;
 
         Skill skill = this.skillSet.get(skillIndex);
@@ -123,8 +123,11 @@ public class SkillBar {
 
         int reqSkillPoints = skill.getReqSkillPoints(currentSkillLevel - 1);
 
-        investedSkillPoints.put(skillIndex, invested - reqSkillPoints);
+        int newInvested = invested - reqSkillPoints;
+        investedSkillPoints.put(skillIndex, newInvested);
         remakeSkillBarIcon(skillIndex);
+
+        rpgClassStats.setInvestedSkillPoint(skillIndex, newInvested);
         return true;
     }
 

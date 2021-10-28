@@ -28,6 +28,22 @@ public enum AttributeType {
         return "attributeCustomName";
     }
 
+    public String getShortName() {
+        switch (this) {
+            case BONUS_ELEMENT_DAMAGE:
+                return ChatPalette.RED + "Dmg";
+            case BONUS_ELEMENT_DEFENSE:
+                return ChatPalette.BLUE_LIGHT + "Def";
+            case BONUS_MAX_HEALTH:
+                return ChatPalette.GREEN_DARK + "HP";
+            case BONUS_MAX_MANA:
+                return ChatPalette.BLUE + "MP";
+            case BONUS_CRITICAL_CHANCE:
+                return ChatPalette.GOLD + "Crit%";
+        }
+        return "attributeCustomName";
+    }
+
     public String getDescription() {
         switch (this) {
             case BONUS_ELEMENT_DAMAGE:
@@ -56,6 +72,22 @@ public enum AttributeType {
                 return 1;
             case BONUS_CRITICAL_CHANCE:
                 return 0.0005;
+        }
+        return 1;
+    }
+
+    public double getBonusFromLevelReduction() {
+        switch (this) {
+            case BONUS_ELEMENT_DAMAGE:
+                return 0.1;
+            case BONUS_ELEMENT_DEFENSE:
+                return 0.2;
+            case BONUS_MAX_HEALTH:
+                return 0.1;
+            case BONUS_MAX_MANA:
+                return 0.05;
+            case BONUS_CRITICAL_CHANCE:
+                return 0.05;
         }
         return 1;
     }

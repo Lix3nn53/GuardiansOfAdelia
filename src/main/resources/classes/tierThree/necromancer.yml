@@ -11,11 +11,11 @@ description:
   - "Living Death magic. They control bone and flesh"
   - "to protect themself and crush their enemies."
 classIconCustomModelData: 18
-attributeElementDamage: 4
-attributeElementDefense: 3
-attributeMaxHealth: 5
-attributeMaxMana: 1
-attributeCriticalChance: 0
+attributeElementDamage: 9
+attributeElementDefense: 4
+attributeMaxHealth: 4
+attributeMaxMana: 6
+attributeCriticalChance: 2
 weaponGearTypes:
   - "WAND"
   - "STAFF"
@@ -24,7 +24,6 @@ armorGearTypes:
   - "CLOTH_ARMOR"
   - "FEATHER_ARMOR"
   - "LIGHT_ARMOR"
-hasDefaultOffhand: false
 actionBarInfoType: "COMPANION_COUNT"
 actionBarIcon: "&5☠"
 skillOne:

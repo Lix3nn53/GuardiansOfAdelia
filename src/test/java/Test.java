@@ -1,8 +1,5 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
-import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
-import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
-import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,9 +10,11 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException, SQLException {
 
-        for (int i = 3; i > 1; i--) {
+        for (int levelD = 1; levelD <= 90; levelD++) {
             // Use i as normal here
-            System.out.println("i: " + i);
+            int damageItem = StatUtils.getDamageItem(levelD);
+            int healthItem = StatUtils.getHealthItem(levelD);
+            System.out.println("level: " + levelD + " damage: " + damageItem + " hp: " + healthItem);
         }
 
         /*int size = 5;
@@ -188,7 +187,7 @@ public class Test {
 
         System.out.println("result: " + result);*/
 
-        for (GearLevel gearLevel : GearLevel.values()) {
+        /*for (GearLevel gearLevel : GearLevel.values()) {
             System.out.println("-----------" + gearLevel.toString());
             int minNumberOfAttr = 5;
             int minNumberOfElements = 5;
@@ -214,7 +213,7 @@ public class Test {
                 if (attributeValue == 0) continue;
                 System.out.println(elementType.name() + ": " + attributeValue);
             }
-        }
+        }*/
         /*for (int requiredLevel = 0; requiredLevel <= 99; requiredLevel += 10) {
             GearLevel gearLevel = GearLevel.getGearLevel(requiredLevel);
             System.out.println("requiredLevel: " + requiredLevel + "GearLevel: " + gearLevel);

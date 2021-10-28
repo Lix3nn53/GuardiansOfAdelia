@@ -11,20 +11,19 @@ description:
   - "Rogues are an expert at dealing"
   - "damage in a short amount of time!"
 classIconCustomModelData: 33
-attributeElementDamage: 5
-attributeElementDefense: 3
-attributeMaxHealth: 6
-attributeMaxMana: 1
-attributeCriticalChance: 1
+attributeElementDamage: 8
+attributeElementDefense: 4
+attributeMaxHealth: 4
+attributeMaxMana: 2
+attributeCriticalChance: 7
 weaponGearTypes:
   - "DAGGER"
   - "CROSSBOW"
+  - "BOW"
 armorGearTypes:
   - "FEATHER_ARMOR"
   - "LIGHT_ARMOR"
   - "CLOTH_ARMOR"
-hasDefaultOffhand: true
-isDefaultOffhandWeapon: true
 actionBarInfoType: "VARIABLE"
 actionBarIcon: "&4♦"
 actionBarKey: "blood"

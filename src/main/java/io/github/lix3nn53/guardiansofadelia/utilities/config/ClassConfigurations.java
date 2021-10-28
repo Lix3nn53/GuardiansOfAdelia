@@ -147,12 +147,6 @@ public class ClassConfigurations {
                 }
             }
 
-            boolean hasDefaultOffhand = fileConfiguration.getBoolean("hasDefaultOffhand");
-            boolean isDefaultOffhandWeapon = false;
-            if (hasDefaultOffhand) {
-                isDefaultOffhandWeapon = fileConfiguration.getBoolean("isDefaultOffhandWeapon");
-            }
-
             ActionBarInfoType actionBarInfoType = fileConfiguration.contains("actionBarInfoType") ? ActionBarInfoType.valueOf(fileConfiguration.getString("actionBarInfoType")) : null;
             String actionBarIcon = fileConfiguration.getString("actionBarIcon");
             String actionBarKey = fileConfiguration.getString("actionBarKey");
@@ -160,7 +154,7 @@ public class ClassConfigurations {
             ActionBarInfo actionBarInfo = new ActionBarInfo(actionBarInfoType, actionBarIcon, actionBarKey);
 
             RPGClass rpgClass = new RPGClass(color, mainElement, className, tier, classIconCustomModelData, attributeTiers, skillSet,
-                    actionBarInfo, shieldGearTypes, weaponGearTypes, armorGearTypes, hasDefaultOffhand, isDefaultOffhandWeapon, description);
+                    actionBarInfo, shieldGearTypes, weaponGearTypes, armorGearTypes, description);
 
             RPGClassManager.addClass(className, rpgClass);
         }

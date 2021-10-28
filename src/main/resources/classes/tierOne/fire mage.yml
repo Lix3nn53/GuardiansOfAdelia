@@ -9,11 +9,11 @@ mainElement: "FIRE"
 description:
   - "Todo"
 classIconCustomModelData: 30
-attributeElementDamage: 1
+attributeElementDamage: 9
 attributeElementDefense: 4
-attributeMaxHealth: 5
+attributeMaxHealth: 4
 attributeMaxMana: 6
-attributeCriticalChance: 0
+attributeCriticalChance: 2
 weaponGearTypes:
   - "WAND"
   - "STAFF"
@@ -22,7 +22,6 @@ armorGearTypes:
   - "CLOTH_ARMOR"
   - "FEATHER_ARMOR"
   - "LIGHT_ARMOR"
-hasDefaultOffhand: false
 actionBarInfoType: "VARIABLE"
 actionBarIcon: "&c🔥"
 actionBarKey: "firespirit"

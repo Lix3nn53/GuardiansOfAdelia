@@ -335,7 +335,8 @@ public class MenuList {
                     StringBuilder bonusAttributes = new StringBuilder(" ");
                     for (AttributeType attributeType : AttributeType.values()) {
                         int bonus = attributeTiers.get(attributeType);
-                        bonusAttributes.append(bonus).append(" ");
+                        String shortName = attributeType.getShortName();
+                        bonusAttributes.append(shortName).append("=").append(bonus).append(" ");
                     }
                     lore.add(bonusAttributes.toString());
 

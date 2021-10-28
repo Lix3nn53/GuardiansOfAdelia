@@ -26,14 +26,11 @@ public class RPGClass {
     private final List<WeaponGearType> weaponGearTypes;
     private final List<ArmorGearType> armorGearTypes;
 
-    private final boolean hasDefaultOffhand;
-    private final boolean isDefaultOffhandWeapon;
-
     private final List<String> description;
 
     public RPGClass(ChatPalette color, ElementType mainElement, String name, int tier, int customModelData, HashMap<AttributeType, Integer> attributeTiers,
                     HashMap<Integer, Skill> skillSet, ActionBarInfo actionBarInfo, List<ShieldGearType> shieldGearTypes, List<WeaponGearType> weaponGearTypes,
-                    List<ArmorGearType> armorGearTypes, boolean hasDefaultOffhand, boolean isDefaultOffhandWeapon, List<String> description) {
+                    List<ArmorGearType> armorGearTypes, List<String> description) {
         this.color = color;
         this.mainElement = mainElement;
         this.name = name.toUpperCase();
@@ -45,8 +42,6 @@ public class RPGClass {
         this.shieldGearTypes = shieldGearTypes;
         this.weaponGearTypes = weaponGearTypes;
         this.armorGearTypes = armorGearTypes;
-        this.hasDefaultOffhand = hasDefaultOffhand;
-        this.isDefaultOffhandWeapon = isDefaultOffhandWeapon;
         this.description = description;
     }
 
@@ -75,7 +70,7 @@ public class RPGClass {
         double levelD = level;
         double tierD = tier;
 
-        return (int) ((levelD * ((levelD * tierD) / 125)) + 0.5);
+        return (int) ((levelD * ((levelD * tierD) / (levelD * 0.2))) + 0.5);
     }
 
     public HashMap<AttributeType, Integer> getAttributeTiers() {
@@ -92,14 +87,6 @@ public class RPGClass {
 
     public WeaponGearType getDefaultWeaponGearType() {
         return weaponGearTypes.get(0);
-    }
-
-    public boolean hasDefaultOffhand() {
-        return hasDefaultOffhand;
-    }
-
-    public boolean isDefaultOffhandWeapon() {
-        return isDefaultOffhandWeapon;
     }
 
     public ArmorGearType getDefaultArmorGearType() {
