@@ -7,7 +7,9 @@
     <groupId>io.github.Lix3nn53</groupId>
     <artifactId>GuardiansOfAdelia</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>GuardiansOfAdelia</name>
     <build>
+        <finalName>${project.name}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -90,6 +92,10 @@
             <id>sk89q-repo</id>
             <url>http://maven.sk89q.com/repo/</url>
         </repository>
+        <repository>
+            <id>lumine-repo</id>
+            <url>https://mvn.lumine.io/repository/maven-public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -102,7 +108,7 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>3.3.1</version>
+            <version>5.0.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -122,9 +128,9 @@
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
-            <version>4.7.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/modules/ProtocolLib.jar</systemPath>
+            <version>4.7.0</version>
+            <type>jar</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
@@ -141,11 +147,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>io.lumine.xikage</groupId>
-            <artifactId>MythicMobs</artifactId>
+            <groupId>io.lumine</groupId>
+            <artifactId>Mythic-Dist</artifactId>
             <version>5.0.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/modules/MythicMobs-5.0.0-alpha1.jar</systemPath>
+            <type>jar</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.xxmicloxx</groupId>

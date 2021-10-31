@@ -1,6 +1,6 @@
 main: io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia
-name: GuardiansOfAdelia
-version: '0.1'
+name: '${project.name}'
+version: '${project.version}'
 api-version: 1.13
 description: GuardiansOfAdelia MMORPG project
 load: POSTWORLD
