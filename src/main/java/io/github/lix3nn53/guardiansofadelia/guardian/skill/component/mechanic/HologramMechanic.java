@@ -3,6 +3,10 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.DroppedItemWatcher;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -22,6 +26,8 @@ import java.util.List;
 public class HologramMechanic extends MechanicComponent {
 
     private final Material HELMET;
+    private final boolean DISGUISE;
+    private final boolean FOLLOW;
     private final int CUSTOM_MODEL_DATA;
     private final List<Integer> DURATION;
     private final String DISPLAY_TEXT;
@@ -29,10 +35,10 @@ public class HologramMechanic extends MechanicComponent {
     private final boolean GRAVITY;
     private final boolean MARKER;
     private final boolean SAVE;
-    private final double speed;
+    private final double SPEED;
 
-    private final Vector offset;
-    private final EulerAngle angle;
+    private final Vector OFFSET;
+    private final EulerAngle ANGLE;
 
     public HologramMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -50,6 +56,8 @@ public class HologramMechanic extends MechanicComponent {
         }
 
         this.HELMET = Material.valueOf(configurationSection.getString("helmetType"));
+        this.DISGUISE = configurationSection.contains("disguise") && configurationSection.getBoolean("disguise");
+        this.FOLLOW = configurationSection.contains("follow") && configurationSection.getBoolean("follow");
         this.CUSTOM_MODEL_DATA = configurationSection.getInt("customModelData");
         this.DURATION = configurationSection.getIntegerList("durations");
 
@@ -78,9 +86,9 @@ public class HologramMechanic extends MechanicComponent {
         }
 
         if (configurationSection.contains("speed")) {
-            this.speed = configurationSection.getDouble("speed");
+            this.SPEED = configurationSection.getDouble("speed");
         } else {
-            this.speed = 0;
+            this.SPEED = 0;
         }
         this.SAVE = configurationSection.contains("save") && configurationSection.getBoolean("save");
 
@@ -88,13 +96,13 @@ public class HologramMechanic extends MechanicComponent {
         double forward = configurationSection.contains("forward") ? configurationSection.getDouble("forward") : 0;
         double right = configurationSection.contains("right") ? configurationSection.getDouble("right") : 0;
 
-        this.offset = new Vector(forward, upward, right);
+        this.OFFSET = new Vector(forward, upward, right);
 
         double anglex = configurationSection.contains("anglex") ? configurationSection.getDouble("anglex") : 0;
         double angley = configurationSection.contains("angley") ? configurationSection.getDouble("angley") : 0;
         double anglez = configurationSection.contains("anglez") ? configurationSection.getDouble("anglez") : 0;
 
-        this.angle = new EulerAngle(anglex, angley, anglez);
+        this.ANGLE = new EulerAngle(anglex, angley, anglez);
     }
 
     /**
@@ -112,24 +120,31 @@ public class HologramMechanic extends MechanicComponent {
         List<LivingEntity> armorStandList = new ArrayList<>();
 
         for (LivingEntity target : targets) {
-            Location location = target.getLocation().add(this.offset);
+            Location location = target.getLocation().add(this.OFFSET);
             ArmorStand model = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
             model.setVisible(false);
             model.setInvulnerable(true);
             model.setSmall(SMALL);
             model.setGravity(GRAVITY);
             model.setMarker(MARKER);
-            model.setHeadPose(this.angle);
+            model.setHeadPose(this.ANGLE);
 
             if (HELMET != null) {
                 ItemStack itemStack = new ItemStack(HELMET);
                 ItemMeta itemMeta = itemStack.getItemMeta();
-
                 itemMeta.setCustomModelData(CUSTOM_MODEL_DATA);
                 itemStack.setItemMeta(itemMeta);
 
-                EntityEquipment equipment = model.getEquipment();
-                equipment.setHelmet(itemStack);
+                if (DISGUISE) {
+                    MiscDisguise disguise = new MiscDisguise(DisguiseType.DROPPED_ITEM);
+                    DroppedItemWatcher watcher = (DroppedItemWatcher) disguise.getWatcher();
+                    watcher.setItemStack(itemStack);
+
+                    DisguiseAPI.disguiseToAll(model, disguise);
+                } else {
+                    EntityEquipment equipment = model.getEquipment();
+                    equipment.setHelmet(itemStack);
+                }
             }
 
             if (DISPLAY_TEXT != null) {
@@ -138,13 +153,29 @@ public class HologramMechanic extends MechanicComponent {
                 model.setCustomNameVisible(true);
             }
 
-            if (speed != 0) {
+            if (SPEED != 0) {
                 Vector dir = target.getLocation().getDirection();
-                model.setVelocity(dir.multiply(speed));
+                model.setVelocity(dir.multiply(SPEED));
             }
 
             if (SAVE) {
                 SkillDataManager.onSkillEntityCreateWithSaveOption(caster, model, castCounter);
+            }
+
+            if (FOLLOW) {
+                new BukkitRunnable() {
+
+                    @Override
+                    public void run() {
+                        if (!model.isValid()) {
+                            cancel();
+                            model.remove();
+                        } else {
+                            Location location = target.getLocation().clone().add(OFFSET);
+                            model.teleport(location);
+                        }
+                    }
+                }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 1L);
             }
 
             new BukkitRunnable() {

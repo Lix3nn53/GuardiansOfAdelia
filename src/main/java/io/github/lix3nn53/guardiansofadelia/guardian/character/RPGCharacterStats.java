@@ -82,9 +82,9 @@ public class RPGCharacterStats {
     private ArmorGearType sameTypeArmorSet = null;
     private List<GearSet> gearSets = new ArrayList<>();
 
-    public RPGCharacterStats(Player player, String rpgClassStr) {
+    public RPGCharacterStats(Player player, String startClass) {
         this.player = player;
-        this.rpgClassStr = rpgClassStr;
+        this.rpgClassStr = startClass;
 
         player.setLevel(1);
         player.setHealthScale(20);
@@ -111,10 +111,6 @@ public class RPGCharacterStats {
 
         onMaxHealthChange();
 
-        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-
-        ActionBarInfo actionBarInfo = rpgClass.getActionBarInfo();
-
         //start action bar scheduler
         new BukkitRunnable() {
             @Override
@@ -123,6 +119,10 @@ public class RPGCharacterStats {
                     cancel();
                     return;
                 }
+
+                RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
+                ActionBarInfo actionBarInfo = rpgClass.getActionBarInfo();
+
                 String between = actionBarInfo.getActionBarBetween(player);
 
                 StringBuilder message = new StringBuilder(ChatPalette.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + between + ChatPalette.BLUE_LIGHT + "✦" + currentMana + "/" + getTotalMaxMana());
